@@ -8978,7 +8978,7 @@ __metadata:
     stylelint-declaration-block-no-ignored-properties: ^2.6.0
     stylelint-value-no-unknown-custom-properties: ^4.0.0
     typescript: ^5.1.6
-    vite: ^4.5.1
+    vite: ^5.0.12
     vite-plugin-turbosnap: ^1.0.3
     yarn: ^1.22.10
   languageName: unknown
@@ -27142,7 +27142,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.4, vite@npm:^4.5.1":
+"vite@npm:^4.4.4":
   version: 4.5.1
   resolution: "vite@npm:4.5.1"
   dependencies:
