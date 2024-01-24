@@ -11,11 +11,6 @@ import { useLocale } from "../../utils/useLocale";
 import { DropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
-/**
- * TODO:
- * - Update classNames
- * - Update CSS
- */
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
     const inputRef = useRef<HTMLInputElement | null>(null);

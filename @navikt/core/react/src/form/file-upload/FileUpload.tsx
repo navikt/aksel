@@ -17,31 +17,62 @@ interface FileUploadComponent
   extends React.ForwardRefExoticComponent<
     FileUploadProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * Framed zone to drag-n-drop files, upload files with button-click or copy-paste.
+   * @example Single file
+   * ```jsx
+   * <FileUpload.Dropzone
+   *  label="Last opp fil"
+   *   multiple={false}
+   *   onSelect={onSelect}
+   * />
+   *
+   * @example Multiple files
+   * ```jsx
+   * <FileUpload.Dropzone
+   *  label="Last opp fil"
+   *   multiple={true}
+   *   onSelect={onSelect}
+   * />
+   *
+   * @example Error
+   * ```jsx
+   *  <FileUpload.Dropzone
+   *   label="Last opp filer"
+   *   onSelect={onSelect}
+   *   error={error}
+   *  />
+   * ```
+   */
   Dropzone: typeof Dropzone;
   Item: typeof Item;
 }
 
-// TODO: Update jsdoc
 /**
- * A set of components used to upload files and display files.
- * FileUpload is only a namespace, only use the subcomponents.
+ * A set of components used to upload and display files.
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/fileupload)
- * @example
+ * @example Dropzone
  * ```jsx
  *  <FileUpload.Dropzone />
  * ```
  *
- * @example
+ * @example Items
  * ```jsx
- *  <FileUpload.List>
- *    <FileUpload.Item file={myFile} />
- *    <FileUpload.Item file={mySecondFile} />
- *  </FileUpload.List>
+ *  <VStack gap="4">
+ *    <FileUpload.Item as="li" file={myFile} />
+ *    <FileUpload.Item as="li" file={mySecondFile} />
+ *  </VStack>
  * ```
  *
- * @example
+ * @example Locale
  * ```jsx
- *  <FileUpload.Item file={myStandaloneFile} />
+ * <FileUpload locale="en">
+ *    <FileUpload.Dropzone />
+ *   <VStack gap="4">
+ *     <FileUpload.Item as="li" file={myFile} />
+ *     <FileUpload.Item as="li" file={mySecondFile} />
+ *   </VStack>
+ * </FileUpload>
  * ```
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
