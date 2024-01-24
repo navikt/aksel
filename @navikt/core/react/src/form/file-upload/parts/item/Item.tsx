@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
-import { ErrorMessage } from "../../../../typography";
+import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
 import { useFileUploadLocale } from "../../FileUpload.context";
 import { useLocale } from "../../utils/useLocale";
@@ -91,7 +91,11 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
           <ItemIcon isLoading={!!status} file={file} />
           <div className="navds-file-item__file-info">
             <ItemName file={file} href={href} onClick={onFileClick} />
-            {!isError && <div>{getStatusText()}</div>}
+            {!isError && (
+              <BodyShort as="div" size="small">
+                {getStatusText()}
+              </BodyShort>
+            )}
             <div
               className="navds-file-item__error"
               aria-relevant="additions removals"
