@@ -19,6 +19,7 @@ const ItemButton = ({ file, onRetry, onDelete, error }: Props) => {
   if (error && onRetry) {
     return (
       <Button
+        className="navds-file-item__button"
         type="button"
         variant="tertiary-neutral"
         onClick={onRetry}
@@ -29,6 +30,7 @@ const ItemButton = ({ file, onRetry, onDelete, error }: Props) => {
   if (onDelete) {
     return (
       <Button
+        className="navds-file-item__button"
         type="button"
         variant="tertiary-neutral"
         onClick={onDelete}

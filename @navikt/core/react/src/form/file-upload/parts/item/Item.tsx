@@ -12,6 +12,11 @@ import { formatFileSize } from "./utils/format-file-size";
 
 export interface FileItemBaseProps {
   /**
+   * Overrides html-tag
+   * @default "div"
+   */
+  as?: "div" | "li";
+  /**
    * Either a native File or file metadata.
    */
   file: FileItem;
@@ -92,19 +97,18 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
               aria-relevant="additions removals"
               aria-live="polite"
             >
-              {isError && <ErrorMessage>{error}</ErrorMessage>}
+              {isError && <ErrorMessage size="small">{error}</ErrorMessage>}
             </div>
           </div>
-          <div className="navds-file-item__button">
-            {!status && (
-              <ItemButton
-                file={file}
-                onRetry={onRetry}
-                onDelete={onDelete}
-                error={error}
-              />
-            )}
-          </div>
+
+          {!status && (
+            <ItemButton
+              file={file}
+              onRetry={onRetry}
+              onDelete={onDelete}
+              error={error}
+            />
+          )}
         </Component>
       );
     },
