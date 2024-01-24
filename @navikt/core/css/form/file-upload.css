@@ -195,19 +195,17 @@
 }
 
 .navds-file-item__icon {
-  min-height: 3rem;
-  min-width: 3rem;
-  display: grid;
-  place-content: center;
-}
-
-.navds-file-item__icon-avatar {
   background-color: var(--ac-file-upload-file-icon-bg, var(--a-bg-subtle));
   border-radius: var(--a-border-radius-xlarge);
   min-height: 3rem;
   min-width: 3rem;
   display: grid;
   place-content: center;
+  transition: background-color 250ms cubic-bezier(0.3, 1, 0.3, 1);
+}
+
+.navds-file-item__icon--loading {
+  background-color: transparent;
 }
 
 .navds-file-item__file-info {

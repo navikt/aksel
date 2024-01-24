@@ -19,7 +19,7 @@ interface ItemIconProps {
 function ItemIcon({ isLoading, file }: ItemIconProps) {
   if (isLoading) {
     return (
-      <div className="navds-file-item__icon">
+      <div className="navds-file-item__icon navds-file-item__icon--loading">
         <Loader size="large" />
       </div>
     );
