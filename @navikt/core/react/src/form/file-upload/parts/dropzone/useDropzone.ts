@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { partitionFiles } from "../../utils/partition-files";
 import { DropzoneProps } from "./dropzone.types";
 
@@ -14,7 +14,7 @@ export const useDropzone = ({
   inputRef,
 }: UseDropzoneProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
-  const isDraggingRef = useRef(false);
+  /* const isDraggingRef = useRef(false); */
 
   const upload = useCallback(
     (files: File[]) => {
@@ -60,19 +60,19 @@ export const useDropzone = ({
 
   // onDragOver triggers 60+ times per second, so we need to cut it off, and
   const onDragOver = () => {
-    if (isDraggingRef.current) {
+    /* if (isDraggingRef.current) {
       return;
     }
-    isDraggingRef.current = true;
+    isDraggingRef.current = true; */
     setIsDraggingOver(true);
   };
 
   // onDragOver triggers 60+ times per second, so we need to cut it off, and
   const onDragLeave = () => {
-    if (!isDraggingRef.current) {
+    /* if (!isDraggingRef.current) {
       return;
     }
-    isDraggingRef.current = false;
+    isDraggingRef.current = false; */
     setIsDraggingOver(false);
   };
 
