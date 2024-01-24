@@ -47,7 +47,7 @@ const FilteredOptions = () => {
           <div
             className="navds-combobox__list-item navds-combobox__list-item--max-selected sticky"
             aria-selected={false}
-            id={`${id}-max-selected`}
+            id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
             data-no-focus="true"
           >
             {maxSelected.message ??

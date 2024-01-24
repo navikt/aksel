@@ -28,6 +28,9 @@ const getIsLoadingId = (comboboxId: string) => `${comboboxId}-is-loading`;
 
 const getNoHitsId = (comboboxId: string) => `${comboboxId}-no-hits`;
 
+const getMaxSelectedOptionsId = (comboboxId: string) =>
+  `${comboboxId}-max-selected-options`;
+
 export default {
   normalizeText,
   isPartOfText,
@@ -38,4 +41,5 @@ export default {
   getOptionId,
   getIsLoadingId,
   getNoHitsId,
+  getMaxSelectedOptionsId,
 };
