@@ -63,7 +63,7 @@ const Page = (props: PageProps["props"]) => {
     return <NotFotfund />;
   }
 
-  const remainingPosts = props?.bloggposts?.slice(4, props?.bloggposts.length);
+  const remainingPosts = props?.bloggposts?.slice(3, props?.bloggposts.length);
 
   return (
     <>
