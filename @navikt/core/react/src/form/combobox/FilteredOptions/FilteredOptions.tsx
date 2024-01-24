@@ -42,7 +42,7 @@ const FilteredOptions = () => {
       id={filteredOptionsUtil.getFilteredOptionsId(id)}
       tabIndex={-1}
     >
-      <div className="navds-combobox__list_non-selectables">
+      <div className="navds-combobox__list_non-selectables" role="status">
         {maxSelected?.isLimitReached && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--max-selected sticky"
