@@ -154,6 +154,7 @@ const FilteredOptions = () => {
             }}
             role="option"
             aria-selected={selectedOptions.includes(option)}
+            aria-disabled={isDisabled(option) || undefined}
           >
             <BodyShort size={size}>{option}</BodyShort>
             {selectedOptions.includes(option) && <CheckmarkIcon />}
