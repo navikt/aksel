@@ -1,5 +1,5 @@
-import { FuseItemT, GroupedHitsT, SearchHitT, SearchResultsT } from "@/types";
 import Fuse from "fuse.js";
+import { FuseItemT, GroupedHitsT, SearchHitT, SearchResultsT } from "@/types";
 
 export function createSearchResult(
   result: SearchHitT[],

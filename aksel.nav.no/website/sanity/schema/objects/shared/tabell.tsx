@@ -1,5 +1,5 @@
-import { TableIcon } from "@navikt/aksel-icons";
 import { defineType } from "sanity";
+import { TableIcon } from "@navikt/aksel-icons";
 
 export const Tabell = defineType({
   title: "Tabell",

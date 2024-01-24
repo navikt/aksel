@@ -1,3 +1,8 @@
+import cl from "clsx";
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { CodeIcon } from "@navikt/aksel-icons";
+import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import {
   ChangelogIcon,
   FigmaIcon,
@@ -22,11 +27,6 @@ import {
 import { generateSidebar } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
 import { SEO } from "@/web/seo/SEO";
-import { CodeIcon } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
-import cl from "clsx";
-import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { komponentKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{

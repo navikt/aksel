@@ -1,6 +1,7 @@
 import { createClient } from "@sanity/client";
 import exportDataset from "@sanity/export";
 import { clientConfig } from "../sanity/config";
+
 const sanityToken = process.env.SANITY_PREVIEW_TOKEN;
 
 if (!sanityToken) {

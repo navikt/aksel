@@ -1,5 +1,5 @@
-import { AmplitudeEvents, amplitude } from "@/logging";
 import { createContext, useCallback, useContext } from "react";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { useSearch } from "../hooks";
 import { SearchContext } from "./SearchProvider";
 

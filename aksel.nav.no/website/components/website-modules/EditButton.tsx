@@ -1,14 +1,12 @@
-import { useCheckAuth } from "@/hooks/useCheckAuth";
-import { useSanityDocId } from "@/hooks/useSanityDocId";
 import { PencilIcon } from "@navikt/aksel-icons";
+import { useSanityData } from "@/hooks/useSanityData";
 
 function EditButton() {
-  const idCtx = useSanityDocId();
-  const validUser = useCheckAuth();
+  const sanityCtx = useSanityData();
 
-  return validUser && idCtx?.id ? (
+  return sanityCtx.validUser && sanityCtx?.id ? (
     <a
-      href={`https://aksel.nav.no/admin/prod/intent/edit/id=${idCtx?.id}`}
+      href={`https://aksel.nav.no/admin/prod/intent/edit/id=${sanityCtx?.id}`}
       target="_blank"
       rel="noreferrer"
       className="absolute right-0 top-0 flex -translate-y-[99%] items-center gap-2 overflow-hidden rounded-tl bg-deepblue-800 px-2 py-1 text-white  transition-transform hover:translate-x-0 hover:bg-deepblue-700"

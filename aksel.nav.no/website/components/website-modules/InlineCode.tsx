@@ -1,7 +1,7 @@
 const InlineCode = (
   props: React.HTMLAttributes<HTMLElement> & { noAmps?: boolean },
 ) => (
-  <code className="font-mono text-sm font-semibold leading-normal text-deepblue-800 before:contents dark:text-deepblue-300">
+  <code className="rounded-sm bg-surface-neutral-subtle px-1 py-05 font-mono text-sm font-semibold">
     {!props?.noAmps && (
       <span aria-hidden className="inline-code-amp">
         `

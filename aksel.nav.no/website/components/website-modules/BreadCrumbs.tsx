@@ -1,6 +1,6 @@
+import cl from "clsx";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import cl from "clsx";
 
 export const BreadCrumbs = ({
   href,

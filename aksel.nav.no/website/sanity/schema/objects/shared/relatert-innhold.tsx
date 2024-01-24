@@ -1,6 +1,6 @@
-import AkselRelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
-import { LinkIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { LinkIcon } from "@navikt/aksel-icons";
+import AkselRelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import { allArticleDocsRef } from "../../../config";
 
 export const RelatertInnhold = defineType({

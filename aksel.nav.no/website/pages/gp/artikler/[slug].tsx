@@ -1,3 +1,4 @@
+import differenceInMonths from "date-fns/differenceInMonths";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -25,9 +26,10 @@ import {
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
+import OutdatedAlert from "@/web/OutdatedAlert";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
-import NotFotfund from "../../404";
+import NotFound from "../../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -35,10 +37,11 @@ type PageProps = NextPageT<{
   >;
   publishDate: string;
   verifiedDate: string;
+  outdated: boolean;
   toc: TableOfContentsT;
 }>;
 
-export const query = `{
+const query = `{
   "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
   {
     ...,
@@ -88,6 +91,9 @@ export const getStaticProps: GetStaticProps = async ({
     slug: `god-praksis/artikler/${slug}`,
   });
 
+  const verifiedDate =
+    page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt;
+
   return {
     props: {
       page,
@@ -95,9 +101,8 @@ export const getStaticProps: GetStaticProps = async ({
       preview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
-      verifiedDate: await dateStr(
-        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt,
-      ),
+      verifiedDate: await dateStr(verifiedDate),
+      outdated: differenceInMonths(new Date(), new Date(verifiedDate)) >= 12,
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
       toc: generateTableOfContents({
         content: page?.content,
@@ -113,10 +118,11 @@ const Page = ({
   page: data,
   publishDate,
   verifiedDate,
+  outdated,
   toc,
 }: PageProps["props"]) => {
   if (!data) {
-    return <NotFotfund />;
+    return <NotFound />;
   }
 
   if (!data.content || !data.heading) {
@@ -239,6 +245,7 @@ const Page = ({
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
               <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
+                {outdated && <OutdatedAlert />}
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (

@@ -1,6 +1,6 @@
-import { Box, Detail, VStack } from "@navikt/ds-react";
 import cl from "clsx";
 import { StringInputProps, TextInputProps } from "sanity";
+import { Box, Detail, VStack } from "@navikt/ds-react";
 
 export function InputWithCounter(
   props: (StringInputProps | TextInputProps) & {
