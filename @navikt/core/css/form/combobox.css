@@ -305,13 +305,6 @@
   align-items: flex-start;
 }
 
-/* 
-.navds-combobox__list {
-  overflow-y: auto;
-  border: 1px solid var(--ac-combobox-list-border-color, var(--a-border-divider));
-  box-shadow: var(--a-shadow-small);
-}
-*/
 
 .navds-combobox__list-item--focus,
 .navds-combobox__list--with-hover .navds-combobox__list-item:not([data-no-focus="true"]):hover {
