@@ -1,8 +1,8 @@
-import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
-import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
-import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Heading } from "@navikt/ds-react";
+import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
+import { GroupedHitsT, SearchHitT, searchOptions } from "@/types";
 import { Hit } from "./Hit";
 
 export function CollectionMapper({

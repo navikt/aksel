@@ -1,10 +1,10 @@
-import { PersonCircleIcon } from "@navikt/aksel-icons";
-import docs from "@navikt/ds-tokens/docs.json";
 import Link from "next/link";
 import color from "tinycolor2";
+import { PersonCircleIcon } from "@navikt/aksel-icons";
+import { CopyButton } from "@navikt/ds-react";
+import docs from "@navikt/ds-tokens/docs.json";
 import { Grid } from "../Grid";
 import { getColorString, getGlobalReference, sanitizeName } from "../utilities";
-import { CopyButton } from "@navikt/ds-react";
 
 export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];

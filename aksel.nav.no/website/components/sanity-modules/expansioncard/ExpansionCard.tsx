@@ -1,6 +1,6 @@
+import { ExpansionCard as DsExpansionCard } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
-import { ExpansionCard as DsExpansionCard } from "@navikt/ds-react";
 
 type ExpansionCardProps = {
   node: {

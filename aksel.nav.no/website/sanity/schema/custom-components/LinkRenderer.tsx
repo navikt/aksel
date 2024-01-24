@@ -1,11 +1,10 @@
 /**
  * https://www.sanity.io/guides/ultimate-guide-for-customising-portable-text-from-schema-to-react-component
  */
-
-import { SANITY_API_VERSION } from "@/sanity/config";
-import { Tooltip } from "@navikt/ds-react";
 import { useClient } from "sanity";
 import useSWR from "swr";
+import { Tooltip } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const ExternalLinkRenderer = (props) => {
   if (props.validation.length > 0) {

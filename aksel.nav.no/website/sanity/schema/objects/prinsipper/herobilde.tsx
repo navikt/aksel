@@ -1,6 +1,6 @@
-import { ImageIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
+import { ImageIcon } from "@navikt/aksel-icons";
 
 export const HeroBilde = defineType({
   title: "Hero bilde",

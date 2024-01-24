@@ -1,6 +1,6 @@
-import { noCdnClient, sanityClient } from "@/sanity/client.server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { noCdnClient, sanityClient } from "@/sanity/client.server";
 
 const ignoredPaths = ["/eksempler", "/templates", "/ikoner", "/admin"];
 const ignoredStaticPaths = [

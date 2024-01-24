@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import ErrorBoundary from "@/error-boundary";
-import { urlFor } from "@/sanity/interface";
-import { DoDontT } from "@/types";
+import cl from "clsx";
 import {
   CheckmarkIcon,
   ExclamationmarkIcon,
   XMarkIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
-import cl from "clsx";
+import ErrorBoundary from "@/error-boundary";
+import { urlFor } from "@/sanity/interface";
+import { DoDontT } from "@/types";
 
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   if (!block.picture) {

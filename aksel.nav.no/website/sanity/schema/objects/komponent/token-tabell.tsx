@@ -1,5 +1,5 @@
-import { TokenIcon } from "@navikt/aksel-icons";
 import { defineType } from "sanity";
+import { TokenIcon } from "@navikt/aksel-icons";
 
 export const TokenTabell = defineType({
   name: "token_ref",

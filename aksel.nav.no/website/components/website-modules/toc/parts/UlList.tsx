@@ -1,6 +1,6 @@
+import { BodyShort } from "@navikt/ds-react";
 import { TableOfContentsT } from "@/types";
 import { removeEmojies } from "@/utils";
-import { BodyShort } from "@navikt/ds-react";
 import styles from "./table-of-contents.module.css";
 
 function UlList({

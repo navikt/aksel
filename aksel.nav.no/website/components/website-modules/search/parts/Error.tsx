@@ -1,6 +1,6 @@
-import { searchOptions } from "@/types";
-import { Skeleton } from "@navikt/ds-react";
 import { useContext } from "react";
+import { Skeleton } from "@navikt/ds-react";
+import { searchOptions } from "@/types";
 import { SearchResultContext } from "../providers";
 
 export const Error = () => {

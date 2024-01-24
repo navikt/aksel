@@ -1,4 +1,3 @@
-import { searchOptions } from "@/types";
 import {
   Dispatch,
   SetStateAction,
@@ -7,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { searchOptions } from "@/types";
 import { useShortcut } from "../hooks";
 
 type SearchContextType = {

@@ -1,4 +1,3 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
 import Avatar from "boring-avatars";
 import React from "react";
 import {
@@ -7,6 +6,7 @@ import {
   defineField,
   defineType,
 } from "sanity";
+import { SANITY_API_VERSION } from "@/sanity/config";
 import { EditorPage } from "../custom-components/EditorPage";
 import { EditorPreview } from "../custom-components/EditorPreview";
 
