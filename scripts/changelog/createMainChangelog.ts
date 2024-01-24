@@ -14,7 +14,7 @@ import remarkStringify from "npm:remark-stringify";
 import { unified } from "npm:unified";
 import { CONTINUE, EXIT, SKIP, visit } from "npm:unist-util-visit";
 import { visitParents } from "npm:unist-util-visit-parents";
-import { getChangelogs } from "../article-views/update-article-views/utils.js";
+import { getChangelogs } from "./utils.ts";
 
 /**
  * Small diagram of the process:
