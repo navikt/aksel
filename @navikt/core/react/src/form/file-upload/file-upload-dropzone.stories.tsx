@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileUpload } from "..";
 import { HStack } from "../../layout/stack";
-import { OnFileSelectProps } from "./parts/Dropzone";
+import { OnFileSelectProps } from "./parts/dropzone/Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",

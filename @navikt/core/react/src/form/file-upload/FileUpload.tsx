@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { FileUploadLocaleContextProvider } from "./FileUpload.context";
-import Dropzone from "./parts/Dropzone";
+import Dropzone from "./parts/dropzone/Dropzone";
 import Item from "./parts/item/Item";
 
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {

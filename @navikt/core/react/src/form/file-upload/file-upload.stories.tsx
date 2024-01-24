@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FileUpload } from "..";
 import { VStack } from "../../layout/stack";
 import { ErrorMessage, Heading } from "../../typography";
-import { OnFileSelectProps } from "./parts/Dropzone";
+import { OnFileSelectProps } from "./parts/dropzone/Dropzone";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",

@@ -8,14 +8,14 @@ import React, {
   useState,
 } from "react";
 import { CloudUpIcon } from "@navikt/aksel-icons";
-import { Button } from "../../../button";
-import { BodyShort, ErrorMessage, Label } from "../../../typography";
-import { useMergeRefs } from "../../../util/hooks";
-import { omit } from "../../../util/omit";
-import { FormFieldProps, useFormField } from "../../useFormField";
-import { useFileUploadLocale } from "../FileUpload.context";
-import { partitionFiles } from "../utils/partition-files";
-import { useLocale } from "../utils/useLocale";
+import { Button } from "../../../../button";
+import { BodyShort, ErrorMessage, Label } from "../../../../typography";
+import { useMergeRefs } from "../../../../util/hooks";
+import { omit } from "../../../../util/omit";
+import { FormFieldProps, useFormField } from "../../../useFormField";
+import { useFileUploadLocale } from "../../FileUpload.context";
+import { partitionFiles } from "../../utils/partition-files";
+import { useLocale } from "../../utils/useLocale";
 
 export interface OnFileSelectProps {
   allFiles: File[];
@@ -61,7 +61,6 @@ export interface DropzoneProps
 
 /**
  * TODO:
- * - Make locale-return a "pre"-resolved object
  * - Extract logic to hooks
  * - Update classNames
  * - Update i18n
