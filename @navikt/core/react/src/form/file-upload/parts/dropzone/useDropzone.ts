@@ -1,28 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { partitionFiles } from "../../utils/partition-files";
-import { OnFileSelectProps } from "./Dropzone";
+import { DropzoneProps } from "./dropzone.types";
+
+export interface UseDropzoneProps
+  extends Pick<DropzoneProps, "accept" | "onSelect" | "validator"> {
+  inputRef: React.MutableRefObject<HTMLInputElement | null>;
+}
 
 export const useDropzone = ({
   accept,
   onSelect,
   validator,
   inputRef,
-}: {
-  accept?: string;
-  /**
-   * Callback triggered on file select
-   */
-  onSelect: (files: OnFileSelectProps) => void;
-  /**
-   * Custom validator that is used to decide
-   * if a file is accepted or rejected.
-   */
-  validator?: (file: File) => boolean;
-  /**
-   *
-   */
-  inputRef: React.MutableRefObject<HTMLInputElement | null>;
-}) => {
+}: UseDropzoneProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const isDraggingRef = useRef(false);
 

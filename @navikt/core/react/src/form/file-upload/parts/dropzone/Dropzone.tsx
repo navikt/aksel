@@ -5,56 +5,14 @@ import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
 import { useMergeRefs } from "../../../../util/hooks";
 import { omit } from "../../../../util/omit";
-import { FormFieldProps, useFormField } from "../../../useFormField";
+import { useFormField } from "../../../useFormField";
 import { useFileUploadLocale } from "../../FileUpload.context";
 import { useLocale } from "../../utils/useLocale";
+import { DropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
-
-export interface OnFileSelectProps {
-  allFiles: File[];
-  acceptedFiles: File[];
-  rejectedFiles: File[];
-}
-
-export interface DropzoneProps
-  extends Omit<FormFieldProps, "size" | "disabled" | "readOnly">,
-    Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      "children" | "size" | "onSelect"
-    > {
-  /**
-   * Text shown to the user.
-   */
-  label: string;
-  /**
-   * Class name passed to the outermost <div> element.
-   */
-  className?: string;
-  /**
-   * Indicates if it is possible
-   * to select multiple files at once.
-   * @default true
-   */
-  multiple?: boolean;
-  /**
-   * Indicates which file types to accept.
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept
-   */
-  accept?: string;
-  /**
-   * Callback triggered on file select
-   */
-  onSelect: (files: OnFileSelectProps) => void;
-  /**
-   * Custom validator that is used to decide
-   * if a file is accepted or rejected.
-   */
-  validator?: (file: File) => boolean;
-}
 
 /**
  * TODO:
- * - Extract logic to hooks
  * - Update classNames
  * - Update i18n
  * - Update CSS
