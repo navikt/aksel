@@ -44,7 +44,7 @@ Default.argTypes = {
   isListOpen: {
     control: { type: "boolean" },
   },
-  maxSelectedOptions: {
+  maxSelected: {
     control: { type: "number" },
   },
   size: {
