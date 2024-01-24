@@ -14,13 +14,8 @@ import { useMergeRefs } from "../../../util/hooks";
 import { omit } from "../../../util/omit";
 import { FormFieldProps, useFormField } from "../../useFormField";
 import { useFileUploadLocale } from "../FileUpload.context";
-import {
-  getButtonText,
-  getDragAndDropText,
-  getDropText,
-  getOrText,
-} from "../utils/i18n";
 import { partitionFiles } from "../utils/partition-files";
+import { useLocale } from "../utils/useLocale";
 
 export interface OnFileSelectProps {
   allFiles: File[];
@@ -94,6 +89,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       useFormField(props, "fileUpload");
 
     const localeCtx = useFileUploadLocale()?.locale ?? "nb";
+    const translation = useLocale(localeCtx, { multiple });
 
     /**
      * Put callbacks in refs so that we don't re-add the paste event listener on every
@@ -201,14 +197,14 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               aria-hidden={!isDraggingOver}
               className="aware-animation-text"
             >
-              {getDropText(localeCtx)}
+              {translation.drop}
             </span>
           </div>
           <div aria-hidden className="navds-file-dropzone__zone-text">
             <BodyShort as="div" spacing>
-              {getDragAndDropText(localeCtx, multiple)}
+              {translation.dragAndDrop}
             </BodyShort>
-            <BodyShort as="div">{getOrText(localeCtx)}</BodyShort>
+            <BodyShort as="div">{translation.or}</BodyShort>
           </div>
           <Button
             className="navds-file-dropzone__button"
@@ -216,7 +212,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             onClick={onButtonClick}
             tabIndex={-1}
           >
-            {getButtonText(localeCtx, multiple)}
+            {translation.button}
           </Button>
 
           <input

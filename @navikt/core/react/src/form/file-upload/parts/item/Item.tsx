@@ -2,12 +2,12 @@ import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
 import { ErrorMessage } from "../../../../typography";
 import { useFileUploadLocale } from "../../FileUpload.context";
+import { useLocale } from "../../utils/useLocale";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
 import { FileItem } from "./types";
 import { formatFileSize } from "./utils/format-file-size";
-import { getDownloadingText, getUploadingText } from "./utils/i18n";
 
 export interface FileItemBaseProps {
   /**
@@ -58,8 +58,20 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
     }: FileItemProps,
     ref,
   ) => {
-    const locale = useFileUploadLocale()?.locale ?? "nb";
+    const localeCtx = useFileUploadLocale()?.locale ?? "nb";
+    const translation = useLocale(localeCtx, { name: file.name });
+
     const isError = !!error && !status;
+
+    function getStatusText() {
+      if (status === "uploading") {
+        return translation.uploading;
+      }
+      if (status === "downloading") {
+        return translation.downloading;
+      }
+      return formatFileSize(file);
+    }
 
     return (
       <div
@@ -71,7 +83,7 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
         <ItemIcon isLoading={!!status} file={file} />
         <div className="navds-file-item__file-info">
           <ItemName file={file} href={href} onClick={onFileClick} />
-          {!isError && <div>{getStatusText(file, locale, status)}</div>}
+          {!isError && <div>{getStatusText()}</div>}
           <div
             className="navds-file-item__error"
             aria-relevant="additions removals"
@@ -94,19 +106,5 @@ export const Item = forwardRef<HTMLDivElement, FileItemProps>(
     );
   },
 );
-
-function getStatusText(
-  file: FileItem,
-  locale: "nb" | "en",
-  status?: FileItemProps["status"],
-) {
-  if (status === "uploading") {
-    return getUploadingText(locale);
-  }
-  if (status === "downloading") {
-    return getDownloadingText(locale);
-  }
-  return formatFileSize(file);
-}
 
 export default Item;
