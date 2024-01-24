@@ -109,19 +109,15 @@ for (const article of articles) {
       _weak: true,
     },
     url,
-    views_day: data?.views_day ?? -1,
-    views_week: data?.views_week ?? -1,
-    views_month: data?.views_month ?? -1,
-    views_year: data?.views_year ?? -1,
+    views_day: data?.views_day,
+    views_week: data?.views_week,
+    views_month: data?.views_month,
+    views_year: data?.views_year,
   });
 }
 
 const transactionClient = noCdnClient.transaction();
-// TODO this slice & the dryRun below is only useful during development
-// documents = documents.slice(0, 10);
-// console.log({ documents });
 documents.forEach(async (doc) => {
-  // await rangeDelay(100, 150);
   await transactionClient.createOrReplace(doc);
 });
 const res_commit = await transactionClient.commit({ dryRun: false });
