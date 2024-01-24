@@ -1,7 +1,7 @@
+import { useRouter } from "next/router";
 import { createContext, useCallback, useContext, useEffect } from "react";
 import { SearchContext } from "./SearchProvider";
 import { SearchResultContext } from "./SearchResultProvider";
-import { useRouter } from "next/router";
 
 type SearchNavigationProviderT = { close: () => void };
 

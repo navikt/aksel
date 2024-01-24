@@ -1,8 +1,7 @@
+import { useState } from "react";
+import { BodyLong, ReadMore } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { VideoT } from "@/types";
-import { BodyLong, ReadMore } from "@navikt/ds-react";
-
-import { useState } from "react";
 
 type VideoProps = {
   node: VideoT;

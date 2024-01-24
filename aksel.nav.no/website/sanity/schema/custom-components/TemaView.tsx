@@ -1,5 +1,3 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
-import { Heading, VStack } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
   IntentButton,
@@ -9,6 +7,8 @@ import {
   useFormValue,
   useSchema,
 } from "sanity";
+import { Heading, VStack } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export function TemaView() {
   const client = useClient({ apiVersion: SANITY_API_VERSION });

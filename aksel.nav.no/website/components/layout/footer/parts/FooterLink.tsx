@@ -1,5 +1,5 @@
-import { amplitudeLogNavigation } from "@/logging";
 import { Link } from "@navikt/ds-react";
+import { amplitudeLogNavigation } from "@/logging";
 
 function FooterLink({ children, href }) {
   return (

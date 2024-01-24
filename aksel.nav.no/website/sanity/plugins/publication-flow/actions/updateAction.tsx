@@ -1,10 +1,10 @@
-import { CloudUpIcon } from "@navikt/aksel-icons";
 import {
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
   useDocumentOperation,
 } from "sanity";
+import { CloudUpIcon } from "@navikt/aksel-icons";
 
 export const createWrappedUpdateAction = (): DocumentActionComponent => {
   const WrappedUpdate = (

@@ -1,5 +1,5 @@
-import { TableOfContentsT } from "@/types";
 import { Label } from "@navikt/ds-react";
+import { TableOfContentsT } from "@/types";
 import ScrollFade from "./parts/ScrollFade";
 import UlList from "./parts/UlList";
 import { useToc } from "./useToc";

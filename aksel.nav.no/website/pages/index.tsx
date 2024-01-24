@@ -1,16 +1,6 @@
-import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
-import FrontpageBlock, {
-  BlocksT,
-} from "@/cms/frontpage-blocks/FrontpageBlocks";
-import Footer from "@/layout/footer/Footer";
-import Header from "@/layout/header/Header";
-import { getClient } from "@/sanity/client.server";
-import { contributorsAll } from "@/sanity/queries";
-import { AkselTemaT, NextPageT } from "@/types";
-import { userPrefersReducedMotion } from "@/utils";
-import { IntroCards } from "@/web/IntroCards";
-import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
-import { SEO } from "@/web/seo/SEO";
+import cl from "clsx";
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy, useState } from "react";
 import {
   CompassIcon,
   ComponentIcon,
@@ -27,9 +17,19 @@ import {
   Page,
   useClientLayoutEffect,
 } from "@navikt/ds-react";
-import cl from "clsx";
-import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useState } from "react";
+import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "@/cms/frontpage-blocks/FrontpageBlocks";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { getClient } from "@/sanity/client.server";
+import { contributorsAll } from "@/sanity/queries";
+import { AkselTemaT, NextPageT } from "@/types";
+import { userPrefersReducedMotion } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 
 type PageProps = NextPageT<{
   tema: AkselTemaT[];

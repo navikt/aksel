@@ -1,6 +1,6 @@
-import { FuseItemT, SearchHitT } from "@/types";
-import { omit } from "@navikt/ds-react";
 import Fuse from "fuse.js";
+import { omit } from "@navikt/ds-react";
+import { FuseItemT, SearchHitT } from "@/types";
 
 export function formatResults(res: Fuse.FuseResult<FuseItemT>[]): SearchHitT[] {
   return res.map((x) => {

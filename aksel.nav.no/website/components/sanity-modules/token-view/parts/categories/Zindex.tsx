@@ -1,6 +1,6 @@
+import cl from "clsx";
 import { CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
-import cl from "clsx";
 import { Grid } from "../Grid";
 import { sanitizeName } from "../utilities";
 

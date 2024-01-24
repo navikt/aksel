@@ -1,3 +1,7 @@
+import cl from "clsx";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import Bilde from "@/cms/bilde/Bilde";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -15,10 +19,6 @@ import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
-import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
-import cl from "clsx";
-import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
