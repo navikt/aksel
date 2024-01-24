@@ -1,12 +1,5 @@
 import cl from "clsx";
-import React, {
-  ChangeEvent,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useRef } from "react";
 import { CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
@@ -14,8 +7,8 @@ import { useMergeRefs } from "../../../../util/hooks";
 import { omit } from "../../../../util/omit";
 import { FormFieldProps, useFormField } from "../../../useFormField";
 import { useFileUploadLocale } from "../../FileUpload.context";
-import { partitionFiles } from "../../utils/partition-files";
 import { useLocale } from "../../utils/useLocale";
+import { useDropzone } from "./useDropzone";
 
 export interface OnFileSelectProps {
   allFiles: File[];
@@ -68,7 +61,6 @@ export interface DropzoneProps
  */
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
-    const [isDraggingOver, setIsDraggingOver] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(inputRef, ref);
 
@@ -90,76 +82,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const localeCtx = useFileUploadLocale()?.locale ?? "nb";
     const translation = useLocale(localeCtx, { multiple });
 
-    /**
-     * Put callbacks in refs so that we don't re-add the paste event listener on every
-     * render when consumer creates new onSelect/validator function(s) on every render
-     */
-    const onSelectRef = useRef(onSelect);
-    const validatorRef = useRef(validator);
-    onSelectRef.current = onSelect;
-    validatorRef.current = validator;
-
-    const upload = useCallback(
-      (files: File[]) => {
-        const { acceptedFiles, rejectedFiles } = partitionFiles(
-          files,
-          accept,
-          validatorRef.current,
-        );
-
-        onSelectRef.current({ allFiles: files, acceptedFiles, rejectedFiles });
-      },
-      [accept],
-    );
-
-    useEffect(() => {
-      const fileInput = inputRef.current;
-
-      const handlePaste = (event: ClipboardEvent) => {
-        if (fileInput === null || window.document.activeElement !== fileInput) {
-          return;
-        }
-        event.preventDefault();
-        if (!event.clipboardData) {
-          return;
-        }
-
-        const files = Array.from(event.clipboardData.items)
-          .filter((item) => item.kind === "file")
-          .map((item) => item.getAsFile())
-          .filter((item): item is File => item !== null);
-
-        if (files.length > 0) {
-          upload(files);
-        }
-      };
-
-      window.addEventListener("paste", handlePaste);
-
-      return () => {
-        window.removeEventListener("paste", handlePaste);
-      };
-    }, [upload]);
-
-    const onButtonClick = () => {
-      inputRef.current?.click();
-    };
-
-    const onDragEnter = () => setIsDraggingOver(true);
-
-    const onDragEnd = () => setIsDraggingOver(false);
-
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const fileList = event.target.files;
-      if (!fileList) {
-        return;
-      }
-
-      upload(Array.from(fileList));
-
-      // Resets the value to make it is possible to upload the same file several consecutive times
-      event.target.value = "";
-    };
+    const dropzoneCtx = useDropzone({ inputRef, onSelect, validator, accept });
 
     return (
       <div className={cl("navds-form-field", "navds-file-dropzone", className)}>
@@ -176,13 +99,14 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </BodyShort>
         )}
         <div
-          onDragOver={onDragEnter}
-          onDragLeave={onDragEnd}
-          onDragEnd={onDragEnd}
-          onDrop={onDragEnd}
+          onDragOver={dropzoneCtx.onDragOver}
+          onDragLeave={dropzoneCtx.onDragLeave}
+          onDragEnd={dropzoneCtx.onDragEnd}
+          onDrop={dropzoneCtx.onDrop}
           className={cl("navds-file-dropzone__zone", {
             "navds-file-dropzone__zone--error": hasError,
-            "navds-file-dropzone__zone--dragging-over": isDraggingOver,
+            "navds-file-dropzone__zone--dragging-over":
+              dropzoneCtx.isDraggingOver,
           })}
         >
           <div className="navds-file-dropzone__zone-icon">
@@ -193,7 +117,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
               <CloudUpIcon fontSize="2rem" aria-hidden />
             </div>
             <span
-              aria-hidden={!isDraggingOver}
+              aria-hidden={!dropzoneCtx.isDraggingOver}
               className="aware-animation-text"
             >
               {translation.drop}
@@ -208,7 +132,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           <Button
             className="navds-file-dropzone__button"
             variant="secondary"
-            onClick={onButtonClick}
+            onClick={() => inputRef.current?.click()}
             tabIndex={-1}
           >
             {translation.button}
@@ -221,7 +145,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             className="navds-file-dropzone__input"
             multiple={multiple}
             accept={accept}
-            onChange={onChange}
+            onChange={dropzoneCtx.onChange}
             ref={mergedRef}
           />
         </div>
