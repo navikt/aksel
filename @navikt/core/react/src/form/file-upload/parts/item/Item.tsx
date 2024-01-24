@@ -32,23 +32,74 @@ export interface FileItemBaseProps {
    * Error message relating to the item.
    */
   error?: string;
-  /**
-   * Indicates if the file is being uploaded or downloaded.
-   */
-  status?: "uploading" | "downloading";
+}
+
+type OnDelete = (event: MouseEvent<HTMLButtonElement>) => void;
+type OnRetry = (event: MouseEvent<HTMLButtonElement>) => void;
+
+type FileItemDeleteProps = {
+  status: "delete";
   /**
    * Callback called when the delete button is clicked.
    */
-  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onDelete: OnDelete;
+};
+
+type FileItemRetryProps = {
+  status: "retry";
   /**
    * Callback called when the retry button is clicked.
    */
-  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+  onRetry: OnRetry;
+};
 
-export interface FileItemProps
-  extends FileItemBaseProps,
-    React.HTMLAttributes<HTMLDivElement> {}
+type FileItemDownloadingProps = {
+  status: "downloading";
+  /**
+   * Callback called when the delete button is clicked.
+   */
+  onDelete?: OnDelete;
+  /**
+   * Callback called when the retry button is clicked.
+   */
+  onRetry?: OnRetry;
+};
+
+type FileItemUploadingProps = {
+  status: "uploading";
+  /**
+   * Callback called when the delete button is clicked.
+   */
+  onDelete?: OnDelete;
+  /**
+   * Callback called when the retry button is clicked.
+   */
+  onRetry?: OnRetry;
+};
+
+type FileItemUndefinedProps = {
+  status?: undefined;
+  /**
+   * Callback called when the delete button is clicked.
+   */
+  onDelete?: OnDelete;
+  /**
+   * Callback called when the retry button is clicked.
+   */
+  onRetry?: OnRetry;
+};
+
+type FileItemConditionalProps = FileItemBaseProps &
+  (
+    | FileItemDeleteProps
+    | FileItemRetryProps
+    | FileItemDownloadingProps
+    | FileItemUploadingProps
+    | FileItemUndefinedProps
+  );
+
+export type FileItemProps = FileItemConditionalProps &
+  React.HTMLAttributes<HTMLDivElement>;
 
 export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
   forwardRef(

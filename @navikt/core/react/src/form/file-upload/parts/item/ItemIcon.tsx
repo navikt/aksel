@@ -17,15 +17,11 @@ interface ItemIconProps {
 }
 
 function ItemIcon({ isLoading, file }: ItemIconProps) {
-  if (isLoading) {
-    return (
-      <div className="navds-file-item__icon navds-file-item__icon--loading">
-        <Loader size="large" />
-      </div>
-    );
-  }
-
-  return (
+  return isLoading ? (
+    <div className="navds-file-item__icon navds-file-item__icon--loading">
+      <Loader size="large" />
+    </div>
+  ) : (
     <div className="navds-file-item__icon navds-file-item__icon-avatar">
       <Icon file={file} />
     </div>
