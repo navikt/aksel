@@ -46,7 +46,6 @@ const FilteredOptions = () => {
         {maxSelected?.isLimitReached && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--max-selected sticky"
-            aria-selected={false}
             id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
             data-no-focus="true"
           >
@@ -57,7 +56,6 @@ const FilteredOptions = () => {
         {isLoading && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--loading sticky"
-            aria-selected={false}
             id={filteredOptionsUtil.getIsLoadingId(id)}
             data-no-focus="true"
           >
@@ -67,7 +65,6 @@ const FilteredOptions = () => {
         {!isLoading && filteredOptions.length === 0 && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--no-options sticky"
-            aria-selected={false}
             id={filteredOptionsUtil.getNoHitsId(id)}
             data-no-focus="true"
           >
