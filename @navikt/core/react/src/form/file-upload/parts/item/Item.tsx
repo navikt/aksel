@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
 import { ErrorMessage } from "../../../../typography";
+import { OverridableComponent } from "../../../../util";
 import { useFileUploadLocale } from "../../FileUpload.context";
 import { useLocale } from "../../utils/useLocale";
 import ItemButton from "./ItemButton";
@@ -44,67 +45,69 @@ export interface FileItemProps
   extends FileItemBaseProps,
     React.HTMLAttributes<HTMLDivElement> {}
 
-export const Item = forwardRef<HTMLDivElement, FileItemProps>(
-  (
-    {
-      file,
-      status,
-      onDelete,
-      onRetry,
-      error,
-      className,
-      href,
-      onFileClick,
-    }: FileItemProps,
-    ref,
-  ) => {
-    const localeCtx = useFileUploadLocale()?.locale ?? "nb";
-    const translation = useLocale(localeCtx, { name: file.name });
+export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        as: Component = "div",
+        file,
+        status,
+        onDelete,
+        onRetry,
+        error,
+        className,
+        href,
+        onFileClick,
+      },
+      ref,
+    ) => {
+      const localeCtx = useFileUploadLocale()?.locale ?? "nb";
+      const translation = useLocale(localeCtx, { name: file.name });
 
-    const isError = !!error && !status;
+      const isError = !!error && !status;
 
-    function getStatusText() {
-      if (status === "uploading") {
-        return translation.uploading;
+      function getStatusText() {
+        if (status === "uploading") {
+          return translation.uploading;
+        }
+        if (status === "downloading") {
+          return translation.downloading;
+        }
+        return formatFileSize(file);
       }
-      if (status === "downloading") {
-        return translation.downloading;
-      }
-      return formatFileSize(file);
-    }
 
-    return (
-      <div
-        ref={ref}
-        className={cl("navds-file-item", className, {
-          "navds-file-item--error": isError,
-        })}
-      >
-        <ItemIcon isLoading={!!status} file={file} />
-        <div className="navds-file-item__file-info">
-          <ItemName file={file} href={href} onClick={onFileClick} />
-          {!isError && <div>{getStatusText()}</div>}
-          <div
-            className="navds-file-item__error"
-            aria-relevant="additions removals"
-            aria-live="polite"
-          >
-            {isError && <ErrorMessage>{error}</ErrorMessage>}
+      return (
+        <Component
+          ref={ref}
+          className={cl("navds-file-item", className, {
+            "navds-file-item--error": isError,
+          })}
+        >
+          <ItemIcon isLoading={!!status} file={file} />
+          <div className="navds-file-item__file-info">
+            <ItemName file={file} href={href} onClick={onFileClick} />
+            {!isError && <div>{getStatusText()}</div>}
+            <div
+              className="navds-file-item__error"
+              aria-relevant="additions removals"
+              aria-live="polite"
+            >
+              {isError && <ErrorMessage>{error}</ErrorMessage>}
+            </div>
           </div>
-        </div>
-        <div className="navds-file-item__button">
-          {!status && (
-            <ItemButton
-              file={file}
-              onRetry={onRetry}
-              onDelete={onDelete}
-              error={error}
-            />
-          )}
-        </div>
-      </div>
-    );
-  },
-);
+          <div className="navds-file-item__button">
+            {!status && (
+              <ItemButton
+                file={file}
+                onRetry={onRetry}
+                onDelete={onDelete}
+                error={error}
+              />
+            )}
+          </div>
+        </Component>
+      );
+    },
+  );
 
 export default Item;
