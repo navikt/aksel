@@ -26,7 +26,6 @@ export {
   FileUpload,
   type DropzoneProps,
   type OnFileSelectProps,
-  type FileListProps,
   type FileItemProps,
   type FileMetadata,
   type FileItem,

@@ -14,7 +14,6 @@ import { useDropzone } from "./useDropzone";
 /**
  * TODO:
  * - Update classNames
- * - Update i18n
  * - Update CSS
  */
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
