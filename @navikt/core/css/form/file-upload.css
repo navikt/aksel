@@ -38,7 +38,7 @@
   visibility: hidden;
 }
 
-.navds-file-dropzone__zone--dragging-over:hover:not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:hover:not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
   color: var(--ac-button-secondary-hover-text, var(--__ac-button-secondary-hover-text, var(--a-text-action-on-action-subtle)));
   background-color: var(
     --ac-button-secondary-hover-bg,
