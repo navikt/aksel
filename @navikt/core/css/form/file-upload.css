@@ -54,6 +54,7 @@
   border-radius: calc(var(--a-border-radius-large) - 1px);
   animation: akselFileUploadDragover 250ms cubic-bezier(0.3, 1.75, 0.3, 1);
   cursor: grabbing !important;
+  pointer-events: none;
 }
 
 @keyframes akselFileUploadDragover {
@@ -177,6 +178,7 @@
   position: absolute;
   top: var(--a-spacing-6);
   z-index: 1;
+  pointer-events: none;
   transition:
     top 0.6s cubic-bezier(0.3, 1.4, 0.3, 1),
     transform 0.6s cubic-bezier(0.3, 1.4, 0.3, 1);
