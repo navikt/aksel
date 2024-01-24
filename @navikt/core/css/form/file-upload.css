@@ -195,7 +195,8 @@
 }
 
 .navds-file-item__icon {
-  background-color: var(--ac-file-upload-file-icon-bg, var(--a-bg-subtle));
+  background-color: var(--ac-file-upload-file-icon-bg, var(--a-surface-neutral-subtle));
+  color: var(--a-icon-default);
   border-radius: var(--a-border-radius-xlarge);
   min-height: 3rem;
   min-width: 3rem;

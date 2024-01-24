@@ -7,6 +7,7 @@ import {
   FilePdfIcon,
   FileTextIcon,
   FileWordIcon,
+  FileXMarkIcon,
 } from "@navikt/aksel-icons";
 import { Loader } from "../../../../loader";
 import { FileItem } from "./types";
@@ -14,14 +15,29 @@ import { FileItem } from "./types";
 interface ItemIconProps {
   isLoading?: boolean;
   file: FileItem;
+  error: boolean;
 }
 
-function ItemIcon({ isLoading, file }: ItemIconProps) {
-  return isLoading ? (
-    <div className="navds-file-item__icon navds-file-item__icon--loading">
-      <Loader size="large" />
-    </div>
-  ) : (
+const iconProps = {
+  fontSize: "2rem",
+  "aria-hidden": true,
+};
+
+function ItemIcon({ isLoading, file, error }: ItemIconProps) {
+  if (isLoading) {
+    return (
+      <div className="navds-file-item__icon navds-file-item__icon--loading">
+        <Loader size="large" />
+      </div>
+    );
+  } else if (error) {
+    return (
+      <div className="navds-file-item__icon navds-file-item__icon-avatar">
+        <FileXMarkIcon {...iconProps} />
+      </div>
+    );
+  }
+  return (
     <div className="navds-file-item__icon navds-file-item__icon-avatar">
       <Icon file={file} />
     </div>
@@ -30,11 +46,6 @@ function ItemIcon({ isLoading, file }: ItemIconProps) {
 
 function Icon({ file }: { file: FileItem }) {
   const extension = file.name.substring(file.name.lastIndexOf(".") + 1);
-
-  const iconProps = {
-    fontSize: "2rem",
-    "aria-hidden": true,
-  };
 
   switch (extension) {
     case "jpg":
