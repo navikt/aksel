@@ -41,8 +41,36 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
 
     const dropzoneCtx = useDropzone({ inputRef, onSelect, validator, accept });
 
+    /*
+
+    navds-dropzone
+    navds-dropzone--error
+    navds-dropzone--dragging
+    navds-dropzone__zone
+    navds-dropzone__zone-icon
+    navds-dropzone__zone-text
+    navds-dropzone__zone-button
+    navds-dropzone__zone-input
+    navds-dropzone__zone-release
+    navds-dropzone__zone-release_icon
+    navds-dropzone__zone-release_text
+
+
+
+    navds-file-dropzone                       -> navds-dropzone
+    navds-file-dropzone__zone--error          -> navds-dropzone--error ++++++++
+    navds-file-dropzone__zone--dragging-over  -> navds-dropzone--dragging ++++++++
+    navds-file-dropzone__zone                 -> navds-dropzone__zone
+    navds-file-dropzone__zone-icon            -> navds-dropzone__zone-icon
+    navds-file-dropzone__zone-text            -> navds-dropzone__zone-text
+    navds-file-dropzone__button               -> navds-dropzone__zone-button
+    navds-file-dropzone__input                -> navds-dropzone__zone-input
+    aware-animation                           -> navds-dropzone__zone-release
+    aware-animation-icon                      -> navds-dropzone__zone-release_icon
+    aware-animation-text                      -> navds-dropzone__zone-release_text
+    */
     return (
-      <div className={cl("navds-form-field", "navds-file-dropzone", className)}>
+      <div className={cl("navds-form-field", "navds-dropzone", className)}>
         <Label htmlFor={inputProps.id} className="navds-form-field__label">
           {label}
         </Label>
