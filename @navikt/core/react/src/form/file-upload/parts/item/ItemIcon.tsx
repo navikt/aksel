@@ -16,27 +16,27 @@ interface ItemIconProps {
   file: FileItem;
 }
 
-const ItemIcon = ({ isLoading, file }: ItemIconProps) => {
+function ItemIcon({ isLoading, file }: ItemIconProps) {
   if (isLoading) {
     return (
-      <div className="navds-file-item__loader">
+      <div className="navds-file-item__icon">
         <Loader size="large" />
       </div>
     );
   }
 
   return (
-    <div className="navds-file-item__icon">
+    <div className="navds-file-item__icon navds-file-item__icon-avatar">
       <Icon file={file} />
     </div>
   );
-};
+}
 
-const Icon = ({ file }: { file: FileItem }) => {
+function Icon({ file }: { file: FileItem }) {
   const extension = file.name.substring(file.name.lastIndexOf(".") + 1);
 
   const iconProps = {
-    fontSize: "1.5rem",
+    fontSize: "2rem",
     "aria-hidden": true,
   };
 
@@ -62,6 +62,6 @@ const Icon = ({ file }: { file: FileItem }) => {
     default:
       return <FileIcon {...iconProps} />;
   }
-};
+}
 
 export default ItemIcon;
