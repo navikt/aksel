@@ -1,0 +1,9 @@
+{
+  "cssCustomProperties.files": ["@navikt/core/css/dist/index.css"],
+  "cssCustomProperties.languages": ["css"],
+  "eslint.problems.shortenToSingleLine": false,
+  "deno.enablePaths": ["scripts/article-views", "scripts/changelog"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "deno.enable": true,
+  "deno.lint": true,
+}
