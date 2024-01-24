@@ -1,12 +1,12 @@
+import cl from "clsx";
+import NextImage from "next/legacy/image";
+import NextLink from "next/link";
+import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName, getImage } from "@/utils";
-import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import cl from "clsx";
-import NextImage from "next/legacy/image";
-import NextLink from "next/link";
 import { Tag } from "./Tag";
 
 export type ArticleT = {

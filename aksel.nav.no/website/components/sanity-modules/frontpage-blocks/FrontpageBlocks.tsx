@@ -1,5 +1,6 @@
 import ErrorBoundary from "@/error-boundary";
 import Latest, { LatestT } from "./latest-articles/Latest";
+
 export type BlocksT = LatestT;
 
 type FrontpageBlockProps = {

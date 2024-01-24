@@ -1,8 +1,7 @@
 // Usikker på om skal være med videre
-
-import { FileTextIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
+import { FileTextIcon } from "@navikt/aksel-icons";
 
 export const InnholdsKort = defineType({
   title: "Innholdskort",

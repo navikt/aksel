@@ -1,6 +1,6 @@
+import * as jscodeshift from "jscodeshift";
 import { compressToEncodedURIComponent } from "lz-string";
 import ts from "typescript";
-import * as jscodeshift from "jscodeshift";
 
 const parse = jscodeshift.withParser("tsx");
 

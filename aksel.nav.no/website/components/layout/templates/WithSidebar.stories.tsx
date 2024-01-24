@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from "@storybook/react";
 import { SanityBlockContent } from "@/sanity-block";
 import { getBlocks } from "@/sb-util";
-import type { Meta, StoryObj } from "@storybook/react";
 import { WithSidebar } from "./WithSidebar";
 
 const meta = {

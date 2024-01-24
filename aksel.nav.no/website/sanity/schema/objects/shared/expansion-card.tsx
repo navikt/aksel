@@ -1,5 +1,5 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 
 export const ExpansionCard = defineType({
   name: "expansioncard",

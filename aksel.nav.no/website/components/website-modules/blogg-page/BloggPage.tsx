@@ -1,6 +1,6 @@
+import { Heading } from "@navikt/ds-react";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
-import { Heading } from "@navikt/ds-react";
 import { BloggList } from "./parts/BloggList";
 import { HighlightedBlogg } from "./parts/HighlightedBlogg";
 

@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { MenuHamburgerIcon } from "@navikt/aksel-icons";
 import { Button, Modal, Show } from "@navikt/ds-react";
-import { useState } from "react";
 import HamburgerLink from "./HamburgerLink";
 
 export const Hamburger = () => {

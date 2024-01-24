@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
-  useDocumentOperation,
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
+  useDocumentOperation,
 } from "sanity";
 
 export const createWrappedDefaultPublish = (

@@ -1,5 +1,3 @@
-import InlineCode from "@/web/InlineCode";
-import KBD from "@/web/KBD";
 import {
   BulletListIcon,
   CodeIcon,
@@ -8,6 +6,8 @@ import {
   LinkIcon,
   NumberListIcon,
 } from "@navikt/aksel-icons";
+import InlineCode from "@/web/InlineCode";
+import KBD from "@/web/KBD";
 import { allArticleDocsRef } from "../../../config";
 import {
   ExternalLinkRenderer,

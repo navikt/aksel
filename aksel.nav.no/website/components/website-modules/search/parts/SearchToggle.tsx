@@ -1,6 +1,6 @@
+import { useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Modal } from "@navikt/ds-react";
-import { useContext } from "react";
 import { SearchContext, SearchNavigationContext } from "../providers";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";

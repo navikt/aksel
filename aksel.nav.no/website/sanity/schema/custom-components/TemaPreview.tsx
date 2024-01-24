@@ -1,5 +1,5 @@
-import { Tag } from "@navikt/ds-react";
 import { getPublishedId, useFormValue } from "sanity";
+import { Tag } from "@navikt/ds-react";
 
 export function TemaPreview(props) {
   const usedTema = useFormValue(["tema"]) as any[];

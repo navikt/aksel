@@ -1,10 +1,10 @@
-import { urlFor } from "@/sanity/interface";
-import { ArticleListT } from "@/types";
-import { StatusTag } from "@/web/StatusTag";
-import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import Nextlink from "next/link";
+import { Heading } from "@navikt/ds-react";
+import { urlFor } from "@/sanity/interface";
+import { ArticleListT } from "@/types";
+import { StatusTag } from "@/web/StatusTag";
 
 const ComponentOverview = ({ node }: { node: ArticleListT }) => {
   if (!node || node.length === 0) {

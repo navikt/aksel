@@ -1,9 +1,9 @@
+import NextLink from "next/link";
+import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { InnholdsKortPrinsipperT } from "@/types";
-import { Heading } from "@navikt/ds-react";
-import NextLink from "next/link";
 
 type InnholdsKortProps = {
   node: InnholdsKortPrinsipperT;

@@ -1,5 +1,5 @@
-import { AkselTable, AkselTableRow } from "@/web/Table";
 import docs from "@navikt/ds-tokens/docs.json";
+import { AkselTable, AkselTableRow } from "@/web/Table";
 
 export const SpacingView = ({ cat }: { cat: string }) => {
   const spacings = docs[cat];

@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
-import { landingsider, previews } from "../../config";
 import { ChatIcon } from "@navikt/aksel-icons";
+import { landingsider, previews } from "../../config";
 
 export const Feedback = defineType({
   title: "Feedback",

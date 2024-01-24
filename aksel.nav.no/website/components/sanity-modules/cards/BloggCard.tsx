@@ -1,10 +1,10 @@
+import NextLink from "next/link";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { getAuthors } from "@/utils";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import NextLink from "next/link";
 
 type BloggCardProps = {
   blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;

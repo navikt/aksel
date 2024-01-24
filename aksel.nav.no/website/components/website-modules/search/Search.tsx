@@ -1,9 +1,9 @@
 import { Search } from "./parts/SearchToggle";
 import {
-  SearchProvider,
-  SearchResultProvider,
   SearchLoggingProvider,
   SearchNavigationProvider,
+  SearchProvider,
+  SearchResultProvider,
 } from "./providers";
 
 const GlobalSearch = () => (

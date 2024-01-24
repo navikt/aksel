@@ -1,3 +1,6 @@
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -14,9 +17,6 @@ import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
 import { SEO } from "@/web/seo/SEO";
-import { Heading } from "@navikt/ds-react";
-import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
@@ -63,7 +63,7 @@ const Page = (props: PageProps["props"]) => {
     return <NotFotfund />;
   }
 
-  const remainingPosts = props?.bloggposts?.slice(4, props?.bloggposts.length);
+  const remainingPosts = props?.bloggposts?.slice(3, props?.bloggposts.length);
 
   return (
     <>
