@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import { FileUpload } from "..";
 import { HStack } from "../../layout/stack";
 import { OnFileSelectProps } from "./parts/dropzone/dropzone.types";
@@ -60,13 +60,22 @@ export const WithDescription: StoryObj = {
 };
 
 export const WithError: StoryObj = {
-  render: () => (
-    <FileUpload.Dropzone
-      label="Last opp filer"
-      onSelect={onSelect}
-      error="Du må laste opp en fil"
-    />
-  ),
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [error, setError] = useState<string | null>(null);
+    return (
+      <div style={{ height: 400 }}>
+        <button onClick={() => setError((x) => (!x ? "error" : null))}>
+          toggle
+        </button>
+        <FileUpload.Dropzone
+          label="Last opp filer"
+          onSelect={onSelect}
+          error={error}
+        />
+      </div>
+    );
+  },
 };
 
 export const WithErrorAndDescription: StoryObj = {

@@ -39,11 +39,11 @@
   box-shadow: inset 0 2px 4px 1px rgb(11 11 11/ 0.05);
 }
 
-.navds-file-dropzone__zone--dragging-over {
+.navds-dropzone--dragging > .navds-file-dropzone__zone {
   --__ac-dropzone-background: var(--a-surface-action-subtle-hover);
 }
 
-.navds-file-dropzone__zone:hover .navds-file-dropzone__button {
+.navds-file-dropzone__zone:hover > .navds-dropzone__zone-button {
   color: var(--ac-button-secondary-hover-text, var(--__ac-button-secondary-hover-text, var(--a-text-action-on-action-subtle)));
   background-color: var(
     --ac-button-secondary-hover-bg,
@@ -51,7 +51,7 @@
   );
 }
 
-.navds-file-dropzone__zone--dragging-over::after {
+.navds-dropzone--dragging > .navds-file-dropzone__zone::after {
   color: var(--a-text-action-selected);
   background-color: var(--a-surface-hover);
   content: "";
@@ -83,47 +83,46 @@
   }
 }
 
-.navds-file-dropzone__zone-icon {
+.navds-dropzone__zone-icon {
   display: grid;
   padding: var(--__ac-dropzone-icon-padding);
   visibility: hidden;
 }
 
-.navds-file-dropzone__zone--error:not(.navds-file-dropzone__zone--dragging-over) {
+.navds-dropzone--error:where(:not(.navds-dropzone--dragging)) > .navds-file-dropzone__zone {
   border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
   border-width: 2px;
   margin: -1px 0;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible):not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible) > .navds-dropzone__zone-button {
   box-shadow:
     inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
     var(--a-shadow-focus);
 }
 
 @supports (not selector(:focus-visible)) or (not selector(:has(a))) {
-  .navds-file-dropzone__zone:focus-within .navds-file-dropzone__button {
+  .navds-file-dropzone__zone:focus-within > .navds-dropzone__zone-button {
     box-shadow:
       inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--__ac-button-secondary-focus-border, var(--a-border-action))),
       var(--a-shadow-focus);
   }
 }
 
-.navds-file-dropzone__zone:has(:active):not(.navds-file-dropzone__zone--dragging-over) .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:active) .navds-dropzone__zone-button {
   color: var(--ac-button-secondary-active-text, var(--__ac-button-secondary-active-text, var(--a-text-on-action)));
   background-color: var(--ac-button-secondary-active-bg, var(--__ac-button-secondary-active-bg, var(--a-surface-action-active)));
   box-shadow: none;
 }
 
-.navds-file-dropzone__zone:has(:focus-visible:active):not(.navds-file-dropzone__zone--dragging-over)
-  .navds-file-dropzone__button {
+.navds-file-dropzone__zone:has(:focus-visible:active) .navds-dropzone__zone-button {
   box-shadow:
     inset 0 0 0 1px
       var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
     var(--a-shadow-focus);
 }
 
-.navds-file-dropzone__input {
+.navds-dropzone__zone-input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -132,14 +131,51 @@
   cursor: pointer;
 }
 
-.navds-file-dropzone__input::file-selector-button {
+.navds-dropzone__zone-input::file-selector-button {
   cursor: pointer;
+}
+
+.navds-dropzone__zone-release {
+  color: var(--a-text-action-selected);
+  top: var(--__ac-dropzone-padding);
+  display: grid;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  transition:
+    top var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under),
+    transform var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
+}
+
+.navds-dropzone__zone-release__icon {
+  display: grid;
+  padding: var(--__ac-dropzone-icon-padding);
+  border-radius: var(--a-border-radius-full);
+  background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
+  transition: background-color var(--__ac-dropzone-animation-length-short) var(--__ac-dropzone-animation-over-under);
+}
+
+.navds-dropzone--dragging .navds-dropzone__zone-release > .navds-dropzone__zone-release__icon {
+  background-color: transparent;
+}
+
+.navds-dropzone__zone-release__text {
+  visibility: hidden;
+}
+
+.navds-dropzone--dragging .navds-dropzone__zone-release > .navds-dropzone__zone-release__text {
+  transition: visibility var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
+  visibility: visible;
+}
+
+.navds-dropzone--dragging .navds-dropzone__zone-release {
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /**
  * FileUpload.Item
  */
-
 .navds-file-item {
   display: flex;
   box-shadow: 0 0 0 1px var(--ac-file-upload-file-border, var(--a-border-subtle));
@@ -178,43 +214,4 @@
 
 .navds-file-item__file-info {
   word-break: break-word;
-}
-
-/* TODO: ANIMATION */
-.aware-animation {
-  color: var(--a-text-action-selected);
-  top: var(--__ac-dropzone-padding);
-  display: grid;
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  transition:
-    top var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under),
-    transform var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
-}
-
-.aware-animation-icon {
-  display: grid;
-  padding: var(--__ac-dropzone-icon-padding);
-  border-radius: var(--a-border-radius-full);
-  background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
-  transition: background-color var(--__ac-dropzone-animation-length-short) var(--__ac-dropzone-animation-over-under);
-}
-
-.navds-file-dropzone__zone--dragging-over > .aware-animation > .aware-animation-icon {
-  background-color: transparent;
-}
-
-.aware-animation-text {
-  visibility: hidden;
-}
-
-.navds-file-dropzone__zone--dragging-over > .aware-animation > .aware-animation-text {
-  transition: visibility var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
-  visibility: visible;
-}
-
-.navds-file-dropzone__zone--dragging-over > .aware-animation {
-  top: 50%;
-  transform: translateY(-50%);
 }
