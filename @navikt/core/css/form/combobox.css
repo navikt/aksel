@@ -306,11 +306,7 @@
   padding-left: calc(var(--a-spacing-2) - 4px);
 }
 
-.navds-combobox__list-item:not(
-    .navds-combobox__list-item--max-selected,
-    .navds-combobox__list-item--loading,
-    .navds-combobox__list-item--no-options
-  )[data-no-focus="true"] {
+.navds-combobox__list-item[data-no-focus="true"] {
   cursor: not-allowed;
   opacity: 0.4;
 }
