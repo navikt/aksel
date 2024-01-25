@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
-import { useState } from "react";
 
 const Example = () => {
   const [selectedOptions, setSelectedOptions] = useState([
@@ -42,6 +42,11 @@ const options = [
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
 
 export const args = {
   index: 1,
