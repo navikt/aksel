@@ -10,7 +10,7 @@ const Example = () => {
   return (
     <div>
       <UNSAFE_Combobox
-        label="Hva er de kuleste transportmidlene? (velg opp til 3)"
+        label="Hva er de kuleste transportmidlene? (velg opptil 3)"
         options={options}
         isMultiSelect
         maxSelected={{ limit: 3 }}
