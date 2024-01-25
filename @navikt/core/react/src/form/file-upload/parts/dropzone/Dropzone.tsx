@@ -60,18 +60,18 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDragLeave={dropzoneCtx.onDragLeave}
           onDragEnd={dropzoneCtx.onDragEnd}
           onDrop={dropzoneCtx.onDrop}
-          className="navds-dropzone__zone"
+          className="navds-dropzone__area"
         >
-          <div className="navds-dropzone__zone-icon">
+          <div className="navds-dropzone__area-icon">
             <CloudUpIcon fontSize="1.5rem" aria-hidden />
           </div>
-          <div className="navds-dropzone__zone-release">
-            <div className="navds-dropzone__zone-release__icon">
+          <div className="navds-dropzone__area-release">
+            <div className="navds-dropzone__area-release__icon">
               <CloudUpIcon aria-hidden />
             </div>
             <span
               aria-hidden={!dropzoneCtx.isDraggingOver}
-              className="navds-dropzone__zone-release__text"
+              className="navds-dropzone__area-release__text"
             >
               {translation.drop}
             </span>
@@ -83,7 +83,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             <BodyShort as="div">{translation.or}</BodyShort>
           </div>
           <Button
-            className="navds-dropzone__zone-button"
+            className="navds-dropzone__area-button"
             variant="secondary"
             onClick={() => inputRef.current?.click()}
             tabIndex={-1}
@@ -95,7 +95,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             {...omit(rest, ["errorId"])}
             {...inputProps}
             type="file"
-            className="navds-dropzone__zone-input"
+            className="navds-dropzone__area-input"
             multiple={multiple}
             accept={accept}
             onChange={dropzoneCtx.onChange}
