@@ -143,8 +143,9 @@ const FilteredOptions = () => {
                 return;
               }
               toggleOption(option, event);
-              if (!isMultiSelect && !selectedOptions.includes(option))
-                toggleIsListOpen(false);
+              if (!isMultiSelect && !selectedOptions.includes(option)){
+                              toggleIsListOpen(false);
+              }
             }}
             role="option"
             aria-selected={selectedOptions.includes(option)}
