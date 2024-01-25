@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
-import React, { useId, useMemo, useState } from "react";
+import React, { useId, useMemo, useRef, useState } from "react";
 import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
 
 export default {
@@ -296,6 +296,7 @@ export const MaxSelectedOptions: StoryFunction = () => {
     options[0],
     options[1],
   ]);
+  const comboboxRef = useRef<HTMLInputElement>(null);
   return (
     <UNSAFE_Combobox
       id={id}
@@ -310,9 +311,10 @@ export const MaxSelectedOptions: StoryFunction = () => {
       }
       isMultiSelect
       allowNewValues
-      isListOpen
+      isListOpen={comboboxRef.current ? undefined : true}
       value={value}
       onChange={(event) => setValue(event?.target.value)}
+      ref={comboboxRef}
     />
   );
 };
