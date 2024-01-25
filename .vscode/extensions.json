@@ -8,9 +8,7 @@
     "ms-playwright.playwright",
     "ms-vsliveshare.vsliveshare",
     "sanity-io.vscode-sanity",
-    "shinichi-takii.sql-bigquery",
     "stylelint.vscode-stylelint",
-    "vunguyentuan.vscode-css-variables",
-    "usernamehw.errorlens"
+    "vunguyentuan.vscode-css-variables"
   ]
 }
