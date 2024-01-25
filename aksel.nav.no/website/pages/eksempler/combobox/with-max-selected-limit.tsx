@@ -14,7 +14,7 @@ const Example = () => {
         options={options}
         isMultiSelect
         maxSelected={{ limit: 3 }}
-        selectedOptions={["car", "bus", "train"]}
+        selectedOptions={selectedOptions}
         onToggleSelected={(option, isSelected) =>
           isSelected
             ? setSelectedOptions([...selectedOptions, option])
