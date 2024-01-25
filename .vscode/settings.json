@@ -5,4 +5,24 @@
   "deno.enablePaths": ["scripts/article-views", "scripts/changelog"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "deno.lint": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/esm": true,
+    "**/cjs": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.yarn/**": true,
+    "**/dist": true,
+    "**/esm": true,
+    "**/cjs": true
+  },
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "**/esm/**",
+    "**/cjs/**"
+  ],
+  "playwright.reuseBrowser": true
 }
