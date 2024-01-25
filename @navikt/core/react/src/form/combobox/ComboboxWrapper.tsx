@@ -47,7 +47,6 @@ const ComboboxWrapper = ({
       ref={wrapperRef}
       className={cl(
         className,
-        "navds-combobox-wrapper",
         "navds-form-field",
         `navds-form-field--${inputSize}`,
         {
