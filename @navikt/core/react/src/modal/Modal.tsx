@@ -201,7 +201,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 level="1"
                 id={ariaLabelId}
               >
-                FOO1
+                FOO12
                 <span className="navds-modal__header-icon">{header.icon}</span>
                 {header.heading}
               </Heading>
