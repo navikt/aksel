@@ -1,16 +1,16 @@
 {
-    "recommendations": [
-        "csstools.postcss",
-        "dbaeumer.vscode-eslint",
-        "denoland.vscode-deno",
-        "esbenp.prettier-vscode",
-        "github.vscode-github-actions",
-        "ms-playwright.playwright",
-        "ms-vsliveshare.vsliveshare",
-        "sanity-io.vscode-sanity",
-        "shinichi-takii.sql-bigquery",
-        "stylelint.vscode-stylelint",
-        "Tock.vscode-css-custom-properties",
-        "usernamehw.errorlens",
-    ],
+  "recommendations": [
+    "csstools.postcss",
+    "dbaeumer.vscode-eslint",
+    "denoland.vscode-deno",
+    "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
+    "ms-playwright.playwright",
+    "ms-vsliveshare.vsliveshare",
+    "sanity-io.vscode-sanity",
+    "shinichi-takii.sql-bigquery",
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables",
+    "usernamehw.errorlens"
+  ]
 }

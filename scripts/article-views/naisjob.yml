@@ -1,0 +1,10 @@
+apiVersion: nais.io/v1
+kind: Naisjob
+metadata:
+  labels:
+    team: myteam
+  name: myjob
+  namespace: myteam
+spec:
+  image: ${{ image }}
+  schedule: "*/1 * * * *"
