@@ -1,9 +1,9 @@
-import Fuse from "fuse.js";
+import type { FuseResult } from "fuse.js";
 import { FuseItemT, GroupedHitsT, SearchHitT, SearchResultsT } from "@/types";
 
 export function createSearchResult(
   result: SearchHitT[],
-  rawResults: Fuse.FuseResult<FuseItemT>[],
+  rawResults: FuseResult<FuseItemT>[],
 ) {
   const groupedHits: GroupedHitsT = result?.reduce((prev, cur) => {
     if (cur.item._type in prev) {
