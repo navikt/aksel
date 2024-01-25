@@ -1,4 +1,4 @@
-.navds-combobox-form-field {
+.navds-combobox-wrapper {
   display: flex;
   flex-direction: column;
 }
@@ -304,7 +304,6 @@
   background-color: inherit;
   align-items: flex-start;
 }
-
 
 .navds-combobox__list-item--focus,
 .navds-combobox__list--with-hover .navds-combobox__list-item:not([data-no-focus="true"]):hover {
