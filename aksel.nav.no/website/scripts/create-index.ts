@@ -3,6 +3,7 @@ import fs from "fs";
 import { groupBy, omit } from "lodash";
 import { allArticleDocuments } from "../sanity/config";
 import { noCdnClient } from "../sanity/interface/client.server";
+
 dotenv.config();
 
 main();

@@ -1,4 +1,3 @@
-import { Button } from "@navikt/ds-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
@@ -6,9 +5,9 @@ import {
   DocumentActionProps,
   useDocumentOperation,
 } from "sanity";
-
-import { QualityCheckContent } from "./focusAction";
 import { SealCheckmarkIcon } from "@navikt/aksel-icons";
+import { Button } from "@navikt/ds-react";
+import { QualityCheckContent } from "./focusAction";
 
 export const createWrappedApproveAction = () => {
   const WrappedApprove = (

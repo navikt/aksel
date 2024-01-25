@@ -1,5 +1,5 @@
-import { urlFor } from "@/sanity/interface";
 import Head from "next/head";
+import { urlFor } from "@/sanity/interface";
 
 type SEOProps = {
   title: string;

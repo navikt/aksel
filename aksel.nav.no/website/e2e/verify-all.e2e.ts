@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import urls from "./sitemap-urls.json";
 
 test.describe("Check for errors in all pages", () => {

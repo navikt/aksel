@@ -42,12 +42,11 @@ const FilteredOptions = () => {
       id={filteredOptionsUtil.getFilteredOptionsId(id)}
       tabIndex={-1}
     >
-      <div className="navds-combobox__list_non-selectables">
+      <div className="navds-combobox__list_non-selectables" role="status">
         {maxSelected?.isLimitReached && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--max-selected sticky"
-            aria-selected={false}
-            id={`${id}-max-selected`}
+            id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
             data-no-focus="true"
           >
             {maxSelected.message ??
@@ -57,7 +56,6 @@ const FilteredOptions = () => {
         {isLoading && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--loading sticky"
-            aria-selected={false}
             id={filteredOptionsUtil.getIsLoadingId(id)}
             data-no-focus="true"
           >
@@ -67,7 +65,6 @@ const FilteredOptions = () => {
         {!isLoading && filteredOptions.length === 0 && (
           <div
             className="navds-combobox__list-item navds-combobox__list-item--no-options sticky"
-            aria-selected={false}
             id={filteredOptionsUtil.getNoHitsId(id)}
             data-no-focus="true"
           >
@@ -154,6 +151,7 @@ const FilteredOptions = () => {
             }}
             role="option"
             aria-selected={selectedOptions.includes(option)}
+            aria-disabled={isDisabled(option) || undefined}
           >
             <BodyShort size={size}>{option}</BodyShort>
             {selectedOptions.includes(option) && <CheckmarkIcon />}

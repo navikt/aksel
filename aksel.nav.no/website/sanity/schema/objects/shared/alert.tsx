@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
 import { toPlainText } from "@portabletext/react";
+import { defineField, defineType } from "sanity";
 import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
 
 export const Alert = defineType({

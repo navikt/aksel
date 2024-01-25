@@ -1,9 +1,9 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Box, Label, Show } from "@navikt/ds-react";
 import { amplitudeLogNavigation } from "@/logging";
 import { SidebarT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
-import { Box, Label, Show } from "@navikt/ds-react";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 const Sidebar = ({
   kategori,

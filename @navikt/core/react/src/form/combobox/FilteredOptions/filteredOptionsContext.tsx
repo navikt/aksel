@@ -71,7 +71,7 @@ export const FilteredOptionsProvider = ({
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
-  const { selectedOptions } = useSelectedOptionsContext();
+  const { selectedOptions, maxSelected } = useSelectedOptionsContext();
 
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
@@ -166,10 +166,17 @@ export const FilteredOptionsProvider = ({
         activeOption = filteredOptionsUtils.getIsLoadingId(id);
       }
     }
-    return cl(activeOption, partialAriaDescribedBy) || undefined;
+    const maybeMaxSelectedOptionsId =
+      maxSelected?.isLimitReached &&
+      filteredOptionsUtils.getMaxSelectedOptionsId(id);
+    return (
+      cl(activeOption, maybeMaxSelectedOptionsId, partialAriaDescribedBy) ||
+      undefined
+    );
   }, [
     isListOpen,
     isLoading,
+    maxSelected?.isLimitReached,
     value,
     partialAriaDescribedBy,
     shouldAutocomplete,

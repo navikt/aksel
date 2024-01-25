@@ -1,7 +1,7 @@
+import { useContext } from "react";
+import { Heading, Label } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
 import { searchOptions } from "@/types";
-import { Heading, Label } from "@navikt/ds-react";
-import { useContext } from "react";
 import { SearchContext, SearchResultContext } from "../providers";
 import { Collection, CollectionMapper } from "./HitCollection";
 

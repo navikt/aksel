@@ -1,6 +1,6 @@
-import React from "react";
 import cl from "clsx";
 import Fuse from "fuse.js";
+import React from "react";
 import { searchOptions } from "@/types";
 
 function splitStr(str: string, query: string) {

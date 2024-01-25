@@ -1,6 +1,6 @@
-import { amplitudeLogNavigation } from "@/logging";
 import cl from "clsx";
 import Link from "next/link";
+import { amplitudeLogNavigation } from "@/logging";
 
 export const IntroCards = ({
   links,

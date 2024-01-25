@@ -1,11 +1,11 @@
+import cl from "clsx";
+import Image from "next/legacy/image";
+import NextLink from "next/link";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import cl from "clsx";
-import Image from "next/legacy/image";
-import NextLink from "next/link";
 import { ArticleT } from "./Card";
 import { Tag } from "./Tag";
 

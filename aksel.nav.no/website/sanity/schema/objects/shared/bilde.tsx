@@ -1,5 +1,5 @@
-import { ImageIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { ImageIcon } from "@navikt/aksel-icons";
 
 export const Bilde = defineType({
   title: "Bilde",

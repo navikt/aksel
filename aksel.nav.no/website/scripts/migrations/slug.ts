@@ -1,7 +1,6 @@
 /**
  * Migration template
  */
-
 import dotenv from "dotenv";
 import { noCdnClient } from "../../sanity/interface/client.server";
 

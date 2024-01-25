@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { getBlocks, getKey, AkselTheme } from "@/sb-util";
+import { AkselTheme, getBlocks, getKey } from "@/sb-util";
 import Tips from "./Tips";
 
 const meta = {

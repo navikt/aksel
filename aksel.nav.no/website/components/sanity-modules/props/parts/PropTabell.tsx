@@ -1,6 +1,6 @@
+import { BodyShort, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
-import { BodyShort, Heading } from "@navikt/ds-react";
 import { DtList } from "./DtList";
 
 type PropTableProps = {

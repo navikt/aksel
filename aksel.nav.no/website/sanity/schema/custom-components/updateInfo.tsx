@@ -1,6 +1,6 @@
-import { Alert } from "@navikt/ds-react";
 import { differenceInMonths } from "date-fns";
 import { useFormValue } from "sanity";
+import { Alert } from "@navikt/ds-react";
 
 export function UpdateInfo() {
   const verified: any = useFormValue(["updateInfo", "lastVerified"]);

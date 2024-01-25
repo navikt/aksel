@@ -1,8 +1,8 @@
-import ErrorBoundary from "@/error-boundary";
-import { Heading } from "@navikt/ds-react";
 import cl from "clsx";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { Heading } from "@navikt/ds-react";
+import ErrorBoundary from "@/error-boundary";
 import Card, { ArticleT } from "./Card";
 import { Highlight } from "./Highlight";
 

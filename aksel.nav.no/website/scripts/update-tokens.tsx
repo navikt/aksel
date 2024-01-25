@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-
 import core from "@navikt/ds-css/tokens.json";
 import tokens from "@navikt/ds-tokens/docs.json";
 import { noCdnClient } from "../sanity/interface/client.server";

@@ -1,6 +1,6 @@
+import { createContext, useContext, useMemo } from "react";
 import { allArticleDocuments } from "@/sanity/config";
 import { SearchHitT, SearchResultsT } from "@/types";
-import { createContext, useContext, useMemo } from "react";
 import { useSearch } from "../hooks";
 import { formatRawResults } from "../utils";
 import { SearchContext } from "./SearchProvider";

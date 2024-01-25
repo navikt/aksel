@@ -1,7 +1,7 @@
+import { Alert as DsAlert, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AlertT } from "@/types";
-import { Alert as DsAlert, Heading } from "@navikt/ds-react";
 
 type AlertProps = {
   node: AlertT;
