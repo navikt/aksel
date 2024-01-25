@@ -18,7 +18,7 @@ interface FileUploadComponent
     FileUploadProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Framed zone to drag-n-drop files, upload files with button-click or copy-paste.
+   * Framed area to drag-n-drop files, upload files with button-click or copy-paste.
    * @example Single file
    * ```jsx
    * <FileUpload.Dropzone
@@ -45,6 +45,44 @@ interface FileUploadComponent
    * ```
    */
   Dropzone: typeof Dropzone;
+
+  /**
+   * Framed zone to drag-n-drop files, upload files with button-click or copy-paste.
+   * @example Single
+   * ```jsx
+   * <FileUpload.Item file={file} status="uploading" />
+   * ```
+   *
+   * @example Multiple items can be semantically grouped as a list.
+   * ```jsx
+   * <VStack gap="4" as="ul">
+   *    <FileUpload.Item as="li" file={file} />
+   *    <FileUpload.Item as="li" file={file2} />
+   *    <FileUpload.Item as="li" file={file3} status="uploading" />
+   * </VStack>
+   * ```
+   * @example File-object
+   * ```jsx
+   * // Native File
+   * <FileUpload.Item file={file} error="Something went wrong" />
+   *
+   * // File-metadata
+   * <FileUpload.Item file={{ name: "fileName.pdf", size: 1_048_576 }} error="Something went wrong" />
+   * ```
+   *
+   * @example Error
+   * ```jsx
+   * <FileUpload.Item file={file} error="Something went wrong" />
+   * ```
+   *
+   * @example Status
+   * ```jsx
+   * <FileUpload.Item file={file} status="uploading" />
+   * <FileUpload.Item file={file} status="downloading" />
+   * <FileUpload.Item file={file} status="retry" onRetry={...}/>
+   * <FileUpload.Item file={file} status="delete" onDelete={...}/>
+   * ```
+   */
   Item: typeof Item;
 }
 
