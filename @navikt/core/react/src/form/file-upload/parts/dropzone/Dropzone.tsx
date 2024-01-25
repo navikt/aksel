@@ -63,11 +63,11 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           className="navds-file-dropzone__zone"
         >
           <div className="navds-dropzone__zone-icon">
-            <CloudUpIcon fontSize="2rem" aria-hidden />
+            <CloudUpIcon fontSize="1.5rem" aria-hidden />
           </div>
           <div className="navds-dropzone__zone-release">
             <div className="navds-dropzone__zone-release__icon">
-              <CloudUpIcon fontSize="2rem" aria-hidden />
+              <CloudUpIcon aria-hidden />
             </div>
             <span
               aria-hidden={!dropzoneCtx.isDraggingOver}
