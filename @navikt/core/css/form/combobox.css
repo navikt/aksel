@@ -267,7 +267,8 @@
 
 .navds-combobox__list-item--max-selected {
   background: var(--ac-combobox-list-item-max-selected-bg, var(--a-surface-info-subtle));
-  border-radius: 3px 3px 0 0; /* TODO: Change to default 4px border-radius when we refactor styling of dropdown */
+border-start-start-radius: calc(var(--a-border-radius-medium) - 1px);
+border-start-end-radius: calc(var(--a-border-radius-medium) - 1px);
   border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
   margin-bottom: calc(var(--a-spacing-1) * -1);
 }
