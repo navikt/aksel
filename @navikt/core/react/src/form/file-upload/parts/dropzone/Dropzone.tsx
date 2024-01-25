@@ -60,7 +60,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDragLeave={dropzoneCtx.onDragLeave}
           onDragEnd={dropzoneCtx.onDragEnd}
           onDrop={dropzoneCtx.onDrop}
-          className="navds-file-dropzone__zone"
+          className="navds-dropzone__zone"
         >
           <div className="navds-dropzone__zone-icon">
             <CloudUpIcon fontSize="1.5rem" aria-hidden />
