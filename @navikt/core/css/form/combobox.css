@@ -276,10 +276,6 @@
   margin-bottom: calc(var(--a-spacing-1) * -1);
 }
 
-.navds-combobox__list-item--max-selected + li {
-  margin-top: 0;
-}
-
 .navds-combobox__list-item--no-options:hover,
 .navds-combobox__list-item--loading:hover,
 .navds-combobox__list-item--max-selected:hover {
