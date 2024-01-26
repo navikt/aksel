@@ -1,12 +1,13 @@
 name: Update article views
 on:
   workflow_dispatch:
-#   schedule:
-#     # 12.00 every day
-#     - cron: "0 0 * * *"
 jobs:
   execute:
     runs-on: ubuntu-latest
+    permissions: # TODO: remove once merged
+      packages: "write"
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -33,10 +34,10 @@ jobs:
           dockerfile: scripts/article-views/Dockerfile
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
-      - name: start naisjob dev-gcp
+      - name: start naisjob prod-gcp
         uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: scripts/naisjob.yaml
-          CLUSTER: dev-gcp
+          CLUSTER: prod-gcp
           IMAGE: ${{ steps.docker-push.outputs.image }}
