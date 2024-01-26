@@ -14,11 +14,11 @@ const getButtonText = (locale: FileUploadLocale, multiple: boolean) => {
 const getDragAndDropText = (locale: FileUploadLocale, multiple: boolean) => {
   switch (locale) {
     case "nb":
-      return `Dra og slipp ${multiple ? "filer" : "fil"}`;
+      return `Dra og slipp ${multiple ? "filer" : "fil"} her`;
     case "en":
-      return `Drag and drop ${multiple ? "files" : "file"}`;
+      return `Drag and drop ${multiple ? "files" : "file"} here`;
     default:
-      return `Dra og slipp ${multiple ? "filer" : "fil"}`;
+      return `Dra og slipp ${multiple ? "filer" : "fil"} her`;
   }
 };
 
