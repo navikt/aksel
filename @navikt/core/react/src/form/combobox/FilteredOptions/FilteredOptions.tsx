@@ -55,7 +55,7 @@ const FilteredOptions = () => {
         <div className="navds-combobox__list_non-selectables" role="status">
           {maxSelected?.isLimitReached && (
             <div
-              className="navds-combobox__list-item navds-combobox__list-item--max-selected"
+              className="navds-combobox__list-item--max-selected"
               id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
             >
               {maxSelected.message ??
@@ -64,7 +64,7 @@ const FilteredOptions = () => {
           )}
           {isLoading && (
             <div
-              className="navds-combobox__list-item navds-combobox__list-item--loading"
+              className="navds-combobox__list-item--loading"
               id={filteredOptionsUtil.getIsLoadingId(id)}
             >
               <Loader title="Søker..." />
@@ -72,7 +72,7 @@ const FilteredOptions = () => {
           )}
           {!isLoading && filteredOptions.length === 0 && (
             <div
-              className="navds-combobox__list-item navds-combobox__list-item--no-options"
+              className="navds-combobox__list-item--no-options"
               id={filteredOptionsUtil.getNoHitsId(id)}
             >
               Ingen søketreff
