@@ -33,6 +33,11 @@ const FilteredOptions = () => {
   const isDisabled = (option) =>
     maxSelected?.isLimitReached && !selectedOptions.includes(option);
 
+  const shouldRenderNonSelectables =
+    maxSelected?.isLimitReached || // Render maxSelected message
+    isLoading || // Render loading message
+    (!isLoading && filteredOptions.length === 0); // Render no hits message
+
   const shouldRenderFilteredOptionsList =
     (allowNewValues && isValueNew && !maxSelected?.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
@@ -46,33 +51,35 @@ const FilteredOptions = () => {
       id={filteredOptionsUtil.getFilteredOptionsId(id)}
       tabIndex={-1}
     >
-      <div className="navds-combobox__list_non-selectables" role="status">
-        {maxSelected?.isLimitReached && (
-          <div
-            className="navds-combobox__list-item navds-combobox__list-item--max-selected"
-            id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
-          >
-            {maxSelected.message ??
-              `${selectedOptions.length} av ${maxSelected.limit} er valgt.`}
-          </div>
-        )}
-        {isLoading && (
-          <div
-            className="navds-combobox__list-item navds-combobox__list-item--loading"
-            id={filteredOptionsUtil.getIsLoadingId(id)}
-          >
-            <Loader title="Søker..." />
-          </div>
-        )}
-        {!isLoading && filteredOptions.length === 0 && (
-          <div
-            className="navds-combobox__list-item navds-combobox__list-item--no-options"
-            id={filteredOptionsUtil.getNoHitsId(id)}
-          >
-            Ingen søketreff
-          </div>
-        )}
-      </div>
+      {shouldRenderNonSelectables && (
+        <div className="navds-combobox__list_non-selectables" role="status">
+          {maxSelected?.isLimitReached && (
+            <div
+              className="navds-combobox__list-item navds-combobox__list-item--max-selected"
+              id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
+            >
+              {maxSelected.message ??
+                `${selectedOptions.length} av ${maxSelected.limit} er valgt.`}
+            </div>
+          )}
+          {isLoading && (
+            <div
+              className="navds-combobox__list-item navds-combobox__list-item--loading"
+              id={filteredOptionsUtil.getIsLoadingId(id)}
+            >
+              <Loader title="Søker..." />
+            </div>
+          )}
+          {!isLoading && filteredOptions.length === 0 && (
+            <div
+              className="navds-combobox__list-item navds-combobox__list-item--no-options"
+              id={filteredOptionsUtil.getNoHitsId(id)}
+            >
+              Ingen søketreff
+            </div>
+          )}
+        </div>
+      )}
 
       {shouldRenderFilteredOptionsList && (
         <ul
