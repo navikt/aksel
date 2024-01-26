@@ -1,0 +1,18 @@
+apiVersion: nais.io/v1
+kind: Naisjob
+metadata:
+  name: verktoykasse
+  namespace: designsystem
+  labels:
+    team: designsystem
+spec:
+  image: { { image } }
+  schedule: "0 0,12 * * *"
+  command:
+    - deno
+    - run
+    - --allow-net
+    - --allow-env
+    - --allow-read
+    - --no-config
+    - scripts/article-views/update-article-views/main.ts
