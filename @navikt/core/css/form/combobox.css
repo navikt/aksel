@@ -89,6 +89,11 @@
   box-shadow: none;
 }
 
+.navds-combobox__input[readonly] {
+  cursor: default;
+  background-color: inherit;
+}
+
 .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus-visible) {
   box-shadow:
     0 0 0 1px var(--a-surface-default) inset,
@@ -130,6 +135,12 @@
   .navds-combobox--focused .navds-combobox__wrapper-inner.navds-combobox__wrapper-inner--virtually-unfocused {
     box-shadow: none;
   }
+}
+
+.navds-combobox__wrapper-inner:has(.navds-combobox__input[readonly]) {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+  cursor: default;
 }
 
 .navds-combobox__button-clear {

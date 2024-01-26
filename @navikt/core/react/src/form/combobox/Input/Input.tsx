@@ -20,8 +20,10 @@ interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, ...rest }, ref) => {
-    const { clearInput, inputProps, onChange, size, value } = useInputContext();
+    const { clearInput, inputProps, onChange, size, value, readOnly } =
+      useInputContext();
     const {
+      maxSelected,
       selectedOptions,
       removeSelectedOption,
       toggleOption,
@@ -188,6 +190,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        readOnly={maxSelected?.isLimitReached || readOnly || undefined}
         className={cl(
           inputClassName,
           "navds-combobox__input",
