@@ -33,6 +33,10 @@ const FilteredOptions = () => {
   const isDisabled = (option) =>
     maxSelected?.isLimitReached && !selectedOptions.includes(option);
 
+  const shouldRenderFilteredOptionsList =
+    (allowNewValues && isValueNew && !maxSelected?.isLimitReached) || // Render add new option
+    filteredOptions.length > 0; // Render filtered options
+
   return (
     <div
       className={cl("navds-combobox__list", {
@@ -70,92 +74,95 @@ const FilteredOptions = () => {
         )}
       </div>
 
-      <ul
-        ref={setFilteredOptionsRef}
-        role="listbox"
-        className="navds-combobox__list-options"
-      >
-        {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
-          <li
-            tabIndex={-1}
-            onMouseMove={() => {
-              if (
-                activeDecendantId !== filteredOptionsUtil.getAddNewOptionId(id)
-              ) {
-                virtualFocus.moveFocusToElement(
-                  filteredOptionsUtil.getAddNewOptionId(id),
-                );
-                setIsMouseLastUsedInputDevice(true);
-              }
-            }}
-            onPointerUp={(event) => {
-              toggleOption(value, event);
-              if (!isMultiSelect && !selectedOptions.includes(value))
-                toggleIsListOpen(false);
-            }}
-            id={filteredOptionsUtil.getAddNewOptionId(id)}
-            className={cl(
-              "navds-combobox__list-item navds-combobox__list-item--new-option",
-              {
-                "navds-combobox__list-item--new-option--focus":
+      {shouldRenderFilteredOptionsList && (
+        <ul
+          ref={setFilteredOptionsRef}
+          role="listbox"
+          className="navds-combobox__list-options"
+        >
+          {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
+            <li
+              tabIndex={-1}
+              onMouseMove={() => {
+                if (
+                  activeDecendantId !==
+                  filteredOptionsUtil.getAddNewOptionId(id)
+                ) {
+                  virtualFocus.moveFocusToElement(
+                    filteredOptionsUtil.getAddNewOptionId(id),
+                  );
+                  setIsMouseLastUsedInputDevice(true);
+                }
+              }}
+              onPointerUp={(event) => {
+                toggleOption(value, event);
+                if (!isMultiSelect && !selectedOptions.includes(value))
+                  toggleIsListOpen(false);
+              }}
+              id={filteredOptionsUtil.getAddNewOptionId(id)}
+              className={cl(
+                "navds-combobox__list-item navds-combobox__list-item--new-option",
+                {
+                  "navds-combobox__list-item--new-option--focus":
+                    activeDecendantId ===
+                    filteredOptionsUtil.getAddNewOptionId(id),
+                },
+              )}
+              role="option"
+              aria-selected={false}
+            >
+              <PlusIcon aria-hidden />
+              <BodyShort size={size}>
+                Legg til{" "}
+                <Label as="span" size={size}>
+                  &#8220;{value}&#8221;
+                </Label>
+              </BodyShort>
+            </li>
+          )}
+          {filteredOptions.map((option) => (
+            <li
+              className={cl("navds-combobox__list-item", {
+                "navds-combobox__list-item--focus":
                   activeDecendantId ===
-                  filteredOptionsUtil.getAddNewOptionId(id),
-              },
-            )}
-            role="option"
-            aria-selected={false}
-          >
-            <PlusIcon aria-hidden />
-            <BodyShort size={size}>
-              Legg til{" "}
-              <Label as="span" size={size}>
-                &#8220;{value}&#8221;
-              </Label>
-            </BodyShort>
-          </li>
-        )}
-        {filteredOptions.map((option) => (
-          <li
-            className={cl("navds-combobox__list-item", {
-              "navds-combobox__list-item--focus":
-                activeDecendantId ===
-                filteredOptionsUtil.getOptionId(id, option),
-              "navds-combobox__list-item--selected":
-                selectedOptions.includes(option),
-            })}
-            data-no-focus={isDisabled(option) || undefined}
-            id={filteredOptionsUtil.getOptionId(id, option)}
-            key={option}
-            tabIndex={-1}
-            onMouseMove={() => {
-              if (
-                activeDecendantId !==
-                filteredOptionsUtil.getOptionId(id, option)
-              ) {
-                virtualFocus.moveFocusToElement(
                   filteredOptionsUtil.getOptionId(id, option),
-                );
-                setIsMouseLastUsedInputDevice(true);
-              }
-            }}
-            onPointerUp={(event) => {
-              if (isDisabled(option)) {
-                return;
-              }
-              toggleOption(option, event);
-              if (!isMultiSelect && !selectedOptions.includes(option)){
-                              toggleIsListOpen(false);
-              }
-            }}
-            role="option"
-            aria-selected={selectedOptions.includes(option)}
-            aria-disabled={isDisabled(option) || undefined}
-          >
-            <BodyShort size={size}>{option}</BodyShort>
-            {selectedOptions.includes(option) && <CheckmarkIcon />}
-          </li>
-        ))}
-      </ul>
+                "navds-combobox__list-item--selected":
+                  selectedOptions.includes(option),
+              })}
+              data-no-focus={isDisabled(option) || undefined}
+              id={filteredOptionsUtil.getOptionId(id, option)}
+              key={option}
+              tabIndex={-1}
+              onMouseMove={() => {
+                if (
+                  activeDecendantId !==
+                  filteredOptionsUtil.getOptionId(id, option)
+                ) {
+                  virtualFocus.moveFocusToElement(
+                    filteredOptionsUtil.getOptionId(id, option),
+                  );
+                  setIsMouseLastUsedInputDevice(true);
+                }
+              }}
+              onPointerUp={(event) => {
+                if (isDisabled(option)) {
+                  return;
+                }
+                toggleOption(option, event);
+                if (!isMultiSelect && !selectedOptions.includes(option)) {
+                  toggleIsListOpen(false);
+                }
+              }}
+              role="option"
+              aria-selected={selectedOptions.includes(option)}
+              aria-disabled={isDisabled(option) || undefined}
+            >
+              <BodyShort size={size}>{option}</BodyShort>
+              {selectedOptions.includes(option) && <CheckmarkIcon />}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
