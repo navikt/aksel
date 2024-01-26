@@ -61,7 +61,6 @@ export const Default: StoryFn = () => {
       {files.allFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {" "}
             {`Valgte filer (${files.allFiles.length} av ${MAX_FILES})`}
           </Heading>
           <VStack gap="2">
