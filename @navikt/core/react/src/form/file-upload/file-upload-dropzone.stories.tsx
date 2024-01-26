@@ -93,10 +93,10 @@ export const Locales: StoryObj = {
   render: () => (
     <HStack gap="12">
       <FileUpload locale="nb">
-        <FileUpload.Dropzone label="English" onSelect={onSelect} />
+        <FileUpload.Dropzone label="Norsk bokmål" onSelect={onSelect} />
       </FileUpload>
       <FileUpload locale="en">
-        <FileUpload.Dropzone label="Nynorsk" onSelect={onSelect} />
+        <FileUpload.Dropzone label="English" onSelect={onSelect} />
       </FileUpload>
     </HStack>
   ),
