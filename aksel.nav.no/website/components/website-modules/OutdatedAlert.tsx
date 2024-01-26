@@ -15,7 +15,7 @@ export default function OutdatedAlert() {
           Innholdet kan være utdatert
         </Heading>
         <BodyLong className={validUser ? "mb-4" : undefined}>
-          Det er over 1 år siden innholdet ble endret. Vi kan ikke være helt
+          Det er over 1 år siden innholdet ble revidert. Vi kan ikke være helt
           sikre på hvor nøyaktig artikkelen er lenger.
         </BodyLong>
         {validUser && (

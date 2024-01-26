@@ -74,9 +74,7 @@ describe("Render combobox", () => {
   it("Should show loading icon when loading (used for async search)", async () => {
     render(<App options={[]} isListOpen isLoading />);
 
-    expect(
-      await screen.findByRole("option", { name: "venter..." }),
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Søker...")).toBeInTheDocument();
   });
 });
 
