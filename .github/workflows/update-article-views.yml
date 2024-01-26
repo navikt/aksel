@@ -25,5 +25,20 @@ jobs:
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_UTILITY_WRITE }}" >> scripts/article-views/.env
-      - name: Install dependencies
+      - name: Run script
         run: deno run --allow-net --allow-read --allow-env --no-config scripts/article-views/update-article-views/main.ts
+      - uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: designsystem
+          push_image: true
+          dockerfile: scripts/article-views/Dockerfile
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+      - name: start naisjob dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: scripts/naisjob.yaml
+          CLUSTER: dev-gcp
+          IMAGE: ${{ steps.docker-push.outputs.image }}
