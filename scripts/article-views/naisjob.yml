@@ -5,8 +5,13 @@ metadata:
   namespace: designsystem
   labels:
     team: designsystem
+  ownerReferences:
+    - apiVersion: nais.io/v1
+      kind: Application
+      name: designsystem
+      uid: 86D01574-6D92-49F7-AB4F-768FF0807EE0
 spec:
-  image: {{ image }}
+  image: { { image } }
   schedule: "0 0,12 * * *"
   command:
     - deno
