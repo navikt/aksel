@@ -4,10 +4,10 @@ import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
 import { useFileUploadLocale } from "../../FileUpload.context";
 import { useLocale } from "../../utils/useLocale";
+import { FileItem } from "./Item.types";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
-import { FileItem } from "./types";
 import { formatFileSize } from "./utils/format-file-size";
 
 export interface FileItemBaseProps {
@@ -21,7 +21,7 @@ export interface FileItemBaseProps {
    */
   file: FileItem;
   /**
-   * Callback called when the file named is clicked.
+   * Callback called when the filename is clicked.
    */
   onFileClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**

@@ -3,7 +3,7 @@ import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { useFileUploadLocale } from "../../FileUpload.context";
 import { useLocale } from "../../utils/useLocale";
-import { FileItem } from "./types";
+import { FileItem } from "./Item.types";
 
 interface Props {
   file: FileItem;

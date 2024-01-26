@@ -10,7 +10,7 @@ import {
   FileXMarkIcon,
 } from "@navikt/aksel-icons";
 import { Loader } from "../../../../loader";
-import { FileItem } from "./types";
+import { FileItem } from "./Item.types";
 
 interface ItemIconProps {
   isLoading?: boolean;
