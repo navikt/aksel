@@ -6,7 +6,7 @@ metadata:
   labels:
     team: designsystem
 spec:
-  image: { { image } }
+  image: {{ image }}
   schedule: "0 0,12 * * *"
   command:
     - deno
