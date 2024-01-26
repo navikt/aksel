@@ -3,9 +3,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <HStack gap="2" align="center">
-      <CopyButton size="small" copyText="Maguer Gorge 14b, 56430 Tatooine" />
-      Adresse: Maguer Gorge 14b, 56430 Tatooine
+    <HStack gap="1" align="center">
+      <span>Flere statsborgerskap: Norge, Danmark, Finland</span>
+      <span>/</span>
+      <HStack gap="1" align="center">
+        1709230141 <CopyButton size="small" copyText="1709230141" />
+      </HStack>
+      <span>/</span>
+      <span>Gift</span>
     </HStack>
   );
 };
@@ -20,5 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "CopyButton kan settes inline med tekst for å forenkle repetitive oppgaver.",
+  desc: "CopyButton kan eksempelvis inlines i breadcrumbs for kopi av fødselsnummer.",
 };
