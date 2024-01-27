@@ -10,13 +10,6 @@ import { OnFileSelectProps } from "./parts/dropzone/dropzone.types";
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
   component: FileUpload.Dropzone,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 500, maxWidth: "100%" }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
@@ -82,6 +75,16 @@ export const Default: StoryFn = () => {
       )}
     </VStack>
   );
+};
+
+Default.parameters = {
+  decorators: [
+    (Story) => (
+      <div style={{ width: 500, maxWidth: "100%" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 function getError(file: File, rejectedFiles: File[]) {

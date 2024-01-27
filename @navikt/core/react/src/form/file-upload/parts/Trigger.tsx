@@ -1,13 +1,10 @@
 import React, { forwardRef, useRef } from "react";
 import { Slot } from "../../../util/Slot";
-import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import { FileUploadBaseProps } from "../FileUpload.types";
 import { useDropzone } from "./dropzone/useDropzone";
 
-interface FileUploadTriggerProps
-  extends FileUploadBaseProps,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "onSelect"> {
+interface FileUploadTriggerProps extends FileUploadBaseProps {
   children: React.ReactNode;
 }
 
@@ -24,7 +21,6 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
     ref,
   ) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
-
     const mergedRef = useMergeRefs(ref, inputRef);
 
     const dropzoneCtx = useDropzone({ inputRef, onSelect, validator, accept });
@@ -48,7 +44,7 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
           style={{ display: "none" }}
           multiple={multiple}
           accept={accept}
-          onChange={composeEventHandlers(rest.onChange, dropzoneCtx.onChange)}
+          onChange={dropzoneCtx.onChange}
         />
       </>
     );
