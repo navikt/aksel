@@ -1,6 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
+import { UploadIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
+import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { ErrorMessage, Heading } from "../../typography";
 import { OnFileSelectProps } from "./parts/dropzone/dropzone.types";
@@ -95,3 +97,13 @@ function getListError(files: OnFileSelectProps) {
   if (filesTooMany > 1)
     return `Du har lagt ved ${filesTooMany} filer for mye, vennligst fjern ${filesTooMany} filer`;
 }
+
+export const TriggerWithButton = {
+  render: () => {
+    return (
+      <FileUpload.Trigger onSelect={console.log}>
+        <Button icon={<UploadIcon aria-hidden />}>Last opp filer</Button>
+      </FileUpload.Trigger>
+    );
+  },
+};

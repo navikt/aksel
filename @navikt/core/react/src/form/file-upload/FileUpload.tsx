@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { FileUploadLocaleContextProvider } from "./FileUpload.context";
+import Trigger from "./parts/Trigger";
 import Dropzone from "./parts/dropzone/Dropzone";
 import Item from "./parts/item/Item";
 
@@ -84,6 +85,7 @@ interface FileUploadComponent
    * ```
    */
   Item: typeof Item;
+  Trigger: typeof Trigger;
 }
 
 /**
@@ -125,5 +127,6 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
 FileUpload.Dropzone = Dropzone;
 FileUpload.Item = Item;
+FileUpload.Trigger = Trigger;
 
 export default FileUpload;

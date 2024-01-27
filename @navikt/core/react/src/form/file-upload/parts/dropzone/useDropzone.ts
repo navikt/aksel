@@ -51,10 +51,10 @@ export const useDropzone = ({
       }
     };
 
-    window.addEventListener("paste", handlePaste);
+    fileInput?.addEventListener("paste", handlePaste);
 
     return () => {
-      window.removeEventListener("paste", handlePaste);
+      fileInput?.removeEventListener("paste", handlePaste);
     };
   }, [inputRef, upload]);
 
