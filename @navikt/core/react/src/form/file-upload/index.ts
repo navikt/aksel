@@ -4,4 +4,4 @@ export {
   type OnFileSelectProps,
 } from "./parts/dropzone/dropzone.types";
 export { type FileItemProps } from "./parts/item/Item";
-export { type FileItem, type FileMetadata } from "./parts/item/types";
+export { type FileItem, type FileMetadata } from "./parts/item/Item.types";

@@ -35,7 +35,7 @@ describe("partitionFiles", () => {
     expect(acceptedFiles.length).toBe(1);
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(txtFileName);
-    expect(rejectedFiles[0].name).toBe(csvFileName);
+    expect(rejectedFiles[0].file.name).toBe(csvFileName);
   });
 
   test("rejects file that does not pass validator", () => {
@@ -44,17 +44,22 @@ describe("partitionFiles", () => {
     const csvFile = createCsvFile(csvFileName);
     const txtFile = createTxtFile(txtFileName);
     const files = [txtFile, csvFile];
-    const validator = (file: File) => file.name === txtFile.name;
+    const validator = (file: File) => {
+      if (file.name === txtFile.name) {
+        return true;
+      }
+      return "custom validation error";
+    };
     const { acceptedFiles, rejectedFiles } = partitionFiles(
       files,
       undefined,
-      validator
+      validator,
     );
 
     expect(acceptedFiles.length).toBe(1);
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(txtFileName);
-    expect(rejectedFiles[0].name).toBe(csvFileName);
+    expect(rejectedFiles[0].file.name).toBe(csvFileName);
   });
 
   test("rejects file that passes accept parameter but does not pass validator", () => {
@@ -63,17 +68,22 @@ describe("partitionFiles", () => {
     const csvFile = createCsvFile(csvFileName);
     const txtFile = createTxtFile(txtFileName);
     const files = [txtFile, csvFile];
-    const validator = (file: File) => file.name === txtFile.name;
+    const validator = (file: File) => {
+      if (file.name === txtFile.name) {
+        return true;
+      }
+      return "custom validation error";
+    };
     const { acceptedFiles, rejectedFiles } = partitionFiles(
       files,
       ".txt, .csv",
-      validator
+      validator,
     );
 
     expect(acceptedFiles.length).toBe(1);
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(txtFileName);
-    expect(rejectedFiles[0].name).toBe(csvFileName);
+    expect(rejectedFiles[0].file.name).toBe(csvFileName);
   });
 
   test("rejects file that passes validator but does not pass accept parameter", () => {
@@ -82,17 +92,21 @@ describe("partitionFiles", () => {
     const csvFile = createCsvFile(csvFileName);
     const txtFile = createTxtFile(txtFileName);
     const files = [txtFile, csvFile];
-    const validator = (file: File) =>
-      file.name === csvFile.name || file.name === txtFile.name;
+    const validator = (file: File) => {
+      if (file.name === csvFile.name || file.name === txtFile.name) {
+        return true;
+      }
+      return "custom validation error";
+    };
     const { acceptedFiles, rejectedFiles } = partitionFiles(
       files,
       ".csv",
-      validator
+      validator,
     );
 
     expect(acceptedFiles.length).toBe(1);
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(csvFileName);
-    expect(rejectedFiles[0].name).toBe(txtFileName);
+    expect(rejectedFiles[0].file.name).toBe(txtFileName);
   });
 });

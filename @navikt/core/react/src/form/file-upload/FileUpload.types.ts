@@ -1,7 +1,15 @@
+export const FileRejectionReason = {
+  FileType: "filetype",
+  FileSize: "filesize",
+  FileCount: "filecount",
+};
+
+type FileUploadRejectedReason = keyof typeof FileRejectionReason | string;
+
 export interface OnFileSelectProps {
   allFiles: File[];
   acceptedFiles: File[];
-  rejectedFiles: File[];
+  rejectedFiles: { file: File; reason: FileUploadRejectedReason[] }[];
 }
 
 export interface FileUploadBaseProps {
@@ -17,6 +25,10 @@ export interface FileUploadBaseProps {
    */
   accept?: string;
   /**
+   * Maximum size of a file to accept
+   */
+  maxSizeInBytes?: number;
+  /**
    * Callback triggered on file select
    */
   onSelect: (files: OnFileSelectProps) => void;
@@ -24,5 +36,13 @@ export interface FileUploadBaseProps {
    * Custom validator that is used to decide
    * if a file is accepted or rejected.
    */
-  validator?: (file: File) => boolean;
+  validator?: (file: File) => true | string;
+  /**
+   *
+   */
+  maxFiles?: number;
+  /**
+   *
+   */
+  currentFileCount?: number;
 }

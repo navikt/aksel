@@ -3,7 +3,15 @@ import { partitionFiles } from "../../utils/partition-files";
 import { DropzoneProps } from "./dropzone.types";
 
 export interface UseDropzoneProps
-  extends Pick<DropzoneProps, "accept" | "onSelect" | "validator"> {
+  extends Pick<
+    DropzoneProps,
+    | "accept"
+    | "onSelect"
+    | "validator"
+    | "maxSizeInBytes"
+    | "maxFiles"
+    | "currentFileCount"
+  > {
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
@@ -12,6 +20,9 @@ export const useDropzone = ({
   onSelect,
   validator,
   inputRef,
+  maxSizeInBytes,
+  maxFiles,
+  currentFileCount,
 }: UseDropzoneProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const isDraggingRef = useRef(false);
@@ -22,11 +33,14 @@ export const useDropzone = ({
         files,
         accept,
         validator,
+        maxSizeInBytes,
+        maxFiles,
+        currentFileCount,
       );
 
       onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
     },
-    [accept, onSelect, validator],
+    [accept, maxSizeInBytes, onSelect, validator],
   );
 
   useEffect(() => {

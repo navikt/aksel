@@ -25,6 +25,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       multiple = true,
       accept,
       validator,
+      maxSizeInBytes,
+      maxFiles,
+      currentFileCount,
       ...rest
     } = props;
 
@@ -34,7 +37,15 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const localeCtx = useFileUploadLocale()?.locale ?? "nb";
     const translation = useLocale(localeCtx, { multiple });
 
-    const dropzoneCtx = useDropzone({ inputRef, onSelect, validator, accept });
+    const dropzoneCtx = useDropzone({
+      inputRef,
+      onSelect,
+      validator,
+      accept,
+      maxSizeInBytes,
+      maxFiles,
+      currentFileCount,
+    });
 
     return (
       <div

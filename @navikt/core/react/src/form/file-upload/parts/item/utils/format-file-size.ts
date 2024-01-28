@@ -1,4 +1,4 @@
-import { FileItem } from "../types";
+import { FileItem } from "../Item.types";
 
 const MAX_MEGA_BYTES = 500;
 
