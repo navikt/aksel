@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "5.15.1",
+  "version": "6.0.0-alpha.2",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -14,12 +14,9 @@
     "url": "git+https://github.com/navikt/aksel.git"
   },
   "sideEffects": false,
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "files": [
     "/cjs",
@@ -28,11 +25,26 @@
     "_docs.json",
     "!**/*.tsbuildinfo"
   ],
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\"",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC jest"
   },
