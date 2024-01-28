@@ -5,7 +5,7 @@ import { FileUpload } from "..";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { ErrorMessage, Heading } from "../../typography";
-import { OnFileSelectProps } from "./parts/dropzone/dropzone.types";
+import { OnFileSelectProps } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
@@ -36,10 +36,11 @@ export const Default: StoryFn = () => {
 
   function removeFile(fileToRemove: File) {
     const filter = (file: File) => file !== fileToRemove;
+
     const newFiles = {
       allFiles: files.allFiles.filter(filter),
       acceptedFiles: files.acceptedFiles.filter(filter),
-      rejectedFiles: files.rejectedFiles.filter(filter),
+      rejectedFiles: files.rejectedFiles.filter((x) => x.file !== fileToRemove),
     };
     setFiles(newFiles);
   }
@@ -87,9 +88,13 @@ Default.parameters = {
   ],
 };
 
-function getError(file: File, rejectedFiles: File[]) {
+function getError(
+  file: File,
+  rejectedFiles: OnFileSelectProps["rejectedFiles"],
+) {
   if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE} MB`;
-  if (rejectedFiles.includes(file)) return "Filformatet støttes ikke";
+  if (rejectedFiles.some((x) => x.file === file))
+    return "Filformatet støttes ikke";
   return undefined;
 }
 
