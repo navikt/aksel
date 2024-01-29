@@ -13,6 +13,8 @@ module.exports = {
       "lg-down": { value: "1023px" },
       xl: { value: "1280px" },
       "xl-down": { value: "1279px" },
+      "2xl": { value: "1440px" },
+      "2xl-down": { value: "1439px" },
     },
     text: {
       width: {
@@ -56,7 +58,6 @@ module.exports = {
       },
     },
     "z-index": {
-      modal: { value: 2000 },
       popover: { value: 1000 },
       focus: { value: 10 },
       tooltip: { value: 3000 },
