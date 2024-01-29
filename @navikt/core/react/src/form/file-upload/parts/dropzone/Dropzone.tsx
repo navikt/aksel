@@ -1,21 +1,18 @@
 import cl from "clsx";
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef } from "react";
 import { CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
-import { useMergeRefs } from "../../../../util/hooks";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadLocale } from "../../FileUpload.context";
+import { useFileUpload } from "../../useFileUpload";
 import { useLocale } from "../../utils/useLocale";
 import { DropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
 const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
   (props: DropzoneProps, ref) => {
-    const inputRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = useMergeRefs(inputRef, ref);
-
     const {
       onSelect,
       error,
@@ -40,13 +37,17 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       inputProps.disabled ??
       (fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0);
 
-    const dropzoneCtx = useDropzone({
-      inputRef,
+    const { onChange, inputRef, mergedRef } = useFileUpload({
+      ref,
       onSelect,
       validator,
       accept,
       maxSizeInBytes,
       fileLimit,
+      disabled,
+    });
+
+    const dropzoneCtx = useDropzone({
       disabled,
     });
 
@@ -113,7 +114,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             className="navds-dropzone__area-input"
             multiple={multiple}
             accept={accept}
-            onChange={dropzoneCtx.onChange}
+            onChange={onChange}
             ref={mergedRef}
             disabled={disabled}
           />
