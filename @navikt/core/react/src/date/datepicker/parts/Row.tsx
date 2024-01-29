@@ -1,6 +1,6 @@
 import { getUnixTime } from "date-fns/getUnixTime";
 import React from "react";
-import { Day, useDayPicker } from "react-day-picker";
+import { useDayPicker } from "react-day-picker";
 import { Hide } from "../../../layout/responsive";
 import WeekNumber from "./WeekNumber";
 
@@ -20,7 +20,13 @@ export interface RowProps {
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/Row
  */
 function Row(props: RowProps): JSX.Element {
-  const { styles, classNames, showWeekNumber } = useDayPicker();
+  const { styles, classNames, showWeekNumber, components } = useDayPicker();
+
+  const Day = components?.Day;
+
+  if (!Day) {
+    throw new Error("Day is undefined");
+  }
 
   return (
     <tr className={classNames.row} style={styles.row}>
