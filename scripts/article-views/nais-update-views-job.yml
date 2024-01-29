@@ -14,6 +14,6 @@ spec:
     "--allow-net",
     "--allow-env",
     "--allow-read",
-    "--no-config",
     "scripts/article-views/update-article-views/main.ts"
   ]
+  retryLimit: 3
