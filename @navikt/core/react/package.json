@@ -42,9 +42,9 @@
   },
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
-    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
+    "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json\" ",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC jest"
   },

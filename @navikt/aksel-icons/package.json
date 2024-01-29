@@ -55,7 +55,8 @@
     "parse-svg": "node -e 'require(\"./config/parse-svg.js\").main()'",
     "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
-    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
+    "write-packagejson": "echo '{\"type\": \"module\"}' > dist/react/esm/package.json",
+    "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "fetch-new:icons": "node config/figma/index.mjs",
     "zip:icons": "node config/zip.js"
