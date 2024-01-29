@@ -6,4 +6,5 @@ WORKDIR /app
 # should copy over .env created in github action
 COPY scripts/article-views ./
 
-CMD ["./scripts/article-views/update-article-views.ts"]
+USER deno
+CMD ["run", "--allow-net", "--allow-env", "--allow-read", "./scripts/article-views/update-article-views.ts"]
