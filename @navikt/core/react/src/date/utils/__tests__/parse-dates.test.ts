@@ -1,5 +1,5 @@
 /* eslint-disable jest/expect-expect */
-import getMonth from "date-fns/getMonth";
+import { getMonth } from "date-fns/getMonth";
 import nb from "date-fns/locale/nb";
 import { isValidDate, parseDate } from "..";
 

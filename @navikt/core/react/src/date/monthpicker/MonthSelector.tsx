@@ -1,7 +1,7 @@
-import isSameMonth from "date-fns/isSameMonth";
-import setMonth from "date-fns/setMonth";
-import setYear from "date-fns/setYear";
-import startOfMonth from "date-fns/startOfMonth";
+import { isSameMonth } from "date-fns/isSameMonth";
+import { setMonth } from "date-fns/setMonth";
+import { setYear } from "date-fns/setYear";
+import { startOfMonth } from "date-fns/startOfMonth";
 import React, { useState } from "react";
 import { BodyShort } from "../../typography";
 import { useSharedMonthContext } from "../context";

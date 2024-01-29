@@ -1,6 +1,6 @@
-import isBefore from "date-fns/isBefore";
-import parse from "date-fns/parse";
-import sub from "date-fns/sub";
+import { isBefore } from "date-fns/isBefore";
+import { parse } from "date-fns/parse";
+import { sub } from "date-fns/sub";
 import { isValidDate } from "./check-dates";
 
 export const INPUT_DATE_STRING_FORMAT_DATE = "dd.MM.yyyy";
