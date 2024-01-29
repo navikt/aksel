@@ -6,4 +6,4 @@ USER deno
 
 # should copy over .env created in github action
 COPY scripts/article-views ./
-CMD ["run", "--allow-net", "--allow-env", "--allow-read", "./scripts/article-views/update-article-views/main.ts"]
+CMD ["run", "--allow-net", "--allow-env", "--allow-read", "./update-article-views/main.ts"]
