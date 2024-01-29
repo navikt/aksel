@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.3",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -44,7 +44,7 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\"",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json\" ",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC jest"
   },
@@ -77,6 +77,7 @@
     "swr": "^1.1.2",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
+    "tsc-alias": "1.8.8",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
