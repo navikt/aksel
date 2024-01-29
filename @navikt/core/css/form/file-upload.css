@@ -40,6 +40,12 @@
   border-color: var(--a-border-default);
 }
 
+.navds-dropzone--disabled > .navds-dropzone__area:hover {
+  border-color: var(--a-border-subtle);
+  box-shadow: initial;
+  cursor: default;
+}
+
 .navds-dropzone--dragging > .navds-dropzone__area {
   --__ac-dropzone-background: var(--a-surface-action-subtle-hover);
 }
@@ -130,6 +136,11 @@
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.navds-dropzone--disabled .navds-dropzone__area-input {
+  cursor: default;
+  z-index: -1;
 }
 
 .navds-dropzone__area-input::file-selector-button {

@@ -37,12 +37,8 @@ export interface FileUploadBaseProps {
    * if a file is accepted or rejected.
    */
   validator?: (file: File) => true | string;
-  /**
-   *
-   */
-  maxFiles?: number;
-  /**
-   *
-   */
-  currentFileCount?: number;
+  fileLimit?: {
+    max: number;
+    current: number;
+  };
 }

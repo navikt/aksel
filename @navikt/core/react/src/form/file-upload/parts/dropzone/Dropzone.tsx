@@ -26,8 +26,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       accept,
       validator,
       maxSizeInBytes,
-      maxFiles,
-      currentFileCount,
+      fileLimit,
       ...rest
     } = props;
 
@@ -37,14 +36,18 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
     const localeCtx = useFileUploadLocale()?.locale ?? "nb";
     const translation = useLocale(localeCtx, { multiple });
 
+    const disabled =
+      inputProps.disabled ??
+      (fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0);
+
     const dropzoneCtx = useDropzone({
       inputRef,
       onSelect,
       validator,
       accept,
       maxSizeInBytes,
-      maxFiles,
-      currentFileCount,
+      fileLimit,
+      disabled,
     });
 
     return (
@@ -52,6 +55,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         className={cl("navds-form-field", "navds-dropzone", className, {
           "navds-dropzone--error": hasError,
           "navds-dropzone--dragging": dropzoneCtx.isDraggingOver,
+          "navds-dropzone--disabled": disabled,
         })}
       >
         <Label htmlFor={inputProps.id} className="navds-form-field__label">
@@ -111,6 +115,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             accept={accept}
             onChange={dropzoneCtx.onChange}
             ref={mergedRef}
+            disabled={disabled}
           />
         </div>
         <div

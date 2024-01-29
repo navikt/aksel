@@ -52,6 +52,7 @@ export const Default: StoryFn = () => {
         description={`I formatene doc, xls, pdf - maks størrelse ${MAX_SIZE_MB} MB`}
         accept=".doc,.docx,.xls,.xlsx,.pdf"
         onSelect={addFiles}
+        fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}
       />
 
       {files.allFiles.length > 0 && (

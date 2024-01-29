@@ -102,6 +102,19 @@ export const Locales: StoryObj = {
   ),
 };
 
-export const Widget: StoryObj = {
-  render: () => <FileUpload.Dropzone label="Widget" onSelect={console.log} />,
+export const Disabled: StoryObj = {
+  render: () => (
+    <div>
+      <FileUpload.Dropzone
+        label="Disabled prop"
+        onSelect={console.log}
+        disabled
+      />
+      <FileUpload.Dropzone
+        label="FileLimit disabled"
+        onSelect={console.log}
+        fileLimit={{ max: 1, current: 2 }}
+      />
+    </div>
+  ),
 };

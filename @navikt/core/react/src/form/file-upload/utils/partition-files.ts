@@ -11,8 +11,7 @@ export const partitionFiles = (
   accept?: string,
   validator?: FileUploadBaseProps["validator"],
   maxSizeInBytes: number = -1,
-  maxFiles: number = -1,
-  currentFileCount: number = -1,
+  fileLimit: FileUploadBaseProps["fileLimit"] = { max: -1, current: -1 },
 ): Pick<OnFileSelectProps, "acceptedFiles" | "rejectedFiles"> => {
   const acceptedFiles: File[] = [];
   const rejectedFiles: OnFileSelectProps["rejectedFiles"] = [];
@@ -40,7 +39,7 @@ export const partitionFiles = (
       reason.push(FileRejectionReason.FileSize);
     }
 
-    if (maxFiles > 0 && currentFileCount + (index + 1) > maxFiles) {
+    if (fileLimit.max > 0 && fileLimit.current + (index + 1) > fileLimit.max) {
       reason.push(FileRejectionReason.FileCount);
     }
 

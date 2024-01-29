@@ -5,14 +5,10 @@ import { DropzoneProps } from "./dropzone.types";
 export interface UseDropzoneProps
   extends Pick<
     DropzoneProps,
-    | "accept"
-    | "onSelect"
-    | "validator"
-    | "maxSizeInBytes"
-    | "maxFiles"
-    | "currentFileCount"
+    "accept" | "onSelect" | "validator" | "maxSizeInBytes" | "fileLimit"
   > {
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
+  disabled?: boolean;
 }
 
 export const useDropzone = ({
@@ -21,8 +17,8 @@ export const useDropzone = ({
   validator,
   inputRef,
   maxSizeInBytes,
-  maxFiles,
-  currentFileCount,
+  fileLimit,
+  disabled,
 }: UseDropzoneProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const isDraggingRef = useRef(false);
@@ -34,13 +30,12 @@ export const useDropzone = ({
         accept,
         validator,
         maxSizeInBytes,
-        maxFiles,
-        currentFileCount,
+        fileLimit,
       );
 
       onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
     },
-    [accept, maxSizeInBytes, onSelect, validator],
+    [accept, fileLimit, maxSizeInBytes, onSelect, validator],
   );
 
   useEffect(() => {
@@ -104,10 +99,10 @@ export const useDropzone = ({
 
   return {
     isDraggingOver,
-    onDragOver,
-    onDragLeave,
-    onDragEnd: onDragLeave,
-    onDrop: onDragLeave,
-    onChange,
+    onDragOver: disabled ? undefined : onDragOver,
+    onDragLeave: disabled ? undefined : onDragLeave,
+    onDragEnd: disabled ? undefined : onDragLeave,
+    onDrop: disabled ? undefined : onDragLeave,
+    onChange: disabled ? undefined : onChange,
   };
 };
