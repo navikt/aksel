@@ -8,11 +8,12 @@ metadata:
 spec:
   image: {{ image }}
   schedule: "0 * * * *"
-  command:
-    - deno
-    - run
-    - --allow-net
-    - --allow-env
-    - --allow-read
-    - --no-config
-    - scripts/article-views/update-article-views/main.ts
+  command: "deno"
+  args: [
+    "run",
+    "--allow-net",
+    "--allow-env",
+    "--allow-read",
+    "--no-config",
+    "scripts/article-views/update-article-views/main.ts"
+  ]
