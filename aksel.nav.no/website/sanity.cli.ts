@@ -1,5 +1,5 @@
-import { SANITY_DATASET, SANITY_PROJECT_ID } from "@/sanity/config";
 import { defineCliConfig } from "sanity/cli";
+import { SANITY_DATASET, SANITY_PROJECT_ID } from "@/sanity/config";
 
 /**
  * Used for sanity cli commands

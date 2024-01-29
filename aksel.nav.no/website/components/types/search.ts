@@ -1,4 +1,4 @@
-import Fuse from "fuse.js";
+import type { FuseResultMatch } from "fuse.js";
 import { allArticleDocuments } from "@/sanity/config";
 
 export const searchOptions: {
@@ -59,7 +59,7 @@ export type SearchHitT = {
   score?: number;
   anchor?: string;
   description?: string;
-  matches?: readonly Fuse.FuseResultMatch[];
+  matches?: readonly FuseResultMatch[];
 };
 
 export type GroupedHitsT = Partial<

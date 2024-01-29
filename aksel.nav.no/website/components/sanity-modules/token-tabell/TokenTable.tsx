@@ -1,9 +1,9 @@
+import NextLink from "next/link";
+import core from "@navikt/ds-css/tokens.json";
+import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { TokenTableT } from "@/types";
 import { AkselTable, AkselTableRow } from "@/web/Table";
-import core from "@navikt/ds-css/tokens.json";
-import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
-import NextLink from "next/link";
 import ShowMore from "./parts/ShowMore";
 
 type TokenTableProps = { node: TokenTableT };

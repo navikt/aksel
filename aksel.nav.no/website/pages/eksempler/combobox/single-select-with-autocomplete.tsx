@@ -30,6 +30,11 @@ const initialOptions = [
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 0,
   desc: "Ved Single Select velger brukeren ett valg fra listen. Med autocomplete foreslås et valg fra listen som matcher det brukeren skriver.",

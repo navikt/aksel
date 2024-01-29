@@ -1,5 +1,5 @@
-import { AkselTheme, getKey } from "@/sb-util";
 import type { Meta, StoryObj } from "@storybook/react";
+import { AkselTheme, getKey } from "@/sb-util";
 import RelatertInnhold from "./RelatertInnhold";
 
 const meta = {

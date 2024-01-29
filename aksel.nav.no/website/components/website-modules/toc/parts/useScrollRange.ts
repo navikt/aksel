@@ -1,7 +1,7 @@
-import { useClientLayoutEffect } from "@navikt/ds-react";
 import throttle from "lodash/throttle";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useClientLayoutEffect } from "@navikt/ds-react";
 
 function getOpacity(n: number): string {
   return Math.min(Math.min(Math.max(n, 0), 100) / 100, 1).toFixed(1);

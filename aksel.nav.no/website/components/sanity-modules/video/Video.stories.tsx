@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from "@storybook/react";
 import { SANITY_PROJECT_ID } from "@/sanity/config";
 import { AkselTheme, getKey } from "@/sb-util";
-import type { Meta, StoryObj } from "@storybook/react";
 import Video from "./Video";
 
 const meta = {

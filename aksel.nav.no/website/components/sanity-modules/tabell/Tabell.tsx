@@ -1,6 +1,6 @@
+import { Table } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { TableT } from "@/types";
-import { Table } from "@navikt/ds-react";
 
 type TableProps = { node: TableT };
 

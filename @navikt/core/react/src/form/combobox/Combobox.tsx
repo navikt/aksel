@@ -89,7 +89,7 @@ export const Combobox = forwardRef<
             "navds-combobox__wrapper-inner navds-text-field__input",
             {
               "navds-combobox__wrapper-inner--virtually-unfocused":
-                activeDecendantId !== null,
+                activeDecendantId !== undefined,
             },
           )}
           onClick={focusInput}

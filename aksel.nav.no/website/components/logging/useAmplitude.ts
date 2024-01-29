@@ -1,5 +1,4 @@
 import type { Types } from "@amplitude/analytics-browser";
-
 import { useEffect } from "react";
 
 const batchedEvents = [];

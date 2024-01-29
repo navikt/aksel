@@ -57,7 +57,6 @@ const ComboboxWrapper = ({
       )}
       onFocus={onFocusInsideWrapper}
       onBlur={onBlurWrapper}
-      tabIndex={-1}
     >
       {children}
     </div>

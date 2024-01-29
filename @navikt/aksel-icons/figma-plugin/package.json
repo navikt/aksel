@@ -13,23 +13,23 @@
   "dependencies": {
     "@navikt/ds-css": "*",
     "@navikt/ds-react": "*",
-    "fuse.js": "^6.6.2",
+    "fuse.js": "^7.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.62.0",
-    "@svgr/core": "^6.5.1",
+    "@figma/plugin-typings": "^1.84.0",
+    "@svgr/core": "^8.1.0",
     "@types/node": "^18.15.11",
-    "@types/postcss-url": "^10.0.0",
+    "@types/postcss-url": "^10.0.4",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "postcss": "^8.4.31",
     "postcss-url": "^10.1.3",
     "typescript": "^5.1.6",
-    "vite": "^4.5.1",
-    "vite-plugin-singlefile": "^0.13.3",
-    "vite-plugin-svgr": "^2.4.0"
+    "vite": "^5.0.12",
+    "vite-plugin-singlefile": "^1.0.0",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }

@@ -1,9 +1,9 @@
+import Image from "next/legacy/image";
+import NextLink from "next/link";
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { AkselTemaT } from "@/types";
-import Image from "next/legacy/image";
-import NextLink from "next/link";
 
 type GodPraksisCardSimpleProps = {
   node: Partial<AkselTemaT>;
