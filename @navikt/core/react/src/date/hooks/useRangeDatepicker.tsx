@@ -1,6 +1,8 @@
-import { differenceInCalendarDays } from "date-fns/differenceInCalendarDays";
-import { isBefore as checkIsBefore } from "date-fns/isBefore";
-import { isWeekend } from "date-fns/isWeekend";
+import {
+  isBefore as checkIsBefore,
+  differenceInCalendarDays,
+  isWeekend,
+} from "date-fns";
 import React, { useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
 import { DatePickerProps } from "../datepicker/DatePicker";

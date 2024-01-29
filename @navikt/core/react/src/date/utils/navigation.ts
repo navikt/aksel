@@ -1,4 +1,4 @@
-import { setYear } from "date-fns/setYear";
+import { setYear } from "date-fns";
 import { Matcher, isMatch } from "./is-match";
 
 export const nextEnabled = (

@@ -3592,7 +3592,7 @@ __metadata:
     clsx: ^1.2.1
     concurrently: 7.2.1
     copyfiles: ^2.4.1
-    date-fns: ^3.0.0
+    date-fns: ^2.30.0 || ^3.0.0
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^29.0.0
@@ -11999,7 +11999,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^3.0.0":
+"date-fns@npm:^2.30.0 || ^3.0.0":
   version: 3.3.1
   resolution: "date-fns@npm:3.3.1"
   checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283

@@ -1,5 +1,4 @@
-import { isThisMonth } from "date-fns/isThisMonth";
-import { setYear } from "date-fns/setYear";
+import { isThisMonth, setYear } from "date-fns";
 
 export const dateIsInCurrentMonth = (
   date: Date,

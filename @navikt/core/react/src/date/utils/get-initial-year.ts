@@ -1,4 +1,4 @@
-import { startOfYear } from "date-fns/startOfYear";
+import { startOfYear } from "date-fns";
 import { DayPickerContextValue } from "react-day-picker";
 
 /**

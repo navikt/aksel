@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from "@storybook/react";
-import { isSameDay } from "date-fns/isSameDay";
+import { isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
 import { useDatepicker, useRangeDatepicker } from "..";
 import { BodyLong, Button, HGrid, Modal, VStack } from "../..";
