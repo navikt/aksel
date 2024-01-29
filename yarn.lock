@@ -3592,12 +3592,12 @@ __metadata:
     clsx: ^1.2.1
     concurrently: 7.2.1
     copyfiles: ^2.4.1
-    date-fns: ^2.30.0
+    date-fns: ^3.0.0
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^29.0.0
     jest-environment-jsdom: ^29.0.0
-    react-day-picker: 8.3.4
+    react-day-picker: 8.10.0
     react-dom: ^18.0.0
     react-router-dom: ^6.3.0
     rimraf: 3.0.2
@@ -11996,6 +11996,13 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.21.0
   checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.0.0":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1"
+  checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283
   languageName: node
   linkType: hard
 
@@ -22307,6 +22314,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-day-picker@npm:8.10.0":
+  version: 8.10.0
+  resolution: "react-day-picker@npm:8.10.0"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
+  languageName: node
+  linkType: hard
+
 "react-day-picker@npm:8.3.4":
   version: 8.3.4
   resolution: "react-day-picker@npm:8.3.4"
@@ -27503,7 +27520,7 @@ __metadata:
     clsx: ^1.2.1
     codesandbox: ^2.2.3
     cross-env: ^7.0.0
-    date-fns: ^2.30.0
+    date-fns: ^3.0.0
     dotenv: ^10.0.0
     fuse.js: ^7.0.0
     jest: ^29.0.0

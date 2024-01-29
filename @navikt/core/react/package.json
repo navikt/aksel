@@ -55,8 +55,8 @@
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
-    "date-fns": "^2.30.0",
-    "react-day-picker": "8.3.4"
+    "date-fns": "^3.0.0",
+    "react-day-picker": "8.10.0"
   },
   "devDependencies": {
     "@testing-library/dom": "8.13.0",
