@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useMergeRefs } from "../../util/hooks";
 import { FileUploadBaseProps } from "./FileUpload.types";
 import { partitionFiles } from "./utils/partition-files";
@@ -34,32 +34,6 @@ export const useFileUpload = ({
     },
     [accept, fileLimit, maxSizeInBytes, onSelect, validator],
   );
-
-  useEffect(() => {
-    const fileInput = inputRef.current;
-
-    const handlePaste = (event: ClipboardEvent) => {
-      if (fileInput === null || !event.clipboardData) {
-        return;
-      }
-      event.preventDefault();
-
-      const files = Array.from(event.clipboardData.items)
-        .filter((item) => item.kind === "file")
-        .map((item) => item.getAsFile())
-        .filter((item): item is File => item !== null);
-
-      if (files.length > 0) {
-        upload(files);
-      }
-    };
-
-    fileInput?.addEventListener("paste", handlePaste);
-
-    return () => {
-      fileInput?.removeEventListener("paste", handlePaste);
-    };
-  }, [inputRef, upload]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
