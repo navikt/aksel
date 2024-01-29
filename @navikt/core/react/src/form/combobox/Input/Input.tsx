@@ -101,9 +101,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onEnter(e);
           break;
         case "Home":
+          toggleIsListOpen(false);
           virtualFocus.moveFocusToTop();
           break;
         case "End":
+          toggleIsListOpen(true);
           virtualFocus.moveFocusToBottom();
           break;
         default:
@@ -135,7 +137,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
           if (isListOpen && activeDecendantId) {
             e.preventDefault();
-            if (virtualFocus.isFocusOnTheTop) {
+            if (virtualFocus.isFocusOnTheTop()) {
               toggleIsListOpen(false);
             }
             virtualFocus.moveFocusUp();
