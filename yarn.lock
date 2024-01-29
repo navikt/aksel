@@ -3589,7 +3589,7 @@ __metadata:
     "@testing-library/user-event": ^14.2.0
     "@types/faker": 5.5.8
     "@types/jest": ^29.0.0
-    clsx: ^1.2.1
+    clsx: ^2.1.0
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     date-fns: ^2.30.0 || ^3.0.0
@@ -10778,7 +10778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0":
+"clsx@npm:^2.0.0, clsx@npm:^2.1.0":
   version: 2.1.0
   resolution: "clsx@npm:2.1.0"
   checksum: 43fefc29b6b49c9476fbce4f8b1cc75c27b67747738e598e6651dd40d63692135dc60b18fa1c5b78a2a9ba8ae6fd2055a068924b94e20b42039bd53b78b98e1d
@@ -27517,7 +27517,7 @@ __metadata:
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.0
     boring-avatars: 1.10.1
-    clsx: ^1.2.1
+    clsx: ^2.1.0
     codesandbox: ^2.2.3
     cross-env: ^7.0.0
     date-fns: ^2.30.0

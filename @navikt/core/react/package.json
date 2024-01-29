@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.0.0-alpha.3",
+  "version": "6.0.0-alpha.4",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -54,7 +54,7 @@
     "@navikt/ds-tokens": "^5.15.1",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
-    "clsx": "^1.2.1",
+    "clsx": "^2.1.0",
     "date-fns": "^2.30.0 || ^3.0.0",
     "react-day-picker": "8.10.0"
   },
