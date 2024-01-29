@@ -1,13 +1,13 @@
 apiVersion: nais.io/v1
 kind: Naisjob
 metadata:
-  name: verktoykasse-job
+  name: update-views-job
   namespace: designsystem
   labels:
     team: designsystem
 spec:
-  image: {{ image }}
-  schedule: "0 0,12 * * *"
+  image: { { image } }
+  schedule: "0 * * * *"
   command:
     - deno
     - run
