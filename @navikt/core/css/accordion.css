@@ -189,6 +189,14 @@
 
 @media (forced-colors: active) {
   .navds-accordion__header {
-    border: 1px solid transparent;
+    border: 1px solid buttonborder;
+    background-color: canvas;
+    color: canvastext;
+  }
+
+  .navds-accordion__header:hover {
+    background-color: canvas;
+    border: 1px solid highlight;
+    color: HighLight;
   }
 }

@@ -99,3 +99,11 @@
   flex-flow: row nowrap;
   justify-content: flex-end;
 }
+
+@media (forced-colors: active) {
+  .navds-alert {
+    border: 1px solid canvastext;
+    background-color: canvas;
+    color: canvastext;
+  }
+}

@@ -144,3 +144,18 @@
 .navds-toggle-group--small > .navds-toggle-group__button > .navds-toggle-group__button-inner > svg {
   font-size: 1.125rem;
 }
+
+@media (forced-colors: active) {
+  .navds-toggle-group {
+    border: var(--a-high-contrast-border);
+  }
+
+  .navds-toggle-group__button[aria-checked="true"],
+  .navds-toggle-group__button[aria-pressed="true"] {
+    border: var(--a-high-contrast-border);
+  }
+
+  .navds-toggle-group__button:active {
+    background-color: none !important;
+  }
+}
