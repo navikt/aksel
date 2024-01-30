@@ -1,0 +1,12 @@
+{
+  "a": {
+    "high-contrast": {
+      "border": {
+        "value": "var(--a-high-contrast-border-width) solid transparent"
+      },
+      "border-width": {
+        "value": "1px"
+      }
+    }
+  }
+}
