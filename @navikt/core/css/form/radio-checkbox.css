@@ -72,7 +72,7 @@
 
 .navds-checkbox__input:focus-visible + .navds-checkbox__label::before,
 .navds-radio__input:focus-visible + .navds-radio__label::before {
-  outline: 2px solid transparent;
+  outline: 2px solid highlight;
   outline-offset: 2px;
   box-shadow:
     0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)),
@@ -83,6 +83,8 @@
 @supports not selector(:focus-visible) {
   .navds-checkbox__input:focus + .navds-checkbox__label::before,
   .navds-radio__input:focus + .navds-radio__label::before {
+    outline: 2px solid highlight;
+    outline-offset: 2px;
     box-shadow:
       0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)),
       0 0 0 4px var(--a-border-focus);
@@ -385,7 +387,7 @@
 
   .navds-radio__input:checked:focus-visible + .navds-radio__label::before {
     border: 1px solid var(--__ac-radio-checkbox-high-contrast-bg);
-    outline: 2px solid var(--__ac-radio-checkbox-high-contrast-text);
+    outline: 2px solid highlight;
     outline-offset: 2px;
   }
 
