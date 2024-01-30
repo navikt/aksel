@@ -143,6 +143,8 @@
   height: 1.5rem;
   transform: translate(var(--a-spacing-1-alt));
   pointer-events: none;
+  display: flex;
+  align-items: center;
 }
 
 .navds-checkbox--small .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
