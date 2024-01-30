@@ -191,3 +191,43 @@
 .navds-chips--small .navds-chips--icon-right {
   padding-right: var(--a-spacing-05);
 }
+
+@media (forced-colors: active) {
+  .navds-chips__chip {
+    border: 1px solid transparent;
+  }
+
+  .navds-chips__chip:hover {
+    color: highlight;
+  }
+
+  .navds-chips__chip:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .navds-chips__toggle:active {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+
+  .navds-chips__toggle[aria-pressed="true"] {
+    background-color: Highlight;
+    color: HighlightText;
+    border: 1px solid Highlight;
+  }
+
+  .navds-chips__toggle:where([aria-pressed="true"], :active) > span {
+    forced-color-adjust: none;
+  }
+
+  .navds-chips__toggle[aria-pressed="true"]:hover {
+    background-color: HighlightText;
+    color: Highlight;
+  }
+
+  .navds-chips__toggle[aria-pressed="true"]:active {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}

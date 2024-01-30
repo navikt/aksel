@@ -54,7 +54,7 @@ Default.args = {
 };
 
 export const Group = () => (
-  <RadioGroup legend="Group legend" defaultValue="tekst2">
+  <RadioGroup legend="Group legend" defaultValue="tekst2" disabled>
     <Radio value="tekst">Radiotekst</Radio>
     <Radio value="tekst2">Radiotekst</Radio>
   </RadioGroup>
