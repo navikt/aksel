@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.17.0
+
+### Minor Changes
+
+- Høykontrast: Komponenter støtter nå standard høykontrast-modus på Windows ([#2680](https://github.com/navikt/aksel/pull/2680))
+
 ## 5.16.0
 
 ### Minor Changes
