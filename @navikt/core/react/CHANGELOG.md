@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.17.1
+
+### Patch Changes
+
+- Eksponer variabelen "role" i Search-komponenten ([#2667](https://github.com/navikt/aksel/pull/2667))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.1
+  - @navikt/aksel-icons@5.17.1
+
 ## 5.17.0
 
 ### Minor Changes
