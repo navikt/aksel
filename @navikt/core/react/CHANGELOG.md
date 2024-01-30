@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 5.17.0
+
+### Minor Changes
+
+- Høykontrast: Komponenter støtter nå standard høykontrast-modus på Windows ([#2680](https://github.com/navikt/aksel/pull/2680))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.0
+  - @navikt/aksel-icons@5.17.0
+
 ## 5.16.0
 
 ### Minor Changes
