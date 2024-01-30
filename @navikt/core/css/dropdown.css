@@ -58,13 +58,15 @@
 }
 
 .navds-dropdown__item:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   box-shadow: inset 0 0 0 2px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-dropdown__item:focus {
-    outline: none;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
     box-shadow: inset 0 0 0 2px var(--a-border-focus);
   }
 }
@@ -74,4 +76,15 @@
   opacity: 0.3;
   background: transparent;
   cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .navds-dropdown__item:hover {
+    color: highlight;
+  }
+
+  .navds-dropdown__item:disabled {
+    opacity: 1;
+    color: graytext;
+  }
 }
