@@ -51,3 +51,29 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (forced-colors: active) {
+  .navds-tooltip {
+    border: var(--a-high-contrast-border);
+  }
+
+  .navds-tooltip[data-side="top"] .navds-tooltip__arrow {
+    border-bottom: var(--a-high-contrast-border);
+    border-right: var(--a-high-contrast-border);
+  }
+
+  .navds-tooltip[data-side="right"] .navds-tooltip__arrow {
+    border-bottom: var(--a-high-contrast-border);
+    border-left: var(--a-high-contrast-border);
+  }
+
+  .navds-tooltip[data-side="bottom"] .navds-tooltip__arrow {
+    border-left: var(--a-high-contrast-border);
+    border-top: var(--a-high-contrast-border);
+  }
+
+  .navds-tooltip[data-side="left"] .navds-tooltip__arrow {
+    border-top: var(--a-high-contrast-border);
+    border-right: var(--a-high-contrast-border);
+  }
+}
