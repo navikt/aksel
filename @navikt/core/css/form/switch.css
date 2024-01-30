@@ -246,7 +246,6 @@
   }
 
   .navds-switch__input:focus-visible ~ .navds-switch__track {
-    /* forced-color-adjust: none; */
     outline: 2px solid Highlight;
     outline-offset: 2px;
   }
