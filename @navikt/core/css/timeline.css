@@ -393,3 +393,25 @@
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
+@media (forced-colors: active) {
+  .navds-timeline__period--success,
+  .navds-timeline__period--warning,
+  .navds-timeline__period--info,
+  .navds-timeline__period--neutral,
+  .navds-timeline__period--danger {
+    forced-color-adjust: none;
+  }
+
+  .navds-timeline__row {
+    border: 1px solid transparent;
+  }
+
+  .navds-timeline__pin-wrapper::before {
+    border: 1px solid transparent;
+  }
+
+  .navds-timeline__pin-button {
+    outline: 4px solid transparent;
+  }
+}
