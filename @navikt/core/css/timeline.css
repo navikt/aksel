@@ -414,4 +414,24 @@
   .navds-timeline__pin-button {
     outline: 4px solid transparent;
   }
+
+  .navds-timeline__popover[data-placement^="top"] > .navds-timeline__popover-arrow {
+    border-left-color: canvas;
+    border-top-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="bottom"] > .navds-timeline__popover-arrow {
+    border-bottom-color: canvas;
+    border-right-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="left"] > .navds-timeline__popover-arrow {
+    border-left-color: canvas;
+    border-bottom-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="right"] > .navds-timeline__popover-arrow {
+    border-right-color: canvas;
+    border-top-color: canvas;
+  }
 }
