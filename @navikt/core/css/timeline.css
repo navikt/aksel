@@ -395,6 +395,11 @@
 }
 
 @media (forced-colors: active) {
+  .navds-timeline__period:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
   .navds-timeline__period--success,
   .navds-timeline__period--warning,
   .navds-timeline__period--info,
@@ -413,6 +418,13 @@
 
   .navds-timeline__pin-button {
     outline: 4px solid transparent;
+  }
+
+  .navds-timeline__pin-button:focus,
+  .navds-timeline__pin-button:focus-visible {
+    outline: 4px solid Highlight;
+    outline-offset: 2px;
+    box-shadow: none;
   }
 
   .navds-timeline__popover[data-placement^="top"] > .navds-timeline__popover-arrow {
