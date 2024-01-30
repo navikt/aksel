@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.16.0
+
+### Minor Changes
+
+- :sparkles: Combobox: Mulighet for å begrense hvor mange valg bruker kan ta ([#2260](https://github.com/navikt/aksel/pull/2260))
+
 ## 5.15.1
 
 ## 5.15.0
