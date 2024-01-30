@@ -25,10 +25,7 @@ const checkState = (
       prevState.overflow !== overflow)
   ) {
     renders.current += 1;
-    return {
-      overflow,
-      outerHeightStyle,
-    }; //newState;
+    return newState;
   }
   if (process.env.NODE_ENV !== "production" && renders.current === 20) {
     console.error(

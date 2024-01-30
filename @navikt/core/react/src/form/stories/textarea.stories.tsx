@@ -202,5 +202,5 @@ export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
   );
 };
 ModalStrictMode.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
+  chromatic: { disable: true }, // Not reproducable in Chromatic
 };
