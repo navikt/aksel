@@ -362,6 +362,7 @@
   .navds-radio {
     --__ac-radio-checkbox-high-contrast-bg: field;
     --__ac-radio-checkbox-high-contrast-text: fieldtext;
+    --__ac-radio-checkbox-high-contrast-highlight: highlight;
   }
 
   .navds-checkbox__label::before,
@@ -394,6 +395,10 @@
   :not(.navds-checkbox--readonly) > .navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label,
   :not(.navds-radio--readonly) > .navds-radio__input:hover:not(:disabled) + .navds-radio__label {
     color: highlight;
+  }
+
+  .navds-checkbox__input:focus-visible + .navds-checkbox__label::before {
+    outline: 2px solid var(--__ac-radio-checkbox-high-contrast-highlight);
   }
 
   .navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label::before {
