@@ -198,12 +198,17 @@
   }
 
   .navds-chips__chip:hover {
-    color: highlight;
+    background-color: HighlightText;
+    color: Highlight;
   }
 
   .navds-chips__chip:focus-visible {
     outline: 2px solid transparent;
     outline-offset: 2px;
+  }
+
+  .navds-chips__chip:where([aria-pressed="true"], :active, :hover) > span {
+    forced-color-adjust: none;
   }
 
   .navds-chips__toggle:active {
@@ -212,18 +217,14 @@
   }
 
   .navds-chips__toggle[aria-pressed="true"] {
-    background-color: Highlight;
-    color: HighlightText;
-    border: 1px solid Highlight;
-  }
-
-  .navds-chips__toggle:where([aria-pressed="true"], :active) > span {
-    forced-color-adjust: none;
+    background-color: selecteditem;
+    color: selecteditemtext;
+    border: 1px solid selecteditem;
   }
 
   .navds-chips__toggle[aria-pressed="true"]:hover {
-    background-color: HighlightText;
-    color: Highlight;
+    background-color: selecteditemtext;
+    color: selecteditem;
   }
 
   .navds-chips__toggle[aria-pressed="true"]:active {
