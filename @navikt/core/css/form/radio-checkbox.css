@@ -72,7 +72,7 @@
 
 .navds-checkbox__input:focus-visible + .navds-checkbox__label::before,
 .navds-radio__input:focus-visible + .navds-radio__label::before {
-  outline: 2px solid highlight;
+  outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow:
     0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)),
@@ -83,7 +83,7 @@
 @supports not selector(:focus-visible) {
   .navds-checkbox__input:focus + .navds-checkbox__label::before,
   .navds-radio__input:focus + .navds-radio__label::before {
-    outline: 2px solid highlight;
+    outline: 2px solid transparent;
     outline-offset: 2px;
     box-shadow:
       0 0 0 2px var(--ac-radio-checkbox-border, var(--a-border-default)),
@@ -358,6 +358,18 @@
 }
 
 @media (forced-colors: active) {
+  .navds-checkbox__input:focus-visible + .navds-checkbox__label::before,
+  .navds-radio__input:focus-visible + .navds-radio__label::before {
+    outline-color: highlight;
+  }
+
+  @supports not selector(:focus-visible) {
+    .navds-checkbox__input:focus + .navds-checkbox__label::before,
+    .navds-radio__input:focus + .navds-radio__label::before {
+      outline-color: highlight;
+    }
+  }
+
   .navds-checkbox,
   .navds-radio {
     --__ac-radio-checkbox-high-contrast-bg: field;
