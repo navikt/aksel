@@ -70,6 +70,41 @@
   margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
 }
 
+@media (forced-colors: active) {
+  .navds-stepper__step {
+    background-color: ButtonFace;
+    color: ButtonText;
+  }
+
+  .navds-stepper__circle.navds-stepper__circle {
+    border: 0;
+  }
+
+  .navds-stepper__step .navds-stepper__circle {
+    forced-color-adjust: none;
+    background-color: ButtonText;
+    border-color: ButtonText;
+    color: ButtonFace;
+  }
+
+  .navds-stepper__step.navds-stepper__step:focus-visible {
+    box-shadow: none;
+    outline: 2px solid highlight;
+    outline-offset: 2px;
+  }
+
+  .navds-stepper__step.navds-stepper__step--active .navds-stepper__circle {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    border-color: HighlightText;
+    color: HighlightText;
+  }
+
+  .navds-stepper__line {
+    background-color: ButtonText;
+  }
+}
+
 button.navds-stepper__step {
   appearance: none;
   border: none;
