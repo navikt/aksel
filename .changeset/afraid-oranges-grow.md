@@ -2,4 +2,4 @@
 "@navikt/aksel-icons": patch
 ---
 
-Ikoner: LocationPin-ikoner
+Ikoner: Nytt ikon `LocationPin` ✨ 
