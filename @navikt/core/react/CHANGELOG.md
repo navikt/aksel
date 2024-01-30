@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 5.16.0
+
+### Minor Changes
+
+- :sparkles: Combobox: Mulighet for å begrense hvor mange valg bruker kan ta ([#2260](https://github.com/navikt/aksel/pull/2260))
+
+### Patch Changes
+
+- Updated dependencies [[`eff9b5ecc`](https://github.com/navikt/aksel/commit/eff9b5ecce2817e3823ce61be7635359eec98451)]:
+  - @navikt/aksel-icons@5.16.0
+  - @navikt/ds-tokens@5.16.0
+
 ## 5.15.1
 
 ### Patch Changes
