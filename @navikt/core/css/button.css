@@ -496,6 +496,16 @@
   opacity: 0.3;
 }
 
+/* Loader overrides */
+.navds-button .navds-loader .navds-loader__foreground {
+  stroke: var(--ac-button-loader-stroke, currentColor);
+}
+
+.navds-button--primary .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
+  stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
+}
+
 @media (forced-colors: active) {
   .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
     opacity: 1;
@@ -518,13 +528,13 @@
   .navds-button:hover span {
     forced-color-adjust: none;
   }
-}
 
-.navds-button .navds-loader .navds-loader__foreground {
-  stroke: var(--ac-button-loader-stroke, currentColor);
-}
+  .navds-button .navds-loader .navds-loader__foreground {
+    stroke: canvas;
+  }
 
-.navds-button--primary .navds-loader .navds-loader__background,
-.navds-button--danger .navds-loader .navds-loader__background {
-  stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
+  .navds-button--primary .navds-loader .navds-loader__background,
+  .navds-button--danger .navds-loader .navds-loader__background {
+    stroke: canvastext;
+  }
 }
