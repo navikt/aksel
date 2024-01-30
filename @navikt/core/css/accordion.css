@@ -197,6 +197,6 @@
   .navds-accordion__header:hover {
     background-color: canvas;
     border: 1px solid highlight;
-    color: HighLight;
+    color: highlight;
   }
 }

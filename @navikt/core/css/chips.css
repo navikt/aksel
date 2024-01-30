@@ -198,8 +198,8 @@
   }
 
   .navds-chips__chip:hover {
-    background-color: HighlightText;
-    color: Highlight;
+    background-color: highlighttext;
+    color: highlight;
   }
 
   .navds-chips__chip:focus-visible {
@@ -212,8 +212,8 @@
   }
 
   .navds-chips__toggle:active {
-    background-color: Highlight;
-    color: HighlightText;
+    background-color: highlight;
+    color: highlighttext;
   }
 
   .navds-chips__toggle[aria-pressed="true"] {
@@ -228,7 +228,7 @@
   }
 
   .navds-chips__toggle[aria-pressed="true"]:active {
-    background-color: Highlight;
-    color: HighlightText;
+    background-color: highlight;
+    color: highlighttext;
   }
 }

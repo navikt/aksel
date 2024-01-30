@@ -95,9 +95,9 @@
 
   .navds-stepper__step.navds-stepper__step--active .navds-stepper__circle {
     forced-color-adjust: none;
-    background-color: Highlight;
-    border-color: HighlightText;
-    color: HighlightText;
+    background-color: highlight;
+    border-color: highlighttext;
+    color: highlighttext;
   }
 
   .navds-stepper__line {

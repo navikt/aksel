@@ -421,7 +421,7 @@
   }
 
   .navds-combobox__list-item--new-option--focus {
-    outline: 2px solid Highlight;
+    outline: 2px solid highlight;
     outline-offset: -3px;
   }
 }

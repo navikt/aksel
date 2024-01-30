@@ -132,8 +132,8 @@
 }
 @media (forced-colors: active) {
   .navds-button.navds-button--primary {
-    background-color: Highlight;
-    color: HighlightText;
+    background-color: highlight;
+    color: highlighttext;
   }
 
   .navds-button.navds-button--primary span {

@@ -268,8 +268,8 @@
 @media (forced-colors: active) {
   .navds-date.navds-date button.rdp-day_selected {
     forced-color-adjust: none;
-    background-color: Highlight;
-    color: HighlightText;
+    background-color: highlight;
+    color: highlighttext;
     box-shadow: none;
   }
 

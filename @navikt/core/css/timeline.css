@@ -396,7 +396,7 @@
 
 @media (forced-colors: active) {
   .navds-timeline__period:focus {
-    outline: 2px solid Highlight;
+    outline: 2px solid highlight;
     outline-offset: 2px;
   }
 
@@ -422,7 +422,7 @@
 
   .navds-timeline__pin-button:focus,
   .navds-timeline__pin-button:focus-visible {
-    outline: 4px solid Highlight;
+    outline: 4px solid highlight;
     outline-offset: 2px;
     box-shadow: none;
   }

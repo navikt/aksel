@@ -246,7 +246,7 @@
   }
 
   .navds-switch__input:focus-visible ~ .navds-switch__track {
-    outline: 2px solid Highlight;
+    outline: 2px solid highlight;
     outline-offset: 2px;
   }
 
