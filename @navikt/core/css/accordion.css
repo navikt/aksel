@@ -74,7 +74,8 @@
 }
 
 .navds-accordion__header:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
   box-shadow: var(--a-shadow-focus);
   border-radius: var(--a-border-radius-large);
 }
@@ -183,5 +184,11 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-accordion__header {
+    border: 1px solid transparent;
   }
 }
