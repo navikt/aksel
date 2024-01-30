@@ -81,7 +81,8 @@
 }
 
 .navds-button:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
 }
 
@@ -129,6 +130,16 @@
   background-color: var(--ac-button-primary-bg, var(--__ac-button-primary-bg, var(--a-surface-action)));
   color: var(--ac-button-primary-text, var(--__ac-button-primary-text, var(--a-text-on-action)));
 }
+@media (forced-colors: active) {
+  .navds-button.navds-button--primary {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+
+  .navds-button.navds-button--primary span {
+    forced-color-adjust: none;
+  }
+}
 
 .navds-button--primary:hover {
   background-color: var(--ac-button-primary-hover-bg, var(--__ac-button-primary-hover-bg, var(--a-surface-action-hover)));
@@ -139,9 +150,16 @@
 }
 
 .navds-button--primary:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow:
     inset 0 0 0 1px var(--ac-button-primary-focus-border, var(--__ac-button-primary-focus-border, var(--a-surface-default))),
     var(--a-shadow-focus);
+}
+@media (forced-colors: active) {
+  .navds-button--primary:focus-visible {
+    box-shadow: none;
+  }
 }
 
 @supports not selector(:focus-visible) {
@@ -476,6 +494,30 @@
 
 .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
   opacity: 0.3;
+}
+
+@media (forced-colors: active) {
+  .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  .navds-button {
+    border: 1px solid transparent;
+    color: ButtonText;
+    background-color: ButtonFace;
+  }
+
+  .navds-button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    box-shadow: none;
+  }
+
+  .navds-button:hover span {
+    forced-color-adjust: none;
+  }
 }
 
 .navds-button .navds-loader .navds-loader__foreground {
