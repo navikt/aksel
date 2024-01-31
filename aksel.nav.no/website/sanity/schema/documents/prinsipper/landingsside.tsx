@@ -1,5 +1,5 @@
-import { HouseIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { HouseIcon } from "@navikt/aksel-icons";
 
 export const PrinsipperLandingSide = defineType({
   title: "Landingsside Prinsipper",

@@ -5,7 +5,6 @@ import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { getLocaleFromString, labels } from "../utils";
 import Caption from "./parts/Caption";
-import DayButton from "./parts/DayButton";
 import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
@@ -94,7 +93,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             HeadRow,
             WeekNumber,
             Row,
-            Day: DayButton,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}

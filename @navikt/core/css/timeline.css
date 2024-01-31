@@ -393,3 +393,57 @@
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
+@media (forced-colors: active) {
+  .navds-timeline__period:focus {
+    outline: 2px solid highlight;
+    outline-offset: 2px;
+  }
+
+  .navds-timeline__period--success,
+  .navds-timeline__period--warning,
+  .navds-timeline__period--info,
+  .navds-timeline__period--neutral,
+  .navds-timeline__period--danger {
+    forced-color-adjust: none;
+  }
+
+  .navds-timeline__row {
+    border: 1px solid transparent;
+  }
+
+  .navds-timeline__pin-wrapper::before {
+    border: 1px solid transparent;
+  }
+
+  .navds-timeline__pin-button {
+    outline: 4px solid transparent;
+  }
+
+  .navds-timeline__pin-button:focus,
+  .navds-timeline__pin-button:focus-visible {
+    outline: 4px solid highlight;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  .navds-timeline__popover[data-placement^="top"] > .navds-timeline__popover-arrow {
+    border-left-color: canvas;
+    border-top-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="bottom"] > .navds-timeline__popover-arrow {
+    border-bottom-color: canvas;
+    border-right-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="left"] > .navds-timeline__popover-arrow {
+    border-left-color: canvas;
+    border-bottom-color: canvas;
+  }
+
+  .navds-timeline__popover[data-placement^="right"] > .navds-timeline__popover-arrow {
+    border-right-color: canvas;
+    border-top-color: canvas;
+  }
+}

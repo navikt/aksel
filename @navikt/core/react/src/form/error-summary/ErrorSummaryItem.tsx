@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../util";
+import { OverridableComponent } from "../../util/types";
 
 export interface ErrorSummaryItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -14,7 +14,7 @@ export interface ErrorSummaryItemProps
   href?: string;
 }
 
-export type ErrorSummaryItemType = OverridableComponent<
+type ErrorSummaryItemType = OverridableComponent<
   ErrorSummaryItemProps,
   HTMLAnchorElement
 >;
@@ -22,13 +22,15 @@ export type ErrorSummaryItemType = OverridableComponent<
 export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(className, "navds-error-summary__item", "navds-link")}
-      >
-        {children}
-      </Component>
+      <li>
+        <Component
+          {...rest}
+          ref={ref}
+          className={cl(className, "navds-error-summary__item", "navds-link")}
+        >
+          {children}
+        </Component>
+      </li>
     );
   },
 );

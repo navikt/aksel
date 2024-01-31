@@ -1,5 +1,5 @@
-import { Heading, BodyLong, Link } from "@navikt/ds-react";
 import NextLink from "next/link";
+import { BodyLong, Heading, Link } from "@navikt/ds-react";
 
 const CubeLarge = () => (
   <svg

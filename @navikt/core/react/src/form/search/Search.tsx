@@ -66,6 +66,10 @@ export interface SearchProps
    * Exposes the HTML size attribute
    */
   htmlSize?: number | string;
+  /*
+   * Exposes role attribute
+   */
+  role?: string;
 }
 
 interface SearchComponent
@@ -114,6 +118,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onChange,
       onSearchClick,
       htmlSize,
+      role,
       ...rest
     } = props;
 
@@ -205,7 +210,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              role="searchbox"
+              role={role ?? "searchbox"}
               className={cl(
                 className,
                 "navds-search__input",

@@ -39,7 +39,9 @@ export const ArticleCard = ({
 
   return (
     <Link
-      href={`/${slug}`}
+      href={`/${
+        slug.replace("god-praksis/", "gp/") /* TODO: Remove replace */
+      }`}
       className={cl(
         "w-full flex-shrink overflow-hidden text-ellipsis rounded-large bg-surface-default p-5 shadow-small transition-shadow ease-out hover:shadow-large focus:outline-none focus-visible:shadow-focus",
         {

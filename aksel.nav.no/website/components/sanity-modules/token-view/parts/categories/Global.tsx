@@ -1,7 +1,7 @@
+import { CopyButton } from "@navikt/ds-react";
 import docs from "@navikt/ds-tokens/docs.json";
 import { Grid } from "../Grid";
 import { getColorString, sanitizeName } from "../utilities";
-import { CopyButton } from "@navikt/ds-react";
 
 export const GlobalView = ({ cat }: { cat: string }) => {
   const colors: { name: string; value: string }[] = docs[cat];

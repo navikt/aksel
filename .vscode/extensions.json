@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "denoland.vscode-deno",
+    "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
+    "ms-playwright.playwright",
+    "sanity-io.vscode-sanity",
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables",
+    "bradlc.vscode-tailwindcss"
+  ]
+}

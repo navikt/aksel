@@ -1,5 +1,3 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
-import { Tag } from "@navikt/ds-react";
 import { useEffect, useState } from "react";
 import {
   getPublishedId,
@@ -7,6 +5,8 @@ import {
   useCurrentUser,
   useFormValue,
 } from "sanity";
+import { Tag } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export function EditorPreview(props) {
   const editors = useFormValue(["contributors"]) as any[];

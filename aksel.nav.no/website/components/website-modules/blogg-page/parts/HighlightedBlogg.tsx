@@ -1,10 +1,10 @@
+import Image from "next/legacy/image";
+import NextLink from "next/link";
+import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
 import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
 import { getAuthors, getImage } from "@/utils";
-import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
-import Image from "next/legacy/image";
-import NextLink from "next/link";
 
 export const HighlightedBlogg = ({
   blogg,

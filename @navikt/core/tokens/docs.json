@@ -40,6 +40,16 @@
       "name": "--a-breakpoint-xl-down",
       "value": "1279px",
       "description": "@media (max-width: 1279px)"
+    },
+    {
+      "name": "--a-breakpoint-2xl",
+      "value": "1440px",
+      "description": "@media (min-width: 1440px)"
+    },
+    {
+      "name": "--a-breakpoint-2xl-down",
+      "value": "1439px",
+      "description": "@media (max-width: 1439px)"
     }
   ],
   "text-width": [{ "name": "--a-text-width-max", "value": "576px" }],
@@ -531,7 +541,6 @@
   "z-index": [
     { "name": "--a-z-index-focus", "value": 10 },
     { "name": "--a-z-index-popover", "value": 1000 },
-    { "name": "--a-z-index-modal", "value": 2000 },
     { "name": "--a-z-index-tooltip", "value": 3000 }
   ]
 }

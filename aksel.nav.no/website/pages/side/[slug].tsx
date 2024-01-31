@@ -1,3 +1,6 @@
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { Heading } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -5,9 +8,6 @@ import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
-import { Heading } from "@navikt/ds-react";
-import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;

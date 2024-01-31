@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort, Heading } from "../typography";
-import { useId } from "../util/useId";
+import { useId } from "../util/hooks";
 import { ListItem } from "./ListItem";
 import { ListContext } from "./context";
 import { ListProps } from "./types";

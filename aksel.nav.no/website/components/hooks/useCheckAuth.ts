@@ -1,10 +1,13 @@
-import { clientConfig } from "@/sanity/config";
 import { useEffect, useState } from "react";
+import { clientConfig } from "@/sanity/config";
 
-export const useCheckAuth = () => {
-  const [user, setUser] = useState(true);
+export const useCheckAuth = (skipCheck?: boolean) => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    if (skipCheck) {
+      return;
+    }
     const fetchUser = async () => {
       const response = await fetch(
         `https://${clientConfig.projectId}.api.sanity.io/v1/users/me`,
@@ -21,7 +24,7 @@ export const useCheckAuth = () => {
       setUser(false);
     };
     fetchUser();
-  }, []);
+  }, [skipCheck]);
 
   return user;
 };

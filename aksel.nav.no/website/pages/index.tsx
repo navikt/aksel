@@ -1,16 +1,6 @@
-import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
-import FrontpageBlock, {
-  BlocksT,
-} from "@/cms/frontpage-blocks/FrontpageBlocks";
-import Footer from "@/layout/footer/Footer";
-import Header from "@/layout/header/Header";
-import { getClient } from "@/sanity/client.server";
-import { contributorsAll } from "@/sanity/queries";
-import { AkselTemaT, NextPageT } from "@/types";
-import { userPrefersReducedMotion } from "@/utils";
-import { IntroCards } from "@/web/IntroCards";
-import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
-import { SEO } from "@/web/seo/SEO";
+import cl from "clsx";
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy, useState } from "react";
 import {
   CompassIcon,
   ComponentIcon,
@@ -27,12 +17,22 @@ import {
   Page,
   useClientLayoutEffect,
 } from "@navikt/ds-react";
-import cl from "clsx";
-import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useState } from "react";
+import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
+import FrontpageBlock, {
+  BlocksT,
+} from "@/cms/frontpage-blocks/FrontpageBlocks";
+import Footer from "@/layout/footer/Footer";
+import Header from "@/layout/header/Header";
+import { getClient } from "@/sanity/client.server";
+import { contributorsAll } from "@/sanity/queries";
+import { AkselTemaT, NextPageT } from "@/types";
+import { userPrefersReducedMotion } from "@/utils";
+import { IntroCards } from "@/web/IntroCards";
+import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { SEO } from "@/web/seo/SEO";
 
 type PageProps = NextPageT<{
-  tema: Array<AkselTemaT>;
+  tema: AkselTemaT[];
   page: {
     title: string;
     god_praksis_intro: string;
@@ -68,19 +68,34 @@ const query = `*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
-          _type,
-          _id,
-          heading,
-          _createdAt,
-          _updatedAt,
-          publishedAt,
-          "slug": slug.current,
-          "tema": tema[]->title,
-          ingress,
-          seo,
-          ${contributorsAll}
-        },
+        "artikler": select(
+          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          },
+          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          }
+        ),
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
           _type,
           _id,
@@ -106,7 +121,13 @@ export const getStaticProps: GetStaticProps = async ({
 }): Promise<PageProps> => {
   const client = getClient();
 
-  const { page = null, tema = null, blocks = null } = await client.fetch(query);
+  const {
+    page = null,
+    tema = null,
+    blocks = null,
+  } = await client.fetch(query, {
+    preview: "false",
+  });
 
   const validateTema = tema
     .filter(
@@ -284,7 +305,12 @@ const PagePreview = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
       <Suspense fallback={<Forside {...props} />}>
-        <WithPreview comp={Forside} query={query} props={props} />
+        <WithPreview
+          comp={Forside}
+          query={query}
+          props={props}
+          params={{ preview: "true" }}
+        />
       </Suspense>
     );
   }

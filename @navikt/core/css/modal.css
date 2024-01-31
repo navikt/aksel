@@ -168,3 +168,9 @@
     opacity: 1;
   }
 }
+
+@media (forced-colors: active) {
+  .navds-modal {
+    outline: 2px solid transparent;
+  }
+}

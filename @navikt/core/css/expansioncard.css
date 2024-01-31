@@ -145,13 +145,13 @@
 }
 
 .navds-expansioncard__header-button:focus-visible {
-  outline: none;
+  outline: 3px solid transparent;
   box-shadow: var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-expansioncard__header-button:focus {
-    outline: none;
+    outline: 3px solid transparent;
     box-shadow: var(--a-shadow-focus);
   }
 }
@@ -219,5 +219,13 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-expansioncard:hover {
+    --__ac-expansioncard-border-color: highlight;
+
+    outline: 1px solid highlight;
   }
 }

@@ -1,15 +1,15 @@
+import cl from "clsx";
+import Fuse from "fuse.js";
+import Link from "next/link";
+import { useMemo, useRef, useState } from "react";
+import * as Icons from "@navikt/aksel-icons";
+import meta from "@navikt/aksel-icons/metadata";
+import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
 import { useMedia } from "@/hooks/useMedia";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
-import * as Icons from "@navikt/aksel-icons";
-import meta from "@navikt/aksel-icons/metadata";
-import { HGrid, Heading, Modal, Search, ToggleGroup } from "@navikt/ds-react";
-import cl from "clsx";
-import Fuse from "fuse.js";
-import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
 import { IconSidebar } from "./Sidebar";
 import { TitleLinks } from "./TitleLinks";
 import { categorizeIcons, getFillIcon } from "./utils";
@@ -116,17 +116,16 @@ export const IconPage = ({ name }: { name: string }) => {
                   onSubmit={(e) => e.preventDefault()}
                   className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
                 >
-                  <div className="w-fit">
-                    <ToggleGroup
-                      value={toggle}
-                      onChange={(v) => setToggle(v as any)}
-                      variant="neutral"
-                      aria-label="Velg ikonvariant"
-                    >
-                      <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
-                      <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
-                    </ToggleGroup>
-                  </div>
+                  <ToggleGroup
+                    value={toggle}
+                    onChange={(v) => setToggle(v as any)}
+                    variant="neutral"
+                    aria-label="Velg ikonvariant"
+                    className="shrink-0"
+                  >
+                    <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
+                    <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                  </ToggleGroup>
                   <Search
                     variant="simple"
                     label="Ikonsøk"

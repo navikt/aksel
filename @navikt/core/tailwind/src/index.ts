@@ -2,6 +2,7 @@ import { writeFileSync } from "fs";
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { getColors } from "./colors";
 import { getBreakpoints } from "./getBreakpoints";
+import { getMaxWidth } from "./getMaxWidth";
 import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
@@ -26,8 +27,7 @@ const config = {
       lineHeight: Reducer(tokens, ["font-line-height"]),
       fontFamily: Reducer(tokens, ["font-family"]),
       borderRadius: Reducer(tokens, ["border-radius"]),
-      // TODO: Add next major-release
-      // maxWidth: Reducer(tokens, ["text-width"]),
+      maxWidth: getMaxWidth(tokens),
     },
   },
 };

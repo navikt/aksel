@@ -23,7 +23,7 @@ import React, {
 import { ModalContext } from "../modal/ModalContext";
 import { useProvider } from "../provider";
 import { Detail } from "../typography";
-import { useId } from "../util";
+import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 

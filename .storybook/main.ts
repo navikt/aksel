@@ -1,7 +1,7 @@
 import { mergeConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 
-module.exports = {
+export default {
   staticDirs: ["./public"],
 
   stories: () => [

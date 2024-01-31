@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ExpansionCard aria-label="default-demo">
+    <ExpansionCard aria-label="Demo med bare tittel">
       <ExpansionCard.Header>
         <ExpansionCard.Title>Utbetaling av sykepenger</ExpansionCard.Title>
       </ExpansionCard.Header>

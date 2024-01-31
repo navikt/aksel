@@ -1,5 +1,5 @@
+import { defineField, defineType } from "sanity";
 import { BulletListIcon } from "@navikt/aksel-icons";
-import { defineType, defineField } from "sanity";
 
 export const PropsSeksjon = defineType({
   title: "Props",

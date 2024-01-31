@@ -1,5 +1,5 @@
-import { HouseIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { HouseIcon } from "@navikt/aksel-icons";
 import { templatesKategorier } from "../../../config";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";

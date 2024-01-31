@@ -1,0 +1,44 @@
+name: Update article views
+on:
+  workflow_dispatch:
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    permissions: # TODO: remove once merged
+      packages: "write"
+      contents: "read"
+      id-token: "write"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: gp-popular-articles # TODO: remove once merged
+          fetch-depth: 1
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_UTILITY_WRITE }}" >> scripts/article-views/.env
+      - uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: designsystem
+          push_image: true
+          dockerfile: scripts/article-views/Dockerfile
+          docker_context: scripts/article-views
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+      - name: start naisjob prod-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: scripts/article-views/nais-update-views-job.yml
+          CLUSTER: prod-gcp
+          IMAGE: ${{ steps.docker-push.outputs.image }}

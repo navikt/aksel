@@ -7,16 +7,6 @@ export default {
   title: "ds-react/Chat",
   component: Chat,
   argTypes: {
-    backgroundColor: {
-      control: {
-        type: "text",
-      },
-    },
-    avatarBgColor: {
-      control: {
-        type: "text",
-      },
-    },
     position: {
       control: { type: "radio" },
       options: POSITIONS,
@@ -61,27 +51,6 @@ export const Small = () => (
       Aute minim nisi sunt mollit duis sunt nulla minim non proident.
     </Chat.Bubble>
     <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-    <Chat.Bubble>
-      Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
-      labore nisi ut.
-    </Chat.Bubble>
-  </Chat>
-);
-
-export const Colors = () => (
-  <Chat
-    avatar="NAV"
-    name="NAV"
-    timestamp="01.01.21 14:00"
-    avatarBgColor="var(--a-surface-alt-1-subtle)"
-    backgroundColor="var(--a-surface-warning-subtle)"
-  >
-    <Chat.Bubble>
-      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-    </Chat.Bubble>
-    <Chat.Bubble backgroundColor="lightYellow">
-      Tempor fugiat amet eu sint in in ullamco.
-    </Chat.Bubble>
     <Chat.Bubble>
       Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
       labore nisi ut.

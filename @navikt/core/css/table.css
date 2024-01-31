@@ -264,3 +264,29 @@
 .navds-table--small .navds-table__expanded-row-content {
   padding: var(--a-spacing-2) calc(var(--a-spacing-2) + 3rem);
 }
+
+@media (forced-colors: active) {
+  .navds-date.navds-date button.rdp-day_selected {
+    forced-color-adjust: none;
+    background-color: highlight;
+    color: highlighttext;
+    box-shadow: none;
+  }
+
+  .navds-date.navds-date button {
+    color: buttontext;
+    forced-color-adjust: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .navds-date button:focus-visible {
+    color: buttontext;
+    forced-color-adjust: none;
+    outline: 2px solid highlight;
+  }
+
+  .navds-date.navds-date button.rdp-day_disabled {
+    color: GrayText;
+  }
+}

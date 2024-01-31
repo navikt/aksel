@@ -2,7 +2,8 @@ import cl from "clsx";
 import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef, useRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
-import { omit, useId } from "../../util";
+import { omit } from "../../util";
+import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { DateContext } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
@@ -10,7 +11,6 @@ import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, labels } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
-import DayButton from "./parts/DayButton";
 import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
@@ -123,7 +123,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           HeadRow,
           WeekNumber,
           Row,
-          Day: DayButton,
         }}
         className={cl("navds-date", className)}
         classNames={{

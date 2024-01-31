@@ -63,14 +63,15 @@
 }
 
 .navds-tabs__tab:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   box-shadow: inset var(--a-shadow-focus);
   color: var(--ac-tabs-focus-text, var(--a-text-default));
 }
 
 @supports not selector(:focus-visible) {
   .navds-tabs__tab:focus {
-    outline: none;
+    outline: 2px solid transparent;
     box-shadow: inset var(--a-shadow-focus);
     color: var(--ac-tabs-focus-text, var(--a-text-default));
   }
@@ -125,13 +126,29 @@
 }
 
 .navds-tabs__tabpanel:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
   box-shadow: inset 0 0 0 2px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-tabs__tabpanel:focus {
-    outline: none;
+    outline: 2px solid transparent;
     box-shadow: inset 0 0 0 2px var(--a-border-focus);
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-tabs__tab[aria-selected="true"] {
+    border-bottom: 3px solid canvastext;
+    padding-block-end: calc(var(--a-spacing-3) - 3px);
+  }
+
+  .navds-tabs__tab--small[aria-selected="true"] {
+    padding-block-end: calc(var(--a-spacing-1-alt) - 3px);
+  }
+
+  .navds-tabs__tab-icon--top[aria-selected="true"],
+  .navds-tabs__tab--small.navds-tabs__tab-icon--top[aria-selected="true"] {
+    padding-block-end: calc(var(--a-spacing-1) - 3px);
   }
 }

@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong, ErrorMessage } from "../typography";
-import { useId } from "../util";
+import { useId } from "../util/hooks";
 import { Checkbox, CheckboxProps } from "./checkbox";
 import { useFormField } from "./useFormField";
 

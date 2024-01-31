@@ -45,7 +45,8 @@
 }
 
 .navds-text-field__input:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
 }
 
@@ -100,4 +101,11 @@
 .navds-text-field__input[type="search"]::-webkit-search-results-button,
 .navds-text-field__input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
+}
+
+@media (forced-colors: active) {
+  .navds-text-field__input {
+    background-color: field;
+    color: fieldtext;
+  }
 }

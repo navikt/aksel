@@ -1,7 +1,7 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
-import { Button, useId, type HeadingProps } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
+import { Button, type HeadingProps, useId } from "@navikt/ds-react";
 
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
@@ -62,7 +62,8 @@ export interface ShowMoreProps
  *   Toads have dry, leathery skin, short legs, and large bumps covering the parotoid glands.
  * </ShowMore>
  */
-export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
+export const ShowMore =
+  /*forwardRef<HTMLElement, ShowMoreProps>(*/
   (
     {
       as: Component = "aside",
@@ -77,7 +78,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
       className,
       "aria-labelledby": ariaLabelledby,
       ...rest
-    },
+    }: ShowMoreProps,
     /* ref, */
   ) => {
     const localRef = useRef<HTMLElement>(null);
@@ -136,8 +137,7 @@ export const ShowMore = forwardRef<HTMLElement, ShowMoreProps>(
         </div>
       </Component>
     );
-  },
-);
+  };
 
 export default ShowMore;
 

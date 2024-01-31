@@ -1,3 +1,12 @@
+import {
+  PortableText,
+  PortableTextMarkComponentProps,
+  PortableTextReactComponents,
+} from "@portabletext/react";
+import cl from "clsx";
+import NextLink from "next/link";
+import { Children } from "react";
+import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import Accordion from "@/cms/accordion/Accordion";
 import Alert from "@/cms/alert/Alert";
 import Bilde from "@/cms/bilde/Bilde";
@@ -17,15 +26,6 @@ import Video from "@/cms/video/Video";
 import { amplitudeLogNavigation } from "@/logging";
 import InlineCode from "@/web/InlineCode";
 import KBD from "@/web/KBD";
-import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
-import {
-  PortableText,
-  PortableTextMarkComponentProps,
-  PortableTextReactComponents,
-} from "@portabletext/react";
-import cl from "clsx";
-import NextLink from "next/link";
-import { Children } from "react";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -118,7 +118,7 @@ const serializers: Partial<PortableTextReactComponents> = {
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
-    code: ({ text }) => <InlineCode>{text}</InlineCode>,
+    code: ({ text }) => <InlineCode noAmps>{text}</InlineCode>,
     link: ({ text, value: { href } }: PortableTextMarkComponentProps<any>) => {
       if (!href) {
         return <span>{text}</span>;

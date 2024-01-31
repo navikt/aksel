@@ -1,9 +1,8 @@
+import React from "react";
 import ErrorBoundary from "@/error-boundary";
 import { UUTableT } from "@/types";
 import KBD from "@/web/KBD";
-
 import { AkselTable, AkselTableRow } from "@/web/Table";
-import React from "react";
 
 type UUTableProps = { node: UUTableT };
 
