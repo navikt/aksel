@@ -105,3 +105,16 @@
 .navds-chat--right .navds-chat__top-text--left {
   align-self: flex-start;
 }
+
+@media (forced-colors: active) {
+  .navds-chat__bubble,
+  .navds-chat__avatar {
+    border: 1px solid canvastext;
+    background-color: canvas;
+    color: canvastext;
+  }
+
+  .navds-chat__avatar svg {
+    forced-color-adjust: none;
+  }
+}

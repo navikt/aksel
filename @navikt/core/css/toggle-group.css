@@ -65,7 +65,8 @@
 }
 
 .navds-toggle-group__button:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 1px;
   box-shadow:
     0 0 0 1px var(--a-surface-default),
     0 0 0 4px var(--a-border-focus);
@@ -73,7 +74,8 @@
 
 @supports not selector(:focus-visible) {
   .navds-toggle-group__button:focus {
-    outline: none;
+    outline: 2px solid transparent;
+    outline-offset: 1px;
     box-shadow:
       0 0 0 1px var(--a-surface-default),
       0 0 0 4px var(--a-border-focus);
@@ -143,4 +145,33 @@
 
 .navds-toggle-group--small > .navds-toggle-group__button > .navds-toggle-group__button-inner > svg {
   font-size: 1.125rem;
+}
+
+@media (forced-colors: active) {
+  .navds-toggle-group {
+    border: 2px solid transparent;
+  }
+
+  .navds-toggle-group__button:hover {
+    color: highlight;
+  }
+
+  .navds-toggle-group__button[aria-checked="true"],
+  .navds-toggle-group__button[aria-pressed="true"] {
+    background-color: selecteditem;
+    color: selecteditemtext;
+  }
+
+  .navds-toggle-group__button[aria-checked="true"] > *,
+  .navds-toggle-group__button[aria-pressed="true"] > * {
+    forced-color-adjust: none;
+  }
+
+  .navds-toggle-group__button:active {
+    background-color: none !important;
+  }
+
+  .navds-toggle-group__button:focus-visible {
+    outline-color: highlight;
+  }
 }

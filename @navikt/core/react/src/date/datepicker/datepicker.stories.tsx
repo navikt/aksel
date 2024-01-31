@@ -27,13 +27,13 @@ export const Default: StoryObj<DefaultStoryProps> = {
     const [open, setOpen] = useState(false);
 
     const rangeCtx = useRangeDatepicker({
-      fromDate: new Date("Aug 23 2020"),
-      toDate: new Date("Aug 23 2023"),
+      fromDate: new Date("Aug 23 2023"),
+      toDate: new Date("Aug 23 2029"),
     });
 
     const singleCtx = useDatepicker({
       fromDate: new Date("Aug 23 2020"),
-      toDate: new Date("Aug 23 2023"),
+      toDate: new Date("Aug 23 2029"),
     });
 
     const newProps = {
@@ -42,7 +42,7 @@ export const Default: StoryObj<DefaultStoryProps> = {
             open,
             onClose: () => setOpen(false),
             fromDate: new Date("Aug 23 2020"),
-            toDate: new Date("Aug 23 2023"),
+            toDate: new Date("Aug 23 2029"),
           }
         : {}),
     };

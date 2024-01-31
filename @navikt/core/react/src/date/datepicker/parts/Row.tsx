@@ -2,6 +2,7 @@ import { getUnixTime } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Hide } from "../../../layout/responsive";
+import DayButton from "./DayButton";
 import WeekNumber from "./WeekNumber";
 
 /**
@@ -43,7 +44,7 @@ function Row(props: RowProps): JSX.Element {
           style={styles.cell}
           key={getUnixTime(date)}
         >
-          <Day displayMonth={props.displayMonth} date={date} />
+          <DayButton displayMonth={props.displayMonth} date={date} />
         </td>
       ))}
     </tr>

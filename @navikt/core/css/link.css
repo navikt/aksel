@@ -36,7 +36,7 @@
 }
 
 .navds-link:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
   color: var(--ac-link-focus-text, var(--a-text-on-action));
   text-decoration: none;
   background-color: var(--ac-link-focus-bg, var(--a-border-focus));
@@ -45,7 +45,7 @@
 
 @supports not selector(:focus-visible) {
   .navds-link:focus {
-    outline: none;
+    outline: 2px solid transparent;
     color: var(--ac-link-focus-text, var(--a-text-on-action));
     text-decoration: none;
     background-color: var(--ac-link-focus-bg, var(--a-border-focus));
@@ -54,7 +54,7 @@
 }
 
 .navds-link:active {
-  outline: none;
+  outline: 2px solid transparent;
   color: var(--ac-link-active-text, var(--a-text-on-action));
   text-decoration: none;
   background-color: var(--ac-link-active-bg, var(--a-border-focus));
