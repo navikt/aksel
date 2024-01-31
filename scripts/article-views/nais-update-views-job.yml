@@ -20,3 +20,4 @@ spec:
     outbound:
       external:
         - host: hnbe3yhs.api.sanity.io
+        - host: reops-proxy.intern.nav.no
