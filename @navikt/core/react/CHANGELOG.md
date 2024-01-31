@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 5.17.2
+
+### Patch Changes
+
+- :bug: Textarea: Sett riktig høyde når brukt i Modal + StrictMode ([#2679](https://github.com/navikt/aksel/pull/2679))
+
+- DatePicker: Knapper fikk ikke riktig aria-label ([#2678](https://github.com/navikt/aksel/pull/2678))
+
+- Textarea: debounce ResizeObserver for å unngå feilmelding ([#2685](https://github.com/navikt/aksel/pull/2685))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.2
+  - @navikt/aksel-icons@5.17.2
+
 ## 5.17.1
 
 ### Patch Changes
