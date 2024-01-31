@@ -12,4 +12,11 @@ export interface DropzoneProps
    * Text shown to the user.
    */
   label: string;
+
+  texts?: {
+    dropzone?: string;
+    or?: string;
+    button?: string;
+    disabled?: string;
+  };
 }
