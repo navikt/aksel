@@ -1,6 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Button } from "../../button";
+import { Modal } from "../../modal";
 import { Textarea } from "../index";
 
 const meta: Meta<typeof Textarea> = {
@@ -185,4 +186,21 @@ AutoScrollbar.argTypes = {
   hideLabel: { type: "boolean" },
   maxRows: { type: "number" },
   minRows: { type: "number" },
+};
+
+export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
+  // Story added after fixing an issue where TextareaAutoSize would reach max re-renders
+  // and set the height to 2px when used in StrictMode in a Modal that is initially open.
+  return (
+    <React.StrictMode>
+      <Modal open>
+        <Modal.Body>
+          <Textarea label="Har du noen tilbakemeldinger?" />
+        </Modal.Body>
+      </Modal>
+    </React.StrictMode>
+  );
+};
+ModalStrictMode.parameters = {
+  chromatic: { disable: true }, // Not reproducable in Chromatic
 };
