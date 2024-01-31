@@ -1,7 +1,7 @@
 import * as path from "https://deno.land/std@0.102.0/path/mod.ts";
 import { load } from "https://deno.land/std@0.212.0/dotenv/mod.ts";
 import { createClient } from "npm:next-sanity";
-import { clientConfig } from "../../../aksel.nav.no/website/sanity/config.ts";
+import { clientConfig } from "../config.ts";
 import { queryArticleURLs } from "../queries.ts";
 import { amplitudeFetchJSON, hashString, sum_last_n } from "./utils.ts";
 

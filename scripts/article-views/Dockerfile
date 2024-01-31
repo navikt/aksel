@@ -5,5 +5,5 @@ RUN chown -R deno:deno /app
 USER deno
 
 # should copy over .env created in github action
-COPY scripts/article-views ./
+COPY . .
 CMD ["run", "--allow-net", "--allow-env", "--allow-read", "./update-article-views/main.ts"]
