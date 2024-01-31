@@ -1,12 +1,12 @@
+import cl from "clsx";
+import Image from "next/legacy/image";
+import NextLink from "next/link";
+import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import Sidebar from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
 import { SidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
 import TableOfContents from "@/web/toc/TableOfContents";
-import { Box, Detail, Heading, Link } from "@navikt/ds-react";
-import cl from "clsx";
-import Image from "next/legacy/image";
-import NextLink from "next/link";
 
 export const WithSidebar = ({
   children,

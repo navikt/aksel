@@ -1,5 +1,25 @@
 # @navikt/ds-css
 
+## 5.17.2
+
+### Patch Changes
+
+- Checkbox: I noen edgecaser ved bruk av shadow-dom ble ikke checkmark sentert i Checkbox ([#2682](https://github.com/navikt/aksel/pull/2682))
+
+## 5.17.1
+
+## 5.17.0
+
+### Minor Changes
+
+- Høykontrast: Komponenter støtter nå standard høykontrast-modus på Windows ([#2680](https://github.com/navikt/aksel/pull/2680))
+
+## 5.16.0
+
+### Minor Changes
+
+- :sparkles: Combobox: Mulighet for å begrense hvor mange valg bruker kan ta ([#2260](https://github.com/navikt/aksel/pull/2260))
+
 ## 5.15.1
 
 ## 5.15.0

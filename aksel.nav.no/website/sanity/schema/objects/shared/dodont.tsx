@@ -1,6 +1,6 @@
-import AkselDoDont from "@/cms/do-dont/DoDont";
-import { CheckmarkCircleIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { CheckmarkCircleIcon } from "@navikt/aksel-icons";
+import AkselDoDont from "@/cms/do-dont/DoDont";
 
 export const DoDont = defineType({
   title: "Do / Dont",

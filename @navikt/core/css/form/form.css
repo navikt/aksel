@@ -53,3 +53,9 @@
   flex-shrink: 0;
   align-self: flex-start;
 }
+
+@media (forced-colors: active) {
+  .navds-form-field--disabled {
+    opacity: 1;
+  }
+}

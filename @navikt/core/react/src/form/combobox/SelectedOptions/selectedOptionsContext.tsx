@@ -8,7 +8,7 @@ import React, {
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxProps } from "../types";
+import { ComboboxProps, MaxSelected } from "../types";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: string) => void;
@@ -16,6 +16,7 @@ type SelectedOptionsContextType = {
   removeSelectedOption: (option: string) => void;
   prevSelectedOptions?: string[];
   selectedOptions: string[];
+  maxSelected?: MaxSelected & { isLimitReached: boolean };
   setSelectedOptions: (any) => void;
   toggleOption: (
     option: string,
@@ -39,6 +40,7 @@ export const SelectedOptionsProvider = ({
     | "options"
     | "selectedOptions"
     | "onToggleSelected"
+    | "maxSelected"
   >;
 }) => {
   const { clearInput, focusInput } = useInputContext();
@@ -54,6 +56,7 @@ export const SelectedOptionsProvider = ({
     selectedOptions: externalSelectedOptions,
     onToggleSelected,
     options,
+    maxSelected,
   } = value;
   const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
   const selectedOptions = useMemo(
@@ -129,6 +132,9 @@ export const SelectedOptionsProvider = ({
 
   const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
 
+  const isLimitReached =
+    !!maxSelected?.limit && selectedOptions.length >= maxSelected.limit;
+
   const selectedOptionsState = {
     addSelectedOption,
     isMultiSelect,
@@ -137,6 +143,10 @@ export const SelectedOptionsProvider = ({
     selectedOptions,
     setSelectedOptions,
     toggleOption,
+    maxSelected: maxSelected && {
+      ...maxSelected,
+      isLimitReached,
+    },
   };
 
   return (

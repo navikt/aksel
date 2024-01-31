@@ -40,6 +40,7 @@
         "options": {
           "tailwindConfig": "./aksel.nav.no/website/tailwind.config.js",
           "plugins": [
+            "@trivago/prettier-plugin-sort-imports",
             "prettier-plugin-tailwindcss"
           ]
         }
@@ -187,7 +188,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
     "typescript": "^5.1.6",
-    "vite": "^4.5.1",
+    "vite": "^5.0.12",
     "vite-plugin-turbosnap": "^1.0.3",
     "yarn": "^1.22.10"
   },

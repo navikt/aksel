@@ -1,6 +1,3 @@
-import { SanityBlockContent } from "@/sanity-block";
-import { SANITY_API_VERSION } from "@/sanity/config";
-import { Button } from "@navikt/ds-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
@@ -11,6 +8,9 @@ import {
   useDocumentOperation,
 } from "sanity";
 import useSWR from "swr";
+import { Button } from "@navikt/ds-react";
+import { SanityBlockContent } from "@/sanity-block";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (

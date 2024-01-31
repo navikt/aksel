@@ -1,5 +1,17 @@
 # @navikt/aksel-icons
 
+## 5.17.2
+
+## 5.17.1
+
+## 5.17.0
+
+## 5.16.0
+
+### Patch Changes
+
+- Ikoner: Nytt ikon `LocationPin` ✨ ([#2672](https://github.com/navikt/aksel/pull/2672))
+
 ## 5.15.1
 
 ## 5.15.0

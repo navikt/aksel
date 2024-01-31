@@ -1,5 +1,5 @@
-import { VideoplayerIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { VideoplayerIcon } from "@navikt/aksel-icons";
 
 export const Video = defineType({
   name: "video",

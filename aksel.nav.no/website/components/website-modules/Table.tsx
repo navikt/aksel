@@ -1,6 +1,6 @@
-import { CopyButton } from "@navikt/ds-react";
 import cl from "clsx";
 import { createContext, useContext } from "react";
+import { CopyButton } from "@navikt/ds-react";
 
 const TableContext = createContext<boolean>(false);
 

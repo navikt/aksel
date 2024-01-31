@@ -1,8 +1,8 @@
+import { LightBulbIcon } from "@navikt/aksel-icons";
+import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { TipsT } from "@/types";
-import { LightBulbIcon } from "@navikt/aksel-icons";
-import { Heading } from "@navikt/ds-react";
 
 type TipsProps = { node: TipsT };
 

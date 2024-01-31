@@ -1,6 +1,5 @@
-import CoreDocs from "@navikt/ds-react/_docs.json";
 import dotenv from "dotenv";
-
+import CoreDocs from "@navikt/ds-react/_docs.json";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();

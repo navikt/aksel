@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
-import React, { useId, useMemo, useState } from "react";
+import React, { useId, useMemo, useRef, useState } from "react";
 import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
 
 export default {
@@ -37,10 +37,15 @@ Default.args = {
   label: "Hva er dine favorittfrukter?",
   shouldAutocomplete: true,
   isLoading: false,
+  isMultiSelect: false,
+  allowNewValues: false,
 };
 Default.argTypes = {
   isListOpen: {
     control: { type: "boolean" },
+  },
+  maxSelected: {
+    control: { type: "number" },
   },
   size: {
     options: ["medium", "small"],
@@ -283,6 +288,36 @@ export const ComboboxSizes = () => (
     />
   </>
 );
+
+export const MaxSelectedOptions: StoryFunction = () => {
+  const id = useId();
+  const [value, setValue] = useState<string | undefined>("");
+  const [selectedOptions, setSelectedOptions] = useState([
+    options[0],
+    options[1],
+  ]);
+  const comboboxRef = useRef<HTMLInputElement>(null);
+  return (
+    <UNSAFE_Combobox
+      id={id}
+      label="Komboboks med begrenset antall valg"
+      options={options}
+      maxSelected={{ limit: 2 }}
+      selectedOptions={selectedOptions}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
+      isMultiSelect
+      allowNewValues
+      isListOpen={comboboxRef.current ? undefined : true}
+      value={value}
+      onChange={(event) => setValue(event?.target.value)}
+      ref={comboboxRef}
+    />
+  );
+};
 
 export const WithError: StoryFunction = (props) => {
   const [hasSelectedValue, setHasSelectedValue] = useState(false);

@@ -6,7 +6,7 @@ export default function OutdatedAlert() {
   const { id, validUser } = useSanityData();
 
   return (
-    <div className="flex gap-3 p-4 rounded-md ring-1 bg-amber-50 ring-amber-300 mb-12">
+    <div className="mb-12 flex gap-3 rounded-md bg-amber-50 p-4 ring-1 ring-amber-300">
       <div>
         <HourglassBottomFilledIcon aria-hidden fontSize="1.5rem" />
       </div>
@@ -15,7 +15,7 @@ export default function OutdatedAlert() {
           Innholdet kan være utdatert
         </Heading>
         <BodyLong className={validUser ? "mb-4" : undefined}>
-          Det er over 1 år siden innholdet ble endret. Vi kan ikke være helt
+          Det er over 1 år siden innholdet ble revidert. Vi kan ikke være helt
           sikre på hvor nøyaktig artikkelen er lenger.
         </BodyLong>
         {validUser && (

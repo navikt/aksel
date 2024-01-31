@@ -1,7 +1,7 @@
-import { FileResetIcon, FileTextIcon } from "@navikt/aksel-icons";
-
 import differenceInMonths from "date-fns/differenceInMonths";
 import React from "react";
+import { FileResetIcon, FileTextIcon } from "@navikt/aksel-icons";
+
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
 export const artikkelPreview = (_type: string) => {

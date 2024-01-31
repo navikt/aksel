@@ -59,3 +59,26 @@
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
+@media (forced-colors: active) {
+  .navds-popover[data-placement^="top"] > .navds-popover__arrow {
+    border-left-color: canvas;
+    border-top-color: canvas;
+  }
+
+  /* prettier-ignore */
+  .navds-popover[data-placement^="bottom"] > .navds-popover__arrow {
+    border-bottom-color: canvas;
+    border-right-color: canvas;
+  }
+
+  .navds-popover[data-placement^="left"] > .navds-popover__arrow {
+    border-left-color: canvas;
+    border-bottom-color: canvas;
+  }
+
+  .navds-popover[data-placement^="right"] > .navds-popover__arrow {
+    border-right-color: canvas;
+    border-top-color: canvas;
+  }
+}

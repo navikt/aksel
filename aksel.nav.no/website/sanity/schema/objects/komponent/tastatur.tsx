@@ -1,5 +1,5 @@
-import { KeyHorizontalIcon } from "@navikt/aksel-icons";
 import { defineField, defineType } from "sanity";
+import { KeyHorizontalIcon } from "@navikt/aksel-icons";
 
 export const TastaturUU = defineType({
   title: "Tastatur",

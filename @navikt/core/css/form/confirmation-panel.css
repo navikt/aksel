@@ -8,6 +8,7 @@
   background-color: var(--ac-confirmation-panel-bg, var(--a-surface-warning-subtle));
   transition: background-color linear 100ms;
   justify-self: stretch;
+  position: relative;
 }
 
 .navds-confirmation-panel__content {
@@ -22,4 +23,27 @@
 .navds-confirmation-panel--error .navds-confirmation-panel__inner {
   border-color: var(--ac-confirmation-panel-error-border, var(--a-border-danger));
   background-color: var(--ac-confirmation-panel-error-bg, var(--a-surface-danger-subtle));
+}
+
+@media (forced-colors: active) {
+  .navds-confirmation-panel__inner::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-left: 8px solid;
+    border-color: orange;
+    forced-color-adjust: none;
+    border-start-start-radius: calc(var(--a-border-radius-medium) - 1px);
+    border-end-start-radius: calc(var(--a-border-radius-medium) - 1px);
+  }
+
+  .navds-confirmation-panel--checked .navds-confirmation-panel__inner::before {
+    border-color: green;
+  }
+
+  .navds-confirmation-panel--error .navds-confirmation-panel__inner::before {
+    border-color: red;
+  }
 }
