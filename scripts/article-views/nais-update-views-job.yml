@@ -16,3 +16,7 @@ spec:
     - --allow-read
     - scripts/article-views/update-article-views/main.ts
   restartPolicy: Never
+  accessPolicy:
+    outbound:
+      external:
+        - host: hnbe3yhs.api.sanity.io
