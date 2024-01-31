@@ -1,13 +1,13 @@
-import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
-import { urlFor } from "@/sanity/interface";
-import { SearchHitT, searchOptions } from "@/types";
-import { StatusTag } from "@/web/StatusTag";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { Chips } from "@navikt/ds-react";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import { default as Link, default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { Chips } from "@navikt/ds-react";
+import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
+import { urlFor } from "@/sanity/interface";
+import { SearchHitT, searchOptions } from "@/types";
+import { StatusTag } from "@/web/StatusTag";
 import { SearchContext, SearchLoggingContext } from "../providers";
 import { highlightMatches, highlightStr } from "../utils";
 

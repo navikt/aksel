@@ -19,7 +19,7 @@ import React, {
 } from "react";
 import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
-import { useClientLayoutEffect, useEventListener } from "../util";
+import { useClientLayoutEffect, useEventListener } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 

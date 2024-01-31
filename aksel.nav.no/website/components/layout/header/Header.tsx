@@ -1,10 +1,10 @@
-import AkselLogo from "@/assets/Logo";
-import { amplitudeLogNavigation } from "@/logging";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Box, Button, HStack, Page, Show, Spacer } from "@navikt/ds-react";
 import cl from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Box, Button, HStack, Page, Show, Spacer } from "@navikt/ds-react";
+import AkselLogo from "@/assets/Logo";
+import { amplitudeLogNavigation } from "@/logging";
 import { Hamburger } from "./parts/Hamburger";
 import HeaderLink from "./parts/HeaderLink";
 

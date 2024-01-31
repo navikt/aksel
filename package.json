@@ -40,6 +40,7 @@
         "options": {
           "tailwindConfig": "./aksel.nav.no/website/tailwind.config.js",
           "plugins": [
+            "@trivago/prettier-plugin-sort-imports",
             "prettier-plugin-tailwindcss"
           ]
         }
@@ -146,12 +147,11 @@
     "@storybook/addon-storysource": "^7.6.7",
     "@storybook/blocks": "^7.6.7",
     "@storybook/csf-tools": "^7.6.7",
-    "@storybook/jest": "^0.2.3",
     "@storybook/manager-api": "^7.6.7",
     "@storybook/nextjs": "^7.6.7",
     "@storybook/react": "^7.6.7",
     "@storybook/react-vite": "^7.6.7",
-    "@storybook/testing-library": "^0.2.2",
+    "@storybook/test": "^7.6.7",
     "@storybook/theming": "^7.6.7",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
@@ -188,7 +188,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
     "typescript": "^5.1.6",
-    "vite": "^4.5.1",
+    "vite": "^5.0.12",
     "vite-plugin-turbosnap": "^1.0.3",
     "yarn": "^1.22.10"
   },

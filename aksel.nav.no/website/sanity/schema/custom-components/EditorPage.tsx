@@ -1,12 +1,3 @@
-import { SANITY_API_VERSION } from "@/sanity/config";
-import {
-  Accordion,
-  BodyShort,
-  Heading,
-  Label,
-  Link,
-  Loader,
-} from "@navikt/ds-react";
 import { differenceInMonths } from "date-fns";
 import React, { useMemo } from "react";
 import {
@@ -19,6 +10,15 @@ import {
   useSchema,
 } from "sanity";
 import useSWR from "swr";
+import {
+  Accordion,
+  BodyShort,
+  Heading,
+  Label,
+  Link,
+  Loader,
+} from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 const DocumentList = ({
   data,

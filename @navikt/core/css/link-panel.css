@@ -18,14 +18,16 @@
 }
 
 .navds-link-panel:focus-visible {
+  outline: 3px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
-  outline: none;
 }
 
 @supports not selector(:focus-visible) {
   .navds-link-panel:focus {
+    outline: 3px solid transparent;
+    outline-offset: 2px;
     box-shadow: var(--a-shadow-focus);
-    outline: none;
   }
 }
 

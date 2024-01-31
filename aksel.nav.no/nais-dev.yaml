@@ -26,7 +26,6 @@ spec:
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
       rules: []
-      env:
   filesFrom:
     - emptyDir:
         medium: Memory

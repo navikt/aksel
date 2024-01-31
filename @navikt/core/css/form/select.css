@@ -13,6 +13,21 @@
   padding-right: 2rem;
 }
 
+@media (forced-colors: active) {
+  .navds-select__input.navds-select__input.navds-select__input {
+    background-color: ButtonFace;
+    border-color: ButtonText;
+    color: ButtonText;
+    forced-color-adjust: none;
+    box-shadow: none;
+  }
+
+  .navds-select__input.navds-select__input.navds-select__input:focus-visible {
+    outline: 2px solid highlight;
+    outline-offset: 2px;
+  }
+}
+
 .navds-select__input:hover {
   border-color: var(--ac-select-hover-bg, var(--a-border-action));
   cursor: pointer;
@@ -44,6 +59,12 @@
   pointer-events: none;
   align-self: center;
   color: var(--ac-select-text, var(--a-text-default));
+}
+
+@media (forced-colors: active) {
+  .navds-select__chevron {
+    color: ButtonText;
+  }
 }
 
 .navds-form-field--small .navds-select__input {

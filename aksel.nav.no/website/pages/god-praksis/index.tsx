@@ -1,3 +1,7 @@
+import { GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { SparklesIcon } from "@navikt/aksel-icons";
+import { Heading } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import GodPraksisCard from "@/cms/cards/GodPraksisCard";
 import Footer from "@/layout/footer/Footer";
@@ -16,17 +20,13 @@ import {
 } from "@/types";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { SparklesIcon } from "@navikt/aksel-icons";
-import { Heading } from "@navikt/ds-react";
-import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 
 type PageProps = NextPageT<{
   page: AkselGodPraksisLandingPageDocT;
-  temaer: Array<AkselTemaT>;
-  resent: Array<
-    ResolveTemaT<ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>>
-  >;
+  temaer: AkselTemaT[];
+  resent: ResolveTemaT<
+    ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>
+  >[];
 }>;
 
 export const query = `*[_type == "godpraksis_landingsside"][0]{

@@ -1,7 +1,7 @@
+import { Label } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
-import { Label } from "@navikt/ds-react";
 
 type IntroProps = {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];

@@ -1,12 +1,11 @@
-import { SanityDocumentLike } from "sanity";
 import { useCallback, useEffect, useRef, useState } from "react";
-
+import { SanityDocumentLike } from "sanity";
 import {
   ArrowsCirclepathIcon,
   LeaveIcon,
   MobileSmallIcon,
 } from "@navikt/aksel-icons";
-import { CopyButton, Button, Loader, HStack, Spacer } from "@navikt/ds-react";
+import { Button, CopyButton, HStack, Loader, Spacer } from "@navikt/ds-react";
 
 export type IframeProps = {
   document: {

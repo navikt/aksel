@@ -1,8 +1,8 @@
-import { searchOptions } from "@/types";
-import KBD from "@/web/KBD";
+import { useContext, useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button, Chips, Search } from "@navikt/ds-react";
-import { useContext, useEffect, useRef } from "react";
+import { searchOptions } from "@/types";
+import KBD from "@/web/KBD";
 import { useShortcut } from "../hooks";
 import {
   SearchContext,
@@ -102,7 +102,7 @@ export const SearchForm = () => {
                 const newTags = (tags as string[]).includes(key)
                   ? tags.filter((y) => y !== key)
                   : [...tags, key];
-                setTags(newTags as Array<keyof typeof searchOptions>);
+                setTags(newTags as (keyof typeof searchOptions)[]);
                 update(query, newTags);
               }}
             >

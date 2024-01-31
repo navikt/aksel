@@ -57,7 +57,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         <button
           {...rest}
           ref={mergedRef}
-          onClick={composeEventHandlers(onClick, () => setOpen((x) => x))}
+          onClick={composeEventHandlers(onClick, () => setOpen((x) => !x))}
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}

@@ -1,6 +1,6 @@
-import { getClient } from "@/sanity/client.server";
 import { LiveQueryProvider } from "next-sanity/preview";
 import { useMemo } from "react";
+import { getClient } from "@/sanity/client.server";
 import LiveQuery from "./parts/LiveQuery";
 import { PreviewProps } from "./parts/types";
 

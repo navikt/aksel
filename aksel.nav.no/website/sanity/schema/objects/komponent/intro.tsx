@@ -1,6 +1,6 @@
-import { HouseIcon } from "@navikt/aksel-icons";
 import React from "react";
 import { defineField, defineType } from "sanity";
+import { HouseIcon } from "@navikt/aksel-icons";
 
 export const KomponentIntro = defineType({
   title: "Intro",

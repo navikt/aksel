@@ -13,7 +13,7 @@
 }
 
 .navds-help-text__button:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
   box-shadow:
     0 0 0 1px var(--a-border-focus),
     inset 0 0 0 1px var(--a-border-focus);
@@ -21,7 +21,7 @@
 
 @supports not selector(:focus-visible) {
   .navds-help-text__button:focus {
-    outline: none;
+    outline: 2px solid transparent;
     box-shadow:
       0 0 0 1px var(--a-border-focus),
       inset 0 0 0 1px var(--a-border-focus);
@@ -62,5 +62,19 @@
 
   .navds-help-text__button:where(:focus) > .navds-help-text__icon--filled {
     display: inherit;
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
+    display: inherit;
+  }
+
+  .navds-help-text__button:hover > .navds-help-text__icon {
+    color: highlight;
+  }
+
+  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+    display: none;
   }
 }

@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
-import { omit, useId } from "../../util";
+import { omit } from "../../util";
+import { useId } from "../../util/hooks";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";

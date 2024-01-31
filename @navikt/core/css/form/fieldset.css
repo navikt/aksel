@@ -42,3 +42,10 @@
 .navds-fieldset:disabled > .navds-fieldset__description {
   opacity: 0.3;
 }
+
+@media (forced-colors: active) {
+  .navds-fieldset:disabled > .navds-fieldset__legend,
+  .navds-fieldset:disabled > .navds-fieldset__description {
+    opacity: 1;
+  }
+}

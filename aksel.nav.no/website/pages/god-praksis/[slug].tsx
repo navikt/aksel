@@ -1,3 +1,8 @@
+import cl from "clsx";
+import Image from "next/legacy/image";
+import { GetStaticPaths, GetStaticProps } from "next/types";
+import { Suspense, lazy } from "react";
+import { Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -9,11 +14,6 @@ import { AkselTemaT, NextPageT } from "@/types";
 import { abbrName } from "@/utils";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { Detail, Heading, Label } from "@navikt/ds-react";
-import cl from "clsx";
-import Image from "next/legacy/image";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{

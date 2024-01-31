@@ -1,5 +1,91 @@
 # @navikt/ds-react
 
+## 5.17.2
+
+### Patch Changes
+
+- :bug: Textarea: Sett riktig høyde når brukt i Modal + StrictMode ([#2679](https://github.com/navikt/aksel/pull/2679))
+
+- DatePicker: Knapper fikk ikke riktig aria-label ([#2678](https://github.com/navikt/aksel/pull/2678))
+
+- Textarea: debounce ResizeObserver for å unngå feilmelding ([#2685](https://github.com/navikt/aksel/pull/2685))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.2
+  - @navikt/aksel-icons@5.17.2
+
+## 5.17.1
+
+### Patch Changes
+
+- Eksponer variabelen "role" i Search-komponenten ([#2667](https://github.com/navikt/aksel/pull/2667))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.1
+  - @navikt/aksel-icons@5.17.1
+
+## 5.17.0
+
+### Minor Changes
+
+- Høykontrast: Komponenter støtter nå standard høykontrast-modus på Windows ([#2680](https://github.com/navikt/aksel/pull/2680))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.0
+  - @navikt/aksel-icons@5.17.0
+
+## 5.16.0
+
+### Minor Changes
+
+- :sparkles: Combobox: Mulighet for å begrense hvor mange valg bruker kan ta ([#2260](https://github.com/navikt/aksel/pull/2260))
+
+### Patch Changes
+
+- Updated dependencies [[`eff9b5ecc`](https://github.com/navikt/aksel/commit/eff9b5ecce2817e3823ce61be7635359eec98451)]:
+  - @navikt/aksel-icons@5.16.0
+  - @navikt/ds-tokens@5.16.0
+
+## 5.15.1
+
+### Patch Changes
+
+- HelpText: HelpText-state ble ikke riktig oppdatert ved klikk ([#2643](https://github.com/navikt/aksel/pull/2643))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.15.1
+  - @navikt/aksel-icons@5.15.1
+
+## 5.15.0
+
+### Patch Changes
+
+- Updated dependencies [[`9c5288c40`](https://github.com/navikt/aksel/commit/9c5288c40559499fa4940e491890bc5dcabfe5da)]:
+  - @navikt/aksel-icons@5.15.0
+  - @navikt/ds-tokens@5.15.0
+
+## 5.14.0
+
+### Minor Changes
+
+- Intern state: Komponenter respekterer nå `e.preventDefault()` bedre når event overskrives internt i komponent. ([#2610](https://github.com/navikt/aksel/pull/2610))
+
+- Tag: Har nå innebygd støtte for ikoner ([#2611](https://github.com/navikt/aksel/pull/2611))
+
+- Table: Table.DataCell og Table.HeaderCell har nå `textSize`-prop for å justere font-size mellom 18px og 16px. ([#2613](https://github.com/navikt/aksel/pull/2613))
+
+### Patch Changes
+
+- Internt API: Oppdatert intern import/export av hooks og typer fra utils ([#2618](https://github.com/navikt/aksel/pull/2618))
+
+- Intern-API: Erstattet `mergeRefs` i `useMemo` med lokal `useMergeRefs`-hook ([#2609](https://github.com/navikt/aksel/pull/2609))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.14.0
+  - @navikt/aksel-icons@5.14.0
+
 ## 5.13.0
 
 ### Minor Changes

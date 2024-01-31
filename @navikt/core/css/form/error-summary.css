@@ -9,9 +9,15 @@
   padding: var(--a-spacing-3);
 }
 
-.navds-error-summary:focus-visible {
-  box-shadow: var(--a-shadow-focus);
+.navds-error-summary__heading:focus {
   outline: none;
+}
+
+.navds-error-summary:focus-visible,
+.navds-error-summary:has(.navds-error-summary__heading:focus-visible) {
+  box-shadow:
+    0 0 0 1px var(--a-border-on-inverted),
+    0 0 0 4px var(--a-border-focus);
 }
 
 @supports not selector(:focus-visible) {

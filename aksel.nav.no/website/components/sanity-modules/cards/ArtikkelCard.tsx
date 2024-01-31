@@ -1,6 +1,7 @@
+import NextLink from "next/link";
+import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-
 import { amplitudeLogNavigation } from "@/logging";
 import {
   AkselGodPraksisDocT,
@@ -9,8 +10,6 @@ import {
   ResolveTemaT,
 } from "@/types";
 import { abbrName } from "@/utils";
-import { BodyShort, Detail, Heading } from "@navikt/ds-react";
-import NextLink from "next/link";
 
 type ArtikkelCardProps = ResolveContributorsSingleT<
   ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>

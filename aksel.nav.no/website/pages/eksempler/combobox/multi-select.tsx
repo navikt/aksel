@@ -31,6 +31,11 @@ const initialOptions = [
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+};
+
 export const args = {
   index: 1,
   desc: "Ved Multi Select kan brukeren velge flere valg fra listen.",

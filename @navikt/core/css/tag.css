@@ -180,3 +180,15 @@
   background-color: var(--ac-tag-alt-3-moderate-bg, var(--a-surface-alt-3-moderate));
   color: var(--ac-tag-alt-3-moderate-text, var(--a-text-default));
 }
+
+@media (forced-colors: active) {
+  .navds-tag {
+    forced-color-adjust: none;
+  }
+
+  .navds-tag--neutral,
+  .navds-tag--neutral-moderate {
+    border-color: canvastext;
+    color: canvastext;
+  }
+}
