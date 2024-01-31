@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useTabsContext, useTabsDescendantsContext } from "../../context";
+import { useTabsContext, useTabsDescendantsContext } from "../../Tabs.context";
 
 /**
  * TabList hook to manage multiple tab buttons,

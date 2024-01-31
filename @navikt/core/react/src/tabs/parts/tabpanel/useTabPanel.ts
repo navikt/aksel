@@ -1,4 +1,4 @@
-import { useTabsContext } from "../../context";
+import { useTabsContext } from "../../Tabs.context";
 
 type TabPanelProps = {
   value: string;

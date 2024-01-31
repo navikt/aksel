@@ -4,11 +4,11 @@ import {
   TabsDescendantsProvider,
   TabsProvider,
   useTabsDescendants,
-} from "./context";
+} from "./Tabs.context";
+import { TabsProps } from "./Tabs.types";
 import Tab from "./parts/tab/Tab";
 import TabList from "./parts/tablist/TabList";
 import TabPanel from "./parts/tabpanel/TabPanel";
-import { TabsProps } from "./types";
 import { useTabs } from "./useTabs";
 
 interface TabsComponent
@@ -92,7 +92,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
 
     return (
       <TabsDescendantsProvider value={descendants}>
-        <TabsProvider value={context}>
+        <TabsProvider {...context}>
           <div
             ref={ref}
             {...rest}

@@ -1,6 +1,6 @@
-import { createContext } from "../util/hooks/context/create-context";
+import { createContext } from "../util/create-context";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
-import { TabsProps } from "./types";
+import { TabsProps } from "./Tabs.types";
 import { useTabs } from "./useTabs";
 
 export const [

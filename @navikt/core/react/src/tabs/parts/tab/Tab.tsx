@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../../typography";
 import { OverridableComponent } from "../../../util";
-import { useTabsContext } from "../../context";
+import { useTabsContext } from "../../Tabs.context";
 import { useTab } from "./useTab";
 
 export interface TabProps
