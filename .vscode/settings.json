@@ -17,9 +17,5 @@
     "**/esm": true,
     "**/cjs": true
   },
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "**/esm/**",
-    "**/cjs/**"
-  ],
   "playwright.reuseBrowser": true
 }
