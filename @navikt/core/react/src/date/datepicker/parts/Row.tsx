@@ -21,13 +21,7 @@ export interface RowProps {
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/Row
  */
 function Row(props: RowProps): JSX.Element {
-  const { styles, classNames, showWeekNumber, components } = useDayPicker();
-
-  const Day = components?.Day;
-
-  if (!Day) {
-    throw new Error("Day is undefined");
-  }
+  const { styles, classNames, showWeekNumber } = useDayPicker();
 
   return (
     <tr className={classNames.row} style={styles.row}>
