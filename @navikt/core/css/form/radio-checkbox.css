@@ -143,6 +143,10 @@
   height: 1.5rem;
   transform: translate(var(--a-spacing-1-alt));
   pointer-events: none;
+
+/* Fixed edcase where when using in shadow-dom, svg will not center */
+  display: flex;
+  align-items: center;
 }
 
 .navds-checkbox--small .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
