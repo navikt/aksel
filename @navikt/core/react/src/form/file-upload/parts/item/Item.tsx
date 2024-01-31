@@ -139,31 +139,33 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
             "navds-file-item--error": isError,
           })}
         >
-          <ItemIcon isLoading={!!status} file={file} error={isError} />
-          <div className="navds-file-item__file-info">
-            <ItemName file={file} href={href} onClick={onFileClick} />
-            {!isError && (
-              <BodyShort as="div" size="small">
-                {getStatusText()}
-              </BodyShort>
-            )}
-            <div
-              className="navds-file-item__error"
-              aria-relevant="additions removals"
-              aria-live="polite"
-            >
-              {isError && <ErrorMessage size="small">{error}</ErrorMessage>}
+          <div className="navds-file-item__inner">
+            <ItemIcon isLoading={!!status} file={file} error={isError} />
+            <div className="navds-file-item__file-info">
+              <ItemName file={file} href={href} onClick={onFileClick} />
+              {!isError && (
+                <BodyShort as="div" size="small">
+                  {getStatusText()}
+                </BodyShort>
+              )}
             </div>
-          </div>
 
-          {!status && (
-            <ItemButton
-              file={file}
-              onRetry={onRetry}
-              onDelete={onDelete}
-              error={error}
-            />
-          )}
+            {!status && (
+              <ItemButton
+                file={file}
+                onRetry={onRetry}
+                onDelete={onDelete}
+                error={error}
+              />
+            )}
+          </div>
+          <div
+            className="navds-form-field__error"
+            aria-relevant="additions removals"
+            aria-live="polite"
+          >
+            {isError && <ErrorMessage>{error}</ErrorMessage>}
+          </div>
         </Component>
       );
     },
