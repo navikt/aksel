@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.17.2
+
+### Patch Changes
+
+- Checkbox: I noen edgecaser ved bruk av shadow-dom ble ikke checkmark sentert i Checkbox ([#2682](https://github.com/navikt/aksel/pull/2682))
+
 ## 5.17.1
 
 ## 5.17.0
