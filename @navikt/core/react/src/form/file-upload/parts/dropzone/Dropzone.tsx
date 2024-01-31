@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { CloudUpIcon } from "@navikt/aksel-icons";
+import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
 import { omit } from "../../../../util/omit";
@@ -27,19 +27,20 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       icon: DropzoneIcon = CloudUpIcon,
       dragDropText,
       buttonText,
-      /* disabledText, */
+      disabledText,
+      disabled,
       ...rest
     } = props;
 
+    const _disabled =
+      disabled ??
+      (fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0);
+
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
-      useFormField(props, "fileUpload");
+      useFormField({ ...props, disabled: _disabled }, "fileUpload");
 
     const localeCtx = useFileUploadLocale()?.locale ?? "nb";
     const translation = useLocale(localeCtx, { multiple });
-
-    const disabled =
-      inputProps.disabled ??
-      (fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0);
 
     const { onChange, inputRef, mergedRef } = useFileUpload({
       ref,
@@ -48,11 +49,11 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       accept,
       maxSizeInBytes,
       fileLimit,
-      disabled,
+      disabled: inputProps.disabled,
     });
 
     const dropzoneCtx = useDropzone({
-      disabled,
+      disabled: inputProps.disabled,
     });
 
     return (
@@ -60,7 +61,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
         className={cl("navds-form-field", "navds-dropzone", className, {
           "navds-dropzone--error": hasError,
           "navds-dropzone--dragging": dropzoneCtx.isDraggingOver,
-          "navds-dropzone--disabled": disabled,
+          "navds-dropzone--disabled": inputProps.disabled,
         })}
       >
         <Label htmlFor={inputProps.id} className="navds-form-field__label">
@@ -82,34 +83,45 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           onDrop={dropzoneCtx.onDrop}
           className="navds-dropzone__area"
         >
-          <div className="navds-dropzone__area-icon">
-            <DropzoneIcon fontSize="1.5rem" aria-hidden />
-          </div>
-          <div className="navds-dropzone__area-release">
-            <div className="navds-dropzone__area-release__icon">
-              <DropzoneIcon aria-hidden />
+          {!inputProps.disabled && (
+            <>
+              <div className="navds-dropzone__area-icon">
+                <DropzoneIcon fontSize="1.5rem" aria-hidden />
+              </div>
+              <div className="navds-dropzone__area-release">
+                <div className="navds-dropzone__area-release__icon">
+                  <DropzoneIcon aria-hidden />
+                </div>
+                <span
+                  aria-hidden={!dropzoneCtx.isDraggingOver}
+                  className="navds-dropzone__area-release__text"
+                >
+                  {translation.drop}
+                </span>
+              </div>
+              <div aria-hidden>
+                <BodyShort as="div" spacing>
+                  {dragDropText ?? translation.dragAndDrop}
+                </BodyShort>
+                <BodyShort as="div">{translation.or}</BodyShort>
+              </div>
+              <Button
+                className="navds-dropzone__area-button"
+                variant="secondary"
+                onClick={() => inputRef.current?.click()}
+                tabIndex={-1}
+              >
+                {buttonText ?? translation.button}
+              </Button>
+            </>
+          )}
+
+          {inputProps.disabled && (
+            <div className="navds-dropzone__area-disabled">
+              <CircleSlashIcon aria-hidden fontSize="1.75rem" />
+              <BodyShort as="div">{disabledText}</BodyShort>
             </div>
-            <span
-              aria-hidden={!dropzoneCtx.isDraggingOver}
-              className="navds-dropzone__area-release__text"
-            >
-              {translation.drop}
-            </span>
-          </div>
-          <div aria-hidden>
-            <BodyShort as="div" spacing>
-              {dragDropText ?? translation.dragAndDrop}
-            </BodyShort>
-            <BodyShort as="div">{translation.or}</BodyShort>
-          </div>
-          <Button
-            className="navds-dropzone__area-button"
-            variant="secondary"
-            onClick={() => inputRef.current?.click()}
-            tabIndex={-1}
-          >
-            {buttonText ?? translation.button}
-          </Button>
+          )}
 
           <input
             {...omit(rest, ["errorId"])}
@@ -120,7 +132,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             accept={accept}
             onChange={onChange}
             ref={mergedRef}
-            disabled={disabled}
           />
         </div>
         <div

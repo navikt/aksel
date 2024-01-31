@@ -190,6 +190,15 @@
   transform: translateY(-50%);
 }
 
+.navds-dropzone__area-disabled {
+  color: var(--a-text-subtle);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--a-spacing-2);
+  place-content: center;
+}
+
 /**
  * FileUpload.Item
  */

@@ -105,16 +105,18 @@ export const Locales: StoryObj = {
 
 export const Disabled: StoryObj = {
   render: () => (
-    <div>
+    <div className="colgap">
       <FileUpload.Dropzone
         label="Disabled prop"
         onSelect={console.log}
         disabled
+        disabledText="Du har ikke rettigheter til å laste opp filer"
       />
       <FileUpload.Dropzone
         label="FileLimit disabled"
         onSelect={console.log}
         fileLimit={{ max: 1, current: 2 }}
+        disabledText="Du kan ikke laste opp flere filer"
       />
     </div>
   ),
