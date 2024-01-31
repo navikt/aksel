@@ -1,6 +1,17 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
+export type MaxSelected = {
+  /**
+   * The limit for maximum selected options
+   */
+  limit: number;
+  /**
+   * Override the message to display when the limit for maximum selected options has been reached
+   */
+  message?: string;
+};
+
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
@@ -97,6 +108,10 @@ export interface ComboboxProps
    * e.g. for a filter, where options can be toggled elsewhere/programmatically.
    */
   selectedOptions?: string[];
+  /**
+   * Options for the maximum number of selected options.
+   */
+  maxSelected?: MaxSelected;
   /**
    * Set to "true" to enable inline autocomplete.
    *

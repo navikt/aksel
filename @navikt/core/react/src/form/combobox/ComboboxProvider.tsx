@@ -43,6 +43,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       isMultiSelect,
       onToggleSelected,
       selectedOptions,
+      maxSelected,
       options,
       value,
       onChange,
@@ -71,6 +72,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
               allowNewValues,
               isMultiSelect,
               selectedOptions,
+              maxSelected,
               onToggleSelected,
               options,
             }}

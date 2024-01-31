@@ -170,7 +170,7 @@ const App = () => {
                               className="icon-classname icon-button"
                             >
                               <T
-                                font-size="2rem"
+                                fontSize="2rem"
                                 title={i.id}
                                 id={`icon-id-${i.id}`}
                               />

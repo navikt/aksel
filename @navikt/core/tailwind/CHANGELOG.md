@@ -1,5 +1,17 @@
 # @navikt/ds-tailwind
 
+## 5.17.2
+
+## 5.17.1
+
+## 5.17.0
+
+## 5.16.0
+
+### Minor Changes
+
+- Tailwind: La til ny `maxWidth` for text ([#2652](https://github.com/navikt/aksel/pull/2652))
+
 ## 5.15.1
 
 ## 5.15.0

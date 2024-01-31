@@ -11,6 +11,10 @@ on:
     paths:
       - "@navikt/**"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   visual_regression_test:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'ignore-chromatic') }}

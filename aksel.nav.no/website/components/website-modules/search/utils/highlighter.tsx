@@ -1,5 +1,5 @@
 import cl from "clsx";
-import Fuse from "fuse.js";
+import type { FuseResultMatch } from "fuse.js";
 import React from "react";
 import { searchOptions } from "@/types";
 
@@ -50,7 +50,7 @@ export function highlightStr(
   );
 }
 
-export function highlightMatches(hitMatch: Fuse.FuseResultMatch) {
+export function highlightMatches(hitMatch: FuseResultMatch) {
   const text = hitMatch.value;
   const result = [];
   const matches = [...hitMatch.indices];

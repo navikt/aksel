@@ -57,3 +57,11 @@
     opacity: 0.4;
   }
 }
+
+@media (forced-colors: active) {
+  .navds-skeleton {
+    forced-color-adjust: none;
+    background-color: var(--a-surface-neutral);
+    animation-duration: 2s;
+  }
+}

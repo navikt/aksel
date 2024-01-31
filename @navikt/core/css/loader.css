@@ -111,3 +111,9 @@
     stroke-dashoffset: -120px;
   }
 }
+
+@media (forced-colors: active) {
+  .navds-loader__background {
+    stroke: canvastext;
+  }
+}
