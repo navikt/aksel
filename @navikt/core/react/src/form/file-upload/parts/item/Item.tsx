@@ -143,11 +143,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
             <ItemIcon isLoading={!!status} file={file} error={isError} />
             <div className="navds-file-item__file-info">
               <ItemName file={file} href={href} onClick={onFileClick} />
-              {!isError && (
-                <BodyShort as="div" size="small">
-                  {getStatusText()}
-                </BodyShort>
-              )}
+              <BodyShort as="div">{getStatusText()}</BodyShort>
             </div>
 
             {!status && (
