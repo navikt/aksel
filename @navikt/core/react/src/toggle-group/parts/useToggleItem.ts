@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { mergeRefs } from "../../util/hooks/useMergeRefs";
-import { useToggleGroupContext, useToggleGroupDescendant } from "../context";
+import {
+  useToggleGroupContext,
+  useToggleGroupDescendant,
+} from "../ToggleGroup.context";
 
 export interface UseToggleItemProps {
   /**

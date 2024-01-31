@@ -6,9 +6,9 @@ import {
   ToggleGroupDescendantsProvider,
   ToggleGroupProvider,
   useToggleGroupDescendants,
-} from "./context";
+} from "./ToggleGroup.context";
+import { ToggleGroupProps } from "./ToggleGroup.types";
 import ToggleItem from "./parts/ToggleItem";
-import { ToggleGroupProps } from "./types";
 import { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleGroupComponent
@@ -85,7 +85,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
     return (
       <ToggleGroupDescendantsProvider value={descendants}>
-        <ToggleGroupProvider value={context}>
+        <ToggleGroupProvider {...context}>
           <div className={cl("navds-toggle-group__wrapper", className)}>
             {label && (
               <Label

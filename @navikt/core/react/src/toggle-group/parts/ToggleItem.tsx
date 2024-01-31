@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography/BodyShort";
-import { useToggleGroupContext } from "../context";
+import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 
 export interface ToggleItemProps
