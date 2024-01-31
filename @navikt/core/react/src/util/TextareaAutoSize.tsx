@@ -167,7 +167,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         });
       };
 
-      const handleResize = () => {
+      const handleResize = debounce(() => {
         renders.current = 0;
 
         if (inputRef.current?.style.height || inputRef.current?.style.width) {
@@ -179,13 +179,12 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         }
 
         syncHeightWithFlushSync();
-      };
+      });
 
-      const debounceHandleResize = debounce(handleResize);
       const input = inputRef.current!;
       const containerWindow = ownerWindow(input);
 
-      containerWindow.addEventListener("resize", debounceHandleResize);
+      containerWindow.addEventListener("resize", handleResize);
 
       let resizeObserver: ResizeObserver;
       if (typeof ResizeObserver !== "undefined") {
@@ -194,8 +193,8 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       }
 
       return () => {
-        debounceHandleResize.clear();
-        containerWindow.removeEventListener("resize", debounceHandleResize);
+        handleResize.clear();
+        containerWindow.removeEventListener("resize", handleResize);
         if (resizeObserver) {
           resizeObserver.disconnect();
         }
