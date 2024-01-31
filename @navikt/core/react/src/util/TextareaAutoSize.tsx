@@ -10,7 +10,7 @@ type State = {
   overflow?: boolean | undefined;
 };
 
-const updateState = (
+const checkState = (
   prevState: State,
   newState: State,
   renders: React.MutableRefObject<number>,
@@ -25,20 +25,12 @@ const updateState = (
       prevState.overflow !== overflow)
   ) {
     renders.current += 1;
-    return {
-      overflow,
-      outerHeightStyle,
-    };
+    return newState;
   }
-  if (process.env.NODE_ENV !== "production") {
-    if (renders.current === 20) {
-      console.error(
-        [
-          "Textarea: Too many re-renders. The layout is unstable.",
-          "TextareaAutosize limits the number of renders to prevent an infinite loop.",
-        ].join("\n"),
-      );
-    }
+  if (process.env.NODE_ENV !== "production" && renders.current === 20) {
+    console.error(
+      "Textarea: Too many re-renders. The layout is unstable. TextareaAutosize limits the number of renders to prevent an infinite loop.",
+    );
   }
   return prevState;
 };
@@ -92,9 +84,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
   ) => {
     const { current: isControlled } = useRef(value != null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-
     const handleRef = useMergeRefs(inputRef, ref);
-
     const shadowRef = useRef<HTMLTextAreaElement>(null);
     const renders = useRef(0);
     const [state, setState] = useState<State>({ outerHeightStyle: 0 });
@@ -153,35 +143,31 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       return { outerHeightStyle, overflow };
     }, [maxRows, minRows, other.placeholder]);
 
-    const syncHeight = React.useCallback(() => {
+    const syncHeight = () => {
       const newState = getUpdatedState();
-
       if (isEmpty(newState)) {
         return;
       }
-
-      setState((prevState) => updateState(prevState, newState, renders));
-    }, [getUpdatedState]);
+      setState((prevState) => checkState(prevState, newState, renders));
+    };
 
     useClientLayoutEffect(() => {
       const syncHeightWithFlushSync = () => {
         const newState = getUpdatedState();
-
         if (isEmpty(newState)) {
           return;
         }
 
         // In React 18, state updates in a ResizeObserver's callback are happening after
         // the paint, this leads to an infinite rendering.
-        //
-        // Using flushSync ensures that the states is updated before the next pain.
+        // Using flushSync ensures that the state is updated before the next paint.
         // Related issue - https://github.com/facebook/react/issues/24331
         ReactDOM.flushSync(() => {
-          setState((prevState) => updateState(prevState, newState, renders));
+          setState((prevState) => checkState(prevState, newState, renders));
         });
       };
 
-      const handleResize = () => {
+      const handleResize = debounce(() => {
         renders.current = 0;
 
         if (inputRef.current?.style.height || inputRef.current?.style.width) {
@@ -193,13 +179,12 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         }
 
         syncHeightWithFlushSync();
-      };
+      });
 
-      const debounceHandleResize = debounce(handleResize);
       const input = inputRef.current!;
       const containerWindow = ownerWindow(input);
 
-      containerWindow.addEventListener("resize", debounceHandleResize);
+      containerWindow.addEventListener("resize", handleResize);
 
       let resizeObserver: ResizeObserver;
       if (typeof ResizeObserver !== "undefined") {
@@ -208,8 +193,8 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       }
 
       return () => {
-        debounceHandleResize.clear();
-        containerWindow.removeEventListener("resize", debounceHandleResize);
+        handleResize.clear();
+        containerWindow.removeEventListener("resize", handleResize);
         if (resizeObserver) {
           resizeObserver.disconnect();
         }

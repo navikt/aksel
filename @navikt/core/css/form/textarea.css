@@ -43,13 +43,15 @@
 }
 
 .navds-textarea__input:focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-textarea__input:focus {
-    outline: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     box-shadow: var(--a-shadow-focus);
   }
 }
@@ -131,4 +133,11 @@
   background-color: var(--a-surface-subtle);
   border-color: var(--a-border-subtle);
   cursor: default;
+}
+
+@media (forced-colors: active) {
+  .navds-textarea__input {
+    background-color: field;
+    color: fieldtext;
+  }
 }

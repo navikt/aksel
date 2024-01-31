@@ -7,6 +7,27 @@
   --navds-internalheader-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
 }
 
+@media (forced-colors: active) {
+  .navds-internalheader {
+    background-color: ButtonFace;
+    border-color: ButtonText;
+    border: solid 1px ButtonText;
+    color: ButtonText;
+  }
+
+  .navds-internalheader a:focus-visible {
+    box-shadow: none;
+    outline: 2px solid highlight;
+    outline-offset: 2px;
+  }
+
+  .navds-internalheader .navds-internalheader__button:focus-visible {
+    box-shadow: none;
+    outline: 2px solid highlight;
+    outline-offset: 2px;
+  }
+}
+
 .navds-internalheader__title {
   border: none;
   overflow: visible;

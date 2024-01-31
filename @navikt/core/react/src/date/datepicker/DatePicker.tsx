@@ -11,7 +11,6 @@ import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, labels } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
-import DayButton from "./parts/DayButton";
 import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
@@ -124,7 +123,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           HeadRow,
           WeekNumber,
           Row,
-          Day: DayButton,
         }}
         className={cl("navds-date", className)}
         classNames={{
