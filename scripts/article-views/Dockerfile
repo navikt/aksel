@@ -4,7 +4,7 @@ WORKDIR /app
 RUN chown -R deno:deno /app
 USER deno
 
-COPY deps.ts .
+COPY ./deps.ts .
 RUN deno cache deps.ts
 
 # should copy over .env created in github action
