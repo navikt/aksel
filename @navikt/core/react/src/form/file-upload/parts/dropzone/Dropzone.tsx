@@ -24,6 +24,10 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       validator,
       maxSizeInBytes,
       fileLimit,
+      icon: DropzoneIcon = CloudUpIcon,
+      dragDropText,
+      buttonText,
+      /* disabledText, */
       ...rest
     } = props;
 
@@ -79,11 +83,11 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           className="navds-dropzone__area"
         >
           <div className="navds-dropzone__area-icon">
-            <CloudUpIcon fontSize="1.5rem" aria-hidden />
+            <DropzoneIcon fontSize="1.5rem" aria-hidden />
           </div>
           <div className="navds-dropzone__area-release">
             <div className="navds-dropzone__area-release__icon">
-              <CloudUpIcon aria-hidden />
+              <DropzoneIcon aria-hidden />
             </div>
             <span
               aria-hidden={!dropzoneCtx.isDraggingOver}
@@ -94,7 +98,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           </div>
           <div aria-hidden>
             <BodyShort as="div" spacing>
-              {translation.dragAndDrop}
+              {dragDropText ?? translation.dragAndDrop}
             </BodyShort>
             <BodyShort as="div">{translation.or}</BodyShort>
           </div>
@@ -104,7 +108,7 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
             onClick={() => inputRef.current?.click()}
             tabIndex={-1}
           >
-            {translation.button}
+            {buttonText ?? translation.button}
           </Button>
 
           <input

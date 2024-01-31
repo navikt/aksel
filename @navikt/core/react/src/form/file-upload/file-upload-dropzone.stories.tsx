@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
+import { ImageIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
 import { HStack } from "../../layout/stack";
 import { OnFileSelectProps } from "./FileUpload.types";
@@ -114,6 +115,21 @@ export const Disabled: StoryObj = {
         label="FileLimit disabled"
         onSelect={console.log}
         fileLimit={{ max: 1, current: 2 }}
+      />
+    </div>
+  ),
+};
+
+export const Custom: StoryObj = {
+  render: () => (
+    <div>
+      <FileUpload.Dropzone
+        label="Custom variant"
+        onSelect={console.log}
+        icon={ImageIcon}
+        dragDropText="Dra og slipp bilder i format .png"
+        buttonText="Velg bilder"
+        disabledText="Du kan ikke laste opp flere bilder"
       />
     </div>
   ),
