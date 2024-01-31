@@ -20,5 +20,14 @@ export const getGlobalReference = (
     .filter(([key]) => key.startsWith("global-"))
     .reduce((acc, [, value]) => [...acc, ...value], []);
 
-  return globalRefs.find(({ value }) => semanticValue === value) ?? null;
+  console.log(globalRefs);
+  return (
+    globalRefs.find(
+      ({ value, name }) => semanticValue === value && notBlacklistedName(name),
+    ) ?? null
+  );
 };
+
+function notBlacklistedName(name: string) {
+  return !["--a-nav-red"].includes(name);
+}
