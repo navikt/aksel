@@ -20,24 +20,28 @@
     "access": "public",
     "provenance": true
   },
-  "sideEffects": [
-    "*.svg"
-  ],
+  "sideEffects": false,
   "license": "MIT",
   "main": "./dist/react/cjs/index.js",
   "module": "./dist/react/esm/index.js",
   "typings": "./dist/react/esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/react/esm/index.d.ts",
-      "import": "./dist/react/esm/index.js",
-      "require": "./dist/react/cjs/index.js"
+      "import": {
+        "types": "./dist/react/esm/index.d.ts",
+        "default": "./dist/react/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/react/cjs/index.d.ts",
+        "default": "./dist/react/cjs/index.js"
+      }
     },
-    "./svg/*.svg": "./dist/svg/*.svg",
     "./metadata": {
       "types": "./dist/metadata.d.ts",
       "default": "./dist/metadata.js"
-    }
+    },
+    "./svg/*.svg": "./dist/svg/*.svg",
+    "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
