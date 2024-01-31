@@ -10,5 +10,6 @@
     "**/esm": true,
     "**/cjs": true
   },
-  "playwright.reuseBrowser": true
+  "playwright.reuseBrowser": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
