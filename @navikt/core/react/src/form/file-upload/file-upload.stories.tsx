@@ -69,15 +69,8 @@ const DefaultFn = ({ error = false }) => {
       <FileUpload.Item
         {...props}
         onRetry={() => console.log("retry")}
-        status={
-          loading
-            ? "uploading"
-            : index % 2 === 0
-              ? "retry"
-              : props?.error
-                ? "delete"
-                : "delete"
-        }
+        status={loading ? "uploading" : "completed"}
+        itemAction="delete"
       />
     );
   };

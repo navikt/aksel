@@ -15,7 +15,7 @@ import { FileItem } from "./Item.types";
 interface ItemIconProps {
   isLoading?: boolean;
   file: FileItem;
-  error: boolean;
+  showError: boolean;
 }
 
 const iconProps = {
@@ -23,14 +23,14 @@ const iconProps = {
   "aria-hidden": true,
 };
 
-function ItemIcon({ isLoading, file, error }: ItemIconProps) {
+function ItemIcon({ isLoading, file, showError }: ItemIconProps) {
   if (isLoading) {
     return (
       <div className="navds-file-item__icon navds-file-item__icon--loading">
         <Loader size="large" />
       </div>
     );
-  } else if (error) {
+  } else if (showError) {
     return (
       <div className="navds-file-item__icon navds-file-item__icon-avatar">
         <FileXMarkIcon {...iconProps} />

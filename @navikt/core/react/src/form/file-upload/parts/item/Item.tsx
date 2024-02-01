@@ -32,73 +32,54 @@ export interface FileItemBaseProps {
    * Error message relating to the item.
    */
   error?: string;
+  /**
+   *
+   */
+  status?: "downloading" | "uploading" | "completed";
+  /**
+   * Callback called when the delete button is clicked.
+   */
+  /* onDelete?: (event: MouseEvent<HTMLButtonElement>) => void; */
+  /**
+   * Callback called when the retry button is clicked.
+   */
+  /* onRetry?: (event: MouseEvent<HTMLButtonElement>) => void; */
+  /**
+   *
+   */
+  /* itemAction?: "delete" | "retry" | "none"; */
 }
 
-type OnDelete = (event: MouseEvent<HTMLButtonElement>) => void;
-type OnRetry = (event: MouseEvent<HTMLButtonElement>) => void;
-
-type FileItemDeleteProps = {
-  status: "delete";
-  /**
-   * Callback called when the delete button is clicked.
-   */
-  onDelete: OnDelete;
+type FileItemActionDelete = {
+  onDelete: (event: MouseEvent<HTMLButtonElement>) => void;
+  itemAction: "delete";
 };
 
-type FileItemRetryProps = {
-  status: "retry";
-  /**
-   * Callback called when the retry button is clicked.
-   */
-  onRetry: OnRetry;
+type FileItemActionRetry = {
+  onRetry: (event: MouseEvent<HTMLButtonElement>) => void;
+  itemAction: "retry";
 };
 
-type FileItemDownloadingProps = {
-  status: "downloading";
-  /**
-   * Callback called when the delete button is clicked.
-   */
-  onDelete?: OnDelete;
-  /**
-   * Callback called when the retry button is clicked.
-   */
-  onRetry?: OnRetry;
+type FileItemActionNone = {
+  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
+  itemAction: "none";
 };
 
-type FileItemUploadingProps = {
-  status: "uploading";
-  /**
-   * Callback called when the delete button is clicked.
-   */
-  onDelete?: OnDelete;
-  /**
-   * Callback called when the retry button is clicked.
-   */
-  onRetry?: OnRetry;
+type FileItemActionUndefined = {
+  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
+  itemAction?: undefined;
 };
 
-type FileItemUndefinedProps = {
-  status?: undefined;
-  /**
-   * Callback called when the delete button is clicked.
-   */
-  onDelete?: OnDelete;
-  /**
-   * Callback called when the retry button is clicked.
-   */
-  onRetry?: OnRetry;
-};
+type FileItemConditionalProps =
+  | FileItemActionDelete
+  | FileItemActionRetry
+  | FileItemActionNone
+  | FileItemActionUndefined;
 
-type FileItemConditionalProps = FileItemBaseProps &
-  (
-    | FileItemDeleteProps
-    | FileItemRetryProps
-    | FileItemDownloadingProps
-    | FileItemUploadingProps
-    | FileItemUndefinedProps
-  );
-
-export type FileItemProps = FileItemConditionalProps &
+export type FileItemProps = FileItemBaseProps &
+  FileItemConditionalProps &
   React.HTMLAttributes<HTMLDivElement>;
 
 export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
@@ -114,15 +95,14 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         className,
         href,
         onFileClick,
+        itemAction = "delete",
       },
       ref,
     ) => {
       const localeCtx = useFileUploadLocale()?.locale ?? "nb";
       const translation = useLocale(localeCtx, { name: file.name });
 
-      const userAction = status === "retry" || status === "delete";
-
-      const isError = !!error && (!status || userAction);
+      const showError = !!error && (!status || status === "completed");
 
       function getStatusText() {
         if (status === "uploading") {
@@ -138,27 +118,26 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         <Component
           ref={ref}
           className={cl("navds-file-item", className, {
-            "navds-file-item--error": isError,
+            "navds-file-item--error": showError,
           })}
         >
           <div className="navds-file-item__inner">
             <ItemIcon
-              isLoading={["uploading", "downloading"].includes(status ?? "")}
+              isLoading={status && status !== "completed"}
               file={file}
-              error={isError}
+              showError={showError}
             />
             <div className="navds-file-item__file-info">
               <ItemName file={file} href={href} onClick={onFileClick} />
               <BodyShort as="div">{getStatusText()}</BodyShort>
             </div>
 
-            {(userAction || !status) && (
+            {status === "completed" && (
               <ItemButton
-                status={status}
                 file={file}
                 onRetry={onRetry}
                 onDelete={onDelete}
-                error={error}
+                action={itemAction}
               />
             )}
           </div>
@@ -167,7 +146,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {isError && <ErrorMessage>{error}</ErrorMessage>}
+            {showError && <ErrorMessage>{error}</ErrorMessage>}
           </div>
         </Component>
       );
