@@ -156,7 +156,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
             )}
           </div>
           <div
-            className="navds-form-field__error"
+            className="navds-file-item__error"
             aria-relevant="additions removals"
             aria-live="polite"
           >

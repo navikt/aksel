@@ -2,9 +2,10 @@ import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
+import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
-import { ErrorMessage, Heading } from "../../typography";
+import { Heading } from "../../typography";
 import { OnFileSelectProps } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
@@ -49,11 +50,16 @@ export const Default: StoryFn = () => {
     <VStack gap="6" style={{ maxWidth: 500 }}>
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
-        description={`I formatene doc, xls, pdf - maks størrelse ${MAX_SIZE_MB} MB`}
-        accept=".doc,.docx,.xls,.xlsx,.pdf"
+        description={`Maks størrelse ${MAX_SIZE_MB} MB`}
+        disabledText="Du kan ikke laste opp flere filer"
+        /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
         onSelect={addFiles}
         fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}
       />
+
+      {getListError(files) && (
+        <Alert variant="error">{getListError(files)}</Alert>
+      )}
 
       {files.allFiles.length > 0 && (
         <VStack gap="2">
@@ -70,9 +76,6 @@ export const Default: StoryFn = () => {
               />
             ))}
           </VStack>
-          {getListError(files) && (
-            <ErrorMessage>{getListError(files)}</ErrorMessage>
-          )}
         </VStack>
       )}
     </VStack>

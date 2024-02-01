@@ -260,14 +260,14 @@ export const Animated: StoryObj = {
               first: {
                 file: fileTxt,
                 status: undefined,
-                error: "Failed to upload",
+                error: "Kunne ikke laste opp filen",
                 onRetry: () => null,
                 onDelete: undefined,
               },
               second: {
                 file: filePdf,
                 status: undefined,
-                error: "File is to large",
+                error: "Filen er for stor. Maks 20MB",
                 onRetry: undefined,
                 onDelete: () => null,
               },

@@ -202,15 +202,10 @@
 /**
  * FileUpload.Item
  */
-.navds-file-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-spacing-2);
-}
 
 .navds-file-item__inner {
   outline: 1px solid var(--a-border-subtle);
-  transition: outline 250ms cubic-bezier(0.3, 1, 0.3, 1);
+  transition: outline-color 250ms cubic-bezier(0.3, 1, 0.3, 1);
   border-radius: var(--a-border-radius-large);
   padding: var(--a-spacing-3);
   display: flex;
@@ -219,8 +214,7 @@
 }
 
 .navds-file-item--error > .navds-file-item__inner {
-  outline-color: var(--a-border-danger);
-  outline-width: 2px;
+  outline: 2px solid var(--a-border-danger);
 }
 
 .navds-file-item__icon {
@@ -244,4 +238,8 @@
 
 .navds-file-item__button {
   margin-left: auto;
+}
+
+.navds-file-item--error > .navds-file-item__error {
+  margin-top: var(--a-spacing-2);
 }
