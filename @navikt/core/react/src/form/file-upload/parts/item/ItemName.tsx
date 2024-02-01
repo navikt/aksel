@@ -41,6 +41,7 @@ const ItemName = ({ file, href, onClick }: Props) => {
     return (
       <Link
         href="#"
+        download={file.name}
         onClick={(event) => {
           event.preventDefault();
           downloadFile(file);
