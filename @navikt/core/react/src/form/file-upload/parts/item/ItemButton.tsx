@@ -10,13 +10,14 @@ interface Props {
   onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   error?: string;
+  status?: "delete" | "retry";
 }
 
-const ItemButton = ({ file, onRetry, onDelete, error }: Props) => {
+const ItemButton = ({ file, onRetry, onDelete, error, status }: Props) => {
   const localeCtx = useFileUploadLocale().locale ?? "nb";
   const translation = useLocale(localeCtx, { name: file.name });
 
-  if (error && onRetry) {
+  if (error && onRetry && status === "retry") {
     return (
       <Button
         className="navds-file-item__button"
@@ -27,7 +28,7 @@ const ItemButton = ({ file, onRetry, onDelete, error }: Props) => {
       />
     );
   }
-  if (onDelete) {
+  if (onDelete && status === "delete") {
     return (
       <Button
         className="navds-file-item__button"

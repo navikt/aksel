@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
 import { Alert } from "../../alert";
@@ -15,12 +15,12 @@ const meta: Meta<typeof FileUpload.Dropzone> = {
 
 export default meta;
 
-const MAX_FILES = 5;
-const MAX_SIZE_MB = 3;
+const MAX_FILES = 3;
+const MAX_SIZE_MB = 1;
 const MAX_SIZE = MAX_SIZE_MB * 1024 * 1024;
 
-export const Default: StoryFn = () => {
-  const [files, setFiles] = useState<OnFileSelectProps>({
+const DefaultFn = ({ error = false }) => {
+  const [files, setFiles] = useState<any>({
     allFiles: [],
     acceptedFiles: [],
     rejectedFiles: [],
@@ -29,8 +29,18 @@ export const Default: StoryFn = () => {
   function addFiles(filesToAdd: OnFileSelectProps) {
     const newFiles = {
       allFiles: [...files.allFiles, ...filesToAdd.allFiles],
-      acceptedFiles: [...files.acceptedFiles, ...filesToAdd.acceptedFiles],
-      rejectedFiles: [...files.rejectedFiles, ...filesToAdd.rejectedFiles],
+      acceptedFiles: error
+        ? []
+        : [...files.acceptedFiles, ...filesToAdd.acceptedFiles],
+      rejectedFiles: error
+        ? [
+            ...files.rejectedFiles,
+            ...filesToAdd.allFiles.map((x) => ({
+              file: x,
+              reason: ["custom error"],
+            })),
+          ]
+        : [...files.rejectedFiles, ...filesToAdd.rejectedFiles],
     };
     setFiles(newFiles);
   }
@@ -45,6 +55,32 @@ export const Default: StoryFn = () => {
     };
     setFiles(newFiles);
   }
+
+  const CustomItem = ({ index, ...props }: any) => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500 * index);
+    }, [index]);
+
+    return (
+      <FileUpload.Item
+        {...props}
+        onRetry={() => console.log("retry")}
+        status={
+          loading
+            ? "uploading"
+            : index % 2 === 0
+              ? "retry"
+              : props?.error
+                ? "delete"
+                : "delete"
+        }
+      />
+    );
+  };
 
   return (
     <VStack gap="6" style={{ maxWidth: 500 }}>
@@ -66,12 +102,13 @@ export const Default: StoryFn = () => {
           <Heading level="3" size="xsmall">
             {`Valgte filer (${files.allFiles.length} av ${MAX_FILES})`}
           </Heading>
-          <VStack gap="2">
-            {files.allFiles.map((file, index) => (
-              <FileUpload.Item
-                key={index}
+          <VStack gap="3">
+            {files.allFiles.map((file: File, index) => (
+              <CustomItem
+                key={file.name}
+                index={index}
                 file={file}
-                error={getError(file, files.rejectedFiles)}
+                error={getError(file, files.rejectedFiles, index)}
                 onDelete={() => removeFile(file)}
               />
             ))}
@@ -81,6 +118,8 @@ export const Default: StoryFn = () => {
     </VStack>
   );
 };
+
+export const Default: StoryFn = DefaultFn;
 
 Default.parameters = {
   decorators: [
@@ -92,13 +131,21 @@ Default.parameters = {
   ],
 };
 
+const errors = [
+  "Filformatet støttes ikke",
+  "Filen er for stor",
+  "Du kan ikke laste opp tomme filer",
+  "Noe gikk galt under opplastingen, prøv å laste opp filen på nytt",
+];
+
 function getError(
   file: File,
   rejectedFiles: OnFileSelectProps["rejectedFiles"],
+  index: number,
 ) {
   if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE} MB`;
   if (rejectedFiles.some((x) => x.file === file))
-    return "Filformatet støttes ikke";
+    return errors[index % errors.length];
   return undefined;
 }
 
@@ -109,6 +156,10 @@ function getListError(files: OnFileSelectProps) {
   if (filesTooMany > 1)
     return `Du har lagt ved ${filesTooMany} filer for mye, vennligst fjern ${filesTooMany} filer`;
 }
+
+export const AlwaysError = {
+  render: () => <>{DefaultFn({ error: true })}</>,
+};
 
 export const TriggerWithButton = {
   render: () => {

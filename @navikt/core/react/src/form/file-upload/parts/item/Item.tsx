@@ -120,7 +120,9 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
       const localeCtx = useFileUploadLocale()?.locale ?? "nb";
       const translation = useLocale(localeCtx, { name: file.name });
 
-      const isError = !!error && !status;
+      const userAction = status === "retry" || status === "delete";
+
+      const isError = !!error && (!status || userAction);
 
       function getStatusText() {
         if (status === "uploading") {
@@ -140,14 +142,19 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
           })}
         >
           <div className="navds-file-item__inner">
-            <ItemIcon isLoading={!!status} file={file} error={isError} />
+            <ItemIcon
+              isLoading={["uploading", "downloading"].includes(status ?? "")}
+              file={file}
+              error={isError}
+            />
             <div className="navds-file-item__file-info">
               <ItemName file={file} href={href} onClick={onFileClick} />
               <BodyShort as="div">{getStatusText()}</BodyShort>
             </div>
 
-            {!status && (
+            {(userAction || !status) && (
               <ItemButton
+                status={status}
                 file={file}
                 onRetry={onRetry}
                 onDelete={onDelete}
