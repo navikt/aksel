@@ -60,6 +60,8 @@ export const getStaticProps: GetStaticProps = async ({
       slug,
     });
 
+  const chipsData = groupByTema(chipsDataAll)[slug];
+
   return {
     props: {
       tema,
@@ -71,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({
       title: "",
       chipsData: groupByTema(chipsDataAll)[slug],
     },
-    notFound: !tema || !heroNav.some((nav) => nav.slug === slug),
+    notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
     revalidate: 60,
   };
 };

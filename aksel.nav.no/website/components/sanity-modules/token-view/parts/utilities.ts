@@ -20,7 +20,6 @@ export const getGlobalReference = (
     .filter(([key]) => key.startsWith("global-"))
     .reduce((acc, [, value]) => [...acc, ...value], []);
 
-  console.log(globalRefs);
   return (
     globalRefs.find(
       ({ value, name }) => semanticValue === value && notBlacklistedName(name),
