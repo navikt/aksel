@@ -15,15 +15,14 @@ export const ShapesView = ({ cat }: { cat: string }) => {
               style={{ borderRadius: x.value }}
               className="mr-3 grid h-16 w-16 place-content-center rounded-lg bg-surface-alt-3-strong text-4xl leading-none"
             />
-            <dl className="grid h-full">
-              <dt className="inline-flex items-center gap-2">
-                <CopyButton
-                  text={sanitizeName(x.name.replace("border-radius-", ""))}
-                  copyText={x.name}
-                  size="small"
-                  iconPosition="right"
-                />
+            <dl>
+              <dt className="inline-flex items-start gap-1 text-medium">
+                <span className="flex min-h-8 items-center">
+                  {sanitizeName(x.name.replace("border-radius-", ""))}
+                </span>
+                <CopyButton copyText={x.name} size="small" />
               </dt>
+
               <dd className="mt-auto text-medium text-text-subtle">
                 {x.value}
               </dd>

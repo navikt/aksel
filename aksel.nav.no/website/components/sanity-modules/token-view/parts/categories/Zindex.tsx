@@ -34,14 +34,12 @@ export const ZindexView = ({ cat }: { cat: string }) => {
                 />
               ))}
             </div>
-            <dl className="grid h-full">
-              <dt className="inline-flex items-center gap-2">
-                <CopyButton
-                  text={sanitizeName(token.name.replace("z-index-", ""))}
-                  copyText={token.name}
-                  size="small"
-                  iconPosition="right"
-                />
+            <dl>
+              <dt className="inline-flex items-start gap-1 text-medium">
+                <span className="flex min-h-8 items-center">
+                  {sanitizeName(token.name.replace("z-index-", ""))}
+                </span>
+                <CopyButton copyText={token.name} size="small" />
               </dt>
               <dd className="mt-auto text-medium text-text-subtle">
                 {token.value}
