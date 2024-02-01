@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.17.3
+
+### Patch Changes
+
+- :bug: Textarea: maxLength virker nå selv om man sender inn onChange uten å sende inn value ([#2690](https://github.com/navikt/aksel/pull/2690))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.3
+  - @navikt/aksel-icons@5.17.3
+
 ## 5.17.2
 
 ### Patch Changes
