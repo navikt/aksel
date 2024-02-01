@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
+    "@floating-ui/react-dom": "^2.0.8",
     "@navikt/aksel-icons": "^5.17.3",
     "@navikt/ds-tokens": "^5.17.3",
     "@radix-ui/react-tabs": "1.0.0",

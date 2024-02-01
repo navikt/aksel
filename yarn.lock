@@ -2828,6 +2828,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/dom@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "@floating-ui/dom@npm:1.6.1"
+  dependencies:
+    "@floating-ui/core": ^1.6.0
+    "@floating-ui/utils": ^0.2.1
+  checksum: 5565e4dee612bab62950913c311d75d3f773bd1d9dc437f7e33b46340f32ec565733c995c6185381adaf64e627df3c79901d0a9d555f58c02509d0764bceb57d
+  languageName: node
+  linkType: hard
+
 "@floating-ui/react-dom@npm:2.0.0":
   version: 2.0.0
   resolution: "@floating-ui/react-dom@npm:2.0.0"
@@ -2849,6 +2859,18 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: 3c3907722f17c2cc11819c92d81d53962db049ea96dcd73a886e5d807b3a5d4e31c472e53f63af74f2a5c110bcc5ced68f49f16b4df11c02312fed2c7708de59
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@floating-ui/react-dom@npm:2.0.8"
+  dependencies:
+    "@floating-ui/dom": ^1.6.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 5da7f13a69281e38859a3203a608fe9de1d850b332b355c10c0c2427c7b7209a0374c10f6295b6577c1a70237af8b678340bd4cc0a4b1c66436a94755d81e526
   languageName: node
   linkType: hard
 
@@ -3449,7 +3471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^5.17.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^5.17.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3476,8 +3498,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-css": ^5.17.3
+    "@navikt/ds-tokens": ^5.17.3
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3495,7 +3517,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 5.17.2
+    "@navikt/ds-css": 5.17.3
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.6.0
@@ -3519,11 +3541,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@5.17.2, @navikt/ds-css@^5.17.2, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@5.17.3, @navikt/ds-css@^5.17.3, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-tokens": ^5.17.3
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3536,13 +3558,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^5.17.2, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^5.17.3, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@floating-ui/react-dom": ^2.0.8
+    "@navikt/aksel-icons": ^5.17.3
+    "@navikt/ds-tokens": ^5.17.3
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3576,11 +3599,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^5.17.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^5.17.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-tokens": ^5.17.3
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3592,7 +3615,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^5.17.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^5.17.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8842,11 +8865,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^5.17.2
-    "@navikt/ds-css": ^5.17.2
-    "@navikt/ds-react": ^5.17.2
-    "@navikt/ds-tailwind": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/aksel-icons": ^5.17.3
+    "@navikt/ds-css": ^5.17.3
+    "@navikt/ds-react": ^5.17.3
+    "@navikt/ds-tailwind": ^5.17.3
+    "@navikt/ds-tokens": ^5.17.3
   languageName: unknown
   linkType: soft
 
