@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
@@ -20,7 +20,7 @@ const MAX_SIZE_MB = 1;
 const MAX_SIZE = MAX_SIZE_MB * 1024 * 1024;
 
 const DefaultFn = ({ error = false }) => {
-  const [files, setFiles] = useState<any>({
+  const [files, setFiles] = useState<OnFileSelectProps>({
     allFiles: [],
     acceptedFiles: [],
     rejectedFiles: [],
@@ -81,7 +81,7 @@ const DefaultFn = ({ error = false }) => {
         label="Last opp filer til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
         disabledText="Du kan ikke laste opp flere filer"
-        /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
+        accept=".doc,.docx,.xls,.xlsx,.pdf"
         onSelect={addFiles}
         fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}
       />
@@ -90,13 +90,13 @@ const DefaultFn = ({ error = false }) => {
         <Alert variant="error">{getListError(files)}</Alert>
       )}
 
-      {files.allFiles.length > 0 && (
+      {files.acceptedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {`Valgte filer (${files.allFiles.length} av ${MAX_FILES})`}
+            {`Vedlagt filer (${files.acceptedFiles.length} av ${MAX_FILES})`}
           </Heading>
           <VStack gap="3">
-            {files.allFiles.map((file: File, index) => (
+            {files.acceptedFiles.map((file: File, index) => (
               <CustomItem
                 key={file.name}
                 index={index}
@@ -108,13 +108,30 @@ const DefaultFn = ({ error = false }) => {
           </VStack>
         </VStack>
       )}
+      {files.rejectedFiles.length > 0 && (
+        <VStack gap="2">
+          <Heading level="3" size="xsmall">
+            Filer som ikke vil bli lagt ved søknad
+          </Heading>
+          <VStack gap="3">
+            {files.rejectedFiles.map((rejected, index) => (
+              <CustomItem
+                key={rejected.file.name}
+                index={index}
+                file={rejected.file}
+                error={getError(rejected.file, files.rejectedFiles, index)}
+                onDelete={() => removeFile(rejected.file)}
+              />
+            ))}
+          </VStack>
+        </VStack>
+      )}
     </VStack>
   );
 };
 
-export const Default: StoryFn = DefaultFn;
-
-Default.parameters = {
+export const Default = {
+  render: () => <DefaultFn error={false} />,
   decorators: [
     (Story) => (
       <div style={{ width: 500, maxWidth: "100%" }}>
@@ -143,7 +160,7 @@ function getError(
 }
 
 function getListError(files: OnFileSelectProps) {
-  const filesTooMany = files.allFiles.length - MAX_FILES;
+  const filesTooMany = files.acceptedFiles.length - MAX_FILES;
   if (filesTooMany === 1)
     return "Du har lagt ved en fil for mye, vennligst fjern en fil";
   if (filesTooMany > 1)
@@ -151,7 +168,14 @@ function getListError(files: OnFileSelectProps) {
 }
 
 export const AlwaysError = {
-  render: () => <>{DefaultFn({ error: true })}</>,
+  render: () => <DefaultFn error />,
+  decorators: [
+    (Story) => (
+      <div style={{ width: 500, maxWidth: "100%" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const TriggerWithButton = {
