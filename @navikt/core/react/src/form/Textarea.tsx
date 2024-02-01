@@ -186,7 +186,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               </span>
               <Counter
                 maxLength={maxLength}
-                currentLength={props.value?.length ?? uncontrolledValue?.length}
+                currentLength={props.value?.length ?? uncontrolledValue.length}
                 size={size}
                 i18n={i18n}
               />
