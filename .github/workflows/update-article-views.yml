@@ -1,4 +1,4 @@
-name: Update article views
+name: Redeploy Naisjob (update-article-views)
 on:
   workflow_dispatch:
 jobs:
