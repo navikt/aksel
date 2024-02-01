@@ -17,14 +17,12 @@ export const ShadowView = ({ cat }: { cat: string }) => {
               }}
               className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
             />
-            <dl className="grid h-full">
-              <dt className="inline-flex items-center gap-2">
-                <CopyButton
-                  text={sanitizeName(x.name.replace("shadow-", ""))}
-                  copyText={x.name}
-                  size="small"
-                  iconPosition="right"
-                />
+            <dl>
+              <dt className="inline-flex items-start gap-1 text-medium">
+                <span className="flex min-h-8 items-center">
+                  {sanitizeName(x.name.replace("shadow-", ""))}
+                </span>
+                <CopyButton copyText={x.name} size="small" />
               </dt>
               <dd className="mt-auto text-medium text-text-subtle">
                 {x.value}
