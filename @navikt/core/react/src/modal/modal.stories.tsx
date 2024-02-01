@@ -117,9 +117,9 @@ export const NativeDialogTest = () => {
   return (
     <div>
       <button onClick={() => ref.current?.showModal()}>Åpne modal</button>
-      <dialog className="navds-modal" ref={ref} aria-label="My dialog label">
+      <dialog ref={ref} aria-label="Native dialog">
         <div>
-          Dette er en test av native dialog.
+          <p>Dette er en test av native dialog.</p>
           <button onClick={() => ref.current?.close()}>Lukk</button>
         </div>
       </dialog>
