@@ -18,12 +18,12 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { createContext } from "../util/create-context";
+import { createContext } from "../../util/create-context";
 import {
   useCallbackRef,
   useClientLayoutEffect,
   useMergeRefs,
-} from "../util/hooks";
+} from "../../util/hooks";
 
 /**
  * Definitions
