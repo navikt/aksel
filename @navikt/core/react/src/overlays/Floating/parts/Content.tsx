@@ -78,7 +78,7 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const mergeRefs = useMergeRefs(forwardedRef, (node) => setContent(node));
 
     const arrowDefaults = {
-      padding: 0,
+      padding: 5,
       width: 0,
       height: 0,
       ..._arrow,
@@ -86,8 +86,6 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const [arrow, setArrow] = useState<HTMLSpanElement | null>(null);
     const arrowWidth = arrowDefaults.width;
     const arrowHeight = arrowDefaults.height;
-
-    console.log(arrowHeight, arrowWidth);
 
     const desiredPlacement = (side +
       (align !== "center" ? "-" + align : "")) as Placement;

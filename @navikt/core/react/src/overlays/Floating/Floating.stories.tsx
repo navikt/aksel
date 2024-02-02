@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Portal from "../portal/Portal";
 import Floating from "./Floating";
 
@@ -92,6 +93,315 @@ export const WithUpdatePositionStrategyAlways = () => {
   );
 };
 
+export const PropsCheck = () => {
+  const [scrollContainer1, setScrollContainer1] =
+    useState<HTMLDivElement | null>(null);
+  const [scrollContainer2, setScrollContainer2] =
+    useState<HTMLDivElement | null>(null);
+
+  return (
+    <div style={{ paddingBottom: 500 }}>
+      <style>{`
+      .anchor-small{
+        background: red;
+        width: 40px;
+        height: 40px;
+      }
+
+      .content-small {
+        transform-origin: var(--ac-floating-transform-origin);
+        background-color: var(--a-gray-100);
+        border-radius: var(--a-border-radius-large);
+        width: 100px;
+        height: 50px;
+        display: grid;
+        place-content: center;
+      }
+
+      .arrow{
+        background: transparent;
+        fill: var(--a-gray-100);
+      }
+      `}</style>
+      <header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 150,
+
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+
+          backgroundColor: "grey",
+          border: "1px solid black",
+        }}
+      >
+        <h1>In fixed header</h1>
+        <Floating>
+          <Floating.Anchor className="anchor-small">1</Floating.Anchor>
+          <Floating.Content
+            className="content-small"
+            sideOffset={5}
+            arrow={{ height: 5, width: 10, className: "arrow" }}
+          >
+            1
+          </Floating.Content>
+        </Floating>
+
+        <Floating>
+          <Floating.Anchor className="anchor-small">2</Floating.Anchor>
+          <Portal asChild>
+            <Floating.Content
+              className="content-small"
+              sideOffset={5}
+              arrow={{ height: 5, width: 10, className: "arrow" }}
+            >
+              (portalled)
+            </Floating.Content>
+          </Portal>
+        </Floating>
+      </header>
+
+      <div
+        style={{
+          marginTop: 100,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 150,
+          border: "1px solid black",
+        }}
+      >
+        <h1>In normal page flow</h1>
+        <Floating>
+          <Floating.Anchor className="anchor-small">3</Floating.Anchor>
+          <Floating.Content
+            className="content-small"
+            sideOffset={5}
+            arrow={{ height: 5, width: 10, className: "arrow" }}
+          >
+            3
+          </Floating.Content>
+        </Floating>
+
+        <Floating>
+          <Floating.Anchor className="anchor-small">4</Floating.Anchor>
+          <Portal asChild>
+            <Floating.Content
+              className="content-small"
+              sideOffset={5}
+              arrow={{ height: 5, width: 10, className: "arrow" }}
+            >
+              4 (portalled)
+            </Floating.Content>
+          </Portal>
+        </Floating>
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          marginTop: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 150,
+          border: "1px solid black",
+        }}
+      >
+        <h1>In relative parent</h1>
+        <Floating>
+          <Floating.Anchor className="anchor-small">5</Floating.Anchor>
+          <Floating.Content
+            className="content-small"
+            sideOffset={5}
+            arrow={{ height: 5, width: 10, className: "arrow" }}
+          >
+            5
+          </Floating.Content>
+        </Floating>
+
+        <Floating>
+          <Floating.Anchor className="anchor-small">6</Floating.Anchor>
+          <Portal asChild>
+            <Floating.Content
+              className="content-small"
+              sideOffset={5}
+              arrow={{ height: 5, width: 10, className: "arrow" }}
+            >
+              6 (portalled)
+            </Floating.Content>
+          </Portal>
+        </Floating>
+      </div>
+
+      <div
+        style={{
+          marginTop: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 150,
+          border: "1px solid black",
+          transform: "translate3d(100px, 0, 0)",
+        }}
+      >
+        <h1>In translated parent</h1>
+        <Floating>
+          <Floating.Anchor className="anchor-small">7</Floating.Anchor>
+          <Floating.Content
+            className="content-small"
+            sideOffset={5}
+            arrow={{ height: 5, width: 10, className: "arrow" }}
+          >
+            7
+          </Floating.Content>
+        </Floating>
+
+        <Floating>
+          <Floating.Anchor className="anchor-small">8</Floating.Anchor>
+          <Portal asChild>
+            <Floating.Content
+              className="content-small"
+              sideOffset={5}
+              arrow={{ height: 5, width: 10, className: "arrow" }}
+            >
+              8 (portalled)
+            </Floating.Content>
+          </Portal>
+        </Floating>
+      </div>
+
+      <div style={{ display: "flex", gap: 100 }}>
+        <div>
+          <h1>In scrolling container</h1>
+          <div
+            ref={setScrollContainer1}
+            style={{
+              width: 400,
+              height: 600,
+              overflow: "auto",
+              border: "1px solid black",
+            }}
+          >
+            <div style={{ height: 2000 }}>
+              {Array.from({ length: 10 }, (_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 150,
+                    paddingBottom: 100,
+                  }}
+                >
+                  <Floating>
+                    <Floating.Anchor className="anchor-small">
+                      9.{i + 1}
+                    </Floating.Anchor>
+                    <Floating.Content
+                      className="content-small"
+                      sideOffset={5}
+                      hideWhenDetached
+                      collisionBoundary={scrollContainer1}
+                      arrow={{ height: 5, width: 10, className: "arrow" }}
+                    >
+                      9.{i + 1}
+                    </Floating.Content>
+                  </Floating>
+
+                  <Floating>
+                    <Floating.Anchor className="anchor-small">
+                      10.{i + 1}
+                    </Floating.Anchor>
+                    <Portal asChild>
+                      <Floating.Content
+                        className="content-small"
+                        sideOffset={5}
+                        hideWhenDetached
+                        collisionBoundary={scrollContainer1}
+                        arrow={{ height: 5, width: 10, className: "arrow" }}
+                      >
+                        10.{i + 1} (portalled)
+                      </Floating.Content>
+                    </Portal>
+                  </Floating>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h1>With position sticky</h1>
+          <div
+            ref={setScrollContainer2}
+            style={{
+              width: 400,
+              height: 600,
+              overflow: "auto",
+              border: "1px solid black",
+            }}
+          >
+            <div style={{ height: 2000 }}>
+              {Array.from({ length: 10 }, (_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 150,
+                    paddingBottom: 100,
+                    position: "sticky",
+                    top: 0,
+                  }}
+                >
+                  <Floating>
+                    <Floating.Anchor className="anchor-small">
+                      9.{i + 1}
+                    </Floating.Anchor>
+                    <Floating.Content
+                      className="content-small"
+                      sideOffset={5}
+                      hideWhenDetached
+                      collisionBoundary={scrollContainer2}
+                      arrow={{ height: 5, width: 10, className: "arrow" }}
+                    >
+                      9.{i + 1}
+                    </Floating.Content>
+                  </Floating>
+
+                  <Floating>
+                    <Floating.Anchor className="anchor-small">
+                      10.{i + 1}
+                    </Floating.Anchor>
+                    <Portal asChild>
+                      <Floating.Content
+                        className="content-small"
+                        sideOffset={5}
+                        hideWhenDetached
+                        collisionBoundary={scrollContainer2}
+                        arrow={{ height: 5, width: 10, className: "arrow" }}
+                      >
+                        10.{i + 1} (portalled)
+                      </Floating.Content>
+                    </Portal>
+                  </Floating>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function Scrollable(props: any) {
   return (
     <div
@@ -100,6 +410,7 @@ function Scrollable(props: any) {
         alignItems: "center",
         justifyContent: "center",
         height: "200vh",
+        width: "200vw",
       }}
       {...props}
     >
