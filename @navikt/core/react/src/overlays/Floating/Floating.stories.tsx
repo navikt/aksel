@@ -8,7 +8,7 @@ export default {
   },
 };
 
-export const Styled = () => {
+export const StyledFloatingElement = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <Scrollable>
@@ -21,6 +21,41 @@ export const Styled = () => {
           <Floating.Content
             className="content"
             sideOffset={5}
+            arrow={{ height: 10, width: 10, className: "arrow" }}
+          >
+            <button onClick={() => setOpen(false)}>close</button>
+          </Floating.Content>
+        )}
+      </Floating>
+    </Scrollable>
+  );
+};
+
+export const WithUpdatePositionStrategyAlways = () => {
+  const [open, setOpen] = React.useState(false);
+  const [left, setLeft] = React.useState(0);
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      setLeft((prev) => (prev + 50) % 300);
+    }, 500);
+    return () => clearInterval(intervalId);
+  }, []);
+  return (
+    <Scrollable>
+      <Floating>
+        <Floating.Anchor
+          className="anchor"
+          onClick={() => setOpen(true)}
+          style={{ marginLeft: left }}
+        >
+          open
+        </Floating.Anchor>
+
+        {open && (
+          <Floating.Content
+            className="content"
+            sideOffset={5}
+            updatePositionStrategy="always"
             arrow={{ height: 20, width: 10, className: "arrow" }}
           >
             <button onClick={() => setOpen(false)}>close</button>

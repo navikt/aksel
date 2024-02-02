@@ -54,6 +54,7 @@ export const FloatingArrow = ({
         height={height}
         viewBox="0 0 30 10"
         preserveAspectRatio="none"
+        style={{ display: "block" }}
       >
         <polygon points="0,0 30,0 15,10" />
       </svg>
