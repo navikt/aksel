@@ -26,8 +26,8 @@ const Video = ({ node }: VideoProps) => {
         controls
         loop
         aria-describedby={node.transkripsjon ? transcriptId : undefined}
-        aria-label="Trykk space for å starte/pause video"
         poster="/images/og/video-poster.png"
+        crossOrigin={window.location.port === "3000" ? "anonymous" : undefined} // Needed for the <track>
       >
         <source src={node.webm.url} type={`video/${node.webm.extension}`} />
         {node.fallback && (
@@ -36,6 +36,7 @@ const Video = ({ node }: VideoProps) => {
             type={`video/${node.fallback.extension}`}
           />
         )}
+        {node.track && <track kind="captions" srcLang="no" src={node.track} />}
       </video>
       {node?.caption && (
         <BodyLong as="figcaption" className="px-7">
@@ -44,13 +45,17 @@ const Video = ({ node }: VideoProps) => {
       )}
       {node?.transkripsjon && (
         <ReadMore
-          header="transkripsjon"
+          header="Transkripsjon"
           open={open}
           onClick={() => setOpen((x) => !x)}
         >
-          <span id={transcriptId} className="whitespace-break-spaces">
-            {node.transkripsjon}
-          </span>
+          <div id={transcriptId} className="whitespace-break-spaces">
+            {node.transkripsjon.split("\n\n").map((paragraph, i, array) => (
+              <BodyLong key={i} spacing={i < array.length - 1}>
+                {paragraph}
+              </BodyLong>
+            ))}
+          </div>
         </ReadMore>
       )}
     </figure>
