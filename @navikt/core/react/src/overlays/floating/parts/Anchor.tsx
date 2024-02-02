@@ -1,10 +1,12 @@
 import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import { Slot } from "../../../util/Slot";
 import { useMergeRefs } from "../../../util/hooks";
 import { useFloatingContext } from "../Floating.context";
 import { Measurable } from "../Floating.types";
 
 interface FloatingAnchorProps extends HTMLAttributes<HTMLDivElement> {
   virtualRef?: React.RefObject<Measurable>;
+  asChild?: boolean;
 }
 
 /**
@@ -12,7 +14,7 @@ interface FloatingAnchorProps extends HTMLAttributes<HTMLDivElement> {
  * Allows anchoring to non-DOM nodes like a cursor position when used with `virtualRef`.
  */
 export const FloatingAnchor = forwardRef<HTMLDivElement, FloatingAnchorProps>(
-  ({ virtualRef, ...rest }: FloatingAnchorProps, forwardedRef) => {
+  ({ virtualRef, asChild, ...rest }: FloatingAnchorProps, forwardedRef) => {
     const context = useFloatingContext();
     const ref = useRef<HTMLDivElement>(null);
 
@@ -24,6 +26,8 @@ export const FloatingAnchor = forwardRef<HTMLDivElement, FloatingAnchorProps>(
       context.onAnchorChange(virtualRef?.current || ref.current);
     });
 
-    return virtualRef ? null : <div ref={mergedRef} {...rest} />;
+    const Comp = asChild ? Slot : "div";
+
+    return virtualRef ? null : <Comp ref={mergedRef} {...rest} />;
   },
 );
