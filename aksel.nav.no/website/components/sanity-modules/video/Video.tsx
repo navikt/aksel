@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { BodyLong, ReadMore } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { VideoT } from "@/types";
@@ -9,6 +9,7 @@ type VideoProps = {
 
 const Video = ({ node }: VideoProps) => {
   const [open, setOpen] = useState(false);
+  const transcriptId = useId();
 
   if (!node || (!node.webm && !node.fallback) || !node.alt) {
     return null;
@@ -24,9 +25,7 @@ const Video = ({ node }: VideoProps) => {
         playsInline
         controls
         loop
-        aria-describedby={
-          node.transkripsjon ? node.alt + "transkript" : undefined
-        }
+        aria-describedby={node.transkripsjon ? transcriptId : undefined}
         aria-label="Trykk space for å starte/pause video"
         poster="/images/og/video-poster.png"
       >
@@ -49,7 +48,9 @@ const Video = ({ node }: VideoProps) => {
           open={open}
           onClick={() => setOpen((x) => !x)}
         >
-          <span id={node.alt + "transkript"}>{node.transkripsjon}</span>
+          <span id={transcriptId} className="whitespace-break-spaces">
+            {node.transkripsjon}
+          </span>
         </ReadMore>
       )}
     </figure>
