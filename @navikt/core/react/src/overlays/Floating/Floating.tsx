@@ -37,53 +37,54 @@ type Side = (typeof SIDE_OPTIONS)[number];
 type Align = (typeof ALIGN_OPTIONS)[number];
 
 /**
- * Popper
+ * Floating
  */
-type PopperContextValue = {
+type FloatingContextValue = {
   anchor: Measurable | null;
   onAnchorChange(anchor: Measurable | null): void;
 };
 
-const [PopperProvider, usePopperContext] = createContext<PopperContextValue>({
-  name: "PopperContext",
-  hookName: "usePopper",
-  providerName: "PopperProvider",
-});
+const [FloatingProvider, useFloatingContext] =
+  createContext<FloatingContextValue>({
+    name: "FloatingContext",
+    hookName: "useFloating",
+    providerName: "FloatingProvider",
+  });
 
-interface PopperProps {
+interface FloatingProps {
   children: React.ReactNode;
 }
 
-export const Popper = ({ children }: PopperProps) => {
+export const Floating = ({ children }: FloatingProps) => {
   const [anchor, setAnchor] = useState<Measurable | null>(null);
 
   return (
-    <PopperProvider anchor={anchor} onAnchorChange={setAnchor}>
+    <FloatingProvider anchor={anchor} onAnchorChange={setAnchor}>
       {children}
-    </PopperProvider>
+    </FloatingProvider>
   );
 };
 
 /**
- * PopperAnchor
+ * FloatingAnchor
  */
-interface PopperAnchorProps extends HTMLAttributes<HTMLDivElement> {
+interface FloatingAnchorProps extends HTMLAttributes<HTMLDivElement> {
   virtualRef?: React.RefObject<Measurable>;
 }
 
 /**
- * `PopperAnchor` provides an anchor for a Popper instance.
+ * `FloatingAnchor` provides an anchor for a Floating instance.
  * Allows anchoring to non-DOM nodes like a cursor position when used with `virtualRef`.
  */
-export const PopperAnchor = forwardRef<HTMLDivElement, PopperAnchorProps>(
-  ({ virtualRef, ...rest }: PopperAnchorProps, forwardedRef) => {
-    const context = usePopperContext();
+export const FloatingAnchor = forwardRef<HTMLDivElement, FloatingAnchorProps>(
+  ({ virtualRef, ...rest }: FloatingAnchorProps, forwardedRef) => {
+    const context = useFloatingContext();
     const ref = useRef<HTMLDivElement>(null);
 
     const mergedRef = useMergeRefs(forwardedRef, ref);
 
     React.useEffect(() => {
-      // Allows anchoring the popper to non-DOM nodes like a cursor position.
+      // Allows anchoring the floating to non-DOM nodes like a cursor position.
       // We replace `anchorRef` with a virtual ref in such cases.
       context.onAnchorChange(virtualRef?.current || ref.current);
     });
@@ -93,9 +94,9 @@ export const PopperAnchor = forwardRef<HTMLDivElement, PopperAnchorProps>(
 );
 
 /**
- * PopperContent
+ * FloatingContent
  */
-type PopperContentContextValue = {
+type FloatingContentContextValue = {
   placedSide: Side;
   onArrowChange: (arrow: HTMLSpanElement | null) => void;
   arrowX?: number;
@@ -103,16 +104,16 @@ type PopperContentContextValue = {
   hideArrow: boolean;
 };
 
-const [PopperContentProvider, usePopperContentContext] =
-  createContext<PopperContentContextValue>({
-    name: "PopperContentContext",
-    hookName: "usePopperContentContext",
-    providerName: "PopperContentProvider",
+const [FloatingContentProvider, useFloatingContentContext] =
+  createContext<FloatingContentContextValue>({
+    name: "FloatingContentContext",
+    hookName: "useFloatingContentContext",
+    providerName: "FloatingContentProvider",
   });
 
 type Boundary = Element | null;
 
-interface PopperContentProps extends HTMLAttributes<HTMLDivElement> {
+interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   side?: Side;
   sideOffset?: number;
   align?: Align;
@@ -130,7 +131,7 @@ interface PopperContentProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * TODO: Will need to comb trough and remove unnecessary props like avoidCollisions and the like.
  */
-export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
+export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   (
     {
       side = "bottom",
@@ -146,10 +147,10 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
       updatePositionStrategy = "optimized",
       onPlaced,
       ...contentProps
-    }: PopperContentProps,
+    }: FloatingContentProps,
     forwardedRef,
   ) => {
-    const context = usePopperContext();
+    const context = useFloatingContext();
 
     const [content, setContent] = useState<HTMLDivElement | null>(null);
     const mergeRefs = useMergeRefs(forwardedRef, (node) => setContent(node));
@@ -226,19 +227,19 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
                * Allows styling and animations based on the available space.
                */
               contentStyle.setProperty(
-                "--ac-popper-available-width",
+                "--ac-floating-available-width",
                 `${availableWidth}px`,
               );
               contentStyle.setProperty(
-                "--ac-popper-available-height",
+                "--ac-floating-available-height",
                 `${availableHeight}px`,
               );
               contentStyle.setProperty(
-                "--ac-popper-anchor-width",
+                "--ac-floating-anchor-width",
                 `${anchorWidth}px`,
               );
               contentStyle.setProperty(
-                "--ac-popper-anchor-height",
+                "--ac-floating-anchor-height",
                 `${anchorHeight}px`,
               );
             },
@@ -270,7 +271,7 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
     return (
       <div
         ref={refs.setFloating}
-        data-aksel-popper-content-wrapper=""
+        data-aksel-floating-content-wrapper=""
         style={{
           ...floatingStyles,
           transform: isPositioned
@@ -278,7 +279,7 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
             : "translate(0, -200%)", // keep off the page when measuring
           minWidth: "max-content",
           zIndex: contentZIndex,
-          ["--ac-popper-transform-origin" as any]: [
+          ["--ac-floating-transform-origin" as any]: [
             middlewareData.transformOrigin?.x,
             middlewareData.transformOrigin?.y,
           ].join(" "),
@@ -287,7 +288,7 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
         // This attribute is necessary for both portalled and inline calculations.
         dir="ltr"
       >
-        <PopperContentProvider
+        <FloatingContentProvider
           placedSide={placedSide}
           onArrowChange={setArrow}
           arrowX={arrowX}
@@ -301,21 +302,21 @@ export const PopperContent = forwardRef<HTMLDivElement, PopperContentProps>(
             {...contentProps}
             style={{
               ...contentProps.style,
-              // if the PopperContent hasn't been placed yet (not all measurements done)
+              // if the FloatingContent hasn't been placed yet (not all measurements done)
               // we prevent animations so that users's animation don't kick in too early referring wrong sides
               animation: !isPositioned ? "none" : undefined,
               // hide the content if using the hide middleware and should be hidden
               opacity: middlewareData.hide?.referenceHidden ? 0 : undefined,
             }}
           />
-        </PopperContentProvider>
+        </FloatingContentProvider>
       </div>
     );
   },
 );
 
 /**
- * Popper Arrow
+ * Floating Arrow
  */
 
 const OPPOSITE_SIDE: Record<Side, Side> = {
@@ -325,14 +326,18 @@ const OPPOSITE_SIDE: Record<Side, Side> = {
   left: "right",
 };
 
-interface PopperArrowProps {
+interface FloatingArrowProps {
   className?: string;
   width?: number;
   height?: number;
 }
 
-export const PopperArrow = ({ width, height, className }: PopperArrowProps) => {
-  const context = usePopperContentContext();
+export const FloatingArrow = ({
+  width,
+  height,
+  className,
+}: FloatingArrowProps) => {
+  const context = useFloatingContentContext();
 
   const side = OPPOSITE_SIDE[context.placedSide];
 
@@ -374,7 +379,7 @@ export const PopperArrow = ({ width, height, className }: PopperArrowProps) => {
 };
 
 /**
- * `transformOrigin` is a custom middleware for floating-ui that calculates the transform origin of the popper-element.
+ * `transformOrigin` is a custom middleware for floating-ui that calculates the transform origin of the floating-element.
  */
 function transformOrigin(options: {
   arrowWidth: number;
