@@ -18,9 +18,12 @@ export const Styled = () => {
         </Floating.Anchor>
 
         {open && (
-          <Floating.Content className="content" sideOffset={5}>
+          <Floating.Content
+            className="content"
+            sideOffset={5}
+            arrow={{ height: 20, width: 10, className: "arrow" }}
+          >
             <button onClick={() => setOpen(false)}>close</button>
-            {/* <Popper.Arrow className={arrowClass()} width={20} height={10} /> */}
           </Floating.Content>
         )}
       </Floating>
@@ -47,7 +50,7 @@ function Scrollable(props: any) {
       }
 
       .content {
-        transformOrigin: 'var(--ac-popper-transform-origin)';
+        transform-origin: var(--ac-floating-transform-origin);
         background-color: var(--a-gray-100);
         border-radius: var(--a-border-radius-large);
         width: 300px;
@@ -57,6 +60,7 @@ function Scrollable(props: any) {
       }
 
       .arrow{
+        background: transparent;
         fill: var(--a-gray-100);
       }
       `}</style>

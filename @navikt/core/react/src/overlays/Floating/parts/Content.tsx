@@ -25,6 +25,7 @@ import {
   getSideAndAlignFromPlacement,
   transformOrigin,
 } from "../Floating.utils";
+import { FloatingArrow } from "./Arrow";
 
 type Boundary = Element | null;
 
@@ -33,7 +34,6 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   sideOffset?: number;
   align?: Align;
   alignOffset?: number;
-  arrowPadding?: number;
   avoidCollisions?: boolean;
   collisionBoundary?: Boundary | Boundary[];
   collisionPadding?: number | Partial<Record<Side, number>>;
@@ -41,6 +41,12 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   hideWhenDetached?: boolean;
   updatePositionStrategy?: "optimized" | "always";
   onPlaced?: () => void;
+  arrow?: {
+    className?: string;
+    padding?: number;
+    width: number;
+    height: number;
+  };
 }
 
 /**
@@ -49,11 +55,11 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
 export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   (
     {
+      children,
       side = "bottom",
       sideOffset = 0,
       align = "center",
       alignOffset = 0,
-      arrowPadding = 0,
       avoidCollisions = true,
       collisionBoundary = [],
       collisionPadding: collisionPaddingProp = 0,
@@ -61,6 +67,7 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       hideWhenDetached = false,
       updatePositionStrategy = "optimized",
       onPlaced,
+      arrow: _arrow,
       ...contentProps
     }: FloatingContentProps,
     forwardedRef,
@@ -70,12 +77,17 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const [content, setContent] = useState<HTMLDivElement | null>(null);
     const mergeRefs = useMergeRefs(forwardedRef, (node) => setContent(node));
 
-    /**
-     * TODO: ArrowWidth and arrowHeight should (maybe) be calculated from the arrow element.
-     */
+    const arrowDefaults = {
+      padding: 0,
+      width: 0,
+      height: 0,
+      ..._arrow,
+    };
     const [arrow, setArrow] = useState<HTMLSpanElement | null>(null);
-    const arrowWidth = 0;
-    const arrowHeight = 0;
+    const arrowWidth = arrowDefaults.width;
+    const arrowHeight = arrowDefaults.height;
+
+    console.log(arrowHeight, arrowWidth);
 
     const desiredPlacement = (side +
       (align !== "center" ? "-" + align : "")) as Placement;
@@ -159,7 +171,8 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
               );
             },
           }),
-          arrow && floatingArrow({ element: arrow, padding: arrowPadding }),
+          arrow &&
+            floatingArrow({ element: arrow, padding: arrowDefaults.padding }),
           transformOrigin({ arrowWidth, arrowHeight }),
           hideWhenDetached &&
             hide({ strategy: "referenceHidden", ...detectOverflowOptions }),
@@ -223,7 +236,16 @@ export const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
               // hide the content if using the hide middleware and should be hidden
               opacity: middlewareData.hide?.referenceHidden ? 0 : undefined,
             }}
-          />
+          >
+            {children}
+            {_arrow?.height && _arrow?.width && (
+              <FloatingArrow
+                width={_arrow.width}
+                height={_arrow.height}
+                className={_arrow.className}
+              />
+            )}
+          </div>
         </FloatingContentProvider>
       </div>
     );
