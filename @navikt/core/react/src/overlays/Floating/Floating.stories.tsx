@@ -1,4 +1,5 @@
 import * as React from "react";
+import Portal from "../portal/Portal";
 import Floating from "./Floating";
 
 export default {
@@ -25,6 +26,31 @@ export const StyledFloatingElement = () => {
           >
             <button onClick={() => setOpen(false)}>close</button>
           </Floating.Content>
+        )}
+      </Floating>
+    </Scrollable>
+  );
+};
+
+export const WithPortal = () => {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <Scrollable>
+      <Floating>
+        <Floating.Anchor className="anchor" onClick={() => setOpen(true)}>
+          open
+        </Floating.Anchor>
+
+        {open && (
+          <Portal asChild>
+            <Floating.Content
+              className="content"
+              sideOffset={5}
+              arrow={{ height: 10, width: 10, className: "arrow" }}
+            >
+              <button onClick={() => setOpen(false)}>close</button>
+            </Floating.Content>
+          </Portal>
         )}
       </Floating>
     </Scrollable>
