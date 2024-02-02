@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.17.4
+
+### Patch Changes
+
+- Bleed: `marginInline='full'` og `reflectivePadding` kan nå brukes sammen. ([#2695](https://github.com/navikt/aksel/pull/2695))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.4
+  - @navikt/aksel-icons@5.17.4
+
 ## 5.17.3
 
 ### Patch Changes
