@@ -1,5 +1,4 @@
 import {
-  FloatingPortal,
   autoUpdate,
   arrow as flArrow,
   flip,
@@ -21,7 +20,7 @@ import React, {
   useRef,
 } from "react";
 import { ModalContext } from "../modal/ModalContext";
-import { useProvider } from "../provider";
+import Portal from "../overlays/portal/Portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -123,10 +122,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const modalContext = useContext(ModalContext);
-    const providerRootElement = useProvider()?.rootElement;
-    const rootElement = modalContext
-      ? modalContext.ref.current
-      : providerRootElement;
+    const rootElement = modalContext ? modalContext.ref.current : undefined;
 
     const {
       x,
@@ -199,7 +195,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               : children?.props["aria-describedby"],
           }),
         )}
-        <FloatingPortal root={rootElement}>
+        <Portal rootElement={rootElement}>
           {_open && (
             <div
               {...getFloatingProps({
@@ -253,7 +249,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               )}
             </div>
           )}
-        </FloatingPortal>
+        </Portal>
       </>
     );
   },
