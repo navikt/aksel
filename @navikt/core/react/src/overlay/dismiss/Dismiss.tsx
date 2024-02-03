@@ -5,6 +5,7 @@ import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { useEscapeKeydown } from "./useEscapeKeydown";
 import { useFocusOutside } from "./useFocusOutside";
+import { usePointerDownOutside } from "./usePointerDownOutside";
 
 interface DismissableLayerProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ interface DismissableLayerProps extends HTMLAttributes<HTMLDivElement> {
    */
   onDismiss?: () => void;
   /**
-   *
+   * Renders the `DismissableLayer` as a child of the `Slot` component.
    */
   asChild?: boolean;
 }
@@ -51,16 +52,19 @@ const [
   useDescendantsContext,
   useDescendants,
   useDescendant,
-] = createDescendantContext<HTMLDivElement, { value?: string }>();
+] = createDescendantContext<
+  HTMLDivElement,
+  { disableOutsidePointerEvents: boolean }
+>();
 
 const DismissableLayerImpl = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (
     {
       children,
       asChild,
-      /* disableOutsidePointerEvents, */
+      disableOutsidePointerEvents = false,
       onEscapeKeyDown,
-      /* onPointerDownOutside, */
+      onPointerDownOutside,
       onFocusOutside,
       onInteractOutside,
       onDismiss,
@@ -69,12 +73,41 @@ const DismissableLayerImpl = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }: DismissableLayerProps,
     ref,
   ) => {
-    const { register, index, descendants } = useDescendant();
+    const { register, index, descendants } = useDescendant({
+      disableOutsidePointerEvents,
+    });
 
     const [node, setNode] = useState<HTMLDivElement | null>(null);
     const ownerDocument = node?.ownerDocument ?? globalThis?.document;
 
     const mergedRefs = useMergeRefs(ref, (_node) => setNode(_node), register);
+
+    /* const isPointerEventsEnabled = index >= highestLayerWithOutsidePointerEventsDisabledIndex; */
+
+    const pointerDownOutside = usePointerDownOutside((event) => {
+      let lastIndex = -1;
+
+      descendants.values().forEach((obj, _index) => {
+        if (obj.disableOutsidePointerEvents) {
+          lastIndex = _index;
+        }
+      });
+
+      /**
+       * Makes sure we stop event at the highest layer with pointer events disabled.
+       * If not checked, we risk closing every layer when clicking outside.
+       */
+      const isPointerEventsEnabled = index > lastIndex;
+      if (!isPointerEventsEnabled) {
+        return;
+      }
+
+      onPointerDownOutside?.(event);
+      onInteractOutside?.(event);
+      if (!event.defaultPrevented && onDismiss) {
+        onDismiss();
+      }
+    }, ownerDocument);
 
     const focusOutside = useFocusOutside((event) => {
       onFocusOutside?.(event);
@@ -89,7 +122,9 @@ const DismissableLayerImpl = forwardRef<HTMLDivElement, DismissableLayerProps>(
        * Most nested element will always be last in the descendants list.
        */
       const isHighestLayer = index === descendants.count() - 1;
-      if (!isHighestLayer) return;
+      if (!isHighestLayer) {
+        return;
+      }
 
       onEscapeKeyDown?.(event);
       if (!event.defaultPrevented && onDismiss) {
@@ -110,6 +145,10 @@ const DismissableLayerImpl = forwardRef<HTMLDivElement, DismissableLayerProps>(
         onBlurCapture={composeEventHandlers(
           rest.onBlurCapture,
           focusOutside.onBlurCapture,
+        )}
+        onPointerDownCapture={composeEventHandlers(
+          rest.onPointerDownCapture,
+          pointerDownOutside.onPointerDownCapture,
         )}
       >
         {children}

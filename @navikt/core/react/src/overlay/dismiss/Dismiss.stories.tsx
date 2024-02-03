@@ -135,7 +135,7 @@ export const Nested = () => {
   return (
     <div style={{ fontFamily: "sans-serif", textAlign: "center" }}>
       <h1>DismissableLayer (nested)</h1>
-      <DismissableBox />
+      <DismissableBox index={0} />
     </div>
   );
 };
@@ -150,6 +150,7 @@ function DismissableBox(props) {
       onEscapeKeyDown={() => {
         console.log("Escape key down");
       }}
+      disableOutsidePointerEvents={props.index % 3 === 0}
       style={{
         display: "inline-block",
         verticalAlign: "middle",
@@ -172,6 +173,7 @@ function DismissableBox(props) {
 
       {open ? (
         <DismissableBox
+          index={props.index + 1}
           onPointerDownOutside={(event) => {
             if (event.target === openButtonRef.current) {
               event.preventDefault();
