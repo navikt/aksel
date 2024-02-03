@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import DismissableLayer from "./Dismiss";
+import DismissableLayer from "./DismissableLayer";
 
 export default {
-  title: "Utilities/Dismiss",
+  title: "Utilities/DismissableLayer",
   parameters: {
     chromatic: { disable: true },
   },
