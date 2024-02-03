@@ -15,6 +15,7 @@ export interface CreateContextOptions<T> {
   errorMessage?: string;
   name?: string;
   defaultValue?: T;
+  strict?: boolean;
 }
 
 type ProviderProps<T> = T & { children: React.ReactNode };
@@ -35,6 +36,7 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
     providerName = "Provider",
     errorMessage,
     defaultValue,
+    strict = true,
   } = options;
 
   const Context = createReactContext<T | undefined>(defaultValue);
@@ -49,7 +51,7 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
   function useContext() {
     const context = useReactContext(Context);
 
-    if (!context) {
+    if (!context && strict) {
       const error = new Error(
         errorMessage ?? getErrorMessage(hookName, providerName),
       );
