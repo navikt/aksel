@@ -46,18 +46,6 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   const hasPointerDownOutsideRef = useRef(false);
 
   /**
-   * In cases where the element is opened by a trigger, often when using Popover or Tooltip.
-   * We want to avoid closing the element when interacting with the trigger itself.
-   *
-   * This is done by checking if the event target is the trigger itself or a child of the trigger.
-   * If so, we prevent the default behavior of the event.
-   *
-   * Since `pointerDownOutside` and `focusOutside` both check internally if the event-target is `node`/ withing `node` by default
-   * we should in theory only need to check anchor-element, but since we don't add `tabIndex` to the Popover/Tooltip-element
-   * the `focusOutside`-handler does not handle focus-events correctly. So we need to check both `anchor` and `dismissable`-element are not interacted with.
-   */
-
-  /**
    * Handles the case where a DismissableLayer outside a Popover or Tooltip is open.
    * We want to prevent the DismissableLayer from closing when the trigger or anchor element itself, or its child elements are interacted with.
    *
@@ -173,7 +161,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
   useEscapeKeydown((event) => {
     /**
-     * The more nested element will always be last in the descendants list.
+     * The deepest nested element will always be last in the descendants list.
      * This allows us to only close the highest layer when pressing escape.
      */
     const isHighestLayer = index === descendants.count() - 1;

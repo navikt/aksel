@@ -94,7 +94,7 @@ export const Default = () => {
               dismissOnPointerDownOutside === false ||
               event.target === openButtonRef.current
             ) {
-              event.preventDefault();
+              /* event.preventDefault(); */
             }
           }}
           onFocusOutside={(event) => {

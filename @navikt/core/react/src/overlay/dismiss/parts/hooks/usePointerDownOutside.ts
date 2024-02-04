@@ -7,6 +7,7 @@ import { CUSTOM_EVENTS, dispatchCustomEvent } from "./dispatchCustomEvent";
  * Listens for `pointerdown` outside a react subtree. We use `pointerdown` rather than `pointerup`
  * to mimic layer dismissing behaviour present in OS.
  * Returns props to pass to the node we want to check for outside events.
+ * By checking `isPointerInsideReactTreeRef` we can determine if the event happened outside the subtree of the node, saving some element-comparisons.
  */
 export function usePointerDownOutside(
   callback?: (event: CustomPointerDownEvent) => void,
@@ -18,6 +19,17 @@ export function usePointerDownOutside(
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
+      /**
+       * The `DismisableLayer`-API is based on the ability to stop events from propagating and in the end calling `onDismiss`
+       * if `usePointerDownOutside` runs `event.preventDefault()`.
+       *
+       * Altrough `pointerdown` is already a cancelable event,
+       * to to make sure the batching of events works corretly with `focusIn` in `useFocusOutside`,
+       * we still use a custom event like in `useFocusOutside`.
+       *
+       * Since pointer-events are `discrete` events in React: https://github.com/facebook/react/blob/a8a4742f1c54493df00da648a3f9d26e3db9c8b5/packages/react-dom/src/events/ReactDOMEventListener.js#L318
+       * we need to to use flushSync to ensure that the event is dispatched before the next event is raised.
+       */
       function dispatchPointerEvent() {
         dispatchCustomEvent(
           CUSTOM_EVENTS.POINTER_DOWN_OUTSIDE,
@@ -44,13 +56,12 @@ export function usePointerDownOutside(
         }
       } else {
         // We need to remove the event listener in case the outside click has been canceled.
-        // See: https://github.com/radix-ui/primitives/issues/2171
         ownerDocument.removeEventListener("click", handleClickRef.current);
       }
       isPointerInsideReactTreeRef.current = false;
     };
     /**
-     * if this hook executes in a component that mounts via a `pointerdown` event, the event
+     * If this hook executes in a component that mounts via a `pointerdown` event, the event
      * would bubble up to the document and trigger a `pointerDownOutside` event. We avoid
      * this by delaying the event listener registration on the document.
      * This is not React specific, but rather how the DOM works, ie:
