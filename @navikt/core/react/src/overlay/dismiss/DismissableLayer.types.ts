@@ -40,6 +40,16 @@ interface DismissableLayerBaseProps extends HTMLAttributes<HTMLDivElement> {
    * Handler called when the `DismissableLayer` should be dismissed
    */
   onDismiss?: () => void;
+  /**
+   * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
+   * @note safeZone.dismissable is only needed when its element does not have a `tabIndex`
+   * since it will not receive focus-events.
+   * TODO: Review if we can add tabIndex back to floating-elements.
+   */
+  safeZone?: {
+    anchor?: Element | null;
+    dismissable?: Element | null;
+  };
 }
 
 export type DismissableLayerProps = WithAsChild<DismissableLayerBaseProps>;

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Slot } from "../../../util/Slot";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
@@ -19,7 +19,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       onFocusOutside,
       onInteractOutside,
       onDismiss,
-
+      safeZone,
       ...rest
     }: DismissableLayerProps,
     ref,
@@ -33,7 +33,51 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
     const mergedRefs = useMergeRefs(ref, (_node) => setNode(_node), register);
 
-    /* const isPointerEventsEnabled = index >= highestLayerWithOutsidePointerEventsDisabledIndex; */
+    const hasInteractedOutsideRef = useRef(false);
+    const hasPointerDownOutsideRef = useRef(false);
+
+    function handleOutsideEvent(event) {
+      if (!safeZone?.anchor && !safeZone?.dismissable) {
+        return;
+      }
+
+      if (!event.defaultPrevented) {
+        hasInteractedOutsideRef.current = true;
+        if (event.detail.originalEvent.type === "pointerdown") {
+          hasPointerDownOutsideRef.current = true;
+        }
+      }
+
+      const target = event.target as HTMLElement;
+
+      if (event.detail.originalEvent.type === "pointerdown") {
+        const targetIsTrigger =
+          safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
+        if (targetIsTrigger) {
+          event.preventDefault();
+        }
+      } else {
+        const targetIsNotTrigger =
+          target instanceof HTMLElement &&
+          ![safeZone?.anchor, safeZone?.dismissable].some(
+            (element) => element?.contains(target as Node),
+          ) &&
+          !target.contains(safeZone?.dismissable ?? null);
+
+        if (!targetIsNotTrigger) {
+          event.preventDefault();
+        }
+      }
+
+      if (
+        event.detail.originalEvent.type === "focusin" &&
+        hasPointerDownOutsideRef.current
+      ) {
+        event.preventDefault();
+      }
+      hasPointerDownOutsideRef.current = false;
+      hasInteractedOutsideRef.current = false;
+    }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
       let lastIndex = -1;
@@ -55,6 +99,8 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
       onPointerDownOutside?.(event);
       onInteractOutside?.(event);
+
+      safeZone && handleOutsideEvent(event);
       if (!event.defaultPrevented && onDismiss) {
         console.log("not dismissed pointerdown", event.defaultPrevented);
         onDismiss();
@@ -65,6 +111,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       onFocusOutside?.(event);
       onInteractOutside?.(event);
 
+      safeZone && handleOutsideEvent(event);
       if (!event.defaultPrevented && onDismiss) {
         console.log("not dismissed focusOutside", event.defaultPrevented);
         onDismiss();
