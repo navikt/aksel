@@ -9,6 +9,10 @@ const DismissableLayer: React.FC<DismissableLayerProps> = (
 ) => {
   const context = useDescendantsContext();
 
+  /**
+   * To correctly handle nested DismissableLayer,
+   * we make sure to only initialize `Descendants` API for the root layer.
+   */
   return context ? (
     <DismissableLayerNode {...props} />
   ) : (

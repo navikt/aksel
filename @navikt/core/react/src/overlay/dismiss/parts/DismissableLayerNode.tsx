@@ -2,7 +2,11 @@ import React, { useRef, useState } from "react";
 import { Slot } from "../../../util/Slot";
 import { useMergeRefs } from "../../../util/hooks";
 import { useDescendant } from "../DismissableLayer.context";
-import { DismissableLayerProps } from "../DismissableLayer.types";
+import {
+  CustomFocusEvent,
+  CustomPointerDownEvent,
+  DismissableLayerProps,
+} from "../DismissableLayer.types";
 import { useEscapeKeydown } from "./hooks/useEscapeKeydown";
 import { useFocusOutside } from "./hooks/useFocusOutside";
 import { usePointerDownOutside } from "./hooks/usePointerDownOutside";
@@ -23,7 +27,17 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     disableOutsidePointerEvents,
   });
 
+  /**
+   * `node` will be set to the ref of the component or nested component
+   * Ex: If `<DismissableLayer asChild>` is used around the Popover-element,
+   * `node` will be set to the Popover-element.
+   */
   const [node, setNode] = useState<HTMLDivElement | null>(null);
+
+  /**
+   * In some cases the `node.ownerDocument` can differ from global document.
+   * This can happend when portaling elements or using web-components
+   */
   const ownerDocument = node?.ownerDocument ?? globalThis?.document;
 
   const mergedRefs = useMergeRefs((_node) => setNode(_node), register);
@@ -31,7 +45,31 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   const hasInteractedOutsideRef = useRef(false);
   const hasPointerDownOutsideRef = useRef(false);
 
-  function handleOutsideEvent(event) {
+  /**
+   * In cases where the element is opened by a trigger, often when using Popover or Tooltip.
+   * We want to avoid closing the element when interacting with the trigger itself.
+   *
+   * This is done by checking if the event target is the trigger itself or a child of the trigger.
+   * If so, we prevent the default behavior of the event.
+   *
+   * Since `pointerDownOutside` and `focusOutside` both check internally if the event-target is `node`/ withing `node` by default
+   * we should in theory only need to check anchor-element, but since we don't add `tabIndex` to the Popover/Tooltip-element
+   * the `focusOutside`-handler does not handle focus-events correctly. So we need to check both `anchor` and `dismissable`-element are not interacted with.
+   */
+
+  /**
+   * Handles the case where a DismissableLayer outside a Popover or Tooltip is open.
+   * We want to prevent the DismissableLayer from closing when the trigger or anchor element itself, or its child elements are interacted with.
+   *
+   * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent the default event behavior.
+   *
+   * The `pointerDownOutside` and `focusOutside` handlers already check if the event target is within the DismissableLayer (`node`).
+   * However, since we don't add a `tabIndex` to the Popover/Tooltip, the `focusOutside` handler doesn't correctly handle focus events.
+   * Therefore, we also need to check that neither the trigger (`anchor`) nor the DismissableLayer (`dismissable`) are the event targets.
+   */
+  function handleOutsideEvent(
+    event: CustomFocusEvent | CustomPointerDownEvent,
+  ) {
     if (!safeZone?.anchor && !safeZone?.dismissable) {
       return;
     }
@@ -45,12 +83,14 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
     const target = event.target as HTMLElement;
 
+    /**
+     * pointerdown-events works as expected, but focus-events does not.
+     * For focus-event we need to also check `safeZone.dismissable` (the Popover/Tooltip itself) since it does not have a tabIndex.
+     */
     if (event.detail.originalEvent.type === "pointerdown") {
       const targetIsTrigger =
         safeZone?.anchor?.contains(target) || target === safeZone?.anchor;
-      if (targetIsTrigger) {
-        event.preventDefault();
-      }
+      targetIsTrigger && event.preventDefault();
     } else {
       const targetIsNotTrigger =
         target instanceof HTMLElement &&
@@ -59,11 +99,17 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
         ) &&
         !target.contains(safeZone?.dismissable ?? null);
 
-      if (!targetIsNotTrigger) {
-        event.preventDefault();
-      }
+      !targetIsNotTrigger && event.preventDefault();
     }
 
+    /**
+     * In Safari, if the trigger element is inside a container with tabIndex={0}, a click on the trigger
+     * will first fire a 'pointerdownoutside' event on the trigger itself. However, it will then fire a
+     * 'focusoutside' event on the container.
+     *
+     * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
+     * This is because the 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+     */
     if (
       event.detail.originalEvent.type === "focusin" &&
       hasPointerDownOutsideRef.current
@@ -85,9 +131,9 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
     /**
      * Makes sure we stop event at the highest layer with pointer events disabled.
-     * If not checked, we risk closing every layer when clicking outside.
+     * If not checked, we risk closing every layer when clicking outside the layer.
      */
-    const isPointerEventsEnabled = index > lastIndex;
+    const isPointerEventsEnabled = index >= lastIndex;
     if (!isPointerEventsEnabled) {
       return;
     }
@@ -95,7 +141,14 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     onPointerDownOutside?.(event);
     onInteractOutside?.(event);
 
+    /**
+     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+     */
     safeZone && handleOutsideEvent(event);
+
+    /**
+     * Both `onPointerDownOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
+     */
     if (!event.defaultPrevented && onDismiss) {
       onDismiss();
     }
@@ -105,7 +158,14 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     onFocusOutside?.(event);
     onInteractOutside?.(event);
 
+    /**
+     * Add safeZone to prevent closing when interacting with trigger/anchor or its children.
+     */
     safeZone && handleOutsideEvent(event);
+
+    /**
+     * Both `onFocusOutside` and `onInteractOutside` are able to preventDefault the event, thus stopping call for `onDismiss`.
+     */
     if (!event.defaultPrevented && onDismiss) {
       onDismiss();
     }
@@ -113,7 +173,8 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
   useEscapeKeydown((event) => {
     /**
-     * Most nested element will always be last in the descendants list.
+     * The more nested element will always be last in the descendants list.
+     * This allows us to only close the highest layer when pressing escape.
      */
     const isHighestLayer = index === descendants.count() - 1;
     if (!isHighestLayer) {
@@ -121,6 +182,10 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     }
 
     onEscapeKeyDown?.(event);
+    /**
+     * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
+     * We want to `preventDefault` the escape-event to avoid sideeffect from other elements on screen
+     */
     if (!event.defaultPrevented && onDismiss) {
       event.preventDefault();
       onDismiss();
@@ -128,6 +193,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }, ownerDocument);
 
   const Comp = asChild ? Slot : "div";
+
   return (
     <Comp
       ref={mergedRefs}
