@@ -102,7 +102,6 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
       safeZone && handleOutsideEvent(event);
       if (!event.defaultPrevented && onDismiss) {
-        console.log("not dismissed pointerdown", event.defaultPrevented);
         onDismiss();
       }
     }, ownerDocument);
@@ -113,7 +112,6 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
       safeZone && handleOutsideEvent(event);
       if (!event.defaultPrevented && onDismiss) {
-        console.log("not dismissed focusOutside", event.defaultPrevented);
         onDismiss();
       }
     }, ownerDocument);

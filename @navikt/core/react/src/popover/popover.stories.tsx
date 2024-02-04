@@ -54,14 +54,7 @@ export const Default = () => {
       <Button ref={setAnchorEl} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={() => {
-          console.log("onClose default");
-          setOpen(false);
-        }}
-      >
+      <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
         <Popover.Content>
           Velit in consequat <button>testknapp</button>
         </Popover.Content>
