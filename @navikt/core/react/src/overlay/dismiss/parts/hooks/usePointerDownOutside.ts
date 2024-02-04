@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../../util/hooks";
+import { CustomPointerDownEvent } from "../../DismissableLayer.types";
+import { CUSTOM_EVENTS, dispatchCustomEvent } from "./dispatchCustomEvent";
 
 /**
  * Listens for `pointerdown` outside a react subtree. We use `pointerdown` rather than `pointerup`
@@ -7,7 +9,7 @@ import { useCallbackRef } from "../../../../util/hooks";
  * Returns props to pass to the node we want to check for outside events.
  */
 export function usePointerDownOutside(
-  callback?: (event: PointerEvent) => void,
+  callback?: (event: CustomPointerDownEvent) => void,
   ownerDocument: Document = globalThis?.document,
 ) {
   const handlePointerDownOutside = useCallbackRef(callback) as EventListener;
@@ -16,6 +18,15 @@ export function usePointerDownOutside(
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
+      function dispatchPointerEvent() {
+        dispatchCustomEvent(
+          CUSTOM_EVENTS.POINTER_DOWN_OUTSIDE,
+          handlePointerDownOutside,
+          { originalEvent: event },
+          { discrete: true },
+        );
+      }
+
       if (event.target && !isPointerInsideReactTreeRef.current) {
         /**
          * On touch devices, we delay reactivating pointer-events to account for the browser's delay in executing events after touch ends.
@@ -24,12 +35,12 @@ export function usePointerDownOutside(
          */
         if (event.pointerType === "touch") {
           ownerDocument.removeEventListener("click", handleClickRef.current);
-          handleClickRef.current = handlePointerDownOutside;
+          handleClickRef.current = dispatchPointerEvent;
           ownerDocument.addEventListener("click", handleClickRef.current, {
             once: true,
           });
         } else {
-          handlePointerDownOutside(event);
+          dispatchPointerEvent();
         }
       } else {
         // We need to remove the event listener in case the outside click has been canceled.

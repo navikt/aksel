@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../../util/hooks";
+import { CustomFocusEvent } from "../../DismissableLayer.types";
+import { CUSTOM_EVENTS, dispatchCustomEvent } from "./dispatchCustomEvent";
 
 /**
  * Tracks focus outside a React subtree. Returns props for the subtree root.
  */
 export function useFocusOutside(
-  callback?: (event: FocusEvent) => void,
+  callback?: (event: CustomFocusEvent) => void,
   ownerDocument: Document = globalThis?.document,
 ) {
   const handleFocusOutside = useCallbackRef(callback) as EventListener;
@@ -14,10 +16,16 @@ export function useFocusOutside(
   useEffect(() => {
     const handleFocus = (event: FocusEvent) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
-        handleFocusOutside(event);
+        const eventDetail = { originalEvent: event };
+
+        dispatchCustomEvent(
+          CUSTOM_EVENTS.FOCUS_OUTSIDE,
+          handleFocusOutside,
+          eventDetail,
+        );
       }
     };
-    ownerDocument.addEventListener("focusin", handleFocus);
+    ownerDocument.addEventListener("focusin", handleFocus, {});
     return () => ownerDocument.removeEventListener("focusin", handleFocus);
   }, [ownerDocument, handleFocusOutside]);
 

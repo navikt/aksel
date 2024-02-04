@@ -56,6 +56,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       onPointerDownOutside?.(event);
       onInteractOutside?.(event);
       if (!event.defaultPrevented && onDismiss) {
+        console.log("not dismissed pointerdown", event.defaultPrevented);
         onDismiss();
       }
     }, ownerDocument);
@@ -63,7 +64,9 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const focusOutside = useFocusOutside((event) => {
       onFocusOutside?.(event);
       onInteractOutside?.(event);
+
       if (!event.defaultPrevented && onDismiss) {
+        console.log("not dismissed focusOutside", event.defaultPrevented);
         onDismiss();
       }
     }, ownerDocument);

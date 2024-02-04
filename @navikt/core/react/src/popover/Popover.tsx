@@ -4,10 +4,7 @@ import {
   offset as flOffset,
   flip,
   shift,
-  useClick,
-  useDismiss,
   useFloating,
-  useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, {
@@ -19,6 +16,7 @@ import React, {
 } from "react";
 import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
+import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { useClientLayoutEffect, useEventListener } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -131,20 +129,23 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
 
+    const hasInteractedOutsideRef = useRef(false);
+    const hasPointerDownOutsideRef = useRef(false);
+
     const {
-      x,
-      y,
-      strategy,
-      context,
       update,
       refs,
       placement: flPlacement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      floatingStyles,
     } = useFloating({
       strategy: chosenStrategy,
       placement,
       open,
-      onOpenChange: () => onClose(),
+      onOpenChange: () => {
+        console.log("onOpenChange");
+        onClose();
+      },
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
         chosenFlip &&
@@ -153,11 +154,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         flArrow({ element: arrowRef, padding: 8 }),
       ],
     });
-
-    const { getFloatingProps } = useInteractions([
-      useClick(context),
-      useDismiss(context),
-    ]);
 
     useClientLayoutEffect(() => {
       refs.setReference(anchorEl);
@@ -186,7 +182,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             ) &&
             !e.target.contains(refs.floating.current)
           ) {
-            open && onClose();
+            console.log("focusin custom");
+            /* open && onClose(); */
           }
         },
         [anchorEl, refs, open, onClose],
@@ -201,38 +198,77 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }[flPlacement.split("-")[0]];
 
     return (
-      <div
-        className={cl("navds-popover", className, {
-          "navds-popover--hidden": !open || !anchorEl,
-        })}
-        data-placement={flPlacement}
-        aria-hidden={!open || !anchorEl}
-        {...getFloatingProps({
-          ref: floatingRef,
-          style: {
-            position: strategy,
-            top: y ?? 0,
-            left: x ?? 0,
-          },
-          tabIndex: undefined,
-        })}
-        {...rest}
+      <DismissableLayer
+        asChild
+        onInteractOutside={(event) => {
+          if (!event.defaultPrevented) {
+            hasInteractedOutsideRef.current = true;
+            if (event.detail.originalEvent.type === "pointerdown") {
+              hasPointerDownOutsideRef.current = true;
+            }
+          }
+
+          // Prevent dismissing when clicking the trigger.
+          // As the trigger is already setup to close, without doing so would
+          // cause it to close and immediately open.
+          const target = event.target as HTMLElement;
+
+          const targetIsTrigger =
+            target instanceof HTMLElement &&
+            ![anchorEl, refs.floating.current].some(
+              (element) => element?.contains(target as Node),
+            ) &&
+            !target.contains(refs.floating.current);
+
+          if (targetIsTrigger) {
+            event.preventDefault();
+          }
+
+          // On Safari if the trigger is inside a container with tabIndex={0}, when clicked
+          // we will get the pointer down outside event on the trigger, but then a subsequent
+          // focus outside event on the container, we ignore any focus outside event when we've
+          // already had a pointer down outside event.
+          if (
+            event.detail.originalEvent.type === "focusin" &&
+            hasPointerDownOutsideRef.current
+          ) {
+            event.preventDefault();
+          }
+          hasPointerDownOutsideRef.current = false;
+          hasInteractedOutsideRef.current = false;
+        }}
+        onDismiss={() => {
+          console.log("dismiss");
+          /* onClose?.(); */
+        }}
       >
-        {children}
-        {arrow && (
-          <div
-            ref={(node) => {
-              arrowRef.current = node;
-            }}
-            style={{
-              ...(arrowX != null ? { left: arrowX } : {}),
-              ...(arrowY != null ? { top: arrowY } : {}),
-              ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-            }}
-            className="navds-popover__arrow"
-          />
-        )}
-      </div>
+        <div
+          ref={floatingRef}
+          {...rest}
+          className={cl("navds-popover", className, {
+            "navds-popover--hidden": !open || !anchorEl,
+          })}
+          style={{ ...rest.style, ...floatingStyles }}
+          data-placement={flPlacement}
+          aria-hidden={!open || !anchorEl}
+          /* tabIndex={-1} */
+        >
+          {children}
+          {arrow && (
+            <div
+              ref={(node) => {
+                arrowRef.current = node;
+              }}
+              style={{
+                ...(arrowX != null ? { left: arrowX } : {}),
+                ...(arrowY != null ? { top: arrowY } : {}),
+                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+              }}
+              className="navds-popover__arrow"
+            />
+          )}
+        </div>
+      </DismissableLayer>
     );
   },
 ) as PopoverComponent;
