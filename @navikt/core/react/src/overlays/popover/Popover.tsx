@@ -123,3 +123,30 @@ export const PopoverTrigger = (props: PopoverTriggerProps) => {
     <Floating.Anchor asChild>{trigger}</Floating.Anchor>
   );
 };
+
+/**
+ * Content
+ */
+
+interface PopoverContentProps {
+  /**
+   * Used to force mounting when more control is needed. Useful when
+   * controlling animation with React animation libraries.
+   */
+  forceMount?: true;
+}
+
+export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
+  (props: PopoverContentProps, ref) => {
+    const context = usePopoverContext();
+    console.log(props);
+    /**
+     * We avoid rendering the content when the popover is closed
+     */
+    if (!context.open) {
+      return null;
+    }
+
+    return <div ref={ref}>abc</div>;
+  },
+);
