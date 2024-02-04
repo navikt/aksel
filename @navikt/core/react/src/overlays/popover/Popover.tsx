@@ -1,10 +1,12 @@
 import React, {
   ButtonHTMLAttributes,
   ComponentPropsWithoutRef,
+  HTMLAttributes,
   forwardRef,
   useCallback,
   useEffect,
 } from "react";
+import DismissableLayer from "../../overlay/dismiss/DismissableLayer";
 import { useId } from "../../util";
 import { Slot } from "../../util/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -128,18 +130,12 @@ export const PopoverTrigger = (props: PopoverTriggerProps) => {
  * Content
  */
 
-interface PopoverContentProps {
-  /**
-   * Used to force mounting when more control is needed. Useful when
-   * controlling animation with React animation libraries.
-   */
-  forceMount?: true;
-}
+interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
-  (props: PopoverContentProps, ref) => {
+  ({ ...rest }: PopoverContentProps, ref) => {
     const context = usePopoverContext();
-    console.log(props);
+
     /**
      * We avoid rendering the content when the popover is closed
      */
@@ -147,6 +143,27 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
       return null;
     }
 
-    return <div ref={ref}>abc</div>;
+    return (
+      <DismissableLayer
+        asChild
+        disableOutsidePointerEvents={false}
+        safeZone={{ anchor: context.triggerRef.current }}
+        onDismiss={() => context.onOpenChange(false)}
+      >
+        <Floating.Content
+          ref={ref}
+          data-state={context.open ? "open" : "closed"}
+          role="dialog"
+          id={context.contentId}
+          {...rest}
+        />
+      </DismissableLayer>
+    );
   },
 );
+
+Popover.Anchor = PopoverAnchor;
+Popover.Trigger = PopoverTrigger;
+Popover.Content = PopoverContent;
+
+export default Popover;
