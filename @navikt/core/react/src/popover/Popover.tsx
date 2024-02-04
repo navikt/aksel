@@ -4,22 +4,14 @@ import {
   offset as flOffset,
   flip,
   shift,
-  useClick,
-  useDismiss,
   useFloating,
-  useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  HTMLAttributes,
-  forwardRef,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
+import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
 import { DateContext } from "../date/context";
 import { ModalContext } from "../modal/ModalContext";
-import { useClientLayoutEffect, useEventListener } from "../util/hooks";
+import DismissableLayer from "../overlay/dismiss/DismissableLayer";
+import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
@@ -132,19 +124,15 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const chosenFlip = isInDatepicker ? false : _flip;
 
     const {
-      x,
-      y,
-      strategy,
-      context,
       update,
       refs,
       placement: flPlacement,
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      floatingStyles,
     } = useFloating({
       strategy: chosenStrategy,
       placement,
       open,
-      onOpenChange: () => onClose(),
       middleware: [
         flOffset(offset ?? (arrow ? 16 : 4)),
         chosenFlip &&
@@ -153,11 +141,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         flArrow({ element: arrowRef, padding: 8 }),
       ],
     });
-
-    const { getFloatingProps } = useInteractions([
-      useClick(context),
-      useDismiss(context),
-    ]);
 
     useClientLayoutEffect(() => {
       refs.setReference(anchorEl);
@@ -175,24 +158,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return () => cleanup();
     }, [refs.floating, refs.reference, update, open, anchorEl]);
 
-    useEventListener(
-      "focusin",
-      useCallback(
-        (e: FocusEvent) => {
-          if (
-            e.target instanceof HTMLElement &&
-            ![anchorEl, refs.floating.current].some(
-              (element) => element?.contains(e.target as Node),
-            ) &&
-            !e.target.contains(refs.floating.current)
-          ) {
-            open && onClose();
-          }
-        },
-        [anchorEl, refs, open, onClose],
-      ),
-    );
-
     const staticSide = {
       top: "bottom",
       right: "left",
@@ -201,38 +166,40 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }[flPlacement.split("-")[0]];
 
     return (
-      <div
-        className={cl("navds-popover", className, {
-          "navds-popover--hidden": !open || !anchorEl,
-        })}
-        data-placement={flPlacement}
-        aria-hidden={!open || !anchorEl}
-        {...getFloatingProps({
-          ref: floatingRef,
-          style: {
-            position: strategy,
-            top: y ?? 0,
-            left: x ?? 0,
-          },
-          tabIndex: undefined,
-        })}
-        {...rest}
+      <DismissableLayer
+        asChild
+        safeZone={{
+          anchor: anchorEl,
+          dismissable: refs.floating.current,
+        }}
+        onDismiss={() => onClose?.()}
       >
-        {children}
-        {arrow && (
-          <div
-            ref={(node) => {
-              arrowRef.current = node;
-            }}
-            style={{
-              ...(arrowX != null ? { left: arrowX } : {}),
-              ...(arrowY != null ? { top: arrowY } : {}),
-              ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-            }}
-            className="navds-popover__arrow"
-          />
-        )}
-      </div>
+        <div
+          ref={floatingRef}
+          {...rest}
+          className={cl("navds-popover", className, {
+            "navds-popover--hidden": !open || !anchorEl,
+          })}
+          style={{ ...rest.style, ...floatingStyles }}
+          data-placement={flPlacement}
+          aria-hidden={!open || !anchorEl}
+        >
+          {children}
+          {arrow && (
+            <div
+              ref={(node) => {
+                arrowRef.current = node;
+              }}
+              style={{
+                ...(arrowX != null ? { left: arrowX } : {}),
+                ...(arrowY != null ? { top: arrowY } : {}),
+                ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+              }}
+              className="navds-popover__arrow"
+            />
+          )}
+        </div>
+      </DismissableLayer>
     );
   },
 ) as PopoverComponent;

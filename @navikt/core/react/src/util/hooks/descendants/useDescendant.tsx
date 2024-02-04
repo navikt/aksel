@@ -31,6 +31,7 @@ const [DescendantsContextProvider, useDescendantsContext] = createContext<
 >({
   name: "DescendantsProvider",
   errorMessage: "useDescendantsContext must be used within DescendantsProvider",
+  strict: false,
 });
 
 /**
