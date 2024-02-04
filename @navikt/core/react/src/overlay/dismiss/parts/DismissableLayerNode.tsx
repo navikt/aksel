@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Slot } from "../../../util/Slot";
 import { useMergeRefs } from "../../../util/hooks";
 import { useDescendant } from "../DismissableLayer.context";
@@ -10,6 +10,8 @@ import {
 import { useEscapeKeydown } from "./hooks/useEscapeKeydown";
 import { useFocusOutside } from "./hooks/useFocusOutside";
 import { usePointerDownOutside } from "./hooks/usePointerDownOutside";
+
+let originalBodyPointerEvents: string;
 
 const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   children,
@@ -44,6 +46,27 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
   const hasInteractedOutsideRef = useRef(false);
   const hasPointerDownOutsideRef = useRef(false);
+
+  const pointerEnabled = useMemo(() => {
+    let lastIndex = -1;
+
+    descendants.values().forEach((obj, _index) => {
+      if (obj.disableOutsidePointerEvents) {
+        lastIndex = _index;
+      }
+    });
+
+    return {
+      /**
+       * Makes sure we stop events at the highest layer with pointer events disabled.
+       * If not checked, we risk closing every layer when clicking outside the layer.
+       */
+      isPointerEventsEnabled: index >= lastIndex,
+      isBodyPointerEventsDisabled: descendants
+        .values()
+        .find((x) => !!x.disableOutsidePointerEvents),
+    };
+  }, [descendants, index]);
 
   /**
    * Handles the case where a DismissableLayer outside a Popover or Tooltip is open.
@@ -109,20 +132,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }
 
   const pointerDownOutside = usePointerDownOutside((event) => {
-    let lastIndex = -1;
-
-    descendants.values().forEach((obj, _index) => {
-      if (obj.disableOutsidePointerEvents) {
-        lastIndex = _index;
-      }
-    });
-
-    /**
-     * Makes sure we stop event at the highest layer with pointer events disabled.
-     * If not checked, we risk closing every layer when clicking outside the layer.
-     */
-    const isPointerEventsEnabled = index >= lastIndex;
-    if (!isPointerEventsEnabled) {
+    if (!pointerEnabled.isPointerEventsEnabled) {
       return;
     }
 
@@ -180,6 +190,23 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     }
   }, ownerDocument);
 
+  /**
+   * If `disableOutsidePointerEvents` is true,
+   * we want to disable pointer events on the body when the first layer is opened.
+   */
+  useEffect(() => {
+    if (!node || !disableOutsidePointerEvents || index !== 0) {
+      return;
+    }
+
+    originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
+    ownerDocument.body.style.pointerEvents = "none";
+
+    return () => {
+      ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+    };
+  }, [node, ownerDocument, disableOutsidePointerEvents, index]);
+
   const Comp = asChild ? Slot : "div";
 
   return (
@@ -189,6 +216,14 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
       onFocusCapture={focusOutside.onFocusCapture}
       onBlurCapture={focusOutside.onBlurCapture}
       onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
+      style={{
+        pointerEvents: pointerEnabled.isBodyPointerEventsDisabled
+          ? pointerEnabled.isPointerEventsEnabled
+            ? "auto"
+            : "none"
+          : undefined,
+        ...rest.style,
+      }}
     >
       {children}
     </Comp>
