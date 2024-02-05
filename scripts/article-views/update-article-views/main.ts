@@ -98,20 +98,22 @@ for (const article of articles) {
 
   const data = merged_fragments_view_datas.get(url);
 
-  documents.push({
-    _id: `${hashString(url)}`,
-    _type: "article_views",
-    article_ref: {
-      _ref: article._id,
-      _type: "reference",
-      _weak: true,
-    },
-    url,
-    views_day: data?.views_day,
-    views_week: data?.views_week,
-    views_month: data?.views_month,
-    views_year: data?.views_year,
-  });
+  if (data) {
+    documents.push({
+      _id: `${hashString(url)}`,
+      _type: "article_views",
+      article_ref: {
+        _ref: article._id,
+        _type: "reference",
+        _weak: true,
+      },
+      url,
+      views_day: data?.views_day,
+      views_week: data?.views_week,
+      views_month: data?.views_month,
+      views_year: data?.views_year,
+    });
+  }
 }
 
 const transactionClient = noCdnClient.transaction();
