@@ -1,6 +1,6 @@
 import { clientConfig } from "../../../aksel.nav.no/website/sanity/config.ts";
 import { createClient, load, path } from "../deps.ts";
-import { queryArticleURLs } from "../queries.ts";
+import { queryArticleURLs, queryArticleViews } from "../queries.ts";
 import { amplitudeFetchJSON, hashString, sum_last_n } from "./utils.ts";
 
 /*
@@ -90,8 +90,22 @@ const noCdnClient = createClient({
   token,
 });
 
+const transactionClient = noCdnClient.transaction();
+
+const document_ids = [];
+
+// delete all the article views (old data)
+const articleViewDocs = await noCdnClient.fetch(queryArticleViews);
+for (const articleViewDoc of articleViewDocs) {
+  document_ids.push(articleViewDoc._id);
+}
+document_ids.forEach(async (doc) => {
+  await transactionClient.delete(doc);
+});
+
 const documents = [];
 
+// re-build the article views
 const articles = await noCdnClient.fetch(queryArticleURLs);
 for (const article of articles) {
   const url = `https://aksel.nav.no/${article.slug}`;
@@ -116,7 +130,6 @@ for (const article of articles) {
   }
 }
 
-const transactionClient = noCdnClient.transaction();
 documents.forEach(async (doc) => {
   await transactionClient.createOrReplace(doc);
 });
