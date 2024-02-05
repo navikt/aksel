@@ -98,7 +98,7 @@
 }
 
 .navds-dropzone--error:where(:not(.navds-dropzone--dragging)) > .navds-dropzone__area {
-  border-color: var(--ac-file-upload-error-border, var(--a-surface-danger));
+  border-color: var(--a-surface-danger);
   border-width: 2px;
   margin: -1px 0;
 }
@@ -164,7 +164,7 @@
   display: grid;
   padding: var(--__ac-dropzone-icon-padding);
   border-radius: var(--a-border-radius-full);
-  background-color: var(--ac-file-upload-icon-bg, var(--a-surface-neutral-subtle));
+  background-color: var(--a-surface-neutral-subtle);
   transition:
     background-color 300ms var(--__ac-dropzone-animation-ease-out),
     font-size 300ms var(--__ac-dropzone-animation-ease-out);
@@ -219,7 +219,7 @@
 }
 
 .navds-file-item__icon {
-  background-color: var(--ac-file-upload-file-icon-bg, var(--a-surface-neutral-subtle));
+  background-color: var(--a-surface-neutral-subtle);
   color: var(--a-icon-default);
   border-radius: var(--a-border-radius-xlarge);
   min-height: 3rem;
