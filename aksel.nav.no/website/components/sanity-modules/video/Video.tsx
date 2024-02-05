@@ -28,7 +28,7 @@ const Video = ({ node }: VideoProps) => {
         aria-describedby={node.transkripsjon ? transcriptId : undefined}
         poster="/images/og/video-poster.png"
         crossOrigin={
-          globalThis?.location.port === "3000" ? "anonymous" : undefined
+          globalThis?.location?.port === "3000" ? "anonymous" : undefined
         } // Needed for the <track>
       >
         <source src={node.webm.url} type={`video/${node.webm.extension}`} />
