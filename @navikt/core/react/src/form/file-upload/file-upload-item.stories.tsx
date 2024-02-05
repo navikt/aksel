@@ -46,18 +46,20 @@ export const Default: StoryObj<typeof FileUpload.Item> = {
 
 export const Icons: StoryObj<typeof FileUpload.Item> = {
   render: () => (
-    <VStack gap="5">
-      <FileUpload.Item file={fileTxt} />
-      <FileUpload.Item file={filePng} />
-      <FileUpload.Item file={filePdf} />
-      <FileUpload.Item file={fileDocx} />
-      <FileUpload.Item file={fileDocx} status="uploading" />
-      <FileUpload.Item file={fileDocx} status="downloading" />
-      <FileUpload.Item file={fileXlsx} />
-      <FileUpload.Item file={fileCsv} />
-      <FileUpload.Item file={filePptx} />
-      <FileUpload.Item file={fileWebp} />
-    </VStack>
+    <FileUpload>
+      <VStack gap="5" as="ul">
+        <FileUpload.Item file={fileTxt} as="li" />
+        <FileUpload.Item file={filePng} as="li" />
+        <FileUpload.Item file={filePdf} as="li" />
+        <FileUpload.Item file={fileDocx} as="li" />
+        <FileUpload.Item file={fileDocx} as="li" status="uploading" />
+        <FileUpload.Item file={fileDocx} as="li" status="downloading" />
+        <FileUpload.Item file={fileXlsx} as="li" />
+        <FileUpload.Item file={fileCsv} as="li" />
+        <FileUpload.Item file={filePptx} as="li" />
+        <FileUpload.Item file={fileWebp} as="li" />
+      </VStack>
+    </FileUpload>
   ),
 };
 
@@ -81,40 +83,31 @@ export const Error: StoryObj<typeof FileUpload.Item> = {
 export const Buttons: StoryObj<typeof FileUpload.Item> = {
   render: () => (
     <VStack gap="5">
-      <FileUpload.Item file={fileXlsx} onRetry={() => onRetry(fileXlsx)} />
-      <FileUpload.Item
-        file={fileXlsx}
-        onRetry={() => onRetry(fileXlsx)}
-        onDelete={() => onDelete(fileXlsx)}
-      />
-      <FileUpload.Item file={fileXlsx} onDelete={() => onDelete(fileXlsx)} />
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
         onRetry={() => onRetry(fileDocx)}
         status="uploading"
+        itemAction="delete"
       />
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
         onRetry={() => onRetry(fileDocx)}
         status="downloading"
+        itemAction="retry"
       />
       <FileUpload.Item
         file={fileCsv}
         error="Error og onRetry"
         onRetry={() => onRetry(fileCsv)}
+        itemAction="retry"
       />
       <FileUpload.Item
         file={filePptx}
         error="Error og onDelete"
         onDelete={() => onDelete(filePptx)}
-      />
-      <FileUpload.Item
-        file={fileWebp}
-        error="Error, onRetry og onDelete"
-        onRetry={() => onRetry(fileWebp)}
-        onDelete={() => onDelete(fileWebp)}
+        itemAction="delete"
       />
     </VStack>
   ),
@@ -170,28 +163,6 @@ export const Download: StoryObj = {
         }}
       />
       <FileUpload.Item file={fileTxt} />
-    </VStack>
-  ),
-};
-
-export const Locale: StoryObj<{ locale: "nb" | "en" }> = {
-  render: () => (
-    <VStack gap="12">
-      <Heading size="medium">Laster opp</Heading>
-      <FileUpload locale="nb">
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileTxt} status="uploading" />
-        <FileUpload.Item file={fileTxt} status="uploading" />
-      </FileUpload>
-
-      <Heading size="medium">Laster ned</Heading>
-      <FileUpload locale="en">
-        <FileUpload.Item file={fileTxt} status="downloading" />
-        <FileUpload.Item file={fileTxt} status="downloading" />
-        <FileUpload.Item file={fileTxt} status="downloading" />
-        <FileUpload.Item file={fileTxt} status="downloading" />
-      </FileUpload>
     </VStack>
   ),
 };
@@ -279,22 +250,21 @@ export const Animated: StoryObj = {
 
     return (
       <VStack gap="6">
-        <FileUpload locale="nb">
-          <VStack gap="3">
-            <FileUpload.Item
-              file={files.first.file}
-              status={files.first.status}
-              error={files.first.error}
-              onRetry={files.first.onRetry}
-            />
-            <FileUpload.Item
-              file={files.second.file}
-              status={files.second.status}
-              error={files.second.error}
-              onRetry={files.second.onRetry}
-            />
-          </VStack>
-        </FileUpload>
+        <VStack gap="3">
+          <FileUpload.Item
+            file={files.first.file}
+            status={files.first.status}
+            error={files.first.error}
+            onRetry={files.first.onRetry}
+          />
+          <FileUpload.Item
+            file={files.second.file}
+            status={files.second.status}
+            error={files.second.error}
+            onRetry={files.second.onRetry}
+          />
+        </VStack>
+
         <HStack gap="2">
           <Button onClick={start}>Start</Button>
           <Button

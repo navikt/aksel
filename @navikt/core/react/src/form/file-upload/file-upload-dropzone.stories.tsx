@@ -2,7 +2,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
-import { HStack } from "../../layout/stack";
 import { OnFileSelectProps } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
@@ -90,19 +89,6 @@ export const WithErrorAndDescription: StoryObj = {
   ),
 };
 
-export const Locales: StoryObj = {
-  render: () => (
-    <HStack gap="12">
-      <FileUpload locale="nb">
-        <FileUpload.Dropzone label="Norsk bokmål" onSelect={onSelect} />
-      </FileUpload>
-      <FileUpload locale="en">
-        <FileUpload.Dropzone label="English" onSelect={onSelect} />
-      </FileUpload>
-    </HStack>
-  ),
-};
-
 export const Disabled: StoryObj = {
   render: () => (
     <div className="colgap">
@@ -110,13 +96,11 @@ export const Disabled: StoryObj = {
         label="Disabled prop"
         onSelect={console.log}
         disabled
-        disabledText="Du har ikke rettigheter til å laste opp filer"
       />
       <FileUpload.Dropzone
         label="FileLimit disabled"
         onSelect={console.log}
         fileLimit={{ max: 1, current: 2 }}
-        disabledText="Du kan ikke laste opp flere filer"
       />
     </div>
   ),
@@ -126,12 +110,16 @@ export const Custom: StoryObj = {
   render: () => (
     <div>
       <FileUpload.Dropzone
+        translations={{
+          dropzone: {
+            dragAndDropMultiple: "Dra og slipp bilder i format .png",
+            buttonMultiple: "Velg bilder",
+            disabled: "Du kan ikke laste opp flere bilder",
+          },
+        }}
         label="Custom variant"
         onSelect={console.log}
         icon={ImageIcon}
-        dragDropText="Dra og slipp bilder i format .png"
-        buttonText="Velg bilder"
-        disabledText="Du kan ikke laste opp flere bilder"
       />
     </div>
   ),

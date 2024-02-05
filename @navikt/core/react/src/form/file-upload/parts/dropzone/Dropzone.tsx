@@ -5,9 +5,9 @@ import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
-import { useFileUploadLocale } from "../../FileUpload.context";
+import { useFileUploadTranslation } from "../../FileUpload.context";
+import { useI18n } from "../../i18n/i18n.context";
 import { useFileUpload } from "../../useFileUpload";
-import { useLocale } from "../../utils/useLocale";
 import { DropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
@@ -25,22 +25,23 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       maxSizeInBytes,
       fileLimit,
       icon: DropzoneIcon = CloudUpIcon,
-      dragDropText,
-      buttonText,
-      disabledText,
       disabled,
+      translations,
       ...rest
     } = props;
 
-    const _disabled =
-      disabled ??
-      (fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0);
+    const context = useFileUploadTranslation();
+    const translate = useI18n({
+      FileUpload: translations ?? context?.translations,
+    });
+
+    const fileLimitReached =
+      fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0;
+
+    const _disabled = disabled ?? fileLimitReached;
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField({ ...props, disabled: _disabled }, "fileUpload");
-
-    const localeCtx = useFileUploadLocale()?.locale ?? "nb";
-    const translation = useLocale(localeCtx, { multiple });
 
     const { onChange, inputRef, mergedRef } = useFileUpload({
       ref,
@@ -96,14 +97,18 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
                   aria-hidden={!dropzoneCtx.isDraggingOver}
                   className="navds-dropzone__area-release__text"
                 >
-                  {translation.drop}
+                  {translate("Aksel.FileUpload.dropzone.drop")}
                 </span>
               </div>
               <div aria-hidden>
                 <BodyShort as="div" spacing>
-                  {dragDropText ?? translation.dragAndDrop}
+                  {multiple
+                    ? translate("Aksel.FileUpload.dropzone.dragAndDropMultiple")
+                    : translate("Aksel.FileUpload.dropzone.dragAndDrop")}
                 </BodyShort>
-                <BodyShort as="div">{translation.or}</BodyShort>
+                <BodyShort as="div">
+                  {translate("Aksel.FileUpload.dropzone.or")}
+                </BodyShort>
               </div>
               <Button
                 className="navds-dropzone__area-button"
@@ -111,7 +116,9 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
                 onClick={() => inputRef.current?.click()}
                 tabIndex={-1}
               >
-                {buttonText ?? translation.button}
+                {multiple
+                  ? translate("Aksel.FileUpload.dropzone.buttonMultiple")
+                  : translate("Aksel.FileUpload.dropzone.button")}
               </Button>
             </>
           )}
@@ -119,7 +126,11 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
           {inputProps.disabled && (
             <div className="navds-dropzone__area-disabled">
               <CircleSlashIcon aria-hidden fontSize="1.75rem" />
-              <BodyShort as="div">{disabledText}</BodyShort>
+              <BodyShort as="div">
+                {fileLimitReached
+                  ? translate("Aksel.FileUpload.dropzone.disabledFilelimit")
+                  : translate("Aksel.FileUpload.dropzone.disabled")}
+              </BodyShort>
             </div>
           )}
 

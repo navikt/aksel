@@ -80,7 +80,6 @@ const DefaultFn = ({ error = false }) => {
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
-        disabledText="Du kan ikke laste opp flere filer"
         accept=".doc,.docx,.xls,.xlsx,.pdf"
         onSelect={addFiles}
         fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}

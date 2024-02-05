@@ -1,13 +1,22 @@
 {
   "Aksel": {
-    "Alert": {
-      "iconTitle": {
-        "info": "Informasjon",
-        "success": "Suksess",
-        "warning": "Advarsel",
-        "error": "Feil"
+    "FileUpload": {
+      "dropzone": {
+        "button": "Velg fil",
+        "buttonMultiple": "Velg filer",
+        "dragAndDrop": "Dra og slipp fil her",
+        "dragAndDropMultiple": "Dra og slipp filer her",
+        "drop": "Slipp",
+        "or": "eller",
+        "disabled": "Filopplasting er deaktivert",
+        "disabledFilelimit": "Du kan ikke laste opp flere filer"
       },
-      "closeButtonTitle": "Lukk alert"
+      "item": {
+        "retryButtonTitle": "Prøv å laste opp filen på nytt",
+        "deleteButtonTitle": "Slett filen",
+        "uploading": "Laster opp…",
+        "downloading": "Laster ned…"
+      }
     }
   }
 }

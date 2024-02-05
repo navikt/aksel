@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { get } from "./get";
-import { TranslationDictionary } from "./i18n.types";
+import { ComponentTranslation, TranslationDictionary } from "./i18n.types";
 import nb from "./locales/nb.json";
 import { merge } from "./merge";
 
@@ -15,7 +15,7 @@ type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
 
-export function useI18n() {
+export function useI18n(local: ComponentTranslation) {
   const i18n = useContext(I18nContext);
 
   const translation: TranslationDictionary = useMemo(
@@ -28,35 +28,32 @@ export function useI18n() {
    */
   const translate = (
     id: NestedKeyOf<typeof nb>,
-    {
-      local,
-      replacements,
-    }: { local?: string | number; replacements?: string | number },
+    options?: { replacements: string | number },
   ): string => {
     /**
      * https://regex101.com/r/LYKWi3/1
      */
     const REPLACE_REGEX = /{([^}]*)}/g;
 
-    const text: string = local ?? get(translation, id);
+    const text: string = get({ Aksel: local }, id) || get(translation, id);
 
     if (!text) {
       return "";
     }
 
-    if (replacements) {
+    if (options?.replacements) {
       return text.replace(REPLACE_REGEX, (match: string) => {
         const replacement: string = match.substring(1, match.length - 1)!;
 
-        if (replacements[replacement] === undefined) {
-          const replacementData = JSON.stringify(replacements);
+        if (options.replacements[replacement] === undefined) {
+          const replacementData = JSON.stringify(options.replacements);
 
           throw new Error(
             `Error translating key '${id}'. No replacement syntax ({}) found for key '${replacement}'. The following replacements were passed: '${replacementData}'`,
           );
         }
 
-        return replacements[replacement];
+        return options.replacements[replacement];
       });
     }
 

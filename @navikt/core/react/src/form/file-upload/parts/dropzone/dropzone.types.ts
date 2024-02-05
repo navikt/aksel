@@ -1,5 +1,6 @@
 import { FormFieldProps } from "../../../useFormField";
 import { FileUploadBaseProps } from "../../FileUpload.types";
+import { ComponentTranslation } from "../../i18n/i18n.types";
 
 export interface DropzoneProps
   extends FileUploadBaseProps,
@@ -9,21 +10,12 @@ export interface DropzoneProps
    * Text shown to the user.
    */
   label: string;
-
   /**
    * @default CloudUpIcon
    */
   icon?: React.ComponentType<any>;
   /**
-   * @default "Dra og slipp [filer / fil] her"
+   * i18n-API for easier access to customizing texts and labels
    */
-  dragDropText?: string;
-  /**
-   * @default "Velg [filer / fil]"
-   */
-  buttonText?: string;
-  /**
-   * @default ...
-   */
-  disabledText?: string;
+  translations?: ComponentTranslation["FileUpload"];
 }

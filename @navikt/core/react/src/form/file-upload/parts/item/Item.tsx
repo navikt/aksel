@@ -2,8 +2,9 @@ import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
 import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
-import { useFileUploadLocale } from "../../FileUpload.context";
-import { useLocale } from "../../utils/useLocale";
+import { useFileUploadTranslation } from "../../FileUpload.context";
+import { useI18n } from "../../i18n/i18n.context";
+import { ComponentTranslation } from "../../i18n/i18n.types";
 import { FileItem } from "./Item.types";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
@@ -48,6 +49,10 @@ export interface FileItemBaseProps {
    *
    */
   /* itemAction?: "delete" | "retry" | "none"; */
+  /**
+   * i18n-API for easier access to customizing texts and labels
+   */
+  translations?: ComponentTranslation["FileUpload"];
 }
 
 type FileItemActionDelete = {
@@ -88,7 +93,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
       {
         as: Component = "div",
         file,
-        status,
+        status = "completed",
         onDelete,
         onRetry,
         error,
@@ -96,20 +101,23 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         href,
         onFileClick,
         itemAction = "delete",
+        translations,
       },
       ref,
     ) => {
-      const localeCtx = useFileUploadLocale()?.locale ?? "nb";
-      const translation = useLocale(localeCtx, { name: file.name });
+      const context = useFileUploadTranslation();
+      const translate = useI18n({
+        FileUpload: translations ?? context?.translations,
+      });
 
       const showError = !!error && (!status || status === "completed");
 
       function getStatusText() {
         if (status === "uploading") {
-          return translation.uploading;
+          return translate("Aksel.FileUpload.item.uploading");
         }
         if (status === "downloading") {
-          return translation.downloading;
+          return translate("Aksel.FileUpload.item.downloading");
         }
         return formatFileSize(file);
       }
@@ -138,6 +146,10 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
                 onRetry={onRetry}
                 onDelete={onDelete}
                 action={itemAction}
+                retryTitle={translate("Aksel.FileUpload.item.retryButtonTitle")}
+                deleteTitle={translate(
+                  "Aksel.FileUpload.item.deleteButtonTitle",
+                )}
               />
             )}
           </div>

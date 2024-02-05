@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { FileUploadLocaleContextProvider } from "./FileUpload.context";
+import { ComponentTranslation } from "./i18n/i18n.types";
 import Trigger from "./parts/Trigger";
 import Dropzone from "./parts/dropzone/Dropzone";
 import Item from "./parts/item/Item";
@@ -8,10 +9,9 @@ import Item from "./parts/item/Item";
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * Changes locale used for component text.
-   * @default "nb" (norsk bokmål)
+   * i18n-API for easier access to customizing texts and labels
    */
-  locale?: "nb" | "en";
+  translations?: ComponentTranslation["FileUpload"];
 }
 
 interface FileUploadComponent
@@ -116,13 +116,15 @@ interface FileUploadComponent
  * ```
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
-  ({ children, locale, className, ...rest }: FileUploadProps, ref) => (
-    <FileUploadLocaleContextProvider locale={locale}>
-      <div ref={ref} {...rest} className={cl("navds-file-upload", className)}>
-        {children}
-      </div>
-    </FileUploadLocaleContextProvider>
-  ),
+  ({ children, className, translations, ...rest }: FileUploadProps, ref) => {
+    return (
+      <FileUploadLocaleContextProvider translations={translations}>
+        <div ref={ref} {...rest} className={cl("navds-file-upload", className)}>
+          {children}
+        </div>
+      </FileUploadLocaleContextProvider>
+    );
+  },
 ) as FileUploadComponent;
 
 FileUpload.Dropzone = Dropzone;

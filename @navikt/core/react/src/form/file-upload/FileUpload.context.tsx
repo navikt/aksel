@@ -1,11 +1,11 @@
 import { createContext } from "../../util/create-context";
+import { ComponentTranslation } from "./i18n/i18n.types";
 
 export type FileUploadLocaleContextProps = {
-  locale: "nb" | "en" | undefined;
+  translations?: ComponentTranslation["FileUpload"];
 };
 
-export const [FileUploadLocaleContextProvider, useFileUploadLocale] =
+export const [FileUploadLocaleContextProvider, useFileUploadTranslation] =
   createContext<FileUploadLocaleContextProps>({
     strict: false,
-    defaultValue: { locale: "nb" },
   });
