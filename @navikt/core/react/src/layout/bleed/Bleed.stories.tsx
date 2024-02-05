@@ -272,6 +272,19 @@ export const Full = {
             </Bleed>
           </Box>
         </Box>
+        <Box
+          className="maxWidth"
+          background="surface-alt-1-subtle"
+          padding="10"
+        >
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginInline="full" reflectivePadding asChild>
+              <Box background="surface-success-subtle">
+                <BodyLong>full + reflectivePadding</BodyLong>
+              </Box>
+            </Bleed>
+          </Box>
+        </Box>
       </VStack>
     </>
   ),
