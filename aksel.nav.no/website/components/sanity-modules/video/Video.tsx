@@ -41,12 +41,13 @@ const Video = ({ node }: VideoProps) => {
         {node.track && <track kind="captions" srcLang="no" src={node.track} />}
       </video>
       {node?.caption && (
-        <BodyLong as="figcaption" className="px-7">
+        <BodyLong as="figcaption" className="px-4">
           {node.caption}
         </BodyLong>
       )}
       {node?.transkripsjon && (
         <ReadMore
+          className="px-4"
           header="Transkripsjon"
           open={open}
           onClick={() => setOpen((x) => !x)}
