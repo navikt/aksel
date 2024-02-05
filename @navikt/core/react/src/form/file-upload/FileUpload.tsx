@@ -103,17 +103,6 @@ interface FileUploadComponent
  *    <FileUpload.Item as="li" file={mySecondFile} />
  *  </VStack>
  * ```
- *
- * @example Locale
- * ```jsx
- * <FileUpload locale="en">
- *    <FileUpload.Dropzone />
- *   <VStack gap="4">
- *     <FileUpload.Item as="li" file={myFile} />
- *     <FileUpload.Item as="li" file={mySecondFile} />
- *   </VStack>
- * </FileUpload>
- * ```
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
   ({ children, className, translations, ...rest }: FileUploadProps, ref) => {
