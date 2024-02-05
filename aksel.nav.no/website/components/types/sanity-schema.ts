@@ -359,6 +359,7 @@ export type VideoT = ArrayObjectT<{
   alt: string;
   webm: { extension: string; url: string } | null;
   fallback?: { extension: string; url: string } | null;
+  track?: string;
   transkripsjon?: string;
   caption?: string;
 }>;

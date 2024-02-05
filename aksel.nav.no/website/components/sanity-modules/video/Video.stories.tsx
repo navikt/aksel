@@ -17,11 +17,14 @@ const args = {
     _key: getKey(),
     alt: "Alt-tekst for video",
     caption: "caption-tekst",
-    transkripsjon: "Transkripsjonstekst",
+    transkripsjon:
+      "Transkripsjonstekst avsnitt 1 linje 1\nLinje 2\n\nTranskripsjonstekst avsnitt 2",
     webm: {
       url: `https://cdn.sanity.io/files/${SANITY_PROJECT_ID}/production/274a2ceb69b056e1a7048ad1a5a2f8deff53a2f4.webm`,
       extension: "WEBM",
     },
+    track:
+      "data:@file/octet-stream;base64,V0VCVlRUCgowMDowMS4wMDAgLS0+IDAwOjAyLjAwMApIZWkhCgowMDowMy4wMDAgLS0+IDAwOjA0LjUwMApEZXR0ZSBlciBldCBla3NlbXBlbAoKMDA6MDQuNTAwIC0tPiAwMDowNS43MDAKcMOlIHVuZGVydGVrc3Rlci4=",
   },
 };
 
