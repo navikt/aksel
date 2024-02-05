@@ -4,6 +4,10 @@ on:
 jobs:
   execute:
     runs-on: ubuntu-latest
+    permissions:
+      packages: "write"
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/checkout@v3
         with:
