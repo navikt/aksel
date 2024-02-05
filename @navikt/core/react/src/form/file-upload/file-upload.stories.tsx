@@ -166,17 +166,6 @@ function getListError(files: OnFileSelectProps) {
     return `Du har lagt ved ${filesTooMany} filer for mye, vennligst fjern ${filesTooMany} filer`;
 }
 
-export const AlwaysError = {
-  render: () => <DefaultFn error />,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 500, maxWidth: "100%" }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
 export const TriggerWithButton = {
   render: () => {
     return (

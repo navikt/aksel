@@ -1,9 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { FileItem, FileUpload } from "..";
-import { Button } from "../../button";
-import { HStack, VStack } from "../../layout/stack";
-import { Heading } from "../../typography";
+import { VStack } from "../../layout/stack";
 
 const meta: Meta<typeof FileUpload.Item> = {
   title: "ds-react/FileUpload/Item",
@@ -30,20 +28,6 @@ const filePptx = new File(["abc"], "file.pptx");
 const fileWebp = new File(["abc"], "file.webp");
 const fileDocx = new File(["abc"], "file.docx");
 
-export const Default: StoryObj<typeof FileUpload.Item> = {
-  render: (props) => <FileUpload.Item {...props} file={fileDocx} />,
-  args: {
-    error: "",
-    href: "",
-  },
-  argTypes: {
-    status: {
-      options: [undefined, "uploading", "downloading"],
-      control: { type: "radio" },
-    },
-  },
-};
-
 export const Icons: StoryObj<typeof FileUpload.Item> = {
   render: () => (
     <FileUpload>
@@ -63,12 +47,12 @@ export const Icons: StoryObj<typeof FileUpload.Item> = {
   ),
 };
 
-export const Error: StoryObj<typeof FileUpload.Item> = {
+export const States: StoryObj<typeof FileUpload.Item> = {
   render: () => (
-    <VStack gap="5">
-      <Heading size="small">Vanlig error</Heading>
+    <div>
+      <h2>Error</h2>
       <FileUpload.Item file={fileTxt} error="Plain error" />
-      <Heading size="small">Error og uploading</Heading>
+      <h3>error + status</h3>
       <FileUpload.Item
         file={fileTxt}
         error="Error og uploading"
@@ -76,13 +60,8 @@ export const Error: StoryObj<typeof FileUpload.Item> = {
         onRetry={() => onRetry(fileTxt)}
         onDelete={() => onDelete(fileTxt)}
       />
-    </VStack>
-  ),
-};
-
-export const Buttons: StoryObj<typeof FileUpload.Item> = {
-  render: () => (
-    <VStack gap="5">
+      <h2>Item Actions</h2>
+      <h3>status + delete</h3>
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
@@ -90,6 +69,7 @@ export const Buttons: StoryObj<typeof FileUpload.Item> = {
         status="uploading"
         itemAction="delete"
       />
+      <h3>status + retry</h3>
       <FileUpload.Item
         file={fileDocx}
         onDelete={() => onDelete(fileDocx)}
@@ -97,19 +77,33 @@ export const Buttons: StoryObj<typeof FileUpload.Item> = {
         status="downloading"
         itemAction="retry"
       />
+      <h3>retry </h3>
+      <FileUpload.Item
+        file={fileCsv}
+        onRetry={() => onRetry(fileCsv)}
+        itemAction="retry"
+      />
+      <h3>delete </h3>
+      <FileUpload.Item
+        file={filePptx}
+        onDelete={() => onDelete(filePptx)}
+        itemAction="delete"
+      />
+      <h3>retry + error</h3>
       <FileUpload.Item
         file={fileCsv}
         error="Error og onRetry"
         onRetry={() => onRetry(fileCsv)}
         itemAction="retry"
       />
+      <h3>delete + error</h3>
       <FileUpload.Item
         file={filePptx}
         error="Error og onDelete"
         onDelete={() => onDelete(filePptx)}
         itemAction="delete"
       />
-    </VStack>
+    </div>
   ),
 };
 
@@ -121,20 +115,7 @@ export const Download: StoryObj = {
           name: "withOnClick.txt",
           size: 1_048_576,
         }}
-        onClick={() => alert("onClick")}
-      />
-      <FileUpload.Item
-        file={{
-          name: "withOnClickAndDelete.txt",
-          size: 600_000_000,
-        }}
-        onClick={() => alert("onClick")}
-        onDelete={() =>
-          onDelete({
-            name: "withOnClickAndDelete.txt",
-            size: 600_000_000,
-          })
-        }
+        onFileClick={() => alert("onFileClick")}
       />
       <FileUpload.Item
         file={{
@@ -145,138 +126,11 @@ export const Download: StoryObj = {
       />
       <FileUpload.Item
         file={{
-          name: "withHrefAndDelete.txt",
-          size: 1,
-        }}
-        onDelete={() =>
-          onDelete({
-            name: "withHref.txt",
-            size: 1,
-          })
-        }
-        href="https://www.nav.no"
-      />
-      <FileUpload.Item
-        file={{
-          name: "withoutHrefOrOnClick.txt",
+          name: "withoutHrefOrOnFileClick.txt",
           size: 2_000_000,
         }}
       />
       <FileUpload.Item file={fileTxt} />
     </VStack>
   ),
-};
-
-export const Animated: StoryObj = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [files, setFiles] = useState<any>({
-      first: {
-        file: fileTxt,
-        status: undefined,
-        error: undefined,
-        onRetry: undefined,
-        onDelete: undefined,
-      },
-      second: {
-        file: filePdf,
-        status: undefined,
-        error: undefined,
-        onRetry: undefined,
-        onDelete: undefined,
-      },
-    });
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const timeout = useRef<NodeJS.Timeout>();
-
-    const start = () => {
-      setFiles({
-        first: {
-          file: fileTxt,
-          status: "uploading",
-          error: undefined,
-          onRetry: undefined,
-          onDelete: undefined,
-        },
-        second: {
-          file: filePdf,
-          status: "uploading",
-          error: undefined,
-          onRetry: undefined,
-          onDelete: undefined,
-        },
-      });
-
-      timeout.current = setTimeout(() => {
-        setFiles({
-          first: {
-            file: fileTxt,
-            status: undefined,
-            error: "Failed to upload",
-            onRetry: () => null,
-            onDelete: undefined,
-          },
-          second: {
-            file: filePdf,
-            status: "uploading",
-            error: undefined,
-            onRetry: undefined,
-            onDelete: undefined,
-          },
-        });
-        timeout.current = setTimeout(
-          () =>
-            setFiles({
-              first: {
-                file: fileTxt,
-                status: undefined,
-                error: "Kunne ikke laste opp filen",
-                onRetry: () => null,
-                onDelete: undefined,
-              },
-              second: {
-                file: filePdf,
-                status: undefined,
-                error: "Filen er for stor. Maks 20MB",
-                onRetry: undefined,
-                onDelete: () => null,
-              },
-            }),
-          1500,
-        );
-      }, 2000);
-    };
-
-    return (
-      <VStack gap="6">
-        <VStack gap="3">
-          <FileUpload.Item
-            file={files.first.file}
-            status={files.first.status}
-            error={files.first.error}
-            onRetry={files.first.onRetry}
-          />
-          <FileUpload.Item
-            file={files.second.file}
-            status={files.second.status}
-            error={files.second.error}
-            onRetry={files.second.onRetry}
-          />
-        </VStack>
-
-        <HStack gap="2">
-          <Button onClick={start}>Start</Button>
-          <Button
-            onClick={() => {
-              timeout.current && clearTimeout(timeout.current);
-              start();
-            }}
-          >
-            Restart
-          </Button>
-        </HStack>
-      </VStack>
-    );
-  },
 };

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
 import { OnFileSelectProps } from "./FileUpload.types";
@@ -28,87 +28,42 @@ const onSelect = ({
   );
 };
 
-export const Default: StoryObj<typeof FileUpload.Dropzone> = {
-  render: (props) => <FileUpload.Dropzone {...props} onSelect={onSelect} />,
-  args: {
-    label: "Last opp filer",
-    description: "",
-    error: "",
-    multiple: true,
-    accept: "",
-  },
-};
-
-export const SingleFile: StoryObj = {
+export const States: StoryObj = {
   render: () => (
-    <FileUpload.Dropzone
-      label="Last opp fil"
-      multiple={false}
-      onSelect={onSelect}
-    />
-  ),
-};
-
-export const WithDescription: StoryObj = {
-  render: () => (
-    <FileUpload.Dropzone
-      label="Last opp filer"
-      description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
-      onSelect={onSelect}
-    />
-  ),
-};
-
-export const WithError: StoryObj = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [error, setError] = useState<string | null>(null);
-    return (
-      <div style={{ height: 400 }}>
-        <button onClick={() => setError((x) => (!x ? "error" : null))}>
-          toggle
-        </button>
-        <FileUpload.Dropzone
-          label="Last opp filer"
-          onSelect={onSelect}
-          error={error}
-        />
-      </div>
-    );
-  },
-};
-
-export const WithErrorAndDescription: StoryObj = {
-  render: () => (
-    <FileUpload.Dropzone
-      label="Last opp filer"
-      onSelect={onSelect}
-      error="Du må laste opp en fil"
-      description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
-    />
-  ),
-};
-
-export const Disabled: StoryObj = {
-  render: () => (
-    <div className="colgap">
+    <div>
+      <h2>Disabled</h2>
       <FileUpload.Dropzone
         label="Disabled prop"
         onSelect={console.log}
         disabled
       />
+
       <FileUpload.Dropzone
         label="FileLimit disabled"
         onSelect={console.log}
         fileLimit={{ max: 1, current: 2 }}
       />
+      <h2>Error</h2>
+      <FileUpload.Dropzone
+        label="Last opp filer"
+        onSelect={onSelect}
+        error="Du må laste opp en fil"
+        description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
+      />
     </div>
   ),
 };
 
-export const Custom: StoryObj = {
+export const Translation: StoryObj = {
   render: () => (
     <div>
+      <h2>Single file</h2>
+      <FileUpload.Dropzone
+        label="Last opp fil"
+        multiple={false}
+        onSelect={onSelect}
+      />
+      <h2>Custom texts</h2>
       <FileUpload.Dropzone
         translations={{
           dropzone: {
@@ -117,7 +72,7 @@ export const Custom: StoryObj = {
             disabled: "Du kan ikke laste opp flere bilder",
           },
         }}
-        label="Custom variant"
+        label="Last opp bilder"
         onSelect={console.log}
         icon={ImageIcon}
       />
