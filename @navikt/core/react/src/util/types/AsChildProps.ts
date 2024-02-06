@@ -1,4 +1,4 @@
-export type WithAsChild =
+export type AsChildProps =
   | {
       children: React.ReactElement | false | null;
       /**

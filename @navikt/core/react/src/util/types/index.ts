@@ -1,2 +1,2 @@
 export type { OverridableComponent } from "./OverridableComponent";
-export type { WithAsChild } from "./WithAsChild";
+export type { AsChildProps } from "./AsChildProps";
