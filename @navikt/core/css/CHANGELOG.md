@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 5.17.5
+
+### Patch Changes
+
+- ExpansionCard: Padding-top for Content er justert opp 8px (medium) og 4px (small) ([#2699](https://github.com/navikt/aksel/pull/2699))
+
 ## 5.17.4
 
 ## 5.17.3
