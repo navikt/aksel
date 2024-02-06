@@ -2,17 +2,16 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../../provider";
 import { Slot } from "../../util/Slot";
+import { WithAsChild } from "../../util/types";
 
-export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
+interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * An optional container where the portaled content should be appended.
    */
   rootElement?: HTMLElement | null;
-  /**
-   * When true, Portal will render as its child. This merges classes, styles and event handlers.
-   */
-  asChild?: boolean;
 }
+
+export type PortalProps = PortalBaseProps & WithAsChild;
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, asChild, ...rest }, ref) => {

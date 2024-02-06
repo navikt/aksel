@@ -20,10 +20,12 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
     }
 
     if (React.Children.count(children) > 1) {
-      console.error(
+      const error = new Error(
         "Aksel: Components using 'asChild' expects to recieve a single React element child.",
       );
-      return React.Children.only(null);
+      error.name = "SlotError";
+      Error.captureStackTrace?.(error, Slot);
+      throw error;
     }
 
     return null;
