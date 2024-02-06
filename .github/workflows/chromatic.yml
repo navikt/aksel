@@ -59,7 +59,9 @@ jobs:
           exitZeroOnChanges: false
           buildScriptName: "build:storybook"
           onlyChanged: true
+          untraced: "**/package.json|yarn.lock|**/*.md"
           externals: \@navikt/core/css/**/*.css
+          traceChanged: true
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
