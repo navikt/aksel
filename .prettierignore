@@ -1,5 +1,5 @@
-**/nais-dev.yaml
-**/nais-prod.yaml
+**/nais*.yaml
+**/nais*.yml
 **/codemod/**/tests/**/*.js
 node_modules
 .next

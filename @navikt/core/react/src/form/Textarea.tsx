@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
 import TextareaAutosize from "../util/TextareaAutoSize";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { ReadOnlyIcon } from "./ReadOnlyIcon";
 import Counter from "./TextareaCounter";
@@ -102,7 +103,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
-    const [controlledValue, setControlledValue] = useState<string>(
+    const [uncontrolledValue, setUncontrolledValue] = useState(
       props?.defaultValue ?? "",
     );
 
@@ -160,11 +161,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <TextareaAutosize
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
-          onChange={(e) =>
-            props.onChange
-              ? props.onChange(e)
-              : setControlledValue(e.target.value)
-          }
+          onChange={composeEventHandlers(
+            props.onChange,
+            props.value === undefined
+              ? (e) => setUncontrolledValue(e.target.value)
+              : undefined,
+          )}
           minRows={getMinRows()}
           autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
@@ -183,7 +185,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             </span>
             <Counter
               maxLength={maxLength}
-              currentLength={props.value?.length ?? controlledValue?.length}
+              currentLength={props.value?.length ?? uncontrolledValue.length}
               size={size}
               i18n={i18n}
             />

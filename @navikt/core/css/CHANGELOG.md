@@ -1,5 +1,9 @@
 # @navikt/ds-css
 
+## 5.17.4
+
+## 5.17.3
+
 ## 5.17.2
 
 ### Patch Changes

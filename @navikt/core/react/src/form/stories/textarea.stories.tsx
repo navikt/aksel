@@ -1,4 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
@@ -123,6 +124,24 @@ export const MaxRows: StoryFn = () => {
 
 export const Resize: StoryFn = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
+};
+
+export const OnChange: StoryFn = () => {
+  return (
+    <Textarea
+      label="Ipsum enim quis culpa"
+      onChange={console.log}
+      maxLength={50}
+    />
+  );
+};
+OnChange.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByLabelText("Ipsum enim quis culpa");
+  userEvent.click(input);
+  await userEvent.type(input, "Aute fugiat ut culpa");
+  const text = canvas.getByText("30 tegn igjen");
+  expect(text).toBeVisible();
 };
 
 export const Controlled: StoryFn = () => {

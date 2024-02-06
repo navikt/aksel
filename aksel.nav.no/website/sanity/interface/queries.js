@@ -79,7 +79,8 @@ const defaultBlock = `
     "fallback": {
       "url": fallback.asset->url,
       "extension": fallback.asset->extension
-    }
+    },
+    "track": track.asset->url
  },
  _type == "alert" =>{
     ...,
