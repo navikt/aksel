@@ -3,6 +3,7 @@ import { StructureResolver } from "sanity/desk";
 import {
   CircleSlashIcon,
   ComponentIcon,
+  EyeIcon,
   FileTextIcon,
   ImageIcon,
   LightBulbIcon,
@@ -298,10 +299,11 @@ export const structure: StructureResolver = async (
                       .icon(FileTextIcon)
                       .id(`publication_flow`),
                     S.listItem()
-                      .title("Artikkel Visninger")
+                      .title("Artikkelvisninger")
+                      .icon(EyeIcon)
                       .child(
                         S.documentList()
-                          .title("Artikkel Visninger")
+                          .title("Artikkelvisninger")
                           .filter(`_type == 'article_views'`)
                           .apiVersion(SANITY_API_VERSION)
                           .menuItems([

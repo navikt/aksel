@@ -1,17 +1,16 @@
-name: Update article views
+name: Redeploy Naisjob (update-article-views)
 on:
   workflow_dispatch:
 jobs:
   execute:
     runs-on: ubuntu-latest
-    permissions: # TODO: remove once merged
+    permissions:
       packages: "write"
       contents: "read"
       id-token: "write"
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: gp-popular-articles # TODO: remove once merged
           fetch-depth: 1
       - uses: denoland/setup-deno@v1
         with:
@@ -31,7 +30,7 @@ jobs:
         with:
           team: designsystem
           push_image: true
-          dockerfile: scripts/article-views/Dockerfile
+          dockerfile: scripts/article-views/Dockerfile.update-article-views
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
       - name: start naisjob prod-gcp
