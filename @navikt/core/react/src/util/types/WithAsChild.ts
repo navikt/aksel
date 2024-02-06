@@ -8,7 +8,7 @@ export type WithAsChild =
        * @example
        * ```tsx
        * <Component asChild data-prop>
-       *   <ChildComponent data-child/>
+       *   <ChildComponent data-child />
        * </Component>
        *
        * // Renders
@@ -26,7 +26,7 @@ export type WithAsChild =
        * @example
        * ```tsx
        * <Component asChild data-prop>
-       *   <ChildComponent data-child/>
+       *   <ChildComponent data-child />
        * </Component>
        *
        * // Renders
