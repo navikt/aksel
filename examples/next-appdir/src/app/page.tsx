@@ -30,7 +30,8 @@ export default function Home() {
         </div>
       </div>
 
-      <Button icon={<StarIcon />}>Knapp</Button>
+      <StarIcon />
+      <Button>Knapp</Button>
       <div className={styles.center}>
         <Image
           className={styles.logo}

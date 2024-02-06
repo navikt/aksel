@@ -4,7 +4,15 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@navikt/ds-react", "@navikt/aksel-icons"],
+  experimental: {
+    /**
+     * https://nextjs.org/docs/app/api-reference/next-config-js/optimizePackageImports
+     * https://github.com/vercel/next.js/issues/60246
+     * https://github.com/vercel/next.js/issues/44039
+     * https://github.com/vercel/next.js/issues/12557
+     */
+    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
