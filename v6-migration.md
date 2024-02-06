@@ -1,5 +1,17 @@
 # Aksel v6 migrations
 
+## Nextjs
+
+Komponenter og ikoner bruker nå `use client`, som betyr at de kan brukes rett ut av boksen i f.eks nextjs app-router. En problematikk er at bundle-size blir ekstremt stor da hele react og ikonpakke blir trukket inn, selv om bare 1 modul blir brukt.
+Løsningen er:
+`optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],`
+men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grunnleggende som går litt i dybden om routing, next/link, app-dir og config.
+
+- https://nextjs.org/docs/app/api-reference/next-config-js/optimizePackageImports
+- https://github.com/vercel/next.js/issues/60246
+- https://github.com/vercel/next.js/issues/44039
+- https://github.com/vercel/next.js/issues/12557
+
 ## ErrorSummary
 
 - Heading-prop er satt som required
