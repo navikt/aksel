@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Alert, AlertProps } from ".";
-import { BodyLong, Heading as DsHeading, Link, VStack } from "..";
+import { VStack } from "../layout/stack";
+import { Link } from "../link";
+import { BodyLong, Heading as DsHeading } from "../typography";
+import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",
