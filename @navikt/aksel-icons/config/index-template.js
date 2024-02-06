@@ -6,7 +6,7 @@ const defaultIndexTemplate = (paths) => {
     return `export { default as ${basename}Icon } from './${basename}'`;
   });
 
-  return exportEntries.join("\n");
+  return `"use client";\n${exportEntries.join("\n")}`;
 };
 
 module.exports = defaultIndexTemplate;
