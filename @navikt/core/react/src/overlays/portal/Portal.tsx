@@ -1,7 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../../provider";
-import { useId } from "../../util";
 import { Slot } from "../../util/Slot";
 
 export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
@@ -17,7 +16,6 @@ export interface PortalProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, asChild, ...rest }, ref) => {
-    const portalId = "portal-" + useId();
     const contextRoot = useProvider()?.rootElement;
     const _rootContainer =
       rootElement ?? contextRoot ?? globalThis?.document?.body;
@@ -26,7 +24,7 @@ export const Portal = forwardRef<HTMLDivElement, PortalProps>(
 
     return _rootContainer
       ? ReactDOM.createPortal(
-          <Component ref={ref} data-aksel-portal={portalId} {...rest} />,
+          <Component ref={ref} data-aksel-portal="" {...rest} />,
           _rootContainer,
         )
       : null;
