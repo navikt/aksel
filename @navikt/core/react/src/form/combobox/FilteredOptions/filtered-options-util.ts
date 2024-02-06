@@ -4,9 +4,6 @@ const normalizeText = (text: string): string =>
 const isPartOfText = (value, text) =>
   normalizeText(text).startsWith(normalizeText(value ?? ""));
 
-const isValueInList = (value, list) =>
-  list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
-
 const getMatchingValuesFromList = (value, list, alwaysIncluded) =>
   list?.filter(
     (listItem) =>
@@ -34,7 +31,6 @@ const getMaxSelectedOptionsId = (comboboxId: string) =>
 export default {
   normalizeText,
   isPartOfText,
-  isValueInList,
   getMatchingValuesFromList,
   getFilteredOptionsId,
   getAddNewOptionId,
