@@ -1,7 +1,4 @@
-import { max, min } from "date-fns";
-import setMonth from "date-fns/setMonth";
-import setYear from "date-fns/setYear";
-import startOfMonth from "date-fns/startOfMonth";
+import { max, min, setMonth, setYear, startOfMonth } from "date-fns";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";

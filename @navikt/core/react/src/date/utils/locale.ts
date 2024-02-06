@@ -1,6 +1,4 @@
-import enGB from "date-fns/locale/en-GB";
-import nb from "date-fns/locale/nb";
-import nn from "date-fns/locale/nn";
+import { enGB, nb, nn } from "date-fns/locale";
 
 /** @private */
 export const getLocaleFromString = (locale: "nb" | "nn" | "en" = "nb") => {

@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import setYear from "date-fns/setYear";
+import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button, DateInputProps } from "../..";
 import { useMonthpicker } from "../hooks";
@@ -22,7 +22,7 @@ export const Default: StoryFn<{
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
+      <MonthPicker {...monthpickerProps} onMonthSelect={console.log}>
         <MonthPicker.Input
           label="Velg måned"
           variant="monthpicker"
@@ -47,6 +47,7 @@ Default.argTypes = {
 export const DropdownCaption = () => {
   return (
     <MonthPicker.Standalone
+      onMonthSelect={console.log}
       dropdownCaption
       fromDate={new Date("Feb 10 2019")}
       toDate={new Date("Sep 27 2032")}

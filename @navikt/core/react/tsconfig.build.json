@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./cjs",
     "module": "commonjs",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "declaration": true,
+    "sourceMap": true
   },
   "include": ["./src"]
 }
