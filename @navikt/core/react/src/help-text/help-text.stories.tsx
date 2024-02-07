@@ -1,6 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useRef } from "react";
-import { BodyLong, Heading, HelpText } from "..";
+import { BodyLong, Heading } from "../typography";
+import HelpText from "./HelpText";
 
 const meta: Meta<typeof HelpText> = {
   title: "ds-react/HelpText",

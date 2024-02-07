@@ -1,8 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
 import setYear from "date-fns/setYear";
 import React, { useId, useState } from "react";
-import { Button, DateInputProps } from "../..";
+import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
+import { DateInputProps } from "../parts/DateInput";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./types";
 
