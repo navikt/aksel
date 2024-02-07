@@ -82,13 +82,17 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
       <UNSAFE_Combobox
         id={id}
         label="Komboboks - velg flere"
+        allowNewValues
         options={props.options}
         isMultiSelect={props.isMultiSelect}
-        onToggleSelected={(option, isSelected) =>
+        onToggleSelected={(value, isSelected) =>
           isSelected
-            ? setSelectedOptions([...selectedOptions, option])
+            ? setSelectedOptions([
+                ...selectedOptions,
+                { label: value, value, isSelected },
+              ])
             : setSelectedOptions(
-                selectedOptions.filter((o) => o.label !== option.label),
+                selectedOptions.filter((o) => o.value !== value),
               )
         }
         size={props.size}
@@ -96,16 +100,16 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
       {selectedOptions.length > 0 && (
         <dl>
           {selectedOptions.map((option) => (
-            <>
+            <React.Fragment key={option.label}>
               <dt>{option.label}</dt>
               {Object.keys(option)
                 .filter((key) => key !== "label")
                 .map((key) => (
-                  <dd key={`${option.label}${option[key]}`}>
-                    {key}: {option[key]}
+                  <dd key={`${option.label}${key}`}>
+                    {key}: {option[key].toString()}
                   </dd>
                 ))}
-            </>
+            </React.Fragment>
           ))}
         </dl>
       )}

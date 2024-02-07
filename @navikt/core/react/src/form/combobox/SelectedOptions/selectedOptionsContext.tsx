@@ -78,7 +78,7 @@ export const SelectedOptionsProvider = ({
         setSelectedOptions([option]);
         setCustomOptions([]);
       }
-      onToggleSelected?.(option, true, isCustomOption);
+      onToggleSelected?.(option.value, true, isCustomOption);
     },
     [
       addCustomOption,
@@ -102,7 +102,7 @@ export const SelectedOptionsProvider = ({
           ),
         );
       }
-      onToggleSelected?.(option, false, isCustomOption);
+      onToggleSelected?.(option.value, false, isCustomOption);
     },
     [customOptions, onToggleSelected, removeCustomOption],
   );

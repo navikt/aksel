@@ -3,7 +3,7 @@ import { FormFieldProps } from "../useFormField";
 
 export type ComboboxOption = {
   label: string;
-  value: string | number;
+  value: string;
   [key: string]: any; // TODO: Add more properties for ComboboxOption
 };
 
@@ -103,7 +103,7 @@ export interface ComboboxProps
    * @returns
    */
   onToggleSelected?: (
-    option: ComboboxOption,
+    option: ComboboxOption["value"],
     isSelected: boolean,
     isCustomOption: boolean,
   ) => void;
