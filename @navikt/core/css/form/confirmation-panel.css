@@ -25,6 +25,10 @@
   background-color: var(--ac-confirmation-panel-error-bg, var(--a-surface-danger-subtle));
 }
 
+.navds-confirmation-panel--error .navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label {
+  color: var(--a-text-default);
+}
+
 @media (forced-colors: active) {
   .navds-confirmation-panel__inner::before {
     content: "";
