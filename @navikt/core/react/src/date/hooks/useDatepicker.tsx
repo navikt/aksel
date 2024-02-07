@@ -56,11 +56,6 @@ export interface UseDatepickerOptions
    * In 2024 this equals to 1944 - 2043
    */
   allowTwoDigitYear?: boolean;
-  /**
-   * Will be removed in a future major-version
-   * @deprecated
-   */
-  openOnFocus?: false;
 }
 
 interface UseDatepickerValue {
