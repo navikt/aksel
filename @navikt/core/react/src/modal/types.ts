@@ -36,11 +36,14 @@ export interface ModalProps
   /**
    * Called when the user tries to close the modal by one of the built-in methods.
    * Used if you want to ask the user for confirmation before closing.
+   * @warning Will not always be called when pressing Esc. See `onCancel` for more info.
    * @returns Whether to close the modal
    */
-  onBeforeClose?: () => boolean;
+  onBeforeClose?: () => boolean | void;
   /**
-   * Called when the user presses the Esc key.
+   * *Sometimes** called when the user presses the Esc key.
+   * @warning *Some browsers does not always trigger this event. Chrome only triggers it if you have
+   *  interacted with the modal, and will not trigger it a second time if you press Esc twice in a row.
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   /**

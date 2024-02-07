@@ -9,12 +9,12 @@ import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { ModalContextProvider, useModalContext } from "./Modal.context";
-import { ModalProps } from "./Modal.types";
 import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
+import { ModalProps } from "./types";
 
 interface ModalComponent
   extends React.ForwardRefExoticComponent<

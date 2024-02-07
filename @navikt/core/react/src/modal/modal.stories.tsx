@@ -145,7 +145,7 @@ export const WithUseState: StoryFn = () => {
 WithUseState.storyName = "With useState";
 
 export const EmptyHeader: StoryFn = () => (
-  <Modal open>
+  <Modal open aria-label="123">
     <Modal.Header />
     <Modal.Body>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
