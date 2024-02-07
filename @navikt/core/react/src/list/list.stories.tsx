@@ -6,7 +6,8 @@ import {
   HeadHeartIcon,
   RecycleIcon,
 } from "@navikt/aksel-icons";
-import { List, VStack } from "..";
+import { VStack } from "../layout/stack";
+import List from "./List";
 
 export default {
   title: "ds-react/List",

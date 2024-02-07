@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Loader, LoaderProps } from "..";
+import Loader, { LoaderProps } from "./Loader";
 
 export default {
   title: "ds-react/Loader",
