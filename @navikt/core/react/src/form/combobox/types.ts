@@ -1,6 +1,12 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
+export type ComboboxOption = {
+  label: string;
+  value: string | number;
+  [key: string]: any; // TODO: Add more properties for ComboboxOption
+};
+
 export type MaxSelected = {
   /**
    * The limit for maximum selected options
@@ -22,7 +28,7 @@ export interface ComboboxProps
   /**
    * List of options to use for autocompletion
    */
-  options: string[];
+  options: string[] | ComboboxOption[];
   /**
    * If enabled, adds an option to add the value of the input as an option whenever there are no options matching the value.
    */
@@ -42,7 +48,7 @@ export interface ComboboxProps
    * If provided, this overrides the internal search logic in the component.
    * Useful for e.g. searching on a server or when overriding the search algorithm to search for synonyms or similar.
    */
-  filteredOptions?: string[];
+  filteredOptions?: string[] | ComboboxOption[];
   /**
    * Optionally hide the label visually.
    * Not recommended, but can be considered for e.g. search fields in the top menu.
@@ -97,7 +103,7 @@ export interface ComboboxProps
    * @returns
    */
   onToggleSelected?: (
-    option: string,
+    option: ComboboxOption,
     isSelected: boolean,
     isCustomOption: boolean,
   ) => void;
@@ -107,7 +113,7 @@ export interface ComboboxProps
    * Use this prop when controlling the selected state outside for the component,
    * e.g. for a filter, where options can be toggled elsewhere/programmatically.
    */
-  selectedOptions?: string[];
+  selectedOptions?: string[] | ComboboxOption[];
   /**
    * Options for the maximum number of selected options.
    */

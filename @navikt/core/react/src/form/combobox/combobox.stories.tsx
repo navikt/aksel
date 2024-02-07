@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useId, useMemo, useRef, useState } from "react";
 import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
+import { ComboboxOption } from "./types";
 
 export default {
   title: "ds-react/Combobox",
@@ -69,6 +70,57 @@ export const MultiSelect: StoryFunction = (props) => {
 
 MultiSelect.args = {
   options,
+  isMultiSelect: true,
+  size: "medium",
+};
+
+export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
+  const id = useId();
+  const [selectedOptions, setSelectedOptions] = useState<ComboboxOption[]>([]);
+  return (
+    <>
+      <UNSAFE_Combobox
+        id={id}
+        label="Komboboks - velg flere"
+        options={props.options}
+        isMultiSelect={props.isMultiSelect}
+        onToggleSelected={(option, isSelected) =>
+          isSelected
+            ? setSelectedOptions([...selectedOptions, option])
+            : setSelectedOptions(
+                selectedOptions.filter((o) => o.label !== option.label),
+              )
+        }
+        size={props.size}
+      />
+      {selectedOptions.length > 0 && (
+        <dl>
+          {selectedOptions.map((option) => (
+            <>
+              <dt>{option.label}</dt>
+              {Object.keys(option)
+                .filter((key) => key !== "label")
+                .map((key) => (
+                  <dd key={`${option.label}${option[key]}`}>
+                    {key}: {option[key]}
+                  </dd>
+                ))}
+            </>
+          ))}
+        </dl>
+      )}
+    </>
+  );
+};
+
+MultiSelectWithComplexOptions.args = {
+  options: [
+    { label: "Apple", value: "apple", icon: "true", price: "10 NOK" },
+    { label: "Banana", value: "banana", icon: "false", price: "20 NOK" },
+    { label: "Orange", value: "orange", icon: "true", price: "30 NOK" },
+    { label: "Pear", value: "pear", icon: "false", price: "40 NOK" },
+    { label: "Grape", value: "grape", icon: "true", price: "50 NOK" },
+  ],
   isMultiSelect: true,
   size: "medium",
 };
@@ -142,7 +194,7 @@ export const MultiSelectWithExternalChips: StoryFn<{
       <UNSAFE_Combobox
         options={props.options}
         selectedOptions={selectedOptions}
-        onToggleSelected={(option) => toggleSelected(option)}
+        onToggleSelected={(option) => toggleSelected(option.label)}
         isMultiSelect
         value={props.controlled ? value : undefined}
         onChange={(event) =>
@@ -218,11 +270,11 @@ export const Controlled: StoryFn<{
     [props.options, value],
   );
 
-  const onToggleSelected = (option: string, isSelected: boolean) => {
+  const onToggleSelected = (option: ComboboxOption, isSelected: boolean) => {
     if (isSelected) {
-      setSelectedOptions([...selectedOptions, option]);
+      setSelectedOptions([...selectedOptions, option.label]);
     } else {
-      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+      setSelectedOptions(selectedOptions.filter((o) => o !== option.label));
     }
   };
 
@@ -306,8 +358,10 @@ export const MaxSelectedOptions: StoryFunction = () => {
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
-          ? setSelectedOptions([...selectedOptions, option])
-          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+          ? setSelectedOptions([...selectedOptions, option.label])
+          : setSelectedOptions(
+              selectedOptions.filter((o) => o !== option.label),
+            )
       }
       isMultiSelect
       allowNewValues

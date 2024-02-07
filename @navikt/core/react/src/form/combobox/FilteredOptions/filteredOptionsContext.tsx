@@ -10,21 +10,18 @@ import React, {
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { toComboboxOption } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxProps } from "../types";
+import { ComboboxOption, ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
 
 type FilteredOptionsProps = {
   children: any;
-  value: Pick<
-    ComboboxProps,
-    | "allowNewValues"
-    | "filteredOptions"
-    | "isListOpen"
-    | "isLoading"
-    | "options"
-  >;
+  value: Pick<ComboboxProps, "allowNewValues" | "isListOpen" | "isLoading"> & {
+    filteredOptions?: ComboboxOption[];
+    options: ComboboxOption[];
+  };
 };
 
 type FilteredOptionsContextType = {
@@ -36,12 +33,12 @@ type FilteredOptionsContextType = {
   >;
   isListOpen: boolean;
   isLoading?: boolean;
-  filteredOptions: string[];
+  filteredOptions: ComboboxOption[];
   isMouseLastUsedInputDevice: boolean;
   setIsMouseLastUsedInputDevice: React.Dispatch<SetStateAction<boolean>>;
   isValueNew: boolean;
   toggleIsListOpen: (newState?: boolean) => void;
-  currentOption?: string;
+  currentOption?: ComboboxOption;
   shouldAutocomplete?: boolean;
   virtualFocus: VirtualFocusType;
 };
@@ -76,7 +73,7 @@ export const FilteredOptionsProvider = ({
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
 
-  const filteredOptions = useMemo(() => {
+  const filteredOptions = useMemo<ComboboxOption[]>(() => {
     if (externalFilteredOptions) {
       return externalFilteredOptions;
     }
@@ -104,11 +101,11 @@ export const FilteredOptionsProvider = ({
       options.reduce(
         (map, _option) => ({
           ...map,
-          [filteredOptionsUtils.getOptionId(id, _option)]: _option,
+          [filteredOptionsUtils.getOptionId(id, _option.label)]: _option,
         }),
         {
           [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
-            ? value
+            ? toComboboxOption(value)
             : undefined,
         },
       ),
@@ -123,7 +120,7 @@ export const FilteredOptionsProvider = ({
       filteredOptions.length > 0
     ) {
       setValue(
-        `${searchTerm}${filteredOptions[0].substring(searchTerm.length)}`,
+        `${searchTerm}${filteredOptions[0].label.substring(searchTerm.length)}`,
       );
       setSearchTerm(searchTerm);
     }
@@ -161,7 +158,10 @@ export const FilteredOptionsProvider = ({
       activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if ((value && value !== "") || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
-        activeOption = filteredOptionsUtils.getOptionId(id, filteredOptions[0]);
+        activeOption = filteredOptionsUtils.getOptionId(
+          id,
+          filteredOptions[0].label,
+        );
       } else if (isListOpen && isLoading) {
         activeOption = filteredOptionsUtils.getIsLoadingId(id);
       }

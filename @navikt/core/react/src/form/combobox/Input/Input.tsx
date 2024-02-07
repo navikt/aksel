@@ -45,7 +45,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       (event: React.KeyboardEvent) => {
         const isTextInSelectedOptions = (text: string) => {
           return selectedOptions.find(
-            (item) => item.toLocaleLowerCase() === text.toLocaleLowerCase(),
+            (item) =>
+              item.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
           );
         };
 
@@ -53,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(currentOption)) {
+          if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
             toggleIsListOpen(false);
           }
         } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
@@ -64,11 +65,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Autocompleting or adding a new value
           const selectedValue =
-            allowNewValues && isValueNew ? value : filteredOptions[0];
+            allowNewValues && isValueNew
+              ? { label: value, value }
+              : filteredOptions[0];
           toggleOption(selectedValue, event);
           if (
             !isMultiSelect &&
-            !isTextInSelectedOptions(filteredOptions[0] || selectedValue)
+            !isTextInSelectedOptions(
+              filteredOptions[0].label || selectedValue.label,
+            )
           ) {
             toggleIsListOpen(false);
           }

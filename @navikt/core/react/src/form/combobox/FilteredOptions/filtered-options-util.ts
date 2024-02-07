@@ -1,13 +1,21 @@
+import { isInList } from "../combobox-utils";
+import { ComboboxOption } from "../types";
+
 const normalizeText = (text: string): string =>
   typeof text === "string" ? text.toLocaleLowerCase().trim() : "";
 
-const isPartOfText = (value, text) =>
+const isPartOfText = (value: string, text: string) =>
   normalizeText(text).startsWith(normalizeText(value ?? ""));
 
-const getMatchingValuesFromList = (value, list, alwaysIncluded) =>
+const getMatchingValuesFromList = (
+  value: string,
+  list: ComboboxOption[],
+  alwaysIncluded: ComboboxOption[],
+) =>
   list?.filter(
     (listItem) =>
-      isPartOfText(value, listItem) || alwaysIncluded.includes(listItem),
+      isPartOfText(value, listItem.label) ||
+      isInList(listItem.label, alwaysIncluded),
   );
 
 const getFilteredOptionsId = (comboboxId: string) =>
