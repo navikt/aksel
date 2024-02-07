@@ -24,7 +24,7 @@ export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
  * Use Box with padding and border instead
  * ```
  * <Box padding="4" />
- * <Box padding="4" border />
+ * <Box padding="4" borderWidth="1" borderRadius="small" />
  * ```
  * Component will be removed in a future major release
  */
