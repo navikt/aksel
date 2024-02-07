@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 5.18.0
+
+### Minor Changes
+
+- Portal: Ny komponent `Portal` som lar deg enkelt bruke `createPortal`, også på serversiden ([#2697](https://github.com/navikt/aksel/pull/2697))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.0
+  - @navikt/aksel-icons@5.18.0
+
 ## 5.17.5
 
 ### Patch Changes
