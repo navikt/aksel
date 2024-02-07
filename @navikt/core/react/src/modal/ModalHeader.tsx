@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { ModalContext } from "./ModalContext";
+import { useModalContext } from "./Modal.context";
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -15,7 +15,7 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ children, className, closeButton = true, ...rest }, ref) => {
-    const context = useContext(ModalContext);
+    const context = useModalContext();
     if (context === null) {
       console.error("<Modal.Header> has to be used within a <Modal>");
       return null;

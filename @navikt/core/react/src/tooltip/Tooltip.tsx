@@ -12,14 +12,8 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  HTMLAttributes,
-  cloneElement,
-  forwardRef,
-  useContext,
-  useRef,
-} from "react";
-import { ModalContext } from "../modal/ModalContext";
+import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import { useModalContext } from "../modal/Modal.context";
 import Portal from "../overlays/portal/Portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
@@ -121,7 +115,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     });
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const modalContext = useContext(ModalContext);
+    const modalContext = useModalContext();
     const rootElement = modalContext ? modalContext.ref.current : undefined;
 
     const {

@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
-import { ModalContext } from "../../modal/ModalContext";
+import { useModalContext } from "../../modal/Modal.context";
 import { Popover } from "../../popover";
 import { useMedia } from "../../util/hooks";
 import { modalCloseButtonLabel, modalLabel } from "../utils/labels";
@@ -30,7 +30,7 @@ export const DateWrapper = ({
   popoverProps,
 }: DateWrapperProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
-  const isInModal = useContext(ModalContext) !== null;
+  const isInModal = useModalContext() !== null;
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) && !isInModal;
 
