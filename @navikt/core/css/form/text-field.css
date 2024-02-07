@@ -41,7 +41,7 @@
 }
 
 .navds-text-field__input:hover {
-  border-color: var(--ac-textfield-hover-border, var(--__ac-textfield-hover-border, var(--a-border-action)));
+  border-color: var(--ac-textfield-hover-border, var(--__ac-textfield-hover-border, var(--a-border-action-hover)));
 }
 
 .navds-text-field__input:focus-visible {

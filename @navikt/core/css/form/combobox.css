@@ -92,9 +92,6 @@
 }
 
 .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus-visible) {
-  box-shadow:
-    0 0 0 1px var(--a-surface-default) inset,
-    var(--a-shadow-focus);
   box-shadow: var(--a-shadow-focus);
   outline: 3px solid transparent;
   outline-offset: 2px;
@@ -113,9 +110,6 @@
   }
 
   .navds-combobox__wrapper-inner:has(.navds-combobox__input:focus) {
-    box-shadow:
-      0 0 0 1px var(--a-surface-default) inset,
-      var(--a-shadow-focus);
     box-shadow: var(--a-shadow-focus);
     outline: 3px solid transparent;
     outline-offset: 2px;
@@ -129,9 +123,6 @@
 
 @supports not selector(:has) {
   .navds-combobox--focused .navds-combobox__wrapper-inner {
-    box-shadow:
-      0 0 0 1px var(--a-surface-default) inset,
-      var(--a-shadow-focus);
     box-shadow: var(--a-shadow-focus);
     outline: 3px solid transparent;
     outline-offset: 2px;
