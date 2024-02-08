@@ -1,6 +1,8 @@
+// eslint-disable-next-line testing-library/no-manual-cleanup
 import { act, fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { describe, expect, test } from "vitest";
 import {
   focusVisible,
   renderWithStyles as render,
@@ -64,7 +66,7 @@ describe("Tooltip", () => {
     expect(screen.queryByRole("tooltip")).toBeNull();
   });
 
-  it("delay", async () => {
+  test("delay", async () => {
     const user = userEvent.setup();
 
     render(
@@ -85,7 +87,7 @@ describe("Tooltip", () => {
     expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
-  it("outsideClick", async () => {
+  test("outsideClick", async () => {
     render(
       <div>
         <Tooltip content="Hello World">
@@ -108,7 +110,7 @@ describe("Tooltip", () => {
     expect(screen.queryByRole("tooltip")).toBeNull();
   });
 
-  it("keep open on tooltip-click", async () => {
+  test("keep open on tooltip-click", async () => {
     render(
       <div>
         <Tooltip content="Hello World">
@@ -128,7 +130,7 @@ describe("Tooltip", () => {
     expect(screen.getByRole("tooltip")).toBeVisible();
   });
 
-  it("close on focus-loss", async () => {
+  test("close on focus-loss", async () => {
     render(
       <div>
         <Tooltip content="Hello World">

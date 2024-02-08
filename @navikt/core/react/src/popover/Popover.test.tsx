@@ -1,5 +1,6 @@
 import { act, fireEvent, screen } from "@testing-library/react";
 import React from "react";
+import { describe, expect, test, vi } from "vitest";
 import { renderWithStyles as render } from "../../tests/utils";
 import Popover from "./Popover";
 
@@ -34,8 +35,8 @@ describe("Popover", () => {
     expect(screen.getByTestId("popover-id")).not.toBeVisible();
   });
 
-  it("outsideClick", async () => {
-    const fn = jest.fn();
+  test("outsideClick", async () => {
+    const fn = vi.fn();
     render(
       <div>
         <Popover
@@ -58,8 +59,8 @@ describe("Popover", () => {
     expect(fn).toHaveBeenCalled();
   });
 
-  it("escape", async () => {
-    const fn = jest.fn();
+  test("escape", async () => {
+    const fn = vi.fn();
     const { container } = render(
       <div>
         <Popover
@@ -83,8 +84,8 @@ describe("Popover", () => {
     expect(fn).toHaveBeenCalled();
   });
 
-  it("keep open on popover-focus", async () => {
-    const fn = jest.fn();
+  test("keep open on popover-focus", async () => {
+    const fn = vi.fn();
     render(
       <div>
         <Popover
@@ -106,8 +107,8 @@ describe("Popover", () => {
     expect(fn).toHaveBeenCalledTimes(0);
   }, 20000);
 
-  it("keep open on popover-click", async () => {
-    const fn = jest.fn();
+  test("keep open on popover-click", async () => {
+    const fn = vi.fn();
     render(
       <div>
         <Popover
