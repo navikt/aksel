@@ -7,7 +7,7 @@ const Test = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <Modal open={open}>
+    <Modal open={open} onClose={() => null} aria-label="Test">
       <Modal.Body>
         <p>Foobar</p>
         <Button onClick={() => setOpen(false)}>Close</Button>
@@ -40,7 +40,7 @@ describe("Modal", () => {
 
   test("should toggle body class when using portal", async () => {
     render(
-      <Modal portal open>
+      <Modal portal open onClose={() => null} aria-label="Test">
         <Modal.Header />
       </Modal>,
     );
