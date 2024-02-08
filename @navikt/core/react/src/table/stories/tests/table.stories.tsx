@@ -5,6 +5,9 @@ import Table from "../../Table";
 export default {
   title: "ds-react/Table/Tests",
   component: Table,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 export const ClickableRowTest = {
