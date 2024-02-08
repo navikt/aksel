@@ -345,4 +345,7 @@ export const Chromatic: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
