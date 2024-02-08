@@ -39,14 +39,9 @@ export interface UseMonthPickerOptions
    * Allows input of with 'yy' year format.
    * @default true
    * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
-   * In 2023 this equals to 1943 - 2042
+   * In 2024 this equals to 1944 - 2043
    */
   allowTwoDigitYear?: boolean;
-  /**
-   * Will be removed in a future major-version
-   * @deprecated
-   */
-  openOnFocus?: boolean;
 }
 
 interface UseMonthPickerValue {

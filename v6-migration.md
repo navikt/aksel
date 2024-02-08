@@ -1,5 +1,9 @@
 # Aksel v6 migrations
 
+## DatePicker/MonthPicker
+
+`openOnFocus`-prop er fjernet helt fra typer
+
 ## ErrorSummary
 
 - Heading-prop er satt som required
