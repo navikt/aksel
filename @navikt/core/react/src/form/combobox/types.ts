@@ -1,10 +1,21 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
+/**
+ * A more complex version of options for the Combobox.
+ * Used for separating the label and the value of the option.
+ *
+ * May be expanded in the future with more properties for supporting icons, grouping, etc.
+ */
 export type ComboboxOption = {
+  /**
+   * The label to display in the dropdown list
+   */
   label: string;
+  /**
+   * The programmatic value of the option, for use internally. Will be returned from onToggleSelected.
+   */
   value: string;
-  [key: string]: any; // TODO: Add more properties for ComboboxOption
 };
 
 export type MaxSelected = {
@@ -97,7 +108,7 @@ export interface ComboboxProps
   /**
    * Callback function triggered whenever an option is selected or de-selected
    *
-   * @param option
+   * @param option - The option value
    * @param isSelected - Whether the option has been selected or unselected
    * @param isCustomOption - Whether the option comes from user input, instead of from the list
    * @returns
