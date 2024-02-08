@@ -16,6 +16,16 @@
 
 Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. Om dette ikke dekker behovet eksponerer komponenten css-variabler som kan overstyres.
 
+## Modal
+
+### Props
+
+Prop-typene er gjort strengere for å gjøre det lettere å gjøre rett, primært for å unngå at `onBeforeClose` brukes når man egentlig burde brukt `onClose`.
+
+- Hvis du bruker propen `open` må du også bruke `onClose` for å holde lokal state oppdatert.
+- `onBeforeClose` må returnere `boolean`. Dette callbacket er ment for å brukes til å spørre om bekreftelse før modalen lukkes. Kode som alltid skal kjøre når modalen lukkes må legges i `onClose`.
+- `aria-label` eller `aria-labelledby` er påkrevd hvis du ikke bruker `header`. Du kan dessuten ikke bruke de to førstnevnte samtidig.
+
 ## Grid
 
 ### CSS
