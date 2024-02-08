@@ -12,6 +12,10 @@ men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grun
 - https://github.com/vercel/next.js/issues/44039
 - https://github.com/vercel/next.js/issues/12557
 
+## DatePicker/MonthPicker
+
+`openOnFocus`-prop er fjernet helt fra typer
+
 ## ErrorSummary
 
 - Heading-prop er satt som required

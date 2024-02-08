@@ -7,20 +7,12 @@ const options: docgen.ParserOptions = {
   shouldRemoveUndefinedFromOptional: true,
 
   propFilter: (prop) => {
-    if (prop.name === "className") return true;
-    if (prop.declarations !== undefined && prop.declarations.length > 0) {
-      const hasPropAdditionalDescription = prop.declarations.some(
-        (declaration) => {
-          return (
-            !declaration.fileName.includes("node_modules") ||
-            declaration.name === "RefAttributes"
-          );
-        },
-      );
-
-      return hasPropAdditionalDescription;
+    if (prop.name === "className" || prop.parent?.name === "RefAttributes") {
+      return true;
     }
-
+    if (prop.parent?.fileName.includes("/node_modules/@types/react/")) {
+      return false;
+    }
     return true;
   },
 };
@@ -36,7 +28,7 @@ const genDocs = () => {
         !x.toLowerCase().includes("pictogram"),
     );
 
-  const res: any[] = [];
+  const res: docgen.ComponentDoc[][] = [];
   const fails: string[] = [];
 
   files.forEach((file) => {
@@ -50,17 +42,11 @@ const genDocs = () => {
 
   console.log({ Documented: res.length, fails });
 
-  const cleaned = res.flat().reduce(
-    (old, cur) => [
-      ...old,
-      {
-        filePath: cur.filePath,
-        displayName: cur.displayName,
-        props: cur.props,
-      },
-    ],
-    [],
-  );
+  const cleaned = res.flat().map((file) => ({
+    filePath: file.filePath,
+    displayName: file.displayName,
+    props: file.props,
+  }));
 
   writeFileSync(`_docs.json`, JSON.stringify(cleaned, null, 2));
 };
