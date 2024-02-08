@@ -25,6 +25,7 @@
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
     "test": "jest --config ./config/jest.config.js",
+    "test:v": "vitest -c config/vitest.config.ts",
     "playwright": "playwright test",
     "test:watch": "jest --watch --config ./config/jest.config.js",
     "backup": "ts-node scripts/backup.js",
@@ -95,6 +96,7 @@
     "start-server-and-test": "^1.14.0",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^1.2.2"
   }
 }
