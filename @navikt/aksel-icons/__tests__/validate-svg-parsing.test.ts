@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { parseIcon } from "../config/parse-svg";
 
 describe(`SVG should be correctly parsed`, () => {
@@ -27,7 +28,7 @@ describe(`SVG should be correctly parsed`, () => {
   </svg>
   `;
 
-  it("a", () => {
+  test("a", () => {
     expect(parseIcon(simpleSvg)).toEqual(simpleSvgResult);
     expect(parseIcon(advancedSvg)).toEqual(advancedSvgResult);
   });

@@ -56,9 +56,10 @@
     "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
     "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "fetch-new:icons": "node config/figma/index.mjs",
-    "zip:icons": "node config/zip.js"
+    "zip:icons": "node config/zip.js",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "devDependencies": {
     "@svgr/cli": "6.5.1",
@@ -76,15 +77,7 @@
     "react": "^18.0.0",
     "rehype-parse": "8.0.4",
     "typescript": "^5.1.6",
-    "unified": "10.1.2"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/unified/*"
-    ],
-    "testMatch": [
-      "**/__tests__/*.js",
-      "**/__tests__/*.mjs"
-    ]
+    "unified": "10.1.2",
+    "vitest": "^1.2.2"
   }
 }

@@ -3469,6 +3469,7 @@ __metadata:
     rehype-parse: 8.0.4
     typescript: ^5.1.6
     unified: 10.1.2
+    vitest: ^1.2.2
   languageName: unknown
   linkType: soft
 
