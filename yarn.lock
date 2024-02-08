@@ -3553,7 +3553,6 @@ __metadata:
     date-fns: ^2.30.0
     faker: 5.5.3
     fast-glob: 3.2.11
-    happy-dom: ^13.3.8
     jsdom: 24.0.0
     react-day-picker: 8.3.4
     react-dom: ^18.0.0
@@ -12901,7 +12900,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^4.2.0, entities@npm:^4.4.0, entities@npm:^4.5.0":
+"entities@npm:^4.2.0, entities@npm:^4.4.0":
   version: 4.5.0
   resolution: "entities@npm:4.5.0"
   checksum: 853f8ebd5b425d350bffa97dd6958143179a5938352ccae092c62d1267c4e392a039be1bae7d51b6e4ffad25f51f9617531fedf5237f15df302ccfb452cbf2d7
@@ -15454,17 +15453,6 @@ __metadata:
   bin:
     handlebars: bin/handlebars
   checksum: 00e68bb5c183fd7b8b63322e6234b5ac8fbb960d712cb3f25587d559c2951d9642df83c04a1172c918c41bcfc81bfbd7a7718bbce93b893e0135fc99edea93ff
-  languageName: node
-  linkType: hard
-
-"happy-dom@npm:^13.3.8":
-  version: 13.3.8
-  resolution: "happy-dom@npm:13.3.8"
-  dependencies:
-    entities: ^4.5.0
-    webidl-conversions: ^7.0.0
-    whatwg-mimetype: ^3.0.0
-  checksum: cfdb9f80f19b0d1839c96c3b7d52f0890ab4d13fbda30081f5cdf748328c5ea1e14da10bf0531e7607c97f2196757ac0a61bf26334497285c8e29d2a6ec13a7a
   languageName: node
   linkType: hard
 
