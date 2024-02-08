@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { getColors } from "../colors";
 
 describe("Check correct parsing of tailwind tokens", () => {

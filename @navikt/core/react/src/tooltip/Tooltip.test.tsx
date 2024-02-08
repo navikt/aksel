@@ -1,4 +1,3 @@
-// eslint-disable-next-line testing-library/no-manual-cleanup
 import { act, fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
