@@ -21,7 +21,9 @@
     "build": "node ./config/build.js > /dev/null",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "cd config && style-dictionary build",
-    "test": "jest"
+    "test-old": "jest",
+    "test:token": "vitest run",
+    "test:watch": "vitest watch"
   },
   "repository": {
     "type": "git",
@@ -37,7 +39,8 @@
     "style-dictionary": "^3.0.2",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^1.2.2"
   },
   "publishConfig": {
     "access": "public",
