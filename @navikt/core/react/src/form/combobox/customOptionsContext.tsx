@@ -1,4 +1,5 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { createContext } from "../../util/create-context";
 import { ComboboxOption } from "./Combobox.types";
 import { useInputContext } from "./parts/input/Input.context";
 
@@ -9,11 +10,14 @@ type CustomOptionsContextType = {
   setCustomOptions: React.Dispatch<React.SetStateAction<ComboboxOption[]>>;
 };
 
-const CustomOptionsContext = createContext<CustomOptionsContextType>(
-  {} as CustomOptionsContextType,
-);
+const [CustomOptionsContextProvider, useCustomOptionsContext] =
+  createContext<CustomOptionsContextType>({
+    name: "CustomOptionsContext",
+    hookName: "useCustomOptionsContext",
+    providerName: "CustomOptionsProvider",
+  });
 
-export const CustomOptionsProvider = ({
+const CustomOptionsProvider = ({
   children,
   value,
 }: {
@@ -46,26 +50,16 @@ export const CustomOptionsProvider = ({
     [focusInput, isMultiSelect, setCustomOptions],
   );
 
-  const customOptionsState = {
-    customOptions,
-    removeCustomOption,
-    addCustomOption,
-    setCustomOptions,
-  };
-
   return (
-    <CustomOptionsContext.Provider value={customOptionsState}>
+    <CustomOptionsContextProvider
+      customOptions={customOptions}
+      removeCustomOption={removeCustomOption}
+      addCustomOption={addCustomOption}
+      setCustomOptions={setCustomOptions}
+    >
       {children}
-    </CustomOptionsContext.Provider>
+    </CustomOptionsContextProvider>
   );
 };
 
-export const useCustomOptionsContext = () => {
-  const context = useContext(CustomOptionsContext);
-  if (!context) {
-    throw new Error(
-      "useCustomOptionsContext must be used within a CustomOptionsProvider",
-    );
-  }
-  return context;
-};
+export { CustomOptionsProvider, useCustomOptionsContext };
