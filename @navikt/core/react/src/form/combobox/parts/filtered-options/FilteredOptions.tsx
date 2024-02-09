@@ -1,12 +1,12 @@
 import cl from "clsx";
 import React from "react";
 import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
-import { Loader } from "../../../loader";
-import { BodyShort, Label } from "../../../typography";
-import { ComboboxOption } from "../Combobox.types";
-import { useInputContext } from "../Input/inputContext";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { isInList, toComboboxOption } from "../combobox-utils";
+import { Loader } from "../../../../loader";
+import { BodyShort, Label } from "../../../../typography";
+import { ComboboxOption } from "../../Combobox.types";
+import { isInList, toComboboxOption } from "../../util/combobox-utils";
+import { useInputContext } from "../input/inputContext";
+import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 

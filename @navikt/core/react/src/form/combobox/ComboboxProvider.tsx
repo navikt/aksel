@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import Combobox from "./Combobox";
 import { ComboboxBaseProps } from "./Combobox.types";
-import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
-import { InputContextProvider } from "./Input/inputContext";
-import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
-import { mapFromStringArrayToComboboxOptionArray } from "./combobox-utils";
 import { CustomOptionsProvider } from "./customOptionsContext";
+import { FilteredOptionsProvider } from "./parts/filtered-options/filteredOptionsContext";
+import { InputContextProvider } from "./parts/input/inputContext";
+import { SelectedOptionsProvider } from "./parts/selected-options/selectedOptionsContext";
+import { mapFromStringArrayToComboboxOptionArray } from "./util/combobox-utils";
 
 /**
  * A component that allows the user to search in a list of options

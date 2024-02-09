@@ -5,10 +5,10 @@ import React, {
   forwardRef,
   useCallback,
 } from "react";
-import { omit } from "../../../util";
-import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
-import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { omit } from "../../../../util";
+import filteredOptionsUtil from "../filtered-options/filtered-options-util";
+import { useFilteredOptionsContext } from "../filtered-options/filteredOptionsContext";
+import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
 import { useInputContext } from "./inputContext";
 
 interface InputProps

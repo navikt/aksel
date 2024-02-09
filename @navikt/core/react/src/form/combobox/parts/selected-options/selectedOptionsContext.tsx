@@ -5,15 +5,15 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { usePrevious } from "../../../util/hooks";
+import { usePrevious } from "../../../../util/hooks";
 import {
   ComboboxBaseProps,
   ComboboxOption,
   MaxSelected,
-} from "../Combobox.types";
-import { useInputContext } from "../Input/inputContext";
-import { isInList } from "../combobox-utils";
-import { useCustomOptionsContext } from "../customOptionsContext";
+} from "../../Combobox.types";
+import { useCustomOptionsContext } from "../../customOptionsContext";
+import { isInList } from "../../util/combobox-utils";
+import { useInputContext } from "../input/inputContext";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: ComboboxOption) => void;

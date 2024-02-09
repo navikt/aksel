@@ -2,16 +2,16 @@ import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import ClearButton from "./ClearButton";
 import { ComboboxProps } from "./Combobox.types";
 import ComboboxWrapper from "./ComboboxWrapper";
-import FilteredOptions from "./FilteredOptions/FilteredOptions";
-import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
-import Input from "./Input/Input";
-import { useInputContext } from "./Input/inputContext";
-import SelectedOptions from "./SelectedOptions/SelectedOptions";
-import { useSelectedOptionsContext } from "./SelectedOptions/selectedOptionsContext";
-import ToggleListButton from "./ToggleListButton";
+import ClearButton from "./parts/buttons/ClearButton";
+import ToggleListButton from "./parts/buttons/ToggleListButton";
+import FilteredOptions from "./parts/filtered-options/FilteredOptions";
+import { useFilteredOptionsContext } from "./parts/filtered-options/filteredOptionsContext";
+import Input from "./parts/input/Input";
+import { useInputContext } from "./parts/input/inputContext";
+import SelectedOptions from "./parts/selected-options/SelectedOptions";
+import { useSelectedOptionsContext } from "./parts/selected-options/selectedOptionsContext";
 
 export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
   (props, ref) => {

@@ -8,8 +8,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useClientLayoutEffect } from "../../../util/hooks";
-import { FormFieldType, useFormField } from "../../useFormField";
+import { useClientLayoutEffect } from "../../../../util";
+import { FormFieldType, useFormField } from "../../../useFormField";
 
 interface InputContextType extends FormFieldType {
   clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;

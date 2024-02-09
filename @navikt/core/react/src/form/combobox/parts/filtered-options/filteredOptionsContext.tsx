@@ -7,12 +7,12 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
-import { ComboboxBaseProps, ComboboxOption } from "../Combobox.types";
-import { useInputContext } from "../Input/inputContext";
-import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { toComboboxOption } from "../combobox-utils";
-import { useCustomOptionsContext } from "../customOptionsContext";
+import { useClientLayoutEffect, usePrevious } from "../../../../util/hooks";
+import { ComboboxBaseProps, ComboboxOption } from "../../Combobox.types";
+import { useCustomOptionsContext } from "../../customOptionsContext";
+import { toComboboxOption } from "../../util/combobox-utils";
+import { useInputContext } from "../input/inputContext";
+import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
 

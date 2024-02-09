@@ -1,4 +1,4 @@
-import { ComboboxOption } from "./Combobox.types";
+import { ComboboxOption } from "../Combobox.types";
 
 const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) =>
   list
