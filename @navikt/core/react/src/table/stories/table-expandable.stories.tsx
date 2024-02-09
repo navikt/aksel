@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Table } from "..";
-import { Button, Checkbox, Link } from "../..";
+import { Button } from "../../button";
+import { Checkbox } from "../../form";
+import { Link } from "../../link";
+import Table from "../Table";
 
 export default {
   title: "ds-react/Table",

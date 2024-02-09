@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Accordion, AccordionProps } from ".";
-import { Table } from "..";
+import { Table } from "../table";
 import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";

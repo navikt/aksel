@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import React from "react";
-import { Detail } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import Detail from "../Detail";
 
 const meta = {
   title: "ds-react/Typography/Detail",
