@@ -1,14 +1,13 @@
 import React, {
   ChangeEvent,
   ChangeEventHandler,
-  createContext,
   useCallback,
-  useContext,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { useClientLayoutEffect } from "../../../../util";
+import { createContext } from "../../../../util/create-context";
 import { FormFieldType, useFormField } from "../../../useFormField";
 
 interface InputContextType extends FormFieldType {
@@ -24,9 +23,15 @@ interface InputContextType extends FormFieldType {
   shouldAutocomplete?: boolean;
 }
 
-const InputContext = createContext<InputContextType>({} as InputContextType);
+const [InputContextProvider, useInputContext] = createContext<InputContextType>(
+  {
+    name: "InputContextProvider",
+    hookName: "useInputContext",
+    providerName: "InputContextProvider",
+  },
+);
 
-export const InputContextProvider = ({ children, value: props }) => {
+const InputProvider = ({ children, value: props }) => {
   const {
     defaultValue = "",
     description,
@@ -98,33 +103,21 @@ export const InputContextProvider = ({ children, value: props }) => {
     }
   }, [value, searchTerm, shouldAutocomplete]);
 
-  return (
-    <InputContext.Provider
-      value={{
-        ...formFieldProps,
-        clearInput,
-        error,
-        focusInput,
-        inputRef,
-        value,
-        setValue,
-        onChange,
-        searchTerm,
-        setSearchTerm,
-        shouldAutocomplete,
-      }}
-    >
-      {children}
-    </InputContext.Provider>
-  );
+  const ctx = {
+    ...formFieldProps,
+    clearInput,
+    error,
+    focusInput,
+    inputRef,
+    value,
+    setValue,
+    onChange,
+    searchTerm,
+    setSearchTerm,
+    shouldAutocomplete,
+  };
+
+  return <InputContextProvider {...ctx}>{children}</InputContextProvider>;
 };
 
-export const useInputContext = () => {
-  const context = useContext(InputContext);
-  if (!context) {
-    throw new Error(
-      "useInputContext must be used within an InputContextProvider",
-    );
-  }
-  return context;
-};
+export { useInputContext, InputProvider };

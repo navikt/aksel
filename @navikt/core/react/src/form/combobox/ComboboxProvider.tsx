@@ -3,7 +3,7 @@ import Combobox from "./Combobox";
 import { ComboboxBaseProps } from "./Combobox.types";
 import { CustomOptionsProvider } from "./customOptionsContext";
 import { FilteredOptionsProvider } from "./parts/filtered-options/FilteredOptions.context";
-import { InputContextProvider } from "./parts/input/Input.context";
+import { InputProvider } from "./parts/input/Input.context";
 import { SelectedOptionsProvider } from "./parts/selected-options/SelectedOptions.context";
 import { mapFromStringArrayToComboboxOptionArray } from "./util/combobox-utils";
 
@@ -62,7 +62,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxBaseProps>(
       externalSelectedOptions,
     );
     return (
-      <InputContextProvider
+      <InputProvider
         value={{
           defaultValue,
           error,
@@ -101,7 +101,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxBaseProps>(
             </FilteredOptionsProvider>
           </SelectedOptionsProvider>
         </CustomOptionsProvider>
-      </InputContextProvider>
+      </InputProvider>
     );
   },
 );
