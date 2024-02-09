@@ -122,4 +122,31 @@ describe("Combobox state-handling", () => {
       await screen.findByRole("option", { name: "banana" }),
     ).toBeInTheDocument();
   });
+
+  it("Should handle complex options with label and value", async () => {
+    const onToggleSelected = jest.fn();
+    render(
+      <App
+        options={[
+          { label: "Banana", value: "banana" },
+          { label: "Apple", value: "apple" },
+          { label: "Tangerine", value: "tangerine" },
+        ]}
+        onToggleSelected={onToggleSelected}
+      />,
+    );
+
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    const bananaOption = screen.getByRole("option", {
+      name: "Banana",
+      selected: false,
+    });
+    await act(async () => {
+      await userEvent.click(bananaOption);
+    });
+    expect(onToggleSelected).toHaveBeenCalledWith("banana", true, false);
+    expect(
+      screen.getByRole("option", { name: "Banana", selected: true }),
+    ).toBeInTheDocument();
+  });
 });
