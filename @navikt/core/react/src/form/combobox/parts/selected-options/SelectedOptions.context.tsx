@@ -1,10 +1,5 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useState } from "react";
+import { createContext } from "../../../../util/create-context";
 import { usePrevious } from "../../../../util/hooks";
 import {
   ComboboxBaseProps,
@@ -29,11 +24,14 @@ type SelectedOptionsContextType = {
   ) => void;
 };
 
-const SelectedOptionsContext = createContext<SelectedOptionsContextType>(
-  {} as SelectedOptionsContextType,
-);
+const [SelectedOptionsContextProvider, useSelectedOptionsContext] =
+  createContext<SelectedOptionsContextType>({
+    name: "InputContext",
+    hookName: "useSelectedOptionsContext",
+    providerName: "SelectedOptionsContextProvider",
+  });
 
-export const SelectedOptionsProvider = ({
+const SelectedOptionsProvider = ({
   children,
   value,
 }: {
@@ -153,18 +151,10 @@ export const SelectedOptionsProvider = ({
   };
 
   return (
-    <SelectedOptionsContext.Provider value={selectedOptionsState}>
+    <SelectedOptionsContextProvider {...selectedOptionsState}>
       {children}
-    </SelectedOptionsContext.Provider>
+    </SelectedOptionsContextProvider>
   );
 };
 
-export const useSelectedOptionsContext = () => {
-  const context = useContext(SelectedOptionsContext);
-  if (!context) {
-    throw new Error(
-      "useSelectedOptionsContext must be used within a SelectedOptionsProvider",
-    );
-  }
-  return context;
-};
+export { useSelectedOptionsContext, SelectedOptionsProvider };
