@@ -5,7 +5,7 @@ import { Loader } from "../../../../loader";
 import { BodyShort, Label } from "../../../../typography";
 import { ComboboxOption } from "../../Combobox.types";
 import { isInList, toComboboxOption } from "../../util/combobox-utils";
-import { useInputContext } from "../input/inputContext";
+import { useInputContext } from "../input/Input.context";
 import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";

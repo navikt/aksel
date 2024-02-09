@@ -9,7 +9,7 @@ import ToggleListButton from "./parts/buttons/ToggleListButton";
 import FilteredOptions from "./parts/filtered-options/FilteredOptions";
 import { useFilteredOptionsContext } from "./parts/filtered-options/filteredOptionsContext";
 import Input from "./parts/input/Input";
-import { useInputContext } from "./parts/input/inputContext";
+import { useInputContext } from "./parts/input/Input.context";
 import SelectedOptions from "./parts/selected-options/SelectedOptions";
 import { useSelectedOptionsContext } from "./parts/selected-options/selectedOptionsContext";
 

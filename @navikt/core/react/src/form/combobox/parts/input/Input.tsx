@@ -9,7 +9,7 @@ import { omit } from "../../../../util";
 import filteredOptionsUtil from "../filtered-options/filtered-options-util";
 import { useFilteredOptionsContext } from "../filtered-options/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
-import { useInputContext } from "./inputContext";
+import { useInputContext } from "./Input.context";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {

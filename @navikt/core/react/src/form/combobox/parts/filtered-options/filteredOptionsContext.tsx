@@ -11,7 +11,7 @@ import { useClientLayoutEffect, usePrevious } from "../../../../util/hooks";
 import { ComboboxBaseProps, ComboboxOption } from "../../Combobox.types";
 import { useCustomOptionsContext } from "../../customOptionsContext";
 import { toComboboxOption } from "../../util/combobox-utils";
-import { useInputContext } from "../input/inputContext";
+import { useInputContext } from "../input/Input.context";
 import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";

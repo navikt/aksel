@@ -3,7 +3,7 @@ import Combobox from "./Combobox";
 import { ComboboxBaseProps } from "./Combobox.types";
 import { CustomOptionsProvider } from "./customOptionsContext";
 import { FilteredOptionsProvider } from "./parts/filtered-options/filteredOptionsContext";
-import { InputContextProvider } from "./parts/input/inputContext";
+import { InputContextProvider } from "./parts/input/Input.context";
 import { SelectedOptionsProvider } from "./parts/selected-options/selectedOptionsContext";
 import { mapFromStringArrayToComboboxOptionArray } from "./util/combobox-utils";
 

@@ -13,7 +13,7 @@ import {
 } from "../../Combobox.types";
 import { useCustomOptionsContext } from "../../customOptionsContext";
 import { isInList } from "../../util/combobox-utils";
-import { useInputContext } from "../input/inputContext";
+import { useInputContext } from "../input/Input.context";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: ComboboxOption) => void;
