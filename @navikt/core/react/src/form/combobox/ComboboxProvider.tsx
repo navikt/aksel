@@ -2,9 +2,9 @@ import React, { forwardRef } from "react";
 import Combobox from "./Combobox";
 import { ComboboxBaseProps } from "./Combobox.types";
 import { CustomOptionsProvider } from "./customOptionsContext";
-import { FilteredOptionsProvider } from "./parts/filtered-options/filteredOptionsContext";
+import { FilteredOptionsProvider } from "./parts/filtered-options/FilteredOptions.context";
 import { InputContextProvider } from "./parts/input/Input.context";
-import { SelectedOptionsProvider } from "./parts/selected-options/selectedOptionsContext";
+import { SelectedOptionsProvider } from "./parts/selected-options/SelectedOptions.context";
 import { mapFromStringArrayToComboboxOptionArray } from "./util/combobox-utils";
 
 /**

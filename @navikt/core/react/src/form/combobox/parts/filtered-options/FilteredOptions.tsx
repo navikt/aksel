@@ -6,9 +6,9 @@ import { BodyShort, Label } from "../../../../typography";
 import { ComboboxOption } from "../../Combobox.types";
 import { isInList, toComboboxOption } from "../../util/combobox-utils";
 import { useInputContext } from "../input/Input.context";
-import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
+import { useSelectedOptionsContext } from "../selected-options/SelectedOptions.context";
+import { useFilteredOptionsContext } from "./FilteredOptions.context";
 import filteredOptionsUtil from "./filtered-options-util";
-import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
   const {

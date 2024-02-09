@@ -2,7 +2,7 @@ import React from "react";
 import { Chips } from "../../../../chips";
 import { ComboboxOption } from "../../Combobox.types";
 import { useInputContext } from "../input/Input.context";
-import { useSelectedOptionsContext } from "./selectedOptionsContext";
+import { useSelectedOptionsContext } from "./SelectedOptions.context";
 
 interface SelectedOptionsProps {
   selectedOptions?: ComboboxOption[];

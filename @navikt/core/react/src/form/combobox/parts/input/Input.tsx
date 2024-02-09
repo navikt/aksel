@@ -6,9 +6,9 @@ import React, {
   useCallback,
 } from "react";
 import { omit } from "../../../../util";
+import { useFilteredOptionsContext } from "../filtered-options/FilteredOptions.context";
 import filteredOptionsUtil from "../filtered-options/filtered-options-util";
-import { useFilteredOptionsContext } from "../filtered-options/filteredOptionsContext";
-import { useSelectedOptionsContext } from "../selected-options/selectedOptionsContext";
+import { useSelectedOptionsContext } from "../selected-options/SelectedOptions.context";
 import { useInputContext } from "./Input.context";
 
 interface InputProps
