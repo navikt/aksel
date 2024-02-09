@@ -8,17 +8,20 @@ import React, {
   useState,
 } from "react";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
+import { ComboboxBaseProps, ComboboxOption } from "../Combobox.types";
 import { useInputContext } from "../Input/inputContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
 
 type FilteredOptionsProps = {
   children: any;
-  value: Pick<ComboboxProps, "allowNewValues" | "isListOpen" | "isLoading"> & {
+  value: Pick<
+    ComboboxBaseProps,
+    "allowNewValues" | "isListOpen" | "isLoading"
+  > & {
     filteredOptions?: ComboboxOption[];
     options: ComboboxOption[];
   };

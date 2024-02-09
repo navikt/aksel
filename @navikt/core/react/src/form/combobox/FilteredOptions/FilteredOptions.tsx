@@ -3,10 +3,10 @@ import React from "react";
 import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
 import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
+import { ComboboxOption } from "../Combobox.types";
 import { useInputContext } from "../Input/inputContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
-import { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 

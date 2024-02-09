@@ -1,8 +1,8 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useId, useMemo, useRef, useState } from "react";
-import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
-import { ComboboxOption } from "./types";
+import { Chips, TextField, UNSAFE_Combobox } from "../../index";
+import { ComboboxBaseProps, ComboboxOption } from "./Combobox.types";
 
 export default {
   title: "ds-react/Combobox",
@@ -170,7 +170,7 @@ MultiSelectWithAddNewOptions.args = {
 
 export const MultiSelectWithExternalChips: StoryFn<{
   controlled: boolean;
-  options: ComboboxProps["options"];
+  options: ComboboxBaseProps["options"];
 }> = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [value, setValue] = useState("");

@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
+import { ComboboxOption } from "./Combobox.types";
 import { useInputContext } from "./Input/inputContext";
-import { ComboboxOption } from "./types";
 
 type CustomOptionsContextType = {
   customOptions: ComboboxOption[];

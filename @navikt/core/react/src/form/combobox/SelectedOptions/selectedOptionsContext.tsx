@@ -6,10 +6,14 @@ import React, {
   useState,
 } from "react";
 import { usePrevious } from "../../../util/hooks";
+import {
+  ComboboxBaseProps,
+  ComboboxOption,
+  MaxSelected,
+} from "../Combobox.types";
 import { useInputContext } from "../Input/inputContext";
 import { isInList } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
 
 type SelectedOptionsContextType = {
   addSelectedOption: (option: ComboboxOption) => void;
@@ -35,7 +39,7 @@ export const SelectedOptionsProvider = ({
 }: {
   children: any;
   value: Pick<
-    ComboboxProps,
+    ComboboxBaseProps,
     "allowNewValues" | "isMultiSelect" | "onToggleSelected" | "maxSelected"
   > & { options: ComboboxOption[]; selectedOptions?: ComboboxOption[] };
 }) => {

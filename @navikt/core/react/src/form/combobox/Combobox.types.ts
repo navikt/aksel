@@ -18,7 +18,7 @@ export type MaxSelected = {
   message?: string;
 };
 
-export interface ComboboxProps
+export interface ComboboxBaseProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
   /**
@@ -149,3 +149,8 @@ export interface ComboboxProps
    */
   value?: string;
 }
+
+export type ComboboxProps = Omit<
+  ComboboxBaseProps,
+  "onChange" | "options" | "size" | "onClear" | "value"
+>;
