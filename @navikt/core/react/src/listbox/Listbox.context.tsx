@@ -11,10 +11,10 @@ export const [ListboxContextProvider, useListboxContext] =
 
 export const [
   ListboxDescendantsProvider,
-  _,
-  useListboxDescendants,
+  useDescendantsContext,
+  useCreateListboxDescendants,
   useListboxDescendant,
-] = createDescendantContext<HTMLDivElement>();
+] = createDescendantContext<HTMLDivElement, { id: string }>();
 
 export interface ListboxImplContextProps {
   focusedId: string | null;
