@@ -11,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Demo: Story = {
-  render: () => <Listbox />,
+  render: () => <Listbox>Listbox</Listbox>,
 };
