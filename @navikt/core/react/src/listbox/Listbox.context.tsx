@@ -15,3 +15,15 @@ export const [
   useListboxDescendants,
   useListboxDescendant,
 ] = createDescendantContext<HTMLDivElement>();
+
+export interface ListboxImplContextProps {
+  focusedId: string | null;
+  selectOption: (id: string) => void;
+}
+
+export const [ListboxImlpContextProvider, useListboxImplContext] =
+  createContext<ListboxImplContextProps>({
+    hookName: "useListboxImplContext",
+    providerName: "ListboxImlpContextProvider",
+    name: "ListboxImplContext",
+  });

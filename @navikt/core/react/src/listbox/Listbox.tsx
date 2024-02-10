@@ -1,10 +1,21 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
+import { useId, useMergeRefs } from "../util/hooks";
 import {
   ListboxContextProvider,
   ListboxDescendantsProvider,
+  ListboxImlpContextProvider,
+  useListboxDescendant,
   useListboxDescendants,
+  useListboxImplContext,
 } from "./Listbox.context";
 import { ListboxProps } from "./Listbox.types";
+
+interface ListboxComponent
+  extends React.ForwardRefExoticComponent<
+    ListboxProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Option: typeof ListboxOption;
+}
 
 export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(
   ({ children, virtual }, forwardedRef) => {
@@ -25,14 +36,64 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(
       </ListboxDescendantsProvider>
     );
   },
-);
+) as ListboxComponent;
 
 interface ListboxImlpProps {
   children?: React.ReactNode;
 }
 
-export const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
+const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
   ({ children }, ref) => {
-    return <div ref={ref}>{children}</div>;
+    const [focusedId, setFocusedId] = useState<string | null>(null);
+
+    return (
+      <ListboxImlpContextProvider
+        focusedId={focusedId}
+        selectOption={setFocusedId}
+      >
+        <div ref={ref}>{children}</div>
+      </ListboxImlpContextProvider>
+    );
   },
 );
+
+interface ListboxOptionProps {
+  children?: React.ReactNode;
+  disabled?: boolean;
+}
+
+const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
+  ({ children, disabled }, forwardedRef) => {
+    const ctx = useListboxImplContext();
+    const { register } = useListboxDescendant({
+      disabled,
+    });
+
+    const id = useId();
+
+    const mergedRefs = useMergeRefs(register, forwardedRef);
+
+    return (
+      <div
+        ref={mergedRefs}
+        data-id={id}
+        role="option"
+        aria-selected={ctx.focusedId === id}
+        onPointerMove={() => ctx.selectOption(id)}
+      >
+        <style>
+          {`
+            [aria-selected="true"] {
+              color: red;
+            }
+          `}
+        </style>
+        {children}
+      </div>
+    );
+  },
+);
+
+Listbox.Option = ListboxOption;
+
+export default Listbox;
