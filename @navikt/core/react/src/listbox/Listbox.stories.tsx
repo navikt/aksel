@@ -14,13 +14,13 @@ type Story = StoryObj<typeof meta>;
 export const Demo: Story = {
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [inptutIsFocus, setInptutIsFocus] = useState(false);
+    const [inputIsFocus, setInputIsFocus] = useState(false);
     return (
-      <Listbox focusFirstOnKeydown={inptutIsFocus}>
+      <Listbox focusFirstOnKeydown={inputIsFocus}>
         <input
           type="text"
-          onFocusCapture={() => setInptutIsFocus(true)}
-          onBlurCapture={() => setInptutIsFocus(false)}
+          onFocusCapture={() => setInputIsFocus(true)}
+          onBlurCapture={() => setInputIsFocus(false)}
         />
         <Listbox.Option>option1</Listbox.Option>
         <Listbox.Option>option2</Listbox.Option>
@@ -51,15 +51,23 @@ const WrapperComboboxItem = ({ item, childRender, ...rest }: any) => {
 };
 
 const ComboboxPOC = ({ options, children }: DemoProps) => {
-  const [inptutIsFocus, setInptutIsFocus] = useState(false);
+  const [inputIsFocus, setInputIsFocus] = useState(false);
 
   return (
     <div>
-      <Listbox focusFirstOnKeydown={inptutIsFocus}>
+      <style>
+        {`
+            [aria-selected="true"] {
+              color: red;
+            }
+          `}
+      </style>
+      <Listbox focusFirstOnKeydown={inputIsFocus}>
         <input
           type="text"
-          onFocusCapture={() => setInptutIsFocus(true)}
-          onBlurCapture={() => setInptutIsFocus(false)}
+          onFocusCapture={() => setInputIsFocus(true)}
+          onBlurCapture={() => setInputIsFocus(false)}
+          data-isvirtualfocus={inputIsFocus}
         />
         {options.map((option, key) => (
           <WrapperComboboxItem key={key} item={option} childRender={children} />

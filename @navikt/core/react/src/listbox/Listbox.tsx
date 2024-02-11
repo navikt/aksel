@@ -21,14 +21,15 @@ interface ListboxComponent
 }
 
 export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(
-  ({ children, virtual }, forwardedRef) => {
+  ({ children, virtual, onSelectionChange }, forwardedRef) => {
     const descendants = useCreateListboxDescendants();
 
     const memoizedProps = useMemo(
       () => ({
         virtual,
+        onSelectionChange,
       }),
-      [virtual],
+      [virtual, onSelectionChange],
     );
 
     return (
@@ -140,13 +141,6 @@ const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
         aria-selected={ctx.focusedId === id}
         onPointerMove={() => ctx.selectOption(id)}
       >
-        <style>
-          {`
-            [aria-selected="true"] {
-              color: red;
-            }
-          `}
-        </style>
         {children}
       </div>
     );
