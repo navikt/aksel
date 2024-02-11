@@ -6,7 +6,7 @@ export type ListboxBaseProps = {
    * allows setting current focused value to null when ArrowUp while on first item
    */
   focusFirstOnKeydown?: boolean;
-  onSelectionChange?: (value: Key[]) => void;
+  onSelectionChange?: (value: Key) => void;
 };
 
 export interface ListboxProps extends ListboxBaseProps {

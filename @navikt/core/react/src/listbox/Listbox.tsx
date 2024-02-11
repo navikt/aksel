@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { forwardRef, useMemo, useState } from "react";
 import { useId, useMergeRefs } from "../util/hooks";
@@ -53,6 +55,10 @@ const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
     const { nextEnabled, prevEnabled, firstEnabled, lastEnabled, values } =
       useDescendantsContext();
 
+    const handleFocusChange = (value: string | null) => {
+      setFocusedId(value);
+    };
+
     return (
       <ListboxImlpContextProvider
         focusedId={focusedId}
@@ -70,32 +76,32 @@ const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
                   focusedId === null
                 ) {
                   const first = firstEnabled();
-                  first && setFocusedId(first.id);
+                  first && handleFocusChange(first.id);
                 }
                 const next = nextEnabled(currentIndex, false);
-                next && setFocusedId(next.id);
+                next && handleFocusChange(next.id);
 
                 break;
               }
               case "ArrowUp": {
                 const prev = prevEnabled(currentIndex, false);
                 if (prev) {
-                  setFocusedId(prev.id);
+                  handleFocusChange(prev.id);
                 } else {
-                  setFocusedId(null);
+                  handleFocusChange(null);
                 }
                 break;
               }
               case "Home": {
                 e.preventDefault();
                 const first = firstEnabled();
-                first && setFocusedId(first.id);
+                first && handleFocusChange(first.id);
                 break;
               }
               case "End": {
                 e.preventDefault();
                 const last = lastEnabled();
-                last && setFocusedId(last.id);
+                last && handleFocusChange(last.id);
                 break;
               }
               case "Enter": {
@@ -119,27 +125,32 @@ const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
 interface ListboxOptionProps {
   children?: React.ReactNode;
   disabled?: boolean;
+  id?: string;
 }
 
 const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
-  ({ children, disabled = false }, forwardedRef) => {
+  ({ children, disabled = false, id }, forwardedRef) => {
+    const listCtx = useListboxContext();
     const ctx = useListboxImplContext();
-    const id = useId();
+    const _id = useId();
 
+    const itemId = id ?? _id;
     const { register } = useListboxDescendant({
       disabled,
-      id,
+      id: itemId,
     });
 
     const mergedRefs = useMergeRefs(register, forwardedRef);
 
     return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
       <div
         ref={mergedRefs}
-        data-id={id}
+        data-id={itemId}
         role="option"
-        aria-selected={ctx.focusedId === id}
-        onPointerMove={() => ctx.selectOption(id)}
+        aria-selected={ctx.focusedId === itemId}
+        onPointerMove={() => ctx.selectOption(itemId)}
+        onClick={() => listCtx.onSelectionChange?.(itemId)}
       >
         {children}
       </div>

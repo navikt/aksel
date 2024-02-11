@@ -62,7 +62,10 @@ const ComboboxPOC = ({ options, children }: DemoProps) => {
             }
           `}
       </style>
-      <Listbox focusFirstOnKeydown={inputIsFocus}>
+      <Listbox
+        focusFirstOnKeydown={inputIsFocus}
+        onSelectionChange={console.log}
+      >
         <input
           type="text"
           onFocusCapture={() => setInputIsFocus(true)}
@@ -100,7 +103,9 @@ export const ComboboxLabelDemo = {
           { key: "opt-3", label: "Option 3" },
         ]}
       >
-        {({ item }) => <Listbox.Option>{item}</Listbox.Option>}
+        {({ item }) => (
+          <Listbox.Option id={item.key}>{item.label}</Listbox.Option>
+        )}
       </ComboboxPOC>
     );
   },
