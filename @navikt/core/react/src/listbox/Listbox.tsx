@@ -7,6 +7,7 @@ import {
   ListboxImlpContextProvider,
   useCreateListboxDescendants,
   useDescendantsContext,
+  useListboxContext,
   useListboxDescendant,
   useListboxImplContext,
 } from "./Listbox.context";
@@ -46,6 +47,7 @@ interface ListboxImlpProps {
 
 const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
   ({ children }, ref) => {
+    const ctx = useListboxContext();
     const [focusedId, setFocusedId] = useState<string | null>(null);
     const { nextEnabled, prevEnabled, firstEnabled, lastEnabled, values } =
       useDescendantsContext();
@@ -62,14 +64,25 @@ const ListboxImlp = forwardRef<HTMLDivElement, ListboxImlpProps>(
             const currentIndex = values().findIndex((d) => d.id === focusedId);
             switch (e.key) {
               case "ArrowDown": {
+                if (
+                  (ctx.focusFirstOnKeydown && currentIndex === -1) ||
+                  focusedId === null
+                ) {
+                  const first = firstEnabled();
+                  first && setFocusedId(first.id);
+                }
                 const next = nextEnabled(currentIndex, false);
                 next && setFocusedId(next.id);
-                console.log(next);
+
                 break;
               }
               case "ArrowUp": {
                 const prev = prevEnabled(currentIndex, false);
-                prev && setFocusedId(prev.id);
+                if (prev) {
+                  setFocusedId(prev.id);
+                } else {
+                  setFocusedId(null);
+                }
                 break;
               }
               case "Home": {
