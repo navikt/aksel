@@ -34,7 +34,7 @@ export const Demo: Story = {
 };
 
 type DemoProps = {
-  options: any[];
+  options?: any[];
   children: RenderProps<{ item: any }>["children"];
 };
 
@@ -72,9 +72,20 @@ const ComboboxPOC = ({ options, children }: DemoProps) => {
           onBlurCapture={() => setInputIsFocus(false)}
           data-isvirtualfocus={inputIsFocus}
         />
-        {options.map((option, key) => (
-          <WrapperComboboxItem key={key} item={option} childRender={children} />
-        ))}
+        <>{/* TODO: FIkse typer */}</>
+        {!options ? (
+          children
+        ) : (
+          <>
+            {options?.map((option, key) => (
+              <WrapperComboboxItem
+                key={key}
+                item={option}
+                childRender={children}
+              />
+            ))}
+          </>
+        )}
       </Listbox>
     </div>
   );
@@ -106,6 +117,18 @@ export const ComboboxLabelDemo = {
         {({ item }) => (
           <Listbox.Option id={item.key}>{item.label}</Listbox.Option>
         )}
+      </ComboboxPOC>
+    );
+  },
+};
+
+export const ComboboxStaticDemo = {
+  render: () => {
+    return (
+      <ComboboxPOC>
+        <Listbox.Option id="static-1">Static 1</Listbox.Option>
+        <Listbox.Option id="static-2">Static 2</Listbox.Option>
+        <Listbox.Option id="static-3">Static 3</Listbox.Option>
       </ComboboxPOC>
     );
   },
