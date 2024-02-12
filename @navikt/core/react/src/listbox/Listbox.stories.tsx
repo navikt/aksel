@@ -72,7 +72,7 @@ const ComboboxPOC = ({ options, children }: DemoProps) => {
           onBlurCapture={() => setInputIsFocus(false)}
           data-isvirtualfocus={inputIsFocus}
         />
-        <>{/* TODO: FIkse typer */}</>
+        <>{/* TODO: Fikse typer */}</>
         {!options ? (
           children
         ) : (
