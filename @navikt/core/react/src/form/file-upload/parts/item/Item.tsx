@@ -38,19 +38,7 @@ export interface FileItemBaseProps {
    */
   status?: "downloading" | "uploading" | "completed";
   /**
-   * Callback called when the delete button is clicked.
-   */
-  /* onDelete?: (event: MouseEvent<HTMLButtonElement>) => void; */
-  /**
-   * Callback called when the retry button is clicked.
-   */
-  /* onRetry?: (event: MouseEvent<HTMLButtonElement>) => void; */
-  /**
-   *
-   */
-  /* itemAction?: "delete" | "retry" | "none"; */
-  /**
-   * i18n-API for easier access to customizing texts and labels
+   * i18n-API for customizing texts and labels
    */
   translations?: ComponentTranslation["FileUpload"];
 }

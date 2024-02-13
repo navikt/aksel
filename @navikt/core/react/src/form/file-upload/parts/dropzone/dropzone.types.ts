@@ -15,7 +15,7 @@ export interface DropzoneProps
    */
   icon?: React.ComponentType<any>;
   /**
-   * i18n-API for easier access to customizing texts and labels
+   * i18n-API for customizing texts and labels
    */
   translations?: ComponentTranslation["FileUpload"];
 }

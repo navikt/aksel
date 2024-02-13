@@ -9,7 +9,7 @@ import Item from "./parts/item/Item";
 interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * i18n-API for easier access to customizing texts and labels
+   * i18n-API for customizing texts and labels
    */
   translations?: ComponentTranslation["FileUpload"];
 }
