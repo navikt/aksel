@@ -60,6 +60,7 @@ describe("partitionFiles", () => {
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(txtFileName);
     expect(rejectedFiles[0].file.name).toBe(csvFileName);
+    expect(rejectedFiles[0].reason).toEqual(["custom validation error"]);
   });
 
   test("rejects file that passes accept parameter but does not pass validator", () => {
@@ -108,5 +109,27 @@ describe("partitionFiles", () => {
     expect(rejectedFiles.length).toBe(1);
     expect(acceptedFiles[0].name).toBe(csvFileName);
     expect(rejectedFiles[0].file.name).toBe(txtFileName);
+    expect(rejectedFiles[0].reason).toEqual(["filetype"]);
+  });
+
+  test("rejects file that is too large", () => {
+    const txtFileName = "foo.txt";
+    const csvFileName = "bar.csv";
+    const csvFile = createCsvFile(csvFileName);
+    const txtFile = createTxtFile(txtFileName);
+    const files = [txtFile, csvFile];
+    const maxSizeInBytes = 5;
+    const { acceptedFiles, rejectedFiles } = partitionFiles(
+      files,
+      undefined,
+      undefined,
+      maxSizeInBytes,
+    );
+
+    expect(acceptedFiles.length).toBe(1);
+    expect(rejectedFiles.length).toBe(1);
+    expect(acceptedFiles[0].name).toBe(txtFileName);
+    expect(rejectedFiles[0].file.name).toBe(csvFileName);
+    expect(rejectedFiles[0].reason).toEqual(["filesize"]);
   });
 });
