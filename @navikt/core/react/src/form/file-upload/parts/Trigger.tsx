@@ -35,9 +35,6 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
       <>
         <Slot
           onClick={() => {
-            if (inputRef.current?.value) {
-              inputRef.current.value = "";
-            }
             inputRef.current?.click();
           }}
         >
