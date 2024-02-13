@@ -206,6 +206,7 @@
 
 .navds-file-item__inner {
   outline: 1px solid var(--a-border-subtle);
+  outline-offset: -1px;
   transition: outline-color 250ms cubic-bezier(0.3, 1, 0.3, 1);
   border-radius: var(--a-border-radius-large);
   padding: var(--a-spacing-3);
