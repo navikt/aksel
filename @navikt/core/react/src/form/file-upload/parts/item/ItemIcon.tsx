@@ -32,13 +32,13 @@ function ItemIcon({ isLoading, file, showError }: ItemIconProps) {
     );
   } else if (showError) {
     return (
-      <div className="navds-file-item__icon navds-file-item__icon-avatar">
+      <div className="navds-file-item__icon">
         <FileXMarkIcon {...iconProps} />
       </div>
     );
   }
   return (
-    <div className="navds-file-item__icon navds-file-item__icon-avatar">
+    <div className="navds-file-item__icon">
       <Icon file={file} />
     </div>
   );

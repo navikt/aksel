@@ -76,7 +76,7 @@ const DefaultFn = ({ error = false }) => {
   };
 
   return (
-    <VStack gap="6" style={{ maxWidth: 500 }}>
+    <VStack gap="6">
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
@@ -92,7 +92,7 @@ const DefaultFn = ({ error = false }) => {
       {files.acceptedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {`Vedlagt filer (${files.acceptedFiles.length} av ${MAX_FILES})`}
+            {`Vedlagte filer (${files.acceptedFiles.length} av ${MAX_FILES})`}
           </Heading>
           <VStack gap="3">
             {files.acceptedFiles.map((file: File, index) => (
@@ -152,7 +152,7 @@ function getError(
   rejectedFiles: OnFileSelectProps["rejectedFiles"],
   index: number,
 ) {
-  if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE} MB`;
+  if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE_MB} MB`;
   if (rejectedFiles.some((x) => x.file === file))
     return errors[index % errors.length];
   return undefined;

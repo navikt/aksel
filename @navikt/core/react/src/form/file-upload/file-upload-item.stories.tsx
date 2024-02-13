@@ -77,13 +77,13 @@ export const States: StoryObj<typeof FileUpload.Item> = {
         status="downloading"
         itemAction="retry"
       />
-      <h3>retry </h3>
+      <h3>retry</h3>
       <FileUpload.Item
         file={fileCsv}
         onRetry={() => onRetry(fileCsv)}
         itemAction="retry"
       />
-      <h3>delete </h3>
+      <h3>delete</h3>
       <FileUpload.Item
         file={filePptx}
         onDelete={() => onDelete(filePptx)}

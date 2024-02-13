@@ -23,26 +23,28 @@ interface FileUploadComponent
    * @example Single file
    * ```jsx
    * <FileUpload.Dropzone
-   *  label="Last opp fil"
+   *   label="Last opp fil"
    *   multiple={false}
    *   onSelect={onSelect}
    * />
+   * ```
    *
    * @example Multiple files
    * ```jsx
    * <FileUpload.Dropzone
-   *  label="Last opp fil"
+   *   label="Last opp fil"
    *   multiple={true}
    *   onSelect={onSelect}
    * />
+   * ```
    *
    * @example Error
    * ```jsx
-   *  <FileUpload.Dropzone
+   * <FileUpload.Dropzone
    *   label="Last opp filer"
    *   onSelect={onSelect}
    *   error={error}
-   *  />
+   * />
    * ```
    */
   Dropzone: typeof Dropzone;
@@ -57,9 +59,9 @@ interface FileUploadComponent
    * @example Multiple items can be semantically grouped as a list.
    * ```jsx
    * <VStack gap="4" as="ul">
-   *    <FileUpload.Item as="li" file={file} />
-   *    <FileUpload.Item as="li" file={file2} />
-   *    <FileUpload.Item as="li" file={file3} status="uploading" />
+   *   <FileUpload.Item as="li" file={file} />
+   *   <FileUpload.Item as="li" file={file2} />
+   *   <FileUpload.Item as="li" file={file3} status="uploading" />
    * </VStack>
    * ```
    * @example File-object
@@ -98,10 +100,10 @@ interface FileUploadComponent
  *
  * @example Items
  * ```jsx
- *  <VStack gap="4">
- *    <FileUpload.Item as="li" file={myFile} />
- *    <FileUpload.Item as="li" file={mySecondFile} />
- *  </VStack>
+ * <VStack gap="4" as="ul">
+ *   <FileUpload.Item as="li" file={myFile} />
+ *   <FileUpload.Item as="li" file={mySecondFile} />
+ * </VStack>
  * ```
  */
 export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
