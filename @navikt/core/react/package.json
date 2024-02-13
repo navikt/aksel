@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.0.0-alpha.7",
+  "version": "5.18.0",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -16,7 +16,8 @@
   "sideEffects": false,
   "typings": "./esm/index.d.ts",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "files": [
     "/cjs",
