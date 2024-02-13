@@ -198,7 +198,6 @@
   align-items: center;
   flex-direction: column;
   gap: var(--a-spacing-2);
-  place-content: center;
 }
 
 /**
