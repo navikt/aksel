@@ -16,7 +16,6 @@ export const useDropzone = ({
     setIsDraggingOver(true);
   };
 
-  // onDragOver triggers 60+ times per second, so we need to cut it off, and
   const onDragLeave = () => {
     isDraggingRef.current = false;
     setIsDraggingOver(false);
