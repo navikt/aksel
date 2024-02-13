@@ -1,8 +1,9 @@
 import type { Meta } from "@storybook/react";
 import React, { ReactNode } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { HGrid, HStack, VStack } from "../..";
 import { BodyLong, Detail, Heading } from "../../typography";
+import { HGrid } from "../grid";
+import { HStack, VStack } from "../stack";
 import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
 import { Box } from "./Box";
 

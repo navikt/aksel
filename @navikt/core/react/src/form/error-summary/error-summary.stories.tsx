@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import React, { useRef } from "react";
-import { ErrorSummary } from "..";
+import { ErrorSummary } from "./ErrorSummary";
 
 export default {
   title: "ds-react/Errorsummary",

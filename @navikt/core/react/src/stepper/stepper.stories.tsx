@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { BodyLong } from "..";
+import { BodyLong } from "../typography";
 import Stepper from "./Stepper";
 
 const meta: Meta<typeof Stepper> = {

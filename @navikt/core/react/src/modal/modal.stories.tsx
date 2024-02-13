@@ -1,9 +1,11 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Heading, Tooltip } from "..";
+import { Button } from "../button";
 import { Checkbox, CheckboxGroup } from "../form/checkbox";
 import { VStack } from "../layout/stack";
+import { Tooltip } from "../tooltip";
+import { BodyLong, Heading } from "../typography";
 import Modal from "./Modal";
 
 const meta: Meta<typeof Modal> = {

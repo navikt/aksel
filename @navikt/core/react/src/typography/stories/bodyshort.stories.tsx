@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import React from "react";
-import { BodyShort } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import { BodyShort } from "../BodyShort";
 
 const meta = {
   title: "ds-react/Typography/BodyShort",

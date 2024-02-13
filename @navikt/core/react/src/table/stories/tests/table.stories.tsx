@@ -1,6 +1,6 @@
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React from "react";
-import { Table } from "../..";
+import Table from "../../Table";
 
 export default {
   title: "ds-react/Table/Tests",
