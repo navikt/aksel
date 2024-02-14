@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import { ToggleGroup } from "./ToggleGroup";
 
@@ -31,7 +32,7 @@ describe("ToggleGroup", () => {
     expect(toggle).toHaveAttribute("aria-checked", "true");
     expect(toggle).toHaveAttribute("role", "radio");
     expect(toggle).toHaveAttribute("type", "button");
-    expect(toggle).toHaveAttribute("tabindex", "-1");
+    expect(toggle).toHaveAttribute("tabindex", "0");
   });
 
   test("sets correct attributes on idle toggle", () => {
@@ -50,5 +51,45 @@ describe("ToggleGroup", () => {
 
     fireEvent.focus(toggle);
     expect(toggle).toHaveAttribute("tabindex", "0");
+  });
+
+  test("rowing tabindex keydown moves focus", () => {
+    render(<TestToggleGroup defaultValue="toggle1" />);
+    const toggle = screen.getByTestId("toggle1");
+
+    expect(toggle).toHaveAttribute("tabindex", "0");
+    fireEvent.keyDown(toggle, { key: "ArrowRight" });
+
+    expect(toggle).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByTestId("toggle2")).toHaveAttribute("tabindex", "0");
+    expect(screen.getByTestId("toggle2")).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+  });
+
+  test("moved focus on tab actives focused toggle", async () => {
+    render(<TestToggleGroup defaultValue="toggle1" />);
+    const toggle = screen.getByTestId("toggle1");
+
+    expect(toggle).toHaveAttribute("tabindex", "0");
+    fireEvent.keyDown(toggle, { key: "ArrowRight" });
+
+    expect(toggle).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByTestId("toggle2")).toHaveAttribute("tabindex", "0");
+    expect(screen.getByTestId("toggle2")).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      await userEvent.keyboard(" ");
+    });
+
+    expect(screen.getByTestId("toggle2")).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
   });
 });
