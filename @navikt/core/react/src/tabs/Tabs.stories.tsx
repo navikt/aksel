@@ -190,10 +190,10 @@ export const Overflow = () => {
   );
 };
 
-export const Fitted = {
+export const Fill = {
   render: () => (
     <div className="colgap">
-      <Tabs defaultValue="test2" fitted>
+      <Tabs defaultValue="test2" fill>
         <Tabs.List>
           <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
           <Tabs.Tab

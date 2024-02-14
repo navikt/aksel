@@ -13,7 +13,7 @@ export const [
 type TabsProviderProps = ReturnType<typeof useTabs> &
   Pick<
     TabsProps,
-    "selectionFollowsFocus" | "loop" | "size" | "iconPosition" | "fitted"
+    "selectionFollowsFocus" | "loop" | "size" | "iconPosition" | "fill"
   >;
 
 /* State context */

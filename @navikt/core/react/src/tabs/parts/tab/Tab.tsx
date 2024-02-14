@@ -56,7 +56,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
             className,
             {
               "navds-tabs__tab--icon-only": icon && !label,
-              "navds-tabs__tab--fitted": ctx.fitted,
+              "navds-tabs__tab--fill": ctx.fill,
             },
           )}
           role="tab"

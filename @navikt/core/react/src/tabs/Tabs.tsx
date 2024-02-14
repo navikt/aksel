@@ -69,7 +69,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       selectionFollowsFocus = false,
       loop = true,
       iconPosition = "left",
-      fitted = false,
+      fill = false,
       ...rest
     },
     ref,
@@ -85,9 +85,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         loop,
         size,
         iconPosition,
-        fitted,
+        fill,
       }),
-      [fitted, iconPosition, loop, selectionFollowsFocus, size, tabsContext],
+      [fill, iconPosition, loop, selectionFollowsFocus, size, tabsContext],
     );
 
     return (
