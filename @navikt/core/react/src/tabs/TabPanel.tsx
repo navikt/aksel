@@ -1,4 +1,4 @@
-import { TabsContent } from "@radix-ui/react-tabs";
+import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 
@@ -15,7 +15,7 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ className, ...rest }, ref) => (
-    <TabsContent
+    <RadixTabs.TabsContent
       {...rest}
       ref={ref}
       className={cl("navds-tabs__tabpanel", className)}

@@ -13,7 +13,7 @@ import {
   startOfYear,
   subDays,
 } from "date-fns";
-import nbLocale from "date-fns/locale/nb";
+import { nb as nbLocale } from "date-fns/locale";
 import React from "react";
 import { Detail } from "../typography/Detail";
 import { useTimelineContext } from "./hooks/useTimelineContext";
