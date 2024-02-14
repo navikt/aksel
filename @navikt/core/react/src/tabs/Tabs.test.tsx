@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Tabs } from "./Tabs";
 
@@ -64,7 +65,7 @@ describe("Tabs", () => {
     expect(tab).toHaveAttribute("aria-selected", "true");
     expect(tab).toHaveAttribute("role", "tab");
     expect(tab).toHaveAttribute("aria-controls");
-    expect(tab).toHaveAttribute("tabindex", "-1");
+    expect(tab).toHaveAttribute("tabindex", "0");
   });
 
   test("sets correct attributes on idle tab", () => {
@@ -100,10 +101,71 @@ describe("Tabs", () => {
   });
 
   test("sets tabindex to 0 when focused", () => {
-    render(<TestTabs defaultValue="tab2" />);
+    render(<TestTabs defaultValue="tab1" />);
     const tab = screen.getByTestId("tab2");
 
     fireEvent.focus(tab);
     expect(tab).toHaveAttribute("tabindex", "0");
+  });
+
+  test("rowing tabindex keydown moves focus", () => {
+    render(<TestTabs defaultValue="tab1" />);
+    const tab = screen.getByTestId("tab1");
+
+    expect(tab).toHaveAttribute("tabindex", "0");
+    fireEvent.keyDown(tab, { key: "ArrowRight" });
+
+    expect(tab).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByTestId("tab2")).toHaveAttribute("tabindex", "0");
+    expect(screen.getByTestId("tab2")).toHaveAttribute(
+      "aria-selected",
+      "false",
+    );
+  });
+
+  test("selectionFollowsFocus moves active tabs", () => {
+    render(<TestTabs defaultValue="tab1" selectionFollowsFocus />);
+    const tab = screen.getByTestId("tab1");
+
+    expect(tab).toHaveAttribute("tabindex", "0");
+    fireEvent.keyDown(tab, { key: "ArrowRight" });
+
+    expect(screen.getByTestId("tab2")).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByTestId("tab2")).toHaveAttribute("tabindex", "0");
+  });
+
+  test("tabbing from tabs moves focus to tabPanel", async () => {
+    render(<TestTabs defaultValue="tab1" />);
+    const tab = screen.getByTestId("tab1");
+
+    tab.focus();
+    await userEvent.tab();
+
+    expect(screen.getByTestId("tabpanel1")).toHaveFocus();
+  });
+
+  test("shift+tab back to tablist should focus selected tab", async () => {
+    render(<TestTabs defaultValue="tab1" />);
+    const tab = screen.getByTestId("tab1");
+
+    /* Move focus to tab2 */
+    fireEvent.keyDown(tab, { key: "ArrowRight" });
+    expect(screen.getByTestId("tab2")).toHaveFocus();
+
+    /* Move focus to tabPanel */
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      /* Tablist handles tabbing with setTimeout, so we need to use act */
+      await userEvent.tab();
+    });
+
+    expect(screen.getByTestId("tabpanel1")).toHaveFocus();
+    /* Move focus back to tablist, now tab1 should have focus */
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      await userEvent.tab({ shift: true });
+    });
+    expect(screen.getByTestId("tab1")).toHaveFocus();
   });
 });
