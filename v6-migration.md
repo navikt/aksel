@@ -119,3 +119,14 @@ For brukere av vår tailwind-config vil dette også si at `screen` er oppdatert.
   "2xl": "1440px"
 },
 ```
+
+### Table
+
+SortState.direction har nå `"none"` tilgjengelig, gir lettere type-håndtering for bruker.
+
+```
+export interface SortState {
+  orderBy: string;
+  direction: "ascending" | "descending" | "none";
+}
+```
