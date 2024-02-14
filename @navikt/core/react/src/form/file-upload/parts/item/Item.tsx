@@ -22,11 +22,13 @@ export interface FileItemBaseProps {
    */
   file: FileItem;
   /**
-   * Callback called when the filename is clicked.
+   * onClick on the file name.
+   * @note If this and `href` is not set and the `file` prop is a native file, onClick will download the file.
    */
   onFileClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**
-   * Href to use on the <a> tag displaying the file name.
+   * href on the file name.
+   * @note If this and `onFileClick` is not set and the `file` prop is a native file, onClick will download the file.
    */
   href?: string;
   /**
@@ -34,9 +36,10 @@ export interface FileItemBaseProps {
    */
   error?: string;
   /**
-   *
+   * Status "downloading" and "uploading" displays a loading indicator.
+   * @default "idle"
    */
-  status?: "downloading" | "uploading" | "completed";
+  status?: "downloading" | "uploading" | "idle";
   /**
    * i18n-API for customizing texts and labels
    */
@@ -81,7 +84,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
       {
         as: Component = "div",
         file,
-        status = "completed",
+        status = "idle",
         onDelete,
         onRetry,
         error,
@@ -98,7 +101,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         FileUpload: translations ?? context?.translations,
       });
 
-      const showError = !!error && (!status || status === "completed");
+      const showError = !!error && status === "idle";
 
       function getStatusText() {
         if (status === "uploading") {
@@ -119,7 +122,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         >
           <div className="navds-file-item__inner">
             <ItemIcon
-              isLoading={status && status !== "completed"}
+              isLoading={status !== "idle"}
               file={file}
               showError={showError}
             />
@@ -128,7 +131,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
               <BodyShort as="div">{getStatusText()}</BodyShort>
             </div>
 
-            {status === "completed" && (
+            {status === "idle" && (
               <ItemButton
                 file={file}
                 onRetry={onRetry}

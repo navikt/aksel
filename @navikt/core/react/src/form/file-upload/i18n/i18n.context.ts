@@ -4,6 +4,11 @@ import { ComponentTranslation, TranslationDictionary } from "./i18n.types";
 import nb from "./locales/nb.json";
 import { merge } from "./merge";
 
+/**
+ * https://regex101.com/r/LYKWi3/1
+ */
+const REPLACE_REGEX = /{[^}]*}/g;
+
 export const I18nContext = createContext<
   TranslationDictionary | TranslationDictionary[]
 >(nb);
@@ -29,12 +34,7 @@ export function useI18n(local: ComponentTranslation) {
   const translate = (
     id: NestedKeyOf<typeof nb>,
     options?: { replacements: string | number },
-  ): string => {
-    /**
-     * https://regex101.com/r/LYKWi3/1
-     */
-    const REPLACE_REGEX = /{([^}]*)}/g;
-
+  ) => {
     const text: string = get({ Aksel: local }, id) || get(translation, id);
 
     if (!text) {
@@ -42,8 +42,8 @@ export function useI18n(local: ComponentTranslation) {
     }
 
     if (options?.replacements) {
-      return text.replace(REPLACE_REGEX, (match: string) => {
-        const replacement: string = match.substring(1, match.length - 1)!;
+      return text.replace(REPLACE_REGEX, (match) => {
+        const replacement = match.substring(1, match.length - 1);
 
         if (options.replacements[replacement] === undefined) {
           const replacementData = JSON.stringify(options.replacements);

@@ -4,27 +4,21 @@ import {
   OnFileSelectProps,
 } from "../FileUpload.types";
 import { isAcceptedFileType } from "./is-accepted-file-type";
-import { acceptedSize } from "./is-accepted-size";
+import { isAcceptedSize } from "./is-accepted-size";
 
 export const partitionFiles = (
   files: File[],
   accept?: string,
   validator?: FileUploadBaseProps["validator"],
   maxSizeInBytes: number = -1,
-  fileLimit: FileUploadBaseProps["fileLimit"] = { max: -1, current: -1 },
 ): Pick<OnFileSelectProps, "acceptedFiles" | "rejectedFiles"> => {
   const acceptedFiles: File[] = [];
   const rejectedFiles: OnFileSelectProps["rejectedFiles"] = [];
 
-  files.forEach((file, index) => {
+  files.forEach((file) => {
     const acceptedFileType = isAcceptedFileType(file, accept);
-    const acceptedFileSize = acceptedSize(file, maxSizeInBytes);
+    const acceptedFileSize = isAcceptedSize(file, maxSizeInBytes);
     const customValidation = validator ? validator(file) : true;
-
-    if (acceptedFileType && customValidation === true) {
-      acceptedFiles.push(file);
-      return;
-    }
 
     const reason: OnFileSelectProps["rejectedFiles"][0]["reason"] = [];
     if (customValidation !== true) {
@@ -39,8 +33,9 @@ export const partitionFiles = (
       reason.push(FileRejectionReason.FileSize);
     }
 
-    if (fileLimit.max > 0 && fileLimit.current + (index + 1) > fileLimit.max) {
-      reason.push(FileRejectionReason.FileCount);
+    if (reason.length === 0) {
+      acceptedFiles.push(file);
+      return;
     }
 
     rejectedFiles.push({

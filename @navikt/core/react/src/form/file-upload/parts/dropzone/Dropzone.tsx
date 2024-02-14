@@ -49,7 +49,6 @@ const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
       validator,
       accept,
       maxSizeInBytes,
-      fileLimit,
       disabled: inputProps.disabled,
     });
 

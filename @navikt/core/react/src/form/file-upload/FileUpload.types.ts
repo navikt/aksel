@@ -14,8 +14,7 @@ export interface OnFileSelectProps {
 
 export interface FileUploadBaseProps {
   /**
-   * Indicates if it is possible
-   * to select multiple files at once.
+   * Indicates if it is possible to select multiple files at once.
    * @default true
    */
   multiple?: boolean;
@@ -29,8 +28,7 @@ export interface FileUploadBaseProps {
    */
   maxSizeInBytes?: number;
   /**
-   * Custom validator that is used to decide
-   * if a file is accepted or rejected.
+   * Custom validator that is used to decide if a file is accepted or rejected.
    * @return true if the file is accepted, otherwise a string with the reason for rejection
    */
   validator?: (file: File) => true | string;
@@ -39,7 +37,7 @@ export interface FileUploadBaseProps {
    */
   onSelect: (files: OnFileSelectProps) => void;
   /**
-   * Disables file upload when current >= max
+   * Disables the dropzone when current >= max, unless `disabled` prop is set to `false`.
    */
   fileLimit?: {
     max: number;

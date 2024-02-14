@@ -4,7 +4,7 @@
       "dropzone": {
         "button": "Velg fil",
         "buttonMultiple": "Velg filer",
-        "dragAndDrop": "Dra og slipp fil her",
+        "dragAndDrop": "Dra og slipp filen her",
         "dragAndDropMultiple": "Dra og slipp filer her",
         "drop": "Slipp",
         "or": "eller",

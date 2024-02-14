@@ -1,8 +1,8 @@
 export function isAcceptedFileType(
   file: File,
-  accept: string | undefined
+  accept: string | undefined,
 ): boolean {
-  if (accept === undefined) {
+  if (!accept) {
     return true;
   }
   const mimeType = file.type;

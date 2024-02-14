@@ -18,12 +18,12 @@ describe("partitionFiles", () => {
     expect(rejectedFiles.length).toBe(0);
   });
 
-  test("rejects all files when accept parameter is empty", () => {
+  test("accepts all files when accept parameter is empty", () => {
     const files = [createTxtFile(), createCsvFile()];
     const { acceptedFiles, rejectedFiles } = partitionFiles(files, "");
 
-    expect(acceptedFiles.length).toBe(0);
-    expect(rejectedFiles.length).toBe(2);
+    expect(acceptedFiles.length).toBe(2);
+    expect(rejectedFiles.length).toBe(0);
   });
 
   test("rejects file that does not match accept parameter", () => {

@@ -1,9 +1,10 @@
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import { useMergeRefs } from "../../util/hooks";
 import { FileUploadBaseProps } from "./FileUpload.types";
 import { partitionFiles } from "./utils/partition-files";
 
-export interface UseFileUploadProps extends FileUploadBaseProps {
+export interface UseFileUploadProps
+  extends Omit<FileUploadBaseProps, "fileLimit"> {
   ref: React.ForwardedRef<HTMLInputElement>;
   disabled?: boolean;
 }
@@ -14,26 +15,21 @@ export const useFileUpload = ({
   onSelect,
   validator,
   maxSizeInBytes,
-  fileLimit,
   disabled,
 }: UseFileUploadProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const mergedRef = useMergeRefs(inputRef, ref);
 
-  const upload = useCallback(
-    (files: File[]) => {
-      const { acceptedFiles, rejectedFiles } = partitionFiles(
-        files,
-        accept,
-        validator,
-        maxSizeInBytes,
-        fileLimit,
-      );
+  const upload = (files: File[]) => {
+    const { acceptedFiles, rejectedFiles } = partitionFiles(
+      files,
+      accept,
+      validator,
+      maxSizeInBytes,
+    );
 
-      onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
-    },
-    [accept, fileLimit, maxSizeInBytes, onSelect, validator],
-  );
+    onSelect({ allFiles: files, acceptedFiles, rejectedFiles });
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
