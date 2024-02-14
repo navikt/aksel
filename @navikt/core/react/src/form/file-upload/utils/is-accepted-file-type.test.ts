@@ -10,8 +10,8 @@ describe("isAcceptedFileType", () => {
     expect(isAcceptedFileType(txtFile(), undefined)).toBe(true);
   });
 
-  test("returns false when accept is empty string", () => {
-    expect(isAcceptedFileType(txtFile(), "")).toBe(false);
+  test("returns true when accept is empty string", () => {
+    expect(isAcceptedFileType(txtFile(), "")).toBe(true);
   });
 
   test("returns true when file matches accepted extensions", () => {
@@ -28,13 +28,13 @@ describe("isAcceptedFileType", () => {
 
   test("returns true when file matches the accepted exact mime types", () => {
     expect(isAcceptedFileType(txtFile(), "application/pdf, text/plain")).toBe(
-      true
+      true,
     );
   });
 
   test("returns false when file does not the accepted exact mime types", () => {
     expect(isAcceptedFileType(txtFile(), "application/pdf, text/csv")).toBe(
-      false
+      false,
     );
   });
 
@@ -48,7 +48,7 @@ describe("isAcceptedFileType", () => {
 
   test("returns true if matches extension, but not exact or wildcard mime type", () => {
     expect(
-      isAcceptedFileType(txtFile(), "application/*, image/*, .txt, audio/mpeg")
+      isAcceptedFileType(txtFile(), "application/*, image/*, .txt, audio/mpeg"),
     ).toBe(true);
   });
 
@@ -56,14 +56,14 @@ describe("isAcceptedFileType", () => {
     expect(
       isAcceptedFileType(
         txtFile(),
-        "application/*, text/plain, .jpg, audio/mpeg"
-      )
+        "application/*, text/plain, .jpg, audio/mpeg",
+      ),
     ).toBe(true);
   });
 
   test("returns true if matches wildcard mime type, but not extension or exact mime type", () => {
     expect(
-      isAcceptedFileType(txtFile(), "application/*, text/*, .jpg, audio/mpeg")
+      isAcceptedFileType(txtFile(), "application/*, text/*, .jpg, audio/mpeg"),
     ).toBe(true);
   });
 });
