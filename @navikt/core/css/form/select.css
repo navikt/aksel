@@ -29,12 +29,13 @@
 }
 
 .navds-select__input:hover {
-  border-color: var(--ac-select-hover-bg, var(--a-border-action));
+  border-color: var(--ac-select-hover-border, var(--a-border-action-hover));
   cursor: pointer;
 }
 
 .navds-select__input:focus-visible {
   outline: none;
+  border-color: var(--ac-select-active-border, var(--a-border-action-selected));
   box-shadow: var(--a-shadow-focus);
 }
 

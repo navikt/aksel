@@ -50,6 +50,7 @@
 
 .navds-dropdown__item:hover {
   background-color: var(--ac-dropdown-item-hover-bg, var(--a-surface-action-subtle-hover));
+  color: var(--ac-dropdown-item-hover-text, var(--a-text-action-hover));
 }
 
 .navds-dropdown__item:active {
