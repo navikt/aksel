@@ -11967,7 +11967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.16.1, date-fns@npm:^2.26.1, date-fns@npm:^2.27.0, date-fns@npm:^2.30.0":
+"date-fns@npm:^2.16.1, date-fns@npm:^2.26.1, date-fns@npm:^2.27.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -27563,7 +27563,7 @@ __metadata:
     clsx: ^2.1.0
     codesandbox: ^2.2.3
     cross-env: ^7.0.0
-    date-fns: ^2.30.0
+    date-fns: ^3.0.0
     dotenv: ^10.0.0
     fuse.js: ^7.0.0
     jest: ^29.0.0
