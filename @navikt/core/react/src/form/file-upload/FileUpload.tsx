@@ -20,7 +20,8 @@ interface FileUploadComponent
   > {
   /**
    * Framed area to drag-n-drop files, upload files with button-click or copy-paste.
-   * @example Single file
+   * @example
+   * Single file
    * ```jsx
    * <FileUpload.Dropzone
    *   label="Last opp fil"
@@ -29,7 +30,8 @@ interface FileUploadComponent
    * />
    * ```
    *
-   * @example Multiple files
+   * @example
+   * Multiple files
    * ```jsx
    * <FileUpload.Dropzone
    *   label="Last opp fil"
@@ -38,7 +40,8 @@ interface FileUploadComponent
    * />
    * ```
    *
-   * @example Error
+   * @example
+   * Error
    * ```jsx
    * <FileUpload.Dropzone
    *   label="Last opp filer"
@@ -50,43 +53,56 @@ interface FileUploadComponent
   Dropzone: typeof Dropzone;
 
   /**
-   * Framed zone to drag-n-drop files, upload files with button-click or copy-paste.
-   * @example Single
+   * Displays a file with status, file size, action and error message.
+   * @example
+   * Single
    * ```jsx
    * <FileUpload.Item file={file} status="uploading" />
    * ```
    *
-   * @example Multiple items can be semantically grouped as a list.
+   * @example
+   * Multiple items can be semantically grouped as a list.
    * ```jsx
-   * <VStack gap="4" as="ul">
-   *   <FileUpload.Item as="li" file={file} />
-   *   <FileUpload.Item as="li" file={file2} />
-   *   <FileUpload.Item as="li" file={file3} status="uploading" />
-   * </VStack>
+   * <FileUpload>
+   *   <VStack gap="4" as="ul">
+   *     <FileUpload.Item as="li" file={file} />
+   *     <FileUpload.Item as="li" file={file2} />
+   *     <FileUpload.Item as="li" file={file3} status="uploading" />
+   *   </VStack>
+   * </FileUpload>
    * ```
-   * @example File-object
+   *
+   * @example
+   * Custom file object
    * ```jsx
-   * // Native File
+   * <FileUpload.Item file={{ name: "fileName.pdf", size: 1_048_576 }} />
+   * ```
+   *
+   * @example
+   * Error
+   * ```jsx
    * <FileUpload.Item file={file} error="Something went wrong" />
-   *
-   * // File-metadata
-   * <FileUpload.Item file={{ name: "fileName.pdf", size: 1_048_576 }} error="Something went wrong" />
    * ```
    *
-   * @example Error
-   * ```jsx
-   * <FileUpload.Item file={file} error="Something went wrong" />
-   * ```
-   *
-   * @example Status
+   * @example
+   * Status & actions
    * ```jsx
    * <FileUpload.Item file={file} status="uploading" />
    * <FileUpload.Item file={file} status="downloading" />
-   * <FileUpload.Item file={file} status="retry" onRetry={...}/>
-   * <FileUpload.Item file={file} status="delete" onDelete={...}/>
+   * <FileUpload.Item file={file} itemAction="retry" onRetry={...} />
+   * <FileUpload.Item file={file} itemAction="delete" onDelete={...} />
    * ```
    */
   Item: typeof Item;
+  /**
+   * Wrapper for a button to trigger file select.
+   * @example
+   * ```jsx
+   * <FileUpload.Trigger onSelect={...}>
+   *   <Button>Last opp filer</Button>
+   * </FileUpload.Trigger>
+   * ```
+   */
   Trigger: typeof Trigger;
 }
 
@@ -98,7 +114,8 @@ interface FileUploadComponent
  *  <FileUpload.Dropzone />
  * ```
  *
- * @example Items
+ * @example
+ * Items
  * ```jsx
  * <VStack gap="4" as="ul">
  *   <FileUpload.Item as="li" file={myFile} />

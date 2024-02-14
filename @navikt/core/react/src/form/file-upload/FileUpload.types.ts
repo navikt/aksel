@@ -29,14 +29,18 @@ export interface FileUploadBaseProps {
    */
   maxSizeInBytes?: number;
   /**
+   * Custom validator that is used to decide
+   * if a file is accepted or rejected.
+   * @return true if the file is accepted, otherwise a string with the reason for rejection
+   */
+  validator?: (file: File) => true | string;
+  /**
    * Callback triggered on file select
    */
   onSelect: (files: OnFileSelectProps) => void;
   /**
-   * Custom validator that is used to decide
-   * if a file is accepted or rejected.
+   * Disables file upload when current >= max
    */
-  validator?: (file: File) => true | string;
   fileLimit?: {
     max: number;
     current: number;

@@ -34,6 +34,7 @@ export const Icons: StoryObj<typeof FileUpload.Item> = {
       <VStack gap="5" as="ul">
         <FileUpload.Item file={fileTxt} as="li" />
         <FileUpload.Item file={filePng} as="li" />
+        <FileUpload.Item file={fileWebp} as="li" />
         <FileUpload.Item file={filePdf} as="li" />
         <FileUpload.Item file={fileDocx} as="li" />
         <FileUpload.Item file={fileDocx} as="li" status="uploading" />
@@ -41,7 +42,6 @@ export const Icons: StoryObj<typeof FileUpload.Item> = {
         <FileUpload.Item file={fileXlsx} as="li" />
         <FileUpload.Item file={fileCsv} as="li" />
         <FileUpload.Item file={filePptx} as="li" />
-        <FileUpload.Item file={fileWebp} as="li" />
       </VStack>
     </FileUpload>
   ),
@@ -112,21 +112,21 @@ export const Download: StoryObj = {
     <VStack gap="5">
       <FileUpload.Item
         file={{
-          name: "withOnClick.txt",
+          name: "with onClick.txt",
           size: 1_048_576,
         }}
         onFileClick={() => alert("onFileClick")}
       />
       <FileUpload.Item
         file={{
-          name: "withHref.txt",
+          name: "with href.txt",
           size: 1,
         }}
         href="https://www.nav.no"
       />
       <FileUpload.Item
         file={{
-          name: "withoutHrefOrOnFileClick.txt",
+          name: "without href/onFileClick.txt",
           size: 2_000_000,
         }}
       />
