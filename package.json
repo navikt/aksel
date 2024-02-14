@@ -11,7 +11,8 @@
     "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
     "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
-    "changelog": "deno run --allow-read --allow-write --no-config scripts/deno/createMainChangelog.ts",
+    "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",
+    "updateArticleViews": "deno run --allow-net --allow-env --allow-read --no-config scripts/article-views/update-article-views/main.ts",
     "chromatic": "npx chromatic --only-changed --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p run test",
@@ -132,7 +133,8 @@
     "ignoreFiles": [
       "**/dist/**",
       "**/@navikt/codemod/**",
-      "**/@navikt/aksel/**"
+      "**/@navikt/aksel/**",
+      "**/examples/**"
     ]
   },
   "repository": {
@@ -171,7 +173,6 @@
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-testing-library": "^6.0.2",
     "fast-glob": "3.2.11",
-    "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
     "husky": "^8.0.0",
     "lint-staged": "13.0.3",

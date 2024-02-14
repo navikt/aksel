@@ -39,13 +39,14 @@
 }
 
 .navds-textarea__input:hover {
-  border-color: var(--ac-textarea-hover-border, var(--__ac-textarea-hover-border, var(--a-border-action)));
+  border-color: var(--ac-textarea-hover-border, var(--__ac-textarea-hover-border, var(--a-border-action-hover)));
 }
 
 .navds-textarea__input:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
+  border-color: var(--ac-textarea-active-border, var(--a-border-action-selected));
 }
 
 @supports not selector(:focus-visible) {

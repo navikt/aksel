@@ -1,5 +1,5 @@
-import format from "date-fns/format";
-import nbLocale from "date-fns/locale/nb";
+import { format } from "date-fns";
+import { nb } from "date-fns/locale";
 import { DatePicker, useDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -16,7 +16,7 @@ const Example = () => {
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
       <div className="pt-4">
-        {selectedDay && format(selectedDay, "dd.MM.yyyy", { locale: nbLocale })}
+        {selectedDay && format(selectedDay, "dd.MM.yyyy", { locale: nb })}
       </div>
     </div>
   );
@@ -32,5 +32,5 @@ export const Demo = {
 
 export const args = {
   index: 10,
-  desc: "Prop allowTwoDigitYear legger til støtte for 'yy'-format. Tilgjengelig year-range vil være fra 1943-2042 (2023).",
+  desc: "Prop 'allowTwoDigitYear' legger til støtte for 'yy'-format. Tilgjengelig year-range vil være 80 år bakover og 19 år framover. I 2024 tilsvarer det 1944-2043.",
 };

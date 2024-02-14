@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { LinkPanel } from "..";
+import LinkPanel from "./LinkPanel";
 
 export default {
   title: "ds-react/LinkPanel",

@@ -25,6 +25,7 @@ const template = (variables, { tpl }) => {
   };
 
   return tpl`
+"use client";
 ${imports};
 
 ${variables.interfaces};

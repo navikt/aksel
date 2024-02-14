@@ -220,6 +220,10 @@ button.navds-stepper__step {
   color: var(--ac-stepper-active, var(--a-text-action-selected));
 }
 
+.navds-stepper__step:hover:where(:not(.navds-stepper__step--non-interactive)) {
+  color: var(--ac-stepper-hover-active, var(--a-text-action-hover));
+}
+
 :where(.navds-stepper__step:hover) .navds-stepper__content {
   text-decoration: underline;
 }
@@ -239,8 +243,7 @@ button.navds-stepper__step {
 }
 
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover) .navds-stepper__circle--success {
-  color: var(--ac-stepper-hover-bg, var(--a-surface-action-subtle-hover));
-  background-color: var(--ac-stepper-text, var(--a-surface-action));
+  background-color: var(--ac-stepper-text, var(--a-surface-action-hover));
 }
 
 /* Non-interactive */

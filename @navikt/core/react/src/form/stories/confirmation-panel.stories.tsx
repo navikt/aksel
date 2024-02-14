@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Link } from "../..";
+import { Link } from "../../link";
 import { ConfirmationPanel } from "../index";
 
 export default {

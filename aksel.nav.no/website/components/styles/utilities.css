@@ -81,10 +81,6 @@ p.override-text-no-max {
   color: inherit;
 }
 
-[id] > code > .inline-code-amp {
-  display: none;
-}
-
 /* Not in tailwindcss yet: https://github.com/tailwindlabs/tailwindcss/discussions/11486 */
 .text-wrap-balance {
   text-wrap: balance;

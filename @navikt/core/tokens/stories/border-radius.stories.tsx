@@ -3,6 +3,9 @@ import React from "react";
 
 export default {
   title: "ds-tokens/Border-radius",
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
 
 const Border = ({ token }) => (
@@ -24,3 +27,18 @@ export const Medium = () => <Border token="var(--a-border-radius-medium)" />;
 export const Large = () => <Border token="var(--a-border-radius-large)" />;
 export const XLarge = () => <Border token="var(--a-border-radius-xlarge)" />;
 export const Full = () => <Border token="var(--a-border-radius-full)" />;
+
+export const Chromatic = {
+  render: () => (
+    <div className="colgap">
+      <Small />
+      <Medium />
+      <Large />
+      <XLarge />
+      <Full />
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

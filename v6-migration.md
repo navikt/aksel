@@ -1,5 +1,21 @@
 # Aksel v6 migrations
 
+## Nextjs
+
+Komponenter og ikoner bruker nå `use client`, som betyr at de kan brukes rett ut av boksen i f.eks nextjs app-router. En problematikk er at bundle-size blir ekstremt stor da hele react og ikonpakke blir trukket inn, selv om bare 1 modul blir brukt.
+Løsningen er:
+`optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],`
+men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grunnleggende som går litt i dybden om routing, next/link, app-dir og config.
+
+- https://nextjs.org/docs/app/api-reference/next-config-js/optimizePackageImports
+- https://github.com/vercel/next.js/issues/60246
+- https://github.com/vercel/next.js/issues/44039
+- https://github.com/vercel/next.js/issues/12557
+
+## DatePicker/MonthPicker
+
+`openOnFocus`-prop er fjernet helt fra typer
+
 ## ErrorSummary
 
 - Heading-prop er satt som required
@@ -11,6 +27,16 @@
 ### Props
 
 Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. Om dette ikke dekker behovet eksponerer komponenten css-variabler som kan overstyres.
+
+## Modal
+
+### Props
+
+Prop-typene er gjort strengere for å gjøre det lettere å gjøre rett, primært for å unngå at `onBeforeClose` brukes når man egentlig burde brukt `onClose`.
+
+- Hvis du bruker propen `open` må du også bruke `onClose` for å holde lokal state oppdatert.
+- `onBeforeClose` må returnere `boolean`. Dette callbacket er ment for å brukes til å spørre om bekreftelse før modalen lukkes. Kode som alltid skal kjøre når modalen lukkes må legges i `onClose`.
+- `aria-label` eller `aria-labelledby` er påkrevd hvis du ikke bruker `header`. Du kan dessuten ikke bruke de to førstnevnte samtidig.
 
 ## Grid
 
@@ -104,4 +130,15 @@ For brukere av vår tailwind-config vil dette også si at `screen` er oppdatert.
   "xl": "1280px",
   "2xl": "1440px"
 },
+```
+
+### Table
+
+SortState.direction har nå `"none"` tilgjengelig, gir lettere type-håndtering for bruker.
+
+```
+export interface SortState {
+  orderBy: string;
+  direction: "ascending" | "descending" | "none";
+}
 ```

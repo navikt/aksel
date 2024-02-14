@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { Table, TableProps } from "../";
-import { Alert, Button, Checkbox, CheckboxGroup, Link } from "../..";
+import { Button } from "../../button";
+import { Checkbox } from "../../form";
+import { VStack } from "../../layout/stack";
+import {
+  Expandable,
+  ExpandableLarge,
+  ExpandableSmall,
+} from "./table-2-expandable.stories";
 
 export default {
   title: "ds-react/Table",
   component: Table,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 interface Props extends TableProps {
   button?: boolean;
   shadeOnHover?: boolean;
 }
+
 const TableComponent = ({ button, shadeOnHover, ...rest }: Props) => (
   <Table {...rest}>
     <Table.Header>
@@ -89,74 +100,58 @@ export const Buttons = () => <TableComponent size="small" button />;
 
 export const WithDivs = () => {
   return (
-    <>
-      <Alert variant="warning">
-        Obs! Hvis man skal bygge tabeller uten å bruke vanlig {"<tabell> "}
-        -markup er det svært viktig at man supplerer elementene med{" "}
-        <Link href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/table/table.html">
-          riktige
-        </Link>{" "}
-        role-attributter og display-stiler for å bevare den semantiske verdien i
-        tabellene. Vi anbefaler fortsatt å ikke ta i bruk denne metoden hvis
-        mulig, da nettleseren ikke kan tolke tabellen like bra uten riktig
-        markup.
-      </Alert>
-      <div className="navds-table" role="table">
-        <div className="navds-table__header" role="rowgroup">
-          <div className="navds-table__row" role="row">
-            <div className="navds-table__header-cell" role="columnheader">
-              Fornavn
-            </div>
-            <div className="navds-table__header-cell" role="columnheader">
-              Etternavn
-            </div>
-            <div className="navds-table__header-cell" role="columnheader">
-              Rolle
-            </div>
+    <div className="navds-table" role="table">
+      <div className="navds-table__header" role="rowgroup">
+        <div className="navds-table__row" role="row">
+          <div className="navds-table__header-cell" role="columnheader">
+            Fornavn
           </div>
-        </div>
-        <div className="navds-table__body" role="rowgroup">
-          <div className="navds-table__row" role="row">
-            <div className="navds-table__data-cell" role="cell">
-              Jean-Luc
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              Picard
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              Kaptein
-            </div>
+          <div className="navds-table__header-cell" role="columnheader">
+            Etternavn
           </div>
-          <div className="navds-table__row" role="row">
-            <div className="navds-table__data-cell" role="cell">
-              William
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              Riker
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              Kommandør
-            </div>
-          </div>
-          <div className="navds-table__row" role="row">
-            <div className="navds-table__data-cell" role="cell">
-              Geordi
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              La Forge
-            </div>
-            <div className="navds-table__data-cell" role="cell">
-              Sjefsingeniør
-            </div>
+          <div className="navds-table__header-cell" role="columnheader">
+            Rolle
           </div>
         </div>
       </div>
-    </>
+      <div className="navds-table__body" role="rowgroup">
+        <div className="navds-table__row" role="row">
+          <div className="navds-table__data-cell" role="cell">
+            Jean-Luc
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            Picard
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            Kaptein
+          </div>
+        </div>
+        <div className="navds-table__row" role="row">
+          <div className="navds-table__data-cell" role="cell">
+            William
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            Riker
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            Kommandør
+          </div>
+        </div>
+        <div className="navds-table__row" role="row">
+          <div className="navds-table__data-cell" role="cell">
+            Geordi
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            La Forge
+          </div>
+          <div className="navds-table__data-cell" role="cell">
+            Sjefsingeniør
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
-
-export const Selection = () => <SelectionTable />;
-export const SelectionSmall = () => <SelectionTable size="small" />;
 
 const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
   const useToggleList = (initialState) => {
@@ -182,7 +177,7 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.DataCell>
             <Checkbox
               size={size}
-              checked={selectedRows.includes("all")}
+              indeterminate
               onChange={() => toggleSelectedRow("all")}
             >
               Select all
@@ -212,12 +207,12 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.DataCell>USA</Table.DataCell>
           <Table.DataCell>38</Table.DataCell>
         </Table.Row>
-        <Table.Row selected={selectedRows.includes("2")}>
+        <Table.Row selected>
           <Table.DataCell>
             <Checkbox
               size={size}
               hideLabel
-              checked={selectedRows.includes("2")}
+              checked
               onChange={() => toggleSelectedRow("2")}
               aria-labelledby={`x_r2-${size}`}
             >
@@ -231,36 +226,67 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
           <Table.DataCell>Denmark</Table.DataCell>
           <Table.DataCell>11</Table.DataCell>
         </Table.Row>
-        <Table.Row selected={selectedRows.includes("3")}>
-          <Table.DataCell>
-            <CheckboxGroup legend="velg flere felt" hideLegend>
-              <Checkbox
-                size={size}
-                hideLabel
-                checked={selectedRows.includes("3")}
-                onChange={() => toggleSelectedRow("3")}
-                aria-labelledby={`x_r3-${size}`}
-              >
-                {" "}
-              </Checkbox>
-              <Checkbox
-                size={size}
-                hideLabel
-                checked={selectedRows.includes("3")}
-                onChange={() => toggleSelectedRow("3")}
-                aria-labelledby={`x_r3-${size}`}
-              >
-                {" "}
-              </Checkbox>
-            </CheckboxGroup>
-          </Table.DataCell>
-          <Table.HeaderCell scope="row" colSpan={4}>
-            <span id={`x_r3-${size}`}>
-              Don&apos;t stack multiple checkboxes
-            </span>
-          </Table.HeaderCell>
-        </Table.Row>
       </Table.Body>
     </Table>
   );
+};
+
+export const Selection = () => <SelectionTable />;
+export const SelectionSmall = () => <SelectionTable size="small" />;
+
+export const Chromatic = {
+  render: () => (
+    <VStack gap="8">
+      <div>
+        <h3>Default</h3>
+        <Default />
+        <h3>Zebra</h3>
+        <Zebra />
+      </div>
+      <div>
+        <h3>Large</h3>
+        <SizeLarge />
+      </div>
+      <div>
+        <h3>Medium</h3>
+        <SizeMedium />
+      </div>
+      <div>
+        <h3>Small</h3>
+        <SizeSmall />
+      </div>
+      <div>
+        <h3>With Buttons</h3>
+        <Buttons />
+      </div>
+      <div>
+        <h3>Custom with divs</h3>
+        <WithDivs />
+      </div>
+      <div>
+        <h3>Selection</h3>
+        <Selection />
+      </div>
+      <div>
+        <h3>Selection small</h3>
+        <SelectionSmall />
+      </div>
+      <h2>Expandable</h2>
+      <div>
+        <h3>Large</h3>
+        <ExpandableLarge />
+      </div>
+      <div>
+        <h3>Medium</h3>
+        <Expandable />
+      </div>
+      <div>
+        <h3>Small</h3>
+        <ExpandableSmall />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

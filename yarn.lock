@@ -3449,7 +3449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^5.17.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^5.18.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3467,6 +3467,7 @@ __metadata:
     lodash.startcase: 4.4.0
     react: ^18.0.0
     rehype-parse: 8.0.4
+    tsc-alias: 1.8.8
     typescript: ^5.1.6
     unified: 10.1.2
   languageName: unknown
@@ -3476,8 +3477,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-css": ^5.18.0
+    "@navikt/ds-tokens": ^5.18.0
     "@types/jest": ^29.0.0
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3495,7 +3496,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 5.17.2
+    "@navikt/ds-css": 5.18.0
     "@types/inquirer": ^9.0.3
     "@types/jest": ^29.0.0
     axios: 1.6.0
@@ -3519,11 +3520,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@5.17.2, @navikt/ds-css@^5.17.2, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@5.18.0, @navikt/ds-css@^5.18.0, @navikt/ds-css@^5.9.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-tokens": ^5.18.0
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3536,13 +3537,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^5.17.2, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^5.18.0, @navikt/ds-react@^5.9.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/aksel-icons": ^5.18.0
+    "@navikt/ds-tokens": ^5.18.0
+    "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
     "@testing-library/jest-dom": ^5.16.0
@@ -3550,21 +3552,22 @@ __metadata:
     "@testing-library/user-event": ^14.2.0
     "@types/faker": 5.5.8
     "@types/jest": ^29.0.0
-    clsx: ^1.2.1
+    clsx: ^2.1.0
     concurrently: 7.2.1
     copyfiles: ^2.4.1
-    date-fns: ^2.30.0
+    date-fns: ^3.0.0
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^29.0.0
     jest-environment-jsdom: ^29.0.0
-    react-day-picker: 8.3.4
+    react-day-picker: 8.10.0
     react-dom: ^18.0.0
     react-router-dom: ^6.3.0
     rimraf: 3.0.2
     swr: ^1.1.2
     ts-jest: ^29.0.0
     ts-node: ^10.9.1
+    tsc-alias: 1.8.8
     typescript: ^5.1.6
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
@@ -3575,11 +3578,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^5.17.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^5.18.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/ds-tokens": ^5.18.0
     "@types/jest": ^29.0.0
     color: 4.2.3
     jest: ^29.0.0
@@ -3591,7 +3594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^5.17.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^5.18.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -4189,6 +4192,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-presence@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-presence@npm:1.0.0"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-compose-refs": 1.0.0
+    "@radix-ui/react-use-layout-effect": 1.0.0
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: a607d67795aa265e88f1765dcc7c18bebf6d88d116cb7f529ebe5a3fbbe751a42763aff0c1c89cdd8ce7f7664355936c4070fd3d4685774aff1a80fa95f4665b
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-primitive@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-primitive@npm:1.0.0"
@@ -4356,6 +4373,26 @@ __metadata:
     "@types/react":
       optional: true
   checksum: edf5edf435ff594bea7e198bf16d46caf81b6fb559493acad4fa8c308218896136acb16f9b7238c788fd13e94a904f2fd0b6d834e530e4cae94522cdb8f77ce9
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-tabs@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@radix-ui/react-tabs@npm:1.0.0"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/primitive": 1.0.0
+    "@radix-ui/react-context": 1.0.0
+    "@radix-ui/react-direction": 1.0.0
+    "@radix-ui/react-id": 1.0.0
+    "@radix-ui/react-presence": 1.0.0
+    "@radix-ui/react-primitive": 1.0.0
+    "@radix-ui/react-roving-focus": 1.0.0
+    "@radix-ui/react-use-controllable-state": 1.0.0
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 162413906c80a1fd2a3dddc9ac7f951b5e789cd69cc829f309735ac4ce6a21a9832c2abf71295a176a042fa6deb8a70dc597e219966d268d125e08d3a39f0596
   languageName: node
   linkType: hard
 
@@ -8807,11 +8844,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^5.17.2
-    "@navikt/ds-css": ^5.17.2
-    "@navikt/ds-react": ^5.17.2
-    "@navikt/ds-tailwind": ^5.17.2
-    "@navikt/ds-tokens": ^5.17.2
+    "@navikt/aksel-icons": ^5.18.0
+    "@navikt/ds-css": ^5.18.0
+    "@navikt/ds-react": ^5.18.0
+    "@navikt/ds-tailwind": ^5.18.0
+    "@navikt/ds-tokens": ^5.18.0
   languageName: unknown
   linkType: soft
 
@@ -8850,7 +8887,6 @@ __metadata:
     eslint-plugin-storybook: ^0.6.15
     eslint-plugin-testing-library: ^6.0.2
     fast-glob: 3.2.11
-    fs-extra: ^10.0.1
     glob: ^7.1.6
     husky: ^8.0.0
     lint-staged: 13.0.3
@@ -10697,14 +10733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^2.0.0":
+"clsx@npm:^2.0.0, clsx@npm:^2.1.0":
   version: 2.1.0
   resolution: "clsx@npm:2.1.0"
   checksum: 43fefc29b6b49c9476fbce4f8b1cc75c27b67747738e598e6651dd40d63692135dc60b18fa1c5b78a2a9ba8ae6fd2055a068924b94e20b42039bd53b78b98e1d
@@ -11922,6 +11951,13 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.21.0
   checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.0.0":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1"
+  checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283
   languageName: node
   linkType: hard
 
@@ -14502,7 +14538,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^10.0.0, fs-extra@npm:^10.0.1":
+"fs-extra@npm:^10.0.0":
   version: 10.1.0
   resolution: "fs-extra@npm:10.1.0"
   dependencies:
@@ -19228,6 +19264,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mylas@npm:^2.1.9":
+  version: 2.1.13
+  resolution: "mylas@npm:2.1.13"
+  checksum: f861d092137a9ac268cba88042392a5dc2a290eed5c8543954eae849d85e5961332211161d2c08c3644ad893f20dbe9de89b07f5dc027f1f92f13f2d38f4b81f
+  languageName: node
+  linkType: hard
+
 "mz@npm:^2.7.0":
   version: 2.7.0
   resolution: "mz@npm:2.7.0"
@@ -20910,6 +20953,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"plimit-lit@npm:^1.2.6":
+  version: 1.6.1
+  resolution: "plimit-lit@npm:1.6.1"
+  dependencies:
+    queue-lit: ^1.5.1
+  checksum: 5f18f1ea7254832bdc663c303420c804b5bc8070c670c88161171f0ebacaf46ce7ca12147ddf52bc22d927bb37bfbac6ed6fa478c93cb4be16b62c5fad16dd5f
+  languageName: node
+  linkType: hard
+
 "pluralize-esm@npm:^9.0.2":
   version: 9.0.5
   resolution: "pluralize-esm@npm:9.0.5"
@@ -22043,6 +22095,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"queue-lit@npm:^1.5.1":
+  version: 1.5.2
+  resolution: "queue-lit@npm:1.5.2"
+  checksum: 8dd45c79bd25b33b0c7d587391eb0b4acc4deb797bf92fef62b2d8e7c03b64083f5304f09d52a18267d34d020cc67ccde97a88185b67590eeccb194938ff1f98
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -22217,13 +22276,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.3.4":
-  version: 8.3.4
-  resolution: "react-day-picker@npm:8.3.4"
+"react-day-picker@npm:8.10.0":
+  version: 8.10.0
+  resolution: "react-day-picker@npm:8.10.0"
   peerDependencies:
-    date-fns: ^2.28.0
+    date-fns: ^2.28.0 || ^3.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 789e124e831383fc8219711f0b0610c1541ad283c37c71765ad1012288e4648bca504b1c21646363a9659ccc825d33f8600013fd0d119f9d13b1ff73196a7eaa
+  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
   languageName: node
   linkType: hard
 
@@ -26089,6 +26148,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsc-alias@npm:1.8.8":
+  version: 1.8.8
+  resolution: "tsc-alias@npm:1.8.8"
+  dependencies:
+    chokidar: ^3.5.3
+    commander: ^9.0.0
+    globby: ^11.0.4
+    mylas: ^2.1.9
+    normalize-path: ^3.0.0
+    plimit-lit: ^1.2.6
+  bin:
+    tsc-alias: dist/bin/index.js
+  checksum: 204852f75ce516c991813c371e4b3cda8767c50b6ad12b5c1b5f0227eb7e69fef559775fc829ba744b37dfd9930a1632dbabd62366a474fa0e174b2625ccb54f
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths-webpack-plugin@npm:^4.0.1":
   version: 4.1.0
   resolution: "tsconfig-paths-webpack-plugin@npm:4.1.0"
@@ -27394,7 +27469,7 @@ __metadata:
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.0
     boring-avatars: 1.10.1
-    clsx: ^1.2.1
+    clsx: ^2.1.0
     codesandbox: ^2.2.3
     cross-env: ^7.0.0
     date-fns: ^2.30.0
