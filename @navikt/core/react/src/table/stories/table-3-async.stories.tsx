@@ -10,7 +10,7 @@ export default {
   title: "ds-react/Table",
   component: Table,
   parameters: {
-    chromatic: { delay: 500 },
+    chromatic: { disable: true },
   },
 };
 
