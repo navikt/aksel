@@ -37,14 +37,16 @@ export const useFileUpload = ({
       return;
     }
 
-    upload(Array.from(fileList));
+    if (!disabled) {
+      upload(Array.from(fileList));
+    }
 
     // Resets the value to make it is possible to upload the same file several consecutive times
     event.target.value = "";
   };
 
   return {
-    onChange: disabled ? undefined : onChange,
+    onChange,
     inputRef,
     mergedRef,
   };

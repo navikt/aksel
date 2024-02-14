@@ -93,7 +93,7 @@ export const Default: StoryFn = () => {
           <VStack gap="3">
             {files.acceptedFiles.map((file: File, index) => (
               <CustomItem
-                key={file.name}
+                key={index}
                 index={index}
                 file={file}
                 onDelete={() => removeFile(file)}
@@ -110,7 +110,7 @@ export const Default: StoryFn = () => {
           <VStack gap="3">
             {files.rejectedFiles.map((rejected, index) => (
               <CustomItem
-                key={rejected.file.name}
+                key={index}
                 index={index}
                 file={rejected.file}
                 error={errors[rejected.reason[0]]}
