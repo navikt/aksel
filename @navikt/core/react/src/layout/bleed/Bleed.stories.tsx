@@ -1,7 +1,8 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
-import { Box, HStack, VStack } from "../..";
 import { BodyLong } from "../../typography";
+import { Box } from "../box";
+import { HStack, VStack } from "../stack";
 import { Bleed } from "./Bleed";
 
 export default {

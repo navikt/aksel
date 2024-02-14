@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Dropdown } from "..";
 import { Button } from "../button";
+import Dropdown from "./Dropdown";
 
 export default {
   title: "ds-react/Dropdown",

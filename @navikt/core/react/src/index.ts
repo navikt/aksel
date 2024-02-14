@@ -10,6 +10,7 @@ export * from "./expansion-card";
 export * from "./form";
 export * from "./grid";
 export * from "./guide-panel";
+export * from "./overlays";
 export * from "./help-text";
 export * from "./internal-header";
 export * from "./link";

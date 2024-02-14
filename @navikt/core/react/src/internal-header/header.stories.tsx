@@ -6,7 +6,8 @@ import {
   MenuGridIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
-import { Dropdown, InternalHeader } from "..";
+import { Dropdown } from "../dropdown";
+import InternalHeader from "./InternalHeader";
 
 export default {
   title: "ds-react/InternalHeader",

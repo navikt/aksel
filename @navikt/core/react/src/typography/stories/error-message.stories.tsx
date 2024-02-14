@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import React from "react";
-import { ErrorMessage } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import ErrorMessage from "../ErrorMessage";
 
 const meta = {
   title: "ds-react/Typography/ErrorMessage",
   component: ErrorMessage,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof ErrorMessage>;
 
 export default meta;
@@ -16,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 const lorem =
   "Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
-export const Default: Story = {
+export const Controls: Story = {
   args: {
     spacing: false,
     children: lorem,
@@ -88,5 +91,33 @@ export const OverrideTag: Story = {
 
     expect(defaultErrorMessage.tagName).toEqual("P");
     expect(legendErrorMessage.tagName).toEqual("LEGEND");
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Medium</h2>
+        <h3>Size</h3>
+        {SizeMedium.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingMedium.render?.(...props)}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <h3>Size</h3>
+        {SizeSmall.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingSmall.render?.(...props)}
+      </div>
+      <div>
+        <h2>Override Tag</h2>
+        {OverrideTag.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };
