@@ -1,5 +1,4 @@
-import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
-import isWeekend from "date-fns/isWeekend";
+import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -53,14 +52,9 @@ export interface UseDatepickerOptions
    * Allows input of with 'yy' year format.
    * @default true
    * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
-   * In 2023 this equals to 1943 - 2042
+   * In 2024 this equals to 1944 - 2043
    */
   allowTwoDigitYear?: boolean;
-  /**
-   * Will be removed in a future major-version
-   * @deprecated
-   */
-  openOnFocus?: false;
 }
 
 interface UseDatepickerValue {

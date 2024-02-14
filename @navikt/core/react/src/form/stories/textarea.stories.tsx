@@ -1,4 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
@@ -125,6 +126,24 @@ export const Resize: StoryFn = () => {
   return <Textarea resize label="Ipsum enim quis culpa" />;
 };
 
+export const OnChange: StoryFn = () => {
+  return (
+    <Textarea
+      label="Ipsum enim quis culpa"
+      onChange={console.log}
+      maxLength={50}
+    />
+  );
+};
+OnChange.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByLabelText("Ipsum enim quis culpa");
+  userEvent.click(input);
+  await userEvent.type(input, "Aute fugiat ut culpa");
+  const text = canvas.getByText("30 tegn igjen");
+  expect(text).toBeVisible();
+};
+
 export const Controlled: StoryFn = () => {
   const [value, setValue] = useState("");
   return (
@@ -193,7 +212,7 @@ export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
   // and set the height to 2px when used in StrictMode in a Modal that is initially open.
   return (
     <React.StrictMode>
-      <Modal open>
+      <Modal open onClose={() => null} aria-label="Modal med textarea">
         <Modal.Body>
           <Textarea label="Har du noen tilbakemeldinger?" />
         </Modal.Body>

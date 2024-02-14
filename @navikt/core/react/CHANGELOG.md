@@ -1,5 +1,55 @@
 # @navikt/ds-react
 
+## 5.18.1
+
+### Patch Changes
+
+- Panel: Komponent er nå markert som deprecated. Bruk `Box` i fremtiden. ([#2712](https://github.com/navikt/aksel/pull/2712))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.1
+  - @navikt/aksel-icons@5.18.1
+
+## 5.18.0
+
+### Minor Changes
+
+- Portal: Ny komponent `Portal` som lar deg enkelt bruke `createPortal`, også på serversiden ([#2697](https://github.com/navikt/aksel/pull/2697))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.0
+  - @navikt/aksel-icons@5.18.0
+
+## 5.17.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.5
+  - @navikt/aksel-icons@5.17.5
+
+## 5.17.4
+
+### Patch Changes
+
+- Bleed: `marginInline='full'` og `reflectivePadding` kan nå brukes sammen. ([#2695](https://github.com/navikt/aksel/pull/2695))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.4
+  - @navikt/aksel-icons@5.17.4
+
+## 5.17.3
+
+### Patch Changes
+
+- :bug: Textarea: maxLength virker nå selv om man sender inn onChange uten å sende inn value ([#2690](https://github.com/navikt/aksel/pull/2690))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.3
+  - @navikt/aksel-icons@5.17.3
+
 ## 5.17.2
 
 ### Patch Changes

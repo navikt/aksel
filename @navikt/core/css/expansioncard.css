@@ -177,7 +177,7 @@
  * Content *
  *************************/
 .navds-expansioncard__content {
-  --__ac-expansioncard-padding-block: var(--a-spacing-3);
+  --__ac-expansioncard-padding-block: var(--a-spacing-5);
 
   border-end-end-radius: var(--__ac-expansioncard-border-radius);
   border-end-start-radius: var(--__ac-expansioncard-border-radius);
@@ -185,6 +185,10 @@
     var(--__ac-expansioncard-padding-inline);
   border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
   border-top: none;
+}
+
+.navds-expansioncard--small .navds-expansioncard__content {
+  --__ac-expansioncard-padding-block: var(--a-spacing-4);
 }
 
 .navds-expansioncard__content--closed {

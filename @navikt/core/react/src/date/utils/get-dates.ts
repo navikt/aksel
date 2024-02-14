@@ -1,8 +1,10 @@
-import isSameYear from "date-fns/isSameYear";
-import setMonth from "date-fns/setMonth";
-import setYear from "date-fns/setYear";
-import startOfMonth from "date-fns/startOfMonth";
-import startOfYear from "date-fns/startOfYear";
+import {
+  isSameYear,
+  setMonth,
+  setYear,
+  startOfMonth,
+  startOfYear,
+} from "date-fns";
 
 export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
   const dropdownMonths: Date[] = [];

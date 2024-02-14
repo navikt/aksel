@@ -1,3 +1,4 @@
+"use client";
 export * from "./accordion";
 export * from "./alert";
 export * from "./button";
@@ -9,6 +10,7 @@ export * from "./dropdown";
 export * from "./expansion-card";
 export * from "./form";
 export * from "./guide-panel";
+export * from "./overlays";
 export * from "./help-text";
 export * from "./internal-header";
 export * from "./link";

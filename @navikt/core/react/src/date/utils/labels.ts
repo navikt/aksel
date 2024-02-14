@@ -1,3 +1,4 @@
+import { Locale } from "date-fns";
 import { Labels, NavButtonLabel } from "react-day-picker";
 
 const labelNext: NavButtonLabel = (date, options) => {

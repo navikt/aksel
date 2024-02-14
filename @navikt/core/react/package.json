@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "5.17.2",
+  "version": "5.18.1",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -14,8 +14,6 @@
     "url": "git+https://github.com/navikt/aksel.git"
   },
   "sideEffects": false,
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
   "publishConfig": {
     "access": "public",
@@ -28,22 +26,37 @@
     "_docs.json",
     "!**/*.tsbuildinfo"
   ],
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
-    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
+    "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC jest"
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^5.17.2",
-    "@navikt/ds-tokens": "^5.17.2",
+    "@navikt/aksel-icons": "^5.18.1",
+    "@navikt/ds-tokens": "^5.18.1",
     "@radix-ui/react-tabs": "1.0.0",
-    "clsx": "^1.2.1",
-    "date-fns": "^2.30.0",
-    "react-day-picker": "8.3.4"
+    "clsx": "^2.1.0",
+    "date-fns": "^3.0.0",
+    "react-day-picker": "8.10.0"
   },
   "devDependencies": {
     "@testing-library/dom": "8.13.0",
@@ -64,6 +77,7 @@
     "swr": "^1.1.2",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
+    "tsc-alias": "1.8.8",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
