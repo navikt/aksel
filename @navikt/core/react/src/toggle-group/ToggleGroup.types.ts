@@ -32,4 +32,9 @@ export interface ToggleGroupProps
    * @default "action"
    */
   variant?: "action" | "neutral";
+  /**
+   * Stretch each button to fill avaliable space in container
+   * @default false
+   */
+  fill?: boolean;
 }

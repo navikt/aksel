@@ -91,6 +91,9 @@ export const Compositions = () => {
       <ToggleGroup value={activeValue} onChange={setActiveValue}>
         {Items(true)}
       </ToggleGroup>
+      <ToggleGroup fill value={activeValue} onChange={setActiveValue}>
+        {Items(true)}
+      </ToggleGroup>
     </div>
   );
 };

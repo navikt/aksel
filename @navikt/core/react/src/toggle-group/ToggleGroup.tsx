@@ -48,6 +48,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       defaultValue,
       "aria-describedby": desc,
       variant = "action",
+      fill = false,
       ...rest
     },
     ref,
@@ -86,7 +87,11 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     return (
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
-          <div className={cl("navds-toggle-group__wrapper", className)}>
+          <div
+            className={cl("navds-toggle-group__wrapper", className, {
+              "navds-toggle-group__wrapper--fill": fill,
+            })}
+          >
             {label && (
               <Label
                 size={size}
