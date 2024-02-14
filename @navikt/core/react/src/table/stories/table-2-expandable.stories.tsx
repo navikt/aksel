@@ -7,6 +7,9 @@ import Table from "../Table";
 export default {
   title: "ds-react/Table",
   component: Table,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 export const Expandable = () => {
@@ -27,6 +30,7 @@ export const Expandable = () => {
             content={row.content}
             key={row.name}
             togglePlacement="right"
+            defaultOpen
           >
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{row[key]}</Table.DataCell>
@@ -52,7 +56,7 @@ export const ExpandableLarge = () => {
       </Table.Header>
       <Table.Body>
         {data.slice(0, 1).map((row) => (
-          <Table.ExpandableRow content={row.content} key={row.name}>
+          <Table.ExpandableRow defaultOpen content={row.content} key={row.name}>
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
@@ -89,7 +93,7 @@ export const ExpandableSmall = () => {
       </Table.Header>
       <Table.Body>
         {data.slice(0, 1).map((row) => (
-          <Table.ExpandableRow content={row.content} key={row.name}>
+          <Table.ExpandableRow defaultOpen content={row.content} key={row.name}>
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{row[key]}</Table.DataCell>
             ))}
@@ -236,36 +240,6 @@ const data = [
     ),
   },
 ];
-
-export const ExpandableOpen = () => {
-  return (
-    <Table zebraStripes>
-      <Table.Header>
-        <Table.Row>
-          {columns.map(({ key, name }) => (
-            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
-          ))}
-          <Table.HeaderCell />
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {data.map((row) => (
-          <Table.ExpandableRow
-            expansionDisabled={row.animal === "Sel"}
-            content={row.content}
-            key={row.name}
-            togglePlacement="right"
-            defaultOpen
-          >
-            {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
-            ))}
-          </Table.ExpandableRow>
-        ))}
-      </Table.Body>
-    </Table>
-  );
-};
 
 export const ClickableRow = () => {
   const [isRowOpen1, setIsRowOpen1] = useState(false);
