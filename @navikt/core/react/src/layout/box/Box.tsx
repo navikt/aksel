@@ -13,11 +13,11 @@ import {
 } from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Background color. Accepts a color token. */
+  /** Background-color. Accepts a color token. */
   background?: BackgroundToken;
-  /** Border color. Accepts a color token. */
+  /** Border-color. Accepts a color token. */
   borderColor?: BorderColorToken;
-  /** Border radius. Accepts a radius token, or an object of radius tokens for different breakpoints.
+  /** Border-radius. Accepts a radius token, or an object of radius tokens for different breakpoints.
    * @example
    * borderRadius='full'
    * borderRadius='0 full large small'
@@ -31,7 +31,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * borderWidth='1 2 3 4'
    */
   borderWidth?: SpaceDelimitedAttribute<"0" | "1" | "2" | "3" | "4" | "5">;
-  /** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /** Padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
