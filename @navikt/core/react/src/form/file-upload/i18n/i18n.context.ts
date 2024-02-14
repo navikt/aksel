@@ -23,7 +23,7 @@ type NestedKeyOf<ObjectType extends object> = {
 export function useI18n(local: ComponentTranslation) {
   const i18n = useContext(I18nContext);
 
-  const translation: TranslationDictionary = useMemo(
+  const translation = useMemo(
     () => (Array.isArray(i18n) ? merge(...i18n.slice().reverse()) : i18n),
     [i18n],
   );
@@ -35,7 +35,7 @@ export function useI18n(local: ComponentTranslation) {
     id: NestedKeyOf<typeof nb>,
     options?: { replacements: string | number },
   ) => {
-    const text: string = get({ Aksel: local }, id) || get(translation, id);
+    const text = get({ Aksel: local }, id) || get(translation, id);
 
     if (!text) {
       return "";

@@ -1,9 +1,7 @@
-interface GeneralObject {
-  [key: string]: any;
-}
+import { TranslationDictionary } from "./i18n.types";
 
-export function merge(...objs: GeneralObject[]) {
-  let final = {};
+export function merge(...objs: TranslationDictionary[]) {
+  let final: TranslationDictionary = {};
 
   for (const obj of objs) {
     final = mergeRecursively(final, obj);
@@ -12,22 +10,26 @@ export function merge(...objs: GeneralObject[]) {
   return final;
 }
 
-function mergeRecursively(objA: GeneralObject, objB: GeneralObject) {
-  const objARes: GeneralObject = { ...objA };
+function mergeRecursively(
+  objA: TranslationDictionary,
+  objB: TranslationDictionary,
+) {
+  const objARes = { ...objA };
 
   for (const key in objB) {
     if (!(key in objB)) {
       continue;
-    } else if (isMergeableValue(objB[key]) && isMergeableValue(objARes[key])) {
-      objARes[key] = mergeRecursively(objARes[key], objB[key]);
+    }
+
+    const a = objARes[key];
+    const b = objB[key];
+
+    if (typeof b !== "string" && typeof a !== "string") {
+      objARes[key] = mergeRecursively(a, b);
     } else {
-      objARes[key] = objB[key];
+      objARes[key] = b;
     }
   }
 
   return objARes;
-}
-
-function isMergeableValue(value: any) {
-  return value !== null && typeof value === "object";
 }
