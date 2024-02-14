@@ -1,7 +1,6 @@
 export const FileRejectionReason = {
   FileType: "filetype",
   FileSize: "filesize",
-  FileCount: "filecount",
 };
 
 type FileUploadRejectedReason = keyof typeof FileRejectionReason | string;

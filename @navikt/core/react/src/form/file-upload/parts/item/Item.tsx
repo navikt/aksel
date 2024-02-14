@@ -44,6 +44,8 @@ export interface FileItemBaseProps {
    * i18n-API for customizing texts and labels
    */
   translations?: ComponentTranslation["FileUpload"];
+  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 type FileItemActionDelete = {
@@ -57,22 +59,13 @@ type FileItemActionRetry = {
 };
 
 type FileItemActionNone = {
-  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
-  itemAction: "none";
-};
-
-type FileItemActionUndefined = {
-  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
-  itemAction?: undefined;
+  itemAction?: "none";
 };
 
 type FileItemConditionalProps =
   | FileItemActionDelete
   | FileItemActionRetry
-  | FileItemActionNone
-  | FileItemActionUndefined;
+  | FileItemActionNone;
 
 export type FileItemProps = FileItemBaseProps &
   FileItemConditionalProps &

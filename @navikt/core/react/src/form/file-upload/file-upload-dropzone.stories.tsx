@@ -28,6 +28,23 @@ const onSelect = ({
   );
 };
 
+export const Default: StoryObj<typeof FileUpload.Dropzone> = {
+  render: (props) => <FileUpload.Dropzone {...props} onSelect={console.log} />,
+  args: {
+    label: "Last opp filer",
+    description: "",
+    error: "",
+    multiple: true,
+    accept: "",
+    maxSizeInBytes: 0,
+    fileLimit: { max: 2, current: 1 },
+  },
+  argTypes: {
+    disabled: { control: { type: "boolean" } },
+  },
+  parameters: { chromatic: { disable: true } },
+};
+
 export const States: StoryObj = {
   render: () => (
     <div>
@@ -37,12 +54,12 @@ export const States: StoryObj = {
         onSelect={console.log}
         disabled
       />
-
       <FileUpload.Dropzone
         label="FileLimit disabled"
         onSelect={console.log}
         fileLimit={{ max: 1, current: 2 }}
       />
+
       <h2>Error</h2>
       <FileUpload.Dropzone
         label="Last opp filer"
@@ -63,6 +80,7 @@ export const Translation: StoryObj = {
         multiple={false}
         onSelect={onSelect}
       />
+
       <h2>Custom texts</h2>
       <FileUpload.Dropzone
         translations={{
@@ -75,6 +93,19 @@ export const Translation: StoryObj = {
         label="Last opp bilder"
         onSelect={console.log}
         icon={ImageIcon}
+      />
+
+      <h3>Disabled</h3>
+      <FileUpload.Dropzone
+        translations={{
+          dropzone: {
+            disabled: "Du kan ikke laste opp flere bilder",
+          },
+        }}
+        label="Last opp bilder"
+        onSelect={console.log}
+        icon={ImageIcon}
+        disabled
       />
     </div>
   ),

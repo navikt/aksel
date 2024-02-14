@@ -1,12 +1,12 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { FileUpload } from "..";
+import { FileItemProps, FileUpload } from "..";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
-import { OnFileSelectProps } from "./FileUpload.types";
+import { FileRejectionReason, OnFileSelectProps } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
@@ -19,7 +19,31 @@ const MAX_FILES = 3;
 const MAX_SIZE_MB = 1;
 const MAX_SIZE = MAX_SIZE_MB * 1024 * 1024;
 
-const DefaultFn = ({ error = false }) => {
+const CustomItem = ({
+  index,
+  ...props
+}: FileItemProps & {
+  index: number;
+  onDelete: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 700 * index);
+  }, [index]);
+
+  return (
+    <FileUpload.Item
+      {...props}
+      status={loading ? "uploading" : "idle"}
+      itemAction="delete"
+    />
+  );
+};
+
+export const Default: StoryFn = () => {
   const [files, setFiles] = useState<OnFileSelectProps>({
     allFiles: [],
     acceptedFiles: [],
@@ -29,18 +53,8 @@ const DefaultFn = ({ error = false }) => {
   function addFiles(filesToAdd: OnFileSelectProps) {
     const newFiles = {
       allFiles: [...files.allFiles, ...filesToAdd.allFiles],
-      acceptedFiles: error
-        ? []
-        : [...files.acceptedFiles, ...filesToAdd.acceptedFiles],
-      rejectedFiles: error
-        ? [
-            ...files.rejectedFiles,
-            ...filesToAdd.allFiles.map((x) => ({
-              file: x,
-              reason: ["custom error"],
-            })),
-          ]
-        : [...files.rejectedFiles, ...filesToAdd.rejectedFiles],
+      acceptedFiles: [...files.acceptedFiles, ...filesToAdd.acceptedFiles],
+      rejectedFiles: [...files.rejectedFiles, ...filesToAdd.rejectedFiles],
     };
     setFiles(newFiles);
   }
@@ -56,33 +70,15 @@ const DefaultFn = ({ error = false }) => {
     setFiles(newFiles);
   }
 
-  const CustomItem = ({ index, ...props }: any) => {
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 500 * index);
-    }, [index]);
-
-    return (
-      <FileUpload.Item
-        {...props}
-        onRetry={() => console.log("retry")}
-        status={loading ? "uploading" : "completed"}
-        itemAction="delete"
-      />
-    );
-  };
-
   return (
-    <VStack gap="6">
+    <VStack gap="6" style={{ width: 500, maxWidth: "100%" }}>
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
         accept=".doc,.docx,.xls,.xlsx,.pdf"
-        onSelect={addFiles}
+        maxSizeInBytes={MAX_SIZE}
         fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}
+        onSelect={addFiles}
       />
 
       {getListError(files) && (
@@ -100,7 +96,6 @@ const DefaultFn = ({ error = false }) => {
                 key={file.name}
                 index={index}
                 file={file}
-                error={getError(file, files.rejectedFiles, index)}
                 onDelete={() => removeFile(file)}
               />
             ))}
@@ -118,7 +113,7 @@ const DefaultFn = ({ error = false }) => {
                 key={rejected.file.name}
                 index={index}
                 file={rejected.file}
-                error={getError(rejected.file, files.rejectedFiles, index)}
+                error={errors[rejected.reason[0]]}
                 onDelete={() => removeFile(rejected.file)}
               />
             ))}
@@ -128,35 +123,12 @@ const DefaultFn = ({ error = false }) => {
     </VStack>
   );
 };
+Default.parameters = { chromatic: { disable: true } };
 
-export const Default = {
-  render: () => <DefaultFn error={false} />,
-  decorators: [
-    (Story) => (
-      <div style={{ width: 500, maxWidth: "100%" }}>
-        <Story />
-      </div>
-    ),
-  ],
+const errors = {
+  [FileRejectionReason.FileType]: "Filformatet støttes ikke",
+  [FileRejectionReason.FileSize]: `Filen er større enn ${MAX_SIZE_MB} MB`,
 };
-
-const errors = [
-  "Filformatet støttes ikke",
-  "Filen er for stor",
-  "Du kan ikke laste opp tomme filer",
-  "Noe gikk galt under opplastingen, prøv å laste opp filen på nytt",
-];
-
-function getError(
-  file: File,
-  rejectedFiles: OnFileSelectProps["rejectedFiles"],
-  index: number,
-) {
-  if (file.size > MAX_SIZE) return `Filen er større enn ${MAX_SIZE_MB} MB`;
-  if (rejectedFiles.some((x) => x.file === file))
-    return errors[index % errors.length];
-  return undefined;
-}
 
 function getListError(files: OnFileSelectProps) {
   const filesTooMany = files.acceptedFiles.length - MAX_FILES;
@@ -166,12 +138,107 @@ function getListError(files: OnFileSelectProps) {
     return `Du har lagt ved ${filesTooMany} filer for mye, vennligst fjern ${filesTooMany} filer`;
 }
 
-export const TriggerWithButton = {
-  render: () => {
+export const Single: StoryFn = () => {
+  const [files, setFiles] = useState<OnFileSelectProps>({
+    allFiles: [],
+    acceptedFiles: [],
+    rejectedFiles: [],
+  });
+
+  function addFiles(filesToAdd: OnFileSelectProps) {
+    setFiles(filesToAdd);
+  }
+
+  function removeFile() {
+    setFiles({
+      allFiles: [],
+      acceptedFiles: [],
+      rejectedFiles: [],
+    });
+  }
+
+  return (
+    <VStack gap="6" style={{ width: 500, maxWidth: "100%" }}>
+      <FileUpload.Dropzone
+        label="Last opp fil til søknaden"
+        description={`Maks størrelse ${MAX_SIZE_MB} MB`}
+        accept=".doc,.docx,.xls,.xlsx,.pdf"
+        maxSizeInBytes={MAX_SIZE}
+        fileLimit={{ max: 1, current: files.allFiles.length }}
+        multiple={false}
+        onSelect={addFiles}
+      />
+      {files.acceptedFiles.map((file) => (
+        <FileUpload.Item
+          key={file.name}
+          file={file}
+          onDelete={() => removeFile()}
+        />
+      ))}
+      {files.rejectedFiles.map((rejected) => (
+        <FileUpload.Item
+          key={rejected.file.name}
+          file={rejected.file}
+          error={errors[rejected.reason[0]]}
+          onDelete={() => removeFile()}
+        />
+      ))}
+    </VStack>
+  );
+};
+Single.parameters = { chromatic: { disable: true } };
+
+export const Translation = () => (
+  <FileUpload
+    translations={{
+      dropzone: {
+        dragAndDropMultiple: "Dra og slipp bilder i format .png",
+        buttonMultiple: "Velg bilder",
+        or: "eventuelt",
+        disabled: "Du kan ikke laste opp flere bilder",
+      },
+      item: {
+        deleteButtonTitle: "Slett bilde",
+        downloading: "Laster bilde...",
+        uploading: "Laster opp bilde...",
+        retryButtonTitle: "Last opp bilde på nytt",
+      },
+    }}
+  >
+    <VStack gap="3" style={{ width: 500, maxWidth: "100%" }}>
+      <FileUpload.Dropzone label="Last opp bilder" onSelect={console.log} />
+      <FileUpload.Item
+        file={{ name: "eksempel.png", size: 200000 }}
+        onDelete={() => null}
+      />
+      <FileUpload.Item
+        file={{ name: "eksempel.png", size: 200000 }}
+        itemAction="retry"
+        onRetry={() => null}
+      />
+      <FileUpload.Item
+        file={{ name: "eksempel.png", size: 200000 }}
+        status="downloading"
+      />{" "}
+      <FileUpload.Item
+        file={{ name: "eksempel.png", size: 200000 }}
+        status="uploading"
+      />
+    </VStack>
+  </FileUpload>
+);
+
+export const TriggerWithButton: StoryObj<typeof FileUpload.Trigger> = {
+  render: (props) => {
     return (
-      <FileUpload.Trigger onSelect={console.log}>
+      <FileUpload.Trigger {...props} onSelect={console.log}>
         <Button icon={<UploadIcon aria-hidden />}>Last opp filer</Button>
       </FileUpload.Trigger>
     );
+  },
+  args: {
+    multiple: true,
+    accept: "",
+    maxSizeInBytes: 0,
   },
 };
