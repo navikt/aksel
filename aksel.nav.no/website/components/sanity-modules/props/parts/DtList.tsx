@@ -26,7 +26,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
         </span>
       </dt>
       {prop.defaultValue && (
-        <dd className="text-m mt-3">
+        <dd className="text-m mt-1">
           <span className="font-size-2">default: </span>
           <span>{Highlighter({ type: prop.defaultValue })}</span>
         </dd>
