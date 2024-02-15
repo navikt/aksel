@@ -95,7 +95,7 @@ export interface DatePickerDefaultProps
    */
   onOpenToggle?: () => void;
   /**
-   * Avoid using if possible!
+   * **Avoid using if possible!**
    * Changes what CSS position property to use.
    * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
    * @default See Popover

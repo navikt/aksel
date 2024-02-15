@@ -28,7 +28,7 @@ export interface ButtonProps
     | "danger";
   /**
    * Changes padding, height and font-size
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
   /**

@@ -31,11 +31,11 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @default 'default'
+   * @default "default"
    */
   variant?: "default" | "neutral";
   /**
-   * @default 'small'
+   * @default "small"
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
   /**

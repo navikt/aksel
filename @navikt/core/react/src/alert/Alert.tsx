@@ -21,7 +21,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "error" | "warning" | "info" | "success";
   /**
    * Changes padding and font-sizes
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small";
   /**

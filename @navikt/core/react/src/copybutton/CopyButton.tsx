@@ -56,12 +56,12 @@ export interface CopyButtonProps
   activeDuration?: number;
   /**
    * Accessible label for icon (ignored if text is set)
-   * @default 'Kopier'
+   * @default "Kopier"
    */
   title?: string;
   /**
    * Accessible label for icon in active-state (ignored if text is set)
-   * @default 'Kopiert'
+   * @default "Kopiert"
    */
   activeTitle?: string;
   /**

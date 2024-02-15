@@ -31,7 +31,7 @@ export interface ReadMoreProps
   onOpenChange?: (open: boolean) => void;
   /**
    * Changes fontsize for content
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small";
 }
