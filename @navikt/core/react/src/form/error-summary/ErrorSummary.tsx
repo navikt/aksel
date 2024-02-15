@@ -4,7 +4,7 @@ import { BodyShort, Heading } from "../../typography";
 import { useId } from "../../util/hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
-export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
+interface ErrorSummaryBaseProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Collectipn of ErrorSummary.Item
    */
@@ -23,13 +23,30 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;
+}
+
+type ErrorSummaryWithRef = {
+  "aria-live"?: "polite";
   /**
    * When manually setting focus to `<ErrorSummary />` use the
    * `focusTargetRef`-prop and not ref.
    * This directs focus to heading, improving screen reader experience
    */
+  focusTargetRef: React.RefObject<HTMLElement>;
+};
+
+type ErrorSummaryWithAriaLive = {
   focusTargetRef?: React.RefObject<HTMLElement>;
-}
+  /**
+   * When manually setting focus to `<ErrorSummary />` use the
+   * `focusTargetRef`-prop and not ref.
+   * This directs focus to heading, improving screen reader experience
+   */
+  "aria-live": "polite";
+};
+
+export type ErrorSummaryProps = ErrorSummaryBaseProps &
+  (ErrorSummaryWithRef | ErrorSummaryWithAriaLive);
 
 interface ErrorSummaryComponent
   extends React.ForwardRefExoticComponent<

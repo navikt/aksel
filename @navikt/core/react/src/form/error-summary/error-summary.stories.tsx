@@ -27,6 +27,7 @@ export const Default = {
       heading="Feiloppsummering komponent"
       headingTag={props.headingTag || "h2"}
       size={props.size ?? undefined}
+      aria-live="polite"
     >
       <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
       <ErrorSummary.Item href="#2">
@@ -37,7 +38,11 @@ export const Default = {
 };
 
 export const Small = () => (
-  <ErrorSummary heading="Feiloppsummering komponent" size="small">
+  <ErrorSummary
+    heading="Feiloppsummering komponent"
+    size="small"
+    aria-live="polite"
+  >
     <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
     <ErrorSummary.Item href="#2">
       Tekstfeltet må ha en godkjent e-mail

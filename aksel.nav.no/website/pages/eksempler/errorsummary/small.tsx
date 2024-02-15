@@ -6,6 +6,7 @@ const Example = () => {
     <ErrorSummary
       heading="Du må fikse disse feilene før du kan sende inn søknad."
       size="small"
+      aria-live="polite"
     >
       <ErrorSummary.Item href="#1">
         Felt må fylles ut med alder

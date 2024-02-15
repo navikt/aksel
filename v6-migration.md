@@ -20,6 +20,7 @@ men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grun
 
 - Heading-prop er satt som required
 - Ny prop `focusTargetRef` for å bedre håndtere fokushåntering
+- Har conditional-prop der man endten setter `aria-live="polite"` eller `focusTargetRef` (eller begge).
 - Hinte om at neste major-versjon kommer til å potensielt endre hvordan ref settes på section (tabIndex fjernes) og at de bør bruke `focusTargetRef`.
 
 ## Chat
