@@ -19,8 +19,11 @@ export const UxTweaks = ({ href, length, ...rest }: UxTweaksProps) => {
       <Box
         padding="6"
         borderRadius="xlarge"
-        className="space-y-3 border border-border-subtle bg-violet-50"
+        borderWidth="1"
+        borderColor="border-subtle"
+        className="space-y-3 bg-violet-50"
         as="aside"
+        role="presentation"
       >
         <Heading level="2" size="medium" id="uxtweaks-aside">
           Vil du hjelpe oss å forbedre Aksel?
