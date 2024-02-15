@@ -1,11 +1,12 @@
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
+import { nbNOLocale } from "@sanity/locale-nb-no";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
@@ -74,12 +75,9 @@ function defaultConfig() {
         }
         return prev;
       },
-      unstable_comments: {
-        enabled: true,
-      },
     },
     plugins: [
-      deskTool({
+      structureTool({
         title: "Editor",
         structure,
         defaultDocumentNode,
@@ -93,6 +91,7 @@ function defaultConfig() {
       visionTool(),
       unsplashImageAsset(),
       colorInput(),
+      nbNOLocale(),
     ],
   };
 }
