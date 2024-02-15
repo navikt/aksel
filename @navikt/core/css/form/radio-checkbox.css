@@ -144,7 +144,7 @@
   transform: translate(var(--a-spacing-1-alt));
   pointer-events: none;
 
-/* Fixed edcase where when using in shadow-dom, svg will not center */
+  /* Fixed edcase where when using in shadow-dom, svg will not center */
   display: flex;
   align-items: center;
 }
