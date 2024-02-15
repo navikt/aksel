@@ -9,4 +9,4 @@ type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
-export type ComponentTranslation = RecursivePartial<typeof nb.Aksel>;
+export type ComponentTranslation = RecursivePartial<typeof nb>;
