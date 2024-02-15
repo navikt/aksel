@@ -3,7 +3,7 @@ import { TranslationDictionary } from "./i18n.types";
 /**
  * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3
  */
-const OBJECT_NOTATION_MATCHER = /\[(.*?)\]|(\w+)/g;
+const OBJECT_NOTATION_MATCHER = /(\w+)/g;
 
 export function get(
   obj: TranslationDictionary | undefined,
