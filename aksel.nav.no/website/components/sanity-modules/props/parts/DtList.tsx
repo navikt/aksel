@@ -14,7 +14,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
       as="div"
       className="dtlist block overflow-x-auto border border-t-0 border-gray-300 p-2 first-of-type:border-t last-of-type:rounded-b"
     >
-      <dt className="-m-2 bg-gray-100 p-2">
+      <dt>
         {!prop.defaultValue ? (
           <span className="font-mono font-semibold">{`${prop.name}${
             prop?.required ? "" : "?"
