@@ -16,19 +16,9 @@ export interface CreateContextOptions<T> {
   errorMessage?: string;
   name?: string;
   defaultValue?: T;
-  /**
-   * When `true`, `useContext` will throw an error if context is outside of a provider
-   * @default true
-   */
-  strict?: boolean;
 }
 
 type ProviderProps<T> = T & { children: React.ReactNode };
-
-export type CreateContextReturn<T> = [
-  (contextValues: ProviderProps<T>) => React.JSX.Element,
-  () => T,
-];
 
 function getErrorMessage(hook: string, provider: string) {
   return `${hook} returned \`undefined\`. Seems you forgot to wrap component within ${provider}`;
@@ -41,7 +31,6 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
     providerName = "Provider",
     errorMessage,
     defaultValue,
-    strict = true,
   } = options;
 
   const Context = createReactContext<T | undefined>(defaultValue);
@@ -64,7 +53,9 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
     },
   );
 
-  function useContext() {
+  function useContext<S extends boolean = true>(
+    strict: S = true as S,
+  ): Context<S, T> {
     const context = useReactContext(Context);
 
     if (!context && strict) {
@@ -76,10 +67,12 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
       throw error;
     }
 
-    return context;
+    return context as Context<S, T>;
   }
 
   Context.displayName = name;
 
-  return [Provider, useContext] as CreateContextReturn<T>;
+  return [Provider, useContext] as const;
 }
+
+type Context<S, T> = S extends true ? T : T | undefined;

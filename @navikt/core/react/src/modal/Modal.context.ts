@@ -7,10 +7,7 @@ interface ModalContextProps {
 }
 
 export const [ModalContextProvider, useModalContext] =
-  createContext<ModalContextProps | null>({
-    defaultValue: null,
+  createContext<ModalContextProps>({
     name: "ModalContext",
-    hookName: "useModalContext",
-    providerName: "ModalContextProvider",
-    strict: false,
+    errorMessage: "<Modal.Header> must be used within a <Modal>",
   });

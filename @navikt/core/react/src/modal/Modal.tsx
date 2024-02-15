@@ -98,7 +98,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
     const dateContext = useContext(DateContext);
-    const modalContext = useModalContext();
+    const modalContext = useModalContext(false);
     if (modalContext && !dateContext) {
       console.error("Modals should not be nested");
     }
