@@ -109,7 +109,7 @@ describe("partitionFiles", () => {
     expect(rejected.length).toBe(1);
     expect(accepted[0].name).toBe(csvFileName);
     expect(rejected[0].file.name).toBe(txtFileName);
-    expect(rejected[0].reasons).toEqual(["filetype"]);
+    expect(rejected[0].reasons).toEqual(["fileType"]);
   });
 
   test("rejects file that is too large", () => {
@@ -127,6 +127,6 @@ describe("partitionFiles", () => {
     expect(rejected.length).toBe(1);
     expect(accepted[0].name).toBe(txtFileName);
     expect(rejected[0].file.name).toBe(csvFileName);
-    expect(rejected[0].reasons).toEqual(["filesize"]);
+    expect(rejected[0].reasons).toEqual(["fileSize"]);
   });
 });
