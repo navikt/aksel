@@ -96,17 +96,17 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                   aria-hidden={!dropzoneCtx.isDraggingOver}
                   className="navds-dropzone__area-release__text"
                 >
-                  {translate("Aksel.FileUpload.dropzone.drop")}
+                  {translate("FileUpload.dropzone.drop")}
                 </span>
               </div>
               <div aria-hidden>
                 <BodyShort as="div" spacing>
                   {multiple
-                    ? translate("Aksel.FileUpload.dropzone.dragAndDropMultiple")
-                    : translate("Aksel.FileUpload.dropzone.dragAndDrop")}
+                    ? translate("FileUpload.dropzone.dragAndDropMultiple")
+                    : translate("FileUpload.dropzone.dragAndDrop")}
                 </BodyShort>
                 <BodyShort as="div">
-                  {translate("Aksel.FileUpload.dropzone.or")}
+                  {translate("FileUpload.dropzone.or")}
                 </BodyShort>
               </div>
               <Button
@@ -116,8 +116,8 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 tabIndex={-1}
               >
                 {multiple
-                  ? translate("Aksel.FileUpload.dropzone.buttonMultiple")
-                  : translate("Aksel.FileUpload.dropzone.button")}
+                  ? translate("FileUpload.dropzone.buttonMultiple")
+                  : translate("FileUpload.dropzone.button")}
               </Button>
             </>
           )}
@@ -127,8 +127,8 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
               <CircleSlashIcon aria-hidden fontSize="1.75rem" />
               <BodyShort as="div">
                 {fileLimitReached
-                  ? translate("Aksel.FileUpload.dropzone.disabledFilelimit")
-                  : translate("Aksel.FileUpload.dropzone.disabled")}
+                  ? translate("FileUpload.dropzone.disabledFilelimit")
+                  : translate("FileUpload.dropzone.disabled")}
               </BodyShort>
             </div>
           )}

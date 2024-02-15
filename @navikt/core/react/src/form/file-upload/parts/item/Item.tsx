@@ -99,10 +99,10 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
 
       function getStatusText() {
         if (status === "uploading") {
-          return translate("Aksel.FileUpload.item.uploading");
+          return translate("FileUpload.item.uploading");
         }
         if (status === "downloading") {
-          return translate("Aksel.FileUpload.item.downloading");
+          return translate("FileUpload.item.downloading");
         }
         return formatFileSize(file);
       }
@@ -132,10 +132,8 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 onRetry={onRetry}
                 onDelete={onDelete}
                 action={itemAction}
-                retryTitle={translate("Aksel.FileUpload.item.retryButtonTitle")}
-                deleteTitle={translate(
-                  "Aksel.FileUpload.item.deleteButtonTitle",
-                )}
+                retryTitle={translate("FileUpload.item.retryButtonTitle")}
+                deleteTitle={translate("FileUpload.item.deleteButtonTitle")}
               />
             )}
           </div>
