@@ -1,12 +1,8 @@
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Detail, Link, Tooltip } from "@navikt/ds-react";
-import InlineCode from "@/web/InlineCode";
+import { lazy } from "react";
+import { Detail, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
 
-const LinkWrapper = ({ children }) => {
-  return <Link href={children}>{children ? children : ""}</Link>;
-};
+const LazyDescription = lazy(() => import("./DtListDescription"));
 
 export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
@@ -18,7 +14,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
       as="div"
       className="dtlist block overflow-x-auto border border-t-0 border-gray-300 p-2 first-of-type:border-t last-of-type:rounded-b"
     >
-      <dt>
+      <dt className="-m-2 bg-gray-100 p-2">
         {!prop.defaultValue ? (
           <span className="font-mono font-semibold">{`${prop.name}${
             prop?.required ? "" : "?"
@@ -40,14 +36,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
         </span>
       </dt>
       {prop.description && (
-        <dd className="ml-2 mr-2 whitespace-pre-wrap pl-2 text-base">
-          <Markdown
-            remarkPlugins={[remarkGfm]}
-            components={{ code: InlineCode, a: LinkWrapper }}
-          >
-            {prop.description}
-          </Markdown>
-        </dd>
+        <LazyDescription>{prop.description}</LazyDescription>
       )}
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="mt-2 text-base">
