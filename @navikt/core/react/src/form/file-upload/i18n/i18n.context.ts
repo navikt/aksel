@@ -35,7 +35,7 @@ export function useI18n(local: ComponentTranslation) {
     id: NestedKeyOf<typeof nb>,
     options?: { replacements: string | number },
   ) => {
-    const text = get({ Aksel: local }, id) || get(translation, id);
+    const text = get(local, id) || get(translation, id);
 
     if (!text) {
       return "";
