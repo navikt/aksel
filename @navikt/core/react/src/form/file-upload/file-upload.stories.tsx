@@ -1,12 +1,16 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { FileItemProps, FileUpload } from "..";
+import { FileUpload, FileUploadItemProps } from "..";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
-import { FileRejectionReason, OnFileSelectProps } from "./FileUpload.types";
+import {
+  FileObject,
+  FileRejected,
+  FileRejectionReason,
+} from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
@@ -22,7 +26,7 @@ const MAX_SIZE = MAX_SIZE_MB * 1024 * 1024;
 const CustomItem = ({
   index,
   ...props
-}: FileItemProps & {
+}: FileUploadItemProps & {
   index: number;
   onDelete: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) => {
@@ -44,31 +48,18 @@ const CustomItem = ({
 };
 
 export const Default: StoryFn = () => {
-  const [files, setFiles] = useState<OnFileSelectProps>({
-    allFiles: [],
-    acceptedFiles: [],
-    rejectedFiles: [],
-  });
+  const [files, setFiles] = useState<FileObject[]>([]);
 
-  function addFiles(filesToAdd: OnFileSelectProps) {
-    const newFiles = {
-      allFiles: [...files.allFiles, ...filesToAdd.allFiles],
-      acceptedFiles: [...files.acceptedFiles, ...filesToAdd.acceptedFiles],
-      rejectedFiles: [...files.rejectedFiles, ...filesToAdd.rejectedFiles],
-    };
-    setFiles(newFiles);
+  function addFiles(filesToAdd: FileObject[]) {
+    setFiles([...files, ...filesToAdd]);
   }
 
-  function removeFile(fileToRemove: File) {
-    const filter = (file: File) => file !== fileToRemove;
-
-    const newFiles = {
-      allFiles: files.allFiles.filter(filter),
-      acceptedFiles: files.acceptedFiles.filter(filter),
-      rejectedFiles: files.rejectedFiles.filter((x) => x.file !== fileToRemove),
-    };
-    setFiles(newFiles);
+  function removeFile(fileToRemove: FileObject) {
+    setFiles(files.filter((file) => file !== fileToRemove));
   }
+
+  const acceptedFiles = files.filter((file) => !file.error);
+  const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
   return (
     <VStack gap="6" style={{ width: 500, maxWidth: "100%" }}>
@@ -77,44 +68,44 @@ export const Default: StoryFn = () => {
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
         accept=".doc,.docx,.xls,.xlsx,.pdf"
         maxSizeInBytes={MAX_SIZE}
-        fileLimit={{ max: MAX_FILES, current: files.allFiles.length }}
+        fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
         onSelect={addFiles}
       />
 
-      {getListError(files) && (
-        <Alert variant="error">{getListError(files)}</Alert>
+      {getListError(acceptedFiles) && (
+        <Alert variant="error">{getListError(acceptedFiles)}</Alert>
       )}
 
-      {files.acceptedFiles.length > 0 && (
+      {acceptedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {`Vedlagte filer (${files.acceptedFiles.length} av ${MAX_FILES})`}
+            {`Vedlagte filer (${acceptedFiles.length} av ${MAX_FILES})`}
           </Heading>
           <VStack gap="3">
-            {files.acceptedFiles.map((file: File, index) => (
+            {acceptedFiles.map((file, index) => (
               <CustomItem
                 key={index}
                 index={index}
-                file={file}
+                file={file.file}
                 onDelete={() => removeFile(file)}
               />
             ))}
           </VStack>
         </VStack>
       )}
-      {files.rejectedFiles.length > 0 && (
+      {rejectedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
             Filer som ikke vil bli lagt ved søknad
           </Heading>
           <VStack gap="3">
-            {files.rejectedFiles.map((rejected, index) => (
+            {rejectedFiles.map((rejected, index) => (
               <CustomItem
                 key={index}
                 index={index}
                 file={rejected.file}
-                error={errors[rejected.reason[0]]}
-                onDelete={() => removeFile(rejected.file)}
+                error={errors[rejected.reasons[0]]}
+                onDelete={() => removeFile(rejected)}
               />
             ))}
           </VStack>
@@ -125,13 +116,13 @@ export const Default: StoryFn = () => {
 };
 Default.parameters = { chromatic: { disable: true } };
 
-const errors = {
-  [FileRejectionReason.FileType]: "Filformatet støttes ikke",
-  [FileRejectionReason.FileSize]: `Filen er større enn ${MAX_SIZE_MB} MB`,
+const errors: Record<FileRejectionReason, string> = {
+  fileType: "Filformatet støttes ikke",
+  fileSize: `Filen er større enn ${MAX_SIZE_MB} MB`,
 };
 
-function getListError(files: OnFileSelectProps) {
-  const filesTooMany = files.acceptedFiles.length - MAX_FILES;
+function getListError(acceptedFiles: FileObject[]) {
+  const filesTooMany = acceptedFiles.length - MAX_FILES;
   if (filesTooMany === 1)
     return "Du har lagt ved en fil for mye, vennligst fjern en fil";
   if (filesTooMany > 1)
@@ -139,22 +130,14 @@ function getListError(files: OnFileSelectProps) {
 }
 
 export const Single: StoryFn = () => {
-  const [files, setFiles] = useState<OnFileSelectProps>({
-    allFiles: [],
-    acceptedFiles: [],
-    rejectedFiles: [],
-  });
+  const [files, setFiles] = useState<FileObject[]>([]);
 
-  function addFiles(filesToAdd: OnFileSelectProps) {
+  function addFiles(filesToAdd: FileObject[]) {
     setFiles(filesToAdd);
   }
 
   function removeFile() {
-    setFiles({
-      allFiles: [],
-      acceptedFiles: [],
-      rejectedFiles: [],
-    });
+    setFiles([]);
   }
 
   return (
@@ -164,23 +147,16 @@ export const Single: StoryFn = () => {
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
         accept=".doc,.docx,.xls,.xlsx,.pdf"
         maxSizeInBytes={MAX_SIZE}
-        fileLimit={{ max: 1, current: files.allFiles.length }}
+        fileLimit={{ max: 1, current: files.length }}
         multiple={false}
         onSelect={addFiles}
       />
-      {files.acceptedFiles.map((file) => (
+      {files.map((file) => (
         <FileUpload.Item
-          key={file.name}
-          file={file}
-          onDelete={() => removeFile()}
-        />
-      ))}
-      {files.rejectedFiles.map((rejected) => (
-        <FileUpload.Item
-          key={rejected.file.name}
-          file={rejected.file}
-          error={errors[rejected.reason[0]]}
-          onDelete={() => removeFile()}
+          key={file.file.name}
+          file={file.file}
+          error={file.error ? errors[file.reasons[0]] : undefined}
+          onDelete={removeFile}
         />
       ))}
     </VStack>

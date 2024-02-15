@@ -1,15 +1,25 @@
-export const FileRejectionReason = {
-  FileType: "filetype",
-  FileSize: "filesize",
+export const fileRejectionReason = {
+  FileType: "fileType" as const,
+  FileSize: "fileSize" as const,
 };
 
-type FileUploadRejectedReason = keyof typeof FileRejectionReason | string;
+export type FileRejectionReason =
+  (typeof fileRejectionReason)[keyof typeof fileRejectionReason];
+type RejectionReason = keyof typeof fileRejectionReason | string;
 
-export interface OnFileSelectProps {
-  allFiles: File[];
-  acceptedFiles: File[];
-  rejectedFiles: { file: File; reason: FileUploadRejectedReason[] }[];
-}
+export type FileRejected = {
+  file: File;
+  error: true;
+  reasons: RejectionReason[];
+};
+type FileAccepted = { file: File; error: false };
+
+export type FileObject = FileRejected | FileAccepted;
+type RejectedPartitionedFile = { file: File; reasons: RejectionReason[] };
+export type PartitionedFiles = {
+  accepted: File[];
+  rejected: RejectedPartitionedFile[];
+};
 
 export interface FileUploadBaseProps {
   /**
@@ -34,7 +44,7 @@ export interface FileUploadBaseProps {
   /**
    * Callback triggered on file select
    */
-  onSelect: (files: OnFileSelectProps) => void;
+  onSelect: (files: FileObject[], partitionedFiles: PartitionedFiles) => void;
   /**
    * Disables the dropzone when current >= max, unless `disabled` prop is set to `false`.
    */

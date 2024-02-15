@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
 import { FileUpload } from "..";
-import { OnFileSelectProps } from "./FileUpload.types";
+import { FileObject, PartitionedFiles } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
@@ -18,13 +18,12 @@ const meta: Meta<typeof FileUpload.Dropzone> = {
 
 export default meta;
 
-const onSelect = ({
-  allFiles,
-  acceptedFiles,
-  rejectedFiles,
-}: OnFileSelectProps) => {
+const onSelect = (
+  allFiles: FileObject[],
+  { accepted, rejected }: PartitionedFiles,
+) => {
   alert(
-    `Lastet opp ${allFiles.length} filer. Accepted: ${acceptedFiles.length}. Rejected: ${rejectedFiles.length}`,
+    `Lastet opp ${allFiles.length} filer. Accepted: ${accepted.length}. Rejected: ${rejected.length}`,
   );
 };
 

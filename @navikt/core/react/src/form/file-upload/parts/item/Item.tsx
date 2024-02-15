@@ -67,11 +67,11 @@ type FileItemConditionalProps =
   | FileItemActionRetry
   | FileItemActionNone;
 
-export type FileItemProps = FileItemBaseProps &
+export type FileUploadItemProps = FileItemBaseProps &
   FileItemConditionalProps &
   React.HTMLAttributes<HTMLDivElement>;
 
-export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
+export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
   forwardRef(
     (
       {
@@ -86,6 +86,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
         onFileClick,
         itemAction = "delete",
         translations,
+        ...rest
       },
       ref,
     ) => {
@@ -109,6 +110,7 @@ export const Item: OverridableComponent<FileItemProps, HTMLDivElement> =
       return (
         <Component
           ref={ref}
+          {...rest}
           className={cl("navds-file-item", className, {
             "navds-file-item--error": showError,
           })}

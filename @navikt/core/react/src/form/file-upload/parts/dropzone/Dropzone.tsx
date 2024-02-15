@@ -8,11 +8,11 @@ import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";
 import { useI18n } from "../../i18n/i18n.context";
 import { useFileUpload } from "../../useFileUpload";
-import { DropzoneProps } from "./dropzone.types";
+import { FileUploadDropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
-const Dropzone = forwardRef<HTMLInputElement, DropzoneProps>(
-  (props: DropzoneProps, ref) => {
+const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
+  (props: FileUploadDropzoneProps, ref) => {
     const {
       onSelect,
       error,

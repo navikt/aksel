@@ -24,9 +24,12 @@ export {
 export { Search, type SearchClearEvent, type SearchProps } from "./search";
 export {
   FileUpload,
-  type DropzoneProps,
-  type OnFileSelectProps,
-  type FileItemProps,
+  type FileUploadDropzoneProps,
+  type FileUploadTriggerProps,
+  type FileObject,
+  type FileRejected,
+  type FileRejectionReason,
+  type FileUploadItemProps,
   type FileMetadata,
   type FileItem,
 } from "./file-upload";

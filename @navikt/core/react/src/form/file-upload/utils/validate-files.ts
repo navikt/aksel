@@ -1,51 +1,62 @@
 import {
-  FileRejectionReason,
+  FileObject,
   FileUploadBaseProps,
-  OnFileSelectProps,
+  PartitionedFiles,
+  fileRejectionReason,
 } from "../FileUpload.types";
 import { isAcceptedFileType } from "./is-accepted-file-type";
 import { isAcceptedSize } from "./is-accepted-size";
 
-export const partitionFiles = (
+export const validateFiles = (
   files: File[],
   accept?: string,
   validator?: FileUploadBaseProps["validator"],
   maxSizeInBytes: number = -1,
-): Pick<OnFileSelectProps, "acceptedFiles" | "rejectedFiles"> => {
-  const acceptedFiles: File[] = [];
-  const rejectedFiles: OnFileSelectProps["rejectedFiles"] = [];
+) => {
+  const allFiles: FileObject[] = [];
+  const accepted: File[] = [];
+  const rejected: PartitionedFiles["rejected"] = [];
 
   files.forEach((file) => {
     const acceptedFileType = isAcceptedFileType(file, accept);
     const acceptedFileSize = isAcceptedSize(file, maxSizeInBytes);
     const customValidation = validator ? validator(file) : true;
 
-    const reason: OnFileSelectProps["rejectedFiles"][0]["reason"] = [];
+    const reasons: PartitionedFiles["rejected"][0]["reasons"] = [];
     if (customValidation !== true) {
-      reason.push(customValidation);
+      reasons.push(customValidation);
     }
 
     if (!acceptedFileType) {
-      reason.push(FileRejectionReason.FileType);
+      reasons.push(fileRejectionReason.FileType);
     }
 
     if (!acceptedFileSize) {
-      reason.push(FileRejectionReason.FileSize);
+      reasons.push(fileRejectionReason.FileSize);
     }
 
-    if (reason.length === 0) {
-      acceptedFiles.push(file);
+    allFiles.push({
+      file,
+      error: reasons.length > 0,
+      reasons,
+    });
+
+    if (reasons.length === 0) {
+      accepted.push(file);
       return;
     }
 
-    rejectedFiles.push({
+    rejected.push({
       file,
-      reason,
+      reasons,
     });
   });
 
   return {
-    acceptedFiles,
-    rejectedFiles,
+    files: allFiles,
+    partitionedFiles: {
+      accepted,
+      rejected,
+    },
   };
 };
