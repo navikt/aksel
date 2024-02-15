@@ -4961,19 +4961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:^6.11.1, @sanity/client@npm:^6.6.0":
-  version: 6.11.3
-  resolution: "@sanity/client@npm:6.11.3"
-  dependencies:
-    "@sanity/eventsource": ^5.0.0
-    "@vercel/stega": 0.1.0
-    get-it: ^8.4.6
-    rxjs: ^7.0.0
-  checksum: bb930ec5a6dbad5a2c7a67ef885c0154af8057e6c599244a4f98a1351af02a9bb1cebb65558898b38ae04a8fb1b471b66fae6745e54c4f3be48d70a4cfd7b462
-  languageName: node
-  linkType: hard
-
-"@sanity/client@npm:^6.12.4, @sanity/client@npm:^6.13.3":
+"@sanity/client@npm:^6.12.4, @sanity/client@npm:^6.13.3, @sanity/client@npm:^6.6.0":
   version: 6.13.3
   resolution: "@sanity/client@npm:6.13.3"
   dependencies:
@@ -5372,23 +5360,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/types@npm:3.29.1":
+"@sanity/types@npm:3.29.1, @sanity/types@npm:^3.14.5":
   version: 3.29.1
   resolution: "@sanity/types@npm:3.29.1"
   dependencies:
     "@sanity/client": ^6.12.4
     "@types/react": ^18.0.25
   checksum: 1e33b0c4187b1c716d62a75cf062dc736cc009ceb4b96215966c921498d1741c641bde6a2ca683b89fb9e2952e6776849fd7cf88f165fdd880ffcb366527e249
-  languageName: node
-  linkType: hard
-
-"@sanity/types@npm:^3.14.5":
-  version: 3.26.0
-  resolution: "@sanity/types@npm:3.26.0"
-  dependencies:
-    "@sanity/client": ^6.11.1
-    "@types/react": ^18.0.25
-  checksum: b7ccdda463e298859dc0fcb5225532f32792a9c857e3c2c07d9a696f8059c633d3a5c66f4fd11c0f0c82d9564e7f41cf341d75ebab2cf209a9f97a660f4707a6
   languageName: node
   linkType: hard
 
@@ -15538,10 +15516,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groq@npm:^3.0.0, groq@npm:^3.14.5":
+"groq@npm:^3.0.0":
   version: 3.26.0
   resolution: "groq@npm:3.26.0"
   checksum: 84dbf23b5a152790daf1c6923865aee63b5b2ba34fd150a66fce478912c8a6660827f3828756bb8679dd50c68fbd6a434168007e46fc68361d009b450e7f9e62
+  languageName: node
+  linkType: hard
+
+"groq@npm:^3.14.5":
+  version: 3.29.1
+  resolution: "groq@npm:3.29.1"
+  checksum: 826594e20c1cba1f55e106048543f50ab1bcbc728ea1ea017df97dbd28e0aa4035684dc082eeebfe726c813374bbe3706a8bb0b9f2586eeb6b6de090a79d9ce1
   languageName: node
   linkType: hard
 
