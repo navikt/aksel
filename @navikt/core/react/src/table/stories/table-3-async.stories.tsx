@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import { Loader, Pagination, SortState } from "../..";
-import { Table } from "../index";
+import { Loader } from "../../loader";
+import { Pagination } from "../../pagination";
+import Table from "../Table";
+import { SortState } from "../types";
 import peopleJson from "./people.json";
 
 export default {
   title: "ds-react/Table",
   component: Table,
   parameters: {
-    chromatic: { delay: 500 },
+    chromatic: { disable: true },
   },
 };
 

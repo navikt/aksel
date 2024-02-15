@@ -3,6 +3,9 @@ import React from "react";
 
 export default {
   title: "ds-tokens/Shadows",
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
 
 const Shadow = ({ token }) => (
@@ -27,3 +30,20 @@ export const Focus = () => <Shadow token="var(--a-shadow-focus)" />;
 export const FocusInverted = () => (
   <Shadow token="var(--a-shadow-focus-inverted)" />
 );
+
+export const Chromatic = {
+  render: () => (
+    <div className="colgap">
+      <XSmall />
+      <Small />
+      <Medium />
+      <Large />
+      <XLarge />
+      <Focus />
+      <FocusInverted />
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

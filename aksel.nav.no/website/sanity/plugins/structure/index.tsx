@@ -3,6 +3,7 @@ import { StructureResolver } from "sanity/desk";
 import {
   CircleSlashIcon,
   ComponentIcon,
+  EyeIcon,
   FileTextIcon,
   ImageIcon,
   LightBulbIcon,
@@ -10,7 +11,6 @@ import {
   PencilBoardIcon,
   RectangleSectionsIcon,
   TokenIcon,
-  EyeIcon,
 } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,

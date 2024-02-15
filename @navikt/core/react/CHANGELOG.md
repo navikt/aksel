@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.18.1
+
+### Patch Changes
+
+- Panel: Komponent er nå markert som deprecated. Bruk `Box` i fremtiden. ([#2712](https://github.com/navikt/aksel/pull/2712))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.1
+  - @navikt/aksel-icons@5.18.1
+
 ## 5.18.0
 
 ### Minor Changes
