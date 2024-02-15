@@ -104,6 +104,7 @@ module.exports = {
     "cjs",
     "dist",
     "**/codemod/**/*.js",
+    "website-next",
     "!.storybook",
   ],
 };

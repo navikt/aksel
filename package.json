@@ -133,7 +133,8 @@
     "ignoreFiles": [
       "**/dist/**",
       "**/@navikt/codemod/**",
-      "**/@navikt/aksel/**"
+      "**/@navikt/aksel/**",
+      "**/aksel.nav.no/website-next/**"
     ]
   },
   "repository": {
