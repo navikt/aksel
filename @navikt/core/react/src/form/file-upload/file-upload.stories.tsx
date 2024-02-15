@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { FileUpload, FileUploadItemProps } from "..";
+import { UNSAFE_FileUpload as FileUpload, FileUploadItemProps } from "..";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
@@ -195,7 +195,7 @@ export const Translation = () => (
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
         status="downloading"
-      />{" "}
+      />
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
         status="uploading"

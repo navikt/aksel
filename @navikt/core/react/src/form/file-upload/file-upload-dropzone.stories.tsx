@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
-import { FileUpload } from "..";
+import { UNSAFE_FileUpload as FileUpload } from "..";
 import { FileObject, PartitionedFiles } from "./FileUpload.types";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {

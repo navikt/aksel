@@ -23,7 +23,7 @@ export {
 } from "./radio";
 export { Search, type SearchClearEvent, type SearchProps } from "./search";
 export {
-  FileUpload,
+  FileUpload as UNSAFE_FileUpload,
   type FileUploadDropzoneProps,
   type FileUploadTriggerProps,
   type FileObject,
