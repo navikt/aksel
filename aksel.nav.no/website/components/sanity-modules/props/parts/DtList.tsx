@@ -1,5 +1,5 @@
-import { lazy } from "react";
-import { Detail, Tooltip } from "@navikt/ds-react";
+import { Suspense, lazy } from "react";
+import { Detail, Skeleton, Tooltip } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
 
 const LazyDescription = lazy(() => import("./DtListDescription"));
@@ -36,7 +36,9 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
         </span>
       </dt>
       {prop.description && (
-        <LazyDescription>{prop.description}</LazyDescription>
+        <Suspense fallback={<Skeleton />}>
+          <LazyDescription>{prop.description}</LazyDescription>
+        </Suspense>
       )}
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="mt-2 text-base">
