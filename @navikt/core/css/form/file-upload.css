@@ -243,5 +243,5 @@
 }
 
 .navds-file-item--error > .navds-file-item__error {
-  margin-top: var(--a-spacing-2);
+  margin-top: var(--a-spacing-1);
 }
