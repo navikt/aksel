@@ -30,7 +30,7 @@ export const DateWrapper = ({
   popoverProps,
 }: DateWrapperProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
-  const isInModal = useModalContext(false) !== null;
+  const isInModal = useModalContext(false) !== undefined;
   const hideModal =
     useMedia("screen and (min-width: 768px)", true) && !isInModal;
 

@@ -126,7 +126,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const isInModal = useModalContext(false) !== null;
+    const isInModal = useModalContext(false) !== undefined;
     const isInDatepicker = useContext(DateContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
