@@ -242,7 +242,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
             gutters
             className="-translate-y-48 sm:-translate-y-32"
           >
-            <HGrid columns="1fr" gap="20">
+            <HGrid columns="1fr" gap="16">
               <Box
                 background="surface-default"
                 borderWidth="1"
@@ -294,12 +294,12 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                       <GodPraksisCardSimple key={t._id} node={t} />
                     ))}
                   </ul>
-                  <UxTweaks
-                    href="https://study.uxtweak.com/treetest/onFDOBRUT19G3KNNNa7DD"
-                    length={3}
-                  />
                 </VStack>
               </Box>
+              <UxTweaks
+                href="https://study.uxtweak.com/treetest/onFDOBRUT19G3KNNNa7DD"
+                length={3}
+              />
 
               <Box paddingInline={{ xs: "2", lg: "18" }}>
                 <FrontpageBlock blocks={blocks} />

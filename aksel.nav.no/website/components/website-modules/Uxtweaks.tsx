@@ -16,13 +16,16 @@ interface UxTweaksProps extends HTMLAttributes<HTMLDivElement> {
 export const UxTweaks = ({ href, length, ...rest }: UxTweaksProps) => {
   return (
     <Page.Block width="md" {...rest}>
-      <Box padding="6" borderRadius="xlarge" className="bg-pink-100">
-        <Heading level="2" size="medium">
+      <Box
+        padding="6"
+        borderRadius="xlarge"
+        className="space-y-3 border border-border-subtle bg-violet-50"
+        as="aside"
+      >
+        <Heading level="2" size="medium" id="uxtweaks-aside">
           Vil du hjelpe oss å forbedre Aksel?
         </Heading>
-        <BodyLong>
-          {`Testen er frivillig og anonym. Testen tar ca ${length} minutter.`}
-        </BodyLong>
+        <BodyLong>{`Testen er anonym og tar ca ${length} minutter.`}</BodyLong>
 
         <Link as={NextLink} href={href} target="_blank">
           Delta i testen
