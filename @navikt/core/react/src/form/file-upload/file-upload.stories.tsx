@@ -33,9 +33,12 @@ const CustomItem = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 700 * index);
+    setTimeout(
+      () => {
+        setLoading(false);
+      },
+      1700 * index + 1,
+    );
   }, [index]);
 
   return (
@@ -62,11 +65,14 @@ export const Default: StoryFn = () => {
   const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
   return (
-    <VStack gap="6" style={{ width: 500, maxWidth: "100%" }}>
+    <VStack
+      gap="6"
+      style={{ width: 500, maxWidth: "100%", minHeight: "100vh" }}
+    >
       <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Maks størrelse ${MAX_SIZE_MB} MB`}
-        accept=".doc,.docx,.xls,.xlsx,.pdf"
+        /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
         maxSizeInBytes={MAX_SIZE}
         fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
         onSelect={addFiles}
