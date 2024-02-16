@@ -25,7 +25,12 @@ export const UxTweaks = ({ href, length, ...rest }: UxTweaksProps) => {
         as="aside"
         role="presentation"
       >
-        <Heading level="2" size="medium" id="uxtweaks-aside">
+        <Heading
+          level="2"
+          size="medium"
+          id="uxtweaks-aside"
+          className="text-aksel-heading"
+        >
           Vil du hjelpe oss å forbedre Aksel?
         </Heading>
         <BodyLong>{`Testen er anonym og tar ca ${length} minutter.`}</BodyLong>
