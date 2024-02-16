@@ -3619,7 +3619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:v14.1.1-canary.57":
+"@next/bundle-analyzer@npm:14.1.1-canary.57":
   version: 14.1.1-canary.57
   resolution: "@next/bundle-analyzer@npm:14.1.1-canary.57"
   dependencies:
@@ -3635,7 +3635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:v14.1.1-canary.57":
+"@next/eslint-plugin-next@npm:14.1.1-canary.57":
   version: 14.1.1-canary.57
   resolution: "@next/eslint-plugin-next@npm:14.1.1-canary.57"
   dependencies:
@@ -19463,7 +19463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:v14.1.1-canary.57":
+"next@npm:14.1.1-canary.57":
   version: 14.1.1-canary.57
   resolution: "next@npm:14.1.1-canary.57"
   dependencies:
@@ -27503,8 +27503,8 @@ __metadata:
     "@amplitude/analytics-browser": ^2.2.3
     "@axe-core/playwright": ^4.5.2
     "@babel/core": ^7.19.0
-    "@next/bundle-analyzer": v14.1.1-canary.57
-    "@next/eslint-plugin-next": v14.1.1-canary.57
+    "@next/bundle-analyzer": 14.1.1-canary.57
+    "@next/eslint-plugin-next": 14.1.1-canary.57
     "@playwright/test": 1.35.1
     "@portabletext/react": ^3.0.11
     "@sanity/block-tools": ^3.20.0
@@ -27536,7 +27536,7 @@ __metadata:
     json5: 2.2.1
     lodash: ^4.17.21
     lz-string: ^1.5.0
-    next: v14.1.1-canary.57
+    next: 14.1.1-canary.57
     next-logger: 3.0.2
     next-sanity: 5.5.8
     pino: ^8.14.1
