@@ -92,12 +92,23 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+      },
+    ],
     dangerouslyAllowSVG: true,
   },
   output: "standalone",
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
+    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
+    largePageDataBytes: 128 * 2000,
   },
 };
 
