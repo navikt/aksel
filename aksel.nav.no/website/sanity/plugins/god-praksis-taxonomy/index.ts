@@ -1,5 +1,5 @@
 import { definePlugin } from "sanity";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { publicationFlow } from "../publication-flow";
 import innholdsType from "./documents/innholdstype";
 import tema from "./documents/tema";
@@ -47,7 +47,7 @@ export const godPraksisTaxonomy = definePlugin(() => {
       ],
     },
     plugins: [
-      deskTool({
+      structureTool({
         name: "aksel_taxonomy",
         title: "Aksel Taxonomy",
         structure,
