@@ -189,7 +189,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               : children?.props["aria-describedby"],
           }),
         )}
-        <Portal rootElement={rootElement}>
+        <Portal rootElement={rootElement} asChild>
           {_open && (
             <div
               {...getFloatingProps({
