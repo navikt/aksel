@@ -11,6 +11,7 @@
       "@/preview": ["./components/website-modules/preview/WithPreview.tsx"],
       "@/logging": ["./components/logging/index.ts"],
       "@/utils": ["./components/utils/index.ts"],
+      "@/draftmode/*": ["./sanity/interface/v2/*"],
       "@/layout/*": ["./components/layout/*"],
       "@/assets/*": ["./components/assets/*"],
       "@/web/*": ["./components/website-modules/*"],

@@ -22,6 +22,7 @@
       "@/sanity-block": ["./components/website-modules/SanityBlockContent.tsx"],
       "@/hooks/*": ["./components/hooks/*"],
       "@/preview": ["./components/website-modules/preview/WithPreview.tsx"],
+      "@/draftmode/*": ["./sanity/interface/v2/*"],
       "@/logging": ["./components/logging/index.ts"],
       "@/utils": ["./components/utils/index.ts"],
       "@/layout/*": ["./components/layout/*"],

@@ -10,7 +10,7 @@ import {
 /**
  * Based on https://www.sanity.io/guides/nextjs-live-preview
  */
-export function getClient({
+export function getDraftClient({
   draftMode,
   token,
 }: {

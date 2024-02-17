@@ -1,9 +1,7 @@
-export const previewToken = process.env.SANITY_PREVIEW_TOKEN;
+export const draftmodeToken = process.env.SANITY_PREVIEW_TOKEN;
 export const viewerToken = process.env.SANITY_PRIVATE_NO_DRAFTS;
 
-console.log({ previewToken, viewerToken });
-
-if (!previewToken) {
+if (!draftmodeToken) {
   throw new Error("Missing SANITY_PREVIEW_TOKEN");
 }
 

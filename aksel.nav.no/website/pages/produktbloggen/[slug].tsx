@@ -2,6 +2,9 @@ import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -18,9 +21,6 @@ import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
-import { Preview } from "../../sanity/interface/v2/Preview";
-import { getClient } from "../../sanity/interface/v2/client";
-import { previewToken, viewerToken } from "../../sanity/interface/v2/token";
 
 type PageProps = NextPageT<{
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
@@ -209,9 +209,9 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
-  const client = getClient({
+  const client = getDraftClient({
     draftMode: context.draftMode,
-    token: context.draftMode ? previewToken : viewerToken,
+    token: context.draftMode ? draftmodeToken : viewerToken,
   });
 
   const { blogg, morePosts } = await client.fetch(query, {
@@ -228,7 +228,7 @@ export const getServerSideProps: GetServerSideProps = async (
       title: blogg?.heading ?? "",
       publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
       draftMode: context.draftMode,
-      token: context.draftMode ? previewToken : "",
+      token: context.draftMode ? draftmodeToken : "",
     },
     notFound: !blogg && !context.preview,
   };
@@ -236,13 +236,13 @@ export const getServerSideProps: GetServerSideProps = async (
 
 export default function Blogg(props: PageProps["props"]) {
   return props.draftMode ? (
-    <Preview
+    <PagePreview
       query={query}
       props={props}
       params={{ slug: `produktbloggen/${props.slug}` }}
     >
       {(_props) => <Page {..._props} />}
-    </Preview>
+    </PagePreview>
   ) : (
     <Page {...props} />
   );

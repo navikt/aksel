@@ -3,6 +3,6 @@ import { PreviewProps } from "./types";
 
 const LiveQuery = dynamic(() => import("./LiveQuery"));
 
-export function Preview(props: PreviewProps) {
+export function PagePreview(props: PreviewProps) {
   return <LiveQuery {...props} />;
 }

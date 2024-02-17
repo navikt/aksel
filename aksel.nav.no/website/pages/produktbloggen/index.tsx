@@ -1,6 +1,9 @@
 import { GetStaticProps } from "next/types";
 import { Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
@@ -16,9 +19,6 @@ import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
-import { Preview } from "../../sanity/interface/v2/Preview";
-import { getClient } from "../../sanity/interface/v2/client";
-import { previewToken, viewerToken } from "../../sanity/interface/v2/token";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
@@ -95,9 +95,9 @@ const query = `*[_type == "blogg_landingsside"][0]{
 export const getStaticProps: GetStaticProps = async ({
   draftMode = false,
 }): Promise<PageProps> => {
-  const client = getClient({
+  const client = getDraftClient({
     draftMode,
-    token: draftMode ? previewToken : viewerToken,
+    token: draftMode ? draftmodeToken : viewerToken,
   });
 
   const { bloggposts, page } = await client.fetch(query);
@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({
       title: "Forside Blogg",
       id: page?._id ?? "",
       draftMode,
-      token: draftMode ? previewToken : "",
+      token: draftMode ? draftmodeToken : "",
     },
     notFound: false,
     revalidate: 60,
@@ -119,9 +119,9 @@ export const getStaticProps: GetStaticProps = async ({
 
 export default function Home(props: PageProps["props"]) {
   return props.draftMode ? (
-    <Preview query={query} props={props}>
+    <PagePreview query={query} props={props}>
       {(_props) => <Page {..._props} />}
-    </Preview>
+    </PagePreview>
   ) : (
     <Page {...props} />
   );
