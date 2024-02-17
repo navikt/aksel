@@ -1,12 +1,13 @@
 import cl from "clsx";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import Bilde from "@/cms/bilde/Bilde";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselPrinsippDocT,
@@ -26,48 +27,6 @@ type PageProps = NextPageT<{
   publishDate: string;
   toc: TableOfContentsT;
 }>;
-
-export const query = `{
-  "prinsipp": *[slug.current == $slug] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    "content": select(
-      $valid == "true" => content[]{
-        ...,
-        ${destructureBlocks}
-      },
-      $valid != "true" => []
-    ),
-    ${contributorsAll}
-  }
-}`;
-
-export const getServerSideProps: GetServerSideProps = async (
-  context,
-): Promise<PageProps> => {
-  const { prinsipp } = await getClient().fetch(query, {
-    slug: `prinsipper/${(context.params?.prinsipp as string[]).join("/")}`,
-    valid: "true",
-  });
-
-  return {
-    props: {
-      prinsipp,
-      slug: (context.params?.prinsipp as string[]).join("/"),
-      preview: context.preview ?? false,
-      id: prinsipp?._id,
-      title: prinsipp?.heading ?? "",
-      publishDate: await dateStr(prinsipp?.publishedAt ?? prinsipp._createdAt),
-      toc: generateTableOfContents({
-        content: prinsipp?.content,
-        type: "aksel_prinsipp",
-      }),
-    },
-    notFound:
-      (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
-  };
-};
 
 const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   if (!data) {
@@ -205,26 +164,67 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `prinsipper/${props.slug}`,
-            valid: "true",
-          }}
-        />
-      </Suspense>
-    );
+export const query = `{
+  "prinsipp": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    "content": select(
+      $valid == "true" => content[]{
+        ...,
+        ${destructureBlocks}
+      },
+      $valid != "true" => []
+    ),
+    ${contributorsAll}
   }
+}`;
 
-  return <Page {...props} />;
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode: context.draftMode,
+    token: context.draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { prinsipp } = await client.fetch(query, {
+    slug: `prinsipper/${(context.params?.prinsipp as string[]).join("/")}`,
+    valid: "true",
+  });
+
+  return {
+    props: {
+      prinsipp,
+      slug: (context.params?.prinsipp as string[]).join("/"),
+      id: prinsipp?._id,
+      title: prinsipp?.heading ?? "",
+      publishDate: await dateStr(prinsipp?.publishedAt ?? prinsipp._createdAt),
+      toc: generateTableOfContents({
+        content: prinsipp?.content,
+        type: "aksel_prinsipp",
+      }),
+      draftMode: context.draftMode,
+      token: context.draftMode ? draftmodeToken : "",
+    },
+    notFound:
+      (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
+  };
 };
 
-export default Wrapper;
+export default function StandalonePage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `prinsipper/${props.slug}`,
+        valid: "true",
+      }}
+    >
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
