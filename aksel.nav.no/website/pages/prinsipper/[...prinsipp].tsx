@@ -212,7 +212,7 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default function StandalonePage(props: PageProps["props"]) {
+export default function PrinsippPage(props: PageProps["props"]) {
   return props.draftMode ? (
     <PagePreview
       query={query}

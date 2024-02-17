@@ -48,7 +48,9 @@ function App({ Component, pageProps, router }: AppProps<SharedPageProps>) {
       value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}
     >
       <PreviewProvider token={token}>
-        <Component {...pageProps} />
+        <div className="globalstyles">
+          <Component {...pageProps} />
+        </div>
         <Suspense>
           <VisualEditing />
         </Suspense>

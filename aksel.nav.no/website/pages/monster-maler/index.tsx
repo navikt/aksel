@@ -1,13 +1,14 @@
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
@@ -24,32 +25,6 @@ type PageProps = NextPageT<{
   sidebar: SidebarT;
   links: ArticleListT;
 }>;
-
-export const query = `{${sidebarQuery}, ${landingPageQuery(
-  "templates",
-)}, "links": *[_type == "templates_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}): Promise<PageProps> => {
-  const { sidebar, page, links } = await getClient().fetch(query, {
-    type: "templates_artikkel",
-  });
-
-  return {
-    props: {
-      page,
-      sidebar: generateSidebar(sidebar, "templates"),
-      links,
-      slug: "/monster-maler",
-      preview,
-      title: "Forside Mønster og Maler",
-      id: page?._id ?? "",
-    },
-    revalidate: 60,
-    notFound: false,
-  };
-};
 
 const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
@@ -115,32 +90,52 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
+export const query = `{${sidebarQuery}, ${landingPageQuery(
+  "templates",
+)}, "links": *[_type == "templates_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            type: "templates_artikkel",
-          }}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "templates"),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
+export const getStaticProps: GetStaticProps = async ({
+  draftMode,
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+  const { sidebar, page, links } = await client.fetch(query, {
+    type: "templates_artikkel",
+  });
 
-  return <Page {...props} />;
+  return {
+    props: {
+      page,
+      sidebar: generateSidebar(sidebar, "templates"),
+      links,
+      slug: "/monster-maler",
+      title: "Forside Mønster og Maler",
+      id: page?._id ?? "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    revalidate: 60,
+    notFound: false,
+  };
 };
 
-export default Wrapper;
+export default function MonsterMalerFrontpage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{ type: "templates_artikkel" }}
+    >
+      {(_props) => (
+        <Page
+          {..._props}
+          sidebar={generateSidebar(_props.sidebar, "templates")}
+        />
+      )}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
