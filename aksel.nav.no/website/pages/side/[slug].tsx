@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
@@ -12,38 +13,6 @@ import NotFotfund from "../404";
 
 type PageProps = NextPageT<{ page: ResolveSlugT<AkselStandaloneDocT> }>;
 
-export const query = `{
-  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    content[]{
-      ...,
-      ${destructureBlocks}
-    }
-  }
-}`;
-
-export const getServerSideProps: GetServerSideProps = async (
-  context,
-): Promise<PageProps> => {
-  const { page } = await getClient().fetch(query, {
-    slug: `side/${context.params.slug}`,
-  });
-
-  return {
-    props: {
-      page,
-      slug: context.params.slug as string,
-      preview: context.preview ?? false,
-      id: page?._id ?? "",
-      title: page?.heading ?? "",
-    },
-    notFound: !page && !context.preview,
-  };
-};
-
-/* Standalone-sider */
 const Page = ({ page }: PageProps["props"]) => {
   if (!page) {
     return <NotFotfund />;
@@ -84,25 +53,54 @@ const Page = ({ page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `side/${props.slug}`,
-          }}
-        />
-      </Suspense>
-    );
+export const query = `{
+  "page": *[slug.current == $slug && _type == "aksel_standalone"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    }
   }
+}`;
 
-  return <Page {...props} />;
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode: context.draftMode,
+    token: context.draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { page } = await client.fetch(query, {
+    slug: `side/${context.params.slug}`,
+  });
+
+  return {
+    props: {
+      page,
+      slug: context.params.slug as string,
+      preview: context.preview ?? false,
+      id: page?._id ?? "",
+      title: page?.heading ?? "",
+      draftMode: context.draftMode,
+      token: context.draftMode ? draftmodeToken : "",
+    },
+    notFound: !page && !context.preview,
+  };
 };
 
-export default Wrapper;
+export default function StandalonePage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{ slug: `side/${props.slug}` }}
+    >
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
