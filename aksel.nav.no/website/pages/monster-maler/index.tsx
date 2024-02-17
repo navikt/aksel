@@ -101,6 +101,7 @@ export const getStaticProps: GetStaticProps = async ({
     draftMode,
     token: draftMode ? draftmodeToken : viewerToken,
   });
+
   const { sidebar, page, links } = await client.fetch(query, {
     type: "templates_artikkel",
   });
@@ -128,12 +129,17 @@ export default function MonsterMalerFrontpage(props: PageProps["props"]) {
       props={props}
       params={{ type: "templates_artikkel" }}
     >
-      {(_props) => (
-        <Page
-          {..._props}
-          sidebar={generateSidebar(_props.sidebar, "templates")}
-        />
-      )}
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props.sidebar, "templates")}
+          />
+        );
+      }}
     </PagePreview>
   ) : (
     <Page {...props} />

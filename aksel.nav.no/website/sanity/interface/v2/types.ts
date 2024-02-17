@@ -5,7 +5,7 @@ export type ResolverT = {
 }[];
 
 export type PreviewProps = {
-  children: (props: PreviewProps["props"]) => React.ReactNode;
+  children: (props: PreviewProps["props"], loading: boolean) => React.ReactNode;
   /**
    * Sanity(groq)-query to run live data on
    */

@@ -222,7 +222,20 @@ export default function PrinsippPage(props: PageProps["props"]) {
         valid: "true",
       }}
     >
-      {(_props) => <Page {..._props} />}
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            toc={generateTableOfContents({
+              content: _props?.prinsipp?.content,
+              type: "aksel_prinsipp",
+            })}
+          />
+        );
+      }}
     </PagePreview>
   ) : (
     <Page {...props} />

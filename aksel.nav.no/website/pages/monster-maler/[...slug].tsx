@@ -1,12 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Detail, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
@@ -33,66 +34,6 @@ type PageProps = NextPageT<{
   publishDate: string;
   toc: TableOfContentsT;
 }>;
-
-const query = `{
-  "page": *[_type == "templates_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
-    {
-      ...,
-      "slug": slug.current,
-      content[]{
-        ...,
-        ${destructureBlocks}
-      },
-  },
-  "seo": *[_type == "templates_landingsside"][0].seo.image,
-  ${sidebarQuery}
-}`;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("templates_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.split("/").filter((x) => x !== "monster-maler"),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string[] };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { page, sidebar, seo } = await getClient().fetch(query, {
-    slug: `monster-maler/${slug.slice(0, 2).join("/")}`,
-    type: "templates_artikkel",
-  });
-
-  return {
-    props: {
-      page,
-      slug: slug.slice(0, 2).join("/"),
-      seo,
-      sidebar: generateSidebar(sidebar, "templates"),
-      preview,
-      title: page?.heading ?? "",
-      id: page?._id ?? "",
-      refs: [],
-      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
-      toc: generateTableOfContents({
-        content: page?.content,
-        type: "templates_artikkel",
-      }),
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};
 
 const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   if (!page) {
@@ -176,43 +117,99 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
+const query = `{
+  "page": *[_type == "templates_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug.current,
+      content[]{
+        ...,
+        ${destructureBlocks}
+      },
+  },
+  "seo": *[_type == "templates_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
 
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          params={{
-            slug: `monster-maler/${props.slug}`,
-            type: "templates_artikkel",
-          }}
-          props={props}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "templates"),
-            },
-            {
-              key: "toc",
-              dataKeys: ["page.content", "page.intro"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "templates_artikkel",
-                  intro: !!v[1],
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getDocuments("templates_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
+        params: {
+          slug: slug.split("/").filter((x) => x !== "monster-maler"),
+        },
+      })),
+    ),
+    fallback: "blocking",
+  };
 };
 
-export default Wrapper;
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  draftMode,
+}: {
+  params: { slug: string[] };
+  draftMode: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { page, sidebar, seo } = await client.fetch(query, {
+    slug: `monster-maler/${slug.slice(0, 2).join("/")}`,
+    type: "templates_artikkel",
+  });
+
+  return {
+    props: {
+      page,
+      slug: slug.slice(0, 2).join("/"),
+      seo,
+      sidebar: generateSidebar(sidebar, "templates"),
+      title: page?.heading ?? "",
+      id: page?._id ?? "",
+      refs: [],
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "templates_artikkel",
+      }),
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !page && !draftMode,
+    revalidate: 60,
+  };
+};
+
+export default function MonsterMalerPage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `monster-maler/${props.slug}`,
+        type: "templates_artikkel",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props.sidebar, "templates")}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "templates_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
