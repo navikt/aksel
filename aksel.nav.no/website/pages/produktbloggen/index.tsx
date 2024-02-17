@@ -1,10 +1,8 @@
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselBloggDocT,
@@ -18,45 +16,14 @@ import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
+import { Preview } from "../../sanity/interface/v2/Preview";
+import { getClient } from "../../sanity/interface/v2/client";
+import { previewToken, viewerToken } from "../../sanity/interface/v2/token";
 
 type PageProps = NextPageT<{
   page: AkselBloggFrontpageT;
   bloggposts: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
 }>;
-
-export const query = `*[_type == "blogg_landingsside"][0]{
-  "page": {..., intro[]{...,${destructureBlocks}}},
-  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
-    seo,
-    heading,
-    ingress,
-    publishedAt,
-    _createdAt,
-    _id,
-    "slug": slug.current,
-    ${contributorsAll}
-  }
-}`;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { bloggposts, page } = await getClient().fetch(query);
-
-  return {
-    props: {
-      page,
-      bloggposts,
-      preview,
-      title: "Forside Blogg",
-      id: page?._id ?? "",
-    },
-    notFound: false,
-    revalidate: 60,
-  };
-};
 
 const Page = (props: PageProps["props"]) => {
   if (!props.bloggposts) {
@@ -111,18 +78,51 @@ const Page = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={query} props={props} />
-      </Suspense>
-    );
+const query = `*[_type == "blogg_landingsside"][0]{
+  "page": {..., intro[]{...,${destructureBlocks}}},
+  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
+    seo,
+    heading,
+    ingress,
+    publishedAt,
+    _createdAt,
+    _id,
+    "slug": slug.current,
+    ${contributorsAll}
   }
+}`;
 
-  return <Page {...props} />;
+export const getStaticProps: GetStaticProps = async ({
+  draftMode = false,
+}): Promise<PageProps> => {
+  const client = getClient({
+    draftMode,
+    token: draftMode ? previewToken : viewerToken,
+  });
+
+  const { bloggposts, page } = await client.fetch(query);
+
+  return {
+    props: {
+      page,
+      bloggposts,
+      preview: draftMode,
+      title: "Forside Blogg",
+      id: page?._id ?? "",
+      draftMode,
+      token: draftMode ? previewToken : "",
+    },
+    notFound: false,
+    revalidate: 60,
+  };
 };
 
-export default Wrapper;
+export default function Home(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <Preview query={query} props={props}>
+      {(_props) => <Page {..._props} />}
+    </Preview>
+  ) : (
+    <Page {...props} />
+  );
+}

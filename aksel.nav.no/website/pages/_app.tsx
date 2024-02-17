@@ -1,5 +1,6 @@
+import { VisualEditing } from "@sanity/visual-editing/next-pages-router";
 import { AppProps } from "next/app";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDataContext } from "@/hooks/useSanityData";
@@ -7,7 +8,20 @@ import { useAmplitudeInit } from "@/logging";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
 
-function App({ Component, pageProps, router }: AppProps) {
+const PreviewProvider = lazy(
+  () => import("../sanity/interface/v2/PreviewProvider"),
+);
+
+export interface SharedPageProps {
+  draftMode?: boolean;
+  token?: string;
+  id?: string;
+  page?: any;
+}
+
+function App({ Component, pageProps, router }: AppProps<SharedPageProps>) {
+  const { draftMode, token } = pageProps;
+
   useHashScroll();
   useAmplitudeInit();
 
@@ -29,7 +43,18 @@ function App({ Component, pageProps, router }: AppProps) {
 
   const validUser = useCheckAuth(!useGlobalStyles);
 
-  return (
+  return draftMode ? (
+    <SanityDataContext.Provider
+      value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}
+    >
+      <PreviewProvider token={token}>
+        <Component {...pageProps} />
+        <Suspense>
+          <VisualEditing />
+        </Suspense>
+      </PreviewProvider>
+    </SanityDataContext.Provider>
+  ) : (
     <>
       <BaseSEO path={router.asPath} />
       <SanityDataContext.Provider

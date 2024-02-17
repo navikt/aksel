@@ -1,12 +1,10 @@
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { urlFor } from "@/sanity/interface";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
@@ -20,54 +18,15 @@ import { BloggAd } from "@/web/BloggAd";
 import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
+import { Preview } from "../../sanity/interface/v2/Preview";
+import { getClient } from "../../sanity/interface/v2/client";
+import { previewToken, viewerToken } from "../../sanity/interface/v2/token";
 
 type PageProps = NextPageT<{
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
   morePosts: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>[];
   publishDate: string;
 }>;
-
-export const query = `{
-  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    content[]{
-      ...,
-      ${destructureBlocks}
-    },
-    ${contributorsAll}
-  },
-  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
-    "slug": slug.current,
-    heading,
-    _createdAt,
-    _id,
-    ingress,
-    ${contributorsAll},
-  }
-}`;
-
-export const getServerSideProps: GetServerSideProps = async (
-  context,
-): Promise<PageProps> => {
-  const { blogg, morePosts } = await getClient().fetch(query, {
-    slug: `produktbloggen/${context.params.slug}`,
-  });
-
-  return {
-    props: {
-      blogg,
-      morePosts,
-      slug: context.params.slug as string,
-      preview: context.preview ?? false,
-      id: blogg?._id ?? "",
-      title: blogg?.heading ?? "",
-      publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
-    },
-    notFound: !blogg && !context.preview,
-  };
-};
 
 const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
   if (!blogg) {
@@ -226,23 +185,65 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{ slug: `produktbloggen/${props.slug}` }}
-        />
-      </Suspense>
-    );
+export const query = `{
+  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    ${contributorsAll}
+  },
+  "morePosts": *[_type == "aksel_blogg" && slug.current != $slug] | order(publishedAt desc, _updatedAt desc)[0...3] {
+    "slug": slug.current,
+    heading,
+    _createdAt,
+    _id,
+    ingress,
+    ${contributorsAll},
   }
+}`;
 
-  return <Page {...props} />;
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const client = getClient({
+    draftMode: context.draftMode,
+    token: context.draftMode ? previewToken : viewerToken,
+  });
+
+  const { blogg, morePosts } = await client.fetch(query, {
+    slug: `produktbloggen/${context.params.slug}`,
+  });
+
+  return {
+    props: {
+      blogg,
+      morePosts,
+      slug: context.params.slug as string,
+      preview: context.preview ?? false,
+      id: blogg?._id ?? "",
+      title: blogg?.heading ?? "",
+      publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
+      draftMode: context.draftMode,
+      token: context.draftMode ? previewToken : "",
+    },
+    notFound: !blogg && !context.preview,
+  };
 };
 
-export default Wrapper;
+export default function Blogg(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <Preview
+      query={query}
+      props={props}
+      params={{ slug: `produktbloggen/${props.slug}` }}
+    >
+      {(_props) => <Page {..._props} />}
+    </Preview>
+  ) : (
+    <Page {...props} />
+  );
+}

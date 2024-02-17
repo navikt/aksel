@@ -4,6 +4,8 @@ export type NextPageT<T> = {
     preview: boolean;
     id: string;
     title: string;
+    draftMode?: boolean;
+    token?: string;
   };
   notFound: boolean;
   revalidate?: number;

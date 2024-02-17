@@ -6,6 +6,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
+import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
@@ -92,6 +93,13 @@ function defaultConfig() {
       unsplashImageAsset(),
       colorInput(),
       nbNOLocale(),
+      presentationTool({
+        previewUrl: {
+          draftMode: {
+            enable: "/api/preview/draft",
+          },
+        },
+      }),
     ],
   };
 }
