@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import {
   CompassIcon,
   ComponentIcon,
@@ -22,9 +22,11 @@ import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
 import FrontpageBlock, {
   BlocksT,
 } from "@/cms/frontpage-blocks/FrontpageBlocks";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
@@ -42,121 +44,6 @@ type PageProps = NextPageT<{
   };
   blocks?: BlocksT[];
 }>;
-
-const query = `*[_type == "aksel_forside"][0]{
-  "page": {
-    ...,
-  },
-  "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
-  blocks[]{
-    ...,
-    _type == "nytt_fra_aksel"=>{
-      highlights[]->{
-        ...,
-        "content": null,
-        ${contributorsAll},
-        "tema": tema[]->title,
-      },
-      "curatedResent": {
-        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
-          _type,
-          _id,
-          heading,
-          _createdAt,
-          _updatedAt,
-          publishedAt,
-          "slug": slug.current,
-          ingress,
-          seo,
-          ${contributorsAll}
-        },
-        "artikler": select(
-          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": tema[]->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          },
-          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...4]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": tema[]->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          }
-        ),
-        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
-          _type,
-          _id,
-          heading,
-          "slug": slug.current,
-          status,
-          kategori,
-          _createdAt,
-          _updatedAt,
-          publishedAt,
-          seo,
-          ${contributorsAll}
-        },
-      },
-    }
-  }
-}`;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const client = getClient();
-
-  const {
-    page = null,
-    tema = null,
-    blocks = null,
-  } = await client.fetch(query, {
-    preview: "false",
-  });
-
-  const validateTema = tema
-    .filter(
-      (t) =>
-        t?.title &&
-        t?.slug &&
-        t?.pictogram &&
-        t?.seksjoner.some(
-          (seksjon) => seksjon?.sider.some((side: any) => side?._ref),
-        ),
-    )
-    .sort((a, b) => a.title.localeCompare(b.title));
-
-  return {
-    props: {
-      tema: validateTema,
-      page,
-      blocks,
-      slug: "/",
-      preview,
-      id: page?._id ?? "",
-      title: "Forsiden",
-    },
-    revalidate: 600,
-    notFound: false,
-  };
-};
 
 const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   const [pause, setPause] = useState(false);
@@ -312,23 +199,129 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const PagePreview = (props: PageProps["props"]) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Forside {...props} />}>
-        <WithPreview
-          comp={Forside}
-          query={query}
-          props={props}
-          params={{ preview: "true" }}
-        />
-      </Suspense>
-    );
+const query = `*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  },
+  "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
+  blocks[]{
+    ...,
+    _type == "nytt_fra_aksel"=>{
+      highlights[]->{
+        ...,
+        "content": null,
+        ${contributorsAll},
+        "tema": tema[]->title,
+      },
+      "curatedResent": {
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
+        "artikler": select(
+          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          },
+          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...4]{
+            _type,
+            _id,
+            heading,
+            _createdAt,
+            _updatedAt,
+            publishedAt,
+            "slug": slug.current,
+            "tema": tema[]->title,
+            ingress,
+            seo,
+            ${contributorsAll}
+          }
+        ),
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+          _type,
+          _id,
+          heading,
+          "slug": slug.current,
+          status,
+          kategori,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          seo,
+          ${contributorsAll}
+        },
+      },
+    }
   }
+}`;
 
-  return <Forside {...props} />;
+export const getStaticProps: GetStaticProps = async ({
+  draftMode,
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const {
+    page = null,
+    tema = null,
+    blocks = null,
+  } = await client.fetch(query, {
+    preview: "false",
+  });
+
+  const validateTema = tema
+    .filter(
+      (t) =>
+        t?.title &&
+        t?.slug &&
+        t?.pictogram &&
+        t?.seksjoner.some(
+          (seksjon) => seksjon?.sider.some((side: any) => side?._ref),
+        ),
+    )
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  return {
+    props: {
+      tema: validateTema,
+      page,
+      blocks,
+      slug: "/",
+      id: page?._id ?? "",
+      title: "Forsiden",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    revalidate: 600,
+    notFound: false,
+  };
 };
 
-export default PagePreview;
+export default function FrontPage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview query={query} props={props} params={{ preview: "true" }}>
+      {(_props) => <Forside {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

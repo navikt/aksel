@@ -106,7 +106,6 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       page,
       bloggposts,
-      preview: draftMode,
       title: "Forside Blogg",
       id: page?._id ?? "",
       draftMode,

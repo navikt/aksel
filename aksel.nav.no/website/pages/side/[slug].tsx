@@ -81,7 +81,6 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       page,
       slug: context.params.slug as string,
-      preview: context.preview ?? false,
       id: page?._id ?? "",
       title: page?.heading ?? "",
       draftMode: context.draftMode,

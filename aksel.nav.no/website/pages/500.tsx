@@ -96,4 +96,5 @@ function ErrorPage({ statusCode }) {
     </Page>
   );
 }
+
 export default ErrorPage;

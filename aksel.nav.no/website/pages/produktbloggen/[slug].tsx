@@ -223,7 +223,6 @@ export const getServerSideProps: GetServerSideProps = async (
       blogg,
       morePosts,
       slug: context.params.slug as string,
-      preview: context.preview ?? false,
       id: blogg?._id ?? "",
       title: blogg?.heading ?? "",
       publishDate: await dateStr(blogg?.publishedAt ?? blogg?._createdAt),
