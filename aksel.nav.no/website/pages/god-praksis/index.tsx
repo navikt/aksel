@@ -1,13 +1,14 @@
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { SparklesIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import GodPraksisCard from "@/cms/cards/GodPraksisCard";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
@@ -28,50 +29,6 @@ type PageProps = NextPageT<{
     ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>
   >[];
 }>;
-
-export const query = `*[_type == "godpraksis_landingsside"][0]{
-  "page": {
-    ...,
-    intro[]{
-      ...,
-      ${destructureBlocks}
-    }
-  },
-  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
-    ...,
-    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
-  },
-  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
-    _id,
-    heading,
-    _createdAt,
-    _updatedAt,
-    publishedAt,
-    "slug": slug.current,
-    "tema": tema[]->title,
-    ingress,
-  }
-}`;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}): Promise<PageProps> => {
-  const { temaer, page, resent } = await getClient().fetch(query);
-
-  return {
-    props: {
-      page,
-      temaer,
-      resent,
-      slug: "/god-praksis",
-      preview,
-      title: "Forside God praksis",
-      id: page?._id ?? "",
-    },
-    notFound: !temaer,
-    revalidate: 60,
-  };
-};
 
 const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   const filteredTemas = temaer.filter((x) => x.refCount > 0);
@@ -132,18 +89,62 @@ const Page = ({ temaer, page, resent }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={query} props={props} />
-      </Suspense>
-    );
+export const query = `*[_type == "godpraksis_landingsside"][0]{
+  "page": {
+    ...,
+    intro[]{
+      ...,
+      ${destructureBlocks}
+    }
+  },
+  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
+    ...,
+    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
+  },
+  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
+    _id,
+    heading,
+    _createdAt,
+    _updatedAt,
+    publishedAt,
+    "slug": slug.current,
+    "tema": tema[]->title,
+    ingress,
   }
+}`;
 
-  return <Page {...props} />;
+export const getStaticProps: GetStaticProps = async ({
+  draftMode = false,
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { temaer, page, resent } = await client.fetch(query);
+
+  return {
+    props: {
+      page,
+      temaer,
+      resent,
+      slug: "/god-praksis",
+      title: "Forside God praksis",
+      id: page?._id ?? "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !temaer,
+    revalidate: 60,
+  };
 };
 
-export default Wrapper;
+export default function GodPraksisFrontpage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview query={query} props={props}>
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

@@ -153,16 +153,21 @@ export default function GrunnleggendePages(props: PageProps["props"]) {
         type: "ds_artikkel",
       }}
     >
-      {(_props) => (
-        <Page
-          {..._props}
-          sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
-          toc={generateTableOfContents({
-            content: _props?.page?.content,
-            type: "ds_artikkel",
-          })}
-        />
-      )}
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "ds_artikkel",
+            })}
+          />
+        );
+      }}
     </PagePreview>
   ) : (
     <Page {...props} />

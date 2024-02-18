@@ -1,13 +1,14 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { getAkselTema, urlFor } from "@/sanity/interface";
 import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
@@ -21,73 +22,6 @@ type PageProps = NextPageT<{
     ansvarlig?: { title: string; roller: string[] };
   };
 }>;
-
-export const query = `{
-  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
-    ...,
-    "ansvarlig": ansvarlig->{title, roller},
-    seksjoner[]{
-      ...,
-      beskrivelse[]{
-        ...,
-        ${destructureBlocks}
-      },
-      sider[]->{
-        _id,
-        heading,
-        _createdAt,
-        _updatedAt,
-        publishedAt,
-        updateInfo,
-        "slug": slug.current,
-        "tema": tema[]->title,
-        ingress,
-        "contributor": ${contributorsSingle}
-      }
-    },
-    "pictogram": pictogram.asset-> {
-        url,
-        altText,
-    },
-  }
-}`;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getAkselTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { tema } = await getClient().fetch(query, {
-    slug,
-  });
-
-  return {
-    props: {
-      tema,
-      slug,
-      preview,
-      id: tema?._id ?? null,
-      title: tema?.title ?? "",
-    },
-    notFound: !tema && !preview,
-    revalidate: 60,
-  };
-};
 
 const Page = ({ tema: page }: PageProps["props"]) => {
   if (!page || !page.seksjoner || page.seksjoner.length === 0) {
@@ -218,25 +152,91 @@ const Page = ({ tema: page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: props?.slug,
-          }}
-        />
-      </Suspense>
-    );
+export const query = `{
+  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
+    ...,
+    "ansvarlig": ansvarlig->{title, roller},
+    seksjoner[]{
+      ...,
+      beskrivelse[]{
+        ...,
+        ${destructureBlocks}
+      },
+      sider[]->{
+        _id,
+        heading,
+        _createdAt,
+        _updatedAt,
+        publishedAt,
+        updateInfo,
+        "slug": slug.current,
+        "tema": tema[]->title,
+        ingress,
+        "contributor": ${contributorsSingle}
+      }
+    },
+    "pictogram": pictogram.asset-> {
+        url,
+        altText,
+    },
   }
+}`;
 
-  return <Page {...props} />;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getAkselTema().then((paths) =>
+      paths.map(({ path }) => ({
+        params: {
+          slug: path,
+        },
+      })),
+    ),
+    fallback: "blocking",
+  };
 };
 
-export default Wrapper;
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  draftMode = false,
+}: {
+  params: { slug: string };
+  draftMode?: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { tema } = await client.fetch(query, {
+    slug,
+  });
+
+  return {
+    props: {
+      tema,
+      slug,
+      id: tema?._id ?? null,
+      title: tema?.title ?? "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !tema && !draftMode,
+    revalidate: 60,
+  };
+};
+
+export default function GodPraksisCategories(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: props?.slug,
+      }}
+    >
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

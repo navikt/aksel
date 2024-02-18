@@ -131,12 +131,17 @@ export default function GrunnleggendeFrontpage(props: PageProps["props"]) {
         type: "ds_artikkel",
       }}
     >
-      {(_props) => (
-        <Page
-          {..._props}
-          sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
-        />
-      )}
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+          />
+        );
+      }}
     </PagePreview>
   ) : (
     <Page {...props} />
