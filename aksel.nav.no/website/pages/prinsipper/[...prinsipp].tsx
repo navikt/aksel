@@ -183,9 +183,10 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const draftMode = context.draftMode ?? false;
   const client = getDraftClient({
-    draftMode: context.draftMode,
-    token: context.draftMode ? draftmodeToken : viewerToken,
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
   });
 
   const { prinsipp } = await client.fetch(query, {
@@ -204,8 +205,8 @@ export const getServerSideProps: GetServerSideProps = async (
         content: prinsipp?.content,
         type: "aksel_prinsipp",
       }),
-      draftMode: context.draftMode,
-      token: context.draftMode ? draftmodeToken : "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
     },
     notFound:
       (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,

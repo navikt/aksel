@@ -1,6 +1,5 @@
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import {
@@ -11,12 +10,14 @@ import {
   YarnIcon,
 } from "@/assets/Icons";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
@@ -34,34 +35,6 @@ type PageProps = NextPageT<{
   sidebar: SidebarT;
   links: ArticleListT;
 }>;
-
-export const query = `{${sidebarQuery}, ${landingPageQuery(
-  "komponenter",
-)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori, "sidebarindex": sidebarindex}}`;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { sidebar, page, links } = await getClient().fetch(query, {
-    type: "komponent_artikkel",
-  });
-
-  return {
-    props: {
-      page,
-      sidebar: generateSidebar(sidebar, "komponenter"),
-      links,
-      slug: "/komponenter",
-      preview,
-      title: "",
-      id: page?._id ?? "",
-    },
-    revalidate: 60,
-    notFound: false,
-  };
-};
 
 const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   return (
@@ -235,32 +208,62 @@ function Links() {
   );
 }
 
-const WithPreview = lazy(() => import("@/preview"));
+export const query = `{${sidebarQuery}, ${landingPageQuery(
+  "komponenter",
+)}, "links": *[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori, "sidebarindex": sidebarindex}}`;
 
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            type: "komponent_artikkel",
-          }}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "komponenter"),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
+export const getStaticProps: GetStaticProps = async ({
+  draftMode = false,
+}: {
+  draftMode?: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
 
-  return <Page {...props} />;
+  const { sidebar, page, links } = await client.fetch(query, {
+    type: "komponent_artikkel",
+  });
+
+  return {
+    props: {
+      page,
+      sidebar: generateSidebar(sidebar, "komponenter"),
+      links,
+      slug: "/komponenter",
+      title: "",
+      id: page?._id ?? "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    revalidate: 60,
+    notFound: false,
+  };
 };
 
-export default Wrapper;
+export default function KomponentFrontpage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        type: "komponent_artikkel",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props.sidebar, "komponenter")}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

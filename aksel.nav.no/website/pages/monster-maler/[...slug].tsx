@@ -146,7 +146,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({
   params: { slug },
-  draftMode,
+  draftMode = false,
 }: {
   params: { slug: string[] };
   draftMode: boolean;

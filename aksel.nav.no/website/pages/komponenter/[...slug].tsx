@@ -1,15 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
@@ -62,94 +63,6 @@ type PageProps = NextPageT<{
   publishDate: string;
   toc: TableOfContentsT;
 }>;
-
-/**
- * "refs" må disables i preview da next-sanity sin
- * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
- * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
- */
-const query = `{
-  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
-    {
-      ...,
-      "slug": slug.current,
-      linked_package {
-        "title": @->title,
-        "github_link": @->github_link,
-        "status": @->status
-      },
-      intro{
-        ...,
-        body[]{
-          ...,
-        ${destructureBlocks}
-        }
-      },
-      content[]{
-        ...,
-        ${destructureBlocks}
-      },
-  },
-  "refs": select(
-    $preview == "true" => [],
-    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
-      _id,
-      heading,
-      "slug": slug,
-      status
-    }
-  ),
-  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
-  ${sidebarQuery}
-}`;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("komponent_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.split("/").filter((x) => x !== "komponenter"),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string[] };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { page, sidebar, refs, seo } = await getClient().fetch(query, {
-    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
-    type: "komponent_artikkel",
-    preview: "false",
-  });
-
-  return {
-    props: {
-      page,
-      refs,
-      slug: slug.slice(0, 2).join("/"),
-      seo,
-      sidebar: generateSidebar(sidebar, "komponenter"),
-      preview,
-      title: page?.heading ?? "",
-      id: page?._id ?? "",
-      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
-      toc: generateTableOfContents({
-        content: page?.content,
-        type: "komponent_artikkel",
-        intro: !!page?.intro,
-      }),
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};
 
 const Page = ({
   page,
@@ -325,44 +238,128 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
+/**
+ * "refs" må disables i preview da next-sanity sin
+ * preview-funksjonalitet fører til en infinite loop som låser applikasjonen.
+ * Dette er på grunn av av hele datasettet blir lastet inn i preview flere ganger som til slutt låser vinduet.
+ */
+const query = `{
+  "page": *[_type == "komponent_artikkel" && slug.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug.current,
+      linked_package {
+        "title": @->title,
+        "github_link": @->github_link,
+        "status": @->status
+      },
+      intro{
+        ...,
+        body[]{
+          ...,
+        ${destructureBlocks}
+        }
+      },
+      content[]{
+        ...,
+        ${destructureBlocks}
+      },
+  },
+  "refs": select(
+    $preview == "true" => [],
+    $preview != "true" => *[_type == "komponent_artikkel" && count(*[references(^._id)][slug.current == $slug]) > 0][0...3]{
+      _id,
+      heading,
+      "slug": slug,
+      status
+    }
+  ),
+  "seo": *[_type == "komponenter_landingsside"][0].seo.image,
+  ${sidebarQuery}
+}`;
 
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          params={{
-            slug: `komponenter/${props.slug}`,
-            type: "komponent_artikkel",
-            preview: "true",
-          }}
-          props={props}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "komponenter"),
-            },
-            {
-              key: "toc",
-              dataKeys: ["page.content", "page.intro"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "komponent_artikkel",
-                  intro: !!v[1],
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getDocuments("komponent_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
+        params: {
+          slug: slug.split("/").filter((x) => x !== "komponenter"),
+        },
+      })),
+    ),
+    fallback: "blocking",
+  };
 };
 
-export default Wrapper;
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  draftMode = false,
+}: {
+  params: { slug: string[] };
+  draftMode: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { page, sidebar, refs, seo } = await client.fetch(query, {
+    slug: `komponenter/${slug.slice(0, 2).join("/")}`,
+    type: "komponent_artikkel",
+    preview: "false",
+  });
+
+  return {
+    props: {
+      page,
+      refs,
+      slug: slug.slice(0, 2).join("/"),
+      seo,
+      sidebar: generateSidebar(sidebar, "komponenter"),
+      title: page?.heading ?? "",
+      id: page?._id ?? "",
+      publishDate: await dateStr(page?._updatedAt ?? page?._createdAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "komponent_artikkel",
+        intro: !!page?.intro,
+      }),
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !page && !draftMode,
+    revalidate: 60,
+  };
+};
+
+export default function KomponentSider(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `komponenter/${props.slug}`,
+        type: "komponent_artikkel",
+        preview: "true",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props.sidebar, "komponenter")}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "komponent_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

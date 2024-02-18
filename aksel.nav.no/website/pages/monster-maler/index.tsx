@@ -95,7 +95,7 @@ export const query = `{${sidebarQuery}, ${landingPageQuery(
 )}, "links": *[_type == "templates_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
 export const getStaticProps: GetStaticProps = async ({
-  draftMode,
+  draftMode = false,
 }): Promise<PageProps> => {
   const client = getDraftClient({
     draftMode,

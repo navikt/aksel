@@ -273,7 +273,7 @@ const query = `*[_type == "aksel_forside"][0]{
 }`;
 
 export const getStaticProps: GetStaticProps = async ({
-  draftMode,
+  draftMode = false,
 }): Promise<PageProps> => {
   const client = getDraftClient({
     draftMode,
@@ -322,6 +322,6 @@ export default function FrontPage(props: PageProps["props"]) {
       {(_props) => <Forside {..._props} />}
     </PagePreview>
   ) : (
-    <Page {...props} />
+    <Forside {...props} />
   );
 }

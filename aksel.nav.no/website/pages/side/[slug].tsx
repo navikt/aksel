@@ -68,9 +68,10 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const draftMode = context.draftMode ?? false;
   const client = getDraftClient({
-    draftMode: context.draftMode,
-    token: context.draftMode ? draftmodeToken : viewerToken,
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
   });
 
   const { page } = await client.fetch(query, {
@@ -83,8 +84,8 @@ export const getServerSideProps: GetServerSideProps = async (
       slug: context.params.slug as string,
       id: page?._id ?? "",
       title: page?.heading ?? "",
-      draftMode: context.draftMode,
-      token: context.draftMode ? draftmodeToken : "",
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
     },
     notFound: !page && !context.preview,
   };
