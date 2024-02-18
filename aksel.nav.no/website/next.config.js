@@ -85,8 +85,8 @@ const nextConfig = {
       },
       {
         source: "/preview/:slug*",
-        destination: "/api/preview?slug=:slug*",
-        permanent: true,
+        destination: "/admin/prod/presentation?preview=:slug*",
+        permanent: false,
       },
     ];
   },
