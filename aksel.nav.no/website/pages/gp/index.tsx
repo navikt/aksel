@@ -1,6 +1,9 @@
 import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useEffect } from "react";
+import { useEffect } from "react";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { chipsDataForAllTema } from "@/layout/god-praksis-page/chips/dataTransforms";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
@@ -13,7 +16,6 @@ import {
   initialGpMainPageArticles,
   initialGpMainPageArticlesResponse,
 } from "@/layout/god-praksis-page/interface";
-import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
@@ -29,29 +31,6 @@ const query = groq`
 type QueryResponse = heroNavQueryResponse &
   chipsDataAllQueryResponse &
   initialGpMainPageArticlesResponse;
-
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}): Promise<PageProps> => {
-  const { heroNav, initialInnholdstype, chipsDataAll } =
-    await getClient().fetch<QueryResponse>(query);
-
-  return {
-    props: {
-      tema: null,
-      heroNav: heroNav.filter((x) => x.hasRefs),
-      initialArticles: groupArticles({
-        initialInnholdstype,
-      }),
-      preview,
-      id: "",
-      title: "",
-      chipsData: chipsDataForAllTema(chipsDataAll),
-    },
-    notFound: false,
-    revalidate: 60,
-  };
-};
 
 const GpPage = (props: PageProps["props"]) => {
   useEffect(() => {
@@ -72,45 +51,55 @@ const GpPage = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
+export const getStaticProps: GetStaticProps = async ({
+  draftMode = false,
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
 
-/**
- * TODO: Preview does not work atm because of funcitions used in getStaticProps
- */
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview
-          comp={GpPage}
-          query={query}
-          props={props}
-          resolvers={[
-            {
-              key: "heroNav",
-              dataKeys: ["heroNav"],
-              cb: (v) => v[0]?.filter((x) => x.hasRefs),
-            },
-            {
-              key: "initialArticles",
-              dataKeys: ["initialInnholdstype"],
-              cb: (v) =>
-                groupArticles({
-                  initialInnholdstype: v[0],
-                }),
-            },
-            {
-              key: "chipsData",
-              dataKeys: ["chipsDataAll"],
-              cb: (v) => chipsDataForAllTema(v[0]),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
+  const { heroNav, initialInnholdstype, chipsDataAll } =
+    await client.fetch<QueryResponse>(query);
 
-  return <GpPage {...props} />;
+  return {
+    props: {
+      tema: null,
+      heroNav: heroNav.filter((x) => x.hasRefs),
+      initialArticles: groupArticles({
+        initialInnholdstype,
+      }),
+      id: "",
+      title: "",
+      chipsData: chipsDataForAllTema(chipsDataAll),
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: false,
+    revalidate: 60,
+  };
 };
 
-export default Wrapper;
+export default function GPFrontpage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview query={query} props={props}>
+      {(_props, loading) => {
+        if (loading) {
+          return <GpPage {...props} />;
+        }
+        return (
+          <GpPage
+            {..._props}
+            heroNav={_props?.heroNav.filter((x) => x.hasRefs)}
+            initialArticles={groupArticles({
+              initialInnholdstype: _props?.initialInnholdstype,
+            })}
+            chipsData={chipsDataForAllTema(_props?.chipsDataAll)}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <GpPage {...props} />
+  );
+}

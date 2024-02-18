@@ -1,6 +1,9 @@
 import { groq } from "next-sanity";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy, useEffect } from "react";
+import { useEffect } from "react";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
@@ -15,7 +18,6 @@ import {
   temaQuery,
   temaQueryResponse,
 } from "@/layout/god-praksis-page/interface";
-import { getClient } from "@/sanity/client.server";
 import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
@@ -34,49 +36,6 @@ type QueryResponse = chipsDataAllQueryResponse &
   heroNavQueryResponse &
   temaQueryResponse &
   initialTemaPageArticlesResponse;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getGpTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
-    await getClient().fetch<QueryResponse>(query, {
-      slug,
-    });
-
-  const chipsData = groupByTema(chipsDataAll)[slug];
-
-  return {
-    props: {
-      tema,
-      heroNav: heroNav.filter((x) => x.hasRefs),
-      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
-      slug,
-      preview,
-      id: "",
-      title: "",
-      chipsData: groupByTema(chipsDataAll)[slug],
-    },
-    notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
-    revalidate: 60,
-  };
-};
 
 const GpPage = (props: PageProps["props"]) => {
   useEffect(() => {
@@ -97,46 +56,82 @@ const GpPage = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview
-          comp={GpPage}
-          query={query}
-          props={props}
-          params={{
-            slug: props?.slug,
-          }}
-          resolvers={[
-            {
-              key: "heroNav",
-              dataKeys: ["heroNav"],
-              cb: (v) => v[0]?.filter((x) => x.hasRefs),
-            },
-            {
-              key: "initialArticles",
-              dataKeys: ["initialInnholdstype", "initialUndertema"],
-              cb: (v) =>
-                groupArticles({
-                  initialInnholdstype: v[0],
-                  initialUndertema: v[1],
-                }),
-            },
-            {
-              key: "chipsData",
-              dataKeys: ["chipsDataAll"],
-              cb: (v) => groupByTema(v[0])[props?.slug],
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <GpPage {...props} />;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getGpTema().then((paths) =>
+      paths.map(({ path }) => ({
+        params: {
+          slug: path,
+        },
+      })),
+    ),
+    fallback: "blocking",
+  };
 };
 
-export default Wrapper;
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  draftMode = false,
+}: {
+  params: { slug: string };
+  draftMode?: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
+    await client.fetch<QueryResponse>(query, {
+      slug,
+    });
+
+  const chipsData = groupByTema(chipsDataAll)[slug];
+
+  return {
+    props: {
+      tema,
+      heroNav: heroNav.filter((x) => x.hasRefs),
+      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
+      slug,
+      id: "",
+      title: "",
+      chipsData: groupByTema(chipsDataAll)[slug],
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
+    revalidate: 60,
+  };
+};
+
+export default function GPCategoryPage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: props?.slug,
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <GpPage {...props} />;
+        }
+        return (
+          <GpPage
+            {..._props}
+            heroNav={_props?.heroNav.filter((x) => x.hasRefs)}
+            initialArticles={groupArticles({
+              initialInnholdstype: _props?.initialInnholdstype,
+              initialUndertema: _props?.initialUndertema,
+            })}
+            chipsData={groupByTema(_props?.chipsDataAll)[props?.slug]}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <GpPage {...props} />
+  );
+}

@@ -1,14 +1,15 @@
 import differenceInMonths from "date-fns/differenceInMonths";
 import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import { PagePreview } from "@/draftmode/PagePreview";
+import { getDraftClient } from "@/draftmode/client";
+import { draftmodeToken, viewerToken } from "@/draftmode/token";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
@@ -40,79 +41,6 @@ type PageProps = NextPageT<{
   outdated: boolean;
   toc: TableOfContentsT;
 }>;
-
-const query = `{
-  "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
-  {
-    ...,
-    "slug": slug.current,
-    content[]{
-      ...,
-      ${destructureBlocks}
-    },
-    tema[]->{title, slug, seo},
-    ${contributorsAll},
-    relevante_artikler[]->{
-      _id,
-      heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      updateInfo,
-      "slug": slug.current,
-      "tema": tema[]->tag,
-      ingress,
-      "contributor": ${contributorsSingle},
-    }
-  }
-}`;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("aksel_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.replace("god-praksis/artikler/", ""),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { page } = await getClient().fetch(query, {
-    slug: `god-praksis/artikler/${slug}`,
-  });
-
-  const verifiedDate =
-    page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt;
-
-  return {
-    props: {
-      page,
-      slug,
-      preview,
-      id: page?._id ?? "",
-      title: page?.heading ?? "",
-      verifiedDate: await dateStr(verifiedDate),
-      outdated: differenceInMonths(new Date(), new Date(verifiedDate)) >= 12,
-      publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
-      toc: generateTableOfContents({
-        content: page?.content,
-        type: "aksel_artikkel",
-      }),
-    },
-    notFound: !page && !preview,
-    revalidate: 60,
-  };
-};
 
 const Page = ({
   page: data,
@@ -281,36 +209,110 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `god-praksis/artikler/${props?.slug}`,
-          }}
-          resolvers={[
-            {
-              key: "toc",
-              dataKeys: ["page.content"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "aksel_artikkel",
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
+const query = `{
+  "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+    tema[]->{title, slug, seo},
+    ${contributorsAll},
+    relevante_artikler[]->{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      updateInfo,
+      "slug": slug.current,
+      "tema": tema[]->tag,
+      ingress,
+      "contributor": ${contributorsSingle},
+    }
   }
+}`;
 
-  return <Page {...props} />;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: await getDocuments("aksel_artikkel").then((paths) =>
+      paths.map(({ slug }) => ({
+        params: {
+          slug: slug.replace("god-praksis/artikler/", ""),
+        },
+      })),
+    ),
+    fallback: "blocking",
+  };
 };
 
-export default Wrapper;
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug },
+  draftMode = false,
+}: {
+  params: { slug: string };
+  draftMode?: boolean;
+}): Promise<PageProps> => {
+  const client = getDraftClient({
+    draftMode,
+    token: draftMode ? draftmodeToken : viewerToken,
+  });
+
+  const { page } = await client.fetch(query, {
+    slug: `god-praksis/artikler/${slug}`,
+  });
+
+  const verifiedDate =
+    page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt;
+
+  return {
+    props: {
+      page,
+      slug,
+      id: page?._id ?? "",
+      title: page?.heading ?? "",
+      verifiedDate: await dateStr(verifiedDate),
+      outdated: differenceInMonths(new Date(), new Date(verifiedDate)) >= 12,
+      publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
+      toc: generateTableOfContents({
+        content: page?.content,
+        type: "aksel_artikkel",
+      }),
+      draftMode,
+      token: draftMode ? draftmodeToken : "",
+    },
+    notFound: !page && !draftMode,
+    revalidate: 60,
+  };
+};
+
+export default function GPCategoryPage(props: PageProps["props"]) {
+  return props.draftMode ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `god-praksis/artikler/${props?.slug}`,
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "aksel_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
