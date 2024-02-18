@@ -1,3 +1,4 @@
+import { vercelStegaCleanAll } from "@sanity/client/stega";
 import { sanityCategoryLookup } from "../../sanity/config";
 import { SidebarInputNodeT, SidebarT } from "../types";
 
@@ -5,10 +6,11 @@ export function generateSidebar(
   input: SidebarInputNodeT[],
   type: "komponenter" | "grunnleggende" | "templates",
 ): SidebarT {
+  const _input = vercelStegaCleanAll(input);
   return sanityCategoryLookup(type)
     .map((x) => ({
       ...x,
-      pages: input
+      pages: _input
         .filter((y) => y?.kategori === x.value)
         .sort((a, b) => {
           return a?.heading.localeCompare(b?.heading);

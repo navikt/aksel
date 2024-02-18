@@ -1,5 +1,8 @@
 import differenceInMonths from "date-fns/differenceInMonths";
-import { StructureResolver } from "sanity/structure";
+import {
+  DefaultDocumentNodeResolver,
+  StructureResolver,
+} from "sanity/structure";
 import {
   CircleSlashIcon,
   ComponentIcon,
@@ -363,7 +366,10 @@ export const resolveProductionUrl = (doc) => {
   }
 };
 
-export const defaultDocumentNode = (S, { schemaType }) => {
+export const defaultDocumentNode: DefaultDocumentNodeResolver = (
+  S,
+  { schemaType },
+) => {
   if (
     [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
       schemaType,

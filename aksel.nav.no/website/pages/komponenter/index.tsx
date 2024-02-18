@@ -1,3 +1,4 @@
+import { vercelStegaCleanAll } from "@sanity/client/stega";
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
 import { CodeIcon } from "@navikt/aksel-icons";
@@ -259,6 +260,7 @@ export default function KomponentFrontpage(props: PageProps["props"]) {
           <Page
             {..._props}
             sidebar={generateSidebar(_props.sidebar, "komponenter")}
+            links={vercelStegaCleanAll(_props?.links)}
           />
         );
       }}

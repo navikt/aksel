@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { clientConfig } from "@/sanity/config";
 
 export const useCheckAuth = (skipCheck?: boolean) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<string | boolean | null>(null);
 
   useEffect(() => {
     if (skipCheck) {

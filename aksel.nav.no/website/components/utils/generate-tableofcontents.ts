@@ -1,3 +1,4 @@
+import { vercelStegaCleanAll } from "@sanity/client/stega";
 import { allArticleDocuments } from "@/sanity/config";
 import { TableOfContentsT } from "@/types";
 
@@ -8,8 +9,9 @@ type GeneralPageToc = {
 };
 
 export function generateTableOfContents(
-  input: GeneralPageToc,
+  baseInput: GeneralPageToc,
 ): TableOfContentsT {
+  const input = vercelStegaCleanAll(baseInput);
   if (!input.content) {
     return [];
   }
