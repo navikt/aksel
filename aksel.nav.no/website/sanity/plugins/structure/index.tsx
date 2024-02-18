@@ -1,4 +1,5 @@
 import differenceInMonths from "date-fns/differenceInMonths";
+import { Iframe, IframeOptions } from "sanity-plugin-iframe-pane";
 import {
   DefaultDocumentNodeResolver,
   StructureResolver,
@@ -26,7 +27,6 @@ import {
   templatesKategorier,
 } from "../../config";
 import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
-import { Iframe } from "./IFrame";
 import { GodPraksisPanes } from "./god-praksis";
 import { Panes } from "./panes";
 
@@ -335,7 +335,7 @@ export const resolveProductionUrl = (doc) => {
 
   if (previews.includes(doc._type)) {
     const slug = doc.slug?.current;
-    const previewUrl = `/preview/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -345,7 +345,7 @@ export const resolveProductionUrl = (doc) => {
   }
   if (landingsider.find((x) => x.name === doc._type)) {
     const slug = landingsider.find((x) => x.name === doc._type).url;
-    const previewUrl = `/preview/${slug}`;
+    const previewUrl = `/${slug}`;
     if (!slug) {
       return "";
     }
@@ -356,7 +356,7 @@ export const resolveProductionUrl = (doc) => {
 
   if ("aksel_tema" === doc._type) {
     const slug = doc.slug?.current;
-    const previewUrl = `/preview/god-praksis/${slug}`;
+    const previewUrl = `/god-praksis/${slug}`;
     if (!slug) {
       return "";
     }
@@ -365,6 +365,20 @@ export const resolveProductionUrl = (doc) => {
       : `${devPath}${previewUrl}`;
   }
 };
+
+const iframeOptions = {
+  url: {
+    origin: "same-origin",
+    preview: (document) => {
+      if (!document) {
+        return new Error("Missing document");
+      }
+      return resolveProductionUrl(document) ?? new Error("Missing slug");
+    },
+    draftMode: "/api/preview/draft",
+  },
+  reload: { button: true },
+} satisfies IframeOptions;
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
   S,
@@ -377,13 +391,7 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (
   ) {
     return S.document().views([
       S.view.form(),
-
-      S.view
-        .component(Iframe)
-        .options({
-          url: (doc) => resolveProductionUrl(doc),
-        })
-        .title("Forhåndsvisning"),
+      S.view.component(Iframe).options(iframeOptions).title("Forhåndsvisning"),
     ]);
   }
   if (schemaType === "aksel_forside") {

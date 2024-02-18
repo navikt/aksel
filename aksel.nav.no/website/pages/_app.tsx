@@ -8,9 +8,7 @@ import { useAmplitudeInit } from "@/logging";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
 
-const PreviewProvider = lazy(
-  () => import("../sanity/interface/v2/PreviewProvider"),
-);
+const PreviewProvider = lazy(() => import("@/draftmode/PreviewProvider"));
 
 export interface SharedPageProps {
   draftMode?: boolean;

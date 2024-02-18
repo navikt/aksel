@@ -88,6 +88,12 @@ const nextConfig = {
         destination: "/admin/prod/presentation?preview=:slug*",
         permanent: false,
       },
+      {
+        /* Allows correct linking when sharing drafts with visual-editing enabled */
+        source: "/admin/intent/edit/:slug*",
+        destination: "/admin/prod/intent/edit/:slug*",
+        permanent: false,
+      },
     ];
   },
 
