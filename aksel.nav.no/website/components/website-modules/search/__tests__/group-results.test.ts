@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, test } from "vitest";
 import { SearchResultsT } from "@/types";
 import { createSearchResult } from "../utils";
 
@@ -48,7 +49,7 @@ describe("createSearchResult", () => {
     ];
   });
 
-  it("should group hits by type", () => {
+  test("should group hits by type", () => {
     const expected = {
       komponent_artikkel: [
         { item: { _type: "komponent_artikkel" }, score: 0.05, matches: [] },
@@ -73,7 +74,7 @@ describe("createSearchResult", () => {
     expect(actual.groupedHits).toEqual(expected);
   });
 
-  it("should return top 3 results with score < 0.1", () => {
+  test("should return top 3 results with score < 0.1", () => {
     const expected = [
       { item: { _type: "komponent_artikkel" }, score: 0.05, matches: [] },
     ];
@@ -81,13 +82,13 @@ describe("createSearchResult", () => {
     expect(actual.topResults).toEqual(expected);
   });
 
-  it("should return total number of hits", () => {
+  test("should return total number of hits", () => {
     const expected = 6;
     const actual: SearchResultsT = createSearchResult(result, rawResults);
     expect(actual.totalHits).toEqual(expected);
   });
 
-  it("should return number of hits by type", () => {
+  test("should return number of hits by type", () => {
     const expected = {
       komponent_artikkel: 1,
       aksel_artikkel: 1,

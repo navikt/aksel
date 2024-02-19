@@ -1,4 +1,5 @@
-const kebabCase = require("../kebabCase");
+import { describe, expect, test } from "vitest";
+import kebabCase from "../kebabCase";
 
 describe("kebabCase", () => {
   [

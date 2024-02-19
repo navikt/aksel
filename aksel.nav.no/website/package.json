@@ -24,9 +24,9 @@
     "update:changelog": "ts-node --project tsconfig.tsnode.json ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
-    "test": "jest --config ./config/jest.config.js",
+    "test": "vitest run -c config/vitest.config.ts",
+    "test:watch": "vitest watch -c config/vitest.config.ts",
     "playwright": "playwright test",
-    "test:watch": "jest --watch --config ./config/jest.config.js",
     "backup": "ts-node scripts/backup.js",
     "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch"
   },
@@ -73,17 +73,12 @@
     "@playwright/test": "1.35.1",
     "@sanity/block-tools": "^3.20.0",
     "@sanity/schema": "^3.20.0",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^13.3.0",
-    "@types/jest": "^29.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.0",
     "cross-env": "^7.0.0",
     "dotenv": "^10.0.0",
-    "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.0.0",
     "jsdom": "^22.1.0",
     "json5": "2.2.1",
     "pino-pretty": "^10.0.0",
@@ -93,8 +88,8 @@
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
     "start-server-and-test": "^1.14.0",
-    "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^1.2.2"
   }
 }

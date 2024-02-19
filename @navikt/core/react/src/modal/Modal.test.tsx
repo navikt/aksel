@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React, { useState } from "react";
+import { describe, expect, test } from "vitest";
 import { Button, Modal } from "..";
 import { BODY_CLASS } from "./ModalUtils";
 

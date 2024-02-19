@@ -4,6 +4,7 @@ import { select, selectAll } from "hast-util-select";
 import { basename } from "path";
 import parse from "rehype-parse";
 import { unified } from "unified";
+import { describe, expect, test } from "vitest";
 
 const basePath = "./icons";
 
@@ -18,39 +19,44 @@ describe(`Each icons has a valid code`, () => {
         .use(parse, { fragment: true, space: "svg" })
         .parse(readFileSync(`${basePath}/${file}`));
 
-      it(`has valid attributes on root-node`, () => {
-        const properties = Object.keys(
-          select(":root", iconAst).properties,
-        ).sort();
+      test(`has valid attributes on root-node`, () => {
+        const root = select(":root", iconAst);
+        const properties =
+          root && root.properties ? Object.keys(root.properties).sort() : [];
 
         expect(properties).toStrictEqual(
           ["viewBox", "xmlns", "height", "width", "fill"].sort(),
         );
       });
 
-      it(`has valid xml-attr`, () => {
-        const xmlns = select(":root", iconAst).properties.xmlns;
+      test(`has valid xml-attr`, () => {
+        const root = select(":root", iconAst);
+        const xmlns = root && root.properties ? root.properties.xmlns : null;
         expect(xmlns).toBe("http://www.w3.org/2000/svg");
       });
 
-      it(`has valid viewbox`, () => {
-        const viewbox = select(":root", iconAst).properties.viewBox;
+      test(`has valid viewbox`, () => {
+        const root = select(":root", iconAst);
+        const viewbox =
+          root && root.properties ? root.properties.viewBox : null;
         expect(viewbox).toBe("0 0 24 24");
       });
 
-      it(`root fill is none`, () => {
-        const fill = select(":root", iconAst).properties.fill;
+      test(`root fill is none`, () => {
+        const root = select(":root", iconAst);
+        const fill = root && root.properties ? root.properties.fill : null;
         expect(fill).toBe("none");
       });
 
-      it(`has valid width and height`, () => {
-        const width = select(":root", iconAst).properties.width;
-        const height = select(":root", iconAst).properties.height;
+      test(`has valid width and height`, () => {
+        const root = select(":root", iconAst);
+        const width = root && root.properties ? root.properties.width : null;
+        const height = root && root.properties ? root.properties.height : null;
         expect(width).toBe("24");
         expect(height).toBe("24");
       });
 
-      it(`has valid stroke`, () => {
+      test(`has valid stroke`, () => {
         const nodes = selectAll("*", iconAst);
 
         nodes.forEach((n) => {
@@ -59,7 +65,7 @@ describe(`Each icons has a valid code`, () => {
         });
       });
 
-      it(`has valid stroke-width`, () => {
+      test(`has valid stroke-width`, () => {
         const nodes = selectAll("*", iconAst);
         nodes.forEach((n) => {
           n.properties?.strokeWidth &&

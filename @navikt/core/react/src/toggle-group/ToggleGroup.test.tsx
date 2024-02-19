@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { describe, expect, test } from "vitest";
 import { ToggleGroup } from "./ToggleGroup";
 
 const TestToggleGroup = ({ value, onChange, defaultValue }: any) => (
