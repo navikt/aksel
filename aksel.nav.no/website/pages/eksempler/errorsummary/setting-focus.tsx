@@ -40,5 +40,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en ID på ErrorSummary og referere til den i URLens hash.",
+  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du sette en ID på ErrorSummary og referere til den i URLens anchor + legge på aria-live.",
 };
