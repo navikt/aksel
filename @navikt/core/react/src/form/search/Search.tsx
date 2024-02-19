@@ -23,7 +23,7 @@ export type SearchClearEvent =
 
 export interface SearchProps
   extends Omit<FormFieldProps, "readOnly">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "type"> {
   children?: React.ReactNode;
   /**
    * Search label

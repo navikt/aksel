@@ -1,5 +1,4 @@
-import setYear from "date-fns/setYear";
-import startOfMonth from "date-fns/startOfMonth";
+import { setYear, startOfMonth } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { Matcher, getInitialYear } from "../utils";

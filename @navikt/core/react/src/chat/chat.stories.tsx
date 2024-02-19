@@ -7,16 +7,6 @@ export default {
   title: "ds-react/Chat",
   component: Chat,
   argTypes: {
-    backgroundColor: {
-      control: {
-        type: "text",
-      },
-    },
-    avatarBgColor: {
-      control: {
-        type: "text",
-      },
-    },
     position: {
       control: { type: "radio" },
       options: POSITIONS,

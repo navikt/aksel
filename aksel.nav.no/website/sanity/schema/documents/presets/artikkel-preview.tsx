@@ -1,4 +1,4 @@
-import differenceInMonths from "date-fns/differenceInMonths";
+import { differenceInMonths } from "date-fns";
 import React from "react";
 import { FileResetIcon, FileTextIcon } from "@navikt/aksel-icons";
 

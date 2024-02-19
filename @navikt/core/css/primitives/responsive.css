@@ -45,3 +45,15 @@
     display: none !important;
   }
 }
+
+@media (min-width: 1440px) {
+  .navds-responsive__below--2xl {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1439px) {
+  .navds-responsive__above--2xl {
+    display: none !important;
+  }
+}
