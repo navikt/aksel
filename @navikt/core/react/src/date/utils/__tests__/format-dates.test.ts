@@ -1,4 +1,4 @@
-import nb from "date-fns/locale/nb";
+import { nb } from "date-fns/locale";
 import { describe, expect, test } from "vitest";
 import { formatDateForInput } from "../format-date";
 import { parseDate } from "../parse-date";

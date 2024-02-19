@@ -32,5 +32,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 0,
+  desc: "I de fleste tilfellene vil du bruke 'width' og 'height' for å manuelt bygge opp en visuell representasjon av elementet du skal emulere. Disse settes da rett på style, slik at px, rem eller f.eks. '100%' fungerer.",
 };

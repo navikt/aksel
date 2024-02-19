@@ -1,5 +1,4 @@
-import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
-import isWeekend from "date-fns/isWeekend";
+import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DatePickerProps } from "../datepicker/DatePicker";
@@ -56,11 +55,6 @@ export interface UseDatepickerOptions
    * In 2024 this equals to 1944 - 2043
    */
   allowTwoDigitYear?: boolean;
-  /**
-   * Will be removed in a future major-version
-   * @deprecated
-   */
-  openOnFocus?: false;
 }
 
 interface UseDatepickerValue {

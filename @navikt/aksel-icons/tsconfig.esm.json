@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "./dist/react/esm",
     "module": "esnext",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": true
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
   }
 }

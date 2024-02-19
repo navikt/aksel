@@ -1,4 +1,4 @@
-import isSameYear from "date-fns/isSameYear";
+import { isSameYear } from "date-fns";
 import { describe, expect, test } from "vitest";
 import { getInitialYear } from "..";
 
