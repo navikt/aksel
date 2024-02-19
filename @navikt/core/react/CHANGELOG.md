@@ -1,5 +1,37 @@
 # @navikt/ds-react
 
+## 6.0.0
+
+### Major Changes
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Search: Fjern 'type' fra SearchProps ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- OverridableComponent: Fikset feil som tillot vilkårlige props ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Grid, ContentContainer: Komponenter er fjernet fra systemet. [Se migreringsguide](https://aksel.nav.no/grunnleggende/kode/migrering#dd2cfa9fb1d1). ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Table: SortState.direction har nå `none` tilgjengelig: `"ascending" | "descending" | "none"` ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Modal: Strengere prop-typer ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Minor Changes
+
+- SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Patch Changes
+
+- Updated dependencies [[`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522)]:
+  - @navikt/ds-tokens@6.0.0
+  - @navikt/aksel-icons@6.0.0
+
 ## 5.18.3
 
 ### Patch Changes

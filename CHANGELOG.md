@@ -1,5 +1,65 @@
 # Changelog
 
+## 6.0
+
+### @navikt/aksel-icons
+
+- ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+* SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/aksel-stylelint
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/aksel
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/ds-tailwind
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/ds-css
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Grid, ContentContainer: Komponenter er fjernet fra systemet. [Se migreringsguide](https://aksel.nav.no/grunnleggende/kode/migrering#dd2cfa9fb1d1). ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- CSS: Oppdatert bruk av action-farger i systemet. Dette påvirker komponentene: Button, CopyButton, Dropdown, Combobox, ConfirmationPanel, Radio, Checkbox, Search, Select, TextField, Textarea, Helptext, LinkPanel, Link, ReadMore, Stepper og Tabs. Endringen skal ikke brekke noe så lenge man ikke har overskrevet farger manuelt. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: Nye tokens `--a-text-action-hover`,`--a-icon-action-hover` og `--a-border-action-hover` ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/ds-tokens
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: Fjernet token `--a-z-index-modal` da den ikke lengre blir konsumert i systemet. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### @navikt/ds-react
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Search: Fjern 'type' fra SearchProps ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- OverridableComponent: Fikset feil som tillot vilkårlige props ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Grid, ContentContainer: Komponenter er fjernet fra systemet. [Se migreringsguide](https://aksel.nav.no/grunnleggende/kode/migrering#dd2cfa9fb1d1). ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Table: SortState.direction har nå `none` tilgjengelig: `"ascending" | "descending" | "none"` ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Modal: Strengere prop-typer ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+* SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
 ## 5.18
 
 ### @navikt/ds-react
