@@ -23,7 +23,6 @@
     "/cjs",
     "/esm",
     "/src",
-    "_docs.json",
     "!**/*.tsbuildinfo"
   ],
   "main": "./cjs/index.js",
