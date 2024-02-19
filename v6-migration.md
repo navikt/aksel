@@ -108,6 +108,16 @@ Alle klasser med `.navds-content-container`-prefix er fjernet
 </Page>
 ```
 
+## Search
+
+Du vil nå få type-feil hvis du prøver å sette `type`. Internt i komponenten er `type` hardkodet til "search" og det har aldri vært mulig å endre dette med en prop.
+
+```jsx
+<Search label="Søk" type="text" />
+                    ~~~~
+                 // Property 'type' does not exist on type...
+```
+
 ## Tokens
 
 ### Z-index
