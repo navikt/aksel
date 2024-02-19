@@ -16,12 +16,6 @@ men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grun
 
 `openOnFocus`-prop er fjernet helt fra typer
 
-## ErrorSummary
-
-- Heading-prop er satt som required
-- Ny prop `focusTargetRef` for å bedre håndtere fokushåntering
-- Hinte om at neste major-versjon kommer til å potensielt endre hvordan ref settes på section (tabIndex fjernes) og at de bør bruke `focusTargetRef`.
-
 ## Chat
 
 ### Props
