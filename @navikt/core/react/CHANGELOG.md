@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.18.2
+
+### Patch Changes
+
+- Modal: Oppdatert intern håntering av context i komponent ([#2714](https://github.com/navikt/aksel/pull/2714))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.2
+  - @navikt/aksel-icons@5.18.2
+
 ## 5.18.1
 
 ### Patch Changes
