@@ -1,3 +1,4 @@
+import { vercelStegaCleanAll } from "@sanity/client/stega";
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
 import { BodyLong, Heading } from "@navikt/ds-react";
@@ -90,7 +91,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-export const query = `{${sidebarQuery}, ${landingPageQuery(
+const query = `{${sidebarQuery}, ${landingPageQuery(
   "grunnleggende",
 )}, "links": *[_type == "ds_artikkel" && defined(kategori)]{_id,heading,"slug": slug,status,kategori,"sidebarindex": sidebarindex}}`;
 
@@ -139,6 +140,7 @@ export default function GrunnleggendeFrontpage(props: PageProps["props"]) {
           <Page
             {..._props}
             sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+            links={vercelStegaCleanAll(_props?.links)}
           />
         );
       }}

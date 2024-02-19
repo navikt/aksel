@@ -1,3 +1,4 @@
+import { vercelStegaCleanAll } from "@sanity/client/stega";
 import { ExpansionCard as DsExpansionCard } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
@@ -20,12 +21,16 @@ const ExpansionCard = ({ node }: ExpansionCardProps) => {
     <DsExpansionCard
       id="aksel-expansioncard"
       className="mb-7 max-w-2xl"
-      aria-label={node.heading}
+      aria-label={vercelStegaCleanAll(node.heading)}
     >
       <DsExpansionCard.Header>
         <DsExpansionCard.Title
-          as={node.heading_level}
-          size={node.heading_level === "h3" ? "medium" : "small"}
+          as={vercelStegaCleanAll(node.heading_level)}
+          size={
+            vercelStegaCleanAll(node.heading_level) === "h3"
+              ? "medium"
+              : "small"
+          }
         >
           {node.heading}
         </DsExpansionCard.Title>
