@@ -256,13 +256,9 @@ export const Icon = () => (
 );
 
 export const Chromatic: Story = {
-  render: (...props) => {
+  render: () => {
     return (
       <div>
-        <h2>Default</h2>
-        {/* 
-        //@ts-expect-error TODO fix types here. it works but the type is a bit complex */}
-        <Default {...props} />
         <h2>Description</h2>
         <Description />
         <h2>Sizes</h2>

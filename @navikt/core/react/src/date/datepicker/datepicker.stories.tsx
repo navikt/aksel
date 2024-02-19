@@ -481,14 +481,8 @@ export const ModalDemo = () => {
 ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
 
 export const Chromatic: Story = {
-  render: (...props) => (
+  render: () => (
     <div>
-      <div>
-        <h2>Default</h2>
-        {/* 
-        // @ts-expect-error TODO: fix types here. it works but the type is a bit complex */}
-        {Default.render?.(...props)}
-      </div>
       <div>
         <h2>DropdownCaption</h2>
         <DropdownCaption />
@@ -572,12 +566,6 @@ export const Chromatic: Story = {
       <div>
         <h2>WeekDayClick</h2>
         <WeekDayClick />
-      </div>
-      <div>
-        <h2>ModalDemo</h2>
-        {/* 
-        // @ts-expect-error TODO: fix types here. it works but the type is a bit complex */}
-        {ModalDemo.render?.(...props)}
       </div>
     </div>
   ),

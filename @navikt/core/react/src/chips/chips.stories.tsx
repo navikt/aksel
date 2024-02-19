@@ -254,15 +254,6 @@ export const Chromatic: Story = {
       </div>
     </div>
   ),
-  argTypes: {
-    size: {
-      options: ["medium", "small"],
-      control: { type: "select" },
-    },
-  },
-  args: {
-    size: "medium",
-  },
   parameters: {
     chromatic: { disable: false },
   },
