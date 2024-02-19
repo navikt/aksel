@@ -1,24 +1,31 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, ErrorSummary } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const errorRef = useRef<HTMLElement>(null);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    errorRef.current && errorRef.current.focus();
+  }, [hasError]);
 
   return (
     <div className="flex flex-col items-start gap-12">
-      <ErrorSummary
-        heading="Du må fikse disse feilene før du kan sende inn søknad."
-        focusTargetRef={errorRef}
-      >
-        <ErrorSummary.Item href="#1">
-          Felt må fylles ut med alder
-        </ErrorSummary.Item>
-        <ErrorSummary.Item href="#2">
-          Tekstfeltet må ha en godkjent e-mail
-        </ErrorSummary.Item>
-      </ErrorSummary>
-      <Button onClick={() => errorRef.current?.focus()}>Test fokus</Button>
+      {hasError && (
+        <ErrorSummary
+          heading="Du må fikse disse feilene før du kan sende inn søknad."
+          focusTargetRef={errorRef}
+        >
+          <ErrorSummary.Item href="#1">
+            Felt må fylles ut med alder
+          </ErrorSummary.Item>
+          <ErrorSummary.Item href="#2">
+            Tekstfeltet må ha en godkjent e-mail
+          </ErrorSummary.Item>
+        </ErrorSummary>
+      )}
+      <Button onClick={() => setHasError(!hasError)}>Test fokus</Button>
     </div>
   );
 };

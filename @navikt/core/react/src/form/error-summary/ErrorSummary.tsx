@@ -37,11 +37,6 @@ type ErrorSummaryWithRef = {
 
 type ErrorSummaryWithAriaLive = {
   focusTargetRef?: React.RefObject<HTMLElement>;
-  /**
-   * When manually setting focus to `<ErrorSummary />` use the
-   * `focusTargetRef`-prop and not ref.
-   * This directs focus to heading, improving screen reader experience
-   */
   "aria-live": "polite";
 };
 
@@ -110,8 +105,6 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           `navds-error-summary--${size}`,
         )}
         tabIndex={ref ? -1 : undefined}
-        aria-live="polite"
-        aria-relevant="all"
         aria-labelledby={headingId}
       >
         <Heading
