@@ -12,6 +12,24 @@ men må dokumenteres på Aksel. Vurdere å lage en egen `nextjs` side under grun
 - https://github.com/vercel/next.js/issues/44039
 - https://github.com/vercel/next.js/issues/12557
 
+## OverridableComponent
+
+Vi har rullet tilbake en tidligere endring fordi den viste seg å tillate vilkårlige props på komponenter som bruker OverridableComponent, når man ikke brukte `as`-propen.
+
+Endringen skulle gjøre det enklere å lage egene implementasjoner/wrapper-koponenter rundt Aksel-komponenter. Hvis dere har gjort dette og nå får type-feil, kan dere prøve en av disse variantene:
+
+```jsx
+const MyButton: OverridableComponent<ButtonProps, HTMLButtonElement> = (
+  props: ButtonProps,
+) => {
+  return <Button {...props} />;
+};
+
+const MyButton = (props: ButtonProps) => {
+  return <Button {...props} />;
+};
+```
+
 ## DatePicker/MonthPicker
 
 `openOnFocus`-prop er fjernet helt fra typer
