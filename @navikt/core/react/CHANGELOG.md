@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 5.18.3
+
+### Patch Changes
+
+- Tooltip: Fikset regresjon der bruk av Tooltip ga hydration-error i nextjs ([#2738](https://github.com/navikt/aksel/pull/2738))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.3
+  - @navikt/aksel-icons@5.18.3
+
 ## 5.18.2
 
 ### Patch Changes
