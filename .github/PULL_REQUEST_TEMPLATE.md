@@ -21,7 +21,7 @@ add links to project-tasks, slack discussions etc here
 - Check that only needed components and types are exported from `@navikt/core/react/src/index.ts`
 - Add JSDoc to component (see other components for reference)
 - Create storybook-stories for relevant component variations and compositions. Stories are used for [visual regression testing](https://www.chromatic.com/docs/), so make sure they are complete.
-- Is the component sufficiently complex to warrant tests? Add some unit-tests for jest.
+- Is the component sufficiently complex to warrant tests? Add some unit-tests for vitest.
 
 #### Component-updates 🎉
 

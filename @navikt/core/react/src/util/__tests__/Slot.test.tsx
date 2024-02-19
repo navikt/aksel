@@ -1,12 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
+import { describe, expect, test, vi } from "vitest";
 import { Button } from "../../button";
 import { Slot } from "../Slot";
 
 describe("Slot", () => {
   describe("should handle forwarning events", () => {
     test("Should call onClick when event is on Slot", async () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(
         <Slot onClick={handleClick}>
           <Button>Button</Button>
@@ -17,7 +18,7 @@ describe("Slot", () => {
     });
 
     test("Should call onClick when event is on Child", async () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(
         <Slot>
           <Button onClick={handleClick}>Button</Button>
@@ -28,8 +29,8 @@ describe("Slot", () => {
     });
 
     test("Should call onClick when event is on Child and Slot", async () => {
-      const handleClickSlot = jest.fn();
-      const handleClick = jest.fn();
+      const handleClickSlot = vi.fn();
+      const handleClick = vi.fn();
       render(
         <Slot onClick={handleClickSlot}>
           <Button onClick={handleClick}>Button</Button>
@@ -41,7 +42,7 @@ describe("Slot", () => {
     });
 
     test("Should call onClick when event is on Child and undefined on Slot", async () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(
         <Slot onClick={undefined}>
           <Button onClick={handleClick}>Button</Button>
@@ -52,7 +53,7 @@ describe("Slot", () => {
     });
 
     test("Should call onClick when event is on Slot and undefined on Child", async () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(
         <Slot onClick={handleClick}>
           <Button onClick={undefined}>Button</Button>

@@ -1,5 +1,6 @@
-const fastglob = require("fast-glob");
-const path = require("path");
+import fastglob from "fast-glob";
+import path from "path";
+import { describe, expect, test } from "vitest";
 
 const basePath = path.resolve(__dirname, "../icons");
 
@@ -12,7 +13,7 @@ const ymlList = fastglob
   .map((fileN) => path.basename(fileN));
 
 describe(`Each SVG-file has a matching YML file`, () => {
-  it(`must have a corresponding YML file`, () => {
+  test(`must have a corresponding YML file`, () => {
     expect(
       ymlList
         .map((yml) => yml.replace(".yml", ".svg"))
@@ -22,7 +23,7 @@ describe(`Each SVG-file has a matching YML file`, () => {
 });
 
 describe(`Each YML-file has a matching SVG file`, () => {
-  it(`must have a corresponding SVG file`, () => {
+  test(`must have a corresponding SVG file`, () => {
     expect(
       svgList
         .map((svg) => svg.replace(".svg", ".yml"))

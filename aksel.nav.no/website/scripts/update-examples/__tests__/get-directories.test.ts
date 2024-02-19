@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { getDirectories } from "../parts/get-directories";
 
 describe("Testing getDirectories function", () => {
