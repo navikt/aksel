@@ -1,13 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import faker from "faker";
 import React from "react";
+import { describe, expect, test, vi } from "vitest";
 import { Checkbox, CheckboxGroup } from ".";
 
-const firstArgumentOfFirstCall = (fn: jest.Mock) => fn.mock.calls[0][0];
+const firstArgumentOfFirstCall = (fn: ReturnType<typeof vi.fn>) =>
+  fn.mock.calls[0][0];
 
 test("checkbox group chains onChange calls", async () => {
-  const onGroupChange = jest.fn();
-  const onChange = jest.fn();
+  const onGroupChange = vi.fn();
+  const onChange = vi.fn();
   const value = faker.datatype.string();
   const label = faker.datatype.string();
 
@@ -51,7 +53,7 @@ describe("Checkbox handles controlled-state correctly", () => {
   });
 
   test("onChange called with expected values", async () => {
-    const onGroupChange = jest.fn();
+    const onGroupChange = vi.fn();
 
     render(
       <CheckboxComponent

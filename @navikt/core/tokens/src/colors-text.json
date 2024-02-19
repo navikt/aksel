@@ -15,6 +15,9 @@
     "text-action-selected": {
       "value": "{a.blue.700.value}"
     },
+    "text-action-hover": {
+      "value": "{a.blue.600.value}"
+    },
     "text-action-on-action-subtle": {
       "value": "{a.blue.600.value}"
     },

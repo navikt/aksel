@@ -1,5 +1,5 @@
 import cl from "clsx";
-import isWeekend from "date-fns/isWeekend";
+import { isWeekend } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";

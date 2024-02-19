@@ -2,6 +2,7 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { describe, expect, test } from "vitest";
 import { DatePicker, useRangeDatepicker } from "..";
 
 const RangeDemo = () => {
@@ -22,7 +23,7 @@ const RangeDemo = () => {
 };
 
 describe("Writing in input sets correct values", () => {
-  it("useRangeDatepicker same date", async () => {
+  test("useRangeDatepicker same date", async () => {
     render(<RangeDemo />);
 
     const fraInput = screen.getByRole("textbox", { name: "Fra" });
@@ -40,7 +41,7 @@ describe("Writing in input sets correct values", () => {
     );
   });
 
-  it("useRangeDatepicker before after to", async () => {
+  test("useRangeDatepicker before after to", async () => {
     render(<RangeDemo />);
 
     const fraInput = screen.getByRole("textbox", { name: "Fra" });

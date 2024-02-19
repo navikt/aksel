@@ -1,5 +1,15 @@
 # @navikt/ds-tailwind
 
+## 6.0.0
+
+### Major Changes
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+## 5.18.3
+
+## 5.18.2
+
 ## 5.18.1
 
 ## 5.18.0
