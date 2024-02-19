@@ -1,12 +1,17 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Chips } from ".";
 
 const meta: Meta<typeof Chips> = {
   title: "ds-react/Chips",
   component: Chips,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
+
+type Story = StoryObj<typeof Chips>;
 
 const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
 
@@ -219,4 +224,46 @@ export const Small = () => {
       </Chips>
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>Toggle</h2>
+        <h3>Medium</h3>
+        <Toggle size="medium" />
+        <h3>Small</h3>
+        <Toggle size="small" />
+      </div>
+      <div>
+        <h2>Removable</h2>
+        <Removable />
+      </div>
+      <div>
+        <h2>Regular</h2>
+        <Regular />
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+    </div>
+  ),
+  argTypes: {
+    size: {
+      options: ["medium", "small"],
+      control: { type: "select" },
+    },
+  },
+  args: {
+    size: "medium",
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
