@@ -4,11 +4,13 @@
 
 ### @navikt/ds-react
 
-- Modal: Oppdatert intern håntering av context i komponent ([#2714](https://github.com/navikt/aksel/pull/2714))
+- Tooltip: Fikset regresjon der bruk av Tooltip ga hydration-error i nextjs ([#2738](https://github.com/navikt/aksel/pull/2738))
 
-* Panel: Komponent er nå markert som deprecated. Bruk `Box` i fremtiden. ([#2712](https://github.com/navikt/aksel/pull/2712))
+* Modal: Oppdatert intern håntering av context i komponent ([#2714](https://github.com/navikt/aksel/pull/2714))
 
-- Portal: Ny komponent `Portal` som lar deg enkelt bruke `createPortal`, også på serversiden ([#2697](https://github.com/navikt/aksel/pull/2697))
+- Panel: Komponent er nå markert som deprecated. Bruk `Box` i fremtiden. ([#2712](https://github.com/navikt/aksel/pull/2712))
+
+* Portal: Ny komponent `Portal` som lar deg enkelt bruke `createPortal`, også på serversiden ([#2697](https://github.com/navikt/aksel/pull/2697))
 
 ## 5.17
 
