@@ -1,7 +1,8 @@
 import fs from "fs";
+import { describe, expect, test, vi } from "vitest";
 import { extractMetadata } from "../parts/extract-metadata";
 
-jest.mock("fs");
+vi.mock("fs");
 
 const sampleObj = {
   version: 1,
@@ -18,16 +19,19 @@ const sampleString = JSON.stringify(sampleObj, null, 2);
 
 describe("Testing extractMetadata function", () => {
   test("extractMetadata should return undefined if directory does not exist", () => {
-    (fs.existsSync as jest.Mock).mockReturnValue(false);
+    vi.mocked(fs.existsSync).mockResolvedValue(false);
     const metadata = extractMetadata("nonexistent", "templates");
 
     expect(metadata).toBeUndefined();
   });
 
   test("extractMetadata should read meta.json from /pages/templates directory", () => {
-    (fs.existsSync as jest.Mock).mockReturnValue(true);
-    (fs.readdirSync as jest.Mock).mockReturnValue(["file1.tsx", "meta.json"]);
-    (fs.readFileSync as jest.Mock).mockReturnValue(sampleString);
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    vi.mocked(fs.readdirSync).mockReturnValue([
+      "file1.tsx",
+      "meta.json",
+    ] as unknown as fs.Dirent[]);
+    vi.mocked(fs.readFileSync).mockReturnValue(sampleString);
 
     const metadata = extractMetadata("eksempler", "templates");
 

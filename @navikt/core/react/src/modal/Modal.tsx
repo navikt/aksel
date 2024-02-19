@@ -8,8 +8,8 @@ import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { ModalContextProvider, useModalContext } from "./Modal.context";
 import ModalBody from "./ModalBody";
-import { ModalContext } from "./ModalContext";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
@@ -98,7 +98,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
     const dateContext = useContext(DateContext);
-    const modalContext = useContext(ModalContext);
+    const modalContext = useModalContext(false);
     if (modalContext && !dateContext) {
       console.error("Modals should not be nested");
     }
@@ -185,11 +185,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         onClick={composeEventHandlers(onClick, handleModalClick)}
         aria-labelledby={mergedAriaLabelledBy}
       >
-        <ModalContext.Provider
-          value={{
-            closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
-            ref: modalRef,
-          }}
+        <ModalContextProvider
+          closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
+          ref={modalRef}
         >
           {header && (
             <ModalHeader>
@@ -208,7 +206,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           )}
 
           {children}
-        </ModalContext.Provider>
+        </ModalContextProvider>
       </dialog>
     );
 

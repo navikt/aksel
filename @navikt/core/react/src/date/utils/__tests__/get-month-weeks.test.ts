@@ -1,5 +1,6 @@
 /* https://github.com/gpbl/react-day-picker/blob/main/src/components/Table/utils/getMonthWeeks.test.ts */
 import { enGB, nb } from "date-fns/locale";
+import { describe, expect, test } from "vitest";
 import { getMonthWeeks } from "../get-month-weeks";
 
 describe('when using the "nB" locale', () => {

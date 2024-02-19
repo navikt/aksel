@@ -75,7 +75,7 @@ jobs:
         run: yarn boot
 
       - name: Tests
-        run: yarn workspace aksel.nav.no test
+        run: yarn workspace website test
 
       - name: Build application
         run: yarn workspace aksel.nav.no build:next

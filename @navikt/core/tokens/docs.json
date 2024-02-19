@@ -384,6 +384,7 @@
   "semantic-icon-action": [
     { "name": "--a-icon-action", "value": "rgba(0, 103, 197, 1)" },
     { "name": "--a-icon-action-selected", "value": "rgba(0, 69, 156, 1)" },
+    { "name": "--a-icon-action-hover", "value": "rgba(0, 86, 180, 1)" },
     {
       "name": "--a-icon-action-on-action-subtle",
       "value": "rgba(0, 86, 180, 1)"

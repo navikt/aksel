@@ -1,7 +1,8 @@
-const fastglob = require("fast-glob");
-const path = require("path");
-const jsYaml = require("js-yaml");
-const fs = require("fs");
+import fastglob from "fast-glob";
+import fs from "fs";
+import jsYaml from "js-yaml";
+import path from "path";
+import { describe, expect, test } from "vitest";
 
 const basePath = path.resolve(__dirname, "../icons");
 
@@ -11,7 +12,7 @@ const ymlList = fastglob
 
 describe(`Each icons YML-config is valid`, () => {
   ymlList.forEach((file) => {
-    it(`${file} has valid YML-config`, () => {
+    test(`${file} has valid YML-config`, () => {
       const ymlData = jsYaml.load(fs.readFileSync(`${basePath}/${file}`), {
         schema: jsYaml.JSON_SCHEMA,
       });

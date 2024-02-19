@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "5.18.1",
+  "version": "6.0.0",
   "description": "Aksel react-components for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "/cjs",
     "/esm",
     "/src",
-    "_docs.json",
     "!**/*.tsbuildinfo"
   ],
   "main": "./cjs/index.js",
@@ -47,12 +46,13 @@
     "clean": "rimraf cjs esm",
     "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "TZ=UTC jest"
+    "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^5.18.1",
-    "@navikt/ds-tokens": "^5.18.1",
+    "@navikt/aksel-icons": "^6.0.0",
+    "@navikt/ds-tokens": "^6.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
@@ -64,21 +64,19 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
-    "@types/jest": "^29.0.0",
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "faker": "5.5.3",
     "fast-glob": "3.2.11",
-    "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.0.0",
+    "jsdom": "24.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "3.0.2",
     "swr": "^1.1.2",
-    "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
     "tsc-alias": "1.8.8",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^1.2.2"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

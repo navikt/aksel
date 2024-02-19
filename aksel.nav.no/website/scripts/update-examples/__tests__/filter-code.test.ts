@@ -1,3 +1,4 @@
+import { expect, test } from "vitest";
 import { filterCode } from "../parts/filter-code";
 import {
   codeAfter,

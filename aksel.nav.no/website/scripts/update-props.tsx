@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import CoreDocs from "@navikt/ds-react/_docs.json";
+import fs from "fs";
+import path from "path";
 import { noCdnClient } from "../sanity/interface/client.server";
 
 dotenv.config();
@@ -75,6 +76,15 @@ async function updateProps() {
 }
 
 function propList() {
+  const CoreDocs = JSON.parse(
+    fs.readFileSync(
+      path.resolve(process.cwd(), "../../@navikt/core/react/_docs.json"),
+      {
+        encoding: "utf-8",
+      },
+    ),
+  );
+
   return CoreDocs.map((prop) => {
     const _id = `${hashString(prop.displayName)}_${hashString(prop.filePath)}`;
 
@@ -84,7 +94,7 @@ function propList() {
       title: prop.displayName,
       displayname: prop.displayName,
       filepath: prop.filePath,
-      proplist: Object.values(prop.props).map((val, y) => {
+      proplist: Object.values(prop.props).map((val: any, y) => {
         return {
           _type: "prop",
           _key: val.name + y,

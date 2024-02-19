@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { act } from "react-dom/test-utils";
+import { describe, expect, test } from "vitest";
 import { UNSAFE_Combobox } from "..";
 
 const options = [
@@ -37,7 +38,7 @@ const App = (props) => {
 
 describe("Render combobox", () => {
   describe("with multi select", () => {
-    it("Should be able to search, select and remove selections", async () => {
+    test("Should be able to search, select and remove selections", async () => {
       render(<App isMultiSelect options={options} />);
 
       await act(async () => {
@@ -71,7 +72,7 @@ describe("Render combobox", () => {
     });
   });
 
-  it("Should show loading icon when loading (used for async search)", async () => {
+  test("Should show loading icon when loading (used for async search)", async () => {
     render(<App options={[]} isListOpen isLoading />);
 
     expect(await screen.findByText("Søker...")).toBeInTheDocument();
@@ -79,7 +80,7 @@ describe("Render combobox", () => {
 });
 
 describe("Combobox state-handling", () => {
-  it("Should not select previous focused element when closes", async () => {
+  test("Should not select previous focused element when closes", async () => {
     render(<App options={options} />);
 
     await act(async () => {
@@ -100,7 +101,7 @@ describe("Combobox state-handling", () => {
     expect(screen.queryByRole("button", { name: "banana slett" })).toBeNull();
   });
 
-  it("Should reset list when resetting input (ESC)", async () => {
+  test("Should reset list when resetting input (ESC)", async () => {
     render(<App options={options} />);
 
     await act(async () => {

@@ -1,16 +1,20 @@
-const docs = require("../../docs.json");
-const DsTokens = require("../../dist/tokens-cjs.js");
-const kebabCase = require("../kebabCase.js");
+import { describe, expect, test } from "vitest";
+import DsTokens from "../../dist/tokens-cjs.js";
+import docs from "../../docs.json";
+import kebabCase from "../kebabCase.js";
 
-const flatten = Object.values(docs).reduce((old, val) => [...old, ...val], []);
+const flatten = Object.values(docs).reduce(
+  (old, val) => [...old, ...val],
+  [] as any,
+);
 
-const notFound = [];
-const removed = [];
-const wrongValues = [];
+const notFound: string[] = [];
+const removed: string[] = [];
+const wrongValues: string[] = [];
 
 describe("Validate tokens dokumentation", () => {
   flatten.forEach((x) => {
-    it(`${x.name} should be documented`, () => {
+    test(`${x.name} should be documented`, () => {
       expect(
         Object.keys(DsTokens).find(
           (y) => `--${kebabCase(y)}`.replace("--az-", "--a-z-") === x.name,
@@ -21,10 +25,10 @@ describe("Validate tokens dokumentation", () => {
 
   Object.entries(DsTokens).forEach(([key, val]) => {
     const formatedKey = `--${kebabCase(key)}`.replace("--az-", "--a-z-");
-    it(`${formatedKey} should exist in docs and have correct value`, () => {
+    test(`${formatedKey} should exist in docs and have correct value`, () => {
       const tokenInDoc = flatten.find((x) => x.name === formatedKey);
       expect(tokenInDoc).toBeDefined();
-      expect(tokenInDoc.value).toEqual(val);
+      expect(tokenInDoc?.value).toEqual(val);
     });
   });
 });
