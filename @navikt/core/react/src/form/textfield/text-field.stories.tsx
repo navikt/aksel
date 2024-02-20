@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Select } from "../index";
+import TextField from "./TextField";
 
 export default {
-  title: "ds-react/Select",
-  component: Select,
+  title: "ds-react/TextField",
+  component: TextField,
   argTypes: {
     size: {
       control: {
@@ -27,50 +27,30 @@ export default {
   },
 } as Meta;
 
-const content = (
-  <>
-    <option value="">Velg land</option>
-    <option value="norge">Norge</option>
-    <option value="sverige">Sverige</option>
-  </>
-);
-
 export const Default = {
   render: (props) => {
-    return (
-      <Select {...props} label="Ipsum enim quis culpa">
-        {content}
-      </Select>
-    );
+    return <TextField {...props} label="Ipsum enim quis culpa" />;
   },
 
   args: {},
 };
 
 export const Small = () => {
-  return (
-    <Select size="small" label="Ipsum enim quis culpa">
-      {content}
-    </Select>
-  );
+  return <TextField size="small" label="Ipsum enim quis culpa" />;
 };
 
 export const Description = () => {
   return (
     <div className="colgap">
-      <Select
+      <TextField
         label="Ipsum enim quis culpa"
         description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
-      >
-        {content}
-      </Select>
-      <Select
+      />
+      <TextField
         label="Ipsum enim quis culpa"
         description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
-      >
-        {content}
-      </Select>
+      />
     </div>
   );
 };
@@ -78,19 +58,16 @@ export const Description = () => {
 export const Error = () => {
   return (
     <div className="colgap">
-      <Select
+      <TextField
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
-      >
-        {content}
-      </Select>
-      <Select
+      />
+
+      <TextField
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
-      >
-        {content}
-      </Select>
+      />
     </div>
   );
 };
@@ -98,37 +75,26 @@ export const Error = () => {
 export const Disabled = () => {
   return (
     <div className="colgap">
-      <Select label="Ipsum enim quis culpa" disabled>
-        {content}
-      </Select>
-      <Select label="Ipsum enim quis culpa" disabled size="small">
-        {content}
-      </Select>
+      <TextField label="Ipsum enim quis culpa" disabled />
+      <TextField label="Ipsum enim quis culpa" disabled size="small" />
     </div>
   );
 };
 
 export const HideLabel = () => {
-  return (
-    <Select label="Ipsum enim quis culpa" hideLabel>
-      {content}
-    </Select>
-  );
+  return <TextField label="Ipsum enim quis culpa" hideLabel />;
 };
 
 export const Readonly = () => {
   return (
     <div className="colgap">
-      <Select
-        label="Hvilkets land er du fra?"
-        description="Velg landet du bor 180 dagen i året"
+      <TextField
+        label="Bosted"
+        description="Skriv bosted i Norge"
         readOnly
-      >
-        {content}
-      </Select>
-      <Select label="Hvilkets land er du fra?" readOnly error="feilmelding">
-        {content}
-      </Select>
+        value="Oslo"
+      />
+      <TextField label="Bosted" readOnly error="feilmelding" value="Oslo" />
     </div>
   );
 };

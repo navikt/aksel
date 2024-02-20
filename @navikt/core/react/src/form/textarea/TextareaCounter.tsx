@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { useEffect, useState } from "react";
-import { BodyShort } from "../typography";
-import debounce from "../util/debounce";
+import { BodyShort } from "../../typography";
+import debounce from "../../util/debounce";
 import type { TextareaProps } from "./Textarea";
 
 interface Props {
