@@ -54,7 +54,7 @@ export {
   Spacer,
 } from "./layout/stack";
 export { Link, type LinkProps } from "./link";
-export * from "./link-panel";
+export { LinkPanel, type LinkPanelProps } from "./link-panel";
 export * from "./list";
 export * from "./loader";
 export * from "./modal";

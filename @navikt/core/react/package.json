@@ -238,6 +238,16 @@
         "default": "./cjs/link/index.js"
       }
     },
+    "./LinkPanel": {
+      "import": {
+        "types": "./esm/link-panel/index.d.ts",
+        "default": "./esm/link-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/link-panel/index.d.ts",
+        "default": "./cjs/link-panel/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
