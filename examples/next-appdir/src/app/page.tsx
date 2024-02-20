@@ -32,6 +32,7 @@ export default function Home() {
 
       <StarIcon />
       <Button>Knapp</Button>
+
       <div className={styles.center}>
         <Image
           className={styles.logo}

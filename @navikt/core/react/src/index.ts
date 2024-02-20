@@ -7,7 +7,7 @@ export * from "./chips";
 export * from "./copybutton";
 export * from "./date";
 export * from "./dropdown";
-export * from "./expansion-card";
+export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export * from "./form";
 export * from "./guide-panel";
 export * from "./overlays";
