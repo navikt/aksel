@@ -1,13 +1,14 @@
 {
   "name": "@navikt/ds-react",
   "version": "6.0.0",
-  "description": "Aksel react-components for NAV designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "description": "React components from the Norwegian Labour and Welfare Administration.",
+  "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
   "keywords": [
     "react",
     "typescript",
-    "javascript"
+    "javascript",
+    "NAV"
   ],
   "repository": {
     "type": "git",
