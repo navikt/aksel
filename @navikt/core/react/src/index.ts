@@ -2,7 +2,7 @@
 export { Accordion, type AccordionProps } from "./accordion";
 export { Alert, type AlertProps } from "./alert";
 export { Button, type ButtonProps } from "./button";
-export * from "./chat";
+export { Chat, type ChatProps } from "./chat";
 export * from "./chips";
 export * from "./copybutton";
 export * from "./date";

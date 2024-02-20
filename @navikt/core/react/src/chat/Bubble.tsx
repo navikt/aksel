@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Detail } from "../typography";
 
-export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Bubble text
    */
@@ -21,7 +21,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   toptextPosition?: "left" | "right";
 }
 
-const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
+const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
   ({ children, className, name, timestamp, toptextPosition, ...rest }, ref) => {
     return (
       <div ref={ref} className={cl("navds-chat__bubble", className)} {...rest}>
