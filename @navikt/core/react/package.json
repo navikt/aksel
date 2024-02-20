@@ -58,6 +58,16 @@
         "default": "./cjs/alert/index.js"
       }
     },
+    "./Button": {
+      "import": {
+        "types": "./esm/button/index.d.ts",
+        "default": "./esm/button/index.js"
+      },
+      "require": {
+        "types": "./cjs/button/index.d.ts",
+        "default": "./cjs/button/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",
