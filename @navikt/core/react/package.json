@@ -138,6 +138,16 @@
         "default": "./cjs/expansion-card/index.js"
       }
     },
+    "./GuidePanel": {
+      "import": {
+        "types": "./esm/guide-panel/index.d.ts",
+        "default": "./esm/guide-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/guide-panel/index.d.ts",
+        "default": "./cjs/guide-panel/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

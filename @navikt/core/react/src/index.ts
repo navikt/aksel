@@ -25,7 +25,11 @@ export {
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export * from "./form";
-export * from "./guide-panel";
+export {
+  GuidePanel,
+  GuideDefaultIllustration,
+  type GuidePanelProps,
+} from "./guide-panel";
 export * from "./overlays";
 export * from "./help-text";
 export * from "./internal-header";
