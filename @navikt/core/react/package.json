@@ -88,6 +88,16 @@
         "default": "./cjs/chips/index.js"
       }
     },
+    "./CopyButton": {
+      "import": {
+        "types": "./esm/copybutton/index.d.ts",
+        "default": "./esm/copybutton/index.js"
+      },
+      "require": {
+        "types": "./cjs/copybutton/index.d.ts",
+        "default": "./cjs/copybutton/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",

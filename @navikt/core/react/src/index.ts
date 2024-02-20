@@ -4,7 +4,7 @@ export { Alert, type AlertProps } from "./alert";
 export { Button, type ButtonProps } from "./button";
 export { Chat, type ChatProps } from "./chat";
 export { Chips, type ChipsProps } from "./chips";
-export * from "./copybutton";
+export { CopyButton, type CopyButtonProps } from "./copybutton";
 export * from "./date";
 export * from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
