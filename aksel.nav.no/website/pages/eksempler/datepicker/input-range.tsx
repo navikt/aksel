@@ -1,5 +1,5 @@
-import format from "date-fns/format";
-import nbLocale from "date-fns/locale/nb";
+import { format } from "date-fns";
+import { nb } from "date-fns/locale";
 import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -22,11 +22,11 @@ const Example = () => {
         <div className="pt-4">
           <div>
             {selectedRange?.from &&
-              format(selectedRange.from, "dd.MM.yyyy", { locale: nbLocale })}
+              format(selectedRange.from, "dd.MM.yyyy", { locale: nb })}
           </div>
           <div>
             {selectedRange?.to &&
-              format(selectedRange.to, "dd.MM.yyyy", { locale: nbLocale })}
+              format(selectedRange.to, "dd.MM.yyyy", { locale: nb })}
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { generateTableOfContents } from "../generate-tableofcontents";
 import { komponentPage } from "./mockdata";
 

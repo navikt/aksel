@@ -33,6 +33,7 @@
 
 .navds-read-more__button:hover {
   background-color: var(--ac-read-more-hover-bg, var(--a-surface-hover));
+  color: var(--ac-read-more-hover-text, var(--a-text-action-hover));
 }
 
 .navds-read-more__button:active {

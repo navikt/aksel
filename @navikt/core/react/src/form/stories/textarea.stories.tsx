@@ -217,7 +217,7 @@ export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
   // and set the height to 2px when used in StrictMode in a Modal that is initially open.
   return (
     <React.StrictMode>
-      <Modal open>
+      <Modal open onClose={() => null} aria-label="Modal med textarea">
         <Modal.Body>
           <Textarea label="Har du noen tilbakemeldinger?" />
         </Modal.Body>

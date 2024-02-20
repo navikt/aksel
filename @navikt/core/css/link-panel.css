@@ -9,12 +9,12 @@
 
 .navds-link-panel:hover .navds-link-panel__title {
   text-decoration: underline;
-  color: var(--ac-link-panel-hover-text, var(--a-text-action));
+  color: var(--ac-link-panel-hover-text, var(--a-text-action-hover));
 }
 
 .navds-link-panel:hover {
   box-shadow: var(--a-shadow-small);
-  border-color: var(--ac-link-panel-hover-border, var(--a-border-action));
+  border-color: var(--ac-link-panel-hover-border, var(--a-border-action-hover));
 }
 
 .navds-link-panel:focus-visible {

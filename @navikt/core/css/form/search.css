@@ -95,7 +95,7 @@
 }
 
 .navds-search__button-clear:hover {
-  color: var(--ac-search-clear-icon-hover, var(--__ac-search-clear-icon-hover, var(--a-text-action)));
+  color: var(--ac-search-clear-icon-hover, var(--__ac-search-clear-icon-hover, var(--a-text-action-hover)));
 }
 
 .navds-search__button-clear:focus-visible {
@@ -134,12 +134,12 @@
     0 -1px 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset;
 }
 
-.navds-search__button-search.navds-button--secondary:hover {
+.navds-search__button-search.navds-button--secondary:where(:hover, :active) {
   box-shadow:
-    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
-    0 1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
-    0 -1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
-    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action)));
+    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
+    0 1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
+    0 -1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
+    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover)));
   z-index: 1;
 }
 
@@ -155,7 +155,7 @@
 
 .navds-search__button-search.navds-button--secondary:focus-visible:hover {
   box-shadow:
-    0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
+    0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
     var(--a-shadow-focus);
 }
 

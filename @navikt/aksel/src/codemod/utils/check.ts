@@ -2,6 +2,7 @@ import { applyTransform } from "jscodeshift/dist/testUtils";
 import fs from "node:fs";
 import path from "node:path";
 import prettier from "prettier";
+import { describe, expect, test } from "vitest";
 
 interface TestT {
   fixture: string;
@@ -15,7 +16,7 @@ export function check(
   { fixture, migration, extension = "js", options = {} }: TestT,
 ) {
   describe(migration, () => {
-    it(fixture, async () => {
+    test(fixture, async () => {
       const fixtureDir = path.join(dirName);
       const inputPath = path.join(fixtureDir, `${fixture}.input.${extension}`);
       const parser = extension;

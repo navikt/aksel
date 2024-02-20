@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import faker from "faker";
 import React from "react";
+import { expect, test } from "vitest";
 import { ConfirmationPanel } from ".";
 
 test("omits error id from input", async () => {

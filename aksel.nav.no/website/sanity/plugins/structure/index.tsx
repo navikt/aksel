@@ -1,4 +1,4 @@
-import differenceInMonths from "date-fns/differenceInMonths";
+import { differenceInMonths } from "date-fns";
 import { StructureResolver } from "sanity/desk";
 import {
   CircleSlashIcon,
