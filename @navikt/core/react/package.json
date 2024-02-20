@@ -98,6 +98,26 @@
         "default": "./cjs/copybutton/index.js"
       }
     },
+    "./DatePicker": {
+      "import": {
+        "types": "./esm/date/datepicker/index.d.ts",
+        "default": "./esm/date/datepicker/index.js"
+      },
+      "require": {
+        "types": "./cjs/date/datepicker/index.d.ts",
+        "default": "./cjs/date/datepicker/index.js"
+      }
+    },
+    "./MonthPicker": {
+      "import": {
+        "types": "./esm/date/monthpicker/index.d.ts",
+        "default": "./esm/date/monthpicker/index.js"
+      },
+      "require": {
+        "types": "./cjs/date/monthpicker/index.d.ts",
+        "default": "./cjs/date/monthpicker/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",
