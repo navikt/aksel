@@ -168,6 +168,66 @@
         "default": "./cjs/internal-header/index.js"
       }
     },
+    "./Bleed": {
+      "import": {
+        "types": "./esm/layout/bleed/index.d.ts",
+        "default": "./esm/layout/bleed/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/bleed/index.d.ts",
+        "default": "./cjs/layout/bleed/index.js"
+      }
+    },
+    "./Box": {
+      "import": {
+        "types": "./esm/layout/box/index.d.ts",
+        "default": "./esm/layout/box/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/box/index.d.ts",
+        "default": "./cjs/layout/box/index.js"
+      }
+    },
+    "./HGrid": {
+      "import": {
+        "types": "./esm/layout/grid/index.d.ts",
+        "default": "./esm/layout/grid/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/grid/index.d.ts",
+        "default": "./cjs/layout/grid/index.js"
+      }
+    },
+    "./Page": {
+      "import": {
+        "types": "./esm/layout/page/index.d.ts",
+        "default": "./esm/layout/page/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/page/index.d.ts",
+        "default": "./cjs/layout/page/index.js"
+      }
+    },
+    "./Responsive": {
+      "import": {
+        "types": "./esm/layout/responsive/index.d.ts",
+        "default": "./esm/layout/responsive/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/responsive/index.d.ts",
+        "default": "./cjs/layout/responsive/index.js"
+      }
+    },
+    "./Stack": {
+      "import": {
+        "types": "./esm/layout/stack/index.d.ts",
+        "default": "./esm/layout/stack/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/stack/index.d.ts",
+        "default": "./cjs/layout/stack/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
