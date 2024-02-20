@@ -46,22 +46,21 @@ export { Page, type PageBlockProps, type PageProps } from "./layout/page";
 export { Hide, Show, type ResponsiveProps } from "./layout/responsive";
 export {
   HStack,
-  type HStackProps,
-  Stack,
-  type StackProps,
-  VStack,
-  type VStackProps,
   Spacer,
+  Stack,
+  VStack,
+  type HStackProps,
+  type StackProps,
+  type VStackProps,
 } from "./layout/stack";
 export { Link, type LinkProps } from "./link";
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
 export { List, type ListProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
 export { Modal, type ModalProps } from "./modal";
-export { Portal, type PortalProps } from "./portal";
-export * from "./pagination";
-export * from "./panel";
+export { Pagination, type PaginationProps } from "./pagination";
 export * from "./popover";
+export { Portal, type PortalProps } from "./portal";
 export * from "./provider";
 export * from "./read-more";
 export * from "./skeleton";
@@ -74,3 +73,8 @@ export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
+
+/**
+ * @deprecated
+ */
+export * from "./panel";
