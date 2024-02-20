@@ -37,5 +37,5 @@ export function useBodyScrollLock(
       observer.disconnect();
       document.body.classList.remove(BODY_CLASS); // In case modal is unmounted before it's closed
     };
-  }, [modalRef, portalNode]);
+  }, [modalRef, portalNode, isNested]);
 }
