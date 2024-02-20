@@ -278,6 +278,16 @@
         "default": "./cjs/modal/index.js"
       }
     },
+    "./Portal": {
+      "import": {
+        "types": "./esm/portal/index.d.ts",
+        "default": "./esm/portal/index.js"
+      },
+      "require": {
+        "types": "./cjs/portal/index.d.ts",
+        "default": "./cjs/portal/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
