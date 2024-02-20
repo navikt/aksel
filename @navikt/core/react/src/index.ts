@@ -9,9 +9,9 @@ export {
   DatePicker,
   useDatepicker,
   useRangeDatepicker,
+  type DateInputProps,
   type DatePickerProps,
   type DatePickerStandaloneProps,
-  type DateInputProps,
   type DateValidationT,
   type RangeValidationT,
 } from "./date/datepicker";
@@ -26,18 +26,24 @@ export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export * from "./form";
 export {
-  GuidePanel,
   GuideDefaultIllustration,
+  GuidePanel,
   type GuidePanelProps,
 } from "./guide-panel";
-export * from "./overlays";
-export * from "./help-text";
+export { HelpText, type HelpTextProps } from "./help-text";
 export * from "./internal-header";
+export * from "./layout/bleed";
+export * from "./layout/box";
+export * from "./layout/grid";
+export * from "./layout/page";
+export * from "./layout/responsive";
+export * from "./layout/stack";
 export * from "./link";
 export * from "./link-panel";
 export * from "./list";
 export * from "./loader";
 export * from "./modal";
+export * from "./overlays";
 export * from "./pagination";
 export * from "./panel";
 export * from "./popover";
@@ -53,9 +59,3 @@ export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
-export * from "./layout/bleed";
-export * from "./layout/box";
-export * from "./layout/stack";
-export * from "./layout/grid";
-export * from "./layout/responsive";
-export * from "./layout/page";

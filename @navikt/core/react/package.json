@@ -148,6 +148,16 @@
         "default": "./cjs/guide-panel/index.js"
       }
     },
+    "./HelpText": {
+      "import": {
+        "types": "./esm/help-text/index.d.ts",
+        "default": "./esm/help-text/index.js"
+      },
+      "require": {
+        "types": "./cjs/help-text/index.d.ts",
+        "default": "./cjs/help-text/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
