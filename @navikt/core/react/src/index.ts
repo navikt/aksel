@@ -59,7 +59,7 @@ export { List, type ListProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
 export { Modal, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
-export * from "./popover";
+export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
 export * from "./provider";
 export * from "./read-more";
