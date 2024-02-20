@@ -1,5 +1,5 @@
 "use client";
-export type * from "./types";
+export type { AsChildProps, OverridableComponent } from "./types";
 export { default as debounce } from "./debounce";
 export * from "./omit";
 export { useClientLayoutEffect } from "./hooks/useClientLayoutEffect";

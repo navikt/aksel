@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { Checkbox, CheckboxGroup } from "../../index";
+import Checkbox from "./Checkbox";
+import CheckboxGroup from "./CheckboxGroup";
 
 const meta: Meta<typeof Checkbox> = {
   title: "ds-react/Checkbox",

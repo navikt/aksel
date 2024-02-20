@@ -1,9 +1,9 @@
 "use client";
 export { default as Timeline, type TimelineProps } from "./Timeline";
-export { default as TimelineRow, TimelineRowProps } from "./TimelineRow";
-export { default as TimelinePin, TimelinePinProps } from "./Pin";
-export { default as TimelinePeriod, TimelinePeriodProps } from "./period";
+export { default as TimelineRow, type TimelineRowProps } from "./TimelineRow";
+export { default as TimelinePin, type TimelinePinProps } from "./Pin";
+export { default as TimelinePeriod, type TimelinePeriodProps } from "./period";
 export {
   default as TimelineZoomButton,
-  TimelineZoomButtonProps,
+  type TimelineZoomButtonProps,
 } from "./zoom/ZoomButton";

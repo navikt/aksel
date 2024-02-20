@@ -1,9 +1,11 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
+import { Accordion } from "../../accordion";
 import AccordionContent from "../../accordion/AccordionContent";
 import AccordionHeader from "../../accordion/AccordionHeader";
 import AccordionItem from "../../accordion/AccordionItem";
-import { Accordion, Radio, RadioGroup } from "../../index";
+import Radio from "./Radio";
+import RadioGroup from "./RadioGroup";
 
 const meta: Meta<typeof Radio> = {
   title: "ds-react/Radio",

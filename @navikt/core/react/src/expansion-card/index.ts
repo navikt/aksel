@@ -1,5 +1,4 @@
 "use client";
-
 export {
   type ExpansionCardProps,
   default as ExpansionCard,
