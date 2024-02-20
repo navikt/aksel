@@ -81,11 +81,27 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
 // Require onClose if you use open  &  Require either header, aria-labelledby or aria-label
 export type ModalProps = ModalPropsBase &
   (
-    | { open?: never }
     | { open: boolean | undefined; onClose: ModalPropsBase["onClose"] }
+    | { onClose?: ModalPropsBase["onClose"]; open?: never }
   ) &
   (
-    | { header: ModalPropsBase["header"] }
+    | (
+        | {
+            header: ModalPropsBase["header"];
+            "aria-labelledby": string;
+            "aria-label"?: never;
+          }
+        | {
+            header: ModalPropsBase["header"];
+            "aria-label": string;
+            "aria-labelledby"?: never;
+          }
+        | {
+            header: ModalPropsBase["header"];
+            "aria-labelledby"?: never;
+            "aria-label"?: never;
+          }
+      )
     | { "aria-labelledby": string; "aria-label"?: never }
     | { "aria-labelledby"?: never; "aria-label": string }
   );
