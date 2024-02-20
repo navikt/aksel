@@ -55,7 +55,7 @@ export {
 } from "./layout/stack";
 export { Link, type LinkProps } from "./link";
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
-export * from "./list";
+export { List, type ListProps } from "./list";
 export * from "./loader";
 export * from "./modal";
 export * from "./overlays";
