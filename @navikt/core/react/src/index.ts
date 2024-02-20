@@ -57,7 +57,7 @@ export { Link, type LinkProps } from "./link";
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
 export { List, type ListProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
-export * from "./modal";
+export { Modal, type ModalProps } from "./modal";
 export * from "./overlays";
 export * from "./pagination";
 export * from "./panel";
