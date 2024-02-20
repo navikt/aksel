@@ -3,7 +3,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useState } from "react";
 import { Label } from "../typography";
 import { useId } from "../util/hooks";
-import ToggleItem, { ToggleItemProps } from "./ToggleItem";
+import ToggleItem, { ToggleGroupItemProps } from "./ToggleItem";
 import { ToggleGroupContext } from "./context";
 
 export interface ToggleGroupProps
@@ -45,10 +45,10 @@ interface ToggleGroupComponent
     ToggleGroupProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * @see 🏷️ {@link ToggleItemProps}
+   * @see 🏷️ {@link ToggleGroupItemProps}
    */
   Item: React.ForwardRefExoticComponent<
-    ToggleItemProps & React.RefAttributes<HTMLButtonElement>
+    ToggleGroupItemProps & React.RefAttributes<HTMLButtonElement>
   >;
 }
 

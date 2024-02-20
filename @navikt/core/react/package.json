@@ -388,6 +388,16 @@
         "default": "./cjs/timeline/index.js"
       }
     },
+    "./ToggleGroup": {
+      "import": {
+        "types": "./esm/toggle-group/index.d.ts",
+        "default": "./esm/toggle-group/index.js"
+      },
+      "require": {
+        "types": "./cjs/toggle-group/index.d.ts",
+        "default": "./cjs/toggle-group/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
