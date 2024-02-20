@@ -48,12 +48,6 @@ export default {
 
   async viteFinal(config, { configType }) {
     return mergeConfig(config, {
-      onwarn(warning, warn) {
-        if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
-          return;
-        }
-        warn(warning);
-      },
       plugins:
         configType === "PRODUCTION"
           ? [
