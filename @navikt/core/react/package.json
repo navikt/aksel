@@ -38,6 +38,16 @@
         "default": "./cjs/index.js"
       }
     },
+    "./Accordion": {
+      "import": {
+        "types": "./esm/accordion/index.d.ts",
+        "default": "./esm/accordion/index.js"
+      },
+      "require": {
+        "types": "./cjs/accordion/index.d.ts",
+        "default": "./cjs/accordion/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",
