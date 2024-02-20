@@ -308,6 +308,16 @@
         "default": "./cjs/popover/index.js"
       }
     },
+    "./Provider": {
+      "import": {
+        "types": "./esm/provider/index.d.ts",
+        "default": "./esm/provider/index.js"
+      },
+      "require": {
+        "types": "./cjs/provider/index.d.ts",
+        "default": "./cjs/provider/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

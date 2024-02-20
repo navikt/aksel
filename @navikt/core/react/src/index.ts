@@ -61,7 +61,7 @@ export { Modal, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
 export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
-export * from "./provider";
+export { Provider, type ProviderProps } from "./provider";
 export * from "./read-more";
 export * from "./skeleton";
 export * from "./stepper";
