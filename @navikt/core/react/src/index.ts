@@ -64,7 +64,7 @@ export { Portal, type PortalProps } from "./portal";
 export { Provider, type ProviderProps } from "./provider";
 export { ReadMore, type ReadMoreProps } from "./read-more";
 export { Skeleton, type SkeletonProps } from "./skeleton";
-export * from "./stepper";
+export { Stepper, type StepperProps } from "./stepper";
 export * from "./table";
 export * from "./tabs";
 export * from "./tag";

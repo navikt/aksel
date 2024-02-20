@@ -338,6 +338,16 @@
         "default": "./cjs/skeleton/index.js"
       }
     },
+    "./Stepper": {
+      "import": {
+        "types": "./esm/stepper/index.d.ts",
+        "default": "./esm/stepper/index.js"
+      },
+      "require": {
+        "types": "./cjs/stepper/index.d.ts",
+        "default": "./cjs/stepper/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
