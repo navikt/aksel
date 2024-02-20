@@ -398,6 +398,16 @@
         "default": "./cjs/toggle-group/index.js"
       }
     },
+    "./Tooltip": {
+      "import": {
+        "types": "./esm/tooltip/index.d.ts",
+        "default": "./esm/tooltip/index.js"
+      },
+      "require": {
+        "types": "./cjs/tooltip/index.d.ts",
+        "default": "./cjs/tooltip/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

@@ -88,7 +88,7 @@ export {
   type TimelineZoomButtonProps,
 } from "./timeline";
 export { ToggleGroup, type ToggleGroupProps } from "./toggle-group";
-export * from "./tooltip";
+export { Tooltip, type TooltipProps } from "./tooltip";
 export * from "./typography";
 export * from "./util";
 
