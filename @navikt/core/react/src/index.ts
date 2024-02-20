@@ -24,7 +24,6 @@ export {
 } from "./date/monthpicker";
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
-export * from "./form";
 export {
   GuideDefaultIllustration,
   GuidePanel,
@@ -66,7 +65,6 @@ export { Skeleton, type SkeletonProps } from "./skeleton";
 export { Stepper, type StepperProps } from "./stepper";
 export {
   Table,
-  type TableProps,
   type BodyProps,
   type ColumnHeaderProps,
   type DataCellProps,
@@ -75,14 +73,15 @@ export {
   type HeaderProps,
   type RowProps,
   type SortState,
+  type TableProps,
 } from "./table";
 export { Tabs, type TabsProps } from "./tabs";
 export { Tag, type TagProps } from "./tag";
 export {
   Timeline,
-  type TimelineProps,
   type TimelinePeriodProps,
   type TimelinePinProps,
+  type TimelineProps,
   type TimelineRowProps,
   type TimelineZoomButtonProps,
 } from "./timeline";
@@ -90,18 +89,18 @@ export { ToggleGroup, type ToggleGroupProps } from "./toggle-group";
 export { Tooltip, type TooltipProps } from "./tooltip";
 export {
   BodyLong,
-  type BodyLongProps,
   BodyShort,
-  type BodyShortProps,
   Detail,
-  type DetailProps,
   ErrorMessage,
-  type ErrorMessageProps,
   Heading,
-  type HeadingProps,
   Ingress,
-  type IngressProps,
   Label,
+  type BodyLongProps,
+  type BodyShortProps,
+  type DetailProps,
+  type ErrorMessageProps,
+  type HeadingProps,
+  type IngressProps,
   type LabelProps,
 } from "./typography";
 export {
@@ -113,8 +112,36 @@ export {
   useId,
 } from "./util";
 
+export {
+  Checkbox,
+  CheckboxGroup,
+  type CheckboxGroupProps,
+  type CheckboxProps,
+} from "./form/checkbox";
+export {
+  Combobox as UNSAFE_Combobox,
+  type ComboboxProps,
+} from "./form/combobox";
+export {
+  ConfirmationPanel,
+  type ConfirmationPanelProps,
+} from "./form/confirmation-panel";
+export { ErrorSummary, type ErrorSummaryProps } from "./form/error-summary";
+export { Fieldset, type FieldsetProps } from "./form/fieldset";
+export {
+  Radio,
+  RadioGroup,
+  type RadioGroupProps,
+  type RadioProps,
+} from "./form/radio";
+export { Search, type SearchClearEvent, type SearchProps } from "./form/search";
+export { Select, type SelectProps } from "./form/select";
+export { Switch, type SwitchProps } from "./form/switch";
+export { Textarea, type TextareaProps } from "./form/textarea";
+export { TextField, type TextFieldProps } from "./form/textfield";
+
 /**
  * @deprecated
  */
-export { Panel, type PanelProps } from "./panel";
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
+export { Panel, type PanelProps } from "./panel";

@@ -3,7 +3,7 @@ import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
-import { Textarea } from "../index";
+import { Textarea } from "./index";
 
 const meta: Meta<typeof Textarea> = {
   title: "ds-react/Textarea",
