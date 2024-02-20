@@ -77,8 +77,8 @@ export {
   type RowProps,
   type SortState,
 } from "./table";
-export * from "./tabs";
-export * from "./tag";
+export { Tabs, type TabsProps } from "./tabs";
+export { Tag, type TagProps } from "./tag";
 export * from "./timeline";
 export * from "./toggle-group";
 export * from "./tooltip";

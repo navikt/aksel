@@ -358,6 +358,26 @@
         "default": "./cjs/table/index.js"
       }
     },
+    "./Tabs": {
+      "import": {
+        "types": "./esm/tabs/index.d.ts",
+        "default": "./esm/tabs/index.js"
+      },
+      "require": {
+        "types": "./cjs/tabs/index.d.ts",
+        "default": "./cjs/tabs/index.js"
+      }
+    },
+    "./Tag": {
+      "import": {
+        "types": "./esm/tag/index.d.ts",
+        "default": "./esm/tag/index.js"
+      },
+      "require": {
+        "types": "./cjs/tag/index.d.ts",
+        "default": "./cjs/tag/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
