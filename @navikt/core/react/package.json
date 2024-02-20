@@ -158,6 +158,16 @@
         "default": "./cjs/help-text/index.js"
       }
     },
+    "./InternalHeader": {
+      "import": {
+        "types": "./esm/internal-header/index.d.ts",
+        "default": "./esm/internal-header/index.js"
+      },
+      "require": {
+        "types": "./cjs/internal-header/index.d.ts",
+        "default": "./cjs/internal-header/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

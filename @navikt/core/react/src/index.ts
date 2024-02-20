@@ -31,7 +31,14 @@ export {
   type GuidePanelProps,
 } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
-export * from "./internal-header";
+export {
+  InternalHeader,
+  type InternalHeaderButtonProps,
+  type InternalHeaderProps,
+  type InternalHeaderTitleProps,
+  type InternalHeaderUserButtonProps,
+  type InternalHeaderUserProps,
+} from "./internal-header";
 export * from "./layout/bleed";
 export * from "./layout/box";
 export * from "./layout/grid";
