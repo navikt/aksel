@@ -65,7 +65,18 @@ export { Provider, type ProviderProps } from "./provider";
 export { ReadMore, type ReadMoreProps } from "./read-more";
 export { Skeleton, type SkeletonProps } from "./skeleton";
 export { Stepper, type StepperProps } from "./stepper";
-export * from "./table";
+export {
+  Table,
+  type TableProps,
+  type BodyProps,
+  type ColumnHeaderProps,
+  type DataCellProps,
+  type ExpandableRowProps,
+  type HeaderCellProps,
+  type HeaderProps,
+  type RowProps,
+  type SortState,
+} from "./table";
 export * from "./tabs";
 export * from "./tag";
 export * from "./timeline";
