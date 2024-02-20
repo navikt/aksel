@@ -48,6 +48,16 @@
         "default": "./cjs/accordion/index.js"
       }
     },
+    "./Alert": {
+      "import": {
+        "types": "./esm/alert/index.d.ts",
+        "default": "./esm/alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/index.d.ts",
+        "default": "./cjs/alert/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",

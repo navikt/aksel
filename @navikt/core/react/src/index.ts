@@ -1,6 +1,6 @@
 "use client";
 export { Accordion, type AccordionProps } from "./accordion";
-export * from "./alert";
+export { Alert, type AlertProps } from "./alert";
 export * from "./button";
 export * from "./chat";
 export * from "./chips";
