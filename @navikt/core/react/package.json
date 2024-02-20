@@ -408,6 +408,16 @@
         "default": "./cjs/tooltip/index.js"
       }
     },
+    "./Typography": {
+      "import": {
+        "types": "./esm/typography/index.d.ts",
+        "default": "./esm/typography/index.js"
+      },
+      "require": {
+        "types": "./cjs/typography/index.d.ts",
+        "default": "./cjs/typography/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

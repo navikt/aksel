@@ -89,7 +89,22 @@ export {
 } from "./timeline";
 export { ToggleGroup, type ToggleGroupProps } from "./toggle-group";
 export { Tooltip, type TooltipProps } from "./tooltip";
-export * from "./typography";
+export {
+  BodyLong,
+  type BodyLongProps,
+  BodyShort,
+  type BodyShortProps,
+  Detail,
+  type DetailProps,
+  ErrorMessage,
+  type ErrorMessageProps,
+  Heading,
+  type HeadingProps,
+  Ingress,
+  type IngressProps,
+  Label,
+  type LabelProps,
+} from "./typography";
 export * from "./util";
 
 /**
