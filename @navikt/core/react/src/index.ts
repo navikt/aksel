@@ -62,7 +62,7 @@ export { Pagination, type PaginationProps } from "./pagination";
 export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
 export { Provider, type ProviderProps } from "./provider";
-export * from "./read-more";
+export { ReadMore, type ReadMoreProps } from "./read-more";
 export * from "./skeleton";
 export * from "./stepper";
 export * from "./table";

@@ -318,6 +318,16 @@
         "default": "./cjs/provider/index.js"
       }
     },
+    "./ReadMore": {
+      "import": {
+        "types": "./esm/read-more/index.d.ts",
+        "default": "./esm/read-more/index.js"
+      },
+      "require": {
+        "types": "./cjs/read-more/index.d.ts",
+        "default": "./cjs/read-more/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
