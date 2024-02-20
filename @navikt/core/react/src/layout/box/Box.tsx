@@ -145,3 +145,5 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     );
   },
 );
+
+export default Box;

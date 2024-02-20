@@ -1,2 +1,2 @@
 "use client";
-export { Bleed, type BleedProps } from "./Bleed";
+export { default as Bleed, type BleedProps } from "./Bleed";
