@@ -1,3 +1,4 @@
+"use client";
 export type * from "./types";
 export { default as debounce } from "./debounce";
 export * from "./omit";
