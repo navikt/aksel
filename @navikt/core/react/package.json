@@ -328,6 +328,16 @@
         "default": "./cjs/read-more/index.js"
       }
     },
+    "./Skeleton": {
+      "import": {
+        "types": "./esm/skeleton/index.d.ts",
+        "default": "./esm/skeleton/index.js"
+      },
+      "require": {
+        "types": "./cjs/skeleton/index.d.ts",
+        "default": "./cjs/skeleton/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

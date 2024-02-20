@@ -63,7 +63,7 @@ export { Popover, type PopoverProps } from "./popover";
 export { Portal, type PortalProps } from "./portal";
 export { Provider, type ProviderProps } from "./provider";
 export { ReadMore, type ReadMoreProps } from "./read-more";
-export * from "./skeleton";
+export { Skeleton, type SkeletonProps } from "./skeleton";
 export * from "./stepper";
 export * from "./table";
 export * from "./tabs";
