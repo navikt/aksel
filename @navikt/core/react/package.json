@@ -378,6 +378,16 @@
         "default": "./cjs/tag/index.js"
       }
     },
+    "./Timeline": {
+      "import": {
+        "types": "./esm/timeline/index.d.ts",
+        "default": "./esm/timeline/index.js"
+      },
+      "require": {
+        "types": "./cjs/timeline/index.d.ts",
+        "default": "./cjs/timeline/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

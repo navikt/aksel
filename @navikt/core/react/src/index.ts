@@ -79,7 +79,14 @@ export {
 } from "./table";
 export { Tabs, type TabsProps } from "./tabs";
 export { Tag, type TagProps } from "./tag";
-export * from "./timeline";
+export {
+  Timeline,
+  type TimelineProps,
+  type TimelinePeriodProps,
+  type TimelinePinProps,
+  type TimelineRowProps,
+  type TimelineZoomButtonProps,
+} from "./timeline";
 export * from "./toggle-group";
 export * from "./tooltip";
 export * from "./typography";
