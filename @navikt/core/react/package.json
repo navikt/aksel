@@ -68,6 +68,26 @@
         "default": "./cjs/button/index.js"
       }
     },
+    "./Chat": {
+      "import": {
+        "types": "./esm/chat/index.d.ts",
+        "default": "./esm/chat/index.js"
+      },
+      "require": {
+        "types": "./cjs/chat/index.d.ts",
+        "default": "./cjs/chat/index.js"
+      }
+    },
+    "./Chips": {
+      "import": {
+        "types": "./esm/chips/index.d.ts",
+        "default": "./esm/chips/index.js"
+      },
+      "require": {
+        "types": "./cjs/chips/index.d.ts",
+        "default": "./cjs/chips/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",
