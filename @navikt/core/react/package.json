@@ -118,6 +118,16 @@
         "default": "./cjs/date/monthpicker/index.js"
       }
     },
+    "./Dropdown": {
+      "import": {
+        "types": "./esm/dropdown/index.d.ts",
+        "default": "./esm/dropdown/index.js"
+      },
+      "require": {
+        "types": "./cjs/dropdown/index.d.ts",
+        "default": "./cjs/dropdown/index.js"
+      }
+    },
     "./ExpansionCard": {
       "import": {
         "types": "./esm/expansion-card/index.d.ts",

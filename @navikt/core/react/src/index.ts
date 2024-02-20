@@ -22,7 +22,7 @@ export {
   type MonthPickerStandaloneProps,
   type MonthValidationT,
 } from "./date/monthpicker";
-export * from "./dropdown";
+export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export * from "./form";
 export * from "./guide-panel";
