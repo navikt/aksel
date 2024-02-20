@@ -53,7 +53,7 @@ export {
   type VStackProps,
   Spacer,
 } from "./layout/stack";
-export * from "./link";
+export { Link, type LinkProps } from "./link";
 export * from "./link-panel";
 export * from "./list";
 export * from "./loader";

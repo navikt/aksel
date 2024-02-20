@@ -228,6 +228,16 @@
         "default": "./cjs/layout/stack/index.js"
       }
     },
+    "./Link": {
+      "import": {
+        "types": "./esm/link/index.d.ts",
+        "default": "./esm/link/index.js"
+      },
+      "require": {
+        "types": "./cjs/link/index.d.ts",
+        "default": "./cjs/link/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
