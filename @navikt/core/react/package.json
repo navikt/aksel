@@ -428,6 +428,116 @@
         "default": "./cjs/util/index.js"
       }
     },
+    "./Checkbox": {
+      "import": {
+        "types": "./esm/form/checkbox/index.d.ts",
+        "default": "./esm/form/checkbox/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/checkbox/index.d.ts",
+        "default": "./cjs/form/checkbox/index.js"
+      }
+    },
+    "./Radio": {
+      "import": {
+        "types": "./esm/form/radio/index.d.ts",
+        "default": "./esm/form/radio/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/radio/index.d.ts",
+        "default": "./cjs/form/radio/index.js"
+      }
+    },
+    "./Combobox": {
+      "import": {
+        "types": "./esm/form/combobox/index.d.ts",
+        "default": "./esm/form/combobox/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/combobox/index.d.ts",
+        "default": "./cjs/form/combobox/index.js"
+      }
+    },
+    "./ConfirmationPanel": {
+      "import": {
+        "types": "./esm/form/confirmation-panel/index.d.ts",
+        "default": "./esm/form/confirmation-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/confirmation-panel/index.d.ts",
+        "default": "./cjs/form/confirmation-panel/index.js"
+      }
+    },
+    "./ErrorSummary": {
+      "import": {
+        "types": "./esm/form/error-summary/index.d.ts",
+        "default": "./esm/form/error-summary/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/error-summary/index.d.ts",
+        "default": "./cjs/form/error-summary/index.js"
+      }
+    },
+    "./Fieldset": {
+      "import": {
+        "types": "./esm/form/fieldset/index.d.ts",
+        "default": "./esm/form/fieldset/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/fieldset/index.d.ts",
+        "default": "./cjs/form/fieldset/index.js"
+      }
+    },
+    "./Search": {
+      "import": {
+        "types": "./esm/form/search/index.d.ts",
+        "default": "./esm/form/search/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/search/index.d.ts",
+        "default": "./cjs/form/search/index.js"
+      }
+    },
+    "./Select": {
+      "import": {
+        "types": "./esm/form/select/index.d.ts",
+        "default": "./esm/form/select/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/select/index.d.ts",
+        "default": "./cjs/form/select/index.js"
+      }
+    },
+    "./Switch": {
+      "import": {
+        "types": "./esm/form/switch/index.d.ts",
+        "default": "./esm/form/switch/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/switch/index.d.ts",
+        "default": "./cjs/form/switch/index.js"
+      }
+    },
+    "./Textarea": {
+      "import": {
+        "types": "./esm/form/textarea/index.d.ts",
+        "default": "./esm/form/textarea/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/textarea/index.d.ts",
+        "default": "./cjs/form/textarea/index.js"
+      }
+    },
+    "./TextField": {
+      "import": {
+        "types": "./esm/form/textfield/index.d.ts",
+        "default": "./esm/form/textfield/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/textfield/index.d.ts",
+        "default": "./cjs/form/textfield/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
