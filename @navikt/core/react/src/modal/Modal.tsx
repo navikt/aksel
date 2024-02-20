@@ -3,7 +3,7 @@ import cl from "clsx";
 import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { DateContext } from "../date/context";
-import { useProvider } from "../provider";
+import { useProvider } from "../provider/Provider";
 import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
