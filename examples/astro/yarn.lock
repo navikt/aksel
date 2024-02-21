@@ -787,8 +787,8 @@ __metadata:
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
   version: 6.0.0
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=195047&locator=irregular-iron%40workspace%3A."
-  checksum: cd48bd2b0156ba249a7286f030eff0770a94cf953a1d330be742e78346156bd74fd795913a5736d462179a73ea0b816cb2001f916df1ccd3f70686aba923563a
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=c8ef50&locator=irregular-iron%40workspace%3A."
+  checksum: 6a67a242ea79369e86133f93978c59e3eafee62394dc77afdb43abe3e1378b794f9260e2a676733a479b2540ece39178d486a5ccdb568b25947609fd79256d16
   languageName: node
   linkType: hard
 
@@ -801,14 +801,14 @@ __metadata:
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
   version: 6.0.0
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=db371a&locator=irregular-iron%40workspace%3A."
-  checksum: c23757615f28266378fad6f3bd7fd87441c83584c6aad48bd26af0446519acab5f00542ac0d32c7359f6375bddaab9f8ff6401177285472763be6a7df44aaec3
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=5a7bec&locator=irregular-iron%40workspace%3A."
+  checksum: ef58024b82948aafb7a42e2714e913bc1abc555eeee451f41e351b69965e49641c292e7eaff2f16e1f2aec1f3ed0b406944c6c60922d82f385c4598c429e3967
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
   version: 6.0.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=574c1a&locator=irregular-iron%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=10c2cd&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": 0.25.4
     "@navikt/aksel-icons": ^6.0.0
@@ -824,7 +824,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: ed9c23a6f3d2b5676305e3b64332ce829a6f1936e5efb0150ac375fa3a76e21a16ef7a518919598198825508a876a08bb4215e37c2ed1a0695cb819756044a49
+  checksum: 2ff94903969bb3fb179912f3960e3699cd7de58da726e7ce461f71e1919354976133e925393db15fe98af13a6f4fcd488afcfa98d47b2b951ef29a5d2d3c1d4a
   languageName: node
   linkType: hard
 
@@ -3006,9 +3006,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ip@npm:2.0.0"
-  checksum: cfcfac6b873b701996d71ec82a7dd27ba92450afdb421e356f44044ed688df04567344c36cbacea7d01b1c39a4c732dc012570ebe9bebfb06f27314bca625349
+  version: 2.0.1
+  resolution: "ip@npm:2.0.1"
+  checksum: d765c9fd212b8a99023a4cde6a558a054c298d640fec1020567494d257afd78ca77e37126b1a3ef0e053646ced79a816bf50621d38d5e768cdde0431fa3b0d35
   languageName: node
   linkType: hard
 
