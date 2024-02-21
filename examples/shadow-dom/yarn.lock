@@ -229,7 +229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.21.0":
+"@babel/runtime@npm:^7.13.10":
   version: 7.23.8
   resolution: "@babel/runtime@npm:7.23.8"
   dependencies:
@@ -554,46 +554,46 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^5.15.1":
-  version: 5.15.1
-  resolution: "@navikt/aksel-icons@npm:5.15.1"
-  checksum: 082d62346fa9eb1c2d5eb486c55ded4e73ca412943d0f5ee02230e2c25a52d05679da4257ad27faaeb6d4140a7b23fff978bfcaff784db1d68dc724fbc1632b1
+"@navikt/aksel-icons@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@navikt/aksel-icons@npm:6.0.0"
+  checksum: 75da616e916d9cb75fe788fd6a5b14a7f051a879983ed6f442d0d89150613a7f458c46f9aa39ec7a96883ef96a553f204178c2276535e88564e4f82b45ea9f24
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=shadow-dom%40workspace%3A.":
-  version: 5.15.1
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=86380a&locator=shadow-dom%40workspace%3A."
-  checksum: cc58f94cb99974bd3e56f9b7e6288276d487440c9b2355892aa5f1cc2415def2ba093761f4da9da7bb14e18f1e8aafd6673538a773ff033a3bcd38f237072781
+  version: 6.0.0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=5a7bec&locator=shadow-dom%40workspace%3A."
+  checksum: ef58024b82948aafb7a42e2714e913bc1abc555eeee451f41e351b69965e49641c292e7eaff2f16e1f2aec1f3ed0b406944c6c60922d82f385c4598c429e3967
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
-  version: 5.15.1
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=6368a5&locator=shadow-dom%40workspace%3A."
+  version: 6.0.0
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=89dfe2&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.15.1
-    "@navikt/ds-tokens": ^5.15.1
+    "@navikt/aksel-icons": ^6.0.0
+    "@navikt/ds-tokens": ^6.0.0
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
-    clsx: ^1.2.1
-    date-fns: ^2.30.0
-    react-day-picker: 8.3.4
+    clsx: ^2.1.0
+    date-fns: ^3.0.0
+    react-day-picker: 8.10.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: d004d8394b87e7c5029c9de2158482edbe69d2110242dc5eafb292c1b3b1d591df998f126d9e3f3d7d574207783c5d582d50093dbe5d906fa1b80d7ba72fca52
+  checksum: c24b8aeb898aa85d1be7414af205f6b880b7843bddbace346f3cd43035d27fef5311782e07c7523c2ac8c78142e48a39f3c261ef9c548f2bec113d7acc0b054a
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^5.15.1":
-  version: 5.15.1
-  resolution: "@navikt/ds-tokens@npm:5.15.1"
-  checksum: d8b36aa133d227497427764d5efb6e6569808732e1bbf4128354359b10eb3a3aa38e5f851e0060a93a89f544f50995d57d503c2a5be69a2e7b181dba082cc64f
+"@navikt/ds-tokens@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@navikt/ds-tokens@npm:6.0.0"
+  checksum: 2e7f80219056a233a5f56eefb878314d765ab59e401f9da6ac9f5eda12479c7ebf6342cda0e15463424f948bde80e0ffcaeefcc4b46210a4f6c5dd303f944d83
   languageName: node
   linkType: hard
 
@@ -1179,10 +1179,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
+"clsx@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "clsx@npm:2.1.0"
+  checksum: 43fefc29b6b49c9476fbce4f8b1cc75c27b67747738e598e6651dd40d63692135dc60b18fa1c5b78a2a9ba8ae6fd2055a068924b94e20b42039bd53b78b98e1d
   languageName: node
   linkType: hard
 
@@ -1243,12 +1243,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0":
-  version: 2.30.0
-  resolution: "date-fns@npm:2.30.0"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-  checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
+"date-fns@npm:^3.0.0":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1"
+  checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283
   languageName: node
   linkType: hard
 
@@ -1557,9 +1555,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ip@npm:2.0.0"
-  checksum: cfcfac6b873b701996d71ec82a7dd27ba92450afdb421e356f44044ed688df04567344c36cbacea7d01b1c39a4c732dc012570ebe9bebfb06f27314bca625349
+  version: 2.0.1
+  resolution: "ip@npm:2.0.1"
+  checksum: d765c9fd212b8a99023a4cde6a558a054c298d640fec1020567494d257afd78ca77e37126b1a3ef0e053646ced79a816bf50621d38d5e768cdde0431fa3b0d35
   languageName: node
   linkType: hard
 
@@ -1908,13 +1906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.3.4":
-  version: 8.3.4
-  resolution: "react-day-picker@npm:8.3.4"
+"react-day-picker@npm:8.10.0":
+  version: 8.10.0
+  resolution: "react-day-picker@npm:8.10.0"
   peerDependencies:
-    date-fns: ^2.28.0
+    date-fns: ^2.28.0 || ^3.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 789e124e831383fc8219711f0b0610c1541ad283c37c71765ad1012288e4648bca504b1c21646363a9659ccc825d33f8600013fd0d119f9d13b1ff73196a7eaa
+  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
   languageName: node
   linkType: hard
 
