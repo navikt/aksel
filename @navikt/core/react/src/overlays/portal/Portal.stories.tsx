@@ -12,7 +12,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Box background="surface-neutral-subtle" border>
+    <Box background="surface-neutral-subtle">
       <h1>In regular DOM tree</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
@@ -65,7 +65,10 @@ export const CustomPortalRootFromProvider = () => {
             <p>This is mounted to Tree B, while created inside Tree A</p>
           </Portal>
         </Box>
-        <Box background="surface-alt-3-subtle" ref={setPortalContainer}>
+        <Box
+          background="surface-alt-3-subtle"
+          ref={(el) => el && setPortalContainer(el)}
+        >
           <h1>Tree B</h1>
         </Box>
       </Box>
@@ -75,7 +78,7 @@ export const CustomPortalRootFromProvider = () => {
 
 export const AsChild = () => {
   return (
-    <Box background="surface-neutral-subtle" border>
+    <Box background="surface-neutral-subtle">
       <h1>In regular DOM tree</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
