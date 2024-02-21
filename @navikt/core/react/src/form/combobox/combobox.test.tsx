@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { act } from "react-dom/test-utils";
 import { describe, expect, test } from "vitest";
-import { Combobox as UNSAFE_Combobox } from "./index";
+import { UNSAFE_Combobox } from "./index";
 
 const options = [
   "banana",

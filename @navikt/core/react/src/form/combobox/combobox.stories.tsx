@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useId, useMemo, useRef, useState } from "react";
 import { Chips } from "../../chips";
 import { TextField } from "../textfield";
-import { ComboboxProps, Combobox as UNSAFE_Combobox } from "./index";
+import { ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",
