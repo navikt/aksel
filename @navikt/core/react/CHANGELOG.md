@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 6.1.0
+
+### Minor Changes
+
+- Komponenter støtter nå lokal import `@navikt/ds-react/Button`, [Dokumentasjon](https://aksel.nav.no/grunnleggende/kode/nextjs). ([#2745](https://github.com/navikt/aksel/pull/2745))
+
+### Patch Changes
+
+- Modal: Bedre feilmeldinger ved feil bruk av props ([#2744](https://github.com/navikt/aksel/pull/2744))
+
+- Modal: Ikke opphev scroll lock ved lukking av nesta modal (DatePicker) ([#2743](https://github.com/navikt/aksel/pull/2743))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.0
+  - @navikt/aksel-icons@6.1.0
+
 ## 6.0.0
 
 ### Major Changes
