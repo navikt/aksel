@@ -1,6 +1,20 @@
 import React from "react";
 import type { ModalProps } from "./types";
 
+export interface MouseCoordinates {
+  clientX: number;
+  clientY: number;
+}
+
+export const coordsAreInside = (
+  { clientX, clientY }: MouseCoordinates,
+  { left, top, right, bottom }: DOMRect,
+) => {
+  if (clientX < left || clientY < top) return false;
+  if (clientX > right || clientY > bottom) return false;
+  return true;
+};
+
 export function getCloseHandler(
   modalRef: React.RefObject<HTMLDialogElement>,
   header: ModalProps["header"],
