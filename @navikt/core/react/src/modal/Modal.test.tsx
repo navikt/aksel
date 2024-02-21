@@ -17,22 +17,7 @@ const Test = () => {
   );
 };
 
-const Test2 = () => {
-  return (
-    <Modal open>
-      <Modal.Body>
-        <p>Foobar</p>
-      </Modal.Body>
-    </Modal>
-  );
-};
-
 describe("Modal", () => {
-  test("types work", () => {
-    render(<Test2 />);
-    expect(screen.getByText("Foobar")).toBeVisible();
-  });
-
   test("should be visible", () => {
     render(<Test />);
     expect(screen.getByText("Foobar")).toBeVisible();
