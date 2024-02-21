@@ -188,7 +188,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         <ModalContextProvider
           closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
           ref={modalRef}
-          foo="bar"
         >
           {header && (
             <ModalHeader>
@@ -224,9 +223,3 @@ Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
 export default Modal;
-
-// TEST
-
-export const PropTypeTest = () => {
-  return <Modal open>Mangler onClose eller label</Modal>;
-};
