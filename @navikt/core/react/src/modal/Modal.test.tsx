@@ -17,6 +17,17 @@ const Test = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Test2 = () => {
+  return (
+    <Modal open>
+      <Modal.Body>
+        <p>Foobar</p>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
 describe("Modal", () => {
   test("should be visible", () => {
     render(<Test />);

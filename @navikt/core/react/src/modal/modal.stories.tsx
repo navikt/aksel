@@ -362,7 +362,6 @@ const PropTypeTest = () => {
         OK
       </Modal>
 
-      {/* @ts-expect-error - Mangler label */}
       <Modal>Mangler label</Modal>
 
       {/* @ts-expect-error - Mangler onClose eller label */}
