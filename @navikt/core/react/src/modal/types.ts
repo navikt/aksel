@@ -85,23 +85,21 @@ export type ModalProps = ModalPropsBase &
     | { onClose?: ModalPropsBase["onClose"]; open?: never }
   ) &
   (
-    | (
-        | {
-            header: ModalPropsBase["header"];
-            "aria-labelledby": string;
-            "aria-label"?: never;
-          }
-        | {
-            header: ModalPropsBase["header"];
-            "aria-label": string;
-            "aria-labelledby"?: never;
-          }
-        | {
-            header: ModalPropsBase["header"];
-            "aria-labelledby"?: never;
-            "aria-label"?: never;
-          }
-      )
     | { "aria-labelledby": string; "aria-label"?: never }
     | { "aria-labelledby"?: never; "aria-label": string }
+    | {
+        header: ModalPropsBase["header"];
+        "aria-labelledby": string;
+        "aria-label"?: never;
+      }
+    | {
+        header: ModalPropsBase["header"];
+        "aria-label": string;
+        "aria-labelledby"?: never;
+      }
+    | {
+        header: ModalPropsBase["header"];
+        "aria-labelledby"?: never;
+        "aria-label"?: never;
+      }
   );
