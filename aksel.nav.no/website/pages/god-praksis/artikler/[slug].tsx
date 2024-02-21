@@ -2,7 +2,14 @@ import NextLink from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import {
+  BodyLong,
+  BodyShort,
+  Button,
+  Detail,
+  Heading,
+  Label,
+} from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -28,6 +35,7 @@ import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
+import { useAuth } from "../../../components/auth/AuthProvider";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -115,6 +123,8 @@ const Page = ({
   verifiedDate,
   toc,
 }: PageProps["props"]) => {
+  const auth = useAuth();
+
   if (!data) {
     return <NotFotfund />;
   }
@@ -180,6 +190,18 @@ const Page = ({
         id="hovedinnhold"
         className="aksel-artikkel group/aksel bg-surface-subtle pt-4 focus:outline-none"
       >
+        <div>{`Loading: ${auth.loading}`}</div>
+        {!auth.loading && (
+          <div>{`Is authenticated: ${auth.isAuthenticated}`}</div>
+        )}
+        <div>
+          <Button variant="secondary" onClick={auth.login}>
+            Login
+          </Button>
+          <Button variant="secondary" onClick={auth.logout}>
+            Logout
+          </Button>
+        </div>
         <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">

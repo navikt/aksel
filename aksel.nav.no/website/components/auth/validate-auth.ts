@@ -1,47 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next/types";
+import { NextApiRequest } from "next/types";
 import { validateAzureToken } from "@navikt/next-auth-wonderwall";
 import { logger } from "../../config/logger";
-
-/* import { TokenPayload } from "./auth.types"; */
-
-type ApiHandler = (
-  req: NextApiRequest,
-  res: NextApiResponse,
-) => Promise<unknown> | unknown;
-
-export function withAuthenticatedApi(handler: ApiHandler): ApiHandler {
-  return async function withBearerTokenHandler(req, res, ...rest) {
-    /* if (isLocalOrDemo) {
-          return handler(req, res, ...rest)
-      } */
-
-    const bearerToken: string | null | undefined = req.headers["authorization"];
-
-    const validatedToken = bearerToken
-      ? await validateAzureToken(bearerToken)
-      : null;
-
-    if (validatedToken !== "valid") {
-      if (validatedToken.errorType !== "EXPIRED") {
-        logger.error(
-          new Error(
-            `Invalid JWT token found (cause: ${validatedToken.errorType} ${validatedToken.message}, redirecting to login.`,
-            { cause: validatedToken.error },
-          ),
-        );
-      }
-      res.status(401).json({ message: "Access denied" });
-      return;
-    }
-
-    return handler(req, res, ...rest);
-  };
-}
 
 /**
  * Validates the wonderwall token according to nais.io. Should only actually redirect if the token has expired.
  */
-export async function validateWonderwallToken(req: NextApiRequest) {
+export async function validateWonderwallToken(
+  req: NextApiRequest,
+): Promise<boolean> {
   const requestHeaders = req.headers;
 
   /* if (isLocal) {
@@ -52,8 +18,9 @@ export async function validateWonderwallToken(req: NextApiRequest) {
   const bearerToken: string | null | undefined =
     requestHeaders["authorization"];
 
+  console.log("token: ", bearerToken);
   if (!bearerToken) {
-    /* redirect(`/oauth2/login?redirect=${redirectPath}`) */
+    return false;
   }
 
   const validationResult = await validateAzureToken(bearerToken);
@@ -67,9 +34,9 @@ export async function validateWonderwallToken(req: NextApiRequest) {
         ),
       );
     }
-
-    /* redirect(`/oauth2/login?redirect=${redirectPath}`) */
+    return false;
   }
+  return true;
 }
 
 export function getUser(headers: NextApiRequest["headers"]): {
