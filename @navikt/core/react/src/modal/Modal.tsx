@@ -98,8 +98,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
     const dateContext = useContext(DateContext);
-    const modalContext = useModalContext(false);
-    if (modalContext && !dateContext) {
+    const isNested = useModalContext(false) !== undefined;
+    if (isNested && !dateContext) {
       console.error("Modals should not be nested");
     }
 
@@ -130,7 +130,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, portalNode, open]);
 
-    useBodyScrollLock(modalRef, portalNode);
+    useBodyScrollLock(modalRef, portalNode, isNested);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);

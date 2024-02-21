@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Accordion } from "../../accordion";
 import AccordionContent from "../../accordion/AccordionContent";
@@ -16,8 +16,13 @@ const meta: Meta<typeof Radio> = {
       control: { type: "radio" },
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
+
+type Story = StoryObj<typeof Radio>;
 
 export const Default = (props) => {
   const [state, setState] = useState("radio1");
@@ -180,3 +185,45 @@ export const Readonly = () => (
     </RadioGroup>
   </div>
 );
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>Group</h2>
+        <Group />
+      </div>
+      <div>
+        <h2>GroupError</h2>
+        <GroupError />
+      </div>
+      <div>
+        <h2>GroupSmall</h2>
+        <GroupSmall />
+      </div>
+      <div>
+        <h2>GroupDescription</h2>
+        <GroupDescription />
+      </div>
+      <div>
+        <h2>UUDemo</h2>
+        <UUDemo />
+      </div>
+      <div>
+        <h2>TestInsideAccordion</h2>
+        <TestInsideAccordion />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        <Readonly />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

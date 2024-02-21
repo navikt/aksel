@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Link } from "../../link";
 import { ConfirmationPanel } from "./index";
@@ -17,7 +17,12 @@ export default {
       type: "string",
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof ConfirmationPanel>;
 
 const content = (
   <>
@@ -94,4 +99,30 @@ export const Error = () => {
       </ConfirmationPanel>
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        {Default.render?.(props)}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+      <div>
+        <h2>No content</h2>
+        <NoContent />
+      </div>
+      <div>
+        <h2>Error</h2>
+        <Error />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
