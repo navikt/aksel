@@ -25,9 +25,9 @@ export {
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export {
-  GuideDefaultIllustration,
   GuidePanel,
   type GuidePanelProps,
+  GuidePanelDefaultIllustration,
 } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
 export {
@@ -118,10 +118,7 @@ export {
   type CheckboxGroupProps,
   type CheckboxProps,
 } from "./form/checkbox";
-export {
-  Combobox as UNSAFE_Combobox,
-  type ComboboxProps,
-} from "./form/combobox";
+export { UNSAFE_Combobox, type ComboboxProps } from "./form/combobox";
 export {
   ConfirmationPanel,
   type ConfirmationPanelProps,
