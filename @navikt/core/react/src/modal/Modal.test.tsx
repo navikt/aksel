@@ -17,7 +17,6 @@ const Test = () => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Test2 = () => {
   return (
     <Modal open>
@@ -29,6 +28,11 @@ const Test2 = () => {
 };
 
 describe("Modal", () => {
+  test("types work", () => {
+    render(<Test2 />);
+    expect(screen.getByText("Foobar")).toBeVisible();
+  });
+
   test("should be visible", () => {
     render(<Test />);
     expect(screen.getByText("Foobar")).toBeVisible();

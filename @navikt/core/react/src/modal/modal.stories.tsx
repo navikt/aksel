@@ -340,8 +340,7 @@ ChromaticViewportTesting.parameters = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const PropTypeTest = () => {
+export const PropTypeTest = () => {
   return (
     <>
       <Modal header={{ heading: "Label" }}>OK</Modal>
