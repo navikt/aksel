@@ -786,37 +786,37 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
-  version: 5.15.1
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=e285d5&locator=irregular-iron%40workspace%3A."
-  checksum: 9ff883f79f240e5c5c12b0d6cfafa25c3a7f00d9f0a7cd510cc86da75f080909091ffe8d36dd5c48d166b2794ae7a4192ff1106a045f820c1579701c07538755
+  version: 6.0.0
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=195047&locator=irregular-iron%40workspace%3A."
+  checksum: cd48bd2b0156ba249a7286f030eff0770a94cf953a1d330be742e78346156bd74fd795913a5736d462179a73ea0b816cb2001f916df1ccd3f70686aba923563a
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^5.15.1":
-  version: 5.15.1
-  resolution: "@navikt/aksel-icons@npm:5.15.1"
-  checksum: 082d62346fa9eb1c2d5eb486c55ded4e73ca412943d0f5ee02230e2c25a52d05679da4257ad27faaeb6d4140a7b23fff978bfcaff784db1d68dc724fbc1632b1
+"@navikt/aksel-icons@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@navikt/aksel-icons@npm:6.0.0"
+  checksum: 75da616e916d9cb75fe788fd6a5b14a7f051a879983ed6f442d0d89150613a7f458c46f9aa39ec7a96883ef96a553f204178c2276535e88564e4f82b45ea9f24
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
-  version: 5.15.1
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=7b2ad3&locator=irregular-iron%40workspace%3A."
-  checksum: cf23e5768e2897a5d6a08d2d8ec27471042b6dd9cb13a58ed62290268a2615b60e14491a58bb9d3dfd18ad184faf8e3c99b88a783be4c303983df50de2f1903f
+  version: 6.0.0
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=db371a&locator=irregular-iron%40workspace%3A."
+  checksum: c23757615f28266378fad6f3bd7fd87441c83584c6aad48bd26af0446519acab5f00542ac0d32c7359f6375bddaab9f8ff6401177285472763be6a7df44aaec3
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
-  version: 6.0.0-alpha.4
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=a0e994&locator=irregular-iron%40workspace%3A."
+  version: 6.0.0
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=574c1a&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^5.15.1
-    "@navikt/ds-tokens": ^5.15.1
+    "@navikt/aksel-icons": ^6.0.0
+    "@navikt/ds-tokens": ^6.0.0
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     clsx: ^2.1.0
-    date-fns: ^2.30.0 || ^3.0.0
+    date-fns: ^3.0.0
     react-day-picker: 8.10.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
@@ -824,14 +824,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 63681f20bd049f1d6d174036041e2e907c225addef79827f79b06d8714d53d3a3585513326faebd2fd9fea290da4e7e15181a08a83e086f282a15c93d5bde82f
+  checksum: ed9c23a6f3d2b5676305e3b64332ce829a6f1936e5efb0150ac375fa3a76e21a16ef7a518919598198825508a876a08bb4215e37c2ed1a0695cb819756044a49
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^5.15.1":
-  version: 5.15.1
-  resolution: "@navikt/ds-tokens@npm:5.15.1"
-  checksum: d8b36aa133d227497427764d5efb6e6569808732e1bbf4128354359b10eb3a3aa38e5f851e0060a93a89f544f50995d57d503c2a5be69a2e7b181dba082cc64f
+"@navikt/ds-tokens@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@navikt/ds-tokens@npm:6.0.0"
+  checksum: 2e7f80219056a233a5f56eefb878314d765ab59e401f9da6ac9f5eda12479c7ebf6342cda0e15463424f948bde80e0ffcaeefcc4b46210a4f6c5dd303f944d83
   languageName: node
   linkType: hard
 
@@ -2087,7 +2087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0 || ^3.0.0":
+"date-fns@npm:^3.0.0":
   version: 3.3.1
   resolution: "date-fns@npm:3.3.1"
   checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283

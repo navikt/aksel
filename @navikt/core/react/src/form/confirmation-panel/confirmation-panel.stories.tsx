@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Link } from "../../link";
-import { ConfirmationPanel } from "../index";
+import { ConfirmationPanel } from "./index";
 
 export default {
   title: "ds-react/ConfirmationPanel",

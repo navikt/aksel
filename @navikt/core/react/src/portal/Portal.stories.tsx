@@ -1,6 +1,6 @@
 import React from "react";
-import { Box } from "../../layout/box";
-import { Provider } from "../../provider";
+import { Box } from "../layout/box";
+import { Provider } from "../provider";
 import { Portal } from "./Portal";
 
 export default {

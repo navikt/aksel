@@ -1,13 +1,13 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
-import { BodyShort, ErrorMessage, Label } from "../typography";
-import { omit } from "../util";
-import TextareaAutosize from "../util/TextareaAutoSize";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useId } from "../util/hooks";
-import { ReadOnlyIcon } from "./ReadOnlyIcon";
+import { BodyShort, ErrorMessage, Label } from "../../typography";
+import { omit } from "../../util";
+import TextareaAutosize from "../../util/TextareaAutoSize";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { useId } from "../../util/hooks";
+import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
-import { FormFieldProps, useFormField } from "./useFormField";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text

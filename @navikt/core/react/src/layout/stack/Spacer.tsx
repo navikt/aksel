@@ -13,3 +13,5 @@ import React from "react";
  * </HStack>
  */
 export const Spacer = () => <div className="navds-stack__spacer" />;
+
+export default Spacer;

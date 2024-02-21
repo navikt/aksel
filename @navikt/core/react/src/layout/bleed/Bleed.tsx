@@ -125,3 +125,5 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     );
   },
 );
+
+export default Bleed;
