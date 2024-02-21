@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Select } from "../index";
+import Select from "./Select";
 
 export default {
   title: "ds-react/Select",

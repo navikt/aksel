@@ -1,2 +1,2 @@
-export { default as Link } from "./Link";
-export { type LinkProps } from "./Link";
+"use client";
+export { default as Link, type LinkProps } from "./Link";

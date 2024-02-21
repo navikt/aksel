@@ -76,3 +76,5 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       );
     },
   );
+
+export default Stack;

@@ -24,7 +24,7 @@
 
 ### Minor Changes
 
-- SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+- SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ### Patch Changes
 
@@ -1100,7 +1100,7 @@
 
 ### Patch Changes
 
-- CopyButton: Fjernet use-client directive fra komponent. (warning i vite/rollup)
+- CopyButton: Fjernet use client directive fra komponent. (warning i vite/rollup)
 
 ## 3.2.0
 

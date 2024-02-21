@@ -1,11 +1,41 @@
 import Image from "next/image";
-import { StarIcon } from "@navikt/aksel-icons";
-import { Button } from "@navikt/ds-react";
+import { PrinterLargeIcon, StarIcon } from "@navikt/aksel-icons";
+import * as Accordion from "@navikt/ds-react/Accordion";
+import { Button } from "@navikt/ds-react/Button";
+import { Checkbox, CheckboxGroup } from "@navikt/ds-react/Checkbox";
+import { UNSAFE_Combobox } from "@navikt/ds-react/Combobox";
+import {
+  ExpansionCard,
+  ExpansionCardContent,
+  ExpansionCardHeader,
+  ExpansionCardTitle,
+} from "@navikt/ds-react/ExpansionCard";
+import { Select } from "@navikt/ds-react/Select";
+import { Tooltip } from "@navikt/ds-react/Tooltip";
+import { omit } from "@navikt/ds-react/Utils";
+import { ClientComponent } from "./client";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const initialOptions = [
+    "A New Hope",
+    "The Empire Strikes Back",
+    "Return of the Jedi",
+    "The Phantom Menace",
+    "Attack of the Clones",
+    "Revenge of the Sith",
+    "The Force Awakens",
+    "Rogue One",
+    "The Last Jedi",
+    "Solo",
+    "The Rise of Skywalker",
+  ];
+
+  console.log({ omit: omit({ test: "value" }, ["test"]) });
+
   return (
     <main className={styles.main}>
+      <ClientComponent />
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
@@ -29,9 +59,63 @@ export default function Home() {
           </a>
         </div>
       </div>
-
+      <Tooltip content="Skriv ut dokument">
+        <Button icon={<PrinterLargeIcon title="demo knapp" />} />
+      </Tooltip>
+      <Select label="Hvilket land har du bosted i?">
+        <option value="">Velg land</option>
+        <option value="norge">Norge</option>
+        <option value="sverige">Sverige</option>
+        <option value="danmark">Danmark</option>
+      </Select>
       <StarIcon />
       <Button>Knapp</Button>
+      <ExpansionCard aria-label="Demo med bare tittel">
+        <ExpansionCardHeader>
+          <ExpansionCardTitle>Utbetaling av sykepenger</ExpansionCardTitle>
+        </ExpansionCardHeader>
+        <ExpansionCardContent>abc</ExpansionCardContent>
+      </ExpansionCard>
+      <Accordion.Accordion>
+        <Accordion.AccordionItem>
+          <Accordion.AccordionHeader>
+            Til deg som er mellom 62 og 67 år
+          </Accordion.AccordionHeader>
+          <Accordion.AccordionContent>
+            Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
+            hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
+            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+          </Accordion.AccordionContent>
+        </Accordion.AccordionItem>
+        <Accordion.AccordionItem>
+          <Accordion.AccordionHeader>
+            Til deg som har yrkesskade eller yrkessykdom
+          </Accordion.AccordionHeader>
+          <Accordion.AccordionContent>
+            Med yrkesskade mener vi at du har fått en skade som følge av en
+            arbeidsulykke. Vi kan godkjenne en sykdom som yrkessykdom hvis den
+            kommer av skadelig påvirkning fra arbeidsmiljøet.
+          </Accordion.AccordionContent>
+        </Accordion.AccordionItem>
+        <Accordion.AccordionItem>
+          <Accordion.AccordionHeader>
+            Til deg som er helt frisk
+          </Accordion.AccordionHeader>
+          <Accordion.AccordionContent>
+            Da er det lite som trengs å gjøres.
+          </Accordion.AccordionContent>
+        </Accordion.AccordionItem>
+      </Accordion.Accordion>
+      <UNSAFE_Combobox
+        label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
+        options={initialOptions}
+        shouldAutocomplete={true}
+      />
+      <CheckboxGroup legend="Hvor vil du sitte?">
+        <Checkbox value="Bakerst">Bakerst</Checkbox>
+        <Checkbox value="Midterst">Midterst</Checkbox>
+        <Checkbox value="Fremst">Fremst</Checkbox>
+      </CheckboxGroup>
       <div className={styles.center}>
         <Image
           className={styles.logo}
