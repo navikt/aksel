@@ -78,6 +78,8 @@ export const getServerSideProps: GetServerSideProps = async (
 ): Promise<PageProps> => {
   const signedIn = await validateWonderwallToken(context.req.headers);
 
+  const isPreview = context.preview ?? false;
+
   const slug = context.params.slug as string;
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
@@ -87,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       page,
       slug,
-      preview: context.preview ?? false,
+      preview: isPreview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
@@ -100,8 +102,7 @@ export const getServerSideProps: GetServerSideProps = async (
       }),
       signedIn,
     },
-    notFound: !page && !(context.preview ?? false),
-    revalidate: 60,
+    notFound: !page && !isPreview,
   };
 };
 
