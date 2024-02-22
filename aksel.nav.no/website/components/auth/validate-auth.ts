@@ -6,17 +6,14 @@ import { logger } from "../../config/logger";
  * Validates the wonderwall token according to nais.io. Should only actually redirect if the token has expired.
  */
 export async function validateWonderwallToken(
-  req: NextApiRequest,
+  headers: NextApiRequest["headers"],
 ): Promise<boolean> {
-  const requestHeaders = req.headers;
-
   /* if (isLocal) {
       logger.warn('Is running locally, skipping RSC auth')
       return
   } */
 
-  const bearerToken: string | null | undefined =
-    requestHeaders["authorization"];
+  const bearerToken: string | null | undefined = headers["authorization"];
 
   console.log("token: ", bearerToken);
   if (!bearerToken) {

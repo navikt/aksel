@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import {
@@ -15,7 +15,6 @@ import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -35,7 +34,8 @@ import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
-import { useAuth } from "../../../components/auth/AuthProvider";
+import { useAuth } from "../../../components/auth/useAuth";
+import { validateWonderwallToken } from "../../../components/auth/validate-auth";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
@@ -44,6 +44,7 @@ type PageProps = NextPageT<{
   publishDate: string;
   verifiedDate: string;
   toc: TableOfContentsT;
+  signedIn: boolean;
 }>;
 
 export const query = `{
@@ -72,26 +73,12 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("aksel_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.replace("god-praksis/artikler/", ""),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const signedIn = await validateWonderwallToken(context.req.headers);
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
+  const slug = context.params.slug as string;
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
@@ -100,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       page,
       slug,
-      preview,
+      preview: context.preview ?? false,
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
@@ -111,8 +98,9 @@ export const getStaticProps: GetStaticProps = async ({
         content: page?.content,
         type: "aksel_artikkel",
       }),
+      signedIn,
     },
-    notFound: !page && !preview,
+    notFound: !page && !(context.preview ?? false),
     revalidate: 60,
   };
 };
@@ -122,9 +110,9 @@ const Page = ({
   publishDate,
   verifiedDate,
   toc,
+  signedIn,
 }: PageProps["props"]) => {
   const auth = useAuth();
-
   if (!data) {
     return <NotFotfund />;
   }
@@ -190,10 +178,7 @@ const Page = ({
         id="hovedinnhold"
         className="aksel-artikkel group/aksel bg-surface-subtle pt-4 focus:outline-none"
       >
-        <div>{`Loading: ${auth.loading}`}</div>
-        {!auth.loading && (
-          <div>{`Is authenticated: ${auth.isAuthenticated}`}</div>
-        )}
+        <div>{`Is authenticated: ${signedIn}`}</div>
         <div>
           <Button variant="secondary" onClick={auth.login}>
             Login
