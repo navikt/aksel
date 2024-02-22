@@ -567,7 +567,6 @@
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
     "concurrently": "7.2.1",
-    "copyfiles": "^2.4.1",
     "faker": "5.5.3",
     "fast-glob": "3.2.11",
     "jsdom": "24.0.0",
