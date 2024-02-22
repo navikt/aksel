@@ -5,7 +5,6 @@ import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDataContext } from "@/hooks/useSanityData";
 import { useAmplitudeInit } from "@/logging";
 import { BaseSEO } from "@/web/seo/BaseSEO";
-import { AuthProvider } from "../components/auth/AuthProvider";
 import "../components/styles/index.css";
 
 function App({ Component, pageProps, router }: AppProps) {
@@ -37,11 +36,9 @@ function App({ Component, pageProps, router }: AppProps) {
         value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}
       >
         {useGlobalStyles ? (
-          <AuthProvider>
-            <div className="globalstyles">
-              <Component {...pageProps} />
-            </div>
-          </AuthProvider>
+          <div className="globalstyles">
+            <Component {...pageProps} />
+          </div>
         ) : (
           <Component {...pageProps} />
         )}
