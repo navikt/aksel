@@ -8,6 +8,7 @@
       "@/types": ["./components/types/index.ts"],
       "@/sanity-block": ["./components/website-modules/SanityBlockContent.tsx"],
       "@/hooks/*": ["./components/hooks/*"],
+      "@/auth/*": ["./components/auth/*"],
       "@/preview": ["./components/website-modules/preview/WithPreview.tsx"],
       "@/logging": ["./components/logging/index.ts"],
       "@/utils": ["./components/utils/index.ts"],
