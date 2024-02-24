@@ -8,10 +8,10 @@ import { logger } from "../../config/logger";
 export async function validateWonderwallToken(
   headers: NextApiRequest["headers"],
 ): Promise<boolean> {
-  /* if (isLocal) {
-      logger.warn('Is running locally, skipping RSC auth')
-      return
-  } */
+  if (process.env.NODE_ENV !== "production") {
+    logger.info("Is running locally, skipping RSC auth");
+    return;
+  }
 
   const bearerToken: string | null | undefined = headers["authorization"];
 
