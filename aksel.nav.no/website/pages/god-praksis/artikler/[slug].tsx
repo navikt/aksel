@@ -10,6 +10,7 @@ import {
   Heading,
   Label,
 } from "@navikt/ds-react";
+import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -35,7 +36,6 @@ import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
 import { useAuth } from "../../../components/auth/useAuth";
-import { validateWonderwallToken } from "../../../components/auth/validate-auth";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
