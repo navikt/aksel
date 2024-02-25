@@ -24,14 +24,9 @@ jobs:
         with:
           node-version: "20"
           cache: yarn
-
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-test-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test
+      - name: set-env for yarn install to @navikt scope
+        shell: bash
+        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: yarn
