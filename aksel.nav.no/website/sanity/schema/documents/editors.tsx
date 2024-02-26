@@ -29,6 +29,7 @@ export const Editors = defineType({
     }),
     defineField({
       title: "Epostaddresse",
+      description: "Bruk NAV-epostaddresse.",
       name: "email",
       type: "string",
       initialValue: (_, { currentUser }) => {
