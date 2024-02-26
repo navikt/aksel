@@ -6,7 +6,6 @@ import {
   getPublishedId,
   useClient,
   useCurrentUser,
-  useFormValue,
   useSchema,
 } from "sanity";
 import useSWR from "swr";
@@ -161,17 +160,17 @@ const DraftList = ({ data }: { data: any[] }) => {
 
 export const EditorPage = () => {
   const user = useCurrentUser();
-  const userId = useFormValue([`user_id`]) as { current?: string };
 
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(
-    `*[count((contributors[]->user_id.current)[@ == "${userId?.current}"]) > 0]`,
+    `*[count((contributors[]->{email, alt_email})[@.email == "${user.email}" || @.alt_email == "${user.email}"]) > 0]`,
     (query) => client.fetch(query),
   );
 
   if (error || !user) {
     return <div>Feilet lasting av bruker...</div>;
   }
+
   if (!data) {
     return (
       <div className="mx-auto mt-24">

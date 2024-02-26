@@ -21,7 +21,11 @@ export function EditorPreview(props) {
 
   const anonym = props?.subtitle?.includes("Anonym");
   const currentUser =
-    editor && editor.find((x) => x?.user_id?.current === user?.id);
+    editor &&
+    editor.find(
+      (x) => x?.email === user?.email || x?.alt_email === user?.email,
+    );
+
   return (
     <div className="flex shrink-0 items-center justify-between">
       {props.renderDefault({

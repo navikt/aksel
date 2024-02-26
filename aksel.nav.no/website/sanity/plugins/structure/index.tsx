@@ -69,10 +69,14 @@ export const structure: StructureResolver = async (
   const ids = await getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(`*[_type == "editor"]{
       _id,
-      user_id
+      email,
+      alt_email
     }`);
 
-  const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
+  const editor = ids.find(
+    ({ email, alt_email }) =>
+      email === currentUser.email || alt_email === currentUser.email,
+  );
   const adminOrDev = currentUser.roles.find((x) =>
     ["developer", "administrator"].includes(x.name),
   );
@@ -82,8 +86,8 @@ export const structure: StructureResolver = async (
 
   const outdated = (
     await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-      `*[$id in contributors[]->user_id.current]{_id, updateInfo}`,
-      { id: currentUser?.id },
+      `*[$email in contributors[]->email || $email in contributors[]->alt_email]{_id, updateInfo}`,
+      { email: currentUser?.email },
     )
   ).filter((x) => isAfter(x.updateInfo?.lastVerified));
 
