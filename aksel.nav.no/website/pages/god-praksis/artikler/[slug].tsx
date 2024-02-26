@@ -1,8 +1,9 @@
 import NextLink from "next/link";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import { getAuthUser } from "@/auth/getAuthUser";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
@@ -38,6 +39,10 @@ type PageProps = NextPageT<{
   verifiedDate: string;
   toc: TableOfContentsT;
   signedIn: boolean;
+  user: {
+    name: string;
+    email: string;
+  };
 }>;
 
 export const query = `{
@@ -71,6 +76,8 @@ export const getServerSideProps: GetServerSideProps = async (
 ): Promise<PageProps> => {
   const signedIn = await validateWonderwallToken(context.req.headers);
 
+  const user = getAuthUser(context.req.headers);
+
   const isPreview = context.preview ?? false;
 
   const slug = context.params.slug as string;
@@ -94,6 +101,7 @@ export const getServerSideProps: GetServerSideProps = async (
         type: "aksel_artikkel",
       }),
       signedIn,
+      user,
     },
     notFound: !page && !isPreview,
   };
@@ -104,7 +112,11 @@ const Page = ({
   publishDate,
   verifiedDate,
   toc,
+  signedIn,
+  user,
 }: PageProps["props"]) => {
+  const [sentFeedback, setSentFeedback] = useState(false);
+
   if (!data) {
     return <NotFotfund />;
   }
@@ -252,9 +264,23 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  <Feedback />
-                  <Feedback state="loggedIn" />
-                  <Feedback state="feedbackSent" />
+                  {signedIn ? (
+                    sentFeedback ? (
+                      <Feedback
+                        username={user.name}
+                        state="feedbackSent"
+                        setSentFeedback={setSentFeedback}
+                      />
+                    ) : (
+                      <Feedback
+                        username={user.name}
+                        state="loggedIn"
+                        setSentFeedback={setSentFeedback}
+                      />
+                    )
+                  ) : (
+                    <Feedback />
+                  )}
                 </div>
               </div>
             </div>

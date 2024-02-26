@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -14,11 +14,17 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
-const FeedbackForm = ({ state }: { state: Props["state"] }) => {
+const FeedbackForm = ({
+  state,
+  username,
+  setSentFeedback,
+}: {
+  state: Props["state"];
+  username: string;
+  setSentFeedback?: Dispatch<SetStateAction<boolean>>;
+}) => {
   let form: React.ReactNode = null;
-  const user = "Ola Nordmann";
-
-  console.log(user || "no user");
+  const _username = username || "Ukjent bruker";
 
   switch (state) {
     case "feedbackSent":
@@ -28,7 +34,12 @@ const FeedbackForm = ({ state }: { state: Props["state"] }) => {
             Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
             relevant. Takk skal du ha!
           </BodyLong>
-          <Button className="h-11 bg-deepblue-600 hover:bg-deepblue-700">
+          <Button
+            onClick={() => {
+              setSentFeedback?.(false);
+            }}
+            className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          >
             Nytt innspill
           </Button>
         </>
@@ -45,7 +56,7 @@ const FeedbackForm = ({ state }: { state: Props["state"] }) => {
           <VStack gap="4">
             <HStack gap="2">
               <PersonIcon fontSize="1.5rem" />
-              <BodyShort>{user || "Ukjent bruker"}</BodyShort>
+              <BodyShort>{_username}</BodyShort>
               <BodyShort>
                 (<Link href="#">logg ut</Link>)
               </BodyShort>
@@ -57,7 +68,13 @@ const FeedbackForm = ({ state }: { state: Props["state"] }) => {
               maxLength={500}
             ></Textarea>
           </VStack>
-          <Button className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700">
+          <Button
+            onClick={() => {
+              setSentFeedback?.(true);
+              // send to API route
+            }}
+            className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          >
             Send inn
           </Button>
         </>
@@ -82,11 +99,24 @@ const FeedbackForm = ({ state }: { state: Props["state"] }) => {
   return form;
 };
 
-type Props = {
-  state?: "public" | "loggedIn" | "feedbackSent";
-};
+type Props =
+  | {
+      state?: "public";
+      username?: never;
+      setSentFeedback?: never;
+    }
+  | {
+      state: "loggedIn";
+      username: string;
+      setSentFeedback: Dispatch<SetStateAction<boolean>>;
+    }
+  | {
+      state: "feedbackSent";
+      username: string;
+      setSentFeedback: Dispatch<SetStateAction<boolean>>;
+    };
 
-export const Feedback = ({ state }: Props) => {
+export const Feedback = ({ state, username, setSentFeedback }: Props) => {
   const _state = state || "public";
   return (
     <Box
@@ -102,7 +132,11 @@ export const Feedback = ({ state }: Props) => {
               ? "Innspill sendt"
               : "Innspill til artikkelen"}
           </Heading>
-          <FeedbackForm state={_state} />
+          <FeedbackForm
+            username={username}
+            state={_state}
+            setSentFeedback={setSentFeedback}
+          />
         </div>
         <div className="relative translate-y-3">
           <svg
