@@ -31,6 +31,9 @@ export const Editors = defineType({
       title: "Epostaddresse",
       name: "email",
       type: "string",
+      initialValue: (_, { currentUser }) => {
+        return currentUser.email;
+      },
       validation: (Rule) =>
         Rule.required()
           .email()
@@ -60,6 +63,9 @@ export const Editors = defineType({
       hidden: ({ currentUser, parent }) => {
         const { roles, email } = currentUser;
 
+        if (!parent?.email || !parent?.title) {
+          return false;
+        }
         if (
           roles.find(({ name }) =>
             ["developer", "administrator"].includes(name),

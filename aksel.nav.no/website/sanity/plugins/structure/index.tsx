@@ -66,14 +66,14 @@ export const structure: StructureResolver = async (
   S,
   { currentUser, getClient },
 ) => {
-  const ids = await getClient({ apiVersion: SANITY_API_VERSION })
+  const editors = await getClient({ apiVersion: SANITY_API_VERSION })
     .fetch(`*[_type == "editor"]{
       _id,
       email,
       alt_email
     }`);
 
-  const editor = ids.find(
+  const editor = editors.find(
     ({ email, alt_email }) =>
       email === currentUser.email || alt_email === currentUser.email,
   );
@@ -223,6 +223,15 @@ export const structure: StructureResolver = async (
               ...Panes("aksel_blogg", [...bloggKategorier], S),
             ]),
         ),
+      S.divider(),
+      S.listItem()
+        .title("Forfattere")
+        .child(
+          S.documentList()
+            .title("Forfattere")
+            .filter(`_type == 'editor'`)
+            .apiVersion(SANITY_API_VERSION),
+        ),
       ...(adminOrDev
         ? [
             S.divider(),
@@ -248,15 +257,6 @@ export const structure: StructureResolver = async (
                             ...S.documentTypeList(
                               "aksel_standalone"
                             ).getMenuItems(),
-                          ]) */
-                    ),
-                    S.listItem().title("Forfattere").child(
-                      S.documentList()
-                        .title("Forfattere")
-                        .filter(`_type == 'editor'`)
-                        .apiVersion(SANITY_API_VERSION),
-                      /* .menuItems([
-                            ...S.documentTypeList("editor").getMenuItems(),
                           ]) */
                     ),
                     S.listItem().title("Redirects").child(
