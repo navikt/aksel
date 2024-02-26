@@ -1,10 +1,16 @@
 import { NextApiRequest } from "next/types";
 
 export function getAuthUser(headers: NextApiRequest["headers"]): {
-  name: string;
-  email: string;
+  name: string | null;
+  email: string | null;
 } {
   const token = getToken(headers);
+  if (!token) {
+    return {
+      name: null,
+      email: null,
+    };
+  }
   const jwt = JSON.parse(
     Buffer.from(token.split(".")[1], "base64").toString("utf8"),
   );

@@ -40,8 +40,8 @@ type PageProps = NextPageT<{
   toc: TableOfContentsT;
   signedIn: boolean;
   user: {
-    name: string;
-    email: string;
+    name: string | null;
+    email: string | null;
   };
 }>;
 
@@ -76,7 +76,10 @@ export const getServerSideProps: GetServerSideProps = async (
 ): Promise<PageProps> => {
   const signedIn = await validateWonderwallToken(context.req.headers);
 
-  const user = getAuthUser(context.req.headers);
+  // TODO: why does the typing not work here? shouldn't have to specify it
+  const user: { name: string | null; email: string | null } = getAuthUser(
+    context.req.headers,
+  );
 
   const isPreview = context.preview ?? false;
 
