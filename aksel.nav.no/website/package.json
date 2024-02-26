@@ -8,7 +8,7 @@
     "dev": "next | pino-pretty",
     "build:old": "next build",
     "build": "yarn workspace playroom build:playroom && next build && yarn update:searchindex && yarn update:rss && yarn cp:assets",
-    "start": "cd .next/standalone/aksel.nav.no/website && node server.js",
+    "start": "cd .next/standalone/aksel.nav.no/website && cross-env PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "cp:playroom": "cross-env mkdir -p public/sandbox && cross-env cp -R ../playroom/dist/* public/sandbox",
     "cp:static": "cross-env cp -R .next/static .next/standalone/aksel.nav.no/website/.next/static",
     "cp:public": "cross-env cp -R public .next/standalone/aksel.nav.no/website/",
