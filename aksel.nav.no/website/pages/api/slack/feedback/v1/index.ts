@@ -1,8 +1,9 @@
-import { UsersListResponse, WebClient } from "@slack/web-api";
+import { WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { groq } from "next-sanity";
+import "server-only";
 import { z } from "zod";
 import { getClient } from "@/sanity/client.server";
+import { fetchSlackMembers, findUserByEmail } from "@/slack";
 import { logger } from "../../../../../config/logger";
 
 const requestBodySchema = z.object({
@@ -58,7 +59,7 @@ export default async function sendSlackbotFeedback(
   }
 
   const document = await getClient().fetch(
-    groq`*[_id == $id][0]{
+    `*[_id == $id][0]{
       "id": _id,
       "title": heading,
       "editors": contributors[]->email,
@@ -76,21 +77,21 @@ export default async function sendSlackbotFeedback(
     response.status(400).json({ message: "No sanity-document found id" });
   }
 
-  const slackUsers: UsersListResponse["members"] | null = await client.users
-    .list({})
-    .then((r) => (r.ok ? r.members ?? [] : []))
-    .catch((e) => {
-      logger.error(
-        `Error extracting members from slack in slackbot feedback: ${e}`,
-      );
-      return null;
-    });
+  const slackMembers = await fetchSlackMembers();
 
-  const senderSlackUser = slackUsers?.find(
-    (m) => lowercase(m.profile?.email) === lowercase(tempSender.email),
+  if (slackMembers.ok === false) {
+    logger.error(
+      `Error extracting members from slack in slackbot feedback: ${slackMembers.error}`,
+    );
+    return;
+  }
+
+  const senderSlackUser = findUserByEmail(
+    tempSender.email,
+    slackMembers.members,
   );
 
-  let recievingUsers: Member[] | null = slackUsers
+  let recievingUsers: Member[] | null = slackMembers.members
     .filter((m) =>
       document.editors.map(lowercase).includes(lowercase(m.profile?.email)),
     )
