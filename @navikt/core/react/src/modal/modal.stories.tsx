@@ -94,42 +94,6 @@ export const WithUseRef: StoryFn = () => {
 };
 WithUseRef.storyName = "With useRef";
 
-export const Test: StoryFn = () => {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  return (
-    <div>
-      <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
-      <Modal ref={ref} header={{ heading: "Tittel" }}>
-        <Modal.Body>
-          <BodyLong>Dette er hovedinnholdet i modalen.</BodyLong>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button>Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="tertiary">Tertiary</Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
-  );
-};
-
-export const NativeDialogTest = () => {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  return (
-    <div>
-      <button onClick={() => ref.current?.showModal()}>Åpne modal</button>
-      <dialog ref={ref} aria-label="Native dialog">
-        <div>
-          <p>Dette er en test av native dialog.</p>
-          <button onClick={() => ref.current?.close()}>Lukk</button>
-        </div>
-      </dialog>
-    </div>
-  );
-};
-
 export const WithUseState: StoryFn = () => {
   const [open, setOpen] = useState(true);
   const [open2, setOpen2] = useState(false);

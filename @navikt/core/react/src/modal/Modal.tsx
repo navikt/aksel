@@ -114,7 +114,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
       // We have to use JS because it doesn't work to set it with a prop (React bug?)
       // Currently doesn't seem to work in Chrome. See also Tooltip.tsx
-      //if (modalRef.current && portalNode) modalRef.current.autofocus = true; // TODO TEMP
+      if (modalRef.current && portalNode) modalRef.current.autofocus = true;
     }, [modalRef, portalNode]);
 
     useEffect(() => {
