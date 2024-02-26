@@ -13,6 +13,7 @@ import {
   Textarea,
   VStack,
 } from "@navikt/ds-react";
+import { useAuth } from "@/auth/useAuth";
 
 const FeedbackForm = ({
   state,
@@ -23,6 +24,8 @@ const FeedbackForm = ({
   username: string;
   setSentFeedback?: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const { login, logout } = useAuth();
+
   let form: React.ReactNode = null;
   const _username = username || "Ukjent bruker";
 
@@ -58,7 +61,16 @@ const FeedbackForm = ({
               <PersonIcon fontSize="1.5rem" />
               <BodyShort>{_username}</BodyShort>
               <BodyShort>
-                (<Link href="#">logg ut</Link>)
+                (
+                <Link
+                  onClick={() => {
+                    logout();
+                  }}
+                  href="#"
+                >
+                  logg ut
+                </Link>
+                )
               </BodyShort>
             </HStack>
             <Checkbox>skjul navnet mitt</Checkbox>
@@ -88,7 +100,12 @@ const FeedbackForm = ({
           <BodyLong className="mb-6">
             Logg inn med NAV SSO for å gi innspill til artikkelen
           </BodyLong>
-          <Button className="h-11 bg-deepblue-600 hover:bg-deepblue-700">
+          <Button
+            onClick={() => {
+              login();
+            }}
+            className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          >
             Logg inn med NAV SSO
           </Button>
         </>
