@@ -10,7 +10,7 @@ export async function validateWonderwallToken(
 ): Promise<boolean> {
   if (process.env.NODE_ENV !== "production") {
     logger.info("Is running locally, skipping RSC auth");
-    return;
+    return true;
   }
 
   const bearerToken: string | null | undefined = headers["authorization"];
