@@ -102,7 +102,7 @@ const FeedbackForm = ({
           </BodyLong>
           <Button
             onClick={() => {
-              login();
+              login("#innspill-form");
             }}
             className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
@@ -144,7 +144,7 @@ export const Feedback = ({ state, username, setSentFeedback }: Props) => {
     >
       <HGrid columns="7fr 1fr" gap="5">
         <div>
-          <Heading size="small" className="mb-1">
+          <Heading id="innspill-form" size="small" className="mb-1">
             {_state === "feedbackSent"
               ? "Innspill sendt"
               : "Innspill til artikkelen"}

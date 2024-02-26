@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 export const useAuth = () => {
   const router = useRouter();
 
-  const login = async () => {
-    router.push(`/oauth2/login?redirect=${router.asPath}`, undefined, {
+  const login = async (anchor = "") => {
+    router.push(`/oauth2/login?redirect=${router.asPath}${anchor}`, undefined, {
       shallow: true,
     });
   };
