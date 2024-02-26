@@ -9,7 +9,7 @@
     "build:old": "next build",
     "build": "yarn workspace playroom build:playroom && next build && yarn update:searchindex && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
-    "cp:playroom": "mkdir -p public/sandbox && cp -R ../playroom/dist/* public/sandbox",
+    "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
     "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static",
