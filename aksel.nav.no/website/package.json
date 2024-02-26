@@ -14,7 +14,7 @@
     "cp:public": "cross-env cp -R public .next/standalone/aksel.nav.no/website/",
     "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static",
     "update:searchindex": "ts-node --project tsconfig.json ./scripts/create-index",
-    "e2e": "yarn build && yarn start-server-and-test start http://localhost:3000 playwright",
+    "e2e": "yarn build && yarn start-server-and-test 'yarn start' http://localhost:3000 'yarn playwright'",
     "e2e:full": "yarn build && ts-node ./e2e/genUrls.ts && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci-full": "ts-node ./e2e/genUrls.ts && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "update:rss": "ts-node --project tsconfig.tsnode.json ./scripts/generate-rss-feed",
@@ -88,7 +88,7 @@
     "postcss-loader": "7.0.0",
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
-    "start-server-and-test": "^1.14.0",
+    "start-server-and-test": "^2.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"

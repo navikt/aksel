@@ -9493,13 +9493,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.27.2":
-  version: 0.27.2
-  resolution: "axios@npm:0.27.2"
+"axios@npm:^1.6.1":
+  version: 1.6.7
+  resolution: "axios@npm:1.6.7"
   dependencies:
-    follow-redirects: ^1.14.9
+    follow-redirects: ^1.15.4
     form-data: ^4.0.0
-  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
+    proxy-from-env: ^1.1.0
+  checksum: 87d4d429927d09942771f3b3a6c13580c183e31d7be0ee12f09be6d5655304996bb033d85e54be81606f4e89684df43be7bf52d14becb73a12727bf33298a082
   languageName: node
   linkType: hard
 
@@ -14375,7 +14376,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.4":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.4":
   version: 1.15.5
   resolution: "follow-redirects@npm:1.15.5"
   peerDependenciesMeta:
@@ -17125,7 +17126,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"joi@npm:^17.7.0":
+"joi@npm:^17.11.0":
   version: 17.12.2
   resolution: "joi@npm:17.12.2"
   dependencies:
@@ -18636,7 +18637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.7":
+"minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 75a6d645fb122dad29c06a7597bddea977258957ed88d7a6df59b5cd3fe4a527e253e9bbf2e783e4b73657f9098b96a5fe96ab8a113655d4109108577ecf85b0
@@ -24495,9 +24496,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"start-server-and-test@npm:^1.14.0":
-  version: 1.15.4
-  resolution: "start-server-and-test@npm:1.15.4"
+"start-server-and-test@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "start-server-and-test@npm:2.0.3"
   dependencies:
     arg: ^5.0.2
     bluebird: 3.7.2
@@ -24506,12 +24507,12 @@ __metadata:
     execa: 5.1.1
     lazy-ass: 1.6.0
     ps-tree: 1.2.0
-    wait-on: 7.0.1
+    wait-on: 7.2.0
   bin:
     server-test: src/bin/start.js
     start-server-and-test: src/bin/start.js
     start-test: src/bin/start.js
-  checksum: 0df9a4710ea45ddb1a9f719e0865faa8e26a973beff693dfe244ae2d914bfc6eed4d2db8529cdcad3d53658c4655356e5aca3520485a3ef4d9d9f320956b0e7d
+  checksum: 8e2844a1fab631e1ad83e58d903e8425cd6d2c2cbbc79f71b72a15dbc7d90e6e340bb9133c910d8f3da8b55c737cf579afb581b4551ae7a2392450a78180fa53
   languageName: node
   linkType: hard
 
@@ -27049,18 +27050,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wait-on@npm:7.0.1":
-  version: 7.0.1
-  resolution: "wait-on@npm:7.0.1"
+"wait-on@npm:7.2.0":
+  version: 7.2.0
+  resolution: "wait-on@npm:7.2.0"
   dependencies:
-    axios: ^0.27.2
-    joi: ^17.7.0
+    axios: ^1.6.1
+    joi: ^17.11.0
     lodash: ^4.17.21
-    minimist: ^1.2.7
-    rxjs: ^7.8.0
+    minimist: ^1.2.8
+    rxjs: ^7.8.1
   bin:
     wait-on: bin/wait-on
-  checksum: 1e8a17d8ee6436f71d3ab82781ce31267481fcd7bbccde49b0f8124871e6e40a1acac3401f04f775ba6203853a5813352fa131620fc139914351f3b2894d573f
+  checksum: 69ec1432bb4479363fdd71f2f3f501a98aa356a562781108a4a89ef8fdf1e3d5fd0c2fd56c4cc5902abbb662065f1f22d4e436a1e6fc9331ce8b575eb023325e
   languageName: node
   linkType: hard
 
@@ -27360,7 +27361,7 @@ __metadata:
     sanity-plugin-utils: ^1.6.4
     sharp: 0.32.6
     showdown: ^2.1.0
-    start-server-and-test: ^1.14.0
+    start-server-and-test: ^2.0.3
     styled-components: ^6.0.0
     swr: ^1.1.2
     tailwindcss: ^3.3.3
