@@ -20,7 +20,7 @@ export const CodeSandbox = ({ code }: { code: string }) => {
   const parameters = getParameters({
     files: {
       "package.json": {
-        // @ts-expect-error
+        // @ts-expect-error https://github.com/codesandbox/codesandbox-importers/issues/137
         content: {
           dependencies: {
             react: "latest",
