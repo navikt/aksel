@@ -6,6 +6,6 @@ export function findUserByEmail(
   members: UsersListResponse["members"],
 ): UsersListResponse["members"][0] | undefined {
   return members.find(
-    (m) => m.profile?.email.toLowerCase() === email.toLowerCase(),
+    (m) => m.profile?.email?.toLowerCase() === email.toLowerCase(),
   );
 }

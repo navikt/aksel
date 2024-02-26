@@ -1,5 +1,11 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { findUserByEmail } from "../find-user";
+
+vi.mock("server-only", () => {
+  return {
+    // mock server-only module
+  };
+});
 
 test("findUserByEmail returns user when user with given email exists", () => {
   const members = [
