@@ -25,6 +25,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { Feedback } from "@/web/Feedback";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
@@ -251,6 +252,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
+                  <Feedback />
                 </div>
               </div>
             </div>
