@@ -29,14 +29,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               >
                 Aa
               </div>
-              <dl className="grid h-full">
-                <dt className="inline-flex items-center gap-2">
-                  <CopyButton
-                    copyText={x.name}
-                    text={sanitizeName(x.name.replace("text-", ""))}
-                    size="small"
-                    iconPosition="right"
-                  />
+              <dl>
+                <dt className="inline-flex items-start gap-1 text-medium">
+                  <span className="flex min-h-8 items-center">
+                    {sanitizeName(x.name.replace("text-", ""))}
+                  </span>
+                  <CopyButton copyText={x.name} size="small" />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -80,14 +78,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   }}
                 />
               </div>
-              <dl className="grid h-full">
-                <dt className="inline-flex items-center gap-2">
-                  <CopyButton
-                    text={sanitizeName(x.name.replace("icon-", ""))}
-                    copyText={x.name}
-                    size="small"
-                    iconPosition="right"
-                  />
+              <dl>
+                <dt className="inline-flex items-start gap-1 text-medium">
+                  <span className="flex min-h-8 items-center">
+                    {sanitizeName(x.name.replace("icon-", ""))}
+                  </span>
+                  <CopyButton copyText={x.name} size="small" />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -123,14 +119,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 }}
                 className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
               />
-              <dl className="grid h-full">
-                <dt className="inline-flex items-center gap-2">
-                  <CopyButton
-                    text={sanitizeName(x.name.replace("border-", ""))}
-                    copyText={x.name}
-                    size="small"
-                    iconPosition="right"
-                  />
+              <dl>
+                <dt className="inline-flex items-start gap-1 text-medium">
+                  <span className="flex min-h-8 items-center">
+                    {sanitizeName(x.name.replace("border-", ""))}
+                  </span>
+                  <CopyButton copyText={x.name} size="small" />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -195,14 +189,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   }}
                 />
               </div>
-              <dl className="grid h-full">
-                <dt className="inline-flex items-center gap-2">
-                  <CopyButton
-                    text={sanitizeName(x.name.replace("surface-", ""))}
-                    copyText={x.name}
-                    size="small"
-                    iconPosition="right"
-                  />
+              <dl>
+                <dt className="inline-flex items-start gap-1 text-medium">
+                  <span className="flex min-h-8 items-center">
+                    {sanitizeName(x.name.replace("surface-", ""))}
+                  </span>
+                  <CopyButton copyText={x.name} size="small" />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -249,14 +241,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   style={{ backgroundColor: `var(${x.name})` }}
                 />
               </div>
-              <dl className="grid h-full">
-                <dt className="inline-flex items-center gap-2">
-                  <CopyButton
-                    text={sanitizeName(x.name.replace("surface-", ""))}
-                    copyText={x.name}
-                    size="small"
-                    iconPosition="right"
-                  />
+              <dl>
+                <dt className="inline-flex items-start gap-1 text-medium">
+                  <span className="flex min-h-8 items-center">
+                    {sanitizeName(x.name.replace("surface-", ""))}
+                  </span>
+                  <CopyButton copyText={x.name} size="small" />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -294,14 +284,12 @@ export const SemanticView = ({ cat }: { cat: string }) => {
             >
               <div className="component-checkered-bg z-[-1] h-16 w-16" />
             </div>
-            <dl className="grid h-full">
-              <dt className="inline-flex items-center gap-2">
-                <CopyButton
-                  text={sanitizeName(x.name.replace("surface-", ""))}
-                  copyText={x.name}
-                  size="small"
-                  iconPosition="right"
-                />
+            <dl>
+              <dt className="inline-flex items-start gap-1 text-medium">
+                <span className="flex min-h-8 items-center">
+                  {sanitizeName(x.name.replace("surface-", ""))}
+                </span>
+                <CopyButton copyText={x.name} size="small" />
               </dt>
               <dd className="mt-auto text-medium text-text-subtle">
                 {ref ? (

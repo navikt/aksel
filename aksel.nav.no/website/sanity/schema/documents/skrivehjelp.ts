@@ -14,7 +14,6 @@ export const Skrivehjelp = defineType({
       of: [
         {
           ...block,
-          // @ts-expect-error
           styles: [...headingStyles],
         },
       ],

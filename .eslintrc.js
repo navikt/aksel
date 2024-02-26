@@ -46,7 +46,8 @@ module.exports = {
     },
     {
       files: ["**/*.test.*", "**/__tests__/*"],
-      extends: ["plugin:jest/recommended", "plugin:testing-library/react"],
+      plugins: ["vitest"],
+      extends: ["plugin:vitest/recommended", "plugin:testing-library/react"],
     },
 
     {
@@ -71,7 +72,6 @@ module.exports = {
           "error",
           "aksel.nav.no/website/pages/",
         ],
-        "@typescript-eslint/ban-ts-comment": "off", // Temporary
       },
     },
     {

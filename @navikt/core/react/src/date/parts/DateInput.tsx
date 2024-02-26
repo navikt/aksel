@@ -15,7 +15,7 @@ export interface DateInputProps
    */
   label: React.ReactNode;
   /**
-   * Shows label and description for screenreaders-only
+   * Shows label and description for screen readers only
    * @default false
    */
   hideLabel?: boolean;

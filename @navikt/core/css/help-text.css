@@ -53,6 +53,11 @@
 
 .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
   display: inherit;
+  color: var(--ac-help-text-button-hover-color, var(--a-surface-action-hover));
+}
+
+.navds-help-text__button[aria-expanded="true"] > .navds-help-text__icon--filled {
+  color: var(--ac-help-text-button-active-color, var(--a-surface-action-active));
 }
 
 @supports not selector(:focus-visible) {

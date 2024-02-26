@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Box, HGrid, Hide, Show, VStack } from "../..";
+import { Box } from "../box";
+import { HGrid } from "../grid";
+import { Hide, Show } from "../responsive";
+import { VStack } from "../stack";
 import { Content } from "./Content";
 import { FilterCard } from "./Filter";
 import { Header } from "./Header";
@@ -13,6 +16,7 @@ const meta = {
   title: "kitchen sink/navno-sidemal",
   parameters: {
     layout: "fullscreen",
+    chromatic: { disableSnapshot: true },
   },
 } satisfies Meta;
 

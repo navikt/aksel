@@ -23,7 +23,7 @@ export type SearchClearEvent =
 
 export interface SearchProps
   extends Omit<FormFieldProps, "readOnly">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "type"> {
   children?: React.ReactNode;
   /**
    * Search label
@@ -66,10 +66,10 @@ export interface SearchProps
    * Exposes the HTML size attribute
    */
   htmlSize?: number | string;
-    /*
+  /*
    * Exposes role attribute
    */
-  role?: string
+  role?: string;
 }
 
 interface SearchComponent
@@ -210,7 +210,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              role={role ?? 'searchbox'}
+              role={role ?? "searchbox"}
               className={cl(
                 className,
                 "navds-search__input",

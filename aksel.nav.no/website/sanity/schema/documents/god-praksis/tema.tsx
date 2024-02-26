@@ -29,7 +29,7 @@ export const Tema = defineType({
       group: "innhold",
 
       options: {
-        // @ts-expect-error
+        // @ts-expect-error - maxLength is a custom prop not officially supported
         maxLength: 130,
       },
       validation: (Rule) =>

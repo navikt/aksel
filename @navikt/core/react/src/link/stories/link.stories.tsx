@@ -1,11 +1,9 @@
 import React from "react";
 import { PlusCircleFillIcon } from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  Alert as DsAlert,
-  ConfirmationPanel as DsConfirmationPanel,
-  Link,
-} from "../..";
+import { Alert } from "../../alert";
+import { ConfirmationPanel } from "../../form/confirmation-panel";
+import { BodyLong } from "../../typography";
+import Link from "../Link";
 import { RandomIcon } from "./RandomIcon";
 
 export default {
@@ -139,37 +137,37 @@ const DemoLink = () => (
 
 export const Icon = () => <DemoLink />;
 
-export const Alert = () => {
+export const InAlert = () => {
   return (
     <div className="colgap">
-      <DsAlert variant="info">
+      <Alert variant="info">
         <DemoLink />
-      </DsAlert>
-      <DsAlert variant="success">
+      </Alert>
+      <Alert variant="success">
         <DemoLink />
-      </DsAlert>
-      <DsAlert variant="warning">
+      </Alert>
+      <Alert variant="warning">
         <DemoLink />
-      </DsAlert>
-      <DsAlert variant="error">
+      </Alert>
+      <Alert variant="error">
         <DemoLink />
-      </DsAlert>
+      </Alert>
     </div>
   );
 };
 
-export const ConfirmationPanel = () => {
+export const InConfirmationPanel = () => {
   return (
     <div className="colgap">
-      <DsConfirmationPanel label="demo">
+      <ConfirmationPanel label="demo">
         <DemoLink />
-      </DsConfirmationPanel>
-      <DsConfirmationPanel checked label="demo">
+      </ConfirmationPanel>
+      <ConfirmationPanel checked label="demo">
         <DemoLink />
-      </DsConfirmationPanel>
-      <DsConfirmationPanel error="demo" label="demo">
+      </ConfirmationPanel>
+      <ConfirmationPanel error="demo" label="demo">
         <DemoLink />
-      </DsConfirmationPanel>
+      </ConfirmationPanel>
     </div>
   );
 };

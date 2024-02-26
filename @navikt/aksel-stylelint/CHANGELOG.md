@@ -1,5 +1,27 @@
 # @navikt/aksel-stylelint
 
+## 6.1.0
+
+## 6.0.0
+
+### Major Changes
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+## 5.18.3
+
+## 5.18.2
+
+## 5.18.1
+
+## 5.18.0
+
+## 5.17.5
+
+## 5.17.4
+
+## 5.17.3
+
 ## 5.17.2
 
 ## 5.17.1

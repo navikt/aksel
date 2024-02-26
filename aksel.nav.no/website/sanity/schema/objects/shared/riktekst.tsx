@@ -24,7 +24,7 @@ export const styles = [
 
 export const block = {
   title: "Block",
-  type: "block",
+  type: "block" as const,
   styles: [...styles],
   lists: [
     {
@@ -62,7 +62,7 @@ export const block = {
         title: "Inline-Kode",
         value: "code",
         icon: () => <CodeIcon aria-label="Kode" />,
-        component: ({ children }) => <InlineCode noAmps>{children}</InlineCode>,
+        component: ({ children }) => <InlineCode>{children}</InlineCode>,
       },
       {
         title: "KBD",

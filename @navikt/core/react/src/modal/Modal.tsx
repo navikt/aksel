@@ -3,13 +3,13 @@ import cl from "clsx";
 import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { DateContext } from "../date/context";
-import { useProvider } from "../provider";
+import { useProvider } from "../provider/Provider";
 import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { ModalContextProvider, useModalContext } from "./Modal.context";
 import ModalBody from "./ModalBody";
-import { ModalContext } from "./ModalContext";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
@@ -98,8 +98,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
     const dateContext = useContext(DateContext);
-    const modalContext = useContext(ModalContext);
-    if (modalContext && !dateContext) {
+    const isNested = useModalContext(false) !== undefined;
+    if (isNested && !dateContext) {
       console.error("Modals should not be nested");
     }
 
@@ -130,7 +130,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       }
     }, [modalRef, portalNode, open]);
 
-    useBodyScrollLock(modalRef, portalNode);
+    useBodyScrollLock(modalRef, portalNode, isNested);
 
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
@@ -185,11 +185,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         onClick={composeEventHandlers(onClick, handleModalClick)}
         aria-labelledby={mergedAriaLabelledBy}
       >
-        <ModalContext.Provider
-          value={{
-            closeHandler: getCloseHandler(modalRef, header, onBeforeClose),
-            ref: modalRef,
-          }}
+        <ModalContextProvider
+          closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
+          ref={modalRef}
         >
           {header && (
             <ModalHeader>
@@ -208,7 +206,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           )}
 
           {children}
-        </ModalContext.Provider>
+        </ModalContextProvider>
       </dialog>
     );
 

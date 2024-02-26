@@ -32,6 +32,9 @@ export const Default: Story = {
     text: "",
     activeText: "",
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 export const Interaction: Story = {
@@ -209,4 +212,50 @@ export const Disabled: Story = {
       <CopyButton copyText="3.14" disabled variant="action" />
     </div>
   ),
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Variants</h2>
+        {Variants.render?.(...props)}
+      </div>
+      <div>
+        <h2>IconPosition</h2>
+        {IconPosition.render?.(...props)}
+      </div>
+      <div>
+        <h2>Sizes</h2>
+        {Sizes.render?.(...props)}
+      </div>
+      <div>
+        <h2>Texts</h2>
+        {Texts.render?.(...props)}
+      </div>
+      <div>
+        <h2>Icons</h2>
+        {Icons.render?.(...props)}
+      </div>
+      <div>
+        <h2>InlineDemo</h2>
+        {InlineDemo.render?.(...props)}
+      </div>
+      <div>
+        <h2>WithTooltip</h2>
+        {WithTooltip.render?.(...props)}
+      </div>
+      <div>
+        <h2>Duration</h2>
+        {Duration.render?.(...props)}
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        {Disabled.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

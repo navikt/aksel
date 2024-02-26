@@ -1,5 +1,4 @@
 import {
-  FloatingPortal,
   autoUpdate,
   arrow as flArrow,
   flip,
@@ -13,15 +12,9 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  HTMLAttributes,
-  cloneElement,
-  forwardRef,
-  useContext,
-  useRef,
-} from "react";
-import { ModalContext } from "../modal/ModalContext";
-import { useProvider } from "../provider";
+import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import { useModalContext } from "../modal/Modal.context";
+import { Portal } from "../portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -122,11 +115,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     });
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const modalContext = useContext(ModalContext);
-    const providerRootElement = useProvider()?.rootElement;
-    const rootElement = modalContext
-      ? modalContext.ref.current
-      : providerRootElement;
+    const modalContext = useModalContext(false);
+    const rootElement = modalContext ? modalContext.ref.current : undefined;
 
     const {
       x,
@@ -199,7 +189,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               : children?.props["aria-describedby"],
           }),
         )}
-        <FloatingPortal root={rootElement}>
+        <Portal rootElement={rootElement} asChild>
           {_open && (
             <div
               {...getFloatingProps({
@@ -253,7 +243,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               )}
             </div>
           )}
-        </FloatingPortal>
+        </Portal>
       </>
     );
   },

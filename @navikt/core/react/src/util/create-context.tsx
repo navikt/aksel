@@ -6,6 +6,7 @@
  */
 import React, {
   createContext as createReactContext,
+  forwardRef,
   useContext as useReactContext,
 } from "react";
 
@@ -18,11 +19,6 @@ export interface CreateContextOptions<T> {
 }
 
 type ProviderProps<T> = T & { children: React.ReactNode };
-
-export type CreateContextReturn<T> = [
-  (contextValues: ProviderProps<T>) => React.JSX.Element,
-  () => T,
-];
 
 function getErrorMessage(hook: string, provider: string) {
   return `${hook} returned \`undefined\`. Seems you forgot to wrap component within ${provider}`;
@@ -39,17 +35,30 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
 
   const Context = createReactContext<T | undefined>(defaultValue);
 
-  function Provider({ children, ...context }: ProviderProps<T>) {
-    // Only re-memoize when prop values change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const value = React.useMemo(() => context, Object.values(context)) as T;
-    return <Context.Provider value={value}>{children}</Context.Provider>;
-  }
+  /**
+   * We use forwardRef to allow `ref` to be used as a regular context value
+   * @see https://reactjs.org/docs/forwarding-refs.html#forwarding-refs-to-dom-components
+   */
+  const Provider = forwardRef(
+    ({ children, ...context }: ProviderProps<T>, ref) => {
+      // Only re-memoize when prop values change
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const value = React.useMemo(() => context, Object.values(context)) as T;
 
-  function useContext() {
+      return (
+        <Context.Provider value={ref ? { ...value, ref } : value}>
+          {children}
+        </Context.Provider>
+      );
+    },
+  );
+
+  function useContext<S extends boolean = true>(
+    strict: S = true as S,
+  ): Context<S, T> {
     const context = useReactContext(Context);
 
-    if (!context) {
+    if (!context && strict) {
       const error = new Error(
         errorMessage ?? getErrorMessage(hookName, providerName),
       );
@@ -58,10 +67,12 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
       throw error;
     }
 
-    return context;
+    return context as Context<S, T>;
   }
 
   Context.displayName = name;
 
-  return [Provider, useContext] as CreateContextReturn<T>;
+  return [Provider, useContext] as const;
 }
+
+type Context<S, T> = S extends true ? T : T | undefined;

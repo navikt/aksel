@@ -1,7 +1,8 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
-import { Box, HStack, VStack } from "../..";
 import { BodyLong } from "../../typography";
+import { Box } from "../box";
+import { HStack, VStack } from "../stack";
 import { Bleed } from "./Bleed";
 
 export default {
@@ -268,6 +269,19 @@ export const Full = {
             <Bleed marginInline="0 full">
               <Box background="surface-success-subtle">
                 <BodyLong>marginInline=&quot;0 full&quot;</BodyLong>
+              </Box>
+            </Bleed>
+          </Box>
+        </Box>
+        <Box
+          className="maxWidth"
+          background="surface-alt-1-subtle"
+          padding="10"
+        >
+          <Box background="surface-alt-2-subtle" padding="10">
+            <Bleed marginInline="full" reflectivePadding asChild>
+              <Box background="surface-success-subtle">
+                <BodyLong>full + reflectivePadding</BodyLong>
               </Box>
             </Bleed>
           </Box>

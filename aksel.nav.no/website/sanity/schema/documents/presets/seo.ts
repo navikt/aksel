@@ -26,7 +26,7 @@ const BaseSEOPreset = {
       description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
       options: {
-        // @ts-expect-error
+        // @ts-expect-error - maxLength is a custom prop not officially supported
         maxLength: 160,
       },
     }),

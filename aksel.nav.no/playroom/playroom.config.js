@@ -8,7 +8,7 @@ const path = require("path");
 module.exports = {
   baseUrl: "./",
   components: path.resolve("./src/components.ts"),
-  outputPath: path.resolve("./dist"),
+  outputPath: path.resolve("./dist/sandbox"),
   // Optional:
   title: "Aksel Sandbox",
   snippets: path.resolve("./src/snippets.ts"),

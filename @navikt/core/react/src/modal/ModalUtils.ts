@@ -18,8 +18,10 @@ export const BODY_CLASS = "navds-modal__document-body";
 export function useBodyScrollLock(
   modalRef: React.RefObject<HTMLDialogElement>,
   portalNode: HTMLElement | null,
+  isNested: boolean,
 ) {
   React.useEffect(() => {
+    if (isNested) return;
     if (!modalRef.current || !portalNode) return; // We check both to avoid running this twice when not using portal
     if (modalRef.current.open) document.body.classList.add(BODY_CLASS); // In case `open` is true initially
 
@@ -35,5 +37,5 @@ export function useBodyScrollLock(
       observer.disconnect();
       document.body.classList.remove(BODY_CLASS); // In case modal is unmounted before it's closed
     };
-  }, [modalRef, portalNode]);
+  }, [modalRef, portalNode, isNested]);
 }
