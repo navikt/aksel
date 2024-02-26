@@ -252,7 +252,9 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  <Feedback />
+                  <Feedback username="Ola Nordmann" />
+                  <Feedback username="Ola Nordmann" state="loggedIn" />
+                  <Feedback username="Ola Nordmann" state="feedbackSent" />
                 </div>
               </div>
             </div>
