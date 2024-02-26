@@ -146,7 +146,7 @@
 
 @keyframes akselModalFadeIn {
   from {
-    opacity: 0.0001; /* Using 0 causes focus issue in Safari */
+    opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
     transform: translate3d(0, calc(5% + 4px), 0);
   }
 
