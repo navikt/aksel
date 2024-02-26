@@ -1,4 +1,4 @@
-import { WebClient } from "@slack/web-api";
+import { UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import "server-only";
 import { z } from "zod";
@@ -28,11 +28,6 @@ const demoBody = {
 };
 
 const client = new WebClient(process.env.SLACK_BOT_TOKEN);
-
-type Member = {
-  id: string;
-  name: string;
-};
 
 const tempSender = {
   name: "Ola Normann",
@@ -83,6 +78,7 @@ export default async function sendSlackbotFeedback(
     logger.error(
       `Error extracting members from slack in slackbot feedback: ${slackMembers.error}`,
     );
+    response.status(400);
     return;
   }
 
@@ -91,22 +87,20 @@ export default async function sendSlackbotFeedback(
     slackMembers.members,
   );
 
-  let recievingUsers: Member[] | null = slackMembers.members
-    .filter((m) =>
-      document.editors.map(lowercase).includes(lowercase(m.profile?.email)),
-    )
-    .map((m) => ({
-      id: m.id,
-      name: m.name,
-    }))
-    .filter((m): m is Member => !!m.id);
+  const senderSlackData = senderSlackUser
+    ? {
+        email: senderSlackUser.profile?.email ?? "",
+        slackName: senderSlackUser.profile.display_name,
+        slackId: senderSlackUser.id,
+      }
+    : undefined;
 
-  if (recievingUsers === null) {
-    response.status(500);
-    return;
-  }
+  const slackProfileForEditors = document.editors
+    .filter(Boolean)
+    .map((email: string | null) => findUserByEmail(email, slackMembers.members))
+    .filter(Boolean) as UsersListResponse["members"];
 
-  if (recievingUsers.length === 0) {
+  if (slackProfileForEditors.length === 0) {
     /**
      * TODO:
      * Update clientside that no editors were found and message was not sent
@@ -115,11 +109,7 @@ export default async function sendSlackbotFeedback(
     return;
   }
 
-  /* response.status(200).json({ editors: emailToEditors, users: users });
-  return; */
-
-  recievingUsers = [recievingUsers[1]];
-  for (const user of recievingUsers) {
+  for (const user of slackProfileForEditors) {
     await client.chat.postMessage({
       channel: user.id,
       text: "Add fallback to this",
@@ -137,24 +127,14 @@ export default async function sendSlackbotFeedback(
           title: document.title,
         },
         feedback: validation.data.body.feedback,
-        recievers: recievingUsers.map((x) => x.id),
-        sender: validation.data.body.anon
-          ? undefined
-          : {
-              email: senderSlackUser.profile.email,
-              slackName: senderSlackUser.profile.display_name,
-              slackId: senderSlackUser.id,
-            },
+        recievers: slackProfileForEditors.map((x) => x.id),
+        sender: validation.data.body.anon ? undefined : senderSlackData,
       }),
     });
   }
 
   response.status(200).json({ success: "ok" });
   return;
-}
-
-function lowercase(str: string) {
-  return str?.toLowerCase() ?? "";
 }
 
 type SlackBlockT = {
