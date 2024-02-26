@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from "@storybook/react";
-import setYear from "date-fns/setYear";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
@@ -10,7 +10,12 @@ import { MonthPickerProps } from "./types";
 export default {
   title: "ds-react/Monthpicker",
   component: MonthPicker,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof MonthPicker>;
+
+type Story = StoryObj<typeof MonthPicker>;
 
 export const Default: StoryFn<{
   size: DateInputProps["size"];
@@ -23,7 +28,7 @@ export const Default: StoryFn<{
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
+      <MonthPicker {...monthpickerProps} onMonthSelect={console.log}>
         <MonthPicker.Input
           label="Velg måned"
           variant="monthpicker"
@@ -48,6 +53,7 @@ Default.argTypes = {
 export const DropdownCaption = () => {
   return (
     <MonthPicker.Standalone
+      onMonthSelect={console.log}
       dropdownCaption
       fromDate={new Date("Feb 10 2019")}
       toDate={new Date("Sep 27 2032")}
@@ -174,4 +180,25 @@ export const FollowYear = () => {
       {selectedMonth && <div className="pt-4">{selectedMonth.getMonth()}</div>}
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <div className="colgap">
+      <MonthPicker.Standalone />
+      <DropdownCaption />
+      <NB />
+      <NN />
+      <EN />
+      <DisabledMonths />
+      <UseMonthpicker />
+      <UseMonthpickerFormat />
+      <Required />
+      <UserControlled />
+      <FollowYear />
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

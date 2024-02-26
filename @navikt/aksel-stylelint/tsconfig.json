@@ -6,7 +6,7 @@
     "target": "es2020",
     "preserveWatchOutput": true,
     "declaration": false,
-    "types": ["node", "jest", "@types/jest"],
+    "types": ["node"],
     "outDir": "dist",
     "rootDir": "./src",
     "resolveJsonModule": true,

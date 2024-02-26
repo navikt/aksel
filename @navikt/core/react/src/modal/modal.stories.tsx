@@ -26,6 +26,7 @@ export const WithUseRef: StoryFn = () => {
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
         open={ref.current ? undefined : true /* initially open */}
+        onClose={() => null}
         ref={ref}
         header={{
           label: "Optional label",
@@ -147,7 +148,7 @@ export const WithUseState: StoryFn = () => {
 WithUseState.storyName = "With useState";
 
 export const EmptyHeader: StoryFn = () => (
-  <Modal open>
+  <Modal open onClose={() => null} aria-label="Modal with empty header">
     <Modal.Header />
     <Modal.Body>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -162,21 +163,37 @@ export const EmptyHeader: StoryFn = () => (
 );
 
 export const Small: StoryFn = () => (
-  <Modal open width="small" header={{ heading: "Simple header" }}>
+  <Modal
+    open
+    onClose={() => null}
+    width="small"
+    header={{ heading: "Simple header" }}
+  >
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
 Small.storyName = "Size = Small";
 
 export const MediumWithPortal: StoryFn = () => (
-  <Modal open portal width="medium" header={{ heading: "Simple header" }}>
+  <Modal
+    open
+    onClose={() => null}
+    portal
+    width="medium"
+    header={{ heading: "Simple header" }}
+  >
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
 MediumWithPortal.storyName = "Size = Medium (with portal)";
 
 export const Large800: StoryFn = () => (
-  <Modal open width={800} header={{ heading: "Simple header" }}>
+  <Modal
+    open
+    onClose={() => null}
+    width={800}
+    header={{ heading: "Simple header" }}
+  >
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>
 );
@@ -190,7 +207,9 @@ export const WithTooltip: StoryFn = () => {
       <Button onClick={() => ref.current?.showModal()}>Open Modal</Button>
       <Modal
         open={ref.current ? undefined : true /* initially open */}
+        onClose={() => null}
         ref={ref}
+        aria-label="Tooltip test"
       >
         <Modal.Body>
           <div style={{ marginBottom: "1rem" }}>
@@ -208,7 +227,12 @@ export const WithTooltip: StoryFn = () => {
 };
 
 export const WithSrOnlyElement: StoryFn = () => (
-  <Modal open width={300} header={{ heading: "Simple header" }}>
+  <Modal
+    open
+    onClose={() => null}
+    width={300}
+    header={{ heading: "Simple header" }}
+  >
     <Modal.Body>
       <VStack gap="16">
         <BodyLong>
@@ -257,6 +281,7 @@ export const ChromaticViewportTesting: StoryFn = () => (
     <style>{`#storybook-root { padding: 0 !important }`}</style>
     <Modal
       open
+      onClose={() => null}
       header={{ heading: "Chromatic Viewports Testing", label: "Test" }}
     >
       <Modal.Body>
@@ -314,3 +339,57 @@ ChromaticViewportTesting.parameters = {
     },
   },
 };
+
+// For testing TS error messages:
+
+/* const PropTypeTest = () => {
+  return (
+    <>
+      <Modal header={{ heading: "Label" }}>OK</Modal>
+
+      <Modal header={{ heading: "Label" }} aria-label="Label">
+        OK
+      </Modal>
+
+      <Modal header={{ heading: "Label" }} aria-labelledby="Label">
+        OK
+      </Modal>
+
+      <Modal aria-label="Label">OK</Modal>
+
+      <Modal aria-labelledby="Label">OK</Modal>
+
+      <Modal aria-label="Label" open onClose={() => null}>
+        OK
+      </Modal>
+
+      <Modal>Mangler label</Modal>
+
+      <Modal open>Mangler onClose eller label</Modal>
+
+      <Modal open aria-label="Label">
+        Mangler onClose
+      </Modal>
+
+      <Modal open onClose={() => null}>
+        Mangler label
+      </Modal>
+
+      <Modal header={{ heading: "Label" }} open>
+        Mangler onClose
+      </Modal>
+
+      <Modal
+        header={{ heading: "Label" }}
+        aria-label="Label"
+        aria-labelledby="Label"
+      >
+        For mange labels
+      </Modal>
+
+      <Modal aria-label="Label" aria-labelledby="Label">
+        For mange labels
+      </Modal>
+    </>
+  );
+}; */

@@ -1,15 +1,15 @@
-import { Skeleton } from "@navikt/ds-react";
+import { Box, Skeleton } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="w-56 rounded-lg p-6 shadow-xsmall ">
+    <Box padding="6" borderRadius="large" shadow="xsmall" className="w-56">
       <Skeleton variant="circle" width={60} height={60} />
       <Skeleton variant="text" width="100%" />
       <Skeleton variant="text" width="100%" />
       <Skeleton variant="text" width="100%" />
       <Skeleton variant="text" width="80%" />
-    </div>
+    </Box>
   );
 };
 

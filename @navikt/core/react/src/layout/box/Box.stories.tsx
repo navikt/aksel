@@ -197,7 +197,7 @@ export const PaddingBreakpoints = {
   render: () => (
     <div>
       <Box
-        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}
+        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6", "2xl": "8" }}
         background="surface-neutral"
       >
         <Box background="surface-alt-3-subtle">

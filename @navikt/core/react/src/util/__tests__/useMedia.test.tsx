@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { describe, expect, test } from "vitest";
 import { useMedia } from "../hooks";
 
 function TestComponent({ fallback }: { fallback?: boolean }) {

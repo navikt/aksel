@@ -28,3 +28,5 @@ export const HStack: OverridableComponent<HStackProps, HTMLDivElement> =
   forwardRef((props, ref) => {
     return <Stack {...props} ref={ref} direction="row" />;
   });
+
+export default HStack;

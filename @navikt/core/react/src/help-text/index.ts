@@ -1,2 +1,2 @@
-export { default as HelpText } from "./HelpText";
-export { type HelpTextProps } from "./HelpText";
+"use client";
+export { default as HelpText, type HelpTextProps } from "./HelpText";
