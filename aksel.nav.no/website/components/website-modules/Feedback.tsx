@@ -14,22 +14,24 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
-const FeedbackForm = ({
-  state,
-  username,
-}: {
-  state: Props["state"];
-  username: string;
-}) => {
+const FeedbackForm = ({ state }: { state: Props["state"] }) => {
   let form: React.ReactNode = null;
+  const user = "Ola Nordmann";
+
+  console.log(user || "no user");
 
   switch (state) {
     case "feedbackSent":
       form = (
-        <BodyLong className="mb-6">
-          Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
-          relevant. Takk skal du ha!
-        </BodyLong>
+        <>
+          <BodyLong className="mb-6">
+            Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
+            relevant. Takk skal du ha!
+          </BodyLong>
+          <Button className="h-11 bg-deepblue-600 hover:bg-deepblue-700">
+            Nytt innspill
+          </Button>
+        </>
       );
       break;
 
@@ -43,7 +45,7 @@ const FeedbackForm = ({
           <VStack gap="4">
             <HStack gap="2">
               <PersonIcon fontSize="1.5rem" />
-              <BodyShort>{username || "Ukjent bruker"}</BodyShort>
+              <BodyShort>{user || "Ukjent bruker"}</BodyShort>
               <BodyShort>
                 (<Link href="#">logg ut</Link>)
               </BodyShort>
@@ -82,10 +84,9 @@ const FeedbackForm = ({
 
 type Props = {
   state?: "public" | "loggedIn" | "feedbackSent";
-  username: string;
 };
 
-export const Feedback = ({ state, username }: Props) => {
+export const Feedback = ({ state }: Props) => {
   const _state = state || "public";
   return (
     <Box
@@ -101,7 +102,7 @@ export const Feedback = ({ state, username }: Props) => {
               ? "Innspill sendt"
               : "Innspill til artikkelen"}
           </Heading>
-          <FeedbackForm state={_state} username={username} />
+          <FeedbackForm state={_state} />
         </div>
         <div className="relative translate-y-3">
           <svg
