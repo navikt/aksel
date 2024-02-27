@@ -160,16 +160,16 @@ const FilteredOptions = () => {
                   return;
                 }
                 toggleOption(option, event);
-                if (!isMultiSelect && !selectedOptions.includes(option)) {
+                if (!isMultiSelect && !isInList(option, selectedOptions)) {
                   toggleIsListOpen(false);
                 }
               }}
               role="option"
-              aria-selected={selectedOptions.includes(option)}
+              aria-selected={isInList(option, selectedOptions)}
               aria-disabled={isDisabled(option) || undefined}
             >
               <BodyShort size={size}>{option.label}</BodyShort>
-              {selectedOptions.includes(option) && <CheckmarkIcon />}
+              {isInList(option, selectedOptions) && <CheckmarkIcon />}
             </li>
           ))}
         </ul>
