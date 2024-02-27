@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 export const SanityDataContext = createContext<{
   id?: string;
-  validUser: boolean;
+  validUser: boolean | null;
 } | null>(null);
 
 export function useSanityData() {
