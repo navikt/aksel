@@ -43,8 +43,8 @@ export default async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
+  // First we validate the request with zod
   const validation = requestBodySchema.safeParse({ body: demoBody });
-
   if (validation.success === false) {
     logger.error(
       `Error when validating slackbot feedback: ${validation.error}`,
@@ -53,6 +53,7 @@ export default async function sendSlackbotFeedback(
     return;
   }
 
+  // Sanity already caches requests with cdn, so we don't need to do that here
   const document = await getClient().fetch(
     `*[_id == $id][0]{
       "id": _id,
@@ -65,6 +66,7 @@ export default async function sendSlackbotFeedback(
     },
   );
 
+  // If id given in request is not found in sanity, we return 400
   if (!document) {
     logger.error(
       `Error when fetching sanity document for slackbot feedback: ${validation.data.body.document_id}`,
@@ -82,11 +84,17 @@ export default async function sendSlackbotFeedback(
     return;
   }
 
+  /**
+   * We find the sender in list of slack members
+   * Since everyone in NAV has access to login,
+   * but not slack we might have some cases where no user is found
+   */
   const senderSlackUser = findUserByEmail(
     tempSender.email,
     slackMembers.members,
   );
 
+  // TODO: Bugged, shoud not need to have a slack user to add mail
   const senderSlackData = senderSlackUser
     ? {
         email: senderSlackUser.profile?.email ?? "",
@@ -95,6 +103,9 @@ export default async function sendSlackbotFeedback(
       }
     : undefined;
 
+  /**
+   * We use contributors found on article and find their matching slack profiles
+   */
   const slackProfileForEditors = document.editors
     .filter(Boolean)
     .map((email: string | null) => findUserByEmail(email, slackMembers.members))

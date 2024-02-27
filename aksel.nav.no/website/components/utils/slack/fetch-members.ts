@@ -1,5 +1,9 @@
 import { UsersListResponse, WebClient } from "@slack/web-api";
+import NodeCache from "node-cache";
 import "server-only";
+
+const cache = new NodeCache();
+const CACHE_KEY = "slackMembers";
 
 type SlackMembersSuccess = {
   ok: true;
@@ -14,6 +18,13 @@ type SlackMembersError = {
 export async function fetchSlackMembers(): Promise<
   SlackMembersSuccess | SlackMembersError
 > {
+  // We fetch all slack members and cache them for 24h
+  const slackMembers: SlackMembersSuccess = cache.get(CACHE_KEY);
+
+  if (slackMembers) {
+    return slackMembers;
+  }
+
   const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
   let error: string;
@@ -29,5 +40,11 @@ export async function fetchSlackMembers(): Promise<
     return { ok: false, error };
   }
 
-  return { ok: true, members: slackUsers.members ?? [] };
+  const result: SlackMembersSuccess = {
+    ok: true,
+    members: slackUsers.members ?? [],
+  };
+
+  cache.set(CACHE_KEY, result, 60 * 60 * 24);
+  return result;
 }
