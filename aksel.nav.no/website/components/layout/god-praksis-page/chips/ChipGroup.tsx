@@ -9,8 +9,8 @@ export type ChipsRenderData = { title: string; count: number }[];
 const countUniques = (
   type: "innholdstype" | "undertema",
   data: ChipsData,
-  query: string,
-  comparisonQuery: string,
+  query: string | null,
+  comparisonQuery: string | null,
 ): ChipsRenderData => {
   const lens =
     type === "innholdstype" ? "innholdstype-title" : "undertema-title";
@@ -37,7 +37,7 @@ const countUniques = (
     map.set(entry[lens], count + (add ? 1 : 0));
   });
 
-  const chipData = [];
+  const chipData: { title: string; count: number }[] = [];
   for (const [key, value] of map.entries()) {
     chipData.push({ title: key, count: value });
   }
