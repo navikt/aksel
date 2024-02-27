@@ -26,7 +26,7 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
             size="small"
             variant="tertiary-neutral"
             onClick={context.closeHandler}
-            icon={<XMarkIcon title="Lukk modalvindu" />}
+            icon={<XMarkIcon title="Lukk" />}
           />
         )}
         {children}
