@@ -3,7 +3,7 @@ import { BodyLong, Button, Heading } from "@navikt/ds-react";
 import { useSanityData } from "@/hooks/useSanityData";
 
 export default function OutdatedAlert() {
-  const { id, validUser } = useSanityData();
+  const ctx = useSanityData();
 
   return (
     <div className="mb-12 flex gap-3 rounded-md bg-amber-50 p-4 ring-1 ring-amber-300">
@@ -14,11 +14,11 @@ export default function OutdatedAlert() {
         <Heading level="2" size="small" className="mb-2">
           Innholdet kan være utdatert
         </Heading>
-        <BodyLong className={validUser ? "mb-4" : undefined}>
+        <BodyLong className={ctx?.validUser ? "mb-4" : undefined}>
           Det er over 1 år siden innholdet ble revidert. Vi kan ikke være helt
           sikre på hvor nøyaktig artikkelen er lenger.
         </BodyLong>
-        {validUser && (
+        {ctx?.validUser && (
           <>
             <BodyLong className="mb-2">
               Du ser også dette fordi du kan redigere denne artikkelen. Har du
@@ -26,7 +26,7 @@ export default function OutdatedAlert() {
             </BodyLong>
             <Button
               as="a"
-              href={`https://aksel.nav.no/admin/prod/intent/edit/id=${id}`}
+              href={`https://aksel.nav.no/admin/prod/intent/edit/id=${ctx?.id}`}
               target="_blank"
               size="small"
               variant="secondary-neutral"
