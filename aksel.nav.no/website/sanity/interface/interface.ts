@@ -88,10 +88,10 @@ export async function getDocuments(
       types: source === "all" ? allArticleDocuments : [source],
     },
   );
-  const paths = [];
+  const paths: { slug: string; lastmod: string }[] = [];
 
   documents
-    .filter((x) => !x._id.startsWith("drafts."))
+    ?.filter((x) => !x._id.startsWith("drafts."))
     ?.forEach((page) => {
       page.slug && paths.push({ slug: page.slug, lastmod: page._updatedAt });
     });
