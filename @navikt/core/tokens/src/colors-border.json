@@ -15,6 +15,9 @@
     "border-action-selected": {
       "value": "{a.blue.700.value}"
     },
+    "border-action-hover": {
+      "value": "{a.blue.600.value}"
+    },
     "border-action": {
       "value": "{a.blue.500.value}"
     },

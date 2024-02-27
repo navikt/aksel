@@ -8,6 +8,9 @@ const meta = {
   title: "ds-react/Typography/Label",
   component: Label,
   decorators: [(story) => <div style={{ maxWidth: "400px" }}>{story()}</div>],
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof Label>;
 
 export default meta;
@@ -17,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 const lorem =
   "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
-export const Default: Story = {
+export const Controls: Story = {
   args: {
     spacing: false,
     children: lorem,
@@ -93,5 +96,37 @@ export const OverrideTag: Story = {
 
     expect(defaultLabel.tagName).toEqual("LABEL");
     expect(legendLabel.tagName).toEqual("LEGEND");
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Medium</h2>
+        <h3>Size</h3>
+        {SizeMedium.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingMedium.render?.(...props)}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <h3>Size</h3>
+        {SizeSmall.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingSmall.render?.(...props)}
+      </div>
+      <div>
+        <h2>Colors</h2>
+        {Colors.render?.(...props)}
+      </div>
+      <div>
+        <h2>Override Tag</h2>
+        {OverrideTag.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };

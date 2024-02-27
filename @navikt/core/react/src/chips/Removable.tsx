@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 
-export interface RemovableChipsProps
+export interface ChipsRemovableProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
@@ -24,7 +24,7 @@ export interface RemovableChipsProps
 
 export const RemovableChips = forwardRef<
   HTMLButtonElement,
-  RemovableChipsProps
+  ChipsRemovableProps
 >(
   (
     {

@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import Reducer from "../reducer";
 
 describe("Check correct parsing of tailwind tokens", () => {

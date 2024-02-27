@@ -2,7 +2,7 @@ import React from "react";
 import { Skeleton } from ".";
 import { Alert } from "../alert";
 import { Button } from "../button";
-import { Checkbox } from "../form";
+import { Checkbox } from "../form/checkbox";
 import { BodyLong, Heading } from "../typography";
 
 export default {

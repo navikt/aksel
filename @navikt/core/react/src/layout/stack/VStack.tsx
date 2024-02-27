@@ -28,3 +28,5 @@ export const VStack: OverridableComponent<VStackProps, HTMLDivElement> =
   forwardRef((props, ref) => {
     return <Stack {...props} ref={ref} direction="column" wrap={false} />;
   });
+
+export default VStack;

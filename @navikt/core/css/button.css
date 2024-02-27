@@ -130,6 +130,7 @@
   background-color: var(--ac-button-primary-bg, var(--__ac-button-primary-bg, var(--a-surface-action)));
   color: var(--ac-button-primary-text, var(--__ac-button-primary-text, var(--a-text-on-action)));
 }
+
 @media (forced-colors: active) {
   .navds-button.navds-button--primary {
     background-color: highlight;
@@ -227,6 +228,7 @@
     --ac-button-secondary-hover-bg,
     var(--__ac-button-secondary-hover-bg, var(--a-surface-action-subtle-hover))
   );
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-hover-border, var(--a-border-action-hover));
 }
 
 .navds-button--secondary:focus-visible {

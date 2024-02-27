@@ -1,6 +1,6 @@
+import { StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Accordion, AccordionProps } from ".";
-import { Table } from "../table";
 import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";
@@ -13,13 +13,15 @@ export default {
     AccordionContent,
     AccordionHeader,
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
   decorators: [
     (Story) => (
       <div
         style={{
           width: "600px",
           minHeight: "100vh",
-          padding: "10rem 0",
           display: "flex",
           flexDirection: "column",
           gap: "1rem",
@@ -29,24 +31,9 @@ export default {
       </div>
     ),
   ],
-  argTypes: {
-    variant: {
-      options: ["default", "neutral"],
-      control: { type: "select" },
-    },
-    headingSize: {
-      options: ["large", "medium", "small", "xsmall"],
-      control: { type: "select" },
-    },
-    size: {
-      options: ["large", "medium", "small"],
-      control: { type: "select" },
-    },
-    nItems: {
-      control: { type: "number" },
-    },
-  },
 };
+
+type Story = StoryObj<typeof Accordion>;
 
 const Content = () => (
   <Accordion.Content>
@@ -103,22 +90,34 @@ const Item = (props) => {
   );
 };
 
-export const Default = {
-  render: ({ nItems, ...props }) => {
+export const Controls: Story = {
+  render: ({ ...props }) => {
     return (
       <div style={{ width: 500 }}>
         <Accordion {...props}>
-          {[...Array(nItems ? nItems : 2)].map((_, y) => (
+          {[...Array(4)].map((_, y) => (
             <Item key={y} {...props} />
           ))}
         </Accordion>
       </div>
     );
   },
+  argTypes: {
+    variant: {
+      options: ["default", "neutral"],
+      control: { type: "select" },
+    },
+    headingSize: {
+      options: ["large", "medium", "small", "xsmall"],
+      control: { type: "select" },
+    },
+    size: {
+      options: ["large", "medium", "small"],
+      control: { type: "select" },
+    },
+  },
 
   args: {
-    controlled: false,
-    nItems: 2,
     variant: "default",
     headingSize: "medium",
     size: "medium",
@@ -126,37 +125,31 @@ export const Default = {
   },
 };
 
-export const DefaultOpen = {
-  render: ({ nItems, openItems, ...props }) => {
+export const DefaultOpen: Story = {
+  render: () => {
     return (
       <div style={{ width: 500 }}>
-        <Accordion {...props}>
-          {[...Array(nItems ? nItems : 2)].map((_, y) => (
-            <Item key={y} defaultOpen={openItems.includes(y)} {...props} />
+        <Accordion>
+          {[...Array(4)].map((_, y) => (
+            <Item key={y} defaultOpen={y === 2} />
           ))}
         </Accordion>
       </div>
     );
   },
-
-  args: {
-    openItems: [1, 2],
-    controlled: false,
-    nItems: 5,
-    variant: "neutral",
-    headingSize: "large",
-  },
 };
 
-export const Variants = {
+export const Variants: Story = {
   render: () => {
     return (
       <div style={{ width: 500 }} className="colgap">
+        <h3>Default</h3>
         <Accordion>
           {[...Array(2)].map((_, y) => (
             <Item key={y} defaultOpen />
           ))}
         </Accordion>
+        <h3>Neutral</h3>
         <Accordion variant="neutral">
           {[...Array(2)].map((_, y) => (
             <Item key={y} defaultOpen />
@@ -167,95 +160,31 @@ export const Variants = {
   },
 };
 
-export const Controlled = (props) => {
-  const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
-
-  return (
-    <div style={{ width: 500 }}>
-      <Accordion {...props}>
-        <Accordion.Item open={open}>
-          <Accordion.Header onClick={() => setOpen(!open)}>
-            Accordion header text
-          </Accordion.Header>
-          <Content />
-        </Accordion.Item>
-        <Accordion.Item open={open2}>
-          <Accordion.Header onClick={() => setOpen2(!open2)}>
-            Accordion header text
-          </Accordion.Header>
-          <Content />
-        </Accordion.Item>
-      </Accordion>
-    </div>
-  );
-};
-
-export const WithTable = {
-  render: (props) => {
-    const ExampleTable = () => {
-      return (
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>ID</Table.HeaderCell>
-              <Table.HeaderCell>Fornavn</Table.HeaderCell>
-              <Table.HeaderCell>Etternavn</Table.HeaderCell>
-              <Table.HeaderCell>Rolle</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row>
-              <Table.HeaderCell>1</Table.HeaderCell>
-              <Table.DataCell>Jean-Luc</Table.DataCell>
-              <Table.DataCell>Picard</Table.DataCell>
-              <Table.DataCell>Kaptein</Table.DataCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>2</Table.HeaderCell>
-              <Table.DataCell>William</Table.DataCell>
-              <Table.DataCell>Riker</Table.DataCell>
-              <Table.DataCell>Kommandør</Table.DataCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>3</Table.HeaderCell>
-              <Table.DataCell>Geordi</Table.DataCell>
-              <Table.DataCell>La Forge</Table.DataCell>
-              <Table.DataCell>Sjefsingeniør</Table.DataCell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-      );
-    };
-
-    const ContentWithTable = () => {
-      return (
-        <Accordion.Content>
-          <ExampleTable />
-        </Accordion.Content>
-      );
-    };
+export const ControlledState: Story = {
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [open, setOpen] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [open2, setOpen2] = useState(false);
 
     return (
       <div style={{ width: 500 }}>
-        <Accordion {...props}>
-          <Accordion.Item>
-            <Accordion.Header>Table of people</Accordion.Header>
-            <ContentWithTable />
+        <Accordion>
+          <Accordion.Item open={open}>
+            <Accordion.Header onClick={() => setOpen(!open)}>
+              Accordion header text
+            </Accordion.Header>
+            <Content />
           </Accordion.Item>
-          <Accordion.Item>
-            <Accordion.Header>Table of people</Accordion.Header>
-            <ContentWithTable />
+          <Accordion.Item open={open2}>
+            <Accordion.Header onClick={() => setOpen2(!open2)}>
+              Accordion header text
+            </Accordion.Header>
+            <Content />
           </Accordion.Item>
         </Accordion>
       </div>
     );
-  },
-
-  args: {
-    variant: "default",
-    headingSize: "large",
-    indent: false,
   },
 };
 
@@ -269,9 +198,11 @@ const SingleHeaderAccordion = ({
         <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
         <Accordion.Content>a</Accordion.Content>
       </Accordion.Item>
-      <Accordion.Item>
+      <Accordion.Item open>
         <Accordion.Header>{`${size} size + ${headingSize} heading`}</Accordion.Header>
-        <Accordion.Content>a</Accordion.Content>
+        <Accordion.Content>
+          lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </Accordion.Content>
       </Accordion.Item>
     </Accordion>
   );
@@ -285,18 +216,73 @@ const headingSizes: AccordionProps["headingSize"][] = [
   "xsmall",
 ];
 
-export const Size = (props) => (
-  <div style={{ width: 500 }} className="colgap">
-    {sizes.map((size) => (
-      <SingleHeaderAccordion key={size} size={size} {...props} />
-    ))}
-  </div>
-);
+export const Size: Story = {
+  render: () => (
+    <div style={{ width: 500 }} className="colgap">
+      {sizes.map((size) => (
+        <SingleHeaderAccordion key={size} size={size} />
+      ))}
+    </div>
+  ),
+};
 
-export const HeadingSize = (props) => (
-  <div style={{ width: 500 }} className="colgap">
-    {headingSizes.map((size) => (
-      <SingleHeaderAccordion key={size} headingSize={size} {...props} />
-    ))}
-  </div>
-);
+export const HeadingSize: Story = {
+  render: () => (
+    <div style={{ width: 500 }} className="colgap">
+      {headingSizes.map((size) => (
+        <SingleHeaderAccordion key={size} headingSize={size} />
+      ))}
+    </div>
+  ),
+};
+
+export const Indent: Story = {
+  render: () => {
+    return (
+      <div style={{ width: 500 }} className="colgap">
+        <h3>No indent</h3>
+        <Accordion indent>
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} defaultOpen />
+          ))}
+        </Accordion>
+        <h3>Indent</h3>
+        <Accordion indent={false}>
+          {[...Array(2)].map((_, y) => (
+            <Item key={y} defaultOpen />
+          ))}
+        </Accordion>
+      </div>
+    );
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Variants</h2>
+        {Variants.render?.(...props)}
+      </div>
+      <div>
+        <h2>Size</h2>
+        {Size.render?.(...props)}
+      </div>
+      <div>
+        <h2>HeadingSize</h2>
+        {HeadingSize.render?.(...props)}
+      </div>
+      <div>
+        <h2>DefaultOpen</h2>
+        {DefaultOpen.render?.(...props)}
+      </div>
+      <div>
+        <h2>Indent</h2>
+        {Indent.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

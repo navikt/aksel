@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { abbrName, capitalize, dateStr, isNew } from "../index";
 
 describe("Utils test", () => {

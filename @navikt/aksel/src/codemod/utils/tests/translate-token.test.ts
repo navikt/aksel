@@ -1,6 +1,5 @@
+import { describe, expect, test } from "vitest";
 import { translateToken } from "../translate-token";
-
-jest.autoMockOff();
 
 const tokens = [
   {
