@@ -50,7 +50,7 @@ function getParagraph(link: boolean, index: number) {
     children: [
       {
         _type: "span",
-        marks: [],
+        marks: [] as string[],
         text: `${texts[random]}${link ? " " : " "}`,
         _key: getKey(),
       },
