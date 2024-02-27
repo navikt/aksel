@@ -87,10 +87,7 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
         isMultiSelect={props.isMultiSelect}
         onToggleSelected={(value, isSelected) =>
           isSelected
-            ? setSelectedOptions([
-                ...selectedOptions,
-                { label: value, value, isSelected },
-              ])
+            ? setSelectedOptions([...selectedOptions, { label: value, value }])
             : setSelectedOptions(
                 selectedOptions.filter((o) => o.value !== value),
               )
@@ -102,13 +99,7 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
           {selectedOptions.map((option) => (
             <React.Fragment key={option.label}>
               <dt>{option.label}</dt>
-              {Object.keys(option)
-                .filter((key) => key !== "label")
-                .map((key) => (
-                  <dd key={`${option.label}${key}`}>
-                    {key}: {option[key].toString()}
-                  </dd>
-                ))}
+              <dd>{option.value}</dd>
             </React.Fragment>
           ))}
         </dl>
@@ -119,11 +110,11 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
 
 MultiSelectWithComplexOptions.args = {
   options: [
-    { label: "Apple", value: "apple", icon: "true", price: "10 NOK" },
-    { label: "Banana", value: "banana", icon: "false", price: "20 NOK" },
-    { label: "Orange", value: "orange", icon: "true", price: "30 NOK" },
-    { label: "Pear", value: "pear", icon: "false", price: "40 NOK" },
-    { label: "Grape", value: "grape", icon: "true", price: "50 NOK" },
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+    { label: "Orange", value: "orange" },
+    { label: "Pear", value: "pear" },
+    { label: "Grape", value: "grape" },
   ],
   isMultiSelect: true,
   size: "medium",
@@ -198,7 +189,7 @@ export const MultiSelectWithExternalChips: StoryFn<{
       <UNSAFE_Combobox
         options={props.options}
         selectedOptions={selectedOptions}
-        onToggleSelected={(option) => toggleSelected(option.label)}
+        onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={props.controlled ? value : undefined}
         onChange={(event) =>
@@ -274,11 +265,11 @@ export const Controlled: StoryFn<{
     [props.options, value],
   );
 
-  const onToggleSelected = (option: ComboboxOption, isSelected: boolean) => {
+  const onToggleSelected = (option: string, isSelected: boolean) => {
     if (isSelected) {
-      setSelectedOptions([...selectedOptions, option.label]);
+      setSelectedOptions([...selectedOptions, option]);
     } else {
-      setSelectedOptions(selectedOptions.filter((o) => o !== option.label));
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
     }
   };
 
@@ -362,10 +353,8 @@ export const MaxSelectedOptions: StoryFunction = () => {
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
-          ? setSelectedOptions([...selectedOptions, option.label])
-          : setSelectedOptions(
-              selectedOptions.filter((o) => o !== option.label),
-            )
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
       }
       isMultiSelect
       allowNewValues
