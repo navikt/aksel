@@ -91,7 +91,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const context = useFileUploadTranslation();
+      const context = useFileUploadTranslation(false);
       const translate = useI18n({
         FileUpload: translations ?? context?.translations,
       });

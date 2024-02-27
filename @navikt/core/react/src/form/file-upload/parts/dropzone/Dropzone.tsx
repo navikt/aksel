@@ -30,7 +30,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       ...rest
     } = props;
 
-    const context = useFileUploadTranslation();
+    const context = useFileUploadTranslation(false);
     const translate = useI18n({
       FileUpload: translations ?? context?.translations,
     });
