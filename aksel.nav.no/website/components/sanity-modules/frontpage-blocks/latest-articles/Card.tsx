@@ -123,12 +123,10 @@ const Card = ({ article, visible, index }: CardProps) => {
             href={`/${article.slug}`}
             passHref
             className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "forside-masonary",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            onClick={(e) => {
+              const target = e.currentTarget.getAttribute("href");
+              target && amplitudeLogNavigation("forside-masonary", target);
+            }}
           >
             <Heading
               level="3"

@@ -34,8 +34,11 @@ export const Highlight = ({
       <div className="relative block aspect-video">
         {useStatusImage ? (
           <Image
-            src={urlFor(article.status.bilde).quality(100).auto("format").url()}
-            blurDataURL={urlFor(article.status.bilde)
+            src={urlFor(article.status?.bilde)
+              .quality(100)
+              .auto("format")
+              .url()}
+            blurDataURL={urlFor(article.status?.bilde)
               .width(24)
               .height(24)
               .blur(10)
@@ -90,12 +93,10 @@ export const Highlight = ({
         <Heading size="large" level="3">
           <Link
             as={NextLink}
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "artikkel-kort",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            onClick={(e) => {
+              const target = e.currentTarget.getAttribute("href");
+              target && amplitudeLogNavigation("artikkel-kort", target);
+            }}
             href={`/${article.slug.current}`}
             className="mb-5 mt-2 text-text-default underline hover:no-underline"
           >
