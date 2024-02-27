@@ -1,10 +1,18 @@
-export { default as FileUpload } from "./FileUpload";
+"use client";
+export { default as UNSAFE_FileUpload } from "./FileUpload";
+export { default as UNSAFE_FileUploadDropzone } from "./parts/dropzone/Dropzone";
 export { type FileUploadDropzoneProps } from "./parts/dropzone/dropzone.types";
-export { type FileUploadTriggerProps } from "./parts/Trigger";
+export {
+  default as UNSAFE_FileUploadTrigger,
+  type FileUploadTriggerProps,
+} from "./parts/Trigger";
 export {
   type FileObject,
   type FileRejected,
   type FileRejectionReason,
 } from "./FileUpload.types";
-export { type FileUploadItemProps } from "./parts/item/Item";
+export {
+  default as UNSAFE_FileUploadItem,
+  type FileUploadItemProps,
+} from "./parts/item/Item";
 export { type FileItem, type FileMetadata } from "./parts/item/Item.types";
