@@ -11,7 +11,7 @@ import { Timeline, TimelinePeriodProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [activePeriod, setActivePeriod] = useState("");
+  const [activePeriod, setActivePeriod] = useState<string | null>(null);
 
   return (
     <div className="min-w-[800px]">
@@ -28,8 +28,8 @@ const Example = () => {
               status={p.status}
               icon={p.icon}
               statusLabel={p.statusLabel}
-              onSelectPeriod={() => setActivePeriod(p.id)}
-              isActive={activePeriod && activePeriod === p.id}
+              onSelectPeriod={() => p.id && setActivePeriod(p.id)}
+              isActive={!!(activePeriod && activePeriod === p.id)}
               aria-controls="timeline-panel"
               id={p.id}
             >
@@ -46,8 +46,8 @@ const Example = () => {
               status={p.status}
               icon={p.icon}
               statusLabel={p.statusLabel}
-              onSelectPeriod={() => setActivePeriod(p.id)}
-              isActive={activePeriod && activePeriod === p.id}
+              onSelectPeriod={() => p.id && setActivePeriod(p.id)}
+              isActive={!!(activePeriod && activePeriod === p.id)}
               aria-controls="timeline-panel"
               id={p.id}
             >
@@ -61,9 +61,9 @@ const Example = () => {
           aria-controls={activePeriod}
           id="timeline-panel"
           className="mt-8"
-        >{`${activePeriod}: ${
-          [...person, ...jobb].find((p) => p.id === activePeriod).start
-        }`}</div>
+        >{`${activePeriod}: ${[...person, ...jobb].find(
+          (p) => p.id === activePeriod,
+        )?.start}`}</div>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
@@ -65,7 +65,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -160,7 +160,8 @@ const Page = ({ tema: page }: PageProps["props"]) => {
                           ? abbrName(page?.ansvarlig?.title)
                           : ""}
                       </Label>
-                      {page?.ansvarlig?.roller?.length > 0 ? (
+                      {page?.ansvarlig?.roller &&
+                      page.ansvarlig.roller.length > 0 ? (
                         <div className="mt-[2px] text-medium">
                           {page?.ansvarlig?.roller.join(", ")}
                         </div>

@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const Page = ({ temaer, page, resent }: PageProps["props"]) => {
-  const filteredTemas = temaer.filter((x) => x.refCount > 0);
+  const filteredTemas = temaer.filter((x) => x.refCount && x.refCount > 0);
   return (
     <>
       <SEO
