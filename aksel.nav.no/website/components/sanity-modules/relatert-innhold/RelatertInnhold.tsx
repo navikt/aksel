@@ -34,12 +34,10 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
             <Link
               as={NextLink}
               href={getHref(x)}
-              onClick={(e) =>
-                amplitudeLogNavigation(
-                  "relatert-innhold",
-                  e.currentTarget.getAttribute("href"),
-                )
-              }
+              onClick={(e) => {
+                const target = e.currentTarget.getAttribute("href");
+                target && amplitudeLogNavigation("relatert-innhold", target);
+              }}
               className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"
             >
               {x.title}
