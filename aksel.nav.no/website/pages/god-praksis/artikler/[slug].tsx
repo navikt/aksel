@@ -26,7 +26,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
-import { Feedback } from "@/web/Feedback";
+import { Feedback } from "@/web/Feedback/Feedback";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";

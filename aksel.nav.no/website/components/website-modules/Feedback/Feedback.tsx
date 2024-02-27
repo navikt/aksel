@@ -14,6 +14,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { useAuth } from "@/auth/useAuth";
+import styles from "./Feedback.module.css";
 
 const FeedbackForm = ({
   state,
@@ -142,7 +143,7 @@ export const Feedback = ({ state, username, setSentFeedback }: Props) => {
       className="mt-20"
       padding="6"
     >
-      <HGrid columns="7fr 1fr" gap="5">
+      <HGrid columns={{ xs: "1fr 3.5rem", md: "1fr 4.5rem" }} gap="2">
         <div>
           <Heading id="innspill-form" size="small" className="mb-1">
             {_state === "feedbackSent"
@@ -155,25 +156,30 @@ export const Feedback = ({ state, username, setSentFeedback }: Props) => {
             setSentFeedback={setSentFeedback}
           />
         </div>
-        <div className="relative translate-y-3">
+        <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg
-            width="48"
-            height="48"
-            viewBox="0 0 48 48"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute translate-x-[1.6rem] translate-y-[-0.6rem] scale-110"
+            className={`${styles.responsive} ${styles.responsive_square}`} //responsive-svg absolute translate-x-[0.8rem] translate-y-[-0.8rem] scale-110
           >
             <rect
-              x="24.25"
-              width="34.4325"
-              height="34.4325"
-              rx="1.88654"
-              transform="rotate(45 24.25 0)"
+              x="0"
+              y="0"
+              width="14"
+              height="14"
+              rx="0.75"
+              transform="translate(12.2 2.5) rotate(45 0 0)"
               fill="#D6C3EE"
             />
           </svg>
-          <InboxDownIcon className="absolute" aria-hidden fontSize="4rem" />
+          <InboxDownIcon
+            className={`${styles.responsive} ${styles.responsive_inbox} absolute`}
+            aria-hidden
+            fontSize="4rem"
+          />
         </div>
       </HGrid>
     </Box>
