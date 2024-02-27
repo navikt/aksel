@@ -7,7 +7,7 @@ import { amplitude } from "./useAmplitude";
  * @param to Destination URL
  */
 export const amplitudeLogNavigation = (src: string, to: string) =>
-  amplitude.track(AmplitudeEvents.navigasjon, {
+  amplitude.track?.(AmplitudeEvents.navigasjon, {
     src,
     to,
     from: window.location.pathname,
