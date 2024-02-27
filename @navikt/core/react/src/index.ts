@@ -142,6 +142,8 @@ export {
   type FileUploadTriggerProps,
   type FileObject,
   type FileRejected,
+  type FileAccepted,
+  type RejectedPartitionedFile,
   type FileRejectionReason,
   type FileUploadItemProps,
   type FileItem,

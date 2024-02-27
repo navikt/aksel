@@ -5,17 +5,19 @@ export const fileRejectionReason = {
 
 export type FileRejectionReason =
   (typeof fileRejectionReason)[keyof typeof fileRejectionReason];
-type RejectionReason = keyof typeof fileRejectionReason | string;
 
 export type FileRejected = {
   file: File;
   error: true;
-  reasons: RejectionReason[];
+  reasons: string[];
 };
-type FileAccepted = { file: File; error: false };
+export type FileAccepted = { file: File; error: false };
 
 export type FileObject = FileRejected | FileAccepted;
-type RejectedPartitionedFile = { file: File; reasons: RejectionReason[] };
+export type RejectedPartitionedFile = {
+  file: File;
+  reasons: string[];
+};
 export type PartitionedFiles = {
   accepted: File[];
   rejected: RejectedPartitionedFile[];
