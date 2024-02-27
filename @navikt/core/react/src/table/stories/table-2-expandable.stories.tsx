@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../../button";
-import { Checkbox } from "../../form";
+import { Checkbox } from "../../form/checkbox";
 import { Link } from "../../link";
 import Table from "../Table";
 

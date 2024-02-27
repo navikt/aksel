@@ -1,5 +1,37 @@
 # @navikt/aksel
 
+## 6.1.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@6.1.0
+
+## 6.0.0
+
+### Major Changes
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Patch Changes
+
+- Updated dependencies [[`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522)]:
+  - @navikt/ds-css@6.0.0
+
+## 5.18.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.18.3
+
+## 5.18.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@5.18.2
+
 ## 5.18.1
 
 ### Patch Changes

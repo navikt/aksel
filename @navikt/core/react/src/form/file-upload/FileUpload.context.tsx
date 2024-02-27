@@ -6,6 +6,4 @@ export type FileUploadLocaleContextProps = {
 };
 
 export const [FileUploadLocaleContextProvider, useFileUploadTranslation] =
-  createContext<FileUploadLocaleContextProps>({
-    strict: false,
-  });
+  createContext<FileUploadLocaleContextProps>();

@@ -4,7 +4,7 @@ import React, { forwardRef, useContext } from "react";
 import { BodyShort } from "../typography/BodyShort";
 import { ToggleGroupContext } from "./context";
 
-export interface ToggleItemProps
+export interface ToggleGroupItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Content
@@ -16,7 +16,7 @@ export interface ToggleItemProps
   value: string;
 }
 
-const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
+const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
   ({ className, children, ...rest }, ref) => {
     const context = useContext(ToggleGroupContext);
 

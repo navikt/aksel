@@ -1,7 +1,9 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
-import { BodyLong, GuidePanel, VStack } from "../index";
+import { VStack } from "../layout/stack";
+import { BodyLong } from "../typography";
+import GuidePanel from "./GuidePanel";
 
 export default {
   title: "ds-react/GuidePanel",

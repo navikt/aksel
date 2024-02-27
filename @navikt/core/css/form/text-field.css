@@ -41,13 +41,14 @@
 }
 
 .navds-text-field__input:hover {
-  border-color: var(--ac-textfield-hover-border, var(--__ac-textfield-hover-border, var(--a-border-action)));
+  border-color: var(--ac-textfield-hover-border, var(--__ac-textfield-hover-border, var(--a-border-action-hover)));
 }
 
 .navds-text-field__input:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow: var(--a-shadow-focus);
+  border-color: var(--ac-textfield-active-border, var(--a-border-action-selected));
 }
 
 @supports not selector(:focus-visible) {

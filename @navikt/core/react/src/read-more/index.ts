@@ -1,2 +1,2 @@
-export { default as ReadMore } from "./ReadMore";
-export { type ReadMoreProps } from "./ReadMore";
+"use client";
+export { default as ReadMore, type ReadMoreProps } from "./ReadMore";

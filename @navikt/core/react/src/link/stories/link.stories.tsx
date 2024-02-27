@@ -1,7 +1,7 @@
 import React from "react";
 import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";
-import { ConfirmationPanel } from "../../form";
+import { ConfirmationPanel } from "../../form/confirmation-panel";
 import { BodyLong } from "../../typography";
 import Link from "../Link";
 import { RandomIcon } from "./RandomIcon";

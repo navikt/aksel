@@ -24,7 +24,7 @@ export const styles = [
 
 export const block = {
   title: "Block",
-  type: "block",
+  type: "block" as const,
   styles: [...styles],
   lists: [
     {

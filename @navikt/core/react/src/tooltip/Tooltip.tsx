@@ -12,15 +12,9 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  HTMLAttributes,
-  cloneElement,
-  forwardRef,
-  useContext,
-  useRef,
-} from "react";
-import { ModalContext } from "../modal/ModalContext";
-import Portal from "../overlays/portal/Portal";
+import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import { useModalContext } from "../modal/Modal.context";
+import { Portal } from "../portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -121,7 +115,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     });
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const modalContext = useContext(ModalContext);
+    const modalContext = useModalContext(false);
     const rootElement = modalContext ? modalContext.ref.current : undefined;
 
     const {
@@ -195,7 +189,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               : children?.props["aria-describedby"],
           }),
         )}
-        <Portal rootElement={rootElement}>
+        <Portal rootElement={rootElement} asChild>
           {_open && (
             <div
               {...getFloatingProps({

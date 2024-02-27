@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": ["node"],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
       "@/types": ["./components/types/index.ts"],

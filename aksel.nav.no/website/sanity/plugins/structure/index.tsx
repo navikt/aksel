@@ -1,5 +1,5 @@
-import differenceInMonths from "date-fns/differenceInMonths";
-import { StructureResolver } from "sanity/desk";
+import { differenceInMonths } from "date-fns";
+import { StructureResolver } from "sanity/structure";
 import {
   CircleSlashIcon,
   ComponentIcon,

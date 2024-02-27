@@ -4,16 +4,19 @@
   --__ac-box-padding-md: var(--__ac-box-padding-sm);
   --__ac-box-padding-lg: var(--__ac-box-padding-md);
   --__ac-box-padding-xl: var(--__ac-box-padding-lg);
+  --__ac-box-padding-2xl: var(--__ac-box-padding-xl);
   --__ac-box-padding-inline-xs: initial;
   --__ac-box-padding-inline-sm: var(--__ac-box-padding-inline-xs);
   --__ac-box-padding-inline-md: var(--__ac-box-padding-inline-sm);
   --__ac-box-padding-inline-lg: var(--__ac-box-padding-inline-md);
   --__ac-box-padding-inline-xl: var(--__ac-box-padding-inline-lg);
+  --__ac-box-padding-inline-2xl: var(--__ac-box-padding-inline-xl);
   --__ac-box-padding-block-xs: initial;
   --__ac-box-padding-block-sm: var(--__ac-box-padding-block-xs);
   --__ac-box-padding-block-md: var(--__ac-box-padding-block-sm);
   --__ac-box-padding-block-lg: var(--__ac-box-padding-block-md);
   --__ac-box-padding-block-xl: var(--__ac-box-padding-block-lg);
+  --__ac-box-padding-block-2xl: var(--__ac-box-padding-block-xl);
   --__ac-box-padding: var(--__ac-box-padding-xs);
   --__ac-box-padding-inline: var(--__ac-box-padding-inline-xs);
   --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
@@ -26,6 +29,7 @@
   --__ac-box-border-radius-md: var(--__ac-box-border-radius-sm);
   --__ac-box-border-radius-lg: var(--__ac-box-border-radius-md);
   --__ac-box-border-radius-xl: var(--__ac-box-border-radius-lg);
+  --__ac-box-border-radius-2xl: var(--__ac-box-border-radius-xl);
   --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
 
   padding-inline: var(--__ac-box-padding-inline, var(--__ac-box-padding));
@@ -71,5 +75,14 @@
     --__ac-box-padding-inline: var(--__ac-box-padding-inline-xl);
     --__ac-box-padding-block: var(--__ac-box-padding-block-xl);
     --__ac-box-border-radius: var(--__ac-box-border-radius-xl);
+  }
+}
+
+@media (min-width: 1440px) {
+  .navds-box {
+    --__ac-box-padding: var(--__ac-box-padding-2xl);
+    --__ac-box-padding-inline: var(--__ac-box-padding-inline-2xl);
+    --__ac-box-padding-block: var(--__ac-box-padding-block-2xl);
+    --__ac-box-border-radius: var(--__ac-box-border-radius-2xl);
   }
 }
