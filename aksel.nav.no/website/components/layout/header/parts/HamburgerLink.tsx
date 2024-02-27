@@ -19,10 +19,9 @@ function HamburgerLink({ name, href, onClick }) {
           },
         )}
         onClick={(e) => {
-          amplitudeLogNavigation(
-            "header",
-            e.currentTarget.getAttribute("href"),
-          );
+          const target = e.currentTarget.getAttribute("href");
+          target && amplitudeLogNavigation("header", target);
+
           onClick();
         }}
       >

@@ -54,12 +54,10 @@ const Header = ({
           <Link
             href="/"
             passHref
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "header",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            onClick={(e) => {
+              const target = e.currentTarget.getAttribute("href");
+              target && amplitudeLogNavigation("header", target);
+            }}
             className="mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none focus-visible:shadow-focus sm:mr-6"
           >
             <AkselLogo className="text-deepblue-800" />
