@@ -12,7 +12,7 @@ export const titleField = defineField({
     Rule.max(60).error("Sidetittel kan ikke være over 60 tegn"),
   ],
   options: {
-    //@ts-ignore
+    //@ts-expect-error - maxLength is a custom prop not officially supported
     maxLength: 60,
   },
 });

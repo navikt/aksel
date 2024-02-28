@@ -12,7 +12,12 @@ import { ModalContextProvider, useModalContext } from "./Modal.context";
 import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
-import { getCloseHandler, useBodyScrollLock } from "./ModalUtils";
+import {
+  MouseCoordinates,
+  coordsAreInside,
+  getCloseHandler,
+  useBodyScrollLock,
+} from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { ModalProps } from "./types";
 
@@ -86,6 +91,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       "aria-labelledby": ariaLabelledby,
       style,
       onClick,
+      onMouseDown,
       ...rest
     }: ModalProps,
     ref,
@@ -146,18 +152,42 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       ...(!isWidthPreset ? { width } : {}),
     };
 
+    const mouseClickStart = useRef<MouseCoordinates>({
+      clientX: 0,
+      clientY: 0,
+    });
+    const handleModalMouseDown: React.MouseEventHandler<HTMLDialogElement> = (
+      event,
+    ) => {
+      mouseClickStart.current = event;
+    };
+
+    const shouldHandleModalClick = closeOnBackdropClick && !needPolyfill;
+
     /**
      * @note `closeOnBackdropClick` has issues on polyfill when nesting modals (DatePicker)
      */
-    const handleModalClick = (event: React.MouseEvent<HTMLDialogElement>) => {
-      if (
-        closeOnBackdropClick &&
-        !needPolyfill &&
-        event.target === modalRef.current &&
-        (!onBeforeClose || onBeforeClose() !== false)
-      ) {
-        modalRef.current.close();
+    const handleModalClick = (
+      endEvent: React.MouseEvent<HTMLDialogElement>,
+    ) => {
+      if (endEvent.target !== modalRef.current) {
+        return;
       }
+
+      const modalRect = modalRef.current.getBoundingClientRect();
+
+      if (
+        coordsAreInside(mouseClickStart.current, modalRect) ||
+        coordsAreInside(endEvent, modalRect)
+      ) {
+        return;
+      }
+
+      if (onBeforeClose !== undefined && onBeforeClose() === false) {
+        return;
+      }
+
+      modalRef.current.close();
     };
 
     /**
@@ -182,7 +212,16 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         className={mergedClassName}
         style={mergedStyle}
         onCancel={composeEventHandlers(onCancel, handleModalCancel)}
-        onClick={composeEventHandlers(onClick, handleModalClick)}
+        onClick={
+          shouldHandleModalClick
+            ? composeEventHandlers(onClick, handleModalClick)
+            : onClick
+        }
+        onMouseDown={
+          shouldHandleModalClick
+            ? composeEventHandlers(onMouseDown, handleModalMouseDown)
+            : onMouseDown
+        }
         aria-labelledby={mergedAriaLabelledBy}
       >
         <ModalContextProvider

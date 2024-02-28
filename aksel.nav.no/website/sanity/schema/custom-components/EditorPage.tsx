@@ -48,13 +48,13 @@ const DocumentList = ({
               <IntentButton
                 intent="edit"
                 mode="bleed"
-                padding={1}
-                radius={2}
+                paddingY={1}
                 params={{
                   type,
                   id: getPublishedId(x._id),
                 }}
                 style={{ width: "100%" }}
+                tooltipProps={{ content: "Rediger artikkel" }}
               >
                 <Preview schemaType={schemaType} value={x} key={x._id} />
               </IntentButton>
@@ -95,13 +95,13 @@ const OutDatedList = ({ data }: { data: any[] }) => {
               <IntentButton
                 intent="edit"
                 mode="ghost"
-                padding={1}
-                radius={0}
+                paddingY={1}
                 params={{
                   type: x._type,
                   id: getPublishedId(x._id),
                 }}
                 style={{ width: "100%" }}
+                tooltipProps={{ content: "Rediger artikkel" }}
               >
                 <Preview
                   layout="default"
@@ -136,13 +136,13 @@ const DraftList = ({ data }: { data: any[] }) => {
               <IntentButton
                 intent="edit"
                 mode="ghost"
-                padding={1}
-                radius={0}
+                paddingY={1}
                 params={{
                   type: x._type,
                   id: getPublishedId(x._id),
                 }}
                 style={{ width: "100%" }}
+                tooltipProps={{ content: "Rediger artikkel" }}
               >
                 <Preview
                   layout="default"

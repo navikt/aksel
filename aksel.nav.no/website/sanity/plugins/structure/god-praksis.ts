@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/desk";
+import { StructureBuilder } from "sanity/structure";
 import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
