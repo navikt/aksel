@@ -1,7 +1,7 @@
 import {
   FileObject,
   FileUploadBaseProps,
-  PartitionedFiles,
+  FilesPartitioned,
   fileRejectionReason,
 } from "../FileUpload.types";
 import { isAcceptedFileType } from "./is-accepted-file-type";
@@ -15,14 +15,14 @@ export const validateFiles = (
 ) => {
   const allFiles: FileObject[] = [];
   const accepted: File[] = [];
-  const rejected: PartitionedFiles["rejected"] = [];
+  const rejected: FilesPartitioned["rejected"] = [];
 
   files.forEach((file) => {
     const acceptedFileType = isAcceptedFileType(file, accept);
     const acceptedFileSize = isAcceptedSize(file, maxSizeInBytes);
     const customValidation = validator ? validator(file) : true;
 
-    const reasons: PartitionedFiles["rejected"][0]["reasons"] = [];
+    const reasons: FilesPartitioned["rejected"][0]["reasons"] = [];
     if (customValidation !== true) {
       reasons.push(customValidation);
     }

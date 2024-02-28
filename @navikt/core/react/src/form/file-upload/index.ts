@@ -11,6 +11,7 @@ export {
   type FileRejected,
   type FileAccepted,
   type RejectedPartitionedFile,
+  type FilesPartitioned,
   type FileRejectionReason,
 } from "./FileUpload.types";
 export {

@@ -18,7 +18,7 @@ export type RejectedPartitionedFile = {
   file: File;
   reasons: string[];
 };
-export type PartitionedFiles = {
+export type FilesPartitioned = {
   accepted: File[];
   rejected: RejectedPartitionedFile[];
 };
@@ -46,7 +46,7 @@ export interface FileUploadBaseProps {
   /**
    * Callback triggered on file select
    */
-  onSelect: (files: FileObject[], partitionedFiles: PartitionedFiles) => void;
+  onSelect: (files: FileObject[], partitionedFiles: FilesPartitioned) => void;
   /**
    * Disables the dropzone when current >= max, unless `disabled` prop is set to `false`.
    */

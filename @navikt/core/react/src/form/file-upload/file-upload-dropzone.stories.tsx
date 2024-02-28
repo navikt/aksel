@@ -1,8 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
-import { UNSAFE_FileUpload as FileUpload } from ".";
-import { FileObject, PartitionedFiles } from "./FileUpload.types";
+import {
+  type FileObject,
+  UNSAFE_FileUpload as FileUpload,
+  type FilesPartitioned,
+} from ".";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",
@@ -20,7 +23,7 @@ export default meta;
 
 const onSelect = (
   allFiles: FileObject[],
-  { accepted, rejected }: PartitionedFiles,
+  { accepted, rejected }: FilesPartitioned,
 ) => {
   alert(
     `Lastet opp ${allFiles.length} filer. Accepted: ${accepted.length}. Rejected: ${rejected.length}`,
