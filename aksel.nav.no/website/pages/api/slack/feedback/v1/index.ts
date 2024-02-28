@@ -2,6 +2,8 @@ import { UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import "server-only";
 import { z } from "zod";
+import { authProtectedApi } from "@/auth/authProtectedApi";
+import { getAuthUser } from "@/auth/getAuthUser";
 import { getClient } from "@/sanity/client.server";
 import { fetchSlackMembers, findUserByEmail } from "@/slack";
 import { logger } from "../../../../../config/logger";
@@ -29,17 +31,14 @@ const demoBody = {
 
 const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
-const tempSender = {
-  name: "Ola Normann",
-  email: "Ola.Normann@nav.no",
-};
+export default authProtectedApi(sendSlackbotFeedback);
 
 /**
  * TODO:
  * - After merge of auth-PR, wrapp in withProtectedAPI for to make sure all calls are authenticated
  *
  */
-export default async function sendSlackbotFeedback(
+async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
@@ -50,6 +49,16 @@ export default async function sendSlackbotFeedback(
       `Error when validating slackbot feedback: ${validation.error}`,
     );
     response.status(400).json({ message: validation.error });
+    return;
+  }
+
+  const user = getAuthUser(request.headers);
+
+  if (!user.email || !user.name) {
+    logger.error(
+      `Error with getAuthUser in slackbot feedback. This should not happend since we are using authProtectedApi`,
+    );
+    response.status(400).json({ message: "Invalid user" });
     return;
   }
 
@@ -89,19 +98,16 @@ export default async function sendSlackbotFeedback(
    * Since everyone in NAV has access to login,
    * but might not use slack we canhave some cases where no user is found
    */
-  const senderSlackUser = findUserByEmail(
-    tempSender.email,
-    slackMembers.members,
-  );
+  const senderSlackUser = findUserByEmail(user.email, slackMembers.members);
 
   // TODO: Bugged, shoud not need to have a slack user to add mail
   const senderSlackData = senderSlackUser
     ? {
-        email: tempSender.email,
+        email: user.email,
         slackName: senderSlackUser.profile?.display_name,
         slackId: senderSlackUser.id,
       }
-    : { email: tempSender.email };
+    : { email: user.email };
 
   /**
    * We use contributors found on article and find their matching slack profiles
@@ -120,18 +126,18 @@ export default async function sendSlackbotFeedback(
     return;
   }
 
-  for (const user of slackProfileForEditors) {
-    if (!user.id) {
+  for (const editor of slackProfileForEditors) {
+    if (!editor.id) {
       continue;
     }
     await client.chat.postMessage({
-      channel: user.id,
+      channel: editor.id,
       text: "Add fallback to this",
       metadata: {
         event_type: "aksel_article_feedback",
         event_payload: {
-          name: tempSender.name,
-          email: tempSender.email,
+          name: user.name,
+          email: user.email,
         },
       },
       blocks: slackBlock({
