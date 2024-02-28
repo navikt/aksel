@@ -7,7 +7,7 @@ const CACHE_KEY = "slackMembers";
 
 type SlackMembersSuccess = {
   ok: true;
-  members: UsersListResponse["members"];
+  members: Exclude<UsersListResponse["members"], undefined>;
 };
 
 type SlackMembersError = {
@@ -19,32 +19,38 @@ export async function fetchSlackMembers(): Promise<
   SlackMembersSuccess | SlackMembersError
 > {
   // We fetch all slack members and cache them for 24h
-  const slackMembers: SlackMembersSuccess = cache.get(CACHE_KEY);
+  const slackMembers: SlackMembersSuccess["members"] | undefined =
+    cache.get(CACHE_KEY);
 
   if (slackMembers) {
-    return slackMembers;
+    return {
+      ok: true,
+      members: slackMembers,
+    };
   }
 
   const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
-  let error: string;
-
-  const slackUsers: UsersListResponse = await client.users
+  const slackUsers = await client.users
     .list({})
-    .catch((e) => {
-      error = e;
-      return null;
+    .then((r) => ({ result: r, ok: true as const }))
+    .catch((e: string) => {
+      return { error: e, ok: false as const };
     });
 
-  if (slackUsers === null) {
-    return { ok: false, error };
+  if (slackUsers.ok === false) {
+    return { ok: false, error: slackUsers.error };
+  }
+
+  if (!slackUsers.result.members) {
+    return { ok: false, error: "No members found" };
   }
 
   const result: SlackMembersSuccess = {
     ok: true,
-    members: slackUsers.members ?? [],
+    members: slackUsers.result.members,
   };
 
-  cache.set(CACHE_KEY, result, 60 * 60 * 24);
+  cache.set(CACHE_KEY, slackUsers.result.members, 60 * 60 * 24);
   return result;
 }
