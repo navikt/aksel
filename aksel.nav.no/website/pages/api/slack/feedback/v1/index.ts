@@ -66,7 +66,7 @@ export default async function sendSlackbotFeedback(
     },
   );
 
-  // If id given in request is not found in sanity, we return 400
+  // If id given in request is not found, we will return 400
   if (!document) {
     logger.error(
       `Error when fetching sanity document for slackbot feedback: ${validation.data.body.document_id}`,
@@ -87,7 +87,7 @@ export default async function sendSlackbotFeedback(
   /**
    * We find the sender in list of slack members
    * Since everyone in NAV has access to login,
-   * but not slack we might have some cases where no user is found
+   * but might not use slack we canhave some cases where no user is found
    */
   const senderSlackUser = findUserByEmail(
     tempSender.email,
@@ -97,19 +97,19 @@ export default async function sendSlackbotFeedback(
   // TODO: Bugged, shoud not need to have a slack user to add mail
   const senderSlackData = senderSlackUser
     ? {
-        email: senderSlackUser.profile?.email ?? "",
-        slackName: senderSlackUser.profile.display_name,
+        email: tempSender.email,
+        slackName: senderSlackUser.profile?.display_name,
         slackId: senderSlackUser.id,
       }
-    : undefined;
+    : { email: tempSender.email };
 
   /**
    * We use contributors found on article and find their matching slack profiles
    */
   const slackProfileForEditors = document.editors
     .filter(Boolean)
-    .map((email: string | null) => findUserByEmail(email, slackMembers.members))
-    .filter(Boolean) as UsersListResponse["members"];
+    .map((email: string) => findUserByEmail(email, slackMembers.members))
+    .filter(Boolean) as Exclude<UsersListResponse["members"], undefined>;
 
   if (slackProfileForEditors.length === 0) {
     /**
@@ -121,6 +121,9 @@ export default async function sendSlackbotFeedback(
   }
 
   for (const user of slackProfileForEditors) {
+    if (!user.id) {
+      continue;
+    }
     await client.chat.postMessage({
       channel: user.id,
       text: "Add fallback to this",
@@ -138,7 +141,9 @@ export default async function sendSlackbotFeedback(
           title: document.title,
         },
         feedback: validation.data.body.feedback,
-        recievers: slackProfileForEditors.map((x) => x.id),
+        recievers: slackProfileForEditors
+          .map((x) => x.id)
+          .filter(Boolean) as string[],
         sender: validation.data.body.anon ? undefined : senderSlackData,
       }),
     });
@@ -152,7 +157,7 @@ type SlackBlockT = {
   feedback: string;
   article: { slug: string; title: string; id: string };
   recievers: string[];
-  sender?: { email: string; slackName: string; slackId: string };
+  sender?: { email: string; slackName?: string; slackId?: string };
 };
 
 function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
@@ -203,7 +208,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
               },
             },
             {
-              ...(senderName.startsWith("@")
+              ...(senderName.startsWith("@") && sender?.slackId
                 ? { type: "user", user_id: sender.slackId }
                 : { type: "text", text: senderName }),
             },
