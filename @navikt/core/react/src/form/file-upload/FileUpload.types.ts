@@ -14,13 +14,13 @@ export type FileRejected = {
 export type FileAccepted = { file: File; error: false };
 
 export type FileObject = FileRejected | FileAccepted;
-export type RejectedPartitionedFile = {
+export type FileRejectedPartitioned = {
   file: File;
   reasons: string[];
 };
 export type FilesPartitioned = {
   accepted: File[];
-  rejected: RejectedPartitionedFile[];
+  rejected: FileRejectedPartitioned[];
 };
 
 export interface FileUploadBaseProps {

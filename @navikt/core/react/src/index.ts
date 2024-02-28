@@ -143,7 +143,7 @@ export {
   type FileObject,
   type FileRejected,
   type FileAccepted,
-  type RejectedPartitionedFile,
+  type FileRejectedPartitioned,
   type FilesPartitioned,
   type FileRejectionReason,
   type FileUploadItemProps,
