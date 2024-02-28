@@ -1,5 +1,5 @@
 import { NextApiRequest } from "next/types";
-import { validateAzureToken } from "@navikt/next-auth-wonderwall";
+import { getToken, validateAzureToken } from "@navikt/oasis";
 import { logger } from "../../config/logger";
 
 /**
@@ -13,7 +13,7 @@ export async function validateWonderwallToken(
     return true;
   }
 
-  const bearerToken: string | null | undefined = headers["authorization"];
+  const bearerToken = getToken(headers.authorization ?? "");
 
   if (!bearerToken) {
     return false;
@@ -21,11 +21,11 @@ export async function validateWonderwallToken(
 
   const validationResult = await validateAzureToken(bearerToken);
 
-  if (validationResult !== "valid") {
-    if (validationResult.errorType !== "EXPIRED") {
+  if (!validationResult.ok) {
+    if (validationResult.errorType !== "token expired") {
       logger.error(
         new Error(
-          `Invalid JWT token found (cause: ${validationResult.errorType} ${validationResult.message}, redirecting to login.`,
+          `Invalid JWT token found (cause: ${validationResult.errorType} ${validationResult.error}`,
           { cause: validationResult.error },
         ),
       );

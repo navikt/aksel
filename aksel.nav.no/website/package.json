@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.2.3",
-    "@navikt/next-auth-wonderwall": "1.5.0",
+    "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.0.11",
     "@sanity/client": "^6.13.3",
     "@sanity/code-input": "4.1.2",
