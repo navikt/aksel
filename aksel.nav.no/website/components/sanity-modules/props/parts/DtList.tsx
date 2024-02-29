@@ -23,7 +23,7 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
       className="dtlist block overflow-x-auto border border-t-0 border-gray-300 p-2 first-of-type:border-t last-of-type:rounded-b"
     >
       <dt>
-        <span className="font-mono font-semibold">{`${prop.name}${
+        <span className="font-mono text-medium font-semibold">{`${prop.name}${
           prop?.required ? "" : "?"
         } `}</span>
         <span className="font-mono">

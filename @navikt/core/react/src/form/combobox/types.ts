@@ -113,25 +113,25 @@ export interface ComboboxProps
    */
   maxSelected?: MaxSelected;
   /**
-   * Set to "true" to enable inline autocomplete.
+   * Set to `true` to enable inline autocomplete.
    *
    * @default false
    */
   shouldAutocomplete?: boolean;
   /**
-   * When set to "true" displays selected options as Chips before the input field
+   * When set to `true` displays selected options as Chips before the input field
    *
    * @default true
    */
   shouldShowSelectedOptions?: boolean;
   /**
-   * When set to "true" displays the toggle button for opening/closing the dropdown list
+   * When set to `true` displays the toggle button for opening/closing the dropdown list
    *
    * @default true
    */
   toggleListButton?: boolean;
   /**
-   * Custom name for the toggle list-button. Requires "toggleListButton" to be "true".
+   * Custom name for the toggle list-button. Requires "toggleListButton" to be `true`.
    *
    * @default "Alternativer"
    */

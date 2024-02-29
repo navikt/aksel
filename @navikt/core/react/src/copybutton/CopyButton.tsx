@@ -14,7 +14,7 @@ import copy from "../util/copy";
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
-   * 'xsmall' should only be used in tables
+   * `"xsmall"` should _only_ be used in tables.
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
@@ -23,11 +23,11 @@ export interface CopyButtonProps
    */
   variant?: "action" | "neutral";
   /**
-   * Text to copy to clipboard
+   * Text to copy to clipboard.
    */
   copyText: string;
   /**
-   *  Optional text in button
+   *  Optional text in button.
    */
   text?: string;
   /**
@@ -36,36 +36,38 @@ export interface CopyButtonProps
    */
   activeText?: string;
   /**
-   * Callback when 'copied'-state is active
+   * Callback that is called when internal copy-state changes.
+   *
+   * @param state - `true` when copy-state is activated, `false` when copy-state is deactivated.
    */
   onActiveChange?: (state: boolean) => void;
   /**
-   *  Icon shown when button is not clicked
+   *  Icon shown when button is not clicked.
    * @default <FilesIcon />
    */
   icon?: React.ReactNode;
   /**
-   * Icon shown when active
+   * Icon shown when active.
    * @default <CheckmarkIcon />
    */
   activeIcon?: React.ReactNode;
   /**
-   * Timeout duration in milliseconds
+   * Timeout duration in milliseconds.
    * @default 2000
    */
   activeDuration?: number;
   /**
-   * Accessible label for icon (ignored if text is set)
+   * Accessible label for icon (ignored if text is set).
    * @default "Kopier"
    */
   title?: string;
   /**
-   * Accessible label for icon in active-state (ignored if text is set)
+   * Accessible label for icon in active-state (ignored if text is set).
    * @default "Kopiert"
    */
   activeTitle?: string;
   /**
-   * Icon position in button
+   * Icon position in button.
    * @default "left"
    */
   iconPosition?: "left" | "right";
