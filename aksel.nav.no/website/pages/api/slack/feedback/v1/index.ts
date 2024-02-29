@@ -27,13 +27,6 @@ const requestBodySchema = z.object({
   }),
 });
 
-const demoBody = {
-  feedback: "Dette er en test",
-  anon: true,
-  document_id:
-    "d0b2ca93-433b-4fcc-ab3c-c9c7d4dec186" /* <- https://aksel.nav.no/admin/prod/structure/komponenter;primitives;d0b2ca93-433b-4fcc-ab3c-c9c7d4dec186%2Cinspect%3Don */,
-};
-
 const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
@@ -61,7 +54,9 @@ async function sendSlackbotFeedback(
   /**
    * Validate the request with zod before we continue flow
    */
-  const validation = requestBodySchema.safeParse({ body: demoBody });
+  const validation = requestBodySchema.safeParse({
+    body: JSON.parse(request.body),
+  });
   if (validation.success === false) {
     logger.error(
       `Error when validating slackbot feedback: ${validation.error}`,
