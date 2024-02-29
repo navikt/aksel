@@ -33,11 +33,12 @@ const Example = () => {
       {acceptedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {`Vedlagte filer (${acceptedFiles.length} av ${MAX_FILES})`}
+            {`Vedlegg (${acceptedFiles.length} av ${MAX_FILES})`}
           </Heading>
-          <VStack gap="3">
+          <VStack as="ul" gap="3">
             {acceptedFiles.map((file, index) => (
               <UNSAFE_FileUpload.Item
+                as="li"
                 key={index}
                 file={file.file}
                 onDelete={() => removeFile(file)}
@@ -49,11 +50,12 @@ const Example = () => {
       {rejectedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            Filer som ikke vil bli lagt ved søknad
+            Vedlegg med feil
           </Heading>
-          <VStack gap="3">
+          <VStack as="ul" gap="3">
             {rejectedFiles.map((rejected, index) => (
               <UNSAFE_FileUpload.Item
+                as="li"
                 key={index}
                 file={rejected.file}
                 error={errors[rejected.reasons[0]]}

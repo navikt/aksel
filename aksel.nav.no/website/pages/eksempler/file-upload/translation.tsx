@@ -18,20 +18,24 @@ const Example = () => (
         label="Last opp bilder"
         onSelect={console.log}
       />
-      <VStack gap="2">
-        <Heading level="3" size="xsmall">
-          Vedlagte filer
+      <div>
+        <Heading level="3" size="xsmall" spacing>
+          Vedlegg
         </Heading>
-        <UNSAFE_FileUpload.Item
-          file={{ name: "eksempel.png", size: 200000 }}
-          status="uploading"
-        />
-        <UNSAFE_FileUpload.Item
-          file={{ name: "eksempel.png", size: 200000 }}
-          status="uploading"
-          translations={{ item: { uploading: "Sender bilde..." } }}
-        />
-      </VStack>
+        <VStack as="ul" gap="2">
+          <UNSAFE_FileUpload.Item
+            as="li"
+            file={{ name: "eksempel.png", size: 200000 }}
+            status="uploading"
+          />
+          <UNSAFE_FileUpload.Item
+            as="li"
+            file={{ name: "eksempel.png", size: 200000 }}
+            status="uploading"
+            translations={{ item: { uploading: "Sender bilde..." } }}
+          />
+        </VStack>
+      </div>
     </VStack>
   </UNSAFE_FileUpload>
 );

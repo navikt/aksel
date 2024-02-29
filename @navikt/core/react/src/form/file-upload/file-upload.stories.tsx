@@ -46,6 +46,7 @@ const CustomItem = ({
       {...props}
       status={loading ? "uploading" : "idle"}
       itemAction="delete"
+      as="li"
     />
   );
 };
@@ -65,59 +66,61 @@ export const Default: StoryFn = () => {
   const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
   return (
-    <VStack
-      gap="6"
-      style={{ width: 500, maxWidth: "100%", minHeight: "100vh" }}
-    >
-      <FileUpload.Dropzone
-        label="Last opp filer til søknaden"
-        description={`Maks størrelse ${MAX_SIZE_MB} MB`}
-        /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
-        maxSizeInBytes={MAX_SIZE}
-        fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
-        onSelect={addFiles}
-      />
+    <FileUpload>
+      <VStack
+        gap="6"
+        style={{ width: 500, maxWidth: "100%", minHeight: "100vh" }}
+      >
+        <FileUpload.Dropzone
+          label="Last opp filer til søknaden"
+          description={`Maks størrelse ${MAX_SIZE_MB} MB`}
+          /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
+          maxSizeInBytes={MAX_SIZE}
+          fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
+          onSelect={addFiles}
+        />
 
-      {getListError(acceptedFiles) && (
-        <Alert variant="error">{getListError(acceptedFiles)}</Alert>
-      )}
+        {getListError(acceptedFiles) && (
+          <Alert variant="error">{getListError(acceptedFiles)}</Alert>
+        )}
 
-      {acceptedFiles.length > 0 && (
-        <VStack gap="2">
-          <Heading level="3" size="xsmall">
-            {`Vedlagte filer (${acceptedFiles.length} av ${MAX_FILES})`}
-          </Heading>
-          <VStack gap="3">
-            {acceptedFiles.map((file, index) => (
-              <CustomItem
-                key={index}
-                index={index}
-                file={file.file}
-                onDelete={() => removeFile(file)}
-              />
-            ))}
+        {acceptedFiles.length > 0 && (
+          <VStack gap="2">
+            <Heading level="3" size="xsmall">
+              {`Vedlegg (${acceptedFiles.length} av ${MAX_FILES})`}
+            </Heading>
+            <VStack as="ul" gap="3">
+              {acceptedFiles.map((file, index) => (
+                <CustomItem
+                  key={index}
+                  index={index}
+                  file={file.file}
+                  onDelete={() => removeFile(file)}
+                />
+              ))}
+            </VStack>
           </VStack>
-        </VStack>
-      )}
-      {rejectedFiles.length > 0 && (
-        <VStack gap="2">
-          <Heading level="3" size="xsmall">
-            Filer som ikke vil bli lagt ved søknad
-          </Heading>
-          <VStack gap="3">
-            {rejectedFiles.map((rejected, index) => (
-              <CustomItem
-                key={index}
-                index={index}
-                file={rejected.file}
-                error={errors[rejected.reasons[0]]}
-                onDelete={() => removeFile(rejected)}
-              />
-            ))}
+        )}
+        {rejectedFiles.length > 0 && (
+          <VStack gap="2">
+            <Heading level="3" size="xsmall">
+              Vedlegg med feil
+            </Heading>
+            <VStack as="ul" gap="3">
+              {rejectedFiles.map((rejected, index) => (
+                <CustomItem
+                  key={index}
+                  index={index}
+                  file={rejected.file}
+                  error={errors[rejected.reasons[0]]}
+                  onDelete={() => removeFile(rejected)}
+                />
+              ))}
+            </VStack>
           </VStack>
-        </VStack>
-      )}
-    </VStack>
+        )}
+      </VStack>
+    </FileUpload>
   );
 };
 Default.parameters = { chromatic: { disable: true } };
