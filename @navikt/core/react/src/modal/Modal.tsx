@@ -165,7 +165,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const shouldHandleModalClick = closeOnBackdropClick && !needPolyfill;
 
     /**
-     * @note `closeOnBackdropClick` has issues on polyfill when nesting modals (DatePicker)
+     * `closeOnBackdropClick` has issues on polyfill when nesting modals (DatePicker)
      */
     const handleModalClick = (
       endEvent: React.MouseEvent<HTMLDialogElement>,
@@ -191,7 +191,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     };
 
     /**
-     * @note onCancel fires when you press `Esc`
+     * onCancel fires when you press `Esc`
      */
     const handleModalCancel = (
       event: React.SyntheticEvent<HTMLDialogElement, Event>,

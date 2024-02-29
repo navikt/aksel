@@ -15,12 +15,14 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   orientation?: "horizontal" | "vertical";
   /**
    * Current active step.
-   * @note Stepper index starts at 1, not 0
+   *
+   * Stepper index starts at 1, not 0.
    */
   activeStep: number;
   /**
    * Callback for next activeStep
-   * @note Stepper index starts at 1, not 0
+   *
+   * Stepper index starts at 1, not 0.
    */
   onStepChange?: (step: number) => void;
   /**

@@ -10,6 +10,7 @@ export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /** **Negative** horizontal margin around children.
    *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   *
    * @example
    * marginInline='4'
    * marginInline='4 5'
@@ -20,6 +21,7 @@ export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   >;
   /** **Negative** vertical margin around children.
    *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   *
    * @example
    * marginBlock='4'
    * marginBlock='4 5'

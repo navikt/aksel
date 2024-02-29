@@ -38,8 +38,9 @@ export interface TimelinePeriodProps
    */
   children?: React.ReactNode;
   /**
-   * Visual active inidcation on period
-   * @note Make sure only one period is active at a time
+   * Visual active inidcation on period.
+   *
+   * Make sure only one period is active at a time.
    */
   isActive?: boolean;
 }

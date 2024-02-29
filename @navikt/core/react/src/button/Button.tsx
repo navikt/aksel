@@ -32,8 +32,9 @@ export interface ButtonProps
    */
   size?: "medium" | "small" | "xsmall";
   /**
+   * **Avoid using if possible for accessibility purposes**
+   *
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
-   * @note Avoid using if possible for accessibility purposes
    */
   disabled?: boolean;
   /**

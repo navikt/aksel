@@ -22,8 +22,9 @@ import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Element tooltip anchors to
-   * @note Needs to be React.ReactElement, does not support multiple children/react fragment
+   * Element tooltip anchors to.
+   *
+   * Needs to be React.ReactElement, does not support multiple children/react fragment
    */
   children: React.ReactElement & React.RefAttributes<HTMLElement>;
   /**
@@ -32,45 +33,49 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   /**
    * Tells tooltip to start in open state.
-   * Use sparingly synce hover/focus on other elements will close it
-   * @note "open"-prop overwrites this
+   * Use _sparingly_ since hover/focus on other elements will close it.
+   *
+   * `open`-prop overwrites this.
    */
   defaultOpen?: boolean;
   /**
-   * Change handler for open
+   * Change handler for open.
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Orientation for tooltip
+   * Orientation for tooltip.
    * @default "top"
    */
   placement?: "top" | "right" | "bottom" | "left";
   /**
-   * Toggles rendering of arrow
+   * Toggles rendering of arrow.
    * @default true
    */
   arrow?: boolean;
   /**
-   * Distance from anchor to tooltip
+   * Distance from anchor to tooltip.
    * @default 10px with arrow, 2px without arrow
    */
   offset?: number;
   /**
-   * Text-content inside tooltip
+   * Text-content inside tooltip.
    */
   content: string;
   /**
    * Sets max allowed character length.
+   *
+   * Ideally you should keep the length of the tooltip to a minimum (80 characters).
+   * Currently this only emits a warning in the console.
    * @default 80
    */
   maxChar?: number;
   /**
-   * Adds a delay in milliseconds before opening tooltip
+   * Adds a delay in milliseconds before opening tooltip.
    * @default 150
    */
   delay?: number;
   /**
-   * List of Keyboard-keys for shortcuts
+   * List of Keyboard-keys for shortcuts.
    */
   keys?: string[];
 }
