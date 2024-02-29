@@ -1,6 +1,21 @@
 import { UsersListResponse } from "@slack/web-api";
 import { AuthApiErrorReturn } from "@/auth/auth.types";
 
+export type SlackFeedbackInput = {
+  /**
+   * Feedback message
+   */
+  feedback: string;
+  /**
+   * If user wants to be anonymous
+   */
+  anon: boolean;
+  /**
+   * Sanity-document id for article feedback is about
+   */
+  document_id: string;
+};
+
 type SlackFeedbackOkResponse = {
   ok: true;
 };
