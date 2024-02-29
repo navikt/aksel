@@ -62,10 +62,12 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   content: string;
   /**
-   * Sets max allowed character length.
+   * Sets max character length.
    *
    * Ideally you should keep the length of the tooltip to a minimum (80 characters).
-   * Currently this only emits a warning in the console.
+   * Currently this prop only emits a warning in the console, which can be squelched
+   * by setting this to a larger number. However, before doing so you should _try_
+   * to shorten the content so that it fits into 80 characters.
    * @default 80
    */
   maxChar?: number;

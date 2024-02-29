@@ -12,37 +12,39 @@ import { BodyLong } from "../typography";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Alert content
+   * Alert content.
    */
   children: React.ReactNode;
   /**
-   * Changes colors and icon usage when changed
+   * Changes colors and icon usage when changed.
    */
   variant: "error" | "warning" | "info" | "success";
   /**
-   * Changes padding and font-sizes
+   * Changes padding and font-sizes.
    * @default "medium"
    */
   size?: "medium" | "small";
   /**
-   * Removes border-radius
+   * Removes `border-radius`.
    * @default false
    */
   fullWidth?: boolean;
   /**
-   * Removes background from Alert
+   * Removes background from Alert.
    * @default false
    */
   inline?: boolean;
   /**
-   * Removes close-button(X) when false
-   * Requires onClose to be set
+   * Removes close-button(X) when false.
+   *
+   * **Requires onClose to be set**.
    * @default true
    */
   closeButton?: boolean;
   /**
-   * Callback for alert wanting to close
-   * requires closeButton to be true
+   * Callback for alert wanting to close.
+   *
+   * **requires closeButton to be true**.
    */
   onClose?: () => void;
 }

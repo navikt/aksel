@@ -6,13 +6,11 @@ import { BreakpointsAlias } from "../utilities/types";
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * @example
-   * above='md'
+   * Will show/hide element above breakpoint (inclusive)
    */
   above?: Exclude<BreakpointsAlias, "xs">;
   /**
-   * @example
-   * below='md'
+   * Will show/hide element below breakpoint (inclusive)
    */
   below?: Exclude<BreakpointsAlias, "xs">;
   /**

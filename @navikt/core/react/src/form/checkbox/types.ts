@@ -5,12 +5,12 @@ export interface CheckboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
-   * Adds error indication on checkbox
+   * Adds error indication on checkbox.
    * @default false
    */
   error?: boolean;
   /**
-   * Id for error resulting in checkbox having error
+   * Id for error resulting in checkbox having error.
    */
   errorId?: string;
   /**
@@ -26,12 +26,12 @@ export interface CheckboxProps
    */
   value?: any;
   /**
-   * Specify whether the Checkbox is in an indeterminate state
+   * Specify whether the Checkbox is in an indeterminate state.
    * @default false
    */
   indeterminate?: boolean;
   /**
-   * Adds a description to extend labling of Checkbox
+   * Adds a description to extend labling of Checkbox.
    */
   description?: string;
 }

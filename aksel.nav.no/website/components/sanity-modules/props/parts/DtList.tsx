@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Detail, Skeleton } from "@navikt/ds-react";
+import { BodyShort, Detail, Skeleton, Table } from "@navikt/ds-react";
 import { Highlighter } from "./Highlight";
 
 const LazyDescription = dynamic(() => import("./DtListDescription"), {
@@ -39,6 +39,29 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
       )}
       {prop.description && (
         <LazyDescription>{prop.description}</LazyDescription>
+      )}
+      {prop.params && (
+        <div className="mb-2 ml-2 mt-6">
+          <span className="block text-lg font-semibold">Params:</span>
+          <Table className="m-2 w-[95%]">
+            <Table.Body className="border-t border-grayalpha-500">
+              {prop.params.map((param: string, i: number) => (
+                <Table.Row key={i}>
+                  <Table.HeaderCell>{param.split(" ")[0]}</Table.HeaderCell>
+                  <Table.DataCell>
+                    {param.slice(param.indexOf(" ") + 1)}
+                  </Table.DataCell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+      )}
+      {prop.return && (
+        <div className="mb-2 ml-2 mt-6">
+          <span className="block text-lg font-semibold">Return:</span>
+          <BodyShort className="ml-4">{prop.return}</BodyShort>
+        </div>
       )}
       {prop.example && <LazyExample>{prop.example}</LazyExample>}
 

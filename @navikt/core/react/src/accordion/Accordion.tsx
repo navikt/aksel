@@ -43,12 +43,12 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "large" | "medium" | "small";
   /**
-   * Whether to indent content or not
+   * Whether to indent content or not.
    * @default true
    */
   indent?: boolean;
   /**
-   * Instances of Accordion.Item
+   * Instances of `Accordion.Item`.
    */
   children: React.ReactNode;
 }

@@ -7,7 +7,11 @@ import { ResponsiveProp, SpacingScale } from "../utilities/types";
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * Justify-content
+   * CSS `justify-content` property.
+   *
+   * @example
+   * gap='center'
+   * gap={{xs: 'start', sm: 'center', md: 'end', lg: 'space-around', xl: 'space-between'}}
    */
   justify?: ResponsiveProp<
     | "start"
@@ -18,21 +22,31 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
     | "space-evenly"
   >;
   /**
-   * Align-items
+   * CSS `align-items` property.
+   *
+   * @example
+   * gap='center'
+   * gap={{xs: 'start', sm: 'center', md: 'end', lg: 'baseline', xl: 'stretch'}}
    */
   align?: ResponsiveProp<"start" | "center" | "end" | "baseline" | "stretch">;
   /**
-   * flex-wrap
+   * Sets the CSS `flex-wrap` property.
+   *
+   * @example
+   * gap=true
+   * gap={{xs: true, sm: false, md: true, lg: false, xl: true}}
    */
   wrap?: boolean;
   /**
+   * CSS `gap` property.
+   *
    * @example
    * gap='4'
    * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   gap?: ResponsiveProp<SpacingScale>;
   /**
-   * flex-direction
+   * CSS `flex-direction` property.
    * @default "row"
    */
   direction?: ResponsiveProp<"row" | "column">;

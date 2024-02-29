@@ -10,9 +10,7 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
    * @example
    * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
-   * @example
    * columns={3}
-   * @example
    * columns="repeat(3, minmax(0, 1fr))"
    */
   columns?: ResponsiveProp<number | string>;

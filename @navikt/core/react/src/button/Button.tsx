@@ -11,11 +11,11 @@ import { OverridableComponent } from "../util/types";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Button content
+   * Button content.
    */
   children?: React.ReactNode;
   /**
-   * Changes design and interaction-visuals
+   * Changes design and interaction-visuals.
    * @default "primary"
    */
   variant?:
@@ -27,27 +27,27 @@ export interface ButtonProps
     | "tertiary-neutral"
     | "danger";
   /**
-   * Changes padding, height and font-size
+   * Changes padding, height, and font-size.
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
   /**
-   * **Avoid using if possible for accessibility purposes**
+   * **Avoid using if possible for accessibility purposes**.
    *
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
    */
   disabled?: boolean;
   /**
-   * Replaces button content with a Loader component, keeps width
+   * Replaces button content with a Loader component, keeps width.
    * @default false
    */
   loading?: boolean;
   /**
-   * Button Icon
+   * Button Icon.
    */
   icon?: React.ReactNode;
   /**
-   * Icon position in Button
+   * Icon position in Button.
    * @default "left"
    */
   iconPosition?: "left" | "right";
