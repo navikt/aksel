@@ -21,10 +21,12 @@ const BloggCard = ({ blog }: BloggCardProps) => {
         <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
           <Link
             className="text-deepblue-500 underline hover:no-underline"
-            onClick={(e) => {
-              const target = e.currentTarget.getAttribute("href");
-              target && amplitudeLogNavigation("blogg-card", target);
-            }}
+            onClick={(e) =>
+              amplitudeLogNavigation(
+                "blogg-card",
+                e.currentTarget.getAttribute("href"),
+              )
+            }
           >
             {blog.heading}
           </Link>

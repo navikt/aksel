@@ -47,10 +47,12 @@ const ArtikkelCard = ({
         }}
         passHref
         className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-        onClick={(e) => {
-          const target = e.currentTarget.getAttribute("href");
-          target && amplitudeLogNavigation("artikkel-kort", target);
-        }}
+        onClick={(e) =>
+          amplitudeLogNavigation(
+            "artikkel-kort",
+            e.currentTarget.getAttribute("href"),
+          )
+        }
       >
         <Heading
           level={level}

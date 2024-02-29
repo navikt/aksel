@@ -26,10 +26,12 @@ const InnholdsKort = ({ node }: InnholdsKortProps) => {
         <NextLink
           href={`/${node?.lenke}`}
           passHref
-          onClick={(e) => {
-            const target = e.currentTarget.getAttribute("href");
-            target && amplitudeLogNavigation("prinsipp-kort", target);
-          }}
+          onClick={(e) =>
+            amplitudeLogNavigation(
+              "prinsipp-kort",
+              e.currentTarget.getAttribute("href"),
+            )
+          }
           className="z-10 before:absolute before:inset-0 focus:outline-none"
         >
           {node.title}

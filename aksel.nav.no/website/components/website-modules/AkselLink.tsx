@@ -27,10 +27,9 @@ const AkselLink = ({
         "text-deepblue-500 focus-visible:bg-blue-800 focus-visible:text-text-on-action focus-visible:shadow-[0_0_0_3px_var(--a-blue-800)] group-hover:text-deepblue-800":
           !inverted,
       })}
-      onClick={(e) => {
-        const target = e.currentTarget.getAttribute("href");
-        target && amplitudeLogNavigation("link", target);
-      }}
+      onClick={(e) =>
+        amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
+      }
     >
       {children}
       <svg

@@ -59,10 +59,12 @@ function Section({ section }: { section: SidebarT[number] }) {
               prefetch={false}
               href={`/${page.slug}`}
               className="flex min-h-8 w-full items-center justify-between gap-2  break-words rounded-medium px-2 text-medium focus:outline-none focus-visible:z-10 focus-visible:shadow-focus"
-              onClick={(e) => {
-                const target = e.currentTarget.getAttribute("href");
-                target && amplitudeLogNavigation("meny", target);
-              }}
+              onClick={(e) =>
+                amplitudeLogNavigation(
+                  "meny",
+                  e.currentTarget.getAttribute("href"),
+                )
+              }
             >
               {page.heading}
               <StatusTag size="xsmall" status={page.tag} />

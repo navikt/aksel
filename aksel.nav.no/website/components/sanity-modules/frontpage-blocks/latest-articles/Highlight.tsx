@@ -93,10 +93,12 @@ export const Highlight = ({
         <Heading size="large" level="3">
           <Link
             as={NextLink}
-            onClick={(e) => {
-              const target = e.currentTarget.getAttribute("href");
-              target && amplitudeLogNavigation("artikkel-kort", target);
-            }}
+            onClick={(e) =>
+              amplitudeLogNavigation(
+                "artikkel-kort",
+                e.currentTarget.getAttribute("href"),
+              )
+            }
             href={`/${article.slug.current}`}
             className="mb-5 mt-2 text-text-default underline hover:no-underline"
           >

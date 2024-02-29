@@ -25,10 +25,9 @@ function HeaderLink({ name, href, prefetch = undefined }: HeaderLinkProps) {
               !asPath.startsWith(href),
           },
         )}
-        onClick={(e) => {
-          const target = e.currentTarget.getAttribute("href");
-          target && amplitudeLogNavigation("header", target);
-        }}
+        onClick={(e) =>
+          amplitudeLogNavigation("header", e.currentTarget.getAttribute("href"))
+        }
       >
         {name}
       </Link>

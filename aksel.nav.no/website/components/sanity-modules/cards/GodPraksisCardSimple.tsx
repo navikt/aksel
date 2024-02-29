@@ -31,10 +31,9 @@ const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
       <NextLink
         href={`/god-praksis/${node.slug.current}`}
         passHref
-        onClick={(e) => {
-          const target = e.currentTarget.getAttribute("href");
-          target && amplitudeLogNavigation("card", target);
-        }}
+        onClick={(e) =>
+          amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
+        }
         className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
       >
         {node.title}
