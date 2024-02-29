@@ -1,15 +1,12 @@
 import { NextApiRequest } from "next/types";
+import { AuthUser } from "@/auth/auth.types";
 
-export function getAuthUser(headers: NextApiRequest["headers"]): {
-  name: string | null;
-  email: string | null;
-} {
+export function getAuthUser(
+  headers: NextApiRequest["headers"],
+): AuthUser | null {
   const token = getToken(headers);
   if (!token) {
-    return {
-      name: null,
-      email: null,
-    };
+    return null;
   }
 
   const jwt = JSON.parse(

@@ -5,7 +5,13 @@ import { z } from "zod";
 import { authProtectedApi } from "@/auth/authProtectedApi";
 import { getAuthUser } from "@/auth/getAuthUser";
 import { getClient } from "@/sanity/client.server";
-import { fetchSlackMembers, findUserByEmail } from "@/slack";
+import {
+  SlackFeedbackError,
+  SlackFeedbackErrorT,
+  SlackFeedbackResponse,
+  fetchSlackMembers,
+  findUserByEmail,
+} from "@/slack";
 import { logger } from "../../../../../config/logger";
 
 const requestBodySchema = z.object({
@@ -33,36 +39,43 @@ const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
 
-/**
- * TODO:
- * - After merge of auth-PR, wrapp in withProtectedAPI for to make sure all calls are authenticated
- *
- */
 async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
-  // First we validate the request with zod
+  const user = getAuthUser(request.headers);
+
+  /**
+   * If authenticated user is not found, we return 400.
+   * This should in theory no be possible since api is behind `authProtectedApi`
+   */
+  if (!user) {
+    logger.error(
+      `Error with getAuthUser in slackbot feedback. This should not happend since we are using authProtectedApi`,
+    );
+    response
+      .status(400)
+      .json(responseJson(false, SlackFeedbackError.InvalidUser));
+    return;
+  }
+
+  /**
+   * Validate the request with zod before we continue flow
+   */
   const validation = requestBodySchema.safeParse({ body: demoBody });
   if (validation.success === false) {
     logger.error(
       `Error when validating slackbot feedback: ${validation.error}`,
     );
-    response.status(400).json({ message: validation.error });
+    response
+      .status(400)
+      .json(responseJson(false, SlackFeedbackError.InvalidBody));
     return;
   }
 
-  const user = getAuthUser(request.headers);
-
-  if (!user.email || !user.name) {
-    logger.error(
-      `Error with getAuthUser in slackbot feedback. This should not happend since we are using authProtectedApi`,
-    );
-    response.status(400).json({ message: "Invalid user" });
-    return;
-  }
-
-  // Sanity already caches requests with cdn, so we don't need to do that here
+  /**
+   * Sanity caches requests with cdn, so no need to cache locally
+   */
   const document = await getClient().fetch(
     `*[_id == $id][0]{
       "id": _id,
@@ -75,39 +88,35 @@ async function sendSlackbotFeedback(
     },
   );
 
-  // If id given in request is not found, we will return 400
+  /**
+   * If no document is found, sanity will return `null`
+   */
   if (!document) {
     logger.error(
       `Error when fetching sanity document for slackbot feedback: ${validation.data.body.document_id}`,
     );
-    response.status(400).json({ message: "No sanity-document found id" });
+    response
+      .status(400)
+      .json(responseJson(false, SlackFeedbackError.InvalidId));
   }
 
   const slackMembers = await fetchSlackMembers();
-
   if (slackMembers.ok === false) {
     logger.error(
       `Error extracting members from slack in slackbot feedback: ${slackMembers.error}`,
     );
-    response.status(400);
+    response
+      .status(400)
+      .json(responseJson(false, SlackFeedbackError.NoSlackUsers));
     return;
   }
 
   /**
    * We find the sender in list of slack members
    * Since everyone in NAV has access to login,
-   * but might not use slack we canhave some cases where no user is found
+   * but might not use slack we can have some cases where no user is found
    */
   const senderSlackUser = findUserByEmail(user.email, slackMembers.members);
-
-  // TODO: Bugged, shoud not need to have a slack user to add mail
-  const senderSlackData = senderSlackUser
-    ? {
-        email: user.email,
-        slackName: senderSlackUser.profile?.display_name,
-        slackId: senderSlackUser.id,
-      }
-    : { email: user.email };
 
   /**
    * We use contributors found on article and find their matching slack profiles
@@ -118,11 +127,9 @@ async function sendSlackbotFeedback(
     .filter(Boolean) as Exclude<UsersListResponse["members"], undefined>;
 
   if (slackProfileForEditors.length === 0) {
-    /**
-     * TODO:
-     * Update clientside that no editors were found and message was not sent
-     */
-    response.status(200).json({ message: "No editors found" });
+    response
+      .status(200)
+      .json(responseJson(false, SlackFeedbackError.NoEditors));
     return;
   }
 
@@ -132,7 +139,7 @@ async function sendSlackbotFeedback(
     }
     await client.chat.postMessage({
       channel: editor.id,
-      text: "Add fallback to this",
+      text: `Tilbakemelding: ${validation.data.body.feedback}`,
       metadata: {
         event_type: "aksel_article_feedback",
         event_payload: {
@@ -141,6 +148,7 @@ async function sendSlackbotFeedback(
         },
       },
       blocks: slackBlock({
+        isAnonymous: validation.data.body.anon,
         article: {
           id: document.id,
           slug: document.slug,
@@ -150,28 +158,46 @@ async function sendSlackbotFeedback(
         recievers: slackProfileForEditors
           .map((x) => x.id)
           .filter(Boolean) as string[],
-        sender: validation.data.body.anon ? undefined : senderSlackData,
+        sender: {
+          email: user.email,
+          slackName: senderSlackUser?.profile?.display_name,
+          slackId: senderSlackUser?.id,
+        },
       }),
     });
   }
 
-  response.status(200).json({ success: "ok" });
+  response.status(200).json(responseJson(true));
   return;
 }
 
+function responseJson(
+  valid: boolean,
+  message?: SlackFeedbackErrorT,
+): SlackFeedbackResponse {
+  if (!valid && message) {
+    return { ok: false, error: message };
+  }
+  return { ok: true };
+}
+
 type SlackBlockT = {
+  isAnonymous: boolean;
   feedback: string;
   article: { slug: string; title: string; id: string };
   recievers: string[];
-  sender?: { email: string; slackName?: string; slackId?: string };
+  sender: { email: string; slackName?: string; slackId?: string };
 };
 
-function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
-  const senderName = !sender
-    ? "Anonym"
-    : sender.slackName
-      ? `@${sender.slackName}`
-      : sender.email;
+function slackBlock({
+  isAnonymous,
+  feedback,
+  article,
+  recievers,
+  sender,
+}: SlackBlockT) {
+  const senderName = isAnonymous ? "Anonym tilbakemelding" : sender.email;
+  const useSlackId = !!(sender.slackName && sender.slackId);
 
   return [
     {
@@ -214,7 +240,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
               },
             },
             {
-              ...(senderName.startsWith("@") && sender?.slackId
+              ...(useSlackId
                 ? { type: "user", user_id: sender.slackId }
                 : { type: "text", text: senderName }),
             },
