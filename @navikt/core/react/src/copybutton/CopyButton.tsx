@@ -38,7 +38,7 @@ export interface CopyButtonProps
   /**
    * Callback that is called when internal copy-state changes.
    *
-   * @param state - `true` when copy-state is activated, `false` when copy-state is deactivated.
+   * @param state `true` when copy-state is activated, `false` when copy-state is deactivated.
    */
   onActiveChange?: (state: boolean) => void;
   /**

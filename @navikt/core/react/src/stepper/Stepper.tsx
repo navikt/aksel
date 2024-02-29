@@ -5,7 +5,7 @@ import { StepperContext } from "./context";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
-   * <Stepper.Step /> elements
+   * `<Stepper.Step />` elements.
    */
   children: React.ReactNode;
   /**
@@ -20,13 +20,13 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   activeStep: number;
   /**
-   * Callback for next activeStep
+   * Callback for next `activeStep`.
    *
    * Stepper index starts at 1, not 0.
    */
   onStepChange?: (step: number) => void;
   /**
-   * Makes stepper non-interactive if false
+   * Makes stepper non-interactive if false.
    * @default true
    */
   interactive?: boolean;

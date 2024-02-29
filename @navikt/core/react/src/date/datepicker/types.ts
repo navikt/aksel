@@ -16,7 +16,7 @@ export type MultipleMode = {
   min?: number;
   max?: number;
   /**
-   * Allows selecting a week at a time. Only used with mode="multiple".
+   * Allows selecting a week at a time. Only used with `mode` is set to "multiple".
    */
   onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 };

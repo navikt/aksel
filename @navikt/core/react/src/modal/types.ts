@@ -1,6 +1,6 @@
 interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
-   * Content for the header. Alteratively you can use <Modal.Header> instead for more control,
+   * Content for the header. Alteratively you can use `<Modal.Header>` instead for more control,
    * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
    */
   header?: {
@@ -8,18 +8,18 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
     icon?: React.ReactNode;
     heading: string;
     /**
-     * Heading size
+     * Heading size.
      * @default "medium"
      * */
     size?: "medium" | "small";
     /**
-     * Removes close-button (X) when false
+     * Removes close-button (X) when false.
      * @default true
      */
     closeButton?: boolean;
   };
   /**
-   * Modal content
+   * Modal content.
    */
   children: React.ReactNode;
   /**
@@ -40,8 +40,9 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
    */
   onBeforeClose?: () => boolean;
   /**
-   * *Sometimes** called when the user presses the Esc key.
-   * @warning *Some browsers does not always trigger this event. Chrome only triggers it if you have
+   * _Sometimes*_ called when the user presses the Esc key.
+   *
+   *  *: Some browsers does not always trigger this event. Chrome only triggers it if you have
    *  interacted with the modal, and will not trigger it a second time if you press Esc twice in a row.
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
