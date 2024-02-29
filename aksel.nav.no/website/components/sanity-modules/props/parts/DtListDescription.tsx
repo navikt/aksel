@@ -13,7 +13,6 @@ const DtListDescription = ({ children }) => {
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{ code: InlineCode, a: LinkWrapper }}
-        className="make-this-a-div"
       >
         {children}
       </Markdown>

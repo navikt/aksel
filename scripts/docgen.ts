@@ -19,6 +19,22 @@ const options: docgen.ParserOptions = {
 
 const tsConfigParser = docgen.withCustomConfig(`./tsconfig.esm.json`, options);
 
+const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
+  for (const doc of docs) {
+    for (const prop of Object.values(doc.props)) {
+      if (prop.description) {
+        const example_regex = /@example((.|\n)*?(?=\n{2,}))|@example((.|\n)*)/;
+        const example = prop.description.match(example_regex);
+        prop.description = prop.description.replace(example_regex, "");
+        if ((example && example[1]) || (example && example[3])) {
+          // @ts-expect-error adding a field here to a type that doesn't have it
+          prop.example = (example[1] || example[3]).trim();
+        }
+      }
+    }
+  }
+};
+
 const genDocs = () => {
   const files = fg
     .sync([`./src/**/*.tsx`, "!**/*.stories.*", "!**/*.test.*", "!**/stories"])
@@ -33,6 +49,7 @@ const genDocs = () => {
 
   files.forEach((file) => {
     const doc = tsConfigParser.parse(file);
+    enrich_extra_prop_fields(doc);
     if (doc.length > 0) {
       res.push(doc);
     } else {

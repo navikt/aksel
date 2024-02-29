@@ -7,6 +7,11 @@ const LazyDescription = dynamic(() => import("./DtListDescription"), {
   loading: () => <Skeleton />,
 });
 
+const LazyExample = dynamic(() => import("./DtListExample"), {
+  ssr: false,
+  loading: () => <Skeleton />,
+});
+
 export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
     return null;
@@ -25,15 +30,18 @@ export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
           {prop.type ? <>{Highlighter({ type: prop.type })}</> : ""}
         </span>
       </dt>
+
       {prop.defaultValue && (
-        <dd className="text-m mt-1">
+        <>
           <span className="font-size-2">default: </span>
           <span>{Highlighter({ type: prop.defaultValue })}</span>
-        </dd>
+        </>
       )}
       {prop.description && (
         <LazyDescription>{prop.description}</LazyDescription>
       )}
+      {prop.example && <LazyExample>{prop.example}</LazyExample>}
+
       {prop.name === "ref" && prop.type.includes("Ref<") && (
         <dd className="mt-3 text-base">
           {`${parent} extends ${prop.type.slice(

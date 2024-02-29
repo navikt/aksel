@@ -101,6 +101,7 @@ function propList() {
           name: val.name,
           defaultValue: val.defaultValue?.value ?? null,
           description: val.description,
+          example: val.example,
           required: val.required,
           type: val.type.name,
           ref: val.name === "ref",
