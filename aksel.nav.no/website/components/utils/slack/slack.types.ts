@@ -1,3 +1,4 @@
+import { UsersListResponse } from "@slack/web-api";
 import { AuthApiErrorReturn } from "@/auth/auth.types";
 
 type SlackFeedbackOkResponse = {
@@ -5,11 +6,12 @@ type SlackFeedbackOkResponse = {
 };
 
 export const SlackFeedbackError = {
-  InvalidBody: "Invalid body",
-  InvalidUser: "Invalid user",
-  InvalidId: "Invalid id",
-  NoEditors: "No editors",
-  NoSlackUsers: "No slack users",
+  InvalidBody: "InvalidBody",
+  InvalidUser: "InvalidUser",
+  InvalidId: "InvalidId",
+  NoEditors: "NoEditors",
+  NoSlackUsers: "NoSlackUsers",
+  PostMessageError: "PostMessageError",
 } as const;
 
 export type SlackFeedbackErrorT =
@@ -24,3 +26,13 @@ export type SlackFeedbackResponse =
   | SlackFeedbackOkResponse
   | SlackFeedbackErrorResponse
   | AuthApiErrorReturn;
+
+export type FetchSlackMembersSuccess = {
+  ok: true;
+  members: Exclude<UsersListResponse["members"], undefined>;
+};
+
+export type FetchSlackMembersError = {
+  ok: false;
+  error: string;
+};

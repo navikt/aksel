@@ -1,25 +1,17 @@
 import { UsersListResponse, WebClient } from "@slack/web-api";
 import NodeCache from "node-cache";
-import "server-only";
+import {
+  FetchSlackMembersError,
+  FetchSlackMembersSuccess,
+} from "./slack.types";
 
 const cache = new NodeCache();
-const CACHE_KEY = "slackMembers";
-
-type SlackMembersSuccess = {
-  ok: true;
-  members: Exclude<UsersListResponse["members"], undefined>;
-};
-
-type SlackMembersError = {
-  ok: false;
-  error: string;
-};
+const CACHE_KEY = "fetchslackMembers";
 
 export async function fetchSlackMembers(): Promise<
-  SlackMembersSuccess | SlackMembersError
+  FetchSlackMembersSuccess | FetchSlackMembersError
 > {
-  // We fetch all slack members and cache them for 24h
-  const slackMembers: SlackMembersSuccess["members"] | undefined =
+  const slackMembers: FetchSlackMembersSuccess["members"] | undefined =
     cache.get(CACHE_KEY);
 
   if (slackMembers) {
@@ -31,26 +23,66 @@ export async function fetchSlackMembers(): Promise<
 
   const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
-  const slackUsers = await client.users
-    .list({})
-    .then((r) => ({ result: r, ok: true as const }))
-    .catch((e: string) => {
-      return { error: e, ok: false as const };
+  const pagination: {
+    limit: number;
+    cursor: string | undefined;
+    continue: boolean;
+  } = {
+    limit: 200,
+    cursor: undefined,
+    continue: true,
+  };
+
+  let members: Exclude<UsersListResponse["members"], undefined> = [];
+  let error: string | undefined = undefined;
+
+  while (pagination.continue) {
+    const users = await client.users.list({
+      cursor: pagination.cursor,
+      limit: pagination.limit,
     });
 
-  if (slackUsers.ok === false) {
-    return { ok: false, error: slackUsers.error };
+    if (users.ok && users.members) {
+      members = members.concat(users.members);
+    } else {
+      pagination.continue = false;
+      error = users.error;
+      break;
+    }
+
+    if (
+      users.response_metadata?.next_cursor &&
+      users.response_metadata?.next_cursor !== ""
+    ) {
+      pagination.cursor = users.response_metadata.next_cursor;
+    } else {
+      pagination.continue = false;
+    }
   }
 
-  if (!slackUsers.result.members) {
+  if (error) {
+    return {
+      ok: false,
+      error: error ?? "Error when paginating slack-users",
+    };
+  }
+
+  /**
+   * Lets filter out som unwanted users to simplify the list
+   */
+  members = members
+    .filter((m) => !m.is_bot)
+    .filter((m) => !m.deleted)
+    .filter((m) => !!m.is_email_confirmed);
+
+  if (members.length === 0) {
     return { ok: false, error: "No members found" };
   }
 
-  const result: SlackMembersSuccess = {
-    ok: true,
-    members: slackUsers.result.members,
-  };
+  cache.set(CACHE_KEY, members, 60 * 60 * 24);
 
-  cache.set(CACHE_KEY, slackUsers.result.members, 60 * 60 * 24);
-  return result;
+  return {
+    ok: true,
+    members,
+  };
 }

@@ -1,6 +1,5 @@
 import { UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
-import "server-only";
 import { z } from "zod";
 import { authProtectedApi } from "@/auth/authProtectedApi";
 import { getAuthUser } from "@/auth/getAuthUser";
@@ -133,38 +132,51 @@ async function sendSlackbotFeedback(
     return;
   }
 
+  let postMessageError = false;
+
   for (const editor of slackProfileForEditors) {
     if (!editor.id) {
       continue;
     }
-    await client.chat.postMessage({
-      channel: editor.id,
-      text: `Tilbakemelding: ${validation.data.body.feedback}`,
-      metadata: {
-        event_type: "aksel_article_feedback",
-        event_payload: {
-          name: user.name,
-          email: user.email,
+    await client.chat
+      .postMessage({
+        channel: editor.id,
+        text: `Tilbakemelding: ${validation.data.body.feedback}`,
+        metadata: {
+          event_type: "aksel_article_feedback",
+          event_payload: {
+            name: user.name,
+            email: user.email,
+          },
         },
-      },
-      blocks: slackBlock({
-        isAnonymous: validation.data.body.anon,
-        article: {
-          id: document.id,
-          slug: document.slug,
-          title: document.title,
-        },
-        feedback: validation.data.body.feedback,
-        recievers: slackProfileForEditors
-          .map((x) => x.id)
-          .filter(Boolean) as string[],
-        sender: {
-          email: user.email,
-          slackName: senderSlackUser?.profile?.display_name,
-          slackId: senderSlackUser?.id,
-        },
-      }),
-    });
+        blocks: slackBlock({
+          isAnonymous: validation.data.body.anon,
+          article: {
+            id: document.id,
+            slug: document.slug,
+            title: document.title,
+          },
+          feedback: validation.data.body.feedback,
+          recievers: slackProfileForEditors
+            .map((x) => x.id)
+            .filter(Boolean) as string[],
+          sender: {
+            email: user.email,
+            slackName: senderSlackUser?.profile?.display_name,
+            slackId: senderSlackUser?.id,
+          },
+        }),
+      })
+      .catch((e) => {
+        postMessageError = true;
+        logger.error(`Error when sending slackbot feedback: ${e}`);
+      });
+  }
+
+  if (postMessageError) {
+    response
+      .status(400)
+      .json(responseJson(false, SlackFeedbackError.PostMessageError));
   }
 
   response.status(200).json(responseJson(true));

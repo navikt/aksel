@@ -63,7 +63,6 @@
     "sanity-plugin-asset-source-unsplash": "^1.1.2",
     "sanity-plugin-media": "^2.2.5",
     "sanity-plugin-utils": "^1.6.4",
-    "server-only": "^0.0.1",
     "sharp": "0.32.6",
     "styled-components": "^6.0.0",
     "swr": "^1.1.2",
