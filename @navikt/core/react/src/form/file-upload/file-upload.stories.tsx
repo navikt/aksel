@@ -66,11 +66,8 @@ export const Default: StoryFn = () => {
   const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
   return (
-    <FileUpload>
-      <VStack
-        gap="6"
-        style={{ width: 500, maxWidth: "100%", minHeight: "100vh" }}
-      >
+    <FileUpload style={{ width: 500, maxWidth: "100%", margin: "0 auto" }}>
+      <VStack gap="6">
         <FileUpload.Dropzone
           label="Last opp filer til søknaden"
           description={`Maks størrelse ${MAX_SIZE_MB} MB`}
@@ -123,7 +120,10 @@ export const Default: StoryFn = () => {
     </FileUpload>
   );
 };
-Default.parameters = { chromatic: { disable: true } };
+Default.parameters = {
+  chromatic: { disable: true },
+  layout: "padded",
+};
 
 const errors: Record<FileRejectionReason, string> = {
   fileType: "Filformatet støttes ikke",
