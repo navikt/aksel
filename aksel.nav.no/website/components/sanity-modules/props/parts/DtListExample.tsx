@@ -1,11 +1,10 @@
-import Code from "@/web/Code";
+import Code from "@/cms/props/parts/Code";
 
 const DtListDescription = ({ children }) => {
   return (
-    <div className="mt-3">
-      <span className="font-size-2 ml-4 text-gray-700">Example: </span>
+    <dd className="mt-3 grid">
       <Code>{children}</Code>
-    </div>
+    </dd>
   );
 };
 

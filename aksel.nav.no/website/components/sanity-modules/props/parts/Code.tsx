@@ -9,7 +9,7 @@ const Code = (props: Pick<React.HTMLAttributes<HTMLElement>, "children">) => (
     {({ style, tokens, getLineProps, getTokenProps }) => (
       <pre
         style={style}
-        className="m-2 ml-4 mt-0 border border-gray-300 px-4 py-2"
+        className="overflow-auto rounded-lg border border-gray-300 px-4 py-2"
       >
         {tokens.map((line, i) => (
           <div key={i} {...getLineProps({ line })}>
