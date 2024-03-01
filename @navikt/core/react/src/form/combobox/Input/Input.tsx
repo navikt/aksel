@@ -125,7 +125,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (value === "") {
             const lastSelectedOption =
               selectedOptions[selectedOptions.length - 1];
-            removeSelectedOption(lastSelectedOption);
+            if (lastSelectedOption) {
+              removeSelectedOption(lastSelectedOption);
+            }
           }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
