@@ -29,6 +29,7 @@ export default {
         },
       },
     },
+    "storybook-addon-pseudo-states",
   ],
   framework: {
     name: "@storybook/react-vite",
