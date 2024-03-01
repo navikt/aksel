@@ -124,7 +124,7 @@ describe("Combobox state-handling", () => {
     ).toBeInTheDocument();
   });
 
-  it("Should handle complex options with label and value", async () => {
+  test("Should handle complex options with label and value", async () => {
     const onToggleSelected = vi.fn();
     render(
       <App
