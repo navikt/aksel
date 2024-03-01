@@ -99,7 +99,7 @@ interface FileUploadComponent
    * @example
    * ```jsx
    * <FileUpload.Trigger onSelect={...}>
-   *   <Button>Last opp filer</Button>
+   *   <Button variant="secondary">Last opp filer</Button>
    * </FileUpload.Trigger>
    * ```
    */

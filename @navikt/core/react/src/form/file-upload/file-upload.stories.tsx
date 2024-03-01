@@ -217,7 +217,9 @@ export const TriggerWithButton: StoryObj<typeof FileUpload.Trigger> = {
   render: (props) => {
     return (
       <FileUpload.Trigger {...props} onSelect={console.log}>
-        <Button icon={<UploadIcon aria-hidden />}>Last opp filer</Button>
+        <Button variant="secondary" icon={<UploadIcon aria-hidden />}>
+          Last opp filer
+        </Button>
       </FileUpload.Trigger>
     );
   },
