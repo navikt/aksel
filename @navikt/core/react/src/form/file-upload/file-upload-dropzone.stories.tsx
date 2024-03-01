@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { fireEvent, within } from "@storybook/test";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
 import {
@@ -69,8 +70,18 @@ export const States: StoryObj = {
         error="Du må laste opp en fil"
         description="Bruk filtype DOC, PPT eller PDF. Maks filstørrelse 10 MB."
       />
+
+      <h2>Dragging</h2>
+      <FileUpload.Dropzone label="Drag over test" onSelect={onSelect} />
     </div>
   ),
+};
+States.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByLabelText("Drag over test", {
+    selector: "input",
+  });
+  fireEvent.dragOver(input);
 };
 
 export const Translation: StoryObj = {
