@@ -124,7 +124,24 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
             />
             <div className="navds-file-item__file-info">
               <ItemName file={file} href={href} onClick={onFileClick} />
-              <BodyShort as="div">{getStatusText()}</BodyShort>
+              <BodyShort as="div" size="small">
+                {getStatusText()}
+              </BodyShort>
+              <div
+                className="navds-file-item__error"
+                aria-relevant="additions removals"
+                aria-live="polite"
+              >
+                {showError && (
+                  <BodyShort
+                    size="small"
+                    className="navds-file-item__error-content"
+                  >
+                    <ExclamationmarkTriangleIcon aria-hidden />
+                    {error}
+                  </BodyShort>
+                )}
+              </div>
             </div>
 
             {status === "idle" && (
@@ -136,20 +153,6 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 retryTitle={translate("FileUpload.item.retryButtonTitle")}
                 deleteTitle={translate("FileUpload.item.deleteButtonTitle")}
               />
-            )}
-          </div>
-          <div
-            className={cl("navds-file-item__error", {
-              "navds-file-item__error--show": showError,
-            })}
-            aria-relevant="additions removals"
-            aria-live="polite"
-          >
-            {showError && (
-              <div className="navds-file-item__error-content">
-                <ExclamationmarkTriangleIcon aria-hidden />
-                {error}
-              </div>
             )}
           </div>
         </Component>
