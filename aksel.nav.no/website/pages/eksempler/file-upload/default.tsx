@@ -23,8 +23,8 @@ const Example = () => {
     <VStack gap="6">
       <UNSAFE_FileUpload.Dropzone
         label="Last opp filer til søknaden"
-        description={`Maks størrelse ${MAX_SIZE_MB} MB`}
-        accept=".doc,.docx,.xls,.xlsx,.pdf"
+        description={`Du kan laste opp Word- og PDF-filer. Maks 3 filer. Maks størrelse ${MAX_SIZE_MB} MB.`}
+        accept=".doc,.docx,.pdf"
         maxSizeInBytes={MAX_SIZE}
         fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
         onSelect={(newFiles) => setFiles([...files, ...newFiles])}
@@ -33,7 +33,7 @@ const Example = () => {
       {acceptedFiles.length > 0 && (
         <VStack gap="2">
           <Heading level="3" size="xsmall">
-            {`Vedlegg (${acceptedFiles.length} av ${MAX_FILES})`}
+            {`Vedlegg (${acceptedFiles.length})`}
           </Heading>
           <VStack as="ul" gap="3">
             {acceptedFiles.map((file, index) => (
