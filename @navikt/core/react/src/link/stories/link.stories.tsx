@@ -217,6 +217,7 @@ export const Chromatic = () => (
     </div>
   </>
 );
+Chromatic.parameters = { chromatic: { disable: false } };
 
 export const ChromaticHover = () => (
   <>
@@ -241,7 +242,10 @@ export const ChromaticHover = () => (
     </div>
   </>
 );
-ChromaticHover.parameters = { psudo: { hover: true } };
+ChromaticHover.parameters = {
+  chromatic: { disable: false },
+  psudo: { hover: true },
+};
 
 export const ChromaticFocusVisible = () => (
   <>
@@ -266,7 +270,10 @@ export const ChromaticFocusVisible = () => (
     </div>
   </>
 );
-ChromaticFocusVisible.parameters = { psudo: { focusVisible: true } };
+ChromaticFocusVisible.parameters = {
+  chromatic: { disable: false },
+  psudo: { focusVisible: true },
+};
 
 export const ChromaticActive = () => (
   <>
@@ -291,4 +298,7 @@ export const ChromaticActive = () => (
     </div>
   </>
 );
-ChromaticActive.parameters = { psudo: { active: true } };
+ChromaticActive.parameters = {
+  chromatic: { disable: false },
+  psudo: { active: true },
+};
