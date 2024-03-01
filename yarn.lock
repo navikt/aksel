@@ -3300,7 +3300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.1.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.1.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3335,8 +3335,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.1.0
-    "@navikt/ds-tokens": ^6.1.0
+    "@navikt/ds-css": ^6.1.1
+    "@navikt/ds-tokens": ^6.1.1
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3351,7 +3351,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.1.0
+    "@navikt/ds-css": 6.1.1
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3372,11 +3372,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.1.0, @navikt/ds-css@^6.1.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.1.1, @navikt/ds-css@^6.1.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.1.0
+    "@navikt/ds-tokens": ^6.1.1
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3396,13 +3396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.1.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.1.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^6.1.0
-    "@navikt/ds-tokens": ^6.1.0
+    "@navikt/aksel-icons": ^6.1.1
+    "@navikt/ds-tokens": ^6.1.1
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3456,11 +3456,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-tailwind@^6.1.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.1.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.1.0
+    "@navikt/ds-tokens": ^6.1.1
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3470,7 +3470,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.1.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.1.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8817,11 +8817,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.1.0
-    "@navikt/ds-css": ^6.1.0
-    "@navikt/ds-react": ^6.1.0
-    "@navikt/ds-tailwind": ^6.1.0
-    "@navikt/ds-tokens": ^6.1.0
+    "@navikt/aksel-icons": ^6.1.1
+    "@navikt/ds-css": ^6.1.1
+    "@navikt/ds-react": ^6.1.1
+    "@navikt/ds-tailwind": ^6.1.1
+    "@navikt/ds-tokens": ^6.1.1
   languageName: unknown
   linkType: soft
 
