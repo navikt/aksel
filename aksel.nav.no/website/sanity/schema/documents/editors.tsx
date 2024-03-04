@@ -65,7 +65,7 @@ export const Editors = defineType({
         const { roles, email } = currentUser;
 
         if (!parent?.email || !parent?.title) {
-          return false;
+          return true;
         }
         if (
           roles.find(({ name }) =>
