@@ -30,9 +30,13 @@ const PropTable = ({ komponent }: PropTableProps) => {
           {komponent?.overridable && (
             <div className="border border-t-0 border-gray-300">
               <dt className="px-2 py-2">
-                <span className="rounded-medium bg-surface-alt-3-subtle px-1 py-05 font-mono text-small font-semibold">
+                <Heading
+                  size="xsmall"
+                  level="4"
+                  className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
+                >
                   as?
-                </span>
+                </Heading>
               </dt>
               <dd>
                 <DtList
@@ -50,9 +54,11 @@ const PropTable = ({ komponent }: PropTableProps) => {
           {komponent?.propref?.proplist?.map((prop) => (
             <div className="border border-t-0 border-gray-300" key={prop.name}>
               <dt className="px-2 py-2">
-                <span className="rounded-medium bg-surface-alt-3-subtle px-1 py-05 font-mono text-small font-semibold">{`${
-                  prop.name
-                }${prop?.required ? "" : "?"}`}</span>
+                <Heading
+                  size="xsmall"
+                  level="4"
+                  className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
+                >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
               </dt>
               <dd>
                 <DtList prop={prop} parent={komponent?.title ?? ""} />
