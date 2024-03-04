@@ -42,8 +42,28 @@ export const Description: Story = {
       },
       {
         hasRefs: true,
+        slug: "c3214",
+        title: "Interne flater",
+      },
+      {
+        hasRefs: true,
+        slug: "c321",
+        title: "nav.no",
+      },
+      {
+        hasRefs: true,
         slug: "c",
         title: "Skjemaer",
+      },
+      {
+        hasRefs: true,
+        slug: "c123",
+        title: "Fremragende team",
+      },
+      {
+        hasRefs: true,
+        slug: "c1234",
+        title: "Produktutviklingsmodellen",
       },
     ],
     tema: {
