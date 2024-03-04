@@ -4,4 +4,4 @@ export { type ToggleGroupProps } from "./ToggleGroup.types";
 export {
   default as ToggleGroupItem,
   type ToggleGroupItemProps,
-} from "./ToggleItem";
+} from "./parts/ToggleItem";

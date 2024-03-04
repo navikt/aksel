@@ -4,7 +4,7 @@ import { BodyShort } from "../../typography/BodyShort";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 
-export interface ToggleItemProps
+export interface ToggleGroupItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Content
@@ -16,8 +16,7 @@ export interface ToggleItemProps
   value: string;
 }
 
-// TODO: reset focusedItem on focus-loss
-const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
+const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
   (
     { className, children, value, onClick, onFocus, onKeyDown, ...rest },
     forwardedRef,
