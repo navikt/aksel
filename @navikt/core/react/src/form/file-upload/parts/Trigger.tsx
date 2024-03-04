@@ -17,7 +17,6 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
       onSelect,
       validator,
       maxSizeInBytes,
-      ...rest
     }: FileUploadTriggerProps,
     ref,
   ) => {
@@ -32,16 +31,9 @@ const Trigger = forwardRef<HTMLInputElement, FileUploadTriggerProps>(
 
     return (
       <>
-        <Slot
-          onClick={() => {
-            inputRef.current?.click();
-          }}
-        >
-          {children}
-        </Slot>
+        <Slot onClick={() => inputRef.current?.click()}>{children}</Slot>
         <input
           ref={mergedRef}
-          {...rest}
           type="file"
           style={{ display: "none" }}
           multiple={multiple}
