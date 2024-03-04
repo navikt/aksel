@@ -183,6 +183,7 @@
     "react-dom": "^18.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "storybook": "^7.6.7",
+    "storybook-addon-pseudo-states": "^2.1.2",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",

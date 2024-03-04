@@ -19,9 +19,7 @@ export const UxTweaks = ({ href, length, ...rest }: UxTweaksProps) => {
       <Box
         padding="6"
         borderRadius="xlarge"
-        borderWidth="1"
-        borderColor="border-subtle"
-        className="space-y-3 bg-violet-50"
+        className="space-y-3 bg-amber-200 ring-1 ring-amber-700"
         as="aside"
         role="presentation"
       >

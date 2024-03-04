@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/types";
 
-export interface ToggleChipsProps
+export interface ChipsToggleProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
@@ -22,7 +22,7 @@ export interface ToggleChipsProps
 }
 
 export const ToggleChips: OverridableComponent<
-  ToggleChipsProps,
+  ChipsToggleProps,
   HTMLButtonElement
 > = forwardRef(
   (

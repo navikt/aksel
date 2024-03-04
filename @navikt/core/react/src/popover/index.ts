@@ -1,2 +1,6 @@
+"use client";
 export { default as Popover, type PopoverProps } from "./Popover";
-export { type PopoverContentProps } from "./PopoverContent";
+export {
+  default as PopoverContent,
+  type PopoverContentProps,
+} from "./PopoverContent";

@@ -30,3 +30,5 @@ export const ExpansionCardTitle: OverridableComponent<
     />
   ),
 );
+
+export default ExpansionCardTitle;

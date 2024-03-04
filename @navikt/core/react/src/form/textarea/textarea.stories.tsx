@@ -3,13 +3,15 @@ import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
 import { Modal } from "../../modal";
-import { Textarea } from "../index";
+import { Textarea } from "./index";
 
 const meta: Meta<typeof Textarea> = {
   title: "ds-react/Textarea",
   component: Textarea,
 };
 export default meta;
+
+type Story = StoryObj<typeof Textarea>;
 
 export const Default: StoryObj<typeof Textarea> = {
   render: (props) => {
@@ -37,6 +39,9 @@ export const Default: StoryObj<typeof Textarea> = {
     readOnly: { type: "boolean" },
     maxRows: { type: "number" },
     minRows: { type: "number" },
+  },
+  parameters: {
+    chromatic: { disable: true },
   },
 };
 
@@ -222,4 +227,28 @@ export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
 };
 ModalStrictMode.parameters = {
   chromatic: { disable: true }, // Not reproducable in Chromatic
+};
+
+export const Chromatic: Story = {
+  render: (props) => (
+    <div>
+      <Textarea {...props} label="Textarea" />
+      <Small />
+      <Description />
+      <Error />
+      <Disabled />
+      <HideLabel />
+      <MaxLength />
+      <MinRows />
+      <MaxRows />
+      <Resize />
+      <OnChange />
+      <Controlled />
+      <Readonly />
+      <AutoScrollbar label="autoscrollbar" />
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

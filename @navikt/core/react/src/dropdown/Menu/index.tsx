@@ -6,7 +6,7 @@ import Divider from "./Divider";
 import GroupedList, { GroupedListType } from "./GroupedList";
 import List, { ListType } from "./List";
 
-interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Dropdown content
    */
@@ -39,7 +39,7 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
     | "left-end";
 }
 
-export interface MenuType<Props = MenuProps>
+export interface MenuType<Props = DropdownMenuProps>
   extends React.ForwardRefExoticComponent<
     Props & React.RefAttributes<HTMLDivElement>
   > {
@@ -59,7 +59,7 @@ export interface MenuType<Props = MenuProps>
   >;
 }
 
-export const Menu = forwardRef<HTMLDivElement, MenuProps>(
+export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
   ({ className, onClose, placement = "bottom-end", ...rest }, ref) => {
     const context = useContext(DropdownContext);
 

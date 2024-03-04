@@ -1,6 +1,7 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Checkbox, CheckboxGroup } from "../../index";
+import Checkbox from "./Checkbox";
+import CheckboxGroup from "./CheckboxGroup";
 
 const meta: Meta<typeof Checkbox> = {
   title: "ds-react/Checkbox",
@@ -11,8 +12,13 @@ const meta: Meta<typeof Checkbox> = {
       control: { type: "radio" },
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
+
+type Story = StoryObj<typeof Checkbox>;
 
 export const Default = (props) => {
   const [state, setState] = useState(["checkbox1"]);
@@ -223,3 +229,53 @@ export const Readonly = () => (
     </Checkbox>
   </div>
 );
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>Group</h2>
+        <Group />
+      </div>
+      <div>
+        <h2>GroupError</h2>
+        <GroupError />
+      </div>
+      <div>
+        <h2>GroupSmall</h2>
+        <GroupSmall />
+      </div>
+      <div>
+        <h2>GroupDescription</h2>
+        <GroupDescription />
+      </div>
+      <div>
+        <h2>Single</h2>
+        <Single />
+      </div>
+      <div>
+        <h2>SingleSmall</h2>
+        <SingleSmall />
+      </div>
+      <div>
+        <h2>SingleDescription</h2>
+        <SingleDescription />
+      </div>
+      <div>
+        <h2>Indeterminate</h2>
+        <Indeterminate />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        <Readonly />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

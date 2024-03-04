@@ -7,20 +7,7 @@
   --ac-accordion-item-bg-open: var(--a-deepblue-800);
 }
 
-/* Override bug i sanity-ui */
-/* stylelint-disable-next-line aksel/no-class-override */
-#sanity-wrapper
-  .navds-accordion
-  svg.navds-accordion__expand-icon--filled:not([data-ui="Popover__arrow"]):not([data-ui="Tooltip__arrow"]) {
-  display: none;
-}
-
-/* stylelint-disable-next-line aksel/no-class-override */
-.aksel-admin.aksel-admin svg[focusable="false"] {
-  font-size: calc(30 / 16 * 1em);
-}
-
-/* stylelint-disable-next-line aksel/no-class-override */
-.aksel-admin.aksel-admin :where(.navds-button, .navds-copybutton) svg[focusable="false"] {
-  font-size: inherit;
+/* Scales use of custom icon-use to same size as sanity-native icons */
+.aksel-admin svg:not([data-sanity-icon]) {
+  font-size: calc(21 / 16 * 1em);
 }

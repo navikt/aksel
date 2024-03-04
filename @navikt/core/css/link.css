@@ -20,7 +20,6 @@
 
 .navds-link:hover {
   text-decoration: none;
-  color: var(--ac-link-hover-text, var(--a-text-action-hover));
 }
 
 .navds-link.navds-link--remove-underline {

@@ -1,2 +1,2 @@
-export { default as Skeleton } from "./Skeleton";
-export type { SkeletonProps } from "./Skeleton";
+"use client";
+export { default as Skeleton, type SkeletonProps } from "./Skeleton";

@@ -14,7 +14,7 @@ import {
 import cl from "clsx";
 import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
-import Portal from "../overlays/portal/Portal";
+import { Portal } from "../portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";

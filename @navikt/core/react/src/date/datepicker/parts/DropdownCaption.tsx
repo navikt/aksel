@@ -3,7 +3,7 @@ import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
-import { Select } from "../../../form/Select";
+import { Select } from "../../../form/select";
 import { getMonths, getYears } from "../../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
 import WeekRow from "./WeekRow";

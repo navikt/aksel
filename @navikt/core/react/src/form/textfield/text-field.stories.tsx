@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { TextField } from "../index";
+import TextField from "./TextField";
 
 export default {
   title: "ds-react/TextField",
@@ -25,7 +25,12 @@ export default {
       type: "boolean",
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof TextField>;
 
 export const Default = {
   render: (props) => {
@@ -97,4 +102,42 @@ export const Readonly = () => {
       <TextField label="Bosted" readOnly error="feilmelding" value="Oslo" />
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        {Default?.render({})}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+      <div>
+        <h2>Description</h2>
+        <Description />
+      </div>
+      <div>
+        <h2>Error</h2>
+        <Error />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
+      </div>
+      <div>
+        <h2>HideLabel</h2>
+        <HideLabel />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        <Readonly />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

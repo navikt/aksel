@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Switch } from "../index";
+import Switch from "./Switch";
 
 export default {
   title: "ds-react/Switch",
