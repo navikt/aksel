@@ -43,7 +43,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField({ ...props, disabled: _disabled }, "fileUpload");
 
-    const { onChange, inputRef, mergedRef } = useFileUpload({
+    const { upload, onChange, inputRef, mergedRef } = useFileUpload({
       ref,
       onSelect,
       validator,
@@ -53,6 +53,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
     });
 
     const dropzoneCtx = useDropzone({
+      upload,
       disabled: inputProps.disabled,
     });
 
@@ -63,6 +64,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           "navds-dropzone--dragging": dropzoneCtx.isDraggingOver,
           "navds-dropzone--disabled": inputProps.disabled,
         })}
+        {...omit(rest, ["errorId", "id"])}
       >
         <Label htmlFor={inputProps.id} className="navds-form-field__label">
           {label}
@@ -76,12 +78,14 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             {description}
           </BodyShort>
         )}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
+          className="navds-dropzone__area"
+          onDragEnter={dropzoneCtx.onDragEnter}
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
-          onDragEnd={dropzoneCtx.onDragEnd}
           onDrop={dropzoneCtx.onDrop}
-          className="navds-dropzone__area"
+          onClick={() => inputRef.current?.click()}
         >
           {!inputProps.disabled && (
             <>
@@ -110,10 +114,13 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 </BodyShort>
               </div>
               <Button
+                {...inputProps}
                 className="navds-dropzone__area-button"
                 variant="secondary"
-                onClick={() => inputRef.current?.click()}
-                tabIndex={-1}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  inputRef.current?.click();
+                }}
               >
                 {multiple
                   ? translate("FileUpload.dropzone.buttonMultiple")
@@ -134,10 +141,8 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           )}
 
           <input
-            {...omit(rest, ["errorId"])}
-            {...inputProps}
             type="file"
-            className="navds-dropzone__area-input"
+            style={{ display: "none" }}
             multiple={multiple}
             accept={accept}
             onChange={onChange}
