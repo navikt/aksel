@@ -27,6 +27,13 @@ const requestBodySchema = z.object({
   }),
 });
 
+/* const demoBody = {
+  feedback: "Dette er en test",
+  anon: true,
+  document_id:
+    "d0b2ca93-433b-4fcc-ab3c-c9c7d4dec186"
+}; */
+
 const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
@@ -64,6 +71,7 @@ async function sendSlackbotFeedback(
     response
       .status(400)
       .json(responseJson(false, SlackFeedbackError.InvalidBody));
+
     return;
   }
 
@@ -265,7 +273,7 @@ function slackBlock({
             },
             {
               type: "text",
-              text: "\n\nMedvirkende:\n",
+              text: "\n\nMedvirkende (disse fikk tilbakemeldingen):\n",
               style: {
                 bold: true,
               },
