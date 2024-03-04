@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Detail, Skeleton } from "@navikt/ds-react";
+import { BodyShort, Skeleton } from "@navikt/ds-react";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { Highlighter } from "./Highlight";
 
@@ -19,35 +19,43 @@ export const DtList = ({ prop }: { prop: any; parent: string }) => {
   }
 
   return (
-    <Detail
+    <BodyShort
       as="dl"
-      className="dtlist block overflow-x-auto border border-t-0 border-gray-300 py-2 first-of-type:border-t last-of-type:rounded-b"
+      className="dtlist block overflow-x-auto last-of-type:rounded-b"
     >
-      <dt className="px-2">
-        <span className="rounded-medium bg-surface-alt-3-subtle px-1 py-05 font-mono text-small font-semibold">{`${
-          prop.name
-        }${prop?.required ? "" : "?"}`}</span>
-      </dt>
-
-      <div className="mt-1">
+      <div>
         {prop.type && (
-          <dd className="flex px-3 text-base">
-            <div className="min-w-24 font-semibold">Type: </div>
-            <div>{Highlighter({ type: prop.type })}</div>
-          </dd>
+          <div className="my-4 flex px-3 text-base">
+            <dt>
+              <div className="min-w-24 font-semibold">Type: </div>
+            </dt>
+            <dd>
+              <code className="text-sm">
+                {Highlighter({ type: prop.type })}
+              </code>
+            </dd>
+          </div>
         )}
         {prop.defaultValue && (
-          <dd className="flex px-3 text-base">
-            <div className="min-w-24 font-semibold">Default: </div>
-            <div>{Highlighter({ type: prop.defaultValue })}</div>
-          </dd>
+          <div className="flex px-3 text-base">
+            <dt>
+              <div className="min-w-24 font-semibold">Default: </div>
+            </dt>
+            <dd>
+              <div>{Highlighter({ type: prop.defaultValue })}</div>
+            </dd>
+          </div>
         )}
         {prop.description && (
-          <div className="flex px-3 py-2">
-            <div className="min-w-24 text-base font-semibold">Description:</div>
+          <div className="my-4 flex px-3">
+            <dt>
+              <div className="min-w-24 text-base font-semibold">
+                Description:
+              </div>
+            </dt>
+
             <div>
               <LazyDescription>{prop.description}</LazyDescription>
-
               {prop.params && (
                 <dd className="mt-6">
                   <AkselTable th={[{ text: "Param" }, { text: "Description" }]}>
@@ -68,6 +76,6 @@ export const DtList = ({ prop }: { prop: any; parent: string }) => {
           </div>
         )}
       </div>
-    </Detail>
+    </BodyShort>
   );
 };
