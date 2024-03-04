@@ -78,7 +78,7 @@ export const Editors = defineType({
         if (parent?.alt_email) {
           return parent?.alt_email !== email;
         }
-        return parent?.email !== email;
+        return parent?.email === email;
       },
     }),
   ],
