@@ -1,15 +1,22 @@
+import { Meta } from "@storybook/react";
 import React from "react";
 import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 import { Alert } from "../../alert";
-import { ConfirmationPanel } from "../../form";
+import { ConfirmationPanel } from "../../form/confirmation-panel";
+import { Box } from "../../layout/box";
+import { VStack } from "../../layout/stack";
 import { BodyLong } from "../../typography";
 import Link from "../Link";
 import { RandomIcon } from "./RandomIcon";
 
-export default {
+const meta: Meta<typeof Link> = {
   title: "ds-react/Link",
   component: Link,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
+export default meta;
 
 const LinkWrapper = ({
   children = "Ex aliqua incididunt",
@@ -27,53 +34,38 @@ const LinkWrapper = ({
       variant={variant as "action" | "neutral" | "subtle"}
       inlineText={inlineText}
     >
-      {iconLeft && (
-        <>
-          <RandomIcon />{" "}
-        </>
-      )}
+      {iconLeft && <RandomIcon />}
       {children}
-      {iconRight && (
-        <>
-          {" "}
-          <RandomIcon />
-        </>
-      )}
+      {iconRight && <RandomIcon />}
     </Link>{" "}
   </>
 );
 
 export const Default = {
-  render: ({ icon, inline }) => {
+  render: ({ icon, inline, underline }) => {
     const LinkD = () => (
-      <>
-        {" "}
-        <Link href="#" underline={!inline} inlineText={inline}>
-          {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
-          {icon && <PlusCircleFillIcon />}
-        </Link>{" "}
-      </>
+      <Link href="#" underline={underline} inlineText={inline}>
+        {icon && <PlusCircleFillIcon />}Ex aliqua incididunt
+        {icon && <PlusCircleFillIcon />}
+      </Link>
     );
 
     if (inline) {
       return (
-        <div
-          className="colgap"
-          style={{
-            width: "800px",
-            border: "1px solid black",
-            borderRadius: "8px",
-          }}
+        <Box
+          borderWidth="1"
+          borderRadius="large"
+          padding="4"
+          style={{ maxWidth: "800px" }}
         >
           <BodyLong>
-            Incididunt laborum nisi nisi Lorem
-            <LinkD />
-            in. Laborum aute fugiat officia adipisicing non veniam dolor nulla
-            non ex consectetur fugiat eiusmod aute. Culpa sit aute est duis
-            minim in in voluptate velit fugiat. Laboris est id deserunt ut ea
-            Lorem eu. Esse elit laboris aute commodo sint laborum fugiat aliqua.
+            Incididunt laborum nisi nisi Lorem <LinkD /> in. Laborum aute fugiat
+            officia adipisicing non veniam dolor nulla non ex consectetur fugiat
+            eiusmod aute. Culpa sit aute est duis minim in in voluptate velit
+            fugiat. Laboris est id deserunt ut ea Lorem eu. Esse elit laboris
+            aute commodo sint laborum fugiat aliqua.
           </BodyLong>
-        </div>
+        </Box>
       );
     }
     return <LinkD />;
@@ -82,22 +74,21 @@ export const Default = {
   args: {
     icon: false,
     inline: false,
+    underline: true,
   },
 };
 
 export const InlineInsideBodyLong = {
   render: ({ iconLeft, iconRight }) => {
     return (
-      <div
-        className="colgap"
-        style={{
-          width: "800px",
-          border: "1px solid black",
-          borderRadius: "8px",
-        }}
+      <Box
+        borderWidth="1"
+        borderRadius="large"
+        padding="4"
+        style={{ width: "800px" }}
       >
         <style>{`.storybook-custom-spacing { white-space: pre;}`}</style>
-        <BodyLong>
+        <BodyLong spacing>
           <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight} />
           Eiusmod aute.
           <LinkWrapper underline iconLeft={iconLeft} iconRight={iconRight} />
@@ -119,7 +110,7 @@ export const InlineInsideBodyLong = {
           </LinkWrapper>
           {"     "}spacing.
         </BodyLong>
-      </div>
+      </Box>
     );
   },
   args: {
@@ -128,86 +119,186 @@ export const InlineInsideBodyLong = {
   },
 };
 
-const DemoLink = () => (
+export const Varianter = {
+  render: ({ iconLeft, iconRight }) => {
+    return (
+      <VStack gap="3">
+        {["action", "neutral", "subtle"].map((variant) => (
+          <div key={variant}>
+            <LinkWrapper
+              iconLeft={iconLeft}
+              iconRight={iconRight}
+              variant={variant}
+            />
+          </div>
+        ))}
+      </VStack>
+    );
+  },
+  args: {
+    iconLeft: false,
+    iconRight: false,
+  },
+};
+
+const LinkWithIcon = () => (
   <Link href="#">
-    <PlusCircleFillIcon aria-hidden /> Ex aliqua incididunt{" "}
+    <PlusCircleFillIcon aria-hidden />
+    Ex aliqua incididunt
     <PlusCircleFillIcon aria-hidden />
   </Link>
 );
 
-export const Icon = () => <DemoLink />;
+export const Icon = () => <LinkWithIcon />;
 
-export const InAlert = () => {
-  return (
-    <div className="colgap">
-      <Alert variant="info">
-        <DemoLink />
-      </Alert>
-      <Alert variant="success">
-        <DemoLink />
-      </Alert>
-      <Alert variant="warning">
-        <DemoLink />
-      </Alert>
-      <Alert variant="error">
-        <DemoLink />
-      </Alert>
-    </div>
-  );
-};
-
-export const InConfirmationPanel = () => {
-  return (
-    <div className="colgap">
-      <ConfirmationPanel label="demo">
-        <DemoLink />
-      </ConfirmationPanel>
-      <ConfirmationPanel checked label="demo">
-        <DemoLink />
-      </ConfirmationPanel>
-      <ConfirmationPanel error="demo" label="demo">
-        <DemoLink />
-      </ConfirmationPanel>
-    </div>
-  );
-};
-
-export const Variants = {
-  render: ({ iconLeft, iconRight }) => {
-    return (
-      <div className="colgap">
-        {["action", "neutral", "subtle"].map((variant) => (
-          <>
-            <div>
-              <LinkWrapper
-                iconLeft={iconLeft}
-                iconRight={iconRight}
-                variant={variant}
-              />
-            </div>
-          </>
-        ))}
+const Variants = () => (
+  <VStack gap="3">
+    {["action", "neutral", "subtle"].map((variant) => (
+      <div key={variant}>
+        <LinkWrapper variant={variant} />
       </div>
-    );
-  },
-  args: {
-    iconLeft: false,
-    iconRight: false,
-  },
-};
+    ))}
+  </VStack>
+);
 
-export const InlineLink = {
-  render: () => (
-    <BodyLong>
-      Officia incididunt Culpa sit aute est duis minim in in voluptate velit
-      Incididunt laborum nisi nisi Lorem officia adipisicing non veniam{" "}
-      <Link href="#" inlineText={true}>
-        lenke til ny side
+export const Chromatic = () => (
+  <>
+    <h2>Default</h2>
+    <Link href="#">Ex aliqua incididunt</Link>
+
+    <h2>With icon</h2>
+    <LinkWithIcon />
+
+    <h2>Variants (no underline)</h2>
+    <Variants />
+
+    <h2>Inline</h2>
+    <BodyLong style={{ width: 500 }}>
+      Culpa sit aute est duis minim in in voluptate{" "}
+      <Link href="#" inlineText>
+        dette er en veldig lang lenke som brekker over flere linjer
         <PlusCircleFillIcon aria-hidden />
       </Link>{" "}
       Culpa sit aute est duis minim in in voluptate velit Incididunt laborum
-      nisi nisi Lorem officia adipisicing non veniam occaecat commodo id ad
-      aliquip.
+      nisi nisi{" "}
+      <Link href="#" inlineText>
+        dette er en veldig lang lenke som brekker over flere linjer
+      </Link>{" "}
+      Lorem officia adipisicing non veniam occaecat commodo id ad aliquip.
     </BodyLong>
-  ),
+
+    <h2>In Alert</h2>
+    <div className="colgap">
+      <Alert variant="info">
+        <LinkWithIcon />
+      </Alert>
+      <Alert variant="success">
+        <LinkWithIcon />
+      </Alert>
+      <Alert variant="warning">
+        <LinkWithIcon />
+      </Alert>
+      <Alert variant="error">
+        <LinkWithIcon />
+      </Alert>
+    </div>
+
+    <h2>In ConfirmationPanel</h2>
+    <div className="colgap">
+      <ConfirmationPanel label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+      <ConfirmationPanel checked label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+      <ConfirmationPanel error="demo" label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+    </div>
+  </>
+);
+Chromatic.parameters = { chromatic: { disable: false } };
+
+export const ChromaticHover = () => (
+  <>
+    <h2>With icon</h2>
+    <LinkWithIcon />
+
+    <h2>Variants (no underline)</h2>
+    <Variants />
+
+    <h2>In Alert</h2>
+    <div className="colgap">
+      <Alert variant="info">
+        <LinkWithIcon />
+      </Alert>
+    </div>
+
+    <h2>In ConfirmationPanel</h2>
+    <div className="colgap">
+      <ConfirmationPanel checked label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+    </div>
+  </>
+);
+ChromaticHover.parameters = {
+  chromatic: { disable: false },
+  pseudo: { hover: true },
+};
+
+export const ChromaticFocusVisible = () => (
+  <>
+    <h2>With icon</h2>
+    <LinkWithIcon />
+
+    <h2>Variants (no underline)</h2>
+    <Variants />
+
+    <h2>In Alert</h2>
+    <div className="colgap">
+      <Alert variant="info">
+        <LinkWithIcon />
+      </Alert>
+    </div>
+
+    <h2>In ConfirmationPanel</h2>
+    <div className="colgap">
+      <ConfirmationPanel checked label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+    </div>
+  </>
+);
+ChromaticFocusVisible.parameters = {
+  chromatic: { disable: false },
+  pseudo: { focusVisible: true },
+};
+
+export const ChromaticActive = () => (
+  <>
+    <h2>With icon</h2>
+    <LinkWithIcon />
+
+    <h2>Variants (no underline)</h2>
+    <Variants />
+
+    <h2>In Alert</h2>
+    <div className="colgap">
+      <Alert variant="info">
+        <LinkWithIcon />
+      </Alert>
+    </div>
+
+    <h2>In ConfirmationPanel</h2>
+    <div className="colgap">
+      <ConfirmationPanel checked label="demo">
+        <LinkWithIcon />
+      </ConfirmationPanel>
+    </div>
+  </>
+);
+ChromaticActive.parameters = {
+  chromatic: { disable: false },
+  pseudo: { active: true },
 };

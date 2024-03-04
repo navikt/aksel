@@ -9,7 +9,7 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { Select } from "../../form/Select";
+import { Select } from "../../form/select";
 import { useSharedMonthContext } from "../context";
 import { labelNextYear, labelPrevYear } from "../utils";
 

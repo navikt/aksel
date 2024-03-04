@@ -339,3 +339,57 @@ ChromaticViewportTesting.parameters = {
     },
   },
 };
+
+// For testing TS error messages:
+
+/* const PropTypeTest = () => {
+  return (
+    <>
+      <Modal header={{ heading: "Label" }}>OK</Modal>
+
+      <Modal header={{ heading: "Label" }} aria-label="Label">
+        OK
+      </Modal>
+
+      <Modal header={{ heading: "Label" }} aria-labelledby="Label">
+        OK
+      </Modal>
+
+      <Modal aria-label="Label">OK</Modal>
+
+      <Modal aria-labelledby="Label">OK</Modal>
+
+      <Modal aria-label="Label" open onClose={() => null}>
+        OK
+      </Modal>
+
+      <Modal>Mangler label</Modal>
+
+      <Modal open>Mangler onClose eller label</Modal>
+
+      <Modal open aria-label="Label">
+        Mangler onClose
+      </Modal>
+
+      <Modal open onClose={() => null}>
+        Mangler label
+      </Modal>
+
+      <Modal header={{ heading: "Label" }} open>
+        Mangler onClose
+      </Modal>
+
+      <Modal
+        header={{ heading: "Label" }}
+        aria-label="Label"
+        aria-labelledby="Label"
+      >
+        For mange labels
+      </Modal>
+
+      <Modal aria-label="Label" aria-labelledby="Label">
+        For mange labels
+      </Modal>
+    </>
+  );
+}; */

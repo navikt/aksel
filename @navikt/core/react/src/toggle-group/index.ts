@@ -1,3 +1,7 @@
+"use client";
 export { default as ToggleGroup } from "./ToggleGroup";
 export { type ToggleGroupProps } from "./ToggleGroup.types";
-export { type ToggleItemProps } from "./parts/ToggleItem";
+export {
+  default as ToggleGroupItem,
+  type ToggleGroupItemProps,
+} from "./ToggleItem";

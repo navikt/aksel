@@ -1,3 +1,4 @@
+"use client";
 export { type BodyLongProps, default as BodyLong } from "./BodyLong";
 export { type BodyShortProps, default as BodyShort } from "./BodyShort";
 export { default as Detail, type DetailProps } from "./Detail";

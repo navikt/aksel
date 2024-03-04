@@ -22,3 +22,5 @@ export const LinkPanelTitle: OverridableComponent<
     )}
   />
 ));
+
+export default LinkPanelTitle;

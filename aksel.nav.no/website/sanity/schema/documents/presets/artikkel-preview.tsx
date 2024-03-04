@@ -31,9 +31,9 @@ export const artikkelPreview = (_type: string) => {
             }`,
             media: () =>
               isAfter(updateInfo) ? (
-                <FileResetIcon aria-hidden style={{ fontSize: "4rem" }} />
+                <FileResetIcon aria-hidden />
               ) : (
-                <FileTextIcon />
+                <FileTextIcon aria-hidden />
               ),
           };
         }

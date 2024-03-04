@@ -1,5 +1,9 @@
 # @navikt/aksel-icons
 
+## 6.1.1
+
+## 6.1.0
+
 ## 6.0.0
 
 ### Major Changes
@@ -8,7 +12,7 @@
 
 ### Minor Changes
 
-- SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+- SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ## 5.18.3
 

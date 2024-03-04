@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { InformationSquareIcon } from "@navikt/aksel-icons";
-import { Checkbox, CheckboxGroup } from "../../form";
+import { Checkbox, CheckboxGroup } from "../../form/checkbox";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";

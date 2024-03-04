@@ -48,13 +48,13 @@ export function TemaView() {
           key={x._id}
           intent="edit"
           mode="ghost"
-          padding={1}
-          radius={0}
+          paddingY={1}
           params={{
             type: "aksel_artikkel",
             id: getPublishedId(x._id),
           }}
           style={{ width: "100%" }}
+          tooltipProps={{ content: "Rediger artikkel" }}
         >
           <Preview layout="default" schemaType={type} value={x} key={x._id} />
         </IntentButton>

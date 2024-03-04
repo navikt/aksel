@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import { Alert } from "../alert";
 import { Button } from "../button";
-import { Search } from "../form";
+import { Search } from "../form/search";
 import Tooltip from "./Tooltip";
 
 export default {

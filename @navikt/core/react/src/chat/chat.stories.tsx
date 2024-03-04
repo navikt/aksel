@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Chat, VStack } from "../index";
-import { POSITIONS, SIZES } from "./Chat";
+import { VStack } from "../layout/stack";
+import Chat, { POSITIONS, SIZES } from "./Chat";
 
 export default {
   title: "ds-react/Chat",

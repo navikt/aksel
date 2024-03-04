@@ -1,12 +1,32 @@
 # Changelog
 
+## 6.1
+
+### @navikt/ds-css
+
+- Link: Fjern hover-farge ([#2767](https://github.com/navikt/aksel/pull/2767))
+
+- Modal: Får nå fokus når åpnes i Safari ([#2688](https://github.com/navikt/aksel/pull/2688))
+
+### @navikt/ds-react
+
+- Modal: Fikser uønsket lukking ved klikk-og-dra mellom backdrop og modal (f.eks. ved markering av tekst) dersom `closeOnBackdropClick` er `true`. ([#2752](https://github.com/navikt/aksel/pull/2752))
+
+- Modal: Endre title på lukkeknapp til bare 'Lukk' ([#2688](https://github.com/navikt/aksel/pull/2688))
+
+* Komponenter støtter nå lokal import `@navikt/ds-react/Button`, [Dokumentasjon](https://aksel.nav.no/grunnleggende/kode/nextjs). ([#2745](https://github.com/navikt/aksel/pull/2745))
+
+- Modal: Bedre feilmeldinger ved feil bruk av props ([#2744](https://github.com/navikt/aksel/pull/2744))
+
+- Modal: Ikke opphev scroll lock ved lukking av nesta modal (DatePicker) ([#2743](https://github.com/navikt/aksel/pull/2743))
+
 ## 6.0
 
 ### @navikt/aksel-icons
 
 - ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
 
-* SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+* SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ### @navikt/aksel-stylelint
 
@@ -58,7 +78,7 @@
 
 - Modal: Strengere prop-typer ([#2623](https://github.com/navikt/aksel/pull/2623))
 
-* SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+* SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ## 5.18
 
@@ -895,7 +915,7 @@
 
 * CopyButton: `xsmall`-variant for bruk i tabeller ([PR](https://github.com/navikt/aksel/pull/1994))
 
-- CopyButton: Fjernet use-client directive fra komponent. (warning i vite/rollup)
+- CopyButton: Fjernet use client directive fra komponent. (warning i vite/rollup)
 
 * Ny komponent CopyButton! Erstatter `CopyToClipboard` som nå er tagget som deprecated ([PR](https://github.com/navikt/aksel/pull/1982))
 

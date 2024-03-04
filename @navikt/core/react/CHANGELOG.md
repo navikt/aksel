@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 6.1.1
+
+### Patch Changes
+
+- Modal: Fikser uønsket lukking ved klikk-og-dra mellom backdrop og modal (f.eks. ved markering av tekst) dersom `closeOnBackdropClick` er `true`. ([#2752](https://github.com/navikt/aksel/pull/2752))
+
+- Modal: Endre title på lukkeknapp til bare 'Lukk' ([#2688](https://github.com/navikt/aksel/pull/2688))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.1
+  - @navikt/aksel-icons@6.1.1
+
+## 6.1.0
+
+### Minor Changes
+
+- Komponenter støtter nå lokal import `@navikt/ds-react/Button`, [Dokumentasjon](https://aksel.nav.no/grunnleggende/kode/nextjs). ([#2745](https://github.com/navikt/aksel/pull/2745))
+
+### Patch Changes
+
+- Modal: Bedre feilmeldinger ved feil bruk av props ([#2744](https://github.com/navikt/aksel/pull/2744))
+
+- Modal: Ikke opphev scroll lock ved lukking av nesta modal (DatePicker) ([#2743](https://github.com/navikt/aksel/pull/2743))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.0
+  - @navikt/aksel-icons@6.1.0
+
 ## 6.0.0
 
 ### Major Changes
@@ -24,7 +52,7 @@
 
 ### Minor Changes
 
-- SSR: ds-react og aksel-icons støtter nå `use-client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+- SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
 
 ### Patch Changes
 
@@ -1100,7 +1128,7 @@
 
 ### Patch Changes
 
-- CopyButton: Fjernet use-client directive fra komponent. (warning i vite/rollup)
+- CopyButton: Fjernet use client directive fra komponent. (warning i vite/rollup)
 
 ## 3.2.0
 

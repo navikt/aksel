@@ -5,7 +5,7 @@ import {
   EnvelopeOpenIcon,
   InboxUpIcon,
 } from "@navikt/aksel-icons";
-import { ToggleGroup } from "../index";
+import ToggleGroup from "./ToggleGroup";
 
 const meta: Meta<typeof ToggleGroup> = {
   title: "ds-react/ToggleGroup",

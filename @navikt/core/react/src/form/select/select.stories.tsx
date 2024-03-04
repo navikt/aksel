@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Select } from "../index";
+import Select from "./Select";
 
 export default {
   title: "ds-react/Select",
@@ -25,7 +25,12 @@ export default {
       type: "boolean",
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof Select>;
 
 const content = (
   <>
@@ -131,4 +136,42 @@ export const Readonly = () => {
       </Select>
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        {Default.render?.({ label: "Ipsum enim quis culpa" })}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+      <div>
+        <h2>Description</h2>
+        <Description />
+      </div>
+      <div>
+        <h2>Error</h2>
+        <Error />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
+      </div>
+      <div>
+        <h2>HideLabel</h2>
+        <HideLabel />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        <Readonly />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

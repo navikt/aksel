@@ -1,5 +1,8 @@
 import { CurrentUser } from "sanity";
-import { DefaultDocumentNodeResolver, StructureResolver } from "sanity/desk";
+import {
+  DefaultDocumentNodeResolver,
+  StructureResolver,
+} from "sanity/structure";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
 const adminOrDev = (user: CurrentUser) =>

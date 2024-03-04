@@ -6,5 +6,8 @@ export default defineConfig({
     globals: true,
     setupFiles: "./tests/setup.ts",
     environment: "jsdom",
+    typecheck: {
+      enabled: true,
+    },
   },
 });
