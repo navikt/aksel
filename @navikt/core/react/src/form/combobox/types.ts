@@ -37,7 +37,7 @@ export interface ComboboxProps
    */
   label: React.ReactNode;
   /**
-   * List of options to use for autocompletion
+   * List of options
    */
   options: string[] | ComboboxOption[];
   /**
