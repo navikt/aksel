@@ -14,7 +14,7 @@ export interface ErrorSummaryItemProps
   href?: string;
 }
 
-type ErrorSummaryItemType = OverridableComponent<
+export type ErrorSummaryItemType = OverridableComponent<
   ErrorSummaryItemProps,
   HTMLAnchorElement
 >;
@@ -22,15 +22,13 @@ type ErrorSummaryItemType = OverridableComponent<
 export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
-      <li>
-        <Component
-          {...rest}
-          ref={ref}
-          className={cl(className, "navds-error-summary__item", "navds-link")}
-        >
-          {children}
-        </Component>
-      </li>
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(className, "navds-error-summary__item", "navds-link")}
+      >
+        {children}
+      </Component>
     );
   },
 );

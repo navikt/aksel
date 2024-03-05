@@ -3,7 +3,7 @@ import { Button, ErrorSummary } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const errorRef = useRef<HTMLElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ const Example = () => {
     <div className="flex flex-col items-start gap-12">
       {hasError && (
         <ErrorSummary
+          ref={errorRef}
           heading="Du må fikse disse feilene før du kan sende inn søknad."
-          focusTargetRef={errorRef}
         >
           <ErrorSummary.Item href="#1">
             Felt må fylles ut med alder
