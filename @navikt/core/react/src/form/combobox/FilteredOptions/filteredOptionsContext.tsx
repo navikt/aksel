@@ -73,7 +73,7 @@ export const FilteredOptionsProvider = ({
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
 
-  const filteredOptions = useMemo<ComboboxOption[]>(() => {
+  const filteredOptions = useMemo(() => {
     if (externalFilteredOptions) {
       return externalFilteredOptions;
     }
