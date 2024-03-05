@@ -20,46 +20,44 @@ export const DtList = ({ prop }: { prop: any; parent: string }) => {
 
   return (
     <BodyShort
-      as="div"
+      as="ul"
       className="dtlist overflow-x-auto last-of-type:rounded-b"
     >
-      <div>
-        {prop.type && (
-          <div className="my-4 flex px-3 text-base">
-            <div className="min-w-24 font-semibold">Type: </div>
-            <code className="text-sm">{Highlighter({ type: prop.type })}</code>
-          </div>
-        )}
-        {prop.defaultValue && (
-          <div className="flex px-3 text-base">
-            <div className="min-w-24 font-semibold">Default: </div>
-            <div>{Highlighter({ type: prop.defaultValue })}</div>
-          </div>
-        )}
-        {prop.description && (
-          <div className="my-4 flex px-3">
-            <div className="min-w-24 text-base font-semibold">Description:</div>
+      {prop.type && (
+        <li className="my-4 flex px-3 text-base">
+          <div className="min-w-24 font-semibold">Type: </div>
+          <code className="text-sm">{Highlighter({ type: prop.type })}</code>
+        </li>
+      )}
+      {prop.defaultValue && (
+        <li className="flex px-3 text-base">
+          <div className="min-w-24 font-semibold">Default: </div>
+          <div>{Highlighter({ type: prop.defaultValue })}</div>
+        </li>
+      )}
+      {prop.description && (
+        <li className="my-4 flex px-3">
+          <div className="min-w-24 text-base font-semibold">Description:</div>
 
-            <div>
-              <LazyDescription>{prop.description}</LazyDescription>
-              {prop.params && (
-                <AkselTable th={[{ text: "Param" }, { text: "Description" }]}>
-                  {prop.params.map((param: string, i: number) => (
-                    <AkselTableRow
-                      key={i}
-                      tr={[
-                        { text: param.split(" ")[0] },
-                        { text: param.slice(param.indexOf(" ") + 1) },
-                      ]}
-                    />
-                  ))}
-                </AkselTable>
-              )}
-              {prop.example && <LazyExample>{prop.example}</LazyExample>}
-            </div>
+          <div>
+            <LazyDescription>{prop.description}</LazyDescription>
+            {prop.params && (
+              <AkselTable th={[{ text: "Param" }, { text: "Description" }]}>
+                {prop.params.map((param: string, i: number) => (
+                  <AkselTableRow
+                    key={i}
+                    tr={[
+                      { text: param.split(" ")[0] },
+                      { text: param.slice(param.indexOf(" ") + 1) },
+                    ]}
+                  />
+                ))}
+              </AkselTable>
+            )}
+            {prop.example && <LazyExample>{prop.example}</LazyExample>}
           </div>
-        )}
-      </div>
+        </li>
+      )}
     </BodyShort>
   );
 };
