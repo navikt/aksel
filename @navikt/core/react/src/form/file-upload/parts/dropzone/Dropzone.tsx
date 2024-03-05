@@ -3,6 +3,7 @@ import React, { forwardRef } from "react";
 import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
+import { composeEventHandlers } from "../../../../util/composeEventHandlers";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";
@@ -27,6 +28,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       icon: DropzoneIcon = CloudUpIcon,
       disabled,
       translations,
+      onClick,
       ...rest
     } = props;
 
@@ -64,7 +66,6 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           "navds-dropzone--dragging": dropzoneCtx.isDraggingOver,
           "navds-dropzone--disabled": inputProps.disabled,
         })}
-        {...omit(rest, ["errorId", "id"])}
       >
         <Label htmlFor={inputProps.id} className="navds-form-field__label">
           {label}
@@ -85,7 +86,10 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
           onDrop={dropzoneCtx.onDrop}
-          onClick={() => inputRef.current?.click()}
+          onClick={composeEventHandlers(
+            onClick,
+            () => inputRef.current?.click(),
+          )}
         >
           {!inputProps.disabled && (
             <>
@@ -114,13 +118,11 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 </BodyShort>
               </div>
               <Button
+                {...omit(rest, ["errorId"])}
                 {...inputProps}
                 className="navds-dropzone__area-button"
+                type="button"
                 variant="secondary"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  inputRef.current?.click();
-                }}
               >
                 {multiple
                   ? translate("FileUpload.dropzone.buttonMultiple")

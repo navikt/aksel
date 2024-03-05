@@ -5,7 +5,8 @@ import { ComponentTranslation } from "../../i18n/i18n.types";
 export interface FileUploadDropzoneProps
   extends FileUploadBaseProps,
     Omit<FormFieldProps, "size" | "readOnly">,
-    Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onSelect" | "onClick">,
+    Pick<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
   /**
    * Text shown to the user.
    */
