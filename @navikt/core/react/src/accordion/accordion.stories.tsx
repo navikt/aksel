@@ -162,9 +162,7 @@ export const Variants: Story = {
 
 export const ControlledState: Story = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open2, setOpen2] = useState(false);
 
     return (
