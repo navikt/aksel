@@ -43,12 +43,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        const isTextInSelectedOptions = (text: string): boolean => {
-          return !!selectedOptions.find(
-            (item) =>
-              item.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
+        const isTextInSelectedOptions = (text: string) =>
+          selectedOptions.some(
+            (option) =>
+              option.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
           );
-        };
 
         if (currentOption) {
           event.preventDefault();
