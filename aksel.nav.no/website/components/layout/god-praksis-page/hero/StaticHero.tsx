@@ -25,7 +25,7 @@ function StaticHero({ title, children, description }: GpHeroProps) {
           {description}
         </BodyLong>
       )}
-      <div className="mt-10">{children}</div>
+      {children && <div className="mt-10">{children}</div>}
     </Box>
   );
 }

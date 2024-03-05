@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AkselTheme } from "@/sb-util";
-import Hero from "./Hero";
+import Hero from "./TemaHero";
 
 const meta = {
-  title: "Layout/god-praksis/Hero",
+  title: "Layout/god-praksis/hero/TemaHero",
   component: Hero,
   tags: ["autodocs"],
   decorators: [AkselTheme],
