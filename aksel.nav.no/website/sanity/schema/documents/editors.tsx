@@ -38,7 +38,12 @@ export const Editors = defineType({
       validation: (Rule) =>
         Rule.required()
           .email()
-          .error("Må legge til epostaddresse for forfatter."),
+          .custom((email) => {
+            if (!email.includes("@nav.no")) {
+              return "Epostaddresse må være en NAV-epostaddresse. Må slutte på '@nav.no'";
+            }
+            return true;
+          }),
     }),
     defineField({
       title: "Alternativ epostaddresse",
@@ -75,7 +80,7 @@ export const Editors = defineType({
           return false;
         }
 
-        return parent?.email === email;
+        return parent?.email === email || parent?.alt_email === email;
       },
     }),
   ],
