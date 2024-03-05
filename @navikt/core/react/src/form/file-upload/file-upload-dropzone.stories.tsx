@@ -78,10 +78,10 @@ export const States: StoryObj = {
 };
 States.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const input = canvas.getByLabelText("Drag over test", {
-    selector: "input",
+  const button = canvas.getByLabelText("Drag over test", {
+    selector: "button",
   });
-  fireEvent.dragOver(input);
+  fireEvent.dragEnter(button);
 };
 
 export const Translation: StoryObj = {

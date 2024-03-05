@@ -84,7 +84,7 @@ export const Default: StoryFn = () => {
         {acceptedFiles.length > 0 && (
           <VStack gap="2">
             <Heading level="3" size="xsmall">
-              {`Vedlegg (${acceptedFiles.length} av ${MAX_FILES})`}
+              {`Vedlegg (${acceptedFiles.length} av maks ${MAX_FILES})`}
             </Heading>
             <VStack as="ul" gap="3">
               {acceptedFiles.map((file, index) => (

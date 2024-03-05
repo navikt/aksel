@@ -14,7 +14,7 @@ export const useDropzone = ({ upload, disabled }: Props) => {
   };
 
   const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevents the browser from opening the file in a new tab
   };
 
   const onDragLeave = () => {
@@ -22,7 +22,7 @@ export const useDropzone = ({ upload, disabled }: Props) => {
   };
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevents the browser from opening the file in a new tab
     setIsDraggingOver(false);
 
     const fileList = event.dataTransfer.files;
