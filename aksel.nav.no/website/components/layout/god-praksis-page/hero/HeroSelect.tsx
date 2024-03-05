@@ -67,7 +67,7 @@ function HeroSelect({
         ref={setDialogButton}
         aria-expanded={open}
         aria-hidden={open}
-        tabindex={open ? -1 : 0}
+        tabIndex={open ? -1 : 0}
       >
         Tema
         <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />
