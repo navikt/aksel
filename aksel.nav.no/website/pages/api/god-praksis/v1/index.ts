@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
+import { SanityDocument } from "sanity";
 import { getClient } from "@/sanity/client.server";
 
 export default async function akselAarticles(
@@ -34,7 +35,7 @@ export default async function akselAarticles(
         }
     }`;
 
-  let payload = [];
+  let payload: SanityDocument[] = [];
 
   await getClient()
     .fetch(query)

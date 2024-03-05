@@ -3,7 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { amplitudeLogNavigation } from "@/logging";
 
-function HeaderLink({ name, href, prefetch = undefined }) {
+type HeaderLinkProps = {
+  name: string;
+  href: string;
+  prefetch?: boolean;
+};
+
+function HeaderLink({ name, href, prefetch = undefined }: HeaderLinkProps) {
   const { asPath } = useRouter();
   return (
     <li>

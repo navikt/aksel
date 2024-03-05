@@ -56,7 +56,7 @@ function ChipNav({ type, data }: ChipsNavProps) {
           id={id}
           className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
         >
-          {data.map((entry) => (
+          {data?.map((entry) => (
             <li key={entry.title}>
               <button
                 aria-pressed={encodeURIComponent(entry.title) === query?.[type]}

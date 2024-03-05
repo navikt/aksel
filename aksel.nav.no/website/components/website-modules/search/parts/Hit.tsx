@@ -62,7 +62,9 @@ export const Hit = forwardRef<
               aria-hidden
             />
           ) : (
-            <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+            hit?.item?.status?.tag && (
+              <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+            )
           )}
         </span>
 
@@ -101,7 +103,7 @@ function HeadingLinks({
   const { logSuccess } = useContext(SearchLoggingContext);
 
   const Description = () => {
-    if (hit.matches[0].key !== "heading") {
+    if (hit.matches && hit.matches?.[0].key !== "heading") {
       return highlightMatches(hit.matches[0]);
     }
 
@@ -118,7 +120,7 @@ function HeadingLinks({
         <Description />
         <Chips className="mt-3" size="small">
           {hit.item.lvl2
-            .filter(
+            ?.filter(
               (x) =>
                 !!x.id && highlightedHeadings.includes(x.text.toLowerCase()),
             )

@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
  * - Replace temaQuery with already known tema from initialProps, should not be needed here
  */
 function useGpQuery(): {
-  innholdstypeQuery: string;
-  undertemaQuery: string;
-  temaQuery: string;
+  innholdstypeQuery: string | null;
+  undertemaQuery: string | null;
+  temaQuery: string | null;
   isReady: boolean;
 } {
   const { query, isReady } = useRouter();

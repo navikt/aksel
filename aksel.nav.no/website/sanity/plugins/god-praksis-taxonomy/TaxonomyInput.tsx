@@ -16,7 +16,9 @@ export function TaxonomyInput(props) {
     },
   );
 
-  console.log(props);
+  if (!innholdstyper) {
+    return null;
+  }
 
   return (
     <VStack gap="4">
