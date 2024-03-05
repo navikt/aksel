@@ -10,6 +10,7 @@ export default defineMigration({
         at("anon_navn", unset()),
         at("user_id", unset()),
         at("roller", unset()),
+        at("anonym", unset()),
       ]);
     }
   },

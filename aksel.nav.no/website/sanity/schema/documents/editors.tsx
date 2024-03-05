@@ -15,17 +15,9 @@ export const Editors = defineType({
       title: "Navn",
       name: "title",
       description:
-        "Det er frivillig å vise fult navn på Aksel. Hvis du ikke ønsker at navnet ditt skal være tilgjengelig kan man velge å bare bruke fornavn eller sette seg som 'anonym'",
+        "Det er frivillig å vise navn på Aksel. Hvis du ikke ønsker at navnet ditt skal være tilgjengelig kan man velge å bare bruke fornavn eller et pseudonym.",
       type: "string",
       validation: (Rule) => Rule.required().error("Må legge til navn"),
-    }),
-    defineField({
-      title: "Gjør meg anonym",
-      description: "Navnet ditt vil bare bli vist for innloggede brukere. ",
-      name: "anonym",
-      type: "boolean",
-      initialValue: false,
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       title: "Epostaddresse",
@@ -89,14 +81,13 @@ export const Editors = defineType({
   preview: {
     select: {
       title: "title",
-      anonym: "anonym",
     },
     prepare(selection) {
-      const { title, anonym } = selection;
+      const { title } = selection;
 
       return {
         title,
-        subtitle: anonym ? "Profilside | Anonym" : "Profilside",
+        subtitle: "Profilside",
         media: () => (
           <Avatar
             size={100}
