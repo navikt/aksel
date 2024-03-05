@@ -108,9 +108,9 @@ export interface ComboboxProps
   /**
    * Callback function triggered whenever an option is selected or de-selected
    *
-   * @param option - The option value
-   * @param isSelected - Whether the option has been selected or unselected
-   * @param isCustomOption - Whether the option comes from user input, instead of from the list
+   * @param option The option value
+   * @param isSelected Whether the option has been selected or unselected
+   * @param isCustomOption Whether the option comes from user input, instead of from the list
    * @returns
    */
   onToggleSelected?: (
