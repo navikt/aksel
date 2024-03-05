@@ -12,7 +12,10 @@ const DtListDescription = ({ children }) => {
     <div className="mr-2 flex flex-col gap-2 whitespace-pre-wrap text-base">
       <Markdown
         remarkPlugins={[remarkGfm]}
-        components={{ code: InlineCode, a: LinkWrapper }}
+        components={{
+          code: InlineCode,
+          a: LinkWrapper as any,
+        }}
       >
         {children}
       </Markdown>

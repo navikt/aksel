@@ -2,7 +2,7 @@ import { Highlight, themes } from "prism-react-renderer";
 
 const Code = (props: Pick<React.HTMLAttributes<HTMLElement>, "children">) => (
   <Highlight
-    code={props.children.toString()}
+    code={props.children?.toString() || ""}
     language="javascript"
     theme={themes.vsLight}
   >
