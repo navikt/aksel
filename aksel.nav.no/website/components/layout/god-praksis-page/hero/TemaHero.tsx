@@ -4,15 +4,9 @@ import Cube from "@/layout/god-praksis-page/hero/Cube";
 import HeroSelect from "@/layout/god-praksis-page/hero/HeroSelect";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 
-/**
- * TODO:
- * - Handle dynamic resize better than vw fontsize?
- * - - Can flex-shrink be used here?
- *
- * - Replace liste-elements with chips like in figma
- * - Better aria-label for <nav>
- */
-function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
+type GpHeroProps = { tema: GpTemaT | null } & HeroNavT;
+
+function Hero({ tema, heroNav }: GpHeroProps) {
   const [open, setOpen] = useState(false);
   return (
     <Box

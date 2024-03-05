@@ -1,52 +1,52 @@
 import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useEffect } from "react";
-import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { chipsDataForAllTema } from "@/layout/god-praksis-page/chips/dataTransforms";
+import { Box, HStack, Page, VStack } from "@navikt/ds-react";
+import Footer from "@/layout/footer/Footer";
+import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
+import StaticHero from "@/layout/god-praksis-page/hero/StaticHero";
 import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
-import {
-  GpEntryPageProps,
-  chipsDataAllQuery,
-  chipsDataAllQueryResponse,
-  heroNavQuery,
-  heroNavQueryResponse,
-  initialGpMainPageArticles,
-  initialGpMainPageArticlesResponse,
-} from "@/layout/god-praksis-page/interface";
+import { initialGpMainPageArticles } from "@/layout/god-praksis-page/interface";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<GpEntryPageProps>;
+type GpTemaList = {
+  temaList: { title: string; slug: string; refCount: number }[];
+};
+
+type PageProps = NextPageT<GpTemaList>;
 
 const query = groq`
 {
-  ${heroNavQuery},
-  ${chipsDataAllQuery},
   ${initialGpMainPageArticles}
 }
 `;
-type QueryResponse = heroNavQueryResponse &
-  chipsDataAllQueryResponse &
-  initialGpMainPageArticlesResponse;
+type QueryResponse = GpTemaList;
+
+export const testQ = groq`
+{
+  "temaList": *[_type == "gp.tema"] | order(lower(title)){
+    title,
+    "slug": slug.current,
+    "refCount": count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)])
+  }
+}
+`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { heroNav, initialInnholdstype, chipsDataAll } =
-    await getClient().fetch<QueryResponse>(query);
+  const { temaList } = await getClient().fetch<QueryResponse>(testQ);
 
   return {
     props: {
-      tema: null,
-      heroNav: heroNav.filter((x) => x.hasRefs),
-      initialArticles: groupArticles({
-        initialInnholdstype,
-      }),
+      temaList,
       preview,
       id: "",
-      title: "",
-      chipsData: chipsDataForAllTema(chipsDataAll),
+      title: "God praksis forside",
     },
     notFound: false,
     revalidate: 60,
@@ -67,16 +67,41 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage {...props} />
+      <Page
+        footer={<Footer />}
+        footerPosition="belowFold"
+        className="bg-surface-subtle"
+      >
+        <Header variant="subtle" />
+        <Box paddingBlock="10">
+          <Page.Block width="xl" gutters>
+            <VStack gap="10">
+              <StaticHero
+                title="God praksis"
+                description="Mange som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her."
+              >
+                <HStack gap="6" wrap>
+                  {props.temaList.map((tema) => (
+                    <GpHeroCard
+                      key={tema.slug}
+                      articleCount={tema.refCount}
+                      href={`gp/${tema.slug}`}
+                    >
+                      {tema.title}
+                    </GpHeroCard>
+                  ))}
+                </HStack>
+              </StaticHero>
+            </VStack>
+          </Page.Block>
+        </Box>
+      </Page>
     </>
   );
 };
 
 const WithPreview = lazy(() => import("@/preview"));
 
-/**
- * TODO: Preview does not work atm because of funcitions used in getStaticProps
- */
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (

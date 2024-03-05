@@ -27,18 +27,3 @@ export const groupByTema = (
   }
   return chipNavData;
 };
-
-export const chipsDataForAllTema = (
-  chipsData: chipsDataAllQueryResponse["chipsDataAll"],
-): ChipsData => {
-  const chipNavData: ChipsData = [];
-  for (const entry of chipsData) {
-    for (const undertema of entry.undertema) {
-      chipNavData.push({
-        "undertema-title": undertema.title,
-        "innholdstype-title": entry.innholdstype,
-      });
-    }
-  }
-  return chipNavData;
-};
