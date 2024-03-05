@@ -25,7 +25,7 @@ const Example = () => {
               status={p.status}
               icon={p.icon}
               statusLabel={p.statusLabel}
-              onSelectPeriod={() => p.id && setActivePeriod(p.id)}
+              onSelectPeriod={() => setActivePeriod(p.id)}
               isActive={activePeriod === p.id}
               aria-controls="timeline-panel"
               id={p.id}
@@ -41,7 +41,7 @@ const Example = () => {
               status={p.status}
               icon={p.icon}
               statusLabel={p.statusLabel}
-              onSelectPeriod={() => p.id && setActivePeriod(p.id)}
+              onSelectPeriod={() => setActivePeriod(p.id)}
               isActive={activePeriod === p.id}
               aria-controls="timeline-panel"
               id={p.id}
@@ -62,7 +62,7 @@ const Example = () => {
   );
 };
 
-const person: TimelinePeriodProps[] = [
+const person = [
   {
     id: "1",
     start: new Date("Jan 1 2022"),
@@ -95,9 +95,9 @@ const person: TimelinePeriodProps[] = [
     icon: <VirusIcon aria-hidden />,
     statusLabel: "Stønad korona",
   },
-];
+] satisfies TimelinePeriodProps[];
 
-const jobb: TimelinePeriodProps[] = [
+const jobb = [
   {
     id: "5",
     start: new Date("Feb 2 2022"),
@@ -130,7 +130,7 @@ const jobb: TimelinePeriodProps[] = [
     statusLabel: "Utbetaling",
     icon: <PiggybankIcon aria-hidden />,
   },
-];
+] satisfies TimelinePeriodProps[];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
