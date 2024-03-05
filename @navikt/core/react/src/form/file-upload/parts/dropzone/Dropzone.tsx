@@ -44,6 +44,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField({ ...props, disabled: _disabled }, "fileUpload");
+    const { id: labelId, ...inputPropsRest } = inputProps;
 
     const { upload, onChange, inputRef, mergedRef } = useFileUpload({
       ref,
@@ -67,7 +68,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           "navds-dropzone--disabled": inputProps.disabled,
         })}
       >
-        <Label htmlFor={inputProps.id} className="navds-form-field__label">
+        <Label htmlFor={labelId} className="navds-form-field__label">
           {label}
         </Label>
         {!!description && (
@@ -119,7 +120,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
               </div>
               <Button
                 {...omit(rest, ["errorId"])}
-                {...inputProps}
+                {...inputPropsRest}
                 className="navds-dropzone__area-button"
                 type="button"
                 variant="secondary"
@@ -143,6 +144,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           )}
 
           <input
+            id={labelId}
             type="file"
             style={{ display: "none" }}
             multiple={multiple}
