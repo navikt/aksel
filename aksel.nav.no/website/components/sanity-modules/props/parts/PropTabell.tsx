@@ -52,7 +52,10 @@ const PropTable = ({ komponent }: PropTableProps) => {
             </div>
           )}
           {komponent?.propref?.proplist?.map((prop) => (
-            <div className="border border-t-0 border-gray-300" key={prop.name}>
+            <div
+              className="border border-t-0 border-gray-300 last-of-type:rounded-b-lg"
+              key={prop.name}
+            >
               <dt className="px-2 py-2">
                 <Heading
                   size="xsmall"

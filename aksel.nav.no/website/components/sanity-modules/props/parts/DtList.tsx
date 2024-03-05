@@ -19,14 +19,13 @@ export const DtList = ({ prop }: { prop: any; parent: string }) => {
   }
 
   return (
-    <BodyShort
-      as="ul"
-      className="dtlist overflow-x-auto last-of-type:rounded-b"
-    >
+    <BodyShort as="ul" className="dtlist overflow-x-auto">
       {prop.type && (
         <li className="my-4 flex px-3 text-base">
           <div className="min-w-24 font-semibold">Type: </div>
-          <code className="text-sm">{Highlighter({ type: prop.type })}</code>
+          <code className="mt-05 text-sm">
+            {Highlighter({ type: prop.type })}
+          </code>
         </li>
       )}
       {prop.defaultValue && (
