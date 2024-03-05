@@ -23,6 +23,7 @@ function HamburgerLink({ name, href, onClick }) {
             "header",
             e.currentTarget.getAttribute("href"),
           );
+
           onClick();
         }}
       >

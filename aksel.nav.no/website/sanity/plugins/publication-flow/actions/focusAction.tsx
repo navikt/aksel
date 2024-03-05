@@ -53,7 +53,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
                 },
               },
             ],
-            props.published,
+            props.published ?? {},
           );
     };
 

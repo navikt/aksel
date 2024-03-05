@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.1.1
+
+### Patch Changes
+
+- Modal: Fikser uønsket lukking ved klikk-og-dra mellom backdrop og modal (f.eks. ved markering av tekst) dersom `closeOnBackdropClick` er `true`. ([#2752](https://github.com/navikt/aksel/pull/2752))
+
+- Modal: Endre title på lukkeknapp til bare 'Lukk' ([#2688](https://github.com/navikt/aksel/pull/2688))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.1
+  - @navikt/aksel-icons@6.1.1
+
 ## 6.1.0
 
 ### Minor Changes

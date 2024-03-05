@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths } from "next/types";
 import { Suspense, lazy, useEffect } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
@@ -48,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -88,7 +88,7 @@ const GpPage = (props: PageProps["props"]) => {
     <>
       {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
-        title={props.tema.title ?? ""}
+        title={props.tema?.title ?? ""}
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />

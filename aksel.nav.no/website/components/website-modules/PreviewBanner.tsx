@@ -3,7 +3,7 @@ import { BodyShort, Button } from "@navikt/ds-react";
 import { useSanityData } from "@/hooks/useSanityData";
 
 function PreviewBanner({ loading = true }: { loading: boolean }) {
-  const validUser = useSanityData().validUser;
+  const validUser = useSanityData()?.validUser;
 
   if (validUser === false) {
     return (

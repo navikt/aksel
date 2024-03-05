@@ -182,17 +182,17 @@ export const Editors = defineType({
         ),
       options: {
         source: (_, { currentUser }) => {
-          return currentUser.id;
+          return currentUser?.id ?? "";
         },
         slugify: (input) => input,
       },
       initialValue: (_, { currentUser }) => {
-        return { current: currentUser.id };
+        return { current: currentUser?.id ?? "" };
       },
       readOnly: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
+        !currentUser?.roles.find((x) => x.name === "developer"),
       hidden: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
+        !currentUser?.roles.find((x) => x.name === "developer"),
     }),
     defineField({
       title: "Roller",
@@ -213,11 +213,11 @@ export const Editors = defineType({
       },
       readOnly: true,
       hidden: ({ currentUser, parent }) => {
-        const { id, roles } = currentUser;
+        const user = currentUser;
         return (
-          !roles.find(({ name }) =>
+          !user?.roles.find(({ name }) =>
             ["developer", "administrator"].includes(name),
-          ) && parent?.user_id?.current !== id
+          ) && parent?.user_id?.current !== user?.id
         );
       },
     }),
