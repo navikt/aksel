@@ -82,11 +82,10 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
   return (
     <>
       <UNSAFE_Combobox
+        {...props}
         id={id}
         label="Komboboks - velg flere"
         allowNewValues
-        options={props.options}
-        isMultiSelect={props.isMultiSelect}
         onToggleSelected={(value, isSelected) =>
           isSelected
             ? setSelectedOptions([...selectedOptions, { label: value, value }])
@@ -94,7 +93,6 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
                 selectedOptions.filter((o) => o.value !== value),
               )
         }
-        size={props.size}
       />
       {selectedOptions.length > 0 && (
         <dl>
