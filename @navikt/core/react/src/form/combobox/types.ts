@@ -92,7 +92,6 @@ export interface ComboboxProps
    * Callback function triggered whenever the value of the input field is triggered.
    *
    * @param event
-   * @returns
    */
   onChange?: (
     event: ChangeEvent<HTMLInputElement> | null,
@@ -102,7 +101,6 @@ export interface ComboboxProps
    * Callback function triggered whenever the input field is cleared
    *
    * @param event
-   * @returns
    */
   onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
   /**
@@ -111,7 +109,6 @@ export interface ComboboxProps
    * @param option The option value
    * @param isSelected Whether the option has been selected or unselected
    * @param isCustomOption Whether the option comes from user input, instead of from the list
-   * @returns
    */
   onToggleSelected?: (
     option: ComboboxOption["value"],
