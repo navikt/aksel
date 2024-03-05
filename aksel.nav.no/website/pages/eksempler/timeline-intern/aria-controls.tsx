@@ -47,7 +47,7 @@ const Example = () => {
               icon={p.icon}
               statusLabel={p.statusLabel}
               onSelectPeriod={() => p.id && setActivePeriod(p.id)}
-              isActive={!!(activePeriod && activePeriod === p.id)}
+              isActive={activePeriod === p.id}
               aria-controls="timeline-panel"
               id={p.id}
             >
