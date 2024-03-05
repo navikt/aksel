@@ -17,7 +17,7 @@ import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
 
 type FilteredOptionsProps = {
-  children: any;
+  children: React.ReactNode;
   value: Pick<ComboboxProps, "allowNewValues" | "isListOpen" | "isLoading"> & {
     filteredOptions?: ComboboxOption[];
     options: ComboboxOption[];
