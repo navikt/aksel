@@ -11,7 +11,7 @@ function splitStr(str: string, query: string) {
 export function highlightStr(
   str: string,
   query: string,
-  tag: keyof typeof searchOptions,
+  tag?: keyof typeof searchOptions,
 ) {
   if (!query) {
     return str;
@@ -31,8 +31,10 @@ export function highlightStr(
       {
         "bg-gray-200": !tag,
         "bg-teal-100": tag === "aksel_artikkel",
-        "bg-deepblue-100": ["komponent_artikkel", "ds_artikkel"].includes(tag),
-        "bg-violet-100": ["aksel_prinsipp", "aksel_standalone"].includes(tag),
+        "bg-deepblue-100":
+          tag && ["komponent_artikkel", "ds_artikkel"].includes(tag),
+        "bg-violet-100":
+          tag && ["aksel_prinsipp", "aksel_standalone"].includes(tag),
         "bg-pink-100": tag === "aksel_blogg",
       },
     );
@@ -52,7 +54,12 @@ export function highlightStr(
 
 export function highlightMatches(hitMatch: FuseResultMatch) {
   const text = hitMatch.value;
-  const result = [];
+
+  if (!text) {
+    return null;
+  }
+
+  const result: { text: string; highlight: boolean }[] = [];
   const matches = [...hitMatch.indices];
 
   let index = 0;

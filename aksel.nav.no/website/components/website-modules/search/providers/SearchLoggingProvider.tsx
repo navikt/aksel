@@ -21,6 +21,9 @@ export const SearchLoggingProvider = ({
 
   const logSuccess = useCallback(
     (index: number, url: string, tag?: string) => {
+      if (!context?.results) {
+        return;
+      }
       const data = {
         type: "suksess",
         searchedFromUrl: window.location.pathname,
@@ -34,12 +37,7 @@ export const SearchLoggingProvider = ({
       };
       amplitude.track(AmplitudeEvents.søk, data);
     },
-    [
-      query,
-      tags,
-      context?.results?.totalHits,
-      context?.results?.topResults?.length,
-    ],
+    [query, tags, context?.results],
   );
 
   return (

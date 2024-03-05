@@ -93,10 +93,10 @@ export const IconSidebar = ({
       </Heading>
       <div>
         <span className="navds-sr-only">kategorier</span>
-        <p className="mt-1">{currentIcon.category}</p>
+        <p className="mt-1">{currentIcon?.category}</p>
         <p>
           <span aria-hidden>└ </span>
-          {`${currentIcon.sub_category}`}
+          {currentIcon?.sub_category}
         </p>
       </div>
       <Button

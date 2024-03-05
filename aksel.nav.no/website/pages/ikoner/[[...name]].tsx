@@ -6,7 +6,10 @@ import NotFound from "../404";
 const Page = () => {
   const { query } = useRouter();
 
-  if ((query?.name?.[0] && !meta[query.name[0]]) || query?.name?.length > 1) {
+  if (
+    (query?.name?.[0] && !meta[query.name[0]]) ||
+    (query?.name && query?.name?.length > 1)
+  ) {
     return <NotFound />;
   }
 

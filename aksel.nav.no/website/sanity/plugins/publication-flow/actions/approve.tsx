@@ -31,7 +31,7 @@ export const createWrappedApproveAction = () => {
             },
           },
         ],
-        props.published,
+        props.published ?? {},
       );
     };
 

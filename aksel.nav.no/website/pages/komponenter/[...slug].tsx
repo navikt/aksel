@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
@@ -116,7 +116,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -163,7 +163,10 @@ const Page = ({
     return <NotFotfund />;
   }
 
-  const pack = page?.kodepakker?.length > 0 && kodepakker[page?.kodepakker[0]];
+  const pack =
+    page?.kodepakker &&
+    page?.kodepakker?.length > 0 &&
+    kodepakker[page?.kodepakker[0]];
 
   const tag =
     page?.status?.tag === "beta"
@@ -280,7 +283,7 @@ const Page = ({
                 Oppdatert <time>{publishDate}</time>
               </span>
               {internal && <StatusTag status="internal" />}
-              {page?.status?.tag !== "beta" && (
+              {page?.status?.tag !== "beta" && page?.status?.tag && (
                 <StatusTag showStable status={page?.status?.tag} />
               )}
             </div>
