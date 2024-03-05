@@ -178,7 +178,7 @@ export const EditorPage = () => {
 
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(
-    `*[count((contributors[]->{email, alt_email})[@.email == "${user.email}" || @.alt_email == "${user.email}"]) > 0]`,
+    `*[count((contributors[]->{email, alt_email})[@.email == "${user?.email}" || @.alt_email == "${user?.email}"]) > 0]`,
     (query) => client.fetch(query),
   );
 
