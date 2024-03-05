@@ -27,14 +27,16 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const slug = context.params?.slug as string;
+
   const { page } = await getClient().fetch(query, {
-    slug: `side/${context.params.slug}`,
+    slug: `side/${slug}`,
   });
 
   return {
     props: {
       page,
-      slug: context.params.slug as string,
+      slug,
       preview: context.preview ?? false,
       id: page?._id ?? "",
       title: page?.heading ?? "",

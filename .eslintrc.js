@@ -72,7 +72,6 @@ module.exports = {
           "error",
           "aksel.nav.no/website/pages/",
         ],
-        "@typescript-eslint/ban-ts-comment": "off", // Temporary
       },
     },
     {

@@ -5,13 +5,14 @@ import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
 const views = () => {
-  const list = [];
+  const list: ReturnType<typeof defineField>[] = [];
   komponentKategorier.forEach((kat) => {
     list.push(
       defineField({
         title: `Ingress ${kat.title}`,
         name: `ingress_${kat.value}`,
         type: "text",
+        // @ts-expect-error ReturnType<typeof defineField>[] is not narrow enough to understand schem-type "text"
         rows: 2,
       }),
     );

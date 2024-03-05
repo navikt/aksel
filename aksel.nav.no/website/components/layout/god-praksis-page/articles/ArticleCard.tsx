@@ -1,6 +1,5 @@
 import cl from "clsx";
 import Link from "next/link";
-import { CSSProperties } from "react";
 import {
   ChevronRightIcon,
   FileFillIcon,
@@ -31,11 +30,9 @@ export const ArticleCard = ({
   group: "initial" | "lazy";
   delay?: number;
 }) => {
-  const date = useFormatedDate(publishedAt);
+  const date = useFormatedDate(publishedAt ?? undefined);
 
-  const tDelay: CSSProperties = delay
-    ? { transitionDuration: `${delay}ms` }
-    : undefined;
+  const tDelay = delay ? { transitionDuration: `${delay}ms` } : undefined;
 
   return (
     <Link

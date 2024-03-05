@@ -1,9 +1,9 @@
-import { MutableRefObject, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
 export const useShortcut = (
   open: boolean,
   setOpen: (value: boolean) => void,
-  inputRef: MutableRefObject<HTMLInputElement>,
+  inputRef: RefObject<HTMLInputElement>,
 ) => {
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {

@@ -75,12 +75,12 @@ export const structure: StructureResolver = async (
 
   const editor = editors.find(
     ({ email, alt_email }) =>
-      email === currentUser.email || alt_email === currentUser.email,
+      email === currentUser?.email || alt_email === currentUser?.email,
   );
-  const adminOrDev = currentUser.roles.find((x) =>
+  const adminOrDev = currentUser?.roles.find((x) =>
     ["developer", "administrator"].includes(x.name),
   );
-  const developer = currentUser.roles.find((x) =>
+  const developer = currentUser?.roles.find((x) =>
     ["developer"].includes(x.name),
   );
 
@@ -311,9 +311,9 @@ export const structure: StructureResolver = async (
                           .filter(`_type == 'article_views'`)
                           .apiVersion(SANITY_API_VERSION)
                           .menuItems([
-                            ...S.documentTypeList(
+                            ...(S.documentTypeList(
                               "article_views",
-                            ).getMenuItems(),
+                            ).getMenuItems() ?? []),
                           ]),
                       ),
                   ]),
@@ -324,7 +324,7 @@ export const structure: StructureResolver = async (
       S.divider(),
       ...(developer
         ? S.documentTypeListItems().filter(
-            (listItem) => !filtered.includes(listItem.getId()),
+            (listItem) => !filtered.includes(listItem.getId() ?? ""),
           )
         : []),
     ]);
@@ -345,7 +345,7 @@ export const resolveProductionUrl = (doc) => {
       : `${devPath}${previewUrl}`;
   }
   if (landingsider.find((x) => x.name === doc._type)) {
-    const slug = landingsider.find((x) => x.name === doc._type).url;
+    const slug = landingsider.find((x) => x.name === doc._type)?.url;
     const previewUrl = `/preview/${slug}`;
     if (!slug) {
       return "";

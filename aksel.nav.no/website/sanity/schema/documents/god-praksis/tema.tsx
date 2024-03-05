@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { TemaPreview } from "../../custom-components/TemaPreview";
-import { TemaView } from "../../custom-components/TemaView";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
@@ -29,7 +28,7 @@ export const Tema = defineType({
       group: "innhold",
 
       options: {
-        // @ts-expect-error
+        // @ts-expect-error - maxLength is a custom prop not officially supported
         maxLength: 130,
       },
       validation: (Rule) =>
@@ -131,15 +130,6 @@ export const Tema = defineType({
           ],
         },
       ],
-    }),
-    defineField({
-      title: "Sider uten seksjon",
-      name: "uten_seksjon",
-      type: "string",
-      group: "innhold",
-      components: {
-        field: TemaView,
-      },
     }),
     defineField({
       title: "Pictogram",

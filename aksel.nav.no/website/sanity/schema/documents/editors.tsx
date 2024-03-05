@@ -33,13 +33,13 @@ export const Editors = defineType({
       name: "email",
       type: "string",
       initialValue: (_, { currentUser }) => {
-        return currentUser.email;
+        return currentUser?.email ?? "";
       },
       validation: (Rule) =>
         Rule.required()
           .email()
           .custom((email) => {
-            if (!email.includes("@nav.no")) {
+            if (!email?.includes("@nav.no")) {
               return "Epostaddresse må være en NAV-epostaddresse. Må slutte på '@nav.no'";
             }
             return true;
@@ -52,8 +52,8 @@ export const Editors = defineType({
       type: "string",
       validation: (Rule) => Rule.email(),
       hidden: ({ currentUser }) => {
-        const { roles } = currentUser;
-        return !roles.find(({ name }) =>
+        const user = currentUser;
+        return !user?.roles.find(({ name }) =>
           ["developer", "administrator"].includes(name),
         );
       },
@@ -67,20 +67,22 @@ export const Editors = defineType({
       },
       readOnly: true,
       hidden: ({ currentUser, parent }) => {
-        const { roles, email } = currentUser;
+        const user = currentUser;
 
         if (!parent?.email || !parent?.title) {
           return true;
         }
         if (
-          roles.find(({ name }) =>
+          user?.roles.find(({ name }) =>
             ["developer", "administrator"].includes(name),
           )
         ) {
           return false;
         }
 
-        return parent?.email === email || parent?.alt_email === email;
+        return (
+          parent?.email === user?.email || parent?.alt_email === user?.email
+        );
       },
     }),
   ],

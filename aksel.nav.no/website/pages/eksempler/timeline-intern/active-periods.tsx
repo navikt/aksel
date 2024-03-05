@@ -54,15 +54,15 @@ const Example = () => {
           aria-controls={activePeriod}
           id="timeline-panel"
           className="mt-8"
-        >{`${activePeriod}: ${
-          [...person, ...jobb].find((p) => p.id === activePeriod).start
-        }`}</div>
+        >{`${activePeriod}: ${[...person, ...jobb].find(
+          (p) => p.id === activePeriod,
+        )?.start}`}</div>
       )}
     </div>
   );
 };
 
-const person: TimelinePeriodProps[] = [
+const person = [
   {
     id: "1",
     start: new Date("Jan 1 2022"),
@@ -95,9 +95,9 @@ const person: TimelinePeriodProps[] = [
     icon: <VirusIcon aria-hidden />,
     statusLabel: "Stønad korona",
   },
-];
+] satisfies TimelinePeriodProps[];
 
-const jobb: TimelinePeriodProps[] = [
+const jobb = [
   {
     id: "5",
     start: new Date("Feb 2 2022"),
@@ -130,7 +130,7 @@ const jobb: TimelinePeriodProps[] = [
     statusLabel: "Utbetaling",
     icon: <PiggybankIcon aria-hidden />,
   },
-];
+] satisfies TimelinePeriodProps[];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);

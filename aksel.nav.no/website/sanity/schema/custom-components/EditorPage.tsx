@@ -55,7 +55,9 @@ const DocumentList = ({
                 style={{ width: "100%" }}
                 tooltipProps={{ content: "Rediger artikkel" }}
               >
-                <Preview schemaType={schemaType} value={x} key={x._id} />
+                {schemaType && (
+                  <Preview schemaType={schemaType} value={x} key={x._id} />
+                )}
               </IntentButton>
             </li>
           ))}
@@ -89,28 +91,35 @@ const OutDatedList = ({ data }: { data: any[] }) => {
       </Accordion.Header>
       <Accordion.Content>
         <ul>
-          {list.map((x) => (
-            <li key={x._id}>
-              <IntentButton
-                intent="edit"
-                mode="ghost"
-                paddingY={1}
-                params={{
-                  type: x._type,
-                  id: getPublishedId(x._id),
-                }}
-                style={{ width: "100%" }}
-                tooltipProps={{ content: "Rediger artikkel" }}
-              >
-                <Preview
-                  layout="default"
-                  schemaType={schema.get(x._type)}
-                  value={x}
-                  key={x._id}
-                />
-              </IntentButton>
-            </li>
-          ))}
+          {list.map((x) => {
+            const schemaType = schema.get(x._type);
+            if (!schemaType) {
+              return null;
+            }
+
+            return (
+              <li key={x._id}>
+                <IntentButton
+                  intent="edit"
+                  mode="ghost"
+                  paddingY={1}
+                  params={{
+                    type: x._type,
+                    id: getPublishedId(x._id),
+                  }}
+                  style={{ width: "100%" }}
+                  tooltipProps={{ content: "Rediger artikkel" }}
+                >
+                  <Preview
+                    layout="default"
+                    schemaType={schemaType}
+                    value={x}
+                    key={x._id}
+                  />
+                </IntentButton>
+              </li>
+            );
+          })}
         </ul>
       </Accordion.Content>
     </Accordion.Item>
@@ -130,28 +139,34 @@ const DraftList = ({ data }: { data: any[] }) => {
       <Accordion.Header>Artikler under arbeid ({list.length})</Accordion.Header>
       <Accordion.Content>
         <ul>
-          {list.map((x) => (
-            <li key={x._id}>
-              <IntentButton
-                intent="edit"
-                mode="ghost"
-                paddingY={1}
-                params={{
-                  type: x._type,
-                  id: getPublishedId(x._id),
-                }}
-                style={{ width: "100%" }}
-                tooltipProps={{ content: "Rediger artikkel" }}
-              >
-                <Preview
-                  layout="default"
-                  schemaType={schema.get(x._type)}
-                  value={x}
-                  key={x._id}
-                />
-              </IntentButton>
-            </li>
-          ))}
+          {list.map((x) => {
+            const schemaType = schema.get(x._type);
+            if (!schemaType) {
+              return null;
+            }
+            return (
+              <li key={x._id}>
+                <IntentButton
+                  intent="edit"
+                  mode="ghost"
+                  paddingY={1}
+                  params={{
+                    type: x._type,
+                    id: getPublishedId(x._id),
+                  }}
+                  style={{ width: "100%" }}
+                  tooltipProps={{ content: "Rediger artikkel" }}
+                >
+                  <Preview
+                    layout="default"
+                    schemaType={schemaType}
+                    value={x}
+                    key={x._id}
+                  />
+                </IntentButton>
+              </li>
+            );
+          })}
         </ul>
       </Accordion.Content>
     </Accordion.Item>
