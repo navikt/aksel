@@ -4,17 +4,21 @@ import { CSSProperties, MouseEvent, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, Button, Chips } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
+import Cube from "@/layout/god-praksis-page/hero/Cube";
 import { HeroNavT } from "@/layout/god-praksis-page/interface";
 import styles from "./Hero.module.css";
 
 function HeroSelect({
   heroNav,
   currentSlug,
+  open,
+  setOpen,
 }: {
   heroNav: HeroNavT["heroNav"];
   currentSlug?: string;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [open, setOpen] = useState(false);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
   const currentSelected = useRef<HTMLElement | null>(null);
@@ -62,6 +66,8 @@ function HeroSelect({
         onClick={handleOpen}
         ref={setDialogButton}
         aria-expanded={open}
+        aria-hidden={open}
+        tabindex={open ? -1 : 0}
       >
         Tema
         <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />
@@ -81,6 +87,7 @@ function HeroSelect({
         aria-labelledby="tema-selector-title"
         aria-modal="false"
       >
+        <Cube variant="dark" />
         <Button
           variant="tertiary-neutral"
           icon={<XMarkIcon title="Lukk temavelger" />}
@@ -100,6 +107,7 @@ function HeroSelect({
               }}
               checkmark={false}
               variant="neutral"
+              className="bg-surface-subtle"
             >
               Alle tema
             </Chips.Toggle>
@@ -120,6 +128,7 @@ function HeroSelect({
                     currentSelected.current = element;
                   }
                 }}
+                className={cl({ "bg-surface-subtle": currentSlug !== x.slug })}
               >
                 {x.title}
               </Chips.Toggle>

@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { BodyLong, Box, Heading } from "@navikt/ds-react";
-
-/* import Cube from "@/layout/god-praksis-page/hero/Cube"; */
+import Cube from "@/layout/god-praksis-page/hero/Cube";
 import HeroSelect from "@/layout/god-praksis-page/hero/HeroSelect";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 
@@ -13,6 +13,7 @@ import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
  * - Better aria-label for <nav>
  */
 function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
+  const [open, setOpen] = useState(false);
   return (
     <Box
       background="surface-alt-3-subtle"
@@ -21,16 +22,27 @@ function Hero({ tema, heroNav }: { tema: GpTemaT | null } & HeroNavT) {
       paddingBlock="10 6"
       className="relative isolate bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
     >
-      {/* <Cube /> */}
-      <HeroSelect heroNav={heroNav} currentSlug={tema?.slug} />
-      <Heading level="1" size="xlarge" className="z-10 mt-2 text-aksel-heading">
-        {tema?.title ?? "Alle tema"}
-      </Heading>
-      {tema?.description && (
-        <BodyLong size="large" className="relative z-10 mt-4">
-          {tema.description}
-        </BodyLong>
-      )}
+      <Cube />
+      <HeroSelect
+        heroNav={heroNav}
+        currentSlug={tema?.slug}
+        open={open}
+        setOpen={setOpen}
+      />
+      <div aria-hidden={open}>
+        <Heading
+          level="1"
+          size="xlarge"
+          className="z-10 mt-2 text-aksel-heading"
+        >
+          {tema?.title ?? "Alle tema"}
+        </Heading>
+        {tema?.description && (
+          <BodyLong size="large" className="relative z-10 mt-4">
+            {tema.description}
+          </BodyLong>
+        )}
+      </div>
     </Box>
   );
 }
