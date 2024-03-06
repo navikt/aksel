@@ -16,7 +16,6 @@ import Footer from "@/layout/footer/Footer";
 import GpCompactCard from "@/layout/god-praksis-page/cards/CompactCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
 import StaticHero from "@/layout/god-praksis-page/hero/StaticHero";
-import { initialGpMainPageArticles } from "@/layout/god-praksis-page/interface";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
@@ -34,14 +33,7 @@ type GpTemaList = {
 
 type PageProps = NextPageT<GpTemaList>;
 
-const query = groq`
-{
-  ${initialGpMainPageArticles}
-}
-`;
-type QueryResponse = GpTemaList;
-
-export const testQ = groq`
+export const query = groq`
 {
   "tema": *[_type == "gp.tema"] | order(lower(title)){
     title,
@@ -65,7 +57,7 @@ export const testQ = groq`
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { tema } = await getClient().fetch<QueryResponse>(testQ);
+  const { tema } = await getClient().fetch<GpTemaList>(query);
 
   return {
     props: {

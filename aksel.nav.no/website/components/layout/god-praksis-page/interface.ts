@@ -171,19 +171,6 @@ export type GpArticleT = {
   currentUndertema: string | null;
 };
 
-export const initialGpMainPageArticles = groq`
-  "initialInnholdstype": *[_type == "gp.innholdstype"]{
-    title,
-    "articles": *[_type == "aksel_artikkel" && innholdstype._ref == ^._id]| order(publishedAt desc)[0...${GP_INITIAL_ARTICLES}]${baseGpArticleData}
-  }`;
-
-export type initialGpMainPageArticlesResponse = {
-  initialInnholdstype: {
-    title: string;
-    articles: GpArticleT[];
-  }[];
-};
-
 export const initialTemaPageArticles = groq`
   "initialUndertema": *[_type == "gp.tema.undertema" && $slug == tema->slug.current]{
     title,
