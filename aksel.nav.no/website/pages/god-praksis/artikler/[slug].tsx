@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import { AuthUser } from "@/auth/auth.types";
 import { getAuthUser } from "@/auth/getAuthUser";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
@@ -39,10 +40,7 @@ type PageProps = NextPageT<{
   verifiedDate: string;
   toc: TableOfContentsT;
   signedIn: boolean;
-  user: {
-    name: string | null;
-    email: string | null;
-  };
+  user: AuthUser | null;
 }>;
 
 export const query = `{
@@ -75,15 +73,9 @@ export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
   const signedIn = await validateWonderwallToken(context.req.headers);
-
   const isPreview = context.preview ?? false;
-
+  const user = getAuthUser(context.req.headers);
   const slug = context.params?.slug as string;
-
-  // TODO: why does the typing not work here? shouldn't have to specify it
-  const user: { name: string | null; email: string | null } = getAuthUser(
-    context.req.headers,
-  );
 
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
