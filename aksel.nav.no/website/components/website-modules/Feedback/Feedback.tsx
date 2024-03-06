@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -16,14 +16,16 @@ import {
 import { useAuth } from "@/auth/useAuth";
 import styles from "./Feedback.module.css";
 
+type States = "public" | "feedbackSent" | "loggedIn";
+
 const FeedbackForm = ({
   state,
   username,
-  setSentFeedback,
+  setState,
 }: {
   state: Props["state"];
   username?: string | null;
-  setSentFeedback?: Dispatch<SetStateAction<boolean>>;
+  setState?: Dispatch<SetStateAction<States>>;
 }) => {
   const { login, logout } = useAuth();
 
@@ -40,7 +42,7 @@ const FeedbackForm = ({
           </BodyLong>
           <Button
             onClick={() => {
-              setSentFeedback?.(false);
+              setState?.("loggedIn");
             }}
             className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
@@ -53,6 +55,14 @@ const FeedbackForm = ({
     case "loggedIn":
       form = (
         <>
+          {/* vet ikke hvorfor dette kreves her?... noe rarte med styling av Textarea som skjer her? */}
+          <style>
+            {`
+            .navds-textarea__input {
+              margin-bottom: var(--a-spacing-2);
+            }
+          `}
+          </style>
           <BodyLong className="mb-6">
             Har du innspill til artikkelen? Meldingen blir sendt med Slack til
             folka som har lagd artikkelen 🙌
@@ -77,13 +87,13 @@ const FeedbackForm = ({
             <Checkbox>skjul navnet mitt</Checkbox>
             <Textarea
               label="Innspill"
-              className="h-40"
+              className="h-40 justify-items-stretch"
               maxLength={500}
             ></Textarea>
           </VStack>
           <Button
             onClick={() => {
-              setSentFeedback?.(true);
+              setState?.("feedbackSent");
               // send to API route
             }}
             className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
@@ -119,23 +129,15 @@ const FeedbackForm = ({
 
 type Props =
   | {
-      state?: "public";
       username?: never;
-      setSentFeedback?: never;
     }
   | {
-      state: "loggedIn";
       username: string | null;
-      setSentFeedback: Dispatch<SetStateAction<boolean>>;
-    }
-  | {
-      state: "feedbackSent";
-      username: string | null;
-      setSentFeedback: Dispatch<SetStateAction<boolean>>;
     };
 
-export const Feedback = ({ state, username, setSentFeedback }: Props) => {
-  const _state = state || "public";
+export const Feedback = ({ username }: Props) => {
+  const [state, setState] = useState<States>(username ? "loggedIn" : "public");
+
   return (
     <Box
       borderRadius="large"
@@ -146,15 +148,11 @@ export const Feedback = ({ state, username, setSentFeedback }: Props) => {
       <HGrid columns={{ xs: "1fr 3.5rem", md: "1fr 4.5rem" }} gap="2">
         <div>
           <Heading id="innspill-form" size="small" className="mb-1">
-            {_state === "feedbackSent"
+            {state === "feedbackSent"
               ? "Innspill sendt"
               : "Innspill til artikkelen"}
           </Heading>
-          <FeedbackForm
-            username={username}
-            state={_state}
-            setSentFeedback={setSentFeedback}
-          />
+          <FeedbackForm username={username} state={state} setState={setState} />
         </div>
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg

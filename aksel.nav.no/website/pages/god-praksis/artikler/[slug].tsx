@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import { getAuthUser } from "@/auth/getAuthUser";
@@ -119,8 +119,6 @@ const Page = ({
   signedIn,
   user,
 }: PageProps["props"]) => {
-  const [sentFeedback, setSentFeedback] = useState(false);
-
   if (!data) {
     return <NotFotfund />;
   }
@@ -269,23 +267,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  {signedIn ? (
-                    sentFeedback ? (
-                      <Feedback
-                        username={user?.name}
-                        state="feedbackSent"
-                        setSentFeedback={setSentFeedback}
-                      />
-                    ) : (
-                      <Feedback
-                        username={user?.name}
-                        state="loggedIn"
-                        setSentFeedback={setSentFeedback}
-                      />
-                    )
-                  ) : (
-                    <Feedback />
-                  )}
+                  {signedIn ? <Feedback username={user?.name} /> : <Feedback />}
                 </div>
               </div>
             </div>
