@@ -18,11 +18,14 @@ import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
 import StaticHero from "@/layout/god-praksis-page/hero/StaticHero";
 import Header from "@/layout/header/Header";
 import { amplitudeLogNavigation } from "@/logging";
+import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { NextPageT } from "@/types";
+import { destructureBlocks } from "@/sanity/queries";
+import { AkselGodPraksisLandingPageDocT, NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
 type GpTemaList = {
+  page: AkselGodPraksisLandingPageDocT;
   tema: {
     title: string;
     description: string;
@@ -42,6 +45,13 @@ type PageProps = NextPageT<GpTemaList>;
 
 export const query = groq`
 {
+  "page": *[_type == "godpraksis_landingsside"][0]{
+    ...,
+    intro[]{
+      ...,
+      ${destructureBlocks}
+    }
+  },
   "tema": *[_type == "gp.tema"] | order(lower(title)){
     title,
     description,
@@ -63,13 +73,14 @@ export const query = groq`
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { tema } = await getClient().fetch<GpTemaList>(query);
+  const { tema, page } = await getClient().fetch<GpTemaList>(query);
 
   return {
     props: {
+      page,
       tema,
       preview,
-      id: "",
+      id: "godpraksis_landingsside_id1",
       title: "God praksis forside",
     },
     notFound: false,
@@ -88,9 +99,10 @@ const GpPage = (props: PageProps["props"]) => {
       {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title="God praksis"
-        /* description={page?.seo?.meta} */
-        /* image={page?.seo?.image} */
+        description={props.page?.seo?.meta}
+        image={props.page?.seo?.image}
       />
+
       <Page
         footer={<Footer />}
         footerPosition="belowFold"
@@ -100,11 +112,16 @@ const GpPage = (props: PageProps["props"]) => {
         <Box paddingBlock="10">
           <Page.Block width="xl" gutters>
             <VStack gap="10">
-              <StaticHero
-                title="God praksis"
-                description="Mange som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her."
-              >
+              <StaticHero title="God praksis">
+                {props.page.intro && (
+                  <SanityBlockContent
+                    isIngress
+                    blocks={props.page.intro}
+                    className="mt-4"
+                  />
+                )}
                 <Stack
+                  className="mt-10"
                   gap={{ xs: "4", md: "6" }}
                   wrap
                   direction={{ xs: "column", md: "row" }}
