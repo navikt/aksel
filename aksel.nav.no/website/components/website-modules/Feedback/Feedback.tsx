@@ -19,12 +19,12 @@ import styles from "./Feedback.module.css";
 type States = "public" | "feedbackSent" | "loggedIn";
 
 const FeedbackForm = ({
-  state,
   username,
+  state,
   setState,
 }: {
-  state: Props["state"];
   username?: string | null;
+  state: States;
   setState?: Dispatch<SetStateAction<States>>;
 }) => {
   const { login, logout } = useAuth();
