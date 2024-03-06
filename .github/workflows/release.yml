@@ -30,18 +30,13 @@ jobs:
         with:
           node-version: "20"
           cache: yarn
+      - name: set-env for yarn install to @navikt scope
+        shell: bash
+        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
 
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-prod-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-prod
 
       - name: Install dependencies
         run: yarn
