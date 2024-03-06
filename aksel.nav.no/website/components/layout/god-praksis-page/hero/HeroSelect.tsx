@@ -1,9 +1,9 @@
 import cl from "clsx";
-import Link from "next/link";
 import { CSSProperties, MouseEvent, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, XMarkIcon } from "@navikt/aksel-icons";
-import { BodyShort, Box, Button, Chips } from "@navikt/ds-react";
+import { BodyShort, Box, Button, Stack } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
+import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
 import Cube from "@/layout/god-praksis-page/hero/Cube";
 import { HeroNavT } from "@/layout/god-praksis-page/interface";
 import styles from "./Hero.module.css";
@@ -62,7 +62,7 @@ function HeroSelect({
       <BodyShort
         size="large"
         as="button"
-        className="flex items-center gap-05 rounded-full bg-surface-subtle py-1 pl-4 pr-2 shadow-xsmall focus:outline-none focus-visible:shadow-focus"
+        className="relative z-10 flex items-center gap-05 rounded-full bg-surface-subtle py-1 pl-4 pr-2 shadow-xsmall focus:outline-none focus-visible:shadow-focus"
         onClick={handleOpen}
         ref={setDialogButton}
         aria-expanded={open}
@@ -74,7 +74,7 @@ function HeroSelect({
       </BodyShort>
 
       <Box
-        background="surface-default"
+        background="surface-subtle"
         borderRadius="large"
         paddingInline={{ xs: "8", lg: "14" }}
         paddingBlock="10 6"
@@ -88,52 +88,56 @@ function HeroSelect({
         aria-modal="false"
       >
         <Cube variant="dark" />
+
         <Button
           variant="tertiary-neutral"
           icon={<XMarkIcon title="Lukk temavelger" />}
           onClick={handleClose}
-          className="absolute right-4 top-4"
+          className="absolute right-4 top-4 z-20"
         />
-        <BodyShort size="large" className="py-1" id="tema-selector-title">
+        <BodyShort
+          size="large"
+          className="relative z-10 py-1"
+          id="tema-selector-title"
+        >
           Tema
         </BodyShort>
-        <nav aria-label="Temavelger" className="mt-2 max-w-2xl">
-          <Chips>
-            <Chips.Toggle
-              as={Link}
+        <nav aria-label="Temavelger" className="relative z-10 mt-2">
+          <Stack
+            gap={{ xs: "2", md: "4" }}
+            wrap
+            direction={{ xs: "column", md: "row" }}
+          >
+            <GpHeroCard
               href="/gp"
+              image={null}
+              compact
               onClick={() => {
                 setOpen(false);
               }}
-              checkmark={false}
-              variant="neutral"
-              className="bg-surface-subtle"
             >
               Alle tema
-            </Chips.Toggle>
-            {heroNav.map((x, idx) => (
-              <Chips.Toggle
-                key={x.slug + idx}
-                as={Link}
-                href={`/gp/${x.slug}`}
+            </GpHeroCard>
+            {heroNav.map((tema, idx) => (
+              <GpHeroCard
+                key={tema.slug + idx}
+                href={`/gp/${tema.slug}`}
+                image={tema.image}
+                compact
+                aria-current={currentSlug === tema.slug ? "page" : undefined}
                 onClick={() => {
                   setOpen(false);
                 }}
-                checkmark={false}
-                variant="neutral"
-                selected={currentSlug === x.slug}
-                aria-current={currentSlug === x.slug ? "page" : undefined}
                 ref={(element: HTMLAnchorElement) => {
-                  if (currentSlug === x.slug) {
+                  if (currentSlug === tema.slug) {
                     currentSelected.current = element;
                   }
                 }}
-                className={cl({ "bg-surface-subtle": currentSlug !== x.slug })}
               >
-                {x.title}
-              </Chips.Toggle>
+                {tema.title}
+              </GpHeroCard>
             ))}
-          </Chips>
+          </Stack>
         </nav>
       </Box>
     </>

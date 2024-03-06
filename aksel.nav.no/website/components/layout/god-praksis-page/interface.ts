@@ -28,6 +28,7 @@ export type HeroNavT = {
     title: string;
     slug: string;
     hasRefs: boolean;
+    image: any;
   }[];
 };
 
@@ -35,6 +36,7 @@ export const heroNavQuery = groq`
 "heroNav": *[_type == "gp.tema"]{
   title,
   "slug": slug.current,
+  "image": pictogram,
   "hasRefs": count(*[_type=="aksel_artikkel"
       && (^._id in undertema[]->tema._ref)]) > 0
 }

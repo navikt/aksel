@@ -14,7 +14,7 @@ function Hero({ tema, heroNav }: GpHeroProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="relative isolate bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
+      className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
     >
       <Cube />
       <HeroSelect
@@ -23,7 +23,7 @@ function Hero({ tema, heroNav }: GpHeroProps) {
         open={open}
         setOpen={setOpen}
       />
-      <div aria-hidden={open}>
+      <div aria-hidden={open} className="relative z-10">
         <Heading
           level="1"
           size="xlarge"
