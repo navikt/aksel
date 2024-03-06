@@ -60,10 +60,6 @@ export const query = groq`
 }
 `;
 
-/**
- * TODO:
- * - hente ut faktiske undertema og innholdstype
- */
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
