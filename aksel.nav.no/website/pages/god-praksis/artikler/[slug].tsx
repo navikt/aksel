@@ -71,8 +71,8 @@ export const getServerSideProps: GetServerSideProps = async (
   const signedIn = await validateWonderwallToken(context.req.headers);
 
   const isPreview = context.preview ?? false;
-
   const slug = context.params?.slug as string;
+
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
