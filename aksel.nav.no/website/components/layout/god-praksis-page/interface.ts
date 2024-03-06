@@ -47,6 +47,7 @@ export type heroNavQueryResponse = {
     title: string;
     slug: string;
     hasRefs: boolean;
+    image: any;
   }[];
 };
 
