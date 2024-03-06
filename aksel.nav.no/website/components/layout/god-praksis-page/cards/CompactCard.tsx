@@ -25,7 +25,7 @@ function GpCompactCard({ href, children }: GpHeroCardProps) {
         {children}
       </Heading>
       <div className="flex justify-between">
-        <div className="wrap flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <div className="flex items-center gap-05 text-teal-700">
             <TagFillIcon aria-hidden fontSize="1rem" />
             <Detail weight="semibold" as="span">

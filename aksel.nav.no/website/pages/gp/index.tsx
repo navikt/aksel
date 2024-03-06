@@ -28,6 +28,7 @@ type GpTemaList = {
     description: string;
     slug: string;
     refCount: number;
+    pictogram: any;
     articles: { heading: string; slug: string }[];
   }[];
 };
@@ -39,6 +40,7 @@ export const query = groq`
   "tema": *[_type == "gp.tema"] | order(lower(title)){
     title,
     description,
+    pictogram,
     "slug": slug.current,
     "refCount": count(*[_type=="aksel_artikkel"
       && (^._id in undertema[]->tema._ref)]),
@@ -111,6 +113,7 @@ const GpPage = (props: PageProps["props"]) => {
                         key={tema.slug}
                         articleCount={tema.refCount}
                         href={`gp/${tema.slug}`}
+                        image={tema.pictogram}
                       >
                         {tema.title}
                       </GpHeroCard>

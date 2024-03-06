@@ -37,6 +37,21 @@ export default defineType({
       validation: (Rule) => Rule.unique(),
       of: [{ type: "string" }],
     }),
+    defineField({
+      title: "Pictogram",
+      name: "pictogram",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+          initialValue: "Tema-illustrasjon",
+        },
+      ],
+      validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
+    }),
   ],
   orderings: [
     {
