@@ -22,12 +22,16 @@ const FeedbackForm = ({
   username,
   state,
   setState,
+  document_id,
 }: {
-  username?: string | null;
   state: States;
+  document_id?: string | null;
+  username?: string | null;
   setState?: Dispatch<SetStateAction<States>>;
 }) => {
   const { login, logout } = useAuth();
+  const ref_is_anon = React.useRef<HTMLInputElement>(null);
+  const ref_feedback = React.useRef<HTMLTextAreaElement>(null);
 
   let form: React.ReactNode = null;
   const _username = username || "Ukjent bruker";
@@ -84,17 +88,32 @@ const FeedbackForm = ({
                 )
               </BodyShort>
             </HStack>
-            <Checkbox>skjul navnet mitt</Checkbox>
+            <Checkbox ref={ref_is_anon}>skjul navnet mitt</Checkbox>
             <Textarea
               label="Innspill"
               className="h-40 justify-items-stretch"
               maxLength={500}
+              ref={ref_feedback}
             ></Textarea>
           </VStack>
           <Button
             onClick={() => {
               setState?.("feedbackSent");
-              // send to API route
+
+              const body = JSON.stringify({
+                anon: ref_is_anon.current?.checked || false,
+                feedback: ref_feedback.current?.value || "",
+                document_id: document_id || "",
+              });
+
+              console.log({ body });
+              fetch("/api/slack/feedback/v1", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body,
+              });
             }}
             className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
@@ -130,12 +149,14 @@ const FeedbackForm = ({
 type Props =
   | {
       username?: never;
+      document_id?: never;
     }
   | {
-      username: string | null;
+      username: string;
+      document_id: string;
     };
 
-export const Feedback = ({ username }: Props) => {
+export const Feedback = ({ username, document_id }: Props) => {
   const [state, setState] = useState<States>(username ? "loggedIn" : "public");
 
   return (
@@ -152,7 +173,12 @@ export const Feedback = ({ username }: Props) => {
               ? "Innspill sendt"
               : "Innspill til artikkelen"}
           </Heading>
-          <FeedbackForm username={username} state={state} setState={setState} />
+          <FeedbackForm
+            username={username}
+            state={state}
+            setState={setState}
+            document_id={document_id}
+          />
         </div>
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg

@@ -110,6 +110,7 @@ const Page = ({
   toc,
   signedIn,
   user,
+  id,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
@@ -259,7 +260,11 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  {signedIn ? <Feedback username={user?.name} /> : <Feedback />}
+                  {signedIn ? (
+                    <Feedback username={user?.name} document_id={id} />
+                  ) : (
+                    <Feedback />
+                  )}
                 </div>
               </div>
             </div>

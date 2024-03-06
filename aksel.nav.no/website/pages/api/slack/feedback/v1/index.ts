@@ -61,8 +61,9 @@ async function sendSlackbotFeedback(
   /**
    * Validate the request with zod before we continue flow
    */
+  console.log({ body: request.body });
   const validation = requestBodySchema.safeParse({
-    body: JSON.parse(request.body),
+    body: request.body,
   });
   if (validation.success === false) {
     logger.error(
