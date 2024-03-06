@@ -25,16 +25,16 @@ export const Multiple = {
   render: () => {
     return (
       <HStack gap="4">
-        <GpHeroCard href="test" articleCount={4}>
+        <GpHeroCard href="test" articleCount={4} image={null}>
           Brukerinnsikt
         </GpHeroCard>
-        <GpHeroCard href="test" articleCount={20}>
+        <GpHeroCard href="test" articleCount={20} image={null}>
           Universell Utforming
         </GpHeroCard>
-        <GpHeroCard href="test" articleCount={2}>
+        <GpHeroCard href="test" articleCount={2} image={null}>
           Innsiktsarbeid
         </GpHeroCard>
-        <GpHeroCard href="test" articleCount={40}>
+        <GpHeroCard href="test" articleCount={40} image={null}>
           nav.no
         </GpHeroCard>
       </HStack>
