@@ -6,10 +6,10 @@ import {
   BodyLong,
   Box,
   HGrid,
-  HStack,
   Heading,
   Link,
   Page,
+  Stack,
   VStack,
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
@@ -17,6 +17,7 @@ import GpCompactCard from "@/layout/god-praksis-page/cards/CompactCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
 import StaticHero from "@/layout/god-praksis-page/hero/StaticHero";
 import Header from "@/layout/header/Header";
+import { amplitudeLogNavigation } from "@/logging";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
@@ -98,7 +99,11 @@ const GpPage = (props: PageProps["props"]) => {
                 title="God praksis"
                 description="Mange som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her."
               >
-                <HStack gap="6" wrap>
+                <Stack
+                  gap={{ xs: "4", md: "6" }}
+                  wrap
+                  direction={{ xs: "column", md: "row" }}
+                >
                   {props.tema
                     .filter((x) => x.refCount > 0)
                     .map((tema) => (
@@ -110,7 +115,7 @@ const GpPage = (props: PageProps["props"]) => {
                         {tema.title}
                       </GpHeroCard>
                     ))}
-                </HStack>
+                </Stack>
               </StaticHero>
               <Box paddingInline={{ xs: "4", lg: "10" }}>
                 <VStack gap="10">
@@ -119,14 +124,21 @@ const GpPage = (props: PageProps["props"]) => {
                     .map((tema) => {
                       return (
                         <div key={tema.slug}>
-                          <Heading
-                            level="2"
-                            size="medium"
-                            className="text-aksel-heading"
-                            spacing
+                          <Link
+                            href={`/gp/${tema.slug}`}
+                            as={NextLink}
+                            className="mb-2 text-aksel-heading"
+                            onClick={(e) =>
+                              amplitudeLogNavigation(
+                                "link",
+                                e.currentTarget.getAttribute("href"),
+                              )
+                            }
                           >
-                            {tema.title}
-                          </Heading>
+                            <Heading level="2" size="medium">
+                              {tema.title}
+                            </Heading>
+                          </Link>
                           <BodyLong spacing>{tema.description}</BodyLong>
                           <HGrid
                             columns={{ xs: 1, md: 2 }}
@@ -135,16 +147,26 @@ const GpPage = (props: PageProps["props"]) => {
                             {tema.articles.map((article) => (
                               <GpCompactCard
                                 key={article.slug}
-                                href={`gp/artikkel/${article.slug}`}
+                                href={`${article.slug}`.replace(
+                                  "god-praksis",
+                                  "gp",
+                                )}
                               >
                                 {article.heading}
                               </GpCompactCard>
                             ))}
                           </HGrid>
+
                           <Link
-                            href={`gp/${tema.slug}`}
+                            href={`/gp/${tema.slug}`}
                             as={NextLink}
-                            className="mt-6"
+                            className="mt-4"
+                            onClick={(e) =>
+                              amplitudeLogNavigation(
+                                "gp-se-alle-link",
+                                e.currentTarget.getAttribute("href"),
+                              )
+                            }
                           >
                             Se alle
                           </Link>

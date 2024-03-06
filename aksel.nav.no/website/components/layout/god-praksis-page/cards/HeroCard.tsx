@@ -11,7 +11,7 @@ function GpHeroCard({ href, articleCount, children }: GpHeroCardProps) {
   return (
     <Link
       href={`/${href}`}
-      className="group flex gap-3 rounded-lg bg-surface-default py-3 pl-3 pr-6 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus"
+      className="group flex gap-3 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:py-3 md:pl-3 md:pr-6"
     >
       {/* TODO: Legge til avatar-mulighet i sanity for hvert tema */}
       <div>
