@@ -1,8 +1,9 @@
 import NextLink from "next/link";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import { getAuthUser } from "@/auth/getAuthUser";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
@@ -25,6 +26,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { Feedback } from "@/web/Feedback/Feedback";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
@@ -37,6 +39,10 @@ type PageProps = NextPageT<{
   verifiedDate: string;
   toc: TableOfContentsT;
   signedIn: boolean;
+  user: {
+    name: string | null;
+    email: string | null;
+  };
 }>;
 
 export const query = `{
@@ -74,6 +80,11 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const slug = context.params?.slug as string;
 
+  // TODO: why does the typing not work here? shouldn't have to specify it
+  const user: { name: string | null; email: string | null } = getAuthUser(
+    context.req.headers,
+  );
+
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
@@ -94,6 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (
         type: "aksel_artikkel",
       }),
       signedIn,
+      user,
     },
     notFound: !page && !isPreview,
   };
@@ -104,7 +116,11 @@ const Page = ({
   publishDate,
   verifiedDate,
   toc,
+  signedIn,
+  user,
 }: PageProps["props"]) => {
+  const [sentFeedback, setSentFeedback] = useState(false);
+
   if (!data) {
     return <NotFotfund />;
   }
@@ -253,6 +269,23 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
+                  {signedIn ? (
+                    sentFeedback ? (
+                      <Feedback
+                        username={user?.name}
+                        state="feedbackSent"
+                        setSentFeedback={setSentFeedback}
+                      />
+                    ) : (
+                      <Feedback
+                        username={user?.name}
+                        state="loggedIn"
+                        setSentFeedback={setSentFeedback}
+                      />
+                    )
+                  ) : (
+                    <Feedback />
+                  )}
                 </div>
               </div>
             </div>
