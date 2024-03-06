@@ -10,6 +10,7 @@ const baseArticle = (id: string): GpArticleT => ({
   innholdstype: "metode",
   slug: "url",
   publishedAt: null,
+  currentUndertema: null,
 });
 
 describe("groupArticles function", () => {

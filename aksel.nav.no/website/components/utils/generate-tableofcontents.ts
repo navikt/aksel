@@ -50,13 +50,15 @@ export function generateTableOfContents(
       if (!nested) {
         return;
       }
-      entry.children = [
-        ...entry.children,
-        {
-          id: node.id,
-          title: node.text,
-        },
-      ];
+      if (entry?.children) {
+        entry.children = [
+          ...entry.children,
+          {
+            id: node.id,
+            title: node.text,
+          },
+        ];
+      }
     }
   });
 

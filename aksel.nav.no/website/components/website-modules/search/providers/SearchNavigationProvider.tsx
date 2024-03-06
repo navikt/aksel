@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, useCallback, useContext, useEffect } from "react";
 import { SearchContext } from "./SearchProvider";
-import { SearchResultContext } from "./SearchResultProvider";
+import { useSearchResult } from "./SearchResultProvider";
 
 type SearchNavigationProviderT = { close: () => void };
 
@@ -18,7 +18,7 @@ export const SearchNavigationProvider = ({
 }) => {
   const router = useRouter();
   const { setOpen, setQuery, setTags } = useContext(SearchContext);
-  const { reset } = useContext(SearchResultContext);
+  const { reset } = useSearchResult();
 
   const close = useCallback(() => {
     setOpen(false);

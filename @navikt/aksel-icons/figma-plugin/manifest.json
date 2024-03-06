@@ -6,5 +6,8 @@
   "ui": "dist/index.html",
   "capabilities": [],
   "enableProposedApi": false,
-  "editorType": ["figma", "figjam"]
+  "editorType": ["figma", "figjam"],
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
 }

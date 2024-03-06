@@ -46,15 +46,18 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const slugs = context.params?.prinsipp as string[];
+  const slugString = slugs.join("/");
+
   const { prinsipp } = await getClient().fetch(query, {
-    slug: `prinsipper/${(context.params?.prinsipp as string[]).join("/")}`,
+    slug: `prinsipper/${slugString}`,
     valid: "true",
   });
 
   return {
     props: {
       prinsipp,
-      slug: (context.params?.prinsipp as string[]).join("/"),
+      slug: slugString,
       preview: context.preview ?? false,
       id: prinsipp?._id,
       title: prinsipp?.heading ?? "",
@@ -64,8 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (
         type: "aksel_prinsipp",
       }),
     },
-    notFound:
-      (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
+    notFound: (!prinsipp && !context.preview) || slugs.length > 2,
   };
 };
 

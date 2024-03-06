@@ -1,5 +1,7 @@
 import { SchemaPluginOptions } from "sanity";
-import { GP_DOCUMENTS } from "../plugins/god-praksis-taxonomy";
+import innholdsType from "../plugins/god-praksis-taxonomy/documents/innholdstype";
+import tema from "../plugins/god-praksis-taxonomy/documents/tema";
+import undertema from "../plugins/god-praksis-taxonomy/documents/undertema";
 import * as document from "./documents";
 import * as object from "./objects";
 import { WorkspaceT } from "./util";
@@ -8,7 +10,12 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
   workspace,
 ) => ({
   types: [
-    ...GP_DOCUMENTS,
+    /**
+     * Ny struktur for god praksis
+     */
+    tema,
+    undertema,
+    innholdsType,
 
     /* Documents */
     document.Editors,
@@ -53,6 +60,8 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     /* Objects */
     object.RelatertInnhold,
     object.Kode,
+
+    // @ts-expect-error - sanity-table does not correctly infer type for schema
     object.Tabell,
     object.Bilde,
     object.DoDont,
