@@ -9,9 +9,16 @@ import { Detail, Heading } from "@navikt/ds-react";
 type GpHeroCardProps = {
   children: React.ReactNode;
   href: string;
+  innholdstype?: string;
+  undertema?: string;
 };
 
-function GpCompactCard({ href, children }: GpHeroCardProps) {
+function GpCompactCard({
+  href,
+  children,
+  innholdstype,
+  undertema,
+}: GpHeroCardProps) {
   return (
     <Link
       href={`/${href}`}
@@ -24,20 +31,24 @@ function GpCompactCard({ href, children }: GpHeroCardProps) {
       >
         {children}
       </Heading>
-      <div className="flex justify-between">
+      <div className="mt-auto flex h-fit justify-between">
         <div className="flex flex-wrap gap-3">
-          <div className="flex items-center gap-05 text-teal-700">
-            <TagFillIcon aria-hidden fontSize="1rem" />
-            <Detail weight="semibold" as="span">
-              Undertema
-            </Detail>
-          </div>
-          <div className="flex items-center gap-05 text-violet-600">
-            <FileFillIcon aria-hidden fontSize="1rem" />
-            <Detail weight="semibold" as="span">
-              Innholdstype
-            </Detail>
-          </div>
+          {undertema && (
+            <div className="flex items-center gap-05 text-teal-700">
+              <TagFillIcon aria-hidden fontSize="1rem" />
+              <Detail weight="semibold" as="span">
+                {undertema}
+              </Detail>
+            </div>
+          )}
+          {innholdstype && (
+            <div className="flex items-center gap-05 text-violet-600">
+              <FileFillIcon aria-hidden fontSize="1rem" />
+              <Detail weight="semibold" as="span">
+                {innholdstype}
+              </Detail>
+            </div>
+          )}
         </div>
         <ChevronRightIcon aria-hidden fontSize="1.5rem" />
       </div>

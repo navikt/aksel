@@ -29,7 +29,12 @@ type GpTemaList = {
     slug: string;
     refCount: number;
     pictogram: any;
-    articles: { heading: string; slug: string }[];
+    articles: {
+      heading: string;
+      slug: string;
+      undertema: { title: string; temaTitle: string }[];
+      innholdstype: string;
+    }[];
   }[];
 };
 
@@ -48,6 +53,8 @@ export const query = groq`
       && (^._id in undertema[]->tema._ref)]| order(publishedAt desc)[0...4] {
         heading,
         "slug": slug.current,
+        "undertema": undertema[]->{title, "temaTitle": tema->title},
+        "innholdstype": innholdstype->title
       },
   }
 }
@@ -154,6 +161,12 @@ const GpPage = (props: PageProps["props"]) => {
                                   "god-praksis",
                                   "gp",
                                 )}
+                                innholdstype={article.innholdstype}
+                                undertema={
+                                  article.undertema.find(
+                                    (ut) => ut?.temaTitle === tema.title,
+                                  )?.title
+                                }
                               >
                                 {article.heading}
                               </GpCompactCard>
