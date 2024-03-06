@@ -152,7 +152,7 @@ type Props =
       document_id?: never;
     }
   | {
-      username: string;
+      username?: string;
       document_id: string;
     };
 
