@@ -29,7 +29,7 @@ const Video = ({ node }: VideoProps) => {
         poster="/images/og/video-poster.png"
         crossOrigin="anonymous" // Needed for the <track>
       >
-        <source src={node.webm.url} type={`video/${node.webm.extension}`} />
+        <source src={node.webm?.url} type={`video/${node.webm?.extension}`} />
         {node.fallback && (
           <source
             src={node.fallback.url}

@@ -5,13 +5,13 @@ import { Button, DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [days, setDays] = useState([]);
+  const [days, setDays] = useState<Date[] | undefined>([]);
   const [open, setOpen] = useState(false);
 
   return (
     <div className="min-h-96">
       <DatePicker
-        onSelect={setDays}
+        onSelect={(val) => setDays(val)}
         mode="multiple"
         max={5}
         onClose={() => setOpen(false)}

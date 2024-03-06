@@ -20,28 +20,21 @@ export function CollectionMapper({
     <>
       {Object.entries(groups)
         .sort((a, b) => searchOptions[a[0]].index - searchOptions[b[0]].index)
-        .map(
-          (
-            [key, val]: [key: keyof typeof searchOptions, val: SearchHitT[]],
-            index,
-            arr,
-          ) => {
-            const prev = arr.slice(0, index);
-            const total =
-              prev.reduce((prev2, cur) => prev2 + cur[1].length, 0) +
-              startIndex;
+        .map(([key, val], index, arr) => {
+          const prev = arr.slice(0, index);
+          const total =
+            prev.reduce((prev2, cur) => prev2 + cur[1].length, 0) + startIndex;
 
-            return (
-              <Collection
-                startIndex={total}
-                key={key}
-                heading={`${searchOptions[key].display} (${val.length})`}
-                tag={key}
-                hits={val}
-              />
-            );
-          },
-        )}
+          return (
+            <Collection
+              startIndex={total}
+              key={key}
+              heading={`${searchOptions[key].display} (${val.length})`}
+              tag={key as keyof typeof searchOptions}
+              hits={val}
+            />
+          );
+        })}
     </>
   );
 }

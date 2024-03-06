@@ -10,7 +10,7 @@ export function formatResults(res: FuseResult<FuseItemT>[]): SearchHitT[] {
         FuseItemT,
         "ingress" | "intro"
       >,
-      anchor: resolveAnchor(x.matches[0], x.item),
+      anchor: x.matches?.[0] ? resolveAnchor(x.matches[0], x.item) : undefined,
       description: x?.item.intro || x.item.ingress || "",
     };
   });
@@ -26,7 +26,7 @@ export function formatRawResults(
 }
 
 function resolveAnchor(match: FuseResultMatch, item: FuseItemT) {
-  if (match.key.includes("lvl")) {
+  if (match.key?.includes("lvl")) {
     return item[match.key.split(".")[0]][match.refIndex].id;
   }
   if (match.key === "content.text") {

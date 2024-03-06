@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { TableOfContentsT } from "../../types/toc";
 
 export const useToc = (toc: TableOfContentsT) => {
-  const [activeId, setActiveId] = useState(null);
-  const [activeSubId, setActiveSubId] = useState(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeSubId, setActiveSubId] = useState<string | null>(null);
 
   const tempDisableScroll = useRef(false);
 
   useEffect(() => {
-    const validPick = (el: HTMLElement) => {
+    const validPick = (el: HTMLElement | null) => {
       if (!el) return false;
       const rect = el.getBoundingClientRect();
       return rect.top < 116;
@@ -19,8 +19,8 @@ export const useToc = (toc: TableOfContentsT) => {
       if (tempDisableScroll.current) {
         return;
       }
-      let active = null;
-      let activeSub = null;
+      let active: string | null = null;
+      let activeSub: string | null = null;
 
       for (const x of toc) {
         const lvl2 = document.getElementById(x.id);
@@ -48,7 +48,7 @@ export const useToc = (toc: TableOfContentsT) => {
         const activeNode = document.getElementById(`toc-${activeEl}`);
         const visible = isVisible(activeNode, parent);
 
-        if (!visible) {
+        if (!visible && parent && activeNode) {
           parent.scrollTop = activeNode.offsetTop - 128;
         }
       }

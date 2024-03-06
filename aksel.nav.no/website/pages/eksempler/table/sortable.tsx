@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Table } from "@navikt/ds-react";
+import { SortState, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState<SortState | undefined>();
 
   const handleSort = (sortKey) => {
     setSort(

@@ -18,13 +18,11 @@ const Example = () => {
 
 const Placeholder = ({
   text,
-  noPadding,
   mobil,
   desktop,
   className,
 }: {
   text?: string;
-  noPadding?: boolean;
   mobil?: boolean;
   desktop?: boolean;
   className?: string;
@@ -40,7 +38,6 @@ const Placeholder = ({
           "bg-teal-600": !desktop && !mobil,
         },
       )}
-      style={{ padding: noPadding && 0 }}
     >
       {text}
     </div>

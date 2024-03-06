@@ -9,13 +9,17 @@ import { SpacingView } from "./parts/categories/Spacing";
 import { ZindexView } from "./parts/categories/Zindex";
 
 type TokenViewProps = {
-  token: {
+  token?: {
     title: string;
     kategori: string;
   };
 };
 
 const TokenView = ({ token }: TokenViewProps) => {
+  if (!token) {
+    return null;
+  }
+
   switch (true) {
     case token.title === "font":
       return <FontView cat={token.title} />;

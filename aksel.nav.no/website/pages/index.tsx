@@ -173,7 +173,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       setPause(true);
       return;
     }
-    setPause(JSON.parse(data) ?? false);
+    setPause(JSON.parse(data ?? "false"));
   }, []);
 
   return (
@@ -301,9 +301,11 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                 length={3}
               />
 
-              <Box paddingInline={{ xs: "2", lg: "18" }}>
-                <FrontpageBlock blocks={blocks} />
-              </Box>
+              {blocks && (
+                <Box paddingInline={{ xs: "2", lg: "18" }}>
+                  <FrontpageBlock blocks={blocks} />
+                </Box>
+              )}
             </HGrid>
           </Page.Block>
         </Box>

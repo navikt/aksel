@@ -7,21 +7,20 @@ import { useShortcut } from "../hooks";
 import {
   SearchContext,
   SearchNavigationContext,
-  SearchResultContext,
+  useSearchResult,
 } from "../providers";
 
 export const SearchForm = () => {
   const { open, setOpen, tags, setTags, query, setQuery, os } =
     useContext(SearchContext);
-  const { update, results, reset, isValidating, error } =
-    useContext(SearchResultContext);
+  const { update, results, reset, isValidating, error } = useSearchResult();
   const { close } = useContext(SearchNavigationContext);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useShortcut(open, setOpen, inputRef);
 
   useEffect(() => {
-    setTimeout(() => open && inputRef.current.focus());
+    setTimeout(() => open && inputRef.current?.focus());
   }, [open]);
 
   const handleSearchStart = (value: string) => {

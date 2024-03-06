@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { Detail } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
@@ -59,7 +59,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -121,7 +121,9 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
               <span>
                 Oppdatert <time>{publishDate}</time>
               </span>
-              <StatusTag showStable status={page?.status?.tag} />
+              {page?.status?.tag && (
+                <StatusTag showStable status={page?.status?.tag} />
+              )}
             </div>
           </Detail>
         }

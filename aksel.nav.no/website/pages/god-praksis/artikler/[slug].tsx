@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const isPreview = context.preview ?? false;
 
-  const slug = context.params.slug as string;
+  const slug = context.params?.slug as string;
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
@@ -121,34 +121,35 @@ const Page = ({
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
-  const aside = data?.relevante_artikler?.length > 0 && (
-    <aside
-      className="overflow-x-clip py-8"
-      aria-labelledby="relevante-artikler-aside"
-    >
-      <div className="relativept-12 pb-16">
-        <div className="dynamic-wrapper">
-          <Heading
-            level="2"
-            size="medium"
-            className="px-4 text-deepblue-700"
-            id="relevante-artikler-aside"
-          >
-            {data?.relevante_artikler?.length === 1
-              ? `Les også`
-              : `Relevante artikler`}
-          </Heading>
-          <div className="card-grid-3-1 mt-6 px-4">
-            {data.relevante_artikler.map((x: any) =>
-              x && x?._id ? (
-                <ArtikkelCard level="3" {...x} key={x._id} />
-              ) : null,
-            )}
+  const aside = data?.relevante_artikler &&
+    data.relevante_artikler.length > 0 && (
+      <aside
+        className="overflow-x-clip py-8"
+        aria-labelledby="relevante-artikler-aside"
+      >
+        <div className="relativept-12 pb-16">
+          <div className="dynamic-wrapper">
+            <Heading
+              level="2"
+              size="medium"
+              className="px-4 text-deepblue-700"
+              id="relevante-artikler-aside"
+            >
+              {data?.relevante_artikler?.length === 1
+                ? `Les også`
+                : `Relevante artikler`}
+            </Heading>
+            <div className="card-grid-3-1 mt-6 px-4">
+              {data.relevante_artikler.map((x: any) =>
+                x && x?._id ? (
+                  <ArtikkelCard level="3" {...x} key={x._id} />
+                ) : null,
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </aside>
-  );
+      </aside>
+    );
 
   const filteredTema =
     hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
@@ -206,7 +207,7 @@ const Page = ({
                   </>
                 )}
               </div>
-              {hasTema && (
+              {hasTema && filteredTema && (
                 <div className="mt-8 flex flex-wrap gap-2">
                   {filteredTema.map(({ title, slug }: any) => (
                     <span key={title}>
