@@ -4,6 +4,7 @@ import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
 import { composeEventHandlers } from "../../../../util/composeEventHandlers";
+import { useId } from "../../../../util/hooks";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";
@@ -44,7 +45,12 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField({ ...props, disabled: _disabled }, "fileUpload");
-    const { id: labelId, ...inputPropsRest } = inputProps;
+    const {
+      id: inputId,
+      "aria-describedby": ariaDescribedby,
+      ...inputPropsRest
+    } = inputProps;
+    const labelId = useId();
 
     const { upload, onChange, inputRef, mergedRef } = useFileUpload({
       ref,
@@ -68,7 +74,11 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           "navds-dropzone--disabled": inputProps.disabled,
         })}
       >
-        <Label htmlFor={labelId} className="navds-form-field__label">
+        <Label
+          htmlFor={inputId}
+          id={labelId}
+          className="navds-form-field__label"
+        >
           {label}
         </Label>
         {!!description && (
@@ -121,6 +131,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
               <Button
                 {...omit(rest, ["errorId"])}
                 {...inputPropsRest}
+                aria-describedby={cl(labelId, ariaDescribedby)}
                 className="navds-dropzone__area-button"
                 type="button"
                 variant="secondary"
@@ -144,7 +155,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           )}
 
           <input
-            id={labelId}
+            id={inputId}
             type="file"
             style={{ display: "none" }}
             multiple={multiple}

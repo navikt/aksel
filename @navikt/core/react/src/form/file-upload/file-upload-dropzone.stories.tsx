@@ -72,15 +72,17 @@ export const States: StoryObj = {
       />
 
       <h2>Dragging</h2>
-      <FileUpload.Dropzone label="Drag over test" onSelect={onSelect} />
+      <FileUpload.Dropzone
+        label="Drag over test"
+        multiple={false}
+        onSelect={onSelect}
+      />
     </div>
   ),
 };
 States.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const button = canvas.getByLabelText("Drag over test", {
-    selector: "button",
-  });
+  const button = canvas.getByText("Velg fil");
   fireEvent.dragEnter(button);
 };
 

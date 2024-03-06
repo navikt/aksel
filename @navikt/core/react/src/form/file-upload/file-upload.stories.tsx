@@ -71,7 +71,7 @@ export const Default: StoryFn = () => {
         <FileUpload.Dropzone
           label="Last opp filer til søknaden"
           description={`Maks størrelse ${MAX_SIZE_MB} MB`}
-          /* accept=".doc,.docx,.xls,.xlsx,.pdf" */
+          accept=".doc,.docx,.xls,.xlsx,.pdf"
           maxSizeInBytes={MAX_SIZE}
           fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
           onSelect={addFiles}
