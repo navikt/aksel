@@ -71,7 +71,6 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
       className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[margin] duration-500"
-      /* style={{ minHeight: open && boxHeight ? boxHeight : "auto" }} */
       style={{
         marginBottom: getMargin(),
         transitionTimingFunction: open
