@@ -1,12 +1,12 @@
 import { useMedia } from "@/hooks/useMedia";
-import { TemaHeroModal } from "@/layout/god-praksis-page/hero/parts/tema-hero/HeroModal";
-import { TemaHeroStatic } from "@/layout/god-praksis-page/hero/parts/tema-hero/HeroStatic";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
+import { TemaHeroModal } from "./TemaHero.Modal";
+import { TemaHeroStatic } from "./TemaHero.Static";
 
 type GpHeroProps = { tema: GpTemaT | null } & HeroNavT;
 
 function TemaHero(props: GpHeroProps) {
-  const hideModal = useMedia("screen and (min-width: 1024px)");
+  const hideModal = useMedia("screen and (min-width: 768px)");
 
   return hideModal ? (
     <TemaHeroStatic {...props} />

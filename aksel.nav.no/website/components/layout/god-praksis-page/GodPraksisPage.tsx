@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import TemaHero from "@/layout/god-praksis-page/hero/TemaHero";
+import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import { GpEntryPageProps } from "@/layout/god-praksis-page/interface";
 import useInitialState from "@/layout/god-praksis-page/useInitialState";
 import Header from "@/layout/header/Header";

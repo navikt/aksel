@@ -5,12 +5,13 @@ import { BodyShort } from "@navikt/ds-react";
 type TemaSelectButtonProps = {
   onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   expanded: boolean;
+  hidden?: boolean;
 };
 
 export const TemaSelectButton = forwardRef<
   HTMLButtonElement,
   TemaSelectButtonProps
->(({ onClick, expanded }, ref) => {
+>(({ onClick, expanded, hidden }: TemaSelectButtonProps, ref) => {
   return (
     <BodyShort
       size="large"
@@ -19,6 +20,7 @@ export const TemaSelectButton = forwardRef<
       onClick={onClick}
       aria-expanded={expanded}
       ref={ref}
+      aria-hidden={hidden}
     >
       Tema
       <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />

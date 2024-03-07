@@ -15,7 +15,7 @@ import {
 import Footer from "@/layout/footer/Footer";
 import GpCompactCard from "@/layout/god-praksis-page/cards/CompactCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
-import StaticHero from "@/layout/god-praksis-page/hero/StaticHero";
+import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
 import Header from "@/layout/header/Header";
 import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
@@ -112,7 +112,7 @@ const GpPage = (props: PageProps["props"]) => {
         <Box paddingBlock="10">
           <Page.Block width="xl" gutters>
             <VStack gap="10">
-              <StaticHero title="God praksis">
+              <IntroHero title="God praksis">
                 {props.page.intro && (
                   <SanityBlockContent
                     isIngress
@@ -139,7 +139,7 @@ const GpPage = (props: PageProps["props"]) => {
                       </GpHeroCard>
                     ))}
                 </Stack>
-              </StaticHero>
+              </IntroHero>
               <Box paddingInline={{ xs: "4", lg: "10" }}>
                 <VStack gap="10">
                   {props.tema

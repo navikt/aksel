@@ -1,25 +1,27 @@
 import cl from "clsx";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Box, Button, Heading } from "@navikt/ds-react";
+import { BodyShort, Box, Button } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
-import Cube from "@/layout/god-praksis-page/hero/Cube";
-import { HeroList } from "@/layout/god-praksis-page/hero/parts/HeroList";
-import { TemaSelectButton } from "@/layout/god-praksis-page/hero/parts/tema-hero/SelectButton";
+import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
-import styles from "../../Hero.module.css";
+import { HeroIntro } from "./TemaHero.Intro";
+import { HeroList } from "./TemaHero.List";
+import { TemaSelectButton } from "./TemaHero.Select";
+import styles from "./TemaHero.module.css";
 
 type GpTemaHeroStaticProps = { tema: GpTemaT | null } & HeroNavT;
 
 export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
   const [open, setOpen] = useState(false);
 
-  const currentSelected = useRef<HTMLElement | null>(null);
+  const [boxHeight, setBoxHeight] = useState(0);
+  const currentlyActiveLink = useRef<HTMLElement | null>(null);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
   const [dialogButton, setDialogButton] = useState<HTMLElement | null>(null);
 
-  /* TODO: Fikse typer */
+  /* TODO: Fikse typer, unngå `as` */
   const inlineStyles = {
     "--aksel-website-hero-selector-x": animationRef.x + "px",
     "--aksel-website-hero-selector-y": animationRef.y + "px",
@@ -35,8 +37,8 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
     const yRect = e.currentTarget.offsetTop + rect.height / 2;
 
     setAnimationRef({
-      x: e.clientX ? e.clientX - e.currentTarget.offsetLeft / 2 : xRect,
-      y: e.clientY ? e.clientY - e.currentTarget.offsetTop / 3 : yRect,
+      x: xRect,
+      y: yRect,
     });
   };
 
@@ -51,7 +53,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
   }, [dialogButton]);
 
   useEffect(() => {
-    open && currentSelected.current?.focus();
+    open && currentlyActiveLink.current?.focus();
   }, [open]);
 
   return (
@@ -61,28 +63,20 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
       className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
+      style={{ minHeight: open && boxHeight ? boxHeight : "auto" }}
     >
       <Cube />
-
       <TemaSelectButton
         onClick={handleOpen}
         expanded={open}
         ref={setDialogButton}
+        hidden={open}
       />
-      <div className="relative z-10">
-        <Heading
-          level="1"
-          size="xlarge"
-          className="z-10 mt-2 text-aksel-heading"
-        >
-          {tema?.title}
-        </Heading>
-        {tema?.description && (
-          <BodyLong size="large" className="relative z-10 mt-4">
-            {tema.description}
-          </BodyLong>
-        )}
-      </div>
+      <HeroIntro
+        title={tema?.title}
+        description={tema?.description}
+        hidden={open}
+      />
 
       <Box
         background="surface-subtle"
@@ -97,6 +91,9 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
         role="dialog"
         aria-labelledby="tema-selector-title"
         aria-modal="false"
+        ref={(el) => {
+          setBoxHeight(el?.getBoundingClientRect().height || 0);
+        }}
       >
         <Cube variant="dark" />
 
@@ -114,7 +111,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           Tema
         </BodyShort>
         <HeroList
-          currentSelected={currentSelected}
+          currentlyActiveLink={currentlyActiveLink}
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}

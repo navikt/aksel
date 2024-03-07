@@ -5,18 +5,18 @@ type HeroListProps = {
   heroNav: HeroNavT["heroNav"];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   currentSlug?: string;
-  currentSelected: React.MutableRefObject<HTMLElement | null>;
+  currentlyActiveLink?: React.MutableRefObject<HTMLElement | null>;
 };
 
 export function HeroList({
   heroNav,
   setOpen,
-  currentSelected,
+  currentlyActiveLink,
   currentSlug,
 }: HeroListProps) {
   return (
     <nav aria-label="Temavelger" className="relative z-10 mt-2">
-      <div className="flex flex-col flex-wrap gap-2 lg:flex-row lg:gap-4">
+      <div className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
         <GpHeroCard
           href="gp"
           image={null}
@@ -38,8 +38,8 @@ export function HeroList({
               setOpen(false);
             }}
             ref={(element: HTMLAnchorElement) => {
-              if (currentSlug === tema.slug) {
-                currentSelected.current = element;
+              if (currentSlug === tema.slug && currentlyActiveLink) {
+                currentlyActiveLink.current = element;
               }
             }}
           >

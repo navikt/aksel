@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AkselTheme } from "@/sb-util";
-import Hero from "./StaticHero";
+import Hero from "./IntroHero";
 
 const meta = {
   title: "Layout/god-praksis/hero/StaticHero",

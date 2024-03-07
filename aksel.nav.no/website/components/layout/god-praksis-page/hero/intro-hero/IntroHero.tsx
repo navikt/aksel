@@ -1,12 +1,12 @@
 import { Box, Heading } from "@navikt/ds-react";
-import Cube from "@/layout/god-praksis-page/hero/Cube";
+import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 
-type GpHeroProps = {
+type GpIntroHeroProps = {
   title: string;
   children: React.ReactNode;
 };
 
-function StaticHero({ title, children }: GpHeroProps) {
+function IntroHero({ title, children }: GpIntroHeroProps) {
   return (
     <Box
       background="surface-alt-3-subtle"
@@ -24,4 +24,4 @@ function StaticHero({ title, children }: GpHeroProps) {
   );
 }
 
-export default StaticHero;
+export default IntroHero;
