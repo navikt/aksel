@@ -27,18 +27,16 @@ export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
-    hasRefs: boolean;
     image: any;
   }[];
 };
 
 export const heroNavQuery = groq`
-"heroNav": *[_type == "gp.tema"]{
+"heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0]{
   title,
   "slug": slug.current,
   "image": pictogram,
-  "hasRefs": count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0
 }
 `;
 
@@ -46,7 +44,6 @@ export type heroNavQueryResponse = {
   heroNav: {
     title: string;
     slug: string;
-    hasRefs: boolean;
     image: any;
   }[];
 };

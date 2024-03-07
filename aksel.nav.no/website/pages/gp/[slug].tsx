@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { GetStaticPaths } from "next/types";
+import { GetServerSideProps } from "next/types";
 import { Suspense, lazy, useEffect } from "react";
 import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
 import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
@@ -16,7 +16,6 @@ import {
   temaQueryResponse,
 } from "@/layout/god-praksis-page/interface";
 import { getClient } from "@/sanity/client.server";
-import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
@@ -36,26 +35,12 @@ type QueryResponse = chipsDataAllQueryResponse &
   temaQueryResponse &
   initialTemaPageArticlesResponse;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getGpTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (
+  ctx,
+): Promise<PageProps> => {
+  const slug = ctx.params?.slug as string;
+  const preview = !!ctx.preview;
 
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
   const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
     await getClient().fetch<QueryResponse>(query, {
       slug,
@@ -66,7 +51,7 @@ export const getStaticProps = async ({
   return {
     props: {
       tema,
-      heroNav: heroNav.filter((x) => x.hasRefs),
+      heroNav,
       initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
       slug,
       preview,
@@ -75,7 +60,6 @@ export const getStaticProps = async ({
       chipsData: groupByTema(chipsDataAll)[slug],
     },
     notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
-    revalidate: 60,
   };
 };
 
@@ -112,11 +96,6 @@ const Wrapper = (props: any) => {
             slug: props?.slug,
           }}
           resolvers={[
-            {
-              key: "heroNav",
-              dataKeys: ["heroNav"],
-              cb: (v) => v[0]?.filter((x) => x.hasRefs),
-            },
             {
               key: "initialArticles",
               dataKeys: ["initialInnholdstype", "initialUndertema"],

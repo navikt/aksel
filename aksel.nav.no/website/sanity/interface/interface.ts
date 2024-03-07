@@ -54,29 +54,6 @@ export async function getAkselTema(
   }));
 }
 
-export async function getGpTema(
-  token?: string,
-): Promise<{ path: string; lastmod: string }[]> {
-  const client = token ? noCdnClient(token) : getClient();
-  const tags: {
-    slug: { current: string };
-    _updatedAt: string;
-    hasRefs: boolean;
-  }[] = await client.fetch(
-    `*[_type == "gp.tema"]{
-        slug,
-        _updatedAt,
-        "hasRefs": count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0
-      }`,
-  );
-  return tags
-    .filter((x) => x.hasRefs)
-    .map((x) => ({
-      path: x?.slug.current,
-      lastmod: x?._updatedAt,
-    }));
-}
-
 export async function getDocuments(
   source: (typeof allArticleDocuments)[number] | "all",
   token?: string,
