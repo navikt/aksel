@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, useCallback, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, Button } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
@@ -32,31 +32,26 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
     e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setOpen((x) => !x);
-
-    const xRect = e.currentTarget.offsetLeft + rect.width / 2;
-    const yRect = e.currentTarget.offsetTop + rect.height / 2;
 
     setAnimationRef({
-      x: xRect,
-      y: yRect,
+      x: e.currentTarget.offsetLeft + rect.width / 2,
+      y: e.currentTarget.offsetTop + rect.height / 2,
     });
+    setOpen(true);
+    currentlyActiveLink.current?.focus();
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    dialogButton?.focus();
-  };
-
-  useEscapeKeydown(() => {
+  const handleClose = useCallback(() => {
     setOpen(false);
     dialogButton?.focus();
   }, [dialogButton]);
 
-  useEffect(() => {
-    open && currentlyActiveLink.current?.focus();
-  }, [open]);
+  useEscapeKeydown(handleClose, [handleClose]);
 
+  /**
+   * Tries to equal height for both wrapper and absolute-element
+   * by increasing the margin-bottom of the wrapper
+   */
   const getMargin = () => {
     if (!open) return 0;
     const height = boxHeight ? boxHeight - wrapperHeight : 0;
