@@ -92,7 +92,7 @@ const FeedbackForm = ({
             <Checkbox ref={ref_is_anon}>skjul navnet mitt</Checkbox>
             <Textarea
               label="Innspill"
-              className="min-h-40"
+              className="min-h-40 justify-items-stretch"
               maxLength={500}
               ref={ref_feedback}
               error={error}
