@@ -16,6 +16,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
   const [open, setOpen] = useState(false);
 
   const [boxHeight, setBoxHeight] = useState(0);
+  const [wrapperHeight, setWrapperHeight] = useState(0);
   const currentlyActiveLink = useRef<HTMLElement | null>(null);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
@@ -56,14 +57,28 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
     open && currentlyActiveLink.current?.focus();
   }, [open]);
 
+  const getMargin = () => {
+    if (!open) return 0;
+    const height = boxHeight ? boxHeight - wrapperHeight : 0;
+    if (height > 0) return height;
+    return 0;
+  };
+
   return (
     <Box
       background="surface-alt-3-subtle"
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
-      style={{ minHeight: open && boxHeight ? boxHeight : "auto" }}
+      className={cl(
+        "relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[margin]",
+        styles.marginTransition,
+      )}
+      /* style={{ minHeight: open && boxHeight ? boxHeight : "auto" }} */
+      style={{ marginBottom: getMargin() }}
+      ref={(el) => {
+        setWrapperHeight(el?.getBoundingClientRect().height || 0);
+      }}
     >
       <Cube />
       <TemaSelectButton
