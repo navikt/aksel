@@ -70,12 +70,14 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className={cl(
-        "relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[margin]",
-        styles.marginTransition,
-      )}
+      className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[margin] duration-500"
       /* style={{ minHeight: open && boxHeight ? boxHeight : "auto" }} */
-      style={{ marginBottom: getMargin() }}
+      style={{
+        marginBottom: getMargin(),
+        transitionTimingFunction: open
+          ? "cubic-bezier(0.3, 0, 0.15, 1)"
+          : "cubic-bezier(0, 0.3, 0.15, 1)",
+      }}
       ref={(el) => {
         setWrapperHeight(el?.getBoundingClientRect().height || 0);
       }}

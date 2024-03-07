@@ -17,9 +17,3 @@
     clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
   }
 }
-
-.marginTransition {
-  transition-duration: 450ms;
-  transition-property: cubic-bezier(0.3, 0, 0.15, 1);
-  transition-delay: 100ms;
-}
