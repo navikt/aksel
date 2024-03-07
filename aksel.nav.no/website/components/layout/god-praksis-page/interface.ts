@@ -31,23 +31,6 @@ export type HeroNavT = {
   }[];
 };
 
-export const heroNavQuery = groq`
-"heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0]{
-  title,
-  "slug": slug.current,
-  "image": pictogram,
-}
-`;
-
-export type heroNavQueryResponse = {
-  heroNav: {
-    title: string;
-    slug: string;
-    image: any;
-  }[];
-};
-
 /**
  * Chips navigation
  */
@@ -128,26 +111,6 @@ export type GpEntryPageProps = HeroNavT & {
 } & {
   initialArticles: GpGroupedArticlesT;
 } & { chipsData: ChipsData };
-
-export const temaQuery = groq`
-"tema": *[_type == "gp.tema" && slug.current == $slug][0]{
-    ...,
-    "slug": slug.current,
-    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
-      title,
-      description
-    }
-  }`;
-
-export type temaQueryResponse = {
-  tema: {
-    [key: string]: any;
-    title: string;
-    slug: string;
-    description?: string;
-    undertema: { title: string; description: string }[];
-  };
-};
 
 export const baseGpArticleData = groq`{
   _id,

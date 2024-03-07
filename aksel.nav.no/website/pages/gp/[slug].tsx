@@ -1,39 +1,64 @@
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy, useEffect } from "react";
-import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
-import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
-import {
-  GpEntryPageProps,
-  chipsDataAllQuery,
-  chipsDataAllQueryResponse,
-  heroNavQuery,
-  heroNavQueryResponse,
-  initialTemaPageArticles,
-  initialTemaPageArticlesResponse,
-  temaQuery,
-  temaQueryResponse,
-} from "@/layout/god-praksis-page/interface";
+import { SanityDocument } from "sanity";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<GpEntryPageProps>;
-
 const query = groq`
 {
-  ${heroNavQuery},
-  ${temaQuery},
-  ${chipsDataAllQuery},
-  ${initialTemaPageArticles},
+  "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
+    _id,
+    heading,
+    publishedAt,
+    description,
+    "undertema": undertema[]->{title, "temaTitle": tema->title},
+    "innholdstype": innholdstype->title,
+    "slug": slug.current,
+  },
+  "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
+    ...,
+    "slug": slug.current,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
+      title,
+      description
+    }
+  },
+  "heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0]{
+    title,
+    "slug": slug.current,
+    "image": pictogram,
+  }
 }
 `;
 
-type QueryResponse = chipsDataAllQueryResponse &
-  heroNavQueryResponse &
-  temaQueryResponse &
-  initialTemaPageArticlesResponse;
+type QueryResponse = {
+  tema: SanityDocument & {
+    title: string;
+    slug: string;
+    description?: string;
+    undertema: { title: string; description: string }[];
+  };
+  heroNav: {
+    title: string;
+    slug: string;
+    image: any;
+  }[];
+  articles: {
+    _id: string;
+    heading: string;
+    publishedAt: string;
+    description;
+    string;
+    undertema: { title: string; temaTitle: string };
+    innholdstype: string;
+    slug: string;
+  }[];
+};
+
+type PageProps = NextPageT<QueryResponse>;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
@@ -41,25 +66,24 @@ export const getServerSideProps: GetServerSideProps = async (
   const slug = ctx.params?.slug as string;
   const preview = !!ctx.preview;
 
-  const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
-    await getClient().fetch<QueryResponse>(query, {
+  const { heroNav, tema, articles } = await getClient().fetch<QueryResponse>(
+    query,
+    {
       slug,
-    });
-
-  const chipsData = groupByTema(chipsDataAll)[slug];
+    },
+  );
 
   return {
     props: {
       tema,
       heroNav,
-      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
+      articles,
       slug,
       preview,
-      id: "",
-      title: "",
-      chipsData: groupByTema(chipsDataAll)[slug],
+      id: tema._id ?? "",
+      title: tema.title ?? "",
     },
-    notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
+    notFound: !tema || articles.length === 0,
   };
 };
 
@@ -77,7 +101,8 @@ const GpPage = (props: PageProps["props"]) => {
         /* description={page?.seo?.meta} */
         /* image={page?.seo?.image} */
       />
-      <GodPraksisPage {...props} />
+      <div>hello</div>
+      {/* <GodPraksisPage {...props} /> */}
     </>
   );
 };
@@ -95,22 +120,6 @@ const Wrapper = (props: any) => {
           params={{
             slug: props?.slug,
           }}
-          resolvers={[
-            {
-              key: "initialArticles",
-              dataKeys: ["initialInnholdstype", "initialUndertema"],
-              cb: (v) =>
-                groupArticles({
-                  initialInnholdstype: v[0],
-                  initialUndertema: v[1],
-                }),
-            },
-            {
-              key: "chipsData",
-              dataKeys: ["chipsDataAll"],
-              cb: (v) => groupByTema(v[0])[props?.slug],
-            },
-          ]}
         />
       </Suspense>
     );
