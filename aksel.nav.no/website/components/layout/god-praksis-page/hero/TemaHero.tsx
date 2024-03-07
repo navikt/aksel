@@ -1,44 +1,18 @@
-import { useState } from "react";
-import { BodyLong, Box, Heading } from "@navikt/ds-react";
-import Cube from "@/layout/god-praksis-page/hero/Cube";
-import HeroSelect from "@/layout/god-praksis-page/hero/HeroSelect";
+import { useMedia } from "@/hooks/useMedia";
+import { TemaHeroModal } from "@/layout/god-praksis-page/hero/parts/tema-hero/HeroModal";
+import { TemaHeroStatic } from "@/layout/god-praksis-page/hero/parts/tema-hero/HeroStatic";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 
 type GpHeroProps = { tema: GpTemaT | null } & HeroNavT;
 
-function Hero({ tema, heroNav }: GpHeroProps) {
-  const [open, setOpen] = useState(false);
-  return (
-    <Box
-      background="surface-alt-3-subtle"
-      borderRadius="large"
-      paddingInline={{ xs: "4", lg: "10" }}
-      paddingBlock="10 6"
-      className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
-    >
-      <Cube />
-      <HeroSelect
-        heroNav={heroNav}
-        currentSlug={tema?.slug}
-        open={open}
-        setOpen={setOpen}
-      />
-      <div aria-hidden={open} className="relative z-10">
-        <Heading
-          level="1"
-          size="xlarge"
-          className="z-10 mt-2 text-aksel-heading"
-        >
-          {tema?.title ?? "Alle tema"}
-        </Heading>
-        {tema?.description && (
-          <BodyLong size="large" className="relative z-10 mt-4">
-            {tema.description}
-          </BodyLong>
-        )}
-      </div>
-    </Box>
+function TemaHero(props: GpHeroProps) {
+  const hideModal = useMedia("screen and (min-width: 1024px)");
+
+  return hideModal ? (
+    <TemaHeroStatic {...props} />
+  ) : (
+    <TemaHeroModal {...props} />
   );
 }
 
-export default Hero;
+export default TemaHero;

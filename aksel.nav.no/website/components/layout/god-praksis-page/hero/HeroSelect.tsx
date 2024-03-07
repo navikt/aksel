@@ -1,10 +1,11 @@
 import cl from "clsx";
 import { CSSProperties, MouseEvent, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, XMarkIcon } from "@navikt/aksel-icons";
-import { BodyShort, Box, Button, Stack } from "@navikt/ds-react";
+import { BodyShort, Box, Button, Modal } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
-import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
+import { useMedia } from "@/hooks/useMedia";
 import Cube from "@/layout/god-praksis-page/hero/Cube";
+import { HeroList } from "@/layout/god-praksis-page/hero/parts/HeroList";
 import { HeroNavT } from "@/layout/god-praksis-page/interface";
 import styles from "./Hero.module.css";
 
@@ -20,6 +21,8 @@ function HeroSelect({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
+
+  const hideModal = useMedia("screen and (min-width: 1024px)");
 
   const currentSelected = useRef<HTMLElement | null>(null);
   const [dialogButton, setDialogButton] = useState<HTMLElement | null>(null);
@@ -57,6 +60,62 @@ function HeroSelect({
     open && currentSelected.current?.focus();
   }, [open]);
 
+  const List = () => (
+    <>
+      {hideModal ? (
+        <Box
+          background="surface-subtle"
+          borderRadius="large"
+          paddingInline={{ xs: "8", lg: "14" }}
+          paddingBlock="10 6"
+          className={cl("z-20", {
+            hidden: !open,
+            [styles.heroSelector]: hideModal,
+            "absolute inset-0": hideModal,
+          })}
+          shadow="medium"
+          style={inlineStyles}
+          role="dialog"
+          aria-labelledby="tema-selector-title"
+          aria-modal="false"
+        >
+          <Cube variant="dark" />
+
+          <Button
+            variant="tertiary-neutral"
+            icon={<XMarkIcon title="Lukk temavelger" />}
+            onClick={handleClose}
+            className="absolute right-4 top-4 z-20"
+          />
+          <BodyShort
+            size="large"
+            className="relative z-10 py-1"
+            id="tema-selector-title"
+          >
+            Tema
+          </BodyShort>
+          <HeroList
+            currentSelected={currentSelected}
+            currentSlug={currentSlug}
+            heroNav={heroNav}
+            setOpen={setOpen}
+          />
+        </Box>
+      ) : (
+        <Box paddingInline="8" paddingBlock="0 6">
+          <Cube variant="dark" />
+
+          <HeroList
+            currentSelected={currentSelected}
+            currentSlug={currentSlug}
+            heroNav={heroNav}
+            setOpen={setOpen}
+          />
+        </Box>
+      )}
+    </>
+  );
+
   return (
     <>
       <BodyShort
@@ -73,74 +132,21 @@ function HeroSelect({
         <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />
       </BodyShort>
 
-      <Box
-        background="surface-subtle"
-        borderRadius="large"
-        paddingInline={{ xs: "8", lg: "14" }}
-        paddingBlock="10 6"
-        className={cl("absolute inset-0 z-20", styles.heroSelector, {
-          hidden: !open,
-        })}
-        shadow="medium"
-        style={inlineStyles}
-        role="dialog"
-        aria-labelledby="tema-selector-title"
-        aria-modal="false"
-      >
-        <Cube variant="dark" />
-
-        <Button
-          variant="tertiary-neutral"
-          icon={<XMarkIcon title="Lukk temavelger" />}
-          onClick={handleClose}
-          className="absolute right-4 top-4 z-20"
-        />
-        <BodyShort
-          size="large"
-          className="relative z-10 py-1"
-          id="tema-selector-title"
+      {hideModal ? (
+        <List />
+      ) : (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          header={{ heading: "Tema", closeButton: true }}
+          className="bg-surface-subtle"
+          width="small"
         >
-          Tema
-        </BodyShort>
-        <nav aria-label="Temavelger" className="relative z-10 mt-2">
-          <Stack
-            gap={{ xs: "2", md: "4" }}
-            wrap
-            direction={{ xs: "column", md: "row" }}
-          >
-            <GpHeroCard
-              href="/gp"
-              image={null}
-              compact
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              Alle tema
-            </GpHeroCard>
-            {heroNav.map((tema, idx) => (
-              <GpHeroCard
-                key={tema.slug + idx}
-                href={`/gp/${tema.slug}`}
-                image={tema.image}
-                compact
-                aria-current={currentSlug === tema.slug ? "page" : undefined}
-                onClick={() => {
-                  setOpen(false);
-                }}
-                ref={(element: HTMLAnchorElement) => {
-                  if (currentSlug === tema.slug) {
-                    currentSelected.current = element;
-                  }
-                }}
-              >
-                {tema.title}
-              </GpHeroCard>
-            ))}
-          </Stack>
-        </nav>
-      </Box>
+          <List />
+        </Modal>
+      )}
     </>
   );
 }
+
 export default HeroSelect;

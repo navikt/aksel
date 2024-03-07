@@ -30,6 +30,7 @@ const query = groq`
   ${initialTemaPageArticles},
 }
 `;
+
 type QueryResponse = chipsDataAllQueryResponse &
   heroNavQueryResponse &
   temaQueryResponse &

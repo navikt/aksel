@@ -2,7 +2,7 @@ import cl from "clsx";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { HTMLAttributes, forwardRef } from "react";
-import { BodyShort, Heading, Hide, Show } from "@navikt/ds-react";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
 
 type GpHeroCardProps = {
@@ -22,11 +22,10 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
         className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:gap-3 md:py-3 md:pl-3 md:pr-6"
         {...rest}
       >
-        {/* TODO: Legge til avatar-mulighet i sanity for hvert tema */}
         <div
           className={cl("relative my-auto shrink-0", {
             "size-8 md:size-12": !compact,
-            "size-4 md:size-6": compact,
+            "size-6": compact,
           })}
         >
           {image ? (
@@ -44,24 +43,13 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
         </div>
 
         <div className="grid gap-05">
-          <Show asChild above="md">
-            <Heading
-              size="small"
-              as="span"
-              className="truncate text-aksel-heading underline group-hover:no-underline"
-            >
-              {children}
-            </Heading>
-          </Show>
-          <Hide asChild above="md">
-            <Heading
-              size="xsmall"
-              as="span"
-              className="truncate text-aksel-heading underline group-hover:no-underline"
-            >
-              {children}
-            </Heading>
-          </Hide>
+          <Heading
+            size="small"
+            as="span"
+            className="truncate text-aksel-heading underline group-hover:no-underline"
+          >
+            {children}
+          </Heading>
           {articleCount && (
             <BodyShort
               as="span"
