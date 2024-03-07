@@ -32,6 +32,7 @@ const FeedbackForm = ({
   const { login, logout } = useAuth();
   const ref_is_anon = React.useRef<HTMLInputElement>(null);
   const ref_feedback = React.useRef<HTMLTextAreaElement>(null);
+  const [error, setError] = useState<string | null>(null);
 
   let form: React.ReactNode = null;
   const _username = username || "Ukjent bruker";
@@ -91,18 +92,36 @@ const FeedbackForm = ({
             <Checkbox ref={ref_is_anon}>skjul navnet mitt</Checkbox>
             <Textarea
               label="Innspill"
-              className="h-40 justify-items-stretch"
+              className="min-h-40"
               maxLength={500}
               ref={ref_feedback}
+              error={error}
+              onInput={() => {
+                if (
+                  ref_feedback.current?.value &&
+                  ref_feedback.current?.value.length > 500
+                ) {
+                  return;
+                }
+                setError(null);
+              }}
             ></Textarea>
           </VStack>
           <Button
             onClick={() => {
+              if (!ref_feedback.current?.value) {
+                setError("Feltet kan ikke være tomt.");
+                return;
+              }
+              if (ref_feedback.current?.value.length > 500) {
+                setError("Tilbakemeldingen må være under 500 tegn.");
+                return;
+              }
               setState?.("feedbackSent");
 
               const body = JSON.stringify({
                 anon: ref_is_anon.current?.checked || false,
-                feedback: ref_feedback.current?.value || "",
+                feedback: ref_feedback.current?.value.slice(0, 500) || "",
                 document_id: document_id || "",
               });
 

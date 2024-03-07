@@ -13,11 +13,19 @@ import {
 } from "@/slack";
 import { logger } from "../../../../../config/logger";
 
+const maxFeedbackLength = 500;
+
 const requestBodySchema = z.object({
   body: z.object({
-    feedback: z.string({
-      required_error: "Message-string is required",
-    }),
+    feedback: z
+      .string({
+        required_error: "Message-string is required",
+      })
+      .min(1, "Message-string cannot be empty")
+      .max(
+        maxFeedbackLength,
+        `Message-string cannot be longer than ${maxFeedbackLength} characters`,
+      ),
     anon: z.boolean({
       required_error: "Anonymity-boolean is required",
     }),
