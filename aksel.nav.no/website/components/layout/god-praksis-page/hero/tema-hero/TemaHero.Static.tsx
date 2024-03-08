@@ -38,7 +38,14 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       y: e.currentTarget.offsetTop + rect.height / 2,
     });
     setOpen(true);
-    currentlyActiveLink.current?.focus();
+
+    /**
+     * Since the dialog is not rendered until the next tick,
+     * we need to wait for display: none to be removed before.
+     */
+    setTimeout(() => {
+      currentlyActiveLink.current?.focus();
+    }, 0);
   };
 
   const handleClose = useCallback(() => {
