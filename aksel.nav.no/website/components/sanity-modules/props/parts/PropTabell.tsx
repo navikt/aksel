@@ -26,7 +26,7 @@ const PropTable = ({ komponent }: PropTableProps) => {
           </div>
         )}
 
-        <dl>
+        <dl lang="en">
           {komponent?.overridable && (
             <div className="border border-t-0 border-gray-300">
               <dt className="px-2 py-2">
