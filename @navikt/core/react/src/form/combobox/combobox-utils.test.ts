@@ -1,4 +1,4 @@
-import { isInList } from "./combobox-utils";
+import { isInList, mapToComboboxOptionArray } from "./combobox-utils";
 
 const list = [
   { label: "Hjelpemidler", value: "HJE" },
@@ -29,5 +29,26 @@ describe("isInList", () => {
   test("returns false for ComboboxOptions which do not match both label and value", () => {
     expect(isInList({ label: "Oppfølging", value: "SYM" }, list)).toBe(false);
     expect(isInList({ label: "Sykemelding", value: "OPP" }, list)).toBe(false);
+  });
+});
+
+describe("mapToComboboxOptionArray", () => {
+  test("maps an array of strings to an array of ComboboxOptions", () => {
+    const stringArray = ["Hjelpemidler", "Oppfølging", "Sykepenger"];
+    const comboboxOptions = [
+      { label: "Hjelpemidler", value: "Hjelpemidler" },
+      { label: "Oppfølging", value: "Oppfølging" },
+      { label: "Sykepenger", value: "Sykepenger" },
+    ];
+    expect(mapToComboboxOptionArray(stringArray)).toEqual(comboboxOptions);
+  });
+
+  test("does not change an array of ComboboxOptions", () => {
+    const comboboxOptions = [
+      { label: "Hjelpemidler", value: "Hjelpemidler" },
+      { label: "Oppfølging", value: "Oppfølging" },
+      { label: "Sykepenger", value: "Sykepenger" },
+    ];
+    expect(mapToComboboxOptionArray(comboboxOptions)).toEqual(comboboxOptions);
   });
 });

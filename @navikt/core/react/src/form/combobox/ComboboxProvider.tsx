@@ -3,7 +3,7 @@ import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
 import { InputContextProvider } from "./Input/inputContext";
 import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
-import { mapFromStringArrayToComboboxOptionArray } from "./combobox-utils";
+import { mapToComboboxOptionArray } from "./combobox-utils";
 import { CustomOptionsProvider } from "./customOptionsContext";
 import { ComboboxProps } from "./types";
 
@@ -53,14 +53,9 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       size,
       ...rest
     } = props;
-    const options =
-      mapFromStringArrayToComboboxOptionArray(externalOptions) || [];
-    const filteredOptions = mapFromStringArrayToComboboxOptionArray(
-      externalFilteredOptions,
-    );
-    const selectedOptions = mapFromStringArrayToComboboxOptionArray(
-      externalSelectedOptions,
-    );
+    const options = mapToComboboxOptionArray(externalOptions) || [];
+    const filteredOptions = mapToComboboxOptionArray(externalFilteredOptions);
+    const selectedOptions = mapToComboboxOptionArray(externalSelectedOptions);
     return (
       <InputContextProvider
         value={{

@@ -22,9 +22,7 @@ const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) => {
   }
 };
 
-const mapFromStringArrayToComboboxOptionArray = (
-  options?: string[] | ComboboxOption[],
-) => {
+const mapToComboboxOptionArray = (options?: string[] | ComboboxOption[]) => {
   return options?.map((option: string | ComboboxOption) =>
     typeof option === "string" ? { label: option, value: option } : option,
   );
@@ -35,4 +33,4 @@ const toComboboxOption = (value: string): ComboboxOption => ({
   value,
 });
 
-export { isInList, mapFromStringArrayToComboboxOptionArray, toComboboxOption };
+export { isInList, mapToComboboxOptionArray, toComboboxOption };
