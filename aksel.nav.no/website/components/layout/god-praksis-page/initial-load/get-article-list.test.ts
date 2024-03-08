@@ -16,6 +16,7 @@ const baseArticle = (
     innholdstype: "type1",
     slug: "url",
     publishedAt,
+    currentUndertema: null,
   },
 });
 

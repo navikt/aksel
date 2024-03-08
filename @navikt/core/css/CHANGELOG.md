@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 6.1.1
+
+### Patch Changes
+
+- Link: Fjern hover-farge ([#2767](https://github.com/navikt/aksel/pull/2767))
+
+- Modal: Får nå fokus når åpnes i Safari ([#2688](https://github.com/navikt/aksel/pull/2688))
+
 ## 6.1.0
 
 ## 6.0.0

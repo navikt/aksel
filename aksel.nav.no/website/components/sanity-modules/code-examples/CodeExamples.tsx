@@ -39,12 +39,18 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
     const waitForExampleContentToRender = setInterval(() => {
       const exampleIframeDOM = iframeRef.current?.contentDocument;
 
-      let exampleWrapper: HTMLElement;
+      let exampleWrapper: HTMLElement | null = null;
 
       if (node.dir.variant === "templates") {
-        exampleWrapper = exampleIframeDOM?.getElementById("__next");
+        const element = exampleIframeDOM?.getElementById("__next");
+        if (element) {
+          exampleWrapper = element;
+        }
       } else {
-        exampleWrapper = exampleIframeDOM?.getElementById("ds-example");
+        const element = exampleIframeDOM?.getElementById("ds-example");
+        if (element) {
+          exampleWrapper = element;
+        }
       }
 
       if (exampleWrapper && exampleWrapper.offsetHeight) {
@@ -145,7 +151,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   aria-label={`${node.dir?.title} ${fil.title} eksempel`}
                   title="Demo"
                   className={cl(
-                    "block w-full min-w-80 max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    "block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
                     },
@@ -170,9 +176,11 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                         icon={
                           <MobileSmallIcon title="Sett eksempel til mobilbredde" />
                         }
-                        onClick={() =>
-                          (iframeRef.current.style.width = "360px")
-                        }
+                        onClick={() => {
+                          if (iframeRef.current) {
+                            iframeRef.current.style.width = "360px";
+                          }
+                        }}
                       />
 
                       <Button
@@ -181,7 +189,11 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                         icon={
                           <LaptopIcon title="Sett eksempel til desktopbredde" />
                         }
-                        onClick={() => (iframeRef.current.style.width = "")}
+                        onClick={() => {
+                          if (iframeRef.current) {
+                            iframeRef.current.style.width = "";
+                          }
+                        }}
                       />
                     </HStack>
                   </div>

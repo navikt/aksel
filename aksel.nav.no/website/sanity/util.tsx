@@ -10,7 +10,6 @@ export const getTemplates = () => {
         title: "Profilside",
         id: "profilRole",
         templateId: "editor",
-        subtitle: "(Kan bare ha 1 profilside)",
       },
     ],
     god_praksis_forfatter: [

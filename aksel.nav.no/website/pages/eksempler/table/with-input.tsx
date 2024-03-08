@@ -13,20 +13,26 @@ const Example = () => {
       </Table.Header>
       <Table.Body>
         {data.map(({ name, fnr, start }, i) => {
+          const hasError = fnr.startsWith("18") ? "Error message" : false;
+          const cellClass = hasError ? "align-top" : "";
           return (
             <Table.Row key={i + fnr}>
-              <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
-              <Table.DataCell>
+              <Table.HeaderCell scope="row" className={cellClass}>
+                {name}
+              </Table.HeaderCell>
+              <Table.DataCell className={cellClass}>
                 <TextField
                   label="Fødselsnr."
                   hideLabel
                   defaultValue={`${fnr.substring(0, 6)} ${fnr.substring(6)}`}
                   size="small"
                   htmlSize={14}
-                  error={fnr.startsWith("18") ? "Error message" : false}
+                  error={hasError}
                 />
               </Table.DataCell>
-              <Table.DataCell>{format(new Date(start))}</Table.DataCell>
+              <Table.DataCell className={cellClass}>
+                {format(new Date(start))}
+              </Table.DataCell>
             </Table.Row>
           );
         })}
