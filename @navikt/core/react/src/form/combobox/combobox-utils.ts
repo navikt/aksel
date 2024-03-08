@@ -22,15 +22,15 @@ const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) => {
   }
 };
 
-const mapToComboboxOptionArray = (options?: string[] | ComboboxOption[]) => {
-  return options?.map((option: string | ComboboxOption) =>
-    typeof option === "string" ? { label: option, value: option } : option,
-  );
-};
-
 const toComboboxOption = (value: string): ComboboxOption => ({
   label: value,
   value,
 });
+
+const mapToComboboxOptionArray = (options?: string[] | ComboboxOption[]) => {
+  return options?.map((option: string | ComboboxOption) =>
+    typeof option === "string" ? toComboboxOption(option) : option,
+  );
+};
 
 export { isInList, mapToComboboxOptionArray, toComboboxOption };

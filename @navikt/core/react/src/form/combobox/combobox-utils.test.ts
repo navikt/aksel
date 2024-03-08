@@ -1,4 +1,8 @@
-import { isInList, mapToComboboxOptionArray } from "./combobox-utils";
+import {
+  isInList,
+  mapToComboboxOptionArray,
+  toComboboxOption,
+} from "./combobox-utils";
 
 const list = [
   { label: "Hjelpemidler", value: "HJE" },
@@ -50,5 +54,14 @@ describe("mapToComboboxOptionArray", () => {
       { label: "Sykepenger", value: "Sykepenger" },
     ];
     expect(mapToComboboxOptionArray(comboboxOptions)).toEqual(comboboxOptions);
+  });
+});
+
+describe("toComboboxOption", () => {
+  test("creates a ComboboxOption from a string", () => {
+    expect(toComboboxOption("Hjelpemidler")).toEqual({
+      label: "Hjelpemidler",
+      value: "Hjelpemidler",
+    });
   });
 });
