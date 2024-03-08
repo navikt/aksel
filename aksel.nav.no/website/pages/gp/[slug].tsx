@@ -5,11 +5,13 @@ import { SanityDocument } from "sanity";
 import { BodyLong, Box, HGrid, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
+import ChipNav from "@/layout/god-praksis-page/chips/ChipNav";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
+import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 
 const sanityQuery = groq`
@@ -82,7 +84,13 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       tema,
       heroNav,
-      articles,
+      // Avoids having to format date on client
+      articles: await Promise.all(
+        articles.map(async (a) => ({
+          ...a,
+          publishedAt: await dateStr(a.publishedAt),
+        })),
+      ),
       slug,
       preview,
       id: tema._id ?? "",
@@ -151,6 +159,24 @@ const GpPage = (props: PageProps["props"]) => {
       return map;
     }, new Map<QueryResponse["tema"]["undertema"][0], ParsedGPArticle[]>());
   }, [articles, getUndertemaFromTema]);
+
+  const countArticlesByUndertemaAndInnholdstype = articles.reduce(
+    (acc, article) => {
+      const { undertema } = article;
+
+      const innholdstype = article.innholdstype ?? "_";
+
+      if (!acc[undertema]) {
+        acc[undertema] = {};
+      }
+      if (!acc[undertema][innholdstype]) {
+        acc[undertema][innholdstype] = 0;
+      }
+      acc[undertema][innholdstype]++;
+      return acc;
+    },
+    {},
+  );
 
   const ArticleView = () => {
     switch (view.view) {
@@ -339,12 +365,13 @@ const GpPage = (props: PageProps["props"]) => {
         <Box paddingBlock="10">
           <Page.Block width="xl" gutters>
             <VStack gap="10">
-              <VStack gap="6">
-                <TemaHero tema={props.tema} heroNav={props.heroNav} />
-                {/* <ChipGroup data={props.chipsData} showTema={!!props.tema} /> */}
-              </VStack>
+              <TemaHero tema={props.tema} heroNav={props.heroNav} />
               <Box paddingInline={{ xs: "4", lg: "10" }}>
-                <VStack gap="10">
+                <ChipNav
+                  type="undertema"
+                  data={countArticlesByUndertemaAndInnholdstype}
+                />
+                <VStack gap="10" className="mt-10">
                   <ArticleView />
                 </VStack>
               </Box>

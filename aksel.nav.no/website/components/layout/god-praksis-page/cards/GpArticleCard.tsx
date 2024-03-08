@@ -6,7 +6,6 @@ import {
   TagFillIcon,
 } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "@navikt/ds-react";
-import { useFormatedDate } from "@/hooks/useFormatedDate";
 
 type GpArticleCardProps = {
   children: React.ReactNode;
@@ -25,8 +24,6 @@ function GpArticleCard({
   description,
   publishedAt,
 }: GpArticleCardProps) {
-  const publishDate = useFormatedDate(publishedAt);
-
   return (
     <Link
       href={`/${href}`}
@@ -39,11 +36,12 @@ function GpArticleCard({
       >
         {children}
       </Heading>
-      {publishDate && (
+      {publishedAt && (
         <Detail as="span" textColor="subtle" uppercase>
-          {publishDate}
+          {publishedAt}
         </Detail>
       )}
+
       {description && (
         <BodyLong className="mt-1 line-clamp-2">{description}</BodyLong>
       )}

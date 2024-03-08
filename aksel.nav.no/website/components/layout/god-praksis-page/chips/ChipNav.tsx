@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { HGrid, Label } from "@navikt/ds-react";
+import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
@@ -12,7 +13,7 @@ export type ChipsRenderData = { title: string; count: number }[];
 
 type ChipsNavProps = {
   type: "innholdstype" | "undertema";
-  data?: ChipsRenderData;
+  data: Record<string, Record<string, number>>;
 };
 
 /**
@@ -20,6 +21,8 @@ type ChipsNavProps = {
  * - On initial load, scroll selected into view
  */
 function ChipNav({ type, data }: ChipsNavProps) {
+  const view = useGpViews();
+
   const id = useId();
 
   const { query, replace } = useRouter();
@@ -56,27 +59,35 @@ function ChipNav({ type, data }: ChipsNavProps) {
           id={id}
           className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
         >
-          {data?.map((entry) => (
-            <li key={entry.title}>
-              <button
-                aria-pressed={encodeURIComponent(entry.title) === query?.[type]}
-                onClick={() => handleClick(entry.title)}
-                className={cl(
-                  "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
-                  "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
-                  {
-                    "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
-                      type === "innholdstype",
-                    "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
-                      type === "undertema",
-                  },
-                )}
-                disabled={entry.count === 0}
-              >
-                {`${entry.title} (${entry.count})`}
-              </button>
-            </li>
-          ))}
+          {Object.entries(data)?.map(([entry, innholdstype]) => {
+            const count = Object.values(innholdstype).reduce((acc, curr) => {
+              if (view.view === "undertema") {
+                return entry === view.undertema ? acc + curr : acc;
+              }
+              return acc + curr;
+            }, 0);
+            return (
+              <li key={entry}>
+                <button
+                  aria-pressed={encodeURIComponent(entry) === query?.[type]}
+                  onClick={() => handleClick(entry)}
+                  className={cl(
+                    "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
+                    "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
+                    {
+                      /* "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
+                        type === "innholdstype", */
+                      "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
+                        true,
+                    },
+                  )}
+                  disabled={count === 0}
+                >
+                  {`${entry} (${count})`}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </HGrid>
