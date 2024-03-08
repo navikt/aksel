@@ -1,3 +1,4 @@
+import cl from "clsx";
 import { groq } from "next-sanity";
 import NextLink from "next/link";
 import { GetStaticProps } from "next/types";
@@ -150,7 +151,10 @@ const GpPage = (props: PageProps["props"]) => {
                           <Link
                             href={`/gp/${tema.slug}`}
                             as={NextLink}
-                            className="mb-2 text-aksel-heading"
+                            className={cl("text-aksel-heading", {
+                              "mb-4": !tema.description,
+                              "mb-2 ": !!tema.description,
+                            })}
                             onClick={(e) =>
                               amplitudeLogNavigation(
                                 "link",
@@ -162,7 +166,11 @@ const GpPage = (props: PageProps["props"]) => {
                               {tema.title}
                             </Heading>
                           </Link>
-                          <BodyLong spacing>{tema.description}</BodyLong>
+                          {tema.description && (
+                            <BodyLong className="mb-6">
+                              {tema.description}
+                            </BodyLong>
+                          )}
                           <HGrid
                             columns={{ xs: 1, md: 2 }}
                             gap={{ xs: "3", md: "6" }}
