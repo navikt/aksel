@@ -90,12 +90,7 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
         allowNewValues
         onToggleSelected={(value, isSelected) =>
           isSelected
-            ? setSelectedOptions([
-                ...selectedOptions,
-                (props.options as ComboboxOption[]).find(
-                  (o) => o.value === value,
-                )!.value,
-              ])
+            ? setSelectedOptions([...selectedOptions, value])
             : setSelectedOptions(selectedOptions.filter((o) => o !== value))
         }
         selectedOptions={selectedOptions}

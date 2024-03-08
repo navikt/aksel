@@ -112,7 +112,7 @@ export const SelectedOptionsProvider = ({
       option: ComboboxOption,
       event: React.KeyboardEvent | React.PointerEvent,
     ) => {
-      if (isInList(option, selectedOptions)) {
+      if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
       } else {
         addSelectedOption(option);
