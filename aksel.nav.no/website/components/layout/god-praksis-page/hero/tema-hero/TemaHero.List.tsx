@@ -1,4 +1,4 @@
-import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
+import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
 import { HeroNavT } from "@/layout/god-praksis-page/interface";
 
 type HeroListProps = {

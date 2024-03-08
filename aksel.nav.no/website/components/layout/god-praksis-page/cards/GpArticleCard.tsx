@@ -1,28 +1,36 @@
+import cl from "clsx";
 import Link from "next/link";
 import {
   ChevronRightIcon,
   FileFillIcon,
   TagFillIcon,
 } from "@navikt/aksel-icons";
-import { Detail, Heading } from "@navikt/ds-react";
+import { BodyLong, Detail, Heading } from "@navikt/ds-react";
+import { useFormatedDate } from "@/hooks/useFormatedDate";
 
-type GpHeroCardProps = {
+type GpArticleCardProps = {
   children: React.ReactNode;
   href: string;
   innholdstype?: string;
   undertema?: string;
+  description?: string;
+  publishedAt?: string;
 };
 
-function GpCompactCard({
+function GpArticleCard({
   href,
   children,
   innholdstype,
   undertema,
-}: GpHeroCardProps) {
+  description,
+  publishedAt,
+}: GpArticleCardProps) {
+  const publishDate = useFormatedDate(publishedAt);
+
   return (
     <Link
       href={`/${href}`}
-      className="group grid gap-2 rounded-lg bg-surface-default p-4 pb-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:p-5 md:pb-5"
+      className="group flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:p-5 md:pb-5"
     >
       <Heading
         size="small"
@@ -31,7 +39,19 @@ function GpCompactCard({
       >
         {children}
       </Heading>
-      <div className="mt-auto flex h-fit justify-between">
+      {publishDate && (
+        <Detail as="span" textColor="subtle" uppercase>
+          {publishDate}
+        </Detail>
+      )}
+      {description && (
+        <BodyLong className="mt-1 line-clamp-2">{description}</BodyLong>
+      )}
+      <div
+        className={cl("mt-auto flex h-fit justify-between", {
+          "pt-5": !!description,
+        })}
+      >
         <div className="flex flex-wrap gap-3">
           {undertema && (
             <div className="flex items-center gap-05 text-teal-700">
@@ -56,4 +76,4 @@ function GpCompactCard({
   );
 }
 
-export default GpCompactCard;
+export default GpArticleCard;

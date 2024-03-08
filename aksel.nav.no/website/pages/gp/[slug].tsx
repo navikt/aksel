@@ -4,7 +4,7 @@ import { Suspense, lazy, useCallback, useEffect, useMemo } from "react";
 import { SanityDocument } from "sanity";
 import { BodyLong, Box, HGrid, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import GpCompactCard from "@/layout/god-praksis-page/cards/CompactCard";
+import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
 import Header from "@/layout/header/Header";
@@ -18,7 +18,7 @@ const sanityQuery = groq`
     _id,
     heading,
     publishedAt,
-    description,
+    "description": ingress,
     "undertema": undertema[]->{title, "temaTitle": tema->title},
     "innholdstype": innholdstype->title,
     "slug": slug.current,
@@ -172,14 +172,16 @@ const GpPage = (props: PageProps["props"]) => {
                   )}
                   <HGrid columns={{ xs: 1, md: 2 }} gap={{ xs: "3", md: "6" }}>
                     {utArticles.map((article) => (
-                      <GpCompactCard
+                      <GpArticleCard
                         key={article.slug}
                         href={`${article.slug}`.replace("god-praksis", "gp")}
                         innholdstype={article.innholdstype}
                         undertema={article.undertema}
+                        publishedAt={article.publishedAt}
+                        description={article.description}
                       >
                         {article.heading}
-                      </GpCompactCard>
+                      </GpArticleCard>
                     ))}
                   </HGrid>
                 </div>
@@ -213,14 +215,16 @@ const GpPage = (props: PageProps["props"]) => {
 
             <HGrid columns={{ xs: 1, md: 2 }} gap={{ xs: "3", md: "6" }}>
               {utArticles.map((_article) => (
-                <GpCompactCard
+                <GpArticleCard
                   key={_article.slug}
                   href={`${_article.slug}`.replace("god-praksis", "gp")}
                   innholdstype={_article.innholdstype}
                   undertema={_article.undertema}
+                  publishedAt={_article.publishedAt}
+                  description={_article.description}
                 >
                   {_article.heading}
-                </GpCompactCard>
+                </GpArticleCard>
               ))}
             </HGrid>
           </div>
@@ -258,14 +262,16 @@ const GpPage = (props: PageProps["props"]) => {
                   )}
                   <HGrid columns={{ xs: 1, md: 2 }} gap={{ xs: "3", md: "6" }}>
                     {utArticles.map((article) => (
-                      <GpCompactCard
+                      <GpArticleCard
                         key={article.slug}
                         href={`${article.slug}`.replace("god-praksis", "gp")}
                         innholdstype={article.innholdstype}
                         undertema={article.undertema}
+                        publishedAt={article.publishedAt}
+                        description={article.description}
                       >
                         {article.heading}
-                      </GpCompactCard>
+                      </GpArticleCard>
                     ))}
                   </HGrid>
                 </div>
@@ -296,14 +302,16 @@ const GpPage = (props: PageProps["props"]) => {
             </Heading>
             <HGrid columns={{ xs: 1, md: 2 }} gap={{ xs: "3", md: "6" }}>
               {matchingArticles.map((article) => (
-                <GpCompactCard
+                <GpArticleCard
                   key={article.slug}
                   href={`${article.slug}`.replace("god-praksis", "gp")}
                   innholdstype={article.innholdstype}
                   undertema={article.undertema}
+                  publishedAt={article.publishedAt}
+                  description={article.description}
                 >
                   {article.heading}
-                </GpCompactCard>
+                </GpArticleCard>
               ))}
             </HGrid>
           </div>

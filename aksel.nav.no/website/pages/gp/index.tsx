@@ -13,8 +13,8 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import GpCompactCard from "@/layout/god-praksis-page/cards/CompactCard";
-import GpHeroCard from "@/layout/god-praksis-page/cards/HeroCard";
+import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
+import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
 import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
 import Header from "@/layout/header/Header";
 import { amplitudeLogNavigation } from "@/logging";
@@ -168,7 +168,7 @@ const GpPage = (props: PageProps["props"]) => {
                             gap={{ xs: "3", md: "6" }}
                           >
                             {tema.articles.map((article) => (
-                              <GpCompactCard
+                              <GpArticleCard
                                 key={article.slug}
                                 href={`${article.slug}`.replace(
                                   "god-praksis",
@@ -182,7 +182,7 @@ const GpPage = (props: PageProps["props"]) => {
                                 }
                               >
                                 {article.heading}
-                              </GpCompactCard>
+                              </GpArticleCard>
                             ))}
                           </HGrid>
 

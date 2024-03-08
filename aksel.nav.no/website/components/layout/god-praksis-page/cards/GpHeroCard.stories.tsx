@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { HStack } from "@navikt/ds-react";
 import { AkselTheme } from "@/sb-util";
-import GpHeroCard from "./HeroCard";
+import GpHeroCard from "./GpHeroCard";
 
 const meta = {
   title: "Layout/god-praksis/cards/HeroCard",
