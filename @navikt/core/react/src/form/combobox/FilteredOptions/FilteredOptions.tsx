@@ -33,7 +33,7 @@ const FilteredOptions = () => {
     useSelectedOptionsContext();
 
   const isDisabled = (option: ComboboxOption) =>
-    maxSelected?.isLimitReached && !isInList(option, selectedOptions);
+    maxSelected?.isLimitReached && !isInList(option.value, selectedOptions);
 
   const shouldRenderNonSelectables =
     maxSelected?.isLimitReached || // Render maxSelected message
@@ -136,7 +136,7 @@ const FilteredOptions = () => {
                   activeDecendantId ===
                   filteredOptionsUtil.getOptionId(id, option.label),
                 "navds-combobox__list-item--selected": isInList(
-                  option,
+                  option.value,
                   selectedOptions,
                 ),
               })}
@@ -160,16 +160,19 @@ const FilteredOptions = () => {
                   return;
                 }
                 toggleOption(option, event);
-                if (!isMultiSelect && !isInList(option, selectedOptions)) {
+                if (
+                  !isMultiSelect &&
+                  !isInList(option.value, selectedOptions)
+                ) {
                   toggleIsListOpen(false);
                 }
               }}
               role="option"
-              aria-selected={isInList(option, selectedOptions)}
+              aria-selected={isInList(option.value, selectedOptions)}
               aria-disabled={isDisabled(option) || undefined}
             >
               <BodyShort size={size}>{option.label}</BodyShort>
-              {isInList(option, selectedOptions) && <CheckmarkIcon />}
+              {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
             </li>
           ))}
         </ul>

@@ -4,14 +4,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [selectedOptions, setSelectedOptions] = useState([
-    options[0],
-    options[1],
+    options[0].value,
+    options[1].value,
   ]);
   return (
     <div>
       <UNSAFE_Combobox
-        label="Hva er de kuleste transportmidlene? (velg opptil 3)"
-        options={options}
+        label="Velg temakoder (opptil 3)"
+        options={options.map((o) => ({
+          label: `${o.label} [${o.value}]`,
+          value: o.value,
+        }))}
         isMultiSelect
         maxSelected={{ limit: 3 }}
         selectedOptions={selectedOptions}
@@ -19,11 +22,9 @@ const Example = () => {
           isSelected
             ? setSelectedOptions([
                 ...selectedOptions,
-                options.find((o) => o.value === option),
+                options.find((o) => o.value === option).value,
               ])
-            : setSelectedOptions(
-                selectedOptions.filter((o) => o.value !== option),
-              )
+            : setSelectedOptions(selectedOptions.filter((o) => o !== option))
         }
       />
     </div>
@@ -31,18 +32,20 @@ const Example = () => {
 };
 
 const options = [
-  { label: "Car", value: "car" },
-  { label: "Bus", value: "bus" },
-  { label: "Train", value: "train" },
-  { label: "Skateboard", value: "skateboard" },
-  { label: "Bicycle", value: "bicycle" },
-  { label: "Motorcycle", value: "motorcycle" },
-  { label: "Boat", value: "boat" },
-  { label: "Airplane", value: "airplane" },
-  { label: "Helicopter", value: "helicopter" },
-  { label: "Truck", value: "truck" },
-  { label: "Van", value: "van" },
-  { label: "Scooter", value: "scooter" },
+  { label: "Hjelpemidler", value: "HJE" },
+  { label: "Oppfølging", value: "OPP" },
+  { label: "Sykepenger", value: "SYK" },
+  { label: "Sykemelding", value: "SYM" },
+  { label: "Foreldre- og svangerskapspenger", value: "FOR" },
+  { label: "Arbeidsavklaringspenger", value: "AAP" },
+  { label: "Uføretrygd", value: "UFO" },
+  { label: "Pensjon", value: "PEN" },
+  { label: "Barnetrygd", value: "BAR" },
+  { label: "Kontantstøtte", value: "KON" },
+  { label: "Bostøtte", value: "BOS" },
+  { label: "Barnebidrag", value: "BBI" },
+  { label: "Bidragsforskudd", value: "BIF" },
+  { label: "Grunn- og hjelpestønad", value: "GRU" },
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

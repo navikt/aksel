@@ -1,13 +1,26 @@
 import { ComboboxOption } from "./types";
 
-const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) =>
-  list
-    .map((item) => item.label.toLocaleLowerCase())
-    .includes(
-      typeof option === "string"
-        ? option.toLocaleLowerCase()
-        : option.label.toLocaleLowerCase(),
+/**
+ *
+ * @param option ComboboxOption will be compared by both label and value, while a string option is checked if it matches either the label or value in the list.
+ * @param list
+ */
+const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) => {
+  if (typeof option === "string") {
+    return list.some(
+      (listItem) =>
+        listItem.label.toLocaleLowerCase() === option.toLocaleLowerCase() ||
+        listItem.value.toLocaleLowerCase() === option.toLocaleLowerCase(),
     );
+  } else {
+    return list.some(
+      (listItem) =>
+        listItem.label.toLocaleLowerCase() ===
+          option.label.toLocaleLowerCase() &&
+        listItem.value.toLocaleLowerCase() === option.value.toLocaleLowerCase(),
+    );
+  }
+};
 
 const mapFromStringArrayToComboboxOptionArray = (
   options?: string[] | ComboboxOption[],

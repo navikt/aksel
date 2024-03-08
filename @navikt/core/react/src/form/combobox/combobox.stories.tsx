@@ -81,8 +81,12 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
     <>
       <UNSAFE_Combobox
         {...props}
+        options={props.options.map((option) => ({
+          ...option,
+          label: `${option.label} [${option.value}]`,
+        }))}
         id="combobox-with-complex-options"
-        label="Komboboks - velg flere"
+        label="Velg temakoder"
         allowNewValues
         onToggleSelected={(value, isSelected) =>
           isSelected
@@ -94,6 +98,7 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
               ])
             : setSelectedOptions(selectedOptions.filter((o) => o !== value))
         }
+        selectedOptions={selectedOptions}
       />
       {selectedOptions.length > 0 && (
         <dl>
@@ -118,11 +123,20 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
 
 MultiSelectWithComplexOptions.args = {
   options: [
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-    { label: "Orange", value: "orange" },
-    { label: "Pear", value: "pear" },
-    { label: "Grape", value: "grape" },
+    { label: "Hjelpemidler", value: "HJE" },
+    { label: "Oppfølging", value: "OPP" },
+    { label: "Sykepenger", value: "SYK" },
+    { label: "Sykemelding", value: "SYM" },
+    { label: "Foreldre- og svangerskapspenger", value: "FOR" },
+    { label: "Arbeidsavklaringspenger", value: "AAP" },
+    { label: "Uføretrygd", value: "UFO" },
+    { label: "Pensjon", value: "PEN" },
+    { label: "Barnetrygd", value: "BAR" },
+    { label: "Kontantstøtte", value: "KON" },
+    { label: "Bostøtte", value: "BOS" },
+    { label: "Barnebidrag", value: "BBI" },
+    { label: "Bidragsforskudd", value: "BIF" },
+    { label: "Grunn- og hjelpestønad", value: "GRU" },
   ],
   isMultiSelect: true,
   size: "medium",
