@@ -4,8 +4,6 @@ import { FormFieldProps } from "../useFormField";
 /**
  * A more complex version of options for the Combobox.
  * Used for separating the label and the value of the option.
- *
- * May be expanded in the future with more properties for supporting icons, grouping, etc.
  */
 export type ComboboxOption = {
   /**
