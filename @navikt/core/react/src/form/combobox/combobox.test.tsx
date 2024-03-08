@@ -129,9 +129,10 @@ describe("Combobox state-handling", () => {
     render(
       <App
         options={[
-          { label: "Banana", value: "banana" },
-          { label: "Apple", value: "apple" },
-          { label: "Tangerine", value: "tangerine" },
+          { label: "Hjelpemidler [HJE]", value: "HJE" },
+          { label: "Oppfølging [OPP]", value: "OPP" },
+          { label: "Sykepenger [SYK]", value: "SYK" },
+          { label: "Sykemelding [SYM]", value: "SYM" },
         ]}
         onToggleSelected={onToggleSelected}
       />,
@@ -139,15 +140,18 @@ describe("Combobox state-handling", () => {
 
     expect(screen.getByRole("combobox")).toBeInTheDocument();
     const bananaOption = screen.getByRole("option", {
-      name: "Banana",
+      name: "Hjelpemidler [HJE]",
       selected: false,
     });
     await act(async () => {
       await userEvent.click(bananaOption);
     });
-    expect(onToggleSelected).toHaveBeenCalledWith("banana", true, false);
+    expect(onToggleSelected).toHaveBeenCalledWith("HJE", true, false);
     expect(
-      screen.getByRole("option", { name: "Banana", selected: true }),
+      screen.getByRole("option", {
+        name: "Hjelpemidler [HJE]",
+        selected: true,
+      }),
     ).toBeInTheDocument();
   });
 });
