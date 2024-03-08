@@ -76,7 +76,7 @@ MultiSelect.args = {
 };
 
 export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
-  const [selectedOptions, setSelectedOptions] = useState<ComboboxOption[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   return (
     <>
       <UNSAFE_Combobox
@@ -86,20 +86,30 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
         allowNewValues
         onToggleSelected={(value, isSelected) =>
           isSelected
-            ? setSelectedOptions([...selectedOptions, { label: value, value }])
-            : setSelectedOptions(
-                selectedOptions.filter((o) => o.value !== value),
-              )
+            ? setSelectedOptions([
+                ...selectedOptions,
+                (props.options as ComboboxOption[]).find(
+                  (o) => o.value === value,
+                )!.value,
+              ])
+            : setSelectedOptions(selectedOptions.filter((o) => o !== value))
         }
       />
       {selectedOptions.length > 0 && (
         <dl>
-          {selectedOptions.map((option) => (
-            <React.Fragment key={option.label}>
-              <dt>{option.label}</dt>
-              <dd>{option.value}</dd>
-            </React.Fragment>
-          ))}
+          {selectedOptions
+            .map(
+              (selectedOption) =>
+                (props.options as ComboboxOption[]).find(
+                  (o) => o.value === selectedOption,
+                )!,
+            )
+            .map((option) => (
+              <React.Fragment key={option.label}>
+                <dt>{option.label}</dt>
+                <dd>{option.value}</dd>
+              </React.Fragment>
+            ))}
         </dl>
       )}
     </>
