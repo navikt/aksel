@@ -151,7 +151,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   aria-label={`${node.dir?.title} ${fil.title} eksempel`}
                   title="Demo"
                   className={cl(
-                    "block w-full min-w-80 max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    "block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
                     },
