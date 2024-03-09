@@ -2,16 +2,16 @@ import { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 
-type TemaSelectButtonProps = {
+type HeroSelectButtonProps = {
   onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   expanded: boolean;
   hidden?: boolean;
 };
 
-export const TemaSelectButton = forwardRef<
+export const HeroSelectButton = forwardRef<
   HTMLButtonElement,
-  TemaSelectButtonProps
->(({ onClick, expanded, hidden }: TemaSelectButtonProps, ref) => {
+  HeroSelectButtonProps
+>(({ onClick, expanded, hidden }: HeroSelectButtonProps, ref) => {
   return (
     <BodyShort
       size="large"

@@ -1,7 +1,7 @@
 import { useMedia } from "@/hooks/useMedia";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
-import { TemaHeroModal } from "./TemaHero.Modal";
-import { TemaHeroStatic } from "./TemaHero.Static";
+import { TemaHeroModal } from "./TemaHeroModal";
+import { TemaHeroStatic } from "./TemaHeroStatic";
 
 type GpHeroProps = { tema: GpTemaT | null } & HeroNavT;
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Box, Modal } from "@navikt/ds-react";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
+import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
+import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
+import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
-import { HeroIntro } from "./TemaHero.Intro";
-import { HeroList } from "./TemaHero.List";
-import { TemaSelectButton } from "./TemaHero.Select";
 
 type GpTemaHeroModalProps = { tema: GpTemaT | null } & HeroNavT;
 
@@ -20,7 +20,7 @@ export function TemaHeroModal({ tema, heroNav }: GpTemaHeroModalProps) {
     >
       <Cube />
 
-      <TemaSelectButton onClick={() => setOpen(true)} expanded={open} />
+      <HeroSelectButton onClick={() => setOpen(true)} expanded={open} />
       <HeroIntro title={tema?.title} description={tema?.description} />
 
       <Modal

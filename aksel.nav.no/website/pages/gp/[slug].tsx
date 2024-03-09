@@ -82,7 +82,6 @@ export const getServerSideProps: GetServerSideProps = async (
  * TODO:
  * - Cleanup after refactor
  * - Add SEO
- * - Add chips
  * - Add preview
  * - Add error handling?
  */

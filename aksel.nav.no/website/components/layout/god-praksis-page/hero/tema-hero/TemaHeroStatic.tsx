@@ -4,10 +4,10 @@ import { XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, Box, Button } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
+import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
+import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
+import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
-import { HeroIntro } from "./TemaHero.Intro";
-import { HeroList } from "./TemaHero.List";
-import { TemaSelectButton } from "./TemaHero.Select";
 import styles from "./TemaHero.module.css";
 
 type GpTemaHeroStaticProps = { tema: GpTemaT | null } & HeroNavT;
@@ -84,7 +84,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       }}
     >
       <Cube />
-      <TemaSelectButton
+      <HeroSelectButton
         onClick={handleOpen}
         expanded={open}
         ref={setDialogButton}
