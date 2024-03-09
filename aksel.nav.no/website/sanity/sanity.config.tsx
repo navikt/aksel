@@ -40,10 +40,10 @@ export const workspaceConfig = defineConfig([
     schema: schema("staging"),
     title: "God-praksis staging",
     name: "gp-staging",
-    dataset: "production",
+    dataset: "gpmigration",
     basePath: "/admin/gp-staging",
     icon: TestFlaskIcon,
-    auth: authStore("production"),
+    auth: authStore("gpmigration"),
   },
 ]);
 

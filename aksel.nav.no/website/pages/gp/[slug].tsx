@@ -1,12 +1,15 @@
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy, useCallback, useEffect, useMemo } from "react";
-import { SanityDocument } from "sanity";
 import { BodyLong, Box, HGrid, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
-import ChipNav from "@/layout/god-praksis-page/chips/ChipNav";
+import { GpChipNavigation } from "@/layout/god-praksis-page/chips/GpChipNavigation";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
+import {
+  GpSlugQueryResponse,
+  ParsedGPArticle,
+} from "@/layout/god-praksis-page/interface";
 import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
@@ -42,30 +45,7 @@ const sanityQuery = groq`
 }
 `;
 
-type QueryResponse = {
-  tema: SanityDocument & {
-    title: string;
-    slug: string;
-    description?: string;
-    undertema: { title: string; description: string }[];
-  };
-  heroNav: {
-    title: string;
-    slug: string;
-    image: any;
-  }[];
-  articles: {
-    _id: string;
-    heading: string;
-    publishedAt: string;
-    description: string;
-    undertema: { title: string; temaTitle: string }[];
-    innholdstype: string;
-    slug: string;
-  }[];
-};
-
-type PageProps = NextPageT<QueryResponse>;
+type PageProps = NextPageT<GpSlugQueryResponse>;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
@@ -73,12 +53,10 @@ export const getServerSideProps: GetServerSideProps = async (
   const slug = ctx.params?.slug as string;
   const preview = !!ctx.preview;
 
-  const { heroNav, tema, articles } = await getClient().fetch<QueryResponse>(
-    sanityQuery,
-    {
+  const { heroNav, tema, articles } =
+    await getClient().fetch<GpSlugQueryResponse>(sanityQuery, {
       slug,
-    },
-  );
+    });
 
   return {
     props: {
@@ -98,10 +76,6 @@ export const getServerSideProps: GetServerSideProps = async (
     },
     notFound: !tema || articles.length === 0,
   };
-};
-
-type ParsedGPArticle = Omit<QueryResponse["articles"][0], "undertema"> & {
-  undertema: string;
 };
 
 /**
@@ -157,26 +131,8 @@ const GpPage = (props: PageProps["props"]) => {
       map.set(undertema, articlesForUndertema);
 
       return map;
-    }, new Map<QueryResponse["tema"]["undertema"][0], ParsedGPArticle[]>());
+    }, new Map<GpSlugQueryResponse["tema"]["undertema"][0], ParsedGPArticle[]>());
   }, [articles, getUndertemaFromTema]);
-
-  const countArticlesByUndertemaAndInnholdstype = articles.reduce(
-    (acc, article) => {
-      const { undertema } = article;
-
-      const innholdstype = article.innholdstype ?? "_";
-
-      if (!acc[undertema]) {
-        acc[undertema] = {};
-      }
-      if (!acc[undertema][innholdstype]) {
-        acc[undertema][innholdstype] = 0;
-      }
-      acc[undertema][innholdstype]++;
-      return acc;
-    },
-    {},
-  );
 
   const ArticleView = () => {
     switch (view.view) {
@@ -367,10 +323,8 @@ const GpPage = (props: PageProps["props"]) => {
             <VStack gap="10">
               <TemaHero tema={props.tema} heroNav={props.heroNav} />
               <Box paddingInline={{ xs: "4", lg: "10" }}>
-                <ChipNav
-                  type="undertema"
-                  data={countArticlesByUndertemaAndInnholdstype}
-                />
+                <GpChipNavigation articles={articles} />
+
                 <VStack gap="10" className="mt-10">
                   <ArticleView />
                 </VStack>

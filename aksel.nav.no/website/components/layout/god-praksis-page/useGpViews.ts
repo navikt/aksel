@@ -9,15 +9,19 @@ type ViewBoth = {
 type ViewInnholdstype = {
   view: "innholdstype";
   innholdstype: string;
+  undertema: undefined;
 };
 
 type ViewUndertema = {
   view: "undertema";
   undertema: string;
+  innholdstype: undefined;
 };
 
 type ViewNone = {
   view: "none";
+  undertema: undefined;
+  innholdstype: undefined;
 };
 
 export function useGpViews():
@@ -43,6 +47,7 @@ export function useGpViews():
     return {
       view: "innholdstype",
       innholdstype: safeInnholdstype,
+      undertema: undefined,
     };
   }
 
@@ -50,11 +55,14 @@ export function useGpViews():
     return {
       view: "undertema",
       undertema: safeUndertema,
+      innholdstype: undefined,
     };
   }
 
   return {
     view: "none",
+    undertema: undefined,
+    innholdstype: undefined,
   };
 }
 

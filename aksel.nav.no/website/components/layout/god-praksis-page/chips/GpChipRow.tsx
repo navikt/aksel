@@ -4,25 +4,18 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { HGrid, Label } from "@navikt/ds-react";
-import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
 import ScrollFade from "./ScrollFade";
 
 export type ChipsRenderData = { title: string; count: number }[];
 
-type ChipsNavProps = {
+type GpChipRowProps = {
   type: "innholdstype" | "undertema";
-  data: Record<string, Record<string, number>>;
+  entries: [string, number][];
 };
 
-/**
- * TODO:
- * - On initial load, scroll selected into view
- */
-function ChipNav({ type, data }: ChipsNavProps) {
-  const view = useGpViews();
-
+export function GpChipRow({ type, entries }: GpChipRowProps) {
   const id = useId();
 
   const { query, replace } = useRouter();
@@ -59,31 +52,25 @@ function ChipNav({ type, data }: ChipsNavProps) {
           id={id}
           className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
         >
-          {Object.entries(data)?.map(([entry, innholdstype]) => {
-            const count = Object.values(innholdstype).reduce((acc, curr) => {
-              if (view.view === "undertema") {
-                return entry === view.undertema ? acc + curr : acc;
-              }
-              return acc + curr;
-            }, 0);
+          {entries.map(([entryName, count]) => {
             return (
-              <li key={entry}>
+              <li key={entryName}>
                 <button
-                  aria-pressed={encodeURIComponent(entry) === query?.[type]}
-                  onClick={() => handleClick(entry)}
+                  aria-pressed={encodeURIComponent(entryName) === query?.[type]}
+                  onClick={() => handleClick(entryName)}
                   className={cl(
                     "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
                     "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
                     {
-                      /* "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
-                        type === "innholdstype", */
+                      "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
+                        type === "innholdstype",
                       "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
                         true,
                     },
                   )}
                   disabled={count === 0}
                 >
-                  {`${entry} (${count})`}
+                  {`${entryName} (${count})`}
                 </button>
               </li>
             );
@@ -93,5 +80,3 @@ function ChipNav({ type, data }: ChipsNavProps) {
     </HGrid>
   );
 }
-
-export default ChipNav;
