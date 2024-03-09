@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import BaseSEOPreset from "../../../schema/documents/presets/seo";
 import { sanitizeSlug } from "../../../schema/util";
 
 export default defineType({
@@ -52,6 +53,7 @@ export default defineType({
       ],
       validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
     }),
+    BaseSEOPreset,
   ],
   orderings: [
     {

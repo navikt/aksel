@@ -77,13 +77,6 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-/**
- * TODO:
- * - Cleanup after refactor
- * - Add SEO
- * - Add preview
- * - Add error handling?
- */
 const GpPage = (props: PageProps["props"]) => {
   useEffect(() => {
     window.location.host === "aksel.nav.no" &&
@@ -109,11 +102,10 @@ const GpPage = (props: PageProps["props"]) => {
 
   return (
     <>
-      {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title={props.tema?.title ?? ""}
-        /* description={page?.seo?.meta} */
-        /* image={page?.seo?.image} */
+        description={props.tema?.seo?.meta}
+        image={props.tema?.seo?.image}
       />
       <Page
         footer={<Footer />}

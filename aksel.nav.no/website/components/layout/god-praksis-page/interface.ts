@@ -1,4 +1,5 @@
 import { SanityDocument } from "sanity";
+import { ArticleT } from "@/cms/frontpage-blocks/latest-articles/Card";
 
 export type GpTemaT = {
   title: string;
@@ -27,6 +28,7 @@ export type GpSlugQueryResponse = {
     slug: string;
     description?: string;
     undertema: { title: string; description: string }[];
+    seo?: ArticleT["seo"];
   };
   heroNav: {
     title: string;
