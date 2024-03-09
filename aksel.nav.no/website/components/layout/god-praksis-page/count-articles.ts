@@ -1,5 +1,9 @@
 import { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
 
+/**
+ * To make sure that all keys are present in the counts object,
+ * we initialize the counts object with all possible keys.
+ */
 function initializeCounts(
   articles: ParsedGPArticle[],
   type: string,
@@ -14,6 +18,11 @@ function initializeCounts(
   return counts;
 }
 
+/**
+ * Count the number of articles for each undertema and innholdstype.
+ * If filterUndertema or filterInnholdstype is provided, only count the articles that match the filter.
+ *  The key in Record is the undertema or innholdstype name
+ */
 export function getArticleCounts(
   articles: ParsedGPArticle[],
   filterUndertema?: string,
