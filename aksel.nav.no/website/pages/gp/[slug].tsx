@@ -4,7 +4,7 @@ import { Suspense, lazy, useCallback, useEffect, useMemo } from "react";
 import { BodyLong, Box, HGrid, Heading, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
-import { GpChipNavigation } from "@/layout/god-praksis-page/chips/GpChipNavigation";
+import { GpChipNavigation } from "@/layout/god-praksis-page/chipnavigation/GpChipNavigation";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import {
   GpSlugQueryResponse,

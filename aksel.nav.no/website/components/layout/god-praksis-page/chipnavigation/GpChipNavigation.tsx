@@ -1,8 +1,8 @@
 import { VStack } from "@navikt/ds-react";
-import { GpChipRow } from "@/layout/god-praksis-page/chips/GpChipRow";
 import { getArticleCounts } from "@/layout/god-praksis-page/count-articles";
 import { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
 import { useGpViews } from "@/layout/god-praksis-page/useGpViews";
+import { GpChipRow } from "./GpChipRow";
 
 type GpChipNavigationProps = {
   articles: ParsedGPArticle[];
