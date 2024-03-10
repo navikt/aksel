@@ -16,6 +16,7 @@ export default defineType({
       title: "Beskrivelse",
       type: "text",
       rows: 3,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "tema",
