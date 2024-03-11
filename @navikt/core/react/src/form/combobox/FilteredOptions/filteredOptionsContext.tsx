@@ -68,7 +68,7 @@ export const FilteredOptionsProvider = ({
     setSearchTerm,
     shouldAutocomplete,
   } = useInputContext();
-  const { selectedOptions, maxSelected } = useSelectedOptionsContext();
+  const { maxSelected } = useSelectedOptionsContext();
 
   const [isInternalListOpen, setInternalListOpen] = useState(false);
   const { customOptions } = useCustomOptionsContext();
@@ -78,18 +78,8 @@ export const FilteredOptionsProvider = ({
       return externalFilteredOptions;
     }
     const opts = [...customOptions, ...options];
-    return filteredOptionsUtils.getMatchingValuesFromList(
-      searchTerm,
-      opts,
-      selectedOptions,
-    );
-  }, [
-    customOptions,
-    externalFilteredOptions,
-    options,
-    searchTerm,
-    selectedOptions,
-  ]);
+    return filteredOptionsUtils.getMatchingValuesFromList(searchTerm, opts);
+  }, [customOptions, externalFilteredOptions, options, searchTerm]);
 
   const previousSearchTerm = usePrevious(searchTerm);
 
