@@ -20,10 +20,7 @@ const Example = () => {
         selectedOptions={selectedOptions}
         onToggleSelected={(option, isSelected) =>
           isSelected
-            ? setSelectedOptions([
-                ...selectedOptions,
-                options.find((o) => o.value === option).value,
-              ])
+            ? setSelectedOptions([...selectedOptions, option])
             : setSelectedOptions(selectedOptions.filter((o) => o !== option))
         }
       />
