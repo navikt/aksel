@@ -131,6 +131,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           size="large"
           className="relative z-10 py-1 text-text-on-inverted"
           id="tema-selector-title"
+          weight="semibold"
         >
           Tema
         </BodyShort>
