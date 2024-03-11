@@ -7,7 +7,7 @@ const isPartOfText = (value: string, text: string) =>
   normalizeText(text).startsWith(normalizeText(value ?? ""));
 
 const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
-  list?.filter((listItem) => isPartOfText(value, listItem.label));
+  list.filter((listItem) => isPartOfText(value, listItem.label));
 
 const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
