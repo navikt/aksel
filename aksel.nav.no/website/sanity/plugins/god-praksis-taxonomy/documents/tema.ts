@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import SanityTabGroups from "../../../schema/documents/presets/groups";
 import BaseSEOPreset from "../../../schema/documents/presets/seo";
 import { sanitizeSlug } from "../../../schema/util";
 
@@ -6,6 +7,7 @@ export default defineType({
   name: "gp.tema",
   title: "Tema",
   type: "document",
+  groups: SanityTabGroups,
   fields: [
     defineField({
       name: "title",
