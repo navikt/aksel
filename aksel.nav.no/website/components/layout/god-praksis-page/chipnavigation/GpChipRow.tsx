@@ -33,7 +33,13 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   };
 
   return (
-    <HGrid gap="2" columns={{ md: 1, lg: "auto 1fr" }} align="center">
+    <HGrid
+      gap="2"
+      columns={{ md: 1, lg: "auto 1fr" }}
+      align="center"
+      /* TODO: After release of new GP structure this could be removed since all articles will required proper data, thus always having chips */
+      className="hidden has-[.chiplist]:grid"
+    >
       <Label
         as="span"
         className={cl("flex items-center gap-2 text-aksel-heading", {
@@ -52,29 +58,33 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
           id={id}
           className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
         >
-          {entries.map(([entryName, count]) => {
-            return (
-              <li key={entryName}>
-                <button
-                  aria-pressed={encodeURIComponent(entryName) === query?.[type]}
-                  onClick={() => handleClick(entryName)}
-                  className={cl(
-                    "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
-                    "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
-                    {
-                      "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
-                        type === "innholdstype",
-                      "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
-                        true,
-                    },
-                  )}
-                  disabled={count === 0}
-                >
-                  {`${entryName} (${count})`}
-                </button>
-              </li>
-            );
-          })}
+          {entries
+            .filter((entry) => entry[0] !== "null")
+            .map(([entryName, count]) => {
+              return (
+                <li key={entryName} className="chiplist">
+                  <button
+                    aria-pressed={
+                      encodeURIComponent(entryName) === query?.[type]
+                    }
+                    onClick={() => handleClick(entryName)}
+                    className={cl(
+                      "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
+                      "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
+                      {
+                        "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
+                          type === "innholdstype",
+                        "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
+                          true,
+                      },
+                    )}
+                    disabled={count === 0}
+                  >
+                    {`${entryName} (${count})`}
+                  </button>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </HGrid>
