@@ -20,9 +20,9 @@ export const useFileUpload = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const mergedRef = useMergeRefs(inputRef, ref);
 
-  const upload = (fileList: File[]) => {
+  const upload = (fileList: FileList) => {
     const { files, partitionedFiles } = validateFiles(
-      fileList,
+      Array.from(fileList),
       accept,
       validator,
       maxSizeInBytes,
@@ -38,7 +38,7 @@ export const useFileUpload = ({
     }
 
     if (!disabled) {
-      upload(Array.from(fileList));
+      upload(fileList);
     }
 
     // Resets the value to make it is possible to upload the same file several consecutive times
@@ -46,6 +46,7 @@ export const useFileUpload = ({
   };
 
   return {
+    upload,
     onChange,
     inputRef,
     mergedRef,

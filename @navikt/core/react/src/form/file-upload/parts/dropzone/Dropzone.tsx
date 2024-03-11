@@ -3,6 +3,8 @@ import React, { forwardRef } from "react";
 import { CircleSlashIcon, CloudUpIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
+import { composeEventHandlers } from "../../../../util/composeEventHandlers";
+import { useId } from "../../../../util/hooks";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";
@@ -27,6 +29,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       icon: DropzoneIcon = CloudUpIcon,
       disabled,
       translations,
+      onClick,
       ...rest
     } = props;
 
@@ -42,8 +45,14 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
       useFormField({ ...props, disabled: _disabled }, "fileUpload");
+    const {
+      id: inputId,
+      "aria-describedby": ariaDescribedby,
+      ...inputPropsRest
+    } = inputProps;
+    const labelId = useId();
 
-    const { onChange, inputRef, mergedRef } = useFileUpload({
+    const { upload, onChange, inputRef, mergedRef } = useFileUpload({
       ref,
       onSelect,
       validator,
@@ -53,6 +62,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
     });
 
     const dropzoneCtx = useDropzone({
+      upload,
       disabled: inputProps.disabled,
     });
 
@@ -64,7 +74,11 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           "navds-dropzone--disabled": inputProps.disabled,
         })}
       >
-        <Label htmlFor={inputProps.id} className="navds-form-field__label">
+        <Label
+          htmlFor={inputId}
+          id={labelId}
+          className="navds-form-field__label"
+        >
           {label}
         </Label>
         {!!description && (
@@ -76,12 +90,17 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             {description}
           </BodyShort>
         )}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
+          className="navds-dropzone__area"
+          onDragEnter={dropzoneCtx.onDragEnter}
           onDragOver={dropzoneCtx.onDragOver}
           onDragLeave={dropzoneCtx.onDragLeave}
-          onDragEnd={dropzoneCtx.onDragEnd}
           onDrop={dropzoneCtx.onDrop}
-          className="navds-dropzone__area"
+          onClick={composeEventHandlers(
+            onClick,
+            () => inputRef.current?.click(),
+          )}
         >
           {!inputProps.disabled && (
             <>
@@ -110,10 +129,12 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 </BodyShort>
               </div>
               <Button
+                {...omit(rest, ["errorId"])}
+                {...inputPropsRest}
+                aria-describedby={cl(labelId, ariaDescribedby)}
                 className="navds-dropzone__area-button"
+                type="button"
                 variant="secondary"
-                onClick={() => inputRef.current?.click()}
-                tabIndex={-1}
               >
                 {multiple
                   ? translate("FileUpload.dropzone.buttonMultiple")
@@ -134,10 +155,9 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           )}
 
           <input
-            {...omit(rest, ["errorId"])}
-            {...inputProps}
+            id={inputId}
             type="file"
-            className="navds-dropzone__area-input"
+            style={{ display: "none" }}
             multiple={multiple}
             accept={accept}
             onChange={onChange}

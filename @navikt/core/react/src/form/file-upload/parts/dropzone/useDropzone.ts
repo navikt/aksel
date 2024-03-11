@@ -1,31 +1,43 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { UseFileUploadProps } from "../../useFileUpload";
 
-export const useDropzone = ({
-  disabled,
-}: Pick<UseFileUploadProps, "disabled">) => {
-  const [isDraggingOver, setIsDraggingOver] = useState(false);
-  const isDraggingRef = useRef(false);
+interface Props {
+  upload: (fileList: FileList) => void;
+  disabled: UseFileUploadProps["disabled"];
+}
 
-  // onDragOver triggers 60+ times per second, so we cut it off to avoid excessive computation.
-  const onDragOver = () => {
-    if (isDraggingRef.current) {
-      return;
-    }
-    isDraggingRef.current = true;
+export const useDropzone = ({ upload, disabled }: Props) => {
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+  const onDragEnter = () => {
     setIsDraggingOver(true);
   };
 
+  const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault(); // Prevents the browser from opening the file in a new tab
+  };
+
   const onDragLeave = () => {
-    isDraggingRef.current = false;
     setIsDraggingOver(false);
+  };
+
+  const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault(); // Prevents the browser from opening the file in a new tab
+    setIsDraggingOver(false);
+
+    const fileList = event.dataTransfer.files;
+    if (!fileList) {
+      return;
+    }
+
+    upload(fileList);
   };
 
   return {
     isDraggingOver,
+    onDragEnter: disabled ? undefined : onDragEnter,
     onDragOver: disabled ? undefined : onDragOver,
     onDragLeave: disabled ? undefined : onDragLeave,
-    onDragEnd: disabled ? undefined : onDragLeave,
-    onDrop: disabled ? undefined : onDragLeave,
+    onDrop: disabled ? undefined : onDrop,
   };
 };
