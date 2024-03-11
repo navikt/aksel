@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { CSSProperties, useCallback, useRef, useState } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { BodyShort, Box, Button } from "@navikt/ds-react";
+import { BodyShort, Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
@@ -97,13 +97,18 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       />
 
       <Box
-        background="surface-subtle"
         borderRadius="large"
         paddingInline={{ xs: "8", lg: "14" }}
         paddingBlock="10 6"
-        className={cl("absolute inset-0 z-20", styles.heroSelector, {
-          hidden: !open,
-        })}
+        className={cl(
+          "absolute inset-0 z-20",
+          styles.heroSelector,
+          {
+            hidden: !open,
+          },
+          "after:absolute after:inset-0 after:rounded-large after:bg-deepblue-700/70",
+          "before:absolute before:inset-0 before:-z-10 before:rounded-large before:bg-gradient-to-br before:from-deepblue-700 before:via-blue-500 before:to-violet-700",
+        )}
         shadow="medium"
         style={inlineStyles}
         role="dialog"
@@ -115,15 +120,16 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       >
         <Cube variant="dark" />
 
-        <Button
-          variant="tertiary-neutral"
-          icon={<XMarkIcon title="Lukk temavelger" />}
+        <button
           onClick={handleClose}
-          className="absolute right-4 top-4 z-20"
-        />
+          data-theme="dark"
+          className="absolute right-4 top-4 z-20 grid size-12 place-content-center rounded-medium outline-none hover:bg-gray-50/10 focus-visible:shadow-focus-inverted"
+        >
+          <XMarkIcon title="Lukk temavelger" fontSize="1.5rem" />
+        </button>
         <BodyShort
           size="large"
-          className="relative z-10 py-1"
+          className="relative z-10 py-1 text-text-on-inverted"
           id="tema-selector-title"
         >
           Tema
@@ -133,6 +139,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}
+          onInverted
         />
       </Box>
     </Box>

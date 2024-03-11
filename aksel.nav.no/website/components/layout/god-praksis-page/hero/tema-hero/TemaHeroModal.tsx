@@ -31,7 +31,7 @@ export function TemaHeroModal({ tema, heroNav }: GpTemaHeroModalProps) {
         width="small"
       >
         <Box paddingInline="8" paddingBlock="0 6">
-          <Cube variant="dark" />
+          <Cube variant="light" />
 
           <HeroList
             currentSlug={tema?.slug}

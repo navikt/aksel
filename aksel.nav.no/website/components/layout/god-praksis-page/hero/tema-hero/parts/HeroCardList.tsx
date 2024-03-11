@@ -6,6 +6,7 @@ type HeroListProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   currentSlug?: string;
   currentlyActiveLink?: React.MutableRefObject<HTMLElement | null>;
+  onInverted?: boolean;
 };
 
 export function HeroList({
@@ -13,6 +14,7 @@ export function HeroList({
   setOpen,
   currentlyActiveLink,
   currentSlug,
+  onInverted,
 }: HeroListProps) {
   return (
     <nav aria-label="Temavelger" className="relative z-10 mt-2">
@@ -24,6 +26,7 @@ export function HeroList({
           onClick={() => {
             setOpen(false);
           }}
+          onInverted={onInverted}
         >
           Alle tema
         </GpHeroCard>
@@ -42,6 +45,7 @@ export function HeroList({
                 currentlyActiveLink.current = element;
               }
             }}
+            onInverted={onInverted}
           >
             {tema.title}
           </GpHeroCard>
