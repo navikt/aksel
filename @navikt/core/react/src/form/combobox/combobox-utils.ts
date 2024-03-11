@@ -8,16 +8,12 @@ import { ComboboxOption } from "./types";
 const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) => {
   if (typeof option === "string") {
     return list.some(
-      (listItem) =>
-        listItem.label.toLocaleLowerCase() === option.toLocaleLowerCase() ||
-        listItem.value.toLocaleLowerCase() === option.toLocaleLowerCase(),
+      (listItem) => listItem.label === option || listItem.value === option,
     );
   } else {
     return list.some(
       (listItem) =>
-        listItem.label.toLocaleLowerCase() ===
-          option.label.toLocaleLowerCase() &&
-        listItem.value.toLocaleLowerCase() === option.value.toLocaleLowerCase(),
+        listItem.label === option.label && listItem.value === option.value,
     );
   }
 };
