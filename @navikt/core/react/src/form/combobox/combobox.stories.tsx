@@ -4,7 +4,6 @@ import React, { useMemo, useRef, useState } from "react";
 import { Chips } from "../../chips";
 import { TextField } from "../textfield";
 import { ComboboxProps, UNSAFE_Combobox } from "./index";
-import { ComboboxOption } from "./types";
 
 export default {
   title: "ds-react/Combobox",
@@ -95,23 +94,6 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
         }
         selectedOptions={selectedOptions}
       />
-      {selectedOptions.length > 0 && (
-        <dl>
-          {selectedOptions
-            .map(
-              (selectedOption) =>
-                (props.options as ComboboxOption[]).find(
-                  (o) => o.value === selectedOption,
-                )!,
-            )
-            .map((option) => (
-              <React.Fragment key={option.label}>
-                <dt>{option.label}</dt>
-                <dd>{option.value}</dd>
-              </React.Fragment>
-            ))}
-        </dl>
-      )}
     </>
   );
 };
