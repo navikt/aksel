@@ -5,32 +5,33 @@ import { FieldsetContext } from "./fieldset/context";
 
 export interface FormFieldProps {
   /**
-   * Error message for element
-   */
-  error?: React.ReactNode;
-  /**
-   * Override internal errorId
-   */
-  errorId?: string;
-  /**
-   * Changes font-size, padding and gaps
-   */
-  size?: "medium" | "small";
-  /**
-   * Disables element
-   * @note Avoid using if possible for accessibility purposes
-   */
-  disabled?: boolean;
-  /**
-   * Adds a description to extend labling of a field
+   * Adds a description to extend labling of the field.
    */
   description?: React.ReactNode;
   /**
-   * Override internal id
+   * Error message for element.
+   */
+  error?: React.ReactNode;
+  /**
+   * Override internal errorId.
+   */
+  errorId?: string;
+  /**
+   * Changes font-size, padding and gaps.
+   */
+  size?: "medium" | "small";
+  /**
+   * **Avoid using if possible for accessibility purposes**.
+   *
+   * Disables element.
+   */
+  disabled?: boolean;
+  /**
+   * Override internal id.
    */
   id?: string;
   /**
-   * Read only-state
+   * Read-only state.
    */
   readOnly?: boolean;
 }
