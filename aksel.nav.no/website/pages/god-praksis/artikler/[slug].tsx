@@ -1,14 +1,14 @@
 import NextLink from "next/link";
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -36,6 +36,7 @@ type PageProps = NextPageT<{
   publishDate: string;
   verifiedDate: string;
   toc: TableOfContentsT;
+  signedIn: boolean;
 }>;
 
 export const query = `{
@@ -64,26 +65,15 @@ export const query = `{
   }
 }`;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("aksel_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.replace("god-praksis/artikler/", ""),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const signedIn = await validateWonderwallToken(context.req.headers);
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
+  const isPreview = context.preview ?? false;
+
+  const slug = context.params?.slug as string;
+
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
@@ -92,7 +82,7 @@ export const getStaticProps: GetStaticProps = async ({
     props: {
       page,
       slug,
-      preview,
+      preview: isPreview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(
@@ -103,9 +93,9 @@ export const getStaticProps: GetStaticProps = async ({
         content: page?.content,
         type: "aksel_artikkel",
       }),
+      signedIn,
     },
-    notFound: !page && !preview,
-    revalidate: 60,
+    notFound: !page && !isPreview,
   };
 };
 
@@ -132,34 +122,35 @@ const Page = ({
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
-  const aside = data?.relevante_artikler?.length > 0 && (
-    <aside
-      className="overflow-x-clip py-8"
-      aria-labelledby="relevante-artikler-aside"
-    >
-      <div className="relativept-12 pb-16">
-        <div className="dynamic-wrapper">
-          <Heading
-            level="2"
-            size="medium"
-            className="px-4 text-deepblue-700"
-            id="relevante-artikler-aside"
-          >
-            {data?.relevante_artikler?.length === 1
-              ? `Les også`
-              : `Relevante artikler`}
-          </Heading>
-          <div className="card-grid-3-1 mt-6 px-4">
-            {data.relevante_artikler.map((x: any) =>
-              x && x?._id ? (
-                <ArtikkelCard level="3" {...x} key={x._id} />
-              ) : null,
-            )}
+  const aside = data?.relevante_artikler &&
+    data.relevante_artikler.length > 0 && (
+      <aside
+        className="overflow-x-clip py-8"
+        aria-labelledby="relevante-artikler-aside"
+      >
+        <div className="relativept-12 pb-16">
+          <div className="dynamic-wrapper">
+            <Heading
+              level="2"
+              size="medium"
+              className="px-4 text-deepblue-700"
+              id="relevante-artikler-aside"
+            >
+              {data?.relevante_artikler?.length === 1
+                ? `Les også`
+                : `Relevante artikler`}
+            </Heading>
+            <div className="card-grid-3-1 mt-6 px-4">
+              {data.relevante_artikler.map((x: any) =>
+                x && x?._id ? (
+                  <ArtikkelCard level="3" {...x} key={x._id} />
+                ) : null,
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </aside>
-  );
+      </aside>
+    );
 
   const filteredTema =
     hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
@@ -217,7 +208,7 @@ const Page = ({
                   </>
                 )}
               </div>
-              {hasTema && (
+              {hasTema && filteredTema && (
                 <div className="mt-8 flex flex-wrap gap-2">
                   {filteredTema.map(({ title, slug }: any) => (
                     <span key={title}>

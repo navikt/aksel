@@ -44,7 +44,7 @@ const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
   const [toggle, setToggle] = useState<"stroke" | "fill">("stroke");
-  const focusRef = useRef(null);
+  const focusRef = useRef<HTMLAnchorElement | null>(null);
 
   const [strokeIcons] = useState(
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),

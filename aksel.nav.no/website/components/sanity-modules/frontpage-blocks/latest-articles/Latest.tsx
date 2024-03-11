@@ -33,7 +33,7 @@ const Latest = ({ block }: LatestArticlesProps) => {
       },
       { rootMargin: "0px 0px 100px 0px" },
     );
-    observer.observe(section.current);
+    section.current && observer.observe(section.current);
     return () => observer.disconnect();
   }, []);
 

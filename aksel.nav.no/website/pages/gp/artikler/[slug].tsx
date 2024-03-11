@@ -1,6 +1,6 @@
 import { differenceInMonths } from "date-fns";
 import NextLink from "next/link";
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
@@ -80,7 +80,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params: { slug },
   preview = false,
 }: {
@@ -138,34 +138,35 @@ const Page = ({
 
   const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
-  const aside = data?.relevante_artikler?.length > 0 && (
-    <aside
-      className="overflow-x-clip py-8"
-      aria-labelledby="relevante-artikler-aside"
-    >
-      <div className="relativept-12 pb-16">
-        <div className="dynamic-wrapper">
-          <Heading
-            level="2"
-            size="medium"
-            className="px-4 text-deepblue-700"
-            id="relevante-artikler-aside"
-          >
-            {data?.relevante_artikler?.length === 1
-              ? `Les også`
-              : `Relevante artikler`}
-          </Heading>
-          <div className="card-grid-3-1 mt-6 px-4">
-            {data.relevante_artikler.map((x: any) =>
-              x && x?._id ? (
-                <ArtikkelCard level="3" {...x} key={x._id} />
-              ) : null,
-            )}
+  const aside = data?.relevante_artikler &&
+    data.relevante_artikler.length > 0 && (
+      <aside
+        className="overflow-x-clip py-8"
+        aria-labelledby="relevante-artikler-aside"
+      >
+        <div className="relativept-12 pb-16">
+          <div className="dynamic-wrapper">
+            <Heading
+              level="2"
+              size="medium"
+              className="px-4 text-deepblue-700"
+              id="relevante-artikler-aside"
+            >
+              {data?.relevante_artikler?.length === 1
+                ? `Les også`
+                : `Relevante artikler`}
+            </Heading>
+            <div className="card-grid-3-1 mt-6 px-4">
+              {data.relevante_artikler.map((x: any) =>
+                x && x?._id ? (
+                  <ArtikkelCard level="3" {...x} key={x._id} />
+                ) : null,
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </aside>
-  );
+      </aside>
+    );
 
   const filteredTema =
     hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
@@ -223,7 +224,7 @@ const Page = ({
                   </>
                 )}
               </div>
-              {hasTema && (
+              {hasTema && filteredTema && (
                 <div className="mt-8 flex flex-wrap gap-2">
                   {filteredTema.map(({ title, slug }: any) => (
                     <span key={title}>

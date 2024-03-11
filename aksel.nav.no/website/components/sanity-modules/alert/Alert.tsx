@@ -15,7 +15,7 @@ const Alert = ({ node }: AlertProps) => {
           <Heading
             spacing
             size="small"
-            as={node.heading_level}
+            as={node.heading_level ?? "h2"}
             id={`${encodeURIComponent(node.heading)}-a`}
             className="scroll-m-20"
           >
