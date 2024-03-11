@@ -5,7 +5,7 @@ import { BodyLong, Heading } from "@navikt/ds-react";
 
 type MetadataT = {
   title: string;
-  description: string;
+  explanation: string;
 };
 
 type InnholdstypeT = SanityDocument & MetadataT;
@@ -37,8 +37,8 @@ export function InnholdstypeHighlight(props) {
               {`${result.title} (innholdstype)`}
             </Heading>
           </div>
-          {result.description && (
-            <BodyLong className="mt-2">{result.description}</BodyLong>
+          {result.explanation && (
+            <BodyLong className="mt-2">{result.explanation}</BodyLong>
           )}
         </div>
       </div>

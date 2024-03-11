@@ -14,6 +14,16 @@ export default defineType({
     defineField({
       name: "description",
       title: "Beskrivelse",
+      description: "En kort introduksjon til undertemaet for leser.",
+      type: "text",
+      rows: 3,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "explanation",
+      title: "Forklaring / veiledning",
+      description:
+        "En mer detaljert forklaring av undertemaet for redaktører. F.eks bakgrunn og veiledning for bruk av undertemaet.",
       type: "text",
       rows: 3,
       validation: (Rule) => Rule.required(),
