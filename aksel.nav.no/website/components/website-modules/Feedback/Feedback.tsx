@@ -14,6 +14,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { useAuth } from "@/auth/useAuth";
+import { useSanityData } from "@/hooks/useSanityData";
 import styles from "./Feedback.module.css";
 
 type States = "public" | "feedbackSent" | "loggedIn";
@@ -22,13 +23,12 @@ const FeedbackForm = ({
   username,
   state,
   setState,
-  document_id,
 }: {
   state: States;
-  document_id?: string | null;
   username?: string | null;
   setState?: Dispatch<SetStateAction<States>>;
 }) => {
+  const sanityDocumentId = useSanityData()?.id;
   const { login, logout } = useAuth();
   const ref_is_anon = React.useRef<HTMLInputElement>(null);
   const ref_feedback = React.useRef<HTMLTextAreaElement>(null);
@@ -122,10 +122,9 @@ const FeedbackForm = ({
               const body = JSON.stringify({
                 anon: ref_is_anon.current?.checked || false,
                 feedback: ref_feedback.current?.value.slice(0, 500) || "",
-                document_id: document_id || "",
+                document_id: sanityDocumentId,
               });
 
-              console.log({ body });
               fetch("/api/slack/feedback/v1", {
                 method: "POST",
                 headers: {
@@ -168,14 +167,12 @@ const FeedbackForm = ({
 type Props =
   | {
       username?: never;
-      document_id?: never;
     }
   | {
       username?: string;
-      document_id: string;
     };
 
-export const Feedback = ({ username, document_id }: Props) => {
+export const Feedback = ({ username }: Props) => {
   const [state, setState] = useState<States>(username ? "loggedIn" : "public");
 
   return (
@@ -192,12 +189,7 @@ export const Feedback = ({ username, document_id }: Props) => {
               ? "Innspill sendt"
               : "Innspill til artikkelen"}
           </Heading>
-          <FeedbackForm
-            username={username}
-            state={state}
-            setState={setState}
-            document_id={document_id}
-          />
+          <FeedbackForm username={username} state={state} setState={setState} />
         </div>
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg
