@@ -7,10 +7,7 @@ const Code = (props: Pick<React.HTMLAttributes<HTMLElement>, "children">) => (
     theme={themes.vsLight}
   >
     {({ style, tokens, getLineProps, getTokenProps }) => (
-      <pre
-        style={style}
-        className="overflow-auto rounded-lg border border-gray-300 px-4 py-2"
-      >
+      <pre style={style} className="overflow-auto">
         {tokens.map((line, i) => (
           <div key={i} {...getLineProps({ line })}>
             {line.map((token, key) => (
