@@ -19,31 +19,54 @@ const PropTable = ({ komponent }: PropTableProps) => {
         {komponent?.title ? komponent.title : "Props"}
       </Heading>
 
-      <div className="toc-ignore relative mb-8">
+      <div className="toc-ignore relative mb-8 break-all">
         {komponent?.propref?.proplist?.length === 0 && (
           <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
           </div>
         )}
 
-        <dl>
+        <dl lang="en">
           {komponent?.overridable && (
-            <DtList
-              prop={{
-                description: "OverridableComponent-api",
-                required: false,
-                name: "as",
-                type: "React.ElementType",
-              }}
-              parent={komponent?.title ?? ""}
-            />
+            <div className="border border-t-0 border-gray-300 p-2">
+              <dt className="px-2 py-2">
+                <Heading
+                  size="xsmall"
+                  level="4"
+                  className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
+                >
+                  as?
+                </Heading>
+              </dt>
+              <dd>
+                <DtList
+                  prop={{
+                    description: "OverridableComponent-api",
+                    required: false,
+                    name: "as",
+                    type: "React.ElementType",
+                  }}
+                  parent={komponent?.title ?? ""}
+                />
+              </dd>
+            </div>
           )}
           {komponent?.propref?.proplist?.map((prop) => (
-            <DtList
+            <div
+              className="border border-t-0 border-gray-300 p-2 last-of-type:rounded-b-lg"
               key={prop.name}
-              prop={prop}
-              parent={komponent?.title ?? ""}
-            />
+            >
+              <dt className="px-2 pt-2">
+                <Heading
+                  size="xsmall"
+                  level="4"
+                  className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
+                >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
+              </dt>
+              <dd>
+                <DtList prop={prop} parent={komponent?.title ?? ""} />
+              </dd>
+            </div>
           ))}
         </dl>
       </div>

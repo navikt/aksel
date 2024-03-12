@@ -31,11 +31,11 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * @default 'default'
+   * @default "default"
    */
   variant?: "default" | "neutral";
   /**
-   * @default 'small'
+   * @default "small"
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
   /**
@@ -43,12 +43,12 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "large" | "medium" | "small";
   /**
-   * Whether to indent content or not
+   * Whether to indent content or not.
    * @default true
    */
   indent?: boolean;
   /**
-   * Instances of Accordion.Item
+   * Instances of `Accordion.Item`.
    */
   children: React.ReactNode;
 }

@@ -32,13 +32,11 @@ const AlertWithCloseButton = ({
 }) => {
   const [show, setShow] = React.useState(true);
 
-  return (
-    show && (
-      <Alert variant={variant} closeButton onClose={() => setShow(false)}>
-        {children || "Content"}
-      </Alert>
-    )
-  );
+  return show ? (
+    <Alert variant={variant} closeButton onClose={() => setShow(false)}>
+      {children || "Content"}
+    </Alert>
+  ) : null;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

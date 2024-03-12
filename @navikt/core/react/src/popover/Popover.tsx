@@ -42,7 +42,8 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   onClose: () => void;
   /**
    * Default orientation of popover
-   * @note Try to keep general usage to "top", "bottom", "left", "right"
+   *
+   * Try to keep general usage to "top", "bottom", "left", "right".
    * @default "top"
    */
   placement?:
