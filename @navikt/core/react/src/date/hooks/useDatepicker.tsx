@@ -49,10 +49,11 @@ export interface UseDatepickerOptions
    */
   onValidate?: (val: DateValidationT) => void;
   /**
-   * Allows input of with 'yy' year format.
+   * Allows input of with `yy` year format.
+   *
+   * Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
+   * e.g. In 2024 this equals to 1944 - 2043.
    * @default true
-   * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
-   * In 2024 this equals to 1944 - 2043
    */
   allowTwoDigitYear?: boolean;
 }

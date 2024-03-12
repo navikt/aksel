@@ -16,11 +16,11 @@ export interface ComboboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
   /**
-   * Combobox label
+   * Combobox label.
    */
   label: React.ReactNode;
   /**
-   * List of options to use for autocompletion
+   * List of options to use for autocompletion.
    */
   options: string[];
   /**
@@ -28,11 +28,11 @@ export interface ComboboxProps
    */
   allowNewValues?: boolean;
   /**
-   * If "true" adds a button to clear the value in the input field
+   * If `true` adds a button to clear the value in the input field
    */
   clearButton?: boolean;
   /**
-   * Custom name for the clear button. Requires "clearButton" to be "true".
+   * Custom name for the clear button. Requires `clearButton` to be `true`.
    *
    * @default "Tøm"
    */
@@ -59,13 +59,13 @@ export interface ComboboxProps
    */
   isListOpen?: boolean;
   /**
-   * Set to "true" when doing an async search and waiting for new filteredOptions.
+   * Set to `true` when doing an async search and waiting for new filteredOptions.
    *
    * Will show a spinner in the dropdown and announce to screen readers that it is loading.
    */
   isLoading?: boolean;
   /**
-   * Set to "true" to allow multiple selections
+   * Set to `true` to allow multiple selections.
    *
    * This will display selected values as a list of Chips in front of the input field, instead of a selection replacing the value of the input.
    *
@@ -82,18 +82,18 @@ export interface ComboboxProps
     value?: string,
   ) => void;
   /**
-   * Callback function triggered whenever the input field is cleared
+   * Callback function triggered whenever the input field is cleared.
    *
    * @param event
    * @returns
    */
   onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
   /**
-   * Callback function triggered whenever an option is selected or de-selected
+   * Callback function triggered whenever an option is selected or de-selected.
    *
-   * @param option
-   * @param isSelected - Whether the option has been selected or unselected
-   * @param isCustomOption - Whether the option comes from user input, instead of from the list
+   * @param option The selected option.
+   * @param isSelected Whether the option has been selected or unselected.
+   * @param isCustomOption Whether the option comes from user input, instead of from the list.
    * @returns
    */
   onToggleSelected?: (
@@ -113,25 +113,25 @@ export interface ComboboxProps
    */
   maxSelected?: MaxSelected;
   /**
-   * Set to "true" to enable inline autocomplete.
+   * Set to `true` to enable inline autocomplete.
    *
    * @default false
    */
   shouldAutocomplete?: boolean;
   /**
-   * When set to "true" displays selected options as Chips before the input field
+   * When set to `true` displays selected options as Chips before the input field
    *
    * @default true
    */
   shouldShowSelectedOptions?: boolean;
   /**
-   * When set to "true" displays the toggle button for opening/closing the dropdown list
+   * When set to `true` displays the toggle button for opening/closing the dropdown list
    *
    * @default true
    */
   toggleListButton?: boolean;
   /**
-   * Custom name for the toggle list-button. Requires "toggleListButton" to be "true".
+   * Custom name for the toggle list-button. Requires "toggleListButton" to be `true`.
    *
    * @default "Alternativer"
    */
