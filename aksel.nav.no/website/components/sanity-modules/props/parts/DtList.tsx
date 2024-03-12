@@ -1,48 +1,87 @@
-import { Detail, Tooltip } from "@navikt/ds-react";
+import dynamic from "next/dynamic";
+import { BodyShort, Skeleton } from "@navikt/ds-react";
+import { AkselTable, AkselTableRow } from "@/web/Table";
 import { Highlighter } from "./Highlight";
 
-export const DtList = ({ prop, parent }: { prop: any; parent: string }) => {
+const LazyDescription = dynamic(() => import("./DtListDescription"), {
+  ssr: false,
+  loading: () => <Skeleton />,
+});
+
+const LazyExample = dynamic(() => import("./DtListExample"), {
+  ssr: false,
+  loading: () => <Skeleton />,
+});
+
+// sync with docgen manipulation, on two sides of the fence
+type Prop = Partial<{
+  defaultValue: string;
+  description: string;
+  name: string;
+  parent: {
+    fileName: string;
+    name: string;
+  };
+  declarations: {
+    fileName: string;
+    name: string;
+  }[];
+  required: boolean;
+  type: string;
+  params: string[];
+  return: string;
+  example: string;
+}>;
+
+export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
     return null;
   }
 
   return (
-    <Detail
-      as="div"
-      className="block overflow-x-auto border border-t-0 border-gray-300 p-2 first-of-type:border-t last-of-type:rounded-b"
-    >
-      <dt>
-        {!prop.defaultValue ? (
-          <span className="font-mono font-semibold">{`${prop.name}${
-            prop?.required ? "" : "?"
-          } `}</span>
-        ) : (
-          <Tooltip
-            content={`default: ${prop.defaultValue}`}
-            arrow={false}
-            delay={0}
-          >
-            <span className="mr-2 cursor-pointer border-b border-dashed border-gray-600 font-mono font-semibold">{`${
-              prop.name
-            }${prop?.required ? "" : "?"}`}</span>
-          </Tooltip>
-        )}
-
-        <span className="font-mono">
-          {prop.type ? <>{Highlighter({ type: prop.type })}</> : ""}
-        </span>
-      </dt>
+    <BodyShort as="ul" className="dtlist overflow-x-auto">
+      {prop.type && (
+        <li className="my-3 flex flex-col px-3 text-base md:flex-row">
+          <div className="min-w-24 font-semibold">Type: </div>
+          <code className="mt-05 text-sm">
+            {Highlighter({ type: prop.type })}
+          </code>
+        </li>
+      )}
+      {prop.defaultValue && (
+        <li className="my-3 flex flex-col px-3 text-base md:flex-row">
+          <div className="min-w-24 font-semibold">Default: </div>
+          <div>{Highlighter({ type: prop.defaultValue })}</div>
+        </li>
+      )}
       {prop.description && (
-        <dd className="whitespace-pre-wrap text-base">{prop.description}</dd>
+        <li className="my-3 flex flex-col px-3 md:flex-row">
+          <div className="min-w-24 text-base font-semibold">Description:</div>
+
+          <div>
+            <LazyDescription>{prop.description}</LazyDescription>
+            {prop.params && (
+              <AkselTable th={[{ text: "Param" }, { text: "Description" }]}>
+                {prop.params.map((param: string, i: number) => (
+                  <AkselTableRow
+                    key={i}
+                    tr={[
+                      { text: param.split(" ")[0] },
+                      { text: param.slice(param.indexOf(" ") + 1) },
+                    ]}
+                  />
+                ))}
+              </AkselTable>
+            )}
+          </div>
+        </li>
       )}
-      {prop.name === "ref" && prop.type.includes("Ref<") && (
-        <dd className="text-base">
-          {`${parent} extends ${prop.type.slice(
-            prop.type.indexOf("<") + 1,
-            prop.type.lastIndexOf(">"),
-          )}`}
-        </dd>
+      {prop.example && (
+        <li className="my-3 flex flex-col px-3 text-base md:flex-row">
+          <div className="min-w-24 font-semibold">Example: </div>
+          <LazyExample>{prop.example}</LazyExample>
+        </li>
       )}
-    </Detail>
+    </BodyShort>
   );
 };

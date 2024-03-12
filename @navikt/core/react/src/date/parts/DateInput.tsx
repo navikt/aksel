@@ -21,7 +21,7 @@ export interface DateInputProps
   hideLabel?: boolean;
   /**
    * Changes padding and font-sizes
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small";
   /**

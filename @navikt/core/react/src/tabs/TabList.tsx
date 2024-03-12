@@ -15,7 +15,7 @@ import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * <Tabs.Tab /> elements
+   * `<Tabs.Tab />` elements
    */
   children: React.ReactNode;
 }

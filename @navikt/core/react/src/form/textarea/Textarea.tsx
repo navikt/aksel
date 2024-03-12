@@ -17,7 +17,8 @@ export interface TextareaProps
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Allowed character-count for content
-   * @note This is just a visual indicator! You will need to handle actual character-limits/validation if needed
+   *
+   * This is just a visual indicator! You will still need to handle actual character-limits/validation if needed.
    */
   maxLength?: number;
   /**
@@ -37,15 +38,15 @@ export interface TextareaProps
    */
   minRows?: number;
   /**
-   * Textarea label
+   * Textarea label.
    */
   label: React.ReactNode;
   /**
-   * If enabled shows the label and description for screenreaders only
+   * If enabled shows the label and description for screenreaders only.
    */
   hideLabel?: boolean;
   /**
-   * Enables resizing of field
+   * Enables resizing of field.
    */
   resize?: boolean | "vertical" | "horizontal";
   /**
