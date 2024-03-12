@@ -201,7 +201,7 @@ function IntroSection({
 
 export function GpCardGrid({ children }: { children: React.ReactNode }) {
   return (
-    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
+    <ul className="grid grid-cols-1 gap-3 *:grid md:grid-cols-2 md:gap-6">
       {children}
     </ul>
   );
