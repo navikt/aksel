@@ -13,7 +13,27 @@ const LazyExample = dynamic(() => import("./DtListExample"), {
   loading: () => <Skeleton />,
 });
 
-export const DtList = ({ prop }: { prop: any; parent: string }) => {
+// sync with docgen manipulation, on two sides of the fence
+type Prop = Partial<{
+  defaultValue: string;
+  description: string;
+  name: string;
+  parent: {
+    fileName: string;
+    name: string;
+  };
+  declarations: {
+    fileName: string;
+    name: string;
+  }[];
+  required: boolean;
+  type: string;
+  params: string[];
+  return: string;
+  example: string;
+}>;
+
+export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
   if (prop?.description && prop.description.includes("@private")) {
     return null;
   }

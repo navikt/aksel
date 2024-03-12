@@ -3,8 +3,14 @@ import remarkGfm from "remark-gfm";
 import { Link } from "@navikt/ds-react";
 import InlineCode from "@/web/InlineCode";
 
-const LinkWrapper = ({ children }) => {
-  return <Link href={children}>{children}</Link>;
+const LinkWrapper = ({
+  children,
+  href,
+}: {
+  children?: React.ReactNode;
+  href?: string;
+}) => {
+  return <Link href={href}>{children}</Link>;
 };
 
 const DtListDescription = ({ children }) => {
