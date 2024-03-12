@@ -32,8 +32,7 @@ export const FeedbackForm = ({
 }) => {
   const sanityDocumentId = useSanityData()?.id;
   const { login, logout } = useAuth();
-  const ref_is_anon = React.useRef<HTMLInputElement>(null);
-  const ref_feedback = React.useRef<HTMLTextAreaElement>(null);
+  const [feedbackCache, setFeedbackCache] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const _username = username || "Ukjent bruker";
@@ -41,18 +40,23 @@ export const FeedbackForm = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!ref_feedback.current?.value) {
+    const formData = new FormData(event.currentTarget);
+    const feedback = (formData.get("feedback") as string) || "";
+    setFeedbackCache(feedback);
+    const anon = formData.get("anon") === "on";
+
+    if (!feedback) {
       setError("Feltet kan ikke være tomt.");
       return;
     }
-    if (ref_feedback.current?.value.length > 500) {
+    if (feedback.length > 500) {
       setError("Tilbakemeldingen må være under 500 tegn.");
       return;
     }
 
     const body = JSON.stringify({
-      anon: ref_is_anon.current?.checked || false,
-      feedback: ref_feedback.current?.value.slice(0, 500) || "",
+      anon,
+      feedback: feedback.slice(0, 500) || "",
       document_id: sanityDocumentId,
     });
 
@@ -67,8 +71,8 @@ export const FeedbackForm = ({
       .then((res: SlackFeedbackResponse) => {
         const feedbackMetadata = {
           side: window.location.pathname,
-          anonym: ref_is_anon.current?.checked || false,
-          length: ref_feedback.current?.value.length,
+          anonym: anon,
+          length: feedback.length,
         };
         if (!res.ok) {
           setState("error");
@@ -82,9 +86,6 @@ export const FeedbackForm = ({
             result: "success",
             ...feedbackMetadata,
           });
-          if (ref_feedback?.current?.value) {
-            ref_feedback.current.value = "";
-          }
         }
       });
   };
@@ -140,19 +141,16 @@ export const FeedbackForm = ({
                 )
               </BodyShort>
             </HStack>
-            <Checkbox ref={ref_is_anon}>skjul navnet mitt</Checkbox>
+            <Checkbox name="anon">skjul navnet mitt</Checkbox>
             <Textarea
+              name="feedback"
               label="Innspill"
               className="justify-items-stretch"
               minRows={4}
               maxLength={500}
-              ref={ref_feedback}
               error={error}
-              onInput={() => {
-                if (
-                  ref_feedback.current?.value &&
-                  ref_feedback.current?.value.length > 500
-                ) {
+              onInput={(element) => {
+                if (element.currentTarget.value.length > 500) {
                   return;
                 }
                 setError(null);
@@ -179,12 +177,12 @@ export const FeedbackForm = ({
           <Heading level="3" size="xsmall" className="mb-1">
             Tilbakemelding
           </Heading>
-          {ref_feedback?.current?.value && (
+          {feedbackCache && (
             <BodyLong
               spacing
               className="border-l-2 border-l-border-subtle p-2 pl-4"
             >
-              {ref_feedback.current.value}
+              {feedbackCache}
             </BodyLong>
           )}
 
