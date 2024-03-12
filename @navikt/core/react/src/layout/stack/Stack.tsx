@@ -10,8 +10,8 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * CSS `justify-content` property.
    *
    * @example
-   * gap='center'
-   * gap={{xs: 'start', sm: 'center', md: 'end', lg: 'space-around', xl: 'space-between'}}
+   * justify='center'
+   * justify={{xs: 'start', sm: 'center', md: 'end', lg: 'space-around', xl: 'space-between'}}
    */
   justify?: ResponsiveProp<
     | "start"
@@ -25,16 +25,12 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * CSS `align-items` property.
    *
    * @example
-   * gap='center'
-   * gap={{xs: 'start', sm: 'center', md: 'end', lg: 'baseline', xl: 'stretch'}}
+   * align='center'
+   * align={{xs: 'start', sm: 'center', md: 'end', lg: 'baseline', xl: 'stretch'}}
    */
   align?: ResponsiveProp<"start" | "center" | "end" | "baseline" | "stretch">;
   /**
    * Sets the CSS `flex-wrap` property.
-   *
-   * @example
-   * gap=true
-   * gap={{xs: true, sm: false, md: true, lg: false, xl: true}}
    */
   wrap?: boolean;
   /**
@@ -48,6 +44,10 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * CSS `flex-direction` property.
    * @default "row"
+   *
+   * @example
+   * direction='row'
+   * direction={{xs: 'row', sm: 'column'}}
    */
   direction?: ResponsiveProp<"row" | "column">;
 }
