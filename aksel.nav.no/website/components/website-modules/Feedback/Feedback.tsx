@@ -15,18 +15,19 @@ import {
 } from "@navikt/ds-react";
 import { useAuth } from "@/auth/useAuth";
 import { useSanityData } from "@/hooks/useSanityData";
+import { SlackFeedbackResponse } from "@/slack";
 import styles from "./Feedback.module.css";
 
-type States = "public" | "feedbackSent" | "loggedIn";
+type States = "public" | "feedbackSent" | "loggedIn" | "error";
 
-const FeedbackForm = ({
+export const FeedbackForm = ({
   username,
   state,
   setState,
 }: {
   state: States;
   username?: string | null;
-  setState?: Dispatch<SetStateAction<States>>;
+  setState: Dispatch<SetStateAction<States>>;
 }) => {
   const sanityDocumentId = useSanityData()?.id;
   const { login, logout } = useAuth();
@@ -34,32 +35,68 @@ const FeedbackForm = ({
   const ref_feedback = React.useRef<HTMLTextAreaElement>(null);
   const [error, setError] = useState<string | null>(null);
 
-  let form: React.ReactNode = null;
   const _username = username || "Ukjent bruker";
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!ref_feedback.current?.value) {
+      setError("Feltet kan ikke være tomt.");
+      return;
+    }
+    if (ref_feedback.current?.value.length > 500) {
+      setError("Tilbakemeldingen må være under 500 tegn.");
+      return;
+    }
+
+    const body = JSON.stringify({
+      anon: ref_is_anon.current?.checked || false,
+      feedback: ref_feedback.current?.value.slice(0, 500) || "",
+      document_id: sanityDocumentId,
+    });
+
+    fetch("/api/slack/feedback/v1", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    })
+      .then((res) => res.json())
+      .then((res: SlackFeedbackResponse) => {
+        if (!res.ok) {
+          setState("error");
+        } else {
+          setState("feedbackSent");
+          if (ref_feedback?.current?.value) {
+            ref_feedback.current.value = "";
+          }
+        }
+      });
+  };
 
   switch (state) {
     case "feedbackSent":
-      form = (
-        <>
-          <BodyLong className="mb-6">
-            Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
-            relevant. Takk skal du ha!
-          </BodyLong>
+      return (
+        <div>
+          <IntroSection
+            heading="Innspill sendt"
+            description="Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
+            relevant. Takk skal du ha!"
+          />
+
           <Button
-            onClick={() => {
-              setState?.("loggedIn");
-            }}
+            onClick={() => setState("loggedIn")}
             className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
             Nytt innspill
           </Button>
-        </>
+        </div>
       );
-      break;
 
     case "loggedIn":
-      form = (
-        <>
+      return (
+        <form onSubmit={handleSubmit}>
           {/* vet ikke hvorfor dette kreves her?... noe rarte med styling av Textarea som skjer her? */}
           <style>
             {`
@@ -68,10 +105,10 @@ const FeedbackForm = ({
             }
           `}
           </style>
-          <BodyLong className="mb-6">
-            Har du innspill til artikkelen? Meldingen blir sendt med Slack til
-            folka som har lagd artikkelen 🙌
-          </BodyLong>
+          <IntroSection
+            heading="Innspill til artikkelen"
+            description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til folka som har lagd artikkelen 🙌"
+          />
           <VStack gap="4">
             <HStack gap="2">
               <PersonIcon fontSize="1.5rem" />
@@ -92,7 +129,8 @@ const FeedbackForm = ({
             <Checkbox ref={ref_is_anon}>skjul navnet mitt</Checkbox>
             <Textarea
               label="Innspill"
-              className="min-h-40 justify-items-stretch"
+              className="justify-items-stretch"
+              minRows={4}
               maxLength={500}
               ref={ref_feedback}
               error={error}
@@ -105,64 +143,83 @@ const FeedbackForm = ({
                 }
                 setError(null);
               }}
-            ></Textarea>
+            />
           </VStack>
           <Button
-            onClick={() => {
-              if (!ref_feedback.current?.value) {
-                setError("Feltet kan ikke være tomt.");
-                return;
-              }
-              if (ref_feedback.current?.value.length > 500) {
-                setError("Tilbakemeldingen må være under 500 tegn.");
-                return;
-              }
-              setState?.("feedbackSent");
-
-              const body = JSON.stringify({
-                anon: ref_is_anon.current?.checked || false,
-                feedback: ref_feedback.current?.value.slice(0, 500) || "",
-                document_id: sanityDocumentId,
-              });
-
-              fetch("/api/slack/feedback/v1", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body,
-              });
-            }}
+            type="submit"
             className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
             Send inn
           </Button>
-        </>
+        </form>
       );
-      break;
 
+    case "error": {
+      return (
+        <div>
+          <IntroSection
+            heading="Noe gikk galt!"
+            description="Det skjedde en feil under innsending av tilbakemelding."
+          />
+
+          <Heading level="3" size="xsmall" className="mb-1">
+            Tilbakemelding
+          </Heading>
+          {ref_feedback?.current?.value && (
+            <BodyLong
+              spacing
+              className="border-l-2 border-l-border-subtle p-2 pl-4"
+            >
+              {ref_feedback.current.value}
+            </BodyLong>
+          )}
+
+          <BodyLong>
+            Hvis feilen oppstår flere ganger eller du har lyst til å sende
+            tilbakemeldingen direkte finner du oss under{" "}
+            <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
+              #aksel-designsystemet
+            </Link>{" "}
+            på slack.
+          </BodyLong>
+        </div>
+      );
+    }
     case "public":
     default:
-      form = (
-        <>
-          <BodyLong className="mb-6">
-            Logg inn med NAV SSO for å gi innspill til artikkelen
-          </BodyLong>
+      return (
+        <div>
+          <IntroSection
+            heading="Innspill til artikkelen"
+            description="Logg inn med NAV SSO for å gi innspill til artikkelen"
+          />
           <Button
-            onClick={() => {
-              login("#innspill-form");
-            }}
+            onClick={() => login("#innspill-form")}
             className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
           >
             Logg inn med NAV SSO
           </Button>
-        </>
+        </div>
       );
-      break;
   }
-
-  return form;
 };
+
+function IntroSection({
+  heading,
+  description,
+}: {
+  heading: string;
+  description: string;
+}) {
+  return (
+    <>
+      <Heading level="2" id="innspill-form" size="small" className="mb-1">
+        {heading}
+      </Heading>
+      <BodyLong className="mb-6">{description}</BodyLong>
+    </>
+  );
+}
 
 type Props =
   | {
@@ -183,14 +240,7 @@ export const Feedback = ({ username }: Props) => {
       padding="6"
     >
       <HGrid columns={{ xs: "1fr 3.5rem", md: "1fr 4.5rem" }} gap="2">
-        <div>
-          <Heading id="innspill-form" size="small" className="mb-1">
-            {state === "feedbackSent"
-              ? "Innspill sendt"
-              : "Innspill til artikkelen"}
-          </Heading>
-          <FeedbackForm username={username} state={state} setState={setState} />
-        </div>
+        <FeedbackForm username={username} state={state} setState={setState} />
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg
             width="1em"
