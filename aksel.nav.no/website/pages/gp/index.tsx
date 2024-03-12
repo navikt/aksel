@@ -6,7 +6,6 @@ import { Suspense, lazy, useEffect } from "react";
 import {
   BodyLong,
   Box,
-  HGrid,
   Heading,
   Link,
   Page,
@@ -14,6 +13,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
+import { GpCardGrid } from "@/layout/god-praksis-page/ArticleView";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
 import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
@@ -181,28 +181,26 @@ const GpPage = (props: PageProps["props"]) => {
                               {tema.description}
                             </BodyLong>
                           )}
-                          <HGrid
-                            columns={{ xs: 1, md: 2 }}
-                            gap={{ xs: "3", md: "6" }}
-                          >
+                          <GpCardGrid>
                             {tema.articles.map((article) => (
-                              <GpArticleCard
-                                key={article.slug}
-                                href={`${article.slug}`.replace(
-                                  "god-praksis",
-                                  "gp",
-                                )}
-                                innholdstype={article.innholdstype}
-                                undertema={
-                                  article.undertema.find(
-                                    (ut) => ut?.temaTitle === tema.title,
-                                  )?.title
-                                }
-                              >
-                                {article.heading}
-                              </GpArticleCard>
+                              <li key={article.slug}>
+                                <GpArticleCard
+                                  href={`${article.slug}`.replace(
+                                    "god-praksis",
+                                    "gp",
+                                  )}
+                                  innholdstype={article.innholdstype}
+                                  undertema={
+                                    article.undertema.find(
+                                      (ut) => ut?.temaTitle === tema.title,
+                                    )?.title
+                                  }
+                                >
+                                  {article.heading}
+                                </GpArticleCard>
+                              </li>
                             ))}
-                          </HGrid>
+                          </GpCardGrid>
 
                           <Link
                             href={`/gp/${tema.slug}`}

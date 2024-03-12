@@ -25,17 +25,19 @@ function GpArticleCard({
   publishedAt,
 }: GpArticleCardProps) {
   return (
-    <Link
-      href={`/${href}`}
-      className="group flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:p-5 md:pb-5"
-    >
-      <Heading
-        size="small"
-        as="span"
-        className="text-aksel-heading underline group-hover:no-underline"
+    <div className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-5">
+      <Link
+        href={`/${href}`}
+        className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
       >
-        {children}
-      </Heading>
+        <Heading
+          size="small"
+          as="h3"
+          className="text-aksel-heading underline group-hover:no-underline"
+        >
+          {children}
+        </Heading>
+      </Link>
       {publishedAt && (
         <Detail as="span" textColor="subtle" uppercase>
           {publishedAt}
@@ -70,7 +72,7 @@ function GpArticleCard({
         </div>
         <ChevronRightIcon aria-hidden fontSize="1.5rem" />
       </div>
-    </Link>
+    </div>
   );
 }
 

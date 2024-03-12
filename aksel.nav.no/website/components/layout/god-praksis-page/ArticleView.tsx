@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { BodyLong, HGrid, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import {
   GpSlugQueryResponse,
@@ -46,20 +46,21 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
             return (
               <div key={ut.title}>
                 <IntroSection title={ut.title} description={ut.description} />
-                <CardGrid>
+                <GpCardGrid>
                   {utArticles.map((article) => (
-                    <GpArticleCard
-                      key={article.slug}
-                      href={`${article.slug}`.replace("god-praksis", "gp")}
-                      innholdstype={article.innholdstype}
-                      undertema={article.undertema}
-                      publishedAt={article.publishedAt}
-                      description={article.description}
-                    >
-                      {article.heading}
-                    </GpArticleCard>
+                    <li key={article.slug}>
+                      <GpArticleCard
+                        href={`${article.slug}`.replace("god-praksis", "gp")}
+                        innholdstype={article.innholdstype}
+                        undertema={article.undertema}
+                        publishedAt={article.publishedAt}
+                        description={article.description}
+                      >
+                        {article.heading}
+                      </GpArticleCard>
+                    </li>
                   ))}
-                </CardGrid>
+                </GpCardGrid>
               </div>
             );
           })}
@@ -82,20 +83,21 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
         <div>
           <IntroSection title={ut.title} description={ut.description} />
 
-          <CardGrid>
+          <GpCardGrid>
             {utArticles.map((_article) => (
-              <GpArticleCard
-                key={_article.slug}
-                href={`${_article.slug}`.replace("god-praksis", "gp")}
-                innholdstype={_article.innholdstype}
-                undertema={_article.undertema}
-                publishedAt={_article.publishedAt}
-                description={_article.description}
-              >
-                {_article.heading}
-              </GpArticleCard>
+              <li key={_article.slug}>
+                <GpArticleCard
+                  href={`${_article.slug}`.replace("god-praksis", "gp")}
+                  innholdstype={_article.innholdstype}
+                  undertema={_article.undertema}
+                  publishedAt={_article.publishedAt}
+                  description={_article.description}
+                >
+                  {_article.heading}
+                </GpArticleCard>
+              </li>
             ))}
-          </CardGrid>
+          </GpCardGrid>
         </div>
       );
     }
@@ -120,20 +122,21 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
             return (
               <div key={ut.title}>
                 <IntroSection title={ut.title} description={ut.description} />
-                <CardGrid>
+                <GpCardGrid>
                   {utArticles.map((article) => (
-                    <GpArticleCard
-                      key={article.slug}
-                      href={`${article.slug}`.replace("god-praksis", "gp")}
-                      innholdstype={article.innholdstype}
-                      undertema={article.undertema}
-                      publishedAt={article.publishedAt}
-                      description={article.description}
-                    >
-                      {article.heading}
-                    </GpArticleCard>
+                    <li key={article.slug}>
+                      <GpArticleCard
+                        href={`${article.slug}`.replace("god-praksis", "gp")}
+                        innholdstype={article.innholdstype}
+                        undertema={article.undertema}
+                        publishedAt={article.publishedAt}
+                        description={article.description}
+                      >
+                        {article.heading}
+                      </GpArticleCard>
+                    </li>
                   ))}
-                </CardGrid>
+                </GpCardGrid>
               </div>
             );
           })}
@@ -156,20 +159,21 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
           <IntroSection
             title={`Artikler for ${view.undertema} og ${view.innholdstype}`}
           />
-          <CardGrid>
+          <GpCardGrid>
             {matchingArticles.map((article) => (
-              <GpArticleCard
-                key={article.slug}
-                href={`${article.slug}`.replace("god-praksis", "gp")}
-                innholdstype={article.innholdstype}
-                undertema={article.undertema}
-                publishedAt={article.publishedAt}
-                description={article.description}
-              >
-                {article.heading}
-              </GpArticleCard>
+              <li key={article.slug}>
+                <GpArticleCard
+                  href={`${article.slug}`.replace("god-praksis", "gp")}
+                  innholdstype={article.innholdstype}
+                  undertema={article.undertema}
+                  publishedAt={article.publishedAt}
+                  description={article.description}
+                >
+                  {article.heading}
+                </GpArticleCard>
+              </li>
             ))}
-          </CardGrid>
+          </GpCardGrid>
         </div>
       );
     }
@@ -195,10 +199,10 @@ function IntroSection({
   );
 }
 
-function CardGrid({ children }: { children: React.ReactNode }) {
+export function GpCardGrid({ children }: { children: React.ReactNode }) {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap={{ xs: "3", md: "6" }}>
+    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
       {children}
-    </HGrid>
+    </ul>
   );
 }
