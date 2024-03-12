@@ -1,7 +1,6 @@
 interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
-   * Content for the header. Alteratively you can use `<Modal.Header>` instead for more control,
-   * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
+   * Content for the header. Alteratively you can use `<Modal.Header>` instead for more control, but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
    */
   header?: {
     label?: string;

@@ -44,7 +44,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Callback for alert wanting to close.
    *
-   * **requires closeButton to be true**.
+   * **Requires closeButton to be true**.
    */
   onClose?: () => void;
 }
