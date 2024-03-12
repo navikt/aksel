@@ -15,12 +15,12 @@ const LinkWrapper = ({
 
 const DtListDescription = ({ children }) => {
   return (
-    <div className="mr-2 flex flex-col gap-2 whitespace-pre-wrap text-base">
+    <div className="mr-2 flex flex-col gap-2 text-base">
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{
           code: InlineCode,
-          a: LinkWrapper as any,
+          a: LinkWrapper,
         }}
       >
         {children}

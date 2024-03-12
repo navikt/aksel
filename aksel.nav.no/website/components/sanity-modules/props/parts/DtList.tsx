@@ -41,7 +41,7 @@ export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
   return (
     <BodyShort as="ul" className="dtlist overflow-x-auto">
       {prop.type && (
-        <li className="my-4 flex px-3 text-base">
+        <li className="my-3 flex px-3 text-base">
           <div className="min-w-24 font-semibold">Type: </div>
           <code className="mt-05 text-sm">
             {Highlighter({ type: prop.type })}
@@ -49,13 +49,13 @@ export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
         </li>
       )}
       {prop.defaultValue && (
-        <li className="flex px-3 text-base">
+        <li className="my-3 flex px-3 text-base">
           <div className="min-w-24 font-semibold">Default: </div>
           <div>{Highlighter({ type: prop.defaultValue })}</div>
         </li>
       )}
       {prop.description && (
-        <li className="my-4 flex px-3">
+        <li className="my-3 flex px-3">
           <div className="min-w-24 text-base font-semibold">Description:</div>
 
           <div>
