@@ -15,6 +15,7 @@ import {
 } from "@navikt/ds-react";
 import { useAuth } from "@/auth/useAuth";
 import { useSanityData } from "@/hooks/useSanityData";
+import { AmplitudeEvents, amplitude } from "@/logging";
 import { SlackFeedbackResponse } from "@/slack";
 import styles from "./Feedback.module.css";
 
@@ -64,10 +65,23 @@ export const FeedbackForm = ({
     })
       .then((res) => res.json())
       .then((res: SlackFeedbackResponse) => {
+        const feedbackMetadata = {
+          side: window.location.pathname,
+          anonym: ref_is_anon.current?.checked || false,
+          length: ref_feedback.current?.value.length,
+        };
         if (!res.ok) {
           setState("error");
+          amplitude.track(AmplitudeEvents.slackfeedback, {
+            result: "error",
+            ...feedbackMetadata,
+          });
         } else {
           setState("feedbackSent");
+          amplitude.track(AmplitudeEvents.slackfeedback, {
+            result: "success",
+            ...feedbackMetadata,
+          });
           if (ref_feedback?.current?.value) {
             ref_feedback.current.value = "";
           }
