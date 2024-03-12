@@ -18,39 +18,42 @@ export function HeroList({
 }: HeroListProps) {
   return (
     <nav aria-label="Temavelger" className="relative z-10 mt-2">
-      <div className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
-        <GpHeroCard
-          href="gp"
-          image={null}
-          compact
-          onClick={() => {
-            setOpen(false);
-          }}
-          onInverted={onInverted}
-        >
-          Alle tema
-        </GpHeroCard>
-        {heroNav.map((tema, idx) => (
+      <ul className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
+        <li>
           <GpHeroCard
-            key={tema.slug + idx}
-            href={`gp/${tema.slug}`}
-            image={tema.image}
+            href="gp"
+            image={null}
             compact
-            aria-current={currentSlug === tema.slug ? "page" : undefined}
             onClick={() => {
               setOpen(false);
             }}
-            ref={(element: HTMLAnchorElement) => {
-              if (currentSlug === tema.slug && currentlyActiveLink) {
-                currentlyActiveLink.current = element;
-              }
-            }}
             onInverted={onInverted}
           >
-            {tema.title}
+            Alle tema
           </GpHeroCard>
+        </li>
+        {heroNav.map((tema, idx) => (
+          <li key={tema.slug + idx}>
+            <GpHeroCard
+              href={`gp/${tema.slug}`}
+              image={tema.image}
+              compact
+              aria-current={currentSlug === tema.slug ? "page" : undefined}
+              onClick={() => {
+                setOpen(false);
+              }}
+              ref={(element: HTMLAnchorElement) => {
+                if (currentSlug === tema.slug && currentlyActiveLink) {
+                  currentlyActiveLink.current = element;
+                }
+              }}
+              onInverted={onInverted}
+            >
+              {tema.title}
+            </GpHeroCard>
+          </li>
         ))}
-      </div>
+      </ul>
     </nav>
   );
 }

@@ -127,25 +127,29 @@ const GpPage = (props: PageProps["props"]) => {
                     className="mt-4"
                   />
                 )}
-                <Stack
-                  className="mt-10"
-                  gap={{ xs: "4", md: "6" }}
-                  wrap
-                  direction={{ xs: "column", md: "row" }}
-                >
-                  {props.tema
-                    .filter((x) => x.refCount > 0)
-                    .map((tema) => (
-                      <GpHeroCard
-                        key={tema.slug}
-                        articleCount={tema.refCount}
-                        href={`gp/${tema.slug}`}
-                        image={tema.pictogram}
-                      >
-                        {tema.title}
-                      </GpHeroCard>
-                    ))}
-                </Stack>
+                <nav aria-label="Temavelger">
+                  <Stack
+                    className="mt-10"
+                    gap={{ xs: "4", md: "6" }}
+                    wrap
+                    direction={{ xs: "column", md: "row" }}
+                    as="ul"
+                  >
+                    {props.tema
+                      .filter((x) => x.refCount > 0)
+                      .map((tema) => (
+                        <li key={tema.slug}>
+                          <GpHeroCard
+                            articleCount={tema.refCount}
+                            href={`gp/${tema.slug}`}
+                            image={tema.pictogram}
+                          >
+                            {tema.title}
+                          </GpHeroCard>
+                        </li>
+                      ))}
+                  </Stack>
+                </nav>
               </IntroHero>
               <Box paddingInline={{ xs: "4", lg: "10" }}>
                 <VStack gap="10">
