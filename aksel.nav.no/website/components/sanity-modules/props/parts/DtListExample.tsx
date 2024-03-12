@@ -1,6 +1,6 @@
 import Code from "@/cms/props/parts/Code";
 
-const DtListDescription = ({ children }) => {
+const DtListExample = ({ children }) => {
   return (
     <div className="mt-3 grid text-sm">
       <Code>{children}</Code>
@@ -8,4 +8,4 @@ const DtListDescription = ({ children }) => {
   );
 };
 
-export default DtListDescription;
+export default DtListExample;
