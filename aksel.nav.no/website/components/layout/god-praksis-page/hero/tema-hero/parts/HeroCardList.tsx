@@ -18,14 +18,7 @@ export function HeroList({
     <nav aria-label="Temavelger" className="relative z-10 mt-2">
       <ul className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
         <li>
-          <GpHeroCard
-            href="gp"
-            image={null}
-            compact
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
+          <GpHeroCard href="gp" image={null} compact>
             Alle tema
           </GpHeroCard>
         </li>
@@ -36,13 +29,14 @@ export function HeroList({
               image={tema.image}
               compact
               aria-current={currentSlug === tema.slug ? "page" : undefined}
-              onClick={() => {
-                setOpen(false);
-              }}
               ref={(element: HTMLAnchorElement) => {
                 if (currentSlug === tema.slug && currentlyActiveLink) {
                   currentlyActiveLink.current = element;
                 }
+              }}
+              onClick={() => {
+                // Since navigating to same page will not trigger a new render, we have to manually close it
+                currentSlug === tema.slug && setOpen(false);
               }}
             >
               {tema.title}

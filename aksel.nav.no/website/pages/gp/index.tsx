@@ -121,7 +121,7 @@ const GpPage = (props: PageProps["props"]) => {
           as="main"
           tabIndex={-1}
           id="hovedinnhold"
-          className="focus:outline-none"
+          className="animate-popUpPage focus:outline-none"
         >
           <Page.Block width="xl" gutters>
             <VStack gap="10">
