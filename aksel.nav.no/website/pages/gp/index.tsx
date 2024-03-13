@@ -23,6 +23,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselGodPraksisLandingPageDocT, NextPageT } from "@/types";
+import { AnimatedChevron } from "@/web/AnimatedChevron";
 import { SEO } from "@/web/seo/SEO";
 
 type GpTemaList = {
@@ -205,7 +206,7 @@ const GpPage = (props: PageProps["props"]) => {
                           <Link
                             href={`/gp/${tema.slug}`}
                             as={NextLink}
-                            className="mt-4"
+                            className="group mt-4 flex w-fit items-center text-deepblue-700"
                             onClick={(e) =>
                               amplitudeLogNavigation(
                                 "gp-se-alle-link",
@@ -213,7 +214,7 @@ const GpPage = (props: PageProps["props"]) => {
                               )
                             }
                           >
-                            Se alle
+                            Se alle <AnimatedChevron scale="inline" />
                           </Link>
                         </section>
                       );

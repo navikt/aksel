@@ -1,11 +1,8 @@
 import cl from "clsx";
 import Link from "next/link";
-import {
-  ChevronRightIcon,
-  FileFillIcon,
-  TagFillIcon,
-} from "@navikt/aksel-icons";
+import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "@navikt/ds-react";
+import { AnimatedChevron } from "@/web/AnimatedChevron";
 
 type GpArticleCardProps = {
   children: React.ReactNode;
@@ -28,7 +25,7 @@ function GpArticleCard({
     <article className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-4">
       <Link
         href={`/${href}`}
-        className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
+        className="peer after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
       >
         <Heading
           size="small"
@@ -48,7 +45,7 @@ function GpArticleCard({
         <BodyLong className="mt-1 line-clamp-2">{description}</BodyLong>
       )}
       <div
-        className={cl("mt-auto flex h-fit justify-between", {
+        className={cl("mt-auto flex h-fit justify-between text-deepblue-700", {
           "pt-5": !!description,
         })}
       >
@@ -70,7 +67,8 @@ function GpArticleCard({
             </div>
           )}
         </div>
-        <ChevronRightIcon aria-hidden fontSize="1.5rem" />
+
+        <AnimatedChevron />
       </div>
     </article>
   );

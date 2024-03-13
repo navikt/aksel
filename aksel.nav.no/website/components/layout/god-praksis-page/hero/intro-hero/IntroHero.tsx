@@ -13,7 +13,7 @@ function IntroHero({ title, children }: GpIntroHeroProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock={{ xs: "6", lg: "10" }}
-      className="relative isolate bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[height]"
+      className="relative isolate bg-gradient-to-tr from-teal-400 via-teal-200 via-60% to-teal-200 ring-1 ring-inset ring-teal-400"
     >
       <Cube />
       <Heading level="1" size="xlarge" className="z-10 mt-2 text-aksel-heading">
