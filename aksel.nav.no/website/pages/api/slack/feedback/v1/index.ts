@@ -69,7 +69,6 @@ async function sendSlackbotFeedback(
   /**
    * Validate the request with zod before we continue flow
    */
-  console.log({ body: request.body });
   const validation = requestBodySchema.safeParse({
     body: request.body,
   });

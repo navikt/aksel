@@ -13,43 +13,33 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithOutName: Story = {
-  args: {},
+  args: { userState: { signedIn: false, user: null } },
 };
 
 export const WithName: Story = {
   args: {
-    username: "Ola normann",
+    userState: {
+      signedIn: true,
+      user: {
+        email: "email",
+        name: "name",
+      },
+    },
   },
 };
 
 export const FormPublic = {
-  render: () => (
-    <FeedbackForm state="public" setState={() => null} username="ola normann" />
-  ),
+  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
 };
 
 export const FormSent = {
-  render: () => (
-    <FeedbackForm
-      state="feedbackSent"
-      setState={() => null}
-      username="ola normann"
-    />
-  ),
+  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
 };
 
 export const FormLoggedIn = {
-  render: () => (
-    <FeedbackForm
-      state="loggedIn"
-      setState={() => null}
-      username="ola normann"
-    />
-  ),
+  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
 };
 
 export const FormError = {
-  render: () => (
-    <FeedbackForm state="error" setState={() => null} username="ola normann" />
-  ),
+  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
 };

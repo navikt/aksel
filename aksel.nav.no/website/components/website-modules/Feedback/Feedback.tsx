@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -13,29 +13,23 @@ import {
   Textarea,
   VStack,
 } from "@navikt/ds-react";
+import { AuthUser, UserStateT } from "@/auth/auth.types";
 import { useAuth } from "@/auth/useAuth";
 import { useSanityData } from "@/hooks/useSanityData";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SlackFeedbackResponse } from "@/slack";
 import styles from "./Feedback.module.css";
 
-type States = "public" | "feedbackSent" | "loggedIn" | "error";
+type States = "feedbackSent" | "loggedIn" | "error";
 
-export const FeedbackForm = ({
-  username,
-  state,
-  setState,
-}: {
-  state: States;
-  username?: string | null;
-  setState: Dispatch<SetStateAction<States>>;
-}) => {
+export const FeedbackForm = ({ user }: { user: AuthUser }) => {
+  const [state, setState] = useState<States>("loggedIn");
+  const [errorId, setErrorId] = useState<null | string>(null);
+
   const sanityDocumentId = useSanityData()?.id;
-  const { login, logout } = useAuth();
+  const { logout } = useAuth();
   const [feedbackCache, setFeedbackCache] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-
-  const _username = username || "Ukjent bruker";
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,12 +69,14 @@ export const FeedbackForm = ({
           length: feedback.length,
         };
         if (!res.ok) {
+          setErrorId(res.error);
           setState("error");
           amplitude.track(AmplitudeEvents.slackfeedback, {
             result: "error",
             ...feedbackMetadata,
           });
         } else {
+          setError(null);
           setState("feedbackSent");
           amplitude.track(AmplitudeEvents.slackfeedback, {
             result: "success",
@@ -90,130 +86,120 @@ export const FeedbackForm = ({
       });
   };
 
-  switch (state) {
-    case "feedbackSent":
-      return (
-        <div>
-          <IntroSection
-            heading="Innspill sendt"
-            description="Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
-            relevant. Takk skal du ha!"
-          />
+  if (state === "feedbackSent") {
+    return (
+      <div>
+        <IntroSection
+          heading="Innspill sendt"
+          description="Ditt innspill er viktig for å holde kvaliteten oppe og innholdet
+          relevant. Takk skal du ha!"
+        />
 
-          <Button
-            onClick={() => setState("loggedIn")}
-            className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
-          >
-            Nytt innspill
-          </Button>
-        </div>
-      );
-
-    case "loggedIn":
-      return (
-        <form onSubmit={handleSubmit}>
-          {/* vet ikke hvorfor dette kreves her?... noe rarte med styling av Textarea som skjer her? */}
-          <style>
-            {`
-            .navds-textarea__input {
-              margin-bottom: var(--a-spacing-2);
-            }
-          `}
-          </style>
-          <IntroSection
-            heading="Innspill til artikkelen"
-            description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til folka som har lagd artikkelen 🙌"
-          />
-          <VStack gap="4">
-            <HStack gap="2">
-              <PersonIcon fontSize="1.5rem" />
-              <BodyShort>{_username}</BodyShort>
-              <BodyShort>
-                (
-                <Link
-                  onClick={() => {
-                    logout();
-                  }}
-                  href="#"
-                >
-                  logg ut
-                </Link>
-                )
-              </BodyShort>
-            </HStack>
-            <Checkbox name="anon">skjul navnet mitt</Checkbox>
-            <Textarea
-              name="feedback"
-              label="Innspill"
-              className="justify-items-stretch"
-              minRows={4}
-              maxLength={500}
-              error={error}
-              onInput={(element) => {
-                if (element.currentTarget.value.length > 500) {
-                  return;
-                }
-                setError(null);
-              }}
-            />
-          </VStack>
-          <Button
-            type="submit"
-            className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
-          >
-            Send inn
-          </Button>
-        </form>
-      );
-
-    case "error": {
-      return (
-        <div>
-          <IntroSection
-            heading="Noe gikk galt!"
-            description="Det skjedde en feil under innsending av tilbakemelding."
-          />
-
-          <Heading level="3" size="xsmall" className="mb-1">
-            Tilbakemelding
-          </Heading>
-          {feedbackCache && (
-            <BodyLong
-              spacing
-              className="border-l-2 border-l-border-subtle p-2 pl-4"
-            >
-              {feedbackCache}
-            </BodyLong>
-          )}
-
-          <BodyLong>
-            Hvis feilen oppstår flere ganger eller du har lyst til å sende
-            tilbakemeldingen direkte finner du oss under{" "}
-            <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
-              #aksel-designsystemet
-            </Link>{" "}
-            på slack.
-          </BodyLong>
-        </div>
-      );
-    }
-    case "public":
-    default:
-      return (
-        <div>
-          <IntroSection
-            heading="Innspill til artikkelen"
-            description="Logg inn med NAV SSO for å gi innspill til artikkelen"
-          />
-          <Button
-            onClick={() => login("#innspill-form")}
-            className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
-          >
-            Logg inn med NAV SSO
-          </Button>
-        </div>
-      );
+        <Button
+          onClick={() => setState("loggedIn")}
+          className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+        >
+          Nytt innspill
+        </Button>
+      </div>
+    );
   }
+
+  if (state === "loggedIn") {
+    return (
+      <form onSubmit={handleSubmit}>
+        {/* vet ikke hvorfor dette kreves her?... noe rarte med styling av Textarea som skjer her? */}
+        <style>
+          {`
+          .navds-textarea__input {
+            margin-bottom: var(--a-spacing-2);
+          }
+        `}
+        </style>
+        <IntroSection
+          heading="Innspill til artikkelen"
+          description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til folka som har lagd artikkelen 🙌"
+        />
+        <VStack gap="4">
+          <HStack gap="2">
+            <PersonIcon fontSize="1.5rem" />
+            <BodyShort>{user.name}</BodyShort>
+            <BodyShort>
+              (
+              <Link
+                onClick={() => {
+                  logout();
+                }}
+                href="#"
+              >
+                logg ut
+              </Link>
+              )
+            </BodyShort>
+          </HStack>
+          <Checkbox name="anon">Skjul navnet mitt</Checkbox>
+          <Textarea
+            name="feedback"
+            label="Innspill"
+            className="justify-items-stretch"
+            minRows={4}
+            maxLength={500}
+            error={error}
+            onInput={(element) => {
+              if (element.currentTarget.value.length > 500) {
+                return;
+              }
+              setError(null);
+            }}
+          />
+        </VStack>
+        <Button
+          type="submit"
+          className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
+        >
+          Send inn
+        </Button>
+      </form>
+    );
+  }
+
+  if (state === "error") {
+    return (
+      <div>
+        <IntroSection
+          heading="Noe gikk galt!"
+          description="Det skjedde en feil under innsending av tilbakemelding."
+        />
+
+        <Heading level="3" size="xsmall" className="mb-1">
+          Tilbakemelding
+        </Heading>
+        {feedbackCache && (
+          <BodyLong
+            spacing
+            className="border-l-2 border-l-border-subtle p-2 pl-4"
+          >
+            {feedbackCache}
+          </BodyLong>
+        )}
+
+        <BodyLong>
+          Hvis feilen oppstår flere ganger eller du har lyst til å sende
+          tilbakemeldingen direkte finner du oss under{" "}
+          <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
+            #aksel-designsystemet
+          </Link>{" "}
+          på slack.
+        </BodyLong>
+        <BodyShort
+          textColor="subtle"
+          size="small"
+          className="mt-3"
+        >{`Feil-id: ${errorId}`}</BodyShort>
+      </div>
+    );
+  }
+  return null;
 };
 
 function IntroSection({
@@ -233,16 +219,12 @@ function IntroSection({
   );
 }
 
-type Props =
-  | {
-      username?: never;
-    }
-  | {
-      username?: string;
-    };
+type Props = {
+  userState: UserStateT;
+};
 
-export const Feedback = ({ username }: Props) => {
-  const [state, setState] = useState<States>(username ? "loggedIn" : "public");
+export const Feedback = ({ userState }: Props) => {
+  const { login } = useAuth();
 
   return (
     <Box
@@ -252,7 +234,22 @@ export const Feedback = ({ username }: Props) => {
       padding="6"
     >
       <HGrid columns={{ xs: "1fr 3.5rem", md: "1fr 4.5rem" }} gap="2">
-        <FeedbackForm username={username} state={state} setState={setState} />
+        {userState.signedIn ? (
+          <FeedbackForm user={userState.user} />
+        ) : (
+          <div>
+            <IntroSection
+              heading="Innspill til artikkelen"
+              description="Logg inn med NAV SSO for å gi innspill til artikkelen"
+            />
+            <Button
+              onClick={() => login("#innspill-form")}
+              className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+            >
+              Logg inn med NAV SSO
+            </Button>
+          </div>
+        )}
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg
             width="1em"
