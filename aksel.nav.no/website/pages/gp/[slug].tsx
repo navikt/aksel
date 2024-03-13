@@ -104,7 +104,7 @@ const GpPage = (props: PageProps["props"]) => {
     <>
       <SEO
         title={props.tema?.title ?? ""}
-        description={props.tema?.seo?.meta}
+        description={props.tema?.seo?.meta ?? props.tema.description}
         image={props.tema?.seo?.image}
       />
       <Page
