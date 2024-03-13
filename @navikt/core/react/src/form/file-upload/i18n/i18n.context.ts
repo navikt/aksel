@@ -33,20 +33,16 @@ export function useI18n<T extends Component>(
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24
    */
   const translate = (
-    id: NestedKeyOf<(typeof nb)[T]>,
-    options?: { replacements: string | number },
+    keypath: NestedKeyOf<(typeof nb)[T]>,
+    options?: { replacements: { [key: string]: string | number } },
   ) => {
     const text = get(
-      id,
+      keypath,
       ...local,
       ...(Array.isArray(i18n)
         ? i18n.map((t) => t[componentName])
         : [i18n[componentName]]),
     );
-
-    if (!text) {
-      return "";
-    }
 
     if (options?.replacements) {
       return text.replace(REPLACE_REGEX, (match) => {
@@ -56,11 +52,11 @@ export function useI18n<T extends Component>(
           const replacementData = JSON.stringify(options.replacements);
 
           throw new Error(
-            `Error translating key '${id}'. No replacement syntax ({}) found for key '${replacement}'. The following replacements were passed: '${replacementData}'`,
+            `Error translating key '${keypath}'. No replacement syntax ({}) found for key '${replacement}'. The following replacements were passed: '${replacementData}'`,
           );
         }
 
-        return options.replacements[replacement];
+        return options.replacements[replacement] as string; // can also be a number, but JS doesn't mind...
       });
     }
 
