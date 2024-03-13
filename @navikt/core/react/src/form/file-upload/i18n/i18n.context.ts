@@ -34,7 +34,7 @@ export function useI18n<T extends Component>(
    */
   const translate = (
     keypath: NestedKeyOf<(typeof nb)[T]>,
-    options?: { replacements: { [key: string]: string | number } },
+    options?: { replacements: Record<string, string | number> },
   ) => {
     const text = get(
       keypath,
