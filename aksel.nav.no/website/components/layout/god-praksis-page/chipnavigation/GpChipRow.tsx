@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
+import { safeString } from "@/layout/god-praksis-page/useGpViews";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
 
@@ -20,13 +21,14 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   const { query, replace } = useRouter();
 
   const handleClick = async (titleRaw: string) => {
-    const title = encodeURIComponent(titleRaw);
+    /* const title = encodeURIComponent(titleRaw); */
+    console.log({ query: query[type], encoded: titleRaw });
 
-    query[type] === title
+    query[type] === titleRaw
       ? replace({ query: omit(query, [type]) }, undefined, {
           shallow: true,
         })
-      : replace({ query: { ...query, [type]: title } }, undefined, {
+      : replace({ query: { ...query, [type]: titleRaw } }, undefined, {
           shallow: true,
         });
   };
@@ -56,9 +58,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
               return (
                 <li key={entryName} className="chiplist">
                   <button
-                    aria-pressed={
-                      encodeURIComponent(entryName) === query?.[type]
-                    }
+                    aria-pressed={entryName === safeString(query?.[type])}
                     onClick={() => handleClick(entryName)}
                     className={cl(
                       "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",

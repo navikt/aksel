@@ -66,7 +66,7 @@ export function useGpViews():
   };
 }
 
-function safeString(value: unknown): string | undefined {
+export function safeString(value: unknown): string | undefined {
   if (typeof value === "string") {
     return decodeURIComponent(value);
   }

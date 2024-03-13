@@ -24,7 +24,6 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
@@ -184,7 +183,6 @@ const Page = ({
         <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
-              <BreadCrumbs auto />
               <Heading
                 level="1"
                 size="large"
