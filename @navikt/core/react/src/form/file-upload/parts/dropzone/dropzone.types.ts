@@ -18,5 +18,5 @@ export interface FileUploadDropzoneProps
   /**
    * i18n-API for customizing texts and labels
    */
-  translations?: ComponentTranslation["FileUpload"];
+  translations?: ComponentTranslation<"FileUpload">["dropzone"];
 }

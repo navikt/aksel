@@ -11,7 +11,7 @@ interface FileUploadProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * i18n-API for customizing texts and labels
    */
-  translations?: ComponentTranslation["FileUpload"];
+  translations?: ComponentTranslation<"FileUpload">;
 }
 
 interface FileUploadComponent

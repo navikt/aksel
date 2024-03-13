@@ -1,4 +1,4 @@
-import { TranslationDictionary } from "./i18n.types";
+import { TranslationDictionary, TranslationObject } from "./i18n.types";
 
 export function merge(...objs: TranslationDictionary[]) {
   let final: TranslationDictionary = {};
@@ -10,9 +10,9 @@ export function merge(...objs: TranslationDictionary[]) {
   return final;
 }
 
-function mergeRecursively(
-  objA: TranslationDictionary,
-  objB: TranslationDictionary,
+function mergeRecursively<T>(
+  objA: T,
+  objB: TranslationDictionary | TranslationObject,
 ) {
   const objARes = { ...objA };
 
@@ -24,7 +24,7 @@ function mergeRecursively(
     const a = objARes[key];
     const b = objB[key];
 
-    if (typeof b !== "string" && typeof a !== "string") {
+    if (b && typeof b !== "string" && typeof a !== "string") {
       objARes[key] = mergeRecursively(a, b);
     } else {
       objARes[key] = b;

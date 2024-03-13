@@ -32,7 +32,7 @@ const Example = () => (
             as="li"
             file={{ name: "eksempel.png", size: 200000 }}
             status="uploading"
-            translations={{ item: { uploading: "Sender bilde..." } }}
+            translations={{ uploading: "Sender bilde..." }}
           />
         </VStack>
       </div>

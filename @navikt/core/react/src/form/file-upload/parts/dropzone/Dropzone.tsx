@@ -34,9 +34,11 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
     } = props;
 
     const context = useFileUploadTranslation(false);
-    const translate = useI18n({
-      FileUpload: translations ?? context?.translations,
-    });
+    const translate = useI18n(
+      "FileUpload",
+      { dropzone: translations },
+      context?.translations,
+    );
 
     const fileLimitReached =
       fileLimit && fileLimit?.current >= fileLimit?.max && fileLimit?.max > 0;
@@ -115,18 +117,16 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                   aria-hidden={!dropzoneCtx.isDraggingOver}
                   className="navds-dropzone__area-release__text"
                 >
-                  {translate("FileUpload.dropzone.drop")}
+                  {translate("dropzone.drop")}
                 </span>
               </div>
               <div aria-hidden>
                 <BodyShort as="div" spacing>
                   {multiple
-                    ? translate("FileUpload.dropzone.dragAndDropMultiple")
-                    : translate("FileUpload.dropzone.dragAndDrop")}
+                    ? translate("dropzone.dragAndDropMultiple")
+                    : translate("dropzone.dragAndDrop")}
                 </BodyShort>
-                <BodyShort as="div">
-                  {translate("FileUpload.dropzone.or")}
-                </BodyShort>
+                <BodyShort as="div">{translate("dropzone.or")}</BodyShort>
               </div>
               <Button
                 {...omit(rest, ["errorId"])}
@@ -137,8 +137,8 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 variant="secondary"
               >
                 {multiple
-                  ? translate("FileUpload.dropzone.buttonMultiple")
-                  : translate("FileUpload.dropzone.button")}
+                  ? translate("dropzone.buttonMultiple")
+                  : translate("dropzone.button")}
               </Button>
             </>
           )}
@@ -148,8 +148,8 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
               <CircleSlashIcon aria-hidden fontSize="1.75rem" />
               <BodyShort as="div">
                 {fileLimitReached
-                  ? translate("FileUpload.dropzone.disabledFilelimit")
-                  : translate("FileUpload.dropzone.disabled")}
+                  ? translate("dropzone.disabledFilelimit")
+                  : translate("dropzone.disabled")}
               </BodyShort>
             </div>
           )}

@@ -44,7 +44,7 @@ export interface FileItemBaseProps {
   /**
    * i18n-API for customizing texts and labels
    */
-  translations?: ComponentTranslation["FileUpload"];
+  translations?: ComponentTranslation<"FileUpload">["item"];
   onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
   onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
@@ -92,18 +92,20 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
       ref,
     ) => {
       const context = useFileUploadTranslation(false);
-      const translate = useI18n({
-        FileUpload: translations ?? context?.translations,
-      });
+      const translate = useI18n(
+        "FileUpload",
+        { item: translations },
+        context?.translations,
+      );
 
       const showError = !!error && status === "idle";
 
       function getStatusText() {
         if (status === "uploading") {
-          return translate("FileUpload.item.uploading");
+          return translate("item.uploading");
         }
         if (status === "downloading") {
-          return translate("FileUpload.item.downloading");
+          return translate("item.downloading");
         }
         return formatFileSize(file);
       }
@@ -150,8 +152,8 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 onRetry={onRetry}
                 onDelete={onDelete}
                 action={itemAction}
-                retryTitle={translate("FileUpload.item.retryButtonTitle")}
-                deleteTitle={translate("FileUpload.item.deleteButtonTitle")}
+                retryTitle={translate("item.retryButtonTitle")}
+                deleteTitle={translate("item.deleteButtonTitle")}
               />
             )}
           </div>

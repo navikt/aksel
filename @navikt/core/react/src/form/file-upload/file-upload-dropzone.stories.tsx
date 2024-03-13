@@ -99,11 +99,9 @@ export const Translation: StoryObj = {
       <h2>Custom texts</h2>
       <FileUpload.Dropzone
         translations={{
-          dropzone: {
-            dragAndDropMultiple: "Dra og slipp bilder i format .png",
-            buttonMultiple: "Velg bilder",
-            disabled: "Du kan ikke laste opp flere bilder",
-          },
+          dragAndDropMultiple: "Dra og slipp bilder i format .png",
+          buttonMultiple: "Velg bilder",
+          disabled: "Du kan ikke laste opp flere bilder",
         }}
         label="Last opp bilder"
         onSelect={console.log}
@@ -113,9 +111,7 @@ export const Translation: StoryObj = {
       <h3>Disabled</h3>
       <FileUpload.Dropzone
         translations={{
-          dropzone: {
-            disabled: "Du kan ikke laste opp flere bilder",
-          },
+          disabled: "Du kan ikke laste opp flere bilder",
         }}
         label="Last opp bilder"
         onSelect={console.log}

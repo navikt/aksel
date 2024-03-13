@@ -1,4 +1,4 @@
-import { TranslationDictionary } from "./i18n.types";
+import { TranslationObject } from "./i18n.types";
 
 /**
  * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3
@@ -6,29 +6,34 @@ import { TranslationDictionary } from "./i18n.types";
 const OBJECT_NOTATION_MATCHER = /(\w+)/g;
 
 export function get(
-  obj: TranslationDictionary | undefined,
   keypath: string | string[],
+  ...objs: (TranslationObject | undefined)[]
 ) {
-  if (obj == null) return undefined;
-
   const keys = Array.isArray(keypath) ? keypath : getKeypath(keypath);
-  let acc: string | TranslationDictionary = obj;
 
-  for (let i = 0; i < keys.length; i++) {
-    const val = acc[keys[i]];
-    if (val === undefined) {
-      return "";
+  for (const obj of objs) {
+    if (!obj) {
+      continue;
     }
-    acc = val;
+
+    let acc: string | TranslationObject = obj;
+
+    for (let i = 0; i < keys.length; i++) {
+      const val = acc[keys[i]];
+      if (val === undefined) {
+        continue;
+      }
+      acc = val;
+    }
+
+    if (typeof acc === "string") {
+      return acc;
+    }
   }
 
-  if (typeof acc !== "string") {
-    throw new Error(
-      "Error translating key. The keypath does not resolve to a string.",
-    );
-  }
-
-  return acc;
+  throw new Error(
+    "Error translating key. The keypath does not resolve to a string.",
+  );
 }
 
 function getKeypath(str: string) {

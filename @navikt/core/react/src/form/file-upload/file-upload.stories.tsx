@@ -209,6 +209,11 @@ export const Translation = () => (
         file={{ name: "eksempel.png", size: 200000 }}
         status="uploading"
       />
+      <FileUpload.Item
+        file={{ name: "eksempel.png", size: 200000 }}
+        status="uploading"
+        translations={{ uploading: "Sender bilde..." }}
+      />
     </VStack>
   </FileUpload>
 );

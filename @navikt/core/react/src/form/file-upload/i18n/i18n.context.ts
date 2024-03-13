@@ -1,8 +1,11 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext } from "react";
 import { get } from "./get";
-import { ComponentTranslation, TranslationDictionary } from "./i18n.types";
+import {
+  Component,
+  ComponentTranslation,
+  TranslationDictionary,
+} from "./i18n.types";
 import nb from "./locales/nb.json";
-import { merge } from "./merge";
 
 /**
  * https://regex101.com/r/LYKWi3/1
@@ -20,22 +23,26 @@ type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`;
 }[keyof ObjectType & (string | number)];
 
-export function useI18n(local: ComponentTranslation) {
+export function useI18n<T extends Component>(
+  componentName: T,
+  ...local: (ComponentTranslation<T> | undefined)[]
+) {
   const i18n = useContext(I18nContext);
-
-  const translation = useMemo(
-    () => (Array.isArray(i18n) ? merge(...i18n.slice().reverse()) : i18n),
-    [i18n],
-  );
 
   /**
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24
    */
   const translate = (
-    id: NestedKeyOf<typeof nb>,
+    id: NestedKeyOf<(typeof nb)[T]>,
     options?: { replacements: string | number },
   ) => {
-    const text = get(local, id) || get(translation, id);
+    const text = get(
+      id,
+      ...local,
+      ...(Array.isArray(i18n)
+        ? i18n.map((t) => t[componentName])
+        : [i18n[componentName]]),
+    );
 
     if (!text) {
       return "";

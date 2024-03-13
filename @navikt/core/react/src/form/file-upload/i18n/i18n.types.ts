@@ -1,7 +1,11 @@
 import nb from "./locales/nb.json";
 
+export interface TranslationObject {
+  [key: string]: string | TranslationObject | undefined;
+}
+
 export interface TranslationDictionary {
-  [key: string]: string | TranslationDictionary;
+  [key: string]: TranslationObject | undefined;
 }
 
 /* https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescripts */
@@ -9,4 +13,8 @@ type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
-export type ComponentTranslation = RecursivePartial<typeof nb>;
+export type Component = keyof typeof nb;
+
+export type ComponentTranslation<T extends Component> = RecursivePartial<
+  (typeof nb)[T]
+>;
