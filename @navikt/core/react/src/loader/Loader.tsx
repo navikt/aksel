@@ -35,6 +35,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
    * Allows getting a ref to the component instance.
    * Once the component unmounts, React will set `ref.current` to `null` (or call the ref with `null` if you passed a callback ref).
+   *
    * @see https://react.dev/learn/referencing-values-with-refs#refs-and-the-dom
    */
   ref?: React.Ref<SVGSVGElement>;
