@@ -76,6 +76,7 @@ export const Description: Story = {
       description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.`,
+      image: null,
     },
   },
 };
@@ -109,6 +110,7 @@ export const LongDescription: Story = {
         { description: "Lorem ipsum", title: "WCAG" },
         { description: "Lorem ipsum", title: "Testing" },
       ],
+      image: null,
       description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.
