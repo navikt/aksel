@@ -103,7 +103,6 @@ const GpPage = (props: PageProps["props"]) => {
 
   return (
     <>
-      {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title="God praksis"
         description={props.page?.seo?.meta}
