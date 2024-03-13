@@ -3,9 +3,8 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import { AuthUser } from "@/auth/auth.types";
-import { getAuthUser } from "@/auth/getAuthUser";
-import { validateWonderwallToken } from "@/auth/validateWonderwall";
+import { UserStateT } from "@/auth/auth.types";
+import { getAuthUserState } from "@/auth/getUserState";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -39,8 +38,7 @@ type PageProps = NextPageT<{
   publishDate: string;
   verifiedDate: string;
   toc: TableOfContentsT;
-  signedIn: boolean;
-  user: AuthUser | null;
+  userState: UserStateT;
 }>;
 
 export const query = `{
@@ -72,9 +70,10 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
-  const signedIn = await validateWonderwallToken(context.req.headers);
+  const userState = await getAuthUserState(context.req.headers);
+
   const isPreview = context.preview ?? false;
-  const user = getAuthUser(context.req.headers);
+
   const slug = context.params?.slug as string;
 
   const { page } = await getClient().fetch(query, {
@@ -96,8 +95,7 @@ export const getServerSideProps: GetServerSideProps = async (
         content: page?.content,
         type: "aksel_artikkel",
       }),
-      signedIn,
-      user,
+      userState,
     },
     notFound: !page && !isPreview,
   };
@@ -108,8 +106,7 @@ const Page = ({
   publishDate,
   verifiedDate,
   toc,
-  signedIn,
-  user,
+  userState,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
@@ -259,7 +256,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  {signedIn ? <Feedback username={user?.name} /> : <Feedback />}
+                  <Feedback userState={userState} />
                 </div>
               </div>
             </div>

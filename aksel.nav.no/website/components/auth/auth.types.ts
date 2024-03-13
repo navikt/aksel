@@ -18,3 +18,15 @@ export type AuthApiErrorReturn = {
   ok: false;
   error: (typeof AuthApiErrorReturn)[keyof typeof AuthApiErrorReturn];
 };
+
+type LoggedInT = {
+  signedIn: true;
+  user: AuthUser;
+};
+
+type NotLoggedInT = {
+  signedIn: false;
+  user: null;
+};
+
+export type UserStateT = LoggedInT | NotLoggedInT;
