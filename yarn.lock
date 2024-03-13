@@ -4721,7 +4721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:^6.12.4":
+"@sanity/client@npm:^6.12.4, @sanity/client@npm:^6.6.0":
   version: 6.13.3
   resolution: "@sanity/client@npm:6.13.3"
   dependencies:
@@ -4733,7 +4733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/client@npm:^6.13.3, @sanity/client@npm:^6.6.0":
+"@sanity/client@npm:^6.13.3":
   version: 6.14.3
   resolution: "@sanity/client@npm:6.14.3"
   dependencies:
@@ -7532,11 +7532,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:>=18.0.0":
-  version: 20.11.24
-  resolution: "@types/node@npm:20.11.24"
+  version: 20.11.27
+  resolution: "@types/node@npm:20.11.27"
   dependencies:
     undici-types: ~5.26.4
-  checksum: b11a650e09e254f4725c94f226752b69949a9ac4a5e004e98f109437ac50b02df3ab4d12b2086722fedf2cb62e68b9e723abd3f358a7d7d90d741a0d3bee90c2
+  checksum: 24a134a3c18e7261b6d6385c2b7714b6cf93663f30d5df8ca95c649f9cef917a422d77bfd4a18b2c7d190d3a39f445b345ecd9ef6f994e61c7e92f400ecbe80f
   languageName: node
   linkType: hard
 
@@ -18701,8 +18701,8 @@ __metadata:
   linkType: hard
 
 "mdast-util-mdx-jsx@npm:^3.0.0":
-  version: 3.1.1
-  resolution: "mdast-util-mdx-jsx@npm:3.1.1"
+  version: 3.1.0
+  resolution: "mdast-util-mdx-jsx@npm:3.1.0"
   dependencies:
     "@types/estree-jsx": ^1.0.0
     "@types/hast": ^3.0.0
@@ -18717,7 +18717,7 @@ __metadata:
     unist-util-remove-position: ^5.0.0
     unist-util-stringify-position: ^4.0.0
     vfile-message: ^4.0.0
-  checksum: 29cad51f37226babe6a8f4be09b1a0c9653a39a8937a7cfe0a8dd81e7ee7b89da5a608fde7b264e0c0937f4414b5493edc49b6fd2c2048274ca610a3b48e6481
+  checksum: b38636d003cd8ae74a87c933474bc44571606957dea5de065b7fbcc0af6c9159b35ac250a5c6bd331dc2a54acb64985afb32708711763d51c18b0d439fe50694
   languageName: node
   linkType: hard
 
