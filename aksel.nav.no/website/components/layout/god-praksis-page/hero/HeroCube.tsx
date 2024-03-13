@@ -7,13 +7,26 @@ type CubeProps = {
 function Cube({ variant = "light" }: CubeProps) {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-clip">
+      {/* <div className="absolute left-0 top-0 h-05 w-16 -rotate-45 bg-red-500" /> */}
+      {/* <svg className="pointer-events-none absolute left-0 top-0 -z-10">
+        <rect
+          width="100%"
+          height="2"
+          strokeWidth="2"
+          style={{ fill: "red" }}
+          className={cl({
+            "fill-teal-300": variant === "light",
+            "fill-teal-700": variant === "dark",
+          })}
+        />
+      </svg> */}
       <svg
         width="720"
         height="409"
         viewBox="0 0 720 409"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none absolute right-0 top-0 -z-10"
+        className="flip pointer-events-none absolute right-0 top-0 -z-10"
         aria-hidden
       >
         <path
@@ -23,7 +36,27 @@ function Cube({ variant = "light" }: CubeProps) {
           strokeWidth="2"
           className={cl({
             "fill-teal-300": variant === "light",
-            "fill-teal-500": variant === "dark",
+            "fill-teal-700": variant === "dark",
+          })}
+        />
+      </svg>
+      <svg
+        width="720"
+        height="409"
+        viewBox="0 0 720 409"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="flip pointer-events-none absolute -left-96 -top-80 -z-10 rotate-90"
+        aria-hidden
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M 1329.81 -664 M 130.185 -208.034 C 130.977 -208.034 131.737 -207.718 132.297 -207.156 L 878.495 541.364 C 879.662 542.534 879.662 544.432 878.495 545.602 L 132.298 1294.12 C 131.737 1294.68 130.977 1295 130.185 1295 C 129.393 1295 128.633 1294.68 128.073 1294.12 L -618.125 545.602 C -619.292 544.432 -619.292 542.534 -618.125 541.364 L 128.073 -207.156 C 128.633 -207.718 129.393 -208.034 130.185 -208.034 Z M -611.788 543.483 L 130.185 1287.77 L 872.158 543.483 L 130.185 -200.799 L -611.788 543.483 Z"
+          strokeWidth="2"
+          className={cl({
+            "fill-teal-300": variant === "light",
+            "fill-teal-700": variant === "dark",
           })}
         />
       </svg>
