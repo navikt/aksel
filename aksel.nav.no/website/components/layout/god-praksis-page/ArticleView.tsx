@@ -44,7 +44,7 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
         <>
           {[...articlesByUndertema.entries()].map(([ut, utArticles]) => {
             return (
-              <div key={ut.title} aria-label={`Undertema ${ut.title}`}>
+              <section key={ut.title} aria-label={`Undertema ${ut.title}`}>
                 <IntroSection title={ut.title} description={ut.description} />
                 <GpCardGrid>
                   {utArticles.map((article) => (
@@ -61,7 +61,7 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
                     </li>
                   ))}
                 </GpCardGrid>
-              </div>
+              </section>
             );
           })}
         </>
@@ -120,7 +120,7 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
         <>
           {[...filteredMap.entries()].map(([ut, utArticles]) => {
             return (
-              <div key={ut.title} aria-label={`Undertema ${ut.title}`}>
+              <section key={ut.title} aria-label={`Undertema ${ut.title}`}>
                 <IntroSection title={ut.title} description={ut.description} />
                 <GpCardGrid>
                   {utArticles.map((article) => (
@@ -137,7 +137,7 @@ export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
                     </li>
                   ))}
                 </GpCardGrid>
-              </div>
+              </section>
             );
           })}
         </>

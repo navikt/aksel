@@ -6,20 +6,7 @@ type CubeProps = {
 
 function Cube({ variant = "light" }: CubeProps) {
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 overflow-clip">
-      {/* <div className="absolute left-0 top-0 h-05 w-16 -rotate-45 bg-red-500" /> */}
-      {/* <svg className="pointer-events-none absolute left-0 top-0 -z-10">
-        <rect
-          width="100%"
-          height="2"
-          strokeWidth="2"
-          style={{ fill: "red" }}
-          className={cl({
-            "fill-teal-300": variant === "light",
-            "fill-teal-700": variant === "dark",
-          })}
-        />
-      </svg> */}
+    <div className="pointer-events-none absolute inset-0 overflow-clip">
       <svg
         width="720"
         height="409"

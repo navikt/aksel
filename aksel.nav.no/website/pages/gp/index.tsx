@@ -158,7 +158,7 @@ const GpPage = (props: PageProps["props"]) => {
                 </nav>
               </IntroHero>
               <Box paddingInline={{ xs: "4", lg: "10" }}>
-                <VStack gap="10">
+                <VStack gap="12">
                   {props.tema
                     .filter((x) => x.refCount > 0)
                     .map((tema) => {

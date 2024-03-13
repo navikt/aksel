@@ -233,18 +233,20 @@ const Page = ({
                   </>
                 )}
               </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {data.undertema.map(({ title, tema }) => (
-                  <GpTemaLink
-                    key={title}
-                    href={`/gp/${tema.slug}?undertema=${encodeURIComponent(
-                      title,
-                    )}`}
-                  >
-                    {tema.title}
-                  </GpTemaLink>
-                ))}
-              </div>
+              {data.undertema && data.undertema.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {data.undertema.map(({ title, tema }) => (
+                    <GpTemaLink
+                      key={title}
+                      href={`/gp/${tema.slug}?undertema=${encodeURIComponent(
+                        title,
+                      )}`}
+                    >
+                      {tema.title}
+                    </GpTemaLink>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
               <TableOfContents toc={toc} variant="subtle" />

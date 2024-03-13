@@ -131,7 +131,7 @@ const GpPage = (props: PageProps["props"]) => {
               <Box paddingInline={{ xs: "4", lg: "10" }}>
                 <GpChipNavigation articles={articles} />
 
-                <VStack gap="10" className="mt-10">
+                <VStack gap="12" className="mt-10">
                   <ArticleView
                     articles={articles}
                     undertemaList={props.tema.undertema}
