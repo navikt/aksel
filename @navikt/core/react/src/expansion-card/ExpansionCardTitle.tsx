@@ -7,7 +7,7 @@ export interface ExpansionCardTitleProps
   children: React.ReactNode;
   /**
    * Changes text-sizing
-   * @default medium
+   * @default "medium"
    */
   size?: "large" | "medium" | "small";
 }

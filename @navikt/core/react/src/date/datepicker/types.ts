@@ -16,7 +16,7 @@ export type MultipleMode = {
   min?: number;
   max?: number;
   /**
-   * Allows selecting a week at a time. Only used with mode="multiple".
+   * Allows selecting a week at a time. Only used with `mode` is set to "multiple".
    */
   onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
 };
@@ -83,21 +83,22 @@ export interface DatePickerDefaultProps
    */
   showWeekNumber?: boolean;
   /**
-   * Open state for user-controlled state. Component controlled by default
+   * Open state for user-controlled state. Component controlled by default.
    */
   open?: boolean;
   /**
-   * onClose callback for user-controlled state
+   * onClose callback for user-controlled state.
    */
   onClose?: () => void;
   /**
-   * onOpenToggle callback for user-controlled state. Only called if `<DatePicker.Input />` is used
+   * onOpenToggle callback for user-controlled state. Only called if `<DatePicker.Input />` is used.
    */
   onOpenToggle?: () => void;
   /**
-   * Avoid using if possible!
+   * **Avoid using if possible!**
+   *
    * Changes what CSS position property to use.
-   * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
+   * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape.
    * @default See Popover
    */
   strategy?: "absolute" | "fixed";

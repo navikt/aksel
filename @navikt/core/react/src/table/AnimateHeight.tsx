@@ -51,7 +51,7 @@ interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   duration?: number;
   /**
-   * @default ease
+   * @default "ease"
    */
   easing?: string;
   height: Height;

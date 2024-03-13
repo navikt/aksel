@@ -15,4 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 98,
+  desc: "Readonly-attributtet gjør at verdien ikke kan endres, men brukere vil fortsatt kunne markere og kopiere fra feltet. Til forskjell fra disabled-felter vil brukere også kunne tabbe til det, og feltet vil inkluderes når skjemaet sendes inn.",
 };

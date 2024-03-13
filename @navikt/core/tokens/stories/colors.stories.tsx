@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 /**
- * @note No need to create single Chromatic-story since we want to keep global and semantic colors separated
+ * No need to create single Chromatic-story since we want to keep global and semantic colors separated.
  */
 
 const ColorGroups = ({ prefix }: { prefix: string }) => (
