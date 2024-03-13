@@ -113,7 +113,13 @@ const GpPage = (props: PageProps["props"]) => {
         className="bg-surface-subtle"
       >
         <Header variant="subtle" />
-        <Box paddingBlock="10">
+        <Box
+          paddingBlock="10"
+          as="main"
+          tabIndex={-1}
+          id="hovedinnhold"
+          className="focus:outline-none"
+        >
           <Page.Block width="xl" gutters>
             <VStack gap="10">
               <TemaHero tema={props.tema} heroNav={props.heroNav} />
