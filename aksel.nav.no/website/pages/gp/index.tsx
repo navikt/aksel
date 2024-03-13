@@ -162,7 +162,10 @@ const GpPage = (props: PageProps["props"]) => {
                     .filter((x) => x.refCount > 0)
                     .map((tema) => {
                       return (
-                        <div key={tema.slug}>
+                        <section
+                          key={tema.slug}
+                          aria-label={`Tema ${tema.title}`}
+                        >
                           <Link
                             href={`/gp/${tema.slug}`}
                             as={NextLink}
@@ -220,7 +223,7 @@ const GpPage = (props: PageProps["props"]) => {
                           >
                             Se alle
                           </Link>
-                        </div>
+                        </section>
                       );
                     })}
                 </VStack>

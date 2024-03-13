@@ -40,7 +40,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
     setOpen(true);
 
     /**
-     * Since the dialog is not rendered until the next tick,
+     * Since the dialog is not rendered until the next cycle,
      * we need to wait for display: none to be removed before.
      */
     setTimeout(() => {

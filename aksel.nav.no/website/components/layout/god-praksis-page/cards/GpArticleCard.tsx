@@ -25,7 +25,7 @@ function GpArticleCard({
   publishedAt,
 }: GpArticleCardProps) {
   return (
-    <div className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-5">
+    <article className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-5">
       <Link
         href={`/${href}`}
         className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
@@ -39,7 +39,7 @@ function GpArticleCard({
         </Heading>
       </Link>
       {publishedAt && (
-        <Detail as="span" textColor="subtle" uppercase>
+        <Detail as="time" textColor="subtle" uppercase>
           {publishedAt}
         </Detail>
       )}
@@ -72,7 +72,7 @@ function GpArticleCard({
         </div>
         <ChevronRightIcon aria-hidden fontSize="1.5rem" />
       </div>
-    </div>
+    </article>
   );
 }
 

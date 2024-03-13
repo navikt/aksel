@@ -21,6 +21,7 @@ export const HeroSelectButton = forwardRef<
       aria-expanded={expanded}
       ref={ref}
       aria-hidden={hidden}
+      tabIndex={hidden ? -1 : 0}
     >
       Tema
       <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />
