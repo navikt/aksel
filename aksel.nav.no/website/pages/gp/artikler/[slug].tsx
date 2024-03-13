@@ -51,6 +51,7 @@ const query = `{
       ${destructureBlocks}
     },
     tema[]->{title, slug, seo},
+
     ${contributorsAll},
     relevante_artikler[]->{
       _id,
@@ -66,6 +67,13 @@ const query = `{
     }
   }
 }`;
+
+/**
+ * TODO:
+ *  - hente ut innholdstype og tema fra artikkel som skal vises som chips i toppen
+ */
+/* "tema": undertema[]->tema->title,
+    "innholdstype": innholdstype->title */
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

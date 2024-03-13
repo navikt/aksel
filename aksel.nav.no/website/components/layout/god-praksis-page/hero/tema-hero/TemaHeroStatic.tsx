@@ -72,7 +72,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="relative bg-gradient-to-tr from-teal-400 via-teal-200 via-60% to-teal-200 ring-1 ring-inset ring-teal-400 transition-[margin] duration-500"
+      className="relative bg-gradient-to-tr from-teal-400 to-teal-200 ring-1 ring-inset ring-teal-400 transition-[margin] duration-500"
       style={{
         marginBottom: getMargin(),
         transitionTimingFunction: open
