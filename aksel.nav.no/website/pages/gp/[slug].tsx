@@ -36,7 +36,8 @@ const sanityQuery = groq`
     "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
       title,
       description
-    }
+    },
+    "image": pictogram,
   },
   "heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
       && (^._id in undertema[]->tema._ref)]) > 0]{

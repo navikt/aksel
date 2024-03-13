@@ -97,6 +97,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
         title={tema?.title}
         description={tema?.description}
         hidden={open}
+        image={tema?.image}
       />
 
       <Box

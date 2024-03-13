@@ -6,6 +6,7 @@ export type GpTemaT = {
   slug: string;
   description?: string;
   undertema: { title: string; description: string }[];
+  image: object | null;
 };
 
 /**
@@ -29,6 +30,7 @@ export type GpSlugQueryResponse = {
     description?: string;
     undertema: { title: string; description: string }[];
     seo?: ArticleT["seo"];
+    image: any;
   };
   heroNav: {
     title: string;
