@@ -11,34 +11,15 @@ type GpHeroCardProps = {
   articleCount?: number;
   image: any;
   compact?: boolean;
-  onInverted?: boolean;
 } & HTMLAttributes<HTMLAnchorElement>;
 
 const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
-  (
-    {
-      href,
-      articleCount,
-      children,
-      image,
-      compact = false,
-      onInverted = false,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ href, articleCount, children, image, compact = false, ...rest }, ref) => {
     return (
       <Link
         ref={ref}
         href={`/${href}`}
-        className={cl(
-          "group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small md:gap-3 md:py-3 md:pl-3 md:pr-6",
-          {
-            "focus-visible:outline-offset-2 focus-visible:outline-border-focus-on-inverted":
-              onInverted,
-            "focus-visible:shadow-focus": !onInverted,
-          },
-        )}
+        className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:gap-3 md:py-3 md:pl-3 md:pr-6"
         {...rest}
       >
         <div

@@ -166,24 +166,16 @@ const GpPage = (props: PageProps["props"]) => {
                           key={tema.slug}
                           aria-label={`Tema ${tema.title}`}
                         >
-                          <Link
-                            href={`/gp/${tema.slug}`}
-                            as={NextLink}
+                          <Heading
+                            level="2"
+                            size="medium"
                             className={cl("text-aksel-heading", {
                               "mb-4": !tema.description,
                               "mb-2 ": !!tema.description,
                             })}
-                            onClick={(e) =>
-                              amplitudeLogNavigation(
-                                "link",
-                                e.currentTarget.getAttribute("href"),
-                              )
-                            }
                           >
-                            <Heading level="2" size="medium">
-                              {tema.title}
-                            </Heading>
-                          </Link>
+                            {tema.title}
+                          </Heading>
                           {tema.description && (
                             <BodyLong className="mb-6">
                               {tema.description}

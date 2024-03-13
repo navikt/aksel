@@ -93,6 +93,10 @@ module.exports = {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
+        fadeUp: {
+          "0%": { opacity: 1, transform: "translateY(1rem)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
         toc: {
           "0%": { opacity: 0.2 },
           "100%": { opacity: 1 },
@@ -101,6 +105,7 @@ module.exports = {
       animation: {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         toc: "toc 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
+        fadeUp: "fadeUp 0.600s cubic-bezier(0, 0.3, 0.15, 1)",
       },
     },
   },

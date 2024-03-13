@@ -16,6 +16,9 @@ import { NextPageT } from "@/types";
 import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 
+/**
+ * TODO sort section by abc
+ */
 const sanityQuery = groq`
 {
   "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
@@ -118,7 +121,7 @@ const GpPage = (props: PageProps["props"]) => {
           as="main"
           tabIndex={-1}
           id="hovedinnhold"
-          className="focus:outline-none"
+          className="animate-fadeUp focus:outline-none"
         >
           <Page.Block width="xl" gutters>
             <VStack gap="10">

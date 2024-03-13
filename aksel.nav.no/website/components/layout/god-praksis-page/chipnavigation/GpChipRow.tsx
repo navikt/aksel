@@ -3,10 +3,9 @@ import omit from "lodash/omit";
 import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
-import { HGrid, Label } from "@navikt/ds-react";
+import { Label } from "@navikt/ds-react";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
-import ScrollFade from "./ScrollFade";
 
 export type ChipsRenderData = { title: string; count: number }[];
 
@@ -33,16 +32,13 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   };
 
   return (
-    <HGrid
-      gap="2"
-      columns={{ md: 1, lg: "auto 1fr" }}
-      align="center"
+    <div
       /* TODO: After release of new GP structure this could be removed since all articles will required proper data, thus always having chips */
       className="hidden has-[.chiplist]:grid"
     >
       <Label
         as="span"
-        className={cl("flex items-center gap-2 text-aksel-heading", {
+        className={cl("flex items-center gap-1 text-aksel-heading", {
           "text-violet-600": type === "innholdstype",
           "text-teal-700": type === "undertema",
         })}
@@ -52,12 +48,8 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
         {capitalize(type)}
       </Label>
 
-      <div className="relative overflow-hidden scroll-smooth">
-        <ScrollFade id={id} />
-        <ul
-          id={id}
-          className={cl("flex gap-2 overflow-x-scroll p-1", styles.chips)}
-        >
+      <div className="relative mt-2">
+        <ul id={id} className={cl("flex flex-wrap gap-2 p-1", styles.chips)}>
           {entries
             .filter((entry) => entry[0] !== "null")
             .map(([entryName, count]) => {
@@ -87,6 +79,6 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
             })}
         </ul>
       </div>
-    </HGrid>
+    </div>
   );
 }

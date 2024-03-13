@@ -72,7 +72,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className="relative bg-gradient-to-tr from-deepblue-200 via-deepblue-100 to-deepblue-100 transition-[margin] duration-500"
+      className="relative bg-gradient-to-tr from-teal-400 via-teal-200 via-60% to-teal-200 ring-1 ring-inset ring-teal-400 transition-[margin] duration-500"
       style={{
         marginBottom: getMargin(),
         transitionTimingFunction: open
@@ -101,13 +101,11 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
         paddingInline={{ xs: "8", lg: "14" }}
         paddingBlock="10 6"
         className={cl(
-          "absolute inset-0 z-20",
+          "absolute inset-0 z-20 bg-gradient-to-tr from-teal-700 via-teal-600 to-teal-600 ring-1 ring-inset ring-teal-700",
           styles.heroSelector,
           {
             hidden: !open,
           },
-          "after:absolute after:inset-0 after:rounded-large after:bg-deepblue-700/70",
-          "before:absolute before:inset-0 before:-z-10 before:rounded-large before:bg-gradient-to-br before:from-deepblue-700 before:via-blue-500 before:to-violet-700",
         )}
         shadow="medium"
         style={inlineStyles}
@@ -127,6 +125,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
         >
           <XMarkIcon title="Lukk temavelger" fontSize="1.5rem" />
         </button>
+
         <BodyShort
           size="large"
           className="relative z-10 py-1 text-text-on-inverted"
@@ -140,7 +139,6 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}
-          onInverted
         />
       </Box>
     </Box>
