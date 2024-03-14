@@ -45,7 +45,7 @@ jobs:
       - name: Upload static files to NAV CDN
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          team: aksel
+          team: designsystem
           source: ./aksel.nav.no/website/.next/static
           destination: "/website/_next"
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
