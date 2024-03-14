@@ -80,11 +80,13 @@ jobs:
 
       - name: Upload updated icon.zip to NAV CDN
         if: steps.changesets.outputs.published == 'true'
-        uses: navikt/frontend/actions/cdn-upload/v1@main
+        uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          cdn-team-name: aksel
+          team: aksel
           source: ./@navikt/aksel-icons/aksel-icons.zip
           destination: "/icons/zip"
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Get @navikt/ds-css version
         run: |
@@ -94,8 +96,10 @@ jobs:
 
       - name: Upload CSS to NAV CDN
         if: steps.changesets.outputs.published == 'true'
-        uses: navikt/frontend/actions/cdn-upload/v1@main
+        uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          cdn-team-name: aksel
+          team: aksel
           source: ./@navikt/core/css/dist/version/${{env.version}}
           destination: "@navikt/ds-css"
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
