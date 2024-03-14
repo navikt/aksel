@@ -1,5 +1,6 @@
 import Image from "next/legacy/image";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { urlFor } from "@/sanity/interface";
 
 type HeroIntroProps = {
@@ -19,8 +20,8 @@ export function HeroIntro({
   return (
     <div className="relative z-10 mt-4" aria-hidden={hidden}>
       <div className="flex items-center gap-3">
-        {image && (
-          <div className="relative my-auto size-8 shrink-0 md:size-12">
+        <div className="relative my-auto size-8 shrink-0 md:size-12">
+          {image ? (
             <Image
               src={urlFor(image).auto("format").url()}
               decoding="sync"
@@ -29,8 +30,10 @@ export function HeroIntro({
               aria-hidden
               priority
             />
-          </div>
-        )}
+          ) : (
+            <FallbackPictogram />
+          )}
+        </div>
         <Heading level="1" size="xlarge" className="z-10">
           {title}
         </Heading>

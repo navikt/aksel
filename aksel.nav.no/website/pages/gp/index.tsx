@@ -135,7 +135,7 @@ const GpPage = (props: PageProps["props"]) => {
                 )}
                 <nav aria-label="Temavelger">
                   <Stack
-                    className="mt-10"
+                    className="mt-6"
                     gap={{ xs: "4", md: "6" }}
                     wrap
                     direction={{ xs: "column", md: "row" }}

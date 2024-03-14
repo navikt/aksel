@@ -100,7 +100,8 @@ const GpPage = (props: PageProps["props"]) => {
             undertema: undertema ?? "",
           } satisfies ParsedGPArticle;
         })
-        .filter((article) => !!article.undertema),
+        .filter((article) => !!article.undertema)
+        .sort((a, b) => a.undertema.localeCompare(b.undertema)),
     [props.articles, props.tema.title],
   );
 
