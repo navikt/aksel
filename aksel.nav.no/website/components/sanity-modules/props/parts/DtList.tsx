@@ -43,7 +43,7 @@ export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
       {prop.type && (
         <li className="my-3 flex flex-col px-3 text-base md:flex-row">
           <div className="min-w-24 font-semibold">Type: </div>
-          <code className="mt-05 text-sm">
+          <code className="mt-05 break-all text-sm">
             {Highlighter({ type: prop.type })}
           </code>
         </li>
