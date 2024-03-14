@@ -35,13 +35,6 @@ const requestBodySchema = z.object({
   }),
 });
 
-/* const demoBody = {
-  feedback: "Dette er en test",
-  anon: true,
-  document_id:
-    "d0b2ca93-433b-4fcc-ab3c-c9c7d4dec186"
-}; */
-
 const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
@@ -108,6 +101,8 @@ async function sendSlackbotFeedback(
     response
       .status(400)
       .json(responseJson(false, SlackFeedbackError.InvalidId));
+
+    return;
   }
 
   const slackMembers = await fetchSlackMembers();
@@ -145,6 +140,9 @@ async function sendSlackbotFeedback(
 
   let postMessageError = false;
 
+  /* TODO: Sende timestamp + user + melding + antall som fikk meldingen til lukket slack-kanal */
+  /* Fikk melding === 0, tag designsystem */
+  /* TODO: Fjernet muligheten til å være anonym */
   for (const editor of slackProfileForEditors) {
     if (!editor.id) {
       continue;
@@ -227,7 +225,8 @@ function slackBlock({
       type: "header",
       text: {
         type: "plain_text",
-        text: "Innspill til Aksel-artikkel",
+        /* TODO: Endre melding basert på om du er editor eller temakontakt */
+        text: "Innspill til Aksel-artikkel du har medvirket til",
         emoji: true,
       },
     },

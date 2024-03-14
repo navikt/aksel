@@ -83,7 +83,9 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
             ...feedbackMetadata,
           });
         }
-      });
+      })
+      /* TODO: catch */
+      .catch();
   };
 
   if (state === "feedbackSent") {
@@ -118,7 +120,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
         </style>
         <IntroSection
           heading="Innspill til artikkelen"
-          description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til folka som har lagd artikkelen 🙌"
+          description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til team Aksel og folka som har lagd artikkelen 🙌"
         />
         <VStack gap="4">
           <HStack gap="2">
