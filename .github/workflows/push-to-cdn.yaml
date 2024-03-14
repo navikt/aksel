@@ -20,11 +20,13 @@ jobs:
       - uses: "actions/checkout@v3"
 
       - id: upload
-        uses: navikt/frontend/actions/cdn-upload/v1@main
+        uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          cdn-team-name: aksel
+          team: aksel
           source: ./fonts
           destination: "" # uploads folder to team root
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
         shell: bash
