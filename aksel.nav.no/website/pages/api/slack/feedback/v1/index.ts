@@ -26,9 +26,6 @@ const requestBodySchema = z.object({
         maxFeedbackLength,
         `Message-string cannot be longer than ${maxFeedbackLength} characters`,
       ),
-    anon: z.boolean({
-      required_error: "Anonymity-boolean is required",
-    }),
     document_id: z.string({
       required_error: "Document-id is required",
     }),
@@ -159,7 +156,6 @@ async function sendSlackbotFeedback(
           },
         },
         blocks: slackBlock({
-          isAnonymous: validation.data.body.anon,
           article: {
             id: document.id,
             slug: document.slug,
@@ -182,6 +178,8 @@ async function sendSlackbotFeedback(
       });
   }
 
+  // C06P3E0P5FH TEST channel
+
   if (postMessageError) {
     response
       .status(400)
@@ -203,21 +201,14 @@ function responseJson(
 }
 
 type SlackBlockT = {
-  isAnonymous: boolean;
   feedback: string;
   article: { slug: string; title: string; id: string };
   recievers: string[];
   sender: { email: string; slackName?: string; slackId?: string };
 };
 
-function slackBlock({
-  isAnonymous,
-  feedback,
-  article,
-  recievers,
-  sender,
-}: SlackBlockT) {
-  const senderName = isAnonymous ? "Anonym tilbakemelding" : sender.email;
+function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
+  const senderName = sender.email;
   const useSlackId = !!(sender.slackName && sender.slackId);
 
   return [

@@ -5,7 +5,6 @@ import {
   BodyShort,
   Box,
   Button,
-  Checkbox,
   HGrid,
   HStack,
   Heading,
@@ -37,7 +36,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
     const formData = new FormData(event.currentTarget);
     const feedback = (formData.get("feedback") as string) || "";
     setFeedbackCache(feedback);
-    const anon = formData.get("anon") === "on";
 
     if (!feedback) {
       setError("Feltet kan ikke være tomt.");
@@ -49,7 +47,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
     }
 
     const body = JSON.stringify({
-      anon,
       feedback: feedback.slice(0, 500) || "",
       document_id: sanityDocumentId,
     });
@@ -65,7 +62,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
       .then((res: SlackFeedbackResponse) => {
         const feedbackMetadata = {
           side: window.location.pathname,
-          anonym: anon,
           length: feedback.length,
         };
         if (!res.ok) {
@@ -139,7 +135,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
               )
             </BodyShort>
           </HStack>
-          <Checkbox name="anon">Skjul navnet mitt</Checkbox>
           <Textarea
             name="feedback"
             label="Innspill"
