@@ -40,6 +40,7 @@ async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
+  logger.info("Received slackbot feedback request");
   const user = getAuthUser(request.headers);
 
   /**
@@ -128,18 +129,45 @@ async function sendSlackbotFeedback(
     .map((email: string) => findUserByEmail(email, slackMembers.members))
     .filter(Boolean) as Exclude<UsersListResponse["members"], undefined>;
 
-  if (slackProfileForEditors.length === 0) {
-    response
-      .status(200)
-      .json(responseJson(false, SlackFeedbackError.NoEditors));
-    return;
-  }
-
   let postMessageError = false;
 
-  /* TODO: Sende timestamp + user + melding + antall som fikk meldingen til lukket slack-kanal */
-  /* Fikk melding === 0, tag designsystem */
-  /* TODO: Fjernet muligheten til å være anonym */
+  await client.chat
+    .postMessage({
+      channel: "C06P3E0P5FH",
+      text: `Tilbakemelding: ${validation.data.body.feedback}`,
+      blocks: [
+        ...slackBlock({
+          article: {
+            id: document.id,
+            slug: document.slug,
+            title: document.title,
+          },
+          feedback: validation.data.body.feedback,
+          recievers: slackProfileForEditors
+            .map((x) => x.id)
+            .filter(Boolean) as string[],
+          sender: {
+            email: user.email,
+            slackName: senderSlackUser?.profile?.display_name,
+            slackId: senderSlackUser?.id,
+          },
+        }),
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
+          },
+        },
+      ],
+    })
+    .catch((e) => {
+      postMessageError = true;
+      logger.error(
+        `Error when sending slackbot feedback to private channel: ${e}`,
+      );
+    });
+
   for (const editor of slackProfileForEditors) {
     if (!editor.id) {
       continue;
@@ -148,13 +176,6 @@ async function sendSlackbotFeedback(
       .postMessage({
         channel: editor.id,
         text: `Tilbakemelding: ${validation.data.body.feedback}`,
-        metadata: {
-          event_type: "aksel_article_feedback",
-          event_payload: {
-            name: user.name,
-            email: user.email,
-          },
-        },
         blocks: slackBlock({
           article: {
             id: document.id,
@@ -177,8 +198,6 @@ async function sendSlackbotFeedback(
         logger.error(`Error when sending slackbot feedback: ${e}`);
       });
   }
-
-  // C06P3E0P5FH TEST channel
 
   if (postMessageError) {
     response
