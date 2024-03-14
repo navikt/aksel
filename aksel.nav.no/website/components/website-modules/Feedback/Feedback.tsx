@@ -80,8 +80,15 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
           });
         }
       })
-      /* TODO: catch */
-      .catch();
+      .catch(() => {
+        setErrorId("unknownError");
+        setState("error");
+        amplitude.track(AmplitudeEvents.slackfeedback, {
+          result: "error",
+          side: window.location.pathname,
+          length: feedback.length,
+        });
+      });
   };
 
   if (state === "feedbackSent") {
