@@ -106,14 +106,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
   if (state === "loggedIn") {
     return (
       <form onSubmit={handleSubmit}>
-        {/* vet ikke hvorfor dette kreves her?... noe rarte med styling av Textarea som skjer her? */}
-        <style>
-          {`
-          .navds-textarea__input {
-            margin-bottom: var(--a-spacing-2);
-          }
-        `}
-        </style>
         <IntroSection
           heading="Innspill til artikkelen"
           description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til team Aksel og folka som har lagd artikkelen 🙌"
@@ -138,7 +130,6 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
           <Textarea
             name="feedback"
             label="Innspill"
-            className="justify-items-stretch"
             minRows={4}
             maxLength={500}
             error={error}
