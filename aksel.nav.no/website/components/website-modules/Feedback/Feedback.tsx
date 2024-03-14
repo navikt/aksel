@@ -102,7 +102,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
 
         <Button
           onClick={() => setState("loggedIn")}
-          className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          className="bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
         >
           Nytt innspill
         </Button>
@@ -119,7 +119,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
         />
         <VStack gap="4">
           <HStack gap="2">
-            <PersonIcon fontSize="1.5rem" />
+            <PersonIcon aria-hidden fontSize="1.5rem" />
             <BodyShort>{user.name}</BodyShort>
             <BodyShort>
               (
@@ -150,7 +150,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
         </VStack>
         <Button
           type="submit"
-          className="mt-4 h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          className="mt-4 bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
         >
           Send inn
         </Button>
@@ -209,7 +209,7 @@ function IntroSection({
       <Heading level="2" id="innspill-form" size="small" className="mb-1">
         {heading}
       </Heading>
-      <BodyLong className="mb-6">{description}</BodyLong>
+      <BodyLong className="mb-4">{description}</BodyLong>
     </>
   );
 }
@@ -239,7 +239,7 @@ export const Feedback = ({ userState }: Props) => {
             />
             <Button
               onClick={() => login("#innspill-form")}
-              className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+              className="bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
             >
               Logg inn med NAV SSO
             </Button>
@@ -247,6 +247,7 @@ export const Feedback = ({ userState }: Props) => {
         )}
         <div className="responsive-svg relative translate-x-[-0.2rem] translate-y-[0.7rem]">
           <svg
+            aria-hidden
             width="1em"
             height="1em"
             viewBox="0 0 24 24"
