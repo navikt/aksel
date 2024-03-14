@@ -19,7 +19,7 @@ const PropTable = ({ komponent }: PropTableProps) => {
         {komponent?.title ? komponent.title : "Props"}
       </Heading>
 
-      <div className="toc-ignore relative mb-8">
+      <div className="toc-ignore relative mb-8 break-all">
         {komponent?.propref?.proplist?.length === 0 && (
           <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
