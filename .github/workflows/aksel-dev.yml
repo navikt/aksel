@@ -49,8 +49,8 @@ jobs:
           team: designsystem
           source: ./aksel.nav.no/website/.next/static
           destination: "/website/_next"
-          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Get complete tag
         run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
