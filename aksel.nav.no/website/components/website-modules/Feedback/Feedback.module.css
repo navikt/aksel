@@ -19,8 +19,4 @@
   .responsive_square {
     transform: translate(0.95rem, -1rem);
   }
-
-  .responsive_inbox {
-    /* transform: translate(1rem, 1rem); */
-  }
 }

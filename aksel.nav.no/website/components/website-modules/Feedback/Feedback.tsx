@@ -259,7 +259,7 @@ export const Feedback = ({ userState }: Props) => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={`${styles.responsive} ${styles.responsive_square}`} //responsive-svg absolute translate-x-[0.8rem] translate-y-[-0.8rem] scale-110
+            className={`${styles.responsive} ${styles.responsive_square}`}
           >
             <rect
               x="0"
