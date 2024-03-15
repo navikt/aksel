@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/test";
 import { AkselTheme } from "@/sb-util";
 import { Feedback, FeedbackForm } from "./Feedback";
 
@@ -28,18 +29,25 @@ export const WithName: Story = {
   },
 };
 
-export const FormPublic = {
-  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
-};
+export const InteractionStates = {
+  render: () => {
+    return <FeedbackForm user={{ email: "email", name: "name" }} />;
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-export const FormSent = {
-  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
-};
+    const input = canvas.getByLabelText("Innspill");
 
-export const FormLoggedIn = {
-  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
-};
+    await userEvent.click(input);
+    await userEvent.type(input, "e".repeat(500) + "!");
 
-export const FormError = {
-  render: () => <FeedbackForm user={{ email: "email", name: "name" }} />,
+    const submit = canvas.getByText("Send inn");
+    await userEvent.click(submit);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    await userEvent.click(input);
+    await userEvent.keyboard("{backspace}");
+    await userEvent.click(submit);
+  },
 };
