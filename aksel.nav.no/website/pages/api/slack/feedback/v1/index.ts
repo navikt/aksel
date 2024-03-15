@@ -151,13 +151,18 @@ async function sendSlackbotFeedback(
             slackId: senderSlackUser?.id,
           },
         }),
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
-          },
-        },
+        ...(slackProfileForEditors.length === 0
+          ? [
+              {
+                type: "section",
+                // @ts-expect-error might be fixed in future TS version? should be a good type
+                text: {
+                  type: "mrkdwn",
+                  text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
+                },
+              },
+            ]
+          : []),
       ],
     })
     .catch((e) => {
