@@ -4,7 +4,9 @@ export const useAuth = () => {
   const router = useRouter();
 
   const login = async (anchor = "") => {
-    router.push(`/oauth2/login?redirect=${router.asPath}${anchor}`, undefined, {
+    console.log({ anchor });
+    const redirect = encodeURIComponent(router.asPath + anchor);
+    router.push(`/oauth2/login?redirect=${redirect}`, undefined, {
       shallow: true,
     });
   };
