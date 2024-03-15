@@ -1,4 +1,3 @@
-import { UsersListResponse } from "@slack/web-api";
 import { AuthApiErrorReturn } from "@/auth/auth.types";
 
 export type SlackFeedbackInput = {
@@ -42,9 +41,14 @@ export type SlackFeedbackResponse =
   | SlackFeedbackErrorResponse
   | AuthApiErrorReturn;
 
+export type SanitizedUser = {
+  id: string;
+  email: string;
+};
+
 export type FetchSlackMembersSuccess = {
   ok: true;
-  members: Exclude<UsersListResponse["members"], undefined>;
+  members: SanitizedUser[];
 };
 
 export type FetchSlackMembersError = {

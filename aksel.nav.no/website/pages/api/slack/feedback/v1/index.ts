@@ -148,7 +148,6 @@ async function sendSlackbotFeedback(
             .filter(Boolean) as string[],
           sender: {
             email: user.email,
-            slackName: senderSlackUser?.profile?.display_name,
             slackId: senderSlackUser?.id,
           },
         }),
@@ -188,7 +187,6 @@ async function sendSlackbotFeedback(
             .filter(Boolean) as string[],
           sender: {
             email: user.email,
-            slackName: senderSlackUser?.profile?.display_name,
             slackId: senderSlackUser?.id,
           },
         }),
@@ -223,13 +221,10 @@ type SlackBlockT = {
   feedback: string;
   article: { slug: string; title: string; id: string };
   recievers: string[];
-  sender: { email: string; slackName?: string; slackId?: string };
+  sender: { email: string; slackId?: string };
 };
 
 function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
-  const senderName = sender.email;
-  const useSlackId = !!(sender.slackName && sender.slackId);
-
   return [
     {
       type: "header",
@@ -272,9 +267,9 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
               },
             },
             {
-              ...(useSlackId
+              ...(sender.slackId
                 ? { type: "user", user_id: sender.slackId }
-                : { type: "text", text: senderName }),
+                : { type: "text", text: sender.email }),
             },
             {
               type: "text",

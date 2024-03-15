@@ -1,10 +1,5 @@
-import { UsersListResponse } from "@slack/web-api";
+import { SanitizedUser } from "./slack.types";
 
-export function findUserByEmail(
-  email: string,
-  members: UsersListResponse["members"],
-) {
-  return members?.find(
-    (m) => m.profile?.email?.toLowerCase() === email.toLowerCase(),
-  );
+export function findUserByEmail(email: string, members: SanitizedUser[]) {
+  return members?.find((m) => m.email?.toLowerCase() === email.toLowerCase());
 }

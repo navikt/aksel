@@ -3,6 +3,7 @@ import NodeCache from "node-cache";
 import {
   FetchSlackMembersError,
   FetchSlackMembersSuccess,
+  SanitizedUser,
 } from "./slack.types";
 
 const cache = new NodeCache();
@@ -70,19 +71,25 @@ export async function fetchSlackMembers(): Promise<
   /**
    * Lets filter out som unwanted users to simplify the list
    */
-  members = members
+  const subset_members = members
     .filter((m) => !m.is_bot)
     .filter((m) => !m.deleted)
-    .filter((m) => !!m.is_email_confirmed);
+    .filter((m) => m.is_email_confirmed)
+    .filter((m) => m.profile?.email)
+    .filter((m) => m.id)
+    .map((m) => ({
+      id: m.id,
+      email: m.profile?.email,
+    })) as SanitizedUser[]; // TODO: perhaps not needed with newer TS version
 
-  if (members.length === 0) {
+  if (subset_members.length === 0) {
     return { ok: false, error: "No members found" };
   }
 
-  cache.set(CACHE_KEY, members, 60 * 60 * 24);
+  cache.set(CACHE_KEY, subset_members, 60 * 60 * 24);
 
   return {
     ok: true,
-    members,
+    members: subset_members,
   };
 }
