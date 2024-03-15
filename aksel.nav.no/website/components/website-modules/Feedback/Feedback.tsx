@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
+  Alert,
   BodyLong,
   BodyShort,
   Box,
@@ -19,30 +20,29 @@ import { AmplitudeEvents, amplitude } from "@/logging";
 import { SlackFeedbackResponse } from "@/slack";
 import styles from "./Feedback.module.css";
 
-type States = "feedbackSent" | "loggedIn" | "error";
+type States = "feedbackSent" | "loggedIn" | "error" | "submittingForm";
 
 export const FeedbackForm = ({ user }: { user: AuthUser }) => {
   const [state, setState] = useState<States>("loggedIn");
-  const [errorId, setErrorId] = useState<null | string>(null);
+  const [APIError, setAPIError] = useState<null | string>(null);
 
   const sanityDocumentId = useSanityData()?.id;
   const { logout } = useAuth();
-  const [feedbackCache, setFeedbackCache] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setState("loggedIn");
 
     const formData = new FormData(event.currentTarget);
     const feedback = (formData.get("feedback") as string) || "";
-    setFeedbackCache(feedback);
 
     if (!feedback) {
-      setError("Feltet kan ikke være tomt.");
+      setFormError("Feltet kan ikke være tomt.");
       return;
     }
     if (feedback.length > 500) {
-      setError("Tilbakemeldingen må være under 500 tegn.");
+      setFormError("Tilbakemeldingen må være under 500 tegn.");
       return;
     }
 
@@ -51,6 +51,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
       document_id: sanityDocumentId,
     });
 
+    setState("submittingForm");
     fetch("/api/slack/feedback/v1", {
       method: "POST",
       headers: {
@@ -65,14 +66,14 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
           length: feedback.length,
         };
         if (!res.ok) {
-          setErrorId(res.error);
+          setAPIError(res.error);
           setState("error");
           amplitude.track(AmplitudeEvents.slackfeedback, {
             result: "error",
             ...feedbackMetadata,
           });
         } else {
-          setError(null);
+          setFormError(null);
           setState("feedbackSent");
           amplitude.track(AmplitudeEvents.slackfeedback, {
             result: "success",
@@ -81,7 +82,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
         }
       })
       .catch(() => {
-        setErrorId("unknownError");
+        setAPIError("unknownError");
         setState("error");
         amplitude.track(AmplitudeEvents.slackfeedback, {
           result: "error",
@@ -110,91 +111,69 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
     );
   }
 
-  if (state === "loggedIn") {
-    return (
-      <form onSubmit={handleSubmit}>
-        <IntroSection
-          heading="Innspill til artikkelen"
-          description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til team Aksel og folka som har lagd artikkelen 🙌"
+  return (
+    <form onSubmit={handleSubmit}>
+      <IntroSection
+        heading="Innspill til artikkelen"
+        description="Har du innspill til artikkelen? Meldingen blir sendt med Slack til team Aksel og folka som har lagd artikkelen 🙌"
+      />
+      <VStack gap="4">
+        <HStack gap="2">
+          <PersonIcon aria-hidden fontSize="1.5rem" />
+          <BodyShort>{user.name}</BodyShort>
+          <BodyShort>
+            (
+            <Link
+              onClick={() => {
+                logout();
+              }}
+              href="#"
+            >
+              logg ut
+            </Link>
+            )
+          </BodyShort>
+        </HStack>
+        <Textarea
+          name="feedback"
+          label="Innspill"
+          minRows={4}
+          maxLength={500}
+          error={formError}
+          onInput={(element) => {
+            if (element.currentTarget.value.length > 500) {
+              return;
+            }
+            setFormError(null);
+          }}
         />
-        <VStack gap="4">
-          <HStack gap="2">
-            <PersonIcon aria-hidden fontSize="1.5rem" />
-            <BodyShort>{user.name}</BodyShort>
-            <BodyShort>
-              (
-              <Link
-                onClick={() => {
-                  logout();
-                }}
-                href="#"
-              >
-                logg ut
-              </Link>
-              )
-            </BodyShort>
-          </HStack>
-          <Textarea
-            name="feedback"
-            label="Innspill"
-            minRows={4}
-            maxLength={500}
-            error={error}
-            onInput={(element) => {
-              if (element.currentTarget.value.length > 500) {
-                return;
-              }
-              setError(null);
-            }}
-          />
-        </VStack>
-        <Button
-          type="submit"
-          className="mt-4 bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
-        >
-          Send inn
-        </Button>
-      </form>
-    );
-  }
-
-  if (state === "error") {
-    return (
-      <div>
-        <IntroSection
-          heading="Noe gikk galt!"
-          description="Det skjedde en feil under innsending av tilbakemelding."
-        />
-
-        <Heading level="3" size="xsmall" className="mb-1">
-          Tilbakemelding
-        </Heading>
-        {feedbackCache && (
-          <BodyLong
-            spacing
-            className="border-l-2 border-l-border-subtle p-2 pl-4"
-          >
-            {feedbackCache}
-          </BodyLong>
+      </VStack>
+      <Button
+        type="submit"
+        loading={state === "submittingForm"}
+        className="mt-4 bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
+      >
+        Send inn
+      </Button>
+      <>
+        {state === "error" && (
+          <Alert variant="error" className="mt-4" role="alert">
+            Noe gikk galt! Hvis feilen oppstår flere ganger eller du har lyst
+            til å sende tilbakemeldingen direkte finner du oss under{" "}
+            <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
+              #aksel-designsystemet
+            </Link>{" "}
+            på slack.
+            <BodyShort
+              textColor="subtle"
+              size="small"
+              className="mt-3"
+            >{`Feil-id: ${APIError}`}</BodyShort>
+          </Alert>
         )}
-
-        <BodyLong>
-          Hvis feilen oppstår flere ganger eller du har lyst til å sende
-          tilbakemeldingen direkte finner du oss under{" "}
-          <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
-            #aksel-designsystemet
-          </Link>{" "}
-          på slack.
-        </BodyLong>
-        <BodyShort
-          textColor="subtle"
-          size="small"
-          className="mt-3"
-        >{`Feil-id: ${errorId}`}</BodyShort>
-      </div>
-    );
-  }
-  return null;
+      </>
+    </form>
+  );
 };
 
 function IntroSection({
