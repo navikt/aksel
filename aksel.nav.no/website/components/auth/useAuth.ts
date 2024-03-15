@@ -4,17 +4,10 @@ export const useAuth = () => {
   const router = useRouter();
 
   const login = async (anchor = "") => {
-    const redirect = router.asPath + anchor;
-    router.push(
-      {
-        pathname: `/oauth2/login`,
-        query: { redirect },
-      },
-      undefined,
-      {
-        shallow: true,
-      },
-    );
+    const redirect = router.asPath + encodeURIComponent(anchor);
+    router.push(`/oauth2/login?redirect=${redirect}`, undefined, {
+      shallow: true,
+    });
   };
 
   const logout = async () => {
