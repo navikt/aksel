@@ -1,13 +1,17 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export const useAuth = (loginRedirectId?: string) => {
-  const router = useRouter();
+  const { replace, push, query, asPath } = useRouter();
 
   const login = async () => {
-    router.push(
+    push(
       {
-        pathname: `/oauth2/login?redirect=${router.asPath}`,
-        query: { scrollToFeedback: loginRedirectId ? true : undefined },
+        pathname: `/oauth2/login`,
+        query: {
+          redirect: asPath,
+          scrollToFeedback: loginRedirectId ? true : undefined,
+        },
       },
       undefined,
       {
@@ -17,17 +21,19 @@ export const useAuth = (loginRedirectId?: string) => {
   };
 
   const logout = async () => {
-    router.push(`/oauth2/logout?redirect=${router.asPath}`, undefined, {
+    push(`/oauth2/logout?redirect=${asPath}`, undefined, {
       shallow: true,
     });
   };
 
-  if (loginRedirectId && router.query?.scrollToFeedback) {
-    const query = router.query;
-    delete query.scrollToFeedback;
-    router.replace({ query }, undefined, { shallow: true });
-    document.getElementById(loginRedirectId)?.focus();
-  }
+  useEffect(() => {
+    if (!loginRedirectId || !query.scrollToFeedback) return;
+    const _query = { ...query };
+    delete _query.scrollToFeedback;
+    replace({ query: _query }, undefined, { shallow: true });
+    const item = document.getElementById(loginRedirectId);
+    item?.focus();
+  }, [loginRedirectId, query, replace]);
 
   return { login, logout };
 };

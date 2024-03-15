@@ -185,7 +185,13 @@ function IntroSection({
 }) {
   return (
     <>
-      <Heading level="2" id="innspill-form" size="small" className="mb-1">
+      <Heading
+        level="2"
+        tabIndex={-1}
+        id="innspill-form"
+        size="small"
+        className="mb-1 focus:outline-none"
+      >
         {heading}
       </Heading>
       <BodyLong className="mb-4">{description}</BodyLong>
