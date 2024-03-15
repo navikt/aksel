@@ -1,16 +1,19 @@
 import { useRouter } from "next/router";
 
-export const useAuth = () => {
+export const useAuth = (loginRedirectId?: string) => {
   const router = useRouter();
 
-  // Currently you have to manually urlencode the fragment with `%23`
-  // or you'll for some reason get `#%23` in the url (two fragments?)
-  const login = async (anchor = "") => {
-    const redirect = router.asPath + anchor;
-    console.log({ redirect, asPath: router.asPath, anchor });
-    router.push(`/oauth2/login?redirect=${redirect}`, undefined, {
-      shallow: true,
-    });
+  const login = async () => {
+    router.push(
+      {
+        pathname: `/oauth2/login?redirect=${router.asPath}`,
+        query: { scrollToFeedback: loginRedirectId ? true : undefined },
+      },
+      undefined,
+      {
+        shallow: true,
+      },
+    );
   };
 
   const logout = async () => {
@@ -18,6 +21,13 @@ export const useAuth = () => {
       shallow: true,
     });
   };
+
+  if (loginRedirectId && router.query?.scrollToFeedback) {
+    const query = router.query;
+    delete query.scrollToFeedback;
+    router.replace({ query }, undefined, { shallow: true });
+    document.getElementById(loginRedirectId)?.focus();
+  }
 
   return { login, logout };
 };

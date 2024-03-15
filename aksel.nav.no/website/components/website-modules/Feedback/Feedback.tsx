@@ -198,7 +198,7 @@ type Props = {
 };
 
 export const Feedback = ({ userState }: Props) => {
-  const { login } = useAuth();
+  const { login } = useAuth("innspill-form");
 
   return (
     <Box
@@ -217,7 +217,7 @@ export const Feedback = ({ userState }: Props) => {
               description="Logg inn med NAV SSO for å gi innspill til artikkelen"
             />
             <Button
-              onClick={() => login("innspill-form")}
+              onClick={() => login()}
               className="bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
             >
               Logg inn med NAV SSO
