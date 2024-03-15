@@ -48,13 +48,7 @@ async function sendSlackbotFeedback(
    * This should in theory no be possible since api is behind `authProtectedApi`
    */
   if (!user) {
-    logger.error(
-      `Error with getAuthUser in slackbot feedback. This should not happend since we are using authProtectedApi`,
-    );
-    response
-      .status(400)
-      .json(responseJson(false, SlackFeedbackError.InvalidUser));
-    return;
+    return errorResponse(response, SlackFeedbackError.InvalidUser);
   }
 
   /**
@@ -64,14 +58,7 @@ async function sendSlackbotFeedback(
     body: request.body,
   });
   if (validation.success === false) {
-    logger.error(
-      `Error when validating slackbot feedback: ${validation.error}`,
-    );
-    response
-      .status(400)
-      .json(responseJson(false, SlackFeedbackError.InvalidBody));
-
-    return;
+    return errorResponse(response, SlackFeedbackError.InvalidBody);
   }
 
   /**
@@ -93,25 +80,12 @@ async function sendSlackbotFeedback(
    * If no document is found, sanity will return `null`
    */
   if (!document) {
-    logger.error(
-      `Error when fetching sanity document for slackbot feedback: ${validation.data.body.document_id}`,
-    );
-    response
-      .status(400)
-      .json(responseJson(false, SlackFeedbackError.InvalidId));
-
-    return;
+    return errorResponse(response, SlackFeedbackError.InvalidId);
   }
 
   const slackMembers = await fetchSlackMembers();
   if (slackMembers.ok === false) {
-    logger.error(
-      `Error extracting members from slack in slackbot feedback: ${slackMembers.error}`,
-    );
-    response
-      .status(400)
-      .json(responseJson(false, SlackFeedbackError.NoSlackUsers));
-    return;
+    return errorResponse(response, SlackFeedbackError.NoSlackUsers);
   }
 
   /**
@@ -203,13 +177,28 @@ async function sendSlackbotFeedback(
   }
 
   if (postMessageError) {
-    response
-      .status(400)
-      .json(responseJson(false, SlackFeedbackError.PostMessageError));
+    return errorResponse(response, SlackFeedbackError.PostMessageError);
   }
 
   response.status(200).json(responseJson(true));
   return;
+}
+
+const ErrorMap = {
+  [SlackFeedbackError.InvalidUser]: `Error with getAuthUser in slackbot feedback. This should not happend since we are using authProtectedApi`,
+  [SlackFeedbackError.InvalidBody]: `Error with validation of body in slackbot feedback`,
+  [SlackFeedbackError.InvalidId]: `Error when fetching sanity document for slackbot feedback`,
+  [SlackFeedbackError.NoSlackUsers]: `Error extracting members from slack in slackbot feedback`,
+  [SlackFeedbackError.PostMessageError]: `Error when sending slackbot feedback to private channel or user in slackbot feedback`,
+};
+
+function errorResponse(
+  response: NextApiResponse,
+  error: keyof typeof ErrorMap,
+) {
+  logger.error(ErrorMap[error]);
+
+  response.status(400).json(responseJson(false, error));
 }
 
 function responseJson(

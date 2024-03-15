@@ -217,7 +217,7 @@ export const Feedback = ({ userState }: Props) => {
               description="Logg inn med NAV SSO for å gi innspill til artikkelen"
             />
             <Button
-              onClick={() => login("%23innspill-form")}
+              onClick={() => login("innspill-form")}
               className="bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
             >
               Logg inn med NAV SSO
