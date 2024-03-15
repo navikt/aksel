@@ -6,7 +6,7 @@ type CubeProps = {
 
 function Cube({ variant = "light" }: CubeProps) {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-clip">
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-clip">
       <svg
         width="720"
         height="409"
