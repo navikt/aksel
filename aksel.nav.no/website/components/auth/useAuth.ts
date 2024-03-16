@@ -5,13 +5,9 @@ export const useAuth = (addRedirect?: boolean) => {
 
   const login = async () => {
     push(
-      {
-        pathname: `/oauth2/login`,
-        query: {
-          redirect: asPath,
-          scrollToFeedback: addRedirect ? true : undefined,
-        },
-      },
+      `/oauth2/login?redirect=${asPath}${
+        addRedirect ? "scrollToFeedback=true" : ""
+      }`,
       undefined,
       {
         shallow: true,
