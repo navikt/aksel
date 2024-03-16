@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
-export const useAuth = (loginRedirectId?: string) => {
-  const { replace, push, query, asPath } = useRouter();
+export const useAuth = (addRedirect?: boolean) => {
+  const { push, asPath } = useRouter();
 
   const login = async () => {
     push(
@@ -10,7 +9,7 @@ export const useAuth = (loginRedirectId?: string) => {
         pathname: `/oauth2/login`,
         query: {
           redirect: asPath,
-          scrollToFeedback: loginRedirectId ? true : undefined,
+          scrollToFeedback: addRedirect ? true : undefined,
         },
       },
       undefined,
@@ -25,15 +24,6 @@ export const useAuth = (loginRedirectId?: string) => {
       shallow: true,
     });
   };
-
-  useEffect(() => {
-    if (!loginRedirectId || !query.scrollToFeedback) return;
-    const _query = { ...query };
-    delete _query.scrollToFeedback;
-    replace({ query: _query }, undefined, { shallow: true });
-    const item = document.getElementById(loginRedirectId);
-    item?.focus();
-  }, [loginRedirectId, query, replace]);
 
   return { login, logout };
 };

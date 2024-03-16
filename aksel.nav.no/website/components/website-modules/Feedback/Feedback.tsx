@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
   Alert,
@@ -204,7 +205,18 @@ type Props = {
 };
 
 export const Feedback = ({ userState }: Props) => {
-  const { login } = useAuth("innspill-form");
+  const { login } = useAuth(true);
+
+  const { query, replace } = useRouter();
+
+  useEffect(() => {
+    if (!query.scrollToFeedback) return;
+    const _query = { ...query };
+    delete _query.scrollToFeedback;
+    replace({ query: _query }, undefined, { shallow: true });
+    const item = document.getElementById("innspill-form");
+    item?.focus();
+  }, [query, replace]);
 
   return (
     <Box
