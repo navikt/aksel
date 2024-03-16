@@ -184,6 +184,18 @@ function IntroSection({
   heading: string;
   description: string;
 }) {
+  const [headingRef, setHeadingRef] = useState<HTMLHeadingElement | null>(null);
+  const { query, replace } = useRouter();
+
+  useEffect(() => {
+    if (!query.scrollToFeedback || !headingRef) return;
+    const _query = { ...query };
+    delete _query.scrollToFeedback;
+    replace({ query: _query }, undefined, { shallow: true });
+
+    headingRef.focus();
+  }, [query, replace, headingRef]);
+
   return (
     <>
       <Heading
@@ -192,6 +204,7 @@ function IntroSection({
         id="innspill-form"
         size="small"
         className="mb-1 focus:outline-none"
+        ref={setHeadingRef}
       >
         {heading}
       </Heading>
@@ -206,17 +219,6 @@ type Props = {
 
 export const Feedback = ({ userState }: Props) => {
   const { login } = useAuth(true);
-
-  const { query, replace } = useRouter();
-
-  useEffect(() => {
-    if (!query.scrollToFeedback) return;
-    const _query = { ...query };
-    delete _query.scrollToFeedback;
-    replace({ query: _query }, undefined, { shallow: true });
-    const item = document.getElementById("innspill-form");
-    item?.focus();
-  }, [query, replace]);
 
   return (
     <Box
