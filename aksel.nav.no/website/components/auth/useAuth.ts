@@ -5,7 +5,7 @@ export const useAuth = (addRedirect?: boolean) => {
 
   const login = async () => {
     push(
-      `/oauth2/login?redirect=${asPath}${
+      `/oauth2/login?redirect=${asPath.split("#")[0]}${
         addRedirect ? encodeURIComponent("#scrollToFeedback") : ""
       }`,
       undefined,

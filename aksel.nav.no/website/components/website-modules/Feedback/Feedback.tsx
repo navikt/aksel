@@ -201,7 +201,7 @@ function IntroSection({
       <Heading
         level="2"
         tabIndex={-1}
-        id="innspill-form"
+        id="scrollToFeedback"
         size="small"
         className="mb-1 focus:outline-none"
         ref={setHeadingRef}
