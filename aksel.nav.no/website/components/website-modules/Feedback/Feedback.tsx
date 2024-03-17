@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { InboxDownIcon, PersonIcon } from "@navikt/aksel-icons";
 import {
   Alert,
@@ -184,17 +183,18 @@ function IntroSection({
   heading: string;
   description: string;
 }) {
-  const [headingRef, setHeadingRef] = useState<HTMLHeadingElement | null>(null);
-  const { query, replace } = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setHeadingRef] = useState<HTMLHeadingElement | null>(null);
+  /*   const { query, replace } = useRouter(); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!query.scrollToFeedback || !headingRef) return;
     const _query = { ...query };
     delete _query.scrollToFeedback;
     replace({ query: _query }, undefined, { shallow: true });
 
     headingRef.focus();
-  }, [query, replace, headingRef]);
+  }, [query, replace, headingRef]); */
 
   return (
     <>
