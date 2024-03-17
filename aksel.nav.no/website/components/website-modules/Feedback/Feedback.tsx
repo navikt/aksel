@@ -183,19 +183,6 @@ function IntroSection({
   heading: string;
   description: string;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setHeadingRef] = useState<HTMLHeadingElement | null>(null);
-  /*   const { query, replace } = useRouter(); */
-
-  /* useEffect(() => {
-    if (!query.scrollToFeedback || !headingRef) return;
-    const _query = { ...query };
-    delete _query.scrollToFeedback;
-    replace({ query: _query }, undefined, { shallow: true });
-
-    headingRef.focus();
-  }, [query, replace, headingRef]); */
-
   return (
     <>
       <Heading
@@ -204,7 +191,6 @@ function IntroSection({
         id="scrollToFeedback"
         size="small"
         className="mb-1 focus:outline-none"
-        ref={setHeadingRef}
       >
         {heading}
       </Heading>
