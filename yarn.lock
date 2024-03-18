@@ -4686,7 +4686,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/block-tools@npm:3.34.0, @sanity/block-tools@npm:^3.29.1":
+"@sanity/block-tools@npm:3.34.0":
   version: 3.34.0
   resolution: "@sanity/block-tools@npm:3.34.0"
   dependencies:
@@ -4885,7 +4885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/icons@npm:^2.0.0, @sanity/icons@npm:^2.11.0, @sanity/icons@npm:^2.11.2, @sanity/icons@npm:^2.2.2, @sanity/icons@npm:^2.4.1, @sanity/icons@npm:^2.8.0":
+"@sanity/icons@npm:^2.0.0, @sanity/icons@npm:^2.11.0, @sanity/icons@npm:^2.11.2, @sanity/icons@npm:^2.2.2, @sanity/icons@npm:^2.4.1":
   version: 2.11.2
   resolution: "@sanity/icons@npm:2.11.2"
   peerDependencies:
@@ -5065,7 +5065,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/schema@npm:3.34.0, @sanity/schema@npm:^3.29.1":
+"@sanity/schema@npm:3.34.0":
   version: 3.34.0
   resolution: "@sanity/schema@npm:3.34.0"
   dependencies:
@@ -5138,7 +5138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^2.0.1, @sanity/ui@npm:^2.0.10":
+"@sanity/ui@npm:^2.0.10":
   version: 2.0.10
   resolution: "@sanity/ui@npm:2.0.10"
   dependencies:
@@ -5180,23 +5180,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/vision@npm:3.29.1":
-  version: 3.29.1
-  resolution: "@sanity/vision@npm:3.29.1"
+"@sanity/vision@npm:3.34.0":
+  version: 3.34.0
+  resolution: "@sanity/vision@npm:3.34.0"
   dependencies:
     "@codemirror/autocomplete": ^6.1.0
     "@codemirror/commands": ^6.0.1
     "@codemirror/lang-javascript": ^6.0.2
     "@codemirror/language": ^6.2.1
     "@codemirror/search": ^6.0.1
+    "@codemirror/state": ^6.0.0
     "@codemirror/view": ^6.1.1
     "@juggle/resize-observer": ^3.3.1
     "@lezer/highlight": ^1.0.0
     "@rexxars/react-json-inspector": ^8.0.1
     "@rexxars/react-split-pane": ^0.1.93
     "@sanity/color": ^3.0.0
-    "@sanity/icons": ^2.8.0
-    "@sanity/ui": ^2.0.1
+    "@sanity/icons": ^2.11.0
+    "@sanity/ui": ^2.0.10
     "@uiw/react-codemirror": ^4.11.4
     hashlru: ^2.3.0
     is-hotkey: ^0.2.0
@@ -5205,7 +5206,7 @@ __metadata:
   peerDependencies:
     react: ^18
     styled-components: ^5.2 || ^6
-  checksum: 68d512f8b564aea39c880a3e4adc8b1036df866f288fefd9b7754cf4feb70630ea11806c00fa340cf7a6834c55246fbf8994fd82241790132a93e9305ec39c82
+  checksum: 90ac67274da4568f54e0de2e1b7b1716a65e49113be0aee840067464dbcc4e4ed0555c64017fb32a82eba372ed2c7151c6d7f99ab4591e58307f749b13914299
   languageName: node
   linkType: hard
 
@@ -28485,15 +28486,15 @@ __metadata:
     "@next/eslint-plugin-next": 14.1.1-canary.57
     "@playwright/test": 1.35.1
     "@portabletext/react": ^3.0.11
-    "@sanity/block-tools": ^3.29.1
+    "@sanity/block-tools": 3.34.0
     "@sanity/client": ^6.13.3
     "@sanity/code-input": 4.1.2
     "@sanity/color-input": ^3.1.0
     "@sanity/image-url": 1.0.2
     "@sanity/locale-nb-no": ^1.1.0
-    "@sanity/schema": ^3.29.1
+    "@sanity/schema": 3.34.0
     "@sanity/table": 1.1.2
-    "@sanity/vision": 3.29.1
+    "@sanity/vision": 3.34.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     autoprefixer: ^10.4.0
