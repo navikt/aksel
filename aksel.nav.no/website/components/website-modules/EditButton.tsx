@@ -4,7 +4,7 @@ import { useSanityData } from "@/hooks/useSanityData";
 function EditButton() {
   const sanityCtx = useSanityData();
 
-  return sanityCtx.validUser && sanityCtx?.id ? (
+  return sanityCtx?.validUser && sanityCtx?.id ? (
     <a
       href={`https://aksel.nav.no/admin/prod/intent/edit/id=${sanityCtx?.id}`}
       target="_blank"

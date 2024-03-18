@@ -2,13 +2,12 @@ import { useContext } from "react";
 import { Heading, Label } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
 import { searchOptions } from "@/types";
-import { SearchContext, SearchResultContext } from "../providers";
+import { SearchContext, useSearchResult } from "../providers";
 import { Collection, CollectionMapper } from "./HitCollection";
 
 export const Results = () => {
   const { tags, query } = useContext(SearchContext);
-  const { results, isValidating, error, mostResent } =
-    useContext(SearchResultContext);
+  const { results, isValidating, error, mostResent } = useSearchResult();
 
   if (isValidating || error) {
     return null;
@@ -49,7 +48,7 @@ export const Results = () => {
           )}
         </Heading>
       )}
-      {results?.totalHits > 0 && (
+      {results && results?.totalHits > 0 && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
           <Label as="p" className="sr-only" aria-live="polite">
             {`${results?.totalHits} treff på "${results.query}"${

@@ -63,7 +63,7 @@ function ArticleList({ initialArticles }: ArticleListT) {
         : getKey({
             input: {
               pageIndex: pageIndex + GP_LAZYLOADED_ARTICLES,
-              previousPageData,
+              previousPageData: previousPageData ?? [],
             },
             innholdstypeQuery,
             undertemaQuery,
@@ -82,7 +82,7 @@ function ArticleList({ initialArticles }: ArticleListT) {
     <div>
       <ArticleGrid
         initialData={initialArticles}
-        data={[].concat(...data)}
+        data={data.flat()}
         loaded={router.isReady}
       />
       {!atEndOfLazy && initialArticles.length === 9 && router.isReady && (

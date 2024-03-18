@@ -8,15 +8,15 @@ export const SIZES = ["medium", "small"] as const;
 
 export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Children of type <Chat.Bubble />
+   * Children of type `<Chat.Bubble />`.
    */
   children: React.ReactNode;
   /**
-   * Chat-message name
+   * Chat-message name.
    */
   name?: string;
   /**
-   * Timestamp for sent message
+   * Timestamp for sent message.
    */
   timestamp?: string;
   /**
@@ -30,17 +30,17 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   variant?: "subtle" | "info" | "neutral";
   /**
-   * Positions avatar and bubbles
+   * Positions avatar and bubbles.
    * @default "left"
    */
   position?: (typeof POSITIONS)[number];
   /**
-   * Hoizontal position of toptext
+   * Horizontal position of toptext.
    * @default Same as position
    */
   toptextPosition?: (typeof POSITIONS)[number];
   /**
-   * Affects padding and font size in bubbles
+   * Affects padding and font size in bubbles.
    * @default "medium"
    */
   size?: (typeof SIZES)[number];

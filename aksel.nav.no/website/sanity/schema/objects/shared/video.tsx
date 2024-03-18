@@ -10,10 +10,11 @@ const sanityClient = createClient({
 
 const query = groq`*[_id == $id][0]{size}`;
 
-const validateFileSize = (maxSizeInMb: number) => (file: FileValue) => {
-  if (!file) {
+const validateFileSize = (maxSizeInMb: number, file?: FileValue) => {
+  if (!file || !file.asset?._ref) {
     return true;
   }
+
   return sanityClient
     .fetch(query, { id: file.asset._ref })
     .then((res) =>
@@ -39,7 +40,8 @@ export const Video = defineType({
       options: {
         accept: "video/webm",
       },
-      validation: (Rule) => Rule.required().custom(validateFileSize(30)),
+      validation: (Rule) =>
+        Rule.required().custom((file) => validateFileSize(30, file)),
     }),
     defineField({
       name: "fallback",
@@ -49,7 +51,7 @@ export const Video = defineType({
       options: {
         accept: "video/mp4",
       },
-      validation: (Rule) => Rule.custom(validateFileSize(60)),
+      validation: (Rule) => Rule.custom((file) => validateFileSize(60, file)),
     }),
     defineField({
       name: "track",

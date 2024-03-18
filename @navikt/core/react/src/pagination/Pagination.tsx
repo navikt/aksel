@@ -9,8 +9,9 @@ import PaginationItem, {
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
-   * Current page
-   * @note Pagination indexing starts at 1
+   * Current page.
+   *
+   * Pagination indexing starts at 1.
    */
   page: number;
   /**

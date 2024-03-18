@@ -12,7 +12,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   as?: "div" | "body";
   /**
    * Background color. Accepts a color token.
-   * @default bg-default
+   * @default "bg-default"
    */
   background?: keyof typeof bgColors.a | "surface-subtle";
   /**
@@ -25,7 +25,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   footerPosition?: "belowFold";
   /**
    * Adds a standardised padding of 4rem between content and footer
-   * @default block-end
+   * @default "end"
    */
   contentBlockPadding?: "end" | "none";
 }

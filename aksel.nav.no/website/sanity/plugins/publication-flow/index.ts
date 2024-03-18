@@ -74,7 +74,7 @@ export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
         } else if (hasPublishedAt.some((e) => e === schemaType)) {
           return withCustomPublishAction(prev);
         } else if (schemaType === "aksel_feedback") {
-          return currentUser.roles.find((x) => x.name === "developer")
+          return currentUser?.roles.find((x) => x.name === "developer")
             ? prev
             : [prev[0]];
         }

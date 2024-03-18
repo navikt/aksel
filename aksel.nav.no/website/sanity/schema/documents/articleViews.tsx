@@ -6,7 +6,7 @@ export const ArticleViews = defineType({
   name: "article_views",
   type: "document",
   readOnly: ({ currentUser }) =>
-    !currentUser.roles.find((x) => x.name === "developer"),
+    !currentUser?.roles.find((x) => x.name === "developer"),
   preview: {
     select: {
       title: "article_ref.heading",

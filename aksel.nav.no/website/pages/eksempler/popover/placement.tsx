@@ -3,7 +3,7 @@ import { BodyLong, Heading, Popover, Select } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [anchor, setAnchor] = useState<HTMLSelectElement>(null);
+  const [anchor, setAnchor] = useState<HTMLSelectElement | null>(null);
   const [placement, setPlacement] = useState<Option>(options[0]);
 
   return (

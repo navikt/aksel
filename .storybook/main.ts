@@ -4,10 +4,7 @@ import turbosnap from "vite-plugin-turbosnap";
 export default {
   staticDirs: ["./public"],
 
-  stories: () => [
-    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "./*.stories.mdx",
-  ],
+  stories: () => ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)", "./*.mdx"],
   addons: [
     "@storybook/addon-a11y",
     "@xfinx/storybook-addon-html",
@@ -34,9 +31,6 @@ export default {
   framework: {
     name: "@storybook/react-vite",
     options: {},
-  },
-  features: {
-    storyStoreV7: true,
   },
   docs: {
     autodocs: "tag",

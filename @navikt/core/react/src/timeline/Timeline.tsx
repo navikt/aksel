@@ -20,13 +20,15 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Decides startingpoint in timeline.
    * Defaults to earliest date among the timeline periods.
-   * @note Using this disables use of ZoomButtons. You will need to control zooming yourself.
+   *
+   * Using this disables use of ZoomButtons. You will need to control zooming yourself.
    */
   startDate?: Date;
   /**
    * Decides end-date for timeline.
    * Defaults to the latest date among the timeline periods.
-   * @note Using this disables use of ZoomButtons. You will need to control zooming yourself.
+   *
+   * Using this disables use of ZoomButtons. You will need to control zooming yourself.
    */
   endDate?: Date;
   /**
@@ -63,7 +65,8 @@ interface TimelineComponent
 
 /**
  * A component that displays a timeline of events. Meant for Internal systems.
- * @note Component is made for desktop enviroments and will start having issues on smaller screens.
+ *
+ * Component is made for desktop enviroments and will start having issues on smaller screens.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/timeline)
  * @see 🏷️ {@link TimelineProps}

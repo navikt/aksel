@@ -11,17 +11,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve git history
+
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
+          cache: yarn
+      - name: set-env for yarn install to @navikt scope
+        shell: bash
+        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-build-
       - name: Install dependencies
         run: cd aksel.nav.no/website && yarn
 

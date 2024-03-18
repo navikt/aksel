@@ -15,10 +15,13 @@ export const getColorString = (s: string) => {
 
 export const getGlobalReference = (
   semanticValue: string,
-): { name: string; value: string } => {
+): { name: string; value: string | number } | null => {
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))
-    .reduce((acc, [, value]) => [...acc, ...value], []);
+    .reduce(
+      (acc, [, value]) => [...acc, ...value],
+      [] as { name: string; value: string | number }[],
+    );
 
   return (
     globalRefs.find(

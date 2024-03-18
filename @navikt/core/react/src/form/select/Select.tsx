@@ -8,27 +8,27 @@ import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SelectProps
   extends FormFieldProps,
-    Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
+    Omit<SelectHTMLAttributes<HTMLSelectElement>, "size" | "multiple"> {
   /**
-   * Collection of <option />-elements
+   * Collection of <option />-elements.
    */
   children: React.ReactNode;
   /**
-   * Exposes the HTML size attribute
+   * Exposes the HTML size attribute.
    */
   htmlSize?: number;
   /**
-   * Label for select
+   * Sets inline-style on select wrapper.
+   */
+  style?: React.CSSProperties;
+  /**
+   * Label for select.
    */
   label: React.ReactNode;
   /**
-   * If enabled shows the label and description for screenreaders only
+   * Shows label and description for screenreaders only.
    */
   hideLabel?: boolean;
-  /**
-   * Sets inline-style on select wrapper
-   */
-  style?: React.CSSProperties;
 }
 
 /**

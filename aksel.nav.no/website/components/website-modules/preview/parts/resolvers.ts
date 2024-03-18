@@ -10,7 +10,7 @@ export function runResolvers({
   resolvers,
   data,
 }: {
-  resolvers: ResolverT;
+  resolvers?: ResolverT | null;
   data: any;
 }) {
   if (!resolvers) {
