@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useId } from "react";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { Label } from "@navikt/ds-react";
+import { GpChip } from "@/layout/god-praksis-page/chipnavigation/GpChip";
 import { safeString } from "@/layout/god-praksis-page/useGpViews";
 import { capitalize } from "@/utils";
 import styles from "./Chips.module.css";
@@ -20,14 +21,15 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
 
   const { query, replace } = useRouter();
 
-  const handleClick = async (titleRaw: string) => {
-    /* const title = encodeURIComponent(titleRaw); */
-    console.log({ query: query[type], encoded: titleRaw });
+  const reset = async () => {
+    replace({ query: omit(query, [type]) }, undefined, {
+      shallow: true,
+    });
+  };
 
+  const handleClick = async (titleRaw: string) => {
     query[type] === titleRaw
-      ? replace({ query: omit(query, [type]) }, undefined, {
-          shallow: true,
-        })
+      ? reset()
       : replace({ query: { ...query, [type]: titleRaw } }, undefined, {
           shallow: true,
         });
@@ -39,7 +41,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
       className="hidden has-[.chiplist]:grid"
     >
       <Label
-        as="span"
+        as="h2"
         className={cl("flex items-center gap-1 text-aksel-heading", {
           "text-violet-600": type === "innholdstype",
           "text-teal-700": type === "undertema",
@@ -52,28 +54,25 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
 
       <div className="relative mt-2">
         <ul id={id} className={cl("flex flex-wrap gap-2 p-1", styles.chips)}>
+          <GpChip
+            type={type}
+            disabled={false}
+            onClick={reset}
+            pressed={!safeString(query?.[type])}
+          >
+            {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
+          </GpChip>
           {entries
             .filter((entry) => entry[0] !== "null")
             .map(([entryName, count]) => {
               return (
                 <li key={entryName} className="chiplist">
-                  <button
-                    aria-pressed={entryName === safeString(query?.[type])}
-                    onClick={() => handleClick(entryName)}
-                    className={cl(
-                      "grid min-h-8 place-content-center whitespace-nowrap rounded-full bg-surface-neutral-subtle px-3 py-1 ring-1 ring-inset transition-opacity focus:outline-none focus-visible:shadow-focus-gap aria-pressed:text-text-on-inverted",
-                      "disabled:bg-surface-neutral-subtle disabled:opacity-40 disabled:ring-border-default",
-                      {
-                        "ring-violet-700/50 hover:bg-violet-50 aria-pressed:bg-violet-700 hover:aria-pressed:bg-violet-800":
-                          type === "innholdstype",
-                        "ring-teal-700/50 hover:bg-teal-50 aria-pressed:bg-teal-700 hover:aria-pressed:bg-teal-800":
-                          true,
-                      },
-                    )}
+                  <GpChip
+                    type={type}
                     disabled={count === 0}
-                  >
-                    {`${entryName} (${count})`}
-                  </button>
+                    onClick={() => handleClick(entryName)}
+                    pressed={entryName === safeString(query?.[type])}
+                  >{`${entryName} (${count})`}</GpChip>
                 </li>
               );
             })}

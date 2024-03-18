@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { useState } from "react";
-import { Box, Modal } from "@navikt/ds-react";
+import { Box, Heading, Modal } from "@navikt/ds-react";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
 import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
@@ -17,7 +17,10 @@ export function TemaHeroModal({ tema, heroNav }: GpTemaHeroModalProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock="10 6"
-      className={cl("relative transition-[height]", styles.heroGradient)}
+      className={cl(
+        "relative ring-1 ring-teal-400 transition-[height]",
+        styles.heroGradient,
+      )}
     >
       <Cube />
 
@@ -27,13 +30,17 @@ export function TemaHeroModal({ tema, heroNav }: GpTemaHeroModalProps) {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        header={{ heading: "Tema", closeButton: true }}
         className="bg-surface-subtle"
         width="small"
+        aria-label="Velg tema"
       >
+        <Cube variant="muted" />
+        <Modal.Header closeButton className="z-10">
+          <Heading level="1" size="medium">
+            Tema
+          </Heading>
+        </Modal.Header>
         <Box paddingInline="8" paddingBlock="0 6">
-          <Cube variant="light" />
-
           <HeroList
             currentSlug={tema?.slug}
             heroNav={heroNav}

@@ -143,6 +143,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}
+          onInvertedBg
         />
       </Box>
     </Box>

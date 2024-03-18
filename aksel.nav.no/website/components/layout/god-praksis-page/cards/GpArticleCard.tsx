@@ -22,7 +22,7 @@ function GpArticleCard({
   publishedAt,
 }: GpArticleCardProps) {
   return (
-    <article className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-4">
+    <div className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-4">
       <Link
         href={`/${href}`}
         className="peer after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
@@ -70,7 +70,7 @@ function GpArticleCard({
 
         <AnimatedChevron />
       </div>
-    </article>
+    </div>
   );
 }
 
