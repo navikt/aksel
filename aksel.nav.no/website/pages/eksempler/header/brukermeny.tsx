@@ -1,3 +1,4 @@
+import { LeaveIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
   Detail,
@@ -28,7 +29,9 @@ const Example = () => {
             </dl>
             <Dropdown.Menu.Divider />
             <Dropdown.Menu.List>
-              <Dropdown.Menu.List.Item>Logg ut</Dropdown.Menu.List.Item>
+              <Dropdown.Menu.List.Item>
+                Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
+              </Dropdown.Menu.List.Item>
             </Dropdown.Menu.List>
           </Dropdown.Menu>
         </Dropdown>

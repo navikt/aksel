@@ -2,6 +2,7 @@
   Order matters; rearrange with care
 */
 @import "fieldset.css";
+@import "file-upload.css";
 @import "form.css";
 @import "error-summary.css";
 @import "confirmation-panel.css";

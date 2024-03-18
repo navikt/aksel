@@ -2,10 +2,12 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import {
   ChevronDownIcon,
+  CogIcon,
   ExternalLinkIcon,
+  LeaveIcon,
   MenuGridIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Spacer } from "@navikt/ds-react";
 import { Dropdown } from "../dropdown";
 import InternalHeader from "./InternalHeader";
 
@@ -102,10 +104,11 @@ export const Default = {
               <Dropdown.Menu.Divider />
               <Dropdown.Menu.List>
                 <Dropdown.Menu.List.Item as="a" href="/#settings">
-                  Innstillinger
+                  Innstillinger <Spacer />{" "}
+                  <CogIcon aria-hidden fontSize="1.5rem" />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
-                  Logg ut
+                  Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
                 </Dropdown.Menu.List.Item>
               </Dropdown.Menu.List>
             </Dropdown.Menu>
@@ -180,10 +183,10 @@ export const UserWithMenu = () => (
         <Dropdown.Menu.Divider />
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item as="a" href="/#settings">
-            Innstillinger
+            Innstillinger <Spacer /> <CogIcon aria-hidden fontSize="1.5rem" />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
-            Logg ut
+            Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
           </Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>
       </Dropdown.Menu>

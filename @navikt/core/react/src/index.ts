@@ -136,6 +136,20 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
+export {
+  UNSAFE_FileUpload,
+  type FileUploadDropzoneProps,
+  type FileUploadTriggerProps,
+  type FileObject,
+  type FileRejected,
+  type FileAccepted,
+  type FileRejectedPartitioned,
+  type FilesPartitioned,
+  type FileRejectionReason,
+  type FileUploadItemProps,
+  type FileItem,
+  type FileMetadata,
+} from "./form/file-upload";
 
 /**
  * @deprecated

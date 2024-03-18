@@ -16,6 +16,7 @@ export interface CreateContextOptions<T> {
   errorMessage?: string;
   name?: string;
   defaultValue?: T;
+  strict?: boolean;
 }
 
 type ProviderProps<T> = T & { children: React.ReactNode };
