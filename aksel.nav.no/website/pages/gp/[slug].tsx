@@ -16,9 +16,6 @@ import { NextPageT } from "@/types";
 import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 
-/**
- * TODO sort section by abc
- */
 const sanityQuery = groq`
 {
   "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
@@ -101,6 +98,7 @@ const GpPage = (props: PageProps["props"]) => {
           } satisfies ParsedGPArticle;
         })
         .filter((article) => !!article.undertema)
+        /* Makes sure sections always appear in the same order */
         .sort((a, b) => a.undertema.localeCompare(b.undertema)),
     [props.articles, props.tema.title],
   );
