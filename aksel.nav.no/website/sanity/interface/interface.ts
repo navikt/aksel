@@ -9,9 +9,10 @@ export function urlFor(source: any) {
 export async function sitemapPages(
   token?: string,
 ): Promise<{ path: string; lastmod: string }[]> {
-  const client = token ? noCdnClient(token) : getClient();
+  let client = token ? noCdnClient(token) : getClient();
+  client = client.config({ perspective: "published" });
   const artikler = await getDocuments("all", token);
-  const temaer = await getGpTema(token);
+  const temaer = await getAkselTema(token);
 
   const pages = await client.fetch(
     `{
