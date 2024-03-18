@@ -158,7 +158,7 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
       <>
         {state === "error" && (
           <Alert variant="error" className="mt-4" role="alert">
-            Noe gikk galt! Hvis feilen oppstår flere ganger eller du har lyst
+            Noe gikk galt. Hvis feilen oppstår flere ganger eller du har lyst
             til å sende tilbakemeldingen direkte finner du oss under{" "}
             <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
               #aksel-designsystemet
