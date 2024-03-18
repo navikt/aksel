@@ -22,11 +22,10 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
 
   const [dialogButton, setDialogButton] = useState<HTMLElement | null>(null);
 
-  /* TODO: Fikse typer, unngå `as` */
-  const inlineStyles = {
+  const inlineStyles: CSSProperties = {
     "--aksel-website-hero-selector-x": animationRef.x + "px",
     "--aksel-website-hero-selector-y": animationRef.y + "px",
-  } as CSSProperties;
+  };
 
   const handleOpen = (
     e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>,
