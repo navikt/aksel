@@ -1,4 +1,4 @@
-import { UsersListResponse, WebClient } from "@slack/web-api";
+import { SectionBlock, UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import { authProtectedApi } from "@/auth/authProtectedApi";
@@ -130,12 +130,11 @@ async function sendSlackbotFeedback(
           ? [
               {
                 type: "section",
-                // @ts-expect-error might be fixed in future TS version? should be a good type
                 text: {
                   type: "mrkdwn",
                   text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
                 },
-              },
+              } satisfies SectionBlock,
             ]
           : []),
       ],
