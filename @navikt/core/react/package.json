@@ -565,7 +565,6 @@
     "@navikt/aksel-icons": "^6.2.0",
     "@navikt/ds-tokens": "^6.2.0",
     "@radix-ui/react-tabs": "1.0.0",
-    "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.0"

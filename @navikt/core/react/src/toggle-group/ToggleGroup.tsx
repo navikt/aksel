@@ -1,55 +1,24 @@
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useState } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { Label } from "../typography";
-import { useId } from "../util/hooks";
-import ToggleItem, { ToggleGroupItemProps } from "./ToggleItem";
-import { ToggleGroupContext } from "./context";
-
-export interface ToggleGroupProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
-  /**
-   * Toggles.Item elements
-   */
-  children: React.ReactNode;
-  /**
-   * Changes padding and font-size
-   * @default "medium"
-   */
-  size?: "medium" | "small";
-  /**
-   * Controlled selected value
-   */
-  value?: string;
-  /**
-   * If not controlled, a default-value needs to be set
-   */
-  defaultValue?: string;
-  /**
-   * Callback for selected toggle
-   */
-  onChange: (value: string) => void;
-  /**
-   * Label describing ToggleGroup
-   */
-  label?: React.ReactNode;
-  /**
-   * Changes design and interaction-visuals
-   * @default "action"
-   */
-  variant?: "action" | "neutral";
-}
+import { useId } from "../util";
+import {
+  ToggleGroupDescendantsProvider,
+  ToggleGroupProvider,
+  useToggleGroupDescendants,
+} from "./ToggleGroup.context";
+import { ToggleGroupProps } from "./ToggleGroup.types";
+import ToggleItem from "./parts/ToggleItem";
+import { useToggleGroup } from "./useToggleGroup";
 
 interface ToggleGroupComponent
   extends React.ForwardRefExoticComponent<
     ToggleGroupProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * @see 🏷️ {@link ToggleGroupItemProps}
+   * @see 🏷️ {@link ToggleItem}
    */
-  Item: React.ForwardRefExoticComponent<
-    ToggleGroupItemProps & React.RefAttributes<HTMLButtonElement>
-  >;
+  Item: typeof ToggleItem;
 }
 
 /**
@@ -79,22 +48,31 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       defaultValue,
       "aria-describedby": desc,
       variant = "action",
+      fill = false,
       ...rest
     },
     ref,
   ) => {
-    const [groupValue, setGroupValue] = useState(defaultValue);
+    const descendants = useToggleGroupDescendants();
+
+    const toggleGroupContext = useToggleGroup({
+      defaultValue,
+      value,
+      onChange,
+    });
+
+    const context = useMemo(
+      () => ({
+        ...toggleGroupContext,
+        size,
+      }),
+      [size, toggleGroupContext],
+    );
+
     const labelId = useId();
 
-    const handleValueChange = (v: string) => {
-      if (v !== "") {
-        setGroupValue(v);
-        onChange?.(v);
-      }
-    };
-
     if (!value && !defaultValue) {
-      console.error("ToggleGroup without value/defaultvalue is not allowed");
+      console.error("ToggleGroup without value or defaultvalue is not allowed");
     }
 
     const describeBy = cl({
@@ -107,40 +85,38 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     }
 
     return (
-      <ToggleGroupContext.Provider
-        value={{
-          size,
-        }}
-      >
-        <div className={cl("navds-toggle-group__wrapper", className)}>
-          {label && (
-            <Label
-              size={size}
-              className="navds-toggle-group__label"
-              id={labelId}
-            >
-              {label}
-            </Label>
-          )}
-          <RadixToggleGroup.Root
-            {...rest}
-            onValueChange={handleValueChange}
-            value={value ?? groupValue}
-            defaultValue={defaultValue}
-            ref={ref}
-            className={cl(
-              "navds-toggle-group",
-              `navds-toggle-group--${size}`,
-              `navds-toggle-group--${variant}`,
-            )}
-            {...(describeBy && { "aria-describedby": describeBy })}
-            role="radiogroup"
-            type="single"
+      <ToggleGroupDescendantsProvider value={descendants}>
+        <ToggleGroupProvider {...context}>
+          <div
+            className={cl("navds-toggle-group__wrapper", className, {
+              "navds-toggle-group__wrapper--fill": fill,
+            })}
           >
-            {children}
-          </RadixToggleGroup.Root>
-        </div>
-      </ToggleGroupContext.Provider>
+            {label && (
+              <Label
+                size={size}
+                className="navds-toggle-group__label"
+                id={labelId}
+              >
+                {label}
+              </Label>
+            )}
+            <div
+              {...rest}
+              ref={ref}
+              className={cl(
+                "navds-toggle-group",
+                `navds-toggle-group--${size}`,
+                `navds-toggle-group--${variant}`,
+              )}
+              {...(describeBy && { "aria-describedby": describeBy })}
+              role="radiogroup"
+            >
+              {children}
+            </div>
+          </div>
+        </ToggleGroupProvider>
+      </ToggleGroupDescendantsProvider>
     );
   },
 ) as ToggleGroupComponent;
