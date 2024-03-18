@@ -26,8 +26,9 @@ export interface SearchProps
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "type"> {
   children?: React.ReactNode;
   /**
-   * Search label
-   * @note Will be hidden by default, is required for accessibility reasons.
+   * Search label.
+   *
+   * Will be hidden by default, is required for accessibility reasons.
    */
   label: React.ReactNode;
   /**

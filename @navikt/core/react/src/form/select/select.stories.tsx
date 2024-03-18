@@ -1,36 +1,15 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
-import Select from "./Select";
+import Select, { SelectProps } from "./Select";
 
-export default {
+const meta: Meta<typeof Select> = {
   title: "ds-react/Select",
   component: Select,
-  argTypes: {
-    size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    },
-    description: {
-      type: "string",
-    },
-    error: {
-      type: "string",
-    },
-    hideLabel: {
-      type: "boolean",
-    },
-    disabled: {
-      type: "boolean",
-    },
-  },
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
-
-type Story = StoryObj<typeof Select>;
+};
+export default meta;
 
 const content = (
   <>
@@ -40,16 +19,32 @@ const content = (
   </>
 );
 
-export const Default = {
-  render: (props) => {
-    return (
-      <Select {...props} label="Ipsum enim quis culpa">
-        {content}
-      </Select>
-    );
+export const Default: StoryFn<Omit<SelectProps, "children">> = (props) => (
+  <Select {...props}>{content}</Select>
+);
+Default.args = {
+  label: "Ipsum enim quis culpa",
+};
+Default.argTypes = {
+  description: {
+    type: "string",
   },
-
-  args: {},
+  size: {
+    control: { type: "radio" },
+    options: ["medium", "small"],
+  },
+  error: {
+    type: "string",
+  },
+  hideLabel: {
+    type: "boolean",
+  },
+  disabled: {
+    type: "boolean",
+  },
+  readOnly: {
+    type: "boolean",
+  },
 };
 
 export const Small = () => {
@@ -138,12 +133,12 @@ export const Readonly = () => {
   );
 };
 
-export const Chromatic: Story = {
+export const Chromatic: StoryObj<typeof Select> = {
   render: () => (
     <div>
       <div>
         <h2>Default</h2>
-        {Default.render?.({ label: "Ipsum enim quis culpa" })}
+        <Default label="Ipsum enim quis culpa" />
       </div>
       <div>
         <h2>Small</h2>

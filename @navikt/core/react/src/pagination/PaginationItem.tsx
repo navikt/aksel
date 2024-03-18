@@ -16,7 +16,7 @@ export interface PaginationItemProps extends ButtonProps {
   page: number;
   /**
    * Changes padding, height and font-size
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
 }

@@ -1,33 +1,17 @@
 import cl from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Box, Button, HStack, Page, Show, Spacer } from "@navikt/ds-react";
+import { Box, HStack, Page, Show, Spacer } from "@navikt/ds-react";
 import AkselLogo from "@/assets/Logo";
 import { amplitudeLogNavigation } from "@/logging";
+import { AkselSearchButton } from "@/web/search/parts/SearchButton";
 import { Hamburger } from "./parts/Hamburger";
 import HeaderLink from "./parts/HeaderLink";
 
 export const GlobalSearch = dynamic(
   () => import("../../website-modules/search/Search"),
   {
-    loading: () => (
-      <Button
-        variant="primary"
-        className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
-        aria-keyshortcuts="Control+b"
-        icon={
-          <MagnifyingGlassIcon
-            className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
-            aria-label="Åpne meny"
-            aria-hidden
-          />
-        }
-        iconPosition="left"
-      >
-        Søk
-      </Button>
-    ),
+    loading: () => <AkselSearchButton />,
     ssr: false,
   },
 );

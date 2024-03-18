@@ -36,24 +36,24 @@ export interface SwitchProps
   extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
-   * Switch-label
+   * Switch-label.
    */
   children: React.ReactNode;
   /**
-   * If enabled shows the label and description for screenreaders only
+   * If enabled shows the label and description for screenreaders only.
    */
   hideLabel?: boolean;
   /**
-   * Toggles loading state with loader-component on switch
+   * Toggles loading state with loader-component on switch.
    */
   loading?: boolean;
   /**
-   * Positions switch on left/right side of label
+   * Positions switch on left/right side of label.
    * @default "left"
    */
   position?: "left" | "right";
   /**
-   * Adds a description to extend labling of Switch
+   * Adds a description to extend labling of Switch.
    */
   description?: string;
 }

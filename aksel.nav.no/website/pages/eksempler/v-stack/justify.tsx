@@ -38,18 +38,9 @@ const Example = () => {
   );
 };
 
-const Placeholder = ({
-  text,
-  noPadding,
-}: {
-  text?: string;
-  noPadding?: boolean;
-}) => {
+const Placeholder = ({ text }: { text?: string }) => {
   return (
-    <div
-      className="h-auto min-h-4 w-auto rounded bg-teal-600 p-2 text-text-on-action"
-      style={{ padding: noPadding && 0 }}
-    >
+    <div className="h-auto min-h-4 w-auto rounded bg-teal-600 p-2 text-text-on-action">
       {text}
     </div>
   );

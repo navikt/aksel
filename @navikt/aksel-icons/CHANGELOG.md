@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 6.2.0
+
+### Minor Changes
+
+- Ikoner: Nytt ikon `archive` ([#2772](https://github.com/navikt/aksel/pull/2772))
+
+- Ikoner: Nytt ikon `opensource` ([#2787](https://github.com/navikt/aksel/pull/2787))
+
 ## 6.1.1
 
 ## 6.1.0

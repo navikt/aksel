@@ -6,20 +6,20 @@ import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Collectipn of ErrorSummary.Item
+   * Collection of `ErrorSummary.Item`.
    */
   children: React.ReactNode;
   /**
-   * Changes padding and font-sizes
+   * Changes padding and font-sizes.
    * @default "medium"
    */
   size?: "medium" | "small";
   /**
-   * Heading above links
+   * Heading above links.
    */
   heading?: React.ReactNode;
   /**
-   * Allows setting a different HTML h-tag
+   * Allows setting a different HTML h-tag.
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;
@@ -30,7 +30,7 @@ interface ErrorSummaryComponent
     ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Link to error
+   * Link to error.
    *
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    *

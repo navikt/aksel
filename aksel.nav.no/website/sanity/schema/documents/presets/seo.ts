@@ -2,8 +2,13 @@ import { defineField } from "sanity";
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/;
 
-const decodeAssetId = (id) => {
-  const [, assetId, dimensions, format] = pattern.exec(id);
+const decodeAssetId = (id: string) => {
+  const exec = pattern.exec(id);
+  if (!exec) {
+    return null;
+  }
+
+  const [, assetId, dimensions, format] = exec;
   const [width, height] = dimensions.split("x").map((v) => parseInt(v, 10));
 
   return {
@@ -40,13 +45,16 @@ const BaseSEOPreset = {
       },
       validation: (Rule) =>
         Rule.custom((image) => {
-          if (!image) return true;
-          const { dimensions } = decodeAssetId(image.asset._ref);
-          const aspectR = dimensions.width / dimensions.height;
+          const decode = decodeAssetId(image.asset._ref);
+          if (!image || !decode) {
+            return true;
+          }
+
+          const aspectR = decode.dimensions.width / decode.dimensions.height;
           if (aspectR < 1.5 || aspectR > 2.4) {
             return `Må ha aspect-ratio på ~1.91:1. Er nå: ${aspectR.toFixed(
               2,
-            )}:1. (${dimensions.width}px/${dimensions.height}px)`;
+            )}:1. (${decode.dimensions.width}px/${decode.dimensions.height}px)`;
           }
           return true;
         }),

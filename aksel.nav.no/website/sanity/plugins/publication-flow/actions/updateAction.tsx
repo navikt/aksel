@@ -23,6 +23,7 @@ export const createWrappedUpdateAction = (): DocumentActionComponent => {
         },
       };
     }
+    return null;
   };
 
   return WrappedUpdate;

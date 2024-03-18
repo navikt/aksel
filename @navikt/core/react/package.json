@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -539,6 +539,16 @@
         "default": "./cjs/form/textfield/index.js"
       }
     },
+    "./FileUpload": {
+      "import": {
+        "types": "./esm/form/file-upload/index.d.ts",
+        "default": "./esm/form/file-upload/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/file-upload/index.d.ts",
+        "default": "./cjs/form/file-upload/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -552,8 +562,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^6.1.1",
-    "@navikt/ds-tokens": "^6.1.1",
+    "@navikt/aksel-icons": "^6.2.0",
+    "@navikt/ds-tokens": "^6.2.0",
     "@radix-ui/react-tabs": "1.0.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",

@@ -17,27 +17,6 @@ export const Highlighter = ({
   } else if (type === "number" || !Number.isNaN(parseInt(type))) {
     return <span className="text-deepblue-600">{type}</span>;
   } else if (isType) {
-    const referencedType = null;
-
-    let autoInlinedValue =
-      referencedType &&
-      !referencedType.members &&
-      typeof referencedType.value === "string"
-        ? referencedType.value
-        : undefined;
-
-    if (autoInlinedValue) {
-      const needsParenthesesToMakeSense =
-        prev.includes("&") || prev.includes("|");
-      if (needsParenthesesToMakeSense) {
-        autoInlinedValue = `(${autoInlinedValue})`;
-      }
-    }
-
-    if (autoInlinedValue) {
-      return <Highlighter type={autoInlinedValue} prev={type} />;
-    }
-
     return (
       <span className="text-blue-700">
         <span>{type}</span>

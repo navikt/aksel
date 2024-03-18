@@ -166,15 +166,9 @@ ${expansionCardBlock},
 ${defaultBlock},
 `;
 
-export const contributorsAll = `contributors[]->{
-  anonym == true => {"title":@.anon_navn.current},
-  anonym != true => {"title":@.title}
-}`;
+export const contributorsAll = `contributors[]->{title}`;
 
-export const contributorsSingle = `contributors[0]->{
-  anonym == true => {"title":@.anon_navn.current},
-  anonym != true => {"title":@.title}
-}`;
+export const contributorsSingle = `contributors[0]->{title}`;
 
 export const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,

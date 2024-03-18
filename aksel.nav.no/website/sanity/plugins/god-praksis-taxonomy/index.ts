@@ -8,8 +8,6 @@ import { defaultDocumentNode, structure } from "./structure";
 
 export const GP_DOCUMENT_NAMES = [tema.name, undertema.name, innholdsType.name];
 
-export const GP_DOCUMENTS = [tema, undertema, innholdsType];
-
 export const godPraksisTaxonomy = definePlugin(() => {
   return {
     name: "gp.taxonomy",

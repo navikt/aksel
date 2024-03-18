@@ -20,5 +20,7 @@ export function fuseSearch(results: any[], query: string) {
     includeMatches: true,
     threshold: 0.3,
   });
-  return fuse.search(query).filter((x) => x.score < 0.3);
+  return fuse
+    .search(query)
+    .filter((x) => x.score !== undefined && x.score < 0.3);
 }

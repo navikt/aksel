@@ -34,8 +34,11 @@ export const Highlight = ({
       <div className="relative block aspect-video">
         {useStatusImage ? (
           <Image
-            src={urlFor(article.status.bilde).quality(100).auto("format").url()}
-            blurDataURL={urlFor(article.status.bilde)
+            src={urlFor(article.status?.bilde)
+              .quality(100)
+              .auto("format")
+              .url()}
+            blurDataURL={urlFor(article.status?.bilde)
               .width(24)
               .height(24)
               .blur(10)
