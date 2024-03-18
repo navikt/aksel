@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.2.0
+
+### Patch Changes
+
+- Select: Fjern 'multiple' fra SelectProps ([#2782](https://github.com/navikt/aksel/pull/2782))
+
+- Updated dependencies [[`331b4c4c0`](https://github.com/navikt/aksel/commit/331b4c4c00c323ad7a212bcd45889d2b80c09dee), [`dc5ea3b84`](https://github.com/navikt/aksel/commit/dc5ea3b8420a02690bc88dbbbb97eefe4ee7564d)]:
+  - @navikt/aksel-icons@6.2.0
+  - @navikt/ds-tokens@6.2.0
+
 ## 6.1.1
 
 ### Patch Changes

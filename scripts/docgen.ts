@@ -52,8 +52,8 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
         prop.return = return_val ? return_val : "void";
       }
 
-      const remove_regex = /@see|@link|@note/;
-      prop.description = prop.description.replace(remove_regex, "").trim();
+      const link_regex = /@see {@link (http[^ ]+) ([^}]+)}/;
+      prop.description = prop.description.replace(link_regex, "[$2]($1)");
     }
   }
 };

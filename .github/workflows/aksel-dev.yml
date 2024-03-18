@@ -43,11 +43,13 @@ jobs:
           yarn workspace aksel.nav.no build:next
 
       - name: Upload static files to NAV CDN
-        uses: navikt/frontend/actions/cdn-upload/v1@main
+        uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          cdn-team-name: aksel
+          team: designsystem
           source: ./aksel.nav.no/website/.next/static
           destination: "/website/_next"
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Get complete tag
         run: echo "TAG=DEV-$( date +%s )" >> $GITHUB_ENV
