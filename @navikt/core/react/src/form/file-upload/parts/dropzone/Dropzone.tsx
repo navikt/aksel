@@ -162,6 +162,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             accept={accept}
             onChange={onChange}
             ref={mergedRef}
+            disabled={inputProps.disabled}
           />
         </div>
         <div
