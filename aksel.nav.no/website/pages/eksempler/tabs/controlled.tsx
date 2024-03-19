@@ -16,17 +16,17 @@ const Example = () => {
         <Tabs.Tab
           value="logg"
           label="Logg"
-          icon={<ClockDashedIcon title="historielogg" />}
+          icon={<ClockDashedIcon title="historielogg" aria-hidden />}
         />
         <Tabs.Tab
           value="inbox"
           label="Inbox"
-          icon={<InboxDownIcon title="inbox" />}
+          icon={<InboxDownIcon title="inbox" aria-hidden />}
         />
         <Tabs.Tab
           value="sendt"
           label="Sendt"
-          icon={<PaperplaneIcon title="sendt" />}
+          icon={<PaperplaneIcon title="sendt" aria-hidden />}
         />
       </Tabs.List>
       <Tabs.Panel value="logg" className="h-24 w-full bg-gray-50 p-4">
