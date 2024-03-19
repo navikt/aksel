@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.3.1
+
+### Patch Changes
+
+- FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.1
+  - @navikt/aksel-icons@6.3.1
+
 ## 6.3.0
 
 ### Minor Changes
