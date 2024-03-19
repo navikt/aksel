@@ -1,17 +1,13 @@
+import { ComboboxOption } from "../types";
+
 const normalizeText = (text: string): string =>
   typeof text === "string" ? text.toLocaleLowerCase().trim() : "";
 
-const isPartOfText = (value, text) =>
+const isPartOfText = (value: string, text: string) =>
   normalizeText(text).startsWith(normalizeText(value ?? ""));
 
-const isValueInList = (value, list) =>
-  list?.find((listItem) => normalizeText(value) === normalizeText(listItem));
-
-const getMatchingValuesFromList = (value, list, alwaysIncluded) =>
-  list?.filter(
-    (listItem) =>
-      isPartOfText(value, listItem) || alwaysIncluded.includes(listItem),
-  );
+const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
+  list.filter((listItem) => isPartOfText(value, listItem.label));
 
 const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
@@ -34,7 +30,6 @@ const getMaxSelectedOptionsId = (comboboxId: string) =>
 export default {
   normalizeText,
   isPartOfText,
-  isValueInList,
   getMatchingValuesFromList,
   getFilteredOptionsId,
   getAddNewOptionId,

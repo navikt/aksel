@@ -1,6 +1,21 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
+/**
+ * A more complex version of options for the Combobox.
+ * Used for separating the label and the value of the option.
+ */
+export type ComboboxOption = {
+  /**
+   * The label to display in the dropdown list
+   */
+  label: string;
+  /**
+   * The programmatic value of the option, for use internally. Will be returned from onToggleSelected.
+   */
+  value: string;
+};
+
 export type MaxSelected = {
   /**
    * The limit for maximum selected options
@@ -20,9 +35,9 @@ export interface ComboboxProps
    */
   label: React.ReactNode;
   /**
-   * List of options to use for autocompletion.
+   * List of options
    */
-  options: string[];
+  options: string[] | ComboboxOption[];
   /**
    * If enabled, adds an option to add the value of the input as an option whenever there are no options matching the value.
    */
@@ -42,7 +57,7 @@ export interface ComboboxProps
    * If provided, this overrides the internal search logic in the component.
    * Useful for e.g. searching on a server or when overriding the search algorithm to search for synonyms or similar.
    */
-  filteredOptions?: string[];
+  filteredOptions?: string[] | ComboboxOption[];
   /**
    * Optionally hide the label visually.
    * Not recommended, but can be considered for e.g. search fields in the top menu.
@@ -75,7 +90,6 @@ export interface ComboboxProps
    * Callback function triggered whenever the value of the input field is triggered.
    *
    * @param event
-   * @returns
    */
   onChange?: (
     event: ChangeEvent<HTMLInputElement> | null,
@@ -85,19 +99,17 @@ export interface ComboboxProps
    * Callback function triggered whenever the input field is cleared.
    *
    * @param event
-   * @returns
    */
   onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
   /**
    * Callback function triggered whenever an option is selected or de-selected.
    *
-   * @param option The selected option.
-   * @param isSelected Whether the option has been selected or unselected.
-   * @param isCustomOption Whether the option comes from user input, instead of from the list.
-   * @returns
+   * @param option The option value
+   * @param isSelected Whether the option has been selected or unselected
+   * @param isCustomOption Whether the option comes from user input, instead of from the list
    */
   onToggleSelected?: (
-    option: string,
+    option: ComboboxOption["value"],
     isSelected: boolean,
     isCustomOption: boolean,
   ) => void;
@@ -107,7 +119,7 @@ export interface ComboboxProps
    * Use this prop when controlling the selected state outside for the component,
    * e.g. for a filter, where options can be toggled elsewhere/programmatically.
    */
-  selectedOptions?: string[];
+  selectedOptions?: string[] | ComboboxOption[];
   /**
    * Options for the maximum number of selected options.
    */
