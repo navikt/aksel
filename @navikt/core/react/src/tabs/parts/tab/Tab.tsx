@@ -73,8 +73,8 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
             className="navds-tabs__tab-inner"
             size={ctx?.size}
           >
-            {icon}
-            {label}
+            <span aria-hidden={!!label}>{icon}</span>
+            <span>{label}</span>
           </BodyShort>
         </Component>
       );

@@ -21,31 +21,31 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     const listRef = useRef<HTMLDivElement>(null);
     const mergedRef = useMergeRefs(listRef, ref);
 
-    const ctx = useScrollButtons(listRef);
+    const scrollCtx = useScrollButtons(listRef);
 
     return (
       <div className="navds-tabs__tablist-wrapper">
-        {ctx.show && (
+        {scrollCtx.show && (
           <ScrollButton
             dir="left"
-            hidden={!ctx.start}
-            onClick={ctx.scrollLeft}
+            hidden={!scrollCtx.start}
+            onClick={scrollCtx.scrollLeft}
           />
         )}
         <div
           ref={mergedRef}
           {...rest}
-          onScroll={ctx.update}
+          onScroll={scrollCtx.update}
           className={cl("navds-tabs__tablist", className)}
           role="tablist"
           aria-orientation="horizontal"
           onKeyDown={composeEventHandlers(onKeyDown, _onKeyDown)}
         />
-        {ctx.show && (
+        {scrollCtx.show && (
           <ScrollButton
             dir="right"
-            hidden={!ctx.end}
-            onClick={ctx.scrollRight}
+            hidden={!scrollCtx.end}
+            onClick={scrollCtx.scrollRight}
           />
         )}
       </div>
