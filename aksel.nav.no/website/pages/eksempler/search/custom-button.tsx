@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form>
+    <form role="search">
       <Search label="Søk alle NAV sine sider" variant="secondary">
         <Search.Button type="button" />
       </Search>

@@ -32,16 +32,16 @@ export interface SearchProps
    */
   label: React.ReactNode;
   /**
-   * Shows label and description for screenreaders-only
+   * Shows label and description for screenreaders only.
    * @default true
    */
   hideLabel?: boolean;
   /**
-   * Callback for value-change in input
+   * Callback for value-change in input.
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for click on clear-button or Escape keydown
+   * Callback for click on clear-button or Escape keydown.
    */
   onClear?: (e: SearchClearEvent) => void;
   /**
@@ -59,16 +59,16 @@ export interface SearchProps
    */
   clearButton?: boolean;
   /**
-   * Changes button-variant, "simple" removes button
+   * Changes button-variant, "simple" removes button.
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
   /**
-   * Exposes the HTML size attribute
+   * Exposes the HTML size attribute.
    */
   htmlSize?: number | string;
   /*
-   * Exposes role attribute
+   * Exposes role attribute.
    */
   role?: string;
 }
