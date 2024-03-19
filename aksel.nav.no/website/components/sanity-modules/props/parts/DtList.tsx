@@ -41,7 +41,7 @@ export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
   return (
     <BodyShort as="ul" className="dtlist overflow-x-auto">
       {prop.type && (
-        <li className="my-3 flex flex-col px-3 text-base md:flex-row">
+        <li className="my-3 flex flex-col break-all px-3 text-base md:flex-row">
           <div className="min-w-24 font-semibold">Type: </div>
           <code className="mt-05 text-sm">
             {Highlighter({ type: prop.type })}
