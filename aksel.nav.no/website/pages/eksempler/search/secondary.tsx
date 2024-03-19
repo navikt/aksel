@@ -18,6 +18,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 0,
   desc: "Hvis du er i tvil om hvilken variant du skal bruke, er det sikkert denne som er riktig.",
 };
