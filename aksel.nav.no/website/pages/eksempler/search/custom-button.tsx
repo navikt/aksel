@@ -17,9 +17,9 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
-  desc: "Children kan erstatte knapp hvis man trenger eget ikon eller 'type'-prop",
 };
 
 export const args = {
   index: 8,
+  desc: "Children kan erstatte knapp hvis man f.eks. trenger eget ikon eller 'type'-prop.",
 };
