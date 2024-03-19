@@ -28,7 +28,7 @@ export interface SearchProps
   /**
    * Search label.
    *
-   * Will be hidden by default, is required for accessibility reasons.
+   * Will be hidden by default and is required for accessibility reasons.
    */
   label: React.ReactNode;
   /**
@@ -54,17 +54,17 @@ export interface SearchProps
    */
   clearButtonLabel?: string;
   /**
-   * If false, removes clear-button option from input.
+   * If `false`, removes clear-button option from input.
    * @default true
    */
   clearButton?: boolean;
   /**
-   * Changes button-variant, "simple" removes button.
+   * Changes button-variant, "simple" removes button and replaces it with a `<MagnifyingGlassIcon />`.
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
   /**
-   * Exposes the HTML size attribute.
+   * Exposes the HTML size attribute. Specifies the width of the element, in characters.
    */
   htmlSize?: number | string;
   /*

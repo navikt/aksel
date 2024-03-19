@@ -53,7 +53,7 @@ export interface SwitchProps
    */
   position?: "left" | "right";
   /**
-   * Adds a description to extend labling of Switch.
+   * Adds a description to extend labeling of Switch.
    */
   description?: string;
 }
