@@ -28,7 +28,7 @@ export interface SearchProps
   /**
    * Search label.
    *
-   * Will be hidden by default and is required for accessibility reasons.
+   * Will be hidden by default and is required for WCAG compliance.
    */
   label: React.ReactNode;
   /**
