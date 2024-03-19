@@ -45,11 +45,11 @@ export interface SearchProps
    */
   onClear?: (e: SearchClearEvent) => void;
   /**
-   * Callback for Search-button submit
+   * Callback for Search-button submit.
    */
   onSearchClick?: (value: string) => void;
   /**
-   * aria-label on clear button
+   * Sets the `aria-label` for the clear button.
    * @default "Tøm"
    */
   clearButtonLabel?: string;
