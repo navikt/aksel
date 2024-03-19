@@ -28,47 +28,51 @@ export interface SearchProps
   /**
    * Search label.
    *
-   * Will be hidden by default, is required for accessibility reasons.
+   * Will be hidden by default and is required for WCAG compliance.
    */
   label: React.ReactNode;
   /**
-   * Shows label and description for screenreaders-only
+   * Shows label and description for screenreaders only.
    * @default true
    */
   hideLabel?: boolean;
   /**
-   * Callback for value-change in input
+   * Callback for value-change in input.
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for click on clear-button or Escape keydown
+   * Callback for click on clear-button or Escape keydown.
    */
   onClear?: (e: SearchClearEvent) => void;
   /**
-   * Callback for Search-button submit
+   * Callback for Search-button submit.
    */
   onSearchClick?: (value: string) => void;
   /**
-   * aria-label on clear button
+   * Sets the `aria-label` for the clear button.
    * @default "Tøm"
    */
   clearButtonLabel?: string;
   /**
-   * If false, removes clear-button option from input.
+   * Removes clear-button if `false`.
    * @default true
    */
   clearButton?: boolean;
   /**
-   * Changes button-variant, "simple" removes button
+   * Changes button-variant.
+   *
+   * - "primary": When this is the main function of the page.
+   * - "secondary": This is probably the one you want if in doubt.
+   * - "simple": Removes the search button.
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
   /**
-   * Exposes the HTML size attribute
+   * Exposes the HTML size attribute. Specifies the width of the element, in characters.
    */
   htmlSize?: number | string;
   /*
-   * Exposes role attribute
+   * Exposes role attribute.
    */
   role?: string;
 }
@@ -88,7 +92,7 @@ interface SearchComponent
  *
  * @example
  * ```jsx
- * <form>
+ * <form role="search">
  *   <Search label="Søk alle NAV sine sider" variant="primary" />
  * </form>
  * ```
