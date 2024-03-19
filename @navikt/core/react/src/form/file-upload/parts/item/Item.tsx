@@ -24,12 +24,14 @@ export interface FileItemBaseProps {
   file: FileItem;
   /**
    * onClick on the file name.
-   * @note If this and `href` is not set and the `file` prop is a native file, onClick will download the file.
+   *
+   * If neither this nor `href` is set, and the `file` prop is a native file, onClick will download the file.
    */
   onFileClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
   /**
    * href on the file name.
-   * @note If this and `onFileClick` is not set and the `file` prop is a native file, onClick will download the file.
+   *
+   * If neither this nor `onFileClick` is set, and the `file` prop is a native file, onClick will download the file.
    */
   href?: string;
   /**
