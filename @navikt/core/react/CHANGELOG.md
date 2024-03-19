@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 6.3.0
+
+### Minor Changes
+
+- Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+
+- FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.0
+  - @navikt/aksel-icons@6.3.0
+
 ## 6.2.0
 
 ### Patch Changes
