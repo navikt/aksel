@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { Radio, RadioGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any) => console.log(val);
+  const [error, setError] = useState(
+    "Du må velge en aldersgruppe før du kan gå videre.",
+  );
+  const handleChange = (val: any) => {
+    console.log(val);
+    setError(val ? "" : "Du må velge en aldersgruppe før du kan gå videre.");
+  };
 
   return (
     <RadioGroup
       legend="Velg din aldersgruppe."
       onChange={(val: any) => handleChange(val)}
-      error="Vi fant ingen resultater på din aldersgruppe."
+      error={error}
     >
       <Radio value="10">10-20 år</Radio>
       <Radio value="20">21-45 år</Radio>
