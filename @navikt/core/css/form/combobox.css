@@ -25,7 +25,7 @@
 }
 
 .navds-form-field--small .navds-combobox__wrapper-inner {
-  padding: var(--a-spacing-1) calc(var(--a-spacing-3) / 2);
+  padding: 0 calc(var(--a-spacing-3) / 2);
 }
 
 .navds-combobox__wrapper-inner:hover {
@@ -82,7 +82,6 @@
   margin: 0;
   min-width: 10ch;
   width: 100%;
-  height: 2rem;
 }
 
 .navds-combobox__input:focus-visible {
