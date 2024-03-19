@@ -21,7 +21,7 @@ export interface RadioGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Collection of <Radio />-elements
+   * Collection of `<Radio />`-elements
    */
   children: React.ReactNode;
   /**

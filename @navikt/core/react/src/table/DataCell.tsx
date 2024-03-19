@@ -15,12 +15,7 @@ export interface DataCellProps
   textSize?: "medium" | "small";
 }
 
-export interface DataCellType
-  extends React.ForwardRefExoticComponent<
-    DataCellProps & React.RefAttributes<HTMLTableCellElement>
-  > {}
-
-export const DataCell: DataCellType = forwardRef(
+export const DataCell = forwardRef<HTMLTableCellElement, DataCellProps>(
   ({ className, children = "", align, textSize, ...rest }, ref) => {
     return (
       <BodyShort

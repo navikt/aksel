@@ -7,7 +7,7 @@ import ToggleChips, { ChipsToggleProps } from "./Toggle";
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
   /**
-   * Changes padding and font-sizes
+   * Changes padding and font-sizes.
    * @default "medium"
    */
   size?: "medium" | "small";
@@ -24,7 +24,7 @@ interface ChipsComponent
    */
   Toggle: OverridableComponent<ChipsToggleProps, HTMLButtonElement>;
   /**
-   * Remove filter or the likes on click
+   * Remove filter or the likes on click.
    * @see 🏷️ {@link RemovableChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
