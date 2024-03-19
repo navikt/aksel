@@ -54,12 +54,16 @@ export interface SearchProps
    */
   clearButtonLabel?: string;
   /**
-   * If `false`, removes clear-button option from input.
+   * Removes clear-button if `false`.
    * @default true
    */
   clearButton?: boolean;
   /**
-   * Changes button-variant, "simple" removes button and replaces it with a `<MagnifyingGlassIcon />`.
+   * Changes button-variant.
+   *
+   * - "primary": When this is the main function of the page.
+   * - "secondary": This is probably the one you want if in doubt.
+   * - "simple": Removes the search button.
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";
