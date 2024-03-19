@@ -1,48 +1,51 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import Summary, { SummaryProps } from "./Summary";
+import Summary from "./Summary";
 
-export default {
+const meta: Meta<typeof Summary> = {
   title: "ds-react/Summary",
   component: Summary,
-} satisfies Meta<typeof Summary>;
+  decorators: [(story) => <div style={{ width: "680px" }}>{story()}</div>],
+};
+export default meta;
 
-const exampleItems: SummaryProps["items"] = [
-  {
-    title: "Personalia",
-    editLink: "#",
-    content: [
-      {
-        title: "Navn",
-        content: "Ola Nordmann",
-        customContentSection: [],
-      },
-      {
-        title: "Fødselsnummer",
-        content: "12345678910",
-        customContentSection: [],
-      },
-    ],
-  },
-  {
-    title: "Bostedsland",
-    editLink: "#",
-    content: [
-      {
-        title: "Hvilket land bor du i?",
-        content: "Norge",
-        customContentSection: [],
-      },
-    ],
-  },
-];
+export const Default2: StoryObj<typeof Summary> = {
+  render: () => {
+    return (
+      <Summary>
+        <Summary.Header>
+          <Summary.Heading>Personalia</Summary.Heading>
+          <Summary.EditButton />
+        </Summary.Header>
 
-export const Default = {
-  render: (props: { items: SummaryProps["items"] }) => {
-    return <Summary items={props.items} />;
-  },
+        <Summary.Answer>
+          <Summary.Label>Navn</Summary.Label>
+          <Summary.Value>Ola Nordmann</Summary.Value>
+        </Summary.Answer>
 
-  args: {
-    items: exampleItems,
+        <Summary.Answer>
+          <Summary.Label>Fødselsnummer</Summary.Label>
+          <Summary.Value>12345678910</Summary.Value>
+        </Summary.Answer>
+
+        <Summary.Answer>
+          <Summary.Label>Barn nr 1</Summary.Label>
+          <Summary.Value>
+            <Summary.Answer>
+              <Summary.Label>Navn</Summary.Label>
+              <Summary.Value>Kari Nordmann</Summary.Value>
+            </Summary.Answer>
+            <Summary.Answer>
+              <Summary.Label>Kjønn</Summary.Label>
+              <Summary.Value>Jente</Summary.Value>
+            </Summary.Answer>
+            <Summary.Answer>
+              <Summary.Label>Alder</Summary.Label>
+              <Summary.Value>6</Summary.Value>
+            </Summary.Answer>
+          </Summary.Value>
+        </Summary.Answer>
+      </Summary>
+    );
   },
 };

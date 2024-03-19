@@ -1,81 +1,67 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Bleed } from "../layout/bleed";
 import { Box } from "../layout/box";
-import { HStack, VStack } from "../layout/stack";
-import { Link } from "../link";
-import { Heading } from "../typography";
+import { SummaryAnswer } from "./SummaryAnswer";
+import { FormSummaryEditButton } from "./SummaryEditButton";
+import FormSummaryHeader from "./SummaryHeader";
+import FormSummaryHeading from "./SummaryHeading";
+import { SummaryLabel } from "./SummaryLabel";
+import { SummaryValue } from "./SummaryValue";
+import { injectHRBetween } from "./utils";
 
-type CustomContentSection = {
-  title: string;
-  content: string;
-};
-
-type SummaryContent = {
-  title: string;
-  content: string;
-  customContentSection: CustomContentSection[];
-};
-
-type SummaryItem = {
-  title: string;
-  editLink: string;
-  content: SummaryContent[];
-};
-
-export interface SummaryProps extends HTMLAttributes<HTMLDivElement> {
-  items: SummaryItem[];
+interface SummaryComponent
+  extends React.ForwardRefExoticComponent<
+    SummaryProps & React.RefAttributes<HTMLDivElement>
+  > {
+  children: React.ReactNode;
+  Header: typeof FormSummaryHeader;
+  Heading: typeof FormSummaryHeading;
+  EditButton: typeof FormSummaryEditButton;
+  Label: typeof SummaryLabel;
+  Value: typeof SummaryValue;
+  Answer: typeof SummaryAnswer;
 }
 
-export const Summary = forwardRef<HTMLDivElement, SummaryProps>(({ items }) => {
-  return (
-    <div className="navds-summary">
-      <Heading size="large">Oppsummering</Heading>
-      <VStack gap="8">
-        {items.map((item, i) => {
-          return (
-            <Box
-              borderColor="border-subtle"
-              borderWidth="1"
-              borderRadius="large"
-              // paddingBlock="4"
-              // paddingInline="4"
-              background="bg-subtle"
-              key={i}
-            >
-              <HStack gap="4">
-                <Heading size="medium">{item.title}</Heading>
-                <Link href={item.editLink}>Endre</Link>
-              </HStack>
-              <Bleed marginInline="4" reflectivePadding asChild>
-                <Box background="bg-default">
-                  {item.content.map((content, j) => {
-                    return (
-                      <Box key={j}>
-                        <Box>
-                          {content.title}
-                          <Box>{content.content}</Box>
-                        </Box>
-                        {content.customContentSection.map(
-                          (customContent, k) => {
-                            return (
-                              <Box key={k}>
-                                {customContent.title}
-                                <Box>{customContent.content}</Box>
-                              </Box>
-                            );
-                          },
-                        )}
-                      </Box>
-                    );
-                  })}
-                </Box>
-              </Bleed>
-            </Box>
-          );
-        })}
-      </VStack>
-    </div>
-  );
-});
+export interface SummaryProps extends HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export const Summary = forwardRef<HTMLDivElement, SummaryProps>(
+  ({ children, ...rest }, ref) => {
+    const childrenArray = React.Children.toArray(children);
+    // TODO: Should we check the length of childrenArray?
+    const [header, ...restChildren] = childrenArray;
+
+    return (
+      <div ref={ref} {...rest}>
+        <style>
+          {`
+dl, dd {
+  margin: 0;
+  padding: 0;
+}
+`}
+        </style>
+        <Box
+          as="section"
+          borderRadius="large"
+          borderColor="border-subtle"
+          borderWidth="1"
+        >
+          {header}
+          <Box as="dl" paddingInline="6" paddingBlock="5 6">
+            {injectHRBetween(restChildren)}
+          </Box>
+        </Box>
+      </div>
+    );
+  },
+) as SummaryComponent;
+
+Summary.Header = FormSummaryHeader;
+Summary.Heading = FormSummaryHeading;
+Summary.EditButton = FormSummaryEditButton;
+Summary.Label = SummaryLabel;
+Summary.Value = SummaryValue;
+Summary.Answer = SummaryAnswer;
 
 export default Summary;
