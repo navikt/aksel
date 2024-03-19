@@ -1,0 +1,5 @@
+.--ac-hr {
+  border-color: var(--a-grayalpha-300);
+  border-width: 0.5px;
+  margin: var(--a-spacing-4) 0;
+}
