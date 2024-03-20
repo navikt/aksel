@@ -8,13 +8,17 @@
 
 ### @navikt/ds-react
 
-- FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
+- FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
 
-* FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+- useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
 
-- Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+* FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
 
-- FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
+- FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+
+* Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+
+* FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
 
 ## 6.2
 

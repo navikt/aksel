@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.3.3
+
+### Patch Changes
+
+- FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
+
+- useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.3
+  - @navikt/aksel-icons@6.3.3
+
 ## 6.3.2
 
 ### Patch Changes
