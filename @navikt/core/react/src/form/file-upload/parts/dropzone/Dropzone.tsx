@@ -129,7 +129,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 <BodyShort as="div">{translate("dropzone.or")}</BodyShort>
               </div>
               <Button
-                {...omit(rest, ["errorId"])}
+                {...omit(rest, ["errorId", "id"])}
                 {...inputPropsRest}
                 aria-describedby={cl(labelId, ariaDescribedby)}
                 className="navds-dropzone__area-button"
