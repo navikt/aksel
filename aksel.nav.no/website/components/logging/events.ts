@@ -6,4 +6,5 @@ export enum AmplitudeEvents {
   "feedbackinteraksjon" = "feedbackinteraksjon",
   "søk" = "søk",
   "link" = "link",
+  "slackfeedback" = "slackfeedback",
 }

@@ -99,6 +99,14 @@ const config: StorybookConfig = {
       __dirname,
       "../components/layout/",
     );
+    sbConfig.resolve.alias["@/auth"] = resolve(
+      __dirname,
+      "../components/auth/",
+    );
+    sbConfig.resolve.alias["@/slack"] = resolve(
+      __dirname,
+      "../components/utils/slack/index.ts",
+    );
     sbConfig.resolve.alias["@/assets"] = resolve(
       __dirname,
       "../components/assets/",

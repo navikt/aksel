@@ -1,11 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next/types";
+import { ApiHandler } from "@/auth/auth.types";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
 import { logger } from "../../config/logger";
-
-type ApiHandler = (
-  req: NextApiRequest,
-  res: NextApiResponse,
-) => Promise<unknown> | unknown;
 
 /**
  * Used to authenticate Next.JS pages. Assumes application is behind
