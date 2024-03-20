@@ -160,6 +160,7 @@ export const UseDatepicker = () => {
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
+    onValidate: console.log,
   });
 
   return (

@@ -265,6 +265,8 @@ export const useDatepicker = (
       fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && day && differenceInCalendarDays(day, toDate) > 0;
 
+    console.log(isValidDate(day));
+
     if (
       !isValidDate(day) ||
       (disableWeekends && isWeekend(day)) ||
@@ -272,7 +274,7 @@ export const useDatepicker = (
     ) {
       updateDate(undefined);
       updateValidation({
-        isInvalid: isValidDate(day),
+        isInvalid: !isValidDate(day),
         isWeekend: disableWeekends && isWeekend(day),
         isDisabled: disabled && isMatch(day, disabled),
         isValidDate: false,
