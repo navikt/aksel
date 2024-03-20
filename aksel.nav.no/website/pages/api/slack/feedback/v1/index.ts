@@ -234,7 +234,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
       type: "rich_text",
       elements: [
         {
-          type: "rich_text_section",
+          type: "rich_text_quote",
           elements: [
             {
               type: "text",
@@ -316,6 +316,9 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
         },
         url: `https://aksel.nav.no/admin/prod/intent/edit/id=${article.id}`,
       },
+    },
+    {
+      type: "divider",
     },
   ];
 }
