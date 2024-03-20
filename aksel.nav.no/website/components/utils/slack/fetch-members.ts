@@ -74,7 +74,6 @@ export async function fetchSlackMembers(): Promise<
   const subset_members = members
     .filter((m) => !m.is_bot)
     .filter((m) => !m.deleted)
-    .filter((m) => m.is_email_confirmed)
     .filter((m) => m.profile?.email)
     .filter((m) => m.id)
     .map((m) => ({
