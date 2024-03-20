@@ -265,7 +265,6 @@ export const useDatepicker = (
       fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && day && differenceInCalendarDays(day, toDate) > 0;
 
-    console.log(isValidDate(day));
 
     if (
       !isValidDate(day) ||
