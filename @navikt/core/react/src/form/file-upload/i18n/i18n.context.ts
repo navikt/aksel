@@ -5,7 +5,7 @@ import {
   ComponentTranslation,
   TranslationDictionary,
 } from "./i18n.types";
-import nb from "./locales/nb.json";
+import nb from "./locales/nb";
 
 /**
  * https://regex101.com/r/LYKWi3/1
