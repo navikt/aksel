@@ -1,18 +1,33 @@
 .navds-combobox__wrapper {
+  --combobox-icon-size: 1.5rem;
+  --combobox-wrapper-inner-padding: var(--a-spacing-2);
+  --combobox-list-item-padding-block: var(--a-spacing-3);
+  --combobox-list-item-padding-inline: var(--a-spacing-3);
+  --combobox-border-width: 1px;
+
   display: flex;
   flex-direction: column;
   width: 100%;
   position: relative;
 }
 
-.navds-combobox__wrapper-inner {
+.navds-form-field--small .navds-combobox__wrapper {
+  --combobox-icon-size: 1.25rem;
+  --combobox-wrapper-inner-padding: var(--a-spacing-1);
+  --combobox-list-item-padding-block: var(--a-spacing-1-alt);
+  --combobox-list-item-padding-inline: var(--a-spacing-2);
+}
+
+.navds-combobox__wrapper-inner.navds-text-field__input {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  min-height: initial;
   width: 100%;
-  padding: calc(var(--a-spacing-2) - 2px) var(--a-spacing-2);
+  padding-block: calc(var(--combobox-wrapper-inner-padding) - var(--combobox-border-width));
+  padding-inline: var(--combobox-wrapper-inner-padding);
 }
 
 .navds-combobox__wrapper-inner > :first-child {
@@ -22,10 +37,6 @@
 .navds-combobox__wrapper-inner > :last-child {
   display: flex;
   flex-flow: row nowrap;
-}
-
-.navds-form-field--small .navds-combobox__wrapper-inner {
-  padding: 0 calc(var(--a-spacing-3) / 2);
 }
 
 .navds-combobox__wrapper-inner:hover {
@@ -47,7 +58,7 @@
 }
 
 .navds-combobox__selected-options {
-  gap: var(--a-spacing-2);
+  gap: var(--combobox-wrapper-inner-padding);
   align-items: center;
 }
 
@@ -82,6 +93,7 @@
   margin: 0;
   min-width: 10ch;
   width: 100%;
+  height: 1.5rem;
 }
 
 .navds-combobox__input:focus-visible {
@@ -147,8 +159,8 @@
 }
 
 .navds-combobox__button-clear svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--combobox-icon-size);
+  height: var(--combobox-icon-size);
 }
 
 .navds-combobox__input::-webkit-search-cancel-button {
@@ -197,15 +209,9 @@
 }
 
 .navds-combobox__button-toggle-list svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--combobox-icon-size);
+  height: var(--combobox-icon-size);
   pointer-events: none;
-}
-
-.navds-form-field--small .navds-combobox__button-toggle-list svg,
-.navds-form-field--small .navds-combobox__button-clear svg {
-  width: 1.25rem;
-  height: 1.25rem;
 }
 
 /* dropdown & non selectable dropdown items */
@@ -233,8 +239,8 @@
 }
 
 .navds-combobox__list svg {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: var(--combobox-icon-size);
+  width: var(--combobox-icon-size);
 }
 
 .navds-combobox__list_non-selectables {
@@ -253,18 +259,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: var(--a-spacing-3);
+  padding-block: var(--combobox-list-item-padding-block);
+  padding-inline: var(--combobox-list-item-padding-inline);
   width: 100%;
   background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
   scroll-margin-top: 50px;
-}
-
-.navds-form-field--small .navds-combobox__list-item,
-.navds-form-field--small .navds-combobox__list-item--loading,
-.navds-form-field--small .navds-combobox__list-item--no-options,
-.navds-form-field--small .navds-combobox__list-item--new-option,
-.navds-form-field--small .navds-combobox__list-item--max-selected {
-  padding: calc(var(--a-spacing-3) / 2) var(--a-spacing-2);
 }
 
 .navds-combobox__list-item--loading {
@@ -304,12 +303,7 @@
   background-color: var(--ac-combobox-list-item-hover-bg, var(--a-surface-hover));
   cursor: pointer;
   border-left: 4px solid var(--ac-combobox-list-item-hover-border-left, var(--a-border-strong));
-  padding-left: calc(var(--a-spacing-3) - 4px);
-}
-
-.navds-form-field--small .navds-combobox__list-item--focus,
-.navds-combobox__list--with-hover .navds-form-field--small .navds-combobox__list-item:hover {
-  padding-left: calc(var(--a-spacing-2) - 4px);
+  padding-inline-start: calc(var(--combobox-list-item-padding-inline) - 4px);
 }
 
 .navds-combobox__list-item[data-no-focus="true"] {
@@ -329,7 +323,8 @@
 .navds-combobox__list--with-hover .navds-combobox__list-item--selected:hover {
   background-color: var(--ac-combobox-list-item-selected-hover-bg, var(--a-surface-action-subtle-hover));
   border-left: 4px solid var(--ac-combobox-list-item-selected-hover-border-left, var(--a-border-focus));
-  padding-left: calc(var(--a-spacing-3) - 4px);
+
+  /* padding-left: calc(var(--a-spacing-3) - 4px); */
 }
 
 .navds-combobox__list-item--new-option {
