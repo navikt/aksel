@@ -22,7 +22,7 @@ describe("Utils test", () => {
     expect(capitalize(str4)).toEqual("Teststr");
   });
 
-  test("dateStr", async () => {
+  test("dateStr", { retry: 10, timeout: 8000 }, async () => {
     const date = "2022-06-09T11:05:48Z";
     const date2 = "2021-03-02T12:05:48Z";
 

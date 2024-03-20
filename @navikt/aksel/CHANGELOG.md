@@ -1,5 +1,33 @@
 # @navikt/aksel
 
+## 6.3.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@6.3.3
+
+## 6.3.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@6.3.2
+
+## 6.3.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@6.3.1
+
+## 6.3.0
+
+### Patch Changes
+
+- Updated dependencies [[`25e0d15d6`](https://github.com/navikt/aksel/commit/25e0d15d67cebd36ee58aa3b7d9f1c7104d92de6)]:
+  - @navikt/ds-css@6.3.0
+
 ## 6.2.0
 
 ### Patch Changes

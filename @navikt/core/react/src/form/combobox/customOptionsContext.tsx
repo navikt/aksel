@@ -1,11 +1,12 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { useInputContext } from "./Input/inputContext";
+import { ComboboxOption } from "./types";
 
 type CustomOptionsContextType = {
-  customOptions: string[];
-  removeCustomOption: (option: string) => void;
-  addCustomOption: (option: string) => void;
-  setCustomOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  customOptions: ComboboxOption[];
+  removeCustomOption: (option: ComboboxOption) => void;
+  addCustomOption: (option: ComboboxOption) => void;
+  setCustomOptions: React.Dispatch<React.SetStateAction<ComboboxOption[]>>;
 };
 
 const CustomOptionsContext = createContext<CustomOptionsContextType>(
@@ -19,14 +20,14 @@ export const CustomOptionsProvider = ({
   children: any;
   value: { isMultiSelect?: boolean };
 }) => {
-  const [customOptions, setCustomOptions] = useState<string[]>([]);
+  const [customOptions, setCustomOptions] = useState<ComboboxOption[]>([]);
   const { focusInput } = useInputContext();
   const { isMultiSelect } = value;
 
   const removeCustomOption = useCallback(
-    (option: string) => {
+    (option: ComboboxOption) => {
       setCustomOptions((prevCustomOptions) =>
-        prevCustomOptions.filter((o) => o !== option),
+        prevCustomOptions.filter((o) => o.label !== option.label),
       );
       focusInput();
     },
@@ -34,7 +35,7 @@ export const CustomOptionsProvider = ({
   );
 
   const addCustomOption = useCallback(
-    (option: string) => {
+    (option: ComboboxOption) => {
       if (isMultiSelect) {
         setCustomOptions((prevOptions) => [...prevOptions, option]);
       } else {

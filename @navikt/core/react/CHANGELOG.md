@@ -1,5 +1,51 @@
 # @navikt/ds-react
 
+## 6.3.3
+
+### Patch Changes
+
+- FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
+
+- useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.3
+  - @navikt/aksel-icons@6.3.3
+
+## 6.3.2
+
+### Patch Changes
+
+- FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.2
+  - @navikt/aksel-icons@6.3.2
+
+## 6.3.1
+
+### Patch Changes
+
+- FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.1
+  - @navikt/aksel-icons@6.3.1
+
+## 6.3.0
+
+### Minor Changes
+
+- Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+
+- FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.0
+  - @navikt/aksel-icons@6.3.0
+
 ## 6.2.0
 
 ### Patch Changes

@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { act } from "react-dom/test-utils";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { UNSAFE_Combobox } from "./index";
 
 const options = [
@@ -121,6 +121,37 @@ describe("Combobox state-handling", () => {
 
     expect(
       await screen.findByRole("option", { name: "banana" }),
+    ).toBeInTheDocument();
+  });
+
+  test("Should handle complex options with label and value", async () => {
+    const onToggleSelected = vi.fn();
+    render(
+      <App
+        options={[
+          { label: "Hjelpemidler [HJE]", value: "HJE" },
+          { label: "Oppfølging [OPP]", value: "OPP" },
+          { label: "Sykepenger [SYK]", value: "SYK" },
+          { label: "Sykemelding [SYM]", value: "SYM" },
+        ]}
+        onToggleSelected={onToggleSelected}
+      />,
+    );
+
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    const bananaOption = screen.getByRole("option", {
+      name: "Hjelpemidler [HJE]",
+      selected: false,
+    });
+    await act(async () => {
+      await userEvent.click(bananaOption);
+    });
+    expect(onToggleSelected).toHaveBeenCalledWith("HJE", true, false);
+    expect(
+      screen.getByRole("option", {
+        name: "Hjelpemidler [HJE]",
+        selected: true,
+      }),
     ).toBeInTheDocument();
   });
 });

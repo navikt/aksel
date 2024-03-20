@@ -5,6 +5,8 @@ import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
 import { useInputContext } from "../Input/inputContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { isInList, toComboboxOption } from "../combobox-utils";
+import { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -30,8 +32,8 @@ const FilteredOptions = () => {
   const { isMultiSelect, selectedOptions, toggleOption, maxSelected } =
     useSelectedOptionsContext();
 
-  const isDisabled = (option) =>
-    maxSelected?.isLimitReached && !selectedOptions.includes(option);
+  const isDisabled = (option: ComboboxOption) =>
+    maxSelected?.isLimitReached && !isInList(option.value, selectedOptions);
 
   const shouldRenderNonSelectables =
     maxSelected?.isLimitReached || // Render maxSelected message
@@ -102,8 +104,8 @@ const FilteredOptions = () => {
                 }
               }}
               onPointerUp={(event) => {
-                toggleOption(value, event);
-                if (!isMultiSelect && !selectedOptions.includes(value))
+                toggleOption(toComboboxOption(value), event);
+                if (!isMultiSelect && !isInList(value, selectedOptions))
                   toggleIsListOpen(false);
               }}
               id={filteredOptionsUtil.getAddNewOptionId(id)}
@@ -132,21 +134,23 @@ const FilteredOptions = () => {
               className={cl("navds-combobox__list-item", {
                 "navds-combobox__list-item--focus":
                   activeDecendantId ===
-                  filteredOptionsUtil.getOptionId(id, option),
-                "navds-combobox__list-item--selected":
-                  selectedOptions.includes(option),
+                  filteredOptionsUtil.getOptionId(id, option.label),
+                "navds-combobox__list-item--selected": isInList(
+                  option.value,
+                  selectedOptions,
+                ),
               })}
               data-no-focus={isDisabled(option) || undefined}
-              id={filteredOptionsUtil.getOptionId(id, option)}
-              key={option}
+              id={filteredOptionsUtil.getOptionId(id, option.label)}
+              key={option.label}
               tabIndex={-1}
               onMouseMove={() => {
                 if (
                   activeDecendantId !==
-                  filteredOptionsUtil.getOptionId(id, option)
+                  filteredOptionsUtil.getOptionId(id, option.label)
                 ) {
                   virtualFocus.moveFocusToElement(
-                    filteredOptionsUtil.getOptionId(id, option),
+                    filteredOptionsUtil.getOptionId(id, option.label),
                   );
                   setIsMouseLastUsedInputDevice(true);
                 }
@@ -156,16 +160,19 @@ const FilteredOptions = () => {
                   return;
                 }
                 toggleOption(option, event);
-                if (!isMultiSelect && !selectedOptions.includes(option)) {
+                if (
+                  !isMultiSelect &&
+                  !isInList(option.value, selectedOptions)
+                ) {
                   toggleIsListOpen(false);
                 }
               }}
               role="option"
-              aria-selected={selectedOptions.includes(option)}
+              aria-selected={isInList(option.value, selectedOptions)}
               aria-disabled={isDisabled(option) || undefined}
             >
-              <BodyShort size={size}>{option}</BodyShort>
-              {selectedOptions.includes(option) && <CheckmarkIcon />}
+              <BodyShort size={size}>{option.label}</BodyShort>
+              {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
             </li>
           ))}
         </ul>
