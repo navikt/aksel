@@ -3,9 +3,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form>
+    <form role="search">
       <Search
         label="Søk alle NAV sine sider"
+        description="Her kan du søke på forskjellige ting, f.eks. søknadsskjemaer."
         variant="secondary"
         hideLabel={false}
       />

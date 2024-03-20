@@ -49,6 +49,7 @@ export const Default = (props) => {
     </RadioGroup>
   );
 };
+
 Default.args = {
   controlled: false,
   error: false,

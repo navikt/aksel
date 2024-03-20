@@ -29,7 +29,6 @@ import { contributorsAll } from "@/sanity/queries";
 import { AkselTemaT, NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
-import { UxTweaks } from "@/web/Uxtweaks";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 
@@ -296,10 +295,11 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   </ul>
                 </VStack>
               </Box>
-              <UxTweaks
-                href="https://study.uxtweak.com/treetest/onFDOBRUT19G3KNNNa7DD"
+              {/* Kept commented here in case we want to show future questionnaires from uxtweaks */}
+              {/* <UxTweaks
+                href="https://study.uxtweak.com/treetest/..."
                 length={3}
-              />
+              /> */}
 
               {blocks && (
                 <Box paddingInline={{ xs: "2", lg: "18" }}>
