@@ -1,4 +1,4 @@
-import nb from "./locales/nb.json";
+import nb from "./locales/nb";
 
 export interface TranslationObject {
   [key: string]: string | TranslationObject | undefined;
