@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.3.2
+
+### Patch Changes
+
+- FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.2
+  - @navikt/aksel-icons@6.3.2
+
 ## 6.3.1
 
 ### Patch Changes
