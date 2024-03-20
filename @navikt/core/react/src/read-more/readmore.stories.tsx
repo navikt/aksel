@@ -85,4 +85,7 @@ export const Chromatic: Story = {
       </VStack>
     );
   },
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
