@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.2.3",
+    "@navikt/next-logger": "1.23.0",
     "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.0.11",
     "@sanity/client": "^6.13.3",
@@ -51,7 +52,7 @@
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
     "next": "14.1.1-canary.57",
-    "next-logger": "3.0.2",
+    "next-logger": "^3.0.2",
     "next-sanity": "5.5.8",
     "node-cache": "^5.1.2",
     "pino": "^8.14.1",

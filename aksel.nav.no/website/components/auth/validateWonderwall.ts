@@ -1,6 +1,6 @@
 import { NextApiRequest } from "next/types";
+import { logger } from "@navikt/next-logger";
 import { getToken, validateAzureToken } from "@navikt/oasis";
-import { logger } from "../../config/logger";
 
 /**
  * Validates the wonderwall token according to nais.io. Should only actually redirect if the token has expired.
@@ -9,7 +9,7 @@ export async function validateWonderwallToken(
   headers: NextApiRequest["headers"],
 ): Promise<boolean> {
   if (process.env.NODE_ENV !== "production") {
-    logger.info("Is running locally, skipping RSC auth");
+    logger.error("Is running locally, skipping RSC auth");
     return true;
   }
 
@@ -28,6 +28,10 @@ export async function validateWonderwallToken(
           `Invalid JWT token found (cause: ${validationResult.errorType} ${validationResult.error}`,
           { cause: validationResult.error },
         ),
+      );
+    } else {
+      logger.error(
+        `JWT token has expired (cause: ${validationResult.errorType} ${validationResult.error}`,
       );
     }
     return false;

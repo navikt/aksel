@@ -1,6 +1,7 @@
 import { SectionBlock, UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
+import { logger } from "@navikt/next-logger";
 import { authProtectedApi } from "@/auth/authProtectedApi";
 import { getAuthUser } from "@/auth/getAuthUser";
 import { getClient } from "@/sanity/client.server";
@@ -11,7 +12,6 @@ import {
   fetchSlackMembers,
   findUserByEmail,
 } from "@/slack";
-import { logger } from "../../../../../config/logger";
 
 const maxFeedbackLength = 500;
 

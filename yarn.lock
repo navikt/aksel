@@ -3304,7 +3304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.3.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.3.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3332,8 +3332,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.3.2
-    "@navikt/ds-tokens": ^6.3.2
+    "@navikt/ds-css": ^6.3.3
+    "@navikt/ds-tokens": ^6.3.3
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3348,7 +3348,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.3.2
+    "@navikt/ds-css": 6.3.3
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3369,11 +3369,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.3.2, @navikt/ds-css@^6.3.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.3.3, @navikt/ds-css@^6.3.3, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.3.2
+    "@navikt/ds-tokens": ^6.3.3
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3386,13 +3386,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.3.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.3.3, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
-    "@navikt/aksel-icons": ^6.3.2
-    "@navikt/ds-tokens": ^6.3.2
+    "@navikt/aksel-icons": ^6.3.3
+    "@navikt/ds-tokens": ^6.3.3
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3424,11 +3424,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^6.3.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.3.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.3.2
+    "@navikt/ds-tokens": ^6.3.3
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3438,7 +3438,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.3.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.3.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -3451,6 +3451,16 @@ __metadata:
     vitest: ^1.2.2
   languageName: unknown
   linkType: soft
+
+"@navikt/next-logger@npm:1.23.0":
+  version: 1.23.0
+  resolution: "@navikt/next-logger@npm:1.23.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F1.23.0%2F322dcf9bb53a1415b5a8b6dce561c7a0ed53ee42"
+  peerDependencies:
+    next: 12 || 13 || 14
+    pino: 8
+  checksum: 55df992727e71c501d8a20e33df9293a8aab2fae7674c1f22aa2b4e7d78eade26bee475c5d9f17d505903f8e394f1e31a3e7726c86d2b4c7b312a3a65a3a70e0
+  languageName: node
+  linkType: hard
 
 "@navikt/oasis@npm:3.2.1":
   version: 3.2.1
@@ -8861,11 +8871,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.3.2
-    "@navikt/ds-css": ^6.3.2
-    "@navikt/ds-react": ^6.3.2
-    "@navikt/ds-tailwind": ^6.3.2
-    "@navikt/ds-tokens": ^6.3.2
+    "@navikt/aksel-icons": ^6.3.3
+    "@navikt/ds-css": ^6.3.3
+    "@navikt/ds-react": ^6.3.3
+    "@navikt/ds-tailwind": ^6.3.3
+    "@navikt/ds-tokens": ^6.3.3
   languageName: unknown
   linkType: soft
 
@@ -19964,15 +19974,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-logger@npm:3.0.2":
-  version: 3.0.2
-  resolution: "next-logger@npm:3.0.2"
+"next-logger@npm:4.0.0":
+  version: 4.0.0
+  resolution: "next-logger@npm:4.0.0"
   dependencies:
     cosmiconfig: ^8.1.3
     pino: ^8.11.0
   peerDependencies:
     next: ">=9.0.0"
-  checksum: b7f756ef98564d139f8466ab2a4e9a493297ad28e556a3c0b245472b32d868e65f703ee76749130401fe70d27c1bfa9c1cd3347793967246e46d17e29c387b15
+  checksum: 7aebe1b8cfd1459a55077872c6dcaefecee4b9567537b287ea010484a50bb1f6b2e637971cf3f8934c9d0e0c2188c0f5ec0adb324b1c7b21018199b11b4f3eea
   languageName: node
   linkType: hard
 
@@ -28574,6 +28584,7 @@ __metadata:
     "@amplitude/analytics-browser": ^2.2.3
     "@axe-core/playwright": ^4.5.2
     "@babel/core": ^7.19.0
+    "@navikt/next-logger": 1.23.0
     "@navikt/oasis": 3.2.1
     "@next/bundle-analyzer": 14.1.1-canary.57
     "@next/eslint-plugin-next": 14.1.1-canary.57
@@ -28607,7 +28618,7 @@ __metadata:
     lodash: ^4.17.21
     lz-string: ^1.5.0
     next: 14.1.1-canary.57
-    next-logger: 3.0.2
+    next-logger: 4.0.0
     next-sanity: 5.5.8
     node-cache: ^5.1.2
     pino: ^8.14.1

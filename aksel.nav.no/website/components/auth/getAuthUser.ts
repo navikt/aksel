@@ -1,6 +1,6 @@
 import { NextApiRequest } from "next/types";
+import { logger } from "@navikt/next-logger";
 import { AuthUser } from "@/auth/auth.types";
-import { logger } from "../../config/logger";
 
 export function getAuthUser(
   headers: NextApiRequest["headers"],
