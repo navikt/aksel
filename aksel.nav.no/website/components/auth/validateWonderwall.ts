@@ -9,7 +9,7 @@ export async function validateWonderwallToken(
   headers: NextApiRequest["headers"],
 ): Promise<boolean> {
   if (process.env.NODE_ENV !== "production") {
-    logger.error("Is running locally, skipping RSC auth");
+    logger.info("Is running locally, skipping RSC auth");
     return true;
   }
 
