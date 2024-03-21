@@ -40,7 +40,10 @@ async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
-  logger.info("Received slackbot feedback request");
+  logger.info(
+    { type: "slackbot-feedback" },
+    "Received slackbot feedback request",
+  );
   const user = getAuthUser(request.headers);
 
   /**
@@ -196,7 +199,10 @@ function errorResponse(
   response: NextApiResponse,
   error: keyof typeof ErrorMap,
 ) {
-  logger.error(ErrorMap[error]);
+  logger.error(
+    { type: "slackbot-feedback" },
+    ErrorMap[error] ?? "unknown error",
+  );
 
   response.status(400).json(responseJson(false, error));
 }
