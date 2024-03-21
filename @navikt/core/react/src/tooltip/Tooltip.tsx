@@ -1,5 +1,4 @@
 import {
-  FloatingPortal,
   autoUpdate,
   arrow as flArrow,
   flip,
@@ -13,15 +12,9 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, {
-  HTMLAttributes,
-  cloneElement,
-  forwardRef,
-  useContext,
-  useRef,
-} from "react";
-import { ModalContext } from "../modal/ModalContext";
-import { useProvider } from "../provider";
+import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import { useModalContext } from "../modal/Modal.context";
+import { Portal } from "../portal";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -29,8 +22,9 @@ import { useMergeRefs } from "../util/hooks/useMergeRefs";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Element tooltip anchors to
-   * @note Needs to be React.ReactElement, does not support multiple children/react fragment
+   * Element tooltip anchors to.
+   *
+   * Needs to be React.ReactElement, does not support multiple children/react fragment
    */
   children: React.ReactElement & React.RefAttributes<HTMLElement>;
   /**
@@ -39,45 +33,51 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   open?: boolean;
   /**
    * Tells tooltip to start in open state.
-   * Use sparingly synce hover/focus on other elements will close it
-   * @note "open"-prop overwrites this
+   * Use _sparingly_ since hover/focus on other elements will close it.
+   *
+   * `open`-prop overwrites this.
    */
   defaultOpen?: boolean;
   /**
-   * Change handler for open
+   * Change handler for open.
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Orientation for tooltip
+   * Orientation for tooltip.
    * @default "top"
    */
   placement?: "top" | "right" | "bottom" | "left";
   /**
-   * Toggles rendering of arrow
+   * Toggles rendering of arrow.
    * @default true
    */
   arrow?: boolean;
   /**
-   * Distance from anchor to tooltip
+   * Distance from anchor to tooltip.
    * @default 10px with arrow, 2px without arrow
    */
   offset?: number;
   /**
-   * Text-content inside tooltip
+   * Text-content inside tooltip.
    */
   content: string;
   /**
-   * Sets max allowed character length.
+   * Sets max character length.
+   *
+   * Ideally you should keep the length of the tooltip to a minimum (80 characters).
+   * Currently this prop only emits a warning in the console, which can be squelched
+   * by setting this to a larger number. However, before doing so you should _try_
+   * to shorten the content so that it fits into 80 characters.
    * @default 80
    */
   maxChar?: number;
   /**
-   * Adds a delay in milliseconds before opening tooltip
+   * Adds a delay in milliseconds before opening tooltip.
    * @default 150
    */
   delay?: number;
   /**
-   * List of Keyboard-keys for shortcuts
+   * List of Keyboard-keys for shortcuts.
    */
   keys?: string[];
 }
@@ -122,11 +122,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     });
 
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const modalContext = useContext(ModalContext);
-    const providerRootElement = useProvider()?.rootElement;
-    const rootElement = modalContext
-      ? modalContext.ref.current
-      : providerRootElement;
+    const modalContext = useModalContext(false);
+    const rootElement = modalContext ? modalContext.ref.current : undefined;
 
     const {
       x,
@@ -199,7 +196,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               : children?.props["aria-describedby"],
           }),
         )}
-        <FloatingPortal root={rootElement}>
+        <Portal rootElement={rootElement} asChild>
           {_open && (
             <div
               {...getFloatingProps({
@@ -253,7 +250,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               )}
             </div>
           )}
-        </FloatingPortal>
+        </Portal>
       </>
     );
   },

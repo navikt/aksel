@@ -1,26 +1,24 @@
-export interface ModalProps
-  extends React.DialogHTMLAttributes<HTMLDialogElement> {
+interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
-   * Content for the header. Alteratively you can use <Modal.Header> instead for more control,
-   * but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
+   * Content for the header. Alteratively you can use `<Modal.Header>` instead for more control, but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
    */
   header?: {
     label?: string;
     icon?: React.ReactNode;
     heading: string;
     /**
-     * Heading size
+     * Heading size.
      * @default "medium"
      * */
     size?: "medium" | "small";
     /**
-     * Removes close-button (X) when false
+     * Removes close-button (X) when false.
      * @default true
      */
     closeButton?: boolean;
   };
   /**
-   * Modal content
+   * Modal content.
    */
   children: React.ReactNode;
   /**
@@ -37,12 +35,13 @@ export interface ModalProps
    * Called when the user tries to close the modal by one of the built-in methods.
    * Used if you want to ask the user for confirmation before closing.
    * @warning Will not always be called when pressing Esc. See `onCancel` for more info.
-   * @returns Whether to close the modal
+   * @returns Whether to close the modal or not
    */
-  onBeforeClose?: () => boolean | void;
+  onBeforeClose?: () => boolean;
   /**
-   * *Sometimes** called when the user presses the Esc key.
-   * @warning *Some browsers does not always trigger this event. Chrome only triggers it if you have
+   * _Sometimes*_ called when the user presses the Esc key.
+   *
+   *  *: Some browsers does not always trigger this event. Chrome only triggers it if you have
    *  interacted with the modal, and will not trigger it a second time if you press Esc twice in a row.
    */
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
@@ -66,9 +65,41 @@ export interface ModalProps
    */
   className?: string;
   /**
-   * Sets aria-labelledby on modal.
+   * ID of the element that labels the modal.
    * No need to set this manually if the `header` prop is used. A reference to `header.heading` will be created automatically.
    * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
    */
   "aria-labelledby"?: string;
+  /**
+   * String value that labels the modal.
+   * No need to set this if the `header` prop is used.
+   * @warning If not using `header`, you should set either `aria-labelledby` or `aria-label`.
+   */
+  "aria-label"?: string;
 }
+
+// Require onClose if you use open  &  Require either header, aria-labelledby or aria-label
+export type ModalProps = ModalPropsBase &
+  (
+    | { onClose: ModalPropsBase["onClose"]; open: boolean | undefined }
+    | { onClose?: ModalPropsBase["onClose"]; open?: never }
+  ) &
+  (
+    | {
+        header: ModalPropsBase["header"];
+        "aria-labelledby": string;
+        "aria-label"?: never;
+      }
+    | {
+        header: ModalPropsBase["header"];
+        "aria-label": string;
+        "aria-labelledby"?: never;
+      }
+    | {
+        header: ModalPropsBase["header"];
+        "aria-labelledby"?: never;
+        "aria-label"?: never;
+      }
+    | { "aria-labelledby": string; "aria-label"?: never }
+    | { "aria-labelledby"?: never; "aria-label": string }
+  );

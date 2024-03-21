@@ -5,7 +5,7 @@ import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
 const views = () => {
-  const list = [];
+  const list: ReturnType<typeof defineField>[] = [];
   komponentKategorier.forEach((kat) => {
     list.push(
       defineField({

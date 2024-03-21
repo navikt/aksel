@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { act } from "react-dom/test-utils";
-import { UNSAFE_Combobox } from "..";
+import { describe, expect, test, vi } from "vitest";
+import { UNSAFE_Combobox } from "./index";
 
 const options = [
   "banana",
@@ -37,7 +38,7 @@ const App = (props) => {
 
 describe("Render combobox", () => {
   describe("with multi select", () => {
-    it("Should be able to search, select and remove selections", async () => {
+    test("Should be able to search, select and remove selections", async () => {
       render(<App isMultiSelect options={options} />);
 
       await act(async () => {
@@ -71,7 +72,7 @@ describe("Render combobox", () => {
     });
   });
 
-  it("Should show loading icon when loading (used for async search)", async () => {
+  test("Should show loading icon when loading (used for async search)", async () => {
     render(<App options={[]} isListOpen isLoading />);
 
     expect(await screen.findByText("Søker...")).toBeInTheDocument();
@@ -79,7 +80,7 @@ describe("Render combobox", () => {
 });
 
 describe("Combobox state-handling", () => {
-  it("Should not select previous focused element when closes", async () => {
+  test("Should not select previous focused element when closes", async () => {
     render(<App options={options} />);
 
     await act(async () => {
@@ -100,7 +101,7 @@ describe("Combobox state-handling", () => {
     expect(screen.queryByRole("button", { name: "banana slett" })).toBeNull();
   });
 
-  it("Should reset list when resetting input (ESC)", async () => {
+  test("Should reset list when resetting input (ESC)", async () => {
     render(<App options={options} />);
 
     await act(async () => {
@@ -120,6 +121,37 @@ describe("Combobox state-handling", () => {
 
     expect(
       await screen.findByRole("option", { name: "banana" }),
+    ).toBeInTheDocument();
+  });
+
+  test("Should handle complex options with label and value", async () => {
+    const onToggleSelected = vi.fn();
+    render(
+      <App
+        options={[
+          { label: "Hjelpemidler [HJE]", value: "HJE" },
+          { label: "Oppfølging [OPP]", value: "OPP" },
+          { label: "Sykepenger [SYK]", value: "SYK" },
+          { label: "Sykemelding [SYM]", value: "SYM" },
+        ]}
+        onToggleSelected={onToggleSelected}
+      />,
+    );
+
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    const bananaOption = screen.getByRole("option", {
+      name: "Hjelpemidler [HJE]",
+      selected: false,
+    });
+    await act(async () => {
+      await userEvent.click(bananaOption);
+    });
+    expect(onToggleSelected).toHaveBeenCalledWith("HJE", true, false);
+    expect(
+      screen.getByRole("option", {
+        name: "Hjelpemidler [HJE]",
+        selected: true,
+      }),
     ).toBeInTheDocument();
   });
 });

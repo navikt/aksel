@@ -1,4 +1,4 @@
-import { TabsList } from "@radix-ui/react-tabs";
+import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
 import React, {
   forwardRef,
@@ -15,7 +15,7 @@ import { TabsContext } from "./context";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * <Tabs.Tab /> elements
+   * `<Tabs.Tab />` elements
    */
   children: React.ReactNode;
 }
@@ -112,7 +112,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         {showSteppers && (
           <ScrollButton dir={-1} hidden={!displayScroll.start} />
         )}
-        <TabsList
+        <RadixTabs.TabsList
           {...rest}
           ref={mergedRef}
           onScroll={updateScrollButtonState}

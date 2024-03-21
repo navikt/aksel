@@ -29,7 +29,6 @@ const InnholdsKort = ({ node }: InnholdsKortProps) => {
           onClick={(e) =>
             amplitudeLogNavigation(
               "prinsipp-kort",
-
               e.currentTarget.getAttribute("href"),
             )
           }

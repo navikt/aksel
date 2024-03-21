@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { createContext, forwardRef, useContext, useState } from "react";
-import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
+import { Fieldset, FieldsetProps } from "../fieldset";
+import { FieldsetContext } from "../fieldset/context";
 
 export interface CheckboxGroupState {
   readonly defaultValue?: readonly any[];
@@ -18,7 +19,7 @@ export interface CheckboxGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Collection of <Checkbox/>
+   * Collection of `<Checkbox/>`.
    */
   children: React.ReactNode;
   /**
@@ -26,11 +27,11 @@ export interface CheckboxGroupProps
    */
   value?: any[];
   /**
-   * Default checked checkboxes on render
+   * Default checked checkboxes on render.
    */
   defaultValue?: any[];
   /**
-   * Returns current checked checkboxes in group
+   * Returns current checked checkboxes in group.
    */
   onChange?: (value: any[]) => void;
 }

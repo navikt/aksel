@@ -61,7 +61,7 @@ const TokenTable = ({ node }: TokenTableProps) => {
             Komponent-tokens gir deg muligheten til å sette opp theming eller
             justere styling uten å måtte overskrive css-klasser. Les gjennom{" "}
             <NextLink
-              href="/grunnleggende/styling/design-tokens#hec62d38bc813"
+              href="/grunnleggende/styling/design-tokens#ec62d38bc813"
               passHref
               legacyBehavior
             >

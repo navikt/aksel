@@ -1,8 +1,8 @@
-import { getTestRule } from "jest-preset-stylelint";
+import { testRule } from "stylelint-test-rule-node";
 import rule, { messages } from ".";
 import { deprecations } from "../../deprecations";
 
-getTestRule()({
+testRule({
   plugins: ["./dist/index.js"],
   ruleName: rule.ruleName,
   config: true,

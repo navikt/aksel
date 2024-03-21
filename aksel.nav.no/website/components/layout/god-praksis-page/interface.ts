@@ -168,7 +168,7 @@ export type GpArticleT = {
   slug: string;
   innholdstype: string | null;
   publishedAt: string | null;
-  currentUndertema?: string;
+  currentUndertema: string | null;
 };
 
 export const initialGpMainPageArticles = groq`

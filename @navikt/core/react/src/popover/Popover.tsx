@@ -9,7 +9,7 @@ import {
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
 import { DateContext } from "../date/context";
-import { ModalContext } from "../modal/ModalContext";
+import { useModalContext } from "../modal/Modal.context";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
@@ -34,7 +34,8 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   onClose: () => void;
   /**
    * Default orientation of popover
-   * @note Try to keep general usage to "top", "bottom", "left", "right"
+   *
+   * Try to keep general usage to "top", "bottom", "left", "right".
    * @default "top"
    */
   placement?:
@@ -118,7 +119,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const isInModal = useContext(ModalContext) !== null;
+    const isInModal = useModalContext(false) !== undefined;
     const isInDatepicker = useContext(DateContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;

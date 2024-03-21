@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { dateIsInCurrentMonth } from "..";
 
 const selectedDate = new Date("Feb 1 1994");

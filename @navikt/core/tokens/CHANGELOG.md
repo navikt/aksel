@@ -1,5 +1,37 @@
 # @navikt/ds-tokens
 
+## 6.3.3
+
+## 6.3.2
+
+## 6.3.1
+
+## 6.3.0
+
+## 6.2.0
+
+## 6.1.1
+
+## 6.1.0
+
+## 6.0.0
+
+### Major Changes
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: Fjernet token `--a-z-index-modal` da den ikke lengre blir konsumert i systemet. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+## 5.18.3
+
+## 5.18.2
+
+## 5.18.1
+
+## 5.18.0
+
+## 5.17.5
+
 ## 5.17.4
 
 ## 5.17.3

@@ -1,21 +1,20 @@
 {
   "name": "@navikt/ds-react",
-  "version": "5.17.4",
-  "description": "Aksel react-components for NAV designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "version": "6.3.3",
+  "description": "React components from the Norwegian Labour and Welfare Administration.",
+  "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
   "keywords": [
     "react",
     "typescript",
-    "javascript"
+    "javascript",
+    "NAV"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git"
   },
   "sideEffects": false,
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
   "typings": "./esm/index.d.ts",
   "publishConfig": {
     "access": "public",
@@ -25,26 +24,551 @@
     "/cjs",
     "/esm",
     "/src",
-    "_docs.json",
     "!**/*.tsbuildinfo"
   ],
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    },
+    "./Accordion": {
+      "import": {
+        "types": "./esm/accordion/index.d.ts",
+        "default": "./esm/accordion/index.js"
+      },
+      "require": {
+        "types": "./cjs/accordion/index.d.ts",
+        "default": "./cjs/accordion/index.js"
+      }
+    },
+    "./Alert": {
+      "import": {
+        "types": "./esm/alert/index.d.ts",
+        "default": "./esm/alert/index.js"
+      },
+      "require": {
+        "types": "./cjs/alert/index.d.ts",
+        "default": "./cjs/alert/index.js"
+      }
+    },
+    "./Button": {
+      "import": {
+        "types": "./esm/button/index.d.ts",
+        "default": "./esm/button/index.js"
+      },
+      "require": {
+        "types": "./cjs/button/index.d.ts",
+        "default": "./cjs/button/index.js"
+      }
+    },
+    "./Chat": {
+      "import": {
+        "types": "./esm/chat/index.d.ts",
+        "default": "./esm/chat/index.js"
+      },
+      "require": {
+        "types": "./cjs/chat/index.d.ts",
+        "default": "./cjs/chat/index.js"
+      }
+    },
+    "./Chips": {
+      "import": {
+        "types": "./esm/chips/index.d.ts",
+        "default": "./esm/chips/index.js"
+      },
+      "require": {
+        "types": "./cjs/chips/index.d.ts",
+        "default": "./cjs/chips/index.js"
+      }
+    },
+    "./CopyButton": {
+      "import": {
+        "types": "./esm/copybutton/index.d.ts",
+        "default": "./esm/copybutton/index.js"
+      },
+      "require": {
+        "types": "./cjs/copybutton/index.d.ts",
+        "default": "./cjs/copybutton/index.js"
+      }
+    },
+    "./DatePicker": {
+      "import": {
+        "types": "./esm/date/datepicker/index.d.ts",
+        "default": "./esm/date/datepicker/index.js"
+      },
+      "require": {
+        "types": "./cjs/date/datepicker/index.d.ts",
+        "default": "./cjs/date/datepicker/index.js"
+      }
+    },
+    "./MonthPicker": {
+      "import": {
+        "types": "./esm/date/monthpicker/index.d.ts",
+        "default": "./esm/date/monthpicker/index.js"
+      },
+      "require": {
+        "types": "./cjs/date/monthpicker/index.d.ts",
+        "default": "./cjs/date/monthpicker/index.js"
+      }
+    },
+    "./Dropdown": {
+      "import": {
+        "types": "./esm/dropdown/index.d.ts",
+        "default": "./esm/dropdown/index.js"
+      },
+      "require": {
+        "types": "./cjs/dropdown/index.d.ts",
+        "default": "./cjs/dropdown/index.js"
+      }
+    },
+    "./ExpansionCard": {
+      "import": {
+        "types": "./esm/expansion-card/index.d.ts",
+        "default": "./esm/expansion-card/index.js"
+      },
+      "require": {
+        "types": "./cjs/expansion-card/index.d.ts",
+        "default": "./cjs/expansion-card/index.js"
+      }
+    },
+    "./GuidePanel": {
+      "import": {
+        "types": "./esm/guide-panel/index.d.ts",
+        "default": "./esm/guide-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/guide-panel/index.d.ts",
+        "default": "./cjs/guide-panel/index.js"
+      }
+    },
+    "./HelpText": {
+      "import": {
+        "types": "./esm/help-text/index.d.ts",
+        "default": "./esm/help-text/index.js"
+      },
+      "require": {
+        "types": "./cjs/help-text/index.d.ts",
+        "default": "./cjs/help-text/index.js"
+      }
+    },
+    "./InternalHeader": {
+      "import": {
+        "types": "./esm/internal-header/index.d.ts",
+        "default": "./esm/internal-header/index.js"
+      },
+      "require": {
+        "types": "./cjs/internal-header/index.d.ts",
+        "default": "./cjs/internal-header/index.js"
+      }
+    },
+    "./Bleed": {
+      "import": {
+        "types": "./esm/layout/bleed/index.d.ts",
+        "default": "./esm/layout/bleed/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/bleed/index.d.ts",
+        "default": "./cjs/layout/bleed/index.js"
+      }
+    },
+    "./Box": {
+      "import": {
+        "types": "./esm/layout/box/index.d.ts",
+        "default": "./esm/layout/box/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/box/index.d.ts",
+        "default": "./cjs/layout/box/index.js"
+      }
+    },
+    "./HGrid": {
+      "import": {
+        "types": "./esm/layout/grid/index.d.ts",
+        "default": "./esm/layout/grid/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/grid/index.d.ts",
+        "default": "./cjs/layout/grid/index.js"
+      }
+    },
+    "./Page": {
+      "import": {
+        "types": "./esm/layout/page/index.d.ts",
+        "default": "./esm/layout/page/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/page/index.d.ts",
+        "default": "./cjs/layout/page/index.js"
+      }
+    },
+    "./Responsive": {
+      "import": {
+        "types": "./esm/layout/responsive/index.d.ts",
+        "default": "./esm/layout/responsive/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/responsive/index.d.ts",
+        "default": "./cjs/layout/responsive/index.js"
+      }
+    },
+    "./Stack": {
+      "import": {
+        "types": "./esm/layout/stack/index.d.ts",
+        "default": "./esm/layout/stack/index.js"
+      },
+      "require": {
+        "types": "./cjs/layout/stack/index.d.ts",
+        "default": "./cjs/layout/stack/index.js"
+      }
+    },
+    "./Link": {
+      "import": {
+        "types": "./esm/link/index.d.ts",
+        "default": "./esm/link/index.js"
+      },
+      "require": {
+        "types": "./cjs/link/index.d.ts",
+        "default": "./cjs/link/index.js"
+      }
+    },
+    "./LinkPanel": {
+      "import": {
+        "types": "./esm/link-panel/index.d.ts",
+        "default": "./esm/link-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/link-panel/index.d.ts",
+        "default": "./cjs/link-panel/index.js"
+      }
+    },
+    "./List": {
+      "import": {
+        "types": "./esm/list/index.d.ts",
+        "default": "./esm/list/index.js"
+      },
+      "require": {
+        "types": "./cjs/list/index.d.ts",
+        "default": "./cjs/list/index.js"
+      }
+    },
+    "./Loader": {
+      "import": {
+        "types": "./esm/loader/index.d.ts",
+        "default": "./esm/loader/index.js"
+      },
+      "require": {
+        "types": "./cjs/loader/index.d.ts",
+        "default": "./cjs/loader/index.js"
+      }
+    },
+    "./Modal": {
+      "import": {
+        "types": "./esm/modal/index.d.ts",
+        "default": "./esm/modal/index.js"
+      },
+      "require": {
+        "types": "./cjs/modal/index.d.ts",
+        "default": "./cjs/modal/index.js"
+      }
+    },
+    "./Portal": {
+      "import": {
+        "types": "./esm/portal/index.d.ts",
+        "default": "./esm/portal/index.js"
+      },
+      "require": {
+        "types": "./cjs/portal/index.d.ts",
+        "default": "./cjs/portal/index.js"
+      }
+    },
+    "./Pagination": {
+      "import": {
+        "types": "./esm/pagination/index.d.ts",
+        "default": "./esm/pagination/index.js"
+      },
+      "require": {
+        "types": "./cjs/pagination/index.d.ts",
+        "default": "./cjs/pagination/index.js"
+      }
+    },
+    "./Popover": {
+      "import": {
+        "types": "./esm/popover/index.d.ts",
+        "default": "./esm/popover/index.js"
+      },
+      "require": {
+        "types": "./cjs/popover/index.d.ts",
+        "default": "./cjs/popover/index.js"
+      }
+    },
+    "./Provider": {
+      "import": {
+        "types": "./esm/provider/index.d.ts",
+        "default": "./esm/provider/index.js"
+      },
+      "require": {
+        "types": "./cjs/provider/index.d.ts",
+        "default": "./cjs/provider/index.js"
+      }
+    },
+    "./ReadMore": {
+      "import": {
+        "types": "./esm/read-more/index.d.ts",
+        "default": "./esm/read-more/index.js"
+      },
+      "require": {
+        "types": "./cjs/read-more/index.d.ts",
+        "default": "./cjs/read-more/index.js"
+      }
+    },
+    "./Skeleton": {
+      "import": {
+        "types": "./esm/skeleton/index.d.ts",
+        "default": "./esm/skeleton/index.js"
+      },
+      "require": {
+        "types": "./cjs/skeleton/index.d.ts",
+        "default": "./cjs/skeleton/index.js"
+      }
+    },
+    "./Stepper": {
+      "import": {
+        "types": "./esm/stepper/index.d.ts",
+        "default": "./esm/stepper/index.js"
+      },
+      "require": {
+        "types": "./cjs/stepper/index.d.ts",
+        "default": "./cjs/stepper/index.js"
+      }
+    },
+    "./Table": {
+      "import": {
+        "types": "./esm/table/index.d.ts",
+        "default": "./esm/table/index.js"
+      },
+      "require": {
+        "types": "./cjs/table/index.d.ts",
+        "default": "./cjs/table/index.js"
+      }
+    },
+    "./Tabs": {
+      "import": {
+        "types": "./esm/tabs/index.d.ts",
+        "default": "./esm/tabs/index.js"
+      },
+      "require": {
+        "types": "./cjs/tabs/index.d.ts",
+        "default": "./cjs/tabs/index.js"
+      }
+    },
+    "./Tag": {
+      "import": {
+        "types": "./esm/tag/index.d.ts",
+        "default": "./esm/tag/index.js"
+      },
+      "require": {
+        "types": "./cjs/tag/index.d.ts",
+        "default": "./cjs/tag/index.js"
+      }
+    },
+    "./Timeline": {
+      "import": {
+        "types": "./esm/timeline/index.d.ts",
+        "default": "./esm/timeline/index.js"
+      },
+      "require": {
+        "types": "./cjs/timeline/index.d.ts",
+        "default": "./cjs/timeline/index.js"
+      }
+    },
+    "./ToggleGroup": {
+      "import": {
+        "types": "./esm/toggle-group/index.d.ts",
+        "default": "./esm/toggle-group/index.js"
+      },
+      "require": {
+        "types": "./cjs/toggle-group/index.d.ts",
+        "default": "./cjs/toggle-group/index.js"
+      }
+    },
+    "./Tooltip": {
+      "import": {
+        "types": "./esm/tooltip/index.d.ts",
+        "default": "./esm/tooltip/index.js"
+      },
+      "require": {
+        "types": "./cjs/tooltip/index.d.ts",
+        "default": "./cjs/tooltip/index.js"
+      }
+    },
+    "./Typography": {
+      "import": {
+        "types": "./esm/typography/index.d.ts",
+        "default": "./esm/typography/index.js"
+      },
+      "require": {
+        "types": "./cjs/typography/index.d.ts",
+        "default": "./cjs/typography/index.js"
+      }
+    },
+    "./Utils": {
+      "import": {
+        "types": "./esm/util/index.d.ts",
+        "default": "./esm/util/index.js"
+      },
+      "require": {
+        "types": "./cjs/util/index.d.ts",
+        "default": "./cjs/util/index.js"
+      }
+    },
+    "./Checkbox": {
+      "import": {
+        "types": "./esm/form/checkbox/index.d.ts",
+        "default": "./esm/form/checkbox/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/checkbox/index.d.ts",
+        "default": "./cjs/form/checkbox/index.js"
+      }
+    },
+    "./Radio": {
+      "import": {
+        "types": "./esm/form/radio/index.d.ts",
+        "default": "./esm/form/radio/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/radio/index.d.ts",
+        "default": "./cjs/form/radio/index.js"
+      }
+    },
+    "./Combobox": {
+      "import": {
+        "types": "./esm/form/combobox/index.d.ts",
+        "default": "./esm/form/combobox/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/combobox/index.d.ts",
+        "default": "./cjs/form/combobox/index.js"
+      }
+    },
+    "./ConfirmationPanel": {
+      "import": {
+        "types": "./esm/form/confirmation-panel/index.d.ts",
+        "default": "./esm/form/confirmation-panel/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/confirmation-panel/index.d.ts",
+        "default": "./cjs/form/confirmation-panel/index.js"
+      }
+    },
+    "./ErrorSummary": {
+      "import": {
+        "types": "./esm/form/error-summary/index.d.ts",
+        "default": "./esm/form/error-summary/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/error-summary/index.d.ts",
+        "default": "./cjs/form/error-summary/index.js"
+      }
+    },
+    "./Fieldset": {
+      "import": {
+        "types": "./esm/form/fieldset/index.d.ts",
+        "default": "./esm/form/fieldset/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/fieldset/index.d.ts",
+        "default": "./cjs/form/fieldset/index.js"
+      }
+    },
+    "./Search": {
+      "import": {
+        "types": "./esm/form/search/index.d.ts",
+        "default": "./esm/form/search/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/search/index.d.ts",
+        "default": "./cjs/form/search/index.js"
+      }
+    },
+    "./Select": {
+      "import": {
+        "types": "./esm/form/select/index.d.ts",
+        "default": "./esm/form/select/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/select/index.d.ts",
+        "default": "./cjs/form/select/index.js"
+      }
+    },
+    "./Switch": {
+      "import": {
+        "types": "./esm/form/switch/index.d.ts",
+        "default": "./esm/form/switch/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/switch/index.d.ts",
+        "default": "./cjs/form/switch/index.js"
+      }
+    },
+    "./Textarea": {
+      "import": {
+        "types": "./esm/form/textarea/index.d.ts",
+        "default": "./esm/form/textarea/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/textarea/index.d.ts",
+        "default": "./cjs/form/textarea/index.js"
+      }
+    },
+    "./TextField": {
+      "import": {
+        "types": "./esm/form/textfield/index.d.ts",
+        "default": "./esm/form/textfield/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/textfield/index.d.ts",
+        "default": "./cjs/form/textfield/index.js"
+      }
+    },
+    "./FileUpload": {
+      "import": {
+        "types": "./esm/form/file-upload/index.d.ts",
+        "default": "./esm/form/file-upload/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/file-upload/index.d.ts",
+        "default": "./cjs/form/file-upload/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
-    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
+    "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "TZ=UTC jest"
+    "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^5.17.4",
-    "@navikt/ds-tokens": "^5.17.4",
+    "@navikt/aksel-icons": "^6.3.3",
+    "@navikt/ds-tokens": "^6.3.3",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
-    "clsx": "^1.2.1",
-    "date-fns": "^2.30.0",
-    "react-day-picker": "8.3.4"
+    "clsx": "^2.1.0",
+    "date-fns": "^3.0.0",
+    "react-day-picker": "8.10.0"
   },
   "devDependencies": {
     "@testing-library/dom": "8.13.0",
@@ -52,20 +576,18 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
-    "@types/jest": "^29.0.0",
     "concurrently": "7.2.1",
-    "copyfiles": "^2.4.1",
     "faker": "5.5.3",
     "fast-glob": "3.2.11",
-    "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.0.0",
+    "jsdom": "24.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "3.0.2",
     "swr": "^1.1.2",
-    "ts-jest": "^29.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "tsc-alias": "1.8.8",
+    "typescript": "^5.1.6",
+    "vitest": "^1.2.2"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

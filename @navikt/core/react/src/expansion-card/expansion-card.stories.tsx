@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
 import { ExpansionCard, ExpansionCardProps } from ".";
@@ -23,8 +23,13 @@ const meta: Meta<typeof ExpansionCard> = {
       </div>
     ),
   ],
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
+
+type Story = StoryObj<typeof ExpansionCard>;
 
 const Content = () => (
   <ExpansionCard.Content>
@@ -249,3 +254,29 @@ export const Icon = () => (
         }`}</style>
   </div>
 );
+
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <div>
+        <h2>Description</h2>
+        <Description />
+        <h2>Sizes</h2>
+        <Sizes />
+        <h2>Heading sizing</h2>
+        <HeadingSizing />
+        <h2>Default open</h2>
+        <DefaultOpen />
+        <h2>Controlled state</h2>
+        <ControlledState />
+        <h2>Customization</h2>
+        <Customization />
+        <h2>Icon</h2>
+        <Icon />
+      </div>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

@@ -10,7 +10,7 @@ export const parameters = {
         "Getting started",
         "ds-react",
         ["Primitives"],
-        ["Default"],
+        ["Default", "Controls"],
         "Aksel-icons",
       ],
     },

@@ -9,12 +9,13 @@ import {
   PlayFillIcon,
 } from "@navikt/aksel-icons";
 import {
-  Bleed,
   BodyLong,
   Box,
   Button,
+  HGrid,
   Heading,
   Page,
+  VStack,
   useClientLayoutEffect,
 } from "@navikt/ds-react";
 import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
@@ -171,7 +172,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       setPause(true);
       return;
     }
-    setPause(JSON.parse(data) ?? false);
+    setPause(JSON.parse(data ?? "false"));
   }, []);
 
   return (
@@ -234,64 +235,78 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
 
         <Box background="surface-subtle" paddingBlock="0 32">
           {/* God praksis */}
-          <Page.Block width="2xl" gutters>
-            <Box
-              background="surface-default"
-              borderWidth="1"
-              borderColor="border-subtle"
-              borderRadius="xlarge"
-              paddingBlock={{ xs: "12", sm: "20" }}
-              paddingInline={{ xs: "4", sm: "12" }}
-              className="-translate-y-48 sm:-translate-y-32"
-            >
-              {!reducedMotion && (
-                <Button
-                  variant="tertiary-neutral"
-                  size="small"
-                  className="absolute right-2 top-2"
-                  icon={
-                    pause ? (
-                      <PlayFillIcon title="Start animasjon" />
-                    ) : (
-                      <PauseFillIcon title="Stopp animasjon" />
-                    )
-                  }
-                  onClick={() => {
-                    setPause(!pause);
-                    localStorage.setItem(
-                      "pause-animations",
-                      JSON.stringify(!pause),
-                    );
-                  }}
-                />
+
+          <Page.Block
+            width="2xl"
+            gutters
+            className="-translate-y-48 sm:-translate-y-32"
+          >
+            <HGrid columns="1fr" gap="16">
+              <Box
+                background="surface-default"
+                borderWidth="1"
+                borderColor="border-subtle"
+                borderRadius="xlarge"
+                paddingBlock={{ xs: "12", sm: "16" }}
+                paddingInline={{ xs: "4", sm: "12" }}
+                className="relative"
+              >
+                <VStack gap="12">
+                  {!reducedMotion && (
+                    <Button
+                      variant="tertiary-neutral"
+                      size="small"
+                      className="absolute right-2 top-2"
+                      icon={
+                        pause ? (
+                          <PlayFillIcon title="Start animasjon" />
+                        ) : (
+                          <PauseFillIcon title="Stopp animasjon" />
+                        )
+                      }
+                      onClick={() => {
+                        setPause(!pause);
+                        localStorage.setItem(
+                          "pause-animations",
+                          JSON.stringify(!pause),
+                        );
+                      }}
+                    />
+                  )}
+                  <Box paddingInline={{ xs: "2", sm: "6" }}>
+                    <Heading
+                      level="2"
+                      size="xlarge"
+                      className="text-deepblue-700"
+                      spacing
+                    >
+                      God praksis
+                    </Heading>
+                    <BodyLong size="large" className="max-w-3xl">
+                      {page?.god_praksis_intro ??
+                        "Alle som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
+                    </BodyLong>
+                  </Box>
+
+                  <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
+                    {tema.map((t) => (
+                      <GodPraksisCardSimple key={t._id} node={t} />
+                    ))}
+                  </ul>
+                </VStack>
+              </Box>
+              {/* Kept commented here in case we want to show future questionnaires from uxtweaks */}
+              {/* <UxTweaks
+                href="https://study.uxtweak.com/treetest/..."
+                length={3}
+              /> */}
+
+              {blocks && (
+                <Box paddingInline={{ xs: "2", lg: "18" }}>
+                  <FrontpageBlock blocks={blocks} />
+                </Box>
               )}
-              <Box paddingInline={{ xs: "2", sm: "6" }} paddingBlock="0 12">
-                <Heading
-                  level="2"
-                  size="xlarge"
-                  className="text-deepblue-700"
-                  spacing
-                >
-                  God praksis
-                </Heading>
-                <BodyLong size="large" className="max-w-3xl">
-                  {page?.god_praksis_intro ??
-                    "Alle som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
-                </BodyLong>
-              </Box>
-
-              <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
-                {tema.map((t) => (
-                  <GodPraksisCardSimple key={t._id} node={t} />
-                ))}
-              </ul>
-            </Box>
-
-            <Bleed marginBlock={{ xs: "24", sm: "12" }} asChild>
-              <Box paddingInline={{ xs: "2", lg: "18" }}>
-                <FrontpageBlock blocks={blocks} />
-              </Box>
-            </Bleed>
+            </HGrid>
           </Page.Block>
         </Box>
       </main>

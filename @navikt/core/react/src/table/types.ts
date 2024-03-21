@@ -1,4 +1,4 @@
 export interface SortState {
   orderBy: string;
-  direction: "ascending" | "descending";
+  direction: "ascending" | "descending" | "none";
 }

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-stylelint",
-  "version": "5.17.4",
+  "version": "6.3.3",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/grunnleggende/kode/stylelint",
   "repository": {
@@ -26,7 +26,7 @@
     "/dist"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "yarn build && node --import tsx --test ./dist/**/*.test.js",
     "copy-css": "node -e \"require('fs').copyFileSync('../core/css/dist/index.css','dist/index.css')\"",
     "copy-tokens": "node -e \"require('fs').copyFileSync('../core/css/tokens.json','dist/tokens.json')\"",
     "copy": "yarn copy-css && yarn copy-tokens",
@@ -35,26 +35,14 @@
     "dev": "yarn watch:lint"
   },
   "devDependencies": {
-    "@navikt/ds-css": "^5.17.4",
-    "@navikt/ds-tokens": "^5.17.4",
-    "@types/jest": "^29.0.0",
+    "@navikt/ds-css": "^6.3.3",
+    "@navikt/ds-tokens": "^6.3.3",
     "concurrently": "7.2.1",
-    "copyfiles": "2.4.1",
-    "jest": "^29.0.0",
-    "jest-preset-stylelint": "^6.1.0",
     "postcss-selector-parser": "^6.0.13",
     "postcss-value-parser": "^4.2.0",
     "stylelint": "^14.8.5",
-    "ts-jest": "^29.0.0",
+    "stylelint-test-rule-node": "^0.2.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.1.6"
-  },
-  "jest": {
-    "preset": "jest-preset-stylelint",
-    "testMatch": [
-      "**/*.test.ts"
-    ],
-    "transform": {
-      "^.+\\.ts?$": "ts-jest"
-    }
   }
 }

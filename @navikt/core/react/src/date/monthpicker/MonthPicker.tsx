@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
-import { RootProvider } from "react-day-picker";
+import { DayPickerProvider } from "react-day-picker";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { DateContext, SharedMonthProvider } from "../context";
@@ -127,12 +127,14 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               strategy,
             }}
           >
-            <RootProvider
-              locale={getLocaleFromString(locale)}
-              selected={selected ?? selectedMonth}
-              toDate={toDate}
-              fromDate={fromDate}
-              month={selected ?? selectedMonth}
+            <DayPickerProvider
+              initialProps={{
+                locale: getLocaleFromString(locale),
+                selected: selected ?? selectedMonth,
+                toDate,
+                fromDate,
+                month: selected ?? selectedMonth,
+              }}
             >
               <div className={cl("rdp-month", className)}>
                 <SharedMonthProvider
@@ -147,7 +149,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   <MonthSelector />
                 </SharedMonthProvider>
               </div>
-            </RootProvider>
+            </DayPickerProvider>
           </DateWrapper>
         </div>
       </DateContext.Provider>

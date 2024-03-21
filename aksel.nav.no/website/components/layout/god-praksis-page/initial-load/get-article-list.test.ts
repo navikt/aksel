@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { GpGroupedArticlesT } from "../interface";
 import { getArticleList } from "./get-article-list";
 
@@ -15,6 +16,7 @@ const baseArticle = (
     innholdstype: "type1",
     slug: "url",
     publishedAt,
+    currentUndertema: null,
   },
 });
 

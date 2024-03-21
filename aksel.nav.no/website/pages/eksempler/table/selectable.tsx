@@ -3,7 +3,7 @@ import { Checkbox, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
   const toggleSelectedRow = (value) =>
     setSelectedRows((list) =>
@@ -21,7 +21,7 @@ const Example = () => {
               <Checkbox
                 checked={selectedRows.length === data.length}
                 indeterminate={
-                  selectedRows.length && selectedRows.length !== data.length
+                  selectedRows.length > 0 && selectedRows.length !== data.length
                 }
                 onChange={() => {
                   selectedRows.length

@@ -1,14 +1,20 @@
+import { StoryObj } from "@storybook/react";
 import React from "react";
-import { StarIcon } from "@navikt/aksel-icons";
+import { StarIcon as BaseStarIcon } from "@navikt/aksel-icons";
+import { HStack, VStack } from "../layout/stack";
 import { Button } from "./index";
 
 export default {
   title: "ds-react/Button",
   component: Button,
   parameters: {
-    chromatic: { delay: 600 },
+    chromatic: { disable: true },
   },
 };
+
+type Story = StoryObj<typeof Button>;
+
+const StarIcon = () => <BaseStarIcon aria-hidden />;
 
 const variants: (
   | "primary"
@@ -28,17 +34,7 @@ const variants: (
   "tertiary-neutral",
 ];
 
-const varSwitch = {
-  primary: "Primary",
-  secondary: "Secondary",
-  tertiary: "Tertiary",
-  danger: "Danger",
-  "primary-neutral": "Primary",
-  "secondary-neutral": "Secondary",
-  "tertiary-neutral": "Tertiary",
-};
-
-export const Default = {
+export const Controls: Story = {
   render: (props) => {
     return (
       <Button
@@ -57,7 +53,7 @@ export const Default = {
     icon: false,
     loading: false,
     iconPosition: "left",
-    children: "Knapp",
+    children: "Button",
     variant: "primary",
     size: "medium",
   },
@@ -91,192 +87,99 @@ export const Default = {
   },
 };
 
-export const Small = () => (
-  <div className="rowgap">
-    {variants.map((variant) => (
-      <Button key={variant} variant={variant} size="small">
-        {varSwitch[variant]}
-      </Button>
-    ))}
-  </div>
-);
-
-export const XSmall = () => (
-  <div className="rowgap">
-    {variants.map((variant) => (
-      <Button key={variant} variant={variant} size="xsmall">
-        {varSwitch[variant]}
-      </Button>
-    ))}
-  </div>
-);
-
-export const Link = () => (
-  <div className="rowgap">
-    {variants.map((variant) => (
-      <Button key={variant} variant={variant} as="a" href="#thecakeisalie">
-        {varSwitch[variant]}
-      </Button>
-    ))}
-  </div>
-);
-
-export const Loading = {
-  render: () => (
-    <div className="colgap chromatic-ignore">
-      <div className="rowgap">
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} loading>
-            {varSwitch[variant]}
+function ButtonGrid(props: any) {
+  return (
+    <VStack gap="2">
+      {variants.map((variant) => (
+        <HStack gap="2" key={variant}>
+          <Button variant={variant} {...props}>
+            Button
           </Button>
-        ))}
-      </div>
-      <div className="rowgap">
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} loading size="small">
-            {varSwitch[variant]}
+          <Button variant={variant} {...props} icon={<StarIcon />}>
+            Button
           </Button>
-        ))}
-      </div>
-      <div className="rowgap">
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} loading size="xsmall">
-            {varSwitch[variant]}
+          <Button
+            variant={variant}
+            {...props}
+            icon={<StarIcon />}
+            iconPosition="right"
+          >
+            Button
           </Button>
-        ))}
-      </div>
-    </div>
-  ),
+          <Button variant={variant} {...props} icon={<StarIcon />} />
+        </HStack>
+      ))}
+    </VStack>
+  );
+}
 
-  parameters: {
-    chromatic: { disableSnapshot: true },
-  },
+export const Medium: Story = {
+  render: () => <ButtonGrid size="medium" />,
 };
 
-export const Icon = () => (
-  <div className="colgap ">
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button
-          key={variant}
-          variant={variant}
-          icon={<StarIcon title="Stjerne" />}
-        />
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button
-          key={variant}
-          variant={variant}
-          size="small"
-          icon={<StarIcon title="Stjerne" />}
-        />
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button
-          key={variant}
-          variant={variant}
-          size="xsmall"
-          icon={<StarIcon title="Stjerne" />}
-        />
-      ))}
-    </div>
-  </div>
-);
+export const Small: Story = {
+  render: () => <ButtonGrid size="small" />,
+};
 
-export const IconWText = () => (
-  <div className="colgap">
-    <div className="rowgap">
-      {variants.map((variant, i) => (
-        <Button
-          key={variant}
-          variant={variant}
-          icon={<StarIcon title="Stjerne" />}
-          iconPosition={i % 2 ? "left" : "right"}
-        >
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant, i) => (
-        <Button
-          key={variant}
-          variant={variant}
-          size="small"
-          icon={<StarIcon title="Stjerne" />}
-          iconPosition={i % 2 ? "left" : "right"}
-        >
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant, i) => (
-        <Button
-          key={variant}
-          variant={variant}
-          size="xsmall"
-          icon={<StarIcon title="Stjerne" />}
-          iconPosition={i % 2 ? "left" : "right"}
-        >
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-  </div>
-);
+export const XSmall: Story = {
+  render: () => <ButtonGrid size="xsmall" />,
+};
 
-export const Disabled = () => (
-  <div className="colgap">
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} disabled>
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-    <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} disabled as="a" href="#">
-          {varSwitch[variant]}
-        </Button>
-      ))}
-    </div>
-  </div>
-);
-
-export const LoadingWithAs = {
+export const AsLink: Story = {
   render: () => (
-    <div className="colgap chromatic-ignore">
-      <div className="rowgap">
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} loading size="small">
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </div>
-      <div className="rowgap">
-        {variants.map((variant) => (
-          <Button
-            key={variant}
-            variant={variant}
-            loading
-            size="small"
-            as="a"
-            href="#"
-          >
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </div>
-    </div>
+    <VStack gap="4">
+      <Button href="#" as="a">
+        Button as a-tag
+      </Button>
+      <Button href="#" as="a" disabled>
+        Disabled Button as a-tag
+      </Button>
+    </VStack>
   ),
+};
 
+export const Loading: Story = {
+  render: () => <ButtonGrid loading />,
+};
+
+export const LoadingAsLink: Story = {
+  render: () => <ButtonGrid loading href="#" as="a" />,
+};
+
+export const Disabled: Story = {
+  render: () => <ButtonGrid disabled />,
+};
+
+export const DisabledAsLink: Story = {
+  render: () => <ButtonGrid disabled href="#" as="a" />,
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="6" align="center">
+      <div>
+        <h2>Medium</h2>
+        <ButtonGrid size="medium" />
+      </div>
+      <div>
+        <h2>Small</h2>
+        <ButtonGrid size="small" />
+      </div>
+      <div>
+        <h2>XSmall</h2>
+        <ButtonGrid size="xsmall" />
+      </div>
+      <div>
+        <h2>As Link</h2>
+        <ButtonGrid as="a" href="#" />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <ButtonGrid disabled />
+      </div>
+    </VStack>
+  ),
   parameters: {
-    chromatic: { disableSnapshot: true },
+    chromatic: { disable: false },
   },
 };

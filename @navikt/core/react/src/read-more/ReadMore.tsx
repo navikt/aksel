@@ -8,20 +8,20 @@ import { useControllableState } from "../util/hooks/useControllableState";
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Content inside ReadMore
+   * Content inside ReadMore.
    */
   children: React.ReactNode;
   /**
-   * ReadMore header content
+   * ReadMore header content.
    */
   header: React.ReactNode;
   /**
-   * Opens component if 'true', closes if 'false'
-   * Using this prop removes automatic control of open-state
+   * Opens component if `true`, closes if `false`.
+   * Using this prop removes automatic control of open-state.
    */
   open?: boolean;
   /**
-   * Initially open
+   * Initially open.
    * @default false
    */
   defaultOpen?: boolean;
@@ -30,8 +30,8 @@ export interface ReadMoreProps
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Changes fontsize for content
-   * @default medium
+   * Changes fontsize for content.
+   * @default "medium"
    */
   size?: "medium" | "small";
 }

@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { useId } from "../../util/hooks";
-import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
+import { Fieldset, FieldsetProps } from "../fieldset";
+import { FieldsetContext } from "../fieldset/context";
 
 export interface RadioGroupContextProps {
   name: string;
@@ -20,7 +21,7 @@ export interface RadioGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Collection of <Radio />-elements
+   * Collection of `<Radio />`-elements
    */
   children: React.ReactNode;
   /**

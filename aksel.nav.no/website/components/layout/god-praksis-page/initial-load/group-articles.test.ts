@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { GpArticleT } from "../interface";
 import { groupArticles } from "./group-articles";
 
@@ -9,6 +10,7 @@ const baseArticle = (id: string): GpArticleT => ({
   innholdstype: "metode",
   slug: "url",
   publishedAt: null,
+  currentUndertema: null,
 });
 
 describe("groupArticles function", () => {

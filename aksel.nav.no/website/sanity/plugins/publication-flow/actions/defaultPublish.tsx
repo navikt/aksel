@@ -31,7 +31,7 @@ export const createWrappedDefaultPublish = (
         !props.published &&
           patch.execute(
             [{ set: { publishedAt: new Date().toISOString() } }],
-            props.published,
+            props.published ?? {},
           );
         publish.execute();
 

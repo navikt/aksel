@@ -1,5 +1,3 @@
-import { ComponentType } from "react";
-
 export type ResolverT = {
   key: string;
   dataKeys: string[];
@@ -11,7 +9,7 @@ export type PreviewProps = {
    * Component to call with live data.
    * This would normally be the page-component
    */
-  comp: ComponentType;
+  comp: (props: any) => JSX.Element | null;
   /**
    * Sanity(groq)-query to run live data on
    */

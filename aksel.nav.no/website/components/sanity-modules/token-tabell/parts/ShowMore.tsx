@@ -16,12 +16,12 @@ export interface ShowMoreProps
   children: React.ReactNode;
   /**
    * Changes button size
-   * @default medium
+   * @default "medium"
    */
   size?: "medium" | "small";
   /**
    * Changes background color
-   * @default default
+   * @default "default"
    */
   variant?: "default" | "subtle" | "info";
   /**
@@ -36,7 +36,7 @@ export interface ShowMoreProps
   heading?: string;
   /**
    * Heading size
-   * @default medium
+   * @default "medium"
    */
   headingSize?: HeadingProps["size"];
   /**

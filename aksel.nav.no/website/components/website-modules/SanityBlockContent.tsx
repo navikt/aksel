@@ -118,7 +118,7 @@ const serializers: Partial<PortableTextReactComponents> = {
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
-    code: ({ text }) => <InlineCode noAmps>{text}</InlineCode>,
+    code: ({ text }) => <InlineCode>{text}</InlineCode>,
     link: ({ text, value: { href } }: PortableTextMarkComponentProps<any>) => {
       if (!href) {
         return <span>{text}</span>;
@@ -226,7 +226,7 @@ function SanitizedBlock({
       return (
         <Heading
           tabIndex={-1}
-          id={value._key}
+          id={value?._key}
           level="2"
           size="large"
           className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none"
@@ -242,7 +242,7 @@ function SanitizedBlock({
           level="3"
           size="medium"
           tabIndex={-1}
-          id={value._key}
+          id={value?._key}
         >
           {children}
         </Heading>
@@ -254,7 +254,7 @@ function SanitizedBlock({
           spacing
           level="4"
           size="small"
-          id={value._key}
+          id={value?._key}
         >
           {children}
         </Heading>

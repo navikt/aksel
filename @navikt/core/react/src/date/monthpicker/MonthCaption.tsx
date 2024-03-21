@@ -1,12 +1,15 @@
-import { isAfter, isBefore } from "date-fns";
-import setYear from "date-fns/setYear";
-import startOfMonth from "date-fns/startOfMonth";
-import startOfYear from "date-fns/startOfYear";
+import {
+  isAfter,
+  isBefore,
+  setYear,
+  startOfMonth,
+  startOfYear,
+} from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { Select } from "../../form/Select";
+import { Select } from "../../form/select";
 import { useSharedMonthContext } from "../context";
 import { labelNextYear, labelPrevYear } from "../utils";
 

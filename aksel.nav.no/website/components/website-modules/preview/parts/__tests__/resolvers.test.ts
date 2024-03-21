@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { runResolvers } from "../resolvers";
 
 describe("runResolvers", () => {
@@ -17,7 +18,7 @@ describe("runResolvers", () => {
       {
         key: "result",
         dataKeys: ["key1", "key2"],
-        cb: ([value1, value2]) => value1 + value2,
+        cb: (value) => value[0] + value[1],
       },
     ];
     expect(runResolvers({ resolvers, data })).toEqual({
@@ -32,12 +33,12 @@ describe("runResolvers", () => {
       {
         key: "result1",
         dataKeys: ["key1"],
-        cb: ([value1]) => value1 + "suffix",
+        cb: (value) => value[0] + "suffix",
       },
       {
         key: "result2",
         dataKeys: ["key2"],
-        cb: ([value2]) => "prefix" + value2,
+        cb: (value) => "prefix" + value[0],
       },
     ];
     expect(runResolvers({ resolvers, data })).toEqual({
@@ -53,7 +54,7 @@ describe("runResolvers", () => {
       {
         key: "result",
         dataKeys: ["key1.key2"],
-        cb: ([value2]) => "prefix" + value2,
+        cb: (value) => "prefix" + value[0],
       },
     ];
     expect(runResolvers({ resolvers, data })).toEqual({

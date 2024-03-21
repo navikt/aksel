@@ -1,9 +1,9 @@
-import { Skeleton } from "@navikt/ds-react";
+import { Skeleton, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid w-48 gap-2">
+    <VStack gap="2" className="w-48">
       {/* variant="text" kan endre størelse med justering av font-size */}
       <Skeleton variant="text" width="60%" />
 
@@ -11,7 +11,7 @@ const Example = () => {
       <Skeleton variant="circle" width={60} height={60} />
       <Skeleton variant="rectangle" width="100%" height={30} />
       <Skeleton variant="rounded" width="100%" height={40} />
-    </div>
+    </VStack>
   );
 };
 
@@ -25,4 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "'text' (standard) representerer en enkel linje med tekst. 'circle', 'rectangle' og 'rounded' gir forskjellig visuell representasjon av elementet.",
 };

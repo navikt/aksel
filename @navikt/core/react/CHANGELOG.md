@@ -1,5 +1,171 @@
 # @navikt/ds-react
 
+## 6.3.3
+
+### Patch Changes
+
+- FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
+
+- useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.3
+  - @navikt/aksel-icons@6.3.3
+
+## 6.3.2
+
+### Patch Changes
+
+- FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.2
+  - @navikt/aksel-icons@6.3.2
+
+## 6.3.1
+
+### Patch Changes
+
+- FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.1
+  - @navikt/aksel-icons@6.3.1
+
+## 6.3.0
+
+### Minor Changes
+
+- Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+
+- FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.0
+  - @navikt/aksel-icons@6.3.0
+
+## 6.2.0
+
+### Patch Changes
+
+- Select: Fjern 'multiple' fra SelectProps ([#2782](https://github.com/navikt/aksel/pull/2782))
+
+- Updated dependencies [[`331b4c4c0`](https://github.com/navikt/aksel/commit/331b4c4c00c323ad7a212bcd45889d2b80c09dee), [`dc5ea3b84`](https://github.com/navikt/aksel/commit/dc5ea3b8420a02690bc88dbbbb97eefe4ee7564d)]:
+  - @navikt/aksel-icons@6.2.0
+  - @navikt/ds-tokens@6.2.0
+
+## 6.1.1
+
+### Patch Changes
+
+- Modal: Fikser uønsket lukking ved klikk-og-dra mellom backdrop og modal (f.eks. ved markering av tekst) dersom `closeOnBackdropClick` er `true`. ([#2752](https://github.com/navikt/aksel/pull/2752))
+
+- Modal: Endre title på lukkeknapp til bare 'Lukk' ([#2688](https://github.com/navikt/aksel/pull/2688))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.1
+  - @navikt/aksel-icons@6.1.1
+
+## 6.1.0
+
+### Minor Changes
+
+- Komponenter støtter nå lokal import `@navikt/ds-react/Button`, [Dokumentasjon](https://aksel.nav.no/grunnleggende/kode/nextjs). ([#2745](https://github.com/navikt/aksel/pull/2745))
+
+### Patch Changes
+
+- Modal: Bedre feilmeldinger ved feil bruk av props ([#2744](https://github.com/navikt/aksel/pull/2744))
+
+- Modal: Ikke opphev scroll lock ved lukking av nesta modal (DatePicker) ([#2743](https://github.com/navikt/aksel/pull/2743))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.1.0
+  - @navikt/aksel-icons@6.1.0
+
+## 6.0.0
+
+### Major Changes
+
+- Chat: Fjernet deprecated props `backgroundColor` og `avatarBgColor`. Bruk prop `variant` som erstatning. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Search: Fjern 'type' fra SearchProps ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Tokens: La til nytt brekkpunkt `2xl` for `1440px`. Alle primitives er oppdatert for å reflektere oppdateringen. Brukere av Tailwind vil måtte sjekke at overskriving av `screen: "2xl"` ikke brekker app. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- OverridableComponent: Fikset feil som tillot vilkårlige props ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Grid, ContentContainer: Komponenter er fjernet fra systemet. [Se migreringsguide](https://aksel.nav.no/grunnleggende/kode/migrering#dd2cfa9fb1d1). ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Table: SortState.direction har nå `none` tilgjengelig: `"ascending" | "descending" | "none"` ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Textarea: Fjernet div med klassen navds-textarea\_\_wrapper ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+- Modal: Strengere prop-typer ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Minor Changes
+
+- SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Patch Changes
+
+- Updated dependencies [[`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522), [`636c1ad49`](https://github.com/navikt/aksel/commit/636c1ad49b8afde54b0a1105fecdc6d47f333522)]:
+  - @navikt/ds-tokens@6.0.0
+  - @navikt/aksel-icons@6.0.0
+
+## 5.18.3
+
+### Patch Changes
+
+- Tooltip: Fikset regresjon der bruk av Tooltip ga hydration-error i nextjs ([#2738](https://github.com/navikt/aksel/pull/2738))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.3
+  - @navikt/aksel-icons@5.18.3
+
+## 5.18.2
+
+### Patch Changes
+
+- Modal: Oppdatert intern håntering av context i komponent ([#2714](https://github.com/navikt/aksel/pull/2714))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.2
+  - @navikt/aksel-icons@5.18.2
+
+## 5.18.1
+
+### Patch Changes
+
+- Panel: Komponent er nå markert som deprecated. Bruk `Box` i fremtiden. ([#2712](https://github.com/navikt/aksel/pull/2712))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.1
+  - @navikt/aksel-icons@5.18.1
+
+## 5.18.0
+
+### Minor Changes
+
+- Portal: Ny komponent `Portal` som lar deg enkelt bruke `createPortal`, også på serversiden ([#2697](https://github.com/navikt/aksel/pull/2697))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.18.0
+  - @navikt/aksel-icons@5.18.0
+
+## 5.17.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@5.17.5
+  - @navikt/aksel-icons@5.17.5
+
 ## 5.17.4
 
 ### Patch Changes
@@ -1018,7 +1184,7 @@
 
 ### Patch Changes
 
-- CopyButton: Fjernet use-client directive fra komponent. (warning i vite/rollup)
+- CopyButton: Fjernet use client directive fra komponent. (warning i vite/rollup)
 
 ## 3.2.0
 

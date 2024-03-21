@@ -25,6 +25,9 @@ spec:
     outbound:
       external:
         - host: api.sanity.io
+        - host: api.slack.com
+        - host: slack.com
+        - host: wss-primary.slack.com
         - host: hnbe3yhs.api.sanity.io
         - host: apicdn.sanity.io
         - host: hnbe3yhs.apicdn.sanity.io
@@ -42,3 +45,10 @@ spec:
     - emptyDir:
         medium: Memory
       mountPath: /app/aksel.nav.no/website/.next/cache
+  azure:
+    application:
+      enabled: true
+      tenant: nav.no
+      allowAllUsers: true
+    sidecar:
+      enabled: true

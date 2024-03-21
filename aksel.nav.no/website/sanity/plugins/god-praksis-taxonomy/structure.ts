@@ -1,9 +1,14 @@
 import { CurrentUser } from "sanity";
-import { DefaultDocumentNodeResolver, StructureResolver } from "sanity/desk";
+import {
+  DefaultDocumentNodeResolver,
+  StructureResolver,
+} from "sanity/structure";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
-const adminOrDev = (user: CurrentUser) =>
-  user.roles.find((role) => ["developer", "administrator"].includes(role.name));
+const adminOrDev = (user: CurrentUser | null) =>
+  user?.roles.find((role) =>
+    ["developer", "administrator"].includes(role.name),
+  ) ?? false;
 
 export const structure: StructureResolver = (S, { currentUser }) => {
   if (!adminOrDev(currentUser)) {

@@ -6,6 +6,10 @@ export default {
   title: "ds-tokens/Colors",
 } as Meta;
 
+/**
+ * No need to create single Chromatic-story since we want to keep global and semantic colors separated.
+ */
+
 const ColorGroups = ({ prefix }: { prefix: string }) => (
   <div>
     {Object.entries(tokens)

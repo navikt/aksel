@@ -1,36 +1,38 @@
 import cl from "clsx";
 import React, { useContext } from "react";
 import { useId } from "../util/hooks";
-import { FieldsetContext } from "./Fieldset/context";
+import { FieldsetContext } from "./fieldset/context";
 
 export interface FormFieldProps {
   /**
-   * Error message for element
+   * Adds a description to extend labeling of the field.
+   * Error message for element.
    */
   error?: React.ReactNode;
   /**
-   * Override internal errorId
+   * Override internal errorId.
    */
   errorId?: string;
   /**
-   * Changes font-size, padding and gaps
+   * Changes font-size, padding and gaps.
    */
   size?: "medium" | "small";
   /**
-   * Disables element
-   * @note Avoid using if possible for accessibility purposes
+   * **Avoid using if possible for accessibility purposes**.
+   *
+   * Disables element.
    */
   disabled?: boolean;
   /**
-   * Adds a description to extend labling of a field
+   * Adds a description to extend labeling of a field.
    */
   description?: React.ReactNode;
   /**
-   * Override internal id
+   * Override internal id.
    */
   id?: string;
   /**
-   * Read only-state
+   * Read-only state.
    */
   readOnly?: boolean;
 }

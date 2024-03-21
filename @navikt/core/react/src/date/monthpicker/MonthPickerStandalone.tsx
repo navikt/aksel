@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
-import { RootProvider } from "react-day-picker";
+import { DayPickerProvider } from "react-day-picker";
 import { SharedMonthProvider } from "../context";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
@@ -58,12 +58,14 @@ export const MonthPickerStandalone = forwardRef<
 
     return (
       <div ref={ref} className={cl("navds-date__wrapper", className)}>
-        <RootProvider
-          locale={getLocaleFromString(locale)}
-          selected={selected ?? selectedMonth}
-          toDate={toDate}
-          fromDate={fromDate}
-          month={selected ?? selectedMonth}
+        <DayPickerProvider
+          initialProps={{
+            locale: getLocaleFromString(locale),
+            selected: selected ?? selectedMonth,
+            toDate,
+            fromDate,
+            month: selected ?? selectedMonth,
+          }}
         >
           <div className="navds-date rdp-month">
             <SharedMonthProvider
@@ -78,7 +80,7 @@ export const MonthPickerStandalone = forwardRef<
               <MonthSelector />
             </SharedMonthProvider>
           </div>
-        </RootProvider>
+        </DayPickerProvider>
       </div>
     );
   },
