@@ -42,7 +42,6 @@ async function sendSlackbotFeedback(
 ) {
   const logger = createChildLogger("slackbot-feedback");
   logger.info("Received slackbot feedback request");
-  logger.error("Man made error when sending feedback");
   const user = getAuthUser(request.headers);
 
   /**

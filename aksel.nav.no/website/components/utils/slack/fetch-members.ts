@@ -29,7 +29,7 @@ export async function fetchSlackMembers(): Promise<
     cursor: string | undefined;
     continue: boolean;
   } = {
-    limit: 200,
+    limit: 900,
     cursor: undefined,
     continue: true,
   };
