@@ -1,6 +1,7 @@
 import { SectionBlock, UsersListResponse, WebClient } from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
+import { createChildLogger } from "@navikt/next-logger";
 import { authProtectedApi } from "@/auth/authProtectedApi";
 import { getAuthUser } from "@/auth/getAuthUser";
 import { getClient } from "@/sanity/client.server";
@@ -11,7 +12,6 @@ import {
   fetchSlackMembers,
   findUserByEmail,
 } from "@/slack";
-import { logger } from "../../../../../config/logger";
 
 const maxFeedbackLength = 500;
 
@@ -40,6 +40,7 @@ async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
 ) {
+  const logger = createChildLogger("slackbot-feedback");
   logger.info("Received slackbot feedback request");
   const user = getAuthUser(request.headers);
 
@@ -196,7 +197,8 @@ function errorResponse(
   response: NextApiResponse,
   error: keyof typeof ErrorMap,
 ) {
-  logger.error(ErrorMap[error]);
+  const logger = createChildLogger("slackbot-feedback");
+  logger.error(ErrorMap[error] ?? "unknown error");
 
   response.status(400).json(responseJson(false, error));
 }

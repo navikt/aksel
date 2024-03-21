@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next/types";
+import { logger } from "@navikt/next-logger";
 import { UserStateT } from "@/auth/auth.types";
 import { getAuthUser } from "@/auth/getAuthUser";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
-import { logger } from "../../config/logger";
 
 export async function getAuthUserState(
   headers: NextApiRequest["headers"],
