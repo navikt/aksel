@@ -18,33 +18,37 @@ export const Default2: StoryObj<typeof Summary> = {
           <Summary.EditButton />
         </Summary.Header>
 
-        <Summary.Answer>
-          <Summary.Label>Navn</Summary.Label>
-          <Summary.Value>Ola Nordmann</Summary.Value>
-        </Summary.Answer>
+        <Summary.Answers>
+          <Summary.Answer>
+            <Summary.Label>Navn</Summary.Label>
+            <Summary.Value>Ola Nordmann</Summary.Value>
+          </Summary.Answer>
 
-        <Summary.Answer>
-          <Summary.Label>Fødselsnummer</Summary.Label>
-          <Summary.Value>12345678910</Summary.Value>
-        </Summary.Answer>
+          <Summary.Answer>
+            <Summary.Label>Fødselsnummer</Summary.Label>
+            <Summary.Value>12345678910</Summary.Value>
+          </Summary.Answer>
 
-        <Summary.Answer>
-          <Summary.Label>Barn nr 1</Summary.Label>
-          <Summary.Value>
-            <Summary.Answer>
-              <Summary.Label>Navn</Summary.Label>
-              <Summary.Value>Kari Nordmann</Summary.Value>
-            </Summary.Answer>
-            <Summary.Answer>
-              <Summary.Label>Kjønn</Summary.Label>
-              <Summary.Value>Jente</Summary.Value>
-            </Summary.Answer>
-            <Summary.Answer>
-              <Summary.Label>Alder</Summary.Label>
-              <Summary.Value>6</Summary.Value>
-            </Summary.Answer>
-          </Summary.Value>
-        </Summary.Answer>
+          <Summary.Answer>
+            <Summary.Label>Barn nr 1</Summary.Label>
+            <Summary.Value>
+              <Summary.Answers>
+                <Summary.Answer>
+                  <Summary.Label>Navn</Summary.Label>
+                  <Summary.Value>Kari Nordmann</Summary.Value>
+                </Summary.Answer>
+                <Summary.Answer>
+                  <Summary.Label>Kjønn</Summary.Label>
+                  <Summary.Value>Jente</Summary.Value>
+                </Summary.Answer>
+                <Summary.Answer>
+                  <Summary.Label>Alder</Summary.Label>
+                  <Summary.Value>6</Summary.Value>
+                </Summary.Answer>
+              </Summary.Answers>
+            </Summary.Value>
+          </Summary.Answer>
+        </Summary.Answers>
       </Summary>
     );
   },

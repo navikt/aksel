@@ -6,6 +6,6 @@ export interface SummaryLabelProps
   children: React.ReactNode;
 }
 
-export const SummaryLabel = ({ children }: SummaryLabelProps) => {
+export default function SummaryLabel({ children }: SummaryLabelProps) {
   return <Label as="dt">{children}</Label>;
-};
+}

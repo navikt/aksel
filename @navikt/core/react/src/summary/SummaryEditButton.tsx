@@ -3,7 +3,7 @@ import { Link, LinkProps } from "../link";
 
 export interface FormSummaryEditButtonProps extends Partial<LinkProps> {}
 
-export function FormSummaryEditButton({
+export default function FormSummaryEditButton({
   children = "Endre svar",
   ...rest
 }: FormSummaryEditButtonProps) {

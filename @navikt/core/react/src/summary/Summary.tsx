@@ -1,12 +1,12 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Box } from "../layout/box";
-import { SummaryAnswer } from "./SummaryAnswer";
-import { FormSummaryEditButton } from "./SummaryEditButton";
+import SummaryAnswer from "./SummaryAnswer";
+import SummaryAnswers from "./SummaryAnswers";
+import FormSummaryEditButton from "./SummaryEditButton";
 import FormSummaryHeader from "./SummaryHeader";
 import FormSummaryHeading from "./SummaryHeading";
-import { SummaryLabel } from "./SummaryLabel";
-import { SummaryValue } from "./SummaryValue";
-import { injectHRBetween } from "./utils";
+import SummaryLabel from "./SummaryLabel";
+import SummaryValue from "./SummaryValue";
 
 interface SummaryComponent
   extends React.ForwardRefExoticComponent<
@@ -16,9 +16,10 @@ interface SummaryComponent
   Header: typeof FormSummaryHeader;
   Heading: typeof FormSummaryHeading;
   EditButton: typeof FormSummaryEditButton;
+  Answers: typeof SummaryAnswers;
+  Answer: typeof SummaryAnswer;
   Label: typeof SummaryLabel;
   Value: typeof SummaryValue;
-  Answer: typeof SummaryAnswer;
 }
 
 export interface SummaryProps extends HTMLAttributes<HTMLDivElement> {
@@ -27,32 +28,17 @@ export interface SummaryProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Summary = forwardRef<HTMLDivElement, SummaryProps>(
   ({ children, ...rest }, ref) => {
-    const childrenArray = React.Children.toArray(children);
-    // TODO: Should we check the length of childrenArray?
-    const [header, ...restChildren] = childrenArray;
-
     return (
-      <div ref={ref} {...rest}>
-        <style>
-          {`
-dl, dd {
-  margin: 0;
-  padding: 0;
-}
-`}
-        </style>
-        <Box
-          as="section"
-          borderRadius="large"
-          borderColor="border-subtle"
-          borderWidth="1"
-        >
-          {header}
-          <Box as="dl" paddingInline="6" paddingBlock="5 6">
-            {injectHRBetween(restChildren)}
-          </Box>
-        </Box>
-      </div>
+      <Box
+        ref={ref}
+        {...rest}
+        as="section"
+        borderRadius="large"
+        borderColor="border-subtle"
+        borderWidth="1"
+      >
+        {children}
+      </Box>
     );
   },
 ) as SummaryComponent;
@@ -60,8 +46,9 @@ dl, dd {
 Summary.Header = FormSummaryHeader;
 Summary.Heading = FormSummaryHeading;
 Summary.EditButton = FormSummaryEditButton;
+Summary.Answers = SummaryAnswers;
+Summary.Answer = SummaryAnswer;
 Summary.Label = SummaryLabel;
 Summary.Value = SummaryValue;
-Summary.Answer = SummaryAnswer;
 
 export default Summary;

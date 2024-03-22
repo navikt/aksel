@@ -178,6 +178,7 @@ const StyleMappings = {
     { component: "Tag", main: "tag.css", dependencies: [typoCss] },
     { component: "TextField", main: formCss, dependencies: [typoCss] },
     { component: "Textarea", main: formCss, dependencies: [typoCss] },
+    { component: "FormSummary", main: formCss, dependencies: [typoCss] },
     {
       component: "ToggleGroup",
       main: "toggle-group.css",
