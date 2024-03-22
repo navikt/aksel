@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.3.4
+
+### Patch Changes
+
+- ReadMore: Padding-right på button er bumpet noen px ([#2806](https://github.com/navikt/aksel/pull/2806))
+
 ## 6.3.3
 
 ## 6.3.2
