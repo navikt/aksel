@@ -12,14 +12,16 @@ export default function FormSummaryHeader({
   return (
     <Box
       as="header"
-      background="bg-subtle"
+      background="surface-subtle"
       borderRadius="large large 0 0"
       borderWidth="0 0 1 0"
       borderColor="border-subtle"
       paddingBlock="4"
       paddingInline="6"
     >
-      <HStack justify="space-between">{children}</HStack>
+      <HStack justify="space-between" gap="2">
+        {children}
+      </HStack>
     </Box>
   );
 }
