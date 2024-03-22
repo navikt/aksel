@@ -30,6 +30,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
       disabled,
       translations,
       onClick,
+      id: buttonId,
       ...rest
     } = props;
 
@@ -46,7 +47,10 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
     const _disabled = disabled ?? fileLimitReached;
 
     const { inputProps, errorId, showErrorMsg, hasError, inputDescriptionId } =
-      useFormField({ ...props, disabled: _disabled }, "fileUpload");
+      useFormField(
+        { ...omit(props, ["id"]), disabled: _disabled },
+        "fileUpload",
+      );
     const {
       id: inputId,
       "aria-describedby": ariaDescribedby,
@@ -129,8 +133,9 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
                 <BodyShort as="div">{translate("dropzone.or")}</BodyShort>
               </div>
               <Button
-                {...omit(rest, ["errorId", "id"])}
+                {...omit(rest, ["errorId"])}
                 {...inputPropsRest}
+                id={buttonId}
                 aria-describedby={cl(labelId, ariaDescribedby)}
                 className="navds-dropzone__area-button"
                 type="button"
