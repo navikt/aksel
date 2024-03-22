@@ -1,5 +1,6 @@
 .--ac-hr {
   border-color: var(--a-grayalpha-300);
-  border-width: 0.5px;
+  border-bottom-width: 1px;
+  border-top-width: 0;
   margin: var(--a-spacing-4) 0;
 }

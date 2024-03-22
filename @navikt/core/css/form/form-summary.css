@@ -4,10 +4,12 @@
 }
 
 .form-summary__value {
-  margin: var(--a-spacing-2) 0 0;
+  margin: var(--a-spacing-1) 0 0;
+  line-height: var(--a-font-line-height-xlarge); /* TODO: Skal vi heller bruke BodyLong? */
 }
 
 .form-summary__value .form-summary__answers {
+  margin-top: var(--a-spacing-2);
   padding: var(--a-spacing-4);
   background: var(--a-surface-action-subtle);
   border-radius: var(--a-border-radius-large);
