@@ -1,10 +1,10 @@
 import React from "react";
 
-export interface SummaryValueProps
+export interface FormSummaryValueProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export default function SummaryValue({ children }: SummaryValueProps) {
+export default function FormSummaryValue({ children }: FormSummaryValueProps) {
   return <dd className="form-summary__value">{children}</dd>;
 }

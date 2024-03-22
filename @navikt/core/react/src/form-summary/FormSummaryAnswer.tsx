@@ -1,10 +1,12 @@
 import React from "react";
 
-export interface SummaryAnswerProps
+export interface FormSummaryAnswerProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export default function SummaryAnswer({ children }: SummaryAnswerProps) {
+export default function FormSummaryAnswer({
+  children,
+}: FormSummaryAnswerProps) {
   return <>{children}</>;
 }
