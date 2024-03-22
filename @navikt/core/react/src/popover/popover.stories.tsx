@@ -45,21 +45,19 @@ export default {
   },
 };
 
-export const Default = (props: any) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>();
+export const Default = () => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
+
   return (
     <div tabIndex={-1}>
-      <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
+      <Button ref={setAnchorEl} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>
-      <Popover
-        {...props}
-        open={props.open ?? open}
-        anchorEl={anchorEl}
-        onClose={() => setOpen(false)}
-      >
-        <Popover.Content>Velit in consequat</Popover.Content>
+      <Popover open={open} anchorEl={anchorEl} onClose={() => setOpen(false)}>
+        <Popover.Content>
+          Velit in consequat <button>testknapp</button>
+        </Popover.Content>
       </Popover>
       &nbsp;
       <Button variant="secondary">Another button</Button>
