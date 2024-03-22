@@ -1,20 +1,15 @@
 import React from "react";
-import { Box } from "../layout/box";
 import { HR } from "../layout/hr/HR";
 
-export const injectHRBetween = (children: React.ReactNode[]) => {
-  return children.map((child, index) =>
-    index < children.length - 1 ? (
+export const injectHRBetween = (children: React.ReactNode) => {
+  return React.Children.map(children, (child, index) =>
+    index > 0 ? (
       <>
-        <Box key={index} as="dd">
-          {child}
-        </Box>
         <HR />
+        {child}
       </>
     ) : (
-      <Box key={index} as="dd">
-        {child}
-      </Box>
+      child
     ),
   );
 };
