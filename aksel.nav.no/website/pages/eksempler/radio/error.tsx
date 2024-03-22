@@ -14,7 +14,7 @@ const Example = () => {
   return (
     <RadioGroup
       legend="Velg din aldersgruppe."
-      onChange={(val: any) => handleChange(val)}
+      onChange={handleChange}
       error={error}
     >
       <Radio value="10">10-20 år</Radio>
