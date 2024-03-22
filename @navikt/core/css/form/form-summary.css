@@ -14,3 +14,9 @@
   background: var(--a-surface-action-subtle);
   border-radius: var(--a-border-radius-large);
 }
+
+.form-summary__edit-button {
+  flex-shrink: 0;
+  margin-top: var(--a-spacing-1);
+  align-self: flex-start;
+}

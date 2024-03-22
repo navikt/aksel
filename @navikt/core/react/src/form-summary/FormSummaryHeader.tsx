@@ -19,7 +19,7 @@ export default function FormSummaryHeader({
       paddingBlock="4"
       paddingInline="6"
     >
-      <HStack justify="space-between" gap="2">
+      <HStack justify="space-between" gap="2" wrap={false}>
         {children}
       </HStack>
     </Box>
