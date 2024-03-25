@@ -39,7 +39,10 @@ export function HeroIntro({
         </Heading>
       </div>
       {description && (
-        <BodyLong size="large" className="relative z-10 mt-4">
+        <BodyLong
+          size="large"
+          className="relative z-10 mt-4 rounded-xlarge backdrop-blur-[1px]"
+        >
           {description}
         </BodyLong>
       )}
