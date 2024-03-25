@@ -31,6 +31,7 @@ export default defineType({
       name: "description",
       type: "text",
       rows: 3,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "alias",
@@ -39,15 +40,6 @@ export default defineType({
       type: "array",
       validation: (Rule) => Rule.unique(),
       of: [{ type: "string" }],
-    }),
-    defineField({
-      name: "explanation",
-      title: "Forklaring / veiledning",
-      description:
-        "En mer detaljert forklaring av temaet for redaktører. F.eks bakgrunn og veiledning for hva temaet innebærer.",
-      type: "text",
-      rows: 3,
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       title: "Pictogram",

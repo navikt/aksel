@@ -5,7 +5,7 @@ import { BodyLong, Heading } from "@navikt/ds-react";
 
 type MetadataT = {
   title: string;
-  explanation: string;
+  description: string;
   slug: string;
 };
 
@@ -45,15 +45,15 @@ export function UndertemaHighlight(props) {
                   {`${res.title} (undertema)`}
                 </Heading>
               </div>
-              {res.explanation && (
-                <BodyLong className="mt-2">{res.explanation}</BodyLong>
+              {res.description && (
+                <BodyLong className="mt-2">{res.description}</BodyLong>
               )}
               <div className="ml-2 mt-3 border-l-4 border-border-default pl-4 dark:border-white">
                 <Heading level="4" size="xsmall">
                   {res.tema.title} (tema)
                 </Heading>
-                {res.tema.explanation && (
-                  <BodyLong className="mt-2">{res.tema.explanation}</BodyLong>
+                {res.tema.description && (
+                  <BodyLong className="mt-2">{res.tema.description}</BodyLong>
                 )}
               </div>
             </div>
