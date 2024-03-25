@@ -3,7 +3,8 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import { validateWonderwallToken } from "@/auth/validateWonderwall";
+import { UserStateT } from "@/auth/auth.types";
+import { getAuthUserState } from "@/auth/getUserState";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -24,6 +25,7 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
+import { Feedback } from "@/web/Feedback/Feedback";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../../404";
@@ -35,7 +37,7 @@ type PageProps = NextPageT<{
   publishDate: string;
   verifiedDate: string;
   toc: TableOfContentsT;
-  signedIn: boolean;
+  userState: UserStateT;
 }>;
 
 export const query = `{
@@ -67,7 +69,7 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
-  const signedIn = await validateWonderwallToken(context.req.headers);
+  const userState = await getAuthUserState(context.req.headers);
 
   const isPreview = context.preview ?? false;
 
@@ -92,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (
         content: page?.content,
         type: "aksel_artikkel",
       }),
-      signedIn,
+      userState,
     },
     notFound: !page && !isPreview,
   };
@@ -103,6 +105,7 @@ const Page = ({
   publishDate,
   verifiedDate,
   toc,
+  userState,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFotfund />;
@@ -251,6 +254,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
+                  <Feedback userState={userState} />
                 </div>
               </div>
             </div>

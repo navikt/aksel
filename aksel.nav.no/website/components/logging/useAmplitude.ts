@@ -61,7 +61,7 @@ const useAmplitudeInit = () => {
             .forEach(([event, eventData]) => amplitude.track(event, eventData)),
         )
         .catch(async () => {
-          const { logger } = await import("../../config/logger");
+          const { logger } = await import("@navikt/next-logger");
           logger.error("Failed logging batched events");
         });
     };
