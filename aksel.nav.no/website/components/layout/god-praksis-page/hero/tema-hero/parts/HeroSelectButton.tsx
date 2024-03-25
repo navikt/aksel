@@ -1,5 +1,6 @@
+import cl from "clsx";
 import { forwardRef } from "react";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
 
 type HeroSelectButtonProps = {
@@ -16,7 +17,13 @@ export const HeroSelectButton = forwardRef<
     <BodyShort
       size="large"
       as="button"
-      className="relative z-10 flex items-center gap-05 rounded-full bg-surface-subtle py-1 pl-4 pr-2 shadow-xsmall focus:outline-none focus-visible:shadow-focus"
+      className={cl(
+        "relative z-10 flex items-center gap-05 rounded-full py-1 pl-4 pr-2 shadow-xsmall focus:outline-none focus-visible:shadow-focus",
+        {
+          "bg-teal-800 text-text-on-inverted": expanded,
+          "bg-teal-50 text-text-default": !expanded,
+        },
+      )}
       onClick={onClick}
       aria-expanded={expanded}
       ref={ref}
@@ -24,7 +31,11 @@ export const HeroSelectButton = forwardRef<
       tabIndex={hidden ? -1 : 0}
     >
       Tema
-      <ChevronDownIcon aria-hidden className="shrink-0 text-2xl" />
+      {expanded ? (
+        <ChevronDownUpIcon aria-hidden className="shrink-0 text-2xl" />
+      ) : (
+        <ChevronUpDownIcon aria-hidden className="shrink-0 text-2xl" />
+      )}
     </BodyShort>
   );
 });

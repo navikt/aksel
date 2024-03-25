@@ -1,7 +1,6 @@
 import cl from "clsx";
 import { CSSProperties, useCallback, useRef, useState } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
-import { BodyShort, Box } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
@@ -101,10 +100,10 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
 
       <Box
         borderRadius="large"
-        paddingInline={{ xs: "8", lg: "14" }}
+        paddingInline={{ xs: "4", lg: "10" }}
         paddingBlock="10 6"
         className={cl(
-          "absolute inset-0 z-20 ring-1 ring-teal-700",
+          "absolute inset-0 z-20 overflow-clip ring-1 ring-teal-500",
           styles.heroSelector,
           styles.heroGradientOpen,
           {
@@ -122,28 +121,17 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       >
         <Cube variant="dark" />
 
-        <button
+        <HeroSelectButton
           onClick={handleClose}
-          data-theme="dark"
-          className="absolute right-4 top-4 z-20 grid size-12 place-content-center rounded-medium outline-none hover:bg-gray-50/10 focus-visible:shadow-focus-inverted"
-        >
-          <XMarkIcon title="Lukk temavelger" fontSize="1.5rem" />
-        </button>
+          expanded={true}
+          hidden={false}
+        />
 
-        <BodyShort
-          size="large"
-          className="relative z-10 py-1 text-text-on-inverted"
-          id="tema-selector-title"
-          weight="semibold"
-        >
-          Tema
-        </BodyShort>
         <HeroList
           currentlyActiveLink={currentlyActiveLink}
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}
-          onInvertedBg
         />
       </Box>
     </Box>

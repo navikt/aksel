@@ -19,9 +19,9 @@
 }
 
 .heroGradient {
-  background: linear-gradient(85deg, #2dd4bf 0%, #99f6e4 48%, #99f6e4 100%);
+  background: linear-gradient(85deg, #5eead4 0%, #99f6e4 48%, #99f6e4 100%);
 }
 
 .heroGradientOpen {
-  background: linear-gradient(85deg, #115e59 0%, #0d9488 48.5%, #0d9488 100%);
+  background: linear-gradient(265deg, #14b8a6 0%, #2dd4bf 48.5%, #2dd4bf 100%);
 }
