@@ -1,11 +1,10 @@
 import { differenceInMonths } from "date-fns";
-import NextLink from "next/link";
 import { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
+import { GpTemaLink } from "@/layout/god-praksis-page/chipnavigation/GpTemaLink";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
@@ -21,11 +20,9 @@ import {
   ResolveContributorsT,
   ResolveRelatedArticlesT,
   ResolveSlugT,
-  ResolveTemaT,
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
 import OutdatedAlert from "@/web/OutdatedAlert";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
@@ -33,8 +30,11 @@ import NotFound from "../../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
-    ResolveTemaT<ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>>
-  >;
+    ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>
+  > & {
+    innholdstype: string;
+    undertema: { title: string; tema: { slug: string; title: string } }[];
+  };
   publishDate: string;
   verifiedDate: string;
   outdated: boolean;
@@ -50,7 +50,14 @@ const query = `{
       ...,
       ${destructureBlocks}
     },
-    tema[]->{title, slug, seo},
+    "innholdstype": innholdstype->title,
+    "undertema": undertema[]->{
+      title,
+      "tema": tema->{
+        title,
+        "slug": slug.current,
+      }
+    },
     ${contributorsAll},
     relevante_artikler[]->{
       _id,
@@ -136,8 +143,6 @@ const Page = ({
 
   const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
 
-  const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
-
   const aside = data?.relevante_artikler &&
     data.relevante_artikler.length > 0 && (
       <aside
@@ -168,9 +173,6 @@ const Page = ({
       </aside>
     );
 
-  const filteredTema =
-    hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
-
   return (
     <>
       <SEO
@@ -190,11 +192,18 @@ const Page = ({
         <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
-              <BreadCrumbs auto />
+              {data.innholdstype && (
+                <BodyShort
+                  weight="semibold"
+                  className="uppercase text-violet-600"
+                >
+                  {data.innholdstype}
+                </BodyShort>
+              )}
               <Heading
                 level="1"
                 size="large"
-                className="text-wrap-balance mt-4 text-deepblue-800 md:text-5xl"
+                className="text-wrap-balance mt-1 text-deepblue-800 md:text-5xl"
               >
                 {data.heading}
               </Heading>
@@ -224,21 +233,17 @@ const Page = ({
                   </>
                 )}
               </div>
-              {hasTema && filteredTema && (
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {filteredTema.map(({ title, slug }: any) => (
-                    <span key={title}>
-                      <BodyShort
-                        href={`/god-praksis/${slug.current}`}
-                        key={title}
-                        size="small"
-                        as={NextLink}
-                        className="flex min-h-8 items-center justify-center gap-[2px] rounded-full bg-surface-neutral-subtle pl-4  pr-1 text-deepblue-800 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
-                      >
-                        {title}
-                        <ChevronRightIcon aria-hidden fontSize="1.25rem" />
-                      </BodyShort>
-                    </span>
+              {data.undertema && data.undertema.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {data.undertema.map(({ title, tema }) => (
+                    <GpTemaLink
+                      key={title}
+                      href={`/gp/${tema.slug}?undertema=${encodeURIComponent(
+                        title,
+                      )}`}
+                    >
+                      {tema.title}
+                    </GpTemaLink>
                   ))}
                 </div>
               )}

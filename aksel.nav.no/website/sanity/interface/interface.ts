@@ -9,7 +9,8 @@ export function urlFor(source: any) {
 export async function sitemapPages(
   token?: string,
 ): Promise<{ path: string; lastmod: string }[]> {
-  const client = token ? noCdnClient(token) : getClient();
+  let client = token ? noCdnClient(token) : getClient();
+  client = client.config({ perspective: "published" });
   const artikler = await getDocuments("all", token);
   const temaer = await getAkselTema(token);
 
@@ -40,6 +41,36 @@ export async function sitemapPages(
   ];
 }
 
+export async function getGpTema(
+  token?: string,
+): Promise<{ path: string; lastmod: string }[]> {
+  const client = token ? noCdnClient(token) : getClient();
+  const temaList: {
+    slug: string;
+    _updatedAt: string;
+    lastUpdate: string;
+    refCount: number;
+  }[] = await client.fetch(
+    `*[_type == "gp.tema"]{
+        _updatedAt,
+        "slug": slug.current,
+        "refCount": count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]),
+        "lastUpdate": *[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)] | order(publishedAt desc)[0].publishedAt
+      }`,
+  );
+
+  return temaList
+    .filter((tema) => tema.refCount > 0)
+    .map((tema) => ({
+      path: tema.slug,
+      lastmod: tema.lastUpdate ?? tema._updatedAt,
+    }));
+}
+
+/**
+ * TODO:
+ * - Deprecate when getGpTema gets implemented in production
+ */
 export async function getAkselTema(
   token?: string,
 ): Promise<{ path: string; lastmod: string }[]> {
@@ -52,29 +83,6 @@ export async function getAkselTema(
     path: x?.slug.current,
     lastmod: x?._updatedAt,
   }));
-}
-
-export async function getGpTema(
-  token?: string,
-): Promise<{ path: string; lastmod: string }[]> {
-  const client = token ? noCdnClient(token) : getClient();
-  const tags: {
-    slug: { current: string };
-    _updatedAt: string;
-    hasRefs: boolean;
-  }[] = await client.fetch(
-    `*[_type == "gp.tema"]{
-        slug,
-        _updatedAt,
-        "hasRefs": count(*[_type=="aksel_artikkel" && (^._id in undertema[]->tema._ref)]) > 0
-      }`,
-  );
-  return tags
-    .filter((x) => x.hasRefs)
-    .map((x) => ({
-      path: x?.slug.current,
-      lastmod: x?._updatedAt,
-    }));
 }
 
 export async function getDocuments(

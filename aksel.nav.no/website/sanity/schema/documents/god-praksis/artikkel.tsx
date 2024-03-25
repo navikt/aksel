@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { InnholdstypeHighlight } from "../../custom-components/gp/InnholdstypeHighlight";
+import { UndertemaHighlight } from "../../custom-components/gp/UndertemaHighlight";
 
 /* import { gpTaxonomyObject } from "../../../plugins/god-praksis-taxonomy/taxonomy-object"; */
 import { WorkspaceT } from "../../util";
@@ -48,6 +50,9 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
         title: "Innholdstype",
         type: "reference",
         to: [{ type: "gp.innholdstype" }],
+        components: {
+          field: InnholdstypeHighlight,
+        },
         options: {
           disableNew: true,
         },
@@ -64,6 +69,9 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
         /* Add required after update */
         /* validation: (Rule) => Rule.required(), */
         /*  */
+        components: {
+          field: UndertemaHighlight,
+        },
         of: [
           defineArrayMember({
             title: "Undertema",

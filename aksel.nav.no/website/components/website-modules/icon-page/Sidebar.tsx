@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 
@@ -55,23 +56,10 @@ export const IconSidebar = ({
     });
   };
 
-  const escape = useCallback(
-    (e) => {
-      if (e.key === "Escape") {
-        router.push("/ikoner", undefined, { shallow: true });
-        focusRef?.current?.focus?.();
-      }
-    },
-    [focusRef, router],
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", escape, false);
-
-    return () => {
-      window.removeEventListener("keydown", escape, false);
-    };
-  }, [escape]);
+  useEscapeKeydown(() => {
+    router.push("/ikoner", undefined, { shallow: true });
+    focusRef?.current?.focus?.();
+  }, [focusRef, router]);
 
   return (
     <section
