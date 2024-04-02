@@ -10,11 +10,13 @@ interface Props {
   action: "delete" | "retry" | "none";
   retryTitle: string;
   deleteTitle: string;
+  id?: string;
 }
 
 const ItemButton = ({
   onRetry,
   onDelete,
+  id,
   action,
   retryTitle,
   deleteTitle,
@@ -26,6 +28,7 @@ const ItemButton = ({
   if (onRetry && action === "retry") {
     return (
       <Button
+        id={id}
         className="navds-file-item__button"
         type="button"
         variant="tertiary-neutral"
@@ -37,6 +40,7 @@ const ItemButton = ({
   if (onDelete && action === "delete") {
     return (
       <Button
+        id={id}
         className="navds-file-item__button"
         type="button"
         variant="tertiary-neutral"

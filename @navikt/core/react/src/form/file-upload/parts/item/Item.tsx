@@ -54,15 +54,18 @@ export interface FileItemBaseProps {
 type FileItemActionDelete = {
   onDelete: (event: MouseEvent<HTMLButtonElement>) => void;
   itemAction: "delete";
+  actionButtonId?: string;
 };
 
 type FileItemActionRetry = {
   onRetry: (event: MouseEvent<HTMLButtonElement>) => void;
   itemAction: "retry";
+  actionButtonId?: string;
 };
 
 type FileItemActionNone = {
   itemAction?: "none";
+  actionButtonId?: never;
 };
 
 type FileItemConditionalProps =
@@ -89,6 +92,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         onFileClick,
         itemAction = "delete",
         translations,
+        actionButtonId,
         ...rest
       },
       ref,
@@ -151,6 +155,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
             {status === "idle" && (
               <ItemButton
                 file={file}
+                id={actionButtonId}
                 onRetry={onRetry}
                 onDelete={onDelete}
                 action={itemAction}
