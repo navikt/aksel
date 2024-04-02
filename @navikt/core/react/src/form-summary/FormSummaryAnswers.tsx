@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { injectHRBetween } from "./utils";
 
 export interface FormSummaryAnswersProps
@@ -6,13 +6,15 @@ export interface FormSummaryAnswersProps
   children: React.ReactNode;
 }
 
-export default function FormSummaryAnswers({
-  children,
-  ...rest
-}: FormSummaryAnswersProps) {
+export const FormSummaryAnswers = forwardRef<
+  HTMLDListElement,
+  FormSummaryAnswersProps
+>(({ children, ...rest }: FormSummaryAnswersProps, ref) => {
   return (
-    <dl className="form-summary__answers" {...rest}>
+    <dl className="form-summary__answers" ref={ref} {...rest}>
       {injectHRBetween(children)}
     </dl>
   );
-}
+});
+
+export default FormSummaryAnswers;
