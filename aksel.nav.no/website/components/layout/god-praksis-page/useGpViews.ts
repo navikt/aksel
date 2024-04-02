@@ -24,6 +24,16 @@ type ViewNone = {
   innholdstype: undefined;
 };
 
+/**
+ * Tracks the current filter for current God Praksis tema/page.
+ * We track the current "undertema" and "innholdstype" in the URL query.
+ * If both are present, we are in a "both" view.
+ * If only "undertema" is present, we are in a "undertema" view.
+ * If only "innholdstype" is present, we are in a "innholdstype" view.
+ * If neither are present, we are in a "none" view.
+ *
+ * @returns The current view state.
+ */
 export function useGpViews():
   | ViewBoth
   | ViewInnholdstype
