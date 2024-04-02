@@ -5,7 +5,6 @@
 
 .form-summary__value {
   margin: var(--a-spacing-1) 0 0;
-  line-height: var(--a-font-line-height-xlarge); /* TODO: Skal vi heller bruke BodyLong? */
 }
 
 .form-summary__value .form-summary__answers {

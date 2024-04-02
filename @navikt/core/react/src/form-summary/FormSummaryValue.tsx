@@ -1,4 +1,5 @@
 import React from "react";
+import { BodyLong } from "../typography";
 
 export interface FormSummaryValueProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -6,5 +7,9 @@ export interface FormSummaryValueProps
 }
 
 export default function FormSummaryValue({ children }: FormSummaryValueProps) {
-  return <dd className="form-summary__value">{children}</dd>;
+  return (
+    <BodyLong as="dd" className="form-summary__value">
+      {children}
+    </BodyLong>
+  );
 }
