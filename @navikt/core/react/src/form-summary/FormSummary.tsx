@@ -13,7 +13,9 @@ interface FormSummaryComponent
     FormSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Wrapper component.
+   * Must include:
+   * - `<FormSummary.Heading>`
+   * - `<FormSummary.EditButton>`
    */
   Header: typeof FormSummaryHeader;
   /**
@@ -21,23 +23,23 @@ interface FormSummaryComponent
    */
   Heading: typeof FormSummaryHeading;
   /**
-   * Button to edit the Answers.
+   * ButtonLink to edit the answers to use in the `FormSummary.Header` component. Should link to the relevant part of the form.
    */
   EditButton: typeof FormSummaryEditButton;
   /**
-   * Wrapper component for the Answers.
+   * Wrapper component for the answers.
    */
   Answers: typeof FormSummaryAnswers;
   /**
-   * Wrapper component for each Answer.
+   * Wrapper component for each answer. To be used in the `FormSummary.Answers` component.
    */
   Answer: typeof FormSummaryAnswer;
   /**
-   * Corresponds to the question in the form.
+   * Corresponds to the question in the form. To be used in the `FormSummary.Answer` component.
    */
   Label: typeof FormSummaryLabel;
   /**
-   * Corresponds to the answer in the form.
+   * Corresponds to the answer in the form. To be used in the `FormSummary.Answer` component.
    */
   Value: typeof FormSummaryValue;
 }
