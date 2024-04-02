@@ -9,12 +9,10 @@ export interface FormSummaryAnswersProps
 export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
->(({ children, ...rest }: FormSummaryAnswersProps, ref) => {
-  return (
-    <dl className="form-summary__answers" ref={ref} {...rest}>
-      {injectHRBetween(children)}
-    </dl>
-  );
-});
+>(({ children, ...rest }: FormSummaryAnswersProps, ref) => (
+  <dl className="form-summary__answers" ref={ref} {...rest}>
+    {injectHRBetween(children)}
+  </dl>
+));
 
 export default FormSummaryAnswers;

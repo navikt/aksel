@@ -2,14 +2,14 @@ import React, { forwardRef } from "react";
 import { Box } from "../layout/box";
 import { HStack } from "../layout/stack";
 
-interface FormSummaryHeaderProps {
+interface FormSummaryHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
 export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
->(({ children }, ref) => (
+>(({ children, ...rest }, ref) => (
   <Box
     ref={ref}
     as="header"
@@ -19,6 +19,7 @@ export const FormSummaryHeader = forwardRef<
     borderColor="border-subtle"
     paddingBlock="4"
     paddingInline="6"
+    {...rest}
   >
     <HStack justify="space-between" gap="2" wrap={false}>
       {children}
