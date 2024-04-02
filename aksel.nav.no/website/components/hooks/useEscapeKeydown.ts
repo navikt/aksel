@@ -1,5 +1,10 @@
 import { useEffect } from "react";
 
+/**
+ * SSR-safe hook that listens for the Escape keydown event and calls the provided callback.
+ * @param onEscapeKeyDown callback for when Escape key is pressed
+ * @param deps additional dependencies to keep the hook up-to-date
+ */
 export function useEscapeKeydown(
   onEscapeKeyDown: (event: KeyboardEvent) => void,
   deps: React.DependencyList = [],
