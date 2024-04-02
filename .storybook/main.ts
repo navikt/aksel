@@ -7,7 +7,7 @@ export default {
   stories: () => ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)", "./*.mdx"],
   addons: [
     "@storybook/addon-a11y",
-    "@xfinx/storybook-addon-html",
+    "@whitespace/storybook-addon-html",
     "@storybook/addon-interactions",
     {
       name: "@storybook/addon-storysource",
