@@ -44,7 +44,7 @@ interface FormSummaryComponent
 
 export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Children of the FormSummary component, must be of types:
+   * Must include:
    *
    *  - `<FormSummary.Header>`
    *  - `<FormSummary.Answers>`

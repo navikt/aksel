@@ -1,6 +1,11 @@
 import React from "react";
 
 export interface FormSummaryAnswerProps {
+  /**
+   * Must include:
+   * - `<FormSummary.Label>`
+   * - `<FormSummary.Value>`
+   */
   children: React.ReactNode;
 }
 
