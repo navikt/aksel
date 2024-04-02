@@ -1,5 +1,7 @@
+import cl from "clsx";
 import { Box, Heading } from "@navikt/ds-react";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
+import styles from "../Hero.module.css";
 
 type GpIntroHeroProps = {
   title: string;
@@ -13,7 +15,10 @@ function IntroHero({ title, children }: GpIntroHeroProps) {
       borderRadius="large"
       paddingInline={{ xs: "4", lg: "10" }}
       paddingBlock={{ xs: "6", lg: "10" }}
-      className="relative isolate bg-gradient-to-tr from-teal-400 via-teal-200 via-60% to-teal-200 ring-1 ring-inset ring-teal-400"
+      className={cl(
+        "relative isolate ring-1 ring-inset ring-teal-400",
+        styles.heroGradient,
+      )}
     >
       <Cube />
       <Heading level="1" size="xlarge" className="relative z-10 mt-2">

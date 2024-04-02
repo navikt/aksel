@@ -6,7 +6,7 @@ import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCar
 import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
 import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
-import styles from "./TemaHero.module.css";
+import styles from "../Hero.module.css";
 
 type GpTemaHeroModalProps = { tema: GpTemaT | null } & HeroNavT;
 
