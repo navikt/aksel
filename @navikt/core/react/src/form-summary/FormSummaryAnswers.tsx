@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { injectHRBetween } from "./utils";
 
 export interface FormSummaryAnswersProps
   extends React.HTMLAttributes<HTMLDListElement> {
@@ -11,7 +10,7 @@ export const FormSummaryAnswers = forwardRef<
   FormSummaryAnswersProps
 >(({ children, ...rest }: FormSummaryAnswersProps, ref) => (
   <dl className="form-summary__answers" ref={ref} {...rest}>
-    {injectHRBetween(children)}
+    {children}
   </dl>
 ));
 
