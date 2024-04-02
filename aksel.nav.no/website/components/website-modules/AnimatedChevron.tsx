@@ -1,8 +1,8 @@
 import cl from "clsx";
 
 /**
- * Simple animated chevron Component based on the Aksel brand
- * @note Requires wrapper that is using it to set the `group`-class from tailwind
+ * Simple animated chevron-component based on the Aksel logo
+ * @note Requires wrapper that is using it to set the `group`-class from tailwind (handles hover and focus-visible)
  * @note Uses `currentColor` for the stroke color, so wrapper must defined color
  */
 export function AnimatedChevron({
