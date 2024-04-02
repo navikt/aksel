@@ -1,11 +1,17 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Label } from "../typography";
 
-export interface FormSummaryLabelProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormSummaryLabelProps {
   children: React.ReactNode;
 }
 
-export default function FormSummaryLabel({ children }: FormSummaryLabelProps) {
-  return <Label as="dt">{children}</Label>;
-}
+export const FormSummaryLabel = forwardRef<
+  HTMLDivElement,
+  FormSummaryLabelProps
+>(({ children }, ref) => (
+  <Label as="dt" ref={ref}>
+    {children}
+  </Label>
+));
+
+export default FormSummaryLabel;

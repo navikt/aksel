@@ -1,4 +1,5 @@
-import React from "react";
+import cl from "clsx";
+import React, { forwardRef } from "react";
 import { BodyLong } from "../typography";
 
 export interface FormSummaryValueProps
@@ -6,10 +7,18 @@ export interface FormSummaryValueProps
   children: React.ReactNode;
 }
 
-export default function FormSummaryValue({ children }: FormSummaryValueProps) {
-  return (
-    <BodyLong as="dd" className="form-summary__value">
-      {children}
-    </BodyLong>
-  );
-}
+export const FormSummaryValue = forwardRef<
+  HTMLDivElement,
+  FormSummaryValueProps
+>(({ children, className, ...rest }, ref) => (
+  <BodyLong
+    as="dd"
+    className={cl("form-summary__value", className)}
+    ref={ref}
+    {...rest}
+  >
+    {children}
+  </BodyLong>
+));
+
+export default FormSummaryValue;
