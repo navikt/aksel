@@ -2,7 +2,8 @@ import React, { forwardRef } from "react";
 import { Box } from "../layout/box";
 import { HStack } from "../layout/stack";
 
-interface FormSummaryHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FormSummaryHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
