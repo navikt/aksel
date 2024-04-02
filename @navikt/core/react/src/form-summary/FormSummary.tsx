@@ -44,23 +44,24 @@ interface FormSummaryComponent
 
 export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Children of the FormSummary component, must be of type FormSummary.Header, FormSummary.Answers.
+   * Children of the FormSummary component, must be of types:
+   *
+   *  - `<FormSummary.Header>`
+   *  - `<FormSummary.Answers>`
    *
    * @example
-   * ```jsx
    * <FormSummary>
-   *  <FormSummary.Header>
-   *   <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
-   *  <FormSummary.EditButton />
-   * </FormSummary.Header>
-   * <FormSummary.Answers>
-   *   <FormSummary.Answer>
-   *     <FormSummary.Label>Navn</FormSummary.Label>
-   *     <FormSummary.Value>Ola Nordmann</FormSummary.Value>
-   *   </FormSummary.Answer>
-   * </FormSummary.Answers>
+   *   <FormSummary.Header>
+   *    <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+   *    <FormSummary.EditButton />
+   *   </FormSummary.Header>
+   *   <FormSummary.Answers>
+   *     <FormSummary.Answer>
+   *       <FormSummary.Label>Navn</FormSummary.Label>
+   *       <FormSummary.Value>Ola Nordmann</FormSummary.Value>
+   *     </FormSummary.Answer>
+   *   </FormSummary.Answers>
    * </FormSummary>
-   * ```
    */
   children: React.ReactNode;
 }
@@ -69,20 +70,18 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  * A summary of a previously answered form.
  *
  * @example
- * ```jsx
  * <FormSummary>
- *  <FormSummary.Header>
- *   <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
- *  <FormSummary.EditButton />
- * </FormSummary.Header>
- * <FormSummary.Answers>
- *   <FormSummary.Answer>
- *     <FormSummary.Label>Navn</FormSummary.Label>
- *     <FormSummary.Value>Ola Nordmann</FormSummary.Value>
- *   </FormSummary.Answer>
- * </FormSummary.Answers>
+ *   <FormSummary.Header>
+ *    <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+ *    <FormSummary.EditButton />
+ *   </FormSummary.Header>
+ *   <FormSummary.Answers>
+ *     <FormSummary.Answer>
+ *       <FormSummary.Label>Navn</FormSummary.Label>
+ *       <FormSummary.Value>Ola Nordmann</FormSummary.Value>
+ *     </FormSummary.Answer>
+ *   </FormSummary.Answers>
  * </FormSummary>
- * ```
  */
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
   ({ children, ...rest }, ref) => {
