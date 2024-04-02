@@ -5,13 +5,12 @@ type HeroListProps = {
   heroNav: HeroNavT["heroNav"];
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   currentSlug?: string;
-  currentlyActiveLink?: React.MutableRefObject<HTMLElement | null>;
 };
 
 export function HeroList({
   heroNav,
   setOpen,
-  currentlyActiveLink,
+
   currentSlug,
 }: HeroListProps) {
   return (
@@ -29,11 +28,6 @@ export function HeroList({
               image={tema.image}
               compact
               aria-current={currentSlug === tema.slug ? "page" : undefined}
-              ref={(element: HTMLAnchorElement) => {
-                if (currentSlug === tema.slug && currentlyActiveLink) {
-                  currentlyActiveLink.current = element;
-                }
-              }}
               onClick={() => {
                 // Since navigating to same page will not trigger a new render, we have to manually close it
                 currentSlug === tema.slug && setOpen(false);

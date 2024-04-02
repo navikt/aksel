@@ -20,7 +20,8 @@ export const HeroSelectButton = forwardRef<
       className={cl(
         "relative z-10 flex items-center gap-05 rounded-full py-1 pl-4 pr-2 shadow-xsmall focus:outline-none focus-visible:shadow-focus",
         {
-          "bg-teal-800 text-text-on-inverted": expanded,
+          "bg-teal-800 text-text-on-inverted focus-visible:shadow-focus-gap":
+            expanded,
           "bg-teal-50 text-text-default": !expanded,
         },
       )}

@@ -16,11 +16,11 @@ export function HeroIntro({
   hidden,
   image,
 }: HeroIntroProps) {
-  if (!title) return null;
   return (
     <div className="relative z-10 mt-4" aria-hidden={hidden}>
       <div className="flex items-center gap-3">
-        <div className="relative my-auto size-8 shrink-0 md:size-12">
+        {/* To avoid having duplicate images for different backgrounds, we up the contrast instread */}
+        <div className="relative my-auto size-8 shrink-0 contrast-200 md:size-12">
           {image ? (
             <Image
               src={urlFor(image).auto("format").url()}

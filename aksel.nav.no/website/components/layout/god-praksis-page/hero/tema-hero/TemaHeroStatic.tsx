@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { CSSProperties, useCallback, useRef, useState } from "react";
+import { CSSProperties, useCallback, useState } from "react";
 import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
@@ -16,10 +16,13 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
 
   const [boxHeight, setBoxHeight] = useState(0);
   const [wrapperHeight, setWrapperHeight] = useState(0);
-  const currentlyActiveLink = useRef<HTMLElement | null>(null);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
-  const [dialogButton, setDialogButton] = useState<HTMLElement | null>(null);
+  const [openDialogButton, setOpenDialogButton] = useState<HTMLElement | null>(
+    null,
+  );
+  const [closeDialogButton, setCloseDialogButton] =
+    useState<HTMLElement | null>(null);
 
   const inlineStyles: CSSProperties = {
     "--aksel-website-hero-selector-x": animationRef.x + "px",
@@ -29,6 +32,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
   const handleOpen = (
     e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>,
   ) => {
+    closeDialogButton?.focus();
     const rect = e.currentTarget.getBoundingClientRect();
 
     setAnimationRef({
@@ -36,20 +40,12 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       y: e.currentTarget.offsetTop + rect.height / 2,
     });
     setOpen(true);
-
-    /**
-     * Since the dialog is not rendered until the next cycle,
-     * we need to wait for display: none to be removed before.
-     */
-    setTimeout(() => {
-      currentlyActiveLink.current?.focus();
-    }, 0);
   };
 
   const handleClose = useCallback(() => {
     setOpen(false);
-    dialogButton?.focus();
-  }, [dialogButton]);
+    openDialogButton?.focus();
+  }, [openDialogButton]);
 
   useEscapeKeydown(handleClose, [handleClose]);
 
@@ -88,7 +84,7 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
       <HeroSelectButton
         onClick={handleOpen}
         expanded={open}
-        ref={setDialogButton}
+        ref={setOpenDialogButton}
         hidden={open}
       />
       <HeroIntro
@@ -125,10 +121,10 @@ export function TemaHeroStatic({ tema, heroNav }: GpTemaHeroStaticProps) {
           onClick={handleClose}
           expanded={true}
           hidden={false}
+          ref={setCloseDialogButton}
         />
 
         <HeroList
-          currentlyActiveLink={currentlyActiveLink}
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}
