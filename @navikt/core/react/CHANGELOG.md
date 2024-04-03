@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.3.5
+
+### Patch Changes
+
+- Modal: Fjern tomt element ([#2819](https://github.com/navikt/aksel/pull/2819))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.5
+  - @navikt/aksel-icons@6.3.5
+
 ## 6.3.4
 
 ### Patch Changes
