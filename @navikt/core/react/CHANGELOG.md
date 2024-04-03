@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.3.6
+
+### Patch Changes
+
+- DatePicker: Fjernet role gridcell fra dato-knapper. ([#2826](https://github.com/navikt/aksel/pull/2826))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.6
+  - @navikt/aksel-icons@6.3.6
+
 ## 6.3.5
 
 ### Patch Changes
