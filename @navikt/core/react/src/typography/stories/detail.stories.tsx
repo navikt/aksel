@@ -4,18 +4,17 @@ import React from "react";
 import { VStack } from "../../layout/stack";
 import Detail from "../Detail";
 
-const meta = {
+const meta: Meta<typeof Detail> = {
   title: "ds-react/Typography/Detail",
   component: Detail,
   decorators: [(story) => <div style={{ maxWidth: "200px" }}>{story()}</div>],
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof Detail>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Detail>;
 
 const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
 
