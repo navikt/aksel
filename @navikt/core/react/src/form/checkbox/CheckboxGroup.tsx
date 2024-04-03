@@ -27,7 +27,7 @@ export interface CheckboxGroupProps
    */
   value?: any[];
   /**
-   * Default checked checkboxes on render.
+   * Default checked checkboxes.
    */
   defaultValue?: any[];
   /**

@@ -2,13 +2,13 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any[]) => console.log(val);
+  const handleChange = (val: string[]) => console.log(val);
 
   return (
     <CheckboxGroup
       legend="Hvor vil du sitte?"
       hideLegend
-      onChange={(val: any[]) => handleChange(val)}
+      onChange={handleChange}
     >
       <Checkbox value="Bakerst">Bakerst</Checkbox>
       <Checkbox value="Midterst">Midterst</Checkbox>
@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
+  desc: "Legend må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };
