@@ -128,6 +128,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               removeSelectedOption(lastSelectedOption);
             }
           }
+        } else if (e.key === "Enter" || e.key === "Accept") {
+          e.preventDefault();
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
