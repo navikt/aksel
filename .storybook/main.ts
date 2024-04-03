@@ -1,4 +1,3 @@
-import { mergeConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 
 export default {
@@ -42,6 +41,7 @@ export default {
   },
 
   async viteFinal(config, { configType }) {
+    const { mergeConfig } = await import("vite");
     return mergeConfig(config, {
       plugins:
         configType === "PRODUCTION"
