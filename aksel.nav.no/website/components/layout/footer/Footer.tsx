@@ -32,7 +32,7 @@ const Footer = () => {
             heading="Snarveier"
             links={[
               {
-                url: "/god-praksis/artikler/skriv-for-aksel",
+                url: "/side/skriv-for-aksel",
                 text: "Skriv for Aksel",
               },
               {
