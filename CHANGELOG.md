@@ -10,23 +10,25 @@
 
 ### @navikt/ds-react
 
-- Modal: Fjern tomt element ([#2819](https://github.com/navikt/aksel/pull/2819))
+- DatePicker: Fjernet role gridcell fra dato-knapper. ([#2826](https://github.com/navikt/aksel/pull/2826))
 
-* Switch: Fikset edgecase der checked Switch var visuelt unchecked ([#2810](https://github.com/navikt/aksel/pull/2810))
+* Modal: Fjern tomt element ([#2819](https://github.com/navikt/aksel/pull/2819))
 
-* FileUpload.Dropzone: id prop settes på button ([#2817](https://github.com/navikt/aksel/pull/2817))
+- Switch: Fikset edgecase der checked Switch var visuelt unchecked ([#2810](https://github.com/navikt/aksel/pull/2810))
 
-- FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
+- FileUpload.Dropzone: id prop settes på button ([#2817](https://github.com/navikt/aksel/pull/2817))
 
-- useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
+* FileUpload.Dropzone: Fiks feil med duplisert id ([#2805](https://github.com/navikt/aksel/pull/2805))
 
-* FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
+* useDatePicker: `isInvalid`-key i onValidate var hadde flipper boolean i noen tilfeller ([#2809](https://github.com/navikt/aksel/pull/2809))
 
-- FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
+- FileUpload: Fiks feil ved import av json ([#2803](https://github.com/navikt/aksel/pull/2803))
 
-* Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+* FileUpload: Disabled dropzone stopper opplasting ([#2798](https://github.com/navikt/aksel/pull/2798))
 
-* FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
+- Allow Combobox options as objects to support separate display text and value ([#2716](https://github.com/navikt/aksel/pull/2716))
+
+- FileUpload: Ny komponent `FileUpload` for å håndtere opplasting av filer, Dropzone og fil-visning ([#2504](https://github.com/navikt/aksel/pull/2504))
 
 ## 6.2
 
