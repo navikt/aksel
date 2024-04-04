@@ -2,12 +2,12 @@ import { Radio, RadioGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any) => console.log(val);
+  const handleChange = (val: string) => console.log(val);
 
   return (
     <RadioGroup
       legend="Velg din aldersgruppe."
-      onChange={(val: any) => handleChange(val)}
+      onChange={handleChange}
       disabled
     >
       <Radio value="10">10-20 år</Radio>
@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 99,
+  desc: "Vi fraråder bruk av disabled state. Vurder om du trenger å vise feltet i det hele tatt, om du heller kan bruke 'readOnly', eller bare kan skrive det ut i ren tekst.",
 };

@@ -2,12 +2,12 @@ import { Radio, RadioGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any) => console.log(val);
+  const handleChange = (val: string) => console.log(val);
 
   return (
     <RadioGroup
       legend="Velg din aldersgruppe."
-      onChange={(val: any) => handleChange(val)}
+      onChange={handleChange}
       value="20"
       readOnly
     >
@@ -28,4 +28,5 @@ export const Demo = {
 
 export const args = {
   index: 98,
+  desc: "Readonly-attributtet gjør at valget ikke kan endres, men brukere vil fortsatt kunne markere og kopiere teksten. Til forskjell fra disabled vil brukere også kunne tabbe til det, og feltet vil inkluderes når skjemaet sendes inn.",
 };

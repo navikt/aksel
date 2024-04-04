@@ -16,7 +16,7 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
 export interface CheckboxGroupProps
   extends Omit<
     FieldsetProps,
-    "onChange" | "errorPropagation" | "defaultValue"
+    "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
   > {
   /**
    * Collection of `<Checkbox/>`.
@@ -27,7 +27,7 @@ export interface CheckboxGroupProps
    */
   value?: any[];
   /**
-   * Default checked checkboxes on render.
+   * Default checked checkboxes.
    */
   defaultValue?: any[];
   /**

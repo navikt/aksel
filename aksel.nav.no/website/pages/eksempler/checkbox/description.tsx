@@ -2,13 +2,13 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any[]) => console.log(val);
+  const handleChange = (val: string[]) => console.log(val);
 
   return (
     <CheckboxGroup
       legend="Hvor vil du sitte?"
       description="Fremste rad er nærmest nødutgangene"
-      onChange={(val: any[]) => handleChange(val)}
+      onChange={handleChange}
     >
       <Checkbox value="Bakerst">Bakerst</Checkbox>
       <Checkbox value="Midterst">Midterst</Checkbox>
