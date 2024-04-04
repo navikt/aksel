@@ -30,5 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 20,
-  desc: "Vi fraråder bruk av disabled state fordi det er en dårlig måte å kommunisere med brukerne på.",
+  desc: "Vi fraråder bruk av disabled state da elementet blir gjemt fra hjelpeteknologier og ofte vil være vanskelig å oppfatte visuelt.",
 };
