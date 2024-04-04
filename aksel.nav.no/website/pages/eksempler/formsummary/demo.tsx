@@ -6,7 +6,7 @@ const Example = () => {
     <FormSummary>
       <FormSummary.Header>
         <FormSummary.Heading>Personalia</FormSummary.Heading>
-        <FormSummary.EditButton />
+        <FormSummary.Edit />
       </FormSummary.Header>
 
       <FormSummary.Answers>
