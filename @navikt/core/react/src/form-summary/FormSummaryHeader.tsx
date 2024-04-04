@@ -7,7 +7,7 @@ export interface FormSummaryHeaderProps
   /**
    * Must include:
    * - `<FormSummary.Heading>`
-   * - `<FormSummary.EditButton>`
+   * - `<FormSummary.Edit>`
    */
   children: React.ReactNode;
 }

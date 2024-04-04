@@ -9,9 +9,9 @@ export {
   type FormSummaryAnswersProps,
 } from "./FormSummaryAnswers";
 export {
-  default as FormSummaryEditButton,
-  type FormSummaryEditButtonProps,
-} from "./FormSummaryEditButton";
+  default as FormSummaryEdit,
+  type FormSummaryEditProps,
+} from "./FormSummaryEdit";
 export {
   default as FormSummaryHeader,
   type FormSummaryHeaderProps,

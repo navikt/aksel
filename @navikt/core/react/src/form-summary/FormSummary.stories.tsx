@@ -20,7 +20,7 @@ export const Default: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
       <FormSummary.Heading>Personalia</FormSummary.Heading>
-      <FormSummary.EditButton />
+      <FormSummary.Edit />
     </FormSummary.Header>
 
     <FormSummary.Answers>
@@ -63,7 +63,7 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading>
         Arbeidsforhold som du har i eller utenfor EØS-området
       </FormSummary.Heading>
-      <FormSummary.EditButton />
+      <FormSummary.Edit />
     </FormSummary.Header>
     <FormSummary.Answers>
       <FormSummary.Answer>
@@ -151,7 +151,7 @@ export const ComplexData: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading>
         Diverse informasjon om forskjellige ting og tang. Kjekt å vite.
       </FormSummary.Heading>
-      <FormSummary.EditButton />
+      <FormSummary.Edit />
     </FormSummary.Header>
 
     <FormSummary.Answers>

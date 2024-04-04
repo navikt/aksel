@@ -2,7 +2,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import { Box } from "../layout/box";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
-import FormSummaryEditButton from "./FormSummaryEditButton";
+import FormSummaryEdit from "./FormSummaryEdit";
 import FormSummaryHeader from "./FormSummaryHeader";
 import FormSummaryHeading from "./FormSummaryHeading";
 import FormSummaryLabel from "./FormSummaryLabel";
@@ -15,7 +15,7 @@ interface FormSummaryComponent
   /**
    * Must include:
    * - `<FormSummary.Heading>`
-   * - `<FormSummary.EditButton>`
+   * - `<FormSummary.Edit>`
    */
   Header: typeof FormSummaryHeader;
   /**
@@ -23,9 +23,9 @@ interface FormSummaryComponent
    */
   Heading: typeof FormSummaryHeading;
   /**
-   * ButtonLink to edit the answers to use in the `FormSummary.Header` component. Should link to the relevant part of the form.
+   * Link to edit the answers to use in the `FormSummary.Header` component. Should link to the relevant part of the form.
    */
-  EditButton: typeof FormSummaryEditButton;
+  Edit: typeof FormSummaryEdit;
   /**
    * Wrapper component for the answers.
    */
@@ -55,7 +55,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * <FormSummary>
    *   <FormSummary.Header>
    *    <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
-   *    <FormSummary.EditButton />
+   *    <FormSummary.Edit />
    *   </FormSummary.Header>
    *   <FormSummary.Answers>
    *     <FormSummary.Answer>
@@ -75,7 +75,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  * <FormSummary>
  *   <FormSummary.Header>
  *    <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
- *    <FormSummary.EditButton />
+ *    <FormSummary.Edit />
  *   </FormSummary.Header>
  *   <FormSummary.Answers>
  *     <FormSummary.Answer>
@@ -104,7 +104,7 @@ export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
 
 FormSummary.Header = FormSummaryHeader;
 FormSummary.Heading = FormSummaryHeading;
-FormSummary.EditButton = FormSummaryEditButton;
+FormSummary.Edit = FormSummaryEdit;
 FormSummary.Answers = FormSummaryAnswers;
 FormSummary.Answer = FormSummaryAnswer;
 FormSummary.Label = FormSummaryLabel;
