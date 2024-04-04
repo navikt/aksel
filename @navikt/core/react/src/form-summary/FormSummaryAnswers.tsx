@@ -2,6 +2,9 @@ import React, { forwardRef } from "react";
 
 export interface FormSummaryAnswersProps
   extends React.HTMLAttributes<HTMLDListElement> {
+  /**
+   * Must include one or more of `<FormSummary.Answer>`.
+   */
   children: React.ReactNode;
 }
 

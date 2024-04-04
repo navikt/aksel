@@ -5,9 +5,7 @@ import { HStack } from "../layout/stack";
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Must include:
-   * - `<FormSummary.Heading>`
-   * - `<FormSummary.Edit>`
+   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.Edit>`.
    */
   children: React.ReactNode;
 }

@@ -13,9 +13,7 @@ interface FormSummaryComponent
     FormSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Must include:
-   * - `<FormSummary.Heading>`
-   * - `<FormSummary.Edit>`
+   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.Edit>`.
    */
   Header: typeof FormSummaryHeader;
   /**

@@ -107,6 +107,28 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
   </FormSummary>
 );
 
+export const NoLink: StoryFn<typeof FormSummary> = () => (
+  <FormSummary>
+    <FormSummary.Header>
+      <FormSummary.Heading>
+        Arbeidsforhold som du har i eller utenfor EØS-området
+      </FormSummary.Heading>
+    </FormSummary.Header>
+
+    <FormSummary.Answers>
+      <FormSummary.Answer>
+        <FormSummary.Label>Navn</FormSummary.Label>
+        <FormSummary.Value>Ola Nordmann</FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
+        <FormSummary.Label>Fødselsnummer</FormSummary.Label>
+        <FormSummary.Value>12345678910</FormSummary.Value>
+      </FormSummary.Answer>
+    </FormSummary.Answers>
+  </FormSummary>
+);
+
 const answers = [
   {
     label: "Fortell din livshistorie",
