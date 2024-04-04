@@ -1,7 +1,7 @@
 import cl from "clsx";
 
 type CubeProps = {
-  variant?: "light" | "dark" | "muted";
+  variant?: "light" | "dark";
 };
 
 function Cube({ variant = "light" }: CubeProps) {
@@ -12,7 +12,6 @@ function Cube({ variant = "light" }: CubeProps) {
         {
           "text-teal-300": variant === "light",
           "text-teal-400": variant === "dark",
-          "text-teal-50": variant === "muted",
         },
       )}
     >
