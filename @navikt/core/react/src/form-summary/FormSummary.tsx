@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
@@ -83,9 +84,13 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  * </FormSummary>
  */
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
-  ({ children, ...rest }, ref) => {
+  ({ children, className, ...rest }, ref) => {
     return (
-      <section ref={ref} {...rest} className="navds-form-summary">
+      <section
+        ref={ref}
+        {...rest}
+        className={cl("navds-form-summary", className)}
+      >
         {children}
       </section>
     );
