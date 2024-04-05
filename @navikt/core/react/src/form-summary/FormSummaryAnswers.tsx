@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 
 export interface FormSummaryAnswersProps
@@ -11,8 +12,12 @@ export interface FormSummaryAnswersProps
 export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
->(({ children, ...rest }: FormSummaryAnswersProps, ref) => (
-  <dl className="navds-form-summary__answers" ref={ref} {...rest}>
+>(({ children, className, ...rest }: FormSummaryAnswersProps, ref) => (
+  <dl
+    ref={ref}
+    {...rest}
+    className={cl("navds-form-summary__answers", className)}
+  >
     {children}
   </dl>
 ));
