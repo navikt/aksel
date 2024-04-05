@@ -1,24 +1,30 @@
 import cl from "clsx";
 import Link from "next/link";
+import { createContext, useContext } from "react";
 import { BodyShort, Label } from "@navikt/ds-react";
 import { amplitudeLogNavigation } from "@/logging";
 import styles from "./Menu.module.css";
 
 type MenuProps = {
   children: React.ReactNode;
+  loggingContext: "meny" | "toc";
+  variant: "sidebar" | "toc";
 };
 
-export function Menu({ children }: MenuProps) {
-  return <div>{children}</div>;
+const MenuContext = createContext<Omit<MenuProps, "children"> | null>(null);
+
+export function Menu({ children, ...rest }: MenuProps) {
+  return <MenuContext.Provider value={rest}>{children}</MenuContext.Provider>;
 }
 
 type MenuHeadingProps = {
   children: React.ReactNode;
+  as: "div" | "h2";
 };
 
-export function MenuHeading({ children }: MenuHeadingProps) {
+export function MenuHeading({ children, as }: MenuHeadingProps) {
   return (
-    <Label as="div" size="small" textColor="subtle" className="py-05">
+    <Label as={as} size="small" textColor="subtle" className="py-05">
       {children}
     </Label>
   );
@@ -39,24 +45,38 @@ type MenuListItemProps = {
 };
 
 export function MenuListItem({ children, href, selected }: MenuListItemProps) {
+  const ctx = useContext(MenuContext);
+
+  if (!ctx) {
+    throw new Error("MenuListItem must be used inside a Menu component");
+  }
+
   return (
     <li className="group relative border-l border-border-subtle">
       <BodyShort
+        data-type={ctx.variant}
         size="small"
         as={Link}
         prefetch={false}
         href={href}
         onClick={(e) =>
-          amplitudeLogNavigation("meny", e.currentTarget.getAttribute("href"))
+          amplitudeLogNavigation(
+            ctx.loggingContext,
+            e.currentTarget.getAttribute("href"),
+          )
         }
         className={cl(
           styles.menuListItem,
-          "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-last:last-of-type:pb-0 group-first-of-type:pt-0",
-          "before:absolute before:-left-px before:top-05 before:h-6 before:rounded-r-sm before:transition-all group-first-of-type:before:top-0",
+          "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
+          "before:absolute before:-left-px before:top-05 before:h-[calc(100%-0.25rem)] before:rounded-r-sm before:transition-all group-first:before:top-0 group-first:before:h-[calc(100%-0.125rem)] group-last:before:h-[calc(100%-0.125rem)]",
           {
             "text-text-subtle before:w-0 before:bg-gray-400  before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
               !selected,
-            "text-deepblue-700 before:w-1 before:bg-deepblue-700": selected,
+            "before:w-1": selected,
+            "text-deepblue-700 before:bg-deepblue-700":
+              selected && ctx.variant === "sidebar",
+            "text-text-default before:bg-gray-700":
+              selected && ctx.variant === "toc",
           },
         )}
       >
@@ -64,7 +84,8 @@ export function MenuListItem({ children, href, selected }: MenuListItemProps) {
           className={cl(
             "w-full rounded px-2 py-05 transition-colors duration-200 ease-linear",
             {
-              "bg-surface-selected": selected,
+              "bg-surface-selected": selected && ctx.variant === "sidebar",
+              "bg-surface-neutral-subtle": selected && ctx.variant === "toc",
               "bg-transparent": !selected,
             },
           )}
