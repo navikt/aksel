@@ -17,7 +17,10 @@ const Example = () => {
         <UNSAFE_FileUpload.Item
           key={file.file.name}
           file={file.file}
-          onDelete={() => setFiles([])}
+          button={{
+            action: "delete",
+            onClick: () => setFiles([]),
+          }}
         />
       ))}
     </VStack>

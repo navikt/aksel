@@ -1,56 +1,27 @@
 import React from "react";
 import { ArrowsCirclepathIcon, TrashIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../../button";
-import { FileItem } from "./Item.types";
 
 interface Props {
-  file: FileItem;
-  onRetry?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onDelete?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  action: "delete" | "retry" | "none";
-  retryTitle: string;
-  deleteTitle: string;
+  action: "delete" | "retry";
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   id?: string;
+  title: string;
 }
 
-const ItemButton = ({
-  onRetry,
-  onDelete,
-  id,
-  action,
-  retryTitle,
-  deleteTitle,
-}: Props) => {
-  if (action === "none") {
-    return null;
-  }
+const ItemButton = ({ action, onClick, id, title }: Props) => {
+  const Icon = action === "delete" ? TrashIcon : ArrowsCirclepathIcon;
 
-  if (onRetry && action === "retry") {
-    return (
-      <Button
-        id={id}
-        className="navds-file-item__button"
-        type="button"
-        variant="tertiary-neutral"
-        onClick={onRetry}
-        icon={<ArrowsCirclepathIcon title={retryTitle} />}
-      />
-    );
-  }
-  if (onDelete && action === "delete") {
-    return (
-      <Button
-        id={id}
-        className="navds-file-item__button"
-        type="button"
-        variant="tertiary-neutral"
-        onClick={onDelete}
-        icon={<TrashIcon title={deleteTitle} />}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <Button
+      id={id}
+      className="navds-file-item__button"
+      type="button"
+      variant="tertiary-neutral"
+      onClick={onClick}
+      icon={<Icon title={title} />}
+    />
+  );
 };
 
 export default ItemButton;

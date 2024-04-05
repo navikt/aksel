@@ -12,12 +12,13 @@ import ItemIcon from "./ItemIcon";
 import ItemName from "./ItemName";
 import { formatFileSize } from "./utils/format-file-size";
 
-export interface FileItemBaseProps {
+export interface FileUploadItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Overrides html-tag
    * @default "div"
    */
-  as?: "div" | "li";
+  as?: ("div" | "li") & React.ElementType;
   /**
    * Either a native File or file metadata.
    */
@@ -44,38 +45,18 @@ export interface FileItemBaseProps {
    */
   status?: "downloading" | "uploading" | "idle";
   /**
+   * Props for the action button.
+   */
+  button?: {
+    action: "delete" | "retry";
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    id?: string;
+  };
+  /**
    * i18n-API for customizing texts and labels
    */
   translations?: ComponentTranslation<"FileUpload">["item"];
-  onRetry?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onDelete?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
-
-type FileItemActionDelete = {
-  onDelete: (event: MouseEvent<HTMLButtonElement>) => void;
-  itemAction: "delete";
-  actionButtonId?: string;
-};
-
-type FileItemActionRetry = {
-  onRetry: (event: MouseEvent<HTMLButtonElement>) => void;
-  itemAction: "retry";
-  actionButtonId?: string;
-};
-
-type FileItemActionNone = {
-  itemAction?: "none";
-  actionButtonId?: never;
-};
-
-type FileItemConditionalProps =
-  | FileItemActionDelete
-  | FileItemActionRetry
-  | FileItemActionNone;
-
-export type FileUploadItemProps = FileItemBaseProps &
-  FileItemConditionalProps &
-  React.HTMLAttributes<HTMLDivElement>;
 
 export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
   forwardRef(
@@ -84,17 +65,14 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         as: Component = "div",
         file,
         status = "idle",
-        onDelete,
-        onRetry,
         error,
         className,
         href,
         onFileClick,
-        itemAction = "delete",
+        button,
         translations,
-        actionButtonId,
         ...rest
-      },
+      }: FileUploadItemProps,
       ref,
     ) => {
       const context = useFileUploadTranslation(false);
@@ -152,15 +130,14 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
               </div>
             </div>
 
-            {status === "idle" && (
+            {status === "idle" && button && (
               <ItemButton
-                file={file}
-                id={actionButtonId}
-                onRetry={onRetry}
-                onDelete={onDelete}
-                action={itemAction}
-                retryTitle={translate("item.retryButtonTitle")}
-                deleteTitle={translate("item.deleteButtonTitle")}
+                {...button}
+                title={translate(
+                  button.action === "retry"
+                    ? "item.retryButtonTitle"
+                    : "item.deleteButtonTitle",
+                )}
               />
             )}
           </div>

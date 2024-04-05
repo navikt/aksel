@@ -57,51 +57,63 @@ export const States: StoryObj<typeof FileUpload.Item> = {
         file={fileTxt}
         error="Error og uploading"
         status="uploading"
-        onRetry={() => onRetry(fileTxt)}
-        onDelete={() => onDelete(fileTxt)}
+        button={{
+          onClick: () => onDelete(fileTxt),
+          action: "delete",
+        }}
       />
       <h2>Item Actions</h2>
       <h3>status + delete</h3>
       <FileUpload.Item
         file={fileDocx}
-        onDelete={() => onDelete(fileDocx)}
-        onRetry={() => onRetry(fileDocx)}
         status="uploading"
-        itemAction="delete"
+        button={{
+          onClick: () => onDelete(fileDocx),
+          action: "delete",
+        }}
       />
       <h3>status + retry</h3>
       <FileUpload.Item
         file={fileDocx}
-        onDelete={() => onDelete(fileDocx)}
-        onRetry={() => onRetry(fileDocx)}
         status="downloading"
-        itemAction="retry"
+        button={{
+          onClick: () => onRetry(fileDocx),
+          action: "retry",
+        }}
       />
       <h3>retry</h3>
       <FileUpload.Item
         file={fileCsv}
-        onRetry={() => onRetry(fileCsv)}
-        itemAction="retry"
+        button={{
+          onClick: () => onRetry(fileCsv),
+          action: "retry",
+        }}
       />
       <h3>delete</h3>
       <FileUpload.Item
         file={filePptx}
-        onDelete={() => onDelete(filePptx)}
-        itemAction="delete"
+        button={{
+          onClick: () => onDelete(filePptx),
+          action: "delete",
+        }}
       />
       <h3>retry + error</h3>
       <FileUpload.Item
         file={fileCsv}
         error="Error og onRetry"
-        onRetry={() => onRetry(fileCsv)}
-        itemAction="retry"
+        button={{
+          onClick: () => onRetry(fileCsv),
+          action: "retry",
+        }}
       />
       <h3>delete + error</h3>
       <FileUpload.Item
         file={filePptx}
         error="Error og onDelete"
-        onDelete={() => onDelete(filePptx)}
-        itemAction="delete"
+        button={{
+          onClick: () => onDelete(filePptx),
+          action: "delete",
+        }}
       />
     </div>
   ),
