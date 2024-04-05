@@ -90,6 +90,7 @@ export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
         ref={ref}
         {...rest}
         as="section"
+        className="navds-form-summary"
         borderRadius="large"
         borderColor="border-subtle"
         borderWidth="1"

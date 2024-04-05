@@ -3,11 +3,19 @@
   margin: 0;
 }
 
+.navds-form-summary {
+  overflow: hidden;
+}
+
+.navds-form-summary > .form-summary__answers {
+  border-top: 1px solid var(--a-border-subtle);
+}
+
 .form-summary__value {
   margin: var(--a-spacing-1) 0 0;
 }
 
-.form-summary__value .form-summary__answers {
+.form-summary__value :where(.form-summary__answers) {
   margin-top: var(--a-spacing-2);
   padding: var(--a-spacing-4);
   background: var(--a-surface-action-subtle);
