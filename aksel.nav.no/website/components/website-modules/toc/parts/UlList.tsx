@@ -1,6 +1,7 @@
-import { BodyShort } from "@navikt/ds-react";
+import cl from "clsx";
 import { TableOfContentsT } from "@/types";
 import { removeEmojies } from "@/utils";
+import { MenuList, MenuListItem } from "@/web/menu/Menu";
 import styles from "./table-of-contents.module.css";
 
 function UlList({
@@ -26,42 +27,34 @@ function UlList({
   };
 
   return (
-    <ul
-      className={`pl-3 pr-1 data-active:max-h-[70vh] data-active:overflow-y-scroll data-active:overscroll-contain data-active:py-1 ${styles.hideScrollbar}`}
-      data-active={!nested}
+    <MenuList
+      className={cl(styles.hideScrollbar, {
+        "max-h-[70vh] overflow-y-scroll overscroll-contain": !nested,
+      })}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >
       {toc.map((node) => (
         <li key={node.id}>
           <>
-            <a
+            <MenuListItem
               id={`toc-${node.id}`}
               href={`#${node.id}`}
-              className={styles.listItem}
-              data-active={isActive(node.id)}
+              selected={isActive(node.id)}
               onClick={() =>
                 nested
                   ? tocProps.setActiveSubId(node.id)
                   : tocProps.setActiveId(node.id)
               }
             >
-              <BodyShort
-                size="small"
-                as="span"
-                truncate
-                className="whitespace-break-spaces"
-                weight={isActive(node.id) ? "semibold" : "regular"}
-              >
-                {removeEmojies(node.title).trim()}
-              </BodyShort>
-            </a>
+              {removeEmojies(node.title).trim()}
+            </MenuListItem>
             {!nested && node.children.length > 0 && (
               <UlList toc={node.children} nested tocProps={tocProps} />
             )}
           </>
         </li>
       ))}
-    </ul>
+    </MenuList>
   );
 }
 export default UlList;

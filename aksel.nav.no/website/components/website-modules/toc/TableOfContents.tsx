@@ -1,5 +1,5 @@
-import { Label } from "@navikt/ds-react";
 import { TableOfContentsT } from "@/types";
+import { Menu, MenuHeading } from "@/web/menu/Menu";
 import ScrollFade from "./parts/ScrollFade";
 import UlList from "./parts/UlList";
 import { useToc } from "./useToc";
@@ -16,6 +16,9 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
     return null;
   }
 
+  /**
+   * We have to add this to account for different backgrounds for god-praksis and komponent-pages
+   */
   const style = {
     "--shadow-color":
       variant === "subtle"
@@ -28,13 +31,13 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
       className="sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block"
       style={style}
     >
-      <Label as="h2" className="px-2" textColor="subtle">
-        Innhold på siden
-      </Label>
-      <div className="relative">
-        <ScrollFade />
-        <UlList toc={toc} tocProps={tocCtx} />
-      </div>
+      <Menu loggingContext="toc" variant="toc">
+        <MenuHeading as="h2">Innhold på siden</MenuHeading>
+        <div className="relative">
+          <ScrollFade />
+          <UlList toc={toc} tocProps={tocCtx} />
+        </div>
+      </Menu>
     </aside>
   );
 }

@@ -32,19 +32,33 @@ export function MenuHeading({ children, as }: MenuHeadingProps) {
 
 type MenuListProps = {
   children: React.ReactNode;
+  id?: string;
+  className?: string;
 };
 
-export function MenuList({ children }: MenuListProps) {
-  return <ul className={styles.menuList}>{children}</ul>;
+export function MenuList({ children, id, className }: MenuListProps) {
+  return (
+    <ul className={cl(styles.menuList, className)} id={id}>
+      {children}
+    </ul>
+  );
 }
 
 type MenuListItemProps = {
   children: React.ReactNode;
   selected?: boolean;
   href: string;
+  id?: string;
+  onClick?: () => void;
 };
 
-export function MenuListItem({ children, href, selected }: MenuListItemProps) {
+export function MenuListItem({
+  children,
+  href,
+  selected,
+  id,
+  onClick,
+}: MenuListItemProps) {
   const ctx = useContext(MenuContext);
 
   if (!ctx) {
@@ -52,19 +66,23 @@ export function MenuListItem({ children, href, selected }: MenuListItemProps) {
   }
 
   return (
-    <li className="group relative border-l border-border-subtle">
+    <div
+      className="group relative scroll-m-6 border-l border-border-subtle"
+      id={id}
+    >
       <BodyShort
         data-type={ctx.variant}
         size="small"
         as={Link}
         prefetch={false}
         href={href}
-        onClick={(e) =>
+        onClick={(e) => {
           amplitudeLogNavigation(
             ctx.loggingContext,
             e.currentTarget.getAttribute("href"),
-          )
-        }
+          );
+          onClick?.();
+        }}
         className={cl(
           styles.menuListItem,
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
@@ -93,6 +111,6 @@ export function MenuListItem({ children, href, selected }: MenuListItemProps) {
           {children}
         </span>
       </BodyShort>
-    </li>
+    </div>
   );
 }
