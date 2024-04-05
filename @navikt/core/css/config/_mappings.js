@@ -181,7 +181,7 @@ const StyleMappings = {
     {
       component: "FormSummary",
       main: formCss,
-      dependencies: [typoCss],
+      dependencies: [typoCss, primitivesCss],
     },
     {
       component: "ToggleGroup",
