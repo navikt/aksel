@@ -12,10 +12,10 @@ export const FormSummaryValue = forwardRef<
   FormSummaryValueProps
 >(({ children, className, ...rest }, ref) => (
   <BodyLong
-    as="dd"
-    className={cl("navds-form-summary__value", className)}
     ref={ref}
     {...rest}
+    as="dd"
+    className={cl("navds-form-summary__value", className)}
   >
     {children}
   </BodyLong>

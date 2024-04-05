@@ -13,7 +13,7 @@ export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
 >(({ children, ...rest }, ref) => (
-  <header ref={ref} className="navds-form-summary__header" {...rest}>
+  <header ref={ref} {...rest} className="navds-form-summary__header">
     <HStack justify="space-between" gap="2" wrap={false}>
       {children}
     </HStack>
