@@ -1,34 +1,42 @@
-.form-summary__answers {
+.navds-form-summary__answers {
   padding: var(--a-spacing-5) var(--a-spacing-6) var(--a-spacing-6);
   margin: 0;
 }
 
 .navds-form-summary {
   overflow: hidden;
+  border: 1px solid var(--a-border-subtle);
+  border-radius: var(--a-border-radius-large);
 }
 
-.navds-form-summary > .form-summary__answers {
+.navds-form-summary > .navds-form-summary__answers {
   border-top: 1px solid var(--a-border-subtle);
 }
 
-.form-summary__value {
+.navds-form-summary__header {
+  background-color: var(--a-surface-subtle);
+  padding-block: var(--a-spacing-4);
+  padding-inline: var(--a-spacing-6);
+}
+
+.navds-form-summary__value {
   margin: var(--a-spacing-1) 0 0;
 }
 
-.form-summary__value :where(.form-summary__answers) {
+.navds-form-summary__value :where(.navds-form-summary__answers) {
   margin-top: var(--a-spacing-2);
   padding: var(--a-spacing-4);
   background: var(--a-surface-action-subtle);
   border-radius: var(--a-border-radius-large);
 }
 
-.form-summary__edit {
+.navds-form-summary__edit {
   flex-shrink: 0;
   margin-top: var(--a-spacing-1);
   align-self: flex-start;
 }
 
-.form-summary__value:not(:last-child) {
+.navds-form-summary__value:not(:last-child) {
   margin-bottom: var(--a-spacing-4);
   padding-bottom: var(--a-spacing-4);
   border-bottom: 1px solid var(--a-grayalpha-300);

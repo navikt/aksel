@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { Box } from "../layout/box";
 import { HStack } from "../layout/stack";
 
 export interface FormSummaryHeaderProps
@@ -14,18 +13,11 @@ export const FormSummaryHeader = forwardRef<
   HTMLDivElement,
   FormSummaryHeaderProps
 >(({ children, ...rest }, ref) => (
-  <Box
-    ref={ref}
-    as="header"
-    background="surface-subtle"
-    paddingBlock="4"
-    paddingInline="6"
-    {...rest}
-  >
+  <header ref={ref} className="navds-form-summary__header" {...rest}>
     <HStack justify="space-between" gap="2" wrap={false}>
       {children}
     </HStack>
-  </Box>
+  </header>
 ));
 
 export default FormSummaryHeader;

@@ -9,7 +9,11 @@ export const FormSummaryEdit: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
 > = forwardRef(({ children = "Endre svar", className, ...rest }, ref) => (
-  <Link {...rest} ref={ref} className={cl("form-summary__edit", className)}>
+  <Link
+    {...rest}
+    ref={ref}
+    className={cl("navds-form-summary__edit", className)}
+  >
     {children}
   </Link>
 ));

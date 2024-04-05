@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Box } from "../layout/box";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
 import FormSummaryEdit from "./FormSummaryEdit";
@@ -86,17 +85,9 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
   ({ children, ...rest }, ref) => {
     return (
-      <Box
-        ref={ref}
-        {...rest}
-        as="section"
-        className="navds-form-summary"
-        borderRadius="large"
-        borderColor="border-subtle"
-        borderWidth="1"
-      >
+      <section ref={ref} {...rest} className="navds-form-summary">
         {children}
-      </Box>
+      </section>
     );
   },
 ) as FormSummaryComponent;

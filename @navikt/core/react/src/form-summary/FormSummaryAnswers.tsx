@@ -12,7 +12,7 @@ export const FormSummaryAnswers = forwardRef<
   HTMLDListElement,
   FormSummaryAnswersProps
 >(({ children, ...rest }: FormSummaryAnswersProps, ref) => (
-  <dl className="form-summary__answers" ref={ref} {...rest}>
+  <dl className="navds-form-summary__answers" ref={ref} {...rest}>
     {children}
   </dl>
 ));
