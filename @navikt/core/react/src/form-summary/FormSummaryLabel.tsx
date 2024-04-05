@@ -10,7 +10,7 @@ export const FormSummaryLabel = forwardRef<
   HTMLDivElement,
   FormSummaryLabelProps
 >(({ children, ...rest }, ref) => (
-  <Label as="dt" ref={ref} {...rest}>
+  <Label ref={ref} {...rest} as="dt">
     {children}
   </Label>
 ));
