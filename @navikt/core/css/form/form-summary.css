@@ -39,5 +39,5 @@
 .navds-form-summary__value:not(:last-child) {
   margin-bottom: var(--a-spacing-4);
   padding-bottom: var(--a-spacing-4);
-  border-bottom: 1px solid var(--a-grayalpha-300);
+  border-bottom: 1px solid var(--a-border-divider);
 }
