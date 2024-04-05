@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Menu, MenuHeading, MenuListItem } from "./Menu";
+import { Menu, MenuHeading, MenuList, MenuListItem } from "./Menu";
 
 const meta = {
   title: "Website-modules/Menu",
@@ -36,6 +36,36 @@ export const MenuDemo: Story = {
             <MenuListItem href="#">VStack</MenuListItem>
           </ul>
         </>
+      </Menu>
+    );
+  },
+  args: {
+    children: null,
+  },
+};
+
+export const NestedMenuDemo: Story = {
+  render: () => {
+    return (
+      <Menu>
+        <MenuHeading>Innhold på siden</MenuHeading>
+        <MenuList>
+          <MenuListItem href="#" selected>
+            Så, hvordan går vi frem for å få det til?
+          </MenuListItem>
+          <MenuListItem href="#">Bærekraftige team</MenuListItem>
+          <MenuList>
+            <MenuListItem href="#">Teamstørrelse</MenuListItem>
+            <MenuListItem href="#">Stabilitet Vs. fleksibilitet</MenuListItem>
+            <MenuListItem href="#" selected>
+              Myndighet og hensikt
+            </MenuListItem>
+            <MenuListItem href="#">
+              Ansvar tilpasset kognitiv kapasitet
+            </MenuListItem>
+          </MenuList>
+          <MenuListItem href="#">Teamtyper</MenuListItem>
+        </MenuList>
       </Menu>
     );
   },
