@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { TableOfContentsT } from "@/types";
 import { removeEmojies } from "@/utils";
-import { MenuList, MenuListItem } from "@/web/menu/Menu";
+import { MenuLi, MenuLink, MenuUl } from "@/web/menu/Menu";
 import styles from "./table-of-contents.module.css";
 
 function UlList({
@@ -27,16 +27,16 @@ function UlList({
   };
 
   return (
-    <MenuList
+    <MenuUl
       className={cl(styles.hideScrollbar, {
         "max-h-[70vh] overflow-y-scroll overscroll-contain": !nested,
       })}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >
       {toc.map((node) => (
-        <li key={node.id}>
+        <MenuLi key={node.id}>
           <>
-            <MenuListItem
+            <MenuLink
               id={`toc-${node.id}`}
               href={`#${node.id}`}
               selected={isActive(node.id)}
@@ -47,14 +47,14 @@ function UlList({
               }
             >
               {removeEmojies(node.title).trim()}
-            </MenuListItem>
+            </MenuLink>
             {!nested && node.children.length > 0 && (
               <UlList toc={node.children} nested tocProps={tocProps} />
             )}
           </>
-        </li>
+        </MenuLi>
       ))}
-    </MenuList>
+    </MenuUl>
   );
 }
 export default UlList;

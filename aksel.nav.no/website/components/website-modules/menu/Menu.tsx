@@ -36,7 +36,7 @@ type MenuListProps = {
   className?: string;
 };
 
-export function MenuList({ children, id, className }: MenuListProps) {
+export function MenuUl({ children, id, className }: MenuListProps) {
   return (
     <ul className={cl(styles.menuList, className)} id={id}>
       {children}
@@ -44,7 +44,15 @@ export function MenuList({ children, id, className }: MenuListProps) {
   );
 }
 
-type MenuListItemProps = {
+type MenuLiProps = {
+  children: React.ReactNode;
+};
+
+export function MenuLi({ children }: MenuLiProps) {
+  return <li className="group">{children}</li>;
+}
+
+type MenuLinkProps = {
   children: React.ReactNode;
   selected?: boolean;
   href: string;
@@ -52,13 +60,13 @@ type MenuListItemProps = {
   onClick?: () => void;
 };
 
-export function MenuListItem({
+export function MenuLink({
   children,
   href,
   selected,
   id,
   onClick,
-}: MenuListItemProps) {
+}: MenuLinkProps) {
   const ctx = useContext(MenuContext);
 
   if (!ctx) {
@@ -66,10 +74,7 @@ export function MenuListItem({
   }
 
   return (
-    <div
-      className="group relative scroll-m-6 border-l border-border-subtle"
-      id={id}
-    >
+    <div className="relative scroll-m-6 border-l border-border-subtle" id={id}>
       <BodyShort
         data-type={ctx.variant}
         size="small"
