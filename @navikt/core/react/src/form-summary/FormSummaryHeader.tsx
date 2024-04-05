@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { HStack } from "../layout/stack";
 
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,9 +18,7 @@ export const FormSummaryHeader = forwardRef<
     {...rest}
     className={cl("navds-form-summary__header", className)}
   >
-    <HStack justify="space-between" gap="2" wrap={false}>
-      {children}
-    </HStack>
+    {children}
   </header>
 ));
 
