@@ -1,5 +1,37 @@
 # @navikt/ds-react
 
+## 6.3.6
+
+### Patch Changes
+
+- DatePicker: Fjernet role gridcell fra dato-knapper. ([#2826](https://github.com/navikt/aksel/pull/2826))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.6
+  - @navikt/aksel-icons@6.3.6
+
+## 6.3.5
+
+### Patch Changes
+
+- Modal: Fjern tomt element ([#2819](https://github.com/navikt/aksel/pull/2819))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.5
+  - @navikt/aksel-icons@6.3.5
+
+## 6.3.4
+
+### Patch Changes
+
+- Switch: Fikset edgecase der checked Switch var visuelt unchecked ([#2810](https://github.com/navikt/aksel/pull/2810))
+
+- FileUpload.Dropzone: id prop settes på button ([#2817](https://github.com/navikt/aksel/pull/2817))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.4
+  - @navikt/aksel-icons@6.3.4
+
 ## 6.3.3
 
 ### Patch Changes

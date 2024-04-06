@@ -4,18 +4,17 @@ import React from "react";
 import { VStack } from "../../layout/stack";
 import { BodyShort } from "../BodyShort";
 
-const meta = {
+const meta: Meta<typeof BodyShort> = {
   title: "ds-react/Typography/BodyShort",
   component: BodyShort,
   decorators: [(story) => <div style={{ maxWidth: "250px" }}>{story()}</div>],
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof BodyShort>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof BodyShort>;
 
 const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
 
