@@ -111,4 +111,3 @@ export const Demo = {
 export const args = {
   index: 8,
 };
-// TODO mer realistisk eksempel. Funker ikke å trykke på den i midten nå. Se tabell-dok. Er visst et eksempel på indeterminate der.
