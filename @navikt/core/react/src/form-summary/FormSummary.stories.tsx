@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
+import { Link } from "../link";
 import FormSummary from "./FormSummary";
 
 const meta: Meta<typeof FormSummary> = {
@@ -52,6 +53,39 @@ export const Default: StoryFn<typeof FormSummary> = () => (
             </FormSummary.Answer>
           </FormSummary.Answers>
         </FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
+        <FormSummary.Label>Barn nr 2</FormSummary.Label>
+        <FormSummary.Value>
+          <FormSummary.Answers>
+            <FormSummary.Answer>
+              <FormSummary.Label>Navn</FormSummary.Label>
+              <FormSummary.Value>Per Nordmann</FormSummary.Value>
+            </FormSummary.Answer>
+            <FormSummary.Answer>
+              <FormSummary.Label>Kjønn</FormSummary.Label>
+              <FormSummary.Value>Gutt</FormSummary.Value>
+            </FormSummary.Answer>
+            <FormSummary.Answer>
+              <FormSummary.Label>Alder</FormSummary.Label>
+              <FormSummary.Value>7</FormSummary.Value>
+            </FormSummary.Answer>
+          </FormSummary.Answers>
+        </FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
+        <FormSummary.Label>Kontaktinformasjon</FormSummary.Label>
+        <FormSummary.Value>
+          <Link>Fyll ut kontaktinformasjon</Link>
+        </FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
+        <FormSummary.Label>Hvordan vil du bli varslet?</FormSummary.Label>
+        <FormSummary.Value>E-post</FormSummary.Value>
+        <FormSummary.Value>SMS</FormSummary.Value>
       </FormSummary.Answer>
     </FormSummary.Answers>
   </FormSummary>

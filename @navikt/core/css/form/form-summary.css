@@ -34,8 +34,14 @@
   margin: 0;
 }
 
-.navds-form-summary__value {
-  margin: var(--a-spacing-1) 0 0;
+.navds-form-summary__answer:not(:last-child) {
+  margin-bottom: var(--a-spacing-4);
+  padding-bottom: var(--a-spacing-4);
+  border-bottom: 1px solid var(--a-border-divider);
+}
+
+.navds-form-summary__value:first-of-type {
+  margin-top: var(--a-spacing-1);
 }
 
 .navds-form-summary__value :where(.navds-form-summary__answers) {
@@ -43,10 +49,4 @@
   padding: var(--a-spacing-4);
   background: var(--a-surface-action-subtle);
   border-radius: var(--a-border-radius-large);
-}
-
-.navds-form-summary__value:not(:last-child) {
-  margin-bottom: var(--a-spacing-4);
-  padding-bottom: var(--a-spacing-4);
-  border-bottom: 1px solid var(--a-border-divider);
 }
