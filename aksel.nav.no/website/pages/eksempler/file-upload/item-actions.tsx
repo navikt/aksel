@@ -7,8 +7,10 @@ const Example = () => (
       <Heading size="small">retry</Heading>
       <UNSAFE_FileUpload.Item
         file={new File(["abc".repeat(100000)], "eksempel1.pdf")}
-        onRetry={() => null}
-        itemAction="retry"
+        button={{
+          action: "retry",
+          onClick: () => null,
+        }}
       />
     </div>
     <div>
@@ -16,8 +18,10 @@ const Example = () => (
       <UNSAFE_FileUpload.Item
         file={{ name: "eksempel2.pdf", size: 200000 }}
         href="#"
-        onDelete={() => null}
-        itemAction="delete"
+        button={{
+          action: "delete",
+          onClick: () => null,
+        }}
       />
     </div>
   </VStack>

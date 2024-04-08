@@ -25,6 +25,7 @@ const MAX_SIZE = MAX_SIZE_MB * 1024 * 1024;
 
 const CustomItem = ({
   index,
+  onDelete,
   ...props
 }: FileUploadItemProps & {
   index: number;
@@ -45,7 +46,10 @@ const CustomItem = ({
     <FileUpload.Item
       {...props}
       status={loading ? "uploading" : "idle"}
-      itemAction="delete"
+      button={{
+        action: "delete",
+        onClick: onDelete,
+      }}
       as="li"
     />
   );
@@ -165,7 +169,10 @@ export const Single: StoryFn = () => {
           key={file.file.name}
           file={file.file}
           error={file.error ? errors[file.reasons[0]] : undefined}
-          onDelete={removeFile}
+          button={{
+            action: "delete",
+            onClick: removeFile,
+          }}
         />
       ))}
     </VStack>
@@ -194,12 +201,17 @@ export const Translation = () => (
       <FileUpload.Dropzone label="Last opp bilder" onSelect={console.log} />
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
-        onDelete={() => null}
+        button={{
+          action: "delete",
+          onClick: () => null,
+        }}
       />
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
-        itemAction="retry"
-        onRetry={() => null}
+        button={{
+          action: "retry",
+          onClick: () => null,
+        }}
       />
       <FileUpload.Item
         file={{ name: "eksempel.png", size: 200000 }}
