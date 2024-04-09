@@ -173,7 +173,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           anchor: anchorEl,
           dismissable: refs.floating.current,
         }}
-        onDismiss={() => onClose?.()}
+        onDismiss={() => open && onClose?.()}
+        enabled={open}
       >
         <div
           ref={floatingRef}

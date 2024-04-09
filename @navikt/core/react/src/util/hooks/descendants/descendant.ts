@@ -143,7 +143,19 @@ export class DescendantsManager<
   };
 
   private registerNode = (node: T | null, options?: DescendantOptions<K>) => {
-    if (!node || this.descendants.has(node)) return;
+    if (!node) return;
+
+    /**
+     * While the node is registered, we have to make sure to sync options
+     * This is useful when ex. a node is disabled after it has been registered
+     */
+    if (this.descendants.has(node)) {
+      this.descendants.set(node, {
+        ...this.descendants.get(node),
+        ...options,
+      } as Descendant<T, K>);
+      return;
+    }
 
     const keys = Array.from(this.descendants.keys()).concat(node);
     const sorted = sortNodes(keys);

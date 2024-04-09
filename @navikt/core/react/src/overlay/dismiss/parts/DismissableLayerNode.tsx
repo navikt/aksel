@@ -23,10 +23,12 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   onInteractOutside,
   onDismiss,
   safeZone,
+  enabled,
   ...rest
 }: DismissableLayerProps) => {
   const { register, index, descendants } = useDescendant({
     disableOutsidePointerEvents,
+    disabled: !enabled,
   });
 
   /**
@@ -173,8 +175,10 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     /**
      * The deepest nested element will always be last in the descendants list.
      * This allows us to only close the highest layer when pressing escape.
+     *
+     * In some cases a layer might still exist, but be disabled. We want to ignore these layers.
      */
-    const isHighestLayer = index === descendants.count() - 1;
+    const isHighestLayer = index === descendants.enabledCount() - 1;
     if (!isHighestLayer) {
       return;
     }
