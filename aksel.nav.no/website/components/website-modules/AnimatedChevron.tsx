@@ -3,7 +3,7 @@ import cl from "clsx";
 /**
  * Simple animated chevron-component based on the Aksel logo
  * @note Requires wrapper that is using it to set the `group`-class from tailwind (handles hover and focus-visible)
- * @note Uses `currentColor` for the stroke color, so wrapper must defined color
+ * @note Uses `currentColor` for the stroke color, so wrapper must define color
  */
 export function AnimatedChevron({
   scale = "card",
