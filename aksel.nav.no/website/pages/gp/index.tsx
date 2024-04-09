@@ -203,13 +203,10 @@ const GpPage = (props: PageProps["props"]) => {
                             ))}
                           </GpCardGrid>
 
-                          {/* @ts-expect-error aria-level="3" should work with link */}
                           <Link
                             href={`/gp/${tema.slug}`}
                             as={NextLink}
-                            className="group mt-4 flex w-fit items-center text-deepblue-700"
-                            role="heading"
-                            aria-level="3"
+                            className="group mt-4 w-fit text-deepblue-700"
                             onClick={(e) =>
                               amplitudeLogNavigation(
                                 "gp-se-alle-link",
@@ -217,8 +214,10 @@ const GpPage = (props: PageProps["props"]) => {
                               )
                             }
                           >
-                            Alt fra {tema.title}{" "}
-                            <AnimatedChevron scale="inline" />
+                            <h3 className="flex items-center">
+                              {`Alt fra ${tema.title} `}
+                              <AnimatedChevron scale="inline" />
+                            </h3>
                           </Link>
                         </section>
                       );
