@@ -35,7 +35,7 @@ export interface TabsProps
   selectionFollowsFocus?: boolean;
   /**
    * Loops back to start when navigating past last item
-   * @default false
+   * @default true
    */
   loop?: boolean;
   /**
