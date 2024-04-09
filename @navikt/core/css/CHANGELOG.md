@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.4.1
+
+### Patch Changes
+
+- FileUpload: Item-illustrasjon er nå radius-full ([#2834](https://github.com/navikt/aksel/pull/2834))
+
 ## 6.4.0
 
 ## 6.3.6
