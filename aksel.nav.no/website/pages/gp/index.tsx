@@ -172,7 +172,7 @@ const GpPage = (props: PageProps["props"]) => {
                             size="medium"
                             className={cl("text-aksel-heading", {
                               "mb-4": !tema.description,
-                              "mb-2 ": !!tema.description,
+                              "mb-2": tema.description,
                             })}
                           >
                             {tema.title}
