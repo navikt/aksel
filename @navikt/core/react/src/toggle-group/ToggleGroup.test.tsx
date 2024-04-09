@@ -54,7 +54,7 @@ describe("ToggleGroup", () => {
     expect(toggle).toHaveAttribute("tabindex", "0");
   });
 
-  test("rowing tabindex keydown moves focus", () => {
+  test("roving tabindex keydown moves focus", () => {
     render(<TestToggleGroup defaultValue="toggle1" />);
     const toggle = screen.getByTestId("toggle1");
 

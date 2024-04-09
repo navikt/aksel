@@ -41,7 +41,7 @@ export function useToggleItem<P extends UseToggleItemProps>(
   const onFocus = () => setFocusedValue(value);
 
   /**
-   * Implements rowing-tabindex for horizontal tabs
+   * Implements roving-tabindex for horizontal tabs
    */
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
