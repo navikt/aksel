@@ -58,7 +58,7 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
               textColor="subtle"
               className="uppercase"
             >{`${articleCount} ${
-              articleCount === 1 ? "Artikkel" : "Artikler"
+              articleCount === 1 ? "artikkel" : "artikler"
             }`}</BodyShort>
           )}
         </div>
