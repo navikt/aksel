@@ -23,7 +23,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   onInteractOutside,
   onDismiss,
   safeZone,
-  enabled,
+  enabled = true,
   ...rest
 }: DismissableLayerProps) => {
   const { register, index, descendants } = useDescendant({

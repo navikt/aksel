@@ -56,7 +56,7 @@ interface DismissableLayerBaseProps {
    * Disables layer from beeing counted in context for nested `DismissableLayer`.
    * @note Besides `onEscapeKeyDown`, onDismiss and other event handlers will still work.
    */
-  enabled: boolean;
+  enabled?: boolean;
 }
 
 export type DismissableLayerProps = WithAsChild<DismissableLayerBaseProps>;
