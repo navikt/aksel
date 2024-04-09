@@ -10,7 +10,6 @@ type HeroListProps = {
 export function HeroList({
   heroNav,
   setOpen,
-
   currentSlug,
 }: HeroListProps) {
   return (
