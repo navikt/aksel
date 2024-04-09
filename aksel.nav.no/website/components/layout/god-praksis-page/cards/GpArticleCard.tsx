@@ -46,7 +46,7 @@ function GpArticleCard({
       )}
       <div
         className={cl("mt-auto flex h-fit justify-between text-deepblue-700", {
-          "pt-5": !!description,
+          "pt-5": description,
         })}
       >
         <div className="flex flex-wrap gap-3">
