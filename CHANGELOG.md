@@ -2,6 +2,10 @@
 
 ## 6.4
 
+### @navikt/ds-css
+
+- FileUpload: Item-illustrasjon er nå radius-full ([#2834](https://github.com/navikt/aksel/pull/2834))
+
 ### @navikt/ds-react
 
 - FileUpload.Item: :boom: Endret API og støtte for å sette ID på knappen ([#2824](https://github.com/navikt/aksel/pull/2824))
