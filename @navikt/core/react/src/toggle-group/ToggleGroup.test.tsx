@@ -69,7 +69,7 @@ describe("ToggleGroup", () => {
     );
   });
 
-  test("moved focus on tab actives focused toggle", async () => {
+  test("Space selects focused toggle-item", async () => {
     render(<TestToggleGroup defaultValue="toggle1" />);
     const toggle = screen.getByTestId("toggle1");
 
