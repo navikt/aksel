@@ -1,13 +1,5 @@
 import { HTMLAttributes } from "react";
 
-export interface TabsContextProps {
-  size: "medium" | "small";
-  loop: boolean;
-  iconPosition: "left" | "top";
-  id: string;
-  selectionFollowsFocus?: boolean;
-}
-
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
   children: React.ReactNode;
