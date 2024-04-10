@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
+import { VStack } from "../layout/stack";
 import FormSummary from "./FormSummary";
 
 const meta: Meta<typeof FormSummary> = {
@@ -165,6 +166,15 @@ const answers = [
       },
     ],
   },
+  {
+    label: "Flere ting du har i sekken.",
+    value: [
+      {
+        label: "Saks",
+        value: `En saks til`,
+      },
+    ],
+  },
 ];
 
 export const ComplexData: StoryFn<typeof FormSummary> = () => (
@@ -198,4 +208,49 @@ export const ComplexData: StoryFn<typeof FormSummary> = () => (
       ))}
     </FormSummary.Answers>
   </FormSummary>
+);
+
+export const Empty: StoryFn<typeof FormSummary> = () => (
+  <VStack gap="8">
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading>Just Header</FormSummary.Heading>
+        <FormSummary.Edit />
+      </FormSummary.Header>
+    </FormSummary>
+
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading>Empty Answers</FormSummary.Heading>
+        <FormSummary.Edit />
+      </FormSummary.Header>
+
+      <FormSummary.Answers></FormSummary.Answers>
+    </FormSummary>
+
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading>Empty Answer</FormSummary.Heading>
+        <FormSummary.Edit />
+      </FormSummary.Header>
+
+      <FormSummary.Answers>
+        <FormSummary.Answer></FormSummary.Answer>
+      </FormSummary.Answers>
+    </FormSummary>
+
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading>Empty Label & Value</FormSummary.Heading>
+        <FormSummary.Edit />
+      </FormSummary.Header>
+
+      <FormSummary.Answers>
+        <FormSummary.Answer>
+          <FormSummary.Label></FormSummary.Label>
+          <FormSummary.Value></FormSummary.Value>
+        </FormSummary.Answer>
+      </FormSummary.Answers>
+    </FormSummary>
+  </VStack>
 );
