@@ -62,6 +62,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           role="tab"
           type="button"
           aria-selected={tabCtx.isSelected}
+          data-state={tabCtx.isSelected ? "active" : "inactive"}
           tabIndex={tabCtx.isFocused ? 0 : -1}
           aria-controls={tabCtx.controlsId}
           id={tabCtx.id}

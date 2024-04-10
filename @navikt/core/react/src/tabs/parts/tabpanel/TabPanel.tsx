@@ -34,6 +34,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         aria-labelledby={ctx.labelledbyId}
         id={ctx.id}
         hidden={ctx.hidden}
+        data-state={!ctx.hidden ? "active" : "inactive"}
       >
         {lazy && ctx.hidden ? null : children}
       </div>
