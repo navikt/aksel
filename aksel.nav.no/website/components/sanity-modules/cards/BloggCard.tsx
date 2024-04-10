@@ -15,7 +15,7 @@ const BloggCard = ({ blog }: BloggCardProps) => {
   return (
     <li
       key={blog._id}
-      className="flex h-full flex-col place-content-start border-b border-b-border-subtle pb-8"
+      className="flex h-full flex-col place-content-start border-b border-b-border-subtle pb-10"
     >
       <Heading size="medium" as="div">
         <NextLink href={`/${blog.slug}`} passHref legacyBehavior>
@@ -32,7 +32,7 @@ const BloggCard = ({ blog }: BloggCardProps) => {
           </Link>
         </NextLink>
       </Heading>
-      <BodyLong className="my-2">{blog?.ingress}</BodyLong>
+      <BodyLong className="my-2 line-clamp-2">{blog?.ingress}</BodyLong>
       {getAuthors(blog).length > 0 && (
         <BodyShort
           size="small"

@@ -17,7 +17,9 @@ export function createSearchResult(
     groupedHits,
     topResults:
       result?.length > 4
-        ? result.slice(0, 4).filter((x) => x.score && x.score < 0.1)
+        ? result
+            .filter((x) => x.score !== undefined && x.score < 0.1)
+            .slice(0, 4)
         : [],
     totalHits: result?.length ?? 0,
     hits: {

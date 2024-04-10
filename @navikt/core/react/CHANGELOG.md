@@ -1,5 +1,45 @@
 # @navikt/ds-react
 
+## 6.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.4.1
+  - @navikt/aksel-icons@6.4.1
+
+## 6.4.0
+
+### Minor Changes
+
+- FileUpload.Item: :boom: Endret API og støtte for å sette ID på knappen ([#2824](https://github.com/navikt/aksel/pull/2824))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.4.0
+  - @navikt/aksel-icons@6.4.0
+
+## 6.3.6
+
+### Patch Changes
+
+- DatePicker: Fjernet role gridcell fra dato-knapper. ([#2826](https://github.com/navikt/aksel/pull/2826))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.6
+  - @navikt/aksel-icons@6.3.6
+
+## 6.3.5
+
+### Patch Changes
+
+- Modal: Fjern tomt element ([#2819](https://github.com/navikt/aksel/pull/2819))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.3.5
+  - @navikt/aksel-icons@6.3.5
+
 ## 6.3.4
 
 ### Patch Changes

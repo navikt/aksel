@@ -50,7 +50,7 @@ const Footer = () => {
             heading="Om nettstedet"
             links={[
               {
-                url: "/god-praksis/artikler/om-aksel",
+                url: "/side/om-aksel",
                 text: "Hva er Aksel?",
               },
               {

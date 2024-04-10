@@ -16,6 +16,12 @@ export const Search = () => {
       <Modal
         open={open}
         onClose={close}
+        onKeyDown={(e) => {
+          /* Avoids sideeffects when closing Modal */
+          if (e.key === "Escape") {
+            e.stopPropagation();
+          }
+        }}
         aria-label="Søk"
         className="h-[90%] max-h-[52rem] "
         width="medium"

@@ -14,7 +14,6 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { BloggAd } from "@/web/BloggAd";
-import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
@@ -80,7 +79,6 @@ const Page = (props: PageProps["props"]) => {
           id="hovedinnhold"
           className="relative overflow-hidden focus:outline-none"
         >
-          <AkselCubeStatic className="text-[#FFE78A] opacity-10" />
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 sm:px-6">
             <LatestBloggposts
               bloggs={props?.bloggposts}

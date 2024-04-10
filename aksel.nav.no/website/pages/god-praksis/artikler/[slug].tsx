@@ -254,7 +254,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  <Feedback userState={userState} />
+                  {userState && <Feedback userState={userState} />}
                 </div>
               </div>
             </div>
