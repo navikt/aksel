@@ -63,7 +63,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    *   </FormSummary.Answers>
    * </FormSummary>
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 /**

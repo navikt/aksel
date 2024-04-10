@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
@@ -14,7 +14,7 @@ const meta: Meta<typeof FormSummary> = {
       </div>
     ),
   ],
-  parameters: { layout: "padded" },
+  parameters: { layout: "padded", chromatic: { disable: true } },
 };
 export default meta;
 
@@ -259,7 +259,7 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
         <FormSummary.Edit />
       </FormSummary.Header>
 
-      <FormSummary.Answers></FormSummary.Answers>
+      <FormSummary.Answers>{null}</FormSummary.Answers>
     </FormSummary>
 
     <FormSummary>
@@ -269,7 +269,7 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
       </FormSummary.Header>
 
       <FormSummary.Answers>
-        <FormSummary.Answer></FormSummary.Answer>
+        <FormSummary.Answer>{null}</FormSummary.Answer>
       </FormSummary.Answers>
     </FormSummary>
 
@@ -281,8 +281,8 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
 
       <FormSummary.Answers>
         <FormSummary.Answer>
-          <FormSummary.Label></FormSummary.Label>
-          <FormSummary.Value></FormSummary.Value>
+          <FormSummary.Label>{null}</FormSummary.Label>
+          <FormSummary.Value>{null}</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
     </FormSummary>
@@ -296,9 +296,37 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Answers>
         <FormSummary.Answer>
           <FormSummary.Label>Adresse</FormSummary.Label>
-          <FormSummary.Value></FormSummary.Value>
+          <FormSummary.Value>{null}</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
     </FormSummary>
   </VStack>
 );
+
+export const Chromatic: StoryObj<typeof FormSummary> = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>Long Texts</h2>
+        <LongTexts />
+      </div>
+      <div>
+        <h2>No Link</h2>
+        <NoLink />
+      </div>
+      <div>
+        <h2>Realistic Usage</h2>
+        <RealisticUsage />
+      </div>
+      <div>
+        <h2>Empty</h2>
+        <Empty />
+      </div>
+    </div>
+  ),
+  parameters: { chromatic: { disable: false } },
+};
