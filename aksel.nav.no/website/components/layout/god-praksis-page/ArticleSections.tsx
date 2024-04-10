@@ -16,7 +16,7 @@ export function ArticleSections({
   articles,
   undertemaList,
 }: GpArticleCardProps) {
-  const view = useGpViews();
+  const queryState = useGpViews();
 
   const getUndertemaFromTema = useCallback(
     (undertema: string) => {
@@ -41,7 +41,7 @@ export function ArticleSections({
     }, new Map<GpSlugQueryResponse["tema"]["undertema"][0], ParsedGPArticle[]>());
   }, [articles, getUndertemaFromTema]);
 
-  switch (view.view) {
+  switch (queryState.view) {
     case "none": {
       return (
         <>
@@ -72,7 +72,7 @@ export function ArticleSections({
     }
 
     case "undertema": {
-      const ut = getUndertemaFromTema(view.undertema);
+      const ut = getUndertemaFromTema(queryState.undertema);
       if (!ut) {
         return null;
       }
@@ -108,7 +108,7 @@ export function ArticleSections({
       const filteredMap = new Map();
       for (const [undertema, utArticles] of articlesByUndertema) {
         const filteredArticles = utArticles.filter(
-          (article) => article.innholdstype === view.innholdstype,
+          (article) => article.innholdstype === queryState.innholdstype,
         );
         if (filteredArticles.length > 0) {
           filteredMap.set(undertema, filteredArticles);
@@ -149,8 +149,8 @@ export function ArticleSections({
     case "both": {
       const matchingArticles = articles.filter(
         (article) =>
-          article.undertema === view.undertema &&
-          article.innholdstype === view.innholdstype,
+          article.undertema === queryState.undertema &&
+          article.innholdstype === queryState.innholdstype,
       );
 
       if (matchingArticles.length === 0) {
@@ -160,7 +160,7 @@ export function ArticleSections({
       return (
         <div>
           <IntroSection
-            title={`Artikler for ${view.undertema} og ${view.innholdstype}`}
+            title={`Artikler for ${queryState.undertema} og ${queryState.innholdstype}`}
           />
           <GpCardGrid>
             {matchingArticles.map((article) => (
