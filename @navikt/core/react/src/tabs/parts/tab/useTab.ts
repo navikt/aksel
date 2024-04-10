@@ -37,9 +37,7 @@ export function useTab<P extends UseTabProps>(
 
   const onFocus = () => {
     setFocusedValue(value);
-
-    const shouldSelect = selectionFollowsFocus && !disabled;
-    shouldSelect && setSelectedValue(value);
+    selectionFollowsFocus && setSelectedValue(value);
   };
 
   return {
