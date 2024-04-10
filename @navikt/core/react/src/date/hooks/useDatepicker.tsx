@@ -229,6 +229,10 @@ export const useDatepicker = (
 
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
+    if (selected && required) {
+      return;
+    }
+    console.log(day, selected);
     if (day && !selected) {
       handleOpen(false);
       anchorRef?.focus();
