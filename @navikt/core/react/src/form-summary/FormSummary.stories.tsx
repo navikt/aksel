@@ -33,6 +33,15 @@ export const Default: StoryFn<typeof FormSummary> = () => (
       </FormSummary.Answer>
 
       <FormSummary.Answer>
+        <FormSummary.Label>Adresse</FormSummary.Label>
+        <FormSummary.Value>
+          Gate 123
+          <br />
+          1234 Sted
+        </FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
         <FormSummary.Label>Fødselsnummer</FormSummary.Label>
         <FormSummary.Value>12345678910</FormSummary.Value>
       </FormSummary.Answer>
