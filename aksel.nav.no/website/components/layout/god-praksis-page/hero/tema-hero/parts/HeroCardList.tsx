@@ -12,7 +12,7 @@ export function HeroCardList({ heroNav, setOpen, currentSlug }: HeroListProps) {
     <nav aria-label="Temavelger" className="relative z-10 mt-5">
       <ul className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
         <li>
-          <GpHeroCard href="gp" image={null} compact>
+          <GpHeroCard href="gp" compact>
             Alle tema
           </GpHeroCard>
         </li>

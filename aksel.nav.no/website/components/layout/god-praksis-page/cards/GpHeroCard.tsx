@@ -1,3 +1,4 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -10,7 +11,7 @@ type GpHeroCardProps = {
   children: React.ReactNode;
   href: string;
   articleCount?: number;
-  image: any;
+  image?: SanityImageSource;
   compact?: boolean;
 } & HTMLAttributes<HTMLAnchorElement>;
 

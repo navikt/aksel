@@ -1,3 +1,4 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { SanityDocument } from "sanity";
 import { ArticleT } from "@/cms/frontpage-blocks/latest-articles/Card";
 
@@ -6,7 +7,7 @@ export type GpTemaT = {
   slug: string;
   description?: string;
   undertema: { title: string; description: string }[];
-  image: object | null;
+  image?: SanityImageSource;
 };
 
 /**
@@ -16,7 +17,7 @@ export type HeroNavT = {
   heroNav: {
     title: string;
     slug: string;
-    image: any;
+    image?: SanityImageSource;
   }[];
 };
 
@@ -30,12 +31,12 @@ export type GpSlugQueryResponse = {
     description?: string;
     undertema: { title: string; description: string }[];
     seo?: ArticleT["seo"];
-    image: any;
+    image: SanityImageSource;
   };
   heroNav: {
     title: string;
     slug: string;
-    image: any;
+    image: SanityImageSource;
   }[];
   articles: {
     _id: string;
