@@ -252,5 +252,19 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
         </FormSummary.Answer>
       </FormSummary.Answers>
     </FormSummary>
+
+    <FormSummary>
+      <FormSummary.Header>
+        <FormSummary.Heading>Empty Value</FormSummary.Heading>
+        <FormSummary.Edit />
+      </FormSummary.Header>
+
+      <FormSummary.Answers>
+        <FormSummary.Answer>
+          <FormSummary.Label>Adresse</FormSummary.Label>
+          <FormSummary.Value></FormSummary.Value>
+        </FormSummary.Answer>
+      </FormSummary.Answers>
+    </FormSummary>
   </VStack>
 );
