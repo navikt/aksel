@@ -7,11 +7,11 @@ import { useToggleItem } from "./useToggleItem";
 export interface ToggleGroupItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
-   * Content
+   * Content.
    */
   children: React.ReactNode;
   /**
-   * Value for state-handling
+   * Value for state-handling.
    */
   value: string;
 }
