@@ -75,8 +75,6 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup without value or defaultvalue is not allowed");
     }
 
-    const describeBy = cl(userDescribedby, !!label && labelId);
-
     if (!value && !defaultValue) {
       console.error("ToggleGroup needs either a value or defaultValue");
     }
@@ -106,7 +104,9 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
                 `navds-toggle-group--${size}`,
                 `navds-toggle-group--${variant}`,
               )}
-              aria-describedby={describeBy || undefined}
+              aria-describedby={
+                cl(userDescribedby, !!label && labelId) || undefined
+              }
               role="radiogroup"
             >
               {children}
