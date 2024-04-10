@@ -9,7 +9,8 @@ export interface FormSummaryAnswerProps {
   children: React.ReactNode;
 }
 
-export const FormSummaryAnswer = ({ children }: FormSummaryAnswerProps) =>
-  children;
+export const FormSummaryAnswer = ({ children }: FormSummaryAnswerProps) => (
+  <div className="navds-form-summary__answer">{children}</div>
+);
 
 export default FormSummaryAnswer;
