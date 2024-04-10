@@ -7,11 +7,7 @@ type HeroListProps = {
   currentSlug?: string;
 };
 
-export function HeroList({
-  heroNav,
-  setOpen,
-  currentSlug,
-}: HeroListProps) {
+export function HeroCardList({ heroNav, setOpen, currentSlug }: HeroListProps) {
   return (
     <nav aria-label="Temavelger" className="relative z-10 mt-5">
       <ul className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">

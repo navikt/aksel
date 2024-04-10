@@ -3,7 +3,7 @@ import { CSSProperties, useCallback, useState } from "react";
 import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
-import { HeroList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
+import { HeroCardList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
 import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
 import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
@@ -124,7 +124,7 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
           ref={setCloseDialogButton}
         />
 
-        <HeroList
+        <HeroCardList
           currentSlug={tema?.slug}
           heroNav={heroNav}
           setOpen={setOpen}

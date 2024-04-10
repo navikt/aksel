@@ -21,13 +21,13 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
 
   const { query, replace } = useRouter();
 
-  const reset = async () => {
+  const reset = () => {
     replace({ query: omit(query, [type]) }, undefined, {
       shallow: true,
     });
   };
 
-  const handleClick = async (titleRaw: string) => {
+  const handleClick = (titleRaw: string) => {
     query[type] === titleRaw
       ? reset()
       : replace({ query: { ...query, [type]: titleRaw } }, undefined, {
@@ -62,20 +62,18 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
           >
             {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
           </GpChip>
-          {entries
-            .filter((entry) => entry[0] !== "null")
-            .map(([entryName, count]) => {
-              return (
-                <li key={entryName} className="chiplist">
-                  <GpChip
-                    type={type}
-                    disabled={count === 0}
-                    onClick={() => handleClick(entryName)}
-                    pressed={entryName === safeString(query?.[type])}
-                  >{`${entryName} (${count})`}</GpChip>
-                </li>
-              );
-            })}
+          {entries.map(([entryName, count]) => {
+            return (
+              <li key={entryName} className="chiplist">
+                <GpChip
+                  type={type}
+                  disabled={count === 0}
+                  onClick={() => handleClick(entryName)}
+                  pressed={entryName === safeString(query?.[type])}
+                >{`${entryName} (${count})`}</GpChip>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
