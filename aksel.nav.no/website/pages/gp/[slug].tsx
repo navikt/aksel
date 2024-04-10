@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next/types";
 import { Suspense, lazy, useEffect, useMemo } from "react";
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import { ArticleView } from "@/layout/god-praksis-page/ArticleView";
+import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
 import { GpChipNavigation } from "@/layout/god-praksis-page/chipnavigation/GpChipNavigation";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import {
@@ -131,7 +131,7 @@ const GpPage = (props: PageProps["props"]) => {
                 <GpChipNavigation articles={articles} />
 
                 <VStack gap="12" className="mt-10">
-                  <ArticleView
+                  <ArticleSections
                     articles={articles}
                     undertemaList={props.tema.undertema}
                   />

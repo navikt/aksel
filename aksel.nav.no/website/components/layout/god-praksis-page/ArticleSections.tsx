@@ -12,7 +12,10 @@ type GpArticleCardProps = {
   undertemaList: GpSlugQueryResponse["tema"]["undertema"];
 };
 
-export function ArticleView({ articles, undertemaList }: GpArticleCardProps) {
+export function ArticleSections({
+  articles,
+  undertemaList,
+}: GpArticleCardProps) {
   const view = useGpViews();
 
   const getUndertemaFromTema = useCallback(
