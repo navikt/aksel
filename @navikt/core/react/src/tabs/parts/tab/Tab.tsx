@@ -33,6 +33,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         onClick,
         onFocus,
         disabled,
+        id,
         ...rest
       },
       ref: React.ForwardedRef<HTMLButtonElement>,
@@ -63,8 +64,8 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
           type="button"
           aria-selected={tabCtx.isSelected}
           data-state={tabCtx.isSelected ? "active" : "inactive"}
-          tabIndex={tabCtx.isFocused ? 0 : -1}
-          aria-controls={tabCtx.controlsId}
+          tabIndex={id ?? tabCtx.isFocused ? 0 : -1}
+          aria-controls={rest["aria-controls"] ?? tabCtx.controlsId}
           id={tabCtx.id}
           onFocus={tabCtx.onFocus}
           onClick={tabCtx.onClick}
