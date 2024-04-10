@@ -26,9 +26,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
       <div
         ref={ref}
         {...rest}
-        className={cl("navds-tabs__tabpanel", className, {
-          "navds-tabs__tabpanel--hidden": ctx.hidden,
-        })}
+        className={cl("navds-tabs__tabpanel", className)}
         role="tabpanel"
         tabIndex={0}
         aria-labelledby={ctx.labelledbyId}

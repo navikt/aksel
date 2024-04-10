@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useId } from "../util";
 import { useControllableState } from "../util/hooks/useControllableState";
 import { TabsProps } from "./Tabs.types";
@@ -20,11 +20,10 @@ export function useTabs({
   /**
    * Sync focused `value` with controlled `selectedValue`
    */
-  useEffect(() => {
-    if (value != null) {
-      setFocusedValue(value);
-    }
-  }, [value]);
+
+  if (value != null) {
+    setFocusedValue(value);
+  }
 
   /**
    * Scope ids for better tracking
