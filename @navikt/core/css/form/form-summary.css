@@ -6,8 +6,7 @@
 
 .navds-form-summary__header {
   background-color: var(--a-surface-subtle);
-  padding-block: var(--a-spacing-4);
-  padding-inline: var(--a-spacing-6);
+  padding: var(--a-spacing-4) var(--a-spacing-6);
   display: flex;
   justify-content: space-between;
   gap: 0 var(--a-spacing-2);
@@ -15,6 +14,7 @@
 
 @media (max-width: 479px) {
   .navds-form-summary__header {
+    padding: var(--a-spacing-3) var(--a-spacing-4);
     flex-wrap: wrap;
   }
 }
@@ -32,6 +32,12 @@
 .navds-form-summary__answers {
   padding: var(--a-spacing-5) var(--a-spacing-6) var(--a-spacing-6);
   margin: 0;
+}
+
+@media (max-width: 479px) {
+  .navds-form-summary__answers {
+    padding: var(--a-spacing-4);
+  }
 }
 
 .navds-form-summary__answer:not(:last-child) {
