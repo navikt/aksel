@@ -4,15 +4,15 @@ import { useTabPanel } from "./useTabPanel";
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Tab panel content
+   * Tab panel content.
    */
   children: React.ReactNode;
   /**
-   * Value for state-handling
+   * Value for state-handling.
    */
   value: string;
   /**
-   * If true, will only render children when selected
+   * If true, will only render children when selected.
    * @default true
    */
   lazy?: boolean;

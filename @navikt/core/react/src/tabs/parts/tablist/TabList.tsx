@@ -9,7 +9,7 @@ import { useTabList } from "./useTabList";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * <Tabs.Tab /> elements
+   * <Tabs.Tab /> elements.
    */
   children: React.ReactNode;
 }

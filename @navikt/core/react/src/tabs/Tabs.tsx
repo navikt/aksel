@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
 import {
   TabsDescendantsProvider,
   TabsProvider,
@@ -78,17 +78,17 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
 
     const tabsContext = useTabs({ defaultValue, value, onChange, id });
 
-    const context = useMemo(
-      () => ({
-        ...tabsContext,
-        selectionFollowsFocus,
-        loop,
-        size,
-        iconPosition,
-        fill,
-      }),
-      [fill, iconPosition, loop, selectionFollowsFocus, size, tabsContext],
-    );
+    /**
+     * TabsProvider handles memoization of context values, so we can safely skip it here.
+     */
+    const context = {
+      ...tabsContext,
+      selectionFollowsFocus,
+      loop,
+      size,
+      iconPosition,
+      fill,
+    };
 
     return (
       <TabsDescendantsProvider value={descendants}>

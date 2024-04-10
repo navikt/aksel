@@ -8,15 +8,15 @@ import { useTab } from "./useTab";
 export interface TabProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
   /**
-   * Tab label
+   * Tab label.
    */
   label?: React.ReactNode;
   /**
-   * Tab Icon
+   * Tab Icon.
    */
   icon?: React.ReactNode;
   /**
-   * Value for state-handling
+   * Value for state-handling.
    */
   value: string;
 }
