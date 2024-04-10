@@ -222,24 +222,62 @@ export const Overflow = () => {
 
 export const Fill = {
   render: () => (
-    <div className="colgap">
-      <Tabs defaultValue="test2" fill>
-        <Tabs.List>
-          <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
-          <Tabs.Tab
-            value="test2"
-            icon={<DishwasherIcon aria-hidden />}
-            label="Oppvaskmaskin"
-          />
-          <Tabs.Tab
-            value="test3"
-            icon={<FreezerIcon aria-hidden />}
-            label="Fryser"
-          />
-        </Tabs.List>
-        <Panel />
-      </Tabs>
-    </div>
+    <Tabs defaultValue="test2" fill>
+      <Tabs.List>
+        <Tabs.Tab value="test1" icon={<MugIcon aria-hidden />} label="Skap" />
+        <Tabs.Tab
+          value="test2"
+          icon={<DishwasherIcon aria-hidden />}
+          label="Oppvaskmaskin"
+        />
+        <Tabs.Tab
+          value="test3"
+          icon={<FreezerIcon aria-hidden />}
+          label="Fryser"
+        />
+      </Tabs.List>
+      <Panel />
+    </Tabs>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
+export const CustomIds = {
+  render: () => (
+    <Tabs defaultValue="test2">
+      <Tabs.List>
+        <Tabs.Tab
+          value="test1"
+          label="Skap"
+          id="custom-tabid-1"
+          aria-controls="custom-tabpanelid-1"
+        />
+        <Tabs.Tab
+          value="test2"
+          label="Oppvaskmaskin"
+          id="custom-tabid-2"
+          aria-controls="custom-tabpanelid-2"
+        />
+      </Tabs.List>
+      <Tabs.Panel
+        value="test1"
+        className="panel"
+        id="custom-tabpanelid-1"
+        aria-labelledby="custom-tabid-1"
+      >
+        Innholdspanel for Skap-tab
+      </Tabs.Panel>
+      <Tabs.Panel
+        value="test2"
+        className="panel"
+        id="custom-tabpanelid-2"
+        aria-labelledby="custom-tabid-2"
+      >
+        Innholdspanel for Oppvaskmaskin-tab
+      </Tabs.Panel>
+    </Tabs>
   ),
   parameters: {
     layout: "fullscreen",

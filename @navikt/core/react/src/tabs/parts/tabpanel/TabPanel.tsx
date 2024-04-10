@@ -16,6 +16,12 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   lazy?: boolean;
+  /**
+   * Overrides auto-generated id.
+   * @note TabPanel will generate an id if not provided. If you need to override it,
+   * make sure to also include the correct `aria-labelledby` id for the Tab that labels it.
+   */
+  id?: string;
 }
 
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
