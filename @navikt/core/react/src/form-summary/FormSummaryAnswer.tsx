@@ -1,6 +1,8 @@
+import cl from "clsx";
 import React from "react";
 
-export interface FormSummaryAnswerProps {
+export interface FormSummaryAnswerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Must include:
    * - `<FormSummary.Label>`
@@ -9,8 +11,17 @@ export interface FormSummaryAnswerProps {
   children: React.ReactNode;
 }
 
-export const FormSummaryAnswer = ({ children }: FormSummaryAnswerProps) => (
-  <div className="navds-form-summary__answer">{children}</div>
-);
+export const FormSummaryAnswer = React.forwardRef<
+  HTMLDivElement,
+  FormSummaryAnswerProps
+>(({ children, className, ...rest }, ref) => (
+  <div
+    ref={ref}
+    {...rest}
+    className={cl("navds-form-summary__answer", className)}
+  >
+    {children}
+  </div>
+));
 
 export default FormSummaryAnswer;
