@@ -9242,7 +9242,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.7.3
     "@typescript-eslint/parser": ^6.7.3
     "@whitespace/storybook-addon-html": ^6.0.4
-    chromatic: 9.1.0
+    chromatic: 11.3.0
     concurrently: 7.2.1
     cross-env: ^7.0.0
     eslint: ^8.50.0
@@ -10913,14 +10913,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:9.1.0":
-  version: 9.1.0
-  resolution: "chromatic@npm:9.1.0"
+"chromatic@npm:11.3.0":
+  version: 11.3.0
+  resolution: "chromatic@npm:11.3.0"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 4fe6dc7e7011edc655e9a21f496f91679710e37466ffdd3d10debbe87c35af54ccff4eeff1be3bf21a0c03b9871d17b6853083276bd1e71b44b5ec85f22a3bcc
+  checksum: 267bf4f4b5b548e065f770e6909229e67089f560233f04f8be3dc176583bd640a4637ad8f6f7e796b86b37af2a512b14b5e16ec7c0f6d07abf529ece740c62db
   languageName: node
   linkType: hard
 
