@@ -3,17 +3,13 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [state, setState] = useState(["Midterst"]);
+  const [state, setState] = useState(["taxi"]);
 
   return (
-    <CheckboxGroup
-      legend="Hvor vil du sitte?"
-      onChange={(v) => setState(v)}
-      value={state}
-    >
-      <Checkbox value="Bakerst">Bakerst</Checkbox>
-      <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst">Fremst</Checkbox>
+    <CheckboxGroup legend="Transportmiddel" onChange={setState} value={state}>
+      <Checkbox value="car">Bil</Checkbox>
+      <Checkbox value="taxi">Drosje</Checkbox>
+      <Checkbox value="public">Kollektivt</Checkbox>
     </CheckboxGroup>
   );
 };

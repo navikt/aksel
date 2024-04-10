@@ -4,18 +4,17 @@ import React from "react";
 import { VStack } from "../../layout/stack";
 import BodyLong from "../BodyLong";
 
-const meta = {
+const meta: Meta<typeof BodyLong> = {
   title: "ds-react/Typography/BodyLong",
   component: BodyLong,
   decorators: [(story) => <div style={{ maxWidth: "700px" }}>{story()}</div>],
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof BodyLong>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof BodyLong>;
 
 const lorem =
   "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";

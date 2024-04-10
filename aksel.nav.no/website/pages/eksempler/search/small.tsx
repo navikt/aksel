@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form>
+    <form role="search">
       <Search
         label="Søk alle NAV sine sider"
         variant="secondary"
@@ -23,4 +23,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Small brukes på interne flater der det er behov for et mer komprimert grensesnitt. Small passer også i tilknytning til en komponent, for eksempel til filtrering av data i en tabell.",
 };

@@ -1,5 +1,29 @@
 # @navikt/ds-css
 
+## 6.4.1
+
+### Patch Changes
+
+- FileUpload: Item-illustrasjon er nå radius-full ([#2834](https://github.com/navikt/aksel/pull/2834))
+
+## 6.4.0
+
+## 6.3.6
+
+## 6.3.5
+
+## 6.3.4
+
+### Patch Changes
+
+- ReadMore: Padding-right på button er bumpet noen px ([#2806](https://github.com/navikt/aksel/pull/2806))
+
+## 6.3.3
+
+## 6.3.2
+
+## 6.3.1
+
 ## 6.3.0
 
 ### Minor Changes

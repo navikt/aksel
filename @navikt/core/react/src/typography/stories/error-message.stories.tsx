@@ -4,17 +4,16 @@ import React from "react";
 import { VStack } from "../../layout/stack";
 import ErrorMessage from "../ErrorMessage";
 
-const meta = {
+const meta: Meta<typeof ErrorMessage> = {
   title: "ds-react/Typography/ErrorMessage",
   component: ErrorMessage,
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof ErrorMessage>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ErrorMessage>;
 
 const lorem =
   "Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";

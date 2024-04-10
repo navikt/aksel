@@ -272,7 +272,7 @@ export const useDatepicker = (
     ) {
       updateDate(undefined);
       updateValidation({
-        isInvalid: isValidDate(day),
+        isInvalid: !isValidDate(day),
         isWeekend: disableWeekends && isWeekend(day),
         isDisabled: disabled && isMatch(day, disabled),
         isValidDate: false,
