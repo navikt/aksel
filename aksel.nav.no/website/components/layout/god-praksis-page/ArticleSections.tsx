@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import {
@@ -18,17 +18,15 @@ export function ArticleSections({
 }: GpArticleCardProps) {
   const queryState = useGpViews();
 
-  const getUndertemaFromTema = useCallback(
-    (undertema: string) => {
-      return undertemaList.find((ut) => ut.title === undertema) ?? null;
-    },
+  const sections: [
+    GpSlugQueryResponse["tema"]["undertema"][0],
+    ParsedGPArticle[],
+  ][] = useMemo(() => {
+    const getUndertemaNameFromTema = (undertema: string) =>
+      undertemaList.find((ut) => ut.title === undertema) ?? null;
 
-    [undertemaList],
-  );
-
-  const articlesByUndertema = useMemo(() => {
-    return articles.reduce((map, article) => {
-      const undertema = getUndertemaFromTema(article.undertema);
+    const groupedByUndertema = articles.reduce((map, article) => {
+      const undertema = getUndertemaNameFromTema(article.undertema);
       if (!undertema) {
         return map;
       }
@@ -39,74 +37,23 @@ export function ArticleSections({
 
       return map;
     }, new Map<GpSlugQueryResponse["tema"]["undertema"][0], ParsedGPArticle[]>());
-  }, [articles, getUndertemaFromTema]);
 
-  switch (queryState.view) {
-    case "none": {
-      return (
-        <>
-          {[...articlesByUndertema.entries()].map(([ut, utArticles]) => {
-            return (
-              <section key={ut.title} aria-label={`Undertema ${ut.title}`}>
-                <IntroSection title={ut.title} description={ut.description} />
-                <GpCardGrid>
-                  {utArticles.map((article) => (
-                    <li key={article.slug}>
-                      <GpArticleCard
-                        href={`${article.slug}`.replace("god-praksis", "gp")}
-                        innholdstype={article.innholdstype}
-                        undertema={article.undertema}
-                        publishedAt={article.publishedAt}
-                        description={article.description}
-                      >
-                        {article.heading}
-                      </GpArticleCard>
-                    </li>
-                  ))}
-                </GpCardGrid>
-              </section>
-            );
-          })}
-        </>
-      );
-    }
-
-    case "undertema": {
-      const ut = getUndertemaFromTema(queryState.undertema);
-      if (!ut) {
-        return null;
+    if (queryState.view === "none") {
+      return [...groupedByUndertema.entries()];
+    } else if (queryState.view === "undertema") {
+      const currentUndertema = getUndertemaNameFromTema(queryState.undertema);
+      if (!currentUndertema) {
+        return [];
       }
 
-      const utArticles = articlesByUndertema.get(ut);
+      const utArticles = groupedByUndertema.get(currentUndertema);
       if (!utArticles) {
-        return null;
+        return [];
       }
-
-      return (
-        <div>
-          <IntroSection title={ut.title} description={ut.description} />
-
-          <GpCardGrid>
-            {utArticles.map((_article) => (
-              <li key={_article.slug}>
-                <GpArticleCard
-                  href={`${_article.slug}`.replace("god-praksis", "gp")}
-                  innholdstype={_article.innholdstype}
-                  undertema={_article.undertema}
-                  publishedAt={_article.publishedAt}
-                  description={_article.description}
-                >
-                  {_article.heading}
-                </GpArticleCard>
-              </li>
-            ))}
-          </GpCardGrid>
-        </div>
-      );
-    }
-    case "innholdstype": {
+      return [[currentUndertema, utArticles]];
+    } else if (queryState.view === "innholdstype") {
       const filteredMap = new Map();
-      for (const [undertema, utArticles] of articlesByUndertema) {
+      for (const [undertema, utArticles] of groupedByUndertema) {
         const filteredArticles = utArticles.filter(
           (article) => article.innholdstype === queryState.innholdstype,
         );
@@ -116,37 +63,10 @@ export function ArticleSections({
       }
 
       if (filteredMap.size === 0) {
-        return null;
+        return [];
       }
-
-      return (
-        <>
-          {[...filteredMap.entries()].map(([ut, utArticles]) => {
-            return (
-              <section key={ut.title} aria-label={`Undertema ${ut.title}`}>
-                <IntroSection title={ut.title} description={ut.description} />
-                <GpCardGrid>
-                  {utArticles.map((article) => (
-                    <li key={article.slug}>
-                      <GpArticleCard
-                        href={`${article.slug}`.replace("god-praksis", "gp")}
-                        innholdstype={article.innholdstype}
-                        undertema={article.undertema}
-                        publishedAt={article.publishedAt}
-                        description={article.description}
-                      >
-                        {article.heading}
-                      </GpArticleCard>
-                    </li>
-                  ))}
-                </GpCardGrid>
-              </section>
-            );
-          })}
-        </>
-      );
-    }
-    case "both": {
+      return [...filteredMap.entries()];
+    } else if (queryState.view === "both") {
       const matchingArticles = articles.filter(
         (article) =>
           article.undertema === queryState.undertema &&
@@ -154,35 +74,59 @@ export function ArticleSections({
       );
 
       if (matchingArticles.length === 0) {
-        return null;
+        return [];
       }
-
-      return (
-        <div>
-          <IntroSection
-            title={`Artikler for ${queryState.undertema} og ${queryState.innholdstype}`}
-          />
-          <GpCardGrid>
-            {matchingArticles.map((article) => (
-              <li key={article.slug}>
-                <GpArticleCard
-                  href={`${article.slug}`.replace("god-praksis", "gp")}
-                  innholdstype={article.innholdstype}
-                  undertema={article.undertema}
-                  publishedAt={article.publishedAt}
-                  description={article.description}
-                >
-                  {article.heading}
-                </GpArticleCard>
-              </li>
-            ))}
-          </GpCardGrid>
-        </div>
-      );
+      return [
+        [
+          {
+            title: `Artikler for ${queryState.undertema} og ${queryState.innholdstype}`,
+          },
+          matchingArticles,
+        ],
+      ];
     }
-    default:
-      return null;
-  }
+
+    return [];
+  }, [articles, undertemaList, queryState]);
+
+  const SectionTag =
+    queryState.view === "undertema" || queryState.view === "both"
+      ? "div"
+      : "section";
+
+  return (
+    <>
+      {sections.map(([ut, utArticles]) => {
+        return (
+          <SectionTag
+            key={ut.title}
+            aria-label={
+              ["none", "innholdstype"].includes(queryState.view)
+                ? `Undertema ${ut.title}`
+                : undefined
+            }
+          >
+            <IntroSection title={ut.title} description={ut.description} />
+            <GpCardGrid>
+              {utArticles.map((article) => (
+                <li key={article.slug}>
+                  <GpArticleCard
+                    href={`${article.slug}`.replace("god-praksis", "gp")}
+                    innholdstype={article.innholdstype}
+                    undertema={article.undertema}
+                    publishedAt={article.publishedAt}
+                    description={article.description}
+                  >
+                    {article.heading}
+                  </GpArticleCard>
+                </li>
+              ))}
+            </GpCardGrid>
+          </SectionTag>
+        );
+      })}
+    </>
+  );
 }
 
 function IntroSection({
