@@ -41,6 +41,7 @@ const sanityQuery = groq`
     title,
     "slug": slug.current,
     "image": pictogram,
+    "imageInverted": pictogramInverted,
   }
 }
 `;

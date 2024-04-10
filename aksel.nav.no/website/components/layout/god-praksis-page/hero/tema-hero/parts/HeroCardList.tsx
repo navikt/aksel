@@ -20,7 +20,9 @@ export function HeroCardList({ heroNav, setOpen, currentSlug }: HeroListProps) {
           <li key={tema.slug + idx}>
             <GpHeroCard
               href={`gp/${tema.slug}`}
-              image={tema.image}
+              image={
+                currentSlug === tema.slug ? tema.imageInverted : tema.image
+              }
               compact
               aria-current={currentSlug === tema.slug ? "page" : undefined}
               onClick={() => {

@@ -18,6 +18,7 @@ export type HeroNavT = {
     title: string;
     slug: string;
     image?: SanityImageSource;
+    imageInverted?: SanityImageSource;
   }[];
 };
 
@@ -37,6 +38,7 @@ export type GpSlugQueryResponse = {
     title: string;
     slug: string;
     image: SanityImageSource;
+    imageInverted: SanityImageSource;
   }[];
   articles: {
     _id: string;

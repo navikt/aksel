@@ -56,6 +56,22 @@ export default defineType({
       ],
       validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
     }),
+    defineField({
+      title: "Pictogram invertert",
+      name: "pictogramInverted",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+          initialValue: "Tema-illustrasjon",
+        },
+      ],
+      validation: (Rule) =>
+        Rule.required().error("Tema må ha et invertert pictogram"),
+    }),
     BaseSEOPreset,
   ],
   orderings: [

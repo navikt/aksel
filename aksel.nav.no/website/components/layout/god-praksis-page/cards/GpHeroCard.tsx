@@ -21,7 +21,7 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
       <Link
         ref={ref}
         href={`/${href}`}
-        className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus md:gap-3 md:py-3 md:pl-3 md:pr-6"
+        className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus aria-[current]:bg-teal-800 aria-[current]:focus-visible:shadow-focus-gap md:gap-3 md:py-3 md:pl-3 md:pr-6"
         {...rest}
       >
         <div
@@ -48,7 +48,7 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
           <Heading
             size="small"
             as="span"
-            className="truncate text-aksel-heading underline group-hover:no-underline"
+            className="truncate text-aksel-heading underline group-hover:no-underline group-aria-[current]:text-text-on-inverted group-aria-[current]:no-underline"
           >
             {children}
           </Heading>
