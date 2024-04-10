@@ -13,7 +13,7 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
-import { GpCardGrid } from "@/layout/god-praksis-page/ArticleView";
+import { GpCardGrid } from "@/layout/god-praksis-page/ArticleSections";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
 import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
