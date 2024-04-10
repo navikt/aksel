@@ -177,7 +177,7 @@ const answers = [
   },
 ];
 
-export const ComplexData: StoryFn<typeof FormSummary> = () => (
+export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
       <FormSummary.Heading>
