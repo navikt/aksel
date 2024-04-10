@@ -343,3 +343,37 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
   ),
   parameters: { chromatic: { disable: false } },
 };
+
+export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
+  <FormSummary>
+    <FormSummary.Header>
+      <FormSummary.Heading>Personalia</FormSummary.Heading>
+      <FormSummary.Edit />
+    </FormSummary.Header>
+
+    <FormSummary.Answers>
+      <FormSummary.Answer>
+        <FormSummary.Label>
+          Hvilket transportmiddel er du mest kjent for?
+        </FormSummary.Label>
+        <FormSummary.Value>
+          sykkel, tog, bil, buss, sparkesykkel
+        </FormSummary.Value>
+      </FormSummary.Answer>
+
+      <FormSummary.Answer>
+        <FormSummary.Label>Favoritt slagord?</FormSummary.Label>
+        <FormSummary.Value>
+          {`
+          I'll be back.
+          `}
+          <br />
+          Hasta la vista, baby.
+          <br />
+          {`Say hello to my little friend.
+        `}
+        </FormSummary.Value>
+      </FormSummary.Answer>
+    </FormSummary.Answers>
+  </FormSummary>
+);
