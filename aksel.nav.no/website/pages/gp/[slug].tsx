@@ -37,7 +37,7 @@ const sanityQuery = groq`
     "image": pictogram,
   },
   "heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0]{
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title)){
     title,
     "slug": slug.current,
     "image": pictogram,
