@@ -14,7 +14,7 @@ type GpTemaHeroProps = { tema: GpTemaT | null } & HeroNavT;
 function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
   const [open, setOpen] = useState(false);
 
-  const [boxHeight, setBoxHeight] = useState(0);
+  const [dialogHeight, setDialogHeight] = useState(0);
   const [wrapperHeight, setWrapperHeight] = useState(0);
   const [animationRef, setAnimationRef] = useState({ x: 0, y: 0 });
 
@@ -55,7 +55,7 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
    */
   const getMargin = () => {
     if (!open) return 0;
-    const height = boxHeight ? boxHeight - wrapperHeight : 0;
+    const height = dialogHeight ? dialogHeight - wrapperHeight : 0;
     if (height > 0) return height;
     return 0;
   };
@@ -112,7 +112,7 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
         aria-labelledby="tema-selector-title"
         aria-modal="false"
         ref={(el) => {
-          setBoxHeight(el?.getBoundingClientRect().height || 0);
+          setDialogHeight(el?.getBoundingClientRect().height || 0);
         }}
       >
         <Cube variant="dark" />
