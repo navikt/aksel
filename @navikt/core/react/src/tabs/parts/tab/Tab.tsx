@@ -22,7 +22,6 @@ export interface TabProps
   /**
    * Overrides auto-generated id.
    *
-   *
    * **Warning**: Tab generates an id if not provided. If you need to override it,
    * make sure to also include the correct `aria-controls` id for the TabPanel it controls.
    */
