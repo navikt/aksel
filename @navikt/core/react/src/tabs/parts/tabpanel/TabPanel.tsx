@@ -35,7 +35,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         id={ctx.id}
         hidden={ctx.hidden}
       >
-        {lazy ? <>{!ctx.hidden && children}</> : children}
+        {lazy && ctx.hidden ? null : children}
       </div>
     );
   },
