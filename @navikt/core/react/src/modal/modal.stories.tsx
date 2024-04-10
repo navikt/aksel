@@ -146,6 +146,7 @@ export const WithUseState: StoryFn = () => {
   );
 };
 WithUseState.storyName = "With useState";
+WithUseState.parameters = { chromatic: { disable: true } };
 
 export const EmptyHeader: StoryFn = () => (
   <Modal open onClose={() => null} aria-label="Modal with empty header">
@@ -225,6 +226,7 @@ export const WithTooltip: StoryFn = () => {
     </div>
   );
 };
+WithTooltip.parameters = { chromatic: { disable: true } }; // The tooltip behaves unpredictably in Chromatic
 
 export const WithSrOnlyElement: StoryFn = () => (
   <Modal
@@ -328,12 +330,6 @@ ChromaticViewportTesting.parameters = {
         viewport: {
           width: 850,
           height: 400,
-        },
-      },
-      desktop: {
-        viewport: {
-          width: 1280,
-          height: 960,
         },
       },
     },

@@ -121,7 +121,7 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
                     <Heading
                       as="a"
                       size="small"
-                      className="z-10 underline before:absolute before:inset-0 focus:outline-none"
+                      className="z-10 underline before:absolute before:inset-0 focus:outline-none group-hover:no-underline"
                     >
                       {x.heading}
                       {x?.status?.tag && (

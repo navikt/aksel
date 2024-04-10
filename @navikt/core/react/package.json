@@ -564,7 +564,6 @@
     "@floating-ui/react": "0.25.4",
     "@navikt/aksel-icons": "^6.4.1",
     "@navikt/ds-tokens": "^6.4.1",
-    "@radix-ui/react-tabs": "1.0.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.0"

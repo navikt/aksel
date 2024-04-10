@@ -16,7 +16,6 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../404";
@@ -113,12 +112,6 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
           >
             <div className="pt-12">
               <div className="mx-auto mb-16 max-w-prose lg:ml-0 ">
-                {!mainPage && (
-                  <BreadCrumbs
-                    text={`Prinsipper for ${data?.prinsipp?.prinsippvalg}`}
-                    href={`/prinsipper/${data?.prinsipp?.prinsippvalg}`}
-                  />
-                )}
                 <Heading
                   level="1"
                   size="large"

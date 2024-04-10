@@ -1,80 +1,81 @@
 import { groq } from "next-sanity";
-import { GetStaticPaths } from "next/types";
-import { Suspense, lazy, useEffect } from "react";
-import GodPraksisPage from "@/layout/god-praksis-page/GodPraksisPage";
-import { groupByTema } from "@/layout/god-praksis-page/chips/dataTransforms";
-import { groupArticles } from "@/layout/god-praksis-page/initial-load/group-articles";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy, useEffect, useMemo } from "react";
+import { Box, Page, VStack } from "@navikt/ds-react";
+import Footer from "@/layout/footer/Footer";
+import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
+import { GpChipNavigation } from "@/layout/god-praksis-page/chipnavigation/GpChipNavigation";
+import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
 import {
-  GpEntryPageProps,
-  chipsDataAllQuery,
-  chipsDataAllQueryResponse,
-  heroNavQuery,
-  heroNavQueryResponse,
-  initialTemaPageArticles,
-  initialTemaPageArticlesResponse,
-  temaQuery,
-  temaQueryResponse,
+  GpSlugQueryResponse,
+  ParsedGPArticle,
 } from "@/layout/god-praksis-page/interface";
+import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
-import { getGpTema } from "@/sanity/interface";
 import { NextPageT } from "@/types";
+import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<GpEntryPageProps>;
-
-const query = groq`
+const sanityQuery = groq`
 {
-  ${heroNavQuery},
-  ${temaQuery},
-  ${chipsDataAllQuery},
-  ${initialTemaPageArticles},
+  "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
+    _id,
+    heading,
+    publishedAt,
+    "description": ingress,
+    "undertema": undertema[]->{title, "temaTitle": tema->title},
+    "innholdstype": innholdstype->title,
+    "slug": slug.current,
+  },
+  "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
+    ...,
+    "slug": slug.current,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
+      title,
+      description
+    },
+    "image": pictogram,
+  },
+  "heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title)){
+    title,
+    "slug": slug.current,
+    "image": pictogram,
+    "imageInverted": pictogramInverted,
+  }
 }
 `;
-type QueryResponse = chipsDataAllQueryResponse &
-  heroNavQueryResponse &
-  temaQueryResponse &
-  initialTemaPageArticlesResponse;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getGpTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+type PageProps = NextPageT<GpSlugQueryResponse>;
 
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { heroNav, tema, initialInnholdstype, initialUndertema, chipsDataAll } =
-    await getClient().fetch<QueryResponse>(query, {
+export const getServerSideProps: GetServerSideProps = async (
+  ctx,
+): Promise<PageProps> => {
+  const slug = ctx.params?.slug as string;
+  const preview = !!ctx.preview;
+
+  const { heroNav, tema, articles } =
+    await getClient().fetch<GpSlugQueryResponse>(sanityQuery, {
       slug,
     });
-
-  const chipsData = groupByTema(chipsDataAll)[slug];
 
   return {
     props: {
       tema,
-      heroNav: heroNav.filter((x) => x.hasRefs),
-      initialArticles: groupArticles({ initialInnholdstype, initialUndertema }),
+      heroNav,
+      // Avoids having to format date clientside
+      articles: await Promise.all(
+        articles.map(async (a) => ({
+          ...a,
+          publishedAt: await dateStr(a.publishedAt),
+        })),
+      ),
       slug,
       preview,
-      id: "",
-      title: "",
-      chipsData: groupByTema(chipsDataAll)[slug],
+      id: tema._id ?? "",
+      title: tema.title ?? "",
     },
-    notFound: !tema || !heroNav.some((nav) => nav.slug === slug) || !chipsData,
-    revalidate: 60,
+    notFound: !tema || articles.length === 0,
   };
 };
 
@@ -84,15 +85,63 @@ const GpPage = (props: PageProps["props"]) => {
       window.location.replace(`http://aksel.nav.no/404`);
   }, []);
 
+  const articles = useMemo(
+    () =>
+      props.articles
+        .map((article) => {
+          const undertema = article.undertema.find(
+            (ut) => ut?.temaTitle === props.tema.title,
+          )?.title;
+
+          return {
+            ...article,
+            undertema: undertema ?? "",
+          } satisfies ParsedGPArticle;
+        })
+        .filter((article) => !!article.undertema)
+        /* Makes sure sections always appear in the same order */
+        .sort((a, b) => a.undertema.localeCompare(b.undertema)),
+    [props.articles, props.tema.title],
+  );
+
   return (
     <>
-      {/* TODO: Find out how we want to handle SEO for these pages */}
       <SEO
         title={props.tema?.title ?? ""}
-        /* description={page?.seo?.meta} */
-        /* image={page?.seo?.image} */
+        description={props.tema?.seo?.meta ?? props.tema.description}
+        image={props.tema?.seo?.image}
       />
-      <GodPraksisPage {...props} />
+      <Page
+        footer={<Footer />}
+        footerPosition="belowFold"
+        className="bg-surface-subtle"
+      >
+        <Header variant="subtle" />
+        <Box
+          paddingBlock="10"
+          as="main"
+          tabIndex={-1}
+          id="hovedinnhold"
+          className="animate-popUpPage focus:outline-none"
+          key={props.tema?.title}
+        >
+          <Page.Block width="xl" gutters>
+            <VStack gap="10">
+              <TemaHero tema={props.tema} heroNav={props.heroNav} />
+              <Box paddingInline={{ xs: "4", lg: "10" }}>
+                <GpChipNavigation articles={articles} />
+
+                <VStack gap="12" className="mt-10">
+                  <ArticleSections
+                    articles={articles}
+                    undertemaList={props.tema.undertema}
+                  />
+                </VStack>
+              </Box>
+            </VStack>
+          </Page.Block>
+        </Box>
+      </Page>
     </>
   );
 };
@@ -105,32 +154,11 @@ const Wrapper = (props: any) => {
       <Suspense fallback={<GpPage {...props} />}>
         <WithPreview
           comp={GpPage}
-          query={query}
+          query={sanityQuery}
           props={props}
           params={{
             slug: props?.slug,
           }}
-          resolvers={[
-            {
-              key: "heroNav",
-              dataKeys: ["heroNav"],
-              cb: (v) => v[0]?.filter((x) => x.hasRefs),
-            },
-            {
-              key: "initialArticles",
-              dataKeys: ["initialInnholdstype", "initialUndertema"],
-              cb: (v) =>
-                groupArticles({
-                  initialInnholdstype: v[0],
-                  initialUndertema: v[1],
-                }),
-            },
-            {
-              key: "chipsData",
-              dataKeys: ["chipsDataAll"],
-              cb: (v) => groupByTema(v[0])[props?.slug],
-            },
-          ]}
         />
       </Suspense>
     );

@@ -1,10 +1,13 @@
 import { defineField, defineType } from "sanity";
+import SanityTabGroups from "../../../schema/documents/presets/groups";
+import BaseSEOPreset from "../../../schema/documents/presets/seo";
 import { sanitizeSlug } from "../../../schema/util";
 
 export default defineType({
   name: "gp.tema",
   title: "Tema",
   type: "document",
+  groups: SanityTabGroups,
   fields: [
     defineField({
       name: "title",
@@ -28,6 +31,7 @@ export default defineType({
       name: "description",
       type: "text",
       rows: 3,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "alias",
@@ -37,6 +41,38 @@ export default defineType({
       validation: (Rule) => Rule.unique(),
       of: [{ type: "string" }],
     }),
+    defineField({
+      title: "Pictogram",
+      name: "pictogram",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+          initialValue: "Tema-illustrasjon",
+        },
+      ],
+      validation: (Rule) => Rule.required().error("Tema må ha pictogram"),
+    }),
+    defineField({
+      title: "Pictogram invertert",
+      name: "pictogramInverted",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Attribution",
+          hidden: true,
+          initialValue: "Tema-illustrasjon",
+        },
+      ],
+      validation: (Rule) =>
+        Rule.required().error("Tema må ha et invertert pictogram"),
+    }),
+    BaseSEOPreset,
   ],
   orderings: [
     {
