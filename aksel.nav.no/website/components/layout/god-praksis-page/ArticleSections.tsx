@@ -94,39 +94,33 @@ export function ArticleSections({
       ? "div"
       : "section";
 
-  return (
-    <>
-      {sections.map(([ut, utArticles]) => {
-        return (
-          <SectionTag
-            key={ut.title}
-            aria-label={
-              ["none", "innholdstype"].includes(queryState.view)
-                ? `Undertema ${ut.title}`
-                : undefined
-            }
-          >
-            <IntroSection title={ut.title} description={ut.description} />
-            <GpCardGrid>
-              {utArticles.map((article) => (
-                <li key={article.slug}>
-                  <GpArticleCard
-                    href={`${article.slug}`.replace("god-praksis", "gp")}
-                    innholdstype={article.innholdstype}
-                    undertema={article.undertema}
-                    publishedAt={article.publishedAt}
-                    description={article.description}
-                  >
-                    {article.heading}
-                  </GpArticleCard>
-                </li>
-              ))}
-            </GpCardGrid>
-          </SectionTag>
-        );
-      })}
-    </>
-  );
+  return sections.map(([ut, utArticles]) => (
+    <SectionTag
+      key={ut.title}
+      aria-label={
+        ["none", "innholdstype"].includes(queryState.view)
+          ? `Undertema ${ut.title}`
+          : undefined
+      }
+    >
+      <IntroSection title={ut.title} description={ut.description} />
+      <GpCardGrid>
+        {utArticles.map((article) => (
+          <li key={article.slug}>
+            <GpArticleCard
+              href={`${article.slug}`.replace("god-praksis", "gp")}
+              innholdstype={article.innholdstype}
+              undertema={article.undertema}
+              publishedAt={article.publishedAt}
+              description={article.description}
+            >
+              {article.heading}
+            </GpArticleCard>
+          </li>
+        ))}
+      </GpCardGrid>
+    </SectionTag>
+  ));
 }
 
 function IntroSection({
