@@ -232,7 +232,7 @@ export const useDatepicker = (
     if (selected && required) {
       return;
     }
-    console.log(day, selected);
+
     if (day && !selected) {
       handleOpen(false);
       anchorRef?.focus();
