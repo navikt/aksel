@@ -1,5 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
+import { LinkIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import FormSummary from "./FormSummary";
@@ -98,7 +99,10 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
       <FormSummary.Heading>
         Arbeidsforhold som du har i eller utenfor EØS-området
       </FormSummary.Heading>
-      <FormSummary.Edit />
+      <FormSummary.Edit href="#">
+        <LinkIcon />
+        Jeg vil endre dette svaret
+      </FormSummary.Edit>
     </FormSummary.Header>
     <FormSummary.Answers>
       <FormSummary.Answer>
@@ -308,23 +312,23 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
     <div>
       <div>
         <h2>Default</h2>
-        <Default />
+        <Default>{null}</Default>
       </div>
       <div>
         <h2>Long Texts</h2>
-        <LongTexts />
+        <LongTexts>{null}</LongTexts>
       </div>
       <div>
         <h2>No Link</h2>
-        <NoLink />
+        <NoLink>{null}</NoLink>
       </div>
       <div>
         <h2>Realistic Usage</h2>
-        <RealisticUsage />
+        <RealisticUsage>{null}</RealisticUsage>
       </div>
       <div>
         <h2>Empty</h2>
-        <Empty />
+        <Empty>{null}</Empty>
       </div>
     </div>
   ),
