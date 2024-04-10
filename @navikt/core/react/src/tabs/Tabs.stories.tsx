@@ -2,6 +2,7 @@ import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";
+import { VStack } from "../layout/stack";
 
 export default {
   title: "ds-react/Tabs",
@@ -19,6 +20,9 @@ export default {
         type: "radio",
       },
     },
+  },
+  parameters: {
+    chromatic: { disable: true },
   },
 } satisfies Meta<typeof Tabs>;
 
@@ -281,5 +285,45 @@ export const CustomIds = {
   ),
   parameters: {
     layout: "fullscreen",
+  },
+};
+
+export const Chromatic = {
+  render: () => (
+    <VStack gap="6" align="center">
+      <div>
+        <h2>Default</h2>
+        <Default.render />
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+      <div>
+        <h2>Controlled</h2>
+        <Controlled />
+      </div>
+      <div>
+        <h2>IconPosition</h2>
+        <IconPosition />
+      </div>
+      <div>
+        <h2>Icon</h2>
+        <Icon />
+      </div>
+      <div>
+        <h2>Overflow</h2>
+        <Overflow />
+      </div>
+      <div>
+        <h2>Fill</h2>
+        <div style={{ minWidth: 600 }}>
+          <Fill.render />
+        </div>
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false, delay: 300 },
   },
 };
