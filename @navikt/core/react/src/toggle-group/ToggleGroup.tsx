@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef } from "react";
 import { Label } from "../typography";
 import { useId } from "../util";
 import {
@@ -46,7 +46,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       label,
       value,
       defaultValue,
-      "aria-describedby": desc,
+      "aria-describedby": userDescribedby,
       variant = "action",
       fill = false,
       ...rest
@@ -61,13 +61,13 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       onChange,
     });
 
-    const context = useMemo(
-      () => ({
-        ...toggleGroupContext,
-        size,
-      }),
-      [size, toggleGroupContext],
-    );
+    /**
+     * ToggleGroupProvider handles memoization.
+     */
+    const context = {
+      ...toggleGroupContext,
+      size,
+    };
 
     const labelId = useId();
 
@@ -75,10 +75,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup without value or defaultvalue is not allowed");
     }
 
-    const describeBy = cl({
-      [desc ?? ""]: !!desc,
-      [labelId ?? ""]: !!label,
-    });
+    const describeBy = cl(userDescribedby, !!label && labelId);
 
     if (!value && !defaultValue) {
       console.error("ToggleGroup needs either a value or defaultValue");
@@ -109,7 +106,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
                 `navds-toggle-group--${size}`,
                 `navds-toggle-group--${variant}`,
               )}
-              {...(describeBy && { "aria-describedby": describeBy })}
+              aria-describedby={describeBy || undefined}
               role="radiogroup"
             >
               {children}
