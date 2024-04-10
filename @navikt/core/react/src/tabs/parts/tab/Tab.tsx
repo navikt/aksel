@@ -6,7 +6,7 @@ import { useTabsContext } from "../../Tabs.context";
 import { useTab } from "./useTab";
 
 export interface TabProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   /**
    * Tab label.
    */
