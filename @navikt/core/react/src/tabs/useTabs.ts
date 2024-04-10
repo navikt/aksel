@@ -20,7 +20,6 @@ export function useTabs({
   /**
    * Sync focused `value` with controlled `selectedValue`
    */
-
   if (value != null) {
     setFocusedValue(value);
   }
