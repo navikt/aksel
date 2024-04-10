@@ -363,16 +363,9 @@ export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
 
       <FormSummary.Answer>
         <FormSummary.Label>Favoritt slagord?</FormSummary.Label>
-        <FormSummary.Value>
-          {`
-          I'll be back.
-          `}
-          <br />
-          Hasta la vista, baby.
-          <br />
-          {`Say hello to my little friend.
-        `}
-        </FormSummary.Value>
+        <FormSummary.Value>{`I'll be back.`}</FormSummary.Value>
+        <FormSummary.Value>Hasta la vista, baby.</FormSummary.Value>
+        <FormSummary.Value>Say hello to my little friend.</FormSummary.Value>
       </FormSummary.Answer>
     </FormSummary.Answers>
   </FormSummary>
