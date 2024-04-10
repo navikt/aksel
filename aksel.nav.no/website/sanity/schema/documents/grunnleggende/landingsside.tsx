@@ -12,7 +12,6 @@ const views = () => {
         title: `Ingress ${kat.title}`,
         name: `ingress_${kat.value}`,
         type: "text",
-        // @ts-expect-error ReturnType<typeof defineField>[] is not narrow enough to understand schem-type "text"
         rows: 2,
       }),
     );

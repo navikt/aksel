@@ -9,7 +9,7 @@ type PropTableProps = {
 
 const PropTable = ({ komponent }: PropTableProps) => {
   return (
-    <div>
+    <div lang="en">
       <Heading
         size="xsmall"
         level="3"
@@ -19,14 +19,14 @@ const PropTable = ({ komponent }: PropTableProps) => {
         {komponent?.title ? komponent.title : "Props"}
       </Heading>
 
-      <div className="toc-ignore relative mb-8 break-all">
+      <div className="toc-ignore relative mb-8">
         {komponent?.propref?.proplist?.length === 0 && (
           <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
             <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
           </div>
         )}
 
-        <dl lang="en">
+        <dl>
           {komponent?.overridable && (
             <div className="border border-t-0 border-gray-300 p-2">
               <dt className="px-2 py-2">

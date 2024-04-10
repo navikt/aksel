@@ -135,6 +135,14 @@ export const IconPage = ({ name }: { name: string }) => {
                     onChange={setQuery}
                     value={query}
                     clearButton={false}
+                    onKeyDown={(e) => {
+                      /* Avoids closing icon-sidebar when clearing Search */
+                      if (e.key === "Escape") {
+                        if (e.currentTarget.value) {
+                          e.stopPropagation();
+                        }
+                      }
+                    }}
                   />
                 </form>
               </div>

@@ -1,16 +1,22 @@
 import { useRouter } from "next/router";
 
-export const useAuth = () => {
-  const router = useRouter();
+export const useAuth = (addRedirect?: boolean) => {
+  const { push, asPath } = useRouter();
 
   const login = async () => {
-    router.push(`/oauth2/login?redirect=${router.asPath}`, undefined, {
-      shallow: true,
-    });
+    push(
+      `/oauth2/login?redirect=${asPath.split("#")[0]}${
+        addRedirect ? encodeURIComponent("#scrollToFeedback") : ""
+      }`,
+      undefined,
+      {
+        shallow: true,
+      },
+    );
   };
 
   const logout = async () => {
-    router.push(`/oauth2/logout?redirect=${router.asPath}`, undefined, {
+    push(`/oauth2/logout?redirect=${asPath}`, undefined, {
       shallow: true,
     });
   };

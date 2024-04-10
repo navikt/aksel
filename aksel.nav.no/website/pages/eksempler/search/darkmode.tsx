@@ -3,14 +3,14 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form data-theme="dark">
+    <form data-theme="dark" role="search">
       <Search label="Søk alle NAV sine sider" variant="secondary" />
     </form>
   );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "full" });
+export default withDsExample(Example, { variant: "inverted" });
 
 export const args = {
   index: 7,

@@ -1,5 +1,6 @@
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
+import { useControllableState } from "../util/hooks";
 import { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
   ExpansionCardContentProps,
@@ -116,24 +117,24 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
     },
     ref,
   ) => {
-    const [_open, _setOpen] = useState(defaultOpen);
-
     const shouldFade = useRef<boolean>(!(Boolean(open) || defaultOpen));
 
-    const handleOpen = () => {
-      if (open === undefined) {
-        const newOpen = !_open;
-        _setOpen(newOpen);
-        onToggle?.(newOpen);
-      } else {
-        onToggle?.(!open);
-      }
-      shouldFade.current = true;
-    };
+    const [_open, _setOpen] = useControllableState({
+      value: open,
+      onChange: (newValue) => {
+        onToggle?.(newValue);
+        shouldFade.current = true;
+      },
+      defaultValue: defaultOpen,
+    });
 
     return (
       <ExpansionCardContext.Provider
-        value={{ open: open ?? _open, toggleOpen: handleOpen, size }}
+        value={{
+          open: open ?? _open,
+          toggleOpen: () => _setOpen((x) => !x),
+          size,
+        }}
       >
         <section
           {...rest}

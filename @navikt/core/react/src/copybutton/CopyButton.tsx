@@ -33,6 +33,7 @@ export interface CopyButtonProps
   /**
    * Text shown when button is clicked.
    * Only set if used with `text`-prop.
+   * @default "Kopiert!"
    */
   activeText?: string;
   /**
