@@ -238,7 +238,7 @@ export const useDatepicker = (
       anchorRef?.focus();
     }
 
-    if (!required && selected) {
+    if (selected) {
       updateDate(undefined);
       setInputValue("");
       updateValidation({ isValidDate: false, isEmpty: true });
