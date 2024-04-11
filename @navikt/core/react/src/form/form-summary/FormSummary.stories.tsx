@@ -347,7 +347,7 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
 export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>Personalia</FormSummary.Heading>
+      <FormSummary.Heading level="1">Personalia</FormSummary.Heading>
       <FormSummary.Edit href="#" />
     </FormSummary.Header>
 
