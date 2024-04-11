@@ -2,8 +2,59 @@ import { StructureBuilder } from "sanity/structure";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
 export const GodPraksisPanes = (S: StructureBuilder) => [
-  S.documentTypeListItem("gp.tema").title("Tema"),
+  S.listItem({
+    id: "my_gp_published",
+    title: "Mine publiserte artikler",
+    schemaType: "aksel_artikkel",
+    child: (_, { structureContext }) => {
+      const mail = structureContext.currentUser?.email;
 
+      return S.documentTypeList("aksel_artikkel")
+        .title("Artikler")
+        .filter(
+          `_type == $type && !(_id in path("drafts.**")) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
+        )
+        .apiVersion(SANITY_API_VERSION)
+        .params({ type: "aksel_artikkel", mail })
+        .initialValueTemplates([]);
+    },
+  }),
+  S.listItem({
+    id: "my_gp_drafts",
+    title: "Mine drafts",
+    schemaType: "aksel_artikkel",
+    child: (_, { structureContext }) => {
+      const mail = structureContext.currentUser?.email;
+
+      return S.documentTypeList("aksel_artikkel")
+        .title("Artikler")
+        .filter(
+          `_type == $type && _id in path("drafts.**") && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
+        )
+        .apiVersion(SANITY_API_VERSION)
+        .params({ type: "aksel_artikkel", mail })
+        .initialValueTemplates([]);
+    },
+  }),
+  S.listItem({
+    id: "my_gp_outdated",
+    title: "Mine artikler som trenger oppdatering",
+    schemaType: "aksel_artikkel",
+    child: (_, { structureContext }) => {
+      const mail = structureContext.currentUser?.email;
+
+      return S.documentTypeList("aksel_artikkel")
+        .title("Artikler")
+        .filter(
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
+        )
+        .apiVersion(SANITY_API_VERSION)
+        .params({ type: "aksel_artikkel", mail })
+        .initialValueTemplates([]);
+    },
+  }),
+  S.divider(),
+  S.documentTypeListItem("gp.tema").title("Tema"),
   S.listItem({
     id: "tema_view",
     title: "Undertema",
@@ -102,6 +153,23 @@ export const GodPraksisPanes = (S: StructureBuilder) => [
         .filter("_type == $type && !defined(innholdstype)")
         .apiVersion(SANITY_API_VERSION)
         .params({ type: "aksel_artikkel" })
+        .initialValueTemplates([]),
+  }),
+  S.listItem({
+    id: "article_gp_outdated_tema",
+    title: "Trenger oppdatering",
+    schemaType: "aksel_artikkel",
+    child: () =>
+      S.documentTypeList("gp.tema")
+        .child((id) => {
+          return S.documentTypeList("aksel_artikkel")
+            .title("Artikler")
+            .filter(
+              `_type == $type && $id in undertema[]->tema._ref && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365)`,
+            )
+            .apiVersion(SANITY_API_VERSION)
+            .params({ type: "aksel_artikkel", id });
+        })
         .initialValueTemplates([]),
   }),
   S.divider(),
