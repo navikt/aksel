@@ -1,14 +1,15 @@
 import { differenceInMonths } from "date-fns";
-import { GetStaticPaths } from "next/types";
+import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
+import { UserStateT } from "@/auth/auth.types";
+import { getAuthUserState } from "@/auth/getUserState";
 import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
 import { GpTemaLink } from "@/layout/god-praksis-page/chipnavigation/GpTemaLink";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getDocuments } from "@/sanity/interface";
 import {
   contributorsAll,
   contributorsSingle,
@@ -23,6 +24,7 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
+import { Feedback } from "@/web/Feedback/Feedback";
 import OutdatedAlert from "@/web/OutdatedAlert";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
@@ -39,6 +41,7 @@ type PageProps = NextPageT<{
   verifiedDate: string;
   outdated: boolean;
   toc: TableOfContentsT;
+  userState: UserStateT;
 }>;
 
 const query = `{
@@ -74,26 +77,15 @@ const query = `{
   }
 }`;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getDocuments("aksel_artikkel").then((paths) =>
-      paths.map(({ slug }) => ({
-        params: {
-          slug: slug.replace("god-praksis/artikler/", ""),
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<PageProps> => {
+  const userState = await getAuthUserState(context.req.headers);
 
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
+  const isPreview = context.preview ?? false;
+
+  const slug = context.params?.slug as string;
+
   const { page } = await getClient().fetch(query, {
     slug: `god-praksis/artikler/${slug}`,
   });
@@ -105,7 +97,7 @@ export const getStaticProps = async ({
     props: {
       page,
       slug,
-      preview,
+      preview: isPreview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
       verifiedDate: await dateStr(verifiedDate),
@@ -115,9 +107,9 @@ export const getStaticProps = async ({
         content: page?.content,
         type: "aksel_artikkel",
       }),
+      userState,
     },
-    notFound: !page && !preview,
-    revalidate: 60,
+    notFound: !page && !isPreview,
   };
 };
 
@@ -127,6 +119,7 @@ const Page = ({
   verifiedDate,
   outdated,
   toc,
+  userState,
 }: PageProps["props"]) => {
   if (!data) {
     return <NotFound />;
@@ -275,6 +268,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
+                  {userState && <Feedback userState={userState} />}
                 </div>
               </div>
             </div>
