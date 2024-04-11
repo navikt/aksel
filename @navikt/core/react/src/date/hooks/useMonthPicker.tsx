@@ -225,13 +225,17 @@ export const useMonthpicker = (
 
   /* Only allow de-selecting if not required */
   const handleMonthClick = (month?: Date) => {
+    if (!month && required) {
+      return;
+    }
+
     if (month) {
       handleOpen(false);
       setYear(month);
       anchorRef?.focus();
     }
 
-    if (!required && !month) {
+    if (!month) {
       updateMonth(undefined);
       updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");
