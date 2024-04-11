@@ -17,7 +17,6 @@ import {
 } from "@/types";
 import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
-import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -165,7 +164,6 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
           </div>
         </div>
         <div className="relative mt-16">
-          <AkselCubeStatic className="z-0 text-amber-300 opacity-20" />
           <div className="relative z-10 mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

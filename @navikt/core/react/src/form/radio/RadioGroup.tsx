@@ -18,7 +18,7 @@ export const RadioGroupContext =
 export interface RadioGroupProps
   extends Omit<
     FieldsetProps,
-    "onChange" | "errorPropagation" | "defaultValue"
+    "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
   > {
   /**
    * Collection of `<Radio />`-elements

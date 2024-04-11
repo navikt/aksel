@@ -89,8 +89,8 @@ interface FileUploadComponent
    * ```jsx
    * <FileUpload.Item file={file} status="uploading" />
    * <FileUpload.Item file={file} status="downloading" />
-   * <FileUpload.Item file={file} itemAction="retry" onRetry={...} />
-   * <FileUpload.Item file={file} itemAction="delete" onDelete={...} />
+   * <FileUpload.Item file={file} button={{ action:"retry", onClick:... }} />
+   * <FileUpload.Item file={file} button={{ action:"delete", onClick:... }} />
    * ```
    */
   Item: typeof Item;

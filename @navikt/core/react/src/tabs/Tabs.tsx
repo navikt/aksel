@@ -1,48 +1,15 @@
-import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
-import { OverridableComponent } from "../util/types";
-import Tab, { TabProps } from "./Tab";
-import TabList, { TabListProps } from "./TabList";
-import TabPanel, { TabPanelProps } from "./TabPanel";
-import { TabsContext } from "./context";
-
-export interface TabsProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
-  children: React.ReactNode;
-  /**
-   * Changes padding and font-size.
-   * @default "medium"
-   */
-  size?: "medium" | "small";
-  /**
-   * onChange callback for selected Tab.
-   */
-  onChange?: (value: string) => void;
-  /**
-   * Controlled selected value.
-   */
-  value?: string;
-  /**
-   * If not controlled, a default-value needs to be set.
-   */
-  defaultValue?: string;
-  /**
-   * Automatically activates tab on focus/navigation.
-   * @default false
-   */
-  selectionFollowsFocus?: boolean;
-  /**
-   * Loops back to start when navigating past last item.
-   * @default false
-   */
-  loop?: boolean;
-  /**
-   * Icon position in Tab.
-   * @default "left"
-   */
-  iconPosition?: "left" | "top";
-}
+import React, { forwardRef } from "react";
+import {
+  TabsDescendantsProvider,
+  TabsProvider,
+  useTabsDescendants,
+} from "./Tabs.context";
+import { TabsProps } from "./Tabs.types";
+import Tab from "./parts/tab/Tab";
+import TabList from "./parts/tablist/TabList";
+import TabPanel from "./parts/tabpanel/TabPanel";
+import { useTabs } from "./useTabs";
 
 interface TabsComponent
   extends React.ForwardRefExoticComponent<
@@ -52,19 +19,15 @@ interface TabsComponent
    * @see 🏷️ {@link TabProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Tab: OverridableComponent<TabProps, HTMLButtonElement>;
+  Tab: typeof Tab;
   /**
    * @see 🏷️ {@link TabListProps}
    */
-  List: React.ForwardRefExoticComponent<
-    TabListProps & React.RefAttributes<HTMLDivElement>
-  >;
+  List: typeof TabList;
   /**
    * @see 🏷️ {@link TabPanelProps}
    */
-  Panel: React.ForwardRefExoticComponent<
-    TabPanelProps & React.RefAttributes<HTMLDivElement>
-  >;
+  Panel: typeof TabPanel;
 }
 
 /**
@@ -98,33 +61,48 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     {
       className,
       children,
-      onChange,
       size = "medium",
+      defaultValue = "",
+      value,
+      onChange,
+      id,
       selectionFollowsFocus = false,
-      loop = false,
+      loop = true,
       iconPosition = "left",
+      fill = false,
       ...rest
     },
     ref,
   ) => {
+    const descendants = useTabsDescendants();
+
+    const tabsContext = useTabs({ defaultValue, value, onChange, id });
+
+    /**
+     * TabsProvider handles memoization of context values, so we can safely skip it here.
+     */
+    const context = {
+      ...tabsContext,
+      selectionFollowsFocus,
+      loop,
+      size,
+      iconPosition,
+      fill,
+    };
+
     return (
-      <RadixTabs.Root
-        {...rest}
-        ref={ref}
-        className={cl("navds-tabs", className, `navds-tabs--${size}`)}
-        activationMode={selectionFollowsFocus ? "automatic" : "manual"}
-        onValueChange={onChange}
-      >
-        <TabsContext.Provider
-          value={{
-            size,
-            loop,
-            iconPosition,
-          }}
-        >
-          {children}
-        </TabsContext.Provider>
-      </RadixTabs.Root>
+      <TabsDescendantsProvider value={descendants}>
+        <TabsProvider {...context}>
+          <div
+            ref={ref}
+            {...rest}
+            id={id}
+            className={cl("navds-tabs", className, `navds-tabs--${size}`)}
+          >
+            {children}
+          </div>
+        </TabsProvider>
+      </TabsDescendantsProvider>
     );
   },
 ) as TabsComponent;

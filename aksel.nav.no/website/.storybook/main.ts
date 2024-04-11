@@ -12,10 +12,10 @@ function getAbsolutePath(value: string): any {
 }
 
 const config: StorybookConfig = {
-  storyIndexers: (indexers) => {
+  experimental_indexers: (indexers) => {
     const csfIndexer = async (fileName: string, opts) => {
       const code = readFileSync(fileName, "utf-8").toString();
-      return loadCsf(code, { ...opts, fileName }).parse();
+      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
     const exampleIndexer = async (fileName: string, opts) => {
@@ -32,18 +32,18 @@ const config: StorybookConfig = {
         .split("pages/eksempler/")[1]
         .replace(".tsx", "")}"  };\n`;
 
-      return loadCsf(code, { ...opts, fileName }).parse();
+      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
     return [
       ...(indexers || []),
       {
         test: /(stories|story)\.[tj]sx?$/,
-        indexer: csfIndexer,
+        createIndex: csfIndexer,
       },
       {
         test: /pages\/eksempler\/|(".+")|(.+.tsx)$/,
-        indexer: exampleIndexer,
+        createIndex: exampleIndexer,
       },
     ];
   },
@@ -98,6 +98,14 @@ const config: StorybookConfig = {
     sbConfig.resolve.alias["@/layout"] = resolve(
       __dirname,
       "../components/layout/",
+    );
+    sbConfig.resolve.alias["@/auth"] = resolve(
+      __dirname,
+      "../components/auth/",
+    );
+    sbConfig.resolve.alias["@/slack"] = resolve(
+      __dirname,
+      "../components/utils/slack/index.ts",
     );
     sbConfig.resolve.alias["@/assets"] = resolve(
       __dirname,

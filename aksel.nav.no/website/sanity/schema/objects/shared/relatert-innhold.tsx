@@ -32,10 +32,7 @@ export const RelatertInnhold = defineType({
               title: "Tittel",
               name: "title",
               type: "string",
-              validation: (Rule) =>
-                Rule.required()
-                  .max(40)
-                  .error("Tittelen kan være på maks 40 tegn"),
+              validation: (Rule) => Rule.required(),
             }),
             defineField({
               title: "Intern side i Sanity",

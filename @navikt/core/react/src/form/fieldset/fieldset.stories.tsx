@@ -1,5 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { VStack } from "../../layout/stack";
 import TextField from "../textfield/TextField";
 import { Fieldset } from "./index";
 
@@ -26,7 +27,12 @@ export default {
       type: "boolean",
     },
   },
-} as Meta;
+  parameters: {
+    chromatic: { disable: true },
+  },
+} satisfies Meta<typeof Fieldset>;
+
+type Story = StoryObj<typeof Fieldset>;
 
 const content = (
   <>
@@ -35,88 +41,117 @@ const content = (
   </>
 );
 
-export const Default = {
-  render: (props) => {
-    return (
-      <Fieldset legend="Mollit eiusmod" {...props}>
-        {content}
-      </Fieldset>
-    );
-  },
+const contentWithError = (
+  <>
+    <TextField label="Textfield label" hideLabel error="Må være fylt ut" />
+    <TextField label="Textfield label" hideLabel />
+  </>
+);
 
+export const Default: Story = {
   args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
     errorPropagation: true,
+    children: content,
   },
 };
 
-export const Small = () => (
-  <Fieldset
-    size="small"
-    legend="Mollit eiusmod"
-    description="Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure."
-  >
-    {content}
-  </Fieldset>
-);
+export const Small: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    errorPropagation: true,
+    children: content,
+    size: "small",
+  },
+};
 
-export const Description = () => (
-  <Fieldset
-    legend="Mollit eiusmod"
-    description="Esse cupidatat reprehenderit est culpa consectetur sit dolor esse."
-  >
-    <TextField
-      label="Textfield label"
-      description="Amet quis cillum incididunt "
-    />
-    <TextField
-      label="Textfield label"
-      description="Enim et occaecat voluptate labore sit do exercitation laborum non "
-    />
-  </Fieldset>
-);
+export const ErrorPropagation: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    errorPropagation: false,
+    children: contentWithError,
+  },
+};
 
-export const ErrorPropagation = () => (
-  <Fieldset
-    legend="Mollit eiusmod"
-    error="Fieldsett error"
-    errorPropagation={false}
-  >
-    <TextField label="Textfield label" hideLabel error="Må være fylt ut" />
-    <TextField label="Textfield label" hideLabel />
-  </Fieldset>
-);
+export const Error: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    children: content,
+    error: "Laborum officia nisi aliqua esse minim in amet.",
+  },
+};
 
-export const Error = () => (
-  <div className="colgap">
-    <Fieldset
-      legend="Mollit eiusmod"
-      error="Laborum officia nisi aliqua esse minim in amet."
-    >
-      {content}
-    </Fieldset>
-    <Fieldset
-      size="small"
-      legend="Mollit eiusmod"
-      error="Laborum officia nisi aliqua esse minim in amet."
-    >
-      {content}
-    </Fieldset>
-  </div>
-);
+export const Disabled: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    children: content,
+    disabled: true,
+  },
+};
 
-export const Disabled = () => (
-  <div className="colgap">
-    <Fieldset legend="Mollit eiusmod" disabled>
-      {content}
-    </Fieldset>
-    <Fieldset size="small" legend="Mollit eiusmod" disabled>
-      {content}
-    </Fieldset>
-  </div>
-);
+export const HideLegend: Story = {
+  args: {
+    legend: "Mollit eiusmod",
+    description:
+      "Do ullamco amet mollit labore tempor minim cupidatat dolore voluptate velit irure.",
+    children: content,
+    hideLegend: true,
+  },
+};
 
-export const HideLegend = () => (
-  <Fieldset legend="Mollit eiusmod" hideLegend>
-    {content}
-  </Fieldset>
-);
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <VStack gap="4">
+        <div>
+          <h2>Default</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...Default.args} />
+        </div>
+        <div>
+          <h2>Small</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...Small.args} />
+        </div>
+        <div>
+          <h2>ErrorPropagation</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...ErrorPropagation.args} />
+        </div>
+        <div>
+          <h2>Error</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...Error.args} />
+        </div>
+        <div>
+          <h2>Error small</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...Error.args} size="small" />
+        </div>
+        <div>
+          <h2>Disabled</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...Disabled.args} />
+        </div>
+        <div>
+          <h2>HideLegend</h2>
+          {/* @ts-expect-error Args are Partial here */}
+          <Fieldset {...HideLegend.args} />
+        </div>
+      </VStack>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

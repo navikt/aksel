@@ -7,19 +7,20 @@ import React, {
 } from "react";
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/inputContext";
+import { isInList } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";
-import { ComboboxProps, MaxSelected } from "../types";
+import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
 
 type SelectedOptionsContextType = {
-  addSelectedOption: (option: string) => void;
+  addSelectedOption: (option: ComboboxOption) => void;
   isMultiSelect?: boolean;
-  removeSelectedOption: (option: string) => void;
-  prevSelectedOptions?: string[];
-  selectedOptions: string[];
+  removeSelectedOption: (option: ComboboxOption) => void;
+  prevSelectedOptions?: ComboboxOption[];
+  selectedOptions: ComboboxOption[];
   maxSelected?: MaxSelected & { isLimitReached: boolean };
   setSelectedOptions: (any) => void;
   toggleOption: (
-    option: string,
+    option: ComboboxOption,
     event: React.KeyboardEvent | React.PointerEvent,
   ) => void;
 };
@@ -35,13 +36,8 @@ export const SelectedOptionsProvider = ({
   children: any;
   value: Pick<
     ComboboxProps,
-    | "allowNewValues"
-    | "isMultiSelect"
-    | "options"
-    | "selectedOptions"
-    | "onToggleSelected"
-    | "maxSelected"
-  >;
+    "allowNewValues" | "isMultiSelect" | "onToggleSelected" | "maxSelected"
+  > & { options: ComboboxOption[]; selectedOptions?: ComboboxOption[] };
 }) => {
   const { clearInput, focusInput } = useInputContext();
   const {
@@ -58,7 +54,9 @@ export const SelectedOptionsProvider = ({
     options,
     maxSelected,
   } = value;
-  const [internalSelectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [internalSelectedOptions, setSelectedOptions] = useState<
+    ComboboxOption[]
+  >([]);
   const selectedOptions = useMemo(
     () =>
       externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
@@ -66,10 +64,8 @@ export const SelectedOptionsProvider = ({
   );
 
   const addSelectedOption = useCallback(
-    (option: string) => {
-      const isCustomOption = !options
-        .map((opt) => opt.toLowerCase())
-        .includes(option?.toLowerCase?.());
+    (option: ComboboxOption) => {
+      const isCustomOption = !isInList(option, options);
       if (isCustomOption) {
         allowNewValues && addCustomOption(option);
         !isMultiSelect && setSelectedOptions([]);
@@ -82,7 +78,7 @@ export const SelectedOptionsProvider = ({
         setSelectedOptions([option]);
         setCustomOptions([]);
       }
-      onToggleSelected?.(option, true, isCustomOption);
+      onToggleSelected?.(option.value, true, isCustomOption);
     },
     [
       addCustomOption,
@@ -95,8 +91,8 @@ export const SelectedOptionsProvider = ({
   );
 
   const removeSelectedOption = useCallback(
-    (option: string) => {
-      const isCustomOption = customOptions.includes(option);
+    (option: ComboboxOption) => {
+      const isCustomOption = isInList(option, customOptions);
       if (isCustomOption) {
         removeCustomOption(option);
       } else {
@@ -106,14 +102,17 @@ export const SelectedOptionsProvider = ({
           ),
         );
       }
-      onToggleSelected?.(option, false, isCustomOption);
+      onToggleSelected?.(option.value, false, isCustomOption);
     },
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
   const toggleOption = useCallback(
-    (option: string, event: React.KeyboardEvent | React.PointerEvent) => {
-      if (selectedOptions.includes(option)) {
+    (
+      option: ComboboxOption,
+      event: React.KeyboardEvent | React.PointerEvent,
+    ) => {
+      if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
       } else {
         addSelectedOption(option);
@@ -130,7 +129,7 @@ export const SelectedOptionsProvider = ({
     ],
   );
 
-  const prevSelectedOptions = usePrevious<string[]>(selectedOptions);
+  const prevSelectedOptions = usePrevious<ComboboxOption[]>(selectedOptions);
 
   const isLimitReached =
     !!maxSelected?.limit && selectedOptions.length >= maxSelected.limit;

@@ -53,7 +53,7 @@ export interface SwitchProps
    */
   position?: "left" | "right";
   /**
-   * Adds a description to extend labling of Switch.
+   * Adds a description to extend labeling of Switch.
    */
   description?: string;
 }
@@ -85,13 +85,15 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       ...rest
     } = props;
 
-    const [checked, setChecked] = useState(
+    const [_checked, setChecked] = useState(
       defaultChecked ?? checkedProp ?? false,
     );
 
     useEffect(() => {
       checkedProp !== undefined && setChecked(checkedProp);
     }, [checkedProp]);
+
+    const checked = checkedProp ?? _checked;
 
     return (
       <div
