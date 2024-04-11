@@ -447,7 +447,6 @@ export const Required = {
     const { datepickerProps } = useDatepicker({
       locale: "nb",
       defaultSelected: new Date(),
-      disabled: [new Date("Apr 1 2022")],
       required: true,
     });
 
