@@ -23,6 +23,8 @@ const DayButton = (props: DayProps) => {
       role={undefined}
       aria-label={dateTime}
       aria-hidden={dayRender.activeModifiers.outside}
+      aria-selected={undefined}
+      aria-pressed={!!dayRender.activeModifiers.selected}
     />
   );
 };
