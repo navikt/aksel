@@ -128,7 +128,6 @@ export const Required = {
     const { monthpickerProps } = useMonthpicker({
       locale: "nb",
       defaultSelected: new Date(),
-      disabled: [new Date("Apr 1 2022")],
       required: true,
     });
 
