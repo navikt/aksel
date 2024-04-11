@@ -112,7 +112,6 @@ export {
   useId,
 } from "./util";
 
-export { FormSummary, type FormSummaryProps } from "./form-summary";
 export {
   Checkbox,
   CheckboxGroup,
@@ -140,6 +139,7 @@ export {
   type FileUploadTriggerProps,
   type FilesPartitioned,
 } from "./form/file-upload";
+export { FormSummary, type FormSummaryProps } from "./form/form-summary";
 export {
   Radio,
   RadioGroup,

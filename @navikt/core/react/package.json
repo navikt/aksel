@@ -551,12 +551,12 @@
     },
     "./FormSummary": {
       "import": {
-        "types": "./esm/form-summary/index.d.ts",
-        "default": "./esm/form-summary/index.js"
+        "types": "./esm/form/form-summary/index.d.ts",
+        "default": "./esm/form/form-summary/index.js"
       },
       "require": {
-        "types": "./cjs/form-summary/index.d.ts",
-        "default": "./cjs/form-summary/index.js"
+        "types": "./cjs/form/form-summary/index.d.ts",
+        "default": "./cjs/form/form-summary/index.js"
       }
     },
     "./package.json": "./package.json"

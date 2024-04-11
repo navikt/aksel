@@ -1,8 +1,8 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import { LinkIcon } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
-import { Link } from "../link";
+import { VStack } from "../../layout/stack";
+import { Link } from "../../link";
 import FormSummary from "./FormSummary";
 
 const meta: Meta<typeof FormSummary> = {

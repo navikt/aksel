@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { Heading, HeadingProps } from "../typography";
-import { OverridableComponent } from "../util/types";
+import { Heading, HeadingProps } from "../../typography";
+import { OverridableComponent } from "../../util/types";
 
 export interface FormSummaryHeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement> {

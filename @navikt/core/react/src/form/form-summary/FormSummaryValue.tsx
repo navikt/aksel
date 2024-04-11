@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong } from "../typography";
+import { BodyLong } from "../../typography";
 
 export interface FormSummaryValueProps
   extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Label } from "../typography";
+import { Label } from "../../typography";
 
 export interface FormSummaryLabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement> {
