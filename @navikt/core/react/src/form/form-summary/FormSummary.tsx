@@ -86,13 +86,9 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
 export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
   ({ children, className, ...rest }, ref) => {
     return (
-      <section
-        ref={ref}
-        {...rest}
-        className={cl("navds-form-summary", className)}
-      >
+      <div ref={ref} {...rest} className={cl("navds-form-summary", className)}>
         {children}
-      </section>
+      </div>
     );
   },
 ) as FormSummaryComponent;
