@@ -445,8 +445,7 @@ export const WeekDayClick = () => {
 export const Required = {
   render: () => {
     const { datepickerProps } = useDatepicker({
-      locale: "nb",
-      defaultSelected: new Date(),
+      defaultSelected: new Date("Apr 10 2024"),
       required: true,
     });
 

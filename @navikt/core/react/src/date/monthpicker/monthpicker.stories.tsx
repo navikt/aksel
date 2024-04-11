@@ -126,8 +126,7 @@ export const UseMonthpickerFormat = () => {
 export const Required = {
   render: () => {
     const { monthpickerProps } = useMonthpicker({
-      locale: "nb",
-      defaultSelected: new Date(),
+      defaultSelected: new Date("Apr 10 2024"),
       required: true,
     });
 
