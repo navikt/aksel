@@ -1,7 +1,4 @@
 import { SchemaPluginOptions } from "sanity";
-import innholdsType from "../plugins/god-praksis-taxonomy/documents/innholdstype";
-import tema from "../plugins/god-praksis-taxonomy/documents/tema";
-import undertema from "../plugins/god-praksis-taxonomy/documents/undertema";
 import * as document from "./documents";
 import * as object from "./objects";
 import { WorkspaceT } from "./util";
@@ -13,9 +10,9 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     /**
      * Ny struktur for god praksis
      */
-    tema,
-    undertema,
-    innholdsType,
+    document.Tema,
+    document.Undertema,
+    document.Innholdstype,
 
     /* Documents */
     document.Editors,
@@ -42,7 +39,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     document.TemplatesArtikkel,
 
     /* God-praksis */
-    document.Tema,
+    document.TemaOld,
     document.godPraksisArtikkel(workspace),
     document.GodPraksisLandingSide,
 
@@ -93,5 +90,36 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     /* Prinsipper */
     object.HeroBilde,
     object.InnholdsKort,
+  ],
+  templates: [
+    {
+      id: "gp.tema.undertema.by.tema",
+      title: "Undertema",
+      schemaType: "gp.tema.undertema",
+      parameters: [{ name: "id", type: "string" }],
+      value: async (params) => {
+        return {
+          tema: { _type: "reference", _ref: params.id },
+        };
+      },
+    },
+    {
+      id: "gp.artikkel.by.undertema",
+      title: "God praksis aritkkel med undertema",
+      schemaType: "gp.artikkel",
+      parameters: [{ name: "undertema_id", type: "string" }],
+      value: (params) => ({
+        undertema: [{ _type: "reference", _ref: params.undertema_id }],
+      }),
+    },
+    {
+      id: "gp.artikkel.by.innholdstype",
+      title: "God praksis aritkkel med innholdstype",
+      schemaType: "gp.artikkel",
+      parameters: [{ name: "id", type: "string" }],
+      value: (params) => ({
+        innholdstype: { _type: "reference", _ref: params.id },
+      }),
+    },
   ],
 });

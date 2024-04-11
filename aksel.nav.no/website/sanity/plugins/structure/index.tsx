@@ -22,9 +22,9 @@ import {
   prinsippKategorier,
   templatesKategorier,
 } from "../../config";
-import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
 import { Iframe } from "./IFrame";
 import { GodPraksisPanes } from "./god-praksis";
+import { GodPraksisPanesOld } from "./god-praksis.old";
 import { Panes } from "./panes";
 
 const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
@@ -59,7 +59,9 @@ const filtered = [
   "publication_flow",
   "aksel_feedback",
   "article_views",
-  ...GP_DOCUMENT_NAMES,
+  "gp.tema",
+  "gp.tema.undertema",
+  "gp.innholdstype",
 ];
 
 export const structure: StructureResolver = async (
@@ -118,6 +120,21 @@ export const structure: StructureResolver = async (
         : []),
       ...(outdated.length > 0 || !!editor ? [S.divider()] : []),
       S.listItem()
+        .title("God Praksis (ny)")
+        .icon(PencilBoardIcon)
+        .child(
+          S.list()
+            .title("God Praksis")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`godpraksis_landingsside`)
+                .id(`godpraksis_landingsside_id1`),
+              S.divider(),
+              ...GodPraksisPanes(S),
+            ]),
+        ),
+      S.listItem()
         .title("God Praksis")
         .icon(PencilBoardIcon)
         .child(
@@ -129,7 +146,7 @@ export const structure: StructureResolver = async (
                 .schemaType(`godpraksis_landingsside`)
                 .id(`godpraksis_landingsside_id1`),
               S.divider(),
-              ...(await GodPraksisPanes(getClient, S)),
+              ...(await GodPraksisPanesOld(getClient, S)),
             ]),
         ),
       S.listItem()

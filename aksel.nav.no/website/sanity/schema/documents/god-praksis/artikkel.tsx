@@ -2,8 +2,6 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
 import { InnholdstypeHighlight } from "../../custom-components/gp/InnholdstypeHighlight";
 import { UndertemaHighlight } from "../../custom-components/gp/UndertemaHighlight";
-
-/* import { gpTaxonomyObject } from "../../../plugins/god-praksis-taxonomy/taxonomy-object"; */
 import { WorkspaceT } from "../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
@@ -40,8 +38,6 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
           ],
     ...artikkelPreview("God praksis"),
     fields: [
-      // TODO: This will be the new data for "widget"-input when picking taxonomy
-      /* gpTaxonomyObject, */
       oppdateringsvarsel,
       ...hiddenFields,
       defineField({
