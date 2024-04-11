@@ -13,7 +13,7 @@ export interface FormSummaryHeadingProps
    *
    * @default "3"
    */
-  level?: Omit<HeadingProps["level"], "1">;
+  level?: Exclude<HeadingProps["level"], "1">;
 }
 
 export const FormSummaryHeading: OverridableComponent<
