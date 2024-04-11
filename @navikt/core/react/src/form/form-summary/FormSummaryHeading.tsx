@@ -20,12 +20,7 @@ export const FormSummaryHeading: OverridableComponent<
   FormSummaryHeadingProps,
   HTMLHeadingElement
 > = forwardRef(({ level = "3", ...rest }, ref) => (
-  <Heading
-    ref={ref}
-    {...rest}
-    size="medium"
-    level={level} // We know that the type is a subset of HeadingProps["level"] (using Omit<>)
-  />
+  <Heading ref={ref} {...rest} size="medium" level={level} />
 ));
 
 export default FormSummaryHeading;
