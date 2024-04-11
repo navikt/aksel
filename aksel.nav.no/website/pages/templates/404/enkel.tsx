@@ -5,10 +5,10 @@ const Example = () => {
   useDekorator();
 
   return (
-    <Page data-aksel-template="404-v2" footer={<Footer />}>
+    <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
-        <Box paddingBlock="20 16">
+        <Box paddingBlock="20 16" data-aksel-template="404-v2">
           <div>
             <Heading level="1" size="large" spacing>
               Beklager, vi fant ikke siden
