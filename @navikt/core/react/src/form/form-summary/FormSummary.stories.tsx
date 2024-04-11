@@ -47,7 +47,7 @@ export const Default: StoryFn<typeof FormSummary> = () => (
       </FormSummary.Answer>
 
       <FormSummary.Answer>
-        <FormSummary.Label>Barn nr 1</FormSummary.Label>
+        <FormSummary.Label>Barn nr. 1</FormSummary.Label>
         <FormSummary.Value>
           <FormSummary.Answers>
             <FormSummary.Answer>
@@ -67,7 +67,7 @@ export const Default: StoryFn<typeof FormSummary> = () => (
       </FormSummary.Answer>
 
       <FormSummary.Answer>
-        <FormSummary.Label>Barn nr 2</FormSummary.Label>
+        <FormSummary.Label>Barn nr. 2</FormSummary.Label>
         <FormSummary.Value>
           <FormSummary.Answers>
             <FormSummary.Answer>

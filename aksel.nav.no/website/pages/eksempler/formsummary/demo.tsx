@@ -1,4 +1,4 @@
-import { FormSummary } from "@navikt/ds-react";
+import { FormSummary, Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -16,12 +16,21 @@ const Example = () => {
         </FormSummary.Answer>
 
         <FormSummary.Answer>
+          <FormSummary.Label>Adresse</FormSummary.Label>
+          <FormSummary.Value>
+            Gate 123
+            <br />
+            1234 Sted
+          </FormSummary.Value>
+        </FormSummary.Answer>
+
+        <FormSummary.Answer>
           <FormSummary.Label>Fødselsnummer</FormSummary.Label>
           <FormSummary.Value>12345678910</FormSummary.Value>
         </FormSummary.Answer>
 
         <FormSummary.Answer>
-          <FormSummary.Label>Barn nr 1</FormSummary.Label>
+          <FormSummary.Label>Barn nr. 1</FormSummary.Label>
           <FormSummary.Value>
             <FormSummary.Answers>
               <FormSummary.Answer>
@@ -38,6 +47,39 @@ const Example = () => {
               </FormSummary.Answer>
             </FormSummary.Answers>
           </FormSummary.Value>
+        </FormSummary.Answer>
+
+        <FormSummary.Answer>
+          <FormSummary.Label>Barn nr. 2</FormSummary.Label>
+          <FormSummary.Value>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>Navn</FormSummary.Label>
+                <FormSummary.Value>Per Nordmann</FormSummary.Value>
+              </FormSummary.Answer>
+              <FormSummary.Answer>
+                <FormSummary.Label>Kjønn</FormSummary.Label>
+                <FormSummary.Value>Gutt</FormSummary.Value>
+              </FormSummary.Answer>
+              <FormSummary.Answer>
+                <FormSummary.Label>Alder</FormSummary.Label>
+                <FormSummary.Value>7</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary.Value>
+        </FormSummary.Answer>
+
+        <FormSummary.Answer>
+          <FormSummary.Label>Kontaktinformasjon</FormSummary.Label>
+          <FormSummary.Value>
+            <Link>Fyll ut kontaktinformasjon</Link>
+          </FormSummary.Value>
+        </FormSummary.Answer>
+
+        <FormSummary.Answer>
+          <FormSummary.Label>Hvordan vil du bli varslet?</FormSummary.Label>
+          <FormSummary.Value>E-post</FormSummary.Value>
+          <FormSummary.Value>SMS</FormSummary.Value>
         </FormSummary.Answer>
       </FormSummary.Answers>
     </FormSummary>
