@@ -1,21 +1,24 @@
 .navds-progress-bar {
   position: relative;
   background: var(--a-surface-alt-3-subtle, #cce2f0);
-  width: 500px;
+  width: 100%;
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .navds-progress-bar--small {
   height: 12px;
+  min-width: 12px;
 }
 
 .navds-progress-bar--medium {
   height: 16px;
+  min-width: 16px;
 }
 
 .navds-progress-bar--large {
   height: 24px;
+  min-width: 24px;
 }
 
 .navds-progress-bar__progress {
