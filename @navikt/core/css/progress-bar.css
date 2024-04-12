@@ -2,7 +2,7 @@
   position: relative;
   background: var(--a-surface-alt-3-subtle);
   width: 100%;
-  border-radius: 9999px;
+  border-radius: var(--a-border-radius-full);
   overflow: hidden;
 }
 
