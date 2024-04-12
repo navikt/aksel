@@ -8,11 +8,9 @@ import {
   LightBulbIcon,
   PencilBoardIcon,
   RectangleSectionsIcon,
-  TokenIcon,
 } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
-  grunnleggendeKategorier,
   komponentKategorier,
   landingsider,
   previews,
@@ -22,6 +20,7 @@ import {
 import { Iframe } from "./IFrame";
 import { godPraksiStructure } from "./god-praksis";
 import { GodPraksisPanesOld } from "./god-praksis.old";
+import { grunnleggendeStructure } from "./grunnleggende";
 import { Panes } from "./panes";
 import { produktBloggenStructure } from "./produktbloggen";
 
@@ -119,39 +118,25 @@ export const structure: StructureResolver = async (
                 .id(`prinsipper_landingsside_id1`),
               S.divider(),
               ...prinsippKategorier.map(({ value, title }) =>
-                S.listItem().title(title).child(
-                  S.documentList()
-                    .title(title)
-                    .filter(
-                      `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`,
-                    )
-                    .params({ value })
-                    .apiVersion(SANITY_API_VERSION),
-                  /* .menuItems([
-                        ...S.documentTypeList("aksel_prinsipp").getMenuItems(),
-                      ]) */
-                ),
+                S.listItem()
+                  .title(title)
+                  .child(
+                    S.documentList()
+                      .title(title)
+                      .filter(
+                        `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`,
+                      )
+                      .params({ value })
+                      .apiVersion(SANITY_API_VERSION),
+                  ),
               ),
               S.listItem()
                 .title("Alle artikler")
                 .child(S.documentTypeList("aksel_prinsipp")),
             ]),
         ),
-      S.listItem()
-        .title("Grunnleggende")
-        .icon(TokenIcon)
-        .child(
-          S.list()
-            .title("Grunnleggende")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`grunnleggende_landingsside`)
-                .id(`grunnleggende_landingsside_id1`),
-              S.divider(),
-              ...Panes("ds_artikkel", grunnleggendeKategorier, S),
-            ]),
-        ),
+      grunnleggendeStructure(S),
+
       S.listItem()
         .title("Mønster og Maler")
         .icon(RectangleSectionsIcon)

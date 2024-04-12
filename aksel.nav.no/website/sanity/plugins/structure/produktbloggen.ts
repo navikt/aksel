@@ -2,7 +2,7 @@ import { StructureBuilder } from "sanity/structure";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { bloggKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
-import { listDraftArticles, listPublishedArticles } from "./structure.util";
+import { listMyDraftArticles, listPublishedArticles } from "./structure.util";
 
 export function produktBloggenStructure(S: StructureBuilder) {
   return S.listItem()
@@ -22,7 +22,7 @@ export function produktBloggenStructure(S: StructureBuilder) {
             .id(`blogg_landingsside_id1`),
           S.divider(),
           listPublishedArticles(S, "aksel_blogg"),
-          listDraftArticles(S, "aksel_blogg"),
+          listMyDraftArticles(S, "aksel_blogg"),
           S.divider(),
           ...Panes("aksel_blogg", [...bloggKategorier], S),
         ]),

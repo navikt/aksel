@@ -1,7 +1,7 @@
 import { StructureBuilder } from "sanity/structure";
 import { PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
-import { listDraftArticles, listPublishedArticles } from "./structure.util";
+import { listMyDraftArticles, listPublishedArticles } from "./structure.util";
 
 export function godPraksiStructure(S: StructureBuilder) {
   const adminOrDev = S.context.currentUser?.roles.find((x) =>
@@ -34,7 +34,7 @@ export function godPraksiStructure(S: StructureBuilder) {
 function godPraksisPanes(S: StructureBuilder) {
   return [
     listPublishedArticles(S, "aksel_artikkel"),
-    listDraftArticles(S, "aksel_artikkel"),
+    listMyDraftArticles(S, "aksel_artikkel"),
 
     S.listItem({
       id: "my_gp_outdated",
