@@ -1,6 +1,6 @@
 .navds-progress-bar {
   position: relative;
-  background: var(--a-surface-alt-3-subtle, #cce2f0);
+  background: var(--a-surface-alt-3-subtle);
   width: 100%;
   border-radius: 9999px;
   overflow: hidden;
@@ -28,7 +28,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background: var(--a-surface-alt-3, #005b82);
+  background: var(--a-surface-alt-3);
   border-radius: inherit;
   transition: transform 100ms ease-in-out;
 }
@@ -64,14 +64,3 @@
   }
 }
 
-/* @keyframes navds-progress-bar-indeterminate {
-  0% {
-    left: -100%;
-    width: 100%;
-  }
-
-  100% {
-    left: 100%;
-    width: 100%;
-  }
-} */
