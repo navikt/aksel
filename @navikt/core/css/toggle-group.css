@@ -4,6 +4,10 @@
   gap: var(--a-spacing-2);
 }
 
+.navds-toggle-group__wrapper--fill {
+  justify-items: initial;
+}
+
 .navds-toggle-group {
   border-radius: var(--a-border-radius-medium);
   background-color: var(--ac-toggle-group-bg, var(--a-surface-transparent));

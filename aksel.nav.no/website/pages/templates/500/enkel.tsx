@@ -13,11 +13,11 @@ function Example() {
   useDekorator();
 
   return (
-    <Page data-aksel-template="500-v2" footer={<Footer />}>
+    <Page footer={<Footer />}>
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">
-          <HGrid columns="minmax(auto,600px)">
+          <HGrid columns="minmax(auto,600px)" data-aksel-template="500-v2">
             <BodyShort textColor="subtle" size="small">
               Statuskode 500
             </BodyShort>

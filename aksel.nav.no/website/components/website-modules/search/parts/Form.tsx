@@ -69,6 +69,14 @@ export const SearchForm = () => {
             setQuery("");
             reset();
           }}
+          onKeyDown={(e) => {
+            /* Avoids sideeffects when clearing Search */
+            if (e.key === "Escape") {
+              if (e.currentTarget.value) {
+                e.stopPropagation();
+              }
+            }
+          }}
           ref={inputRef}
           autoComplete="off"
           autoCorrect="off"
