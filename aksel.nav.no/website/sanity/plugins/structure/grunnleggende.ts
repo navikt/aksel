@@ -14,7 +14,7 @@ export function grunnleggendeStructure(S: StructureBuilder) {
         .items([
           S.documentListItem({
             displayOptions: { showIcon: false },
-            id: "blogg_landingpage",
+            id: "grunnleggende_landingpage",
             schemaType: "grunnleggende_landingsside",
           })
             .title(`Landingsside`)
@@ -22,7 +22,7 @@ export function grunnleggendeStructure(S: StructureBuilder) {
             .id(`grunnleggende_landingsside_id1`),
           S.divider(),
           listDraftArticles(S, "ds_artikkel"),
-          listOutdatedArticles(S, "ds_artikkel"),
+          listOutdatedArticles(S, "ds_artikkel", 180),
 
           S.divider(),
           ...Panes("ds_artikkel", [...grunnleggendeKategorier], S),

@@ -71,6 +71,7 @@ export function listDraftArticles(
 export function listOutdatedArticles(
   S: StructureBuilder,
   type: (typeof allArticleDocuments)[number],
+  treshold: number = 365,
 ) {
   return S.listItem({
     id: `article_${type}_outdated_tema`,
@@ -80,10 +81,10 @@ export function listOutdatedArticles(
       S.documentTypeList(type)
         .title("Artikler")
         .filter(
-          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365)`,
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*${treshold})`,
         )
         .apiVersion(SANITY_API_VERSION)
-        .params({ type })
+        .params({ type, treshold })
         .initialValueTemplates([])
         .defaultOrdering([
           { field: "updateInfo.lastVerified", direction: "asc" },

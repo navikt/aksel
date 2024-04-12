@@ -1,27 +1,24 @@
 import { StructureResolver } from "sanity/structure";
 import {
   CircleSlashIcon,
-  ComponentIcon,
   EyeIcon,
   FileTextIcon,
   ImageIcon,
   LightBulbIcon,
   PencilBoardIcon,
-  RectangleSectionsIcon,
 } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
-  komponentKategorier,
   landingsider,
   previews,
   prinsippKategorier,
-  templatesKategorier,
 } from "../../config";
 import { Iframe } from "./IFrame";
 import { godPraksiStructure } from "./god-praksis";
 import { GodPraksisPanesOld } from "./god-praksis.old";
 import { grunnleggendeStructure } from "./grunnleggende";
-import { Panes } from "./panes";
+import { komponenterStructure } from "./komponenter";
+import { monsterStructure } from "./monster";
 import { produktBloggenStructure } from "./produktbloggen";
 
 /**
@@ -105,6 +102,11 @@ export const structure: StructureResolver = async (
               ...(await GodPraksisPanesOld(getClient, S)),
             ]),
         ),
+      grunnleggendeStructure(S),
+      komponenterStructure(S),
+      monsterStructure(S),
+      produktBloggenStructure(S),
+
       S.listItem()
         .title("Prinsipper")
         .icon(LightBulbIcon)
@@ -135,39 +137,6 @@ export const structure: StructureResolver = async (
                 .child(S.documentTypeList("aksel_prinsipp")),
             ]),
         ),
-      grunnleggendeStructure(S),
-
-      S.listItem()
-        .title("Mønster og Maler")
-        .icon(RectangleSectionsIcon)
-        .child(
-          S.list()
-            .title("Mønster og Maler")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`templates_landingsside`)
-                .id(`templates_landingsside_id1`),
-              S.divider(),
-              ...Panes("templates_artikkel", templatesKategorier, S),
-            ]),
-        ),
-      S.listItem()
-        .title("Komponenter")
-        .icon(ComponentIcon)
-        .child(
-          S.list()
-            .title("Komponenter")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`komponenter_landingsside`)
-                .id(`komponenter_landingsside_id1`),
-              S.divider(),
-              ...Panes("komponent_artikkel", komponentKategorier, S),
-            ]),
-        ),
-      produktBloggenStructure(S),
       S.divider(),
       S.listItem()
         .title("Forfattere")
