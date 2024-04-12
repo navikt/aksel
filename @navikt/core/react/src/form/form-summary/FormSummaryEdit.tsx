@@ -9,7 +9,7 @@ export interface FormSummaryEditProps
   /**
    * URL to the relevant part of the form, where the answers can be edited.
    */
-  href: string;
+  href?: string;
   /**
    * Link text.
    *
