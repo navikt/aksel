@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
-import FormSummaryEdit from "./FormSummaryEdit";
+import FormSummaryEdit from "./FormSummaryEditLink";
 import FormSummaryHeader from "./FormSummaryHeader";
 import FormSummaryHeading from "./FormSummaryHeading";
 import FormSummaryLabel from "./FormSummaryLabel";

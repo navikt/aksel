@@ -11,7 +11,7 @@ export {
 export {
   default as FormSummaryEdit,
   type FormSummaryEditProps,
-} from "./FormSummaryEdit";
+} from "./FormSummaryEditLink";
 export {
   default as FormSummaryHeader,
   type FormSummaryHeaderProps,
