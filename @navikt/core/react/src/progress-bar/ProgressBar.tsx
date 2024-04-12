@@ -120,7 +120,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
             "navds-progress-bar__progress--indeterminate": isIndeterminate,
           })}
           style={{
-            transform: `translateX(-${100 - (clampedValue / valueMax) * 100}%)`,
+            transform: !isIndeterminate
+              ? `translateX(-${100 - (clampedValue / valueMax) * 100}%)`
+              : undefined,
           }}
         />
       </div>
