@@ -64,7 +64,7 @@ export const IndeterminateState: Story = {
         <ProgressBar
           duration={5}
           size="medium"
-          value={66}
+          value={20}
           labelId="progress-bar-label"
         />
       </div>

@@ -76,7 +76,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         className={cl(
           "navds-progress-bar",
           `navds-progress-bar--${size}`,
-          { "navds-progress-bar--indeterminate": isIndeterminate },
           props.className,
         )}
         aria-valuemin={valueMin}
@@ -87,7 +86,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-labelledby={props.labelId ?? undefined}
       >
         <div
-          className="navds-progress-bar__progress"
+          className={cl("navds-progress-bar__progress", {
+            "navds-progress-bar__progress--indeterminate": isIndeterminate,
+          })}
           style={{
             transform: `translateX(-${100 - (clampedValue / valueMax) * 100}%)`,
           }}
