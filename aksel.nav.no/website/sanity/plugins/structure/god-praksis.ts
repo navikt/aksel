@@ -50,7 +50,10 @@ function godPraksisPanes(S: StructureBuilder) {
           )
           .apiVersion(SANITY_API_VERSION)
           .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
+          .initialValueTemplates([])
+          .defaultOrdering([
+            { field: "updateInfo.lastVerified", direction: "asc" },
+          ]);
       },
     }),
     S.divider(),
@@ -180,7 +183,10 @@ function godPraksisPanes(S: StructureBuilder) {
               )
               .apiVersion(SANITY_API_VERSION)
               .params({ type: "aksel_artikkel", id })
-              .initialValueTemplates([]);
+              .initialValueTemplates([])
+              .defaultOrdering([
+                { field: "updateInfo.lastVerified", direction: "asc" },
+              ]);
           })
           .initialValueTemplates([]),
     }),
