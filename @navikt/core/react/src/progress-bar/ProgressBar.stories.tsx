@@ -106,9 +106,9 @@ export const IndeterminateState: Story = {
         <p id="progress-bar-label">Indeterminate progress bar</p>
         <ProgressBar
           valueMax={100}
-          duration={5}
+          duration={2}
           size="medium"
-          value={20}
+          value={79}
           aria-labelledby="progress-bar-label"
         />
       </div>

@@ -116,12 +116,16 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-label={ariaLabel}
       >
         <div
-          className={cl("navds-progress-bar__progress", {
-            "navds-progress-bar__progress--indeterminate": isIndeterminate,
-          })}
+          className={cl(
+            "navds-progress-bar__progress",
+            "navds-progress-bar__progress--indeterminate",
+          )}
           style={{
             transform: !isIndeterminate
               ? `translateX(-${100 - (clampedValue / valueMax) * 100}%)`
+              : `translateX(0%)`,
+            animationDelay: props.duration
+              ? `${props.duration + 1}s`
               : undefined,
           }}
         />
