@@ -3,9 +3,7 @@ import * as document from "./documents";
 import * as object from "./objects";
 import { WorkspaceT } from "./util";
 
-export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
-  workspace,
-) => ({
+export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = () => ({
   types: [
     /**
      * Ny struktur for god praksis
@@ -40,7 +38,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
 
     /* God-praksis */
     document.TemaOld,
-    document.godPraksisArtikkel(workspace),
+    document.godPraksisArtikkel(),
     document.GodPraksisLandingSide,
 
     /* Blogg */
@@ -106,7 +104,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     {
       id: "gp.artikkel.by.undertema",
       title: "God praksis aritkkel med undertema",
-      schemaType: "gp.artikkel",
+      schemaType: "aksel_artikkel",
       parameters: [{ name: "undertema_id", type: "string" }],
       value: (params) => ({
         undertema: [{ _type: "reference", _ref: params.undertema_id }],
@@ -115,7 +113,7 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = (
     {
       id: "gp.artikkel.by.innholdstype",
       title: "God praksis aritkkel med innholdstype",
-      schemaType: "gp.artikkel",
+      schemaType: "aksel_artikkel",
       parameters: [{ name: "id", type: "string" }],
       value: (params) => ({
         innholdstype: { _type: "reference", _ref: params.id },

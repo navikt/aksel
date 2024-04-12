@@ -22,7 +22,7 @@ import {
   templatesKategorier,
 } from "../../config";
 import { Iframe } from "./IFrame";
-import { GodPraksisPanes } from "./god-praksis";
+import { godPraksiStructure } from "./god-praksis";
 import { GodPraksisPanesOld } from "./god-praksis.old";
 import { Panes } from "./panes";
 
@@ -91,21 +91,7 @@ export const structure: StructureResolver = async (
         : []),
 
       ...(editor ? [S.divider()] : []),
-      S.listItem()
-        .title("God Praksis (ny)")
-        .icon(PencilBoardIcon)
-        .child(
-          S.list()
-            .title("God Praksis")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`godpraksis_landingsside`)
-                .id(`godpraksis_landingsside_id1`),
-              S.divider(),
-              ...GodPraksisPanes(S),
-            ]),
-        ),
+      godPraksiStructure(S),
       S.listItem()
         .title("God Praksis")
         .icon(PencilBoardIcon)
