@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 export interface FormSummaryHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.Edit>`.
+   * Must include `<FormSummary.Heading>` and optionally `<FormSummary.EditLink>`.
    */
   children: React.ReactNode;
 }
