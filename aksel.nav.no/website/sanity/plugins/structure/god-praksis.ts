@@ -1,6 +1,7 @@
 import { StructureBuilder } from "sanity/structure";
 import { PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { listDraftArticles, listPublishedArticles } from "./structure.util";
 
 export function godPraksiStructure(S: StructureBuilder) {
   const adminOrDev = S.context.currentUser?.roles.find((x) =>
@@ -19,7 +20,7 @@ export function godPraksiStructure(S: StructureBuilder) {
         .items([
           S.documentListItem({
             displayOptions: { showIcon: false },
-            id: "gp_new",
+            id: "gp_landingpage",
             schemaType: "godpraksis_landingsside",
           })
             .title(`Landingsside`)
@@ -32,40 +33,9 @@ export function godPraksiStructure(S: StructureBuilder) {
 }
 function godPraksisPanes(S: StructureBuilder) {
   return [
-    S.listItem({
-      id: "my_gp_published",
-      title: "Mine publiserte artikler",
-      schemaType: "aksel_artikkel",
-      child: (_, { structureContext }) => {
-        const mail = structureContext.currentUser?.email;
+    listPublishedArticles(S, "aksel_artikkel"),
+    listDraftArticles(S, "aksel_artikkel"),
 
-        return S.documentTypeList("aksel_artikkel")
-          .title("Artikler")
-          .filter(
-            `_type == $type && !(_id in path("drafts.**")) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
-          )
-          .apiVersion(SANITY_API_VERSION)
-          .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
-      },
-    }),
-    S.listItem({
-      id: "my_gp_drafts",
-      title: "Mine drafts",
-      schemaType: "aksel_artikkel",
-      child: (_, { structureContext }) => {
-        const mail = structureContext.currentUser?.email;
-
-        return S.documentTypeList("aksel_artikkel")
-          .title("Artikler")
-          .filter(
-            `_type == $type && _id in path("drafts.**") && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
-          )
-          .apiVersion(SANITY_API_VERSION)
-          .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
-      },
-    }),
     S.listItem({
       id: "my_gp_outdated",
       title: "Mine artikler som trenger oppdatering",

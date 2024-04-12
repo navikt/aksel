@@ -6,14 +6,12 @@ import {
   FileTextIcon,
   ImageIcon,
   LightBulbIcon,
-  NewspaperIcon,
   PencilBoardIcon,
   RectangleSectionsIcon,
   TokenIcon,
 } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
-  bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
   landingsider,
@@ -25,6 +23,7 @@ import { Iframe } from "./IFrame";
 import { godPraksiStructure } from "./god-praksis";
 import { GodPraksisPanesOld } from "./god-praksis.old";
 import { Panes } from "./panes";
+import { produktBloggenStructure } from "./produktbloggen";
 
 /**
  * List of document-types added to structure.
@@ -183,21 +182,7 @@ export const structure: StructureResolver = async (
               ...Panes("komponent_artikkel", komponentKategorier, S),
             ]),
         ),
-      S.listItem()
-        .title("Produktbloggen")
-        .icon(NewspaperIcon)
-        .child(
-          S.list()
-            .title("Produktbloggen")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`blogg_landingsside`)
-                .id(`blogg_landingsside_id1`),
-              S.divider(),
-              ...Panes("aksel_blogg", [...bloggKategorier], S),
-            ]),
-        ),
+      produktBloggenStructure(S),
       S.divider(),
       S.listItem()
         .title("Forfattere")
