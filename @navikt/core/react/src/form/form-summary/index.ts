@@ -9,7 +9,7 @@ export {
   type FormSummaryAnswersProps,
 } from "./FormSummaryAnswers";
 export {
-  default as FormSummaryEdit,
+  default as FormSummaryEditLink,
   type FormSummaryEditProps,
 } from "./FormSummaryEditLink";
 export {

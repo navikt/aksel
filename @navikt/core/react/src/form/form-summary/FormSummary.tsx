@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import FormSummaryAnswer from "./FormSummaryAnswer";
 import FormSummaryAnswers from "./FormSummaryAnswers";
-import FormSummaryEdit from "./FormSummaryEditLink";
+import FormSummaryEditLink from "./FormSummaryEditLink";
 import FormSummaryHeader from "./FormSummaryHeader";
 import FormSummaryHeading from "./FormSummaryHeading";
 import FormSummaryLabel from "./FormSummaryLabel";
@@ -23,7 +23,7 @@ interface FormSummaryComponent
   /**
    * Link to edit the answers to use in the `FormSummary.Header` component. Should link to the relevant part of the form.
    */
-  EditLink: typeof FormSummaryEdit;
+  EditLink: typeof FormSummaryEditLink;
   /**
    * Wrapper component for the answers.
    */
@@ -95,7 +95,7 @@ export const FormSummary = forwardRef<HTMLDivElement, FormSummaryProps>(
 
 FormSummary.Header = FormSummaryHeader;
 FormSummary.Heading = FormSummaryHeading;
-FormSummary.EditLink = FormSummaryEdit;
+FormSummary.EditLink = FormSummaryEditLink;
 FormSummary.Answers = FormSummaryAnswers;
 FormSummary.Answer = FormSummaryAnswer;
 FormSummary.Label = FormSummaryLabel;
