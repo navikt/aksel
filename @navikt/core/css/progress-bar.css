@@ -30,6 +30,7 @@
   width: 100%;
   background: var(--a-surface-alt-3, #005b82);
   border-radius: inherit;
+  transition: transform 100ms ease-in-out;
 }
 
 .navds-progress-bar__progress--indeterminate {
