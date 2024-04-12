@@ -1,12 +1,5 @@
 import { StructureResolver } from "sanity/structure";
-import {
-  CircleSlashIcon,
-  EyeIcon,
-  FileTextIcon,
-  ImageIcon,
-  LightBulbIcon,
-  PencilBoardIcon,
-} from "@navikt/aksel-icons";
+import { LightBulbIcon, PencilBoardIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
   landingsider,
@@ -14,6 +7,7 @@ import {
   prinsippKategorier,
 } from "../../config";
 import { Iframe } from "./IFrame";
+import { adminStructure } from "./admin";
 import { godPraksiStructure } from "./god-praksis";
 import { GodPraksisPanesOld } from "./god-praksis.old";
 import { grunnleggendeStructure } from "./grunnleggende";
@@ -71,9 +65,7 @@ export const structure: StructureResolver = async (
     ({ email, alt_email }) =>
       email === currentUser?.email || alt_email === currentUser?.email,
   );
-  const adminOrDev = currentUser?.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name),
-  );
+
   const developer = currentUser?.roles.find((x) =>
     ["developer"].includes(x.name),
   );
@@ -146,96 +138,8 @@ export const structure: StructureResolver = async (
             .filter(`_type == 'editor'`)
             .apiVersion(SANITY_API_VERSION),
         ),
-      ...(adminOrDev
-        ? [
-            S.divider(),
-            S.listItem()
-              .title("Admin")
-              .icon(CircleSlashIcon)
-              .child(
-                S.list()
-                  .title("Admin")
-                  .items([
-                    S.documentListItem()
-                      .title(`Forside`)
-                      .schemaType(`aksel_forside`)
-                      .icon(ImageIcon)
-                      .id(`aksel_forside_dokument`),
+      adminStructure(S),
 
-                    S.listItem().title("Standalone-sider").child(
-                      S.documentList()
-                        .title("Sider")
-                        .filter(`_type == 'aksel_standalone'`)
-                        .apiVersion(SANITY_API_VERSION),
-                      /* .menuItems([
-                            ...S.documentTypeList(
-                              "aksel_standalone"
-                            ).getMenuItems(),
-                          ]) */
-                    ),
-                    S.listItem().title("Redirects").child(
-                      S.documentList()
-                        .title("Redirects")
-                        .filter(`_type == 'redirect'`)
-                        .apiVersion(SANITY_API_VERSION),
-                      /* .menuItems([
-                            ...S.documentTypeList("redirect").getMenuItems(),
-                          ]) */
-                    ),
-                    S.listItem()
-                      .title("Eksempler/Templates")
-                      .child(
-                        S.documentList()
-                          .title("Eksempler")
-                          .filter(`_type == 'kode_eksempler_fil'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.listItem()
-                      .title("Token-grupper Designsystemet")
-                      .child(
-                        S.documentList()
-                          .title("Grupper")
-                          .filter(`_type == 'token_kategori'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.listItem()
-                      .title("Props Designsystemet")
-                      .child(
-                        S.documentList()
-                          .title("Props")
-                          .filter(`_type == 'ds_props'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.documentListItem()
-                      .title(`Skrivehjelp`)
-                      .schemaType(`skrivehjelp`)
-                      .icon(FileTextIcon)
-                      .id(`skrivehjelp`),
-                    S.documentListItem()
-                      .title(`Publiseringsflyt`)
-                      .schemaType(`publication_flow`)
-                      .icon(FileTextIcon)
-                      .id(`publication_flow`),
-                    S.listItem()
-                      .title("Artikkelvisninger")
-                      .icon(EyeIcon)
-                      .child(
-                        S.documentList()
-                          .title("Artikkelvisninger")
-                          .filter(`_type == 'article_views'`)
-                          .apiVersion(SANITY_API_VERSION)
-                          .menuItems([
-                            ...(S.documentTypeList(
-                              "article_views",
-                            ).getMenuItems() ?? []),
-                          ]),
-                      ),
-                  ]),
-              ),
-          ]
-        : []),
-
-      S.divider(),
       ...(developer
         ? S.documentTypeListItems().filter(
             (listItem) => !filtered.includes(listItem.getId() ?? ""),
