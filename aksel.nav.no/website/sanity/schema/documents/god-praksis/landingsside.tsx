@@ -1,5 +1,4 @@
 import { defineField, defineType } from "sanity";
-import { HouseIcon } from "@navikt/aksel-icons";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
@@ -19,7 +18,6 @@ export const GodPraksisLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside God-praksis",
-      media: HouseIcon,
     }),
   },
 });

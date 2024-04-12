@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-export default defineType({
+export const Innholdstype = defineType({
   name: "gp.innholdstype",
   title: "Innholdstype",
   type: "document",

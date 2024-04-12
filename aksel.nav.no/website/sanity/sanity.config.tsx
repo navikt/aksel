@@ -10,7 +10,6 @@ import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -33,17 +32,6 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin/dev",
     icon: TestFlaskIcon,
     auth: authStore("development"),
-  },
-  {
-    ...defaultConfig(),
-    plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
-    schema: schema("staging"),
-    title: "God-praksis staging",
-    name: "gp-staging",
-    dataset: "production",
-    basePath: "/admin/gp-staging",
-    icon: TestFlaskIcon,
-    auth: authStore("production"),
   },
 ]);
 
