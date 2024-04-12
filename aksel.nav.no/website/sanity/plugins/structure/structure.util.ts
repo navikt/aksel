@@ -84,6 +84,9 @@ export function listOutdatedArticles(
         )
         .apiVersion(SANITY_API_VERSION)
         .params({ type })
-        .initialValueTemplates([]),
+        .initialValueTemplates([])
+        .defaultOrdering([
+          { field: "updateInfo.lastVerified", direction: "asc" },
+        ]),
   });
 }
