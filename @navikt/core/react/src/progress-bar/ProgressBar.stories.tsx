@@ -46,7 +46,12 @@ export const Default: Story = {
     return (
       <div style={{ width: "400px" }}>
         <p id="progress-bar-label">Loading</p>
-        <ProgressBar size="medium" value={value} labelId="progress-bar-label" />
+        <ProgressBar
+          valueMax={100}
+          size="medium"
+          value={value}
+          aria-labelledby="progress-bar-label"
+        />
       </div>
     );
   },
@@ -62,25 +67,35 @@ export const Default: Story = {
   },
 };
 
-export const Small: Story = {
+export const Sizes: Story = {
   render: () => {
     return (
       <div>
-        <p id="progress-bar-label">Fremdrift i søknaden</p>
+        <p id="progress-bar-label-small">Fremdrift i søknaden</p>
         <ProgressBar
           size="small"
           value={7}
-          valueMin={2}
           valueMax={12}
-          labelId="progress-bar-label"
+          aria-labelledby="progress-bar-label-small"
+        />
+        <p id="progress-bar-label-medium">Fremdrift i søknaden</p>
+        <ProgressBar
+          value={3}
+          valueMax={12}
+          aria-labelledby="progress-bar-label-medium"
+        />
+        <p id="progress-bar-label-large">Fremdrift i søknaden</p>
+        <ProgressBar
+          size="large"
+          value={7}
+          valueMax={12}
+          aria-labelledby="progress-bar-label-large"
         />
       </div>
     );
   },
   args: {
     ...Default.args,
-    size: "small",
-    value: 90,
   },
 };
 
@@ -90,10 +105,11 @@ export const IndeterminateState: Story = {
       <div>
         <p id="progress-bar-label">Indeterminate progress bar</p>
         <ProgressBar
+          valueMax={100}
           duration={5}
           size="medium"
           value={20}
-          labelId="progress-bar-label"
+          aria-labelledby="progress-bar-label"
         />
       </div>
     );
@@ -117,9 +133,9 @@ export const Chromatic: Story = {
           <ProgressBar {...Default.args} />
         </div>
         <div>
-          <h2>Small</h2>
+          <h2>Sizes</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
-          <ProgressBar {...Small.args} />
+          <ProgressBar {...Sizes.args} />
         </div>
         <div>
           <h2>Indeterminate State Animation</h2>

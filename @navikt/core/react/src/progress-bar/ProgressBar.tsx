@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useMemo } from "react";
 
-export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
+interface ProgressBarPropsBase extends HTMLAttributes<HTMLDivElement> {
   /**
    * Changes height of progressbar.
    * @default "medium"
@@ -18,18 +18,36 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   valueMin?: number;
   /**
    * Maximum progress.
-   * @default 100
    */
-  valueMax?: number;
+  valueMax: number;
   /**
-   * Used to approximate a task duration in seconds. ProgressBar shows an indeterminate animation after duration is done.
+   * Used to approximate a task duration in seconds.
+   * ProgressBar shows an indeterminate animation after duration is done.
    */
   duration?: number;
   /**
-   * Used to give the progressbar a label.
+   * String ID of the element that labels the progress-bar.
+   * Not needed if `aria-label` is used.
    */
-  labelId: string;
+  "aria-labelledby"?: string;
+  /**
+   * String value that labels the progress-bar.
+   * Not needed if `aria-labelledby` is used.
+   */
+  "aria-label"?: string;
 }
+
+export type ProgressBarProps = ProgressBarPropsBase &
+  (
+    | {
+        "aria-labelledby": string;
+        "aria-label"?: never;
+      }
+    | {
+        "aria-label": string;
+        "aria-labelledby"?: never;
+      }
+  );
 
 /**
  * ProgressBar
@@ -46,7 +64,18 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
  * <ProgressBar value={2} valueMin={0} valueMax={7} />
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ size = "medium", value, valueMin = 0, valueMax = 100, ...props }, ref) => {
+  (
+    {
+      size = "medium",
+      value,
+      valueMin = 0,
+      valueMax,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-label": ariaLabel,
+      ...props
+    },
+    ref,
+  ) => {
     const clampedValue = useMemo(
       () => Math.min(Math.max(value, valueMin), valueMax),
       [value, valueMin, valueMax],
@@ -83,7 +112,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuenow={clampedValue}
         aria-valuetext={`${clampedValue} av ${valueMax}`} // TODO: needed when we have aria-labelledby?
         role="progressbar"
-        aria-labelledby={props.labelId ?? undefined}
+        aria-labelledby={ariaLabelledBy}
+        aria-label={ariaLabel}
       >
         <div
           className={cl("navds-progress-bar__progress", {
