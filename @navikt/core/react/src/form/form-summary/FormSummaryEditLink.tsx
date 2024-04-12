@@ -19,7 +19,7 @@ export interface FormSummaryEditProps
   children?: React.ReactNode;
 }
 
-export const FormSummaryEdit: OverridableComponent<
+export const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
 > = forwardRef(({ children = "Endre svar", className, ...rest }, ref) => (
@@ -32,4 +32,4 @@ export const FormSummaryEdit: OverridableComponent<
   </Link>
 ));
 
-export default FormSummaryEdit;
+export default FormSummaryEditLink;
