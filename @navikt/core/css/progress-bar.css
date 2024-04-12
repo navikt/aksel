@@ -34,33 +34,25 @@
 }
 
 .navds-progress-bar__progress--indeterminate {
-  /* animation-timing-function: cubic-bezier(0.4, 0.1, 0.5, 0.9); */
-  animation-timing-function: linear;
-  animation-duration: 1.8s;
+  animation-timing-function: ease;
+  animation-duration: 2.5s;
   animation-name: navds-progress-bar-indeterminate;
   animation-iteration-count: infinite;
+  width: 50%;
 }
 
 /* navds-progress-bar-indeterminate wave animation */
 @keyframes navds-progress-bar-indeterminate {
   0% {
-    transform: translateX(-100%);
-  }
-
-  25% {
-    transform: translateX(-45%);
+    transform: translateX(-84%);
   }
 
   50% {
-    transform: translateX(0%);
-  }
-
-  75% {
-    transform: translateX(45%);
+    transform: translateX(184%);
+    animation-direction: reverse;
   }
 
   100% {
-    transform: translateX(100%);
+    transform: translateX(-84%);
   }
 }
-
