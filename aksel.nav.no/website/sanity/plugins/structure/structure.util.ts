@@ -55,14 +55,12 @@ export function listDraftArticles(
     id: `${type}_drafts`,
     title: "Drafts",
     schemaType: type,
-    child: (_, { structureContext }) => {
-      const mail = structureContext.currentUser?.email;
-
+    child: () => {
       return S.documentTypeList(type)
         .title("Artikler")
         .filter(`_type == $type && _id in path("drafts.**")`)
         .apiVersion(SANITY_API_VERSION)
-        .params({ type, mail })
+        .params({ type })
         .initialValueTemplates([]);
     },
   });
