@@ -30,7 +30,7 @@ export function listMyDraftArticles(
 ) {
   return S.listItem({
     id: `my_${type}_drafts`,
-    title: "Mine drafts",
+    title: "Mine utkast",
     schemaType: type,
     child: (_, { structureContext }) => {
       const mail = structureContext.currentUser?.email;
