@@ -1,9 +1,13 @@
 import { differenceInMonths } from "date-fns";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
 
-const isAfter = (date: string, threshold) =>
+const isAfter = (date: string, threshold: number) =>
   differenceInMonths(new Date(), new Date(date)) >= threshold;
 
+/**
+ * @param _type document type
+ * @param threshold number of months before article is considered outdated in **months**
+ */
 export const artikkelPreview = (_type: string, threshold: number = 12) => {
   return {
     preview: {

@@ -1,6 +1,6 @@
 import { StructureBuilder } from "sanity/structure";
 import { RectangleSectionsIcon } from "@navikt/aksel-icons";
-import { komponentKategorier } from "@/sanity/config";
+import { templatesKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listDraftArticles, listOutdatedArticles } from "./structure.util";
 
@@ -25,7 +25,7 @@ export function monsterStructure(S: StructureBuilder) {
           listOutdatedArticles(S, "templates_artikkel", 180),
 
           S.divider(),
-          ...Panes("templates_artikkel", [...komponentKategorier], S),
+          ...Panes("templates_artikkel", [...templatesKategorier], S),
         ]),
     );
 }

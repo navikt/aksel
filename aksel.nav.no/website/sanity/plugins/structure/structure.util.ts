@@ -72,7 +72,7 @@ export function listOutdatedArticles(
   threshold: number = 365,
 ) {
   return S.listItem({
-    id: `article_${type}_outdated_tema`,
+    id: `article_${type}_outdated`,
     title: "Trenger oppdatering",
     schemaType: type,
     child: () =>
