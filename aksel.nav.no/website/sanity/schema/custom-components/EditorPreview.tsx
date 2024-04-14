@@ -22,7 +22,9 @@ export function EditorPreview(props) {
   const currentUser =
     editor &&
     editor.find(
-      (x) => x?.email === user?.email || x?.alt_email === user?.email,
+      (x) =>
+        x?.email.toLowerCase() === user?.email.toLowerCase() ||
+        x?.alt_email.toLowerCase() === user?.email.toLowerCase(),
     );
 
   return (

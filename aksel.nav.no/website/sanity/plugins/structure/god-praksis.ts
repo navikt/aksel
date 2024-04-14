@@ -1,7 +1,11 @@
 import { StructureBuilder } from "sanity/structure";
 import { PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
-import { listMyDraftArticles, listPublishedArticles } from "./structure.util";
+import {
+  editorIsContributorFilter,
+  listMyDraftArticles,
+  listPublishedArticles,
+} from "./structure.util";
 
 export function godPraksiStructure(S: StructureBuilder) {
   const adminOrDev = S.context.currentUser?.roles.find((x) =>
@@ -46,7 +50,7 @@ function godPraksisPanes(S: StructureBuilder) {
         return S.documentTypeList("aksel_artikkel")
           .title("Artikler")
           .filter(
-            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
+            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ${editorIsContributorFilter}`,
           )
           .apiVersion(SANITY_API_VERSION)
           .params({ type: "aksel_artikkel", mail })

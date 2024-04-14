@@ -63,7 +63,8 @@ export const structure: StructureResolver = async (
 
   const editor = editors.find(
     ({ email, alt_email }) =>
-      email === currentUser?.email || alt_email === currentUser?.email,
+      email.toLowerCase() === currentUser?.email.toLowerCase() ||
+      alt_email.toLowerCase() === currentUser?.email.toLowerCase(),
   );
 
   const developer = currentUser?.roles.find((x) =>
