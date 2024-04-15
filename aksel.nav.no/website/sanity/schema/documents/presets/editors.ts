@@ -20,12 +20,16 @@ export const editorField = defineField({
      * If user forgot to create a profile, we create one for them
      */
     if (!profile) {
-      if (!currentUser?.email.endsWith("@nav.no")) {
+      /* Make sure to only create profile for SSO-logins */
+      if (
+        !currentUser?.email.endsWith("@nav.no") ||
+        !currentUser.provider?.includes("saml")
+      ) {
         return [];
       }
       profile = await client.createIfNotExists({
         _type: "editor",
-        _id: `auto-editor-${currentUser?.id}`,
+        _id: `auto-editor.${currentUser?.id}`,
         email: currentUser?.email,
         title: currentUser?.name,
       });
