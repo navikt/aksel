@@ -72,7 +72,7 @@ export const structure: StructureResolver = async (
   );
 
   return S.list()
-    .title("Innholdstyper")
+    .title("Innhold")
     .items([
       ...(editor
         ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
