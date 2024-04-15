@@ -38,17 +38,14 @@ export const godPraksisArtikkel = () =>
           disableNew: true,
         },
         group: "innhold",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
+        validation: (Rule) => Rule.required(),
       }),
       defineField({
         name: "undertema",
         title: "Undertema",
         type: "array",
         group: "innhold",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
-        /*  */
+        validation: (Rule) => Rule.required(),
         components: {
           field: UndertemaHighlight,
         },
