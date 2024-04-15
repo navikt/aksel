@@ -6,23 +6,8 @@ const Example = () => {
     <VStack gap="8">
       <FormSummary>
         <FormSummary.Header>
-          <FormSummary.Heading>Personalia</FormSummary.Heading>
-          <FormSummary.EditLink href="#" aria-label="Endre personalia" />
-        </FormSummary.Header>
-        <FormSummary.Answers>
-          <FormSummary.Answer>
-            <FormSummary.Label>Navn</FormSummary.Label>
-            <FormSummary.Value>Ola Nordmann</FormSummary.Value>
-          </FormSummary.Answer>
-        </FormSummary.Answers>
-      </FormSummary>
-
-      <FormSummary>
-        <FormSummary.Header>
           <FormSummary.Heading>Personal information</FormSummary.Heading>
-          <FormSummary.EditLink href="#" aria-label="Edit personal information">
-            Edit
-          </FormSummary.EditLink>
+          <FormSummary.EditLink href="#">Edit</FormSummary.EditLink>
         </FormSummary.Header>
         <FormSummary.Answers>
           <FormSummary.Answer>
