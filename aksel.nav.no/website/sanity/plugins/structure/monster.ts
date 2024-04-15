@@ -12,12 +12,9 @@ export function monsterStructure(S: StructureBuilder) {
       S.list()
         .title("Mønster og Maler")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "templates_landingpage",
-            schemaType: "templates_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .showIcon(false)
             .schemaType(`templates_landingsside`)
             .id(`templates_landingsside_id1`),
           S.divider(),

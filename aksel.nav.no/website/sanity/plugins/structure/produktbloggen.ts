@@ -12,12 +12,9 @@ export function produktBloggenStructure(S: StructureBuilder) {
       S.list()
         .title("Produktbloggen")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "blogg_landingpage",
-            schemaType: "blogg_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .showIcon(false)
             .schemaType(`blogg_landingsside`)
             .id(`blogg_landingsside_id1`),
           S.divider(),

@@ -12,12 +12,9 @@ export function grunnleggendeStructure(S: StructureBuilder) {
       S.list()
         .title("Grunnleggende")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "grunnleggende_landingpage",
-            schemaType: "grunnleggende_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .showIcon(false)
             .schemaType(`grunnleggende_landingsside`)
             .id(`grunnleggende_landingsside_id1`),
           S.divider(),

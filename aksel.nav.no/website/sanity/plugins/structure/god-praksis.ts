@@ -22,12 +22,9 @@ export function godPraksiStructure(S: StructureBuilder) {
       S.list()
         .title("God Praksis")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "gp_landingpage",
-            schemaType: "godpraksis_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .showIcon(false)
             .schemaType(`godpraksis_landingsside`)
             .id(`godpraksis_landingsside_id1`),
           S.divider(),

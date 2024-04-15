@@ -12,12 +12,9 @@ export function komponenterStructure(S: StructureBuilder) {
       S.list()
         .title("Komponenter")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "komponenter_landingpage",
-            schemaType: "komponenter_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .showIcon(false)
             .schemaType(`komponenter_landingsside`)
             .id(`komponenter_landingsside_id1`),
           S.divider(),
