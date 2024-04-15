@@ -231,9 +231,9 @@ const Page = ({
                   {data.undertema.map(({ title, tema }) => (
                     <GpTemaLink
                       key={title}
-                      href={`/gp/${tema.slug}?undertema=${encodeURIComponent(
-                        title,
-                      )}`}
+                      href={`/god-praksis/${
+                        tema.slug
+                      }?undertema=${encodeURIComponent(title)}`}
                     >
                       {tema.title}
                     </GpTemaLink>
