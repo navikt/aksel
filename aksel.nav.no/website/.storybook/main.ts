@@ -35,6 +35,20 @@ const config: StorybookConfig = {
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
+    const templateIndexer = async (fileName: string, opts) => {
+      let code = readFileSync(fileName, "utf-8").toString();
+
+      code = code.replace(/export default .*/g, "");
+
+      code = code.replace("export const args =", "const args =");
+
+      code += `\nexport default { title: "Templates/${fileName
+        .split("pages/templates/")[1]
+        .replace(".tsx", "")}"  };\n`;
+
+      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
+    };
+
     return [
       ...(indexers || []),
       {
@@ -42,8 +56,12 @@ const config: StorybookConfig = {
         createIndex: csfIndexer,
       },
       {
-        test: /pages\/eksempler\/|(".+")|(.+.tsx)$/,
+        test: /pages\/eksempler\/.+?.tsx$/,
         createIndex: exampleIndexer,
+      },
+      {
+        test: /pages\/templates\/.+?.tsx$/,
+        createIndex: templateIndexer,
       },
     ];
   },
@@ -52,6 +70,7 @@ const config: StorybookConfig = {
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
+    "../pages/templates/**/*.tsx",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-essentials"),
