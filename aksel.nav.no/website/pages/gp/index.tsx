@@ -142,7 +142,7 @@ const GpPage = (props: PageProps["props"]) => {
                         <li key={tema.slug}>
                           <GpHeroCard
                             articleCount={tema.refCount}
-                            href={`gp/${tema.slug}`}
+                            href={`god-praksis/${tema.slug}`}
                             image={tema.pictogram}
                           >
                             {tema.title}
@@ -181,10 +181,7 @@ const GpPage = (props: PageProps["props"]) => {
                             {tema.articles.map((article) => (
                               <li key={article.slug}>
                                 <GpArticleCard
-                                  href={`${article.slug}`.replace(
-                                    "god-praksis",
-                                    "gp",
-                                  )}
+                                  href={article.slug}
                                   innholdstype={article.innholdstype}
                                   undertema={
                                     article.undertema.find(
@@ -199,7 +196,7 @@ const GpPage = (props: PageProps["props"]) => {
                           </GpCardGrid>
 
                           <Link
-                            href={`/gp/${tema.slug}`}
+                            href={`/god-praksis/${tema.slug}`}
                             as={NextLink}
                             className="group mt-4 w-fit text-deepblue-700"
                             onClick={(e) =>
