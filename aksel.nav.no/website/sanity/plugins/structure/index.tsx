@@ -1,4 +1,3 @@
-import { differenceInMonths } from "date-fns";
 import { StructureResolver } from "sanity/structure";
 import {
   CircleSlashIcon,
@@ -22,12 +21,10 @@ import {
   prinsippKategorier,
   templatesKategorier,
 } from "../../config";
-import { GP_DOCUMENT_NAMES } from "../god-praksis-taxonomy";
 import { Iframe } from "./IFrame";
-import { GodPraksisPanes } from "./god-praksis";
+import { godPraksiStructure } from "./god-praksis";
+import { GodPraksisPanesOld } from "./god-praksis.old";
 import { Panes } from "./panes";
-
-const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
 
 /**
  * List of document-types added to structure.
@@ -59,7 +56,9 @@ const filtered = [
   "publication_flow",
   "aksel_feedback",
   "article_views",
-  ...GP_DOCUMENT_NAMES,
+  "gp.tema",
+  "gp.tema.undertema",
+  "gp.innholdstype",
 ];
 
 export const structure: StructureResolver = async (
@@ -84,39 +83,15 @@ export const structure: StructureResolver = async (
     ["developer"].includes(x.name),
   );
 
-  const outdated = (
-    await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-      `*[$email in contributors[]->email || $email in contributors[]->alt_email]{_id, updateInfo}`,
-      { email: currentUser?.email },
-    )
-  ).filter((x) => isAfter(x.updateInfo?.lastVerified));
-
   return S.list()
     .title("Innholdstyper")
     .items([
       ...(editor
         ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
         : []),
-      ...(outdated.length > 0
-        ? [
-            S.listItem()
-              .title(
-                `Utdaterte artikler (${
-                  outdated.filter((x) => !x._id.includes("draft")).length
-                })`,
-              )
-              .child(
-                S.documentList()
-                  .title(`Utdaterte artikler`)
-                  .filter(`_id in $ids`)
-                  .params({
-                    ids: outdated.map((x) => x?._id),
-                  })
-                  .apiVersion(SANITY_API_VERSION),
-              ),
-          ]
-        : []),
-      ...(outdated.length > 0 || !!editor ? [S.divider()] : []),
+
+      ...(editor ? [S.divider()] : []),
+      godPraksiStructure(S),
       S.listItem()
         .title("God Praksis")
         .icon(PencilBoardIcon)
@@ -129,7 +104,7 @@ export const structure: StructureResolver = async (
                 .schemaType(`godpraksis_landingsside`)
                 .id(`godpraksis_landingsside_id1`),
               S.divider(),
-              ...(await GodPraksisPanes(getClient, S)),
+              ...(await GodPraksisPanesOld(getClient, S)),
             ]),
         ),
       S.listItem()

@@ -3,7 +3,7 @@ import { TemaPreview } from "../../custom-components/TemaPreview";
 import SanityTabGroups from "../presets/groups";
 import BaseSEOPreset from "../presets/seo";
 
-export const Tema = defineType({
+export const TemaOld = defineType({
   title: "Aksel Tema",
   name: "aksel_tema",
   type: "document",

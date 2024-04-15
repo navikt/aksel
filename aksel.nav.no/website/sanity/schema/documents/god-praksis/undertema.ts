@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-export default defineType({
+export const Undertema = defineType({
   name: "gp.tema.undertema",
   title: "Undertema",
   type: "document",
