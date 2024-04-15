@@ -9,7 +9,6 @@ const Example = () => {
           <FormSummary.Heading>Personalia</FormSummary.Heading>
           <FormSummary.EditLink href="#" aria-label="Endre svar" />
         </FormSummary.Header>
-
         <FormSummary.Answers>
           <FormSummary.Answer>
             <FormSummary.Label>Navn</FormSummary.Label>
@@ -17,18 +16,18 @@ const Example = () => {
           </FormSummary.Answer>
         </FormSummary.Answers>
       </FormSummary>
+
       <FormSummary>
         <FormSummary.Header>
-          <FormSummary.Heading>Personal</FormSummary.Heading>
-          <FormSummary.EditLink href="#" aria-label="Uppdatera information">
-            Uppdatera information
+          <FormSummary.Heading>Personal information</FormSummary.Heading>
+          <FormSummary.EditLink href="#" aria-label="Edit personal information">
+            Change personal information
           </FormSummary.EditLink>
         </FormSummary.Header>
-
         <FormSummary.Answers>
           <FormSummary.Answer>
-            <FormSummary.Label>Namn</FormSummary.Label>
-            <FormSummary.Value>Sverre Svenska</FormSummary.Value>
+            <FormSummary.Label>Name</FormSummary.Label>
+            <FormSummary.Value>John Doe</FormSummary.Value>
           </FormSummary.Answer>
         </FormSummary.Answers>
       </FormSummary>
