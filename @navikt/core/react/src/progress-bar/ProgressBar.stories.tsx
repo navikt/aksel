@@ -45,13 +45,20 @@ export const Default: Story = {
 
     return (
       <div style={{ width: "400px" }}>
-        <p id="progress-bar-label">Loading</p>
-        <ProgressBar
-          valueMax={100}
-          size="medium"
-          value={value}
-          aria-labelledby="progress-bar-label"
-        />
+        {value < 100 ? (
+          <>
+            <p id="progress-bar-label">Loading</p>
+            <ProgressBar
+              valueMax={100}
+              size="medium"
+              value={value}
+              duration={10}
+              aria-labelledby="progress-bar-label"
+            />
+          </>
+        ) : (
+          <p>Success screen successfully loaded 🎉</p>
+        )}
       </div>
     );
   },
@@ -71,20 +78,20 @@ export const Sizes: Story = {
   render: () => {
     return (
       <div>
-        <p id="progress-bar-label-small">Fremdrift i søknaden</p>
+        <p id="progress-bar-label-small">Fremdrift i søknaden (small)</p>
         <ProgressBar
           size="small"
           value={7}
           valueMax={12}
           aria-labelledby="progress-bar-label-small"
         />
-        <p id="progress-bar-label-medium">Fremdrift i søknaden</p>
+        <p id="progress-bar-label-medium">Fremdrift i søknaden (medium)</p>
         <ProgressBar
           value={3}
           valueMax={12}
           aria-labelledby="progress-bar-label-medium"
         />
-        <p id="progress-bar-label-large">Fremdrift i søknaden</p>
+        <p id="progress-bar-label-large">Fremdrift i søknaden (large)</p>
         <ProgressBar
           size="large"
           value={7}
@@ -101,17 +108,24 @@ export const Sizes: Story = {
 
 export const IndeterminateState: Story = {
   render: () => {
+    const values = [0, 25, 50, 75, 100];
     return (
-      <div>
-        <p id="progress-bar-label">Indeterminate progress bar</p>
-        <ProgressBar
-          valueMax={100}
-          duration={2}
-          size="medium"
-          value={79}
-          aria-labelledby="progress-bar-label"
-        />
-      </div>
+      <>
+        {values.map((value) => (
+          <div key={value}>
+            <p id={`progress-bar-label-${value}`}>
+              Indeterminate progress bar at {value}%
+            </p>
+            <ProgressBar
+              valueMax={100}
+              duration={2}
+              size="medium"
+              value={value}
+              aria-labelledby={`progress-bar-label-${value}`}
+            />
+          </div>
+        ))}
+      </>
     );
   },
   args: {

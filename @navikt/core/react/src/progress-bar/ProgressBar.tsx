@@ -85,10 +85,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
 
     React.useEffect(() => {
       let timer: NodeJS.Timeout;
-      console.log("duration", props.duration);
       if (props.duration)
         timer = setTimeout(() => {
-          console.log("duration done");
           setIsIndeterminate(true);
         }, props.duration * 1000);
 
@@ -116,17 +114,14 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-label={ariaLabel}
       >
         <div
-          className={cl(
-            "navds-progress-bar__progress",
-            "navds-progress-bar__progress--indeterminate",
-          )}
+          className={cl("navds-progress-bar__progress", {
+            "navds-progress-bar__progress--indeterminate": isIndeterminate,
+          })}
           style={{
             transform: !isIndeterminate
               ? `translateX(-${100 - (clampedValue / valueMax) * 100}%)`
-              : `translateX(0%)`,
-            animationDelay: props.duration
-              ? `${props.duration + 1}s`
-              : undefined,
+              : `translateX(-100%)`,
+            animationDelay: isIndeterminate ? `1s` : undefined,
           }}
         />
       </div>
