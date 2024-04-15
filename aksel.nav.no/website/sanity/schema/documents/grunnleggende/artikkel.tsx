@@ -16,7 +16,7 @@ export const GrunnleggendeArtikkel = defineType({
   name: "ds_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Grunnleggende"),
+  ...artikkelPreview("Grunnleggende", 6),
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,

@@ -26,8 +26,8 @@ export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
 export {
   GuidePanel,
-  type GuidePanelProps,
   GuidePanelDefaultIllustration,
+  type GuidePanelProps,
 } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
 export {
@@ -127,6 +127,21 @@ export {
 export { ErrorSummary, type ErrorSummaryProps } from "./form/error-summary";
 export { Fieldset, type FieldsetProps } from "./form/fieldset";
 export {
+  UNSAFE_FileUpload,
+  type FileAccepted,
+  type FileItem,
+  type FileMetadata,
+  type FileObject,
+  type FileRejected,
+  type FileRejectedPartitioned,
+  type FileRejectionReason,
+  type FileUploadDropzoneProps,
+  type FileUploadItemProps,
+  type FileUploadTriggerProps,
+  type FilesPartitioned,
+} from "./form/file-upload";
+export { FormSummary, type FormSummaryProps } from "./form/form-summary";
+export {
   Radio,
   RadioGroup,
   type RadioGroupProps,
@@ -137,20 +152,6 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
-export {
-  UNSAFE_FileUpload,
-  type FileUploadDropzoneProps,
-  type FileUploadTriggerProps,
-  type FileObject,
-  type FileRejected,
-  type FileAccepted,
-  type FileRejectedPartitioned,
-  type FilesPartitioned,
-  type FileRejectionReason,
-  type FileUploadItemProps,
-  type FileItem,
-  type FileMetadata,
-} from "./form/file-upload";
 
 /**
  * @deprecated

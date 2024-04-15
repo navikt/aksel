@@ -180,6 +180,11 @@ const StyleMappings = {
     { component: "TextField", main: formCss, dependencies: [typoCss] },
     { component: "Textarea", main: formCss, dependencies: [typoCss] },
     {
+      component: "FormSummary",
+      main: formCss,
+      dependencies: [typoCss, "link.css"],
+    },
+    {
       component: "ToggleGroup",
       main: "toggle-group.css",
       dependencies: [typoCss],
