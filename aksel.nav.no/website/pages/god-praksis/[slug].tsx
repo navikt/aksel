@@ -1,220 +1,142 @@
-import cl from "clsx";
-import Image from "next/legacy/image";
-import { GetStaticPaths } from "next/types";
-import { Suspense, lazy } from "react";
-import { Detail, Heading, Label } from "@navikt/ds-react";
-import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import { groq } from "next-sanity";
+import { GetServerSideProps } from "next/types";
+import { Suspense, lazy, useMemo } from "react";
+import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
+import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
+import { GpChipNavigation } from "@/layout/god-praksis-page/chipnavigation/GpChipNavigation";
+import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
+import {
+  GpSlugQueryResponse,
+  ParsedGPArticle,
+} from "@/layout/god-praksis-page/interface";
 import Header from "@/layout/header/Header";
-import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import { getAkselTema, urlFor } from "@/sanity/interface";
-import { contributorsSingle, destructureBlocks } from "@/sanity/queries";
-import { AkselTemaT, NextPageT } from "@/types";
-import { abbrName } from "@/utils";
-import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { NextPageT } from "@/types";
+import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
-import NotFotfund from "../404";
 
-type PageProps = NextPageT<{
-  tema: Omit<AkselTemaT, "ansvarlig"> & {
-    ansvarlig?: { title: string; roller: string[] };
-  };
-}>;
-
-export const query = `{
-  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
+const sanityQuery = groq`
+{
+  "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(publishedAt desc) {
+    _id,
+    heading,
+    publishedAt,
+    "description": ingress,
+    "undertema": undertema[]->{title, "temaTitle": tema->title},
+    "innholdstype": innholdstype->title,
+    "slug": slug.current,
+  },
+  "tema": *[_type == "gp.tema" && slug.current == $slug][0]{
     ...,
-    "ansvarlig": ansvarlig->{title, roller},
-    seksjoner[]{
-      ...,
-      beskrivelse[]{
-        ...,
-        ${destructureBlocks}
-      },
-      sider[]->{
-        _id,
-        heading,
-        _createdAt,
-        _updatedAt,
-        publishedAt,
-        updateInfo,
-        "slug": slug.current,
-        "tema": tema[]->title,
-        ingress,
-        "contributor": ${contributorsSingle}
-      }
+    "slug": slug.current,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
+      title,
+      description
     },
-    "pictogram": pictogram.asset-> {
-        url,
-        altText,
-    },
+    "image": pictogram,
+  },
+  "heroNav": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title)){
+    title,
+    "slug": slug.current,
+    "image": pictogram,
+    "imageInverted": pictogramInverted,
   }
-}`;
+}
+`;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: await getAkselTema().then((paths) =>
-      paths.map(({ path }) => ({
-        params: {
-          slug: path,
-        },
-      })),
-    ),
-    fallback: "blocking",
-  };
-};
+type PageProps = NextPageT<GpSlugQueryResponse>;
 
-export const getStaticProps = async ({
-  params: { slug },
-  preview = false,
-}: {
-  params: { slug: string };
-  preview?: boolean;
-}): Promise<PageProps> => {
-  const { tema } = await getClient().fetch(query, {
-    slug,
-  });
+export const getServerSideProps: GetServerSideProps = async (
+  ctx,
+): Promise<PageProps> => {
+  const slug = ctx.params?.slug as string;
+  const preview = !!ctx.preview;
+
+  const { heroNav, tema, articles } =
+    await getClient().fetch<GpSlugQueryResponse>(sanityQuery, {
+      slug,
+    });
 
   return {
     props: {
       tema,
+      heroNav,
+      // Avoids having to format date clientside
+      articles: await Promise.all(
+        articles.map(async (a) => ({
+          ...a,
+          publishedAt: await dateStr(a.publishedAt),
+        })),
+      ),
       slug,
       preview,
-      id: tema?._id ?? null,
-      title: tema?.title ?? "",
+      id: tema._id ?? "",
+      title: tema.title ?? "",
     },
-    notFound: !tema && !preview,
-    revalidate: 60,
+    notFound: !tema || articles.length === 0,
   };
 };
 
-const Page = ({ tema: page }: PageProps["props"]) => {
-  if (!page || !page.seksjoner || page.seksjoner.length === 0) {
-    return <NotFotfund />;
-  }
+const GpPage = (props: PageProps["props"]) => {
+  const articles = useMemo(
+    () =>
+      props.articles
+        .map((article) => {
+          const undertema = article.undertema.find(
+            (ut) => ut?.temaTitle === props.tema.title,
+          )?.title;
 
-  const hasAnsvarlig = !!page?.ansvarlig?.title;
-
-  const hasPages = !!page.seksjoner.find((x) => !!x.sider);
+          return {
+            ...article,
+            undertema: undertema ?? "",
+          } satisfies ParsedGPArticle;
+        })
+        .filter((article) => !!article.undertema)
+        /* Makes sure sections always appear in the same order */
+        .sort((a, b) => a.undertema.localeCompare(b.undertema)),
+    [props.articles, props.tema.title],
+  );
 
   return (
     <>
       <SEO
-        title={page?.title}
-        description={page?.seo?.meta}
-        image={page?.seo?.image}
+        title={props.tema?.title ?? ""}
+        description={props.tema?.seo?.meta ?? props.tema.description}
+        image={props.tema?.seo?.image}
       />
-
-      <div className="bg-surface-subtle">
+      <Page
+        footer={<Footer />}
+        footerPosition="belowFold"
+        className="bg-surface-subtle"
+      >
         <Header variant="subtle" />
-        <main
+        <Box
+          paddingBlock="10"
+          as="main"
           tabIndex={-1}
           id="hovedinnhold"
-          className="relative overflow-hidden focus:outline-none"
+          className="animate-popUpPage focus:outline-none"
+          key={props.tema?.title}
         >
-          <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
-          <div className=" pt-20 text-center">
-            <div className="dynamic-wrapper px-4 pb-6 text-center">
-              <Image
-                src={urlFor(page.pictogram.url).auto("format").url()}
-                decoding="sync"
-                width="72"
-                height="72"
-                layout="fixed"
-                priority
-                aria-hidden
-                alt={page.pictogram?.altText}
-              />
-              <Heading
-                level="1"
-                size="xlarge"
-                className="mt-8 hidden md:block md:text-5xl"
-              >
-                {page.title}
-              </Heading>
-              <Heading level="1" size="large" className="mt-8 block md:hidden">
-                {page.title}
-              </Heading>
+          <Page.Block width="xl" gutters>
+            <VStack gap="10">
+              <TemaHero tema={props.tema} heroNav={props.heroNav} />
+              <Box paddingInline={{ xs: "4", lg: "10" }}>
+                <GpChipNavigation articles={articles} />
 
-              <div className="mt-4 flex flex-col items-center justify-between gap-8">
-                <SanityBlockContent
-                  blocks={page.beskrivelse}
-                  className="override-text-700 max-w-prose xl:mb-8"
-                  isIngress
-                />
-                <div
-                  className={cl(
-                    "max-w relative z-10 mb-2 h-fit sm:w-96 xl:mt-[10px]",
-                    { invisible: !hasAnsvarlig },
-                  )}
-                  aria-hidden={!hasAnsvarlig}
-                >
-                  <Detail as="div" className="mb-2" uppercase>
-                    Ansvarlig for tema
-                  </Detail>
-                  <div className="grid">
-                    <div>
-                      <Label as="div" className="text-xlarge">
-                        {page?.ansvarlig?.title
-                          ? abbrName(page?.ansvarlig?.title)
-                          : ""}
-                      </Label>
-                      {page?.ansvarlig?.roller &&
-                      page.ansvarlig.roller.length > 0 ? (
-                        <div className="mt-[2px] text-medium">
-                          {page?.ansvarlig?.roller.join(", ")}
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative px-4 pb-24 pt-8 md:pt-16 xl:pt-8 ">
-            {hasPages ? (
-              <div className="dynamic-wrapper grid gap-20">
-                {page.seksjoner.map((seksjon) =>
-                  seksjon?.sider ? (
-                    <div key={seksjon._key}>
-                      <Heading level="2" size="medium">
-                        {seksjon.title}
-                      </Heading>
-                      {seksjon.beskrivelse && (
-                        <div className="max-w-prose">
-                          <SanityBlockContent blocks={seksjon.beskrivelse} />
-                        </div>
-                      )}
-                      <div className="card-grid-3-1 mt-6">
-                        {seksjon?.sider?.map((x) => (
-                          <ArtikkelCard
-                            {...x}
-                            level="3"
-                            source={page?.slug?.current}
-                            key={x._id}
-                            variant="god-praksis"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ) : null,
-                )}
-              </div>
-            ) : (
-              <div className="dynamic-wrapper mb-20">
-                <Heading level="2" size="medium">
-                  Fant ingen artikler her enda...
-                </Heading>
-              </div>
-            )}
-          </div>
-        </main>
-        <Footer />
-      </div>
+                <VStack gap="12" className="mt-10">
+                  <ArticleSections
+                    articles={articles}
+                    undertemaList={props.tema.undertema}
+                  />
+                </VStack>
+              </Box>
+            </VStack>
+          </Page.Block>
+        </Box>
+      </Page>
     </>
   );
 };
@@ -224,10 +146,10 @@ const WithPreview = lazy(() => import("@/preview"));
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<Page {...props} />}>
+      <Suspense fallback={<GpPage {...props} />}>
         <WithPreview
-          comp={Page}
-          query={query}
+          comp={GpPage}
+          query={sanityQuery}
           props={props}
           params={{
             slug: props?.slug,
@@ -237,7 +159,7 @@ const Wrapper = (props: any) => {
     );
   }
 
-  return <Page {...props} />;
+  return <GpPage {...props} />;
 };
 
 export default Wrapper;
