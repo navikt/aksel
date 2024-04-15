@@ -1,16 +1,18 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
-import { AkselTemaT } from "@/types";
 
-type GodPraksisCardSimpleProps = {
-  node: Partial<AkselTemaT>;
+type GpFrontpageCardProps = {
+  children: React.ReactNode;
+  href: string;
+  image: SanityImageSource;
 };
 
-const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
-  if (!node?.pictogram || !node?.slug?.current || !node?.title) {
+const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
+  if (!image || !children || !href) {
     return null;
   }
 
@@ -18,9 +20,7 @@ const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
     <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
         <Image
-          src={urlFor(node?.pictogram)
-            .auto("format")
-            .url()}
+          src={urlFor(image).auto("format").url()}
           decoding="sync"
           layout="fill"
           objectFit="contain"
@@ -29,23 +29,23 @@ const GodPraksisCardSimple = ({ node }: GodPraksisCardSimpleProps) => {
         />
       </div>
       <NextLink
-        href={`/god-praksis/${node.slug.current}`}
+        href={href}
         passHref
         onClick={(e) =>
           amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
         }
         className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
       >
-        {node.title}
+        {children}
       </NextLink>
     </li>
   );
 };
 
-export default function Component(props: GodPraksisCardSimpleProps) {
+export default function Component(props: GpFrontpageCardProps) {
   return (
-    <ErrorBoundary boundaryName="GodPraksisCardSimple">
-      <GodPraksisCardSimple {...props} />
+    <ErrorBoundary boundaryName="GpFrontpageCard">
+      <GpFrontpageCard {...props} />
     </ErrorBoundary>
   );
 }

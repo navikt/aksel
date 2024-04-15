@@ -1,4 +1,6 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
+import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
 import { Suspense, lazy, useState } from "react";
 import {
@@ -18,22 +20,26 @@ import {
   VStack,
   useClientLayoutEffect,
 } from "@navikt/ds-react";
-import GodPraksisCardSimple from "@/cms/cards/GodPraksisCardSimple";
 import FrontpageBlock, {
   BlocksT,
 } from "@/cms/frontpage-blocks/FrontpageBlocks";
 import Footer from "@/layout/footer/Footer";
+import GpFrontpageCard from "@/layout/god-praksis-page/cards/GpFrontpageCard";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
-import { AkselTemaT, NextPageT } from "@/types";
+import { NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 
 type PageProps = NextPageT<{
-  tema: AkselTemaT[];
+  tema: {
+    title: string;
+    slug: { current: string };
+    pictogram: SanityImageSource;
+  }[];
   page: {
     title: string;
     god_praksis_intro: string;
@@ -42,11 +48,12 @@ type PageProps = NextPageT<{
   blocks?: BlocksT[];
 }>;
 
-const query = `*[_type == "aksel_forside"][0]{
+const query = groq`*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
-  "tema": *[_type == "aksel_tema" && defined(seksjoner[].sider[])],
+  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title)),
   blocks[]{
     ...,
     _type == "nytt_fra_aksel"=>{
@@ -54,7 +61,7 @@ const query = `*[_type == "aksel_forside"][0]{
         ...,
         "content": null,
         ${contributorsAll},
-        "tema": tema[]->title,
+        "tema": undertema[]->tema->title,
       },
       "curatedResent": {
         "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
@@ -78,7 +85,7 @@ const query = `*[_type == "aksel_forside"][0]{
             _updatedAt,
             publishedAt,
             "slug": slug.current,
-            "tema": tema[]->title,
+            "tema": undertema[]->tema->title,
             ingress,
             seo,
             ${contributorsAll}
@@ -91,7 +98,7 @@ const query = `*[_type == "aksel_forside"][0]{
             _updatedAt,
             publishedAt,
             "slug": slug.current,
-            "tema": tema[]->title,
+            "tema": undertema[]->tema->title,
             ingress,
             seo,
             ${contributorsAll}
@@ -130,21 +137,9 @@ export const getStaticProps: GetStaticProps = async ({
     preview: "false",
   });
 
-  const validateTema = tema
-    .filter(
-      (t) =>
-        t?.title &&
-        t?.slug &&
-        t?.pictogram &&
-        t?.seksjoner.some(
-          (seksjon) => seksjon?.sider.some((side: any) => side?._ref),
-        ),
-    )
-    .sort((a, b) => a.title.localeCompare(b.title));
-
   return {
     props: {
-      tema: validateTema,
+      tema,
       page,
       blocks,
       slug: "/",
@@ -290,7 +285,13 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
 
                   <ul className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
                     {tema.map((t) => (
-                      <GodPraksisCardSimple key={t._id} node={t} />
+                      <GpFrontpageCard
+                        key={t.title}
+                        href={`/god-praksis/${t.slug.current}`}
+                        image={t.pictogram}
+                      >
+                        {t.title}
+                      </GpFrontpageCard>
                     ))}
                   </ul>
                 </VStack>
