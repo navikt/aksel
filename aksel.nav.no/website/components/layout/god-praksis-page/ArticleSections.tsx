@@ -108,7 +108,7 @@ export function ArticleSections({
         {utArticles.map((article) => (
           <li key={article.slug}>
             <GpArticleCard
-              href={`${article.slug}`.replace("god-praksis", "gp")}
+              href={article.slug}
               innholdstype={article.innholdstype}
               undertema={article.undertema}
               publishedAt={article.publishedAt}
