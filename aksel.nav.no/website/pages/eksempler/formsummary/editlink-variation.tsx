@@ -7,7 +7,7 @@ const Example = () => {
       <FormSummary>
         <FormSummary.Header>
           <FormSummary.Heading>Personalia</FormSummary.Heading>
-          <FormSummary.EditLink href="#" aria-label="Endre svar" />
+          <FormSummary.EditLink href="#" aria-label="Endre personalia" />
         </FormSummary.Header>
         <FormSummary.Answers>
           <FormSummary.Answer>
@@ -21,7 +21,7 @@ const Example = () => {
         <FormSummary.Header>
           <FormSummary.Heading>Personal information</FormSummary.Heading>
           <FormSummary.EditLink href="#" aria-label="Edit personal information">
-            Change personal information
+            Edit
           </FormSummary.EditLink>
         </FormSummary.Header>
         <FormSummary.Answers>
