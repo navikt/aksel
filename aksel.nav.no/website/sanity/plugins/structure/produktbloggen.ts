@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { NewspaperIcon } from "@navikt/aksel-icons";
+import { HouseIcon, NewspaperIcon } from "@navikt/aksel-icons";
 import { bloggKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listMyDraftArticles, listPublishedArticles } from "./structure.util";
@@ -14,7 +14,7 @@ export function produktBloggenStructure(S: StructureBuilder) {
         .items([
           S.documentListItem()
             .title(`Landingsside`)
-            .showIcon(false)
+            .icon(HouseIcon)
             .schemaType(`blogg_landingsside`)
             .id(`blogg_landingsside_id1`),
           S.divider(),

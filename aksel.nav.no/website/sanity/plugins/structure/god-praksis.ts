@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { PencilBoardIcon } from "@navikt/aksel-icons";
+import { HouseIcon, PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
 import {
   editorIsContributorFilter,
@@ -24,7 +24,7 @@ export function godPraksiStructure(S: StructureBuilder) {
         .items([
           S.documentListItem()
             .title(`Landingsside`)
-            .showIcon(false)
+            .icon(HouseIcon)
             .schemaType(`godpraksis_landingsside`)
             .id(`godpraksis_landingsside_id1`),
           S.divider(),

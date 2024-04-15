@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { TokenIcon } from "@navikt/aksel-icons";
+import { HouseIcon, TokenIcon } from "@navikt/aksel-icons";
 import { grunnleggendeKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listDraftArticles, listOutdatedArticles } from "./structure.util";
@@ -14,7 +14,7 @@ export function grunnleggendeStructure(S: StructureBuilder) {
         .items([
           S.documentListItem()
             .title(`Landingsside`)
-            .showIcon(false)
+            .icon(HouseIcon)
             .schemaType(`grunnleggende_landingsside`)
             .id(`grunnleggende_landingsside_id1`),
           S.divider(),

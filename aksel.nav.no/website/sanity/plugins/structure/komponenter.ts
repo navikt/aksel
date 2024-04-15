@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { ComponentIcon } from "@navikt/aksel-icons";
+import { ComponentIcon, HouseIcon } from "@navikt/aksel-icons";
 import { komponentKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listDraftArticles, listOutdatedArticles } from "./structure.util";
@@ -14,7 +14,7 @@ export function komponenterStructure(S: StructureBuilder) {
         .items([
           S.documentListItem()
             .title(`Landingsside`)
-            .showIcon(false)
+            .icon(HouseIcon)
             .schemaType(`komponenter_landingsside`)
             .id(`komponenter_landingsside_id1`),
           S.divider(),

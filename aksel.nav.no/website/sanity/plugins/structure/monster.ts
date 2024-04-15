@@ -1,5 +1,5 @@
 import { StructureBuilder } from "sanity/structure";
-import { RectangleSectionsIcon } from "@navikt/aksel-icons";
+import { HouseIcon, RectangleSectionsIcon } from "@navikt/aksel-icons";
 import { templatesKategorier } from "@/sanity/config";
 import { Panes } from "./panes";
 import { listDraftArticles, listOutdatedArticles } from "./structure.util";
@@ -14,7 +14,7 @@ export function monsterStructure(S: StructureBuilder) {
         .items([
           S.documentListItem()
             .title(`Landingsside`)
-            .showIcon(false)
+            .icon(HouseIcon)
             .schemaType(`templates_landingsside`)
             .id(`templates_landingsside_id1`),
           S.divider(),
