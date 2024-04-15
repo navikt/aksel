@@ -3,8 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Checkbox hideLabel value="Midterst">
-      Midterst
+    <Checkbox hideLabel value="car">
+      Bil
     </Checkbox>
   );
 };

@@ -5,11 +5,14 @@ const Example = () => {
   const handleChange = (val: string[]) => console.log(val);
 
   return (
-    <CheckboxGroup legend="Hvor vil du sitte?" onChange={handleChange}>
-      <Checkbox value="Bakerst">Bakerst</Checkbox>
-      <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst" description="Tilgjengelig med rullestol">
-        Fremst
+    <CheckboxGroup legend="Transportmiddel" onChange={handleChange}>
+      <Checkbox value="car">Bil</Checkbox>
+      <Checkbox value="taxi">Drosje</Checkbox>
+      <Checkbox
+        value="public"
+        description="Buss, båt, fly, trikk, T-bane eller tog."
+      >
+        Kollektivt
       </Checkbox>
     </CheckboxGroup>
   );

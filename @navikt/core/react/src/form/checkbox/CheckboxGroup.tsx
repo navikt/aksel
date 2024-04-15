@@ -44,10 +44,10 @@ export interface CheckboxGroupProps
  *
  * @example
  * ```jsx
- * <CheckboxGroup legend="Hvor vil du sitte?">
- *   <Checkbox value="Bakerst">Bakerst</Checkbox>
- *   <Checkbox value="Midterst">Midterst</Checkbox>
- *   <Checkbox value="Fremst">Fremst</Checkbox>
+ * <CheckboxGroup legend="Transportmiddel">
+ *   <Checkbox value="car">Bil</Checkbox>
+ *   <Checkbox value="taxi">Drosje</Checkbox>
+ *   <Checkbox value="public">Kollektivt</Checkbox>
  * </CheckboxGroup>
  * ```
  */

@@ -25,7 +25,6 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { Feedback } from "@/web/Feedback/Feedback";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
@@ -177,7 +176,6 @@ const Page = ({
         <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
-              <BreadCrumbs auto />
               <Heading
                 level="1"
                 size="large"
@@ -256,7 +254,7 @@ const Page = ({
                   <BodyShort as="span" className="text-text-subtle">
                     Publisert: {publishDate}
                   </BodyShort>
-                  <Feedback userState={userState} />
+                  {userState && <Feedback userState={userState} />}
                 </div>
               </div>
             </div>
