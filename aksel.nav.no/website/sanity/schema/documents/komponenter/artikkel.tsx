@@ -17,7 +17,7 @@ export const KomponentArtikkel = defineType({
   name: "komponent_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Komponenter"),
+  ...artikkelPreview("Komponenter", 6),
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,

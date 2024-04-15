@@ -1,10 +1,14 @@
 import { differenceInMonths } from "date-fns";
-import React from "react";
-import { FileResetIcon, FileTextIcon } from "@navikt/aksel-icons";
+import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
 
-const isAfter = (date) => differenceInMonths(new Date(), new Date(date)) >= 6;
+const isAfter = (date: string, threshold: number) =>
+  differenceInMonths(new Date(), new Date(date)) >= threshold;
 
-export const artikkelPreview = (_type: string) => {
+/**
+ * @param _type document type
+ * @param threshold number of months before article is considered outdated in **months**
+ */
+export const artikkelPreview = (_type: string, threshold: number = 12) => {
   return {
     preview: {
       select: {
@@ -24,17 +28,14 @@ export const artikkelPreview = (_type: string) => {
         ) {
           return {
             title: heading,
-            subtitle: `${isAfter(updateInfo) ? "UTDATERT |" : ""}  ${_type} ${
+            subtitle: `${
+              isAfter(updateInfo, threshold) ? "UTDATERT |" : ""
+            }  ${_type} ${
               tema ?? kategori
                 ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""
             }`,
-            media: () =>
-              isAfter(updateInfo) ? (
-                <FileResetIcon aria-hidden />
-              ) : (
-                <FileTextIcon aria-hidden />
-              ),
+            media: isAfter(updateInfo, threshold) && HourglassBottomFilledIcon,
           };
         }
         return {
