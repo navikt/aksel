@@ -1,0 +1,25 @@
+.navds-form-progress__expand-icon {
+  font-size: 1.5rem;
+  margin-block: -0.4rem;
+  margin-right: var(--a-spacing-1-alt);
+}
+
+.navds-form-progress__stepper {
+  display: none;
+}
+
+.navds-form-progress--open .navds-form-progress__stepper {
+  display: block;
+}
+
+.navds-form-progress__button:hover .navds-form-progress__expand-icon {
+  transform: translateY(1px);
+}
+
+.navds-form-progress--open .navds-form-progress__button .navds-form-progress__expand-icon {
+  transform: rotate(-180deg);
+}
+
+.navds-form-progress--open .navds-form-progress__button:hover .navds-form-progress__expand-icon {
+  transform: translateY(-1px) rotate(-180deg);
+}
