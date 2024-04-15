@@ -55,7 +55,7 @@ export function listDraftArticles(
 ) {
   return S.listItem({
     id: `${type}_drafts`,
-    title: "Drafts",
+    title: "Utkast",
     schemaType: type,
     child: () => {
       return S.documentTypeList(type)
