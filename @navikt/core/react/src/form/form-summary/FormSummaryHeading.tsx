@@ -10,7 +10,6 @@ export interface FormSummaryHeadingProps
   children: React.ReactNode;
   /**
    * The heading level.
-   *
    * @default "3"
    */
   level?: Exclude<HeadingProps["level"], "1">;
