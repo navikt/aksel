@@ -70,7 +70,7 @@ const query = `{
       publishedAt,
       updateInfo,
       "slug": slug.current,
-      "tema": tema[]->tag,
+      "tema": undertema[]->tema->title,
       ingress,
       "contributor": ${contributorsSingle},
     }
