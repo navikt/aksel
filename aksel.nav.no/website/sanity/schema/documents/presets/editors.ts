@@ -29,9 +29,9 @@ export const editorField = defineField({
       }
       profile = await client.createIfNotExists({
         _type: "editor",
-        _id: `auto-editor.${currentUser?.id}`,
-        email: currentUser?.email,
-        title: currentUser?.name,
+        _id: `auto-editor.${currentUser.id}`,
+        email: currentUser.email,
+        title: currentUser.name,
       });
     }
 
