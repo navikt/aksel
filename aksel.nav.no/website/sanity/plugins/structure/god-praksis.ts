@@ -1,6 +1,11 @@
 import { StructureBuilder } from "sanity/structure";
-import { PencilBoardIcon } from "@navikt/aksel-icons";
+import { HouseIcon, PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import {
+  editorIsContributorFilter,
+  listMyDraftArticles,
+  listPublishedArticles,
+} from "./structure.util";
 
 export function godPraksiStructure(S: StructureBuilder) {
   const adminOrDev = S.context.currentUser?.roles.find((x) =>
@@ -17,12 +22,9 @@ export function godPraksiStructure(S: StructureBuilder) {
       S.list()
         .title("God Praksis")
         .items([
-          S.documentListItem({
-            displayOptions: { showIcon: false },
-            id: "gp_new",
-            schemaType: "godpraksis_landingsside",
-          })
+          S.documentListItem()
             .title(`Landingsside`)
+            .icon(HouseIcon)
             .schemaType(`godpraksis_landingsside`)
             .id(`godpraksis_landingsside_id1`),
           S.divider(),
@@ -32,40 +34,9 @@ export function godPraksiStructure(S: StructureBuilder) {
 }
 function godPraksisPanes(S: StructureBuilder) {
   return [
-    S.listItem({
-      id: "my_gp_published",
-      title: "Mine publiserte artikler",
-      schemaType: "aksel_artikkel",
-      child: (_, { structureContext }) => {
-        const mail = structureContext.currentUser?.email;
+    listPublishedArticles(S, "aksel_artikkel"),
+    listMyDraftArticles(S, "aksel_artikkel"),
 
-        return S.documentTypeList("aksel_artikkel")
-          .title("Artikler")
-          .filter(
-            `_type == $type && !(_id in path("drafts.**")) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
-          )
-          .apiVersion(SANITY_API_VERSION)
-          .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
-      },
-    }),
-    S.listItem({
-      id: "my_gp_drafts",
-      title: "Mine drafts",
-      schemaType: "aksel_artikkel",
-      child: (_, { structureContext }) => {
-        const mail = structureContext.currentUser?.email;
-
-        return S.documentTypeList("aksel_artikkel")
-          .title("Artikler")
-          .filter(
-            `_type == $type && _id in path("drafts.**") && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
-          )
-          .apiVersion(SANITY_API_VERSION)
-          .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
-      },
-    }),
     S.listItem({
       id: "my_gp_outdated",
       title: "Mine artikler som trenger oppdatering",
@@ -76,11 +47,14 @@ function godPraksisPanes(S: StructureBuilder) {
         return S.documentTypeList("aksel_artikkel")
           .title("Artikler")
           .filter(
-            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ($mail in contributors[]->email || $mail in contributors[]->alt_email)`,
+            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ${editorIsContributorFilter}`,
           )
           .apiVersion(SANITY_API_VERSION)
           .params({ type: "aksel_artikkel", mail })
-          .initialValueTemplates([]);
+          .initialValueTemplates([])
+          .defaultOrdering([
+            { field: "updateInfo.lastVerified", direction: "asc" },
+          ]);
       },
     }),
     S.divider(),
@@ -109,7 +83,7 @@ function godPraksisPanes(S: StructureBuilder) {
     S.divider(),
     S.listItem({
       id: "article_tema_complete_view",
-      title: "Artikler",
+      title: "Tema -> Artikler",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -124,7 +98,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_undertema_view",
-      title: "Artikler undertema",
+      title: "Tema -> Undertema -> Artikler",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -152,7 +126,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_innholdstype_view",
-      title: "Artikler innholdstype",
+      title: "Innholdstype -> Artikler",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.innholdstype")
@@ -210,7 +184,10 @@ function godPraksisPanes(S: StructureBuilder) {
               )
               .apiVersion(SANITY_API_VERSION)
               .params({ type: "aksel_artikkel", id })
-              .initialValueTemplates([]);
+              .initialValueTemplates([])
+              .defaultOrdering([
+                { field: "updateInfo.lastVerified", direction: "asc" },
+              ]);
           })
           .initialValueTemplates([]),
     }),
