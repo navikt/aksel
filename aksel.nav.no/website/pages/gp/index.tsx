@@ -2,7 +2,7 @@ import cl from "clsx";
 import { groq } from "next-sanity";
 import NextLink from "next/link";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import {
   BodyLong,
   Box,
@@ -97,11 +97,6 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 const GpPage = (props: PageProps["props"]) => {
-  useEffect(() => {
-    window.location.host === "aksel.nav.no" &&
-      window.location.replace(`http://aksel.nav.no/404`);
-  }, []);
-
   return (
     <>
       <SEO

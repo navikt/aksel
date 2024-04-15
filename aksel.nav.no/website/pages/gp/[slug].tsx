@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy, useEffect, useMemo } from "react";
+import { Suspense, lazy, useMemo } from "react";
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
@@ -80,11 +80,6 @@ export const getServerSideProps: GetServerSideProps = async (
 };
 
 const GpPage = (props: PageProps["props"]) => {
-  useEffect(() => {
-    window.location.host === "aksel.nav.no" &&
-      window.location.replace(`http://aksel.nav.no/404`);
-  }, []);
-
   const articles = useMemo(
     () =>
       props.articles
