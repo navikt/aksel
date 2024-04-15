@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentUser } from "sanity";
 import { Heading, Label, Link } from "@navikt/ds-react";
 
-export const EditorPage = (...rest) => {
+export const EditorPage = () => {
   const user = useCurrentUser();
 
   if (!user) {
