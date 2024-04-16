@@ -6,7 +6,6 @@ const SanityTabGroups = [
   {
     name: "innhold",
     title: "Innhold",
-    default: true,
   },
   {
     name: "metadata",
