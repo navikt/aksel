@@ -18,33 +18,26 @@ const config: StorybookConfig = {
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
-    const exampleIndexer = async (fileName: string, opts) => {
+    const customIndexer = async (fileName: string, opts) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      code = code.replace(
-        /^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm,
-        "",
-      );
+      const isTemplate = fileName.toLowerCase().includes("templates");
+      const templatesOrExamples = isTemplate ? "Templates" : "Eksempler";
 
-      code = code.replace("export const args =", "const args =");
+      code = code.split(
+        /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
+      )[0];
 
-      code += `\nexport default { title: "Eksempler/${fileName
-        .split("pages/eksempler/")[1]
+      code += `\nexport default { title: "${templatesOrExamples}/${fileName
+        .split(`pages/${templatesOrExamples.toLowerCase()}/`)[1]
         .replace(".tsx", "")}"  };\n`;
 
-      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
-    };
+      code += `\nexport const Demo = {\n
+        render: Example,\n
+      };
+      `;
 
-    const templateIndexer = async (fileName: string, opts) => {
-      let code = readFileSync(fileName, "utf-8").toString();
-
-      code = code.replace(/export default .*/g, "");
-
-      code = code.replace("export const args =", "const args =");
-
-      code += `\nexport default { title: "Templates/${fileName
-        .split("pages/templates/")[1]
-        .replace(".tsx", "")}"  };\n`;
+      console.log({ code });
 
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
@@ -57,11 +50,11 @@ const config: StorybookConfig = {
       },
       {
         test: /pages\/eksempler\/.+?.tsx$/,
-        createIndex: exampleIndexer,
+        createIndex: customIndexer,
       },
       {
         test: /pages\/templates\/.+?.tsx$/,
-        createIndex: templateIndexer,
+        createIndex: customIndexer,
       },
     ];
   },
