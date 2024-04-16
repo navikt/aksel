@@ -54,14 +54,16 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
 
       <div className="relative mt-2">
         <ul id={id} className={cl("flex flex-wrap gap-2 p-1", styles.chips)}>
-          <GpChip
-            type={type}
-            disabled={false}
-            onClick={reset}
-            pressed={!safeString(query?.[type])}
-          >
-            {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
-          </GpChip>
+          <li>
+            <GpChip
+              type={type}
+              disabled={false}
+              onClick={reset}
+              pressed={!safeString(query?.[type])}
+            >
+              {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
+            </GpChip>
+          </li>
           {entries.map(([entryName, count]) => {
             return (
               <li key={entryName} className="chiplist">

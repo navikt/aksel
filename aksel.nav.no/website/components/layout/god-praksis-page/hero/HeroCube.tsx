@@ -22,6 +22,7 @@ function Cube({ variant = "light" }: CubeProps) {
         viewBox="0 0 390 560"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
       >
         <g>
           <path
