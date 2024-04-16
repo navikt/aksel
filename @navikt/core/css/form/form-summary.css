@@ -54,6 +54,17 @@
   padding-bottom: 0;
 }
 
+@media (max-width: 479px) {
+  .navds-form-summary__answer:not(:last-child) {
+    margin-bottom: var(--a-spacing-3);
+    padding-bottom: var(--a-spacing-3);
+  }
+
+  .navds-form-summary__answer:has(.navds-form-summary__answer) {
+    padding-bottom: var(--a-spacing-5);
+  }
+}
+
 .navds-form-summary__value:first-of-type {
   margin-top: var(--a-spacing-1);
 }
