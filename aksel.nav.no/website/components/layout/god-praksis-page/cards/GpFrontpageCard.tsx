@@ -2,27 +2,32 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import ErrorBoundary from "@/error-boundary";
+import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 
 type GpFrontpageCardProps = {
   children: React.ReactNode;
   href: string;
-  image: SanityImageSource;
+  image?: SanityImageSource;
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
   return (
     <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
-        <Image
-          src={urlFor(image).auto("format").url()}
-          decoding="sync"
-          layout="fill"
-          objectFit="contain"
-          aria-hidden
-          priority
-        />
+        {image ? (
+          <Image
+            src={urlFor(image).auto("format").url()}
+            decoding="sync"
+            layout="fill"
+            objectFit="contain"
+            aria-hidden
+            priority
+          />
+        ) : (
+          <FallbackPictogram />
+        )}
       </div>
       <NextLink
         href={href}
