@@ -67,6 +67,33 @@ function Example() {
                 heller må søke på + link til andre søknader.
               </BodyLong>
             </Box>
+            <Box>
+              <Heading level="2" size="large" spacing>
+                Slik søker du
+              </Heading>
+              <BodyLong spacing>
+                Kort info om søknadsprosessen:
+                <br />
+                Forventet mengde spørsmål og omtrent gjennomføringstid?
+                <br />
+                Forventet behov for dokumentasjon?
+                <br />
+                Hvor lenge vi lagrer svarene?Når får du svar?
+              </BodyLong>
+              <BodyLong spacing>
+                Eksempel: I søknaden stiller vi kun spørsmål som er relevante i
+                din situasjon.
+                <br />
+                Antall spørsmål og tiden det tar å søke vil derfor kunne
+                variere. De fleste bruker 20-30 minutter.
+              </BodyLong>
+              <BodyLong>
+                Noen av opplysningene du gir i søknaden må du dokumentere. Du
+                får beskjed underveis i søknaden om hvilken dokumentasjon du må
+                sende inn. Du kan ta pauser når du fyller ut søknaden. Vi lagrer
+                søknaden i opptil ## timer/dager mens du fyller ut.
+              </BodyLong>
+            </Box>
           </VStack>
         </Page.Block>
       </VStack>
