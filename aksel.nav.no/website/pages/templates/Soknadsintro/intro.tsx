@@ -1,12 +1,15 @@
 import { useEffect } from "react";
-import { TasklistIcon } from "@navikt/aksel-icons";
+import { ArrowLeftIcon, TasklistIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   BodyShort,
   Box,
+  Button,
+  Checkbox,
   GuidePanel,
   HGrid,
   Heading,
+  Link,
   Page,
   VStack,
 } from "@navikt/ds-react";
@@ -93,6 +96,23 @@ function Example() {
                 sende inn. Du kan ta pauser når du fyller ut søknaden. Vi lagrer
                 søknaden i opptil ## timer/dager mens du fyller ut.
               </BodyLong>
+            </Box>
+            <Box>
+              <BodyLong spacing>
+                Det er viktig at du gir oss riktige opplysninger slik at vi kan
+                behandle saken din.{" "}
+                <Link href="#gi-riktige-opplysninger">
+                  Les mer om viktigheten av å gi riktige opplysninger.
+                </Link>
+              </BodyLong>
+              <Checkbox>
+                Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
+              </Checkbox>
+            </Box>
+            <Box>
+              <Button variant="primary" icon={<ArrowLeftIcon />}>
+                Start søknad
+              </Button>
             </Box>
           </VStack>
         </Page.Block>
