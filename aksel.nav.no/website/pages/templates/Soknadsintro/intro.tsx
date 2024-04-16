@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { ArrowRightIcon, TasklistIcon } from "@navikt/aksel-icons";
+import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
+  Bleed,
   BodyLong,
   BodyShort,
   Box,
@@ -14,6 +15,7 @@ import {
   Page,
   VStack,
 } from "@navikt/ds-react";
+import { ApplicationPictogram } from "@/assets/Icons";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 function Example() {
@@ -24,17 +26,19 @@ function Example() {
       <Header />
       <VStack gap="8">
         <Page.Block as="main" width="text" gutters>
-          <HGrid gap="6" columns="3rem auto">
-            <TasklistIcon height="3rem" width="3rem" />
-            <VStack gap="1">
-              <BodyShort size="small">
-                NAV 10-07.03 (Om søknaden har ID)
-              </BodyShort>
-              <Heading level="1" size="large">
-                Søknad om [ytelse]
-              </Heading>
-            </VStack>
-          </HGrid>
+          <Bleed marginInline="24">
+            <HGrid gap="6" columns="4.5rem auto">
+              <ApplicationPictogram title="Application" />
+              <VStack gap="1">
+                <BodyShort size="small">
+                  NAV 10-07.03 (Om søknaden har ID)
+                </BodyShort>
+                <Heading level="1" size="large">
+                  Søknad om [ytelse]
+                </Heading>
+              </VStack>
+            </HGrid>
+          </Bleed>
         </Page.Block>
         <Page.Block width="text">
           <VStack gap="12">
