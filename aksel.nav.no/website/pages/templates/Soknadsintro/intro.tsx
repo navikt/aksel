@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { TasklistIcon } from "@navikt/aksel-icons";
 import {
+  BodyLong,
   BodyShort,
+  Box,
   GuidePanel,
   HGrid,
   Heading,
@@ -32,22 +34,40 @@ function Example() {
           </HGrid>
         </Page.Block>
         <Page.Block width="text">
-          <GuidePanel poster>
-            <VStack gap="4">
-              <Heading level="3" size="medium">
-                Hei, [Navn Navnesen]!
+          <VStack gap="12">
+            <GuidePanel poster>
+              <VStack gap="4">
+                <Heading level="3" size="medium">
+                  Hei, [Navn Navnesen]!
+                </Heading>
+                <BodyShort>
+                  Ingress fra nav.no (sjekk om API er en mulighet)
+                  <br />
+                  Link til produktsiden på nav.no.
+                </BodyShort>
+                <BodyShort>
+                  Vi lagrer svarene i søknaden underveis, så du kan trygt ta
+                  pauser og gå tilbake for å endre dem.
+                </BodyShort>
+              </VStack>
+            </GuidePanel>
+            <Box>
+              <Heading level="2" size="large" spacing>
+                Hva kan jeg søke på her? (om relevant)
               </Heading>
-              <BodyShort>
-                Ingress fra nav.no (sjekk om API er en mulighet)
-                <br />
-                Link til produktsiden på nav.no.
-              </BodyShort>
-              <BodyShort>
-                Vi lagrer svarene i søknaden underveis, så du kan trygt ta
-                pauser og gå tilbake for å endre dem.
-              </BodyShort>
-            </VStack>
-          </GuidePanel>
+              <BodyLong spacing>
+                Info om hva du kan søke på her, fordi det er ting du ikke kan
+                søke på her. Som kan føre til at brukerne søker på feil ting.
+              </BodyLong>
+              <Heading level="3" size="medium" spacing>
+                Hva kan jeg ikke søke på her? (om relevant)
+              </Heading>
+              <BodyLong>
+                Info om hva du ikke kan søke på med denne søknaden, hva du
+                heller må søke på + link til andre søknader.
+              </BodyLong>
+            </Box>
+          </VStack>
         </Page.Block>
       </VStack>
       <Env />
