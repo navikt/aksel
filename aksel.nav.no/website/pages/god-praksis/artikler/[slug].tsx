@@ -241,7 +241,7 @@ const Page = ({
                 <div className="mt-12">
                   {authors?.length > 0 && (
                     <Label className="mb-2 text-deepblue-700" as="p">
-                      Bidragsytere
+                      Medvirkende
                     </Label>
                   )}
                   {authors?.length > 0 && (
