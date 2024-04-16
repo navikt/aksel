@@ -2,7 +2,8 @@ import React, { forwardRef } from "react";
 import { Slot } from "../../util/Slot";
 import { useCollapsibleContext } from "../Collapsible.context";
 
-interface CollapsibleContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CollapsibleContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false

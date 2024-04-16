@@ -5,7 +5,7 @@ import { CollapsibleBaseProps } from "./Collapsible.types";
 import CollapsibleContent from "./parts/Collapsible.Content";
 import CollapsibleTrigger from "./parts/Collapsible.Trigger";
 
-interface CollapsibleProps
+export interface CollapsibleProps
   extends CollapsibleBaseProps,
     React.HTMLAttributes<HTMLDivElement> {}
 

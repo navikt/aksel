@@ -3,7 +3,7 @@ import { Slot } from "../../util/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useCollapsibleContext } from "../Collapsible.context";
 
-interface CollapsibleTriggerProps
+export interface CollapsibleTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
