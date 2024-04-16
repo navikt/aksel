@@ -2,6 +2,7 @@ import cl from "clsx";
 import Link from "next/link";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "@navikt/ds-react";
+import ErrorBoundary from "@/error-boundary";
 import { AnimatedChevron } from "@/web/AnimatedChevron";
 
 type GpArticleCardProps = {
@@ -74,4 +75,10 @@ function GpArticleCard({
   );
 }
 
-export default GpArticleCard;
+export default function Component(props: GpArticleCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GpArticleCard">
+      <GpArticleCard {...props} />
+    </ErrorBoundary>
+  );
+}

@@ -6,6 +6,7 @@ import { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { urlFor } from "@/sanity/interface";
+import ErrorBoundary from "@/web/ErrorBoundary";
 
 type GpHeroCardProps = {
   children: React.ReactNode;
@@ -68,4 +69,10 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
   },
 );
 
-export default GpHeroCard;
+export default function Component(props: GpHeroCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GpHeroCard">
+      <GpHeroCard {...props} />
+    </ErrorBoundary>
+  );
+}

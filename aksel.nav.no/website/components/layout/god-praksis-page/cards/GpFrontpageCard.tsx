@@ -12,10 +12,6 @@ type GpFrontpageCardProps = {
 };
 
 const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
-  if (!image || !children || !href) {
-    return null;
-  }
-
   return (
     <li className="flex items-center gap-2 px-2 py-4 sm:gap-4 sm:px-6">
       <div className="relative h-8 w-8 shrink-0 sm:h-12 sm:w-12">
