@@ -22,7 +22,6 @@ function Example() {
   return (
     <Page data-aksel-template="500-v2" footer={<Footer />}>
       <Header />
-      <Page.Block as="main" width="xl" gutters></Page.Block>
       <VStack gap="8">
         <Page.Block as="main" width="text" gutters>
           <HGrid gap="6" columns="3rem auto">
@@ -82,7 +81,7 @@ function Example() {
                 <br />
                 Forventet behov for dokumentasjon?
                 <br />
-                Hvor lenge vi lagrer svarene?Når får du svar?
+                Hvor lenge vi lagrer svarene? Når får du svar?
               </BodyLong>
               <BodyLong spacing>
                 Eksempel: I søknaden stiller vi kun spørsmål som er relevante i
@@ -184,7 +183,7 @@ function Env() {
   return (
     <div
       id="decorator-env"
-      data-src={`${MILJO_URL}/env?context=privatperson`}
+      data-src={`${MILJO_URL}/env?context=privatperson&simple=true&availableLanguages=[{"locale":"nb","url":"https://www.nav.no/person/kontakt-oss"},{"locale":"en","url":"https://www.nav.no/person/kontakt-oss/en/"}]`}
     />
   );
 }
