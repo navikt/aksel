@@ -37,7 +37,7 @@ const Example = () => {
 };
 
 export default {
-  title: "404/404 uten dekorator",
+  title: "templates/404/Uten dekorator",
 };
 
 export const Demo = {
