@@ -7,6 +7,7 @@ interface CollapsibleTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
+   * @default false
    */
   asChild?: boolean;
 }
