@@ -209,23 +209,15 @@ const Page = ({
                 </BodyLong>
               )}
 
-              <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
-                <Detail uppercase as="span">
-                  {verifiedDate}
+              <div className="mt-5 grid">
+                <Detail as="time" textColor="subtle">
+                  {`Oppdatert ${verifiedDate}`}
                 </Detail>
-                {authors?.length > 0 && (
-                  <>
-                    <span className="h-2 w-2 rotate-45 rounded-[1px] bg-deepblue-700 opacity-25" />
-                    <BodyShort
-                      size="small"
-                      as="div"
-                      className="flex flex-wrap gap-1"
-                    >
-                      <address className="not-italic">{authors?.[0]}</address>
-                    </BodyShort>
-                  </>
-                )}
+                <Detail as="time" textColor="subtle">
+                  {`Publisert ${publishDate}`}
+                </Detail>
               </div>
+
               {data.undertema && data.undertema.length > 0 && (
                 <div className="mt-5 flex flex-wrap gap-2">
                   {data.undertema.map(({ title, tema }) => (
@@ -265,9 +257,6 @@ const Page = ({
                       ))}
                     </BodyShort>
                   )}
-                  <BodyShort as="span" className="text-text-subtle">
-                    Publisert: {publishDate}
-                  </BodyShort>
                   {userState && <Feedback userState={userState} />}
                 </div>
               </div>
