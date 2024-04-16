@@ -345,16 +345,14 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
     chromatic: {
       disable: false,
       modes: {
-        desktop: {
+        default: {
           viewport: {
             width: 620,
-            //height: 850,
           },
         },
         sm: {
           viewport: {
             width: 479,
-            //height: 400,
           },
         },
       },
