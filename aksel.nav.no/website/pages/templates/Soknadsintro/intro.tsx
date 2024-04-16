@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ArrowLeftIcon, TasklistIcon } from "@navikt/aksel-icons";
+import { ArrowRightIcon, TasklistIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
   BodyLong,
@@ -110,7 +110,11 @@ function Example() {
               </Checkbox>
             </Box>
             <Box>
-              <Button variant="primary" icon={<ArrowLeftIcon />}>
+              <Button
+                variant="primary"
+                icon={<ArrowRightIcon />}
+                iconPosition="right"
+              >
                 Start søknad
               </Button>
             </Box>
