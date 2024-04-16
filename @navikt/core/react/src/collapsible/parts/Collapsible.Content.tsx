@@ -79,11 +79,11 @@ export const CollapsibleContent = forwardRef<
     <Comp
       ref={composedRefs}
       data-state={ctx.open ? "open" : "closed"}
-      hidden={ctx.open}
+      hidden={!isOpen}
       {...props}
       style={Style}
     >
-      {ctx.open && children}
+      {isOpen && children}
     </Comp>
   );
 });
