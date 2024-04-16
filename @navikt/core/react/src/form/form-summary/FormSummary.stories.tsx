@@ -341,7 +341,25 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
       </div>
     </div>
   ),
-  parameters: { chromatic: { disable: false } },
+  parameters: {
+    chromatic: {
+      disable: false,
+      modes: {
+        desktop: {
+          viewport: {
+            width: 620,
+            //height: 850,
+          },
+        },
+        sm: {
+          viewport: {
+            width: 479,
+            //height: 400,
+          },
+        },
+      },
+    },
+  },
 };
 
 export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
