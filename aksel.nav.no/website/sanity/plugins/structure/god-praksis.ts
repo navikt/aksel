@@ -8,15 +8,8 @@ import {
 } from "./structure.util";
 
 export function godPraksiStructure(S: StructureBuilder) {
-  const adminOrDev = S.context.currentUser?.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name),
-  );
-  if (!adminOrDev) {
-    return S.divider();
-  }
-
   return S.listItem()
-    .title("God Praksis (ny)")
+    .title("God Praksis")
     .icon(PencilBoardIcon)
     .child(
       S.list()
@@ -32,6 +25,7 @@ export function godPraksiStructure(S: StructureBuilder) {
         ]),
     );
 }
+
 function godPraksisPanes(S: StructureBuilder) {
   return [
     listPublishedArticles(S, "aksel_artikkel"),
