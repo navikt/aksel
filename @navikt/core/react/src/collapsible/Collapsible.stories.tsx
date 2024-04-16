@@ -143,6 +143,32 @@ export const AsChild: StoryFn<typeof Collapsible> = () => (
   </Collapsible>
 );
 
+export const DefaultOpen: StoryFn<typeof Collapsible> = () => (
+  <Collapsible defaultOpen>
+    <Collapsible.Trigger asChild>
+      <Button>Button</Button>
+    </Collapsible.Trigger>
+    <Collapsible.Content asChild>
+      <Box padding="4" background="surface-alt-3-subtle">
+        <div>lorem ipsum</div>
+      </Box>
+    </Collapsible.Content>
+  </Collapsible>
+);
+
+export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
+  <Collapsible defaultOpen>
+    <Collapsible.Trigger asChild>
+      <Button>Button</Button>
+    </Collapsible.Trigger>
+    <Collapsible.Content asChild>
+      <Box padding="4" background="surface-alt-3-subtle">
+        <div>lorem ipsum</div>
+      </Box>
+    </Collapsible.Content>
+  </Collapsible>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="8">
@@ -161,6 +187,14 @@ export const Chromatic: Story = {
       <div>
         <h2>AsChild</h2>
         <AsChild />
+      </div>
+      <div>
+        <h2>DefaultOpen</h2>
+        <DefaultOpen />
+      </div>
+      <div>
+        <h2>ControlledOpen</h2>
+        <ControlledOpen />
       </div>
     </VStack>
   ),
