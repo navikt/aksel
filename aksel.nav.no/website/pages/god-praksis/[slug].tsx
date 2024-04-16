@@ -72,8 +72,8 @@ export const getServerSideProps: GetServerSideProps = async (
       ),
       slug,
       preview,
-      id: tema._id ?? "",
-      title: tema.title ?? "",
+      id: tema?._id ?? "",
+      title: tema?.title ?? "",
     },
     notFound: !tema || articles.length === 0,
   };
