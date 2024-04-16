@@ -13,6 +13,10 @@ export type CollapsibleContextProps = Pick<
    * Callback for toggling open state
    */
   onOpenToggle: () => void;
+  /**
+   * Allows always rendering children in content when closed
+   */
+  lazy: boolean;
 };
 
 export const [CollapsibleContextProvider, useCollapsibleContext] =

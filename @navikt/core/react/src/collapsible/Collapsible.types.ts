@@ -3,4 +3,5 @@ export interface CollapsibleBaseProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   disabled?: boolean;
+  lazy?: boolean;
 }

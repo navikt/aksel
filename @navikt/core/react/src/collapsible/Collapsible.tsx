@@ -25,7 +25,15 @@ interface CollapsibleComponent
 
 export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
   (
-    { children, open, defaultOpen = false, onOpenChange, disabled, ...rest },
+    {
+      children,
+      open,
+      defaultOpen = false,
+      onOpenChange,
+      disabled,
+      lazy = false,
+      ...rest
+    },
     ref,
   ) => {
     const [_open, setOpen] = useControllableState({
@@ -45,6 +53,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
           [setOpen],
         )}
         contentId={contentId}
+        lazy={lazy}
       >
         <div ref={ref} data-state={_open ? "open" : "closed"} {...rest}>
           {children}
