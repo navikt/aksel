@@ -1,17 +1,37 @@
 import React, { forwardRef } from "react";
+import { Slot } from "../../util/Slot";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { useCollapsibleContext } from "../Collapsible.context";
 
-interface CollapsibleTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
-  collapsed: boolean;
+interface CollapsibleTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * When true, will render element as its child. This merges classes, styles and event handlers.
+   */
+  asChild?: boolean;
 }
 
 export const CollapsibleTrigger = forwardRef<
-  HTMLDivElement,
+  HTMLButtonElement,
   CollapsibleTriggerProps
->(({ collapsed, children, ...props }, ref) => {
+>(({ children, asChild, onClick, ...props }, ref) => {
+  const ctx = useCollapsibleContext();
+
+  const Comp = asChild ? Slot : "button";
+
   return (
-    <div ref={ref} {...props} style={{ display: collapsed ? "none" : "block" }}>
+    <Comp
+      ref={ref}
+      type="button"
+      data-state={ctx.open ? "open" : "closed"}
+      disabled={ctx.disabled}
+      {...props}
+      aria-controls={ctx.contentId}
+      aria-expanded={ctx.open}
+      onClick={composeEventHandlers(onClick, ctx.onOpenToggle)}
+    >
       {children}
-    </div>
+    </Comp>
   );
 });
 
