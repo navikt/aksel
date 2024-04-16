@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy, useMemo } from "react";
+import { useMemo } from "react";
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
@@ -141,24 +141,10 @@ const GpPage = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
+/**
+ * To avoid infinite loop rendering caused by `count` in query, we avoid showing preview for this page.
+ */
 const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview
-          comp={GpPage}
-          query={sanityQuery}
-          props={props}
-          params={{
-            slug: props?.slug,
-          }}
-        />
-      </Suspense>
-    );
-  }
-
   return <GpPage {...props} />;
 };
 

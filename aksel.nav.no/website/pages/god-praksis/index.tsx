@@ -2,7 +2,6 @@ import cl from "clsx";
 import { groq } from "next-sanity";
 import NextLink from "next/link";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import {
   BodyLong,
   Box,
@@ -224,17 +223,10 @@ const GpPage = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
+/**
+ * To avoid infinite loop rendering caused by `count` in query, we avoid showing preview for this page.
+ */
 const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<GpPage {...props} />}>
-        <WithPreview comp={GpPage} query={query} props={props} />
-      </Suspense>
-    );
-  }
-
   return <GpPage {...props} />;
 };
 

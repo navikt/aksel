@@ -161,7 +161,7 @@ export const resolveProductionUrl = (doc) => {
       : `${devPath}${previewUrl}`;
   }
 
-  if ("aksel_tema" === doc._type) {
+  if ("gp.tema" === doc._type) {
     const slug = doc.slug?.current;
     const previewUrl = `/preview/god-praksis/${slug}`;
     if (!slug) {
@@ -174,11 +174,7 @@ export const resolveProductionUrl = (doc) => {
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
-  if (
-    [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
-      schemaType,
-    )
-  ) {
+  if ([...previews, ...landingsider.map((x) => x.name)].includes(schemaType)) {
     return S.document().views([
       S.view.form(),
 

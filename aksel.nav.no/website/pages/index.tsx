@@ -48,12 +48,18 @@ type PageProps = NextPageT<{
   blocks?: BlocksT[];
 }>;
 
+/**
+ * Using `count` with references in groq query causes infinite loop when previewing
+ */
 const query = groq`*[_type == "aksel_forside"][0]{
   "page": {
     ...,
   },
-  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title)),
+  "tema": select(
+    $preview == "true" => *[_type == "gp.tema"] | order(lower(title)),
+    $preview != "true" => *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title))
+  ),
   blocks[]{
     ...,
     _type == "nytt_fra_aksel"=>{
