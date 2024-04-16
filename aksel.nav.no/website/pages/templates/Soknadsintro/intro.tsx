@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ArrowLeftIcon, TasklistIcon } from "@navikt/aksel-icons";
 import {
+  Accordion,
   BodyLong,
   BodyShort,
   Box,
@@ -113,6 +114,53 @@ function Example() {
               <Button variant="primary" icon={<ArrowLeftIcon />}>
                 Start søknad
               </Button>
+            </Box>
+            <Box paddingBlock="12 0">
+              <Accordion>
+                <Accordion.Item>
+                  <Accordion.Header>
+                    Informasjon vi henter om deg
+                  </Accordion.Header>
+                  <Accordion.Content>
+                    <BodyLong spacing>
+                      Vi henter opplysninger om deg fra folkeregisteret og andre
+                      registre. Vi bruker opplysningene til å fylle ut deler av
+                      søknaden for deg.
+                    </BodyLong>
+                  </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                  <Accordion.Header>
+                    Hvordan vi behandler personopplysninger
+                  </Accordion.Header>
+                  <Accordion.Content>
+                    <BodyLong spacing>
+                      Vi behandler personopplysninger i henhold til
+                      personopplysningsloven. Les mer om hvordan vi behandler
+                      personopplysninger.
+                    </BodyLong>
+                  </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                  <Accordion.Header>Automatis behandling</Accordion.Header>
+                  <Accordion.Content>
+                    <BodyLong spacing>
+                      Vi bruker automatiske systemer for å vurdere søknaden din.
+                      Systemene gjør en del av jobben med å behandle søknaden
+                      din.
+                    </BodyLong>
+                  </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                  <Accordion.Header>Vi lagrer svar underveis</Accordion.Header>
+                  <Accordion.Content>
+                    <BodyLong spacing>
+                      Vi lagrer svarene i søknaden underveis, så du kan trygt ta
+                      pauser og gå tilbake for å endre dem.
+                    </BodyLong>
+                  </Accordion.Content>
+                </Accordion.Item>
+              </Accordion>
             </Box>
           </VStack>
         </Page.Block>
