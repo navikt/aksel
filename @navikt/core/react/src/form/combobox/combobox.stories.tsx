@@ -448,6 +448,8 @@ export const RemoveSelectedMultiSelectTest: StoryObject = {
     await sleep(250);
     userEvent.click(appleSlett);
     await sleep(250);
+    userEvent.click(canvas.getByRole("button", { name: "Alternativer" }));
+    await sleep(250);
     const appleOption = canvas.getByRole("option", {
       name: "apple",
       selected: false,
