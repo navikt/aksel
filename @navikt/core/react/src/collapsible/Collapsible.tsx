@@ -23,6 +23,36 @@ interface CollapsibleComponent
   Content: typeof CollapsibleContent;
 }
 
+/**
+ * Collapsible is a component that allows you to toggle visibility of content.
+ *
+ * @example
+ * ```jsx
+ * <Collapsible>
+ *   <Collapsible.Trigger>Trigger</Collapsible.Trigger>
+ *   <Collapsible.Content>
+ *     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+ *     corporis maxime aliquam, voluptates nobis numquam, non odit optio
+ *     architecto iure laborum possimus! Quibusdam sit ullam, consequatur sunt
+ *     tempore optio aliquid!
+ *   </Collapsible.Content>
+ * </Collapsible>
+ * ```
+ *
+ * @example With asChild
+ * ```jsx
+ * <Collapsible>
+ *   <Collapsible.Trigger asChild>
+ *     <Button>Button</Button>
+ *   </Collapsible.Trigger>
+ *   <Collapsible.Content asChild>
+ *     <Box padding="4" background="surface-alt-3-subtle">
+ *       <div>lorem ipsum</div>
+ *     </Box>
+ *   </Collapsible.Content>
+ * </Collapsible>
+ * ```
+ */
 export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
   (
     {
