@@ -24,7 +24,8 @@
     "/cjs",
     "/esm",
     "/src",
-    "!**/*.tsbuildinfo"
+    "!**/*.tsbuildinfo",
+    "!**/*.stories.*"
   ],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
