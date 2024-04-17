@@ -646,42 +646,34 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     args.onSubmit.mockClear();
     const canvas = within(canvasElement);
 
-    await sleep(500);
+    await sleep(250);
 
     const getInput = () =>
       canvas.getByRole("combobox", {
         name: "Hva er dine favorittfrukter?",
       });
 
-    userEvent.click(getInput());
-    await sleep(250);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
     const bananaOption = canvas.getByRole("option", { name: "banana" });
+    await userEvent.click(getInput());
+
+    await userEvent.keyboard("{ArrowDown}");
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       bananaOption.getAttribute("id"),
     );
 
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await userEvent.keyboard("{Enter}");
     expect(args.onSubmit).not.toHaveBeenCalled();
 
-    userEvent.keyboard("{Shift>}{Tab}");
-    await sleep(250);
+    await userEvent.keyboard("{Shift>}{Tab}");
 
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await userEvent.keyboard("{Enter}");
     expect(args.onSubmit).not.toHaveBeenCalled();
 
-    userEvent.keyboard("test"); // Type option that does not exist
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
+    await userEvent.keyboard("test"); // Type option that does not exist
+    await userEvent.keyboard("{Enter}");
     expect(args.onSubmit).not.toHaveBeenCalled();
 
-    userEvent.keyboard("{Enter}"); // Enter on empty Input with closed list
-    await sleep(250);
+    await userEvent.keyboard("{Enter}"); // Enter on empty Input with closed list
     expect(args.onSubmit).toHaveBeenCalledOnce();
   },
 };
