@@ -83,12 +83,14 @@ export const Sizes: Story = {
           size="small"
           value={7}
           valueMax={12}
+          valueMin={1}
           aria-labelledby="progress-bar-label-small"
         />
         <p id="progress-bar-label-medium">Fremdrift i søknaden (medium)</p>
         <ProgressBar
           value={3}
           valueMax={12}
+          valueMin={1}
           aria-labelledby="progress-bar-label-medium"
         />
         <p id="progress-bar-label-large">Fremdrift i søknaden (large)</p>
@@ -96,6 +98,7 @@ export const Sizes: Story = {
           size="large"
           value={7}
           valueMax={12}
+          valueMin={1}
           aria-labelledby="progress-bar-label-large"
         />
       </div>
