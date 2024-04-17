@@ -177,3 +177,71 @@ export const MarkupTestThree = () => {
     </div>
   );
 };
+
+export const MarkupTestFour = () => {
+  return (
+    <div>
+      <h2>
+        Markup-test med h-tag rundt button, aria-controls på knapp, role region
+        på innhold, aria-labelledby på innhold og aria-controls på innhold.
+      </h2>
+      <Collapsible>
+        <h3>
+          <Collapsible.Trigger id="button-1">
+            Accordion heading en
+          </Collapsible.Trigger>
+        </h3>
+        <Collapsible.Content
+          role="region"
+          aria-labelledby="button-1"
+          aria-controls="button-1"
+        >
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Aspernatur, distinctio blanditiis. Repellat quibusdam magni,
+            recusandae cupiditate blanditiis veniam, debitis dignissimos quod
+            quam reiciendis minima vel fugiat, saepe nulla sunt est.
+          </p>
+        </Collapsible.Content>
+      </Collapsible>
+      <Collapsible>
+        <h3>
+          <Collapsible.Trigger id="button-2">
+            Accordion heading to
+          </Collapsible.Trigger>
+        </h3>
+        <Collapsible.Content
+          role="region"
+          aria-labelledby="button-2"
+          aria-controls="button-2"
+        >
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Aspernatur, distinctio blanditiis. Repellat quibusdam magni,
+            recusandae cupiditate blanditiis veniam, debitis dignissimos quod
+            quam reiciendis minima vel fugiat, saepe nulla sunt est.
+          </p>
+        </Collapsible.Content>
+      </Collapsible>
+      <Collapsible>
+        <h3>
+          <Collapsible.Trigger id="button-3">
+            Accordion heading tre
+          </Collapsible.Trigger>
+        </h3>
+        <Collapsible.Content
+          role="region"
+          aria-labelledby="button-3"
+          aria-controls="button-3"
+        >
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Aspernatur, distinctio blanditiis. Repellat quibusdam magni,
+            recusandae cupiditate blanditiis veniam, debitis dignissimos quod
+            quam reiciendis minima vel fugiat, saepe nulla sunt est.
+          </p>
+        </Collapsible.Content>
+      </Collapsible>
+    </div>
+  );
+};
