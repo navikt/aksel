@@ -679,7 +679,6 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     await userEvent.keyboard("{Enter}", { delay: waitTime });
     expect(args.onSubmit).not.toHaveBeenCalled();
 
-    await userEvent.keyboard("{Enter}", { delay: waitTime }); // Enter on empty Input with closed list
     await userEvent.keyboard("{ArrowDown}", { delay: waitTime }); // Select "test" custom option
     expect(
       canvas.getByRole("option", { name: "test", selected: true }),
@@ -691,6 +690,7 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     expect(args.onSubmit).not.toHaveBeenCalled();
 
     await userEvent.keyboard("{Escape}", { delay: waitTime }); // Clear input field
+    await userEvent.keyboard("{Enter}", { delay: waitTime }); // Enter on empty Input with closed list
     expect(args.onSubmit).toHaveBeenCalledOnce();
   },
 };
