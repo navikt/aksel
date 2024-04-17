@@ -1,3 +1,4 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { differenceInMonths } from "date-fns";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
@@ -35,7 +36,10 @@ type PageProps = NextPageT<{
     ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>
   > & {
     innholdstype: string;
-    undertema: { title: string; tema: { slug: string; title: string } }[];
+    undertema: {
+      title: string;
+      tema: { slug: string; title: string; image: SanityImageSource };
+    }[];
   };
   publishDate: string;
   verifiedDate: string;
@@ -59,6 +63,7 @@ const query = `{
       "tema": tema->{
         title,
         "slug": slug.current,
+        "image": seo.image
       }
     },
     ${contributorsAll},
@@ -171,7 +176,7 @@ const Page = ({
       <SEO
         title={data?.heading}
         description={data?.seo?.meta ?? data?.ingress}
-        image={data?.seo?.image ?? (data?.tema?.[0] as any)?.seo?.image}
+        image={data?.seo?.image ?? data.undertema?.[0]?.tema?.image}
         publishDate={publishDate}
         canonical={`/${data.slug}`}
       />
