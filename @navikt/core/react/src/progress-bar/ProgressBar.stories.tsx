@@ -18,28 +18,22 @@ export const Default: Story = {
     const [value, setValue] = React.useState(0);
     React.useEffect(() => {
       const withRandomIntervals = (callback: () => void) => {
-        const interval = Math.random() * 800 + 100; // Random time between 0.1-0.8 seconds
+        const interval = Math.random() * 4000 + 500; // Random interval between 0.1-0.8 seconds
         return setTimeout(() => {
           callback();
-          withRandomIntervals(callback); // Recursively call setRandomInterval
+          withRandomIntervals(callback);
         }, interval);
       };
 
       const intervalId = withRandomIntervals(() => {
         setValue(
           (oldValue) =>
-            oldValue >= 100 ? 100 : oldValue + Math.random() * 35 + 5, // Increase value 5-40 of 100
+            oldValue >= 100 ? 100 : oldValue + Math.random() * 25 + 5, // Increase value 5-30 of 100
         );
       });
 
-      const timeoutId = setTimeout(
-        () => clearInterval(intervalId),
-        Math.random() * 4000 + 1000, // Random time between 1-5 seconds
-      );
-
       return () => {
         clearInterval(intervalId);
-        clearTimeout(timeoutId);
       };
     }, []);
 
@@ -52,7 +46,6 @@ export const Default: Story = {
               valueMax={100}
               size="medium"
               value={value}
-              duration={10}
               aria-labelledby="progress-bar-label"
             />
           </>
