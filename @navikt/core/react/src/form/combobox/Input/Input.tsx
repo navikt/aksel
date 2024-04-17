@@ -129,7 +129,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
           }
         } else if (e.key === "Enter" || e.key === "Accept") {
-          if (activeDecendantId) {
+          if (activeDecendantId || value) {
             e.preventDefault();
           }
         } else if (e.key === "ArrowDown") {

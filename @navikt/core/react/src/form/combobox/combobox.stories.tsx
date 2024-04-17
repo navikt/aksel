@@ -674,6 +674,12 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     await sleep(250);
     expect(args.onSubmit).not.toHaveBeenCalled();
 
+    userEvent.keyboard("test"); // Type option that does not exist
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
     userEvent.keyboard("{Enter}"); // Enter on empty Input with closed list
     await sleep(250);
     expect(args.onSubmit).toHaveBeenCalledOnce();
