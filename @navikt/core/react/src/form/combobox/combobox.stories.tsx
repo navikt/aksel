@@ -653,16 +653,18 @@ export const TestEnterNotSubmittingForm: StoryObj<{
         name: "Hva er dine favorittfrukter?",
       });
 
-    const bananaOption = canvas.getByRole("option", { name: "banana" });
+    const getOption = (name: string, selected: boolean) =>
+      canvas.getByRole("option", { name, selected });
     await userEvent.click(getInput());
 
     await userEvent.keyboard("{ArrowDown}");
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      bananaOption.getAttribute("id"),
+      getOption("banana", false).getAttribute("id"),
     );
 
     await userEvent.keyboard("{Enter}");
     expect(args.onSubmit).not.toHaveBeenCalled();
+    expect(getOption("banana", true)).toBeVisible();
 
     await userEvent.keyboard("{Shift>}{Tab}");
 
