@@ -41,7 +41,7 @@ export const Default: Story = {
       <div style={{ width: "400px" }}>
         {value < 100 ? (
           <>
-            <p id="progress-bar-label">Loading</p>
+            <p id="progress-bar-label">Laster</p>
             <ProgressBar
               valueMax={100}
               size="medium"
@@ -108,17 +108,17 @@ export const Sizes: Story = {
 
 export const IndeterminateState: Story = {
   render: () => {
-    const values = [0, 25, 50, 75, 100];
+    const values = [25];
     return (
       <>
         {values.map((value) => (
           <div key={value}>
             <p id={`progress-bar-label-${value}`}>
-              Indeterminate progress bar at {value}%
+              Ubestemt fremdrift etter 5 sekunder
             </p>
             <ProgressBar
               valueMax={100}
-              duration={2}
+              duration={5}
               size="medium"
               value={value}
               aria-labelledby={`progress-bar-label-${value}`}
