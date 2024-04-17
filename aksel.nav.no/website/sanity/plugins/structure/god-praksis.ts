@@ -9,7 +9,7 @@ import {
 
 export function godPraksiStructure(S: StructureBuilder) {
   return S.listItem()
-    .title("God Praksis")
+    .title("God praksis")
     .icon(PencilBoardIcon)
     .child(
       S.list()
