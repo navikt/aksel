@@ -33,9 +33,8 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
         {...rest}
       >
         <div
-          className={cl("relative my-auto shrink-0", {
-            "size-8 md:size-12": !compact,
-            "size-8": compact,
+          className={cl("relative my-auto size-8 shrink-0", {
+            "md:size-12": !compact,
           })}
         >
           {image ? (
