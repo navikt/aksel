@@ -10,6 +10,13 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/404/Med feedback",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 const Example = () => {
   useDekorator();
 
@@ -88,10 +95,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/404/Med feedback",
-};
 
 export const Demo = {
   render: Example,

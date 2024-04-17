@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 
+export default {
+  title: "templates/404/Enkel",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 const Example = () => {
   useDekorator();
 
@@ -73,10 +80,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/404/Enkel",
-};
 
 export const Demo = {
   render: Example,

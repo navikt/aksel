@@ -11,6 +11,13 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/500/500-uten-dekorator",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 function Header() {
   return <div id="placeholder-header" />;
 }
@@ -96,10 +103,6 @@ function Example() {
     </Page>
   );
 }
-
-export default {
-  title: "templates/500/500-uten-dekorator",
-};
 
 export const Demo = {
   render: Example,

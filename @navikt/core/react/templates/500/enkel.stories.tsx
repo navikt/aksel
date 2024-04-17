@@ -9,6 +9,13 @@ import {
   Page,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/500/Enkel",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 function Example() {
   useDekorator();
 
@@ -104,10 +111,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/500/Enkel",
-};
 
 export const Demo = {
   render: Example,

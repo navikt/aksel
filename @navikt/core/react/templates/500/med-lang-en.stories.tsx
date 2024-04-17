@@ -10,6 +10,13 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/500/Med lang en",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 function Example() {
   useDekorator();
 
@@ -126,10 +133,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/500/Med lang en",
-};
 
 export const Demo = {
   render: Example,

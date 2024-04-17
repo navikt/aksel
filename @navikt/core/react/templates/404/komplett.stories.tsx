@@ -11,6 +11,13 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/404/Komplett",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 const Example = () => {
   useDekorator();
 
@@ -107,10 +114,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/404/Komplett",
-};
 
 export const Demo = {
   render: Example,

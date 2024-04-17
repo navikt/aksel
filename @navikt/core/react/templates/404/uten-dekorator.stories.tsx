@@ -1,6 +1,13 @@
 import React from "react";
 import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 
+export default {
+  title: "templates/404/Uten dekorator",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 function Header() {
   return <div id="placeholder-header" />;
 }
@@ -34,10 +41,6 @@ const Example = () => {
       </Page.Block>
     </Page>
   );
-};
-
-export default {
-  title: "templates/404/Uten dekorator",
 };
 
 export const Demo = {

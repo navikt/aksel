@@ -11,6 +11,13 @@ import {
   VStack,
 } from "@navikt/ds-react";
 
+export default {
+  title: "templates/500/Med CTA",
+  parameters: {
+    layout: "fullscreen",
+  },
+};
+
 function Example() {
   useDekorator();
 
@@ -111,10 +118,6 @@ function useDekorator() {
     };
   }, []);
 }
-
-export default {
-  title: "templates/500/Med CTA",
-};
 
 export const Demo = {
   render: Example,
