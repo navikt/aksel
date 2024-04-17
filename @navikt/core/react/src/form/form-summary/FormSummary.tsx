@@ -52,7 +52,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * @example
    * <FormSummary>
    *   <FormSummary.Header>
-   *     <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+   *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
    *     <FormSummary.EditLink href="#" />
    *   </FormSummary.Header>
    *   <FormSummary.Answers>
@@ -72,7 +72,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
  * @example
  * <FormSummary>
  *   <FormSummary.Header>
- *     <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+ *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
  *     <FormSummary.EditLink href="#" />
  *   </FormSummary.Header>
  *   <FormSummary.Answers>

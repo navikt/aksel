@@ -98,10 +98,6 @@ const StyleMappings = {
       dependencies: [typoCss],
     },
     {
-      component: "ContentContainer",
-      main: "content-container.css",
-    },
-    {
       component: "CopyButton",
       main: "copybutton.css",
       dependencies: [typoCss],
@@ -125,7 +121,6 @@ const StyleMappings = {
       main: formCss,
       dependencies: [typoCss, "button.css", "loader.css", "link.css"],
     },
-    { component: "Grid", main: "grid.css", dependencies: [typoCss] },
     {
       component: "GuidePanel",
       main: "guide-panel.css",
