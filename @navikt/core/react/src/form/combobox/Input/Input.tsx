@@ -129,7 +129,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
           }
         } else if (e.key === "Enter" || e.key === "Accept") {
-          e.preventDefault();
+          if (activeDecendantId) {
+            e.preventDefault();
+          }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
