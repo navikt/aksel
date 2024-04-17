@@ -9,7 +9,7 @@ import {
 } from "../../config";
 import { Iframe } from "./IFrame";
 import { adminStructure } from "./admin";
-import { godPraksiStructure } from "./god-praksis";
+import { gpStructure } from "./god-praksis";
 import { grunnleggendeStructure } from "./grunnleggende";
 import { komponenterStructure } from "./komponenter";
 import { monsterStructure } from "./monster";
@@ -85,7 +85,7 @@ export const structure: StructureResolver = async (
           ]
         : []),
 
-      godPraksiStructure(S),
+      gpStructure(S),
       grunnleggendeStructure(S),
       komponenterStructure(S),
       monsterStructure(S),

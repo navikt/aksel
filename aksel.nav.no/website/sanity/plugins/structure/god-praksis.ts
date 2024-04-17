@@ -7,7 +7,7 @@ import {
   listPublishedArticles,
 } from "./structure.util";
 
-export function godPraksiStructure(S: StructureBuilder) {
+export function gpStructure(S: StructureBuilder) {
   return S.listItem()
     .title("God praksis")
     .icon(PencilBoardIcon)
