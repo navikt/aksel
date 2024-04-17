@@ -78,7 +78,9 @@ export const Sizes: Story = {
   render: () => {
     return (
       <div>
-        <p id="progress-bar-label-small">Fremdrift i søknaden (small)</p>
+        <p id="progress-bar-label-small">
+          Fremdrift i søknaden (liten versjon)
+        </p>
         <ProgressBar
           size="small"
           value={7}
@@ -86,14 +88,16 @@ export const Sizes: Story = {
           valueMin={1}
           aria-labelledby="progress-bar-label-small"
         />
-        <p id="progress-bar-label-medium">Fremdrift i søknaden (medium)</p>
+        <p id="progress-bar-label-medium">
+          Fremdrift i søknaden (medium versjon)
+        </p>
         <ProgressBar
           value={3}
           valueMax={12}
           valueMin={1}
           aria-labelledby="progress-bar-label-medium"
         />
-        <p id="progress-bar-label-large">Fremdrift i søknaden (large)</p>
+        <p id="progress-bar-label-large">Fremdrift i søknaden (stor versjon)</p>
         <ProgressBar
           size="large"
           value={7}

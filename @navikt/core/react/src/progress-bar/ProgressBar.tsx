@@ -107,8 +107,13 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         )}
         aria-valuemin={valueMin}
         aria-valuemax={valueMax}
-        aria-valuenow={clampedValue}
-        aria-valuetext={`${clampedValue} av ${valueMax}`} // TODO: needed when we have aria-labelledby?
+        aria-valuenow={isIndeterminate ? undefined : clampedValue}
+        aria-valuetext={
+          isIndeterminate
+            ? "Laster, vennligst vent"
+            : `${clampedValue} av ${valueMax}`
+        } // TODO: needed when we have aria-labelledby & valuenow?
+        aria-busy={isIndeterminate}
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}
