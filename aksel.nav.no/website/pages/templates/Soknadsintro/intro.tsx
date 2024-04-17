@@ -9,10 +9,10 @@ import {
   Button,
   Checkbox,
   GuidePanel,
-  HGrid,
   Heading,
   Link,
   Page,
+  Stack,
   VStack,
 } from "@navikt/ds-react";
 import { ApplicationPictogram } from "@/assets/Icons";
@@ -26,18 +26,21 @@ function Example() {
       <Header />
       <VStack gap="8">
         <Page.Block as="main" width="text" gutters>
-          <Bleed marginInline="24">
-            <HGrid gap="6" columns="4.5rem auto">
+          <Bleed marginInline={{ md: "24" }}>
+            <Stack
+              gap="6"
+              direction={{ xs: "row-reverse", md: "row" }}
+              justify="start"
+              wrap={false}
+            >
               <ApplicationPictogram title="Application" />
               <VStack gap="1">
-                <BodyShort size="small">
-                  NAV 10-07.03 (Om søknaden har ID)
-                </BodyShort>
+                <BodyShort size="small">NAV 10-07.03</BodyShort>
                 <Heading level="1" size="large">
                   Søknad om [ytelse]
                 </Heading>
               </VStack>
-            </HGrid>
+            </Stack>
           </Bleed>
         </Page.Block>
         <Page.Block width="text">
