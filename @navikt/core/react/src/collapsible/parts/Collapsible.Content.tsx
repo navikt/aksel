@@ -24,6 +24,7 @@ export const CollapsibleContent = forwardRef<
       ref={ref}
       data-state={ctx.state}
       hidden={!ctx.open}
+      aria-controls={ctx.open ? ctx.triggerId : undefined}
       id={ctx.contentId}
       {...props}
     >

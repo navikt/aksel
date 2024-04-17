@@ -27,6 +27,7 @@ export const CollapsibleTrigger = forwardRef<
       data-state={ctx.state}
       disabled={ctx.disabled}
       {...props}
+      id={ctx.triggerId}
       aria-controls={ctx.open ? ctx.contentId : undefined}
       aria-expanded={ctx.open}
       onClick={composeEventHandlers(onClick, ctx.onOpenToggle)}

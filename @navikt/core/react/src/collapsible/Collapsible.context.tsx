@@ -10,6 +10,10 @@ export type CollapsibleContextProps = Pick<
    */
   contentId: string;
   /**
+   * Allows connecting content to trigger
+   */
+  triggerId: string;
+  /**
    * Callback for toggling open state
    */
   onOpenToggle: () => void;
