@@ -1,3 +1,4 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
 import NextLink from "next/link";
@@ -32,7 +33,7 @@ type GpTemaList = {
     description: string;
     slug: string;
     refCount: number;
-    pictogram: any;
+    pictogram: SanityImageSource;
     articles: {
       heading: string;
       slug: string;
