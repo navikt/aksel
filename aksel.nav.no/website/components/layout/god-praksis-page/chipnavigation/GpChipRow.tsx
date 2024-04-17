@@ -36,10 +36,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   };
 
   return (
-    <div
-      /* TODO: After release of new GP structure this could be removed since all articles will required proper data, thus always having chips */
-      className="hidden has-[.chiplist]:grid"
-    >
+    <div>
       <Label
         as="h2"
         className={cl("flex items-center gap-1 text-aksel-heading", {
@@ -66,7 +63,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
           </li>
           {entries.map(([entryName, count]) => {
             return (
-              <li key={entryName} className="chiplist">
+              <li key={entryName}>
                 <GpChip
                   type={type}
                   disabled={count === 0}
