@@ -51,11 +51,7 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
           )}
         </div>
 
-        <div
-          className={cl("grid gap-05", {
-            "items-center": !articleCount,
-          })}
-        >
+        <div className="grid items-center gap-05">
           <Heading
             size="small"
             as="span"
