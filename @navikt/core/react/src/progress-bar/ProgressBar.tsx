@@ -110,10 +110,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuenow={isIndeterminate ? undefined : clampedValue}
         aria-valuetext={
           isIndeterminate
-            ? "Laster, vennligst vent"
+            ? "Ubestemt fremdrift"
             : `${clampedValue} av ${valueMax}`
         } // TODO: needed when we have aria-labelledby & valuenow?
-        aria-busy={isIndeterminate}
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}

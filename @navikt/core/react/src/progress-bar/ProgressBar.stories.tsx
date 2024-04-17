@@ -113,9 +113,7 @@ export const IndeterminateState: Story = {
       <>
         {values.map((value) => (
           <div key={value}>
-            <p id={`progress-bar-label-${value}`}>
-              Ubestemt fremdrift etter 5 sekunder
-            </p>
+            <p id={`progress-bar-label-${value}`}>Nå laster det</p>
             <ProgressBar
               valueMax={100}
               duration={5}
