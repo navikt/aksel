@@ -22,13 +22,20 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
       <Link
         ref={ref}
         href={`/${href}`}
-        className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus aria-[current]:bg-teal-800 aria-[current]:focus-visible:shadow-focus-gap md:gap-3 md:py-3 md:pl-3 md:pr-6"
+        className={cl(
+          "group flex gap-2 rounded-lg bg-surface-default shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus aria-[current]:bg-teal-800 aria-[current]:focus-visible:shadow-focus-gap md:gap-3",
+          "py-2 pl-2 pr-3 md:pl-3 md:pr-6",
+          {
+            "md:py-2.5": compact,
+            "md:py-3": !compact,
+          },
+        )}
         {...rest}
       >
         <div
           className={cl("relative my-auto shrink-0", {
             "size-8 md:size-12": !compact,
-            "size-6": compact,
+            "size-8": compact,
           })}
         >
           {image ? (
@@ -45,7 +52,11 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
           )}
         </div>
 
-        <div className="grid gap-05">
+        <div
+          className={cl("grid gap-05", {
+            "items-center": !articleCount,
+          })}
+        >
           <Heading
             size="small"
             as="span"
