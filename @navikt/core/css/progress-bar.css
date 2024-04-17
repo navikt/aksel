@@ -40,6 +40,7 @@
   animation-name: navds-progress-bar-indeterminate;
   animation-fill-mode: none;
   animation-iteration-count: infinite;
+  animation-delay: 1s;
 }
 
 /* navds-progress-bar-indeterminate wave animation */

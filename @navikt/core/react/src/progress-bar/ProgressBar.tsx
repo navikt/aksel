@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { HTMLAttributes, forwardRef, useEffect, useState } from "react";
 
 interface ProgressBarPropsBase extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -56,7 +56,7 @@ export type ProgressBarProps = ProgressBarPropsBase &
  *
  * @example
  * // For loading content
- * <ProgressBar value={20} valueMin={0} valueMax={100} duration={12}/>
+ * <ProgressBar value={20} valueMin={0} valueMax={100} duration={12} />
  *
  * @example
  * // As a progress indicator for applications and similar
@@ -69,27 +69,29 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       value,
       valueMin = 0,
       valueMax,
+      duration,
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
-      ...props
+      className,
+      ...rest
     },
     ref,
   ) => {
-    const [isIndeterminate, setIsIndeterminate] = React.useState(false);
+    const [isIndeterminate, setIsIndeterminate] = useState(false);
 
-    React.useEffect(() => {
+    const translate = 100 - (Math.round(value) / valueMax) * 100;
+
+    useEffect(() => {
       let timer: NodeJS.Timeout;
-      if (props.duration)
+      if (duration)
         timer = setTimeout(() => {
           setIsIndeterminate(true);
-        }, props.duration * 1000);
+        }, duration * 1000);
 
       return () => {
-        if (timer) {
-          clearTimeout(timer);
-        }
+        if (timer) clearTimeout(timer);
       };
-    }, [props.duration]);
+    }, [duration]);
 
     return (
       <div
@@ -97,7 +99,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         className={cl(
           "navds-progress-bar",
           `navds-progress-bar--${size}`,
-          props.className,
+          className,
         )}
         aria-valuemin={valueMin}
         aria-valuemax={valueMax}
@@ -110,21 +112,19 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}
+        {...rest}
       >
-        <div className="navds-sr-only">
-          {isIndeterminate
-            ? "Ubestemt fremdrift"
-            : `${Math.round(value)} av ${valueMax}`}
-        </div>
+        {/* <div className="navds-sr-only">
+          {isIndeterminate ? "Ubestemt fremdrift" : `${Math.round(value)} av ${valueMax}`}
+        </div> */}
         <div
           className={cl("navds-progress-bar__foreground", {
             "navds-progress-bar__foreground--indeterminate": isIndeterminate,
           })}
           style={{
             transform: !isIndeterminate
-              ? `translateX(-${100 - (Math.round(value) / valueMax) * 100}%)`
+              ? `translateX(-${translate}%)`
               : `translateX(-100%)`,
-            animationDelay: isIndeterminate ? `1s` : undefined,
           }}
         />
       </div>
