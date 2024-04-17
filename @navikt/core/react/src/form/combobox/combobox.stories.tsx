@@ -624,3 +624,46 @@ export const TestHoverAndFocusSwitching: StoryObject = {
     );
   },
 };
+
+export const TestEnterNotSubmittingForm: StoryObj<{
+  onSubmit: ReturnType<typeof fn>;
+}> = {
+  args: {
+    onSubmit: fn(),
+  },
+  render: ({ onSubmit }) => {
+    return (
+      <form action="https://www.nav.no" method="get" onSubmit={onSubmit}>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+        />
+      </form>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    args.onSubmit.mockClear();
+    const canvas = within(canvasElement);
+
+    await sleep(500);
+
+    const getInput = () =>
+      canvas.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+    userEvent.click(getInput());
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    const bananaOption = canvas.getByRole("option", { name: "banana" });
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      bananaOption.getAttribute("id"),
+    );
+
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    expect(args.onSubmit).not.toHaveBeenCalled();
+  },
+};
