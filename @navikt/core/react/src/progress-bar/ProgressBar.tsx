@@ -118,8 +118,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-label={ariaLabel}
       >
         <div
-          className={cl("navds-progress-bar__progress", {
-            "navds-progress-bar__progress--indeterminate": isIndeterminate,
+          className={cl("navds-progress-bar__foreground", {
+            "navds-progress-bar__foreground--indeterminate": isIndeterminate,
           })}
           style={{
             transform: !isIndeterminate
