@@ -5,7 +5,9 @@ const Example = () => {
   return (
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Personal information</FormSummary.Heading>
+        <FormSummary.Heading level="2">
+          Personal information
+        </FormSummary.Heading>
         <FormSummary.EditLink href="#">Edit</FormSummary.EditLink>
       </FormSummary.Header>
       <FormSummary.Answers>
