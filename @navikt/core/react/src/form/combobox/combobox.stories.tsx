@@ -638,6 +638,7 @@ export const TestEnterNotSubmittingForm: StoryObj<{
           options={options}
           label="Hva er dine favorittfrukter?"
           isMultiSelect
+          allowNewValues
         />
       </form>
     );
@@ -676,6 +677,17 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     expect(args.onSubmit).not.toHaveBeenCalled();
 
     await userEvent.keyboard("{Enter}"); // Enter on empty Input with closed list
+    await userEvent.keyboard("{ArrowDown}"); // Select "test" custom option
+    expect(
+      canvas.getByRole("option", { name: "test", selected: true }),
+    ).toBeVisible();
+    await userEvent.keyboard("{Enter}"); // De-select "test"
+    expect(
+      canvas.queryByRole("option", { name: "test", selected: false }),
+    ).toBeNull();
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{Escape}"); // Clear input field
     expect(args.onSubmit).toHaveBeenCalledOnce();
   },
 };
