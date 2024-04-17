@@ -37,8 +37,6 @@ const config: StorybookConfig = {
       };
       `;
 
-      console.log({ code });
-
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
