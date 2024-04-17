@@ -1,5 +1,6 @@
 import React from "react";
 import { Chips } from "../../../chips";
+import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxOption } from "../types";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
@@ -36,8 +37,13 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   size,
   children,
 }) => {
+  const { toggleIsListOpen } = useFilteredOptionsContext();
   return (
-    <Chips className="navds-combobox__selected-options" size={size}>
+    <Chips
+      className="navds-combobox__selected-options"
+      onFocus={() => toggleIsListOpen(false)}
+      size={size}
+    >
       {selectedOptions.length
         ? selectedOptions.map((option, i) => (
             <Option key={option.label + i} option={option} />

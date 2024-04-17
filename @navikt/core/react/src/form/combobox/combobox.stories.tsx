@@ -633,10 +633,11 @@ export const TestEnterNotSubmittingForm: StoryObj<{
   },
   render: ({ onSubmit }) => {
     return (
-      <form action="https://www.nav.no" method="get" onSubmit={onSubmit}>
+      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
         <UNSAFE_Combobox
           options={options}
           label="Hva er dine favorittfrukter?"
+          isMultiSelect
         />
       </form>
     );
@@ -661,6 +662,13 @@ export const TestEnterNotSubmittingForm: StoryObj<{
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       bananaOption.getAttribute("id"),
     );
+
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    userEvent.keyboard("{Shift>}{Tab}");
+    await sleep(250);
 
     userEvent.keyboard("{Enter}");
     await sleep(250);
