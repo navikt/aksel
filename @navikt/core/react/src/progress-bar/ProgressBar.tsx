@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useMemo } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 
 interface ProgressBarPropsBase extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -51,16 +51,15 @@ export type ProgressBarProps = ProgressBarPropsBase &
 
 /**
  * ProgressBar
- * TODO: DOCUMENTATION
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/progress-bar)
  * @see 🏷️ {@link ProgressBarProps}
  *
  * @example
- * // For innlasting av innhold
+ * // For loading content
  * <ProgressBar value={20} valueMin={0} valueMax={100} duration={12}/>
  *
  * @example
- * // Som fremgangsindikator på søknader og lignende
+ * // As a progress indicator for applications and similar
  * <ProgressBar value={2} valueMin={0} valueMax={7} />
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
@@ -76,11 +75,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     },
     ref,
   ) => {
-    const clampedValue = useMemo(
-      () => Math.min(Math.max(value, valueMin), valueMax),
-      [value, valueMin, valueMax],
-    );
-
     const [isIndeterminate, setIsIndeterminate] = React.useState(false);
 
     React.useEffect(() => {
@@ -107,12 +101,10 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         )}
         aria-valuemin={valueMin}
         aria-valuemax={valueMax}
-        aria-valuenow={isIndeterminate ? undefined : clampedValue}
+        aria-valuenow={isIndeterminate ? undefined : value}
         aria-valuetext={
-          isIndeterminate
-            ? "Ubestemt fremdrift"
-            : `${clampedValue} av ${valueMax}`
-        } // TODO: needed when we have aria-labelledby & valuenow?
+          isIndeterminate ? "Ubestemt fremdrift" : `${value} av ${valueMax}`
+        }
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}
@@ -123,7 +115,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           })}
           style={{
             transform: !isIndeterminate
-              ? `translateX(-${100 - (clampedValue / valueMax) * 100}%)`
+              ? `translateX(-${100 - (value / valueMax) * 100}%)`
               : `translateX(-100%)`,
             animationDelay: isIndeterminate ? `1s` : undefined,
           }}
