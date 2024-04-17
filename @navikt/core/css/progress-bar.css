@@ -1,6 +1,7 @@
 .navds-progress-bar {
-  position: relative;
+  /* background: var(--ac-progress-bar-bg, var(--a-surface-alt-3-subtle)); */
   background: var(--a-surface-alt-3-subtle);
+  position: relative;
   width: 100%;
   border-radius: var(--a-border-radius-full);
   overflow: hidden;
@@ -22,13 +23,14 @@
 }
 
 .navds-progress-bar__progress {
+  /* background: var(--ac-progress-bar-progress-bg, var(--a-surface-alt-3)); */
+  background: var(--a-surface-alt-3);
   transform-origin: left;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   width: 100%;
-  background: var(--a-surface-alt-3);
   border-radius: inherit;
   transition: transform 0.2s ease;
 }

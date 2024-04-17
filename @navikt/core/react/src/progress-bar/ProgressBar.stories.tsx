@@ -44,6 +44,7 @@ export const Default: Story = {
             <p id="progress-bar-label">Laster</p>
             <ProgressBar
               valueMax={100}
+              valueMin={5}
               size="medium"
               value={value}
               aria-labelledby="progress-bar-label"
