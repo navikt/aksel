@@ -24,7 +24,7 @@ export const CollapsibleTrigger = forwardRef<
     <Comp
       ref={ref}
       type="button"
-      data-state={ctx.open ? "open" : "closed"}
+      data-state={ctx.state}
       disabled={ctx.disabled}
       {...props}
       aria-controls={ctx.contentId}

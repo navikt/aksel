@@ -17,6 +17,10 @@ export type CollapsibleContextProps = Pick<
    * Allows always rendering children in content when closed
    */
   lazy: boolean;
+  /**
+   * Utility for getting state as string. Usefull for data-attributes.
+   */
+  state: "open" | "closed";
 };
 
 export const [CollapsibleContextProvider, useCollapsibleContext] =

@@ -22,7 +22,7 @@ export const CollapsibleContent = forwardRef<
   return (
     <Comp
       ref={ref}
-      data-state={ctx.open ? "open" : "closed"}
+      data-state={ctx.state}
       hidden={!ctx.open}
       id={ctx.contentId}
       {...props}

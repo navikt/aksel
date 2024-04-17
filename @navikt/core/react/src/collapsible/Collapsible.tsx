@@ -43,6 +43,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
     });
 
     const contentId = useId();
+    const state = _open ? "open" : "closed";
 
     return (
       <CollapsibleContextProvider
@@ -54,8 +55,9 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
         )}
         contentId={contentId}
         lazy={lazy}
+        state={state}
       >
-        <div ref={ref} data-state={_open ? "open" : "closed"} {...rest}>
+        <div ref={ref} data-state={state} {...rest}>
           {children}
         </div>
       </CollapsibleContextProvider>
