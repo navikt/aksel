@@ -157,7 +157,20 @@ export const DefaultOpen: StoryFn<typeof Collapsible> = () => (
 );
 
 export const ControlledOpen: StoryFn<typeof Collapsible> = () => (
-  <Collapsible defaultOpen>
+  <Collapsible open>
+    <Collapsible.Trigger asChild>
+      <Button>Button</Button>
+    </Collapsible.Trigger>
+    <Collapsible.Content asChild>
+      <Box padding="4" background="surface-alt-3-subtle">
+        <div>lorem ipsum</div>
+      </Box>
+    </Collapsible.Content>
+  </Collapsible>
+);
+
+export const Disabled: StoryFn<typeof Collapsible> = ({ open = false }) => (
+  <Collapsible disabled open={open}>
     <Collapsible.Trigger asChild>
       <Button>Button</Button>
     </Collapsible.Trigger>
@@ -195,6 +208,11 @@ export const Chromatic: Story = {
       <div>
         <h2>ControlledOpen</h2>
         <ControlledOpen />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
+        <Disabled open />
       </div>
     </VStack>
   ),
