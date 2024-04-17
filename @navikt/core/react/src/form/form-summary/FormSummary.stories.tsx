@@ -22,7 +22,7 @@ export default meta;
 export const Default: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>Personalia</FormSummary.Heading>
+      <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
       <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 
@@ -105,7 +105,7 @@ export const Default: StoryFn<typeof FormSummary> = () => (
 export const LongTexts: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>
+      <FormSummary.Heading level="2">
         Arbeidsforhold som du har i eller utenfor EØS-området
       </FormSummary.Heading>
       <FormSummary.EditLink href="#">
@@ -158,7 +158,7 @@ export const LongTexts: StoryFn<typeof FormSummary> = () => (
 export const NoLink: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>
+      <FormSummary.Heading level="2">
         Arbeidsforhold som du har i eller utenfor EØS-området
       </FormSummary.Heading>
     </FormSummary.Header>
@@ -227,7 +227,7 @@ const answers = [
 export const RealisticUsage: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>
+      <FormSummary.Heading level="2">
         Diverse informasjon om forskjellige ting og tang. Kjekt å vite.
       </FormSummary.Heading>
       <FormSummary.EditLink href="#" />
@@ -261,14 +261,14 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
   <VStack gap="8">
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Just Header</FormSummary.Heading>
+        <FormSummary.Heading level="2">Just Header</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
     </FormSummary>
 
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Empty Answers</FormSummary.Heading>
+        <FormSummary.Heading level="2">Empty Answers</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
@@ -277,7 +277,7 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
 
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Empty Answer</FormSummary.Heading>
+        <FormSummary.Heading level="2">Empty Answer</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
@@ -288,7 +288,7 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
 
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Empty Label & Value</FormSummary.Heading>
+        <FormSummary.Heading level="2">Empty Label & Value</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
@@ -302,7 +302,7 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
 
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Empty Value</FormSummary.Heading>
+        <FormSummary.Heading level="2">Empty Value</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
@@ -341,13 +341,29 @@ export const Chromatic: StoryObj<typeof FormSummary> = {
       </div>
     </div>
   ),
-  parameters: { chromatic: { disable: false } },
+  parameters: {
+    chromatic: {
+      disable: false,
+      modes: {
+        default: {
+          viewport: {
+            width: 620,
+          },
+        },
+        sm: {
+          viewport: {
+            width: 479,
+          },
+        },
+      },
+    },
+  },
 };
 
 export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
-      <FormSummary.Heading>Personalia</FormSummary.Heading>
+      <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
       <FormSummary.EditLink href="#" />
     </FormSummary.Header>
 

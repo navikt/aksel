@@ -23,8 +23,8 @@ export function EditorPreview(props) {
     editor &&
     editor.find(
       (x) =>
-        x?.email.toLowerCase() === user?.email.toLowerCase() ||
-        x?.alt_email.toLowerCase() === user?.email.toLowerCase(),
+        x?.email?.toLowerCase() === user?.email.toLowerCase() ||
+        x?.alt_email?.toLowerCase() === user?.email.toLowerCase(),
     );
 
   return (
