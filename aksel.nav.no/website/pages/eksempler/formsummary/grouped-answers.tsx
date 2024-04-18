@@ -63,6 +63,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
   desc: "Man kan gruppere svar ved å neste FormSummary.Answers innenfor FormSummary.Answer.",
 };
