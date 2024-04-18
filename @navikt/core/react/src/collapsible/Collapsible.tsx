@@ -72,7 +72,7 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       onChange: onOpenChange,
     });
 
-    const _id = useId();
+    const internalId = useId();
     const state = _open ? "open" : "closed";
 
     return (
@@ -83,8 +83,8 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
           () => setOpen((prevOpen) => !prevOpen),
           [setOpen],
         )}
-        contentId={`collapsible-content-${_id}`}
-        triggerId={`collapsible-trigger-${_id}`}
+        contentId={`collapsible-content-${internalId}`}
+        triggerId={`collapsible-trigger-${internalId}`}
         lazy={lazy}
         state={state}
       >
