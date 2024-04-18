@@ -13,14 +13,6 @@ export type ResolveContributorsT<T> = Omit<T, "contributors"> & {
   contributors: { title: string }[];
 };
 
-export type ResolveContributorsSingleT<T> = Omit<T, "contributors"> & {
-  contributor: { title: string };
-};
-
-export type ResolveTemaT<T> = Omit<T, "tema"> & {
-  tema: string[];
-};
-
 export type ResolveRelatedArticlesT<T> = Omit<T, "relevante_artikler"> & {
   relevante_artikler?: {
     heading: string;
