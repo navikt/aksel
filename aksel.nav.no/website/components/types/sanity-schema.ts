@@ -202,24 +202,6 @@ export interface AkselGodPraksisLandingPageDocT
   seo?: ArticleT["seo"];
 }
 
-export interface AkselTemaT extends DocumentT<"aksel_tema"> {
-  title: string;
-  oppsummering?: string;
-  beskrivelse?: any;
-  refCount?: number;
-  slug: { current: string };
-  ansvarlig?: { _ref: string };
-  seksjoner: ArrayObjectT<{
-    title: string;
-    beskrivelse: any;
-    sider: ResolveContributorsSingleT<
-      ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
-    >[];
-  }>[];
-  pictogram: any;
-  seo?: ArticleT["seo"];
-}
-
 export interface AccordionT {
   list: ArrayObjectT<{
     title: string;
