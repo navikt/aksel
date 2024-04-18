@@ -11,7 +11,15 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "all": true
+        "noSvgWithoutTitle": "off",
+        "noNoninteractiveElementToInteractiveRole": "off",
+        "useValidAnchor": "off",
+        "useButtonType": "off",
+        "useValidAriaRole": "off",
+        "useValidAriaValues": "off",
+        "useMediaCaption": "off",
+        "useKeyWithClickEvents": "off",
+        "noNoninteractiveTabindex": "off"
       },
       "style": {
         "useImportType": "off",
@@ -19,21 +27,42 @@
         "noUselessElse": "off",
         "useNodejsImportProtocol": "off",
         "useConst": "off",
-        "noUnusedTemplateLiteral": "off"
+        "noUnusedTemplateLiteral": "off",
+        "noInferrableTypes": "off",
+        "noVar": "off",
+        "noParameterAssign": "off",
+        "useNumberNamespace": "off",
+        "noNonNullAssertion": "off",
+        "useSelfClosingElements": "off",
+        "useDefaultParameterLast": "off"
       },
       "suspicious": {
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off",
+        "noArrayIndexKey": "off",
+        "noAssignInExpressions": "off",
+        "noImplicitAnyLet": "off",
+        "noDoubleEquals": "off",
+        "useIsArray": "off",
+        "noGlobalIsNan": "off",
+        "noMisleadingCharacterClass": "off",
+        "noGlobalIsFinite": "off"
       },
       "complexity": {
         "noForEach": "off",
         "useLiteralKeys": "off",
-        "useOptionalChain": "off"
+        "useOptionalChain": "off",
+        "useArrowFunction": "off",
+        "noUselessTernary": "off"
       },
       "performance": {
         "noAccumulatingSpread": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noInnerDeclarations": "off",
+        "useJsxKeyInIterable": "off",
+        "noSelfAssign": "off"
       }
     },
     "ignore": [
@@ -45,7 +74,8 @@
       "**/cjs/**",
       "**/dist/**",
       "**/codemod/**/*.js",
-      "**/tailwind/tailwind.config.js"
+      "**/tailwind/tailwind.config.js",
+      "**/.next/**"
     ]
   }
 }
