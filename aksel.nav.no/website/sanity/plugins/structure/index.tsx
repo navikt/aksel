@@ -38,7 +38,6 @@ const filtered = [
   "blogg_landingsside",
   "prinsipper_landingsside",
   "aksel_prinsipp",
-  "aksel_tema",
   "godpraksis_landingsside",
   "aksel_artikkel",
   "skrivehjelp",
