@@ -15,7 +15,7 @@ export interface CollapsibleTriggerProps
 export const CollapsibleTrigger = forwardRef<
   HTMLButtonElement,
   CollapsibleTriggerProps
->(({ children, asChild, onClick, ...props }, ref) => {
+>(({ children, asChild, onClick, ...rest }, ref) => {
   const ctx = useCollapsibleContext();
 
   const Comp = asChild ? Slot : "button";
@@ -26,7 +26,7 @@ export const CollapsibleTrigger = forwardRef<
       type="button"
       data-state={ctx.state}
       disabled={ctx.disabled}
-      {...props}
+      {...rest}
       id={ctx.triggerId}
       aria-controls={ctx.open ? ctx.contentId : undefined}
       aria-expanded={ctx.open}
