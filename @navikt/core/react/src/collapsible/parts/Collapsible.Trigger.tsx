@@ -4,7 +4,10 @@ import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useCollapsibleContext } from "../Collapsible.context";
 
 export interface CollapsibleTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "id" | "aria-controls" | "aria-expanded"
+  > {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false
@@ -26,11 +29,11 @@ export const CollapsibleTrigger = forwardRef<
       type="button"
       data-state={ctx.state}
       disabled={ctx.disabled}
+      onClick={composeEventHandlers(onClick, ctx.onOpenToggle)}
       {...rest}
       id={ctx.triggerId}
       aria-controls={ctx.open ? ctx.contentId : undefined}
       aria-expanded={ctx.open}
-      onClick={composeEventHandlers(onClick, ctx.onOpenToggle)}
     >
       {children}
     </Comp>
