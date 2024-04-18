@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
+### Patch Changes
+
+- Combobox: Prevents "Enter" while Combobox is focused from submitting form. ([#2861](https://github.com/navikt/aksel/pull/2861))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.6.0
+  - @navikt/aksel-icons@6.6.0
+
 ## 6.5.0
 
 ### Minor Changes

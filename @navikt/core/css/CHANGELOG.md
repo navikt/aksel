@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
 ## 6.5.0
 
 ## 6.4.1

@@ -1,5 +1,14 @@
 # @navikt/aksel
 
+## 6.6.0
+
+### Patch Changes
+
+- Aksel CLI: Fjernet deprecated komponenter fra css oversikt. ([#2860](https://github.com/navikt/aksel/pull/2860))
+
+- Updated dependencies [[`3a73a029f`](https://github.com/navikt/aksel/commit/3a73a029f6272f76e10cb6baefbaa2040feaef6b)]:
+  - @navikt/ds-css@6.6.0
+
 ## 6.5.0
 
 ### Patch Changes
