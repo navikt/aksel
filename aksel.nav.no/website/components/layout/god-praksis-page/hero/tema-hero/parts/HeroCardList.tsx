@@ -12,14 +12,14 @@ export function HeroCardList({ heroNav, setOpen, currentSlug }: HeroListProps) {
     <nav aria-label="Temavelger" className="relative z-10 mt-5">
       <ul className="flex flex-col flex-wrap gap-2 md:flex-row lg:gap-4">
         <li>
-          <GpHeroCard href="gp" compact>
+          <GpHeroCard href="god-praksis" compact>
             Alle tema
           </GpHeroCard>
         </li>
         {heroNav.map((tema, idx) => (
           <li key={tema.slug + idx}>
             <GpHeroCard
-              href={`gp/${tema.slug}`}
+              href={`god-praksis/${tema.slug}`}
               image={
                 currentSlug === tema.slug ? tema.imageInverted : tema.image
               }

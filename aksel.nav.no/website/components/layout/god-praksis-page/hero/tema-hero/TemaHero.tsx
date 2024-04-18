@@ -109,7 +109,7 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
         shadow="medium"
         style={inlineStyles}
         role="dialog"
-        aria-labelledby="tema-selector-title"
+        aria-label="Temanavigasjon"
         aria-modal="false"
         ref={(el) => {
           setDialogHeight(el?.getBoundingClientRect().height || 0);

@@ -1,30 +1,19 @@
+import Avatar from "boring-avatars";
 import { StructureResolver } from "sanity/structure";
-import {
-  CircleSlashIcon,
-  ComponentIcon,
-  EyeIcon,
-  FileTextIcon,
-  ImageIcon,
-  LightBulbIcon,
-  NewspaperIcon,
-  PencilBoardIcon,
-  RectangleSectionsIcon,
-  TokenIcon,
-} from "@navikt/aksel-icons";
+import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
-  bloggKategorier,
-  grunnleggendeKategorier,
-  komponentKategorier,
   landingsider,
   previews,
   prinsippKategorier,
-  templatesKategorier,
 } from "../../config";
 import { Iframe } from "./IFrame";
-import { godPraksiStructure } from "./god-praksis";
-import { GodPraksisPanesOld } from "./god-praksis.old";
-import { Panes } from "./panes";
+import { adminStructure } from "./admin";
+import { gpStructure } from "./god-praksis";
+import { grunnleggendeStructure } from "./grunnleggende";
+import { komponenterStructure } from "./komponenter";
+import { monsterStructure } from "./monster";
+import { produktBloggenStructure } from "./produktbloggen";
 
 /**
  * List of document-types added to structure.
@@ -65,48 +54,43 @@ export const structure: StructureResolver = async (
   S,
   { currentUser, getClient },
 ) => {
-  const editors = await getClient({ apiVersion: SANITY_API_VERSION })
-    .fetch(`*[_type == "editor"]{
-      _id,
-      email,
-      alt_email
-    }`);
-
-  const editor = editors.find(
-    ({ email, alt_email }) =>
-      email === currentUser?.email || alt_email === currentUser?.email,
-  );
-  const adminOrDev = currentUser?.roles.find((x) =>
-    ["developer", "administrator"].includes(x.name),
-  );
-  const developer = currentUser?.roles.find((x) =>
-    ["developer"].includes(x.name),
+  const editor = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
+    `*[_type == "editor" && ($mail == lower(email) || $mail == lower(alt_email))][0]`,
+    { mail: currentUser?.email.toLowerCase() ?? "" },
   );
 
   return S.list()
-    .title("Innholdstyper")
+    .title("Innhold")
     .items([
       ...(editor
-        ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
+        ? [
+            S.listItem()
+              .title(editor?.title ?? "Profilside")
+              .icon(() => (
+                <Avatar
+                  size="1100"
+                  name={editor?.title ?? "Profilside"}
+                  variant="beam"
+                  colors={[
+                    "#D1DAB9",
+                    "#92BEA5",
+                    "#6F646C",
+                    "#671045",
+                    "#31233E",
+                  ]}
+                />
+              ))
+              .child(S.document().schemaType("editor").documentId(editor._id)),
+            S.divider(),
+          ]
         : []),
 
-      ...(editor ? [S.divider()] : []),
-      godPraksiStructure(S),
-      S.listItem()
-        .title("God Praksis")
-        .icon(PencilBoardIcon)
-        .child(
-          S.list()
-            .title("God Praksis")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`godpraksis_landingsside`)
-                .id(`godpraksis_landingsside_id1`),
-              S.divider(),
-              ...(await GodPraksisPanesOld(getClient, S)),
-            ]),
-        ),
+      gpStructure(S),
+      grunnleggendeStructure(S),
+      komponenterStructure(S),
+      monsterStructure(S),
+      produktBloggenStructure(S),
+
       S.listItem()
         .title("Prinsipper")
         .icon(LightBulbIcon)
@@ -120,188 +104,35 @@ export const structure: StructureResolver = async (
                 .id(`prinsipper_landingsside_id1`),
               S.divider(),
               ...prinsippKategorier.map(({ value, title }) =>
-                S.listItem().title(title).child(
-                  S.documentList()
-                    .title(title)
-                    .filter(
-                      `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`,
-                    )
-                    .params({ value })
-                    .apiVersion(SANITY_API_VERSION),
-                  /* .menuItems([
-                        ...S.documentTypeList("aksel_prinsipp").getMenuItems(),
-                      ]) */
-                ),
+                S.listItem()
+                  .title(title)
+                  .child(
+                    S.documentList()
+                      .title(title)
+                      .filter(
+                        `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`,
+                      )
+                      .params({ value })
+                      .apiVersion(SANITY_API_VERSION),
+                  ),
               ),
               S.listItem()
                 .title("Alle artikler")
                 .child(S.documentTypeList("aksel_prinsipp")),
             ]),
         ),
-      S.listItem()
-        .title("Grunnleggende")
-        .icon(TokenIcon)
-        .child(
-          S.list()
-            .title("Grunnleggende")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`grunnleggende_landingsside`)
-                .id(`grunnleggende_landingsside_id1`),
-              S.divider(),
-              ...Panes("ds_artikkel", grunnleggendeKategorier, S),
-            ]),
-        ),
-      S.listItem()
-        .title("Mønster og Maler")
-        .icon(RectangleSectionsIcon)
-        .child(
-          S.list()
-            .title("Mønster og Maler")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`templates_landingsside`)
-                .id(`templates_landingsside_id1`),
-              S.divider(),
-              ...Panes("templates_artikkel", templatesKategorier, S),
-            ]),
-        ),
-      S.listItem()
-        .title("Komponenter")
-        .icon(ComponentIcon)
-        .child(
-          S.list()
-            .title("Komponenter")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`komponenter_landingsside`)
-                .id(`komponenter_landingsside_id1`),
-              S.divider(),
-              ...Panes("komponent_artikkel", komponentKategorier, S),
-            ]),
-        ),
-      S.listItem()
-        .title("Produktbloggen")
-        .icon(NewspaperIcon)
-        .child(
-          S.list()
-            .title("Produktbloggen")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`blogg_landingsside`)
-                .id(`blogg_landingsside_id1`),
-              S.divider(),
-              ...Panes("aksel_blogg", [...bloggKategorier], S),
-            ]),
-        ),
       S.divider(),
       S.listItem()
         .title("Forfattere")
-        .child(
-          S.documentList()
-            .title("Forfattere")
-            .filter(`_type == 'editor'`)
-            .apiVersion(SANITY_API_VERSION),
-        ),
-      ...(adminOrDev
-        ? [
-            S.divider(),
-            S.listItem()
-              .title("Admin")
-              .icon(CircleSlashIcon)
-              .child(
-                S.list()
-                  .title("Admin")
-                  .items([
-                    S.documentListItem()
-                      .title(`Forside`)
-                      .schemaType(`aksel_forside`)
-                      .icon(ImageIcon)
-                      .id(`aksel_forside_dokument`),
+        .child(S.documentTypeList("editor").title("Forfattere")),
+      adminStructure(S),
 
-                    S.listItem().title("Standalone-sider").child(
-                      S.documentList()
-                        .title("Sider")
-                        .filter(`_type == 'aksel_standalone'`)
-                        .apiVersion(SANITY_API_VERSION),
-                      /* .menuItems([
-                            ...S.documentTypeList(
-                              "aksel_standalone"
-                            ).getMenuItems(),
-                          ]) */
-                    ),
-                    S.listItem().title("Redirects").child(
-                      S.documentList()
-                        .title("Redirects")
-                        .filter(`_type == 'redirect'`)
-                        .apiVersion(SANITY_API_VERSION),
-                      /* .menuItems([
-                            ...S.documentTypeList("redirect").getMenuItems(),
-                          ]) */
-                    ),
-                    S.listItem()
-                      .title("Eksempler/Templates")
-                      .child(
-                        S.documentList()
-                          .title("Eksempler")
-                          .filter(`_type == 'kode_eksempler_fil'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.listItem()
-                      .title("Token-grupper Designsystemet")
-                      .child(
-                        S.documentList()
-                          .title("Grupper")
-                          .filter(`_type == 'token_kategori'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.listItem()
-                      .title("Props Designsystemet")
-                      .child(
-                        S.documentList()
-                          .title("Props")
-                          .filter(`_type == 'ds_props'`)
-                          .apiVersion(SANITY_API_VERSION),
-                      ),
-                    S.documentListItem()
-                      .title(`Skrivehjelp`)
-                      .schemaType(`skrivehjelp`)
-                      .icon(FileTextIcon)
-                      .id(`skrivehjelp`),
-                    S.documentListItem()
-                      .title(`Publiseringsflyt`)
-                      .schemaType(`publication_flow`)
-                      .icon(FileTextIcon)
-                      .id(`publication_flow`),
-                    S.listItem()
-                      .title("Artikkelvisninger")
-                      .icon(EyeIcon)
-                      .child(
-                        S.documentList()
-                          .title("Artikkelvisninger")
-                          .filter(`_type == 'article_views'`)
-                          .apiVersion(SANITY_API_VERSION)
-                          .menuItems([
-                            ...(S.documentTypeList(
-                              "article_views",
-                            ).getMenuItems() ?? []),
-                          ]),
-                      ),
-                  ]),
-              ),
-          ]
-        : []),
-
-      S.divider(),
-      ...(developer
-        ? S.documentTypeListItems().filter(
-            (listItem) => !filtered.includes(listItem.getId() ?? ""),
-          )
-        : []),
+      /**
+       * Shows all document-types not in `filtered`.
+       */
+      ...S.documentTypeListItems().filter(
+        (listItem) => !filtered.includes(listItem.getId() ?? ""),
+      ),
     ]);
 };
 
@@ -330,7 +161,7 @@ export const resolveProductionUrl = (doc) => {
       : `${devPath}${previewUrl}`;
   }
 
-  if ("aksel_tema" === doc._type) {
+  if ("gp.tema" === doc._type) {
     const slug = doc.slug?.current;
     const previewUrl = `/preview/god-praksis/${slug}`;
     if (!slug) {
@@ -343,11 +174,7 @@ export const resolveProductionUrl = (doc) => {
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
-  if (
-    [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
-      schemaType,
-    )
-  ) {
+  if ([...previews, ...landingsider.map((x) => x.name)].includes(schemaType)) {
     return S.document().views([
       S.view.form(),
 

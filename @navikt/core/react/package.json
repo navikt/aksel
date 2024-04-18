@@ -24,7 +24,8 @@
     "/cjs",
     "/esm",
     "/src",
-    "!**/*.tsbuildinfo"
+    "!**/*.tsbuildinfo",
+    "!**/*.stories.*"
   ],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -547,6 +548,16 @@
       "require": {
         "types": "./cjs/form/file-upload/index.d.ts",
         "default": "./cjs/form/file-upload/index.js"
+      }
+    },
+    "./FormSummary": {
+      "import": {
+        "types": "./esm/form/form-summary/index.d.ts",
+        "default": "./esm/form/form-summary/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/form-summary/index.d.ts",
+        "default": "./cjs/form/form-summary/index.js"
       }
     },
     "./package.json": "./package.json"

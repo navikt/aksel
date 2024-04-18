@@ -36,10 +36,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   };
 
   return (
-    <div
-      /* TODO: After release of new GP structure this could be removed since all articles will required proper data, thus always having chips */
-      className="hidden has-[.chiplist]:grid"
-    >
+    <div>
       <Label
         as="h2"
         className={cl("flex items-center gap-1 text-aksel-heading", {
@@ -54,17 +51,19 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
 
       <div className="relative mt-2">
         <ul id={id} className={cl("flex flex-wrap gap-2 p-1", styles.chips)}>
-          <GpChip
-            type={type}
-            disabled={false}
-            onClick={reset}
-            pressed={!safeString(query?.[type])}
-          >
-            {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
-          </GpChip>
+          <li>
+            <GpChip
+              type={type}
+              disabled={false}
+              onClick={reset}
+              pressed={!safeString(query?.[type])}
+            >
+              {`Alle (${entries.reduce((acc, [, count]) => acc + count, 0)})`}
+            </GpChip>
+          </li>
           {entries.map(([entryName, count]) => {
             return (
-              <li key={entryName} className="chiplist">
+              <li key={entryName}>
                 <GpChip
                   type={type}
                   disabled={count === 0}

@@ -1,15 +1,12 @@
 import Avatar from "boring-avatars";
 import { defineField, defineType } from "sanity";
 import { EditorPage } from "../custom-components/EditorPage";
-import { EditorPreview } from "../custom-components/EditorPreview";
 
 export const Editors = defineType({
   title: "Forfattere",
   name: "editor",
   type: "document",
-  components: {
-    preview: EditorPreview,
-  },
+
   fields: [
     defineField({
       title: "Navn",
@@ -87,7 +84,7 @@ export const Editors = defineType({
 
       return {
         title,
-        subtitle: "Profilside",
+        subtitle: "Forfatter",
         media: () => (
           <Avatar
             size={100}

@@ -38,17 +38,14 @@ export const godPraksisArtikkel = () =>
           disableNew: true,
         },
         group: "innhold",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
+        validation: (Rule) => Rule.required(),
       }),
       defineField({
         name: "undertema",
         title: "Undertema",
         type: "array",
         group: "innhold",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
-        /*  */
+        validation: (Rule) => Rule.required(),
         components: {
           field: UndertemaHighlight,
         },
@@ -88,12 +85,13 @@ export const godPraksisArtikkel = () =>
       sanitySlug(prefix, 3),
       defineField({
         title: "Kobling til tema",
-        description:
-          "Lenker artikkel til Tema og tilgjengeliggjør den for tema-redaktører.",
         name: "tema",
         type: "array",
         of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
         group: "innhold",
+        deprecated: {
+          reason: 'Erstattet av "undertema" og "innholdstype" felter.',
+        },
       }),
       ingressField,
       defineField({
