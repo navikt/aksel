@@ -12,7 +12,7 @@ export interface CollapsibleBaseProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * When true, prevents the user from interacting with the collapsible.
+   * When true, prevents the user from interacting with the trigger.
    */
   disabled?: boolean;
   /**
