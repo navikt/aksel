@@ -22,16 +22,12 @@ export type ResolveTemaT<T> = Omit<T, "tema"> & {
 };
 
 export type ResolveRelatedArticlesT<T> = Omit<T, "relevante_artikler"> & {
-  relevante_artikler?: ResolveContributorsSingleT<
-    ResolveSlugT<
-      ResolveTemaT<
-        | AkselBloggDocT
-        | AkselGodPraksisDocT
-        | AkselKomponentDocT
-        | AkselGrunnleggendeDocT
-      >
-    >
-  >[];
+  relevante_artikler?: {
+    heading: string;
+    ingress: string;
+    slug: string;
+    innholdstype: string;
+  }[];
 };
 
 type DocumentT<T> = {
