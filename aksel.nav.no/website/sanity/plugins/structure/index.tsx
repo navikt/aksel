@@ -1,5 +1,6 @@
+import Avatar from "boring-avatars";
 import { StructureResolver } from "sanity/structure";
-import { LightBulbIcon, PencilBoardIcon } from "@navikt/aksel-icons";
+import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,
   landingsider,
@@ -8,8 +9,7 @@ import {
 } from "../../config";
 import { Iframe } from "./IFrame";
 import { adminStructure } from "./admin";
-import { godPraksiStructure } from "./god-praksis";
-import { GodPraksisPanesOld } from "./god-praksis.old";
+import { gpStructure } from "./god-praksis";
 import { grunnleggendeStructure } from "./grunnleggende";
 import { komponenterStructure } from "./komponenter";
 import { monsterStructure } from "./monster";
@@ -54,47 +54,38 @@ export const structure: StructureResolver = async (
   S,
   { currentUser, getClient },
 ) => {
-  const editors = await getClient({ apiVersion: SANITY_API_VERSION })
-    .fetch(`*[_type == "editor"]{
-      _id,
-      email,
-      alt_email
-    }`);
-
-  const editor = editors.find(
-    ({ email, alt_email }) =>
-      email?.toLowerCase() === currentUser?.email.toLowerCase() ||
-      alt_email?.toLowerCase() === currentUser?.email.toLowerCase(),
-  );
-
-  const developer = currentUser?.roles.find((x) =>
-    ["developer"].includes(x.name),
+  const editor = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
+    `*[_type == "editor" && ($mail == lower(email) || $mail == lower(alt_email))][0]`,
+    { mail: currentUser?.email.toLowerCase() ?? "" },
   );
 
   return S.list()
     .title("Innhold")
     .items([
       ...(editor
-        ? [S.documentListItem().schemaType(`editor`).id(editor._id)]
+        ? [
+            S.listItem()
+              .title(editor?.title ?? "Profilside")
+              .icon(() => (
+                <Avatar
+                  size="1100"
+                  name={editor?.title ?? "Profilside"}
+                  variant="beam"
+                  colors={[
+                    "#D1DAB9",
+                    "#92BEA5",
+                    "#6F646C",
+                    "#671045",
+                    "#31233E",
+                  ]}
+                />
+              ))
+              .child(S.document().schemaType("editor").documentId(editor._id)),
+            S.divider(),
+          ]
         : []),
 
-      ...(editor ? [S.divider()] : []),
-      godPraksiStructure(S),
-      S.listItem()
-        .title("God Praksis")
-        .icon(PencilBoardIcon)
-        .child(
-          S.list()
-            .title("God Praksis")
-            .items([
-              S.documentListItem()
-                .title(`Landingsside`)
-                .schemaType(`godpraksis_landingsside`)
-                .id(`godpraksis_landingsside_id1`),
-              S.divider(),
-              ...(await GodPraksisPanesOld(getClient, S)),
-            ]),
-        ),
+      gpStructure(S),
       grunnleggendeStructure(S),
       komponenterStructure(S),
       monsterStructure(S),
@@ -133,19 +124,15 @@ export const structure: StructureResolver = async (
       S.divider(),
       S.listItem()
         .title("Forfattere")
-        .child(
-          S.documentList()
-            .title("Forfattere")
-            .filter(`_type == 'editor'`)
-            .apiVersion(SANITY_API_VERSION),
-        ),
+        .child(S.documentTypeList("editor").title("Forfattere")),
       adminStructure(S),
 
-      ...(developer
-        ? S.documentTypeListItems().filter(
-            (listItem) => !filtered.includes(listItem.getId() ?? ""),
-          )
-        : []),
+      /**
+       * Shows all document-types not in `filtered`.
+       */
+      ...S.documentTypeListItems().filter(
+        (listItem) => !filtered.includes(listItem.getId() ?? ""),
+      ),
     ]);
 };
 
@@ -174,7 +161,7 @@ export const resolveProductionUrl = (doc) => {
       : `${devPath}${previewUrl}`;
   }
 
-  if ("aksel_tema" === doc._type) {
+  if ("gp.tema" === doc._type) {
     const slug = doc.slug?.current;
     const previewUrl = `/preview/god-praksis/${slug}`;
     if (!slug) {
@@ -187,11 +174,7 @@ export const resolveProductionUrl = (doc) => {
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {
-  if (
-    [...previews, "aksel_tema", ...landingsider.map((x) => x.name)].includes(
-      schemaType,
-    )
-  ) {
+  if ([...previews, ...landingsider.map((x) => x.name)].includes(schemaType)) {
     return S.document().views([
       S.view.form(),
 
