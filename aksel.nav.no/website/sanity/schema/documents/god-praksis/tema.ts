@@ -34,6 +34,13 @@ export const Tema = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      title: "Temakontakter",
+      name: "contacts",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "editor" }] }],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
       name: "alias",
       title: "Aliaser",
       description: "Hjelper med å gi bedre søketreff internt i admin-løsning",
