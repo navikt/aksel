@@ -83,16 +83,6 @@ export const godPraksisArtikkel = () =>
       titleField,
       editorField,
       sanitySlug(prefix, 3),
-      defineField({
-        title: "Kobling til tema",
-        name: "tema",
-        type: "array",
-        of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
-        group: "innhold",
-        deprecated: {
-          reason: 'Erstattet av "undertema" og "innholdstype" felter.',
-        },
-      }),
       ingressField,
       defineField({
         title: "Innhold",
