@@ -14,7 +14,26 @@
         "all": true
       },
       "style": {
-        "useImportType": "off"
+        "useImportType": "off",
+        "useTemplate": "off",
+        "noUselessElse": "off",
+        "useNodejsImportProtocol": "off",
+        "useConst": "off",
+        "noUnusedTemplateLiteral": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "useLiteralKeys": "off",
+        "useOptionalChain": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
       }
     },
     "ignore": [
