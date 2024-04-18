@@ -14,7 +14,7 @@ export interface CollapsibleContentProps
 export const CollapsibleContent = forwardRef<
   HTMLDivElement,
   CollapsibleContentProps
->(({ children, asChild, ...props }, ref) => {
+>(({ children, asChild, ...rest }, ref) => {
   const ctx = useCollapsibleContext();
 
   const Comp = asChild ? Slot : "div";
@@ -26,7 +26,7 @@ export const CollapsibleContent = forwardRef<
       hidden={!ctx.open}
       aria-controls={ctx.open ? ctx.triggerId : undefined}
       id={ctx.contentId}
-      {...props}
+      {...rest}
     >
       {ctx.lazy || ctx.open ? children : null}
     </Comp>
