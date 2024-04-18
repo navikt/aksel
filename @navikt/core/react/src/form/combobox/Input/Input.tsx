@@ -186,6 +186,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {...omit(inputProps, ["aria-invalid"])}
         ref={ref}
         value={value}
+        onBlur={() => virtualFocus.moveFocusToTop()}
         onChange={onChangeHandler}
         type="text"
         role="combobox"

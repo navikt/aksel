@@ -1,6 +1,5 @@
 import React from "react";
 import { Chips } from "../../../chips";
-import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "../Input/inputContext";
 import { ComboboxOption } from "../types";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
@@ -14,18 +13,11 @@ interface SelectedOptionsProps {
 const Option = ({ option }: { option: ComboboxOption }) => {
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
   const { focusInput } = useInputContext();
-  const { isListOpen, toggleIsListOpen } = useFilteredOptionsContext();
 
   const onClick = (e) => {
     e.stopPropagation();
     removeSelectedOption(option);
     focusInput();
-  };
-
-  const onFocus = () => {
-    if (isListOpen) {
-      toggleIsListOpen(false);
-    }
   };
 
   if (!isMultiSelect) {
@@ -36,11 +28,7 @@ const Option = ({ option }: { option: ComboboxOption }) => {
     );
   }
 
-  return (
-    <Chips.Removable onClick={onClick} onFocus={onFocus}>
-      {option.label}
-    </Chips.Removable>
-  );
+  return <Chips.Removable onClick={onClick}>{option.label}</Chips.Removable>;
 };
 
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({
