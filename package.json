@@ -142,6 +142,7 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.0",
     "@changesets/cli": "2.26.2",
     "@storybook/addon-a11y": "^8.0.5",
     "@storybook/addon-essentials": "^8.0.5",

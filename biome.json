@@ -1,0 +1,32 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "all": true
+      },
+      "style": {
+        "useImportType": "off"
+      }
+    },
+    "ignore": [
+      "**/node_modules/**",
+      "**/lib/**",
+      "**/public/**",
+      "**/examples/**",
+      "**/esm/**",
+      "**/cjs/**",
+      "**/dist/**",
+      "**/codemod/**/*.js",
+      "**/tailwind/tailwind.config.js"
+    ]
+  }
+}

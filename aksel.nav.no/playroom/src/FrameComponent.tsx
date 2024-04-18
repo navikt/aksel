@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import "@navikt/ds-css";
 
 const FrameComponent = ({ children }: { children: React.ReactNode }) => {
