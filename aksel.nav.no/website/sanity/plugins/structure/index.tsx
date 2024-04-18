@@ -42,7 +42,6 @@ const filtered = [
   "aksel_artikkel",
   "skrivehjelp",
   "publication_flow",
-  "aksel_feedback",
   "article_views",
   "gp.tema",
   "gp.tema.undertema",
