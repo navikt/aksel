@@ -36,9 +36,9 @@ const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
 
-type MembersArray = Exclude<UsersListResponse["members"], undefined>;
+type MembersArray = NonNullable<UsersListResponse["members"]>;
 type Member = MembersArray[0] & {
-  id: string;
+  id: NonNullable<MembersArray[0]["id"]>;
 };
 
 async function sendSlackbotFeedback(
