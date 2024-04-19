@@ -36,6 +36,11 @@ const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
 
+type MembersArray = Exclude<UsersListResponse["members"], undefined>;
+type Member = MembersArray[0] & {
+  id: string;
+};
+
 async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
@@ -70,7 +75,8 @@ async function sendSlackbotFeedback(
       "id": _id,
       "title": heading,
       "editors": contributors[]->email,
-      "slug": slug.current
+      "slug": slug.current,
+      "contacts": undertema[]->tema->contacts[]->email
     }`,
     {
       id: validation.data.body.document_id,
@@ -102,9 +108,34 @@ async function sendSlackbotFeedback(
   const slackProfileForEditors = document.editors
     .filter(Boolean)
     .map((email: string) => findUserByEmail(email, slackMembers.members))
-    .filter(Boolean) as Exclude<UsersListResponse["members"], undefined>;
+    .filter(Boolean)
+    .filter((x) => !!x.id) as Member[];
+
+  /**
+   * We use contributors found on article and find their matching slack profiles
+   */
+  const slackProfileForTemaContacts =
+    (document.contacts
+      ?.filter(Boolean)
+      .map((email: string) => findUserByEmail(email, slackMembers.members))
+      .filter(Boolean)
+      .filter((x) => !!x.id) as Member[]) ?? [];
+
+  /**
+   * We want to make sure we avoid sending the message to the same user multiple times
+   */
+  const uniqueRecievers = new Map<Member["id"], Member>();
+  for (const member of slackProfileForEditors) {
+    uniqueRecievers.set(member.id, member);
+  }
+
+  for (const member of slackProfileForTemaContacts) {
+    uniqueRecievers.set(member.id, member);
+  }
 
   let postMessageError = false;
+
+  const uniqueIds = [...uniqueRecievers.keys()];
 
   await client.chat
     .postMessage({
@@ -119,15 +150,13 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: slackProfileForEditors
-            .map((x) => x.id)
-            .filter(Boolean) as string[],
+          recievers: uniqueIds,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
           },
         }),
-        ...(slackProfileForEditors.length === 0
+        ...(uniqueIds.length === 0
           ? [
               {
                 type: "section",
@@ -147,13 +176,13 @@ async function sendSlackbotFeedback(
       );
     });
 
-  for (const editor of slackProfileForEditors) {
-    if (!editor.id) {
+  for (const editor of uniqueIds) {
+    if (!editor) {
       continue;
     }
     await client.chat
       .postMessage({
-        channel: editor.id,
+        channel: editor,
         text: `Tilbakemelding: ${validation.data.body.feedback}`,
         blocks: slackBlock({
           article: {
@@ -162,9 +191,7 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: slackProfileForEditors
-            .map((x) => x.id)
-            .filter(Boolean) as string[],
+          recievers: uniqueIds,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
@@ -281,7 +308,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
             },
             {
               type: "text",
-              text: "\n\nMedvirkende (disse fikk tilbakemeldingen):\n",
+              text: "\n\nMedvirkende og temakontakter (disse fikk tilbakemeldingen):\n",
               style: {
                 bold: true,
               },
