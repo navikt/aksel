@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import { useMemoObservable } from "react-rx";
 import { useDocumentStore, useFormValue } from "sanity";
-import { BodyLong, Button, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, Heading, Link } from "@navikt/ds-react";
 
 type ResultT = {
   tema: { title: string; contacts: { title: string; email: string }[] };
@@ -34,32 +34,25 @@ export function TemaContacts() {
         Temakontakter
       </Heading>
       <BodyLong className="mb-4">
-        Kontaktpersoner for temaene valgt på denne siden. Hvis du trenger hjelp
-        med noe innholdsrelatert, kan du ta kontakt med en av disse.
+        Kontaktpersoner for temaene valgt på denne artikkelen. Hvis du trenger
+        hjelp med innhold eller struktur, kan du ta kontakt med en av disse.
       </BodyLong>
       <div className="space-y-2">
         {results.toReversed().map((res) => {
           return (
-            <div key={res.tema.title}>
-              <Heading level="4" size="xsmall" className="mb-1">
+            <dl key={res.tema.title}>
+              <Heading as="dt" size="xsmall" className="mb-1">
                 {res.tema.title}
               </Heading>
               {res.tema.contacts.map((contact) => (
-                <HStack gap="4" justify="space-between" key={contact.title}>
-                  <span>{contact.title}</span>
+                <dd key={contact.title}>
+                  <span>{`${contact.title} `}</span>
                   {contact?.email && (
-                    <Button
-                      size="small"
-                      variant="tertiary"
-                      as="a"
-                      href={`mailto:${contact.email}`}
-                    >
-                      Send e-post
-                    </Button>
+                    <Link href={`mailto:${contact.email}`}>(Send e-post)</Link>
                   )}
-                </HStack>
+                </dd>
               ))}
-            </div>
+            </dl>
           );
         })}
       </div>
