@@ -42,7 +42,7 @@ export function TemaContacts() {
           return (
             <div key={res.tema.title}>
               <Heading level="4" size="xsmall" className="mb-1">
-                {`${res.tema.title}`}
+                {res.tema.title}
               </Heading>
               {res.tema.contacts.map((contact) => (
                 <HStack gap="4" justify="space-between" key={contact.title}>
