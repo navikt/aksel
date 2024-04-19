@@ -54,7 +54,7 @@ export function TemaContacts() {
                       as="a"
                       href={`mailto:${contact.email}`}
                     >
-                      Send mail
+                      Send e-post
                     </Button>
                   )}
                 </HStack>
