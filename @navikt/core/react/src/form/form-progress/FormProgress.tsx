@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import Button from "../../button/Button";
+import Collapsible from "../../collapsible/Collapsible";
 import { HStack } from "../../layout/stack";
 import { Stepper } from "../../stepper";
 import { BodyShort } from "../../typography";
@@ -29,6 +30,9 @@ export interface FormProgressProps
    * Callback for current open-state
    */
   onOpenChange?: (open: boolean) => void;
+
+  // TODO: Bør vel kunne endre tekstene?
+
   /**
    * Should contain <FormProgress.Step> elements.
    */
@@ -84,12 +88,12 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
       defaultValue: false,
       value: open,
       onChange: onOpenChange,
-    });
+    }); // TODO: Blir dobbelt opp med state nå (pga. Collapsible). Bør Collapsible bare være controlled? Ev. vise riktig tekst med CSS.
 
     return (
       <div
         ref={ref}
-        className={cl(className, { "navds-form-progress--open": _open })}
+        className={cl(className, "navds-form-progress")} // TODO: Vurder om dette klassenavnet trengs
         {...rest}
       >
         <div>
@@ -100,34 +104,32 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
             // TODO: Bruk ProgressBar når merged
           />
         </div>
-        <HStack justify="space-between" align="center">
-          <BodyShort as="span">
-            Steg {activeStep} av {totalSteps}
-          </BodyShort>
-          <Button
-            type="button"
-            variant="tertiary"
-            size="small"
-            className="navds-form-progress__button"
-            onClick={() => _setOpen((x) => !x)}
-            aria-expanded={_open}
-          >
-            <ChevronDownIcon
-              className="navds-form-progress__expand-icon"
-              aria-hidden
-            />
-            {_open ? "Skjul alle steg" : "Vis alle steg"}
-          </Button>
-        </HStack>
-        <div className="navds-form-progress__stepper">
-          <Stepper
-            activeStep={activeStep}
-            onStepChange={onStepChange}
-            interactive={interactiveSteps}
-          >
-            {children}
-          </Stepper>
-        </div>
+        <Collapsible open={_open} onOpenChange={_setOpen}>
+          <HStack justify="space-between" align="center">
+            <BodyShort as="span">
+              Steg {activeStep} av {totalSteps}
+            </BodyShort>
+            <Collapsible.Trigger asChild>
+              <Button
+                variant="tertiary"
+                size="small"
+                className="navds-form-progress__button"
+                icon={<ChevronDownIcon aria-hidden />}
+              >
+                {_open ? "Skjul alle steg" : "Vis alle steg"}
+              </Button>
+            </Collapsible.Trigger>
+          </HStack>
+          <Collapsible.Content className="navds-form-progress__stepper">
+            <Stepper
+              activeStep={activeStep}
+              onStepChange={onStepChange}
+              interactive={interactiveSteps}
+            >
+              {children}
+            </Stepper>
+          </Collapsible.Content>
+        </Collapsible>
       </div>
     );
   },

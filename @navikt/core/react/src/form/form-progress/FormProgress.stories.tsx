@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 import FormProgress from "./FormProgress";
 
 export default {
@@ -31,14 +31,24 @@ export const Default: Story = (props) => (
   </FormProgress>
 );
 Default.args = { activeStep: 1, interactiveSteps: true };
-Default.argTypes = {
-  /*activeStep: {
-    control: { type: "number" },
-  },
-  size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    }, */
+
+export const Controlled: Story = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      <button onClick={() => setOpen(!open)}>State: {open.toString()}</button>
+      <FormProgress
+        totalSteps={3}
+        activeStep={1}
+        open={open}
+        onOpenChange={setOpen}
+      >
+        <FormProgress.Step completed>Start søknad</FormProgress.Step>
+        <FormProgress.Step>Personopplysninger</FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Saksopplysninger
+        </FormProgress.Step>
+      </FormProgress>
+    </>
+  );
 };
