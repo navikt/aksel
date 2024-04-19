@@ -302,7 +302,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
             },
             {
               type: "text",
-              text: "\n\nMedvirkende og temakontakter (disse fikk tilbakemeldingen):\n",
+              text: "\n\nDisse fikk tilbakemeldingen (medvirkende og temakontakter):\n",
               style: {
                 bold: true,
               },
