@@ -69,6 +69,8 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * A summary of a previously answered form.
  *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formsummary)
+ *
  * @example
  * <FormSummary>
  *   <FormSummary.Header>

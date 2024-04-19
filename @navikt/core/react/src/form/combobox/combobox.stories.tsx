@@ -624,3 +624,71 @@ export const TestHoverAndFocusSwitching: StoryObject = {
     );
   },
 };
+
+export const TestEnterNotSubmittingForm: StoryObj<{
+  onSubmit: ReturnType<typeof fn>;
+}> = {
+  args: {
+    onSubmit: fn(),
+  },
+  render: ({ onSubmit }) => {
+    return (
+      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+          allowNewValues
+        />
+      </form>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    args.onSubmit.mockClear();
+    const canvas = within(canvasElement);
+    const waitTime = 0; // Change for debugging
+
+    await sleep(waitTime);
+
+    const getInput = () =>
+      canvas.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+    const getOption = (name: string, selected: boolean) =>
+      canvas.getByRole("option", { name, selected });
+    await userEvent.click(getInput(), { delay: waitTime });
+
+    await userEvent.keyboard("{ArrowDown}", { delay: waitTime });
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      getOption("banana", false).getAttribute("id"),
+    );
+
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+    expect(getOption("banana", true)).toBeVisible();
+
+    await userEvent.keyboard("{Shift>}{Tab}", { delay: waitTime });
+
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("test"); // Type option that does not exist
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{ArrowDown}", { delay: waitTime }); // Select "test" custom option
+    expect(
+      canvas.getByRole("option", { name: "test", selected: true }),
+    ).toBeVisible();
+    await userEvent.keyboard("{Enter}", { delay: waitTime }); // De-select "test"
+    expect(
+      canvas.queryByRole("option", { name: "test", selected: false }),
+    ).toBeNull();
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{Escape}", { delay: waitTime }); // Clear input field
+    await userEvent.keyboard("{Enter}", { delay: waitTime }); // Enter on empty Input with closed list
+    expect(args.onSubmit).toHaveBeenCalledOnce();
+  },
+};
