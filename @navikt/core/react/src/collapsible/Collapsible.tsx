@@ -60,7 +60,6 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
       open,
       defaultOpen = false,
       onOpenChange,
-      disabled,
       lazy = false,
       ...rest
     },
@@ -78,7 +77,6 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps>(
     return (
       <CollapsibleContextProvider
         open={_open}
-        disabled={disabled}
         onOpenToggle={useCallback(
           () => setOpen((prevOpen) => !prevOpen),
           [setOpen],

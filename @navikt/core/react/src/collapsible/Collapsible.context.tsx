@@ -1,10 +1,7 @@
 import { createContext } from "../util/create-context";
 import { CollapsibleBaseProps } from "./Collapsible.types";
 
-export type CollapsibleContextProps = Pick<
-  CollapsibleBaseProps,
-  "open" | "disabled"
-> & {
+export type CollapsibleContextProps = Pick<CollapsibleBaseProps, "open"> & {
   /**
    * Allows connecting trigger to content
    */

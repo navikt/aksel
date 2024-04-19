@@ -12,10 +12,6 @@ export interface CollapsibleBaseProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * When true, prevents the user from interacting with the trigger.
-   */
-  disabled?: boolean;
-  /**
    * Render the collapsible content lazily. This means that the content will not be rendered until the collapsible is open.
    * @default false
    */

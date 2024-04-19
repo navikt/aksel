@@ -28,7 +28,6 @@ export const CollapsibleTrigger = forwardRef<
       ref={ref}
       type="button"
       data-state={ctx.state}
-      disabled={ctx.disabled}
       onClick={composeEventHandlers(onClick, ctx.onOpenToggle)}
       {...rest}
       id={ctx.triggerId}
