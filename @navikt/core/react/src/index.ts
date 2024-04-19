@@ -140,6 +140,7 @@ export {
   type FilesPartitioned,
 } from "./form/file-upload";
 export { FormSummary, type FormSummaryProps } from "./form/form-summary";
+export { FormProgress, type FormProgressProps } from "./form/form-progress";
 export {
   Radio,
   RadioGroup,

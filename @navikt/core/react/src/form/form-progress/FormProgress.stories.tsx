@@ -52,3 +52,4 @@ export const Controlled: Story = () => {
     </>
   );
 };
+Controlled.parameters = { chromatic: { disable: false } };
