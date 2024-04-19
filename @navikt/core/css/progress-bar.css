@@ -1,7 +1,6 @@
 .navds-progress-bar {
   background: var(--ac-progress-bar-bg, var(--a-surface-alt-3-subtle));
   position: relative;
-  width: 100%;
   border-radius: var(--a-border-radius-full);
   overflow: hidden;
 }
