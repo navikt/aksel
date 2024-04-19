@@ -159,7 +159,7 @@ async function sendSlackbotFeedback(
                 type: "section",
                 text: {
                   type: "mrkdwn",
-                  text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
+                  text: ":exclamation: Denne artikkelen har ingen redaktører eller temakontater. @here",
                 },
               } satisfies SectionBlock,
             ]
