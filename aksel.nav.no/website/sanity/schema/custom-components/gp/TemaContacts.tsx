@@ -47,7 +47,7 @@ export function TemaContacts() {
               {res.tema.contacts.map((contact) => (
                 <dd key={contact.title}>
                   {`${contact.title} `}
-                  {contact?.email && (
+                  {contact.email && (
                     <Link href={`mailto:${contact.email}`}>(Send e-post)</Link>
                   )}
                 </dd>
