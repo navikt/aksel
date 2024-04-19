@@ -3,7 +3,10 @@ import { Slot } from "../../util/Slot";
 import { useCollapsibleContext } from "../Collapsible.context";
 
 export interface CollapsibleContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "hidden" | "aria-controls" | "id"
+  > {
   /**
    * When true, will render element as its child. This merges classes, styles and event handlers.
    * @default false
@@ -22,11 +25,11 @@ export const CollapsibleContent = forwardRef<
   return (
     <Comp
       ref={ref}
+      {...rest}
       data-state={ctx.state}
       hidden={!ctx.open}
       aria-controls={ctx.open ? ctx.triggerId : undefined}
       id={ctx.contentId}
-      {...rest}
     >
       {ctx.lazy || ctx.open ? children : null}
     </Comp>
