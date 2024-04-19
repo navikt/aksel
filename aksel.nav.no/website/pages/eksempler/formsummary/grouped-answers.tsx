@@ -5,7 +5,7 @@ const Example = () => {
   return (
     <FormSummary>
       <FormSummary.Header>
-        <FormSummary.Heading>Personalia</FormSummary.Heading>
+        <FormSummary.Heading level="2">Personalia</FormSummary.Heading>
         <FormSummary.EditLink href="#" />
       </FormSummary.Header>
 
@@ -63,6 +63,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 1,
   desc: "Man kan gruppere svar ved å neste FormSummary.Answers innenfor FormSummary.Answer.",
 };

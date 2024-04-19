@@ -41,3 +41,24 @@ export const Multiple = {
     );
   },
 };
+
+export const Compact = {
+  render: () => {
+    return (
+      <HStack gap="4">
+        <GpHeroCard href="test" compact>
+          Brukerinnsikt
+        </GpHeroCard>
+        <GpHeroCard href="test" compact>
+          Universell Utforming
+        </GpHeroCard>
+        <GpHeroCard href="test" compact>
+          Innsiktsarbeid
+        </GpHeroCard>
+        <GpHeroCard href="test" compact>
+          nav.no
+        </GpHeroCard>
+      </HStack>
+    );
+  },
+};

@@ -20,7 +20,7 @@ async function createIndex() {
       )}]]| order(publishedAt desc){
     heading,
     "slug": slug.current,
-    "tema": tema[]->title,
+    "tema": undertema[]->tema->title,
     ingress,
     status,
     _type,

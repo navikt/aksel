@@ -52,7 +52,7 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * @example
    * <FormSummary>
    *   <FormSummary.Header>
-   *     <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+   *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
    *     <FormSummary.EditLink href="#" />
    *   </FormSummary.Header>
    *   <FormSummary.Answers>
@@ -69,10 +69,12 @@ export interface FormSummaryProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * A summary of a previously answered form.
  *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formsummary)
+ *
  * @example
  * <FormSummary>
  *   <FormSummary.Header>
- *     <FormSummary.Heading>HeadingTekst</FormSummary.Heading>
+ *     <FormSummary.Heading level="2">HeadingTekst</FormSummary.Heading>
  *     <FormSummary.EditLink href="#" />
  *   </FormSummary.Header>
  *   <FormSummary.Answers>

@@ -18,19 +18,24 @@ const config: StorybookConfig = {
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
-    const exampleIndexer = async (fileName: string, opts) => {
+    const customIndexer = async (fileName: string, opts) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      code = code.replace(
-        /^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm,
-        "",
-      );
+      const isTemplate = fileName.toLowerCase().includes("templates");
+      const templatesOrExamples = isTemplate ? "Templates" : "Eksempler";
 
-      code = code.replace("export const args =", "const args =");
+      code = code.split(
+        /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
+      )[0];
 
-      code += `\nexport default { title: "Eksempler/${fileName
-        .split("pages/eksempler/")[1]
+      code += `\nexport default { title: "${templatesOrExamples}/${fileName
+        .split(`pages/${templatesOrExamples.toLowerCase()}/`)[1]
         .replace(".tsx", "")}"  };\n`;
+
+      code += `\nexport const Demo = {\n
+        render: Example,\n
+      };
+      `;
 
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
@@ -42,8 +47,12 @@ const config: StorybookConfig = {
         createIndex: csfIndexer,
       },
       {
-        test: /pages\/eksempler\/|(".+")|(.+.tsx)$/,
-        createIndex: exampleIndexer,
+        test: /pages\/eksempler\/.+?.tsx$/,
+        createIndex: customIndexer,
+      },
+      {
+        test: /pages\/templates\/.+?.tsx$/,
+        createIndex: customIndexer,
       },
     ];
   },
@@ -52,6 +61,7 @@ const config: StorybookConfig = {
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
+    "../pages/templates/**/*.tsx",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-essentials"),
