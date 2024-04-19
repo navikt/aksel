@@ -125,17 +125,14 @@ async function sendSlackbotFeedback(
    * We want to make sure we avoid sending the message to the same user multiple times
    */
   const uniqueRecievers = new Map<Member["id"], Member>();
-  for (const member of slackProfileForEditors) {
-    uniqueRecievers.set(member.id, member);
-  }
 
-  for (const member of slackProfileForTemaContacts) {
-    uniqueRecievers.set(member.id, member);
-  }
-
-  let postMessageError = false;
+  [...slackProfileForEditors, ...slackProfileForTemaContacts].forEach(
+    (member) => uniqueRecievers.set(member.id, member),
+  );
 
   const uniqueIds = [...uniqueRecievers.keys()];
+
+  let postMessageError = false;
 
   await client.chat
     .postMessage({
