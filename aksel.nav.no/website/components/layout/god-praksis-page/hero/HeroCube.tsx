@@ -22,8 +22,9 @@ function Cube({ variant = "light" }: CubeProps) {
         viewBox="0 0 390 560"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
       >
-        <g clipPath="url(#clip0_4792_2769)">
+        <g>
           <path
             d="M414.265 -22.7451L296.355 95.1649L414.089 95.1649L531.999 -22.7451L414.265 -22.7451Z"
             stroke="#5EEAD4"
@@ -49,11 +50,6 @@ function Cube({ variant = "light" }: CubeProps) {
             strokeLinejoin="round"
           />
         </g>
-        <defs>
-          <clipPath id="clip0_4792_2769">
-            <rect width="390" height="580" fill="white" />
-          </clipPath>
-        </defs>
       </svg>
     </div>
   );

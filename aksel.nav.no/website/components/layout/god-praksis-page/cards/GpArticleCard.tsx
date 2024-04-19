@@ -2,6 +2,7 @@ import cl from "clsx";
 import Link from "next/link";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "@navikt/ds-react";
+import ErrorBoundary from "@/error-boundary";
 import { AnimatedChevron } from "@/web/AnimatedChevron";
 
 type GpArticleCardProps = {
@@ -45,11 +46,14 @@ function GpArticleCard({
         <BodyLong className="mt-1 line-clamp-2">{description}</BodyLong>
       )}
       <div
-        className={cl("mt-auto flex h-fit justify-between text-deepblue-700", {
-          "pt-5": description,
-        })}
+        className={cl(
+          "mt-auto flex h-fit items-end justify-between gap-2 text-deepblue-700",
+          {
+            "pt-5": description,
+          },
+        )}
       >
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-x-3">
           {undertema && (
             <div className="flex items-center gap-05 text-teal-700">
               <TagFillIcon aria-hidden fontSize="1rem" />
@@ -74,4 +78,10 @@ function GpArticleCard({
   );
 }
 
-export default GpArticleCard;
+export default function Component(props: GpArticleCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GpArticleCard">
+      <GpArticleCard {...props} />
+    </ErrorBoundary>
+  );
+}
