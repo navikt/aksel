@@ -112,7 +112,7 @@ async function sendSlackbotFeedback(
     .filter((x) => !!x.id) as Member[];
 
   /**
-   * We use contributors found on article and find their matching slack profiles
+   * We use Tema contacts found on tema connected to article and find their matching slack profiles
    */
   const slackProfileForTemaContacts =
     (document.contacts
