@@ -38,7 +38,6 @@ export const Tema = defineType({
       name: "contacts",
       type: "array",
       of: [{ type: "reference", to: [{ type: "editor" }] }],
-      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "alias",
