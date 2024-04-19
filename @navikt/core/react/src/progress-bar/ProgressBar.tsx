@@ -79,19 +79,15 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     ref,
   ) => {
     const [isIndeterminate, setIsIndeterminate] = useState(false);
-
     const translate = 100 - (Math.round(value) / valueMax) * 100;
 
+    // Sets progress bar to indeterminate after the specified duration
     useEffect(() => {
       let timer: NodeJS.Timeout;
-      if (duration)
-        timer = setTimeout(() => {
-          setIsIndeterminate(true);
-        }, duration * 1000);
-
-      return () => {
-        if (timer) clearTimeout(timer);
-      };
+      if (duration != null)
+        timer = setTimeout(() => setIsIndeterminate(true), duration * 1000);
+      else setIsIndeterminate(false);
+      return () => clearTimeout(timer);
     }, [duration]);
 
     return (
