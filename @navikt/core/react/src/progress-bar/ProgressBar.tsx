@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useEffect, useState } from "react";
 
-interface ProgressBarPropsBase extends HTMLAttributes<HTMLDivElement> {
+interface ProgressBarPropsBase
+  extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
   /**
    * Changes height of progressbar.
    * @default "medium"
