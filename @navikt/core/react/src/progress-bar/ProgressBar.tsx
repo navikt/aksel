@@ -101,12 +101,12 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           `navds-progress-bar--${size}`,
           className,
         )}
-        aria-valuemin={valueMin}
-        aria-valuemax={valueMax}
-        aria-valuenow={isIndeterminate ? undefined : Math.round(value)}
+        aria-valuemin={isIndeterminate ? 0 : valueMin}
+        aria-valuemax={isIndeterminate ? 0 : valueMax}
+        aria-valuenow={isIndeterminate ? 0 : Math.round(value)}
         aria-valuetext={
           isIndeterminate
-            ? "Ubestemt fremdrift"
+            ? "Fremdrift kan ikke beregnes"
             : `${Math.round(value)} av ${valueMax}`
         }
         role="progressbar"
@@ -114,9 +114,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-label={ariaLabel}
         {...rest}
       >
-        {/* <div className="navds-sr-only">
-          {isIndeterminate ? "Ubestemt fremdrift" : `${Math.round(value)} av ${valueMax}`}
-        </div> */}
         <div
           className={cl("navds-progress-bar__foreground", {
             "navds-progress-bar__foreground--indeterminate": isIndeterminate,
