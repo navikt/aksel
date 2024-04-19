@@ -130,7 +130,7 @@ async function sendSlackbotFeedback(
     (member) => uniqueRecievers.set(member.id, member),
   );
 
-  const uniqueIds = [...uniqueRecievers.keys()];
+  const recieverSlackIdList = [...uniqueRecievers.keys()];
 
   let postMessageError = false;
 
@@ -147,13 +147,13 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: uniqueIds,
+          recievers: recieverSlackIdList,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
           },
         }),
-        ...(uniqueIds.length === 0
+        ...(recieverSlackIdList.length === 0
           ? [
               {
                 type: "section",
@@ -173,13 +173,10 @@ async function sendSlackbotFeedback(
       );
     });
 
-  for (const editor of uniqueIds) {
-    if (!editor) {
-      continue;
-    }
+  for (const slackId of recieverSlackIdList) {
     await client.chat
       .postMessage({
-        channel: editor,
+        channel: slackId,
         text: `Tilbakemelding: ${validation.data.body.feedback}`,
         blocks: slackBlock({
           article: {
@@ -188,7 +185,7 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: uniqueIds,
+          recievers: recieverSlackIdList,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
