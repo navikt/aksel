@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Menu, MenuHeading, MenuList, MenuListItem } from "./Menu";
+import { Menu, MenuHeading, MenuLi, MenuLink, MenuUl } from "./Menu";
 
 const meta = {
   title: "Website-modules/Menu",
@@ -23,17 +23,31 @@ export const MenuDemo: Story = {
         <>
           <MenuHeading as="div">Primitives</MenuHeading>
           <ul onClick={() => setSelected((x) => (x === 0 ? 1 : 0))}>
-            <MenuListItem href="#">Bleed</MenuListItem>
-            <MenuListItem href="#">Box</MenuListItem>
-            <MenuListItem href="#" selected={selected === 1}>
-              HGrid
-            </MenuListItem>
-            <MenuListItem href="#">Hide</MenuListItem>
-            <MenuListItem href="#" selected={selected === 0}>
-              HStack
-            </MenuListItem>
-            <MenuListItem href="#">Show</MenuListItem>
-            <MenuListItem href="#">VStack</MenuListItem>
+            <MenuLi>
+              <MenuLink href="#">Bleed</MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#">Box</MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#" selected={selected === 1}>
+                HGrid
+              </MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#">Hide</MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#" selected={selected === 0}>
+                HStack
+              </MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#">Show</MenuLink>
+            </MenuLi>
+            <MenuLi>
+              <MenuLink href="#">VStack</MenuLink>
+            </MenuLi>
           </ul>
         </>
       </Menu>
@@ -51,23 +65,38 @@ export const NestedMenuDemo: Story = {
     return (
       <Menu loggingContext="toc" variant="toc">
         <MenuHeading as="h2">Innhold på siden</MenuHeading>
-        <MenuList>
-          <MenuListItem href="#" selected>
-            Så, hvordan går vi frem for å få det til?
-          </MenuListItem>
-          <MenuListItem href="#">Bærekraftige team</MenuListItem>
-          <MenuList>
-            <MenuListItem href="#">Teamstørrelse</MenuListItem>
-            <MenuListItem href="#">Stabilitet Vs. fleksibilitet</MenuListItem>
-            <MenuListItem href="#" selected>
-              Myndighet og hensikt
-            </MenuListItem>
-            <MenuListItem href="#">
-              Ansvar tilpasset kognitiv kapasitet
-            </MenuListItem>
-          </MenuList>
-          <MenuListItem href="#">Teamtyper</MenuListItem>
-        </MenuList>
+        <MenuUl>
+          <MenuLi>
+            <MenuLink href="#" selected>
+              Så, hvordan går vi frem for å få det til?
+            </MenuLink>
+          </MenuLi>
+          <MenuLi>
+            <MenuLink href="#">Bærekraftige team</MenuLink>
+          </MenuLi>
+
+          <MenuLi>
+            <MenuUl>
+              <MenuLi>
+                <MenuLink href="#">Teamstørrelse</MenuLink>
+              </MenuLi>
+              <MenuLi>
+                <MenuLink href="#">Stabilitet Vs. fleksibilitet</MenuLink>
+              </MenuLi>
+              <MenuLi>
+                <MenuLink href="#" selected>
+                  Myndighet og hensikt
+                </MenuLink>
+              </MenuLi>
+              <MenuLi>
+                <MenuLink href="#">
+                  Ansvar tilpasset kognitiv kapasitet
+                </MenuLink>
+              </MenuLi>
+            </MenuUl>
+          </MenuLi>
+          <MenuLink href="#">Teamtyper</MenuLink>
+        </MenuUl>
       </Menu>
     );
   },
