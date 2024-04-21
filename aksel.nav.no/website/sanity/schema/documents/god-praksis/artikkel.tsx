@@ -1,8 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { SANITY_API_VERSION } from "@/sanity/config";
-
-/* import { gpTaxonomyObject } from "../../../plugins/god-praksis-taxonomy/taxonomy-object"; */
-import { WorkspaceT } from "../../util";
+import { InnholdstypeHighlight } from "../../custom-components/gp/InnholdstypeHighlight";
+import { UndertemaHighlight } from "../../custom-components/gp/UndertemaHighlight";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
@@ -17,53 +16,39 @@ import { titleField } from "../presets/title-field";
 
 const prefix = "god-praksis/artikler/";
 
-export const godPraksisArtikkel = (workspace: WorkspaceT) =>
+export const godPraksisArtikkel = () =>
   defineType({
     title: "God praksis artikkel",
     name: "aksel_artikkel",
     type: "document",
-    groups:
-      workspace !== "staging"
-        ? [
-            ...SanityTabGroups,
-            { name: "staging", title: "God-praksis staging" },
-          ]
-        : [
-            ...SanityTabGroups.map((x) => ({ ...x, default: false })),
-            {
-              name: "staging",
-              title: "God-praksis staging",
-              default: true,
-            },
-          ],
+    groups: SanityTabGroups,
     ...artikkelPreview("God praksis"),
     fields: [
-      // TODO: This will be the new data for "widget"-input when picking taxonomy
-      /* gpTaxonomyObject, */
       oppdateringsvarsel,
       ...hiddenFields,
       defineField({
-        hidden: () => workspace !== "staging",
         name: "innholdstype",
         title: "Innholdstype",
         type: "reference",
         to: [{ type: "gp.innholdstype" }],
+        components: {
+          field: InnholdstypeHighlight,
+        },
         options: {
           disableNew: true,
         },
-        group: "staging",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
+        group: "innhold",
+        validation: (Rule) => Rule.required(),
       }),
       defineField({
-        hidden: () => workspace !== "staging",
         name: "undertema",
         title: "Undertema",
         type: "array",
-        group: "staging",
-        /* Add required after update */
-        /* validation: (Rule) => Rule.required(), */
-        /*  */
+        group: "innhold",
+        validation: (Rule) => Rule.required(),
+        components: {
+          field: UndertemaHighlight,
+        },
         of: [
           defineArrayMember({
             title: "Undertema",
@@ -100,12 +85,13 @@ export const godPraksisArtikkel = (workspace: WorkspaceT) =>
       sanitySlug(prefix, 3),
       defineField({
         title: "Kobling til tema",
-        description:
-          "Lenker artikkel til Tema og tilgjengeliggjør den for tema-redaktører.",
         name: "tema",
         type: "array",
         of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
         group: "innhold",
+        deprecated: {
+          reason: 'Erstattet av "undertema" og "innholdstype" felter.',
+        },
       }),
       ingressField,
       defineField({

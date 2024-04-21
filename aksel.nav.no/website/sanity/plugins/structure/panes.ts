@@ -19,6 +19,7 @@ export const Panes = (
             .apiVersion(SANITY_API_VERSION),
         ),
     ),
+    S.divider(),
     S.listItem()
       .title(`Uten kategori`)
       .icon(FileXMarkIcon)

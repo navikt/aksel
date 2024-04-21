@@ -7,7 +7,7 @@
 .navds-tabs__tablist {
   display: flex;
   max-width: 100%;
-  width: auto;
+  width: 100%;
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -83,6 +83,10 @@
   gap: var(--a-spacing-1);
 }
 
+.navds-tabs__tab-inner > * {
+  display: inline-flex;
+}
+
 .navds-tabs__tab-inner svg {
   flex-shrink: 0;
 }
@@ -115,6 +119,10 @@
 .navds-tabs__tab--icon-only svg,
 .navds-tabs__tab-icon--top svg {
   font-size: 1.5rem;
+}
+
+.navds-tabs__tab--fill {
+  flex: 1 1 100%;
 }
 
 .navds-tabs__tabpanel:focus-visible {

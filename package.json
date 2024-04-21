@@ -160,7 +160,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@whitespace/storybook-addon-html": "^6.0.4",
-    "chromatic": "9.1.0",
+    "chromatic": "11.3.0",
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
@@ -190,7 +190,7 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
     "typescript": "^5.1.6",
-    "vite": "^5.0.12",
+    "vite": "^5.1.7",
     "vite-plugin-turbosnap": "^1.0.3",
     "yarn": "^1.22.10"
   },

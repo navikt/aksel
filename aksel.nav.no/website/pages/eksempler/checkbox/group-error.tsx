@@ -2,17 +2,17 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any[]) => console.log(val);
+  const handleChange = (val: string[]) => console.log(val);
 
   return (
     <CheckboxGroup
-      legend="Hvor vil du sitte?"
-      onChange={(val: any[]) => handleChange(val)}
-      error="Feilmelding"
+      legend="Transportmiddel"
+      onChange={handleChange}
+      error="Du må velge minst ett transportmiddel."
     >
-      <Checkbox value="Bakerst">Bakerst</Checkbox>
-      <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst">Fremst</Checkbox>
+      <Checkbox value="car">Bil</Checkbox>
+      <Checkbox value="taxi">Drosje</Checkbox>
+      <Checkbox value="public">Kollektivt</Checkbox>
     </CheckboxGroup>
   );
 };

@@ -2,12 +2,12 @@ import { Radio, RadioGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any) => console.log(val);
+  const handleChange = (val: string) => console.log(val);
 
   return (
     <RadioGroup
       legend="Velg din aldersgruppe."
-      onChange={(val: any) => handleChange(val)}
+      onChange={handleChange}
       hideLegend
     >
       <Radio value="10">10-20 år</Radio>
@@ -27,4 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
+  desc: "Legend må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };

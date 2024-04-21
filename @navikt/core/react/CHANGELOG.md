@@ -1,5 +1,63 @@
 # @navikt/ds-react
 
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
+### Patch Changes
+
+- Combobox: Prevents "Enter" while Combobox is focused from submitting form. ([#2861](https://github.com/navikt/aksel/pull/2861))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.6.0
+  - @navikt/aksel-icons@6.6.0
+
+## 6.5.0
+
+### Minor Changes
+
+- Tabs: Ny prop `lazy` som rendrer innhold i TabPanel selv når panel er skjult (har fortsatt display:none) ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+- ToggleGroup: Erstattet bruk av dependency `@radix-ui/react-toggle-group` med egen implementasjon. ([#2620](https://github.com/navikt/aksel/pull/2620))
+
+- Tabs: La til ny prop `fill` som lar Tabs.Tab-elementer strekke seg over tilgjengelig bredde. ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+- Tabs: Erstattet bruk av dependency `@radix-ui/react-tabs` med egen implementasjon. ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Valgte datoer får nå `aria-pressed` for å bedre indikere valg for skjermleser. ([#2838](https://github.com/navikt/aksel/pull/2838))
+
+- DatePicker/MonthPicker: `required`-prop stoppet ikke de-select av allerede valgt dato. ([#2838](https://github.com/navikt/aksel/pull/2838))
+
+- ToggleGroup: La til ny prop `fill` som strekker ToggleGroup til å ta opp all tilgjengelig bredde. ([#2620](https://github.com/navikt/aksel/pull/2620))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.5.0
+  - @navikt/aksel-icons@6.5.0
+
+## 6.4.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.4.1
+  - @navikt/aksel-icons@6.4.1
+
+## 6.4.0
+
+### Minor Changes
+
+- FileUpload.Item: :boom: Endret API og støtte for å sette ID på knappen ([#2824](https://github.com/navikt/aksel/pull/2824))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.4.0
+  - @navikt/aksel-icons@6.4.0
+
 ## 6.3.6
 
 ### Patch Changes

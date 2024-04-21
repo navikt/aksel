@@ -35,5 +35,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Full lar Bleed bryte ut av parent og dekke hele skjermbredden. Dette kan være nyttig for 'Heroes' eller lignende elementer som ønsker å bryte ut av parent-layout",
+  desc: "I noen tilfeller må du også sette 'overflow-x: hidden;' på body for å unngå horisontal scrollbar. Full lar Bleed bryte ut av parent og dekke hele skjermbredden. Dette kan være nyttig for 'Heroes' eller lignende elementer som ønsker å bryte ut av parent-layout",
 };

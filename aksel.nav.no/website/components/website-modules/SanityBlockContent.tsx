@@ -229,7 +229,7 @@ function SanitizedBlock({
           id={value?._key}
           level="2"
           size="large"
-          className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none"
+          className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none dark:text-text-on-inverted"
         >
           {children}
         </Heading>
@@ -237,7 +237,7 @@ function SanitizedBlock({
     case "h3":
       return (
         <Heading
-          className="mt-8 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none"
+          className="mt-8 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none dark:text-text-on-inverted"
           spacing
           level="3"
           size="medium"
@@ -250,7 +250,7 @@ function SanitizedBlock({
     case "h4":
       return (
         <Heading
-          className="mt-6 max-w-text text-deepblue-800"
+          className="mt-6 max-w-text text-deepblue-800 dark:text-text-on-inverted"
           spacing
           level="4"
           size="small"
@@ -264,7 +264,7 @@ function SanitizedBlock({
       return (
         <BodyLong
           spacing
-          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl dark:text-text-on-inverted"
         >
           {children}
         </BodyLong>

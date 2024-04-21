@@ -5,8 +5,7 @@ import { FieldsetContext } from "./fieldset/context";
 
 export interface FormFieldProps {
   /**
-   * Adds a description to extend labeling of the field.
-   * Error message for element.
+   * Error message.
    */
   error?: React.ReactNode;
   /**
@@ -24,7 +23,7 @@ export interface FormFieldProps {
    */
   disabled?: boolean;
   /**
-   * Adds a description to extend labeling of a field.
+   * Adds a description to extend the labeling.
    */
   description?: React.ReactNode;
   /**
