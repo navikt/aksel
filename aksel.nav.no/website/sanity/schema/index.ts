@@ -1,24 +1,15 @@
 import { SchemaPluginOptions } from "sanity";
 import * as document from "./documents";
 import * as object from "./objects";
-import { WorkspaceT } from "./util";
 
-export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = () => ({
+export const schema: SchemaPluginOptions = {
   types: [
-    /**
-     * Ny struktur for god praksis
-     */
-    document.Tema,
-    document.Undertema,
-    document.Innholdstype,
-
     /* Documents */
     document.Editors,
     document.Forside,
     document.Redirect,
     document.Skrivehjelp,
     document.Publiseringsflyt,
-    document.Feedback,
     document.ArticleViews,
 
     /* Komponentsider */
@@ -37,9 +28,11 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = () => ({
     document.TemplatesArtikkel,
 
     /* God-praksis */
-    document.TemaOld,
-    document.godPraksisArtikkel(),
+    document.GodPraksisArtikkel,
     document.GodPraksisLandingSide,
+    document.Tema,
+    document.Undertema,
+    document.Innholdstype,
 
     /* Blogg */
     document.Blogg,
@@ -120,4 +113,4 @@ export const schema: (workspace: WorkspaceT) => SchemaPluginOptions = () => ({
       }),
     },
   ],
-});
+};
