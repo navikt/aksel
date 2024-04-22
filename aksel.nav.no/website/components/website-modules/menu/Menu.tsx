@@ -105,7 +105,7 @@ export function MenuLink({
       >
         <span
           className={cl(
-            "w-full rounded px-2 py-1 transition-colors duration-200 ease-linear",
+            "w-full rounded px-2 py-1 transition-colors duration-100 ease-out",
             {
               "bg-surface-selected": selected && ctx.variant === "sidebar",
               "bg-surface-neutral-subtle": selected && ctx.variant === "toc",
