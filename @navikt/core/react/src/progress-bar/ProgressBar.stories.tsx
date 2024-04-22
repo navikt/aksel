@@ -44,7 +44,6 @@ export const Default: StoryFn = (args) => {
           <p id="progress-bar-label">Laster</p>
           <ProgressBar
             valueMax={100}
-            valueMin={5}
             size={args.size}
             value={value}
             aria-labelledby="progress-bar-label"
@@ -79,7 +78,6 @@ export const Sizes: StoryFn = (args) => {
         size="small"
         value={0}
         valueMax={args.valueMax}
-        valueMin={args.valueMin}
         aria-labelledby="progress-bar-label-small"
       />
       <p id="progress-bar-label-medium">
@@ -88,7 +86,6 @@ export const Sizes: StoryFn = (args) => {
       <ProgressBar
         value={6}
         valueMax={args.valueMax}
-        valueMin={args.valueMin}
         aria-labelledby="progress-bar-label-medium"
       />
       <p id="progress-bar-label-large">Fremdrift i søknaden (stor versjon)</p>
@@ -96,7 +93,6 @@ export const Sizes: StoryFn = (args) => {
         size="large"
         value={12}
         valueMax={args.valueMax}
-        valueMin={args.valueMin}
         aria-labelledby="progress-bar-label-large"
       />
     </div>
@@ -104,7 +100,6 @@ export const Sizes: StoryFn = (args) => {
 };
 
 Sizes.args = {
-  valueMin: 1,
   valueMax: 12,
 };
 

@@ -13,11 +13,6 @@ interface ProgressBarPropsBase
    */
   value: number;
   /**
-   * Minimum progress.
-   * @default 0
-   */
-  valueMin?: number;
-  /**
    * Maximum progress.
    */
   valueMax: number;
@@ -61,18 +56,17 @@ export type ProgressBarProps = ProgressBarPropsBase &
  *
  * @example
  * // For loading content
- * <ProgressBar value={20} valueMin={0} valueMax={100} duration={12} />
+ * <ProgressBar value={20} valueMax={100} duration={12} />
  *
  * @example
  * // As a progress indicator for applications and similar
- * <ProgressBar value={2} valueMin={0} valueMax={7} />
+ * <ProgressBar value={2} valueMax={7} />
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   (
     {
       size = "medium",
       value,
-      valueMin = 0,
       valueMax,
       duration,
       "aria-labelledby": ariaLabelledBy,
@@ -102,7 +96,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           `navds-progress-bar--${size}`,
           className,
         )}
-        aria-valuemin={isIndeterminate ? 0 : Math.round(valueMin)}
         aria-valuemax={isIndeterminate ? 0 : Math.round(valueMax)}
         aria-valuenow={isIndeterminate ? 0 : Math.round(value)}
         aria-valuetext={
