@@ -110,12 +110,12 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate": isIndeterminate,
+            "navds-progress-bar__foreground--indeterminate":
+              Number.isInteger(duration),
           })}
           style={{
-            transform: !isIndeterminate
-              ? `translateX(-${translate}%)`
-              : `translateX(-100%)`,
+            "--__ac-progress-bar-duration": `${duration}s`,
+            "--__ac-progress-bar-translate": `-${translate}%`,
           }}
         />
       </div>

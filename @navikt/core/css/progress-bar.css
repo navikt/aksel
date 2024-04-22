@@ -24,6 +24,9 @@
 }
 
 .navds-progress-bar__foreground {
+  --__ac-progress-bar-translate: initial;
+
+  transform: translateX(var(--__ac-progress-bar-translate));
   background: var(--ac-progress-bar-fg, var(--a-surface-alt-3));
   transform-origin: left;
   position: absolute;
@@ -36,13 +39,14 @@
 }
 
 .navds-progress-bar__foreground--indeterminate {
-  transition: transform 1000ms ease;
-  animation-timing-function: ease-in-out;
-  animation-duration: 2500ms;
-  animation-name: navds-progress-bar-indeterminate;
-  animation-fill-mode: none;
-  animation-iteration-count: infinite;
-  animation-delay: 1s;
+  --__ac-progress-bar-duration: initial;
+
+  animation-name: navds-progress-bar-indeterminate-grow, navds-progress-bar-indeterminate;
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-duration: var(--__ac-progress-bar-duration), 2500ms;
+  animation-fill-mode: forwards, none;
+  animation-iteration-count: 1, infinite;
+  animation-delay: 0s, calc(var(--__ac-progress-bar-duration) + 4s);
 }
 
 /* navds-progress-bar-indeterminate wave animation */
@@ -64,5 +68,28 @@
     left: -50%;
     transform: translateX(0%);
     width: 50%;
+  }
+}
+
+@keyframes navds-progress-bar-indeterminate-grow {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  20% {
+    transform: translateX(-80%);
+  }
+
+  30% {
+    transform: translateX(-40%);
+  }
+
+  40%,
+  50% {
+    transform: translateX(-20%);
+  }
+
+  100% {
+    transform: translateX(-10%);
   }
 }
