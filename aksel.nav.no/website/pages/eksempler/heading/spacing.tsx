@@ -1,12 +1,13 @@
-import { Heading } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <div>
-      <Heading level="3" size="medium">
-        Dette er en &lt;h3&gt;
+      <Heading size="medium" spacing>
+        Minstebeløp for å søke
       </Heading>
+      <BodyLong>Utgiftene må være over 1 880 kroner for å kunne søke.</BodyLong>
     </div>
   );
 };
@@ -20,6 +21,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
-  desc: "Propen 'level' bestemmer hvilken h-tagg som brukes. Du kan sette 'size' uavhengig av dette, men størrelsen bør samsvare med nivået.",
+  index: 1,
+  desc: "Propen 'spacing' øker avstanden til neste element. Avstanden varierer avhengig av 'size'.",
 };
