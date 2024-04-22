@@ -4,12 +4,12 @@ import React, { HTMLAttributes, forwardRef, useEffect, useState } from "react";
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
   /**
-   * Changes height of progressbar.
+   * Changes height.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
   /**
-   * Value of progressbar.
+   * Current progress.
    */
   value: number;
   /**
@@ -22,17 +22,17 @@ interface ProgressBarPropsBase
    */
   valueMax: number;
   /**
-   * Used to approximate a task duration in seconds.
-   * ProgressBar shows an indeterminate animation after duration is done.
+   * Expected task duration in seconds.
+   * ProgressBar shows an indeterminate animation after duration has passed.
    */
   duration?: number;
   /**
-   * String ID of the element that labels the progress-bar.
+   * String ID of the element that labels the progress bar.
    * Not needed if `aria-label` is used.
    */
   "aria-labelledby"?: string;
   /**
-   * String value that labels the progress-bar.
+   * String value that labels the progress bar.
    * Not needed if `aria-labelledby` is used.
    */
   "aria-label"?: string;
@@ -52,6 +52,10 @@ export type ProgressBarProps = ProgressBarPropsBase &
 
 /**
  * ProgressBar
+ * - Shows the progress of a task or process.
+ * - Visualizes the progression of a task or process.
+ * - Visualizes how far along the user is in a process.
+ *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/progress-bar)
  * @see 🏷️ {@link ProgressBarProps}
  *
@@ -98,13 +102,13 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           `navds-progress-bar--${size}`,
           className,
         )}
-        aria-valuemin={isIndeterminate ? 0 : valueMin}
-        aria-valuemax={isIndeterminate ? 0 : valueMax}
+        aria-valuemin={isIndeterminate ? 0 : Math.round(valueMin)}
+        aria-valuemax={isIndeterminate ? 0 : Math.round(valueMax)}
         aria-valuenow={isIndeterminate ? 0 : Math.round(value)}
         aria-valuetext={
           isIndeterminate
             ? "Fremdrift kan ikke beregnes"
-            : `${Math.round(value)} av ${valueMax}`
+            : `${Math.round(value)} av ${Math.round(valueMax)}`
         }
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
