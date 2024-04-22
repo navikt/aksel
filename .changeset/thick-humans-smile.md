@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Spacer: Er nå default `span` (tidligere `div`).
+Spacer: Er nå `span` (tidligere `div`).
