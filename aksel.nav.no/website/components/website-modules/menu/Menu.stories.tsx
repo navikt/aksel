@@ -46,7 +46,9 @@ export const MenuDemo: Story = {
               <MenuLink href="#">Show</MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#">VStack</MenuLink>
+              <MenuLink href="#" selected>
+                VStack
+              </MenuLink>
             </MenuLi>
           </ul>
         </>
@@ -63,7 +65,7 @@ export const MenuDemo: Story = {
 export const NestedMenuDemo: Story = {
   render: () => {
     return (
-      <Menu loggingContext="toc" variant="action">
+      <Menu loggingContext="toc" variant="neutral">
         <MenuHeading as="h2">Innhold på siden</MenuHeading>
         <MenuUl>
           <MenuLi>
@@ -95,7 +97,11 @@ export const NestedMenuDemo: Story = {
               </MenuLi>
             </MenuUl>
           </MenuLi>
-          <MenuLink href="#">Teamtyper</MenuLink>
+          <MenuLi>
+            <MenuLink href="#" selected>
+              Teamtyper
+            </MenuLink>
+          </MenuLi>
         </MenuUl>
       </Menu>
     );
