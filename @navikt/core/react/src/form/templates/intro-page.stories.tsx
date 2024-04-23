@@ -16,8 +16,8 @@ import {
   Stack,
   VStack,
 } from "@navikt/ds-react";
-//import { ApplicationPictogram } from "@/assets/Icons";
 import { Env, Footer, Header, useDekorator } from "../../util/dekorator";
+import { ApplicationPictogram } from "./icons";
 
 const meta = {
   title: "templates/form",
@@ -46,7 +46,7 @@ export const IntroPage: Story = {
                 justify="start"
                 wrap={false}
               >
-                {/* <ApplicationPictogram title="Application" /> */}
+                <ApplicationPictogram title="Application" />
                 <VStack gap="1">
                   <BodyShort size="small">NAV 10-07.03</BodyShort>
                   <Heading level="1" size="large">
