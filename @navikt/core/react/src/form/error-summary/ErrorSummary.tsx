@@ -88,13 +88,14 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         tabIndex={-1}
         aria-live="polite"
         aria-relevant="all"
-        aria-labelledby={headingId}
+        aria-label="Du må fikse disse feilene før du kan gå videre."
       >
         <Heading
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
           id={headingId}
+          aria-hidden
         >
           {heading}
         </Heading>
