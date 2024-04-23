@@ -39,7 +39,7 @@ function defaultConfig() {
   return {
     projectId: SANITY_PROJECT_ID,
     apiVersion: SANITY_API_VERSION,
-    schema: schema("production"),
+    schema,
     form: {
       components: {
         field: (props) => {

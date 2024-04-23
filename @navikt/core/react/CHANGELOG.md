@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 6.6.1
+
+### Patch Changes
+
+- Spacer: Er nå `span` (tidligere `div`). ([#2874](https://github.com/navikt/aksel/pull/2874))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.6.1
+  - @navikt/aksel-icons@6.6.1
+
 ## 6.6.0
 
 ### Minor Changes
