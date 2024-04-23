@@ -9,6 +9,17 @@
   padding: var(--a-spacing-3);
 }
 
+.navds-error-summary:focus {
+  outline: none;
+}
+
+@media (forced-colors: active) {
+  .navds-error-summary:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
+
 .navds-error-summary__heading:focus {
   outline: none;
 }
