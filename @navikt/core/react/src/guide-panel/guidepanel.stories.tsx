@@ -1,7 +1,9 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
-import { BodyLong, GuidePanel, VStack } from "../index";
+import { VStack } from "../layout/stack";
+import { BodyLong } from "../typography";
+import GuidePanel from "./GuidePanel";
 
 export default {
   title: "ds-react/GuidePanel",
@@ -39,16 +41,14 @@ export const PosterVariants = {
   render: () => (
     <VStack gap="6" align="start">
       <GuidePanel>
-        If you exclude the <code>poster</code> prop, you will get the poster
-        variant on mobile (&lt;480px) and the non-poster variant otherwise.
+        If you exclude the `poster` prop, you will get the poster variant on
+        mobile (&lt;480px) and the non-poster variant otherwise.
       </GuidePanel>
       <GuidePanel poster>
-        Use the <code>poster</code> prop to get the poster variant on all
-        viewports.
+        Use the `poster` prop to get the poster variant on all viewports.
       </GuidePanel>
       <GuidePanel poster={false}>
-        Set <code>poster=false</code> to get the non-poster variant on all
-        viewports.
+        Set `poster=false` to get the non-poster variant on all viewports.
       </GuidePanel>
     </VStack>
   ),

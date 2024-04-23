@@ -31,3 +31,5 @@ export const ExpansionCardDescription = forwardRef<
     />
   );
 });
+
+export default ExpansionCardDescription;

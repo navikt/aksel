@@ -20,4 +20,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Bruk av children vil gi en grå blokk som ofte ikke ligner på det faktiske elementet. Derfor anbefaler vi å manuelt bygge elementet ved hjelp av flere skeletons og 'height' + 'width'.",
 };

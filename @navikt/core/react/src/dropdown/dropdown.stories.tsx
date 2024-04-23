@@ -1,15 +1,20 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Dropdown } from "..";
 import { Button } from "../button";
+import Dropdown from "./Dropdown";
 
 export default {
   title: "ds-react/Dropdown",
   component: Dropdown,
-} as Meta;
+  parameters: {
+    chromatic: { disable: true },
+  },
+} satisfies Meta<typeof Dropdown>;
 
-export const Default = () => {
-  return (
+type Story = StoryObj<typeof Dropdown>;
+
+export const Default: Story = {
+  render: () => (
     <Dropdown onSelect={(event) => console.log(event)}>
       <Dropdown.Toggle>Toggle</Dropdown.Toggle>
       <Dropdown.Menu strategy="fixed">
@@ -33,10 +38,10 @@ export const Default = () => {
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
-  );
+  ),
 };
 
-export const DefaultOpen = {
+export const DefaultOpen: Story = {
   render: () => (
     <Dropdown onSelect={(event) => console.log(event)} defaultOpen>
       <Button as={Dropdown.Toggle}>Toggle</Button>
@@ -57,20 +62,41 @@ export const DefaultOpen = {
       </Dropdown.Menu>
     </Dropdown>
   ),
-  args: { chromatic: { delay: 300 } },
 };
 
-export const ControlledOpen = () => {
-  const [openState, setOpenState] = useState(true);
-  return (
-    <Dropdown onSelect={(event) => console.log(event)} open={openState}>
-      <Button as={Dropdown.Toggle} onClick={() => setOpenState(!openState)}>
-        Toggle
-      </Button>
-      <Dropdown.Menu
-        strategy="fixed"
-        onClose={() => console.log("ONCLOSE CONTROLLED")}
-      >
+export const ControlledOpen: Story = {
+  render: () => {
+    const [openState, setOpenState] = useState(true);
+    return (
+      <Dropdown onSelect={(event) => console.log(event)} open={openState}>
+        <Button as={Dropdown.Toggle} onClick={() => setOpenState(!openState)}>
+          Toggle
+        </Button>
+        <Dropdown.Menu
+          strategy="fixed"
+          onClose={() => console.log("ONCLOSE CONTROLLED")}
+        >
+          <Dropdown.Menu.GroupedList>
+            <Dropdown.Menu.GroupedList.Heading>
+              Systemer og oppslagsverk
+            </Dropdown.Menu.GroupedList.Heading>
+            <Dropdown.Menu.GroupedList.Item
+              onClick={() => console.log("GroupedList.Item-click")}
+            >
+              Gosys
+            </Dropdown.Menu.GroupedList.Item>
+          </Dropdown.Menu.GroupedList>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  },
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <Dropdown onSelect={(event) => console.log(event)} open>
+      <Dropdown.Toggle>Toggle</Dropdown.Toggle>
+      <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.GroupedList>
           <Dropdown.Menu.GroupedList.Heading>
             Systemer og oppslagsverk
@@ -81,8 +107,18 @@ export const ControlledOpen = () => {
             Gosys
           </Dropdown.Menu.GroupedList.Item>
         </Dropdown.Menu.GroupedList>
+        <Dropdown.Menu.Divider />
+        <Dropdown.Menu.List>
+          <Dropdown.Menu.List.Item onClick={() => console.log("Item-click")}>
+            Gosys
+          </Dropdown.Menu.List.Item>
+          <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
+          <Dropdown.Menu.List.Item disabled>Infotrygd</Dropdown.Menu.List.Item>
+        </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
-  );
+  ),
+  parameters: {
+    chromatic: { disable: false, delay: 300 },
+  },
 };
-ControlledOpen.args = { chromatic: { delay: 300 } };

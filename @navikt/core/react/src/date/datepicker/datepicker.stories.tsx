@@ -1,9 +1,14 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from "@storybook/react";
-import isSameDay from "date-fns/isSameDay";
+import { expect, userEvent, within } from "@storybook/test";
+import { isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
-import { useDatepicker, useRangeDatepicker } from "..";
-import { BodyLong, Button, HGrid, Modal, VStack } from "../..";
+import { act } from "react-dom/test-utils";
+import { Button } from "../../button";
+import { HGrid } from "../../layout/grid";
+import { VStack } from "../../layout/stack";
+import Modal from "../../modal/Modal";
+import { BodyLong } from "../../typography";
+import { useDatepicker, useRangeDatepicker } from "../hooks";
 import DatePicker, { DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
@@ -14,7 +19,12 @@ const disabledDays = [
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof DatePicker>;
+
+type Story = StoryObj<typeof DatePicker>;
 
 type DefaultStoryProps = DatePickerProps & {
   size: "medium" | "small";
@@ -152,6 +162,7 @@ export const UseDatepicker = () => {
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Feb 23 2024"),
     onDateChange: console.log,
+    onValidate: console.log,
   });
 
   return (
@@ -431,6 +442,43 @@ export const WeekDayClick = () => {
   );
 };
 
+export const Required = {
+  render: () => {
+    const { datepickerProps } = useDatepicker({
+      defaultSelected: new Date("Apr 10 2024"),
+      required: true,
+    });
+
+    return (
+      <div style={{ height: "20rem" }}>
+        <DatePicker.Standalone {...datepickerProps} />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button10 = canvas.getByRole("button", { pressed: true });
+
+    await act(async () => {
+      await userEvent.click(button10);
+    });
+
+    expect(button10.ariaPressed).toBe("true");
+
+    const button17 = canvas.getByText("17").closest("button");
+
+    expect(button17?.ariaPressed).toBe("false");
+
+    await act(async () => {
+      button17 && (await userEvent.click(button17));
+    });
+
+    expect(button17?.ariaPressed).toBe("true");
+    expect(button10.ariaPressed).toBe("false");
+  },
+};
+
 export const ModalDemo = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
@@ -470,3 +518,97 @@ export const ModalDemo = () => {
   );
 };
 ModalDemo.parameters = { chromatic: { pauseAnimationAtEnd: true } };
+
+export const Chromatic: Story = {
+  render: () => (
+    <div>
+      <div>
+        <h2>DropdownCaption</h2>
+        <DropdownCaption />
+      </div>
+      <div>
+        <h2>DisabledDays</h2>
+        <DisabledDays />
+      </div>
+      <div>
+        <h2>ShowWeekNumber</h2>
+        <ShowWeekNumber />
+      </div>
+      <div>
+        <h2>UseDatepicker</h2>
+        <UseDatepicker />
+      </div>
+      <div>
+        <h2>UseRangedDatepicker</h2>
+        <UseRangedDatepicker />
+      </div>
+      <div>
+        <h2>NB</h2>
+        <NB />
+      </div>
+      <div>
+        <h2>NN</h2>
+        <NN />
+      </div>
+      <div>
+        <h2>EN</h2>
+        <EN />
+      </div>
+      <div>
+        <h2>Standalone</h2>
+        <Standalone />
+      </div>
+      <div>
+        <h2>StandaloneRange</h2>
+        <StandaloneRange />
+      </div>
+      <div>
+        <h2>StandaloneMultiple</h2>
+        <StandaloneMultiple />
+      </div>
+      <div>
+        <h2>UserControlled</h2>
+        <UserControlled />
+      </div>
+      <div>
+        <h2>Validering</h2>
+        <Validering />
+      </div>
+      <div>
+        <h2>DisabledInput</h2>
+        <DisabledInput />
+      </div>
+      <div>
+        <h2>ErrorInput</h2>
+        <ErrorInput />
+      </div>
+      <div>
+        <h2>UseRangedDatepickerValidation</h2>
+        <UseRangedDatepickerValidation />
+      </div>
+      <div>
+        <h2>DefaultShownMonth</h2>
+        <DefaultShownMonth />
+      </div>
+      <div>
+        <h2>Size</h2>
+        <Size />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        <Readonly />
+      </div>
+      <div>
+        <h2>StandaloneOptions</h2>
+        <StandaloneOptions />
+      </div>
+      <div>
+        <h2>WeekDayClick</h2>
+        <WeekDayClick />
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

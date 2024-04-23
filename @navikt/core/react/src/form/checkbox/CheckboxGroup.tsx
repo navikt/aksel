@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { createContext, forwardRef, useContext, useState } from "react";
-import { Fieldset, FieldsetContext, FieldsetProps } from "../Fieldset";
+import { Fieldset, FieldsetProps } from "../fieldset";
+import { FieldsetContext } from "../fieldset/context";
 
 export interface CheckboxGroupState {
   readonly defaultValue?: readonly any[];
@@ -15,10 +16,10 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
 export interface CheckboxGroupProps
   extends Omit<
     FieldsetProps,
-    "onChange" | "errorPropagation" | "defaultValue"
+    "onChange" | "errorPropagation" | "defaultValue" | "nativeReadOnly"
   > {
   /**
-   * Collection of <Checkbox/>
+   * Collection of `<Checkbox/>`.
    */
   children: React.ReactNode;
   /**
@@ -26,11 +27,11 @@ export interface CheckboxGroupProps
    */
   value?: any[];
   /**
-   * Default checked checkboxes on render
+   * Default checked checkboxes.
    */
   defaultValue?: any[];
   /**
-   * Returns current checked checkboxes in group
+   * Returns current checked checkboxes in group.
    */
   onChange?: (value: any[]) => void;
 }
@@ -43,10 +44,10 @@ export interface CheckboxGroupProps
  *
  * @example
  * ```jsx
- * <CheckboxGroup legend="Hvor vil du sitte?">
- *   <Checkbox value="Bakerst">Bakerst</Checkbox>
- *   <Checkbox value="Midterst">Midterst</Checkbox>
- *   <Checkbox value="Fremst">Fremst</Checkbox>
+ * <CheckboxGroup legend="Transportmiddel">
+ *   <Checkbox value="car">Bil</Checkbox>
+ *   <Checkbox value="taxi">Drosje</Checkbox>
+ *   <Checkbox value="public">Kollektivt</Checkbox>
  * </CheckboxGroup>
  * ```
  */

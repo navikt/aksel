@@ -16,7 +16,6 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../404";
@@ -46,15 +45,18 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const slugs = context.params?.prinsipp as string[];
+  const slugString = slugs.join("/");
+
   const { prinsipp } = await getClient().fetch(query, {
-    slug: `prinsipper/${(context.params?.prinsipp as string[]).join("/")}`,
+    slug: `prinsipper/${slugString}`,
     valid: "true",
   });
 
   return {
     props: {
       prinsipp,
-      slug: (context.params?.prinsipp as string[]).join("/"),
+      slug: slugString,
       preview: context.preview ?? false,
       id: prinsipp?._id,
       title: prinsipp?.heading ?? "",
@@ -64,8 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (
         type: "aksel_prinsipp",
       }),
     },
-    notFound:
-      (!prinsipp && !context.preview) || context.params.prinsipp.length > 2,
+    notFound: (!prinsipp && !context.preview) || slugs.length > 2,
   };
 };
 
@@ -111,12 +112,6 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
           >
             <div className="pt-12">
               <div className="mx-auto mb-16 max-w-prose lg:ml-0 ">
-                {!mainPage && (
-                  <BreadCrumbs
-                    text={`Prinsipper for ${data?.prinsipp?.prinsippvalg}`}
-                    href={`/prinsipper/${data?.prinsipp?.prinsippvalg}`}
-                  />
-                )}
                 <Heading
                   level="1"
                   size="large"

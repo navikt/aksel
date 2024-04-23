@@ -7,7 +7,7 @@ import { SearchResultsT } from "@/types";
 import { createSearchResult, formatResults, fuseSearch } from "../utils";
 
 export const useSearch = () => {
-  const [fuseResults, setFuseResults] = useState<SearchResultsT>(null);
+  const [fuseResults, setFuseResults] = useState<SearchResultsT | null>(null);
 
   const { data, error, isValidating } = useSWRImmutable(
     `/searchindex.json`,

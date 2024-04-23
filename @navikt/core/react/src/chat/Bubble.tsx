@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Detail } from "../typography";
 
-export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Bubble text
    */
@@ -16,36 +16,15 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   timestamp?: string;
   /**
-   * Background color on bubble
-   * @deprecated Use `variant` on Chat instead
-   */
-  backgroundColor?: string;
-  /**
    * Overrides hoizontal position of toptext
    */
   toptextPosition?: "left" | "right";
 }
 
-const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
-  (
-    {
-      children,
-      className,
-      name,
-      timestamp,
-      backgroundColor,
-      toptextPosition,
-      ...rest
-    },
-    ref,
-  ) => {
+const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
+  ({ children, className, name, timestamp, toptextPosition, ...rest }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cl("navds-chat__bubble", className)}
-        style={{ backgroundColor }}
-        {...rest}
-      >
+      <div ref={ref} className={cl("navds-chat__bubble", className)} {...rest}>
         {(timestamp || name) && (
           <h3
             className={cl(

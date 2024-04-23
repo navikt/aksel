@@ -2,17 +2,18 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: any[]) => console.log(val);
+  const handleChange = (val: string[]) => console.log(val);
 
   return (
     <CheckboxGroup
-      legend="Hvor vil du sitte?"
-      onChange={(val: any[]) => handleChange(val)}
+      legend="Transportmiddel"
+      onChange={handleChange}
+      value={["taxi"]}
       disabled
     >
-      <Checkbox value="Bakerst">Bakerst</Checkbox>
-      <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst">Fremst</Checkbox>
+      <Checkbox value="car">Bil</Checkbox>
+      <Checkbox value="taxi">Drosje</Checkbox>
+      <Checkbox value="public">Kollektivt</Checkbox>
     </CheckboxGroup>
   );
 };
@@ -27,4 +28,5 @@ export const Demo = {
 
 export const args = {
   index: 99,
+  desc: "Vi fraråder bruk av disabled state. Vurder om du trenger å vise feltet i det hele tatt, om du heller kan bruke 'readOnly', eller bare kan skrive det ut i ren tekst.",
 };

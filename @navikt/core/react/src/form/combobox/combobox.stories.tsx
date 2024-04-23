@@ -1,7 +1,9 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
-import React, { useId, useMemo, useRef, useState } from "react";
-import { Chips, ComboboxProps, TextField, UNSAFE_Combobox } from "../../index";
+import React, { useMemo, useRef, useState } from "react";
+import { Chips } from "../../chips";
+import { TextField } from "../textfield";
+import { ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",
@@ -28,10 +30,10 @@ const options = [
   "grape fruit",
 ];
 
-export const Default: StoryFunction = (props) => {
-  const id = useId();
-  return <UNSAFE_Combobox {...props} id={id} />;
-};
+export const Default: StoryFunction = (props) => (
+  <UNSAFE_Combobox {...props} id="combobox" />
+);
+
 Default.args = {
   options,
   label: "Hva er dine favorittfrukter?",
@@ -55,10 +57,9 @@ Default.argTypes = {
 };
 
 export const MultiSelect: StoryFunction = (props) => {
-  const id = useId();
   return (
     <UNSAFE_Combobox
-      id={id}
+      id="combobox-with-multiselect"
       label="Komboboks - velg flere"
       options={props.options}
       isMultiSelect={props.isMultiSelect}
@@ -73,11 +74,55 @@ MultiSelect.args = {
   size: "medium",
 };
 
+export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  return (
+    <>
+      <UNSAFE_Combobox
+        {...props}
+        options={props.options.map((option) => ({
+          ...option,
+          label: `${option.label} [${option.value}]`,
+        }))}
+        id="combobox-with-complex-options"
+        label="Velg temakoder"
+        allowNewValues
+        onToggleSelected={(value, isSelected) =>
+          isSelected
+            ? setSelectedOptions([...selectedOptions, value])
+            : setSelectedOptions(selectedOptions.filter((o) => o !== value))
+        }
+        selectedOptions={selectedOptions}
+      />
+    </>
+  );
+};
+
+MultiSelectWithComplexOptions.args = {
+  options: [
+    { label: "Hjelpemidler", value: "HJE" },
+    { label: "Oppfølging", value: "OPP" },
+    { label: "Sykepenger", value: "SYK" },
+    { label: "Sykemelding", value: "SYM" },
+    { label: "Foreldre- og svangerskapspenger", value: "FOR" },
+    { label: "Arbeidsavklaringspenger", value: "AAP" },
+    { label: "Uføretrygd", value: "UFO" },
+    { label: "Pensjon", value: "PEN" },
+    { label: "Barnetrygd", value: "BAR" },
+    { label: "Kontantstøtte", value: "KON" },
+    { label: "Bostøtte", value: "BOS" },
+    { label: "Barnebidrag", value: "BBI" },
+    { label: "Bidragsforskudd", value: "BIF" },
+    { label: "Grunn- og hjelpestønad", value: "GRU" },
+  ],
+  isMultiSelect: true,
+  size: "medium",
+};
+
 export const WithAddNewOptions: StoryFunction = (props) => {
-  const id = useId();
   return (
     <UNSAFE_Combobox
-      id={id}
+      id="combobox-with-add-new-options"
       label="Komboboks med mulighet for å legge til nye verdier"
       options={props.options}
       allowNewValues={props.allowNewValues}
@@ -93,10 +138,9 @@ WithAddNewOptions.args = {
 };
 
 export const MultiSelectWithAddNewOptions: StoryFunction = (props) => {
-  const id = useId();
   return (
     <UNSAFE_Combobox
-      id={id}
+      id="combobox-with-multiselect-and-add-new-options"
       isMultiSelect={props.isMultiSelect}
       label="Multiselect komboboks med mulighet for å legge til nye verdier"
       options={props.options}
@@ -118,7 +162,6 @@ export const MultiSelectWithExternalChips: StoryFn<{
 }> = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [value, setValue] = useState("");
-  const id = useId();
 
   const toggleSelected = (option: string) =>
     selectedOptions.includes(option)
@@ -140,6 +183,7 @@ export const MultiSelectWithExternalChips: StoryFn<{
         </Chips>
       )}
       <UNSAFE_Combobox
+        id="combobox-with-external-chips"
         options={props.options}
         selectedOptions={selectedOptions}
         onToggleSelected={(option) => toggleSelected(option)}
@@ -152,7 +196,6 @@ export const MultiSelectWithExternalChips: StoryFn<{
         }
         label="Komboboks"
         size="medium"
-        id={id}
         shouldShowSelectedOptions={false}
       />
     </>
@@ -164,19 +207,16 @@ MultiSelectWithExternalChips.args = {
   options,
 };
 
-export const Loading: StoryFunction = (props) => {
-  const id = useId();
-  return (
-    <UNSAFE_Combobox
-      id={id}
-      label="Komboboks (laster)"
-      options={[]}
-      selectedOptions={[]}
-      isListOpen={props.isListOpen}
-      isLoading={props.isLoading}
-    />
-  );
-};
+export const Loading: StoryFunction = (props) => (
+  <UNSAFE_Combobox
+    id="combobox-with-loading-indicator"
+    label="Komboboks (laster)"
+    options={[]}
+    selectedOptions={[]}
+    isListOpen={props.isListOpen}
+    isLoading={props.isLoading}
+  />
+);
 
 Loading.args = {
   isLoading: true,
@@ -184,11 +224,10 @@ Loading.args = {
 };
 
 export const ComboboxWithNoHits: StoryFunction = (props) => {
-  const id = useId();
   const [value, setValue] = useState(props.value);
   return (
     <UNSAFE_Combobox
-      id={id}
+      id="combobox-with-no-hits"
       label="Komboboks (uten søketreff)"
       options={props.options}
       value={value}
@@ -208,7 +247,6 @@ export const Controlled: StoryFn<{
   options: string[];
   initialSelectedOptions: string[];
 }> = (props) => {
-  const id = useId();
   const [value, setValue] = useState(props.value);
   const [selectedOptions, setSelectedOptions] = useState(
     props.initialSelectedOptions,
@@ -236,7 +274,7 @@ export const Controlled: StoryFn<{
       <br />
       <UNSAFE_Combobox
         label="Hva er dine favorittfrukter?"
-        id={id}
+        id="combobox-controlled"
         filteredOptions={filteredOptions}
         isMultiSelect
         options={props.options}
@@ -290,7 +328,6 @@ export const ComboboxSizes = () => (
 );
 
 export const MaxSelectedOptions: StoryFunction = () => {
-  const id = useId();
   const [value, setValue] = useState<string | undefined>("");
   const [selectedOptions, setSelectedOptions] = useState([
     options[0],
@@ -299,7 +336,7 @@ export const MaxSelectedOptions: StoryFunction = () => {
   const comboboxRef = useRef<HTMLInputElement>(null);
   return (
     <UNSAFE_Combobox
-      id={id}
+      id="combobox-with-max-selected-options"
       label="Komboboks med begrenset antall valg"
       options={options}
       maxSelected={{ limit: 2 }}
@@ -585,5 +622,73 @@ export const TestHoverAndFocusSwitching: StoryObject = {
     expect(getInput().getAttribute("aria-activedescendant")).toBe(
       bananaOption.getAttribute("id"),
     );
+  },
+};
+
+export const TestEnterNotSubmittingForm: StoryObj<{
+  onSubmit: ReturnType<typeof fn>;
+}> = {
+  args: {
+    onSubmit: fn(),
+  },
+  render: ({ onSubmit }) => {
+    return (
+      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          isMultiSelect
+          allowNewValues
+        />
+      </form>
+    );
+  },
+  play: async ({ canvasElement, args }) => {
+    args.onSubmit.mockClear();
+    const canvas = within(canvasElement);
+    const waitTime = 0; // Change for debugging
+
+    await sleep(waitTime);
+
+    const getInput = () =>
+      canvas.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+    const getOption = (name: string, selected: boolean) =>
+      canvas.getByRole("option", { name, selected });
+    await userEvent.click(getInput(), { delay: waitTime });
+
+    await userEvent.keyboard("{ArrowDown}", { delay: waitTime });
+    expect(getInput().getAttribute("aria-activedescendant")).toBe(
+      getOption("banana", false).getAttribute("id"),
+    );
+
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+    expect(getOption("banana", true)).toBeVisible();
+
+    await userEvent.keyboard("{Shift>}{Tab}", { delay: waitTime });
+
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("test"); // Type option that does not exist
+    await userEvent.keyboard("{Enter}", { delay: waitTime });
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{ArrowDown}", { delay: waitTime }); // Select "test" custom option
+    expect(
+      canvas.getByRole("option", { name: "test", selected: true }),
+    ).toBeVisible();
+    await userEvent.keyboard("{Enter}", { delay: waitTime }); // De-select "test"
+    expect(
+      canvas.queryByRole("option", { name: "test", selected: false }),
+    ).toBeNull();
+    expect(args.onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard("{Escape}", { delay: waitTime }); // Clear input field
+    await userEvent.keyboard("{Enter}", { delay: waitTime }); // Enter on empty Input with closed list
+    expect(args.onSubmit).toHaveBeenCalledOnce();
   },
 };

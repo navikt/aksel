@@ -1,16 +1,12 @@
-import { mergeConfig } from "vite";
 import turbosnap from "vite-plugin-turbosnap";
 
 export default {
   staticDirs: ["./public"],
 
-  stories: () => [
-    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "./*.stories.mdx",
-  ],
+  stories: () => ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)", "./*.mdx"],
   addons: [
     "@storybook/addon-a11y",
-    "@xfinx/storybook-addon-html",
+    "@whitespace/storybook-addon-html",
     "@storybook/addon-interactions",
     {
       name: "@storybook/addon-storysource",
@@ -29,13 +25,11 @@ export default {
         },
       },
     },
+    "storybook-addon-pseudo-states",
   ],
   framework: {
     name: "@storybook/react-vite",
     options: {},
-  },
-  features: {
-    storyStoreV7: true,
   },
   docs: {
     autodocs: "tag",
@@ -47,6 +41,7 @@ export default {
   },
 
   async viteFinal(config, { configType }) {
+    const { mergeConfig } = await import("vite");
     return mergeConfig(config, {
       plugins:
         configType === "PRODUCTION"

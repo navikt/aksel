@@ -2,11 +2,11 @@ import { defineField, defineType } from "sanity";
 import { LineGraphIcon } from "@navikt/aksel-icons";
 
 export const ArticleViews = defineType({
-  title: "Artikkel Visninger",
+  title: "Artikkelvisninger",
   name: "article_views",
   type: "document",
   readOnly: ({ currentUser }) =>
-    !currentUser.roles.find((x) => x.name === "developer"),
+    !currentUser?.roles.find((x) => x.name === "developer"),
   preview: {
     select: {
       title: "article_ref.heading",
@@ -20,9 +20,9 @@ export const ArticleViews = defineType({
   },
   orderings: [
     {
-      title: "Views total",
-      name: "views",
-      by: [{ field: "views", direction: "desc" }],
+      title: "Views day",
+      name: "views_day",
+      by: [{ field: "views_day", direction: "desc" }],
     },
     {
       title: "Views week",
@@ -43,28 +43,29 @@ export const ArticleViews = defineType({
   fields: [
     defineField({
       type: "number",
-      name: "views",
-      description: "total lifetime views",
+      name: "views_day",
+      title: "Visninger i de siste 24 timer",
     }),
     defineField({
       type: "number",
       name: "views_week",
-      description: "views in the last week",
+      title: "Visninger siste 7 dager",
     }),
     defineField({
       type: "number",
       name: "views_month",
-      description: "views in the last month",
+      title: "Visninger siste 30 dager",
     }),
     defineField({
       type: "number",
       name: "views_year",
-      description: "views in the last year",
+      title: "Visninger siste 365 dager",
     }),
     defineField({
       title: "articleRef",
       name: "article_ref",
       type: "reference",
+      weak: true,
       to: { type: "aksel_artikkel" },
     }),
     defineField({

@@ -57,7 +57,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
   },
-  assetPrefix: useCdn ? "https://cdn.nav.no/aksel/website" : undefined,
+  assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
   async headers() {
     return [
       {
@@ -92,12 +92,19 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["cdn.sanity.io", "raw.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
     dangerouslyAllowSVG: true,
   },
   output: "standalone",
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
+    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
+    largePageDataBytes: 128 * 2000,
   },
 };
 

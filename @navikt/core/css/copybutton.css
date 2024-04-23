@@ -145,7 +145,7 @@
 }
 
 .navds-copybutton--action:hover {
-  color: var(--ac-copybutton-action-hover-text, var(--__ac-copybutton-action-text, var(--a-text-action)));
+  color: var(--ac-copybutton-action-hover-text, var(--__ac-copybutton-action-text, var(--a-text-action-hover)));
   background-color: var(--ac-copybutton-action-hover-bg, var(--__ac-copybutton-bg-hover, var(--a-surface-hover)));
 }
 

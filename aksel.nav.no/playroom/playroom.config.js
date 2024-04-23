@@ -8,12 +8,12 @@ const path = require("path");
 module.exports = {
   baseUrl: "./",
   components: path.resolve("./src/components.ts"),
-  outputPath: path.resolve("./dist"),
+  outputPath: path.resolve("./dist/sandbox"),
   // Optional:
   title: "Aksel Sandbox",
   snippets: path.resolve("./src/snippets.ts"),
   widths: [320, 480, 768, 1024, 1280, 1440],
-  defaultWidths: [320, 1280], // will be supported if this PR is merged: https://github.com/seek-oss/playroom/pull/302
+  defaultVisibleWidths: [320, 1280],
   port: 9000,
   frameComponent: path.resolve("./src/FrameComponent.tsx"),
   useScope: path.resolve("./src/useScope.tsx"),

@@ -1,22 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import React from "react";
-import { Detail } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import Detail from "../Detail";
 
-const meta = {
+const meta: Meta<typeof Detail> = {
   title: "ds-react/Typography/Detail",
   component: Detail,
   decorators: [(story) => <div style={{ maxWidth: "200px" }}>{story()}</div>],
-} satisfies Meta<typeof Detail>;
-
+  parameters: {
+    chromatic: { disable: true },
+  },
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Detail>;
 
 const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
 
-export const Default: Story = {
+export const Controls: Story = {
   args: {
     spacing: false,
     children: lorem,
@@ -83,5 +85,31 @@ export const OverrideTag: Story = {
 
     expect(defaultDetail.tagName).toEqual("P");
     expect(legendDetail.tagName).toEqual("LEGEND");
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Spacing</h2>
+        {Spacing.render?.(...props)}
+      </div>
+      <div>
+        <h2>Colors</h2>
+        {Colors.render?.(...props)}
+      </div>
+      <div>
+        <h2>Align</h2>
+        {Align.render?.(...props)}
+      </div>
+      <div>
+        <h2>Override Tag</h2>
+        {OverrideTag.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };

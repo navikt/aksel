@@ -40,7 +40,10 @@ export const withDsExample = (
     const BreakpointText = () => {
       let breakpoint = "";
       let Icon = LaptopIcon;
-      if (width < 480) {
+      if (!width) {
+        Icon = MonitorIcon;
+        breakpoint = "xl";
+      } else if (width < 480) {
         Icon = MobileSmallIcon;
         breakpoint = "xs";
       } else if (width < 768) {

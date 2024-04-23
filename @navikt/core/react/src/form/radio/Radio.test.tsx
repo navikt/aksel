@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import faker from "faker";
 import React from "react";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { Radio, RadioGroup } from ".";
 
 const value1 = faker.datatype.string();
@@ -18,9 +19,14 @@ const Group = (props) => (
 
 describe("Controlled RadioGroup", () => {
   const originalError = console.error;
-  const mockError = jest.fn();
-  beforeEach(() => (console.error = mockError));
-  afterEach(() => (console.error = originalError));
+  const mockError = vi.fn();
+  beforeEach(() => {
+    console.error = mockError;
+  });
+
+  afterEach(() => {
+    console.error = originalError;
+  });
 
   test("doesnt console.error", () => {
     const { rerender } = render(<Group value={value1} />);

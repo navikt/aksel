@@ -1,15 +1,15 @@
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
+import { nbNOLocale } from "@sanity/locale-nb-no";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
 import { getTemplates } from "./util";
@@ -33,24 +33,13 @@ export const workspaceConfig = defineConfig([
     icon: TestFlaskIcon,
     auth: authStore("development"),
   },
-  {
-    ...defaultConfig(),
-    plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
-    schema: schema("staging"),
-    title: "God-praksis staging",
-    name: "gp-staging",
-    dataset: "production",
-    basePath: "/admin/gp-staging",
-    icon: TestFlaskIcon,
-    auth: authStore("production"),
-  },
 ]);
 
 function defaultConfig() {
   return {
     projectId: SANITY_PROJECT_ID,
     apiVersion: SANITY_API_VERSION,
-    schema: schema("production"),
+    schema,
     form: {
       components: {
         field: (props) => {
@@ -74,12 +63,9 @@ function defaultConfig() {
         }
         return prev;
       },
-      unstable_comments: {
-        enabled: true,
-      },
     },
     plugins: [
-      deskTool({
+      structureTool({
         title: "Editor",
         structure,
         defaultDocumentNode,
@@ -93,6 +79,7 @@ function defaultConfig() {
       visionTool(),
       unsplashImageAsset(),
       colorInput(),
+      nbNOLocale(),
     ],
   };
 }

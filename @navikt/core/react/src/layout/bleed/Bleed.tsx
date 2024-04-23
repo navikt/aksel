@@ -9,21 +9,29 @@ export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 
 export interface BleedProps extends React.HTMLAttributes<HTMLDivElement> {
   /** **Negative** horizontal margin around children.
-   *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   * Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   *
+   * The `px` value is useful to nudge by just 1px.
+   * The `full` value is used to extend the margin to the full width of the parent.
+   *
    * @example
    * marginInline='4'
    * marginInline='4 5'
-   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6', "2xl": '12'}}
    */
   marginInline?: ResponsiveProp<
     BleedSpacingInline | `${BleedSpacingInline} ${BleedSpacingInline}`
   >;
   /** **Negative** vertical margin around children.
    *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
+   *
+   * The `px` value is useful to nudge by just 1px.
+   * This prop does **not** accept the `full` value.
+   *
    * @example
    * marginBlock='4'
    * marginBlock='4 5'
-   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6', "2xl": '12'}}
    */
   marginBlock?: ResponsiveProp<
     BleedSpacingBlock | `${BleedSpacingBlock} ${BleedSpacingBlock}`
@@ -125,3 +133,5 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     );
   },
 );
+
+export default Bleed;

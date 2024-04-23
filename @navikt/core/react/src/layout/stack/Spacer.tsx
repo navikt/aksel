@@ -12,4 +12,6 @@ import React from "react";
  *  <MyComponent />
  * </HStack>
  */
-export const Spacer = () => <div className="navds-stack__spacer" />;
+export const Spacer = () => <span className="navds-stack__spacer" />;
+
+export default Spacer;

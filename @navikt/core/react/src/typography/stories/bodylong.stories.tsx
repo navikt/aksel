@@ -1,23 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import React from "react";
-import { BodyLong } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import BodyLong from "../BodyLong";
 
-const meta = {
+const meta: Meta<typeof BodyLong> = {
   title: "ds-react/Typography/BodyLong",
   component: BodyLong,
   decorators: [(story) => <div style={{ maxWidth: "700px" }}>{story()}</div>],
-} satisfies Meta<typeof BodyLong>;
-
+  parameters: {
+    chromatic: { disable: true },
+  },
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof BodyLong>;
 
 const lorem =
   "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
-export const Default: Story = {
+export const Controls: Story = {
   args: {
     spacing: false,
     children: lorem,
@@ -160,5 +162,48 @@ export const OverrideTag: Story = {
 
     expect(defaultBodyLong.tagName).toEqual("P");
     expect(legendBodyLong.tagName).toEqual("LEGEND");
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Large</h2>
+        <h3>Size</h3>
+        {SizeLarge.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingLarge.render?.(...props)}
+      </div>
+      <div>
+        <h2>Medium</h2>
+        <h3>Size</h3>
+        {SizeMedium.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingMedium.render?.(...props)}
+      </div>
+      <div>
+        <h2>Small</h2>
+        <h3>Size</h3>
+        {SizeSmall.render?.(...props)}
+        <h3>Spacing</h3>
+        {SpacingSmall.render?.(...props)}
+      </div>
+      <div>
+        <h2>Colors</h2>
+        {Colors.render?.(...props)}
+      </div>
+      <div>
+        <h2>Align</h2>
+        {Align.render?.(...props)}
+      </div>
+      <div>
+        <h2>Override Tag</h2>
+        {OverrideTag.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };

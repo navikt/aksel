@@ -44,7 +44,7 @@ const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
 export const IconPage = ({ name }: { name: string }) => {
   const [query, setQuery] = useState("");
   const [toggle, setToggle] = useState<"stroke" | "fill">("stroke");
-  const focusRef = useRef(null);
+  const focusRef = useRef<HTMLAnchorElement | null>(null);
 
   const [strokeIcons] = useState(
     Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
@@ -135,6 +135,14 @@ export const IconPage = ({ name }: { name: string }) => {
                     onChange={setQuery}
                     value={query}
                     clearButton={false}
+                    onKeyDown={(e) => {
+                      /* Avoids closing icon-sidebar when clearing Search */
+                      if (e.key === "Escape") {
+                        if (e.currentTarget.value) {
+                          e.stopPropagation();
+                        }
+                      }
+                    }}
                   />
                 </form>
               </div>

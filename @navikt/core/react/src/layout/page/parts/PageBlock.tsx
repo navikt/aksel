@@ -72,3 +72,5 @@ export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
       );
     },
   );
+
+export default PageBlock;

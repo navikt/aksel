@@ -1,2 +1,3 @@
+"use client";
 export { default as GuidePanel, type GuidePanelProps } from "./GuidePanel";
-export { DefaultIllustration as GuideDefaultIllustration } from "./Illustration";
+export { DefaultIllustration as GuidePanelDefaultIllustration } from "./Illustration";

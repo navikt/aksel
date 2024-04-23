@@ -18,3 +18,5 @@ export const LinkPanelDescription = forwardRef<
     className={cl("navds-link-panel__description", className)}
   />
 ));
+
+export default LinkPanelDescription;

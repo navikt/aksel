@@ -48,6 +48,16 @@ Installer dependencies og bygg workspace
 yarn && yarn boot
 ```
 
+### Tilgang til Github Package Registry
+
+Siden vi bruker avhengigheter som ligger i GPR, så må man sette opp tilgang til GPR med en PAT (personal access token) som har `read:packages`. Du kan [opprette PAT her](https://github.com/settings/tokens).
+
+I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
+
+`export NPM_AUTH_TOKEN=<din PAT med read:packages>`
+
+### Shortcuts
+
 | Command                   | Script                                                                                                 |
 | ------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `yarn boot`               | Bygger alle pakker                                                                                     |

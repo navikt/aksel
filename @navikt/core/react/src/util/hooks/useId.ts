@@ -1,3 +1,5 @@
+"use client";
+
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
 import React, { useEffect, useState } from "react";
 

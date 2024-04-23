@@ -13,7 +13,7 @@ export function InputWithCounter(
     <VStack gap="1">
       {props.renderDefault(props)}
       <Counter
-        // @ts-ignore
+        // @ts-expect-error - maxLength is a custom prop not officially supported
         maxLength={schemaType?.options?.maxLength}
         currentLength={value?.length ?? 0}
       />

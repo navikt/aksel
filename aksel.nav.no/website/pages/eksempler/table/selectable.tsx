@@ -3,7 +3,7 @@ import { Checkbox, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
   const toggleSelectedRow = (value) =>
     setSelectedRows((list) =>
@@ -13,59 +13,55 @@ const Example = () => {
     );
 
   return (
-    <>
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.DataCell>
-              <Checkbox
-                checked={selectedRows.length === data.length}
-                indeterminate={
-                  selectedRows.length && selectedRows.length !== data.length
-                }
-                onChange={() => {
-                  selectedRows.length
-                    ? setSelectedRows([])
-                    : setSelectedRows(data.map(({ fnr }) => fnr));
-                }}
-                hideLabel
-              >
-                Velg alle rader
-              </Checkbox>
-            </Table.DataCell>
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.DataCell>
+            <Checkbox
+              checked={selectedRows.length === data.length}
+              indeterminate={
+                selectedRows.length > 0 && selectedRows.length !== data.length
+              }
+              onChange={() => {
+                selectedRows.length
+                  ? setSelectedRows([])
+                  : setSelectedRows(data.map(({ fnr }) => fnr));
+              }}
+              hideLabel
+            >
+              Velg alle rader
+            </Checkbox>
+          </Table.DataCell>
 
-            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Start</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {data.map(({ name, fnr, start }, i) => {
-            return (
-              <Table.Row key={i + fnr} selected={selectedRows.includes(fnr)}>
-                <Table.DataCell>
-                  <Checkbox
-                    hideLabel
-                    checked={selectedRows.includes(fnr)}
-                    onChange={() => {
-                      toggleSelectedRow(fnr);
-                    }}
-                    aria-labelledby={`id-${fnr}`}
-                  >
-                    {" "}
-                  </Checkbox>
-                </Table.DataCell>
-                <Table.HeaderCell scope="row">
-                  <span id={`id-${fnr}`}>{name}</span>
-                </Table.HeaderCell>
-                <Table.DataCell>{fnr}</Table.DataCell>
-                <Table.DataCell>{format(new Date(start))}</Table.DataCell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </>
+          <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Start</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.map(({ name, fnr, start }, i) => {
+          return (
+            <Table.Row key={i + fnr} selected={selectedRows.includes(fnr)}>
+              <Table.DataCell>
+                <Checkbox
+                  hideLabel
+                  checked={selectedRows.includes(fnr)}
+                  onChange={() => toggleSelectedRow(fnr)}
+                  aria-labelledby={`id-${fnr}`}
+                >
+                  {" "}
+                </Checkbox>
+              </Table.DataCell>
+              <Table.HeaderCell scope="row">
+                <span id={`id-${fnr}`}>{name}</span>
+              </Table.HeaderCell>
+              <Table.DataCell>{fnr}</Table.DataCell>
+              <Table.DataCell>{format(new Date(start))}</Table.DataCell>
+            </Table.Row>
+          );
+        })}
+      </Table.Body>
+    </Table>
   );
 };
 

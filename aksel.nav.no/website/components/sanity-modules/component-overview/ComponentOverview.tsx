@@ -27,8 +27,14 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
         return -1;
       }
 
-      if (a.sidebarindex !== null || b.sidebarindex !== null) {
-        if (a.sidebarindex !== null && b.sidebarindex !== null) {
+      if (
+        typeof a.sidebarindex === "number" ||
+        typeof b.sidebarindex === "number"
+      ) {
+        if (
+          typeof a.sidebarindex === "number" &&
+          typeof b.sidebarindex === "number"
+        ) {
           return a.sidebarindex - b.sidebarindex;
         } else if (a.sidebarindex !== null) {
           return -1;
@@ -115,12 +121,14 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
                     <Heading
                       as="a"
                       size="small"
-                      className="z-10 underline before:absolute before:inset-0 focus:outline-none"
+                      className="z-10 underline before:absolute before:inset-0 focus:outline-none group-hover:no-underline"
                     >
                       {x.heading}
-                      <span className="absolute left-4 top-4">
-                        <StatusTag status={x?.status?.tag} />
-                      </span>
+                      {x?.status?.tag && (
+                        <span className="absolute left-4 top-4">
+                          <StatusTag status={x?.status?.tag} />
+                        </span>
+                      )}
                     </Heading>
                   </Nextlink>
                 </span>

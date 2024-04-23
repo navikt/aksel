@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button, Modal } from "@navikt/ds-react";
+import { Modal } from "@navikt/ds-react";
+import { AkselSearchButton } from "@/web/search/parts/SearchButton";
 import { SearchContext, SearchNavigationContext } from "../providers";
 import { Error } from "./Error";
 import { SearchForm } from "./Form";
@@ -12,25 +12,16 @@ export const Search = () => {
 
   return (
     <>
-      <Button
-        variant="primary"
-        className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
-        aria-keyshortcuts="Control+b"
-        icon={
-          <MagnifyingGlassIcon
-            className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
-            aria-label="Åpne meny"
-            aria-hidden
-          />
-        }
-        iconPosition="left"
-        onClick={() => setOpen(true)}
-      >
-        Søk
-      </Button>
+      <AkselSearchButton onClick={() => setOpen(true)} />
       <Modal
         open={open}
         onClose={close}
+        onKeyDown={(e) => {
+          /* Avoids sideeffects when closing Modal */
+          if (e.key === "Escape") {
+            e.stopPropagation();
+          }
+        }}
         aria-label="Søk"
         className="h-[90%] max-h-[52rem] "
         width="medium"

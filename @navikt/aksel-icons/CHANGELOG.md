@@ -1,5 +1,61 @@
 # @navikt/aksel-icons
 
+## 6.6.1
+
+## 6.6.0
+
+## 6.5.0
+
+## 6.4.1
+
+## 6.4.0
+
+## 6.3.6
+
+## 6.3.5
+
+## 6.3.4
+
+## 6.3.3
+
+## 6.3.2
+
+## 6.3.1
+
+## 6.3.0
+
+## 6.2.0
+
+### Minor Changes
+
+- Ikoner: Nytt ikon `archive` ([#2772](https://github.com/navikt/aksel/pull/2772))
+
+- Ikoner: Nytt ikon `opensource` ([#2787](https://github.com/navikt/aksel/pull/2787))
+
+## 6.1.1
+
+## 6.1.0
+
+## 6.0.0
+
+### Major Changes
+
+- ESM: ds-react og aksel-icons støtter nå native ESM 🎉 ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+### Minor Changes
+
+- SSR: ds-react og aksel-icons støtter nå `use client` og kan brukes i nextjs app-router uten lokal re-eksportering. ([#2623](https://github.com/navikt/aksel/pull/2623))
+
+## 5.18.3
+
+## 5.18.2
+
+## 5.18.1
+
+## 5.18.0
+
+## 5.17.5
+
 ## 5.17.4
 
 ## 5.17.3

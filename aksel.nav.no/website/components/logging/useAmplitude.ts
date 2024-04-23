@@ -1,9 +1,10 @@
 import type { Types } from "@amplitude/analytics-browser";
 import { useEffect } from "react";
 
-const batchedEvents = [];
+const batchedEvents: Parameters<Pick<Types.BrowserClient, "track">["track"]>[] =
+  [];
 
-export let amplitude: Partial<Pick<Types.BrowserClient, "init" | "track">> = {
+export let amplitude: Pick<Types.BrowserClient, "init" | "track"> = {
   track: (...eventsData) => {
     batchedEvents.push(eventsData);
     return {
@@ -16,6 +17,7 @@ export let amplitude: Partial<Pick<Types.BrowserClient, "init" | "track">> = {
       ),
     };
   },
+  init: () => ({ promise: new Promise<void>((resolve) => resolve()) }),
 };
 
 const AMPLITUDE_PUBLIC_API_KEY = "1a9a84a5e557ac9635a250bc27d75030";
@@ -59,7 +61,7 @@ const useAmplitudeInit = () => {
             .forEach(([event, eventData]) => amplitude.track(event, eventData)),
         )
         .catch(async () => {
-          const { logger } = await import("../../config/logger");
+          const { logger } = await import("@navikt/next-logger");
           logger.error("Failed logging batched events");
         });
     };
@@ -89,6 +91,7 @@ function mockAmplitude() {
         ),
       };
     },
+    init: () => ({ promise: new Promise<void>((resolve) => resolve()) }),
   };
 }
 

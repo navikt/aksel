@@ -10,7 +10,6 @@ export const getTemplates = () => {
         title: "Profilside",
         id: "profilRole",
         templateId: "editor",
-        subtitle: "(Kan bare ha 1 profilside)",
       },
     ],
     god_praksis_forfatter: [
@@ -19,14 +18,6 @@ export const getTemplates = () => {
         id: "godPraksisForfatterRole",
         templateId: "aksel_artikkel",
         subtitle: "Fagartikkel",
-      },
-    ],
-    tema_ansvarlig: [
-      {
-        title: "God praksis tema",
-        id: "temaAnsvarligRole",
-        templateId: "aksel_tema",
-        subtitle: "Nytt god-praksis tema",
       },
     ],
     blogger: [

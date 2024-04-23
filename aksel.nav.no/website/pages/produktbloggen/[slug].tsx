@@ -17,7 +17,6 @@ import {
 } from "@/types";
 import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
-import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -51,15 +50,16 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
+  const slug = context.params?.slug as string;
   const { blogg, morePosts } = await getClient().fetch(query, {
-    slug: `produktbloggen/${context.params.slug}`,
+    slug: `produktbloggen/${slug}`,
   });
 
   return {
     props: {
       blogg,
       morePosts,
-      slug: context.params.slug as string,
+      slug,
       preview: context.preview ?? false,
       id: blogg?._id ?? "",
       title: blogg?.heading ?? "",
@@ -101,7 +101,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             <Heading
               level="1"
               size="xlarge"
-              className="text-wrap-balance mt-1 break-words text-5xl leading-[1.2] text-deepblue-800 [hyphens:_auto]"
+              className="text-wrap-balance mt-1 hyphens-auto break-words text-5xl leading-[1.2] text-deepblue-800 md:hyphens-none"
             >
               {blogg.heading}
             </Heading>
@@ -164,7 +164,6 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
           </div>
         </div>
         <div className="relative mt-16">
-          <AkselCubeStatic className="z-0 text-amber-300 opacity-20" />
           <div className="relative z-10 mt-8 px-4">
             <SanityBlockContent
               className="dynamic-wrapper-prose"

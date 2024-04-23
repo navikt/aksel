@@ -8,21 +8,21 @@ import { StepperContext } from "./context";
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Text content by indicator
+   * Text content by indicator.
    */
   children: string;
   /**
-   * Handled by Stepper, overwriting may break component logic
+   * Handled by Stepper, overwriting may break component logic.
    * @private
    */
   unsafe_index?: number;
   /**
-   * Makes step-indicator a checkmark
+   * Makes step-indicator a checkmark.
    * @default false
    */
   completed?: boolean;
   /**
-   * Makes step non-interactive if false. Step will be set to a <div>, overriding `as`-prop
+   * Makes step non-interactive if false. Step will be set to a `<div>`, overriding `as`-prop.
    * @default true
    */
   interactive?: boolean;

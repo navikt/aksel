@@ -69,7 +69,8 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onYearChange?: (y?: Date) => void;
   /**
-   * Avoid using if possible!
+   * **Avoid using if possible!**
+   *
    * Changes what CSS position property to use
    * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
    * @default "absolute"

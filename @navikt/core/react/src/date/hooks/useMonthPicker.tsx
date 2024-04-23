@@ -36,17 +36,13 @@ export interface UseMonthPickerOptions
    */
   defaultYear?: Date;
   /**
-   * Allows input of with 'yy' year format.
+   * Allows input of with `yy` year format.
+   *
+   * Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
+   * In 2024 this equals to 1944 - 2043
    * @default true
-   * @Note Decision between 20th and 21st century is based on before(todays year - 80) ? 21st : 20th.
-   * In 2023 this equals to 1943 - 2042
    */
   allowTwoDigitYear?: boolean;
-  /**
-   * Will be removed in a future major-version
-   * @deprecated
-   */
-  openOnFocus?: boolean;
 }
 
 interface UseMonthPickerValue {
@@ -229,13 +225,17 @@ export const useMonthpicker = (
 
   /* Only allow de-selecting if not required */
   const handleMonthClick = (month?: Date) => {
+    if (!month && required) {
+      return;
+    }
+
     if (month) {
       handleOpen(false);
       setYear(month);
       anchorRef?.focus();
     }
 
-    if (!required && !month) {
+    if (!month) {
       updateMonth(undefined);
       updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");

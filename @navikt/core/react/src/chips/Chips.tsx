@@ -1,13 +1,13 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { OverridableComponent } from "../util/types";
-import RemovableChips, { RemovableChipsProps } from "./Removable";
-import ToggleChips, { ToggleChipsProps } from "./Toggle";
+import RemovableChips, { ChipsRemovableProps } from "./Removable";
+import ToggleChips, { ChipsToggleProps } from "./Toggle";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
   /**
-   * Changes padding and font-sizes
+   * Changes padding and font-sizes.
    * @default "medium"
    */
   size?: "medium" | "small";
@@ -22,13 +22,13 @@ interface ChipsComponent
    * @see 🏷️ {@link ToggleChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Toggle: OverridableComponent<ToggleChipsProps, HTMLButtonElement>;
+  Toggle: OverridableComponent<ChipsToggleProps, HTMLButtonElement>;
   /**
-   * Remove filter or the likes on click
+   * Remove filter or the likes on click.
    * @see 🏷️ {@link RemovableChipsProps}
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    */
-  Removable: OverridableComponent<RemovableChipsProps, HTMLButtonElement>;
+  Removable: OverridableComponent<ChipsRemovableProps, HTMLButtonElement>;
 }
 
 /**

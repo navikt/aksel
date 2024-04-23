@@ -94,7 +94,7 @@ export const PopoverAnchor = forwardRef<
     return () => onCustomAnchorRemove();
   }, [onCustomAnchorAdd, onCustomAnchorRemove]);
 
-  return <Floating.Anchor ref={ref} {...props}></Floating.Anchor>;
+  return <Floating.Anchor ref={ref} {...props} />;
 });
 
 /**

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { BodyLong, ReadMore } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { VideoT } from "@/types";
@@ -9,6 +9,7 @@ type VideoProps = {
 
 const Video = ({ node }: VideoProps) => {
   const [open, setOpen] = useState(false);
+  const transcriptId = useId();
 
   if (!node || (!node.webm && !node.fallback) || !node.alt) {
     return null;
@@ -24,32 +25,38 @@ const Video = ({ node }: VideoProps) => {
         playsInline
         controls
         loop
-        aria-describedby={
-          node.transkripsjon ? node.alt + "transkript" : undefined
-        }
-        aria-label="Trykk space for å starte/pause video"
+        aria-describedby={node.transkripsjon ? transcriptId : undefined}
         poster="/images/og/video-poster.png"
+        crossOrigin="anonymous" // Needed for the <track>
       >
-        <source src={node.webm.url} type={`video/${node.webm.extension}`} />
+        <source src={node.webm?.url} type={`video/${node.webm?.extension}`} />
         {node.fallback && (
           <source
             src={node.fallback.url}
             type={`video/${node.fallback.extension}`}
           />
         )}
+        {node.track && <track kind="captions" srcLang="no" src={node.track} />}
       </video>
       {node?.caption && (
-        <BodyLong as="figcaption" className="px-7">
+        <BodyLong as="figcaption" className="px-4">
           {node.caption}
         </BodyLong>
       )}
       {node?.transkripsjon && (
         <ReadMore
-          header="transkripsjon"
+          className="px-4"
+          header="Transkripsjon"
           open={open}
           onClick={() => setOpen((x) => !x)}
         >
-          <span id={node.alt + "transkript"}>{node.transkripsjon}</span>
+          <div id={transcriptId} className="whitespace-break-spaces">
+            {node.transkripsjon.split("\n\n").map((paragraph, i, array) => (
+              <BodyLong key={i} spacing={i < array.length - 1}>
+                {paragraph}
+              </BodyLong>
+            ))}
+          </div>
         </ReadMore>
       )}
     </figure>

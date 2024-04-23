@@ -1,149 +1,234 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import cl from "clsx";
+import { groq } from "next-sanity";
+import NextLink from "next/link";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
-import { SparklesIcon } from "@navikt/aksel-icons";
-import { Heading } from "@navikt/ds-react";
-import ArtikkelCard from "@/cms/cards/ArtikkelCard";
-import GodPraksisCard from "@/cms/cards/GodPraksisCard";
+import {
+  BodyLong,
+  Box,
+  Heading,
+  Link,
+  Page,
+  Stack,
+  VStack,
+} from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
+import { GpCardGrid } from "@/layout/god-praksis-page/ArticleSections";
+import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
+import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
+import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
 import Header from "@/layout/header/Header";
+import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
-import {
-  AkselGodPraksisDocT,
-  AkselGodPraksisLandingPageDocT,
-  AkselTemaT,
-  NextPageT,
-  ResolveContributorsT,
-  ResolveSlugT,
-  ResolveTemaT,
-} from "@/types";
-import { AkselCubeStatic } from "@/web/aksel-cube/AkselCube";
+import { AkselGodPraksisLandingPageDocT, NextPageT } from "@/types";
+import { AnimatedChevron } from "@/web/AnimatedChevron";
 import { SEO } from "@/web/seo/SEO";
 
-type PageProps = NextPageT<{
+type GpTemaList = {
   page: AkselGodPraksisLandingPageDocT;
-  temaer: AkselTemaT[];
-  resent: ResolveTemaT<
-    ResolveContributorsT<ResolveSlugT<AkselGodPraksisDocT>>
-  >[];
-}>;
+  tema: {
+    title: string;
+    description: string;
+    slug: string;
+    refCount: number;
+    pictogram: SanityImageSource;
+    articles: {
+      heading: string;
+      slug: string;
+      undertema: { title: string; temaTitle: string }[];
+      innholdstype: string;
+    }[];
+  }[];
+};
 
-export const query = `*[_type == "godpraksis_landingsside"][0]{
-  "page": {
+type PageProps = NextPageT<GpTemaList>;
+
+export const query = groq`
+{
+  "page": *[_type == "godpraksis_landingsside"][0]{
     ...,
     intro[]{
       ...,
       ${destructureBlocks}
     }
   },
-  "temaer": *[_type == "aksel_tema" && defined(seksjoner[].sider[])]{
-    ...,
-    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
-  },
-  "resent": *[_type == "aksel_artikkel" && defined(publishedAt)] | order(publishedAt desc)[0...9]{
-    _id,
-    heading,
-    _createdAt,
-    _updatedAt,
-    publishedAt,
+  "tema": *[_type == "gp.tema"] | order(lower(title)){
+    title,
+    description,
+    pictogram,
     "slug": slug.current,
-    "tema": tema[]->title,
-    ingress,
+    "refCount": count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]),
+    "articles": *[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)] {
+        heading,
+        "slug": slug.current,
+        "undertema": undertema[]->{title, "temaTitle": tema->title},
+        "innholdstype": innholdstype->title,
+        "views": *[_type == "article_views" && article_ref._ref == ^._id][0].views_month
+      } | order(coalesce(views, -1) desc)[0...4]{
+        heading,
+        slug,
+        undertema,
+        innholdstype
+      },
   }
-}`;
+}
+`;
 
 export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }): Promise<PageProps> => {
-  const { temaer, page, resent } = await getClient().fetch(query);
+  const { tema, page } = await getClient().fetch<GpTemaList>(query);
 
   return {
     props: {
       page,
-      temaer,
-      resent,
-      slug: "/god-praksis",
+      tema,
       preview,
-      title: "Forside God praksis",
-      id: page?._id ?? "",
+      id: "godpraksis_landingsside_id1",
+      title: "God praksis forside",
     },
-    notFound: !temaer,
+    notFound: false,
     revalidate: 60,
   };
 };
 
-const Page = ({ temaer, page, resent }: PageProps["props"]) => {
-  const filteredTemas = temaer.filter((x) => x.refCount > 0);
+const GpPage = (props: PageProps["props"]) => {
   return (
     <>
       <SEO
         title="God praksis"
-        description={page?.seo?.meta}
-        image={page?.seo?.image}
+        description={props.page?.seo?.meta}
+        image={props.page?.seo?.image}
       />
 
-      <div className="relative overflow-hidden bg-surface-subtle">
-        <Header variant="transparent" />
-        <main tabIndex={-1} id="hovedinnhold" className=" focus:outline-none">
-          <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 pt-20 sm:px-6">
-            <Heading
-              level="1"
-              size="xlarge"
-              className="mb-4 text-5xl text-deepblue-800"
-            >
-              God praksis
-            </Heading>
-            {page.intro && <SanityBlockContent isIngress blocks={page.intro} />}
-            <AkselCubeStatic className="text-deepblue-300 opacity-5 " />
-            <div>
-              <ul className="card-grid-3-1 mt-20 ">
-                {filteredTemas.map((t) => (
-                  <GodPraksisCard key={t._id} node={t} />
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-24">
-              <Heading
-                level="2"
-                size="medium"
-                className="flex items-center gap-2 text-deepblue-800"
-              >
-                <SparklesIcon aria-hidden className="shrink-0" /> Nyeste
-                artikler
-              </Heading>
-              <div className="card-grid-3-1 my-6">
-                {resent.map((art: any) => (
-                  <ArtikkelCard
-                    level="3"
-                    variant="tema"
-                    {...art}
-                    key={art._id}
+      <Page
+        footer={<Footer />}
+        footerPosition="belowFold"
+        className="bg-surface-subtle"
+      >
+        <Header variant="subtle" />
+        <Box
+          paddingBlock="10"
+          as="main"
+          tabIndex={-1}
+          id="hovedinnhold"
+          className="animate-popUpPage focus:outline-none"
+        >
+          <Page.Block width="xl" gutters>
+            <VStack gap="10">
+              <IntroHero title="God praksis">
+                {props.page.intro && (
+                  <SanityBlockContent
+                    isIngress
+                    blocks={props.page.intro}
+                    className="mt-4"
                   />
-                ))}
-              </div>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
+                )}
+                <nav aria-label="Temavelger">
+                  <Stack
+                    className="mt-6"
+                    gap={{ xs: "4", md: "6" }}
+                    wrap
+                    direction={{ xs: "column", md: "row" }}
+                    as="ul"
+                  >
+                    {props.tema
+                      .filter((x) => x.refCount > 0)
+                      .map((tema) => (
+                        <li key={tema.slug}>
+                          <GpHeroCard
+                            articleCount={tema.refCount}
+                            href={`god-praksis/${tema.slug}`}
+                            image={tema.pictogram}
+                          >
+                            {tema.title}
+                          </GpHeroCard>
+                        </li>
+                      ))}
+                  </Stack>
+                </nav>
+              </IntroHero>
+              <Box paddingInline={{ xs: "4", lg: "10" }}>
+                <VStack gap="12">
+                  {props.tema
+                    .filter((x) => x.refCount > 0)
+                    .map((tema) => {
+                      return (
+                        <section
+                          key={tema.slug}
+                          aria-label={`Tema ${tema.title}`}
+                        >
+                          <Heading
+                            level="2"
+                            size="medium"
+                            className={cl("text-aksel-heading", {
+                              "mb-4": !tema.description,
+                              "mb-2": tema.description,
+                            })}
+                          >
+                            {tema.title}
+                          </Heading>
+                          {tema.description && (
+                            <BodyLong className="mb-6">
+                              {tema.description}
+                            </BodyLong>
+                          )}
+                          <GpCardGrid>
+                            {tema.articles.map((article) => (
+                              <li key={article.slug}>
+                                <GpArticleCard
+                                  href={article.slug}
+                                  innholdstype={article.innholdstype}
+                                  undertema={
+                                    article.undertema.find(
+                                      (ut) => ut?.temaTitle === tema.title,
+                                    )?.title
+                                  }
+                                >
+                                  {article.heading}
+                                </GpArticleCard>
+                              </li>
+                            ))}
+                          </GpCardGrid>
+
+                          <Link
+                            href={`/god-praksis/${tema.slug}`}
+                            as={NextLink}
+                            className="group mt-4 w-fit text-deepblue-700"
+                            onClick={(e) =>
+                              amplitudeLogNavigation(
+                                "gp-se-alle-link",
+                                e.currentTarget.getAttribute("href"),
+                              )
+                            }
+                          >
+                            <h3 className="flex items-center">
+                              {`Alt fra ${tema.title} `}
+                              <AnimatedChevron scale="inline" />
+                            </h3>
+                          </Link>
+                        </section>
+                      );
+                    })}
+                </VStack>
+              </Box>
+            </VStack>
+          </Page.Block>
+        </Box>
+      </Page>
     </>
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
+/**
+ * To avoid infinite loop rendering caused by `count` in query, we avoid showing preview for this page.
+ */
 const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={query} props={props} />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
+  return <GpPage {...props} />;
 };
 
 export default Wrapper;

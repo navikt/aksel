@@ -1,8 +1,9 @@
 import type { Meta } from "@storybook/react";
 import React, { ReactNode } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { HGrid, HStack, VStack } from "../..";
 import { BodyLong, Detail, Heading } from "../../typography";
+import { HGrid } from "../grid";
+import { HStack, VStack } from "../stack";
 import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
 import { Box } from "./Box";
 
@@ -196,7 +197,7 @@ export const PaddingBreakpoints = {
   render: () => (
     <div>
       <Box
-        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6" }}
+        padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6", "2xl": "8" }}
         background="surface-neutral"
       >
         <Box background="surface-alt-3-subtle">

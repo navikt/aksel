@@ -1,22 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, within } from "@storybook/test";
 import { default as React } from "react";
-import { Heading } from "..";
-import { VStack } from "../..";
+import { VStack } from "../../layout/stack";
+import Heading from "../Heading";
 
-const meta = {
+const meta: Meta<typeof Heading> = {
   title: "ds-react/Typography/Heading",
   component: Heading,
   decorators: [(story) => <div style={{ maxWidth: "300px" }}>{story()}</div>],
-} satisfies Meta<typeof Heading>;
-
+  parameters: {
+    chromatic: { disable: true },
+  },
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Heading>;
 
 const lorem = "Hva kan vi hjelpe deg med?";
 
-export const Default: Story = {
+export const Controls: Story = {
   args: {
     spacing: false,
     children: lorem,
@@ -137,5 +139,31 @@ export const OverrideTag: Story = {
 
     expect(defaultHeading.tagName).toEqual("H1");
     expect(legendHeading.tagName).toEqual("LEGEND");
+  },
+};
+
+export const Chromatic: Story = {
+  render: (...props) => (
+    <div>
+      <div>
+        <h2>Sizes</h2>
+        {Sizes.render?.(...props)}
+      </div>
+      <div>
+        <h2>Colors</h2>
+        {Colors.render?.(...props)}
+      </div>
+      <div>
+        <h2>Align</h2>
+        {Align.render?.(...props)}
+      </div>
+      <div>
+        <h2>Override Tag</h2>
+        {OverrideTag.render?.(...props)}
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };

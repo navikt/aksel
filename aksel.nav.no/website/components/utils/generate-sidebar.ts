@@ -35,6 +35,8 @@ export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   } else if (b.tag === "deprecated") {
     return -1;
   }
+
+  return 0;
 }
 
 export function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {

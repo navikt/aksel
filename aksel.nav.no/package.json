@@ -8,18 +8,17 @@
     "dev": "yarn workspace website dev",
     "build:next": "yarn workspace website build",
     "serve:next": "yarn workspace website start",
-    "sanity:update": "yarn workspace website update:sanity",
-    "test": "yarn workspace website test"
+    "sanity:update": "yarn workspace website update:sanity"
   },
   "workspaces": [
     "website",
     "playroom"
   ],
   "dependencies": {
-    "@navikt/aksel-icons": "^5.17.4",
-    "@navikt/ds-css": "^5.17.4",
-    "@navikt/ds-react": "^5.17.4",
-    "@navikt/ds-tailwind": "^5.17.4",
-    "@navikt/ds-tokens": "^5.17.4"
+    "@navikt/aksel-icons": "^6.6.1",
+    "@navikt/ds-css": "^6.6.1",
+    "@navikt/ds-react": "^6.6.1",
+    "@navikt/ds-tailwind": "^6.6.1",
+    "@navikt/ds-tokens": "^6.6.1"
   }
 }

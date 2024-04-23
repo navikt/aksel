@@ -4,7 +4,7 @@ import { useMergeRefs } from "../../../util/hooks";
 import { useFloatingContext } from "../Floating.context";
 import { Measurable } from "../Floating.types";
 
-interface FloatingAnchorProps extends HTMLAttributes<HTMLDivElement> {
+export interface FloatingAnchorProps extends HTMLAttributes<HTMLDivElement> {
   virtualRef?: React.RefObject<Measurable>;
   asChild?: boolean;
 }

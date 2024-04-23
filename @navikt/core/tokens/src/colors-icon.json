@@ -9,6 +9,9 @@
     "icon-action-selected": {
       "value": "{a.blue.700.value}"
     },
+    "icon-action-hover": {
+      "value": "{a.blue.600.value}"
+    },
     "icon-action-on-action-subtle": {
       "value": "{a.blue.600.value}"
     },

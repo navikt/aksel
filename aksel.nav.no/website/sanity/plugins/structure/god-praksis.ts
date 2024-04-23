@@ -1,67 +1,189 @@
-import { StructureBuilder } from "sanity/desk";
-import { FileXMarkIcon, TagIcon } from "@navikt/aksel-icons";
+import { StructureBuilder } from "sanity/structure";
+import { HouseIcon, PencilBoardIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import {
+  editorIsContributorFilter,
+  listMyDraftArticles,
+  listPublishedArticles,
+} from "./structure.util";
 
-/* documentStore is in Alpha, so avoid using for now */
-export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
-  let tema = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-    `*[_type == "aksel_tema"]{title,seksjoner, _id}`,
-  );
-  tema = tema
-    .map((x) => ({
-      title: x.title,
-      sider:
-        x.seksjoner?.reduce((b, n) => [...b, ...(n?.sider ?? [])], []) || [],
-      _id: x._id,
-    }))
-    .filter(
-      (x) =>
-        !(
-          x._id.startsWith("drafts") &&
-          tema.find((y) => y._id === x._id.replace("drafts.", ""))
-        ),
+export function gpStructure(S: StructureBuilder) {
+  return S.listItem()
+    .title("God praksis")
+    .icon(PencilBoardIcon)
+    .child(
+      S.list()
+        .title("God Praksis")
+        .items([
+          S.documentListItem()
+            .title(`Landingsside`)
+            .icon(HouseIcon)
+            .schemaType(`godpraksis_landingsside`)
+            .id(`godpraksis_landingsside_id1`),
+          S.divider(),
+          ...godPraksisPanes(S),
+        ]),
     );
+}
 
-  const ids = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
-    `*[_type == "aksel_artikkel"]{_id, tema}`,
-  );
-
+function godPraksisPanes(S: StructureBuilder) {
   return [
-    S.listItem()
-      .title(`Temasider (${tema.length})`)
-      .icon(TagIcon)
-      .child(S.documentTypeList("aksel_tema")),
+    listPublishedArticles(S, "aksel_artikkel"),
+    listMyDraftArticles(S, "aksel_artikkel"),
+
+    S.listItem({
+      id: "my_gp_outdated",
+      title: "Mine artikler som trenger oppdatering",
+      schemaType: "aksel_artikkel",
+      child: (_, { structureContext }) => {
+        const mail = structureContext.currentUser?.email;
+
+        return S.documentTypeList("aksel_artikkel")
+          .title("Artikler")
+          .filter(
+            `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365) && ${editorIsContributorFilter}`,
+          )
+          .apiVersion(SANITY_API_VERSION)
+          .params({ type: "aksel_artikkel", mail })
+          .initialValueTemplates([])
+          .defaultOrdering([
+            { field: "updateInfo.lastVerified", direction: "asc" },
+          ]);
+      },
+    }),
     S.divider(),
-    ...tema.map(({ title, _id }) =>
-      S.listItem()
-        .title(
-          `${title} (${
-            ids.filter(
-              (x) =>
-                x?.tema &&
-                x?.tema?.find?.((y) => y._ref === _id.replace("drafts.", "")),
-            ).length ?? 0
-          })`,
-        )
-        .child(
-          S.documentList()
-            .title(`${title}`)
-            .filter(`_type == 'aksel_artikkel' && $undertema in tema[]._ref`)
-            .params({ undertema: _id.replace("drafts.", "") })
-            .apiVersion(SANITY_API_VERSION),
-          /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
-        ),
-    ),
+    S.documentTypeListItem("gp.tema").title("Tema"),
+    S.listItem({
+      id: "tema_view",
+      title: "Undertema",
+      schemaType: "gp.tema.undertema",
+      child: () =>
+        S.documentTypeList("gp.tema")
+          .child((id) => {
+            return S.documentTypeList("gp.tema.undertema")
+              .title("Undertema")
+              .filter("_type == $type && tema._ref == $id")
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "gp.tema.undertema", id })
+              .initialValueTemplates([
+                S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
+                  id,
+                }),
+              ]);
+          })
+          .initialValueTemplates([]),
+    }),
+    S.documentTypeListItem("gp.innholdstype").title("Innholdstyper"),
     S.divider(),
-    S.listItem()
-      .title(`Artikler uten tema (${ids.filter((x) => !x?.tema).length ?? 0})`)
-      .icon(FileXMarkIcon)
-      .child(
-        S.documentList()
-          .title(`Artikler uten tema`)
-          .filter(`_type == 'aksel_artikkel' && !defined(tema)`)
-          .apiVersion(SANITY_API_VERSION),
-        /* .menuItems([...S.documentTypeList("aksel_artikkel").getMenuItems()]) */
-      ),
+    S.listItem({
+      id: "article_tema_complete_view",
+      title: "Tema -> Artikler",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("gp.tema")
+          .child((id) => {
+            return S.documentTypeList("aksel_artikkel")
+              .title("Artikler")
+              .filter("_type == $type && $id in undertema[]->tema._ref")
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "aksel_artikkel", id });
+          })
+          .initialValueTemplates([]),
+    }),
+    S.listItem({
+      id: "article_undertema_view",
+      title: "Tema -> Undertema -> Artikler",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("gp.tema")
+          .child((id) => {
+            return S.documentTypeList("gp.tema.undertema")
+              .title("Undertema")
+              .filter("_type == $type && tema._ref == $id")
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "gp.tema.undertema", id })
+              .child((undertema_id) => {
+                return S.documentTypeList("aksel_artikkel")
+                  .title("Artikler")
+                  .filter("_type == $type && $id in undertema[]._ref")
+                  .apiVersion(SANITY_API_VERSION)
+                  .params({ type: "aksel_artikkel", id: undertema_id })
+                  .initialValueTemplates([
+                    S.initialValueTemplateItem("gp.artikkel.by.undertema", {
+                      undertema_id,
+                    }),
+                  ]);
+              })
+              .initialValueTemplates([]);
+          })
+          .initialValueTemplates([]),
+    }),
+    S.listItem({
+      id: "article_innholdstype_view",
+      title: "Innholdstype -> Artikler",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("gp.innholdstype")
+          .child((id) => {
+            return S.documentTypeList("aksel_artikkel")
+              .title("Artikler")
+              .filter("_type == $type && $id == innholdstype._ref")
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "aksel_artikkel", id })
+              .initialValueTemplates([
+                S.initialValueTemplateItem("gp.artikkel.by.innholdstype", {
+                  id,
+                }),
+              ]);
+          })
+          .initialValueTemplates([]),
+    }),
+    S.divider(),
+    S.listItem({
+      id: "article_no_undertema_view",
+      title: "Uten undertema",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("aksel_artikkel")
+          .title("Artikler")
+          .filter("_type == $type && !defined(undertema)")
+          .apiVersion(SANITY_API_VERSION)
+          .params({ type: "aksel_artikkel" })
+          .initialValueTemplates([]),
+    }),
+
+    S.listItem({
+      id: "article_no_innholdstype_view",
+      title: "Uten innholdstype",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("aksel_artikkel")
+          .title("Artikler")
+          .filter("_type == $type && !defined(innholdstype)")
+          .apiVersion(SANITY_API_VERSION)
+          .params({ type: "aksel_artikkel" })
+          .initialValueTemplates([]),
+    }),
+    S.listItem({
+      id: "article_gp_outdated_tema",
+      title: "Trenger oppdatering",
+      schemaType: "aksel_artikkel",
+      child: () =>
+        S.documentTypeList("gp.tema")
+          .child((id) => {
+            return S.documentTypeList("aksel_artikkel")
+              .title("Artikler")
+              .filter(
+                `_type == $type && $id in undertema[]->tema._ref && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*365)`,
+              )
+              .apiVersion(SANITY_API_VERSION)
+              .params({ type: "aksel_artikkel", id })
+              .initialValueTemplates([])
+              .defaultOrdering([
+                { field: "updateInfo.lastVerified", direction: "asc" },
+              ]);
+          })
+          .initialValueTemplates([]),
+    }),
   ];
-};
+}

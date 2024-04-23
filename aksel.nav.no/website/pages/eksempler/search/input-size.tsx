@@ -3,10 +3,9 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <form>
+    <form role="search">
       <Search
         label="Hva er artikkelnummeret til denne varen?"
-        description="Art.nr. finner du på varens produktside eller i katalogen."
         hideLabel={false}
         htmlSize="12"
       />
