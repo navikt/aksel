@@ -149,9 +149,11 @@ export class DescendantsManager<
      * While the node is registered, we have to make sure to sync options
      * This is useful when ex. a node is disabled after it has been registered
      */
-    if (this.descendants.has(node)) {
+    const mapNode = this.descendants.get(node);
+    if (mapNode) {
       this.descendants.set(node, {
-        ...this.descendants.get(node),
+        index: mapNode.index,
+        node,
         ...options,
       } as Descendant<T, K>);
       return;

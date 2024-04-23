@@ -17,11 +17,6 @@ function useDescendants<
   K extends Record<string, any> = object,
 >() {
   const descendants = useRef(new DescendantsManager<T, K>()).current;
-  useClientLayoutEffect(() => {
-    return () => {
-      descendants.destroy();
-    };
-  });
 
   return descendants;
 }

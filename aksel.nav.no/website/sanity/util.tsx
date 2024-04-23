@@ -20,14 +20,6 @@ export const getTemplates = () => {
         subtitle: "Fagartikkel",
       },
     ],
-    tema_ansvarlig: [
-      {
-        title: "God praksis tema",
-        id: "temaAnsvarligRole",
-        templateId: "aksel_tema",
-        subtitle: "Nytt god-praksis tema",
-      },
-    ],
     blogger: [
       {
         title: "Bloggpost",

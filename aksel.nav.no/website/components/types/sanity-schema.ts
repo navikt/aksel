@@ -13,25 +13,13 @@ export type ResolveContributorsT<T> = Omit<T, "contributors"> & {
   contributors: { title: string }[];
 };
 
-export type ResolveContributorsSingleT<T> = Omit<T, "contributors"> & {
-  contributor: { title: string };
-};
-
-export type ResolveTemaT<T> = Omit<T, "tema"> & {
-  tema: string[];
-};
-
 export type ResolveRelatedArticlesT<T> = Omit<T, "relevante_artikler"> & {
-  relevante_artikler?: ResolveContributorsSingleT<
-    ResolveSlugT<
-      ResolveTemaT<
-        | AkselBloggDocT
-        | AkselGodPraksisDocT
-        | AkselKomponentDocT
-        | AkselGrunnleggendeDocT
-      >
-    >
-  >[];
+  relevante_artikler?: {
+    heading: string;
+    ingress: string;
+    slug: string;
+    innholdstype: string;
+  }[];
 };
 
 type DocumentT<T> = {
@@ -199,24 +187,6 @@ export interface AkselLandingPageDocT
 export interface AkselGodPraksisLandingPageDocT
   extends DocumentT<"godpraksis_landingsside"> {
   intro: any[];
-  seo?: ArticleT["seo"];
-}
-
-export interface AkselTemaT extends DocumentT<"aksel_tema"> {
-  title: string;
-  oppsummering?: string;
-  beskrivelse?: any;
-  refCount?: number;
-  slug: { current: string };
-  ansvarlig?: { _ref: string };
-  seksjoner: ArrayObjectT<{
-    title: string;
-    beskrivelse: any;
-    sider: ResolveContributorsSingleT<
-      ResolveTemaT<ResolveSlugT<AkselGodPraksisDocT>>
-    >[];
-  }>[];
-  pictogram: any;
   seo?: ArticleT["seo"];
 }
 

@@ -1,5 +1,23 @@
 # @navikt/ds-css
 
+## 6.6.1
+
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
+## 6.5.0
+
+## 6.4.1
+
+### Patch Changes
+
+- FileUpload: Item-illustrasjon er nå radius-full ([#2834](https://github.com/navikt/aksel/pull/2834))
+
+## 6.4.0
+
 ## 6.3.6
 
 ## 6.3.5

@@ -6,13 +6,13 @@ const Example = () => {
 
   return (
     <CheckboxGroup
-      legend="Hvor vil du sitte?"
+      legend="Transportmiddel"
       onChange={handleChange}
-      error="Feilmelding"
+      error="Du må velge minst ett transportmiddel."
     >
-      <Checkbox value="Bakerst">Bakerst</Checkbox>
-      <Checkbox value="Midterst">Midterst</Checkbox>
-      <Checkbox value="Fremst">Fremst</Checkbox>
+      <Checkbox value="car">Bil</Checkbox>
+      <Checkbox value="taxi">Drosje</Checkbox>
+      <Checkbox value="public">Kollektivt</Checkbox>
     </CheckboxGroup>
   );
 };

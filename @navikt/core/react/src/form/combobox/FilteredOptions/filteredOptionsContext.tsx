@@ -97,9 +97,17 @@ export const FilteredOptionsProvider = ({
           [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
             ? toComboboxOption(value)
             : undefined,
+          ...customOptions.reduce(
+            (acc, customOption) => ({
+              ...acc,
+              [filteredOptionsUtils.getOptionId(id, customOption.label)]:
+                customOption,
+            }),
+            {},
+          ),
         },
       ),
-    [allowNewValues, id, options, value],
+    [allowNewValues, customOptions, id, options, value],
   );
 
   useClientLayoutEffect(() => {

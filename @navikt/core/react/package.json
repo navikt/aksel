@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.3.6",
+  "version": "6.6.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -24,7 +24,8 @@
     "/cjs",
     "/esm",
     "/src",
-    "!**/*.tsbuildinfo"
+    "!**/*.tsbuildinfo",
+    "!**/*.stories.*"
   ],
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -549,6 +550,16 @@
         "default": "./cjs/form/file-upload/index.js"
       }
     },
+    "./FormSummary": {
+      "import": {
+        "types": "./esm/form/form-summary/index.d.ts",
+        "default": "./esm/form/form-summary/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/form-summary/index.d.ts",
+        "default": "./cjs/form/form-summary/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -562,10 +573,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^6.3.6",
-    "@navikt/ds-tokens": "^6.3.6",
-    "@radix-ui/react-tabs": "1.0.0",
-    "@radix-ui/react-toggle-group": "1.0.0",
+    "@navikt/aksel-icons": "^6.6.1",
+    "@navikt/ds-tokens": "^6.6.1",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.0"
