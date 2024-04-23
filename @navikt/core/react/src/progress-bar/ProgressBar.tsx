@@ -9,7 +9,7 @@ interface ProgressBarPropsBase
    */
   size?: "large" | "medium" | "small";
   /**
-   * Current progress.
+   * Current progress. When duration is set, value is ignored.
    */
   value: number;
   /**
@@ -18,7 +18,8 @@ interface ProgressBarPropsBase
   valueMax: number;
   /**
    * Expected task duration in seconds.
-   * ProgressBar shows an indeterminate animation after duration has passed.
+   * ProgressBar grows with a preset animation for {duration} seconds
+   * Afterwards, it shows an indeterminate animation.
    */
   duration?: number;
   /**
@@ -47,8 +48,6 @@ export type ProgressBarProps = ProgressBarPropsBase &
 
 /**
  * ProgressBar
- * - Shows the progress of a task or process.
- * - Visualizes the progression of a task or process.
  * - Visualizes how far along the user is in a process.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/progress-bar)
@@ -59,7 +58,7 @@ export type ProgressBarProps = ProgressBarPropsBase &
  * <ProgressBar value={20} valueMax={100} duration={12} />
  *
  * @example
- * // As a progress indicator for applications and similar
+ * // As a step indicator for forms, questionnaires, etc.
  * <ProgressBar value={2} valueMax={7} />
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
@@ -110,11 +109,12 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate":
-              Number.isInteger(duration),
+            "navds-progress-bar__foreground--indeterminate": !!duration,
           })}
           style={{
-            "--__ac-progress-bar-duration": `${duration}s`,
+            "--__ac-progress-bar-duration": duration
+              ? `${duration}s`
+              : undefined,
             "--__ac-progress-bar-translate": `-${translate}%`,
           }}
         />
