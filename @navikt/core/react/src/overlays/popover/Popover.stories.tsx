@@ -1,5 +1,5 @@
 import React from "react";
-import Portal from "../portal/Portal";
+import { Portal } from "../../portal";
 import { Popover } from "./Popover";
 
 export default { title: "Experimental/Popover" };
