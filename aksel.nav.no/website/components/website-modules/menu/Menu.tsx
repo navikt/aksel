@@ -8,7 +8,7 @@ import styles from "./Menu.module.css";
 type MenuProps = {
   children: React.ReactNode;
   loggingContext: "meny" | "toc";
-  variant: "sidebar" | "toc";
+  variant: "action" | "neutral";
 };
 
 const MenuContext = createContext<Omit<MenuProps, "children"> | null>(null);
@@ -97,9 +97,9 @@ export function MenuLink({
               !selected,
             "before:w-1": selected,
             "text-deepblue-700 before:bg-deepblue-700":
-              selected && ctx.variant === "sidebar",
+              selected && ctx.variant === "action",
             "text-text-default before:bg-gray-700":
-              selected && ctx.variant === "toc",
+              selected && ctx.variant === "neutral",
           },
         )}
       >
@@ -107,8 +107,9 @@ export function MenuLink({
           className={cl(
             "w-full rounded px-2 py-1 transition-colors duration-100 ease-out",
             {
-              "bg-surface-selected": selected && ctx.variant === "sidebar",
-              "bg-surface-neutral-subtle": selected && ctx.variant === "toc",
+              "bg-surface-selected": selected && ctx.variant === "action",
+              "bg-surface-neutral-subtle":
+                selected && ctx.variant === "neutral",
               "bg-transparent": !selected,
             },
           )}

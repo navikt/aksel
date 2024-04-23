@@ -19,7 +19,7 @@ export const MenuDemo: Story = {
   render: () => {
     const [selected, setSelected] = useState(0);
     return (
-      <Menu loggingContext="meny" variant="sidebar">
+      <Menu loggingContext="meny" variant="action">
         <>
           <MenuHeading as="div">Primitives</MenuHeading>
           <ul onClick={() => setSelected((x) => (x === 0 ? 1 : 0))}>
@@ -56,14 +56,14 @@ export const MenuDemo: Story = {
   args: {
     children: null,
     loggingContext: "meny",
-    variant: "sidebar",
+    variant: "action",
   },
 };
 
 export const NestedMenuDemo: Story = {
   render: () => {
     return (
-      <Menu loggingContext="toc" variant="toc">
+      <Menu loggingContext="toc" variant="action">
         <MenuHeading as="h2">Innhold på siden</MenuHeading>
         <MenuUl>
           <MenuLi>
@@ -103,6 +103,6 @@ export const NestedMenuDemo: Story = {
   args: {
     children: null,
     loggingContext: "toc",
-    variant: "toc",
+    variant: "neutral",
   },
 };

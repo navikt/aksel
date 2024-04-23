@@ -20,7 +20,7 @@ const Sidebar = ({
         as="nav"
         className="w-sidebar shrink-0 self-start"
       >
-        <Menu loggingContext="meny" variant="sidebar">
+        <Menu loggingContext="meny" variant="action">
           <ul className="space-y-6">
             {links.map((section) => (
               <Section key={section.value} section={section} />
