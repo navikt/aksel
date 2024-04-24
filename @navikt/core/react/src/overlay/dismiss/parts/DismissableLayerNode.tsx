@@ -81,7 +81,6 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }, [descendants, index]);
 
   /**
-   * Handles the case where a DismissableLayer wrapped around a Popover, Tooltip etc.
    * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
    *
    * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
@@ -148,6 +147,9 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
       return;
     }
 
+    /**
+     * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+     */
     onPointerDownOutside?.(event);
     onInteractOutside?.(event);
 
@@ -169,6 +171,9 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
       return;
     }
 
+    /**
+     * We call these before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+     */
     onFocusOutside?.(event);
     onInteractOutside?.(event);
 
@@ -200,6 +205,9 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
       return;
     }
 
+    /**
+     * We call this before letting `handleOutsideEvent` do its checks to give consumer a chance to preventDefault based certain cases.
+     */
     onEscapeKeyDown?.(event);
     /**
      * `onEscapeKeyDown` is able to preventDefault the event, thus stopping call for `onDismiss`.
