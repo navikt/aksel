@@ -18,7 +18,7 @@ interface ProgressBarPropsBase
   valueMax: number;
   /**
    * Expected task duration in seconds.
-   * ProgressBar grows with a preset animation for {duration} seconds
+   * ProgressBar grows with a preset animation for {duration} seconds.
    * After a 4 sec delay, it then shows an indeterminate animation.
    * A duration of 0 will show an indeterminate animation immediately.
    */
