@@ -105,17 +105,27 @@ Sizes.args = {
 
 export const IndeterminateState: Story = {
   render: () => {
-    const values = [0, 25, 50, 75, 100];
+    const values = [2, 5, 10, 20];
     return (
       <>
-        {values.map((value, index) => (
+        <p id="progress-bar-label-immediate-indeterminate">
+          Duration prop satt til 0 sek
+        </p>
+        <ProgressBar
+          valueMax={100}
+          duration={0}
+          size="medium"
+          value={50}
+          aria-labelledby="progress-bar-label-immediate-indeterminate"
+        />
+        {values.map((value) => (
           <div key={value}>
             <p id={`progress-bar-label-${value}`}>
-              Nå laster det veldig veldig veldig
+              duration-prop satt til {value} sek
             </p>
             <ProgressBar
               valueMax={100}
-              duration={5 * index + 1}
+              duration={5 * value}
               size="medium"
               value={value}
               aria-labelledby={`progress-bar-label-${value}`}

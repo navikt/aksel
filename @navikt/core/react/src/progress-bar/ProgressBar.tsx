@@ -19,7 +19,8 @@ interface ProgressBarPropsBase
   /**
    * Expected task duration in seconds.
    * ProgressBar grows with a preset animation for {duration} seconds
-   * Afterwards, it shows an indeterminate animation.
+   * After a 4 sec delay, it then shows an indeterminate animation.
+   * A duration of 0 will show an indeterminate animation immediately.
    */
   duration?: number;
   /**
@@ -109,12 +110,14 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate": !!duration,
+            "navds-progress-bar__foreground--indeterminate":
+              Number.isInteger(duration),
           })}
           style={{
-            "--__ac-progress-bar-duration": duration
+            "--__ac-progress-bar-duration": Number.isInteger(duration)
               ? `${duration}s`
               : undefined,
+            "--__ac-progress-bar-delay": `${duration === 0 ? 0 : 4}s`,
             "--__ac-progress-bar-translate": `-${translate}%`,
           }}
         />
