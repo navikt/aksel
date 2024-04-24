@@ -310,6 +310,16 @@
         "default": "./cjs/popover/index.js"
       }
     },
+    "./ProgressBar": {
+      "import": {
+        "types": "./esm/progress-bar/index.d.ts",
+        "default": "./esm/progress-bar/index.js"
+      },
+      "require": {
+        "types": "./cjs/progress-bar/index.d.ts",
+        "default": "./cjs/progress-bar/index.js"
+      }
+    },
     "./Provider": {
       "import": {
         "types": "./esm/provider/index.d.ts",
