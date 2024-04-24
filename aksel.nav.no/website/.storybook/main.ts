@@ -11,6 +11,8 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
+const indexRegex = /export const args = {\s+index: (\d+),/;
+
 const config: StorybookConfig = {
   experimental_indexers: (indexers) => {
     const csfIndexer = async (fileName: string, opts) => {
@@ -24,18 +26,25 @@ const config: StorybookConfig = {
       const isTemplate = fileName.toLowerCase().includes("templates");
       const templatesOrExamples = isTemplate ? "Templates" : "Eksempler";
 
+      const matches = indexRegex.exec(code);
+      const prefix = matches ? `${matches[1]} | ` : "";
+
       code = code.split(
         /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
       )[0];
 
-      code += `\nexport default { title: "${templatesOrExamples}/${fileName
+      const folderAndName = fileName
         .split(`pages/${templatesOrExamples.toLowerCase()}/`)[1]
-        .replace(".tsx", "")}"  };\n`;
+        .replace(".tsx", "")
+        .split("/");
+      const folder = folderAndName[0];
+      const name = folderAndName[1];
+      const storyName = `${prefix}${name}`;
 
-      code += `\nexport const Demo = {\n
-        render: Example,\n
-      };
-      `;
+      code += `
+        export default { title: "${templatesOrExamples}/${folder}/${storyName}" };
+        export const Demo = { render: Example };
+        Demo.storyName = "${storyName}";`;
 
       return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };

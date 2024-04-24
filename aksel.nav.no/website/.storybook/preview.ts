@@ -27,6 +27,18 @@ const preview: Preview = {
         },
       ],
     },
+    options: {
+      storySort: (a, b) => {
+        const aIndex = parseInt(a.name.split(" | ")[0]);
+        const bIndex = parseInt(b.name.split(" | ")[0]);
+
+        if (isNaN(aIndex) || isNaN(bIndex)) {
+          return undefined;
+        }
+
+        return aIndex - bIndex;
+      },
+    },
   },
 };
 
