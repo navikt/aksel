@@ -21,5 +21,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "'truncate' gjør at teksten kuttes ved én linje. Pass på så du ikke gjemmer viktig informasjon som man ikke kan finne andre steder.",
+  desc: "'truncate' gjør at teksten kuttes ved enden av første linje. Pass på så du ikke gjemmer viktig informasjon som man ikke kan finne andre steder.",
 };

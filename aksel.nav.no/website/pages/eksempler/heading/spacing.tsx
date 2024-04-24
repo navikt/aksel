@@ -22,5 +22,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Propen 'spacing' øker avstanden til neste element. Avstanden varierer avhengig av 'size'.",
+  desc: "Propen 'spacing' legger til mellomrom under overskriften. Avstanden varierer avhengig av 'size'.",
 };
