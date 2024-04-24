@@ -5,7 +5,7 @@ import {
 } from "../DismissableLayer.context";
 
 /**
- * `DismissableRoot´ is only needed to initialize the `Descendants` API for the root layer.
+ * `DismissableRoot´ is used to initialize the `Descendants`-API at the root layer.
  */
 const DismissableRoot = ({ children }: { children: React.ReactNode }) => {
   const descendants = useDismissableDescendants();

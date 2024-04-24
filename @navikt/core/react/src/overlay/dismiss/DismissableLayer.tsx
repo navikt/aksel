@@ -11,7 +11,7 @@ const DismissableLayer: React.FC<DismissableLayerProps> = (
 
   /**
    * To correctly handle nested DismissableLayer,
-   * we make sure to only initialize `Descendants` API for the root layer.
+   * we only initialize the `Descendants`-API for the root layer to aboid resetting context
    */
   return context ? (
     <DismissableLayerNode {...props} />

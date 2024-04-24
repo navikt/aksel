@@ -16,13 +16,13 @@ let originalBodyPointerEvents: string;
 const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   children,
   asChild,
-  disableOutsidePointerEvents = false,
   onEscapeKeyDown,
   onPointerDownOutside,
   onFocusOutside,
   onInteractOutside,
   onDismiss,
   safeZone,
+  disableOutsidePointerEvents = false,
   enabled = true,
   ...rest
 }: DismissableLayerProps) => {
@@ -33,10 +33,18 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
 
   /**
    * `node` will be set to the ref of the component or nested component
-   * Ex: If `<DismissableLayer asChild>` is used around the Popover-element,
-   * `node` will be set to the Popover-element.
+   * Ex: If
+   * ```
+   * <DismissableLayer asChild>
+   *   <Popover />
+   * </DismissableLayer>
+   * ```
+   * `node` will in this case be the Popover-element.
+   * We use State her and not ref since we want to trigger a rerender when the node changes.
    */
   const [node, setNode] = useState<HTMLDivElement | null>(null);
+
+  const mergedRefs = useMergeRefs((_node) => setNode(_node), register);
 
   /**
    * In some cases the `node.ownerDocument` can differ from global document.
@@ -44,15 +52,14 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
    */
   const ownerDocument = node?.ownerDocument ?? globalThis?.document;
 
-  const mergedRefs = useMergeRefs((_node) => setNode(_node), register);
-
   const hasInteractedOutsideRef = useRef(false);
   const hasPointerDownOutsideRef = useRef(false);
 
   const pointerEnabled = useMemo(() => {
     let lastIndex = -1;
 
-    descendants.values().forEach((obj, _index) => {
+    const descendantNodes = descendants.values();
+    descendantNodes.forEach((obj, _index) => {
       if (obj.disableOutsidePointerEvents) {
         lastIndex = _index;
       }
@@ -64,9 +71,12 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
        * If not checked, we risk closing every layer when clicking outside the layer.
        */
       isPointerEventsEnabled: index >= lastIndex,
-      isBodyPointerEventsDisabled: descendants
-        .values()
-        .find((x) => !!x.disableOutsidePointerEvents),
+      /**
+       * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
+       */
+      isBodyPointerEventsDisabled: descendantNodes.find(
+        (x) => !!x.disableOutsidePointerEvents,
+      ),
     };
   }, [descendants, index]);
 
