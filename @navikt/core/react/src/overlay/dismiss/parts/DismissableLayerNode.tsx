@@ -81,10 +81,10 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }, [descendants, index]);
 
   /**
-   * Handles the case where a DismissableLayer outside a Popover or Tooltip is open.
-   * We want to prevent the DismissableLayer from closing when the trigger or anchor element itself, or its child elements are interacted with.
+   * Handles the case where a DismissableLayer wrapped around a Popover, Tooltip etc.
+   * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
    *
-   * To achieve this, we check if the event target is the trigger/anchor or a child. If it is, we prevent the default event behavior.
+   * To achieve this, we check if the event target is the trigger, anchor or a child. If it is, we prevent default event behavior.
    *
    * The `pointerDownOutside` and `focusOutside` handlers already check if the event target is within the DismissableLayer (`node`).
    * However, since we don't add a `tabIndex` to the Popover/Tooltip, the `focusOutside` handler doesn't correctly handle focus events.
@@ -93,7 +93,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   function handleOutsideEvent(
     event: CustomFocusEvent | CustomPointerDownEvent,
   ) {
-    if (!safeZone?.anchor && !safeZone?.dismissable) {
+    if ((!safeZone?.anchor && !safeZone?.dismissable) || !enabled) {
       return;
     }
 
@@ -131,7 +131,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
      * 'focusoutside' event on the container.
      *
      * To handle this, we ignore any 'focusoutside' events if a 'pointerdownoutside' event has already occurred.
-     * This is because the 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
+     * 'pointerdownoutside' event is sufficient to indicate interaction outside the DismissableLayer.
      */
     if (
       event.detail.originalEvent.type === "focusin" &&
@@ -144,7 +144,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }
 
   const pointerDownOutside = usePointerDownOutside((event) => {
-    if (!pointerEnabled.isPointerEventsEnabled) {
+    if (!pointerEnabled.isPointerEventsEnabled || !enabled) {
       return;
     }
 
@@ -165,6 +165,10 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }, ownerDocument);
 
   const focusOutside = useFocusOutside((event) => {
+    if (!enabled) {
+      return;
+    }
+
     onFocusOutside?.(event);
     onInteractOutside?.(event);
 
@@ -182,6 +186,9 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   }, ownerDocument);
 
   useEscapeKeydown((event) => {
+    if (!enabled) {
+      return;
+    }
     /**
      * The deepest nested element will always be last in the descendants list.
      * This allows us to only close the highest layer when pressing escape.
@@ -209,7 +216,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
    * we want to disable pointer events on the body when the first layer is opened.
    */
   useEffect(() => {
-    if (!node || !disableOutsidePointerEvents || index !== 0) {
+    if (!node || !disableOutsidePointerEvents || index !== 0 || !enabled) {
       return;
     }
 
@@ -219,7 +226,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
     return () => {
       ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
     };
-  }, [node, ownerDocument, disableOutsidePointerEvents, index]);
+  }, [node, ownerDocument, disableOutsidePointerEvents, index, enabled]);
 
   const Comp = asChild ? Slot : "div";
 

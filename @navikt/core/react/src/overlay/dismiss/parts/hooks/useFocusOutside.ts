@@ -34,7 +34,7 @@ export function useFocusOutside(
         );
       }
     };
-    ownerDocument.addEventListener("focusin", handleFocus, {});
+    ownerDocument.addEventListener("focusin", handleFocus);
     return () => ownerDocument.removeEventListener("focusin", handleFocus);
   }, [ownerDocument, handleFocusOutside]);
 
