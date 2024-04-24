@@ -14,6 +14,7 @@ interface ProgressBarPropsBase
   value?: number;
   /**
    * Maximum progress.
+   * @default 100
    */
   valueMax?: number;
   /**
