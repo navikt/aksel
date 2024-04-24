@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useEffect, useState } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
@@ -76,17 +76,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     },
     ref,
   ) => {
-    const [isIndeterminate, setIsIndeterminate] = useState(false);
     const translate = 100 - (Math.round(value) / valueMax) * 100;
-
-    // Sets progress bar to indeterminate after the specified duration
-    useEffect(() => {
-      let timer: NodeJS.Timeout;
-      if (duration != null)
-        timer = setTimeout(() => setIsIndeterminate(true), duration * 1000);
-      else setIsIndeterminate(false);
-      return () => clearTimeout(timer);
-    }, [duration]);
 
     return (
       <div
@@ -96,10 +86,10 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           `navds-progress-bar--${size}`,
           className,
         )}
-        aria-valuemax={isIndeterminate ? 0 : Math.round(valueMax)}
-        aria-valuenow={isIndeterminate ? 0 : Math.round(value)}
+        aria-valuemax={duration ? 0 : Math.round(valueMax)}
+        aria-valuenow={duration ? 0 : Math.round(value)}
         aria-valuetext={
-          isIndeterminate
+          duration
             ? "Fremdrift kan ikke beregnes"
             : `${Math.round(value)} av ${Math.round(valueMax)}`
         }
