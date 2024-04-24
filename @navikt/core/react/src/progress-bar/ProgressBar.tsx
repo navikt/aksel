@@ -50,7 +50,7 @@ export type ProgressBarProps = ProgressBarPropsBase &
 
 /**
  * ProgressBar
- * - Visualizes how far along the user is in a process.
+ * A component for visualizing progression in a process.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/progress-bar)
  * @see 🏷️ {@link ProgressBarProps}
