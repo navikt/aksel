@@ -1,11 +1,14 @@
-import { BodyShort } from "@navikt/ds-react";
+import { BodyShort, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
+
   return (
-    <BodyShort weight="semibold">
-      Du må gjøre en filtrering for å se brukere i listen.
-    </BodyShort>
+    <VStack gap="5">
+      <BodyShort weight="regular">Regular (default): {exampleText}</BodyShort>
+      <BodyShort weight="semibold">Semibold: {exampleText}</BodyShort>
+    </VStack>
   );
 };
 
