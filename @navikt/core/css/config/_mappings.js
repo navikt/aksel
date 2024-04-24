@@ -159,6 +159,7 @@ const StyleMappings = {
     },
     { component: "Panel", main: "panel.css" },
     { component: "Popover", main: "popover.css" },
+    { component: "ProgressBar", main: "progress-bar.css" },
     { component: "Provider", main: "" },
     { component: "Radio", main: formCss, dependencies: [typoCss] },
     { component: "RadioGroup", main: formCss, dependencies: [typoCss] },

@@ -5,17 +5,13 @@ import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import { UserStateT } from "@/auth/auth.types";
 import { getAuthUserState } from "@/auth/getUserState";
-import ArtikkelCard from "@/cms/cards/ArtikkelCard";
 import Footer from "@/layout/footer/Footer";
+import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import { GpTemaLink } from "@/layout/god-praksis-page/chipnavigation/GpTemaLink";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import {
-  contributorsAll,
-  contributorsSingle,
-  destructureBlocks,
-} from "@/sanity/queries";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
   NextPageT,
@@ -68,16 +64,10 @@ const query = `{
     },
     ${contributorsAll},
     relevante_artikler[]->{
-      _id,
       heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      updateInfo,
-      "slug": slug.current,
-      "tema": undertema[]->tema->title,
       ingress,
-      "contributor": ${contributorsSingle},
+      "slug": slug.current,
+      "innholdstype": innholdstype->title,
     }
   }
 }`;
@@ -160,11 +150,16 @@ const Page = ({
                 : `Relevante artikler`}
             </Heading>
             <div className="card-grid-3-1 mt-6 px-4">
-              {data.relevante_artikler.map((x: any) =>
-                x && x?._id ? (
-                  <ArtikkelCard level="3" {...x} key={x._id} />
-                ) : null,
-              )}
+              {data.relevante_artikler.map((x) => (
+                <GpArticleCard
+                  key={x.heading}
+                  href={x.slug}
+                  description={x.ingress}
+                  innholdstype={x.innholdstype}
+                >
+                  {x.heading}
+                </GpArticleCard>
+              ))}
             </div>
           </div>
         </div>
