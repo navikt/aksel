@@ -56,8 +56,8 @@ export type ProgressBarProps = ProgressBarPropsBase &
  * @see 🏷️ {@link ProgressBarProps}
  *
  * @example
- * // For loading content
- * <ProgressBar value={20} valueMax={100} duration={12} />
+ * // For loading content with an approximate duration in sec.
+ * <ProgressBar duration={30} />
  *
  * @example
  * // As a step indicator for forms, questionnaires, etc.
