@@ -2,17 +2,10 @@ import { BodyShort } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
-
   return (
-    <div>
-      <BodyShort size="small" spacing>
-        {lorem}
-      </BodyShort>
-      <BodyShort size="small" spacing>
-        {lorem}
-      </BodyShort>
-    </div>
+    <BodyShort weight="semibold">
+      Du må gjøre en filtrering for å se brukere i listen.
+    </BodyShort>
   );
 };
 
@@ -25,5 +18,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 1,
 };
