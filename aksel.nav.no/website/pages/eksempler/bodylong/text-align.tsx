@@ -1,19 +1,24 @@
-import { BodyLong } from "@navikt/ds-react";
+import { BodyLong, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
+  const exampleText =
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
   return (
-    <div>
-      <BodyLong size="small" spacing>
-        {lorem}
+    <VStack gap="5">
+      <BodyLong align="start">
+        <b>Start:</b> {exampleText}
       </BodyLong>
-      <BodyLong size="small" spacing>
-        {lorem}
+
+      <BodyLong align="center">
+        <b>Center:</b> {exampleText}
       </BodyLong>
-    </div>
+
+      <BodyLong align="end">
+        <b>End:</b> {exampleText}
+      </BodyLong>
+    </VStack>
   );
 };
 
