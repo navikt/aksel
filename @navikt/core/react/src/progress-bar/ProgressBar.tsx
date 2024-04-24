@@ -67,7 +67,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     {
       size = "medium",
       value = 0,
-      valueMax = 0,
+      valueMax = 100,
       duration,
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
