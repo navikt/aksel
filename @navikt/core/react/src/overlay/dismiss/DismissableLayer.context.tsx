@@ -1,10 +1,10 @@
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 
 export const [
-  DescendantsProvider,
-  useDescendantsContext,
-  useDescendants,
-  useDescendant,
+  DismissableDescendantsProvider,
+  useDismissableDescendantsContext,
+  useDismissableDescendants,
+  useDismissableDescendant,
 ] = createDescendantContext<
   HTMLDivElement,
   { disableOutsidePointerEvents: boolean }

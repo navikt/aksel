@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Slot } from "../../../util/Slot";
 import { useMergeRefs } from "../../../util/hooks";
-import { useDescendant } from "../DismissableLayer.context";
+import { useDismissableDescendant } from "../DismissableLayer.context";
 import {
   CustomFocusEvent,
   CustomPointerDownEvent,
@@ -26,7 +26,7 @@ const DismissableLayerNode: React.FC<DismissableLayerProps> = ({
   enabled = true,
   ...rest
 }: DismissableLayerProps) => {
-  const { register, index, descendants } = useDescendant({
+  const { register, index, descendants } = useDismissableDescendant({
     disableOutsidePointerEvents,
     disabled: !enabled,
   });
