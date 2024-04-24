@@ -11,11 +11,11 @@ interface ProgressBarPropsBase
   /**
    * Current progress. When duration is set, value is ignored.
    */
-  value: number;
+  value?: number;
   /**
    * Maximum progress.
    */
-  valueMax: number;
+  valueMax?: number;
   /**
    * Expected task duration in seconds.
    * ProgressBar grows with a preset animation for {duration} seconds.
@@ -66,8 +66,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   (
     {
       size = "medium",
-      value,
-      valueMax,
+      value = 0,
+      valueMax = 0,
       duration,
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
