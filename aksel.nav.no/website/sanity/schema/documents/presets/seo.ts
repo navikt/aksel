@@ -45,8 +45,13 @@ const BaseSEOPreset = {
       },
       validation: (Rule) =>
         Rule.custom((image) => {
+          if (!image) {
+            return true;
+          }
+
           const decode = decodeAssetId(image.asset._ref);
-          if (!image || !decode) {
+
+          if (!decode) {
             return true;
           }
 
