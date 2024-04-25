@@ -33,12 +33,10 @@ const config: StorybookConfig = {
         /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
       )[0];
 
-      const folderAndName = fileName
+      const [folder, name] = fileName
         .split(`pages/${templatesOrExamples.toLowerCase()}/`)[1]
         .replace(".tsx", "")
         .split("/");
-      const folder = folderAndName[0];
-      const name = folderAndName[1];
       const storyName = `${prefix}${name}`;
 
       code += `
