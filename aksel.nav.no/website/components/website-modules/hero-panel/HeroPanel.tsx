@@ -4,11 +4,9 @@ import styles from "./HeroPanel.module.css";
 
 type HeroPanelProps = {
   children: React.ReactNode;
-  variant: "god-praksis" | "komponent";
+  variant: "god-praksis" | "god-praksis-inverted" | "komponent";
   style?: React.CSSProperties;
   className?: string;
-  colorFrom: string;
-  colorTo: string;
 };
 
 /**
@@ -16,21 +14,11 @@ type HeroPanelProps = {
  */
 export const HeroPanel = forwardRef<HTMLDivElement, HeroPanelProps>(
   (
-    {
-      children,
-      variant,
-      style: _style,
-      className,
-      colorFrom,
-      colorTo,
-      ...rest
-    }: HeroPanelProps,
+    { children, variant, style: _style, className, ...rest }: HeroPanelProps,
     ref,
   ) => {
     const style: React.CSSProperties = {
       ..._style,
-      "--gradient-color-from": colorFrom,
-      "--gradient-color-to": colorTo,
     };
 
     return (
@@ -45,6 +33,7 @@ export const HeroPanel = forwardRef<HTMLDivElement, HeroPanelProps>(
           styles.heroGradient,
           {
             "ring-teal-400": variant === "god-praksis",
+            "ring-teal-500": variant === "god-praksis-inverted",
           },
         )}
         style={style}

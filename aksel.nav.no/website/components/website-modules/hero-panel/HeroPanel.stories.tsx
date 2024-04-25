@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const GodPraksis: Story = {
   args: {
     variant: "god-praksis",
+    children: "God praksis",
   },
 };
