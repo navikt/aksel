@@ -1,41 +1,56 @@
+import cl from "clsx";
 import { forwardRef } from "react";
+import styles from "./HeroPanel.module.css";
 
 type HeroPanelProps = {
+  children: React.ReactNode;
   variant: "god-praksis" | "komponent";
+  style?: React.CSSProperties;
+  className?: string;
+  colorFrom: string;
+  colorTo: string;
 };
 
 /**
  * HeroPanel generic for a unified hero-look across landing pages
  */
 export const HeroPanel = forwardRef<HTMLDivElement, HeroPanelProps>(
-  ({ variant, ...rest }: HeroPanelProps, ref) => {
+  (
+    {
+      children,
+      variant,
+      style: _style,
+      className,
+      colorFrom,
+      colorTo,
+      ...rest
+    }: HeroPanelProps,
+    ref,
+  ) => {
+    const style: React.CSSProperties = {
+      ..._style,
+      "--gradient-color-from": colorFrom,
+      "--gradient-color-to": colorTo,
+    };
+
     return (
-      <div data-variant={variant} ref={ref} {...rest}>
-        panel
+      <div
+        {...rest}
+        ref={ref}
+        data-variant={variant}
+        className={cl(
+          className,
+          "rounded-large px-4 pb-6 pt-10 ring-1 lg:px-10",
+          "transition-[margin] duration-500",
+          styles.heroGradient,
+          {
+            "ring-teal-400": variant === "god-praksis",
+          },
+        )}
+        style={style}
+      >
+        {children}
       </div>
     );
   },
 );
-
-/*
-<Box
-      background="surface-alt-3-subtle"
-      borderRadius="large"
-      paddingInline={{ xs: "4", lg: "10" }}
-      paddingBlock="10 6"
-      className={cl(
-        "relative ring-1 ring-teal-400 transition-[margin] duration-500",
-        styles.heroGradient,
-      )}
-      style={{
-        marginBottom: getMargin(),
-        transitionTimingFunction: open
-          ? "cubic-bezier(0.3, 0, 0.15, 1)"
-          : "cubic-bezier(0, 0.3, 0.15, 1)",
-      }}
-      ref={(el) => {
-        setWrapperHeight(el?.getBoundingClientRect().height || 0);
-      }}
-    >
-
-*/
