@@ -31,7 +31,7 @@ export const HeroPanel = forwardRef<HTMLDivElement, HeroPanelProps>(
         data-variant={variant}
         className={cl(
           className,
-          "rounded-large px-4 pb-6 pt-10 ring-1 lg:px-10",
+          "rounded-large px-4 py-6 ring-1 ring-inset lg:px-10 lg:py-10",
           "transition-[margin] duration-500",
           styles.heroGradient,
           {

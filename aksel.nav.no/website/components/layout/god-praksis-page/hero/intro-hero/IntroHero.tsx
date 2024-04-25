@@ -1,7 +1,6 @@
-import cl from "clsx";
-import { Box, Heading } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
-import styles from "../Hero.module.css";
+import { HeroPanel } from "@/web/hero-panel/HeroPanel";
 
 type GpIntroHeroProps = {
   title: string;
@@ -10,22 +9,13 @@ type GpIntroHeroProps = {
 
 function IntroHero({ title, children }: GpIntroHeroProps) {
   return (
-    <Box
-      background="surface-alt-3-subtle"
-      borderRadius="large"
-      paddingInline={{ xs: "4", lg: "10" }}
-      paddingBlock={{ xs: "6", lg: "10" }}
-      className={cl(
-        "relative isolate ring-1 ring-inset ring-teal-400",
-        styles.heroGradient,
-      )}
-    >
+    <HeroPanel variant="god-praksis" className="relative isolate">
       <Cube />
-      <Heading level="1" size="xlarge" className="relative z-10 mt-2">
+      <Heading level="1" size="xlarge" className="relative z-10">
         {title}
       </Heading>
       <div className="relative z-10">{children}</div>
-    </Box>
+    </HeroPanel>
   );
 }
 

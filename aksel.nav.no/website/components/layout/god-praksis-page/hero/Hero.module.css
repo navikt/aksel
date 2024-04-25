@@ -17,11 +17,3 @@
     clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
   }
 }
-
-.heroGradient {
-  background: linear-gradient(85deg, #5eead4 0%, #99f6e4 48%, #99f6e4 100%);
-}
-
-.heroGradientOpen {
-  background: linear-gradient(265deg, #14b8a6 0%, #2dd4bf 48.5%, #2dd4bf 100%);
-}
