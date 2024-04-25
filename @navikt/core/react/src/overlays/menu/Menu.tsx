@@ -27,11 +27,16 @@
  * MenuRadioItem is a radio button
  * MenuCheckbox is a checkbox. Checkboxes can be standalone so no fieldset needed
  */
-import React, { forwardRef, useCallback } from "react";
-import { useCallbackRef } from "../../util/hooks";
+import React, { forwardRef, useCallback, useRef } from "react";
+import DismissableLayer from "../../overlay/dismiss/DismissableLayer";
+import { DismissableLayerProps } from "../../overlay/dismiss/DismissableLayer.types";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { useCallbackRef, useMergeRefs } from "../../util/hooks";
+import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import Floating from "../floating/Floating";
 import { FloatingAnchorProps } from "../floating/parts/Anchor";
-import { MenuProvider } from "./Menu.context";
+import { FloatingContentProps } from "../floating/parts/Content";
+import { MenuProvider, useMenuContext } from "./Menu.context";
 import { MenuContentType } from "./Menu.types";
 
 /**
@@ -89,13 +94,135 @@ export const MenuTrigger = forwardRef<
 /**
  * Content
  */
-interface MenuContentProps {
-  children: React.ReactNode;
+interface MenuContentProps extends FloatingContentProps {
+  onFocusOutside?: DismissableLayerProps["onFocusOutside"];
 }
 
+export const [
+  MenuContentDescendantsProvider,
+  useMenuContentDescendantsContext,
+  useMenuContentDescendants,
+  useMenuContentDescendant,
+] = createDescendantContext<HTMLElement>();
+
 export const MenuContent = ({ children }: MenuContentProps) => {
-  return <div>{children}</div>;
+  const descendants = useMenuContentDescendants();
+
+  return (
+    <MenuContentDescendantsProvider value={descendants}>
+      {children}
+    </MenuContentDescendantsProvider>
+  );
 };
+
+/* Cotent Impl */
+
+/*  <MenuContentImpl
+        {...props}
+        ref={composedRefs}
+        // we make sure we're not trapping once it's been closed
+        // (closed !== unmounted when animating out)
+        trapFocus={context.open}
+        // make sure to only disable pointer events when open
+        // this avoids blocking interactions while animating out
+        disableOutsidePointerEvents={context.open}
+        disableOutsideScroll
+        // When focus is trapped, a `focusout` event may still happen.
+        // We make sure we don't trigger our `onDismiss` in such case.
+        onFocusOutside={composeEventHandlers(
+          props.onFocusOutside,
+          (event) => event.preventDefault(),
+          { checkForDefaultPrevented: false }
+        )}
+        onDismiss={() => context.onOpenChange(false)}
+      /> */
+
+/**
+ * TODO:
+ * - Implement rowing keyboard nav
+ * - Focusgroup/lock
+ */
+export const MenuContentImpl = forwardRef<
+  React.ElementRef<typeof Floating.Content>,
+  MenuContentProps
+>(({ children, style, onFocusOutside, ...rest }: MenuContentProps, ref) => {
+  const context = useMenuContext();
+  const _ref = useRef<HTMLDivElement>(null);
+
+  const composedRefs = useMergeRefs(ref, _ref);
+
+  /* https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L435 */
+  return (
+    <DismissableLayer
+      asChild
+      disableOutsidePointerEvents={context.open}
+      /* TODO: Fix support for custom types */
+      onFocusOutside={composeEventHandlers<any>(
+        onFocusOutside,
+        (event) => event.preventDefault(),
+        { checkForDefaultPrevented: false },
+      )}
+      onDismiss={() => context.onOpenChange(false)}
+    >
+      <Floating.Content
+        role="menu"
+        aria-orientation="vertical"
+        data-state={context.open ? "open" : "closed"}
+        {...rest}
+        ref={composedRefs}
+        style={{ outline: "none", ...style }}
+        /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
+        // submenu key events bubble through portals. We only care about keys in this menu.
+        const target = event.target as HTMLElement;
+        const isKeyDownInside =
+          target.closest("[data-radix-menu-content]") === event.currentTarget;
+        const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+        const isCharacterKey = event.key.length === 1;
+        if (isKeyDownInside) {
+          // menus should not be navigated using tab key so we prevent it
+          if (event.key === "Tab") event.preventDefault();
+          if (!isModifierKey && isCharacterKey)
+            handleTypeaheadSearch(event.key);
+        }
+        // focus first/last item based on key pressed
+        const content = contentRef.current;
+        if (event.target !== content) return;
+        if (!FIRST_LAST_KEYS.includes(event.key)) return;
+        event.preventDefault();
+        const items = getItems().filter((item) => !item.disabled);
+        const candidateNodes = items.map((item) => item.ref.current!);
+        if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
+        focusFirst(candidateNodes);
+      })} */
+        /* onBlur={composeEventHandlers(props.onBlur, (event) => {
+        // clear search buffer when leaving the menu
+        if (!event.currentTarget.contains(event.target)) {
+          window.clearTimeout(timerRef.current);
+          searchRef.current = "";
+        }
+      })} */
+        /* onPointerMove={composeEventHandlers(
+        props.onPointerMove,
+        whenMouse((event) => {
+          const target = event.target as HTMLElement;
+          const pointerXHasChanged = lastPointerXRef.current !== event.clientX;
+
+          // We don't use `event.movementX` for this check because Safari will
+          // always return `0` on a pointer event.
+          if (event.currentTarget.contains(target) && pointerXHasChanged) {
+            const newDir =
+              event.clientX > lastPointerXRef.current ? "right" : "left";
+            pointerDirRef.current = newDir;
+            lastPointerXRef.current = event.clientX;
+          }
+        }),
+      )} */
+      >
+        {children}
+      </Floating.Content>
+    </DismissableLayer>
+  );
+});
 
 /**
  * SubTrigger

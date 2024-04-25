@@ -29,7 +29,7 @@ import { FloatingArrow } from "./Arrow";
 
 type Boundary = Element | null;
 
-interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
+export interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   side?: Side;
   sideOffset?: number;
   align?: Align;
