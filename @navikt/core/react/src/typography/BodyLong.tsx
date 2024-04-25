@@ -8,12 +8,12 @@ export interface BodyLongProps
   extends TypoProps,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * large: 20px, medium: 18px, small: 16px
+   * large: 20px, medium: 18px, small: 16px.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
   /**
-   * Text
+   * Text.
    */
   children: React.ReactNode;
 }

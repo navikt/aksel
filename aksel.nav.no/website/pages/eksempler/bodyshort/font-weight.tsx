@@ -6,13 +6,8 @@ const Example = () => {
 
   return (
     <VStack gap="5">
-      <BodyShort textColor="default">
-        <b>Default:</b> {exampleText}
-      </BodyShort>
-
-      <BodyShort textColor="subtle">
-        <b>Subtle:</b> {exampleText}
-      </BodyShort>
+      <BodyShort weight="regular">Regular (default): {exampleText}</BodyShort>
+      <BodyShort weight="semibold">Semibold: {exampleText}</BodyShort>
     </VStack>
   );
 };
@@ -26,5 +21,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 1,
 };

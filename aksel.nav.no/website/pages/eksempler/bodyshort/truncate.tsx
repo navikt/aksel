@@ -2,12 +2,11 @@ import { BodyShort } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
-
   return (
-    <div>
-      <BodyShort spacing>{lorem}</BodyShort>
-      <BodyShort spacing>{lorem}</BodyShort>
+    <div style={{ maxWidth: "300px" }}>
+      <BodyShort truncate>
+        Du må gjøre en filtrering for å se brukere i listen.
+      </BodyShort>
     </div>
   );
 };
@@ -21,5 +20,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 2,
+  desc: "'truncate' gjør at teksten kuttes ved enden av første linje. Pass på så du ikke gjemmer viktig informasjon som man ikke kan finne andre steder.",
 };
