@@ -16,3 +16,10 @@ export const GodPraksis: Story = {
     children: "God praksis",
   },
 };
+
+export const GodPraksisInverted: Story = {
+  args: {
+    variant: "god-praksis-inverted",
+    children: "God praksis",
+  },
+};

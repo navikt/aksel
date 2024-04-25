@@ -1,12 +1,12 @@
 import cl from "clsx";
 import { CSSProperties, useCallback, useState } from "react";
-import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { HeroCardList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
 import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
 import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
 import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
+import { HeroPanel } from "@/web/hero-panel/HeroPanel";
 import styles from "../Hero.module.css";
 
 type GpTemaHeroProps = { tema: GpTemaT | null } & HeroNavT;
@@ -61,15 +61,9 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
   };
 
   return (
-    <Box
-      background="surface-alt-3-subtle"
-      borderRadius="large"
-      paddingInline={{ xs: "4", lg: "10" }}
-      paddingBlock="10 6"
-      className={cl(
-        "relative ring-1 ring-teal-400 transition-[margin] duration-500",
-        styles.heroGradient,
-      )}
+    <HeroPanel
+      variant="god-praksis"
+      className="relative"
       style={{
         marginBottom: getMargin(),
         transitionTimingFunction: open
@@ -94,23 +88,19 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
         image={tema?.image}
       />
 
-      <Box
-        borderRadius="large"
-        paddingInline={{ xs: "4", lg: "10" }}
-        paddingBlock="10 6"
+      <HeroPanel
+        variant="god-praksis-inverted"
         className={cl(
-          "absolute inset-0 z-20 overflow-clip ring-1 ring-teal-500",
+          "absolute inset-0 z-20 overflow-clip",
           styles.heroSelector,
-          styles.heroGradientOpen,
           {
             hidden: !open,
           },
         )}
-        shadow="medium"
         style={inlineStyles}
         role="dialog"
         aria-label="Temanavigasjon"
-        aria-modal="false"
+        aria-modal={false}
         ref={(el) => {
           setDialogHeight(el?.getBoundingClientRect().height || 0);
         }}
@@ -129,8 +119,8 @@ function TemaHero({ tema, heroNav }: GpTemaHeroProps) {
           heroNav={heroNav}
           setOpen={setOpen}
         />
-      </Box>
-    </Box>
+      </HeroPanel>
+    </HeroPanel>
   );
 }
 

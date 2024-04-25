@@ -7,6 +7,9 @@ type HeroPanelProps = {
   variant: "god-praksis" | "god-praksis-inverted" | "komponent";
   style?: React.CSSProperties;
   className?: string;
+  role?: "dialog";
+  "aria-label"?: string;
+  "aria-modal"?: boolean;
 };
 
 /**
