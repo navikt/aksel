@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import Button from "../../button/Button";
 import Collapsible from "../../collapsible/Collapsible";
 import { HStack } from "../../layout/stack";
+import { ProgressBar } from "../../progress-bar";
 import { Stepper } from "../../stepper";
 import { BodyShort } from "../../typography";
 import { useControllableState } from "../../util/hooks/useControllableState";
@@ -96,18 +97,17 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
         className={cl(className, "navds-form-progress")} // TODO: Vurder om dette klassenavnet trengs
         {...rest}
       >
-        <div>
-          <progress
-            value={activeStep}
-            max={totalSteps}
-            style={{ width: "100%" }}
-            // TODO: Bruk ProgressBar når merged
-          />
-        </div>
+        <ProgressBar
+          aria-label="Fremdrift" // TODO vurder
+          //aria-hidden
+          value={activeStep}
+          valueMax={totalSteps}
+          className="navds-form-progress__bar"
+        />
         <Collapsible open={_open} onOpenChange={_setOpen}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
-              Steg {activeStep} av {totalSteps}
+              {`Steg ${activeStep} av ${totalSteps}`}
             </BodyShort>
             <Collapsible.Trigger asChild>
               <Button
