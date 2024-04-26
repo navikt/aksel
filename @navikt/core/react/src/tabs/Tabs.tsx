@@ -78,7 +78,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
 
     const tabsContext = useTabs({ defaultValue, value, onChange, id });
 
-    /**
+    /**#
      * TabsProvider handles memoization of context values, so we can safely skip it here.
      */
     const context = {

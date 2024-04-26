@@ -88,6 +88,29 @@ export const Padding = () => (
   </VStack>
 );
 
+export const HeightWidth = () => (
+  <VStack align="center" gap="2">
+    <BasePrimitive height="2rem">
+      <div>height 2 rem</div>
+    </BasePrimitive>
+    <BasePrimitive minHeight="2rem">
+      <div>min-height 2 rem</div>
+    </BasePrimitive>
+    <BasePrimitive maxHeight="2rem">
+      <div>max-height 2 rem</div>
+    </BasePrimitive>
+    <BasePrimitive height="2rem">
+      <div>width 2 rem</div>
+    </BasePrimitive>
+    <BasePrimitive minWidth="2rem">
+      <div>min-width 2 rem</div>
+    </BasePrimitive>
+    <BasePrimitive maxWidth="2rem">
+      <div>max-width 2 rem</div>
+    </BasePrimitive>
+  </VStack>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">

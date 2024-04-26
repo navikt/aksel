@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React from "react";
 import { Slot } from "../../util/Slot";
-import { getResponsiveProps } from "../utilities/css";
+import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export interface BasePrimitiveProps {
@@ -30,6 +30,30 @@ export interface BasePrimitiveProps {
   paddingBlock?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
+  /**
+   *
+   */
+  width?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  minWidth?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  maxWidth?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  height?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  minHeight?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  maxHeight?: ResponsiveProp<string>;
 }
 
 export const BasePrimitive = ({
@@ -37,11 +61,25 @@ export const BasePrimitive = ({
   padding,
   paddingInline,
   paddingBlock,
+  width,
+  minWidth,
+  maxWidth,
+  height,
+  minHeight,
+  maxHeight,
 }: BasePrimitiveProps) => {
   const style: React.CSSProperties = {
+    /* Padding */
     ...getResponsiveProps("r", "p", "spacing", padding),
     ...getResponsiveProps("r", "pi", "spacing", paddingInline),
     ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    /* Width & height */
+    ...getResponsiveValue(`r`, "w", width),
+    ...getResponsiveValue(`r`, "minw", minWidth),
+    ...getResponsiveValue(`r`, "maxw", maxWidth),
+    ...getResponsiveValue(`r`, "h", height),
+    ...getResponsiveValue(`r`, "minh", minHeight),
+    ...getResponsiveValue(`r`, "maxh", maxHeight),
   };
 
   return (
@@ -50,6 +88,12 @@ export const BasePrimitive = ({
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,
         "navds-r-pb": paddingBlock,
+        "navds-r-w": width,
+        "navds-r-minw": minWidth,
+        "navds-r-maxw": maxWidth,
+        "navds-r-h": height,
+        "navds-r-minh": minHeight,
+        "navds-r-maxh": maxHeight,
       })}
       style={style}
     >
