@@ -54,6 +54,32 @@ export interface BasePrimitiveProps {
    *
    */
   maxHeight?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  position?: ResponsiveProp<
+    "static" | "relative" | "absolute" | "fixed" | "sticky"
+  >;
+  /**
+   *
+   */
+  inset?: ResponsiveProp<SpacingScale>;
+  /**
+   *
+   */
+  top?: ResponsiveProp<SpacingScale>;
+  /**
+   *
+   */
+  right?: ResponsiveProp<SpacingScale>;
+  /**
+   *
+   */
+  bottom?: ResponsiveProp<SpacingScale>;
+  /**
+   *
+   */
+  left?: ResponsiveProp<SpacingScale>;
 }
 
 export const BasePrimitive = ({
@@ -67,6 +93,12 @@ export const BasePrimitive = ({
   height,
   minHeight,
   maxHeight,
+  position,
+  inset,
+  top,
+  right,
+  left,
+  bottom,
 }: BasePrimitiveProps) => {
   const style: React.CSSProperties = {
     /* Padding */
@@ -80,6 +112,13 @@ export const BasePrimitive = ({
     ...getResponsiveValue(`r`, "h", height),
     ...getResponsiveValue(`r`, "minh", minHeight),
     ...getResponsiveValue(`r`, "maxh", maxHeight),
+    /* Positon & inset */
+    ...getResponsiveValue(`r`, "position", position),
+    ...getResponsiveProps("r", "inset", "spacing", inset),
+    ...getResponsiveProps("r", "top", "spacing", top),
+    ...getResponsiveProps("r", "right", "spacing", right),
+    ...getResponsiveProps("r", "bottom", "spacing", bottom),
+    ...getResponsiveProps("r", "left", "spacing", left),
   };
 
   return (
@@ -94,6 +133,12 @@ export const BasePrimitive = ({
         "navds-r-h": height,
         "navds-r-minh": minHeight,
         "navds-r-maxh": maxHeight,
+        "navds-r-position": position,
+        "navds-r-inset": inset,
+        "navds-r-top": top,
+        "navds-r-right": right,
+        "navds-r-bottom": bottom,
+        "navds-r-left": left,
       })}
       style={style}
     >

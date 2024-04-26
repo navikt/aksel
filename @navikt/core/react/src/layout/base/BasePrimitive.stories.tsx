@@ -111,6 +111,33 @@ export const HeightWidth = () => (
   </VStack>
 );
 
+export const PositionAbsolute = () => (
+  <div
+    style={{
+      position: "relative",
+      height: 200,
+      width: 300,
+      background: "gray",
+    }}
+  >
+    <BasePrimitive position="absolute" inset="0">
+      <div style={{ display: "grid", placeContent: "center" }}>inset 0</div>
+    </BasePrimitive>
+    <BasePrimitive position="absolute" top="4" right="0">
+      <div>Top</div>
+    </BasePrimitive>
+    <BasePrimitive position="absolute" bottom="4">
+      <div>bottom</div>
+    </BasePrimitive>
+    <BasePrimitive position="absolute" right="4" bottom="0">
+      <div>right</div>
+    </BasePrimitive>
+    <BasePrimitive position="absolute" left="4">
+      <div>left</div>
+    </BasePrimitive>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">
