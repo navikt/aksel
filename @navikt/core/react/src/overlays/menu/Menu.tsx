@@ -51,6 +51,12 @@ import {
   SubmenuSide,
 } from "./Menu.types";
 
+/* Utils */
+
+const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
+const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
+const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
+
 /**
  * Menu
  */
@@ -153,6 +159,8 @@ export const MenuContentImpl = forwardRef<
       onFocusOutside,
       onCloseAutoFocus,
       onOpenAutoFocus,
+      onPointerMove,
+      onKeyDown,
       ...rest
     }: MenuContentProps,
     ref,
@@ -166,6 +174,9 @@ export const MenuContentImpl = forwardRef<
     const pointerDirRef = useRef<SubmenuSide>("right");
 
     const contentRef = useRef<HTMLDivElement>(null);
+
+    const lastPointerXRef = useRef(0);
+
     /* const [currentItemId, setCurrentItemId] = useState<string | null>(null); */
 
     // Make sure the whole tree has focus guards as our `MenuContent` may be
@@ -246,55 +257,59 @@ export const MenuContentImpl = forwardRef<
               role="menu"
               aria-orientation="vertical"
               data-state={context.open ? "open" : "closed"}
+              data-aksel-menu-content=""
               {...rest}
               ref={composedRefs}
               style={{ outline: "none", ...style }}
-              /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
-        // submenu key events bubble through portals. We only care about keys in this menu.
-        const target = event.target as HTMLElement;
-        const isKeyDownInside =
-          target.closest("[data-radix-menu-content]") === event.currentTarget;
-        const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
-        const isCharacterKey = event.key.length === 1;
-        if (isKeyDownInside) {
-          // menus should not be navigated using tab key so we prevent it
-          if (event.key === "Tab") event.preventDefault();
-          if (!isModifierKey && isCharacterKey)
-            handleTypeaheadSearch(event.key);
-        }
-        // focus first/last item based on key pressed
-        const content = contentRef.current;
-        if (event.target !== content) return;
-        if (!FIRST_LAST_KEYS.includes(event.key)) return;
-        event.preventDefault();
-        const items = getItems().filter((item) => !item.disabled);
-        const candidateNodes = items.map((item) => item.ref.current!);
-        if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
-        focusFirst(candidateNodes);
-      })} */
-              /* onBlur={composeEventHandlers(props.onBlur, (event) => {
-        // clear search buffer when leaving the menu
-        if (!event.currentTarget.contains(event.target)) {
-          window.clearTimeout(timerRef.current);
-          searchRef.current = "";
-        }
-      })} */
-              /* onPointerMove={composeEventHandlers(
-        props.onPointerMove,
-        whenMouse((event) => {
-          const target = event.target as HTMLElement;
-          const pointerXHasChanged = lastPointerXRef.current !== event.clientX;
+              onKeyDown={composeEventHandlers(onKeyDown, (event) => {
+                // submenu key events bubble through portals. We only care about keys in this menu.
+                const target = event.target as HTMLElement;
 
-          // We don't use `event.movementX` for this check because Safari will
-          // always return `0` on a pointer event.
-          if (event.currentTarget.contains(target) && pointerXHasChanged) {
-            const newDir =
-              event.clientX > lastPointerXRef.current ? "right" : "left";
-            pointerDirRef.current = newDir;
-            lastPointerXRef.current = event.clientX;
-          }
-        }),
-      )} */
+                if (
+                  target.closest("[data-aksel-menu-content]") ===
+                    event.currentTarget &&
+                  event.key === "Tab"
+                ) {
+                  // menus should not be navigated using tab key so we prevent it
+                  event.preventDefault();
+                }
+                // focus first/last item based on key pressed
+                const content = contentRef.current;
+                if (event.target !== content) {
+                  return;
+                }
+                if (!FIRST_LAST_KEYS.includes(event.key)) {
+                  return;
+                }
+                event.preventDefault();
+                /* This should be handled by decendantcontext */
+                /* const items = getItems().filter((item) => !item.disabled);
+                const candidateNodes = items.map((item) => item.ref.current!);
+                if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
+                focusFirst(candidateNodes); */
+              })}
+              onPointerMove={composeEventHandlers(
+                onPointerMove,
+                whenMouse((event) => {
+                  const target = event.target as HTMLElement;
+                  const pointerXHasChanged =
+                    lastPointerXRef.current !== event.clientX;
+
+                  // We don't use `event.movementX` for this check because Safari will
+                  // always return `0` on a pointer event.
+                  if (
+                    event.currentTarget.contains(target) &&
+                    pointerXHasChanged
+                  ) {
+                    const newDir =
+                      event.clientX > lastPointerXRef.current
+                        ? "right"
+                        : "left";
+                    pointerDirRef.current = newDir;
+                    lastPointerXRef.current = event.clientX;
+                  }
+                }),
+              )}
             >
               {children}
             </Floating.Content>
@@ -304,6 +319,13 @@ export const MenuContentImpl = forwardRef<
     );
   },
 );
+
+function whenMouse<E>(
+  handler: React.PointerEventHandler<E>,
+): React.PointerEventHandler<E> {
+  return (event) =>
+    event.pointerType === "mouse" ? handler(event) : undefined;
+}
 
 // Determine if a point is inside of a polygon.
 // Based on https://github.com/substack/point-in-polygon
