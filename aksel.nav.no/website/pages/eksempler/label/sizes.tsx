@@ -1,11 +1,17 @@
-import { Label } from "@navikt/ds-react";
+import { Label, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
+  const exampleText =
     "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
-  return <Label size="small">{lorem}</Label>;
+  return (
+    <VStack gap="5">
+      <Label>Medium (18px): {exampleText}</Label>
+
+      <Label size="small">Small (16px): {exampleText}</Label>
+    </VStack>
+  );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -17,5 +23,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 0,
 };

@@ -12,11 +12,11 @@ export interface DetailProps
    */
   size?: "medium" | "small";
   /**
-   * Paragraph text
+   * Text
    */
   children: React.ReactNode;
   /**
-   * All caps
+   * ALL CAPS
    */
   uppercase?: boolean;
 }
@@ -30,9 +30,9 @@ export interface DetailProps
  *
  * @example
  * ```jsx
- *     <Detail>
- *       Du må gjøre en filtrering for å se brukere i listen.
- *     </Detail>
+ * <Detail>
+ *   Du må gjøre en filtrering for å se brukere i listen.
+ * </Detail>
  * ```
  */
 export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
