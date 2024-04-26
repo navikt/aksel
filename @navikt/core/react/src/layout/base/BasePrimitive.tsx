@@ -80,6 +80,18 @@ export interface BasePrimitiveProps {
    *
    */
   left?: ResponsiveProp<SpacingScale>;
+  /**
+   *
+   */
+  overflow?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
+  /**
+   *
+   */
+  overflowX?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
+  /**
+   *
+   */
+  overflowY?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
 }
 
 export const BasePrimitive = ({
@@ -99,6 +111,9 @@ export const BasePrimitive = ({
   right,
   left,
   bottom,
+  overflow,
+  overflowX,
+  overflowY,
 }: BasePrimitiveProps) => {
   const style: React.CSSProperties = {
     /* Padding */
@@ -119,6 +134,10 @@ export const BasePrimitive = ({
     ...getResponsiveProps("r", "right", "spacing", right),
     ...getResponsiveProps("r", "bottom", "spacing", bottom),
     ...getResponsiveProps("r", "left", "spacing", left),
+    /* Overflow */
+    ...getResponsiveValue(`r`, "overflow", overflow),
+    ...getResponsiveValue(`r`, "overflowx", overflowX),
+    ...getResponsiveValue(`r`, "overflowy", overflowY),
   };
 
   return (
@@ -139,6 +158,9 @@ export const BasePrimitive = ({
         "navds-r-right": right,
         "navds-r-bottom": bottom,
         "navds-r-left": left,
+        "navds-r-overflow": overflow,
+        "navds-r-overflowx": overflowX,
+        "navds-r-overflowy": overflowY,
       })}
       style={style}
     >

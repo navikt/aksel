@@ -138,6 +138,36 @@ export const PositionAbsolute = () => (
   </div>
 );
 
+export const Overflow = () => (
+  <div>
+    <BasePrimitive overflow="scroll" maxHeight="100px" maxWidth="100px">
+      <div>
+        <div style={{ width: 200, height: 200 }}>scroll</div>
+      </div>
+    </BasePrimitive>
+    <BasePrimitive
+      overflowX="scroll"
+      overflowY="hidden"
+      maxHeight="100px"
+      maxWidth="100px"
+    >
+      <div>
+        <div style={{ width: 200, height: 200 }}>scroll-x</div>
+      </div>
+    </BasePrimitive>
+    <BasePrimitive
+      overflowY="scroll"
+      overflowX="hidden"
+      maxHeight="100px"
+      maxWidth="100px"
+    >
+      <div>
+        <div style={{ width: 200, height: 200 }}>scroll-y</div>
+      </div>
+    </BasePrimitive>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">
@@ -161,6 +191,14 @@ export const Chromatic: Story = {
       <div>
         <h2>Height & Width</h2>
         <HeightWidth />
+      </div>
+      <div>
+        <h2>Position Absolute</h2>
+        <PositionAbsolute />
+      </div>
+      <div>
+        <h2>Overflow</h2>
+        <Overflow />
       </div>
     </VStack>
   ),
