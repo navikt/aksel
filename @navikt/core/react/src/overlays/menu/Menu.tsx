@@ -38,8 +38,18 @@ import { FloatingAnchorProps } from "../floating/parts/Anchor";
 import { FloatingContentProps } from "../floating/parts/Content";
 import { useFocusGuards } from "./FocusGuard";
 import { FocusScope, FocusScopeProps } from "./FocusLock";
-import { MenuProvider, useMenuContext } from "./Menu.context";
-import { MenuContentType } from "./Menu.types";
+import {
+  MenuContentProvider,
+  MenuProvider,
+  useMenuContext,
+} from "./Menu.context";
+import {
+  GraceIntent,
+  MenuContentType,
+  Point,
+  Polygon,
+  SubmenuSide,
+} from "./Menu.types";
 
 /**
  * Menu
@@ -149,49 +159,97 @@ export const MenuContentImpl = forwardRef<
   ) => {
     const context = useMenuContext();
     const _ref = useRef<HTMLDivElement>(null);
-
     const composedRefs = useMergeRefs(ref, _ref);
 
-    const contentRef = React.useRef<HTMLDivElement>(null);
+    const pointerGraceTimerRef = useRef(0);
+    const pointerGraceIntentRef = useRef<GraceIntent | null>(null);
+    const pointerDirRef = useRef<SubmenuSide>("right");
+
+    const contentRef = useRef<HTMLDivElement>(null);
+    /* const [currentItemId, setCurrentItemId] = useState<string | null>(null); */
 
     // Make sure the whole tree has focus guards as our `MenuContent` may be
     // the last element in the DOM (beacuse of the `Portal`)
     useFocusGuards();
 
+    const isPointerMovingToSubmenu = useCallback(
+      (event: React.PointerEvent) => {
+        const isMovingTowards =
+          pointerDirRef.current === pointerGraceIntentRef.current?.submenuSide;
+        return (
+          isMovingTowards &&
+          isPointerInGraceArea(event, pointerGraceIntentRef.current?.area)
+        );
+      },
+      [],
+    );
+
     /* https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L435 */
     return (
-      <FocusScope
-        asChild
-        onMountAutoFocus={composeEventHandlers<any>(
-          onOpenAutoFocus,
+      <MenuContentProvider
+        onItemEnter={useCallback(
           (event) => {
-            // when opening, explicitly focus the content area only and leave
-            // `onEntryFocus` in  control of focusing first item
-            event.preventDefault();
-            contentRef.current?.focus({ preventScroll: true });
+            if (isPointerMovingToSubmenu(event)) {
+              event.preventDefault();
+            }
           },
+          [isPointerMovingToSubmenu],
         )}
-        onUnmountAutoFocus={onCloseAutoFocus}
+        onItemLeave={React.useCallback(
+          (event) => {
+            if (isPointerMovingToSubmenu(event)) {
+              return;
+            }
+            contentRef.current?.focus();
+            /* setCurrentItemId(null); */
+          },
+          [isPointerMovingToSubmenu],
+        )}
+        onTriggerLeave={React.useCallback(
+          (event) => {
+            if (isPointerMovingToSubmenu(event)) {
+              event.preventDefault();
+            }
+          },
+          [isPointerMovingToSubmenu],
+        )}
+        pointerGraceTimerRef={pointerGraceTimerRef}
+        onPointerGraceIntentChange={React.useCallback((intent) => {
+          pointerGraceIntentRef.current = intent;
+        }, [])}
       >
-        <DismissableLayer
+        <FocusScope
           asChild
-          disableOutsidePointerEvents={context.open}
-          /* TODO: Fix support for custom types */
-          onFocusOutside={composeEventHandlers<any>(
-            onFocusOutside,
-            (event) => event.preventDefault(),
-            { checkForDefaultPrevented: false },
+          onMountAutoFocus={composeEventHandlers<any>(
+            onOpenAutoFocus,
+            (event) => {
+              // when opening, explicitly focus the content area only and leave
+              // `onEntryFocus` in  control of focusing first item
+              event.preventDefault();
+              contentRef.current?.focus({ preventScroll: true });
+            },
           )}
-          onDismiss={() => context.onOpenChange(false)}
+          onUnmountAutoFocus={onCloseAutoFocus}
         >
-          <Floating.Content
-            role="menu"
-            aria-orientation="vertical"
-            data-state={context.open ? "open" : "closed"}
-            {...rest}
-            ref={composedRefs}
-            style={{ outline: "none", ...style }}
-            /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
+          <DismissableLayer
+            asChild
+            disableOutsidePointerEvents={context.open}
+            /* TODO: Fix support for custom types */
+            onFocusOutside={composeEventHandlers<any>(
+              onFocusOutside,
+              (event) => event.preventDefault(),
+              { checkForDefaultPrevented: false },
+            )}
+            onDismiss={() => context.onOpenChange(false)}
+          >
+            <Floating.Content
+              role="menu"
+              aria-orientation="vertical"
+              data-state={context.open ? "open" : "closed"}
+              {...rest}
+              ref={composedRefs}
+              style={{ outline: "none", ...style }}
+              /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
         // submenu key events bubble through portals. We only care about keys in this menu.
         const target = event.target as HTMLElement;
         const isKeyDownInside =
@@ -214,14 +272,14 @@ export const MenuContentImpl = forwardRef<
         if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
         focusFirst(candidateNodes);
       })} */
-            /* onBlur={composeEventHandlers(props.onBlur, (event) => {
+              /* onBlur={composeEventHandlers(props.onBlur, (event) => {
         // clear search buffer when leaving the menu
         if (!event.currentTarget.contains(event.target)) {
           window.clearTimeout(timerRef.current);
           searchRef.current = "";
         }
       })} */
-            /* onPointerMove={composeEventHandlers(
+              /* onPointerMove={composeEventHandlers(
         props.onPointerMove,
         whenMouse((event) => {
           const target = event.target as HTMLElement;
@@ -237,14 +295,40 @@ export const MenuContentImpl = forwardRef<
           }
         }),
       )} */
-          >
-            {children}
-          </Floating.Content>
-        </DismissableLayer>
-      </FocusScope>
+            >
+              {children}
+            </Floating.Content>
+          </DismissableLayer>
+        </FocusScope>
+      </MenuContentProvider>
     );
   },
 );
+
+// Determine if a point is inside of a polygon.
+// Based on https://github.com/substack/point-in-polygon
+function isPointInPolygon(point: Point, polygon: Polygon) {
+  const { x, y } = point;
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const xi = polygon[i].x;
+    const yi = polygon[i].y;
+    const xj = polygon[j].x;
+    const yj = polygon[j].y;
+
+    // prettier-ignore
+    const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+
+  return inside;
+}
+
+function isPointerInGraceArea(event: React.PointerEvent, area?: Polygon) {
+  if (!area) return false;
+  const cursorPos = { x: event.clientX, y: event.clientY };
+  return isPointInPolygon(cursorPos, area);
+}
 
 /**
  * SubTrigger
