@@ -23,12 +23,10 @@ export const Hit = forwardRef<
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchLoggingContext);
 
-  const getHref = () => {
-    if ("anchor" in hit) {
-      return `/${hit.item.slug}${hit?.anchor ? `#h${hit.anchor}` : ""}`;
-    }
-    return `/${hit.item.slug}`;
-  };
+  const href =
+    "anchor" in hit && hit.anchor
+      ? `/${hit.item.slug}#${hit.anchor}`
+      : `/${hit.item.slug}`;
 
   return (
     <li
@@ -45,7 +43,7 @@ export const Hit = forwardRef<
           })}
         >
           <NextLink
-            href={getHref()}
+            href={href}
             onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
             className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
           >
@@ -128,7 +126,7 @@ function HeadingLinks({
               <Link
                 prefetch={false}
                 key={x.text}
-                href={`/${hit.item.slug}${`#h${x.id}`}`}
+                href={`/${hit.item.slug}${`#${x.id}`}`}
                 onClick={() =>
                   logSuccess(index, `/${(hit.item as any).slug}`, x.text)
                 }
