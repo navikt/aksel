@@ -36,6 +36,8 @@ import { createDescendantContext } from "../../util/hooks/descendants/useDescend
 import Floating from "../floating/Floating";
 import { FloatingAnchorProps } from "../floating/parts/Anchor";
 import { FloatingContentProps } from "../floating/parts/Content";
+import { useFocusGuards } from "./FocusGuard";
+import { FocusScope, FocusScopeProps } from "./FocusLock";
 import { MenuProvider, useMenuContext } from "./Menu.context";
 import { MenuContentType } from "./Menu.types";
 
@@ -95,7 +97,16 @@ export const MenuTrigger = forwardRef<
  * Content
  */
 interface MenuContentProps extends FloatingContentProps {
+  /**
+   * Event handler called when auto-focusing on close.
+   * Can be prevented.
+   */
+  onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
+  onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
+  onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
   onFocusOutside?: DismissableLayerProps["onFocusOutside"];
+  onInteractOutside?: DismissableLayerProps["onInteractOutside"];
+  onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
 }
 
 export const [
@@ -116,27 +127,6 @@ export const MenuContent = ({ children }: MenuContentProps) => {
 };
 
 /* Cotent Impl */
-
-/*  <MenuContentImpl
-        {...props}
-        ref={composedRefs}
-        // we make sure we're not trapping once it's been closed
-        // (closed !== unmounted when animating out)
-        trapFocus={context.open}
-        // make sure to only disable pointer events when open
-        // this avoids blocking interactions while animating out
-        disableOutsidePointerEvents={context.open}
-        disableOutsideScroll
-        // When focus is trapped, a `focusout` event may still happen.
-        // We make sure we don't trigger our `onDismiss` in such case.
-        onFocusOutside={composeEventHandlers(
-          props.onFocusOutside,
-          (event) => event.preventDefault(),
-          { checkForDefaultPrevented: false }
-        )}
-        onDismiss={() => context.onOpenChange(false)}
-      /> */
-
 /**
  * TODO:
  * - Implement rowing keyboard nav
@@ -145,33 +135,63 @@ export const MenuContent = ({ children }: MenuContentProps) => {
 export const MenuContentImpl = forwardRef<
   React.ElementRef<typeof Floating.Content>,
   MenuContentProps
->(({ children, style, onFocusOutside, ...rest }: MenuContentProps, ref) => {
-  const context = useMenuContext();
-  const _ref = useRef<HTMLDivElement>(null);
+>(
+  (
+    {
+      children,
+      style,
+      onFocusOutside,
+      onCloseAutoFocus,
+      onOpenAutoFocus,
+      ...rest
+    }: MenuContentProps,
+    ref,
+  ) => {
+    const context = useMenuContext();
+    const _ref = useRef<HTMLDivElement>(null);
 
-  const composedRefs = useMergeRefs(ref, _ref);
+    const composedRefs = useMergeRefs(ref, _ref);
 
-  /* https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L435 */
-  return (
-    <DismissableLayer
-      asChild
-      disableOutsidePointerEvents={context.open}
-      /* TODO: Fix support for custom types */
-      onFocusOutside={composeEventHandlers<any>(
-        onFocusOutside,
-        (event) => event.preventDefault(),
-        { checkForDefaultPrevented: false },
-      )}
-      onDismiss={() => context.onOpenChange(false)}
-    >
-      <Floating.Content
-        role="menu"
-        aria-orientation="vertical"
-        data-state={context.open ? "open" : "closed"}
-        {...rest}
-        ref={composedRefs}
-        style={{ outline: "none", ...style }}
-        /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
+    const contentRef = React.useRef<HTMLDivElement>(null);
+
+    // Make sure the whole tree has focus guards as our `MenuContent` may be
+    // the last element in the DOM (beacuse of the `Portal`)
+    useFocusGuards();
+
+    /* https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L435 */
+    return (
+      <FocusScope
+        asChild
+        onMountAutoFocus={composeEventHandlers<any>(
+          onOpenAutoFocus,
+          (event) => {
+            // when opening, explicitly focus the content area only and leave
+            // `onEntryFocus` in  control of focusing first item
+            event.preventDefault();
+            contentRef.current?.focus({ preventScroll: true });
+          },
+        )}
+        onUnmountAutoFocus={onCloseAutoFocus}
+      >
+        <DismissableLayer
+          asChild
+          disableOutsidePointerEvents={context.open}
+          /* TODO: Fix support for custom types */
+          onFocusOutside={composeEventHandlers<any>(
+            onFocusOutside,
+            (event) => event.preventDefault(),
+            { checkForDefaultPrevented: false },
+          )}
+          onDismiss={() => context.onOpenChange(false)}
+        >
+          <Floating.Content
+            role="menu"
+            aria-orientation="vertical"
+            data-state={context.open ? "open" : "closed"}
+            {...rest}
+            ref={composedRefs}
+            style={{ outline: "none", ...style }}
+            /* onKeyDown={composeEventHandlers(contentProps.onKeyDown, (event) => {
         // submenu key events bubble through portals. We only care about keys in this menu.
         const target = event.target as HTMLElement;
         const isKeyDownInside =
@@ -194,14 +214,14 @@ export const MenuContentImpl = forwardRef<
         if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
         focusFirst(candidateNodes);
       })} */
-        /* onBlur={composeEventHandlers(props.onBlur, (event) => {
+            /* onBlur={composeEventHandlers(props.onBlur, (event) => {
         // clear search buffer when leaving the menu
         if (!event.currentTarget.contains(event.target)) {
           window.clearTimeout(timerRef.current);
           searchRef.current = "";
         }
       })} */
-        /* onPointerMove={composeEventHandlers(
+            /* onPointerMove={composeEventHandlers(
         props.onPointerMove,
         whenMouse((event) => {
           const target = event.target as HTMLElement;
@@ -217,12 +237,14 @@ export const MenuContentImpl = forwardRef<
           }
         }),
       )} */
-      >
-        {children}
-      </Floating.Content>
-    </DismissableLayer>
-  );
-});
+          >
+            {children}
+          </Floating.Content>
+        </DismissableLayer>
+      </FocusScope>
+    );
+  },
+);
 
 /**
  * SubTrigger
