@@ -130,6 +130,11 @@ export const Chromatic: Story = {
         <h2>PaddingBreakpointsInherit2</h2>
         <PaddingBreakpointsInherit2 />
       </div>
+
+      <div>
+        <h2>Height & Width</h2>
+        <HeightWidth />
+      </div>
     </VStack>
   ),
 
