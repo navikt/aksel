@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { BodyLong } from "../../typography";
 import { Box } from "../box";
-import { VStack } from "../stack";
+import { HStack, VStack } from "../stack";
 import { BasePrimitive } from "./BasePrimitive";
 
 const meta: Meta<typeof BasePrimitive> = {
@@ -168,6 +168,20 @@ export const Overflow = () => (
   </div>
 );
 
+export const Flex = () => (
+  <HStack align="center" gap="2">
+    <BasePrimitive flexGrow="1">
+      <div>grow</div>
+    </BasePrimitive>
+    <BasePrimitive flexShrink="0">
+      <div>shrink</div>
+    </BasePrimitive>
+    <BasePrimitive flexBasis="200px">
+      <div>shrink</div>
+    </BasePrimitive>
+  </HStack>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">
@@ -199,6 +213,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Overflow</h2>
         <Overflow />
+      </div>
+      <div>
+        <h2>Flex</h2>
+        <Flex />
       </div>
     </VStack>
   ),

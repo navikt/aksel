@@ -92,6 +92,18 @@ export interface BasePrimitiveProps {
    *
    */
   overflowY?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
+  /**
+   *
+   */
+  flexBasis?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  flexShrink?: ResponsiveProp<string>;
+  /**
+   *
+   */
+  flexGrow?: ResponsiveProp<string>;
 }
 
 export const BasePrimitive = ({
@@ -114,6 +126,9 @@ export const BasePrimitive = ({
   overflow,
   overflowX,
   overflowY,
+  flexBasis,
+  flexGrow,
+  flexShrink,
 }: BasePrimitiveProps) => {
   const style: React.CSSProperties = {
     /* Padding */
@@ -138,6 +153,10 @@ export const BasePrimitive = ({
     ...getResponsiveValue(`r`, "overflow", overflow),
     ...getResponsiveValue(`r`, "overflowx", overflowX),
     ...getResponsiveValue(`r`, "overflowy", overflowY),
+    /* flex */
+    ...getResponsiveValue(`r`, "flex-basis", flexBasis),
+    ...getResponsiveValue(`r`, "flex-grow", flexGrow),
+    ...getResponsiveValue(`r`, "flex-shrink", flexShrink),
   };
 
   return (
@@ -161,6 +180,9 @@ export const BasePrimitive = ({
         "navds-r-overflow": overflow,
         "navds-r-overflowx": overflowX,
         "navds-r-overflowy": overflowY,
+        "navds-r-flex-basis": flexBasis,
+        "navds-r-flex-grow": flexGrow,
+        "navds-r-flex-shrink": flexShrink,
       })}
       style={style}
     >
