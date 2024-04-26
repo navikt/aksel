@@ -44,7 +44,7 @@ export const Hit = forwardRef<
         >
           <NextLink
             href={href}
-            onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
+            onClick={() => logSuccess(index, `/${hit.item.slug}`)}
             className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
           >
             <span className="group-hover:underline">
@@ -60,8 +60,8 @@ export const Hit = forwardRef<
               aria-hidden
             />
           ) : (
-            hit?.item?.status?.tag && (
-              <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+            hit.item?.status?.tag && (
+              <StatusTag status={hit.item.status.tag} aria-hidden />
             )
           )}
         </span>
@@ -126,10 +126,8 @@ function HeadingLinks({
               <Link
                 prefetch={false}
                 key={x.text}
-                href={`/${hit.item.slug}${`#${x.id}`}`}
-                onClick={() =>
-                  logSuccess(index, `/${(hit.item as any).slug}`, x.text)
-                }
+                href={`/${hit.item.slug}#${x.id}`}
+                onClick={() => logSuccess(index, `/${hit.item.slug}`, x.text)}
                 className="flex min-h-6 items-center justify-center rounded-full bg-surface-neutral-subtle px-2 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
               >
                 <span>{x.text}</span>
