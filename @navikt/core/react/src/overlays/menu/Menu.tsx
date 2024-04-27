@@ -66,10 +66,10 @@ const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 /**
  * Menu
  */
-interface MenuProps {
+export interface MenuProps {
   children?: React.ReactNode;
   open?: boolean;
-  onOpenChange: (open: boolean) => void;
+  onOpenChange?: (open: boolean) => void;
   /**
    * @default "bottom"
    */
@@ -87,15 +87,17 @@ export const Menu: MenuComponent = ({
   const [content, setContent] = React.useState<MenuContentType | null>(null);
 
   return (
-    <MenuProvider
-      onClose={useCallback(() => handleOpenChange(false), [handleOpenChange])}
-      open={open}
-      onOpenChange={handleOpenChange}
-      content={content}
-      onContentChange={setContent}
-    >
-      {children}
-    </MenuProvider>
+    <Floating>
+      <MenuProvider
+        onClose={useCallback(() => handleOpenChange(false), [handleOpenChange])}
+        open={open}
+        onOpenChange={handleOpenChange}
+        content={content}
+        onContentChange={setContent}
+      >
+        {children}
+      </MenuProvider>
+    </Floating>
   );
 };
 
@@ -138,12 +140,12 @@ export const [
   useMenuContentDescendant,
 ] = createDescendantContext<HTMLElement>();
 
-export const MenuContent = ({ children }: MenuContentProps) => {
+export const MenuContent = ({ children, ...rest }: MenuContentProps) => {
   const descendants = useMenuContentDescendants();
 
   return (
     <MenuContentDescendantsProvider value={descendants}>
-      {children}
+      <MenuContentImpl {...rest}>{children}</MenuContentImpl>
     </MenuContentDescendantsProvider>
   );
 };
