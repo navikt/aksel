@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { Portal } from "../../portal";
-import { Menu, MenuContent, MenuItem, MenuProps, MenuTrigger } from "./Menu";
+import { Menu, MenuContent, MenuProps, MenuTrigger } from "./Menu";
+import { MenuItem } from "./parts/Menu.Item";
 
 const meta: Meta<typeof Menu> = {
   title: "Utilities/Menu",

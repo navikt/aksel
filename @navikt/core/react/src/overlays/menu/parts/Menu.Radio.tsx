@@ -1,11 +1,12 @@
 import React, { forwardRef } from "react";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useCallbackRef } from "../../../util/hooks";
-import { MenuGroup, MenuGroupProps, MenuItem, MenuItemProps } from "../Menu";
+import { MenuGroup, MenuGroupProps } from "../Menu";
 import {
   MenuRadioGroupProvider,
   useMenuRadioGroupContext,
 } from "../Menu.context";
+import { MenuItem, MenuItemProps } from "./Menu.Item";
 
 /**
  * RadioGroup
