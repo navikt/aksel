@@ -1,4 +1,5 @@
 import { createContext } from "../../util/create-context";
+import Floating from "../floating/Floating";
 import { GraceIntent, MenuContentType } from "./Menu.types";
 
 /**
@@ -50,4 +51,23 @@ export const [MenuRadioGroupProvider, useMenuRadioGroupContext] =
     name: "MenuRadioGroupContext",
     hookName: "useMenuRadioGroupContext",
     providerName: "MenuRadioGroupProvider",
+  });
+
+/**
+ * MenuSub
+ */
+type MenuSubContextValue = {
+  contentId: string;
+  triggerId: string;
+  trigger: React.ElementRef<typeof Floating.Anchor> | null;
+  onTriggerChange(
+    trigger: React.ElementRef<typeof Floating.Anchor> | null,
+  ): void;
+};
+
+export const [MenuSubProvider, useMenuSubContext] =
+  createContext<MenuSubContextValue>({
+    name: "MenuSubContext",
+    hookName: "useMenuSubContext",
+    providerName: "MenuSubProvider",
   });

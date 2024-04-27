@@ -27,11 +27,18 @@
  * MenuRadioItem is a radio button
  * MenuCheckbox is a checkbox. Checkboxes can be standalone so no fieldset needed
  */
-import React, { HTMLAttributes, forwardRef, useCallback, useRef } from "react";
+import React, {
+  HTMLAttributes,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import DismissableLayer from "../../overlay/dismiss/DismissableLayer";
 import { DismissableLayerProps } from "../../overlay/dismiss/DismissableLayer.types";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useCallbackRef, useMergeRefs } from "../../util/hooks";
+import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import Floating from "../floating/Floating";
 import { FloatingAnchorProps } from "../floating/parts/Anchor";
@@ -41,6 +48,7 @@ import { FocusScope, FocusScopeProps } from "./FocusLock";
 import {
   MenuContentProvider,
   MenuProvider,
+  MenuSubProvider,
   useMenuContext,
 } from "./Menu.context";
 import {
@@ -80,7 +88,7 @@ export const Menu: MenuComponent = ({
 }: MenuProps) => {
   const handleOpenChange = useCallbackRef(onOpenChange);
 
-  const [content, setContent] = React.useState<MenuContentType | null>(null);
+  const [content, setContent] = useState<MenuContentType | null>(null);
 
   return (
     <Floating>
@@ -356,28 +364,6 @@ function isPointerInGraceArea(event: React.PointerEvent, area?: Polygon) {
 }
 
 /**
- * SubTrigger
- */
-interface MenuSubTriggerProps {
-  children: React.ReactNode;
-}
-
-export const MenuSubTrigger = ({ children }: MenuSubTriggerProps) => {
-  return <div>{children}</div>;
-};
-
-/**
- * SubContent
- */
-interface MenuSubContentProps {
-  children: React.ReactNode;
-}
-
-export const MenuSubContent = ({ children }: MenuSubContentProps) => {
-  return <div>{children}</div>;
-};
-
-/**
  * Divider
  */
 interface MenuDividerProps extends HTMLAttributes<HTMLDivElement> {}
@@ -414,4 +400,80 @@ interface MenuLabelProps extends HTMLAttributes<HTMLDivElement> {
 
 export const MenuLabel = ({ ...rest }: MenuLabelProps) => {
   return <div {...rest} />;
+};
+
+/**
+ * SubMenu
+ */
+interface MenuSubProps {
+  children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export const MenuSub = ({
+  children,
+  open = false,
+  onOpenChange,
+}: MenuSubProps) => {
+  const parentMenuContext = useMenuContext();
+
+  const [trigger, setTrigger] = useState<React.ElementRef<
+    typeof Floating.Anchor
+  > | null>(null);
+
+  const [content, setContent] = useState<React.ElementRef<
+    typeof Floating.Content
+  > | null>(null);
+
+  const handleOpenChange = useCallbackRef(onOpenChange);
+
+  // Prevent the parent menu from reopening with open submenus.
+  useEffect(() => {
+    if (parentMenuContext.open === false) handleOpenChange(false);
+    return () => handleOpenChange(false);
+  }, [parentMenuContext.open, handleOpenChange]);
+
+  return (
+    <Floating>
+      <MenuProvider
+        onClose={useCallback(() => handleOpenChange(false), [handleOpenChange])}
+        open={open}
+        onOpenChange={handleOpenChange}
+        content={content}
+        onContentChange={setContent}
+      >
+        <MenuSubProvider
+          contentId={useId()}
+          triggerId={useId()}
+          trigger={trigger}
+          onTriggerChange={setTrigger}
+        >
+          {children}
+        </MenuSubProvider>
+      </MenuProvider>
+    </Floating>
+  );
+};
+
+/**
+ * SubTrigger
+ */
+interface MenuSubTriggerProps {
+  children: React.ReactNode;
+}
+
+export const MenuSubTrigger = ({ children }: MenuSubTriggerProps) => {
+  return <div>{children}</div>;
+};
+
+/**
+ * SubContent
+ */
+interface MenuSubContentProps {
+  children: React.ReactNode;
+}
+
+export const MenuSubContent = ({ children }: MenuSubContentProps) => {
+  return <div>{children}</div>;
 };
