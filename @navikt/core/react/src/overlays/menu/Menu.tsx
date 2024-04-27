@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
 /**
  * API
  * Menu
@@ -55,6 +53,7 @@ import {
   Polygon,
   SubmenuSide,
 } from "./Menu.types";
+import { RowingListSlow } from "./RowingListSlot";
 
 /* Utils */
 
@@ -203,6 +202,8 @@ export const MenuContentImpl = forwardRef<
       [],
     );
 
+    const descendants = useMenuContentDescendantsContext();
+
     /* https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L435 */
     return (
       <MenuContentProvider
@@ -252,7 +253,8 @@ export const MenuContentImpl = forwardRef<
         >
           <DismissableLayer
             asChild
-            disableOutsidePointerEvents={context.open}
+            /* Do we really need to disable all outside interaction? */
+            /* disableOutsidePointerEvents={context.open} */
             /* TODO: Fix support for custom types */
             onFocusOutside={composeEventHandlers<any>(
               onFocusOutside,
@@ -261,66 +263,68 @@ export const MenuContentImpl = forwardRef<
             )}
             onDismiss={() => context.onOpenChange(false)}
           >
-            <Floating.Content
-              role="menu"
-              aria-orientation="vertical"
-              data-state={context.open ? "open" : "closed"}
-              data-aksel-menu-content=""
-              {...rest}
-              ref={composedRefs}
-              style={{ outline: "none", ...style }}
-              onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-                // submenu key events bubble through portals. We only care about keys in this menu.
-                const target = event.target as HTMLElement;
+            <RowingListSlow descendants={descendants}>
+              <Floating.Content
+                role="menu"
+                aria-orientation="vertical"
+                data-state={context.open ? "open" : "closed"}
+                data-aksel-menu-content=""
+                {...rest}
+                ref={composedRefs}
+                style={{ outline: "none", ...style }}
+                onKeyDown={composeEventHandlers(onKeyDown, (event) => {
+                  // submenu key events bubble through portals. We only care about keys in this menu.
+                  const target = event.target as HTMLElement;
 
-                if (
-                  target.closest("[data-aksel-menu-content]") ===
-                    event.currentTarget &&
-                  event.key === "Tab"
-                ) {
-                  // menus should not be navigated using tab key so we prevent it
+                  if (
+                    target.closest("[data-aksel-menu-content]") ===
+                      event.currentTarget &&
+                    event.key === "Tab"
+                  ) {
+                    // menus should not be navigated using tab key so we prevent it
+                    event.preventDefault();
+                  }
+                  // focus first/last item based on key pressed
+                  const content = contentRef.current;
+                  if (event.target !== content) {
+                    return;
+                  }
+                  if (!FIRST_LAST_KEYS.includes(event.key)) {
+                    return;
+                  }
                   event.preventDefault();
-                }
-                // focus first/last item based on key pressed
-                const content = contentRef.current;
-                if (event.target !== content) {
-                  return;
-                }
-                if (!FIRST_LAST_KEYS.includes(event.key)) {
-                  return;
-                }
-                event.preventDefault();
-                /* This should be handled by decendantcontext */
-                /* const items = getItems().filter((item) => !item.disabled);
+                  /* This should be handled by decendantcontext */
+                  /* const items = getItems().filter((item) => !item.disabled);
                 const candidateNodes = items.map((item) => item.ref.current!);
                 if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
                 focusFirst(candidateNodes); */
-              })}
-              onPointerMove={composeEventHandlers(
-                onPointerMove,
-                whenMouse((event) => {
-                  const target = event.target as HTMLElement;
-                  const pointerXHasChanged =
-                    lastPointerXRef.current !== event.clientX;
+                })}
+                onPointerMove={composeEventHandlers(
+                  onPointerMove,
+                  whenMouse((event) => {
+                    const target = event.target as HTMLElement;
+                    const pointerXHasChanged =
+                      lastPointerXRef.current !== event.clientX;
 
-                  // We don't use `event.movementX` for this check because Safari will
-                  // always return `0` on a pointer event.
-                  if (
-                    event.currentTarget.contains(target) &&
-                    pointerXHasChanged
-                  ) {
-                    const newDir =
-                      event.clientX > lastPointerXRef.current
-                        ? "right"
-                        : "left";
-                    pointerDirRef.current = newDir;
-                    lastPointerXRef.current = event.clientX;
-                  }
-                }),
-              )}
-            >
-              {children}
-            </Floating.Content>
+                    // We don't use `event.movementX` for this check because Safari will
+                    // always return `0` on a pointer event.
+                    if (
+                      event.currentTarget.contains(target) &&
+                      pointerXHasChanged
+                    ) {
+                      const newDir =
+                        event.clientX > lastPointerXRef.current
+                          ? "right"
+                          : "left";
+                      pointerDirRef.current = newDir;
+                      lastPointerXRef.current = event.clientX;
+                    }
+                  }),
+                )}
+              >
+                {children}
+              </Floating.Content>
+            </RowingListSlow>
           </DismissableLayer>
         </FocusScope>
       </MenuContentProvider>

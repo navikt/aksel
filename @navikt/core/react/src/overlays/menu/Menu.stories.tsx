@@ -62,7 +62,7 @@ export const Items = () => (
     </MenuItem>
     {/* <Menu.Separator className={separatorClass()} /> */}
     <MenuItem style={itemStyles} disabled onSelect={() => window.alert("cut")}>
-      <button>Cut</button>
+      <button>Cut (disabled)</button>
     </MenuItem>
     <MenuItem style={itemStyles} onSelect={() => window.alert("copy")}>
       <button>Copy</button>
