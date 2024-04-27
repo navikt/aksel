@@ -1,7 +1,16 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { Portal } from "../../portal";
-import { Menu, MenuContent, MenuProps, MenuTrigger } from "./Menu";
+import {
+  Menu,
+  MenuContent,
+  MenuDivider,
+  MenuProps,
+  MenuSub,
+  MenuSubContent,
+  MenuSubTrigger,
+  MenuTrigger,
+} from "./Menu";
 import { MenuItem } from "./parts/Menu.Item";
 
 const meta: Meta<typeof Menu> = {
@@ -74,6 +83,153 @@ export const Items = () => (
   </MenuWithAnchor>
 );
 
+const Submenu: React.FC<
+  MenuProps & { disabled?: boolean; heading?: string }
+> = (props) => {
+  const {
+    heading = "Submenu",
+    open = true,
+    onOpenChange,
+    children,
+    disabled,
+    ...contentProps
+  } = props;
+  return (
+    <MenuSub open={open} onOpenChange={onOpenChange}>
+      <MenuSubTrigger style={itemStyles} disabled={disabled}>
+        {heading} →
+      </MenuSubTrigger>
+      <Portal>
+        <MenuSubContent style={contentStyles} {...contentProps}>
+          {children}
+        </MenuSubContent>
+      </Portal>
+    </MenuSub>
+  );
+};
+
+export const Submenus = () => {
+  const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+  const [rtl, setRtl] = React.useState(false);
+  const [animated, setAnimated] = React.useState(false);
+
+  React.useEffect(() => {
+    if (rtl) {
+      document.documentElement.setAttribute("dir", "rtl");
+      return () => document.documentElement.removeAttribute("dir");
+    }
+  }, [rtl]);
+
+  return (
+    <div>
+      <div
+        style={{
+          marginBottom: 8,
+          display: "grid",
+          gridAutoFlow: "row",
+          gap: 4,
+        }}
+      >
+        <label>
+          <input
+            type="checkbox"
+            checked={rtl}
+            onChange={(event) => setRtl(event.currentTarget.checked)}
+          />
+          Right-to-left
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={animated}
+            onChange={(event) => setAnimated(event.currentTarget.checked)}
+          />
+          Animated
+        </label>
+      </div>
+      <MenuWithAnchor>
+        <MenuItem style={itemStyles} onSelect={() => window.alert("undo")}>
+          Undo
+        </MenuItem>
+        <Submenu open={open1} onOpenChange={setOpen1}>
+          <MenuItem style={itemStyles} disabled>
+            Disabled
+          </MenuItem>
+          <MenuItem style={itemStyles} onSelect={() => window.alert("one")}>
+            One
+          </MenuItem>
+          <Submenu open={open2} onOpenChange={setOpen2}>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("one")}>
+              One
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("two")}>
+              Two
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("three")}>
+              Three
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("four")}>
+              Four
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("five")}>
+              Five
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("six")}>
+              Six
+            </MenuItem>
+          </Submenu>
+          <Submenu heading="Sub Menu" open={open3} onOpenChange={setOpen3}>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("one")}>
+              One
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("two")}>
+              Two
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("three")}>
+              Three
+            </MenuItem>
+          </Submenu>
+          <MenuItem style={itemStyles} onSelect={() => window.alert("two")}>
+            Two
+          </MenuItem>
+          <Submenu open={open4} onOpenChange={setOpen4} disabled>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("one")}>
+              One
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("two")}>
+              Two
+            </MenuItem>
+            <MenuItem style={itemStyles} onSelect={() => window.alert("three")}>
+              Three
+            </MenuItem>
+          </Submenu>
+          <MenuItem style={itemStyles} onSelect={() => window.alert("three")}>
+            Three
+          </MenuItem>
+        </Submenu>
+
+        <MenuDivider style={dividerStyles} />
+        <MenuItem
+          style={itemStyles}
+          disabled
+          onSelect={() => window.alert("cut")}
+        >
+          Cut
+        </MenuItem>
+        <MenuItem style={itemStyles} onSelect={() => window.alert("copy")}>
+          Copy
+        </MenuItem>
+        <MenuItem style={itemStyles} onSelect={() => window.alert("paste")}>
+          Paste
+        </MenuItem>
+      </MenuWithAnchor>
+    </div>
+  );
+};
+
 const contentStyles: React.CSSProperties = {
   display: "block",
   minWidth: 150,
@@ -92,4 +248,10 @@ const itemStyles: React.CSSProperties = {
   justifyContent: "space-between",
   padding: "0 8px",
   borderRadius: 3,
+};
+
+const dividerStyles: React.CSSProperties = {
+  height: 1,
+  margin: "0.25rem 0.75rem",
+  backgroundColor: "var(--a-gray-100)",
 };
