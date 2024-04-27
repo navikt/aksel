@@ -46,6 +46,7 @@ import {
   MenuRadioGroupProvider,
   useMenuContentContext,
   useMenuContext,
+  useMenuRadioGroupContext,
 } from "./Menu.context";
 import {
   GraceIntent,
@@ -585,13 +586,33 @@ export const MenuRadioGroup = forwardRef<HTMLDivElement, MenuRadioGroupProps>(
 /**
  * Radio
  */
-interface MenuRadioProps {
-  children: React.ReactNode;
+interface MenuRadioProps extends MenuItemProps {
+  value: string;
 }
 
-export const MenuRadio = ({ children }: MenuRadioProps) => {
-  return <div>{children}</div>;
-};
+export const MenuRadio = forwardRef<
+  React.ElementRef<typeof MenuItem>,
+  MenuRadioProps
+>(({ children, value, onSelect, ...rest }: MenuRadioProps, ref) => {
+  const context = useMenuRadioGroupContext();
+  const checked = value === context.value;
+
+  return (
+    <MenuItem
+      ref={ref}
+      {...rest}
+      role="menuitemradio"
+      aria-checked={checked}
+      onSelect={composeEventHandlers<any>(
+        onSelect,
+        () => context.onValueChange?.(value),
+        { checkForDefaultPrevented: false },
+      )}
+    >
+      {children}
+    </MenuItem>
+  );
+});
 
 /**
  * Checkbox
