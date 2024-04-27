@@ -36,3 +36,18 @@ export const [MenuContentProvider, useMenuContentContext] =
     hookName: "useMenuContentContext",
     providerName: "MenuContentProvider",
   });
+
+/**
+ * MenuRadioGroup
+ */
+type MenuRadioGroupContextValue = {
+  value?: string;
+  onValueChange?: (value: string) => void;
+};
+
+export const [MenuRadioGroupProvider, useMenuRadioGroupContext] =
+  createContext<MenuRadioGroupContextValue>({
+    name: "MenuRadioGroupContext",
+    hookName: "useMenuRadioGroupContext",
+    providerName: "MenuRadioGroupProvider",
+  });

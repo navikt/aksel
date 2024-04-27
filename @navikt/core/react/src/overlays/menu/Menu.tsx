@@ -43,6 +43,7 @@ import { FocusScope, FocusScopeProps } from "./FocusLock";
 import {
   MenuContentProvider,
   MenuProvider,
+  MenuRadioGroupProvider,
   useMenuContentContext,
   useMenuContext,
 } from "./Menu.context";
@@ -405,9 +406,11 @@ interface MenuGroupProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const MenuGroup = ({ ...rest }: MenuGroupProps) => {
-  return <div role="group" {...rest} />;
-};
+export const MenuGroup = forwardRef<HTMLDivElement, MenuGroupProps>(
+  ({ ...rest }: MenuGroupProps, ref) => {
+    return <div role="group" ref={ref} {...rest} />;
+  },
+);
 
 /**
  * Label
@@ -560,13 +563,24 @@ export const MenuItem = forwardRef(
 /**
  * RadioGroup
  */
-interface MenuRadioGroupProps {
-  children: React.ReactNode;
+interface MenuRadioGroupProps extends MenuGroupProps {
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
-export const MenuRadioGroup = ({ children }: MenuRadioGroupProps) => {
-  return <div>{children}</div>;
-};
+export const MenuRadioGroup = forwardRef<HTMLDivElement, MenuRadioGroupProps>(
+  ({ children, value, onValueChange, ...rest }: MenuRadioGroupProps, ref) => {
+    const handleValueChange = useCallbackRef(onValueChange);
+
+    return (
+      <MenuRadioGroupProvider value={value} onValueChange={handleValueChange}>
+        <MenuGroup ref={ref} {...rest}>
+          {children}
+        </MenuGroup>
+      </MenuRadioGroupProvider>
+    );
+  },
+);
 
 /**
  * Radio
