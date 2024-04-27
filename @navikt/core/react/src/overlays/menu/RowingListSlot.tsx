@@ -6,9 +6,9 @@ import { DescendantsManager } from "../../util/hooks/descendants/descendant";
 interface RowingListSlotProps extends React.HTMLAttributes<HTMLDivElement> {
   descendants: DescendantsManager<HTMLElement, object>;
   /**
-   * @default vertical
+   * Switches between right/left and up/down navigation with arrow keys
    */
-  direction?: "horizontal" | "vertical";
+  direction: "horizontal" | "vertical";
 }
 
 export const RowingListSlow = forwardRef<HTMLDivElement, RowingListSlotProps>(

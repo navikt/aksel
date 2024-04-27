@@ -263,7 +263,7 @@ export const MenuContentImpl = forwardRef<
             )}
             onDismiss={() => context.onOpenChange(false)}
           >
-            <RowingListSlow descendants={descendants}>
+            <RowingListSlow descendants={descendants} direction="vertical">
               <Floating.Content
                 role="menu"
                 aria-orientation="vertical"
