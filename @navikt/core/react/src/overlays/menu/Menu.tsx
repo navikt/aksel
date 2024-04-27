@@ -392,13 +392,19 @@ export const MenuSubContent = ({ children }: MenuSubContentProps) => {
 /**
  * Divider
  */
-interface MenuDividerProps {
+interface MenuDividerProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const MenuDivider = ({ children }: MenuDividerProps) => {
-  return <div>{children}</div>;
-};
+export const MenuDivider = forwardRef<HTMLDivElement, MenuDividerProps>(
+  ({ children, ...rest }: MenuDividerProps, ref) => {
+    return (
+      <div ref={ref} {...rest} role="separator" aria-orientation="horizontal">
+        {children}
+      </div>
+    );
+  },
+);
 
 /**
  * Group
