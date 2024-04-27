@@ -238,6 +238,7 @@ export const MenuContentImpl = forwardRef<
           pointerGraceIntentRef.current = intent;
         }, [])}
       >
+        {/* Not 100% convinced we actually need this API */}
         <FocusScope
           asChild
           onMountAutoFocus={composeEventHandlers<any>(

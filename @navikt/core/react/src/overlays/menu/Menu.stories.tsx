@@ -90,6 +90,5 @@ const itemStyles: React.CSSProperties = {
   height: 32,
   justifyContent: "space-between",
   padding: "0 8px",
-  /* background: "var(--a-gray-200)", */
   borderRadius: 3,
 };
