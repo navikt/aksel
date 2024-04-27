@@ -147,15 +147,20 @@ export const [
   useMenuContentDescendant,
 ] = createDescendantContext<HTMLElement>();
 
-export const MenuContent = ({ children, ...rest }: MenuContentProps) => {
+export const MenuContent = forwardRef<
+  React.ElementRef<typeof Floating.Content>,
+  MenuContentProps
+>(({ children, ...rest }: MenuContentProps, ref) => {
   const descendants = useMenuContentDescendants();
 
   return (
     <MenuContentDescendantsProvider value={descendants}>
-      <MenuContentImpl {...rest}>{children}</MenuContentImpl>
+      <MenuContentImpl {...rest} ref={ref}>
+        {children}
+      </MenuContentImpl>
     </MenuContentDescendantsProvider>
   );
-};
+});
 
 /* Cotent Impl */
 /**
@@ -603,10 +608,71 @@ export const MenuSubTrigger = forwardRef<HTMLDivElement, MenuSubTriggerProps>(
 /**
  * SubContent
  */
-interface MenuSubContentProps {
-  children: React.ReactNode;
-}
+interface MenuSubContentProps extends MenuContentProps {}
 
-export const MenuSubContent = ({ children }: MenuSubContentProps) => {
-  return <div>{children}</div>;
-};
+export const MenuSubContent = forwardRef<
+  React.ElementRef<typeof MenuContent>,
+  MenuContentProps
+>(
+  (
+    {
+      children,
+      onFocusOutside,
+      onEscapeKeyDown,
+      onKeyDown,
+      ...rest
+    }: MenuSubContentProps,
+    ref,
+  ) => {
+    const context = useMenuContext();
+    const subContext = useMenuSubContext();
+    const _ref = useRef<React.ElementRef<typeof MenuContent>>(null);
+    const composedRefs = useMergeRefs(ref, _ref);
+
+    return (
+      <MenuContent
+        ref={composedRefs}
+        id={subContext.contentId}
+        aria-labelledby={subContext.triggerId}
+        {...rest}
+        align="start"
+        side="right"
+        /* TODO: Might need to re-implement keyboard/pointer tracking */
+        /* onOpenAutoFocus={(event) => {
+        // when opening a submenu, focus content for keyboard users only
+        if (context.isUsingKeyboardRef.current) ref.current?.focus();
+        event.preventDefault();
+      }} */
+        onCloseAutoFocus={(event) => event.preventDefault()}
+        onFocusOutside={composeEventHandlers<any>(onFocusOutside, (event) => {
+          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+          // on pointer interaction.
+          if (event.target !== subContext.trigger) {
+            context.onOpenChange(false);
+          }
+        })}
+        onEscapeKeyDown={composeEventHandlers<any>(onEscapeKeyDown, (event) => {
+          context.onClose();
+          // ensure pressing escape in submenu doesn't escape full screen mode
+          event.preventDefault();
+        })}
+        onKeyDown={composeEventHandlers(onKeyDown, (event) => {
+          // Submenu key events bubble through portals. We only care about keys in this menu.
+          const isKeyDownInside = event.currentTarget.contains(
+            event.target as HTMLElement,
+          );
+          const isCloseKey = ["ArrowLeft"].includes(event.key);
+          if (isKeyDownInside && isCloseKey) {
+            context.onOpenChange(false);
+            // We focus manually because we prevented it in `onCloseAutoFocus`
+            subContext.trigger?.focus();
+            // prevent window from scrolling
+            event.preventDefault();
+          }
+        })}
+      >
+        {children}
+      </MenuContent>
+    );
+  },
+);
