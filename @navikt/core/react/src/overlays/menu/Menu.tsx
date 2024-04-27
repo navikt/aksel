@@ -392,9 +392,7 @@ export const MenuSubContent = ({ children }: MenuSubContentProps) => {
 /**
  * Divider
  */
-interface MenuDividerProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
+interface MenuDividerProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const MenuDivider = forwardRef<HTMLDivElement, MenuDividerProps>(
   ({ children, ...rest }: MenuDividerProps, ref) => {
