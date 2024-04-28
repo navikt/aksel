@@ -1,16 +1,12 @@
-import { composeEventHandlers } from "@radix-ui/primitive";
 import { createCollection } from "@radix-ui/react-collection";
-import { composeRefs, useComposedRefs } from "@radix-ui/react-compose-refs";
 import { createContextScope } from "@radix-ui/react-context";
 import type { Scope } from "@radix-ui/react-context";
 import { useDirection } from "@radix-ui/react-direction";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
-import { useId } from "@radix-ui/react-id";
 import * as PopperPrimitive from "@radix-ui/react-popper";
 import { createPopperScope } from "@radix-ui/react-popper";
-import { Portal as PortalPrimitive } from "@radix-ui/react-portal";
 import { Presence } from "@radix-ui/react-presence";
 import {
   Primitive,
@@ -20,10 +16,12 @@ import type * as Radix from "@radix-ui/react-primitive";
 import * as RovingFocusGroup from "@radix-ui/react-roving-focus";
 import { createRovingFocusGroupScope } from "@radix-ui/react-roving-focus";
 import { Slot } from "@radix-ui/react-slot";
-import { useCallbackRef } from "@radix-ui/react-use-callback-ref";
 import { hideOthers } from "aria-hidden";
-import * as React from "react";
+import React from "react";
 import { RemoveScroll } from "react-remove-scroll";
+import { Portal as PortalPrimitive } from "../portal";
+import { composeEventHandlers } from "../util/composeEventHandlers";
+import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 
 type Direction = "ltr" | "rtl";
 
@@ -297,7 +295,7 @@ const MenuRootContentModal = React.forwardRef<
 >((props: ScopedProps<MenuRootContentTypeProps>, forwardedRef) => {
   const context = useMenuContext(CONTENT_NAME, props.__scopeMenu);
   const ref = React.useRef<MenuRootContentTypeElement>(null);
-  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const composedRefs = useMergeRefs(forwardedRef, ref);
 
   // Hide everything from ARIA except the `MenuContent`
   React.useEffect(() => {
@@ -424,7 +422,7 @@ const MenuContentImpl = React.forwardRef<
   const getItems = useCollection(__scopeMenu);
   const [currentItemId, setCurrentItemId] = React.useState<string | null>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
-  const composedRefs = useComposedRefs(
+  const composedRefs = useMergeRefs(
     forwardedRef,
     contentRef,
     context.onContentChange,
@@ -691,7 +689,7 @@ const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
     const ref = React.useRef<HTMLDivElement>(null);
     const rootContext = useMenuRootContext(ITEM_NAME, props.__scopeMenu);
     const contentContext = useMenuContentContext(ITEM_NAME, props.__scopeMenu);
-    const composedRefs = useComposedRefs(forwardedRef, ref);
+    const composedRefs = useMergeRefs(forwardedRef, ref);
     const isPointerDownRef = React.useRef(false);
 
     const handleSelect = () => {
@@ -764,7 +762,7 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
     const contentContext = useMenuContentContext(ITEM_NAME, __scopeMenu);
     const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeMenu);
     const ref = React.useRef<HTMLDivElement>(null);
-    const composedRefs = useComposedRefs(forwardedRef, ref);
+    const composedRefs = useMergeRefs(forwardedRef, ref);
     const [isFocused, setIsFocused] = React.useState(false);
 
     // get the item's `.textContent` as default strategy for typeahead `textValue`
@@ -1144,6 +1142,8 @@ const MenuSubTrigger = React.forwardRef<
   const { pointerGraceTimerRef, onPointerGraceIntentChange } = contentContext;
   const scope = { __scopeMenu: props.__scopeMenu };
 
+  const composedRefs = useMergeRefs(forwardedRef, subContext.onTriggerChange);
+
   const clearOpenTimer = React.useCallback(() => {
     if (openTimerRef.current) window.clearTimeout(openTimerRef.current);
     openTimerRef.current = null;
@@ -1168,7 +1168,7 @@ const MenuSubTrigger = React.forwardRef<
         aria-controls={subContext.contentId}
         data-state={getOpenState(context.open)}
         {...props}
-        ref={composeRefs(forwardedRef, subContext.onTriggerChange)}
+        ref={composedRefs}
         // This is redundant for mouse users but we cannot determine pointer type from
         // click event and we cannot use pointerup event (see git history for reasons why)
         onClick={(event) => {
@@ -1289,7 +1289,7 @@ const MenuSubContent = React.forwardRef<
   const rootContext = useMenuRootContext(CONTENT_NAME, props.__scopeMenu);
   const subContext = useMenuSubContext(SUB_CONTENT_NAME, props.__scopeMenu);
   const ref = React.useRef<MenuSubContentElement>(null);
-  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const composedRefs = useMergeRefs(forwardedRef, ref);
   return (
     <Collection.Provider scope={props.__scopeMenu}>
       <Presence present={forceMount || context.open}>
