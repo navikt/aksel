@@ -15,6 +15,7 @@ export interface MenuItemProps
   children: React.ReactNode;
   onSelect?: (event: Event) => void;
   disabled?: boolean;
+  asChild?: boolean;
 }
 
 const ITEM_SELECT_EVENT = "menu.itemSelect";
@@ -33,6 +34,7 @@ export const MenuItem = forwardRef(
       onPointerLeave,
       onFocus,
       onBlur,
+      asChild,
       ...rest
     }: MenuItemProps,
     ref,
@@ -74,8 +76,10 @@ export const MenuItem = forwardRef(
       }
     };
 
+    const Comp = asChild ? Slot : "button";
+
     return (
-      <Slot
+      <Comp
         ref={composedRefs}
         {...rest}
         data-highlighted={isFocused ? "" : undefined}
@@ -140,7 +144,7 @@ export const MenuItem = forwardRef(
         onBlur={composeEventHandlers(onBlur, () => setIsFocused(false))}
       >
         {children}
-      </Slot>
+      </Comp>
     );
   },
 );

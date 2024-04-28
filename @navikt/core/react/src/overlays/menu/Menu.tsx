@@ -181,13 +181,14 @@ export const MenuContentImpl = forwardRef<
       onOpenAutoFocus,
       onPointerMove,
       onKeyDown,
+      onEscapeKeyDown,
       ...rest
     }: MenuContentProps,
     ref,
   ) => {
     const context = useMenuContext();
     const _ref = useRef<HTMLDivElement>(null);
-    const composedRefs = useMergeRefs(ref, _ref);
+    const composedRefs = useMergeRefs(ref, _ref, context.onContentChange);
 
     const pointerGraceTimerRef = useRef(0);
     const pointerGraceIntentRef = useRef<GraceIntent | null>(null);
@@ -276,6 +277,7 @@ export const MenuContentImpl = forwardRef<
               { checkForDefaultPrevented: false },
             )}
             onDismiss={() => context.onOpenChange(false)}
+            onEscapeKeyDown={onEscapeKeyDown}
           >
             <RowingListSlow descendants={descendants} direction="vertical">
               <Floating.Content
@@ -336,7 +338,7 @@ export const MenuContentImpl = forwardRef<
                   }),
                 )}
               >
-                {children}
+                {context.open ? children : null}
               </Floating.Content>
             </RowingListSlow>
           </DismissableLayer>
@@ -594,6 +596,7 @@ export const MenuSubTrigger = forwardRef<HTMLDivElement, MenuSubTriggerProps>(
               context.onOpenChange(true);
               // The trigger may hold focus if opened via pointer interaction
               // so we ensure content is given focus again when switching to keyboard.
+              console.log(context.content);
               context.content?.focus();
               // prevent window from scrolling
               event.preventDefault();
@@ -637,12 +640,14 @@ export const MenuSubContent = forwardRef<
         {...rest}
         align="start"
         side="right"
-        /* TODO: Might need to re-implement keyboard/pointer tracking */
-        /* onOpenAutoFocus={(event) => {
-        // when opening a submenu, focus content for keyboard users only
-        if (context.isUsingKeyboardRef.current) ref.current?.focus();
-        event.preventDefault();
-      }} */
+        onOpenAutoFocus={(event) => {
+          // when opening a submenu, focus content for keyboard users only
+          /* TODO: Might need to re-implement keyboard/pointer tracking */
+          /* if (context.isUsingKeyboardRef.current) ref.current?.focus(); */
+          _ref?.current?.focus();
+          console.log("autofocus");
+          event.preventDefault();
+        }}
         onCloseAutoFocus={(event) => event.preventDefault()}
         onFocusOutside={composeEventHandlers<any>(onFocusOutside, (event) => {
           // We prevent closing when the trigger is focused to avoid triggering a re-open animation

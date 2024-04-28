@@ -84,7 +84,7 @@ export const Items = () => (
 );
 
 const Submenu: React.FC<
-  MenuProps & { disabled?: boolean; heading?: string }
+  MenuProps & { disabled?: boolean; heading?: string; id?: string }
 > = (props) => {
   const {
     heading = "Submenu",
@@ -113,51 +113,15 @@ export const Submenus = () => {
   const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
   const [open4, setOpen4] = React.useState(false);
-  const [rtl, setRtl] = React.useState(false);
-  const [animated, setAnimated] = React.useState(false);
-
-  React.useEffect(() => {
-    if (rtl) {
-      document.documentElement.setAttribute("dir", "rtl");
-      return () => document.documentElement.removeAttribute("dir");
-    }
-  }, [rtl]);
 
   return (
     <div>
-      <div
-        style={{
-          marginBottom: 8,
-          display: "grid",
-          gridAutoFlow: "row",
-          gap: 4,
-        }}
-      >
-        <label>
-          <input
-            type="checkbox"
-            checked={rtl}
-            onChange={(event) => setRtl(event.currentTarget.checked)}
-          />
-          Right-to-left
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={animated}
-            onChange={(event) => setAnimated(event.currentTarget.checked)}
-          />
-          Animated
-        </label>
-      </div>
       <MenuWithAnchor>
         <MenuItem style={itemStyles} onSelect={() => window.alert("undo")}>
           Undo
         </MenuItem>
-        <Submenu open={open1} onOpenChange={setOpen1}>
-          <MenuItem style={itemStyles} disabled>
-            Disabled
-          </MenuItem>
+        <Submenu open={open1} onOpenChange={setOpen1} id="testid123">
+          <MenuItem style={itemStyles}>Disabled</MenuItem>
           <MenuItem style={itemStyles} onSelect={() => window.alert("one")}>
             One
           </MenuItem>
