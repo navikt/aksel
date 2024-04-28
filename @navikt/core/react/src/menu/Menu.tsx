@@ -1,8 +1,4 @@
-import { createCollection } from "@radix-ui/react-collection";
-import { createContextScope } from "@radix-ui/react-context";
-import { createPopperScope } from "@radix-ui/react-popper";
 import { Presence } from "@radix-ui/react-presence";
-import { createRovingFocusGroupScope } from "@radix-ui/react-roving-focus";
 import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
@@ -10,6 +6,7 @@ import { Floating } from "../overlays/floating/Floating";
 import { Portal as PortalPrimitive } from "../portal";
 import { Slot } from "../util/Slot";
 import { composeEventHandlers } from "../util/composeEventHandlers";
+import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { useFocusGuards } from "./FocusGuards";
@@ -52,20 +49,6 @@ const SlottedDivElement = React.forwardRef<HTMLDivElement, PrimitiveDivProps>(
 
 const MENU_NAME = "Menu";
 
-type ItemData = { disabled: boolean; textValue: string };
-const [Collection, useCollection, createCollectionScope] = createCollection<
-  MenuItemElement,
-  ItemData
->(MENU_NAME);
-
-const [createMenuContext, createMenuScope] = createContextScope(MENU_NAME, [
-  createCollectionScope,
-  createPopperScope,
-  createRovingFocusGroupScope,
-]);
-
-const useRovingFocusGroupScope = createRovingFocusGroupScope();
-
 type MenuContextValue = {
   open: boolean;
   onOpenChange(open: boolean): void;
@@ -73,8 +56,10 @@ type MenuContextValue = {
   onContentChange(content: MenuContentElement | null): void;
 };
 
-const [MenuProvider, useMenuContext] =
-  createMenuContext<MenuContextValue>(MENU_NAME);
+const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
+  providerName: "MenuProvider",
+  hookName: "useMenuContext",
+});
 
 type MenuRootContextValue = {
   onClose(): void;
@@ -83,7 +68,10 @@ type MenuRootContextValue = {
 };
 
 const [MenuRootProvider, useMenuRootContext] =
-  createMenuContext<MenuRootContextValue>(MENU_NAME);
+  createContext<MenuRootContextValue>({
+    providerName: "MenuRootProvider",
+    hookName: "useMenuRootContext",
+  });
 
 interface MenuProps {
   children?: React.ReactNode;
@@ -98,7 +86,6 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
   const [content, setContent] = React.useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = React.useRef(false);
   const handleOpenChange = useCallbackRef(onOpenChange);
-  const direction = "ltr";
 
   React.useEffect(() => {
     // Capture phase ensures we set the boolean before any side effects execute
@@ -141,7 +128,6 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
             [handleOpenChange],
           )}
           isUsingKeyboardRef={isUsingKeyboardRef}
-          dir={direction}
           modal={modal}
         >
           {children}
@@ -210,8 +196,12 @@ type MenuContentContextValue = {
   pointerGraceTimerRef: React.MutableRefObject<number>;
   onPointerGraceIntentChange(intent: GraceIntent | null): void;
 };
+
 const [MenuContentProvider, useMenuContentContext] =
-  createMenuContext<MenuContentContextValue>(CONTENT_NAME);
+  createContext<MenuContentContextValue>({
+    providerName: "MenuContentProvider",
+    hookName: "useMenuContentContext",
+  });
 
 export const [
   MenuDescendantsProvider,
@@ -240,22 +230,18 @@ const MenuContent = React.forwardRef<MenuContentElement, MenuContentProps>(
 
     const descendants = useMenuDescendants();
 
-    const context = useMenuContext(CONTENT_NAME);
-    const rootContext = useMenuRootContext(CONTENT_NAME);
+    const context = useMenuContext();
+    const rootContext = useMenuRootContext();
 
     return (
       <MenuDescendantsProvider value={descendants}>
-        <Collection.Provider>
-          <Presence present={forceMount || context.open}>
-            <Collection.Slot>
-              {rootContext.modal ? (
-                <MenuRootContentModal {...contentProps} ref={forwardedRef} />
-              ) : (
-                <MenuRootContentNonModal {...contentProps} ref={forwardedRef} />
-              )}
-            </Collection.Slot>
-          </Presence>
-        </Collection.Provider>
+        <Presence present={forceMount || context.open}>
+          {rootContext.modal ? (
+            <MenuRootContentModal {...contentProps} ref={forwardedRef} />
+          ) : (
+            <MenuRootContentNonModal {...contentProps} ref={forwardedRef} />
+          )}
+        </Presence>
       </MenuDescendantsProvider>
     );
   },
@@ -271,7 +257,7 @@ const MenuRootContentModal = React.forwardRef<
   MenuRootContentTypeElement,
   MenuRootContentTypeProps
 >((props: MenuRootContentTypeProps, forwardedRef) => {
-  const context = useMenuContext(CONTENT_NAME);
+  const context = useMenuContext();
   const ref = React.useRef<MenuRootContentTypeElement>(null);
   const composedRefs = useMergeRefs(forwardedRef, ref);
 
@@ -308,7 +294,7 @@ const MenuRootContentNonModal = React.forwardRef<
   MenuRootContentTypeElement,
   MenuRootContentTypeProps
 >((props: MenuRootContentTypeProps, forwardedRef) => {
-  const context = useMenuContext(CONTENT_NAME);
+  const context = useMenuContext();
   return (
     <MenuContentImpl
       {...props}
@@ -377,9 +363,9 @@ const MenuContentImpl = React.forwardRef<
 
   const descendants = useMenuDescendantsContext()!;
 
-  const context = useMenuContext(CONTENT_NAME);
-  const rootContext = useMenuRootContext(CONTENT_NAME);
-  const getItems = useCollection();
+  const context = useMenuContext();
+  const rootContext = useMenuRootContext();
+
   const contentRef = React.useRef<HTMLDivElement>(null);
   const composedRefs = useMergeRefs(
     forwardedRef,
@@ -501,7 +487,7 @@ const MenuContentImpl = React.forwardRef<
               aria-orientation="vertical"
               data-state={getOpenState(context.open)}
               data-radix-menu-content=""
-              dir={rootContext.dir}
+              dir="ltr"
               {...contentProps}
               ref={composedRefs}
               style={{ outline: "none", ...contentProps.style }}
@@ -527,8 +513,8 @@ const MenuContentImpl = React.forwardRef<
                   if (event.target !== content) return;
                   if (!FIRST_LAST_KEYS.includes(event.key)) return;
                   event.preventDefault();
-                  const items = getItems().filter((item) => !item.disabled);
-                  const candidateNodes = items.map((item) => item.ref.current!);
+                  const items = descendants.enabledValues();
+                  const candidateNodes = items.map((item) => item.node);
                   if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
                   focusFirst(candidateNodes);
                 },
@@ -626,8 +612,8 @@ const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
   (props: MenuItemProps, forwardedRef) => {
     const { disabled = false, onSelect, ...itemProps } = props;
     const ref = React.useRef<HTMLDivElement>(null);
-    const rootContext = useMenuRootContext(ITEM_NAME);
-    const contentContext = useMenuContentContext(ITEM_NAME);
+    const rootContext = useMenuRootContext();
+    const contentContext = useMenuContentContext();
     const composedRefs = useMergeRefs(forwardedRef, ref);
     const isPointerDownRef = React.useRef(false);
 
@@ -702,7 +688,7 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
 
     const { register } = useMenuDescendant({ disabled, textValue });
 
-    const contentContext = useMenuContentContext(ITEM_NAME);
+    const contentContext = useMenuContentContext();
     const ref = React.useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
     const [isFocused, setIsFocused] = React.useState(false);
@@ -799,9 +785,13 @@ MenuCheckboxItem.displayName = CHECKBOX_ITEM_NAME;
 const RADIO_GROUP_NAME = "MenuRadioGroup";
 
 const [RadioGroupProvider, useRadioGroupContext] =
-  createMenuContext<MenuRadioGroupProps>(RADIO_GROUP_NAME, {
-    value: undefined,
-    onValueChange: () => {},
+  createContext<MenuRadioGroupProps>({
+    providerName: "MenuRadioGroupProvider",
+    hookName: "useRadioGroupContext",
+    defaultValue: {
+      value: undefined,
+      onValueChange: () => {},
+    },
   });
 
 type MenuRadioGroupElement = React.ElementRef<typeof MenuGroup>;
@@ -841,7 +831,7 @@ const MenuRadioItem = React.forwardRef<
   MenuRadioItemProps
 >((props: MenuRadioItemProps, forwardedRef) => {
   const { value, ...radioItemProps } = props;
-  const context = useRadioGroupContext(RADIO_ITEM_NAME);
+  const context = useRadioGroupContext();
   const checked = value === context.value;
 
   /* TODO: removed indicator warpper, fix sideeffects */
@@ -903,8 +893,12 @@ type MenuSubContextValue = {
   onTriggerChange(trigger: MenuSubTriggerElement | null): void;
 };
 
-const [MenuSubProvider, useMenuSubContext] =
-  createMenuContext<MenuSubContextValue>(SUB_NAME);
+const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
+  {
+    providerName: "MenuSubProvider",
+    hookName: "useMenuSubContext",
+  },
+);
 
 interface MenuSubProps {
   children?: React.ReactNode;
@@ -914,7 +908,7 @@ interface MenuSubProps {
 
 const MenuSub: React.FC<MenuSubProps> = (props: MenuSubProps) => {
   const { children, open = false, onOpenChange } = props;
-  const parentMenuContext = useMenuContext(SUB_NAME);
+  const parentMenuContext = useMenuContext();
 
   const [trigger, setTrigger] = React.useState<MenuSubTriggerElement | null>(
     null,
@@ -964,10 +958,9 @@ const MenuSubTrigger = React.forwardRef<
   MenuSubTriggerElement,
   MenuSubTriggerProps
 >((props: MenuSubTriggerProps, forwardedRef) => {
-  const context = useMenuContext(SUB_TRIGGER_NAME);
-  const rootContext = useMenuRootContext(SUB_TRIGGER_NAME);
-  const subContext = useMenuSubContext(SUB_TRIGGER_NAME);
-  const contentContext = useMenuContentContext(SUB_TRIGGER_NAME);
+  const context = useMenuContext();
+  const subContext = useMenuSubContext();
+  const contentContext = useMenuContentContext();
   const openTimerRef = React.useRef<number | null>(null);
   const { pointerGraceTimerRef, onPointerGraceIntentChange } = contentContext;
 
@@ -1069,7 +1062,7 @@ const MenuSubTrigger = React.forwardRef<
         onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
           const isTypingAhead = contentContext.searchRef.current !== "";
           if (props.disabled || (isTypingAhead && event.key === " ")) return;
-          if (SUB_OPEN_KEYS[rootContext.dir].includes(event.key)) {
+          if (SUB_OPEN_KEYS["ltr"].includes(event.key)) {
             context.onOpenChange(true);
             // The trigger may hold focus if opened via pointer interaction
             // so we ensure content is given focus again when switching to keyboard.
@@ -1113,69 +1106,59 @@ const MenuSubContent = React.forwardRef<
   MenuSubContentProps
 >((props: MenuSubContentProps, forwardedRef) => {
   const { forceMount = false, ...subContentProps } = props;
-  const context = useMenuContext(CONTENT_NAME);
-  const rootContext = useMenuRootContext(CONTENT_NAME);
-  const subContext = useMenuSubContext(SUB_CONTENT_NAME);
+  const context = useMenuContext();
+  const rootContext = useMenuRootContext();
+  const subContext = useMenuSubContext();
   const ref = React.useRef<MenuSubContentElement>(null);
   const composedRefs = useMergeRefs(forwardedRef, ref);
   return (
-    <Collection.Provider>
-      <Presence present={forceMount || context.open}>
-        <Collection.Slot>
-          <MenuContentImpl
-            id={subContext.contentId}
-            aria-labelledby={subContext.triggerId}
-            {...subContentProps}
-            ref={composedRefs}
-            align="start"
-            side={rootContext.dir === "rtl" ? "left" : "right"}
-            disableOutsidePointerEvents={false}
-            trapFocus={false}
-            onOpenAutoFocus={(event) => {
-              // when opening a submenu, focus content for keyboard users only
-              if (rootContext.isUsingKeyboardRef.current) ref.current?.focus();
-              event.preventDefault();
-            }}
-            // The menu might close because of focusing another menu item in the parent menu. We
-            // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
-            onCloseAutoFocus={(event) => event.preventDefault()}
-            onFocusOutside={composeEventHandlers(
-              props.onFocusOutside,
-              (event) => {
-                // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-                // on pointer interaction.
-                if (event.target !== subContext.trigger)
-                  context.onOpenChange(false);
-              },
-            )}
-            onEscapeKeyDown={composeEventHandlers(
-              props.onEscapeKeyDown,
-              (event) => {
-                rootContext.onClose();
-                // ensure pressing escape in submenu doesn't escape full screen mode
-                event.preventDefault();
-              },
-            )}
-            onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-              // Submenu key events bubble through portals. We only care about keys in this menu.
-              const isKeyDownInside = event.currentTarget.contains(
-                event.target as HTMLElement,
-              );
-              const isCloseKey = SUB_CLOSE_KEYS[rootContext.dir].includes(
-                event.key,
-              );
-              if (isKeyDownInside && isCloseKey) {
-                context.onOpenChange(false);
-                // We focus manually because we prevented it in `onCloseAutoFocus`
-                subContext.trigger?.focus();
-                // prevent window from scrolling
-                event.preventDefault();
-              }
-            })}
-          />
-        </Collection.Slot>
-      </Presence>
-    </Collection.Provider>
+    <Presence present={forceMount || context.open}>
+      <MenuContentImpl
+        id={subContext.contentId}
+        aria-labelledby={subContext.triggerId}
+        {...subContentProps}
+        ref={composedRefs}
+        align="start"
+        side="right"
+        disableOutsidePointerEvents={false}
+        trapFocus={false}
+        onOpenAutoFocus={(event) => {
+          // when opening a submenu, focus content for keyboard users only
+          if (rootContext.isUsingKeyboardRef.current) ref.current?.focus();
+          event.preventDefault();
+        }}
+        // The menu might close because of focusing another menu item in the parent menu. We
+        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+        onCloseAutoFocus={(event) => event.preventDefault()}
+        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
+          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+          // on pointer interaction.
+          if (event.target !== subContext.trigger) context.onOpenChange(false);
+        })}
+        onEscapeKeyDown={composeEventHandlers(
+          props.onEscapeKeyDown,
+          (event) => {
+            rootContext.onClose();
+            // ensure pressing escape in submenu doesn't escape full screen mode
+            event.preventDefault();
+          },
+        )}
+        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+          // Submenu key events bubble through portals. We only care about keys in this menu.
+          const isKeyDownInside = event.currentTarget.contains(
+            event.target as HTMLElement,
+          );
+          const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
+          if (isKeyDownInside && isCloseKey) {
+            context.onOpenChange(false);
+            // We focus manually because we prevented it in `onCloseAutoFocus`
+            subContext.trigger?.focus();
+            // prevent window from scrolling
+            event.preventDefault();
+          }
+        })}
+      />
+    </Presence>
   );
 });
 
@@ -1306,7 +1289,6 @@ const SubTrigger = MenuSubTrigger;
 const SubContent = MenuSubContent;
 
 export {
-  createMenuScope,
   //
   Menu,
   MenuAnchor,
