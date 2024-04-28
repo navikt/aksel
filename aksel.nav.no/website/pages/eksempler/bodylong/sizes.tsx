@@ -2,33 +2,25 @@ import { BodyLong, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
+  const exampleText =
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
   return (
-    <VStack gap="4">
-      <BodyLong>{lorem}</BodyLong>
-      <Divider />
-      <div>
-        <Descriptor>Semibold</Descriptor>
-        <BodyLong weight="semibold">{lorem}</BodyLong>
-      </div>
-      <Divider />
-      <div>
-        <Descriptor>Truncate (ellipsis)</Descriptor>
-        <BodyLong truncate>{lorem}</BodyLong>
-      </div>
+    <VStack gap="5">
+      <BodyLong size="small">
+        <b>Small (16px):</b> {exampleText}
+      </BodyLong>
+
+      <BodyLong size="medium">
+        <b>Medium (default, 18px):</b> {exampleText}
+      </BodyLong>
+
+      <BodyLong size="large">
+        <b>Large (20px):</b> {exampleText}
+      </BodyLong>
     </VStack>
   );
 };
-
-function Descriptor({ children }) {
-  return <p className="mb-3 text-xl font-semibold">{children}</p>;
-}
-
-function Divider() {
-  return <hr className="border-border-subtle" />;
-}
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "full" });

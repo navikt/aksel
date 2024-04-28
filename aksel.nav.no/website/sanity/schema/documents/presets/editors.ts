@@ -27,12 +27,21 @@ export const editorField = defineField({
       ) {
         return [];
       }
-      profile = await client.createIfNotExists({
-        _type: "editor",
-        _id: `auto-editor.${currentUser.id}`,
-        email: currentUser.email,
-        title: currentUser.name,
-      });
+      try {
+        profile = await client.createIfNotExists({
+          _type: "editor",
+          _id: `auto-editor.${currentUser.id}`,
+          email: currentUser.email,
+          title: currentUser.name,
+        });
+      } catch (error) {
+        const { logger } = await import("@navikt/next-logger");
+        logger.error({
+          message: "Failed to create sanity profile for user.",
+          roles: JSON.stringify(currentUser.roles),
+        });
+        return [];
+      }
     }
 
     return [{ _ref: profile._id, _type: "reference" }];
