@@ -1,27 +1,21 @@
 import { createCollection } from "@radix-ui/react-collection";
 import { createContextScope } from "@radix-ui/react-context";
 import type { Scope } from "@radix-ui/react-context";
-import { useDirection } from "@radix-ui/react-direction";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
-import { useFocusGuards } from "@radix-ui/react-focus-guards";
-import { FocusScope } from "@radix-ui/react-focus-scope";
 import * as PopperPrimitive from "@radix-ui/react-popper";
 import { createPopperScope } from "@radix-ui/react-popper";
 import { Presence } from "@radix-ui/react-presence";
-import {
-  Primitive,
-  dispatchDiscreteCustomEvent,
-} from "@radix-ui/react-primitive";
 import type * as Radix from "@radix-ui/react-primitive";
 import * as RovingFocusGroup from "@radix-ui/react-roving-focus";
 import { createRovingFocusGroupScope } from "@radix-ui/react-roving-focus";
 import { Slot } from "@radix-ui/react-slot";
-import { hideOthers } from "aria-hidden";
 import React from "react";
-import { RemoveScroll } from "react-remove-scroll";
+import ReactDOM from "react-dom";
 import { Portal as PortalPrimitive } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
+import { useFocusGuards } from "./FocusGuards";
+import { FocusScope } from "./FocusScope";
 
 type Direction = "ltr" | "rtl";
 
@@ -37,6 +31,21 @@ const SUB_CLOSE_KEYS: Record<Direction, string[]> = {
   ltr: ["ArrowLeft"],
   rtl: ["ArrowRight"],
 };
+
+/**
+ * SlottedDivElement
+ */
+
+interface PrimitiveDivProps extends React.HTMLAttributes<HTMLDivElement> {
+  asChild?: boolean;
+}
+
+const SlottedDivElement = React.forwardRef<HTMLDivElement, PrimitiveDivProps>(
+  ({ asChild, ...rest }, forwardedRef) => {
+    const Comp = asChild ? Slot : "div";
+    return <Comp {...rest} ref={forwardedRef} />;
+  },
+);
 
 /* -------------------------------------------------------------------------------------------------
  * Menu
@@ -72,7 +81,6 @@ const [MenuProvider, useMenuContext] =
 type MenuRootContextValue = {
   onClose(): void;
   isUsingKeyboardRef: React.RefObject<boolean>;
-  dir: Direction;
   modal: boolean;
 };
 
@@ -83,7 +91,6 @@ interface MenuProps {
   children?: React.ReactNode;
   open?: boolean;
   onOpenChange?(open: boolean): void;
-  dir?: Direction;
   modal?: boolean;
 }
 
@@ -92,7 +99,6 @@ const Menu: React.FC<MenuProps> = (props: ScopedProps<MenuProps>) => {
     __scopeMenu,
     open = false,
     children,
-    dir,
     onOpenChange,
     modal = true,
   } = props;
@@ -100,7 +106,7 @@ const Menu: React.FC<MenuProps> = (props: ScopedProps<MenuProps>) => {
   const [content, setContent] = React.useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = React.useRef(false);
   const handleOpenChange = useCallbackRef(onOpenChange);
-  const direction = useDirection(dir);
+  const direction = "ltr";
 
   React.useEffect(() => {
     // Capture phase ensures we set the boolean before any side effects execute
@@ -298,10 +304,11 @@ const MenuRootContentModal = React.forwardRef<
   const composedRefs = useMergeRefs(forwardedRef, ref);
 
   // Hide everything from ARIA except the `MenuContent`
-  React.useEffect(() => {
+  /* TODO: Is this needed? */
+  /* React.useEffect(() => {
     const content = ref.current;
     if (content) return hideOthers(content);
-  }, []);
+  }, []); */
 
   return (
     <MenuContentImpl
@@ -434,8 +441,9 @@ const MenuContentImpl = React.forwardRef<
   const pointerDirRef = React.useRef<Side>("right");
   const lastPointerXRef = React.useRef(0);
 
+  /* TODO: Remoed ScrollWrapper from here, fix sideeffects */
   const ScrollLockWrapper = disableOutsideScroll
-    ? RemoveScroll
+    ? React.Fragment
     : React.Fragment;
   const scrollLockWrapperProps = disableOutsideScroll
     ? { as: Slot, allowPinchZoom: true }
@@ -640,14 +648,15 @@ MenuContent.displayName = CONTENT_NAME;
 
 const GROUP_NAME = "MenuGroup";
 
-type MenuGroupElement = React.ElementRef<typeof Primitive.div>;
-type PrimitiveDivProps = Radix.ComponentPropsWithoutRef<typeof Primitive.div>;
+type MenuGroupElement = React.ElementRef<typeof SlottedDivElement>;
 interface MenuGroupProps extends PrimitiveDivProps {}
 
 const MenuGroup = React.forwardRef<MenuGroupElement, MenuGroupProps>(
   (props: ScopedProps<MenuGroupProps>, forwardedRef) => {
     const { __scopeMenu, ...groupProps } = props;
-    return <Primitive.div role="group" {...groupProps} ref={forwardedRef} />;
+    return (
+      <SlottedDivElement role="group" {...groupProps} ref={forwardedRef} />
+    );
   },
 );
 
@@ -659,13 +668,13 @@ MenuGroup.displayName = GROUP_NAME;
 
 const LABEL_NAME = "MenuLabel";
 
-type MenuLabelElement = React.ElementRef<typeof Primitive.div>;
+type MenuLabelElement = React.ElementRef<typeof SlottedDivElement>;
 interface MenuLabelProps extends PrimitiveDivProps {}
 
 const MenuLabel = React.forwardRef<MenuLabelElement, MenuLabelProps>(
   (props: ScopedProps<MenuLabelProps>, forwardedRef) => {
     const { __scopeMenu, ...labelProps } = props;
-    return <Primitive.div {...labelProps} ref={forwardedRef} />;
+    return <SlottedDivElement {...labelProps} ref={forwardedRef} />;
   },
 );
 
@@ -702,7 +711,8 @@ const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
         menuItem.addEventListener(ITEM_SELECT, (event) => onSelect?.(event), {
           once: true,
         });
-        dispatchDiscreteCustomEvent(menuItem, itemSelectEvent);
+        /* dispatchDiscreteCustomEvent */
+        ReactDOM.flushSync(() => menuItem.dispatchEvent(itemSelectEvent));
         if (itemSelectEvent.defaultPrevented) {
           isPointerDownRef.current = false;
         } else {
@@ -750,7 +760,7 @@ MenuItem.displayName = ITEM_NAME;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-type MenuItemImplElement = React.ElementRef<typeof Primitive.div>;
+type MenuItemImplElement = React.ElementRef<typeof SlottedDivElement>;
 interface MenuItemImplProps extends PrimitiveDivProps {
   disabled?: boolean;
   textValue?: string;
@@ -785,7 +795,7 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
           {...rovingFocusGroupScope}
           focusable={!disabled}
         >
-          <Primitive.div
+          <SlottedDivElement
             role="menuitem"
             data-highlighted={isFocused ? "" : undefined}
             aria-disabled={disabled || undefined}
@@ -855,21 +865,21 @@ const MenuCheckboxItem = React.forwardRef<
   MenuCheckboxItemProps
 >((props: ScopedProps<MenuCheckboxItemProps>, forwardedRef) => {
   const { checked = false, onCheckedChange, ...checkboxItemProps } = props;
+
+  /* TODO: removed indicator warpper, fix sideeffects */
   return (
-    <ItemIndicatorProvider scope={props.__scopeMenu} checked={checked}>
-      <MenuItem
-        role="menuitemcheckbox"
-        aria-checked={isIndeterminate(checked) ? "mixed" : checked}
-        {...checkboxItemProps}
-        ref={forwardedRef}
-        data-state={getCheckedState(checked)}
-        onSelect={composeEventHandlers(
-          checkboxItemProps.onSelect,
-          () => onCheckedChange?.(isIndeterminate(checked) ? true : !checked),
-          { checkForDefaultPrevented: false },
-        )}
-      />
-    </ItemIndicatorProvider>
+    <MenuItem
+      role="menuitemcheckbox"
+      aria-checked={isIndeterminate(checked) ? "mixed" : checked}
+      {...checkboxItemProps}
+      ref={forwardedRef}
+      data-state={getCheckedState(checked)}
+      onSelect={composeEventHandlers(
+        checkboxItemProps.onSelect,
+        () => onCheckedChange?.(isIndeterminate(checked) ? true : !checked),
+        { checkForDefaultPrevented: false },
+      )}
+    />
   );
 });
 
@@ -930,76 +940,26 @@ const MenuRadioItem = React.forwardRef<
   const { value, ...radioItemProps } = props;
   const context = useRadioGroupContext(RADIO_ITEM_NAME, props.__scopeMenu);
   const checked = value === context.value;
+
+  /* TODO: removed indicator warpper, fix sideeffects */
+
   return (
-    <ItemIndicatorProvider scope={props.__scopeMenu} checked={checked}>
-      <MenuItem
-        role="menuitemradio"
-        aria-checked={checked}
-        {...radioItemProps}
-        ref={forwardedRef}
-        data-state={getCheckedState(checked)}
-        onSelect={composeEventHandlers(
-          radioItemProps.onSelect,
-          () => context.onValueChange?.(value),
-          { checkForDefaultPrevented: false },
-        )}
-      />
-    </ItemIndicatorProvider>
+    <MenuItem
+      role="menuitemradio"
+      aria-checked={checked}
+      {...radioItemProps}
+      ref={forwardedRef}
+      data-state={getCheckedState(checked)}
+      onSelect={composeEventHandlers(
+        radioItemProps.onSelect,
+        () => context.onValueChange?.(value),
+        { checkForDefaultPrevented: false },
+      )}
+    />
   );
 });
 
 MenuRadioItem.displayName = RADIO_ITEM_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuItemIndicator
- * -----------------------------------------------------------------------------------------------*/
-
-const ITEM_INDICATOR_NAME = "MenuItemIndicator";
-
-type CheckboxContextValue = { checked: CheckedState };
-
-const [ItemIndicatorProvider, useItemIndicatorContext] =
-  createMenuContext<CheckboxContextValue>(ITEM_INDICATOR_NAME, {
-    checked: false,
-  });
-
-type MenuItemIndicatorElement = React.ElementRef<typeof Primitive.span>;
-type PrimitiveSpanProps = Radix.ComponentPropsWithoutRef<typeof Primitive.span>;
-interface MenuItemIndicatorProps extends PrimitiveSpanProps {
-  /**
-   * Used to force mounting when more control is needed. Useful when
-   * controlling animation with React animation libraries.
-   */
-  forceMount?: true;
-}
-
-const MenuItemIndicator = React.forwardRef<
-  MenuItemIndicatorElement,
-  MenuItemIndicatorProps
->((props: ScopedProps<MenuItemIndicatorProps>, forwardedRef) => {
-  const { __scopeMenu, forceMount, ...itemIndicatorProps } = props;
-  const indicatorContext = useItemIndicatorContext(
-    ITEM_INDICATOR_NAME,
-    __scopeMenu,
-  );
-  return (
-    <Presence
-      present={
-        forceMount ||
-        isIndeterminate(indicatorContext.checked) ||
-        indicatorContext.checked === true
-      }
-    >
-      <Primitive.span
-        {...itemIndicatorProps}
-        ref={forwardedRef}
-        data-state={getCheckedState(indicatorContext.checked)}
-      />
-    </Presence>
-  );
-});
-
-MenuItemIndicator.displayName = ITEM_INDICATOR_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuSeparator
@@ -1007,7 +967,7 @@ MenuItemIndicator.displayName = ITEM_INDICATOR_NAME;
 
 const SEPARATOR_NAME = "MenuSeparator";
 
-type MenuSeparatorElement = React.ElementRef<typeof Primitive.div>;
+type MenuSeparatorElement = React.ElementRef<typeof SlottedDivElement>;
 interface MenuSeparatorProps extends PrimitiveDivProps {}
 
 const MenuSeparator = React.forwardRef<
@@ -1016,7 +976,7 @@ const MenuSeparator = React.forwardRef<
 >((props: ScopedProps<MenuSeparatorProps>, forwardedRef) => {
   const { __scopeMenu, ...separatorProps } = props;
   return (
-    <Primitive.div
+    <SlottedDivElement
       role="separator"
       aria-orientation="horizontal"
       {...separatorProps}
@@ -1469,7 +1429,6 @@ const Item = MenuItem;
 const CheckboxItem = MenuCheckboxItem;
 const RadioGroup = MenuRadioGroup;
 const RadioItem = MenuRadioItem;
-const ItemIndicator = MenuItemIndicator;
 const Separator = MenuSeparator;
 const Arrow = MenuArrow;
 const Sub = MenuSub;
@@ -1489,7 +1448,6 @@ export {
   MenuCheckboxItem,
   MenuRadioGroup,
   MenuRadioItem,
-  MenuItemIndicator,
   MenuSeparator,
   MenuArrow,
   MenuSub,
@@ -1506,7 +1464,6 @@ export {
   CheckboxItem,
   RadioGroup,
   RadioItem,
-  ItemIndicator,
   Separator,
   Arrow,
   Sub,
@@ -1524,7 +1481,6 @@ export type {
   MenuCheckboxItemProps,
   MenuRadioGroupProps,
   MenuRadioItemProps,
-  MenuItemIndicatorProps,
   MenuSeparatorProps,
   MenuArrowProps,
   MenuSubProps,
