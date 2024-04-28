@@ -186,3 +186,16 @@ function DismissableBox(props) {
     </DismissableLayer>
   );
 }
+
+export const DisableOutsidePointerEventsWhileHidden = () => (
+  <div>
+    <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
+      <div style={{ height: 100, width: 100, background: "red" }}>
+        <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
+          <div style={{ height: 50, width: 50, background: "blue" }} />
+        </DismissableLayer>
+      </div>
+    </DismissableLayer>
+    <button onClick={console.log}>Should be clickable</button>
+  </div>
+);

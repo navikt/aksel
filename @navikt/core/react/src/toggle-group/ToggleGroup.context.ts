@@ -28,4 +28,5 @@ export const [ToggleGroupProvider, useToggleGroupContext] =
     name: "ToggleGroupContext",
     hookName: "useToggleGroupContext",
     providerName: "ToggleGroupProvider",
+    errorMessage: "<ToggleGroup.Item> needs to be wrapped within <ToggleGroup>",
   });

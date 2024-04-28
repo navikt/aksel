@@ -60,6 +60,7 @@ export function usePointerDownOutside(
       }
       isPointerInsideReactTreeRef.current = false;
     };
+
     /**
      * If this hook executes in a component that mounts via a `pointerdown` event, the event
      * would bubble up to the document and trigger a `pointerDownOutside` event. We avoid
@@ -76,6 +77,7 @@ export function usePointerDownOutside(
     const timerId = window.setTimeout(() => {
       ownerDocument.addEventListener("pointerdown", handlePointerDown);
     }, 0);
+
     return () => {
       window.clearTimeout(timerId);
       ownerDocument.removeEventListener("pointerdown", handlePointerDown);
