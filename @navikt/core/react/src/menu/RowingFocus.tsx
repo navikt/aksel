@@ -1,15 +1,53 @@
-import React, { forwardRef, useCallback } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { composeEventHandlers } from "../../esm/util/composeEventHandlers";
 import { Slot } from "../util/Slot";
+import { useCallbackRef, useMergeRefs } from "../util/hooks";
 import { DescendantsManager } from "../util/hooks/descendants/descendant";
 
 interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, object>;
+  onEntryFocus?: (event: Event) => void;
 }
 
+const ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus";
+const EVENT_OPTIONS = { bubbles: false, cancelable: true };
+
 export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
-  ({ asChild, descendants, onKeyDown, ...rest }: RowingFocusProps, ref) => {
+  (
+    {
+      asChild,
+      descendants,
+      onKeyDown,
+      onEntryFocus,
+      onMouseDown,
+      onBlur,
+      onFocus,
+      ...rest
+    }: RowingFocusProps,
+    ref,
+  ) => {
+    const _ref = React.useRef<HTMLDivElement>(null);
+    const composedRefs = useMergeRefs(ref, _ref);
+
+    const handleEntryFocus = useCallbackRef(onEntryFocus);
+    const [isTabbingBackOut, setIsTabbingBackOut] = useState(false);
+    const isClickFocusRef = useRef(false);
+
+    useEffect(() => {
+      const node = _ref.current;
+      if (node) {
+        node.addEventListener(ENTRY_FOCUS, handleEntryFocus);
+        return () => node.removeEventListener(ENTRY_FOCUS, handleEntryFocus);
+      }
+    }, [handleEntryFocus]);
+
     /* TODO: implement ownerdocument here */
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
@@ -59,9 +97,37 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     const Comp = asChild ? Slot : "div";
     return (
       <Comp
-        ref={ref}
+        ref={composedRefs}
+        tabIndex={isTabbingBackOut || descendants.enabledCount() === 0 ? -1 : 0}
         {...rest}
+        style={{ outline: "none", ...rest.style }}
         onKeyDown={composeEventHandlers(onKeyDown, handleKeyDown)}
+        onMouseDown={composeEventHandlers(onMouseDown, () => {
+          isClickFocusRef.current = true;
+        })}
+        onFocus={composeEventHandlers(onFocus, (event) => {
+          // We normally wouldn't need this check, because we already check
+          // that the focus is on the current target and not bubbling to it.
+          // We do this because Safari doesn't focus buttons when clicked, and
+          // instead, the wrapper will get focused and not through a bubbling event.
+          const isKeyboardFocus = !isClickFocusRef.current;
+
+          if (
+            event.target === event.currentTarget &&
+            isKeyboardFocus &&
+            !isTabbingBackOut
+          ) {
+            const entryFocusEvent = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
+            event.currentTarget.dispatchEvent(entryFocusEvent);
+
+            if (!entryFocusEvent.defaultPrevented) {
+              descendants.firstEnabled()?.node.focus({ preventScroll: true });
+            }
+          }
+
+          isClickFocusRef.current = false;
+        })}
+        onBlur={composeEventHandlers(onBlur, () => setIsTabbingBackOut(false))}
       >
         123
       </Comp>
