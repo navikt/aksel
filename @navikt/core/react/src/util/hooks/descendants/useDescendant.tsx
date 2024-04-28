@@ -86,7 +86,7 @@ export function createDescendantContext<
   );
 
   const _useDescendantsContext = () =>
-    cast<DescendantsManager<T, K>>(useDescendantsContext());
+    cast<DescendantsManager<T, K> | undefined>(useDescendantsContext(false));
 
   const _useDescendant = (options?: DescendantOptions<K>) =>
     useDescendant<T, K>(options);
