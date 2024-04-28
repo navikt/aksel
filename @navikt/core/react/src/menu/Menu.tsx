@@ -15,7 +15,7 @@ import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { useFocusGuards } from "./FocusGuards";
 import { FocusScope } from "./FocusScope";
-import { RowingFocus } from "./RowingFocus";
+import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 
 type Direction = "ltr" | "rtl";
 
@@ -219,7 +219,7 @@ export const [
   useMenuDescendantsContext,
   useMenuDescendants,
   useMenuDescendant,
-] = createDescendantContext<MenuItemElement>();
+] = createDescendantContext<MenuItemElement, { textValue?: string }>();
 
 type MenuContentElement = MenuRootContentTypeElement;
 /**
@@ -293,7 +293,6 @@ const MenuRootContentModal = React.forwardRef<
       // make sure to only disable pointer events when open
       // this avoids blocking interactions while animating out
       disableOutsidePointerEvents={context.open}
-      disableOutsideScroll
       // When focus is trapped, a `focusout` event may still happen.
       // We make sure we don't trigger our `onDismiss` in such case.
       onFocusOutside={composeEventHandlers(
@@ -317,7 +316,6 @@ const MenuRootContentNonModal = React.forwardRef<
       ref={forwardedRef}
       trapFocus={false}
       disableOutsidePointerEvents={false}
-      disableOutsideScroll={false}
       onDismiss={() => context.onOpenChange(false)}
     />
   );
@@ -330,9 +328,7 @@ type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
-type RovingFocusGroupProps = React.ComponentPropsWithoutRef<
-  typeof RovingFocusGroup.Root
->;
+
 type PopperContentProps = React.ComponentPropsWithoutRef<
   typeof Floating.Content
 >;
@@ -340,12 +336,6 @@ type MenuContentImplPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
-
-  /**
-   * Whether scrolling outside the `MenuContent` should be prevented
-   * (default: `false`)
-   */
-  disableOutsideScroll?: boolean;
 
   /**
    * Whether focus should be trapped within the `MenuContent`
@@ -361,14 +351,7 @@ interface MenuContentImplProps
    * Can be prevented.
    */
   onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
-
-  /**
-   * Whether keyboard navigation should loop around
-   * @defaultValue false
-   */
-  loop?: RovingFocusGroupProps["loop"];
-
-  onEntryFocus?: RovingFocusGroupProps["onEntryFocus"];
+  onEntryFocus?: RowingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
   onFocusOutside?: DismissableLayerProps["onFocusOutside"];
@@ -380,7 +363,6 @@ const MenuContentImpl = React.forwardRef<
   MenuContentImplProps
 >((props: MenuContentImplProps, forwardedRef) => {
   const {
-    loop = false,
     trapFocus,
     onOpenAutoFocus,
     onCloseAutoFocus,
@@ -391,7 +373,6 @@ const MenuContentImpl = React.forwardRef<
     onFocusOutside,
     onInteractOutside,
     onDismiss,
-    disableOutsideScroll,
     ...contentProps
   } = props;
 
@@ -413,24 +394,16 @@ const MenuContentImpl = React.forwardRef<
   const pointerDirRef = React.useRef<Side>("right");
   const lastPointerXRef = React.useRef(0);
 
-  /* TODO: Remoed ScrollWrapper from here, fix sideeffects */
-  const ScrollLockWrapper = disableOutsideScroll
-    ? React.Fragment
-    : React.Fragment;
-  const scrollLockWrapperProps = disableOutsideScroll
-    ? { as: Slot, allowPinchZoom: true }
-    : undefined;
-
   const handleTypeaheadSearch = (key: string) => {
     const search = searchRef.current + key;
-    const items = getItems().filter((item) => !item.disabled);
+    const items = descendants.enabledValues();
     const currentItem = document.activeElement;
-    const currentMatch = items.find((item) => item.ref.current === currentItem)
+
+    const currentMatch = items.find((item) => item.node === currentItem)
       ?.textValue;
-    const values = items.map((item) => item.textValue);
+    const values = items.map((item) => item.textValue ?? "");
     const nextMatch = getNextMatch(values, search, currentMatch);
-    const newItem = items.find((item) => item.textValue === nextMatch)?.ref
-      .current;
+    const newItem = items.find((item) => item.textValue === nextMatch)?.node;
 
     // Reset `searchRef` 1 second after it was last updated
     (function updateSearch(value: string) {
@@ -496,108 +469,104 @@ const MenuContentImpl = React.forwardRef<
         pointerGraceIntentRef.current = intent;
       }, [])}
     >
-      <ScrollLockWrapper {...scrollLockWrapperProps}>
-        <FocusScope
+      <FocusScope
+        asChild
+        trapped={trapFocus}
+        onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
+          // when opening, explicitly focus the content area only and leave
+          // `onEntryFocus` in  control of focusing first item
+          event.preventDefault();
+          contentRef.current?.focus({ preventScroll: true });
+        })}
+        onUnmountAutoFocus={onCloseAutoFocus}
+      >
+        <DismissableLayer
           asChild
-          trapped={trapFocus}
-          onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
-            // when opening, explicitly focus the content area only and leave
-            // `onEntryFocus` in  control of focusing first item
-            event.preventDefault();
-            contentRef.current?.focus({ preventScroll: true });
-          })}
-          onUnmountAutoFocus={onCloseAutoFocus}
+          disableOutsidePointerEvents={disableOutsidePointerEvents}
+          onEscapeKeyDown={onEscapeKeyDown}
+          onPointerDownOutside={onPointerDownOutside}
+          onFocusOutside={onFocusOutside}
+          onInteractOutside={onInteractOutside}
+          onDismiss={onDismiss}
         >
-          <DismissableLayer
-            asChild
-            disableOutsidePointerEvents={disableOutsidePointerEvents}
-            onEscapeKeyDown={onEscapeKeyDown}
-            onPointerDownOutside={onPointerDownOutside}
-            onFocusOutside={onFocusOutside}
-            onInteractOutside={onInteractOutside}
-            onDismiss={onDismiss}
+          <RowingFocus
+            descendants={descendants}
+            onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
+              // only focus first item when using keyboard
+              if (!rootContext.isUsingKeyboardRef.current)
+                event.preventDefault();
+            })}
           >
-            <RowingFocus
-              descendants={descendants}
-              onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-                // only focus first item when using keyboard
-                if (!rootContext.isUsingKeyboardRef.current)
-                  event.preventDefault();
-              })}
-            >
-              <Floating.Content
-                role="menu"
-                aria-orientation="vertical"
-                data-state={getOpenState(context.open)}
-                data-radix-menu-content=""
-                dir={rootContext.dir}
-                {...contentProps}
-                ref={composedRefs}
-                style={{ outline: "none", ...contentProps.style }}
-                onKeyDown={composeEventHandlers(
-                  contentProps.onKeyDown,
-                  (event) => {
-                    // submenu key events bubble through portals. We only care about keys in this menu.
-                    const target = event.target as HTMLElement;
-                    const isKeyDownInside =
-                      target.closest("[data-radix-menu-content]") ===
-                      event.currentTarget;
-                    const isModifierKey =
-                      event.ctrlKey || event.altKey || event.metaKey;
-                    const isCharacterKey = event.key.length === 1;
-                    if (isKeyDownInside) {
-                      // menus should not be navigated using tab key so we prevent it
-                      if (event.key === "Tab") event.preventDefault();
-                      if (!isModifierKey && isCharacterKey)
-                        handleTypeaheadSearch(event.key);
-                    }
-                    // focus first/last item based on key pressed
-                    const content = contentRef.current;
-                    if (event.target !== content) return;
-                    if (!FIRST_LAST_KEYS.includes(event.key)) return;
-                    event.preventDefault();
-                    const items = getItems().filter((item) => !item.disabled);
-                    const candidateNodes = items.map(
-                      (item) => item.ref.current!,
-                    );
-                    if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
-                    focusFirst(candidateNodes);
-                  },
-                )}
-                onBlur={composeEventHandlers(props.onBlur, (event) => {
-                  // clear search buffer when leaving the menu
-                  if (!event.currentTarget.contains(event.target)) {
-                    window.clearTimeout(timerRef.current);
-                    searchRef.current = "";
+            <Floating.Content
+              role="menu"
+              aria-orientation="vertical"
+              data-state={getOpenState(context.open)}
+              data-radix-menu-content=""
+              dir={rootContext.dir}
+              {...contentProps}
+              ref={composedRefs}
+              style={{ outline: "none", ...contentProps.style }}
+              onKeyDown={composeEventHandlers(
+                contentProps.onKeyDown,
+                (event) => {
+                  // submenu key events bubble through portals. We only care about keys in this menu.
+                  const target = event.target as HTMLElement;
+                  const isKeyDownInside =
+                    target.closest("[data-radix-menu-content]") ===
+                    event.currentTarget;
+                  const isModifierKey =
+                    event.ctrlKey || event.altKey || event.metaKey;
+                  const isCharacterKey = event.key.length === 1;
+                  if (isKeyDownInside) {
+                    // menus should not be navigated using tab key so we prevent it
+                    if (event.key === "Tab") event.preventDefault();
+                    if (!isModifierKey && isCharacterKey)
+                      handleTypeaheadSearch(event.key);
                   }
-                })}
-                onPointerMove={composeEventHandlers(
-                  props.onPointerMove,
-                  whenMouse((event) => {
-                    const target = event.target as HTMLElement;
-                    const pointerXHasChanged =
-                      lastPointerXRef.current !== event.clientX;
+                  // focus first/last item based on key pressed
+                  const content = contentRef.current;
+                  if (event.target !== content) return;
+                  if (!FIRST_LAST_KEYS.includes(event.key)) return;
+                  event.preventDefault();
+                  const items = getItems().filter((item) => !item.disabled);
+                  const candidateNodes = items.map((item) => item.ref.current!);
+                  if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
+                  focusFirst(candidateNodes);
+                },
+              )}
+              onBlur={composeEventHandlers(props.onBlur, (event) => {
+                // clear search buffer when leaving the menu
+                if (!event.currentTarget.contains(event.target)) {
+                  window.clearTimeout(timerRef.current);
+                  searchRef.current = "";
+                }
+              })}
+              onPointerMove={composeEventHandlers(
+                props.onPointerMove,
+                whenMouse((event) => {
+                  const target = event.target as HTMLElement;
+                  const pointerXHasChanged =
+                    lastPointerXRef.current !== event.clientX;
 
-                    // We don't use `event.movementX` for this check because Safari will
-                    // always return `0` on a pointer event.
-                    if (
-                      event.currentTarget.contains(target) &&
-                      pointerXHasChanged
-                    ) {
-                      const newDir =
-                        event.clientX > lastPointerXRef.current
-                          ? "right"
-                          : "left";
-                      pointerDirRef.current = newDir;
-                      lastPointerXRef.current = event.clientX;
-                    }
-                  }),
-                )}
-              />
-            </RowingFocus>
-          </DismissableLayer>
-        </FocusScope>
-      </ScrollLockWrapper>
+                  // We don't use `event.movementX` for this check because Safari will
+                  // always return `0` on a pointer event.
+                  if (
+                    event.currentTarget.contains(target) &&
+                    pointerXHasChanged
+                  ) {
+                    const newDir =
+                      event.clientX > lastPointerXRef.current
+                        ? "right"
+                        : "left";
+                    pointerDirRef.current = newDir;
+                    lastPointerXRef.current = event.clientX;
+                  }
+                }),
+              )}
+            />
+          </RowingFocus>
+        </DismissableLayer>
+      </FocusScope>
     </MenuContentProvider>
   );
 });
@@ -732,78 +701,53 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
   (props: MenuItemImplProps, forwardedRef) => {
     const { disabled = false, textValue, ...itemProps } = props;
 
-    const { register } = useMenuDescendant();
+    const { register } = useMenuDescendant({ disabled, textValue });
 
     const contentContext = useMenuContentContext(ITEM_NAME);
-    const rovingFocusGroupScope = useRovingFocusGroupScope();
     const ref = React.useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
     const [isFocused, setIsFocused] = React.useState(false);
 
-    // get the item's `.textContent` as default strategy for typeahead `textValue`
-    const [textContent, setTextContent] = React.useState("");
-    React.useEffect(() => {
-      const menuItem = ref.current;
-      if (menuItem) {
-        setTextContent((menuItem.textContent ?? "").trim());
-      }
-    }, [itemProps.children]);
-
     return (
-      <Collection.ItemSlot
-        disabled={disabled}
-        textValue={textValue ?? textContent}
-      >
-        <RovingFocusGroup.Item
-          asChild
-          {...rovingFocusGroupScope}
-          focusable={!disabled}
-        >
-          <SlottedDivElement
-            role="menuitem"
-            data-highlighted={isFocused ? "" : undefined}
-            aria-disabled={disabled || undefined}
-            data-disabled={disabled ? "" : undefined}
-            {...itemProps}
-            ref={composedRefs}
-            /**
-             * We focus items on `pointerMove` to achieve the following:
-             *
-             * - Mouse over an item (it focuses)
-             * - Leave mouse where it is and use keyboard to focus a different item
-             * - Wiggle mouse without it leaving previously focused item
-             * - Previously focused item should re-focus
-             *
-             * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
-             * wiggles. This is to match native menu implementation.
-             */
-            onPointerMove={composeEventHandlers(
-              props.onPointerMove,
-              whenMouse((event) => {
-                if (disabled) {
-                  contentContext.onItemLeave(event);
-                } else {
-                  contentContext.onItemEnter(event);
-                  if (!event.defaultPrevented) {
-                    const item = event.currentTarget;
-                    item.focus();
-                  }
-                }
-              }),
-            )}
-            onPointerLeave={composeEventHandlers(
-              props.onPointerLeave,
-              whenMouse((event) => contentContext.onItemLeave(event)),
-            )}
-            onFocus={composeEventHandlers(props.onFocus, () =>
-              setIsFocused(true),
-            )}
-            onBlur={composeEventHandlers(props.onBlur, () =>
-              setIsFocused(false),
-            )}
-          />
-        </RovingFocusGroup.Item>
-      </Collection.ItemSlot>
+      <SlottedDivElement
+        role="menuitem"
+        data-highlighted={isFocused ? "" : undefined}
+        aria-disabled={disabled || undefined}
+        data-disabled={disabled ? "" : undefined}
+        {...itemProps}
+        ref={composedRefs}
+        /**
+         * We focus items on `pointerMove` to achieve the following:
+         *
+         * - Mouse over an item (it focuses)
+         * - Leave mouse where it is and use keyboard to focus a different item
+         * - Wiggle mouse without it leaving previously focused item
+         * - Previously focused item should re-focus
+         *
+         * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
+         * wiggles. This is to match native menu implementation.
+         */
+        onPointerMove={composeEventHandlers(
+          props.onPointerMove,
+          whenMouse((event) => {
+            if (disabled) {
+              contentContext.onItemLeave(event);
+            } else {
+              contentContext.onItemEnter(event);
+              if (!event.defaultPrevented) {
+                const item = event.currentTarget;
+                item.focus();
+              }
+            }
+          }),
+        )}
+        onPointerLeave={composeEventHandlers(
+          props.onPointerLeave,
+          whenMouse((event) => contentContext.onItemLeave(event)),
+        )}
+        onFocus={composeEventHandlers(props.onFocus, () => setIsFocused(true))}
+        onBlur={composeEventHandlers(props.onBlur, () => setIsFocused(false))}
+      />
     );
   },
 );
@@ -1187,7 +1131,6 @@ const MenuSubContent = React.forwardRef<
             align="start"
             side={rootContext.dir === "rtl" ? "left" : "right"}
             disableOutsidePointerEvents={false}
-            disableOutsideScroll={false}
             trapFocus={false}
             onOpenAutoFocus={(event) => {
               // when opening a submenu, focus content for keyboard users only
@@ -1292,7 +1235,11 @@ function wrapArray<T>(array: T[], startIndex: number) {
  * and focus would never move. This is as opposed to the regular case, where we
  * don't want focus to move if the current match still matches.
  */
-function getNextMatch(values: string[], search: string, currentMatch?: string) {
+function getNextMatch(
+  values: string[],
+  search: string,
+  currentMatch?: string | null,
+) {
   const isRepeated =
     search.length > 1 && Array.from(search).every((char) => char === search[0]);
   const normalizedSearch = isRepeated ? search[0] : search;
