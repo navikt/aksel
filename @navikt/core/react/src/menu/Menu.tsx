@@ -1,7 +1,6 @@
 import { createCollection } from "@radix-ui/react-collection";
 import { createContextScope } from "@radix-ui/react-context";
 import type { Scope } from "@radix-ui/react-context";
-import * as PopperPrimitive from "@radix-ui/react-popper";
 import { createPopperScope } from "@radix-ui/react-popper";
 import { Presence } from "@radix-ui/react-presence";
 import * as RovingFocusGroup from "@radix-ui/react-roving-focus";
@@ -10,6 +9,7 @@ import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
+import { Floating } from "../overlays/floating/Floating";
 import { Portal as PortalPrimitive } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
@@ -101,7 +101,7 @@ const Menu: React.FC<MenuProps> = (props: ScopedProps<MenuProps>) => {
     onOpenChange,
     modal = true,
   } = props;
-  const popperScope = usePopperScope(__scopeMenu);
+
   const [content, setContent] = React.useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = React.useRef(false);
   const handleOpenChange = useCallbackRef(onOpenChange);
@@ -135,7 +135,7 @@ const Menu: React.FC<MenuProps> = (props: ScopedProps<MenuProps>) => {
   }, []);
 
   return (
-    <PopperPrimitive.Root {...popperScope}>
+    <Floating>
       <MenuProvider
         scope={__scopeMenu}
         open={open}
@@ -156,7 +156,7 @@ const Menu: React.FC<MenuProps> = (props: ScopedProps<MenuProps>) => {
           {children}
         </MenuRootProvider>
       </MenuProvider>
-    </PopperPrimitive.Root>
+    </Floating>
   );
 };
 
@@ -168,23 +168,15 @@ Menu.displayName = MENU_NAME;
 
 const ANCHOR_NAME = "MenuAnchor";
 
-type MenuAnchorElement = React.ElementRef<typeof PopperPrimitive.Anchor>;
-type PopperAnchorProps = React.ComponentPropsWithoutRef<
-  typeof PopperPrimitive.Anchor
->;
+type MenuAnchorElement = React.ElementRef<typeof Floating.Anchor>;
+type PopperAnchorProps = React.ComponentPropsWithoutRef<typeof Floating.Anchor>;
 interface MenuAnchorProps extends PopperAnchorProps {}
 
 const MenuAnchor = React.forwardRef<MenuAnchorElement, MenuAnchorProps>(
   (props: ScopedProps<MenuAnchorProps>, forwardedRef) => {
-    const { __scopeMenu, ...anchorProps } = props;
-    const popperScope = usePopperScope(__scopeMenu);
-    return (
-      <PopperPrimitive.Anchor
-        {...popperScope}
-        {...anchorProps}
-        ref={forwardedRef}
-      />
-    );
+    const { ...anchorProps } = props;
+
+    return <Floating.Anchor {...anchorProps} ref={forwardedRef} />;
   },
 );
 
@@ -351,7 +343,7 @@ const MenuRootContentNonModal = React.forwardRef<
 
 /* ---------------------------------------------------------------------------------------------- */
 
-type MenuContentImplElement = React.ElementRef<typeof PopperPrimitive.Content>;
+type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
@@ -360,7 +352,7 @@ type RovingFocusGroupProps = React.ComponentPropsWithoutRef<
   typeof RovingFocusGroup.Root
 >;
 type PopperContentProps = React.ComponentPropsWithoutRef<
-  typeof PopperPrimitive.Content
+  typeof Floating.Content
 >;
 type MenuContentImplPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
@@ -561,7 +553,7 @@ const MenuContentImpl = React.forwardRef<
               })}
               preventScrollOnEntryFocus
             >
-              <PopperPrimitive.Content
+              <Floating.Content
                 role="menu"
                 aria-orientation="vertical"
                 data-state={getOpenState(context.open)}
@@ -987,34 +979,6 @@ const MenuSeparator = React.forwardRef<
 MenuSeparator.displayName = SEPARATOR_NAME;
 
 /* -------------------------------------------------------------------------------------------------
- * MenuArrow
- * -----------------------------------------------------------------------------------------------*/
-
-const ARROW_NAME = "MenuArrow";
-
-type MenuArrowElement = React.ElementRef<typeof PopperPrimitive.Arrow>;
-type PopperArrowProps = React.ComponentPropsWithoutRef<
-  typeof PopperPrimitive.Arrow
->;
-interface MenuArrowProps extends PopperArrowProps {}
-
-const MenuArrow = React.forwardRef<MenuArrowElement, MenuArrowProps>(
-  (props: ScopedProps<MenuArrowProps>, forwardedRef) => {
-    const { __scopeMenu, ...arrowProps } = props;
-    const popperScope = usePopperScope(__scopeMenu);
-    return (
-      <PopperPrimitive.Arrow
-        {...popperScope}
-        {...arrowProps}
-        ref={forwardedRef}
-      />
-    );
-  },
-);
-
-MenuArrow.displayName = ARROW_NAME;
-
-/* -------------------------------------------------------------------------------------------------
  * MenuSub
  * -----------------------------------------------------------------------------------------------*/
 
@@ -1039,7 +1003,7 @@ interface MenuSubProps {
 const MenuSub: React.FC<MenuSubProps> = (props: ScopedProps<MenuSubProps>) => {
   const { __scopeMenu, children, open = false, onOpenChange } = props;
   const parentMenuContext = useMenuContext(SUB_NAME, __scopeMenu);
-  const popperScope = usePopperScope(__scopeMenu);
+
   const [trigger, setTrigger] = React.useState<MenuSubTriggerElement | null>(
     null,
   );
@@ -1053,7 +1017,7 @@ const MenuSub: React.FC<MenuSubProps> = (props: ScopedProps<MenuSubProps>) => {
   }, [parentMenuContext.open, handleOpenChange]);
 
   return (
-    <PopperPrimitive.Root {...popperScope}>
+    <Floating>
       <MenuProvider
         scope={__scopeMenu}
         open={open}
@@ -1071,7 +1035,7 @@ const MenuSub: React.FC<MenuSubProps> = (props: ScopedProps<MenuSubProps>) => {
           {children}
         </MenuSubProvider>
       </MenuProvider>
-    </PopperPrimitive.Root>
+    </Floating>
   );
 };
 
@@ -1429,7 +1393,6 @@ const CheckboxItem = MenuCheckboxItem;
 const RadioGroup = MenuRadioGroup;
 const RadioItem = MenuRadioItem;
 const Separator = MenuSeparator;
-const Arrow = MenuArrow;
 const Sub = MenuSub;
 const SubTrigger = MenuSubTrigger;
 const SubContent = MenuSubContent;
@@ -1448,7 +1411,6 @@ export {
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
-  MenuArrow,
   MenuSub,
   MenuSubTrigger,
   MenuSubContent,
@@ -1464,7 +1426,6 @@ export {
   RadioGroup,
   RadioItem,
   Separator,
-  Arrow,
   Sub,
   SubTrigger,
   SubContent,
@@ -1481,7 +1442,6 @@ export type {
   MenuRadioGroupProps,
   MenuRadioItemProps,
   MenuSeparatorProps,
-  MenuArrowProps,
   MenuSubProps,
   MenuSubTriggerProps,
   MenuSubContentProps,
