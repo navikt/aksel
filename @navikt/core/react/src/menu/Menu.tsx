@@ -1,16 +1,15 @@
 import { createCollection } from "@radix-ui/react-collection";
 import { createContextScope } from "@radix-ui/react-context";
 import type { Scope } from "@radix-ui/react-context";
-import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import * as PopperPrimitive from "@radix-ui/react-popper";
 import { createPopperScope } from "@radix-ui/react-popper";
 import { Presence } from "@radix-ui/react-presence";
-import type * as Radix from "@radix-ui/react-primitive";
 import * as RovingFocusGroup from "@radix-ui/react-roving-focus";
 import { createRovingFocusGroupScope } from "@radix-ui/react-roving-focus";
 import { Slot } from "@radix-ui/react-slot";
 import React from "react";
 import ReactDOM from "react-dom";
+import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { Portal as PortalPrimitive } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
@@ -170,7 +169,7 @@ Menu.displayName = MENU_NAME;
 const ANCHOR_NAME = "MenuAnchor";
 
 type MenuAnchorElement = React.ElementRef<typeof PopperPrimitive.Anchor>;
-type PopperAnchorProps = Radix.ComponentPropsWithoutRef<
+type PopperAnchorProps = React.ComponentPropsWithoutRef<
   typeof PopperPrimitive.Anchor
 >;
 interface MenuAnchorProps extends PopperAnchorProps {}
@@ -353,14 +352,14 @@ const MenuRootContentNonModal = React.forwardRef<
 /* ---------------------------------------------------------------------------------------------- */
 
 type MenuContentImplElement = React.ElementRef<typeof PopperPrimitive.Content>;
-type FocusScopeProps = Radix.ComponentPropsWithoutRef<typeof FocusScope>;
-type DismissableLayerProps = Radix.ComponentPropsWithoutRef<
+type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
+type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
-type RovingFocusGroupProps = Radix.ComponentPropsWithoutRef<
+type RovingFocusGroupProps = React.ComponentPropsWithoutRef<
   typeof RovingFocusGroup.Root
 >;
-type PopperContentProps = Radix.ComponentPropsWithoutRef<
+type PopperContentProps = React.ComponentPropsWithoutRef<
   typeof PopperPrimitive.Content
 >;
 type MenuContentImplPrivateProps = {
@@ -994,7 +993,7 @@ MenuSeparator.displayName = SEPARATOR_NAME;
 const ARROW_NAME = "MenuArrow";
 
 type MenuArrowElement = React.ElementRef<typeof PopperPrimitive.Arrow>;
-type PopperArrowProps = Radix.ComponentPropsWithoutRef<
+type PopperArrowProps = React.ComponentPropsWithoutRef<
   typeof PopperPrimitive.Arrow
 >;
 interface MenuArrowProps extends PopperArrowProps {}
