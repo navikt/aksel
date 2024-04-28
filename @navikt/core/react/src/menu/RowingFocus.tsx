@@ -5,7 +5,7 @@ import { DescendantsManager } from "../util/hooks/descendants/descendant";
 
 interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
-  descendants: DescendantsManager<HTMLElement, object>;
+  descendants: DescendantsManager<HTMLDivElement, object>;
 }
 
 export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
