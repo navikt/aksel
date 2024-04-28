@@ -10,7 +10,7 @@ import { Slot } from "../util/Slot";
 import { useCallbackRef, useMergeRefs } from "../util/hooks";
 import { DescendantsManager } from "../util/hooks/descendants/descendant";
 
-interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, object>;
   onEntryFocus?: (event: Event) => void;

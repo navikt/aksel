@@ -1,4 +1,3 @@
-import { Presence } from "@radix-ui/react-presence";
 import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
@@ -216,17 +215,11 @@ type MenuContentElement = MenuRootContentTypeElement;
  * they have conflicting prop types. We agreed that we would allow MenuSubContent to
  * accept props that it would just ignore.
  */
-interface MenuContentProps extends MenuRootContentTypeProps {
-  /**
-   * Used to force mounting when more control is needed. Useful when
-   * controlling animation with React animation libraries.
-   */
-  forceMount?: true;
-}
+interface MenuContentProps extends MenuRootContentTypeProps {}
 
 const MenuContent = React.forwardRef<MenuContentElement, MenuContentProps>(
   (props: MenuContentProps, forwardedRef) => {
-    const { forceMount = false, ...contentProps } = props;
+    const { ...contentProps } = props;
 
     const descendants = useMenuDescendants();
 
@@ -235,13 +228,13 @@ const MenuContent = React.forwardRef<MenuContentElement, MenuContentProps>(
 
     return (
       <MenuDescendantsProvider value={descendants}>
-        <Presence present={forceMount || context.open}>
-          {rootContext.modal ? (
+        {context.open ? (
+          rootContext.modal ? (
             <MenuRootContentModal {...contentProps} ref={forwardedRef} />
           ) : (
             <MenuRootContentNonModal {...contentProps} ref={forwardedRef} />
-          )}
-        </Presence>
+          )
+        ) : null}
       </MenuDescendantsProvider>
     );
   },
@@ -1093,72 +1086,66 @@ interface MenuSubContentProps
     | "onEntryFocus"
     | "side"
     | "align"
-  > {
-  /**
-   * Used to force mounting when more control is needed. Useful when
-   * controlling animation with React animation libraries.
-   */
-  forceMount?: true;
-}
+  > {}
 
 const MenuSubContent = React.forwardRef<
   MenuSubContentElement,
   MenuSubContentProps
 >((props: MenuSubContentProps, forwardedRef) => {
-  const { forceMount = false, ...subContentProps } = props;
+  const { ...subContentProps } = props;
   const context = useMenuContext();
   const rootContext = useMenuRootContext();
   const subContext = useMenuSubContext();
   const ref = React.useRef<MenuSubContentElement>(null);
   const composedRefs = useMergeRefs(forwardedRef, ref);
+
+  if (!context.open) {
+    return null;
+  }
+
   return (
-    <Presence present={forceMount || context.open}>
-      <MenuContentImpl
-        id={subContext.contentId}
-        aria-labelledby={subContext.triggerId}
-        {...subContentProps}
-        ref={composedRefs}
-        align="start"
-        side="right"
-        disableOutsidePointerEvents={false}
-        trapFocus={false}
-        onOpenAutoFocus={(event) => {
-          // when opening a submenu, focus content for keyboard users only
-          if (rootContext.isUsingKeyboardRef.current) ref.current?.focus();
+    <MenuContentImpl
+      id={subContext.contentId}
+      aria-labelledby={subContext.triggerId}
+      {...subContentProps}
+      ref={composedRefs}
+      align="start"
+      side="right"
+      disableOutsidePointerEvents={false}
+      trapFocus={false}
+      onOpenAutoFocus={(event) => {
+        // when opening a submenu, focus content for keyboard users only
+        if (rootContext.isUsingKeyboardRef.current) ref.current?.focus();
+        event.preventDefault();
+      }}
+      // The menu might close because of focusing another menu item in the parent menu. We
+      // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+      onCloseAutoFocus={(event) => event.preventDefault()}
+      onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
+        // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+        // on pointer interaction.
+        if (event.target !== subContext.trigger) context.onOpenChange(false);
+      })}
+      onEscapeKeyDown={composeEventHandlers(props.onEscapeKeyDown, (event) => {
+        rootContext.onClose();
+        // ensure pressing escape in submenu doesn't escape full screen mode
+        event.preventDefault();
+      })}
+      onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+        // Submenu key events bubble through portals. We only care about keys in this menu.
+        const isKeyDownInside = event.currentTarget.contains(
+          event.target as HTMLElement,
+        );
+        const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
+        if (isKeyDownInside && isCloseKey) {
+          context.onOpenChange(false);
+          // We focus manually because we prevented it in `onCloseAutoFocus`
+          subContext.trigger?.focus();
+          // prevent window from scrolling
           event.preventDefault();
-        }}
-        // The menu might close because of focusing another menu item in the parent menu. We
-        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
-        onCloseAutoFocus={(event) => event.preventDefault()}
-        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
-          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-          // on pointer interaction.
-          if (event.target !== subContext.trigger) context.onOpenChange(false);
-        })}
-        onEscapeKeyDown={composeEventHandlers(
-          props.onEscapeKeyDown,
-          (event) => {
-            rootContext.onClose();
-            // ensure pressing escape in submenu doesn't escape full screen mode
-            event.preventDefault();
-          },
-        )}
-        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-          // Submenu key events bubble through portals. We only care about keys in this menu.
-          const isKeyDownInside = event.currentTarget.contains(
-            event.target as HTMLElement,
-          );
-          const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
-          if (isKeyDownInside && isCloseKey) {
-            context.onOpenChange(false);
-            // We focus manually because we prevented it in `onCloseAutoFocus`
-            subContext.trigger?.focus();
-            // prevent window from scrolling
-            event.preventDefault();
-          }
-        })}
-      />
-    </Presence>
+        }
+      })}
+    />
   );
 });
 
