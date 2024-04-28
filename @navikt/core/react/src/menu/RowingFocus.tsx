@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { composeEventHandlers } from "../../esm/util/composeEventHandlers";
 import { Slot } from "../util/Slot";
+import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useCallbackRef, useMergeRefs } from "../util/hooks";
 import { DescendantsManager } from "../util/hooks/descendants/descendant";
 
