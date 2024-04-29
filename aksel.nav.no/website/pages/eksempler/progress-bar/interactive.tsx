@@ -1,5 +1,5 @@
 import React from "react";
-import { BodyShort, Button, ProgressBar } from "@navikt/ds-react";
+import { BodyShort, Button, HStack, ProgressBar } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const starWarsQuotes = [
@@ -22,28 +22,31 @@ const Example = () => {
   return (
     <div>
       <div>
-        <ProgressBar value={value} valueMax={12} aria-label="interactive" />
+        <ProgressBar value={value} valueMax={11} aria-label="interactive" />
 
         <BodyShort style={{ margin: "3rem 0", textAlign: "center" }}>
           {starWarsQuotes[value]}
         </BodyShort>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+      <HStack gap="20">
         <Button
           onClick={() =>
-            setValue((oldValue) => (oldValue === 0 ? 0 : oldValue - 1))
+            setValue(
+              (oldValue) =>
+                (oldValue - 1 + starWarsQuotes.length) % starWarsQuotes.length,
+            )
           }
         >
           Forrige sitat
         </Button>
         <Button
           onClick={() =>
-            setValue((oldValue) => (oldValue === 12 ? 12 : oldValue + 1))
+            setValue((oldValue) => (oldValue + 1) % starWarsQuotes.length)
           }
         >
           Neste sitat
         </Button>
-      </div>
+      </HStack>
     </div>
   );
 };
