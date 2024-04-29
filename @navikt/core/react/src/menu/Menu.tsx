@@ -1,3 +1,7 @@
+/**
+ * TODO:
+ * - Context needs to be scoped to avoid descendant conflicts
+ */
 import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
@@ -78,6 +82,7 @@ interface MenuProps {
 }
 
 interface MenuComponent extends React.FC<MenuProps> {
+  Root: typeof Menu;
   Anchor: typeof MenuAnchor;
   Portal: typeof MenuPortal;
   Content: typeof MenuContent;
@@ -421,7 +426,7 @@ const MenuContentImpl = React.forwardRef<
 
   // Make sure the whole tree has focus guards as our `MenuContent` may be
   // the last element in the DOM (beacuse of the `Portal`)
-  /* TODO: Testing just not having this */
+  /* TODO: Testing just not having guards */
   /* useFocusGuards(); */
 
   const isPointerMovingToSubmenu = React.useCallback(

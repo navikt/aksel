@@ -443,6 +443,35 @@ const Submenu: React.FC<
   );
 };
 
+export const TestMenu: React.FC<MenuProps> = () => {
+  const props = { open: true };
+  return (
+    <Menu open={props.open} onOpenChange={() => {}} modal={true}>
+      {/* inline-block allows anchor to move when rtl changes on document */}
+      <Menu.Anchor asChild>
+        <button>Menu</button>
+      </Menu.Anchor>
+      <Menu.Portal>
+        <Menu.Content
+          className="content"
+          onCloseAutoFocus={(event) => event.preventDefault()}
+          align="start"
+        >
+          <Menu.Item className="item" onSelect={() => window.alert("Undo")}>
+            Undo
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("Add")}>
+            Add
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("Save")}>
+            Save
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+};
+
 const itemCss = `
   display: flex;
   align-items: center;
