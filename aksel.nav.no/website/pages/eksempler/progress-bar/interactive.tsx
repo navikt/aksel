@@ -22,9 +22,13 @@ const Example = () => {
   return (
     <div>
       <div>
-        <ProgressBar value={value} valueMax={11} aria-label="interactive" />
+        <ProgressBar
+          value={value}
+          valueMax={11}
+          aria-label="interaktiv fremdriftindikator"
+        />
 
-        <BodyShort style={{ margin: "3rem 0", textAlign: "center" }}>
+        <BodyShort align="center" style={{ margin: "3rem 0" }}>
           {starWarsQuotes[value]}
         </BodyShort>
       </div>

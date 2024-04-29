@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <div>
-      <p id="indeterminate">6 sek duration med 4 sek delay</p>
+      <p id="indeterminate">Laster opp fil</p>
       <ProgressBar duration={6} aria-labelledby="indeterminate" />
     </div>
   );
@@ -20,4 +20,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Med duration-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
 };
