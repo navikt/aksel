@@ -8,7 +8,8 @@ import { composeEventHandlers } from "../util/composeEventHandlers";
 import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
-import { useFocusGuards } from "./FocusGuards";
+
+/* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./FocusScope";
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 
@@ -45,9 +46,6 @@ const SlottedDivElement = React.forwardRef<HTMLDivElement, PrimitiveDivProps>(
 /* -------------------------------------------------------------------------------------------------
  * Menu
  * -----------------------------------------------------------------------------------------------*/
-
-const MENU_NAME = "Menu";
-
 type MenuContextValue = {
   open: boolean;
   onOpenChange(open: boolean): void;
@@ -79,7 +77,23 @@ interface MenuProps {
   modal?: boolean;
 }
 
-const Menu: React.FC<MenuProps> = (props: MenuProps) => {
+interface MenuComponent extends React.FC<MenuProps> {
+  Anchor: typeof MenuAnchor;
+  Portal: typeof MenuPortal;
+  Content: typeof MenuContent;
+  Group: typeof MenuGroup;
+  Label: typeof MenuLabel;
+  Item: typeof MenuItem;
+  CheckboxItem: typeof MenuCheckboxItem;
+  RadioGroup: typeof MenuRadioGroup;
+  RadioItem: typeof MenuRadioItem;
+  Separator: typeof MenuSeparator;
+  Sub: typeof MenuSub;
+  SubTrigger: typeof MenuSubTrigger;
+  SubContent: typeof MenuSubContent;
+}
+
+const MenuRoot = (props: MenuProps) => {
   const { open = false, children, onOpenChange, modal = true } = props;
 
   const [content, setContent] = React.useState<MenuContentElement | null>(null);
@@ -136,7 +150,7 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
   );
 };
 
-Menu.displayName = MENU_NAME;
+const Menu = MenuRoot as MenuComponent;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuAnchor
@@ -397,6 +411,7 @@ const MenuContentImpl = React.forwardRef<
        * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
        */
       setTimeout(() => (newItem as HTMLElement).focus());
+      console.log("focusing new item");
     }
   };
 
@@ -406,7 +421,8 @@ const MenuContentImpl = React.forwardRef<
 
   // Make sure the whole tree has focus guards as our `MenuContent` may be
   // the last element in the DOM (beacuse of the `Portal`)
-  useFocusGuards();
+  /* TODO: Testing just not having this */
+  /* useFocusGuards(); */
 
   const isPointerMovingToSubmenu = React.useCallback(
     (event: React.PointerEvent) => {
@@ -467,12 +483,16 @@ const MenuContentImpl = React.forwardRef<
           onInteractOutside={onInteractOutside}
           onDismiss={onDismiss}
         >
+          {/* TODO: adding asChild broke something with focus order */}
           <RowingFocus
+            asChild
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
+              console.log("called entryfocus");
               // only focus first item when using keyboard
               if (!rootContext.isUsingKeyboardRef.current)
                 event.preventDefault();
+              console.log("prevent entryFocus");
             })}
           >
             <Floating.Content
@@ -487,6 +507,7 @@ const MenuContentImpl = React.forwardRef<
               onKeyDown={composeEventHandlers(
                 contentProps.onKeyDown,
                 (event) => {
+                  console.log("content");
                   // submenu key events bubble through portals. We only care about keys in this menu.
                   const target = event.target as HTMLElement;
                   const isKeyDownInside =
@@ -501,6 +522,7 @@ const MenuContentImpl = React.forwardRef<
                     if (!isModifierKey && isCharacterKey)
                       handleTypeaheadSearch(event.key);
                   }
+
                   // focus first/last item based on key pressed
                   const content = contentRef.current;
                   if (event.target !== content) return;
@@ -633,6 +655,8 @@ const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
     return (
       <MenuItemImpl
         {...itemProps}
+        /* TODO: Only for testing */
+        tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
         disabled={disabled}
         onClick={composeEventHandlers(props.onClick, handleSelect)}
@@ -692,6 +716,8 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
         data-highlighted={isFocused ? "" : undefined}
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
+        /* TODO: Only for testing */
+        tabIndex={-1}
         {...itemProps}
         ref={composedRefs}
         /**
@@ -723,7 +749,10 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
           props.onPointerLeave,
           whenMouse((event) => contentContext.onItemLeave(event)),
         )}
-        onFocus={composeEventHandlers(props.onFocus, () => setIsFocused(true))}
+        onFocus={composeEventHandlers(props.onFocus, () => {
+          setIsFocused(true);
+          console.log("focus");
+        })}
         onBlur={composeEventHandlers(props.onBlur, () => setIsFocused(false))}
       />
     );
@@ -987,6 +1016,7 @@ const MenuSubTrigger = React.forwardRef<
         // This is redundant for mouse users but we cannot determine pointer type from
         // click event and we cannot use pointerup event (see git history for reasons why)
         onClick={(event) => {
+          console.log("kdwn");
           props.onClick?.(event);
           if (props.disabled || event.defaultPrevented) return;
           /**
@@ -1053,6 +1083,7 @@ const MenuSubTrigger = React.forwardRef<
           }),
         )}
         onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+          console.log("kdwn");
           const isTypingAhead = contentContext.searchRef.current !== "";
           if (props.disabled || (isTypingAhead && event.key === " ")) return;
           if (SUB_OPEN_KEYS["ltr"].includes(event.key)) {
@@ -1115,7 +1146,11 @@ const MenuSubContent = React.forwardRef<
       trapFocus={false}
       onOpenAutoFocus={(event) => {
         // when opening a submenu, focus content for keyboard users only
-        if (rootContext.isUsingKeyboardRef.current) ref.current?.focus();
+        if (rootContext.isUsingKeyboardRef.current) {
+          ref.current?.focus();
+          console.log(ref.current);
+          console.log("ran openautofocus");
+        }
         event.preventDefault();
       }}
       // The menu might close because of focusing another menu item in the parent menu. We
@@ -1260,53 +1295,22 @@ function whenMouse<E>(
     event.pointerType === "mouse" ? handler(event) : undefined;
 }
 
-const Root = Menu;
-const Anchor = MenuAnchor;
-const Portal = MenuPortal;
-const Content = MenuContent;
-const Group = MenuGroup;
-const Label = MenuLabel;
-const Item = MenuItem;
-const CheckboxItem = MenuCheckboxItem;
-const RadioGroup = MenuRadioGroup;
-const RadioItem = MenuRadioItem;
-const Separator = MenuSeparator;
-const Sub = MenuSub;
-const SubTrigger = MenuSubTrigger;
-const SubContent = MenuSubContent;
+Menu.Root = Menu;
+Menu.Anchor = MenuAnchor;
+Menu.Portal = MenuPortal;
+Menu.Content = MenuContent;
+Menu.Group = MenuGroup;
+Menu.Label = MenuLabel;
+Menu.Item = MenuItem;
+Menu.CheckboxItem = MenuCheckboxItem;
+Menu.RadioGroup = MenuRadioGroup;
+Menu.RadioItem = MenuRadioItem;
+Menu.Separator = MenuSeparator;
+Menu.Sub = MenuSub;
+Menu.SubTrigger = MenuSubTrigger;
+Menu.SubContent = MenuSubContent;
 
-export {
-  //
-  Menu,
-  MenuAnchor,
-  MenuPortal,
-  MenuContent,
-  MenuGroup,
-  MenuLabel,
-  MenuItem,
-  MenuCheckboxItem,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuSeparator,
-  MenuSub,
-  MenuSubTrigger,
-  MenuSubContent,
-  //
-  Root,
-  Anchor,
-  Portal,
-  Content,
-  Group,
-  Label,
-  Item,
-  CheckboxItem,
-  RadioGroup,
-  RadioItem,
-  Separator,
-  Sub,
-  SubTrigger,
-  SubContent,
-};
+export { Menu };
 export type {
   MenuProps,
   MenuAnchorProps,

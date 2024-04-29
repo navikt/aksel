@@ -22,6 +22,7 @@ const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
   (
     {
+      children,
       asChild,
       descendants,
       onKeyDown,
@@ -52,6 +53,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
         const loop = false;
+        console.log(descendants.values().map((x) => x.node));
         /**
          * Tabs.Tab is registered with its prop 'value'.
          * We can then use it to find the current focuses descendant
@@ -66,6 +68,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
         };
         const prevTab = () => {
           const prev = descendants.prevEnabled(idx, loop);
+          console.log("prev", prev);
           prev && prev.node?.focus();
         };
         const firstTab = () => {
@@ -98,8 +101,8 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     return (
       <Comp
         ref={composedRefs}
-        tabIndex={isTabbingBackOut || descendants.enabledCount() === 0 ? -1 : 0}
         {...rest}
+        tabIndex={isTabbingBackOut || descendants.enabledCount() === 0 ? -1 : 0}
         style={{ outline: "none", ...rest.style }}
         onKeyDown={composeEventHandlers(onKeyDown, handleKeyDown)}
         onMouseDown={composeEventHandlers(onMouseDown, () => {
@@ -121,6 +124,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
             event.currentTarget.dispatchEvent(entryFocusEvent);
 
             if (!entryFocusEvent.defaultPrevented) {
+              console.log("focusing first");
               descendants.firstEnabled()?.node.focus({ preventScroll: true });
             }
           }
@@ -129,7 +133,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
         })}
         onBlur={composeEventHandlers(onBlur, () => setIsTabbingBackOut(false))}
       >
-        123
+        {children}
       </Comp>
     );
   },

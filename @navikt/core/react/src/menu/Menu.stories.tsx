@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Menu } from "./Menu";
 
 export default {
@@ -6,10 +6,10 @@ export default {
   excludeStories: ["TickIcon", "classes"],
   decorators: [
     (Story) => (
-      <>
+      <div>
         {storyStyles}
         <Story />
-      </>
+      </div>
     ),
   ],
 };
@@ -40,29 +40,20 @@ export const Submenus = () => {
   const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
   const [open4, setOpen4] = React.useState(false);
-  const [rtl, setRtl] = React.useState(false);
-  const [animated, setAnimated] = React.useState(false);
-
-  React.useEffect(() => {
-    if (rtl) {
-      document.documentElement.setAttribute("dir", "rtl");
-      return () => document.documentElement.removeAttribute("dir");
-    }
-  }, [rtl]);
 
   return (
     <MenuWithAnchor>
       <Menu.Item className="item" onSelect={() => window.alert("undo")}>
         Undo
       </Menu.Item>
-      <Submenu open={open1} onOpenChange={setOpen1} animated={animated}>
+      <Submenu open={open1} onOpenChange={setOpen1}>
         <Menu.Item className="item" disabled>
           Disabled
         </Menu.Item>
         <Menu.Item className="item" onSelect={() => window.alert("one")}>
           One
         </Menu.Item>
-        <Submenu open={open2} onOpenChange={setOpen2} animated={animated}>
+        <Submenu open={open2} onOpenChange={setOpen2}>
           <Menu.Item className="item" onSelect={() => window.alert("one")}>
             One
           </Menu.Item>
@@ -82,12 +73,7 @@ export const Submenus = () => {
             Six
           </Menu.Item>
         </Submenu>
-        <Submenu
-          heading="Sub Menu"
-          open={open3}
-          onOpenChange={setOpen3}
-          animated={animated}
-        >
+        <Submenu heading="Sub Menu" open={open3} onOpenChange={setOpen3}>
           <Menu.Item className="item" onSelect={() => window.alert("one")}>
             One
           </Menu.Item>
@@ -101,12 +87,7 @@ export const Submenus = () => {
         <Menu.Item className="item" onSelect={() => window.alert("two")}>
           Two
         </Menu.Item>
-        <Submenu
-          open={open4}
-          onOpenChange={setOpen4}
-          animated={animated}
-          disabled
-        >
+        <Submenu open={open4} onOpenChange={setOpen4} disabled>
           <Menu.Item className="item" onSelect={() => window.alert("one")}>
             One
           </Menu.Item>
@@ -136,10 +117,10 @@ export const Submenus = () => {
   );
 };
 
-export const foodGroups: Array<{
+const foodGroups: {
   label?: string;
-  foods: Array<{ value: string; label: string; disabled?: boolean }>;
-}> = [
+  foods: { value: string; label: string; disabled?: boolean }[];
+}[] = [
   {
     label: "Fruits",
     foods: [
@@ -343,9 +324,9 @@ export const RadioItems = () => {
       </Menu.Item>
       <Menu.Separator className="separator" />
       <Menu.RadioGroup value={file} onValueChange={setFile}>
-        {files.map((file) => (
-          <Menu.RadioItem key={file} className="item" value={file}>
-            {file}
+        {files.map((_file) => (
+          <Menu.RadioItem key={_file} className="item" value={_file}>
+            {_file}
             <TickIcon />
           </Menu.RadioItem>
         ))}
@@ -393,9 +374,9 @@ export const Animated = () => {
           ),
         )}
         <Menu.RadioGroup value={file} onValueChange={setFile}>
-          {files.map((file) => (
-            <Menu.RadioItem key={file} className="item" value={file}>
-              {file}
+          {files.map((_file) => (
+            <Menu.RadioItem key={_file} className="item" value={_file}>
+              {_file}
               <TickIcon />
             </Menu.RadioItem>
           ))}
@@ -406,8 +387,7 @@ export const Animated = () => {
 };
 
 type MenuProps = Omit<
-  React.ComponentProps<typeof Menu.Root> &
-    React.ComponentProps<typeof Menu.Content>,
+  React.ComponentProps<typeof Menu> & React.ComponentProps<typeof Menu.Content>,
   | "trapFocus"
   | "onCloseAutoFocus"
   | "disableOutsidePointerEvents"
@@ -417,7 +397,7 @@ type MenuProps = Omit<
 const MenuWithAnchor: React.FC<MenuProps> = (props) => {
   const { open = true, children, ...contentProps } = props;
   return (
-    <Menu.Root open={open} onOpenChange={() => {}} modal={false}>
+    <Menu open={open} onOpenChange={() => {}} modal={false}>
       {/* inline-block allows anchor to move when rtl changes on document */}
       <Menu.Anchor style={{ display: "inline-block" }} />
       <Menu.Portal>
@@ -430,19 +410,19 @@ const MenuWithAnchor: React.FC<MenuProps> = (props) => {
           {children}
         </Menu.Content>
       </Menu.Portal>
-    </Menu.Root>
+    </Menu>
   );
 };
 
 const Submenu: React.FC<
-  MenuProps & { animated: boolean; disabled?: boolean; heading?: string }
+  MenuProps & { animated?: boolean; disabled?: boolean; heading?: string }
 > = (props) => {
   const {
     heading = "Submenu",
     open = true,
     onOpenChange,
     children,
-    animated,
+    animated = false,
     disabled,
     ...contentProps
   } = props;
@@ -464,32 +444,36 @@ const Submenu: React.FC<
 };
 
 const itemCss = `
-  display: "flex";
-  align-items: "center";
-  justify-content: "space-between";
-  line-height: "1";
-  cursor: "default";
-  user-select: "none";
-  white-space: "nowrap";
-  height: 25;
-  padding: "0 10px";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1;
+  cursor: default;
+  user-select: none;
+  white-space: nowrap;
+  height: 25px;
+  padding: 0 10px;
   color: black;
-  border-radius: 3;
+  border-radius: 3px;
 `;
 
 const storyStyles = (
   <style>{`
 
+    *:focus{
+      color: red !important;
+    }
+
     .content {
       display: inline-block;
       box-sizing: border-box;
-      min-width: 130;
+      min-width: 130px;
       background-color: white;
       border: 1px solid gray;
-      border-radius: 6;
-      padding: 5;
+      border-radius: 6px;
+      padding: 5px;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
-      font-size: 13;
+      font-size: 13px;
 
       &:focus-within {
         borderColor: black;
@@ -516,6 +500,7 @@ const storyStyles = (
     }
 
     .subTrigger {
+      ${itemCss}
       &:not([data-highlighted])[data-state="open"] {
         backgroundColor: gray;
         color: black;
@@ -524,7 +509,7 @@ const storyStyles = (
 
     .separator {
       margin: 5px 10px;
-      height: 1;
+      height: 1px;
       backgroundColor: gray;
     }
 
