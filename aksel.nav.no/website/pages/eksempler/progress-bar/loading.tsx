@@ -25,8 +25,8 @@ const Example = () => {
   }, []);
 
   return (
-    <div>
-      <div id="loading">Simulated loading</div>
+    <div style={{ width: "300px" }}>
+      <div id="loading">Simulart lasting</div>
       <ProgressBar value={value} aria-labelledby="loading" />
     </div>
   );

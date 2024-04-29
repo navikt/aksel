@@ -4,8 +4,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <div>
-      <p>6 sec duration (and 4 sec default delay)</p>
-      <ProgressBar duration={6} aria-label="6 sec indeterminate state" />
+      <p id="indeterminate">6 sek duration med 4 sek delay</p>
+      <ProgressBar duration={6} aria-labelledby="indeterminate" />
     </div>
   );
 };
