@@ -25,6 +25,10 @@ interface ProgressBarPropsBase
    */
   duration?: number;
   /**
+   * Callback function when progress is indeterminate.
+   */
+  onIndeterminate?: () => void;
+  /**
    * String ID of the element that labels the progress bar.
    * Not needed if `aria-label` is used.
    */
@@ -73,11 +77,22 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
       className,
+      onIndeterminate,
       ...rest
     },
     ref,
   ) => {
     const translate = 100 - (Math.round(value) / valueMax) * 100;
+
+    React.useEffect(() => {
+      if (duration && onIndeterminate) {
+        const timeout = setTimeout(
+          () => onIndeterminate(),
+          duration * 1000 + 4000,
+        );
+        return () => clearTimeout(timeout);
+      }
+    }, [duration, onIndeterminate]);
 
     return (
       <div
@@ -91,7 +106,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuenow={duration ? 0 : Math.round(value)}
         aria-valuetext={
           duration
-            ? "Fremdrift kan ikke beregnes"
+            ? `Fremdrift kan ikke beregnes, antatt tid er: ${duration} sekunder`
             : `${Math.round(value)} av ${Math.round(valueMax)}`
         }
         role="progressbar"

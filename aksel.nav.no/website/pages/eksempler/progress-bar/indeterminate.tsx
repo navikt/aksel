@@ -1,11 +1,21 @@
+import React from "react";
 import { ProgressBar } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const [isIndeterminate, setIsIndeterminate] = React.useState(false);
   return (
-    <div>
-      <p id="indeterminate">Laster opp fil</p>
-      <ProgressBar duration={6} aria-labelledby="indeterminate" />
+    <div style={{ width: "300px" }}>
+      <p id="indeterminate">Jobber med saken</p>
+      <ProgressBar
+        // @ts-expect-error onIndeterminate is not in the API (yet)
+        onIndeterminate={() => {
+          setIsIndeterminate(true);
+        }}
+        duration={6}
+        aria-labelledby="indeterminate"
+      />
+      {isIndeterminate && <p>Oi, dette tok lenger tid en forventet!</p>}
     </div>
   );
 };

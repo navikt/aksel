@@ -65,4 +65,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  desc: "Progress bar kan brukes til å vise hvor i en flyt brukeren er",
 };
