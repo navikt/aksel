@@ -27,7 +27,6 @@ const Example = () => {
   return (
     <div>
       <div id="loading-bar">Simulated loading bar</div>
-
       <ProgressBar value={value} aria-labelledby="loading-bar" />
     </div>
   );

@@ -23,6 +23,7 @@ const Example = () => {
     <div>
       <div>
         <ProgressBar value={value} valueMax={12} aria-label="interactive" />
+
         <BodyShort style={{ margin: "3rem 0", textAlign: "center" }}>
           {starWarsQuotes[value]}
         </BodyShort>
