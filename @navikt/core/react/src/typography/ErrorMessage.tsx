@@ -8,12 +8,12 @@ export interface ErrorMessageProps
   extends Pick<TypoProps, "spacing">,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * medium: 18px, small: 16px
+   * medium: 18px, small: 16px.
    * @default "medium"
    */
   size?: "medium" | "small";
   /**
-   * Error text
+   * Error text.
    */
   children: React.ReactNode;
 }
@@ -27,9 +27,9 @@ export interface ErrorMessageProps
  *
  * @example
  * ```jsx
- *     <ErrorMessage>
- *       Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
- *     </ErrorMessage>
+ * <ErrorMessage>
+ *   Du må fylle ut: Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
+ * </ErrorMessage>
  * ```
  */
 export const ErrorMessage: OverridableComponent<
