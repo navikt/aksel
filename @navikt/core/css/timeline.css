@@ -12,7 +12,7 @@
   height: 1rem;
   box-sizing: content-box;
   grid-column: 2;
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--a-spacing-1);
 }
 
 .navds-timeline__row-label {
@@ -171,7 +171,7 @@
   flex-direction: column-reverse;
   isolation: isolate;
 
-  --navdsc-timeline-pin-size: 1.1rem;
+  --navdsc-timeline-pin-size: 0.9rem;
 }
 
 .navds-timeline__pin-button {
