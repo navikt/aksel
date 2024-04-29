@@ -1,43 +1,5 @@
 import React from "react";
 
-function createContext<ContextValueType extends object | null>(
-  rootComponentName: string,
-  defaultContext?: ContextValueType,
-) {
-  const Context = React.createContext<ContextValueType | undefined>(
-    defaultContext,
-  );
-
-  function Provider(props: ContextValueType & { children: React.ReactNode }) {
-    const { children, ...context } = props;
-    // Only re-memoize when prop values change
-
-    const value = React.useMemo(
-      () => context,
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      Object.values(context),
-    ) as ContextValueType;
-    return <Context.Provider value={value}>{children}</Context.Provider>;
-  }
-
-  function useContext(consumerName: string) {
-    const context = React.useContext(Context);
-    if (context) return context;
-    if (defaultContext !== undefined) return defaultContext;
-    // if a defaultContext wasn't specified, it's a required context.
-    throw new Error(
-      `\`${consumerName}\` must be used within \`${rootComponentName}\``,
-    );
-  }
-
-  Provider.displayName = rootComponentName + "Provider";
-  return [Provider, useContext] as const;
-}
-
-/* -------------------------------------------------------------------------------------------------
- * createContextScope
- * -----------------------------------------------------------------------------------------------*/
-
 type Scope<C = any> = { [scopeName: string]: React.Context<C>[] } | undefined;
 type ScopeHook = (scope: Scope) => { [__scopeProp: string]: Scope };
 interface CreateScope {
@@ -45,16 +7,28 @@ interface CreateScope {
   (): ScopeHook;
 }
 
+/**
+ * Create a scoped context. This scopes the context for a specific component tree.
+ * This is useful when you have multiple instances of the same context API in the same component, but want to keep them separate.
+ * Example scenario:
+ * - You have a component that renders a list of items, and each item registers on the `descendant`-context.
+ * - You use a different component using the `descendant`-context within the item component.
+ * - Without scoping, the descendant context would be shared between all items.
+ *
+ * @param scopeName Name of the scope
+ * @param createContextScopeDeps Array of scoped contexts to compose with
+ */
 function createContextScope(
   scopeName: string,
   createContextScopeDeps: CreateScope[] = [],
 ) {
   let defaultContexts: any[] = [];
 
-  /* -----------------------------------------------------------------------------------------------
-   * createContext
-   * ---------------------------------------------------------------------------------------------*/
-
+  /**
+   * @param rootComponentName Name of the root component (used for error messages)
+   * @param defaultContext default context-value
+   * @returns [Provider, useContext]
+   */
   function createScopedContext<ContextValueType extends object | null>(
     rootComponentName: string,
     defaultContext?: ContextValueType,
@@ -126,10 +100,9 @@ function createContextScope(
   ] as const;
 }
 
-/* -------------------------------------------------------------------------------------------------
- * composeContextScopes
- * -----------------------------------------------------------------------------------------------*/
-
+/**
+ * Compose multiple scopes into a single scope.
+ */
 function composeContextScopes(...scopes: CreateScope[]) {
   const baseScope = scopes[0];
   if (scopes.length === 1) return baseScope;
@@ -164,7 +137,4 @@ function composeContextScopes(...scopes: CreateScope[]) {
   return createScope;
 }
 
-/* -----------------------------------------------------------------------------------------------*/
-
-export { createContext, createContextScope };
-export type { CreateScope, Scope };
+export { createContextScope, type CreateScope, type Scope };
