@@ -16,7 +16,7 @@ export interface DetailProps
    */
   children: React.ReactNode;
   /**
-   * ALL CAPS
+   * ALL CAPS.
    */
   uppercase?: boolean;
 }
