@@ -6,7 +6,7 @@ import DismissableRoot from "./parts/DismissableLayerRoot";
 
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (props: DismissableLayerProps, ref) => {
-    const context = useDismissableDescendantsContext();
+    const context = useDismissableDescendantsContext(false);
 
     /**
      * To correctly handle nested DismissableLayer,

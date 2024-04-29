@@ -373,7 +373,7 @@ const MenuContentImpl = React.forwardRef<
     ...contentProps
   } = props;
 
-  const descendants = useMenuDescendantsContext()!;
+  const descendants = useMenuDescendantsContext();
 
   const context = useMenuContext();
   const rootContext = useMenuRootContext();
