@@ -22,7 +22,7 @@ const Example = () => {
   return (
     <div>
       <div>
-        <ProgressBar value={value} valueMax={12} aria-label="used-in-form" />
+        <ProgressBar value={value} valueMax={12} aria-label="interactive" />
         <BodyShort style={{ margin: "3rem 0", textAlign: "center" }}>
           {starWarsQuotes[value]}
         </BodyShort>
@@ -33,14 +33,14 @@ const Example = () => {
             setValue((oldValue) => (oldValue === 0 ? 0 : oldValue - 1))
           }
         >
-          Forrige side
+          Forrige sitat
         </Button>
         <Button
           onClick={() =>
             setValue((oldValue) => (oldValue === 12 ? 12 : oldValue + 1))
           }
         >
-          Neste side
+          Neste sitat
         </Button>
       </div>
     </div>
