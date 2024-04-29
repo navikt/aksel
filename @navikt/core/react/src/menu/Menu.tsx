@@ -242,18 +242,16 @@ const MenuContent = React.forwardRef<MenuContentElement, MenuContentProps>(
 
     const descendants = useMenuDescendants();
 
-    const context = useMenuContext();
+    /* const context = useMenuContext(); */
     const rootContext = useMenuRootContext();
 
     return (
       <MenuDescendantsProvider value={descendants}>
-        {context.open ? (
-          rootContext.modal ? (
-            <MenuRootContentModal {...contentProps} ref={forwardedRef} />
-          ) : (
-            <MenuRootContentNonModal {...contentProps} ref={forwardedRef} />
-          )
-        ) : null}
+        {rootContext.modal ? (
+          <MenuRootContentModal {...contentProps} ref={forwardedRef} />
+        ) : (
+          <MenuRootContentNonModal {...contentProps} ref={forwardedRef} />
+        )}
       </MenuDescendantsProvider>
     );
   },
@@ -416,7 +414,7 @@ const MenuContentImpl = React.forwardRef<
        * to avoid potential bugs. See: https://github.com/facebook/react/issues/20332
        */
       setTimeout(() => (newItem as HTMLElement).focus());
-      console.log("focusing new item");
+      /* console.log("focusing new item"); */
     }
   };
 
@@ -493,11 +491,11 @@ const MenuContentImpl = React.forwardRef<
             asChild
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-              console.log("called entryfocus");
+              /* console.log("called entryfocus"); */
               // only focus first item when using keyboard
               if (!rootContext.isUsingKeyboardRef.current)
                 event.preventDefault();
-              console.log("prevent entryFocus");
+              /* console.log("prevent entryFocus"); */
             })}
           >
             <Floating.Content
@@ -512,7 +510,8 @@ const MenuContentImpl = React.forwardRef<
               onKeyDown={composeEventHandlers(
                 contentProps.onKeyDown,
                 (event) => {
-                  console.log("content");
+                  console.log("floating kwdwn");
+                  /* console.log("content"); */
                   // submenu key events bubble through portals. We only care about keys in this menu.
                   const target = event.target as HTMLElement;
                   const isKeyDownInside =
@@ -533,10 +532,14 @@ const MenuContentImpl = React.forwardRef<
                   if (event.target !== content) return;
                   if (!FIRST_LAST_KEYS.includes(event.key)) return;
                   event.preventDefault();
-                  const items = descendants.enabledValues();
-                  const candidateNodes = items.map((item) => item.node);
-                  if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
-                  focusFirst(candidateNodes);
+
+                  console.log(descendants.values().map((x) => x.node));
+                  if (LAST_KEYS.includes(event.key)) {
+                    descendants.lastEnabled()?.node?.focus();
+                    return;
+                  }
+                  console.log("firstNode", descendants.firstEnabled()?.node);
+                  descendants.firstEnabled()?.node?.focus();
                 },
               )}
               onBlur={composeEventHandlers(props.onBlur, (event) => {
@@ -756,7 +759,7 @@ const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
         )}
         onFocus={composeEventHandlers(props.onFocus, () => {
           setIsFocused(true);
-          console.log("focus");
+          /* console.log("focus"); */
         })}
         onBlur={composeEventHandlers(props.onBlur, () => setIsFocused(false))}
       />
@@ -1021,7 +1024,7 @@ const MenuSubTrigger = React.forwardRef<
         // This is redundant for mouse users but we cannot determine pointer type from
         // click event and we cannot use pointerup event (see git history for reasons why)
         onClick={(event) => {
-          console.log("kdwn");
+          /* console.log("kdwn"); */
           props.onClick?.(event);
           if (props.disabled || event.defaultPrevented) return;
           /**
@@ -1088,7 +1091,8 @@ const MenuSubTrigger = React.forwardRef<
           }),
         )}
         onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-          console.log("kdwn");
+          console.log("keydown2");
+          /* console.log("kdwn"); */
           const isTypingAhead = contentContext.searchRef.current !== "";
           if (props.disabled || (isTypingAhead && event.key === " ")) return;
           if (SUB_OPEN_KEYS["ltr"].includes(event.key)) {
@@ -1096,6 +1100,7 @@ const MenuSubTrigger = React.forwardRef<
             // The trigger may hold focus if opened via pointer interaction
             // so we ensure content is given focus again when switching to keyboard.
             context.content?.focus();
+            console.log("opening submenu", context.content);
             // prevent window from scrolling
             event.preventDefault();
           }
@@ -1128,6 +1133,8 @@ const MenuSubContent = React.forwardRef<
   MenuSubContentElement,
   MenuSubContentProps
 >((props: MenuSubContentProps, forwardedRef) => {
+  const descendants = useMenuDescendants();
+
   const { ...subContentProps } = props;
   const context = useMenuContext();
   const rootContext = useMenuRootContext();
@@ -1135,57 +1142,59 @@ const MenuSubContent = React.forwardRef<
   const ref = React.useRef<MenuSubContentElement>(null);
   const composedRefs = useMergeRefs(forwardedRef, ref);
 
-  if (!context.open) {
-    return null;
-  }
-
   return (
-    <MenuContentImpl
-      id={subContext.contentId}
-      aria-labelledby={subContext.triggerId}
-      {...subContentProps}
-      ref={composedRefs}
-      align="start"
-      side="right"
-      disableOutsidePointerEvents={false}
-      trapFocus={false}
-      onOpenAutoFocus={(event) => {
-        // when opening a submenu, focus content for keyboard users only
-        if (rootContext.isUsingKeyboardRef.current) {
-          ref.current?.focus();
-          console.log(ref.current);
-          console.log("ran openautofocus");
-        }
-        event.preventDefault();
-      }}
-      // The menu might close because of focusing another menu item in the parent menu. We
-      // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
-      onCloseAutoFocus={(event) => event.preventDefault()}
-      onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
-        // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-        // on pointer interaction.
-        if (event.target !== subContext.trigger) context.onOpenChange(false);
-      })}
-      onEscapeKeyDown={composeEventHandlers(props.onEscapeKeyDown, (event) => {
-        rootContext.onClose();
-        // ensure pressing escape in submenu doesn't escape full screen mode
-        event.preventDefault();
-      })}
-      onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-        // Submenu key events bubble through portals. We only care about keys in this menu.
-        const isKeyDownInside = event.currentTarget.contains(
-          event.target as HTMLElement,
-        );
-        const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
-        if (isKeyDownInside && isCloseKey) {
-          context.onOpenChange(false);
-          // We focus manually because we prevented it in `onCloseAutoFocus`
-          subContext.trigger?.focus();
-          // prevent window from scrolling
+    <MenuDescendantsProvider value={descendants}>
+      <MenuContentImpl
+        id={subContext.contentId}
+        aria-labelledby={subContext.triggerId}
+        {...subContentProps}
+        ref={composedRefs}
+        align="start"
+        side="right"
+        disableOutsidePointerEvents={false}
+        trapFocus={false}
+        onOpenAutoFocus={(event) => {
+          // when opening a submenu, focus content for keyboard users only
+          if (rootContext.isUsingKeyboardRef.current) {
+            ref.current?.focus();
+            /* console.log(ref.current); */
+            console.log("ran openautofocus");
+          }
           event.preventDefault();
-        }
-      })}
-    />
+        }}
+        // The menu might close because of focusing another menu item in the parent menu. We
+        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+        onCloseAutoFocus={(event) => event.preventDefault()}
+        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
+          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+          // on pointer interaction.
+          if (event.target !== subContext.trigger) context.onOpenChange(false);
+        })}
+        onEscapeKeyDown={composeEventHandlers(
+          props.onEscapeKeyDown,
+          (event) => {
+            rootContext.onClose();
+            // ensure pressing escape in submenu doesn't escape full screen mode
+            event.preventDefault();
+          },
+        )}
+        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+          console.log("keydown3");
+          // Submenu key events bubble through portals. We only care about keys in this menu.
+          const isKeyDownInside = event.currentTarget.contains(
+            event.target as HTMLElement,
+          );
+          const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
+          if (isKeyDownInside && isCloseKey) {
+            context.onOpenChange(false);
+            // We focus manually because we prevented it in `onCloseAutoFocus`
+            subContext.trigger?.focus();
+            // prevent window from scrolling
+            event.preventDefault();
+          }
+        })}
+      />
+    </MenuDescendantsProvider>
   );
 });
 
@@ -1207,16 +1216,6 @@ function getCheckedState(checked: CheckedState) {
     : checked
       ? "checked"
       : "unchecked";
-}
-
-function focusFirst(candidates: HTMLElement[]) {
-  const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
-  for (const candidate of candidates) {
-    // if focus is already where we want to go, we don't want to keep going through the candidates
-    if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
-    candidate.focus();
-    if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
-  }
 }
 
 /**

@@ -53,7 +53,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
         const loop = false;
-        console.log(descendants.values().map((x) => x.node));
+        console.log("keydown");
         /**
          * Tabs.Tab is registered with its prop 'value'.
          * We can then use it to find the current focuses descendant
@@ -109,6 +109,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
           isClickFocusRef.current = true;
         })}
         onFocus={composeEventHandlers(onFocus, (event) => {
+          return;
           // We normally wouldn't need this check, because we already check
           // that the focus is on the current target and not bubbling to it.
           // We do this because Safari doesn't focus buttons when clicked, and
