@@ -25,7 +25,7 @@ const Example = () => {
         <ProgressBar
           value={value}
           valueMax={11}
-          aria-label="interaktiv fremdriftindikator"
+          aria-label="fremdrift i Star Wars-sitatvisning"
         />
 
         <BodyShort align="center" style={{ margin: "3rem 0" }}>
