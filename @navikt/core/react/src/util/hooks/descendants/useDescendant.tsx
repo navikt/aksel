@@ -9,74 +9,20 @@ import { DescendantOptions, DescendantsManager } from "./descendant";
 import { cast } from "./utils";
 
 /**
- * @internal
- * Initializing DescendantsManager
- */
-function useDescendants<
-  T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = object,
->() {
-  const descendants = useRef(new DescendantsManager<T, K>()).current;
-
-  return descendants;
-}
-
-const [DescendantsContextProvider, useDescendantsContext] = createContext<
-  ReturnType<typeof useDescendants>
->({
-  name: "DescendantsProvider",
-  errorMessage: "useDescendantsContext must be used within DescendantsProvider",
-});
-
-/**
- * @internal
- * This hook provides information to descendant component:
- * - Index compared to other descendants
- * - ref callback to register the descendant
- * - Its enabled index compared to other enabled descendants
- */
-function useDescendant<
-  T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = object,
->(options?: DescendantOptions<K>) {
-  const descendants = useDescendantsContext();
-  const [index, setIndex] = useState(-1);
-  const ref = useRef<T>(null);
-
-  useClientLayoutEffect(() => {
-    return () => {
-      if (!ref.current) return;
-      descendants.unregister(ref.current);
-    };
-  }, []);
-
-  useClientLayoutEffect(() => {
-    if (!ref.current) return;
-    const dataIndex = Number(ref.current.dataset["index"]);
-    if (index != dataIndex && !Number.isNaN(dataIndex)) {
-      setIndex(dataIndex);
-    }
-  });
-
-  const refCallback = options
-    ? cast<React.RefCallback<T>>(descendants.register(options))
-    : cast<React.RefCallback<T>>(descendants.register);
-
-  return {
-    descendants,
-    index,
-    enabledIndex: descendants.enabledIndexOf(ref.current),
-    register: mergeRefs([refCallback, ref]),
-  };
-}
-
-/**
  * Provides strongly typed versions of the context provider and hooks above.
  */
 export function createDescendantContext<
   T extends HTMLElement = HTMLElement,
   K extends Record<string, any> = object,
 >() {
+  const [DescendantsContextProvider, useDescendantsContext] = createContext<
+    ReturnType<typeof _useDescendants>
+  >({
+    name: "DescendantsProvider",
+    errorMessage:
+      "useDescendantsContext must be used within DescendantsProvider",
+  });
+
   const ContextProvider = cast<React.Provider<DescendantsManager<T, K>>>(
     (props) => (
       <DescendantsContextProvider {...props.value}>
@@ -85,13 +31,64 @@ export function createDescendantContext<
     ),
   );
 
-  const _useDescendantsContext = () =>
-    cast<DescendantsManager<T, K>>(useDescendantsContext());
+  type Context<S> = S extends true
+    ? ReturnType<typeof _useDescendants>
+    : ReturnType<typeof _useDescendants> | undefined;
 
-  const _useDescendant = (options?: DescendantOptions<K>) =>
-    useDescendant<T, K>(options);
+  function _useDescendantsContext<S extends boolean = true>(
+    strict: S = true as S,
+  ): Context<S> {
+    return useDescendantsContext(strict);
+  }
 
-  const _useDescendants = () => useDescendants<T, K>();
+  /**
+   * @internal
+   * This hook provides information to descendant component:
+   * - Index compared to other descendants
+   * - ref callback to register the descendant
+   * - Its enabled index compared to other enabled descendants
+   */
+  function _useDescendant(options?: DescendantOptions<K>) {
+    const descendants = useDescendantsContext();
+    const [index, setIndex] = useState(-1);
+    const ref = useRef<T>(null);
+
+    useClientLayoutEffect(() => {
+      return () => {
+        if (!ref.current) return;
+        descendants.unregister(ref.current);
+      };
+    }, []);
+
+    useClientLayoutEffect(() => {
+      if (!ref.current) return;
+      const dataIndex = Number(ref.current.dataset["index"]);
+      if (index != dataIndex && !Number.isNaN(dataIndex)) {
+        setIndex(dataIndex);
+      }
+    });
+
+    const refCallback = options
+      ? cast<React.RefCallback<T>>(descendants.register(options))
+      : cast<React.RefCallback<T>>(descendants.register);
+
+    return {
+      descendants,
+      index,
+      enabledIndex: descendants.enabledIndexOf(ref.current),
+      register: mergeRefs([refCallback, ref]),
+    };
+  }
+
+  /**
+   * @internal
+   * Initializing DescendantsManager
+   */
+  function _useDescendants() {
+    const descendants = useRef(new DescendantsManager<T, K>()).current;
+
+    return descendants;
+  }
 
   return [
     // context provider
