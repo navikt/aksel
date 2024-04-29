@@ -1,9 +1,9 @@
-import { ProgressBar } from "@navikt/ds-react";
+import { ProgressBar, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+    <VStack gap="4">
       <p id="progress-bar-label-small">Fremdrift i søknaden (liten versjon)</p>
       <ProgressBar
         value={1}
@@ -11,6 +11,7 @@ const Example = () => {
         size="small"
         aria-labelledby="progress-bar-label-small"
       />
+
       <p id="progress-bar-label-medium">
         Fremdrift i søknaden (medium versjon)
       </p>
@@ -20,6 +21,7 @@ const Example = () => {
         size="medium"
         aria-labelledby="progress-bar-label-medium"
       />
+
       <p id="progress-bar-label-large">Fremdrift i søknaden (stor versjon)</p>
       <ProgressBar
         value={11}
@@ -27,7 +29,7 @@ const Example = () => {
         size="large"
         aria-labelledby="progress-bar-label-large"
       />
-    </div>
+    </VStack>
   );
 };
 
