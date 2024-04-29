@@ -12,7 +12,7 @@ export interface DetailProps
    */
   size?: "medium" | "small";
   /**
-   * Text
+   * Text.
    */
   children: React.ReactNode;
   /**
