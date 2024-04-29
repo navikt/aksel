@@ -7,10 +7,17 @@ const Example = () => {
 
   // This useEffect is used to simulate loading
   React.useEffect(() => {
+    const setRandomInterval = (callback: () => void) => {
+      const interval = Math.random() * 4000 + 500;
+      return setTimeout(() => {
+        callback();
+        setRandomInterval(callback);
+      }, interval);
+    };
     const intervalId = setRandomInterval(() => {
       setValue((oldValue) => {
         if (oldValue === 100) return 3;
-        const increment = Math.random() * 25 + 5; // Increase value 5-30
+        const increment = Math.random() * 25 + 5;
         return oldValue + increment > 100 ? 100 : oldValue + increment;
       });
     });
@@ -20,6 +27,7 @@ const Example = () => {
   return (
     <div>
       <div id="loading-bar">Simulated loading bar</div>
+
       <ProgressBar value={value} aria-labelledby="loading-bar" />
     </div>
   );
@@ -27,14 +35,6 @@ const Example = () => {
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
-
-const setRandomInterval = (callback: () => void) => {
-  const interval = Math.random() * 4000 + 500; // Random interval between 0.1-0.8 seconds
-  return setTimeout(() => {
-    callback();
-    setRandomInterval(callback);
-  }, interval);
-};
 
 /* Storybook story */
 export const Demo = {
