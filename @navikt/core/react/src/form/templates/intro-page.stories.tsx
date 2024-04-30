@@ -68,10 +68,6 @@ export const IntroPage: Story = {
                     <br />
                     Link til produktsiden på nav.no.
                   </BodyShort>
-                  <BodyShort>
-                    Vi lagrer svarene i søknaden underveis, så du kan trygt ta
-                    pauser og gå tilbake for å endre dem.
-                  </BodyShort>
                 </VStack>
               </GuidePanel>
               <Box>
@@ -101,14 +97,14 @@ export const IntroPage: Story = {
                   <br />
                   Forventet behov for dokumentasjon?
                   <br />
-                  Hvor lenge vi lagrer svarene? Når får du svar?
+                  Hvor lenge vi lagrer svarene?
+                  <br />
+                  Når får du svar?
                 </BodyLong>
                 <BodyLong spacing>
                   Eksempel: I søknaden stiller vi kun spørsmål som er relevante
-                  i din situasjon.
-                  <br />
-                  Antall spørsmål og tiden det tar å søke vil derfor kunne
-                  variere. De fleste bruker 20-30 minutter.
+                  i din situasjon. Antall spørsmål og tiden det tar å søke vil
+                  derfor kunne variere. De fleste bruker 20-30 minutter.
                 </BodyLong>
                 <BodyLong>
                   Noen av opplysningene du gir i søknaden må du dokumentere. Du
@@ -146,9 +142,8 @@ export const IntroPage: Story = {
                     </Accordion.Header>
                     <Accordion.Content>
                       <BodyLong spacing>
-                        Vi henter opplysninger om deg fra folkeregisteret og
-                        andre registre. Vi bruker opplysningene til å fylle ut
-                        deler av søknaden for deg.
+                        Info om hvor vi vil hente info fra og hva slags info vi
+                        henter. Se standardtekster for søknadsdialoger på Navet.
                       </BodyLong>
                     </Accordion.Content>
                   </Accordion.Item>
@@ -158,9 +153,9 @@ export const IntroPage: Story = {
                     </Accordion.Header>
                     <Accordion.Content>
                       <BodyLong spacing>
-                        Vi behandler personopplysninger i henhold til
-                        personopplysningsloven. Les mer om hvordan vi behandler
-                        personopplysninger.
+                        Informasjon om hvordan søknaden behandler
+                        personopplysningene til bruker. + Link til info om
+                        hvordan NAV behandler personopplysninger.
                       </BodyLong>
                     </Accordion.Content>
                   </Accordion.Item>
@@ -168,9 +163,9 @@ export const IntroPage: Story = {
                     <Accordion.Header>Automatis behandling</Accordion.Header>
                     <Accordion.Content>
                       <BodyLong spacing>
-                        Vi bruker automatiske systemer for å vurdere søknaden
-                        din. Systemene gjør en del av jobben med å behandle
-                        søknaden din.
+                        Informasjon om hva automatisk behandling er for noe og
+                        hva det betyr for bruker. Noe om rettigheter ved
+                        automatisk avslag.
                       </BodyLong>
                     </Accordion.Content>
                   </Accordion.Item>
@@ -180,8 +175,9 @@ export const IntroPage: Story = {
                     </Accordion.Header>
                     <Accordion.Content>
                       <BodyLong spacing>
-                        Vi lagrer svarene i søknaden underveis, så du kan trygt
-                        ta pauser og gå tilbake for å endre dem.
+                        Info om hvordan denne søknaden mellomlagrer
+                        informasjonen din, både automatisk og med lagreknapp.Se
+                        standardtekster for søknadsdialoger på Navet.
                       </BodyLong>
                     </Accordion.Content>
                   </Accordion.Item>
