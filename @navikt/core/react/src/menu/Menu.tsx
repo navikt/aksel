@@ -268,9 +268,6 @@ const MenuRootContentModal = React.forwardRef<
     <MenuContentImpl
       {...props}
       ref={composedRefs}
-      // we make sure we're not trapping once it's been closed
-      // (closed !== unmounted when animating out)
-      trapFocus={context.open}
       // make sure to only disable pointer events when open
       // this avoids blocking interactions while animating out
       disableOutsidePointerEvents={context.open}
@@ -295,7 +292,6 @@ const MenuRootContentNonModal = React.forwardRef<
     <MenuContentImpl
       {...props}
       ref={forwardedRef}
-      trapFocus={false}
       disableOutsidePointerEvents={false}
       onDismiss={() => context.onOpenChange(false)}
     />
@@ -318,13 +314,8 @@ type MenuContentImplPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
-
-  /**
-   * Whether focus should be trapped within the `MenuContent`
-   * (default: false)
-   */
-  trapFocus?: FocusScopeProps["trapped"];
 };
+
 interface MenuContentImplProps
   extends MenuContentImplPrivateProps,
     Omit<PopperContentProps, "dir" | "onPlaced"> {
@@ -345,7 +336,6 @@ const MenuContentImpl = React.forwardRef<
   MenuContentImplProps
 >((props: MenuContentImplProps, forwardedRef) => {
   const {
-    trapFocus,
     onOpenAutoFocus,
     onCloseAutoFocus,
     disableOutsidePointerEvents,
@@ -419,7 +409,6 @@ const MenuContentImpl = React.forwardRef<
     >
       <FocusScope
         asChild
-        trapped={trapFocus}
         onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
           // when opening, explicitly focus the content area only and leave
           // `onEntryFocus` in  control of focusing first item
@@ -1090,7 +1079,6 @@ const MenuSubContent = React.forwardRef<
         align="start"
         side="right"
         disableOutsidePointerEvents={false}
-        trapFocus={false}
         onOpenAutoFocus={(event) => {
           // when opening a submenu, focus content for keyboard users only
           if (rootContext.isUsingKeyboardRef.current) {
@@ -1208,18 +1196,18 @@ Menu.SubContent = MenuSubContent;
 
 export { Menu };
 export type {
-  MenuProps,
   MenuAnchorProps,
-  MenuPortalProps,
+  MenuCheckboxItemProps,
   MenuContentProps,
   MenuGroupProps,
-  MenuLabelProps,
   MenuItemProps,
-  MenuCheckboxItemProps,
+  MenuLabelProps,
+  MenuPortalProps,
+  MenuProps,
   MenuRadioGroupProps,
   MenuRadioItemProps,
   MenuSeparatorProps,
+  MenuSubContentProps,
   MenuSubProps,
   MenuSubTriggerProps,
-  MenuSubContentProps,
 };
