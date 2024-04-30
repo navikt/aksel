@@ -7,9 +7,15 @@ export {
   isIndeterminate,
   getOpenState,
   SELECTION_KEYS,
+  FIRST_LAST_KEYS,
+  FIRST_KEYS,
+  LAST_KEYS,
 };
 
 const SELECTION_KEYS = ["Enter", " "];
+const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
+const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
+const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 
 function getOpenState(open: boolean) {
   return open ? "open" : "closed";

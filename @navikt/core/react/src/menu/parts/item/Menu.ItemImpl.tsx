@@ -1,7 +1,6 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
-import { useMenuContentContext } from "../../Menu";
 import { useMenuDescendant } from "../../Menu.context";
 import { whenMouse } from "../../Menu.utils";
 import {
@@ -9,6 +8,7 @@ import {
   type SlottedDivElementRef,
   type SlottedDivProps,
 } from "../SlottedDivElement";
+import { useMenuContentContext } from "../content/Menu.context";
 
 type MenuItemImplElement = SlottedDivElementRef;
 
