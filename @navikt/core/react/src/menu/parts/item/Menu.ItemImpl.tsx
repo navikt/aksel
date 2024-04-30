@@ -17,9 +17,17 @@ interface MenuItemImplProps extends SlottedDivProps {
 }
 
 const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
-  (props: MenuItemImplProps, forwardedRef) => {
-    const { disabled = false, ...itemProps } = props;
-
+  (
+    {
+      disabled = false,
+      onPointerMove,
+      onPointerLeave,
+      onFocus,
+      onBlur,
+      ...rest
+    }: MenuItemImplProps,
+    forwardedRef,
+  ) => {
     const { register } = useMenuDescendant({ disabled });
 
     const contentContext = useMenuContentContext();
@@ -35,7 +43,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         data-disabled={disabled ? "" : undefined}
         /* TODO: Only for testing */
         tabIndex={-1}
-        {...itemProps}
+        {...rest}
         ref={composedRefs}
         /**
          * We focus items on `pointerMove` to achieve the following:
@@ -49,7 +57,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
          * wiggles. This is to match native menu implementation.
          */
         onPointerMove={composeEventHandlers(
-          props.onPointerMove,
+          onPointerMove,
           whenMouse((event) => {
             if (disabled) {
               contentContext.onItemLeave(event);
@@ -63,13 +71,13 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
           }),
         )}
         onPointerLeave={composeEventHandlers(
-          props.onPointerLeave,
+          onPointerLeave,
           whenMouse((event) => contentContext.onItemLeave(event)),
         )}
-        onFocus={composeEventHandlers(props.onFocus, () => {
+        onFocus={composeEventHandlers(onFocus, () => {
           setIsFocused(true);
         })}
-        onBlur={composeEventHandlers(props.onBlur, () => setIsFocused(false))}
+        onBlur={composeEventHandlers(onBlur, () => setIsFocused(false))}
       />
     );
   },

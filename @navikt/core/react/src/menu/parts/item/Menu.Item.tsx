@@ -10,16 +10,27 @@ import {
   MenuItemImplProps,
 } from "./Menu.ItemImpl";
 
-const ITEM_SELECT = "menu.itemSelect";
+const ITEM_SELECT_EVENT = "menu.itemSelect";
 
 type MenuItemElement = MenuItemImplElement;
+
 interface MenuItemProps extends Omit<MenuItemImplProps, "onSelect"> {
   onSelect?: (event: Event) => void;
 }
 
 const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
-  (props: MenuItemProps, forwardedRef) => {
-    const { disabled = false, onSelect, ...itemProps } = props;
+  (
+    {
+      disabled = false,
+      onSelect,
+      onClick,
+      onPointerUp,
+      onPointerDown,
+      onKeyDown,
+      ...rest
+    }: MenuItemProps,
+    forwardedRef,
+  ) => {
     const ref = useRef<HTMLDivElement>(null);
     const rootContext = useMenuRootContext();
     const composedRefs = useMergeRefs(forwardedRef, ref);
@@ -28,13 +39,17 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
     const handleSelect = () => {
       const menuItem = ref.current;
       if (!disabled && menuItem) {
-        const itemSelectEvent = new CustomEvent(ITEM_SELECT, {
+        const itemSelectEvent = new CustomEvent(ITEM_SELECT_EVENT, {
           bubbles: true,
           cancelable: true,
         });
-        menuItem.addEventListener(ITEM_SELECT, (event) => onSelect?.(event), {
-          once: true,
-        });
+        menuItem.addEventListener(
+          ITEM_SELECT_EVENT,
+          (event) => onSelect?.(event),
+          {
+            once: true,
+          },
+        );
         /* dispatchDiscreteCustomEvent */
         ReactDOM.flushSync(() => menuItem.dispatchEvent(itemSelectEvent));
         if (itemSelectEvent.defaultPrevented) {
@@ -47,23 +62,23 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
 
     return (
       <MenuItemImpl
-        {...itemProps}
+        {...rest}
         /* TODO: Should this be handled by consumer? */
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
         disabled={disabled}
-        onClick={composeEventHandlers(props.onClick, handleSelect)}
+        onClick={composeEventHandlers(onClick, handleSelect)}
         onPointerDown={(event) => {
-          props.onPointerDown?.(event);
+          onPointerDown?.(event);
           isPointerDownRef.current = true;
         }}
-        onPointerUp={composeEventHandlers(props.onPointerUp, (event) => {
+        onPointerUp={composeEventHandlers(onPointerUp, (event) => {
           // Pointer down can move to a different menu item which should activate it on pointer up.
           // We dispatch a click for selection to allow composition with click based triggers and to
           // prevent Firefox from getting stuck in text selection mode when the menu closes.
           if (!isPointerDownRef.current) event.currentTarget?.click();
         })}
-        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+        onKeyDown={composeEventHandlers(onKeyDown, (event) => {
           if (disabled) {
             return;
           }

@@ -13,31 +13,37 @@ import {
   useMenuDescendantsContext,
   useMenuRootContext,
 } from "./Menu.context";
-import type { CheckedState, GraceIntent, SubMenuSide } from "./Menu.types";
+import type { GraceIntent, SubMenuSide } from "./Menu.types";
 import {
+  SELECTION_KEYS,
   getCheckedState,
   getOpenState,
-  isIndeterminate,
   isPointerInGraceArea,
   whenMouse,
 } from "./Menu.utils";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { MenuAnchor, type MenuAnchorProps } from "./parts/Menu.Anchor";
+import {
+  MenuCheckboxItem,
+  type MenuCheckboxItemProps,
+} from "./parts/Menu.Checkbox";
 import { MenuGroup, type MenuGroupProps } from "./parts/Menu.Group";
 import { MenuLabel, type MenuLabelProps } from "./parts/Menu.Label";
 import { MenuPortal, type MenuPortalProps } from "./parts/Menu.Portal";
 import { MenuSeparator, type MenuSeparatorProps } from "./parts/Menu.Separator";
 import {
   MenuItem,
-  MenuItemElement,
-  MenuItemProps,
+  type MenuItemElement,
+  type MenuItemProps,
 } from "./parts/item/Menu.Item";
-import { MenuItemImpl, MenuItemImplProps } from "./parts/item/Menu.ItemImpl";
+import {
+  MenuItemImpl,
+  type MenuItemImplProps,
+} from "./parts/item/Menu.ItemImpl";
 import { FocusScope } from "./parts/util/FocusScope";
 import { RowingFocus, type RowingFocusProps } from "./parts/util/RowingFocus";
 
-const SELECTION_KEYS = ["Enter", " "];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
@@ -436,45 +442,6 @@ const MenuContentImpl = React.forwardRef<
 });
 
 MenuContent.displayName = CONTENT_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuCheckboxItem
- * -----------------------------------------------------------------------------------------------*/
-
-const CHECKBOX_ITEM_NAME = "MenuCheckboxItem";
-
-type MenuCheckboxItemElement = MenuItemElement;
-
-interface MenuCheckboxItemProps extends MenuItemProps {
-  checked?: CheckedState;
-  // `onCheckedChange` can never be called with `"indeterminate"` from the inside
-  onCheckedChange?: (checked: boolean) => void;
-}
-
-const MenuCheckboxItem = React.forwardRef<
-  MenuCheckboxItemElement,
-  MenuCheckboxItemProps
->((props: MenuCheckboxItemProps, forwardedRef) => {
-  const { checked = false, onCheckedChange, ...checkboxItemProps } = props;
-
-  /* TODO: removed indicator warpper, fix sideeffects */
-  return (
-    <MenuItem
-      role="menuitemcheckbox"
-      aria-checked={isIndeterminate(checked) ? "mixed" : checked}
-      {...checkboxItemProps}
-      ref={forwardedRef}
-      data-state={getCheckedState(checked)}
-      onSelect={composeEventHandlers(
-        checkboxItemProps.onSelect,
-        () => onCheckedChange?.(isIndeterminate(checked) ? true : !checked),
-        { checkForDefaultPrevented: false },
-      )}
-    />
-  );
-});
-
-MenuCheckboxItem.displayName = CHECKBOX_ITEM_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuRadioGroup
