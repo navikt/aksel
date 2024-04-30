@@ -11,9 +11,13 @@ import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 import { FocusScope } from "./FocusScope";
 import {
   MenuDescendantsProvider,
+  MenuProvider,
+  MenuRootProvider,
+  useMenuContext,
   useMenuDescendant,
   useMenuDescendants,
   useMenuDescendantsContext,
+  useMenuRootContext,
 } from "./Menu.context";
 import type { CheckedState, GraceIntent, SubMenuSide } from "./Menu.types";
 import {
@@ -26,8 +30,8 @@ import {
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 import {
   SlottedDivElement,
-  SlottedDivElementRef,
-  SlottedDivProps,
+  type SlottedDivElementRef,
+  type SlottedDivProps,
 } from "./parts/SlottedDivElement";
 
 const SELECTION_KEYS = ["Enter", " "];
@@ -40,29 +44,6 @@ const SUB_CLOSE_KEYS = ["ArrowLeft"];
 /* -------------------------------------------------------------------------------------------------
  * Menu
  * -----------------------------------------------------------------------------------------------*/
-type MenuContextValue = {
-  open: boolean;
-  onOpenChange(open: boolean): void;
-  content: MenuContentElement | null;
-  onContentChange(content: MenuContentElement | null): void;
-};
-
-const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
-  providerName: "MenuProvider",
-  hookName: "useMenuContext",
-});
-
-type MenuRootContextValue = {
-  onClose(): void;
-  isUsingKeyboardRef: React.RefObject<boolean>;
-  modal: boolean;
-};
-
-const [MenuRootProvider, useMenuRootContext] =
-  createContext<MenuRootContextValue>({
-    providerName: "MenuRootProvider",
-    hookName: "useMenuRootContext",
-  });
 
 interface MenuProps {
   children?: React.ReactNode;
@@ -137,7 +118,7 @@ const MenuRoot = (props: MenuProps) => {
           isUsingKeyboardRef={isUsingKeyboardRef}
           modal={modal}
         >
-          {children}
+          -{children}
         </MenuRootProvider>
       </MenuProvider>
     </Floating>
@@ -223,7 +204,6 @@ const MenuContent = React.forwardRef<MenuContentElement, MenuContentProps>(
 
     const descendants = useMenuDescendants();
 
-    /* const context = useMenuContext(); */
     const rootContext = useMenuRootContext();
 
     return (
