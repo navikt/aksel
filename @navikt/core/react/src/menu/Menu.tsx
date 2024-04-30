@@ -424,6 +424,8 @@ const MenuContentImpl = React.forwardRef<
           // when opening, explicitly focus the content area only and leave
           // `onEntryFocus` in  control of focusing first item
           event.preventDefault();
+
+          console.log("onMountuatoFocus", contentRef.current);
           contentRef.current?.focus({ preventScroll: true });
         })}
         onUnmountAutoFocus={onCloseAutoFocus}

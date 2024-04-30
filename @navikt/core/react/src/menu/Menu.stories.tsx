@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu } from "./Menu";
 
 export default {
@@ -336,6 +336,69 @@ const MenuWithAnchor: React.FC<MenuProps> = (props) => {
           {...contentProps}
         >
           {children}
+        </Menu.Content>
+      </Menu.Portal>
+    </Menu>
+  );
+};
+
+export const MenuWithOpenButton = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Menu open={open} onOpenChange={() => {}} modal={false}>
+      {/* inline-block allows anchor to move when rtl changes on document */}
+      <Menu.Anchor asChild>
+        <button
+          type="button"
+          onPointerDown={(event) => {
+            // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
+            // but not when the control key is pressed (avoiding MacOS right click)
+            if (event.button === 0 && event.ctrlKey === false) {
+              setOpen((x) => !x);
+              // prevent trigger focusing when opening
+              // this allows the content to be given focus without competition
+              if (!open) event.preventDefault();
+            }
+          }}
+          onKeyDown={(event) => {
+            if (["Enter", " "].includes(event.key)) setOpen((x) => !x);
+            if (event.key === "ArrowDown") setOpen(true);
+            // prevent keydown from scrolling window / first focused item to execute
+            // that keydown (inadvertently closing the menu)
+            if (["Enter", " ", "ArrowDown"].includes(event.key))
+              event.preventDefault();
+          }}
+        >
+          button
+        </button>
+      </Menu.Anchor>
+      <Menu.Portal>
+        <Menu.Content
+          className="content"
+          onCloseAutoFocus={(event) => event.preventDefault()}
+          align="start"
+        >
+          <Menu.Item className="item" onSelect={() => window.alert("undo")}>
+            Undo
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("redo")}>
+            Redo
+          </Menu.Item>
+          <Menu.Separator className="separator" />
+          <Menu.Item
+            className="item"
+            disabled
+            onSelect={() => window.alert("cut")}
+          >
+            Cut
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("copy")}>
+            Copy
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("paste")}>
+            Paste
+          </Menu.Item>
         </Menu.Content>
       </Menu.Portal>
     </Menu>
