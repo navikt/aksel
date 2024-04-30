@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Slot } from "../util/Slot";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useCallbackRef, useMergeRefs } from "../util/hooks";
-import { DescendantsManager } from "../util/hooks/descendants/descendant";
+import { Slot } from "../../../util/Slot";
+import { composeEventHandlers } from "../../../util/composeEventHandlers";
+import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
+import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
 
 export interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;

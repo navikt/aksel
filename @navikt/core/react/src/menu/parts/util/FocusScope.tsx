@@ -1,8 +1,8 @@
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import * as React from "react";
 import { forwardRef, useEffect, useState } from "react";
-import { Slot } from "../../util/Slot";
-import { useCallbackRef } from "../../util/hooks";
+import { Slot } from "../../../util/Slot";
+import { useCallbackRef } from "../../../util/hooks";
 
 const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";

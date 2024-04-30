@@ -23,10 +23,8 @@ import {
   isPointerInGraceArea,
   whenMouse,
 } from "./Menu.utils";
-import { RowingFocus, type RowingFocusProps } from "./RowingFocus";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
-import { FocusScope } from "./parts/FocusScope";
 import { MenuAnchor, type MenuAnchorProps } from "./parts/Menu.Anchor";
 import { MenuGroup, type MenuGroupProps } from "./parts/Menu.Group";
 import { MenuLabel, type MenuLabelProps } from "./parts/Menu.Label";
@@ -37,6 +35,8 @@ import {
   type SlottedDivElementRef,
   type SlottedDivProps,
 } from "./parts/SlottedDivElement";
+import { FocusScope } from "./parts/util/FocusScope";
+import { RowingFocus, type RowingFocusProps } from "./parts/util/RowingFocus";
 
 const SELECTION_KEYS = ["Enter", " "];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
