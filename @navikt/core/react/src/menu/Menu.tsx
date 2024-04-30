@@ -30,6 +30,7 @@ import { FocusScope } from "./parts/FocusScope";
 import { MenuAnchor, MenuAnchorProps } from "./parts/Menu.Anchor";
 import { MenuGroup, MenuGroupProps } from "./parts/Menu.Group";
 import { MenuPortal, MenuPortalProps } from "./parts/Menu.Portal";
+import { MenuSeparator, MenuSeparatorProps } from "./parts/Menu.Separator";
 import {
   SlottedDivElement,
   type SlottedDivElementRef,
@@ -714,32 +715,6 @@ const MenuRadioItem = React.forwardRef<
 });
 
 MenuRadioItem.displayName = RADIO_ITEM_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuSeparator
- * -----------------------------------------------------------------------------------------------*/
-
-const SEPARATOR_NAME = "MenuSeparator";
-
-type MenuSeparatorElement = SlottedDivElementRef;
-interface MenuSeparatorProps extends SlottedDivProps {}
-
-const MenuSeparator = React.forwardRef<
-  MenuSeparatorElement,
-  MenuSeparatorProps
->((props: MenuSeparatorProps, forwardedRef) => {
-  const { ...separatorProps } = props;
-  return (
-    <SlottedDivElement
-      role="separator"
-      aria-orientation="horizontal"
-      {...separatorProps}
-      ref={forwardedRef}
-    />
-  );
-});
-
-MenuSeparator.displayName = SEPARATOR_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuSub
