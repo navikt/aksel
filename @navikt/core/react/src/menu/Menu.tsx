@@ -6,9 +6,6 @@ import { Portal as PortalPrimitive } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
-
-/* import { useFocusGuards } from "./FocusGuards"; */
-import { FocusScope } from "./FocusScope";
 import {
   MenuDescendantsProvider,
   MenuProvider,
@@ -28,6 +25,9 @@ import {
   whenMouse,
 } from "./Menu.utils";
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
+
+/* import { useFocusGuards } from "./FocusGuards"; */
+import { FocusScope } from "./parts/FocusScope";
 import {
   SlottedDivElement,
   type SlottedDivElementRef,
