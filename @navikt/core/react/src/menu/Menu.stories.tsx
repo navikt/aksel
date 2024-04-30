@@ -447,7 +447,6 @@ export const TestMenu: React.FC<MenuProps> = () => {
   const props = { open: true };
   return (
     <Menu open={props.open} onOpenChange={() => {}} modal={true}>
-      {/* inline-block allows anchor to move when rtl changes on document */}
       <Menu.Anchor asChild>
         <button>Menu</button>
       </Menu.Anchor>

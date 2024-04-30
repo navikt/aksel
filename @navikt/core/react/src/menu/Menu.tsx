@@ -13,20 +13,12 @@ import { createDescendantContext } from "../util/hooks/descendants/useDescendant
 import { FocusScope } from "./FocusScope";
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 
-type Direction = "ltr" | "rtl";
-
 const SELECTION_KEYS = ["Enter", " "];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
-const SUB_OPEN_KEYS: Record<Direction, string[]> = {
-  ltr: [...SELECTION_KEYS, "ArrowRight"],
-  rtl: [...SELECTION_KEYS, "ArrowLeft"],
-};
-const SUB_CLOSE_KEYS: Record<Direction, string[]> = {
-  ltr: ["ArrowLeft"],
-  rtl: ["ArrowRight"],
-};
+const SUB_OPEN_KEYS = [...SELECTION_KEYS, "ArrowRight"];
+const SUB_CLOSE_KEYS = ["ArrowLeft"];
 
 /**
  * SlottedDivElement
@@ -323,6 +315,7 @@ type DismissableLayerProps = React.ComponentPropsWithoutRef<
 type PopperContentProps = React.ComponentPropsWithoutRef<
   typeof Floating.Content
 >;
+
 type MenuContentImplPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
@@ -382,7 +375,7 @@ const MenuContentImpl = React.forwardRef<
   const searchRef = React.useRef("");
   const pointerGraceTimerRef = React.useRef(0);
   const pointerGraceIntentRef = React.useRef<GraceIntent | null>(null);
-  const pointerDirRef = React.useRef<Side>("right");
+  const pointerDirRef = React.useRef<SubMenuSide>("right");
   const lastPointerXRef = React.useRef(0);
 
   const handleTypeaheadSearch = (key: string) => {
@@ -1052,7 +1045,7 @@ const MenuSubTrigger = React.forwardRef<
             const contentRect = context.content?.getBoundingClientRect();
             if (contentRect) {
               // TODO: make sure to update this when we change positioning logic
-              const side = context.content?.dataset.side as Side;
+              const side = context.content?.dataset.side as SubMenuSide;
               const rightSide = side === "right";
               const bleed = rightSide ? -5 : +5;
               const contentNearEdge = contentRect[rightSide ? "left" : "right"];
@@ -1090,7 +1083,7 @@ const MenuSubTrigger = React.forwardRef<
           /* console.log("kdwn"); */
           const isTypingAhead = contentContext.searchRef.current !== "";
           if (props.disabled || (isTypingAhead && event.key === " ")) return;
-          if (SUB_OPEN_KEYS["ltr"].includes(event.key)) {
+          if (SUB_OPEN_KEYS.includes(event.key)) {
             context.onOpenChange(true);
             // The trigger may hold focus if opened via pointer interaction
             // so we ensure content is given focus again when switching to keyboard.
@@ -1179,7 +1172,7 @@ const MenuSubContent = React.forwardRef<
           const isKeyDownInside = event.currentTarget.contains(
             event.target as HTMLElement,
           );
-          const isCloseKey = SUB_CLOSE_KEYS["ltr"].includes(event.key);
+          const isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
           if (isKeyDownInside && isCloseKey) {
             context.onOpenChange(false);
             // We focus manually because we prevented it in `onCloseAutoFocus`
@@ -1259,8 +1252,8 @@ function getNextMatch(
 
 type Point = { x: number; y: number };
 type Polygon = Point[];
-type Side = "left" | "right";
-type GraceIntent = { area: Polygon; side: Side };
+type SubMenuSide = "left" | "right";
+type GraceIntent = { area: Polygon; side: SubMenuSide };
 
 // Determine if a point is inside of a polygon.
 // Based on https://github.com/substack/point-in-polygon
