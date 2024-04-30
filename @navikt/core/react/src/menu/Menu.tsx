@@ -70,7 +70,6 @@ interface MenuProps {
 }
 
 interface MenuComponent extends React.FC<MenuProps> {
-  Root: typeof Menu;
   Anchor: typeof MenuAnchor;
   Portal: typeof MenuPortal;
   Content: typeof MenuContent;
@@ -1287,7 +1286,6 @@ function whenMouse<E>(
     event.pointerType === "mouse" ? handler(event) : undefined;
 }
 
-Menu.Root = Menu;
 Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;
 Menu.Content = MenuContent;
