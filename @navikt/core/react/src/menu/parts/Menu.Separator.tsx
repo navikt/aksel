@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import {
   SlottedDivElement,
-  SlottedDivElementRef,
-  SlottedDivProps,
+  type SlottedDivElementRef,
+  type SlottedDivProps,
 } from "./SlottedDivElement";
 
 interface MenuSeparatorProps extends SlottedDivProps {}

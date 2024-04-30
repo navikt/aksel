@@ -23,14 +23,15 @@ import {
   isPointerInGraceArea,
   whenMouse,
 } from "./Menu.utils";
-import { RowingFocus, RowingFocusProps } from "./RowingFocus";
+import { RowingFocus, type RowingFocusProps } from "./RowingFocus";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./parts/FocusScope";
-import { MenuAnchor, MenuAnchorProps } from "./parts/Menu.Anchor";
-import { MenuGroup, MenuGroupProps } from "./parts/Menu.Group";
-import { MenuPortal, MenuPortalProps } from "./parts/Menu.Portal";
-import { MenuSeparator, MenuSeparatorProps } from "./parts/Menu.Separator";
+import { MenuAnchor, type MenuAnchorProps } from "./parts/Menu.Anchor";
+import { MenuGroup, type MenuGroupProps } from "./parts/Menu.Group";
+import { MenuLabel, type MenuLabelProps } from "./parts/Menu.Label";
+import { MenuPortal, type MenuPortalProps } from "./parts/Menu.Portal";
+import { MenuSeparator, type MenuSeparatorProps } from "./parts/Menu.Separator";
 import {
   SlottedDivElement,
   type SlottedDivElementRef,
@@ -436,24 +437,6 @@ const MenuContentImpl = React.forwardRef<
 });
 
 MenuContent.displayName = CONTENT_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuLabel
- * -----------------------------------------------------------------------------------------------*/
-
-const LABEL_NAME = "MenuLabel";
-
-type MenuLabelElement = SlottedDivElementRef;
-interface MenuLabelProps extends SlottedDivProps {}
-
-const MenuLabel = React.forwardRef<MenuLabelElement, MenuLabelProps>(
-  (props: MenuLabelProps, forwardedRef) => {
-    const { ...labelProps } = props;
-    return <SlottedDivElement {...labelProps} ref={forwardedRef} />;
-  },
-);
-
-MenuLabel.displayName = LABEL_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuItem
