@@ -539,7 +539,7 @@ const storyStyles = (
     .separator {
       margin: 5px 10px;
       height: 1px;
-      backgroundColor: gray;
+      background-color: gray;
     }
 
 
