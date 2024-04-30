@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { Floating } from "../overlays/floating/Floating";
-import { Portal as PortalPrimitive } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
@@ -29,6 +28,8 @@ import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./parts/FocusScope";
 import { MenuAnchor, MenuAnchorProps } from "./parts/Menu.Anchor";
+import { MenuGroup, MenuGroupProps } from "./parts/Menu.Group";
+import { MenuPortal, MenuPortalProps } from "./parts/Menu.Portal";
 import {
   SlottedDivElement,
   type SlottedDivElementRef,
@@ -127,29 +128,6 @@ const MenuRoot = (props: MenuProps) => {
 };
 
 const Menu = MenuRoot as MenuComponent;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuPortal
- * -----------------------------------------------------------------------------------------------*/
-
-type PortalProps = React.ComponentPropsWithoutRef<typeof PortalPrimitive>;
-type MenuPortalProps = PortalProps & {
-  children: React.ReactElement;
-};
-
-const MenuPortal: React.FC<MenuPortalProps> = (props: MenuPortalProps) => {
-  const { children, rootElement } = props;
-  const context = useMenuContext();
-  return (
-    <>
-      {context.open && (
-        <PortalPrimitive asChild rootElement={rootElement}>
-          {children}
-        </PortalPrimitive>
-      )}
-    </>
-  );
-};
 
 /* -------------------------------------------------------------------------------------------------
  * MenuContent
@@ -457,26 +435,6 @@ const MenuContentImpl = React.forwardRef<
 });
 
 MenuContent.displayName = CONTENT_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuGroup
- * -----------------------------------------------------------------------------------------------*/
-
-const GROUP_NAME = "MenuGroup";
-
-type MenuGroupElement = SlottedDivElementRef;
-interface MenuGroupProps extends SlottedDivProps {}
-
-const MenuGroup = React.forwardRef<MenuGroupElement, MenuGroupProps>(
-  (props: MenuGroupProps, forwardedRef) => {
-    const { ...groupProps } = props;
-    return (
-      <SlottedDivElement role="group" {...groupProps} ref={forwardedRef} />
-    );
-  },
-);
-
-MenuGroup.displayName = GROUP_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuLabel
