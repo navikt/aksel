@@ -11,6 +11,14 @@ import { createDescendantContext } from "../util/hooks/descendants/useDescendant
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./FocusScope";
+import type { CheckedState, GraceIntent, SubMenuSide } from "./Menu.types";
+import {
+  getCheckedState,
+  getOpenState,
+  isIndeterminate,
+  isPointerInGraceArea,
+  whenMouse,
+} from "./Menu.utils";
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 
 const SELECTION_KEYS = ["Enter", " "];
@@ -701,8 +709,6 @@ const CHECKBOX_ITEM_NAME = "MenuCheckboxItem";
 
 type MenuCheckboxItemElement = MenuItemElement;
 
-type CheckedState = boolean | "indeterminate";
-
 interface MenuCheckboxItemProps extends MenuItemProps {
   checked?: CheckedState;
   // `onCheckedChange` can never be called with `"indeterminate"` from the inside
@@ -1124,62 +1130,6 @@ const MenuSubContent = React.forwardRef<
 });
 
 MenuSubContent.displayName = SUB_CONTENT_NAME;
-
-/* -----------------------------------------------------------------------------------------------*/
-
-function getOpenState(open: boolean) {
-  return open ? "open" : "closed";
-}
-
-function isIndeterminate(checked?: CheckedState): checked is "indeterminate" {
-  return checked === "indeterminate";
-}
-
-function getCheckedState(checked: CheckedState) {
-  return isIndeterminate(checked)
-    ? "indeterminate"
-    : checked
-      ? "checked"
-      : "unchecked";
-}
-
-type Point = { x: number; y: number };
-type Polygon = Point[];
-type SubMenuSide = "left" | "right";
-type GraceIntent = { area: Polygon; side: SubMenuSide };
-
-/**
- * Determine if a point is inside of a polygon.
- */
-function isPointInPolygon(point: Point, polygon: Polygon) {
-  const { x, y } = point;
-  let inside = false;
-  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-    const xi = polygon[i].x;
-    const yi = polygon[i].y;
-    const xj = polygon[j].x;
-    const yj = polygon[j].y;
-
-    // prettier-ignore
-    const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-    if (intersect) inside = !inside;
-  }
-
-  return inside;
-}
-
-function isPointerInGraceArea(event: React.PointerEvent, area?: Polygon) {
-  if (!area) return false;
-  const cursorPos = { x: event.clientX, y: event.clientY };
-  return isPointInPolygon(cursorPos, area);
-}
-
-function whenMouse<E>(
-  handler: React.PointerEventHandler<E>,
-): React.PointerEventHandler<E> {
-  return (event) =>
-    event.pointerType === "mouse" ? handler(event) : undefined;
-}
 
 Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;

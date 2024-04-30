@@ -97,6 +97,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     );
 
     const Comp = asChild ? Slot : "div";
+
     return (
       <Comp
         ref={composedRefs}
