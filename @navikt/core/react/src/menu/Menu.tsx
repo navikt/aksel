@@ -1148,8 +1148,9 @@ type Polygon = Point[];
 type SubMenuSide = "left" | "right";
 type GraceIntent = { area: Polygon; side: SubMenuSide };
 
-// Determine if a point is inside of a polygon.
-// Based on https://github.com/substack/point-in-polygon
+/**
+ * Determine if a point is inside of a polygon.
+ */
 function isPointInPolygon(point: Point, polygon: Polygon) {
   const { x, y } = point;
   let inside = false;
@@ -1194,20 +1195,20 @@ Menu.Sub = MenuSub;
 Menu.SubTrigger = MenuSubTrigger;
 Menu.SubContent = MenuSubContent;
 
-export { Menu };
-export type {
-  MenuAnchorProps,
-  MenuCheckboxItemProps,
-  MenuContentProps,
-  MenuGroupProps,
-  MenuItemProps,
-  MenuLabelProps,
-  MenuPortalProps,
-  MenuProps,
-  MenuRadioGroupProps,
-  MenuRadioItemProps,
-  MenuSeparatorProps,
-  MenuSubContentProps,
-  MenuSubProps,
-  MenuSubTriggerProps,
+export {
+  Menu,
+  type MenuAnchorProps,
+  type MenuCheckboxItemProps,
+  type MenuContentProps,
+  type MenuGroupProps,
+  type MenuItemProps,
+  type MenuLabelProps,
+  type MenuPortalProps,
+  type MenuProps,
+  type MenuRadioGroupProps,
+  type MenuRadioItemProps,
+  type MenuSeparatorProps,
+  type MenuSubContentProps,
+  type MenuSubProps,
+  type MenuSubTriggerProps,
 };
