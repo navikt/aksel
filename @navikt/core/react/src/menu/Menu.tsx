@@ -3,14 +3,18 @@ import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { Floating } from "../overlays/floating/Floating";
 import { Portal as PortalPrimitive } from "../portal";
-import { Slot } from "../util/Slot";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
-import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./FocusScope";
+import {
+  MenuDescendantsProvider,
+  useMenuDescendant,
+  useMenuDescendants,
+  useMenuDescendantsContext,
+} from "./Menu.context";
 import type { CheckedState, GraceIntent, SubMenuSide } from "./Menu.types";
 import {
   getCheckedState,
@@ -20,6 +24,11 @@ import {
   whenMouse,
 } from "./Menu.utils";
 import { RowingFocus, RowingFocusProps } from "./RowingFocus";
+import {
+  SlottedDivElement,
+  SlottedDivElementRef,
+  SlottedDivProps,
+} from "./parts/SlottedDivElement";
 
 const SELECTION_KEYS = ["Enter", " "];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
@@ -27,21 +36,6 @@ const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 const SUB_OPEN_KEYS = [...SELECTION_KEYS, "ArrowRight"];
 const SUB_CLOSE_KEYS = ["ArrowLeft"];
-
-/**
- * SlottedDivElement
- */
-
-interface PrimitiveDivProps extends React.HTMLAttributes<HTMLDivElement> {
-  asChild?: boolean;
-}
-
-const SlottedDivElement = React.forwardRef<HTMLDivElement, PrimitiveDivProps>(
-  ({ asChild, ...rest }, forwardedRef) => {
-    const Comp = asChild ? Slot : "div";
-    return <Comp {...rest} ref={forwardedRef} />;
-  },
-);
 
 /* -------------------------------------------------------------------------------------------------
  * Menu
@@ -214,13 +208,6 @@ const [MenuContentProvider, useMenuContentContext] =
     providerName: "MenuContentProvider",
     hookName: "useMenuContentContext",
   });
-
-export const [
-  MenuDescendantsProvider,
-  useMenuDescendantsContext,
-  useMenuDescendants,
-  useMenuDescendant,
-] = createDescendantContext<MenuItemElement>();
 
 type MenuContentElement = MenuRootContentTypeElement;
 /**
@@ -523,8 +510,8 @@ MenuContent.displayName = CONTENT_NAME;
 
 const GROUP_NAME = "MenuGroup";
 
-type MenuGroupElement = React.ElementRef<typeof SlottedDivElement>;
-interface MenuGroupProps extends PrimitiveDivProps {}
+type MenuGroupElement = SlottedDivElementRef;
+interface MenuGroupProps extends SlottedDivProps {}
 
 const MenuGroup = React.forwardRef<MenuGroupElement, MenuGroupProps>(
   (props: MenuGroupProps, forwardedRef) => {
@@ -543,8 +530,8 @@ MenuGroup.displayName = GROUP_NAME;
 
 const LABEL_NAME = "MenuLabel";
 
-type MenuLabelElement = React.ElementRef<typeof SlottedDivElement>;
-interface MenuLabelProps extends PrimitiveDivProps {}
+type MenuLabelElement = SlottedDivElementRef;
+interface MenuLabelProps extends SlottedDivProps {}
 
 const MenuLabel = React.forwardRef<MenuLabelElement, MenuLabelProps>(
   (props: MenuLabelProps, forwardedRef) => {
@@ -637,8 +624,8 @@ MenuItem.displayName = ITEM_NAME;
 
 /* ---------------------------------------------------------------------------------------------- */
 
-type MenuItemImplElement = React.ElementRef<typeof SlottedDivElement>;
-interface MenuItemImplProps extends PrimitiveDivProps {
+type MenuItemImplElement = SlottedDivElementRef;
+interface MenuItemImplProps extends SlottedDivProps {
   disabled?: boolean;
 }
 
@@ -822,8 +809,8 @@ MenuRadioItem.displayName = RADIO_ITEM_NAME;
 
 const SEPARATOR_NAME = "MenuSeparator";
 
-type MenuSeparatorElement = React.ElementRef<typeof SlottedDivElement>;
-interface MenuSeparatorProps extends PrimitiveDivProps {}
+type MenuSeparatorElement = SlottedDivElementRef;
+interface MenuSeparatorProps extends SlottedDivProps {}
 
 const MenuSeparator = React.forwardRef<
   MenuSeparatorElement,
