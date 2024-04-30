@@ -118,7 +118,7 @@ const MenuRoot = (props: MenuProps) => {
           isUsingKeyboardRef={isUsingKeyboardRef}
           modal={modal}
         >
-          -{children}
+          {children}
         </MenuRootProvider>
       </MenuProvider>
     </Floating>
@@ -231,13 +231,6 @@ const MenuRootContentModal = React.forwardRef<
   const context = useMenuContext();
   const ref = React.useRef<MenuRootContentTypeElement>(null);
   const composedRefs = useMergeRefs(forwardedRef, ref);
-
-  // Hide everything from ARIA except the `MenuContent`
-  /* TODO: Is this needed? */
-  /* React.useEffect(() => {
-    const content = ref.current;
-    if (content) return hideOthers(content);
-  }, []); */
 
   return (
     <MenuContentImpl

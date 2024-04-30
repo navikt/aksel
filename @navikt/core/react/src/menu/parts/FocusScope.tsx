@@ -1,8 +1,8 @@
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { Slot } from "../util/Slot";
-import { useCallbackRef } from "../util/hooks";
+import { forwardRef, useEffect, useState } from "react";
+import { Slot } from "../../util/Slot";
+import { useCallbackRef } from "../../util/hooks";
 
 const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
@@ -25,7 +25,7 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
   onUnmountAutoFocus?: (event: Event) => void;
 }
 
-const FocusScope = React.forwardRef<HTMLDivElement, FocusScopeProps>(
+const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   (
     {
       onMountAutoFocus: onMountAutoFocusProp,
