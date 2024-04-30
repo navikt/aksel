@@ -1,7 +1,3 @@
-/**
- * TODO:
- * - Context needs to be scoped to avoid descendant conflicts
- */
 import React from "react";
 import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
@@ -486,7 +482,6 @@ const MenuContentImpl = React.forwardRef<
           onInteractOutside={onInteractOutside}
           onDismiss={onDismiss}
         >
-          {/* TODO: adding asChild broke something with focus order */}
           <RowingFocus
             asChild
             descendants={descendants}
@@ -663,7 +658,7 @@ const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
     return (
       <MenuItemImpl
         {...itemProps}
-        /* TODO: Only for testing */
+        /* TODO: Should this be handled by consumer? */
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
         disabled={disabled}
