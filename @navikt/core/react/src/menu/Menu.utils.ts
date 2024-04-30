@@ -6,7 +6,10 @@ export {
   getCheckedState,
   isIndeterminate,
   getOpenState,
+  SELECTION_KEYS,
 };
+
+const SELECTION_KEYS = ["Enter", " "];
 
 function getOpenState(open: boolean) {
   return open ? "open" : "closed";

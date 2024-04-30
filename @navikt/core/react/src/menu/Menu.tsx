@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import DismissableLayer from "../overlay/dismiss/DismissableLayer";
 import { Floating } from "../overlays/floating/Floating";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -10,7 +9,6 @@ import {
   MenuProvider,
   MenuRootProvider,
   useMenuContext,
-  useMenuDescendant,
   useMenuDescendants,
   useMenuDescendantsContext,
   useMenuRootContext,
@@ -31,10 +29,11 @@ import { MenuLabel, type MenuLabelProps } from "./parts/Menu.Label";
 import { MenuPortal, type MenuPortalProps } from "./parts/Menu.Portal";
 import { MenuSeparator, type MenuSeparatorProps } from "./parts/Menu.Separator";
 import {
-  SlottedDivElement,
-  type SlottedDivElementRef,
-  type SlottedDivProps,
-} from "./parts/SlottedDivElement";
+  MenuItem,
+  MenuItemElement,
+  MenuItemProps,
+} from "./parts/item/Menu.Item";
+import { MenuItemImpl, MenuItemImplProps } from "./parts/item/Menu.ItemImpl";
 import { FocusScope } from "./parts/util/FocusScope";
 import { RowingFocus, type RowingFocusProps } from "./parts/util/RowingFocus";
 
@@ -145,7 +144,7 @@ type MenuContentContextValue = {
   onPointerGraceIntentChange(intent: GraceIntent | null): void;
 };
 
-const [MenuContentProvider, useMenuContentContext] =
+export const [MenuContentProvider, useMenuContentContext] =
   createContext<MenuContentContextValue>({
     providerName: "MenuContentProvider",
     hookName: "useMenuContentContext",
@@ -439,152 +438,6 @@ const MenuContentImpl = React.forwardRef<
 MenuContent.displayName = CONTENT_NAME;
 
 /* -------------------------------------------------------------------------------------------------
- * MenuItem
- * -----------------------------------------------------------------------------------------------*/
-
-const ITEM_NAME = "MenuItem";
-const ITEM_SELECT = "menu.itemSelect";
-
-type MenuItemElement = MenuItemImplElement;
-interface MenuItemProps extends Omit<MenuItemImplProps, "onSelect"> {
-  onSelect?: (event: Event) => void;
-}
-
-const MenuItem = React.forwardRef<MenuItemElement, MenuItemProps>(
-  (props: MenuItemProps, forwardedRef) => {
-    const { disabled = false, onSelect, ...itemProps } = props;
-    const ref = React.useRef<HTMLDivElement>(null);
-    const rootContext = useMenuRootContext();
-    const composedRefs = useMergeRefs(forwardedRef, ref);
-    const isPointerDownRef = React.useRef(false);
-
-    const handleSelect = () => {
-      const menuItem = ref.current;
-      if (!disabled && menuItem) {
-        const itemSelectEvent = new CustomEvent(ITEM_SELECT, {
-          bubbles: true,
-          cancelable: true,
-        });
-        menuItem.addEventListener(ITEM_SELECT, (event) => onSelect?.(event), {
-          once: true,
-        });
-        /* dispatchDiscreteCustomEvent */
-        ReactDOM.flushSync(() => menuItem.dispatchEvent(itemSelectEvent));
-        if (itemSelectEvent.defaultPrevented) {
-          isPointerDownRef.current = false;
-        } else {
-          rootContext.onClose();
-        }
-      }
-    };
-
-    return (
-      <MenuItemImpl
-        {...itemProps}
-        /* TODO: Should this be handled by consumer? */
-        tabIndex={disabled ? -1 : 0}
-        ref={composedRefs}
-        disabled={disabled}
-        onClick={composeEventHandlers(props.onClick, handleSelect)}
-        onPointerDown={(event) => {
-          props.onPointerDown?.(event);
-          isPointerDownRef.current = true;
-        }}
-        onPointerUp={composeEventHandlers(props.onPointerUp, (event) => {
-          // Pointer down can move to a different menu item which should activate it on pointer up.
-          // We dispatch a click for selection to allow composition with click based triggers and to
-          // prevent Firefox from getting stuck in text selection mode when the menu closes.
-          if (!isPointerDownRef.current) event.currentTarget?.click();
-        })}
-        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-          if (disabled) {
-            return;
-          }
-          if (SELECTION_KEYS.includes(event.key)) {
-            event.currentTarget.click();
-            /**
-             * We prevent default browser behaviour for selection keys as they should trigger
-             * a selection only:
-             * - prevents space from scrolling the page.
-             * - if keydown causes focus to move, prevents keydown from firing on the new target.
-             */
-            event.preventDefault();
-          }
-        })}
-      />
-    );
-  },
-);
-
-MenuItem.displayName = ITEM_NAME;
-
-/* ---------------------------------------------------------------------------------------------- */
-
-type MenuItemImplElement = SlottedDivElementRef;
-interface MenuItemImplProps extends SlottedDivProps {
-  disabled?: boolean;
-}
-
-const MenuItemImpl = React.forwardRef<MenuItemImplElement, MenuItemImplProps>(
-  (props: MenuItemImplProps, forwardedRef) => {
-    const { disabled = false, ...itemProps } = props;
-
-    const { register } = useMenuDescendant({ disabled });
-
-    const contentContext = useMenuContentContext();
-    const ref = React.useRef<HTMLDivElement>(null);
-    const composedRefs = useMergeRefs(forwardedRef, ref, register);
-    const [isFocused, setIsFocused] = React.useState(false);
-
-    return (
-      <SlottedDivElement
-        role="menuitem"
-        data-highlighted={isFocused ? "" : undefined}
-        aria-disabled={disabled || undefined}
-        data-disabled={disabled ? "" : undefined}
-        /* TODO: Only for testing */
-        tabIndex={-1}
-        {...itemProps}
-        ref={composedRefs}
-        /**
-         * We focus items on `pointerMove` to achieve the following:
-         *
-         * - Mouse over an item (it focuses)
-         * - Leave mouse where it is and use keyboard to focus a different item
-         * - Wiggle mouse without it leaving previously focused item
-         * - Previously focused item should re-focus
-         *
-         * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
-         * wiggles. This is to match native menu implementation.
-         */
-        onPointerMove={composeEventHandlers(
-          props.onPointerMove,
-          whenMouse((event) => {
-            if (disabled) {
-              contentContext.onItemLeave(event);
-            } else {
-              contentContext.onItemEnter(event);
-              if (!event.defaultPrevented) {
-                const item = event.currentTarget;
-                item.focus();
-              }
-            }
-          }),
-        )}
-        onPointerLeave={composeEventHandlers(
-          props.onPointerLeave,
-          whenMouse((event) => contentContext.onItemLeave(event)),
-        )}
-        onFocus={composeEventHandlers(props.onFocus, () => {
-          setIsFocused(true);
-        })}
-        onBlur={composeEventHandlers(props.onBlur, () => setIsFocused(false))}
-      />
-    );
-  },
-);
-
-/* -------------------------------------------------------------------------------------------------
  * MenuCheckboxItem
  * -----------------------------------------------------------------------------------------------*/
 
@@ -770,7 +623,7 @@ MenuSub.displayName = SUB_NAME;
 
 const SUB_TRIGGER_NAME = "MenuSubTrigger";
 
-type MenuSubTriggerElement = MenuItemImplElement;
+type MenuSubTriggerElement = MenuItemElement;
 interface MenuSubTriggerProps extends MenuItemImplProps {}
 
 const MenuSubTrigger = React.forwardRef<
