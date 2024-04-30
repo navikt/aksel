@@ -28,6 +28,7 @@ import { RowingFocus, RowingFocusProps } from "./RowingFocus";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { FocusScope } from "./parts/FocusScope";
+import { MenuAnchor, MenuAnchorProps } from "./parts/Menu.Anchor";
 import {
   SlottedDivElement,
   type SlottedDivElementRef,
@@ -126,26 +127,6 @@ const MenuRoot = (props: MenuProps) => {
 };
 
 const Menu = MenuRoot as MenuComponent;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuAnchor
- * -----------------------------------------------------------------------------------------------*/
-
-const ANCHOR_NAME = "MenuAnchor";
-
-type MenuAnchorElement = React.ElementRef<typeof Floating.Anchor>;
-type PopperAnchorProps = React.ComponentPropsWithoutRef<typeof Floating.Anchor>;
-interface MenuAnchorProps extends PopperAnchorProps {}
-
-const MenuAnchor = React.forwardRef<MenuAnchorElement, MenuAnchorProps>(
-  (props: MenuAnchorProps, forwardedRef) => {
-    const { ...anchorProps } = props;
-
-    return <Floating.Anchor {...anchorProps} ref={forwardedRef} />;
-  },
-);
-
-MenuAnchor.displayName = ANCHOR_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuPortal
