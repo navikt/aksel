@@ -12,12 +12,7 @@ import {
   useMenuRootContext,
 } from "./Menu.context";
 import type { SubMenuSide } from "./Menu.types";
-import {
-  SELECTION_KEYS,
-  getCheckedState,
-  getOpenState,
-  whenMouse,
-} from "./Menu.utils";
+import { SELECTION_KEYS, getOpenState, whenMouse } from "./Menu.utils";
 
 /* import { useFocusGuards } from "./FocusGuards"; */
 import { MenuAnchor, type MenuAnchorProps } from "./parts/Menu.Anchor";
@@ -28,6 +23,8 @@ import {
 import { MenuGroup, type MenuGroupProps } from "./parts/Menu.Group";
 import { MenuLabel, type MenuLabelProps } from "./parts/Menu.Label";
 import { MenuPortal, type MenuPortalProps } from "./parts/Menu.Portal";
+import { MenuRadioItem, MenuRadioItemProps } from "./parts/Menu.Radio";
+import { MenuRadioGroup, MenuRadioGroupProps } from "./parts/Menu.RadioGroup";
 import { MenuSeparator, type MenuSeparatorProps } from "./parts/Menu.Separator";
 import {
   MenuContent,
@@ -139,86 +136,6 @@ const MenuRoot = (props: MenuProps) => {
 };
 
 const Menu = MenuRoot as MenuComponent;
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------------------------------
- * MenuRadioGroup
- * -----------------------------------------------------------------------------------------------*/
-
-const RADIO_GROUP_NAME = "MenuRadioGroup";
-
-const [RadioGroupProvider, useRadioGroupContext] =
-  createContext<MenuRadioGroupProps>({
-    providerName: "MenuRadioGroupProvider",
-    hookName: "useRadioGroupContext",
-    defaultValue: {
-      value: undefined,
-      onValueChange: () => {},
-    },
-  });
-
-type MenuRadioGroupElement = React.ElementRef<typeof MenuGroup>;
-interface MenuRadioGroupProps extends MenuGroupProps {
-  value?: string;
-  onValueChange?: (value: string) => void;
-}
-
-const MenuRadioGroup = React.forwardRef<
-  MenuRadioGroupElement,
-  MenuRadioGroupProps
->((props: MenuRadioGroupProps, forwardedRef) => {
-  const { value, onValueChange, ...groupProps } = props;
-  const handleValueChange = useCallbackRef(onValueChange);
-  return (
-    <RadioGroupProvider value={value} onValueChange={handleValueChange}>
-      <MenuGroup {...groupProps} ref={forwardedRef} />
-    </RadioGroupProvider>
-  );
-});
-
-MenuRadioGroup.displayName = RADIO_GROUP_NAME;
-
-/* -------------------------------------------------------------------------------------------------
- * MenuRadioItem
- * -----------------------------------------------------------------------------------------------*/
-
-const RADIO_ITEM_NAME = "MenuRadioItem";
-
-type MenuRadioItemElement = React.ElementRef<typeof MenuItem>;
-interface MenuRadioItemProps extends MenuItemProps {
-  value: string;
-}
-
-const MenuRadioItem = React.forwardRef<
-  MenuRadioItemElement,
-  MenuRadioItemProps
->((props: MenuRadioItemProps, forwardedRef) => {
-  const { value, ...radioItemProps } = props;
-  const context = useRadioGroupContext();
-  const checked = value === context.value;
-
-  /* TODO: removed indicator warpper, fix sideeffects */
-
-  return (
-    <MenuItem
-      role="menuitemradio"
-      aria-checked={checked}
-      {...radioItemProps}
-      ref={forwardedRef}
-      data-state={getCheckedState(checked)}
-      onSelect={composeEventHandlers(
-        radioItemProps.onSelect,
-        () => context.onValueChange?.(value),
-        { checkForDefaultPrevented: false },
-      )}
-    />
-  );
-});
-
-MenuRadioItem.displayName = RADIO_ITEM_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * MenuSub
