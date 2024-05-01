@@ -7,12 +7,16 @@ export {
   isIndeterminate,
   getOpenState,
   SELECTION_KEYS,
+  SUB_OPEN_KEYS,
+  SUB_CLOSE_KEYS,
   FIRST_LAST_KEYS,
   FIRST_KEYS,
   LAST_KEYS,
 };
 
 const SELECTION_KEYS = ["Enter", " "];
+const SUB_OPEN_KEYS = [...SELECTION_KEYS, "ArrowRight"];
+const SUB_CLOSE_KEYS = ["ArrowLeft"];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
