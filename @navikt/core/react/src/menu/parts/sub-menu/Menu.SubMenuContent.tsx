@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import {
@@ -34,7 +34,7 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
     const context = useMenuContext();
     const rootContext = useMenuRootContext();
     const subContext = useMenuSubContext();
-    const ref = React.useRef<MenuContentImplElement>(null);
+    const ref = useRef<MenuContentImplElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref);
 
     return (

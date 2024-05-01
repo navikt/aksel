@@ -9,11 +9,14 @@ import { MenuSubProvider } from "./Menu.SubMenu.context";
 interface MenuSubProps {
   children?: React.ReactNode;
   open?: boolean;
-  onOpenChange?(open: boolean): void;
+  onOpenChange?: (open: boolean) => void;
 }
 
-const MenuSub: React.FC<MenuSubProps> = (props: MenuSubProps) => {
-  const { children, open = false, onOpenChange } = props;
+const MenuSub: React.FC<MenuSubProps> = ({
+  children,
+  onOpenChange,
+  open = false,
+}: MenuSubProps) => {
   const parentMenuContext = useMenuContext();
 
   const [trigger, setTrigger] = useState<MenuItemElement | null>(null);
@@ -22,7 +25,9 @@ const MenuSub: React.FC<MenuSubProps> = (props: MenuSubProps) => {
 
   // Prevent the parent menu from reopening with open submenus.
   useEffect(() => {
-    if (parentMenuContext.open === false) handleOpenChange(false);
+    if (parentMenuContext.open === false) {
+      handleOpenChange(false);
+    }
     return () => handleOpenChange(false);
   }, [parentMenuContext.open, handleOpenChange]);
 
