@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 /** Number of components which have requested interest to have focus guards */
 let count = 0;
