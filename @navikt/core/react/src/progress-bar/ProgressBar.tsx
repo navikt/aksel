@@ -22,8 +22,9 @@ interface ProgressBarPropsBase
    * ProgressBar grows with a preset animation for {duration} seconds.
    * After a 4 sec delay, it then shows an indeterminate animation.
    * A duration of 0 will show an indeterminate animation immediately.
+   * Temporary removed to avoid conflicts when updating API
    */
-  duration?: number;
+  //duration?: number;
   /**
    * String ID of the element that labels the progress bar.
    * Not needed if `aria-label` is used.
@@ -72,7 +73,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       size = "medium",
       value = 0,
       valueMax = 100,
-      duration,
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
       className,
@@ -81,6 +81,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     ref,
   ) => {
     const translate = 100 - (Math.round(value) / valueMax) * 100;
+    const duration = undefined;
 
     return (
       <div
