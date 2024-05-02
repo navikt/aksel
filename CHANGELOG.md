@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.7
+
+### @navikt/ds-react
+
+- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+
+### @navikt/ds-css
+
+- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+
+* Checkbox, Radio: Erstatter `:focus-visible` med `:focus` for bedre UX brukt sammen med ErrorSummary. ([#2893](https://github.com/navikt/aksel/pull/2893))
+
+* :lipstick: tweak CSS for timeline pins. ([#2889](https://github.com/navikt/aksel/pull/2889))
+
 ## 6.6
 
 ### @navikt/aksel
