@@ -5,7 +5,8 @@ const Example = () => {
   return (
     <div>
       <p id="indeterminate">Laster opp fil</p>
-      <ProgressBar duration={6} aria-labelledby="indeterminate" />
+      {/* TODO: Remove outcommented duration prop */}
+      <ProgressBar /* duration={6} */ aria-labelledby="indeterminate" />
     </div>
   );
 };
