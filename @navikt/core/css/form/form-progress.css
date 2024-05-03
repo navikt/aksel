@@ -9,6 +9,11 @@
   margin-top: var(--a-spacing-1);
 }
 
+.navds-form-progress__button[data-state="closed"] .navds-form-progress__btn-txt-hide,
+.navds-form-progress__button[data-state="open"] .navds-form-progress__btn-txt-show {
+  display: none;
+}
+
 .navds-form-progress__button:hover svg {
   transform: translateY(1px);
 }

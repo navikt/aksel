@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import Button from "../../button/Button";
@@ -7,7 +6,6 @@ import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
 import { Stepper } from "../../stepper";
 import { BodyShort } from "../../typography";
-import { useControllableState } from "../../util/hooks/useControllableState";
 import FormProgressStep from "./FormProgressStep";
 
 export interface FormProgressProps
@@ -62,7 +60,7 @@ interface FormProgressComponent
 }
 
 /**
- * TODO DESC
+ * Component for visualizing progression in a form with multiple steps.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/formprogress)
  * @see 🏷️ {@link FormProgressProps}
@@ -80,23 +78,12 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
       children,
       onStepChange,
       interactiveSteps,
-      className,
       ...rest
     }: FormProgressProps,
     ref,
   ) => {
-    const [_open, _setOpen] = useControllableState({
-      defaultValue: false,
-      value: open,
-      onChange: onOpenChange,
-    }); // TODO: Blir dobbelt opp med state nå (pga. Collapsible). Bør Collapsible bare være controlled? Ev. vise riktig tekst med CSS.
-
     return (
-      <div
-        ref={ref}
-        className={cl(className, "navds-form-progress")} // TODO: Vurder om dette klassenavnet trengs
-        {...rest}
-      >
+      <div ref={ref} {...rest}>
         <ProgressBar
           aria-label="Fremdrift" // TODO vurder
           //aria-hidden
@@ -104,7 +91,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           valueMax={totalSteps}
           className="navds-form-progress__bar"
         />
-        <Collapsible open={_open} onOpenChange={_setOpen}>
+        <Collapsible open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
               {`Steg ${activeStep} av ${totalSteps}`}
@@ -116,7 +103,12 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
                 className="navds-form-progress__button"
                 icon={<ChevronDownIcon aria-hidden />}
               >
-                {_open ? "Skjul alle steg" : "Vis alle steg"}
+                <span className="navds-form-progress__btn-txt-hide">
+                  Skjul alle steg
+                </span>
+                <span className="navds-form-progress__btn-txt-show">
+                  Vis alle steg
+                </span>
               </Button>
             </Collapsible.Trigger>
           </HStack>
