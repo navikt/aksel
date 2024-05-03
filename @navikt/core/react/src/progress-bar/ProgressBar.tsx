@@ -9,7 +9,7 @@ interface ProgressBarPropsBase
    */
   size?: "large" | "medium" | "small";
   /**
-   * Current progress. When duration is set, value is ignored.
+   * Current progress. If set, the `simulated` prop overrides `value`.
    */
   value?: number;
   /**
@@ -18,16 +18,20 @@ interface ProgressBarPropsBase
    */
   valueMax?: number;
   /**
-   * Expected task duration in seconds.
-   * ProgressBar grows with a preset animation for {duration} seconds.
-   * After a 4 sec delay, it then shows an indeterminate animation.
-   * A duration of 0 will show an indeterminate animation immediately.
+   * Visually simulates loading.
+   * ProgressBar grows with a preset animation for set number of seconds,
+   * then shows an indeterminate animation on timeout.
    */
-  duration?: number;
-  /**
-   * Callback function when progress is indeterminate.
-   */
-  onIndeterminate?: () => void;
+  simulated?: {
+    /**
+     * Duration in seconds.
+     */
+    seconds: number;
+    /**
+     * Callback function when progress is indeterminate.
+     */
+    onTimeout: () => void;
+  };
   /**
    * String ID of the element that labels the progress bar.
    * Not needed if `aria-label` is used.
@@ -64,7 +68,11 @@ export type ProgressBarProps = ProgressBarPropsBase &
  *
  * @example
  * // For loading content with an approximate duration in sec.
- * <ProgressBar duration={30} />
+ * <ProgressBar simulated={
+ *     seconds:30,
+ *     onTimeout:() => { console.log("Oops, this is taking more time than expected!")
+ * }
+ * />
  *
  * @example
  * // As a step indicator for forms, questionnaires, etc.
@@ -76,11 +84,10 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       size = "medium",
       value = 0,
       valueMax = 100,
-      duration,
       "aria-labelledby": ariaLabelledBy,
       "aria-label": ariaLabel,
       className,
-      onIndeterminate,
+      simulated,
       ...rest
     },
     ref,
@@ -88,14 +95,14 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     const translate = 100 - (Math.round(value) / valueMax) * 100;
 
     React.useEffect(() => {
-      if (duration && onIndeterminate) {
+      if (simulated?.seconds && simulated?.onTimeout) {
         const timeout = setTimeout(
-          () => onIndeterminate(),
-          duration * 1000 + 4000,
+          () => simulated.onTimeout(),
+          simulated.seconds * 1000 + 4000,
         );
         return () => clearTimeout(timeout);
       }
-    }, [duration, onIndeterminate]);
+    }, [simulated, simulated?.seconds, simulated?.onTimeout]);
 
     return (
       <div
@@ -105,11 +112,11 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           `navds-progress-bar--${size}`,
           className,
         )}
-        aria-valuemax={duration ? 0 : Math.round(valueMax)}
-        aria-valuenow={duration ? 0 : Math.round(value)}
+        aria-valuemax={simulated?.seconds ? 0 : Math.round(valueMax)}
+        aria-valuenow={simulated?.seconds ? 0 : Math.round(value)}
         aria-valuetext={
-          duration
-            ? `Fremdrift kan ikke beregnes, antatt tid er: ${duration} sekunder`
+          simulated?.seconds
+            ? `Fremdrift kan ikke beregnes, antatt tid er: ${simulated?.seconds} sekunder`
             : `${Math.round(value)} av ${Math.round(valueMax)}`
         }
         role="progressbar"
@@ -119,14 +126,17 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate":
-              Number.isInteger(duration),
+            "navds-progress-bar__foreground--indeterminate": Number.isInteger(
+              simulated?.seconds,
+            ),
           })}
           style={{
-            "--__ac-progress-bar-duration": Number.isInteger(duration)
-              ? `${duration}s`
+            "--__ac-progress-bar-simulated": Number.isInteger(
+              simulated?.seconds,
+            )
+              ? `${simulated?.seconds}s`
               : undefined,
-            "--__ac-progress-bar-delay": `${duration === 0 ? 0 : 4}s`,
+            "--__ac-progress-bar-delay": `${simulated?.seconds === 0 ? 0 : 4}s`,
             "--__ac-progress-bar-translate": `-${translate}%`,
           }}
         />

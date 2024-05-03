@@ -39,15 +39,15 @@
 }
 
 .navds-progress-bar__foreground--indeterminate {
-  --__ac-progress-bar-duration: initial;
+  --__ac-progress-bar-simulated: initial;
   --__ac-progress-bar-delay: initial;
 
   animation-name: navds-progress-bar-indeterminate-grow, navds-progress-bar-indeterminate;
   animation-timing-function: ease-in-out, ease-in-out;
-  animation-duration: var(--__ac-progress-bar-duration), 2500ms;
+  animation-duration: var(--__ac-progress-bar-simulated), 2500ms;
   animation-fill-mode: forwards, none;
   animation-iteration-count: 1, infinite;
-  animation-delay: 0s, calc((var(--__ac-progress-bar-duration) + var(--__ac-progress-bar-delay)));
+  animation-delay: 0s, calc((var(--__ac-progress-bar-simulated) + var(--__ac-progress-bar-delay)));
 }
 
 /* navds-progress-bar-indeterminate wave animation */

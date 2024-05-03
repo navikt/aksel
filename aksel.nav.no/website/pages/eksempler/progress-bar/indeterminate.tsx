@@ -6,13 +6,16 @@ const Example = () => {
   // const [isIndeterminate, setIsIndeterminate] = React.useState(false);
   return (
     <div style={{ width: "300px" }}>
-      <p id="indeterminate">Jobber med saken</p>
+      <p id="indeterminate-working">Jobber med saken</p>
       <ProgressBar
-        // onIndeterminate={() => {
-        //   setIsIndeterminate(true);
+        // simulated={{
+        //   seconds: 6,
+        //   onTimeout: () => {
+        //     console.log("Ferdig!");
+        //     setIsIndeterminate(true);
+        //   },
         // }}
-        duration={6}
-        aria-labelledby="indeterminate"
+        aria-labelledby="indeterminate-working"
       />
       {/* {isIndeterminate && <p>Oi, dette tok lenger tid en forventet!</p>} */}
     </div>
@@ -29,5 +32,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Med duration-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
+  desc: "Med simulated-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
 };
