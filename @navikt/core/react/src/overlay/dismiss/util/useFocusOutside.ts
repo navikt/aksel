@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../../util/hooks";
-import { CustomFocusEvent } from "../../DismissableLayer.types";
-import { CUSTOM_EVENTS, dispatchCustomEvent } from "./dispatchCustomEvent";
+import { useCallbackRef } from "../../../util/hooks";
+import {
+  CUSTOM_EVENTS,
+  CustomFocusEvent,
+  dispatchCustomEvent,
+} from "./dispatchCustomEvent";
 
 /**
  * Tracks focus outside a React subtree. Returns props for the subtree root.

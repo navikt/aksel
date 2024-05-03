@@ -10,7 +10,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
 import { DateContext } from "../date/context";
 import { useModalContext } from "../modal/Modal.context";
-import DismissableLayer from "../overlay/dismiss/DismissableLayer";
+import { DismissableLayer } from "../overlay/dismiss/DismissableLayer";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";

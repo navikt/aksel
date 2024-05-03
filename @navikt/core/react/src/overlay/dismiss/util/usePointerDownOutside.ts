@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useCallbackRef } from "../../../../util/hooks";
-import { CustomPointerDownEvent } from "../../DismissableLayer.types";
-import { CUSTOM_EVENTS, dispatchCustomEvent } from "./dispatchCustomEvent";
+import { useCallbackRef } from "../../../util/hooks";
+import {
+  CUSTOM_EVENTS,
+  CustomPointerDownEvent,
+  dispatchCustomEvent,
+} from "./dispatchCustomEvent";
 
 /**
  * Listens for `pointerdown` outside a react subtree. We use `pointerdown` rather than `pointerup`

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import DismissableLayer from "./DismissableLayer";
+import { DismissableLayer } from "./DismissableLayer";
 
 export default {
   title: "Utilities/DismissableLayer",
