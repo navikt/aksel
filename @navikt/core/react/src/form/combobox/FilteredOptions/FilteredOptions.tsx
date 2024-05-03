@@ -72,7 +72,7 @@ const FilteredOptions = () => {
               <Loader title="Søker..." />
             </div>
           )}
-          {!isLoading && filteredOptions.length === 0 && (
+          {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
             <div
               className="navds-combobox__list-item--no-options"
               id={filteredOptionsUtil.getNoHitsId(id)}
