@@ -136,7 +136,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
             )
               ? `${simulated?.seconds}s`
               : undefined,
-            "--__ac-progress-bar-delay": `${simulated?.seconds === 0 ? 0 : 4}s`,
             "--__ac-progress-bar-translate": `-${translate}%`,
           }}
         />
