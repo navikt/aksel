@@ -266,7 +266,6 @@
   border-start-start-radius: calc(var(--a-border-radius-medium) - 1px);
   border-start-end-radius: calc(var(--a-border-radius-medium) - 1px);
   border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
-  margin-bottom: calc(var(--a-spacing-1) * -1);
 }
 
 .navds-combobox__list_non-selectables:hover {
