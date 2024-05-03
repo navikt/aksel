@@ -1,4 +1,4 @@
-import { Detail, VStack } from "@navikt/ds-react";
+import { BodyShort, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -6,8 +6,17 @@ const Example = () => {
 
   return (
     <VStack gap="5">
-      <Detail textColor="default">Default: {exampleText}</Detail>
-      <Detail textColor="subtle">Subtle: {exampleText}</Detail>
+      <BodyShort align="start">
+        <b>Start:</b> {exampleText}
+      </BodyShort>
+
+      <BodyShort align="center">
+        <b>Center:</b> {exampleText}
+      </BodyShort>
+
+      <BodyShort align="end">
+        <b>End:</b> {exampleText}
+      </BodyShort>
     </VStack>
   );
 };
@@ -21,5 +30,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
 };

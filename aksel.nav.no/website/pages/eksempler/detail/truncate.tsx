@@ -1,18 +1,12 @@
-import { Label } from "@navikt/ds-react";
+import { Detail } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
-    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
-    <div>
-      <Label spacing as="p">
-        {lorem}
-      </Label>
-      <Label spacing as="p">
-        {lorem}
-      </Label>
+    <div style={{ maxWidth: 200 }}>
+      <Detail truncate>{exampleText}</Detail>
     </div>
   );
 };

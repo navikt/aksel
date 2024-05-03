@@ -8,12 +8,12 @@ export interface BodyShortProps
   extends TypoProps,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * large: 20px, medium: 18px, small: 16px
+   * large: 20px, medium: 18px, small: 16px.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
   /**
-   * Paragraph text
+   * Paragraph text.
    */
   children: React.ReactNode;
 }
@@ -27,9 +27,9 @@ export interface BodyShortProps
  *
  * @example
  * ```jsx
- *     <BodyShort>
- *       Du må gjøre en filtrering for å se brukere i listen.
- *     </BodyShort>
+ * <BodyShort>
+ *   Du må gjøre en filtrering for å se brukere i listen.
+ * </BodyShort>
  * ```
  */
 export const BodyShort: OverridableComponent<

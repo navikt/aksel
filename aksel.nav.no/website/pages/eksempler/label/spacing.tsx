@@ -2,18 +2,19 @@ import { Label } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
+  const exampleText =
     "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
 
   return (
-    <div>
-      <Label size="small" spacing as="p">
-        {lorem}
+    <>
+      <Label spacing as="p">
+        {exampleText}
       </Label>
-      <Label size="small" spacing as="p">
-        {lorem}
+
+      <Label spacing as="p">
+        {exampleText}
       </Label>
-    </div>
+    </>
   );
 };
 
@@ -26,5 +27,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 1,
+  desc: "Propen 'spacing' legger til margin-bottom. Avstanden varierer avhengig av 'size'.",
 };

@@ -1,11 +1,16 @@
-import { Label } from "@navikt/ds-react";
+import { Detail, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem =
-    "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
-  return <Label>{lorem}</Label>;
+  return (
+    <VStack gap="5">
+      <Detail>Regular: {exampleText}</Detail>
+
+      <Detail weight="semibold">Semibold: {exampleText}</Detail>
+    </VStack>
+  );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

@@ -8,16 +8,16 @@ export interface HeadingProps
   extends Pick<TypoProps, "spacing" | "visuallyHidden" | "align" | "textColor">,
     React.HTMLAttributes<HTMLHeadingElement> {
   /**
-   * Heading level
+   * Heading level.
    * @default "1"
    */
   level?: "1" | "2" | "3" | "4" | "5" | "6";
   /**
-   * Changes text-sizing
+   * xlarge: 40px, large: 32px, medium: 24px, small: 20px, xsmall: 18px.
    */
   size: "xlarge" | "large" | "medium" | "small" | "xsmall";
   /**
-   * Heading text
+   * Heading text.
    */
   children: React.ReactNode;
 }
@@ -31,9 +31,9 @@ export interface HeadingProps
  *
  * @example
  * ```jsx
- *     <Heading level="1" size="xlarge">
- *       Hva kan vi hjelpe deg med?
- *     </Heading>
+ * <Heading level="1" size="xlarge">
+ *   Hva kan vi hjelpe deg med?
+ * </Heading>
  * ```
  */
 export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =

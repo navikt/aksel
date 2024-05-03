@@ -6,14 +6,10 @@ const Example = () => {
     "Hvis du ikke bor sammen med begge foreldrene dine, kan du ha rett til barnebidrag fra en eller begge foreldre mens du fullfører videregående skole eller tilsvarende.";
 
   return (
-    <div>
-      <BodyLong size="large" spacing>
-        {lorem}
-      </BodyLong>
-      <BodyLong size="large" spacing>
-        {lorem}
-      </BodyLong>
-    </div>
+    <>
+      <BodyLong spacing>{lorem}</BodyLong>
+      <BodyLong spacing>{lorem}</BodyLong>
+    </>
   );
 };
 
@@ -27,4 +23,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Propen 'spacing' legger til mellomrom under avsnittet. Avstanden varierer avhengig av 'size'.",
 };

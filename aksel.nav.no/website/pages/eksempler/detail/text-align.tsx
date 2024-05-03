@@ -1,14 +1,14 @@
-import { ErrorMessage, VStack } from "@navikt/ds-react";
+import { Detail, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const exampeText = "Du må fylle ut tekstfeltet før innsending.";
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
     <VStack gap="5">
-      <ErrorMessage>Medium (18px): {exampeText}</ErrorMessage>
-
-      <ErrorMessage size="small">Small (16px): {exampeText}</ErrorMessage>
+      <Detail align="start">Start: {exampleText}</Detail>
+      <Detail align="center">Center: {exampleText}</Detail>
+      <Detail align="end">End: {exampleText}</Detail>
     </VStack>
   );
 };
@@ -22,5 +22,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 5,
 };

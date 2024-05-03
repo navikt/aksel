@@ -5,14 +5,10 @@ const Example = () => {
   const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
-    <div>
-      <BodyShort size="large" spacing>
-        {lorem}
-      </BodyShort>
-      <BodyShort size="large" spacing>
-        {lorem}
-      </BodyShort>
-    </div>
+    <>
+      <BodyShort spacing>{lorem}</BodyShort>
+      <BodyShort spacing>{lorem}</BodyShort>
+    </>
   );
 };
 
@@ -26,4 +22,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
+  desc: "Propen 'spacing' legger til mellomrom under avsnittet. Avstanden varierer avhengig av 'size'.",
 };
