@@ -68,10 +68,10 @@ export type ProgressBarProps = ProgressBarPropsBase &
  *
  * @example
  * // For loading content with an approximate duration in sec.
- * <ProgressBar simulated={
- *     seconds:30,
- *     onTimeout:() => { console.log("Oops, this is taking more time than expected!")
- * }
+ * <ProgressBar simulated={{
+ *     seconds: 30,
+ *     onTimeout: () => console.log("Oops, this is taking more time than expected!")
+ *   }}
  * />
  *
  * @example
