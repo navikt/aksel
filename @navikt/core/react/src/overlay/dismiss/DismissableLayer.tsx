@@ -154,7 +154,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      */
     const [node, setNode] = useState<HTMLDivElement | null>(null);
 
-    const mergedRefs = useMergeRefs((_node) => setNode(_node), register, ref);
+    const mergedRefs = useMergeRefs(setNode, register, ref);
 
     /**
      * In some cases the `node.ownerDocument` can differ from global document.
@@ -168,7 +168,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const pointerEnabled = useMemo(() => {
       let lastIndex = -1;
 
-      const descendantNodes = descendants.values();
+      const descendantNodes = descendants.enabledValues();
       descendantNodes.forEach((obj, _index) => {
         if (obj.disableOutsidePointerEvents) {
           lastIndex = _index;
@@ -184,9 +184,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         /**
          * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
          */
-        isBodyPointerEventsDisabled: descendantNodes.find(
-          (x) => !!x.disableOutsidePointerEvents,
-        ),
+        isBodyPointerEventsDisabled: lastIndex > -1,
       };
     }, [descendants, index]);
 

@@ -554,14 +554,14 @@ __metadata:
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=shadow-dom%40workspace%3A.":
   version: 6.6.1
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=c1ce18&locator=shadow-dom%40workspace%3A."
-  checksum: 8be3bcebe91e0a90c34a8b0af1057751f35a56c21d2e9d1146fe259d644fd4355730641dda41ed1c2815aed053e5e2167a1375e4f6061fdd1f595ca8358d0bfb
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=5a64a6&locator=shadow-dom%40workspace%3A."
+  checksum: 9ad466d6f755be78c2e00ba85726a51a02c0c3d2263bf03c75e3b18ecbc18080314eac3489097ffd8173d8ceb865bd2d66fcad05de5efb216a87846bc25755de
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=shadow-dom%40workspace%3A.":
   version: 6.6.1
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=c66528&locator=shadow-dom%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=ce8906&locator=shadow-dom%40workspace%3A."
   dependencies:
     "@floating-ui/react": 0.25.4
     "@navikt/aksel-icons": ^6.6.1
@@ -575,7 +575,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: c7b8394f2323f3b1b21fe901c3e20fc1fd4a82f981065d1da97ae60c677301eac5a0376dfb4062b9e5a7c6a33460529e0479a467212ce69adc365b8000919c13
+  checksum: 91439edea0e503cac55073f735a56b34d652e1726a3801f8fa1cbd66e5cc4a61f072e1a82a04923e9fc6afa73d77300980d21e36c2b84f297b45b610acfede7d
   languageName: node
   linkType: hard
 
