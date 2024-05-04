@@ -1,11 +1,13 @@
-import { ErrorMessage } from "@navikt/ds-react";
+import { Detail } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
+
   return (
-    <ErrorMessage size="small">
-      Du må fylle ut tekstfeltet før innsending.
-    </ErrorMessage>
+    <div style={{ maxWidth: 200 }}>
+      <Detail truncate>{exampleText}</Detail>
+    </div>
   );
 };
 
@@ -18,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 2,
 };

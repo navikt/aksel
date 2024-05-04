@@ -27,9 +27,9 @@ export interface BodyShortProps
  *
  * @example
  * ```jsx
- *     <BodyShort>
- *       Du må gjøre en filtrering for å se brukere i listen.
- *     </BodyShort>
+ * <BodyShort>
+ *   Du må gjøre en filtrering for å se brukere i listen.
+ * </BodyShort>
  * ```
  */
 export const BodyShort: OverridableComponent<

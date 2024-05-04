@@ -31,9 +31,9 @@ export interface HeadingProps
  *
  * @example
  * ```jsx
- *     <Heading level="1" size="xlarge">
- *       Hva kan vi hjelpe deg med?
- *     </Heading>
+ * <Heading level="1" size="xlarge">
+ *   Hva kan vi hjelpe deg med?
+ * </Heading>
  * ```
  */
 export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =

@@ -23,12 +23,10 @@ export const Hit = forwardRef<
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchLoggingContext);
 
-  const getHref = () => {
-    if ("anchor" in hit) {
-      return `/${hit.item.slug}${hit?.anchor ? `#h${hit.anchor}` : ""}`;
-    }
-    return `/${hit.item.slug}`;
-  };
+  const href =
+    "anchor" in hit && hit.anchor
+      ? `/${hit.item.slug}#${hit.anchor}`
+      : `/${hit.item.slug}`;
 
   return (
     <li
@@ -45,8 +43,8 @@ export const Hit = forwardRef<
           })}
         >
           <NextLink
-            href={getHref()}
-            onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
+            href={href}
+            onClick={() => logSuccess(index, `/${hit.item.slug}`)}
             className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
           >
             <span className="group-hover:underline">
@@ -62,8 +60,8 @@ export const Hit = forwardRef<
               aria-hidden
             />
           ) : (
-            hit?.item?.status?.tag && (
-              <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+            hit.item?.status?.tag && (
+              <StatusTag status={hit.item.status.tag} aria-hidden />
             )
           )}
         </span>
@@ -128,10 +126,8 @@ function HeadingLinks({
               <Link
                 prefetch={false}
                 key={x.text}
-                href={`/${hit.item.slug}${`#h${x.id}`}`}
-                onClick={() =>
-                  logSuccess(index, `/${(hit.item as any).slug}`, x.text)
-                }
+                href={`/${hit.item.slug}#${x.id}`}
+                onClick={() => logSuccess(index, `/${hit.item.slug}`, x.text)}
                 className="flex min-h-6 items-center justify-center rounded-full bg-surface-neutral-subtle px-2 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
               >
                 <span>{x.text}</span>
