@@ -47,7 +47,7 @@ export const Default: StoryFn = (args) => {
             size={args.size}
             value={value}
             aria-labelledby="progress-bar-label"
-            duration={args.indeterminate ? 0 : undefined}
+            /* duration={args.indeterminate ? 0 : undefined} */
           />
         </>
       ) : (
@@ -103,6 +103,9 @@ Sizes.args = {
   valueMax: 12,
 };
 
+/**
+ * Duration is temp disabled due to potential API-updates
+ */
 export const IndeterminateState: Story = {
   render: () => {
     const values = [2, 5, 10, 20];
@@ -113,7 +116,7 @@ export const IndeterminateState: Story = {
         </p>
         <ProgressBar
           valueMax={100}
-          duration={0}
+          /* duration={0} */
           size="medium"
           value={50}
           aria-labelledby="progress-bar-label-immediate-indeterminate"
@@ -125,7 +128,7 @@ export const IndeterminateState: Story = {
             </p>
             <ProgressBar
               valueMax={100}
-              duration={value}
+              /* duration={value} */
               size="medium"
               value={value}
               aria-labelledby={`progress-bar-label-${value}`}

@@ -8,12 +8,12 @@ export interface LabelProps
   extends Omit<TypoProps, "weight" | "align" | "truncate">,
     React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
-   * medium: 18px, small: 16px
+   * medium: 18px, small: 16px.
    * @default "medium"
    */
   size?: "medium" | "small";
   /**
-   * Paragraph text
+   * Label text.
    */
   children: React.ReactNode;
 }
@@ -27,9 +27,9 @@ export interface LabelProps
  *
  * @example
  * ```jsx
- *     <Label>
- *       Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
- *     </Label>
+ * <Label>
+ *   Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon
+ * </Label>
  * ```
  */
 export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
