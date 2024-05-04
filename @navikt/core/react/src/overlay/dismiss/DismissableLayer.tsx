@@ -9,7 +9,7 @@ import React, {
 import { Slot } from "../../util/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { WithAsChild } from "../../util/types/WithAsChild";
+import { AsChild } from "../../util/types/AsChild";
 import {
   CustomFocusEvent,
   CustomPointerDownEvent,
@@ -54,9 +54,7 @@ interface DismissableLayerBaseProps {
   onDismiss?: () => void;
   /**
    * Stops `onDismiss` from beeing called when interacting with the `safeZone` elements.
-   * @note safeZone.dismissable is only needed when its element does not have a `tabIndex`
-   * since it will not receive focus-events.
-   * TODO: Review if we can add tabIndex back to floating-elements.
+   * `safeZone.dismissable` is only needed when its element does not have a `tabIndex` since it will not receive focus-events.
    */
   safeZone?: {
     anchor?: Element | null;
@@ -66,12 +64,11 @@ interface DismissableLayerBaseProps {
   style?: CSSProperties;
   /**
    * Disables layer from beeing counted in context for nested `DismissableLayer`.
-   * @note Besides `onEscapeKeyDown`, onDismiss and other event handlers will still work.
    */
   enabled?: boolean;
 }
 
-type DismissableLayerProps = WithAsChild<DismissableLayerBaseProps>;
+type DismissableLayerProps = DismissableLayerBaseProps & AsChild;
 
 export const [
   DismissableDescendantsProvider,
