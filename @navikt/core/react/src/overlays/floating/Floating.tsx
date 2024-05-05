@@ -185,7 +185,6 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   avoidCollisions?: boolean;
   collisionBoundary?: Boundary | Boundary[];
   collisionPadding?: number | Partial<Record<Side, number>>;
-  sticky?: "partial" | "always";
   hideWhenDetached?: boolean;
   updatePositionStrategy?: "optimized" | "always";
   onPlaced?: () => void;
@@ -197,9 +196,6 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   };
 }
 
-/**
- * TODO: Will need to comb trough and remove unnecessary props like avoidCollisions and the like.
- */
 const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   (
     {
@@ -211,7 +207,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       avoidCollisions = true,
       collisionBoundary = [],
       collisionPadding: collisionPaddingProp = 0,
-      sticky = "partial",
       hideWhenDetached = false,
       updatePositionStrategy = "optimized",
       onPlaced,
@@ -286,7 +281,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             shift({
               mainAxis: true,
               crossAxis: false,
-              limiter: sticky === "partial" ? limitShift() : undefined,
+              limiter: limitShift(),
               ...detectOverflowOptions,
             }),
           avoidCollisions && flip({ ...detectOverflowOptions }),
