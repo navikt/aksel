@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
-import { Button, Chips, Search } from "@navikt/ds-react";
-import { searchOptions } from "@/types";
+import { Button, Search } from "@navikt/ds-react";
 import KBD from "@/web/KBD";
 import { useShortcut } from "../hooks";
 import {
@@ -11,9 +10,8 @@ import {
 } from "../providers";
 
 export const SearchForm = () => {
-  const { open, setOpen, tags, setTags, query, setQuery, os } =
-    useContext(SearchContext);
-  const { update, results, reset, isValidating, error } = useSearchResult();
+  const { open, setOpen, query, setQuery, os } = useContext(SearchContext);
+  const { update, reset, isValidating, error } = useSearchResult();
   const { close } = useContext(SearchNavigationContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -25,27 +23,12 @@ export const SearchForm = () => {
 
   const handleSearchStart = (value: string) => {
     setQuery(value);
-    value === "" ? reset() : update(value, tags);
-  };
-
-  const noHits = (key: string) => {
-    return !Object.hasOwn(results?.groupedHits ?? {}, key);
-  };
-
-  const noHitsAndQuery = (key: string) => {
-    return query.length > 0 && !tags.find((x) => x === key);
+    value === "" ? reset() : update(value);
   };
 
   if (isValidating || error) {
     return null;
   }
-
-  const chipsToShow = Object.entries(searchOptions)
-    .filter((x) => !x[1].hidden)
-    .filter(
-      ([key]) =>
-        !(noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0),
-    );
 
   return (
     <form
@@ -97,27 +80,6 @@ export const SearchForm = () => {
           />
         </div>
       </div>
-      {chipsToShow.length !== 0 && (
-        <Chips className="px-4 pb-4 md:px-10">
-          {chipsToShow.map(([key, val]) => (
-            <Chips.Toggle
-              key={key}
-              variant="neutral"
-              selected={tags.includes(key as keyof typeof searchOptions)}
-              type="button"
-              onClick={() => {
-                const newTags = (tags as string[]).includes(key)
-                  ? tags.filter((y) => y !== key)
-                  : [...tags, key];
-                setTags(newTags as (keyof typeof searchOptions)[]);
-                update(query, newTags);
-              }}
-            >
-              {val.display}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      )}
     </form>
   );
 };

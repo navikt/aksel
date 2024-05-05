@@ -17,7 +17,7 @@ export const SearchLoggingProvider = ({
   children: React.ReactNode;
 }) => {
   const context = useSearch();
-  const { query, tags } = useContext(SearchContext);
+  const { query } = useContext(SearchContext);
 
   const logSuccess = useCallback(
     (index: number, url: string, tag?: string) => {
@@ -28,7 +28,6 @@ export const SearchLoggingProvider = ({
         type: "suksess",
         searchedFromUrl: window.location.pathname,
         query,
-        filter: tags,
         tag,
         index,
         url,
@@ -37,7 +36,7 @@ export const SearchLoggingProvider = ({
       };
       amplitude.track(AmplitudeEvents.søk, data);
     },
-    [query, tags, context?.results],
+    [query, context?.results],
   );
 
   return (

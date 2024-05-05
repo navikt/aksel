@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { Heading, Label } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
-import { searchOptions } from "@/types";
 import { SearchContext, useSearchResult } from "../providers";
 import { Collection, CollectionMapper } from "./HitCollection";
 
 export const Results = () => {
-  const { tags, query } = useContext(SearchContext);
+  const { query } = useContext(SearchContext);
   const { results, isValidating, error, mostResent } = useSearchResult();
 
   if (isValidating || error) {
@@ -40,24 +39,12 @@ export const Results = () => {
         >
           <span className="text-text-subtle">Ingen treff på &quot;</span>
           <span className="break-all">{query}</span>
-          <span className="text-text-subtle">&quot;</span>
-          {tags.length > 0 && (
-            <span className="text-text-subtle">{` i ${tags
-              .map((x) => searchOptions[x].display.toLowerCase())
-              .join(", ")}`}</span>
-          )}
         </Heading>
       )}
       {results && results?.totalHits > 0 && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
           <Label as="p" className="sr-only" aria-live="polite">
-            {`${results?.totalHits} treff på "${results.query}"${
-              tags.length > 0
-                ? ` i ${tags
-                    .map((x) => searchOptions[x].display.toLowerCase())
-                    .join(", ")}`
-                : ""
-            }`}
+            {`${results?.totalHits} treff på "${results.query}`}
           </Label>
           <div className="pb-4">
             {results?.topResults.length > 0 && (

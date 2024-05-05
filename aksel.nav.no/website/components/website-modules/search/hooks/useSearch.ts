@@ -16,7 +16,7 @@ export const useSearch = () => {
 
   const updateResults = useMemo(
     () =>
-      debounce((value: string, tags: string[]) => {
+      debounce((value: string) => {
         if (!value) {
           return;
         }
@@ -24,11 +24,7 @@ export const useSearch = () => {
         const rawResults = fuseSearch(data, value);
 
         const formatedResults = formatResults(
-          rawResults.filter((x) =>
-            (tags.length > 0 ? tags : allArticleDocuments).includes(
-              x.item._type,
-            ),
-          ),
+          rawResults.filter((x) => allArticleDocuments.includes(x.item._type)),
         );
 
         setFuseResults({
@@ -39,7 +35,6 @@ export const useSearch = () => {
           type: "standard",
           searchedFromUrl: window.location.pathname,
           query: value,
-          filter: tags,
         });
       }),
     [data],
