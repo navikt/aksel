@@ -98,7 +98,7 @@ export function Collection({
           {heading}
         </Heading>
       )}
-      <ul className="mt-2 px-0 md:px-6">
+      <ul className="px-0 md:px-6">
         {split.initial.map((x, xi) => (
           <Hit
             key={xi}

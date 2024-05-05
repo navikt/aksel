@@ -35,10 +35,10 @@ export const Hit = forwardRef<
         "relative flex scroll-my-10 items-center  justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0",
       )}
     >
-      <div className="w-full truncate px-2 py-4">
+      <div className="w-full truncate px-2 py-3">
         <span
           className={cl({
-            "flex flex-col gap-1": simple,
+            "flex flex-col": simple,
             "flex items-center gap-2": !simple,
           })}
         >
