@@ -1,5 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { VStack } from "../layout/stack";
 import Loader, { LoaderProps } from "./Loader";
 
 export default {
@@ -27,7 +28,12 @@ export default {
       },
     },
   },
+  parameters: {
+    chromatic: { disable: false },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof Loader>;
 
 export const Default = {
   render: (props: LoaderProps) => {
@@ -80,3 +86,25 @@ export const Transparent = () => (
     </div>
   </div>
 );
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="2">
+      <div>
+        <h2>Size</h2>
+        <Size />
+      </div>
+      <div>
+        <h2>Variant</h2>
+        <Variant />
+      </div>
+      <div>
+        <h2>Transparent</h2>
+        <Transparent />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
