@@ -74,7 +74,7 @@ export function Collection({
   return (
     <div>
       {heading && tag && (
-        <h3
+        <h2
           className={cl("sticky top-0 z-10 p-2 px-6 md:px-10", {
             "bg-deepblue-50": ["komponent_artikkel", "ds_artikkel"].includes(
               tag,
@@ -87,13 +87,13 @@ export function Collection({
           })}
         >
           <Tag hTag="span" type={tag} size="small" inline count={hits.length} />
-        </h3>
+        </h2>
       )}
       {heading && !tag && (
         <Heading
           className="sticky top-0 z-10 bg-surface-subtle p-2 px-6  md:px-10"
           size="small"
-          level="3"
+          level="2"
         >
           {heading}
         </Heading>
