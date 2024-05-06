@@ -75,7 +75,7 @@ export function Collection({
     <div>
       {heading && tag && (
         <h3
-          className={cl("sticky top-0 z-10 p-2 px-4 md:px-10", {
+          className={cl("sticky top-0 z-10 p-2 px-6 md:px-10", {
             "bg-deepblue-50": ["komponent_artikkel", "ds_artikkel"].includes(
               tag,
             ),
@@ -91,14 +91,14 @@ export function Collection({
       )}
       {heading && !tag && (
         <Heading
-          className="sticky top-0 z-10 bg-surface-subtle p-2 px-4  md:px-10"
+          className="sticky top-0 z-10 bg-surface-subtle p-2 px-6  md:px-10"
           size="small"
           level="3"
         >
           {heading}
         </Heading>
       )}
-      <ul className="px-0 md:px-6">
+      <ul className="px-2 md:px-6">
         {split.initial.map((x, xi) => (
           <Hit
             key={xi}
