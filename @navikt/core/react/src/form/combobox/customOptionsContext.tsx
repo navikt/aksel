@@ -17,7 +17,7 @@ const [ComboboxCustomOptionsProvider, useComboboxCustomOptions] =
       "useComboboxCustomOptions must be used within a ComboboxCustomOptionsProvider",
   });
 
-export const CustomOptionsProvider = ({
+const CustomOptionsProvider = ({
   children,
   value,
 }: {
@@ -64,4 +64,4 @@ export const CustomOptionsProvider = ({
   );
 };
 
-export { useComboboxCustomOptions };
+export { CustomOptionsProvider, useComboboxCustomOptions };

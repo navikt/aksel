@@ -43,7 +43,7 @@ const [FilteredOptionsContextProvider, useFilteredOptionsContext] =
       "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
   });
 
-export const FilteredOptionsProvider = ({
+const FilteredOptionsProvider = ({
   children,
   value: props,
 }: FilteredOptionsProps) => {
@@ -214,4 +214,4 @@ export const FilteredOptionsProvider = ({
   );
 };
 
-export { useFilteredOptionsContext };
+export { FilteredOptionsProvider, useFilteredOptionsContext };
