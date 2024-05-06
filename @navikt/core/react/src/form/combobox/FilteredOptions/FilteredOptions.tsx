@@ -38,7 +38,7 @@ const FilteredOptions = () => {
   const shouldRenderNonSelectables =
     maxSelected?.isLimitReached || // Render maxSelected message
     isLoading || // Render loading message
-    (!isLoading && filteredOptions.length === 0); // Render no hits message
+    (!isLoading && filteredOptions.length === 0 && !allowNewValues); // Render no hits message
 
   const shouldRenderFilteredOptionsList =
     (allowNewValues && isValueNew && !maxSelected?.isLimitReached) || // Render add new option
