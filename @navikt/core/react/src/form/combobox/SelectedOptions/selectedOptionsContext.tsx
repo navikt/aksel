@@ -8,7 +8,7 @@ import React, {
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
-import { useCustomOptionsContext } from "../customOptionsContext";
+import { useComboboxCustomOptions } from "../customOptionsContext";
 import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
 
 type SelectedOptionsContextType = {
@@ -45,7 +45,7 @@ export const SelectedOptionsProvider = ({
     removeCustomOption,
     addCustomOption,
     setCustomOptions,
-  } = useCustomOptionsContext();
+  } = useComboboxCustomOptions();
   const {
     allowNewValues,
     isMultiSelect,

@@ -1,17 +1,21 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { createContext } from "../../util/create-context";
 import { useInputContext } from "./Input/Input.context";
 import { ComboboxOption } from "./types";
 
-type CustomOptionsContextType = {
+type CustomOptionsContextValue = {
   customOptions: ComboboxOption[];
   removeCustomOption: (option: ComboboxOption) => void;
   addCustomOption: (option: ComboboxOption) => void;
   setCustomOptions: React.Dispatch<React.SetStateAction<ComboboxOption[]>>;
 };
 
-const CustomOptionsContext = createContext<CustomOptionsContextType>(
-  {} as CustomOptionsContextType,
-);
+const [ComboboxCustomOptionsProvider, useComboboxCustomOptions] =
+  createContext<CustomOptionsContextValue>({
+    name: "ComboboxCustomOptions",
+    errorMessage:
+      "useComboboxCustomOptions must be used within a ComboboxCustomOptionsProvider",
+  });
 
 export const CustomOptionsProvider = ({
   children,
@@ -54,18 +58,10 @@ export const CustomOptionsProvider = ({
   };
 
   return (
-    <CustomOptionsContext.Provider value={customOptionsState}>
+    <ComboboxCustomOptionsProvider {...customOptionsState}>
       {children}
-    </CustomOptionsContext.Provider>
+    </ComboboxCustomOptionsProvider>
   );
 };
 
-export const useCustomOptionsContext = () => {
-  const context = useContext(CustomOptionsContext);
-  if (!context) {
-    throw new Error(
-      "useCustomOptionsContext must be used within a CustomOptionsProvider",
-    );
-  }
-  return context;
-};
+export { useComboboxCustomOptions };

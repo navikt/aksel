@@ -11,7 +11,7 @@ import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";
-import { useCustomOptionsContext } from "../customOptionsContext";
+import { useComboboxCustomOptions } from "../customOptionsContext";
 import { ComboboxOption, ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
@@ -71,7 +71,7 @@ export const FilteredOptionsProvider = ({
   const { maxSelected } = useSelectedOptionsContext();
 
   const [isInternalListOpen, setInternalListOpen] = useState(false);
-  const { customOptions } = useCustomOptionsContext();
+  const { customOptions } = useComboboxCustomOptions();
 
   const filteredOptions = useMemo(() => {
     if (externalFilteredOptions) {
