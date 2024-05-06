@@ -6,10 +6,10 @@ import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import ToggleListButton from "../ToggleListButton";
 import { ComboboxProps } from "../types";
 import Input from "./Input";
 import { useInputContext } from "./Input.context";
+import ToggleListButton from "./ToggleListButton";
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 export const InputController = forwardRef<
