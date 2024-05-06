@@ -1,9 +1,7 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
-import { default as Link, default as NextLink } from "next/link";
+import { default as NextLink } from "next/link";
 import { forwardRef, useContext } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { Chips } from "@navikt/ds-react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT, searchOptions } from "@/types";
@@ -66,7 +64,7 @@ export const Hit = forwardRef<
           )}
         </span>
 
-        {!simple && <HeadingLinks index={index} hit={hit} />}
+        {!simple && <HeadingLinks hit={hit} />}
       </div>
 
       {!simple && (
@@ -89,55 +87,18 @@ export const Hit = forwardRef<
   );
 });
 
-const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
-
 function HeadingLinks({
   hit,
-  index,
 }: {
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
-  index: number;
 }) {
-  const { logSuccess } = useContext(SearchLoggingContext);
-
-  const Description = () => {
-    if (hit.matches && hit.matches?.[0].key !== "heading") {
-      return highlightMatches(hit.matches[0]);
-    }
-
-    return (
-      <span className="max-w-full text-lg font-regular text-text-subtle">
-        {hit.description}
-      </span>
-    );
-  };
-
-  if (hit.item._type === "komponent_artikkel") {
-    return (
-      <>
-        <Description />
-        <Chips className="mt-3" size="small">
-          {hit.item.lvl2
-            ?.filter(
-              (x) =>
-                !!x.id && highlightedHeadings.includes(x.text.toLowerCase()),
-            )
-            .map((x) => (
-              <Link
-                prefetch={false}
-                key={x.text}
-                href={`/${hit.item.slug}#${x.id}`}
-                onClick={() => logSuccess(index, `/${hit.item.slug}`, x.text)}
-                className="flex min-h-6 items-center justify-center rounded-full bg-surface-neutral-subtle px-2 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
-              >
-                <span>{x.text}</span>
-                <ChevronRightIcon aria-hidden className="-mr-1" />
-              </Link>
-            ))}
-        </Chips>
-      </>
-    );
+  if (hit.matches && hit.matches?.[0].key !== "heading") {
+    return highlightMatches(hit.matches[0]);
   }
 
-  return <Description />;
+  return (
+    <span className="max-w-full text-lg font-regular text-text-subtle">
+      {hit.description}
+    </span>
+  );
 }

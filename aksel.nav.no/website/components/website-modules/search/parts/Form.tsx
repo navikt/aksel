@@ -28,7 +28,7 @@ export const SearchForm = () => {
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="px-6 pb-2"
+      className="px-6 pb-4"
     >
       <Search
         label={
