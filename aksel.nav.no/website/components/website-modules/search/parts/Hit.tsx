@@ -30,7 +30,7 @@ export const Hit = forwardRef<
     <li
       ref={ref}
       className={cl(
-        "relative flex scroll-my-10 items-center  justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0",
+        "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 focus-within:border-b-transparent has-[+_:focus-within]:border-b-transparent",
       )}
     >
       <div className="w-full truncate px-2 py-3">
@@ -43,11 +43,12 @@ export const Hit = forwardRef<
           <NextLink
             href={href}
             onClick={() => logSuccess(index, `/${hit.item.slug}`)}
-            className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
+            className={cl(
+              "group scroll-my-32 text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
+              "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",
+            )}
           >
-            <span className="group-hover:underline">
-              {highlightStr(hit.item.heading, query, tag)}
-            </span>
+            {highlightStr(hit.item.heading, query, tag)}
           </NextLink>
           {simple ? (
             <Tag
