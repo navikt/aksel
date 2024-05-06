@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { XMarkIcon } from "@navikt/aksel-icons";
 import { useMergeRefs } from "../../../util/hooks";
-import ClearButton from "../ClearButton";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -78,11 +78,17 @@ export const InputController = forwardRef<
       )}
       <div>
         {value && clearButton && (
-          <ClearButton
-            handleClear={clearInput}
-            clearButtonLabel={clearButtonLabel}
+          <button
+            type="button"
+            onClick={clearInput}
+            className="navds-combobox__button-clear"
             tabIndex={-1}
-          />
+          >
+            <span className="navds-sr-only">
+              {clearButtonLabel ? clearButtonLabel : "Tøm"}
+            </span>
+            <XMarkIcon aria-hidden />
+          </button>
         )}
         {toggleListButton && (
           <ToggleListButton

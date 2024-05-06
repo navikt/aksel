@@ -10,9 +10,10 @@ import React, {
 } from "react";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
+import { ComboboxProps } from "../types";
 
 interface InputContextType extends FormFieldType {
-  clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;
+  clearInput: NonNullable<ComboboxProps["onClear"]>;
   error?: string;
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -81,7 +82,7 @@ export const InputContextProvider = ({ children, value: props }) => {
   );
 
   const clearInput = useCallback(
-    (event: React.PointerEvent | React.KeyboardEvent) => {
+    (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
       externalOnChange?.(null, "");
       setValue("");
