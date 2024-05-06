@@ -1,0 +1,96 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import cl from "clsx";
+import React, { forwardRef } from "react";
+import { useMergeRefs } from "../../../util/hooks";
+import ClearButton from "../ClearButton";
+import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
+import SelectedOptions from "../SelectedOptions/SelectedOptions";
+import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import ToggleListButton from "../ToggleListButton";
+import { ComboboxProps } from "../types";
+import Input from "./Input";
+import { useInputContext } from "./Input.context";
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+export const InputController = forwardRef<
+  HTMLInputElement,
+  Omit<
+    ComboboxProps,
+    | "label"
+    | "description"
+    | "hideLabel"
+    | "onChange"
+    | "options"
+    | "size"
+    | "onClear"
+    | "value"
+  >
+>((props, ref) => {
+  const {
+    clearButton = true,
+    clearButtonLabel,
+    toggleListButton = true,
+    toggleListButtonLabel,
+    inputClassName,
+    shouldShowSelectedOptions = true,
+    ...rest
+  } = props;
+
+  const {
+    clearInput,
+    focusInput,
+    inputProps,
+    value,
+    size = "medium",
+    inputRef,
+    toggleOpenButtonRef,
+  } = useInputContext();
+
+  const { activeDecendantId } = useFilteredOptionsContext();
+  const { selectedOptions } = useSelectedOptionsContext();
+
+  const mergedInputRef = useMergeRefs(inputRef, ref);
+
+  return (
+    <div
+      className={cl("navds-combobox__wrapper-inner navds-text-field__input", {
+        "navds-combobox__wrapper-inner--virtually-unfocused":
+          activeDecendantId !== undefined,
+      })}
+      onClick={focusInput}
+    >
+      {!shouldShowSelectedOptions ? (
+        <Input
+          id={inputProps.id}
+          ref={mergedInputRef}
+          inputClassName={inputClassName}
+          {...rest}
+        />
+      ) : (
+        <SelectedOptions selectedOptions={selectedOptions} size={size}>
+          <Input
+            id={inputProps.id}
+            ref={mergedInputRef}
+            inputClassName={inputClassName}
+            {...rest}
+          />
+        </SelectedOptions>
+      )}
+      <div>
+        {value && clearButton && (
+          <ClearButton
+            handleClear={clearInput}
+            clearButtonLabel={clearButtonLabel}
+            tabIndex={-1}
+          />
+        )}
+        {toggleListButton && (
+          <ToggleListButton
+            toggleListButtonLabel={toggleListButtonLabel}
+            ref={toggleOpenButtonRef}
+          />
+        )}
+      </div>
+    </div>
+  );
+});

@@ -22,6 +22,7 @@ interface InputContextType extends FormFieldType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
+  toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
 }
 
 const InputContext = createContext<InputContextType>({} as InputContextType);
@@ -52,6 +53,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     "comboboxfield",
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
@@ -112,6 +114,7 @@ export const InputContextProvider = ({ children, value: props }) => {
         searchTerm,
         setSearchTerm,
         shouldAutocomplete,
+        toggleOpenButtonRef,
       }}
     >
       {children}

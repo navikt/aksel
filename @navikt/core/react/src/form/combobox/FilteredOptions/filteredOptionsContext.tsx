@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
-import { useInputContext } from "../Input/inputContext";
+import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";

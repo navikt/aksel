@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { usePrevious } from "../../../util/hooks";
-import { useInputContext } from "../Input/inputContext";
+import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
 import { useCustomOptionsContext } from "../customOptionsContext";
 import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
