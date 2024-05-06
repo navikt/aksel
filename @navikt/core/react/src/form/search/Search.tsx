@@ -78,9 +78,9 @@ export interface SearchProps
   role?: string;
 
   /*
-   * To render a dropdown list of results
+   * To render a autocomplete list of results
    */
-  dropdown?: (value: string) => string[];
+  autocomplete?: (value: string) => string[];
 }
 
 interface SearchComponent
@@ -130,7 +130,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onSearchClick,
       htmlSize,
       role,
-      dropdown,
+      autocomplete,
       ...rest
     } = props;
 
@@ -138,15 +138,17 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     const mergedRef = useMergeRefs(searchRef, ref);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
-    const [dropdownResults, setDropdownResults] = useState<string[]>([]);
+    const [autocompleteResults, setAutocompleteResults] = useState<string[]>(
+      [],
+    );
 
     const handleChange = useCallback(
       (v: string) => {
         value === undefined && setInternalValue(v);
         onChange?.(v);
-        setDropdownResults(dropdown?.(v) || []);
+        setAutocompleteResults(autocomplete?.(v) || []);
       },
-      [onChange, value, setDropdownResults, dropdown],
+      [onChange, value, setAutocompleteResults, autocomplete],
     );
 
     const handleClear = useCallback(
@@ -269,14 +271,14 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )}
         </div>
-        {dropdownResults.length > 0 && (
+        {autocompleteResults.length > 0 && (
           <Box
             borderColor="border-default"
             borderWidth="1"
             borderRadius="medium"
-            className="navds-search__dropdown-list"
+            className="navds-search__autocomplete-list"
           >
-            {dropdownResults.map((result) => {
+            {autocompleteResults.map((result) => {
               return <div key={result}>{result}</div>;
             })}
           </Box>

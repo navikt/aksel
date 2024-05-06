@@ -75,7 +75,7 @@ export const Small = () => (
   </div>
 );
 
-export const Dropdown = (props) => {
+export const Autocomplete = (props) => {
   const [state, setState] = useState("");
   return (
     <div className="colgap">
@@ -89,7 +89,7 @@ export const Dropdown = (props) => {
         hideLabel={props.hideLabel}
         error={props.error}
         onSearchClick={console.log}
-        dropdown={(searchTerm) => {
+        autocomplete={(searchTerm) => {
           if (!searchTerm) return [];
           return [
             "apple",
