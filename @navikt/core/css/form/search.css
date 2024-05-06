@@ -228,7 +228,7 @@
   }
 }
 
-.navds-search__dropdown-list {
+.navds-search__autocomplete-list {
   overflow-y: auto;
   position: absolute;
   top: 3.5rem;
