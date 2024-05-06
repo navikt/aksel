@@ -1,12 +1,6 @@
 import cl from "clsx";
-import React, {
-  SetStateAction,
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { SetStateAction, useCallback, useMemo, useState } from "react";
+import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -24,7 +18,7 @@ type FilteredOptionsProps = {
   };
 };
 
-type FilteredOptionsContextType = {
+type FilteredOptionsContextValue = {
   activeDecendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
@@ -42,9 +36,12 @@ type FilteredOptionsContextType = {
   shouldAutocomplete?: boolean;
   virtualFocus: VirtualFocusType;
 };
-const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
-  {} as FilteredOptionsContextType,
-);
+const [FilteredOptionsContextProvider, useFilteredOptionsContext] =
+  createContext<FilteredOptionsContextValue>({
+    name: "FilteredOptionsContext",
+    errorMessage:
+      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
+  });
 
 export const FilteredOptionsProvider = ({
   children,
@@ -211,18 +208,10 @@ export const FilteredOptionsProvider = ({
   };
 
   return (
-    <FilteredOptionsContext.Provider value={filteredOptionsState}>
+    <FilteredOptionsContextProvider {...filteredOptionsState}>
       {children}
-    </FilteredOptionsContext.Provider>
+    </FilteredOptionsContextProvider>
   );
 };
 
-export const useFilteredOptionsContext = () => {
-  const context = useContext(FilteredOptionsContext);
-  if (!context) {
-    throw new Error(
-      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
-    );
-  }
-  return context;
-};
+export { useFilteredOptionsContext };
