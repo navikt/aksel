@@ -180,6 +180,7 @@ export const FilteredOptionsProvider = ({
     shouldAutocomplete,
     filteredOptions,
     id,
+    allowNewValues,
   ]);
 
   const currentOption = useMemo(
