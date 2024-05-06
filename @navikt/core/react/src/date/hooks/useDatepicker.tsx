@@ -229,12 +229,16 @@ export const useDatepicker = (
 
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
+    if (selected && required) {
+      return;
+    }
+
     if (day && !selected) {
       handleOpen(false);
       anchorRef?.focus();
     }
 
-    if (!required && selected) {
+    if (selected) {
       updateDate(undefined);
       setInputValue("");
       updateValidation({ isValidDate: false, isEmpty: true });
@@ -272,7 +276,7 @@ export const useDatepicker = (
     ) {
       updateDate(undefined);
       updateValidation({
-        isInvalid: isValidDate(day),
+        isInvalid: !isValidDate(day),
         isWeekend: disableWeekends && isWeekend(day),
         isDisabled: disabled && isMatch(day, disabled),
         isValidDate: false,

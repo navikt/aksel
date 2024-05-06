@@ -9,11 +9,11 @@ export interface RadioProps
    */
   children: React.ReactNode;
   /**
-   * The value of the HTML element.
+   * Radio value.
    */
   value: any;
   /**
-   * Adds a description to extend labeling of Radio.
+   * Adds a description to extend the labeling.
    */
   description?: string;
 }

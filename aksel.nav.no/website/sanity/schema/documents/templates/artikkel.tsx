@@ -16,7 +16,7 @@ export const TemplatesArtikkel = defineType({
   name: "templates_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Mønster/Maler"),
+  ...artikkelPreview("Mønster/Maler", 6),
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,

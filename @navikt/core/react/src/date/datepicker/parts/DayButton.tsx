@@ -20,8 +20,11 @@ const DayButton = (props: DayProps) => {
       name="day"
       ref={buttonRef}
       {...dayRender.buttonProps}
+      role={undefined}
       aria-label={dateTime}
       aria-hidden={dayRender.activeModifiers.outside}
+      aria-selected={undefined}
+      aria-pressed={!!dayRender.activeModifiers.selected}
     />
   );
 };

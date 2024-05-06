@@ -4,18 +4,17 @@ import { default as React } from "react";
 import { VStack } from "../../layout/stack";
 import Heading from "../Heading";
 
-const meta = {
+const meta: Meta<typeof Heading> = {
   title: "ds-react/Typography/Heading",
   component: Heading,
   decorators: [(story) => <div style={{ maxWidth: "300px" }}>{story()}</div>],
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof Heading>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Heading>;
 
 const lorem = "Hva kan vi hjelpe deg med?";
 

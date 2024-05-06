@@ -41,7 +41,10 @@ const Example = () => {
                 as="li"
                 key={index}
                 file={file.file}
-                onDelete={() => removeFile(file)}
+                button={{
+                  action: "delete",
+                  onClick: () => removeFile(file),
+                }}
               />
             ))}
           </VStack>
@@ -59,7 +62,10 @@ const Example = () => {
                 key={index}
                 file={rejected.file}
                 error={errors[rejected.reasons[0]]}
-                onDelete={() => removeFile(rejected)}
+                button={{
+                  action: "delete",
+                  onClick: () => removeFile(rejected),
+                }}
               />
             ))}
           </VStack>

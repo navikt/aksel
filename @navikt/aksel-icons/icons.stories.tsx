@@ -3,12 +3,12 @@ import React from "react";
 import * as AkselIcons from "@navikt/aksel-icons";
 import { StarFillIcon } from "@navikt/aksel-icons";
 
-const meta = {
+const meta: Meta<typeof StarFillIcon> = {
   title: "aksel-icons/Icons",
-} satisfies Meta<typeof StarFillIcon>;
-
+};
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof StarFillIcon>;
 
 export const Icons: Story = {
   render: () => {

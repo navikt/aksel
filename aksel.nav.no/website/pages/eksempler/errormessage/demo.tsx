@@ -1,9 +1,15 @@
-import { ErrorMessage } from "@navikt/ds-react";
+import { ErrorMessage, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const exampeText = "Du må fylle ut tekstfeltet før innsending.";
+
   return (
-    <ErrorMessage>Du må fylle ut tekstfeltet før innsending.</ErrorMessage>
+    <VStack gap="5">
+      <ErrorMessage>Medium (18px): {exampeText}</ErrorMessage>
+
+      <ErrorMessage size="small">Small (16px): {exampeText}</ErrorMessage>
+    </VStack>
   );
 };
 

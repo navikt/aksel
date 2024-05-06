@@ -11,39 +11,55 @@ function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
+const indexRegex = /export const args = {\s+index: (\d+),/;
+
 const config: StorybookConfig = {
-  storyIndexers: (indexers) => {
+  experimental_indexers: (indexers) => {
     const csfIndexer = async (fileName: string, opts) => {
       const code = readFileSync(fileName, "utf-8").toString();
-      return loadCsf(code, { ...opts, fileName }).parse();
+      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
-    const exampleIndexer = async (fileName: string, opts) => {
+    const customIndexer = async (fileName: string, opts) => {
       let code = readFileSync(fileName, "utf-8").toString();
 
-      code = code.replace(
-        /^\s*export default withDsExample\(Example[\s\S]*?;\s*/gm,
-        "",
-      );
+      const isTemplate = fileName.toLowerCase().includes("templates");
+      const templatesOrExamples = isTemplate ? "Templates" : "Eksempler";
 
-      code = code.replace("export const args =", "const args =");
+      const matches = indexRegex.exec(code);
+      const prefix = matches ? `${matches[1]} | ` : "";
 
-      code += `\nexport default { title: "Eksempler/${fileName
-        .split("pages/eksempler/")[1]
-        .replace(".tsx", "")}"  };\n`;
+      code = code.split(
+        /\/\/ EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE/,
+      )[0];
 
-      return loadCsf(code, { ...opts, fileName }).parse();
+      const [folder, name] = fileName
+        .split(`pages/${templatesOrExamples.toLowerCase()}/`)[1]
+        .replace(".tsx", "")
+        .split("/");
+      const storyName = `${prefix}${name}`;
+
+      code += `
+        export default { title: "${templatesOrExamples}/${folder}/${storyName}" };
+        export const Demo = { render: Example };
+        Demo.storyName = "${storyName}";`;
+
+      return loadCsf(code, { ...opts, fileName }).parse().indexInputs;
     };
 
     return [
       ...(indexers || []),
       {
         test: /(stories|story)\.[tj]sx?$/,
-        indexer: csfIndexer,
+        createIndex: csfIndexer,
       },
       {
-        test: /pages\/eksempler\/|(".+")|(.+.tsx)$/,
-        indexer: exampleIndexer,
+        test: /pages\/eksempler\/.+?.tsx$/,
+        createIndex: customIndexer,
+      },
+      {
+        test: /pages\/templates\/.+?.tsx$/,
+        createIndex: customIndexer,
       },
     ];
   },
@@ -52,6 +68,7 @@ const config: StorybookConfig = {
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
+    "../pages/templates/**/*.tsx",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-essentials"),
@@ -98,6 +115,14 @@ const config: StorybookConfig = {
     sbConfig.resolve.alias["@/layout"] = resolve(
       __dirname,
       "../components/layout/",
+    );
+    sbConfig.resolve.alias["@/auth"] = resolve(
+      __dirname,
+      "../components/auth/",
+    );
+    sbConfig.resolve.alias["@/slack"] = resolve(
+      __dirname,
+      "../components/utils/slack/index.ts",
     );
     sbConfig.resolve.alias["@/assets"] = resolve(
       __dirname,

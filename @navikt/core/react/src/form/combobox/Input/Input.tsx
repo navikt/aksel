@@ -128,6 +128,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               removeSelectedOption(lastSelectedOption);
             }
           }
+        } else if (e.key === "Enter" || e.key === "Accept") {
+          if (activeDecendantId || value) {
+            e.preventDefault();
+          }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
@@ -182,6 +186,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {...omit(inputProps, ["aria-invalid"])}
         ref={ref}
         value={value}
+        onBlur={() => virtualFocus.moveFocusToTop()}
         onChange={onChangeHandler}
         type="text"
         role="combobox"

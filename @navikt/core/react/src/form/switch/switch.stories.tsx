@@ -1,5 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+import { VStack } from "../../layout/stack";
 import Switch from "./Switch";
 
 export default {
@@ -31,70 +32,59 @@ export default {
       type: "boolean",
     },
   },
-} as Meta;
-
-export const Default = {
-  render: (props) => {
-    return <Switch {...props}>Label text</Switch>;
+  parameters: {
+    chromatic: { disable: true },
   },
+} satisfies Meta<typeof Switch>;
 
+type Story = StoryObj<typeof Switch>;
+
+export const Default: Story = {
   args: {
-    position: "right",
+    children: "Label text",
   },
 };
 
-export const Small = () => {
-  return (
-    <div className="colgap">
-      <Switch size="small">Label text</Switch>
-      <Switch size="small" position="right">
-        Label text
-      </Switch>
-    </div>
-  );
+export const Small: Story = {
+  args: {
+    children: "Label text",
+    size: "small",
+  },
 };
 
-export const Description = () => {
-  return (
-    <div className="colgap">
-      <Switch size="small" description="Cillum sint exercitation ut cillum.">
-        Label text
-      </Switch>
-      <Switch
-        size="small"
-        position="right"
-        description="Cillum sint exercitation ut cillum."
-      >
-        Label text
-      </Switch>
-    </div>
-  );
+export const Description: Story = {
+  args: {
+    children: "Label text",
+    description: "Cillum sint exercitation ut cillum.",
+  },
 };
 
-export const Loading = () => {
-  return (
-    <div className="colgap">
+export const Loading: Story = {
+  render: () => {
+    return (
       <div className="colgap">
-        <Switch loading>Label text</Switch>
+        <div className="colgap">
+          <Switch loading>Label text</Switch>
 
-        <Switch checked loading>
-          Label text
-        </Switch>
+          <Switch checked loading>
+            Label text
+          </Switch>
+        </div>
+        <div className="colgap">
+          <Switch loading size="small">
+            Label text
+          </Switch>
+          <Switch checked loading size="small">
+            Label text
+          </Switch>
+        </div>
       </div>
-      <div className="colgap">
-        <Switch loading size="small">
-          Label text
-        </Switch>
-        <Switch checked loading size="small">
-          Label text
-        </Switch>
-      </div>
-    </div>
-  );
+    );
+  },
 };
 
-export const Disabled = () => {
-  return (
+export const Disabled: Story = {
+  render: () => (
     <div className="colgap">
       <Switch disabled>Label text</Switch>
 
@@ -102,11 +92,11 @@ export const Disabled = () => {
         Label text
       </Switch>
     </div>
-  );
+  ),
 };
 
-export const HideLabel = () => {
-  return (
+export const HideLabel: Story = {
+  render: () => (
     <div className="colgap">
       <Switch hideLabel>Label text</Switch>
 
@@ -114,11 +104,11 @@ export const HideLabel = () => {
         Label text
       </Switch>
     </div>
-  );
+  ),
 };
 
-export const Readonly = () => {
-  return (
+export const Readonly: Story = {
+  render: () => (
     <div className="colgap">
       <Switch description="Slår av alle notifikasjoner" readOnly>
         Notifikasjoner
@@ -128,5 +118,54 @@ export const Readonly = () => {
         Notifikasjoner
       </Switch>
     </div>
-  );
+  ),
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="4" align="start">
+      <div>
+        <h2>Default</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Default.args} />
+      </div>
+      <div>
+        <h2>Small</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Small.args} position="left" />
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Small.args} position="right" />
+      </div>
+      <div>
+        <h2>Description</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Description.args} position="left" />
+        {/* @ts-expect-error Args are Partial here */}
+        <Switch {...Description.args} position="right" />
+      </div>
+      <div>
+        <h2>Loading</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Loading.render />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Disabled.render />
+      </div>
+      <div>
+        <h2>HideLabel</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <HideLabel.render />
+      </div>
+      <div>
+        <h2>Readonly</h2>
+        {/* @ts-expect-error Args are Partial here */}
+        <Readonly.render />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

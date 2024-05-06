@@ -4,18 +4,17 @@ import React from "react";
 import { VStack } from "../../layout/stack";
 import Label from "../Label";
 
-const meta = {
+const meta: Meta<typeof Label> = {
   title: "ds-react/Typography/Label",
   component: Label,
   decorators: [(story) => <div style={{ maxWidth: "400px" }}>{story()}</div>],
   parameters: {
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof Label>;
-
+};
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Label>;
 
 const lorem =
   "Oppgi årsaken til at du har ventet mer enn 6 måneder med å søke om refusjon";

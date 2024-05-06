@@ -14,7 +14,7 @@ export interface CheckboxProps
    */
   errorId?: string;
   /**
-   * Checkbox label
+   * Checkbox label.
    */
   children: React.ReactNode;
   /**
@@ -22,7 +22,7 @@ export interface CheckboxProps
    */
   hideLabel?: boolean;
   /**
-   * The value of the HTML element.
+   * Checkbox value.
    */
   value?: any;
   /**
@@ -31,7 +31,7 @@ export interface CheckboxProps
    */
   indeterminate?: boolean;
   /**
-   * Adds a description to extend labeling of Checkbox.
+   * Adds a description to extend the labeling.
    */
   description?: string;
 }

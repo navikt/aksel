@@ -1,45 +1,50 @@
-import NextLink from "next/link";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { differenceInMonths } from "date-fns";
 import { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import { validateWonderwallToken } from "@/auth/validateWonderwall";
-import ArtikkelCard from "@/cms/cards/ArtikkelCard";
+import { UserStateT } from "@/auth/auth.types";
+import { getAuthUserState } from "@/auth/getUserState";
 import Footer from "@/layout/footer/Footer";
+import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
+import { GpTemaLink } from "@/layout/god-praksis-page/chipnavigation/GpTemaLink";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
-import {
-  contributorsAll,
-  contributorsSingle,
-  destructureBlocks,
-} from "@/sanity/queries";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 import {
   AkselGodPraksisDocT,
   NextPageT,
   ResolveContributorsT,
   ResolveRelatedArticlesT,
   ResolveSlugT,
-  ResolveTemaT,
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
-import { BreadCrumbs } from "@/web/BreadCrumbs";
+import { Feedback } from "@/web/Feedback/Feedback";
+import OutdatedAlert from "@/web/OutdatedAlert";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
-import NotFotfund from "../../404";
+import NotFound from "../../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<
-    ResolveTemaT<ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>>
-  >;
+    ResolveSlugT<ResolveRelatedArticlesT<AkselGodPraksisDocT>>
+  > & {
+    innholdstype: string;
+    undertema: {
+      title: string;
+      tema: { slug: string; title: string; image: SanityImageSource };
+    }[];
+  };
   publishDate: string;
   verifiedDate: string;
+  outdated: boolean;
   toc: TableOfContentsT;
-  signedIn: boolean;
+  userState: UserStateT;
 }>;
 
-export const query = `{
+const query = `{
   "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
   {
     ...,
@@ -48,19 +53,21 @@ export const query = `{
       ...,
       ${destructureBlocks}
     },
-    tema[]->{title, slug, seo},
+    "innholdstype": innholdstype->title,
+    "undertema": undertema[]->{
+      title,
+      "tema": tema->{
+        title,
+        "slug": slug.current,
+        "image": seo.image
+      }
+    },
     ${contributorsAll},
     relevante_artikler[]->{
-      _id,
       heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      updateInfo,
-      "slug": slug.current,
-      "tema": tema[]->tag,
       ingress,
-      "contributor": ${contributorsSingle},
+      "slug": slug.current,
+      "innholdstype": innholdstype->title,
     }
   }
 }`;
@@ -68,7 +75,7 @@ export const query = `{
 export const getServerSideProps: GetServerSideProps = async (
   context,
 ): Promise<PageProps> => {
-  const signedIn = await validateWonderwallToken(context.req.headers);
+  const userState = await getAuthUserState(context.req.headers);
 
   const isPreview = context.preview ?? false;
 
@@ -78,6 +85,9 @@ export const getServerSideProps: GetServerSideProps = async (
     slug: `god-praksis/artikler/${slug}`,
   });
 
+  const verifiedDate =
+    page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt;
+
   return {
     props: {
       page,
@@ -85,15 +95,14 @@ export const getServerSideProps: GetServerSideProps = async (
       preview: isPreview,
       id: page?._id ?? "",
       title: page?.heading ?? "",
-      verifiedDate: await dateStr(
-        page?.updateInfo?.lastVerified ?? page?.publishedAt ?? page?._updatedAt,
-      ),
+      verifiedDate: await dateStr(verifiedDate),
+      outdated: differenceInMonths(new Date(), new Date(verifiedDate)) >= 12,
       publishDate: await dateStr(page?.publishedAt ?? page?._updatedAt),
       toc: generateTableOfContents({
         content: page?.content,
         type: "aksel_artikkel",
       }),
-      signedIn,
+      userState,
     },
     notFound: !page && !isPreview,
   };
@@ -103,10 +112,12 @@ const Page = ({
   page: data,
   publishDate,
   verifiedDate,
+  outdated,
   toc,
+  userState,
 }: PageProps["props"]) => {
   if (!data) {
-    return <NotFotfund />;
+    return <NotFound />;
   }
 
   if (!data.content || !data.heading) {
@@ -119,8 +130,6 @@ const Page = ({
   }
 
   const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
-
-  const hasTema = "tema" in data && data.tema && data?.tema.length > 0;
 
   const aside = data?.relevante_artikler &&
     data.relevante_artikler.length > 0 && (
@@ -141,26 +150,28 @@ const Page = ({
                 : `Relevante artikler`}
             </Heading>
             <div className="card-grid-3-1 mt-6 px-4">
-              {data.relevante_artikler.map((x: any) =>
-                x && x?._id ? (
-                  <ArtikkelCard level="3" {...x} key={x._id} />
-                ) : null,
-              )}
+              {data.relevante_artikler.map((x) => (
+                <GpArticleCard
+                  key={x.heading}
+                  href={x.slug}
+                  description={x.ingress}
+                  innholdstype={x.innholdstype}
+                >
+                  {x.heading}
+                </GpArticleCard>
+              ))}
             </div>
           </div>
         </div>
       </aside>
     );
 
-  const filteredTema =
-    hasTema && data?.tema?.filter((x: any) => x?.title && x?.slug);
-
   return (
     <>
       <SEO
         title={data?.heading}
         description={data?.seo?.meta ?? data?.ingress}
-        image={data?.seo?.image ?? (data?.tema?.[0] as any)?.seo?.image}
+        image={data?.seo?.image ?? data.undertema?.[0]?.tema?.image}
         publishDate={publishDate}
         canonical={`/${data.slug}`}
       />
@@ -174,11 +185,18 @@ const Page = ({
         <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
           <article className="pb-16 pt-12 md:pb-32">
             <div className="mx-auto mb-16 max-w-prose lg:ml-0">
-              <BreadCrumbs auto />
+              {data.innholdstype && (
+                <BodyShort
+                  weight="semibold"
+                  className="uppercase text-violet-600"
+                >
+                  {data.innholdstype}
+                </BodyShort>
+              )}
               <Heading
                 level="1"
                 size="large"
-                className="text-wrap-balance mt-4 text-deepblue-800 md:text-5xl"
+                className="text-wrap-balance mt-1 text-deepblue-800 md:text-5xl"
               >
                 {data.heading}
               </Heading>
@@ -191,38 +209,26 @@ const Page = ({
                 </BodyLong>
               )}
 
-              <div className="mt-6 inline-flex flex-wrap items-center gap-2 text-base">
-                <Detail uppercase as="span">
-                  {verifiedDate}
+              <div className="mt-5 grid">
+                <Detail as="time" textColor="subtle">
+                  {`Oppdatert ${verifiedDate}`}
                 </Detail>
-                {authors?.length > 0 && (
-                  <>
-                    <span className="h-2 w-2 rotate-45 rounded-[1px] bg-deepblue-700 opacity-25" />
-                    <BodyShort
-                      size="small"
-                      as="div"
-                      className="flex flex-wrap gap-1"
-                    >
-                      <address className="not-italic">{authors?.[0]}</address>
-                    </BodyShort>
-                  </>
-                )}
+                <Detail as="time" textColor="subtle">
+                  {`Publisert ${publishDate}`}
+                </Detail>
               </div>
-              {hasTema && filteredTema && (
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {filteredTema.map(({ title, slug }: any) => (
-                    <span key={title}>
-                      <BodyShort
-                        href={`/god-praksis/${slug.current}`}
-                        key={title}
-                        size="small"
-                        as={NextLink}
-                        className="flex min-h-8 items-center justify-center gap-[2px] rounded-full bg-surface-neutral-subtle pl-4  pr-1 text-deepblue-800 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
-                      >
-                        {title}
-                        <ChevronRightIcon aria-hidden fontSize="1.25rem" />
-                      </BodyShort>
-                    </span>
+
+              {data.undertema && data.undertema.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {data.undertema.map(({ title, tema }) => (
+                    <GpTemaLink
+                      key={title}
+                      href={`/god-praksis/${
+                        tema.slug
+                      }?undertema=${encodeURIComponent(title)}`}
+                    >
+                      {tema.title}
+                    </GpTemaLink>
                   ))}
                 </div>
               )}
@@ -230,11 +236,12 @@ const Page = ({
             <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
               <TableOfContents toc={toc} variant="subtle" />
               <div className="max-w-prose lg:col-span-2 lg:col-start-1">
+                {outdated && <OutdatedAlert />}
                 <SanityBlockContent blocks={data?.content ?? []} />
                 <div className="mt-12">
                   {authors?.length > 0 && (
                     <Label className="mb-2 text-deepblue-700" as="p">
-                      Bidragsytere
+                      Medvirkende
                     </Label>
                   )}
                   {authors?.length > 0 && (
@@ -250,9 +257,7 @@ const Page = ({
                       ))}
                     </BodyShort>
                   )}
-                  <BodyShort as="span" className="text-text-subtle">
-                    Publisert: {publishDate}
-                  </BodyShort>
+                  {userState && <Feedback userState={userState} />}
                 </div>
               </div>
             </div>

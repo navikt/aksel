@@ -32,7 +32,7 @@ const Footer = () => {
             heading="Snarveier"
             links={[
               {
-                url: "/god-praksis/artikler/skriv-for-aksel",
+                url: "/side/skriv-for-aksel",
                 text: "Skriv for Aksel",
               },
               {
@@ -50,7 +50,7 @@ const Footer = () => {
             heading="Om nettstedet"
             links={[
               {
-                url: "/god-praksis/artikler/om-aksel",
+                url: "/side/om-aksel",
                 text: "Hva er Aksel?",
               },
               {
