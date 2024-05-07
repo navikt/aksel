@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
   ChevronDownIcon,
@@ -7,7 +7,7 @@ import {
   LeaveIcon,
   MenuGridIcon,
 } from "@navikt/aksel-icons";
-import { BodyLong, BodyShort, Detail, Spacer } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Spacer, VStack } from "@navikt/ds-react";
 import { Dropdown } from "../dropdown";
 import InternalHeader from "./InternalHeader";
 
@@ -22,7 +22,12 @@ export default {
       },
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof InternalHeader>;
 
 export const Default = {
   render: (props) => {
@@ -227,3 +232,37 @@ export const UserWithMenuGridIconMenu = () => (
     <InternalHeader.User name="Ola Normann" description="id: 123456" />
   </InternalHeader>
 );
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="4">
+      <div>
+        <h2>TitleAsHeading</h2>
+        <TitleAsHeading />
+      </div>
+      <div>
+        <h2>TitleAsLink</h2>
+        <TitleAsLink />
+      </div>
+      <div>
+        <h2>User</h2>
+        <User />
+      </div>
+      <div>
+        <h2>UserWithDescription</h2>
+        <UserWithDescription />
+      </div>
+      <div>
+        <h2>UserWithMenu</h2>
+        <UserWithMenu />
+      </div>
+      <div>
+        <h2>UserWithMenuGridIconMenu</h2>
+        <UserWithMenuGridIconMenu />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};

@@ -21,4 +21,6 @@ export const [TabsProvider, useTabsContext] = createContext<TabsProviderProps>({
   name: "TabsContext",
   hookName: "useTabsContext",
   providerName: "TabsProvider",
+  errorMessage:
+    "Tabs.List, Tabs.Tag and Tabs.Panel needs to be wrapped within <Tabs>",
 });
