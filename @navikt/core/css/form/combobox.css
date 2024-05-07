@@ -248,6 +248,7 @@
 .navds-combobox__list-item--no-options,
 .navds-combobox__list-item--new-option,
 .navds-combobox__list-item--max-selected {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
