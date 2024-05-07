@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { HTMLAttributes, forwardRef, useRef } from "react";
 
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
@@ -93,16 +93,18 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     ref,
   ) => {
     const translate = 100 - (Math.round(value) / valueMax) * 100;
+    const onTimeoutRef = useRef<() => void>();
+    onTimeoutRef.current = simulated?.onTimeout;
 
     React.useEffect(() => {
-      if (simulated?.seconds && simulated?.onTimeout) {
+      if (simulated?.seconds && onTimeoutRef.current) {
         const timeout = setTimeout(
-          simulated.onTimeout,
+          onTimeoutRef.current,
           simulated.seconds * 1000,
         );
         return () => clearTimeout(timeout);
       }
-    }, [simulated, simulated?.seconds, simulated?.onTimeout]);
+    }, [simulated?.seconds]);
 
     return (
       <div
