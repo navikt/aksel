@@ -41,6 +41,7 @@ export const IntroPage: Story = {
           <Page.Block as="main" width="text" gutters>
             <Bleed marginInline={{ md: "24" }}>
               <Stack
+                align="center"
                 gap="6"
                 direction={{ xs: "row-reverse", md: "row" }}
                 justify="start"
