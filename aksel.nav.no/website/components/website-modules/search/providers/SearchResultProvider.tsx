@@ -1,5 +1,4 @@
 import { createContext, useContext, useMemo } from "react";
-import { allArticleDocuments } from "@/sanity/config";
 import { SearchHitT, SearchResultsT } from "@/types";
 import { useSearch } from "../hooks";
 import { formatRawResults } from "../utils";
@@ -29,11 +28,7 @@ export const SearchResultProvider = ({
         return null;
       }
 
-      return formatRawResults(
-        context.rawData
-          .filter((x) => allArticleDocuments.includes(x._type))
-          .slice(0, 20),
-      );
+      return formatRawResults(context.rawData.slice(0, 20));
     }, [context.rawData]);
 
   return (
