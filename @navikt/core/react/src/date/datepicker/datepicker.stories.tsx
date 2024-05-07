@@ -1,7 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
+// eslint-disable-next-line storybook/use-storybook-testing-library
+import { act } from "@testing-library/react";
 import { isSameDay } from "date-fns";
-import React, { act, useId, useState } from "react";
+import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { HGrid } from "../../layout/grid";
 import { VStack } from "../../layout/stack";

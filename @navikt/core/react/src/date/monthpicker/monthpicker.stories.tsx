@@ -1,7 +1,9 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
+// eslint-disable-next-line storybook/use-storybook-testing-library
+import { act } from "@testing-library/react";
 import { setYear } from "date-fns";
-import React, { act, useId, useState } from "react";
+import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
 import { DateInputProps } from "../parts/DateInput";
