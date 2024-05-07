@@ -15,7 +15,7 @@ export const Results = () => {
   return (
     <div className="flex h-full flex-col overflow-y-auto">
       {!results && mostResent && (
-        <div id="aksel-search-results" aria-label="Nyeste artikler">
+        <section aria-label="Nyeste artikler">
           <Collection
             startIndex={0}
             heading={
@@ -27,7 +27,7 @@ export const Results = () => {
             simple
             hits={mostResent}
           />
-        </div>
+        </section>
       )}
       {!results?.totalHits && query && (
         <Heading
@@ -42,7 +42,7 @@ export const Results = () => {
         </Heading>
       )}
       {results && results?.totalHits > 0 && (
-        <div id="aksel-search-results" aria-label="Søkeresultater">
+        <section aria-label="Søkeresultater">
           <Label as="p" className="sr-only" aria-live="polite">
             {`${results?.totalHits} treff på "${results.query}"`}
           </Label>
@@ -68,7 +68,7 @@ export const Results = () => {
               groups={results.groupedHits}
             />
           </div>
-        </div>
+        </section>
       )}
     </div>
   );
