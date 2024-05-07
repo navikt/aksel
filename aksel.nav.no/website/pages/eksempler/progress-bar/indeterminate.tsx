@@ -3,21 +3,21 @@ import { ProgressBar } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  // const [isIndeterminate, setIsIndeterminate] = React.useState(false);
+  const [isIndeterminate, setIsIndeterminate] = React.useState(false);
   return (
     <div style={{ width: "300px" }}>
       <p id="indeterminate-working">Jobber med saken</p>
       <ProgressBar
-        // simulated={{
-        //   seconds: 6,
-        //   onTimeout: () => {
-        //     console.log("Ferdig!");
-        //     setIsIndeterminate(true);
-        //   },
-        // }}
+        simulated={{
+          seconds: 6,
+          onTimeout: () => {
+            console.log("Ferdig!");
+            setIsIndeterminate(true);
+          },
+        }}
         aria-labelledby="indeterminate-working"
       />
-      {/* {isIndeterminate && <p>Oi, dette tok lenger tid en forventet!</p>} */}
+      {isIndeterminate && <p>Oi, dette tok lenger tid en forventet!</p>}
     </div>
   );
 };
