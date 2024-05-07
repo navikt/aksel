@@ -2,7 +2,7 @@ import {
   isInList,
   mapToComboboxOptionArray,
   toComboboxOption,
-} from "./combobox-utils";
+} from "../combobox-utils";
 
 const list = [
   { label: "Hjelpemidler", value: "HJE" },

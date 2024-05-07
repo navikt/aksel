@@ -1,18 +1,17 @@
 import React, {
   ChangeEvent,
   ChangeEventHandler,
-  createContext,
   useCallback,
-  useContext,
   useMemo,
   useRef,
   useState,
 } from "react";
+import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
 import { ComboboxProps } from "../types";
 
-interface InputContextType extends FormFieldType {
+interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
   error?: string;
   focusInput: () => void;
@@ -26,9 +25,13 @@ interface InputContextType extends FormFieldType {
   toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
 }
 
-const InputContext = createContext<InputContextType>({} as InputContextType);
+const [InputContextProvider, useInputContext] =
+  createContext<InputContextValue>({
+    name: "InputContext",
+    errorMessage: "useInputContext must be used within an InputContextProvider",
+  });
 
-export const InputContextProvider = ({ children, value: props }) => {
+const InputProvider = ({ children, value: props }) => {
   const {
     defaultValue = "",
     description,
@@ -101,34 +104,24 @@ export const InputContextProvider = ({ children, value: props }) => {
     }
   }, [value, searchTerm, shouldAutocomplete]);
 
+  const contextValue = {
+    ...formFieldProps,
+    clearInput,
+    error,
+    focusInput,
+    inputRef,
+    value,
+    setValue,
+    onChange,
+    searchTerm,
+    setSearchTerm,
+    shouldAutocomplete,
+    toggleOpenButtonRef,
+  };
+
   return (
-    <InputContext.Provider
-      value={{
-        ...formFieldProps,
-        clearInput,
-        error,
-        focusInput,
-        inputRef,
-        value,
-        setValue,
-        onChange,
-        searchTerm,
-        setSearchTerm,
-        shouldAutocomplete,
-        toggleOpenButtonRef,
-      }}
-    >
-      {children}
-    </InputContext.Provider>
+    <InputContextProvider {...contextValue}>{children}</InputContextProvider>
   );
 };
 
-export const useInputContext = () => {
-  const context = useContext(InputContext);
-  if (!context) {
-    throw new Error(
-      "useInputContext must be used within an InputContextProvider",
-    );
-  }
-  return context;
-};
+export { InputProvider as InputContextProvider, useInputContext };
