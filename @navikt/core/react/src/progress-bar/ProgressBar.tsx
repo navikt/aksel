@@ -47,7 +47,7 @@ interface ProgressBarPropsBase
 export type ProgressBarProps = ProgressBarPropsBase &
   (
     | {
-        "aria-hidden": string;
+        "aria-hidden": true;
       }
     | {
         "aria-labelledby": string;
