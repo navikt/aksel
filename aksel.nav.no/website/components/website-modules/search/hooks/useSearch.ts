@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { debounce } from "@navikt/ds-react";
 import { AmplitudeEvents, amplitude } from "@/logging";
-import { allArticleDocuments } from "@/sanity/config";
 import { SearchResultsT } from "@/types";
 import { createSearchResult, formatResults, fuseSearch } from "../utils";
 
@@ -23,9 +22,7 @@ export const useSearch = () => {
 
         const rawResults = fuseSearch(data, value);
 
-        const formatedResults = formatResults(
-          rawResults.filter((x) => allArticleDocuments.includes(x.item._type)),
-        );
+        const formatedResults = formatResults(rawResults);
 
         setFuseResults({
           ...createSearchResult(formatedResults, rawResults),
