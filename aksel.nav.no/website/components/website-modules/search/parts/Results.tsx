@@ -37,8 +37,8 @@ export const Results = () => {
           aria-live="polite"
           aria-atomic
         >
-          <span className="text-text-subtle">Ingen treff på &quot;</span>
-          <span className="break-all">{query}&quot;</span>
+          <span className="text-text-subtle">Ingen treff på </span>
+          <span className="break-all">&quot;{query}&quot;</span>
         </Heading>
       )}
       {results && results?.totalHits > 0 && (
