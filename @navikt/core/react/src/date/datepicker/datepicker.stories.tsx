@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import { isSameDay } from "date-fns";
-import React, { useId, useState } from "react";
-import { act } from "react-dom/test-utils";
+import React, { act, useId, useState } from "react";
 import { Button } from "../../button";
 import { HGrid } from "../../layout/grid";
 import { VStack } from "../../layout/stack";
