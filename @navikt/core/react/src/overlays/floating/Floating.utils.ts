@@ -1,10 +1,16 @@
 import type { Middleware, Placement } from "@floating-ui/react-dom";
-import { Align, Side } from "./Floating.types";
+
+const SIDE_OPTIONS = ["top", "right", "bottom", "left"] as const;
+const ALIGN_OPTIONS = ["start", "center", "end"] as const;
+
+type Side = (typeof SIDE_OPTIONS)[number];
+type Align = (typeof ALIGN_OPTIONS)[number];
+type Measurable = { getBoundingClientRect(): DOMRect };
 
 /**
  * `transformOrigin` is a custom middleware for floating-ui that calculates the transform origin of the floating-element.
  */
-export function transformOrigin(options: {
+function transformOrigin(options: {
   arrowWidth: number;
   arrowHeight: number;
 }): Middleware {
@@ -48,7 +54,10 @@ export function transformOrigin(options: {
   };
 }
 
-export function getSideAndAlignFromPlacement(placement: Placement) {
+function getSideAndAlignFromPlacement(placement: Placement) {
   const [side, align = "center"] = placement.split("-");
   return [side as Side, align as Align] as const;
 }
+
+export { getSideAndAlignFromPlacement, transformOrigin };
+export type { Side, Align, Measurable };

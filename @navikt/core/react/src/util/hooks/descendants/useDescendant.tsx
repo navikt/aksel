@@ -31,16 +31,6 @@ export function createDescendantContext<
     ),
   );
 
-  type Context<S> = S extends true
-    ? ReturnType<typeof _useDescendants>
-    : ReturnType<typeof _useDescendants> | undefined;
-
-  function _useDescendantsContext<S extends boolean = true>(
-    strict: S = true as S,
-  ): Context<S> {
-    return useDescendantsContext(strict);
-  }
-
   /**
    * @internal
    * This hook provides information to descendant component:
@@ -94,7 +84,7 @@ export function createDescendantContext<
     // context provider
     ContextProvider,
     // call this when you need to read from context
-    _useDescendantsContext,
+    useDescendantsContext,
     // descendants state information, to be called and passed to `ContextProvider`
     _useDescendants,
     // descendant index information

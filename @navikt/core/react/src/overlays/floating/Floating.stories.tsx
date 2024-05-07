@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Portal } from "../../portal";
-import Floating from "./Floating";
+import { Floating } from "./Floating";
 
 export default {
   title: "Utilities/Floating",
