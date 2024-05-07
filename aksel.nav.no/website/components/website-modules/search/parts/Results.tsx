@@ -44,7 +44,7 @@ export const Results = () => {
       {results && results?.totalHits > 0 && (
         <div id="aksel-search-results" aria-label="Søkeresultater">
           <Label as="p" className="sr-only" aria-live="polite">
-            {`${results?.totalHits} treff på "${results.query}`}
+            {`${results?.totalHits} treff på "${results.query}"`}
           </Label>
           <div className="pb-4">
             {results?.topResults.length > 0 && (
