@@ -29,9 +29,6 @@ export interface FormProgressProps
    * Callback for current open-state
    */
   onOpenChange?: (open: boolean) => void;
-
-  // TODO: Bør vel kunne endre tekstene?
-
   /**
    * Should contain <FormProgress.Step> elements.
    */
@@ -47,6 +44,12 @@ export interface FormProgressProps
    * @default true
    */
   interactiveSteps?: boolean;
+
+  // TODO:
+  /**
+   * i18n-API for customizing texts and labels
+   */
+  //translations?: ComponentTranslation<"FormProgress">;
 }
 
 interface FormProgressComponent
@@ -85,8 +88,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
     return (
       <div ref={ref} {...rest}>
         <ProgressBar
-          aria-label="Fremdrift" // TODO vurder
-          //aria-hidden
+          aria-hidden
           value={activeStep}
           valueMax={totalSteps}
           className="navds-form-progress__bar"
