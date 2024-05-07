@@ -385,8 +385,6 @@ const MenuContentImpl = forwardRef<
           // when opening, explicitly focus the content area only and leave
           // `onEntryFocus` in  control of focusing first item
           event.preventDefault();
-
-          console.log("onMountuatoFocus", contentRef.current);
           contentRef.current?.focus({ preventScroll: true });
         })}
         onUnmountAutoFocus={onCloseAutoFocus}
@@ -404,11 +402,9 @@ const MenuContentImpl = forwardRef<
             asChild
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-              /* console.log("called entryfocus"); */
               // only focus first item when using keyboard
               if (!rootContext.isUsingKeyboardRef.current)
                 event.preventDefault();
-              /* console.log("prevent entryFocus"); */
             })}
           >
             <Floating.Content
@@ -423,7 +419,6 @@ const MenuContentImpl = forwardRef<
               onKeyDown={composeEventHandlers(
                 contentProps.onKeyDown,
                 (event) => {
-                  /* console.log("content"); */
                   // submenu key events bubble through portals. We only care about keys in this menu.
                   const target = event.target as HTMLElement;
                   const isKeyDownInside =
@@ -440,12 +435,10 @@ const MenuContentImpl = forwardRef<
                   if (!FIRST_LAST_KEYS.includes(event.key)) return;
                   event.preventDefault();
 
-                  console.log(descendants.values().map((x) => x.node));
                   if (LAST_KEYS.includes(event.key)) {
                     descendants.lastEnabled()?.node?.focus();
                     return;
                   }
-                  console.log("firstNode", descendants.firstEnabled()?.node);
                   descendants.firstEnabled()?.node?.focus();
                 },
               )}
@@ -947,7 +940,6 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           // This is redundant for mouse users but we cannot determine pointer type from
           // click event and we cannot use pointerup event (see git history for reasons why)
           onClick={(event) => {
-            /* console.log("kdwn"); */
             props.onClick?.(event);
             if (props.disabled || event.defaultPrevented) return;
             /**
@@ -1024,7 +1016,6 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
               // The trigger may hold focus if opened via pointer interaction
               // so we ensure content is given focus again when switching to keyboard.
               context.content?.focus();
-              console.log("opening submenu", context.content);
               // prevent window from scrolling
               event.preventDefault();
             }
@@ -1075,8 +1066,6 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
             // when opening a submenu, focus content for keyboard users only
             if (rootContext.isUsingKeyboardRef.current) {
               ref.current?.focus();
-              /* console.log(ref.current); */
-              console.log("ran openautofocus");
             }
             event.preventDefault();
           }}
