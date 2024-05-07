@@ -1,5 +1,6 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
+import { VStack } from "../layout/stack";
 import { BodyLong } from "../typography";
 import Stepper from "./Stepper";
 
@@ -15,7 +16,13 @@ const meta: Meta<typeof Stepper> = {
       control: { type: "number" },
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
+
+type Story = StoryObj<typeof Stepper>;
+
 export default meta;
 
 const storyTexts = [
@@ -72,7 +79,7 @@ Default.args = {
   completed: false,
 };
 
-export const Horizontal = () => {
+export const Horizontal: StoryFn<Story> = () => {
   const [activeStep, setActiveStep] = useState(2);
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
@@ -95,7 +102,7 @@ export const Horizontal = () => {
   );
 };
 
-export const Vertical = () => {
+export const Vertical: StoryFn<Story> = () => {
   const [activeStep, setActiveStep] = useState(2);
   const props = { onClick: (e) => e.preventDefault(), href: "#" };
   return (
@@ -118,7 +125,7 @@ export const Vertical = () => {
   );
 };
 
-export const DisplayOnly = () => {
+export const DisplayOnly: StoryFn<Story> = () => {
   return (
     <div className="colgap">
       <Stepper
@@ -157,7 +164,7 @@ export const DisplayOnly = () => {
   );
 };
 
-export const CompletedSteps = () => {
+export const CompletedSteps: StoryFn<Story> = () => {
   const [activeStep, setActiveStep] = useState(3);
   return (
     <div className="colgap">
@@ -197,4 +204,30 @@ export const CompletedSteps = () => {
       </Stepper>
     </div>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="4">
+      <div>
+        <h2>Horizontal</h2>
+        <Horizontal />
+      </div>
+      <div>
+        <h2>Vertical</h2>
+        <Vertical />
+      </div>
+      <div>
+        <h2>Display only</h2>
+        <DisplayOnly />
+      </div>
+      <div>
+        <h2>Completed steps</h2>
+        <CompletedSteps />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
