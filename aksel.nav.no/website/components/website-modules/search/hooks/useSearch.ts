@@ -38,7 +38,6 @@ export const useSearch = () => {
         amplitude.track(AmplitudeEvents.søk, {
           type: "standard",
           searchedFromUrl: window.location.pathname,
-          query: value,
           filter: tags,
         });
       }),

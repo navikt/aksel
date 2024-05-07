@@ -1,11 +1,23 @@
+import React from "react";
 import { ProgressBar } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
+  const [isIndeterminate, setIsIndeterminate] = React.useState(false);
   return (
-    <div>
-      <p id="indeterminate">Laster opp fil</p>
-      <ProgressBar duration={6} aria-labelledby="indeterminate" />
+    <div style={{ width: "300px" }}>
+      <p id="indeterminate-working">Jobber med saken</p>
+      <ProgressBar
+        simulated={{
+          seconds: 6,
+          onTimeout: () => {
+            console.log("Ferdig!");
+            setIsIndeterminate(true);
+          },
+        }}
+        aria-labelledby="indeterminate-working"
+      />
+      {isIndeterminate && <p>Oi, dette tok lenger tid en forventet!</p>}
     </div>
   );
 };
@@ -20,5 +32,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Med duration-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
+  desc: "Med simulated-propen kan man legge inn et anslag i sekunder, så simulerer komponenten progresjon.",
 };
