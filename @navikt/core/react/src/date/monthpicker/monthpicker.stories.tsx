@@ -1,7 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
-// eslint-disable-next-line storybook/use-storybook-testing-library
-import { act } from "@testing-library/react";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
@@ -142,9 +140,7 @@ export const Required = {
 
     const buttonApr = canvas.getByRole("button", { pressed: true });
 
-    await act(async () => {
-      await userEvent.click(buttonApr);
-    });
+    await userEvent.click(buttonApr);
 
     expect(buttonApr.ariaPressed).toBe("true");
 
@@ -152,9 +148,7 @@ export const Required = {
 
     expect(buttonSep?.ariaPressed).toBe("false");
 
-    await act(async () => {
-      buttonSep && (await userEvent.click(buttonSep));
-    });
+    buttonSep && (await userEvent.click(buttonSep));
 
     expect(buttonSep?.ariaPressed).toBe("true");
     expect(buttonApr.ariaPressed).toBe("false");
