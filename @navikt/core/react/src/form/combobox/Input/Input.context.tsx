@@ -25,13 +25,13 @@ interface InputContextValue extends FormFieldType {
   toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
 }
 
-const [InputContextImplProvider, useInputContext] =
+const [InputContextProvider, useInputContext] =
   createContext<InputContextValue>({
     name: "InputContext",
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });
 
-const InputContextProvider = ({ children, value: props }) => {
+const InputProvider = ({ children, value: props }) => {
   const {
     defaultValue = "",
     description,
@@ -120,10 +120,8 @@ const InputContextProvider = ({ children, value: props }) => {
   };
 
   return (
-    <InputContextImplProvider {...contextValue}>
-      {children}
-    </InputContextImplProvider>
+    <InputContextProvider {...contextValue}>{children}</InputContextProvider>
   );
 };
 
-export { InputContextProvider, useInputContext };
+export { InputProvider as InputContextProvider, useInputContext };
