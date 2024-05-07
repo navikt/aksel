@@ -9,7 +9,7 @@ export function useTabList() {
   const { focusedValue, loop, selectedValue, setFocusedValue } =
     useTabsContext();
 
-  const descendants = useTabsDescendantsContext()!;
+  const descendants = useTabsDescendantsContext();
 
   /**
    * Implements rowing-tabindex for horizontal tabs
