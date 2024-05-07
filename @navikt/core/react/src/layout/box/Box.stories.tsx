@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React, { ReactNode } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "../../typography";
@@ -10,8 +10,14 @@ import { Box } from "./Box";
 const meta: Meta<typeof Box> = {
   title: "ds-react/Primitives/Box",
   component: Box,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
+
 export default meta;
+
+type Story = StoryObj<typeof Box>;
 
 export const Default = () => (
   <Box>
@@ -378,3 +384,77 @@ export const PaddingDemo = () => (
     </Box>
   </VStack>
 );
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="2">
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>As card</h2>
+        <AsCard />
+      </div>
+      <div>
+        <h2>Theming demo</h2>
+        <ThemingDemo />
+      </div>
+      <div>
+        <h2>Padding breakpoints</h2>
+        <PaddingBreakpoints.render />
+      </div>
+      <div>
+        <h2>Padding breakpoints inherit 1</h2>
+        <PaddingBreakpointsInherit1.render />
+      </div>
+      <div>
+        <h2>Padding breakpoints inherit 2</h2>
+        <PaddingBreakpointsInherit2 />
+      </div>
+      <div>
+        <h2>Padding</h2>
+        <Padding />
+      </div>
+      <div>
+        <h2>Box in box</h2>
+        <BoxInBox />
+      </div>
+      <div>
+        <h2>With HGrid</h2>
+        <WithHGrid />
+      </div>
+      <div>
+        <h2>Border width</h2>
+        <BorderWidth />
+      </div>
+      <div>
+        <h2>Border radius</h2>
+        <BorderRadius />
+      </div>
+      <div>
+        <h2>Padding demo</h2>
+        <PaddingDemo />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+      modes: {
+        mobile_portrait: {
+          viewport: {
+            width: 400,
+            height: 850,
+          },
+        },
+        desktop: {
+          viewport: {
+            width: 1280,
+            height: 960,
+          },
+        },
+      },
+    },
+  },
+};

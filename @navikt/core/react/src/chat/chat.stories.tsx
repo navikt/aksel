@@ -1,25 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
-import Chat, { POSITIONS, SIZES } from "./Chat";
+import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";
 
 export default {
   title: "ds-react/Chat",
   component: Chat,
-  argTypes: {
-    position: {
-      control: { type: "radio" },
-      options: POSITIONS,
-    },
-    toptextPosition: {
-      control: { type: "radio" },
-      options: POSITIONS,
-    },
-    size: {
-      control: { type: "radio" },
-      options: SIZES,
-    },
-  },
   parameters: {
     chromatic: { disable: true },
   },
@@ -48,43 +34,49 @@ export const Controls: Story = {
     timestamp: "01.01.21 14:00",
     avatar: "ON",
   },
+  argTypes: {
+    position: {
+      control: { type: "radio" },
+      options: [...POSITIONS], // TypeScript does not like using readonly typed arrays here
+    },
+    toptextPosition: {
+      control: { type: "radio" },
+      options: [...POSITIONS],
+    },
+    size: {
+      control: { type: "radio" },
+      options: [...SIZES],
+    },
+    variant: {
+      control: { type: "radio" },
+      options: [...VARIANTS],
+    },
+  },
 };
 
 export const Size: Story = {
   render: () => (
     <VStack gap="4">
-      <h3>Medium</h3>
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        size="medium"
-      >
-        <Chat.Bubble>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </Chat.Bubble>
-        <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-        <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </Chat.Bubble>
-      </Chat>
-      <h3>Small</h3>
-      <Chat
-        avatar="ON"
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        size="small"
-      >
-        <Chat.Bubble>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </Chat.Bubble>
-        <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-        <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </Chat.Bubble>
-      </Chat>
+      {SIZES.map((size) => (
+        <>
+          <h3>{size}</h3>
+          <Chat
+            avatar="ON"
+            name="Ola Normann"
+            timestamp="01.01.21 14:00"
+            size={size}
+          >
+            <Chat.Bubble>
+              Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+            </Chat.Bubble>
+            <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+            <Chat.Bubble>
+              Adipisicing laborum est eu laborum est sit in commodo enim sint
+              laboris labore nisi ut.
+            </Chat.Bubble>
+          </Chat>
+        </>
+      ))}
     </VStack>
   ),
 };
@@ -92,35 +84,21 @@ export const Size: Story = {
 export const Variants: Story = {
   render: () => (
     <VStack gap="4">
-      <h3>Info</h3>
-      <Chat avatar="NAV" name="NAV" timestamp="01.01.21 14:00" variant="info">
-        <Chat.Bubble>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </Chat.Bubble>
-      </Chat>
-      <h3>Neutral</h3>
-      <Chat
-        avatar="KN"
-        name="Kari Nordmann"
-        timestamp="01.01.21 14:03"
-        variant="neutral"
-        position="right"
-      >
-        <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
-      </Chat>
-      <h3>Subtle</h3>
-      <Chat
-        avatar="ON"
-        name="Ola Nordmann"
-        timestamp="01.01.21 14:07"
-        variant="subtle"
-        position="right"
-      >
-        <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </Chat.Bubble>
-      </Chat>
+      {VARIANTS.map((variant) => (
+        <>
+          <h3>{variant}</h3>
+          <Chat
+            avatar="NAV"
+            name="NAV"
+            timestamp="01.01.21 14:00"
+            variant={variant}
+          >
+            <Chat.Bubble>
+              Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+            </Chat.Bubble>
+          </Chat>
+        </>
+      ))}
     </VStack>
   ),
 };
@@ -131,8 +109,7 @@ export const Position: Story = {
       <h3>Default</h3>
       <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00">
         <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
+          Reprehenderit pariatur officia exercitation laboris.
         </Chat.Bubble>
       </Chat>
       <h3>Right</h3>
@@ -159,10 +136,7 @@ export const Position: Story = {
         timestamp="01.01.21 15:00"
       >
         <Chat.Bubble>
-          Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
-          dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
-          ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
-          labore sunt aute.
+          Reprehenderit pariatur officia exercitation laboris.
         </Chat.Bubble>
       </Chat>
     </VStack>
@@ -171,8 +145,8 @@ export const Position: Story = {
 
 export const ToptextPosition: Story = {
   render: () => (
-    <VStack gap="4">
-      <h3>Right</h3>
+    <VStack gap="4" style={{ width: 500 }}>
+      <h3>All right</h3>
       <Chat
         avatar="ON"
         name="Ola Normann"
@@ -180,20 +154,31 @@ export const ToptextPosition: Story = {
         toptextPosition="right"
       >
         <Chat.Bubble>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
+          Reprehenderit pariatur officia exercitation laboris.
         </Chat.Bubble>
       </Chat>
-      <h3>Left</h3>
-      <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 15:00">
-        <Chat.Bubble toptextPosition="left">
-          Exercitation irure Lorem cupidatat culpa anim cillum esse ullamco qui
-          dolore laborum et Lorem. Labore sunt duis id Lorem voluptate commodo
-          ea esse. Dolore esse aliqua proident ea ad commodo ut dolore voluptate
-          labore sunt aute.
+      <h3>Single bubble right</h3>
+      <Chat avatar="ON" name="Ola Normann" timestamp="01.01.21 14:00">
+        <Chat.Bubble>
+          Reprehenderit pariatur officia exercitation laboris.
+        </Chat.Bubble>
+        <Chat.Bubble timestamp="14:02" toptextPosition="right">
+          Enim velit deserunt do quis.
         </Chat.Bubble>
       </Chat>
-      <h3>Left</h3>
+
+      <h3>All left</h3>
+      <Chat
+        avatar="ON"
+        name="Ola Normann"
+        timestamp="01.01.21 15:00"
+        toptextPosition="left"
+      >
+        <Chat.Bubble>
+          Reprehenderit pariatur officia exercitation laboris.
+        </Chat.Bubble>
+      </Chat>
+      <h3>All left, position right</h3>
       <Chat
         name="Kari Høyli"
         timestamp="01.01.21 14:32"
@@ -202,25 +187,6 @@ export const ToptextPosition: Story = {
       >
         <Chat.Bubble>
           Reprehenderit pariatur officia exercitation laboris.
-        </Chat.Bubble>
-        <Chat.Bubble>
-          Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit
-          est dolore incididunt. Occaecat cupidatat magna.
-        </Chat.Bubble>
-      </Chat>
-      <h3>Right</h3>
-      <Chat
-        name="Kari Høyli"
-        timestamp="01.01.21 14:32"
-        position="right"
-        toptextPosition="right"
-      >
-        <Chat.Bubble>
-          Reprehenderit pariatur officia exercitation laboris.
-        </Chat.Bubble>
-        <Chat.Bubble>
-          Enim velit deserunt do quis. Eu fugiat magna esse dolore ad sunt sit
-          est dolore incididunt. Occaecat cupidatat magna.
         </Chat.Bubble>
       </Chat>
     </VStack>
