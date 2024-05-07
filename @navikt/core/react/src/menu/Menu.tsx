@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import ReactDOM from "react-dom";
-import DismissableLayer from "../overlay/dismiss/DismissableLayer";
+import { DismissableLayer } from "../overlay/dismiss/DismissableLayer";
 import { Floating } from "../overlays/floating/Floating";
 import { Portal } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -164,7 +164,7 @@ type MenuAnchorBaseProps = React.ComponentPropsWithoutRef<
   typeof Floating.Anchor
 >;
 
-interface MenuAnchorProps extends MenuAnchorBaseProps {}
+type MenuAnchorProps = MenuAnchorBaseProps;
 
 const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
   (props: MenuAnchorProps, forwardedRef) => {
