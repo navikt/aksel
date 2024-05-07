@@ -149,9 +149,9 @@ const FilteredOptionsProvider = ({
 
   const ariaDescribedBy = useMemo(() => {
     let activeOption;
-    if (!isLoading && filteredOptions.length === 0) {
+    if (!isLoading && filteredOptions.length === 0 && !allowNewValues) {
       activeOption = filteredOptionsUtils.getNoHitsId(id);
-    } else if ((value && value !== "") || isLoading) {
+    } else if (value || isLoading) {
       if (shouldAutocomplete && filteredOptions[0]) {
         activeOption = filteredOptionsUtils.getOptionId(
           id,
@@ -177,6 +177,7 @@ const FilteredOptionsProvider = ({
     shouldAutocomplete,
     filteredOptions,
     id,
+    allowNewValues,
   ]);
 
   const currentOption = useMemo(

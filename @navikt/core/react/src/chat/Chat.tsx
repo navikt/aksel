@@ -3,6 +3,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyLong } from "../typography";
 import Bubble from "./Bubble";
 
+export const VARIANTS = ["subtle", "info", "neutral"] as const;
 export const POSITIONS = ["left", "right"] as const;
 export const SIZES = ["medium", "small"] as const;
 
@@ -28,7 +29,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * Avoid using the same background as the surface behind Chat.
    * @default "neutral"
    */
-  variant?: "subtle" | "info" | "neutral";
+  variant?: (typeof VARIANTS)[number];
   /**
    * Positions avatar and bubbles.
    * @default "left"
