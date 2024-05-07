@@ -415,7 +415,7 @@ const MenuContentImpl = forwardRef<
               role="menu"
               aria-orientation="vertical"
               data-state={getOpenState(context.open)}
-              data-radix-menu-content=""
+              data-aksel-menu-content=""
               dir="ltr"
               {...contentProps}
               ref={composedRefs}
@@ -427,7 +427,7 @@ const MenuContentImpl = forwardRef<
                   // submenu key events bubble through portals. We only care about keys in this menu.
                   const target = event.target as HTMLElement;
                   const isKeyDownInside =
-                    target.closest("[data-radix-menu-content]") ===
+                    target.closest("[data-aksel-menu-content]") ===
                     event.currentTarget;
                   if (isKeyDownInside) {
                     // menus should not be navigated using tab key so we prevent it
