@@ -1,6 +1,6 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
-import { default as NextLink } from "next/link";
+import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
