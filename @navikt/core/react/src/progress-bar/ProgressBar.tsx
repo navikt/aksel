@@ -97,7 +97,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     React.useEffect(() => {
       if (simulated?.seconds && simulated?.onTimeout) {
         const timeout = setTimeout(
-          () => simulated.onTimeout(),
+          simulated.onTimeout,
           simulated.seconds * 1000 + 4000,
         );
         return () => clearTimeout(timeout);
