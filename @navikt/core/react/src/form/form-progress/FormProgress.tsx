@@ -102,7 +102,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           className="navds-form-progress__bar"
         />
 
-        <Collapsible open={open} onOpenChange={onOpenChange}>
+        <Collapsible lazy open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
               {translate("step", {
@@ -126,14 +126,18 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
             </Collapsible.Trigger>
           </HStack>
 
-          <Collapsible.Content className="navds-form-progress__stepper">
-            <Stepper
-              activeStep={activeStep}
-              onStepChange={onStepChange}
-              interactive={interactiveSteps}
-            >
-              {children}
-            </Stepper>
+          <Collapsible.Content className="navds-form-progress__collapsable">
+            <div className="navds-form-progress__collapsable-content">
+              <div className="navds-form-progress__stepper">
+                <Stepper
+                  activeStep={activeStep}
+                  onStepChange={onStepChange}
+                  interactive={interactiveSteps}
+                >
+                  {children}
+                </Stepper>
+              </div>
+            </div>
           </Collapsible.Content>
         </Collapsible>
       </div>

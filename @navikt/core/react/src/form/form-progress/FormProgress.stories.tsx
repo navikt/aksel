@@ -22,17 +22,24 @@ type ControllableProps = Pick<
 >;
 
 export const Default: StoryFn<ControllableProps> = (props) => (
-  <FormProgress {...props}>
-    <FormProgress.Step completed>Start søknad</FormProgress.Step>
-    <FormProgress.Step>Personopplysninger</FormProgress.Step>
-    <FormProgress.Step interactive={false}>Saksopplysninger</FormProgress.Step>
-    <FormProgress.Step interactive={false}>
-      Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
-    </FormProgress.Step>
-    <FormProgress.Step>Vedlegg</FormProgress.Step>
-    <FormProgress.Step>Oppsummering</FormProgress.Step>
-    <FormProgress.Step>Innsending</FormProgress.Step>
-  </FormProgress>
+  <>
+    <FormProgress {...props}>
+      <FormProgress.Step href="#" completed>
+        Start søknad
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Saksopplysninger
+      </FormProgress.Step>
+      <FormProgress.Step interactive={false}>
+        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+      </FormProgress.Step>
+      <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+      <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+      <FormProgress.Step href="#">Innsending</FormProgress.Step>
+    </FormProgress>
+    <p>Noe innhold som dyttes ned</p>
+  </>
 );
 Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 
