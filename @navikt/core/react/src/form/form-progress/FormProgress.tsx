@@ -126,8 +126,8 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
             </Collapsible.Trigger>
           </HStack>
 
-          <Collapsible.Content className="navds-form-progress__collapsable">
-            <div className="navds-form-progress__collapsable-content">
+          <Collapsible.Content className="navds-form-progress__collapsible">
+            <div className="navds-form-progress__collapsible-content">
               <div className="navds-form-progress__stepper">
                 <Stepper
                   activeStep={activeStep}

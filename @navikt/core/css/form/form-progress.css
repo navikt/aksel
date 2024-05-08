@@ -19,28 +19,28 @@
   transform: translateY(-1px) rotate(-180deg);
 }
 
-.navds-form-progress__collapsable {
+.navds-form-progress__collapsible {
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
   transition: grid-template-rows 0.3s cubic-bezier(0.3, 0, 0.15, 1);
 }
 
-.navds-form-progress__collapsable[hidden] {
+.navds-form-progress__collapsible[hidden] {
   display: grid;
 }
 
-.navds-form-progress__collapsable[data-state="open"] {
+.navds-form-progress__collapsible[data-state="open"] {
   grid-template-rows: 1fr;
 }
 
-.navds-form-progress__collapsable-content {
+.navds-form-progress__collapsible-content {
   min-height: 0;
   transition: visibility 0.3s;
   visibility: hidden;
 }
 
-.navds-form-progress__collapsable[data-state="open"] .navds-form-progress__collapsable-content {
+.navds-form-progress__collapsible[data-state="open"] .navds-form-progress__collapsible-content {
   visibility: visible;
 }
 
