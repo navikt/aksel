@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { debounce } from "@navikt/ds-react";
 import { AmplitudeEvents, amplitude } from "@/logging";
-import { allArticleDocuments } from "@/sanity/config";
 import { SearchResultsT } from "@/types";
 import { createSearchResult, formatResults, fuseSearch } from "../utils";
 
@@ -16,20 +15,14 @@ export const useSearch = () => {
 
   const updateResults = useMemo(
     () =>
-      debounce((value: string, tags: string[]) => {
+      debounce((value: string) => {
         if (!value) {
           return;
         }
 
         const rawResults = fuseSearch(data, value);
 
-        const formatedResults = formatResults(
-          rawResults.filter((x) =>
-            (tags.length > 0 ? tags : allArticleDocuments).includes(
-              x.item._type,
-            ),
-          ),
-        );
+        const formatedResults = formatResults(rawResults);
 
         setFuseResults({
           ...createSearchResult(formatedResults, rawResults),
@@ -38,8 +31,6 @@ export const useSearch = () => {
         amplitude.track(AmplitudeEvents.søk, {
           type: "standard",
           searchedFromUrl: window.location.pathname,
-          query: value,
-          filter: tags,
         });
       }),
     [data],

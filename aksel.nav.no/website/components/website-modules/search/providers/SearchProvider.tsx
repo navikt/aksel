@@ -1,20 +1,10 @@
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { searchOptions } from "@/types";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useShortcut } from "../hooks";
 
 type SearchContextType = {
   os: "mac" | "windows";
   open: boolean;
   setOpen: (v) => void;
-  tags: (keyof typeof searchOptions)[];
-  setTags: Dispatch<SetStateAction<(keyof typeof searchOptions)[]>>;
   query: string;
   setQuery: (v: string) => void;
 };
@@ -23,15 +13,12 @@ export const SearchContext = createContext<SearchContextType>({
   os: "windows",
   open: false,
   setOpen: () => null,
-  tags: [],
-  setTags: () => null,
   query: "",
   setQuery: () => null,
 });
 
 export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
-  const [tags, setTags] = useState<SearchContextType["tags"]>([]);
   const [os, setOs] = useState<SearchContextType["os"]>("windows");
   const inputRef = useRef(null);
 
@@ -51,8 +38,6 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
         os,
         open,
         setOpen,
-        tags,
-        setTags,
         query,
         setQuery,
       }}

@@ -1,8 +1,8 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
 import { Tag, TagProps } from ".";
-import { HStack } from "../layout/stack";
+import { HStack, VStack } from "../layout/stack";
 
 const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];
 
@@ -52,7 +52,12 @@ export default {
       options: ["xsmall", "small", "medium"],
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof Tag>;
+
+type Story = StoryObj<typeof Tag>;
 
 export const Default = {
   render: (props) => (
@@ -72,7 +77,7 @@ export const Default = {
   },
 };
 
-export const Small = () => {
+export const Small: StoryFn<Story> = () => {
   return (
     <div className="rowgap rowgap-wrap">
       {variants.map((variant) => (
@@ -84,7 +89,7 @@ export const Small = () => {
   );
 };
 
-export const XSmall = () => {
+export const XSmall: StoryFn<Story> = () => {
   return (
     <div className="rowgap rowgap-wrap">
       {variants.map((variant) => (
@@ -96,7 +101,7 @@ export const XSmall = () => {
   );
 };
 
-export const Variants = () => {
+export const Variants: StoryFn<Story> = () => {
   return (
     <div className="rowgap rowgap-wrap">
       {variants.map((variant) => (
@@ -108,7 +113,7 @@ export const Variants = () => {
   );
 };
 
-export const WithIcons = () => {
+export const WithIcons: StoryFn<Story> = () => {
   return (
     <HStack gap="2" align="start">
       {sizes.reverse().map((size) => (
@@ -123,4 +128,34 @@ export const WithIcons = () => {
       ))}
     </HStack>
   );
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="2">
+      <div>
+        <h2>Default</h2>
+        <Default.render {...Default.args} />
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small />
+      </div>
+      <div>
+        <h2>XSmall</h2>
+        <XSmall />
+      </div>
+      <div>
+        <h2>Variants</h2>
+        <Variants />
+      </div>
+      <div>
+        <h2>WithIcons</h2>
+        <WithIcons />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

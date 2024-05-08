@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.7.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.7.0
+  - @navikt/aksel-icons@6.7.0
+
 ## 6.6.1
 
 ### Patch Changes

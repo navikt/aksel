@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "6.6.1",
+  "version": "6.7.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -310,6 +310,16 @@
         "default": "./cjs/popover/index.js"
       }
     },
+    "./ProgressBar": {
+      "import": {
+        "types": "./esm/progress-bar/index.d.ts",
+        "default": "./esm/progress-bar/index.js"
+      },
+      "require": {
+        "types": "./cjs/progress-bar/index.d.ts",
+        "default": "./cjs/progress-bar/index.js"
+      }
+    },
     "./Provider": {
       "import": {
         "types": "./esm/provider/index.d.ts",
@@ -573,16 +583,17 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.25.4",
-    "@navikt/aksel-icons": "^6.6.1",
-    "@navikt/ds-tokens": "^6.6.1",
+    "@floating-ui/react-dom": "^2.0.9",
+    "@navikt/aksel-icons": "^6.7.0",
+    "@navikt/ds-tokens": "^6.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "8.13.0",
+    "@testing-library/dom": "9.3.4",
     "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^13.3.0",
+    "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
     "concurrently": "7.2.1",

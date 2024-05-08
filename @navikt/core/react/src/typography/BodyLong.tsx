@@ -8,12 +8,12 @@ export interface BodyLongProps
   extends TypoProps,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * large: 20px, medium: 18px, small: 16px
+   * large: 20px, medium: 18px, small: 16px.
    * @default "medium"
    */
   size?: "large" | "medium" | "small";
   /**
-   * Text
+   * Text.
    */
   children: React.ReactNode;
 }
@@ -27,11 +27,11 @@ export interface BodyLongProps
  *
  * @example
  * ```jsx
- *     <BodyLong>
- *       Hvis du ikke bor sammen med begge foreldrene dine,
- *       kan du ha rett til barnebidrag fra en eller begge foreldre mens du
- *       fullfører videregående skole eller tilsvarende.
- *     </BodyLong>
+ * <BodyLong>
+ *   Hvis du ikke bor sammen med begge foreldrene dine,
+ *   kan du ha rett til barnebidrag fra en eller begge foreldre mens du
+ *   fullfører videregående skole eller tilsvarende.
+ * </BodyLong>
  * ```
  */
 export const BodyLong: OverridableComponent<
