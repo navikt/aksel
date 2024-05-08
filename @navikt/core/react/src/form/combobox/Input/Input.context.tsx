@@ -1,18 +1,18 @@
 import React, {
   ChangeEvent,
   ChangeEventHandler,
-  createContext,
   useCallback,
-  useContext,
   useMemo,
   useRef,
   useState,
 } from "react";
+import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
+import { ComboboxProps } from "../types";
 
-interface InputContextType extends FormFieldType {
-  clearInput: (event: React.PointerEvent | React.KeyboardEvent) => void;
+interface InputContextValue extends FormFieldType {
+  clearInput: NonNullable<ComboboxProps["onClear"]>;
   error?: string;
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -22,11 +22,16 @@ interface InputContextType extends FormFieldType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
+  toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
 }
 
-const InputContext = createContext<InputContextType>({} as InputContextType);
+const [InputContextProvider, useInputContext] =
+  createContext<InputContextValue>({
+    name: "InputContext",
+    errorMessage: "useInputContext must be used within an InputContextProvider",
+  });
 
-export const InputContextProvider = ({ children, value: props }) => {
+const InputProvider = ({ children, value: props }) => {
   const {
     defaultValue = "",
     description,
@@ -52,6 +57,7 @@ export const InputContextProvider = ({ children, value: props }) => {
     "comboboxfield",
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
@@ -79,7 +85,7 @@ export const InputContextProvider = ({ children, value: props }) => {
   );
 
   const clearInput = useCallback(
-    (event: React.PointerEvent | React.KeyboardEvent) => {
+    (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
       externalOnChange?.(null, "");
       setValue("");
@@ -98,33 +104,24 @@ export const InputContextProvider = ({ children, value: props }) => {
     }
   }, [value, searchTerm, shouldAutocomplete]);
 
+  const contextValue = {
+    ...formFieldProps,
+    clearInput,
+    error,
+    focusInput,
+    inputRef,
+    value,
+    setValue,
+    onChange,
+    searchTerm,
+    setSearchTerm,
+    shouldAutocomplete,
+    toggleOpenButtonRef,
+  };
+
   return (
-    <InputContext.Provider
-      value={{
-        ...formFieldProps,
-        clearInput,
-        error,
-        focusInput,
-        inputRef,
-        value,
-        setValue,
-        onChange,
-        searchTerm,
-        setSearchTerm,
-        shouldAutocomplete,
-      }}
-    >
-      {children}
-    </InputContext.Provider>
+    <InputContextProvider {...contextValue}>{children}</InputContextProvider>
   );
 };
 
-export const useInputContext = () => {
-  const context = useContext(InputContext);
-  if (!context) {
-    throw new Error(
-      "useInputContext must be used within an InputContextProvider",
-    );
-  }
-  return context;
-};
+export { InputProvider as InputContextProvider, useInputContext };
