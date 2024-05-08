@@ -44,7 +44,7 @@ export const Hit = forwardRef<
             href={href}
             onClick={() => logSuccess(index, `/${hit.item.slug}`)}
             className={cl(
-              "group scroll-my-32 text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
+              "group scroll-my-32 truncate text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
               "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",
             )}
           >
