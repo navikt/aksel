@@ -30,7 +30,7 @@ export const Default: Story = (props) => (
     <FormProgress.Step>Innsending</FormProgress.Step>
   </FormProgress>
 );
-Default.args = { activeStep: 1, interactiveSteps: true };
+Default.args = { activeStep: 2, interactiveSteps: true };
 
 export const Controlled: Story = () => {
   const [open, setOpen] = useState(true);
@@ -39,7 +39,7 @@ export const Controlled: Story = () => {
       <button onClick={() => setOpen(!open)}>State: {open.toString()}</button>
       <FormProgress
         totalSteps={3}
-        activeStep={1}
+        activeStep={2}
         open={open}
         onOpenChange={setOpen}
       >

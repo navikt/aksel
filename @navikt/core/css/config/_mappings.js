@@ -182,7 +182,13 @@ const StyleMappings = {
     {
       component: "FormProgress",
       main: formCss,
-      dependencies: [typoCss, "button.css", primitivesCss, "stepper.css"], // TODO: ProgressBar
+      dependencies: [
+        typoCss,
+        "progress-bar.css",
+        "button.css",
+        primitivesCss,
+        "stepper.css",
+      ],
     },
     {
       component: "ToggleGroup",

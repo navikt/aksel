@@ -69,7 +69,11 @@ interface FormProgressComponent
  * @see 🏷️ {@link FormProgressProps}
  *
  * @example
- * TODO
+ * <FormProgress activeStep={2} totalSteps={3}>
+ *   <FormProgress.Step completed href="#">Children</FormProgress.Step>
+ *   <FormProgress.Step href="#">Personal information</FormProgress.Step>
+ *   <FormProgress.Step interactive={false}>Summary</FormProgress.Step>
+ * </FormProgress>
  */
 export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
   (
