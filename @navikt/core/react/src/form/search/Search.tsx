@@ -235,6 +235,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 "navds-body-short",
                 `navds-body-short--${size}`,
               )}
+              autoComplete={autocomplete ? "off" : "on"}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
             {(value ?? internalValue) && clearButton && (
