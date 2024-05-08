@@ -49,7 +49,9 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * direction='row'
    * direction={{xs: 'row', sm: 'column'}}
    */
-  direction?: ResponsiveProp<"row" | "column">;
+  direction?: ResponsiveProp<
+    "row" | "column" | "row-reverse" | "column-reverse"
+  >;
 }
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
