@@ -12,6 +12,7 @@ import {
   GuidePanel,
   Heading,
   Link,
+  List,
   Page,
   Stack,
   VStack,
@@ -49,9 +50,9 @@ export const IntroPage: Story = {
               >
                 <ApplicationPictogram title="Application" />
                 <VStack gap="1">
-                  <BodyShort size="small">NAV 10-07.03</BodyShort>
                   <Heading level="1" size="large">
-                    Søknad om [ytelse]
+                    Søknad om [ytelse] om masse rart og tullball og litt mer for
+                    å gå over flere linjer.
                   </Heading>
                 </VStack>
               </Stack>
@@ -65,54 +66,129 @@ export const IntroPage: Story = {
                     Hei, [Navn Navnesen]!
                   </Heading>
                   <BodyShort>
-                    Ingress fra nav.no (sjekk om API er en mulighet)
-                    <br />
-                    Link til produktsiden på nav.no.
+                    GuidePanel brukes til kort overordnet veiledning til
+                    søkeren. Språket er uformelt og betryggende. GuidePanel
+                    inkluderer ikke spesifikk veiledning knyttet til skjemafelt
+                    i søknaden.
+                  </BodyShort>
+                  <BodyShort>
+                    Her står også en kort forklaring av “produktet”. Kopier
+                    gjerne ingress fra nav.no. Det skal være nok informasjon til
+                    å forstå hva søknaden handler om uten å kopiere for mye
+                    innhold fra produktsiden.
+                  </BodyShort>
+                  <BodyShort>
+                    Avslutt med lenke til produktsiden på nav.no som åpnes i ny
+                    fane.
                   </BodyShort>
                 </VStack>
               </GuidePanel>
               <Box>
                 <Heading level="2" size="large" spacing>
-                  Hva kan jeg søke på her? (om relevant)
+                  Før du søker
                 </Heading>
                 <BodyLong spacing>
-                  Info om hva du kan søke på her, fordi det er ting du ikke kan
-                  søke på her. Som kan føre til at brukerne søker på feil ting.
+                  Her skal det kun stå informasjon brukeren vil ha stor nytte av
+                  før søknaden. Informasjon brukeren ikke trenger før start, og
+                  som brukeren vil få underveis, skal ikke stå her. Undersøk
+                  hvilken informasjon som ligger i søknadsdialogen og på
+                  kvitteringssiden, slik at vi minimerer dobbelt innhold.
+                  Eksempler på nyttig informasjon nedenfor - punktene tas bare
+                  med om de er relevante:
                 </BodyLong>
-                <Heading level="3" size="medium" spacing>
-                  Hva kan jeg ikke søke på her? (om relevant)
-                </Heading>
-                <BodyLong>
-                  Info om hva du ikke kan søke på med denne søknaden, hva du
-                  heller må søke på + link til andre søknader.
-                </BodyLong>
+                <List>
+                  <List.Item>
+                    Ting brukeren må ha gjort før søknaden.{" "}
+                    <i>
+                      Du må ha meldt deg som arbeidssøker før du kan søke om
+                      dagpenger.
+                    </i>
+                  </List.Item>
+                  <List.Item>
+                    Dokumentasjon brukeren kan bli bedt om.{" "}
+                    <i>
+                      Noen av opplysningene du gir underveis vil du bli bedt om
+                      å dokumentere. Du vil trenge xx og xx for å fullføre denne
+                      søknaden.
+                    </i>
+                  </List.Item>
+                  <List.Item>
+                    Automatisk lagring.{" "}
+                    <i>
+                      Vi lagrer svarene dine (xx timer) mens du fyller ut, så du
+                      kan ta pauser underveis.
+                    </i>
+                  </List.Item>
+                  <List.Item>
+                    Antall steg og estimert tidsbruk.{" "}
+                    <i>
+                      Det er XX steg i søknaden, og du kan regne med å bruke ca.
+                      XX minutter.
+                    </i>
+                  </List.Item>
+                  <List.Item>
+                    Søknadsfrister.{" "}
+                    <i>Husk at du må søke om xx innen xx dager.</i>
+                  </List.Item>
+                  <List.Item>
+                    Saksbehandlingstider og info om gyldighet, krav osv.{" "}
+                    <i>
+                      Vi bruker ca. xx uker på å behandle søknaden din. Husk at
+                      du må sende meldekort xx ofte selv om du ikke har fått
+                      svar på søknaden din om dagpenger ennå.
+                    </i>
+                  </List.Item>
+                </List>
               </Box>
               <Box>
-                <Heading level="2" size="large" spacing>
-                  Slik søker du
-                </Heading>
-                <BodyLong spacing>
-                  Kort info om søknadsprosessen:
-                  <br />
-                  Forventet mengde spørsmål og omtrent gjennomføringstid?
-                  <br />
-                  Forventet behov for dokumentasjon?
-                  <br />
-                  Hvor lenge vi lagrer svarene?
-                  <br />
-                  Når får du svar?
-                </BodyLong>
-                <BodyLong spacing>
-                  Eksempel: I søknaden stiller vi kun spørsmål som er relevante
-                  i din situasjon. Antall spørsmål og tiden det tar å søke vil
-                  derfor kunne variere. De fleste bruker 20-30 minutter.
-                </BodyLong>
-                <BodyLong>
-                  Noen av opplysningene du gir i søknaden må du dokumentere. Du
-                  får beskjed underveis i søknaden om hvilken dokumentasjon du
-                  må sende inn. Du kan ta pauser når du fyller ut søknaden. Vi
-                  lagrer søknaden i opptil ## timer/dager mens du fyller ut.
-                </BodyLong>
+                <Accordion>
+                  <Accordion.Item>
+                    <Accordion.Header>
+                      Informasjon vi henter om deg
+                    </Accordion.Header>
+                    <Accordion.Content>
+                      <BodyLong spacing>
+                        Her skal det så informasjon om hvor vi vil hente
+                        opplysninger om søkeren og hva slags opplysninger vi
+                        henter.
+                      </BodyLong>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                  <Accordion.Item>
+                    <Accordion.Header>
+                      Hvordan vi behandler personopplysninger
+                    </Accordion.Header>
+                    <Accordion.Content>
+                      <BodyLong spacing>
+                        Her skal det stå informasjon om hvordan vi behandler
+                        personopplysningene til søkeren.
+                      </BodyLong>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                  <Accordion.Item>
+                    <Accordion.Header>Automatis behandling</Accordion.Header>
+                    <Accordion.Content>
+                      <BodyLong spacing>
+                        Her skal det stå informasjon om hva automatisk
+                        behandling er for noe og hva det betyr for søkeren. Samt
+                        informasjon om søkers rettigheter ved automatisk avslag.
+                      </BodyLong>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                  <Accordion.Item>
+                    <Accordion.Header>
+                      Vi lagrer svar underveis
+                    </Accordion.Header>
+                    <Accordion.Content>
+                      <BodyLong spacing>
+                        Her skal det stå informasjon om hvordan denne søknaden
+                        mellomlagrer informasjonen til søkeren og hvor lenge
+                        informasjonen lagres. Både automatisk lagring og
+                        samtykke til lagring med lagre-knapp.
+                      </BodyLong>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                </Accordion>
               </Box>
               <Box>
                 <BodyLong spacing>
@@ -134,55 +210,6 @@ export const IntroPage: Story = {
                 >
                   Start søknad
                 </Button>
-              </Box>
-              <Box paddingBlock="12 0">
-                <Accordion>
-                  <Accordion.Item>
-                    <Accordion.Header>
-                      Informasjon vi henter om deg
-                    </Accordion.Header>
-                    <Accordion.Content>
-                      <BodyLong spacing>
-                        Info om hvor vi vil hente info fra og hva slags info vi
-                        henter. Se standardtekster for søknadsdialoger på Navet.
-                      </BodyLong>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                  <Accordion.Item>
-                    <Accordion.Header>
-                      Hvordan vi behandler personopplysninger
-                    </Accordion.Header>
-                    <Accordion.Content>
-                      <BodyLong spacing>
-                        Informasjon om hvordan søknaden behandler
-                        personopplysningene til bruker. + Link til info om
-                        hvordan NAV behandler personopplysninger.
-                      </BodyLong>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                  <Accordion.Item>
-                    <Accordion.Header>Automatis behandling</Accordion.Header>
-                    <Accordion.Content>
-                      <BodyLong spacing>
-                        Informasjon om hva automatisk behandling er for noe og
-                        hva det betyr for bruker. Noe om rettigheter ved
-                        automatisk avslag.
-                      </BodyLong>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                  <Accordion.Item>
-                    <Accordion.Header>
-                      Vi lagrer svar underveis
-                    </Accordion.Header>
-                    <Accordion.Content>
-                      <BodyLong spacing>
-                        Info om hvordan denne søknaden mellomlagrer
-                        informasjonen din, både automatisk og med lagreknapp.Se
-                        standardtekster for søknadsdialoger på Navet.
-                      </BodyLong>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                </Accordion>
               </Box>
             </VStack>
           </Page.Block>
