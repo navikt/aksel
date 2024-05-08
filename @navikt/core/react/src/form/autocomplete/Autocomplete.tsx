@@ -40,9 +40,11 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   const descendants = useAutocompleteDescendants();
   return (
     <DismissableLayer>
-      <RovingFocus asChild descendants={descendants}>
-        <Floating>{children}</Floating>
-      </RovingFocus>
+      <AutocompleteDescendantsProvider value={descendants}>
+        <RovingFocus asChild descendants={descendants}>
+          <Floating>{children}</Floating>
+        </RovingFocus>
+      </AutocompleteDescendantsProvider>
     </DismissableLayer>
   );
 };
@@ -76,7 +78,24 @@ export const AutocompleteItem = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <div className="navds-autocomplete-item">{children}</div>;
+  const { register, index, descendants } = useAutocompleteDescendant();
+  return (
+    <div
+      className="navds-autocomplete-item"
+      role="button"
+      tabIndex={0}
+      ref={register}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowDown") {
+          descendants.next(index)?.node.focus();
+        } else if (event.key === "ArrowUp") {
+          descendants.prev(index)?.node.focus();
+        }
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 Autocomplete.Anchor = AutocompleteAnchor;
