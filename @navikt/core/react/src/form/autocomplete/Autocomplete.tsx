@@ -1,5 +1,6 @@
 import React from "react";
 import { DismissableLayer } from "../../overlay/dismiss/DismissableLayer";
+import { Floating } from "../../overlays/floating/Floating";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { RovingFocus } from "./RovingFocus";
 import { SlottedDivElementRef } from "./SlottedDivElement";
@@ -15,12 +16,17 @@ import { SlottedDivElementRef } from "./SlottedDivElement";
 // perhaps a desired API?
 //
 // <Autocomplete>
-//    <Autocomplete.Item>
-//       ...
-//    </Autocomplete.Item>
-//    <Autocomplete.Item>
-//       ...
-//    </Autocomplete.Item>
+//    <Autocomplete.Anchor>
+//        ...
+//    </Autocomplete.Anchor>
+//    <Autocomplete.Content>
+//        <Autocomplete.Item>
+//           ...
+//        </Autocomplete.Item>
+//        <Autocomplete.Item>
+//           ...
+//        </Autocomplete.Item>
+//    <Autocomplete.Content>
 // </Autocomplete>
 
 export const [
@@ -35,8 +41,46 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   return (
     <DismissableLayer>
       <RovingFocus asChild descendants={descendants}>
-        {children}
+        <Floating>{children}</Floating>
       </RovingFocus>
     </DismissableLayer>
   );
 };
+
+export const AutocompleteAnchor = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <Floating.Anchor className="navds-autocomplete-anchor">
+      {children}
+    </Floating.Anchor>
+  );
+};
+
+export const AutocompleteContent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return <div className="navds-autocomplete-content">{children}</div>;
+};
+
+export const AutocompleteItem = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <Floating.Content className="navds-autocomplete-item">
+      {children}
+    </Floating.Content>
+  );
+};
+
+Autocomplete.Anchor = AutocompleteAnchor;
+Autocomplete.Item = AutocompleteItem;
+Autocomplete.Content = AutocompleteContent;
+
+export default Autocomplete;
