@@ -68,8 +68,9 @@ export const Controlled: StoryFn = () => {
 
 export const Chromatic: StoryFn = () => (
   <VStack gap="10">
-    <Default activeStep={1} totalSteps={7} />
-
+    <div>
+      <Default activeStep={1} totalSteps={7} />
+    </div>
     <div>
       <Controlled />
     </div>
