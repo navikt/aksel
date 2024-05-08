@@ -1,10 +1,9 @@
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import { FormProgress } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const activeStep = useGetStepFromPath();
+  const activeStep = 2; // Finn steg basert på rute
 
   return (
     <div style={{ width: "300px" }}>
@@ -26,11 +25,6 @@ const Example = () => {
     </div>
   );
 };
-
-function useGetStepFromPath() {
-  const router = useRouter();
-  return parseInt(router.asPath.split("/steg-")[1]) || 2;
-}
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { variant: "static" });
