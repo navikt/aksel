@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
-import FormProgress from "./FormProgress";
+import VStack from "../../layout/stack/VStack";
+import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
   title: "ds-react/FormProgress",
@@ -15,10 +16,13 @@ export default {
   parameters: { layout: "padded", chromatic: { disable: true } },
 } satisfies Meta<typeof FormProgress>;
 
-type Story = StoryFn<typeof FormProgress>;
+type ControllableProps = Pick<
+  FormProgressProps,
+  "activeStep" | "totalSteps" | "interactiveSteps"
+>;
 
-export const Default: Story = (props) => (
-  <FormProgress {...props} totalSteps={7}>
+export const Default: StoryFn<ControllableProps> = (props) => (
+  <FormProgress {...props}>
     <FormProgress.Step completed>Start søknad</FormProgress.Step>
     <FormProgress.Step>Personopplysninger</FormProgress.Step>
     <FormProgress.Step interactive={false}>Saksopplysninger</FormProgress.Step>
@@ -30,9 +34,9 @@ export const Default: Story = (props) => (
     <FormProgress.Step>Innsending</FormProgress.Step>
   </FormProgress>
 );
-Default.args = { activeStep: 2, interactiveSteps: true };
+Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 
-export const Controlled: Story = () => {
+export const Controlled: StoryFn = () => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -54,4 +58,14 @@ export const Controlled: Story = () => {
     </>
   );
 };
-Controlled.parameters = { chromatic: { disable: false } };
+
+export const Chromatic: StoryFn = () => (
+  <VStack gap="10">
+    <Default activeStep={1} totalSteps={7} />
+
+    <div>
+      <Controlled />
+    </div>
+  </VStack>
+);
+Chromatic.parameters = { chromatic: { disable: false } };
