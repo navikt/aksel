@@ -2,6 +2,8 @@ import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import Button from "../../button/Button";
 import Collapsible from "../../collapsible/Collapsible";
+import { useI18n } from "../../i18n/i18n.context";
+import { ComponentTranslation } from "../../i18n/i18n.types";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
 import { Stepper } from "../../stepper";
@@ -44,12 +46,10 @@ export interface FormProgressProps
    * @default true
    */
   interactiveSteps?: boolean;
-
-  // TODO:
   /**
    * i18n-API for customizing texts and labels
    */
-  //translations?: ComponentTranslation<"FormProgress">;
+  translations?: ComponentTranslation<"FormProgress">;
 }
 
 interface FormProgressComponent
@@ -81,10 +81,13 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
       children,
       onStepChange,
       interactiveSteps,
+      translations,
       ...rest
     }: FormProgressProps,
     ref,
   ) => {
+    const translate = useI18n("FormProgress", translations);
+
     return (
       <div ref={ref} {...rest}>
         <ProgressBar
@@ -96,7 +99,9 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
         <Collapsible open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
-              {`Steg ${activeStep} av ${totalSteps}`}
+              {translate("step", {
+                replacements: { activeStep, totalSteps },
+              })}
             </BodyShort>
             <Collapsible.Trigger asChild>
               <Button
@@ -106,10 +111,10 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
                 icon={<ChevronDownIcon aria-hidden />}
               >
                 <span className="navds-form-progress__btn-txt-hide">
-                  Skjul alle steg
+                  {translate("hideAllSteps")}
                 </span>
                 <span className="navds-form-progress__btn-txt-show">
-                  Vis alle steg
+                  {translate("showAllSteps")}
                 </span>
               </Button>
             </Collapsible.Trigger>

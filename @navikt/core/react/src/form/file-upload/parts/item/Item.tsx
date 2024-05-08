@@ -1,11 +1,11 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
 import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
+import { useI18n } from "../../../../i18n/i18n.context";
+import { ComponentTranslation } from "../../../../i18n/i18n.types";
 import { BodyShort } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
 import { useFileUploadTranslation } from "../../FileUpload.context";
-import { useI18n } from "../../i18n/i18n.context";
-import { ComponentTranslation } from "../../i18n/i18n.types";
 import { FileItem } from "./Item.types";
 import ItemButton from "./ItemButton";
 import ItemIcon from "./ItemIcon";
