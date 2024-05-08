@@ -3,7 +3,7 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { describe, expect, test, vi } from "vitest";
-import { UNSAFE_Combobox } from "./index";
+import { UNSAFE_Combobox } from "../index";
 
 const options = [
   "banana",

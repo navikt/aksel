@@ -100,7 +100,9 @@ export interface ComboboxProps
    *
    * @param event
    */
-  onClear?: (event: React.PointerEvent | React.KeyboardEvent) => void;
+  onClear?: (
+    event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent,
+  ) => void;
   /**
    * Callback function triggered whenever an option is selected or de-selected.
    *

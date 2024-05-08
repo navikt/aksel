@@ -69,7 +69,8 @@ function godPraksisPanes(S: StructureBuilder) {
                 S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
                   id,
                 }),
-              ]);
+              ])
+              .schemaType("gp.tema.undertema");
           })
           .initialValueTemplates([]),
     }),
@@ -112,7 +113,8 @@ function godPraksisPanes(S: StructureBuilder) {
                     S.initialValueTemplateItem("gp.artikkel.by.undertema", {
                       undertema_id,
                     }),
-                  ]);
+                  ])
+                  .schemaType("gp.tema.undertema");
               })
               .initialValueTemplates([]);
           })
@@ -134,7 +136,8 @@ function godPraksisPanes(S: StructureBuilder) {
                 S.initialValueTemplateItem("gp.artikkel.by.innholdstype", {
                   id,
                 }),
-              ]);
+              ])
+              .schemaType("aksel_artikkel");
           })
           .initialValueTemplates([]),
     }),
