@@ -168,7 +168,10 @@ export const Small: StoryFn = () => (
     open
     onClose={() => null}
     width="small"
-    header={{ heading: "Simple header" }}
+    header={{
+      heading: "Simple header",
+      size: "small",
+    }}
   >
     <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
   </Modal>

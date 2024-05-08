@@ -121,6 +121,10 @@
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
 }
 
+.navds-modal__body--small {
+  font-size: var(--a-font-size-small);
+}
+
 .navds-modal__header + .navds-modal__body {
   padding-top: var(--a-spacing-0);
 }
