@@ -47,7 +47,7 @@ export interface FormProgressProps
    */
   interactiveSteps?: boolean;
   /**
-   * i18n-API for customizing texts and labels
+   * i18n API for customizing texts and labels.
    */
   translations?: ComponentTranslation<"FormProgress">;
 }
@@ -100,6 +100,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
           valueMax={totalSteps}
           className="navds-form-progress__bar"
         />
+
         <Collapsible open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
@@ -123,6 +124,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
               </Button>
             </Collapsible.Trigger>
           </HStack>
+
           <Collapsible.Content className="navds-form-progress__stepper">
             <Stepper
               activeStep={activeStep}

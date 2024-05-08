@@ -38,16 +38,18 @@ export const Controlled: Story = () => {
     <>
       <button onClick={() => setOpen(!open)}>State: {open.toString()}</button>
       <FormProgress
-        totalSteps={3}
-        activeStep={2}
+        totalSteps={5}
+        activeStep={3}
         open={open}
         onOpenChange={setOpen}
       >
         <FormProgress.Step completed>Start søknad</FormProgress.Step>
-        <FormProgress.Step>Personopplysninger</FormProgress.Step>
-        <FormProgress.Step interactive={false}>
-          Saksopplysninger
+        <FormProgress.Step completed interactive={false}>
+          Personopplysninger
         </FormProgress.Step>
+        <FormProgress.Step>Saksopplysninger</FormProgress.Step>
+        <FormProgress.Step>Vedlegg</FormProgress.Step>
+        <FormProgress.Step interactive={false}>Oppsummering</FormProgress.Step>
       </FormProgress>
     </>
   );
