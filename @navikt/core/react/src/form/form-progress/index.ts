@@ -2,8 +2,6 @@
 export {
   default as FormProgress,
   type FormProgressProps,
-} from "./FormProgress";
-export {
-  default as FormProgressStep,
+  FormProgressStep,
   type FormProgressStepProps,
-} from "./FormProgressStep";
+} from "./FormProgress";

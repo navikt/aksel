@@ -147,4 +147,6 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
 
 FormProgress.Step = Stepper.Step;
 
+export const FormProgressStep = Stepper.Step;
+
 export default FormProgress;
