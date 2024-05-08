@@ -1,4 +1,3 @@
-import NextLink from "next/link";
 import { FormProgress } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -8,16 +7,12 @@ const Example = () => {
   return (
     <div style={{ width: "300px" }}>
       <FormProgress totalSteps={5} activeStep={activeStep}>
-        <FormProgress.Step as={NextLink} href="#/steg-1" completed>
+        <FormProgress.Step href="#/steg-1" completed>
           Dine opplysninger
         </FormProgress.Step>
-        <FormProgress.Step as={NextLink} href="#/steg-2">
-          Barn
-        </FormProgress.Step>
-        <FormProgress.Step as={NextLink} href="#/steg-3">
-          Fastlege
-        </FormProgress.Step>
-        <FormProgress.Step as={NextLink} href="#/steg-4">
+        <FormProgress.Step href="#/steg-2">Barn</FormProgress.Step>
+        <FormProgress.Step href="#/steg-3">Fastlege</FormProgress.Step>
+        <FormProgress.Step href="#/steg-4">
           Tilleggsopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>Oppsummering</FormProgress.Step>
