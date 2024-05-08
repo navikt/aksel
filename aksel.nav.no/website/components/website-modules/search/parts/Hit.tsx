@@ -68,18 +68,20 @@ export const Hit = forwardRef<
         {!simple && <HeadingLinks hit={hit} />}
       </div>
 
-      {!simple && hit.item?.status?.bilde && (
+      {!simple && (
         <div className="hidden aspect-square w-24 sm:block">
-          <Image
-            src={urlFor(hit.item.status.bilde).auto("format").url()}
-            decoding="sync"
-            width="96"
-            height="96"
-            layout="fixed"
-            objectFit="contain"
-            alt={hit.item?.heading + " thumbnail"}
-            aria-hidden
-          />
+          {hit.item?.status?.bilde && (
+            <Image
+              src={urlFor(hit.item.status.bilde).auto("format").url()}
+              decoding="sync"
+              width="96"
+              height="96"
+              layout="fixed"
+              objectFit="contain"
+              alt={hit.item?.heading + " thumbnail"}
+              aria-hidden
+            />
+          )}
         </div>
       )}
     </li>
