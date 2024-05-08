@@ -1,13 +1,11 @@
 import { createContext, useContext, useMemo } from "react";
-import { allArticleDocuments } from "@/sanity/config";
 import { SearchHitT, SearchResultsT } from "@/types";
 import { useSearch } from "../hooks";
 import { formatRawResults } from "../utils";
-import { SearchContext } from "./SearchProvider";
 
 type SearchResultContextType = {
   results: SearchResultsT | null;
-  update: (value: string, tags: string[]) => void;
+  update: (value: string) => void;
   error: any;
   isValidating: boolean;
   reset: () => void;
@@ -23,7 +21,6 @@ export const SearchResultProvider = ({
   children: React.ReactNode;
 }) => {
   const context = useSearch();
-  const { tags } = useContext(SearchContext);
 
   const mostResent: Omit<SearchHitT, "score" | "anchor">[] | null =
     useMemo(() => {
@@ -31,14 +28,8 @@ export const SearchResultProvider = ({
         return null;
       }
 
-      return formatRawResults(
-        context.rawData
-          .filter((x) =>
-            (tags.length > 0 ? tags : allArticleDocuments).includes(x._type),
-          )
-          .slice(0, 20),
-      );
-    }, [context.rawData, tags]);
+      return formatRawResults(context.rawData.slice(0, 20));
+    }, [context.rawData]);
 
   return (
     <SearchResultContext.Provider value={{ ...context, mostResent }}>

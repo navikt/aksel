@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext } from "react";
+import { createContext, useCallback } from "react";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { useSearch } from "../hooks";
-import { SearchContext } from "./SearchProvider";
 
 type SearchLoggingContextType = {
   logSuccess: (index: number, url: string, tag?: string) => void;
@@ -17,7 +16,6 @@ export const SearchLoggingProvider = ({
   children: React.ReactNode;
 }) => {
   const context = useSearch();
-  const { tags } = useContext(SearchContext);
 
   const logSuccess = useCallback(
     (index: number, url: string, tag?: string) => {
@@ -27,7 +25,6 @@ export const SearchLoggingProvider = ({
       const data = {
         type: "suksess",
         searchedFromUrl: window.location.pathname,
-        filter: tags,
         tag,
         index,
         url,
@@ -36,7 +33,7 @@ export const SearchLoggingProvider = ({
       };
       amplitude.track(AmplitudeEvents.søk, data);
     },
-    [tags, context?.results],
+    [context?.results],
   );
 
   return (

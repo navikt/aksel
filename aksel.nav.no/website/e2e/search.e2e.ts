@@ -15,8 +15,9 @@ test("test", async ({ page }) => {
     .analyze();
   expect(accessibilityScanResults.violations).toEqual([]);
 
-  await page.getByPlaceholder("Søk gjennom hele aksel").click();
-  await page.getByPlaceholder("Søk gjennom hele aksel").fill("button");
+  const placeholder = "Søk på artikler, f.eks. Button";
+  await page.getByPlaceholder(placeholder).click();
+  await page.getByPlaceholder(placeholder).fill("button");
 
   const SearchHitsScan = await new AxeBuilder({ page })
     .disableRules(["definition-list", "scrollable-region-focusable"])

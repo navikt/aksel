@@ -1,6 +1,6 @@
 import React from "react";
 import { Chips } from "../../../chips";
-import { useInputContext } from "../Input/inputContext";
+import { useInputContext } from "../Input/Input.context";
 import { ComboboxOption } from "../types";
 import { useSelectedOptionsContext } from "./selectedOptionsContext";
 
