@@ -37,7 +37,7 @@ export const Default: StoryFn = ({
 Default.argTypes = {
   width: {
     control: "radio",
-    options: widths,
+    options: [...widths],
   },
   background: {
     control: "radio",
