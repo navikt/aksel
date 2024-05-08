@@ -1,4 +1,4 @@
-import { ComponentTranslation } from "../../../../i18n/i18n.types";
+import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
 import { FormFieldProps } from "../../../useFormField";
 import { FileUploadBaseProps } from "../../FileUpload.types";
 

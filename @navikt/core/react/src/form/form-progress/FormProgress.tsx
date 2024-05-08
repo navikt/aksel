@@ -2,13 +2,12 @@ import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import Button from "../../button/Button";
 import Collapsible from "../../collapsible/Collapsible";
-import { useI18n } from "../../i18n/i18n.context";
-import { ComponentTranslation } from "../../i18n/i18n.types";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
-import { Stepper } from "../../stepper";
+import { Stepper, StepperStepProps } from "../../stepper";
 import { BodyShort } from "../../typography";
-import FormProgressStep from "./FormProgressStep";
+import { useI18n } from "../../util/i18n/i18n.context";
+import { ComponentTranslation } from "../../util/i18n/i18n.types";
 
 export interface FormProgressProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -52,6 +51,8 @@ export interface FormProgressProps
   translations?: ComponentTranslation<"FormProgress">;
 }
 
+export type FormProgressStepProps = StepperStepProps;
+
 interface FormProgressComponent
   extends React.ForwardRefExoticComponent<
     FormProgressProps & React.RefAttributes<HTMLDivElement>
@@ -59,7 +60,7 @@ interface FormProgressComponent
   /**
    * To be used inside `<FormProgress>`.
    */
-  Step: typeof FormProgressStep;
+  Step: typeof Stepper.Step;
 }
 
 /**
@@ -140,6 +141,6 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
   },
 ) as FormProgressComponent;
 
-FormProgress.Step = FormProgressStep;
+FormProgress.Step = Stepper.Step;
 
 export default FormProgress;
