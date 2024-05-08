@@ -30,7 +30,7 @@ export const Hit = forwardRef<
     <li
       ref={ref}
       className={cl(
-        "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 focus-within:border-b-transparent has-[+_:focus-within]:border-b-transparent",
+        "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 has-[+_*_:focus-visible]:border-b-transparent has-[:focus-visible]:border-b-transparent",
       )}
     >
       <div className="w-full truncate px-2 py-3">
