@@ -64,7 +64,11 @@ export const AutocompleteContent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <div className="navds-autocomplete-content">{children}</div>;
+  return (
+    <Floating.Content className="navds-autocomplete-content">
+      {children}
+    </Floating.Content>
+  );
 };
 
 export const AutocompleteItem = ({
@@ -72,11 +76,7 @@ export const AutocompleteItem = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return (
-    <Floating.Content className="navds-autocomplete-item">
-      {children}
-    </Floating.Content>
-  );
+  return <div className="navds-autocomplete-item">{children}</div>;
 };
 
 Autocomplete.Anchor = AutocompleteAnchor;

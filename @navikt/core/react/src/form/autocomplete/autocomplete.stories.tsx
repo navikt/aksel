@@ -11,7 +11,6 @@ export default {
 export const Default = () => {
   return (
     <div className="navds-autocomplete-test-class-for-div-wrapper">
-      <p>test text</p>
       <Autocomplete>
         <Autocomplete.Anchor>
           <Search label="Søk på nav sine sider" />
