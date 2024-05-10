@@ -55,21 +55,21 @@ function Example() {
               <Heading level="3" size="medium" spacing>
                 Hei, [Navn Navnesen]!
               </Heading>
-              <BodyShort spacing>
+              <BodyLong spacing>
                 GuidePanel brukes til kort overordnet veiledning til søkeren.
                 Språket er uformelt og betryggende. GuidePanel inkluderer ikke
                 spesifikk veiledning knyttet til skjemafelt i søknaden.
-              </BodyShort>
-              <BodyShort spacing>
+              </BodyLong>
+              <BodyLong spacing>
                 Her står også en kort forklaring av “produktet”. Kopier gjerne
                 ingress fra nav.no. Det skal være nok informasjon til å forstå
                 hva søknaden handler om uten å kopiere for mye innhold fra
                 produktsiden.
-              </BodyShort>
-              <BodyShort>
+              </BodyLong>
+              <BodyLong>
                 Avslutt med lenke til produktsiden på nav.no som åpnes i ny
                 fane.
-              </BodyShort>
+              </BodyLong>
             </GuidePanel>
             <Box>
               <Heading level="2" size="large" spacing>
