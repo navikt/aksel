@@ -69,6 +69,12 @@ export const TemplatesArtikkel = defineType({
       },
     }),
     defineField({
+      title: "Github discussions link",
+      name: "gh_discussions",
+      type: "url",
+      group: "settings",
+    }),
+    defineField({
       title: "Sidebar index",
       description:
         "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
