@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
+  Alert,
   Bleed,
   BodyLong,
   BodyShort,
@@ -71,6 +72,11 @@ function Example() {
                 fane.
               </BodyShort>
             </GuidePanel>
+            <Alert variant="info">
+              Her skal det stå en viktig melding om tidsbestemte eller
+              situasjonsbestemte forhold som påvirker søknaden. <br />
+              Bruk kun 1 Info Alert per side.
+            </Alert>
             <Box>
               <Heading level="2" size="large" spacing>
                 Før du søker
@@ -214,7 +220,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  title: "Introside",
-  desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
+  index: 2,
+  title: "Med Alert",
+  desc: "I noen tilfeller oppstår det akutte eller tidsbestemte forhold rundt søknaden som brukeren må vite om før de starter søknaden. Dette kan være frister, situasjonsbestemte forhold eller annen viktig informasjon som brukeren bør ha før de starter søknaden. Alerten skal være informativ og kortfattet.",
 };

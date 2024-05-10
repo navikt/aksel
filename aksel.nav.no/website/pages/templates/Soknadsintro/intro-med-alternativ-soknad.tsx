@@ -73,6 +73,24 @@ function Example() {
             </GuidePanel>
             <Box>
               <Heading level="2" size="large" spacing>
+                Her kan du søke om
+              </Heading>
+              <BodyLong spacing>
+                Denne seksjonen brukes dersom det er utfordrende å bruke riktig
+                søknad. Her skal det stå informasjon om hva du kan søke om med
+                denne søknaden. Bruk punktliste for god lesbarhet.
+              </BodyLong>
+              <Heading level="3" size="medium" spacing>
+                Dette kan du ikke søke om her
+              </Heading>
+              <BodyLong spacing>
+                Deretter skal det stå informasjon om hva du ikke kan søke om i
+                denne søknaden, og link til alternativ søknad. Bruk punktliste
+                for god lesbarhet.
+              </BodyLong>
+            </Box>
+            <Box>
+              <Heading level="2" size="large" spacing>
                 Før du søker
               </Heading>
               <BodyLong spacing>
@@ -214,7 +232,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  title: "Introside",
-  desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
+  index: 3,
+  title: "Alternativ søknad",
+  desc: "I noen tilfeller finnes det lignende søknader som dekker litt andre behov. For å redusere sjansen for at brukere søker på feil ytelse, så kan du inkludere en seksjon som sier hva du kan søke på i denne søknaden, og hva du må bruke en annen søknad for.",
 };
