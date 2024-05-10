@@ -18,6 +18,7 @@ import ExpansionCard from "@/cms/expansioncard/ExpansionCard";
 import PropsSeksjon from "@/cms/props/PropsSeksjon";
 import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import SideModul from "@/cms/side-modul/SideModul";
+import StandardHightlight from "@/cms/standard-highlight/StandardHightlight";
 import Tabell from "@/cms/tabell/Tabell";
 import TastaturModul from "@/cms/tastatur-tabell/TastaturTabell";
 import Tips from "@/cms/tips/Tips";
@@ -46,6 +47,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
+    standard_highlight: ({ value }) => <StandardHightlight node={value} />,
   },
   unknownType: () => null,
   block: {

@@ -12,12 +12,16 @@ type StandardHightlightProps = {
 const StandardHightlight = ({ node }: StandardHightlightProps) => {
   const id = useId();
 
+  if (!node.text || !node.title) return null;
+
   return (
     <Box
       as="section"
       background="surface-subtle"
       padding="6"
       aria-labelledby={id}
+      className="mb-7 last:mb-0 dark:bg-surface-neutral-moderate"
+      borderRadius="large"
     >
       <HStack justify="space-between" gap="4" align="center" wrap={false}>
         <Heading size="small" as="p" textColor="subtle" id={id} aria-hidden>
@@ -33,7 +37,6 @@ const StandardHightlight = ({ node }: StandardHightlightProps) => {
 
 function formatText(text: string) {
   if (!text) return null;
-  console.log(text.split("\n"));
   return text
     .split("\n")
     .filter(Boolean)
