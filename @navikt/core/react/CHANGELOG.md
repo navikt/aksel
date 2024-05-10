@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 6.7.1
+
+### Patch Changes
+
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
+- Combobox: Remove 'Ingen søketreff' when custom options allowed ([#2895](https://github.com/navikt/aksel/pull/2895))
+
+- Datepicker, MonthPicker: Rekkefølgen på årstall i Select er reversert slik at siste år er øverst. Dette er endret for å være bedre tilpasset ekspertsystemer der de mest relevante årene ble vist lengst unna musepeker ved klikk. ([#2882](https://github.com/navikt/aksel/pull/2882))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.7.1
+  - @navikt/aksel-icons@6.7.1
+
 ## 6.7.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.7.1
+
+### Patch Changes
+
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
 ## 6.7.0
 
 ### Minor Changes
