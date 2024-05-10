@@ -79,7 +79,8 @@
 }
 
 .navds-read-more__button:hover > .navds-read-more__expand-icon {
-  transform: translateY(1px);
+  position: relative;
+  top: 1px;
 }
 
 .navds-read-more--open > .navds-read-more__button > .navds-read-more__expand-icon {
@@ -87,5 +88,6 @@
 }
 
 .navds-read-more--open > .navds-read-more__button:hover > .navds-read-more__expand-icon {
-  transform: translateY(-1px) rotate(-180deg);
+  top: -1px;
+  transform: rotate(-180deg);
 }
