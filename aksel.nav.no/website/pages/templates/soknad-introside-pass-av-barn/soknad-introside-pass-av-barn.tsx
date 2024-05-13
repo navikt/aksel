@@ -31,8 +31,8 @@ function Example() {
   return (
     <Page data-aksel-template="500-v2" footer={<Footer />}>
       <Header />
-      <VStack gap="8">
-        <Page.Block as="main" width="text" gutters>
+      <VStack as="main" gap="8">
+        <Page.Block width="text" gutters>
           <Bleed marginInline={{ lg: "24" }}>
             <Stack
               align="center"
