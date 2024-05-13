@@ -570,6 +570,16 @@
         "default": "./cjs/form/form-summary/index.js"
       }
     },
+    "./FormProgress": {
+      "import": {
+        "types": "./esm/form/form-progress/index.d.ts",
+        "default": "./esm/form/form-progress/index.js"
+      },
+      "require": {
+        "types": "./cjs/form/form-progress/index.d.ts",
+        "default": "./cjs/form/form-progress/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

@@ -19,6 +19,7 @@ add links to project-tasks, slack discussions etc here
 - Check that styling is correctly exported from `@navikt/core/css/index.css`
 - Check that correct tokens for component is documented in `@navikt/core/css/tokens.json`
 - Check that only needed components and types are exported from `@navikt/core/react/src/index.ts`
+- Check that component is exported from `@navikt/core/react/package.json`
 - Add JSDoc to component (see other components for reference)
 - Create storybook-stories for relevant component variations and compositions. Stories are used for [visual regression testing](https://www.chromatic.com/docs/), so make sure they are complete.
 - Is the component sufficiently complex to warrant tests? Add some unit-tests for vitest.
