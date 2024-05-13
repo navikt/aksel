@@ -1,9 +1,9 @@
 import { defineField, defineType } from "sanity";
 import { Chat2Icon } from "@navikt/aksel-icons";
-import StandardHightlight from "@/cms/standard-highlight/StandardHightlight";
+import AkselExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
 
-export const StandardHighlightBlock = defineType({
-  name: "standard_highlight",
+export const ExampletextBlock = defineType({
+  name: "exampletext_block",
   title: "Eksempel/Standard tekst",
   type: "object",
   icon: Chat2Icon,
@@ -29,6 +29,6 @@ export const StandardHighlightBlock = defineType({
     },
   },
   components: {
-    preview: (values) => <StandardHightlight node={values as any} />,
+    preview: (values) => <AkselExampletextBlock node={values as any} />,
   },
 });

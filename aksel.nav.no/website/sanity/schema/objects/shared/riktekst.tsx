@@ -170,7 +170,7 @@ const Riktekst = (
     "do_dont",
     "alert",
     "tabell_v2",
-    "standard_highlight",
+    "exampletext_block",
   ];
 
   const komponent = [
@@ -180,7 +180,7 @@ const Riktekst = (
     "token_ref",
   ];
 
-  const templates = ["kode_eksempler", "standard_highlight"];
+  const templates = ["kode_eksempler", "exampletext_block"];
 
   const grunnleggende = ["spesial_seksjon"];
 

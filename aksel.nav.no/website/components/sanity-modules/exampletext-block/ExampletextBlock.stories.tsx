@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AkselTheme } from "@/sb-util";
-import StandardHightlight from "./StandardHightlight";
+import ExampletextBlock from "./ExampletextBlock";
 
 const meta = {
-  title: "Sanity-modules/StandardHightlight",
-  component: StandardHightlight,
+  title: "Sanity-modules/ExampletextBlock",
+  component: ExampletextBlock,
   tags: ["autodocs"],
-} satisfies Meta<typeof StandardHightlight>;
+} satisfies Meta<typeof ExampletextBlock>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

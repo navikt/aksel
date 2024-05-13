@@ -79,7 +79,7 @@ export const schema: SchemaPluginOptions = {
     object.KomponentIntro,
 
     /* Templatesider */
-    object.StandardHighlightBlock,
+    object.ExampletextBlock,
 
     /* Prinsipper */
     object.HeroBilde,

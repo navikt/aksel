@@ -2,14 +2,14 @@ import { useId } from "react";
 import { BodyLong, Box, CopyButton, HStack, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 
-type StandardHightlightProps = {
+type ExampletextBlockProps = {
   node: {
     title: string;
     text: string;
   };
 };
 
-const StandardHightlight = ({ node }: StandardHightlightProps) => {
+const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
   const id = useId();
 
   if (!node.text || !node.title) return null;
@@ -43,10 +43,10 @@ function formatText(text: string) {
     .map((line, index) => <BodyLong key={index}>{line}</BodyLong>);
 }
 
-export default function Component(props: StandardHightlightProps) {
+export default function Component(props: ExampletextBlockProps) {
   return (
-    <ErrorBoundary boundaryName="StandardHightlight">
-      <StandardHightlight {...props} />
+    <ErrorBoundary boundaryName="ExampletextBlock">
+      <ExampletextBlock {...props} />
     </ErrorBoundary>
   );
 }
