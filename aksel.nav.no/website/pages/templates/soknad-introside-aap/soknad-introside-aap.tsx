@@ -74,7 +74,7 @@ function Example() {
                 .
               </BodyLong>
             </GuidePanel>
-            <Box>
+            <div>
               <Heading level="2" size="large" spacing>
                 Før du søker
               </Heading>
@@ -86,8 +86,8 @@ function Example() {
                   Du kan søke om AAP selv om du ikke har mottatt sykepenger.
                 </List.Item>
               </List>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Accordion>
                 <Accordion.Item>
                   <Accordion.Header>
@@ -134,7 +134,7 @@ function Example() {
                   </Accordion.Content>
                 </Accordion.Item>
               </Accordion>
-            </Box>
+            </div>
             <Box paddingBlock="0 12">
               <BodyLong>
                 Det er viktig at du gir oss riktige opplysninger slik at vi kan

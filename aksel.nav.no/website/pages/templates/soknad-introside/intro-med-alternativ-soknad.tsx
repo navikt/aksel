@@ -74,7 +74,7 @@ function Example() {
                 fane.
               </BodyLong>
             </GuidePanel>
-            <Box>
+            <div>
               <Heading level="2" size="large" spacing>
                 Her kan du søke om
               </Heading>
@@ -91,8 +91,8 @@ function Example() {
                 denne søknaden, og link til alternativ søknad. Bruk punktliste
                 for god lesbarhet.
               </BodyLong>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Heading level="2" size="large" spacing>
                 Før du søker
               </Heading>
@@ -148,7 +148,7 @@ function Example() {
                   </i>
                 </List.Item>
               </List>
-            </Box>
+            </div>
             <Box>
               <Accordion>
                 <Accordion.Item>

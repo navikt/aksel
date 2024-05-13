@@ -85,7 +85,7 @@ function Example() {
                 </Link>
               </BodyLong>
             </GuidePanel>
-            <Box>
+            <div>
               <Heading level="2" size="large" spacing>
                 Her kan du søke om
               </Heading>
@@ -111,8 +111,8 @@ function Example() {
               <BodyLong>
                 Du kan ikke kombinere AFP i offentlig sektor og alderspensjon.
               </BodyLong>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Heading level="2" size="large" spacing>
                 Før du søker
               </Heading>
@@ -135,7 +135,7 @@ function Example() {
                   måneder.
                 </List.Item>
               </List>
-            </Box>
+            </div>
             <Box>
               <Accordion>
                 <Accordion.Item>

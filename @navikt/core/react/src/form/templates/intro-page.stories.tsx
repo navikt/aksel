@@ -7,7 +7,6 @@ import {
   Bleed,
   BodyLong,
   BodyShort,
-  Box,
   Button,
   Checkbox,
   GuidePanel,
@@ -106,7 +105,7 @@ const IntroPageTemplate: Story = {
                 </Alert>
               )}
               {props.showAlternativeApplications && (
-                <Box>
+                <div>
                   <Heading level="2" size="large" spacing>
                     Her kan du søke om
                   </Heading>
@@ -124,9 +123,9 @@ const IntroPageTemplate: Story = {
                     i denne søknaden, og link til alternativ søknad. Bruk
                     punktliste for god lesbarhet.
                   </BodyLong>
-                </Box>
+                </div>
               )}
-              <Box>
+              <div>
                 <Heading level="2" size="large" spacing>
                   Før du søker
                 </Heading>
@@ -182,8 +181,8 @@ const IntroPageTemplate: Story = {
                     </i>
                   </List.Item>
                 </List>
-              </Box>
-              <Box>
+              </div>
+              <div>
                 <Accordion>
                   <Accordion.Item>
                     <Accordion.Header>
@@ -232,8 +231,8 @@ const IntroPageTemplate: Story = {
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion>
-              </Box>
-              <Box>
+              </div>
+              <div>
                 <BodyLong spacing>
                   Det er viktig at du gir oss riktige opplysninger slik at vi
                   kan behandle saken din.{" "}
@@ -244,8 +243,8 @@ const IntroPageTemplate: Story = {
                 <Checkbox>
                   Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
                 </Checkbox>
-              </Box>
-              <Box>
+              </div>
+              <div>
                 <Button
                   variant="primary"
                   icon={<ArrowRightIcon />}
@@ -253,7 +252,7 @@ const IntroPageTemplate: Story = {
                 >
                   Start søknad
                 </Button>
-              </Box>
+              </div>
             </VStack>
           </Page.Block>
         </VStack>

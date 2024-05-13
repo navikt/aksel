@@ -75,16 +75,14 @@ function Example() {
                 </Link>
               </BodyLong>
             </GuidePanel>
-            <Box>
-              <RadioGroup legend="Hvilket barn gjelder søknaden din?">
-                <Radio value="luke">Luke født 19 BBY</Radio>
-                <Radio value="leia">Leia født 19 BBY</Radio>
-                <Radio value="other" description="Det vil opprettes en ny sak">
-                  Et annet barn
-                </Radio>
-              </RadioGroup>
-            </Box>
-            <Box>
+            <RadioGroup legend="Hvilket barn gjelder søknaden din?">
+              <Radio value="luke">Luke født 19 BBY</Radio>
+              <Radio value="leia">Leia født 19 BBY</Radio>
+              <Radio value="other" description="Det vil opprettes en ny sak">
+                Et annet barn
+              </Radio>
+            </RadioGroup>
+            <div>
               <Heading level="2" size="large" spacing>
                 Før du søker
               </Heading>
@@ -92,8 +90,8 @@ function Example() {
                 Vi lagrer søknaden din i 24 timer. Hvis du ikke fortsetter innen
                 den tid, blir søknaden slettet.
               </BodyLong>
-            </Box>
-            <Box>
+            </div>
+            <div>
               <Accordion>
                 <Accordion.Item>
                   <Accordion.Header>
@@ -140,7 +138,7 @@ function Example() {
                   </Accordion.Content>
                 </Accordion.Item>
               </Accordion>
-            </Box>
+            </div>
             <Box paddingBlock="0 12">
               <BodyLong>
                 Det er viktig at du gir oss riktige opplysninger slik at vi kan
