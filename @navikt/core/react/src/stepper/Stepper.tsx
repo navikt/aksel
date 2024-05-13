@@ -58,7 +58,7 @@ interface StepperComponent
  *   <Stepper
  *     aria-labelledby="stepper-heading"
  *     activeStep={activeStep}
- *     onStepChange={(x) => setActiveStep(x)}
+ *     onStepChange={setActiveStep}
  *   >
  *     <Stepper.Step href="#">Start søknad</Stepper.Step>
  *     <Stepper.Step href="#">Saksopplysninger</Stepper.Step>

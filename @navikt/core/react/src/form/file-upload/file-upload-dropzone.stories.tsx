@@ -80,7 +80,7 @@ export const States: StoryObj = {
     </div>
   ),
 };
-States.play = async ({ canvasElement }) => {
+States.play = ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const button = canvas.getByText("Velg fil");
   fireEvent.dragEnter(button);

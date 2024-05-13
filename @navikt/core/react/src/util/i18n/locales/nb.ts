@@ -17,4 +17,9 @@ export default {
       downloading: "Laster ned…",
     },
   },
+  FormProgress: {
+    step: "Steg {activeStep} av {totalSteps}",
+    showAllSteps: "Vis alle steg",
+    hideAllSteps: "Skjul alle steg",
+  },
 };
