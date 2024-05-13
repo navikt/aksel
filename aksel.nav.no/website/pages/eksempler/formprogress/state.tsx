@@ -6,7 +6,7 @@ const Example = () => {
   const [activeStep, setActiveStep] = useState(2);
 
   return (
-    <div style={{ width: "300px" }}>
+    <div style={{ minHeight: 260 }}>
       <FormProgress
         totalSteps={5}
         activeStep={activeStep}
