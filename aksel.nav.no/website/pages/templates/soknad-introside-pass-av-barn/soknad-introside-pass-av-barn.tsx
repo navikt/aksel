@@ -29,7 +29,7 @@ function Example() {
   useDekorator();
 
   return (
-    <Page data-aksel-template="500-v2" footer={<Footer />}>
+    <Page data-aksel-template="form-intropage-v1" footer={<Footer />}>
       <Header />
       <VStack as="main" gap="8">
         <Page.Block width="text" gutters>
