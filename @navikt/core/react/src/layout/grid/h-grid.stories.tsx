@@ -110,6 +110,21 @@ export const AlignItems = {
   ),
 };
 
+export const Nested = {
+  render: () => (
+    <HGrid columns={{ xs: 1, sm: 2 }} gap="8">
+      <HGrid columns="2" gap="2">
+        <Placeholder text="1" />
+        <Placeholder text="2" />
+      </HGrid>
+      <HGrid columns="2" gap="2">
+        <Placeholder text="3" />
+        <Placeholder text="4" />
+      </HGrid>
+    </HGrid>
+  ),
+};
+
 function Placeholder({ text, height }: { text: string; height?: string }) {
   return (
     <div
@@ -147,6 +162,10 @@ export const Chromatic: Story = {
       <div>
         <h2>AlignItems</h2>
         <AlignItems.render />
+      </div>
+      <div>
+        <h2>Nested</h2>
+        <Nested.render />
       </div>
     </VStack>
   ),
