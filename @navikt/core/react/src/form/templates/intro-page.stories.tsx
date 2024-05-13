@@ -55,11 +55,11 @@ const IntroPageTemplate: Story = {
         <Header />
         <VStack as="main" gap="8">
           <Page.Block width="text" gutters>
-            <Bleed marginInline={{ md: "24" }}>
+            <Bleed marginInline={{ lg: "24" }}>
               <Stack
                 align="center"
                 gap="6"
-                direction={{ xs: "row-reverse", md: "row" }}
+                direction={{ xs: "row-reverse", lg: "row" }}
                 justify="start"
                 wrap={false}
               >
