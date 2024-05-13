@@ -3562,7 +3562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.7.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.7.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3590,8 +3590,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.7.0
-    "@navikt/ds-tokens": ^6.7.0
+    "@navikt/ds-css": ^6.7.1
+    "@navikt/ds-tokens": ^6.7.1
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3606,7 +3606,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.7.0
+    "@navikt/ds-css": 6.7.1
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3627,11 +3627,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.7.0, @navikt/ds-css@^6.7.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.7.1, @navikt/ds-css@^6.7.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.7.0
+    "@navikt/ds-tokens": ^6.7.1
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3644,14 +3644,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.7.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.7.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
     "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^6.7.0
-    "@navikt/ds-tokens": ^6.7.0
+    "@navikt/aksel-icons": ^6.7.1
+    "@navikt/ds-tokens": ^6.7.1
     "@testing-library/dom": 9.3.4
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^15.0.7
@@ -3681,11 +3681,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^6.7.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.7.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.7.0
+    "@navikt/ds-tokens": ^6.7.1
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3695,7 +3695,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.7.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.7.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -3709,13 +3709,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/next-logger@npm:1.23.0":
-  version: 1.23.0
-  resolution: "@navikt/next-logger@npm:1.23.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F1.23.0%2F322dcf9bb53a1415b5a8b6dce561c7a0ed53ee42"
+"@navikt/next-logger@npm:1.24.0":
+  version: 1.24.0
+  resolution: "@navikt/next-logger@npm:1.24.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fnext-logger%2F1.24.0%2F45cb8c2c9151ed993db5576d247a65e9742a0c87"
   peerDependencies:
     next: 12 || 13 || 14
-    pino: 8
-  checksum: 55df992727e71c501d8a20e33df9293a8aab2fae7674c1f22aa2b4e7d78eade26bee475c5d9f17d505903f8e394f1e31a3e7726c86d2b4c7b312a3a65a3a70e0
+    pino: 8 || 9
+  checksum: e6327d53d0bfa009724023d0904d717a015e7f9f1ae2b76c3a6f033c7fadb09597da69a4fe08c16cc273016c1eb2aaa90487b80962667e357dc0e1325d16db78
   languageName: node
   linkType: hard
 
@@ -3750,10 +3750,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/env@npm:14.1.1-canary.57"
-  checksum: fc7687f1294a3be1d6f2433f2d85194f4fb8698753f1058c89d3bfa15ee8cfb85c20b0da2ea734829b2ecc90305c74af76c67dc449af86bfa048315106cb00d1
+"@next/env@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/env@npm:14.2.3"
+  checksum: 47ddb64ec6cdc13dfcf560ba42cce71d7948174bf800162738e20ba0147cc46a5f6fdde1eb7957a3676a9eca6dccf6603836ed7c755eab238d9f5c73614d9880
   languageName: node
   linkType: hard
 
@@ -3766,65 +3766,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-darwin-arm64@npm:14.1.1-canary.57"
+"@next/swc-darwin-arm64@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-darwin-arm64@npm:14.2.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-darwin-x64@npm:14.1.1-canary.57"
+"@next/swc-darwin-x64@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-darwin-x64@npm:14.2.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-linux-arm64-gnu@npm:14.1.1-canary.57"
+"@next/swc-linux-arm64-gnu@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.3"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-linux-arm64-musl@npm:14.1.1-canary.57"
+"@next/swc-linux-arm64-musl@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-linux-arm64-musl@npm:14.2.3"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-linux-x64-gnu@npm:14.1.1-canary.57"
+"@next/swc-linux-x64-gnu@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-linux-x64-gnu@npm:14.2.3"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-linux-x64-musl@npm:14.1.1-canary.57"
+"@next/swc-linux-x64-musl@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-linux-x64-musl@npm:14.2.3"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-win32-arm64-msvc@npm:14.1.1-canary.57"
+"@next/swc-win32-arm64-msvc@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-ia32-msvc@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-win32-ia32-msvc@npm:14.1.1-canary.57"
+"@next/swc-win32-ia32-msvc@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.3"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/swc-win32-x64-msvc@npm:14.1.1-canary.57"
+"@next/swc-win32-x64-msvc@npm:14.2.3":
+  version: 14.2.3
+  resolution: "@next/swc-win32-x64-msvc@npm:14.2.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -8168,11 +8168,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.7.0
-    "@navikt/ds-css": ^6.7.0
-    "@navikt/ds-react": ^6.7.0
-    "@navikt/ds-tailwind": ^6.7.0
-    "@navikt/ds-tokens": ^6.7.0
+    "@navikt/aksel-icons": ^6.7.1
+    "@navikt/ds-css": ^6.7.1
+    "@navikt/ds-react": ^6.7.1
+    "@navikt/ds-tailwind": ^6.7.1
+    "@navikt/ds-tokens": ^6.7.1
   languageName: unknown
   linkType: soft
 
@@ -19201,15 +19201,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-logger@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "next-logger@npm:3.0.2"
+"next-logger@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "next-logger@npm:4.0.0"
   dependencies:
     cosmiconfig: ^8.1.3
     pino: ^8.11.0
   peerDependencies:
     next: ">=9.0.0"
-  checksum: b7f756ef98564d139f8466ab2a4e9a493297ad28e556a3c0b245472b32d868e65f703ee76749130401fe70d27c1bfa9c1cd3347793967246e46d17e29c387b15
+  checksum: 7aebe1b8cfd1459a55077872c6dcaefecee4b9567537b287ea010484a50bb1f6b2e637971cf3f8934c9d0e0c2188c0f5ec0adb324b1c7b21018199b11b4f3eea
   languageName: node
   linkType: hard
 
@@ -19234,20 +19234,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "next@npm:14.1.1-canary.57"
+"next@npm:^14.2.3":
+  version: 14.2.3
+  resolution: "next@npm:14.2.3"
   dependencies:
-    "@next/env": 14.1.1-canary.57
-    "@next/swc-darwin-arm64": 14.1.1-canary.57
-    "@next/swc-darwin-x64": 14.1.1-canary.57
-    "@next/swc-linux-arm64-gnu": 14.1.1-canary.57
-    "@next/swc-linux-arm64-musl": 14.1.1-canary.57
-    "@next/swc-linux-x64-gnu": 14.1.1-canary.57
-    "@next/swc-linux-x64-musl": 14.1.1-canary.57
-    "@next/swc-win32-arm64-msvc": 14.1.1-canary.57
-    "@next/swc-win32-ia32-msvc": 14.1.1-canary.57
-    "@next/swc-win32-x64-msvc": 14.1.1-canary.57
+    "@next/env": 14.2.3
+    "@next/swc-darwin-arm64": 14.2.3
+    "@next/swc-darwin-x64": 14.2.3
+    "@next/swc-linux-arm64-gnu": 14.2.3
+    "@next/swc-linux-arm64-musl": 14.2.3
+    "@next/swc-linux-x64-gnu": 14.2.3
+    "@next/swc-linux-x64-musl": 14.2.3
+    "@next/swc-win32-arm64-msvc": 14.2.3
+    "@next/swc-win32-ia32-msvc": 14.2.3
+    "@next/swc-win32-x64-msvc": 14.2.3
     "@swc/helpers": 0.5.5
     busboy: 1.6.0
     caniuse-lite: ^1.0.30001579
@@ -19256,6 +19256,7 @@ __metadata:
     styled-jsx: 5.1.1
   peerDependencies:
     "@opentelemetry/api": ^1.1.0
+    "@playwright/test": ^1.41.2
     react: ^18.2.0
     react-dom: ^18.2.0
     sass: ^1.3.0
@@ -19281,11 +19282,13 @@ __metadata:
   peerDependenciesMeta:
     "@opentelemetry/api":
       optional: true
+    "@playwright/test":
+      optional: true
     sass:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: e8a379d8db0cd8d8e43743f34a82d07aee4bb82eafb32ddada3e13477bbc819ed664c93f55f8f03a8e69def02a46077fd2c0d588d8c4410af417d692d0eeb352
+  checksum: d34ea63adf23fe46efebe2a9c536c9127c0ee006d74c60d6d23aecbef650798c976b27c17910ca585f3bb1223b10924cb429b9ce930f3074aee1170d1519dccc
   languageName: node
   linkType: hard
 
@@ -20742,7 +20745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:^8.11.0, pino@npm:^8.14.1":
+"pino@npm:^8.11.0, pino@npm:^8.21.0":
   version: 8.21.0
   resolution: "pino@npm:8.21.0"
   dependencies:
@@ -27804,7 +27807,7 @@ __metadata:
     "@amplitude/analytics-browser": ^2.2.3
     "@axe-core/playwright": ^4.5.2
     "@babel/core": ^7.19.0
-    "@navikt/next-logger": 1.23.0
+    "@navikt/next-logger": 1.24.0
     "@navikt/oasis": 3.2.1
     "@next/bundle-analyzer": 14.1.1-canary.57
     "@next/eslint-plugin-next": 14.1.1-canary.57
@@ -27837,11 +27840,11 @@ __metadata:
     json5: 2.2.1
     lodash: ^4.17.21
     lz-string: ^1.5.0
-    next: 14.1.1-canary.57
-    next-logger: ^3.0.2
+    next: ^14.2.3
+    next-logger: ^4.0.0
     next-sanity: 5.5.8
     node-cache: ^5.1.2
-    pino: ^8.14.1
+    pino: ^8.21.0
     pino-pretty: ^10.0.0
     postcss: ^8.4.31
     postcss-import: ^14.1.0
