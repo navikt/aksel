@@ -11,7 +11,7 @@ export const SuggestionBlockGhPages = ({
       <span className="-mt-[1px] grid h-7 shrink-0 place-content-center text-2xl">
         <HandShakeHeartIcon aria-hidden />
       </span>
-      <div className="grid">
+      <div>
         <Heading size="small" level="2">
           Samarbeid
         </Heading>
