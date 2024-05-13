@@ -40,7 +40,7 @@ function Example() {
               wrap={false}
             >
               <ApplicationPictogram title="Application" />
-              <VStack gap="1">
+              <VStack gap="1" style={{ flex: 1 }}>
                 <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="large">
                   Søknad om arbeidsavklaringspenger (AAP)
@@ -49,7 +49,7 @@ function Example() {
             </Stack>
           </Bleed>
         </Page.Block>
-        <Page.Block width="text">
+        <Page.Block width="text" gutters>
           <VStack gap="12">
             <GuidePanel poster>
               <Heading level="3" size="medium" spacing>

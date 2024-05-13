@@ -64,7 +64,7 @@ const IntroPageTemplate: Story = {
                 wrap={false}
               >
                 <ApplicationPictogram title="Application" />
-                <VStack gap="1">
+                <VStack gap="1" style={{ flex: 1 }}>
                   <Heading level="1" size="large">
                     Søknad om [ytelse] om masse rart og tullball og litt mer for
                     å gå over flere linjer.
@@ -73,7 +73,7 @@ const IntroPageTemplate: Story = {
               </Stack>
             </Bleed>
           </Page.Block>
-          <Page.Block width="text">
+          <Page.Block width="text" gutters>
             <VStack gap="12">
               <GuidePanel poster>
                 <VStack gap="4">
