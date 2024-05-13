@@ -13,6 +13,7 @@ import {
   Page,
   Radio,
   RadioGroup,
+  Show,
   Stack,
   VStack,
 } from "@navikt/ds-react";
@@ -32,15 +33,17 @@ function Example() {
       <Header />
       <VStack gap="8">
         <Page.Block as="main" width="text" gutters>
-          <Bleed marginInline={{ md: "24" }}>
+          <Bleed marginInline={{ lg: "24" }}>
             <Stack
               align="center"
               gap="6"
-              direction={{ xs: "row-reverse", md: "row" }}
+              direction={{ xs: "row-reverse", lg: "row" }}
               justify="start"
               wrap={false}
             >
-              <ApplicationPictogram title="Application" />
+              <Show above="sm">
+                <ApplicationPictogram title="Application" />
+              </Show>
               <VStack gap="1" style={{ flex: 1 }}>
                 <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="large">
