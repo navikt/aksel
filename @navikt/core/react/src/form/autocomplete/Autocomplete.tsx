@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { DismissableLayer } from "../../overlay/dismiss/DismissableLayer";
 import { Floating } from "../../overlays/floating/Floating";
+import { createContext } from "../../util/create-context";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { RovingFocus } from "./RovingFocus";
 import { SlottedDivElementRef } from "./SlottedDivElement";
@@ -36,15 +37,25 @@ export const [
   useAutocompleteDescendant,
 ] = createDescendantContext<SlottedDivElementRef>();
 
+export const [AutocompleteContextProvider, useAutocompleteValue] =
+  createContext<{
+    value: string;
+    setValue: Dispatch<SetStateAction<string>>;
+  }>();
+
 export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   const descendants = useAutocompleteDescendants();
+  const [value, setValue] = useState("");
+  console.log({ value });
   return (
     <DismissableLayer>
-      <AutocompleteDescendantsProvider value={descendants}>
-        <RovingFocus asChild descendants={descendants}>
-          <Floating>{children}</Floating>
-        </RovingFocus>
-      </AutocompleteDescendantsProvider>
+      <AutocompleteContextProvider {...{ value, setValue }}>
+        <AutocompleteDescendantsProvider value={descendants}>
+          <RovingFocus asChild descendants={descendants}>
+            <Floating>{children}</Floating>
+          </RovingFocus>
+        </AutocompleteDescendantsProvider>
+      </AutocompleteContextProvider>
     </DismissableLayer>
   );
 };
@@ -54,8 +65,19 @@ export const AutocompleteAnchor = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { register, index, descendants } = useAutocompleteDescendant();
   return (
-    <Floating.Anchor className="navds-autocomplete-anchor">
+    <Floating.Anchor
+      className="navds-autocomplete-anchor"
+      ref={register}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowDown") {
+          descendants.next(index)?.node.focus();
+        } else if (event.key === "ArrowUp") {
+          descendants.prev(index)?.node.focus();
+        }
+      }}
+    >
       {children}
     </Floating.Anchor>
   );
@@ -79,12 +101,19 @@ export const AutocompleteItem = ({
   children: React.ReactNode;
 }) => {
   const { register, index, descendants } = useAutocompleteDescendant();
+  const { value, setValue } = useAutocompleteValue();
   return (
     <div
       className="navds-autocomplete-item"
       role="button"
       tabIndex={0}
       ref={register}
+      onFocus={(event) => {
+        console.log(
+          `inside focus of item: ${event.target.children[0].innerHTML}, old value: ${value}`,
+        );
+        setValue(event.target.children[0].innerHTML || "");
+      }}
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
           descendants.next(index)?.node.focus();
