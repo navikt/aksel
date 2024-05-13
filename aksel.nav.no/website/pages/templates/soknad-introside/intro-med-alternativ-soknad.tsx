@@ -234,5 +234,5 @@ export const Demo = {
 export const args = {
   index: 3,
   title: "Alternativ søknad",
-  desc: "I noen tilfeller finnes det lignende søknader som dekker litt andre behov. For å redusere sjansen for at brukere søker på feil ytelse, så kan du inkludere en seksjon som sier hva du kan søke på i denne søknaden, og hva du må bruke en annen søknad for.",
+  desc: "I noen tilfeller finnes det søknader som dekker litt andre behov. For å redusere sjansen for at brukere søker på feil ytelse, så kan du inkludere en seksjon som sier hva du kan søke på i denne søknaden, og eventuelt hva du må bruke en annen søknad for.",
 };
