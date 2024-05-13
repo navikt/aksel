@@ -6,14 +6,8 @@ import FormProgress, { FormProgressProps } from "./FormProgress";
 export default {
   title: "ds-react/FormProgress",
   component: FormProgress,
-  decorators: [
-    (story) => (
-      <div style={{ width: 300, maxWidth: "100%", margin: "0 auto" }}>
-        {story()}
-      </div>
-    ),
-  ],
-  parameters: { layout: "padded", chromatic: { disable: true } },
+  decorators: [(story) => <div style={{ width: 300 }}>{story()}</div>],
+  parameters: { chromatic: { disable: true } },
 } satisfies Meta<typeof FormProgress>;
 
 type ControllableProps = Pick<
@@ -22,7 +16,7 @@ type ControllableProps = Pick<
 >;
 
 export const Default: StoryFn<ControllableProps> = (props) => (
-  <>
+  <div style={{ minHeight: 700 }}>
     <FormProgress {...props}>
       <FormProgress.Step href="#" completed>
         Start søknad
@@ -39,7 +33,7 @@ export const Default: StoryFn<ControllableProps> = (props) => (
       <FormProgress.Step href="#">Innsending</FormProgress.Step>
     </FormProgress>
     <p>Noe innhold som dyttes ned</p>
-  </>
+  </div>
 );
 Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
 
