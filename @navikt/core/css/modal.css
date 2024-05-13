@@ -103,6 +103,10 @@
   padding: var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-4) var(--a-spacing-6);
 }
 
+.navds-modal__header--small {
+  padding: var(--a-spacing-4) var(--a-spacing-4) 0 var(--a-spacing-4);
+}
+
 .navds-modal__header-icon svg {
   display: inline;
   vertical-align: -0.25rem;
@@ -134,6 +138,10 @@
   flex-flow: row-reverse wrap;
   gap: var(--a-spacing-4);
   padding: var(--a-spacing-4) var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-6);
+}
+
+.navds-modal__footer--small {
+  padding: var(--a-spacing-4);
 }
 
 .navds-modal__footer :nth-of-type(2) {
