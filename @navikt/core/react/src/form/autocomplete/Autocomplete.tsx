@@ -97,22 +97,20 @@ export const AutocompleteContent = ({
 
 export const AutocompleteItem = ({
   children,
+  pick,
 }: {
   children: React.ReactNode;
+  pick: () => void;
 }) => {
   const { register, index, descendants } = useAutocompleteDescendant();
-  const { value, setValue } = useAutocompleteValue();
   return (
     <div
       className="navds-autocomplete-item"
       role="button"
       tabIndex={0}
       ref={register}
-      onFocus={(event) => {
-        console.log(
-          `inside focus of item: ${event.target.children[0].innerHTML}, old value: ${value}`,
-        );
-        setValue(event.target.children[0].innerHTML || "");
+      onFocus={() => {
+        pick();
       }}
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
