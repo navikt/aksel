@@ -77,7 +77,7 @@ const IntroPageTemplate: Story = {
             <VStack gap="12">
               <GuidePanel poster>
                 <VStack gap="4">
-                  <Heading level="3" size="medium">
+                  <Heading level="2" size="medium">
                     Hei, [Navn Navnesen]!
                   </Heading>
                   <BodyShort>

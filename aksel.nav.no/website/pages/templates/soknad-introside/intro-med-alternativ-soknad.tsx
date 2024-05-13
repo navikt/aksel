@@ -55,7 +55,7 @@ function Example() {
         <Page.Block width="text" gutters>
           <VStack gap="12">
             <GuidePanel poster>
-              <Heading level="3" size="medium" spacing>
+              <Heading level="2" size="medium" spacing>
                 Hei, [Navn Navnesen]!
               </Heading>
               <BodyLong spacing>
