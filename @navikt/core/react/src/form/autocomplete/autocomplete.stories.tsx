@@ -8,28 +8,36 @@ export default {
   component: Autocomplete,
 } as Meta;
 
-const MySearch = () => {
+const MyAnchor = () => {
   const { value } = useAutocompleteValue();
-  return <Search label="Søk på nav sine sider" value={value} />;
+  return (
+    <Autocomplete.Anchor>
+      <Search label="Søk på nav sine sider" value={value} />
+    </Autocomplete.Anchor>
+  );
+};
+const MyItem = ({ children }: { children: string }) => {
+  const { setValue } = useAutocompleteValue();
+  return (
+    <Autocomplete.Item
+      pick={() => {
+        setValue(children);
+      }}
+    >
+      <span>{children}</span>
+    </Autocomplete.Item>
+  );
 };
 
 export const Default = () => {
   return (
     <div className="navds-autocomplete-test-class-for-div-wrapper">
       <Autocomplete>
-        <Autocomplete.Anchor>
-          <MySearch />
-        </Autocomplete.Anchor>
+        <MyAnchor />
         <Autocomplete.Content>
-          <Autocomplete.Item>
-            <p>item #1</p>
-          </Autocomplete.Item>
-          <Autocomplete.Item>
-            <p>item #2</p>
-          </Autocomplete.Item>
-          <Autocomplete.Item>
-            <p>item #3</p>
-          </Autocomplete.Item>
+          <MyItem>item #1</MyItem>
+          <MyItem>item #2</MyItem>
+          <MyItem>item #3</MyItem>
         </Autocomplete.Content>
       </Autocomplete>
     </div>
