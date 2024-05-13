@@ -225,6 +225,7 @@ export const ApplicationPictogram = ({ title, ...props }) => (
     viewBox="0 0 72 72"
     fill="none"
     style={{ flexShrink: 0 }}
+    aria-hidden
     {...props}
   >
     <title>{title}</title>

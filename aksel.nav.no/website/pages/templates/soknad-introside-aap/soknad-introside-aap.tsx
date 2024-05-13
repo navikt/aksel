@@ -150,7 +150,7 @@ function Example() {
               </Box>
               <Button
                 variant="primary"
-                icon={<ArrowRightIcon />}
+                icon={<ArrowRightIcon aria-hidden />}
                 iconPosition="right"
               >
                 Start søknad
