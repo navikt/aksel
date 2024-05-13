@@ -109,7 +109,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
                 replacements: { activeStep, totalSteps },
               })}
             </BodyShort>
-            <Collapsible.Trigger asChild disableAriaExpanded>
+            <Collapsible.Trigger asChild aria-expanded={undefined}>
               <Button
                 variant="tertiary"
                 size="small"
