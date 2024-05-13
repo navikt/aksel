@@ -63,7 +63,7 @@ const IntroPageTemplate: Story = {
                 wrap={false}
               >
                 <ApplicationPictogram title="Application" />
-                <VStack gap="1" style={{ flex: 1 }}>
+                <VStack gap="1">
                   <Heading level="1" size="large">
                     Søknad om [ytelse] om masse rart og tullball og litt mer for
                     å gå over flere linjer.

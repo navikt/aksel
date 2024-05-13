@@ -44,7 +44,7 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram title="Application" />
               </Show>
-              <VStack gap="1" style={{ flex: 1 }}>
+              <VStack gap="1">
                 <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="large">
                   Søknad om [ytelse]

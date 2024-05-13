@@ -7,6 +7,7 @@ export const ApplicationPictogram = ({ title, ...props }) => (
     height="72"
     viewBox="0 0 72 72"
     fill="none"
+    style={{ flexShrink: 0 }}
     {...props}
   >
     <title>{title}</title>
