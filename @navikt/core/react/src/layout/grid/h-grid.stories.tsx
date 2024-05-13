@@ -113,11 +113,11 @@ export const AlignItems = {
 export const Nested = {
   render: () => (
     <HGrid columns={{ xs: 1, sm: 2 }} gap="8">
-      <HGrid columns="2" gap="2">
+      <HGrid columns={2} gap="2">
         <Placeholder text="1" />
         <Placeholder text="2" />
       </HGrid>
-      <HGrid columns="2" gap="2">
+      <HGrid columns={2} gap="2">
         <Placeholder text="3" />
         <Placeholder text="4" />
       </HGrid>
