@@ -14,6 +14,7 @@ import {
   Link,
   List,
   Page,
+  Show,
   Stack,
   VStack,
 } from "@navikt/ds-react";
@@ -62,7 +63,9 @@ const IntroPageTemplate: Story = {
                 justify="start"
                 wrap={false}
               >
-                <ApplicationPictogram title="Application" />
+                <Show above="sm">
+                  <ApplicationPictogram title="Application" />
+                </Show>
                 <VStack gap="1">
                   <Heading level="1" size="large">
                     Søknad om [ytelse] om masse rart og tullball og litt mer for
