@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
-import React from "react";
+import React, { ReactNode } from "react";
+import { HangerIcon, PuzzlePieceIcon, RulerIcon } from "@navikt/aksel-icons";
 import { Search } from "../search";
 import { Autocomplete, useAutocompleteValue } from "./Autocomplete";
 
@@ -16,7 +17,7 @@ const MyAnchor = () => {
     </Autocomplete.Anchor>
   );
 };
-const MyItem = ({ children }: { children: string }) => {
+const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
   const { setValue } = useAutocompleteValue();
   return (
     <Autocomplete.Item
@@ -24,7 +25,10 @@ const MyItem = ({ children }: { children: string }) => {
         setValue(children);
       }}
     >
-      <span>{children}</span>
+      <span>
+        {icon}
+        <span>{children}</span>
+      </span>
     </Autocomplete.Item>
   );
 };
@@ -35,9 +39,9 @@ export const Default = () => {
       <Autocomplete>
         <MyAnchor />
         <Autocomplete.Content>
-          <MyItem>item #1</MyItem>
-          <MyItem>item #2</MyItem>
-          <MyItem>item #3</MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger</MyItem>
+          <MyItem icon={<RulerIcon aria-hidden />}>ruler</MyItem>
+          <MyItem icon={<PuzzlePieceIcon aria-hidden />}>puzzle piece</MyItem>
         </Autocomplete.Content>
       </Autocomplete>
     </div>
