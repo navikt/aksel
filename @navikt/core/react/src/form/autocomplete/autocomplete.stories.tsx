@@ -1,19 +1,24 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import { Search } from "../search";
-import { Autocomplete } from "./Autocomplete";
+import { Autocomplete, useAutocompleteValue } from "./Autocomplete";
 
 export default {
   title: "Utilities/Autocomplete",
   component: Autocomplete,
 } as Meta;
 
+const MySearch = () => {
+  const { value } = useAutocompleteValue();
+  return <Search label="Søk på nav sine sider" value={value} />;
+};
+
 export const Default = () => {
   return (
     <div className="navds-autocomplete-test-class-for-div-wrapper">
       <Autocomplete>
         <Autocomplete.Anchor>
-          <Search label="Søk på nav sine sider" />
+          <MySearch />
         </Autocomplete.Anchor>
         <Autocomplete.Content>
           <Autocomplete.Item>
