@@ -7,10 +7,6 @@
   display: none;
 }
 
-.navds-form-progress__button svg {
-  transition: transform 150ms ease-in-out;
-}
-
 .navds-form-progress__button:hover svg {
   transform: translateY(1px);
 }
