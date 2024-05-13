@@ -13,12 +13,16 @@ export interface CollapsibleTriggerProps
    * @default false
    */
   asChild?: boolean;
+  /**
+   * You may disable aria-expanded if the accessable name of the trigger is changed when toggled, e.g. "Show"/"Hide".
+   */
+  disableAriaExpanded?: boolean;
 }
 
 export const CollapsibleTrigger = forwardRef<
   HTMLButtonElement,
   CollapsibleTriggerProps
->(({ children, asChild, onClick, ...rest }, ref) => {
+>(({ children, asChild, disableAriaExpanded, onClick, ...rest }, ref) => {
   const ctx = useCollapsibleContext();
 
   const Comp = asChild ? Slot : "button";
@@ -32,7 +36,7 @@ export const CollapsibleTrigger = forwardRef<
       {...rest}
       id={ctx.triggerId}
       aria-controls={ctx.open ? ctx.contentId : undefined}
-      aria-expanded={ctx.open}
+      aria-expanded={disableAriaExpanded ? undefined : ctx.open}
     >
       {children}
     </Comp>
