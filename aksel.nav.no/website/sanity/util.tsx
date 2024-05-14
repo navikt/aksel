@@ -1,6 +1,9 @@
-import { ConfigContext, NewDocumentOptionsResolver } from "sanity";
+import {
+  ConditionalPropertyCallbackContext,
+  NewDocumentOptionsResolver,
+} from "sanity";
 
-export const devsOnly = ({ currentUser }: ConfigContext) =>
+export const devsOnly = ({ currentUser }: ConditionalPropertyCallbackContext) =>
   !currentUser?.roles.find(({ name }) =>
     ["developer", "administrator"].includes(name),
   );
