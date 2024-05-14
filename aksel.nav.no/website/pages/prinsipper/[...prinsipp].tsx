@@ -1,6 +1,5 @@
 import cl from "clsx";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import Bilde from "@/cms/bilde/Bilde";
 import Footer from "@/layout/footer/Footer";
@@ -16,6 +15,7 @@ import {
   TableOfContentsT,
 } from "@/types";
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFotfund from "../404";
@@ -200,26 +200,32 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `prinsipper/${props.slug}`,
-            valid: "true",
-          }}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function PrinsippPage(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `prinsipper/${props.slug}`,
+        valid: "true",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            toc={generateTableOfContents({
+              content: _props?.prinsipp?.content,
+              type: "aksel_prinsipp",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
