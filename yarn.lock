@@ -3911,12 +3911,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/bundle-analyzer@npm:14.1.1-canary.57"
+"@next/bundle-analyzer@npm:^14.2.3":
+  version: 14.2.3
+  resolution: "@next/bundle-analyzer@npm:14.2.3"
   dependencies:
     webpack-bundle-analyzer: 4.10.1
-  checksum: b2ed70ccaecaffaaafd4ff70b341c911a2b8b9f01c2f9956af1ff37c0e05842834e978ace17bfb50fad78208fa0b1db9a836ba254e2f0573c74ed1ffe30a8fdf
+  checksum: 34355cd5e28b02aba8179babd5ffd9c7f275c3fddeb16895c3f4fcbc3333c26fc6991dcb6488e26a7eb55516118ad9f53d25c916ea263d06beda417af7a06179
   languageName: node
   linkType: hard
 
@@ -3927,12 +3927,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:14.1.1-canary.57":
-  version: 14.1.1-canary.57
-  resolution: "@next/eslint-plugin-next@npm:14.1.1-canary.57"
+"@next/eslint-plugin-next@npm:^14.2.3":
+  version: 14.2.3
+  resolution: "@next/eslint-plugin-next@npm:14.2.3"
   dependencies:
     glob: 10.3.10
-  checksum: 97547762f153092ba0baa40a53ff7a21cc51b43fb0ba78a0dc81a96514a425a7ce0f74400192e5ca3ae3499b9424314ad7014c936eaf9a9f3f2def726960ec65
+  checksum: f149344f0f347e02a7d2302c0e318a42a565e6930cd7a72b4681e157a0aa2c5079d2c5cf019b9b58a1e19ff5a3fe273fd80d53add8b3c1a9fe5b7ed70d70ae4a
   languageName: node
   linkType: hard
 
@@ -28209,8 +28209,8 @@ __metadata:
     "@babel/core": ^7.19.0
     "@navikt/next-logger": 1.24.0
     "@navikt/oasis": 3.2.1
-    "@next/bundle-analyzer": 14.1.1-canary.57
-    "@next/eslint-plugin-next": 14.1.1-canary.57
+    "@next/bundle-analyzer": ^14.2.3
+    "@next/eslint-plugin-next": ^14.2.3
     "@playwright/test": 1.35.1
     "@portabletext/react": ^3.0.11
     "@sanity/block-tools": 3.41.1
