@@ -77,8 +77,8 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.5.2",
     "@babel/core": "^7.19.0",
-    "@next/bundle-analyzer": "14.1.1-canary.57",
-    "@next/eslint-plugin-next": "14.1.1-canary.57",
+    "@next/bundle-analyzer": "^14.2.3",
+    "@next/eslint-plugin-next": "^14.2.3",
     "@playwright/test": "1.35.1",
     "@sanity/block-tools": "3.41.1",
     "@sanity/schema": "3.41.1",
