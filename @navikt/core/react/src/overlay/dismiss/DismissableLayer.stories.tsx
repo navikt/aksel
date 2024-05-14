@@ -160,7 +160,7 @@ function DismissableBox(props) {
         display: "inline-block",
         verticalAlign: "middle",
         padding: 20,
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
+        backgroundColor: `rgba(0, 0, ${props.index * 90}, 0.1)`,
         borderRadius: 10,
         marginTop: 20,
         ...props.style,

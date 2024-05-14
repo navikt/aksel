@@ -138,6 +138,14 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       disabled: !enabled,
     });
 
+    const [pointerState, setPointerState] = useState<{
+      isPointerEventsEnabled: boolean;
+      isBodyPointerEventsDisabled: boolean;
+    }>({
+      isPointerEventsEnabled: true,
+      isBodyPointerEventsDisabled: false,
+    });
+
     /**
      * `node` will be set to the ref of the component or nested component
      * Ex: If
@@ -162,7 +170,8 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
 
-    const pointerEnabled = () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
       let lastIndex = -1;
 
       const descendantNodes = descendants.enabledValues();
@@ -172,7 +181,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         }
       });
 
-      return {
+      setPointerState({
         /**
          * Makes sure we stop events at the highest layer with pointer events disabled.
          * If not checked, we risk closing every layer when clicking outside the layer.
@@ -182,8 +191,8 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
          * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
          */
         isBodyPointerEventsDisabled: lastIndex > -1,
-      };
-    };
+      });
+    });
 
     /**
      * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
@@ -248,7 +257,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!pointerEnabled().isPointerEventsEnabled || !enabled) {
+      if (!pointerState.isPointerEventsEnabled || !enabled) {
         return;
       }
 
@@ -359,7 +368,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
 
     const Comp = asChild ? Slot : "div";
 
-    const pointerState = pointerEnabled();
+    const pointers = pointerState.isBodyPointerEventsDisabled
+      ? pointerState.isPointerEventsEnabled
+        ? "auto"
+        : "none"
+      : undefined;
 
     return (
       <Comp
@@ -377,6 +390,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
           ...rest.style,
         }}
       >
+        {pointers}
         {children}
       </Comp>
     );
