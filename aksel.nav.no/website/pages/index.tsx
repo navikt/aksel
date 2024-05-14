@@ -322,16 +322,12 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   );
 };
 
-const Wrapper = (props: PageProps["props"]) => {
-  if (props?.preview) {
-    return (
-      <PagePreview query={query} props={props} params={{ preview: "true" }}>
-        {(_props) => <Forside {..._props} />}
-      </PagePreview>
-    );
-  }
-
-  return <Forside {...props} />;
-};
-
-export default Wrapper;
+export default function HomePage(props: PageProps["props"]) {
+  return props?.preview ? (
+    <PagePreview query={query} props={props} params={{ preview: "true" }}>
+      {(_props) => <Forside {..._props} />}
+    </PagePreview>
+  ) : (
+    <Forside {...props} />
+  );
+}

@@ -139,34 +139,32 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
 };
 
 export default function GrunnleggendePage(props: PageProps["props"]) {
-  if (props?.preview) {
-    return (
-      <PagePreview
-        query={query}
-        props={props}
-        params={{
-          slug: `grunnleggende/${props.slug}`,
-          type: "ds_artikkel",
-        }}
-      >
-        {(_props, loading) => {
-          if (loading) {
-            return <Page {...props} />;
-          }
-          return (
-            <Page
-              {..._props}
-              sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
-              toc={generateTableOfContents({
-                content: _props?.page?.content,
-                type: "ds_artikkel",
-              })}
-            />
-          );
-        }}
-      </PagePreview>
-    );
-  }
-
-  return <Page {...props} />;
+  return props?.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `grunnleggende/${props.slug}`,
+        type: "ds_artikkel",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "ds_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
 }

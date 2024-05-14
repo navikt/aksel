@@ -116,29 +116,27 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
 };
 
 export default function GrunnleggendeFrontpage(props: PageProps["props"]) {
-  if (props?.preview) {
-    return (
-      <PagePreview
-        query={query}
-        props={props}
-        params={{
-          type: "ds_artikkel",
-        }}
-      >
-        {(_props, loading) => {
-          if (loading) {
-            return <Page {...props} />;
-          }
-          return (
-            <Page
-              {..._props}
-              sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
-            />
-          );
-        }}
-      </PagePreview>
-    );
-  }
-
-  return <Page {...props} />;
+  return props?.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        type: "ds_artikkel",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
 }

@@ -86,20 +86,16 @@ const Page = ({ page }: PageProps["props"]) => {
   );
 };
 
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <PagePreview
-        query={query}
-        props={props}
-        params={{ slug: `side/${props.slug}` }}
-      >
-        {(_props) => <Page {..._props} />}
-      </PagePreview>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function StandalonePage(props: PageProps["props"]) {
+  return props?.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{ slug: `side/${props.slug}` }}
+    >
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
