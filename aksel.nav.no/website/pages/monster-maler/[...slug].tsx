@@ -1,5 +1,4 @@
 import { GetStaticPaths } from "next/types";
-import { Suspense, lazy } from "react";
 import { Detail, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
@@ -22,6 +21,7 @@ import {
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlockGhPages } from "@/web/suggestionblock/SuggestionBlock.GhPages";
 import NotFotfund from "../404";
@@ -182,43 +182,33 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          params={{
-            slug: `monster-maler/${props.slug}`,
-            type: "templates_artikkel",
-          }}
-          props={props}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "templates"),
-            },
-            {
-              key: "toc",
-              dataKeys: ["page.content", "page.intro"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "templates_artikkel",
-                  intro: !!v[1],
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function MonsterMalerPage(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `monster-maler/${props.slug}`,
+        type: "templates_artikkel",
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            sidebar={generateSidebar(_props.sidebar, "templates")}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "templates_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
