@@ -1,6 +1,5 @@
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
@@ -17,6 +16,7 @@ import {
 } from "@/types";
 import { abbrName, dateStr, getImage } from "@/utils";
 import { BloggAd } from "@/web/BloggAd";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -225,23 +225,16 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{ slug: `produktbloggen/${props.slug}` }}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function Blogg(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{ slug: `produktbloggen/${props.slug}` }}
+    >
+      {(_props) => <Page {..._props} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
