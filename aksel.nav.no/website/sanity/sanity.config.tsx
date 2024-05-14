@@ -4,7 +4,6 @@ import { nbNOLocale } from "@sanity/locale-nb-no";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
-import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
@@ -77,7 +76,6 @@ function defaultConfig() {
       codeInput(),
       media(),
       visionTool(),
-      unsplashImageAsset(),
       colorInput(),
       nbNOLocale(),
     ],
