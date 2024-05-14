@@ -5,7 +5,7 @@ const Example = () => {
   const activeStep = 2; // Finn steg basert på rute
 
   return (
-    <div style={{ width: "300px" }}>
+    <div style={{ minHeight: 260 }}>
       <FormProgress totalSteps={5} activeStep={activeStep}>
         <FormProgress.Step href="#/steg-1" completed>
           Dine opplysninger
