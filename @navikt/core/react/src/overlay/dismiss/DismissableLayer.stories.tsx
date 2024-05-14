@@ -198,15 +198,18 @@ function DismissableBox(props) {
   );
 }
 
-export const DisableOutsidePointerEventsWhileHidden = () => (
-  <div>
-    <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
-      <div style={{ height: 100, width: 100, background: "red" }}>
-        <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
-          <div style={{ height: 50, width: 50, background: "blue" }} />
-        </DismissableLayer>
-      </div>
-    </DismissableLayer>
-    <button onClick={console.log}>Should be clickable</button>
-  </div>
-);
+export const DisableOutsidePointerEventsWhileHidden = () => {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <div>
+      <DismissableLayer disableOutsidePointerEvents={true} enabled={enabled}>
+        <div style={{ height: 100, width: 100, background: "red" }}>
+          <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
+            <div style={{ height: 50, width: 50, background: "blue" }} />
+          </DismissableLayer>
+        </div>
+      </DismissableLayer>
+      <button onClick={() => setEnabled((x) => !x)}>Should be clickable</button>
+    </div>
+  );
+};
