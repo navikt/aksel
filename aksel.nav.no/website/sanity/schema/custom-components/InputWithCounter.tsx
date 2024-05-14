@@ -1,9 +1,10 @@
 import cl from "clsx";
-import { StringInputProps, TextInputProps } from "sanity";
+import React from "react";
+import { FieldProps } from "sanity";
 import { Box, Detail, VStack } from "@navikt/ds-react";
 
 export function InputWithCounter(
-  props: (StringInputProps | TextInputProps) & {
+  props: FieldProps & {
     size?: "medium" | "large";
   },
 ) {
@@ -13,9 +14,8 @@ export function InputWithCounter(
     <VStack gap="1">
       {props.renderDefault(props)}
       <Counter
-        // @ts-expect-error - maxLength is a custom prop not officially supported
         maxLength={schemaType?.options?.maxLength}
-        currentLength={value?.length ?? 0}
+        currentLength={typeof value === "string" ? value?.length ?? 0 : 0}
       />
     </VStack>
   );
