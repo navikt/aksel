@@ -328,19 +328,6 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * If `disableOutsidePointerEvents` is true,
      * we want to disable pointer events on the body when the first layer is opened.
      */
-    /* useEffect(() => {
-      if (!node || !disableOutsidePointerEvents || index !== 0 || !enabled) {
-        return;
-      }
-
-      originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
-      ownerDocument.body.style.pointerEvents = "none";
-
-      return () => {
-        ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
-      };
-    }, [node, ownerDocument, disableOutsidePointerEvents, index, enabled]); */
-
     useEffect(() => {
       if (!node) return;
       if (disableOutsidePointerEvents) {
