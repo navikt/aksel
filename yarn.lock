@@ -4913,25 +4913,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^2.1.2":
-  version: 2.1.6
-  resolution: "@sanity/ui@npm:2.1.6"
-  dependencies:
-    "@floating-ui/react-dom": ^2.0.9
-    "@sanity/color": ^3.0.6
-    "@sanity/icons": ^2.11.8
-    csstype: ^3.1.3
-    framer-motion: 11.0.8
-    react-refractor: ^2.1.7
-  peerDependencies:
-    react: ^18
-    react-dom: ^18
-    react-is: ^18
-    styled-components: ^5.2 || ^6
-  checksum: 5d18faf8e85e85c2dec9c5c7405a29f0d36deecc5a402c17d05836cff9bfbf2e00061b29dffb5a1c7939f113766f231e1e36ee19e74a2f81a92f8f2f23989121
-  languageName: node
-  linkType: hard
-
 "@sanity/ui@npm:^2.1.6":
   version: 2.1.7
   resolution: "@sanity/ui@npm:2.1.7"
@@ -22702,17 +22683,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-infinite-scroll-component@npm:6.1.0":
-  version: 6.1.0
-  resolution: "react-infinite-scroll-component@npm:6.1.0"
-  dependencies:
-    throttle-debounce: ^2.1.0
-  peerDependencies:
-    react: ">=16.0.0"
-  checksum: 3708398934366df907dbad215247ebc1033221957ce7e32289ea31750cce70aa16513e2d03743e06c8b868ac7c542d12d5dbb6c830fd408433a4762f3cb5ecfb
-  languageName: node
-  linkType: hard
-
 "react-is@npm:18.1.0":
   version: 18.1.0
   resolution: "react-is@npm:18.1.0"
@@ -22766,15 +22736,6 @@ __metadata:
     "@types/react": ">=18"
     react: ">=18"
   checksum: ca1daa650d48b84a5a9771683cdb3f3d2d418247ce0faf73ede3207c65f2a21cdebb9df37afda67f6fc8f0f0a7b9ce00eb239781954a4d6c7ad88ea4df068add
-  languageName: node
-  linkType: hard
-
-"react-photo-album@npm:2.3.1":
-  version: 2.3.1
-  resolution: "react-photo-album@npm:2.3.1"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: 33057c316bb0e3a0d522801155ca962b8ea5ec8fa5e9d1d6eab019e39a37b4f8d520d3f0a889f2bdd44d2ecd12fb1d4ddd5f3170041a9947793ddf5c699b72af
   languageName: node
   linkType: hard
 
@@ -23954,24 +23915,6 @@ __metadata:
   dependencies:
     "@sanity/diff-match-patch": ^3.0.0
   checksum: c821f462e5e1bc259dc7d61ff1395aaff3884df18b89f425b2020f203edc1aa6971670ca81696f621e35c9a4f4e65a439353b0f343516ce5f9d2b65970cf97b8
-  languageName: node
-  linkType: hard
-
-"sanity-plugin-asset-source-unsplash@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "sanity-plugin-asset-source-unsplash@npm:3.0.1"
-  dependencies:
-    "@sanity/icons": ^2.11.8
-    "@sanity/incompatible-plugin": ^1.0.4
-    "@sanity/ui": ^2.1.2
-    react-infinite-scroll-component: 6.1.0
-    react-photo-album: 2.3.1
-    rxjs: ^7.8.1
-  peerDependencies:
-    react: ^18
-    sanity: ^3
-    styled-components: ^6.1
-  checksum: f5b1d4cab41ee86571bd5c87e0175ad2480b60e2ac73f231df11f31757473ad94ae522a69c26e0702d755456026cbef8db6dac6890f396a784204673816ef070
   languageName: node
   linkType: hard
 
@@ -26307,13 +26250,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"throttle-debounce@npm:^2.1.0":
-  version: 2.3.0
-  resolution: "throttle-debounce@npm:2.3.0"
-  checksum: 6d90aa2ddb294f8dad13d854a1cfcd88fdb757469669a096a7da10f515ee466857ac1e750649cb9da931165c6f36feb448318e7cb92570f0a3679d20e860a925
-  languageName: node
-  linkType: hard
-
 "throttle-debounce@npm:^3.0.1":
   version: 3.0.1
   resolution: "throttle-debounce@npm:3.0.1"
@@ -28194,7 +28130,6 @@ __metadata:
     remark-gfm: ^4.0.0
     rss: ^1.2.2
     sanity: 3.41.1
-    sanity-plugin-asset-source-unsplash: ^3.0.1
     sanity-plugin-media: ^2.2.5
     sanity-plugin-utils: ^1.6.4
     sharp: 0.32.6
