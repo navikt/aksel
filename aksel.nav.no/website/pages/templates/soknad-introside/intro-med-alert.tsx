@@ -60,19 +60,15 @@ function Example() {
                 Hei, [Navn Navnesen]!
               </Heading>
               <BodyLong spacing>
-                GuidePanel brukes til kort overordnet veiledning til søkeren.
-                Språket er uformelt og betryggende. GuidePanel inkluderer ikke
-                spesifikk veiledning knyttet til skjemafelt i søknaden.
-              </BodyLong>
-              <BodyLong spacing>
-                Her står også en kort forklaring av “produktet”. Kopier gjerne
-                ingress fra nav.no. Det skal være nok informasjon til å forstå
-                hva søknaden handler om uten å kopiere for mye innhold fra
-                produktsiden.
+                Seksjonen GuidePanel brukes til en kort, overordnet veiledning
+                til søkeren. Seksjonen henter inn søkerens navn, og gir en en
+                komprimert forklaring av pengestøtten, tiltaket eller
+                hjelpemiddelet. Denne teksten hentes fra ingressen til
+                produktsiden på nav.no.
               </BodyLong>
               <BodyLong>
-                Avslutt med lenke til produktsiden på nav.no som åpnes i ny
-                fane.
+                Avslutt teksten i seksjonen med en lenke til produktsiden på
+                nav.no som åpnes i en ny fane.
               </BodyLong>
             </GuidePanel>
             <Alert variant="info">
@@ -85,17 +81,13 @@ function Example() {
                 Før du søker
               </Heading>
               <BodyLong spacing>
-                Her skal det kun stå informasjon brukeren vil ha stor nytte av
-                før søknaden. Informasjon brukeren ikke trenger før start, og
-                som brukeren vil få underveis, skal ikke stå her. Undersøk
-                hvilken informasjon som ligger i søknadsdialogen og på
-                kvitteringssiden, slik at vi minimerer dobbelt innhold.
-                Eksempler på nyttig informasjon nedenfor - punktene tas bare med
-                om de er relevante:
+                Denne seksjonen brukes til å gi søkerne informasjon de vil ha
+                stor nytte av før de går i gang med søknaden. Eksempler på
+                nyttig informasjon:
               </BodyLong>
               <List>
                 <List.Item>
-                  Ting brukeren må ha gjort før søknaden.{" "}
+                  Oppgaver brukeren må ha gjort før de søker.{" "}
                   <i>
                     Du må ha meldt deg som arbeidssøker før du kan søke om
                     dagpenger.
@@ -136,6 +128,14 @@ function Example() {
                   </i>
                 </List.Item>
               </List>
+              <BodyLong>
+                For annen, utfyllende informasjon om søknaden bør du lenke
+                direkte til søknadskapittelet i produktsiden, som{" "}
+                <Link href="https://www.nav.no/dagpenger#sok">
+                  dette eksempelet for dagpenger
+                </Link>
+                .
+              </BodyLong>
             </div>
             <div>
               <Accordion>
@@ -163,12 +163,12 @@ function Example() {
                   </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
-                  <Accordion.Header>Automatis behandling</Accordion.Header>
+                  <Accordion.Header>Automatisk saksbehandling</Accordion.Header>
                   <Accordion.Content>
                     <BodyLong spacing>
                       Her skal det stå informasjon om hva automatisk behandling
-                      er for noe og hva det betyr for søkeren. Samt informasjon
-                      om søkers rettigheter ved automatisk avslag.
+                      er, hva det betyr for søkeren og informasjon om søkerens
+                      rettigheter ved automatisk avslag.
                     </BodyLong>
                   </Accordion.Content>
                 </Accordion.Item>
@@ -178,8 +178,9 @@ function Example() {
                     <BodyLong spacing>
                       Her skal det stå informasjon om hvordan denne søknaden
                       mellomlagrer informasjonen til søkeren og hvor lenge
-                      informasjonen lagres. Både automatisk lagring og samtykke
-                      til lagring med lagre-knapp.
+                      informasjonen lagres. Vi skal informere om mellomlagring
+                      ved både automatisk lagring og ved samtykke til lagring
+                      med lagre-knapp.
                     </BodyLong>
                   </Accordion.Content>
                 </Accordion.Item>

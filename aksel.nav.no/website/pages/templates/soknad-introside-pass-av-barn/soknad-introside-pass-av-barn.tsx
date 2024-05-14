@@ -130,12 +130,12 @@ function Example() {
                   </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
-                  <Accordion.Header>Automatis behandling</Accordion.Header>
+                  <Accordion.Header>Automatisk saksbehandling</Accordion.Header>
                   <Accordion.Content>
                     <BodyLong spacing>
                       Her skal det stå informasjon om hva automatisk behandling
-                      er for noe og hva det betyr for søkeren. Samt informasjon
-                      om søkers rettigheter ved automatisk avslag.
+                      er, hva det betyr for søkeren og informasjon om søkerens
+                      rettigheter ved automatisk avslag.
                     </BodyLong>
                   </Accordion.Content>
                 </Accordion.Item>
@@ -145,8 +145,9 @@ function Example() {
                     <BodyLong spacing>
                       Her skal det stå informasjon om hvordan denne søknaden
                       mellomlagrer informasjonen til søkeren og hvor lenge
-                      informasjonen lagres. Både automatisk lagring og samtykke
-                      til lagring med lagre-knapp.
+                      informasjonen lagres. Vi skal informere om mellomlagring
+                      ved både automatisk lagring og ved samtykke til lagring
+                      med lagre-knapp.
                     </BodyLong>
                   </Accordion.Content>
                 </Accordion.Item>
