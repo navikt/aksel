@@ -12,7 +12,7 @@ export const ExampletextBlock = defineType({
       title: "Heading",
       name: "title",
       type: "string",
-      initialValue: "Eksempeltekst for A, B og C",
+      initialValue: "Eksempeltekst",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
