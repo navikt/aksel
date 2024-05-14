@@ -2,7 +2,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import {
   CompassIcon,
   ComponentIcon,
@@ -32,6 +32,7 @@ import { NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 
 type PageProps = NextPageT<{
@@ -321,23 +322,16 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const PagePreview = (props: PageProps["props"]) => {
+const Wrapper = (props: PageProps["props"]) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<Forside {...props} />}>
-        <WithPreview
-          comp={Forside}
-          query={query}
-          props={props}
-          params={{ preview: "true" }}
-        />
-      </Suspense>
+      <PagePreview query={query} props={props} params={{ preview: "true" }}>
+        {(_props) => <Forside {..._props} />}
+      </PagePreview>
     );
   }
 
   return <Forside {...props} />;
 };
 
-export default PagePreview;
+export default Wrapper;
