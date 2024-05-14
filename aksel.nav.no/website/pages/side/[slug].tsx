@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -7,6 +6,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
 import { AkselStandaloneDocT, NextPageT, ResolveSlugT } from "@/types";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -86,21 +86,16 @@ const Page = ({ page }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `side/${props.slug}`,
-          }}
-        />
-      </Suspense>
+      <PagePreview
+        query={query}
+        props={props}
+        params={{ slug: `side/${props.slug}` }}
+      >
+        {(_props) => <Page {..._props} />}
+      </PagePreview>
     );
   }
 
