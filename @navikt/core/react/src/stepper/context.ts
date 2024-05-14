@@ -1,17 +1,11 @@
-import { createContext } from "../util/create-context";
+import { createContext } from "react";
 
-interface StepperContextValue {
+interface StepperContextProps {
+  activeStep: number;
   onStepChange: (step: number) => void;
   lastIndex: number;
   orientation: "horizontal" | "vertical";
   interactive: boolean;
-  activeStep: number;
-  currentStep: number;
 }
 
-export const [StepperContextProvider, useStepperContext] =
-  createContext<StepperContextValue>({
-    hookName: "useStepperContext",
-    providerName: "StepperContextProvider",
-    name: "StepperContext",
-  });
+export const StepperContext = createContext<StepperContextProps | null>(null);
