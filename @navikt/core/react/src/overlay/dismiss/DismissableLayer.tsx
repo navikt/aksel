@@ -2,7 +2,6 @@ import React, {
   CSSProperties,
   forwardRef,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -81,6 +80,7 @@ export const [
 >();
 
 let originalBodyPointerEvents: string;
+let changedBodyPointerEvents = false;
 
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
   (props: DismissableLayerProps, ref) => {
@@ -162,7 +162,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
 
-    const pointerEnabled = useMemo(() => {
+    const pointerEnabled = () => {
       let lastIndex = -1;
 
       const descendantNodes = descendants.enabledValues();
@@ -183,7 +183,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
          */
         isBodyPointerEventsDisabled: lastIndex > -1,
       };
-    }, [descendants, index]);
+    };
 
     /**
      * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
@@ -248,7 +248,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!pointerEnabled.isPointerEventsEnabled || !enabled) {
+      if (!pointerEnabled().isPointerEventsEnabled || !enabled) {
         return;
       }
 
@@ -328,7 +328,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * If `disableOutsidePointerEvents` is true,
      * we want to disable pointer events on the body when the first layer is opened.
      */
-    useEffect(() => {
+    /* useEffect(() => {
       if (!node || !disableOutsidePointerEvents || index !== 0 || !enabled) {
         return;
       }
@@ -339,9 +339,34 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       return () => {
         ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
       };
-    }, [node, ownerDocument, disableOutsidePointerEvents, index, enabled]);
+    }, [node, ownerDocument, disableOutsidePointerEvents, index, enabled]); */
+
+    useEffect(() => {
+      if (!node) return;
+      if (disableOutsidePointerEvents) {
+        if (!changedBodyPointerEvents) {
+          originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
+          ownerDocument.body.style.pointerEvents = "none";
+          changedBodyPointerEvents = true;
+        }
+      }
+      return () => {
+        const outsidePointerEventsDisabled = descendants
+          .enabledValues()
+          .filter((obj) => obj.disableOutsidePointerEvents);
+        if (
+          disableOutsidePointerEvents &&
+          outsidePointerEventsDisabled.length === 0
+        ) {
+          changedBodyPointerEvents = false;
+          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+        }
+      };
+    }, [node, ownerDocument, disableOutsidePointerEvents, descendants]);
 
     const Comp = asChild ? Slot : "div";
+
+    const pointerState = pointerEnabled();
 
     return (
       <Comp
@@ -351,8 +376,8 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         onBlurCapture={focusOutside.onBlurCapture}
         onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
         style={{
-          pointerEvents: pointerEnabled.isBodyPointerEventsDisabled
-            ? pointerEnabled.isPointerEventsEnabled
+          pointerEvents: pointerState.isBodyPointerEventsDisabled
+            ? pointerState.isPointerEventsEnabled
               ? "auto"
               : "none"
             : undefined,

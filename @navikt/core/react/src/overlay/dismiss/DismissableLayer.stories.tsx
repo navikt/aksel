@@ -144,13 +144,18 @@ function DismissableBox(props) {
   const [open, setOpen] = React.useState(false);
   const openButtonRef = React.useRef(null);
 
+  const disableOutsidePointer = props.index % 3 === 0 && props.index !== 0;
+
+  const beforeDisableOutsidePointer =
+    (props.index + 1) % 3 === 0 && props.index > 0;
+
   return (
     <DismissableLayer
       {...props}
       onEscapeKeyDown={() => {
         console.log("Escape key down");
       }}
-      disableOutsidePointerEvents={props.index % 3 === 0}
+      disableOutsidePointerEvents={disableOutsidePointer}
       style={{
         display: "inline-block",
         verticalAlign: "middle",
@@ -161,7 +166,7 @@ function DismissableBox(props) {
         ...props.style,
       }}
     >
-      <div>
+      <div style={{ display: "grid" }}>
         <button
           ref={openButtonRef}
           type="button"
@@ -169,6 +174,12 @@ function DismissableBox(props) {
         >
           {open ? "Close" : "Open"} new layer
         </button>
+        {disableOutsidePointer ? (
+          <span style={{ color: "white" }}>DisableOutsidePointer</span>
+        ) : null}
+        {beforeDisableOutsidePointer ? (
+          <span style={{ color: "white" }}>Before DisableOutsidePointer</span>
+        ) : null}
       </div>
 
       {open ? (
