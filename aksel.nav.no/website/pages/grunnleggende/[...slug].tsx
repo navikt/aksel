@@ -1,5 +1,4 @@
 import { GetStaticPaths } from "next/types";
-import { Suspense, lazy } from "react";
 import { Detail } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
@@ -20,6 +19,7 @@ import {
 } from "@/types";
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -138,39 +138,33 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          params={{
-            slug: `grunnleggende/${props.slug}`,
-            type: "ds_artikkel",
-          }}
-          props={props}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "grunnleggende"),
-            },
-            {
-              key: "toc",
-              dataKeys: ["page.content", "page.intro"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "ds_artikkel",
-                  intro: !!v[1],
-                }),
-            },
-          ]}
-        />
-      </Suspense>
+      <PagePreview
+        query={query}
+        props={props}
+        params={{
+          slug: `grunnleggende/${props.slug}`,
+          type: "ds_artikkel",
+        }}
+      >
+        {(_props, loading) => {
+          if (loading) {
+            return <Page {...props} />;
+          }
+          return (
+            <Page
+              {..._props}
+              sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+              toc={generateTableOfContents({
+                content: _props?.page?.content,
+                type: "ds_artikkel",
+              })}
+            />
+          );
+        }}
+      </PagePreview>
     );
   }
 

@@ -1,6 +1,5 @@
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
@@ -16,6 +15,7 @@ import {
   SidebarT,
 } from "@/types";
 import { generateSidebar } from "@/utils";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import { grunnleggendeKategorier } from "../../sanity/config";
 
@@ -115,28 +115,28 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
 const Wrapper = (props: any) => {
   if (props?.preview) {
     return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            type: "ds_artikkel",
-          }}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "grunnleggende"),
-            },
-          ]}
-        />
-      </Suspense>
+      <PagePreview
+        query={query}
+        props={props}
+        params={{
+          type: "ds_artikkel",
+        }}
+      >
+        {(_props, loading) => {
+          if (loading) {
+            return <Page {...props} />;
+          }
+          return (
+            <Page
+              {..._props}
+              sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+            />
+          );
+        }}
+      </PagePreview>
     );
   }
 

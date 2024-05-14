@@ -54,7 +54,7 @@
     "lz-string": "^1.5.0",
     "next": "^14.2.3",
     "next-logger": "^4.0.0",
-    "next-sanity": "5.5.8",
+    "next-sanity": "9.0.17",
     "node-cache": "^5.1.2",
     "pino": "^8.21.0",
     "prism-react-renderer": "^2.0.0",
