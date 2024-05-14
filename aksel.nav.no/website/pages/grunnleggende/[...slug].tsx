@@ -138,7 +138,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
   );
 };
 
-const Wrapper = (props: any) => {
+export default function GrunnleggendePage(props: PageProps["props"]) {
   if (props?.preview) {
     return (
       <PagePreview
@@ -169,6 +169,4 @@ const Wrapper = (props: any) => {
   }
 
   return <Page {...props} />;
-};
-
-export default Wrapper;
+}

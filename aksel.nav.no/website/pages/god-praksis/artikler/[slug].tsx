@@ -1,7 +1,6 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { differenceInMonths } from "date-fns";
 import { GetServerSideProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
 import { UserStateT } from "@/auth/auth.types";
 import { getAuthUserState } from "@/auth/getUserState";
@@ -23,6 +22,7 @@ import {
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { Feedback } from "@/web/Feedback/Feedback";
 import OutdatedAlert from "@/web/OutdatedAlert";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import TableOfContents from "@/web/toc/TableOfContents";
 import NotFound from "../../404";
@@ -270,36 +270,31 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            slug: `god-praksis/artikler/${props?.slug}`,
-          }}
-          resolvers={[
-            {
-              key: "toc",
-              dataKeys: ["page.content"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "aksel_artikkel",
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function KomponentFrontpage(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `god-praksis/artikler/${props?.slug}`,
+      }}
+    >
+      {(_props, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {..._props}
+            toc={generateTableOfContents({
+              content: _props?.page?.content,
+              type: "aksel_artikkel",
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

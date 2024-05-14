@@ -115,7 +115,7 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
   );
 };
 
-const Wrapper = (props: any) => {
+export default function GrunnleggendeFrontpage(props: PageProps["props"]) {
   if (props?.preview) {
     return (
       <PagePreview
@@ -141,6 +141,4 @@ const Wrapper = (props: any) => {
   }
 
   return <Page {...props} />;
-};
-
-export default Wrapper;
+}
