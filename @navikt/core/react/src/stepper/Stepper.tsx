@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import Step, { StepperStepProps } from "./Step";
-import { StepperContext } from "./context";
+import { StepperContextProvider } from "./context";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -94,41 +94,37 @@ export const Stepper: StepperComponent = forwardRef<
           className,
         )}
       >
-        <StepperContext.Provider
-          value={{
-            activeStep,
-            onStepChange,
-            lastIndex: React.Children.count(children),
-            orientation,
-            interactive,
-          }}
-        >
-          {React.Children.map(children, (step, index) => {
-            return (
-              <li
-                className={cl("navds-stepper__item", {
-                  "navds-stepper__item--behind": activeStep > index,
-                  "navds-stepper__item--completed":
-                    React.isValidElement<StepperStepProps>(step) &&
-                    step?.props?.completed,
-                  "navds-stepper__item--non-interactive":
-                    React.isValidElement<StepperStepProps>(step) &&
-                    !(step?.props?.interactive ?? interactive),
-                })}
-                key={index + (children?.toString?.() ?? "")}
+        {React.Children.map(children, (step, index) => {
+          return (
+            <li
+              className={cl("navds-stepper__item", {
+                "navds-stepper__item--behind": activeStep > index,
+                "navds-stepper__item--completed":
+                  React.isValidElement<StepperStepProps>(step) &&
+                  step?.props?.completed,
+                "navds-stepper__item--non-interactive":
+                  React.isValidElement<StepperStepProps>(step) &&
+                  !(step?.props?.interactive ?? interactive),
+              })}
+              key={index + (children?.toString?.() ?? "")}
+            >
+              <span className="navds-stepper__line navds-stepper__line--1" />
+              <StepperContextProvider
+                interactive={interactive}
+                activeStep={activeStep}
+                lastIndex={React.Children.count(children)}
+                currentStep={index}
+                onStepChange={onStepChange}
+                orientation={orientation}
               >
-                <span className="navds-stepper__line navds-stepper__line--1" />
                 {React.isValidElement<StepperStepProps>(step)
-                  ? React.cloneElement(step, {
-                      ...step.props,
-                      unsafe_index: index,
-                    })
+                  ? React.cloneElement(step, step.props)
                   : step}
-                <span className="navds-stepper__line navds-stepper__line--2" />
-              </li>
-            );
-          })}
-        </StepperContext.Provider>
+              </StepperContextProvider>
+              <span className="navds-stepper__line navds-stepper__line--2" />
+            </li>
+          );
+        })}
       </ol>
     );
   },
