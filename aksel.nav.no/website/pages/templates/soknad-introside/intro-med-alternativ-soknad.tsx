@@ -151,7 +151,7 @@ function Example() {
                     Informasjon vi henter om deg
                   </Accordion.Header>
                   <Accordion.Content>
-                    <BodyLong spacing>
+                    <BodyLong>
                       Her skal det så informasjon om hvor vi vil hente
                       opplysninger om søkeren og hva slags opplysninger vi
                       henter.
@@ -163,7 +163,7 @@ function Example() {
                     Hvordan vi behandler personopplysninger
                   </Accordion.Header>
                   <Accordion.Content>
-                    <BodyLong spacing>
+                    <BodyLong>
                       Her skal det stå informasjon om hvordan vi behandler
                       personopplysningene til søkeren.
                     </BodyLong>
@@ -172,7 +172,7 @@ function Example() {
                 <Accordion.Item>
                   <Accordion.Header>Automatisk saksbehandling</Accordion.Header>
                   <Accordion.Content>
-                    <BodyLong spacing>
+                    <BodyLong>
                       Her skal det stå informasjon om hva automatisk behandling
                       er, hva det betyr for søkeren og informasjon om søkerens
                       rettigheter ved automatisk avslag.
@@ -182,7 +182,7 @@ function Example() {
                 <Accordion.Item>
                   <Accordion.Header>Vi lagrer svar underveis</Accordion.Header>
                   <Accordion.Content>
-                    <BodyLong spacing>
+                    <BodyLong>
                       Her skal det stå informasjon om hvordan denne søknaden
                       mellomlagrer informasjonen til søkeren og hvor lenge
                       informasjonen lagres. Vi skal informere om mellomlagring
