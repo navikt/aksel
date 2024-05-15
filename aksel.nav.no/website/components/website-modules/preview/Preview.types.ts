@@ -1,8 +1,4 @@
-export type ResolverT = {
-  key: string;
-  dataKeys: string[];
-  cb: (v: any[]) => any;
-}[];
+import type { QueryParams } from "next-sanity";
 
 export type PreviewProps = {
   children: (props: PreviewProps["props"], loading: boolean) => React.ReactNode;
@@ -13,7 +9,7 @@ export type PreviewProps = {
   /**
    * sanity(groq)-params
    */
-  params?: any;
+  params?: QueryParams;
   /**
    * Default/fallback-data if preview fails and for initial load
    */
