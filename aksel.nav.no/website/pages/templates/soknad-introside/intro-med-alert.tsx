@@ -55,7 +55,7 @@ function Example() {
               </Heading>
               <BodyLong spacing>
                 Seksjonen GuidePanel brukes til en kort, overordnet veiledning
-                til søkeren. Seksjonen henter inn søkerens navn, og gir en en
+                til søkeren. Seksjonen henter inn søkerens navn, og gir en
                 komprimert forklaring av pengestøtten, tiltaket eller
                 hjelpemiddelet. Denne teksten hentes fra ingressen til
                 produktsiden på nav.no.
