@@ -30,8 +30,8 @@ function Example() {
             <Stack
               align="center"
               gap="6"
-              direction={{ xs: "row-reverse", lg: "row" }}
-              justify="start"
+              direction={{ sm: "row-reverse", lg: "row" }}
+              justify={{ sm: "space-between", lg: "start" }}
               wrap={false}
             >
               <Show above="sm">
