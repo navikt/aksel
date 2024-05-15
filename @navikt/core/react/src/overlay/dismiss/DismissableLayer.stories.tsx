@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { HStack, VStack } from "../../layout/stack";
 import { DismissableLayer } from "./DismissableLayer";
 
 export default {
@@ -211,5 +212,96 @@ export const DisableOutsidePointerEventsWhileHidden = () => {
       </DismissableLayer>
       <button onClick={() => setEnabled((x) => !x)}>Should be clickable</button>
     </div>
+  );
+};
+
+export const ParallelDismissableLayer = () => {
+  const [single, setSingle] = useState(false);
+  const [double, setDouble] = useState(false);
+  const [nestedSingle, setNestedSingle] = useState(false);
+  const [nestedDouble, setNestedDouble] = useState(false);
+
+  const Layer = ({
+    disableOutsidePointerEvents,
+    children,
+  }: {
+    disableOutsidePointerEvents?: boolean;
+    children?: React.ReactNode;
+  }) => {
+    const [open, setOpen] = useState(true);
+
+    if (!open) return null;
+
+    const style = {
+      width: 100,
+      height: 100,
+      backgroundColor: "red",
+    };
+
+    return (
+      <DismissableLayer
+        disableOutsidePointerEvents={disableOutsidePointerEvents}
+        style={style}
+      >
+        <button onClick={() => setOpen(false)}>Close me</button>
+        {children}
+      </DismissableLayer>
+    );
+  };
+
+  const state = (_state: boolean) => (_state ? "open" : "closed");
+
+  return (
+    <VStack gap="4">
+      <HStack gap="2">
+        <button onClick={() => setSingle((x) => !x)}>
+          Single {state(single)}
+        </button>
+        <button onClick={() => setDouble((x) => !x)}>
+          Double {state(double)}
+        </button>
+        <button onClick={() => setNestedSingle((x) => !x)}>
+          Nested Single {state(nestedSingle)}
+        </button>
+        <button onClick={() => setNestedDouble((x) => !x)}>
+          Nested Double {state(nestedDouble)}
+        </button>
+      </HStack>
+
+      {single && <Layer disableOutsidePointerEvents />}
+      {double && (
+        <div>
+          <Layer disableOutsidePointerEvents />
+          <Layer disableOutsidePointerEvents />
+        </div>
+      )}
+      {nestedSingle && (
+        <Layer disableOutsidePointerEvents>
+          <Layer disableOutsidePointerEvents />
+        </Layer>
+      )}
+      {nestedDouble && (
+        <div>
+          <Layer disableOutsidePointerEvents>
+            <Layer disableOutsidePointerEvents />
+          </Layer>
+          <Layer disableOutsidePointerEvents>
+            <Layer disableOutsidePointerEvents />
+          </Layer>
+        </div>
+      )}
+
+      <button>Focustrap (does nothing)</button>
+      <button
+        onClick={() => {
+          setSingle(false);
+          setDouble(false);
+          setNestedSingle(false);
+          setNestedDouble(false);
+        }}
+      >
+        Reset
+      </button>
+    </VStack>
   );
 };
