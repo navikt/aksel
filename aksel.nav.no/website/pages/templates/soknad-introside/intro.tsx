@@ -22,11 +22,14 @@ function Example() {
   useDekorator();
 
   return (
-    <Page data-aksel-template="form-intropage-v1" footer={<Footer />}>
+    <Page footer={<Footer />}>
       <Header />
       <VStack as="main" gap="8">
         <Page.Block width="text" gutters>
-          <Bleed marginInline={{ lg: "24" }}>
+          <Bleed
+            marginInline={{ lg: "24" }}
+            data-aksel-template="form-intropage-v1"
+          >
             <Stack
               align="center"
               gap="6"
