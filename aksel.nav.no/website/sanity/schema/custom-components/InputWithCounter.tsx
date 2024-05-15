@@ -15,7 +15,7 @@ export function InputWithCounter(
       {props.renderDefault(props)}
       <Counter
         maxLength={schemaType?.options?.maxLength}
-        currentLength={typeof value === "string" ? value?.length ?? 0 : 0}
+        currentLength={typeof value === "string" ? value.length : 0}
       />
     </VStack>
   );
