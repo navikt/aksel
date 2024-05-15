@@ -1,26 +1,12 @@
-import {
-  EnvelopeClosedIcon,
-  EnvelopeOpenIcon,
-  PaperplaneIcon,
-} from "@navikt/aksel-icons";
 import { ToggleGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log} label="Inbox">
-      <ToggleGroup.Item value="ulest">
-        <EnvelopeClosedIcon aria-hidden />
-        Ulest
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">
-        <EnvelopeOpenIcon aria-hidden />
-        Lest
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">
-        <PaperplaneIcon aria-hidden />
-        Sendt
-      </ToggleGroup.Item>
+      <ToggleGroup.Item value="ulest" label="Ulest" />
+      <ToggleGroup.Item value="lest" label="Lest" />
+      <ToggleGroup.Item value="sendt" label="Sendt" />
     </ToggleGroup>
   );
 };

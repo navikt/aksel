@@ -9,18 +9,21 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
-      <ToggleGroup.Item value="ulest">
-        <EnvelopeClosedIcon aria-hidden />
-        Ulest
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">
-        <EnvelopeOpenIcon aria-hidden />
-        Lest
-      </ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">
-        <PaperplaneIcon aria-hidden />
-        Sendt
-      </ToggleGroup.Item>
+      <ToggleGroup.Item
+        value="ulest"
+        icon={<EnvelopeClosedIcon aria-hidden />}
+        label="Ulest"
+      />
+      <ToggleGroup.Item
+        value="lest"
+        icon={<EnvelopeOpenIcon aria-hidden />}
+        label="Lest"
+      />
+      <ToggleGroup.Item
+        value="sendt"
+        icon={<PaperplaneIcon aria-hidden />}
+        label="Sendt"
+      />
     </ToggleGroup>
   );
 };

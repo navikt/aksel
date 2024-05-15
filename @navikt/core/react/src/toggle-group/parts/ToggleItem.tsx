@@ -4,21 +4,62 @@ import { BodyShort } from "../../typography/BodyShort";
 import { useToggleGroupContext } from "../ToggleGroup.context";
 import { useToggleItem } from "./useToggleItem";
 
-export interface ToggleGroupItemProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
-  /**
-   * Content.
-   */
-  children: React.ReactNode;
+type BaseProps = Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> & {
   /**
    * Value for state-handling.
    */
   value: string;
-}
+};
+
+type ChildrenProps = {
+  /**
+   * @deprecated
+   */
+  children: React.ReactNode;
+  label?: never;
+  icon?: never;
+};
+
+type LabelProps = {
+  children?: never;
+  /**
+   * Item label.
+   */
+  label: React.ReactNode;
+  /**
+   * Item Icon.
+   */
+  icon?: React.ReactNode;
+};
+
+type IconProps = {
+  children?: never;
+  /**
+   * Item label.
+   */
+  label?: React.ReactNode;
+  /**
+   * Item Icon.
+   */
+  icon: React.ReactNode;
+};
+
+export type ToggleGroupItemProps = BaseProps &
+  (ChildrenProps | LabelProps | IconProps);
 
 const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
   (
-    { className, children, value, onClick, onFocus, onKeyDown, ...rest },
+    {
+      className,
+      children,
+      icon,
+      label,
+      value,
+      onClick,
+      onFocus,
+      onKeyDown,
+      ...rest
+    },
     forwardedRef,
   ) => {
     const itemCtx = useToggleItem(
@@ -45,7 +86,14 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
           className="navds-toggle-group__button-inner"
           size={ctx?.size}
         >
-          {children}
+          {children ? (
+            children
+          ) : (
+            <>
+              {icon}
+              {label}
+            </>
+          )}
         </BodyShort>
       </button>
     );

@@ -32,33 +32,21 @@ export default meta;
 
 const Items = (icon?: boolean, both?: boolean) => (
   <>
-    <ToggleGroup.Item value="ulest">
-      {both ? (
-        <>
-          <EnvelopeClosedIcon /> Uleste
-        </>
-      ) : (
-        <>{icon ? <EnvelopeClosedIcon /> : "Uleste"}</>
-      )}
-    </ToggleGroup.Item>
-    <ToggleGroup.Item value="lest">
-      {both ? (
-        <>
-          <EnvelopeOpenIcon /> Leste
-        </>
-      ) : (
-        <>{icon ? <EnvelopeOpenIcon /> : "Leste"}</>
-      )}
-    </ToggleGroup.Item>
-    <ToggleGroup.Item value="sendt">
-      {both ? (
-        <>
-          <InboxUpIcon /> Sendt
-        </>
-      ) : (
-        <>{icon ? <InboxUpIcon /> : "Sendt"}</>
-      )}
-    </ToggleGroup.Item>
+    <ToggleGroup.Item
+      value="ulest"
+      icon={(both ?? icon) && <EnvelopeClosedIcon />}
+      label={both && "Uleste"}
+    />
+    <ToggleGroup.Item
+      value="lest"
+      icon={(both ?? icon) && <EnvelopeOpenIcon />}
+      label={both && "Leste"}
+    />
+    <ToggleGroup.Item
+      value="sendt"
+      icon={(both ?? icon) && <InboxUpIcon />}
+      label={both && "Sendt"}
+    />
   </>
 );
 
