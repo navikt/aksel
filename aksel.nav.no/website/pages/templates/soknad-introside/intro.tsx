@@ -38,7 +38,7 @@ function Example() {
               wrap={false}
             >
               <Show above="sm">
-                <ApplicationPictogram title="Application" />
+                <ApplicationPictogram />
               </Show>
               <VStack gap="1">
                 <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
@@ -249,7 +249,7 @@ function useDekorator() {
   }, []);
 }
 
-const ApplicationPictogram = ({ title, ...props }) => (
+const ApplicationPictogram = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="72"
@@ -258,9 +258,7 @@ const ApplicationPictogram = ({ title, ...props }) => (
     fill="none"
     style={{ flexShrink: 0 }}
     aria-hidden
-    {...props}
   >
-    <title>{title}</title>
     <rect x="23.25" y="22.5" width="26.25" height="9" fill="#CCE2F0" />
     <rect x="23.25" y="36.75" width="26.25" height="9" fill="#CCE2F0" />
     <circle cx="36.75" cy="34.5" r="21" fill="#CCE2F0" />
