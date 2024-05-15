@@ -9,7 +9,12 @@ export const makeConfig = (icons, folder) => {
       name: resolveName(icon).replace(".svg", ""),
       category: icon.containing_frame.pageName,
       sub_category: icon.containing_frame.name,
-      keywords: [...icon.description.split(",").map((x) => x.trim())],
+      keywords: [
+        ...icon.description
+          .split(",")
+          .filter(Boolean)
+          .map((x) => x.trim()),
+      ],
       variant: icon.name.includes("Variant=")
         ? icon.name.replace("Variant=", "")
         : "Stroke",
