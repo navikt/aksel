@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { StrictMode, useRef, useState } from "react";
 import { HStack, VStack } from "../../layout/stack";
 import { DismissableLayer } from "./DismissableLayer";
 
@@ -7,6 +7,10 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
+  excludeStories: [
+    "ParallelDismissableLayer",
+    "DisableOutsidePointerEventsWhileHidden",
+  ],
 };
 
 export const Default = () => {
@@ -252,56 +256,58 @@ export const ParallelDismissableLayer = () => {
   const state = (_state: boolean) => (_state ? "open" : "closed");
 
   return (
-    <VStack gap="4">
-      <HStack gap="2">
-        <button onClick={() => setSingle((x) => !x)}>
-          Single {state(single)}
-        </button>
-        <button onClick={() => setDouble((x) => !x)}>
-          Double {state(double)}
-        </button>
-        <button onClick={() => setNestedSingle((x) => !x)}>
-          Nested Single {state(nestedSingle)}
-        </button>
-        <button onClick={() => setNestedDouble((x) => !x)}>
-          Nested Double {state(nestedDouble)}
-        </button>
-      </HStack>
+    <StrictMode>
+      <VStack gap="4">
+        <HStack gap="2">
+          <button onClick={() => setSingle((x) => !x)}>
+            Single {state(single)}
+          </button>
+          <button onClick={() => setDouble((x) => !x)}>
+            Double {state(double)}
+          </button>
+          <button onClick={() => setNestedSingle((x) => !x)}>
+            Nested Single {state(nestedSingle)}
+          </button>
+          <button onClick={() => setNestedDouble((x) => !x)}>
+            Nested Double {state(nestedDouble)}
+          </button>
+        </HStack>
 
-      {single && <Layer disableOutsidePointerEvents />}
-      {double && (
-        <div>
-          <Layer disableOutsidePointerEvents />
-          <Layer disableOutsidePointerEvents />
-        </div>
-      )}
-      {nestedSingle && (
-        <Layer disableOutsidePointerEvents>
-          <Layer disableOutsidePointerEvents />
-        </Layer>
-      )}
-      {nestedDouble && (
-        <div>
+        {single && <Layer disableOutsidePointerEvents />}
+        {double && (
+          <div>
+            <Layer disableOutsidePointerEvents />
+            <Layer disableOutsidePointerEvents />
+          </div>
+        )}
+        {nestedSingle && (
           <Layer disableOutsidePointerEvents>
             <Layer disableOutsidePointerEvents />
           </Layer>
-          <Layer disableOutsidePointerEvents>
-            <Layer disableOutsidePointerEvents />
-          </Layer>
-        </div>
-      )}
+        )}
+        {nestedDouble && (
+          <div>
+            <Layer disableOutsidePointerEvents>
+              <Layer />
+            </Layer>
+            <Layer>
+              <Layer disableOutsidePointerEvents />
+            </Layer>
+          </div>
+        )}
 
-      <button>Focustrap (does nothing)</button>
-      <button
-        onClick={() => {
-          setSingle(false);
-          setDouble(false);
-          setNestedSingle(false);
-          setNestedDouble(false);
-        }}
-      >
-        Reset
-      </button>
-    </VStack>
+        <button>Focustrap (does nothing)</button>
+        <button
+          onClick={() => {
+            setSingle(false);
+            setDouble(false);
+            setNestedSingle(false);
+            setNestedDouble(false);
+          }}
+        >
+          Reset
+        </button>
+      </VStack>
+    </StrictMode>
   );
 };
