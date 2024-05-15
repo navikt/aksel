@@ -143,10 +143,6 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       forceUpdate: () => setForce({}),
     });
 
-    const [isPointerEventsEnabled, setIsPointerEventsEnabled] = useState(true);
-    const [isBodyPointerEventsDisabled, setIsBodyPointerEventsDisabled] =
-      useState(false);
-
     /**
      * `node` will be set to the ref of the component or nested component
      * Ex: If
@@ -171,27 +167,32 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
+    const pointerState = (() => {
       let lastIndex = -1;
 
       const descendantNodes = descendants.enabledValues();
+
       descendantNodes.forEach((obj, _index) => {
         if (obj.disableOutsidePointerEvents) {
           lastIndex = _index;
         }
       });
 
-      /**
-       * Makes sure we stop events at the highest layer with pointer events disabled.
-       * If not checked, we risk closing every layer when clicking outside the layer.
-       */
-      setIsPointerEventsEnabled(index >= lastIndex);
-      /**
-       * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
-       */
-      setIsBodyPointerEventsDisabled(bodyLockCount > 0);
-    });
+      return {
+        /**
+         * Makes sure we stop events at the highest layer with pointer events disabled.
+         * If not checked, we risk closing every layer when clicking outside the layer.
+         */
+        isPointerEventsEnabled: index >= lastIndex,
+        /**
+         * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
+         */
+        isBodyPointerEventsDisabled: bodyLockCount > 0,
+        pointerStyle: (index >= lastIndex && bodyLockCount > 0
+          ? "auto"
+          : undefined) as CSSProperties["pointerEvents"] | undefined,
+      };
+    })();
 
     /**
      * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
@@ -256,7 +257,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!isPointerEventsEnabled || !enabled) {
+      if (!pointerState.isPointerEventsEnabled || !enabled) {
         return;
       }
 
@@ -375,10 +376,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         onBlurCapture={focusOutside.onBlurCapture}
         onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
         style={{
-          pointerEvents:
-            isBodyPointerEventsDisabled && isPointerEventsEnabled
-              ? "auto"
-              : undefined,
+          pointerEvents: pointerState.pointerStyle,
           ...rest.style,
         }}
       >

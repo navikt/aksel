@@ -7,10 +7,6 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-  excludeStories: [
-    "ParallelDismissableLayer",
-    "DisableOutsidePointerEventsWhileHidden",
-  ],
 };
 
 export const Default = () => {
