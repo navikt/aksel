@@ -80,7 +80,7 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
       return (
         <Comp
           {...rest}
-          aria-current={activeStep === unsafe_index}
+          aria-current={activeStep === unsafe_index ? "step" : undefined}
           ref={ref}
           className={cl("navds-stepper__step", className, {
             "navds-stepper__step--active": activeStep === unsafe_index,

@@ -1,17 +1,17 @@
 .navds-hgrid {
   --__ac-hgrid-columns-xs: initial;
-  --__ac-hgrid-columns-sm: initial;
-  --__ac-hgrid-columns-md: initial;
-  --__ac-hgrid-columns-lg: initial;
-  --__ac-hgrid-columns-xl: initial;
-  --__ac-hgrid-columns-2xl: initial;
+  --__ac-hgrid-columns-sm: var(--__ac-hgrid-columns-xs);
+  --__ac-hgrid-columns-md: var(--__ac-hgrid-columns-sm);
+  --__ac-hgrid-columns-lg: var(--__ac-hgrid-columns-md);
+  --__ac-hgrid-columns-xl: var(--__ac-hgrid-columns-lg);
+  --__ac-hgrid-columns-2xl: var(--__ac-hgrid-columns-xl);
   --__ac-hgrid-columns: var(--__ac-hgrid-columns-xs);
   --__ac-hgrid-gap-xs: initial;
-  --__ac-hgrid-gap-sm: initial;
-  --__ac-hgrid-gap-md: initial;
-  --__ac-hgrid-gap-lg: initial;
-  --__ac-hgrid-gap-xl: initial;
-  --__ac-hgrid-gap-2xl: initial;
+  --__ac-hgrid-gap-sm: var(--__ac-hgrid-gap-xs);
+  --__ac-hgrid-gap-md: var(--__ac-hgrid-gap-sm);
+  --__ac-hgrid-gap-lg: var(--__ac-hgrid-gap-md);
+  --__ac-hgrid-gap-xl: var(--__ac-hgrid-gap-lg);
+  --__ac-hgrid-gap-2xl: var(--__ac-hgrid-gap-xl);
   --__ac-hgrid-gap: var(--__ac-hgrid-gap-xs);
   --__ac-hgrid-align: initial;
 
@@ -23,56 +23,35 @@
 
 @media (min-width: 480px) {
   .navds-hgrid {
-    --__ac-hgrid-columns: var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs));
-    --__ac-hgrid-gap: var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs));
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-sm);
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-sm);
   }
 }
 
 @media (min-width: 768px) {
   .navds-hgrid {
-    --__ac-hgrid-columns: var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs)));
-    --__ac-hgrid-gap: var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs)));
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-md);
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-md);
   }
 }
 
 @media (min-width: 1024px) {
   .navds-hgrid {
-    --__ac-hgrid-columns: var(
-      --__ac-hgrid-columns-lg,
-      var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs)))
-    );
-    --__ac-hgrid-gap: var(--__ac-hgrid-gap-lg, var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs))));
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-lg);
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-lg);
   }
 }
 
 @media (min-width: 1280px) {
   .navds-hgrid {
-    --__ac-hgrid-columns: var(
-      --__ac-hgrid-columns-xl,
-      var(--__ac-hgrid-columns-lg, var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs))))
-    );
-    --__ac-hgrid-gap: var(
-      --__ac-hgrid-gap-xl,
-      var(--__ac-hgrid-gap-lg, var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs))))
-    );
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-xl);
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-xl);
   }
 }
 
 @media (min-width: 1440px) {
   .navds-hgrid {
-    --__ac-hgrid-columns: var(
-      --__ac-hgrid-columns-2xl,
-      var(
-        --__ac-hgrid-columns-xl,
-        var(--__ac-hgrid-columns-lg, var(--__ac-hgrid-columns-md, var(--__ac-hgrid-columns-sm, var(--__ac-hgrid-columns-xs))))
-      )
-    );
-    --__ac-hgrid-gap: var(
-      --__ac-hgrid-gap-2xl,
-      var(
-        --__ac-hgrid-gap-xl,
-        var(--__ac-hgrid-gap-lg, var(--__ac-hgrid-gap-md, var(--__ac-hgrid-gap-sm, var(--__ac-hgrid-gap-xs))))
-      )
-    );
+    --__ac-hgrid-columns: var(--__ac-hgrid-columns-2xl);
+    --__ac-hgrid-gap: var(--__ac-hgrid-gap-2xl);
   }
 }

@@ -14,6 +14,7 @@ import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import DoDont from "@/cms/do-dont/DoDont";
+import ExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
 import ExpansionCard from "@/cms/expansioncard/ExpansionCard";
 import PropsSeksjon from "@/cms/props/PropsSeksjon";
 import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
@@ -46,6 +47,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
+    exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
   },
   unknownType: () => null,
   block: {
