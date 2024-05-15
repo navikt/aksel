@@ -32,11 +32,6 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin/dev",
     icon: TestFlaskIcon,
     auth: authStore("development"),
-    document: {
-      newDocumentOptions: (prev) => {
-        return prev;
-      },
-    },
   },
 ]);
 
