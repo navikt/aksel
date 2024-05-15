@@ -77,7 +77,7 @@ function Example() {
               <Heading level="3" size="medium" spacing>
                 Dette kan du ikke søke om her
               </Heading>
-              <BodyLong spacing>
+              <BodyLong>
                 Legg inn informasjon om hva du ikke kan søke om fra denne siden
                 og legg inn lenke til de aktuelle søknadene man skal bruke i
                 stedet.
