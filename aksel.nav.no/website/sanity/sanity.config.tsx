@@ -12,8 +12,8 @@ import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode } from "./desk/documentNode";
 import { structure } from "./desk/structure";
 import { publicationFlow } from "./plugins";
-import { schema } from "./schema";
-import { InputWithCounter } from "./schema/custom-components";
+import { schema } from "./schemaTypes";
+import { InputWithCounter } from "./schemaTypes/custom-components";
 import { newDocumentsCreator } from "./util";
 
 export const workspaceConfig = defineConfig([
