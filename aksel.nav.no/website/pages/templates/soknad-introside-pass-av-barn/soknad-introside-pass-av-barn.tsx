@@ -153,7 +153,7 @@ function Example() {
                 </Accordion.Item>
               </Accordion>
             </div>
-            <Box paddingBlock="0 12">
+            <div>
               <BodyLong>
                 Det er viktig at du gir oss riktige opplysninger slik at vi kan
                 behandle saken din.{" "}
@@ -173,7 +173,7 @@ function Example() {
               >
                 Start søknad
               </Button>
-            </Box>
+            </div>
           </VStack>
         </Page.Block>
       </VStack>
