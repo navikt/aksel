@@ -30,25 +30,33 @@ const meta: Meta<typeof ToggleGroup> = {
 
 export default meta;
 
-const Items = (icon?: boolean, both?: boolean) => (
-  <>
-    <ToggleGroup.Item
-      value="ulest"
-      icon={(both ?? icon) && <EnvelopeClosedIcon />}
-      label={both && "Uleste"}
-    />
-    <ToggleGroup.Item
-      value="lest"
-      icon={(both ?? icon) && <EnvelopeOpenIcon />}
-      label={both && "Leste"}
-    />
-    <ToggleGroup.Item
-      value="sendt"
-      icon={(both ?? icon) && <InboxUpIcon />}
-      label={both && "Sendt"}
-    />
-  </>
-);
+const Items = (icon?: boolean, both?: boolean) => {
+  const hasLabel = both || !icon;
+
+  const iconProps = hasLabel
+    ? { "aria-hidden": true }
+    : { title: "Ikontittel" };
+
+  return (
+    <>
+      <ToggleGroup.Item
+        value="ulest"
+        icon={(both ?? icon) && <EnvelopeClosedIcon {...iconProps} />}
+        label={hasLabel && "Uleste"}
+      />
+      <ToggleGroup.Item
+        value="lest"
+        icon={(both ?? icon) && <EnvelopeOpenIcon {...iconProps} />}
+        label={hasLabel && "Leste"}
+      />
+      <ToggleGroup.Item
+        value="sendt"
+        icon={(both ?? icon) && <InboxUpIcon {...iconProps} />}
+        label={hasLabel && "Sendt"}
+      />
+    </>
+  );
+};
 
 export const Default = (props) => {
   const [activeValue, setActiveValue] = useState("ulest");
