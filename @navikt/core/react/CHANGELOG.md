@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 6.8.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+### Patch Changes
+
+- Stepper.Step: Set aria-current to "step" instead of true ([#2920](https://github.com/navikt/aksel/pull/2920))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.8.0
+  - @navikt/aksel-icons@6.8.0
+
 ## 6.7.1
 
 ### Patch Changes
