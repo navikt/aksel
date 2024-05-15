@@ -375,11 +375,10 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         onBlurCapture={focusOutside.onBlurCapture}
         onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
         style={{
-          pointerEvents: isBodyPointerEventsDisabled
-            ? isPointerEventsEnabled
+          pointerEvents:
+            isBodyPointerEventsDisabled && isPointerEventsEnabled
               ? "auto"
-              : undefined
-            : undefined,
+              : undefined,
           ...rest.style,
         }}
       >
