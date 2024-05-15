@@ -95,16 +95,16 @@ export const Stepper: StepperComponent = forwardRef<
         )}
       >
         {React.Children.map(children, (step, index) => {
+          const stepProps: Partial<StepperStepProps> =
+            React.isValidElement<StepperStepProps>(step) ? step.props : {};
+
           return (
             <li
               className={cl("navds-stepper__item", {
                 "navds-stepper__item--behind": activeStep > index,
-                "navds-stepper__item--completed":
-                  React.isValidElement<StepperStepProps>(step) &&
-                  step?.props?.completed,
+                "navds-stepper__item--completed": stepProps.completed,
                 "navds-stepper__item--non-interactive":
-                  React.isValidElement<StepperStepProps>(step) &&
-                  !(step?.props?.interactive ?? interactive),
+                  stepProps.interactive ?? interactive,
               })}
               key={index + (children?.toString?.() ?? "")}
             >
@@ -113,13 +113,11 @@ export const Stepper: StepperComponent = forwardRef<
                 interactive={interactive}
                 activeStep={activeStep}
                 lastIndex={React.Children.count(children)}
-                currentStep={index}
+                index={index}
                 onStepChange={onStepChange}
                 orientation={orientation}
               >
-                {React.isValidElement<StepperStepProps>(step)
-                  ? React.cloneElement(step, step.props)
-                  : step}
+                {step}
               </StepperContextProvider>
               <span className="navds-stepper__line navds-stepper__line--2" />
             </li>

@@ -6,7 +6,7 @@ interface StepperContextValue {
   orientation: "horizontal" | "vertical";
   interactive: boolean;
   activeStep: number;
-  currentStep: number;
+  index: number;
 }
 
 export const [StepperContextProvider, useStepperContext] =
