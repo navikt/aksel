@@ -1,13 +1,7 @@
 import Avatar from "boring-avatars";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
-import {
-  SANITY_API_VERSION,
-  landingsider,
-  previews,
-  prinsippKategorier,
-} from "../../config";
-import { Iframe } from "./IFrame";
+import { SANITY_API_VERSION, prinsippKategorier } from "../../config";
 import { adminStructure } from "./admin";
 import { gpStructure } from "./god-praksis";
 import { grunnleggendeStructure } from "./grunnleggende";
@@ -48,10 +42,7 @@ const filtered = [
   "gp.innholdstype",
 ];
 
-export const structure: StructureResolver = async (
-  S,
-  { currentUser, getClient },
-) => {
+const structure: StructureResolver = async (S, { currentUser, getClient }) => {
   const editor = await getClient({ apiVersion: SANITY_API_VERSION }).fetch(
     `*[_type == "editor" && ($mail == lower(email) || $mail == lower(alt_email))][0]`,
     { mail: currentUser?.email.toLowerCase() ?? "" },
@@ -134,58 +125,4 @@ export const structure: StructureResolver = async (
     ]);
 };
 
-export const resolveProductionUrl = (doc) => {
-  const basePath = "https://aksel.nav.no";
-  const devPath = "http://localhost:3000";
-
-  if (previews.includes(doc._type)) {
-    const slug = doc.slug?.current;
-    const previewUrl = `/preview/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
-  }
-  if (landingsider.find((x) => x.name === doc._type)) {
-    const slug = landingsider.find((x) => x.name === doc._type)?.url;
-    const previewUrl = `/preview/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
-  }
-
-  if ("gp.tema" === doc._type) {
-    const slug = doc.slug?.current;
-    const previewUrl = `/preview/god-praksis/${slug}`;
-    if (!slug) {
-      return "";
-    }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
-  }
-};
-
-export const defaultDocumentNode = (S, { schemaType }) => {
-  if ([...previews, ...landingsider.map((x) => x.name)].includes(schemaType)) {
-    return S.document().views([
-      S.view.form(),
-
-      S.view
-        .component(Iframe)
-        .options({
-          url: (doc) => resolveProductionUrl(doc),
-        })
-        .title("Forhåndsvisning"),
-    ]);
-  }
-  if (schemaType === "aksel_forside") {
-    return S.document().views([S.view.form()]);
-  }
-  return S.document().views([S.view.form()]);
-};
+export { structure };
