@@ -327,6 +327,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  title: "Introside pass av barn",
+  index: 0,
 };

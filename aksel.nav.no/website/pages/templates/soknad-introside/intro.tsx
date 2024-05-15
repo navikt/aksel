@@ -354,7 +354,7 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 0,
   title: "Introside",
   desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
 };
