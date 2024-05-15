@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.8
+
+### @navikt/ds-react
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+* Stepper.Step: Set aria-current to "step" instead of true ([#2920](https://github.com/navikt/aksel/pull/2920))
+
+### @navikt/ds-css
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+* HGrid: forenklet CSS. ([#2917](https://github.com/navikt/aksel/pull/2917))
+
 ## 6.7
 
 ### @navikt/ds-react
