@@ -91,7 +91,7 @@ function Example() {
               </List>
               <BodyLong spacing>
                 Du kan lese mer om AFP i privat sektor hos Fellesordningen for
-                AFP
+                AFP.
               </BodyLong>
               <Heading level="3" size="medium" spacing>
                 Dette kan du ikke søke om her
