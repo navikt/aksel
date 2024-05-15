@@ -14,4 +14,5 @@ export const [StepperContextProvider, useStepperContext] =
     hookName: "useStepperContext",
     providerName: "StepperContextProvider",
     name: "StepperContext",
+    errorMessage: "<Stepper.Step> has to be used within <Stepper>",
   });
