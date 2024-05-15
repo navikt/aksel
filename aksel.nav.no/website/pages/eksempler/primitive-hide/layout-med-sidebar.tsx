@@ -113,12 +113,12 @@ const DesktopSidebar = ({ className }: { className?: string }) => (
       </Heading>
     </Box>
     <nav aria-label="innhold">
-      <List>
+      <ul>
         <LinkElement>Hvem kan få?</LinkElement>
         <LinkElement>Hvor lenge?</LinkElement>
         <LinkElement>Hvor mye penger kan du få?</LinkElement>
         <LinkElement>Når utbetales pengene?</LinkElement>
-      </List>
+      </ul>
     </nav>
   </Box>
 );
