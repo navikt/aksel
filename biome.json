@@ -42,7 +42,6 @@
         "noShadowRestrictedNames": "off",
         "noArrayIndexKey": "off",
         "noAssignInExpressions": "off",
-        "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
         "useIsArray": "off",
         "noGlobalIsNan": "off",

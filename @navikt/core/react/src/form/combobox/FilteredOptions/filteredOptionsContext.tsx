@@ -148,7 +148,7 @@ const FilteredOptionsProvider = ({
   );
 
   const ariaDescribedBy = useMemo(() => {
-    let activeOption;
+    let activeOption: string = "";
     if (!isLoading && filteredOptions.length === 0 && !allowNewValues) {
       activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if (value || isLoading) {
@@ -164,6 +164,7 @@ const FilteredOptionsProvider = ({
     const maybeMaxSelectedOptionsId =
       maxSelected?.isLimitReached &&
       filteredOptionsUtils.getMaxSelectedOptionsId(id);
+
     return (
       cl(activeOption, maybeMaxSelectedOptionsId, partialAriaDescribedBy) ||
       undefined
