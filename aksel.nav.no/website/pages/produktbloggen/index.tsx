@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next/types";
+import type { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
@@ -6,7 +6,7 @@ import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import {
+import type {
   AkselBloggDocT,
   AkselBloggFrontpageT,
   NextPageT,

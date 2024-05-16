@@ -1,4 +1,4 @@
-import { Locale, isBefore, parse, sub } from "date-fns";
+import { type Locale, isBefore, parse, sub } from "date-fns";
 import { isValidDate } from "./check-dates";
 
 export const INPUT_DATE_STRING_FORMAT_DATE = "dd.MM.yyyy";

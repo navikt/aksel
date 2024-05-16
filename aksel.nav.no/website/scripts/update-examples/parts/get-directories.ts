@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { DirectoryDataT, RootDirectoriesT } from "../types";
+import type { DirectoryDataT, RootDirectoriesT } from "../types";
 
 /**
  * Returns metadata for each 'page' found in directory

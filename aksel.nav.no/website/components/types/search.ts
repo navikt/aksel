@@ -1,5 +1,5 @@
 import type { FuseResultMatch } from "fuse.js";
-import { allArticleDocuments } from "@/sanity/config";
+import type { allArticleDocuments } from "@/sanity/config";
 
 export const searchOptions: {
   [K in (typeof allArticleDocuments)[number]]: {

@@ -1,4 +1,8 @@
-import { SectionBlock, UsersListResponse, WebClient } from "@slack/web-api";
+import {
+  type SectionBlock,
+  type UsersListResponse,
+  WebClient,
+} from "@slack/web-api";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import { createChildLogger } from "@navikt/next-logger";
@@ -7,8 +11,8 @@ import { getAuthUser } from "@/auth/getAuthUser";
 import { getClient } from "@/sanity/client.server";
 import {
   SlackFeedbackError,
-  SlackFeedbackErrorT,
-  SlackFeedbackResponse,
+  type SlackFeedbackErrorT,
+  type SlackFeedbackResponse,
   fetchSlackMembers,
   findUserByEmail,
 } from "@/slack";

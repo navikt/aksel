@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { SidebarInputNodeT, SidebarT } from "../../types/sanity-schema";
+import type { SidebarInputNodeT, SidebarT } from "../../types/sanity-schema";
 import {
   generateSidebar,
   sortDeprecated,

@@ -1,5 +1,5 @@
 import Avatar from "boring-avatars";
-import { StructureResolver } from "sanity/structure";
+import type { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
   SANITY_API_VERSION,

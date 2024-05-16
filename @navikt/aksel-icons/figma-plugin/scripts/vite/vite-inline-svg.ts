@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Plugin } from "vite";
+import type { Plugin } from "vite";
 
 function svgToDataURL(svgStr: string) {
   const encoded = encodeURIComponent(svgStr)

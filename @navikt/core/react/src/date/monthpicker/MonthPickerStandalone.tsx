@@ -5,7 +5,7 @@ import { SharedMonthProvider } from "../context";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+import type { MonthPickerProps } from "./types";
 
 export interface MonthPickerStandaloneProps
   extends Omit<

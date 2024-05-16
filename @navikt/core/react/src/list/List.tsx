@@ -4,7 +4,7 @@ import { BodyShort, Heading } from "../typography";
 import { useId } from "../util/hooks";
 import { ListItem } from "./ListItem";
 import { ListContext } from "./context";
-import { ListProps } from "./types";
+import type { ListProps } from "./types";
 
 export interface ListComponent
   extends React.ForwardRefExoticComponent<

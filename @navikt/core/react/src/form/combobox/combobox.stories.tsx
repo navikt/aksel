@@ -1,9 +1,9 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React, { useMemo, useRef, useState } from "react";
 import { Chips } from "../../chips";
 import { TextField } from "../textfield";
-import { ComboboxProps, UNSAFE_Combobox } from "./index";
+import { type ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",

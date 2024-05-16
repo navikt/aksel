@@ -5,9 +5,9 @@ import {
   isSameMonth,
 } from "date-fns";
 import {
-  DateAfter,
-  DateBefore,
-  DateRange,
+  type DateAfter,
+  type DateBefore,
+  type DateRange,
   isDateAfterType,
   isDateBeforeType,
   isDateRange,

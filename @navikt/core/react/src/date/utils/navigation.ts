@@ -1,5 +1,5 @@
 import { setYear } from "date-fns";
-import { Matcher, isMatch } from "./is-match";
+import { type Matcher, isMatch } from "./is-match";
 
 export const nextEnabled = (
   months,

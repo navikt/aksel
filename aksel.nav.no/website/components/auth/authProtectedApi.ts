@@ -1,5 +1,5 @@
 import { logger } from "@navikt/next-logger";
-import { ApiHandler } from "@/auth/auth.types";
+import type { ApiHandler } from "@/auth/auth.types";
 import { validateWonderwallToken } from "@/auth/validateWonderwall";
 
 /**

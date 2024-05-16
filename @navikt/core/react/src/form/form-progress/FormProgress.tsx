@@ -4,10 +4,10 @@ import Button from "../../button/Button";
 import Collapsible from "../../collapsible/Collapsible";
 import { HStack } from "../../layout/stack";
 import { ProgressBar } from "../../progress-bar";
-import { Stepper, StepperStepProps } from "../../stepper";
+import { Stepper, type StepperStepProps } from "../../stepper";
 import { BodyShort } from "../../typography";
 import { useI18n } from "../../util/i18n/i18n.context";
-import { ComponentTranslation } from "../../util/i18n/i18n.types";
+import type { ComponentTranslation } from "../../util/i18n/i18n.types";
 
 export interface FormProgressProps
   extends React.HTMLAttributes<HTMLDivElement> {

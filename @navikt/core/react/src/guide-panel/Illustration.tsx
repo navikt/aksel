@@ -1,4 +1,4 @@
-import React, { SVGProps } from "react";
+import React, { type SVGProps } from "react";
 import { useId } from "../util/hooks";
 
 interface SVGRProps {

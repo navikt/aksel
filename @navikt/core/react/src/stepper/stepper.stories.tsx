@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { VStack } from "../layout/stack";
 import { BodyLong } from "../typography";

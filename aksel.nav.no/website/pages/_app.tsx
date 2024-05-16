@@ -1,4 +1,4 @@
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";

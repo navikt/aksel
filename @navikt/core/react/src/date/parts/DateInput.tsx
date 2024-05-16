@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { InputHTMLAttributes, forwardRef, useRef } from "react";
+import React, { type InputHTMLAttributes, forwardRef, useRef } from "react";
 import { CalendarIcon } from "@navikt/aksel-icons";
 import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "../../form/useFormField";
+import { type FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useDateInputContext } from "../context";

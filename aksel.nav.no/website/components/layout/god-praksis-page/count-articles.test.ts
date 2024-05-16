@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
+import type { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
 import { getArticleCounts } from "./count-articles";
 
 describe("getArticleCounts", () => {

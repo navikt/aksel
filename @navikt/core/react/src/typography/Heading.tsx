@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util/types";
-import { TypoProps } from "./types";
+import type { OverridableComponent } from "../util/types";
+import type { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
 export interface HeadingProps

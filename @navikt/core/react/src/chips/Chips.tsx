@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
-import { OverridableComponent } from "../util/types";
-import RemovableChips, { ChipsRemovableProps } from "./Removable";
-import ToggleChips, { ChipsToggleProps } from "./Toggle";
+import React, { type HTMLAttributes, forwardRef } from "react";
+import type { OverridableComponent } from "../util/types";
+import RemovableChips, { type ChipsRemovableProps } from "./Removable";
+import ToggleChips, { type ChipsToggleProps } from "./Toggle";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;

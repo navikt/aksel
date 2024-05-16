@@ -10,7 +10,7 @@ import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";
 import { useFileUpload } from "../../useFileUpload";
-import { FileUploadDropzoneProps } from "./dropzone.types";
+import type { FileUploadDropzoneProps } from "./dropzone.types";
 import { useDropzone } from "./useDropzone";
 
 const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(

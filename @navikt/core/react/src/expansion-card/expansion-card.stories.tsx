@@ -1,7 +1,7 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { PlantIcon } from "@navikt/aksel-icons";
-import { ExpansionCard, ExpansionCardProps } from ".";
+import { ExpansionCard, type ExpansionCardProps } from ".";
 import { BodyLong } from "../typography";
 
 const meta: Meta<typeof ExpansionCard> = {

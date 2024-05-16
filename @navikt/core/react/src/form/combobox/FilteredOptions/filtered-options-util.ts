@@ -1,4 +1,4 @@
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 
 const normalizeText = (text: string): string =>
   typeof text === "string" ? text.toLocaleLowerCase().trim() : "";

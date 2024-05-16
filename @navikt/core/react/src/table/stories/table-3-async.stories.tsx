@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { Loader } from "../../loader";
 import { Pagination } from "../../pagination";
 import Table from "../Table";
-import { SortState } from "../types";
+import type { SortState } from "../types";
 import peopleJson from "./people.json";
 
 export default {

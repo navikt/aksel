@@ -1,5 +1,5 @@
-import { allArticleDocuments } from "@/sanity/config";
-import { TableOfContentsT } from "@/types";
+import type { allArticleDocuments } from "@/sanity/config";
+import type { TableOfContentsT } from "@/types";
 
 type GeneralPageToc = {
   type: (typeof allArticleDocuments)[number];

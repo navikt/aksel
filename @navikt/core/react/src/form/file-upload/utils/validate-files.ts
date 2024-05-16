@@ -1,7 +1,7 @@
 import {
-  FileObject,
-  FileUploadBaseProps,
-  FilesPartitioned,
+  type FileObject,
+  type FileUploadBaseProps,
+  type FilesPartitioned,
   fileRejectionReason,
 } from "../FileUpload.types";
 import { isAcceptedFileType } from "./is-accepted-file-type";

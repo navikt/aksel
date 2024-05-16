@@ -1,8 +1,8 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { HTMLAttributes, forwardRef } from "react";
+import { type HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { urlFor } from "@/sanity/interface";

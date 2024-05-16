@@ -1,12 +1,12 @@
 import cl from "clsx";
-import { CSSProperties, useCallback, useState } from "react";
+import { type CSSProperties, useCallback, useState } from "react";
 import { Box } from "@navikt/ds-react";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
 import Cube from "@/layout/god-praksis-page/hero/HeroCube";
 import { HeroCardList } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroCardList";
 import { HeroIntro } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroIntro";
 import { HeroSelectButton } from "@/layout/god-praksis-page/hero/tema-hero/parts/HeroSelectButton";
-import { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
+import type { GpTemaT, HeroNavT } from "@/layout/god-praksis-page/interface";
 import styles from "../Hero.module.css";
 
 type GpTemaHeroProps = { tema: GpTemaT | null } & HeroNavT;

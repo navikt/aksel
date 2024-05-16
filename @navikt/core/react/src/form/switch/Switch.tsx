@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, {
-  InputHTMLAttributes,
+  type InputHTMLAttributes,
   forwardRef,
   useEffect,
   useState,
@@ -9,7 +9,7 @@ import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 const SelectedIcon = () => (
   <svg

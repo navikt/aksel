@@ -1,8 +1,8 @@
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
 import { Slot } from "../util/Slot";
-import { AsChildProps } from "../util/types";
+import type { AsChildProps } from "../util/types";
 
 interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {
   /**

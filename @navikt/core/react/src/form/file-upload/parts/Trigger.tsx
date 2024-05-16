@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Slot } from "../../../util/Slot";
-import { FileUploadBaseProps } from "../FileUpload.types";
+import type { FileUploadBaseProps } from "../FileUpload.types";
 import { useFileUpload } from "../useFileUpload";
 
 export interface FileUploadTriggerProps

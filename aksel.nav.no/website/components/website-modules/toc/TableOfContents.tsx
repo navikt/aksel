@@ -1,4 +1,4 @@
-import { TableOfContentsT } from "@/types";
+import type { TableOfContentsT } from "@/types";
 import { Menu, MenuHeading } from "@/web/menu/Menu";
 import ScrollFade from "./parts/ScrollFade";
 import UlList from "./parts/UlList";

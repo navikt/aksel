@@ -3,7 +3,7 @@ import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
-import { RelatertInnholdT } from "@/types";
+import type { RelatertInnholdT } from "@/types";
 
 type RelatertInnholdProps = {
   node: RelatertInnholdT;

@@ -1,5 +1,5 @@
 import { useMemoObservable } from "react-rx";
-import { SanityDocument, useDocumentStore, useFormValue } from "sanity";
+import { type SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { FileFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading } from "@navikt/ds-react";
 

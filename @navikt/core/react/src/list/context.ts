@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ListProps } from "./types";
+import type { ListProps } from "./types";
 
 interface ListContextProps {
   listType: ListProps["as"];

@@ -1,5 +1,9 @@
 import React from "react";
-import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
+import {
+  type CaptionProps,
+  useDayPicker,
+  useNavigation,
+} from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Label } from "../../../typography";

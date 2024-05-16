@@ -1,6 +1,6 @@
 import throttle from "lodash/throttle";
 import { useEffect, useRef, useState } from "react";
-import { TableOfContentsT } from "../../types/toc";
+import type { TableOfContentsT } from "../../types/toc";
 
 export const useToc = (toc: TableOfContentsT) => {
   const [activeId, setActiveId] = useState<string | null>(null);

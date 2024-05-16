@@ -1,18 +1,18 @@
 import { groq } from "next-sanity";
-import { GetServerSideProps } from "next/types";
+import type { GetServerSideProps } from "next/types";
 import { useMemo } from "react";
 import { Box, Page, VStack } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import { ArticleSections } from "@/layout/god-praksis-page/ArticleSections";
 import { GpChipNavigation } from "@/layout/god-praksis-page/chipnavigation/GpChipNavigation";
 import TemaHero from "@/layout/god-praksis-page/hero/tema-hero/TemaHero";
-import {
+import type {
   GpSlugQueryResponse,
   ParsedGPArticle,
 } from "@/layout/god-praksis-page/interface";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
-import { NextPageT } from "@/types";
+import type { NextPageT } from "@/types";
 import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 

@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 import Nextlink from "next/link";
 import { Heading } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
-import { ArticleListT } from "@/types";
+import type { ArticleListT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 
 const ComponentOverview = ({ node }: { node: ArticleListT }) => {

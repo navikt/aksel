@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import Enquirer from "enquirer";
-import { AnswersT } from "./config";
+import type { AnswersT } from "./config";
 
 export async function inquiry(answers: AnswersT, questions: any[]) {
   return await Enquirer.prompt(

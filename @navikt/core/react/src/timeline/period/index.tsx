@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
-import { TimelineComponentTypes } from "../utils/types.internal";
+import type { TimelineComponentTypes } from "../utils/types.internal";
 import ClickablePeriod from "./ClickablePeriod";
 import NonClickablePeriod from "./NonClickablePeriod";
 

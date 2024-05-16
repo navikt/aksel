@@ -1,8 +1,8 @@
 import fs from "fs";
 import JSON5 from "json5";
 import path from "path";
-import { CodeExampleSchemaT } from "../../../components/types";
-import { RootDirectoriesT } from "../types";
+import type { CodeExampleSchemaT } from "../../../components/types";
+import type { RootDirectoriesT } from "../types";
 
 export function extractMetadata(
   dirName: string,

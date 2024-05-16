@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
-import { CodeExampleSchemaT } from "../../components/types";
+import type { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
-import { RootDirectoriesT } from "./types";
+import type { RootDirectoriesT } from "./types";
 
 dotenv.config();
 

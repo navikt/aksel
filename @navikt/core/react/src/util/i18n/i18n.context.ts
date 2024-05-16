@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { get } from "./get";
-import {
+import type {
   Component,
   ComponentTranslation,
   TranslationDictionary,

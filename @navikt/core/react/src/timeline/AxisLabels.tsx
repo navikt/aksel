@@ -19,7 +19,7 @@ import { Detail } from "../typography/Detail";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
-import { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
+import type { AxisLabel, AxisLabelTemplates } from "./utils/types.external";
 
 export const dayLabels = (
   start: Date,

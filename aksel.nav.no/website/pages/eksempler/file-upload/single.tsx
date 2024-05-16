@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileObject, UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
+import { type FileObject, UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {

@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
-import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { type DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { getLocaleFromString, labels } from "../utils";
 import Caption from "./parts/Caption";
@@ -10,7 +10,7 @@ import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
 import TableHead from "./parts/TableHead";
 import WeekNumber from "./parts/WeekNumber";
-import {
+import type {
   DatePickerDefaultProps,
   MultipleMode,
   RangeMode,

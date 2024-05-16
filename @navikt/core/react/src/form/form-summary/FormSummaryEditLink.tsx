@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Link } from "../../link";
-import { OverridableComponent } from "../../util/types";
+import type { OverridableComponent } from "../../util/types";
 
 // export type FormSummaryEditProps = Partial<LinkProps>;
 export interface FormSummaryEditProps

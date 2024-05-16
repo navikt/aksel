@@ -1,7 +1,7 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import { ComponentIcon } from "@navikt/aksel-icons";
-import { Tag, TagProps } from ".";
+import { Tag, type TagProps } from ".";
 import { HStack, VStack } from "../layout/stack";
 
 const sizes: TagProps["size"][] = ["xsmall", "small", "medium"];

@@ -1,4 +1,4 @@
-import { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
+import type { ParsedGPArticle } from "@/layout/god-praksis-page/interface";
 
 /**
  * To make sure that all keys are present in the counts object,

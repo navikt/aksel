@@ -6,7 +6,7 @@ import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
-import { ArticleT } from "./Card";
+import type { ArticleT } from "./Card";
 import { Tag } from "./Tag";
 
 export const Highlight = ({

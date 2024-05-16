@@ -4,7 +4,7 @@ import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { CheckboxProps } from "./types";
+import type { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(

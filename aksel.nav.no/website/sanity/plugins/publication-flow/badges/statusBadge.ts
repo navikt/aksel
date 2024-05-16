@@ -1,5 +1,5 @@
 import { differenceInMonths } from "date-fns";
-import { DocumentBadgeDescription, DocumentBadgeProps } from "sanity";
+import type { DocumentBadgeDescription, DocumentBadgeProps } from "sanity";
 
 export const CreateStatusBadge = () => {
   const WrappedStatusBadge = (

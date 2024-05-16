@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { PositionedPeriod } from "../utils/types.internal";
+import type { PositionedPeriod } from "../utils/types.internal";
 
 interface RowContextProps {
   periods: PositionedPeriod[];

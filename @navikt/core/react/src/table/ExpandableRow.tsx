@@ -6,7 +6,7 @@ import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
-import Row, { RowProps } from "./Row";
+import Row, { type RowProps } from "./Row";
 
 export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   /**

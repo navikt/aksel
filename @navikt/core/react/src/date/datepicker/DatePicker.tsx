@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
-import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { type DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -16,7 +16,7 @@ import { HeadRow } from "./parts/HeadRow";
 import Row from "./parts/Row";
 import TableHead from "./parts/TableHead";
 import WeekNumber from "./parts/WeekNumber";
-import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
+import type { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 

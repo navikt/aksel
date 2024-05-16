@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { FileItem, UNSAFE_FileUpload as FileUpload } from ".";
+import { type FileItem, UNSAFE_FileUpload as FileUpload } from ".";
 import { VStack } from "../../layout/stack";
 
 const meta: Meta<typeof FileUpload.Item> = {

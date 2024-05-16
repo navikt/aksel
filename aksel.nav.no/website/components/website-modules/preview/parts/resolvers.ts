@@ -1,4 +1,4 @@
-import { ResolverT } from "./types";
+import type { ResolverT } from "./types";
 
 /**
  * `runResolvers` is responsible for executing a set of resolvers for streamed data from sanity.

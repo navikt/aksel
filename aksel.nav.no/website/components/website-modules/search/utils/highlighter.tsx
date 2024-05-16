@@ -1,7 +1,7 @@
 import cl from "clsx";
 import type { FuseResultMatch } from "fuse.js";
 import React from "react";
-import { searchOptions } from "@/types";
+import type { searchOptions } from "@/types";
 
 function splitStr(str: string, query: string) {
   const regexStr = query.toLowerCase().split(" ").join("|");

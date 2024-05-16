@@ -5,7 +5,7 @@ import { InputContextProvider } from "./Input/Input.context";
 import { SelectedOptionsProvider } from "./SelectedOptions/selectedOptionsContext";
 import { mapToComboboxOptionArray } from "./combobox-utils";
 import { CustomOptionsProvider } from "./customOptionsContext";
-import { ComboboxProps } from "./types";
+import type { ComboboxProps } from "./types";
 
 /**
  * A component that allows the user to search in a list of options

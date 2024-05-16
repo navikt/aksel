@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { FileArrayT, RootDirectoriesT } from "../types";
+import type { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
 import { processAndCompressForURI } from "./sandbox-process-base64";

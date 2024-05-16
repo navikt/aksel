@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import ZoomButton, { ZoomButtonType } from "./ZoomButton";
+import ZoomButton, { type ZoomButtonType } from "./ZoomButton";
 
 interface ZoomProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;

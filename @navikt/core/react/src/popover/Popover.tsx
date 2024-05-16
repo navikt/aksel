@@ -7,13 +7,18 @@ import {
   useFloating,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
+import React, {
+  type HTMLAttributes,
+  forwardRef,
+  useContext,
+  useRef,
+} from "react";
 import { DateContext } from "../date/context";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlay/dismiss/DismissableLayer";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import PopoverContent, { PopoverContentType } from "./PopoverContent";
+import PopoverContent, { type PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**

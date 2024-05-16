@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
-import { Popover, PopoverProps } from "../popover";
+import { Popover, type PopoverProps } from "../popover";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { HelpTextIcon } from "./HelpTextIcon";

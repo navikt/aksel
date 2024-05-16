@@ -1,5 +1,5 @@
 import React, {
-  CSSProperties,
+  type CSSProperties,
   forwardRef,
   useEffect,
   useRef,
@@ -8,8 +8,8 @@ import React, {
 import { Slot } from "../../util/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { AsChild } from "../../util/types/AsChild";
-import {
+import type { AsChild } from "../../util/types/AsChild";
+import type {
   CustomFocusEvent,
   CustomPointerDownEvent,
 } from "./util/dispatchCustomEvent";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useControllableState } from "../util/hooks/useControllableState";
-import Menu, { MenuType } from "./Menu";
+import Menu, { type MenuType } from "./Menu";
 import Toggle from "./Toggle";
 import { DropdownContext } from "./context";
 

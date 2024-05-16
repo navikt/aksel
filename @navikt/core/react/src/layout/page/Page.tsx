@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
-import { OverridableComponent } from "../../util";
+import type bgColors from "@navikt/ds-tokens/src/colors-bg.json";
+import type { OverridableComponent } from "../../util";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {

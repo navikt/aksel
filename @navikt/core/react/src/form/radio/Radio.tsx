@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
-import { RadioProps } from "./types";
+import type { RadioProps } from "./types";
 import { useRadio } from "./useRadio";
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {

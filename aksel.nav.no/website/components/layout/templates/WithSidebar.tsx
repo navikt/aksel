@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { Box, Detail, Heading, Link } from "@navikt/ds-react";
 import Sidebar from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
-import { SidebarT, TableOfContentsT } from "@/types";
+import type { SidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
 import TableOfContents from "@/web/toc/TableOfContents";
 

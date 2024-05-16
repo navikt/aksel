@@ -1,5 +1,5 @@
 /* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { type CSSProperties, useEffect, useRef, useState } from "react";
 
 // ------------------ Types
 

@@ -10,7 +10,7 @@ import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone from "./MonthPickerStandalone";
 import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+import type { MonthPickerProps } from "./types";
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerProps> {

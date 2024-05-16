@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import React, { useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";

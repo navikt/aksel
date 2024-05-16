@@ -1,4 +1,4 @@
-import { GetStaticPaths } from "next/types";
+import type { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
@@ -12,7 +12,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
-import {
+import type {
   AkselKomponentDocT,
   ArticleListT,
   NextPageT,

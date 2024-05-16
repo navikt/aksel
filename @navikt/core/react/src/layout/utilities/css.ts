@@ -1,4 +1,4 @@
-import { ResponsiveProp } from "./types";
+import type { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
   componentName: string,

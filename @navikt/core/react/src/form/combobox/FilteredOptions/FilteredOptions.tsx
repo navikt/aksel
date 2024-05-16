@@ -6,7 +6,7 @@ import { BodyShort, Label } from "../../../typography";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
-import { ComboboxOption } from "../types";
+import type { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 

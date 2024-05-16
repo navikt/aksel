@@ -1,6 +1,6 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
-import { OverridableComponent } from "../../../util";
+import React, { type HTMLAttributes, forwardRef } from "react";
+import type { OverridableComponent } from "../../../util";
 
 export interface ContentBoxProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

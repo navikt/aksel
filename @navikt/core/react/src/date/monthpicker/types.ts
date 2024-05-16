@@ -1,4 +1,4 @@
-import { Matcher } from "../utils";
+import type { Matcher } from "../utils";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

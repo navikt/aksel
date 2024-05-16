@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { BodyLong, Box, Heading, Link, Page } from "@navikt/ds-react";
 
 interface UxTweaksProps extends HTMLAttributes<HTMLDivElement> {

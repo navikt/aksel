@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { fireEvent, within } from "@storybook/test";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";

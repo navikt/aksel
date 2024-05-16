@@ -1,6 +1,6 @@
 import React, {
-  ChangeEvent,
-  ChangeEventHandler,
+  type ChangeEvent,
+  type ChangeEventHandler,
   useCallback,
   useMemo,
   useRef,
@@ -8,8 +8,8 @@ import React, {
 } from "react";
 import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
-import { FormFieldType, useFormField } from "../../useFormField";
-import { ComboboxProps } from "../types";
+import { type FormFieldType, useFormField } from "../../useFormField";
+import type { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;

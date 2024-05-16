@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { GetStaticProps } from "next/types";
+import type { GetStaticProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
@@ -9,7 +9,7 @@ import { WithSidebar } from "@/layout/templates/WithSidebar";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
-import {
+import type {
   AkselLandingPageDocT,
   ArticleListT,
   NextPageT,

@@ -6,7 +6,7 @@ import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../util/types";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

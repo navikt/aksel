@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "vitest";
-import { SearchResultsT } from "@/types";
+import type { SearchResultsT } from "@/types";
 import { createSearchResult } from "../utils";
 
 describe("createSearchResult", () => {

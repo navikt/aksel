@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useCallbackRef } from "../../../util/hooks";
 import {
   CUSTOM_EVENTS,
-  CustomFocusEvent,
+  type CustomFocusEvent,
   dispatchCustomEvent,
 } from "./dispatchCustomEvent";
 

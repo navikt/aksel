@@ -13,13 +13,13 @@ import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
 import ModalHeader from "./ModalHeader";
 import {
-  MouseCoordinates,
+  type MouseCoordinates,
   coordsAreInside,
   getCloseHandler,
   useBodyScrollLock,
 } from "./ModalUtils";
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
-import { ModalProps } from "./types";
+import type { ModalProps } from "./types";
 
 interface ModalComponent
   extends React.ForwardRefExoticComponent<

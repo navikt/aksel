@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { debounce } from "@navikt/ds-react";
 import { AmplitudeEvents, amplitude } from "@/logging";
-import { SearchResultsT } from "@/types";
+import type { SearchResultsT } from "@/types";
 import { createSearchResult, formatResults, fuseSearch } from "../utils";
 
 export const useSearch = () => {

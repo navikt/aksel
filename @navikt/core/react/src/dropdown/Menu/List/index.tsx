@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../../../util/types";
-import ListItem, { ListItemProps } from "./Item";
+import type { OverridableComponent } from "../../../util/types";
+import ListItem, { type ListItemProps } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**

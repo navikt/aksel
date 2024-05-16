@@ -1,5 +1,5 @@
-import { Locale } from "date-fns";
-import { Labels, NavButtonLabel } from "react-day-picker";
+import type { Locale } from "date-fns";
+import type { Labels, NavButtonLabel } from "react-day-picker";
 
 const labelNext: NavButtonLabel = (date, options) => {
   switch (options?.locale?.code) {

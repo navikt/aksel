@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Box, Show } from "@navikt/ds-react";
-import { SidebarT } from "@/types";
+import type { SidebarT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { Menu, MenuHeading, MenuLi, MenuLink, MenuUl } from "@/web/menu/Menu";
 

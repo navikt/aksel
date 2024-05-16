@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SanityDocumentLike } from "sanity";
+import type { SanityDocumentLike } from "sanity";
 import {
   ArrowsCirclepathIcon,
   LeaveIcon,

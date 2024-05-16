@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import { isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
@@ -8,7 +8,7 @@ import { VStack } from "../../layout/stack";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
 import { useDatepicker, useRangeDatepicker } from "../hooks";
-import DatePicker, { DatePickerProps } from "./DatePicker";
+import DatePicker, { type DatePickerProps } from "./DatePicker";
 
 const disabledDays = [
   new Date("Oct 10 2022"),

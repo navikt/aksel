@@ -2,7 +2,7 @@ import { LightBulbIcon } from "@navikt/aksel-icons";
 import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
-import { TipsT } from "@/types";
+import type { TipsT } from "@/types";
 
 type TipsProps = { node: TipsT };
 

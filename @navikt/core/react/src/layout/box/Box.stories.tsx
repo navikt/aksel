@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { HGrid } from "../grid";
 import { HStack, VStack } from "../stack";
-import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
+import type { BackgroundToken, BorderRadiiToken } from "../utilities/types";
 import { Box } from "./Box";
 
 const meta: Meta<typeof Box> = {

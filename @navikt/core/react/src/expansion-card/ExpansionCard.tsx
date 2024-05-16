@@ -1,20 +1,20 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { useControllableState } from "../util/hooks";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
-  ExpansionCardContentProps,
+  type ExpansionCardContentProps,
 } from "./ExpansionCardContent";
 import {
   ExpansionCardDescription,
-  ExpansionCardDescriptionProps,
+  type ExpansionCardDescriptionProps,
 } from "./ExpansionCardDescription";
 import ExpansionCardHeader, {
-  ExpansionCardHeaderProps,
+  type ExpansionCardHeaderProps,
 } from "./ExpansionCardHeader";
 import {
   ExpansionCardTitle,
-  ExpansionCardTitleProps,
+  type ExpansionCardTitleProps,
 } from "./ExpansionCardTitle";
 import { ExpansionCardContext } from "./context";
 

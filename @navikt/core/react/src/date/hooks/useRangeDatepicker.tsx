@@ -4,16 +4,16 @@ import {
   isWeekend,
 } from "date-fns";
 import React, { useState } from "react";
-import { DateRange, isMatch } from "react-day-picker";
-import { DatePickerProps } from "../datepicker/DatePicker";
-import { DateInputProps } from "../parts/DateInput";
+import { type DateRange, isMatch } from "react-day-picker";
+import type { DatePickerProps } from "../datepicker/DatePicker";
+import type { DateInputProps } from "../parts/DateInput";
 import {
   formatDateForInput,
   getLocaleFromString,
   isValidDate,
   parseDate,
 } from "../utils";
-import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
+import type { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
 
 export type RangeValidationT = {
   from: DateValidationT;

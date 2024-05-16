@@ -3,8 +3,8 @@ import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "../typography";
 import PaginationItem, {
-  PaginationItemProps,
-  PaginationItemType,
+  type PaginationItemProps,
+  type PaginationItemType,
 } from "./PaginationItem";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {

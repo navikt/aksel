@@ -1,5 +1,5 @@
 import { createClient, groq } from "next-sanity";
-import { FileValue, defineField, defineType } from "sanity";
+import { type FileValue, defineField, defineType } from "sanity";
 import { VideoplayerIcon } from "@navikt/aksel-icons";
 import { clientConfig } from "@/sanity/config";
 

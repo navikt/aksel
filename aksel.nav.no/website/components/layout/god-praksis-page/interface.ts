@@ -1,6 +1,6 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { SanityDocument } from "sanity";
-import { ArticleT } from "@/cms/frontpage-blocks/latest-articles/Card";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityDocument } from "sanity";
+import type { ArticleT } from "@/cms/frontpage-blocks/latest-articles/Card";
 
 export type GpTemaT = {
   title: string;

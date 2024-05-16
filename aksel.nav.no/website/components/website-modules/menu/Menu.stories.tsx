@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Menu, MenuHeading, MenuLi, MenuLink, MenuUl } from "./Menu";
 

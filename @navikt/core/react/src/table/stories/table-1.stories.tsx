@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, TableProps } from "../";
+import { Table, type TableProps } from "../";
 import { Button } from "../../button";
 import { Checkbox } from "../../form/checkbox";
 import { VStack } from "../../layout/stack";

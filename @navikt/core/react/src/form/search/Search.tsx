@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, {
-  InputHTMLAttributes,
+  type InputHTMLAttributes,
   forwardRef,
   useCallback,
   useRef,
@@ -10,8 +10,8 @@ import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { FormFieldProps, useFormField } from "../useFormField";
-import SearchButton, { SearchButtonType } from "./SearchButton";
+import { type FormFieldProps, useFormField } from "../useFormField";
+import SearchButton, { type SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
 
 export type SearchClearEvent =

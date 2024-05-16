@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { Node as PostCSSNode } from "postcss";
+import type { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
 import { isCustomProperty, tokenExists } from "../../utils";

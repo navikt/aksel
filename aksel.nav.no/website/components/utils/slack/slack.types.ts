@@ -1,4 +1,4 @@
-import { AuthApiErrorReturn } from "@/auth/auth.types";
+import type { AuthApiErrorReturn } from "@/auth/auth.types";
 
 export type SlackFeedbackInput = {
   /**

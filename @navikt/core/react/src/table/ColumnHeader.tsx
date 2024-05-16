@@ -4,7 +4,7 @@ import {
   ArrowUpIcon,
   ArrowsUpDownIcon,
 } from "@navikt/aksel-icons";
-import HeaderCell, { HeaderCellProps } from "./HeaderCell";
+import HeaderCell, { type HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
 
 export interface ColumnHeaderProps extends HeaderCellProps {

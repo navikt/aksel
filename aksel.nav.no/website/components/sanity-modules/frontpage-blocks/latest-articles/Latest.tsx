@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import Card, { ArticleT } from "./Card";
+import Card, { type ArticleT } from "./Card";
 import { Highlight } from "./Highlight";
 
 export type LatestT = {

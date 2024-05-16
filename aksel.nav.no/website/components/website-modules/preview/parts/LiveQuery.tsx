@@ -1,7 +1,7 @@
 import { useLiveQuery } from "next-sanity/preview";
 import dynamic from "next/dynamic";
 import { runResolvers } from "./resolvers";
-import { PreviewProps } from "./types";
+import type { PreviewProps } from "./types";
 
 const PreviewBanner = dynamic(() => import("@/web/PreviewBanner"), {
   ssr: false,

@@ -1,9 +1,9 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { differenceInMonths } from "date-fns";
-import { GetServerSideProps } from "next/types";
+import type { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading, Label } from "@navikt/ds-react";
-import { UserStateT } from "@/auth/auth.types";
+import type { UserStateT } from "@/auth/auth.types";
 import { getAuthUserState } from "@/auth/getUserState";
 import Footer from "@/layout/footer/Footer";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
@@ -12,7 +12,7 @@ import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import {
+import type {
   AkselGodPraksisDocT,
   NextPageT,
   ResolveContributorsT,

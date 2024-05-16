@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useControllableState } from "../util/hooks/useControllableState";
-import { ToggleGroupProps } from "./ToggleGroup.types";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
 
 export function useToggleGroup({
   onChange,

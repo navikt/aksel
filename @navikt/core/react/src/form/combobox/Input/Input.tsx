@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, {
-  ChangeEvent,
-  InputHTMLAttributes,
+  type ChangeEvent,
+  type InputHTMLAttributes,
   forwardRef,
   useCallback,
 } from "react";

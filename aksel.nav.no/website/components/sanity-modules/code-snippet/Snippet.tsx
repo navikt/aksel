@@ -1,9 +1,9 @@
 import cl from "clsx";
-import { Highlight, Language } from "prism-react-renderer";
+import { Highlight, type Language } from "prism-react-renderer";
 import { ChevronRightIcon, TerminalIcon } from "@navikt/aksel-icons";
 import { CopyButton, Label } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { CodeSnippetT } from "@/types";
+import type { CodeSnippetT } from "@/types";
 import theme from "./theme";
 
 type CodeSnippetProps = {

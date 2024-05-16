@@ -1,4 +1,4 @@
-import { GetStaticPaths } from "next/types";
+import type { GetStaticPaths } from "next/types";
 import { Suspense, lazy } from "react";
 import { Detail } from "@navikt/ds-react";
 import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
@@ -9,7 +9,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
 import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
-import {
+import type {
   AkselGrunnleggendeDocT,
   ArticleListT,
   NextPageT,

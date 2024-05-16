@@ -3,7 +3,7 @@ import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
 import { BodyLong, Heading as DsHeading } from "../typography";
-import Alert, { AlertProps } from "./Alert";
+import Alert, { type AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
   title: "ds-react/Alert",

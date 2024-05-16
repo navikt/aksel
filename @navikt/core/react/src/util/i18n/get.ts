@@ -1,4 +1,4 @@
-import { TranslationObject } from "./i18n.types";
+import type { TranslationObject } from "./i18n.types";
 
 /**
  * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3

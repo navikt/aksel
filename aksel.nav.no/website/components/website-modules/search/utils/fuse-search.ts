@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { FuseItemT } from "@/types";
+import type { FuseItemT } from "@/types";
 
 export function fuseSearch(results: any[], query: string) {
   /* https://fusejs.io/api/options.html */

@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
 import HelpText from "./HelpText";

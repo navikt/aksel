@@ -1,10 +1,10 @@
 import cl from "clsx";
-import React, { SelectHTMLAttributes, forwardRef } from "react";
+import React, { type SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { type FormFieldProps, useFormField } from "../useFormField";
 
 export interface SelectProps
   extends FormFieldProps,

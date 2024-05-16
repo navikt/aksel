@@ -1,6 +1,6 @@
-import { UsersListResponse, WebClient } from "@slack/web-api";
+import { type UsersListResponse, WebClient } from "@slack/web-api";
 import NodeCache from "node-cache";
-import {
+import type {
   FetchSlackMembersError,
   FetchSlackMembersSuccess,
   SanitizedUser,

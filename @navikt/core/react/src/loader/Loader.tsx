@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { SVGProps, forwardRef } from "react";
+import React, { type SVGProps, forwardRef } from "react";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 

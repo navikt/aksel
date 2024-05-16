@@ -18,7 +18,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
-import { TimelineComponentTypes } from "./utils/types.internal";
+import type { TimelineComponentTypes } from "./utils/types.internal";
 
 export interface TimelinePinProps
   extends React.HTMLAttributes<HTMLButtonElement> {

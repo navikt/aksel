@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button, ButtonProps } from "../../button";
+import { Button, type ButtonProps } from "../../button";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { SearchContext } from "./context";
 

@@ -1,4 +1,4 @@
-import { Rule } from "stylelint";
+import type { Rule } from "stylelint";
 import designTokenExists from "./aksel-design-token-exists";
 import noComponentReference from "./aksel-design-token-no-component-reference";
 import noGlobalOverride from "./aksel-design-token-no-global-override";

@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Command } from "commander";
+import type { Command } from "commander";
 import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";

@@ -1,9 +1,11 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import AccordionContent, { AccordionContentProps } from "./AccordionContent";
+import AccordionContent, {
+  type AccordionContentProps,
+} from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
-import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
-import AccordionItem, { AccordionItemProps } from "./AccordionItem";
+import AccordionHeader, { type AccordionHeaderProps } from "./AccordionHeader";
+import AccordionItem, { type AccordionItemProps } from "./AccordionItem";
 
 interface AccordionComponent
   extends React.ForwardRefExoticComponent<

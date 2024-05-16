@@ -1,12 +1,12 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
-import { DateInputProps } from "../parts/DateInput";
+import type { DateInputProps } from "../parts/DateInput";
 import MonthPicker from "./MonthPicker";
-import { MonthPickerProps } from "./types";
+import type { MonthPickerProps } from "./types";
 
 export default {
   title: "ds-react/Monthpicker",

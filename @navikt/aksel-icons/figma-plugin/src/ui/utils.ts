@@ -1,4 +1,4 @@
-import meta from "@navikt/aksel-icons/metadata";
+import type meta from "@navikt/aksel-icons/metadata";
 
 const subCategorizeIcons = (
   icons: (typeof meta)[1][],

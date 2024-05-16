@@ -1,5 +1,5 @@
-import { StructureBuilder } from "sanity/structure";
-import { SANITY_API_VERSION, allArticleDocuments } from "@/sanity/config";
+import type { StructureBuilder } from "sanity/structure";
+import { SANITY_API_VERSION, type allArticleDocuments } from "@/sanity/config";
 
 export const editorIsContributorFilter = `($mail in (contributors[]->{"email": lower(email)})[].email || $mail in (contributors[]->{"email": lower(alt_email)})[].email)`;
 

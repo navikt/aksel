@@ -8,7 +8,7 @@ import Header from "./Header";
 import HeaderCell from "./HeaderCell";
 import Row from "./Row";
 import { TableContext } from "./context";
-import { SortState } from "./types";
+import type { SortState } from "./types";
 
 export interface TableProps
   extends React.TableHTMLAttributes<HTMLTableElement> {

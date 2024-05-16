@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import React from "react";
 import { InformationIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";

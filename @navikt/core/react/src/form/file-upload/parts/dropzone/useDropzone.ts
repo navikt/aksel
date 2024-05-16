@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UseFileUploadProps } from "../../useFileUpload";
+import type { UseFileUploadProps } from "../../useFileUpload";
 
 interface Props {
   upload: (fileList: FileList) => void;

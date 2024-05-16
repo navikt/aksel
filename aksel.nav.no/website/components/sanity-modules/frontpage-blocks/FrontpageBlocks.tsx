@@ -1,5 +1,5 @@
 import ErrorBoundary from "@/error-boundary";
-import Latest, { LatestT } from "./latest-articles/Latest";
+import Latest, { type LatestT } from "./latest-articles/Latest";
 
 export type BlocksT = LatestT;
 

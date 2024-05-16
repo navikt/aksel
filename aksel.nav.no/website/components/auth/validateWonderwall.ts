@@ -1,4 +1,4 @@
-import { NextApiRequest } from "next/types";
+import type { NextApiRequest } from "next/types";
 import { logger } from "@navikt/next-logger";
 import { getToken, validateAzureToken } from "@navikt/oasis";
 

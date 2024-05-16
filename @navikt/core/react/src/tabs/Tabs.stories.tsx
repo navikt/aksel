@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { DishwasherIcon, FreezerIcon, MugIcon } from "@navikt/aksel-icons";
 import { Tabs } from ".";

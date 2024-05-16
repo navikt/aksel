@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from "react";
-import { FormFieldProps } from "../useFormField";
+import type { InputHTMLAttributes } from "react";
+import type { FormFieldProps } from "../useFormField";
 
 export interface RadioProps
   extends Omit<FormFieldProps, "error" | "errorId" | "readOnly">,

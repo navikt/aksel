@@ -1,7 +1,7 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
-import FormProgress, { FormProgressProps } from "./FormProgress";
+import FormProgress, { type FormProgressProps } from "./FormProgress";
 
 export default {
   title: "ds-react/FormProgress",

@@ -3,7 +3,7 @@ import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
-import { InnholdsKortPrinsipperT } from "@/types";
+import type { InnholdsKortPrinsipperT } from "@/types";
 
 type InnholdsKortProps = {
   node: InnholdsKortPrinsipperT;

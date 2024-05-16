@@ -1,4 +1,4 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import ErrorBoundary from "@/error-boundary";

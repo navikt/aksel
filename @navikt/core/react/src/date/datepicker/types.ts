@@ -1,4 +1,4 @@
-import { DateRange, DayPickerBase, Matcher } from "react-day-picker";
+import type { DateRange, DayPickerBase, Matcher } from "react-day-picker";
 
 export type SingleMode = {
   mode?: "single";

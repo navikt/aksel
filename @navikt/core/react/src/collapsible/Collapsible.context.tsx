@@ -1,5 +1,5 @@
 import { createContext } from "../util/create-context";
-import { CollapsibleBaseProps } from "./Collapsible.types";
+import type { CollapsibleBaseProps } from "./Collapsible.types";
 
 export type CollapsibleContextProps = Pick<CollapsibleBaseProps, "open"> & {
   /**

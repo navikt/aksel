@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback } from "react";
 import { useControllableState, useId } from "../util/hooks";
 import { CollapsibleContextProvider } from "./Collapsible.context";
-import { CollapsibleBaseProps } from "./Collapsible.types";
+import type { CollapsibleBaseProps } from "./Collapsible.types";
 import CollapsibleContent from "./parts/Collapsible.Content";
 import CollapsibleTrigger from "./parts/Collapsible.Trigger";
 

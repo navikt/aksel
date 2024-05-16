@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Accordion } from "../../accordion";
 import AccordionContent from "../../accordion/AccordionContent";

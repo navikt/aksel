@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { GetServerSideProps } from "next/types";
+import type { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
 import Bilde from "@/cms/bilde/Bilde";
@@ -8,7 +8,7 @@ import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import {
+import type {
   AkselPrinsippDocT,
   NextPageT,
   ResolveContributorsT,

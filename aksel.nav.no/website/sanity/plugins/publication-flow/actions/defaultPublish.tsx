@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import {
-  DocumentActionComponent,
-  DocumentActionDescription,
-  DocumentActionProps,
+  type DocumentActionComponent,
+  type DocumentActionDescription,
+  type DocumentActionProps,
   useDocumentOperation,
 } from "sanity";
 

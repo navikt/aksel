@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorBoundary from "@/error-boundary";
-import { UUTableT } from "@/types";
+import type { UUTableT } from "@/types";
 import KBD from "@/web/KBD";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 

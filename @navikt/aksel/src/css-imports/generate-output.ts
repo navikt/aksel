@@ -11,7 +11,7 @@ import {
   rootDir,
   typoCss,
 } from "@navikt/ds-css/config/_mappings";
-import { AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
+import { type AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
 import { inquiry } from "./inquiry";
 
 export async function generateImportOutput(answers: AnswersT) {

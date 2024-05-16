@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
 import Chat, { POSITIONS, SIZES, VARIANTS } from "./Chat";

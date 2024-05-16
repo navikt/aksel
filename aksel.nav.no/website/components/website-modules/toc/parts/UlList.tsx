@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { TableOfContentsT } from "@/types";
+import type { TableOfContentsT } from "@/types";
 import { removeEmojies } from "@/utils";
 import { MenuLi, MenuLink, MenuUl } from "@/web/menu/Menu";
 import styles from "./table-of-contents.module.css";

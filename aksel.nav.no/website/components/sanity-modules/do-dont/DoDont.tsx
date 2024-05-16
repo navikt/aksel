@@ -8,7 +8,7 @@ import {
 import { BodyShort } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
-import { DoDontT } from "@/types";
+import type { DoDontT } from "@/types";
 
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
   if (!block.picture) {

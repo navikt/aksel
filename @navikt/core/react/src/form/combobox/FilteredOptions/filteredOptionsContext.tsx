@@ -1,14 +1,19 @@
 import cl from "clsx";
-import React, { SetStateAction, useCallback, useMemo, useState } from "react";
+import React, {
+  type SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";
 import { useComboboxCustomOptions } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps } from "../types";
+import type { ComboboxOption, ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
-import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
+import useVirtualFocus, { type VirtualFocusType } from "./useVirtualFocus";
 
 type FilteredOptionsProps = {
   children: React.ReactNode;

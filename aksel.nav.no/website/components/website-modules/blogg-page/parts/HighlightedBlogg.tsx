@@ -3,7 +3,11 @@ import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
 import { urlFor } from "@/sanity/interface";
-import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
+import type {
+  AkselBloggDocT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 import { getAuthors, getImage } from "@/utils";
 
 export const HighlightedBlogg = ({

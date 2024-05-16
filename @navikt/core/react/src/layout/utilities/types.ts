@@ -1,9 +1,9 @@
-import borderRadii from "@navikt/ds-tokens/src/border.json";
-import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
-import borderColors from "@navikt/ds-tokens/src/colors-border.json";
-import surfaceColors from "@navikt/ds-tokens/src/colors-surface.json";
-import shadows from "@navikt/ds-tokens/src/shadow.json";
-import Spacing from "@navikt/ds-tokens/src/spacing.json";
+import type borderRadii from "@navikt/ds-tokens/src/border.json";
+import type bgColors from "@navikt/ds-tokens/src/colors-bg.json";
+import type borderColors from "@navikt/ds-tokens/src/colors-border.json";
+import type surfaceColors from "@navikt/ds-tokens/src/colors-surface.json";
+import type shadows from "@navikt/ds-tokens/src/shadow.json";
+import type Spacing from "@navikt/ds-tokens/src/spacing.json";
 
 export type BackgroundToken =
   | keyof typeof bgColors.a

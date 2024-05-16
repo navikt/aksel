@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { omit } from "../../util";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
-import { CheckboxProps } from "./types";
+import type { CheckboxProps } from "./types";
 
 /**
  * Handles props for Checkboxes in context with Fieldset and CheckboxGroup

@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import { createContext } from "../../create-context";
 import { useClientLayoutEffect } from "../useClientLayoutEffect";
 import { mergeRefs } from "../useMergeRefs";
-import { DescendantOptions, DescendantsManager } from "./descendant";
+import { type DescendantOptions, DescendantsManager } from "./descendant";
 import { cast } from "./utils";
 
 /**

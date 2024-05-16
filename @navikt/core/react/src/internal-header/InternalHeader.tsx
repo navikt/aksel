@@ -1,17 +1,17 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
-import { OverridableComponent } from "../util/types";
+import React, { type HTMLAttributes, forwardRef } from "react";
+import type { OverridableComponent } from "../util/types";
 import InternalHeaderButton, {
-  InternalHeaderButtonProps,
+  type InternalHeaderButtonProps,
 } from "./InternalHeaderButton";
 import InternalHeaderTitle, {
-  InternalHeaderTitleProps,
+  type InternalHeaderTitleProps,
 } from "./InternalHeaderTitle";
 import InternalHeaderUser, {
-  InternalHeaderUserProps,
+  type InternalHeaderUserProps,
 } from "./InternalHeaderUser";
 import InternalHeaderUserButton, {
-  InternalHeaderUserButtonProps,
+  type InternalHeaderUserButtonProps,
 } from "./InternalHeaderUserButton";
 
 export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {

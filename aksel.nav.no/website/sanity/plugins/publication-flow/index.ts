@@ -1,6 +1,6 @@
 import {
-  DocumentActionComponent,
-  DocumentBadgeComponent,
+  type DocumentActionComponent,
+  type DocumentBadgeComponent,
   definePlugin,
 } from "sanity";
 import { allArticleDocuments } from "@/sanity/config";

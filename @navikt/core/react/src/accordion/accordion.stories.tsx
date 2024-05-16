@@ -1,6 +1,6 @@
-import { StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Accordion, AccordionProps } from ".";
+import { Accordion, type AccordionProps } from ".";
 import AccordionContent from "./AccordionContent";
 import AccordionHeader from "./AccordionHeader";
 import AccordionItem from "./AccordionItem";

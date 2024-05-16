@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
-import Loader, { LoaderProps } from "./Loader";
+import Loader, { type LoaderProps } from "./Loader";
 
 export default {
   title: "ds-react/Loader",

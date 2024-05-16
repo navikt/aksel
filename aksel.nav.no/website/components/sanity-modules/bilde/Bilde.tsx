@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { BodyLong, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { urlFor } from "@/sanity/interface";
-import { BildeT } from "@/types";
+import type { BildeT } from "@/types";
 
 type BildeProps = {
   node: BildeT;

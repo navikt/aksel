@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import React from "react";
 import { Tooltip } from "@navikt/ds-react";
 import * as tokens from "../dist/tokens.js";

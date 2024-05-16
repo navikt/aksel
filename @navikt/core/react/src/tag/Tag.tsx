@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { type HTMLAttributes, forwardRef } from "react";
 import { BodyShort } from "../typography";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {

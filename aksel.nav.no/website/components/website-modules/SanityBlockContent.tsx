@@ -1,7 +1,7 @@
 import {
   PortableText,
-  PortableTextMarkComponentProps,
-  PortableTextReactComponents,
+  type PortableTextMarkComponentProps,
+  type PortableTextReactComponents,
 } from "@portabletext/react";
 import cl from "clsx";
 import NextLink from "next/link";

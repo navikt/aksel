@@ -1,9 +1,9 @@
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
-  DocumentActionComponent,
-  DocumentActionDescription,
-  DocumentActionProps,
+  type DocumentActionComponent,
+  type DocumentActionDescription,
+  type DocumentActionProps,
   useClient,
   useDocumentOperation,
 } from "sanity";

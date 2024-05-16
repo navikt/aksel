@@ -1,4 +1,4 @@
-import { SanitizedUser } from "./slack.types";
+import type { SanitizedUser } from "./slack.types";
 
 export function findUserByEmail(
   email: string,

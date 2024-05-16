@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
-import { PeriodProps } from "../period/types";
-import { Spatial } from "./types.internal";
+import type { PeriodProps } from "../period/types";
+import type { Spatial } from "./types.internal";
 
 export interface Positioned {
   horizontalPosition: number;

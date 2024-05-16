@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/structure";
+import type { StructureBuilder } from "sanity/structure";
 import {
   CircleSlashIcon,
   EyeIcon,

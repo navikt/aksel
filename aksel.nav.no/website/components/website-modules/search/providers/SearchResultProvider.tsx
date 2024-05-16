@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo } from "react";
-import { SearchHitT, SearchResultsT } from "@/types";
+import type { SearchHitT, SearchResultsT } from "@/types";
 import { useSearch } from "../hooks";
 import { formatRawResults } from "../utils";
 

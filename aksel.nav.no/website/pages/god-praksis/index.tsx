@@ -1,8 +1,8 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
 import NextLink from "next/link";
-import { GetStaticProps } from "next/types";
+import type { GetStaticProps } from "next/types";
 import {
   BodyLong,
   Box,
@@ -22,7 +22,7 @@ import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
-import { AkselGodPraksisLandingPageDocT, NextPageT } from "@/types";
+import type { AkselGodPraksisLandingPageDocT, NextPageT } from "@/types";
 import { AnimatedChevron } from "@/web/AnimatedChevron";
 import { SEO } from "@/web/seo/SEO";
 

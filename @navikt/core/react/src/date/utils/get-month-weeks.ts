@@ -1,5 +1,5 @@
 import {
-  Locale,
+  type Locale,
   addDays,
   addWeeks,
   differenceInCalendarDays,

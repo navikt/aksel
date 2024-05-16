@@ -2,7 +2,7 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import fs from "fs";
 import path from "path";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export function focusVisible(element: HTMLElement) {
   act(() => {

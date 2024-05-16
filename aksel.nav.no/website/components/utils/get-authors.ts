@@ -1,4 +1,8 @@
-import { AkselBloggDocT, ResolveContributorsT, ResolveSlugT } from "@/types";
+import type {
+  AkselBloggDocT,
+  ResolveContributorsT,
+  ResolveSlugT,
+} from "@/types";
 
 export const getAuthors = (
   blog: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>,

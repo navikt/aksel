@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, AlertProps } from "@navikt/ds-react";
+import { Alert, type AlertProps } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {

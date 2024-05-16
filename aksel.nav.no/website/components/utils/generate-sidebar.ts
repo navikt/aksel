@@ -1,5 +1,5 @@
 import { sanityCategoryLookup } from "../../sanity/config";
-import { SidebarInputNodeT, SidebarT } from "../types";
+import type { SidebarInputNodeT, SidebarT } from "../types";
 
 export function generateSidebar(
   input: SidebarInputNodeT[],

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useId } from "../util";
 import { useControllableState } from "../util/hooks/useControllableState";
-import { TabsProps } from "./Tabs.types";
+import type { TabsProps } from "./Tabs.types";
 
 export function useTabs({
   onChange,

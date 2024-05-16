@@ -1,6 +1,6 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
-import Select, { SelectProps } from "./Select";
+import Select, { type SelectProps } from "./Select";
 
 const meta: Meta<typeof Select> = {
   title: "ds-react/Select",

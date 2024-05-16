@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, {
-  ButtonHTMLAttributes,
+  type ButtonHTMLAttributes,
   forwardRef,
   useEffect,
   useRef,

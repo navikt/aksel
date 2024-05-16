@@ -1,4 +1,4 @@
-import { TranslationDictionary, TranslationObject } from "./i18n.types";
+import type { TranslationDictionary, TranslationObject } from "./i18n.types";
 
 export function merge(...objs: TranslationDictionary[]) {
   let final: TranslationDictionary = {};

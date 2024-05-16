@@ -12,7 +12,12 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import React, {
+  type HTMLAttributes,
+  cloneElement,
+  forwardRef,
+  useRef,
+} from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Detail } from "../typography";

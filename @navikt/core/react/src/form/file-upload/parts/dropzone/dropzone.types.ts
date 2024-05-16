@@ -1,6 +1,6 @@
-import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
-import { FormFieldProps } from "../../../useFormField";
-import { FileUploadBaseProps } from "../../FileUpload.types";
+import type { ComponentTranslation } from "../../../../util/i18n/i18n.types";
+import type { FormFieldProps } from "../../../useFormField";
+import type { FileUploadBaseProps } from "../../FileUpload.types";
 
 export interface FileUploadDropzoneProps
   extends FileUploadBaseProps,

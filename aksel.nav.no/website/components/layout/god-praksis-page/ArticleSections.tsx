@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
-import {
+import type {
   GpSlugQueryResponse,
   ParsedGPArticle,
 } from "@/layout/god-praksis-page/interface";

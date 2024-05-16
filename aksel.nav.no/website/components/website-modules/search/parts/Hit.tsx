@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
-import { SearchHitT, searchOptions } from "@/types";
+import type { SearchHitT, searchOptions } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { SearchContext, SearchLoggingContext } from "../providers";
 import { highlightMatches, highlightStr } from "../utils";

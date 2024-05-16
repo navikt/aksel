@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import core from "@navikt/ds-css/tokens.json";
 import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { TokenTableT } from "@/types";
+import type { TokenTableT } from "@/types";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import ShowMore from "./parts/ShowMore";
 

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Heading, HeadingProps } from "../../typography";
+import { Heading, type HeadingProps } from "../../typography";
 
 export interface FormSummaryHeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement> {

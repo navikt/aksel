@@ -1,7 +1,7 @@
 import { createContext } from "../util/create-context";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
-import { TabsProps } from "./Tabs.types";
-import { useTabs } from "./useTabs";
+import type { TabsProps } from "./Tabs.types";
+import type { useTabs } from "./useTabs";
 
 export const [
   TabsDescendantsProvider,

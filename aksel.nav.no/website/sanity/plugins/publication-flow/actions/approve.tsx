@@ -1,8 +1,8 @@
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
-  DocumentActionDescription,
-  DocumentActionProps,
+  type DocumentActionDescription,
+  type DocumentActionProps,
   useDocumentOperation,
 } from "sanity";
 import { SealCheckmarkIcon } from "@navikt/aksel-icons";

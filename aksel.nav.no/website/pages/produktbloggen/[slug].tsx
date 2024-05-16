@@ -1,5 +1,5 @@
 import Image from "next/legacy/image";
-import { GetServerSideProps } from "next/types";
+import type { GetServerSideProps } from "next/types";
 import { Suspense, lazy } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
@@ -9,7 +9,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { urlFor } from "@/sanity/interface";
 import { contributorsAll, destructureBlocks } from "@/sanity/queries";
-import {
+import type {
   AkselBloggDocT,
   NextPageT,
   ResolveContributorsT,

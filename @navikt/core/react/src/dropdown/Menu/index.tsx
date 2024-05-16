@@ -3,8 +3,8 @@ import React, { forwardRef, useContext } from "react";
 import { Popover } from "../../popover";
 import { DropdownContext } from "../context";
 import Divider from "./Divider";
-import GroupedList, { GroupedListType } from "./GroupedList";
-import List, { ListType } from "./List";
+import GroupedList, { type GroupedListType } from "./GroupedList";
+import List, { type ListType } from "./List";
 
 interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

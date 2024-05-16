@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { SortState } from "./types";
+import type { SortState } from "./types";
 
 export interface TableContextProps {
   onSortChange?: (sortKey: string) => void;

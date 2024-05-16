@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { omit } from "../../util";
-import { Period } from "./types.external";
+import type { Period } from "./types.external";
 
 type ParsedChild = {
   label?: string;

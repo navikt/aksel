@@ -6,7 +6,7 @@ import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { ComboboxProps } from "../types";
+import type { ComboboxProps } from "../types";
 import Input from "./Input";
 import { useInputContext } from "./Input.context";
 import ToggleListButton from "./ToggleListButton";

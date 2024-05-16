@@ -6,7 +6,7 @@ import TextareaAutosize from "../../util/TextareaAutoSize";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useId } from "../../util/hooks";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
-import { FormFieldProps, useFormField } from "./../useFormField";
+import { type FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
 /**

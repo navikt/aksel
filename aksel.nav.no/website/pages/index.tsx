@@ -1,7 +1,7 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
-import { GetStaticProps } from "next/types";
+import type { GetStaticProps } from "next/types";
 import { Suspense, lazy, useState } from "react";
 import {
   CompassIcon,
@@ -21,14 +21,14 @@ import {
   useClientLayoutEffect,
 } from "@navikt/ds-react";
 import FrontpageBlock, {
-  BlocksT,
+  type BlocksT,
 } from "@/cms/frontpage-blocks/FrontpageBlocks";
 import Footer from "@/layout/footer/Footer";
 import GpFrontpageCard from "@/layout/god-praksis-page/cards/GpFrontpageCard";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
-import { NextPageT } from "@/types";
+import type { NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";

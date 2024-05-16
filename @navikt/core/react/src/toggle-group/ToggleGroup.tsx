@@ -7,7 +7,7 @@ import {
   ToggleGroupProvider,
   useToggleGroupDescendants,
 } from "./ToggleGroup.context";
-import { ToggleGroupProps } from "./ToggleGroup.types";
+import type { ToggleGroupProps } from "./ToggleGroup.types";
 import ToggleItem from "./parts/ToggleItem";
 import { useToggleGroup } from "./useToggleGroup";
 

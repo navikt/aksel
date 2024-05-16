@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { OverridableComponent } from "../util/types";
+import type { OverridableComponent } from "../util/types";
 import { useStepperContext } from "./context";
 
 export interface StepperStepProps

@@ -1,12 +1,12 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { UNSAFE_FileUpload as FileUpload, FileUploadItemProps } from ".";
+import { UNSAFE_FileUpload as FileUpload, type FileUploadItemProps } from ".";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Heading } from "../../typography";
-import {
+import type {
   FileObject,
   FileRejected,
   FileRejectionReason,

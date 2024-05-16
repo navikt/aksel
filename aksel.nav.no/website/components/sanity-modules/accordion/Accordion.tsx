@@ -1,7 +1,7 @@
 import { Accordion as DsAccordion } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
-import { AccordionT } from "@/types";
+import type { AccordionT } from "@/types";
 
 type AccordionProps = {
   node: AccordionT;

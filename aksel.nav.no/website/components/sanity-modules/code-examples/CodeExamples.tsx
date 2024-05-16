@@ -10,7 +10,7 @@ import {
 import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
-import { CodeExamplesT } from "@/types";
+import type { CodeExamplesT } from "@/types";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 

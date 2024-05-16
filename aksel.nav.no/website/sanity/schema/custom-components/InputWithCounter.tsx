@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React from "react";
-import { FieldProps } from "sanity";
+import type { FieldProps } from "sanity";
 import { Box, Detail, VStack } from "@navikt/ds-react";
 
 export function InputWithCounter(

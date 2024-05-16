@@ -1,7 +1,7 @@
 import {
-  DocumentActionComponent,
-  DocumentActionDescription,
-  DocumentActionProps,
+  type DocumentActionComponent,
+  type DocumentActionDescription,
+  type DocumentActionProps,
   useDocumentOperation,
 } from "sanity";
 import { CloudUpIcon } from "@navikt/aksel-icons";
