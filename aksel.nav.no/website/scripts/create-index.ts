@@ -51,9 +51,11 @@ function sanitzeSanityData(data) {
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
         return 0;
-      } else if (!a.publishedAt) {
+      }
+      if (!a.publishedAt) {
         return 1;
-      } else if (!b.publishedAt) {
+      }
+      if (!b.publishedAt) {
         return -1;
       }
 

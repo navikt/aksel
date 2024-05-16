@@ -70,7 +70,9 @@ export default async function preview(
 
   if (article) {
     return redirectToPreview(res, `/${article}`);
-  } else if (godpraksis) {
+  }
+
+  if (godpraksis) {
     return redirectToPreview(res, `/god-praksis/${godpraksis}`);
   }
 

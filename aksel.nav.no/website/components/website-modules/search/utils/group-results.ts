@@ -8,9 +8,9 @@ export function createSearchResult(
   const groupedHits: GroupedHitsT = result?.reduce((prev, cur) => {
     if (cur.item._type in prev) {
       return { ...prev, [cur.item._type]: [...prev[cur.item._type], cur] };
-    } else {
-      return { ...prev, [cur.item._type]: [cur] };
     }
+
+    return { ...prev, [cur.item._type]: [cur] };
   }, {});
 
   const response: SearchResultsT = {

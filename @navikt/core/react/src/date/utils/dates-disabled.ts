@@ -9,7 +9,9 @@ export const disableDate = (
   let result: boolean = false;
   if (disabledSelection instanceof Date) {
     return isSameDay(disabledSelection, date);
-  } else if (disabledSelection instanceof Array) {
+  }
+
+  if (disabledSelection instanceof Array) {
     for (let i = 0; i < disabledSelection.length; i++) {
       const selection = disabledSelection[i];
       if (isDateRange(selection)) {

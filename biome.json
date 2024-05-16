@@ -25,7 +25,6 @@
       "style": {
         "useImportType": "off",
         "useTemplate": "off",
-        "noUselessElse": "off",
         "useNodejsImportProtocol": "off",
         "useConst": "off",
         "noUnusedTemplateLiteral": "off",
