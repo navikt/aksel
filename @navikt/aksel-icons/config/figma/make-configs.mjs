@@ -5,16 +5,17 @@ import { resolveName } from "./icon-name.mjs";
 
 export const makeConfig = (icons, folder) => {
   icons.forEach((icon) => {
+    const name = resolveName(icon).replace(".svg", "");
+    const keywords = icon.description
+      .split(",")
+      .filter(Boolean)
+      .map((x) => x.trim());
+
     const config = {
-      name: resolveName(icon).replace(".svg", ""),
+      name,
       category: icon.containing_frame.pageName,
       sub_category: icon.containing_frame.name,
-      keywords: [
-        ...icon.description
-          .split(",")
-          .filter(Boolean)
-          .map((x) => x.trim()),
-      ],
+      keywords: keywords.length > 0 ? keywords : [name],
       variant: icon.name.includes("Variant=")
         ? icon.name.replace("Variant=", "")
         : "Stroke",

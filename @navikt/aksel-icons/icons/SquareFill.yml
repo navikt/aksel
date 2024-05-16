@@ -2,18 +2,8 @@ name: SquareFill
 category: Status
 sub_category: Shapes
 keywords:
-  - information
-  - details
-  - help
-  - tooltip
-  - description
-  - explanation
-  - informasjon
-  - detaljer
-  - hjelp
-  - verktøytips
-  - beskrivelse
-  - forklaring
+  - firkant
+  - kvadrat
 variant: Fill
 updated_at: 15.05.2024
 created_at: 15.05.2024
