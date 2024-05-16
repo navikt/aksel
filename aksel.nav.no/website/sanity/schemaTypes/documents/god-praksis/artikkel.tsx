@@ -10,9 +10,9 @@ import { ingressField } from "../presets/ingress";
 import { oppdateringsvarsel } from "../presets/oppdateringsvarsel";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import BaseSEOPreset from "../presets/seo";
-import { skrivehjelp } from "../presets/skrivehjelp";
 import { sanitySlug } from "../presets/slug";
 import { titleField } from "../presets/title-field";
+import { writeHelpField } from "./writehelp";
 
 const prefix = "god-praksis/artikler/";
 
@@ -93,6 +93,6 @@ export const GodPraksisArtikkel = defineType({
     }),
     relevanteArtiklerField,
     BaseSEOPreset,
-    skrivehjelp,
+    writeHelpField,
   ],
 });

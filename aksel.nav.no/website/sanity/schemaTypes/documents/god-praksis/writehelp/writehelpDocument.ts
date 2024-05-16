@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
-import { block, headingStyles } from "../objects";
+import { block, headingStyles } from "../../objects";
 
-export const Skrivehjelp = defineType({
+const writeHelpDocument = defineType({
   title: "Skrivehjelp",
   name: "skrivehjelp",
   type: "document",
@@ -20,3 +20,5 @@ export const Skrivehjelp = defineType({
     }),
   ],
 });
+
+export { writeHelpDocument };

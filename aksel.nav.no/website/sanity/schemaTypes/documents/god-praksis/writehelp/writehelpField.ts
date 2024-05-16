@@ -1,7 +1,7 @@
 import { defineField } from "sanity";
-import { WriteHelp } from "../../custom-components/WriteHelp";
+import { WriteHelp } from "./WriteHelpInput";
 
-export const skrivehjelp = defineField({
+const writeHelpField = defineField({
   title: " ",
   name: "writeHelp",
   type: "string",
@@ -10,3 +10,5 @@ export const skrivehjelp = defineField({
     input: WriteHelp,
   },
 });
+
+export { writeHelpField };

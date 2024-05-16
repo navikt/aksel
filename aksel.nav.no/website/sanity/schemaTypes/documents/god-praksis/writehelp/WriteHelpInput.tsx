@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { SanityBlockContent } from "@/sanity-block";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
-export const WriteHelp = () => {
+const WriteHelp = () => {
   const client = useClient({ apiVersion: SANITY_API_VERSION });
   const { data, error } = useSWR(`*[_id == "skrivehjelp"][0]`, (query) =>
     client.fetch(query),
@@ -18,4 +18,4 @@ export const WriteHelp = () => {
   return <SanityBlockContent blocks={content ?? []} />;
 };
 
-export default WriteHelp;
+export { WriteHelp };
