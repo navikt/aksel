@@ -18,12 +18,8 @@ export const getGlobalReference = (
 ): { name: string; value: string | number } | null => {
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))
-    .reduce(
-      (acc, [, value]) => {
-        acc.push(...value);
-        return acc;
-      },
-      [] as { name: string; value: string | number }[],
+    .flatMap(([, value]) =>
+      value.map(({ name, value: _value }) => ({ name, value: String(_value) })),
     );
 
   return (
