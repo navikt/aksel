@@ -1,6 +1,6 @@
 import { FuseResult } from "fuse.js";
 import { beforeEach, describe, expect, test } from "vitest";
-import { FuseItemT, SearchHitT, SearchResultsT } from "@/types";
+import type { FuseItemT, SearchHitT, SearchResultsT } from "@/types";
 import { createSearchResult } from "../utils";
 
 describe("createSearchResult", () => {
