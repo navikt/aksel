@@ -46,8 +46,7 @@
         "noDoubleEquals": "off",
         "useIsArray": "off",
         "noGlobalIsNan": "off",
-        "noMisleadingCharacterClass": "off",
-        "noGlobalIsFinite": "off"
+        "noMisleadingCharacterClass": "off"
       },
       "complexity": {
         "noForEach": "off",
