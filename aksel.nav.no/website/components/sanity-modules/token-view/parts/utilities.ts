@@ -19,7 +19,10 @@ export const getGlobalReference = (
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))
     .reduce(
-      (acc, [, value]) => [...acc, ...value],
+      (acc, [, value]) => {
+        acc.push(...value);
+        return acc;
+      },
       [] as { name: string; value: string | number }[],
     );
 

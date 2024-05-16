@@ -101,21 +101,27 @@ export const migrations: {
 
 export function getMigrationPath(str: string) {
   return Object.values(migrations)
-    .reduce((acc, val) => [...val, ...acc], [])
+    .reduce((acc, val) => {
+      acc.push(...val);
+      return acc;
+    }, [])
     .find((x) => x.value === str)?.path;
 }
 
 export function getWarning(str: string) {
   return Object.values(migrations)
-    .reduce((acc, val) => [...val, ...acc], [])
+    .reduce((acc, val) => {
+      acc.push(...val);
+      return acc;
+    }, [])
     .find((x) => x.value === str)?.warning;
 }
 
 export function getMigrationNames() {
-  return Object.values(migrations).reduce(
-    (acc, val) => [...val.map((x) => x.value), ...acc],
-    [] as string[],
-  );
+  return Object.values(migrations).reduce((acc, val) => {
+    acc.push(...val.map((x) => x.value));
+    return acc;
+  }, [] as string[]);
 }
 
 export function getMigrationString() {
