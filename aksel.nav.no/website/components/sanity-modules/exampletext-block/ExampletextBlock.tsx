@@ -17,7 +17,9 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
   return (
     <Box
       as="section"
-      background="surface-subtle"
+      background="surface-neutral-subtle"
+      borderWidth="1"
+      borderColor="border-subtle"
       padding="6"
       aria-labelledby={id}
       className="mb-7 last:mb-0 dark:bg-surface-neutral-moderate"
@@ -40,7 +42,7 @@ function formatText(text: string) {
   return text
     .split("\n")
     .filter(Boolean)
-    .map((line, index) => <BodyLong key={index}>{line}</BodyLong>);
+    .map((line) => <BodyLong key={line}>{line}</BodyLong>);
 }
 
 export default function Component(props: ExampletextBlockProps) {
