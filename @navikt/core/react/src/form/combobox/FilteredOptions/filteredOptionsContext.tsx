@@ -86,22 +86,23 @@ const FilteredOptionsProvider = ({
   const filteredOptionsMap = useMemo(
     () =>
       options.reduce(
-        (map, _option) => ({
-          ...map,
-          [filteredOptionsUtils.getOptionId(id, _option.label)]: _option,
-        }),
+        (map, _option) => {
+          const _id = filteredOptionsUtils.getOptionId(id, _option.label);
+          map[_id] = _option;
+          return map;
+        },
         {
           [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
             ? toComboboxOption(value)
             : undefined,
-          ...customOptions.reduce(
-            (acc, customOption) => ({
-              ...acc,
-              [filteredOptionsUtils.getOptionId(id, customOption.label)]:
-                customOption,
-            }),
-            {},
-          ),
+          ...customOptions.reduce((acc, customOption) => {
+            const _id = filteredOptionsUtils.getOptionId(
+              id,
+              customOption.label,
+            );
+            acc[_id] = customOption;
+            return acc;
+          }, {}),
         },
       ),
     [allowNewValues, customOptions, id, options, value],
