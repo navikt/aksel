@@ -100,12 +100,8 @@ function mapContent(blocks: any[]) {
     }
   });
 
-  const mapped = Object.entries(groupBy(contentBlocks, "id")).reduce(
-    (prev: { id?: string; text: string }[], [key, value]) => {
-      prev.push({ id: key, text: value.map((x) => x.text).join(" ") });
-      return prev;
-    },
-    [],
+  const mapped = Object.entries(groupBy(contentBlocks, "id")).map(
+    ([key, value]) => ({ id: key, text: value.map((x) => x.text).join(" ") }),
   );
 
   return mapped;
