@@ -83,30 +83,27 @@ const FilteredOptionsProvider = ({
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
-  const filteredOptionsMap = useMemo(
-    () =>
-      options.reduce(
-        (map, _option) => {
-          const _id = filteredOptionsUtils.getOptionId(id, _option.label);
-          map[_id] = _option;
-          return map;
-        },
-        {
-          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
-            ? toComboboxOption(value)
-            : undefined,
-          ...customOptions.reduce((acc, customOption) => {
-            const _id = filteredOptionsUtils.getOptionId(
-              id,
-              customOption.label,
-            );
-            acc[_id] = customOption;
-            return acc;
-          }, {}),
-        },
-      ),
-    [allowNewValues, customOptions, id, options, value],
-  );
+  const filteredOptionsMap = useMemo(() => {
+    const initialMap = {
+      [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
+        ? toComboboxOption(value)
+        : undefined,
+      ...customOptions.reduce((acc, customOption) => {
+        const _id = filteredOptionsUtils.getOptionId(id, customOption.label);
+        acc[_id] = customOption;
+        return acc;
+      }, {}),
+    };
+
+    // Add the options to the map
+    const finalMap = options.reduce((map, _option) => {
+      const _id = filteredOptionsUtils.getOptionId(id, _option.label);
+      map[_id] = _option;
+      return map;
+    }, initialMap);
+
+    return finalMap;
+  }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
     if (
