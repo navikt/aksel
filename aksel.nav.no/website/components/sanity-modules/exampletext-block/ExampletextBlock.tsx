@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { BodyLong, Box, CopyButton, HStack, Heading } from "@navikt/ds-react";
+import { BodyLong, CopyButton, HStack, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 
 type ExampletextBlockProps = {
@@ -15,15 +15,9 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
   if (!node.text || !node.title) return null;
 
   return (
-    <Box
-      as="section"
-      background="surface-neutral-subtle"
-      borderWidth="1"
-      borderColor="border-subtle"
-      padding="6"
+    <section
       aria-labelledby={id}
-      className="mb-7 last:mb-0 dark:bg-surface-neutral-moderate"
-      borderRadius="large"
+      className="mb-7 rounded-large bg-grayalpha-50 p-6 ring-1 ring-border-subtle last:mb-0 dark:bg-surface-neutral-moderate"
     >
       <HStack justify="space-between" gap="4" align="center" wrap={false}>
         <Heading size="small" as="p" textColor="subtle" id={id} aria-hidden>
@@ -33,7 +27,7 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
       </HStack>
       <hr className="my-4 border-border-subtle" aria-hidden />
       <div className="space-y-7">{formatText(node.text)}</div>
-    </Box>
+    </section>
   );
 };
 
