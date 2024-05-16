@@ -15,7 +15,7 @@ const prefersReducedMotion = globalThis?.matchMedia
 
 function isNumber(n: string) {
   const number = parseFloat(n);
-  return !isNaN(number) && isFinite(number);
+  return !Number.isNaN(number) && isFinite(number);
 }
 
 function isPercentage(height: Height) {

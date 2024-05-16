@@ -45,7 +45,6 @@
         "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
         "useIsArray": "off",
-        "noGlobalIsNan": "off",
         "noMisleadingCharacterClass": "off",
         "noGlobalIsFinite": "off"
       },
