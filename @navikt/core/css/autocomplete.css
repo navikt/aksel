@@ -1,0 +1,4 @@
+.vfocus {
+  outline: solid 3px var(--a-border-focus);
+  border-radius: var(--a-border-radius-medium);
+}

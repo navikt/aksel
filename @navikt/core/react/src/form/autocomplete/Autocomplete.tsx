@@ -1,10 +1,8 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { DismissableLayer } from "../../overlay/dismiss/DismissableLayer";
-import { Floating } from "../../overlays/floating/Floating";
 import { createContext } from "../../util/create-context";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { RovingFocus } from "./RovingFocus";
 import { SlottedDivElementRef } from "./SlottedDivElement";
+import { remove_virtual_focus, set_virtual_focus } from "./utils";
 
 // The recipe for success!
 //
@@ -43,43 +41,102 @@ export const [AutocompleteContextProvider, useAutocompleteValue] =
     setValue: Dispatch<SetStateAction<string>>;
   }>();
 
+const [AutocompleteInternalContextProvider, useAutocompleteInternalContext] =
+  createContext<{
+    virtualFocusIdx: number;
+    setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
+  }>();
+
 export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   const descendants = useAutocompleteDescendants();
   const [value, setValue] = useState("");
-  console.log({ value });
+  const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
   return (
-    <DismissableLayer>
+    <AutocompleteInternalContextProvider
+      {...{ virtualFocusIdx, setVirtualFocusIdx }}
+    >
       <AutocompleteContextProvider {...{ value, setValue }}>
         <AutocompleteDescendantsProvider value={descendants}>
-          <RovingFocus asChild descendants={descendants}>
-            <Floating>{children}</Floating>
-          </RovingFocus>
+          <div
+            onChange={(event) => {
+              // assumption: there is a bubbling onChange from an input inside Anchor
+              setValue((event.target as HTMLInputElement).value);
+            }}
+          >
+            {children}
+          </div>
         </AutocompleteDescendantsProvider>
       </AutocompleteContextProvider>
-    </DismissableLayer>
+    </AutocompleteInternalContextProvider>
   );
 };
 
+export interface AutocompleteAnchorProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The function that is run when the focused element
+   * is to be picked (eg. do an actual search, change route)
+   */
+  pick: () => void;
+  children: React.ReactNode;
+}
+
 export const AutocompleteAnchor = ({
   children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const { register, index, descendants } = useAutocompleteDescendant();
+  pick,
+}: AutocompleteAnchorProps) => {
+  const { setValue } = useAutocompleteValue();
+
+  const { register, descendants } = useAutocompleteDescendant({
+    handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
+      set_virtual_focus(node_to_focus, node_to_blur);
+      setValue(""); // TODO: might want to let user define this instead (focus function on Anchor)
+    },
+    handlePick: () => {
+      pick();
+    },
+  });
+  const { virtualFocusIdx, setVirtualFocusIdx } =
+    useAutocompleteInternalContext();
+
   return (
-    <Floating.Anchor
-      className="navds-autocomplete-anchor"
+    <div
+      role="searchbox"
+      tabIndex={0}
       ref={register}
+      onBlur={() => {
+        const curr = descendants.item(virtualFocusIdx);
+        if (curr?.node) {
+          remove_virtual_focus(curr.node);
+        }
+      }}
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
-          descendants.next(index)?.node.focus();
+          event.preventDefault();
+          const curr = descendants.item(virtualFocusIdx);
+          const next = descendants.next(virtualFocusIdx);
+          if (next?.handleVirtualOnFocus && curr?.node) {
+            next.handleVirtualOnFocus(next.node, curr.node);
+            setVirtualFocusIdx(next.index);
+          }
         } else if (event.key === "ArrowUp") {
-          descendants.prev(index)?.node.focus();
+          event.preventDefault();
+          const curr = descendants.item(virtualFocusIdx);
+          const prev = descendants.prev(virtualFocusIdx);
+          if (prev?.handleVirtualOnFocus && curr?.node) {
+            prev.handleVirtualOnFocus(prev.node, curr?.node);
+            setVirtualFocusIdx(prev.index);
+          }
+        } else if (event.key === "Enter") {
+          const curr = descendants.item(0);
+          if (curr?.handlePick) {
+            curr.handlePick();
+          }
         }
       }}
     >
       {children}
-    </Floating.Anchor>
+    </div>
   );
 };
 
@@ -88,35 +145,57 @@ export const AutocompleteContent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return (
-    <Floating.Content className="navds-autocomplete-content">
-      {children}
-    </Floating.Content>
-  );
+  return <div className="navds-autocomplete-content">{children}</div>;
 };
+
+export interface AutocompleteItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The function that is run when the element is focused
+   * (virtually, not actual focus, eg. set a border around an item)
+   */
+  focus: () => void;
+  children: React.ReactNode;
+}
 
 export const AutocompleteItem = ({
   children,
-  pick,
-}: {
-  children: React.ReactNode;
-  pick: () => void;
-}) => {
-  const { register, index, descendants } = useAutocompleteDescendant();
+  focus,
+}: AutocompleteItemProps) => {
+  const { register, index, descendants } = useAutocompleteDescendant({
+    handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
+      set_virtual_focus(node_to_focus, node_to_blur);
+      focus();
+    },
+  });
+  const { virtualFocusIdx, setVirtualFocusIdx } =
+    useAutocompleteInternalContext();
+
   return (
     <div
+      id={`descendant-${index}`}
       className="navds-autocomplete-item"
       role="button"
-      tabIndex={0}
       ref={register}
-      onFocus={() => {
-        pick();
+      tabIndex={-1} // shouldn't really be focusable, they are virtually focusable, but can be clicked
+      onFocus={() => {}} // set focus to anchor?
+      onKeyDown={() => {}} // set focus to anchor?
+      onClick={() => {
+        const anchor = descendants.item(0);
+        if (anchor?.handlePick) {
+          anchor.handlePick();
+        }
       }}
-      onKeyDown={(event) => {
-        if (event.key === "ArrowDown") {
-          descendants.next(index)?.node.focus();
-        } else if (event.key === "ArrowUp") {
-          descendants.prev(index)?.node.focus();
+      onMouseOver={(event) => {
+        const prev = descendants.item(virtualFocusIdx);
+        const currIdx = descendants.indexOf(event.currentTarget);
+        const curr = descendants.item(currIdx);
+        if (prev?.node) {
+          remove_virtual_focus(prev.node);
+        }
+        if (curr?.node && curr?.handleVirtualOnFocus) {
+          curr.handleVirtualOnFocus(curr.node);
+          setVirtualFocusIdx(curr.index);
         }
       }}
     >

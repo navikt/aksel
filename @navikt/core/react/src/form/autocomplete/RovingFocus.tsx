@@ -67,7 +67,6 @@ export const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
         };
         const prevTab = () => {
           const prev = descendants.prevEnabled(idx, loop);
-          console.log("prev", prev);
           prev && prev.node?.focus();
         };
         const firstTab = () => {
