@@ -8,8 +8,8 @@ export const makeConfig = (icons, folder) => {
     const name = resolveName(icon).replace(".svg", "");
     const keywords = icon.description
       .split(",")
-      .filter(Boolean)
-      .map((x) => x.trim());
+      .map((x) => x.trim())
+      .filter(Boolean);
 
     const config = {
       name,
