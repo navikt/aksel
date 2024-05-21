@@ -12,7 +12,11 @@ export default {
 const MyAnchor = () => {
   const { value } = useAutocompleteValue();
   return (
-    <Autocomplete.Anchor>
+    <Autocomplete.Anchor
+      pick={() => {
+        console.log(`pick(): searching for ${value}`);
+      }}
+    >
       <Search label="Søk på nav sine sider" value={value} />
     </Autocomplete.Anchor>
   );
@@ -21,7 +25,7 @@ const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
   const { setValue } = useAutocompleteValue();
   return (
     <Autocomplete.Item
-      pick={() => {
+      focus={() => {
         setValue(children);
       }}
     >
@@ -39,9 +43,14 @@ export const Default = () => {
       <Autocomplete>
         <MyAnchor />
         <Autocomplete.Content>
-          <MyItem icon={<HangerIcon aria-hidden />}>hanger</MyItem>
-          <MyItem icon={<RulerIcon aria-hidden />}>ruler</MyItem>
-          <MyItem icon={<PuzzlePieceIcon aria-hidden />}>puzzle piece</MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+          <MyItem icon={<RulerIcon aria-hidden />}>ruler </MyItem>
+          <MyItem icon={<PuzzlePieceIcon aria-hidden />}>puzzle piece </MyItem>
         </Autocomplete.Content>
       </Autocomplete>
     </div>
