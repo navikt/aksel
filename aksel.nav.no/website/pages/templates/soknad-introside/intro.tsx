@@ -49,7 +49,7 @@ function Example() {
           </Bleed>
         </Page.Block>
         <Page.Block width="text" gutters>
-          <VStack gap="12">
+          <VStack gap="8">
             <GuidePanel poster>
               <Heading level="2" size="medium" spacing>
                 Hei, [Navn Navnesen]!
