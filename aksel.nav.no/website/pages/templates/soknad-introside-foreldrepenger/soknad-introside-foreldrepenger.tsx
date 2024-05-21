@@ -32,7 +32,6 @@ function Example() {
             data-aksel-template="form-intropage-v1"
           >
             <Stack
-              align="center"
               gap="6"
               direction={{ sm: "row-reverse", lg: "row" }}
               justify={{ sm: "space-between", lg: "start" }}
