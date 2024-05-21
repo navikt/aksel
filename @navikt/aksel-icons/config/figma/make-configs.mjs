@@ -33,7 +33,11 @@ export const makeConfig = (icons, folder) => {
         .join("."),
     };
 
-    const yml = jsYaml.dump(config, { noRefs: true, skipInvalid: false });
+    const yml = jsYaml.dump(config, {
+      noRefs: true,
+      skipInvalid: false,
+      quotingType: '"',
+    });
 
     writeFileSync(resolve(folder, `${config.name}.yml`), yml, {
       encoding: "utf8",
