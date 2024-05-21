@@ -8112,13 +8112,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@whitespace/storybook-addon-html@npm:^6.0.4":
-  version: 6.0.5
-  resolution: "@whitespace/storybook-addon-html@npm:6.0.5"
+"@whitespace/storybook-addon-html@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "@whitespace/storybook-addon-html@npm:6.1.1"
   peerDependencies:
     prettier: ^3.0.0
     react-syntax-highlighter: ^15.0.0
-  checksum: 339bb88f2fa3a321111a70aa5e5885d54e4225540ee7df14623369707a773d227452334414621b759e98c9f0d8edfb24112fcf4089d8c7ef838b713fea30645d
+  checksum: 0e93d370e9665c6cae1f5bd8a3735cb5fe57c7d9be7b13f001747b05173b8f272be823b2f91f9985c9755b591ec4f9b7e118fbd9ca86446bfd9e4efbf928039f
   languageName: node
   linkType: hard
 
@@ -8450,7 +8450,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.3.0
     "@typescript-eslint/eslint-plugin": ^6.7.3
     "@typescript-eslint/parser": ^6.7.3
-    "@whitespace/storybook-addon-html": ^6.0.4
+    "@whitespace/storybook-addon-html": ^6.1.1
     chromatic: 11.3.0
     concurrently: 7.2.1
     cross-env: ^7.0.0
