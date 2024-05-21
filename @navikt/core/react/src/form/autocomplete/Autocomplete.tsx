@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
 import { createContext } from "../../util/create-context";
+import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
 import { remove_virtual_focus, set_virtual_focus } from "./utils";
@@ -81,10 +82,10 @@ export interface AutocompleteAnchorProps
   children: React.ReactNode;
 }
 
-export const AutocompleteAnchor = ({
-  children,
-  pick,
-}: AutocompleteAnchorProps) => {
+export const AutocompleteAnchor = forwardRef<
+  HTMLDivElement,
+  AutocompleteAnchorProps
+>(({ children, pick }, ref) => {
   const { setValue } = useAutocompleteValue();
 
   const { register, descendants } = useAutocompleteDescendant({
@@ -99,11 +100,13 @@ export const AutocompleteAnchor = ({
   const { virtualFocusIdx, setVirtualFocusIdx } =
     useAutocompleteInternalContext();
 
+  const mergedRefs = useMergeRefs(ref, register);
+
   return (
     <div
       role="searchbox"
       tabIndex={0}
-      ref={register}
+      ref={mergedRefs}
       onBlur={() => {
         const curr = descendants.item(virtualFocusIdx);
         if (curr?.node) {
@@ -138,7 +141,7 @@ export const AutocompleteAnchor = ({
       {children}
     </div>
   );
-};
+});
 
 export const AutocompleteContent = ({
   children,
