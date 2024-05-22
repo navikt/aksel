@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
+  Alert,
   Bleed,
   BodyLong,
   Box,
@@ -10,9 +11,8 @@ import {
   GuidePanel,
   Heading,
   Link,
+  List,
   Page,
-  Radio,
-  RadioGroup,
   Show,
   Stack,
   VStack,
@@ -40,44 +40,58 @@ function Example() {
                 <ApplicationPictogram />
               </Show>
               <Heading level="1" size="large">
-                Søknad om foreldrepenger
+                Søknad om støtte til pass av barn
               </Heading>
             </Stack>
           </Bleed>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
-              Hei, Darth Vader!
+              Hei, Luke Skywalker!
             </Heading>
             <BodyLong spacing>
               Jeg er her for å veilede deg gjennom søknaden. Svarene dine lagres
-              i underveis, slik at du trygt kan gå tilbake og endre dem.
+              underveis, slik at du trygt kan gå tilbake og endre dem.
             </BodyLong>
             <BodyLong spacing>
-              Foreldrepenger skal erstatte inntekten din når du skal være hjemme
-              med barnet i forbindelse med fødsel eller adopsjon.
+              Denne pengestøtten kan gis til deg som gjennomfører en
+              arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar
+              AAP, uføretrygd eller har nedsatt arbeidsevne.
             </BodyLong>
             <BodyLong>
               <Link href="#">
-                Les mer om foreldrepenger, hvem som kan søke og hva du kan få på
-                nav.no.
+                Les mer om støtte til pass av barn, hvem som kan søke og hva du
+                kan få på nav.no.
               </Link>
             </BodyLong>
           </GuidePanel>
-          <RadioGroup legend="Hvilket barn gjelder søknaden din?">
-            <Radio value="luke">Luke født 19 BBY</Radio>
-            <Radio value="leia">Leia født 19 BBY</Radio>
-            <Radio value="other" description="Det vil opprettes en ny sak">
-              Et annet barn
-            </Radio>
-          </RadioGroup>
+          <Alert variant="info">
+            <Heading level="2" size="small" spacing>
+              Søker du for nytt skole- eller barnehageår?
+            </Heading>
+            <BodyLong>
+              Du må dokumentere utgiftene til barnepass for perioden du søker
+              for. Vi anbefaler at du venter med å søke til du har fakturaen for
+              det nye skole- eller barnehageåret.
+            </BodyLong>
+          </Alert>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong>
-              Vi lagrer søknaden din i 24 timer. Hvis du ikke fortsetter innen
-              den tid, blir søknaden slettet.
-            </BodyLong>
+            <List>
+              <List.Item>
+                Du må dokumentere dine utgifter til pass av barn med faktura som
+                inneholder beløp og periode.
+              </List.Item>
+              <List.Item>
+                Du kan bare søke om støtte til pass av barn hvis ingen andre har
+                fått dekket utgiftene til pass av samme barn.
+              </List.Item>
+              <List.Item>
+                Vi dekker opp til 64 prosent av utgiftene du har til pass av
+                barn.
+              </List.Item>
+            </List>
           </div>
           <div>
             <Accordion>
@@ -306,4 +320,5 @@ export const Demo = {
 export const args = {
   index: 0,
   sandbox: false,
+  title: "Pass av barn",
 };

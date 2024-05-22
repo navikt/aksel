@@ -10,8 +10,9 @@ import {
   GuidePanel,
   Heading,
   Link,
-  List,
   Page,
+  Radio,
+  RadioGroup,
   Show,
   Stack,
   VStack,
@@ -39,91 +40,46 @@ function Example() {
                 <ApplicationPictogram />
               </Show>
               <Heading level="1" size="large">
-                Søknad om alderspensjon
+                Søknad om foreldrepenger
               </Heading>
             </Stack>
           </Bleed>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
-              Hei, Luke Skywalker!
+              Hei, Darth Vader!
             </Heading>
             <BodyLong spacing>
               Jeg er her for å veilede deg gjennom søknaden. Svarene dine lagres
-              underveis, slik at du trygt kan gå tilbake og endre dem.
+              i underveis, slik at du trygt kan gå tilbake og endre dem.
             </BodyLong>
             <BodyLong spacing>
-              Alderspensjon fra folketrygden er livsvarig, og sikrer at du har
-              inntekt når du er pensjonist.
+              Foreldrepenger skal erstatte inntekten din når du skal være hjemme
+              med barnet i forbindelse med fødsel eller adopsjon.
             </BodyLong>
-            <List>
-              <List.Item>
-                Du tjener opp alderspensjon fra inntekt og botid i Norge.
-              </List.Item>
-              <List.Item>
-                Du kan jobbe samtidig som du tar ut alderspensjon fra NAV.
-              </List.Item>
-              <List.Item>
-                Det er ulike regler for alderspensjon avhengig av når du er
-                født.
-              </List.Item>
-            </List>
             <BodyLong>
               <Link href="#">
-                Les mer om alderspensjon, hvem som kan søke og hva du kan få på
+                Les mer om foreldrepenger, hvem som kan søke og hva du kan få på
                 nav.no.
               </Link>
             </BodyLong>
           </GuidePanel>
-          <div>
-            <Heading level="2" size="large" spacing>
-              Her kan du søke om
-            </Heading>
-            <List>
-              <List.Item>Alderspensjon</List.Item>
-              <List.Item>Avtalefestet pensjon (AFP) i privat sektor</List.Item>
-            </List>
-            <BodyLong spacing>
-              Du kan lese mer om AFP i privat sektor hos Fellesordningen for
-              AFP.
-            </BodyLong>
-            <Heading level="3" size="medium" spacing>
-              Dette kan du ikke søke om her
-            </Heading>
-            <List>
-              <List.Item>
-                Avtalefestet pensjon (AFP) i offentlig sektor (link)
-              </List.Item>
-              <List.Item>Tjenestepensjon (link)</List.Item>
-            </List>
-            <BodyLong>
-              Du kan ikke kombinere AFP i offentlig sektor og alderspensjon.
-            </BodyLong>
-          </div>
+          <RadioGroup legend="Hvilket barn gjelder søknaden din?">
+            <Radio value="luke">Luke født 19 BBY</Radio>
+            <Radio value="leia">Leia født 19 BBY</Radio>
+            <Radio value="other" description="Det vil opprettes en ny sak">
+              Et annet barn
+            </Radio>
+          </RadioGroup>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <List>
-              <List.Item>
-                Er du usikker på om du har høy nok opptjening til å ta ut
-                pensjon nå, kan du bruke <Link href="#">kalkulatoren</Link> vår.
-                Her kan du også se hvor mye du kan få i pensjon og når du kan ta
-                ut pensjon.
-              </List.Item>
-              <List.Item>
-                Du kan søke opptil fire måneder før du skal ta ut pensjon. NAV
-                må ha mottatt søknaden senest måneden før uttak. Det er ikke
-                mulig å søke tilbake i tid, fordi alderspensjon først kan
-                innvilges fra måneden etter at søknad er fremsatt. Du må alltid
-                søke for å få alderspensjon, også etter fylte 67 år.
-              </List.Item>
-              <List.Item>
-                Du kan ta pauser og fortsette å skrive søknaden i inntil fire
-                måneder.
-              </List.Item>
-            </List>
+            <BodyLong>
+              Vi lagrer søknaden din i 24 timer. Hvis du ikke fortsetter innen
+              den tid, blir søknaden slettet.
+            </BodyLong>
           </div>
-          <Box>
+          <div>
             <Accordion>
               <Accordion.Item>
                 <Accordion.Header>
@@ -170,7 +126,7 @@ function Example() {
                 </Accordion.Content>
               </Accordion.Item>
             </Accordion>
-          </Box>
+          </div>
           <div>
             <BodyLong>
               Det er viktig at du gir oss riktige opplysninger slik at vi kan
@@ -350,4 +306,5 @@ export const Demo = {
 export const args = {
   index: 0,
   sandbox: false,
+  title: "Foreldrepenger",
 };

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
-  Alert,
   Bleed,
   BodyLong,
   Box,
@@ -40,7 +39,7 @@ function Example() {
                 <ApplicationPictogram />
               </Show>
               <Heading level="1" size="large">
-                Søknad om støtte til pass av barn
+                Søknad om arbeidsavklaringspenger (AAP)
               </Heading>
             </Stack>
           </Bleed>
@@ -53,43 +52,27 @@ function Example() {
               underveis, slik at du trygt kan gå tilbake og endre dem.
             </BodyLong>
             <BodyLong spacing>
-              Denne pengestøtten kan gis til deg som gjennomfører en
-              arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar
-              AAP, uføretrygd eller har nedsatt arbeidsevne.
+              Arbeidsavklaringspenger forkortes ofte med “AAP”.
             </BodyLong>
             <BodyLong>
+              AAP skal sikre deg inntekt når du på grunn av sykdom eller skade
+              har behov for å få avklart mulighetene dine til å jobbe.{" "}
               <Link href="#">
-                Les mer om støtte til pass av barn, hvem som kan søke og hva du
-                kan få på nav.no.
+                Les mer om AAP, hvem som kan søke og hva du kan få på nav.no
               </Link>
+              .
             </BodyLong>
           </GuidePanel>
-          <Alert variant="info">
-            <Heading level="2" size="small" spacing>
-              Søker du for nytt skole- eller barnehageår?
-            </Heading>
-            <BodyLong>
-              Du må dokumentere utgiftene til barnepass for perioden du søker
-              for. Vi anbefaler at du venter med å søke til du har fakturaen for
-              det nye skole- eller barnehageåret.
-            </BodyLong>
-          </Alert>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
             <List>
               <List.Item>
-                Du må dokumentere dine utgifter til pass av barn med faktura som
-                inneholder beløp og periode.
+                Vanligvis kan du tidligst få AAP fra den dagen du søker.
               </List.Item>
               <List.Item>
-                Du kan bare søke om støtte til pass av barn hvis ingen andre har
-                fått dekket utgiftene til pass av samme barn.
-              </List.Item>
-              <List.Item>
-                Vi dekker opp til 64 prosent av utgiftene du har til pass av
-                barn.
+                Du kan søke om AAP selv om du ikke har mottatt sykepenger.
               </List.Item>
             </List>
           </div>
@@ -320,4 +303,5 @@ export const Demo = {
 export const args = {
   index: 0,
   sandbox: false,
+  title: "AAP",
 };
