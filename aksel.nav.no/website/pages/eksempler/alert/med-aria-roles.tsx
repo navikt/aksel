@@ -1,9 +1,9 @@
-import { Alert } from "@navikt/ds-react";
+import { Alert, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="4">
       <Alert variant="info">
         Hvilken aria-role og hvilken Alert-variant man bruker er knyttet til
         viktigheten av innholdet. I Info-varianten bør det ikke være nødvendig å
@@ -20,7 +20,7 @@ const Example = () => {
       <Alert role="alert" variant="error">
         Kritisk feil! I Error-varianten kan du bruke role=&quot;alert&quot;
       </Alert>
-    </div>
+    </VStack>
   );
 };
 
