@@ -5,7 +5,6 @@ import {
   Alert,
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   Button,
   Checkbox,
@@ -41,7 +40,6 @@ function Example() {
                 <ApplicationPictogram />
               </Show>
               <VStack gap="1">
-                <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="large">
                   Søknad om støtte til pass av barn
                 </Heading>
