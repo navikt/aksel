@@ -159,6 +159,7 @@ const Riktekst = (
     "expansioncard",
     "tabell_v2",
     "video",
+    "exampletext_block",
   ];
 
   const accordion = [
