@@ -39,11 +39,9 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <VStack gap="1">
-                <Heading level="1" size="large">
-                  Søknad om støtte til pass av barn
-                </Heading>
-              </VStack>
+              <Heading level="1" size="large">
+                Søknad om støtte til pass av barn
+              </Heading>
             </Stack>
           </Bleed>
         </Page.Block>

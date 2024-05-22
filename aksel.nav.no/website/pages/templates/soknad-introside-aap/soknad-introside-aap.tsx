@@ -38,11 +38,9 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <VStack gap="1">
-                <Heading level="1" size="large">
-                  Søknad om arbeidsavklaringspenger (AAP)
-                </Heading>
-              </VStack>
+              <Heading level="1" size="large">
+                Søknad om arbeidsavklaringspenger (AAP)
+              </Heading>
             </Stack>
           </Bleed>
         </Page.Block>
