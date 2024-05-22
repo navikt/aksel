@@ -1,9 +1,9 @@
-import { Chat } from "@navikt/ds-react";
+import { Chat, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-10">
+    <VStack gap="10">
       <Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00">
         <Chat.Bubble toptextPosition="right">
           Hei! Mitt navn er Eva. Hva kan jeg hjelpe deg med?
@@ -20,7 +20,7 @@ const Example = () => {
           Hei Eva. Hvor sjekker jeg statusen på foreldrepengersøknaden min?
         </Chat.Bubble>
       </Chat>
-    </div>
+    </VStack>
   );
 };
 
