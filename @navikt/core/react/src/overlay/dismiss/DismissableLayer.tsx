@@ -2,7 +2,6 @@ import React, {
   CSSProperties,
   forwardRef,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -77,9 +76,13 @@ export const [
   useDismissableDescendant,
 ] = createDescendantContext<
   HTMLDivElement,
-  { disableOutsidePointerEvents: boolean }
+  { disableOutsidePointerEvents: boolean; forceUpdate: () => void }
 >();
 
+/**
+ * Number of layers with `disableOutsidePointerEvents` set to `true` currently enabled.
+ */
+let bodyLockCount = 0;
 let originalBodyPointerEvents: string;
 
 const DismissableLayer = forwardRef<HTMLDivElement, DismissableLayerProps>(
@@ -133,9 +136,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }: DismissableLayerProps,
     ref,
   ) => {
+    const [, setForce] = useState({});
     const { register, index, descendants } = useDismissableDescendant({
       disableOutsidePointerEvents,
       disabled: !enabled,
+      forceUpdate: () => setForce({}),
     });
 
     /**
@@ -162,10 +167,11 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     const hasInteractedOutsideRef = useRef(false);
     const hasPointerDownOutsideRef = useRef(false);
 
-    const pointerEnabled = useMemo(() => {
+    const pointerState = (() => {
       let lastIndex = -1;
 
       const descendantNodes = descendants.enabledValues();
+
       descendantNodes.forEach((obj, _index) => {
         if (obj.disableOutsidePointerEvents) {
           lastIndex = _index;
@@ -181,9 +187,12 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         /**
          * If we find a node with `disableOutsidePointerEvents` we want to disable pointer events on the body.
          */
-        isBodyPointerEventsDisabled: lastIndex > -1,
+        isBodyPointerEventsDisabled: bodyLockCount > 0,
+        pointerStyle: (index >= lastIndex && bodyLockCount > 0
+          ? "auto"
+          : undefined) as CSSProperties["pointerEvents"] | undefined,
       };
-    }, [descendants, index]);
+    })();
 
     /**
      * We want to prevent the Layer from closing when the trigger, anchor element, or its child elements are interacted with.
@@ -248,7 +257,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
     }
 
     const pointerDownOutside = usePointerDownOutside((event) => {
-      if (!pointerEnabled.isPointerEventsEnabled || !enabled) {
+      if (!pointerState.isPointerEventsEnabled || !enabled) {
         return;
       }
 
@@ -329,17 +338,33 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * we want to disable pointer events on the body when the first layer is opened.
      */
     useEffect(() => {
-      if (!node || !disableOutsidePointerEvents || index !== 0 || !enabled) {
-        return;
+      if (!node || !enabled || !disableOutsidePointerEvents) return;
+
+      if (bodyLockCount === 0) {
+        originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
+        ownerDocument.body.style.pointerEvents = "none";
       }
-
-      originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
-      ownerDocument.body.style.pointerEvents = "none";
-
+      bodyLockCount++;
       return () => {
-        ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+        if (bodyLockCount === 1) {
+          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
+        }
+        bodyLockCount--;
       };
-    }, [node, ownerDocument, disableOutsidePointerEvents, index, enabled]);
+    }, [
+      node,
+      ownerDocument,
+      disableOutsidePointerEvents,
+      descendants,
+      enabled,
+    ]);
+
+    /**
+     * To make sure pointerEvents are enabled for all parents and siblings when the layer is removed from the DOM
+     */
+    useEffect(() => {
+      return () => descendants.values().forEach((x) => x.forceUpdate());
+    }, [descendants, node]);
 
     const Comp = asChild ? Slot : "div";
 
@@ -351,11 +376,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         onBlurCapture={focusOutside.onBlurCapture}
         onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
         style={{
-          pointerEvents: pointerEnabled.isBodyPointerEventsDisabled
-            ? pointerEnabled.isPointerEventsEnabled
-              ? "auto"
-              : "none"
-            : undefined,
+          pointerEvents: pointerState.pointerStyle,
           ...rest.style,
         }}
       >
