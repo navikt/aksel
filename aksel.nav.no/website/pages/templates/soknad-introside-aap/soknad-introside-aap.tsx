@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
@@ -301,6 +301,7 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
+  parameters: { layout: "fullscreen" },
 };
 
 export const args = {
