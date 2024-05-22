@@ -42,7 +42,7 @@ function Example() {
               <VStack gap="1">
                 <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
                 <Heading level="1" size="large">
-                  Søknad om [ytelse] TEST
+                  Søknad om [ytelse]
                 </Heading>
               </VStack>
             </Stack>

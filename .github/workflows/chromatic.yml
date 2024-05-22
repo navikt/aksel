@@ -58,7 +58,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false
-          buildScriptName: "build:storybook"
+          buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
           untraced: "**/package.json|yarn.lock|**/*.md"
           externals: \@navikt/core/css/**/*.css
