@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
-import { Button, type HeadingProps, useId } from "@navikt/ds-react";
+import { Button, type HeadingProps } from "@navikt/ds-react";
 
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
@@ -9,7 +9,7 @@ export interface ShowMoreProps
    * Override what element to render the wrapper as.
    * @default aside
    */
-  as?: "aside" | "section";
+  as?: "aside" | "section" | "div";
   /**
    * Content. Is [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert) when collapsed.
    */
@@ -76,15 +76,28 @@ export const ShowMore =
       headingLevel = "1", */
       scrollBackOnCollapse = true,
       className,
-      "aria-labelledby": ariaLabelledby,
+      //"aria-labelledby": ariaLabelledby,
       ...rest
     }: ShowMoreProps,
     /* ref, */
   ) => {
     const localRef = useRef<HTMLElement>(null);
     /* const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]); */
+    const shouldScroll = useRef(false);
     const [isOpen, setIsOpen] = useState(false);
-    const ariaLabelId = useId();
+    //const ariaLabelId = useId();
+
+    useEffect(() => {
+      if (
+        localRef.current &&
+        shouldScroll.current &&
+        scrollBackOnCollapse &&
+        !isOpen
+      ) {
+        localRef.current.scrollIntoView({ block: "nearest" });
+        shouldScroll.current = false;
+      }
+    }, [isOpen, scrollBackOnCollapse]);
 
     const ChevronIcon = isOpen ? ChevronUpIcon : ChevronDownIcon;
 
@@ -97,9 +110,7 @@ export const ShowMore =
           className,
           { "navds-show-more--closed": !isOpen },
         )}
-        aria-labelledby={
-          !ariaLabelledby && !rest["aria-label"] ? ariaLabelId : ariaLabelledby
-        }
+        //aria-labelledby={!ariaLabelledby && !rest["aria-label"] ? ariaLabelId : ariaLabelledby}
         {...rest}
       >
         {/* <Heading size={headingSize} level={headingLevel} id={ariaLabelId}>
@@ -117,9 +128,7 @@ export const ShowMore =
               size={size}
               onClick={() => {
                 setIsOpen(!isOpen);
-                if (scrollBackOnCollapse && isOpen) {
-                  localRef.current?.scrollIntoView();
-                }
+                shouldScroll.current = true;
               }}
             >
               {isOpen ? "Vis mindre" : "Vis mer"}
