@@ -23,7 +23,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * We recommend using an SVG or plain text initials as avatar.
    *
-   * **Hidden from screen readers.**
+   * **Hidden for screen readers.**
    */
   avatar?: React.ReactNode;
   /**
