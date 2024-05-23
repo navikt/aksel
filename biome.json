@@ -1,0 +1,81 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "noNoninteractiveElementToInteractiveRole": "off",
+        "useValidAnchor": "off",
+        "useButtonType": "off",
+        "useValidAriaRole": "off",
+        "useValidAriaValues": "off",
+        "useMediaCaption": "off",
+        "useKeyWithClickEvents": "off",
+        "noNoninteractiveTabindex": "off",
+        "useAriaPropsForRole": "off"
+      },
+      "style": {
+        "useImportType": "off",
+        "useTemplate": "off",
+        "noUselessElse": "off",
+        "useNodejsImportProtocol": "off",
+        "useConst": "off",
+        "noUnusedTemplateLiteral": "off",
+        "noInferrableTypes": "off",
+        "noVar": "off",
+        "noParameterAssign": "off",
+        "useNumberNamespace": "off",
+        "noNonNullAssertion": "off",
+        "useSelfClosingElements": "off",
+        "useDefaultParameterLast": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off",
+        "noArrayIndexKey": "off",
+        "noAssignInExpressions": "off",
+        "noImplicitAnyLet": "off",
+        "noDoubleEquals": "off",
+        "useIsArray": "off",
+        "noGlobalIsNan": "off",
+        "noMisleadingCharacterClass": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "useLiteralKeys": "off",
+        "useOptionalChain": "off",
+        "useArrowFunction": "off",
+        "noUselessTernary": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off",
+        "noInnerDeclarations": "off",
+        "useJsxKeyInIterable": "off",
+        "noSelfAssign": "off"
+      }
+    },
+    "ignore": [
+      "**/node_modules/**",
+      "**/lib/**",
+      "**/public/**",
+      "**/examples/**",
+      "**/esm/**",
+      "**/cjs/**",
+      "**/dist/**",
+      "**/codemod/**/*.js",
+      "**/tailwind/tailwind.config.js",
+      "**/.next/**"
+    ]
+  }
+}
