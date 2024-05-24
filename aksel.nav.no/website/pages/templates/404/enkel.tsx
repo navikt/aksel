@@ -11,7 +11,7 @@ const Example = () => {
         <Box paddingBlock="20 16" data-aksel-template="404-v2">
           <div>
             <Heading level="1" size="large" spacing>
-              Beklager, vi fant ikke siden
+              Beklager, vi fant ikke siden TEST
             </Heading>
             <BodyShort>
               Denne siden kan være slettet eller flyttet, eller det er en feil i
