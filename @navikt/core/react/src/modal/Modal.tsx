@@ -115,6 +115,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       // We check both to avoid activating polyfill twice when not using portal.
       if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
+
+        // Force-add the "polyfilled" class in case of SSR (needPolyfill will always be false on the server)
+        modalRef.current.classList.add("navds-modal--polyfilled");
       }
       // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
       // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
