@@ -29,7 +29,7 @@ export const parseDate = (
   type: "date" | "month",
   allowTwoDigitYear: boolean,
 ): Date => {
-  let parsed;
+  let parsed: Date;
   const ALLOWED_FORMATS =
     type === "date" ? ALLOWED_INPUT_FORMATS_DATE : ALLOWED_INPUT_FORMATS_MONTH;
 
@@ -76,8 +76,13 @@ export const parseDate = (
   return new Date("Invalid date");
 };
 
-function isTwoDigitYear(dateString, today, locale, formats) {
-  let parsed;
+function isTwoDigitYear(
+  dateString: string,
+  today: Date,
+  locale: Locale,
+  formats: string[],
+) {
+  let parsed: Date;
   const newFormat = formats.map((x) => x.replace("yyyy", "yy"));
   for (const format of newFormat) {
     parsed = parse(dateString, format, today, { locale });

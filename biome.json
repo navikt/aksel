@@ -41,7 +41,6 @@
         "noShadowRestrictedNames": "off",
         "noArrayIndexKey": "off",
         "noAssignInExpressions": "off",
-        "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
         "noMisleadingCharacterClass": "off"
       },
