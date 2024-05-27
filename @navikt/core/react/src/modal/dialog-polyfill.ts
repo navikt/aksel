@@ -631,7 +631,8 @@ dialogPolyfill.DialogManager = function () {
     this.mo_ = new MutationObserver(function (records) {
       var removed = [];
       records.forEach(function (rec) {
-        for (var i = 0, c: Node; (c = rec.removedNodes[i]); ++i) {
+        // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type c in this scenario
+        for (var i = 0, c; (c = rec.removedNodes[i]); ++i) {
           if (!(c instanceof Element)) {
             continue;
           } else if (c.localName === "dialog") {
@@ -676,7 +677,7 @@ dialogPolyfill.DialogManager.prototype.updateStacking = function () {
   var zIndex = this.zIndexHigh_;
 
   for (
-    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+    // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
     var i = 0, dpi;
     (dpi = this.pendingDialogStack[i]);
     ++i
