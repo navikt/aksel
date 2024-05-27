@@ -49,7 +49,11 @@ export const KodeEksempelDoc = defineType({
             { title: "Innhold", name: "innhold", type: "string" },
             { title: "Beskrivelse", name: "description", type: "text" },
             { title: "Index", name: "index", type: "number" },
-            { title: "Enable Sandbox", name: "sandboxEnabled", type: "string" },
+            {
+              title: "Enable Sandbox",
+              name: "sandboxEnabled",
+              type: "boolean",
+            },
             {
               title: "Sandbox Base64-snippet",
               name: "sandboxBase64",

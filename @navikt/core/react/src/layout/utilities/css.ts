@@ -44,7 +44,9 @@ const translateTokenStringToCSS = (
       if (componentProp === "margin-inline" && x === "full") {
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/-2)`;
-      } else if (componentProp === "padding-inline" && x === "full") {
+      }
+
+      if (componentProp === "padding-inline" && x === "full") {
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/2)`;
       }

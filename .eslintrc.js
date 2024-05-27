@@ -32,6 +32,7 @@ module.exports = {
     "react/display-name": "off",
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
+    "no-else-return": "error",
   },
   reportUnusedDisableDirectives: true,
   overrides: [
