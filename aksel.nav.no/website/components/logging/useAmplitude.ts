@@ -36,7 +36,9 @@ const useAmplitudeInit = () => {
     const initAmplitude = async () => {
       if (isExample() || isTemplate()) {
         return;
-      } else if (!isProdUrl()) {
+      }
+
+      if (!isProdUrl()) {
         mockAmplitude();
         return;
       }

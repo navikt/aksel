@@ -68,9 +68,9 @@ const useVirtualFocus = (
     const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
     if (_currentIndex === elementsAbleToReceiveFocus.length - 1) {
       return;
-    } else {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1]);
     }
+
+    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1]);
   };
 
   const moveFocusToTop = () => _moveFocusAndScrollTo(undefined);
