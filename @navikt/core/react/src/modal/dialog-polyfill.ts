@@ -676,7 +676,8 @@ dialogPolyfill.DialogManager.prototype.updateStacking = function () {
   var zIndex = this.zIndexHigh_;
 
   for (
-    var i = 0, dpi: { updateZIndex: (arg0: number, arg1: number) => void };
+    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+    var i = 0, dpi;
     (dpi = this.pendingDialogStack[i]);
     ++i
   ) {
