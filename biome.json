@@ -45,9 +45,7 @@
         "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
         "useIsArray": "off",
-        "noGlobalIsNan": "off",
-        "noMisleadingCharacterClass": "off",
-        "noGlobalIsFinite": "off"
+        "noMisleadingCharacterClass": "off"
       },
       "complexity": {
         "noForEach": "off",
@@ -56,7 +54,6 @@
         "useArrowFunction": "off",
         "noUselessTernary": "off"
       },
-
       "correctness": {
         "useExhaustiveDependencies": "off",
         "noInnerDeclarations": "off",

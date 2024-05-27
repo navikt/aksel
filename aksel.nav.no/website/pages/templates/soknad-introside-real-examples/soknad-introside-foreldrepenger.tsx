@@ -4,15 +4,15 @@ import {
   Accordion,
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   Button,
   Checkbox,
   GuidePanel,
   Heading,
   Link,
-  List,
   Page,
+  Radio,
+  RadioGroup,
   Show,
   Stack,
   VStack,
@@ -39,87 +39,44 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <VStack gap="1">
-                <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
-                <Heading level="1" size="large">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
+              <Heading level="1" size="large">
+                Søknad om foreldrepenger
+              </Heading>
             </Stack>
           </Bleed>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
-              Hei, [Navn Navnesen]!
+              Hei, Darth Vader!
             </Heading>
             <BodyLong spacing>
-              Seksjonen GuidePanel brukes til en kort, overordnet veiledning til
-              søkeren. Seksjonen henter inn søkerens navn, og gir en komprimert
-              forklaring av pengestøtten, tiltaket eller hjelpemiddelet. Denne
-              teksten hentes fra ingressen til produktsiden på nav.no.
+              Jeg er her for å veilede deg gjennom søknaden. Svarene dine lagres
+              i underveis, slik at du trygt kan gå tilbake og endre dem.
+            </BodyLong>
+            <BodyLong spacing>
+              Foreldrepenger skal erstatte inntekten din når du skal være hjemme
+              med barnet i forbindelse med fødsel eller adopsjon.
             </BodyLong>
             <BodyLong>
-              Avslutt teksten i seksjonen med en lenke til produktsiden på
-              nav.no som åpnes i en ny fane.
+              <Link href="#">
+                Les mer om foreldrepenger, hvem som kan søke og hva du kan få på
+                nav.no.
+              </Link>
             </BodyLong>
           </GuidePanel>
+          <RadioGroup legend="Hvilket barn gjelder søknaden din?">
+            <Radio value="luke">Luke født 19 BBY</Radio>
+            <Radio value="leia">Leia født 19 BBY</Radio>
+            <Radio value="other" description="Det vil opprettes en ny sak">
+              Et annet barn
+            </Radio>
+          </RadioGroup>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong spacing>
-              Denne seksjonen brukes til å gi søkerne informasjon de vil ha stor
-              nytte av før de går i gang med søknaden. Eksempler på nyttig
-              informasjon:
-            </BodyLong>
-            <List>
-              <List.Item>
-                Oppgaver brukeren må ha gjort før de søker.{" "}
-                <i>
-                  Du må ha meldt deg som arbeidssøker før du kan søke om
-                  dagpenger.
-                </i>
-              </List.Item>
-              <List.Item>
-                Dokumentasjon brukeren kan bli bedt om.{" "}
-                <i>
-                  Noen av opplysningene du gir underveis vil du bli bedt om å
-                  dokumentere. Du vil trenge xx og xx for å fullføre denne
-                  søknaden.
-                </i>
-              </List.Item>
-              <List.Item>
-                Automatisk lagring.{" "}
-                <i>
-                  Vi lagrer svarene dine (xx timer) mens du fyller ut, så du kan
-                  ta pauser underveis.
-                </i>
-              </List.Item>
-              <List.Item>
-                Antall steg og estimert tidsbruk.{" "}
-                <i>
-                  Det er XX steg i søknaden, og du kan regne med å bruke ca. XX
-                  minutter.
-                </i>
-              </List.Item>
-              <List.Item>
-                Søknadsfrister. <i>Husk at du må søke om xx innen xx dager.</i>
-              </List.Item>
-              <List.Item>
-                Saksbehandlingstider og info om gyldighet, krav osv.{" "}
-                <i>
-                  Vi bruker ca. xx uker på å behandle søknaden din. Husk at du
-                  må sende meldekort xx ofte selv om du ikke har fått svar på
-                  søknaden din om dagpenger ennå.
-                </i>
-              </List.Item>
-            </List>
             <BodyLong>
-              For annen, utfyllende informasjon om søknaden bør du lenke direkte
-              til søknadskapittelet i produktsiden, som{" "}
-              <Link href="https://www.nav.no/dagpenger#sok">
-                dette eksempelet for dagpenger
-              </Link>
-              .
+              Vi lagrer søknaden din i 24 timer. Hvis du ikke fortsetter innen
+              den tid, blir søknaden slettet.
             </BodyLong>
           </div>
           <div>
@@ -348,7 +305,6 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  title: "Standard",
-  desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
   sandbox: false,
+  title: "Foreldrepenger",
 };

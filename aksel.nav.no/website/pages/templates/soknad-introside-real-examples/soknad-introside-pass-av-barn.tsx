@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Accordion,
+  Alert,
   Bleed,
   BodyLong,
-  BodyShort,
   Box,
   Button,
   Checkbox,
@@ -39,88 +39,59 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <VStack gap="1">
-                <BodyShort size="small">NAV 10-07.03 (om relevant)</BodyShort>
-                <Heading level="1" size="large">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
+              <Heading level="1" size="large">
+                Søknad om støtte til pass av barn
+              </Heading>
             </Stack>
           </Bleed>
           <GuidePanel poster>
             <Heading level="2" size="medium" spacing>
-              Hei, [Navn Navnesen]!
+              Hei, Luke Skywalker!
             </Heading>
             <BodyLong spacing>
-              Seksjonen GuidePanel brukes til en kort, overordnet veiledning til
-              søkeren. Seksjonen henter inn søkerens navn, og gir en komprimert
-              forklaring av pengestøtten, tiltaket eller hjelpemiddelet. Denne
-              teksten hentes fra ingressen til produktsiden på nav.no.
+              Jeg er her for å veilede deg gjennom søknaden. Svarene dine lagres
+              underveis, slik at du trygt kan gå tilbake og endre dem.
+            </BodyLong>
+            <BodyLong spacing>
+              Denne pengestøtten kan gis til deg som gjennomfører en
+              arbeidsrettet aktivitet og er enslig mor/far, gjenlevende, mottar
+              AAP, uføretrygd eller har nedsatt arbeidsevne.
             </BodyLong>
             <BodyLong>
-              Avslutt teksten i seksjonen med en lenke til produktsiden på
-              nav.no som åpnes i en ny fane.
+              <Link href="#">
+                Les mer om støtte til pass av barn, hvem som kan søke og hva du
+                kan få på nav.no.
+              </Link>
             </BodyLong>
           </GuidePanel>
+          <Alert variant="info">
+            <Heading level="2" size="small" spacing>
+              Søker du for nytt skole- eller barnehageår?
+            </Heading>
+            <BodyLong>
+              Du må dokumentere utgiftene til barnepass for perioden du søker
+              for. Vi anbefaler at du venter med å søke til du har fakturaen for
+              det nye skole- eller barnehageåret.
+            </BodyLong>
+          </Alert>
           <div>
             <Heading level="2" size="large" spacing>
               Før du søker
             </Heading>
-            <BodyLong spacing>
-              Denne seksjonen brukes til å gi søkerne informasjon de vil ha stor
-              nytte av før de går i gang med søknaden. Eksempler på nyttig
-              informasjon:
-            </BodyLong>
             <List>
               <List.Item>
-                Oppgaver brukeren må ha gjort før de søker.{" "}
-                <i>
-                  Du må ha meldt deg som arbeidssøker før du kan søke om
-                  dagpenger.
-                </i>
+                Du må dokumentere dine utgifter til pass av barn med faktura som
+                inneholder beløp og periode.
               </List.Item>
               <List.Item>
-                Dokumentasjon brukeren kan bli bedt om.{" "}
-                <i>
-                  Noen av opplysningene du gir underveis vil du bli bedt om å
-                  dokumentere. Du vil trenge xx og xx for å fullføre denne
-                  søknaden.
-                </i>
+                Du kan bare søke om støtte til pass av barn hvis ingen andre har
+                fått dekket utgiftene til pass av samme barn.
               </List.Item>
               <List.Item>
-                Automatisk lagring.{" "}
-                <i>
-                  Vi lagrer svarene dine (xx timer) mens du fyller ut, så du kan
-                  ta pauser underveis.
-                </i>
-              </List.Item>
-              <List.Item>
-                Antall steg og estimert tidsbruk.{" "}
-                <i>
-                  Det er XX steg i søknaden, og du kan regne med å bruke ca. XX
-                  minutter.
-                </i>
-              </List.Item>
-              <List.Item>
-                Søknadsfrister. <i>Husk at du må søke om xx innen xx dager.</i>
-              </List.Item>
-              <List.Item>
-                Saksbehandlingstider og info om gyldighet, krav osv.{" "}
-                <i>
-                  Vi bruker ca. xx uker på å behandle søknaden din. Husk at du
-                  må sende meldekort xx ofte selv om du ikke har fått svar på
-                  søknaden din om dagpenger ennå.
-                </i>
+                Vi dekker opp til 64 prosent av utgiftene du har til pass av
+                barn.
               </List.Item>
             </List>
-            <BodyLong>
-              For annen, utfyllende informasjon om søknaden bør du lenke direkte
-              til søknadskapittelet i produktsiden, som{" "}
-              <Link href="https://www.nav.no/dagpenger#sok">
-                dette eksempelet for dagpenger
-              </Link>
-              .
-            </BodyLong>
           </div>
           <div>
             <Accordion>
@@ -348,7 +319,6 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  title: "Standard",
-  desc: "Introsiden skal informere brukeren om hva de kan søke på, hvordan de søker og hva som skjer etter at de har sendt inn søknaden.",
   sandbox: false,
+  title: "Pass av barn",
 };

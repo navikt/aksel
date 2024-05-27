@@ -35,6 +35,8 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   wrap?: boolean;
   /**
    * CSS `gap` property.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    *
    * @example
    * gap='4'
