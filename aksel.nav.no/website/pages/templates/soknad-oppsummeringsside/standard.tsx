@@ -31,10 +31,7 @@ function Example() {
       <Header />
       <Page.Block width="text" gutters>
         <VStack as="main" gap="8">
-          <Bleed
-            marginInline={{ lg: "24" }}
-            data-aksel-template="form-summarypage-v1"
-          >
+          <Bleed marginInline={{ lg: "24" }}>
             <Stack
               gap="6"
               direction={{ sm: "row-reverse", lg: "row" }}
@@ -55,7 +52,7 @@ function Example() {
             </Stack>
           </Bleed>
 
-          <div>
+          <div data-aksel-template="form-summarypage-v1">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
