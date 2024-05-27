@@ -5,7 +5,7 @@ import { Button } from "../button";
 import { Checkbox, CheckboxGroup } from "../form/checkbox";
 import { VStack } from "../layout/stack";
 import { Tooltip } from "../tooltip";
-import { BodyLong, Heading } from "../typography";
+import { BodyLong, BodyShort, Heading } from "../typography";
 import Modal from "./Modal";
 
 const meta: Meta<typeof Modal> = {
@@ -49,6 +49,7 @@ export const WithUseRef: StoryFn = () => {
 
           {/* Nested modal */}
           <Modal
+            size="small"
             ref={ref2}
             onBeforeClose={() =>
               window.confirm("Are you sure you want to close the modal?")
@@ -163,6 +164,11 @@ export const EmptyHeader: StoryFn = () => (
   </Modal>
 );
 
+/* size="small" mainly changes padding on its own.
+ * now it changes width and heading/header size too.
+ * Should it affect elements inside the modal?
+ * that can be overridden by more specific size props?
+ */
 export const Small: StoryFn = () => (
   <Modal
     open
@@ -172,8 +178,16 @@ export const Small: StoryFn = () => (
       heading: "Simple header",
       size: "small",
     }}
+    size="small"
   >
-    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+    <Modal.Body>
+      <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button size="small" variant="secondary">
+        Dummy button
+      </Button>
+    </Modal.Footer>
   </Modal>
 );
 Small.storyName = "Size = Small";
@@ -186,7 +200,9 @@ export const MediumWithPortal: StoryFn = () => (
     width="medium"
     header={{ heading: "Simple header" }}
   >
-    <Modal.Body>Lorem ipsum dolor sit amet.</Modal.Body>
+    <Modal.Body>
+      <BodyShort size="small">Lorem ipsum dolor sit amet.</BodyShort>
+    </Modal.Body>
   </Modal>
 );
 MediumWithPortal.storyName = "Size = Medium (with portal)";

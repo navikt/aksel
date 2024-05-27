@@ -1,5 +1,9 @@
 interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
   /**
+   * Size of the modal.
+   */
+  size?: "small" | "medium";
+  /**
    * Content for the header. Alteratively you can use `<Modal.Header>` instead for more control, but then you have to set `aria-label` or `aria-labelledby` on the modal manually.
    */
   header?: {
@@ -9,7 +13,7 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
     /**
      * Heading size.
      * @default "medium"
-     * */
+     */
     size?: "medium" | "small";
     /**
      * Removes close-button (X) when false.

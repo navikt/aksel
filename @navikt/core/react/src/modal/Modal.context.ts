@@ -4,6 +4,7 @@ import { createContext } from "../util/create-context";
 interface ModalContextProps {
   closeHandler?: React.MouseEventHandler<HTMLButtonElement>;
   ref: React.RefObject<HTMLDialogElement>;
+  size?: "small" | "medium";
 }
 
 export const [ModalContextProvider, useModalContext] =

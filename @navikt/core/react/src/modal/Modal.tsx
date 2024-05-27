@@ -92,6 +92,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       style,
       onClick,
       onMouseDown,
+      size,
       ...rest
     }: ModalProps,
     ref,
@@ -138,8 +139,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
     useBodyScrollLock(modalRef, portalNode, isNested);
 
-    const isWidthPreset =
-      typeof width === "string" && ["small", "medium"].includes(width);
+    let isWidthPreset = false;
+    if (typeof width === "string" && ["small", "medium"].includes(width))
+      isWidthPreset = true;
+    else if (size === "small") isWidthPreset = true;
 
     const mergedClassName = cl("navds-modal", className, {
       "navds-modal--polyfilled": needPolyfill,
@@ -227,6 +230,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         <ModalContextProvider
           closeHandler={getCloseHandler(modalRef, header, onBeforeClose)}
           ref={modalRef}
+          size={size}
         >
           {header && (
             <ModalHeader>
