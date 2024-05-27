@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { Bleed, BodyLong, CopyButton, HStack, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import ShowMore from "../token-tabell/parts/ShowMore";
+import ShowMore from "@/web/ShowMore";
 
 type ExampletextBlockProps = {
   node: {
