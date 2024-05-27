@@ -11,7 +11,7 @@ export const disableDate = (
     return isSameDay(disabledSelection, date);
   }
 
-  if (disabledSelection instanceof Array) {
+  if (Array.isArray(disabledSelection)) {
     for (let i = 0; i < disabledSelection.length; i++) {
       const selection = disabledSelection[i];
       if (isDateRange(selection)) {

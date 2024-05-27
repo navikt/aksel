@@ -43,7 +43,6 @@
         "noAssignInExpressions": "off",
         "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
-        "useIsArray": "off",
         "noMisleadingCharacterClass": "off"
       },
       "complexity": {
