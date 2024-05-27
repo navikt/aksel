@@ -44,9 +44,7 @@
         "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
         "useIsArray": "off",
-        "noGlobalIsNan": "off",
-        "noMisleadingCharacterClass": "off",
-        "noGlobalIsFinite": "off"
+        "noMisleadingCharacterClass": "off"
       },
       "complexity": {
         "noForEach": "off",
@@ -54,9 +52,6 @@
         "useOptionalChain": "off",
         "useArrowFunction": "off",
         "noUselessTernary": "off"
-      },
-      "performance": {
-        "noAccumulatingSpread": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",
