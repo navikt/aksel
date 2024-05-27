@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { ComponentTranslation } from "../../util/i18n/i18n.types";
 import { FileUploadLocaleContextProvider } from "./FileUpload.context";
-import { ComponentTranslation } from "./i18n/i18n.types";
 import Trigger from "./parts/Trigger";
 import Dropzone from "./parts/dropzone/Dropzone";
 import Item from "./parts/item/Item";

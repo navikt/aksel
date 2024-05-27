@@ -21,6 +21,8 @@ import {
 import dialogPolyfill, { needPolyfill } from "./dialog-polyfill";
 import { ModalProps } from "./types";
 
+const polyfillClassName = "navds-modal--polyfilled";
+
 interface ModalComponent
   extends React.ForwardRefExoticComponent<
     ModalProps & React.RefAttributes<HTMLDialogElement>
@@ -116,6 +118,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       // We check both to avoid activating polyfill twice when not using portal.
       if (needPolyfill && modalRef.current && portalNode) {
         dialogPolyfill.registerDialog(modalRef.current);
+
+        // Force-add the "polyfilled" class in case of SSR (needPolyfill will always be false on the server)
+        modalRef.current.classList.add(polyfillClassName);
       }
       // We set autofocus on the dialog element to prevent the default behavior where first focusable element gets focus when modal is opened.
       // This is mainly to fix an edge case where having a Tooltip as the first focusable element would make it activate when you open the modal.
@@ -145,7 +150,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     else if (size === "small") isWidthPreset = true;
 
     const mergedClassName = cl("navds-modal", className, {
-      "navds-modal--polyfilled": needPolyfill,
+      polyfillClassName: needPolyfill,
       "navds-modal--autowidth": !width,
       [`navds-modal--${width}`]: isWidthPreset,
     });

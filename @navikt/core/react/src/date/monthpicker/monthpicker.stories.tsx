@@ -2,7 +2,6 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
-import { act } from "react-dom/test-utils";
 import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
 import { DateInputProps } from "../parts/DateInput";
@@ -141,9 +140,7 @@ export const Required = {
 
     const buttonApr = canvas.getByRole("button", { pressed: true });
 
-    await act(async () => {
-      await userEvent.click(buttonApr);
-    });
+    await userEvent.click(buttonApr);
 
     expect(buttonApr.ariaPressed).toBe("true");
 
@@ -151,9 +148,7 @@ export const Required = {
 
     expect(buttonSep?.ariaPressed).toBe("false");
 
-    await act(async () => {
-      buttonSep && (await userEvent.click(buttonSep));
-    });
+    buttonSep && (await userEvent.click(buttonSep));
 
     expect(buttonSep?.ariaPressed).toBe("true");
     expect(buttonApr.ariaPressed).toBe("false");

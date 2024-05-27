@@ -159,6 +159,7 @@ const Riktekst = (
     "expansioncard",
     "tabell_v2",
     "video",
+    "exampletext_block",
   ];
 
   const accordion = [
@@ -170,6 +171,7 @@ const Riktekst = (
     "do_dont",
     "alert",
     "tabell_v2",
+    "exampletext_block",
   ];
 
   const komponent = [
@@ -179,7 +181,7 @@ const Riktekst = (
     "token_ref",
   ];
 
-  const templates = ["kode_eksempler"];
+  const templates = ["kode_eksempler", "exampletext_block"];
 
   const grunnleggende = ["spesial_seksjon"];
 

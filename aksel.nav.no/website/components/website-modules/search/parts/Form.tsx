@@ -1,20 +1,12 @@
 import { useContext, useEffect, useRef } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
-import { Button, Chips, Search } from "@navikt/ds-react";
-import { searchOptions } from "@/types";
+import { Search } from "@navikt/ds-react";
 import KBD from "@/web/KBD";
 import { useShortcut } from "../hooks";
-import {
-  SearchContext,
-  SearchNavigationContext,
-  useSearchResult,
-} from "../providers";
+import { SearchContext, useSearchResult } from "../providers";
 
 export const SearchForm = () => {
-  const { open, setOpen, tags, setTags, query, setQuery, os } =
-    useContext(SearchContext);
-  const { update, results, reset, isValidating, error } = useSearchResult();
-  const { close } = useContext(SearchNavigationContext);
+  const { open, setOpen, query, setQuery, os } = useContext(SearchContext);
+  const { update, reset, isValidating, error } = useSearchResult();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useShortcut(open, setOpen, inputRef);
@@ -25,99 +17,51 @@ export const SearchForm = () => {
 
   const handleSearchStart = (value: string) => {
     setQuery(value);
-    value === "" ? reset() : update(value, tags);
-  };
-
-  const noHits = (key: string) => {
-    return !Object.hasOwn(results?.groupedHits ?? {}, key);
-  };
-
-  const noHitsAndQuery = (key: string) => {
-    return query.length > 0 && !tags.find((x) => x === key);
+    value === "" ? reset() : update(value);
   };
 
   if (isValidating || error) {
     return null;
   }
 
-  const chipsToShow = Object.entries(searchOptions)
-    .filter((x) => !x[1].hidden)
-    .filter(
-      ([key]) =>
-        !(noHitsAndQuery(key) && noHits(key) && results?.hits[key] === 0),
-    );
-
   return (
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="grid w-full gap-2 bg-surface-default"
+      className="px-6 pb-4"
     >
-      <div className="flex items-center gap-1 p-1">
-        <Search
-          label={
-            <span className="flex items-center gap-2">
-              <span>Søk i hele Aksel</span>
-              {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
-            </span>
-          }
-          aria-autocomplete="both"
-          variant="simple"
-          value={query}
-          onChange={(v) => handleSearchStart(v)}
-          onClear={() => {
-            setQuery("");
-            reset();
-          }}
-          onKeyDown={(e) => {
-            /* Avoids sideeffects when clearing Search */
-            if (e.key === "Escape") {
-              if (e.currentTarget.value) {
-                e.stopPropagation();
-              }
+      <Search
+        label={
+          <span className="flex items-center gap-2">
+            <span>Søk i hele Aksel</span>
+            {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
+          </span>
+        }
+        aria-autocomplete="both"
+        variant="simple"
+        value={query}
+        onChange={(v) => handleSearchStart(v)}
+        onClear={() => {
+          setQuery("");
+          reset();
+        }}
+        onKeyDown={(e) => {
+          /* Avoids sideeffects when clearing Search */
+          if (e.key === "Escape") {
+            if (e.currentTarget.value) {
+              e.stopPropagation();
             }
-          }}
-          ref={inputRef}
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          id="aksel-search-input"
-          clearButton={false}
-          placeholder="Søk gjennom hele aksel"
-          className="border-none pr-0 focus:shadow-none"
-        />
-        <div className="grid h-full w-12 place-content-center">
-          <Button
-            variant="tertiary-neutral"
-            icon={<XMarkIcon title="Lukk søk" />}
-            onClick={close}
-            type="button"
-            size="small"
-          />
-        </div>
-      </div>
-      {chipsToShow.length !== 0 && (
-        <Chips className="px-4 pb-4 md:px-10">
-          {chipsToShow.map(([key, val]) => (
-            <Chips.Toggle
-              key={key}
-              variant="neutral"
-              selected={tags.includes(key as keyof typeof searchOptions)}
-              type="button"
-              onClick={() => {
-                const newTags = (tags as string[]).includes(key)
-                  ? tags.filter((y) => y !== key)
-                  : [...tags, key];
-                setTags(newTags as (keyof typeof searchOptions)[]);
-                update(query, newTags);
-              }}
-            >
-              {val.display}
-            </Chips.Toggle>
-          ))}
-        </Chips>
-      )}
+          }
+        }}
+        ref={inputRef}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        id="aksel-search-input"
+        clearButton={false}
+        placeholder="Søk på artikler, f.eks. Button"
+      />
     </form>
   );
 };

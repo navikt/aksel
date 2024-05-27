@@ -184,7 +184,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
             (step, i) => {
               const n = Number(step);
-              return isNaN(n) ? (
+              return Number.isNaN(n) ? (
                 <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
                   <BodyShort size={size === "xsmall" ? "small" : size}>
                     ...

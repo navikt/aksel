@@ -180,6 +180,17 @@ const StyleMappings = {
       dependencies: [typoCss, "link.css"],
     },
     {
+      component: "FormProgress",
+      main: formCss,
+      dependencies: [
+        typoCss,
+        "progress-bar.css",
+        "button.css",
+        primitivesCss,
+        "stepper.css",
+      ],
+    },
+    {
       component: "ToggleGroup",
       main: "toggle-group.css",
       dependencies: [typoCss],

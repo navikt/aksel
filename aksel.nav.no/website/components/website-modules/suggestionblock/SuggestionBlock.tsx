@@ -190,7 +190,7 @@ const options: {
     text: "Denne komponenten er ny eller oppdatert. Tar du den i bruk ønsker vi gjerne innspill til hvordan den fungerer i tjenesten din!",
     link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cnytt+✨&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Ny",
-    icon: <ChangeLogIconOutline />,
+    icon: <ChangeLogIconOutline aria-hidden />,
   },
   "komponent-beta": {
     text: "Komponenten er under utvikling, men klar for adopsjon. Vi ønsker gjerne innspill på hvordan den fungerer og hvilke forbedringer vi kan gjøre.",

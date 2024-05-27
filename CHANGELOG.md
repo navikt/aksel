@@ -1,18 +1,40 @@
 # Changelog
 
+## 6.8
+
+### @navikt/ds-react
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+* Stepper.Step: Set aria-current to "step" instead of true ([#2920](https://github.com/navikt/aksel/pull/2920))
+
+### @navikt/ds-css
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+* HGrid: forenklet CSS. ([#2917](https://github.com/navikt/aksel/pull/2917))
+
 ## 6.7
 
 ### @navikt/ds-react
 
-- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
+- Combobox: Remove 'Ingen søketreff' when custom options allowed ([#2895](https://github.com/navikt/aksel/pull/2895))
+
+- Datepicker, MonthPicker: Rekkefølgen på årstall i Select er reversert slik at siste år er øverst. Dette er endret for å være bedre tilpasset ekspertsystemer der de mest relevante årene ble vist lengst unna musepeker ved klikk. ([#2882](https://github.com/navikt/aksel/pull/2882))
+
+* :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
 
 ### @navikt/ds-css
 
-- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
 
-* Checkbox, Radio: Erstatter `:focus-visible` med `:focus` for bedre UX brukt sammen med ErrorSummary. ([#2893](https://github.com/navikt/aksel/pull/2893))
+* :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
 
-* :lipstick: tweak CSS for timeline pins. ([#2889](https://github.com/navikt/aksel/pull/2889))
+- Checkbox, Radio: Erstatter `:focus-visible` med `:focus` for bedre UX brukt sammen med ErrorSummary. ([#2893](https://github.com/navikt/aksel/pull/2893))
+
+- :lipstick: tweak CSS for timeline pins. ([#2889](https://github.com/navikt/aksel/pull/2889))
 
 ## 6.6
 

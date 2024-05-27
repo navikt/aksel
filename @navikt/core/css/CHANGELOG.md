@@ -1,5 +1,21 @@
 # @navikt/ds-css
 
+## 6.8.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+### Patch Changes
+
+- HGrid: forenklet CSS. ([#2917](https://github.com/navikt/aksel/pull/2917))
+
+## 6.7.1
+
+### Patch Changes
+
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
 ## 6.7.0
 
 ### Minor Changes

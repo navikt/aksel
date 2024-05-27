@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Accordion, Button } from "@navikt/ds-react";
+import { Accordion, Button, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="grid place-items-start gap-2">
+    <VStack gap="2" align="center">
       <Button variant="secondary" onClick={() => setOpen(!open)}>
         Toggle Accordion
       </Button>
@@ -29,7 +29,7 @@ const Example = () => {
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-    </div>
+    </VStack>
   );
 };
 
