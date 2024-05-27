@@ -4,19 +4,19 @@ import { Detail } from "../typography";
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Bubble text
+   * Bubble text.
    */
   children: React.ReactNode;
   /**
-   * name/sender on bubble
+   * Name/sender on bubble.
    */
   name?: string;
   /**
-   * Timestamp for sent message
+   * Timestamp for sent message.
    */
   timestamp?: string;
   /**
-   * Overrides hoizontal position of toptext
+   * Overrides hoizontal position of toptext.
    */
   toptextPosition?: "left" | "right";
 }

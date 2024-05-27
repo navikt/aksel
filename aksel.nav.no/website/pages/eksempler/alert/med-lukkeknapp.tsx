@@ -1,10 +1,10 @@
 import React from "react";
-import { Alert, AlertProps } from "@navikt/ds-react";
+import { Alert, AlertProps, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="4">
       <AlertWithCloseButton variant="info">
         Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha hatt
         en pensjonsgivende inntekt som tilsvarer x G, året før du fikk nedsatt
@@ -19,7 +19,7 @@ const Example = () => {
       <AlertWithCloseButton variant="error">
         Noe gikk galt! Prøv igjen om noen minutter.
       </AlertWithCloseButton>
-    </div>
+    </VStack>
   );
 };
 

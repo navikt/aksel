@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Chips } from "@navikt/ds-react";
+import { Chips, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -18,7 +18,7 @@ const Example = () => {
   const [filter, setFilter] = useState(options);
 
   return (
-    <div className="grid gap-4">
+    <VStack gap="10">
       <Chips size="small">
         {options.map((c) => (
           <Chips.Toggle
@@ -50,7 +50,7 @@ const Example = () => {
           </Chips.Removable>
         ))}
       </Chips>
-    </div>
+    </VStack>
   );
 };
 
