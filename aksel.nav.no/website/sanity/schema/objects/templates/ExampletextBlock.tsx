@@ -9,7 +9,7 @@ export const ExampletextBlock = defineType({
   icon: Chat2Icon,
   fields: [
     defineField({
-      title: "Heading",
+      title: "Tittel",
       name: "title",
       type: "string",
       initialValue: "Eksempeltekst",
@@ -20,6 +20,11 @@ export const ExampletextBlock = defineType({
       name: "text",
       type: "text",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: "Bruk ReadMore",
+      name: "readMore",
+      type: "boolean",
     }),
   ],
   preview: {

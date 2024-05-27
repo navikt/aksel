@@ -44,7 +44,6 @@
         "noAssignInExpressions": "off",
         "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
-        "noGlobalIsNan": "off",
         "noMisleadingCharacterClass": "off"
       },
       "complexity": {
@@ -53,9 +52,6 @@
         "useOptionalChain": "off",
         "useArrowFunction": "off",
         "noUselessTernary": "off"
-      },
-      "performance": {
-        "noAccumulatingSpread": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",

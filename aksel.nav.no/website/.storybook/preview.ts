@@ -32,7 +32,7 @@ const preview: Preview = {
         const aIndex = parseInt(a.name.split(" | ")[0]);
         const bIndex = parseInt(b.name.split(" | ")[0]);
 
-        if (isNaN(aIndex) || isNaN(bIndex)) {
+        if (Number.isNaN(aIndex) || Number.isNaN(bIndex)) {
           return undefined;
         }
 
