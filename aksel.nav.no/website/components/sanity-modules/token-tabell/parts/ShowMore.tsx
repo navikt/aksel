@@ -81,23 +81,18 @@ export const ShowMore =
     }: ShowMoreProps,
     /* ref, */
   ) => {
-    const localRef = useRef<HTMLElement>(null);
+    const localRef = useRef<HTMLDivElement>(null);
     /* const mergedRef = useMemo(() => mergeRefs([localRef, ref]), [ref]); */
-    const shouldScroll = useRef(false);
+    const [shouldScroll, setShouldScroll] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     //const ariaLabelId = useId();
 
     useEffect(() => {
-      if (
-        localRef.current &&
-        shouldScroll.current &&
-        scrollBackOnCollapse &&
-        !isOpen
-      ) {
+      if (localRef.current && shouldScroll) {
         localRef.current.scrollIntoView({ block: "nearest" });
-        shouldScroll.current = false;
+        setShouldScroll(false);
       }
-    }, [isOpen, scrollBackOnCollapse]);
+    }, [shouldScroll]);
 
     const ChevronIcon = isOpen ? ChevronUpIcon : ChevronDownIcon;
 
@@ -128,7 +123,9 @@ export const ShowMore =
               size={size}
               onClick={() => {
                 setIsOpen(!isOpen);
-                shouldScroll.current = true;
+                if (isOpen && scrollBackOnCollapse) {
+                  setShouldScroll(true);
+                }
               }}
             >
               {isOpen ? "Vis mindre" : "Vis mer"}

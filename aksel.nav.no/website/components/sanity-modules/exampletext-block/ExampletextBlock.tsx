@@ -30,7 +30,12 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
       <hr className="my-4 border-border-subtle" aria-hidden />
       {node.readMore ? (
         <Bleed marginInline="4" marginBlock="4" asChild>
-          <ShowMore as="div" variant="subtle" collapsedHeight="20rem">
+          <ShowMore
+            as="div"
+            variant="subtle"
+            collapsedHeight="20rem"
+            className="scroll-my-20"
+          >
             <div className="space-y-7">{formatText(node.text)}</div>
           </ShowMore>
         </Bleed>
