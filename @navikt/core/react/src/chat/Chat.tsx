@@ -13,15 +13,17 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Chat-message name.
+   * Name/sender on first bubble.
    */
   name?: string;
   /**
-   * Timestamp for sent message.
+   * Timestamp on first bubble.
    */
   timestamp?: string;
   /**
-   * Avatar for messenger. Regular text for initials works too, but it will be hidden for screen readers.
+   * We recommend using an SVG or plain text initials as avatar.
+   *
+   * **Hidden for screen readers.**
    */
   avatar?: React.ReactNode;
   /**
@@ -58,7 +60,7 @@ interface ChatComponent
 }
 
 /**
- * A component for communicating dialogs between two parties.
+ * A component for communicating a dialog between two or more parties.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
  * @see 🏷️ {@link ChatProps}
