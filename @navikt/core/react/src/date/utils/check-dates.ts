@@ -9,5 +9,5 @@ export const dateIsInCurrentMonth = (
 
 /** @private */
 export function isValidDate(day: Date): boolean {
-  return day && !Number.isNaN(day?.getTime()) && day.getFullYear() > 999;
+  return day && !Number.isNaN(day.getTime()) && day.getFullYear() > 999;
 }
