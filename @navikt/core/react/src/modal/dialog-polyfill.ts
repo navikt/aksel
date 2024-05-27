@@ -702,11 +702,8 @@ dialogPolyfill.DialogManager.prototype.containedByTopDialog_ = function (
   candidate,
 ) {
   while ((candidate = findNearestDialog(candidate))) {
-    for (
-      var i = 0, dpi: { dialog: any };
-      (dpi = this.pendingDialogStack[i]);
-      ++i
-    ) {
+    // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
+    for (var i = 0, dpi; (dpi = this.pendingDialogStack[i]); ++i) {
       if (dpi.dialog === candidate) {
         return i === 0; // only valid if top-most
       }
