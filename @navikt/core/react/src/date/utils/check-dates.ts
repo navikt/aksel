@@ -8,6 +8,6 @@ export const dateIsInCurrentMonth = (
 };
 
 /** @private */
-export function isValidDate(day: Date): boolean {
-  return day && !Number.isNaN(day.getTime()) && day.getFullYear() > 999;
+export function isValidDate(day?: Date): boolean {
+  return !!(day && !Number.isNaN(day.getTime()) && day.getFullYear() > 999);
 }
