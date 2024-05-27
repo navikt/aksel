@@ -676,12 +676,8 @@ dialogPolyfill.DialogManager.prototype.unblockDocument = function () {
 dialogPolyfill.DialogManager.prototype.updateStacking = function () {
   var zIndex = this.zIndexHigh_;
 
-  for (
-    // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
-    var i = 0, dpi;
-    (dpi = this.pendingDialogStack[i]);
-    ++i
-  ) {
+  // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
+  for (var i = 0, dpi; (dpi = this.pendingDialogStack[i]); ++i) {
     dpi.updateZIndex(--zIndex, --zIndex);
     if (i === 0) {
       this.overlay.style.zIndex = --zIndex;
