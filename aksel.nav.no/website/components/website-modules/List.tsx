@@ -3,9 +3,7 @@ import {
   ListProps as AkselListProps,
 } from "@navikt/ds-react";
 
-type ListProps = Pick<AkselListProps, "as" | "title"> & {
-  children: React.ReactNode;
-};
+type ListProps = Pick<AkselListProps, "as" | "title" | "children">;
 
 const List = ({ children, as = "ul", title }: ListProps) => (
   <AkselList className="list-margin max-w-text" as={as} title={title}>
