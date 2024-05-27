@@ -54,9 +54,6 @@
         "useArrowFunction": "off",
         "noUselessTernary": "off"
       },
-      "performance": {
-        "noAccumulatingSpread": "off"
-      },
       "correctness": {
         "useExhaustiveDependencies": "off",
         "noInnerDeclarations": "off",
