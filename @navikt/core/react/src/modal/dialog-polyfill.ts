@@ -634,9 +634,12 @@ dialogPolyfill.DialogManager = function () {
         for (var i = 0, c; (c = rec.removedNodes[i]); ++i) {
           if (!(c instanceof Element)) {
             continue;
-          } else if (c.localName === "dialog") {
+          }
+
+          if (c.localName === "dialog") {
             removed.push(c);
           }
+
           removed = removed.concat(c.querySelectorAll("dialog"));
         }
       });

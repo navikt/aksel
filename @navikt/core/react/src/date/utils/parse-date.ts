@@ -43,6 +43,7 @@ export const parseDate = (
         return parsed;
       }
     }
+
     for (const format of [
       ...ALLOWED_FORMATS.map((x) => x.replace("yyyy", "yy")),
     ]) {
@@ -55,24 +56,24 @@ export const parseDate = (
 
         if (isValidDate(new Date(convertedDate))) {
           return new Date(convertedDate);
-        } else {
-          return new Date("Invalid date");
         }
-      }
-    }
-    return new Date("Invalid date");
-  } else {
-    for (const format of ALLOWED_FORMATS) {
-      parsed = parse(date, format, today, { locale });
-      if (
-        isValidDate(parsed) &&
-        !isTwoDigitYear(date, today, locale, ALLOWED_FORMATS)
-      ) {
-        return parsed;
+        return new Date("Invalid date");
       }
     }
     return new Date("Invalid date");
   }
+
+  for (const format of ALLOWED_FORMATS) {
+    parsed = parse(date, format, today, { locale });
+    if (
+      isValidDate(parsed) &&
+      !isTwoDigitYear(date, today, locale, ALLOWED_FORMATS)
+    ) {
+      return parsed;
+    }
+  }
+
+  return new Date("Invalid date");
 };
 
 function isTwoDigitYear(dateString, today, locale, formats) {
