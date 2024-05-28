@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { StrictMode, useRef, useState } from "react";
+import { HStack, VStack } from "../../layout/stack";
 import { DismissableLayer } from "./DismissableLayer";
 
 export default {
@@ -144,24 +145,29 @@ function DismissableBox(props) {
   const [open, setOpen] = React.useState(false);
   const openButtonRef = React.useRef(null);
 
+  const disableOutsidePointer = props.index % 3 === 0 && props.index !== 0;
+
+  const beforeDisableOutsidePointer =
+    (props.index + 1) % 3 === 0 && props.index > 0;
+
   return (
     <DismissableLayer
       {...props}
       onEscapeKeyDown={() => {
         console.log("Escape key down");
       }}
-      disableOutsidePointerEvents={props.index % 3 === 0}
+      disableOutsidePointerEvents={disableOutsidePointer}
       style={{
         display: "inline-block",
         verticalAlign: "middle",
         padding: 20,
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
+        backgroundColor: `rgba(0, 0, ${props.index * 90}, 0.1)`,
         borderRadius: 10,
         marginTop: 20,
         ...props.style,
       }}
     >
-      <div>
+      <div style={{ display: "grid" }}>
         <button
           ref={openButtonRef}
           type="button"
@@ -169,6 +175,12 @@ function DismissableBox(props) {
         >
           {open ? "Close" : "Open"} new layer
         </button>
+        {disableOutsidePointer ? (
+          <span style={{ color: "white" }}>DisableOutsidePointer</span>
+        ) : null}
+        {beforeDisableOutsidePointer ? (
+          <span style={{ color: "white" }}>Before DisableOutsidePointer</span>
+        ) : null}
       </div>
 
       {open ? (
@@ -187,15 +199,111 @@ function DismissableBox(props) {
   );
 }
 
-export const DisableOutsidePointerEventsWhileHidden = () => (
-  <div>
-    <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
-      <div style={{ height: 100, width: 100, background: "red" }}>
-        <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
-          <div style={{ height: 50, width: 50, background: "blue" }} />
-        </DismissableLayer>
-      </div>
-    </DismissableLayer>
-    <button onClick={console.log}>Should be clickable</button>
-  </div>
-);
+export const DisableOutsidePointerEventsWhileHidden = () => {
+  const [enabled, setEnabled] = useState(false);
+  return (
+    <div>
+      <DismissableLayer disableOutsidePointerEvents={true} enabled={enabled}>
+        <div style={{ height: 100, width: 100, background: "red" }}>
+          <DismissableLayer disableOutsidePointerEvents={true} enabled={false}>
+            <div style={{ height: 50, width: 50, background: "blue" }} />
+          </DismissableLayer>
+        </div>
+      </DismissableLayer>
+      <button onClick={() => setEnabled((x) => !x)}>Should be clickable</button>
+    </div>
+  );
+};
+
+export const ParallelDismissableLayer = () => {
+  const [single, setSingle] = useState(false);
+  const [double, setDouble] = useState(false);
+  const [nestedSingle, setNestedSingle] = useState(false);
+  const [nestedDouble, setNestedDouble] = useState(false);
+
+  const Layer = ({
+    disableOutsidePointerEvents,
+    children,
+  }: {
+    disableOutsidePointerEvents?: boolean;
+    children?: React.ReactNode;
+  }) => {
+    const [open, setOpen] = useState(true);
+
+    if (!open) return null;
+
+    const style = {
+      width: 100,
+      height: 100,
+      backgroundColor: "red",
+    };
+
+    return (
+      <DismissableLayer
+        disableOutsidePointerEvents={disableOutsidePointerEvents}
+        style={style}
+      >
+        <button onClick={() => setOpen(false)}>Close me</button>
+        {children}
+      </DismissableLayer>
+    );
+  };
+
+  const state = (_state: boolean) => (_state ? "open" : "closed");
+
+  return (
+    <StrictMode>
+      <VStack gap="4">
+        <HStack gap="2">
+          <button onClick={() => setSingle((x) => !x)}>
+            Single {state(single)}
+          </button>
+          <button onClick={() => setDouble((x) => !x)}>
+            Double {state(double)}
+          </button>
+          <button onClick={() => setNestedSingle((x) => !x)}>
+            Nested Single {state(nestedSingle)}
+          </button>
+          <button onClick={() => setNestedDouble((x) => !x)}>
+            Nested Double {state(nestedDouble)}
+          </button>
+        </HStack>
+
+        {single && <Layer disableOutsidePointerEvents />}
+        {double && (
+          <div>
+            <Layer disableOutsidePointerEvents />
+            <Layer disableOutsidePointerEvents />
+          </div>
+        )}
+        {nestedSingle && (
+          <Layer disableOutsidePointerEvents>
+            <Layer disableOutsidePointerEvents />
+          </Layer>
+        )}
+        {nestedDouble && (
+          <div>
+            <Layer disableOutsidePointerEvents>
+              <Layer />
+            </Layer>
+            <Layer>
+              <Layer disableOutsidePointerEvents />
+            </Layer>
+          </div>
+        )}
+
+        <button>Focustrap (does nothing)</button>
+        <button
+          onClick={() => {
+            setSingle(false);
+            setDouble(false);
+            setNestedSingle(false);
+            setNestedDouble(false);
+          }}
+        >
+          Reset
+        </button>
+      </VStack>
+    </StrictMode>
+  );
+};

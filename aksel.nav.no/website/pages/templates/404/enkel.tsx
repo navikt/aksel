@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BodyShort, Box, Heading, Link, List, Page } from "@navikt/ds-react";
 
 const Example = () => {
@@ -80,6 +80,7 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
+  parameters: { layout: "fullscreen" },
 };
 
 export const args = {

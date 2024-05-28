@@ -25,7 +25,6 @@ export const Undertema = defineType({
       validation: (Rule) => Rule.required(),
       type: "reference",
       to: [{ type: "gp.tema" }],
-      readOnly: true,
       options: {
         disableNew: true,
       },

@@ -22,7 +22,9 @@ const ruleFunction: stylelint.Rule = () => {
               !deprecation.classes.includes(className.value)
             ) {
               continue;
-            } else if (
+            }
+
+            if (
               deprecation.deprecatePrefix &&
               !deprecation.classes.some((x) => className.value.startsWith(x))
             ) {

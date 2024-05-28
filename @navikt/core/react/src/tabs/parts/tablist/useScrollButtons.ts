@@ -32,9 +32,9 @@ export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
     const win = listRef.current?.ownerDocument ?? document ?? window;
     win.addEventListener("resize", handleResize);
 
-    let resizeObserver;
+    let resizeObserver: ResizeObserver;
 
-    if (typeof ResizeObserver !== "undefined") {
+    if (typeof ResizeObserver !== "undefined" && listRef.current) {
       resizeObserver = new ResizeObserver(handleResize);
       resizeObserver.observe(listRef.current);
     }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BugIcon } from "@navikt/aksel-icons";
 import {
   BodyShort,
@@ -95,6 +95,7 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
+  parameters: { layout: "fullscreen" },
 };
 
 export const args = {
