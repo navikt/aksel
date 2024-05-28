@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../util/Slot";
+import { SlottedElement } from "../../slot/SlotElement";
 import { useCollapsibleContext } from "../Collapsible.context";
 
 export interface CollapsibleContentProps
@@ -20,19 +20,19 @@ export const CollapsibleContent = forwardRef<
 >(({ children, asChild, ...rest }, ref) => {
   const ctx = useCollapsibleContext();
 
-  const Comp = asChild ? Slot : "div";
-
   return (
-    <Comp
+    <SlottedElement
       ref={ref}
       {...rest}
+      as="div"
+      asChild={asChild}
       data-state={ctx.state}
       hidden={!ctx.open}
       aria-controls={ctx.open ? ctx.triggerId : undefined}
       id={ctx.contentId}
     >
       {ctx.lazy || ctx.open ? children : null}
-    </Comp>
+    </SlottedElement>
   );
 });
 

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { Slot } from "../../util/Slot";
+import { SlottedElement } from "../../slot/SlotElement";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -123,11 +123,11 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       };
     }
 
-    const Comp = asChild ? Slot : "div";
-
     return (
-      <Comp
+      <SlottedElement
         {...rest}
+        asChild={asChild}
+        as="div"
         className={cl("navds-bleed", className, {
           "navds-bleed--padding": reflectivePadding,
         })}

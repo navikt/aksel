@@ -17,7 +17,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Slot } from "../../util/Slot";
+import { SlottedElement } from "../../slot/SlotElement";
 import { createContext } from "../../util/create-context";
 import {
   useCallbackRef,
@@ -92,9 +92,9 @@ const FloatingAnchor = forwardRef<HTMLDivElement, FloatingAnchorProps>(
       context.onAnchorChange(virtualRef?.current || ref.current);
     });
 
-    const Comp = asChild ? Slot : "div";
-
-    return virtualRef ? null : <Comp ref={mergedRef} {...rest} />;
+    return virtualRef ? null : (
+      <SlottedElement ref={mergedRef} {...rest} asChild={asChild} as="div" />
+    );
   },
 );
 

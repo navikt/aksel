@@ -1,17 +1,17 @@
 import React, { forwardRef } from "react";
+import { OverridableComponent } from "../util";
 import { Slot } from "./Slot";
 
-interface SlottedDivProps extends React.HTMLAttributes<HTMLDivElement> {
+interface SlottedProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
 
-const SlottedDivElement = forwardRef<HTMLDivElement, SlottedDivProps>(
-  ({ asChild, ...rest }, forwardedRef) => {
-    const Comp = asChild ? Slot : "div";
+const SlottedElement: OverridableComponent<SlottedProps, HTMLDivElement> =
+  forwardRef(({ asChild, as: Element = "div", ...rest }, forwardedRef) => {
+    const Comp = asChild ? Slot : Element;
     return <Comp {...rest} ref={forwardedRef} />;
-  },
-);
+  });
 
-type SlottedDivElementRef = React.ElementRef<typeof SlottedDivElement>;
+type SlottedElementRef = React.ElementRef<typeof SlottedElement>;
 
-export { SlottedDivElement, type SlottedDivElementRef, type SlottedDivProps };
+export { SlottedElement, type SlottedElementRef, type SlottedProps };
