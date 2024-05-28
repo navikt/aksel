@@ -5,6 +5,7 @@ import type { StarFillIcon } from "@navikt/aksel-icons";
 
 const meta: Meta<typeof StarFillIcon> = {
   title: "aksel-icons/Icons",
+  parameters: { html: { disable: true } },
 };
 export default meta;
 

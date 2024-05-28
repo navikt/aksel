@@ -19,6 +19,7 @@ export function runResolvers({
 
   return resolvers.reduce((acc, resolver) => {
     /* Not allowed to edit accumulators directly as its readonly*/
+    // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
     const _acc = { ...acc };
     const dataFromKeys = resolver.dataKeys.map((key) =>
       getNestedProperty(_acc, key),

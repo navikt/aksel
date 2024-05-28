@@ -6,7 +6,7 @@ import type { ResponsiveProp, SpacingScale } from "../utilities/types";
 export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   * Number of columns to display. Can be a number, a string with a unit, or tokens for specific breakpoints.
+   * Number of columns to display. Can be a number, a string, or an object with values for specific breakpoints.
    * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
    * @example
    * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
@@ -14,7 +14,10 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    * columns="repeat(3, minmax(0, 1fr))"
    */
   columns?: ResponsiveProp<number | string>;
-  /** Spacing between columns. Based on spacing-tokens.
+  /**
+   * Spacing between columns.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    * @example
    * gap="6"
    * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}

@@ -1,7 +1,7 @@
-import { Label } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import type { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
+import { List, ListItem } from "@/web/List";
 
 type IntroProps = {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
@@ -19,41 +19,23 @@ const Intro = ({ node, internal }: IntroProps) => {
         Intro
       </h2>
       <SanityBlockContent blocks={node.body} />
-      <div className="mt-7">
-        <Label as="p" className="mb-3">
-          Egnet til:
-        </Label>
-        <ul className="mb-7 list-disc">
-          {internal && (
-            <li className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]">
-              Bruk på interne flater
-            </li>
-          )}
+      <div className="mt-7 space-y-6">
+        <List title="Egnet til:">
+          {internal && <ListItem>Bruk på interne flater</ListItem>}
           {node.brukes_til.map((x) => (
-            <li
-              key={x}
-              className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
-            >
+            <ListItem icon key={x}>
               {x}
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </List>
         {node?.brukes_ikke_til && (
-          <>
-            <Label as="p" className="mb-3">
-              Uegnet til:
-            </Label>
-            <ul className="list-disc">
-              {node.brukes_ikke_til.map((x) => (
-                <li
-                  key={x}
-                  className="mb-3 ml-5 list-item max-w-[calc(theme(spacing.text)_-_1em)]"
-                >
-                  {x}
-                </li>
-              ))}
-            </ul>
-          </>
+          <List title="Uegnet til:">
+            {node.brukes_ikke_til.map((x) => (
+              <ListItem icon key={x}>
+                {x}
+              </ListItem>
+            ))}
+          </List>
         )}
       </div>
     </div>

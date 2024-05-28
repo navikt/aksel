@@ -24,7 +24,6 @@
       },
       "style": {
         "useTemplate": "off",
-        "noUselessElse": "off",
         "useNodejsImportProtocol": "off",
         "useConst": "off",
         "noUnusedTemplateLiteral": "off",
@@ -41,12 +40,8 @@
         "noShadowRestrictedNames": "off",
         "noArrayIndexKey": "off",
         "noAssignInExpressions": "off",
-        "noImplicitAnyLet": "off",
         "noDoubleEquals": "off",
-        "useIsArray": "off",
-        "noGlobalIsNan": "off",
-        "noMisleadingCharacterClass": "off",
-        "noGlobalIsFinite": "off"
+        "noMisleadingCharacterClass": "off"
       },
       "complexity": {
         "noForEach": "off",
@@ -54,9 +49,6 @@
         "useOptionalChain": "off",
         "useArrowFunction": "off",
         "noUselessTernary": "off"
-      },
-      "performance": {
-        "noAccumulatingSpread": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",

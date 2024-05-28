@@ -195,11 +195,13 @@ const semverSort = (a: string, b: string): number => {
 
   if (aMajor !== bMajor) {
     return aMajor - bMajor;
-  } else if (aMinor !== bMinor) {
-    return aMinor - bMinor;
-  } else {
-    return aPatch - bPatch;
   }
+
+  if (aMinor !== bMinor) {
+    return aMinor - bMinor;
+  }
+
+  return aPatch - bPatch;
 };
 
 const createMainChangelog = async (changelog: Changelog): Promise<string> => {

@@ -109,45 +109,45 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           props.onComplete();
         },
       };
-    } else {
-      const verifiedStatus =
-        differenceInMonths(new Date(), new Date(lastVerified)) < 6
-          ? "pre"
-          : "post";
-      // Approve content action
-      return {
-        label: "Godkjenn innhold",
-        onHandle: () => {
-          setVerifyOpen(true);
-        },
-        tone: "positive",
-        dialog: verifyOpen && {
-          type: "dialog",
-          header: "Kvalitetssjekk før publisering",
-          onClose: () => setVerifyOpen(false),
-          content: (
-            <>
-              <QualityCheckContent type={`${verifiedStatus}Verify`} />
-              <div className="flex justify-end gap-4">
-                <Button variant="tertiary" onClick={cancelAction}>
-                  Nei, avbryt
-                </Button>
-                <Button
-                  onClick={() => {
-                    verifyContent();
-                    publish.execute();
-                    props.onComplete();
-                    setVerifyOpen(false);
-                  }}
-                >
-                  Ja, godkjenn
-                </Button>
-              </div>
-            </>
-          ),
-        },
-      };
     }
+
+    const verifiedStatus =
+      differenceInMonths(new Date(), new Date(lastVerified)) < 6
+        ? "pre"
+        : "post";
+    // Approve content action
+    return {
+      label: "Godkjenn innhold",
+      onHandle: () => {
+        setVerifyOpen(true);
+      },
+      tone: "positive",
+      dialog: verifyOpen && {
+        type: "dialog",
+        header: "Kvalitetssjekk før publisering",
+        onClose: () => setVerifyOpen(false),
+        content: (
+          <>
+            <QualityCheckContent type={`${verifiedStatus}Verify`} />
+            <div className="flex justify-end gap-4">
+              <Button variant="tertiary" onClick={cancelAction}>
+                Nei, avbryt
+              </Button>
+              <Button
+                onClick={() => {
+                  verifyContent();
+                  publish.execute();
+                  props.onComplete();
+                  setVerifyOpen(false);
+                }}
+              >
+                Ja, godkjenn
+              </Button>
+            </div>
+          </>
+        ),
+      },
+    };
   };
 
   return WrappedFocus;

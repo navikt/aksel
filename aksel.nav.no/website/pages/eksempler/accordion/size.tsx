@@ -1,4 +1,4 @@
-import { Accordion } from "@navikt/ds-react";
+import { Accordion, Link } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -10,7 +10,7 @@ const Example = () => {
           <Accordion.Content>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. NAV kan gjøre <Link href="#">unntak</Link>.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
@@ -21,7 +21,7 @@ const Example = () => {
           <Accordion.Content>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. NAV kan gjøre <Link href="#">unntak</Link>.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
@@ -32,7 +32,7 @@ const Example = () => {
           <Accordion.Content>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. NAV kan gjøre <Link href="#">unntak</Link>.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
@@ -43,7 +43,7 @@ const Example = () => {
           <Accordion.Content>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. NAV kan gjøre <Link href="#">unntak</Link>.
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>

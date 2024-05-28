@@ -30,7 +30,9 @@ function ItemIcon({ isLoading, file, showError }: ItemIconProps) {
         <Loader size="large" />
       </div>
     );
-  } else if (showError) {
+  }
+
+  if (showError) {
     return (
       <div className="navds-file-item__icon">
         <FileXMarkIcon {...iconProps} />

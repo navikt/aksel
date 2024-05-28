@@ -20,3 +20,14 @@ export const Aksel: Story = {
   },
   decorators: [AkselTheme],
 };
+
+export const ReadMore: Story = {
+  args: {
+    node: {
+      readMore: true,
+      title: "Eksempeltekst",
+      text: "[H2] Her kan du søke om\n\n- Alderspensjon\n\n- Avtalefestet pensjon (AFP) i privat sektor\n\nDu kan lese mer om AFP i privat sektor hos Fellesordningen for AFP\n\n[H3] Dette kan du ikke søke om her\n\n- Avtalefestet pensjon (AFP) i offentlig sektor [lenke]\n\n- Tjenestepensjon [lenke]\n\nDu kan ikke kombinere AFP i offentlig sektor og alderspensjon.",
+    },
+  },
+  decorators: [AkselTheme],
+};

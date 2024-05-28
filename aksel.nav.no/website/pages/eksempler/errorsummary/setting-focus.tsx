@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Button, ErrorSummary } from "@navikt/ds-react";
+import { Button, ErrorSummary, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -11,7 +11,7 @@ const Example = () => {
   }, [hasError]);
 
   return (
-    <div className="flex flex-col items-start gap-12">
+    <VStack gap="12" align="start">
       {hasError && (
         <ErrorSummary
           ref={errorRef}
@@ -26,7 +26,7 @@ const Example = () => {
         </ErrorSummary>
       )}
       <Button onClick={() => setHasError(!hasError)}>Test fokus</Button>
-    </div>
+    </VStack>
   );
 };
 

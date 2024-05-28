@@ -10,12 +10,12 @@ const isInList = (option: ComboboxOption | string, list: ComboboxOption[]) => {
     return list.some(
       (listItem) => listItem.label === option || listItem.value === option,
     );
-  } else {
-    return list.some(
-      (listItem) =>
-        listItem.label === option.label && listItem.value === option.value,
-    );
   }
+
+  return list.some(
+    (listItem) =>
+      listItem.label === option.label && listItem.value === option.value,
+  );
 };
 
 const toComboboxOption = (value: string): ComboboxOption => ({

@@ -2,7 +2,7 @@ import { setYear } from "date-fns";
 import { type Matcher, isMatch } from "./is-match";
 
 export const nextEnabled = (
-  months,
+  months: Date[],
   key: string,
   disabled: Matcher[],
   currentMonth: Date,
@@ -258,13 +258,13 @@ const isOutOfRange = (
 
 const nextOnRow = (
   currentIndex: number,
-  months,
+  months: Date[],
   yearState: Date,
   disabled: Matcher[],
   mode: "home" | "end",
 ) => {
   const row = getRow(currentIndex);
-  let monthsOfRow;
+  let monthsOfRow: Date[] = [];
 
   switch (row) {
     case 1:

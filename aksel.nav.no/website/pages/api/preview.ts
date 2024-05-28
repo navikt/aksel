@@ -33,7 +33,7 @@ export default async function preview(
 ) {
   const { slug } = req.query;
 
-  if ((!slug && slug !== ":slug*") || slug instanceof Array) {
+  if ((!slug && slug !== ":slug*") || Array.isArray(slug)) {
     return redirectToPreview(res, "/");
   }
 
@@ -70,7 +70,9 @@ export default async function preview(
 
   if (article) {
     return redirectToPreview(res, `/${article}`);
-  } else if (godpraksis) {
+  }
+
+  if (godpraksis) {
     return redirectToPreview(res, `/god-praksis/${godpraksis}`);
   }
 

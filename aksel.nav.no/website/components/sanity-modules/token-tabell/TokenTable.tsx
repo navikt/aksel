@@ -3,8 +3,8 @@ import core from "@navikt/ds-css/tokens.json";
 import { Bleed, BodyLong, CopyButton, Label, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import type { TokenTableT } from "@/types";
+import ShowMore from "@/web/ShowMore";
 import { AkselTable, AkselTableRow } from "@/web/Table";
-import ShowMore from "./parts/ShowMore";
 
 type TokenTableProps = { node: TokenTableT };
 

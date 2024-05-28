@@ -12,28 +12,36 @@ export const Highlighter = ({
 
   if (isString) {
     return <span className="text-[#ab05d9]">{type}</span>;
-  } else if (type === "boolean") {
+  }
+  if (type === "boolean") {
     return <span className="text-[#9a050f]">{type}</span>;
-  } else if (type === "number" || !Number.isNaN(parseInt(type))) {
+  }
+  if (type === "number" || !Number.isNaN(parseInt(type))) {
     return <span className="text-deepblue-600">{type}</span>;
-  } else if (isType) {
+  }
+  if (isType) {
     return (
       <span className="text-blue-700">
         <span>{type}</span>
       </span>
     );
-  } else if (type.match(/^[a-z]+$/gi) !== null) {
-    return <span className="text-deepblue-600">{type}</span>;
-  } else {
-    if (prev === type) return <>{type}</>;
-    const tokenRegex = /([^a-z0-9'"/-]+)/gi;
-    const tokens = type.split(tokenRegex);
-    return (
-      <>
-        {tokens.map((token, i) => (
-          <Highlighter key={prev + token + i} type={token} prev={type} />
-        ))}
-      </>
-    );
   }
+  if (type.match(/^[a-z]+$/gi) !== null) {
+    return <span className="text-deepblue-600">{type}</span>;
+  }
+
+  if (prev === type) {
+    return <>{type}</>;
+  }
+
+  const tokenRegex = /([^a-z0-9'"/-]+)/gi;
+  const tokens = type.split(tokenRegex);
+
+  return (
+    <>
+      {tokens.map((token, i) => (
+        <Highlighter key={prev + token + i} type={token} prev={type} />
+      ))}
+    </>
+  );
 };

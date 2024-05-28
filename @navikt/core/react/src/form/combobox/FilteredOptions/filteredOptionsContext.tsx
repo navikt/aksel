@@ -88,29 +88,27 @@ const FilteredOptionsProvider = ({
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
-  const filteredOptionsMap = useMemo(
-    () =>
-      options.reduce(
-        (map, _option) => ({
-          ...map,
-          [filteredOptionsUtils.getOptionId(id, _option.label)]: _option,
-        }),
-        {
-          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
-            ? toComboboxOption(value)
-            : undefined,
-          ...customOptions.reduce(
-            (acc, customOption) => ({
-              ...acc,
-              [filteredOptionsUtils.getOptionId(id, customOption.label)]:
-                customOption,
-            }),
-            {},
-          ),
-        },
-      ),
-    [allowNewValues, customOptions, id, options, value],
-  );
+  const filteredOptionsMap = useMemo(() => {
+    const initialMap = {
+      [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
+        ? toComboboxOption(value)
+        : undefined,
+      ...customOptions.reduce((acc, customOption) => {
+        const _id = filteredOptionsUtils.getOptionId(id, customOption.label);
+        acc[_id] = customOption;
+        return acc;
+      }, {}),
+    };
+
+    // Add the options to the map
+    const finalMap = options.reduce((map, _option) => {
+      const _id = filteredOptionsUtils.getOptionId(id, _option.label);
+      map[_id] = _option;
+      return map;
+    }, initialMap);
+
+    return finalMap;
+  }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
     if (
@@ -153,7 +151,7 @@ const FilteredOptionsProvider = ({
   );
 
   const ariaDescribedBy = useMemo(() => {
-    let activeOption;
+    let activeOption: string = "";
     if (!isLoading && filteredOptions.length === 0 && !allowNewValues) {
       activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if (value || isLoading) {
@@ -169,6 +167,7 @@ const FilteredOptionsProvider = ({
     const maybeMaxSelectedOptionsId =
       maxSelected?.isLimitReached &&
       filteredOptionsUtils.getMaxSelectedOptionsId(id);
+
     return (
       cl(activeOption, maybeMaxSelectedOptionsId, partialAriaDescribedBy) ||
       undefined
