@@ -20,9 +20,10 @@ export interface HGridProps extends HTMLAttributes<HTMLDivElement> {
    * or an object of spacing tokens for different breakpoints.
    * @example
    * gap="6"
+   * gap="8 4"
    * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
    */
-  gap?: ResponsiveProp<SpacingScale>;
+  gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
    * Vertical alignment of children. Elements will by default stretch to the height of parent-element.
    */
