@@ -29,8 +29,8 @@ function Example() {
   return (
     <Page footer={<Footer />}>
       <Header />
-      <Page.Block width="text" gutters>
-        <VStack as="main" gap="8">
+      <Page.Block as="main" width="text" gutters>
+        <VStack gap="8">
           <Bleed marginInline={{ lg: "24" }}>
             <Stack
               gap="6"
