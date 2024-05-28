@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { SlottedElement } from "../../slot/SlotElement";
+import { SlottedElement } from "../../slot/SlottedElement";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 

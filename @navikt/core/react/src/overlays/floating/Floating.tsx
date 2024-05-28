@@ -17,7 +17,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SlottedElement } from "../../slot/SlotElement";
+import { SlottedElement } from "../../slot/SlottedElement";
 import { createContext } from "../../util/create-context";
 import {
   useCallbackRef,

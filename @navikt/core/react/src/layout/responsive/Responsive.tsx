@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { SlottedElement } from "../../slot/SlotElement";
+import { SlottedElement } from "../../slot/SlottedElement";
 import { BreakpointsAlias } from "../utilities/types";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {

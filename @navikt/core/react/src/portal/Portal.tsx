@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import ReactDOM from "react-dom";
 import { useProvider } from "../provider/Provider";
-import { SlottedElement } from "../slot/SlotElement";
+import { SlottedElement } from "../slot/SlottedElement";
 import { AsChildProps } from "../util/types";
 
 interface PortalBaseProps extends HTMLAttributes<HTMLDivElement> {

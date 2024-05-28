@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SlottedElement } from "../../slot/SlotElement";
+import { SlottedElement } from "../../slot/SlottedElement";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { AsChild } from "../../util/types/AsChild";
