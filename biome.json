@@ -67,7 +67,8 @@
       "**/dist/**",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
-      "**/.next/**"
+      "**/.next/**",
+      "**/aksel-icons/src/**"
     ]
   }
 }

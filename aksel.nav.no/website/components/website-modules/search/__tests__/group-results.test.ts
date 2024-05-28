@@ -1,4 +1,4 @@
-import { FuseResult } from "fuse.js";
+import type { FuseResult } from "fuse.js";
 import { beforeEach, describe, expect, test } from "vitest";
 import type { FuseItemT, SearchHitT, SearchResultsT } from "@/types";
 import { createSearchResult } from "../utils";

@@ -1,5 +1,5 @@
 import { loadCsf } from "@storybook/csf-tools";
-import { StorybookConfig } from "@storybook/react-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
 import { readFileSync } from "fs";
 import turbosnap from "vite-plugin-turbosnap";
 import TsconfigPathsPlugin from "vite-tsconfig-paths";

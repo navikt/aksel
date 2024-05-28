@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
-import { StructureBuilder } from "sanity/structure";
-import { SANITY_API_VERSION, allArticleDocuments } from "@/sanity/config";
+import type { StructureBuilder } from "sanity/structure";
+import { SANITY_API_VERSION, type allArticleDocuments } from "@/sanity/config";
 
 export const editorIsContributorFilter = groq`(lower($mail) in (contributors[]->{"email": lower(email)})[].email || lower($mail) in (contributors[]->{"email": lower(alt_email)})[].email)`;
 

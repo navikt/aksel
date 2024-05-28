@@ -1,6 +1,6 @@
 import {
   List as AkselList,
-  ListProps as AkselListProps,
+  type ListProps as AkselListProps,
 } from "@navikt/ds-react";
 
 type ListProps = Pick<AkselListProps, "as" | "title" | "children">;
