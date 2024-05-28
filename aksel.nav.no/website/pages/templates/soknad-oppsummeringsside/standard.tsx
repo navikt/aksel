@@ -156,7 +156,11 @@ function Example() {
             <BodyShort as="div" size="small" textColor="subtle">
               Sist lagret: 10. mars 2024 kl. 13.55
             </BodyShort>
-            <HGrid gap="4" columns={{ xs: "1fr", sm: "12rem 12rem" }}>
+            <HGrid
+              gap="8 4"
+              columns={{ xs: 1, sm: 2 }}
+              style={{ width: "fit-content" }}
+            >
               <Button
                 variant="secondary"
                 icon={<ArrowLeftIcon aria-hidden />}
@@ -171,25 +175,23 @@ function Example() {
               >
                 Send søknad
               </Button>
+
+              <Button
+                variant="tertiary"
+                icon={<FloppydiskIcon aria-hidden />}
+                iconPosition="left"
+              >
+                Fortsett senere
+              </Button>
+              <Button
+                variant="tertiary"
+                icon={<TrashIcon aria-hidden />}
+                iconPosition="left"
+              >
+                Slett søknaden
+              </Button>
             </HGrid>
           </VStack>
-
-          <HGrid gap="4" columns={{ xs: "1fr", sm: "12rem 12rem" }}>
-            <Button
-              variant="tertiary"
-              icon={<FloppydiskIcon aria-hidden />}
-              iconPosition="left"
-            >
-              Fortsett senere
-            </Button>
-            <Button
-              variant="tertiary"
-              icon={<TrashIcon aria-hidden />}
-              iconPosition="left"
-            >
-              Slett søknaden
-            </Button>
-          </HGrid>
         </VStack>
       </Page.Block>
       <Env />
