@@ -38,8 +38,6 @@ export type GraceIntent = { area: Polygon; side: SubMenuSide };
 
 export type CheckedState = boolean | "indeterminate";
 
-export type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
-
 /**
  * Menu
  */
@@ -73,6 +71,8 @@ export const [
   useMenuDescendant,
 ] = createDescendantContext<SlottedDivElementRef>();
 
+type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
+
 type MenuContextValue = {
   open: boolean;
   onOpenChange(open: boolean): void;
@@ -105,7 +105,7 @@ const MenuRoot = (props: MenuProps) => {
   const handleOpenChange = useCallbackRef(onOpenChange);
 
   useEffect(() => {
-    // Capture phase ensures we set the boolean before any side effects execute
+    // Capturephase ensures we set the boolean before any side effects execute
     // in response to the key or pointer event as they might depend on this value.
     const handleKeyDown = () => {
       isUsingKeyboardRef.current = true;
@@ -236,8 +236,6 @@ const MenuRootContentNonModal = React.forwardRef<
   );
 });
 
-export { MenuRootContentNonModal };
-
 /**
  * Modal content
  */
@@ -265,8 +263,6 @@ const MenuRootContentModal = forwardRef<
     />
   );
 });
-
-export { MenuRootContentModal };
 
 /**
  * Menu content implisit
@@ -474,14 +470,6 @@ const MenuContentImpl = forwardRef<
 
 interface MenuContentImplTypeProps
   extends Omit<MenuContentImplProps, keyof MenuContentImplPrivateProps> {}
-
-export {
-  MenuContentImpl,
-  type MenuContentImplProps,
-  type MenuContentImplElement,
-  type MenuContentImplTypeProps,
-  type MenuContentImplPrivateProps,
-};
 
 /**
  * Item
@@ -752,7 +740,7 @@ const MenuRadioItem = forwardRef<
   const context = useRadioGroupContext();
   const checked = value === context.value;
 
-  /* TODO: removed indicator warpper, fix sideeffects */
+  /* TODO: removed indicator wrapper, fix sideeffects */
 
   return (
     <MenuItem
@@ -791,7 +779,7 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
     }: MenuCheckboxItemProps,
     forwardedRef,
   ) => {
-    /* TODO: removed indicator warpper, fix sideeffects from not automatically toggling checkmark */
+    /* TODO: removed indicator wrapper, fix sideeffects from not automatically toggling checkmark */
     return (
       <MenuItem
         role="menuitemcheckbox"
