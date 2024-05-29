@@ -75,42 +75,6 @@ export const Small = () => (
   </div>
 );
 
-export const Autocomplete = (props) => {
-  const [state, setState] = useState("");
-  return (
-    <div className="colgap">
-      <Search
-        value={props.controlled ? state : undefined}
-        onChange={props.controlled ? setState : undefined}
-        label="Søk"
-        size={props.size}
-        clearButton={props.clearButton}
-        variant={props.variant}
-        hideLabel={props.hideLabel}
-        error={props.error}
-        onSearchClick={console.log}
-        autocomplete={(searchTerm) => {
-          if (!searchTerm) return [];
-          return [
-            "apple",
-            "banana",
-            "break fluid",
-            "bandana",
-            "banjo",
-            "grape",
-            "melon",
-            "pineapple",
-            "juice",
-            "cat",
-            "dog",
-            "xylophone",
-          ].filter((term) => term.startsWith(searchTerm));
-        }}
-      />
-    </div>
-  );
-};
-
 export const Variants = () => (
   <div className="rowgap">
     <div className="colgap">
