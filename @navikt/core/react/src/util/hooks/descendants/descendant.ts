@@ -13,7 +13,6 @@ export type DescendantOptions<T = object> = T & {
     node_to_focus: HTMLElement,
     node_to_blur?: HTMLElement,
   ) => void;
-  handlePick?: () => void;
 };
 
 export type Descendant<T, K> = DescendantOptions<K> & {

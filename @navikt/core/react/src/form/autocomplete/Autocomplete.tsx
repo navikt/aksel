@@ -34,7 +34,16 @@ export const [
   useAutocompleteDescendantsContext,
   useAutocompleteDescendants,
   useAutocompleteDescendant,
-] = createDescendantContext<SlottedDivElementRef>();
+] = createDescendantContext<
+  SlottedDivElementRef,
+  {
+    handleVirtualOnFocus?: (
+      node_to_focus: HTMLElement,
+      node_to_blur?: HTMLElement,
+    ) => void;
+    handlePick?: () => void;
+  }
+>();
 
 export const [AutocompleteContextProvider, useAutocompleteValue] =
   createContext<{
@@ -190,7 +199,7 @@ export const AutocompleteItem = ({
           anchor.handlePick();
         }
       }}
-      onMouseOver={(event) => {
+      onMouseMove={(event) => {
         const prev = descendants.item(virtualFocusIdx);
         const currIdx = descendants.indexOf(event.currentTarget);
         const curr = descendants.item(currIdx);
