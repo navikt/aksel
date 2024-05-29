@@ -30,9 +30,13 @@ export function generateSidebar(
 export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   if (a?.tag === "deprecated" && b?.tag === "deprecated") {
     return 0;
-  } else if (a?.tag === "deprecated") {
+  }
+
+  if (a?.tag === "deprecated") {
     return 1;
-  } else if (b.tag === "deprecated") {
+  }
+
+  if (b.tag === "deprecated") {
     return -1;
   }
 
@@ -46,9 +50,11 @@ export function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
 
   if (a.sidebarindex !== null && b.sidebarindex !== null) {
     return a.sidebarindex - b.sidebarindex;
-  } else if (a.sidebarindex !== null) {
-    return -1;
-  } else {
-    return 1;
   }
+
+  if (a.sidebarindex !== null) {
+    return -1;
+  }
+
+  return 1;
 }

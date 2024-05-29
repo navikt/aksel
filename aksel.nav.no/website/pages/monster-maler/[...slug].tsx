@@ -23,6 +23,7 @@ import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlockGhPages } from "@/web/suggestionblock/SuggestionBlock.GhPages";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
@@ -136,6 +137,9 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
         pageProps={page}
         variant="page"
       >
+        {page.gh_discussions && (
+          <SuggestionBlockGhPages reference={page.gh_discussions} />
+        )}
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
 

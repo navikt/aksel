@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
+import { SuggestionBlockGhPages } from "./SuggestionBlock.GhPages";
 
 const meta = {
   title: "Website-modules/SuggestionBlock",
@@ -44,4 +45,8 @@ export const Ikoner: Story = {
   args: {
     variant: "ikoner",
   },
+};
+
+export const GhPages = {
+  render: () => <SuggestionBlockGhPages reference="http://localhost:6007" />,
 };

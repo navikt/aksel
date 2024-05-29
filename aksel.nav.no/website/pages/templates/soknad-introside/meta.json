@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "changelog": [
+    {
+      "description": "Publiserte standardmalen, samt varianter med Alert og 'Dette søker du på her' (alternativ søknad)",
+      "date": "15.05.2024",
+      "version": 1
+    }
+  ]
+}

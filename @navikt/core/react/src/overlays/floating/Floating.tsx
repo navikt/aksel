@@ -218,7 +218,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const context = useFloatingContext();
 
     const [content, setContent] = useState<HTMLDivElement | null>(null);
-    const mergeRefs = useMergeRefs(forwardedRef, (node) => setContent(node));
+    const mergeRefs = useMergeRefs(forwardedRef, setContent);
 
     const arrowDefaults = {
       padding: 5,

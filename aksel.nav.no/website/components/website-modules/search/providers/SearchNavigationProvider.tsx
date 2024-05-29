@@ -17,19 +17,18 @@ export const SearchNavigationProvider = ({
   children: React.ReactNode;
 }) => {
   const router = useRouter();
-  const { setOpen, setQuery, setTags } = useContext(SearchContext);
+  const { setOpen, setQuery } = useContext(SearchContext);
   const { reset } = useSearchResult();
 
   const close = useCallback(() => {
     setOpen(false);
     reset();
     setQuery("");
-    setTags([]);
-  }, [reset, setOpen, setQuery, setTags]);
+  }, [reset, setOpen, setQuery]);
 
   /* Add a small delay to get a precieved smoother navigation */
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
     const handler = () => {
       timeout && clearTimeout(timeout);
 

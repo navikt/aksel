@@ -132,6 +132,7 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
     unsafe?: boolean;
     bilde?: any;
   };
+  gh_discussions?: string;
   intro: {
     body?: any[];
     brukes_til: string[];

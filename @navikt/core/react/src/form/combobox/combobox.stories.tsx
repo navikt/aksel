@@ -464,14 +464,43 @@ export const RemoveSelectedMultiSelectTest: StoryObject = {
   },
 };
 
-export const AddWhenAddNewDisabledTest: StoryObject = {
+export const AllowNewValuesTest: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox
         options={options}
         label="Hva er dine favorittfrukter?"
-        isMultiSelect
+        allowNewValues
       />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "aaa", { delay: 200 });
+    await sleep(250);
+
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{ArrowDown}");
+    await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+    userEvent.keyboard("{Escape}");
+    await sleep(250);
+
+    const invalidSelect = canvas.queryByLabelText("aaa slett");
+    expect(invalidSelect).not.toBeInTheDocument();
+  },
+};
+
+export const DisallowNewValuesTest: StoryObject = {
+  render: () => {
+    return (
+      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
     );
   },
   play: async ({ canvasElement }) => {
