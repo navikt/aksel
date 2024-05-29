@@ -22,7 +22,7 @@
 
 .navds-combobox__button-clear svg,
 .navds-combobox__button-toggle-list svg,
-.navds-combobox__button-list svg {
+.navds-combobox__list svg {
   width: var(--__ac-combobox-icon-size);
   height: var(--__ac-combobox-icon-size);
 }
