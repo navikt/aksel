@@ -7,7 +7,6 @@ import React, {
   useState,
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
-import { Box } from "../../layout/box";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -76,11 +75,6 @@ export interface SearchProps
    * Exposes role attribute.
    */
   role?: string;
-
-  /*
-   * To render a autocomplete list of results
-   */
-  autocomplete?: (value: string) => string[];
 }
 
 interface SearchComponent
@@ -130,7 +124,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onSearchClick,
       htmlSize,
       role,
-      autocomplete,
       ...rest
     } = props;
 
@@ -138,17 +131,13 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     const mergedRef = useMergeRefs(searchRef, ref);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
-    const [autocompleteResults, setAutocompleteResults] = useState<string[]>(
-      [],
-    );
 
     const handleChange = useCallback(
       (v: string) => {
         value === undefined && setInternalValue(v);
         onChange?.(v);
-        setAutocompleteResults(autocomplete?.(v) || []);
       },
-      [onChange, value, setAutocompleteResults, autocomplete],
+      [onChange, value],
     );
 
     const handleClear = useCallback(
@@ -235,7 +224,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
                 "navds-body-short",
                 `navds-body-short--${size}`,
               )}
-              autoComplete={autocomplete ? "off" : "on"}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
             {(value ?? internalValue) && clearButton && (
@@ -272,18 +260,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )}
         </div>
-        {autocompleteResults.length > 0 && (
-          <Box
-            borderColor="border-default"
-            borderWidth="1"
-            borderRadius="medium"
-            className="navds-search__autocomplete-list"
-          >
-            {autocompleteResults.map((result) => {
-              return <div key={result}>{result}</div>;
-            })}
-          </Box>
-        )}
       </div>
     );
   },
