@@ -164,31 +164,28 @@ export const EmptyHeader: StoryFn = () => (
   </Modal>
 );
 
-/* size="small" mainly changes padding on its own.
- * now it changes width and heading/header size too.
- * Should it affect elements inside the modal?
- * that can be overridden by more specific size props?
- */
 export const Small: StoryFn = () => (
-  <Modal
-    open
-    onClose={() => null}
-    width="small"
-    header={{
-      heading: "Simple header",
-      size: "small",
-    }}
-    size="small"
-  >
-    <Modal.Body>
-      <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button size="small" variant="secondary">
-        Dummy button
-      </Button>
-    </Modal.Footer>
-  </Modal>
+  <>
+    <Modal
+      open
+      onClose={() => null}
+      width="small"
+      header={{
+        heading: "Simple header",
+        size: "small",
+      }}
+      size="small"
+    >
+      <Modal.Body>
+        <BodyLong size="small">Lorem ipsum dolor sit amet.</BodyLong>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button size="small" variant="secondary">
+          Dummy button
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </>
 );
 Small.storyName = "Size = Small";
 
