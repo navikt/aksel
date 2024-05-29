@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import ReactDOM from "react-dom";
-import { DismissableLayer } from "../overlay/dismiss/DismissableLayer";
+import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
 import { Floating } from "../overlays/floating/Floating";
 import { Portal } from "../portal";
 import { composeEventHandlers } from "../util/composeEventHandlers";

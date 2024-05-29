@@ -327,7 +327,9 @@ const MenuWithAnchor: React.FC<MenuProps> = (props) => {
   return (
     <Menu open={open} onOpenChange={() => {}} modal={false}>
       {/* inline-block allows anchor to move when rtl changes on document */}
-      <Menu.Anchor style={{ display: "inline-block" }} />
+      <Menu.Anchor>
+        <div style={{ display: "inline-block" }} />
+      </Menu.Anchor>
       <Menu.Portal>
         <Menu.Content
           className="content"
