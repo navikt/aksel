@@ -1,3 +1,4 @@
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { HGrid } from ".";
 import { VStack } from "../stack";
@@ -13,6 +14,7 @@ export default {
   component: HGrid,
   parameters: {
     layout: "fullscreen",
+    chromatic: { disable: true },
   },
   argTypes: {
     columnsType: {
@@ -21,7 +23,9 @@ export default {
       control: { type: "radio" },
     },
   },
-};
+} as Meta;
+
+type Story = StoryObj<typeof HGrid>;
 
 /* const getColumnsProp = () */
 
@@ -106,6 +110,21 @@ export const AlignItems = {
   ),
 };
 
+export const Nested = {
+  render: () => (
+    <HGrid columns={{ xs: 1, sm: 2 }} gap="8">
+      <HGrid columns={2} gap="2">
+        <Placeholder text="1" />
+        <Placeholder text="2" />
+      </HGrid>
+      <HGrid columns={2} gap="2">
+        <Placeholder text="3" />
+        <Placeholder text="4" />
+      </HGrid>
+    </HGrid>
+  ),
+};
+
 function Placeholder({ text, height }: { text: string; height?: string }) {
   return (
     <div
@@ -120,3 +139,54 @@ function Placeholder({ text, height }: { text: string; height?: string }) {
     </div>
   );
 }
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="4">
+      <div>
+        <h2>Gap</h2>
+        <Gap.render />
+      </div>
+      <div>
+        <h2>DynamicGap</h2>
+        <DynamicGap.render />
+      </div>
+      <div>
+        <h2>Columns</h2>
+        <Columns.render />
+      </div>
+      <div>
+        <h2>DynamicColumns</h2>
+        <DynamicColumns.render />
+      </div>
+      <div>
+        <h2>AlignItems</h2>
+        <AlignItems.render />
+      </div>
+      <div>
+        <h2>Nested</h2>
+        <Nested.render />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    layout: "fullscreen",
+    chromatic: {
+      disable: false,
+      modes: {
+        mobile_portrait: {
+          viewport: {
+            width: 400,
+            height: 850,
+          },
+        },
+        desktop: {
+          viewport: {
+            width: 1280,
+            height: 960,
+          },
+        },
+      },
+    },
+  },
+};

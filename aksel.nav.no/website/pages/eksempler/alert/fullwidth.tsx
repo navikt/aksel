@@ -1,9 +1,9 @@
-import { Alert } from "@navikt/ds-react";
+import { Alert, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="4">
       <Alert fullWidth variant="info">
         Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha hatt
         en pensjonsgivende inntekt som tilsvarer x G, året før du fikk nedsatt
@@ -18,7 +18,7 @@ const Example = () => {
       <Alert fullWidth variant="error">
         Noe gikk galt! Prøv igjen om noen minutter.
       </Alert>
-    </div>
+    </VStack>
   );
 };
 

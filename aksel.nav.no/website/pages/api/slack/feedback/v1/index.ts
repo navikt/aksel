@@ -36,6 +36,11 @@ const client = new WebClient(process.env.SLACK_BOT_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
 
+type MembersArray = NonNullable<UsersListResponse["members"]>;
+type Member = MembersArray[0] & {
+  id: NonNullable<MembersArray[0]["id"]>;
+};
+
 async function sendSlackbotFeedback(
   request: NextApiRequest,
   response: NextApiResponse,
@@ -70,7 +75,8 @@ async function sendSlackbotFeedback(
       "id": _id,
       "title": heading,
       "editors": contributors[]->email,
-      "slug": slug.current
+      "slug": slug.current,
+      "contacts": undertema[]->tema->contacts[]->email
     }`,
     {
       id: validation.data.body.document_id,
@@ -102,7 +108,27 @@ async function sendSlackbotFeedback(
   const slackProfileForEditors = document.editors
     .filter(Boolean)
     .map((email: string) => findUserByEmail(email, slackMembers.members))
-    .filter(Boolean) as Exclude<UsersListResponse["members"], undefined>;
+    .filter(Boolean)
+    .filter((x) => !!x.id) as Member[];
+
+  /**
+   * We use contacts found on tema connected to article and find their matching slack profiles
+   */
+  const slackProfileForTemaContacts =
+    (document.contacts
+      ?.filter(Boolean)
+      .map((email: string) => findUserByEmail(email, slackMembers.members))
+      .filter(Boolean)
+      .filter((x) => !!x.id) as Member[]) ?? [];
+
+  /**
+   * We want to make sure we avoid sending the message to the same user multiple times
+   */
+  const ids = [...slackProfileForEditors, ...slackProfileForTemaContacts].map(
+    (member) => member.id,
+  );
+
+  const recieverSlackIdList = [...new Set(ids)];
 
   let postMessageError = false;
 
@@ -119,21 +145,19 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: slackProfileForEditors
-            .map((x) => x.id)
-            .filter(Boolean) as string[],
+          recievers: recieverSlackIdList,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
           },
         }),
-        ...(slackProfileForEditors.length === 0
+        ...(recieverSlackIdList.length === 0
           ? [
               {
                 type: "section",
                 text: {
                   type: "mrkdwn",
-                  text: ":exclamation: Denne artikkelen har ingen redaktører. @here",
+                  text: ":exclamation: Denne artikkelen har ingen redaktører eller temakontater. @here",
                 },
               } satisfies SectionBlock,
             ]
@@ -147,13 +171,10 @@ async function sendSlackbotFeedback(
       );
     });
 
-  for (const editor of slackProfileForEditors) {
-    if (!editor.id) {
-      continue;
-    }
+  for (const slackId of recieverSlackIdList) {
     await client.chat
       .postMessage({
-        channel: editor.id,
+        channel: slackId,
         text: `Tilbakemelding: ${validation.data.body.feedback}`,
         blocks: slackBlock({
           article: {
@@ -162,9 +183,7 @@ async function sendSlackbotFeedback(
             title: document.title,
           },
           feedback: validation.data.body.feedback,
-          recievers: slackProfileForEditors
-            .map((x) => x.id)
-            .filter(Boolean) as string[],
+          recievers: recieverSlackIdList,
           sender: {
             email: user.email,
             slackId: senderSlackUser?.id,
@@ -281,7 +300,7 @@ function slackBlock({ feedback, article, recievers, sender }: SlackBlockT) {
             },
             {
               type: "text",
-              text: "\n\nMedvirkende (disse fikk tilbakemeldingen):\n",
+              text: "\n\nDisse fikk tilbakemeldingen (medvirkende og temakontakter):\n",
               style: {
                 bold: true,
               },

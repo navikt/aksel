@@ -245,7 +245,7 @@
 .navds-timeline__pin-wrapper::before {
   content: "";
   top: var(--navdsc-timeline-pin-size);
-  height: calc(88% - var(--navdsc-timeline-pin-size));
+  height: calc(100% - var(--navdsc-timeline-pin-size) * 2);
   width: 1px;
   margin: 0 auto;
   background: var(--a-surface-inverted);

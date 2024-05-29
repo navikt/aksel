@@ -3,6 +3,7 @@ import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyLong } from "../typography";
 import Bubble from "./Bubble";
 
+export const VARIANTS = ["subtle", "info", "neutral"] as const;
 export const POSITIONS = ["left", "right"] as const;
 export const SIZES = ["medium", "small"] as const;
 
@@ -12,15 +13,17 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Chat-message name.
+   * Name/sender on first bubble.
    */
   name?: string;
   /**
-   * Timestamp for sent message.
+   * Timestamp on first bubble.
    */
   timestamp?: string;
   /**
-   * Avatar for messenger. Regular text for initials works too, but it will be hidden for screen readers.
+   * We recommend using an SVG or plain text initials as avatar.
+   *
+   * **Hidden for screen readers.**
    */
   avatar?: React.ReactNode;
   /**
@@ -28,7 +31,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * Avoid using the same background as the surface behind Chat.
    * @default "neutral"
    */
-  variant?: "subtle" | "info" | "neutral";
+  variant?: (typeof VARIANTS)[number];
   /**
    * Positions avatar and bubbles.
    * @default "left"
@@ -57,7 +60,7 @@ interface ChatComponent
 }
 
 /**
- * A component for communicating dialogs between two parties.
+ * A component for communicating a dialog between two or more parties.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/chat)
  * @see 🏷️ {@link ChatProps}

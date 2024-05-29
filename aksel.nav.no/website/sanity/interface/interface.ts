@@ -12,7 +12,7 @@ export async function sitemapPages(
   let client = token ? noCdnClient(token) : getClient();
   client = client.config({ perspective: "published" });
   const artikler = await getDocuments("all", token);
-  const temaer = await getAkselTema(token);
+  const temaer = await getGpTema(token);
 
   const pages = await client.fetch(
     `{
@@ -65,24 +65,6 @@ export async function getGpTema(
       path: tema.slug,
       lastmod: tema.lastUpdate ?? tema._updatedAt,
     }));
-}
-
-/**
- * TODO:
- * - Deprecate when getGpTema gets implemented in production
- */
-export async function getAkselTema(
-  token?: string,
-): Promise<{ path: string; lastmod: string }[]> {
-  const client = token ? noCdnClient(token) : getClient();
-  const tags: { slug: { current: string }; _updatedAt: string }[] =
-    await client.fetch(
-      `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0]{slug,_updatedAt}`,
-    );
-  return tags.map((x) => ({
-    path: x?.slug.current,
-    lastmod: x?._updatedAt,
-  }));
 }
 
 export async function getDocuments(

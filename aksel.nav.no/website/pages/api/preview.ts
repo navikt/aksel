@@ -33,7 +33,7 @@ export default async function preview(
 ) {
   const { slug } = req.query;
 
-  if ((!slug && slug !== ":slug*") || slug instanceof Array) {
+  if ((!slug && slug !== ":slug*") || Array.isArray(slug)) {
     return redirectToPreview(res, "/");
   }
 
@@ -52,30 +52,28 @@ export default async function preview(
   }
 
   // Check if the article with the given `slug` exists
-  const { article, godpraksis, gp } = await previewClient.fetch(
+  const { article, godpraksis } = await previewClient.fetch(
     `{
       "article": *[slug.current == $slug][0].slug.current,
-      "godpraksis": *[slug.current == $godPraksis && _type == "aksel_tema"][0].slug.current,
-      "gp": *[slug.current == $gp && _type == "gp.tema"][0].slug.current
+      "godpraksis": *[slug.current == $godpraksis && _type == "gp.tema"][0].slug.current
       }`,
     {
       slug,
-      godPraksis: slug.replace("god-praksis/", ""),
-      gp: slug.replace("gp/", ""),
+      godpraksis: slug.replace("god-praksis/", ""),
     },
   );
 
   // If the slug doesn't exist prevent preview mode from being enabled
-  if (!article && !godpraksis && !gp) {
+  if (!article && !godpraksis) {
     return res.status(401).json({ message: "Invalid slug" });
   }
 
   if (article) {
     return redirectToPreview(res, `/${article}`);
-  } else if (godpraksis) {
+  }
+
+  if (godpraksis) {
     return redirectToPreview(res, `/god-praksis/${godpraksis}`);
-  } else if (gp) {
-    return redirectToPreview(res, `/gp/${gp}`);
   }
 
   // Redirect to the path from the fetched article

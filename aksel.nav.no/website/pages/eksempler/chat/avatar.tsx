@@ -1,10 +1,10 @@
 import { PersonHeadsetIcon, PersonIcon } from "@navikt/aksel-icons";
-import { Chat } from "@navikt/ds-react";
+import { Chat, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-10">
+    <VStack gap="10">
       <Chat
         avatar={<PersonHeadsetIcon />}
         name="EVA"
@@ -24,7 +24,7 @@ const Example = () => {
           Hvor sjekker jeg statusen på foreldrepengersøknaden min?
         </Chat.Bubble>
       </Chat>
-    </div>
+    </VStack>
   );
 };
 

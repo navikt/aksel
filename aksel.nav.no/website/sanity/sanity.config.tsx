@@ -3,17 +3,16 @@ import { colorInput } from "@sanity/color-input";
 import { nbNOLocale } from "@sanity/locale-nb-no";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
-import { defineConfig } from "sanity";
-import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
+import React from "react";
+import { FieldProps, defineConfig } from "sanity";
 import { media } from "sanity-plugin-media";
 import { structureTool } from "sanity/structure";
 import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
-import { godPraksisTaxonomy } from "./plugins/god-praksis-taxonomy";
 import { schema } from "./schema";
 import { InputWithCounter } from "./schema/custom-components";
-import { getTemplates } from "./util";
+import { newDocumentsCreator } from "./util";
 
 export const workspaceConfig = defineConfig([
   {
@@ -34,27 +33,17 @@ export const workspaceConfig = defineConfig([
     icon: TestFlaskIcon,
     auth: authStore("development"),
   },
-  {
-    ...defaultConfig(),
-    plugins: [...defaultConfig().plugins, godPraksisTaxonomy()],
-    schema: schema("staging"),
-    title: "God-praksis staging",
-    name: "gp-staging",
-    dataset: "production",
-    basePath: "/admin/gp-staging",
-    icon: TestFlaskIcon,
-    auth: authStore("production"),
-  },
 ]);
 
 function defaultConfig() {
   return {
     projectId: SANITY_PROJECT_ID,
     apiVersion: SANITY_API_VERSION,
-    schema: schema("production"),
+    schema,
+    scheduledPublishing: { enabled: false },
     form: {
       components: {
-        field: (props) => {
+        field: (props: FieldProps) => {
           const name = props.schemaType?.name;
 
           if (name === "string" && props.schemaType?.options?.maxLength) {
@@ -69,12 +58,7 @@ function defaultConfig() {
       },
     },
     document: {
-      newDocumentOptions: (prev, { creationContext }) => {
-        if (creationContext.type === "global") {
-          return getTemplates();
-        }
-        return prev;
-      },
+      newDocumentOptions: newDocumentsCreator,
     },
     plugins: [
       structureTool({
@@ -89,7 +73,6 @@ function defaultConfig() {
       codeInput(),
       media(),
       visionTool(),
-      unsplashImageAsset(),
       colorInput(),
       nbNOLocale(),
     ],

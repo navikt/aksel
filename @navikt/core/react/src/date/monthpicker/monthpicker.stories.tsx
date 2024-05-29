@@ -1,4 +1,5 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
@@ -121,25 +122,37 @@ export const UseMonthpickerFormat = () => {
   );
 };
 
-export const Required = () => {
-  const { inputProps, monthpickerProps } = useMonthpicker({
-    locale: "nb",
-    defaultSelected: new Date(),
-    disabled: [new Date("Apr 1 2022")],
-    required: true,
-  });
+export const Required = {
+  render: () => {
+    const { monthpickerProps } = useMonthpicker({
+      defaultSelected: new Date("Apr 10 2024"),
+      required: true,
+    });
 
-  return (
-    <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input
-          {...inputProps}
-          label="Velg måned"
-          variant="monthpicker"
-        />
-      </MonthPicker>
-    </div>
-  );
+    return (
+      <div style={{ height: "20rem" }}>
+        <MonthPicker.Standalone {...monthpickerProps} />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const buttonApr = canvas.getByRole("button", { pressed: true });
+
+    await userEvent.click(buttonApr);
+
+    expect(buttonApr.ariaPressed).toBe("true");
+
+    const buttonSep = canvas.getByText("september").closest("button");
+
+    expect(buttonSep?.ariaPressed).toBe("false");
+
+    buttonSep && (await userEvent.click(buttonSep));
+
+    expect(buttonSep?.ariaPressed).toBe("true");
+    expect(buttonApr.ariaPressed).toBe("false");
+  },
 };
 
 export const UserControlled = () => {
@@ -193,7 +206,6 @@ export const Chromatic: Story = {
       <DisabledMonths />
       <UseMonthpicker />
       <UseMonthpickerFormat />
-      <Required />
       <UserControlled />
       <FollowYear />
     </div>

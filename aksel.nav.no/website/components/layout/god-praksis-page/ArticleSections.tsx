@@ -40,7 +40,9 @@ export function ArticleSections({
 
     if (queryState.view === "none") {
       return [...groupedByUndertema.entries()];
-    } else if (queryState.view === "undertema") {
+    }
+
+    if (queryState.view === "undertema") {
       const currentUndertema = getUndertemaNameFromTema(queryState.undertema);
       if (!currentUndertema) {
         return [];
@@ -51,7 +53,9 @@ export function ArticleSections({
         return [];
       }
       return [[currentUndertema, utArticles]];
-    } else if (queryState.view === "innholdstype") {
+    }
+
+    if (queryState.view === "innholdstype") {
       const filteredMap = new Map();
       for (const [undertema, utArticles] of groupedByUndertema) {
         const filteredArticles = utArticles.filter(
@@ -66,7 +70,8 @@ export function ArticleSections({
         return [];
       }
       return [...filteredMap.entries()];
-    } else if (queryState.view === "both") {
+    }
+    if (queryState.view === "both") {
       const matchingArticles = articles.filter(
         (article) =>
           article.undertema === queryState.undertema &&
@@ -108,7 +113,7 @@ export function ArticleSections({
         {utArticles.map((article) => (
           <li key={article.slug}>
             <GpArticleCard
-              href={`${article.slug}`.replace("god-praksis", "gp")}
+              href={article.slug}
               innholdstype={article.innholdstype}
               undertema={article.undertema}
               publishedAt={article.publishedAt}

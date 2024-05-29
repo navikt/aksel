@@ -14,6 +14,7 @@ import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import DoDont from "@/cms/do-dont/DoDont";
+import ExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
 import ExpansionCard from "@/cms/expansioncard/ExpansionCard";
 import PropsSeksjon from "@/cms/props/PropsSeksjon";
 import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
@@ -26,6 +27,7 @@ import Video from "@/cms/video/Video";
 import { amplitudeLogNavigation } from "@/logging";
 import InlineCode from "@/web/InlineCode";
 import KBD from "@/web/KBD";
+import { List, ListItem } from "@/web/List";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -46,6 +48,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
+    exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
   },
   unknownType: () => null,
   block: {
@@ -84,37 +87,12 @@ const serializers: Partial<PortableTextReactComponents> = {
   ),
 
   list: {
-    bullet: ({ children }) => (
-      <ul className="aksel-list-ul list-margin relative mb-7 max-w-text list-disc last:mb-0">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol
-        type="1"
-        className="aksel-list-ol list-margin mb-7 max-w-text list-decimal last:mb-0"
-      >
-        {children}
-      </ol>
-    ),
+    bullet: ({ children }) => <List as="ul">{children}</List>,
+    number: ({ children }) => <List as="ol">{children}</List>,
   },
   listItem: {
-    bullet: ({ children }) => (
-      <BodyLong
-        as="li"
-        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
-      >
-        {children}
-      </BodyLong>
-    ),
-    number: ({ children }) => (
-      <BodyLong
-        as="li"
-        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
-      >
-        {children}
-      </BodyLong>
-    ),
+    bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
+    number: ({ children }) => <ListItem>{children}</ListItem>,
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
@@ -229,7 +207,7 @@ function SanitizedBlock({
           id={value?._key}
           level="2"
           size="large"
-          className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none"
+          className="mb-4 mt-12 max-w-text scroll-mt-20 text-deepblue-800 first-of-type:mt-0 focus:outline-none dark:text-text-on-inverted"
         >
           {children}
         </Heading>
@@ -237,7 +215,7 @@ function SanitizedBlock({
     case "h3":
       return (
         <Heading
-          className="mt-8 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none"
+          className="mt-8 max-w-text scroll-mt-20 text-deepblue-800 focus:outline-none dark:text-text-on-inverted"
           spacing
           level="3"
           size="medium"
@@ -250,7 +228,7 @@ function SanitizedBlock({
     case "h4":
       return (
         <Heading
-          className="mt-6 max-w-text text-deepblue-800"
+          className="mt-6 max-w-text text-deepblue-800 dark:text-text-on-inverted"
           spacing
           level="4"
           size="small"
@@ -264,7 +242,7 @@ function SanitizedBlock({
       return (
         <BodyLong
           spacing
-          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl"
+          className="last:mb-0 group-[.aksel-block-ingress]/ingress:text-xl dark:text-text-on-inverted"
         >
           {children}
         </BodyLong>

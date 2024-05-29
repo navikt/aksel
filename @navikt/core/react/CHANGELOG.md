@@ -1,5 +1,93 @@
 # @navikt/ds-react
 
+## 6.8.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+### Patch Changes
+
+- Stepper.Step: Set aria-current to "step" instead of true ([#2920](https://github.com/navikt/aksel/pull/2920))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.8.0
+  - @navikt/aksel-icons@6.8.0
+
+## 6.7.1
+
+### Patch Changes
+
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
+- Combobox: Remove 'Ingen søketreff' when custom options allowed ([#2895](https://github.com/navikt/aksel/pull/2895))
+
+- Datepicker, MonthPicker: Rekkefølgen på årstall i Select er reversert slik at siste år er øverst. Dette er endret for å være bedre tilpasset ekspertsystemer der de mest relevante årene ble vist lengst unna musepeker ved klikk. ([#2882](https://github.com/navikt/aksel/pull/2882))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.7.1
+  - @navikt/aksel-icons@6.7.1
+
+## 6.7.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.7.0
+  - @navikt/aksel-icons@6.7.0
+
+## 6.6.1
+
+### Patch Changes
+
+- Spacer: Er nå `span` (tidligere `div`). ([#2874](https://github.com/navikt/aksel/pull/2874))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.6.1
+  - @navikt/aksel-icons@6.6.1
+
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
+### Patch Changes
+
+- Combobox: Prevents "Enter" while Combobox is focused from submitting form. ([#2861](https://github.com/navikt/aksel/pull/2861))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.6.0
+  - @navikt/aksel-icons@6.6.0
+
+## 6.5.0
+
+### Minor Changes
+
+- Tabs: Ny prop `lazy` som rendrer innhold i TabPanel selv når panel er skjult (har fortsatt display:none) ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+- ToggleGroup: Erstattet bruk av dependency `@radix-ui/react-toggle-group` med egen implementasjon. ([#2620](https://github.com/navikt/aksel/pull/2620))
+
+- Tabs: La til ny prop `fill` som lar Tabs.Tab-elementer strekke seg over tilgjengelig bredde. ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+- Tabs: Erstattet bruk av dependency `@radix-ui/react-tabs` med egen implementasjon. ([#2621](https://github.com/navikt/aksel/pull/2621))
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Valgte datoer får nå `aria-pressed` for å bedre indikere valg for skjermleser. ([#2838](https://github.com/navikt/aksel/pull/2838))
+
+- DatePicker/MonthPicker: `required`-prop stoppet ikke de-select av allerede valgt dato. ([#2838](https://github.com/navikt/aksel/pull/2838))
+
+- ToggleGroup: La til ny prop `fill` som strekker ToggleGroup til å ta opp all tilgjengelig bredde. ([#2620](https://github.com/navikt/aksel/pull/2620))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.5.0
+  - @navikt/aksel-icons@6.5.0
+
 ## 6.4.1
 
 ### Patch Changes

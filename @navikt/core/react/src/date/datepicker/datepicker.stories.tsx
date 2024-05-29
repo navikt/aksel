@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
 import { isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
@@ -438,6 +439,39 @@ export const WeekDayClick = () => {
       />
     </VStack>
   );
+};
+
+export const Required = {
+  render: () => {
+    const { datepickerProps } = useDatepicker({
+      defaultSelected: new Date("Apr 10 2024"),
+      required: true,
+    });
+
+    return (
+      <div style={{ height: "20rem" }}>
+        <DatePicker.Standalone {...datepickerProps} />
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button10 = canvas.getByRole("button", { pressed: true });
+
+    await userEvent.click(button10);
+
+    expect(button10.ariaPressed).toBe("true");
+
+    const button17 = canvas.getByText("17").closest("button");
+
+    expect(button17?.ariaPressed).toBe("false");
+
+    button17 && (await userEvent.click(button17));
+
+    expect(button17?.ariaPressed).toBe("true");
+    expect(button10.ariaPressed).toBe("false");
+  },
 };
 
 export const ModalDemo = () => {

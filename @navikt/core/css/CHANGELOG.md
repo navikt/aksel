@@ -1,5 +1,43 @@
 # @navikt/ds-css
 
+## 6.8.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: FormProgress ([#2855](https://github.com/navikt/aksel/pull/2855))
+
+### Patch Changes
+
+- HGrid: forenklet CSS. ([#2917](https://github.com/navikt/aksel/pull/2917))
+
+## 6.7.1
+
+### Patch Changes
+
+- Progressbar: Tweak API, examples, stories and css ([#2892](https://github.com/navikt/aksel/pull/2892))
+
+## 6.7.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent: ProgressBar ([#2845](https://github.com/navikt/aksel/pull/2845))
+
+### Patch Changes
+
+- Checkbox, Radio: Erstatter `:focus-visible` med `:focus` for bedre UX brukt sammen med ErrorSummary. ([#2893](https://github.com/navikt/aksel/pull/2893))
+
+- :lipstick: tweak CSS for timeline pins. ([#2889](https://github.com/navikt/aksel/pull/2889))
+
+## 6.6.1
+
+## 6.6.0
+
+### Minor Changes
+
+- :sparkles: Ny komponent FormSummary ([#2802](https://github.com/navikt/aksel/pull/2802))
+
+## 6.5.0
+
 ## 6.4.1
 
 ### Patch Changes

@@ -2,13 +2,13 @@ import { Detail } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const lorem = "Du må gjøre en filtrering for å se brukere i listen.";
+  const exampleText = "Du må gjøre en filtrering for å se brukere i listen.";
 
   return (
-    <div>
-      <Detail spacing>{lorem}</Detail>
-      <Detail spacing>{lorem}</Detail>
-    </div>
+    <>
+      <Detail spacing>{exampleText}</Detail>
+      <Detail spacing>{exampleText}</Detail>
+    </>
   );
 };
 
@@ -21,5 +21,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 3,
+  desc: "Propen 'spacing' legger til mellomrom under teksten. Avstanden varierer avhengig av 'size'.",
 };

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   BodyShort,
   Box,
@@ -90,6 +90,12 @@ function useDekorator() {
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default Example;
+
+/* Storybook story */
+export const Demo = {
+  render: Example,
+  parameters: { layout: "fullscreen" },
+};
 
 export const args = {
   index: 2,

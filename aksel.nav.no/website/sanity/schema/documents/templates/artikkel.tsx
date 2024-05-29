@@ -16,7 +16,7 @@ export const TemplatesArtikkel = defineType({
   name: "templates_artikkel",
   type: "document",
   groups: SanityTabGroups,
-  ...artikkelPreview("Mønster/Maler"),
+  ...artikkelPreview("Mønster/Maler", 6),
   fields: [
     oppdateringsvarsel,
     ...hiddenFields,
@@ -67,6 +67,12 @@ export const TemplatesArtikkel = defineType({
         collapsible: true,
         collapsed: false,
       },
+    }),
+    defineField({
+      title: "Github discussions link",
+      name: "gh_discussions",
+      type: "url",
+      group: "settings",
     }),
     defineField({
       title: "Sidebar index",

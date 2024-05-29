@@ -12,15 +12,15 @@ export type TypoProps = {
    */
   align?: "start" | "center" | "end";
   /**
-   * Visually hide text. Text will still be accessible for screenreaders
+   * Visually hide text. Text will still be accessible for screenreaders.
    */
   visuallyHidden?: boolean;
   /**
-   * Adds spacing below text
+   * Adds spacing below text.
    */
   spacing?: boolean;
   /**
-   * Adjusts color
+   * Adjusts color.
    */
   textColor?: "default" | "subtle";
 };

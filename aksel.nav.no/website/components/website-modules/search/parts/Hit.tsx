@@ -1,9 +1,7 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
-import { default as Link, default as NextLink } from "next/link";
+import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { Chips } from "@navikt/ds-react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT, searchOptions } from "@/types";
@@ -23,35 +21,34 @@ export const Hit = forwardRef<
   const { query } = useContext(SearchContext);
   const { logSuccess } = useContext(SearchLoggingContext);
 
-  const getHref = () => {
-    if ("anchor" in hit) {
-      return `/${hit.item.slug}${hit?.anchor ? `#h${hit.anchor}` : ""}`;
-    }
-    return `/${hit.item.slug}`;
-  };
+  const href =
+    "anchor" in hit && hit.anchor
+      ? `/${hit.item.slug}#${hit.anchor}`
+      : `/${hit.item.slug}`;
 
   return (
     <li
       ref={ref}
       className={cl(
-        "relative flex scroll-my-10 items-center  justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0",
+        "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 has-[+_*_:focus-visible]:border-b-transparent has-[:focus-visible]:border-b-transparent",
       )}
     >
-      <div className="w-full truncate px-2 py-4">
+      <div className="w-full truncate px-2 py-3">
         <span
           className={cl({
-            "flex flex-col gap-1": simple,
+            "flex flex-col": simple,
             "flex items-center gap-2": !simple,
           })}
         >
           <NextLink
-            href={getHref()}
-            onClick={() => logSuccess(index, `/${(hit.item as any).slug}`)}
-            className="group scroll-my-32 text-xl font-semibold focus:outline-none focus-visible:bg-border-focus focus-visible:text-text-on-action focus-visible:shadow-focus"
+            href={href}
+            onClick={() => logSuccess(index, `/${hit.item.slug}`)}
+            className={cl(
+              "group scroll-my-32 truncate text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
+              "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",
+            )}
           >
-            <span className="group-hover:underline">
-              {highlightStr(hit.item.heading, query, tag)}
-            </span>
+            {highlightStr(hit.item.heading, query, tag)}
           </NextLink>
           {simple ? (
             <Tag
@@ -62,13 +59,13 @@ export const Hit = forwardRef<
               aria-hidden
             />
           ) : (
-            hit?.item?.status?.tag && (
-              <StatusTag status={hit?.item?.status?.tag} aria-hidden />
+            hit.item?.status?.tag && (
+              <StatusTag status={hit.item.status.tag} aria-hidden />
             )
           )}
         </span>
 
-        {!simple && <HeadingLinks index={index} hit={hit} />}
+        {!simple && <HeadingLinks hit={hit} />}
       </div>
 
       {!simple && (
@@ -91,57 +88,18 @@ export const Hit = forwardRef<
   );
 });
 
-const highlightedHeadings = ["eksempler", "props", "tokens", "retningslinjer"];
-
 function HeadingLinks({
   hit,
-  index,
 }: {
   hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
-  index: number;
 }) {
-  const { logSuccess } = useContext(SearchLoggingContext);
-
-  const Description = () => {
-    if (hit.matches && hit.matches?.[0].key !== "heading") {
-      return highlightMatches(hit.matches[0]);
-    }
-
-    return (
-      <span className="max-w-full text-lg font-regular text-text-subtle">
-        {hit.description}
-      </span>
-    );
-  };
-
-  if (hit.item._type === "komponent_artikkel") {
-    return (
-      <>
-        <Description />
-        <Chips className="mt-3" size="small">
-          {hit.item.lvl2
-            ?.filter(
-              (x) =>
-                !!x.id && highlightedHeadings.includes(x.text.toLowerCase()),
-            )
-            .map((x) => (
-              <Link
-                prefetch={false}
-                key={x.text}
-                href={`/${hit.item.slug}${`#h${x.id}`}`}
-                onClick={() =>
-                  logSuccess(index, `/${(hit.item as any).slug}`, x.text)
-                }
-                className="flex min-h-6 items-center justify-center rounded-full bg-surface-neutral-subtle px-2 ring-1 ring-inset ring-border-subtle hover:bg-surface-neutral-subtle-hover focus:outline-none focus-visible:shadow-focus"
-              >
-                <span>{x.text}</span>
-                <ChevronRightIcon aria-hidden className="-mr-1" />
-              </Link>
-            ))}
-        </Chips>
-      </>
-    );
+  if (hit.matches && hit.matches?.[0].key !== "heading") {
+    return highlightMatches(hit.matches[0]);
   }
 
-  return <Description />;
+  return (
+    <span className="max-w-full text-lg font-regular text-text-subtle">
+      {hit.description}
+    </span>
+  );
 }

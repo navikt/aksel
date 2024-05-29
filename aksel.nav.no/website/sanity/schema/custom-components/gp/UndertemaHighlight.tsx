@@ -1,7 +1,8 @@
 import { useMemoObservable } from "react-rx";
-import { SanityDocument, useDocumentStore, useFormValue } from "sanity";
+import { type SanityDocument, useDocumentStore, useFormValue } from "sanity";
 import { TagFillIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { TemaContacts } from "./TemaContacts";
 
 type MetadataT = {
   title: string;
@@ -59,6 +60,7 @@ export function UndertemaHighlight(props) {
             </div>
           );
         })}
+        <TemaContacts />
       </div>
     </div>
   );

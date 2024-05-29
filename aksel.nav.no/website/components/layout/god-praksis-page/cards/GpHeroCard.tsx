@@ -6,6 +6,7 @@ import { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
 import { urlFor } from "@/sanity/interface";
+import ErrorBoundary from "@/web/ErrorBoundary";
 
 type GpHeroCardProps = {
   children: React.ReactNode;
@@ -21,13 +22,19 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
       <Link
         ref={ref}
         href={`/${href}`}
-        className="group flex gap-2 rounded-lg bg-surface-default py-2 pl-2 pr-3 shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus aria-[current]:bg-teal-800 aria-[current]:focus-visible:shadow-focus-gap md:gap-3 md:py-3 md:pl-3 md:pr-6"
+        className={cl(
+          "group flex gap-2 rounded-lg bg-surface-default shadow-xsmall outline-none hover:shadow-small focus-visible:shadow-focus aria-[current]:bg-teal-800 aria-[current]:focus-visible:shadow-focus-gap md:gap-3",
+          "py-2 pl-2 pr-3 md:pl-3 md:pr-6",
+          {
+            "md:py-2.5": compact,
+            "md:py-3": !compact,
+          },
+        )}
         {...rest}
       >
         <div
-          className={cl("relative my-auto shrink-0", {
-            "size-8 md:size-12": !compact,
-            "size-6": compact,
+          className={cl("relative my-auto size-8 shrink-0", {
+            "md:size-12": !compact,
           })}
         >
           {image ? (
@@ -44,7 +51,7 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
           )}
         </div>
 
-        <div className="grid gap-05">
+        <div className="grid items-center gap-05">
           <Heading
             size="small"
             as="span"
@@ -68,4 +75,10 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
   },
 );
 
-export default GpHeroCard;
+export default function Component(props: GpHeroCardProps) {
+  return (
+    <ErrorBoundary boundaryName="GpHeroCard">
+      <GpHeroCard {...props} />
+    </ErrorBoundary>
+  );
+}

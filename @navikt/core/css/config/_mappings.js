@@ -98,10 +98,6 @@ const StyleMappings = {
       dependencies: [typoCss],
     },
     {
-      component: "ContentContainer",
-      main: "content-container.css",
-    },
-    {
       component: "CopyButton",
       main: "copybutton.css",
       dependencies: [typoCss],
@@ -125,7 +121,6 @@ const StyleMappings = {
       main: formCss,
       dependencies: [typoCss, "button.css", "loader.css", "link.css"],
     },
-    { component: "Grid", main: "grid.css", dependencies: [typoCss] },
     {
       component: "GuidePanel",
       main: "guide-panel.css",
@@ -164,6 +159,7 @@ const StyleMappings = {
     },
     { component: "Panel", main: "panel.css" },
     { component: "Popover", main: "popover.css" },
+    { component: "ProgressBar", main: "progress-bar.css" },
     { component: "Provider", main: "" },
     { component: "Radio", main: formCss, dependencies: [typoCss] },
     { component: "RadioGroup", main: formCss, dependencies: [typoCss] },
@@ -178,6 +174,22 @@ const StyleMappings = {
     { component: "Tag", main: "tag.css", dependencies: [typoCss] },
     { component: "TextField", main: formCss, dependencies: [typoCss] },
     { component: "Textarea", main: formCss, dependencies: [typoCss] },
+    {
+      component: "FormSummary",
+      main: formCss,
+      dependencies: [typoCss, "link.css"],
+    },
+    {
+      component: "FormProgress",
+      main: formCss,
+      dependencies: [
+        typoCss,
+        "progress-bar.css",
+        "button.css",
+        primitivesCss,
+        "stepper.css",
+      ],
+    },
     {
       component: "ToggleGroup",
       main: "toggle-group.css",

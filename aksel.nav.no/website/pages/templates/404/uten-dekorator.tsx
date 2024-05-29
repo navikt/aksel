@@ -32,6 +32,12 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default Example;
 
+/* Storybook story */
+export const Demo = {
+  render: Example,
+  parameters: { layout: "fullscreen", chromatic: { disable: true } },
+};
+
 export const args = {
   index: 5,
   title: "Uten dekoratøren",

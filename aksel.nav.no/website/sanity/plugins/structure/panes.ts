@@ -19,6 +19,7 @@ export const Panes = (
             .apiVersion(SANITY_API_VERSION),
         ),
     ),
+    S.divider(),
     S.listItem()
       .title(`Uten kategori`)
       .icon(FileXMarkIcon)
@@ -28,6 +29,19 @@ export const Panes = (
           .schemaType(docType)
           .filter(`_type == $docType && !defined(kategori)`)
           .params({ docType })
+          .apiVersion(SANITY_API_VERSION),
+      ),
+    S.listItem()
+      .title("Artikler med gamle kategorier")
+      .icon(FileXMarkIcon)
+      .child(
+        S.documentList()
+          .title("Artikler med gamle kategorier")
+          .schemaType(docType)
+          .filter(
+            `_type == $docType && defined(kategori) && !(kategori in $kat)`,
+          )
+          .params({ docType, kat: categories.map((x) => x.value) })
           .apiVersion(SANITY_API_VERSION),
       ),
   ];

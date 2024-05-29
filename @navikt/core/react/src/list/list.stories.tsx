@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
   BabyWrappedIcon,
@@ -12,7 +12,12 @@ import List from "./List";
 export default {
   title: "ds-react/List",
   component: List,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
+
+type Story = StoryObj<typeof List>;
 
 export const Default = {
   render: () => {
@@ -276,5 +281,47 @@ export const Nested = {
         </List.Item>
       </List>
     );
+  },
+};
+
+export const Chromatic: Story = {
+  render: () => (
+    <VStack gap="2">
+      <div>
+        <h2>Default</h2>
+        <Default.render />
+      </div>
+      <div>
+        <h2>Ordered</h2>
+        <Ordered.render />
+      </div>
+      <div>
+        <h2>WithHeading</h2>
+        <WithHeading.render />
+      </div>
+      <div>
+        <h2>SizesUl</h2>
+        <SizesUl.render />
+      </div>
+      <div>
+        <h2>SizesOl</h2>
+        <SizesOl.render />
+      </div>
+      <div>
+        <h2>SizesIcons</h2>
+        <SizesIcons.render />
+      </div>
+      <div>
+        <h2>Icons</h2>
+        <Icons.render />
+      </div>
+      <div>
+        <h2>Nested</h2>
+        <Nested.render />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
   },
 };

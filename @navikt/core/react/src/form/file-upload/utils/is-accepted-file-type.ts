@@ -15,11 +15,14 @@ export function isAcceptedFileType(
 
     if (isExtensionType) {
       return file.name.toLowerCase().endsWith(validType.toLowerCase());
-    } else if (isWildcardMimeType) {
+    }
+
+    if (isWildcardMimeType) {
       const baseMimeType = mimeType.replace(/\/.*$/, "");
       const baseValidType = validType.replace(/\/.*$/, "");
       return baseMimeType === baseValidType;
     }
+
     return mimeType === validType;
   });
 }

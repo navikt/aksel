@@ -229,12 +229,16 @@ export const useDatepicker = (
 
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
+    if (selected && required) {
+      return;
+    }
+
     if (day && !selected) {
       handleOpen(false);
       anchorRef?.focus();
     }
 
-    if (!required && selected) {
+    if (selected) {
       updateDate(undefined);
       setInputValue("");
       updateValidation({ isValidDate: false, isEmpty: true });

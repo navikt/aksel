@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
-import { DatePicker, useRangeDatepicker } from "@navikt/ds-react";
+import { Box, DatePicker, HStack, useRangeDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -13,13 +13,13 @@ const Example = () => {
   return (
     <div className="min-h-96">
       <DatePicker {...datepickerProps}>
-        <div className="flex flex-wrap justify-center gap-4">
+        <HStack wrap gap="4" justify="center">
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
-        </div>
+        </HStack>
       </DatePicker>
       {selectedRange && (
-        <div className="pt-4">
+        <Box paddingBlock="4 0">
           <div>
             {selectedRange?.from &&
               format(selectedRange.from, "dd.MM.yyyy", { locale: nb })}
@@ -28,7 +28,7 @@ const Example = () => {
             {selectedRange?.to &&
               format(selectedRange.to, "dd.MM.yyyy", { locale: nb })}
           </div>
-        </div>
+        </Box>
       )}
     </div>
   );
