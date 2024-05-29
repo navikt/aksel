@@ -54,9 +54,10 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
   return (
     <AutocompleteInternalContextProvider
-      {...{ virtualFocusIdx, setVirtualFocusIdx }}
+      virtualFocusIdx={virtualFocusIdx}
+      setVirtualFocusIdx={setVirtualFocusIdx}
     >
-      <AutocompleteContextProvider {...{ value, setValue }}>
+      <AutocompleteContextProvider value={value} setValue={setValue}>
         <AutocompleteDescendantsProvider value={descendants}>
           <div
             onChange={(event) => {
