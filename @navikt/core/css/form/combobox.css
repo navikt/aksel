@@ -33,7 +33,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  min-height: initial;
   width: 100%;
   padding-block: calc(var(--__ac-combobox-wrapper-inner-padding) - var(--__ac-combobox-border-width));
   padding-inline: var(--__ac-combobox-wrapper-inner-padding);
