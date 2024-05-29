@@ -18,17 +18,7 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
     const context = useModalContext();
 
     return (
-      <div
-        {...rest}
-        ref={ref}
-        className={cl(
-          "navds-modal__header",
-          {
-            "navds-modal__header--small": context.size === "small",
-          },
-          className,
-        )}
-      >
+      <div {...rest} ref={ref} className={cl("navds-modal__header", className)}>
         {context.closeHandler && closeButton && (
           <Button
             type="button"
