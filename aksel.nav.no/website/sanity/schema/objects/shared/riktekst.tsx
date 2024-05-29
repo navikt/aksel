@@ -65,10 +65,19 @@ export const block = {
         component: ({ children }) => <InlineCode>{children}</InlineCode>,
       },
       {
-        title: "KBD",
+        title: "Quote",
+        value: "quote",
+        icon: () => (
+          <span className="font-semibold" aria-label="quote">
+            Q
+          </span>
+        ),
+        component: ({ children }) => <q>{children}</q>,
+      },
+      {
+        title: "Keyboard",
         value: "kbd",
-        icon: () => <KBD>KBD</KBD>,
-
+        icon: () => <kbd>KBD</kbd>,
         component: ({ children }) => <KBD>{children}</KBD>,
       },
     ],
