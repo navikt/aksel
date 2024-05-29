@@ -3,10 +3,7 @@ import DsTokens from "../../dist/tokens-cjs.js";
 import docs from "../../docs.json";
 import kebabCase from "../kebabCase.js";
 
-const flatten = Object.values(docs).reduce(
-  (old, val) => [...old, ...val],
-  [] as any,
-);
+const flatten = Object.values(docs).flat();
 
 const notFound: string[] = [];
 const removed: string[] = [];

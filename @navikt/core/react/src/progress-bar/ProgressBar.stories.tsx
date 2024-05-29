@@ -47,7 +47,6 @@ export const Default: StoryFn = (args) => {
             size={args.size}
             value={value}
             aria-labelledby="progress-bar-label"
-            /* duration={args.indeterminate ? 0 : undefined} */
           />
         </>
       ) : (
@@ -58,15 +57,11 @@ export const Default: StoryFn = (args) => {
 };
 Default.args = {
   size: "medium",
-  indeterminate: false,
 };
 Default.argTypes = {
   size: {
     options: ["large", "medium", "small"],
     control: { type: "radio" },
-  },
-  indeterminate: {
-    control: { type: "boolean" },
   },
 };
 
@@ -103,35 +98,29 @@ Sizes.args = {
   valueMax: 12,
 };
 
-/**
- * Duration is temp disabled due to potential API-updates
- */
 export const IndeterminateState: Story = {
   render: () => {
-    const values = [2, 5, 10, 20];
+    const values = [0, 5, 10, 20];
     return (
       <>
-        <p id="progress-bar-label-immediate-indeterminate">
-          Duration prop satt til 0 sek
-        </p>
-        <ProgressBar
-          valueMax={100}
-          /* duration={0} */
-          size="medium"
-          value={50}
-          aria-labelledby="progress-bar-label-immediate-indeterminate"
-        />
         {values.map((value) => (
           <div key={value}>
             <p id={`progress-bar-label-${value}`}>
-              duration-prop satt til {value} sek
+              Simulert til å laste i opptil {value} sek.
+              {value === 0 &&
+                " Ved 0 sek vises indeterminate state umiddelbart."}
             </p>
             <ProgressBar
               valueMax={100}
-              /* duration={value} */
               size="medium"
               value={value}
               aria-labelledby={`progress-bar-label-${value}`}
+              simulated={{
+                seconds: value,
+                onTimeout: () => {
+                  console.log("Ferdig!");
+                },
+              }}
             />
           </div>
         ))}

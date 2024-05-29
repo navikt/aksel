@@ -71,7 +71,9 @@ export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
       actions: (prev, { schemaType }) => {
         if (hasQualityControl.some((e) => e === schemaType)) {
           return getCustomActions(prev);
-        } else if (hasPublishedAt.some((e) => e === schemaType)) {
+        }
+
+        if (hasPublishedAt.some((e) => e === schemaType)) {
           return withCustomPublishAction(prev);
         }
 

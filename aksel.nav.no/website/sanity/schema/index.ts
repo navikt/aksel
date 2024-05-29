@@ -78,6 +78,9 @@ export const schema: SchemaPluginOptions = {
     object.TokenTabell,
     object.KomponentIntro,
 
+    /* Templatesider */
+    object.ExampletextBlock,
+
     /* Prinsipper */
     object.HeroBilde,
     object.InnholdsKort,

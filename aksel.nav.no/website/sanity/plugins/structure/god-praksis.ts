@@ -65,6 +65,7 @@ function godPraksisPanes(S: StructureBuilder) {
               .filter("_type == $type && tema._ref == $id")
               .apiVersion(SANITY_API_VERSION)
               .params({ type: "gp.tema.undertema", id })
+              .schemaType("gp.tema.undertema")
               .initialValueTemplates([
                 S.initialValueTemplateItem("gp.tema.undertema.by.tema", {
                   id,
@@ -108,6 +109,7 @@ function godPraksisPanes(S: StructureBuilder) {
                   .filter("_type == $type && $id in undertema[]._ref")
                   .apiVersion(SANITY_API_VERSION)
                   .params({ type: "aksel_artikkel", id: undertema_id })
+                  .schemaType("gp.tema.undertema")
                   .initialValueTemplates([
                     S.initialValueTemplateItem("gp.artikkel.by.undertema", {
                       undertema_id,
@@ -130,6 +132,7 @@ function godPraksisPanes(S: StructureBuilder) {
               .filter("_type == $type && $id == innholdstype._ref")
               .apiVersion(SANITY_API_VERSION)
               .params({ type: "aksel_artikkel", id })
+              .schemaType("aksel_artikkel")
               .initialValueTemplates([
                 S.initialValueTemplateItem("gp.artikkel.by.innholdstype", {
                   id,

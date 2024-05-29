@@ -9,8 +9,12 @@ export default {
 
 export const Spacing = () => {
   const allSpacing: { [key: string]: string } = Object.entries(tokens).reduce(
-    (old, [key, val]) =>
-      key.startsWith("ASpacing") ? { ...old, [key]: val } : { ...old },
+    (old, [key, val]) => {
+      if (key.startsWith("ASpacing")) {
+        old[key] = val;
+      }
+      return old;
+    },
     {},
   );
 

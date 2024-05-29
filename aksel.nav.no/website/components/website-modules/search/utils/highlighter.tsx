@@ -26,18 +26,15 @@ export function highlightStr(
     ) {
       return undefined;
     }
-    return cl(
-      "text-text-default group-focus-visible:text-text-on-action group-focus-visible:bg-transparent",
-      {
-        "bg-gray-200": !tag,
-        "bg-teal-100": tag === "aksel_artikkel",
-        "bg-deepblue-100":
-          tag && ["komponent_artikkel", "ds_artikkel"].includes(tag),
-        "bg-violet-100":
-          tag && ["aksel_prinsipp", "aksel_standalone"].includes(tag),
-        "bg-pink-100": tag === "aksel_blogg",
-      },
-    );
+    return cl("text-text-default", {
+      "bg-gray-200": !tag,
+      "bg-teal-100": tag === "aksel_artikkel",
+      "bg-deepblue-100":
+        tag && ["komponent_artikkel", "ds_artikkel"].includes(tag),
+      "bg-violet-100":
+        tag && ["aksel_prinsipp", "aksel_standalone"].includes(tag),
+      "bg-pink-100": tag === "aksel_blogg",
+    });
   };
   return (
     <>

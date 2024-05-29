@@ -1,6 +1,6 @@
 /* stylelint-disable-next-line aksel/no-class-override */
 .navds-body-long.navds-typo--spacing + .list-margin {
-  @apply -mt-4;
+  margin-top: -1rem;
 }
 
 .override-text-700 p {
@@ -31,25 +31,6 @@ p.override-text-no-max {
 
 .card-grid-3-1 {
   @apply grid gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3;
-}
-
-.aksel-artikkel .aksel-list-ul li::before {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--a-border-radius-small);
-  background-color: var(--a-deepblue-500);
-  transform: translateY(10px) translateX(2px) rotate(45deg);
-  left: 0;
-  content: "";
-}
-
-.aksel-artikkel .aksel-list-ul li::marker {
-  content: none;
-}
-
-.aksel-artikkel .aksel-list-ul {
-  list-style: none;
 }
 
 .component-checkered-bg {

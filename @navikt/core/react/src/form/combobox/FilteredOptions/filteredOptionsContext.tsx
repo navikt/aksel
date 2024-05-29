@@ -1,17 +1,11 @@
 import cl from "clsx";
-import React, {
-  SetStateAction,
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { SetStateAction, useCallback, useMemo, useState } from "react";
+import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect, usePrevious } from "../../../util/hooks";
-import { useInputContext } from "../Input/inputContext";
+import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { toComboboxOption } from "../combobox-utils";
-import { useCustomOptionsContext } from "../customOptionsContext";
+import { useComboboxCustomOptions } from "../customOptionsContext";
 import { ComboboxOption, ComboboxProps } from "../types";
 import filteredOptionsUtils from "./filtered-options-util";
 import useVirtualFocus, { VirtualFocusType } from "./useVirtualFocus";
@@ -24,7 +18,7 @@ type FilteredOptionsProps = {
   };
 };
 
-type FilteredOptionsContextType = {
+type FilteredOptionsContextValue = {
   activeDecendantId?: string;
   allowNewValues?: boolean;
   ariaDescribedBy?: string;
@@ -42,11 +36,14 @@ type FilteredOptionsContextType = {
   shouldAutocomplete?: boolean;
   virtualFocus: VirtualFocusType;
 };
-const FilteredOptionsContext = createContext<FilteredOptionsContextType>(
-  {} as FilteredOptionsContextType,
-);
+const [FilteredOptionsContextProvider, useFilteredOptionsContext] =
+  createContext<FilteredOptionsContextValue>({
+    name: "FilteredOptionsContext",
+    errorMessage:
+      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
+  });
 
-export const FilteredOptionsProvider = ({
+const FilteredOptionsProvider = ({
   children,
   value: props,
 }: FilteredOptionsProps) => {
@@ -71,7 +68,7 @@ export const FilteredOptionsProvider = ({
   const { maxSelected } = useSelectedOptionsContext();
 
   const [isInternalListOpen, setInternalListOpen] = useState(false);
-  const { customOptions } = useCustomOptionsContext();
+  const { customOptions } = useComboboxCustomOptions();
 
   const filteredOptions = useMemo(() => {
     if (externalFilteredOptions) {
@@ -86,29 +83,27 @@ export const FilteredOptionsProvider = ({
   const [isMouseLastUsedInputDevice, setIsMouseLastUsedInputDevice] =
     useState(false);
 
-  const filteredOptionsMap = useMemo(
-    () =>
-      options.reduce(
-        (map, _option) => ({
-          ...map,
-          [filteredOptionsUtils.getOptionId(id, _option.label)]: _option,
-        }),
-        {
-          [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
-            ? toComboboxOption(value)
-            : undefined,
-          ...customOptions.reduce(
-            (acc, customOption) => ({
-              ...acc,
-              [filteredOptionsUtils.getOptionId(id, customOption.label)]:
-                customOption,
-            }),
-            {},
-          ),
-        },
-      ),
-    [allowNewValues, customOptions, id, options, value],
-  );
+  const filteredOptionsMap = useMemo(() => {
+    const initialMap = {
+      [filteredOptionsUtils.getAddNewOptionId(id)]: allowNewValues
+        ? toComboboxOption(value)
+        : undefined,
+      ...customOptions.reduce((acc, customOption) => {
+        const _id = filteredOptionsUtils.getOptionId(id, customOption.label);
+        acc[_id] = customOption;
+        return acc;
+      }, {}),
+    };
+
+    // Add the options to the map
+    const finalMap = options.reduce((map, _option) => {
+      const _id = filteredOptionsUtils.getOptionId(id, _option.label);
+      map[_id] = _option;
+      return map;
+    }, initialMap);
+
+    return finalMap;
+  }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
     if (
@@ -151,7 +146,7 @@ export const FilteredOptionsProvider = ({
   );
 
   const ariaDescribedBy = useMemo(() => {
-    let activeOption;
+    let activeOption: string = "";
     if (!isLoading && filteredOptions.length === 0 && !allowNewValues) {
       activeOption = filteredOptionsUtils.getNoHitsId(id);
     } else if (value || isLoading) {
@@ -167,6 +162,7 @@ export const FilteredOptionsProvider = ({
     const maybeMaxSelectedOptionsId =
       maxSelected?.isLimitReached &&
       filteredOptionsUtils.getMaxSelectedOptionsId(id);
+
     return (
       cl(activeOption, maybeMaxSelectedOptionsId, partialAriaDescribedBy) ||
       undefined
@@ -212,18 +208,10 @@ export const FilteredOptionsProvider = ({
   };
 
   return (
-    <FilteredOptionsContext.Provider value={filteredOptionsState}>
+    <FilteredOptionsContextProvider {...filteredOptionsState}>
       {children}
-    </FilteredOptionsContext.Provider>
+    </FilteredOptionsContextProvider>
   );
 };
 
-export const useFilteredOptionsContext = () => {
-  const context = useContext(FilteredOptionsContext);
-  if (!context) {
-    throw new Error(
-      "useFilteredOptionsContext must be used within a FilteredOptionsProvider",
-    );
-  }
-  return context;
-};
+export { FilteredOptionsProvider, useFilteredOptionsContext };

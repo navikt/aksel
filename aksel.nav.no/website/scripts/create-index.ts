@@ -51,9 +51,11 @@ function sanitzeSanityData(data) {
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
         return 0;
-      } else if (!a.publishedAt) {
+      }
+      if (!a.publishedAt) {
         return 1;
-      } else if (!b.publishedAt) {
+      }
+      if (!b.publishedAt) {
         return -1;
       }
 
@@ -100,11 +102,8 @@ function mapContent(blocks: any[]) {
     }
   });
 
-  const mapped = Object.entries(groupBy(contentBlocks, "id")).reduce(
-    (prev: { id?: string; text: string }[], [key, value]) => {
-      return [...prev, { id: key, text: value.map((x) => x.text).join(" ") }];
-    },
-    [],
+  const mapped = Object.entries(groupBy(contentBlocks, "id")).map(
+    ([key, value]) => ({ id: key, text: value.map((x) => x.text).join(" ") }),
   );
 
   return mapped;

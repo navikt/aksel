@@ -53,7 +53,7 @@ export {
   type VStackProps,
 } from "./layout/stack";
 export { Link, type LinkProps } from "./link";
-export { List, type ListProps } from "./list";
+export { List, type ListProps, type ListItemProps } from "./list";
 export { Loader, type LoaderProps } from "./loader";
 export { Modal, type ModalProps } from "./modal";
 export { Pagination, type PaginationProps } from "./pagination";
@@ -141,6 +141,7 @@ export {
   type FilesPartitioned,
 } from "./form/file-upload";
 export { FormSummary, type FormSummaryProps } from "./form/form-summary";
+export { FormProgress, type FormProgressProps } from "./form/form-progress";
 export {
   Radio,
   RadioGroup,
