@@ -31,77 +31,77 @@ export interface BasePrimitiveProps {
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
   /**
-   *
+   * CSS `width`
    */
   width?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `min-width`
    */
   minWidth?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `max-width`
    */
   maxWidth?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `height`
    */
   height?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `min-height`
    */
   minHeight?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `max-height`
    */
   maxHeight?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `position`
    */
   position?: ResponsiveProp<
     "static" | "relative" | "absolute" | "fixed" | "sticky"
   >;
   /**
-   *
+   * CSS `inset`
    */
   inset?: ResponsiveProp<SpacingScale>;
   /**
-   *
+   * CSS `top`
    */
   top?: ResponsiveProp<SpacingScale>;
   /**
-   *
+   * CSS `right`
    */
   right?: ResponsiveProp<SpacingScale>;
   /**
-   *
+   * CSS `bottom`
    */
   bottom?: ResponsiveProp<SpacingScale>;
   /**
-   *
+   * CSS `left`
    */
   left?: ResponsiveProp<SpacingScale>;
   /**
-   *
+   * CSS `overflow`
    */
   overflow?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
   /**
-   *
+   * CSS `overflow-x`
    */
   overflowX?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
   /**
-   *
+   * CSS `overflow-y`
    */
   overflowY?: ResponsiveProp<"visible" | "hidden" | "clip" | "scroll" | "auto">;
   /**
-   *
+   * CSS `flex-basis`
    */
   flexBasis?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `flex-shrink`
    */
   flexShrink?: ResponsiveProp<string>;
   /**
-   *
+   * CSS `flex-grow`
    */
   flexGrow?: ResponsiveProp<string>;
 }
