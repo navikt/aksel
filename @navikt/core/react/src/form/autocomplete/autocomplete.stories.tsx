@@ -57,7 +57,13 @@ const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
 
 export const Default = () => {
   return (
-    <div className="navds-autocomplete-test-class-for-div-wrapper">
+    <>
+      <style>{`
+.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+  outline: solid 3px var(--a-border-focus);
+  border-radius: var(--a-border-radius-medium);
+}
+`}</style>
       <Autocomplete>
         <MyAnchor>
           <Autocomplete.Content>
@@ -72,7 +78,7 @@ export const Default = () => {
           </Autocomplete.Content>
         </MyAnchor>
       </Autocomplete>
-    </div>
+    </>
   );
 };
 
@@ -119,6 +125,10 @@ const MyDropDownSearchAutocomplete = () => {
         {`
 .dropdown-search-autocomplete {
   width: 100%;
+}
+.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+  outline: solid 3px var(--a-border-focus);
+  border-radius: var(--a-border-radius-medium);
 }
 `}
       </style>
