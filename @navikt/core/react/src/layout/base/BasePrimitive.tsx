@@ -5,7 +5,8 @@ import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export interface BasePrimitiveProps {
-  children: React.ReactNode;
+  children: React.ReactElement;
+  className?: string;
   /** Padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
@@ -108,6 +109,7 @@ export interface BasePrimitiveProps {
 
 export const BasePrimitive = ({
   children,
+  className,
   padding,
   paddingInline,
   paddingBlock,
@@ -162,6 +164,7 @@ export const BasePrimitive = ({
   return (
     <Slot
       className={cl({
+        className,
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,
         "navds-r-pb": paddingBlock,
