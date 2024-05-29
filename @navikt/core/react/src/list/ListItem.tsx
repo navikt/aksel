@@ -2,22 +2,11 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort, Label } from "../typography";
 import { ListContext } from "./context";
+import { ListItemProps } from "./types";
 
-export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  /**
-   * Content for description of the list item
-   */
-  children: React.ReactNode;
-  /**
-   * Title for the list item
-   */
-  title?: string;
-  /*
-   * Icon to be used as list marker for unordered lists.
-   */
-  icon?: React.ReactNode;
-}
-
+/**
+ * @see 🏷️ {@link ListItemProps}
+ */
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType, size } = useContext(ListContext);
