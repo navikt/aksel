@@ -516,7 +516,6 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
     return (
       <MenuItemImpl
         {...rest}
-        /* TODO: Should this be handled by consumer? */
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
         disabled={disabled}
@@ -582,8 +581,6 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         data-highlighted={isFocused ? "" : undefined}
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
-        /* TODO: Only for testing */
-        tabIndex={-1}
         {...rest}
         ref={composedRefs}
         /**
