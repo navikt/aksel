@@ -727,6 +727,37 @@ const MenuRadioGroup = React.forwardRef<
 export { MenuRadioGroup };
 
 /**
+ * MenuItemIndicator
+ */
+const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
+  state: CheckedState;
+}>({
+  providerName: "MenuItemIndicatorProvider",
+  hookName: "useMenuItemIndicatorContext",
+});
+
+interface MenuItemIndicatorProps extends SlottedDivProps {}
+
+const MenuItemIndicator = forwardRef<
+  SlottedDivElementRef,
+  MenuItemIndicatorProps
+>(({ asChild, ...rest }, ref) => {
+  const ctx = useMenuItemIndicatorContext();
+
+  return (
+    <SlottedDivElement
+      {...rest}
+      ref={ref}
+      data-state={getCheckedState(ctx.state)}
+      aria-hidden
+      asChild={asChild}
+    />
+  );
+});
+
+export { MenuItemIndicator };
+
+/**
  * MenuRadio
  */
 interface MenuRadioItemProps extends MenuItemProps {
@@ -740,21 +771,21 @@ const MenuRadioItem = forwardRef<
   const context = useRadioGroupContext();
   const checked = value === context.value;
 
-  /* TODO: removed indicator wrapper, fix sideeffects */
-
   return (
-    <MenuItem
-      role="menuitemradio"
-      aria-checked={checked}
-      {...rest}
-      ref={forwardedRef}
-      data-state={getCheckedState(checked)}
-      onSelect={composeEventHandlers(
-        onSelect,
-        () => context.onValueChange?.(value),
-        { checkForDefaultPrevented: false },
-      )}
-    />
+    <MenuItemIndicatorProvider state={checked}>
+      <MenuItem
+        role="menuitemradio"
+        aria-checked={checked}
+        {...rest}
+        ref={forwardedRef}
+        data-state={getCheckedState(checked)}
+        onSelect={composeEventHandlers(
+          onSelect,
+          () => context.onValueChange?.(value),
+          { checkForDefaultPrevented: false },
+        )}
+      />
+    </MenuItemIndicatorProvider>
   );
 });
 
@@ -779,20 +810,21 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
     }: MenuCheckboxItemProps,
     forwardedRef,
   ) => {
-    /* TODO: removed indicator wrapper, fix sideeffects from not automatically toggling checkmark */
     return (
-      <MenuItem
-        role="menuitemcheckbox"
-        aria-checked={isIndeterminate(checked) ? "mixed" : checked}
-        {...rest}
-        ref={forwardedRef}
-        data-state={getCheckedState(checked)}
-        onSelect={composeEventHandlers(
-          onSelect,
-          () => onCheckedChange?.(isIndeterminate(checked) ? true : !checked),
-          { checkForDefaultPrevented: false },
-        )}
-      />
+      <MenuItemIndicatorProvider state={checked}>
+        <MenuItem
+          role="menuitemcheckbox"
+          aria-checked={isIndeterminate(checked) ? "mixed" : checked}
+          {...rest}
+          ref={forwardedRef}
+          data-state={getCheckedState(checked)}
+          onSelect={composeEventHandlers(
+            onSelect,
+            () => onCheckedChange?.(isIndeterminate(checked) ? true : !checked),
+            { checkForDefaultPrevented: false },
+          )}
+        />
+      </MenuItemIndicatorProvider>
     );
   },
 );
@@ -959,7 +991,6 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 
               const contentRect = context.content?.getBoundingClientRect();
               if (contentRect) {
-                // TODO: make sure to update this when we change positioning logic
                 const side = context.content?.dataset.side as SubMenuSide;
                 const rightSide = side === "right";
                 const bleed = rightSide ? -5 : +5;

@@ -255,7 +255,6 @@ export const RadioItems = () => {
         {files.map((_file) => (
           <Menu.RadioItem key={_file} className="item" value={_file}>
             {_file}
-            <TickIcon />
           </Menu.RadioItem>
         ))}
       </Menu.RadioGroup>
@@ -572,5 +571,21 @@ export const TickIcon = () => (
     strokeWidth="3"
   >
     <path d="M2 20 L12 28 30 4" />
+  </svg>
+);
+
+export const CircleIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    width="12"
+    height="12"
+    fill="none"
+    stroke="currentcolor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="3"
+  >
+    <circle />
   </svg>
 );
