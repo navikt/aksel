@@ -10,7 +10,7 @@ import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useCallbackRef, useMergeRefs } from "../../util/hooks";
 import { DescendantsManager } from "../../util/hooks/descendants/descendant";
 
-export interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RovingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, object>;
   onEntryFocus?: (event: Event) => void;
@@ -19,7 +19,7 @@ export interface RowingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
 const ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus";
 const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
-export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
+const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
   (
     {
       children,
@@ -31,7 +31,7 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
       onBlur,
       onFocus,
       ...rest
-    }: RowingFocusProps,
+    }: RovingFocusProps,
     ref,
   ) => {
     const _ref = React.useRef<HTMLDivElement>(null);
@@ -138,3 +138,5 @@ export const RowingFocus = forwardRef<HTMLDivElement, RowingFocusProps>(
     );
   },
 );
+
+export { RovingFocus, type RovingFocusProps };

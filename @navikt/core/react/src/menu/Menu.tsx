@@ -14,7 +14,7 @@ import { createContext } from "../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 import { FocusScope } from "./parts/FocusScope";
-import { RowingFocus, RowingFocusProps } from "./parts/RowingFocus";
+import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
   SlottedDivElement,
   SlottedDivElementRef,
@@ -288,7 +288,7 @@ interface MenuContentImplProps
    * Can be prevented.
    */
   onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
-  onEntryFocus?: RowingFocusProps["onEntryFocus"];
+  onEntryFocus?: RovingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
   onFocusOutside?: DismissableLayerProps["onFocusOutside"];
@@ -384,7 +384,7 @@ const MenuContentImpl = forwardRef<
           onInteractOutside={onInteractOutside}
           onDismiss={onDismiss}
         >
-          <RowingFocus
+          <RovingFocus
             asChild
             descendants={descendants}
             onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
@@ -451,7 +451,7 @@ const MenuContentImpl = forwardRef<
                 }),
               )}
             />
-          </RowingFocus>
+          </RovingFocus>
         </DismissableLayer>
       </FocusScope>
     </MenuContentProvider>
@@ -1164,33 +1164,33 @@ Menu.ItemIndicator = MenuItemIndicator;
 
 export {
   Menu,
-  type MenuProps,
   MenuAnchor,
-  type MenuAnchorProps,
-  MenuContent,
-  type MenuContentProps,
-  MenuGroup,
-  type MenuGroupProps,
-  MenuItem,
-  type MenuItemElement,
-  MenuLabel,
-  type MenuLabelProps,
-  MenuPortal,
-  type MenuPortalProps,
-  MenuRadioGroup,
-  type MenuRadioGroupProps,
-  MenuRadioItem,
-  type MenuRadioItemProps,
-  MenuSeparator,
-  type MenuSeparatorProps,
   MenuCheckboxItem,
-  type MenuCheckboxItemProps,
-  MenuSub,
-  type MenuSubProps,
-  MenuSubContent,
-  type MenuSubContentProps,
-  MenuSubTrigger,
-  type MenuSubTriggerProps,
+  MenuContent,
+  MenuGroup,
+  MenuItem,
   MenuItemIndicator,
+  MenuLabel,
+  MenuPortal,
+  MenuRadioGroup,
+  MenuRadioItem,
+  MenuSeparator,
+  MenuSub,
+  MenuSubContent,
+  MenuSubTrigger,
+  type MenuAnchorProps,
+  type MenuCheckboxItemProps,
+  type MenuContentProps,
+  type MenuGroupProps,
+  type MenuItemElement,
   type MenuItemIndicatorProps,
+  type MenuLabelProps,
+  type MenuPortalProps,
+  type MenuProps,
+  type MenuRadioGroupProps,
+  type MenuRadioItemProps,
+  type MenuSeparatorProps,
+  type MenuSubContentProps,
+  type MenuSubProps,
+  type MenuSubTriggerProps,
 };
