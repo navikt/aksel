@@ -31,12 +31,11 @@ const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 
-export type Point = { x: number; y: number };
-export type Polygon = Point[];
-export type SubMenuSide = "left" | "right";
-export type GraceIntent = { area: Polygon; side: SubMenuSide };
-
-export type CheckedState = boolean | "indeterminate";
+type Point = { x: number; y: number };
+type Polygon = Point[];
+type SubMenuSide = "left" | "right";
+type GraceIntent = { area: Polygon; side: SubMenuSide };
+type CheckedState = boolean | "indeterminate";
 
 /**
  * Menu
@@ -64,7 +63,7 @@ interface MenuComponent extends React.FC<MenuProps> {
   SubContent: typeof MenuSubContent;
 }
 
-export const [
+const [
   MenuDescendantsProvider,
   useMenuDescendantsContext,
   useMenuDescendants,
@@ -172,8 +171,6 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
   },
 );
 
-export { MenuAnchor };
-
 /**
  * Content
  */
@@ -215,8 +212,6 @@ const MenuContent = React.forwardRef<MenuContentImplElement, MenuContentProps>(
     );
   },
 );
-
-export { MenuContent };
 
 /**
  * Non-modal content
@@ -562,8 +557,6 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
   },
 );
 
-export { MenuItem, type MenuItemElement };
-
 type MenuItemImplElement = SlottedDivElementRef;
 
 interface MenuItemImplProps extends SlottedDivProps {
@@ -637,8 +630,6 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
   },
 );
 
-export { MenuItemImpl, type MenuItemImplElement, type MenuItemImplProps };
-
 /**
  * MenuGroup
  */
@@ -651,8 +642,6 @@ const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
   },
 );
 
-export { MenuGroup };
-
 /**
  * MenuLabel
  */
@@ -663,8 +652,6 @@ const MenuLabel = forwardRef<SlottedDivElementRef, MenuLabelProps>(
     return <SlottedDivElement {...props} ref={ref} />;
   },
 );
-
-export { MenuLabel };
 
 /**
  * MenuPortal
@@ -691,8 +678,6 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
     );
   },
 );
-
-export { MenuPortal };
 
 /**
  * MenuRadio
@@ -724,8 +709,6 @@ const MenuRadioGroup = React.forwardRef<
   );
 });
 
-export { MenuRadioGroup };
-
 /**
  * MenuItemIndicator
  */
@@ -754,8 +737,6 @@ const MenuItemIndicator = forwardRef<
     />
   );
 });
-
-export { MenuItemIndicator };
 
 /**
  * MenuRadio
@@ -788,8 +769,6 @@ const MenuRadioItem = forwardRef<
     </MenuItemIndicatorProvider>
   );
 });
-
-export { MenuRadioItem };
 
 /**
  * MenuCheckbox
@@ -829,8 +808,6 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
   },
 );
 
-export { MenuCheckboxItem };
-
 /**
  * MenuSeparator
  */
@@ -849,8 +826,6 @@ const MenuSeparator = forwardRef<SlottedDivElementRef, MenuSeparatorProps>(
   },
 );
 
-export { MenuSeparator };
-
 /**
  * SubMenu
  */
@@ -861,11 +836,12 @@ type MenuSubContextValue = {
   onTriggerChange(trigger: MenuItemElement | null): void;
 };
 
-export const [MenuSubProvider, useMenuSubContext] =
-  createContext<MenuSubContextValue>({
+const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
+  {
     providerName: "MenuSubProvider",
     hookName: "useMenuSubContext",
-  });
+  },
+);
 
 interface MenuSubProps {
   children?: React.ReactNode;
@@ -912,8 +888,6 @@ const MenuSub: React.FC<MenuSubProps> = ({
     </Floating>
   );
 };
-
-export { MenuSub };
 
 /**
  * SubMenuTrigger
@@ -1045,8 +1019,6 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   },
 );
 
-export { MenuSubTrigger };
-
 /**
  * SubMenuContent
  */
@@ -1128,8 +1100,6 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
   },
 );
 
-export { MenuSubContent };
-
 /**
  * Utilities
  */
@@ -1182,8 +1152,9 @@ function whenMouse<E>(
     event.pointerType === "mouse" ? handler(event) : undefined;
 }
 
-/* Definitions */
-
+/**
+ * Dot-notation definitions
+ */
 Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;
 Menu.Content = MenuContent;
@@ -1200,18 +1171,33 @@ Menu.SubContent = MenuSubContent;
 
 export {
   Menu,
+  MenuAnchor,
   type MenuAnchorProps,
-  type MenuCheckboxItemProps,
+  MenuContent,
   type MenuContentProps,
+  MenuGroup,
   type MenuGroupProps,
-  type MenuItemProps,
+  MenuItem,
+  type MenuItemElement,
+  MenuLabel,
   type MenuLabelProps,
+  MenuPortal,
   type MenuPortalProps,
   type MenuProps,
+  MenuRadioGroup,
   type MenuRadioGroupProps,
+  MenuRadioItem,
   type MenuRadioItemProps,
+  MenuSeparator,
   type MenuSeparatorProps,
-  type MenuSubContentProps,
+  MenuCheckboxItem,
+  type MenuCheckboxItemProps,
+  MenuSub,
   type MenuSubProps,
+  MenuSubContent,
+  type MenuSubContentProps,
+  MenuSubTrigger,
   type MenuSubTriggerProps,
+  MenuItemIndicator,
+  type MenuItemIndicatorProps,
 };
