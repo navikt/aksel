@@ -61,6 +61,7 @@ interface MenuComponent extends React.FC<MenuProps> {
   Sub: typeof MenuSub;
   SubTrigger: typeof MenuSubTrigger;
   SubContent: typeof MenuSubContent;
+  ItemIndicator: typeof MenuItemIndicator;
 }
 
 const [
@@ -1159,9 +1160,11 @@ Menu.Separator = MenuSeparator;
 Menu.Sub = MenuSub;
 Menu.SubTrigger = MenuSubTrigger;
 Menu.SubContent = MenuSubContent;
+Menu.ItemIndicator = MenuItemIndicator;
 
 export {
   Menu,
+  type MenuProps,
   MenuAnchor,
   type MenuAnchorProps,
   MenuContent,
@@ -1174,7 +1177,6 @@ export {
   type MenuLabelProps,
   MenuPortal,
   type MenuPortalProps,
-  type MenuProps,
   MenuRadioGroup,
   type MenuRadioGroupProps,
   MenuRadioItem,

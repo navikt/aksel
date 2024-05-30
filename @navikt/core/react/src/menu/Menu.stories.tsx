@@ -228,7 +228,9 @@ export const CheckboxItems = () => {
           }
         >
           {option}
-          <TickIcon />
+          <Menu.ItemIndicator>
+            <TickIcon />
+          </Menu.ItemIndicator>
         </Menu.CheckboxItem>
       ))}
     </MenuWithAnchor>
@@ -255,6 +257,9 @@ export const RadioItems = () => {
         {files.map((_file) => (
           <Menu.RadioItem key={_file} className="item" value={_file}>
             {_file}
+            <Menu.ItemIndicator>
+              <CircleIcon />
+            </Menu.ItemIndicator>
           </Menu.RadioItem>
         ))}
       </Menu.RadioGroup>
@@ -516,6 +521,10 @@ const storyStyles = (
 
       &[data-disabled] {
         color: gray;
+      }
+
+      >[data-state="unchecked"]{
+        visibility: hidden;
       }
     }
 
