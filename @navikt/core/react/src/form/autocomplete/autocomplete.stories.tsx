@@ -82,6 +82,33 @@ export const Default = () => {
   );
 };
 
+export const NoLoop = () => {
+  return (
+    <>
+      <style>{`
+.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+  outline: solid 3px var(--a-border-focus);
+  border-radius: var(--a-border-radius-medium);
+}
+`}</style>
+      <Autocomplete loop={false}>
+        <MyAnchor>
+          <Autocomplete.Content>
+            <MyItem icon={<CloudIcon aria-hidden />}>cloud </MyItem>
+            <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
+            <MyItem icon={<HourglassIcon aria-hidden />}>hourglass </MyItem>
+            <MyItem icon={<HouseIcon aria-hidden />}>house </MyItem>
+            <MyItem icon={<RulerIcon aria-hidden />}>ruler </MyItem>
+            <MyItem icon={<PuzzlePieceIcon aria-hidden />}>
+              {"puzzle piece "}
+            </MyItem>
+          </Autocomplete.Content>
+        </MyAnchor>
+      </Autocomplete>
+    </>
+  );
+};
+
 const MyDropDownSearchAutocomplete = () => {
   const { value } = useAutocompleteValue();
   const anchorRef = useRef<HTMLDivElement>(null);
