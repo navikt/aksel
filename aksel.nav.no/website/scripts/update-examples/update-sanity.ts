@@ -31,10 +31,7 @@ export async function updateSanity(
       _type: "kode_eksempler_fil",
       title: folder.path,
       variant: directory,
-      filer: parseCodeFiles(folder.path, directory).map((x) => ({
-        ...x,
-        _key: x.navn.split(".")[0],
-      })),
+      filer: await parseCodeFiles(folder.path, directory),
       metadata: extractMetadata(folder.path, directory),
     };
 

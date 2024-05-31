@@ -1,4 +1,5 @@
 export type FileArrayT = {
+  _key: string;
   innhold: string;
   title: string;
   navn: string;

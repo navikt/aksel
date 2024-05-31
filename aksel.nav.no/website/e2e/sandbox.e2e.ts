@@ -3,11 +3,11 @@ import { getDirectories } from "../scripts/update-examples/parts/get-directories
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 
 test.describe("sandbox examples (all)", () => {
-  test.describe("eksempler", () => {
+  test.describe("eksempler", async () => {
     const subdirs = getDirectories("eksempler");
 
     for (const subdir of subdirs) {
-      const files = parseCodeFiles(subdir.path, "eksempler");
+      const files = await parseCodeFiles(subdir.path, "eksempler");
       for (const file of files) {
         if (!file.sandboxEnabled) {
           continue;

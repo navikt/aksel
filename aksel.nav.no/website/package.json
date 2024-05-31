@@ -82,6 +82,7 @@
     "@playwright/test": "1.35.1",
     "@sanity/block-tools": "3.41.1",
     "@sanity/schema": "3.41.1",
+    "@types/jscodeshift": "^0.11.11",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.0",

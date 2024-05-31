@@ -3241,18 +3241,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:^2.0.9":
-  version: 2.0.9
-  resolution: "@floating-ui/react-dom@npm:2.0.9"
-  dependencies:
-    "@floating-ui/dom": ^1.0.0
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: f7a05c90955c713fc2851f74f87bdde9bd91df5f264f061f489bd3b6ce74c78dda204c3e71a09adc56b64f5324f2c2f23c01382e5ec897ee7e8e5235c41b45a9
-  languageName: node
-  linkType: hard
-
 "@floating-ui/react@npm:0.25.4":
   version: 0.25.4
   resolution: "@floating-ui/react@npm:0.25.4"
@@ -3835,7 +3823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.8.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.10.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3863,8 +3851,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-css": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3879,7 +3867,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.8.0
+    "@navikt/ds-css": 6.10.0
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3900,11 +3888,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.8.0, @navikt/ds-css@^6.8.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.10.0, @navikt/ds-css@^6.10.0, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-tokens": ^6.10.0
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3917,14 +3905,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.8.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.10.0, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
     "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/aksel-icons": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
     "@testing-library/dom": 9.3.4
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^15.0.7
@@ -3954,11 +3942,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^6.8.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.10.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-tokens": ^6.10.0
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3968,7 +3956,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.8.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.10.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -7088,6 +7076,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jscodeshift@npm:^0.11.11":
+  version: 0.11.11
+  resolution: "@types/jscodeshift@npm:0.11.11"
+  dependencies:
+    ast-types: ^0.14.1
+    recast: ^0.20.3
+  checksum: 6224b781cbbc8e095cae3cb8f9dd1ca102d6c42d9c882b76ea84dfd0cd43870ce317369480ed6b593352efe9fe7199bd6c40ec2cb37646c474ba15f5b43d2109
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:*, @types/json-schema@npm:^7.0.12, @types/json-schema@npm:^7.0.15, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -8524,11 +8522,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.8.0
-    "@navikt/ds-css": ^6.8.0
-    "@navikt/ds-react": ^6.8.0
-    "@navikt/ds-tailwind": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/aksel-icons": ^6.10.0
+    "@navikt/ds-css": ^6.10.0
+    "@navikt/ds-react": ^6.10.0
+    "@navikt/ds-tailwind": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
   languageName: unknown
   linkType: soft
 
@@ -9033,6 +9031,15 @@ __metadata:
   version: 0.0.8
   resolution: "ast-types-flow@npm:0.0.8"
   checksum: 0a64706609a179233aac23817837abab614f3548c252a2d3d79ea1e10c74aa28a0846e11f466cf72771b6ed8713abc094dcf8c40c3ec4207da163efa525a94a8
+  languageName: node
+  linkType: hard
+
+"ast-types@npm:0.14.2, ast-types@npm:^0.14.1":
+  version: 0.14.2
+  resolution: "ast-types@npm:0.14.2"
+  dependencies:
+    tslib: ^2.0.1
+  checksum: 8674a77307764979f0a0b2006b7223a4b789abffaa7acbf6a1132650a799252155170173a1ff6a7fb6897f59437fc955f2707bdfc391b0797750898876e6c9ed
   languageName: node
   linkType: hard
 
@@ -23286,6 +23293,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"recast@npm:^0.20.3":
+  version: 0.20.5
+  resolution: "recast@npm:0.20.5"
+  dependencies:
+    ast-types: 0.14.2
+    esprima: ~4.0.0
+    source-map: ~0.6.1
+    tslib: ^2.0.1
+  checksum: 14c35115cd9965950724cb2968f069a247fa79ce890643ab6dc3795c705b363f7b92a45238e9f765387c306763be9955f72047bb9d15b5d60b0a55f9e7912d5a
+  languageName: node
+  linkType: hard
+
 "recast@npm:^0.23.3, recast@npm:^0.23.5":
   version: 0.23.6
   resolution: "recast@npm:0.23.6"
@@ -28302,6 +28321,7 @@ __metadata:
     "@sanity/table": 1.1.2
     "@sanity/vision": 3.41.1
     "@slack/web-api": ^7.0.2
+    "@types/jscodeshift": ^0.11.11
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     autoprefixer: ^10.4.0

@@ -84,7 +84,7 @@ module.exports = {
     {
       files: [
         "aksel.nav.no/website/pages/eksempler/**/*.tsx",
-        "aksel.nav.no/website/pages/templates/**/*.tsx",
+        "aksel.nav.no/website/pages/templates/!(__parts)**/*.tsx",
       ],
       plugins: ["aksel-local"],
       rules: {

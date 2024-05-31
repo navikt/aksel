@@ -53,7 +53,7 @@ const sbConfig: StorybookConfig = {
     "../**/*.mdx",
     "../**/*.stories.@(ts|tsx)",
     "../pages/eksempler/**/*.tsx",
-    "../pages/templates/**/*.tsx",
+    "../pages/templates/!(__parts)*/*.tsx",
   ],
   addons: [
     "@storybook/addon-essentials",

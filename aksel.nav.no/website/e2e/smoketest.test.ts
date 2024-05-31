@@ -26,7 +26,7 @@ test.describe("Smoketest all pages", () => {
     });
   }
 
-  test.describe("sandbox examples (just a few)", () => {
+  test.describe("sandbox examples (just a few)", async () => {
     const examples = getDirectories("eksempler");
 
     const folders = [...examples];
@@ -34,7 +34,7 @@ test.describe("Smoketest all pages", () => {
     const randomFolders = [folders[0], folders[20], folders[50]];
 
     for (const folder of randomFolders) {
-      const files = parseCodeFiles(folder.path, "eksempler");
+      const files = await parseCodeFiles(folder.path, "eksempler");
 
       const file = files[0];
       if (!file?.sandboxEnabled) {
