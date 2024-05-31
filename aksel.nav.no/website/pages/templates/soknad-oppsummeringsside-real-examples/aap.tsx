@@ -93,7 +93,7 @@ function Example() {
               </FormSummary.Answer>
               <FormSummary.Answer>
                 <FormSummary.Label>Personnummer</FormSummary.Label>
-                <FormSummary.Value>12345678912</FormSummary.Value>
+                <FormSummary.Value>123456 78912</FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
                 <FormSummary.Label>Folkeregistrert adresse</FormSummary.Label>
