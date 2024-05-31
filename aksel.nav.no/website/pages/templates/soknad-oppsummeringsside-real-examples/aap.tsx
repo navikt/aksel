@@ -41,14 +41,9 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <VStack gap="1">
-                <BodyShort size="small">
-                  NAV 10-07.03 (Om søknaden har ID)
-                </BodyShort>
-                <Heading level="1" size="large">
-                  Søknad om [ytelse]
-                </Heading>
-              </VStack>
+              <Heading level="1" size="large">
+                Søknad om arbeidsavklaringspenger (AAP)
+              </Heading>
             </Stack>
           </Bleed>
 
@@ -61,9 +56,15 @@ function Example() {
                 Oppsummering
               </Heading>
             </Box>
-            <FormProgress activeStep={3} totalSteps={3}>
+            <FormProgress activeStep={9} totalSteps={9}>
               <FormProgress.Step href="#">Steg 1</FormProgress.Step>
               <FormProgress.Step href="#">Steg 2</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 3</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 4</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 5</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 6</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 7</FormProgress.Step>
+              <FormProgress.Step href="#">Steg 8</FormProgress.Step>
               <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
             </FormProgress>
           </div>
@@ -88,7 +89,7 @@ function Example() {
             <FormSummary.Answers>
               <FormSummary.Answer>
                 <FormSummary.Label>Navn</FormSummary.Label>
-                <FormSummary.Value>Anakin Skywalker</FormSummary.Value>
+                <FormSummary.Value>Luke Skywalker</FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
                 <FormSummary.Label>Personnummer</FormSummary.Label>
@@ -97,18 +98,99 @@ function Example() {
               <FormSummary.Answer>
                 <FormSummary.Label>Folkeregistrert adresse</FormSummary.Label>
                 <FormSummary.Value>
-                  Tulleveien 1337
-                  <br />
-                  0472 Oslo
+                  Tulleveien 239A, 0472 Oslo
                 </FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
-                <FormSummary.Label>Telefon</FormSummary.Label>
-                <FormSummary.Value>90 90 90 90</FormSummary.Value>
+                <FormSummary.Label>Telefonnummer</FormSummary.Label>
+                <FormSummary.Value>12 34 56 78</FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
                 <FormSummary.Label>E-postadresse</FormSummary.Label>
-                <FormSummary.Value>mail@tull.tøys</FormSummary.Value>
+                <FormSummary.Value>mail@nomail.example</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">Startdato</FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>Har du sykepenger nå?</FormSummary.Label>
+                <FormSummary.Value>Ja</FormSummary.Value>
+              </FormSummary.Answer>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Har du planer om å ta ferie før du er ferdig med sykepenger?
+                </FormSummary.Label>
+                <FormSummary.Value>Nei</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">
+                Bosted og jobb
+              </FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Har du bodd sammenhengende i Norge de fem siste årene?
+                </FormSummary.Label>
+                <FormSummary.Value>Ja</FormSummary.Value>
+              </FormSummary.Answer>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Har du jobbet utenfor Norge de fem siste årene?
+                </FormSummary.Label>
+                <FormSummary.Value>Nei</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">Yrkesskade</FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Har du en yrkessykdom eller yrkesskade som påvirker hvor mye
+                  du kan jobbe?
+                </FormSummary.Label>
+                <FormSummary.Value>Nei</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">
+                Kontaktperson for helseopplysninger
+              </FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>Fastlege</FormSummary.Label>
+                <FormSummary.Value>
+                  Navn: Sonja Paracet Plastersen
+                  <br />
+                  Legekontor: Andeby legekontor
+                  <br />
+                  Adresse: Skogveien 17, 1234 Andeby
+                  <br />
+                  Telefon: 99 99 99 99
+                  <br />
+                  Er informasjonen om fastlegen din riktig? Ja
+                </FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
           </FormSummary>
@@ -125,11 +207,11 @@ function Example() {
                   <FormSummary.Answers>
                     <FormSummary.Answer>
                       <FormSummary.Label>Navn</FormSummary.Label>
-                      <FormSummary.Value>Luke Skywalker</FormSummary.Value>
+                      <FormSummary.Value>Embla Bakke Li</FormSummary.Value>
                     </FormSummary.Answer>
                     <FormSummary.Answer>
                       <FormSummary.Label>Fødselsdato</FormSummary.Label>
-                      <FormSummary.Value>19 BBY</FormSummary.Value>
+                      <FormSummary.Value>08.03.2023</FormSummary.Value>
                     </FormSummary.Answer>
                   </FormSummary.Answers>
                 </FormSummary.Value>
@@ -140,14 +222,64 @@ function Example() {
                   <FormSummary.Answers>
                     <FormSummary.Answer>
                       <FormSummary.Label>Navn</FormSummary.Label>
-                      <FormSummary.Value>Leia Organa</FormSummary.Value>
+                      <FormSummary.Value>Jonas Li Ibux</FormSummary.Value>
                     </FormSummary.Answer>
                     <FormSummary.Answer>
                       <FormSummary.Label>Fødselsdato</FormSummary.Label>
-                      <FormSummary.Value>19 BBY</FormSummary.Value>
+                      <FormSummary.Value>08.03.2022</FormSummary.Value>
                     </FormSummary.Answer>
                   </FormSummary.Answers>
                 </FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">Student</FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>Er du student?</FormSummary.Label>
+                <FormSummary.Value>Nei</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">Utbetalinger</FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Har du fått eller skal du få ekstra utbetalinger fra
+                  arbeidsgiver?
+                </FormSummary.Label>
+                <FormSummary.Value>Nei</FormSummary.Value>
+              </FormSummary.Answer>
+              <FormSummary.Answer>
+                <FormSummary.Label>
+                  Kryss av for utbetalinger du får, eller nylig har søkt om:
+                </FormSummary.Label>
+                <FormSummary.Value>Ingen av disse</FormSummary.Value>
+              </FormSummary.Answer>
+            </FormSummary.Answers>
+          </FormSummary>
+
+          <FormSummary>
+            <FormSummary.Header>
+              <FormSummary.Heading level="2">
+                Vedlegg og tilleggsopplysninger
+              </FormSummary.Heading>
+              <FormSummary.EditLink href="#" />
+            </FormSummary.Header>
+            <FormSummary.Answers>
+              <FormSummary.Answer>
+                <FormSummary.Label>Vedlegg</FormSummary.Label>
+                <FormSummary.Value>Ingen vedlegg</FormSummary.Value>
               </FormSummary.Answer>
             </FormSummary.Answers>
           </FormSummary>
@@ -350,4 +482,5 @@ export const Demo = {
 export const args = {
   index: 0,
   sandbox: false,
+  title: "AAP",
 };
