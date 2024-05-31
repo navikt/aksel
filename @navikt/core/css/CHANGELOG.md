@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.10.0
+
+### Minor Changes
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
 ## 6.9.0
 
 ### Patch Changes

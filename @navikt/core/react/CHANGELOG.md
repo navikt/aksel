@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.10.0
+
+### Minor Changes
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.10.0
+  - @navikt/aksel-icons@6.10.0
+
 ## 6.9.0
 
 ### Patch Changes
