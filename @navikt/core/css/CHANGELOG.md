@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 6.9.0
+
+### Patch Changes
+
+- Increased padding size for contentBlockPadding on the Page primitive to 4 rem to reflect docs/Figma ([#2876](https://github.com/navikt/aksel/pull/2876))
+
+- Fixed Combobox small sizing to align with other form fields ([#2801](https://github.com/navikt/aksel/pull/2801))
+
 ## 6.8.0
 
 ### Minor Changes

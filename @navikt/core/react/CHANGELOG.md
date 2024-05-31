@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 6.9.0
+
+### Patch Changes
+
+- :bug: Modal: Fix issue where polyfill-classname was not applied when using SSR (Next.js) ([#2954](https://github.com/navikt/aksel/pull/2954))
+
+- Combobox: Improved performance when parsing 1k or more options. ([#2937](https://github.com/navikt/aksel/pull/2937))
+
+- Stepper: Removed unsafe_index prop. ([#2926](https://github.com/navikt/aksel/pull/2926))
+
+- Added options row-reverse and column-reverse to direction prop on Stack. Should only be used with caution. ([#2876](https://github.com/navikt/aksel/pull/2876))
+
+- Updated dependencies [[`1f3df8ad9`](https://github.com/navikt/aksel/commit/1f3df8ad9361bb18c51cdfcef441900bd73f1c1a)]:
+  - @navikt/aksel-icons@6.9.0
+  - @navikt/ds-tokens@6.9.0
+
 ## 6.8.0
 
 ### Minor Changes
