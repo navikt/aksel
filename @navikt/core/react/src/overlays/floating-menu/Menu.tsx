@@ -6,13 +6,13 @@ import React, {
   useState,
 } from "react";
 import ReactDOM from "react-dom";
-import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { Floating } from "../overlays/floating/Floating";
-import { Portal } from "../portal";
-import { composeEventHandlers } from "../util/composeEventHandlers";
-import { createContext } from "../util/create-context";
-import { useCallbackRef, useId, useMergeRefs } from "../util/hooks";
-import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
+import { Portal } from "../../portal";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
+import { createContext } from "../../util/create-context";
+import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
+import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
+import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
+import { Floating } from "../floating/Floating";
 import { FocusScope } from "./parts/FocusScope";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {

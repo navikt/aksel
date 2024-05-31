@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu } from "./Menu";
 
 export default {
-  title: "Utilities/Menu",
+  title: "Utilities/FloatingMenu",
   excludeStories: ["TickIcon", "classes"],
   decorators: [
     (Story) => (
