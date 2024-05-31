@@ -61,6 +61,9 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
   const descendants = useAutocompleteDescendants();
   const [value, setValue] = useState("");
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
+
+  const to_blur = descendants.item(virtualFocusIdx);
+  const to_focus = descendants.item(0);
   return (
     <AutocompleteInternalContextProvider
       virtualFocusIdx={virtualFocusIdx}
@@ -72,6 +75,10 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
             onChange={(event) => {
               // assumption: there is a bubbling onChange from an input inside Anchor
               setValue((event.target as HTMLInputElement).value);
+              if (to_focus?.node) {
+                set_virtual_focus(to_focus.node, to_blur?.node);
+              }
+              setVirtualFocusIdx(0);
             }}
           >
             {children}
