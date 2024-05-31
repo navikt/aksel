@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.10
+
+### @navikt/ds-css
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
+### @navikt/ds-react
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
 ## 6.9
 
 ### @navikt/ds-css
