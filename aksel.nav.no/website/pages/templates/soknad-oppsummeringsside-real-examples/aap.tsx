@@ -181,11 +181,11 @@ function Example() {
               <FormSummary.Answer>
                 <FormSummary.Label>Fastlege</FormSummary.Label>
                 <FormSummary.Value>
-                  Sonja Paracet Plastersen
+                  Navn: Sonja Paracet Plastersen
                   <br />
-                  Andeby legekontor
+                  Legekontor: Andeby legekontor
                   <br />
-                  Skogveien 17, 1234 Andeby
+                  Adresse: Skogveien 17, 1234 Andeby
                   <br />
                   Telefon: 99 99 99 99
                   <br />
