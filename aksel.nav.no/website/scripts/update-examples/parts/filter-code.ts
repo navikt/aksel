@@ -32,9 +32,9 @@ export async function filterCode(code: string, filePath: string) {
 }
 
 /**
- * Scans the code for imports from ../__parts or ../__parts-inline, inlines the imported code and removes the imports.
- * NB: Files in __parts should only contain an arrow function with implicit return.
- * NB: Files in __parts-inline should only contain code that is used in all files that import it.
+ * Scans the code for imports from ../__parts-inline or ../__parts, inlines the imported code and removes the imports.
+ * NB: Files in __parts-inline should only contain an arrow function with implicit return.
+ * NB: Files in __parts should only contain code that is used in all files that import it.
  * See comments bellow for details.
  */
 async function injectImportedCode(code: string, filePath: string) {
