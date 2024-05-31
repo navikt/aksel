@@ -55,9 +55,19 @@ const [AutocompleteInternalContextProvider, useAutocompleteInternalContext] =
   createContext<{
     virtualFocusIdx: number;
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
+    loop: boolean;
   }>();
 
-export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
+type Props = {
+  children: React.ReactNode;
+  /**
+   * Whether to cause focus to loop around when it hits the first or last element
+   * @default true
+   **/
+  loop?: boolean;
+};
+
+export const Autocomplete = ({ children, loop = true }: Props) => {
   const descendants = useAutocompleteDescendants();
   const [value, setValue] = useState("");
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
@@ -68,6 +78,7 @@ export const Autocomplete = ({ children }: { children: React.ReactNode }) => {
     <AutocompleteInternalContextProvider
       virtualFocusIdx={virtualFocusIdx}
       setVirtualFocusIdx={setVirtualFocusIdx}
+      loop={loop}
     >
       <AutocompleteContextProvider value={value} setValue={setValue}>
         <AutocompleteDescendantsProvider value={descendants}>
@@ -114,7 +125,7 @@ export const AutocompleteAnchor = forwardRef<
       pick();
     },
   });
-  const { virtualFocusIdx, setVirtualFocusIdx } =
+  const { virtualFocusIdx, setVirtualFocusIdx, loop } =
     useAutocompleteInternalContext();
 
   const mergedRefs = useMergeRefs(ref, register);
@@ -134,7 +145,7 @@ export const AutocompleteAnchor = forwardRef<
         if (event.key === "ArrowDown") {
           event.preventDefault();
           const curr = descendants.item(virtualFocusIdx);
-          const next = descendants.next(virtualFocusIdx);
+          const next = descendants.next(virtualFocusIdx, loop);
           if (next?.handleVirtualOnFocus && curr?.node) {
             next.handleVirtualOnFocus(next.node, curr.node);
             setVirtualFocusIdx(next.index);
@@ -142,7 +153,7 @@ export const AutocompleteAnchor = forwardRef<
         } else if (event.key === "ArrowUp") {
           event.preventDefault();
           const curr = descendants.item(virtualFocusIdx);
-          const prev = descendants.prev(virtualFocusIdx);
+          const prev = descendants.prev(virtualFocusIdx, loop);
           if (prev?.handleVirtualOnFocus && curr?.node) {
             prev.handleVirtualOnFocus(prev.node, curr?.node);
             setVirtualFocusIdx(prev.index);
