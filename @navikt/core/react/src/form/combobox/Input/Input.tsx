@@ -20,7 +20,16 @@ interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, ...rest }, ref) => {
-    const { clearInput, inputProps, onChange, size, value } = useInputContext();
+    const {
+      clearInput,
+      inputProps,
+      updateInputValue,
+      onChange,
+      size,
+      value,
+      searchTerm,
+      setValue,
+    } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
@@ -132,16 +141,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (activeDecendantId || value) {
             e.preventDefault();
           }
+        } else if (["ArrowLeft", "ArrowUp", "ArrowRight"].includes(e.key)) {
+          onChange(e);
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
-          if (e.target.selectionStart === value?.length) {
-            e.preventDefault();
-            if (virtualFocus.activeElement === null || !isListOpen) {
-              toggleIsListOpen(true);
-            }
-            virtualFocus.moveFocusDown();
+          if (e.target.selectionStart) {
+            setValue(searchTerm);
           }
+          if (virtualFocus.activeElement === null || !isListOpen) {
+            toggleIsListOpen(true);
+          }
+          virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
@@ -155,14 +166,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         }
       },
       [
+        setIsMouseLastUsedInputDevice,
         value,
         selectedOptions,
         removeSelectedOption,
-        isListOpen,
         activeDecendantId,
-        setIsMouseLastUsedInputDevice,
-        toggleIsListOpen,
+        onChange,
         virtualFocus,
+        isListOpen,
+        setValue,
+        searchTerm,
+        toggleIsListOpen,
       ],
     );
 
@@ -188,6 +202,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
         onChange={onChangeHandler}
+        onClick={() => value && updateInputValue(value)}
         type="text"
         role="combobox"
         onKeyUp={handleKeyUp}

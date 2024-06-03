@@ -18,6 +18,7 @@ interface InputContextValue extends FormFieldType {
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
   setValue: (text: string) => void;
+  updateInputValue: (newValue: string) => void;
   onChange: ChangeEventHandler<HTMLInputElement>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
@@ -67,14 +68,20 @@ const InputProvider = ({ children, value: props }) => {
 
   const [searchTerm, setSearchTerm] = useState(value);
 
-  const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.currentTarget.value;
+  const updateInputValue = useCallback(
+    (newValue: string) => {
       externalValue ?? setInternalValue(newValue);
-      externalOnChange?.(event);
       setSearchTerm(newValue);
     },
-    [externalValue, externalOnChange],
+    [externalValue],
+  );
+
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      updateInputValue(event.target.value);
+      externalOnChange?.(event);
+    },
+    [updateInputValue, externalOnChange],
   );
 
   const setValue = useCallback(
@@ -106,6 +113,7 @@ const InputProvider = ({ children, value: props }) => {
 
   const contextValue = {
     ...formFieldProps,
+    updateInputValue,
     clearInput,
     error,
     focusInput,

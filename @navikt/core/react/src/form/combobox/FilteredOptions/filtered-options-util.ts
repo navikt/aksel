@@ -4,10 +4,15 @@ const normalizeText = (text: string): string =>
   typeof text === "string" ? text.toLocaleLowerCase().trim() : "";
 
 const isPartOfText = (value: string, text: string) =>
-  normalizeText(text).startsWith(normalizeText(value ?? ""));
+  normalizeText(text).includes(normalizeText(value ?? ""));
 
 const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
   list.filter((listItem) => isPartOfText(value, listItem.label));
+
+const getValuesStartingWith = (text: string, list: ComboboxOption[]) =>
+  list.find((listItem) =>
+    normalizeText(listItem.label).startsWith(normalizeText(text)),
+  );
 
 const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
@@ -37,4 +42,5 @@ export default {
   getIsLoadingId,
   getNoHitsId,
   getMaxSelectedOptionsId,
+  getValuesStartingWith,
 };
