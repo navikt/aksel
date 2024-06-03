@@ -67,7 +67,18 @@ type Props = {
   loop?: boolean;
 };
 
-export const Autocomplete = ({ children, loop = true }: Props) => {
+// set aria-activedescendant
+// role=listbox
+//
+// rename this Autocomplete -> VirtualFocus
+// remove the value, setValue from it (user defined behaviour / control)
+//
+// videre:
+// 1. use this <VirtualFocus> inside other stuff we have (as a demo / dogfood)
+//   - Combobox
+//   - Search (prop for autocomplete on <Search>)
+// 2. release it publicly?
+export const VirtualFocus = ({ children, loop = true }: Props) => {
   const descendants = useAutocompleteDescendants();
   const [value, setValue] = useState("");
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
@@ -235,8 +246,8 @@ export const AutocompleteItem = ({
   );
 };
 
-Autocomplete.Anchor = AutocompleteAnchor;
-Autocomplete.Item = AutocompleteItem;
-Autocomplete.Content = AutocompleteContent;
+VirtualFocus.Anchor = AutocompleteAnchor;
+VirtualFocus.Item = AutocompleteItem;
+VirtualFocus.Content = AutocompleteContent;
 
-export default Autocomplete;
+export default VirtualFocus;

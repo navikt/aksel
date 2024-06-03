@@ -10,11 +10,11 @@ import {
 } from "@navikt/aksel-icons";
 import { Popover } from "../../popover";
 import { Search } from "../search";
-import { Autocomplete, useAutocompleteValue } from "./Autocomplete";
+import { VirtualFocus, useAutocompleteValue } from "./Autocomplete";
 
 export default {
   title: "Utilities/Autocomplete",
-  component: Autocomplete,
+  component: VirtualFocus,
 } as Meta;
 
 const MyAnchor = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
@@ -22,7 +22,7 @@ const MyAnchor = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
     const { value } = useAutocompleteValue();
     return (
       <div style={{ position: "relative" }}>
-        <Autocomplete.Anchor
+        <VirtualFocus.Anchor
           ref={ref}
           pick={() => {
             console.log(`pick(): searching for ${value}`);
@@ -33,7 +33,7 @@ const MyAnchor = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
             autoComplete="off"
             value={value}
           />
-        </Autocomplete.Anchor>
+        </VirtualFocus.Anchor>
         {children}
       </div>
     );
@@ -42,7 +42,8 @@ const MyAnchor = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
 const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
   const { setValue } = useAutocompleteValue();
   return (
-    <Autocomplete.Item
+    <VirtualFocus.Item
+      // rename focus -> onActive
       focus={() => {
         setValue(children);
       }}
@@ -51,7 +52,7 @@ const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
         {icon}
         <span>{children}</span>
       </span>
-    </Autocomplete.Item>
+    </VirtualFocus.Item>
   );
 };
 
@@ -64,9 +65,9 @@ export const Default = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <Autocomplete>
+      <VirtualFocus>
         <MyAnchor>
-          <Autocomplete.Content>
+          <VirtualFocus.Content>
             <MyItem icon={<CloudIcon aria-hidden />}>cloud </MyItem>
             <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
             <MyItem icon={<HourglassIcon aria-hidden />}>hourglass </MyItem>
@@ -75,9 +76,9 @@ export const Default = () => {
             <MyItem icon={<PuzzlePieceIcon aria-hidden />}>
               {"puzzle piece "}
             </MyItem>
-          </Autocomplete.Content>
+          </VirtualFocus.Content>
         </MyAnchor>
-      </Autocomplete>
+      </VirtualFocus>
     </>
   );
 };
@@ -91,9 +92,9 @@ export const NoLoop = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <Autocomplete loop={false}>
+      <VirtualFocus loop={false}>
         <MyAnchor>
-          <Autocomplete.Content>
+          <VirtualFocus.Content>
             <MyItem icon={<CloudIcon aria-hidden />}>cloud </MyItem>
             <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
             <MyItem icon={<HourglassIcon aria-hidden />}>hourglass </MyItem>
@@ -102,9 +103,9 @@ export const NoLoop = () => {
             <MyItem icon={<PuzzlePieceIcon aria-hidden />}>
               {"puzzle piece "}
             </MyItem>
-          </Autocomplete.Content>
+          </VirtualFocus.Content>
         </MyAnchor>
-      </Autocomplete>
+      </VirtualFocus>
     </>
   );
 };
@@ -141,10 +142,10 @@ const MyDropDownSearchAutocomplete = () => {
     },
   ];
 
-  // const filteredItems = items.filter((i) =>
-  //   i.text.trim().toLowerCase().startsWith(value.trim().toLowerCase()),
-  // );
-  const filteredItems = items;
+  const filteredItems = items.filter((i) =>
+    i.text.trim().toLowerCase().startsWith(value.trim().toLowerCase()),
+  );
+  // const filteredItems = items;
 
   return (
     <>
@@ -171,7 +172,7 @@ const MyDropDownSearchAutocomplete = () => {
           offset={0}
           placement="bottom"
         >
-          <Autocomplete.Content>
+          <VirtualFocus.Content>
             <Popover.Content>
               {filteredItems.map((i) => {
                 return (
@@ -181,7 +182,7 @@ const MyDropDownSearchAutocomplete = () => {
                 );
               })}
             </Popover.Content>
-          </Autocomplete.Content>
+          </VirtualFocus.Content>
         </Popover>
       </MyAnchor>
     </>
@@ -191,9 +192,9 @@ const MyDropDownSearchAutocomplete = () => {
 export const WithPopoverAndFiltering = () => {
   return (
     <div>
-      <Autocomplete>
+      <VirtualFocus>
         <MyDropDownSearchAutocomplete />
-      </Autocomplete>
+      </VirtualFocus>
     </div>
   );
 };
