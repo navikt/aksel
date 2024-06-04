@@ -106,10 +106,11 @@ const FilteredOptionsProvider = ({
   }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
-    const autoCompleteCandidate = filteredOptionsUtils.getValuesStartingWith(
-      searchTerm,
-      filteredOptions,
-    )?.label;
+    const autoCompleteCandidate =
+      filteredOptionsUtils.getFirstValueStartingWith(
+        searchTerm,
+        filteredOptions,
+      )?.label;
     if (
       shouldAutocomplete &&
       autoCompleteCandidate &&

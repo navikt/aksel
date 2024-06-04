@@ -44,5 +44,5 @@ export default {
   getIsLoadingId,
   getNoHitsId,
   getMaxSelectedOptionsId,
-  getValuesStartingWith,
+  getFirstValueStartingWith,
 };
