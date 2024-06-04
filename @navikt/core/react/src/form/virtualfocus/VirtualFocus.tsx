@@ -64,8 +64,6 @@ type Props = {
 // set aria-activedescendant
 // role=listbox
 //
-// remove the value, setValue from it (user defined behaviour / control)
-//
 // videre:
 // 1. use this <VirtualFocus> inside other stuff we have (as a demo / dogfood)
 //   - Combobox
@@ -75,8 +73,6 @@ export const VirtualFocus = ({ children, loop = true }: Props) => {
   const descendants = useAutocompleteDescendants();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
-  const to_blur = descendants.item(virtualFocusIdx);
-  const to_focus = descendants.item(0);
   return (
     <AutocompleteInternalContextProvider
       virtualFocusIdx={virtualFocusIdx}
@@ -84,18 +80,7 @@ export const VirtualFocus = ({ children, loop = true }: Props) => {
       loop={loop}
     >
       <AutocompleteDescendantsProvider value={descendants}>
-        <div
-          onChange={(event) => {
-            // assumption: there is a bubbling onChange from an input inside Anchor
-            setValue((event.target as HTMLInputElement).value);
-            if (to_focus?.node) {
-              set_virtual_focus(to_focus.node, to_blur?.node);
-            }
-            setVirtualFocusIdx(0);
-          }}
-        >
-          {children}
-        </div>
+        {children}
       </AutocompleteDescendantsProvider>
     </AutocompleteInternalContextProvider>
   );
@@ -108,17 +93,22 @@ export interface AutocompleteAnchorProps
    * is to be picked (eg. do an actual search, change route)
    */
   pick: () => void;
+  /**
+   * The function that is run when the element gets
+   * virtual focus set to it.
+   */
+  onActive: () => void;
   children: React.ReactNode;
 }
 
 export const AutocompleteAnchor = forwardRef<
   HTMLDivElement,
   AutocompleteAnchorProps
->(({ children, pick }, ref) => {
+>(({ children, pick, onActive }, ref) => {
   const { register, descendants } = useAutocompleteDescendant({
     handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
       set_virtual_focus(node_to_focus, node_to_blur);
-      setValue(""); // TODO: might want to let user define this instead (focus function on Anchor)
+      onActive();
     },
     handlePick: () => {
       pick();

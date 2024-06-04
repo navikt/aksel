@@ -46,6 +46,9 @@ const MyAnchor = forwardRef<
         pick={() => {
           console.log(`pick(): searching for ${value}`);
         }}
+        onActive={() => {
+          setValue(" ");
+        }}
       >
         <Search
           label="Søk på nav sine sider"
