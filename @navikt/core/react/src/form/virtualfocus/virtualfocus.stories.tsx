@@ -1,5 +1,12 @@
 import { Meta } from "@storybook/react";
-import React, { ReactNode, forwardRef, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  forwardRef,
+  useRef,
+  useState,
+} from "react";
 import {
   CloudIcon,
   HangerIcon,
@@ -10,37 +17,63 @@ import {
 } from "@navikt/aksel-icons";
 import { Popover } from "../../popover";
 import { Search } from "../search";
-import { VirtualFocus, useAutocompleteValue } from "./Autocomplete";
+import { VirtualFocus, useAutocompleteDescendants } from "./VirtualFocus";
+import { set_virtual_focus } from "./utils";
 
 export default {
-  title: "Utilities/Autocomplete",
+  title: "Utilities/VirtualFocus",
   component: VirtualFocus,
 } as Meta;
 
-const MyAnchor = forwardRef<HTMLDivElement, { children: React.ReactNode }>(
-  ({ children }, ref) => {
-    const { value } = useAutocompleteValue();
-    return (
-      <div style={{ position: "relative" }}>
-        <VirtualFocus.Anchor
-          ref={ref}
-          pick={() => {
-            console.log(`pick(): searching for ${value}`);
+const MyAnchor = forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    value: string;
+    setValue: Dispatch<SetStateAction<string>>;
+  }
+>(({ children, value, setValue }, ref) => {
+  const descendants = useAutocompleteDescendants();
+  const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
+
+  const to_blur = descendants.item(virtualFocusIdx);
+  const to_focus = descendants.item(0);
+
+  return (
+    <div style={{ position: "relative" }}>
+      <VirtualFocus.Anchor
+        ref={ref}
+        pick={() => {
+          console.log(`pick(): searching for ${value}`);
+        }}
+      >
+        <Search
+          label="Søk på nav sine sider"
+          autoComplete="off"
+          value={value}
+          onChange={(current_input) => {
+            console.log({ current_input });
+            setValue(current_input);
+            if (to_focus?.node) {
+              set_virtual_focus(to_focus.node, to_blur?.node);
+            }
+            setVirtualFocusIdx(0);
           }}
-        >
-          <Search
-            label="Søk på nav sine sider"
-            autoComplete="off"
-            value={value}
-          />
-        </VirtualFocus.Anchor>
-        {children}
-      </div>
-    );
-  },
-);
-const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
-  const { setValue } = useAutocompleteValue();
+        />
+      </VirtualFocus.Anchor>
+      {children}
+    </div>
+  );
+});
+const MyItem = ({
+  children,
+  icon,
+  setValue,
+}: {
+  children: string;
+  icon: ReactNode;
+  setValue: Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <VirtualFocus.Item
       // rename focus -> onActive
@@ -57,6 +90,8 @@ const MyItem = ({ children, icon }: { children: string; icon: ReactNode }) => {
 };
 
 export const Default = () => {
+  const [value, setValue] = useState("");
+
   return (
     <>
       <style>{`
@@ -66,14 +101,24 @@ export const Default = () => {
 }
 `}</style>
       <VirtualFocus>
-        <MyAnchor>
+        <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
-            <MyItem icon={<CloudIcon aria-hidden />}>cloud </MyItem>
-            <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
-            <MyItem icon={<HourglassIcon aria-hidden />}>hourglass </MyItem>
-            <MyItem icon={<HouseIcon aria-hidden />}>house </MyItem>
-            <MyItem icon={<RulerIcon aria-hidden />}>ruler </MyItem>
-            <MyItem icon={<PuzzlePieceIcon aria-hidden />}>
+            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+              {"cloud "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+              {"hanger "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
+              {"hourglass "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
+              {"house "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
+              {"ruler "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<PuzzlePieceIcon aria-hidden />}>
               {"puzzle piece "}
             </MyItem>
           </VirtualFocus.Content>
@@ -84,6 +129,7 @@ export const Default = () => {
 };
 
 export const NoLoop = () => {
+  const [value, setValue] = useState("");
   return (
     <>
       <style>{`
@@ -93,14 +139,24 @@ export const NoLoop = () => {
 }
 `}</style>
       <VirtualFocus loop={false}>
-        <MyAnchor>
+        <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
-            <MyItem icon={<CloudIcon aria-hidden />}>cloud </MyItem>
-            <MyItem icon={<HangerIcon aria-hidden />}>hanger </MyItem>
-            <MyItem icon={<HourglassIcon aria-hidden />}>hourglass </MyItem>
-            <MyItem icon={<HouseIcon aria-hidden />}>house </MyItem>
-            <MyItem icon={<RulerIcon aria-hidden />}>ruler </MyItem>
-            <MyItem icon={<PuzzlePieceIcon aria-hidden />}>
+            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+              {"cloud "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+              {"hanger "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
+              {"hourglass "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
+              {"house "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
+              {"ruler "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<PuzzlePieceIcon aria-hidden />}>
               {"puzzle piece "}
             </MyItem>
           </VirtualFocus.Content>
@@ -111,9 +167,9 @@ export const NoLoop = () => {
 };
 
 const MyDropDownSearchAutocomplete = () => {
-  const { value } = useAutocompleteValue();
   const anchorRef = useRef<HTMLDivElement>(null);
   const [openState, setOpenState] = useState(false);
+  const [value, setValue] = useState("");
 
   const items = [
     {
@@ -160,7 +216,7 @@ const MyDropDownSearchAutocomplete = () => {
 }
 `}
       </style>
-      <MyAnchor ref={anchorRef}>
+      <MyAnchor setValue={setValue} value={value} ref={anchorRef}>
         <Popover
           className="dropdown-search-autocomplete"
           anchorEl={anchorRef.current}
@@ -176,7 +232,7 @@ const MyDropDownSearchAutocomplete = () => {
             <Popover.Content>
               {filteredItems.map((i) => {
                 return (
-                  <MyItem key={i.text} icon={i.icon}>
+                  <MyItem setValue={setValue} key={i.text} icon={i.icon}>
                     {i.text}
                   </MyItem>
                 );

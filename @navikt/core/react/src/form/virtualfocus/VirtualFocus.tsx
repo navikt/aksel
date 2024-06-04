@@ -45,12 +45,6 @@ export const [
   }
 >();
 
-export const [AutocompleteContextProvider, useAutocompleteValue] =
-  createContext<{
-    value: string;
-    setValue: Dispatch<SetStateAction<string>>;
-  }>();
-
 const [AutocompleteInternalContextProvider, useAutocompleteInternalContext] =
   createContext<{
     virtualFocusIdx: number;
@@ -70,7 +64,6 @@ type Props = {
 // set aria-activedescendant
 // role=listbox
 //
-// rename this Autocomplete -> VirtualFocus
 // remove the value, setValue from it (user defined behaviour / control)
 //
 // videre:
@@ -80,7 +73,6 @@ type Props = {
 // 2. release it publicly?
 export const VirtualFocus = ({ children, loop = true }: Props) => {
   const descendants = useAutocompleteDescendants();
-  const [value, setValue] = useState("");
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
   const to_blur = descendants.item(virtualFocusIdx);
@@ -91,22 +83,20 @@ export const VirtualFocus = ({ children, loop = true }: Props) => {
       setVirtualFocusIdx={setVirtualFocusIdx}
       loop={loop}
     >
-      <AutocompleteContextProvider value={value} setValue={setValue}>
-        <AutocompleteDescendantsProvider value={descendants}>
-          <div
-            onChange={(event) => {
-              // assumption: there is a bubbling onChange from an input inside Anchor
-              setValue((event.target as HTMLInputElement).value);
-              if (to_focus?.node) {
-                set_virtual_focus(to_focus.node, to_blur?.node);
-              }
-              setVirtualFocusIdx(0);
-            }}
-          >
-            {children}
-          </div>
-        </AutocompleteDescendantsProvider>
-      </AutocompleteContextProvider>
+      <AutocompleteDescendantsProvider value={descendants}>
+        <div
+          onChange={(event) => {
+            // assumption: there is a bubbling onChange from an input inside Anchor
+            setValue((event.target as HTMLInputElement).value);
+            if (to_focus?.node) {
+              set_virtual_focus(to_focus.node, to_blur?.node);
+            }
+            setVirtualFocusIdx(0);
+          }}
+        >
+          {children}
+        </div>
+      </AutocompleteDescendantsProvider>
     </AutocompleteInternalContextProvider>
   );
 };
@@ -125,8 +115,6 @@ export const AutocompleteAnchor = forwardRef<
   HTMLDivElement,
   AutocompleteAnchorProps
 >(({ children, pick }, ref) => {
-  const { setValue } = useAutocompleteValue();
-
   const { register, descendants } = useAutocompleteDescendant({
     handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
       set_virtual_focus(node_to_focus, node_to_blur);
