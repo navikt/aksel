@@ -29,8 +29,17 @@ export const Default = {
         <List.Item title="Consectetur Adipiscing Elit">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
-        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
-          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        <List.Item>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto fugiat
+          atque accusantium iure sunt, ipsum voluptas, impedit harum, minus
+          rerum recusandae. Consequuntur sint distinctio nulla reprehenderit eum
+          suscipit quae libero.
+        </List.Item>
+        <List.Item>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto fugiat
+          atque accusantium iure sunt, ipsum voluptas, impedit harum, minus
+          rerum recusandae. Consequuntur sint distinctio nulla reprehenderit eum
+          suscipit quae libero.
         </List.Item>
       </List>
     );

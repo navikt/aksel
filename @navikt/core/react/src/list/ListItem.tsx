@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort, Label } from "../typography";
+import { BodyLong, Label } from "../typography";
 import { ListContext } from "./context";
 import { ListItemProps } from "./types";
 
@@ -45,14 +45,14 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
           </div>
         )}
 
-        <BodyShort as="div" size={size} className="navds-list__item-content">
+        <BodyLong as="div" size={size} className="navds-list__item-content">
           {title && (
             <Label as="p" size={size}>
               {title}
             </Label>
           )}
           {children}
-        </BodyShort>
+        </BodyLong>
       </li>
     );
   },
