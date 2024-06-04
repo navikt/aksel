@@ -101,6 +101,7 @@ export const AsLink = () => {
     />
   );
 };
+
 AsLink.decorators = [
   (Story) => (
     <Router>
@@ -108,3 +109,22 @@ AsLink.decorators = [
     </Router>
   ),
 ];
+
+export const Heading = () => {
+  const [page, setPage] = useState(1);
+  const props = {
+    page: 1,
+    count: 8,
+    siblingCount: 1,
+    boundaryCount: 1,
+  };
+
+  return (
+    <Pagination
+      {...props}
+      page={page}
+      onPageChange={setPage}
+      heading={{ tag: "h2", text: "Dette er en pagination heading" }}
+    />
+  );
+};
