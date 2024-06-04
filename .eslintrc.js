@@ -33,6 +33,17 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        paths: [
+          {
+            name: "*",
+            message: "Please use Bar from /import-bar/baz/ instead.",
+          },
+        ],
+      },
+    ],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
@@ -89,6 +100,16 @@ module.exports = {
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/comment-check": ["error"],
+        "aksel-local/import-check": ["error"],
+      },
+    },
+    {
+      files: [
+        "aksel.nav.no/website/pages/templates/**/*.tsx TODO FIX THIS PATH",
+      ],
+      plugins: ["aksel-local"],
+      rules: {
+        "aksel-local/import-check": ["error"],
       },
     },
   ],
