@@ -100,16 +100,21 @@ module.exports = {
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/comment-check": ["error"],
-        "aksel-local/import-check": ["error"],
       },
     },
     {
-      files: [
-        "aksel.nav.no/website/pages/templates/**/*.tsx TODO FIX THIS PATH",
-      ],
+      files: ["aksel.nav.no/website/pages/templates/__parts*/*.ts*"],
       plugins: ["aksel-local"],
       rules: {
-        "aksel-local/import-check": ["error"],
+        "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
+      },
+    },
+    {
+      files: ["aksel.nav.no/website/pages/templates/__parts-inline/*.ts*"],
+      rules: {
+        "arrow-body-style": ["error", "never"],
+        "func-style": ["error", "expression"],
+        "import/no-named-export": "error",
       },
     },
   ],
