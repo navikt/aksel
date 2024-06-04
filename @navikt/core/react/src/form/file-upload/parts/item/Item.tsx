@@ -45,6 +45,11 @@ export interface FileUploadItemProps
    */
   status?: "downloading" | "uploading" | "idle";
   /**
+   * File-description. Replaces filesize when status is "idle".
+   * This is useful for displaying upload date. Should not act as a replacement for error messages.
+   */
+  description?: string;
+  /**
    * Props for the action button.
    */
   button?: {
@@ -71,6 +76,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         onFileClick,
         button,
         translations,
+        description,
         ...rest
       }: FileUploadItemProps,
       ref,
@@ -91,7 +97,7 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
         if (status === "downloading") {
           return translate("item.downloading");
         }
-        return formatFileSize(file);
+        return description ?? formatFileSize(file);
       }
 
       return (
