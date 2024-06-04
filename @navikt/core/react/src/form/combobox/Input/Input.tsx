@@ -141,12 +141,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (activeDecendantId || value) {
             e.preventDefault();
           }
-        } else if (["ArrowLeft", "ArrowUp", "ArrowRight"].includes(e.key)) {
-          onChange(e);
+        } else if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+          if (value !== "" && value !== searchTerm) {
+            onChange(e);
+          }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
-          if (e.target.selectionStart) {
+          if (e.currentTarget.selectionStart) {
             setValue(searchTerm);
           }
           if (virtualFocus.activeElement === null || !isListOpen) {
@@ -154,6 +156,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
           virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
+          if (value !== "" && value !== searchTerm) {
+            onChange(e);
+          }
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
           if (isListOpen && activeDecendantId) {
