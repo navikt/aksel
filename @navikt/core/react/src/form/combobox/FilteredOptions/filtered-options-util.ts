@@ -9,10 +9,12 @@ const isPartOfText = (value: string, text: string) =>
 const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
   list.filter((listItem) => isPartOfText(value, listItem.label));
 
-const getValuesStartingWith = (text: string, list: ComboboxOption[]) =>
-  list.find((listItem) =>
-    normalizeText(listItem.label).startsWith(normalizeText(text)),
+const getFirstValueStartingWith = (text: string, list: ComboboxOption[]) => {
+  const normalizedText = normalizeText(text);
+  return list.find((listItem) =>
+    normalizeText(listItem.label).startsWith(normalizedText),
   );
+};
 
 const getFilteredOptionsId = (comboboxId: string) =>
   `${comboboxId}-filtered-options`;
