@@ -69,6 +69,8 @@
 
 .navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-3);
+
+  aspect-ratio: 1;
 }
 
 .navds-copybutton--small.navds-copybutton--icon-only {
@@ -79,13 +81,13 @@
   --__ac-copybutton-padding: var(--a-spacing-05);
 }
 
-.navds-copybutton--xsmall .navds-copybutton__icon {
-  font-size: 1.25rem;
-}
-
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
+}
+
+:where(.navds-copybutton--xsmall, .navds-copybutton--small) .navds-copybutton__icon {
+  font-size: 1.25rem;
 }
 
 .navds-copybutton__icon:first-of-type {
