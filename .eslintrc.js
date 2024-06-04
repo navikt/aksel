@@ -95,7 +95,7 @@ module.exports = {
     {
       files: [
         "aksel.nav.no/website/pages/eksempler/**/*.tsx",
-        "aksel.nav.no/website/pages/templates/!(__parts)**/*.tsx",
+        "aksel.nav.no/website/pages/templates/**/*.tsx",
       ],
       plugins: ["aksel-local"],
       rules: {
@@ -103,14 +103,18 @@ module.exports = {
       },
     },
     {
-      files: ["aksel.nav.no/website/pages/templates/__parts*/*.ts*"],
+      files: [
+        "aksel.nav.no/website/components/website-modules/examples/__parts*/*.tsx",
+      ],
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
       },
     },
     {
-      files: ["aksel.nav.no/website/pages/templates/__parts-inline/*.ts*"],
+      files: [
+        "aksel.nav.no/website/components/website-modules/examples/__parts-inline/*.tsx",
+      ],
       rules: {
         "arrow-body-style": ["error", "never"],
         "func-style": ["error", "expression"],

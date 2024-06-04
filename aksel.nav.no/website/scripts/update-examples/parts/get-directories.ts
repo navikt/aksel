@@ -16,9 +16,7 @@ export function getDirectories(directory: RootDirectoriesT): DirectoryDataT {
 
   const folders = fs
     .readdirSync(rootPath, { withFileTypes: true })
-    .filter(
-      (dirent) => dirent.isDirectory() && !dirent.name.startsWith("__parts"),
-    )
+    .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
   return folders.map((dir) => ({ path: `${dir}` }));
