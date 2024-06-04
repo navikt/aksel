@@ -15,25 +15,25 @@ import { remove_virtual_focus, set_virtual_focus } from "./utils";
 //
 // perhaps a desired API?
 //
-// <Autocomplete>
-//    <Autocomplete.Anchor>
+// <VirtualFocus>
+//    <VirtualFocus.Anchor>
 //        ...
-//    </Autocomplete.Anchor>
-//    <Autocomplete.Content>
-//        <Autocomplete.Item>
+//    </VirtualFocus.Anchor>
+//    <VirtualFocus.Content>
+//        <VirtualFocus.Item>
 //           ...
-//        </Autocomplete.Item>
-//        <Autocomplete.Item>
+//        </VirtualFocus.Item>
+//        <VirtualFocus.Item>
 //           ...
-//        </Autocomplete.Item>
-//    <Autocomplete.Content>
-// </Autocomplete>
+//        </VirtualFocus.Item>
+//    <VirtualFocus.Content>
+// </VirtualFocus>
 
 export const [
-  AutocompleteDescendantsProvider,
-  useAutocompleteDescendantsContext,
-  useAutocompleteDescendants,
-  useAutocompleteDescendant,
+  VirtualFocusDescendantsProvider,
+  useVirtualFocusDescendantsContext,
+  useVirtualFocusDescendants,
+  useVirtualFocusDescendant,
 ] = createDescendantContext<
   SlottedDivElementRef,
   {
@@ -45,7 +45,7 @@ export const [
   }
 >();
 
-const [AutocompleteInternalContextProvider, useAutocompleteInternalContext] =
+const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
   createContext<{
     virtualFocusIdx: number;
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
@@ -67,26 +67,26 @@ type Props = {
 // videre:
 // 1. use this <VirtualFocus> inside other stuff we have (as a demo / dogfood)
 //   - Combobox
-//   - Search (prop for autocomplete on <Search>)
+//   - Search (prop for virtualfocus on <Search>)
 // 2. release it publicly?
 export const VirtualFocus = ({ children, loop = true }: Props) => {
-  const descendants = useAutocompleteDescendants();
+  const descendants = useVirtualFocusDescendants();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
   return (
-    <AutocompleteInternalContextProvider
+    <VirtualFocusInternalContextProvider
       virtualFocusIdx={virtualFocusIdx}
       setVirtualFocusIdx={setVirtualFocusIdx}
       loop={loop}
     >
-      <AutocompleteDescendantsProvider value={descendants}>
+      <VirtualFocusDescendantsProvider value={descendants}>
         {children}
-      </AutocompleteDescendantsProvider>
-    </AutocompleteInternalContextProvider>
+      </VirtualFocusDescendantsProvider>
+    </VirtualFocusInternalContextProvider>
   );
 };
 
-export interface AutocompleteAnchorProps
+export interface VirtualFocusAnchorProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function that is run when the focused element
@@ -101,11 +101,11 @@ export interface AutocompleteAnchorProps
   children: React.ReactNode;
 }
 
-export const AutocompleteAnchor = forwardRef<
+export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
-  AutocompleteAnchorProps
+  VirtualFocusAnchorProps
 >(({ children, pick, onActive }, ref) => {
-  const { register, descendants } = useAutocompleteDescendant({
+  const { register, descendants } = useVirtualFocusDescendant({
     handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
       set_virtual_focus(node_to_focus, node_to_blur);
       onActive();
@@ -115,7 +115,7 @@ export const AutocompleteAnchor = forwardRef<
     },
   });
   const { virtualFocusIdx, setVirtualFocusIdx, loop } =
-    useAutocompleteInternalContext();
+    useVirtualFocusInternalContext();
 
   const mergedRefs = useMergeRefs(ref, register);
 
@@ -160,15 +160,15 @@ export const AutocompleteAnchor = forwardRef<
   );
 });
 
-export const AutocompleteContent = ({
+export const VirtualFocusContent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  return <div className="navds-autocomplete-content">{children}</div>;
+  return <div className="navds-virtualfocus-content">{children}</div>;
 };
 
-export interface AutocompleteItemProps
+export interface VirtualFocusItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function that is run when the element is focused
@@ -178,23 +178,23 @@ export interface AutocompleteItemProps
   children: React.ReactNode;
 }
 
-export const AutocompleteItem = ({
+export const VirtualFocusItem = ({
   children,
   focus,
-}: AutocompleteItemProps) => {
-  const { register, index, descendants } = useAutocompleteDescendant({
+}: VirtualFocusItemProps) => {
+  const { register, index, descendants } = useVirtualFocusDescendant({
     handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
       set_virtual_focus(node_to_focus, node_to_blur);
       focus();
     },
   });
   const { virtualFocusIdx, setVirtualFocusIdx } =
-    useAutocompleteInternalContext();
+    useVirtualFocusInternalContext();
 
   return (
     <div
       id={`descendant-${index}`}
-      className="navds-autocomplete-item"
+      className="navds-virtualfocus-item"
       role="button"
       ref={register}
       tabIndex={-1} // shouldn't really be focusable, they are virtually focusable, but can be clicked
@@ -224,8 +224,8 @@ export const AutocompleteItem = ({
   );
 };
 
-VirtualFocus.Anchor = AutocompleteAnchor;
-VirtualFocus.Item = AutocompleteItem;
-VirtualFocus.Content = AutocompleteContent;
+VirtualFocus.Anchor = VirtualFocusAnchor;
+VirtualFocus.Item = VirtualFocusItem;
+VirtualFocus.Content = VirtualFocusContent;
 
 export default VirtualFocus;

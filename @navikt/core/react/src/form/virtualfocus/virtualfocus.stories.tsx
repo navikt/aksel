@@ -17,7 +17,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Popover } from "../../popover";
 import { Search } from "../search";
-import { VirtualFocus, useAutocompleteDescendants } from "./VirtualFocus";
+import { VirtualFocus, useVirtualFocusDescendants } from "./VirtualFocus";
 import { set_virtual_focus } from "./utils";
 
 export default {
@@ -33,7 +33,7 @@ const MyAnchor = forwardRef<
     setValue: Dispatch<SetStateAction<string>>;
   }
 >(({ children, value, setValue }, ref) => {
-  const descendants = useAutocompleteDescendants();
+  const descendants = useVirtualFocusDescendants();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
   const to_blur = descendants.item(virtualFocusIdx);
@@ -98,7 +98,7 @@ export const Default = () => {
   return (
     <>
       <style>{`
-.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -136,7 +136,7 @@ export const NoLoop = () => {
   return (
     <>
       <style>{`
-.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -169,7 +169,7 @@ export const NoLoop = () => {
   );
 };
 
-const MyDropDownSearchAutocomplete = () => {
+const MyDropDownSearchVirtualfocus = () => {
   const anchorRef = useRef<HTMLDivElement>(null);
   const [openState, setOpenState] = useState(false);
   const [value, setValue] = useState("");
@@ -210,10 +210,10 @@ const MyDropDownSearchAutocomplete = () => {
     <>
       <style>
         {`
-.dropdown-search-autocomplete {
+.dropdown-search-virtualfocus {
   width: 100%;
 }
-.navds-autocomplete-item[data-aksel-virtualfocus="true"] {
+.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -221,7 +221,7 @@ const MyDropDownSearchAutocomplete = () => {
       </style>
       <MyAnchor setValue={setValue} value={value} ref={anchorRef}>
         <Popover
-          className="dropdown-search-autocomplete"
+          className="dropdown-search-virtualfocus"
           anchorEl={anchorRef.current}
           open={openState || (!!value.length && !!filteredItems.length)}
           onClose={() => {
@@ -252,7 +252,7 @@ export const WithPopoverAndFiltering = () => {
   return (
     <div>
       <VirtualFocus>
-        <MyDropDownSearchAutocomplete />
+        <MyDropDownSearchVirtualfocus />
       </VirtualFocus>
     </div>
   );
