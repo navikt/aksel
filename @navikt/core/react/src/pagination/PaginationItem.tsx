@@ -33,6 +33,7 @@ export const Item: PaginationItemType = forwardRef(
       as: Component = "button",
       selected = false,
       className,
+      page,
       ...rest
     },
     ref,
@@ -46,6 +47,7 @@ export const Item: PaginationItemType = forwardRef(
         className={cl("navds-pagination__item", className, {
           "navds-pagination__item--selected": selected,
         })}
+        data-state-page={page}
         {...(Component === "button" && { type: "button" })}
         {...rest}
       >
