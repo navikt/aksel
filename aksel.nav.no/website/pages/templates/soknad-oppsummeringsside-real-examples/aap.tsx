@@ -14,9 +14,14 @@ import {
   Stack,
   VStack,
 } from "@navikt/ds-react";
-import FormNavigation from "../__parts-inline/FormNavigation";
-import ApplicationPictogram from "../__parts/ApplicationPictogram";
-import { Env, Footer, Header, useDekorator } from "../__parts/dekorator";
+import FormNavigation from "../../../components/website-modules/examples/__parts-inline/FormNavigation";
+import ApplicationPictogram from "../../../components/website-modules/examples/__parts/ApplicationPictogram";
+import {
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/dekorator";
 
 function Example() {
   useDekorator();
