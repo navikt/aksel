@@ -118,7 +118,6 @@ const FilteredOptionsProvider = ({
       setValue(
         `${searchTerm}${autoCompleteCandidate.substring(searchTerm.length)}`,
       );
-      setSearchTerm(searchTerm);
     }
   }, [
     filteredOptions,
