@@ -142,6 +142,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             e.preventDefault();
           }
         } else if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+          /**
+           * In case user has an active selection and 'completes' the selection with ArrowLeft, ArrowRight or ArrowUp
+           * we need to make sure to update the filter.
+           */
           if (value !== "" && value !== searchTerm) {
             onChange(e);
           }
