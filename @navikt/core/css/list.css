@@ -15,7 +15,7 @@
 }
 
 .navds-list li {
-  margin-block-end: var(--a-spacing-3);
+  margin-block-end: var(--a-spacing-2);
 }
 
 .navds-list--small li {
