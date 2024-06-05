@@ -11,8 +11,8 @@ const meta: Meta<typeof Pagination> = {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small", "xsmall"],
       },
+      options: ["medium", "small", "xsmall"],
     },
   },
   parameters: {
@@ -26,12 +26,11 @@ type Story = StoryObj<typeof Pagination>;
 type StoryFunction = StoryFn<typeof Pagination>;
 
 export const Default: StoryFunction = (props) => {
-  const [page, setPage] = useState(props.page);
+  const [page, setPage] = useState(2);
   return <Pagination {...props} page={page} onPageChange={setPage} />;
 };
 
 Default.args = {
-  page: 2,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
@@ -62,7 +61,6 @@ export const PrevNextText: StoryFunction = (props) => {
 };
 
 PrevNextText.args = {
-  page: 2,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
@@ -77,7 +75,6 @@ export const Small: StoryFunction = (props) => {
 };
 
 Small.args = {
-  page: 1,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
@@ -91,7 +88,6 @@ export const XSmall: StoryFunction = (props) => {
 };
 
 XSmall.args = {
-  page: 1,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
@@ -115,14 +111,13 @@ export const Heading: StoryFunction = (props) => {
 };
 
 Heading.args = {
-  page: 1,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
 };
 
 export const AsLink: StoryFunction = (props) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   return (
     <Pagination
       {...props}
@@ -136,7 +131,6 @@ export const AsLink: StoryFunction = (props) => {
 };
 
 AsLink.args = {
-  page: 1,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
@@ -189,5 +183,5 @@ export const Chromatic: Story = {
       </Router>
     ),
   ],
-  args: { page: 2, count: 8, siblingCount: 1, boundaryCount: 1 },
+  args: { count: 8, siblingCount: 1, boundaryCount: 1 },
 };

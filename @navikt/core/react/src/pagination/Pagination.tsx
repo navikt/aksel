@@ -126,7 +126,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       size = "medium",
       prevNextTexts = false,
       srHeading,
-      "aria-describedby": ariaDescribedBy,
+      "aria-labelledby": ariaLabelledBy,
       renderItem: Item = (item: PaginationItemProps) => (
         <PaginationItem {...item} />
       ),
@@ -157,8 +157,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <nav
         ref={ref}
         {...rest}
-        aria-describedby={
-          srHeading ? cl(headingId, ariaDescribedBy) : ariaDescribedBy
+        aria-labelledby={
+          srHeading ? cl(headingId, ariaLabelledBy) : ariaLabelledBy
         }
         className={cl(
           "navds-pagination",
