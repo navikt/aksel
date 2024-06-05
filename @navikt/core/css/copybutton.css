@@ -51,6 +51,7 @@
   --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3) var(--a-spacing-1) var(--a-spacing-2);
 
   min-height: 2rem;
+  min-width: 2rem;
 }
 
 .navds-copybutton--small.navds-copybutton--icon-right {
@@ -61,6 +62,7 @@
   --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-2) var(--a-spacing-05) var(--a-spacing-1);
 
   min-height: 1.5rem;
+  min-width: 1.5rem;
 }
 
 .navds-copybutton--xsmall.navds-copybutton--icon-right {
@@ -69,8 +71,6 @@
 
 .navds-copybutton--icon-only {
   --__ac-copybutton-padding: var(--a-spacing-3);
-
-  aspect-ratio: 1;
 }
 
 .navds-copybutton--small.navds-copybutton--icon-only {
