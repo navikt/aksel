@@ -8,6 +8,9 @@ import { Textarea } from "./index";
 const meta: Meta<typeof Textarea> = {
   title: "ds-react/Textarea",
   component: Textarea,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
 
@@ -39,9 +42,6 @@ export const Default: StoryObj<typeof Textarea> = {
     readOnly: { type: "boolean" },
     maxRows: { type: "number" },
     minRows: { type: "number" },
-  },
-  parameters: {
-    chromatic: { disable: true },
   },
 };
 

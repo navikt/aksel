@@ -136,7 +136,7 @@ export const Chromatic: Story = {
         <div>
           <h2>WithError small</h2>
           {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Error.args} size="small" />
+          <Fieldset {...WithError.args} size="small" />
         </div>
         <div>
           <h2>Disabled</h2>
