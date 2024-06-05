@@ -126,7 +126,7 @@ export const Heading = () => {
         {...props}
         page={page}
         onPageChange={setPage}
-        heading={{ tag: "h2", text: "Dette er en pagination heading" }}
+        srHeading={{ tag: "h2", text: "Dette er en pagination heading" }}
       />
       <h2>Heading etter pagination</h2>
     </>

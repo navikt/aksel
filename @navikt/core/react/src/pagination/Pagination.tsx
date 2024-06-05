@@ -51,7 +51,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
    */
-  heading?: {
+  srHeading?: {
     tag: "h2" | "h3" | "h4" | "h5" | "h6";
     text: string;
   };
@@ -125,7 +125,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       className,
       size = "medium",
       prevNextTexts = false,
-      heading,
+      srHeading,
       "aria-describedby": ariaDescribedBy,
       renderItem: Item = (item: PaginationItemProps) => (
         <PaginationItem {...item} />
@@ -158,7 +158,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         ref={ref}
         {...rest}
         aria-describedby={
-          heading ? cl(headingId, ariaDescribedBy) : ariaDescribedBy
+          srHeading ? cl(headingId, ariaDescribedBy) : ariaDescribedBy
         }
         className={cl(
           "navds-pagination",
@@ -166,9 +166,14 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           className,
         )}
       >
-        {heading && (
-          <Heading size="xsmall" visuallyHidden as={heading.tag} id={headingId}>
-            {heading.text}
+        {srHeading && (
+          <Heading
+            size="xsmall"
+            visuallyHidden
+            as={srHeading.tag}
+            id={headingId}
+          >
+            {srHeading.text}
           </Heading>
         )}
         <ul className="navds-pagination__list">
