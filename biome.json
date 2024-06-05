@@ -39,7 +39,7 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
-        "noAssignInExpressions": "off",
+
         "noDoubleEquals": "off",
         "noMisleadingCharacterClass": "off"
       },

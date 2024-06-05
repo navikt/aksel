@@ -38,10 +38,12 @@ export function get(
 
 function getKeypath(str: string) {
   const path: string[] = [];
-  let result: RegExpExecArray | null;
-  while ((result = OBJECT_NOTATION_MATCHER.exec(str))) {
+  let result: RegExpExecArray | null = OBJECT_NOTATION_MATCHER.exec(str);
+
+  while (result) {
     const [, first, second] = result;
     path.push(first || second);
+    result = OBJECT_NOTATION_MATCHER.exec(str);
   }
 
   return path;
