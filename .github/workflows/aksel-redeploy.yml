@@ -1,4 +1,4 @@
-name: Redeploy image to for aksel.nav.no
+name: Redeploy image for aksel.nav.no
 on:
   workflow_dispatch:
     inputs:
