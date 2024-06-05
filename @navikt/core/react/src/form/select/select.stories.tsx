@@ -149,7 +149,7 @@ export const Chromatic: StoryObj<typeof Select> = {
         <Description />
       </div>
       <div>
-        <h2>Error</h2>
+        <h2>WithError</h2>
         <WithError />
       </div>
       <div>
