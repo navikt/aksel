@@ -4,11 +4,17 @@
 
 ### @navikt/ds-css
 
-- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+- :lipstick: Remove bottom margin on last item in Stepper and adjust FormProgress accordingly ([#2971](https://github.com/navikt/aksel/pull/2971))
+
+* ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
 
 ### @navikt/ds-react
 
 - ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
+### @navikt/aksel-icons
+
+- Icons: Added back support for sourcemapping. ([#2978](https://github.com/navikt/aksel/pull/2978))
 
 ## 6.9
 
