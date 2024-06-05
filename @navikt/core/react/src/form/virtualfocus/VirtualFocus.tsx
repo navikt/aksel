@@ -3,7 +3,6 @@ import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
-import { remove_virtual_focus, set_virtual_focus } from "./utils";
 
 // The recipe for success!
 //
@@ -17,31 +16,27 @@ import { remove_virtual_focus, set_virtual_focus } from "./utils";
 //
 // <VirtualFocus>
 //    <VirtualFocus.Anchor>
-//        ...
+//      <VirtualFocus.Content>
+//          <VirtualFocus.Item>
+//             ...
+//          </VirtualFocus.Item>
+//          <VirtualFocus.Item>
+//             ...
+//          </VirtualFocus.Item>
+//      <VirtualFocus.Content>
 //    </VirtualFocus.Anchor>
-//    <VirtualFocus.Content>
-//        <VirtualFocus.Item>
-//           ...
-//        </VirtualFocus.Item>
-//        <VirtualFocus.Item>
-//           ...
-//        </VirtualFocus.Item>
-//    <VirtualFocus.Content>
 // </VirtualFocus>
 
 export const [
   VirtualFocusDescendantsProvider,
   useVirtualFocusDescendantsContext,
-  useVirtualFocusDescendants,
+  useVirtualFocusDescendantInitializer,
   useVirtualFocusDescendant,
 ] = createDescendantContext<
   SlottedDivElementRef,
   {
-    handleVirtualOnFocus?: (
-      node_to_focus: HTMLElement,
-      node_to_blur?: HTMLElement,
-    ) => void;
-    handlePick?: () => void;
+    handlePick: () => void;
+    handleOnActive: () => void;
   }
 >();
 
@@ -70,7 +65,7 @@ type Props = {
 //   - Search (prop for virtualfocus on <Search>)
 // 2. release it publicly?
 export const VirtualFocus = ({ children, loop = true }: Props) => {
-  const descendants = useVirtualFocusDescendants();
+  const descendants = useVirtualFocusDescendantInitializer();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
   return (
@@ -105,47 +100,51 @@ export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
 >(({ children, pick, onActive }, ref) => {
-  const { register, descendants } = useVirtualFocusDescendant({
-    handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
-      set_virtual_focus(node_to_focus, node_to_blur);
-      onActive();
-    },
+  const { virtualFocusIdx, setVirtualFocusIdx, loop } =
+    useVirtualFocusInternalContext();
+
+  const { register, descendants, index } = useVirtualFocusDescendant({
     handlePick: () => {
       pick();
     },
+    handleOnActive: () => {
+      setVirtualFocusIdx(0);
+      onActive();
+    },
   });
-  const { virtualFocusIdx, setVirtualFocusIdx, loop } =
-    useVirtualFocusInternalContext();
 
   const mergedRefs = useMergeRefs(ref, register);
 
   return (
     <div
-      role="searchbox"
       tabIndex={0}
+      role="searchbox"
       ref={mergedRefs}
       onBlur={() => {
         const curr = descendants.item(virtualFocusIdx);
         if (curr?.node) {
-          remove_virtual_focus(curr.node);
+          setVirtualFocusIdx(0);
         }
       }}
+      aria-activedescendant={`descendant-${index}`} // TODO: useId()
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
           event.preventDefault();
-          const curr = descendants.item(virtualFocusIdx);
-          const next = descendants.next(virtualFocusIdx, loop);
-          if (next?.handleVirtualOnFocus && curr?.node) {
-            next.handleVirtualOnFocus(next.node, curr.node);
-            setVirtualFocusIdx(next.index);
+          const to_focus_descendant = descendants.next(virtualFocusIdx, loop);
+          const to_focus = to_focus_descendant?.node;
+
+          if (to_focus) {
+            to_focus_descendant.handleOnActive();
+            setVirtualFocusIdx(to_focus_descendant.index);
           }
         } else if (event.key === "ArrowUp") {
           event.preventDefault();
-          const curr = descendants.item(virtualFocusIdx);
-          const prev = descendants.prev(virtualFocusIdx, loop);
-          if (prev?.handleVirtualOnFocus && curr?.node) {
-            prev.handleVirtualOnFocus(prev.node, curr?.node);
-            setVirtualFocusIdx(prev.index);
+          const to_focus_descendant = descendants.prev(virtualFocusIdx, loop);
+          const to_focus = to_focus_descendant?.node;
+
+          if (to_focus) {
+            to_focus_descendant.handleOnActive();
+            setVirtualFocusIdx(to_focus_descendant.index);
           }
         } else if (event.key === "Enter") {
           const curr = descendants.item(0);
@@ -165,7 +164,18 @@ export const VirtualFocusContent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <div className="navds-virtualfocus-content">{children}</div>;
+  const { setVirtualFocusIdx } = useVirtualFocusInternalContext();
+
+  return (
+    <div
+      className="navds-virtualfocus-content"
+      onMouseLeave={() => {
+        setVirtualFocusIdx(0);
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export interface VirtualFocusItemProps
@@ -174,18 +184,21 @@ export interface VirtualFocusItemProps
    * The function that is run when the element is focused
    * (virtually, not actual focus, eg. set a border around an item)
    */
-  focus: () => void;
+  onActive: () => void;
   children: React.ReactNode;
 }
 
 export const VirtualFocusItem = ({
   children,
-  focus,
+  onActive,
 }: VirtualFocusItemProps) => {
-  const { register, index, descendants } = useVirtualFocusDescendant({
-    handleVirtualOnFocus: (node_to_focus, node_to_blur) => {
-      set_virtual_focus(node_to_focus, node_to_blur);
-      focus();
+  const { register, descendants, index } = useVirtualFocusDescendant({
+    handleOnActive: () => {
+      onActive();
+    },
+    handlePick: () => {
+      const anchor = descendants.item(0);
+      anchor?.handlePick();
     },
   });
   const { virtualFocusIdx, setVirtualFocusIdx } =
@@ -193,29 +206,30 @@ export const VirtualFocusItem = ({
 
   return (
     <div
-      id={`descendant-${index}`}
+      id={`descendant-${index}`} // TODO: useId() appended here (from anchor)
       className="navds-virtualfocus-item"
       role="button"
+      data-aksel-virtualfocus={virtualFocusIdx === index}
       ref={register}
       tabIndex={-1} // shouldn't really be focusable, they are virtually focusable, but can be clicked
-      onFocus={() => {}} // set focus to anchor?
-      onKeyDown={() => {}} // set focus to anchor?
-      onClick={() => {
+      onFocus={() => {
         const anchor = descendants.item(0);
-        if (anchor?.handlePick) {
-          anchor.handlePick();
+        anchor?.node.focus();
+      }} // set focus to anchor?
+      onKeyDown={() => {}} // set focus to anchor?
+      onClick={(event) => {
+        const currIdx = descendants.indexOf(event.currentTarget);
+        const curr = descendants.item(currIdx);
+        if (curr) {
+          curr.handlePick();
         }
       }}
       onMouseMove={(event) => {
-        const prev = descendants.item(virtualFocusIdx);
         const currIdx = descendants.indexOf(event.currentTarget);
         const curr = descendants.item(currIdx);
-        if (prev?.node) {
-          remove_virtual_focus(prev.node);
-        }
-        if (curr?.node && curr?.handleVirtualOnFocus) {
-          curr.handleVirtualOnFocus(curr.node);
+        if (curr) {
           setVirtualFocusIdx(curr.index);
+          curr.handleOnActive();
         }
       }}
     >

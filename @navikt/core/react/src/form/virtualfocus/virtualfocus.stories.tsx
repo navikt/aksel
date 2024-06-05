@@ -17,8 +17,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Popover } from "../../popover";
 import { Search } from "../search";
-import { VirtualFocus, useVirtualFocusDescendants } from "./VirtualFocus";
-import { set_virtual_focus } from "./utils";
+import { VirtualFocus, useVirtualFocusDescendant } from "./VirtualFocus";
 
 export default {
   title: "Utilities/VirtualFocus",
@@ -33,11 +32,9 @@ const MyAnchor = forwardRef<
     setValue: Dispatch<SetStateAction<string>>;
   }
 >(({ children, value, setValue }, ref) => {
-  const descendants = useVirtualFocusDescendants();
-  const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
+  const { descendants } = useVirtualFocusDescendant();
 
-  const to_blur = descendants.item(virtualFocusIdx);
-  const to_focus = descendants.item(0);
+  const to_focus = descendants.item(0); // TODO: assumption: 0 === anchor
 
   return (
     <div style={{ position: "relative" }}>
@@ -47,7 +44,7 @@ const MyAnchor = forwardRef<
           console.log(`pick(): searching for ${value}`);
         }}
         onActive={() => {
-          setValue(" ");
+          // setValue(" "); // TODO: this is only an example
         }}
       >
         <Search
@@ -55,12 +52,8 @@ const MyAnchor = forwardRef<
           autoComplete="off"
           value={value}
           onChange={(current_input) => {
-            console.log({ current_input });
             setValue(current_input);
-            if (to_focus?.node) {
-              set_virtual_focus(to_focus.node, to_blur?.node);
-            }
-            setVirtualFocusIdx(0);
+            to_focus?.handleOnActive();
           }}
         />
       </VirtualFocus.Anchor>
@@ -80,7 +73,7 @@ const MyItem = ({
   return (
     <VirtualFocus.Item
       // rename focus -> onActive
-      focus={() => {
+      onActive={() => {
         setValue(children);
       }}
     >

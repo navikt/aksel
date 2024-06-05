@@ -9,10 +9,6 @@ export type DescendantOptions<T = object> = T & {
    * but omitted from enabled nodes map
    */
   disabled?: boolean;
-  handleVirtualOnFocus?: (
-    node_to_focus: HTMLElement,
-    node_to_blur?: HTMLElement,
-  ) => void;
 };
 
 export type Descendant<T, K> = DescendantOptions<K> & {
