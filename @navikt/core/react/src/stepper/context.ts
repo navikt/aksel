@@ -1,11 +1,18 @@
-import { createContext } from "react";
+import { createContext } from "../util/create-context";
 
-interface StepperContextProps {
-  activeStep: number;
+interface StepperContextValue {
   onStepChange: (step: number) => void;
   lastIndex: number;
   orientation: "horizontal" | "vertical";
   interactive: boolean;
+  activeStep: number;
+  index: number;
 }
 
-export const StepperContext = createContext<StepperContextProps | null>(null);
+export const [StepperContextProvider, useStepperContext] =
+  createContext<StepperContextValue>({
+    hookName: "useStepperContext",
+    providerName: "StepperContextProvider",
+    name: "StepperContext",
+    errorMessage: "<Stepper.Step> has to be used within <Stepper>",
+  });

@@ -26,9 +26,13 @@ const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
       (compareAsc(month, fromDate) === -1 && !isSameMonth(month, fromDate)) ||
       (compareDesc(month, toDate) === -1 && !isSameMonth(month, toDate))
     );
-  } else if (fromDate) {
+  }
+
+  if (fromDate) {
     return compareAsc(month, fromDate) === -1 && !isSameMonth(month, fromDate);
-  } else if (toDate) {
+  }
+
+  if (toDate) {
     return compareDesc(month, toDate) === -1 && !isSameMonth(month, toDate);
   }
   return false;

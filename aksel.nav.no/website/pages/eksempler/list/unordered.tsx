@@ -30,4 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "<List> wrapper <ul> og <List.Item> wrapper <li>. Husk å sette riktig 'headingTag' hvis du bruker 'title'.",
 };

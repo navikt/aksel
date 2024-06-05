@@ -35,6 +35,8 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   wrap?: boolean;
   /**
    * CSS `gap` property.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    *
    * @example
    * gap='4'
@@ -49,7 +51,9 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * direction='row'
    * direction={{xs: 'row', sm: 'column'}}
    */
-  direction?: ResponsiveProp<"row" | "column">;
+  direction?: ResponsiveProp<
+    "row" | "column" | "row-reverse" | "column-reverse"
+  >;
 }
 
 export const Stack: OverridableComponent<StackProps, HTMLDivElement> =

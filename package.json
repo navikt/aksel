@@ -13,14 +13,16 @@
     "docgen": "yarn workspaces foreach -v -p run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",
     "updateArticleViews": "deno run --allow-net --allow-env --allow-read --no-config scripts/article-views/update-article-views/main.ts",
-    "chromatic": "npx chromatic --only-changed --project-token x3xqdfgkujg --build-script-name build:storybook",
+    "chromatic": "npx chromatic --only-changed --project-token x3xqdfgkujg --build-script-name build:storybook-chromatic",
+    "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -p -v run test",
     "lint": "yarn eslint --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
     "version": "changeset version && yarn changelog",
-    "release": "yarn boot && yarn docgen && changeset publish"
+    "release": "yarn boot && yarn docgen && changeset publish",
+    "biome:lint": "yarn biome lint ."
   },
   "workspaces": [
     "@navikt/core/*",
@@ -142,6 +144,7 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.3",
     "@changesets/cli": "2.26.2",
     "@storybook/addon-a11y": "^8.0.5",
     "@storybook/addon-essentials": "^8.0.5",
@@ -159,7 +162,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
-    "@whitespace/storybook-addon-html": "^6.0.4",
+    "@whitespace/storybook-addon-html": "^6.1.1",
     "chromatic": "11.3.0",
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
@@ -192,6 +195,7 @@
     "typescript": "^5.1.6",
     "vite": "^5.1.7",
     "vite-plugin-turbosnap": "^1.0.3",
+    "vite-tsconfig-paths": "^4.3.2",
     "yarn": "^1.22.10"
   },
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",

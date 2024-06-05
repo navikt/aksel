@@ -1701,6 +1701,97 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@biomejs/biome@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/biome@npm:1.7.3"
+  dependencies:
+    "@biomejs/cli-darwin-arm64": 1.7.3
+    "@biomejs/cli-darwin-x64": 1.7.3
+    "@biomejs/cli-linux-arm64": 1.7.3
+    "@biomejs/cli-linux-arm64-musl": 1.7.3
+    "@biomejs/cli-linux-x64": 1.7.3
+    "@biomejs/cli-linux-x64-musl": 1.7.3
+    "@biomejs/cli-win32-arm64": 1.7.3
+    "@biomejs/cli-win32-x64": 1.7.3
+  dependenciesMeta:
+    "@biomejs/cli-darwin-arm64":
+      optional: true
+    "@biomejs/cli-darwin-x64":
+      optional: true
+    "@biomejs/cli-linux-arm64":
+      optional: true
+    "@biomejs/cli-linux-arm64-musl":
+      optional: true
+    "@biomejs/cli-linux-x64":
+      optional: true
+    "@biomejs/cli-linux-x64-musl":
+      optional: true
+    "@biomejs/cli-win32-arm64":
+      optional: true
+    "@biomejs/cli-win32-x64":
+      optional: true
+  bin:
+    biome: bin/biome
+  checksum: ad6a6585f1d6fcb9c060319c614b4437d715637ecedbe5f4d45f170f0532894654e7cf5c80420da38c8c626d76fef4b6334c7ee85e6c790bd5ad4f7aa49c5182
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-darwin-arm64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-darwin-arm64@npm:1.7.3"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-darwin-x64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-darwin-x64@npm:1.7.3"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-arm64-musl@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.7.3"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-arm64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-linux-arm64@npm:1.7.3"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-x64-musl@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-linux-x64-musl@npm:1.7.3"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-x64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-linux-x64@npm:1.7.3"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-win32-arm64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-win32-arm64@npm:1.7.3"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-win32-x64@npm:1.7.3":
+  version: 1.7.3
+  resolution: "@biomejs/cli-win32-x64@npm:1.7.3"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@bjoerge/mutiny@npm:^0.5.1":
   version: 0.5.3
   resolution: "@bjoerge/mutiny@npm:0.5.3"
@@ -3732,7 +3823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.8.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.10.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3761,8 +3852,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-css": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3777,7 +3868,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.8.0
+    "@navikt/ds-css": 6.10.0
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3798,11 +3889,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.8.0, @navikt/ds-css@^6.8.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.10.0, @navikt/ds-css@^6.10.0, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-tokens": ^6.10.0
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3815,14 +3906,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.8.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.10.0, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
     "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/aksel-icons": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
     "@testing-library/dom": 9.3.4
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^15.0.7
@@ -3852,11 +3943,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^6.8.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.10.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/ds-tokens": ^6.10.0
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3866,7 +3957,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.8.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.10.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8005,13 +8096,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@whitespace/storybook-addon-html@npm:^6.0.4":
-  version: 6.0.5
-  resolution: "@whitespace/storybook-addon-html@npm:6.0.5"
+"@whitespace/storybook-addon-html@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "@whitespace/storybook-addon-html@npm:6.1.1"
   peerDependencies:
     prettier: ^3.0.0
     react-syntax-highlighter: ^15.0.0
-  checksum: 339bb88f2fa3a321111a70aa5e5885d54e4225540ee7df14623369707a773d227452334414621b759e98c9f0d8edfb24112fcf4089d8c7ef838b713fea30645d
+  checksum: 0e93d370e9665c6cae1f5bd8a3735cb5fe57c7d9be7b13f001747b05173b8f272be823b2f91f9985c9755b591ec4f9b7e118fbd9ca86446bfd9e4efbf928039f
   languageName: node
   linkType: hard
 
@@ -8314,11 +8405,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.8.0
-    "@navikt/ds-css": ^6.8.0
-    "@navikt/ds-react": ^6.8.0
-    "@navikt/ds-tailwind": ^6.8.0
-    "@navikt/ds-tokens": ^6.8.0
+    "@navikt/aksel-icons": ^6.10.0
+    "@navikt/ds-css": ^6.10.0
+    "@navikt/ds-react": ^6.10.0
+    "@navikt/ds-tailwind": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.0
   languageName: unknown
   linkType: soft
 
@@ -8326,6 +8417,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel@workspace:."
   dependencies:
+    "@biomejs/biome": 1.7.3
     "@changesets/cli": 2.26.2
     "@storybook/addon-a11y": ^8.0.5
     "@storybook/addon-essentials": ^8.0.5
@@ -8343,7 +8435,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": ^4.3.0
     "@typescript-eslint/eslint-plugin": ^6.7.3
     "@typescript-eslint/parser": ^6.7.3
-    "@whitespace/storybook-addon-html": ^6.0.4
+    "@whitespace/storybook-addon-html": ^6.1.1
     chromatic: 11.3.0
     concurrently: 7.2.1
     cross-env: ^7.0.0
@@ -8376,6 +8468,7 @@ __metadata:
     typescript: ^5.1.6
     vite: ^5.1.7
     vite-plugin-turbosnap: ^1.0.3
+    vite-tsconfig-paths: ^4.3.2
     yarn: ^1.22.10
   languageName: unknown
   linkType: soft
@@ -14988,6 +15081,13 @@ __metadata:
   version: 0.1.4
   resolution: "globjoin@npm:0.1.4"
   checksum: 0a47d88d566122d9e42da946453ee38b398e0021515ac6a95d13f980ba8c1e42954e05ee26cfcbffce1ac1ee094d0524b16ce1dd874ca52408d6db5c6d39985b
+  languageName: node
+  linkType: hard
+
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: adca162494a176ce9ecf4dd232f7b802956bb1966b37f60c15e49d2e7d961b66c60826366dc2649093cad5a0d69970cfa8875bd1695b5a1a2f33dcd2aa88da3c
   languageName: node
   linkType: hard
 
@@ -26537,7 +26637,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths-webpack-plugin@npm:^4.0.1":
+"tsconfck@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "tsconfck@npm:3.0.3"
+  peerDependencies:
+    typescript: ^5.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: 8ee0d73f730c0747d4bfe569b1931e1b3848f2adfb86ee8f3dc9aedd123f155b363dec7f51dc165fc7938ce592af753aa513adf7753ffcbee1baf97017d919dd
+  languageName: node
+  linkType: hard
+
+"tsconfig-paths-webpack-plugin@npm:^4.0.1, tsconfig-paths-webpack-plugin@npm:^4.1.0":
   version: 4.1.0
   resolution: "tsconfig-paths-webpack-plugin@npm:4.1.0"
   dependencies:
@@ -27593,6 +27707,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vite-tsconfig-paths@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "vite-tsconfig-paths@npm:4.3.2"
+  dependencies:
+    debug: ^4.1.1
+    globrex: ^0.1.2
+    tsconfck: ^3.0.3
+  peerDependencies:
+    vite: "*"
+  peerDependenciesMeta:
+    vite:
+      optional: true
+  checksum: 7105ff641379f9f7055110f33067b236c8ee71b1390c0e6482412cdcc7a98c2e139c1c2a483d14fe9045d1977c14dc931e1ff302d6257ec919c70379db9d2419
+  languageName: node
+  linkType: hard
+
 "vite@npm:^4.5.1":
   version: 4.5.3
   resolution: "vite@npm:4.5.3"
@@ -28082,6 +28212,7 @@ __metadata:
     tailwindcss: ^3.3.3
     tinycolor2: ^1.6.0
     ts-node: ^10.9.1
+    tsconfig-paths-webpack-plugin: ^4.1.0
     typescript: ^5.1.6
     vitest: ^1.2.2
     zod: ^3.22.4

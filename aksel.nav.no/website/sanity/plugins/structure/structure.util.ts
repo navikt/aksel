@@ -1,7 +1,8 @@
+import { groq } from "next-sanity";
 import { StructureBuilder } from "sanity/structure";
 import { SANITY_API_VERSION, allArticleDocuments } from "@/sanity/config";
 
-export const editorIsContributorFilter = `($mail in (contributors[]->{"email": lower(email)})[].email || $mail in (contributors[]->{"email": lower(alt_email)})[].email)`;
+export const editorIsContributorFilter = groq`(lower($mail) in (contributors[]->{"email": lower(email)})[].email || lower($mail) in (contributors[]->{"email": lower(alt_email)})[].email)`;
 
 export function listPublishedArticles(
   S: StructureBuilder,

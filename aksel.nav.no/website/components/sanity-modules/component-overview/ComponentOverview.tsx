@@ -21,9 +21,13 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
     .sort((a, b) => {
       if (a?.status?.tag === "deprecated" && b?.status?.tag === "deprecated") {
         return 0;
-      } else if (a?.status?.tag === "deprecated") {
+      }
+
+      if (a?.status?.tag === "deprecated") {
         return 1;
-      } else if (b?.status?.tag === "deprecated") {
+      }
+
+      if (b?.status?.tag === "deprecated") {
         return -1;
       }
 
@@ -36,11 +40,13 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
           typeof b.sidebarindex === "number"
         ) {
           return a.sidebarindex - b.sidebarindex;
-        } else if (a.sidebarindex !== null) {
-          return -1;
-        } else {
-          return 1;
         }
+
+        if (a.sidebarindex !== null) {
+          return -1;
+        }
+
+        return 1;
       }
       return a?.heading?.localeCompare(b?.heading);
     });

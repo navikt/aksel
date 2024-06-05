@@ -6,13 +6,14 @@ import { getMaxWidth } from "./getMaxWidth";
 import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
-const tokens = Object.entries(TokensBuild).reduce(
-  (old, [key, val]) => ({
-    ...old,
-    [kebabCase(key).replace("a-", "").replace("az-index-", "z-index-")]: val,
-  }),
-  {},
-);
+const tokens = Object.entries(TokensBuild).reduce((old, [key, val]) => {
+  const newKey = kebabCase(key)
+    .replace("a-", "")
+    .replace("az-index-", "z-index-");
+  old[newKey] = val;
+
+  return old;
+}, {});
 
 const config = {
   theme: {

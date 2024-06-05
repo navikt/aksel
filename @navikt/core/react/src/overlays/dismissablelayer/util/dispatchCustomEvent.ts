@@ -5,7 +5,7 @@ type CustomPointerDownEvent = CustomEvent<{
   originalEvent: PointerEvent;
 }>;
 
-export { CustomFocusEvent, CustomPointerDownEvent };
+export type { CustomFocusEvent, CustomPointerDownEvent };
 
 export const CUSTOM_EVENTS = {
   FOCUS_OUTSIDE: "AKSEL_FOCUS_OUTSIDE",

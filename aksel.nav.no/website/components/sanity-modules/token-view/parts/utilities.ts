@@ -18,15 +18,15 @@ export const getGlobalReference = (
 ): { name: string; value: string | number } | null => {
   const globalRefs = Object.entries(docs)
     .filter(([key]) => key.startsWith("global-"))
-    .reduce(
-      (acc, [, value]) => [...acc, ...value],
-      [] as { name: string; value: string | number }[],
-    );
+    .map(([, value]) => value);
 
   return (
-    globalRefs.find(
-      ({ value, name }) => semanticValue === value && notBlacklistedName(name),
-    ) ?? null
+    globalRefs
+      .flat()
+      .find(
+        ({ value, name }) =>
+          semanticValue === value && notBlacklistedName(name),
+      ) ?? null
   );
 };
 

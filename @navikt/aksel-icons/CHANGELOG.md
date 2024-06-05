@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 6.10.0
+
+## 6.9.0
+
+### Minor Changes
+
+- Icons: New icons for geometric shapes ([#2927](https://github.com/navikt/aksel/pull/2927))
+
 ## 6.8.0
 
 ## 6.7.1

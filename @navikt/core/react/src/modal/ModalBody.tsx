@@ -6,9 +6,11 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
-  ({ className, ...rest }, ref) => (
-    <div {...rest} ref={ref} className={cl("navds-modal__body", className)} />
-  ),
+  ({ className, ...rest }, ref) => {
+    return (
+      <div {...rest} ref={ref} className={cl("navds-modal__body", className)} />
+    );
+  },
 );
 
 export default ModalBody;

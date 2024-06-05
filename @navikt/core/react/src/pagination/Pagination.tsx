@@ -25,25 +25,25 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    */
   boundaryCount?: number;
   /**
-   * Callback when current page changes
+   * Callback when current page changes.
    */
   onPageChange?: (page: number) => void;
   /**
-   * Total number of pages
+   * Total number of pages.
    */
   count: number;
   /**
-   * Changes padding, height and font-size
+   * Changes padding, height and font-size.
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
   /**
-   * Display text alongside "previous" and "next" icons
+   * Display text alongside "previous" and "next" icons.
    * @default false
    */
   prevNextTexts?: boolean;
   /**
-   * Override pagination item rendering
+   * Override pagination item rendering.
    * @default (item: PaginationItemProps) => <PaginationItem {...item} />
    */
   renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
@@ -184,7 +184,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
             (step, i) => {
               const n = Number(step);
-              return isNaN(n) ? (
+              return Number.isNaN(n) ? (
                 <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
                   <BodyShort size={size === "xsmall" ? "small" : size}>
                     ...

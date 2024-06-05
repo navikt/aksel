@@ -115,11 +115,13 @@ const axisLabels = (
   const totalDays = differenceInDays(end, start);
   if (totalDays < 40) {
     return dayLabels(start, end, totalDays, direction, templates?.day);
-  } else if (totalDays < 370) {
-    return monthLabels(start, end, direction, templates?.month);
-  } else {
-    return yearLabels(start, end, direction, templates?.year);
   }
+
+  if (totalDays < 370) {
+    return monthLabels(start, end, direction, templates?.month);
+  }
+
+  return yearLabels(start, end, direction, templates?.year);
 };
 
 export const AxisLabels = ({

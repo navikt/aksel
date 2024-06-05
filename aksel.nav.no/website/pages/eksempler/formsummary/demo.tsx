@@ -26,7 +26,7 @@ const Example = () => {
 
         <FormSummary.Answer>
           <FormSummary.Label>Fødselsnummer</FormSummary.Label>
-          <FormSummary.Value>12345678910</FormSummary.Value>
+          <FormSummary.Value>123456 78910</FormSummary.Value>
         </FormSummary.Answer>
 
         <FormSummary.Answer>
