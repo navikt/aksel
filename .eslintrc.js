@@ -110,6 +110,12 @@ module.exports = {
         "import/no-named-export": "error",
       },
     },
+    {
+      files: ["examples/**"],
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
+    },
   ],
   globals: {
     Locale: "readonly",
@@ -119,7 +125,6 @@ module.exports = {
     "node_modules",
     "lib",
     "public",
-    "examples",
     "esm",
     "cjs",
     "dist",
