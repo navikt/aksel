@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.10.1
+
+### Patch Changes
+
+- :lipstick: Remove bottom margin on last item in Stepper and adjust FormProgress accordingly ([#2971](https://github.com/navikt/aksel/pull/2971))
+
 ## 6.10.0
 
 ### Minor Changes
