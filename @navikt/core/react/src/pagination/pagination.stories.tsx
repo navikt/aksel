@@ -1,8 +1,10 @@
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 import { Link, HashRouter as Router } from "react-router-dom";
+import { VStack } from "../layout/stack";
 import Pagination from "./Pagination";
 
-export default {
+const meta: Meta<typeof Pagination> = {
   title: "ds-react/Pagination",
   component: Pagination,
   argTypes: {
@@ -13,12 +15,21 @@ export default {
       },
     },
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
-export const Default = (props: any) => {
+export default meta;
+
+type Story = StoryObj<typeof Pagination>;
+type StoryFunction = StoryFn<typeof Pagination>;
+
+export const Default: StoryFunction = (props) => {
   const [page, setPage] = useState(props.page);
   return <Pagination {...props} page={page} onPageChange={setPage} />;
 };
+
 Default.args = {
   page: 2,
   count: 8,
@@ -27,14 +38,8 @@ Default.args = {
   prevNextTexts: false,
 };
 
-export const PrevNextText = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
+export const PrevNextText: StoryFunction = (props) => {
+  const [page, setPage] = useState(2);
   return (
     <div className="colgap" style={{ alignItems: "center" }}>
       <Pagination {...props} page={page} onPageChange={setPage} prevNextTexts />
@@ -56,68 +61,44 @@ export const PrevNextText = () => {
   );
 };
 
-export const Small = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
+PrevNextText.args = {
+  page: 2,
+  count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
+};
+
+export const Small: StoryFunction = (props) => {
+  const [page, setPage] = useState(2);
+
   return (
     <Pagination {...props} page={page} onPageChange={setPage} size="small" />
   );
 };
 
-export const XSmall = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
+Small.args = {
+  page: 1,
+  count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
+};
+export const XSmall: StoryFunction = (props) => {
+  const [page, setPage] = useState(2);
+
   return (
     <Pagination {...props} page={page} onPageChange={setPage} size="xsmall" />
   );
 };
 
-export const AsLink = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
-  return (
-    <Pagination
-      {...props}
-      page={page}
-      onPageChange={setPage}
-      renderItem={(item) => (
-        <Pagination.Item {...item} as={Link} to={`?page=${item.page}`} />
-      )}
-    />
-  );
+XSmall.args = {
+  page: 1,
+  count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
 };
 
-AsLink.decorators = [
-  (Story) => (
-    <Router>
-      <Story />
-    </Router>
-  ),
-];
-
-export const Heading = () => {
-  const [page, setPage] = useState(1);
-  const props = {
-    page: 1,
-    count: 8,
-    siblingCount: 1,
-    boundaryCount: 1,
-  };
+export const Heading: StoryFunction = (props) => {
+  const [page, setPage] = useState(2);
 
   return (
     <>
@@ -131,4 +112,82 @@ export const Heading = () => {
       <h2>Heading etter pagination</h2>
     </>
   );
+};
+
+Heading.args = {
+  page: 1,
+  count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
+};
+
+export const AsLink: StoryFunction = (props) => {
+  const [page, setPage] = useState(1);
+  return (
+    <Pagination
+      {...props}
+      page={page}
+      onPageChange={setPage}
+      renderItem={(item) => (
+        <Pagination.Item {...item} as={Link} to={`?page=${item.page}`} />
+      )}
+    />
+  );
+};
+
+AsLink.args = {
+  page: 1,
+  count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
+};
+
+AsLink.decorators = [
+  (Story) => (
+    <Router>
+      <Story />
+    </Router>
+  ),
+];
+
+export const Chromatic: Story = {
+  render: (props) => (
+    <VStack gap="8">
+      <div>
+        <h2>Default</h2>
+        <Default {...props} />
+      </div>
+      <div>
+        <h2>PrevNextText</h2>
+        <PrevNextText {...props} />
+      </div>
+      <div>
+        <h2>Small</h2>
+        <Small {...props} />
+      </div>
+      <div>
+        <h2>XSmall</h2>
+        <XSmall {...props} />
+      </div>
+      <div>
+        <h2>Heading</h2>
+        <Heading {...props} />
+      </div>
+      <div>
+        <h2>AsLink</h2>
+        <AsLink {...props} />
+      </div>
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+  decorators: [
+    (Story) => (
+      <Router>
+        <Story />
+      </Router>
+    ),
+  ],
+  args: { page: 2, count: 8, siblingCount: 1, boundaryCount: 1 },
 };
