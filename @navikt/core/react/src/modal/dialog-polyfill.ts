@@ -631,8 +631,6 @@ dialogPolyfill.DialogManager = function () {
     this.mo_ = new MutationObserver(function (records) {
       var removed = [];
       records.forEach(function (rec) {
-        // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type c in this scenario
-        // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
         for (var i = 0, c; (c = rec.removedNodes[i]); ++i) {
           if (!(c instanceof Element)) {
             continue;
@@ -680,8 +678,6 @@ dialogPolyfill.DialogManager.prototype.unblockDocument = function () {
 dialogPolyfill.DialogManager.prototype.updateStacking = function () {
   var zIndex = this.zIndexHigh_;
 
-  // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
-  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   for (var i = 0, dpi; (dpi = this.pendingDialogStack[i]); ++i) {
     dpi.updateZIndex(--zIndex, --zIndex);
     if (i === 0) {
@@ -706,10 +702,7 @@ dialogPolyfill.DialogManager.prototype.updateStacking = function () {
 dialogPolyfill.DialogManager.prototype.containedByTopDialog_ = function (
   candidate,
 ) {
-  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   while ((candidate = findNearestDialog(candidate))) {
-    // biome-ignore lint/suspicious/noImplicitAnyLet: Reduntant to type dpi in this scenario
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     for (var i = 0, dpi; (dpi = this.pendingDialogStack[i]); ++i) {
       if (dpi.dialog === candidate) {
         return i === 0; // only valid if top-most
