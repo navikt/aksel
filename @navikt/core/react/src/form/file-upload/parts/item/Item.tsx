@@ -45,7 +45,7 @@ export interface FileUploadItemProps
    */
   status?: "downloading" | "uploading" | "idle";
   /**
-   * File-description. Replaces filesize when status is "idle".
+   * File description. Replaces file size when status is "idle".
    * This is useful for displaying upload date. Should not act as a replacement for error messages.
    */
   description?: string;
