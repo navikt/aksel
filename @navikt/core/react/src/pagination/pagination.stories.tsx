@@ -120,11 +120,15 @@ export const Heading = () => {
   };
 
   return (
-    <Pagination
-      {...props}
-      page={page}
-      onPageChange={setPage}
-      heading={{ tag: "h2", text: "Dette er en pagination heading" }}
-    />
+    <>
+      <h2>Heading før pagination</h2>
+      <Pagination
+        {...props}
+        page={page}
+        onPageChange={setPage}
+        heading={{ tag: "h2", text: "Dette er en pagination heading" }}
+      />
+      <h2>Heading etter pagination</h2>
+    </>
   );
 };

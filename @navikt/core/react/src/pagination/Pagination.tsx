@@ -49,7 +49,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    */
   renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
   /**
-   * Pagination-heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
+   * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
    */
   heading?: {
     tag: "h2" | "h3" | "h4" | "h5" | "h6";
@@ -134,7 +134,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     },
     ref,
   ) => {
-    const headingId = useId("pagination-heading");
+    const headingId = useId();
 
     if (page < 1) {
       console.error("page cannot be less than 1");

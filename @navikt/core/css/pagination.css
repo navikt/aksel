@@ -1,9 +1,14 @@
+.navds-pagination {
+  position: relative;
+}
+
 .navds-pagination__list {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   gap: var(--a-spacing-3);
+  position: relative;
 }
 
 .navds-pagination__ellipsis {
