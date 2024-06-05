@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: yarn
+          node-version: lts/*
       - name: set-env for yarn install to @navikt scope
         shell: bash
         run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
