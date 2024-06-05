@@ -34,7 +34,7 @@
 .navds-list ul .navds-list__item {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--a-spacing-2);
+  gap: var(--a-spacing-3);
   padding-left: 0;
 }
 
