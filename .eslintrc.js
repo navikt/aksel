@@ -33,17 +33,6 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
-    "no-restricted-imports": [
-      "error",
-      {
-        paths: [
-          {
-            name: "*",
-            message: "Please use Bar from /import-bar/baz/ instead.",
-          },
-        ],
-      },
-    ],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
