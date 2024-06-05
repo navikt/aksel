@@ -18,14 +18,6 @@
   margin-block-end: var(--a-spacing-2);
 }
 
-.navds-list--small li {
-  margin-block-end: var(--a-spacing-2);
-}
-
-.navds-list--nested li {
-  margin-block-end: var(--a-spacing-2);
-}
-
 .navds-list:last-child > ul > li:last-child,
 .navds-list:last-child > ol > li:last-child {
   margin-bottom: 0;
@@ -50,25 +42,25 @@
 .navds-list .navds-list__item-marker--bullet {
   display: flex;
   align-items: center;
-  height: var(--a-font-line-height-large);
+  height: var(--a-font-line-height-xlarge);
   grid-column: 1 / 2;
   color: var(--ac-list-marker-ul-color, var(--ac-list-marker-color, var(--a-icon-default)));
 }
 
 .navds-list--small .navds-list__item-marker--bullet {
-  height: var(--a-font-line-height-medium);
+  height: var(--a-font-line-height-large);
 }
 
 .navds-list__item-marker--icon {
   color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
   display: flex;
   align-items: center;
-  height: var(--a-font-line-height-large);
+  height: var(--a-font-line-height-xlarge);
   padding-block-end: 1px;
 }
 
 .navds-list--small .navds-list__item-marker--icon {
-  height: var(--a-font-line-height-medium);
+  height: var(--a-font-line-height-large);
 }
 
 .navds-list__item-marker--icon svg {
@@ -93,10 +85,10 @@
   font-weight: var(--a-font-weight-bold);
   font-size: var(--a-font-size-large);
   color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--a-font-line-height-xlarge);
 }
 
 .navds-list--small ol li::marker {
   font-size: var(--a-font-size-small);
-  line-height: var(--a-font-line-height-medium);
+  line-height: var(--a-font-line-height-large);
 }
