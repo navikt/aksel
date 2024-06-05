@@ -65,7 +65,7 @@ export const Description: StoryFn = () => {
   );
 };
 
-export const Error: StoryFn = () => {
+export const WithError: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea
@@ -235,7 +235,7 @@ export const Chromatic: Story = {
       <Textarea {...props} label="Textarea" />
       <Small />
       <Description />
-      <Error />
+      <WithError />
       <Disabled />
       <HideLabel />
       <MaxLength />

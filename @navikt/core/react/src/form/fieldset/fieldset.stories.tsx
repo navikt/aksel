@@ -79,7 +79,7 @@ export const ErrorPropagation: Story = {
   },
 };
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
     legend: "Mollit eiusmod",
     description:

@@ -38,7 +38,6 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noShadowRestrictedNames": "off",
         "noArrayIndexKey": "off",
         "noAssignInExpressions": "off",
         "noDoubleEquals": "off",

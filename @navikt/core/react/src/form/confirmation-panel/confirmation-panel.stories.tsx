@@ -76,7 +76,7 @@ export const NoContent = () => {
   );
 };
 
-export const Error = () => {
+export const WithError = () => {
   const [checked, setChecked] = useState(false);
   return (
     <div className="colgap">
@@ -118,7 +118,7 @@ export const Chromatic: Story = {
       </div>
       <div>
         <h2>Error</h2>
-        <Error />
+        <WithError />
       </div>
     </div>
   ),
