@@ -38,7 +38,7 @@ export function get(
 
 function getKeypath(str: string) {
   const path: string[] = [];
-  let result: RegExpExecArray | null = OBJECT_NOTATION_MATCHER.exec(str);
+  let result = OBJECT_NOTATION_MATCHER.exec(str);
 
   while (result) {
     const [, first, second] = result;
