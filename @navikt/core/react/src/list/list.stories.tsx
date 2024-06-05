@@ -392,6 +392,10 @@ export const Chromatic: Story = {
         <h2>Nested</h2>
         <Nested.render />
       </div>
+      <div>
+        <h2>Spacing</h2>
+        <Spacing.render />
+      </div>
     </VStack>
   ),
   parameters: {
