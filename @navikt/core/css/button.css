@@ -53,6 +53,7 @@
 
   padding: var(--ac-button-padding-small, var(--__ac-button-padding));
   min-height: 2rem;
+  min-width: 2rem;
 }
 
 .navds-button--xsmall {
