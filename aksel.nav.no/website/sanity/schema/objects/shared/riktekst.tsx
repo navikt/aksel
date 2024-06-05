@@ -68,7 +68,7 @@ export const block = {
         title: "Quote",
         value: "quote",
         icon: () => (
-          <span className="font-semibold" aria-label="quote">
+          <span className="font-semibold">
             Q
           </span>
         ),
