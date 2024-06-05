@@ -120,7 +120,7 @@ export const Chromatic: Story = {
         <Description />
       </div>
       <div>
-        <h2>Error</h2>
+        <h2>WithError</h2>
         <WithError />
       </div>
       <div>
