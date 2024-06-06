@@ -1,9 +1,7 @@
 import { expect, test } from "@playwright/test";
-import { getDirectories } from "../scripts/update-examples/parts/get-directories";
-import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 import urls from "./test-urls.json";
 
-test("Smoketest all pages", () => {
+test.describe("Smoketest all pages", () => {
   for (const url of urls) {
     test(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
@@ -25,31 +23,4 @@ test("Smoketest all pages", () => {
       }
     });
   }
-
-  test("sandbox examples (just a few)", async () => {
-    const examples = getDirectories("eksempler");
-
-    const folders = [...examples];
-
-    const randomFolders = [folders[0], folders[20], folders[50]];
-
-    for (const folder of randomFolders) {
-      const files = await parseCodeFiles(folder.path, "eksempler");
-
-      const file = files[0];
-      if (!file?.sandboxEnabled) {
-        continue;
-      }
-
-      const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
-
-      test(`check ${folder.path} - ${file.navn}`, async ({ page }) => {
-        await page.goto(`http://localhost:3000${url}`);
-        // await page.waitForLoadState("domcontentloaded");
-        const count = await page.locator("#sandbox-wrapper").count();
-
-        expect(count).toBeGreaterThan(0);
-      });
-    }
-  });
 });

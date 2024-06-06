@@ -1,51 +1,28 @@
 import { expect, test } from "@playwright/test";
 import { getDirectories } from "../scripts/update-examples/parts/get-directories";
-import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
+import { getFiles } from "../scripts/update-examples/parts/get-files";
+import { parseCodeFile } from "../scripts/update-examples/parts/parse-code-files";
 
-test("sandbox examples (all)", () => {
-  test("eksempler", async () => {
-    const subdirs = getDirectories("eksempler");
+const examples = getDirectories("eksempler");
 
-    for (const subdir of subdirs) {
-      const files = await parseCodeFiles(subdir.path, "eksempler");
-      for (const file of files) {
-        if (!file.sandboxEnabled) {
-          continue;
-        }
+for (const example of examples) {
+  const testFiles = getFiles(example.path, "eksempler");
 
-        const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
+  for (const testFile of testFiles.files) {
+    test(`check ${testFiles.dirPath} - ${testFile}`, async ({ page }) => {
+      const parsedFile = await parseCodeFile(testFiles.dirPath, testFile);
+      const url = `/sandbox/preview/index.html?code=${parsedFile.sandboxBase64}`;
 
-        test(`check ${subdir.path} - ${file.navn}`, async ({ page }) => {
-          await page.goto(`http://localhost:3000${url}`);
-          await page.waitForLoadState("domcontentloaded");
-          const count = await page.locator("#sandbox-wrapper").count();
+      test.skip(
+        !parsedFile.sandboxEnabled,
+        `Skipping ${testFiles.dirPath} - ${testFile}`,
+      );
 
-          expect(count).toBeGreaterThan(0);
-        });
-      }
-    }
-  });
+      await page.goto(`http://localhost:3000${url}`);
+      await page.waitForLoadState("domcontentloaded");
+      const count = await page.locator("#sandbox-wrapper").count();
 
-  /* test("templates", () => {
-    const subdirs = getDirectories("templates");
-
-    for (const subdir of subdirs) {
-      const files = parseCodeFiles(subdir.path, "templates");
-      for (const file of files) {
-        if (!file.sandboxEnabled) {
-          continue;
-        }
-
-        const url = `/sandbox/preview/index.html?code=${file.sandboxBase64}`;
-
-        test(`check ${subdir.path} - ${file.navn}`, async ({ page }) => {
-          await page.goto(`http://localhost:3000${url}`);
-          await page.waitForLoadState("domcontentloaded");
-          const count = await page.locator("#sandbox-wrapper").count();
-
-          expect(count).toBeGreaterThan(0);
-        });
-      }
-    }
-  }); */
-});
+      expect(count).toBeGreaterThan(0);
+    });
+  }
+}

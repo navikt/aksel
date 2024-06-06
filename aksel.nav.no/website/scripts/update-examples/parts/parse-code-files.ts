@@ -1,8 +1,8 @@
 import fs from "fs";
-import path from "path";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
+import { getFiles } from "./get-files";
 import { processAndCompressForURI } from "./sandbox-process-base64";
 import { sortResult } from "./sort";
 
@@ -20,38 +20,29 @@ export async function parseCodeFiles(
   dirName: string,
   rootDir: RootDirectoriesT,
 ) {
-  const codeDirPath = path.resolve(
-    process.cwd(),
-    `pages/${rootDir}/${dirName}`,
-  );
-
-  if (!fs.existsSync(codeDirPath)) {
-    return [];
-  }
-
-  const codeFiles = fs
-    .readdirSync(codeDirPath)
-    .filter((x) => !x.includes(".json"));
+  const codeFiles = getFiles(dirName, rootDir);
 
   const parsedCode: FileArrayT = await Promise.all(
-    codeFiles.map(async (file) => {
-      const filePath = `${codeDirPath}/${file}`;
-      const code = fs.readFileSync(filePath, "utf-8");
-      const args = extractArgs(code, filePath);
-      const filteredCode = await filterCode(code, filePath);
-
-      return {
-        innhold: filteredCode,
-        title: args.title ?? fixName(file.replace(".tsx", "")),
-        _key: file.split(".")[0],
-        navn: file.replace(".tsx", ""),
-        description: args.desc,
-        index: args.index ?? 1,
-        sandboxBase64: processAndCompressForURI(filteredCode),
-        sandboxEnabled: args.sandbox ?? true,
-      };
-    }),
+    codeFiles.files.map(async (file) => parseCodeFile(codeFiles.dirPath, file)),
   );
 
   return sortResult(parsedCode);
+}
+
+export async function parseCodeFile(dirPath: string, file: string) {
+  const filePath = `${dirPath}/${file}`;
+  const code = fs.readFileSync(filePath, "utf-8");
+  const args = extractArgs(code, filePath);
+  const filteredCode = await filterCode(code, filePath);
+
+  return {
+    innhold: filteredCode,
+    title: args.title ?? fixName(file.replace(".tsx", "")),
+    _key: file.split(".")[0],
+    navn: file.replace(".tsx", ""),
+    description: args.desc,
+    index: args.index ?? 1,
+    sandboxBase64: processAndCompressForURI(filteredCode),
+    sandboxEnabled: args.sandbox ?? true,
+  };
 }
