@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 import { getDirectories } from "../scripts/update-examples/parts/get-directories";
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 
-test.describe("sandbox examples (all)", () => {
-  test.describe("eksempler", async () => {
+test("sandbox examples (all)", () => {
+  test("eksempler", async () => {
     const subdirs = getDirectories("eksempler");
 
     for (const subdir of subdirs) {
@@ -26,7 +26,7 @@ test.describe("sandbox examples (all)", () => {
     }
   });
 
-  /* test.describe("templates", () => {
+  /* test("templates", () => {
     const subdirs = getDirectories("templates");
 
     for (const subdir of subdirs) {

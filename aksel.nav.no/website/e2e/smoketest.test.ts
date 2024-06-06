@@ -3,7 +3,7 @@ import { getDirectories } from "../scripts/update-examples/parts/get-directories
 import { parseCodeFiles } from "../scripts/update-examples/parts/parse-code-files";
 import urls from "./test-urls.json";
 
-test.describe("Smoketest all pages", () => {
+test("Smoketest all pages", () => {
   for (const url of urls) {
     test(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
@@ -26,7 +26,7 @@ test.describe("Smoketest all pages", () => {
     });
   }
 
-  test.describe("sandbox examples (just a few)", async () => {
+  test("sandbox examples (just a few)", async () => {
     const examples = getDirectories("eksempler");
 
     const folders = [...examples];
