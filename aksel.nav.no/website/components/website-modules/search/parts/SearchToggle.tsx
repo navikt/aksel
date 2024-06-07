@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { Modal } from "@navikt/ds-react";
 import { AkselSearchButton } from "@/web/search/parts/SearchButton";
 import { SearchContext, SearchNavigationContext } from "../providers";
-import { Error } from "./Error";
 import { SearchForm } from "./Form";
 import { Results } from "./Results";
+import { Skeleton } from "./Skeleton";
 
 export const Search = () => {
   const { open, setOpen } = useContext(SearchContext);
@@ -30,7 +30,7 @@ export const Search = () => {
           closeButton: true,
         }}
       >
-        <Error />
+        <Skeleton />
         <SearchForm />
         <Results />
       </Modal>

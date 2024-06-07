@@ -8,6 +8,9 @@ import { Textarea } from "./index";
 const meta: Meta<typeof Textarea> = {
   title: "ds-react/Textarea",
   component: Textarea,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
 
@@ -40,9 +43,6 @@ export const Default: StoryObj<typeof Textarea> = {
     maxRows: { type: "number" },
     minRows: { type: "number" },
   },
-  parameters: {
-    chromatic: { disable: true },
-  },
 };
 
 export const Small: StoryFn = () => {
@@ -65,7 +65,7 @@ export const Description: StoryFn = () => {
   );
 };
 
-export const Error: StoryFn = () => {
+export const WithError: StoryFn = () => {
   return (
     <div className="colgap">
       <Textarea
@@ -235,7 +235,7 @@ export const Chromatic: Story = {
       <Textarea {...props} label="Textarea" />
       <Small />
       <Description />
-      <Error />
+      <WithError />
       <Disabled />
       <HideLabel />
       <MaxLength />
