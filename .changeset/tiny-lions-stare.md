@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-ToggleGroup: Supports `icon` and `label`-prop as a replacement for `children`. Children is marked as deprecated and will be removed in future major-versions.
+ToggleGroup: Added props `icon` and `label` as a replacement for `children`. Children is marked as deprecated and will be removed in a future major-version.
