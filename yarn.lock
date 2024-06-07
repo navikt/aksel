@@ -1701,18 +1701,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@biomejs/biome@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/biome@npm:1.7.3"
+"@biomejs/biome@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/biome@npm:1.8.0"
   dependencies:
-    "@biomejs/cli-darwin-arm64": 1.7.3
-    "@biomejs/cli-darwin-x64": 1.7.3
-    "@biomejs/cli-linux-arm64": 1.7.3
-    "@biomejs/cli-linux-arm64-musl": 1.7.3
-    "@biomejs/cli-linux-x64": 1.7.3
-    "@biomejs/cli-linux-x64-musl": 1.7.3
-    "@biomejs/cli-win32-arm64": 1.7.3
-    "@biomejs/cli-win32-x64": 1.7.3
+    "@biomejs/cli-darwin-arm64": 1.8.0
+    "@biomejs/cli-darwin-x64": 1.8.0
+    "@biomejs/cli-linux-arm64": 1.8.0
+    "@biomejs/cli-linux-arm64-musl": 1.8.0
+    "@biomejs/cli-linux-x64": 1.8.0
+    "@biomejs/cli-linux-x64-musl": 1.8.0
+    "@biomejs/cli-win32-arm64": 1.8.0
+    "@biomejs/cli-win32-x64": 1.8.0
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -1732,62 +1732,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: ad6a6585f1d6fcb9c060319c614b4437d715637ecedbe5f4d45f170f0532894654e7cf5c80420da38c8c626d76fef4b6334c7ee85e6c790bd5ad4f7aa49c5182
+  checksum: 0a77d2ce129b7f422f15bc29c0108537f9ec9acd6c9ccbfca360005ad88255dc6f90a961e30d97e2ea664d149c2276fb8171ca9eacdfd0cd0ed9024d7f86bf8e
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-darwin-arm64@npm:1.7.3"
+"@biomejs/cli-darwin-arm64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-darwin-arm64@npm:1.8.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-darwin-x64@npm:1.7.3"
+"@biomejs/cli-darwin-x64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-darwin-x64@npm:1.8.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.7.3"
+"@biomejs/cli-linux-arm64-musl@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.8.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-linux-arm64@npm:1.7.3"
+"@biomejs/cli-linux-arm64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-linux-arm64@npm:1.8.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-linux-x64-musl@npm:1.7.3"
+"@biomejs/cli-linux-x64-musl@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-linux-x64-musl@npm:1.8.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-linux-x64@npm:1.7.3"
+"@biomejs/cli-linux-x64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-linux-x64@npm:1.8.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-win32-arm64@npm:1.7.3"
+"@biomejs/cli-win32-arm64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-win32-arm64@npm:1.8.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:1.7.3":
-  version: 1.7.3
-  resolution: "@biomejs/cli-win32-x64@npm:1.7.3"
+"@biomejs/cli-win32-x64@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/cli-win32-x64@npm:1.8.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3823,7 +3823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@^6.10.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@^6.10.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3852,8 +3852,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": ^6.10.0
-    "@navikt/ds-tokens": ^6.10.0
+    "@navikt/ds-css": ^6.10.1
+    "@navikt/ds-tokens": ^6.10.1
     concurrently: 7.2.1
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
@@ -3868,7 +3868,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": 6.10.0
+    "@navikt/ds-css": 6.10.1
     axios: 1.6.0
     chalk: 4.1.0
     clipboardy: ^2.3.0
@@ -3889,11 +3889,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@6.10.0, @navikt/ds-css@^6.10.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@6.10.1, @navikt/ds-css@^6.10.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.1
     cssnano: 6.0.0
     fast-glob: 3.2.11
     lodash: 4.17.21
@@ -3906,14 +3906,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^6.10.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^6.10.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": 0.25.4
     "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^6.10.0
-    "@navikt/ds-tokens": ^6.10.0
+    "@navikt/aksel-icons": ^6.10.1
+    "@navikt/ds-tokens": ^6.10.1
     "@testing-library/dom": 9.3.4
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^15.0.7
@@ -3943,11 +3943,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^6.10.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^6.10.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^6.10.0
+    "@navikt/ds-tokens": ^6.10.1
     color: 4.2.3
     lodash: ^4.17.21
     tailwindcss: ^3.3.3
@@ -3957,7 +3957,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^6.10.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^6.10.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -8405,11 +8405,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": ^6.10.0
-    "@navikt/ds-css": ^6.10.0
-    "@navikt/ds-react": ^6.10.0
-    "@navikt/ds-tailwind": ^6.10.0
-    "@navikt/ds-tokens": ^6.10.0
+    "@navikt/aksel-icons": ^6.10.1
+    "@navikt/ds-css": ^6.10.1
+    "@navikt/ds-react": ^6.10.1
+    "@navikt/ds-tailwind": ^6.10.1
+    "@navikt/ds-tokens": ^6.10.1
   languageName: unknown
   linkType: soft
 
@@ -8417,7 +8417,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel@workspace:."
   dependencies:
-    "@biomejs/biome": 1.7.3
+    "@biomejs/biome": 1.8.0
     "@changesets/cli": 2.26.2
     "@storybook/addon-a11y": ^8.0.5
     "@storybook/addon-essentials": ^8.0.5
