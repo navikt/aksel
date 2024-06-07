@@ -4,29 +4,6 @@ import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
 
-// The recipe for success!
-//
-// 1. look at Menu PR, copy pasta + adjust
-// 2. useDescendants for switching focus (iterating focus through list)
-// 3. <Slot /> usage? it's (radix) the enabler for asChild (merge parent props into single child + melt away)
-// 4. <dismissableLayer /> click/focus outside
-// 5. <Floating /> utility
-//
-// perhaps a desired API?
-//
-// <VirtualFocus>
-//    <VirtualFocus.Anchor>
-//      <VirtualFocus.Content>
-//          <VirtualFocus.Item>
-//             ...
-//          </VirtualFocus.Item>
-//          <VirtualFocus.Item>
-//             ...
-//          </VirtualFocus.Item>
-//      <VirtualFocus.Content>
-//    </VirtualFocus.Anchor>
-// </VirtualFocus>
-
 export const [
   VirtualFocusDescendantsProvider,
   useVirtualFocusDescendantsContext,
@@ -56,13 +33,6 @@ type Props = {
   loop?: boolean;
 };
 
-// role=listbox
-//
-// videre:
-// 1. use this <VirtualFocus> inside other stuff we have (as a demo / dogfood)
-//   - Combobox
-//   - Search (prop for virtualfocus on <Search>)
-// 2. release it publicly?
 export const VirtualFocus = ({ children, loop = true }: Props) => {
   const descendants = useVirtualFocusDescendantInitializer();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
