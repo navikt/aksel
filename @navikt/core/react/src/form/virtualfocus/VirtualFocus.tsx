@@ -56,7 +56,6 @@ type Props = {
   loop?: boolean;
 };
 
-// set aria-activedescendant
 // role=listbox
 //
 // videre:
@@ -103,7 +102,7 @@ export const VirtualFocusAnchor = forwardRef<
   const { virtualFocusIdx, setVirtualFocusIdx, loop } =
     useVirtualFocusInternalContext();
 
-  const { register, descendants, index } = useVirtualFocusDescendant({
+  const { register, descendants } = useVirtualFocusDescendant({
     handlePick: () => {
       pick();
     },
@@ -126,7 +125,6 @@ export const VirtualFocusAnchor = forwardRef<
           setVirtualFocusIdx(0);
         }
       }}
-      aria-activedescendant={`descendant-${index}`} // TODO: useId()
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
           event.preventDefault();
