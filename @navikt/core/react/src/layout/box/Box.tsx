@@ -3,13 +3,14 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/types";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  BackgroundToken,
+  BackgroundColorToken,
   BorderColorToken,
   BorderRadiiToken,
   ResponsiveProp,
   ShadowToken,
   SpaceDelimitedAttribute,
   SpacingScale,
+  SurfaceColorToken,
 } from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,7 +18,7 @@ export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    */
-  background?: BackgroundToken;
+  background?: BackgroundColorToken | SurfaceColorToken;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).

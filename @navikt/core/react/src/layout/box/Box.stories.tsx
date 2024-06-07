@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { ReactNode } from "react";
+import React from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyLong, Detail, Heading } from "../../typography";
 import { HGrid } from "../grid";
 import { HStack, VStack } from "../stack";
-import { BackgroundToken, BorderRadiiToken } from "../utilities/types";
-import { Box } from "./Box";
+import { Box, BoxProps } from "./Box";
 
 const meta: Meta<typeof Box> = {
   title: "ds-react/Primitives/Box",
@@ -34,11 +33,7 @@ const Card = ({
   background,
   borderRadius = "xlarge",
   children,
-}: {
-  background?: BackgroundToken;
-  borderRadius?: BorderRadiiToken;
-  children: ReactNode;
-}) => (
+}: Pick<BoxProps, "background" | "borderRadius" | "children">) => (
   <Box
     padding="4"
     background={background}
