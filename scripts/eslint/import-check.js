@@ -8,8 +8,7 @@ module.exports = {
         ) {
           context.report({
             node,
-            message:
-              "Import from this module is not allowed. Only packages from '@navikt' or 'react' are allowed.",
+            message: "You can only import from '@navikt' and 'react'.",
           });
         }
       },
