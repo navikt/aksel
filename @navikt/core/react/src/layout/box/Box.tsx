@@ -13,9 +13,15 @@ import {
 } from "../utilities/types";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** CSS `background-color` property. Accepts a color token. */
+  /**
+   * CSS `background-color` property.
+   * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   */
   background?: BackgroundToken;
-  /** CSS `border-color` property. Accepts a color token. */
+  /**
+   * CSS `border-color` property.
+   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   */
   borderColor?: BorderColorToken;
   /**
    * CSS `border-radius` property.
