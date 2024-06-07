@@ -21,7 +21,7 @@ import {
   Footer,
   Header,
   useDekorator,
-} from "../../../components/website-modules/examples/__parts/Dekorator1";
+} from "../../../components/website-modules/examples/__parts/Dekorator";
 
 function Example() {
   useDekorator();
