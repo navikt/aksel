@@ -13,7 +13,7 @@ type BaseProps = Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> & {
 
 type ChildrenProps = {
   /**
-   * @deprecated
+   * @deprecated Use `label` and/or `icon` as replacement.
    */
   children: React.ReactNode;
   label?: never;
