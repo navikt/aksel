@@ -1,3 +1,7 @@
+.navds-pagination {
+  position: relative;
+}
+
 .navds-pagination__list {
   margin: 0;
   padding: 0;
