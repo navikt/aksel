@@ -86,9 +86,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
           className="navds-toggle-group__button-inner"
           size={ctx?.size}
         >
-          {children ? (
-            children
-          ) : (
+          {children ?? (
             <>
               {icon}
               {label}
