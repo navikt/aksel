@@ -39,7 +39,7 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
-        "noAssignInExpressions": "off",
+
         "noDoubleEquals": "off",
         "noMisleadingCharacterClass": "off"
       },
@@ -67,7 +67,8 @@
       "**/dist/**",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
-      "**/.next/**"
+      "**/.next/**",
+      "**/modal/dialog-polyfill.ts"
     ]
   }
 }
