@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  forwardRef,
+  useId,
+  useState,
+} from "react";
 import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
@@ -22,6 +28,7 @@ const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
     virtualFocusIdx: number;
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
     loop: boolean;
+    uniqueId: string;
   }>();
 
 type Props = {
@@ -42,6 +49,7 @@ export const VirtualFocus = ({ children, loop = true }: Props) => {
       virtualFocusIdx={virtualFocusIdx}
       setVirtualFocusIdx={setVirtualFocusIdx}
       loop={loop}
+      uniqueId={useId()}
     >
       <VirtualFocusDescendantsProvider value={descendants}>
         {children}
@@ -54,7 +62,7 @@ export interface VirtualFocusAnchorProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function that is run when the focused element
-   * is to be picked (eg. do an actual search, change route)
+   * is to be picked (eg. do an actual search, change route... etc)
    */
   pick: () => void;
   /**
@@ -69,10 +77,10 @@ export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
 >(({ children, pick, onActive }, ref) => {
-  const { virtualFocusIdx, setVirtualFocusIdx, loop } =
+  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId } =
     useVirtualFocusInternalContext();
 
-  const { register, descendants } = useVirtualFocusDescendant({
+  const { register, descendants, index } = useVirtualFocusDescendant({
     handlePick: () => {
       pick();
     },
@@ -86,15 +94,10 @@ export const VirtualFocusAnchor = forwardRef<
 
   return (
     <div
+      id={`descendant-${uniqueId}-${index}`}
       tabIndex={0}
       role="searchbox"
       ref={mergedRefs}
-      onBlur={() => {
-        const curr = descendants.item(virtualFocusIdx);
-        if (curr?.node) {
-          setVirtualFocusIdx(0);
-        }
-      }}
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") {
           event.preventDefault();
@@ -132,18 +135,7 @@ export const VirtualFocusContent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { setVirtualFocusIdx } = useVirtualFocusInternalContext();
-
-  return (
-    <div
-      className="navds-virtualfocus-content"
-      onMouseLeave={() => {
-        setVirtualFocusIdx(0);
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="navds-virtualfocus-content">{children}</div>;
 };
 
 export interface VirtualFocusItemProps
@@ -153,38 +145,41 @@ export interface VirtualFocusItemProps
    * (virtually, not actual focus, eg. set a border around an item)
    */
   onActive: () => void;
+  /**
+   * The function that is run when the focused element
+   * is to be picked (eg. do an actual search, change route... etc)
+   */
+  pick: () => void;
   children: React.ReactNode;
 }
 
 export const VirtualFocusItem = ({
   children,
   onActive,
+  pick,
 }: VirtualFocusItemProps) => {
   const { register, descendants, index } = useVirtualFocusDescendant({
     handleOnActive: () => {
       onActive();
     },
     handlePick: () => {
-      const anchor = descendants.item(0);
-      anchor?.handlePick();
+      pick();
     },
   });
-  const { virtualFocusIdx, setVirtualFocusIdx } =
+  const { virtualFocusIdx, setVirtualFocusIdx, uniqueId } =
     useVirtualFocusInternalContext();
+
+  // TODO: const mergedRefs = useMergeRefs(ref, register);
 
   return (
     <div
-      id={`descendant-${index}`} // TODO: useId() appended here (from anchor)
+      id={`descendant-${uniqueId}-${index}`}
       className="navds-virtualfocus-item"
       role="button"
       data-aksel-virtualfocus={virtualFocusIdx === index}
       ref={register}
-      tabIndex={-1} // shouldn't really be focusable, they are virtually focusable, but can be clicked
-      onFocus={() => {
-        const anchor = descendants.item(0);
-        anchor?.node.focus();
-      }} // set focus to anchor?
-      onKeyDown={() => {}} // set focus to anchor?
+      tabIndex={-1}
+      onKeyDown={() => {}} // Visible, non-interactive elements with click handlers must have at least one keyboard listener
       onClick={(event) => {
         const currIdx = descendants.indexOf(event.currentTarget);
         const curr = descendants.item(currIdx);

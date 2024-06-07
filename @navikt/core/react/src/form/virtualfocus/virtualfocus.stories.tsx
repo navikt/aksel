@@ -76,6 +76,9 @@ const MyItem = ({
       onActive={() => {
         setValue(children);
       }}
+      pick={() => {
+        console.log(`running pick on ${children}`);
+      }}
     >
       <span>
         {icon}
@@ -154,6 +157,58 @@ export const NoLoop = () => {
             </MyItem>
             <MyItem setValue={setValue} icon={<PuzzlePieceIcon aria-hidden />}>
               {"puzzle piece "}
+            </MyItem>
+          </VirtualFocus.Content>
+        </MyAnchor>
+      </VirtualFocus>
+    </>
+  );
+};
+
+export const Multiple = () => {
+  const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+  const [value3, setValue3] = useState("");
+  return (
+    <>
+      <style>{`
+.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
+  outline: solid 3px var(--a-border-focus);
+  border-radius: var(--a-border-radius-medium);
+}
+`}</style>
+      <VirtualFocus loop={false}>
+        <MyAnchor setValue={setValue} value={value}>
+          <VirtualFocus.Content>
+            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+              {"cloud "}
+            </MyItem>
+            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+              {"hanger "}
+            </MyItem>
+          </VirtualFocus.Content>
+        </MyAnchor>
+      </VirtualFocus>
+      <VirtualFocus loop={false}>
+        <MyAnchor setValue={setValue2} value={value2}>
+          <VirtualFocus.Content>
+            <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
+              {"cloud "}
+            </MyItem>
+            <MyItem setValue={setValue2} icon={<HangerIcon aria-hidden />}>
+              {"hanger "}
+            </MyItem>
+          </VirtualFocus.Content>
+        </MyAnchor>
+      </VirtualFocus>
+      <VirtualFocus loop={false}>
+        <MyAnchor setValue={setValue3} value={value3}>
+          <VirtualFocus.Content>
+            <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
+              {"cloud "}
+            </MyItem>
+            <MyItem setValue={setValue3} icon={<HangerIcon aria-hidden />}>
+              {"hanger "}
             </MyItem>
           </VirtualFocus.Content>
         </MyAnchor>
