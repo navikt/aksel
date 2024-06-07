@@ -146,3 +146,15 @@ export const Download: StoryObj = {
     </VStack>
   ),
 };
+
+export const Description: StoryObj = {
+  render: () => (
+    <VStack gap="5">
+      <FileUpload.Item file={fileTxt} description="Mottat 11.11.11" />
+      <FileUpload.Item
+        file={fileTxt}
+        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim officiis nisi beatae quia non iste nihil accusantium nobis amet, officia eius, repellendus a cupiditate, commodi eos! Quis illum repudiandae exercitationem."
+      />
+    </VStack>
+  ),
+};
