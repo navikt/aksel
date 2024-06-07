@@ -25,5 +25,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 1,
+  desc: "Ved å skru på propen 'prevNextTexts' får forrige- og neste-knappene synlig tekst i tillegg til chevron.",
 };

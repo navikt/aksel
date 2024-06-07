@@ -46,7 +46,11 @@ export function useFocusOutside(
    * we can eliminate the need for DOM traversal to verify if the focused element is within the react tree.
    */
   return {
-    onFocusCapture: () => (isFocusInsideReactTreeRef.current = true),
-    onBlurCapture: () => (isFocusInsideReactTreeRef.current = false),
+    onFocusCapture: () => {
+      isFocusInsideReactTreeRef.current = true;
+    },
+    onBlurCapture: () => {
+      isFocusInsideReactTreeRef.current = false;
+    },
   };
 }

@@ -7,6 +7,7 @@ import {
   RecycleIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
+import { BodyLong } from "../typography";
 import List from "./List";
 
 export default {
@@ -29,8 +30,17 @@ export const Default = {
         <List.Item title="Consectetur Adipiscing Elit">
           Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
         </List.Item>
-        <List.Item title="Sed Do Eiusmod Tempor Incididunt">
-          Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
+        <List.Item>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto fugiat
+          atque accusantium iure sunt, ipsum voluptas, impedit harum, minus
+          rerum recusandae. Consequuntur sint distinctio nulla reprehenderit eum
+          suscipit quae libero.
+        </List.Item>
+        <List.Item>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto fugiat
+          atque accusantium iure sunt, ipsum voluptas, impedit harum, minus
+          rerum recusandae. Consequuntur sint distinctio nulla reprehenderit eum
+          suscipit quae libero.
         </List.Item>
       </List>
     );
@@ -284,6 +294,69 @@ export const Nested = {
   },
 };
 
+export const Spacing = {
+  render: () => {
+    return (
+      <>
+        <h2>Medium</h2>
+        <BodyLong spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
+        <List>
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+        </List>
+        <BodyLong spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
+        <h2>Small</h2>
+        <BodyLong size="small" spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
+        <List size="small">
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+        </List>
+        <BodyLong size="small" spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
+      </>
+    );
+  },
+};
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="2">
@@ -318,6 +391,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Nested</h2>
         <Nested.render />
+      </div>
+      <div>
+        <h2>Spacing</h2>
+        <Spacing.render />
       </div>
     </VStack>
   ),
