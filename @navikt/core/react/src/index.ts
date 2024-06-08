@@ -153,6 +153,8 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
+export { Phone } from "./phone";
+export { Time } from "./date/Time";
 
 /**
  * @deprecated
