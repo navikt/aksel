@@ -15,6 +15,8 @@ import {
   PuzzlePieceIcon,
   RulerIcon,
 } from "@navikt/aksel-icons";
+import { Button } from "../../button";
+import { VStack } from "../../layout/stack";
 import { Popover } from "../../popover";
 import { Search } from "../search";
 import { VirtualFocus, useVirtualFocusDescendant } from "./VirtualFocus";
@@ -22,6 +24,15 @@ import { VirtualFocus, useVirtualFocusDescendant } from "./VirtualFocus";
 export default {
   title: "Utilities/VirtualFocus",
   component: VirtualFocus,
+  decorators: [
+    (Story) => (
+      <VStack gap="4">
+        <Button>above</Button>
+        <Story />
+        <Button>below</Button>
+      </VStack>
+    ),
+  ],
 } as Meta;
 
 const MyAnchor = forwardRef<
@@ -33,19 +44,21 @@ const MyAnchor = forwardRef<
   }
 >(({ children, value, setValue }, ref) => {
   const { descendants } = useVirtualFocusDescendant();
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  const to_focus = descendants.item(0); // TODO: assumption: 0 === anchor
+  const to_focus = descendants.item(0);
 
   return (
     <div style={{ position: "relative" }}>
       <VirtualFocus.Anchor
         ref={ref}
         pick={() => {
-          console.log(`pick(): searching for ${value}`);
+          console.log(`pick(): ${value}`);
         }}
         onActive={() => {
-          // setValue(" "); // TODO: this is only an example
+          console.log(`onActive(): Anchor`);
         }}
+        tabIndex={-1}
       >
         <Search
           label="Søk på nav sine sider"
@@ -55,6 +68,7 @@ const MyAnchor = forwardRef<
             setValue(current_input);
             to_focus?.handleOnActive();
           }}
+          ref={searchRef}
         />
       </VirtualFocus.Anchor>
       {children}
@@ -77,7 +91,7 @@ const MyItem = ({
         setValue(children);
       }}
       pick={() => {
-        console.log(`running pick on ${children}`);
+        console.log(`pick(): ${children}`);
       }}
     >
       <span>
@@ -99,7 +113,7 @@ export const Default = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus>
+      <VirtualFocus containerRole="listbox">
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -127,7 +141,7 @@ export const Default = () => {
   );
 };
 
-export const NoLoop = () => {
+export const Loop = () => {
   const [value, setValue] = useState("");
   return (
     <>
@@ -137,7 +151,7 @@ export const NoLoop = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus loop={false}>
+      <VirtualFocus containerRole="listbox" loop={true}>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -177,7 +191,7 @@ export const Multiple = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus loop={false}>
+      <VirtualFocus containerRole="listbox">
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -189,7 +203,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus loop={false}>
+      <VirtualFocus containerRole="listbox">
         <MyAnchor setValue={setValue2} value={value2}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
@@ -201,7 +215,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus loop={false}>
+      <VirtualFocus containerRole="listbox">
         <MyAnchor setValue={setValue3} value={value3}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
@@ -299,7 +313,7 @@ const MyDropDownSearchVirtualfocus = () => {
 export const WithPopoverAndFiltering = () => {
   return (
     <div>
-      <VirtualFocus>
+      <VirtualFocus containerRole="listbox">
         <MyDropDownSearchVirtualfocus />
       </VirtualFocus>
     </div>
