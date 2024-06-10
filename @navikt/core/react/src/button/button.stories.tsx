@@ -61,28 +61,28 @@ export const Controls: Story = {
     variant: {
       control: {
         type: "radio",
-        options: [
-          "primary",
-          "secondary",
-          "tertiary",
-          "danger",
-          "primary-neutral",
-          "secondary-neutral",
-          "tertiary-neutral",
-        ],
       },
+      options: [
+        "primary",
+        "secondary",
+        "tertiary",
+        "danger",
+        "primary-neutral",
+        "secondary-neutral",
+        "tertiary-neutral",
+      ],
     },
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small", "xsmall"],
       },
+      options: ["medium", "small", "xsmall"],
     },
     iconPosition: {
       control: {
         type: "radio",
-        options: ["left", "right"],
       },
+      options: ["left", "right"],
     },
   },
 };

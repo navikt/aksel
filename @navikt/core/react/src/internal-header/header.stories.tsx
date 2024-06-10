@@ -18,8 +18,8 @@ export default {
     user: {
       control: {
         type: "radio",
-        options: ["simple", "with description", "with dropdown"],
       },
+      options: ["simple", "with description", "with dropdown"],
     },
   },
   parameters: {

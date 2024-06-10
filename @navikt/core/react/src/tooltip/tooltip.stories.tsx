@@ -25,8 +25,8 @@ export default {
     placement: {
       control: {
         type: "radio",
-        options: ["top", "right", "bottom", "left"],
       },
+      options: ["top", "right", "bottom", "left"],
     },
   },
 } as Meta;

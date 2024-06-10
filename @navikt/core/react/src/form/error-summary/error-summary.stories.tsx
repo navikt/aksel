@@ -15,8 +15,8 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
+      options: ["medium", "small"],
     },
   },
   parameters: {
