@@ -382,7 +382,7 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const CancelInputTest: StoryObject = {
+export const TestCancelInput: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
@@ -408,7 +408,7 @@ export const CancelInputTest: StoryObject = {
   },
 };
 
-export const RemoveSelectedMultiSelectTest: StoryObject = {
+export const TestRemoveSelectedMultiSelect: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox
@@ -464,7 +464,7 @@ export const RemoveSelectedMultiSelectTest: StoryObject = {
   },
 };
 
-export const AllowNewValuesTest: StoryObject = {
+export const TestAllowNewValues: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox
@@ -497,7 +497,7 @@ export const AllowNewValuesTest: StoryObject = {
   },
 };
 
-export const DisallowNewValuesTest: StoryObject = {
+export const TestDisallowNewValues: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
