@@ -4,25 +4,27 @@ import { noCdnClient } from "../../sanity/interface/client.server";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
-import { RootDirectoriesT } from "./types";
+import { validateExamples } from "./parts/validate-examples";
+import { RootDirectoriesT, rootDirectories } from "./types";
 
 dotenv.config();
 
-const token = process.env.SANITY_WRITE_KEY;
+const isDryRun = process.argv.includes("--dry-run");
 
-if (!token) {
-  throw new Error("Missing token 'SANITY_WRITE_KEY' for updating sanity");
-}
+(async function () {
+  for (const directory of rootDirectories) {
+    await updateSanity(directory);
+  }
+})();
 
-updateSanity("templates", false);
-updateSanity("eksempler", false);
-
-export async function updateSanity(
-  directory: RootDirectoriesT,
-  isDryRun: boolean = false,
-) {
+export async function updateSanity(directory: RootDirectoriesT) {
+  const token = process.env.SANITY_WRITE_KEY;
+  if (!token) {
+    throw new Error("Missing token 'SANITY_WRITE_KEY' for updating sanity");
+  }
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
+  const exampleData: CodeExampleSchemaT[] = [];
 
   /* First we add/update examples */
   for (const folder of folders) {
@@ -35,7 +37,12 @@ export async function updateSanity(
       metadata: extractMetadata(folder.path, directory),
     };
 
+    exampleData.push(data);
     transactionClient.createOrReplace(data);
+  }
+
+  if (!validateExamples(exampleData)) {
+    throw new Error("TypeScript errors found in generated code, see above.");
   }
 
   await transactionClient
@@ -62,9 +69,7 @@ export async function updateSanity(
     .commit({ dryRun: isDryRun })
     .then(() => console.log(`Successfully deleted unused ${directory}`))
     .catch((e) => {
-      /**
-       * Errormessage includes all ids that failed.
-       */
+      /* The error message includes all ids that failed. */
       deletedIds = deletedIds.filter((id) => e.message.includes(id));
 
       console.log("\n");

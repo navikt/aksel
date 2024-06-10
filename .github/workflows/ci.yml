@@ -37,5 +37,8 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      - name: Validate example code
+        run: yarn workspace website validate:eksempler
+
       - name: Test
         run: yarn test
