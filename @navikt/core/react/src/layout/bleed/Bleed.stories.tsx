@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 import React from "react";
-import { BodyLong, Heading } from "../../typography";
+import { BodyLong } from "../../typography";
 import { Box } from "../box";
 import { HStack, VStack } from "../stack";
 import { Bleed } from "./Bleed";
@@ -397,29 +397,17 @@ export const ReflectivePadding = {
 export const Chromatic = {
   render: () => (
     <VStack gap="4">
-      <Heading level="2" size="large">
-        Default
-      </Heading>
+      <h2>Default</h2>
       <Default.render />
-      <Heading level="2" size="large">
-        AsChild
-      </Heading>
+      <h2>AsChild</h2>
       <AsChild.render />
-      <Heading level="2" size="large">
-        Breakpoints
-      </Heading>
+      <h2>Breakpoints</h2>
       <Breakpoints.render />
-      <Heading level="2" size="large">
-        Px
-      </Heading>
+      <h2>Px</h2>
       <Px.render />
-      <Heading level="2" size="large">
-        Full
-      </Heading>
+      <h2>Full</h2>
       <Full.render />
-      <Heading level="2" size="large">
-        ReflectivePadding
-      </Heading>
+      <h2>ReflectivePadding</h2>
       <ReflectivePadding.render />
     </VStack>
   ),
