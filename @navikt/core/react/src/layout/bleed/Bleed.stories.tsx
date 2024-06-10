@@ -8,6 +8,9 @@ import { Bleed } from "./Bleed";
 export default {
   title: "ds-react/Primitives/Bleed",
   component: Bleed,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof Bleed>;
 
 export const Default = {

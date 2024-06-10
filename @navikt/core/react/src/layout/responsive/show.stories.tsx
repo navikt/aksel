@@ -7,6 +7,11 @@ import { VStack } from "../stack";
 export default {
   title: "ds-react/Primitives/Show",
   component: Show,
+  parameters: {
+    chromatic: {
+      disable: true,
+    },
+  },
 } satisfies Meta<typeof Show>;
 
 type Story = StoryObj<typeof Show>;
@@ -90,4 +95,10 @@ export const Chromatic: Story = {
       {AsChild.render?.(props, context)}
     </VStack>
   ),
+};
+
+Chromatic.parameters = {
+  chromatic: {
+    disable: false,
+  },
 };

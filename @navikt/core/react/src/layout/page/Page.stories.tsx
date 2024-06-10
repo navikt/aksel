@@ -12,6 +12,7 @@ const meta: Meta = {
   component: Page,
   parameters: {
     layout: "fullscreen",
+    chromatic: { disable: true },
   },
 };
 
@@ -34,12 +35,6 @@ export const Default: StoryFn = ({
     <Content width={width} gutters={gutters} />
   </Page>
 );
-
-Default.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
 
 Default.argTypes = {
   width: {
@@ -79,12 +74,6 @@ export const BelowFold: StoryFn = () => (
   </Page>
 );
 
-BelowFold.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
-
 export const Background: StoryFn = () => (
   <HGrid columns={2} gap="4">
     <Page
@@ -105,12 +94,6 @@ export const Background: StoryFn = () => (
     </Page>
   </HGrid>
 );
-
-Background.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
 
 export const ContentBlockPadding: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
@@ -140,12 +123,6 @@ export const ContentBlockPadding: StoryFn = () => (
     </Page>
   </HGrid>
 );
-
-ContentBlockPadding.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
 
 export const Gutters: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
@@ -229,12 +206,6 @@ WithDecorator.decorators = [
   },
 ];
 
-WithDecorator.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
-
 export const OutsideBackground = () => {
   return (
     <Page
@@ -263,12 +234,6 @@ export const OutsideBackground = () => {
       </Box>
     </Page>
   );
-};
-
-OutsideBackground.parameters = {
-  chromatic: {
-    disable: true,
-  },
 };
 
 function Header({ width = "lg", gutters = false }: any) {

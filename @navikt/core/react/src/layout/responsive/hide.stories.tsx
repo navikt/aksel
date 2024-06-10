@@ -7,6 +7,11 @@ import { VStack } from "../stack";
 export default {
   title: "ds-react/Primitives/Hide",
   component: Hide,
+  parameters: {
+    chromatic: {
+      disable: true,
+    },
+  },
 } satisfies Meta<typeof Hide>;
 
 type Story = StoryObj<typeof Hide>;
@@ -90,4 +95,10 @@ export const Chromatic: Story = {
       {AsChild.render?.(props, context)}
     </VStack>
   ),
+};
+
+Chromatic.parameters = {
+  chromatic: {
+    disable: false,
+  },
 };

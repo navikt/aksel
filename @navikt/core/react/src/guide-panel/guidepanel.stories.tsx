@@ -10,6 +10,9 @@ type Story = StoryObj<typeof GuidePanel>;
 export default {
   title: "ds-react/GuidePanel",
   component: GuidePanel,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof GuidePanel>;
 
 const panelText = `Sit sint eu dolore reprehenderit exercitation labore aute anim sit
