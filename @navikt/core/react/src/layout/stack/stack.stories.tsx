@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { HStack, Spacer, Stack, VStack } from ".";
 import { Box } from "../box";
@@ -6,9 +6,14 @@ import { Box } from "../box";
 export default {
   title: "ds-react/Primitives/Stack",
   component: HStack,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof HStack>;
 
-export const Horizontal = {
+type Story = StoryObj<typeof Stack>;
+
+export const Horizontal: Story = {
   render: () => (
     <HStack gap="4">
       <Placeholders count={4} />
@@ -16,7 +21,7 @@ export const Horizontal = {
   ),
 };
 
-export const Spacing = {
+export const Spacing: Story = {
   render: () => (
     <div style={{ height: "80vh", display: "flex" }}>
       <VStack gap="8">
@@ -41,7 +46,7 @@ export const Spacing = {
   },
 };
 
-export const Vertical = {
+export const Vertical: Story = {
   render: () => (
     <VStack gap="4">
       <Placeholders count={4} />
@@ -49,7 +54,7 @@ export const Vertical = {
   ),
 };
 
-export const VerticalDemo = {
+export const VerticalDemo: Story = {
   render: () => (
     <VStack gap="2">
       <VStack>
@@ -63,7 +68,7 @@ export const VerticalDemo = {
   ),
 };
 
-export const VerticalAlign = {
+export const VerticalAlign: Story = {
   render: () => (
     <VStack gap="4">
       <VStack align="start">
@@ -82,7 +87,7 @@ export const VerticalAlign = {
   },
 };
 
-export const OverrideComponent = {
+export const OverrideComponent: Story = {
   render: () => (
     <VStack gap="4" as="form" onSubmit={(e) => e.preventDefault()}>
       <Placeholders count={4} />
@@ -90,7 +95,7 @@ export const OverrideComponent = {
   ),
 };
 
-export const Responsive = {
+export const Responsive: Story = {
   render: () => (
     <VStack gap={{ xs: "1", sm: "3", md: "6", lg: "10", xl: "16" }}>
       <Placeholders count={4} />
@@ -98,7 +103,7 @@ export const Responsive = {
   ),
 };
 
-export const Nested = {
+export const Nested: Story = {
   render: () => (
     <VStack gap="16">
       <Placeholders count={2}>
@@ -110,7 +115,7 @@ export const Nested = {
   ),
 };
 
-export const DividerDemo = {
+export const DividerDemo: Story = {
   render: () => (
     <div style={{ height: "80vh", width: "40rem" }}>
       <VStack gap={{ xs: "2", md: "6", lg: "12" }}>
@@ -134,7 +139,7 @@ export const DividerDemo = {
   ),
 };
 
-export const ResponsiveDirection = {
+export const ResponsiveDirection: Story = {
   render: () => (
     <Box
       background="surface-alt-3-subtle"
@@ -181,3 +186,31 @@ function Placeholders({
     </>
   );
 }
+
+export const Chromatic: Story = {
+  render: (props, context) => (
+    <VStack gap="4">
+      <h2>Spacing</h2>
+      {Spacing.render?.(props, context)}
+      <h2>Vertical</h2>
+      {Vertical.render?.(props, context)}
+      <h2>VerticalDemo</h2>
+      {VerticalDemo.render?.(props, context)}
+      <h2>VerticalAlign</h2>
+      {VerticalAlign.render?.(props, context)}
+      <h2>OverrideComponent</h2>
+      {OverrideComponent.render?.(props, context)}
+      <h2>Responsive</h2>
+      {Responsive.render?.(props, context)}
+      <h2>Nested</h2>
+      {Nested.render?.(props, context)}
+      <h2>DividerDemo</h2>
+      {DividerDemo.render?.(props, context)}
+      <h2>ResponsiveDirection</h2>
+      {ResponsiveDirection.render?.(props, context)}
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
+};
