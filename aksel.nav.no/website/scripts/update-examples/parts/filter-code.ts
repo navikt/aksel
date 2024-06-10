@@ -31,11 +31,18 @@ export async function filterCode(code: string, filePath: string) {
   return injectImportedCode(filteredCode, filePath);
 }
 
+// Only imports from these directories will be injected
+const codeInjectDir = "/__parts/"; // Will be injected at the end (NB: All code except import/export statements will be injected!)
+const jsxInjectDir = "/__parts-inline/"; // JSX that will be inlined in the example JSX (NB: Use arrow function with implicit return!)
+
+/* In the files that will be injected, we only allow imports from the following places. This is mainly to avoid the complexity
+of dealing with nested imports, but as a bonus we also avoid importing from 3rd-party packages, which wouldn't work in Playroom. */
+const allowedPackages = ["react"];
+const allowedPackageScopes = ["@navikt"];
+
 /**
- * Scans the code for imports from /__parts-inline or /__parts, inlines the imported code and removes the imports.
- * NB: Files in __parts-inline should only contain an arrow function with implicit return.
- * NB: Files in __parts should only contain code that is used in all files that import it.
- * See comments bellow for details.
+ * Scans the code for imports from the predefined folders, injects the imported code and removes the import statements.
+ * Makes some assumptions, see comments bellow for details.
  */
 async function injectImportedCode(code: string, filePath: string) {
   const parsedCode = j(code);
@@ -60,8 +67,8 @@ async function injectImportedCode(code: string, filePath: string) {
     );
     const parsedImportedCode = j(importedCode);
 
-    // Imports from the __parts-inline directory are components that should be inlined in the example JSX.
-    if (importPath.includes("/__parts-inline/")) {
+    // Handle imported components that should be inlined in the example JSX.
+    if (importPath.includes(jsxInjectDir)) {
       // Extract the JSX from the component.
       // We assume it's written as an arrow function with implicit return.
       // This code will only extract the first arrow function in the file. Other code is ignored.
@@ -73,8 +80,8 @@ async function injectImportedCode(code: string, filePath: string) {
       if (!identifier) return;
       jsxToReplace[identifier] = arrowFunctionCode;
     }
-    // Imports from the __parts directory are variables/functions that should be injected bellow the example JSX.
-    else if (importPath.includes("/__parts/")) {
+    // Handle imports that should be injected at the end.
+    else if (importPath.includes(codeInjectDir)) {
       // For simplicity, we don't filter out unused code.
       const cleanedCode = importedCode
         .replace(/import [^;]+;/g, "")
@@ -109,7 +116,7 @@ async function injectImportedCode(code: string, filePath: string) {
 
 /**
  * Copies imports from the imported file to the example code.
- * Only handles aksel/ds and react package imports. (So no recursiveness.)
+ * Only handles imports from a few predefined packages.
  */
 function handleDependencies(
   importDeclarations: Collection<namedTypes.ImportDeclaration>,
@@ -119,8 +126,9 @@ function handleDependencies(
   parsedImportedCode.find(j.ImportDeclaration).forEach((nestedImportDecl) => {
     const packageName = nestedImportDecl.value.source.value?.toString() || "";
     if (
-      (!packageName.includes("@navikt/") && packageName !== "react") ||
-      !nestedImportDecl.value.specifiers // Just to please TS (checks that there's something between "import" and "from")
+      (!allowedPackageScopes.includes(packageName.split("/")[0]) &&
+        !allowedPackages.includes(packageName)) ||
+      !nestedImportDecl.value.specifiers // specifiers is the stuff between `import` and `from`. We don't support `import "file.css";`.
     ) {
       return;
     }
