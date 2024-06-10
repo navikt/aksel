@@ -1,17 +1,19 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { expect, fn, userEvent, within } from "@storybook/test";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useMemo, useRef, useState } from "react";
 import { Chips } from "../../chips";
+import { VStack } from "../../layout/stack";
 import { TextField } from "../textfield";
-import { ComboboxProps, UNSAFE_Combobox } from "./index";
+import { UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",
   component: UNSAFE_Combobox,
   decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof UNSAFE_Combobox>;
 
-type StoryObject = StoryObj<typeof UNSAFE_Combobox>;
 type StoryFunction = StoryFn<typeof UNSAFE_Combobox>;
 
 const options = [
@@ -56,31 +58,23 @@ Default.argTypes = {
   },
 };
 
-export const MultiSelect: StoryFunction = (props) => {
+export const MultiSelect: StoryFn = () => {
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect"
       label="Komboboks - velg flere"
-      options={props.options}
-      isMultiSelect={props.isMultiSelect}
-      size={props.size}
+      options={options}
+      isMultiSelect={true}
     />
   );
 };
 
-MultiSelect.args = {
-  options,
-  isMultiSelect: true,
-  size: "medium",
-};
-
-export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
+export const MultiSelectWithComplexOptions: StoryFn = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   return (
     <>
       <UNSAFE_Combobox
-        {...props}
-        options={props.options.map((option) => ({
+        options={complexOptions.map((option) => ({
           ...option,
           label: `${option.label} [${option.value}]`,
         }))}
@@ -98,68 +92,48 @@ export const MultiSelectWithComplexOptions: StoryFunction = (props) => {
   );
 };
 
-MultiSelectWithComplexOptions.args = {
-  options: [
-    { label: "Hjelpemidler", value: "HJE" },
-    { label: "Oppfølging", value: "OPP" },
-    { label: "Sykepenger", value: "SYK" },
-    { label: "Sykemelding", value: "SYM" },
-    { label: "Foreldre- og svangerskapspenger", value: "FOR" },
-    { label: "Arbeidsavklaringspenger", value: "AAP" },
-    { label: "Uføretrygd", value: "UFO" },
-    { label: "Pensjon", value: "PEN" },
-    { label: "Barnetrygd", value: "BAR" },
-    { label: "Kontantstøtte", value: "KON" },
-    { label: "Bostøtte", value: "BOS" },
-    { label: "Barnebidrag", value: "BBI" },
-    { label: "Bidragsforskudd", value: "BIF" },
-    { label: "Grunn- og hjelpestønad", value: "GRU" },
-  ],
-  isMultiSelect: true,
-  size: "medium",
-};
+const complexOptions = [
+  { label: "Hjelpemidler", value: "HJE" },
+  { label: "Oppfølging", value: "OPP" },
+  { label: "Sykepenger", value: "SYK" },
+  { label: "Sykemelding", value: "SYM" },
+  { label: "Foreldre- og svangerskapspenger", value: "FOR" },
+  { label: "Arbeidsavklaringspenger", value: "AAP" },
+  { label: "Uføretrygd", value: "UFO" },
+  { label: "Pensjon", value: "PEN" },
+  { label: "Barnetrygd", value: "BAR" },
+  { label: "Kontantstøtte", value: "KON" },
+  { label: "Bostøtte", value: "BOS" },
+  { label: "Barnebidrag", value: "BBI" },
+  { label: "Bidragsforskudd", value: "BIF" },
+  { label: "Grunn- og hjelpestønad", value: "GRU" },
+];
 
-export const WithAddNewOptions: StoryFunction = (props) => {
+export const WithAddNewOptions: StoryFn = () => {
   return (
     <UNSAFE_Combobox
       id="combobox-with-add-new-options"
       label="Komboboks med mulighet for å legge til nye verdier"
-      options={props.options}
-      allowNewValues={props.allowNewValues}
-      shouldAutocomplete={props.shouldAutocomplete}
+      options={options}
+      allowNewValues={true}
+      shouldAutocomplete={true}
     />
   );
 };
 
-WithAddNewOptions.args = {
-  options,
-  allowNewValues: true,
-  shouldAutocomplete: true,
-};
-
-export const MultiSelectWithAddNewOptions: StoryFunction = (props) => {
+export const MultiSelectWithAddNewOptions: StoryFn = () => {
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect-and-add-new-options"
-      isMultiSelect={props.isMultiSelect}
+      isMultiSelect={true}
       label="Multiselect komboboks med mulighet for å legge til nye verdier"
-      options={props.options}
-      allowNewValues={props.allowNewValues}
+      options={options}
+      allowNewValues={true}
     />
   );
 };
 
-MultiSelectWithAddNewOptions.args = {
-  allowNewValues: true,
-  isMultiSelect: true,
-  options,
-  shouldAutocomplete: false,
-};
-
-export const MultiSelectWithExternalChips: StoryFn<{
-  controlled: boolean;
-  options: ComboboxProps["options"];
-}> = (props) => {
+export const MultiSelectWithExternalChips: StoryFn = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [value, setValue] = useState("");
 
@@ -184,16 +158,12 @@ export const MultiSelectWithExternalChips: StoryFn<{
       )}
       <UNSAFE_Combobox
         id="combobox-with-external-chips"
-        options={props.options}
+        options={options}
         selectedOptions={selectedOptions}
         onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
-        value={props.controlled ? value : undefined}
-        onChange={(event) =>
-          props.controlled
-            ? setValue(event?.currentTarget.value || "")
-            : undefined
-        }
+        value={value}
+        onChange={(event) => setValue(event?.currentTarget.value || "")}
         label="Komboboks"
         size="medium"
         shouldShowSelectedOptions={false}
@@ -202,34 +172,24 @@ export const MultiSelectWithExternalChips: StoryFn<{
   );
 };
 
-MultiSelectWithExternalChips.args = {
-  controlled: false,
-  options,
-};
-
-export const Loading: StoryFunction = (props) => (
+export const Loading: StoryFn = () => (
   <UNSAFE_Combobox
     id="combobox-with-loading-indicator"
     label="Komboboks (laster)"
     options={[]}
     selectedOptions={[]}
-    isListOpen={props.isListOpen}
-    isLoading={props.isLoading}
+    isListOpen={true}
+    isLoading={true}
   />
 );
 
-Loading.args = {
-  isLoading: true,
-  isListOpen: true,
-};
-
-export const ComboboxWithNoHits: StoryFunction = (props) => {
-  const [value, setValue] = useState(props.value);
+export const ComboboxWithNoHits: StoryFn = () => {
+  const [value, setValue] = useState<string | undefined>("Orange");
   return (
     <UNSAFE_Combobox
       id="combobox-with-no-hits"
       label="Komboboks (uten søketreff)"
-      options={props.options}
+      options={options}
       value={value}
       onChange={(event) => setValue(event?.currentTarget.value)}
       isListOpen={true}
@@ -237,23 +197,15 @@ export const ComboboxWithNoHits: StoryFunction = (props) => {
   );
 };
 
-ComboboxWithNoHits.args = {
-  options,
-  value: "Orange",
-};
-
-export const Controlled: StoryFn<{
-  value: string;
-  options: string[];
-  initialSelectedOptions: string[];
-}> = (props) => {
-  const [value, setValue] = useState(props.value);
-  const [selectedOptions, setSelectedOptions] = useState(
-    props.initialSelectedOptions,
-  );
+export const Controlled: StoryFn = () => {
+  const [value, setValue] = useState<string>("apple");
+  const [selectedOptions, setSelectedOptions] = useState([
+    "passion fruit",
+    "grape fruit",
+  ]);
   const filteredOptions = useMemo(
-    () => props.options.filter((option) => option.includes(value)),
-    [props.options, value],
+    () => options.filter((option) => option.includes(value)),
+    [value],
   );
 
   const onToggleSelected = (option: string, isSelected: boolean) => {
@@ -277,7 +229,7 @@ export const Controlled: StoryFn<{
         id="combobox-controlled"
         filteredOptions={filteredOptions}
         isMultiSelect
-        options={props.options}
+        options={options}
         onChange={(event) => setValue(event?.target.value || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
@@ -285,12 +237,6 @@ export const Controlled: StoryFn<{
       />
     </>
   );
-};
-
-Controlled.args = {
-  value: "apple",
-  options,
-  initialSelectedOptions: ["passion fruit", "grape fruit"],
 };
 
 export const ComboboxSizes = () => (
@@ -327,7 +273,7 @@ export const ComboboxSizes = () => (
   </>
 );
 
-export const MaxSelectedOptions: StoryFunction = () => {
+export const MaxSelectedOptions: StoryFn = () => {
   const [value, setValue] = useState<string | undefined>("");
   const [selectedOptions, setSelectedOptions] = useState([
     options[0],
@@ -356,7 +302,7 @@ export const MaxSelectedOptions: StoryFunction = () => {
   );
 };
 
-export const WithError: StoryFunction = (props) => {
+export const WithError: StoryFn = () => {
   const [hasSelectedValue, setHasSelectedValue] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -364,7 +310,7 @@ export const WithError: StoryFunction = (props) => {
       filteredOptions={isLoading ? [] : undefined}
       options={options}
       label="Hva er dine favorittfrukter?"
-      error={!hasSelectedValue && props.error}
+      error={!hasSelectedValue && "Du må velge en favorittfrukt."}
       isLoading={isLoading}
       onChange={() => {
         setIsLoading(true);
@@ -374,350 +320,38 @@ export const WithError: StoryFunction = (props) => {
     />
   );
 };
-WithError.args = {
-  error: "Du må velge en favorittfrukt.",
+
+export const Chromatic: StoryFn = () => {
+  return (
+    <VStack gap="2">
+      <h2>MultiSelect</h2>
+      <MultiSelect />
+      <h2>ComboboxWithNoHits</h2>
+      <ComboboxWithNoHits />
+      <h2 style={{ marginTop: "5rem" }}>MultiSelectWithComplexOptions</h2>
+      <MultiSelectWithComplexOptions />
+      <h2>WithAddNewOptions</h2>
+      <WithAddNewOptions />
+      <h2>MultiSelectWithAddNewOptions</h2>
+      <MultiSelectWithAddNewOptions />
+      <h2>MultiSelectWithExternalChips</h2>
+      <MultiSelectWithExternalChips />
+      <h2>Loading</h2>
+      <Loading />
+      <h2 style={{ marginTop: "5rem" }}>Controlled</h2>
+      <Controlled />
+      <h2>ComboboxSizes</h2>
+      <ComboboxSizes />
+      <h2>MaxSelectedOptions</h2>
+      <MaxSelectedOptions />
+      <h2 style={{ marginTop: "20rem" }}>WithError</h2>
+      <WithError />
+    </VStack>
+  );
 };
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export const TestCancelInput: StoryObject = {
-  render: () => {
-    return (
-      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
-
-    userEvent.click(input);
-    await userEvent.type(input, "apple", { delay: 200 });
-    await sleep(1000);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(1000);
-    userEvent.keyboard("{Escape}");
-    await sleep(1000);
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(500);
-    const banana = canvas.getByText("banana");
-    userEvent.click(banana);
-  },
-};
-
-export const TestRemoveSelectedMultiSelect: StoryObject = {
-  render: () => {
-    return (
-      <UNSAFE_Combobox
-        options={options}
-        label="Hva er dine favorittfrukter?"
-        isMultiSelect
-      />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
-
-    userEvent.click(input);
-    await userEvent.type(input, "apple", { delay: 200 });
-    await sleep(250);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
-    userEvent.keyboard("{Escape}");
-    await sleep(250);
-
-    userEvent.click(input);
-    await userEvent.type(input, "banana", { delay: 200 });
-    await sleep(250);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
-
-    const appleSlett = canvas.getByLabelText("apple slett");
-    appleSlett.focus();
-    await sleep(250);
-    userEvent.click(appleSlett);
-    await sleep(250);
-    const appleOption = canvas.getByRole("option", {
-      name: "apple",
-      selected: false,
-    });
-    expect(appleOption).toBeVisible();
-    userEvent.keyboard("{Escape}");
-    await sleep(250);
-    expect(appleOption).not.toBeVisible();
-
-    const bananaSlett = canvas.getByLabelText("banana slett");
-    expect(bananaSlett).toBeInTheDocument();
-    const appleSlettAgain = canvas.queryByLabelText("apple slett");
-    expect(appleSlettAgain).not.toBeInTheDocument();
-  },
-};
-
-export const TestAllowNewValues: StoryObject = {
-  render: () => {
-    return (
-      <UNSAFE_Combobox
-        options={options}
-        label="Hva er dine favorittfrukter?"
-        allowNewValues
-      />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
-
-    userEvent.click(input);
-    await userEvent.type(input, "aaa", { delay: 200 });
-    await sleep(250);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
-    userEvent.keyboard("{Escape}");
-    await sleep(250);
-
-    const invalidSelect = canvas.queryByLabelText("aaa slett");
-    expect(invalidSelect).not.toBeInTheDocument();
-  },
-};
-
-export const TestDisallowNewValues: StoryObject = {
-  render: () => {
-    return (
-      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
-
-    userEvent.click(input);
-    await userEvent.type(input, "aaa", { delay: 200 });
-    await sleep(250);
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
-    userEvent.keyboard("{Escape}");
-    await sleep(250);
-
-    const invalidSelect = canvas.queryByLabelText("aaa slett");
-    expect(invalidSelect).not.toBeInTheDocument();
-  },
-};
-
-export const TestThatCallbacksOnlyFireWhenExpected: StoryObj<{
-  onChange: ReturnType<typeof fn>;
-  onClear: ReturnType<typeof fn>;
-  onToggleSelected: ReturnType<typeof fn>;
-}> = {
-  args: {
-    onChange: fn(),
-    onClear: fn(),
-    onToggleSelected: fn(),
-  },
-  render: (props) => {
-    return (
-      <UNSAFE_Combobox
-        options={options}
-        label="Hva er dine favorittfrukter?"
-        {...props}
-      />
-    );
-  },
-  play: async ({ canvasElement, args }) => {
-    args.onToggleSelected.mockClear();
-    args.onClear.mockClear();
-    args.onChange.mockClear();
-    const canvas = within(canvasElement);
-
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
-    const searchWord = "tangerine";
-
-    userEvent.click(input);
-    await userEvent.type(input, searchWord, { delay: 200 });
-    await sleep(250);
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    userEvent.keyboard("{Enter}");
-    await sleep(250);
-    expect(args.onClear.mock.calls).toHaveLength(1);
-    expect(args.onToggleSelected.mock.calls).toHaveLength(1);
-    expect(args.onChange.mock.calls).toHaveLength(searchWord.length + 1);
-  },
-};
-
-export const TestCasingWhenAutoCompleting = {
-  args: {
-    onChange: fn(),
-    onClear: fn(),
-    onToggleSelected: fn(),
-  },
-  render: (props) => {
-    return (
-      <UNSAFE_Combobox
-        options={["Camel Case", "lowercase", "UPPERCASE"]}
-        label="Liker du best store eller små bokstaver?"
-        shouldAutocomplete
-        allowNewValues
-        {...props}
-      />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getByRole<HTMLInputElement>("combobox");
-
-    // With exisiting option
-    userEvent.click(input);
-    await userEvent.type(input, "cAmEl CaSe", { delay: 250 });
-    await sleep(250);
-    expect(input.value).toBe("cAmEl CaSe");
-    await userEvent.type(input, "{Enter}");
-    await sleep(250);
-    const chips = canvas.getAllByRole("list")[0];
-    const selectedUpperCaseChip = within(chips).getAllByRole("listitem")[0];
-    expect(selectedUpperCaseChip).toHaveTextContent("Camel Case"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
-
-    // With custom option
-    userEvent.click(input);
-    await userEvent.type(input, "cAmEl{Backspace}", { delay: 250 });
-    await sleep(250);
-    expect(input.value).toBe("cAmEl");
-    await userEvent.type(input, "{Enter}");
-    await sleep(250);
-    const selectedNewValueChip = within(chips).getAllByRole("listitem")[0];
-    expect(selectedNewValueChip).toHaveTextContent("cAmEl"); // A weird issue is preventing the accessible name from being used in the test, even if it works in VoiceOver
-  },
-};
-
-export const TestHoverAndFocusSwitching: StoryObject = {
-  render: () => {
-    return (
-      <UNSAFE_Combobox options={options} label="Hva er dine favorittfrukter?" />
-    );
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await sleep(500);
-
-    const getInput = () =>
-      canvas.getByRole("combobox", {
-        name: "Hva er dine favorittfrukter?",
-      });
-
-    userEvent.click(getInput());
-    expect(getInput().getAttribute("aria-expanded")).toEqual("false");
-    expect(getInput().getAttribute("aria-activedescendant")).toBeNull();
-
-    await sleep(250);
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    const bananaOption = canvas.getByRole("option", { name: "banana" });
-    expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      bananaOption.getAttribute("id"),
-    );
-
-    userEvent.keyboard("{ArrowDown}");
-    await sleep(250);
-    const appleOption = canvas.getByRole("option", { name: "apple" });
-    expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      appleOption.getAttribute("id"),
-    );
-
-    userEvent.hover(bananaOption);
-    await sleep(250);
-    expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      bananaOption.getAttribute("id"),
-    );
-  },
-};
-
-export const TestEnterNotSubmittingForm: StoryObj<{
-  onSubmit: ReturnType<typeof fn>;
-}> = {
-  args: {
-    onSubmit: fn(),
-  },
-  render: ({ onSubmit }) => {
-    return (
-      <form action="https://www.aksel.nav.no" method="get" onSubmit={onSubmit}>
-        <UNSAFE_Combobox
-          options={options}
-          label="Hva er dine favorittfrukter?"
-          isMultiSelect
-          allowNewValues
-        />
-      </form>
-    );
-  },
-  play: async ({ canvasElement, args }) => {
-    args.onSubmit.mockClear();
-    const canvas = within(canvasElement);
-    const waitTime = 0; // Change for debugging
-
-    await sleep(waitTime);
-
-    const getInput = () =>
-      canvas.getByRole("combobox", {
-        name: "Hva er dine favorittfrukter?",
-      });
-
-    const getOption = (name: string, selected: boolean) =>
-      canvas.getByRole("option", { name, selected });
-    await userEvent.click(getInput(), { delay: waitTime });
-
-    await userEvent.keyboard("{ArrowDown}", { delay: waitTime });
-    expect(getInput().getAttribute("aria-activedescendant")).toBe(
-      getOption("banana", false).getAttribute("id"),
-    );
-
-    await userEvent.keyboard("{Enter}", { delay: waitTime });
-    expect(args.onSubmit).not.toHaveBeenCalled();
-    expect(getOption("banana", true)).toBeVisible();
-
-    await userEvent.keyboard("{Shift>}{Tab}", { delay: waitTime });
-
-    await userEvent.keyboard("{Enter}", { delay: waitTime });
-    expect(args.onSubmit).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("test"); // Type option that does not exist
-    await userEvent.keyboard("{Enter}", { delay: waitTime });
-    expect(args.onSubmit).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{ArrowDown}", { delay: waitTime }); // Select "test" custom option
-    expect(
-      canvas.getByRole("option", { name: "test", selected: true }),
-    ).toBeVisible();
-    await userEvent.keyboard("{Enter}", { delay: waitTime }); // De-select "test"
-    expect(
-      canvas.queryByRole("option", { name: "test", selected: false }),
-    ).toBeNull();
-    expect(args.onSubmit).not.toHaveBeenCalled();
-
-    await userEvent.keyboard("{Escape}", { delay: waitTime }); // Clear input field
-    await userEvent.keyboard("{Enter}", { delay: waitTime }); // Enter on empty Input with closed list
-    expect(args.onSubmit).toHaveBeenCalledOnce();
+Chromatic.parameters = {
+  chromatic: {
+    disable: false,
   },
 };
