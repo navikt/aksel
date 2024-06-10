@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { Box } from "../box";
 import { HGrid } from "../grid";
+import { VStack } from "../stack";
 import Page from "./Page";
 import { widths } from "./parts/PageBlock";
 
@@ -33,6 +34,12 @@ export const Default: StoryFn = ({
     <Content width={width} gutters={gutters} />
   </Page>
 );
+
+Default.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
 
 Default.argTypes = {
   width: {
@@ -72,6 +79,12 @@ export const BelowFold: StoryFn = () => (
   </Page>
 );
 
+BelowFold.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
+
 export const Background: StoryFn = () => (
   <HGrid columns={2} gap="4">
     <Page
@@ -92,6 +105,12 @@ export const Background: StoryFn = () => (
     </Page>
   </HGrid>
 );
+
+Background.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
 
 export const ContentBlockPadding: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
@@ -121,6 +140,12 @@ export const ContentBlockPadding: StoryFn = () => (
     </Page>
   </HGrid>
 );
+
+ContentBlockPadding.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
 
 export const Gutters: StoryFn = () => (
   <HGrid columns={2} gap="6" align="start">
@@ -240,6 +265,12 @@ export const OutsideBackground = () => {
   );
 };
 
+OutsideBackground.parameters = {
+  chromatic: {
+    disable: true,
+  },
+};
+
 function Header({ width = "lg", gutters = false }: any) {
   return (
     <Page.Block as="header" width={width} gutters={gutters}>
@@ -269,3 +300,28 @@ function Footer({ width = "lg", gutters = false }: any) {
     </Page.Block>
   );
 }
+
+export const Chromatic = () => {
+  return (
+    <VStack gap="2">
+      <h2>Default</h2>
+      <Default />
+      <h2>BelowFold</h2>
+      <BelowFold />
+      <h2>Background</h2>
+      <Background />
+      <h2>ContentBlockPadding</h2>
+      <ContentBlockPadding />
+      <h2>Gutters</h2>
+      <Gutters />
+      <h2>OutsideBackground</h2>
+      <OutsideBackground />
+    </VStack>
+  );
+};
+
+Chromatic.parameters = {
+  chromatic: {
+    disable: false,
+  },
+};
