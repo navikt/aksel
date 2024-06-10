@@ -163,7 +163,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@whitespace/storybook-addon-html": "^6.1.1",
-    "chromatic": "11.3.0",
+    "chromatic": "11.5.3",
     "concurrently": "7.2.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
