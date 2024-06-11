@@ -31,13 +31,10 @@ export const query = `{
   {
     ...,
     "slug": slug.current,
-    "content": select(
-      $valid == "true" => content[]{
-        ...,
-        ${destructureBlocks}
-      },
-      $valid != "true" => []
-    ),
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
     ${contributorsAll}
   }
 }`;
@@ -50,7 +47,6 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const { prinsipp } = await getClient().fetch(query, {
     slug: `prinsipper/${slugString}`,
-    valid: "true",
   });
 
   return {
@@ -207,7 +203,6 @@ export default function PrinsippPage(props: PageProps["props"]) {
       props={props}
       params={{
         slug: `prinsipper/${props.slug}`,
-        valid: "true",
       }}
     >
       {(_props, loading) => {
