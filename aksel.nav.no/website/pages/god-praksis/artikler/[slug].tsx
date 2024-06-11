@@ -270,7 +270,7 @@ const Page = ({
   );
 };
 
-export default function KomponentFrontpage(props: PageProps["props"]) {
+export default function GodPraksisArticle(props: PageProps["props"]) {
   return props.preview ? (
     <PagePreview
       query={query}
@@ -279,15 +279,15 @@ export default function KomponentFrontpage(props: PageProps["props"]) {
         slug: `god-praksis/artikler/${props?.slug}`,
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
+            {...previewProps}
             toc={generateTableOfContents({
-              content: _props?.page?.content,
+              content: previewProps?.page?.content,
               type: "aksel_artikkel",
             })}
           />
