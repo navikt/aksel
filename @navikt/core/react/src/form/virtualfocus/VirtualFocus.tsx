@@ -193,10 +193,11 @@ export interface VirtualFocusItemProps
    */
   pick: () => void;
   children: React.ReactNode;
+  itemRole?: React.AriaRole;
 }
 
 export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
-  ({ children, onActive, pick, itemRole = "button", ...rest }, ref) => {
+  ({ children, onActive, pick, itemRole, ...rest }, ref) => {
     const { virtualFocusIdx, setVirtualFocusIdx, uniqueId } =
       useVirtualFocusInternalContext();
     const { register, descendants, index } = useVirtualFocusDescendant({

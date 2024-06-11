@@ -93,6 +93,7 @@ const MyItem = ({
       pick={() => {
         console.log(`pick(): ${children}`);
       }}
+      itemRole="button"
     >
       <span>
         {icon}
