@@ -10,6 +10,7 @@ on:
     branches: [main, next]
     paths:
       - "@navikt/**"
+      - "aksel.nav.no/website/pages/templates/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,22 +26,14 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: lts/*
           cache: yarn
-
-      - name: Restore cache
-        uses: actions/cache@v3
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-visual-regression-test-
 
       - name: Install dependencies
         run: yarn
@@ -49,7 +42,7 @@ jobs:
         run: yarn boot
 
       - name: Chromatic
-        uses: chromaui/action@v1
+        uses: chromaui/action@latest
         id: chromatic_tests
         continue-on-error: true
         with:
@@ -57,7 +50,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false
-          buildScriptName: "build:storybook"
+          buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
           untraced: "**/package.json|yarn.lock|**/*.md"
           externals: \@navikt/core/css/**/*.css

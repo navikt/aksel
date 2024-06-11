@@ -1,11 +1,13 @@
 import { useId } from "react";
-import { BodyLong, Box, CopyButton, HStack, Heading } from "@navikt/ds-react";
+import { Bleed, BodyLong, CopyButton, HStack, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
+import ShowMore from "@/web/ShowMore";
 
 type ExampletextBlockProps = {
   node: {
     title: string;
     text: string;
+    readMore?: boolean;
   };
 };
 
@@ -15,13 +17,9 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
   if (!node.text || !node.title) return null;
 
   return (
-    <Box
-      as="section"
-      background="surface-subtle"
-      padding="6"
+    <section
       aria-labelledby={id}
-      className="mb-7 last:mb-0 dark:bg-surface-neutral-moderate"
-      borderRadius="large"
+      className="mb-7 rounded-large bg-grayalpha-50 p-6 ring-1 ring-border-subtle last:mb-0 dark:bg-surface-neutral-moderate"
     >
       <HStack justify="space-between" gap="4" align="center" wrap={false}>
         <Heading size="small" as="p" textColor="subtle" id={id} aria-hidden>
@@ -30,8 +28,21 @@ const ExampletextBlock = ({ node }: ExampletextBlockProps) => {
         <CopyButton copyText={node.text} size="small" />
       </HStack>
       <hr className="my-4 border-border-subtle" aria-hidden />
-      <div className="space-y-7">{formatText(node.text)}</div>
-    </Box>
+      {node.readMore ? (
+        <Bleed marginInline="4" marginBlock="4" asChild>
+          <ShowMore
+            as="div"
+            variant="subtle"
+            collapsedHeight="20rem"
+            className="scroll-my-20"
+          >
+            <div className="space-y-7">{formatText(node.text)}</div>
+          </ShowMore>
+        </Bleed>
+      ) : (
+        <div className="space-y-7">{formatText(node.text)}</div>
+      )}
+    </section>
   );
 };
 
@@ -40,7 +51,7 @@ function formatText(text: string) {
   return text
     .split("\n")
     .filter(Boolean)
-    .map((line, index) => <BodyLong key={index}>{line}</BodyLong>);
+    .map((line) => <BodyLong key={line}>{line}</BodyLong>);
 }
 
 export default function Component(props: ExampletextBlockProps) {

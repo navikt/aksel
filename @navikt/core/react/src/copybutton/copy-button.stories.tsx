@@ -8,6 +8,9 @@ import { Tooltip } from "../tooltip";
 const meta: Meta<typeof CopyButton> = {
   title: "ds-react/CopyButton",
   component: CopyButton,
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 export default meta;
 
@@ -31,9 +34,6 @@ export const Default: Story = {
     copyText: "3.14",
     text: "",
     activeText: "",
-  },
-  parameters: {
-    chromatic: { disable: true },
   },
 };
 

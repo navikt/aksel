@@ -1,23 +1,12 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort, Label } from "../typography";
+import { BodyLong } from "../typography";
 import { ListContext } from "./context";
+import { ListItemProps } from "./types";
 
-export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  /**
-   * Content for description of the list item
-   */
-  children: React.ReactNode;
-  /**
-   * Title for the list item
-   */
-  title?: string;
-  /*
-   * Icon to be used as list marker for unordered lists.
-   */
-  icon?: React.ReactNode;
-}
-
+/**
+ * @see 🏷️ {@link ListItemProps}
+ */
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType, size } = useContext(ListContext);
@@ -56,14 +45,14 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
           </div>
         )}
 
-        <BodyShort as="div" size={size} className="navds-list__item-content">
+        <BodyLong as="div" size={size} className="navds-list__item-content">
           {title && (
-            <Label as="p" size={size}>
+            <BodyLong as="p" size={size} weight="semibold">
               {title}
-            </Label>
+            </BodyLong>
           )}
           {children}
-        </BodyShort>
+        </BodyLong>
       </li>
     );
   },

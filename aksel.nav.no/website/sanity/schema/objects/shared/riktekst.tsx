@@ -65,10 +65,15 @@ export const block = {
         component: ({ children }) => <InlineCode>{children}</InlineCode>,
       },
       {
-        title: "KBD",
+        title: "Quote",
+        value: "quote",
+        icon: () => <span className="font-semibold">Q</span>,
+        component: ({ children }) => <q>{children}</q>,
+      },
+      {
+        title: "Keyboard",
         value: "kbd",
-        icon: () => <KBD>KBD</KBD>,
-
+        icon: () => <kbd>KBD</kbd>,
         component: ({ children }) => <KBD>{children}</KBD>,
       },
     ],
@@ -159,6 +164,7 @@ const Riktekst = (
     "expansioncard",
     "tabell_v2",
     "video",
+    "exampletext_block",
   ];
 
   const accordion = [

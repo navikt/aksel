@@ -13,7 +13,13 @@ async function main() {
 }
 
 async function createIndex() {
-  const data = await noCdnClient(process.env.SANITY_PRIVATE_NO_DRAFTS)
+  const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_PRIVATE_NO_DRAFTS' for generating searchindex",
+    );
+  }
+  const data = await noCdnClient(token)
     .fetch(
       `*[_type in [${allArticleDocuments.map(
         (x) => `"${x}"`,
@@ -51,9 +57,11 @@ function sanitzeSanityData(data) {
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
         return 0;
-      } else if (!a.publishedAt) {
+      }
+      if (!a.publishedAt) {
         return 1;
-      } else if (!b.publishedAt) {
+      }
+      if (!b.publishedAt) {
         return -1;
       }
 
@@ -100,11 +108,8 @@ function mapContent(blocks: any[]) {
     }
   });
 
-  const mapped = Object.entries(groupBy(contentBlocks, "id")).reduce(
-    (prev: { id?: string; text: string }[], [key, value]) => {
-      return [...prev, { id: key, text: value.map((x) => x.text).join(" ") }];
-    },
-    [],
+  const mapped = Object.entries(groupBy(contentBlocks, "id")).map(
+    ([key, value]) => ({ id: key, text: value.map((x) => x.text).join(" ") }),
   );
 
   return mapped;

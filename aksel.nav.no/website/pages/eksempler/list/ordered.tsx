@@ -27,5 +27,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Husk å sette riktig heading-nivå/tag hvis du bruker en title.",
+  desc: "Du kan bruke 'as' for å endre til 'ol' (nummerert liste).",
 };

@@ -260,7 +260,7 @@ function dialogPolyfillInfo(dialog) {
       removed ? this.downgradeModal() : this.maybeHideModal();
       removed = false;
     }.bind(this);
-    var timeout;
+    var timeout: ReturnType<typeof setTimeout>;
     var delayModel = function (ev) {
       if (ev.target !== dialog) {
         return;
@@ -634,9 +634,12 @@ dialogPolyfill.DialogManager = function () {
         for (var i = 0, c; (c = rec.removedNodes[i]); ++i) {
           if (!(c instanceof Element)) {
             continue;
-          } else if (c.localName === "dialog") {
+          }
+
+          if (c.localName === "dialog") {
             removed.push(c);
           }
+
           removed = removed.concat(c.querySelectorAll("dialog"));
         }
       });

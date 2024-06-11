@@ -60,7 +60,7 @@ export const Description = () => {
   );
 };
 
-export const Error = () => {
+export const WithError = () => {
   return (
     <div className="colgap">
       <TextField
@@ -120,8 +120,8 @@ export const Chromatic: Story = {
         <Description />
       </div>
       <div>
-        <h2>Error</h2>
-        <Error />
+        <h2>WithError</h2>
+        <WithError />
       </div>
       <div>
         <h2>Disabled</h2>

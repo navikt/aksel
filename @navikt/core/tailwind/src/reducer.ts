@@ -12,9 +12,10 @@ const Reducer = (
   replace: string[],
 ) =>
   Object.entries(tokens).reduce((old, [key, value]) => {
-    return replace.find((v) => key.startsWith(v))
-      ? { ...old, [replaceKey(key, replace)]: value }
-      : { ...old };
+    if (replace.find((v) => key.startsWith(v))) {
+      old[replaceKey(key, replace)] = value;
+    }
+    return old;
   }, {});
 
 export default Reducer;

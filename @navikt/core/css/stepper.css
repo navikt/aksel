@@ -70,6 +70,10 @@
   margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
 }
 
+.navds-stepper__item:last-child .navds-stepper__step {
+  margin-bottom: 0;
+}
+
 @media (forced-colors: active) {
   .navds-stepper__step {
     background-color: ButtonFace;

@@ -31,5 +31,7 @@ describe(`Each icons YML-config is valid`, () => {
 });
 
 function isDate(dateStr) {
-  return !isNaN(new Date(dateStr.split(".").reverse().join(".")).getDate());
+  return !Number.isNaN(
+    new Date(dateStr.split(".").reverse().join(".")).getDate(),
+  );
 }

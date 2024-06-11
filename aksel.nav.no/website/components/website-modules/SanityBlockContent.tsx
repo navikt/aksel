@@ -27,6 +27,7 @@ import Video from "@/cms/video/Video";
 import { amplitudeLogNavigation } from "@/logging";
 import InlineCode from "@/web/InlineCode";
 import KBD from "@/web/KBD";
+import { List, ListItem } from "@/web/List";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -86,40 +87,16 @@ const serializers: Partial<PortableTextReactComponents> = {
   ),
 
   list: {
-    bullet: ({ children }) => (
-      <ul className="aksel-list-ul list-margin relative mb-7 max-w-text list-disc last:mb-0">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol
-        type="1"
-        className="aksel-list-ol list-margin mb-7 max-w-text list-decimal last:mb-0"
-      >
-        {children}
-      </ol>
-    ),
+    bullet: ({ children }) => <List as="ul">{children}</List>,
+    number: ({ children }) => <List as="ol">{children}</List>,
   },
   listItem: {
-    bullet: ({ children }) => (
-      <BodyLong
-        as="li"
-        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
-      >
-        {children}
-      </BodyLong>
-    ),
-    number: ({ children }) => (
-      <BodyLong
-        as="li"
-        className="mb-3 ml-5 max-w-[calc(theme(spacing.text)_-_1em)]"
-      >
-        {children}
-      </BodyLong>
-    ),
+    bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
+    number: ({ children }) => <ListItem>{children}</ListItem>,
   },
   marks: {
     kbd: ({ text }) => <KBD>{text}</KBD>,
+    quote: ({ text }) => <q>{text}</q>,
     code: ({ text }) => <InlineCode>{text}</InlineCode>,
     link: ({ text, value: { href } }: PortableTextMarkComponentProps<any>) => {
       if (!href) {

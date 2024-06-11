@@ -123,9 +123,12 @@ export const Prinsipp = defineType({
                   return `Kan bare ha 1 hovedside for hvert prinsipp. Hovedsiden er nå: ${
                     res?.heading ?? "Siden har ikke en heading"
                   }`;
-                } else if (!parent?.hovedside && !res?._id) {
+                }
+
+                if (!parent?.hovedside && !res?._id) {
                   return `Hvert prinsipp må ha minst en hovedside. Velg en hovedside før du fortsetter`;
                 }
+
                 return true;
               },
             ),

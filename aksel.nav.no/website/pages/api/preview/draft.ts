@@ -25,7 +25,7 @@ const client = createClient({
 
 export default async function handle(
   req: NextApiRequest,
-  res: NextApiResponse<string | void>,
+  res: NextApiResponse<string>,
 ) {
   if (!req.url) {
     throw new Error("Missing url");
