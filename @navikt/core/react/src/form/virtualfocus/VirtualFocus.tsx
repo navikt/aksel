@@ -91,11 +91,14 @@ export interface VirtualFocusAnchorProps
   onActive: () => void;
   children: React.ReactNode;
   /**
-   * set this to `-1` if you have an input element inside
+   * Set this to `0` if you want the Anchor container itself
+   * to be focusable.
+   *
+   * Set this to `-1` if you have an input element inside
    * the Anchor that you would rather tab to directly instead
    * of having to tab to the Anchor itself first.
    *
-   * @default 0
+   * @default -1
    */
   tabIndex?: number;
 }
@@ -122,7 +125,6 @@ export const VirtualFocusAnchor = forwardRef<
   return (
     <div
       id={`virtualfocus-${uniqueId}-${index}`}
-      className="navds-virtualfocus-anchor"
       role={role}
       tabIndex={-1}
       aria-owns={`virtualfocus-${uniqueId}-content`}
