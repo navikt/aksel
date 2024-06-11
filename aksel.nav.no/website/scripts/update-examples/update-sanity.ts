@@ -24,6 +24,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
       "Missing token 'SANITY_WRITE_KEY' for updating code examples in Sanity",
     );
   }
+  console.log(`Processing ${directory}`);
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
   const exampleData: CodeExampleSchemaT[] = [];
@@ -49,7 +50,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
-    .then(() => console.log(`Oppdaterte ${directory}-dokumenter i sanity`))
+    .then(() => console.log(`Successfully updated ${directory}`))
     .catch((e) => {
       throw new Error(e.message);
     });
@@ -76,7 +77,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
       console.log("\n");
       console.log(
-        `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in sanity.
+        `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in Sanity.
     How to fix:
     - Go to links provided under and try to manually delete document.
     - You will then be prompted to update referenced document before deleting.
@@ -93,7 +94,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
         ),
       );
       throw new Error(
-        `Failed when deleting old ${directory}-documentation from sanity, see warning above.`,
+        `Failed when deleting old ${directory}-documentation from Sanity, see warning above.`,
       );
     });
 }
