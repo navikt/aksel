@@ -1,8 +1,9 @@
 import { LiveQueryProvider as SanityLiveQueryProvider } from "next-sanity/preview";
-import { useMemo } from "react";
 import { previewDraftsClient } from "@/sanity/client.server";
 import LiveQuery from "./LiveQuery";
 import { PreviewProps } from "./Preview.types";
+
+const client = previewDraftsClient();
 
 const LiveQueryProvider = ({
   query,
@@ -10,8 +11,6 @@ const LiveQueryProvider = ({
   props,
   children,
 }: PreviewProps) => {
-  const client = useMemo(previewDraftsClient, []);
-
   return (
     <SanityLiveQueryProvider client={client}>
       <LiveQuery props={props} query={query} params={params}>
