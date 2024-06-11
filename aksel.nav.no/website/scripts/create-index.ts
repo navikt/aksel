@@ -13,7 +13,13 @@ async function main() {
 }
 
 async function createIndex() {
-  const data = await noCdnClient(process.env.SANITY_PRIVATE_NO_DRAFTS)
+  const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_PRIVATE_NO_DRAFTS' for generating searchindex",
+    );
+  }
+  const data = await noCdnClient(token)
     .fetch(
       `*[_type in [${allArticleDocuments.map(
         (x) => `"${x}"`,
