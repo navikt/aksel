@@ -18,5 +18,13 @@ export const noCdnClient = (token) =>
     token,
   });
 
+export const previewDraftsClient = () =>
+  sanityClient.withConfig({
+    useCdn: false,
+    ignoreBrowserTokenWarning: true,
+    perspective: "previewDrafts",
+    withCredentials: true,
+  });
+
 // Helper function for easily switching between normal client and preview client
 export const getClient = () => sanityClient;
