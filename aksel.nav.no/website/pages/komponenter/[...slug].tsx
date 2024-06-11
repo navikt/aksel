@@ -350,6 +350,7 @@ export default function KomponentSider(props: PageProps["props"]) {
             toc={generateTableOfContents({
               content: _props?.page?.content,
               type: "komponent_artikkel",
+              intro: !!_props?.page?.intro,
             })}
           />
         );
