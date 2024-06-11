@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log} fill>
+    <ToggleGroup defaultValue="lest" onChange={console.log} label="Inbox">
       <ToggleGroup.Item value="ulest" label="Ulest" />
       <ToggleGroup.Item value="lest" label="Lest" />
       <ToggleGroup.Item value="sendt" label="Sendt" />
@@ -12,7 +12,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "static" });
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
@@ -20,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 2,
 };
