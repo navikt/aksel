@@ -1,7 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
-import { BodyShort } from "../typography";
+import { BodyShort, Heading } from "../typography";
+import { useId } from "../util";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
@@ -25,28 +26,35 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    */
   boundaryCount?: number;
   /**
-   * Callback when current page changes
+   * Callback when current page changes.
    */
   onPageChange?: (page: number) => void;
   /**
-   * Total number of pages
+   * Total number of pages.
    */
   count: number;
   /**
-   * Changes padding, height and font-size
+   * Changes padding, height and font-size.
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";
   /**
-   * Display text alongside "previous" and "next" icons
+   * Display text alongside "previous" and "next" icons.
    * @default false
    */
   prevNextTexts?: boolean;
   /**
-   * Override pagination item rendering
+   * Override pagination item rendering.
    * @default (item: PaginationItemProps) => <PaginationItem {...item} />
    */
   renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
+  /**
+   * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
+   */
+  srHeading?: {
+    tag: "h2" | "h3" | "h4" | "h5" | "h6";
+    text: string;
+  };
 }
 
 interface PaginationType
@@ -117,6 +125,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       className,
       size = "medium",
       prevNextTexts = false,
+      srHeading,
+      "aria-labelledby": ariaLabelledBy,
       renderItem: Item = (item: PaginationItemProps) => (
         <PaginationItem {...item} />
       ),
@@ -124,6 +134,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     },
     ref,
   ) => {
+    const headingId = useId();
+
     if (page < 1) {
       console.error("page cannot be less than 1");
       return null;
@@ -145,12 +157,25 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       <nav
         ref={ref}
         {...rest}
+        aria-labelledby={
+          srHeading ? cl(headingId, ariaLabelledBy) : ariaLabelledBy
+        }
         className={cl(
           "navds-pagination",
           `navds-pagination--${size}`,
           className,
         )}
       >
+        {srHeading && (
+          <Heading
+            size="xsmall"
+            visuallyHidden
+            as={srHeading.tag}
+            id={headingId}
+          >
+            {srHeading.text}
+          </Heading>
+        )}
         <ul className="navds-pagination__list">
           <li>
             <Item
