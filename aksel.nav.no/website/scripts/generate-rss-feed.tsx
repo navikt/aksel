@@ -7,14 +7,6 @@ import { noCdnClient } from "../sanity/interface/client.server";
 dotenv.config();
 dotenv.config({ path: `.env.local` });
 
-const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
-
-if (!token) {
-  throw new Error(
-    "Missing token 'SANITY_PRIVATE_NO_DRAFTS' when updating RSS-feed",
-  );
-}
-
 generateRssFeed();
 
 async function generateRssFeed() {
@@ -30,6 +22,12 @@ async function generateRssFeed() {
     "slug": slug.current,
   }`;
 
+  const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_PRIVATE_NO_DRAFTS' when updating RSS-feed",
+    );
+  }
   const bloggposts = await noCdnClient(token).fetch(query);
 
   const feedOptions = {
