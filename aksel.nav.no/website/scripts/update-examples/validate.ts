@@ -8,6 +8,8 @@ import { RootDirectoriesT, rootDirectories } from "./types";
   for (const directory of rootDirectories) {
     if (!(await validate(directory))) {
       error = true;
+    } else {
+        console.log("Everything Is A-OK\n")
     }
   }
   if (error) {
