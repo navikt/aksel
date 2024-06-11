@@ -8,12 +8,6 @@ import { RootDirectoriesT } from "./types";
 
 dotenv.config();
 
-const token = process.env.SANITY_WRITE_KEY;
-
-if (!token) {
-  throw new Error("Missing token 'SANITY_WRITE_KEY' for updating sanity");
-}
-
 updateSanity("templates", false);
 updateSanity("eksempler", false);
 
@@ -21,6 +15,12 @@ export async function updateSanity(
   directory: RootDirectoriesT,
   isDryRun: boolean = false,
 ) {
+  const token = process.env.SANITY_WRITE_KEY;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_WRITE_KEY' for updating code examples in Sanity",
+    );
+  }
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
 

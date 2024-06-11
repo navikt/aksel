@@ -10,12 +10,24 @@ export interface ListComponent
   extends React.ForwardRefExoticComponent<
     ListProps & React.RefAttributes<HTMLDivElement>
   > {
-  /**
-   * @see 🏷️ {@link ListItemProps}
-   */
   Item: typeof ListItem;
 }
 
+/**
+ * A list component
+ *
+ * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/list)
+ * @see 🏷️ {@link ListProps | Props}
+ *
+ * @example
+ * ```jsx
+ * <List>
+ *   <List.Item>Coffee</List.Item>
+ *   <List.Item>Tea</List.Item>
+ *   <List.Item>Milk</List.Item>
+ * </List>
+ * ```
+ */
 export const List = forwardRef<HTMLDivElement, ListProps>(
   (
     {

@@ -73,7 +73,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
               {tokens.map((line, i) => (
                 <span
                   key={i}
-                  {...getLineProps({ line, key: i })}
+                  {...getLineProps({ line })}
                   className={cl(
                     "last-of-type:pb-4",
                     terminalStyling(language) ? "flex items-center" : "block",
@@ -86,7 +86,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
                     />
                   )}
                   {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
+                    <span key={key} {...getTokenProps({ token })} />
                   ))}
                 </span>
               ))}
