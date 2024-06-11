@@ -160,21 +160,20 @@ export const VirtualFocusAnchor = forwardRef<
   );
 });
 
-export const VirtualFocusContent = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export interface VirtualFocusContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const VirtualFocusContent = forwardRef<
+  HTMLDivElement,
+  VirtualFocusContentProps
+>(({ children, ...rest }, ref) => {
   const { uniqueId } = useVirtualFocusInternalContext();
   return (
-    <div
-      id={`virtualfocus-${uniqueId}-content`}
-      className="navds-virtualfocus-content"
-    >
+    <div ref={ref} id={`virtualfocus-${uniqueId}-content`} {...rest}>
       {children}
     </div>
   );
-};
+});
 
 export interface VirtualFocusItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
