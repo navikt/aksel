@@ -18,7 +18,7 @@ export const [
 ] = createDescendantContext<
   SlottedDivElementRef,
   {
-    handlePick: () => void;
+    handleOnSelect: () => void;
     handleOnActive: () => void;
   }
 >();
@@ -29,7 +29,6 @@ const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
     loop: boolean;
     uniqueId: string;
-    containerRole: Props["containerRole"];
   }>();
 
 type Props = {
@@ -85,9 +84,9 @@ export interface VirtualFocusAnchorProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function that is run when the focused element
-   * is to be picked (eg. do an actual search, change route... etc)
+   * is to be selected (eg. do an actual search, change route... etc)
    */
-  pick: () => void;
+  onSelect: () => void;
   /**
    * The function that is run when the element gets
    * virtual focus set to it.
@@ -107,13 +106,13 @@ export interface VirtualFocusAnchorProps
 export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
->(({ children, pick, onActive, ...rest }, ref) => {
+>(({ children, onSelect, onActive, ...rest }, ref) => {
   const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId, containerRole } =
     useVirtualFocusInternalContext();
 
   const { register, descendants, index } = useVirtualFocusDescendant({
-    handlePick: () => {
-      pick();
+    handleOnSelect: () => {
+      onSelect();
     },
     handleOnActive: () => {
       setVirtualFocusIdx(0);
@@ -152,8 +151,8 @@ export const VirtualFocusAnchor = forwardRef<
           }
         } else if (event.key === "Enter") {
           const curr = descendants.item(0);
-          if (curr?.handlePick) {
-            curr.handlePick();
+          if (curr?.handleOnSelect) {
+            curr.handleOnSelect();
           }
         }
       }}
@@ -189,15 +188,14 @@ export interface VirtualFocusItemProps
   onActive: () => void;
   /**
    * The function that is run when the focused element
-   * is to be picked (eg. do an actual search, change route... etc)
+   * is to be selected (eg. do an actual search, change route... etc)
    */
-  pick: () => void;
+  onSelect: () => void;
   children: React.ReactNode;
-  itemRole?: React.AriaRole;
 }
 
 export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
-  ({ children, onActive, pick, itemRole, ...rest }, ref) => {
+  ({ children, onActive, onSelect, ...rest }, ref) => {
     const { virtualFocusIdx, setVirtualFocusIdx, uniqueId } =
       useVirtualFocusInternalContext();
     const { register, descendants, index } = useVirtualFocusDescendant({
@@ -205,34 +203,32 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
         setVirtualFocusIdx(index);
         onActive();
       },
-      handlePick: () => {
-        pick();
+      handleOnSelect: () => {
+        onSelect();
       },
     });
 
     const mergedRefs = useMergeRefs(ref, register);
 
     return (
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
       <div
         id={`virtualfocus-${uniqueId}-${index}`}
         className="navds-virtualfocus-item"
-        role={itemRole}
         data-aksel-virtualfocus={virtualFocusIdx === index}
         ref={mergedRefs}
         tabIndex={-1}
-        onKeyDown={() => {}} // Visible, non-interactive elements with click handlers must have at least one keyboard listener
         onClick={(event) => {
           const currIdx = descendants.indexOf(event.currentTarget);
           const curr = descendants.item(currIdx);
           if (curr) {
-            curr.handlePick();
+            curr.handleOnSelect();
           }
         }}
         onMouseMove={(event) => {
           const currIdx = descendants.indexOf(event.currentTarget);
           const curr = descendants.item(currIdx);
           if (curr) {
-            setVirtualFocusIdx(curr.index);
             curr.handleOnActive();
           }
         }}

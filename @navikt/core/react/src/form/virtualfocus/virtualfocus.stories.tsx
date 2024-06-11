@@ -52,8 +52,8 @@ const MyAnchor = forwardRef<
     <div style={{ position: "relative" }}>
       <VirtualFocus.Anchor
         ref={ref}
-        pick={() => {
-          console.log(`pick(): ${value}`);
+        onSelect={() => {
+          console.log(`onSelect(): ${value}`);
         }}
         onActive={() => {
           console.log(`onActive(): Anchor`);
@@ -90,8 +90,8 @@ const MyItem = ({
       onActive={() => {
         setValue(children);
       }}
-      pick={() => {
-        console.log(`pick(): ${children}`);
+      onSelect={() => {
+        console.log(`onSelect(): ${children}`);
       }}
       itemRole="button"
     >
@@ -114,7 +114,7 @@ export const Default = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus containerRole="listbox">
+      <VirtualFocus containerRole="combobox">
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
