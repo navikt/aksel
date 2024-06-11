@@ -92,18 +92,14 @@ module.exports = {
       },
     },
     {
-      files: [
-        "**/examples/__parts*/*.tsx",
-      ],
+      files: ["**/examples/__parts*/*.tsx"],
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
       },
     },
     {
-      files: [
-        "**/examples/__parts-inline/*.tsx",
-      ],
+      files: ["**/examples/__parts-inline/*.tsx"],
       rules: {
         "arrow-body-style": ["error", "never"],
         "func-style": ["error", "expression"],
