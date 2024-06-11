@@ -46,7 +46,7 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
       ...(process.env.FULL_TEST
-        ? { testMatch: [/.*\.e2e\.(ts|tsx)/, smoketestMatcher] }
+        ? { testMatch: [/.*\.e2e\.(ts|tsx)/] }
         : { testMatch: [smoketestMatcher, /search.e2e.ts/] }),
     },
     {
