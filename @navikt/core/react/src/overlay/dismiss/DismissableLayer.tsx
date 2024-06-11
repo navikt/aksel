@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SlottedElement } from "../../slot/SlottedElement";
+import { Slot } from "../../slot/Slot";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { AsChild } from "../../util/types/AsChild";
@@ -366,12 +366,12 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
       return () => descendants.values().forEach((x) => x.forceUpdate());
     }, [descendants, node]);
 
+    const Comp = asChild ? Slot : "div";
+
     return (
-      <SlottedElement
+      <Comp
         ref={mergedRefs}
         {...rest}
-        asChild={asChild}
-        as="div"
         onFocusCapture={focusOutside.onFocusCapture}
         onBlurCapture={focusOutside.onBlurCapture}
         onPointerDownCapture={pointerDownOutside.onPointerDownCapture}
@@ -381,7 +381,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
         }}
       >
         {children}
-      </SlottedElement>
+      </Comp>
     );
   },
 );
