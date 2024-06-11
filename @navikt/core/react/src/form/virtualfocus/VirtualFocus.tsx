@@ -29,6 +29,7 @@ const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
     loop: boolean;
     uniqueId: string;
+    role: Props["role"];
   }>();
 
 type Props = {
@@ -40,7 +41,7 @@ type Props = {
    * Children that are to get focus inside this container element shall be
    * pointed to by `aria-activedescendant`.
    **/
-  containerRole:
+  role:
     | "combobox"
     | "grid"
     | "listbox"
@@ -57,11 +58,7 @@ type Props = {
   loop?: boolean;
 };
 
-export const VirtualFocus = ({
-  children,
-  containerRole,
-  loop = false,
-}: Props) => {
+export const VirtualFocus = ({ children, role, loop = false }: Props) => {
   const descendants = useVirtualFocusDescendantInitializer();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
@@ -71,7 +68,7 @@ export const VirtualFocus = ({
       setVirtualFocusIdx={setVirtualFocusIdx}
       loop={loop}
       uniqueId={useId().replace(/:/g, "")}
-      containerRole={containerRole}
+      role={role}
     >
       <VirtualFocusDescendantsProvider value={descendants}>
         {children}
@@ -107,7 +104,7 @@ export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
 >(({ children, onSelect, onActive, ...rest }, ref) => {
-  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId, containerRole } =
+  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId, role } =
     useVirtualFocusInternalContext();
 
   const { register, descendants, index } = useVirtualFocusDescendant({
@@ -126,7 +123,7 @@ export const VirtualFocusAnchor = forwardRef<
     <div
       id={`virtualfocus-${uniqueId}-${index}`}
       className="navds-virtualfocus-anchor"
-      role={containerRole}
+      role={role}
       tabIndex={-1}
       aria-owns={`virtualfocus-${uniqueId}-content`}
       aria-controls={`virtualfocus-${uniqueId}-content`}
@@ -198,7 +195,7 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
   ({ children, onActive, onSelect, ...rest }, ref) => {
     const { virtualFocusIdx, setVirtualFocusIdx, uniqueId } =
       useVirtualFocusInternalContext();
-    const { register, descendants, index } = useVirtualFocusDescendant({
+    const { register, index } = useVirtualFocusDescendant({
       handleOnActive: () => {
         setVirtualFocusIdx(index);
         onActive();
@@ -214,23 +211,15 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
       <div
         id={`virtualfocus-${uniqueId}-${index}`}
-        className="navds-virtualfocus-item"
         data-aksel-virtualfocus={virtualFocusIdx === index}
         ref={mergedRefs}
         tabIndex={-1}
-        onClick={(event) => {
-          const currIdx = descendants.indexOf(event.currentTarget);
-          const curr = descendants.item(currIdx);
-          if (curr) {
-            curr.handleOnSelect();
-          }
+        onClick={() => {
+          onSelect();
         }}
-        onMouseMove={(event) => {
-          const currIdx = descendants.indexOf(event.currentTarget);
-          const curr = descendants.item(currIdx);
-          if (curr) {
-            curr.handleOnActive();
-          }
+        onMouseMove={() => {
+          setVirtualFocusIdx(index);
+          onActive();
         }}
         {...rest}
       >
