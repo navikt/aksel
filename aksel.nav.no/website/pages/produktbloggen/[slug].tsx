@@ -232,7 +232,7 @@ export default function Blogg(props: PageProps["props"]) {
       props={props}
       params={{ slug: `produktbloggen/${props.slug}` }}
     >
-      {(_props) => <Page {..._props} />}
+      {(previewProps) => <Page {...previewProps} />}
     </PagePreview>
   ) : (
     <Page {...props} />

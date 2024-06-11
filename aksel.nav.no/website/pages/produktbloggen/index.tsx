@@ -112,7 +112,7 @@ const Page = (props: PageProps["props"]) => {
 export default function Home(props: PageProps["props"]) {
   return props.preview ? (
     <PagePreview query={query} props={props}>
-      {(_props) => <Page {..._props} />}
+      {(previewProps) => <Page {...previewProps} />}
     </PagePreview>
   ) : (
     <Page {...props} />

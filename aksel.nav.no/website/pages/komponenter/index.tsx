@@ -244,14 +244,14 @@ export default function KomponentFrontpage(props: PageProps["props"]) {
         type: "komponent_artikkel",
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
-            sidebar={generateSidebar(_props.sidebar, "komponenter")}
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "komponenter")}
           />
         );
       }}

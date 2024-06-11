@@ -205,15 +205,15 @@ export default function PrinsippPage(props: PageProps["props"]) {
         slug: `prinsipper/${props.slug}`,
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
+            {...previewProps}
             toc={generateTableOfContents({
-              content: _props?.prinsipp?.content,
+              content: previewProps?.prinsipp?.content,
               type: "aksel_prinsipp",
             })}
           />

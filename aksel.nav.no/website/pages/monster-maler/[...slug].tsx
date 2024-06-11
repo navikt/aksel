@@ -192,16 +192,16 @@ export default function MonsterMalerPage(props: PageProps["props"]) {
         type: "templates_artikkel",
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
-            sidebar={generateSidebar(_props.sidebar, "templates")}
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "templates")}
             toc={generateTableOfContents({
-              content: _props?.page?.content,
+              content: previewProps?.page?.content,
               type: "templates_artikkel",
             })}
           />

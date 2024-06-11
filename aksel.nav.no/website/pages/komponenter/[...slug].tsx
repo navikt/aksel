@@ -339,18 +339,18 @@ export default function KomponentSider(props: PageProps["props"]) {
         preview: "true",
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
-            sidebar={generateSidebar(_props.sidebar, "komponenter")}
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "komponenter")}
             toc={generateTableOfContents({
-              content: _props?.page?.content,
+              content: previewProps?.page?.content,
               type: "komponent_artikkel",
-              intro: !!_props?.page?.intro,
+              intro: !!previewProps?.page?.intro,
             })}
           />
         );

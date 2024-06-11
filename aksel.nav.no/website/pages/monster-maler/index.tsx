@@ -122,14 +122,14 @@ export default function MonsterMalerFrontpage(props: PageProps["props"]) {
       props={props}
       params={{ type: "templates_artikkel" }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
-            sidebar={generateSidebar(_props.sidebar, "templates")}
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "templates")}
           />
         );
       }}

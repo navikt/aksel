@@ -93,7 +93,7 @@ export default function StandalonePage(props: PageProps["props"]) {
       props={props}
       params={{ slug: `side/${props.slug}` }}
     >
-      {(_props) => <Page {..._props} />}
+      {(previewProps) => <Page {...previewProps} />}
     </PagePreview>
   ) : (
     <Page {...props} />

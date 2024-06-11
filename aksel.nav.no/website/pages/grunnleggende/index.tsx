@@ -124,14 +124,14 @@ export default function GrunnleggendeFrontpage(props: PageProps["props"]) {
         type: "ds_artikkel",
       }}
     >
-      {(_props, loading) => {
+      {(previewProps, loading) => {
         if (loading) {
           return <Page {...props} />;
         }
         return (
           <Page
-            {..._props}
-            sidebar={generateSidebar(_props?.sidebar, "grunnleggende")}
+            {...previewProps}
+            sidebar={generateSidebar(previewProps?.sidebar, "grunnleggende")}
           />
         );
       }}
