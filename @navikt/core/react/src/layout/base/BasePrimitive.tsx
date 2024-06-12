@@ -71,23 +71,49 @@ export interface BasePrimitiveProps {
     "static" | "relative" | "absolute" | "fixed" | "sticky"
   >;
   /**
-   * CSS `inset`
+   * CSS `inset`.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * inset='4'
+   * inset='4 5'
+   * inset={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
    */
-  inset?: ResponsiveProp<SpacingScale>;
+  inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
    * CSS `top`
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * top='4'
+   * top={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   top?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `right`
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * right='4'
+   * right={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   right?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `bottom`
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * bottom='4'
+   * bottom={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   bottom?: ResponsiveProp<SpacingScale>;
   /**
    * CSS `left`
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * left='4'
+   * left={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   left?: ResponsiveProp<SpacingScale>;
   /**
