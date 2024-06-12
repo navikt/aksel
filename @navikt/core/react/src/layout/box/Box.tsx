@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../util/Slot";
 import { AsChildProps, OverridableComponent } from "../../util/types";
@@ -122,7 +123,18 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
 
     return (
       <BasePrimitive {...rest}>
-        <Comp {...rest} className="navds-box" ref={ref} style={style}>
+        <Comp
+          {...rest}
+          ref={ref}
+          style={style}
+          className={cl("navds-box", {
+            "navds-box-bg": background,
+            "navds-box-border-color": borderColor,
+            "navds-box-border-width": borderWidth,
+            "navds-box-border-radius": borderRadius,
+            "navds-box-shadow": shadow,
+          })}
+        >
           {children}
         </Comp>
       </BasePrimitive>
