@@ -1,4 +1,5 @@
 export type FileArrayT = {
+  _key: string;
   innhold: string;
   title: string;
   navn: string;
@@ -16,4 +17,6 @@ export type ArgsT = {
   desc?: string;
   sandbox?: boolean;
 };
-export type RootDirectoriesT = "eksempler" | "templates";
+
+export const rootDirectories = ["eksempler", "templates"] as const;
+export type RootDirectoriesT = (typeof rootDirectories)[number];

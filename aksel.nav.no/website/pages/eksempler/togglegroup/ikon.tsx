@@ -10,26 +10,32 @@ const Example = () => {
   return (
     <div className="grid gap-4">
       <ToggleGroup defaultValue="lest" onChange={console.log}>
-        <ToggleGroup.Item value="ulest">
-          <EnvelopeClosedIcon title="Ulest" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="lest">
-          <EnvelopeOpenIcon title="Lest" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="sendt">
-          <PaperplaneIcon title="Sendt" />
-        </ToggleGroup.Item>
+        <ToggleGroup.Item
+          value="ulest"
+          icon={<EnvelopeClosedIcon title="Ulest" />}
+        />
+        <ToggleGroup.Item
+          value="lest"
+          icon={<EnvelopeOpenIcon title="Lest" />}
+        />
+        <ToggleGroup.Item
+          value="sendt"
+          icon={<PaperplaneIcon title="Sendt" />}
+        />
       </ToggleGroup>
       <ToggleGroup defaultValue="lest" onChange={console.log} variant="neutral">
-        <ToggleGroup.Item value="ulest">
-          <EnvelopeClosedIcon title="Ulest" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="lest">
-          <EnvelopeOpenIcon title="Lest" />
-        </ToggleGroup.Item>
-        <ToggleGroup.Item value="sendt">
-          <PaperplaneIcon title="Sendt" />
-        </ToggleGroup.Item>
+        <ToggleGroup.Item
+          value="ulest"
+          icon={<EnvelopeClosedIcon title="Ulest" />}
+        />
+        <ToggleGroup.Item
+          value="lest"
+          icon={<EnvelopeOpenIcon title="Lest" />}
+        />
+        <ToggleGroup.Item
+          value="sendt"
+          icon={<PaperplaneIcon title="Sendt" />}
+        />
       </ToggleGroup>
     </div>
   );

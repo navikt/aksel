@@ -3,10 +3,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
-      <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">Lest</ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
+    <ToggleGroup defaultValue="lest" onChange={console.log}>
+      <ToggleGroup.Item value="ulest" label="Ulest" />
+      <ToggleGroup.Item value="lest" label="Lest" />
+      <ToggleGroup.Item value="sendt" label="Sendt" />
     </ToggleGroup>
   );
 };

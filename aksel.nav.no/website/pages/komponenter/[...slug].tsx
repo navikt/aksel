@@ -1,5 +1,4 @@
 import { GetStaticPaths } from "next/types";
-import { Suspense, lazy } from "react";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { ChangelogIcon, FigmaIcon, GithubIcon, YarnIcon } from "@/assets/Icons";
 import ComponentOverview from "@/cms/component-overview/ComponentOverview";
@@ -23,6 +22,7 @@ import {
 } from "@/types";
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
 import { StatusTag } from "@/web/StatusTag";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import NotFotfund from "../404";
@@ -328,44 +328,35 @@ const Page = ({
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          params={{
-            slug: `komponenter/${props.slug}`,
-            type: "komponent_artikkel",
-            preview: "true",
-          }}
-          props={props}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "komponenter"),
-            },
-            {
-              key: "toc",
-              dataKeys: ["page.content", "page.intro"],
-              cb: (v) =>
-                generateTableOfContents({
-                  content: v[0],
-                  type: "komponent_artikkel",
-                  intro: !!v[1],
-                }),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function KomponentSider(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        slug: `komponenter/${props.slug}`,
+        type: "komponent_artikkel",
+        preview: "true",
+      }}
+    >
+      {(previewProps, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "komponenter")}
+            toc={generateTableOfContents({
+              content: previewProps?.page?.content,
+              type: "komponent_artikkel",
+              intro: !!previewProps?.page?.intro,
+            })}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}
