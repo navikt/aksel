@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { BodyLong } from "../../typography";
 import { Box } from "../box";
+import { Hide, Show } from "../responsive";
 import { HStack, VStack } from "../stack";
 import { BasePrimitive } from "./BasePrimitive";
 
@@ -17,28 +17,31 @@ export default meta;
 
 type Story = StoryObj<typeof BasePrimitive>;
 
-export const Default: Story = {
-  args: {
-    children: (
-      <div>
-        This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-        nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-        Proident pariatur proident pariatur magna consequat velit id commodo
-        quis sunt tempor ullamco aliquip pariatur.
-      </div>
-    ),
-  },
-};
+const ResponsiveBreakpointDisplay = () => (
+  <>
+    <Show above="2xl">2xl</Show>
+    <Show above="xl" below="2xl">
+      xl
+    </Show>
+    <Show above="lg" below="xl">
+      lg
+    </Show>
+    <Show above="md" below="lg">
+      md
+    </Show>
+    <Show above="sm" below="md">
+      sm
+    </Show>
+    <Hide above="sm">xs</Hide>
+  </>
+);
 
 export const PaddingBreakpoints = () => (
   <BasePrimitive
-    padding={{ xs: "2", sm: "3", md: "4", lg: "5", xl: "6", "2xl": "8" }}
+    padding={{ xs: "2", sm: "4", md: "8", lg: "16", xl: "24", "2xl": "32" }}
   >
     <Box background="surface-alt-3-subtle">
-      This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-      nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-      Proident pariatur proident pariatur magna consequat velit id commodo quis
-      sunt tempor ullamco aliquip pariatur.
+      <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
 );
@@ -46,10 +49,7 @@ export const PaddingBreakpoints = () => (
 export const PaddingBreakpointsInherit1 = () => (
   <BasePrimitive padding={{ xs: "2" }} paddingInline={{ md: "24 0" }}>
     <Box background="surface-alt-3-subtle">
-      This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-      nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-      Proident pariatur proident pariatur magna consequat velit id commodo quis
-      sunt tempor ullamco aliquip pariatur.
+      <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
 );
@@ -60,10 +60,7 @@ export const PaddingBreakpointsInherit2 = () => (
     paddingInline={{ sm: "4 0", md: "24 0" }}
   >
     <Box background="surface-alt-3-subtle">
-      This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
-      nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
-      Proident pariatur proident pariatur magna consequat velit id commodo quis
-      sunt tempor ullamco aliquip pariatur.
+      <ResponsiveBreakpointDisplay />
     </Box>
   </BasePrimitive>
 );
@@ -71,42 +68,43 @@ export const PaddingBreakpointsInherit2 = () => (
 export const Padding = () => (
   <VStack align="center" gap="2">
     <BasePrimitive padding="20">
-      <BodyLong>Padding all around</BodyLong>
+      <Box borderWidth="1">Padding all around</Box>
     </BasePrimitive>
     <BasePrimitive padding="1" paddingBlock="20 0">
-      <BodyLong>Padding to the North</BodyLong>
+      <Box borderWidth="1">Padding to the North</Box>
     </BasePrimitive>
     <BasePrimitive padding="1" paddingInline="0 20">
-      <BodyLong>Padding to the East</BodyLong>
+      <Box borderWidth="1">Padding to the East</Box>
     </BasePrimitive>
     <BasePrimitive padding="1" paddingBlock="0 20">
-      <BodyLong>Padding to the South</BodyLong>
+      <Box borderWidth="1">Padding to the South</Box>
     </BasePrimitive>
     <BasePrimitive padding="1" paddingInline="20 0">
-      <BodyLong>Padding to the West</BodyLong>
+      <Box borderWidth="1">Padding to the West</Box>
     </BasePrimitive>
   </VStack>
 );
 
 export const HeightWidth = () => (
   <VStack align="center" gap="2">
-    <BasePrimitive height="2rem">
-      <div>height 2 rem</div>
+    <BasePrimitive height="4rem">
+      <Box borderWidth="1">height 4 rem</Box>
     </BasePrimitive>
-    <BasePrimitive minHeight="2rem">
-      <div>min-height 2 rem</div>
+    <BasePrimitive minHeight="4rem">
+      <Box borderWidth="1">min-height 4 rem</Box>
     </BasePrimitive>
-    <BasePrimitive maxHeight="2rem">
-      <div>max-height 2 rem</div>
+    <BasePrimitive maxHeight="4rem" height="10rem">
+      <Box borderWidth="1">max-height 4 rem</Box>
     </BasePrimitive>
-    <BasePrimitive width="2rem">
-      <div>width 2 rem</div>
+
+    <BasePrimitive width="4rem">
+      <Box borderWidth="1">width 4 rem</Box>
     </BasePrimitive>
-    <BasePrimitive minWidth="2rem">
-      <div>min-width 2 rem</div>
+    <BasePrimitive minWidth="12rem">
+      <Box borderWidth="1">min-width 12 rem</Box>
     </BasePrimitive>
-    <BasePrimitive maxWidth="2rem">
-      <div>max-width 2 rem</div>
+    <BasePrimitive maxWidth="4rem" width="20rem">
+      <Box borderWidth="1">max-width 4 rem</Box>
     </BasePrimitive>
   </VStack>
 );
@@ -117,7 +115,7 @@ export const PositionAbsolute = () => (
       position: "relative",
       height: 200,
       width: 300,
-      background: "gray",
+      border: "1px solid gray",
     }}
   >
     <BasePrimitive position="absolute" inset="0">
@@ -139,11 +137,11 @@ export const PositionAbsolute = () => (
 );
 
 export const Overflow = () => (
-  <div>
+  <VStack gap="8">
     <BasePrimitive overflow="scroll" maxHeight="100px" maxWidth="100px">
-      <div>
+      <Box borderWidth="1">
         <div style={{ width: 200, height: 200 }}>scroll</div>
-      </div>
+      </Box>
     </BasePrimitive>
     <BasePrimitive
       overflowX="scroll"
@@ -151,9 +149,9 @@ export const Overflow = () => (
       maxHeight="100px"
       maxWidth="100px"
     >
-      <div>
+      <Box borderWidth="1">
         <div style={{ width: 200, height: 200 }}>scroll-x</div>
-      </div>
+      </Box>
     </BasePrimitive>
     <BasePrimitive
       overflowY="scroll"
@@ -161,34 +159,47 @@ export const Overflow = () => (
       maxHeight="100px"
       maxWidth="100px"
     >
-      <div>
+      <Box borderWidth="1">
         <div style={{ width: 200, height: 200 }}>scroll-y</div>
-      </div>
+      </Box>
     </BasePrimitive>
-  </div>
+  </VStack>
 );
 
 export const Flex = () => (
-  <HStack align="center" gap="2">
-    <BasePrimitive flexGrow="1">
-      <div>grow</div>
-    </BasePrimitive>
-    <BasePrimitive flexShrink="0">
-      <div>shrink</div>
-    </BasePrimitive>
-    <BasePrimitive flexBasis="200px">
-      <div>shrink</div>
-    </BasePrimitive>
-  </HStack>
+  <VStack gap="8">
+    <HStack align="center" gap="2">
+      <BasePrimitive flexGrow="1">
+        <Box borderWidth="1">grow 1</Box>
+      </BasePrimitive>
+      <BasePrimitive flexShrink="0">
+        <Box borderWidth="1">shrink 0</Box>
+      </BasePrimitive>
+      <BasePrimitive flexBasis="200px">
+        <Box borderWidth="1">flex basis 200px</Box>
+      </BasePrimitive>
+    </HStack>
+    <h2>Flex basis</h2>
+    <HStack align="center" gap="0">
+      <BasePrimitive flexBasis="33%">
+        <Box borderWidth="1">33%</Box>
+      </BasePrimitive>
+      <BasePrimitive flexBasis="66%">
+        <Box borderWidth="1">66%</Box>
+      </BasePrimitive>
+      <BasePrimitive flexBasis="20%">
+        <Box borderWidth="1">20%</Box>
+      </BasePrimitive>
+      <BasePrimitive flexBasis="80%">
+        <Box borderWidth="1">80%</Box>
+      </BasePrimitive>
+    </HStack>
+  </VStack>
 );
 
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">
-      <div>
-        <h2>Padding</h2>
-        <Padding />
-      </div>
       <div>
         <h2>PaddingBreakpoints</h2>
         <PaddingBreakpoints />
@@ -201,7 +212,10 @@ export const Chromatic: Story = {
         <h2>PaddingBreakpointsInherit2</h2>
         <PaddingBreakpointsInherit2 />
       </div>
-
+      <div>
+        <h2>Padding</h2>
+        <Padding />
+      </div>
       <div>
         <h2>Height & Width</h2>
         <HeightWidth />
