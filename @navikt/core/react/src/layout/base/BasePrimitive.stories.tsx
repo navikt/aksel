@@ -99,7 +99,7 @@ export const HeightWidth = () => (
     <BasePrimitive maxHeight="2rem">
       <div>max-height 2 rem</div>
     </BasePrimitive>
-    <BasePrimitive height="2rem">
+    <BasePrimitive width="2rem">
       <div>width 2 rem</div>
     </BasePrimitive>
     <BasePrimitive minWidth="2rem">
