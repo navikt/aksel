@@ -59,18 +59,31 @@ Default.argTypes = {
 };
 
 export const MultiSelect: StoryFn = () => {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([
+    "pear",
+    "kiwi",
+  ]);
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect"
       label="Komboboks - velg flere"
       options={options}
       isMultiSelect={true}
+      selectedOptions={selectedOptions}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
     />
   );
 };
 
 export const MultiSelectWithComplexOptions: StoryFn = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([
+    "HJE",
+    "OPP",
+  ]);
   return (
     <>
       <UNSAFE_Combobox
@@ -87,6 +100,7 @@ export const MultiSelectWithComplexOptions: StoryFn = () => {
             : setSelectedOptions(selectedOptions.filter((o) => o !== value))
         }
         selectedOptions={selectedOptions}
+        isMultiSelect
       />
     </>
   );
@@ -109,7 +123,9 @@ const complexOptions = [
   { label: "Grunn- og hjelpestønad", value: "GRU" },
 ];
 
-export const WithAddNewOptions: StoryFn = () => {
+export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
+  const [value, setValue] = useState<string | undefined>("hello");
+  const comboboxRef = useRef<HTMLInputElement>(null);
   return (
     <UNSAFE_Combobox
       id="combobox-with-add-new-options"
@@ -117,11 +133,22 @@ export const WithAddNewOptions: StoryFn = () => {
       options={options}
       allowNewValues={true}
       shouldAutocomplete={true}
+      value={value}
+      onChange={(event) => setValue(event?.currentTarget.value)}
+      isListOpen={open ?? (comboboxRef.current ? true : undefined)}
+      ref={comboboxRef}
     />
   );
 };
 
-export const MultiSelectWithAddNewOptions: StoryFn = () => {
+export const MultiSelectWithAddNewOptions: StoryFn = ({
+  open,
+}: {
+  open?: boolean;
+}) => {
+  const [value, setValue] = useState<string | undefined>("world");
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(["hello"]);
+  const comboboxRef = useRef<HTMLInputElement>(null);
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect-and-add-new-options"
@@ -129,12 +156,25 @@ export const MultiSelectWithAddNewOptions: StoryFn = () => {
       label="Multiselect komboboks med mulighet for å legge til nye verdier"
       options={options}
       allowNewValues={true}
+      value={value}
+      selectedOptions={selectedOptions}
+      onChange={(event) => setValue(event?.currentTarget.value)}
+      onToggleSelected={(option, isSelected) =>
+        isSelected
+          ? setSelectedOptions([...selectedOptions, option])
+          : setSelectedOptions(selectedOptions.filter((o) => o !== option))
+      }
+      isListOpen={open ?? (comboboxRef.current ? true : undefined)}
+      ref={comboboxRef}
     />
   );
 };
 
 export const MultiSelectWithExternalChips: StoryFn = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([
+    "kiwi",
+    "pear",
+  ]);
   const [value, setValue] = useState("");
 
   const toggleSelected = (option: string) =>
@@ -239,41 +279,82 @@ export const Controlled: StoryFn = () => {
   );
 };
 
-export const ComboboxSizes = () => (
-  <>
-    <UNSAFE_Combobox
-      label="Hva er dine favorittfrukter?"
-      description="Medium single-select"
-      options={options}
-    />
-    <br />
-    <UNSAFE_Combobox
-      label="Hva er dine favorittfrukter?"
-      description="Small single-select"
-      options={options}
-      size="small"
-    />
-    <br />
-    <UNSAFE_Combobox
-      label="Hva er dine favorittfrukter?"
-      description="Medium multiselect"
-      options={options}
-      isMultiSelect
-      allowNewValues
-    />
-    <br />
-    <UNSAFE_Combobox
-      label="Hva er dine favorittfrukter?"
-      description="Small multiselect"
-      options={options}
-      isMultiSelect
-      size="small"
-      allowNewValues
-    />
-  </>
-);
+export const ComboboxSizes = () => {
+  const [multiSelectedOptions, setMultiSelectedOptions] = useState<string[]>([
+    "pear",
+    "kiwi",
+  ]);
+  const [singleSelectedOption, setSingleSelectedOption] = useState<string[]>([
+    "apple",
+  ]);
+  return (
+    <>
+      <UNSAFE_Combobox
+        label="Hva er dine favorittfrukter?"
+        description="Medium single-select"
+        options={options}
+        selectedOptions={singleSelectedOption}
+        onToggleSelected={(option, isSelected) =>
+          isSelected
+            ? setSingleSelectedOption([option])
+            : setSingleSelectedOption(
+                singleSelectedOption.filter((o) => o !== option),
+              )
+        }
+      />
+      <br />
+      <UNSAFE_Combobox
+        label="Hva er dine favorittfrukter?"
+        description="Small single-select"
+        options={options}
+        size="small"
+        selectedOptions={singleSelectedOption}
+        onToggleSelected={(option, isSelected) =>
+          isSelected
+            ? setSingleSelectedOption([option])
+            : setSingleSelectedOption(
+                singleSelectedOption.filter((o) => o !== option),
+              )
+        }
+      />
+      <br />
+      <UNSAFE_Combobox
+        label="Hva er dine favorittfrukter?"
+        description="Medium multiselect"
+        options={options}
+        isMultiSelect
+        allowNewValues
+        selectedOptions={multiSelectedOptions}
+        onToggleSelected={(option, isSelected) =>
+          isSelected
+            ? setMultiSelectedOptions([...multiSelectedOptions, option])
+            : setMultiSelectedOptions(
+                multiSelectedOptions.filter((o) => o !== option),
+              )
+        }
+      />
+      <br />
+      <UNSAFE_Combobox
+        label="Hva er dine favorittfrukter?"
+        description="Small multiselect"
+        options={options}
+        isMultiSelect
+        size="small"
+        allowNewValues
+        selectedOptions={multiSelectedOptions}
+        onToggleSelected={(option, isSelected) =>
+          isSelected
+            ? setMultiSelectedOptions([...multiSelectedOptions, option])
+            : setMultiSelectedOptions(
+                multiSelectedOptions.filter((o) => o !== option),
+              )
+        }
+      />
+    </>
+  );
+};
 
-export const MaxSelectedOptions: StoryFn = () => {
+export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
   const [value, setValue] = useState<string | undefined>("");
   const [selectedOptions, setSelectedOptions] = useState([
     options[0],
@@ -294,7 +375,7 @@ export const MaxSelectedOptions: StoryFn = () => {
       }
       isMultiSelect
       allowNewValues
-      isListOpen={comboboxRef.current ? undefined : true}
+      isListOpen={open ?? (comboboxRef.current ? undefined : true)}
       value={value}
       onChange={(event) => setValue(event?.target.value)}
       ref={comboboxRef}
@@ -322,29 +403,34 @@ export const WithError: StoryFn = () => {
 };
 
 export const Chromatic: StoryFn = () => {
+  const H2 = (props: { children: string; style?: React.CSSProperties }) => (
+    <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
+      {props.children}
+    </h2>
+  );
   return (
     <VStack gap="2">
-      <h2>MultiSelect</h2>
+      <H2>MultiSelect</H2>
       <MultiSelect />
-      <h2>ComboboxWithNoHits</h2>
+      <H2>ComboboxWithNoHits</H2>
       <ComboboxWithNoHits />
-      <h2 style={{ marginTop: "5rem" }}>MultiSelectWithComplexOptions</h2>
+      <H2 style={{ marginTop: "5rem" }}>MultiSelectWithComplexOptions</H2>
       <MultiSelectWithComplexOptions />
-      <h2>WithAddNewOptions</h2>
-      <WithAddNewOptions />
-      <h2>MultiSelectWithAddNewOptions</h2>
-      <MultiSelectWithAddNewOptions />
-      <h2>MultiSelectWithExternalChips</h2>
+      <H2>WithAddNewOptions</H2>
+      <WithAddNewOptions open />
+      <H2 style={{ marginTop: "5rem" }}>MultiSelectWithAddNewOptions</H2>
+      <MultiSelectWithAddNewOptions open />
+      <H2 style={{ marginTop: "5rem" }}>MultiSelectWithExternalChips</H2>
       <MultiSelectWithExternalChips />
-      <h2>Loading</h2>
+      <H2>Loading</H2>
       <Loading />
-      <h2 style={{ marginTop: "5rem" }}>Controlled</h2>
+      <H2 style={{ marginTop: "5rem" }}>Controlled Input Value</H2>
       <Controlled />
-      <h2>ComboboxSizes</h2>
+      <H2>ComboboxSizes</H2>
       <ComboboxSizes />
-      <h2>MaxSelectedOptions</h2>
-      <MaxSelectedOptions />
-      <h2 style={{ marginTop: "20rem" }}>WithError</h2>
+      <H2>MaxSelectedOptions</H2>
+      <MaxSelectedOptions open />
+      <H2 style={{ marginTop: "20rem" }}>WithError</H2>
       <WithError />
     </VStack>
   );
