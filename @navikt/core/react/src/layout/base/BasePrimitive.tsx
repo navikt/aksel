@@ -7,7 +7,10 @@ import { ResponsiveProp, SpacingScale } from "../utilities/types";
 export interface BasePrimitiveProps {
   children: React.ReactElement;
   className?: string;
-  /** Padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /**
+   * Padding around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    * @example
    * padding='4'
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
