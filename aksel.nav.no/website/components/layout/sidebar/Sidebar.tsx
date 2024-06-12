@@ -41,7 +41,7 @@ function Section({ section }: { section: SidebarT[number] }) {
   return (
     <li>
       <MenuHeading as="div">{section.title}</MenuHeading>
-      <MenuUl className="py-1">
+      <MenuUl>
         {section.pages.map((page) => (
           <MenuLi
             aria-current={isActive(page.slug) ? "page" : undefined}
