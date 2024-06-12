@@ -16,7 +16,10 @@ export interface BasePrimitiveProps {
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: ResponsiveProp<SpacingScale>;
-  /** Horizontal padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /**
+   * Horizontal padding around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingInline='4'
    * paddingInline='4 5'
