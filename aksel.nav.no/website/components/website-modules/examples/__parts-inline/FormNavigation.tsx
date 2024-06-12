@@ -5,7 +5,7 @@ import {
   PaperplaneIcon,
   TrashIcon,
 } from "@navikt/aksel-icons";
-import { BodyShort, Button, HGrid, VStack } from "@navikt/ds-react";
+import { BodyShort, Button, HGrid, Show, VStack } from "@navikt/ds-react";
 
 const FormNavigation = () => (
   <VStack gap="4">
@@ -13,9 +13,9 @@ const FormNavigation = () => (
       Sist lagret: 10. mars 2024 kl. 13.55
     </BodyShort>
     <HGrid
-      gap="8 4"
+      gap={{ xs: "4", sm: "8 4" }}
       columns={{ xs: 1, sm: 2 }}
-      style={{ width: "fit-content" }}
+      style={{ width: "fit-content" }} // TODO: Kun på sm
     >
       <Button
         variant="secondary"
@@ -31,6 +31,10 @@ const FormNavigation = () => (
       >
         Send søknad
       </Button>
+
+      <Show below="sm">
+        <div />
+      </Show>
 
       <Button
         variant="tertiary"
