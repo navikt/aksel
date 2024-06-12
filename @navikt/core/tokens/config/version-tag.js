@@ -9,6 +9,7 @@ const version = packageJson.version;
 
 let cssContent = fs.readFileSync(cssFilePath, "utf8");
 
-cssContent = cssContent.replace("{", `{\n  --aksel-version: "${version}";`);
-
-fs.writeFileSync(cssFilePath, cssContent);
+if (!cssContent.includes("--aksel-version")) {
+  cssContent = cssContent.replace("{", `{\n  --aksel-version: "${version}";`);
+  fs.writeFileSync(cssFilePath, cssContent);
+}
