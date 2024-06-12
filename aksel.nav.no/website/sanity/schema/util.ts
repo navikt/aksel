@@ -31,7 +31,8 @@ export function sanitizeSlug(input: string) {
       })
       // Replace accented characters with non-accented equivalents
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/gv, "")
+      // biome-ignore lint/suspicious/noMisleadingCharacterClass: Nextjs-loader (webpack/loaders/next-swc-loader.js) does not support adding `v` to regex expressions
+      .replace(/[\u0300-\u036f]/g, "")
       // Replace any non [a-zA-Z0-9_]
       .replace(/[^\w-]+/g, "")
   );
