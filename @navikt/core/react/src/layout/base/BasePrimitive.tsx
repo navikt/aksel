@@ -138,27 +138,27 @@ export const BasePrimitive = ({
     ...getResponsiveProps("r", "pi", "spacing", paddingInline),
     ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
     /* Width & height */
-    ...getResponsiveValue(`r`, "w", width),
-    ...getResponsiveValue(`r`, "minw", minWidth),
-    ...getResponsiveValue(`r`, "maxw", maxWidth),
-    ...getResponsiveValue(`r`, "h", height),
-    ...getResponsiveValue(`r`, "minh", minHeight),
-    ...getResponsiveValue(`r`, "maxh", maxHeight),
+    ...getResponsiveValue("r", "w", width),
+    ...getResponsiveValue("r", "minw", minWidth),
+    ...getResponsiveValue("r", "maxw", maxWidth),
+    ...getResponsiveValue("r", "h", height),
+    ...getResponsiveValue("r", "minh", minHeight),
+    ...getResponsiveValue("r", "maxh", maxHeight),
     /* Positon & inset */
-    ...getResponsiveValue(`r`, "position", position),
+    ...getResponsiveValue("r", "position", position),
     ...getResponsiveProps("r", "inset", "spacing", inset),
     ...getResponsiveProps("r", "top", "spacing", top),
     ...getResponsiveProps("r", "right", "spacing", right),
     ...getResponsiveProps("r", "bottom", "spacing", bottom),
     ...getResponsiveProps("r", "left", "spacing", left),
     /* Overflow */
-    ...getResponsiveValue(`r`, "overflow", overflow),
-    ...getResponsiveValue(`r`, "overflowx", overflowX),
-    ...getResponsiveValue(`r`, "overflowy", overflowY),
-    /* flex */
-    ...getResponsiveValue(`r`, "flex-basis", flexBasis),
-    ...getResponsiveValue(`r`, "flex-grow", flexGrow),
-    ...getResponsiveValue(`r`, "flex-shrink", flexShrink),
+    ...getResponsiveValue("r", "overflow", overflow),
+    ...getResponsiveValue("r", "overflowx", overflowX),
+    ...getResponsiveValue("r", "overflowy", overflowY),
+    /* Flex */
+    ...getResponsiveValue("r", "flex-basis", flexBasis),
+    ...getResponsiveValue("r", "flex-grow", flexGrow),
+    ...getResponsiveValue("r", "flex-shrink", flexShrink),
   };
 
   return (
