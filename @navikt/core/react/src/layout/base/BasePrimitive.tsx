@@ -4,8 +4,7 @@ import { Slot } from "../../util/Slot";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export interface BasePrimitiveProps {
-  children: React.ReactElement;
+export interface PrimtiveBaseProps {
   className?: string;
   /**
    * Padding around children.
@@ -16,6 +15,45 @@ export interface BasePrimitiveProps {
    * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
   padding?: ResponsiveProp<SpacingScale>;
+  /**
+   * margin around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * margin='4'
+   * margin={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
+  margin?: ResponsiveProp<SpacingScale>;
+  /**
+   * Horizontal margin around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * marginInline='4'
+   * marginInline='4 5'
+   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   */
+  marginInline?: ResponsiveProp<
+    | SpacingScale
+    | `${SpacingScale} ${SpacingScale}`
+    | `auto ${SpacingScale}`
+    | `${SpacingScale} auto`
+  >;
+  /**
+   * Vertical margin around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * marginBlock='4'
+   * marginBlock='4 5'
+   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
+  marginBlock?: ResponsiveProp<
+    | SpacingScale
+    | `${SpacingScale} ${SpacingScale}`
+    | `auto ${SpacingScale}`
+    | `${SpacingScale} auto`
+  >;
   /**
    * Horizontal padding around children.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
@@ -140,6 +178,10 @@ export interface BasePrimitiveProps {
    * CSS `flex-grow`
    */
   flexGrow?: ResponsiveProp<string>;
+}
+
+export interface BasePrimitiveProps extends PrimtiveBaseProps {
+  children: React.ReactElement;
 }
 
 export const BasePrimitive = ({
