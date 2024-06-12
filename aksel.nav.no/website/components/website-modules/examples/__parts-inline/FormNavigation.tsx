@@ -32,7 +32,7 @@ const FormNavigation = () => (
         Send søknad
       </Button>
 
-      <Show below="sm">
+      <Show below="sm" asChild>
         <div />
       </Show>
 
