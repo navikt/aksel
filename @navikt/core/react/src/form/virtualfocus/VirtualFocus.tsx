@@ -5,6 +5,7 @@ import React, {
   useId,
   useState,
 } from "react";
+import { Slot } from "../../util/Slot";
 import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
@@ -29,10 +30,10 @@ const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
     loop: boolean;
     uniqueId: string;
-    role: Props["role"];
+    role: VirtualFocusProps["role"];
   }>();
 
-type Props = {
+type VirtualFocusProps = {
   children: React.ReactNode;
   /**
    * The role of the container. This is a limited subset of roles that
@@ -58,7 +59,11 @@ type Props = {
   loop?: boolean;
 };
 
-export const VirtualFocus = ({ children, role, loop = false }: Props) => {
+export const VirtualFocus = ({
+  children,
+  role,
+  loop = false,
+}: VirtualFocusProps) => {
   const descendants = useVirtualFocusDescendantInitializer();
   const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
 
@@ -89,7 +94,7 @@ export interface VirtualFocusAnchorProps
    * virtual focus set to it.
    */
   onActive: () => void;
-  children: React.ReactNode;
+  children: React.ReactElement;
   /**
    * Set this to `0` if you want the Anchor container itself
    * to be focusable.
@@ -98,11 +103,14 @@ export interface VirtualFocusAnchorProps
    * the Anchor that you would rather tab to directly instead
    * of having to tab to the Anchor itself first.
    *
-   * @default -1
+   * @default 0
    */
   tabIndex?: number;
 }
 
+/**
+ * Must have a single child that is an input element.
+ */
 export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
@@ -123,10 +131,10 @@ export const VirtualFocusAnchor = forwardRef<
   const mergedRefs = useMergeRefs(ref, register);
 
   return (
-    <div
+    <Slot
       id={`virtualfocus-${uniqueId}-${index}`}
       role={role}
-      tabIndex={-1}
+      tabIndex={0}
       aria-owns={`virtualfocus-${uniqueId}-content`}
       aria-controls={`virtualfocus-${uniqueId}-content`}
       aria-activedescendant={`virtualfocus-${uniqueId}-${virtualFocusIdx}`}
@@ -158,7 +166,7 @@ export const VirtualFocusAnchor = forwardRef<
       {...rest}
     >
       {children}
-    </div>
+    </Slot>
   );
 });
 

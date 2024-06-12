@@ -26,7 +26,7 @@ export default {
   component: VirtualFocus,
   decorators: [
     (Story) => (
-      <VStack gap="4">
+      <VStack gap="10">
         <Button>above</Button>
         <Story />
         <Button>below</Button>
@@ -58,7 +58,6 @@ const MyAnchor = forwardRef<
         onActive={() => {
           console.log(`onActive(): Anchor`);
         }}
-        tabIndex={-1}
       >
         <Search
           label="Søk på nav sine sider"
@@ -93,7 +92,7 @@ const MyItem = ({
       onSelect={() => {
         console.log(`onSelect(): ${children}`);
       }}
-      itemRole="button"
+      role="button"
     >
       <span>
         {icon}
@@ -114,7 +113,7 @@ export const Default = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus containerRole="combobox">
+      <VirtualFocus role="combobox">
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -152,7 +151,7 @@ export const Loop = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus containerRole="listbox" loop={true}>
+      <VirtualFocus role="listbox" loop={true}>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -192,7 +191,7 @@ export const Multiple = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus containerRole="listbox">
+      <VirtualFocus role="listbox">
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -204,7 +203,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus containerRole="listbox">
+      <VirtualFocus role="listbox">
         <MyAnchor setValue={setValue2} value={value2}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
@@ -216,7 +215,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus containerRole="listbox">
+      <VirtualFocus role="listbox">
         <MyAnchor setValue={setValue3} value={value3}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
@@ -314,7 +313,7 @@ const MyDropDownSearchVirtualfocus = () => {
 export const WithPopoverAndFiltering = () => {
   return (
     <div>
-      <VirtualFocus containerRole="listbox">
+      <VirtualFocus role="listbox">
         <MyDropDownSearchVirtualfocus />
       </VirtualFocus>
     </div>
