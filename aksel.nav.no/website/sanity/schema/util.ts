@@ -31,7 +31,7 @@ export function sanitizeSlug(input: string) {
       })
       // Replace accented characters with non-accented equivalents
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\u0300-\u036f]/gv, "")
       // Replace any non [a-zA-Z0-9_]
       .replace(/[^\w-]+/g, "")
   );

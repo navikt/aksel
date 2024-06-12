@@ -39,9 +39,7 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
-
-        "noDoubleEquals": "off",
-        "noMisleadingCharacterClass": "off"
+        "noDoubleEquals": "off"
       },
       "complexity": {
         "noForEach": "off",
