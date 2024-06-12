@@ -190,6 +190,9 @@ export const BasePrimitive = ({
   padding,
   paddingInline,
   paddingBlock,
+  margin,
+  marginInline,
+  marginBlock,
   width,
   minWidth,
   maxWidth,
@@ -214,6 +217,11 @@ export const BasePrimitive = ({
     ...getResponsiveProps("r", "p", "spacing", padding),
     ...getResponsiveProps("r", "pi", "spacing", paddingInline),
     ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    /* Margin */
+    /* TODO: Unable to handle spacingscale + "auto" combination right now */
+    ...getResponsiveProps("r", "m", "spacing", margin),
+    ...getResponsiveProps("r", "mi", "spacing", marginInline),
+    ...getResponsiveProps("r", "mb", "spacing", marginBlock),
     /* Width & height */
     ...getResponsiveValue("r", "w", width),
     ...getResponsiveValue("r", "minw", minWidth),
@@ -245,6 +253,9 @@ export const BasePrimitive = ({
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,
         "navds-r-pb": paddingBlock,
+        "navds-r-m": margin,
+        "navds-r-mi": marginInline,
+        "navds-r-mb": marginBlock,
         "navds-r-w": width,
         "navds-r-minw": minWidth,
         "navds-r-maxw": maxWidth,
