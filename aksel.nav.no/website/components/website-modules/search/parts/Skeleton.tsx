@@ -1,8 +1,8 @@
-import { Skeleton } from "@navikt/ds-react";
+import { Skeleton as AkselSkeleton } from "@navikt/ds-react";
 import { searchOptions } from "@/types";
 import { useSearchResult } from "../providers";
 
-export const Error = () => {
+export const Skeleton = () => {
   const { isValidating, error } = useSearchResult();
 
   if (error) {
@@ -19,15 +19,15 @@ export const Error = () => {
 
   return (
     <div className="grid w-full gap-2 p-1">
-      <Skeleton height="3rem" variant="rounded" />
+      <AkselSkeleton height="3rem" variant="rounded" />
 
       <div className="flex flex-wrap gap-2 px-4 pb-4 md:px-10">
         {Object.keys(searchOptions)
           .slice(0, Object.keys(searchOptions).length - 1)
           .map((x, i) => (
-            <Skeleton variant="rounded" height="1.75rem" key={i}>
+            <AkselSkeleton variant="rounded" height="1.75rem" key={i}>
               {searchOptions[x].display}
-            </Skeleton>
+            </AkselSkeleton>
           ))}
       </div>
     </div>

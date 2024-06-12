@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 6.10.1
+
+### Patch Changes
+
+- Updated dependencies [[`2cd6b1a39`](https://github.com/navikt/aksel/commit/2cd6b1a3915388535523989c2e998081bc68206c)]:
+  - @navikt/aksel-icons@6.10.1
+  - @navikt/ds-tokens@6.10.1
+
+## 6.10.0
+
+### Minor Changes
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.10.0
+  - @navikt/aksel-icons@6.10.0
+
 ## 6.9.0
 
 ### Patch Changes
@@ -1063,7 +1083,7 @@
 
 ### Minor Changes
 
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/primitives/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
 
 ### Patch Changes
 

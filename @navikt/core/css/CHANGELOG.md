@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 6.10.1
+
+### Patch Changes
+
+- :lipstick: Remove bottom margin on last item in Stepper and adjust FormProgress accordingly ([#2971](https://github.com/navikt/aksel/pull/2971))
+
+## 6.10.0
+
+### Minor Changes
+
+- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
 ## 6.9.0
 
 ### Patch Changes
@@ -483,7 +495,7 @@
 
 ### Minor Changes
 
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/primitives/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
 
 ### Patch Changes
 

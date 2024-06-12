@@ -1,4 +1,4 @@
-name: Redeploy image to for aksel.nav.no
+name: Redeploy image for aksel.nav.no
 on:
   workflow_dispatch:
     inputs:
@@ -19,10 +19,11 @@ jobs:
     name: Redeploy image
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: "20"
-      - uses: actions/checkout@v3
+          node-version: lts/*
+          cache: yarn
+      - uses: actions/checkout@v4
       - name: Login to GitHub Container Registry
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
         with:

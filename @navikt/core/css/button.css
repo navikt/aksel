@@ -53,6 +53,7 @@
 
   padding: var(--ac-button-padding-small, var(--__ac-button-padding));
   min-height: 2rem;
+  min-width: 2rem;
 }
 
 .navds-button--xsmall {
@@ -112,11 +113,7 @@
   margin: 0;
 }
 
-.navds-button--small .navds-button__icon {
-  --ac-button-icon-margin: -2px;
-}
-
-.navds-button--xsmall .navds-button__icon {
+:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
   --ac-button-icon-margin: -2px;
 
   font-size: 1.25rem;

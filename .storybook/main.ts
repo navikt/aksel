@@ -88,17 +88,18 @@ export default {
     const { mergeConfig } = await import("vite");
 
     // The TsconfigPathsPlugin is only used to silence errors when importing nextjs components, but the imports does not acutally work.
+    const tsConfigPathsPluginOpts = { root: "aksel.nav.no/website/" };
 
     return mergeConfig(config, {
       plugins:
         configType === "PRODUCTION"
           ? [
-              TsconfigPathsPlugin(),
+              TsconfigPathsPlugin(tsConfigPathsPluginOpts),
               turbosnap({
                 rootDir: config.root ?? process.cwd(),
               }),
             ]
-          : [TsconfigPathsPlugin()],
+          : [TsconfigPathsPlugin(tsConfigPathsPluginOpts)],
     });
   },
 } satisfies StorybookConfig;

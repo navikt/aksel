@@ -41,7 +41,7 @@ const Footer = () => {
               },
               { url: "https://sikkerhet.nav.no/", text: "Security Playbook" },
               {
-                url: "https://etterlevelse.intern.nav.no/",
+                url: "https://etterlevelse.ansatt.nav.no/",
                 text: "Etterlevelse",
               },
             ]}

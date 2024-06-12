@@ -79,7 +79,7 @@ export const ErrorPropagation: Story = {
   },
 };
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
     legend: "Mollit eiusmod",
     description:
@@ -129,14 +129,14 @@ export const Chromatic: Story = {
           <Fieldset {...ErrorPropagation.args} />
         </div>
         <div>
-          <h2>Error</h2>
+          <h2>WithError</h2>
           {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Error.args} />
+          <Fieldset {...WithError.args} />
         </div>
         <div>
-          <h2>Error small</h2>
+          <h2>WithError small</h2>
           {/* @ts-expect-error Args are Partial here */}
-          <Fieldset {...Error.args} size="small" />
+          <Fieldset {...WithError.args} size="small" />
         </div>
         <div>
           <h2>Disabled</h2>

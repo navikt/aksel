@@ -1,6 +1,5 @@
 import cl from "clsx";
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { CodeIcon } from "@navikt/aksel-icons";
 import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import {
@@ -26,6 +25,7 @@ import {
 } from "@/types";
 import { generateSidebar } from "@/utils";
 import { IntroCards } from "@/web/IntroCards";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import { komponentKategorier } from "../../sanity/config";
 
@@ -235,32 +235,28 @@ function Links() {
   );
 }
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview
-          comp={Page}
-          query={query}
-          props={props}
-          params={{
-            type: "komponent_artikkel",
-          }}
-          resolvers={[
-            {
-              key: "sidebar",
-              dataKeys: ["sidebar"],
-              cb: (v) => generateSidebar(v[0], "komponenter"),
-            },
-          ]}
-        />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function KomponentFrontpage(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview
+      query={query}
+      props={props}
+      params={{
+        type: "komponent_artikkel",
+      }}
+    >
+      {(previewProps, loading) => {
+        if (loading) {
+          return <Page {...props} />;
+        }
+        return (
+          <Page
+            {...previewProps}
+            sidebar={generateSidebar(previewProps.sidebar, "komponenter")}
+          />
+        );
+      }}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

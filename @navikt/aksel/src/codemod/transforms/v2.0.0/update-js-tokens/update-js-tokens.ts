@@ -36,7 +36,9 @@ export default function transformer(file: JSCodeshift, api) {
     let foundName: string = "";
 
     getImportSpecifier(j, root, name, "@navikt/ds-tokens/dist/tokens").forEach(
-      (x) => (foundName = x.node.imported.name),
+      (x) => {
+        foundName = x.node.imported.name;
+      },
     );
 
     if (name === foundName) {
