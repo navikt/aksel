@@ -28,7 +28,10 @@ export interface BasePrimitiveProps {
   paddingInline?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
-  /** Vertical padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
+  /**
+   * Vertical padding around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
    * @example
    * paddingBlock='4'
    * paddingBlock='4 5'
