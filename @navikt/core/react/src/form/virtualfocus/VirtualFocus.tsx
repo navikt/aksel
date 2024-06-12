@@ -114,7 +114,7 @@ export interface VirtualFocusAnchorProps
 export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
->(({ children, onSelect, onActive, ...rest }, ref) => {
+>(({ onSelect, onActive, ...rest }, ref) => {
   const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId, role } =
     useVirtualFocusInternalContext();
 
@@ -143,30 +143,24 @@ export const VirtualFocusAnchor = forwardRef<
         if (event.key === "ArrowDown") {
           event.preventDefault();
           const to_focus_descendant = descendants.next(virtualFocusIdx, loop);
-          const to_focus = to_focus_descendant?.node;
-
-          if (to_focus) {
+          if (to_focus_descendant) {
             to_focus_descendant.handleOnActive();
           }
         } else if (event.key === "ArrowUp") {
           event.preventDefault();
           const to_focus_descendant = descendants.prev(virtualFocusIdx, loop);
-          const to_focus = to_focus_descendant?.node;
-
-          if (to_focus) {
+          if (to_focus_descendant) {
             to_focus_descendant.handleOnActive();
           }
         } else if (event.key === "Enter") {
-          const curr = descendants.item(0);
+          const curr = descendants.item(index);
           if (curr?.handleOnSelect) {
             curr.handleOnSelect();
           }
         }
       }}
       {...rest}
-    >
-      {children}
-    </Slot>
+    />
   );
 });
 

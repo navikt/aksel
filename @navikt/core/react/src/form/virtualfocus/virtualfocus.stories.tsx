@@ -108,7 +108,7 @@ export const Default = () => {
   return (
     <>
       <style>{`
-.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
+[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -146,7 +146,7 @@ export const Loop = () => {
   return (
     <>
       <style>{`
-.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
+[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -186,7 +186,7 @@ export const Multiple = () => {
   return (
     <>
       <style>{`
-.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
+[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
@@ -275,7 +275,7 @@ const MyDropDownSearchVirtualfocus = () => {
 .dropdown-search-virtualfocus {
   width: 100%;
 }
-.navds-virtualfocus-item[data-aksel-virtualfocus="true"] {
+[data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
