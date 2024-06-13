@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
-import { Slot } from "../../util/Slot";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
   BASE_PRIMITIVE_ALLOWED_PROPS,

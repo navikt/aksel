@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
+import { Slot } from "../../slot/Slot";
 import { OverridableComponent, omit } from "../../util";
-import { Slot } from "../../util/Slot";
 import BasePrimitive, {
   BASE_PRIMITIVE_ALLOWED_PROPS,
   PrimtiveBaseProps,
