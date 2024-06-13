@@ -368,11 +368,25 @@ export const BorderRadius = () => (
   </VStack>
 );
 
+export const MarginDemo = () => (
+  <VStack gap="4">
+    <Box borderWidth="1">
+      <Box
+        background="surface-info"
+        margin="5"
+        marginInline={{ xs: "20", lg: "10" }}
+      >
+        Box
+      </Box>
+    </Box>
+  </VStack>
+);
+
 export const PaddingDemo = () => (
   <VStack gap="4">
     <Box
       background="bg-subtle"
-      padding="0"
+      padding="5"
       paddingInline={{ xs: "20", lg: "10" }}
     >
       Box
