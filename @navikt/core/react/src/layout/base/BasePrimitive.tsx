@@ -16,6 +16,30 @@ export interface PrimtiveBaseProps {
    */
   padding?: ResponsiveProp<SpacingScale>;
   /**
+   * Horizontal padding around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * paddingInline='4'
+   * paddingInline='4 5'
+   * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   */
+  paddingInline?: ResponsiveProp<
+    SpacingScale | `${SpacingScale} ${SpacingScale}`
+  >;
+  /**
+   * Vertical padding around children.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * paddingBlock='4'
+   * paddingBlock='4 5'
+   * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
+  paddingBlock?: ResponsiveProp<
+    SpacingScale | `${SpacingScale} ${SpacingScale}`
+  >;
+  /**
    * margin around children.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
@@ -53,30 +77,6 @@ export interface PrimtiveBaseProps {
     | `${SpacingScale} ${SpacingScale}`
     | `auto ${SpacingScale}`
     | `${SpacingScale} auto`
-  >;
-  /**
-   * Horizontal padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
-   * or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingInline='4'
-   * paddingInline='4 5'
-   * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
-   */
-  paddingInline?: ResponsiveProp<
-    SpacingScale | `${SpacingScale} ${SpacingScale}`
-  >;
-  /**
-   * Vertical padding around children.
-   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
-   * or an object of spacing tokens for different breakpoints.
-   * @example
-   * paddingBlock='4'
-   * paddingBlock='4 5'
-   * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-   */
-  paddingBlock?: ResponsiveProp<
-    SpacingScale | `${SpacingScale} ${SpacingScale}`
   >;
   /**
    * CSS `width`
@@ -179,6 +179,33 @@ export interface PrimtiveBaseProps {
    */
   flexGrow?: ResponsiveProp<string>;
 }
+
+export const BasePrimitivePropsAllowedProps: (keyof PrimtiveBaseProps)[] = [
+  "padding",
+  "paddingInline",
+  "paddingBlock",
+  "margin",
+  "marginInline",
+  "marginBlock",
+  "width",
+  "minWidth",
+  "maxWidth",
+  "height",
+  "minHeight",
+  "maxHeight",
+  "position",
+  "inset",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "overflow",
+  "overflowX",
+  "overflowY",
+  "flexBasis",
+  "flexGrow",
+  "flexShrink",
+];
 
 export interface BasePrimitiveProps extends PrimtiveBaseProps {
   children: React.ReactElement;

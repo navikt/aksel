@@ -1,8 +1,13 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { omit } from "../../util";
 import { Slot } from "../../util/Slot";
-import { AsChildProps, OverridableComponent } from "../../util/types";
-import BasePrimitive, { PrimtiveBaseProps } from "../base/BasePrimitive";
+import { OverridableComponent } from "../../util/types";
+import BasePrimitive, {
+  BasePrimitivePropsAllowedProps,
+  PrimtiveBaseProps,
+} from "../base/BasePrimitive";
+import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
 import { getResponsiveProps } from "../utilities/css";
 import {
   BackgroundColorToken,
@@ -15,7 +20,7 @@ import {
 } from "../utilities/types";
 
 export type BoxProps = PrimtiveBaseProps &
-  AsChildProps &
+  PrimitiveWithAsChild &
   React.HTMLAttributes<HTMLDivElement> & {
     /**
      * CSS `background-color` property.
@@ -124,7 +129,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     return (
       <BasePrimitive {...rest}>
         <Comp
-          {...rest}
+          {...omit(rest, BasePrimitivePropsAllowedProps)}
           ref={ref}
           style={style}
           className={cl("navds-box", {
