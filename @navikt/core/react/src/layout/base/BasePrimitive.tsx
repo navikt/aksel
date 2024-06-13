@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React from "react";
-import { Slot } from "../../util/Slot";
+import { Slot } from "../../slot/Slot";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
