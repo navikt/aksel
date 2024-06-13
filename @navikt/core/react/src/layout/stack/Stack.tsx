@@ -4,7 +4,7 @@ import { omit } from "../../util";
 import { Slot } from "../../util/Slot";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
-  BasePrimitivePropsAllowedProps,
+  BASE_PRIMITIVE_ALLOWED_PROPS,
   PrimtiveBaseProps,
 } from "../base/BasePrimitive";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
@@ -93,7 +93,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       return (
         <BasePrimitive {...rest}>
           <Comp
-            {...omit(rest, BasePrimitivePropsAllowedProps)}
+            {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
             ref={ref}
             style={style}
             className={cl("navds-stack", {

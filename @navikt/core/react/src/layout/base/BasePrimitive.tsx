@@ -180,7 +180,7 @@ export interface PrimtiveBaseProps {
   flexGrow?: ResponsiveProp<string>;
 }
 
-export const BasePrimitivePropsAllowedProps: (keyof PrimtiveBaseProps)[] = [
+export const BASE_PRIMITIVE_ALLOWED_PROPS: (keyof PrimtiveBaseProps)[] = [
   "className",
   "padding",
   "paddingInline",

@@ -4,7 +4,7 @@ import { omit } from "../../util";
 import { Slot } from "../../util/Slot";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
-  BasePrimitivePropsAllowedProps,
+  BASE_PRIMITIVE_ALLOWED_PROPS,
   PrimtiveBaseProps,
 } from "../base/BasePrimitive";
 import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
@@ -129,7 +129,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     return (
       <BasePrimitive {...rest}>
         <Comp
-          {...omit(rest, BasePrimitivePropsAllowedProps)}
+          {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
           ref={ref}
           style={style}
           className={cl("navds-box", {

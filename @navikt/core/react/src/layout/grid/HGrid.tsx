@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { OverridableComponent, omit } from "../../util";
 import { Slot } from "../../util/Slot";
 import BasePrimitive, {
-  BasePrimitivePropsAllowedProps,
+  BASE_PRIMITIVE_ALLOWED_PROPS,
   PrimtiveBaseProps,
 } from "../base/BasePrimitive";
 import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
@@ -88,7 +88,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       return (
         <BasePrimitive {...rest}>
           <Comp
-            {...omit(rest, BasePrimitivePropsAllowedProps)}
+            {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
             ref={ref}
             className="navds-hgrid"
             style={styles}
