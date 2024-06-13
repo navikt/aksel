@@ -181,6 +181,7 @@ export interface PrimtiveBaseProps {
 }
 
 export const BasePrimitivePropsAllowedProps: (keyof PrimtiveBaseProps)[] = [
+  "className",
   "padding",
   "paddingInline",
   "paddingBlock",
