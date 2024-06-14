@@ -4,9 +4,9 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log} fill>
-      <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">Lest</ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
+      <ToggleGroup.Item value="ulest" label="Ulest" />
+      <ToggleGroup.Item value="lest" label="Lest" />
+      <ToggleGroup.Item value="sendt" label="Sendt" />
     </ToggleGroup>
   );
 };
@@ -20,5 +20,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 5,
 };

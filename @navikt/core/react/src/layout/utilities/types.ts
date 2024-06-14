@@ -5,9 +5,8 @@ import surfaceColors from "@navikt/ds-tokens/src/colors-surface.json";
 import shadows from "@navikt/ds-tokens/src/shadow.json";
 import Spacing from "@navikt/ds-tokens/src/spacing.json";
 
-export type BackgroundToken =
-  | keyof typeof bgColors.a
-  | keyof typeof surfaceColors.a;
+export type BackgroundColorToken = keyof typeof bgColors.a;
+export type SurfaceColorToken = keyof typeof surfaceColors.a;
 export type BorderColorToken = keyof typeof borderColors.a;
 export type BorderRadiiToken =
   | keyof (typeof borderRadii.a)["border-radius"]

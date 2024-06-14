@@ -123,8 +123,8 @@ export const IconPage = ({ name }: { name: string }) => {
                     aria-label="Velg ikonvariant"
                     className="shrink-0"
                   >
-                    <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
-                    <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+                    <ToggleGroup.Item value="stroke" label="Stroke" />
+                    <ToggleGroup.Item value="fill" label="Fill" />
                   </ToggleGroup>
                   <Search
                     variant="simple"

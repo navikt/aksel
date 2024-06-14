@@ -54,6 +54,8 @@ const options = [
   "left-end",
 ] as const;
 
+type Option = (typeof options)[number];
+
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
 
@@ -61,8 +63,6 @@ export default withDsExample(Example);
 export const Demo = {
   render: Example,
 };
-
-type Option = (typeof options)[number];
 
 export const args = {
   index: 3,

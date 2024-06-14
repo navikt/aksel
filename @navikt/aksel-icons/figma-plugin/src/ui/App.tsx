@@ -120,8 +120,8 @@ const App = () => {
             onChange={(v) => setToggle(v as any)}
             variant="neutral"
           >
-            <ToggleGroup.Item value="stroke">Stroke</ToggleGroup.Item>
-            <ToggleGroup.Item value="fill">Fill</ToggleGroup.Item>
+            <ToggleGroup.Item value="stroke" label="Stroke" />
+            <ToggleGroup.Item value="fill" label="Fill" />
           </ToggleGroup>
         </div>
         <div className="form-search">

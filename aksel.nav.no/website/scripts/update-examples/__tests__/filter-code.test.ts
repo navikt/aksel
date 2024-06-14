@@ -8,26 +8,24 @@ import {
   codeBeforeWithoutExportDefaultDsExample,
 } from "./mockdata";
 
-test("filterCode should remove unwanted code", () => {
-  const codeResult = filterCode(codeBefore);
+test("filterCode should remove unwanted code", async () => {
+  const codeResult = await filterCode(codeBefore, "");
 
   expect(codeResult).toEqual(codeAfter);
 });
 
-test("filterCode should remove unwanted code again", () => {
-  const codeResult = filterCode(codeBeforeExpansionCardIcon);
+test("filterCode should remove unwanted code again", async () => {
+  const codeResult = await filterCode(codeBeforeExpansionCardIcon, "");
 
   expect(codeResult).toEqual(codeAfterExpansionCardIcon);
 });
 
-test("filterCode expects to throw if missing some specific substrings", () => {
-  expect(() => {
-    filterCode(codeBeforeWithoutExportDefaultDsExample);
-  }).toThrow();
+test("filterCode should reject if missing some specific substrings", async () => {
+  await expect(
+    filterCode(codeBeforeWithoutExportDefaultDsExample, ""),
+  ).rejects.toThrow();
 });
 
-test("filterCode should throw on an empty string as input (resulting in empty string output)", () => {
-  expect(() => {
-    filterCode("");
-  }).toThrow();
+test("filterCode should throw on an empty string as input (resulting in empty string output)", async () => {
+  await expect(filterCode("", "")).rejects.toThrow();
 });

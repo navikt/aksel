@@ -38,11 +38,7 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noShadowRestrictedNames": "off",
         "noArrayIndexKey": "off",
-        "noAssignInExpressions": "off",
-        "noDoubleEquals": "off",
-        "noMisleadingCharacterClass": "off"
       },
       "complexity": {
         "noForEach": "off",
@@ -68,7 +64,8 @@
       "**/dist/**",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
-      "**/.next/**"
+      "**/.next/**",
+      "**/modal/dialog-polyfill.ts"
     ]
   }
 }

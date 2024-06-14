@@ -12,6 +12,11 @@ const allTokens: { title: string; kategori: string }[] = [
 
 export const updateTokens = async () => {
   const writeKey = process.env.SANITY_WRITE_KEY;
+  if (!writeKey) {
+    throw new Error(
+      "Missing token 'SANITY_WRITE_KEY' when updating token-documentation",
+    );
+  }
 
   // this is our transactional client, it won't push anything until we say .commit() later
   const transactionClient = noCdnClient(writeKey).transaction();

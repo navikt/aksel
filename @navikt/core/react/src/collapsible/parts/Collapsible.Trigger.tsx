@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../util/Slot";
+import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useCollapsibleContext } from "../Collapsible.context";
 
