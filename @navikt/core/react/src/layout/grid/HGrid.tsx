@@ -4,13 +4,13 @@ import { Slot } from "../../slot/Slot";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
-  PrimtiveProps,
+  PrimitiveProps,
 } from "../base/BasePrimitive";
 import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type HGridProps = PrimtiveProps &
+export type HGridProps = PrimitiveProps &
   PrimitiveWithAsChild &
   React.HTMLAttributes<HTMLDivElement> & {
     /**

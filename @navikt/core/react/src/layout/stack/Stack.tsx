@@ -5,12 +5,12 @@ import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
-  PrimtiveProps,
+  PrimitiveProps,
 } from "../base/BasePrimitive";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type StackProps = PrimtiveProps &
+export type StackProps = PrimitiveProps &
   HTMLAttributes<HTMLDivElement> & {
     /**
      * CSS `justify-content` property.
