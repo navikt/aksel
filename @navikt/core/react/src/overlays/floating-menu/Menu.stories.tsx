@@ -11,7 +11,7 @@ export default {
       </div>
     ),
   ],
-};
+} satisfies Meta<typeof Menu>;
 
 export const Styled = () => (
   <MenuWithAnchor>
