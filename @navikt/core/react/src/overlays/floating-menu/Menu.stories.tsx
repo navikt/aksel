@@ -3,7 +3,6 @@ import { Menu } from "./Menu";
 
 export default {
   title: "Utilities/FloatingMenu",
-  excludeStories: ["TickIcon", "classes"],
   decorators: [
     (Story) => (
       <div>
@@ -567,7 +566,7 @@ const storyStyles = (
 `}</style>
 );
 
-export const TickIcon = () => (
+const TickIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
