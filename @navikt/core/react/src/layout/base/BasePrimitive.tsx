@@ -60,6 +60,7 @@ export interface PrimtiveBaseProps {
   marginInline?: ResponsiveProp<
     | SpacingScale
     | `${SpacingScale} ${SpacingScale}`
+    | "auto"
     | `auto ${SpacingScale}`
     | `${SpacingScale} auto`
   >;

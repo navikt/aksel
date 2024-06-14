@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, omit } from "../../util";
@@ -66,6 +67,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
     (
       {
         children,
+        className,
         as: Component = "div",
         columns,
         gap,
@@ -90,7 +92,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
           <Comp
             {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
             ref={ref}
-            className="navds-hgrid"
+            className={cl("navds-hgrid", className)}
             style={styles}
           >
             {children}

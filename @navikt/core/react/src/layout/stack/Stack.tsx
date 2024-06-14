@@ -67,6 +67,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
     (
       {
         children,
+        className,
         as: Component = "div",
         align,
         justify,
@@ -96,7 +97,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
             {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
             ref={ref}
             style={style}
-            className={cl("navds-stack", {
+            className={cl("navds-stack", className, {
               "navds-vstack": direction === "column",
               "navds-hstack": direction === "row",
             })}

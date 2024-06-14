@@ -87,6 +87,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
   (
     {
       children,
+      className,
       as: Component = "div",
       background,
       borderColor,
@@ -132,7 +133,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
           {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
           ref={ref}
           style={style}
-          className={cl("navds-box", {
+          className={cl("navds-box", className, {
             "navds-box-bg": background,
             "navds-box-border-color": borderColor,
             "navds-box-border-width": borderWidth,

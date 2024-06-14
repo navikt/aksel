@@ -85,6 +85,46 @@ export const Padding = () => (
   </VStack>
 );
 
+export const Margin = () => (
+  <VStack align="center" gap="2">
+    <BasePrimitive margin="20">
+      <Box borderWidth="1">Margin all around</Box>
+    </BasePrimitive>
+    <BasePrimitive margin="1" marginBlock="20 0">
+      <Box borderWidth="1">Margin to the North</Box>
+    </BasePrimitive>
+    <BasePrimitive margin="1" marginInline="0 20">
+      <Box borderWidth="1">Margin to the East</Box>
+    </BasePrimitive>
+    <BasePrimitive margin="1" marginBlock="0 20">
+      <Box borderWidth="1">Margin to the South</Box>
+    </BasePrimitive>
+    <BasePrimitive margin="1" marginInline="20 0">
+      <Box borderWidth="1">Margin to the West</Box>
+    </BasePrimitive>
+  </VStack>
+);
+
+export const MarginAuto = () => (
+  <Box width="300px">
+    <BasePrimitive marginInline="auto">
+      <Box borderWidth="1" width="200px">
+        Margin auto
+      </Box>
+    </BasePrimitive>
+    <BasePrimitive marginInline="auto 0" marginBlock="2">
+      <Box borderWidth="1" width="200px">
+        Margin auto 0
+      </Box>
+    </BasePrimitive>
+    <BasePrimitive marginInline="0 auto" marginBlock="2">
+      <Box borderWidth="1" width="200px">
+        Margin 0 auto
+      </Box>
+    </BasePrimitive>
+  </Box>
+);
+
 export const HeightWidth = () => (
   <VStack align="center" gap="2">
     <BasePrimitive height="4rem">
