@@ -50,6 +50,9 @@ const translateTokenStringToCSS = (
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/2)`;
       }
+      if (componentProp === "mi" && x === "auto") {
+        return "auto";
+      }
 
       let output = `var(--a-${tokenSubgroup}-${x})`;
       if (tokenExceptions.includes(x)) {

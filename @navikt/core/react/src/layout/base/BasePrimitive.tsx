@@ -247,7 +247,6 @@ export const BasePrimitive = ({
     ...getResponsiveProps("r", "pi", "spacing", paddingInline),
     ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
     /* Margin */
-    /* TODO: Unable to handle spacingscale + "auto" combination right now */
     ...getResponsiveProps("r", "m", "spacing", margin),
     ...getResponsiveProps("r", "mi", "spacing", marginInline),
     ...getResponsiveProps("r", "mb", "spacing", marginBlock),

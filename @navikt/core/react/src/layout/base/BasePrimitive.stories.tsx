@@ -106,20 +106,20 @@ export const Margin = () => (
 );
 
 export const MarginAuto = () => (
-  <Box width="300px">
+  <Box width="400px" background="surface-alt-3-subtle">
     <BasePrimitive marginInline="auto">
       <Box borderWidth="1" width="200px">
-        Margin auto
+        MarginInline: auto
       </Box>
     </BasePrimitive>
     <BasePrimitive marginInline="auto 0" marginBlock="2">
       <Box borderWidth="1" width="200px">
-        Margin auto 0
+        MarginInline: auto 0
       </Box>
     </BasePrimitive>
     <BasePrimitive marginInline="0 auto" marginBlock="2">
       <Box borderWidth="1" width="200px">
-        Margin 0 auto
+        MarginInline: 0 auto
       </Box>
     </BasePrimitive>
   </Box>
@@ -256,6 +256,15 @@ export const Chromatic: Story = {
         <h2>Padding</h2>
         <Padding />
       </div>
+      <div>
+        <h2>Margin</h2>
+        <Margin />
+      </div>
+      <div>
+        <h2>MarginAuto</h2>
+        <MarginAuto />
+      </div>
+
       <div>
         <h2>Height & Width</h2>
         <HeightWidth />
