@@ -1,3 +1,4 @@
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Menu } from "./Menu";
 
