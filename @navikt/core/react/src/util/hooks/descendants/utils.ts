@@ -37,7 +37,7 @@ export function sortNodes(nodes: Node[]) {
 }
 
 export const isElement = (el: any): el is HTMLElement =>
-  typeof el == "object" &&
+  typeof el === "object" &&
   "nodeType" in el &&
   el.nodeType === Node.ELEMENT_NODE;
 
