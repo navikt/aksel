@@ -4,7 +4,7 @@ import { Slot } from "../../slot/Slot";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export interface PrimtiveBaseProps {
+export type PrimtiveProps = {
   className?: string;
   /**
    * Padding around children.
@@ -180,9 +180,9 @@ export interface PrimtiveBaseProps {
    * CSS `flex-grow`
    */
   flexGrow?: ResponsiveProp<string>;
-}
+};
 
-export const BASE_PRIMITIVE_ALLOWED_PROPS: (keyof PrimtiveBaseProps)[] = [
+export const PRIMITIVE_PROPS: (keyof PrimtiveProps)[] = [
   "className",
   "padding",
   "paddingInline",
@@ -210,7 +210,7 @@ export const BASE_PRIMITIVE_ALLOWED_PROPS: (keyof PrimtiveBaseProps)[] = [
   "flexShrink",
 ];
 
-export interface BasePrimitiveProps extends PrimtiveBaseProps {
+interface BasePrimitiveProps extends PrimtiveProps {
   children: React.ReactElement;
 }
 

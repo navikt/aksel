@@ -4,8 +4,8 @@ import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
-  BASE_PRIMITIVE_ALLOWED_PROPS,
-  PrimtiveBaseProps,
+  PRIMITIVE_PROPS,
+  PrimtiveProps,
 } from "../base/BasePrimitive";
 import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
 import { getResponsiveProps } from "../utilities/css";
@@ -19,7 +19,7 @@ import {
   SurfaceColorToken,
 } from "../utilities/types";
 
-export type BoxProps = PrimtiveBaseProps &
+export type BoxProps = PrimtiveProps &
   PrimitiveWithAsChild &
   React.HTMLAttributes<HTMLDivElement> & {
     /**
@@ -130,7 +130,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     return (
       <BasePrimitive {...rest}>
         <Comp
-          {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
+          {...omit(rest, PRIMITIVE_PROPS)}
           ref={ref}
           style={style}
           className={cl("navds-box", className, {

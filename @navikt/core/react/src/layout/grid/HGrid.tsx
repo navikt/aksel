@@ -3,14 +3,14 @@ import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
-  BASE_PRIMITIVE_ALLOWED_PROPS,
-  PrimtiveBaseProps,
+  PRIMITIVE_PROPS,
+  PrimtiveProps,
 } from "../base/BasePrimitive";
 import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type HGridProps = PrimtiveBaseProps &
+export type HGridProps = PrimtiveProps &
   PrimitiveWithAsChild &
   React.HTMLAttributes<HTMLDivElement> & {
     /**
@@ -90,7 +90,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       return (
         <BasePrimitive {...rest}>
           <Comp
-            {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
+            {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             className={cl("navds-hgrid", className)}
             style={styles}

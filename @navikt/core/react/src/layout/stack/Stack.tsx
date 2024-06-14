@@ -4,13 +4,13 @@ import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
-  BASE_PRIMITIVE_ALLOWED_PROPS,
-  PrimtiveBaseProps,
+  PRIMITIVE_PROPS,
+  PrimtiveProps,
 } from "../base/BasePrimitive";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type StackProps = PrimtiveBaseProps &
+export type StackProps = PrimtiveProps &
   HTMLAttributes<HTMLDivElement> & {
     /**
      * CSS `justify-content` property.
@@ -94,7 +94,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       return (
         <BasePrimitive {...rest}>
           <Comp
-            {...omit(rest, BASE_PRIMITIVE_ALLOWED_PROPS)}
+            {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
             className={cl("navds-stack", className, {
