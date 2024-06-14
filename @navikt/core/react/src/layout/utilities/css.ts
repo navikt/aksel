@@ -50,7 +50,7 @@ const translateTokenStringToCSS = (
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/2)`;
       }
-      if (componentProp === "mi" && x === "auto") {
+      if (["mi", "mb"].includes(componentProp) && x === "auto") {
         return "auto";
       }
 

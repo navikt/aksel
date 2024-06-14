@@ -76,6 +76,7 @@ export interface PrimtiveBaseProps {
   marginBlock?: ResponsiveProp<
     | SpacingScale
     | `${SpacingScale} ${SpacingScale}`
+    | "auto"
     | `auto ${SpacingScale}`
     | `${SpacingScale} auto`
   >;
