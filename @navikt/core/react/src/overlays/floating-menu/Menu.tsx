@@ -582,6 +582,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         data-highlighted={isFocused ? "" : undefined}
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
+        tabIndex={-1}
         {...rest}
         ref={composedRefs}
         /**
