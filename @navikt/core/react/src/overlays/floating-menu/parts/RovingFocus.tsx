@@ -53,37 +53,33 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
         const loop = false;
-        /**
-         * Tabs.Tab is registered with its prop 'value'.
-         * We can then use it to find the current focuses descendant
-         */
+
         const idx = descendants
           .values()
           .findIndex((x) => x.node.isSameNode(document.activeElement));
 
-        const nextTab = () => {
+        const nextItem = () => {
           const next = descendants.nextEnabled(idx, loop);
           next && next.node?.focus();
         };
-        const prevTab = () => {
+        const prevItem = () => {
           const prev = descendants.prevEnabled(idx, loop);
-          console.log("prev", prev);
           prev && prev.node?.focus();
         };
-        const firstTab = () => {
+        const firstItem = () => {
           const first = descendants.firstEnabled();
           first && first.node?.focus();
         };
-        const lastTab = () => {
+        const lastItem = () => {
           const last = descendants.lastEnabled();
           last && last.node?.focus();
         };
 
         const keyMap: Record<string, React.KeyboardEventHandler> = {
-          ArrowUp: prevTab,
-          ArrowDown: nextTab,
-          Home: firstTab,
-          End: lastTab,
+          ArrowUp: prevItem,
+          ArrowDown: nextItem,
+          Home: firstItem,
+          End: lastItem,
         };
 
         const action = keyMap[event.key];
@@ -124,7 +120,6 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
             event.currentTarget.dispatchEvent(entryFocusEvent);
 
             if (!entryFocusEvent.defaultPrevented) {
-              console.log("focusing first");
               descendants.firstEnabled()?.node.focus({ preventScroll: true });
             }
           }
