@@ -211,7 +211,7 @@ export const CheckboxItems = () => {
         onCheckedChange={handleSelectAll}
       >
         Select all
-        {selection.length === options.length ? <TickIcon /> : "—"}
+        {selection.length === options.length ? <TickIcon /> : <div>—</div>}
       </Menu.CheckboxItem>
       <Menu.Separator className="separator" />
       {options.map((option) => (
