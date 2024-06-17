@@ -65,7 +65,7 @@ export type PrimitiveProps = {
     | `${SpacingScale} auto`
   >;
   /**
-   * Vertical margin around children.
+   * Vertical margin around element.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
