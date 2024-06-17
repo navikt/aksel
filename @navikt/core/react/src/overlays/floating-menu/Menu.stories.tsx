@@ -595,6 +595,6 @@ export const CircleIcon = () => (
     strokeLinejoin="round"
     strokeWidth="3"
   >
-    <circle />
+    <circle cx="16" cy="16" r="2" />
   </svg>
 );
