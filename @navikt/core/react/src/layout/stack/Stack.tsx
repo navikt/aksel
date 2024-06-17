@@ -7,10 +7,12 @@ import BasePrimitive, {
   PRIMITIVE_PROPS,
   PrimitiveProps,
 } from "../base/BasePrimitive";
+import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type StackProps = PrimitiveProps &
+  PrimitiveAsChildProps &
   HTMLAttributes<HTMLDivElement> & {
     /**
      * CSS `justify-content` property.

@@ -6,12 +6,12 @@ import BasePrimitive, {
   PRIMITIVE_PROPS,
   PrimitiveProps,
 } from "../base/BasePrimitive";
-import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
+import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type HGridProps = PrimitiveProps &
-  PrimitiveWithAsChild &
+  PrimitiveAsChildProps &
   React.HTMLAttributes<HTMLDivElement> & {
     /**
      * Number of columns to display. Can be a number, a string, or an object with values for specific breakpoints.

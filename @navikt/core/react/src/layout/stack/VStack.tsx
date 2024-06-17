@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/types";
-import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
+import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { Stack, StackProps } from "./Stack";
 
-export type VStackProps = PrimitiveWithAsChild &
+export type VStackProps = PrimitiveAsChildProps &
   Omit<StackProps, "direction" | "wrap">;
 
 /**

@@ -1,4 +1,4 @@
-export type PrimitiveWithAsChild =
+export type PrimitiveAsChildProps =
   | {
       children: React.ReactElement | false | null;
       /**

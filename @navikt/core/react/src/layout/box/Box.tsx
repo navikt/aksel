@@ -7,7 +7,7 @@ import BasePrimitive, {
   PRIMITIVE_PROPS,
   PrimitiveProps,
 } from "../base/BasePrimitive";
-import { PrimitiveWithAsChild } from "../base/PrimitiveWithAsChild";
+import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
   BackgroundColorToken,
@@ -20,7 +20,7 @@ import {
 } from "../utilities/types";
 
 export type BoxProps = PrimitiveProps &
-  PrimitiveWithAsChild &
+  PrimitiveAsChildProps &
   React.HTMLAttributes<HTMLDivElement> & {
     /**
      * CSS `background-color` property.
