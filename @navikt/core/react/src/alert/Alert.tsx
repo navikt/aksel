@@ -120,7 +120,15 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               variant="tertiary-neutral"
               onClick={onClose}
               type="button"
-              icon={<XMarkIcon title="Lukk Alert" />}
+              icon={
+                <XMarkIcon
+                  title={
+                    ["error", "warning"].includes(variant)
+                      ? "Lukk varsel"
+                      : "Lukk melding"
+                  }
+                />
+              }
             />
           </div>
         )}
