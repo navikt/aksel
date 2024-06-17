@@ -530,7 +530,7 @@ const storyStyles = (
       }
 
       &[data-disabled] {
-        color: gray;
+        color: gray !important;
       }
 
       >[data-state="unchecked"]{
@@ -543,6 +543,10 @@ const storyStyles = (
       &:not([data-highlighted])[data-state="open"] {
         backgroundColor: gray;
         color: black;
+      }
+
+      &[data-disabled] {
+        color: gray;
       }
     }
 
