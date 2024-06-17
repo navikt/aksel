@@ -543,25 +543,23 @@ const storyStyles = (
     }
 
 
-    .contentAnimated {
-      &[data-state="open"] {
-        animation: animateIn 300ms ease;
-      }
+    .contentAnimated[data-state="open"] {
+      animation: animateIn 300ms ease;
+    }
 
-      &[data-state="closed"] {
-        animation: animateOut 300ms ease;
-      }
+    .contentAnimated[data-state="closed"] {
+      animation: animateOut 300ms ease;
     }
 
 
     @keyframes animateIn {
-      from: { transform: scale(0.95); opacity: 0; }
-      to: { transform: scale(1); opacity: 1; }
+      from { transform: scale(0.95); opacity: 0.01; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     @keyframes animateOut {
-      from: { transform: scale(1); opacity: 1; }
-      to: { transform: scale(0.95); opacity: 0; }
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(0.95); opacity: 0; }
     }
 
 `}</style>
