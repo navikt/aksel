@@ -186,6 +186,10 @@ export const WithLabels = () => (
   </MenuWithAnchor>
 );
 
+WithLabels.parameters = {
+  layout: "padded",
+};
+
 export const CheckboxItems = () => {
   const options = ["Crows", "Ravens", "Magpies", "Jackdaws"];
 
@@ -511,7 +515,9 @@ const storyStyles = (
 
     .label {
       ${itemCss}
-      color: gray;
+      font-weight: 600;
+      font-size: 14px;
+      background-color: var(--a-gray-100);
     }
 
     .item {
@@ -585,7 +591,7 @@ const TickIcon = () => (
   </svg>
 );
 
-export const CircleIcon = () => (
+const CircleIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
@@ -595,8 +601,8 @@ export const CircleIcon = () => (
     stroke="currentcolor"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="3"
+    strokeWidth="6"
   >
-    <circle cx="16" cy="16" r="2" />
+    <circle cx="16" cy="16" r="4" />
   </svg>
 );
