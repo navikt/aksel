@@ -19,7 +19,7 @@
   --__ac-r-pi-2xl: var(--__ac-r-pi-xl);
   --__ac-r-pi: var(--__ac-r-pi-xs);
 
-  padding-inline: var(--__ac-r-pi);
+  padding-inline: var(--__ac-r-pi, var(--__ac-r-padding));
 }
 
 .navds-r-pb {
@@ -31,7 +31,7 @@
   --__ac-r-pb-2xl: var(--__ac-r-pb-xl);
   --__ac-r-pb: var(--__ac-r-pb-xs);
 
-  padding-block: var(--__ac-r-pb);
+  padding-block: var(--__ac-r-pb, var(--__ac-r-padding));
 }
 
 .navds-r-m {
@@ -55,7 +55,7 @@
   --__ac-r-mi-2xl: var(--__ac-r-mi-xl);
   --__ac-r-mi: var(--__ac-r-mi-xs);
 
-  margin-inline: var(--__ac-r-mi);
+  margin-inline: var(--__ac-r-mi, var(--__ac-r-margin));
 }
 
 .navds-r-mb {
@@ -67,7 +67,7 @@
   --__ac-r-mb-2xl: var(--__ac-r-mb-xl);
   --__ac-r-mb: var(--__ac-r-mb-xs);
 
-  margin-block: var(--__ac-r-mb);
+  margin-block: var(--__ac-r-mb, var(--__ac-r-margin));
 }
 
 .navds-r-w {
