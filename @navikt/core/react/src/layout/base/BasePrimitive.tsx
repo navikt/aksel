@@ -49,7 +49,7 @@ export type PrimitiveProps = {
    */
   margin?: ResponsiveProp<SpacingScale>;
   /**
-   * Horizontal margin around children.
+   * Horizontal margin around element.
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
