@@ -51,6 +51,7 @@ const MyAnchor = forwardRef<
   return (
     <div style={{ position: "relative" }}>
       <VirtualFocus.Anchor
+        role="combobox"
         ref={ref}
         onSelect={() => {
           console.log(`onSelect(): ${value}`);
@@ -113,7 +114,7 @@ export const Default = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus role="combobox">
+      <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -151,7 +152,7 @@ export const Loop = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus role="listbox" loop={true}>
+      <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -191,7 +192,7 @@ export const Multiple = () => {
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
-      <VirtualFocus role="listbox">
+      <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
@@ -203,7 +204,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus role="listbox">
+      <VirtualFocus>
         <MyAnchor setValue={setValue2} value={value2}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
@@ -215,7 +216,7 @@ export const Multiple = () => {
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
-      <VirtualFocus role="listbox">
+      <VirtualFocus>
         <MyAnchor setValue={setValue3} value={value3}>
           <VirtualFocus.Content>
             <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
@@ -313,7 +314,7 @@ const MyDropDownSearchVirtualfocus = () => {
 export const WithPopoverAndFiltering = () => {
   return (
     <div>
-      <VirtualFocus role="listbox">
+      <VirtualFocus>
         <MyDropDownSearchVirtualfocus />
       </VirtualFocus>
     </div>

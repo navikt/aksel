@@ -30,11 +30,37 @@ const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
     setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
     loop: boolean;
     uniqueId: string;
-    role: VirtualFocusProps["role"];
   }>();
 
 type VirtualFocusProps = {
   children: React.ReactNode;
+  /**
+   * Whether to cause focus to loop around when it hits the first or last element
+   * @default true
+   **/
+  loop?: boolean;
+};
+
+export const VirtualFocus = ({ children, loop = false }: VirtualFocusProps) => {
+  const descendants = useVirtualFocusDescendantInitializer();
+  const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
+
+  return (
+    <VirtualFocusInternalContextProvider
+      virtualFocusIdx={virtualFocusIdx}
+      setVirtualFocusIdx={setVirtualFocusIdx}
+      loop={loop}
+      uniqueId={useId().replace(/:/g, "")}
+    >
+      <VirtualFocusDescendantsProvider value={descendants}>
+        {children}
+      </VirtualFocusDescendantsProvider>
+    </VirtualFocusInternalContextProvider>
+  );
+};
+
+export interface VirtualFocusAnchorProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The role of the container. This is a limited subset of roles that
    * require manual focus management.
@@ -52,38 +78,6 @@ type VirtualFocusProps = {
     | "tree"
     | "treegrid"
     | "tablist";
-  /**
-   * Whether to cause focus to loop around when it hits the first or last element
-   * @default true
-   **/
-  loop?: boolean;
-};
-
-export const VirtualFocus = ({
-  children,
-  role,
-  loop = false,
-}: VirtualFocusProps) => {
-  const descendants = useVirtualFocusDescendantInitializer();
-  const [virtualFocusIdx, setVirtualFocusIdx] = useState(0);
-
-  return (
-    <VirtualFocusInternalContextProvider
-      virtualFocusIdx={virtualFocusIdx}
-      setVirtualFocusIdx={setVirtualFocusIdx}
-      loop={loop}
-      uniqueId={useId().replace(/:/g, "")}
-      role={role}
-    >
-      <VirtualFocusDescendantsProvider value={descendants}>
-        {children}
-      </VirtualFocusDescendantsProvider>
-    </VirtualFocusInternalContextProvider>
-  );
-};
-
-export interface VirtualFocusAnchorProps
-  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function that is run when the focused element
    * is to be selected (eg. do an actual search, change route... etc)
@@ -110,8 +104,8 @@ export interface VirtualFocusAnchorProps
 export const VirtualFocusAnchor = forwardRef<
   HTMLDivElement,
   VirtualFocusAnchorProps
->(({ onSelect, onActive, ...rest }, ref) => {
-  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId, role } =
+>(({ onSelect, onActive, children, ...rest }, ref) => {
+  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId } =
     useVirtualFocusInternalContext();
 
   const { register, descendants, index } = useVirtualFocusDescendant({
@@ -129,7 +123,6 @@ export const VirtualFocusAnchor = forwardRef<
   return (
     <Slot
       id={`virtualfocus-${uniqueId}-${index}`}
-      role={role}
       tabIndex={0}
       aria-owns={`virtualfocus-${uniqueId}-content`}
       aria-controls={`virtualfocus-${uniqueId}-content`}
@@ -156,7 +149,9 @@ export const VirtualFocusAnchor = forwardRef<
         }
       }}
       {...rest}
-    />
+    >
+      {children}
+    </Slot>
   );
 });
 
