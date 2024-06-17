@@ -35,6 +35,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
-  desc: "Hvis ikon bare er illustrativt, husk å legge til 'aria-hidden'.",
+  index: 2,
+  desc: "Husk å legge til 'aria-hidden' hvis ikonet bare er illustrativt.",
 };

@@ -148,7 +148,7 @@ function handleDependencies(
         (newSpecifier) =>
           !pkgImportDecl.node.specifiers.some(
             (oldSpecifier: any) =>
-              (oldSpecifier.type == "ImportDefaultSpecifier" &&
+              (oldSpecifier.type === "ImportDefaultSpecifier" &&
                 oldSpecifier.local.name === newSpecifier.local?.name) ||
               (oldSpecifier.type === "ImportSpecifier" &&
                 oldSpecifier.local.name === newSpecifier.local?.name),

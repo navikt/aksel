@@ -43,9 +43,7 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
-        "noDoubleEquals": "off",
-        "noMisleadingCharacterClass": "off"
+        "noArrayIndexKey": "off"
       },
       "complexity": {
         "noForEach": "off",
