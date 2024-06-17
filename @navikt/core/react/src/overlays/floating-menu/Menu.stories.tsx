@@ -301,7 +301,9 @@ export const Animated = () => {
               disabled={disabled}
             >
               {label}
-              <TickIcon />
+              <Menu.ItemIndicator>
+                <TickIcon />
+              </Menu.ItemIndicator>
             </Menu.CheckboxItem>
           ),
         )}
@@ -309,7 +311,9 @@ export const Animated = () => {
           {files.map((_file) => (
             <Menu.RadioItem key={_file} className="item" value={_file}>
               {_file}
-              <TickIcon />
+              <Menu.ItemIndicator>
+                <TickIcon />
+              </Menu.ItemIndicator>
             </Menu.RadioItem>
           ))}
         </Menu.RadioGroup>
