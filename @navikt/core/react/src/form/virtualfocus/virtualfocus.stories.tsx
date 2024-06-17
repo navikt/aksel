@@ -264,10 +264,7 @@ const MyDropDownSearchVirtualfocus = () => {
     },
   ];
 
-  const filteredItems = items.filter((i) =>
-    i.text.trim().toLowerCase().startsWith(value.trim().toLowerCase()),
-  );
-  // const filteredItems = items;
+  const filteredItems = items;
 
   return (
     <>
@@ -311,7 +308,7 @@ const MyDropDownSearchVirtualfocus = () => {
   );
 };
 
-export const WithPopoverAndFiltering = () => {
+export const WithPopover = () => {
   return (
     <div>
       <VirtualFocus>
