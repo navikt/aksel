@@ -131,7 +131,6 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
       <BasePrimitive {...rest}>
         <Comp
           {...omit(rest, PRIMITIVE_PROPS)}
-          padding
           ref={ref}
           style={style}
           className={cl("navds-box", className, {
