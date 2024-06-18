@@ -39,10 +39,11 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    * or an object of spacing tokens for different breakpoints.
    *
    * @example
-   * gap='4'
+   * gap="6"
+   * gap="8 4"
    * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
    */
-  gap?: ResponsiveProp<SpacingScale>;
+  gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
    * CSS `flex-direction` property.
    * @default "row"
