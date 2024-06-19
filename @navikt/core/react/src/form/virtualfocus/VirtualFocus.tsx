@@ -116,13 +116,14 @@ export const VirtualFocusAnchor = forwardRef<
 
   return (
     <Slot
+ref={mergedRefs}
+      {...rest}
       id={`virtualfocus-${uniqueId}-${index}`}
       tabIndex={0}
       aria-owns={`virtualfocus-${uniqueId}-content`}
       aria-controls={`virtualfocus-${uniqueId}-content`}
       aria-activedescendant={`virtualfocus-${uniqueId}-${virtualFocusIdx}`}
-      ref={mergedRefs}
-      onKeyDown={(event) => {
+      onKeyDown={composeEventHandlers(rest.onKeyDown, (event) => {
         if (event.key === "ArrowDown") {
           event.preventDefault();
           const to_focus_descendant = descendants.next(virtualFocusIdx, loop);
@@ -141,8 +142,7 @@ export const VirtualFocusAnchor = forwardRef<
             curr.handleOnSelect();
           }
         }
-      }}
-      {...rest}
+      })}
     >
       {children}
     </Slot>
