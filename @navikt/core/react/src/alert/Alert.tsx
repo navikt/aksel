@@ -33,7 +33,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Sets max-width on the content to 43.5rem.
    * @default true
    */
-  contentMaxWidth?: boolean; // TODO string??
+  contentMaxWidth?: boolean;
   /**
    * Removes background from Alert.
    * @default false
