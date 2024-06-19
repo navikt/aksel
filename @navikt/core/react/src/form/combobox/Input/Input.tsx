@@ -143,15 +143,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
         } else if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
           /**
-           * In case user has an active selection and 'completes' the selection with ArrowLeft, ArrowRight or ArrowUp
+           * In case user has an active selection and 'completes' the selection with ArrowLeft or ArrowRight
            * we need to make sure to update the filter.
            */
           if (value !== "" && value !== searchTerm) {
             onChange(e);
           }
         } else if (e.key === "ArrowDown") {
-          // Check that cursor position is at the end of the input field,
-          // so we don't interfere with text editing
+          // Reset the value to the search term to cancel autocomplete
+          // if the user moves focus down to the FilteredOptions
           if (e.currentTarget.selectionStart) {
             setValue(searchTerm);
           }
