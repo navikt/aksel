@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Alert: Fix alignment, set max-width on container, and adjust title on close icon
+Alert: Fix alignment, add prop for content max-width, and adjust title on close icon

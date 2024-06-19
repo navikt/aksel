@@ -70,8 +70,7 @@ export const FullWidth: StoryFn = () => {
   return (
     <VStack gap="4">
       <Alert variant="info" fullWidth>
-        Id elit esse enim reprehenderit enim nisi veniam nostrud. Duis aute
-        irure dolor in reprehenderit.
+        Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
       <Alert variant="info" fullWidth size="small">
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
