@@ -102,7 +102,7 @@ export interface VirtualFocusAnchorProps
  * Must have a single child that is an input element.
  */
 export const VirtualFocusAnchor = forwardRef<
-  HTMLDivElement,
+  HTMLInputElement,
   VirtualFocusAnchorProps
 >(({ onSelect, onActive, children, ...rest }, ref) => {
   const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId } =
@@ -142,7 +142,7 @@ export const VirtualFocusAnchor = forwardRef<
             to_focus_descendant.handleOnActive();
           }
         } else if (event.key === "Enter") {
-          const curr = descendants.item(index);
+          const curr = descendants.item(virtualFocusIdx);
           if (curr?.handleOnSelect) {
             curr.handleOnSelect();
           }
@@ -200,10 +200,8 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
     });
 
     const mergedRefs = useMergeRefs(ref, register);
-
     return (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
-      <div
+      <Slot
         id={`virtualfocus-${uniqueId}-${index}`}
         data-aksel-virtualfocus={virtualFocusIdx === index}
         ref={mergedRefs}
@@ -218,7 +216,7 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
         {...rest}
       >
         {children}
-      </div>
+      </Slot>
     );
   },
 );
