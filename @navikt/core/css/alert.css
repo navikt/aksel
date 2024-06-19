@@ -5,7 +5,10 @@
   display: flex;
   gap: var(--a-spacing-3);
   align-items: center;
-  max-width: 47.5rem; /* TODO: Burde det være mindre på small? */
+}
+
+.navds-alert__wrapper {
+  max-width: 43.5rem;
 }
 
 .navds-alert--close-button > .navds-alert__wrapper {
@@ -23,7 +26,6 @@
 
 .navds-alert--full-width {
   border-radius: 0;
-  max-width: none; /* TODO: Burde teksten fortsatt ha maksbredde? */
 }
 
 .navds-alert > .navds-alert__icon {
