@@ -159,7 +159,7 @@ export const VirtualFocusContent = forwardRef<
 >(({ children, ...rest }, ref) => {
   const { uniqueId } = useVirtualFocusInternalContext();
   return (
-    <div ref={ref} id={`virtualfocus-${uniqueId}-content`} {...rest}>
+    <div ref={ref} {...rest} id={`virtualfocus-${uniqueId}-content`}>
       {children}
     </div>
   );
@@ -197,18 +197,18 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
     const mergedRefs = useMergeRefs(ref, register);
     return (
       <Slot
+        ref={mergedRefs}
+        {...rest}
         id={`virtualfocus-${uniqueId}-${index}`}
         data-aksel-virtualfocus={virtualFocusIdx === index}
-        ref={mergedRefs}
         tabIndex={-1}
-        onClick={() => {
+        onClick={composeEventHandlers(rest.onClick, () => {
           onSelect();
-        }}
-        onMouseMove={() => {
+        })}
+        onMouseMove={composeEventHandlers(rest.onMouseMove, () => {
           setVirtualFocusIdx(index);
           onActive();
-        }}
-        {...rest}
+        })}
       >
         {children}
       </Slot>
