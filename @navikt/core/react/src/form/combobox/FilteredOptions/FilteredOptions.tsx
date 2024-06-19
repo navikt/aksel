@@ -3,6 +3,7 @@ import React from "react";
 import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
 import { Loader } from "../../../loader";
 import { BodyShort, Label } from "../../../typography";
+import VirtualFocus from "../../virtualfocus/VirtualFocus";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
@@ -130,50 +131,59 @@ const FilteredOptions = () => {
             </li>
           )}
           {filteredOptions.map((option) => (
-            <li
-              className={cl("navds-combobox__list-item", {
-                "navds-combobox__list-item--focus":
-                  activeDecendantId ===
-                  filteredOptionsUtil.getOptionId(id, option.label),
-                "navds-combobox__list-item--selected": isInList(
-                  option.value,
-                  selectedOptions,
-                ),
-              })}
-              data-no-focus={isDisabled(option) || undefined}
-              id={filteredOptionsUtil.getOptionId(id, option.label)}
+            <VirtualFocus.Item
               key={option.label}
-              tabIndex={-1}
-              onMouseMove={() => {
-                if (
-                  activeDecendantId !==
-                  filteredOptionsUtil.getOptionId(id, option.label)
-                ) {
-                  virtualFocus.moveFocusToElement(
-                    filteredOptionsUtil.getOptionId(id, option.label),
-                  );
-                  setIsMouseLastUsedInputDevice(true);
-                }
+              onActive={() => {
+                console.log(`Item onActive(): ${option.value}`);
               }}
-              onPointerUp={(event) => {
-                if (isDisabled(option)) {
-                  return;
-                }
-                toggleOption(option, event);
-                if (
-                  !isMultiSelect &&
-                  !isInList(option.value, selectedOptions)
-                ) {
-                  toggleIsListOpen(false);
-                }
+              onSelect={() => {
+                console.log(`Item onSelect(): ${option.value}`);
               }}
-              role="option"
-              aria-selected={isInList(option.value, selectedOptions)}
-              aria-disabled={isDisabled(option) || undefined}
             >
-              <BodyShort size={size}>{option.label}</BodyShort>
-              {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
-            </li>
+              <li
+                className={cl("navds-combobox__list-item", {
+                  "navds-combobox__list-item--focus":
+                    activeDecendantId ===
+                    filteredOptionsUtil.getOptionId(id, option.label),
+                  "navds-combobox__list-item--selected": isInList(
+                    option.value,
+                    selectedOptions,
+                  ),
+                })}
+                data-no-focus={isDisabled(option) || undefined}
+                id={filteredOptionsUtil.getOptionId(id, option.label)}
+                tabIndex={-1}
+                onMouseMove={() => {
+                  if (
+                    activeDecendantId !==
+                    filteredOptionsUtil.getOptionId(id, option.label)
+                  ) {
+                    virtualFocus.moveFocusToElement(
+                      filteredOptionsUtil.getOptionId(id, option.label),
+                    );
+                    setIsMouseLastUsedInputDevice(true);
+                  }
+                }}
+                onPointerUp={(event) => {
+                  if (isDisabled(option)) {
+                    return;
+                  }
+                  toggleOption(option, event);
+                  if (
+                    !isMultiSelect &&
+                    !isInList(option.value, selectedOptions)
+                  ) {
+                    toggleIsListOpen(false);
+                  }
+                }}
+                role="option"
+                aria-selected={isInList(option.value, selectedOptions)}
+                aria-disabled={isDisabled(option) || undefined}
+              >
+                <BodyShort size={size}>{option.label}</BodyShort>
+                {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
+              </li>
+            </VirtualFocus.Item>
           ))}
         </ul>
       )}

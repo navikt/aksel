@@ -399,3 +399,8 @@
     outline-offset: -3px;
   }
 }
+
+.navds-combobox__list-options > [data-aksel-virtualfocus="true"] {
+  outline: 2px solid highlight;
+  outline-offset: -3px;
+}

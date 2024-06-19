@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import VirtualFocus from "../virtualfocus/VirtualFocus";
 import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
 import { InputContextProvider } from "./Input/Input.context";
@@ -57,46 +58,48 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
     const filteredOptions = mapToComboboxOptionArray(externalFilteredOptions);
     const selectedOptions = mapToComboboxOptionArray(externalSelectedOptions);
     return (
-      <InputContextProvider
-        value={{
-          defaultValue,
-          error,
-          errorId,
-          id,
-          value,
-          onChange,
-          onClear,
-          shouldAutocomplete,
-          size,
-        }}
-      >
-        <CustomOptionsProvider value={{ isMultiSelect }}>
-          <SelectedOptionsProvider
-            value={{
-              allowNewValues,
-              isMultiSelect,
-              selectedOptions,
-              maxSelected,
-              onToggleSelected,
-              options,
-            }}
-          >
-            <FilteredOptionsProvider
+      <VirtualFocus>
+        <InputContextProvider
+          value={{
+            defaultValue,
+            error,
+            errorId,
+            id,
+            value,
+            onChange,
+            onClear,
+            shouldAutocomplete,
+            size,
+          }}
+        >
+          <CustomOptionsProvider value={{ isMultiSelect }}>
+            <SelectedOptionsProvider
               value={{
                 allowNewValues,
-                filteredOptions,
-                isListOpen,
-                isLoading,
+                isMultiSelect,
+                selectedOptions,
+                maxSelected,
+                onToggleSelected,
                 options,
               }}
             >
-              <Combobox ref={ref} {...rest}>
-                {children}
-              </Combobox>
-            </FilteredOptionsProvider>
-          </SelectedOptionsProvider>
-        </CustomOptionsProvider>
-      </InputContextProvider>
+              <FilteredOptionsProvider
+                value={{
+                  allowNewValues,
+                  filteredOptions,
+                  isListOpen,
+                  isLoading,
+                  options,
+                }}
+              >
+                <Combobox ref={ref} {...rest}>
+                  {children}
+                </Combobox>
+              </FilteredOptionsProvider>
+            </SelectedOptionsProvider>
+          </CustomOptionsProvider>
+        </InputContextProvider>
+      </VirtualFocus>
     );
   },
 );
