@@ -87,21 +87,31 @@ export const Padding = () => (
 
 export const Margin = () => (
   <VStack align="center" gap="2">
-    <BasePrimitive margin="20">
-      <Box borderWidth="1">Margin all around</Box>
-    </BasePrimitive>
-    <BasePrimitive margin="1" marginBlock="20 0">
-      <Box borderWidth="1">Margin to the North</Box>
-    </BasePrimitive>
-    <BasePrimitive margin="1" marginInline="0 20">
-      <Box borderWidth="1">Margin to the East</Box>
-    </BasePrimitive>
-    <BasePrimitive margin="1" marginBlock="0 20">
-      <Box borderWidth="1">Margin to the South</Box>
-    </BasePrimitive>
-    <BasePrimitive margin="1" marginInline="20 0">
-      <Box borderWidth="1">Margin to the West</Box>
-    </BasePrimitive>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="20">
+        <Box borderWidth="1">Margin all around</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginBlock="20 0">
+        <Box borderWidth="1">Margin to the North</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginInline="0 20">
+        <Box borderWidth="1">Margin to the East</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginBlock="0 20">
+        <Box borderWidth="1">Margin to the South</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginInline="20 0">
+        <Box borderWidth="1">Margin to the West</Box>
+      </BasePrimitive>
+    </Box>
   </VStack>
 );
 
