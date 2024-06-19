@@ -16,7 +16,9 @@ export type PrimitiveAsChildProps =
        */
       asChild: true;
       /**
-       * When using asChild, the `as` prop is not allowed.
+       * Implements [OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent)
+       *
+       * When using asChild, the prop is not allowed as it would have no effect.
        */
       as?: never;
     }
