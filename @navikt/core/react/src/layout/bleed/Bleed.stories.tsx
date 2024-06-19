@@ -414,4 +414,7 @@ export const Chromatic = {
       <ReflectivePadding.render />
     </VStack>
   ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };
