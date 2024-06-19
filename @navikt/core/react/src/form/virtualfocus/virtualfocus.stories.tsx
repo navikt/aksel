@@ -89,6 +89,7 @@ const MyItem = ({
       // rename focus -> onActive
       onActive={() => {
         setValue(children);
+        console.log(`onActive(): ${children}`);
       }}
       onSelect={() => {
         console.log(`onSelect(): ${children}`);
