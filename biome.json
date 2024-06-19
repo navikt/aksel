@@ -38,7 +38,7 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
+        "noArrayIndexKey": "off"
       },
       "complexity": {
         "noForEach": "off",
