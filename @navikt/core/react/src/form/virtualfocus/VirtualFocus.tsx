@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
 import { Slot } from "../../util/Slot";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
@@ -116,7 +117,7 @@ export const VirtualFocusAnchor = forwardRef<
 
   return (
     <Slot
-ref={mergedRefs}
+      ref={mergedRefs}
       {...rest}
       id={`virtualfocus-${uniqueId}-${index}`}
       tabIndex={0}
