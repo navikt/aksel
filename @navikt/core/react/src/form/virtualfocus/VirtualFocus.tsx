@@ -1,13 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  forwardRef,
-  useId,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
 import { Slot } from "../../util/Slot";
 import { createContext } from "../../util/create-context";
-import { useMergeRefs } from "../../util/hooks";
+import { useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
 
@@ -50,7 +44,7 @@ export const VirtualFocus = ({ children, loop = false }: VirtualFocusProps) => {
       virtualFocusIdx={virtualFocusIdx}
       setVirtualFocusIdx={setVirtualFocusIdx}
       loop={loop}
-      uniqueId={useId().replace(/:/g, "")}
+      uniqueId={useId()}
     >
       <VirtualFocusDescendantsProvider value={descendants}>
         {children}
