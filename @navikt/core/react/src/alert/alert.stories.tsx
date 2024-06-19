@@ -79,6 +79,13 @@ export const FullWidth: StoryFn = () => {
   );
 };
 
+export const ContentMaxWidthOff: StoryFn = () => (
+  <Alert variant="info" contentMaxWidth={false}>
+    Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
+    reprehenderit enim nisi.
+  </Alert>
+);
+
 export const Inline: StoryFn = () => {
   return (
     <VStack gap="4">
@@ -180,6 +187,9 @@ export const Chromatic: Story = {
 
       <h2>FullWidth</h2>
       <FullWidth />
+
+      <h2>ContentMaxWidthOff</h2>
+      <ContentMaxWidthOff />
 
       <h2>Inline</h2>
       <Inline />

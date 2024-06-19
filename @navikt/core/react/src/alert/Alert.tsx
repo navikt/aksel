@@ -118,8 +118,10 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         <BodyLong
           as="div"
           size={size}
-          className="navds-alert__wrapper"
-          style={contentMaxWidth ? { maxWidth: "43.5rem" } : undefined}
+          className={cl(
+            "navds-alert__wrapper",
+            contentMaxWidth && "navds-alert__wrapper--maxwidth",
+          )}
         >
           {children}
         </BodyLong>

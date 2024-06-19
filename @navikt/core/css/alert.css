@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.navds-alert__wrapper--maxwidth {
+  max-width: 43.5rem;
+}
+
 .navds-alert--close-button > .navds-alert__wrapper {
   margin-block-start: var(--a-spacing-05);
 }
