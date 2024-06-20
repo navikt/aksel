@@ -28,6 +28,7 @@ export const Controls: Story = {
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     fullWidth: false,
+    contentMaxWidth: true,
     inline: false,
     variant: "info",
     size: "medium",
