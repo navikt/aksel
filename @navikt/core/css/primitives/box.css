@@ -1,29 +1,23 @@
-.navds-box {
-  --__ac-box-padding-xs: initial;
-  --__ac-box-padding-sm: var(--__ac-box-padding-xs);
-  --__ac-box-padding-md: var(--__ac-box-padding-sm);
-  --__ac-box-padding-lg: var(--__ac-box-padding-md);
-  --__ac-box-padding-xl: var(--__ac-box-padding-lg);
-  --__ac-box-padding-2xl: var(--__ac-box-padding-xl);
-  --__ac-box-padding-inline-xs: initial;
-  --__ac-box-padding-inline-sm: var(--__ac-box-padding-inline-xs);
-  --__ac-box-padding-inline-md: var(--__ac-box-padding-inline-sm);
-  --__ac-box-padding-inline-lg: var(--__ac-box-padding-inline-md);
-  --__ac-box-padding-inline-xl: var(--__ac-box-padding-inline-lg);
-  --__ac-box-padding-inline-2xl: var(--__ac-box-padding-inline-xl);
-  --__ac-box-padding-block-xs: initial;
-  --__ac-box-padding-block-sm: var(--__ac-box-padding-block-xs);
-  --__ac-box-padding-block-md: var(--__ac-box-padding-block-sm);
-  --__ac-box-padding-block-lg: var(--__ac-box-padding-block-md);
-  --__ac-box-padding-block-xl: var(--__ac-box-padding-block-lg);
-  --__ac-box-padding-block-2xl: var(--__ac-box-padding-block-xl);
-  --__ac-box-padding: var(--__ac-box-padding-xs);
-  --__ac-box-padding-inline: var(--__ac-box-padding-inline-xs);
-  --__ac-box-padding-block: var(--__ac-box-padding-block-xs);
+.navds-box-bg {
   --__ac-box-background: initial;
+
+  background-color: var(--__ac-box-background);
+}
+
+.navds-box-border-color {
   --__ac-box-border-color: initial;
-  --__ac-box-shadow: initial;
+
+  border-color: var(--__ac-box-border-color);
+}
+
+.navds-box-border-width {
   --__ac-box-border-width: initial;
+
+  border-style: solid;
+  border-width: var(--__ac-box-border-width, 0);
+}
+
+.navds-box-border-radius {
   --__ac-box-border-radius-xs: initial;
   --__ac-box-border-radius-sm: var(--__ac-box-border-radius-xs);
   --__ac-box-border-radius-md: var(--__ac-box-border-radius-sm);
@@ -32,57 +26,41 @@
   --__ac-box-border-radius-2xl: var(--__ac-box-border-radius-xl);
   --__ac-box-border-radius: var(--__ac-box-border-radius-xs);
 
-  padding-inline: var(--__ac-box-padding-inline, var(--__ac-box-padding));
-  padding-block: var(--__ac-box-padding-block, var(--__ac-box-padding));
-  background-color: var(--__ac-box-background);
-  border-style: solid;
-  border-color: var(--__ac-box-border-color);
   border-radius: var(--__ac-box-border-radius);
+}
+
+.navds-box-shadow {
+  --__ac-box-shadow: initial;
+
   box-shadow: var(--__ac-box-shadow);
-  border-width: var(--__ac-box-border-width, 0);
 }
 
 @media (min-width: 480px) {
-  .navds-box {
-    --__ac-box-padding: var(--__ac-box-padding-sm);
-    --__ac-box-padding-inline: var(--__ac-box-padding-inline-sm);
-    --__ac-box-padding-block: var(--__ac-box-padding-block-sm);
+  .navds-box-border-radius {
     --__ac-box-border-radius: var(--__ac-box-border-radius-sm);
   }
 }
 
 @media (min-width: 768px) {
-  .navds-box {
-    --__ac-box-padding: var(--__ac-box-padding-md);
-    --__ac-box-padding-inline: var(--__ac-box-padding-inline-md);
-    --__ac-box-padding-block: var(--__ac-box-padding-block-md);
+  .navds-box-border-radius {
     --__ac-box-border-radius: var(--__ac-box-border-radius-md);
   }
 }
 
 @media (min-width: 1024px) {
-  .navds-box {
-    --__ac-box-padding: var(--__ac-box-padding-lg);
-    --__ac-box-padding-inline: var(--__ac-box-padding-inline-lg);
-    --__ac-box-padding-block: var(--__ac-box-padding-block-lg);
+  .navds-box-border-radius {
     --__ac-box-border-radius: var(--__ac-box-border-radius-lg);
   }
 }
 
 @media (min-width: 1280px) {
-  .navds-box {
-    --__ac-box-padding: var(--__ac-box-padding-xl);
-    --__ac-box-padding-inline: var(--__ac-box-padding-inline-xl);
-    --__ac-box-padding-block: var(--__ac-box-padding-block-xl);
+  .navds-box-border-radius {
     --__ac-box-border-radius: var(--__ac-box-border-radius-xl);
   }
 }
 
 @media (min-width: 1440px) {
-  .navds-box {
-    --__ac-box-padding: var(--__ac-box-padding-2xl);
-    --__ac-box-padding-inline: var(--__ac-box-padding-inline-2xl);
-    --__ac-box-padding-block: var(--__ac-box-padding-block-2xl);
+  .navds-box-border-radius {
     --__ac-box-border-radius: var(--__ac-box-border-radius-2xl);
   }
 }
