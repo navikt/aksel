@@ -161,6 +161,46 @@ describe("Render combobox", () => {
         }),
       ).toBeInTheDocument();
     });
+
+    test("should trigger onChange while typing and on accepting autocomplete suggestions", async () => {
+      const onChange = vi.fn();
+      const onToggleSelected = vi.fn();
+      render(
+        <App
+          options={[
+            "Hjelpemidler [HJE]",
+            "Oppfølging [OPP]",
+            "Sykepenger [SYK]",
+            "Sykemelding [SYM]",
+          ]}
+          onChange={onChange}
+          onToggleSelected={onToggleSelected}
+          shouldAutocomplete
+        />,
+      );
+      const combobox = screen.getByRole("combobox");
+      expect(combobox).toBeInTheDocument();
+
+      await act(async () => {
+        await userEvent.click(combobox);
+        await userEvent.type(combobox, "Syke");
+        await userEvent.keyboard("{ArrowRight}");
+        await userEvent.keyboard("{ArrowDown}");
+        await userEvent.keyboard("{Enter}");
+      });
+      expect(onChange).toHaveBeenNthCalledWith(1, "S");
+      expect(onChange).toHaveBeenNthCalledWith(2, "Sy");
+      expect(onChange).toHaveBeenNthCalledWith(3, "Syk");
+      expect(onChange).toHaveBeenNthCalledWith(4, "Syke");
+      expect(onChange).toHaveBeenNthCalledWith(5, "Sykepenger [SYK]");
+      expect(onChange).toHaveBeenCalledWith("");
+      expect(onToggleSelected).toHaveBeenCalledOnce();
+      expect(onToggleSelected).toHaveBeenCalledWith(
+        "Sykepenger [SYK]",
+        true,
+        false,
+      );
+    });
   });
 
   describe("search", () => {

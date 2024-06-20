@@ -1,10 +1,5 @@
 import cl from "clsx";
-import React, {
-  ChangeEvent,
-  InputHTMLAttributes,
-  forwardRef,
-  useCallback,
-} from "react";
+import React, { InputHTMLAttributes, forwardRef, useCallback } from "react";
 import { omit } from "../../../util";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
@@ -127,7 +122,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const handleKeyDown = useCallback(
-      (e) => {
+      (e: React.KeyboardEvent) => {
         setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
           if (value === "") {
@@ -147,7 +142,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
            * we need to make sure to update the filter.
            */
           if (value !== "" && value !== searchTerm) {
-            onChange(e);
+            onChange(value);
           }
         } else if (e.key === "ArrowDown") {
           // Reset the value to the search term to cancel autocomplete
@@ -161,7 +156,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
           if (value !== "" && value !== searchTerm) {
-            onChange(e);
+            onChange(value);
           }
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
@@ -190,7 +185,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
 
     const onChangeHandler = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
+      (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value;
         if (newValue && newValue !== "") {
           toggleIsListOpen(true);
@@ -198,7 +193,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           toggleIsListOpen(false);
         }
         virtualFocus.moveFocusToTop();
-        onChange(event);
+        onChange(newValue);
       },
       [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen],
     );
