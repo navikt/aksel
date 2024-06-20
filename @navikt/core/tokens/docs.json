@@ -56,7 +56,7 @@
   "font": [
     {
       "name": "--a-font-family",
-      "value": "'Source Sans Pro', Arial, sans-serif"
+      "value": "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif"
     },
     { "name": "--a-font-weight-regular", "value": "400" },
     { "name": "--a-font-weight-bold", "value": "600" },
