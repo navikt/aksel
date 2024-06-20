@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "6.10.0",
+  "version": "6.11.0",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -52,10 +52,11 @@
   },
   "files": [
     "dist/*",
+    "src",
     "!**/*.tsbuildinfo"
   ],
   "scripts": {
-    "create-icons": "svgr --no-prettier --silent --index-template config/index-template.js --out-dir src icons && prettier --write ./src",
+    "create-icons": "svgr --no-prettier --silent --index-template config/index-template.js --out-dir src icons && yarn prettier --write ./src",
     "parse-svg": "node -e 'require(\"./config/parse-svg.js\").main()'",
     "copy": "copyfiles util/* src",
     "update-metadata": "node config/metadata.js",
@@ -67,7 +68,7 @@
     "test:watch": "vitest watch"
   },
   "devDependencies": {
-    "@svgr/cli": "6.5.1",
+    "@svgr/cli": "8.1.0",
     "adm-zip": "^0.5.10",
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
@@ -78,6 +79,7 @@
     "js-yaml": "^4.1.0",
     "lodash.camelcase": "4.3.0",
     "lodash.startcase": "4.4.0",
+    "prettier": "3.1.1",
     "react": "^18.0.0",
     "rehype-parse": "8.0.4",
     "tsc-alias": "1.8.8",

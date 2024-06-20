@@ -69,7 +69,7 @@ export interface DatePickerDefaultProps
   dropdownCaption?: boolean;
   /**
    * Apply the disabled modifier to the matching days.
-   * https://react-day-picker.js.org/api/types/Matcher
+   * https://react-day-picker.js.org/api/type-aliases/Matcher
    */
   disabled?: Matcher[];
   /**

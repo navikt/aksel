@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 6.11.0
+
+### Minor Changes
+
+- FileUpload: Added description-prop for Item. ([#2975](https://github.com/navikt/aksel/pull/2975))
+
+- Pagination: Added prop for hidden heading. ([#2976](https://github.com/navikt/aksel/pull/2976))
+
+- ToggleGroup: Added props `icon` and `label` as a replacement for `children`. Children is marked as deprecated and will be removed in a future major-version. ([#2929](https://github.com/navikt/aksel/pull/2929))
+
+### Patch Changes
+
+- List: Changed List.Item to BodyLong, changed Item spacing from 1rem to 0.5rem. ([#2979](https://github.com/navikt/aksel/pull/2979))
+
+- Page: Removed surface-subtle from background-prop ([#2987](https://github.com/navikt/aksel/pull/2987))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.11.0
+  - @navikt/aksel-icons@6.11.0
+
+## 6.10.1
+
+### Patch Changes
+
+- Updated dependencies [[`2cd6b1a39`](https://github.com/navikt/aksel/commit/2cd6b1a3915388535523989c2e998081bc68206c)]:
+  - @navikt/aksel-icons@6.10.1
+  - @navikt/ds-tokens@6.10.1
+
 ## 6.10.0
 
 ### Minor Changes
@@ -1075,7 +1103,7 @@
 
 ### Minor Changes
 
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/primitives/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
 
 ### Patch Changes
 

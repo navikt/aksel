@@ -30,9 +30,9 @@ interface ToggleGroupComponent
  * @example
  * ```jsx
  * <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
- *   <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
- *   <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
- *   <ToggleGroup.Item value="sendt">Sendt</ToggleGroup.Item>
+ *   <ToggleGroup.Item value="ulest" label="Ulest" />
+ *   <ToggleGroup.Item value="lest" label="Leste" />
+ *   <ToggleGroup.Item value="sendt" label="Sendt" />
  * </ToggleGroup>
  * ```
  */

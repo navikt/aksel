@@ -1,14 +1,42 @@
 # Changelog
 
+## 6.11
+
+### @navikt/ds-css
+
+- CopyButton: Icon is now 20px for size small and xsmall. ([#2977](https://github.com/navikt/aksel/pull/2977))
+
+- Button: Updated icon size for size="small" to 1.25rem. ([#2984](https://github.com/navikt/aksel/pull/2984))
+
+- List: Changed List.Item to BodyLong, changed Item spacing from 1rem to 0.5rem. ([#2979](https://github.com/navikt/aksel/pull/2979))
+
+### @navikt/ds-react
+
+- FileUpload: Added description-prop for Item. ([#2975](https://github.com/navikt/aksel/pull/2975))
+
+- Pagination: Added prop for hidden heading. ([#2976](https://github.com/navikt/aksel/pull/2976))
+
+- ToggleGroup: Added props `icon` and `label` as a replacement for `children`. Children is marked as deprecated and will be removed in a future major-version. ([#2929](https://github.com/navikt/aksel/pull/2929))
+
+* List: Changed List.Item to BodyLong, changed Item spacing from 1rem to 0.5rem. ([#2979](https://github.com/navikt/aksel/pull/2979))
+
+* Page: Removed surface-subtle from background-prop ([#2987](https://github.com/navikt/aksel/pull/2987))
+
 ## 6.10
 
 ### @navikt/ds-css
 
-- ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+- :lipstick: Remove bottom margin on last item in Stepper and adjust FormProgress accordingly ([#2971](https://github.com/navikt/aksel/pull/2971))
+
+* ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
 
 ### @navikt/ds-react
 
 - ✨ Modal: add small version ([#2909](https://github.com/navikt/aksel/pull/2909))
+
+### @navikt/aksel-icons
+
+- Icons: Added back support for sourcemapping. ([#2978](https://github.com/navikt/aksel/pull/2978))
 
 ## 6.9
 
@@ -797,7 +825,7 @@
 
 * Border-radius: Fikset hardkodet border-radius i Datepicker, ToggleGroup og Combobox. ([#2159](https://github.com/navikt/aksel/pull/2159))
 
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/primitives/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
 
 * List: Fikset alignment av ikoner ([#2149](https://github.com/navikt/aksel/pull/2149))
 
@@ -805,7 +833,7 @@
 
 ### @navikt/ds-react
 
-- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/core/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
+- HGrid: Ny komponent 'HGrid' er ute i Beta: [Dokumentasjon](https://aksel.nav.no/komponenter/primitives/hgrid) ([#1838](https://github.com/navikt/aksel/pull/1838))
 
 * Fixes bug where combobox list could not be closed after clicking a chip ([#2155](https://github.com/navikt/aksel/pull/2155))
 

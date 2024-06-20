@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { Pagination } from "@navikt/ds-react";
+import { Radio, RadioGroup, Stack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const [pageState, setPageState] = useState(2);
   return (
-    <Pagination
-      page={pageState}
-      onPageChange={(x) => setPageState(x)}
-      count={9}
-      boundaryCount={1}
-      siblingCount={1}
-    />
+    <RadioGroup legend="Har du barn?">
+      <Stack gap="0 6" direction={{ xs: "column", sm: "row" }} wrap={false}>
+        <Radio value="1">Ja</Radio>
+        <Radio value="0">Nei</Radio>
+      </Stack>
+    </RadioGroup>
   );
 };
 

@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next/types";
-import { Suspense, lazy } from "react";
 import { Heading } from "@navikt/ds-react";
 import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
@@ -15,6 +14,7 @@ import {
 } from "@/types";
 import { BloggAd } from "@/web/BloggAd";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
+import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
 
@@ -109,18 +109,12 @@ const Page = (props: PageProps["props"]) => {
   );
 };
 
-const WithPreview = lazy(() => import("@/preview"));
-
-const Wrapper = (props: any) => {
-  if (props?.preview) {
-    return (
-      <Suspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={query} props={props} />
-      </Suspense>
-    );
-  }
-
-  return <Page {...props} />;
-};
-
-export default Wrapper;
+export default function Home(props: PageProps["props"]) {
+  return props.preview ? (
+    <PagePreview query={query} props={props}>
+      {(previewProps) => <Page {...previewProps} />}
+    </PagePreview>
+  ) : (
+    <Page {...props} />
+  );
+}

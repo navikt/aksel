@@ -227,8 +227,6 @@ const GpPage = (props: PageProps["props"]) => {
 /**
  * To avoid infinite loop rendering caused by `count` in query, we avoid showing preview for this page.
  */
-const Wrapper = (props: any) => {
+export default function GpFrontpage(props: PageProps["props"]) {
   return <GpPage {...props} />;
-};
-
-export default Wrapper;
+}

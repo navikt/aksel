@@ -6,14 +6,14 @@ import { codeAfter, codeBefore } from "./mockdata";
 vi.mock("fs");
 
 describe("Testing parseCodeFiles function", () => {
-  test("parseCodeFiles should return an empty array if directory does not exist", () => {
+  test("parseCodeFiles should return an empty array if directory does not exist", async () => {
     vi.mocked(fs.existsSync).mockReturnValue(false);
-    const files = parseCodeFiles("nonexistent", "eksempler");
+    const files = await parseCodeFiles("nonexistent", "eksempler");
 
     expect(files).toEqual([]);
   });
 
-  test("parseCodeFiles should read files from /pages/eksempler directory", () => {
+  test("parseCodeFiles should read files from /pages/eksempler directory", async () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readdirSync).mockReturnValue([
       "file1.tsx",
@@ -21,13 +21,13 @@ describe("Testing parseCodeFiles function", () => {
     ] as unknown as fs.Dirent[]);
     vi.mocked(fs.readFileSync).mockReturnValue(codeBefore);
 
-    const files = parseCodeFiles("eksempler", "eksempler");
+    const files = await parseCodeFiles("eksempler", "eksempler");
 
     expect(files.length).toBeGreaterThan(0);
     expect(files[0].innhold).toEqual(codeAfter);
   });
 
-  test("parseCodeFiles should read files from /pages/templates directory", () => {
+  test("parseCodeFiles should read files from /pages/templates directory", async () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readdirSync).mockReturnValue([
       "file1.tsx",
@@ -35,7 +35,7 @@ describe("Testing parseCodeFiles function", () => {
     ] as unknown as fs.Dirent[]);
     vi.mocked(fs.readFileSync).mockReturnValue(codeBefore);
 
-    const files = parseCodeFiles("templates", "templates");
+    const files = await parseCodeFiles("templates", "templates");
 
     expect(files.length).toBeGreaterThan(0);
     expect(files[0].innhold).toEqual(codeAfter);

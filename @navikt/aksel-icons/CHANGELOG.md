@@ -1,5 +1,13 @@
 # @navikt/aksel-icons
 
+## 6.11.0
+
+## 6.10.1
+
+### Patch Changes
+
+- Icons: Added back support for sourcemapping. ([#2978](https://github.com/navikt/aksel/pull/2978))
+
 ## 6.10.0
 
 ## 6.9.0

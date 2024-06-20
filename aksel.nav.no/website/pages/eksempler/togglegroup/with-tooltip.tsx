@@ -10,19 +10,22 @@ const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log}>
       <Tooltip content="Uleste meldinger">
-        <ToggleGroup.Item value="ulest">
-          <EnvelopeClosedIcon title="Ulest" />
-        </ToggleGroup.Item>
+        <ToggleGroup.Item
+          value="ulest"
+          icon={<EnvelopeClosedIcon title="Ulest" />}
+        />
       </Tooltip>
       <Tooltip content="Leste meldinger">
-        <ToggleGroup.Item value="lest">
-          <EnvelopeOpenIcon title="Lest" />
-        </ToggleGroup.Item>
+        <ToggleGroup.Item
+          value="lest"
+          icon={<EnvelopeOpenIcon title="Lest" />}
+        />
       </Tooltip>
       <Tooltip content="Sendte meldinger">
-        <ToggleGroup.Item value="sendt">
-          <PaperplaneIcon title="Sendt" />
-        </ToggleGroup.Item>
+        <ToggleGroup.Item
+          value="sendt"
+          icon={<PaperplaneIcon title="Sendt" />}
+        />
       </Tooltip>
     </ToggleGroup>
   );
@@ -37,5 +40,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 6,
 };
