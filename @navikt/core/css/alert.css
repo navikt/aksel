@@ -4,6 +4,11 @@
   padding: var(--a-spacing-4);
   display: flex;
   gap: var(--a-spacing-3);
+  align-items: center;
+}
+
+.navds-alert--small.navds-alert--close-button {
+  align-items: flex-start;
 }
 
 .navds-alert__wrapper--maxwidth {
