@@ -1,6 +1,12 @@
 import cl from "clsx";
-import React, { InputHTMLAttributes, forwardRef, useCallback } from "react";
+import React, {
+  InputHTMLAttributes,
+  forwardRef,
+  useCallback,
+  useRef,
+} from "react";
 import { omit } from "../../../util";
+import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -15,6 +21,8 @@ interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, ...rest }, ref) => {
+    const internalRef = useRef<HTMLInputElement>(null);
+    const mergedRefs = useMergeRefs(ref, internalRef);
     const {
       clearInput,
       inputProps,
@@ -147,7 +155,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "ArrowDown") {
           // Reset the value to the search term to cancel autocomplete
           // if the user moves focus down to the FilteredOptions
-          if (e.currentTarget.selectionStart) {
+          if (internalRef.current?.selectionStart) {
             setValue(searchTerm);
           }
           if (virtualFocus.activeElement === null || !isListOpen) {
@@ -202,7 +210,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         {...rest}
         {...omit(inputProps, ["aria-invalid"])}
-        ref={ref}
+        ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
         onChange={onChangeHandler}
