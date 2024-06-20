@@ -36,7 +36,7 @@ export default {
 } as Meta;
 
 const MyAnchor = forwardRef<
-  HTMLDivElement,
+  HTMLInputElement,
   {
     children: React.ReactNode;
     value: string;
@@ -86,7 +86,6 @@ const MyItem = ({
 }) => {
   return (
     <VirtualFocus.Item
-      // rename focus -> onActive
       onActive={() => {
         setValue(children);
         console.log(`onActive(): ${children}`);
@@ -118,24 +117,29 @@ export const Default = () => {
       <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
-            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
-              {"cloud "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
-              {"hanger "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
-              {"hourglass "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
-              {"house "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
-              {"ruler "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<PuzzlePieceIcon aria-hidden />}>
-              {"puzzle piece "}
-            </MyItem>
+            <VStack>
+              <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+                {"cloud "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+                {"hanger "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
+                {"hourglass "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
+                {"house "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
+                {"ruler "}
+              </MyItem>
+              <MyItem
+                setValue={setValue}
+                icon={<PuzzlePieceIcon aria-hidden />}
+              >
+                {"puzzle piece "}
+              </MyItem>
+            </VStack>
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
@@ -234,7 +238,7 @@ export const Multiple = () => {
 };
 
 const MyDropDownSearchVirtualfocus = () => {
-  const anchorRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLInputElement>(null);
   const [openState, setOpenState] = useState(false);
   const [value, setValue] = useState("");
 
