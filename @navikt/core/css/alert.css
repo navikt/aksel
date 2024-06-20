@@ -7,7 +7,11 @@
   align-items: center;
 }
 
-.navds-alert__wrapper {
+.navds-alert--small.navds-alert--close-button {
+  align-items: flex-start;
+}
+
+.navds-alert__wrapper--maxwidth {
   max-width: 43.5rem;
 }
 
