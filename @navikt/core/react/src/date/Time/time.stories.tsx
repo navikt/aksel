@@ -5,7 +5,7 @@ import { Time } from "./Time";
 export default {
   title: "ds-react/Time",
   component: Time,
-} as Meta;
+} satisfies Meta<typeof Time>;
 
 export const Default = () => {
   return <Time date={new Date()} />;
