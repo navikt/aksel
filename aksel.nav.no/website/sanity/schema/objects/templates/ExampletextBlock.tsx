@@ -13,7 +13,18 @@ export const ExampletextBlock = defineType({
       name: "title",
       type: "string",
       initialValue: "Eksempeltekst",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value, context) => {
+          if (!context.document) return true;
+          const content = context.document.content as any[];
+          const blocksWithThisTitle = content
+            .filter((block) => block._type === "exampletext_block")
+            .filter((block) => block.title === value);
+          if (blocksWithThisTitle.length > 1) {
+            return "Tittelen må være unik på tvers av alle eksempeltekst-blokkene.";
+          }
+          return true;
+        }),
     }),
     defineField({
       title: "Tekst",
