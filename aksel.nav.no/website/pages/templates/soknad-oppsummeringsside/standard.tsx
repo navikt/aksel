@@ -176,6 +176,11 @@ export const Demo = {
             width: 1024,
           },
         },
+        tablet: {
+          viewport: {
+            width: 768,
+          },
+        },
         mobile: {
           viewport: {
             width: 400,
