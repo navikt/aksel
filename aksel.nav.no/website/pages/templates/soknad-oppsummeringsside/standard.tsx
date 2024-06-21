@@ -167,7 +167,23 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    chromatic: {
+      modes: {
+        desktop: {
+          viewport: {
+            width: 1024,
+          },
+        },
+        mobile: {
+          viewport: {
+            width: 400,
+          },
+        },
+      },
+    },
+  },
 };
 
 export const args = {
