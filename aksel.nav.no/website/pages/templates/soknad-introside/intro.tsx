@@ -181,7 +181,7 @@ function Example() {
             <BodyLong>
               Det er viktig at du gir oss riktige opplysninger slik at vi kan
               behandle saken din.{" "}
-              <Link href="#gi-riktige-opplysninger">
+              <Link href="https://www.nav.no/endringer">
                 Les mer om viktigheten av å gi riktige opplysninger.
               </Link>
             </BodyLong>
