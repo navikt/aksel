@@ -1,7 +1,6 @@
 import {
   Alert,
   BodyLong,
-  Box,
   Button,
   HStack,
   Heading,
@@ -19,17 +18,13 @@ const Example = () => {
         <BodyLong spacing>
           Det er viktig at du gjennomfører denne aktiviteten med NAV.
         </BodyLong>
-        <BodyLong>
+        <BodyLong spacing>
           Gjør du ikke det, kan det medføre at stønaden du mottar fra NAV
           bortfaller for en periode eller stanses. Hvis du ikke kan gjennomføre
           aktiviteten, ber vi deg ta kontakt med veilederen din så snart som
           mulig.
         </BodyLong>
-        <Box marginBlock="4 0">
-          <Button variant="secondary-neutral">
-            Ok, jeg har lest beskjeden
-          </Button>
-        </Box>
+        <Button variant="secondary-neutral">Ok, jeg har lest beskjeden</Button>
       </Alert>
 
       <Alert size="small" variant="info">
