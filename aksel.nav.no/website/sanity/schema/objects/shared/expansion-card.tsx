@@ -1,6 +1,15 @@
 import { defineField, defineType } from "sanity";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 
+export type ExpansionCardT = {
+  _key: string;
+  _type: "expansioncard";
+  heading: string;
+  heading_level: "h3" | "h4";
+  description?: string;
+  body: any[];
+};
+
 export const ExpansionCard = defineType({
   name: "expansioncard",
   title: "ExpansionCard",
