@@ -79,6 +79,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             allowNewValues && isValueNew
               ? { label: value, value }
               : filteredOptions[0];
+
+          if (!selectedValue) {
+            return;
+          }
+
           toggleOption(selectedValue, event);
           if (
             !isMultiSelect &&

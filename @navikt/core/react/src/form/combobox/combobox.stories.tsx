@@ -41,6 +41,7 @@ Default.args = {
   isLoading: false,
   isMultiSelect: false,
   allowNewValues: false,
+  onChange: console.log,
 };
 Default.argTypes = {
   isListOpen: {
