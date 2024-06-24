@@ -135,7 +135,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const handleKeyDown = useCallback(
-      (e: React.KeyboardEvent) => {
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
           if (value === "") {
