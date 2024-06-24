@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
-import { Slot } from "../../util/Slot";
+import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useId, useMergeRefs } from "../../util/hooks";

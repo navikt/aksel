@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Slot } from "../../util/Slot";
+import { Slot } from "../../slot/Slot";
 
 interface SlottedDivProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;

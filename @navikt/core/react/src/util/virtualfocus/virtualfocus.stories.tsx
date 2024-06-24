@@ -16,9 +16,9 @@ import {
   RulerIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
+import { Search } from "../../form/search";
 import { VStack } from "../../layout/stack";
 import { Popover } from "../../popover";
-import { Search } from "../search";
 import { VirtualFocus, useVirtualFocusDescendant } from "./VirtualFocus";
 
 export default {
