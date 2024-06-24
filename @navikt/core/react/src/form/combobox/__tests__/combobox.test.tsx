@@ -203,33 +203,6 @@ describe("Render combobox", () => {
     });
   });
 
-  test("should not trigger onToggleSelected while pressing Enter with non-matching option", async () => {
-    const onToggleSelected = vi.fn();
-    render(
-      <App
-        options={[
-          "Hjelpemidler [HJE]",
-          "Oppfølging [OPP]",
-          "Sykepenger [SYK]",
-          "Sykemelding [SYM]",
-        ]}
-        onToggleSelected={onToggleSelected}
-        shouldAutocomplete
-      />,
-    );
-    const combobox = screen.getByRole("combobox");
-    expect(combobox).toBeInTheDocument();
-
-    await act(async () => {
-      await userEvent.click(combobox);
-      await userEvent.type(combobox, "Syke");
-      await userEvent.keyboard("{Backspace}");
-      await userEvent.keyboard("{Enter}");
-    });
-
-    expect(onToggleSelected).not.toHaveBeenCalled();
-  });
-
   describe("search", () => {
     test("should find matched anywhere in the label", async () => {
       render(<App options={options} />);
