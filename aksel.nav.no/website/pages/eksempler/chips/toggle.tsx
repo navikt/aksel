@@ -55,7 +55,6 @@ const options = [
   "Skedsmo",
   "Arendal",
   "Gjøvik",
-  "Vennesla",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
