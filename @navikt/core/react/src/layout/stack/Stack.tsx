@@ -73,7 +73,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         children,
         className,
         as: Component = "div",
-        align = "stretch",
+        align,
         justify,
         wrap = true,
         gap,
@@ -86,7 +86,6 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
     ) => {
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-stack-wrap": wrap ? "wrap" : "nowrap",
         ...getResponsiveProps(`stack`, "gap", "spacing", gap),
         ...getResponsiveValue(`stack`, "direction", direction),
         ...getResponsiveValue(`stack`, "align", align),
@@ -104,6 +103,11 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
             className={cl("navds-stack", className, {
               "navds-vstack": direction === "column",
               "navds-hstack": direction === "row",
+              "navds-stack-gap": gap,
+              "navds-stack-align": align,
+              "navds-stack-justify": justify,
+              "navds-stack-direction": direction,
+              "navds-stack-wrap": wrap,
             })}
           >
             {children}
