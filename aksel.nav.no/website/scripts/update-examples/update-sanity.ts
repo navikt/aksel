@@ -4,25 +4,30 @@ import { noCdnClient } from "../../sanity/interface/client.server";
 import { extractMetadata } from "./parts/extract-metadata";
 import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
-import { RootDirectoriesT } from "./types";
+import { validateExamples } from "./parts/validate-examples";
+import { RootDirectoriesT, rootDirectories } from "./types";
 
 dotenv.config();
 
-updateSanity("templates", false);
-updateSanity("eksempler", false);
+const isDryRun = process.argv.includes("--dry-run");
 
-export async function updateSanity(
-  directory: RootDirectoriesT,
-  isDryRun: boolean = false,
-) {
+(async function () {
+  for (const directory of rootDirectories) {
+    await updateSanity(directory);
+  }
+})();
+
+export async function updateSanity(directory: RootDirectoriesT) {
   const token = process.env.SANITY_WRITE_KEY;
   if (!token) {
     throw new Error(
       "Missing token 'SANITY_WRITE_KEY' for updating code examples in Sanity",
     );
   }
+  console.log(`Processing ${directory}`);
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
+  const exampleData: CodeExampleSchemaT[] = [];
 
   /* First we add/update examples */
   for (const folder of folders) {
@@ -31,19 +36,21 @@ export async function updateSanity(
       _type: "kode_eksempler_fil",
       title: folder.path,
       variant: directory,
-      filer: parseCodeFiles(folder.path, directory).map((x) => ({
-        ...x,
-        _key: x.navn.split(".")[0],
-      })),
+      filer: await parseCodeFiles(folder.path, directory),
       metadata: extractMetadata(folder.path, directory),
     };
 
+    exampleData.push(data);
     transactionClient.createOrReplace(data);
+  }
+
+  if (!validateExamples(exampleData)) {
+    throw new Error("TypeScript errors found in generated code, see above.");
   }
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
-    .then(() => console.log(`Oppdaterte ${directory}-dokumenter i sanity`))
+    .then(() => console.log(`Successfully updated ${directory}`))
     .catch((e) => {
       throw new Error(e.message);
     });
@@ -65,14 +72,12 @@ export async function updateSanity(
     .commit({ dryRun: isDryRun })
     .then(() => console.log(`Successfully deleted unused ${directory}`))
     .catch((e) => {
-      /**
-       * Errormessage includes all ids that failed.
-       */
+      /* The error message includes all ids that failed. */
       deletedIds = deletedIds.filter((id) => e.message.includes(id));
 
       console.log("\n");
       console.log(
-        `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in sanity.
+        `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in Sanity.
     How to fix:
     - Go to links provided under and try to manually delete document.
     - You will then be prompted to update referenced document before deleting.
@@ -89,7 +94,7 @@ export async function updateSanity(
         ),
       );
       throw new Error(
-        `Failed when deleting old ${directory}-documentation from sanity, see warning above.`,
+        `Failed when deleting old ${directory}-documentation from Sanity, see warning above.`,
       );
     });
 }

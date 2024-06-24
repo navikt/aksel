@@ -30,6 +30,11 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   fullWidth?: boolean;
   /**
+   * Sets max-width on the content to 43.5rem.
+   * @default true
+   */
+  contentMaxWidth?: boolean;
+  /**
    * Removes background from Alert.
    * @default false
    */
@@ -85,6 +90,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       variant,
       size = "medium",
       fullWidth = false,
+      contentMaxWidth = true,
       inline = false,
       closeButton = false,
       onClose,
@@ -109,7 +115,14 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         )}
       >
         <Icon variant={variant} className="navds-alert__icon" />
-        <BodyLong as="div" size={size} className="navds-alert__wrapper">
+        <BodyLong
+          as="div"
+          size={size}
+          className={cl(
+            "navds-alert__wrapper",
+            contentMaxWidth && "navds-alert__wrapper--maxwidth",
+          )}
+        >
           {children}
         </BodyLong>
         {closeButton && !inline && (
@@ -120,7 +133,15 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
               variant="tertiary-neutral"
               onClick={onClose}
               type="button"
-              icon={<XMarkIcon title="Lukk Alert" />}
+              icon={
+                <XMarkIcon
+                  title={
+                    ["error", "warning"].includes(variant)
+                      ? "Lukk varsel"
+                      : "Lukk melding"
+                  }
+                />
+              }
             />
           </div>
         )}

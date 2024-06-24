@@ -1,6 +1,11 @@
 {
-  "version": 1,
+  "version": 2,
   "changelog": [
+    {
+      "description": "Justerte hvordan knappene nederst vises på mobil",
+      "date": "20.06.2024",
+      "version": 2
+    },
     {
       "description": "Publiserte malen",
       "date": "31.05.2024",

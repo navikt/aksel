@@ -7,6 +7,9 @@ const options: docgen.ParserOptions = {
   shouldRemoveUndefinedFromOptional: true,
 
   propFilter: (prop) => {
+    if (prop.name === "as" && prop.type.name === "undefined") {
+      return false;
+    }
     if (prop.name === "className" || prop.parent?.name === "RefAttributes") {
       return true;
     }

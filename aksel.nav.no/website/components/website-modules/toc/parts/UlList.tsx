@@ -29,7 +29,7 @@ function UlList({
   return (
     <MenuUl
       className={cl(styles.hideScrollbar, {
-        "max-h-[70vh] overflow-y-scroll overscroll-contain": !nested,
+        "max-h-[70vh] overflow-y-scroll overscroll-contain py-1": !nested,
       })}
       id={!nested ? "toc-scroll-wrapper" : undefined}
     >

@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 import path from "path";
 
+const smoketestMatcher = /smoketest(-\w+)?\.test\.ts/;
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -45,22 +46,22 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"],
       },
       ...(process.env.FULL_TEST
-        ? { testMatch: [/.*\.e2e\.(ts|tsx)/, /smoketest.test.ts/] }
-        : { testMatch: [/smoketest.test.ts/, /search.e2e.ts/] }),
+        ? { testMatch: [/.*\.e2e\.(ts|tsx)/] }
+        : { testMatch: [smoketestMatcher, /search.e2e.ts/] }),
     },
     {
       name: "Safari",
       use: {
         ...devices["Desktop Safari"],
       },
-      testMatch: [/smoketest.test.ts/],
+      testMatch: [smoketestMatcher],
     },
     {
       name: "Mobile",
       use: {
         ...devices["iPhone 12"],
       },
-      testMatch: [/smoketest.test.ts/],
+      testMatch: [smoketestMatcher],
     },
 
     /* {
