@@ -17,9 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  visual_regression_test:
+  chromatic:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'ignore-chromatic') }}
-    name: "visual regression test (chromatic)"
     runs-on: ubuntu-latest
     permissions:
       issues: write

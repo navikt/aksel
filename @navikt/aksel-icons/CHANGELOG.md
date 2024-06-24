@@ -1,5 +1,7 @@
 # @navikt/aksel-icons
 
+## 6.11.0
+
 ## 6.10.1
 
 ### Patch Changes

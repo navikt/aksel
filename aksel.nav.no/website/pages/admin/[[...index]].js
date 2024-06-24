@@ -3,25 +3,27 @@ import { NextStudio } from "next-sanity/studio";
 import { useEffect, useState } from "react";
 import { workspaceConfig } from "../../sanity/sanity.config";
 
+const localStorageKey = "aksel:sanity:studio:theme";
+
 const StudioPage = () => {
   const [scheme, setScheme] = useState("dark");
+
   useEffect(() => {
-    const theme = localStorage.getItem("sanityStudio:ui:colorScheme");
+    const theme = localStorage.getItem(localStorageKey);
     if (theme) {
       setScheme(theme);
     } else {
-      /* Assume user using system-theme */
-      window?.matchMedia &&
-      window?.matchMedia("(prefers-color-scheme: dark)").matches
-        ? setScheme("dark")
-        : setScheme("light");
+      const systemTheme = getSystemTheme();
+
+      setScheme(systemTheme);
+      updateLocalStorageTheme(systemTheme);
     }
   }, []);
 
   return (
     <div
       data-theme={scheme}
-      className={cl("aksel-admin h-full min-h-screen", {
+      className={cl("aksel-admin", {
         dark: scheme === "dark",
       })}
       id="sanity-wrapper"
@@ -29,8 +31,12 @@ const StudioPage = () => {
       <NextStudio
         config={workspaceConfig}
         scheme={scheme}
-        onSchemeChange={setScheme}
-        unstable__noFavicons
+        onSchemeChange={(nextScheme) => {
+          const newScheme =
+            nextScheme === "system" ? getSystemTheme() : nextScheme;
+          setScheme(newScheme);
+          updateLocalStorageTheme(newScheme);
+        }}
       />
     </div>
   );
@@ -38,8 +44,12 @@ const StudioPage = () => {
 
 export default StudioPage;
 
-/*
-TODO:
-Sort-order basert på siste godkjent/utdatert? publisedAt?
-https://github.com/sanity-io/next-sanity/issues/223
-*/
+function updateLocalStorageTheme(theme) {
+  localStorage.setItem(localStorageKey, theme);
+}
+
+function getSystemTheme() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}

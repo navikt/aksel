@@ -67,11 +67,7 @@ export const block = {
       {
         title: "Quote",
         value: "quote",
-        icon: () => (
-          <span className="font-semibold">
-            Q
-          </span>
-        ),
+        icon: () => <span className="font-semibold">Q</span>,
         component: ({ children }) => <q>{children}</q>,
       },
       {

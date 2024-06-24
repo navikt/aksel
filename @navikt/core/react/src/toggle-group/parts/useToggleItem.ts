@@ -97,7 +97,10 @@ export function useToggleItem<P extends UseToggleItemProps>(
     ref: mergeRefs([register, ref]),
     isSelected,
     isFocused: focusedValue === value,
-    onClick: composeEventHandlers(onClick, () => setSelectedValue(value)),
+    onClick: composeEventHandlers(
+      onClick,
+      () => selectedValue !== value && setSelectedValue(value),
+    ),
     onFocus: disabled ? undefined : composeEventHandlers(_onFocus, onFocus),
     onKeyDown: composeEventHandlers(_onKeyDown, onKeyDown),
   };

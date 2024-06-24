@@ -16,6 +16,7 @@ export type AsChildProps =
        * ```
        */
       asChild: true;
+      as?: never;
     }
   | {
       children: React.ReactNode;

@@ -6,15 +6,9 @@ import { ToggleGroup } from "./ToggleGroup";
 
 const TestToggleGroup = ({ value, onChange, defaultValue }: any) => (
   <ToggleGroup value={value} onChange={onChange} defaultValue={defaultValue}>
-    <ToggleGroup.Item value="toggle1" data-testid="toggle1">
-      Toggle 1
-    </ToggleGroup.Item>
-    <ToggleGroup.Item value="toggle2" data-testid="toggle2">
-      Toggle 2
-    </ToggleGroup.Item>
-    <ToggleGroup.Item value="toggle3" data-testid="toggle3">
-      Toggle 3
-    </ToggleGroup.Item>
+    <ToggleGroup.Item value="toggle1" data-testid="toggle1" label="Toggle 1" />
+    <ToggleGroup.Item value="toggle2" data-testid="toggle2" label="Toggle 2" />
+    <ToggleGroup.Item value="toggle3" data-testid="toggle3" label="Toggle 3" />
   </ToggleGroup>
 );
 
