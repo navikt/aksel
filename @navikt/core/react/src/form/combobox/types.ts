@@ -89,7 +89,7 @@ export interface ComboboxProps
   /**
    * Callback function triggered whenever the value of the input field is triggered.
    *
-   * @param event
+   * @param value The value after change
    */
   onChange?: (value: string) => void;
   /**
