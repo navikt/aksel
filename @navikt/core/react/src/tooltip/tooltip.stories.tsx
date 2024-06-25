@@ -3,6 +3,7 @@ import React from "react";
 import { Alert } from "../alert";
 import { Button } from "../button";
 import { Search } from "../form/search";
+import { VStack } from "../layout/stack";
 import Tooltip from "./Tooltip";
 
 export default {
@@ -45,28 +46,25 @@ export const Demo = () => (
   </div>
 );
 
-export const Default = {
-  render: (props) => {
-    return (
-      <Tooltip
-        content="Tooltip example"
-        open={props?.open}
-        keys={props?.keys ? ["Cmd", "K"] : undefined}
-        placement={props?.placement}
-        arrow={props?.arrow}
-        delay={props?.delay}
-        offset={props?.offset}
-      >
-        <Button aria-describedby="test123">Tooltip</Button>
-      </Tooltip>
-    );
-  },
-
-  args: {
-    keys: false,
-    arrow: true,
-    delay: 150,
-  },
+export const Default = (props) => {
+  return (
+    <Tooltip
+      content="Tooltip example"
+      open={props?.open}
+      keys={props?.keys ? ["Cmd", "K"] : undefined}
+      placement={props?.placement}
+      arrow={props?.arrow}
+      delay={props?.delay}
+      offset={props?.offset}
+    >
+      <Button aria-describedby="test123">Tooltip</Button>
+    </Tooltip>
+  );
+};
+Default.args = {
+  keys: false,
+  arrow: true,
+  delay: 150,
 };
 
 export const Placement = () => {
@@ -91,11 +89,34 @@ export const Placement = () => {
 export const Keys = () => {
   return (
     <Tooltip
-      content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. Consectetur ullamco quis laboris enim nulla amet proident proident deserunt laborum. Aliqua adipisicing ipsum nisi ipsum nisi pariatur tempor amet aute labore laboris eiusmod adipisicing eu. Et cillum ipsum voluptate ea irure aliquip laboris mollit in. Voluptate tempor do voluptate reprehenderit ea dolor velit ullamco et magna enim ut sit. Pariatur culpa nulla consectetur voluptate id Lorem incididunt magna aliqua sunt ut Lorem. Laborum est quis aute enim et fugiat aute."
+      content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. "
       open={true}
-      keys={["CMD", "K"]}
+      keys={["CMD", "I"]}
     >
       <div>Element</div>
     </Tooltip>
   );
+};
+
+export const Chromatic = () => {
+  return (
+    <VStack gap="24">
+      <div>
+        <h2>Default</h2>
+        <Default />
+      </div>
+      <div>
+        <h2>Placement</h2>
+        <Placement />
+      </div>
+      <div>
+        <h2>Keys</h2>
+        <Keys />
+      </div>
+    </VStack>
+  );
+};
+
+Chromatic.parameters = {
+  chromatic: { disable: false },
 };
