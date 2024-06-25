@@ -1,6 +1,17 @@
 import { defineField, defineType } from "sanity";
 import { Chat2Icon } from "@navikt/aksel-icons";
 import AkselExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
+import { ExpansionCardT } from "../shared/expansion-card";
+
+type ExampletextBlockT = {
+  _key: string;
+  _type: "exampletext_block";
+  title?: string;
+  text?: string;
+  readMore?: boolean;
+};
+
+type ContentTypesWeCareAbout = ExampletextBlockT | ExpansionCardT;
 
 export const ExampletextBlock = defineType({
   name: "exampletext_block",
@@ -13,7 +24,27 @@ export const ExampletextBlock = defineType({
       name: "title",
       type: "string",
       initialValue: "Eksempeltekst",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value, context) => {
+          if (!context.document) return true;
+          const content = context.document.content as ContentTypesWeCareAbout[];
+          let blocksWithThisTitle = 0;
+
+          content.forEach((block) => {
+            if (block._type === "exampletext_block" && block.title === value) {
+              blocksWithThisTitle++;
+            } else if (block._type === "expansioncard") {
+              blocksWithThisTitle += block.body
+                .filter((subBlock) => subBlock._type === "exampletext_block")
+                .filter((subBlock) => subBlock.title === value).length;
+            }
+          });
+
+          if (blocksWithThisTitle > 1) {
+            return "Tittelen må være unik på tvers av alle eksempeltekst-blokkene.";
+          }
+          return true;
+        }),
     }),
     defineField({
       title: "Tekst",
@@ -34,6 +65,8 @@ export const ExampletextBlock = defineType({
     },
   },
   components: {
-    preview: (values) => <AkselExampletextBlock node={values as any} />,
+    preview: (values: Omit<ExampletextBlockT, "_key">) => (
+      <AkselExampletextBlock node={values} />
+    ),
   },
 });

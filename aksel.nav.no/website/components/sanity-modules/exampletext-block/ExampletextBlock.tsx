@@ -5,8 +5,8 @@ import ShowMore from "@/web/ShowMore";
 
 type ExampletextBlockProps = {
   node: {
-    title: string;
-    text: string;
+    title?: string;
+    text?: string;
     readMore?: boolean;
   };
 };
