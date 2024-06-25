@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-Modal: New prop for aligning modal to top
+Modal: New prop `placement` for anchoring the modal to the top of the viewport.
