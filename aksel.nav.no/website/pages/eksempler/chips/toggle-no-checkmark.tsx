@@ -1,36 +1,52 @@
 import { useState } from "react";
-import { Chips } from "@navikt/ds-react";
+import { Chips, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const options = [
-    "Lillehammer",
-    "Nittedal",
-    "Enebakk",
-    "Hamar",
-    "Skedsmo",
-    "Arendal",
-    "Gjøvik",
-    "Vennesla",
-  ];
-
   const [selected, setSelected] = useState(3);
 
   return (
-    <Chips>
-      {options.map((c, y) => (
-        <Chips.Toggle
-          selected={selected === y}
-          checkmark={false}
-          key={c}
-          onClick={() => setSelected(y)}
-        >
-          {c}
-        </Chips.Toggle>
-      ))}
-    </Chips>
+    <VStack gap="10">
+      <Chips>
+        {options.map((label, id) => (
+          <Chips.Toggle
+            checkmark={false}
+            key={label}
+            selected={selected === id}
+            onClick={() => setSelected(id)}
+          >
+            {label}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+
+      <Chips>
+        {options.map((label, id) => (
+          <Chips.Toggle
+            checkmark={false}
+            variant="neutral"
+            key={label}
+            selected={selected === id}
+            onClick={() => setSelected(id)}
+          >
+            {label}
+          </Chips.Toggle>
+        ))}
+      </Chips>
+    </VStack>
   );
 };
+
+const options = [
+  "Lillehammer",
+  "Nittedal",
+  "Enebakk",
+  "Hamar",
+  "Skedsmo",
+  "Arendal",
+  "Gjøvik",
+  "Vennesla",
+];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example);
@@ -41,5 +57,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 3,
+  index: 1,
+  desc: "Hvis du slår av checkmark må det være minst 3 chips, slik at det er mulig å se hvilken som er valgt.",
 };

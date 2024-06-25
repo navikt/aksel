@@ -85,6 +85,56 @@ export const Padding = () => (
   </VStack>
 );
 
+export const Margin = () => (
+  <VStack align="center" gap="2">
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="20">
+        <Box borderWidth="1">Margin all around</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginBlock="20 0">
+        <Box borderWidth="1">Margin to the North</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginInline="0 20">
+        <Box borderWidth="1">Margin to the East</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginBlock="0 20">
+        <Box borderWidth="1">Margin to the South</Box>
+      </BasePrimitive>
+    </Box>
+    <Box background="surface-alt-3-subtle">
+      <BasePrimitive margin="1" marginInline="20 0">
+        <Box borderWidth="1">Margin to the West</Box>
+      </BasePrimitive>
+    </Box>
+  </VStack>
+);
+
+export const MarginAuto = () => (
+  <Box width="400px" background="surface-alt-3-subtle">
+    <BasePrimitive marginInline="auto">
+      <Box borderWidth="1" width="200px">
+        MarginInline: auto
+      </Box>
+    </BasePrimitive>
+    <BasePrimitive marginInline="auto 0" marginBlock="2">
+      <Box borderWidth="1" width="200px">
+        MarginInline: auto 0
+      </Box>
+    </BasePrimitive>
+    <BasePrimitive marginInline="0 auto" marginBlock="2">
+      <Box borderWidth="1" width="200px">
+        MarginInline: 0 auto
+      </Box>
+    </BasePrimitive>
+  </Box>
+);
+
 export const HeightWidth = () => (
   <VStack align="center" gap="2">
     <BasePrimitive height="4rem">
@@ -216,6 +266,15 @@ export const Chromatic: Story = {
         <h2>Padding</h2>
         <Padding />
       </div>
+      <div>
+        <h2>Margin</h2>
+        <Margin />
+      </div>
+      <div>
+        <h2>MarginAuto</h2>
+        <MarginAuto />
+      </div>
+
       <div>
         <h2>Height & Width</h2>
         <HeightWidth />

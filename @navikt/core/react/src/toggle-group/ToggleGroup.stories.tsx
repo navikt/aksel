@@ -65,7 +65,10 @@ export const Default = (props) => {
       size={props.size}
       variant={props.variant}
       value={activeValue}
-      onChange={setActiveValue}
+      onChange={(value) => {
+        setActiveValue(value);
+        console.log(value);
+      }}
       label={props.label ? "Proident minim dolor pariatur." : undefined}
     >
       {Items(props.icon, props.text && props.icon)}

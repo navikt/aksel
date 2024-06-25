@@ -5,9 +5,9 @@ const Example = () => {
   return (
     <VStack gap="4">
       <Alert variant="info">
-        Hvilken aria-role og hvilken Alert-variant man bruker er knyttet til
+        Hvilken ARIA role og hvilken Alert-variant man bruker er knyttet til
         viktigheten av innholdet. I Info-varianten bør det ikke være nødvendig å
-        bruke aria-roles. Bruk role=&quot;status&quot; ved unntak.
+        bruke ARIA role. Bruk role=&quot;status&quot; ved unntak.
       </Alert>
       <Alert role="status" variant="success">
         Du gjorde noe rett! I Success-varianten kan du bruke

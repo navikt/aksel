@@ -1,8 +1,9 @@
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../../util/types";
+import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { Stack, StackProps } from "./Stack";
 
-export type HStackProps = Omit<StackProps, "direction">;
+export type HStackProps = PrimitiveAsChildProps & Omit<StackProps, "direction">;
 
 /**
  * Layout-primitive for horizontal flexbox

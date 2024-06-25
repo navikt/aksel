@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 6.11.0
+
+### Patch Changes
+
+- CopyButton: Icon is now 20px for size small and xsmall. ([#2977](https://github.com/navikt/aksel/pull/2977))
+
+- Button: Updated icon size for size="small" to 1.25rem. ([#2984](https://github.com/navikt/aksel/pull/2984))
+
+- List: Changed List.Item to BodyLong, changed Item spacing from 1rem to 0.5rem. ([#2979](https://github.com/navikt/aksel/pull/2979))
+
 ## 6.10.1
 
 ### Patch Changes
