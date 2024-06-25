@@ -95,10 +95,9 @@ export const Chromatic: Story = {
       {AsChild.render?.(props, context)}
     </VStack>
   ),
-};
-
-Chromatic.parameters = {
-  chromatic: {
-    disable: false,
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
   },
 };
