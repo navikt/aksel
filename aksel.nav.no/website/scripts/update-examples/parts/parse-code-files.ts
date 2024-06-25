@@ -1,8 +1,8 @@
 import fs from "fs";
-import path from "path";
 import { FileArrayT, RootDirectoriesT } from "../types";
 import { extractArgs } from "./extract-args";
 import { filterCode } from "./filter-code";
+import { getFiles } from "./get-files";
 import { processAndCompressForURI } from "./sandbox-process-base64";
 import { sortResult } from "./sort";
 
@@ -16,46 +16,33 @@ const fixName = (str: string) =>
       .trim(),
   ) ?? str;
 
-export function parseCodeFiles(
+export async function parseCodeFiles(
   dirName: string,
   rootDir: RootDirectoriesT,
-): FileArrayT {
-  const codeDirPath = path.resolve(
-    process.cwd(),
-    `pages/${rootDir}/${dirName}`,
+) {
+  const codeFiles = getFiles(dirName, rootDir);
+
+  const parsedCode: FileArrayT = await Promise.all(
+    codeFiles.files.map(async (file) => parseCodeFile(codeFiles.dirPath, file)),
   );
 
-  if (!fs.existsSync(codeDirPath)) {
-    return [];
-  }
+  return sortResult(parsedCode);
+}
 
-  const codeFiles = fs
-    .readdirSync(codeDirPath)
-    .filter((x) => !x.includes(".json"));
+export async function parseCodeFile(dirPath: string, file: string) {
+  const filePath = `${dirPath}/${file}`;
+  const code = fs.readFileSync(filePath, "utf-8");
+  const args = extractArgs(code, filePath);
+  const filteredCode = await filterCode(code, filePath);
 
-  const parsedCode: FileArrayT = codeFiles.map((file) => {
-    let code = "";
-
-    code = fs.readFileSync(
-      path.resolve(process.cwd(), `pages/${rootDir}/${dirName}/${file}`),
-      "utf-8",
-    );
-
-    const args = extractArgs(code, `pages/${rootDir}/${dirName}/${file}`);
-
-    return {
-      innhold: code,
-      title: args.title ?? fixName(file.replace(".tsx", "")),
-      navn: file.replace(".tsx", ""),
-      description: args.desc,
-      index: args.index ?? 1,
-      sandboxBase64: processAndCompressForURI(filterCode(code)),
-      sandboxEnabled: args.sandbox ?? true,
-    };
-  });
-
-  return sortResult(parsedCode).map((x) => ({
-    ...x,
-    innhold: filterCode(x.innhold),
-  }));
+  return {
+    innhold: filteredCode,
+    title: args.title ?? fixName(file.replace(".tsx", "")),
+    _key: file.split(".")[0],
+    navn: file.replace(".tsx", ""),
+    description: args.desc,
+    index: args.index ?? 1,
+    sandboxBase64: processAndCompressForURI(filteredCode),
+    sandboxEnabled: args.sandbox ?? true,
+  };
 }

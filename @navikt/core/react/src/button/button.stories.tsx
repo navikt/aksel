@@ -187,6 +187,6 @@ export const Chromatic: Story = {
 export const ChromaticForcedColors: Story = {
   render: Chromatic.render,
   parameters: {
-    chromatic: { disable: false },
+    chromatic: { disable: false, forcedColors: "active" },
   },
 };

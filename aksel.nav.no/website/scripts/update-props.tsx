@@ -10,6 +10,11 @@ updateProps();
 
 async function updateProps() {
   const token = process.env.SANITY_WRITE_KEY;
+  if (!token) {
+    throw new Error(
+      "Missing token 'SANITY_WRITE_KEY' when updating prop-documentation",
+    );
+  }
 
   const transactionClient = noCdnClient(token).transaction();
 

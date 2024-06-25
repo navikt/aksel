@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import { VStack } from "../layout/stack";
 import { Link } from "../link";
-import { BodyLong, Heading as DsHeading } from "../typography";
+import { BodyLong, Heading } from "../typography";
 import Alert, { AlertProps } from "./Alert";
 
 const meta: Meta<typeof Alert> = {
@@ -25,11 +25,10 @@ const variants: AlertProps["variant"][] = [
 ];
 
 export const Controls: Story = {
-  render: (props) => <Alert {...props} />,
-
   args: {
     children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
     fullWidth: false,
+    contentMaxWidth: true,
     inline: false,
     variant: "info",
     size: "medium",
@@ -38,7 +37,7 @@ export const Controls: Story = {
   argTypes: {
     variant: {
       control: { type: "radio" },
-      options: ["info", "error", "warning", "success"],
+      options: variants,
     },
     size: {
       control: { type: "radio" },
@@ -47,30 +46,29 @@ export const Controls: Story = {
   },
 };
 
-export const Variants: Story = {
-  render: () => (
-    <div className="colgap">
-      <h2>Variants</h2>
+export const Variants: StoryFn = () => {
+  return (
+    <VStack gap="4">
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant} size="small">
           {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud. ",
           )}
         </Alert>
       ))}
-    </div>
-  ),
+    </VStack>
+  );
 };
 
-export const FullWidth: Story = {
-  render: () => (
+export const FullWidth: StoryFn = () => {
+  return (
     <VStack gap="4">
       <h2>FullWidth</h2>
       <Alert variant="info" fullWidth>
@@ -80,13 +78,19 @@ export const FullWidth: Story = {
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
     </VStack>
-  ),
+  );
 };
 
-export const Inline: Story = {
-  render: () => (
+export const ContentMaxWidthOff: StoryFn = () => (
+  <Alert variant="info" contentMaxWidth={false}>
+    Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
+    reprehenderit enim nisi.
+  </Alert>
+);
+
+export const Inline: StoryFn = () => {
+  return (
     <VStack gap="4">
-      <h2>Inline</h2>
       <Alert variant="info" inline>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
@@ -106,17 +110,16 @@ export const Inline: Story = {
         enim nisi veniam nostrud.
       </Alert>
     </VStack>
-  ),
+  );
 };
 
-export const Heading: Story = {
-  render: () => (
-    <div className="colgap">
-      <h2>Heading</h2>
+export const WithHeading: StoryFn = () => {
+  return (
+    <VStack gap="4">
       <Alert variant="info">
-        <DsHeading spacing size="small" level="3">
+        <Heading spacing size="small" level="3">
           Aliquip duis est in commodo pariatur
-        </DsHeading>
+        </Heading>
         <BodyLong>
           Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
           laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
@@ -124,83 +127,90 @@ export const Heading: Story = {
         </BodyLong>
       </Alert>
       <Alert variant="info" size="small">
-        <DsHeading spacing size="xsmall" level="3">
+        <Heading spacing size="xsmall" level="3">
           Aliquip duis est in commodo pariatur
-        </DsHeading>
+        </Heading>
         <BodyLong>
           Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
           laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
           sint commodo consequat eu aute.
         </BodyLong>
       </Alert>
-    </div>
-  ),
+    </VStack>
+  );
 };
 
-export const CloseButton: Story = {
-  render: () => (
+export const CloseButton: StoryFn = () => {
+  return (
     <VStack gap="4">
-      <h2>CloseButton</h2>
       <Alert variant="info" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
-      <Alert variant="info" closeButton>
+      <Alert variant="success" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse
         enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
         reprehenderit enim nisi veniam nostrud. Id elit esse enim reprehenderit
         enim nisi veniam nostrud.
       </Alert>
-      <Alert size="small" variant="info" closeButton>
+      <Alert size="small" variant="error" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
-      <Alert size="small" variant="info" closeButton>
+      <Alert size="small" variant="warning" closeButton>
         Id elit esse enim reprehenderit enim nisi veniam nostrud. Id elit esse
         enim reprehenderit enim nisi veniam nostrud. Id elit esse enim
         reprehenderit enim nisi veniam nostrud. Id elit esse enim reprehenderit
         enim nisi veniam nostrud.
       </Alert>
       <Alert variant="info" closeButton>
-        <DsHeading size="small" level="3">
+        <Heading size="small" level="3">
           Id elit esse enim reprehenderit
-        </DsHeading>
+        </Heading>
         <BodyLong>
           Id elit esse enim reprehenderit enim nisi veniam nostrud.
         </BodyLong>
       </Alert>
       <Alert variant="info" closeButton size="small">
-        <DsHeading size="xsmall" level="3">
+        <Heading size="xsmall" level="3">
           Id elit esse enim reprehenderit
-        </DsHeading>
+        </Heading>
         <BodyLong>
           Id elit esse enim reprehenderit enim nisi veniam nostrud.
         </BodyLong>
       </Alert>
     </VStack>
-  ),
-};
-export const Links: Story = {
-  render: () => (
-    <VStack gap="4">
-      <h2>Links</h2>
-      {variants.map((variant) => (
-        <Alert key={variant} variant={variant}>
-          <Link href="#">Id elit esse enim reprehenderit</Link>
-        </Alert>
-      ))}
-    </VStack>
-  ),
+  );
 };
 
 export const Chromatic: Story = {
-  render: (...props) => (
-    <VStack gap="6">
-      <VStack gap="2">{Variants.render?.(...props)}</VStack>
-      <VStack gap="2">{FullWidth.render?.(...props)}</VStack>
-      <VStack gap="2">{Inline.render?.(...props)}</VStack>
-      <VStack gap="2">{Heading.render?.(...props)}</VStack>
-      <VStack gap="2">{CloseButton.render?.(...props)}</VStack>
-      <VStack gap="2">{Links.render?.(...props)}</VStack>
-    </VStack>
+  render: () => (
+    <div>
+      <h2>Variants</h2>
+      <Variants />
+
+      <h2>FullWidth</h2>
+      <FullWidth />
+
+      <h2>ContentMaxWidthOff</h2>
+      <ContentMaxWidthOff />
+
+      <h2>Inline</h2>
+      <Inline />
+
+      <h2>Heading</h2>
+      <WithHeading />
+
+      <h2>CloseButton</h2>
+      <CloseButton />
+
+      <h2>Links</h2>
+      <VStack gap="2">
+        {variants.map((variant) => (
+          <Alert key={variant} variant={variant}>
+            <Link href="#">Id elit esse enim reprehenderit</Link>
+          </Alert>
+        ))}
+      </VStack>
+    </div>
   ),
   parameters: {
     chromatic: { disable: false },

@@ -91,6 +91,27 @@ module.exports = {
         "aksel-local/comment-check": ["error"],
       },
     },
+    {
+      files: ["**/examples/__parts*/*.tsx"],
+      plugins: ["aksel-local"],
+      rules: {
+        "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
+      },
+    },
+    {
+      files: ["**/examples/__parts-inline/*.tsx"],
+      rules: {
+        "arrow-body-style": ["error", "never"],
+        "func-style": ["error", "expression"],
+        "import/no-named-export": "error",
+      },
+    },
+    {
+      files: ["examples/**"],
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
+    },
   ],
   globals: {
     Locale: "readonly",
@@ -100,7 +121,6 @@ module.exports = {
     "node_modules",
     "lib",
     "public",
-    "examples",
     "esm",
     "cjs",
     "dist",

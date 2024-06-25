@@ -44,8 +44,8 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
           "text-teal-700": type === "undertema",
         })}
       >
-        {type == "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
-        {type == "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
+        {type === "undertema" && <TagFillIcon fontSize="20" aria-hidden />}
+        {type === "innholdstype" && <FileFillIcon fontSize="20" aria-hidden />}
         {capitalize(type)}
       </Label>
 
