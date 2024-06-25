@@ -493,18 +493,12 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
 
     const handleSelect = () => {
       const menuItem = ref.current;
-      if (!disabled && menuItem) {
+      if (!disabled && menuItem && onSelect) {
         const itemSelectEvent = new CustomEvent(ITEM_SELECT_EVENT, {
           bubbles: true,
           cancelable: true,
         });
-        menuItem.addEventListener(
-          ITEM_SELECT_EVENT,
-          (event) => onSelect?.(event),
-          {
-            once: true,
-          },
-        );
+        menuItem.addEventListener(ITEM_SELECT_EVENT, onSelect, { once: true });
         /* dispatchDiscreteCustomEvent */
         ReactDOM.flushSync(() => menuItem.dispatchEvent(itemSelectEvent));
         if (itemSelectEvent.defaultPrevented) {
@@ -539,10 +533,10 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           if (SELECTION_KEYS.includes(event.key)) {
             event.currentTarget.click();
             /**
-             * We prevent default browser behaviour for selection keys as they should trigger
-             * a selection only:
-             * - prevents space from scrolling the page.
-             * - if keydown causes focus to move, prevents keydown from firing on the new target.
+             * We prevent default browser behaviour for selection keys as they should only trigger
+             * selection.
+             * - Prevents space from scrolling the page.
+             * - If keydown causes focus to move, prevents keydown from firing on the new target.
              */
             event.preventDefault();
           }
