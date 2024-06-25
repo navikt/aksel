@@ -209,7 +209,9 @@ export const PlacementTopShort: StoryFn = () => (
       placement="top"
       header={{ heading: "placement = top" }}
     >
-      <Modal.Body>This modal should be aligned to top.</Modal.Body>
+      <Modal.Body>
+        This modal should be top anchored, except on mobile and old browsers.
+      </Modal.Body>
     </Modal>
   </div>
 );
@@ -244,7 +246,10 @@ export const PlacementTopLong: StoryFn = () => {
         header={{ heading: "placement = top" }}
       >
         <Modal.Body>
-          <BodyLong spacing>This modal should be aligned to top.</BodyLong>
+          <BodyLong spacing>
+            This modal should be top anchored, except on mobile and old
+            browsers.
+          </BodyLong>
           <BodyLong spacing>{lorem}</BodyLong>
           <BodyLong>{lorem}</BodyLong>
 
@@ -254,7 +259,10 @@ export const PlacementTopLong: StoryFn = () => {
             placement="top"
             header={{ heading: "placement = top (Nested)" }}
           >
-            <Modal.Body>This modal should also be aligned to top.</Modal.Body>
+            <Modal.Body>
+              This modal should also be top anchored, except on mobile and old
+              browsers.
+            </Modal.Body>
           </Modal>
         </Modal.Body>
         <Modal.Footer>
