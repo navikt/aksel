@@ -38,7 +38,9 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
 
     useEffect(() => {
       if (container) {
-        const previouslyFocusedElement = document.activeElement;
+        const ownerDocument = container.ownerDocument ?? globalThis?.document;
+
+        const previouslyFocusedElement = ownerDocument.activeElement;
         const hasFocusedCandidate = container.contains(
           previouslyFocusedElement,
         );

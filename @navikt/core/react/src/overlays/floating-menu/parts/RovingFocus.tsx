@@ -49,14 +49,16 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       }
     }, [handleEntryFocus]);
 
-    /* TODO: implement ownerdocument here */
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent) => {
         const loop = false;
 
+        const ownerDocument =
+          _ref?.current?.ownerDocument ?? globalThis?.document;
+
         const idx = descendants
           .values()
-          .findIndex((x) => x.node.isSameNode(document.activeElement));
+          .findIndex((x) => x.node.isSameNode(ownerDocument.activeElement));
 
         const nextItem = () => {
           const next = descendants.nextEnabled(idx, loop);
