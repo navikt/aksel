@@ -1,16 +1,11 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { Slot } from "../../../slot/Slot";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
 import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
 
-interface RovingFocusProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RovingFocusProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
   asChild?: boolean;
   descendants: DescendantsManager<HTMLDivElement, object>;
   onEntryFocus?: (event: Event) => void;
@@ -28,7 +23,6 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       onKeyDown,
       onEntryFocus,
       onMouseDown,
-      onBlur,
       onFocus,
       ...rest
     }: RovingFocusProps,
@@ -38,8 +32,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
     const composedRefs = useMergeRefs(ref, _ref);
 
     const handleEntryFocus = useCallbackRef(onEntryFocus);
-    const [isTabbingBackOut, setIsTabbingBackOut] = useState(false);
-    const isClickFocusRef = useRef(false);
+    const isMouseFocusRef = useRef(false);
 
     useEffect(() => {
       const node = _ref.current;
@@ -100,24 +93,20 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       <Comp
         ref={composedRefs}
         {...rest}
-        tabIndex={isTabbingBackOut || descendants.enabledCount() === 0 ? -1 : 0}
+        tabIndex={descendants.enabledCount() === 0 ? -1 : 0}
         style={{ outline: "none", ...rest.style }}
         onKeyDown={composeEventHandlers(onKeyDown, handleKeyDown)}
         onMouseDown={composeEventHandlers(onMouseDown, () => {
-          isClickFocusRef.current = true;
+          isMouseFocusRef.current = true;
         })}
         onFocus={composeEventHandlers(onFocus, (event) => {
           // We normally wouldn't need this check, because we already check
           // that the focus is on the current target and not bubbling to it.
           // We do this because Safari doesn't focus buttons when clicked, and
           // instead, the wrapper will get focused and not through a bubbling event.
-          const isKeyboardFocus = !isClickFocusRef.current;
+          const isKeyboardFocus = !isMouseFocusRef.current;
 
-          if (
-            event.target === event.currentTarget &&
-            isKeyboardFocus &&
-            !isTabbingBackOut
-          ) {
+          if (event.target === event.currentTarget && isKeyboardFocus) {
             const entryFocusEvent = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
             event.currentTarget.dispatchEvent(entryFocusEvent);
 
@@ -126,9 +115,8 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
             }
           }
 
-          isClickFocusRef.current = false;
+          isMouseFocusRef.current = false;
         })}
-        onBlur={composeEventHandlers(onBlur, () => setIsTabbingBackOut(false))}
       >
         {children}
       </Comp>

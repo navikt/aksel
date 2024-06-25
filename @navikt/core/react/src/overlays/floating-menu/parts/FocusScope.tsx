@@ -1,8 +1,7 @@
-import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import * as React from "react";
 import { forwardRef, useEffect, useState } from "react";
 import { Slot } from "../../../slot/Slot";
-import { useCallbackRef } from "../../../util/hooks";
+import { useCallbackRef, useMergeRefs } from "../../../util/hooks";
 
 const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
@@ -34,18 +33,16 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
     const onMountAutoFocus = useCallbackRef(onMountAutoFocusProp);
     const onUnmountAutoFocus = useCallbackRef(onUnmountAutoFocusProp);
 
-    const composedRefs = useComposedRefs(ref, (node) => setContainer(node));
+    const composedRefs = useMergeRefs(ref, (node) => setContainer(node));
 
     useEffect(() => {
       if (container) {
         const ownerDocument = container.ownerDocument ?? globalThis?.document;
 
         const previouslyFocusedElement = ownerDocument.activeElement;
-        const hasFocusedCandidate = container.contains(
-          previouslyFocusedElement,
-        );
+        const hasFocus = container.contains(previouslyFocusedElement);
 
-        if (!hasFocusedCandidate) {
+        if (!hasFocus) {
           const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
           container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
           container.dispatchEvent(mountEvent);

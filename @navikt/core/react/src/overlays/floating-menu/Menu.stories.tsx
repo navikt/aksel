@@ -334,13 +334,12 @@ type MenuProps = Omit<
   | "disableOutsideScroll"
 >;
 
-const MenuWithAnchor: React.FC<MenuProps> = (props) => {
+const MenuWithAnchor = (props: MenuProps) => {
   const { open = true, children, ...contentProps } = props;
   return (
     <Menu open={open} onOpenChange={() => {}} modal={false}>
-      {/* inline-block allows anchor to move when rtl changes on document */}
       <Menu.Anchor>
-        <div style={{ display: "inline-block" }} />
+        <div />
       </Menu.Anchor>
       <Menu.Portal>
         <Menu.Content
@@ -361,7 +360,6 @@ export const MenuWithOpenButton = () => {
 
   return (
     <Menu open={open} onOpenChange={() => {}} modal={false}>
-      {/* inline-block allows anchor to move when rtl changes on document */}
       <Menu.Anchor asChild>
         <button
           type="button"
@@ -448,7 +446,7 @@ const Submenu: React.FC<
   );
 };
 
-export const TestMenu: React.FC<MenuProps> = () => {
+export const TestMenu = () => {
   const props = { open: true };
   return (
     <Menu open={props.open} onOpenChange={() => {}} modal={true}>

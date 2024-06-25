@@ -97,9 +97,12 @@ const [MenuRootProvider, useMenuRootContext] =
     hookName: "useMenuRootContext",
   });
 
-const MenuRoot = (props: MenuProps) => {
-  const { open = false, children, onOpenChange, modal = true } = props;
-
+const MenuRoot = ({
+  open = false,
+  children,
+  onOpenChange,
+  modal = true,
+}: MenuProps) => {
   const [content, setContent] = useState<MenuContentElement | null>(null);
   const isUsingKeyboardRef = useRef(false);
   const handleOpenChange = useCallbackRef(onOpenChange);
@@ -108,6 +111,9 @@ const MenuRoot = (props: MenuProps) => {
     const globalDocument = globalThis.document;
     // Capturephase ensures we set the boolean before any side effects execute
     // in response to the key or pointer event as they might depend on this value.
+    const handlePointer = () => {
+      isUsingKeyboardRef.current = false;
+    };
     const handleKeyDown = () => {
       isUsingKeyboardRef.current = true;
       globalDocument.addEventListener("pointerdown", handlePointer, {
@@ -119,7 +125,6 @@ const MenuRoot = (props: MenuProps) => {
         once: true,
       });
     };
-    const handlePointer = () => (isUsingKeyboardRef.current = false);
     globalDocument.addEventListener("keydown", handleKeyDown, {
       capture: true,
     });
@@ -165,11 +170,7 @@ const Menu = MenuRoot as MenuComponent;
  * Anchor
  */
 type MenuAnchorElement = React.ElementRef<typeof Floating.Anchor>;
-type MenuAnchorBaseProps = React.ComponentPropsWithoutRef<
-  typeof Floating.Anchor
->;
-
-type MenuAnchorProps = MenuAnchorBaseProps;
+type MenuAnchorProps = React.ComponentPropsWithoutRef<typeof Floating.Anchor>;
 
 const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
   (props: MenuAnchorProps, forwardedRef) => {
@@ -194,11 +195,6 @@ const [MenuContentProvider, useMenuContentContext] =
     hookName: "useMenuContentContext",
   });
 
-/**
- * We purposefully don't union MenuRootContent and MenuSubContent props here because
- * they have conflicting prop types. We agreed that we would allow MenuSubContent to
- * accept props that it would just ignore.
- */
 type MenuContentElement = MenuContentImplElement;
 interface MenuContentProps extends MenuContentImplTypeProps {}
 
@@ -266,7 +262,7 @@ const MenuRootContentModal = forwardRef<
 });
 
 /**
- * Menu content implisit
+ * Menu content implicit
  */
 
 type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
@@ -289,7 +285,7 @@ interface MenuContentImplProps
   extends MenuContentImplPrivateProps,
     Omit<PopperContentProps, "dir" | "onPlaced"> {
   /**
-   * Event handler called when auto-focusing on close.
+   * Event handler called when auto-focusing after close.
    * Can be prevented.
    */
   onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
