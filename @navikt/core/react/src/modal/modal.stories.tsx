@@ -7,6 +7,8 @@ import { VStack } from "../layout/stack";
 import { Tooltip } from "../tooltip";
 import { BodyLong, BodyShort, Heading } from "../typography";
 import Modal from "./Modal";
+import ModalRoot from "./Modal.Root";
+import ModalTrigger from "./Modal.Trigger";
 
 const meta: Meta<typeof Modal> = {
   title: "ds-react/Modal",
@@ -293,6 +295,19 @@ export const WithSrOnlyElement: StoryFn = () => (
     </Modal.Footer>
   </Modal>
 );
+
+export const RootAndTriggerTest: StoryFn = () => {
+  return (
+    <ModalRoot>
+      <ModalTrigger asChild>
+        <Button>Open Modal</Button>
+      </ModalTrigger>
+      <Modal header={{ heading: "Simple header" }}>
+        <Modal.Body>Modal content</Modal.Body>
+      </Modal>
+    </ModalRoot>
+  );
+};
 
 export const ChromaticViewportTesting: StoryFn = () => (
   <div id="modal-story-wrapper" style={{ width: "100vw", height: "100vh" }}>

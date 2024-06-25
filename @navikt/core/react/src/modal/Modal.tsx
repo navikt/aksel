@@ -8,6 +8,7 @@ import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { useModalRootContext } from "./Modal.Root";
 import { ModalContextProvider, useModalContext } from "./Modal.context";
 import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
@@ -98,8 +99,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     }: ModalProps,
     ref,
   ) => {
+    const context = useModalRootContext(false);
     const modalRef = useRef<HTMLDialogElement>(null);
-    const mergedRef = useMergeRefs(modalRef, ref);
+    const mergedRef = useMergeRefs(modalRef, ref, context?.contentRef);
 
     const ariaLabelId = useId();
     const rootElement = useProvider()?.rootElement;
@@ -137,9 +139,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           modalRef.current.showModal();
         } else if (!open && modalRef.current.open) {
           modalRef.current.close();
+          context?.onOpenToggle();
         }
       }
-    }, [modalRef, portalNode, open]);
+    }, [modalRef, portalNode, open, context]);
 
     useBodyScrollLock(modalRef, portalNode, isNested);
 
@@ -192,6 +195,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         return;
       }
 
+      context?.onOpenToggle();
       modalRef.current.close();
     };
 
@@ -201,7 +205,11 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const handleModalCancel = (
       event: React.SyntheticEvent<HTMLDialogElement, Event>,
     ) => {
-      onBeforeClose && onBeforeClose() === false && event.preventDefault();
+      if (onBeforeClose && onBeforeClose() === false) {
+        event.preventDefault();
+      } else {
+        context?.onOpenToggle();
+      }
     };
 
     const mergedAriaLabelledBy =
