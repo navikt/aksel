@@ -201,14 +201,17 @@ export const Large800: StoryFn = () => (
 Large800.storyName = "Size = 800px";
 
 export const PlacementTopShort: StoryFn = () => (
-  <Modal
-    open
-    onClose={() => null}
-    placement="top"
-    header={{ heading: "placement = top" }}
-  >
-    <Modal.Body>This modal should be aligned to top.</Modal.Body>
-  </Modal>
+  <div style={{ width: "100vw", height: "100vh" }}>
+    <style>{`#storybook-root { padding: 0 !important }`}</style>
+    <Modal
+      open
+      onClose={() => null}
+      placement="top"
+      header={{ heading: "placement = top" }}
+    >
+      <Modal.Body>This modal should be aligned to top.</Modal.Body>
+    </Modal>
+  </div>
 );
 PlacementTopShort.parameters = {
   chromatic: {
@@ -232,32 +235,35 @@ PlacementTopShort.parameters = {
 export const PlacementTopLong: StoryFn = () => {
   const ref = useRef<HTMLDialogElement>(null);
   return (
-    <Modal
-      open
-      onClose={() => null}
-      placement="top"
-      header={{ heading: "placement = top" }}
-    >
-      <Modal.Body>
-        <BodyLong spacing>This modal should be aligned to top.</BodyLong>
-        <BodyLong spacing>{lorem}</BodyLong>
-        <BodyLong>{lorem}</BodyLong>
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <style>{`#storybook-root { padding: 0 !important }`}</style>
+      <Modal
+        open
+        onClose={() => null}
+        placement="top"
+        header={{ heading: "placement = top" }}
+      >
+        <Modal.Body>
+          <BodyLong spacing>This modal should be aligned to top.</BodyLong>
+          <BodyLong spacing>{lorem}</BodyLong>
+          <BodyLong>{lorem}</BodyLong>
 
-        <Modal
-          ref={ref}
-          onClose={() => null}
-          placement="top"
-          header={{ heading: "placement = top (Nested)" }}
-        >
-          <Modal.Body>This modal should also be aligned to top.</Modal.Body>
-        </Modal>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => ref.current?.showModal()}>
-          Open nested modal
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          <Modal
+            ref={ref}
+            onClose={() => null}
+            placement="top"
+            header={{ heading: "placement = top (Nested)" }}
+          >
+            <Modal.Body>This modal should also be aligned to top.</Modal.Body>
+          </Modal>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => ref.current?.showModal()}>
+            Open nested modal
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };
 PlacementTopLong.parameters = {
@@ -358,7 +364,7 @@ export const WithSrOnlyElement: StoryFn = () => (
 );
 
 export const ChromaticViewportTesting: StoryFn = () => (
-  <div id="modal-story-wrapper" style={{ width: "100vw", height: "100vh" }}>
+  <div style={{ width: "100vw", height: "100vh" }}>
     <style>{`#storybook-root { padding: 0 !important }`}</style>
     <Modal
       open
