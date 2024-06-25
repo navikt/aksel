@@ -47,7 +47,7 @@ function Example() {
             </Stack>
           </Bleed>
 
-          <div data-aksel-template="form-summarypage-v1">
+          <div data-aksel-template="form-summarypage-v2">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>

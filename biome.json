@@ -6,6 +6,11 @@
   "javascript": {
     "jsxRuntime": "reactClassic"
   },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -38,7 +43,7 @@
       },
       "suspicious": {
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off",
+        "noArrayIndexKey": "off"
       },
       "complexity": {
         "noForEach": "off",

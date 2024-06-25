@@ -4,8 +4,7 @@ import { Slot } from "../../slot/Slot";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export interface BasePrimitiveProps {
-  children: React.ReactElement;
+export type PrimitiveProps = {
   className?: string;
   /**
    * Padding around children.
@@ -39,6 +38,47 @@ export interface BasePrimitiveProps {
    */
   paddingBlock?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
+  >;
+  /**
+   * Margin around element.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * margin='4'
+   * margin={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
+  margin?: ResponsiveProp<SpacingScale>;
+  /**
+   * Horizontal margin around element.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * marginInline='4'
+   * marginInline='4 5'
+   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   */
+  marginInline?: ResponsiveProp<
+    | SpacingScale
+    | `${SpacingScale} ${SpacingScale}`
+    | "auto"
+    | `auto ${SpacingScale}`
+    | `${SpacingScale} auto`
+  >;
+  /**
+   * Vertical margin around element.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * marginBlock='4'
+   * marginBlock='4 5'
+   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   */
+  marginBlock?: ResponsiveProp<
+    | SpacingScale
+    | `${SpacingScale} ${SpacingScale}`
+    | "auto"
+    | `auto ${SpacingScale}`
+    | `${SpacingScale} auto`
   >;
   /**
    * CSS `width`
@@ -140,6 +180,38 @@ export interface BasePrimitiveProps {
    * CSS `flex-grow`
    */
   flexGrow?: ResponsiveProp<string>;
+};
+
+export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
+  "className",
+  "padding",
+  "paddingInline",
+  "paddingBlock",
+  "margin",
+  "marginInline",
+  "marginBlock",
+  "width",
+  "minWidth",
+  "maxWidth",
+  "height",
+  "minHeight",
+  "maxHeight",
+  "position",
+  "inset",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "overflow",
+  "overflowX",
+  "overflowY",
+  "flexBasis",
+  "flexGrow",
+  "flexShrink",
+];
+
+interface BasePrimitiveProps extends PrimitiveProps {
+  children: React.ReactElement;
 }
 
 export const BasePrimitive = ({
@@ -148,6 +220,9 @@ export const BasePrimitive = ({
   padding,
   paddingInline,
   paddingBlock,
+  margin,
+  marginInline,
+  marginBlock,
   width,
   minWidth,
   maxWidth,
@@ -172,6 +247,10 @@ export const BasePrimitive = ({
     ...getResponsiveProps("r", "p", "spacing", padding),
     ...getResponsiveProps("r", "pi", "spacing", paddingInline),
     ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    /* Margin */
+    ...getResponsiveProps("r", "m", "spacing", margin),
+    ...getResponsiveProps("r", "mi", "spacing", marginInline),
+    ...getResponsiveProps("r", "mb", "spacing", marginBlock),
     /* Width & height */
     ...getResponsiveValue("r", "w", width),
     ...getResponsiveValue("r", "minw", minWidth),
@@ -203,6 +282,9 @@ export const BasePrimitive = ({
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,
         "navds-r-pb": paddingBlock,
+        "navds-r-m": margin,
+        "navds-r-mi": marginInline,
+        "navds-r-mb": marginBlock,
         "navds-r-w": width,
         "navds-r-minw": minWidth,
         "navds-r-maxw": maxWidth,

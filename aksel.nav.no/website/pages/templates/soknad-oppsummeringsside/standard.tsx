@@ -53,7 +53,7 @@ function Example() {
             </Stack>
           </Bleed>
 
-          <div data-aksel-template="form-summarypage-v1">
+          <div data-aksel-template="form-summarypage-v2">
             <Link href="#">
               <ArrowLeftIcon aria-hidden /> Forrige steg
             </Link>
@@ -167,7 +167,28 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    chromatic: {
+      modes: {
+        desktop: {
+          viewport: {
+            width: 1024,
+          },
+        },
+        tablet: {
+          viewport: {
+            width: 768,
+          },
+        },
+        mobile: {
+          viewport: {
+            width: 400,
+          },
+        },
+      },
+    },
+  },
 };
 
 export const args = {
