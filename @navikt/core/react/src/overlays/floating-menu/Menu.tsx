@@ -584,6 +584,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         data-disabled={disabled ? "" : undefined}
         tabIndex={-1}
         {...rest}
+        style={{ userSelect: "none", ...rest?.style }}
         ref={composedRefs}
         /**
          * We focus items on `pointerMove` to achieve the following:

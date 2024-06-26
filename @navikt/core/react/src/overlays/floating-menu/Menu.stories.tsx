@@ -483,7 +483,6 @@ const itemCss = `
   justify-content: space-between;
   line-height: 1;
   cursor: default;
-  user-select: none;
   white-space: nowrap;
   height: 25px;
   padding: 0 10px;
