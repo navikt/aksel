@@ -297,113 +297,113 @@ interface MenuContentImplProps
 const MenuContentImpl = forwardRef<
   MenuContentImplElement,
   MenuContentImplProps
->((props: MenuContentImplProps, forwardedRef) => {
-  const {
-    onOpenAutoFocus,
-    onCloseAutoFocus,
-    disableOutsidePointerEvents,
-    onEntryFocus,
-    onEscapeKeyDown,
-    onPointerDownOutside,
-    onFocusOutside,
-    onInteractOutside,
-    onDismiss,
-    ...contentProps
-  } = props;
-
-  const descendants = useMenuDescendantsContext();
-
-  const context = useMenuContext();
-  const rootContext = useMenuRootContext();
-
-  const contentRef = useRef<HTMLDivElement>(null);
-  const composedRefs = useMergeRefs(
+>(
+  (
+    {
+      onOpenAutoFocus,
+      onCloseAutoFocus,
+      disableOutsidePointerEvents,
+      onEntryFocus,
+      onEscapeKeyDown,
+      onPointerDownOutside,
+      onFocusOutside,
+      onInteractOutside,
+      onDismiss,
+      ...rest
+    }: MenuContentImplProps,
     forwardedRef,
-    contentRef,
-    context.onContentChange,
-  );
-  const pointerGraceTimerRef = React.useRef(0);
-  const pointerGraceIntentRef = React.useRef<GraceIntent | null>(null);
-  const pointerDirRef = React.useRef<SubMenuSide>("right");
-  const lastPointerXRef = React.useRef(0);
+  ) => {
+    const descendants = useMenuDescendantsContext();
 
-  const isPointerMovingToSubmenu = React.useCallback(
-    (event: React.PointerEvent) => {
-      const isMovingTowards =
-        pointerDirRef.current === pointerGraceIntentRef.current?.side;
-      return (
-        isMovingTowards &&
-        isPointerInGraceArea(event, pointerGraceIntentRef.current?.area)
-      );
-    },
-    [],
-  );
+    const context = useMenuContext();
+    const rootContext = useMenuRootContext();
 
-  return (
-    <MenuContentProvider
-      onItemEnter={React.useCallback(
-        (event) => {
-          if (isPointerMovingToSubmenu(event)) event.preventDefault();
-        },
-        [isPointerMovingToSubmenu],
-      )}
-      onItemLeave={React.useCallback(
-        (event) => {
-          if (isPointerMovingToSubmenu(event)) return;
-          contentRef.current?.focus();
-        },
-        [isPointerMovingToSubmenu],
-      )}
-      onTriggerLeave={React.useCallback(
-        (event) => {
-          if (isPointerMovingToSubmenu(event)) event.preventDefault();
-        },
-        [isPointerMovingToSubmenu],
-      )}
-      pointerGraceTimerRef={pointerGraceTimerRef}
-      onPointerGraceIntentChange={React.useCallback((intent) => {
-        pointerGraceIntentRef.current = intent;
-      }, [])}
-    >
-      <FocusScope
-        onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
-          // when opening, explicitly focus the content area only and leave
-          // `onEntryFocus` in  control of focusing first item
-          event.preventDefault();
-          contentRef.current?.focus({ preventScroll: true });
-        })}
-        onUnmountAutoFocus={onCloseAutoFocus}
+    const contentRef = useRef<HTMLDivElement>(null);
+    const composedRefs = useMergeRefs(
+      forwardedRef,
+      contentRef,
+      context.onContentChange,
+    );
+    const pointerGraceTimerRef = React.useRef(0);
+    const pointerGraceIntentRef = React.useRef<GraceIntent | null>(null);
+    const pointerDirRef = React.useRef<SubMenuSide>("right");
+    const lastPointerXRef = React.useRef(0);
+
+    const isPointerMovingToSubmenu = React.useCallback(
+      (event: React.PointerEvent) => {
+        const isMovingTowards =
+          pointerDirRef.current === pointerGraceIntentRef.current?.side;
+        return (
+          isMovingTowards &&
+          isPointerInGraceArea(event, pointerGraceIntentRef.current?.area)
+        );
+      },
+      [],
+    );
+
+    return (
+      <MenuContentProvider
+        onItemEnter={React.useCallback(
+          (event) => {
+            if (isPointerMovingToSubmenu(event)) event.preventDefault();
+          },
+          [isPointerMovingToSubmenu],
+        )}
+        onItemLeave={React.useCallback(
+          (event) => {
+            if (isPointerMovingToSubmenu(event)) return;
+            contentRef.current?.focus();
+          },
+          [isPointerMovingToSubmenu],
+        )}
+        onTriggerLeave={React.useCallback(
+          (event) => {
+            if (isPointerMovingToSubmenu(event)) event.preventDefault();
+          },
+          [isPointerMovingToSubmenu],
+        )}
+        pointerGraceTimerRef={pointerGraceTimerRef}
+        onPointerGraceIntentChange={React.useCallback((intent) => {
+          pointerGraceIntentRef.current = intent;
+        }, [])}
       >
-        <DismissableLayer
-          asChild
-          disableOutsidePointerEvents={disableOutsidePointerEvents}
-          onEscapeKeyDown={onEscapeKeyDown}
-          onPointerDownOutside={onPointerDownOutside}
-          onFocusOutside={onFocusOutside}
-          onInteractOutside={onInteractOutside}
-          onDismiss={onDismiss}
+        <FocusScope
+          onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
+            // when opening, explicitly focus the content area only and leave
+            // `onEntryFocus` in  control of focusing first item
+            event.preventDefault();
+            contentRef.current?.focus({ preventScroll: true });
+          })}
+          onUnmountAutoFocus={onCloseAutoFocus}
         >
-          <RovingFocus
+          <DismissableLayer
             asChild
-            descendants={descendants}
-            onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-              // only focus first item when using keyboard
-              if (!rootContext.isUsingKeyboardRef.current)
-                event.preventDefault();
-            })}
+            disableOutsidePointerEvents={disableOutsidePointerEvents}
+            onEscapeKeyDown={onEscapeKeyDown}
+            onPointerDownOutside={onPointerDownOutside}
+            onFocusOutside={onFocusOutside}
+            onInteractOutside={onInteractOutside}
+            onDismiss={onDismiss}
           >
-            <Floating.Content
-              role="menu"
-              aria-orientation="vertical"
-              data-state={getOpenState(context.open)}
-              data-aksel-menu-content=""
-              dir="ltr"
-              {...contentProps}
-              ref={composedRefs}
-              style={{ outline: "none", ...contentProps.style }}
-              onKeyDown={composeEventHandlers(
-                contentProps.onKeyDown,
-                (event) => {
+            <RovingFocus
+              asChild
+              descendants={descendants}
+              onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
+                // only focus first item when using keyboard
+                if (!rootContext.isUsingKeyboardRef.current)
+                  event.preventDefault();
+              })}
+            >
+              <Floating.Content
+                role="menu"
+                aria-orientation="vertical"
+                data-state={getOpenState(context.open)}
+                data-aksel-menu-content=""
+                dir="ltr"
+                {...rest}
+                ref={composedRefs}
+                style={{ outline: "none", ...rest.style }}
+                onKeyDown={composeEventHandlers(rest.onKeyDown, (event) => {
                   // submenu key events bubble through portals. We only care about keys in this menu.
                   const target = event.target as HTMLElement;
                   const isKeyDownInside =
@@ -425,37 +425,37 @@ const MenuContentImpl = forwardRef<
                     return;
                   }
                   descendants.firstEnabled()?.node?.focus();
-                },
-              )}
-              onPointerMove={composeEventHandlers(
-                props.onPointerMove,
-                whenMouse((event) => {
-                  const target = event.target as HTMLElement;
-                  const pointerXHasChanged =
-                    lastPointerXRef.current !== event.clientX;
+                })}
+                onPointerMove={composeEventHandlers(
+                  rest.onPointerMove,
+                  whenMouse((event) => {
+                    const target = event.target as HTMLElement;
+                    const pointerXHasChanged =
+                      lastPointerXRef.current !== event.clientX;
 
-                  // We don't use `event.movementX` for this check because Safari will
-                  // always return `0` on a pointer event.
-                  if (
-                    event.currentTarget.contains(target) &&
-                    pointerXHasChanged
-                  ) {
-                    const newDir =
-                      event.clientX > lastPointerXRef.current
-                        ? "right"
-                        : "left";
-                    pointerDirRef.current = newDir;
-                    lastPointerXRef.current = event.clientX;
-                  }
-                }),
-              )}
-            />
-          </RovingFocus>
-        </DismissableLayer>
-      </FocusScope>
-    </MenuContentProvider>
-  );
-});
+                    // We don't use `event.movementX` for this check because Safari will
+                    // always return `0` on a pointer event.
+                    if (
+                      event.currentTarget.contains(target) &&
+                      pointerXHasChanged
+                    ) {
+                      const newDir =
+                        event.clientX > lastPointerXRef.current
+                          ? "right"
+                          : "left";
+                      pointerDirRef.current = newDir;
+                      lastPointerXRef.current = event.clientX;
+                    }
+                  }),
+                )}
+              />
+            </RovingFocus>
+          </DismissableLayer>
+        </FocusScope>
+      </MenuContentProvider>
+    );
+  },
+);
 
 interface MenuContentImplTypeProps
   extends Omit<MenuContentImplProps, keyof MenuContentImplPrivateProps> {}
@@ -1021,7 +1021,6 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
   (props: MenuSubContentProps, forwardedRef) => {
     const descendants = useMenuDescendants();
 
-    const { ...subContentProps } = props;
     const context = useMenuContext();
     const rootContext = useMenuRootContext();
     const subContext = useMenuSubContext();
@@ -1033,7 +1032,7 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
         <MenuContentImpl
           id={subContext.contentId}
           aria-labelledby={subContext.triggerId}
-          {...subContentProps}
+          {...props}
           ref={composedRefs}
           align="start"
           side="right"
