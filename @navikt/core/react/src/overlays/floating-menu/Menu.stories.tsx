@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Menu } from "./Menu";
 
 export default {
@@ -358,10 +358,14 @@ const MenuWithAnchor = (props: MenuProps) => {
 export const MenuWithOpenButton = () => {
   const [open, setOpen] = useState(false);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   return (
     <Menu open={open} onOpenChange={() => {}} modal={false}>
       <Menu.Anchor asChild>
         <button
+          ref={triggerRef}
           type="button"
           onPointerDown={(event) => {
             // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
@@ -370,7 +374,24 @@ export const MenuWithOpenButton = () => {
               setOpen((x) => !x);
               // prevent trigger focusing when opening
               // this allows the content to be given focus without competition
-              if (!open) event.preventDefault();
+              if (!open) {
+                event.preventDefault();
+
+                const cb = (e: any) => {
+                  const isInsideSafezone =
+                    contentRef.current?.contains(e.target) ||
+                    triggerRef.current?.contains(e.target) ||
+                    e.target === triggerRef.current ||
+                    e.target === contentRef.current;
+
+                  if (!isInsideSafezone) {
+                    setOpen(false);
+                  }
+                };
+                document.addEventListener("pointerup", cb, {
+                  once: true,
+                });
+              }
             }
           }}
           onPointerUp={(event) => {
@@ -393,6 +414,7 @@ export const MenuWithOpenButton = () => {
           className="content"
           onCloseAutoFocus={(event) => event.preventDefault()}
           align="start"
+          ref={contentRef}
         >
           <Menu.Item className="item" onSelect={() => window.alert("undo")}>
             Undo
