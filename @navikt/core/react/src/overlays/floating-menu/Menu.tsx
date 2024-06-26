@@ -271,7 +271,7 @@ type DismissableLayerProps = React.ComponentPropsWithoutRef<
 >;
 
 type MenuContentImplPrivateProps = {
-  onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
+  onOpenAutoFocus?: FocusScopeProps["onMountHandler"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
@@ -286,7 +286,7 @@ interface MenuContentImplProps
    * Event handler called when auto-focusing after close.
    * Can be prevented.
    */
-  onCloseAutoFocus?: FocusScopeProps["onUnmountAutoFocus"];
+  onCloseAutoFocus?: FocusScopeProps["onUnmountHandler"];
   onEntryFocus?: RovingFocusProps["onEntryFocus"];
   onEscapeKeyDown?: DismissableLayerProps["onEscapeKeyDown"];
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
@@ -368,13 +368,13 @@ const MenuContentImpl = forwardRef<
         }, [])}
       >
         <FocusScope
-          onMountAutoFocus={composeEventHandlers(onOpenAutoFocus, (event) => {
+          onMountHandler={composeEventHandlers(onOpenAutoFocus, (event) => {
             // when opening, explicitly focus the content area only and leave
             // `onEntryFocus` in  control of focusing first item
             event.preventDefault();
             contentRef.current?.focus({ preventScroll: true });
           })}
-          onUnmountAutoFocus={onCloseAutoFocus}
+          onUnmountHandler={onCloseAutoFocus}
         >
           <DismissableLayer
             asChild

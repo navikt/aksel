@@ -12,26 +12,26 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
    * Event handler called when auto-focusing on mount.
    * Can be prevented.
    */
-  onMountAutoFocus?: (event: Event) => void;
+  onMountHandler?: (event: Event) => void;
   /**
    * Event handler called when auto-focusing on unmount.
    * Can be prevented.
    */
-  onUnmountAutoFocus?: (event: Event) => void;
+  onUnmountHandler?: (event: Event) => void;
 }
 
 const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   (
     {
-      onMountAutoFocus: onMountAutoFocusProp,
-      onUnmountAutoFocus: onUnmountAutoFocusProp,
+      onMountHandler: onMountHandlerCallback,
+      onUnmountHandler: onUnmountHandlerCallback,
       ...rest
     },
     ref,
   ) => {
     const [container, setContainer] = useState<HTMLElement | null>(null);
-    const onMountAutoFocus = useCallbackRef(onMountAutoFocusProp);
-    const onUnmountAutoFocus = useCallbackRef(onUnmountAutoFocusProp);
+    const onMountHandler = useCallbackRef(onMountHandlerCallback);
+    const onUnmountHandler = useCallbackRef(onUnmountHandlerCallback);
 
     const composedRefs = useMergeRefs(ref, (node) => setContainer(node));
 
@@ -44,12 +44,12 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
 
         if (!hasFocus) {
           const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
           container.dispatchEvent(mountEvent);
         }
 
         return () => {
-          container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+          container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
 
           /**
            * https://github.com/facebook/react/issues/17894
@@ -62,21 +62,18 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
               AUTOFOCUS_ON_UNMOUNT,
               EVENT_OPTIONS,
             );
-            container.addEventListener(
-              AUTOFOCUS_ON_UNMOUNT,
-              onUnmountAutoFocus,
-            );
+            container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountHandler);
             container.dispatchEvent(unmountEvent);
 
             // we need to remove the listener after we `dispatchEvent`
             container.removeEventListener(
               AUTOFOCUS_ON_UNMOUNT,
-              onUnmountAutoFocus,
+              onUnmountHandler,
             );
           }, 0);
         };
       }
-    }, [container, onMountAutoFocus, onUnmountAutoFocus]);
+    }, [container, onMountHandler, onUnmountHandler]);
 
     return <Slot tabIndex={-1} {...rest} ref={composedRefs} />;
   },
