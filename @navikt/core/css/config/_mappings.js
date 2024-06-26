@@ -211,6 +211,16 @@ const StyleMappings = {
       main: "date.css",
       dependencies: [typoCss, "button.css", "popover.css"],
     },
+    {
+      component: "Time",
+      main: "",
+      dependenies: [typoCss],
+    },
+    {
+      component: "Phone",
+      main: "phone.css",
+      dependenies: [typoCss],
+    },
   ],
 };
 

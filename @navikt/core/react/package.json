@@ -580,6 +580,26 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
+    "./Phone": {
+      "import": {
+        "types": "./esm/phone/index.d.ts",
+        "default": "./esm/phone/index.js"
+      },
+      "require": {
+        "types": "./cjs/phone/index.d.ts",
+        "default": "./cjs/phone/index.js"
+      }
+    },
+    "./Time": {
+      "import": {
+        "types": "./esm/time/index.d.ts",
+        "default": "./esm/time/index.js"
+      },
+      "require": {
+        "types": "./cjs/time/index.d.ts",
+        "default": "./cjs/time/index.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
