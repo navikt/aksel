@@ -270,10 +270,6 @@ type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
 
-type PopperContentProps = React.ComponentPropsWithoutRef<
-  typeof Floating.Content
->;
-
 type MenuContentImplPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountAutoFocus"];
   onDismiss?: DismissableLayerProps["onDismiss"];
@@ -282,7 +278,10 @@ type MenuContentImplPrivateProps = {
 
 interface MenuContentImplProps
   extends MenuContentImplPrivateProps,
-    Omit<PopperContentProps, "dir" | "onPlaced"> {
+    Omit<
+      React.ComponentPropsWithoutRef<typeof Floating.Content>,
+      "dir" | "onPlaced"
+    > {
   /**
    * Event handler called when auto-focusing after close.
    * Can be prevented.
