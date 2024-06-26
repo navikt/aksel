@@ -497,7 +497,11 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           cancelable: true,
         });
         menuItem.addEventListener(ITEM_SELECT_EVENT, onSelect, { once: true });
-        /* dispatchDiscreteCustomEvent */
+
+        /**
+         * We flush the event synchronously to ensure that the event is dispatched before other events react to side-effect from event.
+         * This is necessary to prevent the menu from potentially closing before we are able to prevent it.
+         */
         ReactDOM.flushSync(() => menuItem.dispatchEvent(itemSelectEvent));
         if (itemSelectEvent.defaultPrevented) {
           isPointerDownRef.current = false;
