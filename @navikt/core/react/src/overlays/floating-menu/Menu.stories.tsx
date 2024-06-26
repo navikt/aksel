@@ -373,6 +373,9 @@ export const MenuWithOpenButton = () => {
               if (!open) event.preventDefault();
             }
           }}
+          onPointerUp={(event) => {
+            console.log(event);
+          }}
           onKeyDown={(event) => {
             if (["Enter", " "].includes(event.key)) setOpen((x) => !x);
             if (event.key === "ArrowDown") setOpen(true);

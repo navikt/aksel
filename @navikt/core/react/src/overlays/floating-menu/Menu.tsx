@@ -43,7 +43,7 @@ type CheckedState = boolean | "indeterminate";
 interface MenuProps {
   children?: React.ReactNode;
   open?: boolean;
-  onOpenChange?(open: boolean): void;
+  onOpenChange?: (open: boolean) => void;
   modal?: boolean;
 }
 
@@ -75,9 +75,9 @@ type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
 
 type MenuContextValue = {
   open: boolean;
-  onOpenChange(open: boolean): void;
+  onOpenChange: (open: boolean) => void;
   content: MenuContentElementRef | null;
-  onContentChange(content: MenuContentElementRef | null): void;
+  onContentChange: (content: MenuContentElementRef | null) => void;
 };
 
 const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
@@ -86,7 +86,7 @@ const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
 });
 
 type MenuRootContextValue = {
-  onClose(): void;
+  onClose: () => void;
   isUsingKeyboardRef: React.RefObject<boolean>;
   modal: boolean;
 };
@@ -182,11 +182,11 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
  * Content
  */
 type MenuContentContextValue = {
-  onItemEnter(event: React.PointerEvent): void;
-  onItemLeave(event: React.PointerEvent): void;
-  onTriggerLeave(event: React.PointerEvent): void;
+  onItemEnter: (event: React.PointerEvent) => void;
+  onItemLeave: (event: React.PointerEvent) => void;
+  onTriggerLeave: (event: React.PointerEvent) => void;
   pointerGraceTimerRef: React.MutableRefObject<number>;
-  onPointerGraceIntentChange(intent: GraceIntent | null): void;
+  onPointerGraceIntentChange: (intent: GraceIntent | null) => void;
 };
 
 const [MenuContentProvider, useMenuContentContext] =
@@ -264,7 +264,6 @@ const MenuRootContentModal = forwardRef<
 /**
  * Menu content implicit
  */
-
 type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
@@ -621,7 +620,6 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
 /**
  * MenuGroup
  */
-
 interface MenuGroupProps extends SlottedDivProps {}
 
 const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
@@ -821,7 +819,7 @@ type MenuSubContextValue = {
   contentId: string;
   triggerId: string;
   trigger: MenuItemElement | null;
-  onTriggerChange(trigger: MenuItemElement | null): void;
+  onTriggerChange: (trigger: MenuItemElement | null) => void;
 };
 
 const [MenuSubProvider, useMenuSubContext] = createContext<MenuSubContextValue>(
