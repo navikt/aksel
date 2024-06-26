@@ -518,10 +518,13 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
         ref={composedRefs}
         disabled={disabled}
         onClick={composeEventHandlers(onClick, handleSelect)}
-        onPointerDown={(event) => {
-          onPointerDown?.(event);
-          isPointerDownRef.current = true;
-        }}
+        onPointerDown={composeEventHandlers(
+          onPointerDown,
+          () => {
+            isPointerDownRef.current = true;
+          },
+          { checkForDefaultPrevented: false },
+        )}
         onPointerUp={composeEventHandlers(onPointerUp, (event) => {
           // Pointer down can move to a different menu item which should activate it on pointer up.
           // We dispatch a click for selection to allow composition with click based triggers and to
