@@ -1,5 +1,15 @@
 # @navikt/aksel-icons
 
+## 6.12.0
+
+### Minor Changes
+
+- Icons: New icon ChildHairEyes ([#3020](https://github.com/navikt/aksel/pull/3020))
+
+### Patch Changes
+
+- Icons: FigureCombination icon adjusted ([#3031](https://github.com/navikt/aksel/pull/3031))
+
 ## 6.11.0
 
 ## 6.10.1
