@@ -330,3 +330,51 @@ export const WithPopover = () => {
     </div>
   );
 };
+
+/**
+ * A simple story without much interactivity (very much incomplete
+ * but shows a good overview of the components & their relationship)
+ * This is essentially 1:1 with the JSDoc example for the component.
+ **/
+export const Simple = () => {
+  return (
+    <>
+      <StoryStyle />
+      <VirtualFocus>
+        <VirtualFocus.Anchor
+          role="combobox"
+          onSelect={() => {
+            console.log("you selected the anchor");
+          }}
+          onActive={() => {
+            console.log("the anchor is now virtually focused");
+          }}
+        >
+          <input type="text" />
+        </VirtualFocus.Anchor>
+        <VirtualFocus.Content>
+          <VirtualFocus.Item
+            onSelect={() => {
+              console.log("you selected the item");
+            }}
+            onActive={() => {
+              console.log("the item is now virtually focused");
+            }}
+          >
+            <p>item 1</p>
+          </VirtualFocus.Item>
+          <VirtualFocus.Item
+            onSelect={() => {
+              console.log("you selected the item");
+            }}
+            onActive={() => {
+              console.log("the item is now virtually focused");
+            }}
+          >
+            <p>item 2</p>
+          </VirtualFocus.Item>
+        </VirtualFocus.Content>
+      </VirtualFocus>
+    </>
+  );
+};
