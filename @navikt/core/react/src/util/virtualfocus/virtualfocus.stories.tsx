@@ -103,17 +103,21 @@ const MyItem = ({
   );
 };
 
-export const Default = () => {
-  const [value, setValue] = useState("");
-
-  return (
-    <>
-      <style>{`
+const StoryStyle = () => (
+  <style>{`
 [data-aksel-virtualfocus="true"] {
   outline: solid 3px var(--a-border-focus);
   border-radius: var(--a-border-radius-medium);
 }
 `}</style>
+);
+
+export const Default = () => {
+  const [value, setValue] = useState("");
+
+  return (
+    <>
+      <StoryStyle />
       <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
@@ -151,33 +155,33 @@ export const Loop = () => {
   const [value, setValue] = useState("");
   return (
     <>
-      <style>{`
-[data-aksel-virtualfocus="true"] {
-  outline: solid 3px var(--a-border-focus);
-  border-radius: var(--a-border-radius-medium);
-}
-`}</style>
-      <VirtualFocus>
+      <StoryStyle />
+      <VirtualFocus loop>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
-            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
-              {"cloud "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
-              {"hanger "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
-              {"hourglass "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
-              {"house "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
-              {"ruler "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<PuzzlePieceIcon aria-hidden />}>
-              {"puzzle piece "}
-            </MyItem>
+            <VStack>
+              <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+                {"cloud "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+                {"hanger "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HourglassIcon aria-hidden />}>
+                {"hourglass "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HouseIcon aria-hidden />}>
+                {"house "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<RulerIcon aria-hidden />}>
+                {"ruler "}
+              </MyItem>
+              <MyItem
+                setValue={setValue}
+                icon={<PuzzlePieceIcon aria-hidden />}
+              >
+                {"puzzle piece "}
+              </MyItem>
+            </VStack>
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
@@ -189,47 +193,49 @@ export const Multiple = () => {
   const [value, setValue] = useState("");
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
+
   return (
     <>
-      <style>{`
-[data-aksel-virtualfocus="true"] {
-  outline: solid 3px var(--a-border-focus);
-  border-radius: var(--a-border-radius-medium);
-}
-`}</style>
+      <StoryStyle />
       <VirtualFocus>
         <MyAnchor setValue={setValue} value={value}>
           <VirtualFocus.Content>
-            <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
-              {"cloud "}
-            </MyItem>
-            <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
-              {"hanger "}
-            </MyItem>
+            <VStack>
+              <MyItem setValue={setValue} icon={<CloudIcon aria-hidden />}>
+                {"cloud "}
+              </MyItem>
+              <MyItem setValue={setValue} icon={<HangerIcon aria-hidden />}>
+                {"hanger "}
+              </MyItem>
+            </VStack>
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
       <VirtualFocus>
         <MyAnchor setValue={setValue2} value={value2}>
           <VirtualFocus.Content>
-            <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
-              {"cloud "}
-            </MyItem>
-            <MyItem setValue={setValue2} icon={<HangerIcon aria-hidden />}>
-              {"hanger "}
-            </MyItem>
+            <VStack>
+              <MyItem setValue={setValue2} icon={<CloudIcon aria-hidden />}>
+                {"cloud "}
+              </MyItem>
+              <MyItem setValue={setValue2} icon={<HangerIcon aria-hidden />}>
+                {"hanger "}
+              </MyItem>
+            </VStack>
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
       <VirtualFocus>
         <MyAnchor setValue={setValue3} value={value3}>
           <VirtualFocus.Content>
-            <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
-              {"cloud "}
-            </MyItem>
-            <MyItem setValue={setValue3} icon={<HangerIcon aria-hidden />}>
-              {"hanger "}
-            </MyItem>
+            <VStack>
+              <MyItem setValue={setValue3} icon={<CloudIcon aria-hidden />}>
+                {"cloud "}
+              </MyItem>
+              <MyItem setValue={setValue3} icon={<HangerIcon aria-hidden />}>
+                {"hanger "}
+              </MyItem>
+            </VStack>
           </VirtualFocus.Content>
         </MyAnchor>
       </VirtualFocus>
@@ -294,17 +300,19 @@ const MyDropDownSearchVirtualfocus = () => {
           }}
           arrow={false}
           offset={0}
-          placement="bottom"
+          placement="bottom-start"
         >
           <VirtualFocus.Content>
             <Popover.Content>
-              {filteredItems.map((i) => {
-                return (
-                  <MyItem setValue={setValue} key={i.text} icon={i.icon}>
-                    {i.text}
-                  </MyItem>
-                );
-              })}
+              <VStack>
+                {filteredItems.map((i) => {
+                  return (
+                    <MyItem setValue={setValue} key={i.text} icon={i.icon}>
+                      {i.text}
+                    </MyItem>
+                  );
+                })}
+              </VStack>
             </Popover.Content>
           </VirtualFocus.Content>
         </Popover>
