@@ -19,7 +19,8 @@ import { Button } from "../../button";
 import { Search } from "../../form/search";
 import { VStack } from "../../layout/stack";
 import { Popover } from "../../popover";
-import { VirtualFocus, useVirtualFocusDescendant } from "./VirtualFocus";
+import { useVirtualFocusDescendant } from "./Context";
+import { VirtualFocus } from "./VirtualFocus";
 
 export default {
   title: "Utilities/VirtualFocus",

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useVirtualFocusInternalContext } from "../VirtualFocus";
+import { useVirtualFocusInternalContext } from "../Context";
 
 export interface VirtualFocusContentProps
   extends React.HTMLAttributes<HTMLDivElement> {}

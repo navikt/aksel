@@ -5,7 +5,7 @@ import { useMergeRefs } from "../../hooks";
 import {
   useVirtualFocusDescendant,
   useVirtualFocusInternalContext,
-} from "../VirtualFocus";
+} from "../Context";
 
 export interface VirtualFocusAnchorProps
   extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,34 +1,13 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { createContext } from "../../util/create-context";
+import React, { useState } from "react";
 import { useId } from "../../util/hooks";
-import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
-import { SlottedDivElementRef } from "./SlottedDivElement";
+import {
+  VirtualFocusDescendantsProvider,
+  VirtualFocusInternalContextProvider,
+  useVirtualFocusDescendantInitializer,
+} from "./Context";
 import { VirtualFocusAnchor } from "./parts/VirtualFocusAnchor";
 import { VirtualFocusContent } from "./parts/VirtualFocusContent";
 import { VirtualFocusItem } from "./parts/VirtualFocusItem";
-
-export const [
-  VirtualFocusDescendantsProvider,
-  useVirtualFocusDescendantsContext,
-  useVirtualFocusDescendantInitializer,
-  useVirtualFocusDescendant,
-] = createDescendantContext<
-  SlottedDivElementRef,
-  {
-    handleOnSelect: () => void;
-    handleOnActive: () => void;
-  }
->();
-
-export const [
-  VirtualFocusInternalContextProvider,
-  useVirtualFocusInternalContext,
-] = createContext<{
-  virtualFocusIdx: number;
-  setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
-  loop: boolean;
-  uniqueId: string;
-}>();
 
 type VirtualFocusProps = {
   children: React.ReactNode;
