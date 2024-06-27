@@ -21,9 +21,9 @@ import {
   SlottedDivProps,
 } from "./parts/SlottedDivElement";
 
-/**
- * Constants
- */
+/* -------------------------------------------------------------------------- */
+/*                                  Constants                                 */
+/* -------------------------------------------------------------------------- */
 const SELECTION_KEYS = ["Enter", " "];
 const SUB_OPEN_KEYS = [...SELECTION_KEYS, "ArrowRight"];
 const SUB_CLOSE_KEYS = ["ArrowLeft"];
@@ -37,9 +37,9 @@ type SubMenuSide = "left" | "right";
 type GraceIntent = { area: Polygon; side: SubMenuSide };
 type CheckedState = boolean | "indeterminate";
 
-/**
- * Menu
- */
+/* -------------------------------------------------------------------------- */
+/*                                    Menu                                    */
+/* -------------------------------------------------------------------------- */
 interface MenuProps {
   children?: React.ReactNode;
   open?: boolean;
@@ -166,9 +166,9 @@ const MenuRoot = ({
 
 const Menu = MenuRoot as MenuComponent;
 
-/**
- * Anchor
- */
+/* -------------------------------------------------------------------------- */
+/*                                 Menu Anchor                                */
+/* -------------------------------------------------------------------------- */
 type MenuAnchorElement = React.ElementRef<typeof Floating.Anchor>;
 type MenuAnchorProps = React.ComponentPropsWithoutRef<typeof Floating.Anchor>;
 
@@ -178,9 +178,9 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
   },
 );
 
-/**
- * Content
- */
+/* -------------------------------------------------------------------------- */
+/*                                Menu Content                                */
+/* -------------------------------------------------------------------------- */
 type MenuContentContextValue = {
   onItemEnter: (event: React.PointerEvent) => void;
   onItemLeave: (event: React.PointerEvent) => void;
@@ -215,9 +215,7 @@ const MenuContent = React.forwardRef<MenuContentImplElement, MenuContentProps>(
   },
 );
 
-/**
- * Non-modal content
- */
+/* ---------------------------- Non-modal content --------------------------- */
 const MenuRootContentNonModal = React.forwardRef<
   MenuContentImplElement,
   MenuContentImplTypeProps
@@ -233,9 +231,7 @@ const MenuRootContentNonModal = React.forwardRef<
   );
 });
 
-/**
- * Modal content
- */
+/* ------------------------------ Modal content ----------------------------- */
 const MenuRootContentModal = forwardRef<
   MenuContentImplElement,
   MenuContentImplTypeProps
@@ -261,9 +257,7 @@ const MenuRootContentModal = forwardRef<
   );
 });
 
-/**
- * Menu content implicit
- */
+/* -------------------------- Menu content implicit ------------------------- */
 type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
@@ -460,9 +454,9 @@ const MenuContentImpl = forwardRef<
 interface MenuContentImplTypeProps
   extends Omit<MenuContentImplProps, keyof MenuContentImplPrivateProps> {}
 
-/**
- * Item
- */
+/* -------------------------------------------------------------------------- */
+/*                                  Menu item                                 */
+/* -------------------------------------------------------------------------- */
 const ITEM_SELECT_EVENT = "menu.itemSelect";
 
 type MenuItemElement = MenuItemImplElement;
@@ -551,6 +545,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
   },
 );
 
+/* --------------------------- Menu Item implicit --------------------------- */
 type MenuItemImplElement = SlottedDivElementRef;
 
 interface MenuItemImplProps extends SlottedDivProps {
@@ -624,9 +619,9 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
   },
 );
 
-/**
- * MenuGroup
- */
+/* -------------------------------------------------------------------------- */
+/*                                  Menu Group                                 */
+/* -------------------------------------------------------------------------- */
 interface MenuGroupProps extends SlottedDivProps {}
 
 const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
@@ -646,9 +641,9 @@ const MenuLabel = forwardRef<SlottedDivElementRef, MenuLabelProps>(
   },
 );
 
-/**
- * MenuPortal
- */
+/* -------------------------------------------------------------------------- */
+/*                                 Menu Portal                                 */
+/* -------------------------------------------------------------------------- */
 type PortalProps = React.ComponentPropsWithoutRef<typeof Portal>;
 type MenuPortalElement = React.ElementRef<typeof Portal>;
 
@@ -672,9 +667,9 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
   },
 );
 
-/**
- * MenuRadio
- */
+/* -------------------------------------------------------------------------- */
+/*                                 Menu Radio                                 */
+/* -------------------------------------------------------------------------- */
 const [RadioGroupProvider, useRadioGroupContext] =
   createContext<MenuRadioGroupProps>({
     providerName: "MenuRadioGroupProvider",
@@ -702,9 +697,9 @@ const MenuRadioGroup = React.forwardRef<
   );
 });
 
-/**
- * MenuItemIndicator
- */
+/* -------------------------------------------------------------------------- */
+/*                             Menu Item Indicator                            */
+/* -------------------------------------------------------------------------- */
 const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
   state: CheckedState;
 }>({
@@ -731,9 +726,9 @@ const MenuItemIndicator = forwardRef<
   );
 });
 
-/**
- * MenuRadio
- */
+/* -------------------------------------------------------------------------- */
+/*                                 Menu Radio                                 */
+/* -------------------------------------------------------------------------- */
 interface MenuRadioItemProps extends MenuItemProps {
   value: string;
 }
@@ -763,9 +758,9 @@ const MenuRadioItem = forwardRef<
   );
 });
 
-/**
- * MenuCheckbox
- */
+/* -------------------------------------------------------------------------- */
+/*                                Menu Checkbox                               */
+/* -------------------------------------------------------------------------- */
 interface MenuCheckboxItemProps extends MenuItemProps {
   checked?: CheckedState;
   // `onCheckedChange` can never be called with `"indeterminate"` from the inside
@@ -801,9 +796,9 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
   },
 );
 
-/**
- * MenuSeparator
- */
+/* -------------------------------------------------------------------------- */
+/*                               Menu Separator                               */
+/* -------------------------------------------------------------------------- */
 interface MenuSeparatorProps extends SlottedDivProps {}
 
 const MenuSeparator = forwardRef<SlottedDivElementRef, MenuSeparatorProps>(
@@ -819,9 +814,9 @@ const MenuSeparator = forwardRef<SlottedDivElementRef, MenuSeparatorProps>(
   },
 );
 
-/**
- * SubMenu
- */
+/* -------------------------------------------------------------------------- */
+/*                                Menu SubMenu                                */
+/* -------------------------------------------------------------------------- */
 type MenuSubContextValue = {
   contentId: string;
   triggerId: string;
@@ -882,9 +877,9 @@ const MenuSub: React.FC<MenuSubProps> = ({
   );
 };
 
-/**
- * SubMenuTrigger
- */
+/* -------------------------------------------------------------------------- */
+/*                            Menu SubMenu Trigger                            */
+/* -------------------------------------------------------------------------- */
 interface MenuSubTriggerProps extends MenuItemImplProps {}
 
 const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
@@ -1012,9 +1007,9 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   },
 );
 
-/**
- * SubMenuContent
- */
+/* -------------------------------------------------------------------------- */
+/*                            Menu SubMenu Content                            */
+/* -------------------------------------------------------------------------- */
 interface MenuSubContentProps
   extends Omit<
     MenuContentImplProps,
@@ -1092,9 +1087,9 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
   },
 );
 
-/**
- * Utilities
- */
+/* -------------------------------------------------------------------------- */
+/*                                  Utilities                                 */
+/* -------------------------------------------------------------------------- */
 function getOpenState(open: boolean) {
   return open ? "open" : "closed";
 }
@@ -1144,9 +1139,7 @@ function whenMouse<E>(
     event.pointerType === "mouse" ? handler(event) : undefined;
 }
 
-/**
- * Dot-notation definitions
- */
+/* -------------------------------------------------------------------------- */
 Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;
 Menu.Content = MenuContent;
