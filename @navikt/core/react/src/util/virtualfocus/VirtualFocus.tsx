@@ -31,7 +31,7 @@ type VirtualFocusProps = {
   children: React.ReactNode;
   /**
    * Whether to cause focus to loop around when it hits the first or last element
-   * @default true
+   * @default false
    **/
   loop?: boolean;
 };
