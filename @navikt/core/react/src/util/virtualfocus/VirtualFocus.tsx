@@ -1,10 +1,11 @@
-import React, { Dispatch, SetStateAction, forwardRef, useState } from "react";
-import { Slot } from "../../slot/Slot";
-import { composeEventHandlers } from "../../util/composeEventHandlers";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { createContext } from "../../util/create-context";
-import { useId, useMergeRefs } from "../../util/hooks";
+import { useId } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { SlottedDivElementRef } from "./SlottedDivElement";
+import { VirtualFocusAnchor } from "./parts/VirtualFocusAnchor";
+import { VirtualFocusContent } from "./parts/VirtualFocusContent";
+import { VirtualFocusItem } from "./parts/VirtualFocusItem";
 
 export const [
   VirtualFocusDescendantsProvider,
@@ -19,13 +20,15 @@ export const [
   }
 >();
 
-const [VirtualFocusInternalContextProvider, useVirtualFocusInternalContext] =
-  createContext<{
-    virtualFocusIdx: number;
-    setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
-    loop: boolean;
-    uniqueId: string;
-  }>();
+export const [
+  VirtualFocusInternalContextProvider,
+  useVirtualFocusInternalContext,
+] = createContext<{
+  virtualFocusIdx: number;
+  setVirtualFocusIdx: Dispatch<SetStateAction<number>>;
+  loop: boolean;
+  uniqueId: string;
+}>();
 
 type VirtualFocusProps = {
   children: React.ReactNode;
@@ -99,171 +102,6 @@ export const VirtualFocus = ({ children, loop = false }: VirtualFocusProps) => {
     </VirtualFocusInternalContextProvider>
   );
 };
-
-export interface VirtualFocusAnchorProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The role of the container. This is a limited subset of roles that
-   * require manual focus management.
-   *
-   * Children that are to get focus inside this container element shall be
-   * pointed to by `aria-activedescendant`.
-   **/
-  role:
-    | "combobox"
-    | "grid"
-    | "listbox"
-    | "menu"
-    | "menubar"
-    | "radiogroup"
-    | "tree"
-    | "treegrid"
-    | "tablist";
-  /**
-   * The function that is run when the focused element
-   * is to be selected (eg. do an actual search, change route... etc)
-   */
-  onSelect: () => void;
-  /**
-   * The function that is run when the element gets
-   * virtual focus set to it.
-   */
-  onActive: () => void;
-  children: React.ReactElement;
-  /**
-   * Set this to `0` if you want the Anchor container itself
-   * to be focusable. Since this Anchor is hoisted & merged with
-   * its first child, you most likely want to keep this as `0`.
-   * @default 0
-   */
-  tabIndex?: number;
-}
-
-/**
- * Must have a single child that is an input element.
- */
-export const VirtualFocusAnchor = forwardRef<
-  HTMLInputElement,
-  VirtualFocusAnchorProps
->(({ onSelect, onActive, children, ...rest }, ref) => {
-  const { virtualFocusIdx, setVirtualFocusIdx, loop, uniqueId } =
-    useVirtualFocusInternalContext();
-
-  const { register, descendants, index } = useVirtualFocusDescendant({
-    handleOnSelect: () => {
-      onSelect();
-    },
-    handleOnActive: () => {
-      setVirtualFocusIdx(0);
-      onActive();
-    },
-  });
-
-  const mergedRefs = useMergeRefs(ref, register);
-
-  return (
-    <Slot
-      ref={mergedRefs}
-      {...rest}
-      id={`virtualfocus-${uniqueId}-${index}`}
-      tabIndex={0}
-      aria-owns={`virtualfocus-${uniqueId}-content`}
-      aria-controls={`virtualfocus-${uniqueId}-content`}
-      aria-activedescendant={`virtualfocus-${uniqueId}-${virtualFocusIdx}`}
-      onKeyDown={composeEventHandlers(rest.onKeyDown, (event) => {
-        if (event.key === "ArrowDown") {
-          event.preventDefault();
-          const to_focus_descendant = descendants.next(virtualFocusIdx, loop);
-          if (to_focus_descendant) {
-            to_focus_descendant.handleOnActive();
-          }
-        } else if (event.key === "ArrowUp") {
-          event.preventDefault();
-          const to_focus_descendant = descendants.prev(virtualFocusIdx, loop);
-          if (to_focus_descendant) {
-            to_focus_descendant.handleOnActive();
-          }
-        } else if (event.key === "Enter") {
-          const curr = descendants.item(virtualFocusIdx);
-          if (curr?.handleOnSelect) {
-            curr.handleOnSelect();
-          }
-        }
-      })}
-    >
-      {children}
-    </Slot>
-  );
-});
-
-export interface VirtualFocusContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
-
-export const VirtualFocusContent = forwardRef<
-  HTMLDivElement,
-  VirtualFocusContentProps
->(({ children, ...rest }, ref) => {
-  const { uniqueId } = useVirtualFocusInternalContext();
-  return (
-    <div ref={ref} {...rest} id={`virtualfocus-${uniqueId}-content`}>
-      {children}
-    </div>
-  );
-});
-
-export interface VirtualFocusItemProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The function that is run when the element is focused
-   * (virtually, not actual focus, eg. set a border around an item)
-   */
-  onActive: () => void;
-  /**
-   * The function that is run when the focused element
-   * is to be selected (eg. do an actual search, change route... etc)
-   */
-  onSelect: () => void;
-  children: React.ReactNode;
-}
-
-/**
- * Contains an item you want to be iterable via virtual focus.
- */
-export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
-  ({ children, onActive, onSelect, ...rest }, ref) => {
-    const { virtualFocusIdx, setVirtualFocusIdx, uniqueId } =
-      useVirtualFocusInternalContext();
-    const { register, index } = useVirtualFocusDescendant({
-      handleOnActive: () => {
-        setVirtualFocusIdx(index);
-        onActive();
-      },
-      handleOnSelect: () => {
-        onSelect();
-      },
-    });
-
-    const mergedRefs = useMergeRefs(ref, register);
-    return (
-      <Slot
-        ref={mergedRefs}
-        {...rest}
-        id={`virtualfocus-${uniqueId}-${index}`}
-        data-aksel-virtualfocus={virtualFocusIdx === index}
-        tabIndex={-1}
-        onClick={composeEventHandlers(rest.onClick, () => {
-          onSelect();
-        })}
-        onMouseMove={composeEventHandlers(rest.onMouseMove, () => {
-          setVirtualFocusIdx(index);
-          onActive();
-        })}
-      >
-        {children}
-      </Slot>
-    );
-  },
-);
 
 VirtualFocus.Anchor = VirtualFocusAnchor;
 VirtualFocus.Item = VirtualFocusItem;
