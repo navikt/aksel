@@ -41,6 +41,7 @@ Default.args = {
   isLoading: false,
   isMultiSelect: false,
   allowNewValues: false,
+  onChange: console.log,
 };
 Default.argTypes = {
   isListOpen: {
@@ -189,10 +190,8 @@ export const MultiSelectWithExternalChips: StoryFn<{
         onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={props.controlled ? value : undefined}
-        onChange={(event) =>
-          props.controlled
-            ? setValue(event?.currentTarget.value || "")
-            : undefined
+        onChange={(newValue) =>
+          props.controlled ? setValue(newValue || "") : undefined
         }
         label="Komboboks"
         size="medium"
@@ -231,7 +230,7 @@ export const ComboboxWithNoHits: StoryFunction = (props) => {
       label="Komboboks (uten søketreff)"
       options={props.options}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={true}
     />
   );
@@ -278,7 +277,7 @@ export const Controlled: StoryFn<{
         filteredOptions={filteredOptions}
         isMultiSelect
         options={props.options}
-        onChange={(event) => setValue(event?.target.value || "")}
+        onChange={(newValue) => setValue(newValue || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}
@@ -350,7 +349,7 @@ export const MaxSelectedOptions: StoryFunction = () => {
       allowNewValues
       isListOpen={comboboxRef.current ? undefined : true}
       value={value}
-      onChange={(event) => setValue(event?.target.value)}
+      onChange={(newValue) => setValue(newValue)}
       ref={comboboxRef}
     />
   );

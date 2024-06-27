@@ -1,4 +1,4 @@
-import React, { ChangeEvent, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 import { FormFieldProps } from "../useFormField";
 
 /**
@@ -91,10 +91,7 @@ export interface ComboboxProps
    *
    * @param event
    */
-  onChange?: (
-    event: ChangeEvent<HTMLInputElement> | null,
-    value?: string,
-  ) => void;
+  onChange?: (value: string) => void;
   /**
    * Callback function triggered whenever the input field is cleared.
    *
