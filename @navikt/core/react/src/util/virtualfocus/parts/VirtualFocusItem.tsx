@@ -34,9 +34,7 @@ export const VirtualFocusItem = forwardRef<HTMLElement, VirtualFocusItemProps>(
         setVirtualFocusIdx(index);
         onActive();
       },
-      handleOnSelect: () => {
-        onSelect();
-      },
+      handleOnSelect: onSelect,
     });
 
     const mergedRefs = useMergeRefs(ref, register);

@@ -57,13 +57,11 @@ export const VirtualFocusAnchor = forwardRef<
     useVirtualFocusInternalContext();
 
   const { register, descendants, index } = useVirtualFocusDescendant({
-    handleOnSelect: () => {
-      onSelect();
-    },
     handleOnActive: () => {
       setVirtualFocusIdx(0);
       onActive();
     },
+    handleOnSelect: onSelect,
   });
 
   const mergedRefs = useMergeRefs(ref, register);
