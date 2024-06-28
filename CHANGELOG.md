@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.13
+
+### @navikt/ds-react
+
+- Modal: New prop `placement` for anchoring the modal to the top of the viewport. ([#3033](https://github.com/navikt/aksel/pull/3033))
+
+### @navikt/ds-css
+
+- Modal: New prop `placement` for anchoring the modal to the top of the viewport. ([#3033](https://github.com/navikt/aksel/pull/3033))
+
 ## 6.12
 
 ### @navikt/ds-react

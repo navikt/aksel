@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.13.0
+
+### Minor Changes
+
+- Modal: New prop `placement` for anchoring the modal to the top of the viewport. ([#3033](https://github.com/navikt/aksel/pull/3033))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.13.0
+  - @navikt/aksel-icons@6.13.0
+
 ## 6.12.0
 
 ### Minor Changes
