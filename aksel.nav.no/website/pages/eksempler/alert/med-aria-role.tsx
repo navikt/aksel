@@ -33,5 +33,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 10,
+  index: 6,
+  desc: "Bruk 'role' dersom alerten vises dynamisk.",
 };

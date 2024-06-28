@@ -3,12 +3,12 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap="4" align="center">
-      <Alert size="small" variant="success">
-        Søknad er sendt inn!
+    <VStack gap="6" align="center">
+      <Alert size="medium" variant="success">
+        Medium success alert
       </Alert>
-      <Alert size="small" variant="success" inline>
-        Søknad er sendt inn!
+      <Alert size="small" variant="success">
+        Small success alert
       </Alert>
     </VStack>
   );
@@ -23,5 +23,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 5,
+  index: 1,
 };
