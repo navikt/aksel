@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { useVirtualFocusInternalContext } from "../Context";
 
 export interface VirtualFocusContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {}
 
 export const VirtualFocusContent = forwardRef<
   HTMLDivElement,
