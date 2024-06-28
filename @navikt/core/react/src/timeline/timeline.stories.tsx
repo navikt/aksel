@@ -8,7 +8,7 @@ export default {
   title: "ds-react/Timeline",
   component: Timeline,
   argTypes: {},
-} as Meta;
+} satisfies Meta<typeof Timeline>;
 
 const DummyLabel = () => {
   return (

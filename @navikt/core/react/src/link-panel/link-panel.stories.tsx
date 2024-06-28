@@ -12,7 +12,7 @@ export default {
       },
     },
   },
-} as Meta;
+} satisfies Meta<typeof LinkPanel>;
 
 export const Default = {
   render: (props: any) => {

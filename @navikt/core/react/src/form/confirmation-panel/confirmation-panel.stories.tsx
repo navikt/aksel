@@ -20,7 +20,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof ConfirmationPanel>;
 
 type Story = StoryObj<typeof ConfirmationPanel>;
 

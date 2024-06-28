@@ -28,7 +28,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof TextField>;
 
 type Story = StoryObj<typeof TextField>;
 

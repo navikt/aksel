@@ -31,7 +31,7 @@ export default {
   parameters: {
     chromatic: { disable: false },
   },
-} as Meta;
+} satisfies Meta<typeof Loader>;
 
 type Story = StoryObj<typeof Loader>;
 
