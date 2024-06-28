@@ -33,6 +33,11 @@ export default {
       </VStack>
     ),
   ],
+  parameters: {
+    chromatic: {
+      disable: true,
+    },
+  },
 } as Meta;
 
 const MyAnchor = forwardRef<
