@@ -38,7 +38,7 @@ export default {
       disable: true,
     },
   },
-} as Meta;
+} satisfies Meta<typeof VirtualFocus>;
 
 const MyAnchor = forwardRef<
   HTMLInputElement,
