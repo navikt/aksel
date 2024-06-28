@@ -8,7 +8,7 @@ import {
 } from "../Context";
 
 export interface VirtualFocusAnchorProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   /**
    * The role of the container. This is a limited subset of roles that
    * require manual focus management.
@@ -38,7 +38,7 @@ export interface VirtualFocusAnchorProps
   onActive: () => void;
   children: React.ReactElement;
   /**
-   * Set this to `0` if you want the Anchor container itself
+   * Set this to `0` if you want the Anchor itself
    * to be focusable. Since this Anchor is hoisted & merged with
    * its first child, you most likely want to keep this as `0`.
    * @default 0
