@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { BodyLong, Button, Modal, ReadMore } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -9,11 +9,20 @@ const Example = () => {
     <div className="py-32">
       <Button onClick={() => ref.current?.showModal()}>Åpne modal</Button>
 
-      <Modal ref={ref} header={{ heading: "Overskrift" }} placement="top">
+      <Modal
+        placement="top"
+        ref={ref}
+        header={{ heading: "Overskrift" }}
+        width="small"
+      >
         <Modal.Body>
-          <BodyLong>
-            Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
-          </BodyLong>
+          <BodyLong>Culpa aliquip ut cupidatat laborum minim quis ex.</BodyLong>
+          <ReadMore header="Qui incididunt dolor do ad ut.">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt
+            debitis deleniti corrupti dolore perspiciatis. Tempora vero numquam
+            ullam aliquam ipsum quo, animi aspernatur facere voluptatum aperiam
+            cum, repellat velit repudiandae.
+          </ReadMore>
         </Modal.Body>
       </Modal>
     </div>
