@@ -19,7 +19,6 @@ import { Button } from "../../button";
 import { Search } from "../../form/search";
 import { VStack } from "../../layout/stack";
 import { Popover } from "../../popover";
-import { useVirtualFocusDescendant } from "./Context";
 import { VirtualFocus } from "./VirtualFocus";
 
 export default {
@@ -44,10 +43,7 @@ const MyAnchor = forwardRef<
     setValue: Dispatch<SetStateAction<string>>;
   }
 >(({ children, value, setValue }, ref) => {
-  const { descendants } = useVirtualFocusDescendant();
   const searchRef = useRef<HTMLInputElement>(null);
-
-  const to_focus = descendants.item(0);
 
   return (
     <div style={{ position: "relative" }}>
@@ -67,7 +63,6 @@ const MyAnchor = forwardRef<
           value={value}
           onChange={(current_input) => {
             setValue(current_input);
-            to_focus?.handleOnActive();
           }}
           ref={searchRef}
         />
