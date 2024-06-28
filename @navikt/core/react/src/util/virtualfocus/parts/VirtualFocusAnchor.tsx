@@ -71,9 +71,9 @@ export const VirtualFocusAnchor = forwardRef<
   return (
     <Slot
       ref={mergedRefs}
+      tabIndex={0}
       {...rest}
       id={`virtualfocus-${uniqueId}-${index}`}
-      tabIndex={0}
       aria-owns={`virtualfocus-${uniqueId}-content`}
       aria-controls={`virtualfocus-${uniqueId}-content`}
       aria-activedescendant={`virtualfocus-${uniqueId}-${virtualFocusIdx}`}
