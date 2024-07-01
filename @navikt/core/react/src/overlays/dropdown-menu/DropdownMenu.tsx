@@ -210,3 +210,17 @@ export const DropdownMenuContent = React.forwardRef<
     );
   },
 );
+
+/* -------------------------------------------------------------------------- */
+/*                              DropdownMenuGroup                             */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuGroupElement = React.ElementRef<typeof Menu.Group>;
+type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
+interface DropdownMenuGroupProps extends MenuGroupProps {}
+
+export const DropdownMenuGroup = forwardRef<
+  DropdownMenuGroupElement,
+  DropdownMenuGroupProps
+>((props: DropdownMenuGroupProps, ref) => {
+  return <Menu.Group ref={ref} {...props} />;
+});
