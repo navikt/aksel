@@ -14,14 +14,6 @@ import InternalHeader from "./InternalHeader";
 export default {
   title: "ds-react/InternalHeader",
   component: InternalHeader,
-  argTypes: {
-    user: {
-      control: {
-        type: "radio",
-      },
-      options: ["simple", "with description", "with dropdown"],
-    },
-  },
   parameters: {
     chromatic: { disable: true },
   },
