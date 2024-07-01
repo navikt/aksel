@@ -10,28 +10,28 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: [
-          "3xlarge",
-          "2xlarge",
-          "xlarge",
-          "large",
-          "medium",
-          "small",
-          "xsmall",
-        ],
       },
+      options: [
+        "3xlarge",
+        "2xlarge",
+        "xlarge",
+        "large",
+        "medium",
+        "small",
+        "xsmall",
+      ],
     },
     variant: {
       control: {
         type: "radio",
-        options: ["neutral", "interaction", "inverted"],
       },
+      options: ["neutral", "interaction", "inverted"],
     },
   },
   parameters: {
     chromatic: { disable: false },
   },
-} as Meta;
+} satisfies Meta<typeof Loader>;
 
 type Story = StoryObj<typeof Loader>;
 

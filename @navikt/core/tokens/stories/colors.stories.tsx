@@ -4,7 +4,7 @@ import tokens from "../docs.json";
 
 export default {
   title: "ds-tokens/Colors",
-} as Meta;
+} satisfies Meta;
 
 /**
  * No need to create single Chromatic-story since we want to keep global and semantic colors separated.

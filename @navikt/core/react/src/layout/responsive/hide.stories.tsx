@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Hide } from ".";
 import { Tag } from "../../tag";
@@ -7,9 +7,16 @@ import { VStack } from "../stack";
 export default {
   title: "ds-react/Primitives/Hide",
   component: Hide,
+  parameters: {
+    chromatic: {
+      disable: true,
+    },
+  },
 } satisfies Meta<typeof Hide>;
 
-export const Default = {
+type Story = StoryObj<typeof Hide>;
+
+export const Default: Story = {
   render: () => (
     <VStack gap="12">
       <VStack gap="2" align="center">
@@ -44,7 +51,7 @@ export const Default = {
   ),
 };
 
-export const AsChild = {
+export const AsChild: Story = {
   render: () => (
     <VStack gap="12">
       <VStack gap="2" align="center">
@@ -77,4 +84,20 @@ export const AsChild = {
       </VStack>
     </VStack>
   ),
+};
+
+export const Chromatic: Story = {
+  render: (props, context) => (
+    <VStack gap="4">
+      <h2>Default</h2>
+      {Default.render?.(props, context)}
+      <h2>AsChild</h2>
+      {AsChild.render?.(props, context)}
+    </VStack>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
 };

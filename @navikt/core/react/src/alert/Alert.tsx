@@ -16,7 +16,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Changes colors and icon usage when changed.
+   * Level of severity. Changes colors and icon.
    */
   variant: "error" | "warning" | "info" | "success";
   /**
@@ -35,15 +35,15 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   contentMaxWidth?: boolean;
   /**
-   * Removes background from Alert.
+   * Removes background, border and padding.
    * @default false
    */
   inline?: boolean;
   /**
-   * Removes close-button(X) when false.
+   * Adds a close-button (X).
    *
    * **Requires onClose to be set**.
-   * @default true
+   * @default false
    */
   closeButton?: boolean;
   /**

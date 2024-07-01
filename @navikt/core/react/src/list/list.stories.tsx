@@ -16,7 +16,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof List>;
 
 type Story = StoryObj<typeof List>;
 

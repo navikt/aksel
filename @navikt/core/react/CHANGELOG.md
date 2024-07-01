@@ -1,5 +1,33 @@
 # @navikt/ds-react
 
+## 6.13.0
+
+### Minor Changes
+
+- Modal: New prop `placement` for anchoring the modal to the top of the viewport. ([#3033](https://github.com/navikt/aksel/pull/3033))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.13.0
+  - @navikt/aksel-icons@6.13.0
+
+## 6.12.0
+
+### Minor Changes
+
+- Primitives: Added support for padding, paddingInline, paddingBlock, margin, marginInline, marginBlock, width, minWidth, maxWidth, height, minHeight, maxHeight, position, inset, top, right, left, bottom, overflow, overflowX, overflowY, flexBasis, flexGrow, flexShrink to Box, HGrid and Stack. ([#3003](https://github.com/navikt/aksel/pull/3003))
+
+### Patch Changes
+
+- ToggleGroup: Selecting already selected value now avoids sending extra event ([#3012](https://github.com/navikt/aksel/pull/3012))
+
+- Alert: Fix alignment, add prop for toggling content max-width, and adjust title on close icon. ([#3007](https://github.com/navikt/aksel/pull/3007))
+
+- Updated dependencies [[`ff8072e35`](https://github.com/navikt/aksel/commit/ff8072e352f4f84f802a6427e1692ff223af722c), [`f1d8e9c4d`](https://github.com/navikt/aksel/commit/f1d8e9c4d357226893da4fdc3feb8063d7d830bb)]:
+  - @navikt/aksel-icons@6.12.0
+  - @navikt/ds-tokens@6.12.0
+
 ## 6.11.0
 
 ### Minor Changes
