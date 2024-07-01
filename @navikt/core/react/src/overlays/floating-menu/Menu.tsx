@@ -603,7 +603,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         )}
         onPointerLeave={composeEventHandlers(
           onPointerLeave,
-          whenMouse((event) => contentContext.onItemLeave(event)),
+          whenMouse(contentContext.onItemLeave),
         )}
       />
     );
