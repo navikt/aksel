@@ -362,7 +362,7 @@ interface DropdownMenuSubProps {
   children?: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
-  onOpenChange?(open: boolean): void;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const DropdownMenuSub = (props: DropdownMenuSubProps) => {
