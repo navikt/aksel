@@ -332,3 +332,80 @@ export const DropdownMenuSeparator = forwardRef<
 >((props: DropdownMenuSeparatorProps, ref) => {
   return <Menu.Separator ref={ref} {...props} />;
 });
+
+/* -------------------------------------------------------------------------- */
+/*                              DropdownMenuSub                               */
+/* -------------------------------------------------------------------------- */
+interface DropdownMenuSubProps {
+  children?: React.ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?(open: boolean): void;
+}
+
+export const DropdownMenuSub = (props: DropdownMenuSubProps) => {
+  const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
+
+  const [open = false, setOpen] = useControllableState({
+    value: openProp,
+    defaultValue: defaultOpen,
+    onChange: onOpenChange,
+  });
+
+  return (
+    <Menu.Sub open={open} onOpenChange={setOpen}>
+      {children}
+    </Menu.Sub>
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                           DropdownMenuSubTrigger                           */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
+type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
+  typeof Menu.SubTrigger
+>;
+interface DropdownMenuSubTriggerProps extends MenuSubTriggerProps {}
+
+export const DropdownMenuSubTrigger = forwardRef<
+  DropdownMenuSubTriggerElement,
+  DropdownMenuSubTriggerProps
+>((props: DropdownMenuSubTriggerProps, ref) => {
+  return <Menu.SubTrigger ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                           DropdownMenuSubContent                           */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
+type MenuSubContentProps = React.ComponentPropsWithoutRef<
+  typeof Menu.SubContent
+>;
+interface DropdownMenuSubContentProps extends MenuSubContentProps {}
+
+export const DropdownMenuSubContent = forwardRef<
+  DropdownMenuSubContentElement,
+  DropdownMenuSubContentProps
+>((props: DropdownMenuSubContentProps, ref) => {
+  return (
+    <Menu.SubContent
+      ref={ref}
+      {...props}
+      style={{
+        ...props.style,
+        ...{
+          "--ac-dropdown-menu-content-transform-origin":
+            "var(--ac-floating-transform-origin)",
+          "--ac-dropdown-menu-content-available-width":
+            "var(--ac-floating-available-width)",
+          "--ac-dropdown-menu-content-available-height":
+            "var(--ac-floating-available-height)",
+          "--ac-dropdown-menu-trigger-width": "var(--ac-floating-anchor-width)",
+          "--ac-dropdown-menu-trigger-height":
+            "var(--ac-floating-anchor-height)",
+        },
+      }}
+    />
+  );
+});
