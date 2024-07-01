@@ -32,7 +32,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof Search>;
 
 type Story = StoryObj<typeof Search>;
 

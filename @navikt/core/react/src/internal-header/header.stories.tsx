@@ -25,7 +25,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof InternalHeader>;
 
 type Story = StoryObj<typeof InternalHeader>;
 
@@ -126,6 +126,13 @@ export const Default = {
   args: {
     titleAsHeading: false,
     systemMenu: false,
+    user: "simple",
+  },
+  argTypes: {
+    user: {
+      control: { type: "radio" },
+      options: ["simple", "with description", "with dropdown"],
+    },
   },
 };
 

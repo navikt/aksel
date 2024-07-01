@@ -30,7 +30,7 @@ export default {
       options: ["top", "right", "bottom", "left"],
     },
   },
-} as Meta;
+} satisfies Meta<typeof Tooltip>;
 
 export const Demo = () => (
   <div>

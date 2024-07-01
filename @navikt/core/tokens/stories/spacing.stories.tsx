@@ -5,7 +5,7 @@ import * as tokens from "../dist/tokens.js";
 
 export default {
   title: "ds-tokens/Spacing",
-} as Meta;
+} satisfies Meta;
 
 export const Spacing = () => {
   const allSpacing: { [key: string]: string } = Object.entries(tokens).reduce(
