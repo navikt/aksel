@@ -70,7 +70,6 @@ export const Variants: StoryFn = () => {
 export const FullWidth: StoryFn = () => {
   return (
     <VStack gap="4">
-      <h2>FullWidth</h2>
       <Alert variant="info" fullWidth>
         Id elit esse enim reprehenderit enim nisi veniam nostrud.
       </Alert>
