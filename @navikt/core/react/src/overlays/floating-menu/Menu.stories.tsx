@@ -515,7 +515,7 @@ const itemCss = `
 const storyStyles = (
   <style>{`
 
-    *:focus{
+    *:focus {
       color: red !important;
     }
 
@@ -546,10 +546,6 @@ const storyStyles = (
       ${itemCss}
       outline: none;
 
-      &[data-highlighted] {
-        backgroundColor: black;
-        color: white;
-      }
 
       &[data-disabled] {
         color: gray !important;
@@ -562,10 +558,6 @@ const storyStyles = (
 
     .subTrigger {
       ${itemCss}
-      &:not([data-highlighted])[data-state="open"] {
-        backgroundColor: gray;
-        color: black;
-      }
 
       &[data-disabled] {
         color: gray;

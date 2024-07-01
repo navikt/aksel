@@ -558,8 +558,6 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
       disabled = false,
       onPointerMove,
       onPointerLeave,
-      onFocus,
-      onBlur,
       ...rest
     }: MenuItemImplProps,
     forwardedRef,
@@ -569,12 +567,10 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
     const contentContext = useMenuContentContext();
     const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
-    const [isFocused, setIsFocused] = useState(false);
 
     return (
       <SlottedDivElement
         role="menuitem"
-        data-highlighted={isFocused ? "" : undefined}
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
         tabIndex={-1}
@@ -610,10 +606,6 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
           onPointerLeave,
           whenMouse((event) => contentContext.onItemLeave(event)),
         )}
-        onFocus={composeEventHandlers(onFocus, () => {
-          setIsFocused(true);
-        })}
-        onBlur={composeEventHandlers(onBlur, () => setIsFocused(false))}
       />
     );
   },
