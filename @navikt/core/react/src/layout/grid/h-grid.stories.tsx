@@ -23,7 +23,7 @@ export default {
       control: { type: "radio" },
     },
   },
-} as Meta;
+} satisfies Meta<typeof HGrid>;
 
 type Story = StoryObj<typeof HGrid>;
 
