@@ -88,6 +88,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       onCancel,
       closeOnBackdropClick,
       width,
+      placement,
       portal,
       className,
       "aria-labelledby": ariaLabelledby,
@@ -147,9 +148,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       typeof width === "string" && ["small", "medium"].includes(width);
 
     const mergedClassName = cl("navds-modal", className, {
-      polyfillClassName: needPolyfill,
+      [polyfillClassName]: needPolyfill,
       "navds-modal--autowidth": !width,
       [`navds-modal--${width}`]: isWidthPreset,
+      "navds-modal--top": placement === "top" && !needPolyfill,
     });
 
     const mergedStyle = {

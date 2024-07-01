@@ -17,6 +17,14 @@ const meta: Meta<typeof Modal> = {
 };
 export default meta;
 
+const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat. Duis aute irure dolor in
+reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.`;
+
 export const WithUseRef: StoryFn = () => {
   const ref = useRef<HTMLDialogElement>(null);
   const ref2 = useRef<HTMLDialogElement>(null);
@@ -37,15 +45,7 @@ export const WithUseRef: StoryFn = () => {
         closeOnBackdropClick
       >
         <Modal.Body>
-          <BodyLong spacing>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </BodyLong>
+          <BodyLong spacing>{lorem}</BodyLong>
 
           {/* Nested modal */}
           <Modal
@@ -72,15 +72,7 @@ export const WithUseRef: StoryFn = () => {
             </Modal.Footer>
           </Modal>
 
-          <BodyLong>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </BodyLong>
+          <BodyLong>{lorem}</BodyLong>
         </Modal.Body>
         <Modal.Footer>
           <Button>Primary</Button>
@@ -152,15 +144,7 @@ WithUseState.parameters = { chromatic: { disable: true } };
 export const EmptyHeader: StoryFn = () => (
   <Modal open onClose={() => null} aria-label="Modal with empty header">
     <Modal.Header />
-    <Modal.Body>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </Modal.Body>
+    <Modal.Body>{lorem}</Modal.Body>
   </Modal>
 );
 
@@ -215,6 +199,99 @@ export const Large800: StoryFn = () => (
   </Modal>
 );
 Large800.storyName = "Size = 800px";
+
+export const PlacementTopShort: StoryFn = () => (
+  <div style={{ width: "100vw", height: "100vh" }}>
+    <style>{`#storybook-root { padding: 0 !important }`}</style>
+    <Modal
+      open
+      onClose={() => null}
+      placement="top"
+      header={{ heading: "placement = top" }}
+    >
+      <Modal.Body>
+        This modal should be top anchored, except on mobile and old browsers.
+      </Modal.Body>
+    </Modal>
+  </div>
+);
+PlacementTopShort.parameters = {
+  chromatic: {
+    modes: {
+      mobile: {
+        viewport: {
+          width: 400,
+          height: 400,
+        },
+      },
+      desktop: {
+        viewport: {
+          width: 1024,
+          height: 600,
+        },
+      },
+    },
+  },
+};
+
+export const PlacementTopLong: StoryFn = () => {
+  const ref = useRef<HTMLDialogElement>(null);
+  return (
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <style>{`#storybook-root { padding: 0 !important }`}</style>
+      <Modal
+        open
+        onClose={() => null}
+        placement="top"
+        header={{ heading: "placement = top" }}
+      >
+        <Modal.Body>
+          <BodyLong spacing>
+            This modal should be top anchored, except on mobile and old
+            browsers.
+          </BodyLong>
+          <BodyLong spacing>{lorem}</BodyLong>
+          <BodyLong>{lorem}</BodyLong>
+
+          <Modal
+            ref={ref}
+            onClose={() => null}
+            placement="top"
+            header={{ heading: "placement = top (Nested)" }}
+          >
+            <Modal.Body>
+              This modal should also be top anchored, except on mobile and old
+              browsers.
+            </Modal.Body>
+          </Modal>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => ref.current?.showModal()}>
+            Open nested modal
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+PlacementTopLong.parameters = {
+  chromatic: {
+    modes: {
+      mobile: {
+        viewport: {
+          width: 400,
+          height: 400,
+        },
+      },
+      desktop: {
+        viewport: {
+          width: 1024,
+          height: 600,
+        },
+      },
+    },
+  },
+};
 
 export const WithTooltip: StoryFn = () => {
   const ref = useRef<HTMLDialogElement>(null);
@@ -295,7 +372,7 @@ export const WithSrOnlyElement: StoryFn = () => (
 );
 
 export const ChromaticViewportTesting: StoryFn = () => (
-  <div id="modal-story-wrapper" style={{ width: "100vw", height: "100vh" }}>
+  <div style={{ width: "100vw", height: "100vh" }}>
     <style>{`#storybook-root { padding: 0 !important }`}</style>
     <Modal
       open
@@ -306,24 +383,8 @@ export const ChromaticViewportTesting: StoryFn = () => (
         <BodyLong spacing>
           This story is tailored for testing the breakpoints with Chromatic.
         </BodyLong>
-        <BodyLong spacing>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </BodyLong>
-        <BodyLong spacing>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-        </BodyLong>
-        <BodyLong>
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo.
-        </BodyLong>
+        <BodyLong spacing>{lorem}</BodyLong>
+        <BodyLong>{lorem}</BodyLong>
       </Modal.Body>
       <Modal.Footer>
         <Button>Primary</Button>

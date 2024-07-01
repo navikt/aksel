@@ -4,16 +4,17 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <VStack gap="4">
-      <Alert variant="info">
-        Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha hatt
-        en pensjonsgivende inntekt som tilsvarer x G, året før du fikk nedsatt
-        arbeidsevnen.
+      <Alert variant="info">Info - Formidler viktig informasjon.</Alert>
+      <Alert variant="success">
+        Success - Bekrefter at en oppgave er fullført som forventet.
       </Alert>
-      <Alert variant="success">Søknad er sendt inn!</Alert>
       <Alert variant="warning">
-        Du må være registrert hos NAV for å bruke aktivitetsplanen.
+        Warning - Bruk denne når du vil at brukeren skal foreta en bestemt
+        handling eller for å advare dem om noe viktig.
       </Alert>
-      <Alert variant="error">Noe gikk galt! Prøv igjen om noen minutter.</Alert>
+      <Alert variant="error">
+        Error - Brukes til å informere brukeren om at noe kritisk har skjedd.
+      </Alert>
     </VStack>
   );
 };

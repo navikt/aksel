@@ -60,6 +60,11 @@ interface ModalPropsBase extends React.DialogHTMLAttributes<HTMLDialogElement> {
    * */
   width?: "medium" | "small" | number | `${number}${string}`;
   /**
+   * Where to place the modal in the viewport. (Will always be centered on mobile and old browsers.)
+   * @default "center"
+   */
+  placement?: "top" | "center";
+  /**
    * Lets you render the modal into a different part of the DOM.
    * Will use `rootElement` from `Provider` if defined, otherwise `document.body`.
    */

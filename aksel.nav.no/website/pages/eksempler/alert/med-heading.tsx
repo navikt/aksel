@@ -23,6 +23,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 7,
-  desc: "Husk riktig h-tag ved bruk av heading i Alert",
+  index: 3,
+  desc: "Husk riktig h-tag ved bruk av heading i Alert.",
 };

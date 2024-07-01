@@ -31,6 +31,7 @@ export type StackProps = PrimitiveProps &
     >;
     /**
      * CSS `align-items` property.
+     * @default "stretch"
      *
      * @example
      * align='center'
@@ -72,7 +73,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
         children,
         className,
         as: Component = "div",
-        align,
+        align = "stretch",
         justify,
         wrap = true,
         gap,
