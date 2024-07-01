@@ -596,8 +596,7 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
             } else {
               contentContext.onItemEnter(event);
               if (!event.defaultPrevented) {
-                const item = event.currentTarget;
-                item.focus();
+                event.currentTarget.focus();
               }
             }
           }),
