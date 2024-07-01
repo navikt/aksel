@@ -32,7 +32,26 @@ interface DropdownMenuProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-export const DropdownMenu = ({
+interface DropdownMenuComponent extends React.FC<DropdownMenuProps> {
+  Trigger: typeof DropdownMenuTrigger;
+  Portal: typeof DropdownMenuPortal;
+  Content: typeof DropdownMenuContent;
+  Group: typeof DropdownMenuGroup;
+  Label: typeof DropdownMenuLabel;
+  Item: typeof DropdownMenuItem;
+  CheckboxItem: typeof DropdownMenuCheckboxItem;
+  RadioGroup: typeof DropdownMenuRadioGroup;
+  RadioItem: typeof DropdownMenuRadioItem;
+  Separator: typeof DropdownMenuSeparator;
+  Sub: typeof DropdownMenuSub;
+  SubTrigger: typeof DropdownMenuSubTrigger;
+  SubContent: typeof DropdownMenuSubContent;
+
+  /* TODO: Will prop just implement this inside the component and not expose it trough the API */
+  ItemIndicator: typeof DropdownMenuItemIndicator;
+}
+
+const DropdownMenuRoot = ({
   children,
   open: openProp,
   defaultOpen = false,
@@ -61,13 +80,15 @@ export const DropdownMenu = ({
   );
 };
 
+const DropdownMenu = DropdownMenuRoot as DropdownMenuComponent;
+
 /* -------------------------------------------------------------------------- */
 /*                             DropdownMenuTrigger                            */
 /* -------------------------------------------------------------------------- */
 type DropdownMenuTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   AsChildProps;
 
-export const DropdownMenuTrigger = forwardRef<
+const DropdownMenuTrigger = forwardRef<
   HTMLButtonElement,
   DropdownMenuTriggerProps
 >(
@@ -135,15 +156,16 @@ export const DropdownMenuTrigger = forwardRef<
 type PortalProps = React.ComponentPropsWithoutRef<typeof Menu.Portal>;
 type MenuPortalElement = React.ElementRef<typeof Menu.Portal>;
 
-type MenuPortalProps = PortalProps & {
+type DropdownMenuPortalProps = PortalProps & {
   children: React.ReactElement;
 };
 
-export const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
-  (props: MenuPortalProps, ref) => {
-    return <Menu.Portal ref={ref} {...props} />;
-  },
-);
+const DropdownMenuPortal = forwardRef<
+  MenuPortalElement,
+  DropdownMenuPortalProps
+>((props: DropdownMenuPortalProps, ref) => {
+  return <Menu.Portal ref={ref} {...props} />;
+});
 
 /* -------------------------------------------------------------------------- */
 /*                             DropdownMenuContent                            */
@@ -153,7 +175,7 @@ type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content>;
 interface DropdownMenuContentProps
   extends Omit<MenuContentProps, "onEntryFocus"> {}
 
-export const DropdownMenuContent = forwardRef<
+const DropdownMenuContent = forwardRef<
   DropdownMenuContentElement,
   DropdownMenuContentProps
 >(
@@ -218,7 +240,7 @@ type DropdownMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
 interface DropdownMenuGroupProps extends MenuGroupProps {}
 
-export const DropdownMenuGroup = forwardRef<
+const DropdownMenuGroup = forwardRef<
   DropdownMenuGroupElement,
   DropdownMenuGroupProps
 >((props: DropdownMenuGroupProps, ref) => {
@@ -232,7 +254,7 @@ type DropdownMenuLabelElement = React.ElementRef<typeof Menu.Label>;
 type MenuLabelProps = React.ComponentPropsWithoutRef<typeof Menu.Label>;
 interface DropdownMenuLabelProps extends MenuLabelProps {}
 
-export const DropdownMenuLabel = forwardRef<
+const DropdownMenuLabel = forwardRef<
   DropdownMenuLabelElement,
   DropdownMenuLabelProps
 >((props: DropdownMenuLabelProps, ref) => {
@@ -246,7 +268,7 @@ type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 interface DropdownMenuItemProps extends MenuItemProps {}
 
-export const DropdownMenuItem = forwardRef<
+const DropdownMenuItem = forwardRef<
   DropdownMenuItemElement,
   DropdownMenuItemProps
 >((props: DropdownMenuItemProps, ref) => {
@@ -264,7 +286,7 @@ type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
 >;
 interface DropdownMenuCheckboxItemProps extends MenuCheckboxItemProps {}
 
-export const DropdownMenuCheckboxItem = forwardRef<
+const DropdownMenuCheckboxItem = forwardRef<
   DropdownMenuCheckboxItemElement,
   DropdownMenuCheckboxItemProps
 >((props: DropdownMenuCheckboxItemProps, ref) => {
@@ -280,7 +302,7 @@ type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
 >;
 interface DropdownMenuRadioGroupProps extends MenuRadioGroupProps {}
 
-export const DropdownMenuRadioGroup = forwardRef<
+const DropdownMenuRadioGroup = forwardRef<
   DropdownMenuRadioGroupElement,
   DropdownMenuRadioGroupProps
 >((props: DropdownMenuRadioGroupProps, ref) => {
@@ -294,7 +316,7 @@ type DropdownMenuRadioItemElement = React.ElementRef<typeof Menu.RadioItem>;
 type MenuRadioItemProps = React.ComponentPropsWithoutRef<typeof Menu.RadioItem>;
 interface DropdownMenuRadioItemProps extends MenuRadioItemProps {}
 
-export const DropdownMenuRadioItem = forwardRef<
+const DropdownMenuRadioItem = forwardRef<
   DropdownMenuRadioItemElement,
   DropdownMenuRadioItemProps
 >((props: DropdownMenuRadioItemProps, ref) => {
@@ -312,7 +334,7 @@ type MenuItemIndicatorProps = React.ComponentPropsWithoutRef<
 >;
 interface DropdownMenuItemIndicatorProps extends MenuItemIndicatorProps {}
 
-export const DropdownMenuItemIndicator = forwardRef<
+const DropdownMenuItemIndicator = forwardRef<
   DropdownMenuItemIndicatorElement,
   DropdownMenuItemIndicatorProps
 >((props: DropdownMenuItemIndicatorProps, ref) => {
@@ -326,7 +348,7 @@ type DropdownMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
 type MenuSeparatorProps = React.ComponentPropsWithoutRef<typeof Menu.Separator>;
 interface DropdownMenuSeparatorProps extends MenuSeparatorProps {}
 
-export const DropdownMenuSeparator = forwardRef<
+const DropdownMenuSeparator = forwardRef<
   DropdownMenuSeparatorElement,
   DropdownMenuSeparatorProps
 >((props: DropdownMenuSeparatorProps, ref) => {
@@ -343,7 +365,7 @@ interface DropdownMenuSubProps {
   onOpenChange?(open: boolean): void;
 }
 
-export const DropdownMenuSub = (props: DropdownMenuSubProps) => {
+const DropdownMenuSub = (props: DropdownMenuSubProps) => {
   const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
 
   const [open = false, setOpen] = useControllableState({
@@ -368,7 +390,7 @@ type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
 >;
 interface DropdownMenuSubTriggerProps extends MenuSubTriggerProps {}
 
-export const DropdownMenuSubTrigger = forwardRef<
+const DropdownMenuSubTrigger = forwardRef<
   DropdownMenuSubTriggerElement,
   DropdownMenuSubTriggerProps
 >((props: DropdownMenuSubTriggerProps, ref) => {
@@ -384,7 +406,7 @@ type MenuSubContentProps = React.ComponentPropsWithoutRef<
 >;
 interface DropdownMenuSubContentProps extends MenuSubContentProps {}
 
-export const DropdownMenuSubContent = forwardRef<
+const DropdownMenuSubContent = forwardRef<
   DropdownMenuSubContentElement,
   DropdownMenuSubContentProps
 >((props: DropdownMenuSubContentProps, ref) => {
@@ -409,3 +431,51 @@ export const DropdownMenuSubContent = forwardRef<
     />
   );
 });
+
+/* -------------------------------------------------------------------------- */
+DropdownMenu.Trigger = DropdownMenuTrigger;
+DropdownMenu.Portal = DropdownMenuPortal;
+DropdownMenu.Content = DropdownMenuContent;
+DropdownMenu.Group = DropdownMenuGroup;
+DropdownMenu.Label = DropdownMenuLabel;
+DropdownMenu.Item = DropdownMenuItem;
+DropdownMenu.CheckboxItem = DropdownMenuCheckboxItem;
+DropdownMenu.RadioGroup = DropdownMenuRadioGroup;
+DropdownMenu.RadioItem = DropdownMenuRadioItem;
+DropdownMenu.Separator = DropdownMenuSeparator;
+DropdownMenu.Sub = DropdownMenuSub;
+DropdownMenu.SubTrigger = DropdownMenuSubTrigger;
+DropdownMenu.SubContent = DropdownMenuSubContent;
+DropdownMenu.ItemIndicator = DropdownMenuItemIndicator;
+
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuItemIndicator,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+  type DropdownMenuCheckboxItemProps,
+  type DropdownMenuContentProps,
+  type DropdownMenuGroupProps,
+  type DropdownMenuItemIndicatorProps,
+  type DropdownMenuLabelProps,
+  type DropdownMenuPortalProps,
+  type DropdownMenuProps,
+  type DropdownMenuRadioGroupProps,
+  type DropdownMenuRadioItemProps,
+  type DropdownMenuSeparatorProps,
+  type DropdownMenuSubContentProps,
+  type DropdownMenuSubProps,
+  type DropdownMenuSubTriggerProps,
+  type DropdownMenuTriggerProps,
+};
