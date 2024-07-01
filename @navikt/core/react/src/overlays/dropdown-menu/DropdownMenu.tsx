@@ -153,7 +153,7 @@ type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content>;
 interface DropdownMenuContentProps
   extends Omit<MenuContentProps, "onEntryFocus"> {}
 
-export const DropdownMenuContent = React.forwardRef<
+export const DropdownMenuContent = forwardRef<
   DropdownMenuContentElement,
   DropdownMenuContentProps
 >(
@@ -223,4 +223,112 @@ export const DropdownMenuGroup = forwardRef<
   DropdownMenuGroupProps
 >((props: DropdownMenuGroupProps, ref) => {
   return <Menu.Group ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                              DropdownMenuLabel                             */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuLabelElement = React.ElementRef<typeof Menu.Label>;
+type MenuLabelProps = React.ComponentPropsWithoutRef<typeof Menu.Label>;
+interface DropdownMenuLabelProps extends MenuLabelProps {}
+
+export const DropdownMenuLabel = forwardRef<
+  DropdownMenuLabelElement,
+  DropdownMenuLabelProps
+>((props: DropdownMenuLabelProps, ref) => {
+  return <Menu.Label ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                              DropdownMenuItem                              */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
+type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
+interface DropdownMenuItemProps extends MenuItemProps {}
+
+export const DropdownMenuItem = forwardRef<
+  DropdownMenuItemElement,
+  DropdownMenuItemProps
+>((props: DropdownMenuItemProps, ref) => {
+  return <Menu.Item ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                          DropdownMenuCheckboxItem                          */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuCheckboxItemElement = React.ElementRef<
+  typeof Menu.CheckboxItem
+>;
+type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
+  typeof Menu.CheckboxItem
+>;
+interface DropdownMenuCheckboxItemProps extends MenuCheckboxItemProps {}
+
+export const DropdownMenuCheckboxItem = forwardRef<
+  DropdownMenuCheckboxItemElement,
+  DropdownMenuCheckboxItemProps
+>((props: DropdownMenuCheckboxItemProps, ref) => {
+  return <Menu.CheckboxItem ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                           DropdownMenuRadioGroup                           */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
+type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
+  typeof Menu.RadioGroup
+>;
+interface DropdownMenuRadioGroupProps extends MenuRadioGroupProps {}
+
+export const DropdownMenuRadioGroup = forwardRef<
+  DropdownMenuRadioGroupElement,
+  DropdownMenuRadioGroupProps
+>((props: DropdownMenuRadioGroupProps, ref) => {
+  return <Menu.RadioGroup ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                           DropdownMenuRadioItem                            */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuRadioItemElement = React.ElementRef<typeof Menu.RadioItem>;
+type MenuRadioItemProps = React.ComponentPropsWithoutRef<typeof Menu.RadioItem>;
+interface DropdownMenuRadioItemProps extends MenuRadioItemProps {}
+
+export const DropdownMenuRadioItem = forwardRef<
+  DropdownMenuRadioItemElement,
+  DropdownMenuRadioItemProps
+>((props: DropdownMenuRadioItemProps, ref) => {
+  return <Menu.RadioItem ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                         DropdownMenuItemIndicator                          */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuItemIndicatorElement = React.ElementRef<
+  typeof Menu.ItemIndicator
+>;
+type MenuItemIndicatorProps = React.ComponentPropsWithoutRef<
+  typeof Menu.ItemIndicator
+>;
+interface DropdownMenuItemIndicatorProps extends MenuItemIndicatorProps {}
+
+export const DropdownMenuItemIndicator = forwardRef<
+  DropdownMenuItemIndicatorElement,
+  DropdownMenuItemIndicatorProps
+>((props: DropdownMenuItemIndicatorProps, ref) => {
+  return <Menu.ItemIndicator ref={ref} {...props} />;
+});
+
+/* -------------------------------------------------------------------------- */
+/*                           DropdownMenuSeparator                            */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
+type MenuSeparatorProps = React.ComponentPropsWithoutRef<typeof Menu.Separator>;
+interface DropdownMenuSeparatorProps extends MenuSeparatorProps {}
+
+export const DropdownMenuSeparator = forwardRef<
+  DropdownMenuSeparatorElement,
+  DropdownMenuSeparatorProps
+>((props: DropdownMenuSeparatorProps, ref) => {
+  return <Menu.Separator ref={ref} {...props} />;
 });
