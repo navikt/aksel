@@ -8,6 +8,9 @@ import { Bleed } from "./Bleed";
 export default {
   title: "ds-react/Primitives/Bleed",
   component: Bleed,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } satisfies Meta<typeof Bleed>;
 
 export const Default = {
@@ -392,4 +395,26 @@ export const ReflectivePadding = {
       </HStack>
     </>
   ),
+};
+
+export const Chromatic = {
+  render: () => (
+    <VStack gap="4">
+      <h2>Default</h2>
+      <Default.render />
+      <h2>AsChild</h2>
+      <AsChild.render />
+      <h2>Breakpoints</h2>
+      <Breakpoints.render />
+      <h2>Px</h2>
+      <Px.render />
+      <h2>Full</h2>
+      <Full.render />
+      <h2>ReflectivePadding</h2>
+      <ReflectivePadding.render />
+    </VStack>
+  ),
+  parameters: {
+    chromatic: { disable: false },
+  },
 };

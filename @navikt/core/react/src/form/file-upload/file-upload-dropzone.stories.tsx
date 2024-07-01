@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { fireEvent, within } from "@storybook/test";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
@@ -48,8 +48,8 @@ export const Default: StoryObj<typeof FileUpload.Dropzone> = {
   parameters: { chromatic: { disable: true } },
 };
 
-export const States: StoryObj = {
-  render: () => (
+export const States: StoryFn = () => {
+  return (
     <div>
       <h2>Disabled</h2>
       <FileUpload.Dropzone
@@ -78,7 +78,7 @@ export const States: StoryObj = {
         onSelect={onSelect}
       />
     </div>
-  ),
+  );
 };
 States.play = ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -86,8 +86,8 @@ States.play = ({ canvasElement }) => {
   fireEvent.dragEnter(button);
 };
 
-export const Translation: StoryObj = {
-  render: () => (
+export const Translation: StoryFn = () => {
+  return (
     <div>
       <h2>Single file</h2>
       <FileUpload.Dropzone
@@ -119,5 +119,5 @@ export const Translation: StoryObj = {
         disabled
       />
     </div>
-  ),
+  );
 };

@@ -316,50 +316,6 @@ export const Empty: StoryFn<typeof FormSummary> = () => (
   </VStack>
 );
 
-export const Chromatic: StoryObj<typeof FormSummary> = {
-  render: () => (
-    <div>
-      <div>
-        <h2>Default</h2>
-        <Default>{null}</Default>
-      </div>
-      <div>
-        <h2>Long Texts</h2>
-        <LongTexts>{null}</LongTexts>
-      </div>
-      <div>
-        <h2>No Link</h2>
-        <NoLink>{null}</NoLink>
-      </div>
-      <div>
-        <h2>Realistic Usage</h2>
-        <RealisticUsage>{null}</RealisticUsage>
-      </div>
-      <div>
-        <h2>Empty</h2>
-        <Empty>{null}</Empty>
-      </div>
-    </div>
-  ),
-  parameters: {
-    chromatic: {
-      disable: false,
-      modes: {
-        default: {
-          viewport: {
-            width: 620,
-          },
-        },
-        sm: {
-          viewport: {
-            width: 479,
-          },
-        },
-      },
-    },
-  },
-};
-
 export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
   <FormSummary>
     <FormSummary.Header>
@@ -386,3 +342,51 @@ export const CommaSeparated: StoryFn<typeof FormSummary> = () => (
     </FormSummary.Answers>
   </FormSummary>
 );
+
+export const Chromatic: StoryObj<typeof FormSummary> = {
+  render: () => (
+    <div>
+      <div>
+        <h2>Default</h2>
+        <Default>{null}</Default>
+      </div>
+      <div>
+        <h2>Long Texts</h2>
+        <LongTexts>{null}</LongTexts>
+      </div>
+      <div>
+        <h2>No Link</h2>
+        <NoLink>{null}</NoLink>
+      </div>
+      <div>
+        <h2>Realistic Usage</h2>
+        <RealisticUsage>{null}</RealisticUsage>
+      </div>
+      <div>
+        <h2>Empty</h2>
+        <Empty>{null}</Empty>
+      </div>
+      <div>
+        <h2>Comma Separated</h2>
+        <CommaSeparated>{null}</CommaSeparated>
+      </div>
+    </div>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+      modes: {
+        default: {
+          viewport: {
+            width: 620,
+          },
+        },
+        sm: {
+          viewport: {
+            width: 479,
+          },
+        },
+      },
+    },
+  },
+};

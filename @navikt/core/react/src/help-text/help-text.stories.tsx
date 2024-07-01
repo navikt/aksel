@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect, useRef } from "react";
 import { BodyLong, Heading } from "../typography";
 import HelpText from "./HelpText";
@@ -7,41 +7,42 @@ const meta: Meta<typeof HelpText> = {
   title: "ds-react/HelpText",
   component: HelpText,
   parameters: {
-    chromatic: { delay: 300 },
+    chromatic: { disable: true },
   },
 };
 export default meta;
 
-export const Default: StoryObj<typeof HelpText> = {
-  render: (props) => (
+export const Default: StoryFn<typeof HelpText> = (props) => {
+  return (
     <HelpText {...props}>Id ullamco excepteur elit fugiat labore.</HelpText>
-  ),
+  );
+};
 
-  args: {
-    title: "Show tooltip",
+Default.args = {
+  title: "Show tooltip",
+};
+
+Default.argTypes = {
+  placement: {
+    control: { type: "radio" },
+    options: [
+      "top",
+      "bottom",
+      "right",
+      "left",
+      "top-start",
+      "top-end",
+      "bottom-start",
+      "bottom-end",
+      "right-start",
+      "right-end",
+      "left-start",
+      "left-end",
+    ],
   },
-  argTypes: {
-    placement: {
-      control: { type: "radio" },
-      options: [
-        "top",
-        "bottom",
-        "right",
-        "left",
-        "top-start",
-        "top-end",
-        "bottom-start",
-        "bottom-end",
-        "right-start",
-        "right-end",
-        "left-start",
-        "left-end",
-      ],
-    },
-    strategy: {
-      control: { type: "radio" },
-      options: ["fixed", "absolute"],
-    },
+  strategy: {
+    control: { type: "radio" },
+    options: ["fixed", "absolute"],
   },
 };
 
@@ -89,3 +90,20 @@ export const WrapperClassName: StoryFn = () => (
     </BodyLong>
   </div>
 );
+
+export const Chromatic = () => {
+  return (
+    <div>
+      <h2>Default</h2>
+      <Default>{null}</Default>
+      <h2>Open</h2>
+      <Open />
+      <h2>WrapperClassName</h2>
+      <WrapperClassName />
+    </div>
+  );
+};
+
+Chromatic.parameters = {
+  chromatic: { disable: false, delay: 300 },
+};

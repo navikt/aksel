@@ -10,14 +10,14 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
+      options: ["medium", "small"],
     },
     position: {
       control: {
         type: "radio",
-        options: ["right", "left"],
       },
+      options: ["right", "left"],
     },
     description: {
       type: "string",

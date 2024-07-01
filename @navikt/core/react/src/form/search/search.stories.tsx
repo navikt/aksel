@@ -14,14 +14,14 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
+      options: ["medium", "small"],
     },
     variant: {
       control: {
         type: "radio",
-        options: ["primary", "secondary", "simple"],
       },
+      options: ["primary", "secondary", "simple"],
     },
     error: {
       control: {
