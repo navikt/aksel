@@ -144,3 +144,69 @@ export const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
     return <Menu.Portal ref={ref} {...props} />;
   },
 );
+
+/* -------------------------------------------------------------------------- */
+/*                             DropdownMenuContent                            */
+/* -------------------------------------------------------------------------- */
+type DropdownMenuContentElement = React.ElementRef<typeof Menu.Content>;
+type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content>;
+interface DropdownMenuContentProps
+  extends Omit<MenuContentProps, "onEntryFocus"> {}
+
+export const DropdownMenuContent = React.forwardRef<
+  DropdownMenuContentElement,
+  DropdownMenuContentProps
+>(
+  (
+    {
+      onCloseAutoFocus,
+      onInteractOutside,
+      style,
+      ...rest
+    }: DropdownMenuContentProps,
+    forwardedRef,
+  ) => {
+    const context = useDropdownMenuContext();
+    const hasInteractedOutsideRef = React.useRef(false);
+
+    return (
+      <Menu.Content
+        id={context.contentId}
+        aria-labelledby={context.triggerId}
+        {...rest}
+        ref={forwardedRef}
+        onCloseAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
+          if (!hasInteractedOutsideRef.current)
+            context.triggerRef.current?.focus();
+          hasInteractedOutsideRef.current = false;
+          // Always prevent auto focus because we either focus manually or want user agent focus
+          event.preventDefault();
+        })}
+        onInteractOutside={composeEventHandlers(onInteractOutside, (event) => {
+          const originalEvent = event.detail.originalEvent as PointerEvent;
+          const ctrlLeftClick =
+            originalEvent.button === 0 && originalEvent.ctrlKey === true;
+          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+          if (isRightClick) {
+            hasInteractedOutsideRef.current = true;
+          }
+        })}
+        style={{
+          ...style,
+          ...{
+            "--ac-dropdown-menu-content-transform-origin":
+              "var(--ac-floating-transform-origin)",
+            "--ac-dropdown-menu-content-available-width":
+              "var(--ac-floating-available-width)",
+            "--ac-dropdown-menu-content-available-height":
+              "var(--ac-floating-available-height)",
+            "--ac-dropdown-menu-trigger-width":
+              "var(--ac-floating-anchor-width)",
+            "--ac-dropdown-menu-trigger-height":
+              "var(--ac-floating-anchor-height)",
+          },
+        }}
+      />
+    );
+  },
+);
