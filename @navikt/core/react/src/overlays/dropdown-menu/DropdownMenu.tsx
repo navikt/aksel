@@ -252,13 +252,24 @@ const DropdownMenuGroup = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuLabelElement = React.ElementRef<typeof Menu.Label>;
 type MenuLabelProps = React.ComponentPropsWithoutRef<typeof Menu.Label>;
-interface DropdownMenuLabelProps extends MenuLabelProps {}
+interface DropdownMenuLabelProps extends Omit<MenuLabelProps, "asChild"> {
+  children: React.ReactNode;
+}
 
 const DropdownMenuLabel = forwardRef<
   DropdownMenuLabelElement,
   DropdownMenuLabelProps
->((props: DropdownMenuLabelProps, ref) => {
-  return <Menu.Label ref={ref} {...props} />;
+>(({ children, className, ...rest }: DropdownMenuLabelProps, ref) => {
+  return (
+    <Menu.Label
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-dropdown-menu__label", className)}
+    >
+      {children}
+    </Menu.Label>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
