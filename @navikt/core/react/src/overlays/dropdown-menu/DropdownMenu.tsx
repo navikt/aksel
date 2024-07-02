@@ -497,33 +497,58 @@ type DropdownMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 type MenuSubContentProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubContent
 >;
-interface DropdownMenuSubContentProps extends MenuSubContentProps {}
+
+interface DropdownMenuSubContentProps
+  extends MenuSubContentProps,
+    Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
+  children: React.ReactNode;
+}
 
 const DropdownMenuSubContent = forwardRef<
   DropdownMenuSubContentElement,
   DropdownMenuSubContentProps
->((props: DropdownMenuSubContentProps, ref) => {
-  return (
-    <Menu.SubContent
-      ref={ref}
-      {...props}
-      style={{
-        ...props.style,
-        ...{
-          "--ac-dropdown-menu-content-transform-origin":
-            "var(--ac-floating-transform-origin)",
-          "--ac-dropdown-menu-content-available-width":
-            "var(--ac-floating-available-width)",
-          "--ac-dropdown-menu-content-available-height":
-            "var(--ac-floating-available-height)",
-          "--ac-dropdown-menu-trigger-width": "var(--ac-floating-anchor-width)",
-          "--ac-dropdown-menu-trigger-height":
-            "var(--ac-floating-anchor-height)",
-        },
-      }}
-    />
-  );
-});
+>(
+  (
+    {
+      children,
+      className,
+      style,
+      rootElement,
+      ...rest
+    }: DropdownMenuSubContentProps,
+    ref,
+  ) => {
+    return (
+      <Menu.Portal rootElement={rootElement}>
+        <Menu.SubContent
+          ref={ref}
+          alignOffset={-4}
+          sideOffset={1}
+          collisionPadding={10}
+          {...rest}
+          className={cl("navds-dropdown-menu__sub-content", className)}
+          style={{
+            ...style,
+            ...{
+              "--ac-dropdown-menu-content-transform-origin":
+                "var(--ac-floating-transform-origin)",
+              "--ac-dropdown-menu-content-available-width":
+                "var(--ac-floating-available-width)",
+              "--ac-dropdown-menu-content-available-height":
+                "var(--ac-floating-available-height)",
+              "--ac-dropdown-menu-trigger-width":
+                "var(--ac-floating-anchor-width)",
+              "--ac-dropdown-menu-trigger-height":
+                "var(--ac-floating-anchor-height)",
+            },
+          }}
+        >
+          {children}
+        </Menu.SubContent>
+      </Menu.Portal>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 DropdownMenu.Trigger = DropdownMenuTrigger;
