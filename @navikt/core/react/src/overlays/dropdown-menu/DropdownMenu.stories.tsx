@@ -14,10 +14,7 @@ export const Demo = () => {
         <Button>Dropdown</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item
-          onClick={() => console.log("Item 1 clicked")}
-          asChild
-        >
+        <DropdownMenu.Item onClick={() => console.log("Item 1 clicked")}>
           <div data-test="123">item</div>
         </DropdownMenu.Item>
       </DropdownMenu.Content>
