@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { CheckmarkIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { Detail } from "../../typography";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -328,7 +329,9 @@ const DropdownMenuItem = forwardRef<
     >
       {children}
       {shortcut && (
-        <div className="navds-dropdown-menu__shortcut">{shortcut}</div>
+        <Detail size="small" as="div" className="navds-dropdown-menu__shortcut">
+          {shortcut}
+        </Detail>
       )}
     </Menu.Item>
   );
@@ -362,7 +365,10 @@ const DropdownMenuCheckboxItem = forwardRef<
         ref={ref}
         {...rest}
         asChild={false}
-        className={cl("navds-dropdown-menu__checkbox", className)}
+        className={cl(
+          "navds-dropdown-menu__item navds-dropdown-menu__checkbox",
+          className,
+        )}
       >
         {children}
         <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
@@ -372,7 +378,13 @@ const DropdownMenuCheckboxItem = forwardRef<
           />
         </Menu.ItemIndicator>
         {shortcut && (
-          <div className="navds-dropdown-menu__shortcut">{shortcut}</div>
+          <Detail
+            size="small"
+            as="div"
+            className="navds-dropdown-menu__shortcut"
+          >
+            {shortcut}
+          </Detail>
         )}
       </Menu.CheckboxItem>
     );
@@ -426,7 +438,10 @@ const DropdownMenuRadioItem = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-dropdown-menu__radio", className)}
+      className={cl(
+        "navds-dropdown-menu__item navds-dropdown-menu__radio",
+        className,
+      )}
     >
       {children}
       <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
@@ -440,7 +455,7 @@ const DropdownMenuRadioItem = forwardRef<
           role="img"
           className="navds-dropdown-menu__indicator-icon"
         >
-          <circle cx="12" cy="12" r="9.5" />
+          <circle cx="12" cy="12" r="6" />
         </svg>
       </Menu.ItemIndicator>
     </Menu.RadioItem>

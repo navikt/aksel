@@ -23,10 +23,12 @@ export const Demo = () => {
         >
           Item 2
         </DropdownMenu.Item>
+        <DropdownMenu.Separator />
         <DropdownMenu.CheckboxItem>Checkbox</DropdownMenu.CheckboxItem>
         <DropdownMenu.CheckboxItem shortcut="⌘+S">
           Checkbox
         </DropdownMenu.CheckboxItem>
+        <DropdownMenu.Separator />
         <DropdownMenu.RadioGroup>
           <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
           <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
