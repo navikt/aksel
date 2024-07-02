@@ -17,6 +17,10 @@ export const Demo = () => {
         <DropdownMenu.Item onClick={() => console.log("Item 1 clicked")}>
           <div data-test="123">item</div>
         </DropdownMenu.Item>
+        <DropdownMenu.RadioGroup>
+          <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
       </DropdownMenu.Content>
     </DropdownMenu>
   );

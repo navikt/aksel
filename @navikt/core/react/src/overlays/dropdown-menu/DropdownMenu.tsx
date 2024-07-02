@@ -48,9 +48,6 @@ interface DropdownMenuComponent extends React.FC<DropdownMenuProps> {
   Sub: typeof DropdownMenuSub;
   SubTrigger: typeof DropdownMenuSubTrigger;
   SubContent: typeof DropdownMenuSubContent;
-
-  /* TODO: Will prop just implement this inside the component and not expose it trough the API */
-  ItemIndicator: typeof DropdownMenuItemIndicator;
 }
 
 const DropdownMenuRoot = ({
@@ -361,31 +358,39 @@ const DropdownMenuRadioGroup = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuRadioItemElement = React.ElementRef<typeof Menu.RadioItem>;
 type MenuRadioItemProps = React.ComponentPropsWithoutRef<typeof Menu.RadioItem>;
-interface DropdownMenuRadioItemProps extends MenuRadioItemProps {}
+interface DropdownMenuRadioItemProps
+  extends Omit<MenuRadioItemProps, "asChild"> {
+  children: React.ReactNode;
+}
 
 const DropdownMenuRadioItem = forwardRef<
   DropdownMenuRadioItemElement,
   DropdownMenuRadioItemProps
->((props: DropdownMenuRadioItemProps, ref) => {
-  return <Menu.RadioItem ref={ref} {...props} />;
-});
-
-/* -------------------------------------------------------------------------- */
-/*                         DropdownMenuItemIndicator                          */
-/* -------------------------------------------------------------------------- */
-type DropdownMenuItemIndicatorElement = React.ElementRef<
-  typeof Menu.ItemIndicator
->;
-type MenuItemIndicatorProps = React.ComponentPropsWithoutRef<
-  typeof Menu.ItemIndicator
->;
-interface DropdownMenuItemIndicatorProps extends MenuItemIndicatorProps {}
-
-const DropdownMenuItemIndicator = forwardRef<
-  DropdownMenuItemIndicatorElement,
-  DropdownMenuItemIndicatorProps
->((props: DropdownMenuItemIndicatorProps, ref) => {
-  return <Menu.ItemIndicator ref={ref} {...props} />;
+>(({ children, className, ...rest }: DropdownMenuRadioItemProps, ref) => {
+  return (
+    <Menu.RadioItem
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-dropdown-menu__radio", className)}
+    >
+      {children}
+      <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden
+          width="1em"
+          height="1em"
+          focusable="false"
+          role="img"
+          className="navds-dropdown-menu__indicator-icon"
+        >
+          <circle cx="12" cy="12" r="9.5" />
+        </svg>
+      </Menu.ItemIndicator>
+    </Menu.RadioItem>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
@@ -492,7 +497,6 @@ DropdownMenu.Separator = DropdownMenuSeparator;
 DropdownMenu.Sub = DropdownMenuSub;
 DropdownMenu.SubTrigger = DropdownMenuSubTrigger;
 DropdownMenu.SubContent = DropdownMenuSubContent;
-DropdownMenu.ItemIndicator = DropdownMenuItemIndicator;
 
 export {
   DropdownMenu,
@@ -500,7 +504,6 @@ export {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuItemIndicator,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -512,7 +515,6 @@ export {
   type DropdownMenuCheckboxItemProps,
   type DropdownMenuContentProps,
   type DropdownMenuGroupProps,
-  type DropdownMenuItemIndicatorProps,
   type DropdownMenuLabelProps,
   type DropdownMenuProps,
   type DropdownMenuRadioGroupProps,
