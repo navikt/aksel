@@ -238,13 +238,22 @@ const DropdownMenuContent = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
-interface DropdownMenuGroupProps extends MenuGroupProps {}
+interface DropdownMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {}
 
 const DropdownMenuGroup = forwardRef<
   DropdownMenuGroupElement,
   DropdownMenuGroupProps
->((props: DropdownMenuGroupProps, ref) => {
-  return <Menu.Group ref={ref} {...props} />;
+>(({ children, className, ...rest }: DropdownMenuGroupProps, ref) => {
+  return (
+    <Menu.Group
+      ref={ref}
+      {...rest}
+      className={cl("navds-dropdown-menu__group", className)}
+      asChild={false}
+    >
+      {children}
+    </Menu.Group>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
