@@ -431,8 +431,14 @@ interface DropdownMenuSeparatorProps extends MenuSeparatorProps {}
 const DropdownMenuSeparator = forwardRef<
   DropdownMenuSeparatorElement,
   DropdownMenuSeparatorProps
->((props: DropdownMenuSeparatorProps, ref) => {
-  return <Menu.Separator ref={ref} {...props} />;
+>(({ className, ...rest }: DropdownMenuSeparatorProps, ref) => {
+  return (
+    <Menu.Separator
+      ref={ref}
+      {...rest}
+      className={cl("navds-dropdown-menu__separator", className)}
+    />
+  );
 });
 
 /* -------------------------------------------------------------------------- */
