@@ -6,6 +6,7 @@ import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { Menu } from "../floating-menu/Menu";
 import { SlottedButtonElement } from "./SlottedButtonElement";
+import { requireReactElement } from "./requireReactElement";
 
 /* -------------------------------------------------------------------------- */
 /*                                DropdownMenu                                */
@@ -142,7 +143,7 @@ const DropdownMenuTrigger = forwardRef<
             }
           })}
         >
-          {children}
+          {requireReactElement(children)}
         </SlottedButtonElement>
       </Menu.Anchor>
     );
