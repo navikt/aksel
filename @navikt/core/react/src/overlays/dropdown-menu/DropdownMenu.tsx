@@ -1,12 +1,11 @@
 import React, { forwardRef, useRef } from "react";
-import { Slot } from "../../slot/Slot";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
-import { AsChildProps } from "../../util/types";
 import { Menu } from "../floating-menu/Menu";
+import { SlottedButtonElement } from "./SlottedButtonElement";
 
 /* -------------------------------------------------------------------------- */
 /*                                DropdownMenu                                */
@@ -23,6 +22,8 @@ type DropdownMenuContextValue = {
 const [DropdownMenuProvider, useDropdownMenuContext] =
   createContext<DropdownMenuContextValue>({
     name: "DropdownMenuContext",
+    errorMessage:
+      "DropdownMenu sub-components cannot be rendered outside the DropdownMenu component.",
   });
 
 interface DropdownMenuProps {
@@ -85,46 +86,40 @@ const DropdownMenu = DropdownMenuRoot as DropdownMenuComponent;
 /* -------------------------------------------------------------------------- */
 /*                             DropdownMenuTrigger                            */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  AsChildProps;
+interface DropdownMenuTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactElement;
+}
 
 const DropdownMenuTrigger = forwardRef<
   HTMLButtonElement,
   DropdownMenuTriggerProps
 >(
   (
-    {
-      disabled = false,
-      asChild,
-      onPointerDown,
-      onKeyDown,
-      ...rest
-    }: DropdownMenuTriggerProps,
-    forwardedRef,
+    { children, onPointerDown, onKeyDown, ...rest }: DropdownMenuTriggerProps,
+    ref,
   ) => {
     const context = useDropdownMenuContext();
 
-    const Comp = asChild ? Slot : "button";
-
-    const mergedRefs = useMergeRefs(forwardedRef, context.triggerRef);
+    const mergedRefs = useMergeRefs(ref, context.triggerRef);
 
     return (
       <Menu.Anchor asChild>
-        <Comp
+        <SlottedButtonElement
           type="button"
           id={context.triggerId}
           aria-haspopup="menu"
           aria-expanded={context.open}
           aria-controls={context.open ? context.contentId : undefined}
           data-state={context.open ? "open" : "closed"}
-          data-disabled={disabled ? "" : undefined}
-          disabled={disabled}
-          {...rest}
           ref={mergedRefs}
+          {...rest}
           onPointerDown={composeEventHandlers(onPointerDown, (event) => {
+            const disabled = event.currentTarget.disabled;
             // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
             // but not when the control key is pressed (avoiding MacOS right click)
             if (!disabled && event.button === 0 && event.ctrlKey === false) {
+              console.log("triggered pointerdown event");
               context.onOpenToggle();
               // prevent trigger focusing when opening
               // this allows the content to be given focus without competition
@@ -132,7 +127,9 @@ const DropdownMenuTrigger = forwardRef<
             }
           })}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-            if (disabled) return;
+            if (event.currentTarget.disabled) {
+              return;
+            }
             if (["Enter", " "].includes(event.key)) {
               context.onOpenToggle();
             }
@@ -144,7 +141,9 @@ const DropdownMenuTrigger = forwardRef<
               event.preventDefault();
             }
           })}
-        />
+        >
+          {children}
+        </SlottedButtonElement>
       </Menu.Anchor>
     );
   },
