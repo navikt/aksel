@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -316,14 +317,41 @@ type DropdownMenuCheckboxItemElement = React.ElementRef<
 type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof Menu.CheckboxItem
 >;
-interface DropdownMenuCheckboxItemProps extends MenuCheckboxItemProps {}
+interface DropdownMenuCheckboxItemProps
+  extends Omit<MenuCheckboxItemProps, "asChild"> {
+  children: React.ReactNode;
+  shortcut?: string;
+}
 
 const DropdownMenuCheckboxItem = forwardRef<
   DropdownMenuCheckboxItemElement,
   DropdownMenuCheckboxItemProps
->((props: DropdownMenuCheckboxItemProps, ref) => {
-  return <Menu.CheckboxItem ref={ref} {...props} />;
-});
+>(
+  (
+    { children, className, shortcut, ...rest }: DropdownMenuCheckboxItemProps,
+    ref,
+  ) => {
+    return (
+      <Menu.CheckboxItem
+        ref={ref}
+        {...rest}
+        asChild={false}
+        className={cl("navds-dropdown-menu__checkbox", className)}
+      >
+        {children}
+        <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
+          <CheckmarkIcon
+            aria-hidden="true"
+            className="navds-dropdown-menu__indicator-icon"
+          />
+        </Menu.ItemIndicator>
+        {shortcut && (
+          <div className="navds-dropdown-menu__shortcut">{shortcut}</div>
+        )}
+      </Menu.CheckboxItem>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                           DropdownMenuRadioGroup                           */
