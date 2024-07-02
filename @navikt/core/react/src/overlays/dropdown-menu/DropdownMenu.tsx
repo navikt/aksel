@@ -277,13 +277,28 @@ const DropdownMenuLabel = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
-interface DropdownMenuItemProps extends MenuItemProps {}
+interface DropdownMenuItemProps extends Omit<MenuItemProps, "asChild"> {
+  children: React.ReactNode;
+  shortcut?: string;
+}
 
 const DropdownMenuItem = forwardRef<
   DropdownMenuItemElement,
   DropdownMenuItemProps
->((props: DropdownMenuItemProps, ref) => {
-  return <Menu.Item ref={ref} {...props} />;
+>(({ children, className, shortcut, ...rest }: DropdownMenuItemProps, ref) => {
+  return (
+    <Menu.Item
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-dropdown-menu__item", className)}
+    >
+      {children}
+      {shortcut && (
+        <div className="navds-dropdown-menu__shortcut">{shortcut}</div>
+      )}
+    </Menu.Item>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
