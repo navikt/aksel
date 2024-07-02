@@ -58,6 +58,7 @@ const DropdownMenuRoot = ({
   onOpenChange,
 }: DropdownMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
+
   const [open = false, setOpen] = useControllableState({
     value: openProp,
     defaultValue: defaultOpen,
@@ -121,7 +122,32 @@ const DropdownMenuTrigger = forwardRef<
               context.onOpenToggle();
               // prevent trigger focusing when opening
               // this allows the content to be given focus without competition
-              if (!context.open) event.preventDefault();
+              if (!context.open) {
+                event.preventDefault();
+
+                /**
+                 * This allows the user to open with pointerDown, while preserving the
+                 * pointerup event to close the menu if user wants to cancel action
+                 */
+                const cb = (e: PointerEvent) => {
+                  const triggerRef = context.triggerRef?.current;
+                  const closestContent = (e.target as Element)?.closest(
+                    "[data-aksel-menu-content]",
+                  );
+                  const isInsideSafezone =
+                    closestContent?.contains(e.target as Node) ||
+                    triggerRef?.contains(e.target as Node) ||
+                    e.target === triggerRef ||
+                    e.target === closestContent;
+
+                  if (!isInsideSafezone) {
+                    context.onOpenChange(false);
+                  }
+                };
+                document.addEventListener("pointerup", cb, {
+                  once: true,
+                });
+              }
             }
           })}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {

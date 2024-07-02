@@ -14,7 +14,7 @@ export const Demo = () => {
         <Button>Dropdown</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item onClick={() => console.log("Item 1 clicked")}>
+        <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
           <div data-test="123">item</div>
         </DropdownMenu.Item>
         <DropdownMenu.RadioGroup>
