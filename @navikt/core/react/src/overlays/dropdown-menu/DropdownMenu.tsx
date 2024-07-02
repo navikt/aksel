@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -36,7 +37,6 @@ interface DropdownMenuProps {
 
 interface DropdownMenuComponent extends React.FC<DropdownMenuProps> {
   Trigger: typeof DropdownMenuTrigger;
-  Portal: typeof DropdownMenuPortal;
   Content: typeof DropdownMenuContent;
   Group: typeof DropdownMenuGroup;
   Label: typeof DropdownMenuLabel;
@@ -120,7 +120,6 @@ const DropdownMenuTrigger = forwardRef<
             // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
             // but not when the control key is pressed (avoiding MacOS right click)
             if (!disabled && event.button === 0 && event.ctrlKey === false) {
-              console.log("triggered pointerdown event");
               context.onOpenToggle();
               // prevent trigger focusing when opening
               // this allows the content to be given focus without competition
@@ -151,29 +150,16 @@ const DropdownMenuTrigger = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                             DropdownMenuPortal                             */
-/* -------------------------------------------------------------------------- */
-type PortalProps = React.ComponentPropsWithoutRef<typeof Menu.Portal>;
-type MenuPortalElement = React.ElementRef<typeof Menu.Portal>;
-
-type DropdownMenuPortalProps = PortalProps & {
-  children: React.ReactElement;
-};
-
-const DropdownMenuPortal = forwardRef<
-  MenuPortalElement,
-  DropdownMenuPortalProps
->((props: DropdownMenuPortalProps, ref) => {
-  return <Menu.Portal ref={ref} {...props} />;
-});
-
-/* -------------------------------------------------------------------------- */
 /*                             DropdownMenuContent                            */
 /* -------------------------------------------------------------------------- */
 type DropdownMenuContentElement = React.ElementRef<typeof Menu.Content>;
-type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content>;
+type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content> &
+  Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement">;
+
 interface DropdownMenuContentProps
-  extends Omit<MenuContentProps, "onEntryFocus"> {}
+  extends Omit<MenuContentProps, "onEntryFocus" | "asChild"> {
+  children?: React.ReactNode;
+}
 
 const DropdownMenuContent = forwardRef<
   DropdownMenuContentElement,
@@ -181,54 +167,68 @@ const DropdownMenuContent = forwardRef<
 >(
   (
     {
+      children,
+      className,
+      style,
       onCloseAutoFocus,
       onInteractOutside,
-      style,
+      rootElement,
       ...rest
     }: DropdownMenuContentProps,
-    forwardedRef,
+    ref,
   ) => {
     const context = useDropdownMenuContext();
     const hasInteractedOutsideRef = React.useRef(false);
 
     return (
-      <Menu.Content
-        id={context.contentId}
-        aria-labelledby={context.triggerId}
-        {...rest}
-        ref={forwardedRef}
-        onCloseAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
-          if (!hasInteractedOutsideRef.current)
-            context.triggerRef.current?.focus();
-          hasInteractedOutsideRef.current = false;
-          // Always prevent auto focus because we either focus manually or want user agent focus
-          event.preventDefault();
-        })}
-        onInteractOutside={composeEventHandlers(onInteractOutside, (event) => {
-          const originalEvent = event.detail.originalEvent as PointerEvent;
-          const ctrlLeftClick =
-            originalEvent.button === 0 && originalEvent.ctrlKey === true;
-          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-          if (isRightClick) {
-            hasInteractedOutsideRef.current = true;
-          }
-        })}
-        style={{
-          ...style,
-          ...{
-            "--ac-dropdown-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--ac-dropdown-menu-content-available-width":
-              "var(--ac-floating-available-width)",
-            "--ac-dropdown-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-            "--ac-dropdown-menu-trigger-width":
-              "var(--ac-floating-anchor-width)",
-            "--ac-dropdown-menu-trigger-height":
-              "var(--ac-floating-anchor-height)",
-          },
-        }}
-      />
+      <Menu.Portal rootElement={rootElement} asChild>
+        <Menu.Content
+          ref={ref}
+          id={context.contentId}
+          aria-labelledby={context.triggerId}
+          className={cl("navds-dropdown-menu__content", className)}
+          align="start"
+          sideOffset={4}
+          collisionPadding={10}
+          {...rest}
+          onCloseAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
+            if (!hasInteractedOutsideRef.current)
+              context.triggerRef.current?.focus();
+            hasInteractedOutsideRef.current = false;
+            // Always prevent auto focus because we either focus manually or want user agent focus
+            event.preventDefault();
+          })}
+          onInteractOutside={composeEventHandlers(
+            onInteractOutside,
+            (event) => {
+              const originalEvent = event.detail.originalEvent as PointerEvent;
+              const ctrlLeftClick =
+                originalEvent.button === 0 && originalEvent.ctrlKey === true;
+              const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+              if (isRightClick) {
+                hasInteractedOutsideRef.current = true;
+              }
+            },
+          )}
+          style={{
+            ...style,
+            ...{
+              "--ac-dropdown-menu-content-transform-origin":
+                "var(--ac-floating-transform-origin)",
+              "--ac-dropdown-menu-content-available-width":
+                "var(--ac-floating-available-width)",
+              "--ac-dropdown-menu-content-available-height":
+                "var(--ac-floating-available-height)",
+              "--ac-dropdown-menu-trigger-width":
+                "var(--ac-floating-anchor-width)",
+              "--ac-dropdown-menu-trigger-height":
+                "var(--ac-floating-anchor-height)",
+            },
+          }}
+        >
+          {children}
+        </Menu.Content>
+      </Menu.Portal>
     );
   },
 );
@@ -434,7 +434,6 @@ const DropdownMenuSubContent = forwardRef<
 
 /* -------------------------------------------------------------------------- */
 DropdownMenu.Trigger = DropdownMenuTrigger;
-DropdownMenu.Portal = DropdownMenuPortal;
 DropdownMenu.Content = DropdownMenuContent;
 DropdownMenu.Group = DropdownMenuGroup;
 DropdownMenu.Label = DropdownMenuLabel;
@@ -456,7 +455,6 @@ export {
   DropdownMenuItem,
   DropdownMenuItemIndicator,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
@@ -469,7 +467,6 @@ export {
   type DropdownMenuGroupProps,
   type DropdownMenuItemIndicatorProps,
   type DropdownMenuLabelProps,
-  type DropdownMenuPortalProps,
   type DropdownMenuProps,
   type DropdownMenuRadioGroupProps,
   type DropdownMenuRadioItemProps,

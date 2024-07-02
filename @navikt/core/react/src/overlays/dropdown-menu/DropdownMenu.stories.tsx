@@ -1,6 +1,5 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { StarIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { DropdownMenu } from "./DropdownMenu";
 
@@ -12,10 +11,13 @@ export const Demo = () => {
   return (
     <DropdownMenu>
       <DropdownMenu.Trigger>
-        <Button disabled icon={<StarIcon aria-hidden />}>
-          Dropdown
-        </Button>
+        <Button>Dropdown</Button>
       </DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item onClick={() => console.log("Item 1 clicked")}>
+          item
+        </DropdownMenu.Item>
+      </DropdownMenu.Content>
     </DropdownMenu>
   );
 };
