@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
-import { CheckmarkIcon } from "@navikt/aksel-icons";
+import { CheckmarkIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -468,13 +468,26 @@ type DropdownMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
 type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubTrigger
 >;
-interface DropdownMenuSubTriggerProps extends MenuSubTriggerProps {}
+interface DropdownMenuSubTriggerProps
+  extends Omit<MenuSubTriggerProps, "asChild"> {}
 
 const DropdownMenuSubTrigger = forwardRef<
   DropdownMenuSubTriggerElement,
   DropdownMenuSubTriggerProps
->((props: DropdownMenuSubTriggerProps, ref) => {
-  return <Menu.SubTrigger ref={ref} {...props} />;
+>(({ children, className, ...rest }: DropdownMenuSubTriggerProps, ref) => {
+  return (
+    <Menu.SubTrigger
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-dropdown-menu__sub-trigger", className)}
+    >
+      {children}
+      <div>
+        <ChevronRightIcon aria-hidden />
+      </div>
+    </Menu.SubTrigger>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
