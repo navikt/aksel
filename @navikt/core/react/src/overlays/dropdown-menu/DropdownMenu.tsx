@@ -335,13 +335,25 @@ type DropdownMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
 type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
   typeof Menu.RadioGroup
 >;
-interface DropdownMenuRadioGroupProps extends MenuRadioGroupProps {}
+interface DropdownMenuRadioGroupProps
+  extends Omit<MenuRadioGroupProps, "asChild"> {
+  children: React.ReactNode;
+}
 
 const DropdownMenuRadioGroup = forwardRef<
   DropdownMenuRadioGroupElement,
   DropdownMenuRadioGroupProps
->((props: DropdownMenuRadioGroupProps, ref) => {
-  return <Menu.RadioGroup ref={ref} {...props} />;
+>(({ children, className, ...rest }: DropdownMenuRadioGroupProps, ref) => {
+  return (
+    <Menu.RadioGroup
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-dropdown-group__radio-group", className)}
+    >
+      {children}
+    </Menu.RadioGroup>
+  );
 });
 
 /* -------------------------------------------------------------------------- */
