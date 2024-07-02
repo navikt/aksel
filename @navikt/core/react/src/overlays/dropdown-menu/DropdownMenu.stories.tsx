@@ -12,8 +12,8 @@ export const Demo = () => {
   return (
     <DropdownMenu>
       <DropdownMenu.Trigger>
-        <Button disabled icon={<StarIcon tabIndex={-1} />}>
-          123
+        <Button disabled icon={<StarIcon aria-hidden />}>
+          Dropdown
         </Button>
       </DropdownMenu.Trigger>
     </DropdownMenu>
