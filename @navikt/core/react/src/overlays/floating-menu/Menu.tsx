@@ -12,7 +12,7 @@ import { createContext } from "../../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
-import { Floating } from "../floating/Floating";
+import { Floating, FloatingContentProps } from "../floating/Floating";
 import { FocusScope } from "./parts/FocusScope";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
@@ -71,7 +71,7 @@ const [
   useMenuDescendant,
 ] = createDescendantContext<SlottedDivElementRef>();
 
-type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
+type MenuContentElementRef = HTMLUListElement;
 
 type MenuContextValue = {
   open: boolean;
@@ -258,7 +258,7 @@ const MenuRootContentModal = forwardRef<
 });
 
 /* -------------------------- Menu content implicit ------------------------- */
-type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
+type MenuContentImplElement = HTMLUListElement;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
@@ -272,10 +272,7 @@ type MenuContentImplPrivateProps = {
 
 interface MenuContentImplProps
   extends MenuContentImplPrivateProps,
-    Omit<
-      React.ComponentPropsWithoutRef<typeof Floating.Content>,
-      "dir" | "onPlaced"
-    > {
+    Omit<FloatingContentProps, "dir" | "onPlaced"> {
   /**
    * Event handler called when auto-focusing after close.
    * Can be prevented.
@@ -312,7 +309,7 @@ const MenuContentImpl = forwardRef<
     const context = useMenuContext();
     const rootContext = useMenuRootContext();
 
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLUListElement>(null);
     const composedRefs = useMergeRefs(
       forwardedRef,
       contentRef,
@@ -389,6 +386,7 @@ const MenuContentImpl = forwardRef<
               })}
             >
               <Floating.Content
+                as="ul"
                 role="menu"
                 aria-orientation="vertical"
                 data-state={getOpenState(context.open)}
