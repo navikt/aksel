@@ -27,12 +27,12 @@ export const Demo = () => {
           </DropdownMenu.Item>
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
-        <DropdownMenu.CheckboxItem>Checkbox</DropdownMenu.CheckboxItem>
+        <DropdownMenu.CheckboxItem checked>Checkbox</DropdownMenu.CheckboxItem>
         <DropdownMenu.CheckboxItem shortcut="⌘+S">
           Checkbox
         </DropdownMenu.CheckboxItem>
         <DropdownMenu.Separator />
-        <DropdownMenu.RadioGroup>
+        <DropdownMenu.RadioGroup value="2">
           <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
           <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
         </DropdownMenu.RadioGroup>
