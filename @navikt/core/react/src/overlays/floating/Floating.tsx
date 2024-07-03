@@ -24,7 +24,7 @@ import {
   useClientLayoutEffect,
   useMergeRefs,
 } from "../../util/hooks";
-import { AsChildProps } from "../../util/types";
+import { AsChildProps, OverridableComponent } from "../../util/types";
 import {
   type Align,
   type Measurable,
@@ -196,10 +196,14 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   };
 }
 
-const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
+const FloatingContent: OverridableComponent<
+  FloatingContentProps,
+  HTMLDivElement
+> = forwardRef(
   (
     {
       children,
+      as: Component = "div",
       side = "bottom",
       sideOffset = 0,
       align = "center",
@@ -212,7 +216,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       onPlaced,
       arrow: _arrow,
       ...contentProps
-    }: FloatingContentProps,
+    },
     forwardedRef,
   ) => {
     const context = useFloatingContext();
@@ -364,7 +368,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
           arrowY={arrowY}
           hideArrow={cannotCenterArrow}
         >
-          <div
+          <Component
             ref={mergeRefs}
             data-side={placedSide}
             data-align={placedAlign}
@@ -386,7 +390,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
                 className={_arrow.className}
               />
             )}
-          </div>
+          </Component>
         </FloatingContentProvider>
       </div>
     );
@@ -396,4 +400,4 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
 Floating.Anchor = FloatingAnchor;
 Floating.Content = FloatingContent;
 
-export { Floating };
+export { Floating, FloatingContentProps };
