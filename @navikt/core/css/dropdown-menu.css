@@ -1,11 +1,14 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable aksel/design-token-exists */
 .navds-dropdown-menu__content {
-  padding: 0.5rem;
+  --__ac-dropdown-menu-content-p: 0.5rem;
+  --__ac-dropdown-menu-item-pr: var(--a-spacing-3);
+  --__ac-dropdown-menu-item-pl: var(--a-spacing-2);
+  --__ac-dropdown-menu-item-height: 32px;
+
+  padding: var(--__ac-dropdown-menu-content-p);
   box-shadow: var(--a-shadow-medium);
   border-radius: var(--a-border-radius-large);
-  border: 1px solid;
-  border-color: var(--a-border-subtle);
   background-color: var(--a-surface-default);
   overflow: auto;
   max-height: var(--ac-dropdown-menu-content-available-height);
@@ -44,12 +47,17 @@ TODO: add support for other directions */
   display: flex;
   align-items: center;
   gap: var(--a-spacing-2);
-  min-height: 32px;
-  padding-inline: var(--a-spacing-4) var(--a-spacing-1);
+  min-height: var(--__ac-dropdown-menu-item-height);
   cursor: default;
   border-radius: var(--a-border-radius-medium);
   position: relative;
-  font-size: var(--a-font-size-medium);
+  padding-left: var(--__ac-dropdown-menu-item-pl);
+  padding-right: var(--__ac-dropdown-menu-item-pr);
+  font-size: var(--a-font-size-small);
+}
+
+.navds-dropdown-menu__item:where(.navds-dropdown-menu__checkbox, .navds-dropdown-menu__radio) {
+  --__ac-dropdown-menu-item-pl: var(--a-spacing-5);
 }
 
 .navds-dropdown-menu__item:focus {
@@ -71,7 +79,18 @@ TODO: add support for other directions */
 }
 
 .navds-dropdown-menu__label {
-  --a: ;
+  display: flex;
+  align-items: center;
+  height: var(--__ac-dropdown-menu-item-height);
+  padding-left: var(--__ac-dropdown-menu-item-pl);
+  padding-right: var(--__ac-dropdown-menu-item-pr);
+  color: var(--a-text-subtle);
+  background: var(--a-surface-neutral-subtle);
+  border-radius: var(--a-border-radius-medium);
+  user-select: none;
+  cursor: default;
+  font-size: var(--a-font-size-small);
+  font-weight: 600;
 }
 
 .navds-dropdown-menu__group {
@@ -92,7 +111,9 @@ TODO: add support for other directions */
 
 .navds-dropdown-menu__separator {
   height: 1px;
-  margin: var(--a-spacing-2) var(--a-spacing-1) var(--a-spacing-2) var(--a-spacing-1);
+  margin-block: var(--a-spacing-2);
+  margin-left: var(--__ac-dropdown-menu-item-pl);
+  margin-right: var(--__ac-dropdown-menu-item-pr);
   background-color: var(--a-border-divider);
 }
 
@@ -107,13 +128,13 @@ TODO: add support for other directions */
 .navds-dropdown-menu__indicator {
   position: absolute;
   left: 0;
-  width: 1rem;
-  display: flex;
+  width: var(--__ac-dropdown-menu-item-pl);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.navds-dropdown-menu__indicator-icon {
-  width: 1rem;
-  height: 1rem;
+:where(.navds-dropdown-menu__indicator-icon, .navds-dropdown-menu__sub-trigger-icon) {
+  width: 16px;
+  height: 16px;
 }

@@ -530,7 +530,7 @@ const DropdownMenuSubTrigger = forwardRef<
       className={cl("navds-dropdown-menu__sub-trigger", className)}
     >
       {children}
-      <div>
+      <div className="navds-dropdown-menu__sub-trigger-icon">
         <ChevronRightIcon aria-hidden />
       </div>
     </Menu.SubTrigger>

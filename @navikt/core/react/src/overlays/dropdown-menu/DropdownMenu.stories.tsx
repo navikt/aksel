@@ -14,15 +14,18 @@ export const Demo = () => {
         <Button>Dropdown</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
-          Item 1
-        </DropdownMenu.Item>
-        <DropdownMenu.Item
-          onSelect={() => console.log("Item 2 clicked")}
-          shortcut="⌘+S"
-        >
-          Item 2
-        </DropdownMenu.Item>
+        <DropdownMenu.Label>Lenker</DropdownMenu.Label>
+        <DropdownMenu.Group>
+          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+            Item 1
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={() => console.log("Item 2 clicked")}
+            shortcut="⌘+S"
+          >
+            Item 2
+          </DropdownMenu.Item>
+        </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.CheckboxItem>Checkbox</DropdownMenu.CheckboxItem>
         <DropdownMenu.CheckboxItem shortcut="⌘+S">
