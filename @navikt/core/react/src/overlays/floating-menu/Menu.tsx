@@ -1,5 +1,4 @@
 import React, {
-  HTMLAttributes,
   forwardRef,
   useCallback,
   useEffect,
@@ -8,13 +7,12 @@ import React, {
 } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
-import { Slot } from "../../slot/Slot";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useCallbackRef, useId, useMergeRefs } from "../../util/hooks";
 import { createDescendantContext } from "../../util/hooks/descendants/useDescendant";
 import { DismissableLayer } from "../dismissablelayer/DismissableLayer";
-import { Floating, FloatingContentProps } from "../floating/Floating";
+import { Floating } from "../floating/Floating";
 import { FocusScope } from "./parts/FocusScope";
 import { RovingFocus, RovingFocusProps } from "./parts/RovingFocus";
 import {
@@ -71,9 +69,9 @@ const [
   useMenuDescendantsContext,
   useMenuDescendants,
   useMenuDescendant,
-] = createDescendantContext<HTMLLIElement>();
+] = createDescendantContext<SlottedDivElementRef>();
 
-type MenuContentElementRef = HTMLUListElement;
+type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
 
 type MenuContextValue = {
   open: boolean;
@@ -260,7 +258,7 @@ const MenuRootContentModal = forwardRef<
 });
 
 /* -------------------------- Menu content implicit ------------------------- */
-type MenuContentImplElement = HTMLUListElement;
+type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
@@ -274,7 +272,10 @@ type MenuContentImplPrivateProps = {
 
 interface MenuContentImplProps
   extends MenuContentImplPrivateProps,
-    Omit<FloatingContentProps, "dir" | "onPlaced"> {
+    Omit<
+      React.ComponentPropsWithoutRef<typeof Floating.Content>,
+      "dir" | "onPlaced"
+    > {
   /**
    * Event handler called when auto-focusing after close.
    * Can be prevented.
@@ -311,7 +312,7 @@ const MenuContentImpl = forwardRef<
     const context = useMenuContext();
     const rootContext = useMenuRootContext();
 
-    const contentRef = useRef<HTMLUListElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(
       forwardedRef,
       contentRef,
@@ -388,7 +389,6 @@ const MenuContentImpl = forwardRef<
               })}
             >
               <Floating.Content
-                as="ul"
                 role="menu"
                 aria-orientation="vertical"
                 data-state={getOpenState(context.open)}
@@ -478,7 +478,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
     }: MenuItemProps,
     forwardedRef,
   ) => {
-    const ref = useRef<HTMLLIElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
     const rootContext = useMenuRootContext();
     const composedRefs = useMergeRefs(forwardedRef, ref);
     const isPointerDownRef = useRef(false);
@@ -546,17 +546,15 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
 );
 
 /* --------------------------- Menu Item implicit --------------------------- */
-type MenuItemImplElement = HTMLLIElement;
+type MenuItemImplElement = SlottedDivElementRef;
 
-interface MenuItemImplProps extends HTMLAttributes<HTMLLIElement> {
+interface MenuItemImplProps extends SlottedDivProps {
   disabled?: boolean;
-  asChild?: boolean;
 }
 
 const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
   (
     {
-      asChild,
       disabled = false,
       onPointerMove,
       onPointerLeave,
@@ -567,13 +565,11 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
     const { register } = useMenuDescendant({ disabled });
 
     const contentContext = useMenuContentContext();
-    const ref = useRef<HTMLLIElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
 
-    const Comp = asChild ? Slot : "li";
-
     return (
-      <Comp
+      <SlottedDivElement
         role="menuitem"
         aria-disabled={disabled || undefined}
         data-disabled={disabled ? "" : undefined}
@@ -617,30 +613,22 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
 /* -------------------------------------------------------------------------- */
 /*                                  Menu Group                                 */
 /* -------------------------------------------------------------------------- */
-interface MenuGroupProps extends HTMLAttributes<HTMLUListElement> {
-  asChild?: boolean;
-}
+interface MenuGroupProps extends SlottedDivProps {}
 
-const MenuGroup = forwardRef<HTMLUListElement, MenuGroupProps>(
-  ({ asChild, ...rest }: MenuGroupProps, ref) => {
-    const Comp = asChild ? Slot : "ul";
-
-    return <Comp role="group" {...rest} ref={ref} />;
+const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
+  (props: MenuGroupProps, ref) => {
+    return <SlottedDivElement role="group" {...props} ref={ref} />;
   },
 );
 
 /**
  * MenuLabel
  */
-interface MenuLabelProps extends HTMLAttributes<HTMLLIElement> {
-  asChild?: boolean;
-}
+interface MenuLabelProps extends SlottedDivProps {}
 
-const MenuLabel = forwardRef<HTMLLIElement, MenuLabelProps>(
-  ({ asChild, ...rest }: MenuLabelProps, ref) => {
-    const Comp = asChild ? Slot : "li";
-
-    return <Comp {...rest} ref={ref} />;
+const MenuLabel = forwardRef<SlottedDivElementRef, MenuLabelProps>(
+  (props: MenuLabelProps, ref) => {
+    return <SlottedDivElement {...props} ref={ref} />;
   },
 );
 

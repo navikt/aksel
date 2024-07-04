@@ -7,7 +7,7 @@ import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
 interface RovingFocusProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
   asChild?: boolean;
-  descendants: DescendantsManager<HTMLLIElement, object>;
+  descendants: DescendantsManager<HTMLDivElement, object>;
   onEntryFocus?: (event: Event) => void;
 }
 

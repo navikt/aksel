@@ -358,7 +358,7 @@ const MenuWithAnchor = (props: MenuProps) => {
 export const MenuWithOpenButton = () => {
   const [open, setOpen] = useState(false);
 
-  const contentRef = useRef<HTMLUListElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -416,30 +416,26 @@ export const MenuWithOpenButton = () => {
           align="start"
           ref={contentRef}
         >
-          <Menu.Group aria-label="actions">
-            <Menu.Item className="item" onSelect={() => window.alert("undo")}>
-              Undo
-            </Menu.Item>
-            <Menu.Item className="item" onSelect={() => window.alert("redo")}>
-              Redo
-            </Menu.Item>
-            <Menu.Separator className="separator" />
-            <Menu.Item
-              className="item"
-              disabled
-              onSelect={() => window.alert("cut")}
-            >
-              Cut
-            </Menu.Item>
-          </Menu.Group>
-          <Menu.Group aria-label="clipboard">
-            <Menu.Item className="item" onSelect={() => window.alert("copy")}>
-              Copy
-            </Menu.Item>
-            <Menu.Item className="item" onSelect={() => window.alert("paste")}>
-              Paste
-            </Menu.Item>
-          </Menu.Group>
+          <Menu.Item className="item" onSelect={() => window.alert("undo")}>
+            Undo
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("redo")}>
+            Redo
+          </Menu.Item>
+          <Menu.Separator className="separator" />
+          <Menu.Item
+            className="item"
+            disabled
+            onSelect={() => window.alert("cut")}
+          >
+            Cut
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("copy")}>
+            Copy
+          </Menu.Item>
+          <Menu.Item className="item" onSelect={() => window.alert("paste")}>
+            Paste
+          </Menu.Item>
         </Menu.Content>
       </Menu.Portal>
     </Menu>
@@ -533,8 +529,6 @@ const storyStyles = (
       padding: 5px;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
       font-size: 13px;
-      list-style: none;
-      margin: 0;
 
       &:focus-within {
         borderColor: black;
@@ -574,12 +568,6 @@ const storyStyles = (
       margin: 5px 10px;
       height: 1px;
       background-color: gray;
-    }
-
-    [role="group"]{
-      list-style: none;
-      padding: 0;
-      margin: 0;
     }
 
 
