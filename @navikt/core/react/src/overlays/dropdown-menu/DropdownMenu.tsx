@@ -263,19 +263,29 @@ const DropdownMenuContent = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
-interface DropdownMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {}
+interface DropdownMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {
+  label?: string;
+}
 
 const DropdownMenuGroup = forwardRef<
   DropdownMenuGroupElement,
   DropdownMenuGroupProps
->(({ children, className, ...rest }: DropdownMenuGroupProps, ref) => {
+>(({ children, className, label, ...rest }: DropdownMenuGroupProps, ref) => {
+  const labelId = useId();
+
   return (
     <Menu.Group
       ref={ref}
       {...rest}
       className={cl("navds-dropdown-menu__group", className)}
       asChild={false}
+      aria-labelledby={label ? labelId : undefined}
     >
+      {label && (
+        <DropdownMenu.Label id={labelId} aria-hidden>
+          {label}
+        </DropdownMenu.Label>
+      )}
       {children}
     </Menu.Group>
   );
@@ -311,8 +321,8 @@ const DropdownMenuLabel = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
-interface DropdownMenuItemProps extends Omit<MenuItemProps, "asChild"> {
-  children: React.ReactNode;
+/* TODO: Re-omit asChild */
+interface DropdownMenuItemProps extends MenuItemProps {
   shortcut?: string;
 }
 
@@ -321,19 +331,20 @@ const DropdownMenuItem = forwardRef<
   DropdownMenuItemProps
 >(({ children, className, shortcut, ...rest }: DropdownMenuItemProps, ref) => {
   return (
-    <Menu.Item
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl("navds-dropdown-menu__item", className)}
-    >
-      {children}
-      {shortcut && (
-        <Detail size="small" as="div" className="navds-dropdown-menu__shortcut">
-          {shortcut}
-        </Detail>
-      )}
-    </Menu.Item>
+    <li role="presentation">
+      <Menu.Item
+        ref={ref}
+        {...rest}
+        className={cl("navds-dropdown-menu__item", className)}
+      >
+        {children}
+        {shortcut && (
+          <Detail as="div" className="navds-dropdown-menu__shortcut">
+            {shortcut}
+          </Detail>
+        )}
+      </Menu.Item>
+    </li>
   );
 });
 
@@ -412,7 +423,7 @@ const DropdownMenuRadioGroup = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-dropdown-group__radio-group", className)}
+      className={cl("navds-dropdown-menu__radio-group", className)}
     >
       {children}
     </Menu.RadioGroup>

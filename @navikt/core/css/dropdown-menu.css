@@ -7,6 +7,7 @@
   --__ac-dropdown-menu-item-height: 32px;
 
   padding: var(--__ac-dropdown-menu-content-p);
+  margin: 0;
   box-shadow: var(--a-shadow-medium);
   border-radius: var(--a-border-radius-large);
   background-color: var(--a-surface-default);
@@ -54,6 +55,8 @@ TODO: add support for other directions */
   padding-left: var(--__ac-dropdown-menu-item-pl);
   padding-right: var(--__ac-dropdown-menu-item-pr);
   font-size: var(--a-font-size-small);
+  margin: 0;
+  list-style: none;
 }
 
 .navds-dropdown-menu__item:where(.navds-dropdown-menu__checkbox, .navds-dropdown-menu__radio) {
@@ -94,7 +97,9 @@ TODO: add support for other directions */
 }
 
 .navds-dropdown-menu__group {
-  --a: ;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .navds-dropdown-menu__checkbox {
@@ -102,7 +107,9 @@ TODO: add support for other directions */
 }
 
 .navds-dropdown-menu__radio-group {
-  --a: ;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .navds-dropdown-menu__radio {

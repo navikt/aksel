@@ -14,8 +14,7 @@ export const Demo = () => {
         <Button>Dropdown</Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
-        <DropdownMenu.Label>Lenker</DropdownMenu.Label>
-        <DropdownMenu.Group>
+        <DropdownMenu.Group label="Lenker">
           <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </DropdownMenu.Item>
@@ -43,4 +42,107 @@ export const Demo = () => {
 
 Demo.parameters = {
   layout: "padded",
+};
+
+export const MarkupDemo = () => {
+  return (
+    <div className="root">
+      <style>{`ul, li {list-style:none; margin:0;padding:0}
+      .root {
+      display:flex; gap: 2rem;}`}</style>
+      <section aria-label="List markup test">
+        <ul role="menu" aria-orientation="vertical" id="r5" tabIndex={0}>
+          <li>
+            <ul role="group" aria-labelledby="r6">
+              <li id="r6" aria-hidden="true">
+                Gruppe 1
+              </li>
+              <li role="presentation">
+                <a href="#123" role="menuitem" tabIndex={0}>
+                  item 1 i gruppe 1
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#123" role="menuitem" tabIndex={0}>
+                  item 2 i gruppe 1
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul role="group" aria-labelledby="r10">
+              <li id="r10" aria-hidden="true">
+                Gruppe 2
+              </li>
+              <li role="presentation">
+                <a href="#123" role="menuitem" tabIndex={0}>
+                  item 3 i gruppe 2
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#123" role="menuitem" tabIndex={0}>
+                  item 4 i gruppe 2
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section aria-label="div-markup test">
+        <div role="menu" aria-orientation="vertical" id="r5" tabIndex={0}>
+          <div role="group" aria-labelledby="r6">
+            <div id="r6" aria-hidden="true">
+              Gruppe 1
+            </div>
+            <div role="menuitem" tabIndex={0}>
+              item 1 i gruppe 1
+            </div>
+            <div role="menuitem" tabIndex={0}>
+              item 2 i gruppe 1
+            </div>
+          </div>
+          <div role="group" aria-labelledby="r11">
+            <div id="r11" aria-hidden="true">
+              Gruppe 2
+            </div>
+            <div role="menuitem" tabIndex={0}>
+              item 3 i gruppe 2
+            </div>
+            <div role="menuitem" tabIndex={0}>
+              item 4 i gruppe 2
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export const MarkupDemo2 = () => {
+  return (
+    <div className="root">
+      <style>{`ul, li {list-style:none; margin:0;padding:0}
+      .root {
+      display:flex; gap: 2rem;}`}</style>
+      <section aria-label="Link versus button test">
+        <div role="menu" aria-orientation="vertical" tabIndex={0}>
+          <a
+            href="#123"
+            role="menuitem"
+            tabIndex={0}
+            onClick={() => alert("klikket på lenke")}
+          >
+            Dette er en lenke med menuitem
+          </a>
+          <button
+            role="menuitem"
+            tabIndex={0}
+            onClick={() => alert("klikket på knapp")}
+          >
+            Dette er en knapp med menuitem
+          </button>
+        </div>
+      </section>
+    </div>
+  );
 };
