@@ -410,23 +410,37 @@ type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
 interface DropdownMenuRadioGroupProps
   extends Omit<MenuRadioGroupProps, "asChild"> {
   children: React.ReactNode;
+  label?: string;
 }
 
 const DropdownMenuRadioGroup = forwardRef<
   DropdownMenuRadioGroupElement,
   DropdownMenuRadioGroupProps
->(({ children, className, ...rest }: DropdownMenuRadioGroupProps, ref) => {
-  return (
-    <Menu.RadioGroup
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl("navds-dropdown-menu__radio-group", className)}
-    >
-      {children}
-    </Menu.RadioGroup>
-  );
-});
+>(
+  (
+    { children, className, label, ...rest }: DropdownMenuRadioGroupProps,
+    ref,
+  ) => {
+    const labelId = useId();
+
+    return (
+      <Menu.RadioGroup
+        ref={ref}
+        {...rest}
+        asChild={false}
+        className={cl("navds-dropdown-menu__radio-group", className)}
+        aria-labelledby={label ? labelId : undefined}
+      >
+        {label && (
+          <DropdownMenu.Label id={labelId} aria-hidden>
+            {label}
+          </DropdownMenu.Label>
+        )}
+        {children}
+      </Menu.RadioGroup>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                           DropdownMenuRadioItem                            */
