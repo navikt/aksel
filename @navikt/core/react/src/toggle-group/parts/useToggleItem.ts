@@ -77,9 +77,16 @@ export function useToggleItem<P extends UseToggleItemProps>(
         End: lastTab,
       };
 
+      const shouldDoAction = !(
+        event.shiftKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.metaKey
+      );
+
       const action = keyMap[event.key];
 
-      if (action) {
+      if (shouldDoAction && action) {
         event.preventDefault();
         action(event);
       } else if (event.key === "Tab") {
