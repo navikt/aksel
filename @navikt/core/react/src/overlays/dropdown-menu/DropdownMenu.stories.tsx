@@ -1,47 +1,88 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Button } from "../../button";
+import { VStack } from "../../layout/stack";
 import { DropdownMenu } from "./DropdownMenu";
 
 export default {
   title: "ds-react/DropdownMenu",
+  parameters: {
+    layout: "padded",
+  },
 } satisfies Meta<typeof DropdownMenu>;
 
-export const Demo = () => {
-  return (
-    <DropdownMenu open>
-      <DropdownMenu.Trigger>
-        <Button>Dropdown</Button>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content>
-        <DropdownMenu.Group label="Lenker">
+type Story = StoryObj<typeof DropdownMenu>;
+
+const DemoDecorator = (Story: any) => (
+  <VStack gap="4" align="start">
+    <p>Placeholder before button</p>
+    <button>Focusable item before dropdown</button>
+    <Story />
+    <button>Focusable item after dropdown</button>
+    <p>Placeholder after button</p>
+  </VStack>
+);
+
+export const OnlyItems: Story = {
+  render: () => {
+    return (
+      <DropdownMenu>
+        <DropdownMenu.Trigger>
+          <button>Open dropdown</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
           <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </DropdownMenu.Item>
-          <DropdownMenu.Item
-            onSelect={() => console.log("Item 2 clicked")}
-            shortcut="⌘+S"
-          >
+          <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2
           </DropdownMenu.Item>
-        </DropdownMenu.Group>
-        <DropdownMenu.Separator />
-        <DropdownMenu.CheckboxItem checked>Checkbox</DropdownMenu.CheckboxItem>
-        <DropdownMenu.CheckboxItem shortcut="⌘+S">
-          Checkbox
-        </DropdownMenu.CheckboxItem>
-        <DropdownMenu.Separator />
-        <DropdownMenu.RadioGroup value="2">
-          <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
-          <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
-        </DropdownMenu.RadioGroup>
-      </DropdownMenu.Content>
-    </DropdownMenu>
-  );
+          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+            Item 3
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
 };
 
-Demo.parameters = {
-  layout: "padded",
+export const Demo: Story = {
+  render: () => {
+    return (
+      <DropdownMenu open>
+        <DropdownMenu.Trigger>
+          <Button>Dropdown</Button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Group label="Lenker">
+            <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+              Item 1
+            </DropdownMenu.Item>
+            <DropdownMenu.Item
+              onSelect={() => console.log("Item 2 clicked")}
+              shortcut="⌘+S"
+            >
+              Item 2
+            </DropdownMenu.Item>
+          </DropdownMenu.Group>
+          <DropdownMenu.Separator />
+          <DropdownMenu.CheckboxItem checked>
+            Checkbox
+          </DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem shortcut="⌘+S">
+            Checkbox
+          </DropdownMenu.CheckboxItem>
+          <DropdownMenu.Separator />
+          <DropdownMenu.RadioGroup value="2">
+            <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
+            <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
 };
 
 export const MarkupDemo = () => {

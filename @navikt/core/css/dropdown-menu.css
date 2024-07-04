@@ -5,6 +5,7 @@
   --__ac-dropdown-menu-item-pr: var(--a-spacing-3);
   --__ac-dropdown-menu-item-pl: var(--a-spacing-2);
   --__ac-dropdown-menu-item-height: 32px;
+  --__ac-dropdown-menu-content-min-width: 8rem;
 
   padding: var(--__ac-dropdown-menu-content-p);
   margin: 0;
@@ -12,6 +13,7 @@
   border-radius: var(--a-border-radius-large);
   background-color: var(--a-surface-default);
   overflow: auto;
+  min-width: var(--__ac-dropdown-menu-content-min-width);
   max-height: var(--ac-dropdown-menu-content-available-height);
   transform-origin: var(--ac-dropdown-menu-content-transform-origin);
 }
