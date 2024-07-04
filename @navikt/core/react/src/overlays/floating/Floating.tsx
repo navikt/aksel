@@ -24,7 +24,7 @@ import {
   useClientLayoutEffect,
   useMergeRefs,
 } from "../../util/hooks";
-import { AsChildProps, OverridableComponent } from "../../util/types";
+import { AsChildProps } from "../../util/types";
 import {
   type Align,
   type Measurable,
@@ -196,14 +196,10 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   };
 }
 
-const FloatingContent: OverridableComponent<
-  FloatingContentProps,
-  HTMLDivElement
-> = forwardRef(
+const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   (
     {
       children,
-      as: Component = "div",
       side = "bottom",
       sideOffset = 0,
       align = "center",
@@ -216,7 +212,7 @@ const FloatingContent: OverridableComponent<
       onPlaced,
       arrow: _arrow,
       ...contentProps
-    },
+    }: FloatingContentProps,
     forwardedRef,
   ) => {
     const context = useFloatingContext();
@@ -368,7 +364,7 @@ const FloatingContent: OverridableComponent<
           arrowY={arrowY}
           hideArrow={cannotCenterArrow}
         >
-          <Component
+          <div
             ref={mergeRefs}
             data-side={placedSide}
             data-align={placedAlign}
@@ -390,7 +386,7 @@ const FloatingContent: OverridableComponent<
                 className={_arrow.className}
               />
             )}
-          </Component>
+          </div>
         </FloatingContentProvider>
       </div>
     );
@@ -400,4 +396,4 @@ const FloatingContent: OverridableComponent<
 Floating.Anchor = FloatingAnchor;
 Floating.Content = FloatingContent;
 
-export { Floating, FloatingContentProps };
+export { Floating };

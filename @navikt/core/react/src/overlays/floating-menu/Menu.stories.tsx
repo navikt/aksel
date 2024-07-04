@@ -358,7 +358,7 @@ const MenuWithAnchor = (props: MenuProps) => {
 export const MenuWithOpenButton = () => {
   const [open, setOpen] = useState(false);
 
-  const contentRef = useRef<HTMLUListElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -529,8 +529,6 @@ const storyStyles = (
       padding: 5px;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
       font-size: 13px;
-      list-style: none;
-      margin: 0;
 
       &:focus-within {
         borderColor: black;
