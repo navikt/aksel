@@ -65,8 +65,8 @@ TODO: add support for other directions */
 
 .navds-dropdown-menu__item:focus {
   outline: none;
-  background-color: var(--a-surface-action-active);
-  color: var(--a-text-on-action);
+  background-color: var(--a-surface-action-subtle-hover);
+  color: var(--a-text-default);
 }
 
 .navds-dropdown-menu__shortcut {
@@ -78,7 +78,7 @@ TODO: add support for other directions */
 }
 
 .navds-dropdown-menu__item:focus > .navds-dropdown-menu__shortcut {
-  color: var(--a-text-on-action);
+  color: var(--a-text-default);
 }
 
 .navds-dropdown-menu__label {
@@ -88,7 +88,6 @@ TODO: add support for other directions */
   padding-left: var(--__ac-dropdown-menu-item-pl);
   padding-right: var(--__ac-dropdown-menu-item-pr);
   color: var(--a-text-subtle);
-  background: var(--a-surface-neutral-subtle);
   border-radius: var(--a-border-radius-medium);
   user-select: none;
   cursor: default;

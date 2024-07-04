@@ -331,20 +331,18 @@ const DropdownMenuItem = forwardRef<
   DropdownMenuItemProps
 >(({ children, className, shortcut, ...rest }: DropdownMenuItemProps, ref) => {
   return (
-    <li role="presentation">
-      <Menu.Item
-        ref={ref}
-        {...rest}
-        className={cl("navds-dropdown-menu__item", className)}
-      >
-        {children}
-        {shortcut && (
-          <Detail as="div" className="navds-dropdown-menu__shortcut">
-            {shortcut}
-          </Detail>
-        )}
-      </Menu.Item>
-    </li>
+    <Menu.Item
+      ref={ref}
+      {...rest}
+      className={cl("navds-dropdown-menu__item", className)}
+    >
+      {children}
+      {shortcut && (
+        <Detail as="div" className="navds-dropdown-menu__shortcut">
+          {shortcut}
+        </Detail>
+      )}
+    </Menu.Item>
   );
 });
 
