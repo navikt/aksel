@@ -167,3 +167,7 @@ TODO: add support for other directions */
   color: var(--a-text-subtle);
   opacity: 0.5;
 }
+
+.navds-dropdown-menu__sub-trigger:where([data-state="open"]) {
+  background-color: var(--a-surface-neutral-subtle);
+}
