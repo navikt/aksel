@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
+import { Modal } from "../../modal";
+import { Tooltip } from "../../tooltip";
 import { DropdownMenu } from "./DropdownMenu";
 
 export default {
@@ -12,15 +15,18 @@ export default {
 
 type Story = StoryObj<typeof DropdownMenu>;
 
-const DemoDecorator = (Story: any) => (
-  <VStack gap="4" align="start">
-    <p>Placeholder before button</p>
-    <button>Focusable item before dropdown</button>
-    <Story />
-    <button>Focusable item after dropdown</button>
-    <p>Placeholder after button</p>
-  </VStack>
-);
+const DemoDecorator = (Story: any, { name }) => {
+  return (
+    <VStack gap="4" align="start">
+      <h2>{name}</h2>
+      <p>Placeholder before button</p>
+      <button>Focusable item before dropdown</button>
+      <Story />
+      <button>Focusable item after dropdown</button>
+      <p>Placeholder after button</p>
+    </VStack>
+  );
+};
 
 export const OnlyItems: Story = {
   render: () => {
@@ -243,6 +249,171 @@ export const SeparatorWithItems: Story = {
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+export const Submenus: Story = {
+  render: () => {
+    return (
+      <DropdownMenu>
+        <DropdownMenu.Trigger>
+          <button>Open dropdown</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+            Item 1
+          </DropdownMenu.Item>
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>Submenu 1</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              <DropdownMenu.Item
+                onSelect={() => console.log("Subitem 1 clicked")}
+              >
+                Subitem 1
+              </DropdownMenu.Item>
+              <DropdownMenu.Item
+                onSelect={() => console.log("Subitem 2 clicked")}
+              >
+                Subitem 2
+              </DropdownMenu.Item>
+              <DropdownMenu.Sub>
+                <DropdownMenu.SubTrigger>
+                  Nested submenu 1
+                </DropdownMenu.SubTrigger>
+                <DropdownMenu.SubContent>
+                  <DropdownMenu.Item
+                    onSelect={() => console.log("Nested Subitem 1 clicked")}
+                  >
+                    Nested Subitem 1
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    onSelect={() => console.log("Nested Subitem 2 clicked")}
+                  >
+                    Nested Subitem 2
+                  </DropdownMenu.Item>
+                </DropdownMenu.SubContent>
+              </DropdownMenu.Sub>
+            </DropdownMenu.SubContent>
+          </DropdownMenu.Sub>
+
+          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+            Item 3
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+export const Disabled: Story = {
+  render: () => {
+    return (
+      <DropdownMenu>
+        <DropdownMenu.Trigger>
+          <button>Open dropdown</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Item
+            onSelect={() => console.log("Item 1 clicked")}
+            disabled
+          >
+            Item 1
+          </DropdownMenu.Item>
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger disabled>
+              Submenu 1
+            </DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              <DropdownMenu.Item
+                onSelect={() => console.log("Subitem 1 clicked")}
+              >
+                Subitem 1
+              </DropdownMenu.Item>
+            </DropdownMenu.SubContent>
+          </DropdownMenu.Sub>
+
+          <DropdownMenu.CheckboxItem checked disabled>
+            Checkbox disabled
+          </DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem>Checkbox 2</DropdownMenu.CheckboxItem>
+          <DropdownMenu.RadioGroup value="1" label="Radiogroup">
+            <DropdownMenu.RadioItem disabled value="1">
+              Radio disabled
+            </DropdownMenu.RadioItem>
+            <DropdownMenu.RadioItem value="2">Radio</DropdownMenu.RadioItem>
+          </DropdownMenu.RadioGroup>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+export const TriggerWithTooltip: Story = {
+  render: () => {
+    return (
+      <DropdownMenu>
+        <Tooltip content="Tooltip!">
+          <DropdownMenu.Trigger>
+            <button>Open dropdown</button>
+          </DropdownMenu.Trigger>
+        </Tooltip>
+        <DropdownMenu.Content>
+          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+            Item 1
+          </DropdownMenu.Item>
+          <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+            Item 2
+          </DropdownMenu.Item>
+          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+            Item 3
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+/**
+ * TODO: Bugs
+ * - When keydown "space" on open modal button, the modal is closed instantly.
+ * Unsure if this is because of the keydown-event repeats or if its caused by eventbubbling
+ */
+export const ModalTrigger: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    return (
+      <div>
+        <DropdownMenu>
+          <DropdownMenu.Trigger>
+            <button>Open dropdown</button>
+          </DropdownMenu.Trigger>
+
+          <DropdownMenu.Content>
+            <DropdownMenu.Item onSelect={() => ref.current?.showModal()}>
+              open modal
+            </DropdownMenu.Item>
+            <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+              Item 2
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu>
+        <Modal ref={ref} header={{ heading: "Heading" }}>
+          <Modal.Body>
+            Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button type="button" onClick={() => ref.current?.close()}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   },
   decorators: [DemoDecorator],
