@@ -550,7 +550,10 @@ const DropdownMenuSubTrigger = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-dropdown-menu__sub-trigger", className)}
+      className={cl(
+        "navds-dropdown-menu__item navds-dropdown-menu__sub-trigger",
+        className,
+      )}
     >
       {children}
       <div className="navds-dropdown-menu__sub-trigger-icon">
@@ -596,7 +599,10 @@ const DropdownMenuSubContent = forwardRef<
           sideOffset={1}
           collisionPadding={10}
           {...rest}
-          className={cl("navds-dropdown-menu__sub-content", className)}
+          className={cl(
+            "navds-dropdown-menu__content navds-dropdown-menu__sub-content",
+            className,
+          )}
           style={{
             ...style,
             ...{

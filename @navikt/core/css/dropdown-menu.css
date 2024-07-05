@@ -59,6 +59,7 @@ TODO: add support for other directions */
   font-size: var(--a-font-size-small);
   margin: 0;
   list-style: none;
+  scroll-margin-block: var(--__ac-dropdown-menu-content-p);
 }
 
 .navds-dropdown-menu__item:where(.navds-dropdown-menu__checkbox, .navds-dropdown-menu__radio) {
@@ -75,8 +76,16 @@ TODO: add support for other directions */
   display: flex;
   align-items: center;
   margin-left: auto;
-  padding-left: var(--space-4);
+  padding-left: var(--a-spacing-4);
   color: var(--a-text-subtle);
+}
+
+.navds-dropdown-menu__sub-trigger-icon {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: var(--a-spacing-4);
+  margin-right: -8px;
 }
 
 .navds-dropdown-menu__item:focus > .navds-dropdown-menu__shortcut {
@@ -142,7 +151,19 @@ TODO: add support for other directions */
   justify-content: center;
 }
 
-:where(.navds-dropdown-menu__indicator-icon, .navds-dropdown-menu__sub-trigger-icon) {
-  width: 16px;
-  height: 16px;
+:where(.navds-dropdown-menu__indicator-icon, .navds-dropdown-menu__sub-trigger-icon) > * {
+  flex-shrink: 0;
+}
+
+:where(.navds-dropdown-menu__indicator-icon) {
+  font-size: 16px;
+}
+
+:where(.navds-dropdown-menu__sub-trigger-icon) {
+  font-size: 18px;
+}
+
+.navds-dropdown-menu__item:where([aria-disabled="true"]) {
+  color: var(--a-text-subtle);
+  opacity: 0.5;
 }
