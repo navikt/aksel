@@ -173,6 +173,19 @@ TODO: add support for other directions */
 
 .navds-dropdown-menu__indicator:where(:not([data-state="unchecked"])) > .navds-dropdown-menu__indicator-icon--checked {
   display: block;
+  animation: aksel-dropdown-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes aksel-dropdown-form-fadein {
+  from {
+    transform: scale(0.85);
+    opacity: 0.1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 :where(.navds-dropdown-menu__sub-trigger-icon) {

@@ -375,6 +375,7 @@ interface DropdownMenuCheckboxItemProps
   shortcut?: string;
 }
 
+/* TODO: Add indeterminate svg */
 const DropdownMenuCheckboxItem = forwardRef<
   DropdownMenuCheckboxItemElement,
   DropdownMenuCheckboxItemProps
@@ -516,74 +517,87 @@ interface DropdownMenuRadioItemProps
 const DropdownMenuRadioItem = forwardRef<
   DropdownMenuRadioItemElement,
   DropdownMenuRadioItemProps
->(({ children, className, ...rest }: DropdownMenuRadioItemProps, ref) => {
-  return (
-    <Menu.RadioItem
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl(
-        "navds-dropdown-menu__item navds-dropdown-menu__radio",
-        className,
-      )}
-    >
-      {children}
-      <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
-        <svg
-          width="1em"
-          height="1em"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
-          aria-hidden
-        >
-          <rect width="24" height="24" rx="12" fill="var(--a-border-default)" />
-          <rect
-            x="1"
-            y="1"
-            width="22"
-            height="22"
-            rx="11"
-            strokeWidth="2"
-            fill="var(--a-surface-default)"
-          />
-        </svg>
-        <svg
-          width="1em"
-          height="1em"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
-          aria-hidden
-        >
-          <rect
-            x="1"
-            y="1"
-            width="22"
-            height="22"
-            rx="11"
-            fill="var(--a-surface-default)"
-          />
-          <rect
-            x="1"
-            y="1"
-            width="22"
-            height="22"
-            rx="11"
-            stroke="var(--a-surface-action-selected)"
-            strokeWidth="2"
-          />
-          <path
-            d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-            fill="var(--a-surface-action-selected)"
-          />
-        </svg>
-      </Menu.ItemIndicator>
-    </Menu.RadioItem>
-  );
-});
+>(
+  (
+    { children, className, onSelect, ...rest }: DropdownMenuRadioItemProps,
+    ref,
+  ) => {
+    return (
+      <Menu.RadioItem
+        ref={ref}
+        {...rest}
+        onSelect={composeEventHandlers(onSelect, (event) => {
+          event.preventDefault();
+        })}
+        asChild={false}
+        className={cl(
+          "navds-dropdown-menu__item navds-dropdown-menu__radio",
+          className,
+        )}
+      >
+        {children}
+        <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
+            aria-hidden
+          >
+            <rect
+              width="24"
+              height="24"
+              rx="12"
+              fill="var(--a-border-default)"
+            />
+            <rect
+              x="1"
+              y="1"
+              width="22"
+              height="22"
+              rx="11"
+              strokeWidth="2"
+              fill="var(--a-surface-default)"
+            />
+          </svg>
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
+            aria-hidden
+          >
+            <rect
+              x="1"
+              y="1"
+              width="22"
+              height="22"
+              rx="11"
+              fill="var(--a-surface-default)"
+            />
+            <rect
+              x="1"
+              y="1"
+              width="22"
+              height="22"
+              rx="11"
+              stroke="var(--a-surface-action-selected)"
+              strokeWidth="2"
+            />
+            <path
+              d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+              fill="var(--a-surface-action-selected)"
+            />
+          </svg>
+        </Menu.ItemIndicator>
+      </Menu.RadioItem>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                           DropdownMenuSeparator                            */
