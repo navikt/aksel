@@ -171,7 +171,12 @@ TODO: add support for other directions */
   display: block;
 }
 
-.navds-dropdown-menu__indicator:where(:not([data-state="unchecked"])) > .navds-dropdown-menu__indicator-icon--checked {
+.navds-dropdown-menu__indicator:where([data-state="checked"]) > .navds-dropdown-menu__indicator-icon--checked {
+  display: block;
+  animation: aksel-dropdown-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navds-dropdown-menu__indicator:where([data-state="indeterminate"]) > .navds-dropdown-menu__indicator-icon--indeterminate {
   display: block;
   animation: aksel-dropdown-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
