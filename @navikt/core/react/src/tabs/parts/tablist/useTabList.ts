@@ -48,16 +48,12 @@ export function useTabList() {
         End: lastTab,
       };
 
-      const shouldDoAction = !(
-        event.shiftKey ||
-        event.ctrlKey ||
-        event.altKey ||
-        event.metaKey
-      );
+      const hasModifiers =
+        event.shiftKey || event.ctrlKey || event.altKey || event.metaKey;
 
       const action = keyMap[event.key];
 
-      if (shouldDoAction && action) {
+      if (action && !hasModifiers) {
         event.preventDefault();
         action(event);
       } else if (event.key === "Tab") {
