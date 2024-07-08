@@ -380,13 +380,22 @@ const DropdownMenuCheckboxItem = forwardRef<
   DropdownMenuCheckboxItemProps
 >(
   (
-    { children, className, shortcut, ...rest }: DropdownMenuCheckboxItemProps,
+    {
+      children,
+      className,
+      shortcut,
+      onSelect,
+      ...rest
+    }: DropdownMenuCheckboxItemProps,
     ref,
   ) => {
     return (
       <Menu.CheckboxItem
         ref={ref}
         {...rest}
+        onSelect={composeEventHandlers(onSelect, (event) => {
+          event.preventDefault();
+        })}
         asChild={false}
         className={cl(
           "navds-dropdown-menu__item navds-dropdown-menu__checkbox",
