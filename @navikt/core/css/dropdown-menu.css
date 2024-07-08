@@ -160,7 +160,19 @@ TODO: add support for other directions */
 }
 
 :where(.navds-dropdown-menu__indicator-icon) {
-  font-size: 16px;
+  font-size: 12px;
+}
+
+.navds-dropdown-menu__indicator-icon {
+  display: none;
+}
+
+.navds-dropdown-menu__indicator[data-state="unchecked"] > .navds-dropdown-menu__indicator-icon--unchecked {
+  display: block;
+}
+
+.navds-dropdown-menu__indicator:where(:not([data-state="unchecked"])) > .navds-dropdown-menu__indicator-icon--checked {
+  display: block;
 }
 
 :where(.navds-dropdown-menu__sub-trigger-icon) {

@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
-import { CheckmarkIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Detail } from "../../typography";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -404,17 +404,55 @@ const DropdownMenuCheckboxItem = forwardRef<
       >
         {children}
         <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
-          <CheckmarkIcon
-            aria-hidden="true"
-            className="navds-dropdown-menu__indicator-icon"
-          />
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
+            aria-hidden
+          >
+            <rect
+              width="24"
+              height="24"
+              rx="4"
+              fill="var(--a-border-default)"
+            />
+            <rect
+              x="1"
+              y="1"
+              width="22"
+              height="22"
+              rx="3"
+              fill="var(--a-surface-default)"
+              strokeWidth="2"
+            />
+          </svg>
+
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
+            aria-hidden
+          >
+            <rect
+              width="24"
+              height="24"
+              rx="4"
+              fill="var(--a-surface-action-selected)"
+            />
+            <path
+              d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
+              fill="var(--a-surface-default)"
+            />
+          </svg>
         </Menu.ItemIndicator>
         {shortcut && (
-          <Detail
-            size="small"
-            as="div"
-            className="navds-dropdown-menu__shortcut"
-          >
+          <Detail as="div" className="navds-dropdown-menu__shortcut">
             {shortcut}
           </Detail>
         )}
@@ -492,16 +530,55 @@ const DropdownMenuRadioItem = forwardRef<
       {children}
       <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
         <svg
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden
           width="1em"
           height="1em"
-          focusable="false"
-          role="img"
-          className="navds-dropdown-menu__indicator-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
+          aria-hidden
         >
-          <circle cx="12" cy="12" r="6" />
+          <rect width="24" height="24" rx="12" fill="var(--a-border-default)" />
+          <rect
+            x="1"
+            y="1"
+            width="22"
+            height="22"
+            rx="11"
+            strokeWidth="2"
+            fill="var(--a-surface-default)"
+          />
+        </svg>
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
+          aria-hidden
+        >
+          <rect
+            x="1"
+            y="1"
+            width="22"
+            height="22"
+            rx="11"
+            fill="var(--a-surface-default)"
+          />
+          <rect
+            x="1"
+            y="1"
+            width="22"
+            height="22"
+            rx="11"
+            stroke="var(--a-surface-action-selected)"
+            strokeWidth="2"
+          />
+          <path
+            d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+            fill="var(--a-surface-action-selected)"
+          />
         </svg>
       </Menu.ItemIndicator>
     </Menu.RadioItem>

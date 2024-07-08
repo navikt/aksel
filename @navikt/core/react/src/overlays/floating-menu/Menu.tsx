@@ -706,10 +706,6 @@ const MenuItemIndicator = forwardRef<
 >(({ asChild, ...rest }, ref) => {
   const ctx = useMenuItemIndicatorContext();
 
-  if (!ctx.state) {
-    return null;
-  }
-
   return (
     <SlottedDivElement
       {...rest}
