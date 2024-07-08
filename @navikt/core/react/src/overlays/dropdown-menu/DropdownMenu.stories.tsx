@@ -157,6 +157,85 @@ export const CheckboxGroups: Story = {
   decorators: [DemoDecorator],
 };
 
+export const CheckboxIndeterminateGroups: Story = {
+  render: () => {
+    const [checkedItems, setCheckedItems] = useState({
+      checkbox1: false,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: false,
+    });
+
+    // Step 3: Handle change
+    const handleCheckboxChange = (checkboxId: string) => {
+      setCheckedItems((prevState) => ({
+        ...prevState,
+        [checkboxId]: !prevState[checkboxId],
+      }));
+    };
+
+    return (
+      <DropdownMenu>
+        <DropdownMenu.Trigger>
+          <button>Open dropdown</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.CheckboxItem
+            checked={
+              Object.values(checkedItems).every(Boolean)
+                ? true
+                : Object.values(checkedItems).some(Boolean)
+                  ? "indeterminate"
+                  : false
+            }
+            onCheckedChange={() =>
+              Object.values(checkedItems).every(Boolean)
+                ? checkedItems
+                : setCheckedItems((prevState) =>
+                    Object.keys(prevState).reduce(
+                      (acc, key) => ({ ...acc, [key]: true }),
+                      {} as typeof checkedItems,
+                    ),
+                  )
+            }
+          >
+            Select all
+          </DropdownMenu.CheckboxItem>
+          <DropdownMenu.Group label="Group 1">
+            <DropdownMenu.CheckboxItem
+              checked={checkedItems.checkbox1}
+              onCheckedChange={() => handleCheckboxChange("checkbox1")}
+            >
+              Checkbox 1
+            </DropdownMenu.CheckboxItem>
+            <DropdownMenu.CheckboxItem
+              checked={checkedItems.checkbox2}
+              onCheckedChange={() => handleCheckboxChange("checkbox2")}
+            >
+              Checkbox 1
+            </DropdownMenu.CheckboxItem>
+          </DropdownMenu.Group>
+          <DropdownMenu.Group label="Group 2">
+            <DropdownMenu.CheckboxItem
+              checked={checkedItems.checkbox3}
+              onCheckedChange={() => handleCheckboxChange("checkbox3")}
+            >
+              Checkbox 3
+            </DropdownMenu.CheckboxItem>
+            <DropdownMenu.CheckboxItem
+              checked={checkedItems.checkbox4}
+              onCheckedChange={() => handleCheckboxChange("checkbox4")}
+            >
+              Checkbox 4
+            </DropdownMenu.CheckboxItem>
+          </DropdownMenu.Group>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
 export const RadioGroups: Story = {
   render: () => {
     const [group1Value, setGroup1Value] = useState("1");
