@@ -321,8 +321,8 @@ const DropdownMenuLabel = forwardRef<
 /* -------------------------------------------------------------------------- */
 type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
-/* TODO: Re-omit asChild */
-interface DropdownMenuItemProps extends MenuItemProps {
+
+interface DropdownMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   shortcut?: string;
   destructive?: boolean;
 }
@@ -345,6 +345,7 @@ const DropdownMenuItem = forwardRef<
       <Menu.Item
         ref={ref}
         {...rest}
+        asChild={false}
         className={cl("navds-dropdown-menu__item", className, {
           "navds-dropdown-menu__item--destructive": destructive,
         })}
