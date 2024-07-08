@@ -72,6 +72,10 @@ TODO: add support for other directions */
   color: var(--a-text-default);
 }
 
+.navds-dropdown-menu__item--destructive:focus {
+  background-color: var(--a-surface-danger-subtle);
+}
+
 .navds-dropdown-menu__shortcut {
   display: flex;
   align-items: center;

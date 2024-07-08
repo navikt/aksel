@@ -324,27 +324,41 @@ type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 /* TODO: Re-omit asChild */
 interface DropdownMenuItemProps extends MenuItemProps {
   shortcut?: string;
+  destructive?: boolean;
 }
 
 const DropdownMenuItem = forwardRef<
   DropdownMenuItemElement,
   DropdownMenuItemProps
->(({ children, className, shortcut, ...rest }: DropdownMenuItemProps, ref) => {
-  return (
-    <Menu.Item
-      ref={ref}
-      {...rest}
-      className={cl("navds-dropdown-menu__item", className)}
-    >
-      {children}
-      {shortcut && (
-        <Detail as="div" className="navds-dropdown-menu__shortcut">
-          {shortcut}
-        </Detail>
-      )}
-    </Menu.Item>
-  );
-});
+>(
+  (
+    {
+      children,
+      className,
+      shortcut,
+      destructive,
+      ...rest
+    }: DropdownMenuItemProps,
+    ref,
+  ) => {
+    return (
+      <Menu.Item
+        ref={ref}
+        {...rest}
+        className={cl("navds-dropdown-menu__item", className, {
+          "navds-dropdown-menu__item--destructive": destructive,
+        })}
+      >
+        {children}
+        {shortcut && (
+          <Detail as="div" className="navds-dropdown-menu__shortcut">
+            {shortcut}
+          </Detail>
+        )}
+      </Menu.Item>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                          DropdownMenuCheckboxItem                          */

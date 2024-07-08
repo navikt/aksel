@@ -1,8 +1,18 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useRef, useState } from "react";
+import {
+  MenuElipsisHorizontalCircleIcon,
+  PencilIcon,
+  PlusIcon,
+  PushPinIcon,
+  TasklistStartIcon,
+  TrashIcon,
+} from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { Table } from "../../table";
+import { Tag } from "../../tag";
 import { Tooltip } from "../../tooltip";
 import { DropdownMenu } from "./DropdownMenu";
 
@@ -417,4 +427,150 @@ export const ModalTrigger: Story = {
     );
   },
   decorators: [DemoDecorator],
+};
+
+const data = [
+  {
+    task: "Finish the report",
+    status: "New",
+  },
+  {
+    task: "Call the client",
+    status: "In progress",
+  },
+  {
+    task: "Prepare the presentation",
+    status: "Done",
+  },
+  {
+    task: "Review the budget",
+    status: "Done",
+  },
+  {
+    task: "Update website",
+    status: "Backlog",
+  },
+] satisfies { task: string; status: Status }[];
+
+const StatusArray = ["New", "In progress", "Done", "Backlog"] as const;
+
+type Status = (typeof StatusArray)[number];
+
+const StatusTag = ({ status }: { status: Status }) => {
+  return (
+    <Tag
+      variant={
+        status === "Done"
+          ? "success"
+          : status === "New"
+            ? "alt1"
+            : status === "Backlog"
+              ? "warning"
+              : "info"
+      }
+    >
+      {status}
+    </Tag>
+  );
+};
+
+type Task = {
+  id: number;
+  task: string;
+  status: Status;
+};
+
+export const ViewDemo: Story = {
+  render: () => {
+    const [tasks, setTasks] = useState<Task[]>(
+      data.map((task, i) => ({ id: i, ...task })),
+    );
+
+    const updateTaskStatus = (taskId: number, newStatus: Status) => {
+      setTasks(
+        tasks.map((task) =>
+          task.id === taskId ? { ...task, status: newStatus } : task,
+        ),
+      );
+    };
+
+    return (
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">Task</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Status</Table.HeaderCell>
+            <Table.HeaderCell scope="col" align="right">
+              Actions
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {tasks.map(({ task, status, id }, i) => (
+            <Table.Row key={i + task}>
+              <Table.HeaderCell scope="row">{task}</Table.HeaderCell>
+              <Table.DataCell>
+                <StatusTag status={status} />
+              </Table.DataCell>
+              <Table.DataCell align="right">
+                <DropdownMenu>
+                  <DropdownMenu.Trigger>
+                    <Button
+                      icon={<MenuElipsisHorizontalCircleIcon title="Meny" />}
+                      size="small"
+                      variant="tertiary-neutral"
+                    />
+                  </DropdownMenu.Trigger>
+                  <DropdownMenu.Content>
+                    <DropdownMenu.Group label="Dashboard">
+                      <DropdownMenu.Item onSelect={() => console.log("Edit")}>
+                        <PlusIcon fontSize="20" /> Add to dashboard
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item onSelect={() => console.log("Edit")}>
+                        <PushPinIcon fontSize="20" /> Pin task
+                      </DropdownMenu.Item>
+                    </DropdownMenu.Group>
+
+                    <DropdownMenu.Group label="Actions">
+                      <DropdownMenu.Item
+                        onSelect={() => updateTaskStatus(id, "In progress")}
+                      >
+                        <TasklistStartIcon fontSize="20" /> Start task
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Sub>
+                        <DropdownMenu.SubTrigger>
+                          <PencilIcon fontSize="20" /> Edit status
+                        </DropdownMenu.SubTrigger>
+                        <DropdownMenu.SubContent>
+                          {StatusArray.map((_status) => (
+                            <DropdownMenu.Item
+                              key={_status}
+                              onSelect={() => updateTaskStatus(id, _status)}
+                              disabled={status === _status}
+                            >
+                              {_status}
+                            </DropdownMenu.Item>
+                          ))}
+                        </DropdownMenu.SubContent>
+                      </DropdownMenu.Sub>
+                      <DropdownMenu.Separator />
+                      <DropdownMenu.Item
+                        destructive
+                        onSelect={() =>
+                          setTasks(tasks.filter((_task) => _task.id !== id))
+                        }
+                      >
+                        <TrashIcon fontSize="20" />
+                        Delete
+                      </DropdownMenu.Item>
+                    </DropdownMenu.Group>
+                  </DropdownMenu.Content>
+                </DropdownMenu>
+              </Table.DataCell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    );
+  },
 };
