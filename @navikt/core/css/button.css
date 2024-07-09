@@ -34,6 +34,7 @@
 
 .navds-button {
   --__ac-button-padding: var(--a-spacing-3) var(--a-spacing-5);
+  --__ac-button-radius: var(--ac-button-border-radius, var(--a-border-radius-medium));
 
   display: inline-flex;
   cursor: pointer;
@@ -41,7 +42,7 @@
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: var(--ac-button-border-radius, var(--a-border-radius-medium));
+  border-radius: var(--__ac-button-radius);
   padding: var(--ac-button-padding, var(--__ac-button-padding));
   align-items: center;
   justify-content: center;
@@ -536,4 +537,33 @@
   .navds-button--danger .navds-loader .navds-loader__background {
     stroke: canvastext;
   }
+}
+
+.navds-button__group {
+  display: flex;
+  gap: var(--a-spacing-05);
+}
+
+.navds-button__group > :where(.navds-button:first-child) {
+  border-radius: 0;
+  border-start-start-radius: var(--__ac-button-radius);
+  border-end-start-radius: var(--__ac-button-radius);
+}
+
+.navds-button__group > :where(.navds-button:last-child) {
+  border-radius: 0;
+  border-start-end-radius: var(--__ac-button-radius);
+  border-end-end-radius: var(--__ac-button-radius);
+}
+
+.navds-button__group > :where(.navds-button--secondary, .navds-button--tertiary):not(:first-child) {
+  margin-left: -4px;
+}
+
+.navds-button__group > :where(.navds-button--secondary, .navds-button--tertiary) > span:first-child {
+  padding-inline: 1px;
+}
+
+.navds-button__group > :where(.navds-button:hover, .navds-button:focus-visible, .navds-button:active) {
+  z-index: 1;
 }

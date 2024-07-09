@@ -1,7 +1,12 @@
 import { StoryObj } from "@storybook/react";
 import React from "react";
-import { StarIcon as BaseStarIcon } from "@navikt/aksel-icons";
+import {
+  StarIcon as BaseStarIcon,
+  ChevronDownIcon,
+  TasklistSendIcon,
+} from "@navikt/aksel-icons";
 import { HStack, VStack } from "../layout/stack";
+import ButtonGroup from "./ButtonGroup";
 import { Button } from "./index";
 
 export default {
@@ -152,6 +157,40 @@ export const Disabled: Story = {
 
 export const DisabledAsLink: Story = {
   render: () => <ButtonGrid disabled href="#" as="a" />,
+};
+
+export const Group: Story = {
+  render: () => (
+    <VStack gap="4">
+      <ButtonGroup>
+        <Button>Send</Button>
+        <Button icon={<ChevronDownIcon title="Dropdown" />} />
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button variant="secondary">Send</Button>
+        <Button
+          variant="secondary"
+          icon={<ChevronDownIcon title="Dropdown" />}
+        />
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button variant="secondary" icon={<TasklistSendIcon aria-hidden />}>
+          Send
+        </Button>
+        <Button
+          variant="secondary"
+          icon={<ChevronDownIcon title="Dropdown" />}
+        />
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button variant="tertiary">Send</Button>
+        <Button
+          variant="tertiary"
+          icon={<ChevronDownIcon title="Dropdown" />}
+        />
+      </ButtonGroup>
+    </VStack>
+  ),
 };
 
 export const Chromatic: Story = {
