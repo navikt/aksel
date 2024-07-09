@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "@navikt/ds-react";
 
+/**
+ * Splits a string into text and links,
+ * and returns an array of React elements.
+ */
 function markdownLink(x: string) {
   const regex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
   let lastIndex = 0;
