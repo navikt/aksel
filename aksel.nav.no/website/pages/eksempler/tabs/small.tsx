@@ -32,7 +32,7 @@ const Example = () => {
       <Tabs.Panel value="inbox" className="h-24 w-full bg-gray-50 p-4">
         Inbox-tab
       </Tabs.Panel>
-      <Tabs.Panel value="sendt" className="h-24  w-full bg-gray-50 p-4">
+      <Tabs.Panel value="sendt" className="h-24 w-full bg-gray-50 p-4">
         Sendt-tab
       </Tabs.Panel>
     </Tabs>

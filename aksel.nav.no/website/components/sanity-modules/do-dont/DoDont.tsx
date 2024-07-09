@@ -23,7 +23,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
         "max-w-sm": !block?.fullwidth,
       })}
     >
-      <div className="relative rounded-lg shadow-xsmall ring-1 ring-inset ring-border-subtle ">
+      <div className="relative rounded-lg shadow-xsmall ring-1 ring-inset ring-border-subtle">
         <BodyShort
           as="span"
           className={cl(
