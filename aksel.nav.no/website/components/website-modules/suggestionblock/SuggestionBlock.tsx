@@ -69,7 +69,7 @@ const SuggestionBlockIcon = ({
   reference?: string;
 }) => {
   return (
-    <div className={cl("mb-12 mt-6 flex gap-3 rounded-lg  py-4 ")}>
+    <div className={cl("mb-12 mt-6 flex gap-3 rounded-lg py-4")}>
       <span className="shrink-0 text-2xl">{options[variant]?.icon}</span>
       <div className="grid">
         {options[variant]?.heading && (

@@ -52,7 +52,7 @@ export const Accordion = defineType({
           {val.list.map((x) => (
             <div
               key={x._key}
-              className="border-b-border flex w-full justify-between border-b px-4 py-2 "
+              className="border-b-border flex w-full justify-between border-b px-4 py-2"
             >
               <span>{x.title}</span>
               <ChevronDownIcon aria-hidden />

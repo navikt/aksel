@@ -107,7 +107,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
             })}
           >
             <div className="pt-12">
-              <div className="mx-auto mb-16 max-w-prose lg:ml-0 ">
+              <div className="mx-auto mb-16 max-w-prose lg:ml-0">
                 <Heading
                   level="1"
                   size="large"
@@ -127,7 +127,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
                   <BodyShort
                     size="small"
                     as="span"
-                    className="text-text-subtle "
+                    className="text-text-subtle"
                   >
                     {publishDate}
                   </BodyShort>
@@ -180,7 +180,7 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
                           ))}
                         </BodyShort>
                       )}
-                      <BodyShort as="span" className="text-text-subtle ">
+                      <BodyShort as="span" className="text-text-subtle">
                         Publisert: {publishDate}
                       </BodyShort>
                     </div>
