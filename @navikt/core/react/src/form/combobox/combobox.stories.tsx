@@ -135,7 +135,7 @@ export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
       allowNewValues={true}
       shouldAutocomplete={true}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={open ?? (comboboxRef.current ? true : undefined)}
       ref={comboboxRef}
     />
@@ -159,7 +159,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       allowNewValues={true}
       value={value}
       selectedOptions={selectedOptions}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       onToggleSelected={(option, isSelected) =>
         isSelected
           ? setSelectedOptions([...selectedOptions, option])
