@@ -1,4 +1,4 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
 import { UNSAFE_FileUpload as FileUpload, FileUploadItemProps } from ".";
@@ -11,6 +11,16 @@ import {
   FileRejected,
   FileRejectionReason,
 } from "./FileUpload.types";
+import {
+  States as DropzoneStates,
+  Translation as DropzoneTranslation,
+} from "./file-upload-dropzone.stories";
+import {
+  Description as ItemDescription,
+  Download as ItemDownload,
+  Icons as ItemIcons,
+  States as ItemStates,
+} from "./file-upload-item.stories";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload",
@@ -180,7 +190,7 @@ export const Single: StoryFn = () => {
 };
 Single.parameters = { chromatic: { disable: true } };
 
-export const Translation = () => (
+export const Translation: StoryFn = () => (
   <FileUpload
     translations={{
       dropzone: {
@@ -230,19 +240,45 @@ export const Translation = () => (
   </FileUpload>
 );
 
-export const TriggerWithButton: StoryObj<typeof FileUpload.Trigger> = {
-  render: (props) => {
-    return (
-      <FileUpload.Trigger {...props} onSelect={console.log}>
-        <Button variant="secondary" icon={<UploadIcon aria-hidden />}>
-          Last opp filer
-        </Button>
-      </FileUpload.Trigger>
-    );
-  },
-  args: {
-    multiple: true,
-    accept: "",
-    maxSizeInBytes: 0,
-  },
+export const TriggerWithButton: StoryFn = (props) => (
+  <FileUpload.Trigger {...props} onSelect={console.log}>
+    <Button variant="secondary" icon={<UploadIcon aria-hidden />}>
+      Last opp filer
+    </Button>
+  </FileUpload.Trigger>
+);
+
+TriggerWithButton.args = {
+  multiple: true,
+  accept: "",
+  maxSizeInBytes: 0,
+};
+
+export const Chromatic: StoryFn = () => (
+  <div>
+    <h2>Default</h2>
+    <Default />
+    <h2>Single</h2>
+    <Single />
+    <h2>Translation</h2>
+    <Translation />
+    <h2>TriggerWithButton</h2>
+    <TriggerWithButton />
+    <h2>DropzoneStates</h2>
+    <DropzoneStates />
+    <h2>DropzoneTranslation</h2>
+    <DropzoneTranslation />
+    <h2>ItemDescription</h2>
+    <ItemDescription />
+    <h2>ItemDownload</h2>
+    <ItemDownload />
+    <h2>ItemIcons</h2>
+    <ItemIcons />
+    <h2>ItemStates</h2>
+    <ItemStates />
+  </div>
+);
+
+Chromatic.parameters = {
+  chromatic: { disable: false },
 };

@@ -126,9 +126,11 @@ function Input() {
       inputMode="numeric"
       onKeyDown={(event) => {
         if (event.key === "ArrowRight") {
+          event.preventDefault();
           descendants.next(index, false)?.node.focus();
         }
         if (event.key === "ArrowLeft") {
+          event.preventDefault();
           descendants.prev(index, false)?.node.focus();
         }
       }}

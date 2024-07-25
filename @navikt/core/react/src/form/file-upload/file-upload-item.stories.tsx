@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { FileItem, UNSAFE_FileUpload as FileUpload } from ".";
 import { VStack } from "../../layout/stack";
@@ -28,8 +28,8 @@ const filePptx = new File(["abc"], "file.pptx");
 const fileWebp = new File(["abc"], "file.webp");
 const fileDocx = new File(["abc"], "file.docx");
 
-export const Icons: StoryObj<typeof FileUpload.Item> = {
-  render: () => (
+export const Icons: StoryFn = () => {
+  return (
     <FileUpload>
       <VStack gap="5" as="ul">
         <FileUpload.Item file={fileTxt} as="li" />
@@ -44,11 +44,11 @@ export const Icons: StoryObj<typeof FileUpload.Item> = {
         <FileUpload.Item file={filePptx} as="li" />
       </VStack>
     </FileUpload>
-  ),
+  );
 };
 
-export const States: StoryObj<typeof FileUpload.Item> = {
-  render: () => (
+export const States: StoryFn = () => {
+  return (
     <div>
       <h2>Error</h2>
       <FileUpload.Item file={fileTxt} error="Plain error" />
@@ -116,11 +116,11 @@ export const States: StoryObj<typeof FileUpload.Item> = {
         }}
       />
     </div>
-  ),
+  );
 };
 
-export const Download: StoryObj = {
-  render: () => (
+export const Download: StoryFn = () => {
+  return (
     <VStack gap="5">
       <FileUpload.Item
         file={{
@@ -144,11 +144,11 @@ export const Download: StoryObj = {
       />
       <FileUpload.Item file={fileTxt} />
     </VStack>
-  ),
+  );
 };
 
-export const Description: StoryObj = {
-  render: () => (
+export const Description: StoryFn = () => {
+  return (
     <VStack gap="5">
       <FileUpload.Item file={fileTxt} description="Mottat 11.11.11" />
       <FileUpload.Item
@@ -156,5 +156,5 @@ export const Description: StoryObj = {
         description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim officiis nisi beatae quia non iste nihil accusantium nobis amet, officia eius, repellendus a cupiditate, commodi eos! Quis illum repudiandae exercitationem."
       />
     </VStack>
-  ),
+  );
 };

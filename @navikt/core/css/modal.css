@@ -59,17 +59,22 @@
 
 @media (min-width: 480px) {
   .navds-modal {
-    max-width: calc(100% - 6px - 2em);
+    max-width: calc(100% - 2em);
   }
 
   .navds-modal--autowidth {
-    max-width: min(700px, calc(100% - 6px - 2em));
+    max-width: min(700px, calc(100% - 2em));
   }
 }
 
 @media (min-height: 480px) {
   .navds-modal {
-    max-height: calc(100% - 6px - 2em);
+    max-height: calc(100% - 2em);
+  }
+
+  .navds-modal--top {
+    margin-top: 2em;
+    max-height: calc(100% - 4em);
   }
 }
 

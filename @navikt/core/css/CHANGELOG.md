@@ -1,5 +1,21 @@
 # @navikt/ds-css
 
+## 6.13.0
+
+### Minor Changes
+
+- Modal: New prop `placement` for anchoring the modal to the top of the viewport. ([#3033](https://github.com/navikt/aksel/pull/3033))
+
+## 6.12.0
+
+### Minor Changes
+
+- Primitives: Added support for padding, paddingInline, paddingBlock, margin, marginInline, marginBlock, width, minWidth, maxWidth, height, minHeight, maxHeight, position, inset, top, right, left, bottom, overflow, overflowX, overflowY, flexBasis, flexGrow, flexShrink to Box, HGrid and Stack. ([#3003](https://github.com/navikt/aksel/pull/3003))
+
+### Patch Changes
+
+- Alert: Fix alignment, add prop for toggling content max-width, and adjust title on close icon. ([#3007](https://github.com/navikt/aksel/pull/3007))
+
 ## 6.11.0
 
 ### Patch Changes

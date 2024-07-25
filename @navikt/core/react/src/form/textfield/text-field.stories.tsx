@@ -9,8 +9,8 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small"],
       },
+      options: ["medium", "small"],
     },
     description: {
       type: "string",
@@ -28,7 +28,7 @@ export default {
   parameters: {
     chromatic: { disable: true },
   },
-} as Meta;
+} satisfies Meta<typeof TextField>;
 
 type Story = StoryObj<typeof TextField>;
 

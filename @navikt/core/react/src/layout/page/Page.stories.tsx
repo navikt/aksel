@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { Box } from "../box";
 import { HGrid } from "../grid";
+import { VStack } from "../stack";
 import Page from "./Page";
 import { widths } from "./parts/PageBlock";
 
@@ -11,6 +12,7 @@ const meta: Meta = {
   component: Page,
   parameters: {
     layout: "fullscreen",
+    chromatic: { disable: true },
   },
 };
 
@@ -204,12 +206,6 @@ WithDecorator.decorators = [
   },
 ];
 
-WithDecorator.parameters = {
-  chromatic: {
-    disable: true,
-  },
-};
-
 export const OutsideBackground = () => {
   return (
     <Page
@@ -269,3 +265,28 @@ function Footer({ width = "lg", gutters = false }: any) {
     </Page.Block>
   );
 }
+
+export const Chromatic = () => {
+  return (
+    <VStack gap="2">
+      <h2>Default</h2>
+      <Default />
+      <h2>BelowFold</h2>
+      <BelowFold />
+      <h2>Background</h2>
+      <Background />
+      <h2>ContentBlockPadding</h2>
+      <ContentBlockPadding />
+      <h2>Gutters</h2>
+      <Gutters />
+      <h2>OutsideBackground</h2>
+      <OutsideBackground />
+    </VStack>
+  );
+};
+
+Chromatic.parameters = {
+  chromatic: {
+    disable: false,
+  },
+};
