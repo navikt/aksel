@@ -152,6 +152,27 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
             virtualFocus.moveFocusUp();
           }
+        } else if (e.key === "PageDown") {
+          // Check that cursor position is at the end of the input field,
+          // so we don't interfere with text editing
+          if (e.target.selectionStart === value?.length) {
+            e.preventDefault();
+            if (virtualFocus.activeElement === null || !isListOpen) {
+              toggleIsListOpen(true);
+            }
+            console.log("pagedown!");
+            virtualFocus.moveFocusPageDown();
+          }
+        } else if (e.key === "PageUp") {
+          // Check that the FilteredOptions list is open and has virtual focus.
+          // Otherwise ignore keystrokes, so it doesn't interfere with text editing
+          if (isListOpen && activeDecendantId) {
+            e.preventDefault();
+            if (virtualFocus.isFocusOnTheTop()) {
+              toggleIsListOpen(false);
+            }
+            virtualFocus.moveFocusPageUp();
+          }
         }
       },
       [
