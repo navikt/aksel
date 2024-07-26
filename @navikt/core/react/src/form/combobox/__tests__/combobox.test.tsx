@@ -162,6 +162,31 @@ describe("Render combobox", () => {
       ).toBeInTheDocument();
     });
 
+    test("should trigger onChange for every character typed or removed", async () => {
+      const onChange = vi.fn();
+      const onToggleSelected = vi.fn();
+      render(
+        <App
+          options={["Apple", "Orange", "Banana", "Lemon"]}
+          onChange={onChange}
+          onToggleSelected={onToggleSelected}
+          shouldAutocomplete
+        />,
+      );
+      const combobox = screen.getByRole("combobox");
+      expect(combobox).toBeInTheDocument();
+
+      await act(async () => {
+        await userEvent.click(combobox);
+        await userEvent.type(combobox, "Lemon");
+      });
+      expect(onChange).toHaveBeenNthCalledWith(1, "L");
+      expect(onChange).toHaveBeenNthCalledWith(2, "Le");
+      expect(onChange).toHaveBeenNthCalledWith(3, "Lem");
+      expect(onChange).toHaveBeenNthCalledWith(4, "Lemo");
+      expect(onChange).toHaveBeenNthCalledWith(5, "Lemon");
+    });
+
     test("should trigger onChange while typing and on accepting autocomplete suggestions", async () => {
       const onChange = vi.fn();
       const onToggleSelected = vi.fn();
