@@ -132,6 +132,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (activeDecendantId || value) {
             e.preventDefault();
           }
+        } else if (e.key === "Escape") {
+          if (isListOpen) {
+            e.preventDefault(); // Prevents the Escape on keydown from closing en encasing Modal, as Combobox reacts on keyup.
+          }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
           // so we don't interfere with text editing
