@@ -56,10 +56,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
             toggleIsListOpen(false);
           }
-        } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
-          event.preventDefault();
-          // Trying to set the same value that is already set, so just clearing the input
-          clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
           // Autocompleting or adding a new value
@@ -80,7 +76,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       },
       [
         allowNewValues,
-        clearInput,
         currentOption,
         filteredOptions,
         isMultiSelect,
