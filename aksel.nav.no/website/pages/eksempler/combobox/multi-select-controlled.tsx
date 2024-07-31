@@ -38,7 +38,7 @@ const Example = () => {
         label="Hvilke land har du besøkt de siste 6 ukene? Velg opptil flere."
         filteredOptions={filteredOptions}
         isMultiSelect
-        onChange={(newValue) => setValue(newValue)}
+        onChange={setValue}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         options={initialOptions}
