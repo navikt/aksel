@@ -1,12 +1,13 @@
 import cl from "clsx";
 import React from "react";
-import { CheckmarkIcon, PlusIcon } from "@navikt/aksel-icons";
+import { CheckmarkIcon } from "@navikt/aksel-icons";
 import { Loader } from "../../../loader";
-import { BodyShort, Label } from "../../../typography";
+import { BodyShort } from "../../../typography";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
-import { isInList, toComboboxOption } from "../combobox-utils";
+import { isInList } from "../combobox-utils";
 import { ComboboxOption } from "../types";
+import AddNewOption from "./AddNewOption";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -14,7 +15,6 @@ const FilteredOptions = () => {
   const {
     inputProps: { id },
     size,
-    value,
   } = useInputContext();
   const {
     allowNewValues,
@@ -90,44 +90,7 @@ const FilteredOptions = () => {
           className="navds-combobox__list-options"
         >
           {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
-            <li
-              tabIndex={-1}
-              onMouseMove={() => {
-                if (
-                  activeDecendantId !==
-                  filteredOptionsUtil.getAddNewOptionId(id)
-                ) {
-                  virtualFocus.moveFocusToElement(
-                    filteredOptionsUtil.getAddNewOptionId(id),
-                  );
-                  setIsMouseLastUsedInputDevice(true);
-                }
-              }}
-              onPointerUp={(event) => {
-                toggleOption(toComboboxOption(value), event);
-                if (!isMultiSelect && !isInList(value, selectedOptions))
-                  toggleIsListOpen(false);
-              }}
-              id={filteredOptionsUtil.getAddNewOptionId(id)}
-              className={cl(
-                "navds-combobox__list-item navds-combobox__list-item--new-option",
-                {
-                  "navds-combobox__list-item--new-option--focus":
-                    activeDecendantId ===
-                    filteredOptionsUtil.getAddNewOptionId(id),
-                },
-              )}
-              role="option"
-              aria-selected={false}
-            >
-              <PlusIcon aria-hidden />
-              <BodyShort size={size}>
-                Legg til{" "}
-                <Label as="span" size={size}>
-                  &#8220;{value}&#8221;
-                </Label>
-              </BodyShort>
-            </li>
+            <AddNewOption />
           )}
           {filteredOptions.map((option) => (
             <li
