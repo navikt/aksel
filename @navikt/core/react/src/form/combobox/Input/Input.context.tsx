@@ -13,7 +13,7 @@ import { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
-  error?: string;
+  error?: ComboboxProps["error"];
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
@@ -31,11 +31,25 @@ const [InputContextProvider, useInputContext] =
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });
 
-const InputProvider = ({ children, value: props }) => {
+interface Props {
+  children: React.ReactNode;
+  value: Pick<
+    ComboboxProps,
+    | "defaultValue"
+    | "error"
+    | "errorId"
+    | "id"
+    | "value"
+    | "onChange"
+    | "onClear"
+    | "shouldAutocomplete"
+    | "size"
+  >;
+}
+
+const InputProvider = ({ children, value: props }: Props) => {
   const {
     defaultValue = "",
-    description,
-    disabled,
     error,
     errorId,
     id: externalId,
@@ -47,8 +61,6 @@ const InputProvider = ({ children, value: props }) => {
   } = props;
   const formFieldProps = useFormField(
     {
-      description,
-      disabled,
       error,
       errorId,
       id: externalId,
@@ -58,7 +70,9 @@ const InputProvider = ({ children, value: props }) => {
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
-  const [internalValue, setInternalValue] = useState<string>(defaultValue);
+  const [internalValue, setInternalValue] = useState<string>(
+    defaultValue.toString(),
+  );
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
@@ -77,21 +91,14 @@ const InputProvider = ({ children, value: props }) => {
     [externalValue, externalOnChange],
   );
 
-  const setValue = useCallback(
-    (text) => {
-      setInternalValue(text);
-    },
-    [setInternalValue],
-  );
-
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
       externalOnChange?.(null, "");
-      setValue("");
+      setInternalValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setValue],
+    [externalOnChange, onClear, setInternalValue],
   );
 
   const focusInput = useCallback(() => {
@@ -111,7 +118,7 @@ const InputProvider = ({ children, value: props }) => {
     focusInput,
     inputRef,
     value,
-    setValue,
+    setValue: setInternalValue,
     onChange,
     searchTerm,
     setSearchTerm,
