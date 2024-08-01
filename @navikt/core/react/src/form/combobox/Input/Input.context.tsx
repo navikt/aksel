@@ -33,20 +33,19 @@ const [InputContextProvider, useInputContext] =
 
 interface Props {
   children: React.ReactNode;
-  value: Pick<
-    ComboboxProps,
-    | "defaultValue"
-    | "description"
-    | "disabled"
-    | "error"
-    | "errorId"
-    | "id"
-    | "value"
-    | "onChange"
-    | "onClear"
-    | "shouldAutocomplete"
-    | "size"
-  >;
+  value: {
+    defaultValue: ComboboxProps["defaultValue"];
+    description: ComboboxProps["description"];
+    disabled: ComboboxProps["disabled"];
+    error: ComboboxProps["error"];
+    errorId: ComboboxProps["errorId"];
+    id: ComboboxProps["id"];
+    value: ComboboxProps["value"];
+    onChange: ComboboxProps["onChange"];
+    onClear: ComboboxProps["onClear"];
+    shouldAutocomplete: ComboboxProps["shouldAutocomplete"];
+    size: ComboboxProps["size"];
+  };
 }
 
 const InputProvider = ({ children, value: props }: Props) => {
