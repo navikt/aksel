@@ -1,10 +1,10 @@
 import cl from "clsx";
 import React from "react";
-import { Loader } from "../../../loader";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import AddNewOption from "./AddNewOption";
 import FilteredOptionsItem from "./FilteredOptionsItem";
+import LoadingMessage from "./LoadingMessage";
 import MaxSelectedMessage from "./MaxSelectedMessage";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
@@ -45,14 +45,7 @@ const FilteredOptions = () => {
       {shouldRenderNonSelectables && (
         <div className="navds-combobox__list_non-selectables" role="status">
           {maxSelected?.isLimitReached && <MaxSelectedMessage />}
-          {isLoading && (
-            <div
-              className="navds-combobox__list-item--loading"
-              id={filteredOptionsUtil.getIsLoadingId(id)}
-            >
-              <Loader title="Søker..." />
-            </div>
-          )}
+          {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
             <div
               className="navds-combobox__list-item--no-options"
