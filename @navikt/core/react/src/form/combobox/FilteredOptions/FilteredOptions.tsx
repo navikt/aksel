@@ -6,6 +6,7 @@ import AddNewOption from "./AddNewOption";
 import FilteredOptionsItem from "./FilteredOptionsItem";
 import LoadingMessage from "./LoadingMessage";
 import MaxSelectedMessage from "./MaxSelectedMessage";
+import NoSearchHitsMessage from "./NoSearchHitsMessage";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -47,12 +48,7 @@ const FilteredOptions = () => {
           {maxSelected?.isLimitReached && <MaxSelectedMessage />}
           {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
-            <div
-              className="navds-combobox__list-item--no-options"
-              id={filteredOptionsUtil.getNoHitsId(id)}
-            >
-              Ingen søketreff
-            </div>
+            <NoSearchHitsMessage />
           )}
         </div>
       )}
