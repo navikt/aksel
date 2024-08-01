@@ -12,7 +12,7 @@ import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsCon
 import { useInputContext } from "./Input.context";
 
 interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "disabled"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
   value?: string;

@@ -60,6 +60,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       <InputContextProvider
         value={{
           defaultValue,
+          description: rest.description,
           error,
           errorId,
           id,
