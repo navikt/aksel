@@ -5,6 +5,7 @@ import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import AddNewOption from "./AddNewOption";
 import FilteredOptionsItem from "./FilteredOptionsItem";
+import MaxSelectedMessage from "./MaxSelectedMessage";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
@@ -21,7 +22,7 @@ const FilteredOptions = () => {
     isMouseLastUsedInputDevice,
     isValueNew,
   } = useFilteredOptionsContext();
-  const { selectedOptions, maxSelected } = useSelectedOptionsContext();
+  const { maxSelected } = useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
     maxSelected?.isLimitReached || // Render maxSelected message
@@ -43,15 +44,7 @@ const FilteredOptions = () => {
     >
       {shouldRenderNonSelectables && (
         <div className="navds-combobox__list_non-selectables" role="status">
-          {maxSelected?.isLimitReached && (
-            <div
-              className="navds-combobox__list-item--max-selected"
-              id={filteredOptionsUtil.getMaxSelectedOptionsId(id)}
-            >
-              {maxSelected.message ??
-                `${selectedOptions.length} av ${maxSelected.limit} er valgt.`}
-            </div>
-          )}
+          {maxSelected?.isLimitReached && <MaxSelectedMessage />}
           {isLoading && (
             <div
               className="navds-combobox__list-item--loading"
