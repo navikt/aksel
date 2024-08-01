@@ -29,7 +29,10 @@ export type MaxSelected = {
 
 export interface ComboboxProps
   extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange" | "value"> {
+    Omit<
+      InputHTMLAttributes<HTMLInputElement>,
+      "size" | "onChange" | "value" | "defaultValue"
+    > {
   /**
    * Combobox label.
    */
@@ -156,4 +159,8 @@ export interface ComboboxProps
    * This converts the input to a controlled input, so you have to use onChange to update the value.
    */
   value?: string;
+  /**
+   * Initial value of the input field. Only works when the input is uncontrolled.
+   */
+  defaultValue?: string;
 }

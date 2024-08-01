@@ -75,9 +75,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
-  const [internalValue, setInternalValue] = useState<string>(
-    defaultValue.toString(),
-  );
+  const [internalValue, setInternalValue] = useState<string>(defaultValue);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
