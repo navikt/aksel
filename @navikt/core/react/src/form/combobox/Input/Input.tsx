@@ -160,7 +160,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "ArrowDown") {
           // Reset the value to the search term to cancel autocomplete
           // if the user moves focus down to the FilteredOptions
-          if (internalRef.current?.selectionStart) {
+          if (value !== searchTerm) {
             setValue(searchTerm);
           }
           if (virtualFocus.activeElement === null || !isListOpen) {
