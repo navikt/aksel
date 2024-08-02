@@ -116,10 +116,11 @@ export const RemoveSelectedMultiSelect: StoryObject = {
   },
 };
 
-export const AllowNewValues: StoryObject = {
+export const AllowNewValuesMultiSelect: StoryObject = {
   render: () => {
     return (
       <UNSAFE_Combobox
+        isMultiSelect={true}
         options={options}
         label="Hva er dine favorittfrukter?"
         allowNewValues
@@ -137,11 +138,39 @@ export const AllowNewValues: StoryObject = {
 
     userEvent.keyboard("{ArrowDown}");
     await sleep(250);
+    userEvent.keyboard("{Enter}");
+    await sleep(250);
+
+    const invalidSelect = canvas.queryByLabelText("aaa slett");
+    expect(invalidSelect).toBeInTheDocument();
+  },
+};
+
+export const AllowNewValuesSingleSelect: StoryObject = {
+  render: () => {
+    return (
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        allowNewValues
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+
+    userEvent.click(input);
+    await userEvent.type(input, "aaa", { delay: 200 });
+    await sleep(250);
+    expect(
+      canvas.getByRole("option", { name: "Legg til “aaa”" }),
+    ).toBeVisible();
+
     userEvent.keyboard("{ArrowDown}");
     await sleep(250);
     userEvent.keyboard("{Enter}");
-    await sleep(250);
-    userEvent.keyboard("{Escape}");
     await sleep(250);
 
     const invalidSelect = canvas.queryByLabelText("aaa slett");

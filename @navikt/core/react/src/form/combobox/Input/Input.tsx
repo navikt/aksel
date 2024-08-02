@@ -84,12 +84,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
 
           toggleOption(selectedValue, event);
-          if (
-            !isMultiSelect &&
-            !isTextInSelectedOptions(
-              filteredOptions[0].label || selectedValue.label,
-            )
-          ) {
+          if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
             toggleIsListOpen(false);
           }
         }
