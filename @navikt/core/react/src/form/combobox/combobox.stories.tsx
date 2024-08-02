@@ -1,7 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "../../button";
 import { Chips } from "../../chips";
 import { VStack } from "../../layout/stack";
+import { Modal } from "../../modal";
 import { TextField } from "../textfield";
 import { UNSAFE_Combobox } from "./index";
 
@@ -406,6 +408,38 @@ export const WithError: StoryFn = () => {
       }}
       onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
     />
+  );
+};
+
+export const InModal: StoryFn = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    modalRef.current?.showModal();
+  }, []);
+
+  return (
+    <>
+      <Button onClick={() => modalRef.current?.showModal()}>Åpne modal</Button>
+      <Modal
+        ref={modalRef}
+        header={{ heading: "Overskrift" }}
+        width="medium"
+        style={{ height: "auto" }}
+      >
+        <Modal.Body style={{ height: "100% " }}>
+          <p>
+            Modalen skal ikke lukke seg om man trykker Escape mens virtuelt
+            fokus er i Combobox sin nedtrekksliste eller om inputfeltet
+            inneholder tekst.
+          </p>
+          <UNSAFE_Combobox
+            options={options}
+            label="Hva er dine favorittfrukter?"
+          />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 

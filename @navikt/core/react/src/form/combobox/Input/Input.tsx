@@ -107,10 +107,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
       e.preventDefault();
       switch (e.key) {
-        case "Escape":
-          clearInput(e);
-          toggleIsListOpen(false);
-          break;
         case "Enter":
         case "Accept":
           onEnter(e);
@@ -142,6 +138,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "Enter" || e.key === "Accept") {
           if (activeDecendantId || value) {
             e.preventDefault();
+          }
+        } else if (e.key === "Escape") {
+          if (isListOpen || value) {
+            e.preventDefault(); // Prevents closing an encasing Modal, as Combobox reacts on keyup.
+            clearInput(e);
+            toggleIsListOpen(false);
           }
         } else if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
           /**
@@ -177,17 +179,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         }
       },
       [
-        setIsMouseLastUsedInputDevice,
         value,
         selectedOptions,
         removeSelectedOption,
+        isListOpen,
         activeDecendantId,
+        setIsMouseLastUsedInputDevice,
+        clearInput,
+        toggleIsListOpen,
         onChange,
         virtualFocus,
-        isListOpen,
         setValue,
         searchTerm,
-        toggleIsListOpen,
       ],
     );
 
