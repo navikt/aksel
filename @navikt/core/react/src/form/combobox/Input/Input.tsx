@@ -26,7 +26,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const {
       clearInput,
       inputProps,
-      updateInputValue,
       onChange,
       size,
       value,
