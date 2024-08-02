@@ -43,6 +43,7 @@ Default.args = {
   isLoading: false,
   isMultiSelect: false,
   allowNewValues: false,
+  onChange: console.log,
 };
 Default.argTypes = {
   isListOpen: {
@@ -134,7 +135,7 @@ export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
       allowNewValues={true}
       shouldAutocomplete={true}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={open ?? (comboboxRef.current ? true : undefined)}
       ref={comboboxRef}
     />
@@ -158,7 +159,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       allowNewValues={true}
       value={value}
       selectedOptions={selectedOptions}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       onToggleSelected={(option, isSelected) =>
         isSelected
           ? setSelectedOptions([...selectedOptions, option])
@@ -203,7 +204,7 @@ export const MultiSelectWithExternalChips: StoryFn = () => {
         onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={value}
-        onChange={(event) => setValue(event?.currentTarget.value || "")}
+        onChange={(newValue) => setValue(newValue || "")}
         label="Komboboks"
         size="medium"
         shouldShowSelectedOptions={false}
@@ -231,7 +232,7 @@ export const ComboboxWithNoHits: StoryFn = () => {
       label="Komboboks (uten søketreff)"
       options={options}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={true}
     />
   );
@@ -270,7 +271,7 @@ export const Controlled: StoryFn = () => {
         filteredOptions={filteredOptions}
         isMultiSelect
         options={options}
-        onChange={(event) => setValue(event?.target.value || "")}
+        onChange={(newValue) => setValue(newValue || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}
@@ -377,7 +378,7 @@ export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
       allowNewValues
       isListOpen={open ?? (comboboxRef.current ? undefined : true)}
       value={value}
-      onChange={(event) => setValue(event?.target.value)}
+      onChange={(newValue) => setValue(newValue)}
       ref={comboboxRef}
     />
   );
