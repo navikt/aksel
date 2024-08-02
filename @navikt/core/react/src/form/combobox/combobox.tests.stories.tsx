@@ -164,7 +164,9 @@ export const AllowNewValuesSingleSelect: StoryObject = {
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });
     await sleep(250);
-    expect(canvas.getByRole("option", { name: "Legg til “aaa”" }));
+    expect(
+      canvas.getByRole("option", { name: "Legg til “aaa”" }),
+    ).toBeVisible();
 
     userEvent.keyboard("{ArrowDown}");
     await sleep(250);
