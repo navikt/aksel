@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
@@ -18,7 +11,7 @@ interface InputContextValue extends FormFieldType {
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
   setValue: (text: string) => void;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: (newValue: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
@@ -68,17 +61,16 @@ const InputProvider = ({ children, value: props }) => {
   const [searchTerm, setSearchTerm] = useState(value);
 
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.currentTarget.value;
+    (newValue: string) => {
       externalValue ?? setInternalValue(newValue);
-      externalOnChange?.(event);
       setSearchTerm(newValue);
+      externalOnChange?.(newValue);
     },
     [externalValue, externalOnChange],
   );
 
   const setValue = useCallback(
-    (text) => {
+    (text: string) => {
       setInternalValue(text);
     },
     [setInternalValue],
@@ -87,7 +79,7 @@ const InputProvider = ({ children, value: props }) => {
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
-      externalOnChange?.(null, "");
+      externalOnChange?.("");
       setValue("");
       setSearchTerm("");
     },
