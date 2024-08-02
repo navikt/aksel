@@ -3,4 +3,4 @@
 "@navikt/ds-css": minor
 ---
 
-Improved search in combobox - find hits anywhere in the label
+Improved search in Combobox - find hits anywhere in the label
