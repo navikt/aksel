@@ -46,6 +46,12 @@ Default.args = {
   onChange: console.log,
 };
 Default.argTypes = {
+  description: {
+    control: { type: "text" },
+  },
+  disabled: {
+    control: { type: "boolean" },
+  },
   isListOpen: {
     control: { type: "boolean" },
   },
@@ -403,6 +409,16 @@ export const WithError: StoryFn = () => {
   );
 };
 
+export const Disabled: StoryFn = () => {
+  return (
+    <UNSAFE_Combobox
+      options={options}
+      label="Hva er dine favorittfrukter?"
+      disabled
+    />
+  );
+};
+
 export const Chromatic: StoryFn = () => {
   const H2 = (props: { children: string; style?: React.CSSProperties }) => (
     <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>
@@ -433,6 +449,8 @@ export const Chromatic: StoryFn = () => {
       <MaxSelectedOptions open />
       <H2 style={{ marginTop: "20rem" }}>WithError</H2>
       <WithError />
+      <H2>Disabled</H2>
+      <Disabled />
     </VStack>
   );
 };

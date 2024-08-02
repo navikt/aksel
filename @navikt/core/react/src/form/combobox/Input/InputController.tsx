@@ -24,6 +24,7 @@ export const InputController = forwardRef<
     | "size"
     | "onClear"
     | "value"
+    | "disabled"
   >
 >((props, ref) => {
   const {

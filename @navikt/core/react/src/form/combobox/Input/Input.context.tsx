@@ -6,7 +6,7 @@ import { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
-  error?: string;
+  error?: ComboboxProps["error"];
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
@@ -24,7 +24,24 @@ const [InputContextProvider, useInputContext] =
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });
 
-const InputProvider = ({ children, value: props }) => {
+interface Props {
+  children: React.ReactNode;
+  value: {
+    defaultValue: ComboboxProps["defaultValue"];
+    description: ComboboxProps["description"];
+    disabled: ComboboxProps["disabled"];
+    error: ComboboxProps["error"];
+    errorId: ComboboxProps["errorId"];
+    id: ComboboxProps["id"];
+    value: ComboboxProps["value"];
+    onChange: ComboboxProps["onChange"];
+    onClear: ComboboxProps["onClear"];
+    shouldAutocomplete: ComboboxProps["shouldAutocomplete"];
+    size: ComboboxProps["size"];
+  };
+}
+
+const InputProvider = ({ children, value: props }: Props) => {
   const {
     defaultValue = "",
     description,
@@ -69,21 +86,14 @@ const InputProvider = ({ children, value: props }) => {
     [externalValue, externalOnChange],
   );
 
-  const setValue = useCallback(
-    (text: string) => {
-      setInternalValue(text);
-    },
-    [setInternalValue],
-  );
-
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
       externalOnChange?.("");
-      setValue("");
+      setInternalValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setValue],
+    [externalOnChange, onClear, setInternalValue],
   );
 
   const focusInput = useCallback(() => {
@@ -103,7 +113,7 @@ const InputProvider = ({ children, value: props }) => {
     focusInput,
     inputRef,
     value,
-    setValue,
+    setValue: setInternalValue,
     onChange,
     searchTerm,
     setSearchTerm,
