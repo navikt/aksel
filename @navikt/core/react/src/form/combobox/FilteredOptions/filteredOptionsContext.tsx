@@ -106,16 +106,19 @@ const FilteredOptionsProvider = ({
   }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
+    const autoCompleteCandidate =
+      filteredOptionsUtils.getFirstValueStartingWith(
+        searchTerm,
+        filteredOptions,
+      )?.label;
     if (
       shouldAutocomplete &&
-      filteredOptionsUtils.normalizeText(searchTerm) !== "" &&
-      (previousSearchTerm?.length || 0) < searchTerm.length &&
-      filteredOptions.length > 0
+      autoCompleteCandidate &&
+      (previousSearchTerm?.length || 0) < searchTerm.length
     ) {
       setValue(
-        `${searchTerm}${filteredOptions[0].label.substring(searchTerm.length)}`,
+        `${searchTerm}${autoCompleteCandidate.substring(searchTerm.length)}`,
       );
-      setSearchTerm(searchTerm);
     }
   }, [
     filteredOptions,
