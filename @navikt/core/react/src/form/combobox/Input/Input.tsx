@@ -163,6 +163,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         isListOpen,
         activeDecendantId,
         setIsMouseLastUsedInputDevice,
+        clearInput,
         toggleIsListOpen,
         virtualFocus,
       ],
