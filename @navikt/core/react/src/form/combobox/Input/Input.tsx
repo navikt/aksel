@@ -96,10 +96,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
       e.preventDefault();
       switch (e.key) {
-        case "Escape":
-          clearInput(e);
-          toggleIsListOpen(false);
-          break;
         case "Enter":
         case "Accept":
           onEnter(e);
@@ -133,8 +129,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             e.preventDefault();
           }
         } else if (e.key === "Escape") {
-          if (isListOpen) {
+          if (isListOpen || value) {
             e.preventDefault(); // Prevents closing an encasing Modal, as Combobox reacts on keyup.
+            clearInput(e);
+            toggleIsListOpen(false);
           }
         } else if (e.key === "ArrowDown") {
           // Check that cursor position is at the end of the input field,
