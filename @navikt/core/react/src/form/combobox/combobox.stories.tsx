@@ -39,8 +39,6 @@ export const Default: StoryFunction = (props) => (
 Default.args = {
   options,
   label: "Hva er dine favorittfrukter?",
-  description: "",
-  disabled: false,
   shouldAutocomplete: true,
   isLoading: false,
   isMultiSelect: false,
@@ -48,6 +46,12 @@ Default.args = {
   onChange: console.log,
 };
 Default.argTypes = {
+  description: {
+    control: { type: "text" },
+  },
+  disabled: {
+    control: { type: "boolean" },
+  },
   isListOpen: {
     control: { type: "boolean" },
   },
