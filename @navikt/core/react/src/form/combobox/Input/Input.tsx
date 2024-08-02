@@ -218,7 +218,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
-        onClick={() => value && updateInputValue(value)}
+        onClick={() => value && onChange(value)}
         onInput={onChangeHandler}
         type="text"
         role="combobox"
