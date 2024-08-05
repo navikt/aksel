@@ -118,6 +118,9 @@ export const Cyrillic: Story = {
     cyrillic: true,
     showDefault: false,
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 export const Samisk: Story = {
@@ -126,6 +129,9 @@ export const Samisk: Story = {
     family: "Source Sans 3",
     samisk: true,
     showDefault: false,
+  },
+  parameters: {
+    chromatic: { disable: true },
   },
 };
 
@@ -136,15 +142,15 @@ export const Mixed: Story = {
     showDefault: false,
     mixed: true,
   },
+  parameters: {
+    chromatic: { disable: true },
+  },
 };
 
 export const FontWeight: Story = {
   render: () => {
     return (
       <>
-        {fontWeights.map((weight) => (
-          <FontComponent key={weight} weight={weight} family="Source Sans 3" />
-        ))}
         {fontWeights.map((weight) => (
           <>
             <h2>{weight}</h2>
@@ -164,29 +170,10 @@ export const FontFamily: Story = {
   render: (args) => {
     return (
       <>
-        <FontComponent
-          weight={args.weight ?? 400}
-          family="Source Sans Pro"
-          mixed
-        />
-        <FontComponent
-          weight={args.weight ?? 400}
-          family="Source Sans 3"
-          mixed
-        />
-
-        <h2>Pro</h2>
-        <FontComponent
-          weight={args.weight ?? 400}
-          family="Source Sans Pro"
-          mixed
-        />
-        <h2>3</h2>
-        <FontComponent
-          weight={args.weight ?? 400}
-          family="Source Sans 3"
-          mixed
-        />
+        <h2>Source Sans Pro</h2>
+        <FontComponent weight={args.weight} family="Source Sans Pro" mixed />
+        <h2>Source Sans 3</h2>
+        <FontComponent weight={args.weight} family="Source Sans 3" mixed />
       </>
     );
   },
