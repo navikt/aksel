@@ -44,6 +44,7 @@ export type GpSlugQueryResponse = {
     _id: string;
     heading: string;
     publishedAt: string;
+    lastVerified: string;
     description: string;
     undertema: { title: string; temaTitle: string }[];
     innholdstype: string;

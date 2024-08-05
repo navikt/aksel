@@ -11,7 +11,7 @@ type GpArticleCardProps = {
   innholdstype?: string;
   undertema?: string;
   description?: string;
-  publishedAt?: string;
+  date?: string;
 };
 
 function GpArticleCard({
@@ -20,7 +20,7 @@ function GpArticleCard({
   innholdstype,
   undertema,
   description,
-  publishedAt,
+  date,
 }: GpArticleCardProps) {
   return (
     <div className="group relative flex flex-col gap-1 rounded-lg bg-surface-default p-4 pb-3 text-text-default shadow-xsmall hover:shadow-small has-[:focus-visible]:shadow-focus md:p-5 md:pb-4">
@@ -36,9 +36,9 @@ function GpArticleCard({
           {children}
         </Heading>
       </Link>
-      {publishedAt && (
+      {date && (
         <Detail as="time" textColor="subtle" uppercase>
-          {publishedAt}
+          {date}
         </Detail>
       )}
 
