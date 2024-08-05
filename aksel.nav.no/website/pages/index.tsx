@@ -71,7 +71,7 @@ const query = groq`*[_type == "aksel_forside"][0]{
         "tema": undertema[]->tema->title,
       },
       "curatedResent": {
-        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...2]{
+        "bloggposts": *[_type == "aksel_blogg" && !(_id in ^.highlights[]._ref)] | order(_createdAt desc)[0...4]{
           _type,
           _id,
           heading,
@@ -84,7 +84,7 @@ const query = groq`*[_type == "aksel_forside"][0]{
           ${contributorsAll}
         },
         "artikler": select(
-          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...4]{
+          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
             _type,
             _id,
             heading,
@@ -97,7 +97,7 @@ const query = groq`*[_type == "aksel_forside"][0]{
             seo,
             ${contributorsAll}
           },
-          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...4]{
+          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...8]{
             _type,
             _id,
             heading,
@@ -111,7 +111,7 @@ const query = groq`*[_type == "aksel_forside"][0]{
             ${contributorsAll}
           }
         ),
-        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...3]{
+        "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
           _type,
           _id,
           heading,

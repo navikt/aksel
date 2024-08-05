@@ -53,7 +53,10 @@ module.exports = {
         },
         {
           test: /\.css$/i,
-          include: [require.resolve("@navikt/ds-css")],
+          include: [
+            require.resolve("@navikt/ds-css"),
+            require.resolve("./src/frameComponent.css"),
+          ],
           use: ["style-loader", "css-loader"],
         },
       ],

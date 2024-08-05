@@ -10,7 +10,10 @@ import { ComboboxProps } from "./types";
 
 export const Combobox = forwardRef<
   HTMLInputElement,
-  Omit<ComboboxProps, "onChange" | "options" | "size" | "onClear" | "value">
+  Omit<
+    ComboboxProps,
+    "onChange" | "options" | "size" | "onClear" | "value" | "disabled"
+  >
 >((props, ref) => {
   const { className, hideLabel = false, description, label, ...rest } = props;
 

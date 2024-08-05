@@ -114,7 +114,7 @@ export const IconPage = ({ name }: { name: string }) => {
               <div className="sticky top-0 z-20 grid items-center rounded-t-2xl border-b border-b-border-subtle bg-surface-default p-1">
                 <form
                   onSubmit={(e) => e.preventDefault()}
-                  className="flex w-full flex-wrap-reverse items-center  gap-4 px-4 py-2 sm:flex-nowrap"
+                  className="flex w-full flex-wrap-reverse items-center gap-4 px-4 py-2 sm:flex-nowrap"
                 >
                   <ToggleGroup
                     value={toggle}

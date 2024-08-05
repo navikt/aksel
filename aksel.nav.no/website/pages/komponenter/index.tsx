@@ -229,7 +229,7 @@ function Links() {
           })
         }
       >
-        <StorybookIcon className="mr-1 " /> Storybook
+        <StorybookIcon className="mr-1" /> Storybook
       </a>
     </BodyShort>
   );

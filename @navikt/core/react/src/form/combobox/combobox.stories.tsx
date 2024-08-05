@@ -1,7 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "../../button";
 import { Chips } from "../../chips";
 import { VStack } from "../../layout/stack";
+import { Modal } from "../../modal";
 import { TextField } from "../textfield";
 import { UNSAFE_Combobox } from "./index";
 
@@ -43,8 +45,15 @@ Default.args = {
   isLoading: false,
   isMultiSelect: false,
   allowNewValues: false,
+  onChange: console.log,
 };
 Default.argTypes = {
+  description: {
+    control: { type: "text" },
+  },
+  disabled: {
+    control: { type: "boolean" },
+  },
   isListOpen: {
     control: { type: "boolean" },
   },
@@ -134,7 +143,7 @@ export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
       allowNewValues={true}
       shouldAutocomplete={true}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={open ?? (comboboxRef.current ? true : undefined)}
       ref={comboboxRef}
     />
@@ -158,7 +167,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       allowNewValues={true}
       value={value}
       selectedOptions={selectedOptions}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       onToggleSelected={(option, isSelected) =>
         isSelected
           ? setSelectedOptions([...selectedOptions, option])
@@ -203,7 +212,7 @@ export const MultiSelectWithExternalChips: StoryFn = () => {
         onToggleSelected={(option) => toggleSelected(option)}
         isMultiSelect
         value={value}
-        onChange={(event) => setValue(event?.currentTarget.value || "")}
+        onChange={(newValue) => setValue(newValue || "")}
         label="Komboboks"
         size="medium"
         shouldShowSelectedOptions={false}
@@ -231,7 +240,7 @@ export const ComboboxWithNoHits: StoryFn = () => {
       label="Komboboks (uten søketreff)"
       options={options}
       value={value}
-      onChange={(event) => setValue(event?.currentTarget.value)}
+      onChange={(newValue) => setValue(newValue)}
       isListOpen={true}
     />
   );
@@ -270,7 +279,7 @@ export const Controlled: StoryFn = () => {
         filteredOptions={filteredOptions}
         isMultiSelect
         options={options}
-        onChange={(event) => setValue(event?.target.value || "")}
+        onChange={(newValue) => setValue(newValue || "")}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         value={value}
@@ -377,7 +386,7 @@ export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
       allowNewValues
       isListOpen={open ?? (comboboxRef.current ? undefined : true)}
       value={value}
-      onChange={(event) => setValue(event?.target.value)}
+      onChange={(newValue) => setValue(newValue)}
       ref={comboboxRef}
     />
   );
@@ -398,6 +407,48 @@ export const WithError: StoryFn = () => {
         setTimeout(() => setIsLoading(false), 2000);
       }}
       onToggleSelected={(_, isSelected) => setHasSelectedValue(isSelected)}
+    />
+  );
+};
+
+export const InModal: StoryFn = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    modalRef.current?.showModal();
+  }, []);
+
+  return (
+    <>
+      <Button onClick={() => modalRef.current?.showModal()}>Åpne modal</Button>
+      <Modal
+        ref={modalRef}
+        header={{ heading: "Overskrift" }}
+        width="medium"
+        style={{ height: "auto" }}
+      >
+        <Modal.Body style={{ height: "100% " }}>
+          <p>
+            Modalen skal ikke lukke seg om man trykker Escape mens virtuelt
+            fokus er i Combobox sin nedtrekksliste eller om inputfeltet
+            inneholder tekst.
+          </p>
+          <UNSAFE_Combobox
+            options={options}
+            label="Hva er dine favorittfrukter?"
+          />
+        </Modal.Body>
+      </Modal>
+    </>
+  );
+};
+
+export const Disabled: StoryFn = () => {
+  return (
+    <UNSAFE_Combobox
+      options={options}
+      label="Hva er dine favorittfrukter?"
+      disabled
     />
   );
 };
@@ -432,6 +483,8 @@ export const Chromatic: StoryFn = () => {
       <MaxSelectedOptions open />
       <H2 style={{ marginTop: "20rem" }}>WithError</H2>
       <WithError />
+      <H2>Disabled</H2>
+      <Disabled />
     </VStack>
   );
 };

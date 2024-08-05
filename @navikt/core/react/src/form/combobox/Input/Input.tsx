@@ -1,18 +1,19 @@
 import cl from "clsx";
 import React, {
-  ChangeEvent,
   InputHTMLAttributes,
   forwardRef,
   useCallback,
+  useRef,
 } from "react";
 import { omit } from "../../../util";
+import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { useInputContext } from "./Input.context";
 
 interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "disabled"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
   value?: string;
@@ -20,7 +21,17 @@ interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputClassName, ...rest }, ref) => {
-    const { clearInput, inputProps, onChange, size, value } = useInputContext();
+    const internalRef = useRef<HTMLInputElement>(null);
+    const mergedRefs = useMergeRefs(ref, internalRef);
+    const {
+      clearInput,
+      inputProps,
+      onChange,
+      size,
+      value,
+      searchTerm,
+      setValue,
+    } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
@@ -56,7 +67,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
             toggleIsListOpen(false);
           }
-        } else if (shouldAutocomplete && isTextInSelectedOptions(value)) {
+        } else if (isTextInSelectedOptions(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
@@ -67,13 +78,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             allowNewValues && isValueNew
               ? { label: value, value }
               : filteredOptions[0];
+
+          if (!selectedValue) {
+            return;
+          }
+
           toggleOption(selectedValue, event);
-          if (
-            !isMultiSelect &&
-            !isTextInSelectedOptions(
-              filteredOptions[0].label || selectedValue.label,
-            )
-          ) {
+          if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
             toggleIsListOpen(false);
           }
         }
@@ -96,10 +107,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
       e.preventDefault();
       switch (e.key) {
-        case "Escape":
-          clearInput(e);
-          toggleIsListOpen(false);
-          break;
         case "Enter":
         case "Accept":
           onEnter(e);
@@ -118,7 +125,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const handleKeyDown = useCallback(
-      (e) => {
+      (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
           if (value === "") {
@@ -132,17 +139,34 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (activeDecendantId || value) {
             e.preventDefault();
           }
-        } else if (e.key === "ArrowDown") {
-          // Check that cursor position is at the end of the input field,
-          // so we don't interfere with text editing
-          if (e.target.selectionStart === value?.length) {
-            e.preventDefault();
-            if (virtualFocus.activeElement === null || !isListOpen) {
-              toggleIsListOpen(true);
-            }
-            virtualFocus.moveFocusDown();
+        } else if (e.key === "Escape") {
+          if (isListOpen || value) {
+            e.preventDefault(); // Prevents closing an encasing Modal, as Combobox reacts on keyup.
+            clearInput(e);
+            toggleIsListOpen(false);
           }
+        } else if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+          /**
+           * In case user has an active selection and 'completes' the selection with ArrowLeft or ArrowRight
+           * we need to make sure to update the filter.
+           */
+          if (value !== "" && value !== searchTerm) {
+            onChange(value);
+          }
+        } else if (e.key === "ArrowDown") {
+          // Reset the value to the search term to cancel autocomplete
+          // if the user moves focus down to the FilteredOptions
+          if (value !== searchTerm) {
+            setValue(searchTerm);
+          }
+          if (virtualFocus.activeElement === null || !isListOpen) {
+            toggleIsListOpen(true);
+          }
+          virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
+          if (value !== "" && value !== searchTerm) {
+            onChange(value);
+          }
           // Check that the FilteredOptions list is open and has virtual focus.
           // Otherwise ignore keystrokes, so it doesn't interfere with text editing
           if (isListOpen && activeDecendantId) {
@@ -161,13 +185,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         isListOpen,
         activeDecendantId,
         setIsMouseLastUsedInputDevice,
+        clearInput,
         toggleIsListOpen,
+        onChange,
         virtualFocus,
+        setValue,
+        searchTerm,
       ],
     );
 
     const onChangeHandler = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
+      (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value;
         if (newValue && newValue !== "") {
           toggleIsListOpen(true);
@@ -175,7 +203,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           toggleIsListOpen(false);
         }
         virtualFocus.moveFocusToTop();
-        onChange(event);
+        onChange(newValue);
       },
       [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen],
     );
@@ -184,10 +212,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         {...rest}
         {...omit(inputProps, ["aria-invalid"])}
-        ref={ref}
+        ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
-        onChange={onChangeHandler}
+        onClick={() => value !== searchTerm && onChange(value)}
+        onInput={onChangeHandler}
         type="text"
         role="combobox"
         onKeyUp={handleKeyUp}
