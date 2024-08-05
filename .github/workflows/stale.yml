@@ -1,0 +1,29 @@
+# https://github.com/actions/stale
+name: Mark stale issues
+
+on:
+  schedule:
+    - cron: "31 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-issue-stale: 120
+          days-before-pr-stale: -1
+          days-before-close: 30
+          any-of-labels: "Besvart"
+          stale-issue-message: |-
+            Hei! Det ser ut som det ikke har vært aktivitet her på en stund. Etter 30 dager vil saken bli lukket automatisk.
+
+            Om saken fortsatt er relevant eller du har oppdateringer, vil en kommentar hindre at den lukkes. Du kan alltids åpne den igjen hvis det skulle være nødvendig!
+          stale-issue-label: "no-issue-activity"
+          ascending: true
+          operations-per-run: 200
