@@ -32,6 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       searchTerm,
       setValue,
       hideCaret,
+      setHideCaret,
     } = useInputContext();
     const {
       selectedOptions,
@@ -216,7 +217,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
-        onClick={() => value !== searchTerm && onChange(value)}
+        onClick={() => {
+          setHideCaret(false);
+          value !== searchTerm && onChange(value);
+        }}
         onInput={onChangeHandler}
         type="text"
         role="combobox"
