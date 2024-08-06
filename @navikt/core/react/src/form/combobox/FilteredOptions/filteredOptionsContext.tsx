@@ -136,7 +136,6 @@ const FilteredOptionsProvider = ({
 
   const toggleIsListOpen = useCallback(
     (newState?: boolean) => {
-      console.log("what?", { newState, isInternalListOpen });
       virtualFocus.moveFocusToTop();
       if (newState ?? !isInternalListOpen) {
         setShowCaret(true);
