@@ -16,6 +16,8 @@ interface InputContextValue extends FormFieldType {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
   toggleOpenButtonRef: React.RefObject<HTMLButtonElement>;
+  showCaret: boolean;
+  setShowCaret: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const [InputContextProvider, useInputContext] =
@@ -69,6 +71,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toggleOpenButtonRef = useRef<HTMLButtonElement>(null);
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
+  const [showCaret, setShowCaret] = useState(true);
 
   const value = useMemo(
     () => String(externalValue ?? internalValue),
@@ -119,6 +122,8 @@ const InputProvider = ({ children, value: props }: Props) => {
     setSearchTerm,
     shouldAutocomplete,
     toggleOpenButtonRef,
+    showCaret,
+    setShowCaret,
   };
 
   return (

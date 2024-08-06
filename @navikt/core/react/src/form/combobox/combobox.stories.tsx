@@ -40,7 +40,7 @@ export const Default: StoryFunction = (props) => (
 
 Default.args = {
   options,
-  label: "Hva er dine favorittfrukter?",
+  label: "Hva er din favorittfrukt?",
   shouldAutocomplete: true,
   isLoading: false,
   isMultiSelect: false,

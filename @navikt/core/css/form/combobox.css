@@ -102,6 +102,11 @@
   min-width: 10ch;
   width: 100%;
   height: var(--__ac-combobox-input-height);
+  caret-color: transparent;
+}
+
+.navds-combobox__input--show-caret {
+  caret-color: unset;
 }
 
 .navds-combobox__input:focus-visible {

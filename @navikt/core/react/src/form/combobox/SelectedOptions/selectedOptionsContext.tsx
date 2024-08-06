@@ -33,7 +33,7 @@ const SelectedOptionsProvider = ({
     "allowNewValues" | "isMultiSelect" | "onToggleSelected" | "maxSelected"
   > & { options: ComboboxOption[]; selectedOptions?: ComboboxOption[] };
 }) => {
-  const { clearInput, focusInput } = useInputContext();
+  const { clearInput, focusInput, setShowCaret } = useInputContext();
   const {
     customOptions,
     removeCustomOption,
@@ -111,6 +111,7 @@ const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
+      setShowCaret(false);
       clearInput(event);
       focusInput();
     },
@@ -120,6 +121,7 @@ const SelectedOptionsProvider = ({
       focusInput,
       removeSelectedOption,
       selectedOptions,
+      setShowCaret,
     ],
   );
 
