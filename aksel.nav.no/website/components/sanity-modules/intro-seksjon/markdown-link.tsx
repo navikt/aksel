@@ -1,31 +1,31 @@
 import React from "react";
-import { Link } from "@navikt/ds-react";
+import AkselLink from "@/web/AkselLink";
 
 /**
  * Splits a string into text and links,
  * and returns an array of React elements.
  */
-function markdownLink(x: string) {
-  const regex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+function markdownLink(input: string) {
+  const regex = /\[([^\]]+)\]\(([^\s)]+)\)/g;
   let lastIndex = 0;
   const elements: React.ReactNode[] = [];
 
-  x.replace(regex, (match, text, url, index) => {
+  input.replace(regex, (match, text, url, index) => {
     if (index > lastIndex) {
-      elements.push(x.slice(lastIndex, index));
+      elements.push(input.slice(lastIndex, index));
     }
     elements.push(
-      <Link href={url} key={index}>
+      <AkselLink href={url} key={index}>
         {text}
-      </Link>,
+      </AkselLink>,
     );
 
     lastIndex = index + match.length;
     return match;
   });
 
-  if (lastIndex < x.length) {
-    elements.push(x.slice(lastIndex));
+  if (lastIndex < input.length) {
+    elements.push(input.slice(lastIndex));
   }
 
   return elements;
