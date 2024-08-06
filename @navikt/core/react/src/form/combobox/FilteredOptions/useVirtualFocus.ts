@@ -6,11 +6,15 @@ export type VirtualFocusType = {
   isFocusOnTheTop: () => boolean;
   isFocusOnTheBottom: () => boolean;
   moveFocusUp: () => void;
+  moveFocusPageUp: () => void;
   moveFocusDown: () => void;
+  moveFocusPageDown: () => void;
   moveFocusToElement: (id: string) => void;
   moveFocusToTop: () => void;
   moveFocusToBottom: () => void;
 };
+
+const PAGE_UP_DOWN_SCROLL_AMOUNT = 5;
 
 const useVirtualFocus = (
   containerRef: HTMLElement | null,
@@ -45,33 +49,51 @@ const useVirtualFocus = (
     _element?.scrollIntoView?.({ block: "nearest" });
   };
 
-  const moveFocusUp = () => {
-    if (!activeElement) {
-      return;
-    }
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
-    const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
-    const elementAbove = elementsAbleToReceiveFocus[_currentIndex - 1];
-    if (_currentIndex === 0) {
-      setActiveElement(undefined);
-    } else {
-      _moveFocusAndScrollTo(elementAbove);
-    }
+  const createMoveFocusUpFunc = (moveAmount: number) => {
+    return () => {
+      if (!activeElement) {
+        return;
+      }
+      const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+      const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
+      const maybeElementAbove =
+        elementsAbleToReceiveFocus[_currentIndex - moveAmount];
+      if (!maybeElementAbove) {
+        if (_currentIndex === 0) {
+          setActiveElement(undefined);
+        } else if (elementsAbleToReceiveFocus.length > 1) {
+          _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0]);
+        }
+      } else {
+        _moveFocusAndScrollTo(maybeElementAbove);
+      }
+    };
   };
 
-  const moveFocusDown = () => {
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
-    if (!activeElement) {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0]);
-      return;
-    }
-    const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
-    if (_currentIndex === elementsAbleToReceiveFocus.length - 1) {
-      return;
-    }
+  const moveFocusUp = createMoveFocusUpFunc(1);
+  const moveFocusPageUp = createMoveFocusUpFunc(PAGE_UP_DOWN_SCROLL_AMOUNT);
 
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1]);
+  const createMoveFocusDownFunc = (moveAmount: number) => {
+    return () => {
+      const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+      if (!activeElement) {
+        _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0]);
+        return;
+      }
+      const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
+      const maybeElementBelow =
+        elementsAbleToReceiveFocus[_currentIndex + moveAmount];
+      if (!maybeElementBelow) {
+        moveFocusToBottom();
+        return;
+      }
+      _moveFocusAndScrollTo(maybeElementBelow);
+    };
   };
+
+  const moveFocusDown = createMoveFocusDownFunc(1);
+
+  const moveFocusPageDown = createMoveFocusDownFunc(PAGE_UP_DOWN_SCROLL_AMOUNT);
 
   const moveFocusToTop = () => _moveFocusAndScrollTo(undefined);
   const moveFocusToBottom = () => {
@@ -95,7 +117,9 @@ const useVirtualFocus = (
     isFocusOnTheTop,
     isFocusOnTheBottom,
     moveFocusUp,
+    moveFocusPageUp,
     moveFocusDown,
+    moveFocusPageDown,
     moveFocusToElement,
     moveFocusToTop,
     moveFocusToBottom,
