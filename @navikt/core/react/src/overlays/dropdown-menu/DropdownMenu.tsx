@@ -476,9 +476,12 @@ const DropdownMenuCheckboxItem = forwardRef<
             />
           </svg>
         </Menu.ItemIndicator>
+        {/* TODO: Improve handling of split here */}
         {shortcut && (
           <Detail as="div" className="navds-dropdown-menu__shortcut">
-            {shortcut}
+            {shortcut.split("").map((char, index) => (
+              <span key={char + index}>{char}</span>
+            ))}
           </Detail>
         )}
       </Menu.CheckboxItem>

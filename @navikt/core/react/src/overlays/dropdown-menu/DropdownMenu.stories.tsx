@@ -14,6 +14,7 @@ import { Modal } from "../../modal";
 import { Table } from "../../table";
 import { Tag } from "../../tag";
 import { Tooltip } from "../../tooltip";
+import { BodyShort } from "../../typography";
 import { DropdownMenu } from "./DropdownMenu";
 
 export default {
@@ -120,31 +121,41 @@ export const Shortcut: Story = {
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
+          <VStack asChild align="start" gap="1" paddingBlock="2">
+            <DropdownMenu.Label>
+              <BodyShort weight="semibold" as="div">
+                Ola Normann
+              </BodyShort>
+              <div>D123456</div>
+            </DropdownMenu.Label>
+          </VStack>
+          <DropdownMenu.Separator />
           <DropdownMenu.Group label="Group 1">
             <DropdownMenu.CheckboxItem
               checked={checkedItems.checkbox1}
               onCheckedChange={() => handleCheckboxChange("checkbox1")}
-              shortcut="⌘+T"
+              shortcut="⌘T"
             >
               Checkbox 1
             </DropdownMenu.CheckboxItem>
             <DropdownMenu.CheckboxItem
               checked={checkedItems.checkbox2}
               onCheckedChange={() => handleCheckboxChange("checkbox2")}
-              shortcut="⇧+⌘+N"
+              shortcut="⇧⌘N"
             >
               Checkbox 2
             </DropdownMenu.CheckboxItem>
           </DropdownMenu.Group>
+          <DropdownMenu.Separator />
           <DropdownMenu.Group label="Group 2">
             <DropdownMenu.Item
-              shortcut="⌘+T"
+              shortcut="⌘T"
               onSelect={() => console.log("Item 1 clicked")}
             >
               Item 1
             </DropdownMenu.Item>
             <DropdownMenu.Item
-              shortcut="⇧+⌘+N"
+              shortcut="⇧⌘N"
               onSelect={() => console.log("Item 2 clicked")}
             >
               Item 2
