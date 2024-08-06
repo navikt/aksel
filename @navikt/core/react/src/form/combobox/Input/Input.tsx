@@ -31,7 +31,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       searchTerm,
       setValue,
-      showCaret,
+      hideCaret,
     } = useInputContext();
     const {
       selectedOptions,
@@ -234,7 +234,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
-          { "navds-combobox__input--show-caret": showCaret },
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
       />
     );
