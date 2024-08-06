@@ -1,9 +1,11 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { Chips } from "../../chips";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
+import { BodyLong } from "../../typography";
 import { TextField } from "../textfield";
 import { UNSAFE_Combobox } from "./index";
 
@@ -65,6 +67,34 @@ Default.argTypes = {
     defaultValue: "medium",
     control: { type: "radio" },
   },
+};
+
+export const WithPlaceholder: StoryFunction = () => {
+  const props = {
+    options,
+    label: "Hva er din favorittfrukt?",
+    shouldAutocomplete: true,
+    isLoading: false,
+    isMultiSelect: false,
+    allowNewValues: false,
+    onChange: console.log,
+  };
+  return (
+    <VStack gap="8" align="center">
+      <Alert variant="warning" style={{ width: "70ch" }}>
+        <VStack gap="4">
+          <BodyLong>
+            {`We don't endorse placeholders, but they shouldn't break either!`}
+          </BodyLong>
+          <BodyLong>
+            {`Don't
+tell anyone that they work (or that they exist).`}
+          </BodyLong>
+        </VStack>
+      </Alert>
+      <UNSAFE_Combobox {...props} id="combobox" placeholder="placeholder" />
+    </VStack>
+  );
 };
 
 export const MultiSelect: StoryFn = () => {

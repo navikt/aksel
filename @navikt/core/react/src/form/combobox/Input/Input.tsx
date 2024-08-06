@@ -240,6 +240,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           `navds-body-short--${size}`,
           { "navds-combobox__input--hide-caret": hideCaret },
         )}
+        placeholder={!selectedOptions.length ? rest.placeholder : undefined}
       />
     );
   },
