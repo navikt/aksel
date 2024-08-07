@@ -10,6 +10,8 @@ export type VirtualFocusType = {
   moveFocusToElement: (id: string) => void;
   moveFocusToTop: () => void;
   moveFocusToBottom: () => void;
+  moveFocusUpBy: (numberOfElements: number) => void;
+  moveFocusDownBy: (numberOfElements: number) => void;
 };
 
 const useVirtualFocus = (
@@ -40,9 +42,12 @@ const useVirtualFocus = (
       : false;
   };
 
-  const _moveFocusAndScrollTo = (_element?: HTMLElement) => {
+  const _moveFocusAndScrollTo = (
+    _element?: HTMLElement,
+    verticalAlignment: "start" | "center" | "end" | "nearest" = "nearest",
+  ) => {
     setActiveElement(_element);
-    _element?.scrollIntoView?.({ block: "nearest" });
+    _element?.scrollIntoView?.({ block: verticalAlignment });
   };
 
   const moveFocusUp = () => {
@@ -89,6 +94,30 @@ const useVirtualFocus = (
     }
   };
 
+  const moveFocusUpBy = (numberOfElements: number) => {
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    if (!activeElement) {
+      return;
+    }
+    const currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
+    const newIndex = Math.max(currentIndex - numberOfElements, 0);
+    console.log(`Moving focus from index ${currentIndex} to ${newIndex}`);
+    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "start");
+  };
+
+  const moveFocusDownBy = (numberOfElements: number) => {
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    const currentIndex = activeElement
+      ? elementsAbleToReceiveFocus.indexOf(activeElement)
+      : -1;
+    const newIndex = Math.min(
+      currentIndex + numberOfElements,
+      elementsAbleToReceiveFocus.length - 1,
+    );
+    console.log(`Moving focus from index ${currentIndex} to ${newIndex}`);
+    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "end");
+  };
+
   return {
     activeElement,
     getElementById,
@@ -99,6 +128,8 @@ const useVirtualFocus = (
     moveFocusToElement,
     moveFocusToTop,
     moveFocusToBottom,
+    moveFocusUpBy,
+    moveFocusDownBy,
   };
 };
 

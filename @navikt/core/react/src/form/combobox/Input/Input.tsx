@@ -198,6 +198,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
             virtualFocus.moveFocusUp();
           }
+        } else if (e.key === "PageUp") {
+          e.preventDefault();
+          virtualFocus.moveFocusUpBy(6);
+          return false;
+        } else if (e.key === "PageDown") {
+          e.preventDefault();
+          virtualFocus.moveFocusDownBy(6);
+          return false;
         }
       },
       [
