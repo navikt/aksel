@@ -4,9 +4,8 @@ import {
   PortableTextReactComponents,
 } from "@portabletext/react";
 import cl from "clsx";
-import NextLink from "next/link";
 import { Children } from "react";
-import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
+import { BodyLong, Detail, Heading } from "@navikt/ds-react";
 import Accordion from "@/cms/accordion/Accordion";
 import Alert from "@/cms/alert/Alert";
 import Bilde from "@/cms/bilde/Bilde";
@@ -24,10 +23,10 @@ import TastaturModul from "@/cms/tastatur-tabell/TastaturTabell";
 import Tips from "@/cms/tips/Tips";
 import TokenTable from "@/cms/token-tabell/TokenTable";
 import Video from "@/cms/video/Video";
-import { amplitudeLogNavigation } from "@/logging";
 import InlineCode from "@/web/InlineCode";
 import KBD from "@/web/KBD";
 import { List, ListItem } from "@/web/List";
+import AkselLink from "./AkselLink";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
@@ -102,42 +101,13 @@ const serializers: Partial<PortableTextReactComponents> = {
       if (!href) {
         return <span>{text}</span>;
       }
-
-      return (
-        <Link
-          as={NextLink}
-          href={href}
-          inlineText
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
-          {...(href.startsWith("http") &&
-          !href.startsWith("https://aksel.nav.no/")
-            ? { target: "_blank", rel: "noreferrer noopener" }
-            : {})}
-        >
-          {text}
-        </Link>
-      );
+      return <AkselLink href={href}>{text}</AkselLink>;
     },
     internalLink: ({ text, value: { slug } }) => {
       if (!slug || !slug.current) {
         return <span>{text}</span>;
       }
-
-      const href = `/${slug?.current}`;
-      return (
-        <Link
-          as={NextLink}
-          href={href}
-          inlineText
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
-        >
-          {text}
-        </Link>
-      );
+      return <AkselLink href={`/${slug.current}`}>{text}</AkselLink>;
     },
   },
   unknownMark: () => null,

@@ -92,7 +92,10 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
           <Comp
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
-            className={cl("navds-hgrid", className)}
+            className={cl("navds-hgrid", className, {
+              "navds-hgrid-gap": gap,
+              "navds-hgrid-align": align,
+            })}
             style={styles}
           >
             {children}

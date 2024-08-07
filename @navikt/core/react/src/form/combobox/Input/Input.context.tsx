@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { createContext } from "../../../util/create-context";
 import { useClientLayoutEffect } from "../../../util/hooks";
 import { FormFieldType, useFormField } from "../../useFormField";
@@ -13,12 +6,12 @@ import { ComboboxProps } from "../types";
 
 interface InputContextValue extends FormFieldType {
   clearInput: NonNullable<ComboboxProps["onClear"]>;
-  error?: string;
+  error?: ComboboxProps["error"];
   focusInput: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
   value: string;
   setValue: (text: string) => void;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: (newValue: string) => void;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   shouldAutocomplete?: boolean;
@@ -31,7 +24,24 @@ const [InputContextProvider, useInputContext] =
     errorMessage: "useInputContext must be used within an InputContextProvider",
   });
 
-const InputProvider = ({ children, value: props }) => {
+interface Props {
+  children: React.ReactNode;
+  value: {
+    defaultValue: ComboboxProps["defaultValue"];
+    description: ComboboxProps["description"];
+    disabled: ComboboxProps["disabled"];
+    error: ComboboxProps["error"];
+    errorId: ComboboxProps["errorId"];
+    id: ComboboxProps["id"];
+    value: ComboboxProps["value"];
+    onChange: ComboboxProps["onChange"];
+    onClear: ComboboxProps["onClear"];
+    shouldAutocomplete: ComboboxProps["shouldAutocomplete"];
+    size: ComboboxProps["size"];
+  };
+}
+
+const InputProvider = ({ children, value: props }: Props) => {
   const {
     defaultValue = "",
     description,
@@ -68,30 +78,22 @@ const InputProvider = ({ children, value: props }) => {
   const [searchTerm, setSearchTerm] = useState(value);
 
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.currentTarget.value;
+    (newValue: string) => {
       externalValue ?? setInternalValue(newValue);
-      externalOnChange?.(event);
       setSearchTerm(newValue);
+      externalOnChange?.(newValue);
     },
     [externalValue, externalOnChange],
-  );
-
-  const setValue = useCallback(
-    (text) => {
-      setInternalValue(text);
-    },
-    [setInternalValue],
   );
 
   const clearInput = useCallback(
     (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
       onClear?.(event);
-      externalOnChange?.(null, "");
-      setValue("");
+      externalOnChange?.("");
+      setInternalValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setValue],
+    [externalOnChange, onClear, setInternalValue],
   );
 
   const focusInput = useCallback(() => {
@@ -111,7 +113,7 @@ const InputProvider = ({ children, value: props }) => {
     focusInput,
     inputRef,
     value,
-    setValue,
+    setValue: setInternalValue,
     onChange,
     searchTerm,
     setSearchTerm,

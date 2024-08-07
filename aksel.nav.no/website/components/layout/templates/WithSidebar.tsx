@@ -74,7 +74,7 @@ export const WithSidebar = ({
                 size="xlarge"
                 className={cl({
                   "text-deepblue-800": variant === "page",
-                  "w-fit  text-text-on-action": variant !== "page",
+                  "w-fit text-text-on-action": variant !== "page",
                 })}
               >
                 {pageType.title}

@@ -93,7 +93,7 @@ export function MenuLink({
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
           "before:absolute before:-left-px before:top-05 before:h-[calc(100%-0.25rem)] before:rounded-r-sm before:transition-all group-first:before:top-0 group-first:before:h-[calc(100%-0.125rem)] group-last:before:h-[calc(100%-0.125rem)]",
           {
-            "text-text-subtle before:w-0 before:bg-gray-400  before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
+            "text-text-subtle before:w-0 before:bg-gray-400 before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
               !selected,
             "before:w-1": selected,
             "text-deepblue-700 before:bg-deepblue-700":

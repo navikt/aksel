@@ -24,6 +24,7 @@ export const InputController = forwardRef<
     | "size"
     | "onClear"
     | "value"
+    | "disabled"
   >
 >((props, ref) => {
   const {
@@ -72,6 +73,7 @@ export const InputController = forwardRef<
             id={inputProps.id}
             ref={mergedInputRef}
             inputClassName={inputClassName}
+            shouldShowSelectedOptions={shouldShowSelectedOptions}
             {...rest}
           />
         </SelectedOptions>

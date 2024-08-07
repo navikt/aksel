@@ -91,7 +91,7 @@ export function Collection({
       )}
       {heading && !tag && (
         <Heading
-          className="sticky top-0 z-10 bg-surface-subtle p-2 px-6  md:px-10"
+          className="sticky top-0 z-10 bg-surface-subtle p-2 px-6 md:px-10"
           size="small"
           level="2"
         >
