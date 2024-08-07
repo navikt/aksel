@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createContext } from "../../../util/create-context";
 import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
@@ -51,6 +51,7 @@ const SelectedOptionsProvider = ({
   const [internalSelectedOptions, setSelectedOptions] = useState<
     ComboboxOption[]
   >([]);
+  const [isLimitReached, setIsLimitReached] = useState(false);
   const selectedOptions = useMemo(
     () =>
       externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
@@ -101,6 +102,15 @@ const SelectedOptionsProvider = ({
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
+  useEffect(() => {
+    console.log({ maxSelected });
+    const nextIsLimitReached =
+      (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
+      !isMultiSelect;
+    setIsLimitReached(nextIsLimitReached);
+    setHideCaret(nextIsLimitReached);
+  }, [maxSelected, selectedOptions, isMultiSelect, setHideCaret]);
+
   const toggleOption = useCallback(
     (
       option: ComboboxOption,
@@ -111,9 +121,6 @@ const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
-      if (!isMultiSelect) {
-        setHideCaret(true);
-      }
       clearInput(event);
       focusInput();
     },
@@ -121,17 +128,12 @@ const SelectedOptionsProvider = ({
       addSelectedOption,
       clearInput,
       focusInput,
-      isMultiSelect,
       removeSelectedOption,
       selectedOptions,
-      setHideCaret,
     ],
   );
 
   const prevSelectedOptions = usePrevious<ComboboxOption[]>(selectedOptions);
-
-  const isLimitReached =
-    !!maxSelected?.limit && selectedOptions.length >= maxSelected.limit;
 
   const selectedOptionsState = {
     addSelectedOption,
