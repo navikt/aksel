@@ -16,11 +16,12 @@ interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "disabled"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
+  shouldShowSelectedOptions?: boolean;
   value?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, ...rest }, ref) => {
+  ({ inputClassName, shouldShowSelectedOptions, ...rest }, ref) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -128,7 +129,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
-          if (value === "") {
+          if (value === "" && shouldShowSelectedOptions) {
             const lastSelectedOption =
               selectedOptions[selectedOptions.length - 1];
             if (lastSelectedOption) {
