@@ -316,6 +316,21 @@ const DropdownMenuLabel = forwardRef<
   );
 });
 
+export const Shortcut = ({ children }: { children: string }) => {
+  const parsed = children
+    .replace(/\+/g, " ")
+    .split(" ")
+    .filter((str) => str !== "");
+
+  return (
+    <Detail as="div" className="navds-dropdown-menu__shortcut">
+      {parsed.map((char, index) => (
+        <span key={char + index}>{char}</span>
+      ))}
+    </Detail>
+  );
+};
+
 /* -------------------------------------------------------------------------- */
 /*                              DropdownMenuItem                              */
 /* -------------------------------------------------------------------------- */
@@ -349,13 +364,10 @@ const DropdownMenuItem = forwardRef<
         className={cl("navds-dropdown-menu__item", className, {
           "navds-dropdown-menu__item--destructive": destructive,
         })}
+        aria-keyshortcuts={shortcut ?? undefined}
       >
         {children}
-        {shortcut && (
-          <Detail as="div" className="navds-dropdown-menu__shortcut">
-            {shortcut}
-          </Detail>
-        )}
+        {shortcut && <Shortcut>{shortcut}</Shortcut>}
       </Menu.Item>
     );
   },
@@ -402,6 +414,7 @@ const DropdownMenuCheckboxItem = forwardRef<
           "navds-dropdown-menu__item navds-dropdown-menu__checkbox",
           className,
         )}
+        aria-keyshortcuts={shortcut ?? undefined}
       >
         {children}
         <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
@@ -476,14 +489,8 @@ const DropdownMenuCheckboxItem = forwardRef<
             />
           </svg>
         </Menu.ItemIndicator>
-        {/* TODO: Improve handling of split here */}
-        {shortcut && (
-          <Detail as="div" className="navds-dropdown-menu__shortcut">
-            {shortcut.split("").map((char, index) => (
-              <span key={char + index}>{char}</span>
-            ))}
-          </Detail>
-        )}
+
+        {shortcut && <Shortcut>{shortcut}</Shortcut>}
       </Menu.CheckboxItem>
     );
   },

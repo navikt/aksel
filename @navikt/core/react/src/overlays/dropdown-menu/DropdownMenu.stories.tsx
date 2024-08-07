@@ -134,14 +134,14 @@ export const Shortcut: Story = {
             <DropdownMenu.CheckboxItem
               checked={checkedItems.checkbox1}
               onCheckedChange={() => handleCheckboxChange("checkbox1")}
-              shortcut="⌘T"
+              shortcut="⌘+T"
             >
               Checkbox 1
             </DropdownMenu.CheckboxItem>
             <DropdownMenu.CheckboxItem
               checked={checkedItems.checkbox2}
               onCheckedChange={() => handleCheckboxChange("checkbox2")}
-              shortcut="⇧⌘N"
+              shortcut="⇧+⌘+N"
             >
               Checkbox 2
             </DropdownMenu.CheckboxItem>
@@ -149,13 +149,13 @@ export const Shortcut: Story = {
           <DropdownMenu.Separator />
           <DropdownMenu.Group label="Group 2">
             <DropdownMenu.Item
-              shortcut="⌘T"
+              shortcut="⌘+T"
               onSelect={() => console.log("Item 1 clicked")}
             >
               Item 1
             </DropdownMenu.Item>
             <DropdownMenu.Item
-              shortcut="⇧⌘N"
+              shortcut="⇧+⌘+N"
               onSelect={() => console.log("Item 2 clicked")}
             >
               Item 2
