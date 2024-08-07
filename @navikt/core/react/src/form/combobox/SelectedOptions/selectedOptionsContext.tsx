@@ -103,7 +103,6 @@ const SelectedOptionsProvider = ({
   );
 
   useEffect(() => {
-    console.log({ maxSelected });
     const nextIsLimitReached =
       (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
       !isMultiSelect;
