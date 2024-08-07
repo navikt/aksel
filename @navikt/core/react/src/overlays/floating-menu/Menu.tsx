@@ -1071,6 +1071,18 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
               // Prevent window from scrolling
               event.preventDefault();
             }
+
+            /* When submenu opens to the left, we allow closing it with ArrowRight */
+            const side = context.content?.dataset.side as SubMenuSide;
+            if (
+              side === "left" &&
+              isKeyDownInside &&
+              event.key === "ArrowRight"
+            ) {
+              context.onOpenChange(false);
+              subContext.trigger?.focus();
+              event.preventDefault();
+            }
           })}
         />
       </MenuDescendantsProvider>
