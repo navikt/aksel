@@ -17,19 +17,59 @@
   max-height: var(--ac-dropdown-menu-content-available-height);
   transform-origin: var(--ac-dropdown-menu-content-transform-origin);
   scrollbar-width: thin;
-}
-
-/* TODO: extract anim-name to separate selector
-TODO: add support for other directions */
-.navds-dropdown-menu__content:where([data-state="open"]):where([data-side="bottom"]) {
-  animation-name: aksel-dropdown-from-bottom, aksel-dropdown-fade-in;
   animation-duration: 0.16s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navds-dropdown-menu__content:where([data-state="open"]):where([data-side="bottom"]) {
+  animation-name: aksel-dropdown-from-bottom, aksel-dropdown-fade-in;
+}
+
+.navds-dropdown-menu__content:where([data-state="open"]):where([data-side="top"]) {
+  animation-name: aksel-dropdown-from-top, aksel-dropdown-fade-in;
+}
+
+.navds-dropdown-menu__content:where([data-state="open"]):where([data-side="left"]) {
+  animation-name: aksel-dropdown-from-left, aksel-dropdown-fade-in;
+}
+
+.navds-dropdown-menu__content:where([data-state="open"]):where([data-side="right"]) {
+  animation-name: aksel-dropdown-from-right, aksel-dropdown-fade-in;
 }
 
 @keyframes aksel-dropdown-from-bottom {
   from {
     transform: translateY(-4px) scale(0.97);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aksel-dropdown-from-top {
+  from {
+    transform: translateY(4px) scale(0.97);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aksel-dropdown-from-left {
+  from {
+    transform: translateX(4px) scale(0.97);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aksel-dropdown-from-right {
+  from {
+    transform: translateX(-4px) scale(0.97);
   }
 
   to {
