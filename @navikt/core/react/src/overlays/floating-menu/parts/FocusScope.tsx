@@ -40,7 +40,7 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
     const onMountHandler = useCallbackRef(onMountHandlerCallback);
     const onUnmountHandler = useCallbackRef(onUnmountHandlerCallback);
 
-    const composedRefs = useMergeRefs(ref, (node) => setContainer(node));
+    const composedRefs = useMergeRefs(ref, setContainer);
 
     useEffect(() => {
       if (!container) return;
