@@ -1,5 +1,29 @@
 # @navikt/ds-react
 
+## 6.14.0
+
+### Minor Changes
+
+- Breaking change: Combobox.onChange now receive only value as argument, instead of ChangeEvent ([#2974](https://github.com/navikt/aksel/pull/2974))
+
+- Improved search in Combobox - find hits anywhere in the label ([#2974](https://github.com/navikt/aksel/pull/2974))
+
+### Patch Changes
+
+- Tabs, ToggleGroup: Rovingfocus now respects shift, alt, ctrl and meta-keys when navigating. ([#3041](https://github.com/navikt/aksel/pull/3041))
+
+- Prevent NullPointer when adding a new/custom option in Combobox single-select ([#3054](https://github.com/navikt/aksel/pull/3054))
+
+- Combobox: Entering an already selected option and pressing enter no longer removes it ([#3061](https://github.com/navikt/aksel/pull/3061))
+
+- Combobox: Description is now connected to the input field via aria-describedby ([#3065](https://github.com/navikt/aksel/pull/3065))
+
+- Prevent Escape in open Combobox from closing Modals ([#3053](https://github.com/navikt/aksel/pull/3053))
+
+- Updated dependencies [[`8fd183cc9`](https://github.com/navikt/aksel/commit/8fd183cc909a1f27a0a9f496415d280c1207a479)]:
+  - @navikt/ds-tokens@6.14.0
+  - @navikt/aksel-icons@6.14.0
+
 ## 6.13.0
 
 ### Minor Changes

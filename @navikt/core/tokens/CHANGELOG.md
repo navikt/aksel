@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 6.14.0
+
+### Minor Changes
+
+- Fonts: Added built-in support for cyrillic, cyrillic-ext and latin-ext ([#3044](https://github.com/navikt/aksel/pull/3044))
+
 ## 6.13.0
 
 ## 6.12.0
