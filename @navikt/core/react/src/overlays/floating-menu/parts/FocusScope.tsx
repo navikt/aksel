@@ -20,6 +20,13 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
   onUnmountHandler?: (event: Event) => void;
 }
 
+/**
+ * FocusScope manages focus on mount and unmount of container.
+ * This is used to better handle autofocus of elements when mounted and unmounted.
+ * Exapmle usage:
+ * - Focus first item in a list when mounted
+ * - Focus a button when unmounted
+ */
 const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
   (
     {
