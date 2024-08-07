@@ -590,6 +590,10 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
           onPointerMove,
           whenMouse((event) => {
             if (disabled) {
+              /**
+               * In the edgecase the focus is still stuck on a previous item, we make sure to reset it
+               * even when the disabled item can't be focused itself to reset it.
+               */
               contentContext.onItemLeave(event);
             } else {
               contentContext.onItemEnter(event);
@@ -648,10 +652,10 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useRadioGroupContext] =
+const [RadioGroupProvider, useMenuRadioGroupContext] =
   createContext<MenuRadioGroupProps>({
     providerName: "MenuRadioGroupProvider",
-    hookName: "useRadioGroupContext",
+    hookName: "useMenuRadioGroupContext",
     defaultValue: {
       value: undefined,
       onValueChange: () => {},
@@ -715,7 +719,7 @@ const MenuRadioItem = forwardRef<
   React.ElementRef<typeof MenuItem>,
   MenuRadioItemProps
 >(({ value, onSelect, ...rest }: MenuRadioItemProps, forwardedRef) => {
-  const context = useRadioGroupContext();
+  const context = useMenuRadioGroupContext();
   const checked = value === context.value;
 
   return (
