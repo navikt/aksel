@@ -699,6 +699,22 @@ export const ViewDemo: Story = {
                               {_status}
                             </DropdownMenu.Item>
                           ))}
+                          <DropdownMenu.Sub>
+                            <DropdownMenu.SubTrigger>
+                              Nested submenu demo
+                            </DropdownMenu.SubTrigger>
+                            <DropdownMenu.SubContent>
+                              {StatusArray.map((_status) => (
+                                <DropdownMenu.Item
+                                  key={_status}
+                                  onSelect={() => updateTaskStatus(id, _status)}
+                                  disabled={status === _status}
+                                >
+                                  {_status}
+                                </DropdownMenu.Item>
+                              ))}
+                            </DropdownMenu.SubContent>
+                          </DropdownMenu.Sub>
                         </DropdownMenu.SubContent>
                       </DropdownMenu.Sub>
                       <DropdownMenu.Separator />
