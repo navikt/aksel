@@ -52,7 +52,6 @@ interface MenuComponent extends React.FC<MenuProps> {
   Portal: typeof MenuPortal;
   Content: typeof MenuContent;
   Group: typeof MenuGroup;
-  Label: typeof MenuLabel;
   Item: typeof MenuItem;
   CheckboxItem: typeof MenuCheckboxItem;
   RadioGroup: typeof MenuRadioGroup;
@@ -621,17 +620,6 @@ const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
   },
 );
 
-/**
- * MenuLabel
- */
-interface MenuLabelProps extends SlottedDivProps {}
-
-const MenuLabel = forwardRef<SlottedDivElementRef, MenuLabelProps>(
-  (props: MenuLabelProps, ref) => {
-    return <SlottedDivElement {...props} ref={ref} />;
-  },
-);
-
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Portal                                 */
 /* -------------------------------------------------------------------------- */
@@ -1147,7 +1135,6 @@ Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;
 Menu.Content = MenuContent;
 Menu.Group = MenuGroup;
-Menu.Label = MenuLabel;
 Menu.Item = MenuItem;
 Menu.CheckboxItem = MenuCheckboxItem;
 Menu.RadioGroup = MenuRadioGroup;
@@ -1166,7 +1153,6 @@ export {
   MenuGroup,
   MenuItem,
   MenuItemIndicator,
-  MenuLabel,
   MenuPortal,
   MenuRadioGroup,
   MenuRadioItem,
@@ -1180,7 +1166,6 @@ export {
   type MenuGroupProps,
   type MenuItemElement,
   type MenuItemIndicatorProps,
-  type MenuLabelProps,
   type MenuPortalProps,
   type MenuProps,
   type MenuRadioGroupProps,

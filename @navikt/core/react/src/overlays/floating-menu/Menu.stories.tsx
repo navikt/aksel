@@ -164,9 +164,9 @@ export const WithLabels = () => (
     {foodGroups.map((foodGroup, index) => (
       <Menu.Group key={index}>
         {foodGroup.label && (
-          <Menu.Label className="label" key={foodGroup.label}>
+          <div className="label" key={foodGroup.label}>
             {foodGroup.label}
-          </Menu.Label>
+          </div>
         )}
         {foodGroup.foods.map((food) => (
           <Menu.Item
