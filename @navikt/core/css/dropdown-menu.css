@@ -1,13 +1,3 @@
-/* Test adding tabindex 0 to disabled items: Did not work out well */
-
-/* Add margin top 1px on checkbox item */
-
-/* Custom scrollbar */
-
-/* Item + linkitem? */
-
-/* Add heading section like in shadcn */
-
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable aksel/design-token-exists */
 .navds-dropdown-menu__content {
@@ -26,6 +16,7 @@
   min-width: var(--__ac-dropdown-menu-content-min-width);
   max-height: var(--ac-dropdown-menu-content-available-height);
   transform-origin: var(--ac-dropdown-menu-content-transform-origin);
+  scrollbar-width: thin;
 }
 
 /* TODO: extract anim-name to separate selector
