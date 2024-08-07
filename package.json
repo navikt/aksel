@@ -63,10 +63,10 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "*.js": "eslint",
-    "*.jsx": "eslint",
-    "*.ts": "eslint",
-    "*.tsx": "eslint",
+    "*.js": "eslint --max-warnings=0",
+    "*.jsx": "eslint --max-warnings=0",
+    "*.ts": "eslint --max-warnings=0",
+    "*.tsx": "eslint --max-warnings=0",
     "*.css": "stylelint",
     "*": "prettier --write --ignore-unknown"
   },
