@@ -5,6 +5,7 @@ import {
   PencilIcon,
   PlusIcon,
   PushPinIcon,
+  TasklistSendIcon,
   TasklistStartIcon,
   TrashIcon,
 } from "@navikt/aksel-icons";
@@ -176,6 +177,8 @@ export const CheckboxGroups: Story = {
       checkbox2: true,
       checkbox3: false,
       checkbox4: true,
+      checkbox5: false,
+      checkbox6: true,
     });
 
     // Step 3: Handle change
@@ -218,6 +221,22 @@ export const CheckboxGroups: Story = {
               onCheckedChange={() => handleCheckboxChange("checkbox4")}
             >
               Checkbox 4
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+          <ActionMenu.Group label="Group 3">
+            <ActionMenu.CheckboxItem
+              checked={checkedItems.checkbox5}
+              onCheckedChange={() => handleCheckboxChange("checkbox5")}
+            >
+              <TasklistSendIcon aria-hidden />
+              Checkbox 5
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
+              checked={checkedItems.checkbox6}
+              onCheckedChange={() => handleCheckboxChange("checkbox6")}
+            >
+              <PencilIcon aria-hidden />
+              Checkbox 6
             </ActionMenu.CheckboxItem>
           </ActionMenu.Group>
         </ActionMenu.Content>
@@ -717,7 +736,7 @@ export const ViewDemo: Story = {
                       </ActionMenu.Sub>
                       <ActionMenu.Separator />
                       <ActionMenu.Item
-                        destructive
+                        variant="danger"
                         onSelect={() =>
                           setTasks(tasks.filter((_task) => _task.id !== id))
                         }

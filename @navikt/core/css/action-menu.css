@@ -15,7 +15,7 @@
   max-height: var(--ac-action-menu-content-available-height);
   transform-origin: var(--ac-action-menu-content-transform-origin);
   scrollbar-width: thin;
-  animation-duration: 0.16s;
+  animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -37,7 +37,7 @@
 
 @keyframes aksel-action-from-bottom {
   from {
-    transform: translateY(-4px) scale(0.97);
+    transform: translateY(-4px);
   }
 
   to {
@@ -47,7 +47,7 @@
 
 @keyframes aksel-action-from-top {
   from {
-    transform: translateY(4px) scale(0.97);
+    transform: translateY(4px);
   }
 
   to {
@@ -57,7 +57,7 @@
 
 @keyframes aksel-action-from-left {
   from {
-    transform: translateX(4px) scale(0.97);
+    transform: translateX(4px);
   }
 
   to {
@@ -67,7 +67,7 @@
 
 @keyframes aksel-action-from-right {
   from {
-    transform: translateX(-4px) scale(0.97);
+    transform: translateX(-4px);
   }
 
   to {
@@ -98,6 +98,7 @@
   font-size: var(--a-font-size-medium);
   scroll-margin-block: var(--__ac-action-menu-content-p);
   white-space: nowrap;
+  line-height: 1.5;
 }
 
 .navds-action-menu__item svg {
@@ -108,13 +109,17 @@
   --__ac-action-menu-item-pl: var(--a-spacing-6);
 }
 
+.navds-action-menu__item:where(.navds-action-menu__checkbox, .navds-action-menu__radio) > span {
+  margin-top: 1px;
+}
+
 .navds-action-menu__item:focus {
   outline: none;
   background-color: var(--a-surface-action-subtle-hover);
   color: var(--a-text-default);
 }
 
-.navds-action-menu__item--destructive:focus {
+.navds-action-menu__item--danger:focus {
   background-color: var(--a-surface-danger-subtle);
 }
 

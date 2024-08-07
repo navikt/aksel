@@ -336,18 +336,12 @@ type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
 interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   shortcut?: string;
-  destructive?: boolean;
+  variant?: "danger";
 }
 
 const ActionMenuItem = forwardRef<ActionMenuItemElement, ActionMenuItemProps>(
   (
-    {
-      children,
-      className,
-      shortcut,
-      destructive,
-      ...rest
-    }: ActionMenuItemProps,
+    { children, className, shortcut, variant, ...rest }: ActionMenuItemProps,
     ref,
   ) => {
     return (
@@ -356,7 +350,7 @@ const ActionMenuItem = forwardRef<ActionMenuItemElement, ActionMenuItemProps>(
         {...rest}
         asChild={false}
         className={cl("navds-action-menu__item", className, {
-          "navds-action-menu__item--destructive": destructive,
+          "navds-action-menu__item--danger": variant === "danger",
         })}
         aria-keyshortcuts={shortcut ?? undefined}
       >
