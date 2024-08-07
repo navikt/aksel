@@ -111,7 +111,9 @@ const SelectedOptionsProvider = ({
       } else {
         addSelectedOption(option);
       }
-      setHideCaret(true);
+      if (!isMultiSelect) {
+        setHideCaret(true);
+      }
       clearInput(event);
       focusInput();
     },
@@ -119,6 +121,7 @@ const SelectedOptionsProvider = ({
       addSelectedOption,
       clearInput,
       focusInput,
+      isMultiSelect,
       removeSelectedOption,
       selectedOptions,
       setHideCaret,
