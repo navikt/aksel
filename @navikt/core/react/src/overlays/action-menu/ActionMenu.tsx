@@ -7,9 +7,9 @@ import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
+import { requireReactElement } from "../../util/requireReactElement";
 import { Menu } from "../floating-menu/Menu";
 import { SlottedButtonElement } from "./SlottedButtonElement";
-import { requireReactElement } from "./requireReactElement";
 
 /* -------------------------------------------------------------------------- */
 /*                                DropdownMenu                                */
