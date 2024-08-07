@@ -14,7 +14,7 @@ interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onMountHandler?: (event: Event) => void;
   /**
-   * Event handler called when auto-focusing on unmount.
+   * Event handler called on unmount. Used for auto-focusing.
    * Can be prevented.
    */
   onUnmountHandler?: (event: Event) => void;
