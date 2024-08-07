@@ -194,34 +194,35 @@ const [MenuContentProvider, useMenuContentContext] =
     hookName: "useMenuContentContext",
   });
 
-type MenuContentElement = MenuContentImplElement;
-interface MenuContentProps extends MenuContentImplTypeProps {}
+type MenuContentElement = MenuContentInternalElement;
+interface MenuContentProps extends MenuContentInternalTypeProps {}
 
-const MenuContent = React.forwardRef<MenuContentImplElement, MenuContentProps>(
-  (props: MenuContentProps, ref) => {
-    const descendants = useMenuDescendants();
-    const rootContext = useMenuRootContext();
+const MenuContent = React.forwardRef<
+  MenuContentInternalElement,
+  MenuContentProps
+>((props: MenuContentProps, ref) => {
+  const descendants = useMenuDescendants();
+  const rootContext = useMenuRootContext();
 
-    return (
-      <MenuDescendantsProvider value={descendants}>
-        {rootContext.modal ? (
-          <MenuRootContentModal {...props} ref={ref} />
-        ) : (
-          <MenuRootContentNonModal {...props} ref={ref} />
-        )}
-      </MenuDescendantsProvider>
-    );
-  },
-);
+  return (
+    <MenuDescendantsProvider value={descendants}>
+      {rootContext.modal ? (
+        <MenuRootContentModal {...props} ref={ref} />
+      ) : (
+        <MenuRootContentNonModal {...props} ref={ref} />
+      )}
+    </MenuDescendantsProvider>
+  );
+});
 
 /* ---------------------------- Non-modal content --------------------------- */
 const MenuRootContentNonModal = React.forwardRef<
-  MenuContentImplElement,
-  MenuContentImplTypeProps
->((props: MenuContentImplTypeProps, ref) => {
+  MenuContentInternalElement,
+  MenuContentInternalTypeProps
+>((props: MenuContentInternalTypeProps, ref) => {
   const context = useMenuContext();
   return (
-    <MenuContentImpl
+    <MenuContentInternal
       {...props}
       ref={ref}
       disableOutsidePointerEvents={false}
@@ -232,13 +233,13 @@ const MenuRootContentNonModal = React.forwardRef<
 
 /* ------------------------------ Modal content ----------------------------- */
 const MenuRootContentModal = forwardRef<
-  MenuContentImplElement,
-  MenuContentImplTypeProps
->((props: MenuContentImplTypeProps, ref) => {
+  MenuContentInternalElement,
+  MenuContentInternalTypeProps
+>((props: MenuContentInternalTypeProps, ref) => {
   const context = useMenuContext();
 
   return (
-    <MenuContentImpl
+    <MenuContentInternal
       {...props}
       ref={ref}
       // make sure to only disable pointer events when open
@@ -256,21 +257,21 @@ const MenuRootContentModal = forwardRef<
   );
 });
 
-/* -------------------------- Menu content implicit ------------------------- */
-type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
+/* -------------------------- Menu content internals ------------------------- */
+type MenuContentInternalElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
 
-type MenuContentImplPrivateProps = {
+type MenuContentInternalPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountHandler"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
 
-interface MenuContentImplProps
-  extends MenuContentImplPrivateProps,
+interface MenuContentInternalProps
+  extends MenuContentInternalPrivateProps,
     Omit<
       React.ComponentPropsWithoutRef<typeof Floating.Content>,
       "dir" | "onPlaced"
@@ -287,9 +288,9 @@ interface MenuContentImplProps
   onInteractOutside?: DismissableLayerProps["onInteractOutside"];
 }
 
-const MenuContentImpl = forwardRef<
-  MenuContentImplElement,
-  MenuContentImplProps
+const MenuContentInternal = forwardRef<
+  MenuContentInternalElement,
+  MenuContentInternalProps
 >(
   (
     {
@@ -303,7 +304,7 @@ const MenuContentImpl = forwardRef<
       onInteractOutside,
       onDismiss,
       ...rest
-    }: MenuContentImplProps,
+    }: MenuContentInternalProps,
     forwardedRef,
   ) => {
     const descendants = useMenuDescendantsContext();
@@ -455,17 +456,20 @@ const MenuContentImpl = forwardRef<
   },
 );
 
-interface MenuContentImplTypeProps
-  extends Omit<MenuContentImplProps, keyof MenuContentImplPrivateProps> {}
+interface MenuContentInternalTypeProps
+  extends Omit<
+    MenuContentInternalProps,
+    keyof MenuContentInternalPrivateProps
+  > {}
 
 /* -------------------------------------------------------------------------- */
 /*                                  Menu item                                 */
 /* -------------------------------------------------------------------------- */
 const ITEM_SELECT_EVENT = "menu.itemSelect";
 
-type MenuItemElement = MenuItemImplElement;
+type MenuItemElement = MenuItemInternalElement;
 
-interface MenuItemProps extends Omit<MenuItemImplProps, "onSelect"> {
+interface MenuItemProps extends Omit<MenuItemInternalProps, "onSelect"> {
   onSelect?: (event: Event) => void;
 }
 
@@ -510,7 +514,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
     };
 
     return (
-      <MenuItemImpl
+      <MenuItemInternal
         {...rest}
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
@@ -549,21 +553,24 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
   },
 );
 
-/* --------------------------- Menu Item implicit --------------------------- */
-type MenuItemImplElement = SlottedDivElementRef;
+/* --------------------------- Menu Item internals --------------------------- */
+type MenuItemInternalElement = SlottedDivElementRef;
 
-interface MenuItemImplProps extends SlottedDivProps {
+interface MenuItemInternalProps extends SlottedDivProps {
   disabled?: boolean;
 }
 
-const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
+const MenuItemInternal = forwardRef<
+  MenuItemInternalElement,
+  MenuItemInternalProps
+>(
   (
     {
       disabled = false,
       onPointerMove,
       onPointerLeave,
       ...rest
-    }: MenuItemImplProps,
+    }: MenuItemInternalProps,
     forwardedRef,
   ) => {
     const { register } = useMenuDescendant({ disabled });
@@ -827,7 +834,9 @@ const MenuSub: React.FC<MenuSubProps> = ({
   const parentMenuContext = useMenuContext();
 
   const [trigger, setTrigger] = useState<MenuItemElement | null>(null);
-  const [content, setContent] = useState<MenuContentImplElement | null>(null);
+  const [content, setContent] = useState<MenuContentInternalElement | null>(
+    null,
+  );
   const handleOpenChange = useCallbackRef(onOpenChange);
 
   // Prevent the parent menu from reopening with open submenus.
@@ -862,7 +871,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
 /* -------------------------------------------------------------------------- */
 /*                            Menu SubMenu Trigger                            */
 /* -------------------------------------------------------------------------- */
-interface MenuSubTriggerProps extends MenuItemImplProps {}
+interface MenuSubTriggerProps extends MenuItemInternalProps {}
 
 const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   (props: MenuSubTriggerProps, forwardedRef) => {
@@ -893,7 +902,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 
     return (
       <MenuAnchor asChild>
-        <MenuItemImpl
+        <MenuItemInternal
           id={subContext.triggerId}
           aria-haspopup="menu"
           aria-expanded={context.open}
@@ -991,92 +1000,89 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 /* -------------------------------------------------------------------------- */
 interface MenuSubContentProps
   extends Omit<
-    MenuContentImplProps,
-    | keyof MenuContentImplPrivateProps
+    MenuContentInternalProps,
+    | keyof MenuContentInternalPrivateProps
     | "onCloseAutoFocus"
     | "onEntryFocus"
     | "side"
     | "align"
   > {}
 
-const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
-  (props: MenuSubContentProps, forwardedRef) => {
-    const descendants = useMenuDescendants();
+const MenuSubContent = forwardRef<
+  MenuContentInternalElement,
+  MenuSubContentProps
+>((props: MenuSubContentProps, forwardedRef) => {
+  const descendants = useMenuDescendants();
 
-    const context = useMenuContext();
-    const rootContext = useMenuRootContext();
-    const subContext = useMenuSubContext();
-    const ref = useRef<MenuContentImplElement>(null);
-    const composedRefs = useMergeRefs(forwardedRef, ref);
+  const context = useMenuContext();
+  const rootContext = useMenuRootContext();
+  const subContext = useMenuSubContext();
+  const ref = useRef<MenuContentInternalElement>(null);
+  const composedRefs = useMergeRefs(forwardedRef, ref);
 
-    return (
-      <MenuDescendantsProvider value={descendants}>
-        <MenuContentImpl
-          id={subContext.contentId}
-          aria-labelledby={subContext.triggerId}
-          {...props}
-          ref={composedRefs}
-          align="start"
-          side="right"
-          disableOutsidePointerEvents={false}
-          onOpenAutoFocus={(event) => {
-            // when opening a submenu, focus content for keyboard users only
-            if (rootContext.isUsingKeyboardRef.current) {
-              ref.current?.focus();
-            }
+  return (
+    <MenuDescendantsProvider value={descendants}>
+      <MenuContentInternal
+        id={subContext.contentId}
+        aria-labelledby={subContext.triggerId}
+        {...props}
+        ref={composedRefs}
+        align="start"
+        side="right"
+        disableOutsidePointerEvents={false}
+        onOpenAutoFocus={(event) => {
+          // when opening a submenu, focus content for keyboard users only
+          if (rootContext.isUsingKeyboardRef.current) {
+            ref.current?.focus();
+          }
+          event.preventDefault();
+        }}
+        // The menu might close because of focusing another menu item in the parent menu. We
+        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+        onCloseAutoFocus={(event) => event.preventDefault()}
+        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
+          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+          // on pointer interaction.
+          if (event.target !== subContext.trigger) context.onOpenChange(false);
+        })}
+        onEscapeKeyDown={composeEventHandlers(
+          props.onEscapeKeyDown,
+          (event) => {
+            rootContext.onClose();
+            // Ensure pressing escape in submenu doesn't escape full screen mode
             event.preventDefault();
-          }}
-          // The menu might close because of focusing another menu item in the parent menu. We
-          // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
-          onCloseAutoFocus={(event) => event.preventDefault()}
-          onFocusOutside={composeEventHandlers(
-            props.onFocusOutside,
-            (event) => {
-              // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-              // on pointer interaction.
-              if (event.target !== subContext.trigger)
-                context.onOpenChange(false);
-            },
-          )}
-          onEscapeKeyDown={composeEventHandlers(
-            props.onEscapeKeyDown,
-            (event) => {
-              rootContext.onClose();
-              // Ensure pressing escape in submenu doesn't escape full screen mode
-              event.preventDefault();
-            },
-          )}
-          onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-            // Submenu key events bubble through portals. We only care about keys in this menu.
-            const isKeyDownInside = event.currentTarget.contains(
-              event.target as HTMLElement,
-            );
-            const isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
-            if (isKeyDownInside && isCloseKey) {
-              context.onOpenChange(false);
-              // We focus manually because we prevented it in `onCloseAutoFocus`
-              subContext.trigger?.focus();
-              // Prevent window from scrolling
-              event.preventDefault();
-            }
+          },
+        )}
+        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+          // Submenu key events bubble through portals. We only care about keys in this menu.
+          const isKeyDownInside = event.currentTarget.contains(
+            event.target as HTMLElement,
+          );
+          const isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
+          if (isKeyDownInside && isCloseKey) {
+            context.onOpenChange(false);
+            // We focus manually because we prevented it in `onCloseAutoFocus`
+            subContext.trigger?.focus();
+            // Prevent window from scrolling
+            event.preventDefault();
+          }
 
-            /* When submenu opens to the left, we allow closing it with ArrowRight */
-            const side = context.content?.dataset.side as SubMenuSide;
-            if (
-              side === "left" &&
-              isKeyDownInside &&
-              event.key === "ArrowRight"
-            ) {
-              context.onOpenChange(false);
-              subContext.trigger?.focus();
-              event.preventDefault();
-            }
-          })}
-        />
-      </MenuDescendantsProvider>
-    );
-  },
-);
+          /* When submenu opens to the left, we allow closing it with ArrowRight */
+          const side = context.content?.dataset.side as SubMenuSide;
+          if (
+            side === "left" &&
+            isKeyDownInside &&
+            event.key === "ArrowRight"
+          ) {
+            context.onOpenChange(false);
+            subContext.trigger?.focus();
+            event.preventDefault();
+          }
+        })}
+      />
+    </MenuDescendantsProvider>
+  );
+});
 
 /* -------------------------------------------------------------------------- */
 /*                                  Utilities                                 */
