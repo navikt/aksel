@@ -582,15 +582,9 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         style={{ userSelect: "none", ...rest?.style }}
         ref={composedRefs}
         /**
-         * We focus items on `pointerMove` to achieve the following:
-         *
-         * - Mouse over an item (it focuses)
-         * - Leave mouse where it is and use keyboard to focus a different item
-         * - Wiggle mouse without it leaving previously focused item
-         * - Previously focused item should re-focus
-         *
-         * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
-         * wiggles. This is to match native menu implementation.
+         * We focus items on `pointerMove` make sure that the item is focused or re-focused
+         * when the mouse wiggles. If we used `mouseOver`/`mouseEnter` it would not re-focus.
+         * This is mostly to handle edgecases where the user uses mouse and keyboard together.
          */
         onPointerMove={composeEventHandlers(
           onPointerMove,
