@@ -15,7 +15,7 @@ import { Table } from "../../table";
 import { Tag } from "../../tag";
 import { Tooltip } from "../../tooltip";
 import { BodyShort } from "../../typography";
-import { DropdownMenu } from "./DropdownMenu";
+import { DropdownMenu } from "./ActionMenu";
 
 export default {
   title: "ds-react/DropdownMenu",
