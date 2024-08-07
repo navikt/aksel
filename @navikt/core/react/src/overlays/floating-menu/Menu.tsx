@@ -1054,7 +1054,7 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
             props.onEscapeKeyDown,
             (event) => {
               rootContext.onClose();
-              // ensure pressing escape in submenu doesn't escape full screen mode
+              // Ensure pressing escape in submenu doesn't escape full screen mode
               event.preventDefault();
             },
           )}
@@ -1068,7 +1068,7 @@ const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
               context.onOpenChange(false);
               // We focus manually because we prevented it in `onCloseAutoFocus`
               subContext.trigger?.focus();
-              // prevent window from scrolling
+              // Prevent window from scrolling
               event.preventDefault();
             }
           })}
