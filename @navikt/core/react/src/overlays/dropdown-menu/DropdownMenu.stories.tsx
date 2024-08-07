@@ -477,6 +477,7 @@ export const Disabled: Story = {
           <DropdownMenu.Item
             onSelect={() => console.log("Item 1 clicked")}
             disabled
+            shortcut="T+W"
           >
             Item 1
           </DropdownMenu.Item>
@@ -493,7 +494,7 @@ export const Disabled: Story = {
             </DropdownMenu.SubContent>
           </DropdownMenu.Sub>
 
-          <DropdownMenu.CheckboxItem checked disabled>
+          <DropdownMenu.CheckboxItem checked disabled shortcut="T+W">
             Checkbox disabled
           </DropdownMenu.CheckboxItem>
           <DropdownMenu.CheckboxItem>Checkbox 2</DropdownMenu.CheckboxItem>

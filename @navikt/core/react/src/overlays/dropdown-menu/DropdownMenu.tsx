@@ -323,7 +323,7 @@ export const Shortcut = ({ children }: { children: string }) => {
     .filter((str) => str !== "");
 
   return (
-    <Detail as="div" className="navds-dropdown-menu__shortcut">
+    <Detail aria-hidden as="div" className="navds-dropdown-menu__shortcut">
       {parsed.map((char, index) => (
         <span key={char + index}>{char}</span>
       ))}
