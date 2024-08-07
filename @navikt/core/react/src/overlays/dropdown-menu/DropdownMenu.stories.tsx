@@ -9,7 +9,7 @@ import {
   TrashIcon,
 } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { VStack } from "../../layout/stack";
+import { HStack, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { Table } from "../../table";
 import { Tag } from "../../tag";
@@ -21,6 +21,7 @@ export default {
   title: "ds-react/DropdownMenu",
   parameters: {
     layout: "padded",
+    chromatic: { disable: true },
   },
 } satisfies Meta<typeof DropdownMenu>;
 
@@ -40,9 +41,9 @@ const DemoDecorator = (Story: any, { name }) => {
 };
 
 export const OnlyItems: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -64,9 +65,9 @@ export const OnlyItems: Story = {
 };
 
 export const GroupedItems: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -101,7 +102,7 @@ export const GroupedItems: Story = {
 };
 
 export const Shortcut: Story = {
-  render: () => {
+  render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
       checkbox2: false,
@@ -116,7 +117,7 @@ export const Shortcut: Story = {
     };
 
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -169,12 +170,12 @@ export const Shortcut: Story = {
 };
 
 export const CheckboxGroups: Story = {
-  render: () => {
+  render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
-      checkbox2: false,
+      checkbox2: true,
       checkbox3: false,
-      checkbox4: false,
+      checkbox4: true,
     });
 
     // Step 3: Handle change
@@ -186,7 +187,7 @@ export const CheckboxGroups: Story = {
     };
 
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -227,10 +228,10 @@ export const CheckboxGroups: Story = {
 };
 
 export const CheckboxIndeterminateGroups: Story = {
-  render: () => {
+  render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
-      checkbox2: false,
+      checkbox2: true,
       checkbox3: false,
       checkbox4: false,
     });
@@ -244,7 +245,7 @@ export const CheckboxIndeterminateGroups: Story = {
     };
 
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -306,7 +307,7 @@ export const CheckboxIndeterminateGroups: Story = {
 };
 
 export const RadioGroups: Story = {
-  render: () => {
+  render: (props) => {
     const [group1Value, setGroup1Value] = useState("1");
     const [group2Value, setGroup2Value] = useState("4");
 
@@ -320,7 +321,7 @@ export const RadioGroups: Story = {
     };
 
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -349,9 +350,9 @@ export const RadioGroups: Story = {
 };
 
 export const SeparatorWithGroupedItems: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -387,9 +388,9 @@ export const SeparatorWithGroupedItems: Story = {
 };
 
 export const SeparatorWithItems: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -413,9 +414,9 @@ export const SeparatorWithItems: Story = {
 };
 
 export const Submenus: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -423,7 +424,7 @@ export const Submenus: Story = {
           <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </DropdownMenu.Item>
-          <DropdownMenu.Sub>
+          <DropdownMenu.Sub open={props.open}>
             <DropdownMenu.SubTrigger>Submenu 1</DropdownMenu.SubTrigger>
             <DropdownMenu.SubContent>
               <DropdownMenu.Item
@@ -436,7 +437,7 @@ export const Submenus: Story = {
               >
                 Subitem 2
               </DropdownMenu.Item>
-              <DropdownMenu.Sub>
+              <DropdownMenu.Sub open={props.open}>
                 <DropdownMenu.SubTrigger>
                   Nested submenu 1
                 </DropdownMenu.SubTrigger>
@@ -467,9 +468,9 @@ export const Submenus: Story = {
 };
 
 export const Disabled: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <DropdownMenu>
+      <DropdownMenu open={props.open}>
         <DropdownMenu.Trigger>
           <button>Open dropdown</button>
         </DropdownMenu.Trigger>
@@ -737,5 +738,65 @@ export const ViewDemo: Story = {
         </Table.Body>
       </Table>
     );
+  },
+};
+
+export const Chromatic: Story = {
+  render: (args, context) => {
+    const newArgs = { ...args, open: true };
+    return (
+      <VStack style={{ gap: "25rem" }}>
+        <HStack gap="12">
+          <div>
+            <h2>OnlyItems</h2>
+            {OnlyItems.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>GroupedItems</h2>
+            {GroupedItems.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>Shortcut</h2>
+            {Shortcut.render?.(newArgs, context)}
+          </div>
+        </HStack>
+        <HStack gap="12">
+          <div>
+            <h2>CheckboxGroups</h2>
+            {CheckboxGroups.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>CheckboxIndeterminateGroups</h2>
+            {CheckboxIndeterminateGroups.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>RadioGroups</h2>
+            {RadioGroups.render?.(newArgs, context)}
+          </div>
+        </HStack>
+        <HStack gap="12">
+          <div>
+            <h2>SeparatorWithGroupedItems</h2>
+            {SeparatorWithGroupedItems.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>SeparatorWithItems</h2>
+            {SeparatorWithItems.render?.(newArgs, context)}
+          </div>
+        </HStack>
+        <div>
+          <h2>Submenus</h2>
+          {Submenus.render?.(newArgs, context)}
+        </div>
+
+        <div>
+          <h2>Disabled</h2>
+          {Disabled.render?.(newArgs, context)}
+        </div>
+      </VStack>
+    );
+  },
+  parameters: {
+    chromatic: { disable: false },
   },
 };
