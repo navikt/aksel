@@ -9,7 +9,7 @@ import { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
-const FilteredOptionsItem = ({ option }) => {
+const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const {
     inputProps: { id },
     size,
