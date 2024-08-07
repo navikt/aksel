@@ -9,7 +9,7 @@ const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
 interface FocusScopeProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Event handler called when auto-focusing on mount.
+   * Event handler called on mount, unless the component already has focus. Used for auto-focusing.
    * Can be prevented.
    */
   onMountHandler?: (event: Event) => void;
