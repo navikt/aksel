@@ -192,6 +192,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         virtualFocus,
         setValue,
         searchTerm,
+        shouldShowSelectedOptions,
       ],
     );
 
