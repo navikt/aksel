@@ -345,6 +345,11 @@ const MenuContentImpl = forwardRef<
         onItemLeave={React.useCallback(
           (event) => {
             if (isPointerMovingToSubmenu(event)) return;
+
+            /**
+             * Resets focus from current active item to content area
+             * This is to prevent focus from being stuck on an item when we move pointer outside the menu or onto a disabled item
+             */
             contentRef.current?.focus();
           },
           [isPointerMovingToSubmenu],
