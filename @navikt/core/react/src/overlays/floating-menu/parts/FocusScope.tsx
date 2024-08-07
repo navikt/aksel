@@ -36,43 +36,38 @@ const FocusScope = forwardRef<HTMLDivElement, FocusScopeProps>(
     const composedRefs = useMergeRefs(ref, (node) => setContainer(node));
 
     useEffect(() => {
-      if (container) {
-        const ownerDocument = container.ownerDocument ?? globalThis?.document;
+      if (!container) return;
 
-        const previouslyFocusedElement = ownerDocument.activeElement;
-        const hasFocus = container.contains(previouslyFocusedElement);
+      const ownerDocument = container.ownerDocument ?? globalThis?.document;
+      const hasFocus = container.contains(ownerDocument.activeElement);
 
-        if (!hasFocus) {
-          const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
-          container.dispatchEvent(mountEvent);
-        }
-
-        return () => {
-          container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
-
-          /**
-           * https://github.com/facebook/react/issues/17894
-           * As usual when dealing with focus and useEffect,
-           * we need to defer the focus to the next event-loop
-           * setTimeout makes sure the code is ran after the next render-cycle
-           */
-          setTimeout(() => {
-            const unmountEvent = new CustomEvent(
-              AUTOFOCUS_ON_UNMOUNT,
-              EVENT_OPTIONS,
-            );
-            container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountHandler);
-            container.dispatchEvent(unmountEvent);
-
-            // we need to remove the listener after we `dispatchEvent`
-            container.removeEventListener(
-              AUTOFOCUS_ON_UNMOUNT,
-              onUnmountHandler,
-            );
-          }, 0);
-        };
+      if (!hasFocus) {
+        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
+        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
+        container.dispatchEvent(mountEvent);
       }
+
+      return () => {
+        container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountHandler);
+
+        /**
+         * https://github.com/facebook/react/issues/17894
+         * As usual when dealing with focus and useEffect,
+         * we need to defer the focus to the next event-loop
+         * setTimeout makes sure the code is ran after the next render-cycle
+         */
+        setTimeout(() => {
+          const unmountEvent = new CustomEvent(
+            AUTOFOCUS_ON_UNMOUNT,
+            EVENT_OPTIONS,
+          );
+          container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountHandler);
+          container.dispatchEvent(unmountEvent);
+
+          // we need to remove the listener after we `dispatchEvent`
+          container.removeEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountHandler);
+        }, 0);
+      };
     }, [container, onMountHandler, onUnmountHandler]);
 
     return <Slot tabIndex={-1} {...rest} ref={composedRefs} />;
