@@ -15,26 +15,26 @@ import { Table } from "../../table";
 import { Tag } from "../../tag";
 import { Tooltip } from "../../tooltip";
 import { BodyShort } from "../../typography";
-import { DropdownMenu } from "./ActionMenu";
+import { ActionMenu } from "./ActionMenu";
 
 export default {
-  title: "ds-react/DropdownMenu",
+  title: "ds-react/ActionMenu",
   parameters: {
     layout: "padded",
     chromatic: { disable: true },
   },
-} satisfies Meta<typeof DropdownMenu>;
+} satisfies Meta<typeof ActionMenu>;
 
-type Story = StoryObj<typeof DropdownMenu>;
+type Story = StoryObj<typeof ActionMenu>;
 
 const DemoDecorator = (Story: any, { name }) => {
   return (
     <VStack gap="4" align="start">
       <h2>{name}</h2>
       <p>Placeholder before button</p>
-      <button>Focusable item before dropdown</button>
+      <button>Focusable item before action</button>
       <Story />
-      <button>Focusable item after dropdown</button>
+      <button>Focusable item after action</button>
       <p>Placeholder after button</p>
     </VStack>
   );
@@ -43,22 +43,22 @@ const DemoDecorator = (Story: any, { name }) => {
 export const OnlyItems: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
-          </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2
-          </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -67,35 +67,35 @@ export const OnlyItems: Story = {
 export const GroupedItems: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Group label="Group 1">
-            <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
               Item 1
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
               Item 2
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
               Item 3
-            </DropdownMenu.Item>
-          </DropdownMenu.Group>
-          <DropdownMenu.Group label="Group 2">
-            <DropdownMenu.Item onSelect={() => console.log("Item 4 clicked")}>
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Item onSelect={() => console.log("Item 4 clicked")}>
               Item 4
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 5 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 5 clicked")}>
               Item 5
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 6 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 6 clicked")}>
               Item 6
-            </DropdownMenu.Item>
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -117,53 +117,53 @@ export const Shortcut: Story = {
     };
 
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
           <VStack asChild align="start" gap="1" paddingBlock="2">
-            <DropdownMenu.Label>
+            <ActionMenu.Label>
               <BodyShort weight="semibold" as="div">
                 Ola Normann
               </BodyShort>
               <div>D123456</div>
-            </DropdownMenu.Label>
+            </ActionMenu.Label>
           </VStack>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Group label="Group 1">
-            <DropdownMenu.CheckboxItem
+          <ActionMenu.Separator />
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox1}
               onCheckedChange={() => handleCheckboxChange("checkbox1")}
               shortcut="⌘+T"
             >
               Checkbox 1
-            </DropdownMenu.CheckboxItem>
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox2}
               onCheckedChange={() => handleCheckboxChange("checkbox2")}
               shortcut="⇧+⌘+N"
             >
               Checkbox 2
-            </DropdownMenu.CheckboxItem>
-          </DropdownMenu.Group>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Group label="Group 2">
-            <DropdownMenu.Item
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+          <ActionMenu.Separator />
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Item
               shortcut="⌘+T"
               onSelect={() => console.log("Item 1 clicked")}
             >
               Item 1
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
+            </ActionMenu.Item>
+            <ActionMenu.Item
               shortcut="⇧+⌘+N"
               onSelect={() => console.log("Item 2 clicked")}
             >
               Item 2
-            </DropdownMenu.Item>
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -187,41 +187,41 @@ export const CheckboxGroups: Story = {
     };
 
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Group label="Group 1">
-            <DropdownMenu.CheckboxItem
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox1}
               onCheckedChange={() => handleCheckboxChange("checkbox1")}
             >
               Checkbox 1
-            </DropdownMenu.CheckboxItem>
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox2}
               onCheckedChange={() => handleCheckboxChange("checkbox2")}
             >
               Checkbox 1
-            </DropdownMenu.CheckboxItem>
-          </DropdownMenu.Group>
-          <DropdownMenu.Group label="Group 2">
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox3}
               onCheckedChange={() => handleCheckboxChange("checkbox3")}
             >
               Checkbox 3
-            </DropdownMenu.CheckboxItem>
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox4}
               onCheckedChange={() => handleCheckboxChange("checkbox4")}
             >
               Checkbox 4
-            </DropdownMenu.CheckboxItem>
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -245,12 +245,12 @@ export const CheckboxIndeterminateGroups: Story = {
     };
 
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.CheckboxItem
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.CheckboxItem
             checked={
               Object.values(checkedItems).every(Boolean)
                 ? true
@@ -270,37 +270,37 @@ export const CheckboxIndeterminateGroups: Story = {
             }
           >
             Select all
-          </DropdownMenu.CheckboxItem>
-          <DropdownMenu.Group label="Group 1">
-            <DropdownMenu.CheckboxItem
+          </ActionMenu.CheckboxItem>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox1}
               onCheckedChange={() => handleCheckboxChange("checkbox1")}
             >
               Checkbox 1
-            </DropdownMenu.CheckboxItem>
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox2}
               onCheckedChange={() => handleCheckboxChange("checkbox2")}
             >
               Checkbox 1
-            </DropdownMenu.CheckboxItem>
-          </DropdownMenu.Group>
-          <DropdownMenu.Group label="Group 2">
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox3}
               onCheckedChange={() => handleCheckboxChange("checkbox3")}
             >
               Checkbox 3
-            </DropdownMenu.CheckboxItem>
-            <DropdownMenu.CheckboxItem
+            </ActionMenu.CheckboxItem>
+            <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox4}
               onCheckedChange={() => handleCheckboxChange("checkbox4")}
             >
               Checkbox 4
-            </DropdownMenu.CheckboxItem>
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.CheckboxItem>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -321,29 +321,29 @@ export const RadioGroups: Story = {
     };
 
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.RadioGroup
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.RadioGroup
             onValueChange={handleGroup1ValueChange}
             value={group1Value}
             label="Group 1"
           >
-            <DropdownMenu.RadioItem value="1">Radio 1</DropdownMenu.RadioItem>
-            <DropdownMenu.RadioItem value="2">Radio 2</DropdownMenu.RadioItem>
-          </DropdownMenu.RadioGroup>
-          <DropdownMenu.RadioGroup
+            <ActionMenu.RadioItem value="1">Radio 1</ActionMenu.RadioItem>
+            <ActionMenu.RadioItem value="2">Radio 2</ActionMenu.RadioItem>
+          </ActionMenu.RadioGroup>
+          <ActionMenu.RadioGroup
             onValueChange={handleGroup2ValueChange}
             value={group2Value}
             label="Group 2"
           >
-            <DropdownMenu.RadioItem value="3">Radio 3</DropdownMenu.RadioItem>
-            <DropdownMenu.RadioItem value="4">Radio 4</DropdownMenu.RadioItem>
-          </DropdownMenu.RadioGroup>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            <ActionMenu.RadioItem value="3">Radio 3</ActionMenu.RadioItem>
+            <ActionMenu.RadioItem value="4">Radio 4</ActionMenu.RadioItem>
+          </ActionMenu.RadioGroup>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -352,36 +352,36 @@ export const RadioGroups: Story = {
 export const SeparatorWithGroupedItems: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Group label="Group 1">
-            <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Group label="Group 1">
+            <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
               Item 1
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
               Item 2
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
               Item 3
-            </DropdownMenu.Item>
-          </DropdownMenu.Group>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Group label="Group 2">
-            <DropdownMenu.Item onSelect={() => console.log("Item 4 clicked")}>
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+          <ActionMenu.Separator />
+          <ActionMenu.Group label="Group 2">
+            <ActionMenu.Item onSelect={() => console.log("Item 4 clicked")}>
               Item 4
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 5 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 5 clicked")}>
               Item 5
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 6 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 6 clicked")}>
               Item 6
-            </DropdownMenu.Item>
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.Item>
+          </ActionMenu.Group>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -390,24 +390,24 @@ export const SeparatorWithGroupedItems: Story = {
 export const SeparatorWithItems: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
-          </DropdownMenu.Item>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Separator />
+          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2
-          </DropdownMenu.Item>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Separator />
+          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -416,52 +416,50 @@ export const SeparatorWithItems: Story = {
 export const Submenus: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
-          </DropdownMenu.Item>
-          <DropdownMenu.Sub open={props.open}>
-            <DropdownMenu.SubTrigger>Submenu 1</DropdownMenu.SubTrigger>
-            <DropdownMenu.SubContent>
-              <DropdownMenu.Item
+          </ActionMenu.Item>
+          <ActionMenu.Sub open={props.open}>
+            <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
+            <ActionMenu.SubContent>
+              <ActionMenu.Item
                 onSelect={() => console.log("Subitem 1 clicked")}
               >
                 Subitem 1
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
+              </ActionMenu.Item>
+              <ActionMenu.Item
                 onSelect={() => console.log("Subitem 2 clicked")}
               >
                 Subitem 2
-              </DropdownMenu.Item>
-              <DropdownMenu.Sub open={props.open}>
-                <DropdownMenu.SubTrigger>
-                  Nested submenu 1
-                </DropdownMenu.SubTrigger>
-                <DropdownMenu.SubContent>
-                  <DropdownMenu.Item
+              </ActionMenu.Item>
+              <ActionMenu.Sub open={props.open}>
+                <ActionMenu.SubTrigger>Nested submenu 1</ActionMenu.SubTrigger>
+                <ActionMenu.SubContent>
+                  <ActionMenu.Item
                     onSelect={() => console.log("Nested Subitem 1 clicked")}
                   >
                     Nested Subitem 1
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Item
+                  </ActionMenu.Item>
+                  <ActionMenu.Item
                     onSelect={() => console.log("Nested Subitem 2 clicked")}
                   >
                     Nested Subitem 2
-                  </DropdownMenu.Item>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Sub>
-            </DropdownMenu.SubContent>
-          </DropdownMenu.Sub>
+                  </ActionMenu.Item>
+                </ActionMenu.SubContent>
+              </ActionMenu.Sub>
+            </ActionMenu.SubContent>
+          </ActionMenu.Sub>
 
-          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -470,43 +468,41 @@ export const Submenus: Story = {
 export const Disabled: Story = {
   render: (props) => {
     return (
-      <DropdownMenu open={props.open}>
-        <DropdownMenu.Trigger>
-          <button>Open dropdown</button>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content>
-          <DropdownMenu.Item
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item
             onSelect={() => console.log("Item 1 clicked")}
             disabled
             shortcut="T+W"
           >
             Item 1
-          </DropdownMenu.Item>
-          <DropdownMenu.Sub>
-            <DropdownMenu.SubTrigger disabled>
-              Submenu 1
-            </DropdownMenu.SubTrigger>
-            <DropdownMenu.SubContent>
-              <DropdownMenu.Item
+          </ActionMenu.Item>
+          <ActionMenu.Sub>
+            <ActionMenu.SubTrigger disabled>Submenu 1</ActionMenu.SubTrigger>
+            <ActionMenu.SubContent>
+              <ActionMenu.Item
                 onSelect={() => console.log("Subitem 1 clicked")}
               >
                 Subitem 1
-              </DropdownMenu.Item>
-            </DropdownMenu.SubContent>
-          </DropdownMenu.Sub>
+              </ActionMenu.Item>
+            </ActionMenu.SubContent>
+          </ActionMenu.Sub>
 
-          <DropdownMenu.CheckboxItem checked disabled shortcut="T+W">
+          <ActionMenu.CheckboxItem checked disabled shortcut="T+W">
             Checkbox disabled
-          </DropdownMenu.CheckboxItem>
-          <DropdownMenu.CheckboxItem>Checkbox 2</DropdownMenu.CheckboxItem>
-          <DropdownMenu.RadioGroup value="1" label="Radiogroup">
-            <DropdownMenu.RadioItem disabled value="1">
+          </ActionMenu.CheckboxItem>
+          <ActionMenu.CheckboxItem>Checkbox 2</ActionMenu.CheckboxItem>
+          <ActionMenu.RadioGroup value="1" label="Radiogroup">
+            <ActionMenu.RadioItem disabled value="1">
               Radio disabled
-            </DropdownMenu.RadioItem>
-            <DropdownMenu.RadioItem value="2">Radio</DropdownMenu.RadioItem>
-          </DropdownMenu.RadioGroup>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+            </ActionMenu.RadioItem>
+            <ActionMenu.RadioItem value="2">Radio</ActionMenu.RadioItem>
+          </ActionMenu.RadioGroup>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -515,24 +511,24 @@ export const Disabled: Story = {
 export const TriggerWithTooltip: Story = {
   render: () => {
     return (
-      <DropdownMenu>
+      <ActionMenu>
         <Tooltip content="Tooltip!">
-          <DropdownMenu.Trigger>
-            <button>Open dropdown</button>
-          </DropdownMenu.Trigger>
+          <ActionMenu.Trigger>
+            <button>Open action</button>
+          </ActionMenu.Trigger>
         </Tooltip>
-        <DropdownMenu.Content>
-          <DropdownMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+        <ActionMenu.Content>
+          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
-          </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2
-          </DropdownMenu.Item>
-          <DropdownMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+          </ActionMenu.Item>
+          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
-          </DropdownMenu.Item>
-        </DropdownMenu.Content>
-      </DropdownMenu>
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
     );
   },
   decorators: [DemoDecorator],
@@ -549,20 +545,20 @@ export const ModalTrigger: Story = {
 
     return (
       <div>
-        <DropdownMenu>
-          <DropdownMenu.Trigger>
-            <button>Open dropdown</button>
-          </DropdownMenu.Trigger>
+        <ActionMenu>
+          <ActionMenu.Trigger>
+            <button>Open action</button>
+          </ActionMenu.Trigger>
 
-          <DropdownMenu.Content>
-            <DropdownMenu.Item onSelect={() => ref.current?.showModal()}>
+          <ActionMenu.Content>
+            <ActionMenu.Item onSelect={() => ref.current?.showModal()}>
               open modal
-            </DropdownMenu.Item>
-            <DropdownMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
               Item 2
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu>
+            </ActionMenu.Item>
+          </ActionMenu.Content>
+        </ActionMenu>
         <Modal ref={ref} header={{ heading: "Heading" }}>
           <Modal.Body>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
@@ -663,64 +659,64 @@ export const ViewDemo: Story = {
                 <StatusTag status={status} />
               </Table.DataCell>
               <Table.DataCell align="right">
-                <DropdownMenu>
-                  <DropdownMenu.Trigger>
+                <ActionMenu>
+                  <ActionMenu.Trigger>
                     <Button
                       icon={<MenuElipsisHorizontalCircleIcon title="Meny" />}
                       size="small"
                       variant="tertiary-neutral"
                     />
-                  </DropdownMenu.Trigger>
-                  <DropdownMenu.Content>
-                    <DropdownMenu.Group label="Dashboard">
-                      <DropdownMenu.Item onSelect={() => console.log("Edit")}>
+                  </ActionMenu.Trigger>
+                  <ActionMenu.Content>
+                    <ActionMenu.Group label="Dashboard">
+                      <ActionMenu.Item onSelect={() => console.log("Edit")}>
                         <PlusIcon fontSize="20" /> Add to dashboard
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item onSelect={() => console.log("Edit")}>
+                      </ActionMenu.Item>
+                      <ActionMenu.Item onSelect={() => console.log("Edit")}>
                         <PushPinIcon fontSize="20" /> Pin task
-                      </DropdownMenu.Item>
-                    </DropdownMenu.Group>
+                      </ActionMenu.Item>
+                    </ActionMenu.Group>
 
-                    <DropdownMenu.Group label="Actions">
-                      <DropdownMenu.Item
+                    <ActionMenu.Group label="Actions">
+                      <ActionMenu.Item
                         onSelect={() => updateTaskStatus(id, "In progress")}
                       >
                         <TasklistStartIcon fontSize="20" /> Start task
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Sub>
-                        <DropdownMenu.SubTrigger>
+                      </ActionMenu.Item>
+                      <ActionMenu.Sub>
+                        <ActionMenu.SubTrigger>
                           <PencilIcon fontSize="20" /> Edit status
-                        </DropdownMenu.SubTrigger>
-                        <DropdownMenu.SubContent>
+                        </ActionMenu.SubTrigger>
+                        <ActionMenu.SubContent>
                           {StatusArray.map((_status) => (
-                            <DropdownMenu.Item
+                            <ActionMenu.Item
                               key={_status}
                               onSelect={() => updateTaskStatus(id, _status)}
                               disabled={status === _status}
                             >
                               {_status}
-                            </DropdownMenu.Item>
+                            </ActionMenu.Item>
                           ))}
-                          <DropdownMenu.Sub>
-                            <DropdownMenu.SubTrigger>
+                          <ActionMenu.Sub>
+                            <ActionMenu.SubTrigger>
                               Nested submenu demo
-                            </DropdownMenu.SubTrigger>
-                            <DropdownMenu.SubContent>
+                            </ActionMenu.SubTrigger>
+                            <ActionMenu.SubContent>
                               {StatusArray.map((_status) => (
-                                <DropdownMenu.Item
+                                <ActionMenu.Item
                                   key={_status}
                                   onSelect={() => updateTaskStatus(id, _status)}
                                   disabled={status === _status}
                                 >
                                   {_status}
-                                </DropdownMenu.Item>
+                                </ActionMenu.Item>
                               ))}
-                            </DropdownMenu.SubContent>
-                          </DropdownMenu.Sub>
-                        </DropdownMenu.SubContent>
-                      </DropdownMenu.Sub>
-                      <DropdownMenu.Separator />
-                      <DropdownMenu.Item
+                            </ActionMenu.SubContent>
+                          </ActionMenu.Sub>
+                        </ActionMenu.SubContent>
+                      </ActionMenu.Sub>
+                      <ActionMenu.Separator />
+                      <ActionMenu.Item
                         destructive
                         onSelect={() =>
                           setTasks(tasks.filter((_task) => _task.id !== id))
@@ -728,10 +724,10 @@ export const ViewDemo: Story = {
                       >
                         <TrashIcon fontSize="20" />
                         Delete
-                      </DropdownMenu.Item>
-                    </DropdownMenu.Group>
-                  </DropdownMenu.Content>
-                </DropdownMenu>
+                      </ActionMenu.Item>
+                    </ActionMenu.Group>
+                  </ActionMenu.Content>
+                </ActionMenu>
               </Table.DataCell>
             </Table.Row>
           ))}

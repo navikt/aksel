@@ -12,9 +12,9 @@ import { requireReactElement } from "../../util/requireReactElement";
 import { Menu } from "../floating-menu/Menu";
 
 /* -------------------------------------------------------------------------- */
-/*                                DropdownMenu                                */
+/*                                ActionMenu                                */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuContextValue = {
+type ActionMenuContextValue = {
   triggerId: string;
   triggerRef: React.RefObject<HTMLButtonElement>;
   contentId: string;
@@ -23,41 +23,41 @@ type DropdownMenuContextValue = {
   onOpenToggle: () => void;
 };
 
-const [DropdownMenuProvider, useDropdownMenuContext] =
-  createContext<DropdownMenuContextValue>({
-    name: "DropdownMenuContext",
+const [ActionMenuProvider, useActionMenuContext] =
+  createContext<ActionMenuContextValue>({
+    name: "ActionMenuContext",
     errorMessage:
-      "DropdownMenu sub-components cannot be rendered outside the DropdownMenu component.",
+      "ActionMenu sub-components cannot be rendered outside the ActionMenu component.",
   });
 
-interface DropdownMenuProps {
+interface ActionMenuProps {
   children?: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-interface DropdownMenuComponent extends React.FC<DropdownMenuProps> {
-  Trigger: typeof DropdownMenuTrigger;
-  Content: typeof DropdownMenuContent;
-  Group: typeof DropdownMenuGroup;
-  Label: typeof DropdownMenuLabel;
-  Item: typeof DropdownMenuItem;
-  CheckboxItem: typeof DropdownMenuCheckboxItem;
-  RadioGroup: typeof DropdownMenuRadioGroup;
-  RadioItem: typeof DropdownMenuRadioItem;
-  Separator: typeof DropdownMenuSeparator;
-  Sub: typeof DropdownMenuSub;
-  SubTrigger: typeof DropdownMenuSubTrigger;
-  SubContent: typeof DropdownMenuSubContent;
+interface ActionMenuComponent extends React.FC<ActionMenuProps> {
+  Trigger: typeof ActionMenuTrigger;
+  Content: typeof ActionMenuContent;
+  Group: typeof ActionMenuGroup;
+  Label: typeof ActionMenuLabel;
+  Item: typeof ActionMenuItem;
+  CheckboxItem: typeof ActionMenuCheckboxItem;
+  RadioGroup: typeof ActionMenuRadioGroup;
+  RadioItem: typeof ActionMenuRadioItem;
+  Separator: typeof ActionMenuSeparator;
+  Sub: typeof ActionMenuSub;
+  SubTrigger: typeof ActionMenuSubTrigger;
+  SubContent: typeof ActionMenuSubContent;
 }
 
-const DropdownMenuRoot = ({
+const ActionMenuRoot = ({
   children,
   open: openProp,
   defaultOpen = false,
   onOpenChange,
-}: DropdownMenuProps) => {
+}: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const [open = false, setOpen] = useControllableState({
@@ -67,7 +67,7 @@ const DropdownMenuRoot = ({
   });
 
   return (
-    <DropdownMenuProvider
+    <ActionMenuProvider
       triggerId={useId()}
       triggerRef={triggerRef}
       contentId={useId()}
@@ -78,29 +78,26 @@ const DropdownMenuRoot = ({
       <Menu open={open} onOpenChange={setOpen} modal={false}>
         {children}
       </Menu>
-    </DropdownMenuProvider>
+    </ActionMenuProvider>
   );
 };
 
-const DropdownMenu = DropdownMenuRoot as DropdownMenuComponent;
+const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
-/*                             DropdownMenuTrigger                            */
+/*                             ActionMenuTrigger                            */
 /* -------------------------------------------------------------------------- */
-interface DropdownMenuTriggerProps
+interface ActionMenuTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactElement;
 }
 
-const DropdownMenuTrigger = forwardRef<
-  HTMLButtonElement,
-  DropdownMenuTriggerProps
->(
+const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
   (
-    { children, onPointerDown, onKeyDown, ...rest }: DropdownMenuTriggerProps,
+    { children, onPointerDown, onKeyDown, ...rest }: ActionMenuTriggerProps,
     ref,
   ) => {
-    const context = useDropdownMenuContext();
+    const context = useActionMenuContext();
 
     const mergedRefs = useMergeRefs(ref, context.triggerRef);
 
@@ -175,20 +172,20 @@ const DropdownMenuTrigger = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                             DropdownMenuContent                            */
+/*                             ActionMenuContent                            */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuContentElement = React.ElementRef<typeof Menu.Content>;
+type ActionMenuContentElement = React.ElementRef<typeof Menu.Content>;
 type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content> &
   Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement">;
 
-interface DropdownMenuContentProps
+interface ActionMenuContentProps
   extends Omit<MenuContentProps, "onEntryFocus" | "asChild"> {
   children?: React.ReactNode;
 }
 
-const DropdownMenuContent = forwardRef<
-  DropdownMenuContentElement,
-  DropdownMenuContentProps
+const ActionMenuContent = forwardRef<
+  ActionMenuContentElement,
+  ActionMenuContentProps
 >(
   (
     {
@@ -199,10 +196,10 @@ const DropdownMenuContent = forwardRef<
       onInteractOutside,
       rootElement,
       ...rest
-    }: DropdownMenuContentProps,
+    }: ActionMenuContentProps,
     ref,
   ) => {
-    const context = useDropdownMenuContext();
+    const context = useActionMenuContext();
     const hasInteractedOutsideRef = React.useRef(false);
 
     return (
@@ -211,7 +208,7 @@ const DropdownMenuContent = forwardRef<
           ref={ref}
           id={context.contentId}
           aria-labelledby={context.triggerId}
-          className={cl("navds-dropdown-menu__content", className)}
+          className={cl("navds-action-menu__content", className)}
           align="start"
           sideOffset={4}
           collisionPadding={10}
@@ -238,15 +235,15 @@ const DropdownMenuContent = forwardRef<
           style={{
             ...style,
             ...{
-              "--ac-dropdown-menu-content-transform-origin":
+              "--ac-action-menu-content-transform-origin":
                 "var(--ac-floating-transform-origin)",
-              "--ac-dropdown-menu-content-available-width":
+              "--ac-action-menu-content-available-width":
                 "var(--ac-floating-available-width)",
-              "--ac-dropdown-menu-content-available-height":
+              "--ac-action-menu-content-available-height":
                 "var(--ac-floating-available-height)",
-              "--ac-dropdown-menu-trigger-width":
+              "--ac-action-menu-trigger-width":
                 "var(--ac-floating-anchor-width)",
-              "--ac-dropdown-menu-trigger-height":
+              "--ac-action-menu-trigger-height":
                 "var(--ac-floating-anchor-height)",
             },
           }}
@@ -259,32 +256,32 @@ const DropdownMenuContent = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                              DropdownMenuGroup                             */
+/*                              ActionMenuGroup                             */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuGroupElement = React.ElementRef<typeof Menu.Group>;
+type ActionMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
-interface DropdownMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {
+interface ActionMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {
   label?: string;
 }
 
-const DropdownMenuGroup = forwardRef<
-  DropdownMenuGroupElement,
-  DropdownMenuGroupProps
->(({ children, className, label, ...rest }: DropdownMenuGroupProps, ref) => {
+const ActionMenuGroup = forwardRef<
+  ActionMenuGroupElement,
+  ActionMenuGroupProps
+>(({ children, className, label, ...rest }: ActionMenuGroupProps, ref) => {
   const labelId = useId();
 
   return (
     <Menu.Group
       ref={ref}
       {...rest}
-      className={cl("navds-dropdown-menu__group", className)}
+      className={cl("navds-action-menu__group", className)}
       asChild={false}
       aria-labelledby={label ? labelId : undefined}
     >
       {label && (
-        <DropdownMenu.Label id={labelId} aria-hidden>
+        <ActionMenu.Label id={labelId} aria-hidden>
           {label}
-        </DropdownMenu.Label>
+        </ActionMenu.Label>
       )}
       {children}
     </Menu.Group>
@@ -292,24 +289,24 @@ const DropdownMenuGroup = forwardRef<
 });
 
 /* -------------------------------------------------------------------------- */
-/*                              DropdownMenuLabel                             */
+/*                              ActionMenuLabel                             */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuLabelElement = React.ElementRef<typeof Menu.Label>;
+type ActionMenuLabelElement = React.ElementRef<typeof Menu.Label>;
 type MenuLabelProps = React.ComponentPropsWithoutRef<typeof Menu.Label>;
-interface DropdownMenuLabelProps extends Omit<MenuLabelProps, "asChild"> {
+interface ActionMenuLabelProps extends Omit<MenuLabelProps, "asChild"> {
   children: React.ReactNode;
 }
 
-const DropdownMenuLabel = forwardRef<
-  DropdownMenuLabelElement,
-  DropdownMenuLabelProps
->(({ children, className, ...rest }: DropdownMenuLabelProps, ref) => {
+const ActionMenuLabel = forwardRef<
+  ActionMenuLabelElement,
+  ActionMenuLabelProps
+>(({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
   return (
     <Menu.Label
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-dropdown-menu__label", className)}
+      className={cl("navds-action-menu__label", className)}
     >
       {children}
     </Menu.Label>
@@ -323,7 +320,7 @@ export const Shortcut = ({ children }: { children: string }) => {
     .filter((str) => str !== "");
 
   return (
-    <Detail aria-hidden as="div" className="navds-dropdown-menu__shortcut">
+    <Detail aria-hidden as="div" className="navds-action-menu__shortcut">
       {parsed.map((char, index) => (
         <span key={char + index}>{char}</span>
       ))}
@@ -332,20 +329,17 @@ export const Shortcut = ({ children }: { children: string }) => {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                              DropdownMenuItem                              */
+/*                              ActionMenuItem                              */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuItemElement = React.ElementRef<typeof Menu.Item>;
+type ActionMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
-interface DropdownMenuItemProps extends Omit<MenuItemProps, "asChild"> {
+interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   shortcut?: string;
   destructive?: boolean;
 }
 
-const DropdownMenuItem = forwardRef<
-  DropdownMenuItemElement,
-  DropdownMenuItemProps
->(
+const ActionMenuItem = forwardRef<ActionMenuItemElement, ActionMenuItemProps>(
   (
     {
       children,
@@ -353,7 +347,7 @@ const DropdownMenuItem = forwardRef<
       shortcut,
       destructive,
       ...rest
-    }: DropdownMenuItemProps,
+    }: ActionMenuItemProps,
     ref,
   ) => {
     return (
@@ -361,8 +355,8 @@ const DropdownMenuItem = forwardRef<
         ref={ref}
         {...rest}
         asChild={false}
-        className={cl("navds-dropdown-menu__item", className, {
-          "navds-dropdown-menu__item--destructive": destructive,
+        className={cl("navds-action-menu__item", className, {
+          "navds-action-menu__item--destructive": destructive,
         })}
         aria-keyshortcuts={shortcut ?? undefined}
       >
@@ -374,23 +368,21 @@ const DropdownMenuItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                          DropdownMenuCheckboxItem                          */
+/*                          ActionMenuCheckboxItem                          */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuCheckboxItemElement = React.ElementRef<
-  typeof Menu.CheckboxItem
->;
+type ActionMenuCheckboxItemElement = React.ElementRef<typeof Menu.CheckboxItem>;
 type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof Menu.CheckboxItem
 >;
-interface DropdownMenuCheckboxItemProps
+interface ActionMenuCheckboxItemProps
   extends Omit<MenuCheckboxItemProps, "asChild"> {
   children: React.ReactNode;
   shortcut?: string;
 }
 
-const DropdownMenuCheckboxItem = forwardRef<
-  DropdownMenuCheckboxItemElement,
-  DropdownMenuCheckboxItemProps
+const ActionMenuCheckboxItem = forwardRef<
+  ActionMenuCheckboxItemElement,
+  ActionMenuCheckboxItemProps
 >(
   (
     {
@@ -399,7 +391,7 @@ const DropdownMenuCheckboxItem = forwardRef<
       shortcut,
       onSelect,
       ...rest
-    }: DropdownMenuCheckboxItemProps,
+    }: ActionMenuCheckboxItemProps,
     ref,
   ) => {
     return (
@@ -411,20 +403,20 @@ const DropdownMenuCheckboxItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-dropdown-menu__item navds-dropdown-menu__checkbox",
+          "navds-action-menu__item navds-action-menu__checkbox",
           className,
         )}
         aria-keyshortcuts={shortcut ?? undefined}
       >
         {children}
-        <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
+        <Menu.ItemIndicator className="navds-action-menu__indicator">
           <svg
             width="1em"
             height="1em"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
+            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
             aria-hidden
           >
             <rect
@@ -449,7 +441,7 @@ const DropdownMenuCheckboxItem = forwardRef<
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--indeterminate"
+            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--indeterminate"
             aria-hidden
           >
             <rect
@@ -474,7 +466,7 @@ const DropdownMenuCheckboxItem = forwardRef<
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
+            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
             aria-hidden
           >
             <rect
@@ -497,63 +489,57 @@ const DropdownMenuCheckboxItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           DropdownMenuRadioGroup                           */
+/*                           ActionMenuRadioGroup                           */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
+type ActionMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
 type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
   typeof Menu.RadioGroup
 >;
-interface DropdownMenuRadioGroupProps
+interface ActionMenuRadioGroupProps
   extends Omit<MenuRadioGroupProps, "asChild"> {
   children: React.ReactNode;
   label?: string;
 }
 
-const DropdownMenuRadioGroup = forwardRef<
-  DropdownMenuRadioGroupElement,
-  DropdownMenuRadioGroupProps
->(
-  (
-    { children, className, label, ...rest }: DropdownMenuRadioGroupProps,
-    ref,
-  ) => {
-    const labelId = useId();
+const ActionMenuRadioGroup = forwardRef<
+  ActionMenuRadioGroupElement,
+  ActionMenuRadioGroupProps
+>(({ children, className, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
+  const labelId = useId();
 
-    return (
-      <Menu.RadioGroup
-        ref={ref}
-        {...rest}
-        asChild={false}
-        className={cl("navds-dropdown-menu__radio-group", className)}
-        aria-labelledby={label ? labelId : undefined}
-      >
-        {label && (
-          <DropdownMenu.Label id={labelId} aria-hidden>
-            {label}
-          </DropdownMenu.Label>
-        )}
-        {children}
-      </Menu.RadioGroup>
-    );
-  },
-);
+  return (
+    <Menu.RadioGroup
+      ref={ref}
+      {...rest}
+      asChild={false}
+      className={cl("navds-action-menu__radio-group", className)}
+      aria-labelledby={label ? labelId : undefined}
+    >
+      {label && (
+        <ActionMenu.Label id={labelId} aria-hidden>
+          {label}
+        </ActionMenu.Label>
+      )}
+      {children}
+    </Menu.RadioGroup>
+  );
+});
 
 /* -------------------------------------------------------------------------- */
-/*                           DropdownMenuRadioItem                            */
+/*                           ActionMenuRadioItem                            */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuRadioItemElement = React.ElementRef<typeof Menu.RadioItem>;
+type ActionMenuRadioItemElement = React.ElementRef<typeof Menu.RadioItem>;
 type MenuRadioItemProps = React.ComponentPropsWithoutRef<typeof Menu.RadioItem>;
-interface DropdownMenuRadioItemProps
-  extends Omit<MenuRadioItemProps, "asChild"> {
+interface ActionMenuRadioItemProps extends Omit<MenuRadioItemProps, "asChild"> {
   children: React.ReactNode;
 }
 
-const DropdownMenuRadioItem = forwardRef<
-  DropdownMenuRadioItemElement,
-  DropdownMenuRadioItemProps
+const ActionMenuRadioItem = forwardRef<
+  ActionMenuRadioItemElement,
+  ActionMenuRadioItemProps
 >(
   (
-    { children, className, onSelect, ...rest }: DropdownMenuRadioItemProps,
+    { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
     return (
@@ -565,19 +551,19 @@ const DropdownMenuRadioItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-dropdown-menu__item navds-dropdown-menu__radio",
+          "navds-action-menu__item navds-action-menu__radio",
           className,
         )}
       >
         {children}
-        <Menu.ItemIndicator className="navds-dropdown-menu__indicator">
+        <Menu.ItemIndicator className="navds-action-menu__indicator">
           <svg
             width="1em"
             height="1em"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--unchecked"
+            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
             aria-hidden
           >
             <rect
@@ -602,7 +588,7 @@ const DropdownMenuRadioItem = forwardRef<
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="navds-dropdown-menu__indicator-icon navds-dropdown-menu__indicator-icon--checked"
+            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
             aria-hidden
           >
             <rect
@@ -634,36 +620,36 @@ const DropdownMenuRadioItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           DropdownMenuSeparator                            */
+/*                           ActionMenuSeparator                            */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
+type ActionMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
 type MenuSeparatorProps = React.ComponentPropsWithoutRef<typeof Menu.Separator>;
-interface DropdownMenuSeparatorProps extends MenuSeparatorProps {}
+interface ActionMenuSeparatorProps extends MenuSeparatorProps {}
 
-const DropdownMenuSeparator = forwardRef<
-  DropdownMenuSeparatorElement,
-  DropdownMenuSeparatorProps
->(({ className, ...rest }: DropdownMenuSeparatorProps, ref) => {
+const ActionMenuSeparator = forwardRef<
+  ActionMenuSeparatorElement,
+  ActionMenuSeparatorProps
+>(({ className, ...rest }: ActionMenuSeparatorProps, ref) => {
   return (
     <Menu.Separator
       ref={ref}
       {...rest}
-      className={cl("navds-dropdown-menu__separator", className)}
+      className={cl("navds-action-menu__separator", className)}
     />
   );
 });
 
 /* -------------------------------------------------------------------------- */
-/*                              DropdownMenuSub                               */
+/*                              ActionMenuSub                               */
 /* -------------------------------------------------------------------------- */
-interface DropdownMenuSubProps {
+interface ActionMenuSubProps {
   children?: React.ReactNode;
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-const DropdownMenuSub = (props: DropdownMenuSubProps) => {
+const ActionMenuSub = (props: ActionMenuSubProps) => {
   const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
 
   const [open = false, setOpen] = useControllableState({
@@ -680,31 +666,31 @@ const DropdownMenuSub = (props: DropdownMenuSubProps) => {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                           DropdownMenuSubTrigger                           */
+/*                           ActionMenuSubTrigger                           */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
+type ActionMenuSubTriggerElement = React.ElementRef<typeof Menu.SubTrigger>;
 type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubTrigger
 >;
-interface DropdownMenuSubTriggerProps
+interface ActionMenuSubTriggerProps
   extends Omit<MenuSubTriggerProps, "asChild"> {}
 
-const DropdownMenuSubTrigger = forwardRef<
-  DropdownMenuSubTriggerElement,
-  DropdownMenuSubTriggerProps
->(({ children, className, ...rest }: DropdownMenuSubTriggerProps, ref) => {
+const ActionMenuSubTrigger = forwardRef<
+  ActionMenuSubTriggerElement,
+  ActionMenuSubTriggerProps
+>(({ children, className, ...rest }: ActionMenuSubTriggerProps, ref) => {
   return (
     <Menu.SubTrigger
       ref={ref}
       {...rest}
       asChild={false}
       className={cl(
-        "navds-dropdown-menu__item navds-dropdown-menu__sub-trigger",
+        "navds-action-menu__item navds-action-menu__sub-trigger",
         className,
       )}
     >
       {children}
-      <div className="navds-dropdown-menu__sub-trigger-icon">
+      <div className="navds-action-menu__sub-trigger-icon">
         <ChevronRightIcon aria-hidden />
       </div>
     </Menu.SubTrigger>
@@ -712,22 +698,22 @@ const DropdownMenuSubTrigger = forwardRef<
 });
 
 /* -------------------------------------------------------------------------- */
-/*                           DropdownMenuSubContent                           */
+/*                           ActionMenuSubContent                           */
 /* -------------------------------------------------------------------------- */
-type DropdownMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
+type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 type MenuSubContentProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubContent
 >;
 
-interface DropdownMenuSubContentProps
+interface ActionMenuSubContentProps
   extends MenuSubContentProps,
     Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
   children: React.ReactNode;
 }
 
-const DropdownMenuSubContent = forwardRef<
-  DropdownMenuSubContentElement,
-  DropdownMenuSubContentProps
+const ActionMenuSubContent = forwardRef<
+  ActionMenuSubContentElement,
+  ActionMenuSubContentProps
 >(
   (
     {
@@ -736,7 +722,7 @@ const DropdownMenuSubContent = forwardRef<
       style,
       rootElement,
       ...rest
-    }: DropdownMenuSubContentProps,
+    }: ActionMenuSubContentProps,
     ref,
   ) => {
     return (
@@ -748,21 +734,21 @@ const DropdownMenuSubContent = forwardRef<
           collisionPadding={10}
           {...rest}
           className={cl(
-            "navds-dropdown-menu__content navds-dropdown-menu__sub-content",
+            "navds-action-menu__content navds-action-menu__sub-content",
             className,
           )}
           style={{
             ...style,
             ...{
-              "--ac-dropdown-menu-content-transform-origin":
+              "--ac-action-menu-content-transform-origin":
                 "var(--ac-floating-transform-origin)",
-              "--ac-dropdown-menu-content-available-width":
+              "--ac-action-menu-content-available-width":
                 "var(--ac-floating-available-width)",
-              "--ac-dropdown-menu-content-available-height":
+              "--ac-action-menu-content-available-height":
                 "var(--ac-floating-available-height)",
-              "--ac-dropdown-menu-trigger-width":
+              "--ac-action-menu-trigger-width":
                 "var(--ac-floating-anchor-width)",
-              "--ac-dropdown-menu-trigger-height":
+              "--ac-action-menu-trigger-height":
                 "var(--ac-floating-anchor-height)",
             },
           }}
@@ -775,43 +761,43 @@ const DropdownMenuSubContent = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-DropdownMenu.Trigger = DropdownMenuTrigger;
-DropdownMenu.Content = DropdownMenuContent;
-DropdownMenu.Group = DropdownMenuGroup;
-DropdownMenu.Label = DropdownMenuLabel;
-DropdownMenu.Item = DropdownMenuItem;
-DropdownMenu.CheckboxItem = DropdownMenuCheckboxItem;
-DropdownMenu.RadioGroup = DropdownMenuRadioGroup;
-DropdownMenu.RadioItem = DropdownMenuRadioItem;
-DropdownMenu.Separator = DropdownMenuSeparator;
-DropdownMenu.Sub = DropdownMenuSub;
-DropdownMenu.SubTrigger = DropdownMenuSubTrigger;
-DropdownMenu.SubContent = DropdownMenuSubContent;
+ActionMenu.Trigger = ActionMenuTrigger;
+ActionMenu.Content = ActionMenuContent;
+ActionMenu.Group = ActionMenuGroup;
+ActionMenu.Label = ActionMenuLabel;
+ActionMenu.Item = ActionMenuItem;
+ActionMenu.CheckboxItem = ActionMenuCheckboxItem;
+ActionMenu.RadioGroup = ActionMenuRadioGroup;
+ActionMenu.RadioItem = ActionMenuRadioItem;
+ActionMenu.Separator = ActionMenuSeparator;
+ActionMenu.Sub = ActionMenuSub;
+ActionMenu.SubTrigger = ActionMenuSubTrigger;
+ActionMenu.SubContent = ActionMenuSubContent;
 
 export {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-  type DropdownMenuCheckboxItemProps,
-  type DropdownMenuContentProps,
-  type DropdownMenuGroupProps,
-  type DropdownMenuLabelProps,
-  type DropdownMenuProps,
-  type DropdownMenuRadioGroupProps,
-  type DropdownMenuRadioItemProps,
-  type DropdownMenuSeparatorProps,
-  type DropdownMenuSubContentProps,
-  type DropdownMenuSubProps,
-  type DropdownMenuSubTriggerProps,
-  type DropdownMenuTriggerProps,
+  ActionMenu,
+  ActionMenuCheckboxItem,
+  ActionMenuContent,
+  ActionMenuGroup,
+  ActionMenuItem,
+  ActionMenuLabel,
+  ActionMenuRadioGroup,
+  ActionMenuRadioItem,
+  ActionMenuSeparator,
+  ActionMenuSub,
+  ActionMenuSubContent,
+  ActionMenuSubTrigger,
+  ActionMenuTrigger,
+  type ActionMenuCheckboxItemProps,
+  type ActionMenuContentProps,
+  type ActionMenuGroupProps,
+  type ActionMenuLabelProps,
+  type ActionMenuProps,
+  type ActionMenuRadioGroupProps,
+  type ActionMenuRadioItemProps,
+  type ActionMenuSeparatorProps,
+  type ActionMenuSubContentProps,
+  type ActionMenuSubProps,
+  type ActionMenuSubTriggerProps,
+  type ActionMenuTriggerProps,
 };
