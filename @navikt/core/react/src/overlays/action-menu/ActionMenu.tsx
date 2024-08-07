@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { Slot } from "../../slot/Slot";
 import { Detail } from "../../typography";
 import { useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -9,7 +10,6 @@ import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { requireReactElement } from "../../util/requireReactElement";
 import { Menu } from "../floating-menu/Menu";
-import { SlottedButtonElement } from "./SlottedButtonElement";
 
 /* -------------------------------------------------------------------------- */
 /*                                DropdownMenu                                */
@@ -106,7 +106,7 @@ const DropdownMenuTrigger = forwardRef<
 
     return (
       <Menu.Anchor asChild>
-        <SlottedButtonElement
+        <Slot
           type="button"
           id={context.triggerId}
           aria-haspopup="menu"
@@ -168,7 +168,7 @@ const DropdownMenuTrigger = forwardRef<
           })}
         >
           {requireReactElement(children)}
-        </SlottedButtonElement>
+        </Slot>
       </Menu.Anchor>
     );
   },
