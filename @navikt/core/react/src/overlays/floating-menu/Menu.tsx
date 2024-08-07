@@ -901,23 +901,20 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
-          // This is redundant for mouse users but we cannot determine pointer type from
-          // click event and we cannot use pointerup event (see git history for reasons why)
+          /**
+           * onClick is added to solve edgecase where the user clicks the trigger,
+           * but the focus is outside browser-window or viewport at first.
+           */
           onClick={(event) => {
             props.onClick?.(event);
             if (props.disabled || event.defaultPrevented) return;
-            /**
-             * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
-             * and we rely heavily on `onFocusOutside` for submenus to close when switching
-             * between separate submenus.
-             */
+
             event.currentTarget.focus();
             if (!context.open) context.onOpenChange(true);
           }}
           onPointerMove={composeEventHandlers(
             props.onPointerMove,
             whenMouse((event) => {
-              contentContext.onItemEnter(event);
               if (event.defaultPrevented) return;
               if (!props.disabled && !context.open && !openTimerRef.current) {
                 contentContext.onPointerGraceIntentChange(null);
