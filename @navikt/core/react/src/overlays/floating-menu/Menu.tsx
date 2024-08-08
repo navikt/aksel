@@ -1058,24 +1058,18 @@ const MenuSubContent = forwardRef<
           const isKeyDownInside = event.currentTarget.contains(
             event.target as HTMLElement,
           );
-          const isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
+          let isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
+
+          /* When submenu opens to the left, we allow closing it with ArrowRight */
+          if (context.content?.dataset.side === "left") {
+            isCloseKey = isCloseKey || event.key === "ArrowRight";
+          }
+
           if (isKeyDownInside && isCloseKey) {
             context.onOpenChange(false);
             // We focus manually because we prevented it in `onCloseAutoFocus`
             subContext.trigger?.focus();
             // Prevent window from scrolling
-            event.preventDefault();
-          }
-
-          /* When submenu opens to the left, we allow closing it with ArrowRight */
-          const side = context.content?.dataset.side as SubMenuSide;
-          if (
-            side === "left" &&
-            isKeyDownInside &&
-            event.key === "ArrowRight"
-          ) {
-            context.onOpenChange(false);
-            subContext.trigger?.focus();
             event.preventDefault();
           }
         })}
