@@ -362,7 +362,7 @@ export const MenuWithOpenButton = () => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <Menu open={open} onOpenChange={() => {}} modal={false}>
+    <Menu open={open} onOpenChange={() => setOpen((x) => !x)} modal={false}>
       <Menu.Anchor asChild>
         <button
           ref={triggerRef}
@@ -414,9 +414,11 @@ export const MenuWithOpenButton = () => {
       <Menu.Portal>
         <Menu.Content
           className="content"
-          onCloseAutoFocus={(event) => event.preventDefault()}
           align="start"
           ref={contentRef}
+          onCloseAutoFocus={() => {
+            triggerRef.current?.focus();
+          }}
         >
           <Menu.Item className="item" onSelect={() => window.alert("undo")}>
             Undo
