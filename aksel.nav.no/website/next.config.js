@@ -75,7 +75,7 @@ const nextConfig = {
       },
       {
         source: "/storybook",
-        destination: "https://main--66b4b3beb91603ed0ab5c45e.chromatic.com//",
+        destination: "https://main--66b4b3beb91603ed0ab5c45e.chromatic.com/",
         permanent: false,
       },
       {
