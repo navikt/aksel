@@ -183,7 +183,7 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
 type MenuContentContextValue = {
   onItemEnter: (event: React.PointerEvent) => void;
   onItemLeave: (event: React.PointerEvent) => void;
-  onTriggerLeave: (event: React.PointerEvent) => void;
+  onPointerLeaveTrigger: (event: React.PointerEvent) => void;
   pointerGraceTimerRef: React.MutableRefObject<number>;
   onPointerGraceIntentChange: (intent: GraceIntent | null) => void;
 };
@@ -355,7 +355,7 @@ const MenuContentInternal = forwardRef<
           },
           [isPointerMovingToSubmenu],
         )}
-        onTriggerLeave={React.useCallback(
+        onPointerLeaveTrigger={React.useCallback(
           (event) => {
             if (isPointerMovingToSubmenu(event)) event.preventDefault();
           },
@@ -968,7 +968,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
                   300,
                 );
               } else {
-                contentContext.onTriggerLeave(event);
+                contentContext.onPointerLeaveTrigger(event);
                 if (event.defaultPrevented) return;
 
                 // There's 100ms where the user may leave an item before the submenu was opened.
