@@ -44,7 +44,7 @@
     "react-scanner": "^1.1.0"
   },
   "devDependencies": {
-    "rimraf": "3.0.2",
+    "rimraf": "6.0.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },
