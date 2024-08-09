@@ -39,6 +39,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       removeSelectedOption,
       toggleOption,
       isMultiSelect,
+      maxSelected,
     } = useSelectedOptionsContext();
     const {
       activeDecendantId,
@@ -218,7 +219,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
         onClick={() => {
-          setHideCaret(false);
+          setHideCaret(!!maxSelected?.isLimitReached);
           value !== searchTerm && onChange(value);
         }}
         onInput={onChangeHandler}

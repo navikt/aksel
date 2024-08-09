@@ -138,7 +138,7 @@ const FilteredOptionsProvider = ({
     (newState?: boolean) => {
       virtualFocus.moveFocusToTop();
       if (newState ?? !isInternalListOpen) {
-        setHideCaret(false);
+        setHideCaret(!!maxSelected?.isLimitReached);
       }
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
