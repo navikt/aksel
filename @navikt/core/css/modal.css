@@ -128,6 +128,18 @@
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+  background:
+    linear-gradient(white 30%, transparent) top,
+    linear-gradient(transparent, white 60%) bottom,
+    radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
+    radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
+  background-size:
+    100% 40px,
+    100% 50px,
+    100% 16px,
+    100% 16px;
+  background-attachment: local, local, scroll, scroll;
+  background-repeat: no-repeat;
 }
 
 .navds-modal--small .navds-modal__body {
