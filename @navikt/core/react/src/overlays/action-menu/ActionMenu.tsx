@@ -362,27 +362,18 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
 /* -------------------------------------------------------------------------- */
 /*                             ActionMenuContent                            */
 /* -------------------------------------------------------------------------- */
-type ActionMenuContentElement = React.ElementRef<typeof Menu.Content>;
-type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content> &
-  Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement">;
-
-/* TODO: Check if we actually want to extend any of these props */
 interface ActionMenuContentProps
-  extends Omit<MenuContentProps, "onEntryFocus" | "asChild"> {
+  extends React.HTMLAttributes<HTMLDivElement>,
+    Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
   children?: React.ReactNode;
 }
 
-const ActionMenuContent = forwardRef<
-  ActionMenuContentElement,
-  ActionMenuContentProps
->(
+const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
   (
     {
       children,
       className,
       style,
-      onCloseAutoFocus,
-      onInteractOutside,
       rootElement,
       ...rest
     }: ActionMenuContentProps,
@@ -398,11 +389,11 @@ const ActionMenuContent = forwardRef<
           id={context.contentId}
           aria-labelledby={context.triggerId}
           className={cl("navds-action-menu__content", className)}
+          {...rest}
           align="start"
           sideOffset={4}
           collisionPadding={10}
-          {...rest}
-          onCloseAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
+          onCloseAutoFocus={(event) => {
             /**
              * In the case of a click outside the menu or trigger,
              * we make sure to not override any native focus behavior
@@ -412,25 +403,22 @@ const ActionMenuContent = forwardRef<
             }
             hasInteractedOutsideRef.current = false;
             event.preventDefault();
-          })}
-          onInteractOutside={composeEventHandlers(
-            onInteractOutside,
-            (event) => {
-              /**
-               * We assume that all clicks outside the menu are intentionally made to close it,
-               * and that we should still focus the trigger when the menu closes. This is to ensure
-               * that the user can easily reopen the menu with keyboard navigation.
-               * The exception is when the user right-clicks, as we can assume the user wants complete control.
-               */
-              const originalEvent = event.detail.originalEvent as PointerEvent;
-              const ctrlLeftClick =
-                originalEvent.button === 0 && originalEvent.ctrlKey === true;
-              const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-              if (isRightClick) {
-                hasInteractedOutsideRef.current = true;
-              }
-            },
-          )}
+          }}
+          onInteractOutside={(event) => {
+            /**
+             * We assume that all clicks outside the menu are intentionally made to close it,
+             * and that we should still focus the trigger when the menu closes. This is to ensure
+             * that the user can easily reopen the menu with keyboard navigation.
+             * The exception is when the user right-clicks, as we can assume the user wants complete control.
+             */
+            const originalEvent = event.detail.originalEvent as PointerEvent;
+            const ctrlLeftClick =
+              originalEvent.button === 0 && originalEvent.ctrlKey === true;
+            const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+            if (isRightClick) {
+              hasInteractedOutsideRef.current = true;
+            }
+          }}
           style={{
             ...style,
             ...{
