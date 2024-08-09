@@ -114,20 +114,23 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
           {...rest}
           onPointerDown={composeEventHandlers(onPointerDown, (event) => {
             const disabled = event.currentTarget.disabled;
-            // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
-            // but not when the control key is pressed (avoiding MacOS right click)
+            /**
+             * Only call handler with left button (onPointerDown gets triggered by all mouse buttons),
+             * but not when the control key is pressed (avoiding MacOS right click)
+             */
             if (!disabled && event.button === 0 && event.ctrlKey === false) {
               context.onOpenToggle();
-              // prevent trigger focusing when opening
-              // this allows the content to be given focus without competition
+              /**
+               * Prevent trigger focusing when opening, allowing the content to be given focus without competition
+               */
               if (!context.open) {
                 event.preventDefault();
 
                 /**
-                 * This allows the user to open with pointerDown, while preserving the
-                 * pointerup event to close the menu if user wants to cancel action
+                 * Allows user to open with pointerDown, while preserving the
+                 * pointerup event to close the menu if user wants to cancel action by moving pointer outside menu
                  */
-                const cb = (e: PointerEvent) => {
+                const pointerUpCallback = (e: PointerEvent) => {
                   const triggerRef = context.triggerRef?.current;
                   const closestContent = (e.target as Element)?.closest(
                     "[data-aksel-menu-content]",
@@ -142,7 +145,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
                     context.onOpenChange(false);
                   }
                 };
-                document.addEventListener("pointerup", cb, {
+                document.addEventListener("pointerup", pointerUpCallback, {
                   once: true,
                 });
               }
@@ -158,7 +161,9 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
             if (event.key === "ArrowDown") {
               context.onOpenChange(true);
             }
-            // prevent keydown from scrolling window / first focused item to execute
+            /**
+             * Stop keydown from scrolling window
+             */
             if (["Enter", " ", "ArrowDown"].includes(event.key)) {
               event.preventDefault();
             }
@@ -214,15 +219,25 @@ const ActionMenuContent = forwardRef<
           collisionPadding={10}
           {...rest}
           onCloseAutoFocus={composeEventHandlers(onCloseAutoFocus, (event) => {
-            if (!hasInteractedOutsideRef.current)
+            /**
+             * In the case of a click outside the menu or trigger,
+             * we make sure to not override any native focus behavior
+             */
+            if (!hasInteractedOutsideRef.current) {
               context.triggerRef.current?.focus();
+            }
             hasInteractedOutsideRef.current = false;
-            // Always prevent auto focus because we either focus manually or want user agent focus
             event.preventDefault();
           })}
           onInteractOutside={composeEventHandlers(
             onInteractOutside,
             (event) => {
+              /**
+               * We assume that all clicks outside the menu are intentionally made to close it,
+               * and that we should still focus the trigger when the menu closes. This is to ensure
+               * that the user can easily reopen the menu with keyboard navigation.
+               * The exception is when the user right-clicks, as we can assume the user wants complete control.
+               */
               const originalEvent = event.detail.originalEvent as PointerEvent;
               const ctrlLeftClick =
                 originalEvent.button === 0 && originalEvent.ctrlKey === true;
@@ -251,6 +266,27 @@ const ActionMenuContent = forwardRef<
           {children}
         </Menu.Content>
       </Menu.Portal>
+    );
+  },
+);
+
+/* -------------------------------------------------------------------------- */
+/*                              ActionMenuLabel                             */
+/* -------------------------------------------------------------------------- */
+interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
+  ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
+    return (
+      <div
+        ref={ref}
+        {...rest}
+        className={cl("navds-action-menu__label", className)}
+      >
+        {children}
+      </div>
     );
   },
 );
@@ -288,28 +324,13 @@ const ActionMenuGroup = forwardRef<
   );
 });
 
-/* -------------------------------------------------------------------------- */
-/*                              ActionMenuLabel                             */
-/* -------------------------------------------------------------------------- */
-interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
-  ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
-    return (
-      <div
-        ref={ref}
-        {...rest}
-        className={cl("navds-action-menu__label", className)}
-      >
-        {children}
-      </div>
-    );
-  },
-);
-
 export const Shortcut = ({ children }: { children: string }) => {
+  /**
+   * Assumes the user will input either
+   * - a single character
+   * - characters separated by "space"
+   * - characters separated by "+"
+   */
   const parsed = children
     .replace(/\+/g, " ")
     .split(" ")
@@ -389,6 +410,9 @@ const ActionMenuCheckboxItem = forwardRef<
         ref={ref}
         {...rest}
         onSelect={composeEventHandlers(onSelect, (event) => {
+          /**
+           * Prevent default to avoid the menu from closing when clicking the checkbox
+           */
           event.preventDefault();
         })}
         asChild={false}
@@ -537,6 +561,9 @@ const ActionMenuRadioItem = forwardRef<
         ref={ref}
         {...rest}
         onSelect={composeEventHandlers(onSelect, (event) => {
+          /**
+           * Prevent default to avoid the menu from closing when clicking the radio
+           */
           event.preventDefault();
         })}
         asChild={false}
