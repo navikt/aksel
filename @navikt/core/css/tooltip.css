@@ -33,7 +33,6 @@
   position: absolute;
 }
 
-/* TODO: Cleanup */
 .navds-tooltip__keys {
   padding-bottom: var(--a-spacing-1);
   display: flex;
