@@ -164,9 +164,9 @@ export const WithLabels = () => (
     {foodGroups.map((foodGroup, index) => (
       <Menu.Group key={index}>
         {foodGroup.label && (
-          <Menu.Label className="label" key={foodGroup.label}>
+          <div className="label" key={foodGroup.label}>
             {foodGroup.label}
-          </Menu.Label>
+          </div>
         )}
         {foodGroup.foods.map((food) => (
           <Menu.Item
@@ -362,22 +362,24 @@ export const MenuWithOpenButton = () => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <Menu open={open} onOpenChange={() => {}} modal={false}>
+    <Menu open={open} onOpenChange={() => setOpen((x) => !x)} modal={false}>
       <Menu.Anchor asChild>
         <button
           ref={triggerRef}
           type="button"
           onPointerDown={(event) => {
-            // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
+            // Only open if it's the left button (mousedown gets triggered by all mouse buttons)
             // but not when the control key is pressed (avoiding MacOS right click)
             if (event.button === 0 && event.ctrlKey === false) {
               setOpen((x) => !x);
-              // prevent trigger focusing when opening
-              // this allows the content to be given focus without competition
               if (!open) {
+                // Prevent trigger focusing when opening
+                // This allows the content to be given focus without competition
                 event.preventDefault();
 
-                const cb = (e: any) => {
+                // Close if pointerUp outside of the content/trigger
+                const cb = (e: PointerEvent) => {
+                  if (!(e.target instanceof Node)) return;
                   const isInsideSafezone =
                     contentRef.current?.contains(e.target) ||
                     triggerRef.current?.contains(e.target) ||
@@ -400,7 +402,7 @@ export const MenuWithOpenButton = () => {
           onKeyDown={(event) => {
             if (["Enter", " "].includes(event.key)) setOpen((x) => !x);
             if (event.key === "ArrowDown") setOpen(true);
-            // prevent keydown from scrolling window / first focused item to execute
+            // Prevent keydown from scrolling window / first focused item to execute
             // that keydown (inadvertently closing the menu)
             if (["Enter", " ", "ArrowDown"].includes(event.key))
               event.preventDefault();
@@ -412,9 +414,11 @@ export const MenuWithOpenButton = () => {
       <Menu.Portal>
         <Menu.Content
           className="content"
-          onCloseAutoFocus={(event) => event.preventDefault()}
           align="start"
           ref={contentRef}
+          onCloseAutoFocus={() => {
+            triggerRef.current?.focus();
+          }}
         >
           <Menu.Item className="item" onSelect={() => window.alert("undo")}>
             Undo
@@ -472,9 +476,8 @@ const Submenu: React.FC<
 };
 
 export const TestMenu = () => {
-  const props = { open: true };
   return (
-    <Menu open={props.open} onOpenChange={() => {}} modal={true}>
+    <Menu open onOpenChange={() => {}} modal={true}>
       <Menu.Anchor asChild>
         <button>Menu</button>
       </Menu.Anchor>

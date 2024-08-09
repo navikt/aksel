@@ -100,13 +100,7 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
           isMouseFocusRef.current = true;
         })}
         onFocus={composeEventHandlers(onFocus, (event) => {
-          // We normally wouldn't need this check, because we already check
-          // that the focus is on the current target and not bubbling to it.
-          // We do this because Safari doesn't focus buttons when clicked, and
-          // instead, the wrapper will get focused and not through a bubbling event.
-          const isKeyboardFocus = !isMouseFocusRef.current;
-
-          if (event.target === event.currentTarget && isKeyboardFocus) {
+          if (event.target === event.currentTarget) {
             const entryFocusEvent = new CustomEvent(ENTRY_FOCUS, EVENT_OPTIONS);
             event.currentTarget.dispatchEvent(entryFocusEvent);
 

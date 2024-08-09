@@ -73,6 +73,7 @@ export const InputController = forwardRef<
             id={inputProps.id}
             ref={mergedInputRef}
             inputClassName={inputClassName}
+            shouldShowSelectedOptions={shouldShowSelectedOptions}
             {...rest}
           />
         </SelectedOptions>

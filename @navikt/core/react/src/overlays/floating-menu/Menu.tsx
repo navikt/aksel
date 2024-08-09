@@ -52,7 +52,6 @@ interface MenuComponent extends React.FC<MenuProps> {
   Portal: typeof MenuPortal;
   Content: typeof MenuContent;
   Group: typeof MenuGroup;
-  Label: typeof MenuLabel;
   Item: typeof MenuItem;
   CheckboxItem: typeof MenuCheckboxItem;
   RadioGroup: typeof MenuRadioGroup;
@@ -184,7 +183,7 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
 type MenuContentContextValue = {
   onItemEnter: (event: React.PointerEvent) => void;
   onItemLeave: (event: React.PointerEvent) => void;
-  onTriggerLeave: (event: React.PointerEvent) => void;
+  onPointerLeaveTrigger: (event: React.PointerEvent) => void;
   pointerGraceTimerRef: React.MutableRefObject<number>;
   onPointerGraceIntentChange: (intent: GraceIntent | null) => void;
 };
@@ -195,34 +194,35 @@ const [MenuContentProvider, useMenuContentContext] =
     hookName: "useMenuContentContext",
   });
 
-type MenuContentElement = MenuContentImplElement;
-interface MenuContentProps extends MenuContentImplTypeProps {}
+type MenuContentElement = MenuContentInternalElement;
+interface MenuContentProps extends MenuContentInternalTypeProps {}
 
-const MenuContent = React.forwardRef<MenuContentImplElement, MenuContentProps>(
-  (props: MenuContentProps, ref) => {
-    const descendants = useMenuDescendants();
-    const rootContext = useMenuRootContext();
+const MenuContent = React.forwardRef<
+  MenuContentInternalElement,
+  MenuContentProps
+>((props: MenuContentProps, ref) => {
+  const descendants = useMenuDescendants();
+  const rootContext = useMenuRootContext();
 
-    return (
-      <MenuDescendantsProvider value={descendants}>
-        {rootContext.modal ? (
-          <MenuRootContentModal {...props} ref={ref} />
-        ) : (
-          <MenuRootContentNonModal {...props} ref={ref} />
-        )}
-      </MenuDescendantsProvider>
-    );
-  },
-);
+  return (
+    <MenuDescendantsProvider value={descendants}>
+      {rootContext.modal ? (
+        <MenuRootContentModal {...props} ref={ref} />
+      ) : (
+        <MenuRootContentNonModal {...props} ref={ref} />
+      )}
+    </MenuDescendantsProvider>
+  );
+});
 
 /* ---------------------------- Non-modal content --------------------------- */
 const MenuRootContentNonModal = React.forwardRef<
-  MenuContentImplElement,
-  MenuContentImplTypeProps
->((props: MenuContentImplTypeProps, ref) => {
+  MenuContentInternalElement,
+  MenuContentInternalTypeProps
+>((props: MenuContentInternalTypeProps, ref) => {
   const context = useMenuContext();
   return (
-    <MenuContentImpl
+    <MenuContentInternal
       {...props}
       ref={ref}
       disableOutsidePointerEvents={false}
@@ -233,13 +233,13 @@ const MenuRootContentNonModal = React.forwardRef<
 
 /* ------------------------------ Modal content ----------------------------- */
 const MenuRootContentModal = forwardRef<
-  MenuContentImplElement,
-  MenuContentImplTypeProps
->((props: MenuContentImplTypeProps, ref) => {
+  MenuContentInternalElement,
+  MenuContentInternalTypeProps
+>((props: MenuContentInternalTypeProps, ref) => {
   const context = useMenuContext();
 
   return (
-    <MenuContentImpl
+    <MenuContentInternal
       {...props}
       ref={ref}
       // make sure to only disable pointer events when open
@@ -257,21 +257,21 @@ const MenuRootContentModal = forwardRef<
   );
 });
 
-/* -------------------------- Menu content implicit ------------------------- */
-type MenuContentImplElement = React.ElementRef<typeof Floating.Content>;
+/* -------------------------- Menu content internals ------------------------- */
+type MenuContentInternalElement = React.ElementRef<typeof Floating.Content>;
 type FocusScopeProps = React.ComponentPropsWithoutRef<typeof FocusScope>;
 type DismissableLayerProps = React.ComponentPropsWithoutRef<
   typeof DismissableLayer
 >;
 
-type MenuContentImplPrivateProps = {
+type MenuContentInternalPrivateProps = {
   onOpenAutoFocus?: FocusScopeProps["onMountHandler"];
   onDismiss?: DismissableLayerProps["onDismiss"];
   disableOutsidePointerEvents?: DismissableLayerProps["disableOutsidePointerEvents"];
 };
 
-interface MenuContentImplProps
-  extends MenuContentImplPrivateProps,
+interface MenuContentInternalProps
+  extends MenuContentInternalPrivateProps,
     Omit<
       React.ComponentPropsWithoutRef<typeof Floating.Content>,
       "dir" | "onPlaced"
@@ -288,9 +288,9 @@ interface MenuContentImplProps
   onInteractOutside?: DismissableLayerProps["onInteractOutside"];
 }
 
-const MenuContentImpl = forwardRef<
-  MenuContentImplElement,
-  MenuContentImplProps
+const MenuContentInternal = forwardRef<
+  MenuContentInternalElement,
+  MenuContentInternalProps
 >(
   (
     {
@@ -304,7 +304,7 @@ const MenuContentImpl = forwardRef<
       onInteractOutside,
       onDismiss,
       ...rest
-    }: MenuContentImplProps,
+    }: MenuContentInternalProps,
     forwardedRef,
   ) => {
     const descendants = useMenuDescendantsContext();
@@ -346,11 +346,16 @@ const MenuContentImpl = forwardRef<
         onItemLeave={React.useCallback(
           (event) => {
             if (isPointerMovingToSubmenu(event)) return;
+
+            /**
+             * Resets focus from current active item to content area
+             * This is to prevent focus from being stuck on an item when we move pointer outside the menu or onto a disabled item
+             */
             contentRef.current?.focus();
           },
           [isPointerMovingToSubmenu],
         )}
-        onTriggerLeave={React.useCallback(
+        onPointerLeaveTrigger={React.useCallback(
           (event) => {
             if (isPointerMovingToSubmenu(event)) event.preventDefault();
           },
@@ -451,17 +456,20 @@ const MenuContentImpl = forwardRef<
   },
 );
 
-interface MenuContentImplTypeProps
-  extends Omit<MenuContentImplProps, keyof MenuContentImplPrivateProps> {}
+interface MenuContentInternalTypeProps
+  extends Omit<
+    MenuContentInternalProps,
+    keyof MenuContentInternalPrivateProps
+  > {}
 
 /* -------------------------------------------------------------------------- */
 /*                                  Menu item                                 */
 /* -------------------------------------------------------------------------- */
 const ITEM_SELECT_EVENT = "menu.itemSelect";
 
-type MenuItemElement = MenuItemImplElement;
+type MenuItemElement = MenuItemInternalElement;
 
-interface MenuItemProps extends Omit<MenuItemImplProps, "onSelect"> {
+interface MenuItemProps extends Omit<MenuItemInternalProps, "onSelect"> {
   onSelect?: (event: Event) => void;
 }
 
@@ -506,7 +514,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
     };
 
     return (
-      <MenuItemImpl
+      <MenuItemInternal
         {...rest}
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
@@ -545,21 +553,24 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
   },
 );
 
-/* --------------------------- Menu Item implicit --------------------------- */
-type MenuItemImplElement = SlottedDivElementRef;
+/* --------------------------- Menu Item internals --------------------------- */
+type MenuItemInternalElement = SlottedDivElementRef;
 
-interface MenuItemImplProps extends SlottedDivProps {
+interface MenuItemInternalProps extends SlottedDivProps {
   disabled?: boolean;
 }
 
-const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
+const MenuItemInternal = forwardRef<
+  MenuItemInternalElement,
+  MenuItemInternalProps
+>(
   (
     {
       disabled = false,
       onPointerMove,
       onPointerLeave,
       ...rest
-    }: MenuItemImplProps,
+    }: MenuItemInternalProps,
     forwardedRef,
   ) => {
     const { register } = useMenuDescendant({ disabled });
@@ -578,20 +589,18 @@ const MenuItemImpl = forwardRef<MenuItemImplElement, MenuItemImplProps>(
         style={{ userSelect: "none", ...rest?.style }}
         ref={composedRefs}
         /**
-         * We focus items on `pointerMove` to achieve the following:
-         *
-         * - Mouse over an item (it focuses)
-         * - Leave mouse where it is and use keyboard to focus a different item
-         * - Wiggle mouse without it leaving previously focused item
-         * - Previously focused item should re-focus
-         *
-         * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
-         * wiggles. This is to match native menu implementation.
+         * We focus items on `pointerMove` make sure that the item is focused or re-focused
+         * when the mouse wiggles. If we used `mouseOver`/`mouseEnter` it would not re-focus.
+         * This is mostly to handle edgecases where the user uses mouse and keyboard together.
          */
         onPointerMove={composeEventHandlers(
           onPointerMove,
           whenMouse((event) => {
             if (disabled) {
+              /**
+               * In the edgecase the focus is still stuck on a previous item, we make sure to reset it
+               * even when the disabled item can't be focused itself to reset it.
+               */
               contentContext.onItemLeave(event);
             } else {
               contentContext.onItemEnter(event);
@@ -618,17 +627,6 @@ interface MenuGroupProps extends SlottedDivProps {}
 const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
   (props: MenuGroupProps, ref) => {
     return <SlottedDivElement role="group" {...props} ref={ref} />;
-  },
-);
-
-/**
- * MenuLabel
- */
-interface MenuLabelProps extends SlottedDivProps {}
-
-const MenuLabel = forwardRef<SlottedDivElementRef, MenuLabelProps>(
-  (props: MenuLabelProps, ref) => {
-    return <SlottedDivElement {...props} ref={ref} />;
   },
 );
 
@@ -661,10 +659,10 @@ const MenuPortal = forwardRef<MenuPortalElement, MenuPortalProps>(
 /* -------------------------------------------------------------------------- */
 /*                                 Menu Radio                                 */
 /* -------------------------------------------------------------------------- */
-const [RadioGroupProvider, useRadioGroupContext] =
+const [RadioGroupProvider, useMenuRadioGroupContext] =
   createContext<MenuRadioGroupProps>({
     providerName: "MenuRadioGroupProvider",
-    hookName: "useRadioGroupContext",
+    hookName: "useMenuRadioGroupContext",
     defaultValue: {
       value: undefined,
       onValueChange: () => {},
@@ -728,7 +726,7 @@ const MenuRadioItem = forwardRef<
   React.ElementRef<typeof MenuItem>,
   MenuRadioItemProps
 >(({ value, onSelect, ...rest }: MenuRadioItemProps, forwardedRef) => {
-  const context = useRadioGroupContext();
+  const context = useMenuRadioGroupContext();
   const checked = value === context.value;
 
   return (
@@ -836,7 +834,9 @@ const MenuSub: React.FC<MenuSubProps> = ({
   const parentMenuContext = useMenuContext();
 
   const [trigger, setTrigger] = useState<MenuItemElement | null>(null);
-  const [content, setContent] = useState<MenuContentImplElement | null>(null);
+  const [content, setContent] = useState<MenuContentInternalElement | null>(
+    null,
+  );
   const handleOpenChange = useCallbackRef(onOpenChange);
 
   // Prevent the parent menu from reopening with open submenus.
@@ -871,7 +871,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
 /* -------------------------------------------------------------------------- */
 /*                            Menu SubMenu Trigger                            */
 /* -------------------------------------------------------------------------- */
-interface MenuSubTriggerProps extends MenuItemImplProps {}
+interface MenuSubTriggerProps extends MenuItemInternalProps {}
 
 const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   (props: MenuSubTriggerProps, forwardedRef) => {
@@ -902,7 +902,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 
     return (
       <MenuAnchor asChild>
-        <MenuItemImpl
+        <MenuItemInternal
           id={subContext.triggerId}
           aria-haspopup="menu"
           aria-expanded={context.open}
@@ -910,23 +910,20 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
-          // This is redundant for mouse users but we cannot determine pointer type from
-          // click event and we cannot use pointerup event (see git history for reasons why)
+          /**
+           * onClick is added to solve edgecase where the user clicks the trigger,
+           * but the focus is outside browser-window or viewport at first.
+           */
           onClick={(event) => {
             props.onClick?.(event);
             if (props.disabled || event.defaultPrevented) return;
-            /**
-             * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
-             * and we rely heavily on `onFocusOutside` for submenus to close when switching
-             * between separate submenus.
-             */
+
             event.currentTarget.focus();
             if (!context.open) context.onOpenChange(true);
           }}
           onPointerMove={composeEventHandlers(
             props.onPointerMove,
             whenMouse((event) => {
-              contentContext.onItemEnter(event);
               if (event.defaultPrevented) return;
               if (!props.disabled && !context.open && !openTimerRef.current) {
                 contentContext.onPointerGraceIntentChange(null);
@@ -971,7 +968,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
                   300,
                 );
               } else {
-                contentContext.onTriggerLeave(event);
+                contentContext.onPointerLeaveTrigger(event);
                 if (event.defaultPrevented) return;
 
                 // There's 100ms where the user may leave an item before the submenu was opened.
@@ -1003,92 +1000,83 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 /* -------------------------------------------------------------------------- */
 interface MenuSubContentProps
   extends Omit<
-    MenuContentImplProps,
-    | keyof MenuContentImplPrivateProps
+    MenuContentInternalProps,
+    | keyof MenuContentInternalPrivateProps
     | "onCloseAutoFocus"
     | "onEntryFocus"
     | "side"
     | "align"
   > {}
 
-const MenuSubContent = forwardRef<MenuContentImplElement, MenuSubContentProps>(
-  (props: MenuSubContentProps, forwardedRef) => {
-    const descendants = useMenuDescendants();
+const MenuSubContent = forwardRef<
+  MenuContentInternalElement,
+  MenuSubContentProps
+>((props: MenuSubContentProps, forwardedRef) => {
+  const descendants = useMenuDescendants();
 
-    const context = useMenuContext();
-    const rootContext = useMenuRootContext();
-    const subContext = useMenuSubContext();
-    const ref = useRef<MenuContentImplElement>(null);
-    const composedRefs = useMergeRefs(forwardedRef, ref);
+  const context = useMenuContext();
+  const rootContext = useMenuRootContext();
+  const subContext = useMenuSubContext();
+  const ref = useRef<MenuContentInternalElement>(null);
+  const composedRefs = useMergeRefs(forwardedRef, ref);
 
-    return (
-      <MenuDescendantsProvider value={descendants}>
-        <MenuContentImpl
-          id={subContext.contentId}
-          aria-labelledby={subContext.triggerId}
-          {...props}
-          ref={composedRefs}
-          align="start"
-          side="right"
-          disableOutsidePointerEvents={false}
-          onOpenAutoFocus={(event) => {
-            // when opening a submenu, focus content for keyboard users only
-            if (rootContext.isUsingKeyboardRef.current) {
-              ref.current?.focus();
-            }
+  return (
+    <MenuDescendantsProvider value={descendants}>
+      <MenuContentInternal
+        id={subContext.contentId}
+        aria-labelledby={subContext.triggerId}
+        {...props}
+        ref={composedRefs}
+        align="start"
+        side="right"
+        disableOutsidePointerEvents={false}
+        onOpenAutoFocus={(event) => {
+          // when opening a submenu, focus content for keyboard users only
+          if (rootContext.isUsingKeyboardRef.current) {
+            ref.current?.focus();
+          }
+          event.preventDefault();
+        }}
+        // The menu might close because of focusing another menu item in the parent menu. We
+        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+        onCloseAutoFocus={(event) => event.preventDefault()}
+        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
+          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
+          // on pointer interaction.
+          if (event.target !== subContext.trigger) context.onOpenChange(false);
+        })}
+        onEscapeKeyDown={composeEventHandlers(
+          props.onEscapeKeyDown,
+          (event) => {
+            rootContext.onClose();
+            // Ensure pressing escape in submenu doesn't escape full screen mode
             event.preventDefault();
-          }}
-          // The menu might close because of focusing another menu item in the parent menu. We
-          // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
-          onCloseAutoFocus={(event) => event.preventDefault()}
-          onFocusOutside={composeEventHandlers(
-            props.onFocusOutside,
-            (event) => {
-              // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-              // on pointer interaction.
-              if (event.target !== subContext.trigger)
-                context.onOpenChange(false);
-            },
-          )}
-          onEscapeKeyDown={composeEventHandlers(
-            props.onEscapeKeyDown,
-            (event) => {
-              rootContext.onClose();
-              // ensure pressing escape in submenu doesn't escape full screen mode
-              event.preventDefault();
-            },
-          )}
-          onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-            // Submenu key events bubble through portals. We only care about keys in this menu.
-            const isKeyDownInside = event.currentTarget.contains(
-              event.target as HTMLElement,
-            );
-            const isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
-            if (isKeyDownInside && isCloseKey) {
-              context.onOpenChange(false);
-              // We focus manually because we prevented it in `onCloseAutoFocus`
-              subContext.trigger?.focus();
-              // prevent window from scrolling
-              event.preventDefault();
-            }
+          },
+        )}
+        onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
+          // Submenu key events bubble through portals. We only care about keys in this menu.
+          const isKeyDownInside = event.currentTarget.contains(
+            event.target as HTMLElement,
+          );
+          let isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
 
-            /* When submenu opens to the left, we allow closing it with ArrowRight */
-            const side = context.content?.dataset.side as SubMenuSide;
-            if (
-              side === "left" &&
-              isKeyDownInside &&
-              event.key === "ArrowRight"
-            ) {
-              context.onOpenChange(false);
-              subContext.trigger?.focus();
-              event.preventDefault();
-            }
-          })}
-        />
-      </MenuDescendantsProvider>
-    );
-  },
-);
+          /* When submenu opens to the left, we allow closing it with ArrowRight */
+          if (context.content?.dataset.side === "left") {
+            isCloseKey = isCloseKey || event.key === "ArrowRight";
+          }
+
+          if (isKeyDownInside && isCloseKey) {
+            context.onOpenChange(false);
+            // We focus manually because we prevented it in `onCloseAutoFocus`
+            subContext.trigger?.focus();
+            // Prevent window from scrolling
+            event.preventDefault();
+          }
+        })}
+      />
+    </MenuDescendantsProvider>
+  );
+});
 
 /* -------------------------------------------------------------------------- */
 /*                                  Utilities                                 */
@@ -1147,7 +1135,6 @@ Menu.Anchor = MenuAnchor;
 Menu.Portal = MenuPortal;
 Menu.Content = MenuContent;
 Menu.Group = MenuGroup;
-Menu.Label = MenuLabel;
 Menu.Item = MenuItem;
 Menu.CheckboxItem = MenuCheckboxItem;
 Menu.RadioGroup = MenuRadioGroup;
@@ -1166,7 +1153,6 @@ export {
   MenuGroup,
   MenuItem,
   MenuItemIndicator,
-  MenuLabel,
   MenuPortal,
   MenuRadioGroup,
   MenuRadioItem,
@@ -1180,7 +1166,6 @@ export {
   type MenuGroupProps,
   type MenuItemElement,
   type MenuItemIndicatorProps,
-  type MenuLabelProps,
   type MenuPortalProps,
   type MenuProps,
   type MenuRadioGroupProps,

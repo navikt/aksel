@@ -47,7 +47,7 @@ jobs:
         with:
           autoAcceptChanges: "main"
           token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: x3xqdfgkujg
+          projectToken: chpt_1dc4af6a1c8cc48
           exitZeroOnChanges: false
           buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
