@@ -33,9 +33,16 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
+    "no-console": ["warn", { allow: ["info", "warn", "error"] }],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
+    {
+      files: ["**/*.stories.ts?(x)"],
+      rules: {
+        "no-console": "off",
+      },
+    },
     {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
