@@ -512,7 +512,7 @@ type ShortcutProps = {
   children: string;
 };
 
-export const Shortcut = ({ children }: ShortcutProps) => {
+const Shortcut = ({ children }: ShortcutProps) => {
   /**
    * Assumes the user will input either
    * - a single character
