@@ -38,13 +38,13 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   overrides: [
     {
-      files: ["**/*.stories.?(j|t)s?(x)"],
+      files: ["**/*.stories.ts?(x)"],
       rules: {
         "no-console": "off",
       },
     },
     {
-      files: ["**/*.?(j|t)s?(x)"],
+      files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
         "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
