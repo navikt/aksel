@@ -48,17 +48,190 @@ interface ActionMenuProps {
 }
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
+  /**
+   * Acts as a trigger and anchor for the menu.
+   * Must be wrapped around a React.ReactNode, ex. a button or similar element.
+   * @example
+   * ```jsx
+   * <ActionMenu.Trigger>
+   *     <button>Open Menu</button>
+   * </ActionMenu.Trigger>
+   * ```
+   */
   Trigger: typeof ActionMenuTrigger;
+  /**
+   * The menu content, containing all the items.
+   * @example
+   * ```jsx
+   * <ActionMenu.Content>
+   *     <ActionMenu.Item>
+   *       Item 1
+   *     </ActionMenu.Item>
+   *     <ActionMenu.Item>
+   *       Item 2
+   *     </ActionMenu.Item>
+   * </ActionMenu.Content>
+   * ```
+   */
   Content: typeof ActionMenuContent;
+  /**
+   * Semantically and visually groups items together with a label.
+   * This is the prefered way to group items, as it provides better accessibility
+   * rather than using a standalone `ActionMenu.Label`
+   * @example
+   * ```jsx
+   * <ActionMenu.Content>
+   *     <ActionMenu.Group label="Group 1">
+   *         <ActionMenu.Item>
+   *           Item 1
+   *         </ActionMenu.Item>
+   *         <ActionMenu.Item>
+   *           Item 2
+   *         </ActionMenu.Item>
+   *     </ActionMenu.Group>
+   *     <ActionMenu.Group label="Group 2">
+   *         <ActionMenu.Item>
+   *           Item 3
+   *         </ActionMenu.Item>
+   *         <ActionMenu.Item>
+   *           Item 4
+   *         </ActionMenu.Item>
+   *     </ActionMenu.Group>
+   * </ActionMenu.Content>
+   * ```
+   */
   Group: typeof ActionMenuGroup;
+  /**
+   * Separate labeling option for the menu.
+   * This is not for grouping items, but rather for adding a label to the menu at the top. For grouping items, use `ActionMenu.Group`.
+   * @example
+   * ```jsx
+   * <ActionMenu.Content>
+   *     <ActionMenu.Label>
+   *         Label
+   *     </ActionMenu.Label>
+   *     <ActionMenu.Separator />
+   * </ActionMenu.Content
+   * ```
+   */
   Label: typeof ActionMenuLabel;
+  /**
+   * A single item in the menu. Can be used standalone or grouped with other items.
+   * Use `onSelect` to handle the action when the item is selected, like navigating to a new page or performing an action.
+   * @example
+   * ```jsx
+   * <ActionMenu.Content>
+   *     // Grouped
+   *     <ActionMenu.Group label="Group 1">
+   *         <ActionMenu.Item onSelect={navigate}>
+   *           Item 1
+   *         </ActionMenu.Item>
+   *         <ActionMenu.Item onSelect={navigate}>
+   *           Item 2
+   *         </ActionMenu.Item>
+   *     </ActionMenu.Group>
+   *     <ActionMenu.Separator />
+   *     // Standalone
+   *     <ActionMenu.Item onSelect={updateState}>
+   *        Item 3
+   *     </ActionMenu.Item>
+   * </ActionMenu.Content>
+   * ```
+   */
   Item: typeof ActionMenuItem;
+  /**
+   * A checkbox item in the menu. Can be used standalone or grouped with other items.
+   * @example
+   * ```jsx
+   * <ActionMenu.CheckboxItem
+   *   checked={isChecked}
+   *   onCheckedChange={handleChange}
+   * >
+   *   Checkbox 1
+   * </ActionMenu.CheckboxItem>
+   * ```
+   */
   CheckboxItem: typeof ActionMenuCheckboxItem;
+  /**
+   * A radio group in the menu.
+   * @example
+   * ```jsx
+   * <ActionMenu.RadioGroup
+   *   onValueChange={handleValueChange}
+   *   value={radioValue}
+   *   label="Radio group"
+   * >
+   *   <ActionMenu.RadioItem value="1">Radio 1</ActionMenu.RadioItem>
+   *   <ActionMenu.RadioItem value="2">Radio 2</ActionMenu.RadioItem>
+   * </ActionMenu.RadioGroup>
+   * ```
+   */
   RadioGroup: typeof ActionMenuRadioGroup;
+  /**
+   * A radio item in the menu. Should always be grouped with a `ActionMenu.RadioGroup`.
+   * @example
+   * ```jsx
+   * <ActionMenu.RadioGroup
+   *   onValueChange={handleValueChange}
+   *   value={radioValue}
+   *   label="Radio group"
+   * >
+   *   <ActionMenu.RadioItem value="1">Radio 1</ActionMenu.RadioItem>
+   *   <ActionMenu.RadioItem value="2">Radio 2</ActionMenu.RadioItem>
+   * </ActionMenu.RadioGroup>
+   * ```
+   */
   RadioItem: typeof ActionMenuRadioItem;
+  /**
+   * A simple divider to separate items in the menu.
+   */
   Separator: typeof ActionMenuSeparator;
+  /**
+   * A sub-menu that can be nested inside the menu.
+   * The sub-menu can be nested inside other sub-menus allowing for multiple levels of nesting.
+   * @example
+   * ```jsx
+   * <ActionMenu.Sub>
+   *   <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
+   *   <ActionMenu.SubContent>
+   *     <ActionMenu.Item>
+   *       Subitem 1
+   *     </ActionMenu.Item>
+   *     <ActionMenu.Item>
+   *       Subitem 2
+   *     </ActionMenu.Item>
+   *   </ActionMenu.SubContent>
+   * </ActionMenu.Sub>
+   * ```
+   */
   Sub: typeof ActionMenuSub;
+  /**
+   * Acts as a trigger for a sub-menu.
+   * In contrast to `ActionMenu.Trigger`, this trigger is a standalone component and should not be wrapped around a React.ReactNode.
+   * @example
+   * ```jsx
+   * <ActionMenu.Sub>
+   *   <ActionMenu.SubTrigger>Submenu 1</ActionMenu.SubTrigger>
+   * </ActionMenu.Sub>
+   * ```
+   */
   SubTrigger: typeof ActionMenuSubTrigger;
+  /**
+   * The content of a sub-menu.
+   * @example
+   * ```jsx
+   * <ActionMenu.Sub>
+   *   <ActionMenu.SubContent>
+   *     <ActionMenu.Item>
+   *       Subitem 1
+   *     </ActionMenu.Item>
+   *     <ActionMenu.Item>
+   *       Subitem 2
+   *     </ActionMenu.Item>
+   *   </ActionMenu.SubContent>
+   * </ActionMenu.Sub>
+   * ```
+   */
   SubContent: typeof ActionMenuSubContent;
 }
 
@@ -857,3 +1030,9 @@ export {
   type ActionMenuSubTriggerProps,
   type ActionMenuTriggerProps,
 };
+
+/**
+ * TODO:
+ * - Update JSDOC for each component
+ * - Check _docs.json output
+ */
