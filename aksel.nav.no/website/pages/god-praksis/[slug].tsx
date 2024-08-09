@@ -18,11 +18,10 @@ import { SEO } from "@/web/seo/SEO";
 
 const sanityQuery = groq`
 {
-  "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc, publishedAt desc) {
+  "articles": *[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {
     _id,
     heading,
-    publishedAt,
-    "lastVerified": updateInfo.lastVerified,
+    "displayDate": updateInfo.lastVerified,
     "description": ingress,
     "undertema": undertema[]->{title, "temaTitle": tema->title},
     "innholdstype": innholdstype->title,
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (
       articles: await Promise.all(
         articles.map(async (a) => ({
           ...a,
-          lastVerified: await dateStr(a.lastVerified ?? a.publishedAt),
+          displayDate: await dateStr(a.displayDate),
         })),
       ),
       slug,

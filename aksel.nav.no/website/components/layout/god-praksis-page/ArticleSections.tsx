@@ -116,7 +116,7 @@ export function ArticleSections({
               href={article.slug}
               innholdstype={article.innholdstype}
               undertema={article.undertema}
-              date={article.lastVerified}
+              date={article.displayDate}
               description={article.description}
             >
               {article.heading}
