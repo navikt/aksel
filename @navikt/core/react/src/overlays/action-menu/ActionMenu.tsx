@@ -832,7 +832,8 @@ const ActionMenuRadioItem = forwardRef<
 /* -------------------------------------------------------------------------- */
 type ActionMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
 type MenuSeparatorProps = React.ComponentPropsWithoutRef<typeof Menu.Separator>;
-interface ActionMenuSeparatorProps extends MenuSeparatorProps {}
+interface ActionMenuSeparatorProps
+  extends Omit<MenuSeparatorProps, "asChild"> {}
 
 const ActionMenuSeparator = forwardRef<
   ActionMenuSeparatorElement,
@@ -841,6 +842,7 @@ const ActionMenuSeparator = forwardRef<
   return (
     <Menu.Separator
       ref={ref}
+      asChild={false}
       {...rest}
       className={cl("navds-action-menu__separator", className)}
     />
@@ -918,12 +920,9 @@ const ActionMenuSubTrigger = forwardRef<
 /*                           ActionMenuSubContent                           */
 /* -------------------------------------------------------------------------- */
 type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
-type MenuSubContentProps = React.ComponentPropsWithoutRef<
-  typeof Menu.SubContent
->;
 
 interface ActionMenuSubContentProps
-  extends MenuSubContentProps,
+  extends React.HTMLAttributes<HTMLDivElement>,
     Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
   children: React.ReactNode;
 }
