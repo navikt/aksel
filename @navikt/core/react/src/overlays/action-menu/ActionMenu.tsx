@@ -200,7 +200,7 @@ const ActionMenuContent = forwardRef<
     ref,
   ) => {
     const context = useActionMenuContext();
-    const hasInteractedOutsideRef = React.useRef(false);
+    const hasInteractedOutsideRef = useRef(false);
 
     return (
       <Menu.Portal rootElement={rootElement} asChild>
