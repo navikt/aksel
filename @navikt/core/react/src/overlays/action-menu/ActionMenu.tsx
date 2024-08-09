@@ -291,27 +291,23 @@ const ActionMenuGroup = forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                              ActionMenuLabel                             */
 /* -------------------------------------------------------------------------- */
-type ActionMenuLabelElement = React.ElementRef<typeof Menu.Label>;
-type MenuLabelProps = React.ComponentPropsWithoutRef<typeof Menu.Label>;
-interface ActionMenuLabelProps extends Omit<MenuLabelProps, "asChild"> {
+interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ActionMenuLabel = forwardRef<
-  ActionMenuLabelElement,
-  ActionMenuLabelProps
->(({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
-  return (
-    <Menu.Label
-      ref={ref}
-      {...rest}
-      asChild={false}
-      className={cl("navds-action-menu__label", className)}
-    >
-      {children}
-    </Menu.Label>
-  );
-});
+const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
+  ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
+    return (
+      <div
+        ref={ref}
+        {...rest}
+        className={cl("navds-action-menu__label", className)}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 
 export const Shortcut = ({ children }: { children: string }) => {
   const parsed = children
