@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.15.0
+
+### Patch Changes
+
+- Combobox: Can no longer remove options with backspace when shouldShowSelectedOptions is false ([#3076](https://github.com/navikt/aksel/pull/3076))
+
+- Refactored Combobox FilteredOptions ([#3073](https://github.com/navikt/aksel/pull/3073))
+
+- Updated dependencies [[`ea3e88146`](https://github.com/navikt/aksel/commit/ea3e881467d27d43464ff9d111369a6b8539f593)]:
+  - @navikt/aksel-icons@6.15.0
+  - @navikt/ds-tokens@6.15.0
+
 ## 6.14.0
 
 ### Minor Changes
