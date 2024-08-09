@@ -32,8 +32,18 @@ const [ActionMenuProvider, useActionMenuContext] =
 
 interface ActionMenuProps {
   children?: React.ReactNode;
+  /**
+   * Whether the menu is open or not.
+   * Only needed if you want manually control state.
+   */
   open?: boolean;
+  /**
+   * Whether the menu should be open by default.
+   */
   defaultOpen?: boolean;
+  /**
+   * Callback for when the menu is opened or closed.
+   */
   onOpenChange?: (open: boolean) => void;
 }
 
@@ -183,6 +193,7 @@ type ActionMenuContentElement = React.ElementRef<typeof Menu.Content>;
 type MenuContentProps = React.ComponentPropsWithoutRef<typeof Menu.Content> &
   Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement">;
 
+/* TODO: Check if we actually want to extend any of these props */
 interface ActionMenuContentProps
   extends Omit<MenuContentProps, "onEntryFocus" | "asChild"> {
   children?: React.ReactNode;
@@ -324,7 +335,11 @@ const ActionMenuGroup = forwardRef<
   );
 });
 
-export const Shortcut = ({ children }: { children: string }) => {
+type ShortcutProps = {
+  children: string;
+};
+
+export const Shortcut = ({ children }: ShortcutProps) => {
   /**
    * Assumes the user will input either
    * - a single character
@@ -352,7 +367,15 @@ type ActionMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
 interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
+  /**
+   * Shows connected shortcut-keys to the items
+   * This is only a visual representation, you will have to implement the actual shortcut yourself.
+   */
   shortcut?: string;
+  /**
+   * Adds a danger variant to the item,
+   * usefull for destructive actions like "delete"
+   */
   variant?: "danger";
 }
 
@@ -388,6 +411,10 @@ type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
 interface ActionMenuCheckboxItemProps
   extends Omit<MenuCheckboxItemProps, "asChild"> {
   children: React.ReactNode;
+  /**
+   * Shows connected shortcut-keys to the items
+   * This is only a visual representation, you will have to implement the actual shortcut yourself.
+   */
   shortcut?: string;
 }
 
@@ -512,6 +539,9 @@ type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
 interface ActionMenuRadioGroupProps
   extends Omit<MenuRadioGroupProps, "asChild"> {
   children: React.ReactNode;
+  /**
+   * Adds a label to the radio group
+   */
   label?: string;
 }
 
@@ -661,8 +691,17 @@ const ActionMenuSeparator = forwardRef<
 /* -------------------------------------------------------------------------- */
 interface ActionMenuSubProps {
   children?: React.ReactNode;
+  /**
+   * Whether the sub-menu is open or not. Only needed if you want to manually control state.
+   */
   open?: boolean;
+  /**
+   * Whether the sub-menu should be open by default.
+   */
   defaultOpen?: boolean;
+  /**
+   * Callback for when the sub-menu is opened or closed.
+   */
   onOpenChange?: (open: boolean) => void;
 }
 
