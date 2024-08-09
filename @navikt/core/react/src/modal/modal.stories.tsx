@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FileIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { Checkbox, CheckboxGroup } from "../form/checkbox";
@@ -291,6 +291,28 @@ PlacementTopLong.parameters = {
       },
     },
   },
+};
+
+export const Scroll: StoryFn = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!bodyRef.current || !modalRef.current) return;
+    modalRef.current.showModal();
+    bodyRef.current.scrollTop = 100;
+  }, []);
+
+  return (
+    <Modal ref={modalRef} header={{ heading: "Scroll shadow demo" }}>
+      <Modal.Body ref={bodyRef} style={{ maxHeight: "500px" }}>
+        <BodyLong spacing>{lorem}</BodyLong>
+        <BodyLong spacing>{lorem}</BodyLong>
+        <BodyLong spacing>{lorem}</BodyLong>
+        <BodyLong>{lorem}</BodyLong>
+      </Modal.Body>
+    </Modal>
+  );
 };
 
 export const WithTooltip: StoryFn = () => {
