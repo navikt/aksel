@@ -64,6 +64,7 @@ const FilteredOptionsProvider = ({
     setValue,
     setSearchTerm,
     shouldAutocomplete,
+    setHideCaret,
   } = useInputContext();
   const { maxSelected } = useSelectedOptionsContext();
 
@@ -136,9 +137,12 @@ const FilteredOptionsProvider = ({
   const toggleIsListOpen = useCallback(
     (newState?: boolean) => {
       virtualFocus.moveFocusToTop();
+      if (newState ?? !isInternalListOpen) {
+        setHideCaret(!!maxSelected?.isLimitReached);
+      }
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
-    [virtualFocus],
+    [virtualFocus, isInternalListOpen, setHideCaret],
   );
 
   const isValueNew = useMemo(

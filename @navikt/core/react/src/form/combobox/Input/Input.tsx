@@ -32,12 +32,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       searchTerm,
       setValue,
+      hideCaret,
+      setHideCaret,
     } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
       toggleOption,
       isMultiSelect,
+      maxSelected,
     } = useSelectedOptionsContext();
     const {
       activeDecendantId,
@@ -217,7 +220,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
-        onClick={() => value !== searchTerm && onChange(value)}
+        onClick={() => {
+          setHideCaret(!!maxSelected?.isLimitReached);
+          value !== searchTerm && onChange(value);
+        }}
         onInput={onChangeHandler}
         type="text"
         role="combobox"
@@ -235,7 +241,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
+        placeholder={!selectedOptions.length ? rest.placeholder : undefined}
       />
     );
   },
