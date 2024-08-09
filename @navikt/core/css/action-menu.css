@@ -198,15 +198,15 @@
 
 .navds-action-menu__indicator:where([data-state="checked"]) > .navds-action-menu__indicator-icon--checked {
   display: block;
-  animation: aksel-action-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: aksel-action-menu-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navds-action-menu__indicator:where([data-state="indeterminate"]) > .navds-action-menu__indicator-icon--indeterminate {
   display: block;
-  animation: aksel-action-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: aksel-action-menu-form-fadein 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes aksel-action-form-fadein {
+@keyframes aksel-action-menu-form-fadein {
   from {
     transform: scale(0.85);
     opacity: 0.1;
