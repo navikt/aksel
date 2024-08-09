@@ -1017,9 +1017,3 @@ export {
   type ActionMenuSubTriggerProps,
   type ActionMenuTriggerProps,
 };
-
-/**
- * TODO:
- * - Update JSDOC for each component
- * - Check _docs.json output
- */
