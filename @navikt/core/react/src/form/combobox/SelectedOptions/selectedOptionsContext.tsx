@@ -105,7 +105,7 @@ const SelectedOptionsProvider = ({
   useEffect(() => {
     const nextIsLimitReached =
       (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
-      !isMultiSelect;
+      (!isMultiSelect && selectedOptions.length > 0);
     setIsLimitReached(nextIsLimitReached);
     setHideCaret(nextIsLimitReached);
   }, [maxSelected, selectedOptions, isMultiSelect, setHideCaret]);
