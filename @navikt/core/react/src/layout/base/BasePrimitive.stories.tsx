@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Box } from "../box";
+import { HGrid } from "../grid";
 import { Hide, Show } from "../responsive";
 import { HStack, VStack } from "../stack";
 import { BasePrimitive } from "./BasePrimitive";
@@ -247,6 +248,35 @@ export const Flex = () => (
   </VStack>
 );
 
+export const Grid = () => (
+  <VStack gap="8">
+    <h2>Static columns</h2>
+    <HGrid gap="2" columns="1fr 1fr 1fr">
+      <BasePrimitive gridColumn="1 / span 2">
+        <Box borderWidth="1">2 columns</Box>
+      </BasePrimitive>
+      <BasePrimitive gridColumn="3 / span 1">
+        <Box borderWidth="1">1 columns</Box>
+      </BasePrimitive>
+    </HGrid>
+    <h2>Dynamic columns</h2>
+    <HGrid gap="2" columns="1fr 1fr 1fr 1fr 1fr 1fr">
+      <BasePrimitive
+        gridColumn={{
+          xs: "1 / span 1",
+          sm: "1 / span 2",
+          md: "1 / span 3",
+          lg: "1 / span 4",
+          xl: "1 / span 5",
+          "2xl": "1 / span 6",
+        }}
+      >
+        <Box borderWidth="1">C</Box>
+      </BasePrimitive>
+    </HGrid>
+  </VStack>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">
@@ -290,6 +320,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Flex</h2>
         <Flex />
+      </div>
+      <div>
+        <h2>Grid</h2>
+        <Grid />
       </div>
     </VStack>
   ),
