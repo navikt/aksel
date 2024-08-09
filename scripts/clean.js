@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const glob = require("glob");
+const fastglob = require("fast-glob");
 
 function deleteFolder(folder) {
   if (!fs.existsSync(folder)) {
@@ -20,19 +20,7 @@ function deleteFolder(folder) {
   fs.rmdirSync(folder);
 }
 
-function getGlobFiles(globPattern, options) {
-  return new Promise((resolve, reject) => {
-    glob(globPattern, options, (err, res) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
-  });
-}
-
-async function clean() {
+function clean() {
   const globPatterns = [
     "./@navikt/**/dist",
     "./@navikt/**/lib",
@@ -43,7 +31,10 @@ async function clean() {
   let deletedFoldersCount = 0;
 
   for (const globPattern of globPatterns) {
-    const folders = await getGlobFiles(globPattern, { dot: true });
+    const folders = fastglob.sync(globPattern, {
+      dot: true,
+      onlyDirectories: true,
+    });
     folders
       .filter((folder) => !folder.includes("node_modules"))
       .forEach((folder) => {
