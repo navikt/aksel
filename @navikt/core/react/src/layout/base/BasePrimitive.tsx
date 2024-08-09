@@ -180,6 +180,10 @@ export type PrimitiveProps = {
    * CSS `flex-grow`
    */
   flexGrow?: ResponsiveProp<string>;
+  /**
+   * CSS `grid-column`
+   */
+  gridColumn?: ResponsiveProp<string>;
 };
 
 export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
@@ -208,6 +212,7 @@ export const PRIMITIVE_PROPS: (keyof PrimitiveProps)[] = [
   "flexBasis",
   "flexGrow",
   "flexShrink",
+  "gridColumn",
 ];
 
 interface BasePrimitiveProps extends PrimitiveProps {
@@ -241,6 +246,7 @@ export const BasePrimitive = ({
   flexBasis,
   flexGrow,
   flexShrink,
+  gridColumn,
 }: BasePrimitiveProps) => {
   const style: React.CSSProperties = {
     /* Padding */
@@ -273,6 +279,8 @@ export const BasePrimitive = ({
     ...getResponsiveValue("r", "flex-basis", flexBasis),
     ...getResponsiveValue("r", "flex-grow", flexGrow),
     ...getResponsiveValue("r", "flex-shrink", flexShrink),
+    /* Grid */
+    ...getResponsiveValue("r", "grid-column", gridColumn),
   };
 
   return (
@@ -303,6 +311,7 @@ export const BasePrimitive = ({
         "navds-r-flex-basis": flexBasis,
         "navds-r-flex-grow": flexGrow,
         "navds-r-flex-shrink": flexShrink,
+        "navds-r-grid-column": gridColumn,
       })}
       style={style}
     >
