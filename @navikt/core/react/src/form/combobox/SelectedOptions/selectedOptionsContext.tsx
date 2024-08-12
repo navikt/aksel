@@ -51,7 +51,7 @@ const SelectedOptionsProvider = ({
   const [internalSelectedOptions, setSelectedOptions] = useState<
     ComboboxOption[]
   >([]);
-  const [isLimitReached, setIsLimitReached] = useState(false);
+  let isLimitReached = false;
   const selectedOptions = useMemo(
     () =>
       externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
@@ -106,7 +106,7 @@ const SelectedOptionsProvider = ({
     const nextIsLimitReached =
       (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
       (!isMultiSelect && selectedOptions.length > 0);
-    setIsLimitReached(nextIsLimitReached);
+    isLimitReached = nextIsLimitReached;
     setHideCaret(nextIsLimitReached);
   }, [maxSelected, selectedOptions, isMultiSelect, setHideCaret]);
 
