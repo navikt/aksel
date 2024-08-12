@@ -2,10 +2,14 @@ import { useState } from "react";
 import { SortState, Table } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-const Example = () => {
-  const [sort, setSort] = useState<SortState | undefined>();
+interface ScopedSortState extends SortState {
+  orderBy: keyof (typeof data)[0];
+}
 
-  const handleSort = (sortKey) => {
+const Example = () => {
+  const [sort, setSort] = useState<ScopedSortState | undefined>();
+
+  const handleSort = (sortKey: ScopedSortState["orderBy"]) => {
     setSort(
       sort && sortKey === sort.orderBy && sort.direction === "descending"
         ? undefined
@@ -19,15 +23,19 @@ const Example = () => {
     );
   };
 
-  const comparator = (a, b, orderBy) => {
-    if (b[orderBy] < a[orderBy] || b[orderBy] === undefined) {
+  function comparator<T>(a: T, b: T, orderBy: keyof T): number {
+    if (
+      b[orderBy] === null ||
+      b[orderBy] === undefined ||
+      b[orderBy] < a[orderBy]
+    ) {
       return -1;
     }
     if (b[orderBy] > a[orderBy]) {
       return 1;
     }
     return 0;
-  };
+  }
 
   const sortedData = data.slice().sort((a, b) => {
     if (sort) {
@@ -40,7 +48,12 @@ const Example = () => {
 
   return (
     <>
-      <Table sort={sort} onSortChange={(sortKey) => handleSort(sortKey)}>
+      <Table
+        sort={sort}
+        onSortChange={(sortKey) =>
+          handleSort(sortKey as unknown as ScopedSortState["orderBy"])
+        }
+      >
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeader sortKey="name" sortable>
