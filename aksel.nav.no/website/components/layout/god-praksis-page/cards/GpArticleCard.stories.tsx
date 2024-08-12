@@ -26,7 +26,7 @@ export const CompactSingle: Story = {
     innholdstype: "Testing",
     undertema: "WCAG",
     description: "",
-    publishedAt: "",
+    date: "",
   },
 };
 
@@ -63,7 +63,7 @@ export const ExpressiveSingle: Story = {
     undertema: "WCAG",
     description:
       "La brukeren sortere innholdet på en måte som er logisk for dem med kortsortering og UXtweak.",
-    publishedAt: "2021-01-01",
+    date: "2021-01-01",
   },
 };
 
@@ -91,7 +91,7 @@ export const ExpressiveMultiple = {
     undertema: "WCAG",
     description:
       "La brukeren sortere innholdet på en måte som er logisk for dem med kortsortering og UXtweak.",
-    publishedAt: "2021-01-01",
+    date: "2021-01-01",
   },
 };
 
@@ -101,7 +101,7 @@ export const ExpressiveNoDescription: Story = {
     children: title.long,
     innholdstype: "Testing",
     undertema: "WCAG",
-    publishedAt: "2021-01-01",
+    date: "2021-01-01",
   },
 };
 
@@ -111,7 +111,7 @@ export const ExpressiveLongDescription: Story = {
     children: title.long,
     innholdstype: "Testing",
     undertema: "WCAG",
-    publishedAt: "2021-01-01",
+    date: "2021-01-01",
     description:
       "This is a description that is very long and should be truncated to a reasonable length to fit the card layout. This is a description that is very long and should be truncated to a reasonable length to fit the card layout. This is a description that is very long and should be truncated to a reasonable length to fit the card layout. This is a description that is very long and should be truncated to a reasonable length to fit the card layout. This is a description that is very long and should be truncated to a reasonable length to fit the card layout. This is a description that is very long and should be truncated to a reasonable length to fit the card layout.",
   },
