@@ -47,9 +47,9 @@ export const komponentKategorier = [
 
 export const grunnleggendeKategorier = [
   { title: "Introduksjon", value: "introduksjon" },
+  { title: "Brand", value: "brand" },
   { title: "Styling", value: "styling" },
   { title: "Guider", value: "guider" },
-  { title: "Design", value: "design" },
   { title: "Kode", value: "kode" },
 ];
 
