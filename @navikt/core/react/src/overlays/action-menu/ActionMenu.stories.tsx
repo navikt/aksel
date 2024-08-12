@@ -756,6 +756,30 @@ export const ViewDemo: Story = {
   },
 };
 
+export const Links: Story = {
+  render: (props) => {
+    return (
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item as="a" href="#1">
+            Item 1
+          </ActionMenu.Item>
+          <ActionMenu.Item as="a" href="#2">
+            Item 2
+          </ActionMenu.Item>
+          <ActionMenu.Item as="a" href="#3">
+            Item 3
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
 export const Chromatic: Story = {
   render: (args, context) => {
     const newArgs = { ...args, open: true };
@@ -807,6 +831,10 @@ export const Chromatic: Story = {
         <div>
           <h2>Disabled</h2>
           {Disabled.render?.(newArgs, context)}
+        </div>
+        <div>
+          <h2>Links</h2>
+          {Links.render?.(newArgs, context)}
         </div>
       </VStack>
     );

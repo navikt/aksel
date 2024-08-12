@@ -3,7 +3,7 @@ import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
 import { Detail } from "../../typography";
-import { useId } from "../../util";
+import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
@@ -136,6 +136,12 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    *        Item 3
    *     </ActionMenu.Item>
    * </ActionMenu.Content>
+   * ```
+   * @example As link
+   * ```jsx
+   * <ActionMenu.Item as="a" href="#">
+   *     Item
+   * </ActionMenu.Item>
    * ```
    */
   Item: typeof ActionMenuItem;
@@ -540,23 +546,27 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   variant?: "danger";
 }
 
-const ActionMenuItem = forwardRef<ActionMenuItemElement, ActionMenuItemProps>(
+const ActionMenuItem: OverridableComponent<
+  ActionMenuItemProps,
+  ActionMenuItemElement
+> = forwardRef(
   (
-    { children, className, shortcut, variant, ...rest }: ActionMenuItemProps,
+    { children, as: Component = "div", className, shortcut, variant, ...rest },
     ref,
   ) => {
     return (
       <Menu.Item
-        ref={ref}
         {...rest}
-        asChild={false}
         className={cl("navds-action-menu__item", className, {
           "navds-action-menu__item--danger": variant === "danger",
         })}
         aria-keyshortcuts={shortcut ?? undefined}
+        asChild
       >
-        {children}
-        {shortcut && <Shortcut>{shortcut}</Shortcut>}
+        <Component ref={ref}>
+          {children}
+          {shortcut && <Shortcut>{shortcut}</Shortcut>}
+        </Component>
       </Menu.Item>
     );
   },

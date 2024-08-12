@@ -99,6 +99,8 @@
   scroll-margin-block: var(--__ac-action-menu-content-p);
   white-space: nowrap;
   line-height: 1.5;
+  color: var(--a-text-default);
+  text-decoration: none;
 }
 
 .navds-action-menu__item svg {
