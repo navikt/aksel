@@ -7,7 +7,7 @@ const Example = () => {
     "Du må velge en aldersgruppe før du kan gå videre.",
   );
   const handleChange = (val: string) => {
-    console.log(val);
+    console.info(val);
     setError("");
   };
 

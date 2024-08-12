@@ -6,7 +6,7 @@ const Example = () => {
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Aug 23 2025"),
     defaultSelected: new Date("Aug 28 2020"),
-    onMonthChange: console.log,
+    onMonthChange: console.info,
   });
 
   return (

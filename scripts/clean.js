@@ -38,13 +38,13 @@ function clean() {
     folders
       .filter((folder) => !folder.includes("node_modules"))
       .forEach((folder) => {
-        console.log(`Deleting folder ${folder}`);
+        console.info(`Deleting folder ${folder}`);
         deleteFolder(folder);
         deletedFoldersCount++;
       });
   }
 
-  console.log(`Deleted ${deletedFoldersCount} folders`);
+  console.info(`Deleted ${deletedFoldersCount} folders`);
 }
 
 clean();

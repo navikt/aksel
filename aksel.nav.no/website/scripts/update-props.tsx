@@ -30,7 +30,7 @@ async function updateProps() {
 
   await transactionClient
     .commit()
-    .then(() => console.log("Successfully updated prop-documentation"))
+    .then(() => console.info("Successfully updated prop-documentation"))
     .catch((e) => {
       throw new Error(e.message);
     });
@@ -47,15 +47,15 @@ async function updateProps() {
 
   await transactionClient
     .commit()
-    .then(() => console.log("Successfully deleted unused prop-documents"))
+    .then(() => console.info("Successfully deleted unused prop-documents"))
     .catch((e) => {
       /**
        * Errormessage includes all ids that failed.
        */
       deletedIds = deletedIds.filter((id) => e.message.includes(id));
 
-      console.log("\n");
-      console.log(
+      console.info("\n");
+      console.info(
         `Found ${deletedIds.length} prop definitions no longer documented.
     This could be caused by moving file-location of prop-definition, a namechange or simply not existing anymore.
 
@@ -64,7 +64,7 @@ async function updateProps() {
     - You will then be prompted to update referenced document before deleting.
     - After updating reference(s) and deleting document(s) there is no need to run the script again.`,
       );
-      console.log(
+      console.info(
         JSON.stringify(
           deletedIds.map(
             (x) =>

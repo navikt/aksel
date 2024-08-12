@@ -41,7 +41,7 @@ const transform = (src: any, type?: string) => {
   try {
     copy = JSON.parse(JSON.stringify(src));
   } catch (error) {
-    console.log(src);
+    console.info(src);
     throw new Error("Invalid data");
   }
 
@@ -54,7 +54,7 @@ const transform = (src: any, type?: string) => {
       default:
 
       throw new Error("Found type without transform!")
-        console.log(data);
+        console.info(data);
         break;
     } */
   });
@@ -111,7 +111,7 @@ const main = async () => {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
-    .then(() => console.log(`Updated!`))
+    .then(() => console.info(`Updated!`))
     .catch((e) => console.error(e.message)); */
 };
 

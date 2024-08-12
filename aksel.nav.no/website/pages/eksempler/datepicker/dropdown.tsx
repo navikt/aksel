@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <DatePicker.Standalone
-      onSelect={console.log}
+      onSelect={console.info}
       dropdownCaption
       fromDate={new Date("1 Oct 2020")}
       toDate={new Date("1 Oct 2024")}
