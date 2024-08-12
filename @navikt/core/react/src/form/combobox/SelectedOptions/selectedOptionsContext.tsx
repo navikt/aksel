@@ -51,7 +51,6 @@ const SelectedOptionsProvider = ({
   const [internalSelectedOptions, setSelectedOptions] = useState<
     ComboboxOption[]
   >([]);
-  let isLimitReached = false;
   const selectedOptions = useMemo(
     () =>
       externalSelectedOptions ?? [...customOptions, ...internalSelectedOptions],
@@ -102,13 +101,13 @@ const SelectedOptionsProvider = ({
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
+  const isLimitReached =
+    (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
+    (!isMultiSelect && selectedOptions.length > 0);
+
   useEffect(() => {
-    const nextIsLimitReached =
-      (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
-      (!isMultiSelect && selectedOptions.length > 0);
-    isLimitReached = nextIsLimitReached;
-    setHideCaret(nextIsLimitReached);
-  }, [maxSelected, selectedOptions, isMultiSelect, setHideCaret]);
+    setHideCaret(isLimitReached);
+  }, [selectedOptions, setHideCaret, isLimitReached]);
 
   const toggleOption = useCallback(
     (
