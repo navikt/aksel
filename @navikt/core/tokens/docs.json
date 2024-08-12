@@ -150,7 +150,7 @@
     { "name": "--a-green-100", "value": "rgba(204, 241, 214, 1)" },
     { "name": "--a-green-200", "value": "rgba(153, 222, 173, 1)" },
     { "name": "--a-green-300", "value": "rgba(102, 199, 134, 1)" },
-    { "name": "--a-green-400", "value": "rgba(51, 170, 95, 1)" },
+    { "name": "--a-green-400", "value": "rgba(42, 167, 88, 1)" },
     { "name": "--a-green-500", "value": "rgba(6, 137, 58, 1)" },
     { "name": "--a-green-600", "value": "rgba(0, 124, 46, 1)" },
     { "name": "--a-green-700", "value": "rgba(0, 106, 35, 1)" },
