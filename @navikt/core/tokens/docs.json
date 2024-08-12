@@ -442,7 +442,7 @@
     },
     {
       "name": "--a-data-surface-5",
-      "value": "rgba(51, 170, 95, 1)"
+      "value": "rgba(42, 167, 88, 1)"
     },
     {
       "name": "--a-data-surface-5-subtle",
@@ -476,7 +476,7 @@
     },
     {
       "name": "--a-data-border-5",
-      "value": "rgba(51, 170, 95, 1)"
+      "value": "rgba(42, 167, 88, 1)"
     },
     {
       "name": "--a-data-border-6",
