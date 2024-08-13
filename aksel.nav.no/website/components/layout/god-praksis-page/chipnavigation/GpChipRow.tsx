@@ -19,10 +19,10 @@ type GpChipRowProps = {
 export function GpChipRow({ type, entries }: GpChipRowProps) {
   const id = useId();
 
-  const { query, replace } = useRouter();
+  const { query, push } = useRouter();
 
   const reset = () => {
-    replace({ query: omit(query, [type]) }, undefined, {
+    push({ query: omit(query, [type]) }, undefined, {
       shallow: true,
     });
   };
@@ -30,7 +30,7 @@ export function GpChipRow({ type, entries }: GpChipRowProps) {
   const handleClick = (titleRaw: string) => {
     query[type] === titleRaw
       ? reset()
-      : replace({ query: { ...query, [type]: titleRaw } }, undefined, {
+      : push({ query: { ...query, [type]: titleRaw } }, undefined, {
           shallow: true,
         });
   };
