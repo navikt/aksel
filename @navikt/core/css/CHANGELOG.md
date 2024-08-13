@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 6.16.0
+
+### Minor Changes
+
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+### Patch Changes
+
+- FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+
+- Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+
 ## 6.15.0
 
 ## 6.14.0

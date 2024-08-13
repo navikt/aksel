@@ -1,5 +1,11 @@
 # @navikt/ds-tokens
 
+## 6.16.0
+
+### Patch Changes
+
+- Tokens: Adjusted Green 400 to comply with AA 3.00 contrast. ([#3091](https://github.com/navikt/aksel/pull/3091))
+
 ## 6.15.0
 
 ## 6.14.0

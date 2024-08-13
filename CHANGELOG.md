@@ -1,5 +1,23 @@
 # Changelog
 
+## 6.16
+
+### @navikt/ds-tokens
+
+- Tokens: Adjusted Green 400 to comply with AA 3.00 contrast. ([#3091](https://github.com/navikt/aksel/pull/3091))
+
+### @navikt/ds-react
+
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+### @navikt/ds-css
+
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+* FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+
+* Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+
 ## 6.15
 
 ### @navikt/ds-react

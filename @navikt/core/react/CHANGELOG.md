@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.16.0
+
+### Minor Changes
+
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+### Patch Changes
+
+- Updated dependencies [[`9e6808d31`](https://github.com/navikt/aksel/commit/9e6808d31fc2bdb60399b409ad7fe739d3da20d1)]:
+  - @navikt/ds-tokens@6.16.0
+  - @navikt/aksel-icons@6.16.0
+
 ## 6.15.0
 
 ### Patch Changes
