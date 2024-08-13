@@ -24,11 +24,7 @@ const Example = () => {
   };
 
   function comparator<T>(a: T, b: T, orderBy: keyof T): number {
-    if (
-      b[orderBy] === null ||
-      b[orderBy] === undefined ||
-      b[orderBy] < a[orderBy]
-    ) {
+    if (b[orderBy] == null || b[orderBy] < a[orderBy]) {
       return -1;
     }
     if (b[orderBy] > a[orderBy]) {
