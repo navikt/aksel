@@ -1,10 +1,8 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const router = useRouter();
-
   return (
     <ActionMenu defaultOpen>
       <ActionMenu.Trigger>
@@ -12,21 +10,17 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="See code for implementation">
-          <ActionMenu.Item onSelect={() => window.open("#")}>
+          <ActionMenu.Item as="a" href="#">
             With Window.open
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={() => router.push("#")}>
-            Nextjs Pages router
-          </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <Link href="#123" passHref legacyBehavior>
+            <ActionMenu.Item as="a">Nextjs Pages router</ActionMenu.Item>
+          </Link>
+          <ActionMenu.Item>
             Nextjs App router (see commented code)
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
-            React router (see commented code)
-          </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
-            Remix (see commented code)
-          </ActionMenu.Item>
+          <ActionMenu.Item>React router (see commented code)</ActionMenu.Item>
+          <ActionMenu.Item>Remix (see commented code)</ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
     </ActionMenu>
@@ -35,33 +29,21 @@ const Example = () => {
 
 /*
 
-'use client'
-import { useRouter } from 'next/navigation'
-const NextjsAppDirExample = () => {
-    const router = useRouter();
-    ...
-    <ActionMenu.Item onSelect={() => router.push("#")}>
-        Nextjs App router
-    </ActionMenu.Item>
-}
-
-import { useNavigate } from 'react-router-dom';
+import { Link as ReactRouterLink } from "react-router-dom";
 const ReactRouterExample = () => {
   const navigate = useNavigate();
   ...
-  <ActionMenu.Item onSelect={() => navigate("#")}>
+  <ActionMenu.Item as={ReactRouterLink} to="#">
       React Router
   </ActionMenu.Item>
 }
 
-import { useNavigate } from "@remix-run/react";
-const ReactRouterExample = () => {
-  const navigate = useNavigate();
-  ...
-  <ActionMenu.Item onSelect={() => navigate("#")}>
-      Remix
+import { Link as RemixLink } from "@remix-run/react";
+const RemixExample = () => (
+  <ActionMenu.Item as={RemixLink} to="#">
+      React Router
   </ActionMenu.Item>
-}
+);
 
 */
 
