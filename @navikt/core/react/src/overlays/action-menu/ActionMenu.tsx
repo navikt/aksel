@@ -2,7 +2,6 @@ import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Slot } from "../../slot/Slot";
-import { Detail } from "../../typography";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -502,6 +501,28 @@ const ActionMenuGroup = forwardRef<
   );
 });
 
+/* --------------------------- Utility-components --------------------------- */
+type MarkerProps = {
+  children: React.ReactNode;
+  className?: string;
+  placement: "left" | "right";
+};
+
+const Marker = ({ children, className, placement }: MarkerProps) => {
+  return (
+    <span
+      aria-hidden
+      className={cl(
+        className,
+        "navds-action-menu__marker",
+        `navds-action-menu__marker--${placement}`,
+      )}
+    >
+      {children}
+    </span>
+  );
+};
+
 type ShortcutProps = {
   children: string;
 };
@@ -519,11 +540,13 @@ const Shortcut = ({ children }: ShortcutProps) => {
     .filter((str) => str !== "");
 
   return (
-    <Detail aria-hidden as="div" className="navds-action-menu__shortcut">
+    <Marker placement="right">
       {parsed.map((char, index) => (
-        <span key={char + index}>{char}</span>
+        <span key={char + index} className="navds-action-menu__shortcut">
+          {char}
+        </span>
       ))}
-    </Detail>
+    </Marker>
   );
 };
 
@@ -544,6 +567,10 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
    * usefull for destructive actions like "delete"
    */
   variant?: "danger";
+  /**
+   *
+   */
+  icon?: React.ReactNode;
 }
 
 const ActionMenuItem: OverridableComponent<
@@ -551,7 +578,15 @@ const ActionMenuItem: OverridableComponent<
   ActionMenuItemElement
 > = forwardRef(
   (
-    { children, as: Component = "div", className, shortcut, variant, ...rest },
+    {
+      children,
+      as: Component = "div",
+      className,
+      icon,
+      shortcut,
+      variant,
+      ...rest
+    },
     ref,
   ) => {
     return (
@@ -559,12 +594,18 @@ const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("navds-action-menu__item", className, {
           "navds-action-menu__item--danger": variant === "danger",
+          "navds-action-menu--marker": icon,
         })}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
       >
         <Component ref={ref}>
           {children}
+          {icon && (
+            <Marker placement="left" className="navds-action-menu__marker-icon">
+              {icon}
+            </Marker>
+          )}
           {shortcut && <Shortcut>{shortcut}</Shortcut>}
         </Component>
       </Menu.Item>
@@ -621,78 +662,80 @@ const ActionMenuCheckboxItem = forwardRef<
         aria-keyshortcuts={shortcut ?? undefined}
       >
         {children}
-        <Menu.ItemIndicator className="navds-action-menu__indicator">
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
-            aria-hidden
-          >
-            <rect
-              width="24"
-              height="24"
-              rx="4"
-              fill="var(--a-border-default)"
-            />
-            <rect
-              x="1"
-              y="1"
-              width="22"
-              height="22"
-              rx="3"
-              fill="var(--a-surface-default)"
-              strokeWidth="2"
-            />
-          </svg>
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--indeterminate"
-            aria-hidden
-          >
-            <rect
-              width="24"
-              height="24"
-              rx="4"
-              fill="var(--a-surface-action-selected)"
-            />
-            <rect
-              x="6"
-              y="10"
-              width="12"
-              height="4"
-              rx="1"
-              fill="var(--a-surface-default)"
-            />
-          </svg>
+        <Marker placement="left">
+          <Menu.ItemIndicator className="navds-action-menu__indicator">
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
+              aria-hidden
+            >
+              <rect
+                width="24"
+                height="24"
+                rx="4"
+                fill="var(--a-border-default)"
+              />
+              <rect
+                x="1"
+                y="1"
+                width="22"
+                height="22"
+                rx="3"
+                fill="var(--a-surface-default)"
+                strokeWidth="2"
+              />
+            </svg>
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--indeterminate"
+              aria-hidden
+            >
+              <rect
+                width="24"
+                height="24"
+                rx="4"
+                fill="var(--a-surface-action-selected)"
+              />
+              <rect
+                x="6"
+                y="10"
+                width="12"
+                height="4"
+                rx="1"
+                fill="var(--a-surface-default)"
+              />
+            </svg>
 
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
-            aria-hidden
-          >
-            <rect
-              width="24"
-              height="24"
-              rx="4"
-              fill="var(--a-surface-action-selected)"
-            />
-            <path
-              d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-              fill="var(--a-surface-default)"
-            />
-          </svg>
-        </Menu.ItemIndicator>
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
+              aria-hidden
+            >
+              <rect
+                width="24"
+                height="24"
+                rx="4"
+                fill="var(--a-surface-action-selected)"
+              />
+              <path
+                d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
+                fill="var(--a-surface-default)"
+              />
+            </svg>
+          </Menu.ItemIndicator>
+        </Marker>
 
         {shortcut && <Shortcut>{shortcut}</Shortcut>}
       </Menu.CheckboxItem>
@@ -774,64 +817,66 @@ const ActionMenuRadioItem = forwardRef<
         )}
       >
         {children}
-        <Menu.ItemIndicator className="navds-action-menu__indicator">
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
-            aria-hidden
-          >
-            <rect
-              width="24"
-              height="24"
-              rx="12"
-              fill="var(--a-border-default)"
-            />
-            <rect
-              x="1"
-              y="1"
-              width="22"
-              height="22"
-              rx="11"
-              strokeWidth="2"
-              fill="var(--a-surface-default)"
-            />
-          </svg>
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
-            aria-hidden
-          >
-            <rect
-              x="1"
-              y="1"
-              width="22"
-              height="22"
-              rx="11"
-              fill="var(--a-surface-default)"
-            />
-            <rect
-              x="1"
-              y="1"
-              width="22"
-              height="22"
-              rx="11"
-              stroke="var(--a-surface-action-selected)"
-              strokeWidth="2"
-            />
-            <path
-              d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-              fill="var(--a-surface-action-selected)"
-            />
-          </svg>
-        </Menu.ItemIndicator>
+        <Marker placement="left">
+          <Menu.ItemIndicator className="navds-action-menu__indicator">
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
+              aria-hidden
+            >
+              <rect
+                width="24"
+                height="24"
+                rx="12"
+                fill="var(--a-border-default)"
+              />
+              <rect
+                x="1"
+                y="1"
+                width="22"
+                height="22"
+                rx="11"
+                strokeWidth="2"
+                fill="var(--a-surface-default)"
+              />
+            </svg>
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
+              aria-hidden
+            >
+              <rect
+                x="1"
+                y="1"
+                width="22"
+                height="22"
+                rx="11"
+                fill="var(--a-surface-default)"
+              />
+              <rect
+                x="1"
+                y="1"
+                width="22"
+                height="22"
+                rx="11"
+                stroke="var(--a-surface-action-selected)"
+                strokeWidth="2"
+              />
+              <path
+                d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+                fill="var(--a-surface-action-selected)"
+              />
+            </svg>
+          </Menu.ItemIndicator>
+        </Marker>
       </Menu.RadioItem>
     );
   },
@@ -902,12 +947,14 @@ type MenuSubTriggerProps = React.ComponentPropsWithoutRef<
   typeof Menu.SubTrigger
 >;
 interface ActionMenuSubTriggerProps
-  extends Omit<MenuSubTriggerProps, "asChild"> {}
+  extends Omit<MenuSubTriggerProps, "asChild"> {
+  icon?: React.ReactNode;
+}
 
 const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
->(({ children, className, ...rest }: ActionMenuSubTriggerProps, ref) => {
+>(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
   return (
     <Menu.SubTrigger
       ref={ref}
@@ -916,12 +963,20 @@ const ActionMenuSubTrigger = forwardRef<
       className={cl(
         "navds-action-menu__item navds-action-menu__sub-trigger",
         className,
+        { "navds-action-menu--marker": icon },
       )}
     >
       {children}
-      <div className="navds-action-menu__sub-trigger-icon">
+      {icon && (
+        <Marker placement="left" className="navds-action-menu__marker-icon">
+          {icon}
+        </Marker>
+      )}
+      <Marker placement="right" className="navds-action-menu__marker-icon">
         <ChevronRightIcon aria-hidden />
-      </div>
+      </Marker>
+      {/* <div className="navds-action-menu__sub-trigger-icon">
+      </div> */}
     </Menu.SubTrigger>
   );
 });
