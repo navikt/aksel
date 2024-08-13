@@ -5,7 +5,7 @@ import {
   PencilIcon,
   PlusIcon,
   PushPinIcon,
-  TasklistSendIcon,
+  StarIcon,
   TasklistStartIcon,
   TrashIcon,
 } from "@navikt/aksel-icons";
@@ -153,12 +153,14 @@ export const Shortcut: Story = {
             <ActionMenu.Item
               shortcut="⌘+T"
               onSelect={() => console.log("Item 1 clicked")}
+              icon={<StarIcon aria-hidden />}
             >
               Item 1
             </ActionMenu.Item>
             <ActionMenu.Item
               shortcut="⇧+⌘+N"
               onSelect={() => console.log("Item 2 clicked")}
+              icon={<PencilIcon aria-hidden />}
             >
               Item 2
             </ActionMenu.Item>
@@ -228,14 +230,12 @@ export const CheckboxGroups: Story = {
               checked={checkedItems.checkbox5}
               onCheckedChange={() => handleCheckboxChange("checkbox5")}
             >
-              <TasklistSendIcon aria-hidden />
               Checkbox 5
             </ActionMenu.CheckboxItem>
             <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox6}
               onCheckedChange={() => handleCheckboxChange("checkbox6")}
             >
-              <PencilIcon aria-hidden />
               Checkbox 6
             </ActionMenu.CheckboxItem>
           </ActionMenu.Group>
@@ -688,23 +688,30 @@ export const ViewDemo: Story = {
                   </ActionMenu.Trigger>
                   <ActionMenu.Content>
                     <ActionMenu.Group label="Dashboard">
-                      <ActionMenu.Item onSelect={() => console.log("Edit")}>
-                        <PlusIcon fontSize="20" /> Add to dashboard
+                      <ActionMenu.Item
+                        onSelect={() => console.log("Edit")}
+                        icon={<PlusIcon />}
+                      >
+                        Add to dashboard
                       </ActionMenu.Item>
-                      <ActionMenu.Item onSelect={() => console.log("Edit")}>
-                        <PushPinIcon fontSize="20" /> Pin task
+                      <ActionMenu.Item
+                        onSelect={() => console.log("Edit")}
+                        icon={<PushPinIcon />}
+                      >
+                        Pin task
                       </ActionMenu.Item>
                     </ActionMenu.Group>
 
                     <ActionMenu.Group label="Actions">
                       <ActionMenu.Item
                         onSelect={() => updateTaskStatus(id, "In progress")}
+                        icon={<TasklistStartIcon />}
                       >
-                        <TasklistStartIcon fontSize="20" /> Start task
+                        Start task
                       </ActionMenu.Item>
                       <ActionMenu.Sub>
-                        <ActionMenu.SubTrigger>
-                          <PencilIcon fontSize="20" /> Edit status
+                        <ActionMenu.SubTrigger icon={<PencilIcon />}>
+                          Edit status
                         </ActionMenu.SubTrigger>
                         <ActionMenu.SubContent>
                           {StatusArray.map((_status) => (
@@ -740,8 +747,8 @@ export const ViewDemo: Story = {
                         onSelect={() =>
                           setTasks(tasks.filter((_task) => _task.id !== id))
                         }
+                        icon={<TrashIcon />}
                       >
-                        <TrashIcon fontSize="20" />
                         Delete
                       </ActionMenu.Item>
                     </ActionMenu.Group>
@@ -754,6 +761,30 @@ export const ViewDemo: Story = {
       </Table>
     );
   },
+};
+
+export const Links: Story = {
+  render: (props) => {
+    return (
+      <ActionMenu open={props.open}>
+        <ActionMenu.Trigger>
+          <button>Open action</button>
+        </ActionMenu.Trigger>
+        <ActionMenu.Content>
+          <ActionMenu.Item as="a" href="#1">
+            Item 1
+          </ActionMenu.Item>
+          <ActionMenu.Item as="a" href="#2">
+            Item 2
+          </ActionMenu.Item>
+          <ActionMenu.Item as="a" href="#3">
+            Item 3
+          </ActionMenu.Item>
+        </ActionMenu.Content>
+      </ActionMenu>
+    );
+  },
+  decorators: [DemoDecorator],
 };
 
 export const Chromatic: Story = {
@@ -807,6 +838,10 @@ export const Chromatic: Story = {
         <div>
           <h2>Disabled</h2>
           {Disabled.render?.(newArgs, context)}
+        </div>
+        <div>
+          <h2>Links</h2>
+          {Links.render?.(newArgs, context)}
         </div>
       </VStack>
     );

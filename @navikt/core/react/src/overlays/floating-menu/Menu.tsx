@@ -510,6 +510,8 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
         } else {
           rootContext.onClose();
         }
+      } else if (!disabled && menuItem) {
+        rootContext.onClose();
       }
     };
 
