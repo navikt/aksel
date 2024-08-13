@@ -25,24 +25,35 @@ const Example = () => {
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Gosys">
-            <ActionMenu.Item onSelect={console.log}>
-              <PersonIcon aria-hidden fontSize="1.25rem" />
+            <ActionMenu.Item
+              onSelect={console.log}
+              icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
+            >
               Personoversikt
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.log}>
-              <PersonGroupIcon aria-hidden fontSize="1.25rem" />
+            <ActionMenu.Item
+              onSelect={console.log}
+              icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
+            >
               Arbeidsgiveroversikt
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.log}>
-              <HandshakeIcon aria-hidden fontSize="1.25rem" />
+            <ActionMenu.Item
+              onSelect={console.log}
+              icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
+            >
               Samhandlere
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.log} disabled>
-              <BarChartIcon aria-hidden fontSize="1.25rem" />
+            <ActionMenu.Item
+              onSelect={console.log}
+              disabled
+              icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
+            >
               Oppgavestatistikk
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={console.log}>
-              <MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />
+            <ActionMenu.Item
+              onSelect={console.log}
+              icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
+            >
               Søk journalpost
             </ActionMenu.Item>
           </ActionMenu.Group>

@@ -71,8 +71,11 @@ const Example = () => {
         </ActionMenu.Sub>
 
         <ActionMenu.Separator />
-        <ActionMenu.Item variant="danger" onSelect={console.log}>
-          <TrashIcon aria-hidden fontSize="1.25rem" />
+        <ActionMenu.Item
+          variant="danger"
+          onSelect={console.log}
+          icon={<TrashIcon aria-hidden fontSize="1.25rem" />}
+        >
           Slett oppgave
         </ActionMenu.Item>
       </ActionMenu.Content>

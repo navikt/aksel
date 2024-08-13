@@ -16,24 +16,39 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+P">
-            <PersonIcon aria-hidden fontSize="1.25rem" />
+          <ActionMenu.Item
+            onSelect={console.log}
+            shortcut="CTRL+P"
+            icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
+          >
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+A">
-            <PersonGroupIcon aria-hidden fontSize="1.25rem" />
+          <ActionMenu.Item
+            onSelect={console.log}
+            shortcut="CTRL+A"
+            icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
+          >
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+S">
-            <HandshakeIcon aria-hidden fontSize="1.25rem" />
+          <ActionMenu.Item
+            onSelect={console.log}
+            shortcut="CTRL+S"
+            icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
+          >
             Samhandlere
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+O">
-            <BarChartIcon aria-hidden fontSize="1.25rem" />
+          <ActionMenu.Item
+            onSelect={console.log}
+            shortcut="CTRL+O"
+            icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
+          >
             Oppgavestatistikk
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+K">
-            <MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />
+          <ActionMenu.Item
+            onSelect={console.log}
+            shortcut="CTRL+K"
+            icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
+          >
             Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
