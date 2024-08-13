@@ -2,4 +2,4 @@
 "@navikt/ds-tokens": patch
 ---
 
-Adjusted color token Green 400
+Tokens: Adjusted Green 400 to comply with AA 3.00 contrast.
