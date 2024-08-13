@@ -47,7 +47,7 @@ const Example = () => {
       <Table
         sort={sort}
         onSortChange={(sortKey) =>
-          handleSort(sortKey as unknown as ScopedSortState["orderBy"])
+          handleSort(sortKey as ScopedSortState["orderBy"])
         }
       >
         <Table.Header>
