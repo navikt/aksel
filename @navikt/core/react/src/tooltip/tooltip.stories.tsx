@@ -92,10 +92,10 @@ export const Keys = () => {
   return (
     <Tooltip
       content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. "
-      open={true}
       keys={["CMD", "I"]}
+      open={true}
     >
-      <div>Element</div>
+      <button tabIndex={0}>Element</button>
     </Tooltip>
   );
 };

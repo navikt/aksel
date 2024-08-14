@@ -200,7 +200,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        <Slot ref={refs.setReference} {...getReferenceProps()} {...labelProps}>
+        <Slot
+          ref={refs.setReference}
+          {...getReferenceProps()}
+          {...labelProps}
+          aria-keyshortcuts={keys ? keys.join("+") : undefined}
+        >
           {children}
         </Slot>
         <Portal rootElement={rootElement} asChild>
@@ -227,7 +232,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               {content}
               {keys && (
-                <span className="navds-tooltip__keys">
+                <span className="navds-tooltip__keys" aria-hidden>
                   {keys.map((key) => (
                     <Detail as="kbd" key={key} className="navds-tooltip__key">
                       {key}
