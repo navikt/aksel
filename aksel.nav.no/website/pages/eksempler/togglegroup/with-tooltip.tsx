@@ -9,23 +9,20 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.log}>
-      <Tooltip content="Uleste meldinger">
+      <Tooltip content="Uleste meldinger" describeChild>
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
         />
       </Tooltip>
-      <Tooltip content="Leste meldinger">
+      <Tooltip content="Leste meldinger" describeChild>
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
         />
       </Tooltip>
-      <Tooltip content="Sendte meldinger">
-        <ToggleGroup.Item
-          value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
-        />
+      <Tooltip content="Sendte meldinger" describeChild>
+        <ToggleGroup.Item value="sendt" icon={<PaperplaneIcon aria-hidden />} />
       </Tooltip>
     </ToggleGroup>
   );
@@ -41,4 +38,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
+  desc: "For ToggleGroup uten label med Tooltip bør du bruke 'describeChild'-prop på Tooltip.",
 };

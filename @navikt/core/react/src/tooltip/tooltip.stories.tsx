@@ -56,8 +56,9 @@ export const Default = (props) => {
       arrow={props?.arrow}
       delay={props?.delay}
       offset={props?.offset}
+      describeChild={props?.describeChild}
     >
-      <Button aria-describedby="test123">Tooltip</Button>
+      <Button>Tooltip</Button>
     </Tooltip>
   );
 };
@@ -65,6 +66,7 @@ Default.args = {
   keys: false,
   arrow: true,
   delay: 150,
+  describeChild: true,
 };
 
 export const Placement = () => {
