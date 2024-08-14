@@ -25,7 +25,7 @@ const Intro = ({ node, internal }: IntroProps) => {
           {internal && <ListItem icon>Bruk på interne flater</ListItem>}
           {node.brukes_til.map((x) => (
             <ListItem icon key={x}>
-              <TextWithMarkdownLink text={x} />
+              <TextWithMarkdownLink>{x}</TextWithMarkdownLink>
             </ListItem>
           ))}
         </List>
@@ -33,7 +33,7 @@ const Intro = ({ node, internal }: IntroProps) => {
           <List title="Uegnet til:">
             {node.brukes_ikke_til.map((x) => (
               <ListItem icon key={x}>
-                <TextWithMarkdownLink text={x} />
+                <TextWithMarkdownLink>{x}</TextWithMarkdownLink>
               </ListItem>
             ))}
           </List>

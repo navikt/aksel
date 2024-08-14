@@ -131,7 +131,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         >
           {fil?.description && (
             <BodyLong className="mb-2">
-              <TextWithMarkdownLink text={fil.description} />
+              <TextWithMarkdownLink>{fil.description}</TextWithMarkdownLink>
             </BodyLong>
           )}
 
