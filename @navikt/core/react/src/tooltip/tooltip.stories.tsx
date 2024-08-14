@@ -46,7 +46,7 @@ export const Default = (props) => {
       arrow={props?.arrow}
       delay={props?.delay}
       offset={props?.offset}
-      describeChild={props?.describeChild}
+      describesChild={props?.describesChild}
     >
       <Button>Tooltip</Button>
     </Tooltip>
@@ -56,7 +56,7 @@ Default.args = {
   keys: false,
   arrow: true,
   delay: 150,
-  describeChild: true,
+  describesChild: true,
 };
 
 export const Placement = () => {

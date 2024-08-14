@@ -87,7 +87,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * Important: This will default to false in future major-versions
    * @default true
    */
-  describeChild?: boolean;
+  describesChild?: boolean;
 }
 
 /**
@@ -119,7 +119,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       keys,
       maxChar = 80,
-      describeChild = true,
+      describesChild = true,
       ...rest
     },
     ref,
@@ -192,7 +192,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         );
     }
 
-    const labelProps = describeChild
+    const labelProps = describesChild
       ? _open
         ? { "aria-describedby": ariaId }
         : { title: content }
