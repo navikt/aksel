@@ -241,6 +241,38 @@ const data = [
   },
 ];
 
+export const ExpandableButtonBleed = () => {
+  return (
+    <div style={{ background: "red" }}>
+      <Table zebraStripes>
+        <Table.Header style={{ background: "white" }}>
+          <Table.Row>
+            {columns.map(({ key, name }) => (
+              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+            ))}
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body style={{ background: "white" }}>
+          {data.map((row, i) => (
+            <Table.ExpandableRow
+              expansionDisabled={row.animal === "Sel"}
+              content={row.content}
+              key={row.name}
+              togglePlacement="right"
+              defaultOpen={i === 3}
+            >
+              {columns.map(({ key }) => (
+                <Table.DataCell key={key}>{row[key]}</Table.DataCell>
+              ))}
+            </Table.ExpandableRow>
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  );
+};
+
 export const ClickableRow = () => {
   const [isRowOpen1, setIsRowOpen1] = useState(false);
   const [isRowOpen2, setIsRowOpen2] = useState(false);

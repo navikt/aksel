@@ -176,9 +176,16 @@
 }
 
 .navds-table__toggle-expand-cell {
-  padding: 0 var(--a-spacing-2);
+  padding: 0;
+  width: 3rem;
+}
+
+.navds-table__toggle-expand-cell > .navds-table__toggle-expand-wrapper {
   position: relative;
-  width: 2.5rem;
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
 }
 
 .navds-table--large .navds-table__toggle-expand-cell {
@@ -211,7 +218,10 @@
   background-color: var(--a-surface-hover);
 }
 
-.navds-table__toggle-expand-cell--open > :where(.navds-table__toggle-expand-button) :where(.navds-table__expandable-icon) {
+.navds-table__toggle-expand-cell--open
+  > .navds-table__toggle-expand-wrapper
+  > :where(.navds-table__toggle-expand-button)
+  :where(.navds-table__expandable-icon) {
   transform: translateY(0) rotate(180deg);
 }
 
@@ -219,7 +229,10 @@
   transform: translateY(1px);
 }
 
-.navds-table__toggle-expand-cell--open > .navds-table__toggle-expand-button:hover > :where(.navds-table__expandable-icon) {
+.navds-table__toggle-expand-cell--open
+  > .navds-table__toggle-expand-wrapper
+  > .navds-table__toggle-expand-button:hover
+  > :where(.navds-table__expandable-icon) {
   transform: translateY(-1px) rotate(180deg);
 }
 

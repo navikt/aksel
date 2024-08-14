@@ -114,18 +114,20 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             })}
           >
             {!expansionDisabled && (
-              <button
-                className="navds-table__toggle-expand-button"
-                type="button"
-                aria-controls={id}
-                aria-expanded={_open}
-                onClick={expansionHandler}
-              >
-                <ChevronDownIcon
-                  className="navds-table__expandable-icon"
-                  title={_open ? "Vis mindre" : "Vis mer"}
-                />
-              </button>
+              <div className="navds-table__toggle-expand-wrapper">
+                <button
+                  className="navds-table__toggle-expand-button"
+                  type="button"
+                  aria-controls={id}
+                  aria-expanded={_open}
+                  onClick={expansionHandler}
+                >
+                  <ChevronDownIcon
+                    className="navds-table__expandable-icon"
+                    title={_open ? "Vis mindre" : "Vis mer"}
+                  />
+                </button>
+              </div>
             )}
           </DataCell>
           {togglePlacement === "left" && children}
