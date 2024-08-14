@@ -5,7 +5,7 @@ import AkselLink from "@/web/AkselLink";
  * Splits a string into text and links,
  * and returns an array of React elements.
  */
-function markdownLink(input: string) {
+const TextWithMarkdownLink: React.FC<{ text: string }> = ({ text: input }) => {
   const regex = /\[([^\]]+)\]\(([^\s)]+)\)/g;
   let lastIndex = 0;
   const elements: React.ReactNode[] = [];
@@ -28,7 +28,7 @@ function markdownLink(input: string) {
     elements.push(input.slice(lastIndex));
   }
 
-  return elements;
-}
+  return <>{elements}</>;
+};
 
-export { markdownLink };
+export { TextWithMarkdownLink };
