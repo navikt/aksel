@@ -30,12 +30,6 @@ export default {
   },
 } satisfies Meta<typeof Tooltip>;
 
-export const Demo = () => (
-  <Tooltip content="Tooltip example">
-    <Button aria-describedby="test123">Tooltip</Button>
-  </Tooltip>
-);
-
 export const Default = (props) => {
   return (
     <Tooltip
