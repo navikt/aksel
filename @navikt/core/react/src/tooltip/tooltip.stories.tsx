@@ -1,8 +1,6 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Alert } from "../alert";
 import { Button } from "../button";
-import { Search } from "../form/search";
 import { VStack } from "../layout/stack";
 import Tooltip from "./Tooltip";
 
@@ -33,17 +31,9 @@ export default {
 } satisfies Meta<typeof Tooltip>;
 
 export const Demo = () => (
-  <div>
-    <Tooltip content="Tooltip example" placement="top">
-      <Alert variant="info">test</Alert>
-    </Tooltip>
-    <Tooltip content="Tooltip example" placement="top">
-      <Search label="søk" />
-    </Tooltip>
-    <Tooltip content="Tooltip example" placement="top">
-      <Button aria-describedby="test123">Tooltip</Button>
-    </Tooltip>
-  </div>
+  <Tooltip content="Tooltip example">
+    <Button aria-describedby="test123">Tooltip</Button>
+  </Tooltip>
 );
 
 export const Default = (props) => {
