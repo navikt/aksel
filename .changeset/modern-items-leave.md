@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Table: Fixed background-clipping when using ExapandableRow
+Table: Fixed background-clipping when using ExpandableRow.
