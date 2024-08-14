@@ -25,5 +25,9 @@ export function extractMetadata(
     "utf-8",
   );
 
-  return JSON5.parse(metadata);
+  try {
+    return JSON5.parse(metadata);
+  } catch (e) {
+    console.error(`Could not parse JSON5 in ${dirName}`);
+  }
 }
