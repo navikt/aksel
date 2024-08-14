@@ -79,7 +79,7 @@ export const Keys = () => {
       keys={["CMD", "I"]}
       open={true}
     >
-      <button tabIndex={0}>Element</button>
+      <button>Element</button>
     </Tooltip>
   );
 };
