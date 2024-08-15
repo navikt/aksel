@@ -32,7 +32,7 @@ const DownloadBlock = ({ node }: DownloadBlockProps) => {
   return (
     <section
       aria-labelledby={id}
-      className="mb-12 flex gap-2 rounded-lg bg-pink-100 px-6 py-4 ring-1 ring-inset ring-pink-300"
+      className="mb-12 flex max-w-2xl gap-2 rounded-lg bg-pink-100 px-6 py-4 ring-1 ring-inset ring-pink-300"
     >
       <span className="-mt-[1px] grid h-[1.625rem] shrink-0 place-content-center text-2xl">
         <DownloadIcon aria-hidden />
