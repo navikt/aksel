@@ -78,7 +78,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           const selectedValue =
             allowNewValues && isValueNew
               ? { label: value, value }
-              : filteredOptions[0];
+              : filteredOptionsUtil.getFirstValueStartingWith(
+                  value,
+                  filteredOptions,
+                ) || filteredOptions[0];
 
           if (!selectedValue) {
             return;
