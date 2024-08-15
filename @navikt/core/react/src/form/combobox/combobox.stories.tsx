@@ -27,11 +27,13 @@ const options = [
   "grape",
   "kiwi",
   "mango",
+  "mangosteen",
+  "mango pie",
   "passion fruit",
   "pineapple",
   "strawberry",
   "watermelon",
-  "grape fruit",
+  "grapefruit",
 ];
 
 export const Default: StoryFunction = (props) => (

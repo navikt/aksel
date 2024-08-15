@@ -10,10 +10,8 @@ const getMatchingValuesFromList = (value: string, list: ComboboxOption[]) =>
   list.filter((listItem) => isPartOfText(value, listItem.label));
 
 const getFirstValueStartingWith = (text: string, list: ComboboxOption[]) => {
-  const lowercasedText =
-    typeof text === "string" ? text.toLocaleLowerCase() : "";
   return list.find((listItem) =>
-    normalizeText(listItem.label).startsWith(lowercasedText),
+    normalizeText(listItem.label).startsWith(text.toLocaleLowerCase()),
   );
 };
 
