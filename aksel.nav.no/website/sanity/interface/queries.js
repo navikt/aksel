@@ -16,7 +16,7 @@ const alert = `_type == "alert" =>{
   }
 }`;
 
-const downloadBlock = `_type == "attachment" =>{
+const attachment = `_type == "attachment" =>{
   ...,
   "downloadLink": asset->url,
   "size": asset->size,
@@ -161,7 +161,7 @@ const tokenRef = `_type == "token_ref"=>@->`;
 
 export const destructureBlocks = `
 ${alert},
-${downloadBlock},
+${attachment},
 ${tips},
 ${tokenRef},
 ${markDef},
