@@ -18,7 +18,7 @@ export const Aksel: Story = {
       body: getBlocks({ length: 1 }),
       downloadLink: "#",
       fileName: "NAV logopakke digitale flater.zip",
-      size: "4KB",
+      size: "4321",
     },
   },
   decorators: [AkselTheme],
