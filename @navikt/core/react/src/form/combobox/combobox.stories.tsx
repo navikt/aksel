@@ -35,7 +35,11 @@ const options = [
 ];
 
 export const Default: StoryFunction = (props) => (
-  <UNSAFE_Combobox {...props} id="combobox" />
+  <UNSAFE_Combobox
+    {...props}
+    maxSelected={{ limit: Number(props.maxSelected) }}
+    id="combobox"
+  />
 );
 
 Default.args = {
