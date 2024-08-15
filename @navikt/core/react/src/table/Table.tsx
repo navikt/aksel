@@ -29,7 +29,7 @@ export interface TableProps
   /**
    * Callback whens sort state changes
    */
-  onSortChange?: (sortKey?: string) => void;
+  onSortChange?: (sortKey: string) => void;
 }
 
 export interface TableType
