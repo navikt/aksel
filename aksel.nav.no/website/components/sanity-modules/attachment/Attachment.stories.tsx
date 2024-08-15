@@ -16,7 +16,7 @@ export const Aksel: Story = {
     node: {
       title: "NAV-logo (for digitale flater)",
       body: getBlocks({ length: 1 }),
-      downloadLink: "#",
+      downloadLink: "1234.zip",
       fileName: "NAV logopakke digitale flater",
       size: "4321",
     },

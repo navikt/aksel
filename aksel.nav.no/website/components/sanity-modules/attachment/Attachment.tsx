@@ -17,13 +17,7 @@ type AttachmentProps = {
 const Attachment = ({ node }: AttachmentProps) => {
   const id = useId();
 
-  if (
-    !node.body ||
-    !node.title ||
-    !node.downloadLink ||
-    !node.fileName ||
-    !node.size
-  ) {
+  if (!node.title || !node.downloadLink || !node.fileName || !node.size) {
     return null;
   }
 
@@ -41,11 +35,13 @@ const Attachment = ({ node }: AttachmentProps) => {
         <Heading size="small" level="2" id={id} aria-hidden>
           {node.title}
         </Heading>
-        <SanityBlockContent blocks={node.body} className="mt-2" />
+        {node.body && (
+          <SanityBlockContent blocks={node.body} className="mt-2" />
+        )}
 
         <Link
           href={`${node.downloadLink}?dl=${node.fileName}.${filetype}`}
-          className="mt-2 text-lg text-blue-700"
+          className="mt-2 text-lg"
           rel="noreferrer noopener"
           download={node.fileName}
         >
