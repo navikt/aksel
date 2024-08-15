@@ -60,7 +60,7 @@ const DownloadBlock = ({ node }: DownloadBlockProps) => {
 function bytesToSize(bytes: number) {
   const units = ["byte", "kilobyte", "megabyte"];
   const unit = Math.floor(Math.log(bytes) / Math.log(1024));
-  return new Intl.NumberFormat("en", {
+  return new Intl.NumberFormat("nb-NO", {
     style: "unit",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
