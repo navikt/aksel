@@ -17,7 +17,6 @@ type DownloadBlockProps = {
 const DownloadBlock = ({ node }: DownloadBlockProps) => {
   const id = useId();
 
-  console.log(node);
   if (
     !node.body ||
     !node.title ||
