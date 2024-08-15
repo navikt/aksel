@@ -3,4 +3,4 @@
 "@navikt/aksel": patch
 ---
 
-:adhesive_bandage: Placeholder goes away when value added
+:adhesive_bandage: Combobox: Placeholder goes away when an option is selected
