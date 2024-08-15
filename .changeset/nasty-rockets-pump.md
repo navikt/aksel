@@ -2,4 +2,4 @@
 "@navikt/aksel": patch
 ---
 
-bump jscodeshift-add-imports to 1.0.11
+Aksel-CLI: Bump jscodeshift-add-imports to 1.0.11.
