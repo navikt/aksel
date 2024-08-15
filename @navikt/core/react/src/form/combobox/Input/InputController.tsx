@@ -34,6 +34,7 @@ export const InputController = forwardRef<
     toggleListButtonLabel,
     inputClassName,
     shouldShowSelectedOptions = true,
+    placeholder,
     ...rest
   } = props;
 
@@ -65,6 +66,7 @@ export const InputController = forwardRef<
           id={inputProps.id}
           ref={mergedInputRef}
           inputClassName={inputClassName}
+          placeholder={selectedOptions.length ? "" : placeholder}
           {...rest}
         />
       ) : (
@@ -74,6 +76,7 @@ export const InputController = forwardRef<
             ref={mergedInputRef}
             inputClassName={inputClassName}
             shouldShowSelectedOptions={shouldShowSelectedOptions}
+            placeholder={selectedOptions.length ? "" : placeholder}
             {...rest}
           />
         </SelectedOptions>

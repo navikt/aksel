@@ -51,6 +51,9 @@ Default.argTypes = {
   description: {
     control: { type: "text" },
   },
+  placeholder: {
+    control: { type: "text" },
+  },
   disabled: {
     control: { type: "boolean" },
   },
