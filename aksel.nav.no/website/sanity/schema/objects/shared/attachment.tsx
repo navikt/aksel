@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { DownloadIcon } from "@navikt/aksel-icons";
 
-export const DownloadBlock = defineType({
+export const Attachment = defineType({
   title: "Vedlegg med nedlastning",
   name: "attachment",
   type: "file",

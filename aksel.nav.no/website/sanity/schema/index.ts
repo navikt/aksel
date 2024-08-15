@@ -60,7 +60,7 @@ export const schema: SchemaPluginOptions = {
     object.ExpansionCard,
     object.Tips,
     object.UnikSidemodul,
-    object.DownloadBlock,
+    object.Attachment,
 
     /* Riktekst */
     object.RiktekstKomponent,
