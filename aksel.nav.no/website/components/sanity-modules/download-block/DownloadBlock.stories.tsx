@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AkselTheme, getBlocks } from "@/sb-util";
-import DownloadsBlock from "./Downloads";
+import DownloadBlock from "./DownloadBlock";
 
 const meta = {
-  title: "Sanity-modules/DownloadsBlock",
-  component: DownloadsBlock,
+  title: "Sanity-modules/DownloadBlock",
+  component: DownloadBlock,
   tags: ["autodocs"],
-} satisfies Meta<typeof DownloadsBlock>;
+} satisfies Meta<typeof DownloadBlock>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -15,9 +15,10 @@ export const Aksel: Story = {
   args: {
     node: {
       title: "NAV-logo (for digitale flater)",
-      content: getBlocks({}),
+      body: getBlocks({ length: 1 }),
       downloadLink: "#",
       fileName: "NAV logopakke digitale flater.zip",
+      size: "4KB",
     },
   },
   decorators: [AkselTheme],
