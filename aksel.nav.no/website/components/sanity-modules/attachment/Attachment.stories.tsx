@@ -23,3 +23,15 @@ export const Aksel: Story = {
   },
   decorators: [AkselTheme],
 };
+
+export const NoBody: Story = {
+  args: {
+    node: {
+      title: "NAV-logo (for digitale flater)",
+      downloadLink: "1234.zip",
+      fileName: "NAV logopakke digitale flater",
+      size: "4321",
+    },
+  },
+  decorators: [AkselTheme],
+};
