@@ -3,7 +3,7 @@ import { DownloadIcon } from "@navikt/aksel-icons";
 
 export const DownloadBlock = defineType({
   title: "Vedlegg med nedlastning",
-  name: "download_block",
+  name: "attachment",
   type: "file",
   icon: DownloadIcon,
   fields: [

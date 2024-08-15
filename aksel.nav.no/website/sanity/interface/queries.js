@@ -16,7 +16,7 @@ const alert = `_type == "alert" =>{
   }
 }`;
 
-const downloadBlock = `_type == "download_block" =>{
+const downloadBlock = `_type == "attachment" =>{
   ...,
   "downloadLink": asset->url,
   "size": asset->size,

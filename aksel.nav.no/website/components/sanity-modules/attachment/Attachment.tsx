@@ -4,7 +4,7 @@ import { Heading, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 
-type DownloadBlockProps = {
+type AttachmentProps = {
   node: {
     title?: string;
     body?: any[];
@@ -14,7 +14,7 @@ type DownloadBlockProps = {
   };
 };
 
-const DownloadBlock = ({ node }: DownloadBlockProps) => {
+const Attachment = ({ node }: AttachmentProps) => {
   const id = useId();
 
   if (
@@ -69,10 +69,10 @@ function bytesToSize(bytes: number) {
   }).format(bytes / 1024 ** unit);
 }
 
-export default function Component(props: DownloadBlockProps) {
+export default function Component(props: AttachmentProps) {
   return (
-    <ErrorBoundary boundaryName="DownloadBlock">
-      <DownloadBlock {...props} />
+    <ErrorBoundary boundaryName="Attachment">
+      <Attachment {...props} />
     </ErrorBoundary>
   );
 }
