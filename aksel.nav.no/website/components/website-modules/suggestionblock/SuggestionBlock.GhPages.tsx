@@ -16,9 +16,9 @@ export const SuggestionBlockGhPages = ({
           Samarbeid
         </Heading>
         <BodyLong className="mt-2">
-          Malen er klar til bruk. Når du har fått prøvd den og høstet erfaringer
-          ønsker vi å lære av din innsikt. Delta i diskusjonen og bli med på å
-          forbedre malen.
+          Retningslinjene er klar til bruk. Når du har fått prøvd den og høstet
+          erfaringer ønsker vi å lære av din innsikt. Delta i diskusjonen og bli
+          med på å forbedre de.
         </BodyLong>
         <Button
           variant="secondary-neutral"
