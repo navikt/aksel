@@ -33,7 +33,26 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
-    "no-console": ["warn", { allow: ["info", "warn", "error"] }],
+    "no-console": [
+      "warn",
+      {
+        allow: [
+          "info",
+          "warn",
+          "error",
+          "group",
+          "groupEnd",
+          "table",
+          "assert",
+          "countReset",
+          "count",
+          "dir",
+          "time",
+          "timeEnd",
+          "timeStamp",
+        ],
+      },
+    ],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
@@ -133,5 +152,6 @@ module.exports = {
     "dist",
     "**/codemod/**/*.js",
     "!.storybook",
+    "**/playwright-report/**",
   ],
 };
