@@ -29,10 +29,11 @@ export const Designsystem: Story = {
             index: 1,
             sandboxBase64: "fakebase64",
             sandboxEnabled: true,
+            description:
+              "Tekst før lenke [Aksel-lenke](https://aksel.nav.no/) tekst etter lenke.",
           },
           {
             _key: getKey(),
-            description: "Testdescription",
             innhold:
               'import { Button } from "@navikt/ds-react";\n\nconst Example = () => {\n  return (\n    <div className="flex flex-wrap gap-2">\n      <Button variant="primary-neutral">Primary</Button>\n      <Button variant="secondary-neutral">Secondary</Button>\n      <Button variant="tertiary-neutral">Tertiary</Button>\n    </div>\n  );\n};',
             navn: "neutral",
