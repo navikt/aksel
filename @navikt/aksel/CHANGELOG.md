@@ -1,5 +1,14 @@
 # @navikt/aksel
 
+## 6.16.1
+
+### Patch Changes
+
+- Aksel-CLI: Bump jscodeshift-add-imports to 1.0.11. ([#3099](https://github.com/navikt/aksel/pull/3099))
+
+- Updated dependencies [[`8ce364ec3`](https://github.com/navikt/aksel/commit/8ce364ec39bceaca80973e1a059e58d477499a8c)]:
+  - @navikt/ds-css@6.16.1
+
 ## 6.16.0
 
 ### Patch Changes
