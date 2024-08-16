@@ -39,7 +39,7 @@
     "figlet": "1.6.0",
     "is-git-clean": "1.1.0",
     "jscodeshift": "^0.15.1",
-    "jscodeshift-add-imports": "1.0.10",
+    "jscodeshift-add-imports": "1.0.11",
     "lodash": "4.17.21",
     "react-scanner": "^1.1.0"
   },
