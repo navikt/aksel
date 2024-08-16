@@ -3589,7 +3589,7 @@ __metadata:
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
     "@navikt/ds-css": "npm:6.16.0"
-    axios: "npm:1.6.0"
+    axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
@@ -3598,7 +3598,7 @@ __metadata:
     figlet: "npm:1.6.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:^0.15.1"
-    jscodeshift-add-imports: "npm:1.0.10"
+    jscodeshift-add-imports: "npm:1.0.11"
     lodash: "npm:4.17.21"
     react-scanner: "npm:^1.1.0"
     rimraf: "npm:6.0.1"
@@ -8279,14 +8279,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.0":
-  version: 1.6.0
-  resolution: "axios@npm:1.6.0"
+"axios@npm:1.7.4":
+  version: 1.7.4
+  resolution: "axios@npm:1.7.4"
   dependencies:
-    follow-redirects: "npm:^1.15.0"
+    follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/f069d938a05d2293e27c7cd6f0c08a1cb764f7cc43a1e637572f8d5928837ecd735890ad67a867d696094ee4b8b4dfdb3727a57aae600845e4c295581cb32f9a
+  checksum: 10/7a1429be1e3d0c2e1b96d4bba4d113efbfabc7c724bed107beb535c782c7bea447ff634886b0c7c43395a264d085450d009eb1154b5f38a8bae49d469fdcbc61
   languageName: node
   linkType: hard
 
@@ -13213,7 +13213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
@@ -16111,15 +16111,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jscodeshift-add-imports@npm:1.0.10":
-  version: 1.0.10
-  resolution: "jscodeshift-add-imports@npm:1.0.10"
+"jscodeshift-add-imports@npm:1.0.11":
+  version: 1.0.11
+  resolution: "jscodeshift-add-imports@npm:1.0.11"
   dependencies:
     "@babel/traverse": "npm:^7.4.5"
     jscodeshift-find-imports: "npm:^2.0.2"
   peerDependencies:
-    jscodeshift: ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
-  checksum: 10/da502e351e8b541f62e6cc6a8b953b153fe8ad2055bbf875ff238b204f6b48a1701bdf6e8e9536bbfc7e699f52f1af539cdb0dbdd899e0608a7fdf8e3c66bbee
+    jscodeshift: ">=0.7 <1"
+  checksum: 10/c50ce72c722b24fa4535ed7bca6f2b17b5ecaa4fa579f1411bdf6cf05b6d2f2c1f1de3d7e35bc1d4d03ae09228afc3dac64fac87b39044c814c6438513d00123
   languageName: node
   linkType: hard
 
