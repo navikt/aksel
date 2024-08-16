@@ -94,12 +94,6 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       !expansionDisabled && expandOnRowClick && onRowClick(e);
     };
 
-    const handleCellClick = (
-      e: React.MouseEvent<HTMLTableCellElement, MouseEvent>,
-    ) => {
-      expansionHandler(e);
-    };
-
     return (
       <>
         <Row
@@ -118,7 +112,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             className={cl("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
-            onClick={handleCellClick}
+            onClick={expansionHandler}
           >
             {!expansionDisabled && (
               <button
