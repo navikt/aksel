@@ -142,7 +142,7 @@ const FilteredOptionsProvider = ({
       }
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
-    [virtualFocus, isInternalListOpen, setHideCaret],
+    [virtualFocus, maxSelected, isInternalListOpen, setHideCaret],
   );
 
   const isValueNew = useMemo(
