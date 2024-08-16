@@ -16,9 +16,9 @@ export const SuggestionBlockGhPages = ({
           Samarbeid
         </Heading>
         <BodyLong className="mt-2">
-          Retningslinjene er klar til bruk. Når du har fått prøvd den og høstet
+          Retningslinjene er klare til bruk. Når du har fått prøvd dem og høstet
           erfaringer ønsker vi å lære av din innsikt. Delta i diskusjonen og bli
-          med på å forbedre de.
+          med på å forbedre retningslinjene.
         </BodyLong>
         <Button
           variant="secondary-neutral"
