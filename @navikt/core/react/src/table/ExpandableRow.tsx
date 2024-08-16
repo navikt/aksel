@@ -94,6 +94,12 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       !expansionDisabled && expandOnRowClick && onRowClick(e);
     };
 
+    const handleCellClick = (
+      e: React.MouseEvent<HTMLTableCellElement, MouseEvent>,
+    ) => {
+      expansionHandler(e);
+    };
+
     return (
       <>
         <Row
@@ -112,22 +118,21 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             className={cl("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
+            onClick={handleCellClick}
           >
             {!expansionDisabled && (
-              <div className="navds-table__toggle-expand-wrapper">
-                <button
-                  className="navds-table__toggle-expand-button"
-                  type="button"
-                  aria-controls={id}
-                  aria-expanded={_open}
-                  onClick={expansionHandler}
-                >
-                  <ChevronDownIcon
-                    className="navds-table__expandable-icon"
-                    title={_open ? "Vis mindre" : "Vis mer"}
-                  />
-                </button>
-              </div>
+              <button
+                className="navds-table__toggle-expand-button"
+                type="button"
+                aria-controls={id}
+                aria-expanded={_open}
+                onClick={expansionHandler}
+              >
+                <ChevronDownIcon
+                  className="navds-table__expandable-icon"
+                  title={_open ? "Vis mindre" : "Vis mer"}
+                />
+              </button>
             )}
           </DataCell>
           {togglePlacement === "left" && children}
