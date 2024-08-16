@@ -101,7 +101,6 @@ const useVirtualFocus = (
     }
     const currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
     const newIndex = Math.max(currentIndex - numberOfElements, 0);
-    console.log(`Moving focus from index ${currentIndex} to ${newIndex}`);
     _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "start");
   };
 
@@ -114,7 +113,6 @@ const useVirtualFocus = (
       currentIndex + numberOfElements,
       elementsAbleToReceiveFocus.length - 1,
     );
-    console.log(`Moving focus from index ${currentIndex} to ${newIndex}`);
     _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "end");
   };
 
