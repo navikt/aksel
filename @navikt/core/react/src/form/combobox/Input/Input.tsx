@@ -233,6 +233,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        placeholder={selectedOptions.length ? undefined : rest.placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",

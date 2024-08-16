@@ -16,6 +16,16 @@ const alert = `_type == "alert" =>{
   }
 }`;
 
+const attachment = `_type == "attachment" =>{
+  ...,
+  "downloadLink": asset->url,
+  "size": asset->size,
+  body[]{
+    ...,
+    ${markDef}
+  }
+}`;
+
 const tips = `_type == "tips" =>{
   ...,
   body[]{
@@ -151,6 +161,7 @@ const tokenRef = `_type == "token_ref"=>@->`;
 
 export const destructureBlocks = `
 ${alert},
+${attachment},
 ${tips},
 ${tokenRef},
 ${markDef},
