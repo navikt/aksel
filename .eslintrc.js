@@ -33,7 +33,7 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
-    "no-console": ["warn", { allow: ["info", "warn", "error"] }],
+    "no-console": ["error", { allow: ["info", "warn", "error"] }],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
