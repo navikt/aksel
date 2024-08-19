@@ -156,7 +156,6 @@ const App = () => {
                         {sub.icons.map((i) => {
                           const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
                           if (T === undefined) {
-                            console.info(i);
                             return null;
                           }
                           return (
