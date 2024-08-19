@@ -56,6 +56,7 @@ export const grunnleggendeKategorier = [
 export const templatesKategorier = [
   { title: "Støtte", value: "stotte" },
   { title: "Søknadsdialog", value: "soknadsdialog" },
+  { title: "Skjemavalidering", value: "skjemavalidering" },
 ];
 
 export const bloggKategorier = [
