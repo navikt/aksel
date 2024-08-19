@@ -53,7 +53,6 @@ export const fetchIcon = async (url) => {
   return await fetch(url)
     .then((x) => x.text())
     .catch((e) => {
-      console.info("Error fetching icon: ", e.message);
       throw e.message;
     });
 };
