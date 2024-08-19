@@ -10,7 +10,6 @@ export const hashString = (str: string) => {
 
 export const amplitudeFetchJSON = async (chart_id: string) => {
   const url = `https://reops-proxy.intern.nav.no/amplitude/100002016/api/3/chart/${chart_id}/query`;
-  console.info({ url });
   return await fetch(url)
     .then((res) => res.json())
     .catch((e) => {
