@@ -20,7 +20,7 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, ...rest }, ref) => {
+  ({ inputClassName, placeholder, ...rest }, ref) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -241,7 +241,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           `navds-body-short--${size}`,
           { "navds-combobox__input--hide-caret": hideCaret },
         )}
-        placeholder={!selectedOptions.length ? rest.placeholder : undefined}
+        placeholder={!selectedOptions.length ? placeholder : undefined}
       />
     );
   },
