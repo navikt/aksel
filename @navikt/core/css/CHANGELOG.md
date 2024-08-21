@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.16.1
+
+### Patch Changes
+
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
 ## 6.16.0
 
 ### Minor Changes

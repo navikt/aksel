@@ -8,15 +8,27 @@
 
 ### @navikt/ds-react
 
-- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+- Table: Corrected the type of onSortChange ([#3103](https://github.com/navikt/aksel/pull/3103))
+
+- :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
+
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
+* Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
 
 ### @navikt/ds-css
 
-- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
 
-* FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+* Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
 
-* Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+- FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+
+- Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+
+### @navikt/aksel
+
+- Aksel-CLI: Bump jscodeshift-add-imports to 1.0.11. ([#3099](https://github.com/navikt/aksel/pull/3099))
 
 ## 6.15
 
