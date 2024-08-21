@@ -4,81 +4,77 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div style={{ background: "var(--a-gray-50)", padding: "20rem" }}>
-      <ActionMenu defaultOpen>
-        <ActionMenu.Trigger>
-          <Button
-            variant="tertiary-neutral"
-            icon={<MenuElipsisHorizontalCircleIcon title="Saksmeny" />}
-            size="small"
-          />
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Group label="Sak #1234">
-            <ActionMenu.Item onSelect={console.log}>Ta sak</ActionMenu.Item>
-            <ActionMenu.Sub>
-              <ActionMenu.SubTrigger>Endre kategori</ActionMenu.SubTrigger>
-              <ActionMenu.SubContent>
+    <ActionMenu defaultOpen>
+      <ActionMenu.Trigger>
+        <Button
+          variant="secondary-neutral"
+          icon={<MenuElipsisHorizontalCircleIcon title="Saksmeny" />}
+          size="small"
+        />
+      </ActionMenu.Trigger>
+      <ActionMenu.Content>
+        <ActionMenu.Group label="Sak #1234">
+          <ActionMenu.Item onSelect={console.log}>Ta sak</ActionMenu.Item>
+          <ActionMenu.Sub>
+            <ActionMenu.SubTrigger>Endre kategori</ActionMenu.SubTrigger>
+            <ActionMenu.SubContent>
+              <ActionMenu.Item onSelect={console.log}>
+                Venter på svar fra NAV
+              </ActionMenu.Item>
+              <ActionMenu.Item onSelect={console.log}>
+                Venter på svar fra bruker
+              </ActionMenu.Item>
+              <ActionMenu.Sub>
+                <ActionMenu.SubTrigger>Møte avtalt</ActionMenu.SubTrigger>
+                <ActionMenu.SubContent>
+                  <ActionMenu.Group label="Når er møtet">
+                    <ActionMenu.Item onSelect={console.log}>
+                      I dag
+                    </ActionMenu.Item>
+                    <ActionMenu.Item onSelect={console.log}>
+                      I morgen
+                    </ActionMenu.Item>
+                    <ActionMenu.Item onSelect={console.log}>
+                      Om en uke
+                    </ActionMenu.Item>
+                  </ActionMenu.Group>
+                </ActionMenu.SubContent>
+              </ActionMenu.Sub>
+            </ActionMenu.SubContent>
+          </ActionMenu.Sub>
+          <ActionMenu.Sub>
+            <ActionMenu.SubTrigger>Tildel saksbehandler</ActionMenu.SubTrigger>
+            <ActionMenu.SubContent>
+              <ActionMenu.Group label="Saksbehandlere">
                 <ActionMenu.Item onSelect={console.log}>
-                  Venter på svar fra NAV
+                  Ola Normann
                 </ActionMenu.Item>
                 <ActionMenu.Item onSelect={console.log}>
-                  Venter på svar fra bruker
+                  Bo Ramberg
                 </ActionMenu.Item>
-                <ActionMenu.Sub>
-                  <ActionMenu.SubTrigger>Møte avtalt</ActionMenu.SubTrigger>
-                  <ActionMenu.SubContent>
-                    <ActionMenu.Group label="Når er møtet">
-                      <ActionMenu.Item onSelect={console.log}>
-                        I dag
-                      </ActionMenu.Item>
-                      <ActionMenu.Item onSelect={console.log}>
-                        I morgen
-                      </ActionMenu.Item>
-                      <ActionMenu.Item onSelect={console.log}>
-                        Om en uke
-                      </ActionMenu.Item>
-                    </ActionMenu.Group>
-                  </ActionMenu.SubContent>
-                </ActionMenu.Sub>
-              </ActionMenu.SubContent>
-            </ActionMenu.Sub>
-            <ActionMenu.Sub>
-              <ActionMenu.SubTrigger>
-                Tildel saksbehandler
-              </ActionMenu.SubTrigger>
-              <ActionMenu.SubContent>
-                <ActionMenu.Group label="Saksbehandlere">
-                  <ActionMenu.Item onSelect={console.log}>
-                    Ola Normann
-                  </ActionMenu.Item>
-                  <ActionMenu.Item onSelect={console.log}>
-                    Bo Ramberg
-                  </ActionMenu.Item>
-                  <ActionMenu.Item onSelect={console.log} disabled>
-                    Ole Olsen
-                  </ActionMenu.Item>
-                  <ActionMenu.Item onSelect={console.log} disabled>
-                    Janne Nilssen
-                  </ActionMenu.Item>
-                  <ActionMenu.Item onSelect={console.log}>
-                    Karin Jakobsen
-                  </ActionMenu.Item>
-                  <ActionMenu.Item onSelect={console.log}>
-                    Kari Nordmann
-                  </ActionMenu.Item>
-                </ActionMenu.Group>
-              </ActionMenu.SubContent>
-            </ActionMenu.Sub>
+                <ActionMenu.Item onSelect={console.log} disabled>
+                  Ole Olsen
+                </ActionMenu.Item>
+                <ActionMenu.Item onSelect={console.log} disabled>
+                  Janne Nilssen
+                </ActionMenu.Item>
+                <ActionMenu.Item onSelect={console.log}>
+                  Karin Jakobsen
+                </ActionMenu.Item>
+                <ActionMenu.Item onSelect={console.log}>
+                  Kari Nordmann
+                </ActionMenu.Item>
+              </ActionMenu.Group>
+            </ActionMenu.SubContent>
+          </ActionMenu.Sub>
 
-            <ActionMenu.Separator />
-            <ActionMenu.Item variant="danger" onSelect={console.log}>
-              Slett oppgave
-            </ActionMenu.Item>
-          </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    </div>
+          <ActionMenu.Separator />
+          <ActionMenu.Item variant="danger" onSelect={console.log}>
+            Slett oppgave
+          </ActionMenu.Item>
+        </ActionMenu.Group>
+      </ActionMenu.Content>
+    </ActionMenu>
   );
 };
 
