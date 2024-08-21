@@ -1,10 +1,3 @@
-import {
-  BarChartIcon,
-  HandshakeIcon,
-  MagnifyingGlassIcon,
-  PersonGroupIcon,
-  PersonIcon,
-} from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -16,39 +9,19 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item
-            onSelect={console.log}
-            shortcut="CTRL+P"
-            icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+P">
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.log}
-            shortcut="CTRL+A"
-            icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+A">
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.log}
-            shortcut="CTRL+S"
-            icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+S">
             Samhandlere
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.log}
-            shortcut="CTRL+O"
-            icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+O">
             Oppgavestatistikk
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.log}
-            shortcut="CTRL+K"
-            icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+K">
             Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
