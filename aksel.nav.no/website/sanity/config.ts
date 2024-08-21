@@ -54,6 +54,7 @@ export const grunnleggendeKategorier = [
 ];
 
 export const templatesKategorier = [
+  { title: "Brev", value: "brev" },
   { title: "Støtte", value: "stotte" },
   { title: "Søknadsdialog", value: "soknadsdialog" },
   { title: "Skjemavalidering", value: "skjemavalidering" },
