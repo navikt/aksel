@@ -84,8 +84,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * When false, Tooltip labels the element, and child-elements content will be ignored by screen-readers.
    * When true, content is added as additional information to the child element.
-   * Important: This will default to false in future major-versions
-   * @default true
+   * @default false
    */
   describesChild?: boolean;
 }
@@ -119,7 +118,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       keys,
       maxChar = 80,
-      describesChild = true,
+      describesChild = false,
       ...rest
     },
     ref,

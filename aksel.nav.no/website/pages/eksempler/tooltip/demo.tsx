@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Tooltip content="Skriv ut dokument" describesChild>
+    <Tooltip content="Skriv ut dokument">
       <Button icon={<PrinterLargeIcon aria-hidden />} />
     </Tooltip>
   );

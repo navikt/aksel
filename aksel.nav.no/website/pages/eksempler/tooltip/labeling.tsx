@@ -5,10 +5,10 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <HStack gap="4">
-      <Tooltip content="Skriv ut dokument" describesChild={false}>
+      <Tooltip content="Skriv ut dokument">
         <Button icon={<PrinterLargeIcon aria-hidden />} />
       </Tooltip>
-      <Tooltip content="Skriv ut dokument">
+      <Tooltip content="Skriv ut dokument" describesChild>
         <Button>Skriv ut</Button>
       </Tooltip>
     </HStack>
@@ -25,5 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Hvis Tooltip er eneste form for tekstlig beskrivelse, bør du sette 'describeChild' til 'false'. Tooltip content blir da satt som 'aria-label' og f.eks. knappen vil oppleves likt for hjelpemidler som for seende brukere.",
+  desc: "Hvis tooltip ikke er eneste form for tekstlig beskrivelse, kan du sette 'describeChild' til 'true'. Tooltip content blir da satt som 'title' (lukket) og 'aria-describedby' (åpen).",
 };

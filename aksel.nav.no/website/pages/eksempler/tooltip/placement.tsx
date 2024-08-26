@@ -10,16 +10,16 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <div className="grid gap-4">
-      <Tooltip content="Skriv ut dokument" describesChild>
+      <Tooltip content="Skriv ut dokument">
         <Button icon={<ArrowUpIcon aria-hidden />} />
       </Tooltip>
-      <Tooltip content="Skriv ut dokument" placement="right" describesChild>
+      <Tooltip content="Skriv ut dokument" placement="right">
         <Button icon={<ArrowRightIcon aria-hidden />} />
       </Tooltip>
-      <Tooltip content="Skriv ut dokument" placement="bottom" describesChild>
+      <Tooltip content="Skriv ut dokument" placement="bottom">
         <Button icon={<ArrowDownIcon aria-hidden />} />
       </Tooltip>
-      <Tooltip content="Skriv ut dokument" placement="left" describesChild>
+      <Tooltip content="Skriv ut dokument" placement="left">
         <Button icon={<ArrowLeftIcon aria-hidden />} />
       </Tooltip>
     </div>
