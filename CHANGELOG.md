@@ -18,13 +18,15 @@
 
 ### @navikt/ds-css
 
-- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+- Font: Reverted change introduced in v6.14 where font locations were changed. This caused a regression where every preload-instance to old font locations no longer worked. ([#3114](https://github.com/navikt/aksel/pull/3114))
 
-* Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+* Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
 
-- FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
 
-- Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+* FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+
+* Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
 
 ### @navikt/aksel
 
