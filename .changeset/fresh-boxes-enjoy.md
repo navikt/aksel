@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-:lipstick: update when the caret stops blinking (combobox)
+Combobox: :lipstick: hide caret on select
