@@ -12,9 +12,6 @@ module.exports = {
       active: 'active~="true"',
     },
     extend: {
-      screens: {
-        "2xl": "1440px",
-      },
       colors: {
         "aksel-heading": "var(--a-deepblue-800)",
         pink: {
