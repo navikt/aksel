@@ -16,7 +16,7 @@ const Example = () => (
     <VStack gap="6">
       <UNSAFE_FileUpload.Dropzone
         label="Last opp bilder"
-        onSelect={console.log}
+        onSelect={console.info}
       />
       <div>
         <Heading level="3" size="xsmall" spacing>

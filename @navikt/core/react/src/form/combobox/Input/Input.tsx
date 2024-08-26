@@ -16,11 +16,12 @@ interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "disabled"> {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
+  shouldShowSelectedOptions?: boolean;
   value?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, placeholder, ...rest }, ref) => {
+  ({ inputClassName, shouldShowSelectedOptions, placeholder, ...rest }, ref) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -131,7 +132,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
         if (e.key === "Backspace") {
-          if (value === "") {
+          if (value === "" && shouldShowSelectedOptions) {
             const lastSelectedOption =
               selectedOptions[selectedOptions.length - 1];
             if (lastSelectedOption) {
@@ -194,6 +195,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         virtualFocus,
         setValue,
         searchTerm,
+        shouldShowSelectedOptions,
       ],
     );
 
@@ -234,6 +236,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        placeholder={selectedOptions.length ? undefined : rest.placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",

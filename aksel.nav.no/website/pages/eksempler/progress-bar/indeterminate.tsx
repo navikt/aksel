@@ -11,7 +11,7 @@ const Example = () => {
         simulated={{
           seconds: 6,
           onTimeout: () => {
-            console.log("Ferdig!");
+            console.info("Ferdig!");
             setIsIndeterminate(true);
           },
         }}

@@ -1,5 +1,19 @@
 # @navikt/aksel-icons
 
+## 6.16.2
+
+## 6.16.1
+
+## 6.16.0
+
+## 6.15.0
+
+### Minor Changes
+
+- Icons: New icon-series for 'SplitHorizontal' and 'SplitVertical' ([#3072](https://github.com/navikt/aksel/pull/3072))
+
+## 6.14.0
+
 ## 6.13.0
 
 ## 6.12.0

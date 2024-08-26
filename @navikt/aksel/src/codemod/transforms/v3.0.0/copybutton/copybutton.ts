@@ -60,7 +60,7 @@ export default function transformer(file, api) {
           );
         } else {
           flagged = true;
-          console.log(
+          console.info(
             chalk.yellow(
               `\n\nWarning: Detected advanced children-type!\nCodemod can't convert into "text" prop so you will need to update this manually.`,
             ),

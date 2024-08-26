@@ -19,7 +19,7 @@ export async function inquiry(answers: AnswersT, questions: any[]) {
     })
     .catch((error) => {
       if (error.isTtyError) {
-        console.log(
+        console.info(
           "Oops, something went wrong! Looks like @navikt/aksel-cli can't run in this terminal. Contact Aksel",
         );
       } else {

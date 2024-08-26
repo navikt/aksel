@@ -12,7 +12,7 @@ const Example = () => {
     <DatePicker.Standalone
       today={new Date("Oct 9 2022")}
       disabled={disabledDays}
-      onSelect={console.log}
+      onSelect={console.info}
     />
   );
 };

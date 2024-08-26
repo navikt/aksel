@@ -34,7 +34,7 @@ export function validateGit(options: any, program: Command) {
     return;
   }
   if (options.force) {
-    console.log(chalk.yellow("Forcing migration without git check"));
+    console.info(chalk.yellow("Forcing migration without git check"));
     return;
   }
 

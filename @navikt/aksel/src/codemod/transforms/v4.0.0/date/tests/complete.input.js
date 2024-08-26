@@ -1,9 +1,9 @@
 import {
-  UNSAFE_useDatepicker,
-  UNSAFE_DatePicker,
-  UNSAFE_useRangeDatepicker,
-  UNSAFE_MonthPicker,
   UNSAFE_useMonthpicker as DsUnsafeUseMonthpicker,
+  UNSAFE_DatePicker,
+  UNSAFE_MonthPicker,
+  UNSAFE_useDatepicker,
+  UNSAFE_useRangeDatepicker,
 } from "@navikt/ds-react";
 
 /* eslint-disable react/jsx-no-undef */
@@ -11,7 +11,7 @@ export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Feb 23 2024"),
-    onDateChange: console.log,
+    onDateChange: console.info,
   });
 
   return (
@@ -27,8 +27,8 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      onRangeChange: console.log,
-      onValidate: console.log,
+      onRangeChange: console.info,
+      onValidate: console.info,
     });
 
   return (
@@ -46,14 +46,14 @@ export const UseRangedDatepicker = () => {
 export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
-    onMonthChange: console.log,
+    onMonthChange: console.info,
     fromDate: new Date("Jan 1 2022"),
     toDate: new Date("Sep 27 2025"),
   });
 
   const {} = UNSAFE_useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
-    onMonthChange: console.log,
+    onMonthChange: console.info,
     fromDate: new Date("Jan 1 2022"),
     toDate: new Date("Sep 27 2025"),
   });
