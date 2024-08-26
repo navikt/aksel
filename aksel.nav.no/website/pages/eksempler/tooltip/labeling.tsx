@@ -25,5 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Hvis Tooltip er eneste form for tekstlig beskrivelse, bør du sette 'describeChild' til 'false'. Tooltip content blir da satt som 'aria-label' og f.eks. knappen vil oppleves likt for hjelpemidler som for seende brukere.",
+  desc: "Hvis Tooltip er eneste form for tekstlig beskrivelse, bør du sette 'describesChild' til 'false'. Tooltip content blir da satt som 'aria-label' og f.eks. knappen vil oppleves likt for hjelpemidler som for seende brukere.",
 };
