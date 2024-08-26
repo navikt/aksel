@@ -5,7 +5,7 @@ import { SanityBlockContent } from "@/sanity-block";
 type ExpansionCardProps = {
   node: {
     heading: string;
-    heading_level: "h3" | "h4";
+    heading_level: "h2" | "h3" | "h4";
     description?: string;
     body: any[];
   };
@@ -16,6 +16,12 @@ const ExpansionCard = ({ node }: ExpansionCardProps) => {
     return null;
   }
 
+  const cardSize = {
+    h2: "large",
+    h3: "medium",
+    h4: "small",
+  } as const;
+
   return (
     <DsExpansionCard
       id="aksel-expansioncard"
@@ -25,7 +31,8 @@ const ExpansionCard = ({ node }: ExpansionCardProps) => {
       <DsExpansionCard.Header>
         <DsExpansionCard.Title
           as={node.heading_level}
-          size={node.heading_level === "h3" ? "medium" : "small"}
+          size={cardSize[node.heading_level]}
+          className="text-aksel-heading"
         >
           {node.heading}
         </DsExpansionCard.Title>

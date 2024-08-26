@@ -22,7 +22,7 @@ class CustomComponent extends HTMLElement {
 const DateWrapper = () => {
   const { datepickerProps, inputProps, selectedDay } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
-    onDateChange: console.log,
+    onDateChange: console.info,
   });
 
   return (

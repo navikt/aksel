@@ -5,7 +5,7 @@ const Example = () => (
   <VStack gap="12">
     <UNSAFE_FileUpload.Dropzone
       label="Last opp filer"
-      onSelect={console.log}
+      onSelect={console.info}
       error="Du må laste opp en fil"
     />
 

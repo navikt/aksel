@@ -17,7 +17,7 @@
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -vv -pA run test",
-    "lint": "yarn eslint --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
+    "lint": "yarn eslint --max-warnings=0 --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
     "create-version": "changeset version && yarn changelog",
@@ -63,10 +63,10 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "*.js": "eslint",
-    "*.jsx": "eslint",
-    "*.ts": "eslint",
-    "*.tsx": "eslint",
+    "*.js": "eslint --max-warnings=0",
+    "*.jsx": "eslint --max-warnings=0",
+    "*.ts": "eslint --max-warnings=0",
+    "*.tsx": "eslint --max-warnings=0",
     "*.css": "stylelint",
     "*": "prettier --write --ignore-unknown"
   },

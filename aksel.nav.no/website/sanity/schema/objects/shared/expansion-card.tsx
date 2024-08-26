@@ -5,7 +5,7 @@ export type ExpansionCardT = {
   _key: string;
   _type: "expansioncard";
   heading: string;
-  heading_level: "h3" | "h4";
+  heading_level: "h2" | "h3" | "h4";
   description?: string;
   body: any[];
 };
@@ -33,6 +33,7 @@ export const ExpansionCard = defineType({
       validation: (Rule) => Rule.required(),
       options: {
         list: [
+          { value: "h2", title: "H2" },
           { value: "h3", title: "H3" },
           { value: "h4", title: "H4" },
         ],

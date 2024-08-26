@@ -31,7 +31,7 @@ const main = async () => {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
-    .then((a) => console.log(`Updated! \n${JSON.stringify(a, null, 2)}`))
+    .then((a) => console.info(`Updated! \n${JSON.stringify(a, null, 2)}`))
     .catch((e) => console.error(e.message));
 };
 

@@ -2,8 +2,8 @@ import chalk from "chalk";
 import figlet from "figlet";
 
 export function helpCommand() {
-  console.log(figlet.textSync("Aksel CLI"));
-  console.log(`
+  console.info(figlet.textSync("Aksel CLI"));
+  console.info(`
 📝 Documentation
    - ${chalk.blueBright(
      "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
