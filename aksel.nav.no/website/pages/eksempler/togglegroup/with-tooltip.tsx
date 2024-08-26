@@ -9,19 +9,19 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <ToggleGroup defaultValue="lest" onChange={console.info}>
-      <Tooltip content="Uleste meldinger" describesChild>
+      <Tooltip content="Uleste meldinger">
         <ToggleGroup.Item
           value="ulest"
           icon={<EnvelopeClosedIcon aria-hidden />}
         />
       </Tooltip>
-      <Tooltip content="Leste meldinger" describesChild>
+      <Tooltip content="Leste meldinger">
         <ToggleGroup.Item
           value="lest"
           icon={<EnvelopeOpenIcon aria-hidden />}
         />
       </Tooltip>
-      <Tooltip content="Sendte meldinger" describesChild>
+      <Tooltip content="Sendte meldinger">
         <ToggleGroup.Item value="sendt" icon={<PaperplaneIcon aria-hidden />} />
       </Tooltip>
     </ToggleGroup>
