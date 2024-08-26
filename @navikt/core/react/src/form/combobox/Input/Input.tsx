@@ -21,7 +21,10 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, shouldShowSelectedOptions, placeholder, ...rest }, ref) => {
+  (
+    { inputClassName, shouldShowSelectedOptions, placeholder, ...rest },
+    ref,
+  ) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -236,7 +239,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
-        placeholder={selectedOptions.length ? undefined : rest.placeholder}
+        placeholder={selectedOptions.length ? undefined : placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",
@@ -244,7 +247,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           `navds-body-short--${size}`,
           { "navds-combobox__input--hide-caret": hideCaret },
         )}
-        placeholder={!selectedOptions.length ? placeholder : undefined}
       />
     );
   },
