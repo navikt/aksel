@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.16.2
+
+### Patch Changes
+
+- Font: Reverted change introduced in v6.14 where font locations were changed. This caused a regression where every preload-instance to old font locations no longer worked. ([#3114](https://github.com/navikt/aksel/pull/3114))
+
 ## 6.16.1
 
 ### Patch Changes
