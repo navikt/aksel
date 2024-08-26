@@ -54,13 +54,13 @@ ${imports.join("\n")}
   }
 
   if (answers.output.includes("print")) {
-    console.log(chalk.bold.cyan(`\nImports 🚀 \n`));
-    console.log(chalk.green(`${importStr}`));
+    console.info(chalk.bold.cyan(`\nImports 🚀 \n`));
+    console.info(chalk.green(`${importStr}`));
   }
 
   if (useCdn) {
-    console.log(chalk.bold.underline.cyan(`\nNotes on CDN-usage 📝`));
-    console.log(
+    console.info(chalk.bold.underline.cyan(`\nNotes on CDN-usage 📝`));
+    console.info(
       `We recommend using Static imports, then uploading the your bundled static-files to your own CDN-instance.
 ✔︎ This allows you to control the version of the CSS-files with package.json, and avoids desync between ds-react/ds-css.
 ✔︎ Remember to add 'https://cdn.nav.no' to your applications CSP!`,
@@ -68,8 +68,8 @@ ${imports.join("\n")}
   }
 
   if (useTailwind) {
-    console.log(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
-    console.log(
+    console.info(chalk.bold.underline.cyan(`\nNotes on Tailwind-use 📝`));
+    console.info(
       `When using tailwind with Aksel, you will need to add the postcss plugin ${chalk.cyan(
         "postcss-import",
       )}
@@ -79,8 +79,8 @@ ${imports.join("\n")}
   }
 
   if (answers.layers === "yes") {
-    console.log(chalk.bold.underline.cyan(`\nNotes on Layers 📝`));
-    console.log(
+    console.info(chalk.bold.underline.cyan(`\nNotes on Layers 📝`));
+    console.info(
       `Layers is not yet supported in Safari <= 15.3. (https://caniuse.com/css-cascade-layers)`,
     );
   }

@@ -5,13 +5,13 @@ const Example = () => (
   <VStack gap="12">
     <UNSAFE_FileUpload.Dropzone
       label="Last opp filer"
-      onSelect={console.log}
+      onSelect={console.info}
       disabled
     />
 
     <UNSAFE_FileUpload.Dropzone
       label="Last opp filer"
-      onSelect={console.log}
+      onSelect={console.info}
       fileLimit={{ max: 1, current: 1 }}
     />
   </VStack>

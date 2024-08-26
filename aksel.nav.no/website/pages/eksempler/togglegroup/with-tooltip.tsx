@@ -8,7 +8,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log}>
+    <ToggleGroup defaultValue="lest" onChange={console.info}>
       <Tooltip content="Uleste meldinger">
         <ToggleGroup.Item
           value="ulest"

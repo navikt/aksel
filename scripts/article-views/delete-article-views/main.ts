@@ -42,4 +42,4 @@ document_ids.forEach(async (doc) => {
   await transactionClient.delete(doc);
 });
 const res_commit = await transactionClient.commit({ dryRun: false });
-console.log({ res_commit });
+console.info({ res_commit });

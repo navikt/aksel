@@ -33,7 +33,7 @@ async function main() {
 
   mkdirSync(iconFolder);
 
-  console.log(`Laster ned ${Object.keys(images).length} ikoner`);
+  console.info(`Laster ned ${Object.keys(images).length} ikoner`);
 
   for (const [key, value] of Object.entries(images)) {
     const icon = await fetchIcon(value).catch((e) => {
@@ -59,7 +59,7 @@ async function main() {
     }
   });
 
-  console.log(`Success! ${Object.keys(images).length} ikoner lastet ned`);
+  console.info(`Success! ${Object.keys(images).length} ikoner lastet ned`);
 }
 
 main();

@@ -9,7 +9,7 @@ const Example = () => {
         className="self-center px-5"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("Search!");
+          console.info("Search!");
         }}
       >
         <Search

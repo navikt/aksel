@@ -9,7 +9,7 @@ const Example = () => {
     toDate: new Date("Aug 23 2025"),
     onValidate: (val) => {
       setHasError(!val.isValidMonth);
-      console.log(val);
+      console.info(val);
     },
   });
 

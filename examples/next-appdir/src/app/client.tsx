@@ -4,9 +4,9 @@ import { ExpansionCard } from "@navikt/ds-react";
 import { omit, useClientLayoutEffect } from "@navikt/ds-react/Utils";
 
 export const ClientComponent = () => {
-  console.log({ omit: omit({ test: "value" }, ["test"]) });
+  console.info({ omit: omit({ test: "value" }, ["test"]) });
   useClientLayoutEffect(() => {
-    console.log("mounted in client-component");
+    console.info("mounted in client-component");
   }, []);
 
   return (
