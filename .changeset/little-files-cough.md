@@ -1,5 +1,5 @@
 ---
-"@navikt/ds-react": minor
+"@navikt/ds-react": major
 ---
 
-Tooltip: New prop 'desribeChild' to better handle elements with no visible labels.
+Tooltip: :boom: Updated labeling of items inside Tooltip. See migrations for how to update. TODO: Insert link here.
