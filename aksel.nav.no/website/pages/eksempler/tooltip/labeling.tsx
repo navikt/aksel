@@ -25,5 +25,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "Hvis tooltip ikke er eneste form for tekstlig beskrivelse, kan du sette 'describeChild' til 'true'. Tooltip content blir da satt som 'title' (lukket) og 'aria-describedby' (åpen).",
+  desc: "Hvis tooltip ikke er eneste form for tekstlig beskrivelse, kan du sette 'describesChild' til 'true'. Tooltip content blir da satt som 'title' (lukket) og 'aria-describedby' (åpen).",
 };
