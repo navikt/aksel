@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ArrowLeftIcon, PaperplaneIcon } from "@navikt/aksel-icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   Button,
   ErrorSummary,
@@ -22,18 +22,6 @@ const validatePersonnummer = (p: string) => {
   return "";
 };
 
-// array of functions to run
-let formSubmissionQueue = [];
-
-const addToFormSubmissionQueue = (eventFN) => {
-  formSubmissionQueue.push(eventFN);
-};
-
-const processFormSubmissionQueue = () => {
-  formSubmissionQueue.forEach((e) => e());
-  formSubmissionQueue = [];
-};
-
 const Example = () => {
   const errorSummaryRef = React.useRef<HTMLDivElement>(null);
 
@@ -41,9 +29,8 @@ const Example = () => {
   const [formSubmitted, setFormSubmitted] = React.useState(false);
 
   const [personnummer, setPersonnummer] = React.useState("");
-  const [transportmiddel, setTransportmiddel] = React.useState("");
-
   const [personnummerError, setPersonnummerError] = React.useState("");
+  const [transportmiddel, setTransportmiddel] = React.useState("");
   const [transportmiddelError, setTransportmiddelError] = React.useState(false);
 
   function submit(event: React.FormEvent) {
@@ -71,13 +58,6 @@ const Example = () => {
     hasTriedToSubmit && (personnummerError || transportmiddelError),
   );
 
-  // this runs anything queued by onBlurs
-  useEffect(() => {
-    document.addEventListener("mouseup", () => {
-      processFormSubmissionQueue();
-    });
-  }, []);
-
   useEffect(() => {
     if (showErrorSummary) {
       errorSummaryRef.current?.focus();
@@ -89,7 +69,7 @@ const Example = () => {
       <Page>
         <Page.Block as="main" width="lg" gutters>
           <VStack gap="8" align="center">
-            <Heading size="large">Søknad sendt!</Heading>
+            <Heading size="large">Demo slutt</Heading>
             <Button
               onClick={() => {
                 location.hash = "";
@@ -114,14 +94,10 @@ const Example = () => {
               description="Du må skrive et gyldig personnummer eller D-nummer"
               value={personnummer}
               onChange={(e) => setPersonnummer(e.currentTarget.value)}
-              onBlur={(e) => {
-                addToFormSubmissionQueue(() => {
-                  (Boolean(hasTriedToSubmit) || personnummer !== "") &&
-                    setPersonnummerError(validatePersonnummer(personnummer));
-                });
-                // if (e.relatedTarget?.innerText !== "Send søknad")
-                //   setPersonnummerError(validatePersonnummer(personnummer));
-                console.log(e);
+              onBlur={() => {
+                // if (e.relatedTarget?.innerText !== "Neste steg") // Kan ev. gjøre noe sånt som dette for å mitigere layout shift
+                Boolean(hasTriedToSubmit) &&
+                  setPersonnummerError(validatePersonnummer(personnummer));
               }}
               error={personnummerError}
             />
@@ -144,7 +120,7 @@ const Example = () => {
             {showErrorSummary && (
               <ErrorSummary
                 ref={errorSummaryRef}
-                heading="Du må fikse disse feilene før du kan sende inn søknad."
+                heading="Du må fikse disse feilene før du kan fortsette:"
               >
                 {personnummerError ? (
                   <ErrorSummary.Item href="#personnummer">
@@ -176,10 +152,10 @@ const Example = () => {
               <Button
                 type="submit"
                 variant="primary"
-                icon={<PaperplaneIcon aria-hidden />}
+                icon={<ArrowRightIcon aria-hidden />}
                 iconPosition="right"
               >
-                Send søknad
+                Neste steg
               </Button>
             </HGrid>
           </VStack>
