@@ -9,7 +9,7 @@ const Example = () => {
 
   return (
     <MonthPicker.Standalone
-      onMonthSelect={console.log}
+      onMonthSelect={console.info}
       dropdownCaption
       fromDate={new Date("1 Oct 2020")}
       toDate={new Date("1 Oct 2024")}

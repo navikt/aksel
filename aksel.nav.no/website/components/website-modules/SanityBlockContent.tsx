@@ -8,6 +8,7 @@ import { Children } from "react";
 import { BodyLong, Detail, Heading } from "@navikt/ds-react";
 import Accordion from "@/cms/accordion/Accordion";
 import Alert from "@/cms/alert/Alert";
+import Attachment from "@/cms/attachment/Attachment";
 import Bilde from "@/cms/bilde/Bilde";
 import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
@@ -48,6 +49,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     tips: ({ value }) => <Tips node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
+    attachment: ({ value }) => <Attachment node={value} />,
   },
   unknownType: () => null,
   block: {

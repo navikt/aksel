@@ -5,7 +5,7 @@ const Example = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     defaultSelected: new Date("Aug 28 2020"),
-    onDateChange: console.log,
+    onDateChange: console.info,
   });
 
   return (

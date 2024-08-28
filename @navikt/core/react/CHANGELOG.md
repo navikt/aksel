@@ -1,5 +1,27 @@
 # @navikt/ds-react
 
+## 6.16.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.16.2
+  - @navikt/aksel-icons@6.16.2
+
+## 6.16.1
+
+### Patch Changes
+
+- Table: Corrected the type of onSortChange ([#3103](https://github.com/navikt/aksel/pull/3103))
+
+- :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
+
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.16.1
+  - @navikt/aksel-icons@6.16.1
+
 ## 6.16.0
 
 ### Minor Changes

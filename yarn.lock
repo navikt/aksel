@@ -3543,7 +3543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^6.16.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^6.16.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3572,8 +3572,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^6.16.0"
-    "@navikt/ds-tokens": "npm:^6.16.0"
+    "@navikt/ds-css": "npm:^6.16.2"
+    "@navikt/ds-tokens": "npm:^6.16.2"
     concurrently: "npm:7.2.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3588,7 +3588,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:6.16.0"
+    "@navikt/ds-css": "npm:6.16.2"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3598,7 +3598,7 @@ __metadata:
     figlet: "npm:1.6.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:^0.15.1"
-    jscodeshift-add-imports: "npm:1.0.10"
+    jscodeshift-add-imports: "npm:1.0.11"
     lodash: "npm:4.17.21"
     react-scanner: "npm:^1.1.0"
     rimraf: "npm:6.0.1"
@@ -3609,11 +3609,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:6.16.0, @navikt/ds-css@npm:^6.16.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:6.16.2, @navikt/ds-css@npm:^6.16.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^6.16.0"
+    "@navikt/ds-tokens": "npm:^6.16.2"
     cssnano: "npm:6.0.0"
     fast-glob: "npm:3.2.11"
     lodash: "npm:4.17.21"
@@ -3626,14 +3626,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^6.16.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^6.16.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^6.16.0"
-    "@navikt/ds-tokens": "npm:^6.16.0"
+    "@navikt/aksel-icons": "npm:^6.16.2"
+    "@navikt/ds-tokens": "npm:^6.16.2"
     "@testing-library/dom": "npm:9.3.4"
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
@@ -3663,11 +3663,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^6.16.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^6.16.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^6.16.0"
+    "@navikt/ds-tokens": "npm:^6.16.2"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3677,7 +3677,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^6.16.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^6.16.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -7654,11 +7654,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^6.16.0"
-    "@navikt/ds-css": "npm:^6.16.0"
-    "@navikt/ds-react": "npm:^6.16.0"
-    "@navikt/ds-tailwind": "npm:^6.16.0"
-    "@navikt/ds-tokens": "npm:^6.16.0"
+    "@navikt/aksel-icons": "npm:^6.16.2"
+    "@navikt/ds-css": "npm:^6.16.2"
+    "@navikt/ds-react": "npm:^6.16.2"
+    "@navikt/ds-tailwind": "npm:^6.16.2"
+    "@navikt/ds-tokens": "npm:^6.16.2"
   languageName: unknown
   linkType: soft
 
@@ -11541,8 +11541,8 @@ __metadata:
   linkType: hard
 
 "elliptic@npm:^6.5.3, elliptic@npm:^6.5.5":
-  version: 6.5.6
-  resolution: "elliptic@npm:6.5.6"
+  version: 6.5.7
+  resolution: "elliptic@npm:6.5.7"
   dependencies:
     bn.js: "npm:^4.11.9"
     brorand: "npm:^1.1.0"
@@ -11551,7 +11551,7 @@ __metadata:
     inherits: "npm:^2.0.4"
     minimalistic-assert: "npm:^1.0.1"
     minimalistic-crypto-utils: "npm:^1.0.1"
-  checksum: 10/09377ec924fdb37775d63e5d7e5ebb2845842e6f08880b68265b1108863e968970c4a4e1c43df622078c8262417deec9a04aeb9d34e8d09a9693e19b5454e1df
+  checksum: 10/fbad1fad0a5cc07df83f80cc1f7a784247ef59075194d3e340eaeb2f4dd594825ee24c7e9b0cf279c9f1982efe610503bb3139737926428c4821d4fca1bcf348
   languageName: node
   linkType: hard
 
@@ -16111,15 +16111,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jscodeshift-add-imports@npm:1.0.10":
-  version: 1.0.10
-  resolution: "jscodeshift-add-imports@npm:1.0.10"
+"jscodeshift-add-imports@npm:1.0.11":
+  version: 1.0.11
+  resolution: "jscodeshift-add-imports@npm:1.0.11"
   dependencies:
     "@babel/traverse": "npm:^7.4.5"
     jscodeshift-find-imports: "npm:^2.0.2"
   peerDependencies:
-    jscodeshift: ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
-  checksum: 10/da502e351e8b541f62e6cc6a8b953b153fe8ad2055bbf875ff238b204f6b48a1701bdf6e8e9536bbfc7e699f52f1af539cdb0dbdd899e0608a7fdf8e3c66bbee
+    jscodeshift: ">=0.7 <1"
+  checksum: 10/c50ce72c722b24fa4535ed7bca6f2b17b5ecaa4fa579f1411bdf6cf05b6d2f2c1f1de3d7e35bc1d4d03ae09228afc3dac64fac87b39044c814c6438513d00123
   languageName: node
   linkType: hard
 
@@ -17812,12 +17812,12 @@ __metadata:
   linkType: hard
 
 "micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
-  version: 4.0.7
-  resolution: "micromatch@npm:4.0.7"
+  version: 4.0.8
+  resolution: "micromatch@npm:4.0.8"
   dependencies:
     braces: "npm:^3.0.3"
     picomatch: "npm:^2.3.1"
-  checksum: 10/a11ed1cb67dcbbe9a5fc02c4062cf8bb0157d73bf86956003af8dcfdf9b287f9e15ec0f6d6925ff6b8b5b496202335e497b01de4d95ef6cf06411bc5e5c474a0
+  checksum: 10/6bf2a01672e7965eb9941d1f02044fad2bd12486b5553dc1116ff24c09a8723157601dc992e74c911d896175918448762df3b3fd0a6b61037dd1a9766ddfbf58
   languageName: node
   linkType: hard
 

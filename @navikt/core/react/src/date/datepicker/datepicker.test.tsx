@@ -8,7 +8,7 @@ import DatePicker from "./DatePicker";
 const App = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
-    onDateChange: console.log,
+    onDateChange: console.info,
   });
 
   return (

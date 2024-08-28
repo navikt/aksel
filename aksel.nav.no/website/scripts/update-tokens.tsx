@@ -47,7 +47,7 @@ export const updateTokens = async () => {
 
   await transactionClient
     .commit()
-    .then(() => console.log(`Updated tokens`))
+    .then(() => console.info(`Updated tokens`))
     .catch((e) => console.error(e.message));
 };
 

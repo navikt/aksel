@@ -8,7 +8,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log} size="small">
+    <ToggleGroup defaultValue="lest" onChange={console.info} size="small">
       <ToggleGroup.Item
         value="ulest"
         icon={<EnvelopeClosedIcon aria-hidden />}

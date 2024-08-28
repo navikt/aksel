@@ -83,7 +83,7 @@ const genDocs = () => {
     }
   });
 
-  console.log({ Documented: res.length, fails });
+  console.info({ Documented: res.length, fails });
 
   const cleaned = res.flat().map((file) => ({
     filePath: file.filePath,

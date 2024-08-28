@@ -55,7 +55,7 @@ export async function main() {
     .set({ content: blocks })
     .commit()
     .then(() => {
-      console.log("Hurray, updated changelog!");
+      console.info("Hurray, updated changelog!");
     })
     .catch((err) => {
       console.error("Oh no, the changelog-update failed: ", err.message);

@@ -27,11 +27,11 @@ async function run() {
     const pkg = JSON.parse(
       fs.readFileSync("./package.json").toString(),
     ).version;
-    console.log(pkg);
+    console.info(pkg);
     return;
   }
 
-  console.log(
+  console.info(
     chalk.red(
       `Unknown command: ${process.argv[2]}.\nRun ${chalk.cyan(
         "npx @navikt/aksel help",
