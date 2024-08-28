@@ -36,6 +36,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 2,
   desc: "Ved Single Select velger brukeren ett valg fra listen. Med autocomplete foreslås et valg fra listen som matcher det brukeren skriver.",
 };

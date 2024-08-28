@@ -61,6 +61,7 @@
     "prism-react-renderer": "^2.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hook-form": "^7.53.0",
     "react-markdown": "^9.0.1",
     "react-responsive-masonry": "2.2.0",
     "react-rx": "^2.1.3",
