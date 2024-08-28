@@ -12,9 +12,10 @@ import {
   useInteractions,
 } from "@floating-ui/react";
 import cl from "clsx";
-import React, { HTMLAttributes, cloneElement, forwardRef, useRef } from "react";
+import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
+import { Slot } from "../slot/Slot";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -80,6 +81,12 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * List of Keyboard-keys for shortcuts.
    */
   keys?: string[];
+  /**
+   * When false, Tooltip labels the element, and child-elements content will be ignored by screen-readers.
+   * When true, content is added as additional information to the child element.
+   * @default false
+   */
+  describesChild?: boolean;
 }
 
 /**
@@ -89,9 +96,9 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
  * @see 🏷️ {@link TooltipProps}
  *
  * @example
- * ```jsx
+ * ```jsx Tooltip as only form of labeling
  * <Tooltip content="Skriv ut dokument">
- *   <Button icon={<PrinterLargeIcon title="demo knapp" />} />
+ *   <Button icon={<PrinterLargeIcon aria-hidden />} />
  * </Tooltip>
  * ```
  */
@@ -111,6 +118,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       keys,
       maxChar = 80,
+      describesChild = false,
       ...rest
     },
     ref,
@@ -164,7 +172,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const ariaId = useId(id);
 
     const mergedRef = useMergeRefs(ref, refs.setFloating);
-    const childMergedRef = useMergeRefs(children.ref, refs.setReference);
 
     if (
       !children ||
@@ -184,18 +191,22 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         );
     }
 
+    const labelProps = describesChild
+      ? _open
+        ? { "aria-describedby": ariaId }
+        : { title: content }
+      : { "aria-label": content };
+
     return (
       <>
-        {cloneElement(
-          children,
-          getReferenceProps({
-            ...children.props,
-            ref: childMergedRef,
-            "aria-describedby": _open
-              ? cl(ariaId, children?.props["aria-describedby"])
-              : children?.props["aria-describedby"],
-          }),
-        )}
+        <Slot
+          ref={refs.setReference}
+          {...getReferenceProps()}
+          {...labelProps}
+          aria-keyshortcuts={keys ? keys.join("+") : undefined}
+        >
+          {children}
+        </Slot>
         <Portal rootElement={rootElement} asChild>
           {_open && (
             <div
@@ -220,7 +231,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               {content}
               {keys && (
-                <span className="navds-tooltip__keys">
+                <span className="navds-tooltip__keys" aria-hidden>
                   {keys.map((key) => (
                     <Detail as="kbd" key={key} className="navds-tooltip__key">
                       {key}
