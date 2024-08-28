@@ -17,7 +17,7 @@ const validatePersonnummer = (p: string) => {
     return "Du må fylle ut personnummer.";
   }
   if (!/^\d{11}$/.test(p)) {
-    return "Personnummer må være 11 sifre.";
+    return "Personnummer må være 11 siffer.";
   }
   return "";
 };
@@ -33,7 +33,7 @@ const Example = () => {
   const [transportmiddel, setTransportmiddel] = React.useState("");
   const [transportmiddelError, setTransportmiddelError] = React.useState(false);
 
-  function submit(event: React.FormEvent) {
+  function onSubmit(event: React.FormEvent) {
     event.preventDefault();
     setHasTriedToSubmit(hasTriedToSubmit + 1);
     let isValidForm = true;
@@ -54,19 +54,17 @@ const Example = () => {
     }
   }
 
+  useEffect(() => {
+    errorSummaryRef.current?.focus();
+  }, [hasTriedToSubmit]);
+
   const showErrorSummary = Boolean(
     hasTriedToSubmit && (personnummerError || transportmiddelError),
   );
 
-  useEffect(() => {
-    if (showErrorSummary) {
-      errorSummaryRef.current?.focus();
-    }
-  }, [showErrorSummary, hasTriedToSubmit]);
-
   if (formSubmitted)
     return (
-      <Page>
+      <Page style={{ marginTop: 20 }}>
         <Page.Block as="main" width="lg" gutters>
           <VStack gap="8" align="center">
             <Heading size="large">Demo slutt</Heading>
@@ -84,18 +82,16 @@ const Example = () => {
     );
 
   return (
-    <Page style={{ marginTop: 100 }}>
+    <Page style={{ marginTop: 20 }}>
       <Page.Block as="main" width="lg" gutters>
-        <form onSubmit={submit}>
+        <form onSubmit={onSubmit}>
           <VStack gap="8">
             <TextField
               id="personnummer"
               label="Personnummer"
-              description="Du må skrive et gyldig personnummer eller D-nummer"
               value={personnummer}
               onChange={(e) => setPersonnummer(e.currentTarget.value)}
               onBlur={() => {
-                // if (e.relatedTarget?.innerText !== "Neste steg") // Kan ev. gjøre noe sånt som dette for å mitigere layout shift
                 Boolean(hasTriedToSubmit) &&
                   setPersonnummerError(validatePersonnummer(personnummer));
               }}
@@ -113,7 +109,7 @@ const Example = () => {
               error={transportmiddelError && "Du må velge et transportmiddel."}
             >
               <Radio value="car">Bil</Radio>
-              <Radio value="walking">Spasering</Radio>
+              <Radio value="walking">Gange</Radio>
               <Radio value="public">Kollektivtransport</Radio>
             </RadioGroup>
 
@@ -176,6 +172,4 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  title: "TODO",
-  desc: "TODO",
 };
