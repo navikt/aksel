@@ -8279,7 +8279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.7.4":
+"axios@npm:1.7.4, axios@npm:^1.6.1, axios@npm:^1.6.5":
   version: 1.7.4
   resolution: "axios@npm:1.7.4"
   dependencies:
@@ -8297,17 +8297,6 @@ __metadata:
     follow-redirects: "npm:1.5.10"
     is-buffer: "npm:^2.0.2"
   checksum: 10/e89e662c4998a2617bd7c34b9444a5d0b2029e3df952e5aa8756c5882e3f1d5a7143d10b5d6435d9276a71a199a3494672d7f1cc72cc8e598224feaf99793ef7
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.6.1, axios@npm:^1.6.5":
-  version: 1.7.3
-  resolution: "axios@npm:1.7.3"
-  dependencies:
-    follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10/7f92af205705a8fb4a9d35666b663729507657f252a1d39d83582590119941872d49078017cf992e32f47aa3b7317f5439f77be772a173dac2ae0fedd38f43ae
   languageName: node
   linkType: hard
 
