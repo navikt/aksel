@@ -3,35 +3,32 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { describe, expect, test, vi } from "vitest";
-import { UNSAFE_Combobox } from "../index";
+import { ComboboxProps, UNSAFE_Combobox } from "../index";
 
 const options = [
-  "banana",
   "apple",
   "apple pie",
-  "tangerine",
-  "pear",
+  "banana",
   "grape",
+  "grape fruit",
   "kiwi",
   "mango",
   "passion fruit",
+  "pear",
   "pineapple",
   "strawberry",
+  "tangerine",
   "watermelon",
-  "grape fruit",
 ];
 
-const App = (props) => {
+const App = ({
+  label = "Hva er dine favorittfrukter?",
+  ...rest
+}: Omit<ComboboxProps, "label"> & { label?: ComboboxProps["label"] }) => {
   const id = useId();
   return (
     <div data-theme="light">
-      <UNSAFE_Combobox
-        label="Hva er dine favorittfrukter?"
-        size="medium"
-        variant="simple"
-        id={id}
-        {...props}
-      />
+      <UNSAFE_Combobox label={label} size="medium" id={id} {...rest} />
     </div>
   );
 };
@@ -259,6 +256,39 @@ describe("Render combobox", () => {
           option.textContent && searchHits.includes(option.textContent),
         ).toBe(true);
       });
+    });
+
+    test("and pressing enter to select autocompleted word will select the correct word", async () => {
+      const onToggleSelected = vi.fn();
+      render(
+        <App
+          onToggleSelected={onToggleSelected}
+          options={options}
+          shouldAutocomplete
+        />,
+      );
+
+      const combobox = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+      await act(async () => {
+        await userEvent.click(combobox);
+
+        await userEvent.type(combobox, "p");
+      });
+
+      expect(combobox.getAttribute("value")).toBe("passion fruit");
+
+      await act(async () => {
+        await userEvent.keyboard("{Enter}");
+      });
+
+      expect(onToggleSelected).toHaveBeenCalledWith(
+        "passion fruit",
+        true,
+        false,
+      );
     });
   });
 });
