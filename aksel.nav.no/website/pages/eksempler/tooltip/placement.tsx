@@ -11,16 +11,16 @@ const Example = () => {
   return (
     <div className="grid gap-4">
       <Tooltip content="Skriv ut dokument">
-        <Button icon={<ArrowUpIcon title="demo knapp" />} />
+        <Button icon={<ArrowUpIcon aria-hidden />} />
       </Tooltip>
       <Tooltip content="Skriv ut dokument" placement="right">
-        <Button icon={<ArrowRightIcon title="demo knapp" />} />
+        <Button icon={<ArrowRightIcon aria-hidden />} />
       </Tooltip>
       <Tooltip content="Skriv ut dokument" placement="bottom">
-        <Button icon={<ArrowDownIcon title="demo knapp" />} />
+        <Button icon={<ArrowDownIcon aria-hidden />} />
       </Tooltip>
       <Tooltip content="Skriv ut dokument" placement="left">
-        <Button icon={<ArrowLeftIcon title="demo knapp" />} />
+        <Button icon={<ArrowLeftIcon aria-hidden />} />
       </Tooltip>
     </div>
   );

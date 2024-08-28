@@ -12,20 +12,17 @@ const Example = () => {
       <Tooltip content="Uleste meldinger">
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
         />
       </Tooltip>
       <Tooltip content="Leste meldinger">
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
         />
       </Tooltip>
       <Tooltip content="Sendte meldinger">
-        <ToggleGroup.Item
-          value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
-        />
+        <ToggleGroup.Item value="sendt" icon={<PaperplaneIcon aria-hidden />} />
       </Tooltip>
     </ToggleGroup>
   );
@@ -41,4 +38,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
+  desc: "For ToggleGroup uten label med Tooltip bør du bruke 'describesChild'-prop på Tooltip.",
 };
