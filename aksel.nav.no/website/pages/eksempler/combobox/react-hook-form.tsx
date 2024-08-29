@@ -74,4 +74,5 @@ export const Demo = {
 export const args = {
   index: 9,
   desc: "Eksempel på bruk med react-hook-form.",
+  sandbox: false,
 };
