@@ -1,5 +1,5 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { UNSAFE_Combobox } from "@navikt/ds-react";
+import { Button, UNSAFE_Combobox, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 type Inputs = { transportmiddel: string[] };
@@ -10,16 +10,16 @@ const Example = () => {
     control,
     formState: { errors },
   } = useForm<Inputs>({
-    reValidateMode: "onBlur",
+    shouldFocusError: false,
     defaultValues: { transportmiddel: [] },
   });
 
   const onValidSubmit: SubmitHandler<Inputs> = (data) => {
-    alert(data);
+    alert("Du valgte: " + data.transportmiddel.join(", "));
   };
 
   return (
-    <form onSubmit={handleSubmit(onValidSubmit)}>
+    <VStack as="form" gap="8" onSubmit={handleSubmit(onValidSubmit)}>
       <Controller
         control={control}
         rules={{ required: "Du må velge minst ett transportmiddel." }}
@@ -44,7 +44,10 @@ const Example = () => {
           />
         )}
       />
-    </form>
+      <div>
+        <Button type="submit">Send inn</Button>
+      </div>
+    </VStack>
   );
 };
 
