@@ -1,4 +1,4 @@
-import { MenuElipsisHorizontalCircleIcon } from "@navikt/aksel-icons";
+import { MenuElipsisVerticalIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -8,7 +8,7 @@ const Example = () => {
       <ActionMenu.Trigger>
         <Button
           variant="secondary-neutral"
-          icon={<MenuElipsisHorizontalCircleIcon title="Saksmeny" />}
+          icon={<MenuElipsisVerticalIcon title="Saksmeny" />}
           size="small"
         />
       </ActionMenu.Trigger>
@@ -90,3 +90,5 @@ export const args = {
   index: 5,
   desc: "Undermenyer lar deg forenklet komplekse grensesnitt og filter ved å flytte innholdet til en godt strukturert meny. Vi anbefaler på det meste to nivåer med undermenyer.",
 };
+
+/* TODO: Small demo table */
