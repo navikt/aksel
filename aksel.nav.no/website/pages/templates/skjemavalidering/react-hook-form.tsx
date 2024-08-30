@@ -37,7 +37,7 @@ const Example = () => {
 
   if (isSubmitSuccessful)
     return (
-      <Page style={{ marginTop: 20 }}>
+      <Page>
         <Page.Block as="main" width="lg" gutters>
           <VStack gap="8" align="center">
             <Heading size="large">Demo slutt</Heading>
@@ -55,7 +55,7 @@ const Example = () => {
     );
 
   return (
-    <Page style={{ marginTop: 20 }}>
+    <Page>
       <Page.Block as="main" width="lg" gutters>
         <form
           onSubmit={(event) => {
@@ -115,7 +115,6 @@ const Example = () => {
               gap={{ xs: "4", sm: "8 4" }}
               columns={{ xs: 1, sm: 2 }}
               width={{ sm: "fit-content" }}
-              style={{ marginBottom: 200 }}
             >
               <Button
                 type="button"
@@ -147,7 +146,6 @@ export default Example;
 /* Storybook story */
 export const Demo = {
   render: Example,
-  parameters: { layout: "fullscreen" },
 };
 
 export const args = {
