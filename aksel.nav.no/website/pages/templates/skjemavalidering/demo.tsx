@@ -30,41 +30,36 @@ const Example = () => {
     submitted: false,
     tries: 0,
   });
-
-  const [personnummer, setPersonnummer] = React.useState("");
-  const [personnummerError, setPersonnummerError] = React.useState("");
-  const [transportmiddel, setTransportmiddel] = React.useState("");
-  const [transportmiddelError, setTransportmiddelError] = React.useState(false);
+  const [values, setValues] = React.useState({
+    personnummer: "",
+    transportmiddel: "",
+  });
+  const [errors, setErrors] = React.useState({
+    personnummer: "",
+    transportmiddel: "",
+  });
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault();
-    let isValidForm = true;
 
-    const personnummerErrorMsg = validatePersonnummer(personnummer);
-    setPersonnummerError(personnummerErrorMsg);
-    if (personnummerErrorMsg) {
-      isValidForm = false;
-    }
-    const transportmiddelInvalid = !transportmiddel;
-    setTransportmiddelError(transportmiddelInvalid);
-    if (transportmiddelInvalid) {
-      isValidForm = false;
-    }
+    const newErrors = {
+      personnummer: validatePersonnummer(values.personnummer),
+      transportmiddel: values.transportmiddel
+        ? ""
+        : "Du må velge et transportmiddel.",
+    };
+    setErrors(newErrors);
 
-    if (isValidForm) {
-      setFormState({ ...formState, submitted: true });
-    } else {
+    if (Object.values(newErrors).some(Boolean)) {
       setFormState({ ...formState, tries: formState.tries + 1 });
+    } else {
+      setFormState({ ...formState, submitted: true });
     }
   }
 
   useEffect(() => {
     errorSummaryRef.current?.focus();
   }, [formState]);
-
-  const showErrorSummary = Boolean(
-    formState.tries && (personnummerError || transportmiddelError),
-  );
 
   if (formState.submitted)
     return (
@@ -93,45 +88,47 @@ const Example = () => {
             <TextField
               id="personnummer"
               label="Personnummer"
-              value={personnummer}
-              onChange={(e) => setPersonnummer(e.currentTarget.value)}
+              value={values.personnummer}
+              onChange={(e) =>
+                setValues({ ...values, personnummer: e.currentTarget.value })
+              }
               onBlur={() => {
-                Boolean(formState.tries) &&
-                  setPersonnummerError(validatePersonnummer(personnummer));
+                formState.tries &&
+                  setErrors({
+                    ...errors,
+                    personnummer: validatePersonnummer(values.personnummer),
+                  });
               }}
-              error={personnummerError}
+              error={errors.personnummer}
             />
             <RadioGroup
               id="transportmiddel"
               tabIndex={-1}
               legend="Transportmiddel"
-              value={transportmiddel}
+              value={values.transportmiddel}
               onChange={(newValue) => {
-                setTransportmiddel(newValue);
-                setTransportmiddelError(false);
+                setValues({ ...values, transportmiddel: newValue });
+                setErrors({ ...errors, transportmiddel: "" });
               }}
-              error={transportmiddelError && "Du må velge et transportmiddel."}
+              error={errors.transportmiddel}
             >
               <Radio value="car">Bil</Radio>
               <Radio value="walking">Gange</Radio>
               <Radio value="public">Kollektivtransport</Radio>
             </RadioGroup>
 
-            {showErrorSummary && (
+            {formState.tries > 0 && Object.values(errors).some(Boolean) && (
               <ErrorSummary
                 ref={errorSummaryRef}
                 heading="Du må rette disse feilene før du kan fortsette:"
               >
-                {personnummerError ? (
-                  <ErrorSummary.Item href="#personnummer">
-                    {personnummerError}
-                  </ErrorSummary.Item>
-                ) : null}
-                {transportmiddelError && (
-                  <ErrorSummary.Item href="#transportmiddel">
-                    Du må velge et transportmiddel.
-                  </ErrorSummary.Item>
-                )}
+                {Object.entries(errors)
+                  .filter(([, error]) => error)
+                  .map(([key, error]) => (
+                    <ErrorSummary.Item href={`#${key}`} key={key}>
+                      {error}
+                    </ErrorSummary.Item>
+                  ))}
               </ErrorSummary>
             )}
 
