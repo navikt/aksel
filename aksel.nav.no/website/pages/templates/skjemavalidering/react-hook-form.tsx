@@ -101,7 +101,7 @@ const Example = () => {
             {Object.values(errors).length > 0 && (
               <ErrorSummary
                 ref={errorSummaryRef}
-                heading="Du må fikse disse feilene før du kan fortsette:"
+                heading="Du må rette disse feilene før du kan fortsette:"
               >
                 {Object.entries(errors).map(([key, error]) => (
                   <ErrorSummary.Item key={key} href={`#${key}`}>

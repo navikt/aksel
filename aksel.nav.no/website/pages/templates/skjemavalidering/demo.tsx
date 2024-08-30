@@ -13,6 +13,7 @@ import {
 } from "@navikt/ds-react";
 
 const validatePersonnummer = (p: string) => {
+  // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
   if (p.length === 0) {
     return "Du må fylle ut personnummer.";
   }
@@ -25,8 +26,10 @@ const validatePersonnummer = (p: string) => {
 const Example = () => {
   const errorSummaryRef = React.useRef<HTMLDivElement>(null);
 
-  const [hasTriedToSubmit, setHasTriedToSubmit] = React.useState(0);
-  const [formSubmitted, setFormSubmitted] = React.useState(false);
+  const [formState, setFormState] = React.useState({
+    submitted: false,
+    tries: 0,
+  });
 
   const [personnummer, setPersonnummer] = React.useState("");
   const [personnummerError, setPersonnummerError] = React.useState("");
@@ -35,7 +38,6 @@ const Example = () => {
 
   function onSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setHasTriedToSubmit(hasTriedToSubmit + 1);
     let isValidForm = true;
 
     const personnummerErrorMsg = validatePersonnummer(personnummer);
@@ -50,19 +52,21 @@ const Example = () => {
     }
 
     if (isValidForm) {
-      setFormSubmitted(true);
+      setFormState({ ...formState, submitted: true });
+    } else {
+      setFormState({ ...formState, tries: formState.tries + 1 });
     }
   }
 
   useEffect(() => {
     errorSummaryRef.current?.focus();
-  }, [hasTriedToSubmit]);
+  }, [formState]);
 
   const showErrorSummary = Boolean(
-    hasTriedToSubmit && (personnummerError || transportmiddelError),
+    formState.tries && (personnummerError || transportmiddelError),
   );
 
-  if (formSubmitted)
+  if (formState.submitted)
     return (
       <Page style={{ marginTop: 20 }}>
         <Page.Block as="main" width="lg" gutters>
@@ -92,7 +96,7 @@ const Example = () => {
               value={personnummer}
               onChange={(e) => setPersonnummer(e.currentTarget.value)}
               onBlur={() => {
-                Boolean(hasTriedToSubmit) &&
+                Boolean(formState.tries) &&
                   setPersonnummerError(validatePersonnummer(personnummer));
               }}
               error={personnummerError}
@@ -116,7 +120,7 @@ const Example = () => {
             {showErrorSummary && (
               <ErrorSummary
                 ref={errorSummaryRef}
-                heading="Du må fikse disse feilene før du kan fortsette:"
+                heading="Du må rette disse feilene før du kan fortsette:"
               >
                 {personnummerError ? (
                   <ErrorSummary.Item href="#personnummer">
