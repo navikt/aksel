@@ -99,6 +99,7 @@
   border: none;
   padding: 0;
   margin: 0;
+  margin-left: var(--a-spacing-1);
   min-width: 10ch;
   width: 100%;
   height: var(--__ac-combobox-input-height);
