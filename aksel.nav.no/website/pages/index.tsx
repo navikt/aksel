@@ -204,7 +204,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               size="xlarge"
               className="leading-[1.2] text-deepblue-700 sm:text-[3.5rem]"
             >
-              TEST
+              Aksel gjør det enklere å lage digitale produkter
             </Heading>
             <AkselCubeAnimated />
           </div>
