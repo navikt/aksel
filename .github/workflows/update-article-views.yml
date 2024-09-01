@@ -22,9 +22,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-build-
-      - name: add tokens to .env
-        run: |
-          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_UTILITY_WRITE }}" >> scripts/article-views/.env
+
       - uses: nais/docker-build-push@v0
         id: docker-push
         with:

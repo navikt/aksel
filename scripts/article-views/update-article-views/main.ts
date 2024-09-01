@@ -79,9 +79,9 @@ for (const view_data of view_datas) {
   });
 }
 
-const token = Deno.env.get("SANITY_WRITE_KEY");
+const token = Deno.env.get("SANITY_WRITE");
 if (!token) {
-  throw new Error("Missing SANITY_WRITE_KEY");
+  throw new Error("Missing SANITY_WRITE");
 }
 
 const noCdnClient = createClient({
