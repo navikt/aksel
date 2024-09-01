@@ -24,10 +24,6 @@ jobs:
         shell: bash
         run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
 
-      - name: add tokens to .env
-        run: |
-          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
-
       - name: Install dependencies
         run: yarn
 
@@ -37,6 +33,8 @@ jobs:
           yarn docgen
 
       - name: Update sanity sync
+        env:
+          SANITY_WRITE: ${{ secrets.SANITY_WRITE }}
         run: yarn workspace aksel.nav.no sanity:update
 
   build_and_deploy:
@@ -59,10 +57,6 @@ jobs:
 
       - name: add tokens to .env
         run: |
-          echo "SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}" >> aksel.nav.no/website/.env
-          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
-          echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
-          echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
           echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
       - name: Install dependencies
@@ -75,6 +69,9 @@ jobs:
         run: yarn workspace website test
 
       - name: Build application
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
         run: yarn workspace aksel.nav.no build:next
 
       - name: Upload static files to NAV CDN

@@ -11,9 +11,9 @@ dotenv.config();
 main();
 
 export async function main() {
-  const token = process.env.SANITY_WRITE_KEY;
+  const token = process.env.SANITY_WRITE;
   if (!token) {
-    throw new Error("Missing token 'SANITY_WRITE_KEY' for updating changelog");
+    throw new Error("Missing token 'SANITY_WRITE' for updating changelog");
   }
   const client = noCdnClient(token);
   const changelog = fs.readFileSync("../../CHANGELOG.md", "utf-8");
