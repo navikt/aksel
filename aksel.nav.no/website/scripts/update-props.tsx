@@ -9,10 +9,10 @@ dotenv.config({ path: `.env.local` });
 updateProps();
 
 async function updateProps() {
-  const token = process.env.SANITY_WRITE_KEY;
+  const token = process.env.SANITY_WRITE;
   if (!token) {
     throw new Error(
-      "Missing token 'SANITY_WRITE_KEY' when updating prop-documentation",
+      "Missing token 'SANITY_WRITE' when updating prop-documentation",
     );
   }
 

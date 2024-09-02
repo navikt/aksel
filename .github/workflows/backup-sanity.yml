@@ -24,7 +24,9 @@ jobs:
         run: cd aksel.nav.no/website && yarn
 
       - name: Export dataset
-        run: cd aksel.nav.no/website && SANITY_PREVIEW_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn backup
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+        run: cd aksel.nav.no/website && yarn backup
       - name: Upload GCP bucket
         uses: "google-github-actions/auth@v2"
         with:

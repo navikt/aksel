@@ -18,10 +18,10 @@ const isDryRun = process.argv.includes("--dry-run");
 })();
 
 export async function updateSanity(directory: RootDirectoriesT) {
-  const token = process.env.SANITY_WRITE_KEY;
+  const token = process.env.SANITY_WRITE;
   if (!token) {
     throw new Error(
-      "Missing token 'SANITY_WRITE_KEY' for updating code examples in Sanity",
+      "Missing token 'SANITY_WRITE' for updating code examples in Sanity",
     );
   }
   console.info(`Processing ${directory}`);

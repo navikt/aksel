@@ -42,7 +42,7 @@ export async function middleware(req: NextRequest) {
     );
 
     if (redirect) {
-      const token = process.env.SANITY_WRITE_KEY;
+      const token = process.env.SANITY_WRITE;
       if (token) {
         noCdnClient(token)
           .patch(redirect._id)

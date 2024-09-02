@@ -11,10 +11,10 @@ const allTokens: { title: string; kategori: string }[] = [
 ];
 
 export const updateTokens = async () => {
-  const writeKey = process.env.SANITY_WRITE_KEY;
+  const writeKey = process.env.SANITY_WRITE;
   if (!writeKey) {
     throw new Error(
-      "Missing token 'SANITY_WRITE_KEY' when updating token-documentation",
+      "Missing token 'SANITY_WRITE' when updating token-documentation",
     );
   }
 

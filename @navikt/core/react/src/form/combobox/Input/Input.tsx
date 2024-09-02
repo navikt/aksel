@@ -33,7 +33,10 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, shouldShowSelectedOptions, onBlur, ...rest }, ref) => {
+  (
+    { inputClassName, shouldShowSelectedOptions, placeholder, onBlur, ...rest },
+    ref,
+  ) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -44,12 +47,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       searchTerm,
       setValue,
+      hideCaret,
+      setHideCaret,
     } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
       toggleOption,
       isMultiSelect,
+      maxSelected,
     } = useSelectedOptionsContext();
     const {
       activeDecendantId,
@@ -234,17 +240,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         role="combobox"
         value={value}
         onBlur={composeEventHandlers(onBlur, virtualFocus.moveFocusToTop)}
-        onClick={() => value !== searchTerm && onChange(value)}
+        onClick={() => {
+          setHideCaret(!!maxSelected?.isLimitReached);
+          value !== searchTerm && onChange(value);
+        }}
         onInput={onChangeHandler}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
         autoComplete="off"
-        placeholder={selectedOptions.length ? undefined : rest.placeholder}
+        placeholder={selectedOptions.length ? undefined : placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}

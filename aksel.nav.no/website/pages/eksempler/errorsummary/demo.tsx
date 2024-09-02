@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ErrorSummary heading="Du må fikse disse feilene før du kan sende inn søknad.">
+    <ErrorSummary heading="Du må rette disse feilene før du kan sende inn søknaden:">
       <ErrorSummary.Item href="#1">
         Felt må fylles ut med alder
       </ErrorSummary.Item>
