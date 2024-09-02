@@ -105,6 +105,10 @@
   height: var(--__ac-combobox-input-height);
 }
 
+.navds-combobox__input--hide-caret {
+  caret-color: transparent;
+}
+
 .navds-combobox__input:focus-visible {
   outline: none;
   border: none;
