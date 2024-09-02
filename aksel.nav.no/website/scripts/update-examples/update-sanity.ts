@@ -18,13 +18,13 @@ const isDryRun = process.argv.includes("--dry-run");
 })();
 
 export async function updateSanity(directory: RootDirectoriesT) {
-  const token = process.env.SANITY_WRITE_KEY;
+  const token = process.env.SANITY_WRITE;
   if (!token) {
     throw new Error(
-      "Missing token 'SANITY_WRITE_KEY' for updating code examples in Sanity",
+      "Missing token 'SANITY_WRITE' for updating code examples in Sanity",
     );
   }
-  console.log(`Processing ${directory}`);
+  console.info(`Processing ${directory}`);
   const transactionClient = noCdnClient(token).transaction();
   const folders = getDirectories(directory);
   const exampleData: CodeExampleSchemaT[] = [];
@@ -50,7 +50,7 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: isDryRun })
-    .then(() => console.log(`Successfully updated ${directory}`))
+    .then(() => console.info(`Successfully updated ${directory}`))
     .catch((e) => {
       throw new Error(e.message);
     });
@@ -70,20 +70,20 @@ export async function updateSanity(directory: RootDirectoriesT) {
 
   await transactionClient
     .commit({ dryRun: isDryRun })
-    .then(() => console.log(`Successfully deleted unused ${directory}`))
+    .then(() => console.info(`Successfully deleted unused ${directory}`))
     .catch((e) => {
       /* The error message includes all ids that failed. */
       deletedIds = deletedIds.filter((id) => e.message.includes(id));
 
-      console.log("\n");
-      console.log(
+      console.info("\n");
+      console.info(
         `Found ${deletedIds.length} ${directory} documents longer documented locally, but referenced in Sanity.
     How to fix:
     - Go to links provided under and try to manually delete document.
     - You will then be prompted to update referenced document before deleting.
     - After updating reference(s) and deleting document(s) there is no need to run the script again.`,
       );
-      console.log(
+      console.info(
         JSON.stringify(
           deletedIds.map(
             (x) =>

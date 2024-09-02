@@ -3,8 +3,8 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <Select label="Hvilket land har du bosted i?" size="small">
-      <option value="">Velg land</option>
+    <Select label="Velg bostedsland" size="small">
+      <option>- Velg land -</option>
       <option value="norge">Norge</option>
       <option value="sverige">Sverige</option>
       <option value="danmark">Danmark</option>

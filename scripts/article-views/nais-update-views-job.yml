@@ -6,9 +6,11 @@ metadata:
   labels:
     team: designsystem
 spec:
+  envFrom:
+    - secret: aksel-website-secrets
   image: {{ image }}
   schedule: "0 * * * *"
-  command: 
+  command:
     - deno
     - run
     - --allow-net

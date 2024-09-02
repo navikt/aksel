@@ -109,7 +109,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    *     <ActionMenu.Label>
    *         Label
    *     </ActionMenu.Label>
-   *     <ActionMenu.Separator />
+   *     <ActionMenu.Divider />
    * </ActionMenu.Content
    * ```
    */
@@ -129,7 +129,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    *           Item 2
    *         </ActionMenu.Item>
    *     </ActionMenu.Group>
-   *     <ActionMenu.Separator />
+   *     <ActionMenu.Divider />
    *     // Standalone
    *     <ActionMenu.Item onSelect={updateState}>
    *        Item 3
@@ -190,7 +190,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
    * A simple divider to separate items in the menu.
    */
-  Separator: typeof ActionMenuSeparator;
+  Divider: typeof ActionMenuDivider;
   /**
    * A sub-menu that can be nested inside the menu.
    * The sub-menu can be nested inside other sub-menus allowing for multiple levels of nesting.
@@ -883,23 +883,22 @@ const ActionMenuRadioItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuSeparator                            */
+/*                           ActionMenuDivider                            */
 /* -------------------------------------------------------------------------- */
-type ActionMenuSeparatorElement = React.ElementRef<typeof Menu.Separator>;
-type MenuSeparatorProps = React.ComponentPropsWithoutRef<typeof Menu.Separator>;
-interface ActionMenuSeparatorProps
-  extends Omit<MenuSeparatorProps, "asChild"> {}
+type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
+type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
+interface ActionMenuDividerProps extends Omit<MenuDividerProps, "asChild"> {}
 
-const ActionMenuSeparator = forwardRef<
-  ActionMenuSeparatorElement,
-  ActionMenuSeparatorProps
->(({ className, ...rest }: ActionMenuSeparatorProps, ref) => {
+const ActionMenuDivider = forwardRef<
+  ActionMenuDividerElement,
+  ActionMenuDividerProps
+>(({ className, ...rest }: ActionMenuDividerProps, ref) => {
   return (
-    <Menu.Separator
+    <Menu.Divider
       ref={ref}
       asChild={false}
       {...rest}
-      className={cl("navds-action-menu__separator", className)}
+      className={cl("navds-action-menu__divider", className)}
     />
   );
 });
@@ -1050,7 +1049,7 @@ ActionMenu.Item = ActionMenuItem;
 ActionMenu.CheckboxItem = ActionMenuCheckboxItem;
 ActionMenu.RadioGroup = ActionMenuRadioGroup;
 ActionMenu.RadioItem = ActionMenuRadioItem;
-ActionMenu.Separator = ActionMenuSeparator;
+ActionMenu.Divider = ActionMenuDivider;
 ActionMenu.Sub = ActionMenuSub;
 ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
@@ -1064,7 +1063,7 @@ export {
   ActionMenuLabel,
   ActionMenuRadioGroup,
   ActionMenuRadioItem,
-  ActionMenuSeparator,
+  ActionMenuDivider,
   ActionMenuSub,
   ActionMenuSubContent,
   ActionMenuSubTrigger,
@@ -1076,7 +1075,7 @@ export {
   type ActionMenuProps,
   type ActionMenuRadioGroupProps,
   type ActionMenuRadioItemProps,
-  type ActionMenuSeparatorProps,
+  type ActionMenuDividerProps,
   type ActionMenuSubContentProps,
   type ActionMenuSubProps,
   type ActionMenuSubTriggerProps,

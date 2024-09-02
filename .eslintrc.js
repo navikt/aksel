@@ -33,9 +33,35 @@ module.exports = {
     "import/no-named-as-default": "off",
     // "import/no-cycle": [1],
     "no-else-return": "error",
+    "no-console": [
+      "warn",
+      {
+        allow: [
+          "info",
+          "warn",
+          "error",
+          "group",
+          "groupEnd",
+          "table",
+          "assert",
+          "countReset",
+          "count",
+          "dir",
+          "time",
+          "timeEnd",
+          "timeStamp",
+        ],
+      },
+    ],
   },
   reportUnusedDisableDirectives: true,
   overrides: [
+    {
+      files: ["**/*.stories.ts?(x)"],
+      rules: {
+        "no-console": "off",
+      },
+    },
     {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
@@ -126,5 +152,6 @@ module.exports = {
     "dist",
     "**/codemod/**/*.js",
     "!.storybook",
+    "**/playwright-report/**",
   ],
 };

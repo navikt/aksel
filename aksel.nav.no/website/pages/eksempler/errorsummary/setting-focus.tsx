@@ -15,7 +15,7 @@ const Example = () => {
       {hasError && (
         <ErrorSummary
           ref={errorRef}
-          heading="Du må fikse disse feilene før du kan sende inn søknad."
+          heading="Du må rette disse feilene før du kan sende inn søknaden:"
         >
           <ErrorSummary.Item href="#1">
             Felt må fylles ut med alder

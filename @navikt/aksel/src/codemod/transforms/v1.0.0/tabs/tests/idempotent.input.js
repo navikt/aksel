@@ -5,7 +5,7 @@ const TabComp = () => {
     /* prettier-ignore */
     <Tabs
       defaultValue="logg"
-      onChange={(x) => console.log(x)}
+      onChange={(x) => console.info(x)}
       loop
       iconPosition="left">
       <Tabs.List>

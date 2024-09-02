@@ -2,7 +2,7 @@ import { MonthPicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return <MonthPicker.Standalone onMonthSelect={console.log} />;
+  return <MonthPicker.Standalone onMonthSelect={console.info} />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

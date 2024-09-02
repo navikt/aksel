@@ -231,8 +231,8 @@ const createMainChangelog = async (changelog: Changelog): Promise<string> => {
 };
 
 const changelogFiles = getChangelogs("./@navikt");
-console.log("processing the following markdown files:", changelogFiles);
+console.info("processing the following markdown files:", changelogFiles);
 const changelogJSON = await parseMarkdownFiles(changelogFiles);
 const changelogStr = await createMainChangelog(changelogJSON);
 writeFileSync("CHANGELOG.md", changelogStr);
-console.log("wrote to CHANGELOG.md");
+console.info("wrote to CHANGELOG.md");

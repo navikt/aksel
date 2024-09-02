@@ -51,15 +51,15 @@ Object.entries(DsTokens).forEach(([key, val]) => {
 
 if (wrongValues.length || notFound.length || removed.length) {
   console.group("Not documented tokens:");
-  console.log(notFound);
+  console.info(notFound);
   console.groupEnd();
 
   console.group("Documented tokens not in package:");
-  console.log(removed);
+  console.info(removed);
   console.groupEnd();
 
   console.group("Tokens with wrong documentation:");
-  console.log(wrongValues);
+  console.info(wrongValues);
   console.groupEnd();
-  console.log("\n");
+  console.info("\n");
 }

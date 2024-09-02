@@ -21,7 +21,10 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, shouldShowSelectedOptions, ...rest }, ref) => {
+  (
+    { inputClassName, shouldShowSelectedOptions, placeholder, ...rest },
+    ref,
+  ) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -32,12 +35,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       searchTerm,
       setValue,
+      hideCaret,
+      setHideCaret,
     } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
       toggleOption,
       isMultiSelect,
+      maxSelected,
     } = useSelectedOptionsContext();
     const {
       activeDecendantId,
@@ -78,7 +84,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           const selectedValue =
             allowNewValues && isValueNew
               ? { label: value, value }
-              : filteredOptions[0];
+              : filteredOptionsUtil.getFirstValueStartingWith(
+                  value,
+                  filteredOptions,
+                ) || filteredOptions[0];
 
           if (!selectedValue) {
             return;
@@ -217,7 +226,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={mergedRefs}
         value={value}
         onBlur={() => virtualFocus.moveFocusToTop()}
-        onClick={() => value !== searchTerm && onChange(value)}
+        onClick={() => {
+          setHideCaret(!!maxSelected?.isLimitReached);
+          value !== searchTerm && onChange(value);
+        }}
         onInput={onChangeHandler}
         type="text"
         role="combobox"
@@ -230,11 +242,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        placeholder={selectedOptions.length ? undefined : placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
       />
     );

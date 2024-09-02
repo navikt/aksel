@@ -1,5 +1,51 @@
 # @navikt/ds-react
 
+## 6.16.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.16.2
+  - @navikt/aksel-icons@6.16.2
+
+## 6.16.1
+
+### Patch Changes
+
+- Table: Corrected the type of onSortChange ([#3103](https://github.com/navikt/aksel/pull/3103))
+
+- :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
+
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@6.16.1
+  - @navikt/aksel-icons@6.16.1
+
+## 6.16.0
+
+### Minor Changes
+
+- Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+### Patch Changes
+
+- Updated dependencies [[`9e6808d31`](https://github.com/navikt/aksel/commit/9e6808d31fc2bdb60399b409ad7fe739d3da20d1)]:
+  - @navikt/ds-tokens@6.16.0
+  - @navikt/aksel-icons@6.16.0
+
+## 6.15.0
+
+### Patch Changes
+
+- Combobox: Can no longer remove options with backspace when shouldShowSelectedOptions is false ([#3076](https://github.com/navikt/aksel/pull/3076))
+
+- Refactored Combobox FilteredOptions ([#3073](https://github.com/navikt/aksel/pull/3073))
+
+- Updated dependencies [[`ea3e88146`](https://github.com/navikt/aksel/commit/ea3e881467d27d43464ff9d111369a6b8539f593)]:
+  - @navikt/aksel-icons@6.15.0
+  - @navikt/ds-tokens@6.15.0
+
 ## 6.14.0
 
 ### Minor Changes

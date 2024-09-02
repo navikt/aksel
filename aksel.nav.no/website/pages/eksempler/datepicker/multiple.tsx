@@ -7,7 +7,7 @@ const Example = () => {
       mode="multiple"
       min={1}
       max={3}
-      onSelect={console.log}
+      onSelect={console.info}
     />
   );
 };

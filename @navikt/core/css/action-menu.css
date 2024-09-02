@@ -185,7 +185,7 @@
   font-size: var(--a-font-size-small);
 }
 
-.navds-action-menu__separator {
+.navds-action-menu__divider {
   height: 1px;
   margin-block: var(--a-spacing-2);
   background-color: var(--a-border-divider);

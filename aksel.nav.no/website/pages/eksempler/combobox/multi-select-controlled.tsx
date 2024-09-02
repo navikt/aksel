@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [value, setValue] = useState("");
   const mockPersistUserAddedValues = (option, isSelected) => {
-    console.log("custom option", { option, isSelected });
+    console.info("custom option", { option, isSelected });
   };
 
   const [selectedOptions, setSelectedOptions] = useState(

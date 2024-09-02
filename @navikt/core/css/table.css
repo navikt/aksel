@@ -176,9 +176,8 @@
 }
 
 .navds-table__toggle-expand-cell {
-  padding: 0 var(--a-spacing-2);
-  position: relative;
-  width: 2.5rem;
+  padding: 0;
+  width: 3rem;
 }
 
 .navds-table--large .navds-table__toggle-expand-cell {
@@ -193,20 +192,25 @@
   display: grid;
   place-content: center;
   cursor: pointer;
-  margin: 0;
   background: transparent;
   border: none;
   border-radius: var(--a-border-radius-medium);
   height: 2rem;
   width: 2rem;
   font-size: 1.5rem;
+  margin: 0 auto;
 }
 
 .navds-table__expandable-icon {
   transition: transform 150ms ease-in-out;
 }
 
+.navds-table__toggle-expand-cell:hover {
+  cursor: pointer;
+}
+
 .navds-table__toggle-expand-button:hover,
+.navds-table__toggle-expand-cell:hover > .navds-table__toggle-expand-button,
 .navds-table__expandable-row--clickable:hover .navds-table__toggle-expand-button {
   background-color: var(--a-surface-hover);
 }
@@ -233,16 +237,6 @@
     outline: none;
     box-shadow: var(--a-shadow-focus);
   }
-}
-
-.navds-table__toggle-expand-button::after {
-  inset: 0;
-  z-index: 1;
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
 }
 
 .navds-table__expanded-row-cell {

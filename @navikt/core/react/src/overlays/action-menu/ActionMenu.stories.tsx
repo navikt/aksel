@@ -131,7 +131,7 @@ export const Shortcut: Story = {
               <div>D123456</div>
             </ActionMenu.Label>
           </VStack>
-          <ActionMenu.Separator />
+          <ActionMenu.Divider />
           <ActionMenu.Group label="Group 1">
             <ActionMenu.CheckboxItem
               checked={checkedItems.checkbox1}
@@ -148,7 +148,7 @@ export const Shortcut: Story = {
               Checkbox 2
             </ActionMenu.CheckboxItem>
           </ActionMenu.Group>
-          <ActionMenu.Separator />
+          <ActionMenu.Divider />
           <ActionMenu.Group label="Group 2">
             <ActionMenu.Item
               shortcut="⌘+T"
@@ -368,7 +368,7 @@ export const RadioGroups: Story = {
   decorators: [DemoDecorator],
 };
 
-export const SeparatorWithGroupedItems: Story = {
+export const DividerWithGroupedItems: Story = {
   render: (props) => {
     return (
       <ActionMenu open={props.open}>
@@ -387,7 +387,7 @@ export const SeparatorWithGroupedItems: Story = {
               Item 3
             </ActionMenu.Item>
           </ActionMenu.Group>
-          <ActionMenu.Separator />
+          <ActionMenu.Divider />
           <ActionMenu.Group label="Group 2">
             <ActionMenu.Item onSelect={() => console.log("Item 4 clicked")}>
               Item 4
@@ -406,7 +406,7 @@ export const SeparatorWithGroupedItems: Story = {
   decorators: [DemoDecorator],
 };
 
-export const SeparatorWithItems: Story = {
+export const DividerWithItems: Story = {
   render: (props) => {
     return (
       <ActionMenu open={props.open}>
@@ -417,11 +417,11 @@ export const SeparatorWithItems: Story = {
           <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
             Item 1
           </ActionMenu.Item>
-          <ActionMenu.Separator />
+          <ActionMenu.Divider />
           <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
             Item 2
           </ActionMenu.Item>
-          <ActionMenu.Separator />
+          <ActionMenu.Divider />
           <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
           </ActionMenu.Item>
@@ -741,7 +741,7 @@ export const ViewDemo: Story = {
                           </ActionMenu.Sub>
                         </ActionMenu.SubContent>
                       </ActionMenu.Sub>
-                      <ActionMenu.Separator />
+                      <ActionMenu.Divider />
                       <ActionMenu.Item
                         variant="danger"
                         onSelect={() =>
@@ -822,12 +822,12 @@ export const Chromatic: Story = {
         </HStack>
         <HStack gap="12">
           <div>
-            <h2>SeparatorWithGroupedItems</h2>
-            {SeparatorWithGroupedItems.render?.(newArgs, context)}
+            <h2>DividerWithGroupedItems</h2>
+            {DividerWithGroupedItems.render?.(newArgs, context)}
           </div>
           <div>
-            <h2>SeparatorWithItems</h2>
-            {SeparatorWithItems.render?.(newArgs, context)}
+            <h2>DividerWithItems</h2>
+            {DividerWithItems.render?.(newArgs, context)}
           </div>
         </HStack>
         <div>

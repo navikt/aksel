@@ -28,9 +28,9 @@ export async function runCodeshift(
     ignore: ignoreNodeModules,
   });
 
-  console.log("\nRunning migration:", chalk.green("input"));
+  console.info("\nRunning migration:", chalk.green("input"));
 
-  options?.glob && console.log(`Using glob: ${chalk.green(options.glob)}\n`);
+  options?.glob && console.info(`Using glob: ${chalk.green(options.glob)}\n`);
 
   const warning = getWarning(input);
 
@@ -49,7 +49,7 @@ export async function runCodeshift(
       print: options?.print,
     });
 
-    warning && console.log(`\n${chalk.yellow(warning)}\n`);
+    warning && console.info(`\n${chalk.yellow(warning)}\n`);
   } catch (error) {
     program.error(chalk.red("Error:", error.message));
   }
