@@ -36,9 +36,11 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   size,
   children,
 }) => {
+  const { value } = useInputContext();
+  const { isMultiSelect } = useSelectedOptionsContext();
   return (
     <Chips className="navds-combobox__selected-options" size={size}>
-      {selectedOptions.length
+      {value.length === 0 || (isMultiSelect && selectedOptions.length)
         ? selectedOptions.map((option, i) => (
             <Option key={option.label + i} option={option} />
           ))

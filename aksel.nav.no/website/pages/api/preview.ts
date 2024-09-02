@@ -4,7 +4,7 @@ import { clientConfig } from "../../sanity/config";
 
 const previewClient = createClient({
   ...clientConfig,
-  token: process.env.SANITY_PREVIEW_TOKEN,
+  token: process.env.SANITY_READ,
   ignoreBrowserTokenWarning: process.env.NODE_ENV === "test",
 });
 
@@ -37,7 +37,7 @@ export default async function preview(
     return redirectToPreview(res, "/");
   }
 
-  if (!process.env.SANITY_PREVIEW_TOKEN) {
+  if (!process.env.SANITY_READ) {
     return res.status(401).json({ message: "Invalid preview-token" });
   }
 
