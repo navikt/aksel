@@ -65,6 +65,10 @@ export const ExampletextBlock = defineType({
     },
   },
   components: {
-    preview: (values) => <AkselExampletextBlock node={values as any} />,
+    preview: (values) => (
+      <AkselExampletextBlock
+        node={{ ...values, title: values.title?.toString() }}
+      />
+    ),
   },
 });
