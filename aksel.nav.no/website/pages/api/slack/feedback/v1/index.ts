@@ -32,7 +32,7 @@ const requestBodySchema = z.object({
   }),
 });
 
-const client = new WebClient(process.env.SLACK_BOT_TOKEN);
+const client = new WebClient(process.env.SLACK_BOT_USER_TOKEN);
 
 export default authProtectedApi(sendSlackbotFeedback);
 

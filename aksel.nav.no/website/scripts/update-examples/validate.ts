@@ -9,7 +9,7 @@ import { RootDirectoriesT, rootDirectories } from "./types";
     if (!(await validate(directory))) {
       error = true;
     } else {
-      console.log("Everything Is A-OK\n");
+      console.info("Everything Is A-OK\n");
     }
   }
   if (error) {
@@ -18,7 +18,7 @@ import { RootDirectoriesT, rootDirectories } from "./types";
 })();
 
 export async function validate(directory: RootDirectoriesT) {
-  console.log(`\n*** Checking '${directory}' ***\n`);
+  console.info(`\n*** Checking '${directory}' ***\n`);
   const folders = getDirectories(directory);
   const exampleData = await Promise.all(
     folders.map(async (folder) => ({

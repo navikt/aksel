@@ -5,22 +5,22 @@
   "private": true,
   "scripts": {
     "postinstall": "husky install",
-    "boot": "yarn workspaces foreach -v -pA --topological-dev --no-private run build",
+    "boot": "yarn workspaces foreach -vv -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js",
     "storybook": "storybook dev -p 6006",
     "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
     "dev": "yarn workspace aksel.nav.no dev",
-    "docgen": "yarn workspaces foreach -v -p run docgen",
+    "docgen": "yarn workspaces foreach -vv -pA run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",
     "updateArticleViews": "deno run --allow-net --allow-env --allow-read --no-config scripts/article-views/update-article-views/main.ts",
     "chromatic": "npx chromatic --only-changed --project-token chpt_1dc4af6a1c8cc48 --build-script-name build:storybook-chromatic",
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
     "build:storybook": "storybook build",
-    "test": "yarn workspaces foreach -p -v run test",
-    "lint": "yarn eslint --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
+    "test": "yarn workspaces foreach -vv -pA run test",
+    "lint": "yarn eslint --max-warnings=0 --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
-    "version": "changeset version && yarn changelog",
+    "create-version": "changeset version && yarn changelog",
     "release": "yarn boot && yarn docgen && changeset publish",
     "biome:lint": "yarn biome lint ."
   },
@@ -63,10 +63,10 @@
     "importOrderSortSpecifiers": true
   },
   "lint-staged": {
-    "*.js": "eslint",
-    "*.jsx": "eslint",
-    "*.ts": "eslint",
-    "*.tsx": "eslint",
+    "*.js": "eslint --max-warnings=0",
+    "*.jsx": "eslint --max-warnings=0",
+    "*.ts": "eslint --max-warnings=0",
+    "*.tsx": "eslint --max-warnings=0",
     "*.css": "stylelint",
     "*": "prettier --write --ignore-unknown"
   },
@@ -176,7 +176,6 @@
     "eslint-plugin-testing-library": "^6.0.2",
     "eslint-plugin-vitest": "^0.3.22",
     "fast-glob": "3.2.11",
-    "glob": "^7.1.6",
     "husky": "^8.0.0",
     "lint-staged": "13.0.3",
     "prettier": "3.1.1",
@@ -199,5 +198,5 @@
     "yarn": "^1.22.10"
   },
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@4.4.0"
 }

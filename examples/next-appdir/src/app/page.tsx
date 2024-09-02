@@ -31,7 +31,7 @@ export default function Home() {
     "The Rise of Skywalker",
   ];
 
-  console.log({ omit: omit({ test: "value" }, ["test"]) });
+  console.info({ omit: omit({ test: "value" }, ["test"]) });
 
   return (
     <main className={styles.main}>

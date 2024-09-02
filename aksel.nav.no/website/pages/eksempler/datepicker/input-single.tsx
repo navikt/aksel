@@ -6,7 +6,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const { datepickerProps, inputProps, selectedDay } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
-    onDateChange: console.log,
+    onDateChange: console.info,
   });
 
   return (

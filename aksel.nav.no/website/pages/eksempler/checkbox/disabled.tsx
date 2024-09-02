@@ -2,7 +2,7 @@ import { Checkbox, CheckboxGroup } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const handleChange = (val: string[]) => console.log(val);
+  const handleChange = (val: string[]) => console.info(val);
 
   return (
     <CheckboxGroup

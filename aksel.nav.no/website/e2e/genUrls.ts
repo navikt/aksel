@@ -4,7 +4,7 @@ import { sitemapPages } from "../sanity/interface/interface";
 
 dotenv.config();
 
-const token = process.env.SANITY_PRIVATE_NO_DRAFTS;
+const token = process.env.SANITY_READ_NO_DRAFTS;
 
 sitemapPages(token)
   .then((pages) =>

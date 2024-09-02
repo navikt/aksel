@@ -22,7 +22,7 @@ export async function fetchSlackMembers(): Promise<
     };
   }
 
-  const client = new WebClient(process.env.SLACK_BOT_TOKEN);
+  const client = new WebClient(process.env.SLACK_BOT_USER_TOKEN);
 
   const pagination: {
     limit: number;

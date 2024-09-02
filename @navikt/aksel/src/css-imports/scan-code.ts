@@ -40,5 +40,5 @@ async function scanCode() {
     })
     .catch(() => null);
 
-  console.log(JSON.stringify(Object.keys(result)));
+  console.info(JSON.stringify(Object.keys(result)));
 }

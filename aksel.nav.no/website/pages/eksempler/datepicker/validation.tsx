@@ -8,7 +8,7 @@ const Example = () => {
     fromDate: new Date("Aug 23 2019"),
     onValidate: (val) => {
       setHasError(!val.isValidDate);
-      console.log(val);
+      console.info(val);
     },
   });
 

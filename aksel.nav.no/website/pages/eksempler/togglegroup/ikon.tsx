@@ -9,7 +9,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   return (
     <div className="grid gap-4">
-      <ToggleGroup defaultValue="lest" onChange={console.log}>
+      <ToggleGroup defaultValue="lest" onChange={console.info}>
         <ToggleGroup.Item
           value="ulest"
           icon={<EnvelopeClosedIcon title="Ulest" />}
@@ -23,7 +23,11 @@ const Example = () => {
           icon={<PaperplaneIcon title="Sendt" />}
         />
       </ToggleGroup>
-      <ToggleGroup defaultValue="lest" onChange={console.log} variant="neutral">
+      <ToggleGroup
+        defaultValue="lest"
+        onChange={console.info}
+        variant="neutral"
+      >
         <ToggleGroup.Item
           value="ulest"
           icon={<EnvelopeClosedIcon title="Ulest" />}

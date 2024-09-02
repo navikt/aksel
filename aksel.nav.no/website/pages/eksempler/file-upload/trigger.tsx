@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <UNSAFE_FileUpload.Trigger multiple={false} onSelect={console.log}>
+    <UNSAFE_FileUpload.Trigger multiple={false} onSelect={console.info}>
       <Button variant="secondary" icon={<UploadIcon aria-hidden />}>
         Last opp filer
       </Button>

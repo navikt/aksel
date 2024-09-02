@@ -2,6 +2,7 @@
   overflow: hidden;
   border: 1px solid var(--a-border-subtle);
   border-radius: var(--a-border-radius-large);
+  background: var(--a-surface-default);
 }
 
 .navds-form-summary__header {
