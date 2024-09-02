@@ -56,7 +56,7 @@ interface MenuComponent extends React.FC<MenuProps> {
   CheckboxItem: typeof MenuCheckboxItem;
   RadioGroup: typeof MenuRadioGroup;
   RadioItem: typeof MenuRadioItem;
-  Separator: typeof MenuSeparator;
+  Divider: typeof MenuDivider;
   Sub: typeof MenuSub;
   SubTrigger: typeof MenuSubTrigger;
   SubContent: typeof MenuSubContent;
@@ -788,12 +788,12 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                               Menu Separator                               */
+/*                               Menu Divider                               */
 /* -------------------------------------------------------------------------- */
-interface MenuSeparatorProps extends SlottedDivProps {}
+interface MenuDividerProps extends SlottedDivProps {}
 
-const MenuSeparator = forwardRef<SlottedDivElementRef, MenuSeparatorProps>(
-  (props: MenuSeparatorProps, ref) => {
+const MenuDivider = forwardRef<SlottedDivElementRef, MenuDividerProps>(
+  (props: MenuDividerProps, ref) => {
     return (
       <SlottedDivElement
         role="separator"
@@ -1141,7 +1141,7 @@ Menu.Item = MenuItem;
 Menu.CheckboxItem = MenuCheckboxItem;
 Menu.RadioGroup = MenuRadioGroup;
 Menu.RadioItem = MenuRadioItem;
-Menu.Separator = MenuSeparator;
+Menu.Divider = MenuDivider;
 Menu.Sub = MenuSub;
 Menu.SubTrigger = MenuSubTrigger;
 Menu.SubContent = MenuSubContent;
@@ -1158,7 +1158,7 @@ export {
   MenuPortal,
   MenuRadioGroup,
   MenuRadioItem,
-  MenuSeparator,
+  MenuDivider,
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
@@ -1172,7 +1172,7 @@ export {
   type MenuProps,
   type MenuRadioGroupProps,
   type MenuRadioItemProps,
-  type MenuSeparatorProps,
+  type MenuDividerProps,
   type MenuSubContentProps,
   type MenuSubProps,
   type MenuSubTriggerProps,
