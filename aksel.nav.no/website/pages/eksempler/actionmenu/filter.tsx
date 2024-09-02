@@ -69,7 +69,7 @@ const Example = () => {
             Tags
           </ActionMenu.CheckboxItem>
         </ActionMenu.Group>
-        <ActionMenu.Separator />
+        <ActionMenu.Divider />
         <ActionMenu.RadioGroup
           onValueChange={setRows}
           value={rows}

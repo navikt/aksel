@@ -9,29 +9,29 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+P">
+          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+P">
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+A">
+          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+A">
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+S">
+          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+S">
             Samhandlere
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+O">
+          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+O">
             Oppgavestatistikk
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log} shortcut="CTRL+K">
+          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+K">
             Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
-        <ActionMenu.Separator />
+        <ActionMenu.Divider />
         <ActionMenu.Group label="Systemer og oppslagsverk">
-          <ActionMenu.Item onSelect={console.log}>A-inntekt</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <ActionMenu.Item onSelect={console.info}>A-inntekt</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>
             Aa-registeret
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>Modia</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>Modia</ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
     </ActionMenu>

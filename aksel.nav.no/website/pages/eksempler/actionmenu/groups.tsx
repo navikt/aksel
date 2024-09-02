@@ -17,44 +17,44 @@ const Example = () => {
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
           <ActionMenu.Item
-            onSelect={console.log}
+            onSelect={console.info}
             icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
           >
             Personoversikt
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={console.log}
+            onSelect={console.info}
             icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
           >
             Arbeidsgiveroversikt
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={console.log}
+            onSelect={console.info}
             icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
           >
             Samhandlere
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={console.log}
+            onSelect={console.info}
             disabled
             icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
           >
             Oppgavestatistikk
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={console.log}
+            onSelect={console.info}
             icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
           >
             Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
-        <ActionMenu.Separator />
+        <ActionMenu.Divider />
         <ActionMenu.Group label="Systemer og oppslagsverk">
-          <ActionMenu.Item onSelect={console.log}>A-inntekt</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <ActionMenu.Item onSelect={console.info}>A-inntekt</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>
             Aa-registeret
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>Modia</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>Modia</ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
     </ActionMenu>

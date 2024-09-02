@@ -9,15 +9,15 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Systemer og oppslagsverk">
-          <ActionMenu.Item onSelect={console.log}>A-inntekt</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <ActionMenu.Item onSelect={console.info}>A-inntekt</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>
             Aa-registeret
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>Gosys</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <ActionMenu.Item onSelect={console.info}>Gosys</ActionMenu.Item>
+          <ActionMenu.Item onSelect={console.info}>
             Modia Sykefraværsoppfølging
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.log}>
+          <ActionMenu.Item onSelect={console.info}>
             Modia Personoversikt
           </ActionMenu.Item>
         </ActionMenu.Group>
