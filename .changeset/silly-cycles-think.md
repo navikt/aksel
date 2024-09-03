@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-Combobox: Respect onBlur from the outside, and omit props that are not respected
+Combobox: Add support for `onBlur`, and omit props that have no effect.
