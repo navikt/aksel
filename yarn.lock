@@ -21847,6 +21847,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.53.0":
+  version: 7.53.0
+  resolution: "react-hook-form@npm:7.53.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10/b7d73696b7c10e042f6ea6fcec01f951091146bfbc89d1378327a970bcd724b968e93fae1657bddada75caf648cfaf8693c5ba03c25e96816b755079d29f65da
+  languageName: node
+  linkType: hard
+
 "react-i18next@npm:14.0.2":
   version: 14.0.2
   resolution: "react-i18next@npm:14.0.2"
@@ -27392,6 +27401,7 @@ __metadata:
     prism-react-renderer: "npm:^2.0.0"
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
+    react-hook-form: "npm:^7.53.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.2.0"
     react-rx: "npm:^2.1.3"
