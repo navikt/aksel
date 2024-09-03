@@ -286,6 +286,7 @@ interface MenuContentInternalProps
   onPointerDownOutside?: DismissableLayerProps["onPointerDownOutside"];
   onFocusOutside?: DismissableLayerProps["onFocusOutside"];
   onInteractOutside?: DismissableLayerProps["onInteractOutside"];
+  safeZone?: DismissableLayerProps["safeZone"];
 }
 
 const MenuContentInternal = forwardRef<
@@ -303,6 +304,7 @@ const MenuContentInternal = forwardRef<
       onFocusOutside,
       onInteractOutside,
       onDismiss,
+      safeZone,
       ...rest
     }: MenuContentInternalProps,
     forwardedRef,
@@ -383,6 +385,7 @@ const MenuContentInternal = forwardRef<
             onFocusOutside={onFocusOutside}
             onInteractOutside={onInteractOutside}
             onDismiss={onDismiss}
+            safeZone={safeZone}
           >
             <RovingFocus
               asChild

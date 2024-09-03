@@ -428,6 +428,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
               hasInteractedOutsideRef.current = true;
             }
           }}
+          safeZone={{ anchor: context.triggerRef.current }}
           style={{
             ...style,
             ...{
