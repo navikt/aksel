@@ -117,7 +117,7 @@ const Example = () => {
               <Radio value="public">Kollektivtransport</Radio>
             </RadioGroup>
 
-            {formState.tries > 0 && Object.values(errors).some(Boolean) && (
+            {Object.values(errors).some(Boolean) && (
               <ErrorSummary
                 ref={errorSummaryRef}
                 heading="Du må rette disse feilene før du kan fortsette:"
