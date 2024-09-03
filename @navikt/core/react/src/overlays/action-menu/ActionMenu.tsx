@@ -76,7 +76,9 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
    * Semantically and visually groups items together with a label.
    * This is the prefered way to group items, as it provides better accessibility
-   * rather than using a standalone `ActionMenu.Label`
+   * rather than using a standalone `ActionMenu.Label`.
+   *
+   * It is required to use either `label` or `aria-label` to provide an accessible name for the group.
    * @example
    * ```jsx
    * <ActionMenu.Content>
@@ -159,6 +161,8 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   CheckboxItem: typeof ActionMenuCheckboxItem;
   /**
    * A radio group in the menu.
+   *
+   * It is required to use either `label` or `aria-label` to provide an accessible name for the group.
    * @example
    * ```jsx
    * <ActionMenu.RadioGroup
@@ -473,9 +477,31 @@ const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
 /* -------------------------------------------------------------------------- */
 type ActionMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
-interface ActionMenuGroupProps extends Omit<MenuGroupProps, "asChild"> {
-  label?: string;
-}
+
+type ActionMenuGroupLabelingProps =
+  | {
+      /**
+       * Adds a visual and accessible label to the group.
+       */
+      label: string;
+      /**
+       * Adds an aria-label to the group.
+       */
+      "aria-label"?: never;
+    }
+  | {
+      /**
+       * Adds an aria-label to the group.
+       */
+      "aria-label": string;
+      /**
+       * Adds a visual and accessible label to the group.
+       */
+      label?: never;
+    };
+
+type ActionMenuGroupProps = Omit<MenuGroupProps, "asChild"> &
+  ActionMenuGroupLabelingProps;
 
 const ActionMenuGroup = forwardRef<
   ActionMenuGroupElement,
@@ -750,14 +776,10 @@ type ActionMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
 type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
   typeof Menu.RadioGroup
 >;
-interface ActionMenuRadioGroupProps
-  extends Omit<MenuRadioGroupProps, "asChild"> {
-  children: React.ReactNode;
-  /**
-   * Adds a label to the radio group
-   */
-  label?: string;
-}
+type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
+  Omit<MenuRadioGroupProps, "asChild"> & {
+    children: React.ReactNode;
+  };
 
 const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
