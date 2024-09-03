@@ -121,6 +121,10 @@
   color: var(--a-text-default);
 }
 
+.navds-action-menu__item--danger {
+  color: var(--a-text-danger);
+}
+
 .navds-action-menu__item--danger:focus {
   background-color: var(--a-surface-danger-subtle);
 }
