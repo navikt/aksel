@@ -19,7 +19,7 @@ const Example = () => {
               <Table.HeaderCell scope="row">{id}</Table.HeaderCell>
               <Table.DataCell>{status}</Table.DataCell>
               <Table.DataCell align="right">
-                <ActionMenu>
+                <ActionMenu defaultOpen={i === 1}>
                   <ActionMenu.Trigger>
                     <Button
                       variant="tertiary-neutral"
