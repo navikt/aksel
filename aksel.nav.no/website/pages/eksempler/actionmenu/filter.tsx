@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -20,7 +21,13 @@ const Example = () => {
   return (
     <ActionMenu defaultOpen>
       <ActionMenu.Trigger>
-        <Button variant="secondary">Filter</Button>
+        <Button
+          variant="secondary-neutral"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          Filter
+        </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Kolonner">
@@ -94,6 +101,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
   desc: "Med CheckboxItem og RadioItem i ActionMenu er det enkelt å lage et filter for tabeller eller andre komplekse grensesnitt.",
 };

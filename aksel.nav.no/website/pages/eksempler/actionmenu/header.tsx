@@ -17,42 +17,30 @@ const Example = () => {
       <ActionMenu defaultOpen>
         <ActionMenu.Trigger>
           <InternalHeader.Button>
-            <MenuGridIcon
-              style={{ fontSize: "1.5rem" }}
-              title="Systemer og oppslagsverk"
-            />
+            <MenuGridIcon fontSize="1.5rem" title="Systemer og oppslagsverk" />
           </InternalHeader.Button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group label="Gosys">
-            <ActionMenu.Item
-              onSelect={console.info}
-              icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
-            >
+            <ActionMenu.Item onSelect={console.info} icon={<PersonIcon />}>
               Personoversikt
             </ActionMenu.Item>
-            <ActionMenu.Item
-              onSelect={console.info}
-              icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
-            >
+            <ActionMenu.Item onSelect={console.info} icon={<PersonGroupIcon />}>
               Arbeidsgiveroversikt
             </ActionMenu.Item>
-            <ActionMenu.Item
-              onSelect={console.info}
-              icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
-            >
+            <ActionMenu.Item onSelect={console.info} icon={<HandshakeIcon />}>
               Samhandlere
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={console.info}
               disabled
-              icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
+              icon={<BarChartIcon />}
             >
               Oppgavestatistikk
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={console.info}
-              icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
+              icon={<MagnifyingGlassIcon />}
             >
               Søk journalpost
             </ActionMenu.Item>

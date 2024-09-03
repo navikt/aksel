@@ -1,5 +1,6 @@
 import {
   BarChartIcon,
+  ChevronDownIcon,
   HandshakeIcon,
   MagnifyingGlassIcon,
   PersonGroupIcon,
@@ -12,38 +13,35 @@ const Example = () => {
   return (
     <ActionMenu defaultOpen>
       <ActionMenu.Trigger>
-        <Button>Open</Button>
+        <Button
+          variant="secondary-neutral"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          Meny
+        </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<PersonIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.info} icon={<PersonIcon />}>
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<PersonGroupIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.info} icon={<PersonGroupIcon />}>
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item
-            onSelect={console.info}
-            icon={<HandshakeIcon aria-hidden fontSize="1.25rem" />}
-          >
+          <ActionMenu.Item onSelect={console.info} icon={<HandshakeIcon />}>
             Samhandlere
           </ActionMenu.Item>
           <ActionMenu.Item
             onSelect={console.info}
             disabled
-            icon={<BarChartIcon aria-hidden fontSize="1.25rem" />}
+            icon={<BarChartIcon />}
           >
             Oppgavestatistikk
           </ActionMenu.Item>
           <ActionMenu.Item
             onSelect={console.info}
-            icon={<MagnifyingGlassIcon aria-hidden fontSize="1.25rem" />}
+            icon={<MagnifyingGlassIcon />}
           >
             Søk journalpost
           </ActionMenu.Item>
@@ -71,5 +69,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Ved å gruppere elementer i ActionMenu vil menyen bli mer oversiktlig og lettere å navigere for brukere av hjelpemidler som skjermlesere.",
+  desc: "Ved å gruppere elementer i ActionMenu vil menyen bli mer oversiktlig og lettere å navigere. Dette vil være ekstra viktig for komplese menyer som inneholder ulike kontekster og funksjonalitet.",
 };

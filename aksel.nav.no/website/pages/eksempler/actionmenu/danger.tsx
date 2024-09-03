@@ -1,4 +1,9 @@
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import {
+  ChevronDownIcon,
+  PersonPlusIcon,
+  TasklistIcon,
+  TrashIcon,
+} from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -15,17 +20,20 @@ const Example = () => {
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
-        <ActionMenu.Group label="Systemer og oppslagsverk">
-          <ActionMenu.Item onSelect={console.info}>A-inntekt</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info}>
-            Aa-registeret
+        <ActionMenu.Group label="Sak #12345">
+          <ActionMenu.Item onSelect={console.info} icon={<PersonPlusIcon />}>
+            Tildel selv
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info}>Gosys</ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info}>
-            Modia Sykefraværsoppfølging
+          <ActionMenu.Item onSelect={console.info} icon={<TasklistIcon />}>
+            Godkjenn
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info}>
-            Modia Personoversikt
+          <ActionMenu.Divider />
+          <ActionMenu.Item
+            variant="danger"
+            onSelect={console.info}
+            icon={<TrashIcon />}
+          >
+            Slett sak
           </ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
@@ -42,5 +50,5 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 8,
 };

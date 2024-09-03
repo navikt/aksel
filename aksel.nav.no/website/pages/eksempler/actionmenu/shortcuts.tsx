@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -5,7 +6,13 @@ const Example = () => {
   return (
     <ActionMenu defaultOpen>
       <ActionMenu.Trigger>
-        <Button>Open</Button>
+        <Button
+          variant="secondary-neutral"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          Meny
+        </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
@@ -47,6 +54,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 3,
   desc: "Du vil selv måtte legge til funksjonalitet for å lytte til tastatursnarveier.",
 };

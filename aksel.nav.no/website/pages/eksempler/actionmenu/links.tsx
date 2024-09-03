@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { ActionMenu, Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -6,12 +7,18 @@ const Example = () => {
   return (
     <ActionMenu defaultOpen>
       <ActionMenu.Trigger>
-        <Button>Open</Button>
+        <Button
+          variant="secondary-neutral"
+          icon={<ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          Meny
+        </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="See code for implementation">
           <ActionMenu.Item as="a" href="#">
-            With Window.open
+            Anchor
           </ActionMenu.Item>
           <Link href="#123" passHref legacyBehavior>
             <ActionMenu.Item as="a">Nextjs Pages router</ActionMenu.Item>
@@ -57,5 +64,6 @@ export const Demo = {
 
 export const args = {
   index: 7,
-  desc: "Alle events sendes gjennom 'onSelect'-callback. Du vil manuelt måtte håndtere routing hvis handlingen er en lenke. Se kode og kommentarer for hvordan dette kan løses i ulike rammeverk.",
 };
+
+// TODO: Icons on trigger buttons!
