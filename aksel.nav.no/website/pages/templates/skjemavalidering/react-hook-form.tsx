@@ -74,7 +74,7 @@ const Example = () => {
                 pattern: {
                   value: /^\d{11}$/,
                   message: "Personnummer må være 11 siffer.",
-                },
+                }, // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
               })}
             />
             <RadioGroup
