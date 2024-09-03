@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ToggleGroup defaultValue="lest" onChange={console.log} fill>
+    <ToggleGroup defaultValue="lest" onChange={console.info} fill>
       <ToggleGroup.Item value="ulest" label="Ulest" />
       <ToggleGroup.Item value="lest" label="Lest" />
       <ToggleGroup.Item value="sendt" label="Sendt" />

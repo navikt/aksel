@@ -22,7 +22,9 @@ module.exports = {
       },
     },
     font: {
-      family: { value: "'Source Sans Pro', Arial, sans-serif" },
+      family: {
+        value: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
+      },
       line: {
         height: {
           heading: {

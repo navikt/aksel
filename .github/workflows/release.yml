@@ -45,7 +45,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: yarn version
+          version: yarn create-version
           publish: yarn release
           createGithubReleases: false
         env:

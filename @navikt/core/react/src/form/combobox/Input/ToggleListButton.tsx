@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
+import { useInputContext } from "./Input.context";
 
 interface ToggleListButtonProps {
   toggleListButtonLabel?: string;
@@ -11,10 +12,14 @@ export const ToggleListButton = forwardRef<
   ToggleListButtonProps
 >(({ toggleListButtonLabel }, ref) => {
   const { isListOpen, toggleIsListOpen } = useFilteredOptionsContext();
+  const { focusInput } = useInputContext();
   return (
     <button
       type="button"
-      onPointerUp={() => toggleIsListOpen()}
+      onPointerUp={() => {
+        toggleIsListOpen();
+        focusInput();
+      }}
       onKeyDown={({ key }) => key === "Enter" && toggleIsListOpen()}
       className="navds-combobox__button-toggle-list"
       aria-expanded={isListOpen}

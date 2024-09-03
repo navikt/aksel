@@ -18,9 +18,9 @@ await load({
   export: true,
 });
 
-const token = Deno.env.get("SANITY_WRITE_KEY");
+const token = Deno.env.get("SANITY_WRITE");
 if (!token) {
-  throw new Error("Missing SANITY_WRITE_KEY");
+  throw new Error("Missing SANITY_WRITE");
 }
 
 const noCdnClient = createClient({
@@ -42,4 +42,4 @@ document_ids.forEach(async (doc) => {
   await transactionClient.delete(doc);
 });
 const res_commit = await transactionClient.commit({ dryRun: false });
-console.log({ res_commit });
+console.info({ res_commit });

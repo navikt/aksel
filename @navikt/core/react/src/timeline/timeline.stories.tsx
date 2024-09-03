@@ -41,7 +41,7 @@ const row1 = [
     start: new Date("Feb 1 2022"),
     end: new Date("Mar 15 2022"),
     status: "danger",
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     statusLabel: "Sykemeldt",
   },
   {
@@ -57,7 +57,7 @@ const row1 = [
     start: new Date("Mar 1 2022"),
     end: new Date("Mar 31 2022"),
     status: "success",
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     icon: <CheckmarkCircleFillIcon aria-hidden />,
     label: "test",
     statusLabel: "Sykemeldt",
@@ -68,7 +68,7 @@ const row1 = [
     end: new Date("Jul 31 2022"),
     status: "warning",
     icon: <CheckmarkCircleFillIcon aria-hidden />,
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     statusLabel: "Sykemeldt",
   },
   {
@@ -87,7 +87,7 @@ const row2 = [
     start: new Date("May 13 2022"),
     end: new Date("May 25 2022"),
     status: "warning",
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     icon: <CheckmarkCircleFillIcon aria-hidden />,
     children: <DummyLabel />,
   },
@@ -96,7 +96,7 @@ const row2 = [
     start: new Date("Feb 1 2022"),
     end: new Date("May 2 2022"),
     status: "neutral",
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     icon: <CheckmarkCircleFillIcon aria-hidden />,
     children: <DummyLabel />,
   },
@@ -326,7 +326,7 @@ export const ActivePeriod = () => {
                 onSelectPeriod={() => {
                   setActivePeriod(p);
                   p?.onSelectPeriod?.();
-                  console.log("PERIOD SELECTED!");
+                  console.info("PERIOD SELECTED!");
                 }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
@@ -455,7 +455,7 @@ export const ContentDemo = () => {
                 onSelectPeriod={() => {
                   setActivePeriod(p);
                   p?.onSelectPeriod?.();
-                  console.log("PERIOD SELECTED!");
+                  console.info("PERIOD SELECTED!");
                 }}
                 icon={p.icon}
                 isActive={activePeriod?.id === p.id}

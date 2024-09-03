@@ -56,7 +56,7 @@ async function createZipArchive() {
 
   zip.addLocalFolder("./core-icons");
   zip.writeZip(outputFile);
-  console.log(`Created ${outputFile} successfully`);
+  console.info(`Created ${outputFile} successfully`);
 }
 
 createZipArchive();

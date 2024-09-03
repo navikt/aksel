@@ -45,7 +45,7 @@ function Example() {
               <Show above="sm">
                 <ApplicationPictogram />
               </Show>
-              <Heading level="1" size="large">
+              <Heading level="1" size="xlarge">
                 Søknad om alderspensjon
               </Heading>
             </Stack>

@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 const Example = () => {
   const [value, setValue] = useState("");
   const mockPersistUserAddedValues = (option, isSelected) => {
-    console.log("custom option", { option, isSelected });
+    console.info("custom option", { option, isSelected });
   };
 
   const [selectedOptions, setSelectedOptions] = useState(
@@ -38,7 +38,7 @@ const Example = () => {
         label="Hvilke land har du besøkt de siste 6 ukene? Velg opptil flere."
         filteredOptions={filteredOptions}
         isMultiSelect
-        onChange={(event) => setValue(event?.target.value || "")}
+        onChange={setValue}
         onToggleSelected={onToggleSelected}
         selectedOptions={selectedOptions}
         options={initialOptions}

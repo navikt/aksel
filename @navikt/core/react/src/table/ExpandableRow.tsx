@@ -112,6 +112,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             className={cl("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
+            onClick={expansionHandler}
           >
             {!expansionDisabled && (
               <button

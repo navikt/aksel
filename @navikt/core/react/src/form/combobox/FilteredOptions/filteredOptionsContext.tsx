@@ -64,6 +64,7 @@ const FilteredOptionsProvider = ({
     setValue,
     setSearchTerm,
     shouldAutocomplete,
+    setHideCaret,
   } = useInputContext();
   const { maxSelected } = useSelectedOptionsContext();
 
@@ -106,16 +107,19 @@ const FilteredOptionsProvider = ({
   }, [allowNewValues, customOptions, id, options, value]);
 
   useClientLayoutEffect(() => {
+    const autoCompleteCandidate =
+      filteredOptionsUtils.getFirstValueStartingWith(
+        searchTerm,
+        filteredOptions,
+      )?.label;
     if (
       shouldAutocomplete &&
-      filteredOptionsUtils.normalizeText(searchTerm) !== "" &&
-      (previousSearchTerm?.length || 0) < searchTerm.length &&
-      filteredOptions.length > 0
+      autoCompleteCandidate &&
+      (previousSearchTerm?.length || 0) < searchTerm.length
     ) {
       setValue(
-        `${searchTerm}${filteredOptions[0].label.substring(searchTerm.length)}`,
+        `${searchTerm}${autoCompleteCandidate.substring(searchTerm.length)}`,
       );
-      setSearchTerm(searchTerm);
     }
   }, [
     filteredOptions,
@@ -133,9 +137,17 @@ const FilteredOptionsProvider = ({
   const toggleIsListOpen = useCallback(
     (newState?: boolean) => {
       virtualFocus.moveFocusToTop();
+      if (newState ?? !isInternalListOpen) {
+        setHideCaret(!!maxSelected?.isLimitReached);
+      }
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
-    [virtualFocus],
+    [
+      virtualFocus,
+      maxSelected?.isLimitReached,
+      isInternalListOpen,
+      setHideCaret,
+    ],
   );
 
   const isValueNew = useMemo(

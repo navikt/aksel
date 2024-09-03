@@ -18,6 +18,7 @@ Disallow: /*.js$
 
 Disallow: /eksempler
 Disallow: /templates
+Disallow: /sandbox
 Disallow: /admin
 Disallow: /gp
 
