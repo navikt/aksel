@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 6.16.3
+
+### Patch Changes
+
+- Combobox :children_crossing: single select now hides selected value when typing, onBlur clears input ([#3124](https://github.com/navikt/aksel/pull/3124))
+
+- Combobox: :lipstick: hide caret on select ([#3071](https://github.com/navikt/aksel/pull/3071))
+
+- :bug: Combobox: trailing spaces no longer work like wildcards for autocomplete suggestions ([#3105](https://github.com/navikt/aksel/pull/3105))
+
+- Fixed bug in Combobox where the wrong option was selected on Enter if the autocompleted word was not the first in FilteredOptions ([#3110](https://github.com/navikt/aksel/pull/3110))
+
+- Updated dependencies [[`9907ef08a`](https://github.com/navikt/aksel/commit/9907ef08a639cb2ee3b2af1ef76a30faadd7b340)]:
+  - @navikt/aksel-icons@6.16.3
+  - @navikt/ds-tokens@6.16.3
+
 ## 6.16.2
 
 ### Patch Changes
