@@ -20,7 +20,6 @@
   "scripts": {
     "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
-    "token": "cd config && style-dictionary build",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
