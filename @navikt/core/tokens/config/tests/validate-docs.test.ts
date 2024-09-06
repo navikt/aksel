@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import DsTokens from "../../dist/tokens-cjs.js";
 import docs from "../../docs.json";
-import kebabCase from "../kebabCase.js";
+import { kebabCase } from "../kebabCase.mjs";
 
 const flatten = Object.values(docs).flat();
 
