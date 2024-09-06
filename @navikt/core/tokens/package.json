@@ -13,6 +13,7 @@
   "license": "MIT",
   "files": [
     "/dist",
+    "!/dist/temp",
     "/src",
     "/tailwind",
     "docs.json"
