@@ -12,6 +12,7 @@ import {
   TextField,
   VStack,
 } from "@navikt/ds-react";
+import { withDsExample } from "@/web/examples/withDsExample";
 
 type Inputs = {
   personnummer: string;
@@ -37,111 +38,108 @@ const Example = () => {
 
   if (isSubmitSuccessful)
     return (
-      <Page>
-        <Page.Block as="main" width="lg" gutters>
-          <VStack gap="8" align="center">
-            <Heading size="large">Demo slutt</Heading>
-            <Button
-              onClick={() => {
-                location.hash = "";
-                location.reload();
-              }}
-            >
-              Nullstill
-            </Button>
-          </VStack>
-        </Page.Block>
-      </Page>
+      <Page.Block as="main" width="lg" gutters>
+        <VStack gap="8" align="center">
+          <Heading size="large">Demo slutt</Heading>
+          <Button
+            onClick={() => {
+              location.hash = "";
+              location.reload();
+            }}
+          >
+            Nullstill
+          </Button>
+        </VStack>
+      </Page.Block>
     );
 
   return (
-    <Page>
-      <Page.Block as="main" width="lg" gutters>
-        <form
-          onSubmit={(event) => {
-            handleSubmit(onValidSubmit)(event).then(() => {
-              errorSummaryRef.current?.focus();
-            });
-          }}
-        >
-          <VStack gap="8">
-            <TextField
-              id="personnummer"
-              label="Personnummer"
-              error={errors.personnummer?.message}
-              {...register("personnummer", {
-                required: "Du må fylle ut personnummer.",
-                pattern: {
-                  value: /^\d{11}$/,
-                  message: "Personnummer må være 11 siffer.",
-                }, // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
-              })}
-            />
-            <RadioGroup
-              id="transportmiddel"
-              tabIndex={-1}
-              legend="Transportmiddel"
-              error={errors.transportmiddel?.message}
-              onChange={() => trigger("transportmiddel")}
-              name="transportmiddel"
+    <Page.Block as="main" width="lg" gutters>
+      <form
+        onSubmit={(event) => {
+          handleSubmit(onValidSubmit)(event).then(() => {
+            errorSummaryRef.current?.focus();
+          });
+        }}
+      >
+        <VStack gap="8">
+          <TextField
+            id="personnummer"
+            label="Personnummer"
+            htmlSize={11}
+            error={errors.personnummer?.message}
+            {...register("personnummer", {
+              required: "Du må fylle ut personnummer.",
+              pattern: {
+                value: /^\d{11}$/,
+                message: "Personnummer må være 11 siffer.",
+              }, // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
+            })}
+          />
+          <RadioGroup
+            id="transportmiddel"
+            tabIndex={-1}
+            legend="Transportmiddel"
+            error={errors.transportmiddel?.message}
+            onChange={() => trigger("transportmiddel")}
+            name="transportmiddel"
+          >
+            {["Bil", "Gange", "Kollektivtransport"].map((value) => (
+              <Radio
+                key={value}
+                value={value}
+                {...register("transportmiddel", {
+                  required: "Du må velge et transportmiddel.",
+                })}
+              >
+                {value}
+              </Radio>
+            ))}
+          </RadioGroup>
+
+          {Object.values(errors).length > 0 && (
+            <ErrorSummary
+              ref={errorSummaryRef}
+              heading="Du må rette disse feilene før du kan fortsette:"
             >
-              {["Bil", "Gange", "Kollektivtransport"].map((value) => (
-                <Radio
-                  key={value}
-                  value={value}
-                  {...register("transportmiddel", {
-                    required: "Du må velge et transportmiddel.",
-                  })}
-                >
-                  {value}
-                </Radio>
+              {Object.entries(errors).map(([key, error]) => (
+                <ErrorSummary.Item key={key} href={`#${key}`}>
+                  {error.message}
+                </ErrorSummary.Item>
               ))}
-            </RadioGroup>
+            </ErrorSummary>
+          )}
 
-            {Object.values(errors).length > 0 && (
-              <ErrorSummary
-                ref={errorSummaryRef}
-                heading="Du må rette disse feilene før du kan fortsette:"
-              >
-                {Object.entries(errors).map(([key, error]) => (
-                  <ErrorSummary.Item key={key} href={`#${key}`}>
-                    {error.message}
-                  </ErrorSummary.Item>
-                ))}
-              </ErrorSummary>
-            )}
-
-            <HGrid
-              gap={{ xs: "4", sm: "8 4" }}
-              columns={{ xs: 1, sm: 2 }}
-              width={{ sm: "fit-content" }}
+          <HGrid
+            gap={{ xs: "4", sm: "8 4" }}
+            columns={{ xs: 1, sm: 2 }}
+            width={{ sm: "fit-content" }}
+          >
+            <Button
+              type="button"
+              variant="secondary"
+              icon={<ArrowLeftIcon aria-hidden />}
+              iconPosition="left"
             >
-              <Button
-                type="button"
-                variant="secondary"
-                icon={<ArrowLeftIcon aria-hidden />}
-                iconPosition="left"
-              >
-                Forrige steg
-              </Button>
-              <Button
-                type="submit"
-                variant="primary"
-                icon={<ArrowRightIcon aria-hidden />}
-                iconPosition="right"
-              >
-                Neste steg
-              </Button>
-            </HGrid>
-          </VStack>
-        </form>
-      </Page.Block>
-    </Page>
+              Forrige steg
+            </Button>
+            <Button
+              type="submit"
+              variant="primary"
+              icon={<ArrowRightIcon aria-hidden />}
+              iconPosition="right"
+            >
+              Neste steg
+            </Button>
+          </HGrid>
+        </VStack>
+      </form>
+    </Page.Block>
   );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default Example;
+export default withDsExample(Example, { variant: "static-full" });
 
 /* Storybook story */
 export const Demo = {
