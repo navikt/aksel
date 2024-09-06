@@ -1,5 +1,15 @@
-module.exports = {
-  source: ["src/index.js", "src/**/*.json"],
+import StyleDictionary from "style-dictionary";
+import { kebabCase } from "./kebabCase.mjs";
+
+const kebabTransform = {
+  name: "name/cti/kebab",
+  type: "name",
+  transform: (prop, options) =>
+    kebabCase([options.prefix].concat(prop.path).join(" ")),
+};
+
+const dictionaryV1 = new StyleDictionary({
+  source: ["src/v1/index.js", "src/v1/**/*.json"],
   platforms: {
     scss: {
       transformGroup: "scss",
@@ -63,4 +73,12 @@ module.exports = {
       ],
     },
   },
-};
+});
+
+async function buildDictionary() {
+  await dictionaryV1.hasInitialized;
+  dictionaryV1.registerTransform(kebabTransform);
+  await dictionaryV1.buildAllPlatforms();
+}
+
+buildDictionary();
