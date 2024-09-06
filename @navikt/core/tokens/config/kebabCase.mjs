@@ -1,5 +1,5 @@
-import { default as lodashKebabCase } from "lodash.camelcase";
+import { default as lodashKebabCase } from "lodash/kebabCase";
 
-export function kebabCase(value) {
-  return lodashKebabCase(value).replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3");
+export function kebabCase(string) {
+  return lodashKebabCase(string).replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3");
 }
