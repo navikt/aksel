@@ -64,7 +64,7 @@ const Example = () => {
 
   if (formState.submitted)
     return (
-      <Page.Block as="main" width="lg" gutters>
+      <Page.Block width="lg" gutters>
         <VStack gap="8" align="center">
           <Heading size="large">Demo slutt</Heading>
           <Button
@@ -80,7 +80,7 @@ const Example = () => {
     );
 
   return (
-    <Page.Block as="main" width="lg" gutters>
+    <Page.Block width="lg" gutters>
       <form onSubmit={onSubmit}>
         <VStack gap="8">
           <TextField

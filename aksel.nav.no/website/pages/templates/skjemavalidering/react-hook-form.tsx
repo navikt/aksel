@@ -38,7 +38,7 @@ const Example = () => {
 
   if (isSubmitSuccessful)
     return (
-      <Page.Block as="main" width="lg" gutters>
+      <Page.Block width="lg" gutters>
         <VStack gap="8" align="center">
           <Heading size="large">Demo slutt</Heading>
           <Button
@@ -54,7 +54,7 @@ const Example = () => {
     );
 
   return (
-    <Page.Block as="main" width="lg" gutters>
+    <Page.Block width="lg" gutters>
       <form
         onSubmit={(event) => {
           handleSubmit(onValidSubmit)(event).then(() => {
