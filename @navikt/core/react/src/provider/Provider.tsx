@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { TranslationDictionary } from "../../cjs/util/i18n/i18n.types";
+import nb from "../util/i18n/locales/nb";
 
 export interface ProviderContextType {
   /**
@@ -10,12 +11,12 @@ export interface ProviderContextType {
    * Translation object (from language .json files)
    * Merged with the default language translations object (officially provided translations).
    */
-  translations?: TranslationDictionary | TranslationDictionary[];
+  translations: TranslationDictionary | TranslationDictionary[];
 }
 
-export const ProviderContext = createContext<ProviderContextType | undefined>(
-  undefined,
-);
+export const ProviderContext = createContext<ProviderContextType>({
+  translations: nb,
+});
 
 export interface ProviderProps {
   children?: React.ReactNode;
@@ -38,9 +39,20 @@ export const useProvider = () => useContext(ProviderContext);
  * </Provider>
  * ```
  */
-export const Provider = ({ children, ...rest }: ProviderProps) => {
+export const Provider = ({
+  children,
+  translations,
+  ...rest
+}: ProviderProps) => {
   return (
-    <ProviderContext.Provider value={rest}>{children}</ProviderContext.Provider>
+    <ProviderContext.Provider
+      value={{
+        translations: translations ?? nb,
+        ...rest,
+      }}
+    >
+      {children}
+    </ProviderContext.Provider>
   );
 };
 

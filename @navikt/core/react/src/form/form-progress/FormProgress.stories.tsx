@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import VStack from "../../layout/stack/VStack";
+import { Provider } from "../../provider";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
@@ -36,6 +37,92 @@ export const Default: StoryFn<ControllableProps> = (props) => (
   </div>
 );
 Default.args = { activeStep: 2, totalSteps: 7, interactiveSteps: true };
+
+export const ProvidedTranslations: StoryFn = () => {
+  const translations = {
+    FormProgress: {
+      step: "Step {activeStep} of {totalSteps}",
+      showAllSteps: "Show all steps",
+      hideAllSteps: "Hide all steps",
+    },
+  };
+
+  return (
+    <Provider translations={translations}>
+      <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
+        <FormProgress.Step href="#" completed>
+          Start søknad
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Saksopplysninger
+        </FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+        <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+        <FormProgress.Step href="#">Innsending</FormProgress.Step>
+      </FormProgress>
+    </Provider>
+  );
+};
+
+export const DefaultTranslations: StoryFn = () => {
+  return (
+    <Provider>
+      <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
+        <FormProgress.Step href="#" completed>
+          Start søknad
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Saksopplysninger
+        </FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+        <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+        <FormProgress.Step href="#">Innsending</FormProgress.Step>
+      </FormProgress>
+    </Provider>
+  );
+};
+
+// TODO: keep this? thoughts?
+//
+// export const ComponentTranslations: StoryFn = () => {
+//   const translations = {
+//     step: "Step {activeStep} of {totalSteps}",
+//     showAllSteps: "Show all steps",
+//     hideAllSteps: "Hide all steps",
+//   };
+//   return (
+//     <Provider>
+//       <FormProgress
+//         translations={translations}
+//         activeStep={2}
+//         totalSteps={7}
+//         interactiveSteps
+//       >
+//         <FormProgress.Step href="#" completed>
+//           Start søknad
+//         </FormProgress.Step>
+//         <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+//         <FormProgress.Step interactive={false}>
+//           Saksopplysninger
+//         </FormProgress.Step>
+//         <FormProgress.Step interactive={false}>
+//           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+//         </FormProgress.Step>
+//         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+//         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+//         <FormProgress.Step href="#">Innsending</FormProgress.Step>
+//       </FormProgress>
+//     </Provider>
+//   );
+// };
 
 export const Controlled: StoryFn = () => {
   const [open, setOpen] = useState(true);
