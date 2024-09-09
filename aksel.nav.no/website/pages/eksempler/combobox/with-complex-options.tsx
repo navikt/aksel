@@ -54,6 +54,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 8,
   desc: "Ved å sende inn options som objekter er det mulig å vise en brukervennlig tekst til brukeren, samtidig som systemet i bakkant kan forholde seg til en ID.",
 };
