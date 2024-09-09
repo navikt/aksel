@@ -41,5 +41,6 @@ add links to project-tasks, slack discussions etc here
 - - Bug/hotfix: Patch
 - - New feature: Minor
 - - Breaking change: Major
+- Format: `<Component>: <gitmoji?> <Text>.`, e.g. "Button: :memo: Improved the JSDOC."
 - Adding breaking changes? Consider adding a codemod for easier migration.
 - Breaking changes also needs documentation under "Migration"-page on website
