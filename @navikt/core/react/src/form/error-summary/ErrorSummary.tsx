@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, isValidElement } from "react";
+import React, { HTMLAttributes, forwardRef } from "react";
 import { BodyShort, Heading } from "../../typography";
 import { useId } from "../../util/hooks";
-import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
+import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -16,6 +16,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   size?: "medium" | "small";
   /**
    * Heading above links.
+   * @default "Du må rette disse feilene før du kan fortsette:"
    */
   heading?: React.ReactNode;
   /**
@@ -23,6 +24,16 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;
+  /**
+   * Id for heading.
+   * Allows for focusing with hash link.
+   */
+  headingId?: string;
+  /**
+   * Use this instead of `ref` when manually focusing `<ErrorSummary />`.
+   * This directs focus to heading, improving screen reader experience.
+   */
+  focusTargetRef?: React.RefObject<HTMLElement>;
 }
 
 interface ErrorSummaryComponent
@@ -41,7 +52,7 @@ interface ErrorSummaryComponent
    * </ErrorSummary.Item>
    * ```
    */
-  Item: ErrorSummaryItemType;
+  Item: typeof ErrorSummaryItem;
 }
 
 /**
@@ -69,12 +80,15 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       className,
       size = "medium",
       headingTag = "h2",
-      heading,
+      headingId: externalHeadingId,
+      heading = "Du må rette disse feilene før du kan fortsette:",
+      focusTargetRef,
       ...rest
     },
     ref,
   ) => {
-    const headingId = useId();
+    const generatedHeadingId = useId();
+    const headingId = externalHeadingId || generatedHeadingId;
 
     return (
       <section
@@ -85,7 +99,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           "navds-error-summary",
           `navds-error-summary--${size}`,
         )}
-        tabIndex={-1}
+        tabIndex={ref ? -1 : undefined}
         aria-live="polite"
         aria-relevant="all"
         aria-labelledby={headingId}
@@ -95,16 +109,13 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           as={headingTag}
           size="small"
           id={headingId}
+          ref={focusTargetRef}
+          tabIndex={focusTargetRef ? -1 : undefined}
         >
           {heading}
         </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
-          {React.Children.map(children, (child) => {
-            if (!isValidElement(child)) {
-              return null;
-            }
-            return <li key={child.toString()}>{child}</li>;
-          })}
+          {children}
         </BodyShort>
       </section>
     );
