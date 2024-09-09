@@ -14,7 +14,7 @@ Alle linjer som inneholder `examples/withDsExample` + alt under `// EXAMPLES DO 
 
 Demo-komponent må ha navn `Example` for at CodeSandbox-knapp skal fungere riktig.
 
-`withDsExample` tar imot parametere, e.g. `{variant: 'static'}` for å sette bredde på komponent til "page width", eller `{variant: 'full'}` for full bredde.
+`withDsExample` tar imot parametere, se JSDOC for detaljer.
 
 ### Args
 
