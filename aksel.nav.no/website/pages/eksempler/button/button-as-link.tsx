@@ -1,12 +1,12 @@
-import NextLink from "next/link";
+import Link from "next/link";
 import { Button } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <NextLink href="#" passHref legacyBehavior>
+    <Link href="#" passHref legacyBehavior>
       <Button as="a">Lenke</Button>
-    </NextLink>
+    </Link>
   );
 };
 
@@ -38,4 +38,5 @@ export const Demo = {
 
 export const args = {
   index: 10,
+  desc: "[OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) lar deg endre hvilken html-tag komponenten rendres med. For vanlige lenker kan dette være en '<a>'-tag, men for f.eks React Router eller Remix kan det være en '<Link>'-komponent.",
 };
