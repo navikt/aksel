@@ -1,6 +1,5 @@
 ---
-"@navikt/ds-react": minor
-"@navikt/ds-css": minor
+"@navikt/ds-react": major
 ---
 
 ErrorSummary: Added fallback text for `heading`.
