@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 6.17.0
+
+### Minor Changes
+
+- Combobox: Add support for `onBlur`, and omit props that have no effect. ([#3125](https://github.com/navikt/aksel/pull/3125))
+
+### Patch Changes
+
+- Updated dependencies [[`1b2dc8896`](https://github.com/navikt/aksel/commit/1b2dc88968ca99d8b24f94ca51843063472dfa95)]:
+  - @navikt/aksel-icons@6.17.0
+  - @navikt/ds-tokens@6.17.0
+
 ## 6.16.3
 
 ### Patch Changes

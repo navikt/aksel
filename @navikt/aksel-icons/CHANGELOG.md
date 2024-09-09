@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 6.17.0
+
+### Minor Changes
+
+- Icons: New 'face' icons for 'Engagement'-category. ([#3134](https://github.com/navikt/aksel/pull/3134))
+
 ## 6.16.3
 
 ### Patch Changes
