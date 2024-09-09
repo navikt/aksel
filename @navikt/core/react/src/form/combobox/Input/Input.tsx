@@ -6,6 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { omit } from "../../../util";
+import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
@@ -13,7 +14,18 @@ import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsCon
 import { useInputContext } from "./Input.context";
 
 interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "disabled"> {
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    | "value"
+    | "disabled"
+    | "onClick"
+    | "onInput"
+    | "type"
+    | "role"
+    | "onKeyUp"
+    | "onKeyDown"
+    | "autoComplete"
+  > {
   ref: React.Ref<HTMLInputElement>;
   inputClassName?: string;
   shouldShowSelectedOptions?: boolean;
@@ -21,7 +33,10 @@ interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputClassName, shouldShowSelectedOptions, ...rest }, ref) => {
+  (
+    { inputClassName, shouldShowSelectedOptions, placeholder, onBlur, ...rest },
+    ref,
+  ) => {
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -32,12 +47,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       searchTerm,
       setValue,
+      hideCaret,
+      setHideCaret,
     } = useInputContext();
     const {
       selectedOptions,
       removeSelectedOption,
       toggleOption,
       isMultiSelect,
+      maxSelected,
     } = useSelectedOptionsContext();
     const {
       activeDecendantId,
@@ -218,28 +236,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {...rest}
         {...omit(inputProps, ["aria-invalid"])}
         ref={mergedRefs}
-        value={value}
-        onBlur={() => virtualFocus.moveFocusToTop()}
-        onClick={() => value !== searchTerm && onChange(value)}
-        onInput={onChangeHandler}
         type="text"
         role="combobox"
+        value={value}
+        onBlur={composeEventHandlers(onBlur, virtualFocus.moveFocusToTop)}
+        onClick={() => {
+          setHideCaret(!!maxSelected?.isLimitReached);
+          value !== searchTerm && onChange(value);
+        }}
+        onInput={onChangeHandler}
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
-        aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
-        aria-expanded={!!isListOpen}
         autoComplete="off"
-        aria-autocomplete={shouldAutocomplete ? "both" : "list"}
-        aria-activedescendant={activeDecendantId}
-        aria-describedby={ariaDescribedBy}
-        aria-invalid={inputProps["aria-invalid"]}
-        placeholder={selectedOptions.length ? undefined : rest.placeholder}
+        placeholder={selectedOptions.length ? undefined : placeholder}
         className={cl(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
+        aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
+        aria-expanded={!!isListOpen}
+        aria-autocomplete={shouldAutocomplete ? "both" : "list"}
+        aria-activedescendant={activeDecendantId}
+        aria-describedby={ariaDescribedBy}
+        aria-invalid={inputProps["aria-invalid"]}
       />
     );
   },

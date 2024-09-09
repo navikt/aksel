@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 6.16.3
+
+### Patch Changes
+
+- Icons: Updated Clipboard icons. ([#3113](https://github.com/navikt/aksel/pull/3113))
+
 ## 6.16.2
 
 ## 6.16.1

@@ -76,6 +76,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 5,
   desc: "Du kan overstyre blant annet value, selectedOptions, filteredOptions.",
 };

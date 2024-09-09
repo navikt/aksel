@@ -25,10 +25,6 @@ jobs:
 
       - name: add tokens to .env
         run: |
-          echo "SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}" >> aksel.nav.no/website/.env
-          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
-          echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
-          echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
           echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
 
       - name: Hide page from search engines
@@ -39,6 +35,9 @@ jobs:
         run: yarn
 
       - name: Build application
+        env:
+          SANITY_READ: ${{ secrets.SANITY_READ }}
+          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
         run: |
           yarn boot
           yarn workspace aksel.nav.no build:next

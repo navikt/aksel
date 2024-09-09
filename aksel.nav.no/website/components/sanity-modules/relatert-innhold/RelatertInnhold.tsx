@@ -10,7 +10,7 @@ type RelatertInnholdProps = {
 };
 
 const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
-  if (!node || node?.lenker?.length === 0) {
+  if (!node || !node.lenker || node?.lenker?.length === 0) {
     return null;
   }
 

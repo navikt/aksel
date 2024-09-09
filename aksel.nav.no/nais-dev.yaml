@@ -6,10 +6,12 @@ metadata:
   labels:
     team: designsystem
 spec:
+  envFrom:
+    - secret: aksel-website-secrets-dev
   image: {{ image }}
   port: 3000
   ingresses:
-    - "https://aksel.ekstern.dev.nav.no"
+    - "https://aksel.ansatt.dev.nav.no"
   liveness:
     path: /api/isAlive
     initialDelay: 10

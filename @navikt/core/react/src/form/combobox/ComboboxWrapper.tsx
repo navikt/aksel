@@ -21,7 +21,7 @@ const ComboboxWrapper = ({
   inputSize,
   toggleIsListOpen,
 }: ComboboxWrapperProps) => {
-  const { toggleOpenButtonRef } = useInputContext();
+  const { toggleOpenButtonRef, clearInput } = useInputContext();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
@@ -40,6 +40,7 @@ const ComboboxWrapper = ({
     if (!wrapperRef.current?.contains(e.relatedTarget)) {
       toggleIsListOpen(false);
       setHasFocusWithin(false);
+      clearInput(e);
     }
   }
 

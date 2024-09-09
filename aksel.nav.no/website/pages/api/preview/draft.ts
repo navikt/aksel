@@ -7,11 +7,11 @@ import {
   SANITY_PROJECT_ID,
 } from "@/sanity/config";
 
-const token = process.env.SANITY_PREVIEW_TOKEN;
+const token = process.env.SANITY_READ;
 
 if (!token) {
   throw new Error(
-    "A secret is provided but there is no `SANITY_PREVIEW_TOKEN` environment variable setup.",
+    "A secret is provided but there is no `SANITY_READ` environment variable setup.",
   );
 }
 
