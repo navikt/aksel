@@ -7,7 +7,9 @@ export interface ProviderContextType {
   rootElement?: HTMLElement;
 }
 
-export const ProviderContext = createContext<ProviderContextType>({});
+export const ProviderContext = createContext<ProviderContextType | undefined>(
+  undefined,
+);
 
 export interface ProviderProps {
   children?: React.ReactNode;
