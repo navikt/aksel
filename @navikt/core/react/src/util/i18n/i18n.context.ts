@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ProviderContext } from "../../provider/Provider";
+import { LanguageProviderContext } from "../../language-provider/LanguageProvider";
 import { get } from "./get";
 import { Component, ComponentTranslation } from "./i18n.types";
 import nb from "./locales/nb";
@@ -20,8 +20,8 @@ export function useI18n<T extends Component>(
   componentName: T,
   ...local: (ComponentTranslation<T> | undefined)[]
 ) {
-  const providerContext = useContext(ProviderContext);
-  const i18n = providerContext.translations;
+  const languageProviderContext = useContext(LanguageProviderContext);
+  const i18n = languageProviderContext.translations;
 
   /**
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24

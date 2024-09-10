@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
+import UNSAFE_AkselLanguageProvider from "../../language-provider/LanguageProvider";
 import VStack from "../../layout/stack/VStack";
-import { Provider } from "../../provider";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {
@@ -48,7 +48,7 @@ export const ProvidedTranslations: StoryFn = () => {
   };
 
   return (
-    <Provider translations={translations}>
+    <UNSAFE_AkselLanguageProvider translations={translations}>
       <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
         <FormProgress.Step href="#" completed>
           Start søknad
@@ -64,13 +64,13 @@ export const ProvidedTranslations: StoryFn = () => {
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </Provider>
+    </UNSAFE_AkselLanguageProvider>
   );
 };
 
 export const DefaultTranslations: StoryFn = () => {
   return (
-    <Provider>
+    <UNSAFE_AkselLanguageProvider>
       <FormProgress activeStep={2} totalSteps={7} interactiveSteps>
         <FormProgress.Step href="#" completed>
           Start søknad
@@ -86,7 +86,7 @@ export const DefaultTranslations: StoryFn = () => {
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </Provider>
+    </UNSAFE_AkselLanguageProvider>
   );
 };
 
@@ -104,7 +104,7 @@ export const ComponentTranslations: StoryFn = () => {
     hideAllSteps: "Fela öll skref",
   };
   return (
-    <Provider translations={globalTranslations}>
+    <UNSAFE_AkselLanguageProvider translations={globalTranslations}>
       <FormProgress
         translations={translations}
         activeStep={2}
@@ -125,7 +125,7 @@ export const ComponentTranslations: StoryFn = () => {
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
         <FormProgress.Step href="#">Innsending</FormProgress.Step>
       </FormProgress>
-    </Provider>
+    </UNSAFE_AkselLanguageProvider>
   );
 };
 
