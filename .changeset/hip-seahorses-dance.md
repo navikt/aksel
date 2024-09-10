@@ -5,7 +5,7 @@
 API change for translations
 
 WHAT
-Translations now live on the global provider component and we will remove component-level translation props.
+Translations now live on the global provider in addition to allowing per-component overrides.
 
 WHY
 Simplify the translations API, a single point of entry for _all_ components. Work well with i18next
