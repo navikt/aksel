@@ -90,39 +90,44 @@ export const DefaultTranslations: StoryFn = () => {
   );
 };
 
-// TODO: keep this? thoughts?
-//
-// export const ComponentTranslations: StoryFn = () => {
-//   const translations = {
-//     step: "Step {activeStep} of {totalSteps}",
-//     showAllSteps: "Show all steps",
-//     hideAllSteps: "Hide all steps",
-//   };
-//   return (
-//     <Provider>
-//       <FormProgress
-//         translations={translations}
-//         activeStep={2}
-//         totalSteps={7}
-//         interactiveSteps
-//       >
-//         <FormProgress.Step href="#" completed>
-//           Start søknad
-//         </FormProgress.Step>
-//         <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
-//         <FormProgress.Step interactive={false}>
-//           Saksopplysninger
-//         </FormProgress.Step>
-//         <FormProgress.Step interactive={false}>
-//           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
-//         </FormProgress.Step>
-//         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
-//         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
-//         <FormProgress.Step href="#">Innsending</FormProgress.Step>
-//       </FormProgress>
-//     </Provider>
-//   );
-// };
+export const ComponentTranslations: StoryFn = () => {
+  const globalTranslations = {
+    FormProgress: {
+      step: "Step {activeStep} of {totalSteps}",
+      showAllSteps: "Show all steps",
+      hideAllSteps: "Hide all steps",
+    },
+  };
+  const translations = {
+    step: "Skref {activeStep} af {totalSteps}",
+    showAllSteps: "Sýndu öll skref",
+    hideAllSteps: "Fela öll skref",
+  };
+  return (
+    <Provider translations={globalTranslations}>
+      <FormProgress
+        translations={translations}
+        activeStep={2}
+        totalSteps={7}
+        interactiveSteps
+      >
+        <FormProgress.Step href="#" completed>
+          Start søknad
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Personopplysninger</FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Saksopplysninger
+        </FormProgress.Step>
+        <FormProgress.Step interactive={false}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </FormProgress.Step>
+        <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
+        <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
+        <FormProgress.Step href="#">Innsending</FormProgress.Step>
+      </FormProgress>
+    </Provider>
+  );
+};
 
 export const Controlled: StoryFn = () => {
   const [open, setOpen] = useState(true);
