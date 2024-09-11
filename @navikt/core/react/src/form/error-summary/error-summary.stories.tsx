@@ -34,11 +34,6 @@ export const Default: Story = {
         type: "text",
       },
     },
-    headingId: {
-      control: {
-        type: "text",
-      },
-    },
     size: {
       control: {
         type: "radio",
@@ -65,10 +60,14 @@ export const A11yDemo: Story = {
     const ref = useRef<HTMLHeadingElement>(null);
     return (
       <div>
-        <button onClick={() => ref.current?.focus()}>
+        <button
+          onClick={() => {
+            ref.current?.focus();
+          }}
+        >
           Fokuser ErrorSummary
         </button>
-        <ErrorSummary heading="Feiloppsummering tittel" focusTargetRef={ref}>
+        <ErrorSummary heading="Feiloppsummering tittel">
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
             Tekstfeltet må ha en godkjent e-mail
@@ -85,7 +84,7 @@ export const FocusDemo: Story = {
     return (
       <div>
         <button onClick={() => ref.current?.focus()}>Focus summary</button>
-        <ErrorSummary heading="Feiloppsummering tittel" focusTargetRef={ref}>
+        <ErrorSummary heading="Feiloppsummering tittel" ref={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
             Tekstfeltet må ha en godkjent e-mail

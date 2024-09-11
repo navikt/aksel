@@ -3,7 +3,7 @@ import { Button, ErrorSummary, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  const errorRef = useRef<HTMLElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -13,10 +13,7 @@ const Example = () => {
   return (
     <VStack gap="12" align="start">
       {hasError && (
-        <ErrorSummary
-          focusTargetRef={errorRef}
-          heading="Du må rette disse feilene før du kan sende inn søknaden:"
-        >
+        <ErrorSummary ref={errorRef}>
           <ErrorSummary.Item href="#1">
             Felt må fylles ut med alder
           </ErrorSummary.Item>
@@ -40,5 +37,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en `headingId` og referere til den i URLens hash.",
+  desc: "Sett fokus på ErrorSummary ved submit. Hvis du gjør en ny sidelasting kan du også sette en `id` og referere til den i URLens hash.",
 };
