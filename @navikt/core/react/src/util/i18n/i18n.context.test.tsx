@@ -1,7 +1,8 @@
 import { renderHook } from "@testing-library/react";
 import React from "react";
 import { describe, expect, test } from "vitest";
-import { I18nContext, useI18n } from "./i18n.context";
+import UNSAFE_AkselLanguageProvider from "../../language-provider/LanguageProvider";
+import { useI18n } from "./i18n.context";
 
 describe("useI18n", () => {
   test("should throw error if key is not found", () => {
@@ -15,7 +16,9 @@ describe("useI18n", () => {
     const i18n = { FileUpload: { item: { uploading: "Test translation" } } };
     const { result } = renderHook(() => useI18n("FileUpload"), {
       wrapper: ({ children }) => (
-        <I18nContext.Provider value={i18n}>{children}</I18nContext.Provider>
+        <UNSAFE_AkselLanguageProvider translations={i18n}>
+          {children}
+        </UNSAFE_AkselLanguageProvider>
       ),
     });
     const translate = result.current;
@@ -29,9 +32,9 @@ describe("useI18n", () => {
     const i18n2 = { FileUpload: { item: { uploading: "Wrong translation" } } };
     const { result } = renderHook(() => useI18n("FileUpload"), {
       wrapper: ({ children }) => (
-        <I18nContext.Provider value={[i18n1, i18n2]}>
+        <UNSAFE_AkselLanguageProvider translations={[i18n1, i18n2]}>
           {children}
-        </I18nContext.Provider>
+        </UNSAFE_AkselLanguageProvider>
       ),
     });
     const translate = result.current;
@@ -45,9 +48,9 @@ describe("useI18n", () => {
     };
     const { result } = renderHook(() => useI18n("FileUpload"), {
       wrapper: ({ children }) => (
-        <I18nContext.Provider value={[i18n1, i18n2]}>
+        <UNSAFE_AkselLanguageProvider translations={[i18n1, i18n2]}>
           {children}
-        </I18nContext.Provider>
+        </UNSAFE_AkselLanguageProvider>
       ),
     });
     const translate = result.current;
