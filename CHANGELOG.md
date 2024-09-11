@@ -8,25 +8,39 @@
 
 ### @navikt/ds-react
 
-- Table: Corrected the type of onSortChange ([#3103](https://github.com/navikt/aksel/pull/3103))
+- Combobox :children_crossing: single select now hides selected value when typing, onBlur clears input ([#3124](https://github.com/navikt/aksel/pull/3124))
 
-- :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
+- Combobox: :lipstick: hide caret on select ([#3071](https://github.com/navikt/aksel/pull/3071))
 
-- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+- :bug: Combobox: trailing spaces no longer work like wildcards for autocomplete suggestions ([#3105](https://github.com/navikt/aksel/pull/3105))
 
-* Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+- Fixed bug in Combobox where the wrong option was selected on Enter if the autocompleted word was not the first in FilteredOptions ([#3110](https://github.com/navikt/aksel/pull/3110))
 
-### @navikt/ds-css
+* Table: Corrected the type of onSortChange ([#3103](https://github.com/navikt/aksel/pull/3103))
 
-- Font: Reverted change introduced in v6.14 where font locations were changed. This caused a regression where every preload-instance to old font locations no longer worked. ([#3114](https://github.com/navikt/aksel/pull/3114))
+* :adhesive_bandage: Combobox: Placeholder goes away when an option is selected ([#3101](https://github.com/navikt/aksel/pull/3101))
 
 * Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
 
 - Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
 
-* FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+### @navikt/ds-css
 
-* Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+- Combobox: :lipstick: hide caret on select ([#3071](https://github.com/navikt/aksel/pull/3071))
+
+* Font: Reverted change introduced in v6.14 where font locations were changed. This caused a regression where every preload-instance to old font locations no longer worked. ([#3114](https://github.com/navikt/aksel/pull/3114))
+
+- Table: Fixed background-clipping when using ExpandableRow. ([#3095](https://github.com/navikt/aksel/pull/3095))
+
+* Primitives: Added `gridColumn`-prop for more grid alignment control. ([#3082](https://github.com/navikt/aksel/pull/3082))
+
+- FormSummary: Added background color ([#3093](https://github.com/navikt/aksel/pull/3093))
+
+- Modal: Added scroll shadows ([#3083](https://github.com/navikt/aksel/pull/3083))
+
+### @navikt/aksel-icons
+
+- Icons: Updated Clipboard icons. ([#3113](https://github.com/navikt/aksel/pull/3113))
 
 ### @navikt/aksel
 

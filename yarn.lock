@@ -3532,7 +3532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^6.16.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^6.16.3, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3561,8 +3561,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^6.16.2"
-    "@navikt/ds-tokens": "npm:^6.16.2"
+    "@navikt/ds-css": "npm:^6.16.3"
+    "@navikt/ds-tokens": "npm:^6.16.3"
     concurrently: "npm:7.2.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3577,7 +3577,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:6.16.2"
+    "@navikt/ds-css": "npm:6.16.3"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3598,11 +3598,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:6.16.2, @navikt/ds-css@npm:^6.16.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:6.16.3, @navikt/ds-css@npm:^6.16.3, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^6.16.2"
+    "@navikt/ds-tokens": "npm:^6.16.3"
     cssnano: "npm:6.0.0"
     fast-glob: "npm:3.2.11"
     lodash: "npm:4.17.21"
@@ -3615,14 +3615,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^6.16.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^6.16.3, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^6.16.2"
-    "@navikt/ds-tokens": "npm:^6.16.2"
+    "@navikt/aksel-icons": "npm:^6.16.3"
+    "@navikt/ds-tokens": "npm:^6.16.3"
     "@testing-library/dom": "npm:9.3.4"
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
@@ -3652,11 +3652,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^6.16.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^6.16.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^6.16.2"
+    "@navikt/ds-tokens": "npm:^6.16.3"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3666,7 +3666,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^6.16.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^6.16.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -7831,11 +7831,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^6.16.2"
-    "@navikt/ds-css": "npm:^6.16.2"
-    "@navikt/ds-react": "npm:^6.16.2"
-    "@navikt/ds-tailwind": "npm:^6.16.2"
-    "@navikt/ds-tokens": "npm:^6.16.2"
+    "@navikt/aksel-icons": "npm:^6.16.3"
+    "@navikt/ds-css": "npm:^6.16.3"
+    "@navikt/ds-react": "npm:^6.16.3"
+    "@navikt/ds-tailwind": "npm:^6.16.3"
+    "@navikt/ds-tokens": "npm:^6.16.3"
   languageName: unknown
   linkType: soft
 
@@ -21847,6 +21847,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.53.0":
+  version: 7.53.0
+  resolution: "react-hook-form@npm:7.53.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10/b7d73696b7c10e042f6ea6fcec01f951091146bfbc89d1378327a970bcd724b968e93fae1657bddada75caf648cfaf8693c5ba03c25e96816b755079d29f65da
+  languageName: node
+  linkType: hard
+
 "react-i18next@npm:14.0.2":
   version: 14.0.2
   resolution: "react-i18next@npm:14.0.2"
@@ -27392,6 +27401,7 @@ __metadata:
     prism-react-renderer: "npm:^2.0.0"
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
+    react-hook-form: "npm:^7.53.0"
     react-markdown: "npm:^9.0.1"
     react-responsive-masonry: "npm:2.2.0"
     react-rx: "npm:^2.1.3"
