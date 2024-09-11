@@ -29,4 +29,18 @@ describe("Testing extractArgs function", () => {
       index: 2,
     });
   });
+
+  test("extractArgs should parse args with markdown links", () => {
+    const code = `export const args = {
+      index: 10,
+      desc: "[OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent)... '<a>'-tag, ... '<Link>'-komponent.",
+    };`;
+
+    const args = extractArgs(code, "filename", "test");
+
+    expect(args).toStrictEqual({
+      desc: "[OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent)... '<a>'-tag, ... '<Link>'-komponent.",
+      index: 10,
+    });
+  });
 });

@@ -8,18 +8,18 @@ const Example = () => {
   return (
     <>
       <Heading size="medium" spacing level="2" id="stepper-heading">
-        Søknadssteg
+        Steg
       </Heading>
       <Stepper
         aria-labelledby="stepper-heading"
         activeStep={activeStep}
-        onStepChange={(x) => setActiveStep(x)}
+        onStepChange={setActiveStep}
       >
-        <Stepper.Step href="#">Start søknad</Stepper.Step>
+        <Stepper.Step href="#">Innledning</Stepper.Step>
         <Stepper.Step href="#">Saksopplysninger</Stepper.Step>
-        <Stepper.Step href="#">Vedlegg</Stepper.Step>
+        <Stepper.Step href="#">Begrunnelse</Stepper.Step>
         <Stepper.Step href="#">Oppsummering</Stepper.Step>
-        <Stepper.Step href="#">Innsending</Stepper.Step>
+        <Stepper.Step href="#">Bekreftelse</Stepper.Step>
       </Stepper>
     </>
   );

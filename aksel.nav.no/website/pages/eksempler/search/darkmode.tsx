@@ -10,7 +10,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "inverted" });
+export default withDsExample(Example, { background: "inverted" });
 
 export const args = {
   index: 7,
