@@ -37,6 +37,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 0,
+  index: 3,
   desc: "Ved Single Select velger brukeren kun ett valg fra nedtrekkslisten.",
 };

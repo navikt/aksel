@@ -37,6 +37,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
+  index: 4,
   desc: "Ved Multi Select kan brukeren velge flere valg fra listen.",
 };

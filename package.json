@@ -13,7 +13,7 @@
     "docgen": "yarn workspaces foreach -vv -pA run docgen",
     "changelog": "deno run --allow-read --allow-write --no-config scripts/changelog/createMainChangelog.ts",
     "updateArticleViews": "deno run --allow-net --allow-env --allow-read --no-config scripts/article-views/update-article-views/main.ts",
-    "chromatic": "npx chromatic --only-changed --project-token chpt_1dc4af6a1c8cc48 --build-script-name build:storybook-chromatic",
+    "chromatic": "npx chromatic --only-changed --build-script-name build:storybook-chromatic",
     "build:storybook-chromatic": "cross-env CHROMATIC=true storybook build",
     "build:storybook": "storybook build",
     "test": "yarn workspaces foreach -vv -pA run test",

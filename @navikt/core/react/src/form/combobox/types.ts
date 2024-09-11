@@ -31,7 +31,17 @@ export interface ComboboxProps
   extends FormFieldProps,
     Omit<
       InputHTMLAttributes<HTMLInputElement>,
-      "size" | "onChange" | "value" | "defaultValue"
+      | "size"
+      | "onChange"
+      | "value"
+      | "defaultValue"
+      | "onClick"
+      | "onInput"
+      | "type"
+      | "role"
+      | "onKeyUp"
+      | "onKeyDown"
+      | "autoComplete"
     > {
   /**
    * Combobox label.

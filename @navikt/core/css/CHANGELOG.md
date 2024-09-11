@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 6.16.3
+
+### Patch Changes
+
+- Combobox: :lipstick: hide caret on select ([#3071](https://github.com/navikt/aksel/pull/3071))
+
 ## 6.16.2
 
 ### Patch Changes
