@@ -24,7 +24,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, { variant: "subtle" });
+export default withDsExample(Example, { background: "subtle" });
 
 /* Storybook story */
 export const Demo = {

@@ -11,16 +11,19 @@ import { HStack } from "@navikt/ds-react";
 import styles from "./examples.module.css";
 
 type withDsT = {
-  variant?: "full" | "inverted" | "static" | "subtle";
+  /**
+   * Full: No horizontal centering (i.e. full width).
+   * Static: No vertical centering and static (but responsive) width. Used for dynamic-height examples like ExpansionCard.
+   * Static-full: No centering in any direction.
+   */
+  variant?: "full" | "static" | "static-full";
+  background?: "inverted" | "subtle";
   showBreakpoints?: boolean;
 };
 
 export const withDsExample = (
   Component: ComponentType,
-  /**
-   * Static: Used for dynamic-height examples like ExpansionCard
-   */
-  { variant, showBreakpoints }: withDsT = {},
+  { variant, background, showBreakpoints }: withDsT = {},
 ) => {
   const DsHOC = (props: any) => {
     const [width, setWidth] = useState<number>();
@@ -64,7 +67,7 @@ export const withDsExample = (
           gap="05"
           className="absolute left-0 top-0 rounded-br-medium p-1"
           align="center"
-          style={{ background: getBg(variant) }}
+          style={{ background: getBg(background) }}
         >
           <Icon aria-hidden fontSize="1.5rem" /> {`${breakpoint}`}
         </HStack>
@@ -73,18 +76,18 @@ export const withDsExample = (
 
     return (
       <div
-        className={cl(styles.examples, {
+        className={cl(styles.container, {
+          [styles.containerDefault]: !variant,
           [styles.containerStatic]: variant === "static",
-          [styles.container]: variant !== "static",
+          [styles.containerFull]: variant === "full",
+          [styles.containerStaticFull]: variant === "static-full",
         })}
-        style={{ background: getBg(variant) }}
+        style={{ background: getBg(background) }}
       >
         {showBreakpoints && <BreakpointText />}
         <div
           id="ds-example"
-          className={cl({
-            "w-full": variant === "full",
-          })}
+          className={variant === "static" ? styles.exampleStatic : undefined}
         >
           <Component {...props} />
         </div>
@@ -99,8 +102,8 @@ export const withDsExample = (
   return DsHOC;
 };
 
-function getBg(variant: withDsT["variant"]): string {
-  switch (variant) {
+function getBg(background: withDsT["background"]): string {
+  switch (background) {
     case "inverted":
       return "var(--a-surface-inverted)";
     case "subtle":
