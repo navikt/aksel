@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
-import UNSAFE_AkselLanguageProvider from "../../language-provider/LanguageProvider";
 import VStack from "../../layout/stack/VStack";
+import UNSAFE_AkselLanguageProvider from "../../provider/i18n/LanguageProvider";
 import FormProgress, { FormProgressProps } from "./FormProgress";
 
 export default {

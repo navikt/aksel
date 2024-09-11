@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LanguageProviderContext } from "../../language-provider/LanguageProvider";
+import { LanguageProviderContext } from "../../provider/i18n/LanguageProvider";
 import { get } from "./get";
 import { Component, ComponentTranslation } from "./i18n.types";
 import nb from "./locales/nb";

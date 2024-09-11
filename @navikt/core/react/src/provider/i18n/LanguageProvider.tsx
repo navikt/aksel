@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { TranslationDictionary } from "../util/i18n/i18n.types";
-import nb from "../util/i18n/locales/nb";
+import { TranslationDictionary } from "../../util/i18n/i18n.types";
+import nb from "../../util/i18n/locales/nb";
 
 export interface LanguageProviderContextType {
   /**
@@ -22,6 +22,8 @@ export interface LanguageProviderProps {
 export const useProvider = () => useContext(LanguageProviderContext);
 
 /**
+ * @private Feature is under development and should not be used in any applications.
+ *
  * @example
  * ```jsx
  * <UNSAFE_AkselLanguageProvider translations={{...}}>

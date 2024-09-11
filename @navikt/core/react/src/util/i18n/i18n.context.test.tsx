@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import React from "react";
 import { describe, expect, test } from "vitest";
-import UNSAFE_AkselLanguageProvider from "../../language-provider/LanguageProvider";
+import UNSAFE_AkselLanguageProvider from "../../provider/i18n/LanguageProvider";
 import { useI18n } from "./i18n.context";
 
 describe("useI18n", () => {
