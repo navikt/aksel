@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, isValidElement } from "react";
+import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
-import { useId } from "../../util/hooks";
-import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
+import { useId, useMergeRefs } from "../../util/hooks";
+import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -16,6 +16,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   size?: "medium" | "small";
   /**
    * Heading above links.
+   * @default "Du må rette disse feilene før du kan fortsette:"
    */
   heading?: React.ReactNode;
   /**
@@ -41,7 +42,7 @@ interface ErrorSummaryComponent
    * </ErrorSummary.Item>
    * ```
    */
-  Item: ErrorSummaryItemType;
+  Item: typeof ErrorSummaryItem;
 }
 
 /**
@@ -69,16 +70,21 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       className,
       size = "medium",
       headingTag = "h2",
-      heading,
+      heading = "Du må rette disse feilene før du kan fortsette:",
       ...rest
     },
     ref,
   ) => {
     const headingId = useId();
 
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
+
+    const mergedRef = useMergeRefs(ref, sectionRef);
+
     return (
       <section
-        ref={ref}
+        ref={mergedRef}
         {...rest}
         className={cl(
           className,
@@ -89,22 +95,24 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         aria-live="polite"
         aria-relevant="all"
         aria-labelledby={headingId}
+        onFocus={(event) => {
+          if (event.target === sectionRef.current) {
+            headingRef?.current?.focus();
+          }
+        }}
       >
         <Heading
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
           id={headingId}
+          ref={headingRef}
+          tabIndex={-1}
         >
           {heading}
         </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
-          {React.Children.map(children, (child) => {
-            if (!isValidElement(child)) {
-              return null;
-            }
-            return <li key={child.toString()}>{child}</li>;
-          })}
+          {children}
         </BodyShort>
       </section>
     );
