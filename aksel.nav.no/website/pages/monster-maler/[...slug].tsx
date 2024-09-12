@@ -23,6 +23,7 @@ import { StatusTag } from "@/web/StatusTag";
 import { AkselTable, AkselTableRow } from "@/web/Table";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
+import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 import { SuggestionBlockGhPages } from "@/web/suggestionblock/SuggestionBlock.GhPages";
 import NotFotfund from "../404";
 
@@ -129,7 +130,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
                 Oppdatert <time>{publishDate}</time>
               </span>
               {page?.status?.tag && (
-                <StatusTag showStable status={page?.status?.tag} />
+                <StatusTag showStable status={page.status.tag} />
               )}
             </div>
           </Detail>
@@ -140,6 +141,11 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
         {page.gh_discussions && (
           <SuggestionBlockGhPages reference={page.gh_discussions} />
         )}
+        {!page.gh_discussions &&
+          page.heading.startsWith("Mønster") &&
+          page.status?.tag === "beta" && (
+            <SuggestionBlock variant="mønster-beta" reference={page.heading} />
+          )}
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
 
