@@ -72,6 +72,7 @@ _:future,
   height: var(--a-font-line-height-xlarge);
   padding-block-end: 1px;
   width: 24px;
+  font-size: 1.5rem;
 }
 
 .navds-list--small .navds-list__item-marker--icon {
@@ -80,8 +81,6 @@ _:future,
 
 .navds-list__item-marker--icon svg {
   flex-shrink: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .navds-list ul .navds-list__item-content {
