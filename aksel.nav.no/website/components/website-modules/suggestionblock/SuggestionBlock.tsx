@@ -8,7 +8,7 @@ const SuggestionBlockComponent = ({
   reference = "",
   unsafe = false,
 }: {
-  variant: "komponent-beta" | "komponent-ny";
+  variant: "komponent-beta" | "komponent-ny" | "mønster-beta";
   reference?: string;
   unsafe?: boolean;
 }) => {
@@ -16,7 +16,7 @@ const SuggestionBlockComponent = ({
     <div
       className={cl("mb-12 flex gap-2 rounded-lg px-6 py-4 ring-1 ring-inset", {
         "bg-surface-info-subtle ring-border-subtle": variant === "komponent-ny",
-        "bg-violet-50 ring-violet-300": variant === "komponent-beta",
+        "bg-violet-50 ring-violet-300": variant.endsWith("-beta"),
       })}
     >
       <span
@@ -24,7 +24,7 @@ const SuggestionBlockComponent = ({
           "-mt-[1px] grid h-7 shrink-0 place-content-center text-2xl",
           {
             "text-lightblue-800": variant === "komponent-ny",
-            "text-violet-800": variant === "komponent-beta",
+            "text-violet-800": variant.endsWith("-beta"),
           },
         )}
       >
@@ -36,7 +36,7 @@ const SuggestionBlockComponent = ({
           level="2"
           className={cl({
             "text-lightblue-800": variant === "komponent-ny",
-            "text-violet-800": variant === "komponent-beta",
+            "text-violet-800": variant.endsWith("-beta"),
           })}
         >
           {options[variant]?.heading}
@@ -74,7 +74,7 @@ const SuggestionBlockIcon = ({
       <div className="grid">
         {options[variant]?.heading && (
           <Heading size="small" level="2">
-            {options[variant]?.heading}
+            {options[variant].heading}
           </Heading>
         )}
         <BodyLong className="mt-2">{options[variant]?.text}</BodyLong>
@@ -103,12 +103,17 @@ export const SuggestionBlock = ({
     | "komponent"
     | "komponent-ny"
     | "komponent-beta"
+    | "mønster-beta"
     | "ikon-not-found"
     | "ikon";
   reference?: string;
   unsafe?: boolean;
 }) => {
-  if (variant === "komponent-ny" || variant === "komponent-beta") {
+  if (
+    variant === "komponent-ny" ||
+    variant === "komponent-beta" ||
+    variant === "mønster-beta"
+  ) {
     return (
       <SuggestionBlockComponent
         variant={variant}
@@ -195,6 +200,12 @@ const options: {
   "komponent-beta": {
     text: "Komponenten er under utvikling, men klar for adopsjon. Vi ønsker gjerne innspill på hvordan den fungerer og hvilke forbedringer vi kan gjøre.",
     link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
+    heading: "Beta",
+    icon: <TestFlaskIcon aria-hidden />,
+  },
+  "mønster-beta": {
+    text: "Mønsteret er under utvikling, men klart for adopsjon. Vi ønsker gjerne innspill på hvordan det fungerer og hvilke forbedringer vi kan gjøre.",
+    link: `${issueUrl}?labels=forespørsel+🥰%2Cmønster%2Cbeta+🧪&title=%5BInnspill+til+mønster%5D%3A+`,
     heading: "Beta",
     icon: <TestFlaskIcon aria-hidden />,
   },
