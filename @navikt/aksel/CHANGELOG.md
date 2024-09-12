@@ -1,5 +1,12 @@
 # @navikt/aksel
 
+## 6.17.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@6.17.0
+
 ## 6.16.3
 
 ### Patch Changes
