@@ -195,13 +195,19 @@ export const Checkboxes: Story = {
               Object.values(checkedItems).every(Boolean)
                 ? setCheckedItems((prevState) =>
                     Object.keys(prevState).reduce(
-                      (acc, key) => ({ ...acc, [key]: false }),
+                      (acc, key) => {
+                        acc[key] = false;
+                        return acc;
+                      },
                       {} as typeof checkedItems,
                     ),
                   )
                 : setCheckedItems((prevState) =>
                     Object.keys(prevState).reduce(
-                      (acc, key) => ({ ...acc, [key]: true }),
+                      (acc, key) => {
+                        acc[key] = true;
+                        return acc;
+                      },
                       {} as typeof checkedItems,
                     ),
                   )
