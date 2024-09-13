@@ -145,7 +145,6 @@
   left: 0;
   width: var(--__ac-action-menu-item-pl);
   display: inline-flex;
-  align-items: center;
   justify-content: center;
 }
 
