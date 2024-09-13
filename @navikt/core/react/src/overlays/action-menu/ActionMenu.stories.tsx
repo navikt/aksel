@@ -28,7 +28,7 @@ export default {
 
 type Story = StoryObj<typeof ActionMenu>;
 
-const DemoDecorator = (Story: any, { name }) => {
+const DemoDecorator: Story["decorators"] = (Story, { name }) => {
   return (
     <VStack gap="4" align="start">
       <h2>{name}</h2>
