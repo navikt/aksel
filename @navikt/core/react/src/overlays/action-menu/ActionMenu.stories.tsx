@@ -279,7 +279,12 @@ export const CheckboxIndeterminateGroups: Story = {
             }
             onCheckedChange={() =>
               Object.values(checkedItems).every(Boolean)
-                ? checkedItems
+                ? setCheckedItems((prevState) =>
+                    Object.keys(prevState).reduce(
+                      (acc, key) => ({ ...acc, [key]: false }),
+                      {} as typeof checkedItems,
+                    ),
+                  )
                 : setCheckedItems((prevState) =>
                     Object.keys(prevState).reduce(
                       (acc, key) => ({ ...acc, [key]: true }),
