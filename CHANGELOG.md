@@ -1,5 +1,27 @@
 # Changelog
 
+## 7.0
+
+### @navikt/ds-css
+
+- ErrorSummary: Focus heading instead of container for improved experience with screen reader. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+### @navikt/ds-react
+
+- ErrorSummary: Added fallback text for `heading`. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+- Tooltip: :boom: Updated labeling of items inside Tooltip. [See migration guide for how to update](https://aksel.nav.no/grunnleggende/kode/migrering#3b5cf05fd100). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+* ErrorSummary: Focus heading instead of container for improved experience with screen reader. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+### @navikt/ds-tailwind
+
+- Tailwind: Extended 'screens'-config in theme to match Aksel breakpoints. Tailwind and Primitives can now be used side by side with matching dynamic breakpoints. [See migration guide for potential issues when adopting](https://aksel.nav.no/grunnleggende/kode/migrering#3a2340f6f69b). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+### @navikt/aksel-icons
+
+- Icons: Removed renamed icons. [See migration guide for changes](https://aksel.nav.no/grunnleggende/kode/migrering#194b60833d9e). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
 ## 6.17
 
 ### @navikt/ds-react
