@@ -102,7 +102,7 @@ export const GroupedItems: Story = {
   decorators: [DemoDecorator],
 };
 
-export const Shortcut: Story = {
+export const ShortcutsAndIcons: Story = {
   render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
@@ -803,7 +803,7 @@ export const Chromatic: Story = {
           </div>
           <div>
             <h2>Shortcut</h2>
-            {Shortcut.render?.(newArgs, context)}
+            {ShortcutsAndIcons.render?.(newArgs, context)}
           </div>
         </HStack>
         <HStack gap="12">

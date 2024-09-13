@@ -11,7 +11,7 @@ import { requireReactElement } from "../../util/requireReactElement";
 import { Menu } from "../floating-menu/Menu";
 
 /* -------------------------------------------------------------------------- */
-/*                                ActionMenu                                */
+/*                                 ActionMenu                                 */
 /* -------------------------------------------------------------------------- */
 type ActionMenuContextValue = {
   triggerId: string;
@@ -49,7 +49,7 @@ interface ActionMenuProps {
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
    * Acts as a trigger and anchor for the menu.
-   * Must be wrapped around a React.ReactNode, ex. a button or similar element.
+   * Must be wrapped around a button. If you use your own component, make sure to forward ref and props.
    * @example
    * ```jsx
    * <ActionMenu.Trigger>
@@ -177,7 +177,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    */
   RadioGroup: typeof ActionMenuRadioGroup;
   /**
-   * A radio item in the menu. Should always be grouped with a `ActionMenu.RadioGroup`.
+   * A radio item in the menu. Should always be grouped with an `ActionMenu.RadioGroup`.
    * @example
    * ```jsx
    * <ActionMenu.RadioGroup
@@ -277,7 +277,7 @@ const ActionMenuRoot = ({
 const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
-/*                             ActionMenuTrigger                            */
+/*                             ActionMenuTrigger                              */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -319,8 +319,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
                 event.preventDefault();
 
                 /**
-                 * Allows user to open with pointerDown, while preserving the
-                 * pointerup event to close the menu if user wants to cancel action by moving pointer outside menu
+                 * Close the menu if pointerUp happens outside of the menu or the trigger
                  */
                 const pointerUpCallback = (e: PointerEvent) => {
                   const triggerRef = context.triggerRef?.current;
@@ -369,10 +368,10 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                             ActionMenuContent                            */
+/*                             ActionMenuContent                              */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id">,
     Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
   children?: React.ReactNode;
 }
@@ -389,7 +388,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
     ref,
   ) => {
     const context = useActionMenuContext();
-    const hasInteractedOutsideRef = useRef(false);
+    const hasRightClickedOutsideRef = useRef(false);
 
     return (
       <Menu.Portal rootElement={rootElement} asChild>
@@ -407,10 +406,10 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
              * In the case of a click outside the menu or trigger,
              * we make sure to not override any native focus behavior
              */
-            if (!hasInteractedOutsideRef.current) {
+            if (!hasRightClickedOutsideRef.current) {
               context.triggerRef.current?.focus();
             }
-            hasInteractedOutsideRef.current = false;
+            hasRightClickedOutsideRef.current = false;
             event.preventDefault();
           }}
           onInteractOutside={(event) => {
@@ -425,7 +424,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
               originalEvent.button === 0 && originalEvent.ctrlKey === true;
             const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
             if (isRightClick) {
-              hasInteractedOutsideRef.current = true;
+              hasRightClickedOutsideRef.current = true;
             }
           }}
           safeZone={{ anchor: context.triggerRef.current }}
@@ -453,7 +452,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuLabel                             */
+/*                              ActionMenuLabel                               */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -474,7 +473,7 @@ const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuGroup                             */
+/*                              ActionMenuGroup                               */
 /* -------------------------------------------------------------------------- */
 type ActionMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
@@ -528,7 +527,9 @@ const ActionMenuGroup = forwardRef<
   );
 });
 
-/* --------------------------- Utility-components --------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                             Utility components                             */
+/* -------------------------------------------------------------------------- */
 type MarkerProps = {
   children: React.ReactNode;
   className?: string;
@@ -556,15 +557,10 @@ type ShortcutProps = {
 
 const Shortcut = ({ children }: ShortcutProps) => {
   /**
-   * Assumes the user will input either
-   * - a single character
-   * - characters separated by "space"
-   * - characters separated by "+"
+   * Assumes the user will input either a single keyboard key
+   * or keys separated by "+"
    */
-  const parsed = children
-    .replace(/\+/g, " ")
-    .split(" ")
-    .filter((str) => str !== "");
+  const parsed = children.split("+").filter((str) => str !== "");
 
   return (
     <Marker placement="right">
@@ -578,24 +574,23 @@ const Shortcut = ({ children }: ShortcutProps) => {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuItem                              */
+/*                               ActionMenuItem                               */
 /* -------------------------------------------------------------------------- */
 type ActionMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
 interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   /**
-   * Shows connected shortcut-keys to the items
+   * Shows connected shortcut-keys for the item.
    * This is only a visual representation, you will have to implement the actual shortcut yourself.
    */
   shortcut?: string;
   /**
-   * Adds a danger variant to the item,
-   * usefull for destructive actions like "delete"
+   * Styles the item as a destructive action.
    */
   variant?: "danger";
   /**
-   *
+   * Adds an icon on the left side. The icon will always have aria-hidden.
    */
   icon?: React.ReactNode;
 }
@@ -651,7 +646,7 @@ interface ActionMenuCheckboxItemProps
   extends Omit<MenuCheckboxItemProps, "asChild"> {
   children: React.ReactNode;
   /**
-   * Shows connected shortcut-keys to the items
+   * Shows connected shortcut-keys for the item.
    * This is only a visual representation, you will have to implement the actual shortcut yourself.
    */
   shortcut?: string;
@@ -686,7 +681,7 @@ const ActionMenuCheckboxItem = forwardRef<
           "navds-action-menu__item navds-action-menu__checkbox",
           className,
         )}
-        aria-keyshortcuts={shortcut ?? undefined}
+        aria-keyshortcuts={shortcut}
       >
         {children}
         <Marker placement="left">
@@ -771,7 +766,7 @@ const ActionMenuCheckboxItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuRadioGroup                           */
+/*                            ActionMenuRadioGroup                            */
 /* -------------------------------------------------------------------------- */
 type ActionMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
 type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
@@ -906,7 +901,7 @@ const ActionMenuRadioItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuDivider                            */
+/*                             ActionMenuDivider                              */
 /* -------------------------------------------------------------------------- */
 type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
 type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
@@ -927,7 +922,7 @@ const ActionMenuDivider = forwardRef<
 });
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuSub                               */
+/*                               ActionMenuSub                                */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuSubProps {
   children?: React.ReactNode;
@@ -997,14 +992,12 @@ const ActionMenuSubTrigger = forwardRef<
       <Marker placement="right" className="navds-action-menu__marker-icon">
         <ChevronRightIcon aria-hidden />
       </Marker>
-      {/* <div className="navds-action-menu__sub-trigger-icon">
-      </div> */}
     </Menu.SubTrigger>
   );
 });
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuSubContent                           */
+/*                            ActionMenuSubContent                            */
 /* -------------------------------------------------------------------------- */
 type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 
