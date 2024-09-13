@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.0.0
+
+### Major Changes
+
+- Icons: Removed renamed icons. [See migration guide for changes](https://aksel.nav.no/grunnleggende/kode/migrering#194b60833d9e). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
 ## 6.17.0
 
 ### Minor Changes
