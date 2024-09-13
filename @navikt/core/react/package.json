@@ -50,6 +50,16 @@
         "default": "./cjs/accordion/index.js"
       }
     },
+    "./ActionMenu": {
+      "import": {
+        "types": "./esm/overlays/action-menu/index.d.ts",
+        "default": "./esm/overlays/action-menu/index.js"
+      },
+      "require": {
+        "types": "./cjs/overlays/action-menu/index.d.ts",
+        "default": "./cjs/overlays/action-menu/index.js"
+      }
+    },
     "./Alert": {
       "import": {
         "types": "./esm/alert/index.d.ts",
