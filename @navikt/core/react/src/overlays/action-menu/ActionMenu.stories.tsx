@@ -172,81 +172,7 @@ export const ShortcutsAndIcons: Story = {
   decorators: [DemoDecorator],
 };
 
-export const CheckboxGroups: Story = {
-  render: (props) => {
-    const [checkedItems, setCheckedItems] = useState({
-      checkbox1: false,
-      checkbox2: true,
-      checkbox3: false,
-      checkbox4: true,
-      checkbox5: false,
-      checkbox6: true,
-    });
-
-    // Step 3: Handle change
-    const handleCheckboxChange = (checkboxId: string) => {
-      setCheckedItems((prevState) => ({
-        ...prevState,
-        [checkboxId]: !prevState[checkboxId],
-      }));
-    };
-
-    return (
-      <ActionMenu open={props.open}>
-        <ActionMenu.Trigger>
-          <button>Open action</button>
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Group label="Group 1">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox1}
-              onCheckedChange={() => handleCheckboxChange("checkbox1")}
-            >
-              Checkbox 1
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox2}
-              onCheckedChange={() => handleCheckboxChange("checkbox2")}
-            >
-              Checkbox 1
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-          <ActionMenu.Group label="Group 2">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox3}
-              onCheckedChange={() => handleCheckboxChange("checkbox3")}
-            >
-              Checkbox 3
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox4}
-              onCheckedChange={() => handleCheckboxChange("checkbox4")}
-            >
-              Checkbox 4
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-          <ActionMenu.Group label="Group 3">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox5}
-              onCheckedChange={() => handleCheckboxChange("checkbox5")}
-            >
-              Checkbox 5
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox6}
-              onCheckedChange={() => handleCheckboxChange("checkbox6")}
-            >
-              Checkbox 6
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    );
-  },
-  decorators: [DemoDecorator],
-};
-
-export const CheckboxIndeterminateGroups: Story = {
+export const Checkboxes: Story = {
   render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
@@ -373,7 +299,7 @@ export const RadioGroups: Story = {
   decorators: [DemoDecorator],
 };
 
-export const DividerWithGroupedItems: Story = {
+export const Dividers: Story = {
   render: (props) => {
     return (
       <ActionMenu open={props.open}>
@@ -404,31 +330,17 @@ export const DividerWithGroupedItems: Story = {
               Item 6
             </ActionMenu.Item>
           </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    );
-  },
-  decorators: [DemoDecorator],
-};
-
-export const DividerWithItems: Story = {
-  render: (props) => {
-    return (
-      <ActionMenu open={props.open}>
-        <ActionMenu.Trigger>
-          <button>Open action</button>
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
-            Item 1
+          <ActionMenu.Divider />
+          <ActionMenu.Item onSelect={() => console.log("Item 7 clicked")}>
+            Item 7
           </ActionMenu.Item>
           <ActionMenu.Divider />
-          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
-            Item 2
+          <ActionMenu.Item onSelect={() => console.log("Item 8 clicked")}>
+            Item 8
           </ActionMenu.Item>
           <ActionMenu.Divider />
-          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
-            Item 3
+          <ActionMenu.Item onSelect={() => console.log("Item 9 clicked")}>
+            Item 9
           </ActionMenu.Item>
         </ActionMenu.Content>
       </ActionMenu>
@@ -813,12 +725,8 @@ export const Chromatic: Story = {
         </HStack>
         <HStack gap="12">
           <div>
-            <h2>CheckboxGroups</h2>
-            {CheckboxGroups.render?.(newArgs, context)}
-          </div>
-          <div>
-            <h2>CheckboxIndeterminateGroups</h2>
-            {CheckboxIndeterminateGroups.render?.(newArgs, context)}
+            <h2>Checkboxes</h2>
+            {Checkboxes.render?.(newArgs, context)}
           </div>
           <div>
             <h2>RadioGroups</h2>
@@ -827,12 +735,8 @@ export const Chromatic: Story = {
         </HStack>
         <HStack gap="12">
           <div>
-            <h2>DividerWithGroupedItems</h2>
-            {DividerWithGroupedItems.render?.(newArgs, context)}
-          </div>
-          <div>
-            <h2>DividerWithItems</h2>
-            {DividerWithItems.render?.(newArgs, context)}
+            <h2>Dividers</h2>
+            {Dividers.render?.(newArgs, context)}
           </div>
         </HStack>
         <div>
