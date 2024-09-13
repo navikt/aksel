@@ -99,7 +99,6 @@ export const ShortcutsAndIcons: Story = {
       checkbox2: false,
     });
 
-    // Step 3: Handle change
     const handleCheckboxChange = (checkboxId: string) => {
       setCheckedItems((prevState) => ({
         ...prevState,
@@ -171,7 +170,6 @@ export const Checkboxes: Story = {
       checkbox4: false,
     });
 
-    // Step 3: Handle change
     const handleCheckboxChange = (checkboxId: string) => {
       setCheckedItems((prevState) => ({
         ...prevState,
@@ -251,7 +249,6 @@ export const RadioGroups: Story = {
     const [group1Value, setGroup1Value] = useState("1");
     const [group2Value, setGroup2Value] = useState("4");
 
-    // Step 3: Handle value change
     const handleGroup1ValueChange = (value: string) => {
       setGroup1Value(value);
     };
