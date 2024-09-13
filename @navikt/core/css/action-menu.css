@@ -12,7 +12,7 @@
   background-color: var(--a-surface-default);
   overflow: auto;
   min-width: 128px;
-  max-width: 640px;
+  max-width: min(100vw, 640px);
   max-height: var(--ac-action-menu-content-available-height);
   transform-origin: var(--ac-action-menu-content-transform-origin);
   scrollbar-width: thin;
