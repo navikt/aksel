@@ -1,10 +1,10 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable aksel/design-token-exists */
 .navds-action-menu__content {
-  --__ac-action-menu-content-p: 0.5rem;
+  --__ac-action-menu-content-p: var(--a-spacing-2);
   --__ac-action-menu-item-pr: var(--a-spacing-3);
   --__ac-action-menu-item-pl: var(--a-spacing-2);
-  --__ac-action-menu-item-height: 32px;
+  --__ac-action-menu-item-height: 2rem;
 
   padding: var(--__ac-action-menu-content-p);
   box-shadow: var(--a-shadow-medium);
