@@ -255,14 +255,6 @@ export const RadioGroups: Story = {
     const [group1Value, setGroup1Value] = useState("1");
     const [group2Value, setGroup2Value] = useState("4");
 
-    const handleGroup1ValueChange = (value: string) => {
-      setGroup1Value(value);
-    };
-
-    const handleGroup2ValueChange = (value: string) => {
-      setGroup2Value(value);
-    };
-
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
@@ -270,7 +262,7 @@ export const RadioGroups: Story = {
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.RadioGroup
-            onValueChange={handleGroup1ValueChange}
+            onValueChange={setGroup1Value}
             value={group1Value}
             label="Group 1"
           >
@@ -278,7 +270,7 @@ export const RadioGroups: Story = {
             <ActionMenu.RadioItem value="2">Radio 2</ActionMenu.RadioItem>
           </ActionMenu.RadioGroup>
           <ActionMenu.RadioGroup
-            onValueChange={handleGroup2ValueChange}
+            onValueChange={setGroup2Value}
             value={group2Value}
             label="Group 2"
           >
