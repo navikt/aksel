@@ -5,7 +5,8 @@ import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useId, useMergeRefs } from "../../util/hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
-export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
+export interface ErrorSummaryProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, "tabIndex"> {
   /**
    * Collection of `ErrorSummary.Item`.
    */
