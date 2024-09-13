@@ -167,14 +167,6 @@
   font-size: var(--a-font-size-small);
 }
 
-.navds-action-menu__sub-trigger-icon {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  padding-left: var(--a-spacing-4);
-  margin-right: -8px;
-}
-
 .navds-action-menu__label {
   display: flex;
   align-items: center;
@@ -193,10 +185,6 @@
   margin-block: var(--a-spacing-2);
   background-color: var(--a-border-divider);
   margin-inline: calc(var(--__ac-action-menu-content-p) * -1);
-}
-
-:where(.navds-action-menu__sub-trigger-icon) > * {
-  flex-shrink: 0;
 }
 
 .navds-action-menu__indicator-icon {
