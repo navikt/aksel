@@ -695,7 +695,7 @@ export const ViewDemo: Story = {
                         Add to dashboard
                       </ActionMenu.Item>
                       <ActionMenu.Item
-                        onSelect={() => console.log("Edit")}
+                        onSelect={() => console.log("Pin task")}
                         icon={<PushPinIcon />}
                       >
                         Pin task
