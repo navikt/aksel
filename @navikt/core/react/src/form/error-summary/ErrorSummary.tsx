@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
+import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useId, useMergeRefs } from "../../util/hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
@@ -95,11 +96,11 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         aria-live="polite"
         aria-relevant="all"
         aria-labelledby={headingId}
-        onFocus={(event) => {
+        onFocus={composeEventHandlers(rest.onFocus, (event) => {
           if (event.target === sectionRef.current) {
             headingRef?.current?.focus();
           }
-        }}
+        })}
       >
         <Heading
           className="navds-error-summary__heading"
