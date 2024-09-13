@@ -75,7 +75,9 @@ export const GroupedItems: Story = {
         <ActionMenu.Content>
           <ActionMenu.Group label="Group 1">
             <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
-              Item 1
+              Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1
+              Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1 Item 1
+              Item 1 Item 1
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
               Item 2

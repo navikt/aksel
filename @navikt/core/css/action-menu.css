@@ -11,7 +11,8 @@
   border-radius: var(--a-border-radius-large);
   background-color: var(--a-surface-default);
   overflow: auto;
-  min-width: 8rem;
+  min-width: 128px;
+  max-width: 640px;
   max-height: var(--ac-action-menu-content-available-height);
   transform-origin: var(--ac-action-menu-content-transform-origin);
   scrollbar-width: thin;
@@ -97,7 +98,6 @@
   padding-right: var(--__ac-action-menu-item-pr);
   font-size: var(--a-font-size-medium);
   scroll-margin-block: var(--__ac-action-menu-content-p);
-  white-space: nowrap;
   line-height: 1.5;
   color: var(--a-text-default);
   text-decoration: none;
