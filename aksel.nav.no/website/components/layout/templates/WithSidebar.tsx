@@ -109,7 +109,7 @@ export const WithSidebar = ({
               </div>
             )}
             {variant === "landingPage" && (
-              <div className="pointer-events-none absolute right-0 top-0 hidden sm:block">
+              <div className="pointer-events-none absolute right-0 top-0 hidden md:block">
                 <HeaderCube />
               </div>
             )}

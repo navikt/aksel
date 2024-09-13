@@ -1,8 +1,6 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Alert } from "../alert";
 import { Button } from "../button";
-import { Search } from "../form/search";
 import { VStack } from "../layout/stack";
 import Tooltip from "./Tooltip";
 
@@ -32,20 +30,6 @@ export default {
   },
 } satisfies Meta<typeof Tooltip>;
 
-export const Demo = () => (
-  <div>
-    <Tooltip content="Tooltip example" placement="top">
-      <Alert variant="info">test</Alert>
-    </Tooltip>
-    <Tooltip content="Tooltip example" placement="top">
-      <Search label="søk" />
-    </Tooltip>
-    <Tooltip content="Tooltip example" placement="top">
-      <Button aria-describedby="test123">Tooltip</Button>
-    </Tooltip>
-  </div>
-);
-
 export const Default = (props) => {
   return (
     <Tooltip
@@ -56,8 +40,9 @@ export const Default = (props) => {
       arrow={props?.arrow}
       delay={props?.delay}
       offset={props?.offset}
+      describesChild={props?.describesChild}
     >
-      <Button aria-describedby="test123">Tooltip</Button>
+      <Button>Tooltip</Button>
     </Tooltip>
   );
 };
@@ -65,6 +50,7 @@ Default.args = {
   keys: false,
   arrow: true,
   delay: 150,
+  describesChild: true,
 };
 
 export const Placement = () => {
@@ -90,10 +76,10 @@ export const Keys = () => {
   return (
     <Tooltip
       content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. "
-      open={true}
       keys={["CMD", "I"]}
+      open={true}
     >
-      <div>Element</div>
+      <button>Element</button>
     </Tooltip>
   );
 };
