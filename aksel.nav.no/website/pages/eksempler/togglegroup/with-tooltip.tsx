@@ -38,5 +38,4 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "For ToggleGroup uten label med Tooltip bør du bruke 'describesChild'-prop på Tooltip.",
 };
