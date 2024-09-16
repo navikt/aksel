@@ -2,7 +2,6 @@ import StyleDictionary from "style-dictionary";
 import { kebabCase } from "./kebabCase.mjs";
 
 const V1_DIST = "dist/";
-const V2_DIST = "dist/temp/";
 
 const kebabTransform = {
   name: "name/cti/kebab",
@@ -12,7 +11,7 @@ const kebabTransform = {
 };
 
 const dictionaryV1 = new StyleDictionary({
-  source: ["src/v1/index.js", "src/v1/**/*.json"],
+  source: ["src/index.js", "src/**/*.json"],
   platforms: {
     scss: {
       transformGroup: "scss",
@@ -78,84 +77,10 @@ const dictionaryV1 = new StyleDictionary({
   },
 });
 
-const dictionaryV2Light = new StyleDictionary({
-  source: ["src/v2/**/*-light.json"],
-  platforms: {
-    css: {
-      transformGroup: "css",
-      buildPath: V2_DIST,
-      files: [
-        {
-          destination: "tokens-light.css",
-          format: "css/variables",
-          options: {
-            outputReferences: true,
-            selector: ":root, :host, .light, .light-theme",
-          },
-        },
-      ],
-    },
-    ts: {
-      transformGroup: "js",
-      buildPath: V2_DIST,
-      files: [
-        {
-          destination: "tokens-light.d.ts",
-          format: "typescript/es6-declarations",
-          options: {
-            outputStringLiterals: true,
-          },
-        },
-      ],
-    },
-  },
-});
-
-const dictionaryV2Dark = new StyleDictionary({
-  source: ["src/v2/**/*-dark.json"],
-  platforms: {
-    css: {
-      transformGroup: "css",
-      buildPath: V2_DIST,
-      files: [
-        {
-          destination: "tokens-dark.css",
-          format: "css/variables",
-          options: {
-            outputReferences: true,
-            selector: ".dark, .dark-theme",
-          },
-        },
-      ],
-    },
-    ts: {
-      transformGroup: "js",
-      buildPath: V2_DIST,
-      files: [
-        {
-          destination: "tokens-dark.d.ts",
-          format: "typescript/es6-declarations",
-          options: {
-            outputStringLiterals: true,
-          },
-        },
-      ],
-    },
-  },
-});
-
 async function buildDictionary() {
   await dictionaryV1.hasInitialized;
   dictionaryV1.registerTransform(kebabTransform);
   await dictionaryV1.buildAllPlatforms();
-
-  await dictionaryV2Light.hasInitialized;
-  dictionaryV2Light.registerTransform(kebabTransform);
-  await dictionaryV2Light.buildAllPlatforms();
-
-  await dictionaryV2Dark.hasInitialized;
-  dictionaryV2Dark.registerTransform(kebabTransform);
-  await dictionaryV2Dark.buildAllPlatforms();
 }
 
 buildDictionary();

@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs",
+    "build:darkside": "tsx ./darkside",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "test": "vitest run",
     "test:watch": "vitest watch"
@@ -33,7 +34,8 @@
     "color": "4.2.3",
     "lodash.kebabcase": "^4.1.1",
     "nodemon": "^3.0.1",
-    "style-dictionary": "^4.1.0",
+    "style-dictionary": "^4.1.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },
