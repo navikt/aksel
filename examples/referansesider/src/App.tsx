@@ -2,12 +2,12 @@ import styled from "styled-components";
 import "@navikt/ds-css";
 import { Button, VStack } from "@navikt/ds-react";
 import "@navikt/ds-tokens";
-// import * as tokens from "@navikt/ds-tokens/dist/tokens";
+import * as tokens from "@navikt/ds-tokens/dist/tokens";
 import "./App.css";
 
 const StyledButton = styled(Button)`
   background-color: var(--a-surface-success);
-  color: var(--a-red-500);
+  color: ${tokens.APurple500};
   border: solid 2px salmon;
 `;
 

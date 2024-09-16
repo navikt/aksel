@@ -359,9 +359,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:^7.0.0":
+"@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-react@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.0.0%2F6bea7efb224bee86c8695f0e576365dd84af6d5d"
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=d96f91&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -373,7 +373,10 @@ __metadata:
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
-  checksum: 10/8f13f69a43f1a3736e26c366ad544964f4038adbb4a210ddc530a2357a9fc3175268579d750061e3c347588e17af26b1d9a441648437bffefdfd9c9dc5abba27
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/0e4723593f21ccbfb8bd2b7113f7a4975038b60de80074839cd7b0147e6885a1765b48f61647eef4b91a41bae27506a3c64ec0021a54f654b0538fddb0652505
   languageName: node
   linkType: hard
 
@@ -2267,7 +2270,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.9.0"
     "@navikt/ds-css": ../../@navikt/core/css
-    "@navikt/ds-react": "npm:^7.0.0"
+    "@navikt/ds-react": ../../@navikt/core/react
     "@navikt/ds-tokens": ../../@navikt/core/tokens
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"

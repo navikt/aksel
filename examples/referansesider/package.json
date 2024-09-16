@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@navikt/ds-css": "../../@navikt/core/css",
-    "@navikt/ds-react": "^7.0.0",
+    "@navikt/ds-react": "../../@navikt/core/react",
     "@navikt/ds-tokens": "../../@navikt/core/tokens",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
