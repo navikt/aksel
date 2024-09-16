@@ -1,3 +1,9 @@
+# tasks
+
+- [ ] own domain: aksel-referansesider.ansatt.nav.no (maybe?)
+- [ ] get designs (our designers should have them)
+- [ ] recreate reference pages from scratch with divs (and maybe use tailwind?)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
