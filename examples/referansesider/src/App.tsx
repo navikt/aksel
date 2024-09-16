@@ -2,13 +2,12 @@ import styled from "styled-components";
 import "@navikt/ds-css";
 import { Button, VStack } from "@navikt/ds-react";
 import "@navikt/ds-tokens";
-// TODO: why does this not work?
-// import { ASurfaceSuccess } from "@navikt/ds-tokens";
+import * as tokens from "@navikt/ds-tokens/dist/tokens";
 import "./App.css";
 
 const StyledButton = styled(Button)`
-  color: orange;
   background-color: var(--a-surface-success);
+  color: ${tokens.ARed500};
   border: solid 2px salmon;
 `;
 
