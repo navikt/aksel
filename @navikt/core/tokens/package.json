@@ -13,7 +13,7 @@
   "license": "MIT",
   "files": [
     "/dist",
-    "!/dist/temp",
+    "!/dist/darkside",
     "/src",
     "/tailwind",
     "docs.json"
@@ -33,6 +33,7 @@
   "devDependencies": {
     "color": "4.2.3",
     "lodash.kebabcase": "^4.1.1",
+    "lodash.merge": "^4.6.2",
     "nodemon": "^3.0.1",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.7.1",

@@ -1,3 +1,6 @@
+import merge from "lodash.merge";
+import { tokenConfigForRole } from "./tokens/token-configs";
+
 export const colorThemeModes = ["light", "dark"] as const;
 export type ColorThemeMode = (typeof colorThemeModes)[number];
 
@@ -29,16 +32,8 @@ export const tokensWithPrefix = (input: any) => {
   return { a: { ...input } };
 };
 
-export type FigmaTokenTypes = "color" | "spacing" | "radius";
-
-export interface FigmaPreparedToken {
-  name: string;
-  type: FigmaTokenTypes;
-  value: string;
-  alias?: string;
-  comment?: string;
-  group: string;
-  code: {
-    web: string;
-  };
-}
+export const tokensForAllRoles = () =>
+  globalColorRoles.reduce(
+    (acc, role) => merge(acc, tokenConfigForRole(role)),
+    {},
+  );
