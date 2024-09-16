@@ -1,25 +1,38 @@
-.examples a {
+.container {
+  padding-inline: 1rem;
+}
+
+.container a {
   text-underline-offset: initial;
   text-decoration-thickness: auto;
 }
 
-.container {
+.containerDefault {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .containerStatic {
   display: flex;
   justify-content: center;
   height: 100%;
-  padding: 1.5rem 1rem;
+  padding-block: 1.5rem;
 }
 
-.containerStatic > * {
+.exampleStatic {
   max-width: 30rem;
   width: 100%;
+}
+
+.containerFull {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.containerStaticFull {
+  padding-block: 1.5rem;
 }

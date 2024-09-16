@@ -1,10 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
-  BabyWrappedIcon,
   BrailleIcon,
+  CheckmarkIcon,
+  ForkIcon,
   HeadHeartIcon,
-  RecycleIcon,
+  SplitHorizontalIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import { BodyLong } from "../typography";
@@ -241,7 +242,7 @@ export const SizesIcons = {
 export const Icons = {
   render: () => {
     return (
-      <List>
+      <List title="Best title">
         <List.Item
           title="Lorem Ipsum Dolor Sit Amet"
           icon={<BrailleIcon aria-hidden />}
@@ -250,14 +251,14 @@ export const Icons = {
         </List.Item>
         <List.Item
           title="Consectetur Adipiscing Elit"
-          icon={<HeadHeartIcon aria-hidden />}
+          icon={<ForkIcon aria-hidden />}
         >
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
-        <List.Item icon={<BabyWrappedIcon aria-hidden />}>
+        <List.Item icon={<CheckmarkIcon aria-hidden />}>
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
-        <List.Item icon={<RecycleIcon aria-hidden />}>
+        <List.Item icon={<SplitHorizontalIcon aria-hidden />}>
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>
       </List>

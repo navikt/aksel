@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.0.0
+
+### Patch Changes
+
+- ErrorSummary: Focus heading instead of container for improved experience with screen reader. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+## 6.17.0
+
 ## 6.16.3
 
 ### Patch Changes
