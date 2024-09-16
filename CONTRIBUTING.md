@@ -42,7 +42,7 @@ Det er ikke satt opp en template for nye komponenter, men vi følger en mal.
 
 ## Dokumentasjon
 
-Dokumentasjon for komponenter finner man på [aksel.nav.no](https://aksel.nav.no/). Hvis man ønsker å skrive noe dokumentasjon selv gjør vi det via CMS et Sanity. Kode-eksempler blir skrevet lokalt i (https://github.com/navikt/aksel/tree/main/aksel.nav.no/website/pages/eksempler)[/pages/eksempler]
+Dokumentasjon for komponenter finner man på [aksel.nav.no](https://aksel.nav.no/). Hvis man ønsker å skrive noe dokumentasjon selv gjør vi det via CMS et Sanity. Kode-eksempler blir skrevet lokalt i [/pages/eksempler](https://github.com/navikt/aksel/tree/main/aksel.nav.no/website/pages/eksempler)
 
 ## Versjonering av pakker
 
