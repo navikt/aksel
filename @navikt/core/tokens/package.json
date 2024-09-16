@@ -19,7 +19,7 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs",
+    "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs && yarn build:darkside",
     "build:darkside": "tsx ./darkside",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "test": "vitest run",

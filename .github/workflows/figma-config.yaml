@@ -1,0 +1,49 @@
+name: "Update remote token config for figma"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "@navikt/core/tokens/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: yarn
+      - name: set-env for yarn install to @navikt scope
+        shell: bash
+        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build tokens
+        run: yarn workspace @navikt/ds-tokens build
+
+      - id: upload
+        uses: nais/deploy/actions/cdn-upload/v2@master
+        with:
+          team: designsystem
+          source: "./@navikt/core/tokens/figma-config.json"
+          destination: "./@navikt/tokens/figma-config.json"
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          source_keep_parent_name: false
+
+      - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
+        shell: bash
