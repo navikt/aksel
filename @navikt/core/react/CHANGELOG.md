@@ -1,5 +1,49 @@
 # @navikt/ds-react
 
+## 7.0.0
+
+### Major Changes
+
+- ErrorSummary: Added fallback text for `heading`. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+- Tooltip: :boom: Updated labeling of items inside Tooltip. [See migration guide for how to update](https://aksel.nav.no/grunnleggende/kode/migrering#3b5cf05fd100). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+### Patch Changes
+
+- ErrorSummary: Focus heading instead of container for improved experience with screen reader. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+- Updated dependencies [[`1c11a6a3b`](https://github.com/navikt/aksel/commit/1c11a6a3b95fe6d0f5015d3b073e05fe5912071b)]:
+  - @navikt/aksel-icons@7.0.0
+  - @navikt/ds-tokens@7.0.0
+
+## 6.17.0
+
+### Minor Changes
+
+- Combobox: Add support for `onBlur`, and omit props that have no effect. ([#3125](https://github.com/navikt/aksel/pull/3125))
+
+### Patch Changes
+
+- Updated dependencies [[`1b2dc8896`](https://github.com/navikt/aksel/commit/1b2dc88968ca99d8b24f94ca51843063472dfa95)]:
+  - @navikt/aksel-icons@6.17.0
+  - @navikt/ds-tokens@6.17.0
+
+## 6.16.3
+
+### Patch Changes
+
+- Combobox :children_crossing: single select now hides selected value when typing, onBlur clears input ([#3124](https://github.com/navikt/aksel/pull/3124))
+
+- Combobox: :lipstick: hide caret on select ([#3071](https://github.com/navikt/aksel/pull/3071))
+
+- :bug: Combobox: trailing spaces no longer work like wildcards for autocomplete suggestions ([#3105](https://github.com/navikt/aksel/pull/3105))
+
+- Fixed bug in Combobox where the wrong option was selected on Enter if the autocompleted word was not the first in FilteredOptions ([#3110](https://github.com/navikt/aksel/pull/3110))
+
+- Updated dependencies [[`9907ef08a`](https://github.com/navikt/aksel/commit/9907ef08a639cb2ee3b2af1ef76a30faadd7b340)]:
+  - @navikt/aksel-icons@6.16.3
+  - @navikt/ds-tokens@6.16.3
+
 ## 6.16.2
 
 ### Patch Changes

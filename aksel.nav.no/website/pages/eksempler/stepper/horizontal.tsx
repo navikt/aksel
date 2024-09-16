@@ -8,26 +8,26 @@ const Example = () => {
   return (
     <>
       <Heading size="medium" spacing level="2" id="stepper-heading">
-        Søknadssteg
+        Steg
       </Heading>
       <Stepper
         aria-labelledby="stepper-heading"
         activeStep={activeStep}
-        onStepChange={(x) => setActiveStep(x)}
+        onStepChange={setActiveStep}
         orientation="horizontal"
       >
-        <Stepper.Step href="#">Start søknad</Stepper.Step>
+        <Stepper.Step href="#">Innledning</Stepper.Step>
         <Stepper.Step href="#">Saksopplysninger</Stepper.Step>
-        <Stepper.Step href="#">Vedlegg</Stepper.Step>
+        <Stepper.Step href="#">Begrunnelse</Stepper.Step>
         <Stepper.Step href="#">Oppsummering</Stepper.Step>
-        <Stepper.Step href="#">Innsending</Stepper.Step>
+        <Stepper.Step href="#">Bekreftelse</Stepper.Step>
       </Stepper>
     </>
   );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "full" });
 
 /* Storybook story */
 export const Demo = {
@@ -35,6 +35,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 1,
-  desc: "Vi anbefaler å ikke bruke horisontal stepper, spesielt på eksterne flater. Dette er for å bedre støtte mobilenheter.",
+  index: 5,
+  desc: "Vi anbefaler å ikke bruke horisontal stepper, da den fungerer dårlig på mindre skjermer.",
 };
