@@ -616,7 +616,7 @@ const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("navds-action-menu__item", className, {
           "navds-action-menu__item--danger": variant === "danger",
-          "navds-action-menu--marker": icon,
+          "navds-action-menu__item--has-icon": icon,
         })}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
@@ -980,7 +980,7 @@ const ActionMenuSubTrigger = forwardRef<
       className={cl(
         "navds-action-menu__item navds-action-menu__sub-trigger",
         className,
-        { "navds-action-menu--marker": icon },
+        { "navds-action-menu__item--has-icon": icon },
       )}
     >
       {children}

@@ -107,7 +107,7 @@
   flex-shrink: 0;
 }
 
-.navds-action-menu__item:where(.navds-action-menu__checkbox, .navds-action-menu__radio, .navds-action-menu--marker) {
+.navds-action-menu__item:where(.navds-action-menu__checkbox, .navds-action-menu__radio, .navds-action-menu__item--has-icon) {
   --__ac-action-menu-item-pl: var(--a-spacing-6);
 }
 
