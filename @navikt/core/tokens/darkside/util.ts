@@ -32,6 +32,9 @@ export const tokensWithPrefix = (input: any) => {
   return { a: { ...input } };
 };
 
+/**
+ * We need to deep merge the token config for each role to get the complete token config for all roles.
+ */
 export const tokensForAllRoles = () =>
   globalColorRoles.reduce(
     (acc, role) => merge(acc, tokenConfigForRole(role)),

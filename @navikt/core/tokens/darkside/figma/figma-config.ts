@@ -7,6 +7,10 @@ import {
   getUniqueColorTokens,
 } from "./sd-parser";
 
+/**
+ * Builds a configuration JSON that can be used by Figma-plugins to
+ * generate 'variables' in a Figma-file based on our tokens.
+ */
 export async function buildFigmaConfig() {
   const { globalLightTokens, globalDarkTokens, semanticTokens } =
     await getTokensByColorRoles();
