@@ -352,10 +352,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:^7.0.0":
+"@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-css@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.0.0%2F24c8994367516a16e383a49d6940e34472ec9413"
-  checksum: 10/23e90e1bd15475c8c94a73e7f9b8af21bef101bfe21f7b4f69833b4399ac5978bd9a73a7b61fca84103db94913218d58a625ddb5c4588f026268a371afbbe9f3
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=978c65&locator=referansesider%40workspace%3A."
+  checksum: 10/1ab483fceb49ce84aa190552c909888d52e8eb296914b6d9efeeb41594b7d3b581046783379bf88f6d641828d53d621f77507e267108ff0f04f87997f96febcc
   languageName: node
   linkType: hard
 
@@ -374,6 +374,13 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: 10/8f13f69a43f1a3736e26c366ad544964f4038adbb4a210ddc530a2357a9fc3175268579d750061e3c347588e17af26b1d9a441648437bffefdfd9c9dc5abba27
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
+  version: 7.0.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=6327f0&locator=referansesider%40workspace%3A."
+  checksum: 10/ae3e51dff8cec9f968bcfb363aa598180168670771203935dcd4f09c4c6e7ce7cebbeb2333de669aa58ebde946aa1c1cbc11da540d9c909bd2a5ec036fa2a45c
   languageName: node
   linkType: hard
 
@@ -2259,9 +2266,9 @@ __metadata:
   resolution: "referansesider@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.9.0"
-    "@navikt/ds-css": "npm:^7.0.0"
+    "@navikt/ds-css": ../../@navikt/core/css
     "@navikt/ds-react": "npm:^7.0.0"
-    "@navikt/ds-tokens": "npm:^7.0.0"
+    "@navikt/ds-tokens": ../../@navikt/core/tokens
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"

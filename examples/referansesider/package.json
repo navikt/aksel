@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@navikt/ds-css": "^7.0.0",
+    "@navikt/ds-css": "../../@navikt/core/css",
     "@navikt/ds-react": "^7.0.0",
-    "@navikt/ds-tokens": "^7.0.0",
+    "@navikt/ds-tokens": "../../@navikt/core/tokens",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.13"
