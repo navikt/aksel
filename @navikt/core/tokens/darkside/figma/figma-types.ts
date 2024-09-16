@@ -12,11 +12,9 @@ export type FigmaTokenConfig = {
   spacing: FigmaConfigEntry;
 };
 
-export type FigmaTokenTypes = "color" | "spacing" | "radius";
-
 export interface FigmaPreparedToken {
   name: string;
-  type: FigmaTokenTypes;
+  type?: string;
   value: string;
   alias?: string;
   comment?: string;

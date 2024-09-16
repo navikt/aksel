@@ -1,7 +1,7 @@
 import {
   ColorThemeMode,
+  GlobaColorScale,
   GlobalColorVariable,
-  GlobalScaleWithObjectNesting,
 } from "../../util";
 
 const NeutralScaleLight: GlobalColorVariable = {
@@ -100,9 +100,7 @@ const NeutralScaleDark: GlobalColorVariable = {
   },
 };
 
-export default (
-  theme: ColorThemeMode,
-): GlobalScaleWithObjectNesting<"neutral"> => {
+export default (theme: ColorThemeMode): GlobaColorScale<"neutral"> => {
   return {
     neutral: theme === "light" ? NeutralScaleLight : NeutralScaleDark,
   };

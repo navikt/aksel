@@ -1,7 +1,7 @@
 import {
   ColorThemeMode,
+  GlobaColorScale,
   GlobalColorVariable,
-  GlobalScaleWithObjectNesting,
 } from "../../util";
 
 const AccentScaleLight: GlobalColorVariable = {
@@ -100,9 +100,7 @@ const AccentScaleDark: GlobalColorVariable = {
   },
 };
 
-export default (
-  theme: ColorThemeMode,
-): GlobalScaleWithObjectNesting<"accent"> => {
+export default (theme: ColorThemeMode): GlobaColorScale<"accent"> => {
   return {
     accent: theme === "light" ? AccentScaleLight : AccentScaleDark,
   };

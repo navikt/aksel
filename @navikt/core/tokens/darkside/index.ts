@@ -1,9 +1,8 @@
+import fs from "fs";
 import StyleDictionary from "style-dictionary";
 import { fileHeader } from "style-dictionary/utils";
 import { buildFigmaConfig } from "./figma/figma-config";
-import { completeGlobalLightScale } from "./tokens/global";
-import { tokenConfigForUniqueTokens } from "./tokens/token-configs";
-import { tokensForAllRoles, tokensWithPrefix } from "./util";
+import { darkModeTokens, lightModeTokens, scaleTokens } from "./util";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -18,22 +17,16 @@ const DARKSIDE_DIST = "./dist/darkside/";
  * - Shadows
  * - Typography
  * - Breakpoints
- * - Spacing
- * - Radius
  */
-const SDictionary = new StyleDictionary({
-  tokens: tokensWithPrefix({
-    ...completeGlobalLightScale(),
-    ...tokensForAllRoles(),
-    ...tokenConfigForUniqueTokens(),
-  }),
+const SDictionaryLightMode = new StyleDictionary({
+  tokens: lightModeTokens(),
   platforms: {
     css: {
       transformGroup: "css",
       buildPath: DARKSIDE_DIST,
       files: [
         {
-          destination: "tokens.css",
+          destination: "light-tokens.css",
           format: "css/variables",
           options: {
             outputReferences: true,
@@ -70,17 +63,61 @@ const SDictionary = new StyleDictionary({
   },
 });
 
+const SDictionaryDarkMode = new StyleDictionary({
+  tokens: darkModeTokens(),
+  platforms: {
+    css: {
+      transformGroup: "css",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "dark-tokens.css",
+          format: "css/variables",
+          options: {
+            outputReferences: true,
+            outputReferenceFallbacks: true,
+            selector: ".dark, .dark-theme",
+          },
+        },
+      ],
+    },
+  },
+});
+
+const SDictionaryScaleTokens = new StyleDictionary({
+  tokens: scaleTokens(),
+  platforms: {
+    css: {
+      transformGroup: "css",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "scale-tokens.css",
+          format: "css/variables",
+          options: {
+            outputReferences: true,
+            outputReferenceFallbacks: true,
+            selector: ":root, :host",
+          },
+        },
+      ],
+    },
+  },
+});
+
 const main = async () => {
   await buildFigmaConfig();
 
-  await SDictionary.hasInitialized;
+  await SDictionaryLightMode.hasInitialized;
+  await SDictionaryDarkMode.hasInitialized;
+  await SDictionaryScaleTokens.hasInitialized;
 
   /**
    * To support theming in the future, we need to export the tokens as CSS variables.
    * By default StyleDictionary does not support this and only outputs to color-values,
    * so we need to create a custom format.
    */
-  SDictionary.registerFormat({
+  SDictionaryLightMode.registerFormat({
     name: "format-js-esm",
     format: async ({ dictionary, file }) => {
       const header = await fileHeader({ file });
@@ -103,7 +140,7 @@ const main = async () => {
    * By default StyleDictionary does not support this and only outputs to color-values,
    * so we need to create a custom format.
    */
-  SDictionary.registerFormat({
+  SDictionaryLightMode.registerFormat({
     name: "format-js-module-flat",
     format: async ({ dictionary, file }) => {
       const header = await fileHeader({ file });
@@ -123,7 +160,20 @@ const main = async () => {
     },
   });
 
-  await SDictionary.buildAllPlatforms();
+  await SDictionaryLightMode.buildAllPlatforms();
+  await SDictionaryDarkMode.buildAllPlatforms();
+  await SDictionaryScaleTokens.buildAllPlatforms();
+
+  const importPaths = [
+    "light-tokens.css",
+    "dark-tokens.css",
+    "scale-tokens.css",
+  ];
+
+  fs.writeFileSync(
+    `${DARKSIDE_DIST}tokens.css`,
+    importPaths.map((path) => `@import "${path}";`).join("\n"),
+  );
 };
 
 main();
