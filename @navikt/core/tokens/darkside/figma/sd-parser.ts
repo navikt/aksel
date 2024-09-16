@@ -11,13 +11,8 @@ import {
   tokenConfigForRole,
   tokenConfigForUniqueTokens,
 } from "../tokens/token-configs";
-import {
-  FigmaPreparedToken,
-  FigmaTokenTypes,
-  colorThemeModes,
-  globalColorRoles,
-  tokensWithPrefix,
-} from "../tokens/util";
+import { colorThemeModes, globalColorRoles, tokensWithPrefix } from "../util";
+import { FigmaPreparedToken, FigmaTokenTypes } from "./figma-types";
 
 export const getTokensByColorRoles = async (): Promise<{
   globalLightTokens: FigmaPreparedToken[];

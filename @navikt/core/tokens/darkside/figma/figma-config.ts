@@ -1,5 +1,5 @@
 import fs from "fs";
-import { FigmaTokenConfig } from "./config";
+import { FigmaTokenConfig } from "./figma-types";
 import {
   getRadiusTokens,
   getSpacingTokens,

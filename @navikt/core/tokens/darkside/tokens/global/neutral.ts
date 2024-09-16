@@ -2,7 +2,7 @@ import {
   ColorThemeMode,
   GlobalColorVariable,
   GlobalScaleWithObjectNesting,
-} from "../util";
+} from "../../util";
 
 const NeutralScaleLight: GlobalColorVariable = {
   "100": {

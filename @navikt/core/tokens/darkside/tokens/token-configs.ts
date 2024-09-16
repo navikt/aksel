@@ -1,4 +1,4 @@
-import { GlobalColorRoles } from "./util";
+import { GlobalColorRoles } from "../util";
 
 export const tokenConfigForRole = (role: GlobalColorRoles) => ({
   bg: {

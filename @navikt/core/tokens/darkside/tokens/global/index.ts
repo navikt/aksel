@@ -1,4 +1,4 @@
-import { ColorThemeMode, GlobalColorRoles, globalColorRoles } from "../util";
+import { ColorThemeMode, GlobalColorRoles, globalColorRoles } from "../../util";
 import AccentScale from "./accent";
 import NeutralScale from "./neutral";
 
