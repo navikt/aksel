@@ -12,20 +12,17 @@ const Example = () => {
       <Tooltip content="Uleste meldinger">
         <ToggleGroup.Item
           value="ulest"
-          icon={<EnvelopeClosedIcon title="Ulest" />}
+          icon={<EnvelopeClosedIcon aria-hidden />}
         />
       </Tooltip>
       <Tooltip content="Leste meldinger">
         <ToggleGroup.Item
           value="lest"
-          icon={<EnvelopeOpenIcon title="Lest" />}
+          icon={<EnvelopeOpenIcon aria-hidden />}
         />
       </Tooltip>
       <Tooltip content="Sendte meldinger">
-        <ToggleGroup.Item
-          value="sendt"
-          icon={<PaperplaneIcon title="Sendt" />}
-        />
+        <ToggleGroup.Item value="sendt" icon={<PaperplaneIcon aria-hidden />} />
       </Tooltip>
     </ToggleGroup>
   );
