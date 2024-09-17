@@ -1,9 +1,13 @@
 import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
+import {
+  darkModeTokens,
+  lightModeTokens,
+  scaleTokens,
+} from "./create-configurations";
 import { buildFigmaConfig } from "./figma/figma-config";
 import { formatCJS, formatES6 } from "./format";
-import { darkModeTokens, lightModeTokens, scaleTokens } from "./util";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";

@@ -2,11 +2,11 @@ import StyleDictionary from "style-dictionary";
 import { Dictionary, TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
 import {
-  ColorThemeMode,
   darkModeTokens,
   lightModeTokens,
   scaleTokens,
-} from "../util";
+} from "../create-configurations";
+import { ColorThemeMode } from "../util";
 import { FigmaPreparedToken } from "./figma-types";
 
 const config = {
