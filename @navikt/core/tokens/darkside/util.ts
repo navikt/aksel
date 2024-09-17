@@ -3,11 +3,9 @@ import merge from "lodash.merge";
 import AccentScale from "./tokens/global/accent";
 import NeutralScale from "./tokens/global/neutral";
 import { radiusTokenConfig } from "./tokens/radius";
+import { semanticTokenConfig } from "./tokens/semantic";
+import { semanticTokensForAllRoles } from "./tokens/semantic-roles";
 import { spacingTokenConfig } from "./tokens/spacing";
-import {
-  tokenConfigForRole,
-  tokenConfigForUniqueTokens,
-} from "./tokens/token-configs";
 
 export function kebabCase(input: string) {
   return lodashKebabCase(input).replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3");
@@ -53,58 +51,51 @@ export const tokensWithPrefix = (input: any) => {
   return { a: { ...input } };
 };
 
-/**
- * We need to deep merge the token config for each role to get the complete token config for all roles.
- */
-export const tokensForAllRoles = () =>
-  globalColorRoles.reduce(
-    (acc, role) => merge(acc, tokenConfigForRole(role)),
-    {},
-  );
-
-export const getGlobalColorScale = (
-  role: GlobalColorRoles,
-  mode: ColorThemeMode,
-) => {
+export const completeGlobalScale = (mode: ColorThemeMode) => {
   const mapping = {
     accent: AccentScale,
     neutral: NeutralScale,
   };
 
-  return mapping[role](mode);
-};
-
-export const completeGlobalLightScale = () => {
   return globalColorRoles.reduce((acc, role) => {
-    return { ...acc, ...getGlobalColorScale(role, "light") };
+    return { ...acc, ...mapping[role](mode) };
   }, {});
 };
 
-export const completeGlobalDarkScale = () => {
-  return globalColorRoles.reduce((acc, role) => {
-    return { ...acc, ...getGlobalColorScale(role, "dark") };
-  }, {});
-};
-
+/**
+ * Collection of configs for:
+ * - Global lightmode colors
+ * - Semantic tokens for each color-role
+ * - Semantic tokens for standalone colors
+ */
 export const lightModeTokens = () => {
   const configs = [
-    tokensForAllRoles(),
-    tokenConfigForUniqueTokens(),
-    completeGlobalLightScale(),
+    semanticTokensForAllRoles(),
+    semanticTokenConfig(),
+    completeGlobalScale("light"),
   ];
   return tokensWithPrefix(
     configs.reduce((acc, config) => merge(acc, config), {}),
   );
 };
 
+/**
+ * Collection of configs for:
+ * - Global darkmode colors
+ */
 export const darkModeTokens = () => {
-  const configs = [completeGlobalDarkScale()];
+  const configs = [completeGlobalScale("dark")];
 
   return tokensWithPrefix(
     configs.reduce((acc, config) => merge(acc, config), {}),
   );
 };
 
+/**
+ * Collection of configs for:
+ * - Spacing
+ * - Radius
+ */
 export const scaleTokens = () => {
   const configs = [spacingTokenConfig, radiusTokenConfig];
 
