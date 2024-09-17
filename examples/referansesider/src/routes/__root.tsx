@@ -17,7 +17,7 @@ const RouteLink = ({ children, to }: { children: ReactNode; to: string }) => {
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex w-[100vw] m-[calc(0 - 50%)] gap-6">
+      <div className="p-2 flex gap-6">
         <RouteLink to="/sykepenger">Sykepenger</RouteLink>{" "}
         <RouteLink to="/minside">Min Side</RouteLink>
       </div>
