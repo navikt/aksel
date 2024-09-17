@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
+import { completeGlobalScale } from "../create-configurations";
 import { contrastTokenConfig } from "../tokens/contrast";
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRoles } from "../tokens/semantic-roles";
 import { spacingTokenConfig } from "../tokens/spacing";
-import { completeGlobalScale } from "../util";
 
 const ConfigKeysWithGroup = ["value", "type", "group"];
 const ConfigKeys = ["value", "type"];
