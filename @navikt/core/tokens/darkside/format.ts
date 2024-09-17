@@ -1,6 +1,6 @@
 import { FormatFn } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
-import { kebabCase } from "../util";
+import { kebabCase } from "./util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
   const header = await fileHeader({ file });
