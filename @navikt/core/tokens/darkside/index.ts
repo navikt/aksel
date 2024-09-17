@@ -1,11 +1,25 @@
 import fs from "fs";
 import StyleDictionary from "style-dictionary";
-import { fileHeader } from "style-dictionary/utils";
 import { buildFigmaConfig } from "./figma/figma-config";
+import { formatCJS, formatES6 } from "./tokens/format";
 import { darkModeTokens, lightModeTokens, scaleTokens } from "./util";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
+
+const filenames = {
+  light: {
+    css: "light-tokens.css",
+    js: "tokens.js",
+    ts: "tokens.d.ts",
+  },
+  dark: {
+    css: "dark-tokens.css",
+  },
+  scale: {
+    css: "scale-tokens.css",
+  },
+};
 
 /**
  * StyleDictionary configuration
@@ -36,27 +50,21 @@ const SDictionaryLightMode = new StyleDictionary({
         },
       ],
     },
-    ts: {
-      transformGroup: "js",
-      buildPath: DARKSIDE_DIST,
-      files: [
-        {
-          destination: "tokens.d.ts",
-          format: "format-js-esm",
-        },
-      ],
-    },
     js: {
       transformGroup: "js",
       buildPath: DARKSIDE_DIST,
       files: [
         {
           destination: "tokens.js",
-          format: "format-js-esm",
+          format: "format-ES6",
         },
         {
           destination: "tokens-cjs.js",
-          format: "format-js-module-flat",
+          format: "format-CJS",
+        },
+        {
+          destination: "tokens.d.ts",
+          format: "format-ES6",
         },
       ],
     },
@@ -108,9 +116,11 @@ const SDictionaryScaleTokens = new StyleDictionary({
 const main = async () => {
   await buildFigmaConfig();
 
-  await SDictionaryLightMode.hasInitialized;
-  await SDictionaryDarkMode.hasInitialized;
-  await SDictionaryScaleTokens.hasInitialized;
+  await Promise.all([
+    SDictionaryLightMode.hasInitialized,
+    SDictionaryDarkMode.hasInitialized,
+    SDictionaryScaleTokens.hasInitialized,
+  ]);
 
   /**
    * To support theming in the future, we need to export the tokens as CSS variables.
@@ -118,21 +128,8 @@ const main = async () => {
    * so we need to create a custom format.
    */
   SDictionaryLightMode.registerFormat({
-    name: "format-js-esm",
-    format: async ({ dictionary, file }) => {
-      const header = await fileHeader({ file });
-      return (
-        header +
-        dictionary.allTokens
-          .map((token) => {
-            return `export const ${token.name} = "var(--${token.path.join(
-              "-",
-            )})";`;
-          })
-          .join("\n") +
-        "\n"
-      );
-    },
+    name: "format-ES6",
+    format: formatES6,
   });
 
   /**
@@ -141,34 +138,19 @@ const main = async () => {
    * so we need to create a custom format.
    */
   SDictionaryLightMode.registerFormat({
-    name: "format-js-module-flat",
-    format: async ({ dictionary, file }) => {
-      const header = await fileHeader({ file });
-      return (
-        header +
-        "module.exports = {\n" +
-        dictionary.allTokens
-          .map((token, idx, arr) => {
-            return `  "${token.name}": "var(--${token.path.join("-")})"${
-              idx !== arr.length - 1 ? "," : ""
-            }`;
-          })
-          .join("\n") +
-        "\n};" +
-        "\n"
-      );
-    },
+    name: "format-CJS",
+    format: formatCJS,
   });
 
-  await SDictionaryLightMode.buildAllPlatforms();
-  await SDictionaryDarkMode.buildAllPlatforms();
-  await SDictionaryScaleTokens.buildAllPlatforms();
+  await Promise.all([
+    SDictionaryLightMode.buildAllPlatforms(),
+    SDictionaryDarkMode.buildAllPlatforms(),
+    SDictionaryScaleTokens.buildAllPlatforms(),
+  ]);
 
-  const importPaths = [
-    "light-tokens.css",
-    "dark-tokens.css",
-    "scale-tokens.css",
-  ];
+  const importPaths = Object.values(filenames)
+    .map((scope) => scope.css)
+    .filter(Boolean);
 
   fs.writeFileSync(
     `${DARKSIDE_DIST}tokens.css`,

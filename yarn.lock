@@ -3879,6 +3879,7 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     color: "npm:4.2.3"
+    lightningcss-cli: "npm:^1.27.0"
     lodash.kebabcase: "npm:^4.1.1"
     lodash.merge: "npm:^4.6.2"
     nodemon: "npm:^3.0.1"
@@ -11531,6 +11532,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-libc@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "detect-libc@npm:1.0.3"
+  bin:
+    detect-libc: ./bin/detect-libc.js
+  checksum: 10/3849fe7720feb153e4ac9407086956e073f1ce1704488290ef0ca8aab9430a8d48c8a9f8351889e7cdc64e5b1128589501e4fef48f3a4a49ba92cd6d112d0757
+  languageName: node
+  linkType: hard
+
 "detect-libc@npm:^2.0.0, detect-libc@npm:^2.0.2, detect-libc@npm:^2.0.3":
   version: 2.0.3
   resolution: "detect-libc@npm:2.0.3"
@@ -17018,6 +17028,118 @@ __metadata:
   dependencies:
     immediate: "npm:~3.0.5"
   checksum: 10/c2c7d9dcc3a9aae641f41cde4e2e2cd571e4426b1f5915862781d77776672dcbca43461e16f4d382c9a300825c15e1a4923f1def3a5568d97577e077a3cecb44
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-darwin-arm64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-darwin-arm64@npm:1.27.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-darwin-x64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-darwin-x64@npm:1.27.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-freebsd-x64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-freebsd-x64@npm:1.27.0"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-linux-arm-gnueabihf@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-linux-arm-gnueabihf@npm:1.27.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-linux-arm64-gnu@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-linux-arm64-gnu@npm:1.27.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-linux-arm64-musl@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-linux-arm64-musl@npm:1.27.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-linux-x64-gnu@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-linux-x64-gnu@npm:1.27.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-linux-x64-musl@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-linux-x64-musl@npm:1.27.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-win32-arm64-msvc@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-win32-arm64-msvc@npm:1.27.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli-win32-x64-msvc@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli-win32-x64-msvc@npm:1.27.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-cli@npm:^1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-cli@npm:1.27.0"
+  dependencies:
+    detect-libc: "npm:^1.0.3"
+    lightningcss-cli-darwin-arm64: "npm:1.27.0"
+    lightningcss-cli-darwin-x64: "npm:1.27.0"
+    lightningcss-cli-freebsd-x64: "npm:1.27.0"
+    lightningcss-cli-linux-arm-gnueabihf: "npm:1.27.0"
+    lightningcss-cli-linux-arm64-gnu: "npm:1.27.0"
+    lightningcss-cli-linux-arm64-musl: "npm:1.27.0"
+    lightningcss-cli-linux-x64-gnu: "npm:1.27.0"
+    lightningcss-cli-linux-x64-musl: "npm:1.27.0"
+    lightningcss-cli-win32-arm64-msvc: "npm:1.27.0"
+    lightningcss-cli-win32-x64-msvc: "npm:1.27.0"
+  dependenciesMeta:
+    lightningcss-cli-darwin-arm64:
+      optional: true
+    lightningcss-cli-darwin-x64:
+      optional: true
+    lightningcss-cli-freebsd-x64:
+      optional: true
+    lightningcss-cli-linux-arm-gnueabihf:
+      optional: true
+    lightningcss-cli-linux-arm64-gnu:
+      optional: true
+    lightningcss-cli-linux-arm64-musl:
+      optional: true
+    lightningcss-cli-linux-x64-gnu:
+      optional: true
+    lightningcss-cli-linux-x64-musl:
+      optional: true
+    lightningcss-cli-win32-arm64-msvc:
+      optional: true
+    lightningcss-cli-win32-x64-msvc:
+      optional: true
+  bin:
+    lightningcss: lightningcss
+  checksum: 10/102d680c49059d7c0e005b0582cdc22d5901d42e0a12b8ee8c36b10c66d70fae5e9326ba42bcb4d9303a41b322af626c7d74c577533114c837b7c1d709f944b8
   languageName: node
   linkType: hard
 
