@@ -800,14 +800,14 @@ __metadata:
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=978c65&locator=referansesider%40workspace%3A."
-  checksum: 10/1ab483fceb49ce84aa190552c909888d52e8eb296914b6d9efeeb41594b7d3b581046783379bf88f6d641828d53d621f77507e267108ff0f04f87997f96febcc
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=cc5e44&locator=referansesider%40workspace%3A."
+  checksum: 10/a9d5beb7ef8f19a334f94ea4fe89d1554afd2decacf3686298dc97b2890e498680aeb5a1c9830a2fee1f701c2636d0dcb038b14dd5a4d8bed4b81765987bd0bc
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=d96f91&locator=referansesider%40workspace%3A."
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=d71693&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -822,14 +822,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/0e4723593f21ccbfb8bd2b7113f7a4975038b60de80074839cd7b0147e6885a1765b48f61647eef4b91a41bae27506a3c64ec0021a54f654b0538fddb0652505
+  checksum: 10/064e5613869549d4f250cde0285ae7d9c731eab2997fea2a959e74d5d5321437626bf43278454707168cfdc8450c78715f88824656e0525a36e2e01d88263e25
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=e1ea7a&locator=referansesider%40workspace%3A."
-  checksum: 10/c2ce74f1017806adabb317600b02c8731a4863a074fbfdec936bad60436d2455f28f114d7d275ce7e8bbb53e6e34a8e2708d66a48ca6e422e67fb48fed9b9a44
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=a528f1&locator=referansesider%40workspace%3A."
+  checksum: 10/521556321cf8a5e7aefe022c827382b23c5c4b2aa3dff9a0a2d6b3c77904cebcdab29e8fa53643760410b277363b9dffd6c967012ef4cd331b93864f6b9a4758
   languageName: node
   linkType: hard
 
@@ -3472,7 +3472,7 @@ __metadata:
     tailwindcss: "npm:^3.4.11"
     typescript: "npm:^5.5.3"
     typescript-eslint: "npm:^8.0.1"
-    vite: "npm:^5.4.5"
+    vite: "npm:^5.4.6"
   languageName: unknown
   linkType: soft
 
@@ -4097,9 +4097,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.5":
-  version: 5.4.5
-  resolution: "vite@npm:5.4.5"
+"vite@npm:^5.4.6":
+  version: 5.4.6
+  resolution: "vite@npm:5.4.6"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -4136,7 +4136,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/ef794392c44cdc0b4256e6a58697ebf9b86536dde04ba6449a853664c8a9441c4ae8c380c35d7e78556f197a738d46921e076064a4ff7a7448e5905d55262baf
+  checksum: 10/8489fa55c48675fc12b64bf7af58b5e2f8a11b2aebc63cb177861bd53dc196d7c496d6918f5a8c48828f51b6fe498166a1a2350334bbfaae10d015a0c71f1c77
   languageName: node
   linkType: hard
 
