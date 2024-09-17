@@ -9,19 +9,17 @@ import {
 } from "../util";
 import { FigmaPreparedToken } from "./figma-types";
 
-export const getSDTokens = async (mode: ColorThemeMode | "scale") => {
-  const tokensList: FigmaPreparedToken[] = [];
+const config = {
+  light: lightModeTokens,
+  dark: darkModeTokens,
+  scale: scaleTokens,
+};
 
-  const config = {
-    light: lightModeTokens,
-    dark: darkModeTokens,
-    scale: scaleTokens,
-  };
-
-  const SD = new StyleDictionary({
+const initializeStyleDictionary = (mode: ColorThemeMode | "scale") => {
+  return new StyleDictionary({
     tokens: config[mode](),
     platforms: {
-      lightmode: {
+      [`figma-${mode}`]: {
         transformGroup: "css",
         files: [
           {
@@ -31,26 +29,24 @@ export const getSDTokens = async (mode: ColorThemeMode | "scale") => {
       },
     },
   });
+};
+
+export const getSDTokens = async (mode: ColorThemeMode | "scale") => {
+  const tokensList: FigmaPreparedToken[] = [];
+  const SD = initializeStyleDictionary(mode);
 
   await SD.hasInitialized;
 
   SD.registerFormat({
     name: "custom-format",
     format: async ({ dictionary }) => {
-      for (const token of dictionary.allTokens) {
-        if (!token.type) {
-          throw new Error(`Token ${token.name} is missing type`);
-        }
+      const preparedTokens = dictionary.allTokens.map((token) => {
         const reference = getReferences(token.original, dictionary.tokens);
-
-        if (reference.length > 0) {
-          tokensList.push(
-            prepareToken({ ...token, alias: reference[0].name }, dictionary),
-          );
-        } else {
-          tokensList.push(prepareToken(token, dictionary));
-        }
-      }
+        return reference.length > 0
+          ? prepareToken({ ...token, alias: reference[0].name }, dictionary)
+          : prepareToken(token, dictionary);
+      });
+      tokensList.push(...preparedTokens);
     },
   });
 

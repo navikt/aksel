@@ -114,8 +114,6 @@ const SDictionaryScaleTokens = new StyleDictionary({
 });
 
 const main = async () => {
-  await buildFigmaConfig();
-
   await Promise.all([
     SDictionaryLightMode.hasInitialized,
     SDictionaryDarkMode.hasInitialized,
@@ -146,6 +144,7 @@ const main = async () => {
     SDictionaryLightMode.buildAllPlatforms(),
     SDictionaryDarkMode.buildAllPlatforms(),
     SDictionaryScaleTokens.buildAllPlatforms(),
+    buildFigmaConfig(),
   ]);
 
   const importPaths = Object.values(filenames)

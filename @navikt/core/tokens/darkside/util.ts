@@ -19,7 +19,6 @@ export const TokenTypes = {
 export type TokenType = (typeof TokenTypes)[keyof typeof TokenTypes];
 
 export const globalColorRoles = ["neutral", "accent"] as const;
-
 export type GlobalColorRoles = (typeof globalColorRoles)[number];
 
 export type GlobaColorScale<T extends GlobalColorRoles> = {
@@ -42,11 +41,15 @@ export type GlobalColorVariable = Record<
   { value: string; type: "global-color"; comment?: string; group: string }
 >;
 
-export const tokensWithPrefix = (input: any) => {
-  return { a: { ...input } };
+export const tokensWithPrefix = (
+  input: Record<string, any>,
+): Record<"a", any> => {
+  return { a: input };
 };
 
-export const completeGlobalScale = (mode: ColorThemeMode) => {
+export const completeGlobalScale = (
+  mode: ColorThemeMode,
+): Record<string, GlobalColorVariable> => {
   const mapping = {
     accent: AccentScale,
     neutral: NeutralScale,
@@ -57,6 +60,10 @@ export const completeGlobalScale = (mode: ColorThemeMode) => {
   }, {});
 };
 
+export const mergeConfigs = (configs: any[]): Record<string, any> => {
+  return configs.reduce((acc, config) => merge(acc, config), {});
+};
+
 /**
  * Collection of configs for:
  * - Global lightmode colors
@@ -64,13 +71,12 @@ export const completeGlobalScale = (mode: ColorThemeMode) => {
  * - Semantic tokens for standalone colors
  */
 export const lightModeTokens = () => {
-  const configs = [
-    semanticTokensForAllRoles(),
-    semanticTokenConfig(),
-    completeGlobalScale("light"),
-  ];
   return tokensWithPrefix(
-    configs.reduce((acc, config) => merge(acc, config), {}),
+    mergeConfigs([
+      semanticTokensForAllRoles(),
+      semanticTokenConfig(),
+      completeGlobalScale("light"),
+    ]),
   );
 };
 
@@ -79,11 +85,7 @@ export const lightModeTokens = () => {
  * - Global darkmode colors
  */
 export const darkModeTokens = () => {
-  const configs = [completeGlobalScale("dark")];
-
-  return tokensWithPrefix(
-    configs.reduce((acc, config) => merge(acc, config), {}),
-  );
+  return tokensWithPrefix(mergeConfigs([completeGlobalScale("dark")]));
 };
 
 /**
@@ -92,9 +94,7 @@ export const darkModeTokens = () => {
  * - Radius
  */
 export const scaleTokens = () => {
-  const configs = [spacingTokenConfig, radiusTokenConfig];
-
   return tokensWithPrefix(
-    configs.reduce((acc, config) => merge(acc, config), {}),
+    mergeConfigs([spacingTokenConfig, radiusTokenConfig]),
   );
 };
