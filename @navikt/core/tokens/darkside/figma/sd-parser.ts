@@ -12,6 +12,7 @@ import { FigmaPreparedToken } from "./figma-types";
 const config = {
   light: lightModeTokens,
   dark: darkModeTokens,
+  /* TODO: Add radius and spacing to name prefix for figma */
   scale: scaleTokens,
 };
 

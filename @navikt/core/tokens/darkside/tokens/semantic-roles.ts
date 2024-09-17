@@ -1,6 +1,9 @@
 import merge from "lodash.merge";
 import { GlobalColorRoles, globalColorRoles } from "../util";
 
+/**
+ * TODO: Handle sub-grouping based on role for figma
+ */
 const configForRole = (role: GlobalColorRoles) => ({
   bg: {
     [role]: {
@@ -13,6 +16,11 @@ const configForRole = (role: GlobalColorRoles) => ({
       type: "color",
       group: "background",
     },
+    /**
+     * TODO: Consider a role-selected token
+     * - For static selected elements like links, combobox ++
+     * - Might just be static bg-selected
+     */
     [`${role}-moderate`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
@@ -28,8 +36,9 @@ const configForRole = (role: GlobalColorRoles) => ({
       type: "color",
       group: "background",
     },
+    /* Should match role-strong */
     [`${role}-moderate-selected`]: {
-      value: `{a.${role}.400.value}`,
+      value: `{a.${role}.700.value}`,
       type: "color",
       group: "background",
     },

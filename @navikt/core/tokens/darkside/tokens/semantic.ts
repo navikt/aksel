@@ -17,6 +17,11 @@ export const semanticTokenConfig = () => ({
     },
   },
   bg: {
+    default: {
+      value: "{a.neutral.000.value}",
+      type: "color",
+      group: "background",
+    },
     input: {
       value: "{a.neutral.000.value}",
       type: "color",
@@ -32,9 +37,9 @@ export const semanticTokenConfig = () => ({
       type: "color",
       group: "background",
     },
-    /* TODO: Custom alpha here? */
     overlay: {
-      value: "{a.neutral.100.value}",
+      /* TODO: Update alpha here, consier not having the token itself? */
+      value: "rgb(2 20 49 / 0.49)",
       type: "color",
       group: "background",
     },
@@ -46,16 +51,20 @@ export const semanticTokenConfig = () => ({
       group: "border",
     },
     subtle: {
-      value: "{a.neutral.500.value}",
+      value: "{a.neutral.400.value}",
       type: "color",
       group: "border",
     },
     strong: {
+      /* TODO: Consider 700 scale here? */
       value: "{a.neutral.600.value}",
       type: "color",
       group: "border",
     },
-    /* TODO: Need to verify this value  */
+    /**
+     * TODO: Need to verify this value
+     * - Discuss with brand
+     */
     focus: {
       value: "{a.accent.700.value}",
       type: "color",
