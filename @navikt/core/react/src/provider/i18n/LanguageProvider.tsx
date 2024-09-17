@@ -34,13 +34,11 @@ export const useProvider = () => useContext(LanguageProviderContext);
 export const UNSAFE_AkselLanguageProvider = ({
   children,
   translations,
-  ...rest
 }: LanguageProviderProps) => {
   return (
     <LanguageProviderContext.Provider
       value={{
         translations: translations ?? nb,
-        ...rest,
       }}
     >
       {children}
