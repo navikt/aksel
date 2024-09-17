@@ -65,33 +65,29 @@ const Content = () => (
 
 type DefaultStoryProps = ExpansionCardProps & { description: boolean };
 type DefaultStory = StoryFn<DefaultStoryProps>;
-export const Default: DefaultStory = (props: DefaultStoryProps) => {
-  return (
-    <ExpansionCard
-      {...props}
-      open={props.open || undefined}
-      aria-label="default-demo"
-    >
-      <ExpansionCard.Header>
-        <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
-        {props.description && (
-          <ExpansionCard.Description>
-            For at yrkesskadedekningen skal gjelde, er det som hovedregel krav
-            til tid, sted og arbeidsoppgaver
-          </ExpansionCard.Description>
-        )}
-      </ExpansionCard.Header>
-      <Content />
-    </ExpansionCard>
-  );
-};
+export const Default: DefaultStory = ({
+  description,
+  ...rest
+}: DefaultStoryProps) => (
+  <ExpansionCard {...rest} aria-label="default-demo">
+    <ExpansionCard.Header>
+      <ExpansionCard.Title>Arbeidstakere</ExpansionCard.Title>
+      {description && (
+        <ExpansionCard.Description>
+          For at yrkesskadedekningen skal gjelde, er det som hovedregel krav til
+          tid, sted og arbeidsoppgaver
+        </ExpansionCard.Description>
+      )}
+    </ExpansionCard.Header>
+    <Content />
+  </ExpansionCard>
+);
 Default.args = {
-  open: false,
-  size: "medium",
   description: false,
 };
 Default.argTypes = {
   size: { control: "radio", options: ["medium", "small"] },
+  open: { control: "boolean" },
 };
 
 export const Description = () => (
