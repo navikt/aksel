@@ -13,12 +13,15 @@
     "@navikt/ds-css": "../../@navikt/core/css",
     "@navikt/ds-react": "../../@navikt/core/react",
     "@navikt/ds-tokens": "../../@navikt/core/tokens",
+    "@tanstack/react-router": "^1.57.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@tanstack/router-devtools": "^1.57.17",
+    "@tanstack/router-plugin": "^1.57.15",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
