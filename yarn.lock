@@ -3121,6 +3121,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@figma/plugin-typings@npm:^1.100.1":
+  version: 1.100.1
+  resolution: "@figma/plugin-typings@npm:1.100.1"
+  checksum: 10/052c1a90f82a56cf984b16549465e373a0e7b30458812a235b6b0b32103a92578fb913390128a930ff3c2ce75e2b65521deb12e4344a8b1d5a7f32c34477c96f
+  languageName: node
+  linkType: hard
+
 "@figma/plugin-typings@npm:^1.84.0":
   version: 1.97.0
   resolution: "@figma/plugin-typings@npm:1.97.0"
@@ -3892,12 +3899,17 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@adobe/leonardo-contrast-colors": "npm:^1.0.0"
+    "@figma/plugin-typings": "npm:^1.100.1"
+    "@types/tinycolor2": "npm:^1.4.6"
     color: "npm:4.2.3"
+    esbuild: "npm:^0.23.1"
     lightningcss: "npm:^1.27.0"
+    lodash: "npm:^4.17.21"
     lodash.kebabcase: "npm:^4.1.1"
     lodash.merge: "npm:^4.6.2"
     nodemon: "npm:^3.0.1"
     style-dictionary: "npm:^4.1.1"
+    tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.7.1"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.2.2"
@@ -6980,6 +6992,13 @@ __metadata:
   dependencies:
     "@types/jest": "npm:*"
   checksum: 10/e257de95a4a9385cc09ae4ca3396d23ad4b5cfb8e021a1ca3454c424c34636075f6fe151b2f881f79bf9d497aa04fbfae62449b135f293e8d2d614fa899898a8
+  languageName: node
+  linkType: hard
+
+"@types/tinycolor2@npm:^1.4.6":
+  version: 1.4.6
+  resolution: "@types/tinycolor2@npm:1.4.6"
+  checksum: 10/a662fd177135d27779b7ccba39881a85167f969787c71c7bf51903d288a519ad5b9526e0a4af7bde6444df6b7abe88bae893d569c6d804108c03dfec9509bdf6
   languageName: node
   linkType: hard
 
@@ -12392,7 +12411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0, esbuild@npm:^0.23.1":
   version: 0.23.1
   resolution: "esbuild@npm:0.23.1"
   dependencies:

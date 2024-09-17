@@ -18,7 +18,7 @@ export interface FigmaPreparedToken {
   value: string;
   alias?: string;
   comment?: string;
-  group: string;
+  group?: string;
   code: {
     web: string;
   };

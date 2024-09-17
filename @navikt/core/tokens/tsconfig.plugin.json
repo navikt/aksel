@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["es6", "ESNext"],
+    "module": "ESNext",
+    "strict": true,
+    "types": ["@figma/plugin-typings"],
+    "moduleResolution": "bundler"
+  },
+  "include": ["./darkside/figma/plugin.ts"]
+}
