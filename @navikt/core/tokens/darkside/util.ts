@@ -1,4 +1,5 @@
 import merge from "lodash.merge";
+import { contrastTokenConfig } from "./tokens/contrast";
 import AccentScale from "./tokens/global/accent";
 import BrandOneScale from "./tokens/global/brand-one";
 import BrandThreeScale from "./tokens/global/brand-three";
@@ -117,6 +118,7 @@ export const lightModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
       semanticTokensForAllRoles(),
+      contrastTokenConfig(),
       semanticTokenConfig(),
       completeGlobalScale("light"),
     ]),

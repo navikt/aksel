@@ -59,14 +59,6 @@ const configForRole = (role: GlobalColorRoles) => ({
       group: "background",
     },
   },
-  contrast: {
-    /* TODO: This might need to be a "custom"-config where each role has its own contrast definition */
-    [role]: {
-      value: `white`,
-      type: "color",
-      group: "contrast",
-    },
-  },
   text: {
     [role]: {
       value: `{a.${role}.1000.value}`,

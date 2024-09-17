@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+import { contrastTokenConfig } from "../tokens/contrast";
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRoles } from "../tokens/semantic-roles";
@@ -18,6 +19,12 @@ describe("Validate token configurations", () => {
   test(`Semantic tokens for all roles`, () => {
     expect(
       validateConfig(semanticTokensForAllRoles(), ConfigKeysWithGroup),
+    ).toBeTruthy();
+  });
+
+  test(`Contrast tokens`, () => {
+    expect(
+      validateConfig(contrastTokenConfig(), ConfigKeysWithGroup),
     ).toBeTruthy();
   });
 
