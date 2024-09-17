@@ -1,4 +1,3 @@
-import { default as lodashKebabCase } from "lodash.kebabcase";
 import merge from "lodash.merge";
 import AccentScale from "./tokens/global/accent";
 import NeutralScale from "./tokens/global/neutral";
@@ -6,10 +5,6 @@ import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRoles } from "./tokens/semantic-roles";
 import { spacingTokenConfig } from "./tokens/spacing";
-
-export function kebabCase(input: string) {
-  return lodashKebabCase(input).replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3");
-}
 
 export const colorThemeModes = ["light", "dark"] as const;
 export type ColorThemeMode = (typeof colorThemeModes)[number];

@@ -6,14 +6,17 @@ const configForRole = (role: GlobalColorRoles) => ({
     [role]: {
       value: `{a.${role}.100.value}`,
       type: "color",
+      group: "background",
     },
     [`${role}-moderate`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
+      group: "background",
     },
     [`${role}-moderate-hover`]: {
       value: `{a.${role}.300.value}`,
       type: "color",
+      group: "background",
     },
   },
 });
