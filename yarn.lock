@@ -3893,7 +3893,7 @@ __metadata:
   dependencies:
     "@adobe/leonardo-contrast-colors": "npm:^1.0.0"
     color: "npm:4.2.3"
-    lightningcss-cli: "npm:^1.27.0"
+    lightningcss: "npm:^1.27.0"
     lodash.kebabcase: "npm:^4.1.1"
     lodash.merge: "npm:^4.6.2"
     nodemon: "npm:^3.0.1"
@@ -17094,115 +17094,113 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss-cli-darwin-arm64@npm:1.27.0":
+"lightningcss-darwin-arm64@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-darwin-arm64@npm:1.27.0"
+  resolution: "lightningcss-darwin-arm64@npm:1.27.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-cli-darwin-x64@npm:1.27.0":
+"lightningcss-darwin-x64@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-darwin-x64@npm:1.27.0"
+  resolution: "lightningcss-darwin-x64@npm:1.27.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-cli-freebsd-x64@npm:1.27.0":
+"lightningcss-freebsd-x64@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-freebsd-x64@npm:1.27.0"
+  resolution: "lightningcss-freebsd-x64@npm:1.27.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-cli-linux-arm-gnueabihf@npm:1.27.0":
+"lightningcss-linux-arm-gnueabihf@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-linux-arm-gnueabihf@npm:1.27.0"
+  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.27.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"lightningcss-cli-linux-arm64-gnu@npm:1.27.0":
+"lightningcss-linux-arm64-gnu@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-linux-arm64-gnu@npm:1.27.0"
+  resolution: "lightningcss-linux-arm64-gnu@npm:1.27.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-cli-linux-arm64-musl@npm:1.27.0":
+"lightningcss-linux-arm64-musl@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-linux-arm64-musl@npm:1.27.0"
+  resolution: "lightningcss-linux-arm64-musl@npm:1.27.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-cli-linux-x64-gnu@npm:1.27.0":
+"lightningcss-linux-x64-gnu@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-linux-x64-gnu@npm:1.27.0"
+  resolution: "lightningcss-linux-x64-gnu@npm:1.27.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-cli-linux-x64-musl@npm:1.27.0":
+"lightningcss-linux-x64-musl@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-linux-x64-musl@npm:1.27.0"
+  resolution: "lightningcss-linux-x64-musl@npm:1.27.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-cli-win32-arm64-msvc@npm:1.27.0":
+"lightningcss-win32-arm64-msvc@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-win32-arm64-msvc@npm:1.27.0"
+  resolution: "lightningcss-win32-arm64-msvc@npm:1.27.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-cli-win32-x64-msvc@npm:1.27.0":
+"lightningcss-win32-x64-msvc@npm:1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli-win32-x64-msvc@npm:1.27.0"
+  resolution: "lightningcss-win32-x64-msvc@npm:1.27.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-cli@npm:^1.27.0":
+"lightningcss@npm:^1.27.0":
   version: 1.27.0
-  resolution: "lightningcss-cli@npm:1.27.0"
+  resolution: "lightningcss@npm:1.27.0"
   dependencies:
     detect-libc: "npm:^1.0.3"
-    lightningcss-cli-darwin-arm64: "npm:1.27.0"
-    lightningcss-cli-darwin-x64: "npm:1.27.0"
-    lightningcss-cli-freebsd-x64: "npm:1.27.0"
-    lightningcss-cli-linux-arm-gnueabihf: "npm:1.27.0"
-    lightningcss-cli-linux-arm64-gnu: "npm:1.27.0"
-    lightningcss-cli-linux-arm64-musl: "npm:1.27.0"
-    lightningcss-cli-linux-x64-gnu: "npm:1.27.0"
-    lightningcss-cli-linux-x64-musl: "npm:1.27.0"
-    lightningcss-cli-win32-arm64-msvc: "npm:1.27.0"
-    lightningcss-cli-win32-x64-msvc: "npm:1.27.0"
+    lightningcss-darwin-arm64: "npm:1.27.0"
+    lightningcss-darwin-x64: "npm:1.27.0"
+    lightningcss-freebsd-x64: "npm:1.27.0"
+    lightningcss-linux-arm-gnueabihf: "npm:1.27.0"
+    lightningcss-linux-arm64-gnu: "npm:1.27.0"
+    lightningcss-linux-arm64-musl: "npm:1.27.0"
+    lightningcss-linux-x64-gnu: "npm:1.27.0"
+    lightningcss-linux-x64-musl: "npm:1.27.0"
+    lightningcss-win32-arm64-msvc: "npm:1.27.0"
+    lightningcss-win32-x64-msvc: "npm:1.27.0"
   dependenciesMeta:
-    lightningcss-cli-darwin-arm64:
+    lightningcss-darwin-arm64:
       optional: true
-    lightningcss-cli-darwin-x64:
+    lightningcss-darwin-x64:
       optional: true
-    lightningcss-cli-freebsd-x64:
+    lightningcss-freebsd-x64:
       optional: true
-    lightningcss-cli-linux-arm-gnueabihf:
+    lightningcss-linux-arm-gnueabihf:
       optional: true
-    lightningcss-cli-linux-arm64-gnu:
+    lightningcss-linux-arm64-gnu:
       optional: true
-    lightningcss-cli-linux-arm64-musl:
+    lightningcss-linux-arm64-musl:
       optional: true
-    lightningcss-cli-linux-x64-gnu:
+    lightningcss-linux-x64-gnu:
       optional: true
-    lightningcss-cli-linux-x64-musl:
+    lightningcss-linux-x64-musl:
       optional: true
-    lightningcss-cli-win32-arm64-msvc:
+    lightningcss-win32-arm64-msvc:
       optional: true
-    lightningcss-cli-win32-x64-msvc:
+    lightningcss-win32-x64-msvc:
       optional: true
-  bin:
-    lightningcss: lightningcss
-  checksum: 10/102d680c49059d7c0e005b0582cdc22d5901d42e0a12b8ee8c36b10c66d70fae5e9326ba42bcb4d9303a41b322af626c7d74c577533114c837b7c1d709f944b8
+  checksum: 10/275a0103c7dc1dfcf8e456a0523d1719a1caff916c45229ec62cdb28a814dce12b7065b88865fb74fc03a2a658ac3361caff5c348f1646313513c125d4f27954
   languageName: node
   linkType: hard
 

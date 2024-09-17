@@ -1,4 +1,5 @@
 import fs from "fs";
+import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import { buildFigmaConfig } from "./figma/figma-config";
 import { formatCJS, formatES6 } from "./format";
@@ -155,6 +156,13 @@ const main = async () => {
     `${DARKSIDE_DIST}tokens.css`,
     importPaths.map((path) => `@import "${path}";`).join("\n"),
   );
+
+  const { code } = bundle({
+    filename: `${DARKSIDE_DIST}tokens.css`,
+    minify: false,
+  });
+
+  fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
 };
 
 main();

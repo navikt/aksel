@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs && yarn build:darkside",
-    "build:darkside": "tsx ./darkside && yarn lightningcss --bundle dist/darkside/tokens.css -o dist/darkside/tokens.css",
+    "build:darkside": "tsx ./darkside",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "test": "vitest run",
     "test:watch": "vitest watch"
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@adobe/leonardo-contrast-colors": "^1.0.0",
     "color": "4.2.3",
-    "lightningcss-cli": "^1.27.0",
+    "lightningcss": "^1.27.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.merge": "^4.6.2",
     "nodemon": "^3.0.1",
