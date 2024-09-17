@@ -1,20 +1,17 @@
 import merge from "lodash.merge";
 import { GlobalColorRoles, globalColorRoles } from "../util";
 
-/**
- * TODO: Handle sub-grouping based on role for figma
- */
 const configForRole = (role: GlobalColorRoles) => ({
   bg: {
     [role]: {
       value: `{a.${role}.100.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-hover`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     /**
      * TODO: Consider a role-selected token
@@ -24,82 +21,82 @@ const configForRole = (role: GlobalColorRoles) => ({
     [`${role}-moderate`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-moderate-hover`]: {
       value: `{a.${role}.300.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-moderate-active`]: {
       value: `{a.${role}.400.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     /* Should match role-strong */
     [`${role}-moderate-selected`]: {
       value: `{a.${role}.700.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-strong`]: {
       value: `{a.${role}.700.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-strong-hover`]: {
       value: `{a.${role}.800.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-strong-active`]: {
       value: `{a.${role}.900.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-raised`]: {
       value: `{a.${role}.100.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
     [`${role}-raised-hover`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
-      group: "background",
+      group: `background.${role}`,
     },
   },
   text: {
     [role]: {
       value: `{a.${role}.1000.value}`,
       type: "color",
-      group: "text",
+      group: `text.${role}`,
     },
     [`${role}-subtle`]: {
       value: `{a.${role}.900.value}`,
       type: "color",
-      group: "text",
+      group: `text.${role}`,
     },
     [`${role}-icon`]: {
       value: `{a.${role}.600.value}`,
       type: "color",
-      group: "text",
+      group: `text.${role}`,
     },
   },
   border: {
     [role]: {
       value: `{a.${role}.500.value}`,
       type: "color",
-      group: "border",
+      group: `border.${role}`,
     },
     [`${role}-subtle`]: {
       value: `{a.${role}.400.value}`,
       type: "color",
-      group: "border",
+      group: `border.${role}`,
     },
     [`${role}-strong`]: {
       value: `{a.${role}.600.value}`,
       type: "color",
-      group: "border",
+      group: `border.${role}`,
     },
   },
 });
