@@ -50,6 +50,11 @@ const DataThreeScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "dataThree",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataThree",
+  },
 };
 
 const DataThreeScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const DataThreeScaleDark: GlobalColorVariable = {
     group: "dataThree",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataThree",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "dataThree",

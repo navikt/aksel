@@ -2,9 +2,15 @@ import {
   ColorThemeMode,
   GlobaColorScale,
   GlobalColorVariable,
+  GlobalColorVariableWith000,
 } from "../../util";
 
-const NeutralScaleLight: GlobalColorVariable = {
+const NeutralScaleLight: GlobalColorVariableWith000 = {
+  "000": {
+    value: "white",
+    type: "global-color",
+    group: "neutral",
+  },
   "100": {
     value: "rgba(204, 225, 255, 1)",
     type: "global-color",
@@ -46,6 +52,11 @@ const NeutralScaleLight: GlobalColorVariable = {
     group: "neutral",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "neutral",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "neutral",
@@ -94,6 +105,11 @@ const NeutralScaleDark: GlobalColorVariable = {
     group: "neutral",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "neutral",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "neutral",

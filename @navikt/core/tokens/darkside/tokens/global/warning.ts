@@ -50,6 +50,11 @@ const WarningScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "warning",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "warning",
+  },
 };
 
 const WarningScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const WarningScaleDark: GlobalColorVariable = {
     group: "warning",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "warning",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "warning",

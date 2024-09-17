@@ -50,6 +50,11 @@ const BrandTwoScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "brandTwo",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "brandTwo",
+  },
 };
 
 const BrandTwoScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const BrandTwoScaleDark: GlobalColorVariable = {
     group: "brandTwo",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "brandTwo",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "brandTwo",

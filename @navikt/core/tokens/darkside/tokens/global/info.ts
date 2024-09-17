@@ -50,6 +50,11 @@ const InfoScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "info",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "info",
+  },
 };
 
 const InfoScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const InfoScaleDark: GlobalColorVariable = {
     group: "info",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "info",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "info",

@@ -50,6 +50,11 @@ const SuccessScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "success",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "success",
+  },
 };
 
 const SuccessScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const SuccessScaleDark: GlobalColorVariable = {
     group: "success",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "success",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "success",

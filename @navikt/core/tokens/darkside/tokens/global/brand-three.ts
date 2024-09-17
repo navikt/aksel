@@ -50,6 +50,11 @@ const BrandThreeScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "brandThree",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "brandThree",
+  },
 };
 
 const BrandThreeScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const BrandThreeScaleDark: GlobalColorVariable = {
     group: "brandThree",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "brandThree",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "brandThree",

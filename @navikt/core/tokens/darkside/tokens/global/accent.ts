@@ -50,6 +50,11 @@ const AccentScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "accent",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "accent",
+  },
 };
 
 const AccentScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const AccentScaleDark: GlobalColorVariable = {
     group: "accent",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "accent",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "accent",

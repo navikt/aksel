@@ -50,6 +50,11 @@ const DataOneScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "dataOne",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataOne",
+  },
 };
 
 const DataOneScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const DataOneScaleDark: GlobalColorVariable = {
     group: "dataOne",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataOne",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "dataOne",

@@ -57,10 +57,16 @@ type GlobalColorScale =
   | "600"
   | "700"
   | "800"
-  | "900";
+  | "900"
+  | "1000";
 
 export type GlobalColorVariable = Record<
   GlobalColorScale,
+  { value: string; type: "global-color"; comment?: string; group: string }
+>;
+
+export type GlobalColorVariableWith000 = Record<
+  GlobalColorScale | "000",
   { value: string; type: "global-color"; comment?: string; group: string }
 >;
 

@@ -50,6 +50,11 @@ const DangerScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "danger",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "danger",
+  },
 };
 
 const DangerScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const DangerScaleDark: GlobalColorVariable = {
     group: "danger",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "danger",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "danger",

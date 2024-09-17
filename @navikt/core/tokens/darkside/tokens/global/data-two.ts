@@ -50,6 +50,11 @@ const DataTwoScaleLight: GlobalColorVariable = {
     type: "global-color",
     group: "dataTwo",
   },
+  "1000": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataTwo",
+  },
 };
 
 const DataTwoScaleDark: GlobalColorVariable = {
@@ -94,6 +99,11 @@ const DataTwoScaleDark: GlobalColorVariable = {
     group: "dataTwo",
   },
   "900": {
+    value: "rgba(102, 165, 244, 1)",
+    type: "global-color",
+    group: "dataTwo",
+  },
+  "1000": {
     value: "rgba(102, 165, 244, 1)",
     type: "global-color",
     group: "dataTwo",
