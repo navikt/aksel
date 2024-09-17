@@ -1,7 +1,7 @@
 import fs from "fs";
 import StyleDictionary from "style-dictionary";
 import { buildFigmaConfig } from "./figma/figma-config";
-import { formatCJS, formatES6 } from "./tokens/format";
+import { formatCJS, formatES6 } from "./format";
 import { darkModeTokens, lightModeTokens, scaleTokens } from "./util";
 
 /* Temporary project location */
