@@ -1,6 +1,16 @@
 import merge from "lodash.merge";
 import AccentScale from "./tokens/global/accent";
+import BrandOneScale from "./tokens/global/brand-one";
+import BrandThreeScale from "./tokens/global/brand-three";
+import BrandTwoScale from "./tokens/global/brand-two";
+import DangerScale from "./tokens/global/danger";
+import DataOneScale from "./tokens/global/data-one";
+import DataThreeScale from "./tokens/global/data-three";
+import DataTwoScale from "./tokens/global/data-two";
+import InfoScale from "./tokens/global/info";
 import NeutralScale from "./tokens/global/neutral";
+import SuccessScale from "./tokens/global/success";
+import WarningScale from "./tokens/global/warning";
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRoles } from "./tokens/semantic-roles";
@@ -18,7 +28,20 @@ export const TokenTypes = {
 
 export type TokenType = (typeof TokenTypes)[keyof typeof TokenTypes];
 
-export const globalColorRoles = ["neutral", "accent"] as const;
+export const globalColorRoles = [
+  "neutral",
+  "accent",
+  "success",
+  "warning",
+  "danger",
+  "info",
+  "brandOne",
+  "brandTwo",
+  "brandThree",
+  "dataOne",
+  "dataTwo",
+  "dataThree",
+] as const;
 export type GlobalColorRoles = (typeof globalColorRoles)[number];
 
 export type GlobaColorScale<T extends GlobalColorRoles> = {
@@ -51,8 +74,22 @@ export const completeGlobalScale = (
   mode: ColorThemeMode,
 ): Record<string, GlobalColorVariable> => {
   const mapping = {
+    /* Core */
     accent: AccentScale,
     neutral: NeutralScale,
+    /* Status */
+    info: InfoScale,
+    success: SuccessScale,
+    warning: WarningScale,
+    danger: DangerScale,
+    /* Brand */
+    brandOne: BrandOneScale,
+    brandTwo: BrandTwoScale,
+    brandThree: BrandThreeScale,
+    /* Data */
+    dataOne: DataOneScale,
+    dataTwo: DataTwoScale,
+    dataThree: DataThreeScale,
   };
 
   return globalColorRoles.reduce((acc, role) => {

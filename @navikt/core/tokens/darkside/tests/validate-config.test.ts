@@ -11,7 +11,7 @@ const ConfigKeys = ["value", "type"];
 describe("Validate token configurations", () => {
   test(`Semantic tokens`, () => {
     expect(
-      validateConfig(semanticTokenConfig, ConfigKeysWithGroup),
+      validateConfig(semanticTokenConfig(), ConfigKeysWithGroup),
     ).toBeTruthy();
   });
 
@@ -42,7 +42,10 @@ describe("Validate token configurations", () => {
   });
 });
 
-function validateConfig(obj: any, requiredKeys: string[]): boolean {
+function validateConfig(
+  obj: Record<string, any>,
+  requiredKeys: string[],
+): boolean {
   for (const key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
       if (!validateConfig(obj[key], requiredKeys)) {
