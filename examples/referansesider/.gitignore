@@ -155,3 +155,4 @@ searchindex.json
 aksel.nav.no/website/public/rss
 
 *.tsbuildinfo
+*/**/*.gen.*
