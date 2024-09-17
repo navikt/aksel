@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect } from "react";
-import bgColors from "@navikt/ds-tokens/src/v1/colors-bg.json";
+import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import { Box } from "../box";
 import { HGrid } from "../grid";
 import { VStack } from "../stack";
