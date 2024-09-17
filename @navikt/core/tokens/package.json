@@ -31,6 +31,7 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
+    "@adobe/leonardo-contrast-colors": "^1.0.0",
     "color": "4.2.3",
     "lightningcss-cli": "^1.27.0",
     "lodash.kebabcase": "^4.1.1",

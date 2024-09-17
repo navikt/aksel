@@ -49,17 +49,20 @@ export type GlobaColorScale<T extends GlobalColorRoles> = {
   [key in T]: GlobalColorVariable;
 };
 
-type GlobalColorScale =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "1000";
+export const globalColorScales = [
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "1000",
+] as const;
+
+export type GlobalColorScale = (typeof globalColorScales)[number];
 
 export type GlobalColorVariable = Record<
   GlobalColorScale,
