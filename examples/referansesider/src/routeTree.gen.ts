@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SykepengerImport } from './routes/sykepenger'
 import { Route as MinsideImport } from './routes/minside'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
@@ -26,10 +27,22 @@ const MinsideRoute = MinsideImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const IndexRoute = IndexImport.update({
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/minside': {
       id: '/minside'
       path: '/minside'
@@ -50,36 +63,41 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/minside': typeof MinsideRoute
   '/sykepenger': typeof SykepengerRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/minside': typeof MinsideRoute
   '/sykepenger': typeof SykepengerRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/minside': typeof MinsideRoute
   '/sykepenger': typeof SykepengerRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/minside' | '/sykepenger'
+  fullPaths: '/' | '/minside' | '/sykepenger'
   fileRoutesByTo: FileRoutesByTo
-  to: '/minside' | '/sykepenger'
-  id: '__root__' | '/minside' | '/sykepenger'
+  to: '/' | '/minside' | '/sykepenger'
+  id: '__root__' | '/' | '/minside' | '/sykepenger'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   MinsideRoute: typeof MinsideRoute
   SykepengerRoute: typeof SykepengerRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   MinsideRoute: MinsideRoute,
   SykepengerRoute: SykepengerRoute,
 }
@@ -96,9 +114,13 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/minside",
         "/sykepenger"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/minside": {
       "filePath": "minside.tsx"
