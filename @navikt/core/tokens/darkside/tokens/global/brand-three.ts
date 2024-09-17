@@ -1,11 +1,13 @@
 import { ColorThemeMode, GlobaColorScale } from "../../util";
 import { getGlobalScaleForColor } from "./leonardo";
 
-const BrandThreeScaleLight = getGlobalScaleForColor("brandThree", "light");
-const BrandThreeScaleDark = getGlobalScaleForColor("brandThree", "light");
+const BrandThreeScaleLight = () =>
+  getGlobalScaleForColor("brandThree", "light");
+const BrandThreeScaleDark = () => getGlobalScaleForColor("brandThree", "dark");
 
 export default (theme: ColorThemeMode): GlobaColorScale<"brandThree"> => {
   return {
-    brandThree: theme === "light" ? BrandThreeScaleLight : BrandThreeScaleDark,
+    brandThree:
+      theme === "light" ? BrandThreeScaleLight() : BrandThreeScaleDark(),
   };
 };

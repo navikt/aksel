@@ -2,7 +2,6 @@ import {
   BackgroundColor,
   Color,
   ContrastColor,
-  ContrastColorValue,
   CssColor,
   Theme,
 } from "@adobe/leonardo-contrast-colors";
@@ -19,72 +18,73 @@ const background = new BackgroundColor({
   ratios: [1],
 });
 
-const globalColorConfig: Record<
+export const globalColorConfig: Record<
   GlobalColorRoles,
   { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
 > = {
   /* Core */
   neutral: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#838c9a"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   accent: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#0090ff"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   /* Status */
   success: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#2aa758", "#e6ffeb"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   info: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#ebfcff", "#66cbec", "#144852"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   warning: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#ffcf4d", "#f56e00", "#cc5200"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   danger: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#f93448", "#ffb3cd"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   /* Brand */
   brandOne: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#99185e", "#7a134b"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   brandTwo: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#cc8066", "#fff3ec"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   brandThree: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#005b82", "#e6f1f8", "#00243a"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   /* Data */
   dataOne: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#8269a2"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
   dataTwo: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#d9e61e"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+
     smooth: false,
   },
   dataThree: {
-    colorKeys: [],
-    ratios: [],
+    colorKeys: ["#ffe45c"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
 };
@@ -121,21 +121,41 @@ const leonardoDarkTheme = new Theme({
   formula: "wcag2",
 }).contrastColors;
 
-const getGlobalColor = (
+const getColorScaleFromLeonardo = (
   role: GlobalColorRoles,
-  name: GlobalColorScale,
+  scale: GlobalColorScale,
   theme: ColorThemeMode,
 ): CssColor => {
-  const leonardoTheme =
-    theme === "light" ? leonardoLightTheme : leonardoDarkTheme;
+  /* We have to remove 'ContrastColorBackground' from first position */
+  const leonardoTheme = (
+    theme === "light" ? leonardoLightTheme : leonardoDarkTheme
+  ).slice(1) as ContrastColor[];
 
-  const color: ContrastColorValue = leonardoTheme[role].find(
-    (x: ContrastColor) => x.name === name,
+  const colorContrastRole = leonardoTheme.find((c) => c.name === role);
+
+  if (!colorContrastRole) {
+    throw new Error(`Color ${role} not found in leonardo config`);
+  }
+
+  /**
+   * @example colorContrastRole format
+   * {
+   *  name: 'dataThree',
+   *  values: [
+   *    { name: 'dataThree100', contrast: 1.08, value: '#200500' },
+   *    { name: 'dataThree200', contrast: 1.16, value: '#2b0f00' },
+   *    ...
+   *  ]
+   *}
+   */
+  const color = colorContrastRole.values.find(
+    (value) => value.name === `${role}${scale}`,
   );
 
   if (!color || !color.value) {
-    throw new Error(`Color ${role}.${name} not found in leonardo config`);
+    throw new Error(`Color ${role}.${scale} not found in leonardo config`);
   }
+
   return color.value;
 };
 
@@ -152,7 +172,7 @@ export const getGlobalScaleForColor = (
   return globalColorScales.reduce(
     (acc, scale) => {
       acc[scale] = {
-        value: getGlobalColor(role, scale, theme),
+        value: getColorScaleFromLeonardo(role, scale, theme),
         type: "global-color",
         group: role,
       };
