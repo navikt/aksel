@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/dist/tokens";
+import SykepengerIkon from "../assets/SykepengerIkon";
 
 const StyledButton = styled.button<{ variant?: "purple" }>`
   background-color: ${(props) =>
@@ -12,11 +13,11 @@ const StyledButton = styled.button<{ variant?: "purple" }>`
 
 const Component = () => {
   return (
-    <div>
-      <h1>Sykepenger</h1>
-      <button>plain button</button>
-      <StyledButton>styled button</StyledButton>
-    </div>
+    <>
+      <h1>hello from sykepenger</h1>
+      <StyledButton variant="purple">styled button</StyledButton>
+      <SykepengerIkon />
+    </>
   );
 };
 

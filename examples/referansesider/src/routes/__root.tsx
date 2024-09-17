@@ -1,16 +1,25 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import {
+  Link,
+  Outlet,
+  ReactNode,
+  createRootRoute,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+
+const RouteLink = ({ children, to }: { children: ReactNode; to: string }) => {
+  return (
+    <Link to={to} className="[&.active]:border border-black rounded m-2 p-2">
+      {children}
+    </Link>
+  );
+};
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
-        <Link to="/sykepenger" className="[&.active]:font-bold">
-          Sykepenger
-        </Link>{" "}
-        <Link to="/minside" className="[&.active]:font-bold">
-          Min Side
-        </Link>
+      <div className="p-2 flex w-[100vw] m-[calc(0 - 50%)] gap-6">
+        <RouteLink to="/sykepenger">Sykepenger</RouteLink>{" "}
+        <RouteLink to="/minside">Min Side</RouteLink>
       </div>
       <hr />
       <Outlet />
