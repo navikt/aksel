@@ -18,7 +18,8 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts",
+    "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
+    "build:darkside": "tsx ./darkside",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -28,7 +29,9 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
+    "@adobe/leonardo-contrast-colors": "^1.0.0",
     "color": "4.2.3",
+    "lightningcss": "^1.27.0",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.19.1",
