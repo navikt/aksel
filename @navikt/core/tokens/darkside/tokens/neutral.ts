@@ -1,4 +1,4 @@
-import { ColorThemeMode } from "../util";
+import { ColorTheme } from "../util";
 
 const NeutralScaleLight = () => ({
   "000": {
@@ -16,7 +16,7 @@ const NeutralScaleDark = () => ({
   },
 });
 
-export const neutralTokenConfig = (theme: ColorThemeMode) => {
+export const neutralTokenConfig = (theme: ColorTheme) => {
   return {
     neutral: theme === "light" ? NeutralScaleLight() : NeutralScaleDark(),
   };

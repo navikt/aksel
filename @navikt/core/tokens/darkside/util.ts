@@ -1,7 +1,7 @@
 import _ from "lodash";
 
-export const colorThemeModes = ["light", "dark"] as const;
-export type ColorThemeMode = (typeof colorThemeModes)[number];
+export const colorThemes = ["light", "dark"] as const;
+export type ColorTheme = (typeof colorThemes)[number];
 
 export const globalColorRoles = [
   "neutral",

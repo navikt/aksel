@@ -6,7 +6,7 @@ import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { spacingTokenConfig } from "./tokens/spacing";
 import {
-  ColorThemeMode,
+  ColorTheme,
   GlobalColorVariable,
   globalColorRoles,
   mergeConfigs,
@@ -14,11 +14,11 @@ import {
 } from "./util";
 
 export const globalScale = (
-  mode: ColorThemeMode,
+  theme: ColorTheme,
 ): Record<string, GlobalColorVariable> => {
   return globalColorRoles.reduce(
     (acc, role) => {
-      acc[role] = getGlobalScaleForColor(role, mode);
+      acc[role] = getGlobalScaleForColor(role, theme);
       return acc;
     },
     {} as Record<string, GlobalColorVariable>,

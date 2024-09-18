@@ -6,7 +6,7 @@ import {
   Theme,
 } from "@adobe/leonardo-contrast-colors";
 import {
-  ColorThemeMode,
+  ColorTheme,
   GlobalColorRoles,
   GlobalColorScale,
   globalColorScales,
@@ -124,7 +124,7 @@ const leonardoDarkTheme = new Theme({
 const getColorScaleFromLeonardo = (
   role: GlobalColorRoles,
   scale: GlobalColorScale,
-  theme: ColorThemeMode,
+  theme: ColorTheme,
 ): CssColor => {
   /* We have to remove 'ContrastColorBackground' from first position */
   const leonardoTheme = (
@@ -167,7 +167,7 @@ type GlobalColor = {
 
 export const getGlobalScaleForColor = (
   role: GlobalColorRoles,
-  theme: ColorThemeMode,
+  theme: ColorTheme,
 ): Record<GlobalColorScale, GlobalColor> => {
   return globalColorScales.reduce(
     (acc, scale) => {
