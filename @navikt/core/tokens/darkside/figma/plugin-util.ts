@@ -2,25 +2,45 @@ import lodash from "lodash";
 import tinycolor from "tinycolor2";
 import { FigmaPreparedToken, FigmaTokenConfig } from "./figma-types";
 
+export type ResolvedFigmaCollection = Record<
+  keyof FigmaTokenConfig,
+  {
+    collection: VariableCollection;
+    variables: Variable[];
+    config: FigmaTokenConfig[keyof FigmaTokenConfig];
+  }
+>;
+
+export type ResolvedFigmaCollectionValue =
+  ResolvedFigmaCollection[keyof ResolvedFigmaCollection];
+
 export async function createOrFindVariable(
   token: FigmaPreparedToken,
-  collection: VariableCollection,
-  variables: Variable[],
+  { collection, variables, config }: ResolvedFigmaCollectionValue,
 ) {
-  const existingVariable = variables.find(
+  let existingVariable = variables.find(
     (variable) => variable.name === extractTokenName(token),
   );
 
-  if (existingVariable) {
-    return existingVariable;
+  if (!existingVariable) {
+    console.info("Creating new variable: ", token.name);
+    existingVariable = figma.variables.createVariable(
+      extractTokenName(token),
+      collection,
+      getFigmaDataType(token),
+    );
+
+    /**
+     * We have to make sure new variables are added to config so that
+     * semantic colors can reference them correctly.
+     */
+    variables.push(existingVariable);
   }
 
-  console.info("Creating new variable: ", token.name);
-  return figma.variables.createVariable(
-    extractTokenName(token),
-    collection,
-    getFigmaDataType(token),
-  );
+  existingVariable.hiddenFromPublishing = config.hideFromPublishing;
+  existingVariable.setVariableCodeSyntax("WEB", token.code.web);
+
+  return existingVariable;
 }
 
 export function getFigmaValueFromToken(token: FigmaPreparedToken) {
@@ -37,11 +57,12 @@ export function getFigmaValueFromToken(token: FigmaPreparedToken) {
   return token.value;
 }
 
+export const SEMANTIC_FIGMA_MODES = ["lightmode", "darkmode"] as const;
+
 export async function resolveAliasId(
   token: FigmaPreparedToken,
-  globalConfig:
-    | FigmaTokenConfig["globalLight"]
-    | FigmaTokenConfig["globalDark"],
+  mode: (typeof SEMANTIC_FIGMA_MODES)[number],
+  configuration: ResolvedFigmaCollection,
 ) {
   const alias = token.alias;
 
@@ -49,24 +70,20 @@ export async function resolveAliasId(
     return null;
   }
 
-  const aliasToken = globalConfig.token.find((t) => t.name === alias);
+  const configToReference =
+    mode === "lightmode"
+      ? configuration["globalLight"]
+      : configuration["globalDark"];
+
+  const aliasToken = configToReference.config.token.find(
+    (t) => t.name === alias,
+  );
 
   if (!aliasToken) {
     return null;
   }
 
-  const collections = await figma.variables.getLocalVariableCollectionsAsync();
-  const collection = collections.find(
-    (col) => col.name === globalConfig.collection,
-  );
-
-  if (!collection) {
-    return null;
-  }
-
-  const variables = getExistingVariables(collection);
-
-  const existingVariable = variables.find(
+  const existingVariable = configToReference.variables.find(
     (variable) => variable.name === extractTokenName(aliasToken),
   );
 
@@ -90,19 +107,26 @@ export function getFigmaDataType(
   return "STRING";
 }
 
-export async function createOrFindCollection(name: string) {
+export async function createOrFindCollection(
+  config: ResolvedFigmaCollectionValue["config"],
+) {
   const existingCollections =
     await figma.variables.getLocalVariableCollectionsAsync();
-  const existingCollection = existingCollections.find(
-    (collection) => collection.name === name,
+
+  let existingCollection = existingCollections.find(
+    (collection) => collection.name === config.collection,
   );
 
-  if (existingCollection) {
-    return existingCollection;
+  if (!existingCollection) {
+    existingCollection = figma.variables.createVariableCollection(
+      config.collection,
+    );
   }
 
-  console.info("Creating new collection: ", name);
-  return figma.variables.createVariableCollection(name);
+  existingCollection.hiddenFromPublishing;
+
+  console.info("Creating new collection: ", config.collection);
+  return existingCollection;
 }
 
 export function getExistingVariables(collection: VariableCollection) {
