@@ -16,9 +16,13 @@ import {
 export const globalScale = (
   mode: ColorThemeMode,
 ): Record<string, GlobalColorVariable> => {
-  return globalColorRoles.reduce((acc, role) => {
-    return { ...acc, ...{ [role]: getGlobalScaleForColor(role, mode) } };
-  }, {});
+  return globalColorRoles.reduce(
+    (acc, role) => {
+      acc[role] = getGlobalScaleForColor(role, mode);
+      return acc;
+    },
+    {} as Record<string, GlobalColorVariable>,
+  );
 };
 
 /**
