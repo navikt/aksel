@@ -1,7 +1,6 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { Page } from "./components/Page";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 
@@ -18,9 +17,7 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <Page>
-        <RouterProvider router={router} />
-      </Page>
+      <RouterProvider router={router} />
     </StrictMode>,
   );
 }

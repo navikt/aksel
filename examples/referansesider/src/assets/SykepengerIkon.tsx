@@ -1,6 +1,6 @@
 export const Ikon = () => {
   return (
-    <span className="relative" aria-hidden="true">
+    <span className="absolute -translate-x-32 translate-y-1" aria-hidden="true">
       <span className="absolute">
         <svg
           role="img"
