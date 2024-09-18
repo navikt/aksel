@@ -1,4 +1,6 @@
-export const semanticTokenConfig = () => ({
+import { StyleDictionaryTokenConfig } from "../util";
+
+export const semanticTokenConfig = (): StyleDictionaryTokenConfig<"color"> => ({
   text: {
     default: {
       value: "{a.neutral.1000.value}",

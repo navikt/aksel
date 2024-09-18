@@ -35,9 +35,22 @@ export const globalColorScales = [
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
 
+type TokenTypes = "color" | "global-color" | "global-radius" | "global-spacing";
+
+export type StyleDictionaryToken<T extends TokenTypes> = {
+  value: string;
+  type: T;
+  group?: string;
+  comment?: string;
+};
+
+export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
+  [key: string]: StyleDictionaryToken<T> | StyleDictionaryTokenConfig<T>;
+};
+
 export type GlobalColorVariable = Record<
   GlobalColorScale,
-  { value: string; type: "global-color"; comment?: string; group: string }
+  StyleDictionaryToken<"global-color">
 >;
 
 export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {

@@ -1,4 +1,6 @@
-export const radiusTokenConfig = {
+import { StyleDictionaryTokenConfig } from "../util";
+
+export const radiusTokenConfig: StyleDictionaryTokenConfig<"global-radius"> = {
   "border-radius": {
     small: { value: "2px", type: "global-radius" },
     medium: { value: "4px", type: "global-radius" },

@@ -1,7 +1,13 @@
 import _ from "lodash";
-import { GlobalColorRoles, globalColorRoles } from "../util";
+import {
+  GlobalColorRoles,
+  StyleDictionaryTokenConfig,
+  globalColorRoles,
+} from "../util";
 
-const configForRole = (role: GlobalColorRoles) => ({
+const configForRole = (
+  role: GlobalColorRoles,
+): StyleDictionaryTokenConfig<"color"> => ({
   bg: {
     [role]: {
       value: `{a.${role}.100.value}`,

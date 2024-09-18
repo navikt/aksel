@@ -1,4 +1,4 @@
-import { ColorTheme } from "../util";
+import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
 const NeutralScaleLight = () => ({
   "000": {
@@ -8,7 +8,7 @@ const NeutralScaleLight = () => ({
   },
 });
 
-const NeutralScaleDark = () => ({
+const NeutralScaleDark = (): StyleDictionaryTokenConfig<"global-color"> => ({
   "000": {
     value: "black",
     type: "global-color",

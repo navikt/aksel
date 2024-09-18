@@ -1,8 +1,8 @@
-import { GlobalColorRoles } from "../util";
+import { GlobalColorRoles, StyleDictionaryToken } from "../util";
 
 export const contrastTokenConfig = (): {
   contrast: {
-    [key in GlobalColorRoles]: { value: string; type: string; group: string };
+    [key in GlobalColorRoles]: StyleDictionaryToken<"color">;
   };
 } => ({
   contrast: {
