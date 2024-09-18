@@ -133,14 +133,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case "Accept":
           onEnter(e);
           break;
-        case "Home":
-          toggleIsListOpen(false);
-          virtualFocus.moveFocusToTop();
-          break;
-        case "End":
-          toggleIsListOpen(true);
-          virtualFocus.moveFocusToBottom();
-          break;
         default:
           break;
       }
@@ -198,6 +190,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
             virtualFocus.moveFocusUp();
           }
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          toggleIsListOpen(false);
+          virtualFocus.moveFocusToTop();
+        } else if (e.key === "End") {
+          e.preventDefault();
+          toggleIsListOpen(true);
+          virtualFocus.moveFocusToBottom();
         } else if (e.key === "PageUp") {
           e.preventDefault();
           virtualFocus.moveFocusUpBy(6);
