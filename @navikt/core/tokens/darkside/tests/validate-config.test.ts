@@ -13,52 +13,52 @@ const configKeys = ["value", "type"];
 describe("Validate token configurations", () => {
   test(`Semantic tokens`, () => {
     expect(
-      validateConfig(semanticTokenConfig(), ConfigKeysWithGroup),
+      validateConfig(semanticTokenConfig(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Semantic tokens for all roles`, () => {
     expect(
-      validateConfig(semanticTokensForAllRolesConfig(), ConfigKeysWithGroup),
+      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Contrast tokens`, () => {
     expect(
-      validateConfig(contrastTokenConfig(), ConfigKeysWithGroup),
+      validateConfig(contrastTokenConfig(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Global lightmode scale`, () => {
     expect(
-      validateConfig(globalScale("light"), ConfigKeysWithGroup),
+      validateConfig(globalScale("light"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Global darkmode scale`, () => {
     expect(
-      validateConfig(globalScale("dark"), ConfigKeysWithGroup),
+      validateConfig(globalScale("dark"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Neutral light unique tokens`, () => {
     expect(
-      validateConfig(neutralTokenConfig("light"), ConfigKeysWithGroup),
+      validateConfig(neutralTokenConfig("light"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Neutral dark unique tokens`, () => {
     expect(
-      validateConfig(neutralTokenConfig("dark"), ConfigKeysWithGroup),
+      validateConfig(neutralTokenConfig("dark"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Spacing scale`, () => {
-    expect(validateConfig(spacingTokenConfig, ConfigKeys)).toBeTruthy();
+    expect(validateConfig(spacingTokenConfig, configKeys)).toBeTruthy();
   });
 
   test(`Radius scale`, () => {
-    expect(validateConfig(radiusTokenConfig, ConfigKeys)).toBeTruthy();
+    expect(validateConfig(radiusTokenConfig, configKeys)).toBeTruthy();
   });
 });
 
