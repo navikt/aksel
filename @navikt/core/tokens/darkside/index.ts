@@ -48,7 +48,6 @@ const SDictionaryLightMode = new StyleDictionary({
           format: "css/variables",
           options: {
             outputReferences: true,
-            outputReferenceFallbacks: true,
             selector: ":root, :host, .light, .light-theme",
           },
         },
@@ -87,7 +86,6 @@ const SDictionaryDarkMode = new StyleDictionary({
           format: "css/variables",
           options: {
             outputReferences: true,
-            outputReferenceFallbacks: true,
             selector: ".dark, .dark-theme",
           },
         },
