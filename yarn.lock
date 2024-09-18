@@ -12,6 +12,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@adobe/leonardo-contrast-colors@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@adobe/leonardo-contrast-colors@npm:1.0.0"
+  dependencies:
+    apca-w3: "npm:^0.1.9"
+    chroma-js: "npm:^2.4.2"
+    ciebase: "npm:^0.1.1"
+    ciecam02: "npm:^0.4.6"
+    hsluv: "npm:^0.1.0"
+  checksum: 10/786bfa6dfc4a74df8dd761b7909ef15e074b84b55e3070eee7003f9b9a768fe69f758970b3ce7a6ddbae6a8acdf4f8da8fc0b31895d534e99aa089a320432631
+  languageName: node
+  linkType: hard
+
 "@alloc/quick-lru@npm:^5.2.0":
   version: 5.2.0
   resolution: "@alloc/quick-lru@npm:5.2.0"
@@ -3878,7 +3891,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
+    "@adobe/leonardo-contrast-colors": "npm:^1.0.0"
     color: "npm:4.2.3"
+    lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
     nodemon: "npm:^3.0.1"
     style-dictionary: "npm:^4.1.1"
@@ -8223,6 +8238,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apca-w3@npm:^0.1.9":
+  version: 0.1.9
+  resolution: "apca-w3@npm:0.1.9"
+  dependencies:
+    colorparsley: "npm:^0.1.8"
+  checksum: 10/df2b109aa6c08655c4699b4a4b8eb9c823fc3563f93c70a2bcfabd8cd8aa6a7501fb6d4b289d3befa05e0b772a6725167704cb28fbec4c5cf85f4780c9f314f3
+  languageName: node
+  linkType: hard
+
 "aproba@npm:^1.1.1":
   version: 1.2.0
   resolution: "aproba@npm:1.2.0"
@@ -9697,6 +9721,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chroma-js@npm:^2.4.2":
+  version: 2.6.0
+  resolution: "chroma-js@npm:2.6.0"
+  checksum: 10/245f0a0b1da7c4cedf30e490db9ab4e9e71fde207cbe1ca05e25ef5ba517df2509b96b29d2c168786237c8162a03dccea38721c4927249cd1d5c5fe0184fc13c
+  languageName: node
+  linkType: hard
+
 "chromatic@npm:11.5.4":
   version: 11.5.4
   resolution: "chromatic@npm:11.5.4"
@@ -9734,6 +9765,25 @@ __metadata:
   version: 3.9.0
   resolution: "ci-info@npm:3.9.0"
   checksum: 10/75bc67902b4d1c7b435497adeb91598f6d52a3389398e44294f6601b20cfef32cf2176f7be0eb961d9e085bb333a8a5cae121cb22f81cf238ae7f58eb80e9397
+  languageName: node
+  linkType: hard
+
+"ciebase@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "ciebase@npm:0.1.1"
+  dependencies:
+    mout: "npm:^0.11.1"
+  checksum: 10/3a14e590daa37b5d90dae195af1f0bc386d747353c141b0969a20bc2774b9431f2315a1730e6636f85b5a863a6d07b6fe9dfae9bce5208b92cef718c0b857cdf
+  languageName: node
+  linkType: hard
+
+"ciecam02@npm:^0.4.6":
+  version: 0.4.6
+  resolution: "ciecam02@npm:0.4.6"
+  dependencies:
+    ciebase: "npm:^0.1.1"
+    mout: "npm:^0.11.1"
+  checksum: 10/4826c9e98b69a611db981d8a81ca4c6e7016d5562e9454b7a9565617541cb182674ae88ad3bca46a86faa9e57e7e1455954adc2045db07498c69d2724c09e8d0
   languageName: node
   linkType: hard
 
@@ -10067,6 +10117,13 @@ __metadata:
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
   checksum: 10/0b8de48bfa5d10afc160b8eaa2b9938f34a892530b2f7d7897e0458d9535a066e3998b49da9d21161c78225b272df19ae3a64d6df28b4c9734c0e55bbd02406f
+  languageName: node
+  linkType: hard
+
+"colorparsley@npm:^0.1.8":
+  version: 0.1.8
+  resolution: "colorparsley@npm:0.1.8"
+  checksum: 10/f4ece36583c6837c111dd8ca0e9316505be93d03f6f8c8880a3c93a6d1103cbe6071aad54fc7e48c4b0e2026a4276d988dd271760da9c1ad856b1ec5f3282b83
   languageName: node
   linkType: hard
 
@@ -11527,6 +11584,15 @@ __metadata:
   version: 6.1.0
   resolution: "detect-indent@npm:6.1.0"
   checksum: 10/ab953a73c72dbd4e8fc68e4ed4bfd92c97eb6c43734af3900add963fd3a9316f3bc0578b018b24198d4c31a358571eff5f0656e81a1f3b9ad5c547d58b2d093d
+  languageName: node
+  linkType: hard
+
+"detect-libc@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "detect-libc@npm:1.0.3"
+  bin:
+    detect-libc: ./bin/detect-libc.js
+  checksum: 10/3849fe7720feb153e4ac9407086956e073f1ce1704488290ef0ca8aab9430a8d48c8a9f8351889e7cdc64e5b1128589501e4fef48f3a4a49ba92cd6d112d0757
   languageName: node
   linkType: hard
 
@@ -14967,6 +15033,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hsluv@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "hsluv@npm:0.1.0"
+  checksum: 10/d9abd2ce5f6a85c0c35eeed6bdcbd275d7cc9e6c3615c0b7ce19a4e1783f67b86cc1bedb4b55bbecbef746719d8c7119e4649d7a5a11100ccd110ddb27719682
+  languageName: node
+  linkType: hard
+
 "html-encoding-sniffer@npm:^3.0.0":
   version: 3.0.0
   resolution: "html-encoding-sniffer@npm:3.0.0"
@@ -17020,6 +17093,116 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lightningcss-darwin-arm64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-darwin-arm64@npm:1.27.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"lightningcss-darwin-x64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-darwin-x64@npm:1.27.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-freebsd-x64@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-freebsd-x64@npm:1.27.0"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-arm-gnueabihf@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.27.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-arm64-gnu@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-linux-arm64-gnu@npm:1.27.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-arm64-musl@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-linux-arm64-musl@npm:1.27.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-x64-gnu@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-linux-x64-gnu@npm:1.27.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"lightningcss-linux-x64-musl@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-linux-x64-musl@npm:1.27.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"lightningcss-win32-arm64-msvc@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-win32-arm64-msvc@npm:1.27.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"lightningcss-win32-x64-msvc@npm:1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss-win32-x64-msvc@npm:1.27.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"lightningcss@npm:^1.27.0":
+  version: 1.27.0
+  resolution: "lightningcss@npm:1.27.0"
+  dependencies:
+    detect-libc: "npm:^1.0.3"
+    lightningcss-darwin-arm64: "npm:1.27.0"
+    lightningcss-darwin-x64: "npm:1.27.0"
+    lightningcss-freebsd-x64: "npm:1.27.0"
+    lightningcss-linux-arm-gnueabihf: "npm:1.27.0"
+    lightningcss-linux-arm64-gnu: "npm:1.27.0"
+    lightningcss-linux-arm64-musl: "npm:1.27.0"
+    lightningcss-linux-x64-gnu: "npm:1.27.0"
+    lightningcss-linux-x64-musl: "npm:1.27.0"
+    lightningcss-win32-arm64-msvc: "npm:1.27.0"
+    lightningcss-win32-x64-msvc: "npm:1.27.0"
+  dependenciesMeta:
+    lightningcss-darwin-arm64:
+      optional: true
+    lightningcss-darwin-x64:
+      optional: true
+    lightningcss-freebsd-x64:
+      optional: true
+    lightningcss-linux-arm-gnueabihf:
+      optional: true
+    lightningcss-linux-arm64-gnu:
+      optional: true
+    lightningcss-linux-arm64-musl:
+      optional: true
+    lightningcss-linux-x64-gnu:
+      optional: true
+    lightningcss-linux-x64-musl:
+      optional: true
+    lightningcss-win32-arm64-msvc:
+      optional: true
+    lightningcss-win32-x64-msvc:
+      optional: true
+  checksum: 10/275a0103c7dc1dfcf8e456a0523d1719a1caff916c45229ec62cdb28a814dce12b7065b88865fb74fc03a2a658ac3361caff5c348f1646313513c125d4f27954
+  languageName: node
+  linkType: hard
+
 "lilconfig@npm:2.0.5":
   version: 2.0.5
   resolution: "lilconfig@npm:2.0.5"
@@ -18752,6 +18935,13 @@ __metadata:
   version: 2.30.1
   resolution: "moment@npm:2.30.1"
   checksum: 10/ae42d876d4ec831ef66110bdc302c0657c664991e45cf2afffc4b0f6cd6d251dde11375c982a5c0564ccc0fa593fc564576ddceb8c8845e87c15f58aa6baca69
+  languageName: node
+  linkType: hard
+
+"mout@npm:^0.11.1":
+  version: 0.11.1
+  resolution: "mout@npm:0.11.1"
+  checksum: 10/f5af9eb414dd01c491d20d671bcd5044dc35a42012234f21b500fe70604c3cadbc3cd42ed3bd68617921b3a8d33ecb7249b9b21a5baa689d5ae5eb35599bddf2
   languageName: node
   linkType: hard
 
