@@ -1,6 +1,6 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-const NeutralScaleLight = () => ({
+const NeutralScaleLight = (): StyleDictionaryTokenConfig<"global-color"> => ({
   "000": {
     value: "white",
     type: "global-color",

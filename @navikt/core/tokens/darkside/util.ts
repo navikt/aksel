@@ -57,6 +57,8 @@ export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {
   return { a: input };
 };
 
-export const mergeConfigs = (configs: any[]): Record<string, any> => {
+export const mergeConfigs = (
+  configs: StyleDictionaryTokenConfig<TokenTypes>[],
+): StyleDictionaryTokenConfig<TokenTypes> => {
   return configs.reduce((acc, config) => _.merge(acc, config), {});
 };
