@@ -13,9 +13,11 @@ export const generateTokenString = (
 ): string => {
   const kebabName = kebabCase(token.name);
   if (format === "es6") {
-    return `export const ${token.name} = "var(--${kebabName})";`;
+    return `export const ${token.name.slice(1)} = "var(--${kebabName})";`;
   }
-  return `  "${token.name}": "var(--${kebabName})"${isLast ? "" : ","}`;
+  return `  "${token.name.slice(1)}": "var(--${kebabName})"${
+    isLast ? "" : ","
+  }`;
 };
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
