@@ -8,7 +8,7 @@ export const contrastTokenConfig = (): {
   contrast: {
     /* core */
     accent: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
