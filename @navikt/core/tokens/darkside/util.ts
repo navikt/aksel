@@ -35,7 +35,14 @@ export const globalColorScales = [
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
 
-type TokenTypes = "color" | "global-color" | "global-radius" | "global-spacing";
+export const tokenTypes = {
+  color: "color",
+  "global-color": "global-color",
+  "global-radius": "global-radius",
+  "global-spacing": "global-spacing",
+} as const;
+
+export type TokenTypes = (typeof tokenTypes)[keyof typeof tokenTypes];
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;
