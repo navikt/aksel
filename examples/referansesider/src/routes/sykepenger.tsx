@@ -2,14 +2,14 @@ import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
-import * as tokens from "@navikt/ds-tokens/dist/tokens";
+import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import ArrowDownRightIcon from "../assets/ArrowDownRightIcon";
 import ChevronDownIcon from "../assets/ChevronDownIcon";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Page } from "../components/Page";
 
 const Detail = styled.span`
-  color: ${tokens.AGray500};
+  color: ${tokens.Accent400};
   font-size: 20px;
   font-weight: 300;
   font-variant-caps: all-small-caps;
@@ -19,7 +19,7 @@ const Header1 = styled.h1`
   position: relative;
   color: #99185e;
   font-size: 48px;
-  font-weight: ${tokens.AFontWeightBold};
+  font-weight: 400;
   margin-bottom: 1rem;
 `;
 
@@ -37,7 +37,7 @@ const Header2 = styled.h1`
     height: 7px;
     left: 0;
     position: absolute;
-    top: calc(${tokens.ASpacing5} * -1);
+    top: calc(var(--a-spacing-4) * -1);
     width: 40px;
   }
 `;
@@ -65,7 +65,7 @@ const FancyHeader = () => {
 };
 
 const Link = styled.a<{ inverted?: boolean }>`
-  color: ${tokens.ABlue600};
+  color: ${tokens.Accent500};
   text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
   &:hover {
     text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
