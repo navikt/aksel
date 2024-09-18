@@ -40,9 +40,7 @@ export type GlobalColorVariable = Record<
   { value: string; type: "global-color"; comment?: string; group: string }
 >;
 
-export const tokensWithPrefix = (
-  input: Record<string, any>,
-): Record<"a", any> => {
+export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {
   return { a: input };
 };
 
