@@ -6,16 +6,30 @@ const generateHeader = async (file: File): Promise<string> => {
   return await fileHeader({ file });
 };
 
+const createComment = (comment?: string): string => {
+  if (!comment) {
+    return "";
+  }
+
+  return `/**\n * ${comment}\n */\n`;
+};
+
 export const generateTokenString = (
   token: TransformedToken,
   format: "es6" | "cjs",
   isLast: boolean,
 ): string => {
+  /**
+   * test token
+   */
+  const comment = createComment(token.comment);
   const kebabName = kebabCase(token.name);
   if (format === "es6") {
-    return `export const ${token.name.slice(1)} = "var(--${kebabName})";`;
+    return `${comment}export const ${token.name.slice(
+      1,
+    )} = "var(--${kebabName})";`;
   }
-  return `  "${token.name.slice(1)}": "var(--${kebabName})"${
+  return `  ${comment}"${token.name.slice(1)}": "var(--${kebabName})"${
     isLast ? "" : ","
   }`;
 };
