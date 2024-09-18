@@ -1,14 +1,19 @@
 import StyleDictionary from "style-dictionary";
-import { kebabCase } from "./kebabCase.mjs";
+import {
+  PlatformConfig,
+  Transform,
+  TransformedToken,
+} from "style-dictionary/types";
+import { kebabCase } from "./kebabCase";
 
 const V1_DIST = "dist/";
 
-const kebabTransform = {
+const kebabTransform: Transform = {
   name: "name/cti/kebab",
   type: "name",
-  transform: (prop, options) =>
-    kebabCase([options.prefix].concat(prop.path).join(" ")),
-};
+  transform: (token: TransformedToken, options: PlatformConfig) =>
+    kebabCase([options.prefix].concat(token.path).join(" ")),
+} as const;
 
 const dictionaryV1 = new StyleDictionary({
   source: ["src/index.js", "src/**/*.json"],
