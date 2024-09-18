@@ -35,7 +35,7 @@ export const globalColorConfig: Record<
   },
   /* Status */
   success: {
-    colorKeys: ["#2aa758", "#e6ffeb"],
+    colorKeys: ["#2aa77d", "#e6ffeb"],
     ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
@@ -45,12 +45,12 @@ export const globalColorConfig: Record<
     smooth: false,
   },
   warning: {
-    colorKeys: ["#ffcf4d", "#f56e00", "#cc5200"],
+    colorKeys: ["#ffeccc", "#ff9100", "#c77300", "#ffcc66"],
     ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-    smooth: false,
+    smooth: true,
   },
   danger: {
-    colorKeys: ["#f93448", "#ffb3cd"],
+    colorKeys: ["#ffb3cd", "#fa4456"],
     ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
     smooth: false,
   },
@@ -61,14 +61,14 @@ export const globalColorConfig: Record<
     smooth: false,
   },
   brandTwo: {
-    colorKeys: ["#cc8066", "#fff3ec"],
+    colorKeys: ["#cc7566", "#fff3ec"],
     ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-    smooth: false,
+    smooth: true,
   },
   brandThree: {
     colorKeys: ["#005b82", "#e6f1f8", "#00243a"],
     ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-    smooth: false,
+    smooth: true,
   },
   /* Data */
   dataOne: {
