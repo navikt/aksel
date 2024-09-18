@@ -13,60 +13,60 @@ export const contrastTokenConfig = (): {
       group: "contrast",
     },
     neutral: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     /* Status */
     danger: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     info: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     success: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     warning: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     /* Brand */
     brandOne: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     brandTwo: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     brandThree: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     /* Data */
     dataOne: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     dataThree: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
     dataTwo: {
-      value: `white`,
+      value: "white",
       type: "color",
       group: "contrast",
     },
