@@ -1,9 +1,26 @@
-module.exports = {
+import StyleDictionary from "style-dictionary";
+import {
+  PlatformConfig,
+  Transform,
+  TransformedToken,
+} from "style-dictionary/types";
+import { kebabCase } from "./kebabCase";
+
+const V1_DIST = "dist/";
+
+const kebabTransform: Transform = {
+  name: "name/cti/kebab",
+  type: "name",
+  transform: (token: TransformedToken, options: PlatformConfig) =>
+    kebabCase([options.prefix].concat(token.path).join(" ")),
+};
+
+const dictionaryV1 = new StyleDictionary({
   source: ["src/index.js", "src/**/*.json"],
   platforms: {
     scss: {
       transformGroup: "scss",
-      buildPath: "dist/",
+      buildPath: V1_DIST,
       files: [
         {
           destination: "tokens.scss",
@@ -13,7 +30,7 @@ module.exports = {
     },
     less: {
       transformGroup: "less",
-      buildPath: "dist/",
+      buildPath: V1_DIST,
       files: [
         {
           destination: "tokens.less",
@@ -23,7 +40,7 @@ module.exports = {
     },
     css: {
       transformGroup: "css",
-      buildPath: "dist/",
+      buildPath: V1_DIST,
       files: [
         {
           destination: "tokens.css",
@@ -37,7 +54,7 @@ module.exports = {
     },
     ts: {
       transformGroup: "js",
-      buildPath: "dist/",
+      buildPath: V1_DIST,
       files: [
         {
           destination: "tokens.d.ts",
@@ -50,7 +67,7 @@ module.exports = {
     },
     js: {
       transformGroup: "js",
-      buildPath: "dist/",
+      buildPath: V1_DIST,
       files: [
         {
           destination: "tokens.js",
@@ -63,4 +80,12 @@ module.exports = {
       ],
     },
   },
-};
+});
+
+async function buildDictionary() {
+  await dictionaryV1.hasInitialized;
+  dictionaryV1.registerTransform(kebabTransform);
+  await dictionaryV1.buildAllPlatforms();
+}
+
+buildDictionary();
