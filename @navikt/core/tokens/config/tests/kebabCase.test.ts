@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import kebabCase from "../kebabCase";
+import { kebabCase } from "../kebabCase.mjs";
 
 describe("kebabCase", () => {
   [

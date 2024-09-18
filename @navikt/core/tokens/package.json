@@ -18,9 +18,8 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "node ./config/build.js > /dev/null && node ./config/version-tag.js",
+    "build": "node ./config/build.mjs > /dev/null && node ./config/version-tag.mjs",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
-    "token": "cd config && style-dictionary build",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -33,8 +32,7 @@
     "color": "4.2.3",
     "lodash": "^4.17.21",
     "nodemon": "^3.0.1",
-    "style-dictionary": "^3.0.2",
-    "ts-node": "^10.9.1",
+    "style-dictionary": "^4.1.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },
