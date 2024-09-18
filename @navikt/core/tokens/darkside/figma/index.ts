@@ -17,35 +17,35 @@ async function buildFigmaConfig() {
 
     const preparedConfig: FigmaTokenConfig = {
       globalLight: {
-        collection: "Global colors light",
+        name: "Global colors light",
         hideFromPublishing: true,
         token: lightTokens.filter(
           (token) => token.type === tokenTypes["global-color"],
         ),
       },
       globalDark: {
-        collection: "Global colors dark",
+        name: "Global colors dark",
         hideFromPublishing: true,
         token: darkTokens.filter(
           (token) => token.type === tokenTypes["global-color"],
         ),
       },
       semanticColors: {
-        collection: "Semantic colors",
+        name: "Semantic colors",
         hideFromPublishing: false,
         token: lightTokens.filter(
           (token) => token.type === tokenTypes["color"],
         ),
       },
       radius: {
-        collection: "Radius",
+        name: "Radius",
         hideFromPublishing: false,
         token: scaleTokens.filter(
           (token) => token.type === tokenTypes["global-radius"],
         ),
       },
       spacing: {
-        collection: "Spacing",
+        name: "Spacing",
         hideFromPublishing: false,
         token: scaleTokens.filter(
           (token) => token.type === tokenTypes["global-spacing"],

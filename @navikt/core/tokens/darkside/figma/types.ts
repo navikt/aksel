@@ -9,7 +9,7 @@ export type FigmaToken = StyleDictionaryToken<TokenTypes> & {
 };
 
 type FigmaConfigEntry = {
-  collection: string;
+  name: string;
   hideFromPublishing: boolean;
   token: FigmaToken[];
 };
