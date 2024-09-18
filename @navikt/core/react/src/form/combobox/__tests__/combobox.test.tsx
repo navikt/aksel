@@ -316,15 +316,15 @@ describe("Render combobox", () => {
       });
 
       await pressKey("ArrowDown");
-      hasVirtualFocus("banana");
+      hasVirtualFocus("apple");
       await pressKey("PageDown");
-      hasVirtualFocus("kiwi");
+      hasVirtualFocus("mango");
       await pressKey("PageDown");
-      hasVirtualFocus("grape fruit");
+      hasVirtualFocus("watermelon");
       await pressKey("PageUp");
-      hasVirtualFocus("kiwi");
+      hasVirtualFocus("mango");
       await pressKey("PageUp");
-      hasVirtualFocus("banana");
+      hasVirtualFocus("apple");
     });
   });
 });
