@@ -1,14 +1,16 @@
+import { twMerge } from "tailwind-merge";
+
 export const Ikon = ({
   className,
   colorFill = "fill-red-500",
   colorStroke = "stroke-red-500",
 }: {
-  className: string;
-  colorFill: string;
-  colorStroke: string;
+  className?: string;
+  colorFill?: string;
+  colorStroke?: string;
 }) => {
   return (
-    <span className={`absolute block ${className}`} aria-hidden="true">
+    <span className={twMerge(`absolute block`, className)} aria-hidden="true">
       <span className="absolute">
         <svg
           role="img"
@@ -17,7 +19,7 @@ export const Ikon = ({
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`${colorFill} opacity-40`}
+          className={twMerge(`opacity-40`, colorFill)}
         >
           <rect x="16" y="36" width="64" height="24"></rect>
           <rect
