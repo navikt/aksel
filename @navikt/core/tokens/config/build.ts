@@ -13,7 +13,7 @@ const kebabTransform: Transform = {
   type: "name",
   transform: (token: TransformedToken, options: PlatformConfig) =>
     kebabCase([options.prefix].concat(token.path).join(" ")),
-} as const;
+};
 
 const dictionaryV1 = new StyleDictionary({
   source: ["src/index.js", "src/**/*.json"],
