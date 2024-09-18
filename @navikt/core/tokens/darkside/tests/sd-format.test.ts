@@ -3,9 +3,9 @@ import { describe, expect, test } from "vitest";
 import { generateTokenString } from "../sd-format";
 
 const token: TransformedToken = {
-  name: "colorPrimary",
+  name: "AColorPrimary",
   value: "#000",
-  path: ["color", "primary"],
+  path: ["A", "color", "primary"],
   original: {
     value: "#000",
     attributes: { category: "color", type: "primary" },
@@ -17,16 +17,18 @@ const token: TransformedToken = {
 describe("generateTokenString", () => {
   test("should generate ES6 token string", () => {
     const result = generateTokenString(token, "es6", false);
-    expect(result).toBe('export const colorPrimary = "var(--color-primary)";');
+    expect(result).toBe(
+      'export const ColorPrimary = "var(--a-color-primary)";',
+    );
   });
 
   test("should generate CJS token string for the last token", () => {
     const result = generateTokenString(token, "cjs", true);
-    expect(result).toBe('  "colorPrimary": "var(--color-primary)"');
+    expect(result).toBe('  "ColorPrimary": "var(--a-color-primary)"');
   });
 
   test("should generate CJS token string for a non-last token", () => {
     const result = generateTokenString(token, "cjs", false);
-    expect(result).toBe('  "colorPrimary": "var(--color-primary)",');
+    expect(result).toBe('  "ColorPrimary": "var(--a-color-primary)",');
   });
 });
