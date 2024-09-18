@@ -1,16 +1,6 @@
+import { getGlobalScaleForColor } from "./leonardo";
 import { contrastTokenConfig } from "./tokens/contrast";
-import AccentScale from "./tokens/global/accent";
-import BrandOneScale from "./tokens/global/brand-one";
-import BrandThreeScale from "./tokens/global/brand-three";
-import BrandTwoScale from "./tokens/global/brand-two";
-import DangerScale from "./tokens/global/danger";
-import DataOneScale from "./tokens/global/data-one";
-import DataThreeScale from "./tokens/global/data-three";
-import DataTwoScale from "./tokens/global/data-two";
-import InfoScale from "./tokens/global/info";
-import NeutralScale from "./tokens/global/neutral";
-import SuccessScale from "./tokens/global/success";
-import WarningScale from "./tokens/global/warning";
+import { neutralTokenConfig } from "./tokens/neutral";
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
@@ -23,30 +13,11 @@ import {
   tokensWithPrefix,
 } from "./util";
 
-export const completeGlobalScale = (
+export const globalScale = (
   mode: ColorThemeMode,
 ): Record<string, GlobalColorVariable> => {
-  const mapping = {
-    /* Core */
-    accent: AccentScale,
-    neutral: NeutralScale,
-    /* Status */
-    info: InfoScale,
-    success: SuccessScale,
-    warning: WarningScale,
-    danger: DangerScale,
-    /* Brand */
-    brandOne: BrandOneScale,
-    brandTwo: BrandTwoScale,
-    brandThree: BrandThreeScale,
-    /* Data */
-    dataOne: DataOneScale,
-    dataTwo: DataTwoScale,
-    dataThree: DataThreeScale,
-  };
-
   return globalColorRoles.reduce((acc, role) => {
-    return { ...acc, ...mapping[role](mode) };
+    return { ...acc, ...{ [role]: getGlobalScaleForColor(role, mode) } };
   }, {});
 };
 
@@ -62,7 +33,8 @@ export const lightModeTokens = () => {
       semanticTokensForAllRolesConfig(),
       contrastTokenConfig(),
       semanticTokenConfig(),
-      completeGlobalScale("light"),
+      neutralTokenConfig("light"),
+      globalScale("light"),
     ]),
   );
 };
@@ -72,7 +44,9 @@ export const lightModeTokens = () => {
  * - Global darkmode colors
  */
 export const darkModeTokens = () => {
-  return tokensWithPrefix(mergeConfigs([completeGlobalScale("dark")]));
+  return tokensWithPrefix(
+    mergeConfigs([globalScale("dark"), neutralTokenConfig("dark")]),
+  );
 };
 
 /**

@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { completeGlobalScale } from "../create-configuration";
+import { globalScale } from "../create-configuration";
 import { contrastTokenConfig } from "../tokens/contrast";
+import { neutralTokenConfig } from "../tokens/neutral";
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
@@ -30,13 +31,25 @@ describe("Validate token configurations", () => {
 
   test(`Global lightmode scale`, () => {
     expect(
-      validateConfig(completeGlobalScale("light"), ConfigKeysWithGroup),
+      validateConfig(globalScale("light"), ConfigKeysWithGroup),
     ).toBeTruthy();
   });
 
-  test(`Global darmode scale`, () => {
+  test(`Global darkmode scale`, () => {
     expect(
-      validateConfig(completeGlobalScale("dark"), ConfigKeysWithGroup),
+      validateConfig(globalScale("dark"), ConfigKeysWithGroup),
+    ).toBeTruthy();
+  });
+
+  test(`Neutral light unique tokens`, () => {
+    expect(
+      validateConfig(neutralTokenConfig("light"), ConfigKeysWithGroup),
+    ).toBeTruthy();
+  });
+
+  test(`Neutral dark unique tokens`, () => {
+    expect(
+      validateConfig(neutralTokenConfig("dark"), ConfigKeysWithGroup),
     ).toBeTruthy();
   });
 

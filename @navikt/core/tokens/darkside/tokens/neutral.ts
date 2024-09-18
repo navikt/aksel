@@ -1,5 +1,4 @@
-import { getGlobalScaleForColor } from "../../leonardo";
-import { ColorThemeMode, GlobaColorScale } from "../../util";
+import { ColorThemeMode } from "../util";
 
 const NeutralScaleLight = () => ({
   "000": {
@@ -7,7 +6,6 @@ const NeutralScaleLight = () => ({
     type: "global-color",
     group: "neutral",
   },
-  ...getGlobalScaleForColor("neutral", "light"),
 });
 
 const NeutralScaleDark = () => ({
@@ -16,10 +14,9 @@ const NeutralScaleDark = () => ({
     type: "global-color",
     group: "neutral",
   },
-  ...getGlobalScaleForColor("neutral", "dark"),
 });
 
-export default (theme: ColorThemeMode): GlobaColorScale<"neutral"> => {
+export const neutralTokenConfig = (theme: ColorThemeMode) => {
   return {
     neutral: theme === "light" ? NeutralScaleLight() : NeutralScaleDark(),
   };

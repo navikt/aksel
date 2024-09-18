@@ -20,10 +20,6 @@ export const globalColorRoles = [
 
 export type GlobalColorRoles = (typeof globalColorRoles)[number];
 
-export type GlobaColorScale<T extends GlobalColorRoles> = {
-  [key in T]: GlobalColorVariable;
-};
-
 export const globalColorScales = [
   "100",
   "200",
