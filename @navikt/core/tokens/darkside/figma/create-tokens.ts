@@ -1,3 +1,4 @@
+import lodash from "lodash";
 import StyleDictionary from "style-dictionary";
 import { Dictionary, TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
@@ -53,7 +54,10 @@ export const getTokensListForCollection = async (
       const preparedTokens = dictionary.allTokens.map((token) => {
         const reference = getReferences(token.original, dictionary.tokens);
         return reference.length > 0
-          ? prepareToken({ ...token, alias: reference[0].name }, dictionary)
+          ? prepareToken(
+              { ...token, alias: extractTokenName(reference[0]) },
+              dictionary,
+            )
           : prepareToken(token, dictionary);
       });
       tokensList.push(...preparedTokens);
@@ -77,7 +81,7 @@ function prepareToken(
   const cssVariable = formatter(token);
 
   return {
-    name: token.name,
+    name: extractTokenName(token),
     /* We can assume this since each config is typed with 'StyleDictionaryToken'  */
     type: token.type as TokenTypes,
     value: prepareValueForFigma(token.value, token.type as TokenTypes),
@@ -112,4 +116,34 @@ function prepareValueForFigma(value: string, type: TokenTypes) {
     default:
       return value;
   }
+}
+
+/**
+ * Allows us to extract the token name from the token object and create the correct grouping for Figma.
+ */
+function extractTokenName(token: TransformedToken) {
+  /**
+   * Remove the "a-" prefix from the token name.
+   */
+  let name = lodash.startCase(token.name.slice(2));
+
+  /**
+   * TODO:
+   * - Find a better way to handle "custom" renames for some tokens
+   */
+  if (token.name.startsWith("a-border-radius")) {
+    name = name.replace("Border", "").trim();
+  }
+
+  /**
+   * By adding "/", we can create subgroups in Figma.
+   */
+  if (token.group) {
+    let grouping = "";
+    token.group.split(".").forEach((group) => {
+      grouping += lodash.startCase(group) + "/".trim();
+    });
+    return grouping + name;
+  }
+  return name;
 }

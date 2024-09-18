@@ -2,7 +2,7 @@ import { StyleDictionaryToken, TokenTypes } from "../util";
 
 export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   name: string;
-  alias: string;
+  alias?: string;
   code: {
     web: string;
   };
