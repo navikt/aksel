@@ -3880,7 +3880,6 @@ __metadata:
   dependencies:
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
-    nodemon: "npm:^3.0.1"
     style-dictionary: "npm:^4.1.1"
     tsx: "npm:^4.19.1"
     typescript: "npm:^5.1.6"
