@@ -1,8 +1,8 @@
-import { FormatFn, TransformedToken } from "style-dictionary/types";
+import { File, FormatFn, TransformedToken } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCase } from "../config/kebabCase";
 
-const generateHeader = async (file: any): Promise<string> => {
+const generateHeader = async (file: File): Promise<string> => {
   return await fileHeader({ file });
 };
 
