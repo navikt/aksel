@@ -1,6 +1,7 @@
 import StyleDictionary from "style-dictionary";
 import { Dictionary, TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
+import tinycolor2 from "tinycolor2";
 import {
   darkModeTokens,
   lightModeTokens,
@@ -79,7 +80,7 @@ function prepareToken(
     name: token.name,
     /* We can assume this since each config is typed with 'StyleDictionaryToken'  */
     type: token.type as TokenTypes,
-    value: token.value,
+    value: prepareValueForFigma(token.value, token.type as TokenTypes),
     alias: token.alias,
     comment: token.comment,
     group: token.group,
@@ -87,4 +88,28 @@ function prepareToken(
       web: `var(${cssVariable.trim().split(": ")[0]})`,
     },
   };
+}
+
+function prepareValueForFigma(value: string, type: TokenTypes) {
+  switch (true) {
+    case type === "color" || type === "global-color": {
+      const color = tinycolor2(value).toRgb();
+      /* Figma requires rgb to be between 0 and 1*/
+      return {
+        r: color.r / 255,
+        g: color.g / 255,
+        b: color.b / 255,
+        a: color.a * 1,
+      };
+    }
+    case type === "global-radius": {
+      return parseInt(value.replace("px", ""), 10);
+    }
+    case type === "global-spacing": {
+      /* We have to convert rem -> px value */
+      return parseFloat(value.replace("rem", "")) * 16;
+    }
+    default:
+      return value;
+  }
 }

@@ -3896,6 +3896,7 @@ __metadata:
     lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
+    tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.19.1"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.2.2"

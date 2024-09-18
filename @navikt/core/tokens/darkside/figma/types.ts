@@ -1,11 +1,12 @@
 import { StyleDictionaryToken, TokenTypes } from "../util";
 
-export type FigmaToken = StyleDictionaryToken<TokenTypes> & {
+export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   name: string;
   alias: string;
   code: {
     web: string;
   };
+  value: string | number | { r: number; g: number; b: number; a: number };
 };
 
 type FigmaConfigEntry = {
