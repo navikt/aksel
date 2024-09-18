@@ -4,4 +4,48 @@
 
 #root {
   width: 100%;
+  font-family: "Source Sans Pro";
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-Regular.otf");
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-Bold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-Light.otf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-ExtraLight.otf");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-It.otf");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-BoldIt.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-LightIt.otf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./assets/SourceSansPro-ExtraLightIt.otf");
+  font-weight: 200;
+  font-style: italic;
 }
