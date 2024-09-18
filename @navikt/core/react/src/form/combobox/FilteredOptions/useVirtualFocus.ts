@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export type VirtualFocusType = {
   activeElement: HTMLElement | undefined;
@@ -42,14 +42,6 @@ const useVirtualFocus = (
       : false;
   };
 
-  const _moveFocusAndScrollTo = (
-    _element?: HTMLElement,
-    verticalAlignment: "start" | "center" | "end" | "nearest" = "nearest",
-  ) => {
-    setActiveElement(_element);
-    _element?.scrollIntoView?.({ block: verticalAlignment });
-  };
-
   const moveFocusUp = () => {
     if (!activeElement) {
       return;
@@ -60,14 +52,14 @@ const useVirtualFocus = (
     if (_currentIndex === 0) {
       setActiveElement(undefined);
     } else {
-      _moveFocusAndScrollTo(elementAbove);
+      setActiveElement(elementAbove);
     }
   };
 
   const moveFocusDown = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     if (!activeElement) {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0]);
+      setActiveElement(elementsAbleToReceiveFocus[0]);
       return;
     }
     const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
@@ -75,13 +67,13 @@ const useVirtualFocus = (
       return;
     }
 
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1]);
+    setActiveElement(elementsAbleToReceiveFocus[_currentIndex + 1]);
   };
 
-  const moveFocusToTop = () => _moveFocusAndScrollTo(undefined);
+  const moveFocusToTop = () => setActiveElement(undefined);
   const moveFocusToBottom = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
-    return _moveFocusAndScrollTo(
+    setActiveElement(
       elementsAbleToReceiveFocus[elementsAbleToReceiveFocus.length - 1],
     );
   };
@@ -101,7 +93,7 @@ const useVirtualFocus = (
     }
     const currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
     const newIndex = Math.max(currentIndex - numberOfElements, 0);
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "nearest");
+    setActiveElement(elementsAbleToReceiveFocus[newIndex]);
   };
 
   const moveFocusDownBy = (numberOfElements: number) => {
@@ -113,8 +105,12 @@ const useVirtualFocus = (
       currentIndex + numberOfElements,
       elementsAbleToReceiveFocus.length - 1,
     );
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[newIndex], "nearest");
+    setActiveElement(elementsAbleToReceiveFocus[newIndex]);
   };
+
+  useLayoutEffect(() => {
+    activeElement?.scrollIntoView?.({ block: "nearest" });
+  }, [activeElement]);
 
   return {
     activeElement,
