@@ -7,8 +7,8 @@ import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
 import { spacingTokenConfig } from "../tokens/spacing";
 
-const ConfigKeysWithGroup = ["value", "type", "group"];
-const ConfigKeys = ["value", "type"];
+const configKeysWithGroup = ["value", "type", "group"];
+const configKeys = ["value", "type"];
 
 describe("Validate token configurations", () => {
   test(`Semantic tokens`, () => {
