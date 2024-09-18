@@ -19,7 +19,7 @@ export const Ikon = ({
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={twMerge(`opacity-40`, colorFill)}
+          className={twMerge(`opacity-20`, colorFill)}
         >
           <rect x="16" y="36" width="64" height="24"></rect>
           <rect

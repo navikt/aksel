@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
 import * as tokens from "@navikt/ds-tokens/dist/tokens";
 import ArrowDownRightIcon from "../assets/ArrowDownRightIcon";
-import SykepengerIkon from "../assets/SykepengerIkon";
+import SykepengerIcon from "../assets/SykepengerIcon";
 import { Page } from "../components/Page";
 
 const Detail = styled.span`
@@ -48,7 +48,7 @@ const InfoSummary = styled.span`
 const FancyHeader = () => {
   return (
     <div className={clsx("mt-16 relative")}>
-      <SykepengerIkon
+      <SykepengerIcon
         className="-translate-x-32 translate-y-1"
         colorStroke="stroke-[#99185e]"
         colorFill="fill-[#99185e]"
