@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs18-debian12 as runtime
+FROM gcr.io/distroless/nodejs22-debian12 as runtime
 
 ENV NODE_ENV production
 
