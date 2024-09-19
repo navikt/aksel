@@ -3121,10 +3121,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/plugin-typings@npm:^1.84.0":
-  version: 1.97.0
-  resolution: "@figma/plugin-typings@npm:1.97.0"
-  checksum: 10/de2a1bbc92b5f507f78c51c5b43abfc28c8957a9b36b317b6a1073fc2ba40137b8df0a2a9a47b70ee47765f3afddfca53150cf07a84434c412fc5703e81ed845
+"@figma/plugin-typings@npm:^1.100.2":
+  version: 1.100.2
+  resolution: "@figma/plugin-typings@npm:1.100.2"
+  checksum: 10/cc04afed7355b8e1ab71bfab41105034cc80498b5156f3e86ea6b7e66b2882477e200fc2b84a6aad23c86d984d8906b0e1689467303da9bae09aeed4d256db00
   languageName: node
   linkType: hard
 
@@ -3892,6 +3892,8 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@adobe/leonardo-contrast-colors": "npm:^1.0.0"
+    "@figma/plugin-typings": "npm:^1.100.2"
+    "@types/tinycolor2": "npm:^1.4.6"
     color: "npm:4.2.3"
     lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
@@ -6982,6 +6984,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tinycolor2@npm:^1.4.6":
+  version: 1.4.6
+  resolution: "@types/tinycolor2@npm:1.4.6"
+  checksum: 10/a662fd177135d27779b7ccba39881a85167f969787c71c7bf51903d288a519ad5b9526e0a4af7bde6444df6b7abe88bae893d569c6d804108c03dfec9509bdf6
+  languageName: node
+  linkType: hard
+
 "@types/unist@npm:*, @types/unist@npm:^3.0.0":
   version: 3.0.2
   resolution: "@types/unist@npm:3.0.2"
@@ -8019,7 +8028,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
   dependencies:
-    "@figma/plugin-typings": "npm:^1.84.0"
+    "@figma/plugin-typings": "npm:^1.100.2"
     "@navikt/ds-css": "npm:*"
     "@navikt/ds-react": "npm:*"
     "@svgr/core": "npm:^8.1.0"

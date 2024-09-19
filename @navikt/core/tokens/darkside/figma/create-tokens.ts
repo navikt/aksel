@@ -45,7 +45,7 @@ export const getTokensListForCollection = async (
 
   /**
    * By adding aliases to the tokens, we can use the name as a lookup to
-   * reference the original tokem in Figma with a 'VariableAlias'.
+   * reference the original token in Figma with a 'VariableAlias'.
    * @see https://www.figma.com/plugin-docs/api/VariableAlias/
    */
   SD.registerFormat({
@@ -125,6 +125,22 @@ function remToPxValue(value: string) {
 }
 
 /**
+ * TODO:
+ * - use this function to create a Figma config
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function extractFigmaDataType(token: FigmaToken): VariableResolvedDataType {
+  if (token.type?.includes("color")) {
+    return "COLOR";
+  }
+  if (token.type?.includes("radius") || token.type?.includes("spacing")) {
+    return "FLOAT";
+  }
+
+  return "STRING";
+}
+
+/**
  * Allows us to extract the token name from the token object and create the correct grouping for Figma.
  */
 function extractTokenName(token: TransformedToken) {
@@ -136,6 +152,7 @@ function extractTokenName(token: TransformedToken) {
   /**
    * TODO:
    * - Find a better way to handle "custom" renames for some tokens
+   * Might just add a "prefix" or "name"-key to the token config itself
    */
   if (token.name.startsWith("a-border-radius")) {
     name = name.replace("Border", "").trim();
@@ -146,7 +163,7 @@ function extractTokenName(token: TransformedToken) {
    */
   if (token.group) {
     let grouping = "";
-    token.group.split(".").forEach((group) => {
+    token.group.split(".").forEach((group: string) => {
       grouping += lodash.startCase(group) + "/".trim();
     });
     return grouping + name;
