@@ -17,7 +17,7 @@ const Detail = styled.span`
 
 const Header1 = styled.h1`
   position: relative;
-  color: #99185e;
+  color: ${tokens.BrandOne900};
   font-size: 48px;
   font-weight: 400;
   margin-bottom: 1rem;
@@ -25,7 +25,7 @@ const Header1 = styled.h1`
 
 const Header2 = styled.h1`
   position: relative;
-  color: #99185e;
+  color: ${tokens.BrandOne900};
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -40,6 +40,14 @@ const Header2 = styled.h1`
     top: calc(var(--a-spacing-4) * -1);
     width: 40px;
   }
+`;
+
+const Header4 = styled.h4`
+  position: relative;
+  color: ${tokens.TextDefault};
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 `;
 
 const InfoSummary = styled.span`
@@ -64,19 +72,30 @@ const FancyHeader = () => {
   );
 };
 
-const Link = styled.a<{ inverted?: boolean }>`
-  color: ${tokens.Accent500};
-  text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
-  &:hover {
-    text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
-  }
-`;
+const Link = ({
+  href = "#",
+  ...rest
+}: {
+  children: ReactNode;
+  inverted?: boolean;
+  href?: string;
+  className?: string;
+}) => {
+  const _Link = styled.a<{ inverted?: boolean }>`
+    color: ${tokens.Accent600};
+    text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
+    &:hover {
+      text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
+    }
+  `;
+
+  return <_Link href={href} {...rest} />;
+};
 
 const ArrowLink = ({ children }: { children: ReactNode }) => {
   return (
     <Link
-      className="flex flex-row items-center text-xl no-underline hover:underline"
-      href="#"
+      className="flex flex-row gap-2 items-center text-xl no-underline hover:underline"
       inverted
     >
       <ArrowDownRightIcon
@@ -85,6 +104,42 @@ const ArrowLink = ({ children }: { children: ReactNode }) => {
       />
       {children}
     </Link>
+  );
+};
+
+const PillLink = ({ children }: { children: ReactNode }) => {
+  const _anchor = styled.a`
+    border: 1px solid #b0b0b0;
+    box-shadow:
+      0 1px 3px #26262633,
+      0 1px 6px #00000024,
+      0 2px 8px #2626261f;
+    &:hover {
+      box-shadow:
+        rgba(21, 60, 103, 0.316) 0px 0.855009px 2.56503px 0.434974px,
+        rgba(0, 0, 0, 0.12) 0px 0.855009px 5.13005px 0px,
+        rgba(38, 38, 38, 0.104) 0px 1.71002px 6.84007px 0px;
+      box-shadow: 0 0 0 3px ${tokens.Accent800};
+    }
+    &::before {
+      background-color: ${tokens.BrandOne900};
+    }
+  `;
+
+  return (
+    <_anchor
+      href="#"
+      className={clsx(
+        "mb-9 inline-flex items-center gap-1",
+        "no-underline rounded-full",
+        "px-2 py-0.5",
+        "before:content before:relative before:inline-block before:rounded-full before:mx-1 before:w-2 before:h-2",
+        "hover:bg-blue-100",
+        "transition-all",
+      )}
+    >
+      {children}
+    </_anchor>
   );
 };
 
@@ -138,72 +193,84 @@ const LinkList = ({ borderTop = false }: { borderTop?: boolean }) => {
 };
 
 const PlainList = ({ children }: { children: ReactNode }) => {
+  const _list = styled.ul`
+    & li::marker {
+      color: ${tokens.BrandOne900};
+    }
+  `;
+
   return (
-    <ul className="text-xl list-disc list-outside flex flex-col gap-3 ml-8 marker:text-[#99185e] mb-9">
+    <_list className="text-xl list-disc list-outside flex flex-col gap-3 ml-8 mb-9">
       {children}
-    </ul>
+    </_list>
   );
 };
 
 const Accordion = () => {
   return (
     <details className="group/details text-xl">
-      <summary className="flex gap-2 items-center group/summary hover:bg-blue-100 p-3 rounded border-opacity-0 border-x-black border">
+      <summary
+        className={clsx(
+          "group/summary",
+          "flex gap-2 items-center",
+          "hover:bg-blue-100 p-3 rounded",
+          "border-opacity-0 border-x-black border",
+          "group-open/details:border-b-0 group-open/details:mb-4",
+        )}
+      >
         <div className="bg-blue-100 group-hover/summary:bg-[#0056b4] w-5 h-5 rounded-lg">
           <ChevronDownIcon
             className={clsx([
-              "w-5 h-5",
               "group-open/details:-rotate-180",
-              "stroke-[#0056b4] fill-[#0056b4]",
               "group-hover/summary:fill-white group-hover/summary:stroke-white",
+              "transition-transform",
+              "w-5 h-5",
+              "stroke-[#0056b4] fill-[#0056b4]",
             ])}
           />
         </div>
         <span className="text-[#0056b4]">Arbeidstaker</span>
       </summary>
-      <div>
-        <p>
+      <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] pl-5 pt-3">
+        <PlainText>
           For å ha rett til sykepenger fra NAV må du ha jobbet minst fire uker
           rett før du ble sykmeldt. Du må også ha en årsinntekt som tilsvarer
           femti prosent av grunnbeløpet i folketrygden, det vil si 62&nbsp;014
           kroner. For å beregne årsinntekten din bruker NAV gjennomsnittet av de
           tre siste månedene.
-        </p>{" "}
-        <p>Det samme gjelder hvis du kombinerer arbeid med uføretrygd.</p>{" "}
-        <h4>Hvis du er kronisk syk eller gravid</h4>{" "}
-        <p>
+        </PlainText>{" "}
+        <PlainText>
+          Det samme gjelder hvis du kombinerer arbeid med uføretrygd.
+        </PlainText>{" "}
+        <Header4>Hvis du er kronisk syk eller gravid</Header4>{" "}
+        <PlainText>
           Har du en&nbsp;langvarig eller kronisk sykdom&nbsp;som kan føre til
           hyppige sykefravær?&nbsp;Eller er du sykmeldt på grunn av årsaker som
           henger sammen med graviditeten?
-        </p>{" "}
-        <p>
+        </PlainText>{" "}
+        <PlainText>
           Vanligvis utbetaler arbeidsgiveren din sykepengene for de første 16
           dagene du er syk. Dette kalles arbeidsgiverperioden.
-        </p>{" "}
-        <p>
+        </PlainText>{" "}
+        <PlainText>
           Hvis du har hyppige og/eller uforutsigbare sykefravær, kan du eller
           arbeidsgiveren din søke om at NAV dekker sykepengene arbeidsgiveren
           har utbetalt i arbeidsgiverperioden.
-        </p>{" "}
-        <div>
-          <Link href="#">
-            <div>Dekking av sykepenger i arbeidsgiverperioden</div>
-          </Link>
-        </div>{" "}
-        <h4>Hvis du er arbeidstaker på skip</h4>{" "}
-        <p>
+        </PlainText>{" "}
+        <PillLink>Dekking av sykepenger i arbeidsgiverperioden</PillLink>
+        <Header4>Hvis du er arbeidstaker på skip</Header4>{" "}
+        <PlainText>
           Sykepenger for arbeidstakere på skip beregnes i hovedsak på samme måte
           som for arbeidstakere, men det er i tillegg noen særskilte regler for
           deg som jobber på skip&nbsp;i utenriksfart som er registrert i Norsk
           internasjonalt skipsregister (NIS).
-        </p>{" "}
-        <ul>
-          {" "}
+        </PlainText>{" "}
+        <PlainList>
           <li>
             Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
             beskjed om at du er syk, derfor må du gi beskjed til arbeidsgiveren
             din så snart som mulig.&nbsp;Du&nbsp;leverer enten&nbsp;
-            <Link href="#">egenmelding</Link>
+            <Link>egenmelding</Link>
             &nbsp;eller sykmelding. Hvis du er syk ut over egenmeldingsdagene,
             må du kontakte lege.
           </li>{" "}
@@ -226,14 +293,16 @@ const Accordion = () => {
             restaurantvirksomhet, er du ikke medlem i folketrygden, og har
             dermed ikke rett til sykepenger.
           </li>{" "}
-        </ul>{" "}
-        <h4>Tilkallingsvikar</h4>{" "}
-        <p>
+        </PlainList>{" "}
+        <Header4>Tilkallingsvikar</Header4>{" "}
+        <PlainText>
           Du kan ha rett til sykepenger, men det avhenger blant annet på hvor
           mye og ofte du har jobbet før du ble sykmeldt.
-        </p>{" "}
-        <p>Hvis du er tilkallingsvikar, er det viktig å avgjøre om</p>{" "}
-        <ul>
+        </PlainText>{" "}
+        <PlainText>
+          Hvis du er tilkallingsvikar, er det viktig å avgjøre om
+        </PlainText>{" "}
+        <PlainList>
           {" "}
           <li>
             du oppfyller kravet til opptjeningstid hvis du bare har jobbet noen
@@ -243,40 +312,36 @@ const Accordion = () => {
             du kan sies å tape pensjonsgivende inntekt hvis du ikke har avtalt
             noen vakter med arbeidsgiveren din framover.
           </li>{" "}
-        </ul>{" "}
-        <h4>Hvis du er mellom 67 og 70 år</h4>{" "}
-        <p>
+        </PlainList>{" "}
+        <Header4>Hvis du er mellom 67 og 70 år</Header4>{" "}
+        <PlainText>
           Du kan få sykepenger fra NAV i opptil 60 dager hvis gjennomsnittet av
           inntekten din de siste 3 månedene før du ble syk omgjort til
           årsinntekt overstiger 248&nbsp;056 kroner (2 ganger grunnbeløpet i
           folketrygden). Dette gjelder hvis du er mellom 67 og 70 år, uavhengig
           av om du har tatt ut alderspensjon.
-        </p>{" "}
-        <p>
+        </PlainText>{" "}
+        <PlainText>
           60-dagersregelen gjelder fra og med dagen etter du fylte 67 år og til
           og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt 70 år, har du
           ikke rett til sykepenger.
-        </p>{" "}
-        <h4>Friskmelding til arbeidsformidling</h4>{" "}
-        <p>
+        </PlainText>{" "}
+        <Header4>Friskmelding til arbeidsformidling</Header4>{" "}
+        <PlainText>
           Hvis alle muligheter for å komme tilbake til arbeidsplassen din er
-          forsøkt, kan du få <Link href="#">sykepenger i inntil 12 uker</Link>{" "}
-          mens du søker ny jobb.
-        </p>{" "}
-        <div>
-          <Link href="#">
-            <div>Friskmelding til arbeidsformidling</div>
-          </Link>
-        </div>{" "}
+          forsøkt, kan du få <Link>sykepenger i inntil 12 uker</Link> mens du
+          søker ny jobb.
+        </PlainText>{" "}
+        <PillLink>Friskmelding til arbeidsformidling</PillLink>
         <h4>Dette gjør du når du blir syk</h4>{" "}
-        <p>
+        <PlainText>
           Du kan få sykepenger fra den dagen arbeidsgiveren din har fått beskjed
           om at du er syk, derfor må du gi beskjed til arbeidsgiveren din så
           snart som mulig. Du leverer enten egenmelding eller sykmelding.
-        </p>{" "}
-        <p>
+        </PlainText>{" "}
+        <PlainText>
           Hvis du er syk lenger enn egenmeldingsdagene, må du kontakte lege.
-        </p>{" "}
+        </PlainText>{" "}
       </div>
     </details>
   );
@@ -289,8 +354,8 @@ const Component = () => {
         <FancyHeader />
         <PlainText className="my-6 text-lg">
           Det finnes også informasjon om sykepenger til{" "}
-          <Link href="#">arbeidsgivere</Link> og{" "}
-          <Link href="#">leger og tannleger eller andre behandlere</Link>.
+          <Link>arbeidsgivere</Link> og{" "}
+          <Link>leger og tannleger eller andre behandlere</Link>.
         </PlainText>
         <LinkList borderTop />
         <Header2>Hvem kan få?</Header2>
