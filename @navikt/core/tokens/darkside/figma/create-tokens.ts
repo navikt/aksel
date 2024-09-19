@@ -107,15 +107,21 @@ function prepareValueForFigma(value: string, type: TokenTypes) {
       };
     }
     case type === "global-radius": {
-      return parseInt(value.replace("px", ""), 10);
+      return remToPxValue(value);
     }
     case type === "global-spacing": {
-      /* We have to convert rem -> px value */
-      return parseFloat(value.replace("rem", "")) * 16;
+      return remToPxValue(value);
     }
     default:
       return value;
   }
+}
+
+/**
+ * Figma does not support relative units, so we need to convert rem to px.
+ */
+function remToPxValue(value: string) {
+  return parseFloat(value.replace("rem", "")) * 16;
 }
 
 /**
