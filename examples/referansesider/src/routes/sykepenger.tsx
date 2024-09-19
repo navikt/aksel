@@ -9,7 +9,7 @@ import SykepengerIcon from "../assets/SykepengerIcon";
 import { Page } from "../components/Page";
 
 const Detail = styled.span`
-  color: ${tokens.Accent400};
+  color: ${tokens.TextSubtle};
   font-size: 20px;
   font-weight: 300;
   font-variant-caps: all-small-caps;
@@ -82,7 +82,7 @@ const Link = ({
   className?: string;
 }) => {
   const _Link = styled.a<{ inverted?: boolean }>`
-    color: ${tokens.Accent600};
+    color: ${tokens.Accent900};
     text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
     &:hover {
       text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
@@ -92,11 +92,18 @@ const Link = ({
   return <_Link href={href} {...rest} />;
 };
 
-const ArrowLink = ({ children }: { children: ReactNode }) => {
+const ArrowLink = ({
+  children,
+  ...rest
+}: {
+  children: ReactNode;
+  href?: string;
+}) => {
   return (
     <Link
       className="flex flex-row gap-2 items-center text-xl no-underline hover:underline"
       inverted
+      {...rest}
     >
       <ArrowDownRightIcon
         colorStroke="stroke-[#0056b4]"
@@ -131,7 +138,7 @@ const PillLink = ({ children }: { children: ReactNode }) => {
       href="#"
       className={clsx(
         "mb-9 inline-flex items-center gap-1",
-        "no-underline rounded-full",
+        "no-underline rounded-full text-[16px]",
         "px-2 py-0.5",
         "before:content before:relative before:inline-block before:rounded-full before:mx-1 before:w-2 before:h-2",
         "hover:bg-blue-100",
@@ -168,22 +175,22 @@ const LinkList = ({ borderTop = false }: { borderTop?: boolean }) => {
         aria-labelledby="heading-page-navigation-menu"
       >
         <li>
-          <ArrowLink>
+          <ArrowLink href="#hvem">
             <span>Hvem kan få?</span>
           </ArrowLink>
         </li>
         <li>
-          <ArrowLink>
+          <ArrowLink href="#hva">
             <span>Hva kan du få?</span>
           </ArrowLink>
         </li>
         <li>
-          <ArrowLink>
+          <ArrowLink href="#sok">
             <span>Søke, ettersende eller klage</span>
           </ArrowLink>
         </li>
         <li>
-          <ArrowLink>
+          <ArrowLink href="#har">
             <span>Når du har sykepenger</span>
           </ArrowLink>
         </li>
@@ -206,16 +213,25 @@ const PlainList = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const Accordion = () => {
+const AccordionItem = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) => {
   return (
     <details className="group/details text-xl">
       <summary
         className={clsx(
           "group/summary",
           "flex gap-2 items-center",
-          "hover:bg-blue-100 p-3 rounded",
-          "border-opacity-0 border-x-black border",
           "group-open/details:border-b-0 group-open/details:mb-4",
+          "hover:bg-blue-100 p-3 rounded",
+          "sticky top-0 z-10",
+          "focus:z-20",
+          "bg-white",
+          "border-opacity-0 border-x-black border",
         )}
       >
         <div className="bg-blue-100 group-hover/summary:bg-[#0056b4] w-5 h-5 rounded-lg">
@@ -229,122 +245,17 @@ const Accordion = () => {
             ])}
           />
         </div>
-        <span className="text-[#0056b4]">Arbeidstaker</span>
+        <span className="text-[#0056b4]">{title}</span>
       </summary>
-      <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] pl-5 pt-3">
-        <PlainText>
-          For å ha rett til sykepenger fra NAV må du ha jobbet minst fire uker
-          rett før du ble sykmeldt. Du må også ha en årsinntekt som tilsvarer
-          femti prosent av grunnbeløpet i folketrygden, det vil si 62&nbsp;014
-          kroner. For å beregne årsinntekten din bruker NAV gjennomsnittet av de
-          tre siste månedene.
-        </PlainText>{" "}
-        <PlainText>
-          Det samme gjelder hvis du kombinerer arbeid med uføretrygd.
-        </PlainText>{" "}
-        <Header4>Hvis du er kronisk syk eller gravid</Header4>{" "}
-        <PlainText>
-          Har du en&nbsp;langvarig eller kronisk sykdom&nbsp;som kan føre til
-          hyppige sykefravær?&nbsp;Eller er du sykmeldt på grunn av årsaker som
-          henger sammen med graviditeten?
-        </PlainText>{" "}
-        <PlainText>
-          Vanligvis utbetaler arbeidsgiveren din sykepengene for de første 16
-          dagene du er syk. Dette kalles arbeidsgiverperioden.
-        </PlainText>{" "}
-        <PlainText>
-          Hvis du har hyppige og/eller uforutsigbare sykefravær, kan du eller
-          arbeidsgiveren din søke om at NAV dekker sykepengene arbeidsgiveren
-          har utbetalt i arbeidsgiverperioden.
-        </PlainText>{" "}
-        <PillLink>Dekking av sykepenger i arbeidsgiverperioden</PillLink>
-        <Header4>Hvis du er arbeidstaker på skip</Header4>{" "}
-        <PlainText>
-          Sykepenger for arbeidstakere på skip beregnes i hovedsak på samme måte
-          som for arbeidstakere, men det er i tillegg noen særskilte regler for
-          deg som jobber på skip&nbsp;i utenriksfart som er registrert i Norsk
-          internasjonalt skipsregister (NIS).
-        </PlainText>{" "}
-        <PlainList>
-          <li>
-            Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
-            beskjed om at du er syk, derfor må du gi beskjed til arbeidsgiveren
-            din så snart som mulig.&nbsp;Du&nbsp;leverer enten&nbsp;
-            <Link>egenmelding</Link>
-            &nbsp;eller sykmelding. Hvis du er syk ut over egenmeldingsdagene,
-            må du kontakte lege.
-          </li>{" "}
-          <li>
-            Du kan få sykepenger hvis du er&nbsp;arbeidsufør
-            som&nbsp;arbeidstaker&nbsp;på skip, selv om du er frisk nok til å
-            jobbe i et annet yrke.
-          </li>{" "}
-          <li>
-            Du har rett til sykepenger selv om du har vært i arbeid i mindre enn
-            fire uker.
-          </li>{" "}
-          <li>
-            Det har betydning for sykepengene hvilket&nbsp;flagg skipet seiler
-            under når du blir sykmeldt.&nbsp;Les mer om sykepenger innenfor og
-            utenfor EU/EØS-området.
-          </li>{" "}
-          <li>
-            Hvis du er ansatt på turistskip innen hotell- og
-            restaurantvirksomhet, er du ikke medlem i folketrygden, og har
-            dermed ikke rett til sykepenger.
-          </li>{" "}
-        </PlainList>{" "}
-        <Header4>Tilkallingsvikar</Header4>{" "}
-        <PlainText>
-          Du kan ha rett til sykepenger, men det avhenger blant annet på hvor
-          mye og ofte du har jobbet før du ble sykmeldt.
-        </PlainText>{" "}
-        <PlainText>
-          Hvis du er tilkallingsvikar, er det viktig å avgjøre om
-        </PlainText>{" "}
-        <PlainList>
-          {" "}
-          <li>
-            du oppfyller kravet til opptjeningstid hvis du bare har jobbet noen
-            vakter av og på i en periode.
-          </li>{" "}
-          <li>
-            du kan sies å tape pensjonsgivende inntekt hvis du ikke har avtalt
-            noen vakter med arbeidsgiveren din framover.
-          </li>{" "}
-        </PlainList>{" "}
-        <Header4>Hvis du er mellom 67 og 70 år</Header4>{" "}
-        <PlainText>
-          Du kan få sykepenger fra NAV i opptil 60 dager hvis gjennomsnittet av
-          inntekten din de siste 3 månedene før du ble syk omgjort til
-          årsinntekt overstiger 248&nbsp;056 kroner (2 ganger grunnbeløpet i
-          folketrygden). Dette gjelder hvis du er mellom 67 og 70 år, uavhengig
-          av om du har tatt ut alderspensjon.
-        </PlainText>{" "}
-        <PlainText>
-          60-dagersregelen gjelder fra og med dagen etter du fylte 67 år og til
-          og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt 70 år, har du
-          ikke rett til sykepenger.
-        </PlainText>{" "}
-        <Header4>Friskmelding til arbeidsformidling</Header4>{" "}
-        <PlainText>
-          Hvis alle muligheter for å komme tilbake til arbeidsplassen din er
-          forsøkt, kan du få <Link>sykepenger i inntil 12 uker</Link> mens du
-          søker ny jobb.
-        </PlainText>{" "}
-        <PillLink>Friskmelding til arbeidsformidling</PillLink>
-        <h4>Dette gjør du når du blir syk</h4>{" "}
-        <PlainText>
-          Du kan få sykepenger fra den dagen arbeidsgiveren din har fått beskjed
-          om at du er syk, derfor må du gi beskjed til arbeidsgiveren din så
-          snart som mulig. Du leverer enten egenmelding eller sykmelding.
-        </PlainText>{" "}
-        <PlainText>
-          Hvis du er syk lenger enn egenmeldingsdagene, må du kontakte lege.
-        </PlainText>{" "}
+      <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] mr-12 pl-5 pt-3">
+        {children}
       </div>
     </details>
   );
+};
+
+const Accordion = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
 };
 
 const Component = () => {
@@ -358,7 +269,7 @@ const Component = () => {
           <Link>leger og tannleger eller andre behandlere</Link>.
         </PlainText>
         <LinkList borderTop />
-        <Header2>Hvem kan få?</Header2>
+        <Header2 id="hvem">Hvem kan få?</Header2>
         <PlainText>
           Du kan ha rett til sykepenger hvis du oppfyller disse generelle
           vilkårene:
@@ -393,7 +304,170 @@ const Component = () => {
           frilansere.
         </PlainText>
         <PlainText>Se hvilke regler som gjelder for deg:</PlainText>
-        <Accordion />
+        <Accordion>
+          <AccordionItem title="Arbeidstaker">
+            <PlainText>
+              For å ha rett til sykepenger fra NAV må du ha jobbet minst fire
+              uker rett før du ble sykmeldt. Du må også ha en årsinntekt som
+              tilsvarer femti prosent av grunnbeløpet i folketrygden, det vil si
+              62&nbsp;014 kroner. For å beregne årsinntekten din bruker NAV
+              gjennomsnittet av de tre siste månedene.
+            </PlainText>{" "}
+            <PlainText>
+              Det samme gjelder hvis du kombinerer arbeid med uføretrygd.
+            </PlainText>{" "}
+            <Header4>Hvis du er kronisk syk eller gravid</Header4>{" "}
+            <PlainText>
+              Har du en&nbsp;langvarig eller kronisk sykdom&nbsp;som kan føre
+              til hyppige sykefravær?&nbsp;Eller er du sykmeldt på grunn av
+              årsaker som henger sammen med graviditeten?
+            </PlainText>{" "}
+            <PlainText>
+              Vanligvis utbetaler arbeidsgiveren din sykepengene for de første
+              16 dagene du er syk. Dette kalles arbeidsgiverperioden.
+            </PlainText>{" "}
+            <PlainText>
+              Hvis du har hyppige og/eller uforutsigbare sykefravær, kan du
+              eller arbeidsgiveren din søke om at NAV dekker sykepengene
+              arbeidsgiveren har utbetalt i arbeidsgiverperioden.
+            </PlainText>{" "}
+            <PillLink>Dekking av sykepenger i arbeidsgiverperioden</PillLink>
+            <Header4>Hvis du er arbeidstaker på skip</Header4>{" "}
+            <PlainText>
+              Sykepenger for arbeidstakere på skip beregnes i hovedsak på samme
+              måte som for arbeidstakere, men det er i tillegg noen særskilte
+              regler for deg som jobber på skip&nbsp;i utenriksfart som er
+              registrert i Norsk internasjonalt skipsregister (NIS).
+            </PlainText>{" "}
+            <PlainList>
+              <li>
+                Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
+                beskjed om at du er syk, derfor må du gi beskjed til
+                arbeidsgiveren din så snart som mulig.&nbsp;Du&nbsp;leverer
+                enten&nbsp;
+                <Link>egenmelding</Link>
+                &nbsp;eller sykmelding. Hvis du er syk ut over
+                egenmeldingsdagene, må du kontakte lege.
+              </li>{" "}
+              <li>
+                Du kan få sykepenger hvis du er&nbsp;arbeidsufør
+                som&nbsp;arbeidstaker&nbsp;på skip, selv om du er frisk nok til
+                å jobbe i et annet yrke.
+              </li>{" "}
+              <li>
+                Du har rett til sykepenger selv om du har vært i arbeid i mindre
+                enn fire uker.
+              </li>{" "}
+              <li>
+                Det har betydning for sykepengene hvilket&nbsp;flagg skipet
+                seiler under når du blir sykmeldt.&nbsp;Les mer om sykepenger
+                innenfor og utenfor EU/EØS-området.
+              </li>{" "}
+              <li>
+                Hvis du er ansatt på turistskip innen hotell- og
+                restaurantvirksomhet, er du ikke medlem i folketrygden, og har
+                dermed ikke rett til sykepenger.
+              </li>{" "}
+            </PlainList>{" "}
+            <Header4>Tilkallingsvikar</Header4>{" "}
+            <PlainText>
+              Du kan ha rett til sykepenger, men det avhenger blant annet på
+              hvor mye og ofte du har jobbet før du ble sykmeldt.
+            </PlainText>{" "}
+            <PlainText>
+              Hvis du er tilkallingsvikar, er det viktig å avgjøre om
+            </PlainText>{" "}
+            <PlainList>
+              {" "}
+              <li>
+                du oppfyller kravet til opptjeningstid hvis du bare har jobbet
+                noen vakter av og på i en periode.
+              </li>{" "}
+              <li>
+                du kan sies å tape pensjonsgivende inntekt hvis du ikke har
+                avtalt noen vakter med arbeidsgiveren din framover.
+              </li>{" "}
+            </PlainList>{" "}
+            <Header4>Hvis du er mellom 67 og 70 år</Header4>{" "}
+            <PlainText>
+              Du kan få sykepenger fra NAV i opptil 60 dager hvis gjennomsnittet
+              av inntekten din de siste 3 månedene før du ble syk omgjort til
+              årsinntekt overstiger 248&nbsp;056 kroner (2 ganger grunnbeløpet i
+              folketrygden). Dette gjelder hvis du er mellom 67 og 70 år,
+              uavhengig av om du har tatt ut alderspensjon.
+            </PlainText>{" "}
+            <PlainText>
+              60-dagersregelen gjelder fra og med dagen etter du fylte 67 år og
+              til og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt 70 år,
+              har du ikke rett til sykepenger.
+            </PlainText>{" "}
+            <Header4>Friskmelding til arbeidsformidling</Header4>{" "}
+            <PlainText>
+              Hvis alle muligheter for å komme tilbake til arbeidsplassen din er
+              forsøkt, kan du få <Link>sykepenger i inntil 12 uker</Link> mens
+              du søker ny jobb.
+            </PlainText>{" "}
+            <PillLink>Friskmelding til arbeidsformidling</PillLink>
+            <h4>Dette gjør du når du blir syk</h4>{" "}
+            <PlainText>
+              Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
+              beskjed om at du er syk, derfor må du gi beskjed til
+              arbeidsgiveren din så snart som mulig. Du leverer enten
+              egenmelding eller sykmelding.
+            </PlainText>{" "}
+            <PlainText>
+              Hvis du er syk lenger enn egenmeldingsdagene, må du kontakte lege.
+            </PlainText>{" "}
+          </AccordionItem>
+          <AccordionItem title="Fisker">
+            <div>
+              <PlainText>
+                Sykepenger til deg som fisker beregnes&nbsp; på samme måte som
+                for arbeidstakere og/eller selvstendig&nbsp; næringsdrivende,
+                men det er noen særskilte regler for deg som er fisker på blad B
+                i fiskermanntallet:
+              </PlainText>{" "}
+              <PlainList>
+                {" "}
+                <li>
+                  Du har rett til sykepenger selv om du har vært i arbeid i
+                  mindre enn fire uker.
+                </li>{" "}
+                <li>
+                  Du har rett til sykepenger med full lønn opp til 6G fra første
+                  sykefraværsdag.
+                </li>{" "}
+              </PlainList>{" "}
+              <Header4>
+                <strong>På lott eller hyre</strong>
+              </Header4>{" "}
+              <PlainText>
+                Hvis du mottar lott, regnes du som&nbsp;selvstendig
+                næringsdrivende.
+              </PlainText>{" "}
+              <PlainText>
+                Hvis du har hyre, regnes du som arbeidstaker.
+              </PlainText>{" "}
+              <h4>Hvis du er mellom 67 og 70 år</h4>{" "}
+              <PlainText>
+                Du kan få sykepenger fra NAV i opptil 60 dager hvis
+                gjennomsnittet av inntekten din de siste 3 månedene før du ble
+                syk omgjort til årsinntekt overstiger 248&nbsp;056 kroner (2
+                ganger grunnbeløpet i folketrygden). Dette gjelder hvis du er
+                mellom 67 og 70 år, uavhengig av om du har tatt ut
+                alderspensjon.
+              </PlainText>{" "}
+              <PlainText>
+                60-dagersregelen gjelder fra og med dagen etter du fylte 67 år
+                og til og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt
+                70 år, har du ikke rett til sykepenger.
+              </PlainText>{" "}
+            </div>
+          </AccordionItem>
+        </Accordion>
+        <Header2 id="hva">Hva kan du få?</Header2>
+        <Header2 id="sok">Søke, ettersende eller klage</Header2>
+        <Header2 id="har">Når du har sykepenger</Header2>
       </Page>
     </>
   );
