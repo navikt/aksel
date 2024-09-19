@@ -281,7 +281,7 @@ const MiniCard = ({
 }: {
   title: string;
   subtitle: string;
-  href: string;
+  href?: string;
 }) => {
   const _subtitle = styled.span`
     font-variant-caps: all-small-caps;
