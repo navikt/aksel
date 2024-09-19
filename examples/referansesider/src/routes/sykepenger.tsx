@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import ArrowDownRightIcon from "../assets/ArrowDownRightIcon";
+import ArrowRightIcon from "../assets/ArrowRightIcon";
 import ChevronDownIcon from "../assets/ChevronDownIcon";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Page } from "../components/Page";
@@ -29,7 +30,7 @@ const Header2 = styled.h1`
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 1rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
   &::before {
     background-color: #99185e;
     opacity: 0.4;
@@ -40,6 +41,14 @@ const Header2 = styled.h1`
     top: calc(var(--a-spacing-4) * -1);
     width: 40px;
   }
+`;
+
+const Header3 = styled.h3`
+  position: relative;
+  color: ${tokens.TextDefault};
+  font-size: 24px;
+  font-weight: 650;
+  margin-bottom: 1rem;
 `;
 
 const Header4 = styled.h4`
@@ -160,40 +169,29 @@ const PlainText = ({
   return <p className={twMerge("text-xl", className, `mb-9`)}>{children}</p>;
 };
 
-const LinkList = ({ borderTop = false }: { borderTop?: boolean }) => {
+const LinkList = ({
+  title,
+  children,
+  borderTop = false,
+}: {
+  title: string;
+  children: ReactNode;
+  borderTop?: boolean;
+}) => {
   return (
     <div
-      className={clsx("bg-[#fef5ef] px-5 py-4", {
+      className={clsx("bg-[#fef5ef] px-5 py-4 mb-4", {
         ["border-t-[#99185e] border-t-[5px]"]: borderTop,
       })}
     >
       <h2 className="mb-4 text-xl font-bold" id="heading-page-navigation-menu">
-        Innhold på siden
+        {title}
       </h2>
       <ul
         className="flex flex-col gap-3"
         aria-labelledby="heading-page-navigation-menu"
       >
-        <li>
-          <ArrowLink href="#hvem">
-            <span>Hvem kan få?</span>
-          </ArrowLink>
-        </li>
-        <li>
-          <ArrowLink href="#hva">
-            <span>Hva kan du få?</span>
-          </ArrowLink>
-        </li>
-        <li>
-          <ArrowLink href="#sok">
-            <span>Søke, ettersende eller klage</span>
-          </ArrowLink>
-        </li>
-        <li>
-          <ArrowLink href="#har">
-            <span>Når du har sykepenger</span>
-          </ArrowLink>
-        </li>
+        {children}
       </ul>
     </div>
   );
@@ -213,6 +211,24 @@ const PlainList = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const PlainOrderedList = ({ children }: { children: ReactNode }) => {
+  const _list = styled.ol`
+    & li::marker {
+      font-weight: 800;
+      color: ${tokens.BrandOne900};
+    }
+    & li {
+      padding-left: 4px;
+    }
+  `;
+
+  return (
+    <_list className="text-xl list-decimal list-outside flex flex-col gap-3 ml-8 mb-9">
+      {children}
+    </_list>
+  );
+};
+
 const AccordionItem = ({
   title,
   children,
@@ -227,7 +243,7 @@ const AccordionItem = ({
           "group/summary",
           "flex gap-2 items-center",
           "group-open/details:border-b-0 group-open/details:mb-4",
-          "hover:bg-blue-100 p-3 rounded",
+          "hover:bg-blue-100 hover:cursor-pointer p-3 rounded",
           "sticky top-0 z-10",
           "focus:z-20",
           "bg-white",
@@ -255,8 +271,100 @@ const AccordionItem = ({
 };
 
 const Accordion = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+  return <div>{children}</div>;
 };
+
+const MiniCard = ({
+  title,
+  subtitle,
+  href = "#",
+}: {
+  title: string;
+  subtitle: string;
+  href: string;
+}) => {
+  const _subtitle = styled.span`
+    font-variant-caps: all-small-caps;
+    font-size: 20px;
+    color: ${tokens.TextSubtle};
+  `;
+
+  const _title = styled.span`
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration-thickness: 3px;
+    color: ${tokens.Accent900};
+  `;
+
+  return (
+    <a
+      href={href}
+      className={clsx(
+        "group",
+        "flex items-center justify-between",
+        "px-5 py-3 border border-gray-300 shadow-sm rounded-lg",
+        "hover:bg-blue-50",
+      )}
+    >
+      <div className="flex flex-col leading-6">
+        <_title className="group-hover:underline">{title}</_title>
+        <_subtitle>{subtitle}</_subtitle>
+      </div>
+      <ArrowRightIcon colorFill="fill-gray-500" colorStroke="stroke-gray-500" />
+    </a>
+  );
+};
+
+const ExpandoPill = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) => {
+  return (
+    <details className="group/details text-xl mb-3">
+      <summary
+        className={clsx(
+          "inline-flex gap-2 items-center",
+          "group-open/details:border-b-0 group-open/details:mb-4",
+          "hover:bg-blue-200 hover:cursor-pointer py-2 pl-3 pr-5 rounded-full",
+          "sticky top-0 z-10",
+          "focus:z-20",
+          "bg-blue-100",
+          "border-opacity-0 border-x-black border",
+        )}
+      >
+        <ChevronDownIcon
+          className={clsx([
+            "group-open/details:-rotate-180",
+            "transition-transform",
+            "w-5 h-5",
+            "stroke-[#0056b4] fill-[#0056b4]",
+          ])}
+        />
+        <span className="text-[#0056b4]">{title}</span>
+      </summary>
+      <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] mr-12 pl-5 pt-3">
+        {children}
+      </div>
+    </details>
+  );
+};
+
+const Button = styled.button`
+  display: inline-block;
+  color: ${tokens.Accent900};
+  border: 2px solid ${tokens.Accent900};
+  font-size: 20px;
+  border-radius: 4px;
+  padding-inline: 1rem;
+  padding-block: 0.4rem;
+  width: fit-content;
+  &:hover {
+    background-color: ${tokens.Accent200};
+  }
+`;
 
 const Component = () => {
   return (
@@ -268,7 +376,28 @@ const Component = () => {
           <Link>arbeidsgivere</Link> og{" "}
           <Link>leger og tannleger eller andre behandlere</Link>.
         </PlainText>
-        <LinkList borderTop />
+        <LinkList title="Innhold på siden" borderTop>
+          <li>
+            <ArrowLink href="#hvem">
+              <span>Hvem kan få?</span>
+            </ArrowLink>
+          </li>
+          <li>
+            <ArrowLink href="#hva">
+              <span>Hva kan du få?</span>
+            </ArrowLink>
+          </li>
+          <li>
+            <ArrowLink href="#sok">
+              <span>Søke, ettersende eller klage</span>
+            </ArrowLink>
+          </li>
+          <li>
+            <ArrowLink href="#har">
+              <span>Når du har sykepenger</span>
+            </ArrowLink>
+          </li>
+        </LinkList>
         <Header2 id="hvem">Hvem kan få?</Header2>
         <PlainText>
           Du kan ha rett til sykepenger hvis du oppfyller disse generelle
@@ -465,9 +594,106 @@ const Component = () => {
             </div>
           </AccordionItem>
         </Accordion>
-        <Header2 id="hva">Hva kan du få?</Header2>
+        <div className="flex flex-col gap-6 mb-6">
+          <Header2 id="hva">Hva kan du få?</Header2>
+          <LinkList title="I dette kapittelet" borderTop>
+            <li>
+              <ArrowLink href="#hvem">
+                <span>Hvor mye kan du få?</span>
+              </ArrowLink>
+            </li>
+            <li>
+              <ArrowLink href="#hva">
+                <span>Hvor lenge kan du få?</span>
+              </ArrowLink>
+            </li>
+            <li>
+              <ArrowLink href="#sok">
+                <span>Reisetilskudd som alternativ til sykepenger</span>
+              </ArrowLink>
+            </li>
+            <li>
+              <ArrowLink href="#har">
+                <span>Andre tilbud</span>
+              </ArrowLink>
+            </li>
+          </LinkList>
+        </div>
+        <div className="mb-10">
+          <Header3>Reisetilskudd som alternativ til sykepenger</Header3>
+          <PlainText>
+            Klarer du å jobbe, men har problemer med å reise til og fra
+            arbeidsstedet? Da kan du ha rett til reisetilskudd i stedet for
+            sykepenger fra 17. dag etter at du ble sykmeldt.
+          </PlainText>
+          <MiniCard title="Reisetilskudd" subtitle="pengestøtte" />
+        </div>
+        <Header3>Andre tilbud</Header3>
+        <PlainText>Mer informasjon til deg som</PlainText>
+        <div className="flex flex-col gap-4">
+          <MiniCard
+            title="Har blitt sykmeldt"
+            subtitle="Dette kan du ha rett til"
+          />
+          <MiniCard
+            title="Har vært syk eller skadet lenge"
+            subtitle="Dette kan du ha rett til"
+          />
+          <MiniCard
+            title="Kan bare jobbe noe på grunn av langvarig sykdom eller skade"
+            subtitle="Dette kan du ha rett til"
+          />
+          <MiniCard
+            title="Har blitt skadet under arbeid, undervisning, rednings- eller militærtjeneste"
+            subtitle="Dette kan du ha rett til"
+          />
+        </div>
         <Header2 id="sok">Søke, ettersende eller klage</Header2>
+        <ExpandoPill title="Hvis du mangler BankId">
+          <PlainText>
+            Hvis du mangler BankID, ikke har legitimasjon på høyeste
+            sikkerhetsnivå eller har fortrolig adresse i Folkeregisteret, må du
+            bruke del D av papirsykmeldingen til å søke om sykepenger. Finn
+            riktig adresse.
+          </PlainText>
+          <PlainText>
+            Hvis du har en arbeidsgiver, må du levere del C av sykmeldingen til
+            arbeidsgiveren din. Del D – søknaden – leverer du til den som skal
+            utbetale sykepenger.
+          </PlainText>
+        </ExpandoPill>
         <Header2 id="har">Når du har sykepenger</Header2>
+        <Header4>Klage på vedtak</Header4>
+        <PlainText>
+          I vedtaket står det hvordan du går fram hvis du skal klage, hvem du
+          skal klage til og klagefrist. Hvis du har spørsmål om vedtaket, kan du
+          kontakte oss.
+        </PlainText>
+        <div className="flex gap-2 mb-10">
+          <Button>Send klage</Button>
+          <Button>Ettersend dokumentasjon</Button>
+        </div>
+        <Header3>Reise eller flytte til utlandet</Header3>
+        <PlainText>
+          Hvis du vurderer å reise mens du er sykmeldt, er det noen ting du må
+          sjekke på forhånd.
+        </PlainText>
+        <PlainOrderedList>
+          <li>
+            Du må sjekke med arbeidsgiveren din om reisen vil hindre planlagt
+            oppfølging og aktivitet på arbeidsplassen.{" "}
+          </li>
+          <li>
+            Du må delta aktivt for å komme tilbake i arbeid for å få sykepenger.
+            Du må forsikre deg om at reisen ikke vil hindre aktiviteter du har
+            avtalt med NAV. Hvis du er usikker, kan du skrive til oss fra
+            nav.no.
+          </li>
+          <li>
+            Du må sjekke med den som har sykmeldt deg om reisen vil forverre
+            helsetilstanden din, og om den vil hindre planlagt behandling.
+          </li>
+        </PlainOrderedList>
       </Page>
     </>
   );
