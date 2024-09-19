@@ -800,14 +800,14 @@ __metadata:
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=cc5e44&locator=referansesider%40workspace%3A."
-  checksum: 10/a9d5beb7ef8f19a334f94ea4fe89d1554afd2decacf3686298dc97b2890e498680aeb5a1c9830a2fee1f701c2636d0dcb038b14dd5a4d8bed4b81765987bd0bc
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=0aa76b&locator=referansesider%40workspace%3A."
+  checksum: 10/aec310371ed53f205f38156de035a2d6a692d5064b172fc56c91e347b79e9ea8a2e0bf19b109c95ddf0937e03c76a10842504b1d3232c9c7b3d82da0a5f30b84
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=d71693&locator=referansesider%40workspace%3A."
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=fbdbb3&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -822,14 +822,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/064e5613869549d4f250cde0285ae7d9c731eab2997fea2a959e74d5d5321437626bf43278454707168cfdc8450c78715f88824656e0525a36e2e01d88263e25
+  checksum: 10/03e1d10eed9badb86b9363df707fe63585dd06bc91f274a0aeffb1ec7a63d8369acd23c239c64c58bad53a3af331579062d1146049dbcb715f164f709309bc7e
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.0.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=a528f1&locator=referansesider%40workspace%3A."
-  checksum: 10/521556321cf8a5e7aefe022c827382b23c5c4b2aa3dff9a0a2d6b3c77904cebcdab29e8fa53643760410b277363b9dffd6c967012ef4cd331b93864f6b9a4758
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=4f66dd&locator=referansesider%40workspace%3A."
+  checksum: 10/9a705d087e0642ef479c8a11ce1239177615a6900730dee86ac6409973ade35cb05b69a3ef14925b53a7244708421fb660007780efcff74c670fe52e0bcad4f4
   languageName: node
   linkType: hard
 
@@ -3461,6 +3461,7 @@ __metadata:
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     autoprefixer: "npm:^10.4.20"
+    clsx: "npm:^2.1.1"
     eslint: "npm:^9.9.0"
     eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"
     eslint-plugin-react-refresh: "npm:^0.4.9"
@@ -3469,6 +3470,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     styled-components: "npm:^6.1.13"
+    tailwind-merge: "npm:^2.5.2"
     tailwindcss: "npm:^3.4.11"
     typescript: "npm:^5.5.3"
     typescript-eslint: "npm:^8.0.1"
@@ -3838,6 +3840,13 @@ __metadata:
   version: 6.2.0
   resolution: "tabbable@npm:6.2.0"
   checksum: 10/980fa73476026e99dcacfc0d6e000d41d42c8e670faf4682496d30c625495e412c4369694f2a15cf1e5252d22de3c396f2b62edbe8d60b5dadc40d09e3f2dde3
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "tailwind-merge@npm:2.5.2"
+  checksum: 10/9f51ae7277a0ba51d9bec774bc9013c1b8736129b52d97886098689ea51bc7a894f6c7e857217019d92925c935ca18a53f24b4b416be4be363ef16cfb2ce480d
   languageName: node
   linkType: hard
 
