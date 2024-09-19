@@ -52,7 +52,7 @@ export type StyleDictionaryToken<T extends TokenTypes> = {
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
-  [key: string]: StyleDictionaryToken<T> | StyleDictionaryTokenConfig<T>;
+  [key: string]: Record<string, StyleDictionaryToken<T>>;
 };
 
 export type GlobalColorVariable = Record<

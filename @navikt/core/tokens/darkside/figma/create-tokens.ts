@@ -8,7 +8,7 @@ import {
   lightModeTokens,
   scaleTokens,
 } from "../create-configuration";
-import { TokenTypes } from "../util";
+import { TokenTypes, tokenTypes } from "../util";
 import { FigmaToken } from "./types";
 
 const config = {
@@ -144,19 +144,13 @@ function extractFigmaDataType(token: FigmaToken): VariableResolvedDataType {
  * Allows us to extract the token name from the token object and create the correct grouping for Figma.
  */
 function extractTokenName(token: TransformedToken) {
-  /**
-   * Remove the "a-" prefix from the token name.
-   */
-  let name = lodash.startCase(token.name.slice(2));
-
-  /**
-   * TODO:
-   * - Find a better way to handle "custom" renames for some tokens
-   * Might just add a "prefix" or "name"-key to the token config itself
-   */
-  if (token.name.startsWith("a-border-radius")) {
-    name = name.replace("Border", "").trim();
+  if (!token.attributes?.item || typeof token.attributes.item !== "string") {
+    throw new Error(`No item attribute found on token: ${token.name}`);
   }
+  /**
+   * Because of the `StyleDictionaryTokenConfig` type, we can assume that attributes.item will always exists.
+   */
+  let name = lodash.startCase(token.attributes.item);
 
   /**
    * By adding "/", we can create subgroups in Figma.
@@ -166,7 +160,26 @@ function extractTokenName(token: TransformedToken) {
     token.group.split(".").forEach((group: string) => {
       grouping += lodash.startCase(group) + "/".trim();
     });
-    return grouping + name;
+
+    name = grouping + name;
   }
+
+  /**
+   * In the case we have a token "Text/Accent/Accent", we want to add a suffix to the name.
+   */
+  const nameKeys = new Set(name.split("/"));
+  if (nameKeys.size !== name.split("/").length) {
+    name += " Default";
+  }
+
+  /**
+   * For pure value tokens, we want to add a prefix to the name to make it more readable in Figma.
+   */
+  if (token.type === tokenTypes["global-radius"]) {
+    name = "Spacing " + name;
+  } else if (token.type === tokenTypes["global-spacing"]) {
+    name = "Spacing " + name;
+  }
+
   return name;
 }

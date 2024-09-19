@@ -17,7 +17,7 @@ const configForRole = (
     [`${role}-hover`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
-      group: `background.${role}`,
+      group: `${role}`,
     },
     /**
      * TODO: Consider a role-selected token
