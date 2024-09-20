@@ -196,7 +196,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           virtualFocus.moveFocusToTop();
         } else if (e.key === "End") {
           e.preventDefault();
-          toggleIsListOpen(true);
+          if (virtualFocus.activeElement === null || !isListOpen) {
+            toggleIsListOpen(true);
+          }
           virtualFocus.moveFocusToBottom();
         } else if (e.key === "PageUp") {
           e.preventDefault();
