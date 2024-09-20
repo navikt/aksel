@@ -60,4 +60,12 @@ export const deprecations: DeprecatedList = [
     classes: ["navds-textarea__wrapper"],
     message: "Removed in v6.0.0",
   },
+  {
+    classes: [
+      "navds-pagination__prev-next-icon",
+      "navds-pagination__next-text",
+      "navds-pagination__prev-text",
+    ],
+    message: "Removed in v7.1.0. These classes had not effect and were removed",
+  },
 ];
