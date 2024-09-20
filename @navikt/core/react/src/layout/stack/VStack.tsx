@@ -27,8 +27,10 @@ export type VStackProps = PrimitiveAsChildProps &
  * </VStack>
  */
 export const VStack: OverridableComponent<VStackProps, HTMLDivElement> =
-  forwardRef((props, ref) => {
-    return <Stack {...props} ref={ref} direction="column" wrap={false} />;
+  forwardRef(({ as = "div", ...rest }, ref) => {
+    return (
+      <Stack as={as} {...rest} ref={ref} direction="column" wrap={false} />
+    );
   });
 
 export default VStack;
