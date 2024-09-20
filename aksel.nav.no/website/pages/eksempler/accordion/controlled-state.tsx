@@ -4,11 +4,13 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   const [open, setOpen] = useState(false);
+
   return (
     <VStack gap="2" align="center">
       <Button variant="secondary" onClick={() => setOpen(!open)}>
         Toggle Accordion
       </Button>
+
       <Accordion>
         <Accordion.Item open={open}>
           <Accordion.Header>Til deg som er mellom 62 og 67 år</Accordion.Header>

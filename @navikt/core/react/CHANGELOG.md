@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.0.1
+
+### Patch Changes
+
+- Combobox: Fix issue with whitespace in the ID of options with multiple spaces ([#3162](https://github.com/navikt/aksel/pull/3162))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.0.1
+  - @navikt/aksel-icons@7.0.1
+
 ## 7.0.0
 
 ### Major Changes

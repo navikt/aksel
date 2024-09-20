@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.0.1
+
+### Patch Changes
+
+- List: :lipstick: make icons 24x24px large ([#3148](https://github.com/navikt/aksel/pull/3148))
+
 ## 7.0.0
 
 ### Patch Changes
