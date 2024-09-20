@@ -194,8 +194,7 @@
     "typescript": "^5.1.6",
     "vite": "^5.4.6",
     "vite-plugin-turbosnap": "^1.0.3",
-    "vite-tsconfig-paths": "^4.3.2",
-    "yarn": "^1.22.10"
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@4.4.0"
