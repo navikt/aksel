@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export type VirtualFocusType = {
   activeElement: HTMLElement | undefined;
@@ -108,7 +108,7 @@ const useVirtualFocus = (
     setActiveElement(elementsAbleToReceiveFocus[newIndex]);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     activeElement?.scrollIntoView?.({ block: "nearest" });
   }, [activeElement]);
 
