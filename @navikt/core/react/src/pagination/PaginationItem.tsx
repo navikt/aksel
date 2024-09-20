@@ -11,7 +11,8 @@ export interface PaginationItemProps extends ButtonProps {
    */
   selected?: boolean;
   /**
-   * @deprecated Use `data-page` instead if you need to access the items page number
+   * Currently only sets `data-page` attribute.
+   * @deprecated Use `data-page` instead if you need to access the items page number in the future.
    */
   page?: number;
   /**
