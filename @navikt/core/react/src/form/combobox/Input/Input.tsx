@@ -201,14 +201,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (e.key === "PageUp") {
           e.preventDefault();
           virtualFocus.moveFocusUpBy(6);
-          return false;
         } else if (e.key === "PageDown") {
           e.preventDefault();
           if (virtualFocus.activeElement === null || !isListOpen) {
             toggleIsListOpen(true);
           }
           virtualFocus.moveFocusDownBy(6);
-          return false;
         }
       },
       [
