@@ -87,10 +87,10 @@ const useVirtualFocus = (
   };
 
   const moveFocusUpBy = (numberOfElements: number) => {
-    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     if (!activeElement) {
       return;
     }
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     const currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
     const newIndex = Math.max(currentIndex - numberOfElements, 0);
     setActiveElement(elementsAbleToReceiveFocus[newIndex]);
