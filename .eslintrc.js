@@ -73,8 +73,11 @@ module.exports = {
     },
     {
       files: ["**/*.test.*", "**/__tests__/*"],
-      plugins: ["vitest"],
-      extends: ["plugin:vitest/recommended", "plugin:testing-library/react"],
+      plugins: ["@vitest"],
+      extends: [
+        "plugin:@vitest/legacy-recommended",
+        "plugin:testing-library/react",
+      ],
     },
 
     {
