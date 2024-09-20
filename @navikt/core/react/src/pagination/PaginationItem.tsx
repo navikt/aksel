@@ -11,9 +11,9 @@ export interface PaginationItemProps extends ButtonProps {
    */
   selected?: boolean;
   /**
-   * The page the item represents
+   * @deprecated Use `data-page` instead if you need to access the items page number
    */
-  page: number;
+  page?: number;
   /**
    * Changes padding, height and font-size
    * @default "medium"
@@ -48,7 +48,7 @@ export const Item: PaginationItemType = forwardRef(
           "navds-pagination__item--selected": selected,
         })}
         data-page={page}
-        /* TODO: Breaking change to remove. Add to future major version. */
+        /* TODO: Breaking change to remove since it's in use by some applications. Add to future major version. */
         page={page}
         {...(Component === "button" && { type: "button" })}
         {...rest}
