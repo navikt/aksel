@@ -9,7 +9,7 @@ import {
   scaleTokens,
 } from "../create-configuration";
 import { TokenTypes, tokenTypes } from "../util";
-import { FigmaToken } from "./types";
+import { FigmaToken, FigmaType } from "./types";
 
 const config = {
   light: lightModeTokens(),
@@ -91,6 +91,7 @@ function prepareToken(
     code: {
       web: `var(${cssVariable.trim().split(": ")[0]})`,
     },
+    figmaType: extractFigmaScope(token),
   };
 }
 
@@ -124,26 +125,29 @@ function remToPxValue(value: string) {
   return parseFloat(value.replace("rem", "")) * 16;
 }
 
-/**
- * TODO:
- * - use this function to create a Figma config
- */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function extractFigmaDataType(token: FigmaToken): VariableResolvedDataType {
+function extractFigmaScope(token: TransformedToken): FigmaType {
+  let type: VariableResolvedDataType = "STRING";
+  let scopes: VariableScope[] = [];
+
   if (token.type?.includes("color")) {
-    return "COLOR";
-  }
-  if (token.type?.includes("radius") || token.type?.includes("spacing")) {
-    return "FLOAT";
+    type = "COLOR";
+    /* TODO: Might need to scope this based on text/bg/contrast grouping */
+    scopes = ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"];
+  } else if (token.type?.includes("radius")) {
+    type = "FLOAT";
+    scopes = ["CORNER_RADIUS"];
+  } else if (token.type?.includes("spacing")) {
+    type = "FLOAT";
+    scopes = ["GAP", "PARAGRAPH_INDENT", "PARAGRAPH_SPACING"];
   }
 
-  return "STRING";
+  return { type, scopes };
 }
 
 /**
  * Allows us to extract the token name from the token object and create the correct grouping for Figma.
  */
-function extractTokenName(token: TransformedToken) {
+export function extractTokenName(token: TransformedToken) {
   if (!token.attributes?.item || typeof token.attributes.item !== "string") {
     throw new Error(`No item attribute found on token: ${token.name}`);
   }
@@ -176,7 +180,7 @@ function extractTokenName(token: TransformedToken) {
    * For pure value tokens, we want to add a prefix to the name to make it more readable in Figma.
    */
   if (token.type === tokenTypes["global-radius"]) {
-    name = "Spacing " + name;
+    name = "Radius " + name;
   } else if (token.type === tokenTypes["global-spacing"]) {
     name = "Spacing " + name;
   }
