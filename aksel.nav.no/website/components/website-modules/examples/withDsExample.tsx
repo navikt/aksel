@@ -8,6 +8,7 @@ import {
   TabletIcon,
 } from "@navikt/aksel-icons";
 import { HStack } from "@navikt/ds-react";
+import { SEO } from "../seo/SEO";
 import styles from "./examples.module.css";
 
 type withDsT = {
@@ -75,23 +76,26 @@ export const withDsExample = (
     };
 
     return (
-      <div
-        className={cl(styles.container, {
-          [styles.containerDefault]: !variant,
-          [styles.containerStatic]: variant === "static",
-          [styles.containerFull]: variant === "full",
-          [styles.containerStaticFull]: variant === "static-full",
-        })}
-        style={{ background: getBg(background) }}
-      >
-        {showBreakpoints && <BreakpointText />}
-        <div
-          id="ds-example"
-          className={variant === "static" ? styles.exampleStatic : undefined}
+      <>
+        <SEO title="Kodeeksempel" />
+        <main
+          className={cl(styles.container, {
+            [styles.containerDefault]: !variant,
+            [styles.containerStatic]: variant === "static",
+            [styles.containerFull]: variant === "full",
+            [styles.containerStaticFull]: variant === "static-full",
+          })}
+          style={{ background: getBg(background) }}
         >
-          <Component {...props} />
-        </div>
-      </div>
+          {showBreakpoints && <BreakpointText />}
+          <div
+            id="ds-example"
+            className={variant === "static" ? styles.exampleStatic : undefined}
+          >
+            <Component {...props} />
+          </div>
+        </main>
+      </>
     );
   };
 
