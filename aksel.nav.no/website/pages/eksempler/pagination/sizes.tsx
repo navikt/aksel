@@ -12,24 +12,27 @@ const Example = () => {
         count={9}
         boundaryCount={1}
         siblingCount={1}
+        aria-label="Paginering medium"
       />
 
       <Pagination
-        page={pageState}
-        onPageChange={setPageState}
-        count={9}
-        boundaryCount={1}
-        siblingCount={1}
         size="small"
-      />
-
-      <Pagination
         page={pageState}
         onPageChange={setPageState}
         count={9}
         boundaryCount={1}
         siblingCount={1}
+        aria-label="Paginering small"
+      />
+
+      <Pagination
         size="xsmall"
+        page={pageState}
+        onPageChange={setPageState}
+        count={9}
+        boundaryCount={1}
+        siblingCount={1}
+        aria-label="Paginering xsmall"
       />
     </VStack>
   );
