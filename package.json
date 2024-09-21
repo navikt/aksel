@@ -98,8 +98,6 @@
     ],
     "rules": {
       "plugin/declaration-block-no-ignored-properties": true,
-      "value-list-comma-newline-after": null,
-      "declaration-colon-newline-after": null,
       "no-descending-specificity": null,
       "selector-class-pattern": null,
       "custom-property-pattern": null,
