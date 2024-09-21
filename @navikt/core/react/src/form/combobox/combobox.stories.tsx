@@ -7,7 +7,7 @@ import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { BodyLong } from "../../typography";
 import { TextField } from "../textfield";
-import { UNSAFE_Combobox } from "./index";
+import { ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",
@@ -38,14 +38,16 @@ const options = [
   "grapefruit",
 ];
 
-export const Default: StoryFunction = (props) => (
+export const Default: StoryFn<ComboboxProps & { maxSelected?: number }> = ({
+  maxSelected,
+  ...rest
+}) => (
   <UNSAFE_Combobox
-    {...props}
-    maxSelected={{ limit: Number(props.maxSelected) }}
+    {...rest}
+    maxSelected={maxSelected && { limit: maxSelected }}
     id="combobox"
   />
 );
-
 Default.args = {
   options,
   label: "Hva er din favorittfrukt?",
