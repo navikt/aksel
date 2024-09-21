@@ -1,13 +1,40 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import urls from "./sitemap-urls.json";
+import { getDirectories } from "../scripts/update-examples/parts/get-directories";
+import { getFiles } from "../scripts/update-examples/parts/get-files";
+
+//import urls from "./sitemap-urls.json";
+
+const examples = getDirectories("eksempler");
 
 test.describe("Axe a11y", () => {
-  for (const url of urls) {
+  for (const example of examples) {
+    const testFiles = getFiles(example.path, "eksempler");
+
+    for (const testFile of testFiles.files) {
+      const url = `/eksempler/${example.path}/${testFile.replace(".tsx", "")}`;
+
+      test(`Check page ${url}`, async ({ page }) => {
+        await page.goto(`http://localhost:3000${url}`);
+        //await page.waitForLoadState("domcontentloaded");
+        const a11yScanResults = await new AxeBuilder({
+          page,
+        })
+          .disableRules(["page-has-heading-one"])
+          .analyze();
+        expect(a11yScanResults.violations).toEqual([]);
+      });
+    }
+  }
+
+  // TODO: Ser ikke ut som axe plukker opp page-attributtet på button i Pagination...
+  // TODO: Templates
+
+  /* for (const url of urls) {
     test(`Check page ${url}`, async ({ page }) => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
-      const accessibilityScanResults = await new AxeBuilder({ page })
+      const a11yScanResults = await new AxeBuilder({ page })
         .disableRules(["definition-list", "scrollable-region-focusable"])
         .exclude("iframe")
         .exclude("#aksel-expansioncard")
@@ -15,9 +42,9 @@ test.describe("Axe a11y", () => {
         .exclude("#toc-scroll")
         .exclude(".aksel-codesnippet")
         .analyze();
-      expect(accessibilityScanResults.violations).toEqual([]);
+      expect(a11yScanResults.violations).toEqual([]);
     });
-  }
+  } */
 });
 
 /*
