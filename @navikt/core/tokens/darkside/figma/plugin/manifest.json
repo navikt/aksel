@@ -7,6 +7,6 @@
   "enableProposedApi": false,
   "editorType": ["figma"],
   "networkAccess": {
-    "allowedDomains": ["cdn.nav.no"]
+    "allowedDomains": ["https://cdn.nav.no"]
   }
 }
