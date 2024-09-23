@@ -4,7 +4,7 @@ import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
 import { useComboboxCustomOptions } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
+import { ComboboxOption, ComboboxProps } from "../types";
 
 type SelectedOptionsContextValue = {
   addSelectedOption: (option: ComboboxOption) => void;
@@ -12,7 +12,7 @@ type SelectedOptionsContextValue = {
   removeSelectedOption: (option: ComboboxOption) => void;
   prevSelectedOptions?: ComboboxOption[];
   selectedOptions: ComboboxOption[];
-  maxSelected?: MaxSelected & { isLimitReached: boolean };
+  maxSelected?: ComboboxProps["maxSelected"] & { isLimitReached: boolean };
   setSelectedOptions: (any) => void;
   toggleOption: (
     option: ComboboxOption,
