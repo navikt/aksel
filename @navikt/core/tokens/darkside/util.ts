@@ -44,10 +44,27 @@ export const tokenTypes = {
 
 export type TokenTypes = (typeof tokenTypes)[keyof typeof tokenTypes];
 
+export const tokenGroupLookup = {
+  background: "background",
+  border: "border",
+  text: "text",
+  contrast: "contrast",
+} as const;
+
+export type TokenGroup =
+  | GlobalColorRoles
+  | (typeof tokenGroupLookup)["background"]
+  | `${(typeof tokenGroupLookup)["background"]}.${GlobalColorRoles}`
+  | (typeof tokenGroupLookup)["text"]
+  | `${(typeof tokenGroupLookup)["text"]}.${GlobalColorRoles}`
+  | (typeof tokenGroupLookup)["border"]
+  | `${(typeof tokenGroupLookup)["border"]}.${GlobalColorRoles}`
+  | (typeof tokenGroupLookup)["border"];
+
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;
   type: T;
-  group?: string;
+  group?: TokenGroup;
   comment?: string;
 };
 

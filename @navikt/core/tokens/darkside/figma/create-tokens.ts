@@ -8,7 +8,7 @@ import {
   lightModeTokens,
   scaleTokens,
 } from "../create-configuration";
-import { TokenTypes, tokenTypes } from "../util";
+import { TokenGroup, TokenTypes, tokenGroupLookup, tokenTypes } from "../util";
 import { FigmaToken, FigmaType } from "./types";
 
 const config = {
@@ -126,21 +126,76 @@ function remToPxValue(value: string) {
 }
 
 function extractFigmaScope(token: TransformedToken): FigmaType {
-  let type: VariableResolvedDataType = "STRING";
-  let scopes: VariableScope[] = [];
+  const group = token.group as TokenGroup;
+  const type = token.type as TokenTypes;
 
-  if (token.type?.includes("color")) {
-    type = "COLOR";
-    /* TODO: Might need to scope this based on text/bg/contrast grouping */
-    scopes = ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"];
-  } else if (token.type?.includes("radius")) {
-    type = "FLOAT";
-    scopes = ["CORNER_RADIUS"];
-  } else if (token.type?.includes("spacing")) {
-    type = "FLOAT";
-    scopes = ["GAP", "PARAGRAPH_INDENT", "PARAGRAPH_SPACING"];
+  if (isSemanticBackgroundGroup(group)) {
+    return createFigmaType("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
   }
 
+  if (isBorderColorGroup(group)) {
+    return createFigmaType("COLOR", ["STROKE_COLOR"]);
+  }
+  if (isContrastGroup(group) || isTextGroup(group)) {
+    return createFigmaType("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
+  }
+  if (isGlobalColorType(type)) {
+    return createFigmaType("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
+  }
+  if (isRadiusType(type)) {
+    return createFigmaType("FLOAT", ["CORNER_RADIUS"]);
+  }
+  if (isSpacingType(type)) {
+    return createFigmaType("FLOAT", ["GAP"]);
+  }
+
+  return createFigmaType("STRING", []);
+}
+
+function isSemanticBackgroundGroup(group?: TokenGroup): boolean {
+  if (!group) {
+    return false;
+  }
+  return group.includes(tokenGroupLookup.background);
+}
+
+function isBorderColorGroup(group?: TokenGroup): boolean {
+  if (!group) {
+    return false;
+  }
+  return group.includes(tokenGroupLookup.border);
+}
+
+function isContrastGroup(group?: TokenGroup): boolean {
+  if (!group) {
+    return false;
+  }
+  return group.includes(tokenGroupLookup.contrast);
+}
+
+function isTextGroup(group?: TokenGroup): boolean {
+  if (!group) {
+    return false;
+  }
+  return group.includes(tokenGroupLookup.text);
+}
+
+function isGlobalColorType(type?: TokenTypes): boolean {
+  return type?.includes(tokenTypes["global-color"]) ?? false;
+}
+
+function isRadiusType(type?: TokenTypes): boolean {
+  return type?.includes(tokenTypes["global-radius"]) ?? false;
+}
+
+function isSpacingType(type?: TokenTypes): boolean {
+  return type?.includes(tokenTypes["global-spacing"]) ?? false;
+}
+
+function createFigmaType(
+  type: VariableResolvedDataType,
+  scopes: VariableScope[],
+): FigmaType {
   return { type, scopes };
 }
 
