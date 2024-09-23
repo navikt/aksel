@@ -3895,6 +3895,7 @@ __metadata:
     "@figma/plugin-typings": "npm:^1.100.2"
     "@types/tinycolor2": "npm:^1.4.6"
     color: "npm:4.2.3"
+    esbuild: "npm:^0.23.1"
     lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
@@ -12400,7 +12401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0, esbuild@npm:~0.23.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0, esbuild@npm:^0.23.1, esbuild@npm:~0.23.0":
   version: 0.23.1
   resolution: "esbuild@npm:0.23.1"
   dependencies:

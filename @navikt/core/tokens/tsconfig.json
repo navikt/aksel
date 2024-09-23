@@ -8,5 +8,9 @@
     "moduleResolution": "Bundler",
     "module": "Preserve"
   },
-  "include": ["./stories", "./darkside/figma"]
+  "include": [
+    "./stories",
+    "./darkside/figma",
+    "./darkside/figma/plugin/plugin.ts"
+  ]
 }

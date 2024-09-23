@@ -21,6 +21,8 @@
     "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
     "build:darkside": "tsx ./darkside && yarn build:figma-config",
     "build:figma-config": "tsx ./darkside/figma",
+    "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --outfile='darkside/figma/plugin/plugin.js'",
+    "build:plugin-watch": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --outfile='darkside/figma/plugin/plugin.js' --watch",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -34,6 +36,7 @@
     "@figma/plugin-typings": "^1.100.2",
     "@types/tinycolor2": "^1.4.6",
     "color": "4.2.3",
+    "esbuild": "^0.23.1",
     "lightningcss": "^1.27.0",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
