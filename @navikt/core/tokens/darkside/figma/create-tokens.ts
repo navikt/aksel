@@ -95,7 +95,7 @@ function prepareToken(
   };
 }
 
-function prepareValueForFigma(value: string, type: TokenTypes) {
+function prepareValueForFigma(value: string, type: TokenTypes): VariableValue {
   switch (true) {
     case type === "color" || type === "global-color":
       return convertColorToFigma(value);
@@ -107,7 +107,10 @@ function prepareValueForFigma(value: string, type: TokenTypes) {
   }
 }
 
-function convertColorToFigma(value: string) {
+/**
+ * Figma c
+ */
+function convertColorToFigma(value: string): RGBA {
   const color = tinycolor2(value).toRgb();
   return {
     r: color.r / 255,
@@ -120,7 +123,7 @@ function convertColorToFigma(value: string) {
 /**
  * Figma does not support relative units, so we need to convert rem to px.
  */
-function remToPxValue(value: string) {
+function remToPxValue(value: string): number {
   return parseFloat(value.replace("rem", "")) * 16;
 }
 
@@ -198,9 +201,6 @@ export function extractTokenName(token: TransformedToken) {
    */
   let name = lodash.startCase(token.attributes.item);
 
-  /**
-   * By adding "/", we can create subgroups in Figma.
-   */
   if (token.group) {
     name = createGroupName(token.group) + name;
   }
@@ -225,6 +225,11 @@ export function extractTokenName(token: TransformedToken) {
   return name;
 }
 
+/**
+ * By splitting the group by ".", we can create a more readable group name in Figma.
+ * @param group "background.primary"
+ * @returns "Background/Primary/"
+ */
 function createGroupName(group: string): string {
   return (
     group

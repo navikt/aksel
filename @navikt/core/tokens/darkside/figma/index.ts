@@ -1,4 +1,5 @@
 import fs from "fs";
+import { version } from "../../package.json";
 import { tokenTypes } from "../util";
 import { getTokensListForCollection } from "./create-tokens";
 import { FigmaTokenConfig } from "./types";
@@ -16,6 +17,8 @@ async function buildFigmaConfig() {
     const scaleTokens = await getTokensListForCollection("scale");
 
     const preparedConfig: FigmaTokenConfig = {
+      version,
+      date: new Date().toISOString(),
       globalLight: {
         name: "Global colors light",
         hideFromPublishing: true,
