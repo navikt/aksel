@@ -63,7 +63,7 @@ export const PageBlock: OverridableComponent<PageBlockProps, HTMLDivElement> =
           {...rest}
           className={cl(
             "navds-pageblock",
-            `navds-pageblock--${width}`,
+            width && `navds-pageblock--${width}`,
             className,
             { "navds-pageblock--gutters": gutters },
           )}

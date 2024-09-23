@@ -48,7 +48,7 @@ export const semanticTokenConfig = (): StyleDictionaryTokenConfig<"color"> => ({
   },
   border: {
     default: {
-      value: "{a.neutral.500.value}",
+      value: "{a.neutral.600.value}",
       type: "color",
       group: "border",
     },
@@ -58,8 +58,7 @@ export const semanticTokenConfig = (): StyleDictionaryTokenConfig<"color"> => ({
       group: "border",
     },
     strong: {
-      /* TODO: Consider 700 scale here? */
-      value: "{a.neutral.600.value}",
+      value: "{a.neutral.700.value}",
       type: "color",
       group: "border",
     },

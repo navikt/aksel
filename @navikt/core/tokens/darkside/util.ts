@@ -15,7 +15,6 @@ export const globalColorRoles = [
   "brandThree",
   "dataOne",
   "dataTwo",
-  "dataThree",
 ] as const;
 
 export type GlobalColorRoles = (typeof globalColorRoles)[number];

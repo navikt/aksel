@@ -25,66 +25,65 @@ export const globalColorConfig: Record<
   /* Core */
   neutral: {
     colorKeys: ["#838c9a"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
   accent: {
-    colorKeys: ["#0090ff"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-    smooth: false,
+    colorKeys: ["#e6f0ff", "#0067c5"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
+    smooth: true,
   },
   /* Status */
   success: {
-    colorKeys: ["#2aa77d", "#e6ffeb"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    colorKeys: ["#2aa758", "#e6ffeb"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
+  /**
+   * TODO: This is currently just a copy of brandThree
+   * - Should info still exist as a global color?
+   * - If not, should the semantic colors be generated for info based on brandThree?
+   */
   info: {
-    colorKeys: ["#ebfcff", "#66cbec", "#144852"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-    smooth: false,
+    colorKeys: ["#005b82", "#e6f1f8", "#00243a"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
+    smooth: true,
   },
   warning: {
-    colorKeys: ["#ffeccc", "#ff9100", "#c77300", "#ffcc66"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    colorKeys: ["#ffbe4d", "#f56e00", "#cc5200"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: true,
   },
   danger: {
-    colorKeys: ["#ffb3cd", "#fa4456"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    colorKeys: ["#f93448", "#ffb3cd"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
   /* Brand */
   brandOne: {
     colorKeys: ["#99185e", "#7a134b"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
   brandTwo: {
-    colorKeys: ["#cc7566", "#fff3ec"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    colorKeys: ["#cc8066", "#fff3ec"],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: true,
   },
   brandThree: {
     colorKeys: ["#005b82", "#e6f1f8", "#00243a"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: true,
   },
   /* Data */
   dataOne: {
     colorKeys: ["#8269a2"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
   dataTwo: {
     colorKeys: ["#d9e61e"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
-
-    smooth: false,
-  },
-  dataThree: {
-    colorKeys: ["#ffe45c"],
-    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.19, 4.89, 5.75, 7.2, 15],
+    ratios: [1.08, 1.16, 1.28, 1.5, 3.5, 4.5, 5.85, 6.6, 8, 15],
     smooth: false,
   },
 };
@@ -140,10 +139,10 @@ const getColorScaleFromLeonardo = (
   /**
    * @example colorContrastRole format
    * {
-   *  name: 'dataThree',
+   *  name: 'dataTwo',
    *  values: [
-   *    { name: 'dataThree100', contrast: 1.08, value: '#200500' },
-   *    { name: 'dataThree200', contrast: 1.16, value: '#2b0f00' },
+   *    { name: 'dataTwo100', contrast: 1.08, value: '#200500' },
+   *    { name: 'dataTwo200', contrast: 1.16, value: '#2b0f00' },
    *    ...
    *  ]
    *}
