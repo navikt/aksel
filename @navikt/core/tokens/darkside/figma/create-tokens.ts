@@ -97,25 +97,24 @@ function prepareToken(
 
 function prepareValueForFigma(value: string, type: TokenTypes) {
   switch (true) {
-    case type === "color" || type === "global-color": {
-      const color = tinycolor2(value).toRgb();
-      /* Figma requires rgb to be between 0 and 1*/
-      return {
-        r: color.r / 255,
-        g: color.g / 255,
-        b: color.b / 255,
-        a: color.a * 1,
-      };
-    }
-    case type === "global-radius": {
+    case type === "color" || type === "global-color":
+      return convertColorToFigma(value);
+    case type === "global-radius":
+    case type === "global-spacing":
       return remToPxValue(value);
-    }
-    case type === "global-spacing": {
-      return remToPxValue(value);
-    }
     default:
       return value;
   }
+}
+
+function convertColorToFigma(value: string) {
+  const color = tinycolor2(value).toRgb();
+  return {
+    r: color.r / 255,
+    g: color.g / 255,
+    b: color.b / 255,
+    a: color.a * 1,
+  };
 }
 
 /**
@@ -153,31 +152,19 @@ function extractFigmaScope(token: TransformedToken): FigmaType {
 }
 
 function isSemanticBackgroundGroup(group?: TokenGroup): boolean {
-  if (!group) {
-    return false;
-  }
-  return group.includes(tokenGroupLookup.background);
+  return group?.includes(tokenGroupLookup.background) ?? false;
 }
 
 function isBorderColorGroup(group?: TokenGroup): boolean {
-  if (!group) {
-    return false;
-  }
-  return group.includes(tokenGroupLookup.border);
+  return group?.includes(tokenGroupLookup.border) ?? false;
 }
 
 function isContrastGroup(group?: TokenGroup): boolean {
-  if (!group) {
-    return false;
-  }
-  return group.includes(tokenGroupLookup.contrast);
+  return group?.includes(tokenGroupLookup.contrast) ?? false;
 }
 
 function isTextGroup(group?: TokenGroup): boolean {
-  if (!group) {
-    return false;
-  }
-  return group.includes(tokenGroupLookup.text);
+  return group?.includes(tokenGroupLookup.text) ?? false;
 }
 
 function isGlobalColorType(type?: TokenTypes): boolean {
@@ -215,12 +202,7 @@ export function extractTokenName(token: TransformedToken) {
    * By adding "/", we can create subgroups in Figma.
    */
   if (token.group) {
-    let grouping = "";
-    token.group.split(".").forEach((group: string) => {
-      grouping += lodash.startCase(group) + "/".trim();
-    });
-
-    name = grouping + name;
+    name = createGroupName(token.group) + name;
   }
 
   /**
@@ -241,4 +223,13 @@ export function extractTokenName(token: TransformedToken) {
   }
 
   return name;
+}
+
+function createGroupName(group: string): string {
+  return (
+    group
+      .split(".")
+      .map((g) => lodash.startCase(g))
+      .join("/") + "/"
+  );
 }

@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
-    "build:darkside": "tsx ./darkside",
+    "build:darkside": "tsx ./darkside && yarn build:figma-config",
     "build:figma-config": "tsx ./darkside/figma",
     "test": "vitest run",
     "test:watch": "vitest watch"
