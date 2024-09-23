@@ -189,21 +189,13 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               size={size}
               icon={
                 <ChevronLeftIcon
-                  className="navds-pagination__prev-next-icon"
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
                     : { title: "Forrige" })}
                 />
               }
             >
-              {prevNextTexts && (
-                <BodyShort
-                  size={size === "xsmall" ? "small" : size}
-                  className="navds-pagination__prev-text"
-                >
-                  Forrige
-                </BodyShort>
-              )}
+              {prevNextTexts && `Forrige`}
             </Item>
           </li>
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
@@ -211,7 +203,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               const n = Number(step);
               return Number.isNaN(n) ? (
                 <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
-                  <BodyShort size={size === "xsmall" ? "small" : size}>
+                  <BodyShort
+                    size={size === "xsmall" ? "small" : size}
+                    as="span"
+                  >
                     ...
                   </BodyShort>
                 </li>
@@ -223,9 +218,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                     page={n}
                     size={size}
                   >
-                    <BodyShort size={size === "xsmall" ? "small" : size}>
-                      {n}
-                    </BodyShort>
+                    {n}
                   </Item>
                 </li>
               );
@@ -243,7 +236,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               size={size}
               icon={
                 <ChevronRightIcon
-                  className="navds-pagination__prev-next-icon"
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
                     : { title: "Neste" })}
@@ -251,14 +243,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               }
               iconPosition="right"
             >
-              {prevNextTexts && (
-                <BodyShort
-                  size={size === "xsmall" ? "small" : size}
-                  className="navds-pagination__next-text"
-                >
-                  Neste
-                </BodyShort>
-              )}
+              {prevNextTexts && `Neste`}
             </Item>
           </li>
         </ul>
