@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Dekoratoren } from "../components/Dekoratoren";
 
 const Component = () => {
   return (
-    <div>
+    <Dekoratoren>
       <h3>hello from minside</h3>
-    </div>
+    </Dekoratoren>
   );
 };
 

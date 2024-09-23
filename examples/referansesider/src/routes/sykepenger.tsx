@@ -7,6 +7,8 @@ import ArrowDownRightIcon from "../assets/ArrowDownRightIcon";
 import ArrowRightIcon from "../assets/ArrowRightIcon";
 import ChevronDownIcon from "../assets/ChevronDownIcon";
 import SykepengerIcon from "../assets/SykepengerIcon";
+import { Dekoratoren } from "../components/Dekoratoren";
+import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 
 const Detail = styled.span`
@@ -79,26 +81,6 @@ const FancyHeader = () => {
       </InfoSummary>
     </div>
   );
-};
-
-const Link = ({
-  href = "#",
-  ...rest
-}: {
-  children: ReactNode;
-  inverted?: boolean;
-  href?: string;
-  className?: string;
-}) => {
-  const _Link = styled.a<{ inverted?: boolean }>`
-    color: ${tokens.Accent900};
-    text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
-    &:hover {
-      text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
-    }
-  `;
-
-  return <_Link href={href} {...rest} />;
 };
 
 const ArrowLink = ({
@@ -368,7 +350,7 @@ const Button = styled.button`
 
 const Component = () => {
   return (
-    <>
+    <Dekoratoren>
       <Page>
         <FancyHeader />
         <PlainText className="my-6 text-lg">
@@ -695,7 +677,7 @@ const Component = () => {
           </li>
         </PlainOrderedList>
       </Page>
-    </>
+    </Dekoratoren>
   );
 };
 
