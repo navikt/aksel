@@ -58,7 +58,8 @@ export type TokenGroup =
   | `${(typeof tokenGroupLookup)["text"]}.${GlobalColorRoles}`
   | (typeof tokenGroupLookup)["border"]
   | `${(typeof tokenGroupLookup)["border"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["border"];
+  | (typeof tokenGroupLookup)["border"]
+  | (typeof tokenGroupLookup)["contrast"];
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;
