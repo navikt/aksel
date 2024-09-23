@@ -27,7 +27,7 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
   } as React.CSSProperties;
 
   return (
-    <div
+    <aside
       className="sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block"
       style={style}
     >
@@ -38,7 +38,7 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
           <UlList toc={toc} tocProps={tocCtx} />
         </div>
       </Menu>
-    </div>
+    </aside>
   );
 }
 
