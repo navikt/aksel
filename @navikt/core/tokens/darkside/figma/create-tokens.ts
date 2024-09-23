@@ -100,6 +100,7 @@ function prepareValueForFigma(value: string, type: TokenTypes): VariableValue {
     case type === "color" || type === "global-color":
       return convertColorToFigma(value);
     case type === "global-radius":
+      return unitToNumber(value).toFixed(0);
     case type === "global-spacing":
       return remToPxValue(value);
     default:
@@ -124,7 +125,11 @@ function convertColorToFigma(value: string): RGBA {
  * Figma does not support relative units, so we need to convert rem to px.
  */
 function remToPxValue(value: string): number {
-  return parseFloat(value.replace("rem", "")) * 16;
+  return unitToNumber(value) * 16;
+}
+
+function unitToNumber(value: string): number {
+  return parseFloat(value.replace("px", "").replace("rem", ""));
 }
 
 function extractFigmaScope(token: TransformedToken): FigmaType {
