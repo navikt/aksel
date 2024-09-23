@@ -9,6 +9,7 @@ import {
   createOrFindVariable,
   getExistingVariables,
   getLastNumber,
+  reset,
   resolveAliasId,
 } from "./plugin-util";
 
@@ -19,7 +20,7 @@ const globalConfig = _config as FigmaTokenConfig;
  * - Add remote fetch of config from CDN i production
  */
 const main = async () => {
-  /* await reset(); */
+  await reset();
 
   const collections = await buildCollections();
 
@@ -153,4 +154,12 @@ async function updateSemanticColorCollection(
   console.info("Updated collection: ", config.name);
 }
 
-main().then(() => figma.closePlugin("Local variables updated!"));
+const date = new Date(globalConfig.date);
+const formattedDate = date.toLocaleDateString("no");
+const formattedTime = date.toLocaleTimeString("no");
+
+main().then(() =>
+  figma.closePlugin(
+    `Local variables updated! Last config update ${formattedDate} at ${formattedTime}.`,
+  ),
+);
