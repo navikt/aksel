@@ -1,4 +1,4 @@
-name: "Update remote token config for figma"
+name: "Update remote token config for figma variables plugin"
 
 on:
   workflow_dispatch:
