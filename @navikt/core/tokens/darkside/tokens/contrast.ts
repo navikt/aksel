@@ -60,11 +60,6 @@ export const contrastTokenConfig = (): {
       type: "color",
       group: "contrast",
     },
-    dataThree: {
-      value: "white",
-      type: "color",
-      group: "contrast",
-    },
     dataTwo: {
       value: "white",
       type: "color",
