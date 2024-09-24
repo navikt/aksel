@@ -2,14 +2,18 @@ import lodash from "lodash";
 import StyleDictionary from "style-dictionary";
 import { Dictionary, TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
-import tinycolor2 from "tinycolor2";
 import {
   darkModeTokens,
   lightModeTokens,
   scaleTokens,
 } from "../create-configuration";
-import { TokenGroup, TokenTypes, tokenGroupLookup, tokenTypes } from "../util";
-import { FigmaToken, FigmaType } from "./types";
+import {
+  type TokenGroup,
+  type TokenTypes,
+  tokenGroupLookup,
+  tokenTypes,
+} from "../util";
+import type { FigmaToken } from "./figma-config.types";
 
 const config = {
   light: lightModeTokens(),
@@ -35,7 +39,7 @@ const createStyleDictionaryForCollection = (
   });
 };
 
-export const getTokensListForCollection = async (
+export const getTokensForCollection = async (
   collection: keyof typeof config,
 ) => {
   const tokensList: FigmaToken[] = [];
@@ -55,7 +59,7 @@ export const getTokensListForCollection = async (
         const reference = getReferences(token.original, dictionary.tokens);
         return reference.length > 0
           ? prepareToken(
-              { ...token, alias: extractTokenName(reference[0]) },
+              { ...token, alias: createTokenName(reference[0]) },
               dictionary,
             )
           : prepareToken(token, dictionary);
@@ -81,123 +85,92 @@ function prepareToken(
   const cssVariable = formatter(token);
 
   return {
-    name: extractTokenName(token),
+    name: createTokenName(token),
     /* We can assume this since each config is typed with 'StyleDictionaryToken'  */
     type: token.type as TokenTypes,
-    value: prepareValueForFigma(token.value, token.type as TokenTypes),
+    value: figmaValue(token),
     alias: token.alias,
     comment: token.comment,
     group: token.group,
     code: {
       web: `var(${cssVariable.trim().split(": ")[0]})`,
     },
-    figmaType: extractFigmaScope(token),
-  };
-}
-
-function prepareValueForFigma(value: string, type: TokenTypes): VariableValue {
-  switch (true) {
-    case type === "color" || type === "global-color":
-      return convertColorToFigma(value);
-    case type === "global-radius":
-    case type === "global-spacing":
-      return remToPxValue(value);
-    default:
-      return value;
-  }
-}
-
-/**
- * Figma c
- */
-function convertColorToFigma(value: string): RGBA {
-  const color = tinycolor2(value).toRgb();
-  return {
-    r: color.r / 255,
-    g: color.g / 255,
-    b: color.b / 255,
-    a: color.a * 1,
+    ...figmaSettings(token),
   };
 }
 
 /**
- * Figma does not support relative units, so we need to convert rem to px.
+ * @see https://www.figma.com/plugin-docs/api/VariableValue
+ *
+ * We do not need to handle the 'color' type since we can use Figma built-in for this
+ * @see https://www.figma.com/plugin-docs/api/properties/figma-util-rgba
  */
-function remToPxValue(value: string): number {
-  return parseFloat(value.replace("rem", "")) * 16;
-}
+export function figmaValue(token: TransformedToken): string | number {
+  if (isRadiusToken(token) || isSpacingToken(token)) {
+    const float = parseFloat(token.value.replace("px", "").replace("rem", ""));
 
-function extractFigmaScope(token: TransformedToken): FigmaType {
-  const group = token.group as TokenGroup;
-  const type = token.type as TokenTypes;
-
-  if (isSemanticBackgroundGroup(group)) {
-    return createFigmaType("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
+    /**
+     * Figma does not support relative units, so we need to convert rem to px.
+     */
+    if (token.value.includes("rem")) {
+      return float * 16;
+    }
+    return float;
   }
 
-  if (isBorderColorGroup(group)) {
-    return createFigmaType("COLOR", ["STROKE_COLOR"]);
+  return token.value;
+}
+
+/**
+ * Scopes allows us to define where in Figma the token can be used.
+ * @see https://www.figma.com/plugin-docs/api/VariableScope
+ */
+function figmaSettings(token: TransformedToken): {
+  figmaType: VariableResolvedDataType;
+  scopes: VariableScope[];
+} {
+  if (isGlobalColor(token)) {
+    return createFigmaSettings("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
   }
-  if (isContrastGroup(group) || isTextGroup(group)) {
-    return createFigmaType("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
+  if (isBackgroundColor(token)) {
+    return createFigmaSettings("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
   }
-  if (isGlobalColorType(type)) {
-    return createFigmaType("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
+  if (isBorderColor(token)) {
+    return createFigmaSettings("COLOR", ["STROKE_COLOR"]);
   }
-  if (isRadiusType(type)) {
-    return createFigmaType("FLOAT", ["CORNER_RADIUS"]);
+  if (isContrastColor(token) || isTextColor(token)) {
+    return createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
   }
-  if (isSpacingType(type)) {
-    return createFigmaType("FLOAT", ["GAP"]);
+  if (isRadiusToken(token)) {
+    return createFigmaSettings("FLOAT", ["CORNER_RADIUS"]);
+  }
+  if (isSpacingToken(token)) {
+    return createFigmaSettings("FLOAT", ["GAP"]);
   }
 
-  return createFigmaType("STRING", []);
+  console.warn(`No fitting type or scope found for token: ${token.name}`);
+  return createFigmaSettings("STRING", []);
 }
 
-function isSemanticBackgroundGroup(group?: TokenGroup): boolean {
-  return group?.includes(tokenGroupLookup.background) ?? false;
-}
-
-function isBorderColorGroup(group?: TokenGroup): boolean {
-  return group?.includes(tokenGroupLookup.border) ?? false;
-}
-
-function isContrastGroup(group?: TokenGroup): boolean {
-  return group?.includes(tokenGroupLookup.contrast) ?? false;
-}
-
-function isTextGroup(group?: TokenGroup): boolean {
-  return group?.includes(tokenGroupLookup.text) ?? false;
-}
-
-function isGlobalColorType(type?: TokenTypes): boolean {
-  return type?.includes(tokenTypes["global-color"]) ?? false;
-}
-
-function isRadiusType(type?: TokenTypes): boolean {
-  return type?.includes(tokenTypes["global-radius"]) ?? false;
-}
-
-function isSpacingType(type?: TokenTypes): boolean {
-  return type?.includes(tokenTypes["global-spacing"]) ?? false;
-}
-
-function createFigmaType(
-  type: VariableResolvedDataType,
+function createFigmaSettings(
+  figmaType: VariableResolvedDataType,
   scopes: VariableScope[],
-): FigmaType {
-  return { type, scopes };
+): {
+  figmaType: VariableResolvedDataType;
+  scopes: VariableScope[];
+} {
+  return { figmaType, scopes };
 }
 
 /**
  * Allows us to extract the token name from the token object and create the correct grouping for Figma.
  */
-export function extractTokenName(token: TransformedToken) {
+export function createTokenName(token: TransformedToken) {
   if (!token.attributes?.item || typeof token.attributes.item !== "string") {
     throw new Error(`No item attribute found on token: ${token.name}`);
   }
   /**
-   * Because of the `StyleDictionaryTokenConfig` type, we can assume that attributes.item will always exists.
+   * Because of the `StyleDictionaryTokenConfig`-type, we can assume that attributes.item will always exists.
    */
   let name = lodash.startCase(token.attributes.item);
 
@@ -216,10 +189,12 @@ export function extractTokenName(token: TransformedToken) {
   /**
    * For pure value tokens, we want to add a prefix to the name to make it more readable in Figma.
    */
-  if (token.type === tokenTypes["global-radius"]) {
-    name = "Radius " + name;
-  } else if (token.type === tokenTypes["global-spacing"]) {
-    name = "Spacing " + name;
+  if (isRadiusToken(token)) {
+    return "Radius " + name;
+  }
+
+  if (isSpacingToken(token)) {
+    return "Spacing " + name;
   }
 
   return name;
@@ -229,6 +204,7 @@ export function extractTokenName(token: TransformedToken) {
  * By splitting the group by ".", we can create a more readable group name in Figma.
  * @param group "background.primary"
  * @returns "Background/Primary/"
+ * @see https://help.figma.com/hc/en-us/articles/14506821864087-Overview-of-variables-collections-and-modes#h_01H9V3QSVH2T1EYNXP7RNXZ8MV
  */
 function createGroupName(group: string): string {
   return (
@@ -237,4 +213,51 @@ function createGroupName(group: string): string {
       .map((g) => lodash.startCase(g))
       .join("/") + "/"
   );
+}
+
+function isTokenOfSemanticColorGroup(
+  token: TransformedToken | FigmaToken,
+  groupType: keyof typeof tokenGroupLookup,
+): boolean {
+  const group = token.group as TokenGroup;
+  if (!isSemanticColor(token)) {
+    return false;
+  }
+  return group?.includes(tokenGroupLookup[groupType]) ?? false;
+}
+
+function isBackgroundColor(token: TransformedToken | FigmaToken): boolean {
+  return isTokenOfSemanticColorGroup(token, "background");
+}
+
+function isBorderColor(token: TransformedToken | FigmaToken): boolean {
+  return isTokenOfSemanticColorGroup(token, "border");
+}
+
+function isContrastColor(token: TransformedToken | FigmaToken): boolean {
+  return isTokenOfSemanticColorGroup(token, "contrast");
+}
+
+function isTextColor(token: TransformedToken | FigmaToken): boolean {
+  return isTokenOfSemanticColorGroup(token, "text");
+}
+
+export function isGlobalColor(token: TransformedToken | FigmaToken): boolean {
+  const type = token.type as TokenTypes;
+  return type === tokenTypes["global-color"] ?? false;
+}
+
+export function isSemanticColor(token: TransformedToken | FigmaToken): boolean {
+  const type = token.type as TokenTypes;
+  return type === tokenTypes["color"] ?? false;
+}
+
+export function isRadiusToken(token: TransformedToken | FigmaToken): boolean {
+  const type = token.type as TokenTypes;
+  return type?.includes(tokenTypes["global-radius"]) ?? false;
+}
+
+export function isSpacingToken(token: TransformedToken | FigmaToken): boolean {
+  const type = token.type as TokenTypes;
+  return type?.includes(tokenTypes["global-spacing"]) ?? false;
 }

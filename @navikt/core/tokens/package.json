@@ -34,13 +34,11 @@
   "devDependencies": {
     "@adobe/leonardo-contrast-colors": "^1.0.0",
     "@figma/plugin-typings": "^1.100.2",
-    "@types/tinycolor2": "^1.4.6",
     "color": "4.2.3",
     "esbuild": "^0.23.1",
     "lightningcss": "^1.27.0",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
-    "tinycolor2": "^1.6.0",
     "tsx": "^4.19.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"

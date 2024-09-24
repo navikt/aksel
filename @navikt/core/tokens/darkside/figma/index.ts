@@ -1,7 +1,12 @@
 import fs from "fs";
 import { version } from "../../package.json";
-import { tokenTypes } from "../util";
-import { getTokensListForCollection } from "./create-tokens";
+import {
+  getTokensForCollection,
+  isGlobalColor,
+  isRadiusToken,
+  isSemanticColor,
+  isSpacingToken,
+} from "./create-tokens";
 import { FigmaTokenConfig } from "./types";
 
 buildFigmaConfig();
@@ -12,9 +17,9 @@ buildFigmaConfig();
  */
 async function buildFigmaConfig() {
   try {
-    const lightTokens = await getTokensListForCollection("light");
-    const darkTokens = await getTokensListForCollection("dark");
-    const scaleTokens = await getTokensListForCollection("scale");
+    const lightTokens = await getTokensForCollection("light");
+    const darkTokens = await getTokensForCollection("dark");
+    const scaleTokens = await getTokensForCollection("scale");
 
     const preparedConfig: FigmaTokenConfig = {
       version,
@@ -22,37 +27,27 @@ async function buildFigmaConfig() {
       globalLight: {
         name: "Global colors light",
         hideFromPublishing: true,
-        token: lightTokens.filter(
-          (token) => token.type === tokenTypes["global-color"],
-        ),
+        token: lightTokens.filter((token) => isGlobalColor(token)),
       },
       globalDark: {
         name: "Global colors dark",
         hideFromPublishing: true,
-        token: darkTokens.filter(
-          (token) => token.type === tokenTypes["global-color"],
-        ),
+        token: darkTokens.filter((token) => isGlobalColor(token)),
       },
       semanticColors: {
         name: "Semantic colors",
         hideFromPublishing: false,
-        token: lightTokens.filter(
-          (token) => token.type === tokenTypes["color"],
-        ),
+        token: lightTokens.filter((token) => isSemanticColor(token)),
       },
       radius: {
         name: "Radius",
         hideFromPublishing: false,
-        token: scaleTokens.filter(
-          (token) => token.type === tokenTypes["global-radius"],
-        ),
+        token: scaleTokens.filter((token) => isRadiusToken(token)),
       },
       spacing: {
         name: "Spacing",
         hideFromPublishing: false,
-        token: scaleTokens.filter(
-          (token) => token.type === tokenTypes["global-spacing"],
-        ),
+        token: scaleTokens.filter((token) => isSpacingToken(token)),
       },
     };
 

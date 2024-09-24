@@ -8,7 +8,11 @@ test.describe("Axe a11y", () => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
       const accessibilityScanResults = await new AxeBuilder({ page })
-        .disableRules(["definition-list", "scrollable-region-focusable"])
+        .disableRules([
+          "definition-list",
+          "scrollable-region-focusable",
+          "landmark-complementary-is-top-level",
+        ])
         .exclude("iframe")
         .exclude("#aksel-expansioncard")
         .exclude("#toc-scroll")

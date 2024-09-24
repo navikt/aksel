@@ -1,4 +1,4 @@
-import { getParameters } from "codesandbox/lib/api/define";
+import { getParameters } from "codesandbox-import-utils/lib/api/define";
 import { Button } from "@navikt/ds-react";
 import { CodeSandboxLogo } from "@/assets/Icons";
 

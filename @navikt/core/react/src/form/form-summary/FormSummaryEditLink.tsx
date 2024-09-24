@@ -22,14 +22,17 @@ export interface FormSummaryEditProps
 export const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
-> = forwardRef(({ children = "Endre svar", className, ...rest }, ref) => (
-  <Link
-    ref={ref}
-    {...rest}
-    className={cl("navds-form-summary__edit", className)}
-  >
-    {children}
-  </Link>
-));
+> = forwardRef(
+  ({ children = "Endre svar", className, as = "a", ...rest }, ref) => (
+    <Link
+      ref={ref}
+      as={as}
+      {...rest}
+      className={cl("navds-form-summary__edit", className)}
+    >
+      {children}
+    </Link>
+  ),
+);
 
 export default FormSummaryEditLink;

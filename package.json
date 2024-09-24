@@ -98,8 +98,6 @@
     ],
     "rules": {
       "plugin/declaration-block-no-ignored-properties": true,
-      "value-list-comma-newline-after": null,
-      "declaration-colon-newline-after": null,
       "no-descending-specificity": null,
       "selector-class-pattern": null,
       "custom-property-pattern": null,
@@ -160,8 +158,9 @@
     "@storybook/theming": "^8.3.0",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitest/eslint-plugin": "^1.1.4",
     "@whitespace/storybook-addon-html": "^6.1.1",
     "chromatic": "11.5.4",
     "concurrently": "7.2.1",
@@ -174,7 +173,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-testing-library": "^6.0.2",
-    "eslint-plugin-vitest": "^0.3.22",
     "fast-glob": "3.2.11",
     "husky": "^8.0.0",
     "lint-staged": "13.0.3",
@@ -192,10 +190,9 @@
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
     "typescript": "^5.1.6",
-    "vite": "^5.1.7",
+    "vite": "^5.4.6",
     "vite-plugin-turbosnap": "^1.0.3",
-    "vite-tsconfig-paths": "^4.3.2",
-    "yarn": "^1.22.10"
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@4.4.0"
