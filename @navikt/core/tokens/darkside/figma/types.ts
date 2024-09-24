@@ -6,7 +6,7 @@ export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   code: {
     web: string;
   };
-  value: VariableValue;
+  value: string | number;
   figmaType: VariableResolvedDataType;
   scopes: VariableScope[];
 };
