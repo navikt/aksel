@@ -734,15 +734,15 @@ __metadata:
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.0.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=b9e349&locator=referansesider%40workspace%3A."
-  checksum: 10/4c792a850d9e14fcdcf68667b7483835efd756abda4d32e6f55db265415c493c8c979ce82b2f877860f867af5c4ed532500536868df2accb7d32914fd7bfe1a2
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=898861&locator=referansesider%40workspace%3A."
+  checksum: 10/2793a7dac7cdb25bab09d3836d7c2750e5364a94280ab0259d4683787caad0820560029fe54e95e5ea7c9b1853e19950896967a7a9aec6cedf63eef1f9c40054
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.0.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ac5a2d&locator=referansesider%40workspace%3A."
-  checksum: 10/cc1a6c82fdcc28af763b2619fd3061dbd8d896149b86346a74e123c3202470df158edbe5eb0b57ecffb62aa97cc3aca7021df5c301a393985e44497ca86ec812
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=50783c&locator=referansesider%40workspace%3A."
+  checksum: 10/bf6667758b3e9401a66b7136d24e1cb960d15bf6383376e4ef4d934b2b272f04c414303141a344cd8327a7f54cc40ca548a77a9ce7fec836bd1dbf1e6db9d09a
   languageName: node
   linkType: hard
 
@@ -1367,6 +1367,25 @@ __metadata:
   peerDependencies:
     vite: ^4 || ^5
   checksum: 10/16498c65aca482f638f490a59c4ef49875e59d4f1631dad7515e2fce2f87a69a4ec0cd9774fc3666b8a6e211f65b78442411a743aea33762caa0044e3c04ad39
+  languageName: node
+  linkType: hard
+
+"@vitest/eslint-plugin@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@vitest/eslint-plugin@npm:1.1.4"
+  peerDependencies:
+    "@typescript-eslint/utils": ">= 8.0"
+    eslint: ">= 8.57.0"
+    typescript: ">= 5.0.0"
+    vitest: "*"
+  peerDependenciesMeta:
+    "@typescript-eslint/utils":
+      optional: true
+    typescript:
+      optional: true
+    vitest:
+      optional: true
+  checksum: 10/becfa0d0c67c06f19f77e409e067e38499e4ceb0c19a4e3a928c727a95372c3918056edddf11632d0e20773d0aa9ea27b68ff8692daf22f115f4e065812be09c
   languageName: node
   linkType: hard
 
@@ -3348,6 +3367,7 @@ __metadata:
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
+    "@vitest/eslint-plugin": "npm:^1.1.4"
     autoprefixer: "npm:^10.4.20"
     clsx: "npm:^2.1.1"
     eslint: "npm:^9.9.0"
