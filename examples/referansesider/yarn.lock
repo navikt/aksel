@@ -732,17 +732,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
+  version: 7.0.1
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=5113aa&locator=referansesider%40workspace%3A."
+  checksum: 10/cb84931f101583297bbb93274a39f09d1945cd9d38e257d2c2fe5f1f710fe2b4ca10275f7024c0a1c0ae7b36527b82dab589942585bb6f92c0f6f74de3b08bd3
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.0.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=898861&locator=referansesider%40workspace%3A."
-  checksum: 10/2793a7dac7cdb25bab09d3836d7c2750e5364a94280ab0259d4683787caad0820560029fe54e95e5ea7c9b1853e19950896967a7a9aec6cedf63eef1f9c40054
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=b9e349&locator=referansesider%40workspace%3A."
+  checksum: 10/4c792a850d9e14fcdcf68667b7483835efd756abda4d32e6f55db265415c493c8c979ce82b2f877860f867af5c4ed532500536868df2accb7d32914fd7bfe1a2
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.0.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=50783c&locator=referansesider%40workspace%3A."
-  checksum: 10/bf6667758b3e9401a66b7136d24e1cb960d15bf6383376e4ef4d934b2b272f04c414303141a344cd8327a7f54cc40ca548a77a9ce7fec836bd1dbf1e6db9d09a
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ac5a2d&locator=referansesider%40workspace%3A."
+  checksum: 10/cc1a6c82fdcc28af763b2619fd3061dbd8d896149b86346a74e123c3202470df158edbe5eb0b57ecffb62aa97cc3aca7021df5c301a393985e44497ca86ec812
   languageName: node
   linkType: hard
 
@@ -3359,6 +3366,7 @@ __metadata:
   resolution: "referansesider@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.9.0"
+    "@navikt/aksel-icons": ../../@navikt/aksel-icons
     "@navikt/ds-css": ../../@navikt/core/css
     "@navikt/ds-tokens": ../../@navikt/core/tokens
     "@tanstack/react-router": "npm:^1.57.17"

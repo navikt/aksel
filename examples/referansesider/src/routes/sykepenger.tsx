@@ -2,10 +2,12 @@ import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
+import {
+  ArrowDownRightIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+} from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
-import ArrowDownRightIcon from "../assets/ArrowDownRightIcon";
-import ArrowRightIcon from "../assets/ArrowRightIcon";
-import ChevronDownIcon from "../assets/ChevronDownIcon";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
@@ -96,10 +98,10 @@ const ArrowLink = ({
       inverted
       {...rest}
     >
-      <ArrowDownRightIcon
-        colorStroke="stroke-[#0056b4]"
-        colorFill="fill-[#0056b4]"
-      />
+      <span className="w-4 h-4 block" aria-hidden="true">
+        {/* TODO: use tokens here */}
+        <ArrowDownRightIcon className="stroke-[#0056b4]" />
+      </span>
       {children}
     </Link>
   );
@@ -232,16 +234,19 @@ const AccordionItem = ({
           "border-opacity-0 border-x-black border",
         )}
       >
+        {/* TODO: use tokens here */}
         <div className="bg-blue-100 group-hover/summary:bg-[#0056b4] w-5 h-5 rounded-lg">
-          <ChevronDownIcon
-            className={clsx([
-              "group-open/details:-rotate-180",
-              "group-hover/summary:fill-white group-hover/summary:stroke-white",
-              "transition-transform",
-              "w-5 h-5",
-              "stroke-[#0056b4] fill-[#0056b4]",
-            ])}
-          />
+          <span className="w-4 h-4 block" aria-hidden="true">
+            <ChevronDownIcon
+              className={clsx([
+                "group-open/details:-rotate-180",
+                "group-hover/summary:text-white",
+                "transition-transform",
+                "w-5 h-5",
+                "text-[#0056b4]",
+              ])}
+            />
+          </span>
         </div>
         <span className="text-[#0056b4]">{title}</span>
       </summary>
@@ -292,7 +297,10 @@ const MiniCard = ({
         <_title className="group-hover:underline">{title}</_title>
         <_subtitle>{subtitle}</_subtitle>
       </div>
-      <ArrowRightIcon colorFill="fill-gray-500" colorStroke="stroke-gray-500" />
+      <span className="w-5 h-5 block" aria-hidden="true">
+        {/* TODO: use token here */}
+        <ArrowRightIcon className="fill-gray-500" />
+      </span>
     </a>
   );
 };
@@ -317,14 +325,17 @@ const ExpandoPill = ({
           "border-opacity-0 border-x-black border",
         )}
       >
-        <ChevronDownIcon
-          className={clsx([
-            "group-open/details:-rotate-180",
-            "transition-transform",
-            "w-5 h-5",
-            "stroke-[#0056b4] fill-[#0056b4]",
-          ])}
-        />
+        {/* TODO: use tokens here */}
+        <span className="w-4 h-4 block" aria-hidden="true">
+          <ChevronDownIcon
+            className={clsx([
+              "group-open/details:-rotate-180",
+              "transition-transform",
+              "w-5 h-5",
+              "text--[#0056b4]",
+            ])}
+          />
+        </span>
         <span className="text-[#0056b4]">{title}</span>
       </summary>
       <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] mr-12 pl-5 pt-3">
