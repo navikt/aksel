@@ -35,7 +35,9 @@ export const Route = createRootRoute({
         <RouteLink to="/komponenter">Komponenter</RouteLink>
       </div>
       <hr />
-      <Outlet />
+      <div className="overflow-x-clip">
+        <Outlet />
+      </div>
       <TanStackRouterDevtools />
     </>
   ),
