@@ -1,6 +1,6 @@
 import { TransformedToken } from "style-dictionary/types";
-import { describe, expect, it } from "vitest";
-import { extractTokenName } from "../figma/create-tokens";
+import { describe, expect, test } from "vitest";
+import { createTokenName, figmaValue } from "../figma/create-tokens";
 
 const baseToken: TransformedToken = {
   name: "tokenName",
@@ -11,57 +11,95 @@ const baseToken: TransformedToken = {
   isSource: true,
 };
 
-describe("extractTokenName", () => {
-  it("should extract name from token with item attribute", () => {
+describe("createTokenName", () => {
+  test("should extract name from token with item attribute", () => {
     const token: TransformedToken = {
       ...baseToken,
       name: "tokenName",
     };
+    expect(createTokenName({ ...token, attributes: { item: "primary" } })).toBe(
+      "Primary",
+    );
     expect(
-      extractTokenName({ ...token, attributes: { item: "primary" } }),
-    ).toBe("Primary");
-    expect(
-      extractTokenName({ ...token, attributes: { item: "bg-strong-hover" } }),
+      createTokenName({ ...token, attributes: { item: "bg-strong-hover" } }),
     ).toBe("Bg Strong Hover");
   });
 
-  it("should create correct grouping for token with group attribute", () => {
+  test("should create correct grouping for token with group attribute", () => {
     const token: TransformedToken = {
       ...baseToken,
       name: "tokenName",
       attributes: { item: "primary" },
       group: "color.background",
     };
-    expect(extractTokenName(token)).toBe("Color/Background/Primary");
+    expect(createTokenName(token)).toBe("Color/Background/Primary");
   });
 
-  it("should add 'Default' suffix for tokens with duplicate names", () => {
+  test("should add 'Default' suffix for tokens with duplicate names", () => {
     const token: TransformedToken = {
       ...baseToken,
       name: "tokenName",
       attributes: { item: "accent" },
       group: "text.accent",
     };
-    expect(extractTokenName(token)).toBe("Text/Accent/Accent Default");
+    expect(createTokenName(token)).toBe("Text/Accent/Accent Default");
   });
 
-  it("should add 'Radius' prefix for global-radius type tokens", () => {
+  test("should add 'Radius' prefix for global-radius type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
       name: "tokenName",
       attributes: { item: "small" },
       type: "global-radius",
     };
-    expect(extractTokenName(token)).toBe("Radius Small");
+    expect(createTokenName(token)).toBe("Radius Small");
   });
 
-  it("should add 'Spacing' prefix for global-spacing type tokens", () => {
+  test("should add 'Spacing' prefix for global-spacing type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
       name: "tokenName",
       attributes: { item: "4" },
       type: "global-spacing",
     };
-    expect(extractTokenName(token)).toBe("Spacing 4");
+    expect(createTokenName(token)).toBe("Spacing 4");
+  });
+});
+
+describe("extracting figma value for token", () => {
+  test("should convert rem to px for global-radius type tokens", () => {
+    const token: TransformedToken = {
+      ...baseToken,
+      value: "1rem",
+      type: "global-radius",
+    };
+    expect(figmaValue(token)).toBe(16);
+  });
+
+  test("should handle conversion of rem in float", () => {
+    const token: TransformedToken = {
+      ...baseToken,
+      value: "0.25rem",
+      type: "global-radius",
+    };
+    expect(figmaValue(token)).toBe(4);
+  });
+
+  test("should convert px to number for global-spacing type tokens", () => {
+    const token: TransformedToken = {
+      ...baseToken,
+      value: "32px",
+      type: "global-spacing",
+    };
+    expect(figmaValue(token)).toBe(32);
+  });
+
+  test("should return the original value for non-radius and non-spacing type tokens", () => {
+    const token: TransformedToken = {
+      ...baseToken,
+      type: "color",
+      value: "#111",
+    };
+    expect(figmaValue(token)).toBe("#111");
   });
 });

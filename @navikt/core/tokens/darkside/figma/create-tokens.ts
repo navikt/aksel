@@ -100,7 +100,7 @@ function prepareToken(
  * We do not need to handle the 'color' type since we can use Figma built-in for this
  * @see https://www.figma.com/plugin-docs/api/properties/figma-util-rgba
  */
-function figmaValue(token: TransformedToken): string | number {
+export function figmaValue(token: TransformedToken): string | number {
   if (isRadiusToken(token) || isSpacingToken(token)) {
     const float = parseFloat(token.value.replace("px", "").replace("rem", ""));
 
