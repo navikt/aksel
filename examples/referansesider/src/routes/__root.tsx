@@ -30,8 +30,9 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <div className="p-2 flex gap-6">
-        <RouteLink to="/sykepenger">Sykepenger</RouteLink>{" "}
+        <RouteLink to="/sykepenger">Sykepenger</RouteLink>
         <RouteLink to="/minside">Min Side</RouteLink>
+        <RouteLink to="/komponenter">Komponenter</RouteLink>
       </div>
       <hr />
       <Outlet />

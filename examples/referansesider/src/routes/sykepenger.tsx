@@ -9,6 +9,7 @@ import {
 } from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import SykepengerIcon from "../assets/SykepengerIcon";
+import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";
@@ -345,21 +346,11 @@ const ExpandoPill = ({
   );
 };
 
-const Button = styled.button`
-  display: inline-block;
-  color: ${tokens.Accent900};
-  border: 2px solid ${tokens.Accent900};
-  font-size: 20px;
-  border-radius: 4px;
-  padding-inline: 1rem;
-  padding-block: 0.4rem;
-  width: fit-content;
-  &:hover {
-    background-color: ${tokens.Accent200};
-  }
-`;
+export const Route = createFileRoute("/sykepenger")({
+  component: SykepengerPage,
+});
 
-const Component = () => {
+function SykepengerPage() {
   return (
     <Dekoratoren>
       <Page>
@@ -663,8 +654,8 @@ const Component = () => {
           kontakte oss.
         </PlainText>
         <div className="flex gap-2 mb-10">
-          <Button>Send klage</Button>
-          <Button>Ettersend dokumentasjon</Button>
+          <Button variant="secondary">Send klage</Button>
+          <Button variant="secondary">Ettersend dokumentasjon</Button>
         </div>
         <Header3>Reise eller flytte til utlandet</Header3>
         <PlainText>
@@ -690,6 +681,4 @@ const Component = () => {
       </Page>
     </Dekoratoren>
   );
-};
-
-export const Route = createFileRoute("/sykepenger")({ component: Component });
+}
