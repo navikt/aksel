@@ -15,5 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "'loading' bør bare brukes for korte lastetider. Ved lengre lastetid bør brukeren bli informert om hva som tar tid/foregår i bakgrunnen mens de venter.",
+  desc: "'loading'-prop bør bare brukes for korte lastetider. Ved lengre lastetid bør brukeren bli informert om hva som tar tid/foregår i bakgrunnen mens de venter.",
 };
