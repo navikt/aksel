@@ -7,8 +7,13 @@ import {
   lightModeTokens,
   scaleTokens,
 } from "../create-configuration";
-import { TokenGroup, TokenTypes, tokenGroupLookup, tokenTypes } from "../util";
-import { FigmaToken } from "./types";
+import {
+  type TokenGroup,
+  type TokenTypes,
+  tokenGroupLookup,
+  tokenTypes,
+} from "../util";
+import type { FigmaToken } from "./figma-config.types";
 
 const config = {
   light: lightModeTokens(),
