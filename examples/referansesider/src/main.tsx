@@ -5,7 +5,7 @@ import "@navikt/ds-tokens/dist/darkside/tokens.css";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 
-const router = createRouter({ routeTree });
+const router = createRouter({ routeTree, trailingSlash: "always" });
 
 declare module "@tanstack/react-router" {
   interface Register {
