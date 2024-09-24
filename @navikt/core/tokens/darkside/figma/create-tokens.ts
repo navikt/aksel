@@ -210,37 +210,31 @@ function createGroupName(group: string): string {
   );
 }
 
-function isBackgroundColor(token: TransformedToken | FigmaToken): boolean {
+function isTokenOfSemanticColorGroup(
+  token: TransformedToken | FigmaToken,
+  groupType: keyof typeof tokenGroupLookup,
+): boolean {
   const group = token.group as TokenGroup;
   if (!isSemanticColor(token)) {
     return false;
   }
-  return group?.includes(tokenGroupLookup.background) ?? false;
+  return group?.includes(tokenGroupLookup[groupType]) ?? false;
+}
+
+function isBackgroundColor(token: TransformedToken | FigmaToken): boolean {
+  return isTokenOfSemanticColorGroup(token, "background");
 }
 
 function isBorderColor(token: TransformedToken | FigmaToken): boolean {
-  const group = token.group as TokenGroup;
-  if (!isSemanticColor(token)) {
-    return false;
-  }
-  return group?.includes(tokenGroupLookup.border) ?? false;
+  return isTokenOfSemanticColorGroup(token, "border");
 }
 
 function isContrastColor(token: TransformedToken | FigmaToken): boolean {
-  const group = token.group as TokenGroup;
-  if (!isSemanticColor(token)) {
-    return false;
-  }
-  return group?.includes(tokenGroupLookup.contrast) ?? false;
+  return isTokenOfSemanticColorGroup(token, "contrast");
 }
 
 function isTextColor(token: TransformedToken | FigmaToken): boolean {
-  const group = token.group as TokenGroup;
-
-  if (!isSemanticColor(token)) {
-    return false;
-  }
-  return group?.includes(tokenGroupLookup.text) ?? false;
+  return isTokenOfSemanticColorGroup(token, "text");
 }
 
 export function isGlobalColor(token: TransformedToken | FigmaToken): boolean {
