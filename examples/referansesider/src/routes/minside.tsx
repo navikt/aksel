@@ -1,6 +1,6 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { ChevronRightIcon, HeartIcon } from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
@@ -41,7 +41,7 @@ const Component = () => {
 
     return (
       <_card>
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full justify-center">
           {title && (
             <span className="font-semibold text-xl border-b border-b-gray-300 px-5 pt-4 pb-2">
               {title}
@@ -93,11 +93,17 @@ const Component = () => {
                 <p className="m-5">Du må sende 2 meldekort</p>
               </Card>
               <Card>
-                <div className="flex flex-row justify-between align-middle items-center h-full">
-                  <span className="font-semibold text-xl px-5 pt-4 pb-2">
-                    AAP (Arbeidsavklaringspenger)
-                  </span>
-                  <ChevronRightIcon className="mx-3 mt-3" />
+                <div className="flex justify-between align-middle items-center h-full">
+                  <div className="flex items-center">
+                    <HeartIcon className="m-4" />
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-xl pt-1">
+                        AAP (Arbeidsavklaringspenger)
+                      </span>
+                      <span>Oversikt over saken din</span>
+                    </div>
+                  </div>
+                  <ChevronRightIcon className="mx-3 mt-1" />
                 </div>
               </Card>
               <Card title="Dialogmøte med NAV">
