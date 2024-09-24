@@ -1,7 +1,6 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
-import { twMerge } from "tailwind-merge";
 import {
   ArrowDownRightIcon,
   ArrowRightIcon,
@@ -13,6 +12,7 @@ import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";
+import { PlainText } from "../components/PlainText";
 
 const Detail = styled.span`
   color: ${tokens.TextSubtle};
@@ -142,16 +142,6 @@ const PillLink = ({ children }: { children: ReactNode }) => {
       {children}
     </_anchor>
   );
-};
-
-const PlainText = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
-  return <p className={twMerge("text-xl", className, `mb-9`)}>{children}</p>;
 };
 
 const LinkList = ({

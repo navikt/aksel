@@ -2,7 +2,6 @@ import { ReactNode } from "@tanstack/react-router";
 import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Link } from "./Link";
-import { Page } from "./Page";
 
 export const Dekoratoren = ({ children }: { children: ReactNode }) => {
   const _link = styled(Link)`
@@ -56,7 +55,7 @@ export const Dekoratoren = ({ children }: { children: ReactNode }) => {
           <_link>Søk</_link>
         </div>
       </div>
-      <Page>{children}</Page>
+      {children}
       <_footer>
         <span>this</span>
         <div>is</div>
