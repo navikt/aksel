@@ -7,7 +7,8 @@ export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
     web: string;
   };
   value: VariableValue;
-  figmaType: FigmaType;
+  figmaType: VariableResolvedDataType;
+  scopes: VariableScope[];
 };
 
 type FigmaConfigEntry = {
@@ -24,9 +25,4 @@ export type FigmaTokenConfig = {
   semanticColors: FigmaConfigEntry;
   radius: FigmaConfigEntry;
   spacing: FigmaConfigEntry;
-};
-
-export type FigmaType = {
-  type: VariableResolvedDataType;
-  scopes: VariableScope[];
 };
