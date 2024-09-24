@@ -2,8 +2,27 @@ import { ReactNode } from "@tanstack/react-router";
 import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 
+const ScLink = styled.a`
+  color: ${tokens.TextAccentSubtle};
+
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &[data-inverted="true"] {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
 export const Link = ({
   href = "#",
+  inverted = false,
   ...rest
 }: {
   children: ReactNode;
@@ -11,13 +30,5 @@ export const Link = ({
   href?: string;
   className?: string;
 }) => {
-  const _Link = styled.a<{ inverted?: boolean }>`
-    color: ${tokens.Accent900};
-    text-decoration: ${(props) => (props.inverted ? "none" : "underline")};
-    &:hover {
-      text-decoration: ${(props) => (props.inverted ? "underline" : "none")};
-    }
-  `;
-
-  return <_Link href={href} {...rest} />;
+  return <ScLink href={href} {...rest} data-inverted={inverted} />;
 };

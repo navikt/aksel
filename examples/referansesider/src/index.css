@@ -6,4 +6,5 @@
   width: 100%;
   font-family: "Source Sans 3", system-ui;
   font-size: 18px;
+  color: var(--a-text-default);
 }

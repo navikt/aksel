@@ -1,6 +1,7 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
+import { twMerge } from "tailwind-merge";
 import {
   ArrowDownRightIcon,
   ArrowRightIcon,
@@ -12,33 +13,37 @@ import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";
-import { PlainText } from "../components/PlainText";
 
-const Detail = styled.span`
+const EyeBrowText = styled.span`
   color: ${tokens.TextSubtle};
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 1.2px;
   font-variant-caps: all-small-caps;
 `;
 
-const Header1 = styled.h1`
-  position: relative;
-  color: ${tokens.BrandOne900};
+const H1 = styled.h1`
+  color: ${tokens.TextBrandOne};
   font-size: 48px;
-  font-weight: 650;
+  font-weight: 700;
   margin-bottom: 1rem;
+  line-height: 52px;
+  letter-spacing: -0.48px;
 `;
 
-const Header2 = styled.h1`
+const H2 = styled.h2`
   position: relative;
-  color: ${tokens.BrandOne900};
+  color: ${tokens.TextBrandOne};
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1rem;
   margin-top: 5rem;
+  line-height: 40px;
+  letter-spacing: -0.288px;
+
   &::before {
-    background-color: #99185e;
-    opacity: 0.4;
+    background-color: ${tokens.BorderBrandOneSubtle};
     content: "";
     height: 7px;
     left: 0;
@@ -48,65 +53,28 @@ const Header2 = styled.h1`
   }
 `;
 
-const Header3 = styled.h3`
-  position: relative;
-  color: ${tokens.TextDefault};
+const H3 = styled.h3`
   font-size: 24px;
-  font-weight: 650;
+  font-weight: 700;
   margin-bottom: 1rem;
+  line-height: 32px;
+  letter-spacing: -0.048px;
 `;
 
-const Header4 = styled.h4`
-  position: relative;
-  color: ${tokens.TextDefault};
+const H4 = styled.h4`
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.02px;
   margin-bottom: 0.5rem;
 `;
 
-const InfoSummary = styled.span`
+const PreAmble = styled.p`
   font-size: 22px;
+  font-weight: 400;
+  line-height: 38.5px;
+  letter-spacing: -0.029px;
 `;
-
-const FancyHeader = () => {
-  return (
-    <div className={clsx("mt-16 relative")}>
-      <SykepengerIcon
-        className="-translate-x-32 translate-y-1"
-        colorStroke="stroke-[#99185e]"
-        colorFill="fill-[#99185e]"
-      />
-      <Detail>PENGESTØTTE — FOR ARBEIDSGIVERE</Detail>
-      <Header1>Sykepenger</Header1>
-      <InfoSummary>
-        Erstatter inntekten din når du ikke kan jobbe på grunn av sykdom eller
-        skade.
-      </InfoSummary>
-    </div>
-  );
-};
-
-const ArrowLink = ({
-  children,
-  ...rest
-}: {
-  children: ReactNode;
-  href?: string;
-}) => {
-  return (
-    <Link
-      className="flex flex-row gap-2 items-center text-xl no-underline hover:underline"
-      inverted
-      {...rest}
-    >
-      <span className="w-4 h-4 block" aria-hidden="true">
-        {/* TODO: use tokens here */}
-        <ArrowDownRightIcon className="stroke-[#0056b4]" />
-      </span>
-      {children}
-    </Link>
-  );
-};
 
 const PillLink = ({ children }: { children: ReactNode }) => {
   const _anchor = styled.a`
@@ -144,13 +112,23 @@ const PillLink = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const Paragraph = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  return <p className={twMerge("text-xl", className, `mb-9`)}>{children}</p>;
+};
+
 const LinkList = ({
   title,
-  children,
+  links,
   borderTop = false,
 }: {
   title: string;
-  children: ReactNode;
+  links: string[];
   borderTop?: boolean;
 }) => {
   return (
@@ -159,14 +137,28 @@ const LinkList = ({
         ["border-t-[#99185e] border-t-[5px]"]: borderTop,
       })}
     >
-      <h2 className="mb-4 text-xl font-bold" id="heading-page-navigation-menu">
+      <h2
+        className="mb-4 text-xl font-semibold"
+        id="heading-page-navigation-menu"
+      >
         {title}
       </h2>
       <ul
         className="flex flex-col gap-3"
         aria-labelledby="heading-page-navigation-menu"
       >
-        {children}
+        {links.map((link) => (
+          <li key={link}>
+            <Link
+              className="flex gap-[6px] items-center text-xl no-underline hover:underline"
+              inverted
+              href={`#${link}`}
+            >
+              <ArrowDownRightIcon aria-hidden />
+              {link}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -344,39 +336,39 @@ function SykepengerPage() {
   return (
     <Dekoratoren>
       <Page>
-        <FancyHeader />
-        <PlainText className="my-6 text-lg">
+        <div className="mt-16 relative">
+          <SykepengerIcon
+            className="-translate-x-32 translate-y-1"
+            colorStroke="stroke-[#99185e]"
+            colorFill="fill-[#99185e]"
+          />
+          <EyeBrowText>PENGESTØTTE — FOR ARBEIDSGIVERE</EyeBrowText>
+          <H1>Sykepenger</H1>
+          <PreAmble>
+            Erstatter inntekten din når du ikke kan jobbe på grunn av sykdom
+            eller skade.
+          </PreAmble>
+        </div>
+        <Paragraph className="my-6 text-lg">
           Det finnes også informasjon om sykepenger til{" "}
           <Link>arbeidsgivere</Link> og{" "}
           <Link>leger og tannleger eller andre behandlere</Link>.
-        </PlainText>
-        <LinkList title="Innhold på siden" borderTop>
-          <li>
-            <ArrowLink href="#hvem">
-              <span>Hvem kan få?</span>
-            </ArrowLink>
-          </li>
-          <li>
-            <ArrowLink href="#hva">
-              <span>Hva kan du få?</span>
-            </ArrowLink>
-          </li>
-          <li>
-            <ArrowLink href="#sok">
-              <span>Søke, ettersende eller klage</span>
-            </ArrowLink>
-          </li>
-          <li>
-            <ArrowLink href="#har">
-              <span>Når du har sykepenger</span>
-            </ArrowLink>
-          </li>
-        </LinkList>
-        <Header2 id="hvem">Hvem kan få?</Header2>
-        <PlainText>
+        </Paragraph>
+        <LinkList
+          title="Innhold på siden"
+          borderTop
+          links={[
+            "Hvem kan få?",
+            "Hva kan du få?",
+            "Søke, ettersende eller klage",
+            "Når du har sykepenger",
+          ]}
+        />
+        <H2 id="hvem">Hvem kan få?</H2>
+        <Paragraph>
           Du kan ha rett til sykepenger hvis du oppfyller disse generelle
           vilkårene:
-        </PlainText>
+        </Paragraph>
         <PlainList>
           <li>
             Du er <Link>medlem av folketrygden</Link> eller er EU/EØS-borger og
@@ -395,53 +387,53 @@ function SykepengerPage() {
             som lønn og betaler skatt av.
           </li>
         </PlainList>
-        <PlainText>
+        <Paragraph>
           Det er NAV som avgjør om sykmeldingen gir deg rett til sykepenger. Det
           er ulike regler avhengig av hva slags arbeid du har eller hvilken
           situasjon du er i.
-        </PlainText>
-        <PlainText>
+        </Paragraph>
+        <Paragraph>
           Får du <Link>fosterhjemsgodtgjørelse</Link>? Da regnes du som
           frilanser. Det samme gjelder hvis du får <Link>omsorgsstønad</Link> og
           du ikke er ansatt hos en arbeidsgiver. Se egen informasjon for
           frilansere.
-        </PlainText>
-        <PlainText>Se hvilke regler som gjelder for deg:</PlainText>
+        </Paragraph>
+        <Paragraph>Se hvilke regler som gjelder for deg:</Paragraph>
         <Accordion>
           <AccordionItem title="Arbeidstaker">
-            <PlainText>
+            <Paragraph>
               For å ha rett til sykepenger fra NAV må du ha jobbet minst fire
               uker rett før du ble sykmeldt. Du må også ha en årsinntekt som
               tilsvarer femti prosent av grunnbeløpet i folketrygden, det vil si
               62&nbsp;014 kroner. For å beregne årsinntekten din bruker NAV
               gjennomsnittet av de tre siste månedene.
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               Det samme gjelder hvis du kombinerer arbeid med uføretrygd.
-            </PlainText>{" "}
-            <Header4>Hvis du er kronisk syk eller gravid</Header4>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <H4>Hvis du er kronisk syk eller gravid</H4>{" "}
+            <Paragraph>
               Har du en&nbsp;langvarig eller kronisk sykdom&nbsp;som kan føre
               til hyppige sykefravær?&nbsp;Eller er du sykmeldt på grunn av
               årsaker som henger sammen med graviditeten?
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               Vanligvis utbetaler arbeidsgiveren din sykepengene for de første
               16 dagene du er syk. Dette kalles arbeidsgiverperioden.
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               Hvis du har hyppige og/eller uforutsigbare sykefravær, kan du
               eller arbeidsgiveren din søke om at NAV dekker sykepengene
               arbeidsgiveren har utbetalt i arbeidsgiverperioden.
-            </PlainText>{" "}
+            </Paragraph>{" "}
             <PillLink>Dekking av sykepenger i arbeidsgiverperioden</PillLink>
-            <Header4>Hvis du er arbeidstaker på skip</Header4>{" "}
-            <PlainText>
+            <H4>Hvis du er arbeidstaker på skip</H4>{" "}
+            <Paragraph>
               Sykepenger for arbeidstakere på skip beregnes i hovedsak på samme
               måte som for arbeidstakere, men det er i tillegg noen særskilte
               regler for deg som jobber på skip&nbsp;i utenriksfart som er
               registrert i Norsk internasjonalt skipsregister (NIS).
-            </PlainText>{" "}
+            </Paragraph>{" "}
             <PlainList>
               <li>
                 Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
@@ -472,14 +464,14 @@ function SykepengerPage() {
                 dermed ikke rett til sykepenger.
               </li>{" "}
             </PlainList>{" "}
-            <Header4>Tilkallingsvikar</Header4>{" "}
-            <PlainText>
+            <H4>Tilkallingsvikar</H4>{" "}
+            <Paragraph>
               Du kan ha rett til sykepenger, men det avhenger blant annet på
               hvor mye og ofte du har jobbet før du ble sykmeldt.
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               Hvis du er tilkallingsvikar, er det viktig å avgjøre om
-            </PlainText>{" "}
+            </Paragraph>{" "}
             <PlainList>
               {" "}
               <li>
@@ -491,45 +483,45 @@ function SykepengerPage() {
                 avtalt noen vakter med arbeidsgiveren din framover.
               </li>{" "}
             </PlainList>{" "}
-            <Header4>Hvis du er mellom 67 og 70 år</Header4>{" "}
-            <PlainText>
+            <H4>Hvis du er mellom 67 og 70 år</H4>{" "}
+            <Paragraph>
               Du kan få sykepenger fra NAV i opptil 60 dager hvis gjennomsnittet
               av inntekten din de siste 3 månedene før du ble syk omgjort til
               årsinntekt overstiger 248&nbsp;056 kroner (2 ganger grunnbeløpet i
               folketrygden). Dette gjelder hvis du er mellom 67 og 70 år,
               uavhengig av om du har tatt ut alderspensjon.
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               60-dagersregelen gjelder fra og med dagen etter du fylte 67 år og
               til og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt 70 år,
               har du ikke rett til sykepenger.
-            </PlainText>{" "}
-            <Header4>Friskmelding til arbeidsformidling</Header4>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <H4>Friskmelding til arbeidsformidling</H4>{" "}
+            <Paragraph>
               Hvis alle muligheter for å komme tilbake til arbeidsplassen din er
               forsøkt, kan du få <Link>sykepenger i inntil 12 uker</Link> mens
               du søker ny jobb.
-            </PlainText>{" "}
+            </Paragraph>{" "}
             <PillLink>Friskmelding til arbeidsformidling</PillLink>
             <h4>Dette gjør du når du blir syk</h4>{" "}
-            <PlainText>
+            <Paragraph>
               Du kan få sykepenger fra den dagen arbeidsgiveren din har fått
               beskjed om at du er syk, derfor må du gi beskjed til
               arbeidsgiveren din så snart som mulig. Du leverer enten
               egenmelding eller sykmelding.
-            </PlainText>{" "}
-            <PlainText>
+            </Paragraph>{" "}
+            <Paragraph>
               Hvis du er syk lenger enn egenmeldingsdagene, må du kontakte lege.
-            </PlainText>{" "}
+            </Paragraph>{" "}
           </AccordionItem>
           <AccordionItem title="Fisker">
             <div>
-              <PlainText>
+              <Paragraph>
                 Sykepenger til deg som fisker beregnes&nbsp; på samme måte som
                 for arbeidstakere og/eller selvstendig&nbsp; næringsdrivende,
                 men det er noen særskilte regler for deg som er fisker på blad B
                 i fiskermanntallet:
-              </PlainText>{" "}
+              </Paragraph>{" "}
               <PlainList>
                 {" "}
                 <li>
@@ -541,69 +533,56 @@ function SykepengerPage() {
                   sykefraværsdag.
                 </li>{" "}
               </PlainList>{" "}
-              <Header4>
+              <H4>
                 <strong>På lott eller hyre</strong>
-              </Header4>{" "}
-              <PlainText>
+              </H4>{" "}
+              <Paragraph>
                 Hvis du mottar lott, regnes du som&nbsp;selvstendig
                 næringsdrivende.
-              </PlainText>{" "}
-              <PlainText>
+              </Paragraph>{" "}
+              <Paragraph>
                 Hvis du har hyre, regnes du som arbeidstaker.
-              </PlainText>{" "}
+              </Paragraph>{" "}
               <h4>Hvis du er mellom 67 og 70 år</h4>{" "}
-              <PlainText>
+              <Paragraph>
                 Du kan få sykepenger fra NAV i opptil 60 dager hvis
                 gjennomsnittet av inntekten din de siste 3 månedene før du ble
                 syk omgjort til årsinntekt overstiger 248&nbsp;056 kroner (2
                 ganger grunnbeløpet i folketrygden). Dette gjelder hvis du er
                 mellom 67 og 70 år, uavhengig av om du har tatt ut
                 alderspensjon.
-              </PlainText>{" "}
-              <PlainText>
+              </Paragraph>{" "}
+              <Paragraph>
                 60-dagersregelen gjelder fra og med dagen etter du fylte 67 år
                 og til og med dagen før&nbsp;du fyller 70 år. Hvis du har fylt
                 70 år, har du ikke rett til sykepenger.
-              </PlainText>{" "}
+              </Paragraph>{" "}
             </div>
           </AccordionItem>
         </Accordion>
         <div className="flex flex-col gap-6 mb-6">
-          <Header2 id="hva">Hva kan du få?</Header2>
-          <LinkList title="I dette kapittelet" borderTop>
-            <li>
-              <ArrowLink href="#hvem">
-                <span>Hvor mye kan du få?</span>
-              </ArrowLink>
-            </li>
-            <li>
-              <ArrowLink href="#hva">
-                <span>Hvor lenge kan du få?</span>
-              </ArrowLink>
-            </li>
-            <li>
-              <ArrowLink href="#sok">
-                <span>Reisetilskudd som alternativ til sykepenger</span>
-              </ArrowLink>
-            </li>
-            <li>
-              <ArrowLink href="#har">
-                <span>Andre tilbud</span>
-              </ArrowLink>
-            </li>
-          </LinkList>
+          <H2 id="hva">Hva kan du få?</H2>
+          <LinkList
+            title="I dette kapittelet"
+            links={[
+              "Hvor mye kan du få?",
+              "Hvor lenge kan du få?",
+              "Reisetilskudd som alternativ til sykepenger",
+              "Andre tilbud",
+            ]}
+          />
         </div>
         <div className="mb-10">
-          <Header3>Reisetilskudd som alternativ til sykepenger</Header3>
-          <PlainText>
+          <H3>Reisetilskudd som alternativ til sykepenger</H3>
+          <Paragraph>
             Klarer du å jobbe, men har problemer med å reise til og fra
             arbeidsstedet? Da kan du ha rett til reisetilskudd i stedet for
             sykepenger fra 17. dag etter at du ble sykmeldt.
-          </PlainText>
+          </Paragraph>
           <MiniCard title="Reisetilskudd" subtitle="pengestøtte" />
         </div>
-        <Header3>Andre tilbud</Header3>
-        <PlainText>Mer informasjon til deg som</PlainText>
+        <H3>Andre tilbud</H3>
+        <Paragraph>Mer informasjon til deg som</Paragraph>
         <div className="flex flex-col gap-4">
           <MiniCard
             title="Har blitt sykmeldt"
@@ -622,36 +601,36 @@ function SykepengerPage() {
             subtitle="Dette kan du ha rett til"
           />
         </div>
-        <Header2 id="sok">Søke, ettersende eller klage</Header2>
+        <H2 id="sok">Søke, ettersende eller klage</H2>
         <ExpandoPill title="Hvis du mangler BankId">
-          <PlainText>
+          <Paragraph>
             Hvis du mangler BankID, ikke har legitimasjon på høyeste
             sikkerhetsnivå eller har fortrolig adresse i Folkeregisteret, må du
             bruke del D av papirsykmeldingen til å søke om sykepenger. Finn
             riktig adresse.
-          </PlainText>
-          <PlainText>
+          </Paragraph>
+          <Paragraph>
             Hvis du har en arbeidsgiver, må du levere del C av sykmeldingen til
             arbeidsgiveren din. Del D – søknaden – leverer du til den som skal
             utbetale sykepenger.
-          </PlainText>
+          </Paragraph>
         </ExpandoPill>
-        <Header2 id="har">Når du har sykepenger</Header2>
-        <Header4>Klage på vedtak</Header4>
-        <PlainText>
+        <H2 id="har">Når du har sykepenger</H2>
+        <H4>Klage på vedtak</H4>
+        <Paragraph>
           I vedtaket står det hvordan du går fram hvis du skal klage, hvem du
           skal klage til og klagefrist. Hvis du har spørsmål om vedtaket, kan du
           kontakte oss.
-        </PlainText>
+        </Paragraph>
         <div className="flex gap-2 mb-10">
           <Button variant="secondary">Send klage</Button>
           <Button variant="secondary">Ettersend dokumentasjon</Button>
         </div>
-        <Header3>Reise eller flytte til utlandet</Header3>
-        <PlainText>
+        <H3>Reise eller flytte til utlandet</H3>
+        <Paragraph>
           Hvis du vurderer å reise mens du er sykmeldt, er det noen ting du må
           sjekke på forhånd.
-        </PlainText>
+        </Paragraph>
         <PlainOrderedList>
           <li>
             Du må sjekke med arbeidsgiveren din om reisen vil hindre planlagt
