@@ -6,10 +6,10 @@ export const Page = ({
   options,
 }: {
   children: ReactNode;
-  options?: { width?: string };
+  options?: { width?: "large" | "medium" };
 }) => {
   const _options = options ?? {
-    width: "72ch",
+    width: "medium",
   };
   const width = _options.width;
   return (
@@ -17,7 +17,8 @@ export const Page = ({
       className={clsx(
         "flex flex-col px-2 w-full m-auto mb-20 min-h-screen",
         "lg:px-0",
-        { [`lg:w-[${width}]`]: width },
+        { [`lg:w-[72ch]`]: width === "medium" },
+        { [`lg:w-[921px]`]: width === "large" },
       )}
     >
       {children}

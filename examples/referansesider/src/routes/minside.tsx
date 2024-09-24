@@ -55,7 +55,7 @@ const Component = () => {
 
   return (
     <Dekoratoren>
-      <Page options={{ width: "912px" }}>
+      <Page options={{ width: "large" }}>
         <div className="flex flex-col">
           <div>
             <Header2>Hei, Navn Navnesen</Header2>
