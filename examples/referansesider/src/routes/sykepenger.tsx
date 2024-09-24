@@ -337,11 +337,7 @@ function SykepengerPage() {
     <Dekoratoren>
       <Page>
         <div className="mt-16 relative">
-          <SykepengerIcon
-            className="-translate-x-32 translate-y-1"
-            colorStroke="stroke-[#99185e]"
-            colorFill="fill-[#99185e]"
-          />
+          <SykepengerIcon className="-translate-x-32 translate-y-1" />
           <EyeBrowText>PENGESTØTTE — FOR ARBEIDSGIVERE</EyeBrowText>
           <H1>Sykepenger</H1>
           <PreAmble>
