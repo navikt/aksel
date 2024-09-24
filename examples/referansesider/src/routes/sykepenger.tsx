@@ -25,7 +25,7 @@ const Header1 = styled.h1`
   position: relative;
   color: ${tokens.BrandOne900};
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 650;
   margin-bottom: 1rem;
 `;
 
