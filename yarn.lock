@@ -3120,7 +3120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/plugin-typings@npm:^1.84.0":
+"@figma/plugin-typings@npm:^1.100.2":
   version: 1.100.2
   resolution: "@figma/plugin-typings@npm:1.100.2"
   checksum: 10/cc04afed7355b8e1ab71bfab41105034cc80498b5156f3e86ea6b7e66b2882477e200fc2b84a6aad23c86d984d8906b0e1689467303da9bae09aeed4d256db00
@@ -3891,6 +3891,7 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@adobe/leonardo-contrast-colors": "npm:^1.0.0"
+    "@figma/plugin-typings": "npm:^1.100.2"
     color: "npm:4.2.3"
     lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
@@ -7912,7 +7913,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel-icons-figma-plugin@workspace:@navikt/aksel-icons/figma-plugin"
   dependencies:
-    "@figma/plugin-typings": "npm:^1.84.0"
+    "@figma/plugin-typings": "npm:^1.100.2"
     "@navikt/ds-css": "npm:*"
     "@navikt/ds-react": "npm:*"
     "@svgr/core": "npm:^8.1.0"
