@@ -1,6 +1,11 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import { ChevronRightIcon, HeartIcon } from "@navikt/aksel-icons";
+import {
+  BellFillIcon,
+  ChevronRightIcon,
+  HeartIcon,
+  PencilFillIcon,
+} from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
@@ -20,8 +25,17 @@ const Component = () => {
   `;
 
   const NotificationsPanel = styled.div`
+    background-color: ${tokens.BrandThree900};
     margin-top: calc(-1 * 44px);
     margin-bottom: 44px;
+
+    svg {
+      color: ${tokens.BrandThree900};
+    }
+
+    #pencil {
+      color: white;
+    }
   `;
 
   const Card = ({
@@ -61,16 +75,20 @@ const Component = () => {
             <Header2>Hei, Navn Navnesen</Header2>
           </div>
           <GrayPanel className="mt-11">
-            <NotificationsPanel className="bg-blue-900 rounded-xl flex justify-between p-2 text-white">
+            <NotificationsPanel className="rounded-xl flex justify-between p-2 text-white">
               <div className="flex justify-start m-2 gap-4">
-                <div className="bg-orange-500 w-14 h-14 rounded-lg">n</div>
+                <div className="bg-orange-500 w-14 h-14 rounded-lg flex justify-center items-center">
+                  <BellFillIcon className="size-6" />
+                </div>
                 <div className="flex flex-col">
                   <span className="font-bold">Varsler</span>
                   <span>3 oppgaver og 6 beskjeder</span>
                 </div>
               </div>
               <div className="flex justify-start m-2 gap-4">
-                <div className="bg-blue-200 w-14 h-14 rounded-lg">n</div>
+                <div className="bg-blue-500 w-14 h-14 rounded-lg flex justify-center items-center">
+                  <PencilFillIcon id="pencil" className="size-6" />
+                </div>
                 <div className="flex flex-col">
                   <span className="font-bold">Utkast</span>
                   <span>Du har 2 påbegynte søknader</span>
