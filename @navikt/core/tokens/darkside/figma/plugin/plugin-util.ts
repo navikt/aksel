@@ -1,4 +1,4 @@
-import { FigmaToken, FigmaTokenConfig } from "../types";
+import { FigmaToken, FigmaTokenConfig } from "../figma-config.types";
 
 export type ScopedFigmaTokenConfig = Omit<FigmaTokenConfig, "version" | "date">;
 
@@ -27,7 +27,7 @@ export async function createOrFindVariable(
     existingVariable = figma.variables.createVariable(
       token.name,
       collection,
-      token.figmaType.type,
+      token.figmaType,
     );
 
     /**
@@ -39,7 +39,7 @@ export async function createOrFindVariable(
 
   existingVariable.hiddenFromPublishing = config.hideFromPublishing;
   existingVariable.setVariableCodeSyntax("WEB", token.code.web);
-  existingVariable.scopes = token.figmaType.scopes;
+  existingVariable.scopes = token.scopes;
   existingVariable.description = token.comment ?? "";
 
   return existingVariable;

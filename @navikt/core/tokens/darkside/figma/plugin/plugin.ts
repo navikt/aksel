@@ -1,5 +1,5 @@
 import _config from "../../../figma-config.json";
-import { FigmaTokenConfig } from "../types";
+import type { FigmaTokenConfig } from "../figma-config.types";
 import {
   type ResolvedFigmaCollection,
   type ResolvedFigmaCollectionValue,
@@ -17,7 +17,7 @@ const globalConfig = _config as FigmaTokenConfig;
 
 /**
  * TODO:
- * - Add remote fetch of config from CDN i production
+ * - Add remote fetch of config from CDN i production after figma config PR is merged
  */
 const main = async () => {
   await reset();
@@ -71,7 +71,14 @@ async function updateGlobalColorCollection(
   for (const token of sortedTokensByScale) {
     const variable = await createOrFindVariable(token, configuration);
 
-    variable.setValueForMode(collection.defaultModeId, token.value);
+    if (typeof token.value !== "string") {
+      throw new Error(`Token value is not a string: ${token}`);
+    }
+
+    variable.setValueForMode(
+      collection.defaultModeId,
+      figma.util.rgba(token.value),
+    );
   }
 
   console.info("Updated collection: ", config.name);
@@ -147,8 +154,12 @@ async function updateSemanticColorCollection(
         continue;
       }
 
+      if (typeof token.value !== "string") {
+        throw new Error(`Token value is not a string: ${token}`);
+      }
+
       /* Some semantic values will be hardcoded to a custom value */
-      variable.setValueForMode(mode.modeId, token.value);
+      variable.setValueForMode(mode.modeId, figma.util.rgba(token.value));
     }
   }
   console.info("Updated collection: ", config.name);
