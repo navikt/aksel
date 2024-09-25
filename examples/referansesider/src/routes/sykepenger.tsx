@@ -76,8 +76,9 @@ const PreAmble = styled.p`
   letter-spacing: -0.029px;
 `;
 
-const PillLink = ({ children }: { children: ReactNode }) => {
-  const _anchor = styled.a`
+let PillLink: ReactNode;
+{
+  const ScAnchor = styled.a`
     border: 1px solid #b0b0b0;
     box-shadow:
       0 1px 3px #26262633,
@@ -95,22 +96,24 @@ const PillLink = ({ children }: { children: ReactNode }) => {
     }
   `;
 
-  return (
-    <_anchor
-      href="#"
-      className={clsx(
-        "mb-9 inline-flex items-center gap-1",
-        "no-underline rounded-full text-[16px]",
-        "px-2 py-0.5",
-        "before:content before:relative before:inline-block before:rounded-full before:mx-1 before:w-2 before:h-2",
-        "hover:bg-blue-100",
-        "transition-all",
-      )}
-    >
-      {children}
-    </_anchor>
-  );
-};
+  PillLink = ({ children }: { children: ReactNode }) => {
+    return (
+      <ScAnchor
+        href="#"
+        className={clsx(
+          "mb-9 inline-flex items-center gap-1",
+          "no-underline rounded-full text-[16px]",
+          "px-2 py-0.5",
+          "before:content before:relative before:inline-block before:rounded-full before:mx-1 before:w-2 before:h-2",
+          "hover:bg-blue-100",
+          "transition-all",
+        )}
+      >
+        {children}
+      </ScAnchor>
+    );
+  };
+}
 
 const Paragraph = ({
   children,
@@ -164,22 +167,26 @@ const LinkList = ({
   );
 };
 
-const PlainList = ({ children }: { children: ReactNode }) => {
-  const _list = styled.ul`
+let PlainList: ReactNode;
+{
+  const ScList = styled.ul`
     & li::marker {
       color: ${tokens.BrandOne900};
     }
   `;
 
-  return (
-    <_list className="text-xl list-disc list-outside flex flex-col gap-3 ml-8 mb-9">
-      {children}
-    </_list>
-  );
-};
+  PlainList = ({ children }: { children: ReactNode }) => {
+    return (
+      <ScList className="text-xl list-disc list-outside flex flex-col gap-3 ml-8 mb-9">
+        {children}
+      </ScList>
+    );
+  };
+}
 
-const PlainOrderedList = ({ children }: { children: ReactNode }) => {
-  const _list = styled.ol`
+let PlainOrderedList: ReactNode;
+{
+  const ScList = styled.ol`
     & li::marker {
       font-weight: 800;
       color: ${tokens.BrandOne900};
@@ -189,12 +196,14 @@ const PlainOrderedList = ({ children }: { children: ReactNode }) => {
     }
   `;
 
-  return (
-    <_list className="text-xl list-decimal list-outside flex flex-col gap-3 ml-8 mb-9">
-      {children}
-    </_list>
-  );
-};
+  PlainOrderedList = ({ children }: { children: ReactNode }) => {
+    return (
+      <ScList className="text-xl list-decimal list-outside flex flex-col gap-3 ml-8 mb-9">
+        {children}
+      </ScList>
+    );
+  };
+}
 
 const AccordionItem = ({
   title,
@@ -244,49 +253,51 @@ const Accordion = ({ children }: { children: ReactNode }) => {
   return <div>{children}</div>;
 };
 
-const MiniCard = ({
-  title,
-  subtitle,
-  href = "#",
-}: {
-  title: string;
-  subtitle: string;
-  href?: string;
-}) => {
-  const _subtitle = styled.span`
+let MiniCard: ReactNode;
+{
+  const ScSubtitle = styled.span`
     font-variant-caps: all-small-caps;
     font-size: 20px;
     color: ${tokens.TextSubtle};
   `;
 
-  const _title = styled.span`
+  const ScTitle = styled.span`
     font-size: 20px;
     font-weight: 600;
     text-decoration-thickness: 3px;
     color: ${tokens.Accent900};
   `;
 
-  return (
-    <a
-      href={href}
-      className={clsx(
-        "group",
-        "flex items-center justify-between",
-        "px-5 py-3 border border-gray-300 shadow-sm rounded-lg",
-        "hover:bg-blue-50",
-      )}
-    >
-      <div className="flex flex-col leading-6">
-        <_title className="group-hover:underline">{title}</_title>
-        <_subtitle>{subtitle}</_subtitle>
-      </div>
-      <span className="w-5 h-5 block" aria-hidden="true">
-        {/* TODO: use token here */}
-        <ArrowRightIcon className="fill-gray-500" />
-      </span>
-    </a>
-  );
-};
+  MiniCard = ({
+    title,
+    subtitle,
+    href = "#",
+  }: {
+    title: string;
+    subtitle: string;
+    href?: string;
+  }) => {
+    return (
+      <a
+        href={href}
+        className={clsx(
+          "group",
+          "flex items-center justify-between",
+          "px-5 py-3 border border-gray-300 shadow-sm rounded-lg",
+          "hover:bg-blue-50",
+        )}
+      >
+        <div className="flex flex-col leading-6">
+          <ScTitle className="group-hover:underline">{title}</ScTitle>
+          <ScSubtitle>{subtitle}</ScSubtitle>
+        </div>
+        <span className="w-5 h-5 block" aria-hidden="true">
+          <ArrowRightIcon className="fill-gray-500" />
+        </span>
+      </a>
+    );
+  };
+}
 
 const ExpandoPill = ({
   title,
