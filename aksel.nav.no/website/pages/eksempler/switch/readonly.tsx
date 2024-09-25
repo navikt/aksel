@@ -22,4 +22,5 @@ export const Demo = {
 
 export const args = {
   index: 98,
+  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra 'disabled' vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn.",
 };
