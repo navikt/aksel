@@ -733,23 +733,23 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.0.1
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=aeadaa&locator=referansesider%40workspace%3A."
-  checksum: 10/d383d1e5bd18e41d07a552db164e6a3f46542da12a5ea482de5218887d3c0b4d2635afb813f26a07baa59ce6051ca460c20ad47aea1d83c93a328b4dd274a810
+  version: 7.1.0
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=22898e&locator=referansesider%40workspace%3A."
+  checksum: 10/c902bccbe74dd153327aa7cc661db88b00caa1f260c909b82364419f835ab77563ac8395e63c39b4ed5d6d3d47552a51027e59b19d145180b2b279658525eb97
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.0.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=e0fe77&locator=referansesider%40workspace%3A."
-  checksum: 10/5f272e25d3e848d78cfc721e93e401693c54e48a857ffb940b0eff46d48bc461ba5c65d8011dcc9432a36dd6f0ebb7cbe9da7646b4cdacda516f0360a55344eb
+  version: 7.1.0
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=bc85a9&locator=referansesider%40workspace%3A."
+  checksum: 10/fcd8aa832291b08b1d64ea76b3426bd8f50eda9705a69dfabae2ca08128a7e46fc1ee733bb852bdae6774654f2102d888f5f18a7212d0c23c611c9ba0b350c15
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.0.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=a3b163&locator=referansesider%40workspace%3A."
-  checksum: 10/00253b4d5cb206b33f22e5813a8c4185fcbe0c598e75e0ef3227e26d706f9ea0c142445e25d8aed7f2c2ba4906c31b5ecd3cada4e27cc511e47f32024e95ea4a
+  version: 7.1.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9d0af6&locator=referansesider%40workspace%3A."
+  checksum: 10/96185e42852b85e5a7ad4d65c68767ea7518c82a2349afc5ff00a31981ce37ced416c29b14f7a7e5187b773e2f3ae981dfc73178d398613fd51ec306c4598338
   languageName: node
   linkType: hard
 
