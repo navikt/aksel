@@ -10,51 +10,62 @@ import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
 
-const Component = () => {
-  const GrayPanel = styled.div`
-    background-color: ${tokens.BgNeutral};
-    margin-inline: calc(-1 * 50vw);
-    padding-inline: 50vw;
+const GrayPanel = styled.div`
+  background-color: ${tokens.BgNeutral};
+  margin-inline: calc(-1 * 50vw);
+  padding-inline: 50vw;
+`;
+
+const Header2 = styled.h2`
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+
+const NotificationsPanel = styled.div`
+  background-color: ${tokens.BgBrandThreeModerate};
+  margin-top: calc(-1 * 44px);
+  margin-bottom: 44px;
+
+  svg {
+    color: ${tokens.BgBrandThreeModerate};
+  }
+
+  #pencil {
+    color: white;
+  }
+`;
+
+let Card;
+{
+  const bg_map: { [key: string]: string } = {
+    default: tokens.BgDefault,
+    subtle: tokens.BgNeutral,
+    info: tokens.BgInfo,
+  };
+
+  const ScCard = styled.div<{ $variant: "default" | "subtle" | "info" }>`
+    border-radius: 8px;
+    background-color: ${(prop) => bg_map[prop.$variant]};
+    box-shadow: ${(prop) =>
+      prop.$variant === "default"
+        ? `rgba(0, 0, 0, 0.15) 0px 1px 3px 0px,
+rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;`
+        : "none;"};
   `;
 
-  const Header2 = styled.h2`
-    font-size: 32px;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  `;
-
-  const NotificationsPanel = styled.div`
-    background-color: ${tokens.BrandThree900};
-    margin-top: calc(-1 * 44px);
-    margin-bottom: 44px;
-
-    svg {
-      color: ${tokens.BrandThree900};
-    }
-
-    #pencil {
-      color: white;
-    }
-  `;
-
-  const Card = ({
+  Card = ({
     title,
     children,
+    variant = "default",
   }: {
     title?: string;
     children: ReactNode;
+    variant?: "default" | "subtle" | "info";
   }) => {
-    const _card = styled.div`
-      border-radius: 8px;
-      background-color: ${tokens.BgDefault};
-      box-shadow:
-        rgba(0, 0, 0, 0.15) 0px 1px 3px 0px,
-        rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;
-    `;
-
     return (
-      <_card>
+      <ScCard $variant={variant}>
         <div className="flex flex-col h-full justify-center">
           {title && (
             <span className="font-semibold text-xl border-b border-b-gray-300 px-5 pt-4 pb-2">
@@ -63,10 +74,12 @@ const Component = () => {
           )}
           <div> {children}</div>
         </div>
-      </_card>
+      </ScCard>
     );
   };
+}
 
+const Component = () => {
   return (
     <Dekoratoren>
       <Page options={{ width: "large" }}>
@@ -75,7 +88,7 @@ const Component = () => {
             <Header2>Hei, Navn Navnesen</Header2>
           </div>
           <GrayPanel className="mt-11">
-            <NotificationsPanel className="rounded-xl flex justify-between p-2 text-white">
+            <NotificationsPanel className="dark rounded-xl flex justify-between p-2 text-white">
               <div className="flex justify-start m-2 gap-4">
                 <div className="bg-orange-500 w-14 h-14 rounded-lg flex justify-center items-center">
                   <BellFillIcon className="size-6" />
@@ -138,7 +151,13 @@ const Component = () => {
               </Card>
             </div>
           </GrayPanel>
+          <Card variant="subtle">
+            <p>test</p>
+          </Card>
           <div>c</div>
+          <Card variant="info">
+            <p>test</p>
+          </Card>
         </div>
       </Page>
     </Dekoratoren>

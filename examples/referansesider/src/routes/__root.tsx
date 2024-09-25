@@ -1,4 +1,5 @@
 import {
+  ErrorComponent,
   Link,
   Outlet,
   ReactNode,
@@ -41,6 +42,7 @@ const TanStackRouterDevtools =
       );
 
 export const Route = createRootRoute({
+  errorComponent: ErrorComponent,
   component: () => (
     <>
       <header className="p-2 px-4 flex mx-auto items-center gap-6 max-w-screen-2xl">
