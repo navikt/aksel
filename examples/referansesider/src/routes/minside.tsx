@@ -12,7 +12,7 @@ import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
 
 const GrayPanel = styled.div`
-  background-color: ${tokens.BgNeutral};
+  background-color: ${tokens.BgNeutralModerate};
   margin-inline: calc(-1 * 50vw);
   padding-inline: 50vw;
 `;
@@ -40,21 +40,12 @@ const NotificationsPanel = styled.div`
 
 let Card;
 {
-  const bg_map: { [key: string]: string } = {
-    default: tokens.BgDefault,
-    subtle: tokens.BgNeutral,
-    info: tokens.BgInfo,
-  };
-
-  const ScCard = styled.div<{ $variant: "default" | "subtle" | "info" }>`
+  const ScCard = styled.div`
     border-radius: 8px;
-    background-color: ${(prop) => bg_map[prop.$variant]};
-    box-shadow: ${(prop) =>
-      prop.$variant === "default"
-        ? `rgba(0, 0, 0, 0.15) 0px 1px 3px 0px,
-rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;`
-        : "none;"};
-
+    background-color: ${tokens.BgDefault};
+    box-shadow:
+      rgba(0, 0, 0, 0.15) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;
     svg {
       transition-property: all;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -79,16 +70,14 @@ rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;`
   Card = ({
     children,
     title,
-    variant = "default",
     emphasis,
   }: {
     children: ReactNode;
     title?: string;
-    variant?: "default" | "subtle" | "info";
     emphasis?: "warning";
   }) => {
     return (
-      <ScCard $variant={variant}>
+      <ScCard>
         <div className="flex flex-col h-full justify-center transition-all">
           {title && (
             <div className="flex justify-between items-center border-b border-b-gray-300">
@@ -109,6 +98,28 @@ rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;`
     );
   };
 }
+
+const PassiveCard = styled.div<{ $variant: "subtle" | "info" }>`
+  border-radius: 8px;
+  overflow: clip;
+  margin-block: 36px 12px;
+  div {
+    padding: 16px;
+    background-color: ${(props) =>
+      props.$variant === "subtle"
+        ? tokens.BgNeutralModerate
+        : tokens.BgInfoModerate};
+  }
+  div:first-child {
+    padding-bottom: 12px;
+  }
+  div.hoverable:hover {
+    background-color: ${(props) =>
+      props.$variant === "subtle"
+        ? tokens.BgNeutralModerateHover
+        : tokens.BgInfoModerateHover};
+  }
+`;
 
 const Component = () => {
   return (
@@ -141,7 +152,7 @@ const Component = () => {
               <div></div>
             </NotificationsPanel>
             <span>Din oversikt</span>
-            <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-2 gap-6 mb-9">
               <Card title="Meldekort" emphasis="warning">
                 <p className="m-5 text-gray-500">
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
@@ -182,13 +193,31 @@ const Component = () => {
               </Card>
             </div>
           </GrayPanel>
-          <Card variant="subtle">
-            <p>test</p>
-          </Card>
-          <div>c</div>
-          <Card variant="info">
-            <p>test</p>
-          </Card>
+          <PassiveCard
+            $variant="subtle"
+            className="flex flex-col gap-0.5 w-[592px] m-auto"
+          >
+            <div>
+              <p>Siste utbetaling</p>
+            </div>
+            <div className="hoverable">
+              <p>Arbeidsavklaringspenger</p>
+            </div>
+          </PassiveCard>
+          <PassiveCard
+            $variant="info"
+            className="flex flex-col gap-0.5 w-[592px] m-auto"
+          >
+            <div className="hoverable">
+              <p>Innboks</p>
+            </div>
+            <div>
+              <p>
+                Informasjon fra NAV og svar på henvendelser og referater fra
+                samtaler du har på telefon, chat og “Skriv til oss”.
+              </p>
+            </div>
+          </PassiveCard>
         </div>
       </Page>
     </Dekoratoren>
