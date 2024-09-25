@@ -20,6 +20,19 @@
   --__ac-combobox-input-height: 1.5rem;
 }
 
+.navds-combobox--disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.navds-combobox--disabled .navds-text-field__input {
+  border: 1px solid var(--a-border-default);
+}
+
+.navds-combobox--disabled *:hover {
+  cursor: default;
+}
+
 .navds-combobox__button-clear svg,
 .navds-combobox__button-toggle-list svg,
 .navds-combobox__list svg {

@@ -58,7 +58,7 @@ const FilteredOptionsProvider = ({
     useState<HTMLUListElement | null>(null);
   const virtualFocus = useVirtualFocus(filteredOptionsRef);
   const {
-    inputProps: { "aria-describedby": partialAriaDescribedBy, id },
+    inputProps: { "aria-describedby": partialAriaDescribedBy, id, disabled },
     value,
     searchTerm,
     setValue,
@@ -136,6 +136,9 @@ const FilteredOptionsProvider = ({
 
   const toggleIsListOpen = useCallback(
     (newState?: boolean) => {
+      if (disabled) {
+        return;
+      }
       virtualFocus.moveFocusToTop();
       if (newState ?? !isInternalListOpen) {
         setHideCaret(!!maxSelected?.isLimitReached);
@@ -147,6 +150,7 @@ const FilteredOptionsProvider = ({
       maxSelected?.isLimitReached,
       isInternalListOpen,
       setHideCaret,
+      disabled,
     ],
   );
 
