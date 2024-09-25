@@ -18,16 +18,16 @@ const Example = () => {
       <ActionMenu.Content>
         <ActionMenu.Group label="See code for implementation">
           <ActionMenu.Item as="a" href="#">
-            Anchor
+            # lenke
           </ActionMenu.Item>
           <Link href="#123" passHref legacyBehavior>
             <ActionMenu.Item as="a">Nextjs Pages router</ActionMenu.Item>
           </Link>
           <ActionMenu.Item>
-            Nextjs App router (see commented code)
+            Nextjs App router (se kommentert kode)
           </ActionMenu.Item>
-          <ActionMenu.Item>React router (see commented code)</ActionMenu.Item>
-          <ActionMenu.Item>Remix (see commented code)</ActionMenu.Item>
+          <ActionMenu.Item>React router (se kommentert kode)</ActionMenu.Item>
+          <ActionMenu.Item>Remix (se kommentert kode)</ActionMenu.Item>
         </ActionMenu.Group>
       </ActionMenu.Content>
     </ActionMenu>
@@ -65,5 +65,3 @@ export const Demo = {
 export const args = {
   index: 7,
 };
-
-// TODO: Icons on trigger buttons!
