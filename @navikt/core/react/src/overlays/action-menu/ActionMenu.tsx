@@ -431,16 +431,10 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
           style={{
             ...style,
             ...{
-              "--ac-action-menu-content-transform-origin":
+              "--__ac-action-menu-content-transform-origin":
                 "var(--ac-floating-transform-origin)",
-              "--ac-action-menu-content-available-width":
-                "var(--ac-floating-available-width)",
-              "--ac-action-menu-content-available-height":
+              "--__ac-action-menu-content-available-height":
                 "var(--ac-floating-available-height)",
-              "--ac-action-menu-trigger-width":
-                "var(--ac-floating-anchor-width)",
-              "--ac-action-menu-trigger-height":
-                "var(--ac-floating-anchor-height)",
             },
           }}
         >
