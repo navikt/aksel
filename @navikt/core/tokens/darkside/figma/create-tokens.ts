@@ -27,13 +27,9 @@ const createStyleDictionaryForCollection = (
   return new StyleDictionary({
     tokens: config[collection],
     platforms: {
-      [`figma-${collection}`]: {
+      [collection]: {
         transformGroup: "css",
-        files: [
-          {
-            format: "custom-format",
-          },
-        ],
+        files: [],
       },
     },
   });
@@ -42,35 +38,24 @@ const createStyleDictionaryForCollection = (
 export const getTokensForCollection = async (
   collection: keyof typeof config,
 ) => {
-  const tokensList: FigmaToken[] = [];
   const SD = createStyleDictionaryForCollection(collection);
 
   await SD.hasInitialized;
 
-  /**
-   * By adding aliases to the tokens, we can use the name as a lookup to
-   * reference the original token in Figma with a 'VariableAlias'.
-   * @see https://www.figma.com/plugin-docs/api/VariableAlias/
-   */
-  SD.registerFormat({
-    name: "custom-format",
-    format: async ({ dictionary }) => {
-      const preparedTokens = dictionary.allTokens.map((token) => {
-        const reference = getReferences(token.original, dictionary.tokens);
-        return reference.length > 0
-          ? prepareToken(
-              { ...token, alias: createTokenName(reference[0]) },
-              dictionary,
-            )
-          : prepareToken(token, dictionary);
-      });
-      tokensList.push(...preparedTokens);
-    },
+  const dictionary = await SD.getPlatformTokens(collection);
+
+  return dictionary.allTokens.map((token) => {
+    const reference = getReferences(token.original, dictionary.tokens);
+    /*
+     * Currently only supports 1 level of references.
+     */
+    return reference.length > 0
+      ? prepareToken(
+          { ...token, alias: createTokenName(reference[0]) },
+          dictionary,
+        )
+      : prepareToken(token, dictionary);
   });
-
-  await SD.buildAllPlatforms();
-
-  return tokensList;
 };
 
 function prepareToken(
@@ -109,7 +94,7 @@ export function figmaValue(token: TransformedToken): string | number {
   if (isRadiusToken(token) || isSpacingToken(token)) {
     const float = parseFloat(token.value.replace("px", "").replace("rem", ""));
 
-    /**
+    /*
      * Figma does not support relative units, so we need to convert rem to px.
      */
     if (token.value.includes("rem")) {
@@ -169,7 +154,7 @@ export function createTokenName(token: TransformedToken) {
   if (!token.attributes?.item || typeof token.attributes.item !== "string") {
     throw new Error(`No item attribute found on token: ${token.name}`);
   }
-  /**
+  /*
    * Because of the `StyleDictionaryTokenConfig`-type, we can assume that attributes.item will always exists.
    */
   let name = lodash.startCase(token.attributes.item);
@@ -178,7 +163,7 @@ export function createTokenName(token: TransformedToken) {
     name = createGroupName(token.group) + name;
   }
 
-  /**
+  /*
    * In the case we have a token "Text/Accent/Accent", we want to add a suffix to the name.
    */
   const nameKeys = new Set(name.split("/"));
@@ -186,7 +171,7 @@ export function createTokenName(token: TransformedToken) {
     name += " Default";
   }
 
-  /**
+  /*
    * For pure value tokens, we want to add a prefix to the name to make it more readable in Figma.
    */
   if (isRadiusToken(token)) {
@@ -244,20 +229,20 @@ function isTextColor(token: TransformedToken | FigmaToken): boolean {
 
 export function isGlobalColor(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === tokenTypes["global-color"] ?? false;
+  return type === tokenTypes["global-color"];
 }
 
 export function isSemanticColor(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === tokenTypes["color"] ?? false;
+  return type === tokenTypes["color"];
 }
 
 export function isRadiusToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type?.includes(tokenTypes["global-radius"]) ?? false;
+  return type?.includes(tokenTypes["global-radius"]);
 }
 
 export function isSpacingToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type?.includes(tokenTypes["global-spacing"]) ?? false;
+  return type?.includes(tokenTypes["global-spacing"]);
 }
