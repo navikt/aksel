@@ -16,19 +16,19 @@ const Example = () => {
       </ActionMenu.Trigger>
       <ActionMenu.Content>
         <ActionMenu.Group label="Gosys">
-          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+P">
+          <ActionMenu.Item onSelect={console.info} shortcut="Ctrl+P">
             Personoversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+A">
+          <ActionMenu.Item onSelect={console.info} shortcut="Ctrl+A">
             Arbeidsgiveroversikt
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+S">
+          <ActionMenu.Item onSelect={console.info} shortcut="Ctrl+S">
             Samhandlere
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+O">
+          <ActionMenu.Item onSelect={console.info} shortcut="Ctrl+O">
             Oppgavestatistikk
           </ActionMenu.Item>
-          <ActionMenu.Item onSelect={console.info} shortcut="CTRL+K">
+          <ActionMenu.Item onSelect={console.info} shortcut="Ctrl+K">
             Søk journalpost
           </ActionMenu.Item>
         </ActionMenu.Group>
