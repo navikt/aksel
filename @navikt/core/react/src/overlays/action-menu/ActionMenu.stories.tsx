@@ -394,11 +394,7 @@ export const Disabled: Story = {
           <button>Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
-          <ActionMenu.Item
-            onSelect={() => console.log("Item 1 clicked")}
-            disabled
-            shortcut="T+W"
-          >
+          <ActionMenu.Item disabled shortcut="T+W">
             Item 1
           </ActionMenu.Item>
           <ActionMenu.Sub>
