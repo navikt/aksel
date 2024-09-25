@@ -12,10 +12,10 @@
   background-color: var(--a-surface-default);
   overflow: auto;
   min-width: 128px;
-  max-width: min(100vw, 640px);
+  max-width: min(95vw, 640px);
+  width: calc(100% + 17px);
   max-height: var(--__ac-action-menu-content-available-height);
   transform-origin: var(--__ac-action-menu-content-transform-origin);
-  scrollbar-width: thin;
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
