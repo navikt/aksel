@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.1.0
+
+### Patch Changes
+
+- Accordion: Remove 'relative' positioning when focused. This resolves some issues where floating elements like popover ended up clipping. ([`9c1eba445`](https://github.com/navikt/aksel/commit/9c1eba44508f295cc6261ff96822b18557bd7ddc))
+
 ## 7.0.1
 
 ### Patch Changes
