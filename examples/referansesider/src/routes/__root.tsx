@@ -5,12 +5,26 @@ import {
   createRootRoute,
 } from "@tanstack/react-router";
 import React from "react";
+import styled from "styled-components";
+import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import { ThemeSwitch } from "../theme/ThemeSwitch";
+
+const ScRouteLink = styled(Link)`
+  &[aria-current="page"] {
+    background-color: ${tokens.BgRaised};
+    text-decoration: underline;
+  }
+`;
+
+const ScUl = styled.ul`
+  background-color: ${tokens.BgSunken};
+`;
 
 const RouteLink = ({ children, to }: { children: ReactNode; to: string }) => {
   return (
-    <Link to={to} className="[&.active]:border border-black rounded m-2 p-2">
+    <ScRouteLink to={to} className="rounded p-2 underline-offset-2">
       {children}
-    </Link>
+    </ScRouteLink>
   );
 };
 
@@ -29,11 +43,22 @@ const TanStackRouterDevtools =
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex gap-6">
-        <RouteLink to="/sykepenger">Sykepenger</RouteLink>
-        <RouteLink to="/minside">Min Side</RouteLink>
-        <RouteLink to="/komponenter">Komponenter</RouteLink>
-      </div>
+      <header className="p-2 px-4 flex mx-auto items-center gap-6 max-w-screen-2xl">
+        <ScUl className="inline-flex items-center gap-1 justify-center h-12 rounded px-1">
+          <li>
+            <RouteLink to="/sykepenger">Sykepenger</RouteLink>
+          </li>
+          <li>
+            <RouteLink to="/minside">Min Side</RouteLink>
+          </li>
+          <li>
+            <RouteLink to="/komponenter">Komponenter</RouteLink>
+          </li>
+        </ScUl>
+        <div className="ml-auto h-fit">
+          <ThemeSwitch />
+        </div>
+      </header>
       <hr />
       <div className="overflow-x-clip">
         <Outlet />
