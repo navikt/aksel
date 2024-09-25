@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   BellFillIcon,
   ChevronRightIcon,
+  ExclamationmarkTriangleFillIcon,
   HeartIcon,
   PencilFillIcon,
 } from "@navikt/aksel-icons";
@@ -24,7 +25,7 @@ const Header2 = styled.h2`
 `;
 
 const NotificationsPanel = styled.div`
-  background-color: ${tokens.BgBrandThreeModerate};
+  background-color: ${tokens.BgInfoModerate};
   margin-top: calc(-1 * 44px);
   margin-bottom: 44px;
 
@@ -53,24 +54,54 @@ let Card;
         ? `rgba(0, 0, 0, 0.15) 0px 1px 3px 0px,
 rgba(0, 0, 0, 0.2) 0px 0px 1px 0px;`
         : "none;"};
+
+    svg {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    &:hover {
+      cursor: pointer;
+      box-shadow:
+        rgba(0, 0, 0, 0.1) 0px 3px 8px 0px,
+        rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.18) 0px 0px 1px 0px;
+      .title {
+        text-decoration: underline;
+      }
+      .chevron {
+        transform: translate(4px, 0);
+      }
+    }
   `;
 
   Card = ({
-    title,
     children,
+    title,
     variant = "default",
+    emphasis,
   }: {
-    title?: string;
     children: ReactNode;
+    title?: string;
     variant?: "default" | "subtle" | "info";
+    emphasis?: "warning";
   }) => {
     return (
       <ScCard $variant={variant}>
-        <div className="flex flex-col h-full justify-center">
+        <div className="flex flex-col h-full justify-center transition-all">
           {title && (
-            <span className="font-semibold text-xl border-b border-b-gray-300 px-5 pt-4 pb-2">
-              {title}
-            </span>
+            <div className="flex justify-between items-center border-b border-b-gray-300">
+              <span className="title font-semibold text-xl px-5 pt-4 pb-2">
+                {title}
+              </span>
+              <div className="flex items-center mr-3">
+                {emphasis && emphasis === "warning" && (
+                  <ExclamationmarkTriangleFillIcon className="mt-2 size-6 text-yellow-600" />
+                )}
+                <ChevronRightIcon className="chevron size-6 mx-2 mt-2" />
+              </div>
+            </div>
           )}
           <div> {children}</div>
         </div>
@@ -111,7 +142,7 @@ const Component = () => {
             </NotificationsPanel>
             <span>Din oversikt</span>
             <div className="grid grid-cols-2 gap-6 mb-8">
-              <Card title="Meldekort">
+              <Card title="Meldekort" emphasis="warning">
                 <p className="m-5 text-gray-500">
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
@@ -134,16 +165,16 @@ const Component = () => {
                       <span>Oversikt over saken din</span>
                     </div>
                   </div>
-                  <ChevronRightIcon className="mx-3 mt-1" />
+                  <ChevronRightIcon className="chevron size-6 mx-3 mt-1" />
                 </div>
               </Card>
-              <Card title="Dialogmøte med NAV">
+              <Card title="Dialogmøte med NAV" emphasis="warning">
                 <p className="m-5 text-gray-500">
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
                 <p className="m-5">Du må sende 2 meldekort</p>
               </Card>
-              <Card title="Aktivitetsplan">
+              <Card title="Aktivitetsplan" emphasis="warning">
                 <p className="m-5 text-gray-500">
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
