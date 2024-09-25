@@ -15,7 +15,7 @@ export const Page = ({
   return (
     <div
       className={clsx(
-        "flex flex-col px-2 w-full m-auto mb-20 min-h-screen",
+        "flex flex-col px-2 w-full m-auto pb-20 min-h-screen",
         "lg:px-0",
         { [`lg:w-[72ch]`]: width === "medium" },
         { [`lg:w-[921px]`]: width === "large" },
