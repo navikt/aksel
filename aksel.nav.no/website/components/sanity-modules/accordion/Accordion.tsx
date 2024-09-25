@@ -5,7 +5,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { AccordionT } from "@/types";
 
 type AccordionProps = {
-  node: AccordionT;
+  node?: AccordionT;
 };
 
 const Accordion = ({ node }: AccordionProps) => {
