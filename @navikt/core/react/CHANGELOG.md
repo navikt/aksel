@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.1.0
+
+### Minor Changes
+
+- Pagination: :lipstick: Updated font-weight to 600 and marked 'page'-prop on 'Item' as deprecated. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+### Patch Changes
+
+- Combobox: :label: Better typing for maxSelected prop ([#3169](https://github.com/navikt/aksel/pull/3169))
+
+- ErrorSummary: Remove aria-attributes. ([#3171](https://github.com/navikt/aksel/pull/3171))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.0
+  - @navikt/aksel-icons@7.1.0
+
 ## 7.0.1
 
 ### Patch Changes

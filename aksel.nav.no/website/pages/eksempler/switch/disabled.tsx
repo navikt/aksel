@@ -15,4 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 99,
+  desc: "Vi fraråder bruk av disabled state. Vurder om du trenger å vise feltet i det hele tatt, om du heller kan bruke 'readOnly', eller bare kan skrive det ut i ren tekst.",
 };
