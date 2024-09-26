@@ -1,3 +1,4 @@
+import { CssColor } from "@adobe/leonardo-contrast-colors";
 import _ from "lodash";
 
 export const colorThemes = ["light", "dark"] as const;
@@ -33,6 +34,11 @@ export const globalColorScales = [
 ] as const;
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
+
+export type GlobalColorConfig = Record<
+  GlobalColorRoles,
+  { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
+>;
 
 type TokenTypes = "color" | "global-color" | "global-radius" | "global-spacing";
 

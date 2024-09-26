@@ -8,60 +8,60 @@ export const contrastTokenConfig = (): {
   contrast: {
     /* core */
     accent: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     neutral: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     /* Status */
     danger: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     info: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     success: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     warning: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     /* Brand */
     brandOne: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     brandTwo: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     brandThree: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     /* Data */
     dataOne: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
     dataTwo: {
-      value: "white",
+      value: "{a.neutral.000.value}",
       type: "color",
       group: "contrast",
     },
