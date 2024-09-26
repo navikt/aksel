@@ -14,7 +14,7 @@ export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
 type FigmaConfigEntry = {
   name: string;
   hideFromPublishing: boolean;
-  token: FigmaToken[];
+  tokens: FigmaToken[];
 };
 
 export type FigmaTokenConfig = {
