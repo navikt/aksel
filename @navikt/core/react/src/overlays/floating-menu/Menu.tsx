@@ -539,7 +539,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           if (!isPointerDownRef.current) event.currentTarget?.click();
         })}
         onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-          if (disabled) {
+          if (disabled || event.repeat) {
             return;
           }
           if (SELECTION_KEYS.includes(event.key)) {
