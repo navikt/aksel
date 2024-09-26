@@ -27,14 +27,14 @@ const Header2 = styled.h2`
 
 const NotificationsPanel = styled.div`
   background-color: ${tokens.BgInfoModerate};
+  box-shadow:
+    0px 1px 3px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   margin-top: calc(-1 * 44px);
   margin-bottom: 44px;
+  color: ${tokens.TextDefault};
 
   svg {
-    color: ${tokens.BgBrandThreeModerate};
-  }
-
-  #pencil {
     color: white;
   }
 `;
@@ -161,7 +161,7 @@ const Component = () => {
             <Header2>Hei, Navn Navnesen</Header2>
           </div>
           <GrayPanel className="mt-11">
-            <NotificationsPanel className="dark rounded-xl flex justify-between p-2 text-white">
+            <NotificationsPanel className="rounded-xl flex justify-between p-2 text-white">
               <div className="flex justify-start m-2 gap-4">
                 <div className="bg-orange-500 w-14 h-14 rounded-lg flex justify-center items-center">
                   <BellFillIcon className="size-6" />
