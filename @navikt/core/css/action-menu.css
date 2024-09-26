@@ -1,5 +1,4 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable aksel/design-token-exists */
 .navds-action-menu__content {
   --__ac-action-menu-content-p: var(--a-spacing-2);
   --__ac-action-menu-item-pr: var(--a-spacing-3);
