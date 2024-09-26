@@ -204,7 +204,7 @@ function isTokenOfSemanticColorGroup(
   token: TransformedToken | FigmaToken,
   groupType: keyof typeof tokenGroupLookup,
 ): boolean {
-  const group = token.group as TokenGroup;
+  const group = token.group as TokenGroup | undefined;
   if (!isSemanticColor(token)) {
     return false;
   }
