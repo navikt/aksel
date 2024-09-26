@@ -34,22 +34,19 @@ export const globalColorScales = [
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
 
-export const tokenTypes = {
-  color: "color",
-  "global-color": "global-color",
-  "global-radius": "global-radius",
-  "global-spacing": "global-spacing",
-} as const;
+export type TokenTypes =
+  | "color"
+  | "global-color"
+  | "global-radius"
+  | "global-spacing";
 
-export type TokenTypes = (typeof tokenTypes)[keyof typeof tokenTypes];
-
-export type TokenGroupLookup = "background" | "border" | "text" | "contrast"; // TODO: Find better name
-type GroupWithRoles = Exclude<TokenGroupLookup, "contrast">; // TODO: Find better name
+export type SemanticTokenGroups = "background" | "border" | "text" | "contrast";
+type SemanticTokenGroupsWithRoles = Exclude<SemanticTokenGroups, "contrast">;
 
 export type TokenGroup =
   | GlobalColorRoles
-  | TokenGroupLookup
-  | `${GroupWithRoles}.${GlobalColorRoles}`;
+  | SemanticTokenGroups
+  | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;

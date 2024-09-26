@@ -8,10 +8,9 @@ import {
   scaleTokens,
 } from "../create-configuration";
 import {
-  StyleDictionaryToken,
+  type SemanticTokenGroups,
+  type StyleDictionaryToken,
   type TokenTypes,
-  tokenGroupLookup,
-  tokenTypes,
 } from "../util";
 import type { FigmaToken } from "./figma-config.types";
 
@@ -202,13 +201,13 @@ function createGroupName(group: string): string {
 
 function isTokenOfSemanticColorGroup(
   token: TransformedToken | FigmaToken,
-  groupType: keyof typeof tokenGroupLookup,
+  groupType: SemanticTokenGroups,
 ): boolean {
   const group = token.group as StyleDictionaryToken<TokenTypes>["group"];
   if (!isSemanticColor(token)) {
     return false;
   }
-  return group?.includes(tokenGroupLookup[groupType]) ?? false;
+  return group?.includes(groupType) ?? false;
 }
 
 function isBackgroundColor(token: TransformedToken | FigmaToken): boolean {
@@ -229,20 +228,20 @@ function isTextColor(token: TransformedToken | FigmaToken): boolean {
 
 export function isGlobalColor(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === tokenTypes["global-color"];
+  return type === "global-color";
 }
 
 export function isSemanticColor(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === tokenTypes["color"];
+  return type === "color";
 }
 
 export function isRadiusToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type?.includes(tokenTypes["global-radius"]);
+  return type === "global-radius";
 }
 
 export function isSpacingToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type?.includes(tokenTypes["global-spacing"]);
+  return type === "global-spacing";
 }
