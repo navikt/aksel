@@ -37,6 +37,11 @@ type SubMenuSide = "left" | "right";
 type GraceIntent = { area: Polygon; side: SubMenuSide };
 type CheckedState = boolean | "indeterminate";
 
+/**
+ * TODO:
+ * - When on small screen + submenu, submenu can open below anchor. We need to handle this case correctly with mouseover and arrow keys
+ */
+
 /* -------------------------------------------------------------------------- */
 /*                                    Menu                                    */
 /* -------------------------------------------------------------------------- */
