@@ -493,6 +493,30 @@ export const Disabled: StoryFn = () => {
   );
 };
 
+export const Readonly: StoryFn = () => {
+  const selectedOptionsMultiple = ["napoleonskake", "donut"];
+  const selectedOptionsSingle = ["pushups"];
+  return (
+    <VStack gap="2">
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
+        selectedOptions={selectedOptionsMultiple}
+        isMultiSelect
+        readOnly
+      />
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er din favoritthobby?"
+        description="Her snakker vi ting du bruker minst én time på hver dag."
+        selectedOptions={selectedOptionsSingle}
+        readOnly
+      />
+    </VStack>
+  );
+};
+
 export const Chromatic: StoryFn = () => {
   const H2 = (props: { children: string; style?: React.CSSProperties }) => (
     <h2 style={{ marginBottom: "-0.25rem", ...props.style }}>

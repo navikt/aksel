@@ -59,6 +59,7 @@ const FilteredOptionsProvider = ({
   const virtualFocus = useVirtualFocus(filteredOptionsRef);
   const {
     inputProps: { "aria-describedby": partialAriaDescribedBy, id, disabled },
+    readOnly,
     value,
     searchTerm,
     setValue,
@@ -136,7 +137,7 @@ const FilteredOptionsProvider = ({
 
   const toggleIsListOpen = useCallback(
     (newState?: boolean) => {
-      if (disabled) {
+      if (disabled || readOnly) {
         return;
       }
       virtualFocus.moveFocusToTop();
@@ -151,6 +152,7 @@ const FilteredOptionsProvider = ({
       isInternalListOpen,
       setHideCaret,
       disabled,
+      readOnly,
     ],
   );
 

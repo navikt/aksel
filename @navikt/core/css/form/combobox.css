@@ -32,6 +32,20 @@
   cursor: not-allowed;
 }
 
+.navds-combobox--readonly {
+  pointer-events: none;
+}
+
+.navds-combobox--readonly > :where(.navds-form-field__label) {
+  display: inline-flex;
+}
+
+.navds-combobox--readonly .navds-text-field__input,
+.navds-combobox--readonly .navds-combobox__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+}
+
 .navds-combobox__button-clear svg,
 .navds-combobox__button-toggle-list svg,
 .navds-combobox__list svg {

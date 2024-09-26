@@ -9,6 +9,7 @@ type ComboboxWrapperProps = {
   inputProps: {
     disabled?: boolean;
   };
+  readOnly?: boolean;
   inputSize: string;
   toggleIsListOpen: (isListOpen: boolean) => void;
 };
@@ -21,7 +22,7 @@ const ComboboxWrapper = ({
   inputSize,
   toggleIsListOpen,
 }: ComboboxWrapperProps) => {
-  const { toggleOpenButtonRef, clearInput } = useInputContext();
+  const { toggleOpenButtonRef, clearInput, readOnly } = useInputContext();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
@@ -55,6 +56,7 @@ const ComboboxWrapper = ({
           "navds-combobox--error": hasError,
           "navds-combobox--disabled": !!inputProps.disabled,
           "navds-combobox--focused": hasFocusWithin,
+          "navds-combobox--readonly": readOnly,
         },
       )}
       onFocus={onFocusInsideWrapper}

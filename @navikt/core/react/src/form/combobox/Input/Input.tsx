@@ -49,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       setValue,
       hideCaret,
       setHideCaret,
+      readOnly,
     } = useInputContext();
     const {
       selectedOptions,
@@ -149,6 +150,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
+        if (readOnly) {
+          return;
+        }
         if (e.key === "Backspace") {
           if (value === "" && shouldShowSelectedOptions) {
             const lastSelectedOption =
@@ -214,6 +218,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         setValue,
         searchTerm,
         shouldShowSelectedOptions,
+        readOnly,
       ],
     );
 
@@ -254,7 +259,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
-          { "navds-combobox__input--hide-caret": hideCaret },
+          { "navds-combobox__input--hide-caret": hideCaret || readOnly },
         )}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}

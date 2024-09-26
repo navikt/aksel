@@ -12,7 +12,7 @@ interface SelectedOptionsProps {
 
 const Option = ({ option }: { option: ComboboxOption }) => {
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
-  const { focusInput } = useInputContext();
+  const { focusInput, readOnly } = useInputContext();
 
   const onClick = (e) => {
     e.stopPropagation();
@@ -28,7 +28,13 @@ const Option = ({ option }: { option: ComboboxOption }) => {
     );
   }
 
-  return <Chips.Removable onClick={onClick}>{option.label}</Chips.Removable>;
+  return readOnly ? (
+    <Chips.Toggle variant="neutral" checkmark={false} as="div">
+      {option.label}
+    </Chips.Toggle>
+  ) : (
+    <Chips.Removable onClick={onClick}>{option.label}</Chips.Removable>
+  );
 };
 
 const SelectedOptions: React.FC<SelectedOptionsProps> = ({
