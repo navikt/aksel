@@ -1,4 +1,5 @@
 import {
+  FlipOptions,
   Placement,
   autoUpdate,
   flip,
@@ -251,11 +252,13 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       return value !== null;
     }
 
-    const detectOverflowOptions = {
+    const detectOverflowOptions: FlipOptions = {
       padding: collisionPadding,
       boundary: boundary.filter(isNotNull),
       // with `strategy: 'fixed'`, this is the only way to get it to respect boundaries
       altBoundary: hasExplicitBoundaries,
+      /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
+      fallbackAxisSideDirection: "end",
     };
 
     const { refs, floatingStyles, placement, isPositioned, middlewareData } =
@@ -282,7 +285,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
               mainAxis: true,
               crossAxis: false,
               limiter: limitShift(),
-              ...detectOverflowOptions,
             }),
           avoidCollisions && flip({ ...detectOverflowOptions }),
           size({
