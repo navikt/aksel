@@ -249,7 +249,9 @@ const Component = () => {
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
                 <p className="m-5">Du må sende 2 meldekort</p>
-                <Tag className="m-5">Les mer om dine muligheter fremover</Tag>
+                <Tag $variant="warning" className="m-5">
+                  Les mer om dine muligheter fremover
+                </Tag>
               </Card>
             </div>
           </GrayPanel>
