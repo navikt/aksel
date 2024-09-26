@@ -27,7 +27,7 @@ async function buildFigmaConfig() {
       globalLight: {
         name: "Global colors light",
         hideFromPublishing: true,
-        token: lightTokens.filter((token) => isGlobalColor(token)),
+        token: lightTokens.filter(isGlobalColor),
       },
       globalDark: {
         name: "Global colors dark",
