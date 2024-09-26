@@ -13,10 +13,7 @@ const baseToken: TransformedToken = {
 
 describe("createTokenName", () => {
   test("should extract name from token with item attribute", () => {
-    const token: TransformedToken = {
-      ...baseToken,
-      name: "tokenName",
-    };
+    const token: TransformedToken = baseToken;
     expect(createTokenName({ ...token, attributes: { item: "primary" } })).toBe(
       "Primary",
     );
@@ -28,7 +25,6 @@ describe("createTokenName", () => {
   test("should create correct grouping for token with group attribute", () => {
     const token: TransformedToken = {
       ...baseToken,
-      name: "tokenName",
       attributes: { item: "primary" },
       group: "color.background",
     };
@@ -38,7 +34,6 @@ describe("createTokenName", () => {
   test("should add 'Default' suffix for tokens with duplicate names", () => {
     const token: TransformedToken = {
       ...baseToken,
-      name: "tokenName",
       attributes: { item: "accent" },
       group: "text.accent",
     };
@@ -48,7 +43,6 @@ describe("createTokenName", () => {
   test("should add 'Radius' prefix for global-radius type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
-      name: "tokenName",
       attributes: { item: "small" },
       type: "global-radius",
     };
@@ -58,7 +52,6 @@ describe("createTokenName", () => {
   test("should add 'Spacing' prefix for global-spacing type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
-      name: "tokenName",
       attributes: { item: "4" },
       type: "global-spacing",
     };
