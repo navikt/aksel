@@ -395,7 +395,6 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
     ref,
   ) => {
     const context = useActionMenuContext();
-    const hasRightClickedOutsideRef = useRef(false);
 
     return (
       <Menu.Portal rootElement={rootElement} asChild>
@@ -408,31 +407,8 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
           align="start"
           sideOffset={4}
           collisionPadding={10}
-          onCloseAutoFocus={(event) => {
-            /**
-             * In the case of a click outside the menu or trigger,
-             * we make sure to not override any native focus behavior
-             */
-            if (!hasRightClickedOutsideRef.current) {
-              context.triggerRef.current?.focus();
-            }
-            hasRightClickedOutsideRef.current = false;
-            event.preventDefault();
-          }}
-          onInteractOutside={(event) => {
-            /**
-             * We assume that all clicks outside the menu are intentionally made to close it,
-             * and that we should still focus the trigger when the menu closes. This is to ensure
-             * that the user can easily reopen the menu with keyboard navigation.
-             * The exception is when the user right-clicks, as we can assume the user wants complete control.
-             */
-            const originalEvent = event.detail.originalEvent as PointerEvent;
-            const ctrlLeftClick =
-              originalEvent.button === 0 && originalEvent.ctrlKey === true;
-            const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-            if (isRightClick) {
-              hasRightClickedOutsideRef.current = true;
-            }
+          onCloseAutoFocus={() => {
+            context.triggerRef.current?.focus();
           }}
           safeZone={{ anchor: context.triggerRef.current }}
           style={{
@@ -1075,24 +1051,24 @@ export {
   ActionMenu,
   ActionMenuCheckboxItem,
   ActionMenuContent,
+  ActionMenuDivider,
   ActionMenuGroup,
   ActionMenuItem,
   ActionMenuLabel,
   ActionMenuRadioGroup,
   ActionMenuRadioItem,
-  ActionMenuDivider,
   ActionMenuSub,
   ActionMenuSubContent,
   ActionMenuSubTrigger,
   ActionMenuTrigger,
   type ActionMenuCheckboxItemProps,
   type ActionMenuContentProps,
+  type ActionMenuDividerProps,
   type ActionMenuGroupProps,
   type ActionMenuLabelProps,
   type ActionMenuProps,
   type ActionMenuRadioGroupProps,
   type ActionMenuRadioItemProps,
-  type ActionMenuDividerProps,
   type ActionMenuSubContentProps,
   type ActionMenuSubProps,
   type ActionMenuSubTriggerProps,
