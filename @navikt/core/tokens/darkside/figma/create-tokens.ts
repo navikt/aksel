@@ -116,13 +116,17 @@ function figmaSettings(token: TransformedToken): {
   if (isGlobalColor(token)) {
     return createFigmaSettings("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
   }
-  if (isBackgroundColor(token)) {
+
+  if (isTokenOfSemanticColorGroup(token, "background")) {
     return createFigmaSettings("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
   }
-  if (isBorderColor(token)) {
+  if (isTokenOfSemanticColorGroup(token, "border")) {
     return createFigmaSettings("COLOR", ["STROKE_COLOR"]);
   }
-  if (isContrastColor(token) || isTextColor(token)) {
+  if (
+    isTokenOfSemanticColorGroup(token, "contrast") ||
+    isTokenOfSemanticColorGroup(token, "text")
+  ) {
     return createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
   }
   if (isRadiusToken(token)) {
@@ -208,22 +212,6 @@ function isTokenOfSemanticColorGroup(
     return false;
   }
   return group?.includes(groupType) ?? false;
-}
-
-function isBackgroundColor(token: TransformedToken | FigmaToken): boolean {
-  return isTokenOfSemanticColorGroup(token, "background");
-}
-
-function isBorderColor(token: TransformedToken | FigmaToken): boolean {
-  return isTokenOfSemanticColorGroup(token, "border");
-}
-
-function isContrastColor(token: TransformedToken | FigmaToken): boolean {
-  return isTokenOfSemanticColorGroup(token, "contrast");
-}
-
-function isTextColor(token: TransformedToken | FigmaToken): boolean {
-  return isTokenOfSemanticColorGroup(token, "text");
 }
 
 export function isGlobalColor(token: TransformedToken | FigmaToken): boolean {
