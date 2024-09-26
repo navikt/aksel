@@ -542,7 +542,23 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           if (disabled || event.repeat) {
             return;
           }
-          if (SELECTION_KEYS.includes(event.key)) {
+          if (["Enter"].includes(event.key)) {
+            event.currentTarget.click();
+            /**
+             * We prevent default browser behaviour for selection keys as they should only trigger
+             * selection.
+             * - Prevents space from scrolling the page.
+             * - If keydown causes focus to move, prevents keydown from firing on the new target.
+             */
+            event.preventDefault();
+          }
+        })}
+        onKeyUp={composeEventHandlers(onKeyDown, (event) => {
+          if (disabled || event.repeat) {
+            return;
+          }
+          /* TODO: Extract keys to constants? */
+          if ([" "].includes(event.key)) {
             event.currentTarget.click();
             /**
              * We prevent default browser behaviour for selection keys as they should only trigger

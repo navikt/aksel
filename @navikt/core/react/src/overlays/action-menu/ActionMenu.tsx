@@ -353,7 +353,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
             if (event.currentTarget.disabled) {
               return;
             }
-            if (["Enter", " "].includes(event.key)) {
+            if (["Enter"].includes(event.key)) {
               context.onOpenToggle();
             }
             if (event.key === "ArrowDown") {
@@ -362,7 +362,24 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
             /**
              * Stop keydown from scrolling window
              */
-            if (["Enter", " ", "ArrowDown"].includes(event.key)) {
+            if (["Enter", "ArrowDown"].includes(event.key)) {
+              event.preventDefault();
+            }
+          })}
+          onKeyUp={composeEventHandlers(onKeyDown, (event) => {
+            if (event.currentTarget.disabled) {
+              return;
+            }
+            if ([" "].includes(event.key)) {
+              context.onOpenToggle();
+            }
+            if (event.key === "ArrowDown") {
+              context.onOpenChange(true);
+            }
+            /**
+             * Stop keydown from scrolling window
+             */
+            if ([" ", "ArrowDown"].includes(event.key)) {
               event.preventDefault();
             }
           })}
