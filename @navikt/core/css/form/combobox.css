@@ -22,15 +22,14 @@
 
 .navds-combobox--disabled {
   opacity: 0.3;
-  cursor: default;
 }
 
 .navds-combobox--disabled .navds-text-field__input {
   border: 1px solid var(--a-border-default);
 }
 
-.navds-combobox--disabled *:hover {
-  cursor: default;
+.navds-combobox--disabled .navds-combobox__wrapper *:hover {
+  cursor: not-allowed;
 }
 
 .navds-combobox__button-clear svg,
