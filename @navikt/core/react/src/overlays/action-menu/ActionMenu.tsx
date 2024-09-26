@@ -267,7 +267,7 @@ const ActionMenuRoot = ({
       onOpenChange={setOpen}
       onOpenToggle={() => setOpen((prevOpen) => !prevOpen)}
     >
-      <Menu open={open} onOpenChange={setOpen} modal={false}>
+      <Menu open={open} onOpenChange={setOpen} modal>
         {children}
       </Menu>
     </ActionMenuProvider>
@@ -286,7 +286,13 @@ interface ActionMenuTriggerProps
 
 const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
   (
-    { children, onPointerDown, onKeyDown, ...rest }: ActionMenuTriggerProps,
+    {
+      children,
+      onPointerDown,
+      onKeyDown,
+      style,
+      ...rest
+    }: ActionMenuTriggerProps,
     ref,
   ) => {
     const context = useActionMenuContext();
@@ -304,6 +310,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
           data-state={context.open ? "open" : "closed"}
           ref={mergedRefs}
           {...rest}
+          style={{ ...style, pointerEvents: context.open ? "auto" : undefined }}
           onPointerDown={composeEventHandlers(onPointerDown, (event) => {
             const disabled = event.currentTarget.disabled;
             /**
