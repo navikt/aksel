@@ -8,7 +8,7 @@ import {
   scaleTokens,
 } from "../create-configuration";
 import {
-  type TokenGroup,
+  StyleDictionaryToken,
   type TokenTypes,
   tokenGroupLookup,
   tokenTypes,
@@ -204,7 +204,7 @@ function isTokenOfSemanticColorGroup(
   token: TransformedToken | FigmaToken,
   groupType: keyof typeof tokenGroupLookup,
 ): boolean {
-  const group = token.group as TokenGroup | undefined;
+  const group = token.group as StyleDictionaryToken<TokenTypes>["group"];
   if (!isSemanticColor(token)) {
     return false;
   }
