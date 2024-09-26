@@ -43,23 +43,13 @@ export const tokenTypes = {
 
 export type TokenTypes = (typeof tokenTypes)[keyof typeof tokenTypes];
 
-export const tokenGroupLookup = {
-  background: "background",
-  border: "border",
-  text: "text",
-  contrast: "contrast",
-} as const;
+export type TokenGroupLookup = "background" | "border" | "text" | "contrast"; // TODO: Find better name
+type GroupWithRoles = Exclude<TokenGroupLookup, "contrast">; // TODO: Find better name
 
 export type TokenGroup =
   | GlobalColorRoles
-  | (typeof tokenGroupLookup)["background"]
-  | `${(typeof tokenGroupLookup)["background"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["text"]
-  | `${(typeof tokenGroupLookup)["text"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["border"]
-  | `${(typeof tokenGroupLookup)["border"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["border"]
-  | (typeof tokenGroupLookup)["contrast"];
+  | TokenGroupLookup
+  | `${GroupWithRoles}.${GlobalColorRoles}`;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;
