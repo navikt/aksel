@@ -23,7 +23,9 @@ async function buildFigmaConfig() {
 
     const preparedConfig: FigmaTokenConfig = {
       version,
-      date: new Date().toISOString(),
+      timestamp: new Date().toLocaleString("no-NO", {
+        timeZone: "Europe/Oslo",
+      }),
       globalLight: {
         name: "Global colors light",
         hideFromPublishing: true,

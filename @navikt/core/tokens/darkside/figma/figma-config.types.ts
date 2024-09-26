@@ -19,7 +19,7 @@ type FigmaConfigEntry = {
 
 export type FigmaTokenConfig = {
   version: string;
-  date: string;
+  timestamp: string;
   globalLight: FigmaConfigEntry;
   globalDark: FigmaConfigEntry;
   semanticColors: FigmaConfigEntry;
