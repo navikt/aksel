@@ -1,7 +1,7 @@
 import { BackgroundColor, Color, Theme } from "@adobe/leonardo-contrast-colors";
 import { GlobalColorConfig } from "../util";
 
-const config: GlobalColorConfig = {
+export const config: GlobalColorConfig = {
   /* Core */
   neutral: {
     colorKeys: ["#838c9a"],
