@@ -32,22 +32,22 @@ async function buildFigmaConfig() {
       globalDark: {
         name: "Global colors dark",
         hideFromPublishing: true,
-        token: darkTokens.filter((token) => isGlobalColor(token)),
+        token: darkTokens.filter(isGlobalColor),
       },
       semanticColors: {
         name: "Semantic colors",
         hideFromPublishing: false,
-        token: lightTokens.filter((token) => isSemanticColor(token)),
+        token: lightTokens.filter(isSemanticColor),
       },
       radius: {
         name: "Radius",
         hideFromPublishing: false,
-        token: scaleTokens.filter((token) => isRadiusToken(token)),
+        token: scaleTokens.filter(isRadiusToken),
       },
       spacing: {
         name: "Spacing",
         hideFromPublishing: false,
-        token: scaleTokens.filter((token) => isSpacingToken(token)),
+        token: scaleTokens.filter(isSpacingToken),
       },
     };
 
