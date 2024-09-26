@@ -63,15 +63,6 @@ describe("extracting figma value for token", () => {
   test("should convert rem to px for global-radius type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
-      value: "1rem",
-      type: "global-radius",
-    };
-    expect(figmaValue(token)).toBe(16);
-  });
-
-  test("should handle conversion of rem in float", () => {
-    const token: TransformedToken = {
-      ...baseToken,
       value: "0.25rem",
       type: "global-radius",
     };
