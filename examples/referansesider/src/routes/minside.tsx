@@ -105,7 +105,7 @@ const Tag = styled.span<{ $variant: "info" | "warning" }>`
   width: fit-content;
   background-color: ${(prop) =>
     prop.$variant === "info"
-      ? tokens.BgInfoStrong
+      ? tokens.BgInfoStrongActive
       : tokens.BgWarningModerateActive}; /*TODO: color tweaks? or token fail?*/
   color: ${(prop) =>
     prop.$variant === "info"
@@ -152,11 +152,39 @@ const PassiveCard = styled.div<{ $variant: "subtle" | "info" }>`
   }
 `;
 
+const AccordionLinkalike = styled.a`
+  color: ${tokens.TextDefault};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px solid ${tokens.BorderNeutralSubtle};
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding-block: 18px;
+
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+
+  &:hover .hoverable {
+    text-decoration: underline;
+  }
+  &:hover .chevron {
+    transform: translate(4px, 0);
+  }
+
+  svg {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+`;
+
 const Component = () => {
   return (
     <Dekoratoren>
       <Page options={{ width: "large" }}>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <div>
             <Header2>Hei, Navn Navnesen</Header2>
           </div>
@@ -228,7 +256,7 @@ const Component = () => {
           <div className="mt-10">
             <PassiveCard
               $variant="subtle"
-              className="flex flex-col gap-0.5 w-[592px] m-auto"
+              className="flex flex-col gap-0.5 max-w-[592px] m-auto"
             >
               <div>
                 <div className="flex justify-between">
@@ -250,7 +278,7 @@ const Component = () => {
             </PassiveCard>
             <PassiveCard
               $variant="info"
-              className="flex flex-col gap-0.5 w-[592px] m-auto"
+              className="flex flex-col gap-0.5 max-w-[592px] m-auto"
             >
               <Link className="hoverable">
                 <div className="flex justify-between">
@@ -268,6 +296,36 @@ const Component = () => {
                 </p>
               </div>
             </PassiveCard>
+          </div>
+          <div className="flex flex-col items-center max-w-[592px] w-full">
+            <div className="w-full px-4">
+              <p>Dokumentarkiv</p>
+              <div className="flex flex-col my-3">
+                <AccordionLinkalike href="#">
+                  <div className="flex flex-col">
+                    <span className="hoverable font-semibold">
+                      Serviceklager
+                    </span>
+                    <span className="text-gray-500">
+                      Sist endret: 25. mai 2023
+                    </span>
+                  </div>
+                  <ChevronRightIcon className="chevron mx-3 size-6 mt-[0.5px]" />
+                </AccordionLinkalike>
+                <AccordionLinkalike href="#">
+                  <div className="flex flex-col">
+                    <span className="hoverable font-semibold">
+                      Arbeidsavklaringspenger
+                    </span>
+                    <span className="text-gray-500">
+                      Sist endret: 25. mai 2023
+                    </span>
+                  </div>
+                  <ChevronRightIcon className="chevron mx-3 size-6 mt-[0.5px]" />
+                </AccordionLinkalike>
+              </div>
+              <Link neutral>Gå til dokumentarkivet</Link>
+            </div>
           </div>
         </div>
       </Page>

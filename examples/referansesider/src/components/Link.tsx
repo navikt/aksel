@@ -20,7 +20,7 @@ const ScLink = styled.a`
   }
 
   &[data-neutral="true"] {
-    color: ${tokens.TextNeutral};
+    color: ${tokens.TextDefault};
   }
 `;
 
