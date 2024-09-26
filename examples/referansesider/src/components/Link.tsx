@@ -18,17 +18,30 @@ const ScLink = styled.a`
       text-decoration: underline;
     }
   }
+
+  &[data-neutral="true"] {
+    color: ${tokens.TextNeutral};
+  }
 `;
 
 export const Link = ({
   href = "#",
   inverted = false,
+  neutral = false,
   ...rest
 }: {
   children: ReactNode;
   inverted?: boolean;
-  href?: string;
+  neutral?: boolean;
   className?: string;
+  href?: string;
 }) => {
-  return <ScLink href={href} {...rest} data-inverted={inverted} />;
+  return (
+    <ScLink
+      href={href}
+      {...rest}
+      data-neutral={neutral}
+      data-inverted={inverted}
+    />
+  );
 };

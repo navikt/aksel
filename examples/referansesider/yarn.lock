@@ -734,22 +734,22 @@ __metadata:
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
   version: 7.1.0
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=22898e&locator=referansesider%40workspace%3A."
-  checksum: 10/c902bccbe74dd153327aa7cc661db88b00caa1f260c909b82364419f835ab77563ac8395e63c39b4ed5d6d3d47552a51027e59b19d145180b2b279658525eb97
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=101570&locator=referansesider%40workspace%3A."
+  checksum: 10/818f359473536a4e20101712113204502bfbef9ec00f0c24ae00bc374e7632f76d12a1c63451fa5d98427ca5c6572fee787c3613b1aea7308fb03e518d820305
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.1.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=bc85a9&locator=referansesider%40workspace%3A."
-  checksum: 10/fcd8aa832291b08b1d64ea76b3426bd8f50eda9705a69dfabae2ca08128a7e46fc1ee733bb852bdae6774654f2102d888f5f18a7212d0c23c611c9ba0b350c15
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=4a5ce2&locator=referansesider%40workspace%3A."
+  checksum: 10/94742041567cd0a4f2201fa85f187fd93ddd51d984aaa318fb99d9b7f80124205a9faa7188a89fc3f93af259217170a24e48813735a9067bdf0b07d5428c08e3
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.1.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9d0af6&locator=referansesider%40workspace%3A."
-  checksum: 10/96185e42852b85e5a7ad4d65c68767ea7518c82a2349afc5ff00a31981ce37ced416c29b14f7a7e5187b773e2f3ae981dfc73178d398613fd51ec306c4598338
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=638013&locator=referansesider%40workspace%3A."
+  checksum: 10/65721c5235cde03fe653263cf89fe47ad700659e541f5bfbc36bb301e80a4c5e3eb2775e704b901956df99d7dec5b1563baf6508dd9aee23f4d094ee29a59b7b
   languageName: node
   linkType: hard
 
