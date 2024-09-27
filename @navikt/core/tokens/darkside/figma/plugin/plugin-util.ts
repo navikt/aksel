@@ -97,11 +97,11 @@ export async function createOrFindCollection(
 
   if (!existingCollection) {
     existingCollection = figma.variables.createVariableCollection(config.name);
+    console.info("Creating new collection: ", config.name);
   }
 
   existingCollection.hiddenFromPublishing;
 
-  console.info("Creating new collection: ", config.name);
   return existingCollection;
 }
 

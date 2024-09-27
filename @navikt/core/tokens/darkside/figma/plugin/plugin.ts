@@ -9,7 +9,6 @@ import {
   createOrFindVariable,
   getExistingVariables,
   getLastNumber,
-  reset,
   resolveAliasId,
 } from "./plugin-util";
 
@@ -39,7 +38,7 @@ async function main() {
     }
   }
 
-  await reset();
+  /*   await reset(); */
 
   const collections = {} as ResolvedFigmaCollection;
 
