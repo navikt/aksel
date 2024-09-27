@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
-import { useId, useMergeRefs } from "../../util/hooks";
+import { useMergeRefs } from "../../util/hooks";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps
@@ -33,13 +33,13 @@ interface ErrorSummaryComponent
     ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
   > {
   /**
-   * Link to error.
+   * Error message with link to field.
    *
    * @see [🤖 OverridableComponent](https://aksel.nav.no/grunnleggende/kode/overridablecomponent) support
    *
    * @example
    * ```jsx
-   * <ErrorSummary.Item href="#1">
+   * <ErrorSummary.Item href="#id-til-alderfelt">
    *   Felt må fylles ut med alder
    * </ErrorSummary.Item>
    * ```
@@ -48,7 +48,7 @@ interface ErrorSummaryComponent
 }
 
 /**
- * A component that displays a summary of errors.
+ * Summary of errors in a form.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/errorsummary)
  * @see 🏷️ {@link ErrorSummaryProps}
@@ -77,15 +77,13 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     },
     ref,
   ) => {
-    const headingId = useId();
-
-    const sectionRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
 
-    const mergedRef = useMergeRefs(ref, sectionRef);
+    const mergedRef = useMergeRefs(ref, wrapperRef);
 
     return (
-      <section
+      <div
         ref={mergedRef}
         {...rest}
         className={cl(
@@ -94,11 +92,8 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           `navds-error-summary--${size}`,
         )}
         tabIndex={-1}
-        aria-live="polite"
-        aria-relevant="all"
-        aria-labelledby={headingId}
         onFocus={composeEventHandlers(rest.onFocus, (event) => {
-          if (event.target === sectionRef.current) {
+          if (event.target === wrapperRef.current) {
             headingRef?.current?.focus();
           }
         })}
@@ -107,7 +102,6 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
-          id={headingId}
           ref={headingRef}
           tabIndex={-1}
         >
@@ -116,7 +110,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {children}
         </BodyShort>
-      </section>
+      </div>
     );
   },
 ) as ErrorSummaryComponent;

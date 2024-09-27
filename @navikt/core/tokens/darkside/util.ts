@@ -1,3 +1,4 @@
+import { CssColor } from "@adobe/leonardo-contrast-colors";
 import _ from "lodash";
 
 export const colorThemes = ["light", "dark"] as const;
@@ -34,32 +35,24 @@ export const globalColorScales = [
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
 
-export const tokenTypes = {
-  color: "color",
-  "global-color": "global-color",
-  "global-radius": "global-radius",
-  "global-spacing": "global-spacing",
-} as const;
+export type TokenTypes =
+  | "color"
+  | "global-color"
+  | "global-radius"
+  | "global-spacing";
 
-export type TokenTypes = (typeof tokenTypes)[keyof typeof tokenTypes];
-
-export const tokenGroupLookup = {
-  background: "background",
-  border: "border",
-  text: "text",
-  contrast: "contrast",
-} as const;
+export type SemanticTokenGroups = "background" | "border" | "text" | "contrast";
+type SemanticTokenGroupsWithRoles = Exclude<SemanticTokenGroups, "contrast">;
 
 export type TokenGroup =
   | GlobalColorRoles
-  | (typeof tokenGroupLookup)["background"]
-  | `${(typeof tokenGroupLookup)["background"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["text"]
-  | `${(typeof tokenGroupLookup)["text"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["border"]
-  | `${(typeof tokenGroupLookup)["border"]}.${GlobalColorRoles}`
-  | (typeof tokenGroupLookup)["border"]
-  | (typeof tokenGroupLookup)["contrast"];
+  | SemanticTokenGroups
+  | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
+
+export type GlobalColorConfig = Record<
+  GlobalColorRoles,
+  { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
+>;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;

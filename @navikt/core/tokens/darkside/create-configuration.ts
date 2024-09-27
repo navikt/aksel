@@ -36,7 +36,7 @@ export const lightModeTokens = () => {
     mergeConfigs([
       semanticTokensForAllRolesConfig(),
       contrastTokenConfig(),
-      semanticTokenConfig(),
+      semanticTokenConfig("light"),
       neutralTokenConfig("light"),
       globalScale("light"),
     ]),
@@ -49,7 +49,13 @@ export const lightModeTokens = () => {
  */
 export const darkModeTokens = () => {
   return tokensWithPrefix(
-    mergeConfigs([globalScale("dark"), neutralTokenConfig("dark")]),
+    mergeConfigs([
+      semanticTokensForAllRolesConfig(),
+      contrastTokenConfig(),
+      semanticTokenConfig("dark"),
+      neutralTokenConfig("dark"),
+      globalScale("dark"),
+    ]),
   );
 };
 

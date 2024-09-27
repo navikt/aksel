@@ -3752,7 +3752,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.0.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.1.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3781,8 +3781,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.0.1"
-    "@navikt/ds-tokens": "npm:^7.0.1"
+    "@navikt/ds-css": "npm:^7.1.0"
+    "@navikt/ds-tokens": "npm:^7.1.0"
     concurrently: "npm:7.2.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3797,7 +3797,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:7.0.1"
+    "@navikt/ds-css": "npm:7.1.0"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3818,11 +3818,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.0.1, @navikt/ds-css@npm:^7.0.1, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.1.0, @navikt/ds-css@npm:^7.1.0, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.0.1"
+    "@navikt/ds-tokens": "npm:^7.1.0"
     cssnano: "npm:6.0.0"
     fast-glob: "npm:3.2.11"
     lodash: "npm:4.17.21"
@@ -3835,14 +3835,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.0.1, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.1.0, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.0.1"
-    "@navikt/ds-tokens": "npm:^7.0.1"
+    "@navikt/aksel-icons": "npm:^7.1.0"
+    "@navikt/ds-tokens": "npm:^7.1.0"
     "@testing-library/dom": "npm:9.3.4"
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
@@ -3872,11 +3872,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.0.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.1.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.0.1"
+    "@navikt/ds-tokens": "npm:^7.1.0"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3886,7 +3886,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.0.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.1.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -7939,11 +7939,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.0.1"
-    "@navikt/ds-css": "npm:^7.0.1"
-    "@navikt/ds-react": "npm:^7.0.1"
-    "@navikt/ds-tailwind": "npm:^7.0.1"
-    "@navikt/ds-tokens": "npm:^7.0.1"
+    "@navikt/aksel-icons": "npm:^7.1.0"
+    "@navikt/ds-css": "npm:^7.1.0"
+    "@navikt/ds-react": "npm:^7.1.0"
+    "@navikt/ds-tailwind": "npm:^7.1.0"
+    "@navikt/ds-tokens": "npm:^7.1.0"
   languageName: unknown
   linkType: soft
 
@@ -22073,8 +22073,8 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^3.27.1":
-  version: 3.29.4
-  resolution: "rollup@npm:3.29.4"
+  version: 3.29.5
+  resolution: "rollup@npm:3.29.5"
   dependencies:
     fsevents: "npm:~2.3.2"
   dependenciesMeta:
@@ -22082,7 +22082,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 10/9e39d54e23731a4c4067e9c02910cdf7479a0f9a7584796e2dc6efaa34bb1e5e015c062c87d1e64d96038baca76cefd47681ff22604fae5827147f54123dc6d0
+  checksum: 10/5ce0e5f1d9288d4954db93993477f894eb3042ec98a7c9c19980e53b1f58296481e3dc6c2b1a2a3680b20eb6c3fe64ed97942d5ff29df658a059647c33b3593c
   languageName: node
   linkType: hard
 

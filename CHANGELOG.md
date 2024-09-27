@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.1
+
+### @navikt/aksel-stylelint
+
+- Pagination: :boom: Added some classNames to list of deprecated (removed) classes. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+### @navikt/ds-react
+
+- Pagination: :lipstick: Updated font-weight to 600 and marked 'page'-prop on 'Item' as deprecated. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+* Combobox: :label: Better typing for maxSelected prop ([#3169](https://github.com/navikt/aksel/pull/3169))
+
+* ErrorSummary: Remove aria-attributes. ([#3171](https://github.com/navikt/aksel/pull/3171))
+
+### @navikt/ds-css
+
+- Accordion: Remove 'relative' positioning when focused. This resolves some issues where floating elements like popover ended up clipping. ([`9c1eba445`](https://github.com/navikt/aksel/commit/9c1eba44508f295cc6261ff96822b18557bd7ddc))
+
 ## 7.0
 
 ### @navikt/aksel-icons
