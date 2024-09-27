@@ -90,7 +90,7 @@ const background = new BackgroundColor({
 export const globalDarkThemeConfig = new Theme({
   colors,
   backgroundColor: background,
-  lightness: 10,
+  lightness: 13,
   contrast: 1,
   saturation: 100,
   output: "HEX",
