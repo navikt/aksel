@@ -1,3 +1,4 @@
+import { CssColor } from "@adobe/leonardo-contrast-colors";
 import _ from "lodash";
 
 export const colorThemes = ["light", "dark"] as const;
@@ -47,6 +48,11 @@ export type TokenGroup =
   | GlobalColorRoles
   | SemanticTokenGroups
   | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
+
+export type GlobalColorConfig = Record<
+  GlobalColorRoles,
+  { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
+>;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;

@@ -9,6 +9,7 @@ import {
 } from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Dekoratoren } from "../components/Dekoratoren";
+import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 
 const GrayPanel = styled.div`
@@ -26,14 +27,14 @@ const Header2 = styled.h2`
 
 const NotificationsPanel = styled.div`
   background-color: ${tokens.BgInfoModerate};
+  box-shadow:
+    0px 1px 3px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.2);
   margin-top: calc(-1 * 44px);
   margin-bottom: 44px;
+  color: ${tokens.TextDefault};
 
   svg {
-    color: ${tokens.BgBrandThreeModerate};
-  }
-
-  #pencil {
     color: white;
   }
 `;
@@ -99,25 +100,83 @@ let Card;
   };
 }
 
+const Tag = styled.span<{ $variant: "info" | "warning" }>`
+  display: block;
+  width: fit-content;
+  background-color: ${(prop) =>
+    prop.$variant === "info"
+      ? tokens.BgInfoStrongActive
+      : tokens.BgWarningModerateActive}; /*TODO: color tweaks? or token fail?*/
+  color: ${(prop) =>
+    prop.$variant === "info"
+      ? "white"
+      : tokens.TextDefault}; /*TODO: color tweaks? or token fail?*/
+  padding-inline: 6px;
+  border-radius: 2px;
+`;
+
 const PassiveCard = styled.div<{ $variant: "subtle" | "info" }>`
   border-radius: 8px;
   overflow: clip;
-  margin-block: 36px 12px;
-  div {
+  margin-block: 0 40px;
+  > div,
+  > a {
     padding: 16px;
     background-color: ${(props) =>
       props.$variant === "subtle"
         ? tokens.BgNeutralModerate
         : tokens.BgInfoModerate};
   }
-  div:first-child {
+  > a {
+    color: ${tokens.TextDefault};
+    text-decoration: none;
+  }
+  > div:first-child {
     padding-bottom: 12px;
   }
-  div.hoverable:hover {
+  > div.hoverable:hover,
+  > a.hoverable:hover {
     background-color: ${(props) =>
       props.$variant === "subtle"
         ? tokens.BgNeutralModerateHover
         : tokens.BgInfoModerateHover};
+    .chevron {
+      transform: translate(4px, 0);
+    }
+  }
+
+  svg {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+`;
+
+const AccordionLinkalike = styled.a`
+  color: ${tokens.TextDefault};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px solid ${tokens.BorderNeutralSubtle};
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding-block: 18px;
+
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+
+  &:hover .hoverable {
+    text-decoration: underline;
+  }
+  &:hover .chevron {
+    transform: translate(4px, 0);
+  }
+
+  svg {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
   }
 `;
 
@@ -125,12 +184,12 @@ const Component = () => {
   return (
     <Dekoratoren>
       <Page options={{ width: "large" }}>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <div>
             <Header2>Hei, Navn Navnesen</Header2>
           </div>
           <GrayPanel className="mt-11">
-            <NotificationsPanel className="dark rounded-xl flex justify-between p-2 text-white">
+            <NotificationsPanel className="rounded-xl flex justify-between p-2 text-white">
               <div className="flex justify-start m-2 gap-4">
                 <div className="bg-orange-500 w-14 h-14 rounded-lg flex justify-center items-center">
                   <BellFillIcon className="size-6" />
@@ -190,34 +249,86 @@ const Component = () => {
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
                 <p className="m-5">Du må sende 2 meldekort</p>
+                <Tag $variant="warning" className="m-5">
+                  Les mer om dine muligheter fremover
+                </Tag>
               </Card>
             </div>
           </GrayPanel>
-          <PassiveCard
-            $variant="subtle"
-            className="flex flex-col gap-0.5 w-[592px] m-auto"
-          >
-            <div>
-              <p>Siste utbetaling</p>
+          <div className="mt-10">
+            <PassiveCard
+              $variant="subtle"
+              className="flex flex-col gap-0.5 max-w-[592px] m-auto"
+            >
+              <div>
+                <div className="flex justify-between">
+                  <p>Siste utbetaling</p>
+                  <Link neutral>Se alle</Link>
+                </div>
+                <span className="font-semibold text-3xl">1 234 kr</span>
+                <p>14. november til kontonummer 1234</p>
+              </div>
+              <Link className="hoverable">
+                <div className="flex justify-between">
+                  <p>Arbeidsavklaringspenger</p>
+                  <div className="flex align-middle gap-1">
+                    <span className="font-semibold">1 234 kr</span>
+                    <ChevronRightIcon className="chevron size-6 mt-[0.5px]" />
+                  </div>
+                </div>
+              </Link>
+            </PassiveCard>
+            <PassiveCard
+              $variant="info"
+              className="flex flex-col gap-0.5 max-w-[592px] m-auto"
+            >
+              <Link className="hoverable">
+                <div className="flex justify-between">
+                  <p>Innboks</p>
+                  <div className="flex align-middle gap-1">
+                    <Tag $variant="info">4 nye meldinger</Tag>
+                    <ChevronRightIcon className="chevron size-6 mt-[0.5px]" />
+                  </div>
+                </div>
+              </Link>
+              <div>
+                <p>
+                  Informasjon fra NAV og svar på henvendelser og referater fra
+                  samtaler du har på telefon, chat og “Skriv til oss”.
+                </p>
+              </div>
+            </PassiveCard>
+          </div>
+          <div className="flex flex-col items-center max-w-[592px] w-full">
+            <div className="w-full px-4">
+              <p>Dokumentarkiv</p>
+              <div className="flex flex-col my-3">
+                <AccordionLinkalike href="#">
+                  <div className="flex flex-col">
+                    <span className="hoverable font-semibold">
+                      Serviceklager
+                    </span>
+                    <span className="text-gray-500">
+                      Sist endret: 25. mai 2023
+                    </span>
+                  </div>
+                  <ChevronRightIcon className="chevron mx-3 size-6 mt-[0.5px]" />
+                </AccordionLinkalike>
+                <AccordionLinkalike href="#">
+                  <div className="flex flex-col">
+                    <span className="hoverable font-semibold">
+                      Arbeidsavklaringspenger
+                    </span>
+                    <span className="text-gray-500">
+                      Sist endret: 25. mai 2023
+                    </span>
+                  </div>
+                  <ChevronRightIcon className="chevron mx-3 size-6 mt-[0.5px]" />
+                </AccordionLinkalike>
+              </div>
+              <Link neutral>Gå til dokumentarkivet</Link>
             </div>
-            <div className="hoverable">
-              <p>Arbeidsavklaringspenger</p>
-            </div>
-          </PassiveCard>
-          <PassiveCard
-            $variant="info"
-            className="flex flex-col gap-0.5 w-[592px] m-auto"
-          >
-            <div className="hoverable">
-              <p>Innboks</p>
-            </div>
-            <div>
-              <p>
-                Informasjon fra NAV og svar på henvendelser og referater fra
-                samtaler du har på telefon, chat og “Skriv til oss”.
-              </p>
-            </div>
-          </PassiveCard>
+          </div>
         </div>
       </Page>
     </Dekoratoren>
