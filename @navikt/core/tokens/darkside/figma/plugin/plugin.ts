@@ -13,25 +13,34 @@ import {
   resolveAliasId,
 } from "./plugin-util";
 
-const globalConfig = _config as FigmaTokenConfig;
+main()
+  .then((timestamp) =>
+    figma.closePlugin(
+      `Local variables updated! Last config update: ${timestamp}.`,
+    ),
+  )
+  .catch((err) =>
+    figma.closePlugin(`Error updating local variables: ${err.message}`),
+  );
 
-/**
- * TODO:
- * - Add remote fetch of config from CDN i production after figma config PR is merged
- */
-const main = async () => {
+async function main() {
+  let globalConfig: FigmaTokenConfig;
+
+  if (process.env.NODE_ENV === "development") {
+    globalConfig = _config as FigmaTokenConfig;
+  } else {
+    try {
+      globalConfig = await fetch(
+        "https://cdn.nav.no/designsystem/@navikt/tokens/figma-config.json",
+      ).then((res) => res.json());
+      console.info("Fetched config from CDN.");
+    } catch (err) {
+      throw new Error("Error fetching config from CDN 😱");
+    }
+  }
+
   await reset();
 
-  const collections = await buildCollections();
-
-  await updateGlobalColorCollection(collections.globalLight);
-  await updateGlobalColorCollection(collections.globalDark);
-  await updateGlobalScalingCollection(collections.radius);
-  await updateGlobalScalingCollection(collections.spacing);
-  await updateSemanticColorCollection(collections);
-};
-
-async function buildCollections() {
   const collections = {} as ResolvedFigmaCollection;
 
   const scopedConfig: ScopedFigmaTokenConfig = {
@@ -53,9 +62,18 @@ async function buildCollections() {
     };
   }
 
-  return collections;
+  await updateGlobalColorCollection(collections.globalLight);
+  await updateGlobalColorCollection(collections.globalDark);
+  await updateGlobalScalingCollection(collections.radius);
+  await updateGlobalScalingCollection(collections.spacing);
+  await updateSemanticColorCollection(collections);
+
+  return globalConfig.timestamp;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                  Utilities                                 */
+/* -------------------------------------------------------------------------- */
 async function updateGlobalColorCollection(
   configuration: ResolvedFigmaCollectionValue,
 ) {
@@ -164,9 +182,3 @@ async function updateSemanticColorCollection(
   }
   console.info("Updated collection: ", config.name);
 }
-
-main().then(() =>
-  figma.closePlugin(
-    `Local variables updated! Last config update: ${globalConfig.timestamp}.`,
-  ),
-);
