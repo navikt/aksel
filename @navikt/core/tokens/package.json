@@ -21,8 +21,9 @@
     "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
     "build:darkside": "tsx ./darkside && yarn build:figma-config && yarn build:plugin",
     "build:figma-config": "tsx ./darkside/figma",
-    "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --outfile='darkside/figma/plugin/plugin.js'",
-    "build:plugin-watch": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --outfile='darkside/figma/plugin/plugin.js' --watch",
+    "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",
+    "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='darkside/figma/plugin/plugin.js'",
+    "build:plugin-watch": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js' --watch",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
