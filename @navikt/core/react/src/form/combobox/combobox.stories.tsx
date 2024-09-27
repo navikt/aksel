@@ -67,6 +67,9 @@ Default.argTypes = {
   disabled: {
     control: { type: "boolean" },
   },
+  readOnly: {
+    control: { type: "boolean" },
+  },
   isListOpen: {
     control: { type: "boolean" },
   },
@@ -484,12 +487,26 @@ export const InModal: StoryFn = () => {
 };
 
 export const Disabled: StoryFn = () => {
+  const selectedOptionsMultiple = ["napoleonskake", "donut"];
+  const selectedOptionsSingle = ["pushups"];
   return (
-    <UNSAFE_Combobox
-      options={options}
-      label="Hva er dine favorittfrukter?"
-      disabled
-    />
+    <VStack gap="2">
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
+        selectedOptions={selectedOptionsMultiple}
+        isMultiSelect
+        disabled
+      />
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er din favoritthobby?"
+        description="Her snakker vi ting du bruker minst én time på hver dag."
+        selectedOptions={selectedOptionsSingle}
+        disabled
+      />
+    </VStack>
   );
 };
 
@@ -549,6 +566,8 @@ export const Chromatic: StoryFn = () => {
       <WithError />
       <H2>Disabled</H2>
       <Disabled />
+      <H2>Readonly</H2>
+      <Readonly />
     </VStack>
   );
 };
