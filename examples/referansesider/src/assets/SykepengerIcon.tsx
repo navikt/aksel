@@ -7,7 +7,7 @@ import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
  * - Unsure of token use here.
  */
 const ScSVG = styled.svg`
-  stroke: ${tokens.TextBrandOne};
+  stroke: ${tokens.TextBrandOneStrong};
 `;
 
 /**

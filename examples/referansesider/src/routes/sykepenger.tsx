@@ -24,7 +24,7 @@ const EyeBrowText = styled.span`
 `;
 
 const H1 = styled.h1`
-  color: ${tokens.TextBrandOne};
+  color: ${tokens.TextBrandOneStrong};
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -34,7 +34,7 @@ const H1 = styled.h1`
 
 const H2 = styled.h2`
   position: relative;
-  color: ${tokens.TextBrandOne};
+  color: ${tokens.TextBrandOneStrong};
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 1rem;

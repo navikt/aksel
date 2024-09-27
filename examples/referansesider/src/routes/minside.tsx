@@ -105,8 +105,8 @@ const Tag = styled.span<{ $variant: "info" | "warning" }>`
   width: fit-content;
   background-color: ${(prop) =>
     prop.$variant === "info"
-      ? tokens.BgInfoStrongActive
-      : tokens.BgWarningModerateActive}; /*TODO: color tweaks? or token fail?*/
+      ? tokens.BgInfoStrongPressed
+      : tokens.BgWarningModeratePressed}; /*TODO: color tweaks? or token fail?*/
   color: ${(prop) =>
     prop.$variant === "info"
       ? "white"

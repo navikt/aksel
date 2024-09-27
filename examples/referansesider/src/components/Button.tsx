@@ -19,12 +19,12 @@ const ScButton = styled.button`
     }
 
     &:active {
-      background-color: ${tokens.BgAccentStrongActive};
+      background-color: ${tokens.BgAccentStrongPressed};
     }
   }
 
   &[data-variant="secondary"] {
-    color: ${tokens.TextAccentSubtle};
+    color: ${tokens.TextAccent};
     box-shadow: inset 0 0 0 2px ${tokens.BorderAccent};
 
     &:hover {
@@ -32,7 +32,7 @@ const ScButton = styled.button`
     }
 
     &:active {
-      background-color: ${tokens.BgAccentModerateActive};
+      background-color: ${tokens.BgAccentModeratePressed};
     }
   }
 `;
