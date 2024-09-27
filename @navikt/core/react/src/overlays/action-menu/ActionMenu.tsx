@@ -349,6 +349,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
               }
             }
           })}
+          /* TODO: Use onClick instead of these two */
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
             if (event.currentTarget.disabled) {
               return;

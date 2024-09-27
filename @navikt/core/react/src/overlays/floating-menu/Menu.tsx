@@ -543,6 +543,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           // prevent Firefox from getting stuck in text selection mode when the menu closes.
           if (!isPointerDownRef.current) event.currentTarget?.click();
         })}
+        /* TODO: refactor these two, use correct onKeyDown/onKeyUp compose */
         onKeyDown={composeEventHandlers(onKeyDown, (event) => {
           if (disabled || event.repeat) {
             return;
