@@ -267,6 +267,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        readOnly={readOnly}
       />
     );
   },

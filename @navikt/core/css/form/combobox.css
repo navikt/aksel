@@ -24,20 +24,12 @@
   opacity: 0.3;
 }
 
-.navds-combobox--disabled .navds-text-field__input {
-  border: 1px solid var(--a-border-default);
-}
-
 .navds-combobox--disabled .navds-combobox__wrapper *:hover {
   cursor: not-allowed;
 }
 
 .navds-combobox--readonly {
   pointer-events: none;
-}
-
-.navds-combobox--readonly > :where(.navds-form-field__label) {
-  display: inline-flex;
 }
 
 .navds-combobox--readonly .navds-text-field__input,

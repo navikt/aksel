@@ -57,6 +57,7 @@ const ComboboxWrapper = ({
           "navds-combobox--disabled": !!inputProps.disabled,
           "navds-combobox--focused": hasFocusWithin,
           "navds-combobox--readonly": readOnly,
+          "navds-form-field--readonly": readOnly,
         },
       )}
       onFocus={onFocusInsideWrapper}
