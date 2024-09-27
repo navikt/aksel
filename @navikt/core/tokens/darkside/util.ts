@@ -35,22 +35,34 @@ export const globalColorScales = [
 
 export type GlobalColorScale = (typeof globalColorScales)[number];
 
+export type TokenTypes =
+  | "color"
+  | "global-color"
+  | "global-radius"
+  | "global-spacing";
+
+export type SemanticTokenGroups = "background" | "border" | "text" | "contrast";
+type SemanticTokenGroupsWithRoles = Exclude<SemanticTokenGroups, "contrast">;
+
+export type TokenGroup =
+  | GlobalColorRoles
+  | SemanticTokenGroups
+  | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
+
 export type GlobalColorConfig = Record<
   GlobalColorRoles,
   { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
 >;
 
-type TokenTypes = "color" | "global-color" | "global-radius" | "global-spacing";
-
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;
   type: T;
-  group?: string;
+  group?: TokenGroup;
   comment?: string;
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
-  [key: string]: StyleDictionaryToken<T> | StyleDictionaryTokenConfig<T>;
+  [key: string]: Record<string, StyleDictionaryToken<T>>;
 };
 
 export type GlobalColorVariable = Record<

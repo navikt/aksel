@@ -1,23 +1,27 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-const NeutralScaleLight = (): StyleDictionaryTokenConfig<"global-color"> => ({
-  "000": {
-    value: "white",
-    type: "global-color",
-    group: "neutral",
+const NeutralScaleLight = {
+  neutral: {
+    "000": {
+      value: "white",
+      type: "global-color",
+      group: "neutral",
+    },
   },
-});
+} as const;
 
-const NeutralScaleDark = (): StyleDictionaryTokenConfig<"global-color"> => ({
-  "000": {
-    value: "black",
-    type: "global-color",
-    group: "neutral",
+const NeutralScaleDark = {
+  neutral: {
+    "000": {
+      value: "black",
+      type: "global-color",
+      group: "neutral",
+    },
   },
-});
+} as const;
 
-export const neutralTokenConfig = (theme: ColorTheme) => {
-  return {
-    neutral: theme === "light" ? NeutralScaleLight() : NeutralScaleDark(),
-  };
+export const neutralTokenConfig = (
+  theme: ColorTheme,
+): StyleDictionaryTokenConfig<"global-color"> => {
+  return theme === "light" ? NeutralScaleLight : NeutralScaleDark;
 };

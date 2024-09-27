@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
-    "build:darkside": "tsx ./darkside",
+    "build:darkside": "tsx ./darkside && yarn build:figma-config",
+    "build:figma-config": "tsx ./darkside/figma",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@adobe/leonardo-contrast-colors": "^1.0.0",
+    "@figma/plugin-typings": "^1.100.2",
     "color": "4.2.3",
     "lightningcss": "^1.27.0",
     "lodash": "^4.17.21",
