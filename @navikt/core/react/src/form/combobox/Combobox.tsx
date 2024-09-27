@@ -46,7 +46,7 @@ export const Combobox = forwardRef<
           "navds-sr-only": hideLabel,
         })}
       >
-        <ReadOnlyIcon readOnly={readOnly} />
+        <ReadOnlyIcon nativeReadOnly={false} readOnly={readOnly} />
         {label}
       </Label>
       {!!description && (
