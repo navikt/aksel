@@ -27,9 +27,7 @@ export const Default: Story = {
     return (
       <Box borderWidth="0 0 0 1" borderColor="border-subtle" maxWidth="500px">
         <List {...props}>
-          <List.Item title="Lorem Ipsum Dolor Sit Amet">
-            Lorem Ipsum Dolor Sit Amet
-          </List.Item>
+          <List.Item title="Lorem Ipsum Dolor Sit Amet">Beskrivelse.</List.Item>
           <List.Item title="Consectetur Adipiscing Elit">
             Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
           </List.Item>
@@ -59,10 +57,6 @@ export const Default: Story = {
             </List>
           </List.Item>
         </List>
-        <List {...props}>
-          <List.Item>Liste 2, item 1</List.Item>
-          <List.Item>Liste 2, item 2</List.Item>
-        </List>
       </Box>
     );
   },
@@ -91,13 +85,6 @@ export const Ordered: Story = {
   render: () => {
     return (
       <Box borderWidth="0 0 0 1" borderColor="border-subtle" maxWidth="500px">
-        <p>Native liste:</p>
-        <ol>
-          <li>Neil Armstrong</li>
-          <li>Alan Bean</li>
-          <li>Peter Conrad</li>
-        </ol>
-        <p>Listekomponent:</p>
         <List as="ol">
           <List.Item title="Lorem Ipsum Dolor Sit Amet">Beskrivelse.</List.Item>
           <List.Item title="Consectetur Adipiscing Elit">
