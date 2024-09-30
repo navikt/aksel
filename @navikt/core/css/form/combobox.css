@@ -32,6 +32,10 @@
   border: 1px solid var(--a-border-default);
 }
 
+.navds-combobox--disabled .navds-combobox__selected-options {
+  pointer-events: none;
+}
+
 .navds-combobox--readonly {
   pointer-events: none;
 }
