@@ -13,20 +13,53 @@
   margin-block: var(--a-spacing-2) 0;
 }
 
+.navds-list ol {
+  padding-left: 1.7rem;
+}
+
+.navds-list ol > .navds-list__item {
+  padding-left: 0.3rem;
+}
+
+/* SAFARI HACK START */
+/* stylelint-disable selector-type-no-unknown */
+
+_::-webkit-full-page-media,
+_:future,
+:root .navds-list ol {
+  padding-left: 2.1rem;
+}
+
+_::-webkit-full-page-media,
+_:future,
+:root .navds-list ol .navds-list__item {
+  padding-left: 0;
+}
+
+/* SAFARI HACK END */
+/* stylelint-enable selector-type-no-unknown */
+
 .navds-list__item {
   margin-block-end: var(--a-spacing-2);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--a-spacing-2);
 }
 
 .navds-list__item:last-child {
   margin-block-end: 0;
 }
 
+.navds-list ul > .navds-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--a-spacing-2);
+}
+
+.navds-list ol li::marker {
+  font-weight: var(--a-font-weight-bold);
+  color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
+}
+
 .navds-list__item-marker {
   width: 1.5rem;
-  text-align: right;
 }
 
 .navds-list ul > li > .navds-list__item-marker {
@@ -51,26 +84,4 @@
 
 .navds-list--medium .navds-list__item-marker--icon {
   padding-block-end: 1px;
-}
-
-.navds-list__item-marker--icon svg {
-  flex-shrink: 0;
-}
-
-.navds-list ol > li > .navds-list__item-marker::before {
-  counter-increment: list-item;
-  content: counter(list-item) ".";
-  font-weight: var(--a-font-weight-bold);
-  font-size: var(--a-font-size-large);
-  line-height: var(--a-font-line-height-xlarge);
-  color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
-}
-
-.navds-list--small ol > li > .navds-list__item-marker::before {
-  font-size: var(--a-font-size-medium);
-  line-height: var(--a-font-line-height-large);
-}
-
-.navds-list--small ol > li > .navds-list__item-marker {
-  font-size: var(--a-font-size-medium);
 }

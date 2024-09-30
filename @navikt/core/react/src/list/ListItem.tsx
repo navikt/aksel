@@ -19,7 +19,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
 
     return (
       <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
-        {listType === "ul" ? (
+        {listType === "ul" && (
           <div
             className={cl("navds-list__item-marker", {
               "navds-list__item-marker--icon": icon,
@@ -43,18 +43,16 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
               </svg>
             )}
           </div>
-        ) : (
-          <div className="navds-list__item-marker" />
         )}
 
-        <BodyLong as="div" size={size}>
+        <div>
           {title && (
             <BodyLong as="p" size={size} weight="semibold">
               {title}
             </BodyLong>
           )}
           {children}
-        </BodyLong>
+        </div>
       </li>
     );
   },
