@@ -28,6 +28,10 @@
   cursor: not-allowed;
 }
 
+.navds-combobox--disabled .navds-text-field__input {
+  border: 1px solid var(--a-border-default);
+}
+
 .navds-combobox--readonly {
   pointer-events: none;
 }
