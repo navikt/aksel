@@ -78,6 +78,10 @@ export class FigmaVariablePluginInterface {
     return variable;
   }
 
+  createVariableAlias(variable: Variable) {
+    return figma.variables.createVariableAlias(variable);
+  }
+
   setVariableValue(
     variable: Variable,
     value: VariableValue,
@@ -112,12 +116,40 @@ export class FigmaVariablePluginInterface {
     return collection.modes;
   }
 
-  createMode(name: string, collection: VariableCollection) {
-    if (this.getModes(collection).find((mode) => mode.name === name)) {
+  getModeWithName<T extends string>(
+    name: T,
+    collection: VariableCollection,
+  ):
+    | {
+        modeId: string;
+        name: T;
+      }
+    | undefined {
+    const foundMode = this.getModes(collection).find(
+      (mode) => mode.name === name,
+    );
+
+    return foundMode ? { modeId: foundMode.modeId, name } : undefined;
+  }
+
+  createMode<T extends string>(
+    name: T,
+    collection: VariableCollection,
+  ): {
+    modeId: string;
+    name: T;
+  } {
+    const existingMode = this.getModes(collection).find(
+      (mode) => mode.name === name,
+    );
+    if (existingMode) {
       console.info("Mode already exists, skipping creation: ", name);
-      return;
+      return { modeId: existingMode.modeId, name };
     }
-    collection.addMode(name);
+    return {
+      modeId: collection.addMode(name),
+      name,
+    };
   }
 
   private removeMode(name: string, collection: VariableCollection) {
@@ -128,7 +160,13 @@ export class FigmaVariablePluginInterface {
     }
   }
 
-  removeNonMatchingModes(modes: string[], collection: VariableCollection) {
+  removeNonMatchingModes(
+    modes: string[],
+    collection: VariableCollection,
+  ): {
+    modeId: string;
+    name: string;
+  }[] {
     const existingModes = this.getModes(collection);
 
     for (const mode of existingModes) {
@@ -136,6 +174,7 @@ export class FigmaVariablePluginInterface {
         collection.removeMode(mode.modeId);
       }
     }
+    return this.getModes(collection);
   }
 
   /* -------------------------------------------------------------------------- */

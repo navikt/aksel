@@ -1,15 +1,14 @@
 import _config from "../../../figma-config.json";
-import { FigmaTokenConfig } from "../figma-config.types";
+import { FigmaConfigEntry, FigmaTokenConfig } from "../figma-config.types";
 import { FigmaVariablePluginInterface } from "./FigmaVariableInterface";
-import { ScopedFigmaTokenConfig } from "./plugin-util";
+
+type ScopedFigmaTokenConfig = Omit<FigmaTokenConfig, "version" | "timestamp">;
 
 export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   private config: FigmaTokenConfig;
   private meta: Pick<FigmaTokenConfig, "version" | "timestamp">;
   private remoteConfigURL =
     "https://cdn.nav.no/designsystem/@navikt/tokens/figma-config.json";
-
-  private semanticModes = ["light", "dark"];
 
   constructor() {
     super();
@@ -31,17 +30,15 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   }
 
   updateVariables(): void {
-    this.updateGlobalColorCollection(this.config.globalLight);
-    this.updateGlobalColorCollection(this.config.globalDark);
+    this.updateGlobalColorCollection(this.config.colors.light.global);
+    this.updateGlobalColorCollection(this.config.colors.dark.global);
+    this.updateSemanticColorCollection(this.config.colors);
+
     this.updateScaleCollection(this.config.radius);
     this.updateScaleCollection(this.config.spacing);
   }
 
-  private updateGlobalColorCollection(
-    entry:
-      | ScopedFigmaTokenConfig["globalLight"]
-      | ScopedFigmaTokenConfig["globalDark"],
-  ): void {
+  private updateGlobalColorCollection(entry: FigmaConfigEntry): void {
     let collection = super.getCollection(entry.name);
 
     if (!collection) {
@@ -134,79 +131,92 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   }
 
   private updateSemanticColorCollection(
-    entry: ScopedFigmaTokenConfig["semanticColors"],
+    entry: ScopedFigmaTokenConfig["colors"],
   ): void {
-    let collection = super.getCollection(entry.name);
+    let collection = super.getCollection(entry.light.name);
 
     if (!collection) {
-      collection = super.createCollection(entry.name);
+      collection = super.createCollection(entry.light.name);
     }
 
-    let modes = super.getModes(collection);
+    for (const modeName of Object.values(entry).map((x) => x.name)) {
+      const globalCollection = super.getCollection(entry[modeName].global.name);
 
-    for (const mode of this.semanticModes) {
-      if (!modes.find((m) => m.name === mode)) {
-        super.createMode(mode, collection);
-      }
-    }
-    modes = super.getModes(collection);
-    super.removeNonMatchingModes(this.semanticModes, collection);
-
-    for (const token of entry.tokens) {
-      /* Color values can only be defined by strings */
-      if (typeof token.value !== "string") {
-        throw new Error(`Token value is not a string: ${token}`);
-      }
-
-      let variable = super.getVariable(token.name, collection.id);
-
-      if (!variable) {
-        variable = super.createVariable(
-          token.name,
-          collection,
-          token.figmaType,
+      if (!globalCollection) {
+        throw new Error(
+          `Global collection not found for: ${entry[modeName].global.name}`,
         );
       }
 
-      if (token.alias)
-        for (const mode of modes) {
-          /* TODO: implement this */
-          /* figma.variables.createVariableAlias */
-          /* const aliasId = super.resolveAliasId(token, mode.name); */
+      let mode = super.getModeWithName(modeName, collection);
 
-          const globalCollection = super.getCollection(
-            mode.name === "light"
-              ? this.config.globalLight.name
-              : this.config.globalDark.name,
-          );
+      if (!mode) {
+        mode = super.createMode(modeName, collection);
+      }
 
-          if (!globalCollection) {
-            throw new Error(`Global collection not found for: ${mode.name}`);
-          }
+      for (const token of entry[modeName].semantic.tokens) {
+        let variable = super.getVariable(token.name, collection.id);
 
-          /* const globalVariable = super.getVariable(token.alias, globalCollection.id) */
-
-          super.setVariableValue(
-            variable,
-            /* "aliasId"
-            ? {
-                type: "VARIABLE_ALIAS",
-                id: "aliasId",
-              }
-            : */ figma.util.rgba(token.value),
-            mode.modeId,
+        if (!variable) {
+          variable = super.createVariable(
+            token.name,
+            collection,
+            token.figmaType,
           );
         }
 
-      super.setVariableMetadata(variable, {
-        codeSyntax: { WEB: token.code.web },
-        description: token.comment ?? "",
-        hiddenFromPublishing: collection.hiddenFromPublishing,
-        scopes: token.scopes,
-      });
+        if (!token.alias) {
+          if (typeof token.value !== "string") {
+            throw new Error(
+              `Semantic tokens without alias requires value to be string: ${token}`,
+            );
+          }
+
+          super.setVariableValue(
+            variable,
+            figma.util.rgba(token.value),
+            mode.modeId,
+          );
+          continue;
+        }
+
+        const globalVariable = super.getVariable(
+          token.alias,
+          globalCollection.id,
+        );
+
+        if (!globalVariable) {
+          throw new Error(
+            `Global variable not found for alias: ${token.alias}`,
+          );
+        }
+
+        super.setVariableValue(
+          variable,
+          super.createVariableAlias(globalVariable),
+          mode.modeId,
+        );
+
+        super.setVariableMetadata(variable, {
+          codeSyntax: { WEB: token.code.web },
+          description: token.comment ?? "",
+          hiddenFromPublishing: collection.hiddenFromPublishing,
+          scopes: token.scopes,
+        });
+      }
+
+      /* Make sure to remove "default" modes if they exist */
+      super.removeNonMatchingModes(
+        Object.values(entry).map((x) => x.name),
+        collection,
+      );
     }
 
     console.info("Updated collection: ", collection.name);
+  }
+
+  exitWithMessage(message: string): void {
+    super.exit(message);
   }
 
   exit(): void {
