@@ -62,11 +62,7 @@ export const Combobox = forwardRef<
         </BodyShort>
       )}
       <div className="navds-combobox__wrapper">
-        <InputController
-          ref={ref}
-          toggleListButton={inputProps.disabled || readOnly ? false : true}
-          {...rest}
-        />
+        <InputController ref={ref} {...rest} />
         <FilteredOptions />
       </div>
       <div
