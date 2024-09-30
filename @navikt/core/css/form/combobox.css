@@ -20,6 +20,24 @@
   --__ac-combobox-input-height: 1.5rem;
 }
 
+.navds-combobox--disabled {
+  opacity: 0.3;
+}
+
+.navds-combobox--disabled .navds-combobox__wrapper *:hover {
+  cursor: not-allowed;
+}
+
+.navds-combobox--readonly {
+  pointer-events: none;
+}
+
+.navds-combobox--readonly .navds-text-field__input,
+.navds-combobox--readonly .navds-combobox__input {
+  background-color: var(--a-surface-subtle);
+  border-color: var(--a-border-subtle);
+}
+
 .navds-combobox__button-clear svg,
 .navds-combobox__button-toggle-list svg,
 .navds-combobox__list svg {
