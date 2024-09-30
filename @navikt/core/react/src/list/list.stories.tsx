@@ -292,36 +292,34 @@ export const Icons: Story = {
 };
 
 export const Tokens: Story = {
-  render: (props) => {
+  render: () => {
     return (
-      <div style={{ "--ac-list-marker-color": "red" }}>
-        <List {...props}>
-          <List.Item>Consectetur Adipiscing Elit</List.Item>
-          <List.Item>
-            Impedit nemo eos sit adipisci non dolores.
-            <List
-              style={{
-                "--ac-list-marker-icon-color": "blue",
-                "--ac-list-marker-ul-color": "pink",
-              }}
-            >
-              <List.Item>Error assumenda officia</List.Item>
-              <List.Item icon={<HeadHeartIcon aria-hidden />}>
-                Suscipit odit voluptatum
-              </List.Item>
-            </List>
-          </List.Item>
-          <List.Item style={{ "--ac-list-marker-ol-color": "green" }}>
-            Iusto fugiat atque accusantium iure sunt.
-            <List as="ol">
-              <List.Item>Error assumenda officia</List.Item>
-            </List>
-            <List>
-              <List.Item>Suscipit odit voluptatum</List.Item>
-            </List>
-          </List.Item>
-        </List>
-      </div>
+      <List style={{ "--ac-list-marker-color": "red" }}>
+        <List.Item>Consectetur Adipiscing Elit</List.Item>
+        <List.Item>
+          Impedit nemo eos sit adipisci non dolores.
+          <List
+            style={{
+              "--ac-list-marker-icon-color": "blue",
+              "--ac-list-marker-ul-color": "pink",
+            }}
+          >
+            <List.Item>Error assumenda officia</List.Item>
+            <List.Item icon={<HeadHeartIcon aria-hidden />}>
+              Suscipit odit voluptatum
+            </List.Item>
+          </List>
+        </List.Item>
+        <List.Item style={{ "--ac-list-marker-ol-color": "green" }}>
+          Iusto fugiat atque accusantium iure sunt.
+          <List as="ol">
+            <List.Item>Error assumenda officia</List.Item>
+          </List>
+          <List>
+            <List.Item>Suscipit odit voluptatum</List.Item>
+          </List>
+        </List.Item>
+      </List>
     );
   },
 };
