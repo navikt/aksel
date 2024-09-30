@@ -47,8 +47,7 @@ export const Default: Story = {
           </List.Item>
           <List.Item>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
-            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
-            minus rerum recusandae.
+            fugiat atque accusantium iure sunt, ipsum voluptas.
             <List as="ol">
               <List.Item title="Tempor Incididunt">
                 Error assumenda officia
@@ -90,25 +89,15 @@ export const Ordered: Story = {
           <List.Item title="Consectetur Adipiscing Elit">
             Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
           </List.Item>
-          <List.Item title="Sed Do Eiusmod Tempor Incididunt">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
-          <List.Item title="Ut Labore Et Dolore Magna Aliqua">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
-          <List.Item title="Enim Ad Minim Veniam">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
           <List.Item title="Quis Nostrud Exercitation Ullamco Eu Fugiat Nulla Pariatur Dolore">
             Beskrivelse på punktet i lista. Prøv å hold den kort og konsis. Men
-            hvis den likevel blir lang, skal teksten brekke til flere linjer.
+            hvis den likevel blir lang, skal teksten brekke.
           </List.Item>
-          <List.Item title="Laboris Nisi Ut Aliquip Ex Ea Commodo">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
-          <List.Item title="Duis Aute Irure Dolor In Reprehenderit">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
+          <List.Item>Sed Do Eiusmod Tempor Incididunt</List.Item>
+          <List.Item>Ut Labore Et Dolore Magna Aliqua</List.Item>
+          <List.Item>Enim Ad Minim Veniam</List.Item>
+          <List.Item>Laboris Nisi Ut Aliquip Ex Ea Commodo</List.Item>
+          <List.Item>Duis Aute Irure Dolor In Reprehenderit</List.Item>
           <List.Item>
             Impedit nemo eos sit adipisci non dolores.
             <List as="ol">
@@ -127,9 +116,7 @@ export const Ordered: Story = {
               <List.Item>Suscipit odit voluptatum</List.Item>
             </List>
           </List.Item>
-          <List.Item title="Eu Fugiat Nulla Pariatur">
-            Beskrivelse på punktet i lista. Prøv å hold den kort og konsis.
-          </List.Item>
+          <List.Item>Eu Fugiat Nulla Pariatur</List.Item>
         </List>
       </Box>
     );
