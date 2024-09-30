@@ -69,17 +69,6 @@ export const Default: Story = {
   },
 };
 
-export const Test = () => (
-  <>
-    <h1>Test av nummerert liste</h1>
-    <List as="ol">
-      <List.Item>Brød</List.Item>
-      <List.Item>Melk</List.Item>
-      <List.Item title="Smør">Til å ha på brødskiva.</List.Item>
-    </List>
-  </>
-);
-
 export const Ordered: Story = {
   render: () => {
     return (
@@ -302,6 +291,41 @@ export const Icons: Story = {
   },
 };
 
+export const Tokens: Story = {
+  render: (props) => {
+    return (
+      <div style={{ "--ac-list-marker-color": "red" }}>
+        <List {...props}>
+          <List.Item>Consectetur Adipiscing Elit</List.Item>
+          <List.Item>
+            Impedit nemo eos sit adipisci non dolores.
+            <List
+              style={{
+                "--ac-list-marker-icon-color": "blue",
+                "--ac-list-marker-ul-color": "pink",
+              }}
+            >
+              <List.Item>Error assumenda officia</List.Item>
+              <List.Item icon={<HeadHeartIcon aria-hidden />}>
+                Suscipit odit voluptatum
+              </List.Item>
+            </List>
+          </List.Item>
+          <List.Item style={{ "--ac-list-marker-ol-color": "green" }}>
+            Iusto fugiat atque accusantium iure sunt.
+            <List as="ol">
+              <List.Item>Error assumenda officia</List.Item>
+            </List>
+            <List>
+              <List.Item>Suscipit odit voluptatum</List.Item>
+            </List>
+          </List.Item>
+        </List>
+      </div>
+    );
+  },
+};
+
 export const Spacing: Story = {
   render: () => {
     return (
@@ -395,6 +419,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Icons</h2>
         {Icons.render?.(...args)}
+      </div>
+      <div>
+        <h2>Tokens</h2>
+        {Tokens.render?.(...args)}
       </div>
       <div>
         <h2>Spacing</h2>
