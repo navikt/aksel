@@ -54,8 +54,12 @@ export class FigmaVariablePluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                              Variable handling                             */
   /* -------------------------------------------------------------------------- */
-  getVariable(name: string): Variable | undefined {
-    return this.variables.find((figmaVariable) => figmaVariable.name === name);
+  getVariable(name: string, collectionId: string): Variable | undefined {
+    return this.variables.find(
+      (figmaVariable) =>
+        figmaVariable.name === name &&
+        figmaVariable.variableCollectionId === collectionId,
+    );
   }
 
   createVariable(
@@ -63,7 +67,7 @@ export class FigmaVariablePluginInterface {
     collection: VariableCollection,
     type: VariableResolvedDataType,
   ): Variable {
-    const existingVariable = this.getVariable(name);
+    const existingVariable = this.getVariable(name, collection.id);
     if (existingVariable) {
       console.info("Variable already exists, skipping creation: ", name);
       return existingVariable;

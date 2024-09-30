@@ -66,7 +66,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
         throw new Error(`Token value is not a string: ${token}`);
       }
 
-      let variable = super.getVariable(token.name);
+      let variable = super.getVariable(token.name, collection.id);
 
       if (!variable) {
         variable = super.createVariable(
@@ -110,7 +110,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
     });
 
     for (const token of sortedTokens) {
-      let variable = super.getVariable(token.name);
+      let variable = super.getVariable(token.name, collection.id);
 
       if (!variable) {
         variable = super.createVariable(
@@ -158,7 +158,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
         throw new Error(`Token value is not a string: ${token}`);
       }
 
-      let variable = super.getVariable(token.name);
+      let variable = super.getVariable(token.name, collection.id);
 
       if (!variable) {
         variable = super.createVariable(
@@ -168,22 +168,35 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
         );
       }
 
-      for (const mode of modes) {
-        /* TODO: implement this */
-        /* figma.variables.createVariableAlias */
-        /* const aliasId = super.resolveAliasId(token, mode.name); */
+      if (token.alias)
+        for (const mode of modes) {
+          /* TODO: implement this */
+          /* figma.variables.createVariableAlias */
+          /* const aliasId = super.resolveAliasId(token, mode.name); */
 
-        super.setVariableValue(
-          variable,
-          /* "aliasId"
+          const globalCollection = super.getCollection(
+            mode.name === "light"
+              ? this.config.globalLight.name
+              : this.config.globalDark.name,
+          );
+
+          if (!globalCollection) {
+            throw new Error(`Global collection not found for: ${mode.name}`);
+          }
+
+          /* const globalVariable = super.getVariable(token.alias, globalCollection.id) */
+
+          super.setVariableValue(
+            variable,
+            /* "aliasId"
             ? {
                 type: "VARIABLE_ALIAS",
                 id: "aliasId",
               }
             : */ figma.util.rgba(token.value),
-          mode.modeId,
-        );
-      }
+            mode.modeId,
+          );
+        }
 
       super.setVariableMetadata(variable, {
         codeSyntax: { WEB: token.code.web },
