@@ -70,6 +70,6 @@ export const deprecations: DeprecatedList = [
   },
   {
     classes: ["navds-list--nested", "navds-list__item-content"],
-    message: "Removed in v7.2.0 <<<TODO",
+    message: "Removed in v7.1.1",
   },
 ];

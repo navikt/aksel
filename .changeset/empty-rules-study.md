@@ -1,5 +1,4 @@
 ---
-"@navikt/aksel-stylelint": patch
 "@navikt/ds-react": patch
 "@navikt/ds-css": patch
 ---
