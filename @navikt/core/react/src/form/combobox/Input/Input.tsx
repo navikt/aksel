@@ -259,7 +259,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           "navds-combobox__input",
           "navds-body-short",
           `navds-body-short--${size}`,
-          { "navds-combobox__input--hide-caret": hideCaret || readOnly },
+          { "navds-combobox__input--hide-caret": hideCaret },
         )}
         aria-controls={filteredOptionsUtil.getFilteredOptionsId(inputProps.id)}
         aria-expanded={!!isListOpen}
