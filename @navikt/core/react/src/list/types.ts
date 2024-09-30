@@ -19,7 +19,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   headingTag?: React.ElementType<any>;
   /**
-   * Changes block margin on list, and font size.
+   * Changes margin-block on list and font size on items.
    * @default "medium"
    */
   size?: "medium" | "small";
