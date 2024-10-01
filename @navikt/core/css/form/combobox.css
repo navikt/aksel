@@ -41,7 +41,7 @@
 }
 
 .navds-combobox--readonly .navds-combobox__button-toggle-list {
-  color: var(--a-gray-300);
+  color: var(--a-grayalpha-500);
 }
 
 .navds-combobox--readonly .navds-text-field__input,
