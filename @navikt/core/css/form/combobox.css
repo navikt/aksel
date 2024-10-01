@@ -40,6 +40,10 @@
   pointer-events: none;
 }
 
+.navds-combobox--readonly .navds-combobox__button-toggle-list {
+  color: var(--a-gray-500);
+}
+
 .navds-combobox--readonly .navds-text-field__input,
 .navds-combobox--readonly .navds-combobox__input {
   background-color: var(--a-surface-subtle);
