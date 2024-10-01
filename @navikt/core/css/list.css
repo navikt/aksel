@@ -81,7 +81,3 @@ _:future,
   font-size: 1.5rem;
   color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
 }
-
-.navds-list--medium .navds-list__item-marker--icon {
-  padding-block-end: 1px;
-}
