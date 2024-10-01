@@ -1,4 +1,4 @@
-FROM denoland/deno:bin
+FROM denoland/deno:distroless
 
 WORKDIR /app
 RUN chown -R deno:deno /app
