@@ -218,9 +218,30 @@ let PlainOrderedList: ReactNode;
 let AccordionItem: ReactNode;
 {
   const ScDetails = styled.details`
+    border-top: 1px solid ${tokens.BorderSubtle};
+    border-bottom: 1px solid ${tokens.BorderSubtle};
+
+    &:hover,
+    &:focus-within {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+    }
+
+    &:hover + details,
+    &:focus-within + details {
+      border-top: 1px solid transparent;
+    }
+    details:has(+ &) {
+      border-bottom: 1px solid transparent;
+    }
+
     &:hover .icon-bg {
       background-color: ${tokens.BgAccentStrongHover};
       color: ${tokens.BgDefault};
+    }
+
+    &:not(first-child) {
+      margin-top: -1px;
     }
   `;
 
@@ -250,13 +271,10 @@ let AccordionItem: ReactNode;
       <ScDetails className="group/details text-xl">
         <ScSummary
           className={clsx(
-            "group/summary",
             "flex gap-2 items-center",
             "group-open/details:border-b-0 group-open/details:mb-4",
             "hover:cursor-pointer p-3 rounded",
-            "sticky top-0 z-10",
-            "focus:z-20",
-            "border-opacity-0 border-x-black border",
+            "sticky top-0 z-10 focus:z-20",
           )}
         >
           {/* TODO: use tokens here */}

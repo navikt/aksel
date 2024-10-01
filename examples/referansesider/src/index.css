@@ -8,3 +8,13 @@
   font-size: 18px;
   color: var(--a-text-default);
 }
+
+:where(:root) *:focus {
+  outline: 4px solid var(--a-bg-accent-strong-hover);
+  z-index: 200;
+}
+
+.dark *:focus,
+*.dark:focus {
+  outline-offset: 4px;
+}
