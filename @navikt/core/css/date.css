@@ -281,7 +281,7 @@
 /* Readonly */
 .navds-date__field--readonly .navds-date__field-button {
   cursor: default;
-  color: var(--a-grayalpha-500);
+  color: var(--a-gray-500);
 }
 
 .navds-date__caption-button {
