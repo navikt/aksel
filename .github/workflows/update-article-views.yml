@@ -5,7 +5,6 @@ jobs:
   execute:
     runs-on: ubuntu-latest
     permissions:
-      packages: "write"
       contents: "read"
       id-token: "write"
     steps:
