@@ -1,8 +1,15 @@
-import { Switch } from "@navikt/ds-react";
+import { Switch, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
-  return <Switch disabled>Varsle med SMS</Switch>;
+  return (
+    <VStack gap="4">
+      <Switch disabled>Varsle med SMS</Switch>
+      <Switch disabled checked>
+        Varsle med SMS
+      </Switch>
+    </VStack>
+  );
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
