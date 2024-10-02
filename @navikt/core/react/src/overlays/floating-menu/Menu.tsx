@@ -18,9 +18,6 @@ import {
 /* -------------------------------------------------------------------------- */
 /*                                  Constants                                 */
 /* -------------------------------------------------------------------------- */
-const SELECTION_KEYS = ["Enter", " "];
-const SUB_OPEN_KEYS = [...SELECTION_KEYS, "ArrowRight"];
-const SUB_CLOSE_KEYS = ["ArrowLeft"];
 const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
@@ -397,6 +394,7 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
       onPointerUp,
       onPointerDown,
       onKeyDown,
+      onKeyUp,
       ...rest
     }: MenuItemProps,
     forwardedRef,
@@ -430,6 +428,26 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
       }
     };
 
+    const handleKey = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+      key: "Enter" | " ",
+    ) => {
+      if (disabled || event.repeat) {
+        return;
+      }
+
+      if (key === event.key) {
+        event.currentTarget.click();
+        /**
+         * We prevent default browser behaviour for selection keys as they should only trigger
+         * selection.
+         * - Prevents space from scrolling the page.
+         * - If keydown causes focus to move, prevents keydown from firing on the new target.
+         */
+        event.preventDefault();
+      }
+    };
+
     return (
       <MenuItemInternal
         {...rest}
@@ -450,38 +468,12 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
           // prevent Firefox from getting stuck in text selection mode when the menu closes.
           if (!isPointerDownRef.current) event.currentTarget?.click();
         })}
-        /* TODO: refactor these two, use correct onKeyDown/onKeyUp compose */
-        onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-          if (disabled || event.repeat) {
-            return;
-          }
-          if (["Enter"].includes(event.key)) {
-            event.currentTarget.click();
-            /**
-             * We prevent default browser behaviour for selection keys as they should only trigger
-             * selection.
-             * - Prevents space from scrolling the page.
-             * - If keydown causes focus to move, prevents keydown from firing on the new target.
-             */
-            event.preventDefault();
-          }
-        })}
-        onKeyUp={composeEventHandlers(onKeyDown, (event) => {
-          if (disabled || event.repeat) {
-            return;
-          }
-          /* TODO: Extract keys to constants? */
-          if ([" "].includes(event.key)) {
-            event.currentTarget.click();
-            /**
-             * We prevent default browser behaviour for selection keys as they should only trigger
-             * selection.
-             * - Prevents space from scrolling the page.
-             * - If keydown causes focus to move, prevents keydown from firing on the new target.
-             */
-            event.preventDefault();
-          }
-        })}
+        onKeyDown={composeEventHandlers(onKeyDown, (event) =>
+          handleKey(event, "Enter"),
+        )}
+        onKeyUp={composeEventHandlers(onKeyUp, (event) =>
+          handleKey(event, " "),
+        )}
       />
     );
   },
@@ -831,6 +823,23 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 
     const composedRefs = useMergeRefs(forwardedRef, subContext.onTriggerChange);
 
+    const handleKey = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+      keys: string[],
+    ) => {
+      if (props.disabled) {
+        return;
+      }
+      if (keys.includes(event.key)) {
+        context.onOpenChange(true);
+        // The trigger may hold focus if opened via pointer interaction
+        // so we ensure content is given focus again when switching to keyboard.
+        context.content?.focus();
+        // prevent window from scrolling
+        event.preventDefault();
+      }
+    };
+
     return (
       <MenuAnchor asChild>
         <MenuItemInternal
@@ -854,19 +863,12 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
             event.currentTarget.focus();
             context.onOpenChange(!context.open);
           }}
-          onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-            if (props.disabled) {
-              return;
-            }
-            if (SUB_OPEN_KEYS.includes(event.key)) {
-              context.onOpenChange(true);
-              // The trigger may hold focus if opened via pointer interaction
-              // so we ensure content is given focus again when switching to keyboard.
-              context.content?.focus();
-              // prevent window from scrolling
-              event.preventDefault();
-            }
-          })}
+          onKeyDown={composeEventHandlers(props.onKeyDown, (event) =>
+            handleKey(event, ["Enter", "ArrowRight"]),
+          )}
+          onKeyUp={composeEventHandlers(props.onKeyUp, (event) =>
+            handleKey(event, [" "]),
+          )}
         />
       </MenuAnchor>
     );
@@ -931,7 +933,7 @@ const MenuSubContent = forwardRef<
           const isKeyDownInside = event.currentTarget.contains(
             event.target as HTMLElement,
           );
-          let isCloseKey = SUB_CLOSE_KEYS.includes(event.key);
+          let isCloseKey = event.key === "ArrowLeft";
 
           /* When submenu opens to the left, we allow closing it with ArrowRight */
           if (context.content?.dataset.side === "left") {
