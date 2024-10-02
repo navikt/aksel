@@ -28,11 +28,6 @@ const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 type SubMenuSide = "left" | "right";
 type CheckedState = boolean | "indeterminate";
 
-/**
- * TODO:
- * - When on small screen + submenu, submenu can open below anchor. We need to handle this case correctly with mouseover and arrow keys
- */
-
 /* -------------------------------------------------------------------------- */
 /*                                    Menu                                    */
 /* -------------------------------------------------------------------------- */
