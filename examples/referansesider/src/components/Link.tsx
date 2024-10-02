@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 
 const ScLink = styled.a`
-  color: ${tokens.TextAccentSubtle};
+  color: ${tokens.TextAccent};
 
   text-decoration: underline;
 

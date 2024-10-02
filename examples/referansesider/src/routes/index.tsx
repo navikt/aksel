@@ -9,7 +9,7 @@ const ScCard = styled(Link)`
   display: block;
   border-radius: 12px;
   text-transform: capitalize;
-  color: ${tokens.TextAccent};
+  color: ${tokens.TextAccentStrong};
   font-weight: 550;
   font-size: 24px;
   border: 1px solid ${tokens.BorderAccentSubtle};

@@ -34,14 +34,14 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
-    [`${role}-moderate-active`]: {
+    [`${role}-moderate-pressed`]: {
       value: `{a.${role}.400.value}`,
       type: "color",
       group: `background.${role}`,
     },
     /* Should match role-strong */
     [`${role}-moderate-selected`]: {
-      value: `{a.${role}.600.value}`,
+      value: `{a.${role}.700.value}`,
       type: "color",
       group: `background.${role}`,
     },
@@ -55,7 +55,7 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
-    [`${role}-strong-active`]: {
+    [`${role}-strong-pressed`]: {
       value: `{a.${role}.800.value}`,
       type: "color",
       group: `background.${role}`,
@@ -73,12 +73,12 @@ const configForRole = (
   },
   text: {
     [role]: {
-      value: `{a.${role}.900.value}`,
+      value: `{a.${role}.700.value}`,
       type: "color",
       group: `text.${role}`,
     },
-    [`${role}-subtle`]: {
-      value: `{a.${role}.700.value}`,
+    [`${role}-strong`]: {
+      value: `{a.${role}.900.value}`,
       type: "color",
       group: `text.${role}`,
     },
@@ -90,7 +90,7 @@ const configForRole = (
   },
   border: {
     [role]: {
-      value: `{a.${role}.600.value}`,
+      value: `{a.${role}.500.value}`,
       type: "color",
       group: `border.${role}`,
     },
@@ -100,7 +100,7 @@ const configForRole = (
       group: `border.${role}`,
     },
     [`${role}-strong`]: {
-      value: `{a.${role}.700.value}`,
+      value: `{a.${role}.600.value}`,
       type: "color",
       group: `border.${role}`,
     },

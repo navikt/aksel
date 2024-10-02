@@ -40,7 +40,7 @@ jobs:
         with:
           team: designsystem
           source: "./@navikt/core/tokens/figma-config.json"
-          destination: "./@navikt/tokens/figma-config.json"
+          destination: "./@navikt/tokens"
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           source_keep_parent_name: false

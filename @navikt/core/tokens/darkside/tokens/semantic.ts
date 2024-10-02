@@ -16,7 +16,7 @@ function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
         group: "background",
       },
       raised: {
-        value: "{a.neutral.100.value}",
+        value: "{a.neutral.200.value}",
         type: "color",
         group: "background",
       },
@@ -50,7 +50,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
     },
     bg: {
       default: {
-        value: "white",
+        value: "{a.neutral.000.value}",
         type: "color",
         group: "background",
       },
@@ -70,15 +70,14 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         group: "background",
       },
       overlay: {
-        /* TODO: Update alpha here, consier not having the token itself? */
-        value: "rgb(2 20 49 / 0.49)",
+        value: "rgba(2, 20, 49 , 0.49)",
         type: "color",
         group: "background",
       },
     },
     border: {
       default: {
-        value: "{a.neutral.600.value}",
+        value: "{a.neutral.500.value}",
         type: "color",
         group: "border",
       },
@@ -88,7 +87,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         group: "border",
       },
       strong: {
-        value: "{a.neutral.700.value}",
+        value: "{a.neutral.600.value}",
         type: "color",
         group: "border",
       },
