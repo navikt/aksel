@@ -103,12 +103,25 @@ let BlueDotHeader;
   };
 }
 
+const ScMainCard = styled.div`
+  border: 1px solid ${tokens.BorderDefault};
+  border-radius: 4px;
+`;
+
+const ScSelect = styled.select`
+  background-color: ${tokens.BgDefault};
+  border: 1px solid ${tokens.BorderDefault};
+  border-radius: 4px;
+  padding: 8px;
+  min-width: 300px;
+`;
+
 const AktivitetsplanPage = () => {
   return (
     <Dekoratoren>
       <Page options={{ width: "medium", footer: "none" }}>
         <Header1>Aktivitetsplan</Header1>
-        <div className="p-2 border border-black rounded-xl flex">
+        <ScMainCard className="p-2 flex mt-6">
           <SykepengerIcon className="w-40 relative translate-x-5 translate-y-3" />
           <div className="flex flex-col gap-2 justify-between my-2">
             <BlueDotHeader dot level={2}>
@@ -119,6 +132,18 @@ const AktivitetsplanPage = () => {
               Endre målet
             </Button>
           </div>
+        </ScMainCard>
+        <div className="flex justify-between mt-6">
+          <div className="flex gap-4">
+            <Button>Legg til aktivitet</Button>
+            <Button variant="secondary">Filtrer</Button>
+          </div>
+          <ScSelect>
+            <option value="dog">Nåværende periode</option>
+            <option value="dog2">Cat</option>
+            <option value="dog3">Border Collie</option>
+            <option value="dog4">Maine Coon</option>
+          </ScSelect>
         </div>
       </Page>
       <Page options={{ width: "xlarge" }}>
