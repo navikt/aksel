@@ -11,6 +11,7 @@ import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";
+import { Tag } from "../components/Tag";
 
 const GrayPanel = styled.div`
   background-color: ${tokens.BgNeutralModerate};
@@ -99,21 +100,6 @@ let Card;
     );
   };
 }
-
-const Tag = styled.span<{ $variant: "info" | "warning" }>`
-  display: block;
-  width: fit-content;
-  background-color: ${(prop) =>
-    prop.$variant === "info"
-      ? tokens.BgInfoStrongPressed
-      : tokens.BgWarningModeratePressed}; /*TODO: color tweaks? or token fail?*/
-  color: ${(prop) =>
-    prop.$variant === "info"
-      ? "white"
-      : tokens.TextDefault}; /*TODO: color tweaks? or token fail?*/
-  padding-inline: 6px;
-  border-radius: 2px;
-`;
 
 const PassiveCard = styled.div<{ $variant: "subtle" | "info" }>`
   border-radius: 8px;

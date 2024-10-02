@@ -704,6 +704,7 @@ function SykepengerPage() {
             helsetilstanden din, og om den vil hindre planlagt behandling.
           </li>
         </PlainOrderedList>
+        <p>hello</p>
       </Page>
     </Dekoratoren>
   );
