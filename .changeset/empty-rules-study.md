@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-List: Add indentation and remove aria attributes
+List: Add indentation and remove overly verbose aria attributes
