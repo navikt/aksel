@@ -19,7 +19,7 @@ export const Page = ({
       className={clsx(
         "flex flex-col px-2 w-full m-auto pb-20",
         "lg:px-0",
-        { [`lg:w-[72ch]`]: width === "medium" },
+        { [`lg:w-[874px]`]: width === "medium" },
         { [`lg:w-[921px]`]: width === "large" },
         { [`lg:w-[1872px]`]: width === "xlarge" },
         { ["min-h-screen"]: footer !== "none" },

@@ -35,20 +35,32 @@ const ScButton = styled.button`
       background-color: ${tokens.BgAccentModeratePressed};
     }
   }
+
+  &[data-size="small"] {
+    min-height: fit-content;
+    padding-inline: 0.75rem;
+    > span {
+      font-size: 16px;
+      line-height: 24px;
+      display: block;
+    }
+  }
 `;
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary";
+  size?: "default" | "small";
 };
 
 export const Button = ({
   children,
   variant = "primary",
+  size = "default",
   ...rest
 }: ButtonProps) => {
   return (
-    <ScButton {...rest} data-variant={variant}>
-      {children}
+    <ScButton {...rest} data-variant={variant} data-size={size}>
+      <span>{children}</span>
     </ScButton>
   );
 };
