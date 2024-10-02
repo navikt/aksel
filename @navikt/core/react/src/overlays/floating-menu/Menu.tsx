@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Portal } from "../../portal";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -31,10 +25,7 @@ const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 
-type Point = { x: number; y: number };
-type Polygon = Point[];
 type SubMenuSide = "left" | "right";
-type GraceIntent = { area: Polygon; side: SubMenuSide };
 type CheckedState = boolean | "indeterminate";
 
 /**
@@ -185,20 +176,6 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
 /* -------------------------------------------------------------------------- */
 /*                                Menu Content                                */
 /* -------------------------------------------------------------------------- */
-type MenuContentContextValue = {
-  onItemEnter: (event: React.PointerEvent) => void;
-  onItemLeave: (event: React.PointerEvent) => void;
-  onPointerLeaveTrigger: (event: React.PointerEvent) => void;
-  pointerGraceTimerRef: React.MutableRefObject<number>;
-  onPointerGraceIntentChange: (intent: GraceIntent | null) => void;
-};
-
-const [MenuContentProvider, useMenuContentContext] =
-  createContext<MenuContentContextValue>({
-    providerName: "MenuContentProvider",
-    hookName: "useMenuContentContext",
-  });
-
 type MenuContentElement = MenuContentInternalElement;
 interface MenuContentProps extends MenuContentInternalTypeProps {}
 
@@ -231,7 +208,9 @@ const MenuRootContentNonModal = React.forwardRef<
       {...props}
       ref={ref}
       disableOutsidePointerEvents={false}
-      onDismiss={() => context.onOpenChange(false)}
+      onDismiss={() => {
+        context.onOpenChange(false);
+      }}
     />
   );
 });
@@ -325,141 +304,96 @@ const MenuContentInternal = forwardRef<
       contentRef,
       context.onContentChange,
     );
-    const pointerGraceTimerRef = React.useRef(0);
-    const pointerGraceIntentRef = React.useRef<GraceIntent | null>(null);
     const pointerDirRef = React.useRef<SubMenuSide>("right");
     const lastPointerXRef = React.useRef(0);
 
-    const isPointerMovingToSubmenu = React.useCallback(
-      (event: React.PointerEvent) => {
-        const isMovingTowards =
-          pointerDirRef.current === pointerGraceIntentRef.current?.side;
-        return (
-          isMovingTowards &&
-          isPointerInGraceArea(event, pointerGraceIntentRef.current?.area)
-        );
-      },
-      [],
-    );
-
     return (
-      <MenuContentProvider
-        onItemEnter={React.useCallback(
-          (event) => {
-            if (isPointerMovingToSubmenu(event)) event.preventDefault();
-          },
-          [isPointerMovingToSubmenu],
-        )}
-        onItemLeave={React.useCallback(
-          (event) => {
-            if (isPointerMovingToSubmenu(event)) return;
-
-            /**
-             * Resets focus from current active item to content area
-             * This is to prevent focus from being stuck on an item when we move pointer outside the menu or onto a disabled item
-             */
-            contentRef.current?.focus();
-          },
-          [isPointerMovingToSubmenu],
-        )}
-        onPointerLeaveTrigger={React.useCallback(
-          (event) => {
-            if (isPointerMovingToSubmenu(event)) event.preventDefault();
-          },
-          [isPointerMovingToSubmenu],
-        )}
-        pointerGraceTimerRef={pointerGraceTimerRef}
-        onPointerGraceIntentChange={React.useCallback((intent) => {
-          pointerGraceIntentRef.current = intent;
-        }, [])}
+      <FocusScope
+        onMountHandler={composeEventHandlers(onOpenAutoFocus, (event) => {
+          // when opening, explicitly focus the content area only and leave
+          // `onEntryFocus` in  control of focusing first item
+          event.preventDefault();
+          contentRef.current?.focus({ preventScroll: true });
+        })}
+        onUnmountHandler={onCloseAutoFocus}
       >
-        <FocusScope
-          onMountHandler={composeEventHandlers(onOpenAutoFocus, (event) => {
-            // when opening, explicitly focus the content area only and leave
-            // `onEntryFocus` in  control of focusing first item
-            event.preventDefault();
-            contentRef.current?.focus({ preventScroll: true });
-          })}
-          onUnmountHandler={onCloseAutoFocus}
+        <DismissableLayer
+          asChild
+          disableOutsidePointerEvents={disableOutsidePointerEvents}
+          onEscapeKeyDown={onEscapeKeyDown}
+          onPointerDownOutside={onPointerDownOutside}
+          onFocusOutside={onFocusOutside}
+          onInteractOutside={onInteractOutside}
+          onDismiss={onDismiss}
+          safeZone={safeZone}
         >
-          <DismissableLayer
+          <RovingFocus
             asChild
-            disableOutsidePointerEvents={disableOutsidePointerEvents}
-            onEscapeKeyDown={onEscapeKeyDown}
-            onPointerDownOutside={onPointerDownOutside}
-            onFocusOutside={onFocusOutside}
-            onInteractOutside={onInteractOutside}
-            onDismiss={onDismiss}
-            safeZone={safeZone}
+            descendants={descendants}
+            onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
+              // only focus first item when using keyboard
+              if (!rootContext.isUsingKeyboardRef.current)
+                event.preventDefault();
+            })}
           >
-            <RovingFocus
-              asChild
-              descendants={descendants}
-              onEntryFocus={composeEventHandlers(onEntryFocus, (event) => {
-                // only focus first item when using keyboard
-                if (!rootContext.isUsingKeyboardRef.current)
-                  event.preventDefault();
+            <Floating.Content
+              role="menu"
+              aria-orientation="vertical"
+              data-state={getOpenState(context.open)}
+              data-aksel-menu-content=""
+              dir="ltr"
+              {...rest}
+              ref={composedRefs}
+              style={{ outline: "none", ...rest.style }}
+              onKeyDown={composeEventHandlers(rest.onKeyDown, (event) => {
+                // submenu key events bubble through portals. We only care about keys in this menu.
+                const target = event.target as HTMLElement;
+                const isKeyDownInside =
+                  target.closest("[data-aksel-menu-content]") ===
+                  event.currentTarget;
+                if (isKeyDownInside) {
+                  // menus should not be navigated using tab key so we prevent it
+                  if (event.key === "Tab") event.preventDefault();
+                }
+
+                // focus first/last item based on key pressed
+                const content = contentRef.current;
+                if (event.target !== content) return;
+                if (!FIRST_LAST_KEYS.includes(event.key)) return;
+                event.preventDefault();
+
+                if (LAST_KEYS.includes(event.key)) {
+                  descendants.lastEnabled()?.node?.focus();
+                  return;
+                }
+                descendants.firstEnabled()?.node?.focus();
               })}
-            >
-              <Floating.Content
-                role="menu"
-                aria-orientation="vertical"
-                data-state={getOpenState(context.open)}
-                data-aksel-menu-content=""
-                dir="ltr"
-                {...rest}
-                ref={composedRefs}
-                style={{ outline: "none", ...rest.style }}
-                onKeyDown={composeEventHandlers(rest.onKeyDown, (event) => {
-                  // submenu key events bubble through portals. We only care about keys in this menu.
+              onPointerMove={composeEventHandlers(
+                rest.onPointerMove,
+                whenMouse((event) => {
                   const target = event.target as HTMLElement;
-                  const isKeyDownInside =
-                    target.closest("[data-aksel-menu-content]") ===
-                    event.currentTarget;
-                  if (isKeyDownInside) {
-                    // menus should not be navigated using tab key so we prevent it
-                    if (event.key === "Tab") event.preventDefault();
+                  const pointerXHasChanged =
+                    lastPointerXRef.current !== event.clientX;
+
+                  // We don't use `event.movementX` for this check because Safari will
+                  // always return `0` on a pointer event.
+                  if (
+                    event.currentTarget.contains(target) &&
+                    pointerXHasChanged
+                  ) {
+                    const newDir =
+                      event.clientX > lastPointerXRef.current
+                        ? "right"
+                        : "left";
+                    pointerDirRef.current = newDir;
+                    lastPointerXRef.current = event.clientX;
                   }
-
-                  // focus first/last item based on key pressed
-                  const content = contentRef.current;
-                  if (event.target !== content) return;
-                  if (!FIRST_LAST_KEYS.includes(event.key)) return;
-                  event.preventDefault();
-
-                  if (LAST_KEYS.includes(event.key)) {
-                    descendants.lastEnabled()?.node?.focus();
-                    return;
-                  }
-                  descendants.firstEnabled()?.node?.focus();
-                })}
-                onPointerMove={composeEventHandlers(
-                  rest.onPointerMove,
-                  whenMouse((event) => {
-                    const target = event.target as HTMLElement;
-                    const pointerXHasChanged =
-                      lastPointerXRef.current !== event.clientX;
-
-                    // We don't use `event.movementX` for this check because Safari will
-                    // always return `0` on a pointer event.
-                    if (
-                      event.currentTarget.contains(target) &&
-                      pointerXHasChanged
-                    ) {
-                      const newDir =
-                        event.clientX > lastPointerXRef.current
-                          ? "right"
-                          : "left";
-                      pointerDirRef.current = newDir;
-                      lastPointerXRef.current = event.clientX;
-                    }
-                  }),
-                )}
-              />
-            </RovingFocus>
-          </DismissableLayer>
-        </FocusScope>
-      </MenuContentProvider>
+                }),
+              )}
+            />
+          </RovingFocus>
+        </DismissableLayer>
+      </FocusScope>
     );
   },
 );
@@ -602,7 +536,7 @@ const MenuItemInternal = forwardRef<
   ) => {
     const { register } = useMenuDescendant({ disabled });
 
-    const contentContext = useMenuContentContext();
+    const context = useMenuContext();
     const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
 
@@ -628,18 +562,15 @@ const MenuItemInternal = forwardRef<
                * In the edgecase the focus is still stuck on a previous item, we make sure to reset it
                * even when the disabled item can't be focused itself to reset it.
                */
-              contentContext.onItemLeave(event);
+              context.content?.focus();
             } else {
-              contentContext.onItemEnter(event);
-              if (!event.defaultPrevented) {
-                event.currentTarget.focus();
-              }
+              event.currentTarget.focus();
             }
           }),
         )}
         onPointerLeave={composeEventHandlers(
           onPointerLeave,
-          whenMouse(contentContext.onItemLeave),
+          whenMouse(() => context.content?.focus()),
         )}
       />
     );
@@ -904,28 +835,8 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   (props: MenuSubTriggerProps, forwardedRef) => {
     const context = useMenuContext();
     const subContext = useMenuSubContext();
-    const contentContext = useMenuContentContext();
-    const openTimerRef = useRef<number | null>(null);
-    const { pointerGraceTimerRef, onPointerGraceIntentChange } = contentContext;
 
     const composedRefs = useMergeRefs(forwardedRef, subContext.onTriggerChange);
-
-    const clearOpenTimer = useCallback(() => {
-      if (openTimerRef.current) {
-        window.clearTimeout(openTimerRef.current);
-      }
-      openTimerRef.current = null;
-    }, []);
-
-    React.useEffect(() => clearOpenTimer, [clearOpenTimer]);
-
-    React.useEffect(() => {
-      const pointerGraceTimer = pointerGraceTimerRef.current;
-      return () => {
-        window.clearTimeout(pointerGraceTimer);
-        onPointerGraceIntentChange(null);
-      };
-    }, [pointerGraceTimerRef, onPointerGraceIntentChange]);
 
     return (
       <MenuAnchor asChild>
@@ -937,72 +848,18 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
-          /**
-           * onClick is added to solve edgecase where the user clicks the trigger,
-           * but the focus is outside browser-window or viewport at first.
-           */
           onClick={(event) => {
+            if (props.disabled || event.defaultPrevented) {
+              return;
+            }
             props.onClick?.(event);
-            if (props.disabled || event.defaultPrevented) return;
-
+            /*
+             * Solves edgecase where the user clicks the trigger,
+             * but the focus is outside browser-window or viewport at first.
+             */
             event.currentTarget.focus();
-            if (!context.open) context.onOpenChange(true);
+            context.onOpenChange(!context.open);
           }}
-          onPointerMove={composeEventHandlers(
-            props.onPointerMove,
-            whenMouse((event) => {
-              if (event.defaultPrevented) return;
-              if (!props.disabled && !context.open && !openTimerRef.current) {
-                contentContext.onPointerGraceIntentChange(null);
-                openTimerRef.current = window.setTimeout(() => {
-                  context.onOpenChange(true);
-                  clearOpenTimer();
-                }, 100);
-              }
-            }),
-          )}
-          onPointerLeave={composeEventHandlers(
-            props.onPointerLeave,
-            whenMouse((event) => {
-              clearOpenTimer();
-
-              const contentRect = context.content?.getBoundingClientRect();
-              if (contentRect) {
-                const side = context.content?.dataset.side as SubMenuSide;
-                const rightSide = side === "right";
-                const bleed = rightSide ? -5 : +5;
-                const contentNearEdge =
-                  contentRect[rightSide ? "left" : "right"];
-                const contentFarEdge =
-                  contentRect[rightSide ? "right" : "left"];
-
-                contentContext.onPointerGraceIntentChange({
-                  area: [
-                    // Apply a bleed on clientX to ensure that our exit point is
-                    // consistently within polygon bounds
-                    { x: event.clientX + bleed, y: event.clientY },
-                    { x: contentNearEdge, y: contentRect.top },
-                    { x: contentFarEdge, y: contentRect.top },
-                    { x: contentFarEdge, y: contentRect.bottom },
-                    { x: contentNearEdge, y: contentRect.bottom },
-                  ],
-                  side,
-                });
-
-                window.clearTimeout(pointerGraceTimerRef.current);
-                pointerGraceTimerRef.current = window.setTimeout(
-                  () => contentContext.onPointerGraceIntentChange(null),
-                  300,
-                );
-              } else {
-                contentContext.onPointerLeaveTrigger(event);
-                if (event.defaultPrevented) return;
-
-                // There's 100ms where the user may leave an item before the submenu was opened.
-                contentContext.onPointerGraceIntentChange(null);
-              }
-            }),
-          )}
           onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
             if (props.disabled) {
               return;
@@ -1067,11 +924,6 @@ const MenuSubContent = forwardRef<
         // The menu might close because of focusing another menu item in the parent menu. We
         // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
         onCloseAutoFocus={(event) => event.preventDefault()}
-        onFocusOutside={composeEventHandlers(props.onFocusOutside, (event) => {
-          // We prevent closing when the trigger is focused to avoid triggering a re-open animation
-          // on pointer interaction.
-          if (event.target !== subContext.trigger) context.onOpenChange(false);
-        })}
         onEscapeKeyDown={composeEventHandlers(
           props.onEscapeKeyDown,
           (event) => {
@@ -1124,32 +976,6 @@ function getCheckedState(checked: CheckedState) {
       : "unchecked";
 }
 
-/**
- * Determine if a point is inside of a polygon.
- */
-function isPointInPolygon(point: Point, polygon: Polygon) {
-  const { x, y } = point;
-  let inside = false;
-  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-    const xi = polygon[i].x;
-    const yi = polygon[i].y;
-    const xj = polygon[j].x;
-    const yj = polygon[j].y;
-
-    // prettier-ignore
-    const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-    if (intersect) inside = !inside;
-  }
-
-  return inside;
-}
-
-function isPointerInGraceArea(event: React.PointerEvent, area?: Polygon) {
-  if (!area) return false;
-  const cursorPos = { x: event.clientX, y: event.clientY };
-  return isPointInPolygon(cursorPos, area);
-}
-
 function whenMouse<E>(
   handler: React.PointerEventHandler<E>,
 ): React.PointerEventHandler<E> {
@@ -1177,19 +1003,20 @@ export {
   MenuAnchor,
   MenuCheckboxItem,
   MenuContent,
+  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemIndicator,
   MenuPortal,
   MenuRadioGroup,
   MenuRadioItem,
-  MenuDivider,
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
   type MenuAnchorProps,
   type MenuCheckboxItemProps,
   type MenuContentProps,
+  type MenuDividerProps,
   type MenuGroupProps,
   type MenuItemElement,
   type MenuItemIndicatorProps,
@@ -1197,7 +1024,6 @@ export {
   type MenuProps,
   type MenuRadioGroupProps,
   type MenuRadioItemProps,
-  type MenuDividerProps,
   type MenuSubContentProps,
   type MenuSubProps,
   type MenuSubTriggerProps,
