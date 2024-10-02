@@ -1,4 +1,4 @@
-export class FigmaVariablePluginInterface {
+export class FigmaPluginInterface {
   private collections: VariableCollection[];
   private variables: Variable[];
 
@@ -20,18 +20,6 @@ export class FigmaVariablePluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                             Collection handling                            */
   /* -------------------------------------------------------------------------- */
-  private getVariablesForCollection(
-    collection: VariableCollection,
-  ): Variable[] {
-    const variables: Variable[] = [];
-
-    for (const variable of this.variables) {
-      if (variable.variableCollectionId === collection.id) {
-        variables.push(variable);
-      }
-    }
-    return variables;
-  }
 
   getCollection(name: string): VariableCollection | undefined {
     return this.collections.find((col) => col.name === name);
@@ -152,14 +140,6 @@ export class FigmaVariablePluginInterface {
     };
   }
 
-  private removeMode(name: string, collection: VariableCollection) {
-    const mode = this.getModes(collection).find((_mode) => _mode.name === name);
-    if (mode) {
-      collection.removeMode(mode.modeId);
-      console.info("Removing mode: ", name);
-    }
-  }
-
   removeNonMatchingModes(
     modes: string[],
     collection: VariableCollection,
@@ -180,12 +160,7 @@ export class FigmaVariablePluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                                  Utilities                                 */
   /* -------------------------------------------------------------------------- */
-  /**
-   * Deletes all local collections in the Figma file.
-   * @important Use with caution! If the current variables are not published in figma,
-   * they will be lost forever!
-   */
-  reset() {
+  resetVariables() {
     this.collections.forEach((collection) => {
       console.info("Deleting collection: ", collection.name);
       collection.remove();
@@ -196,10 +171,3 @@ export class FigmaVariablePluginInterface {
     figma.closePlugin(message);
   }
 }
-
-/* const Test = new FigmaVariablePluginInterface();
-
-Test.init();
-console.log("DONE");
-figma.closePlugin("DONE");
- */

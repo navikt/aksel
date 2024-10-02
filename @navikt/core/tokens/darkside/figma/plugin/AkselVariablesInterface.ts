@@ -1,20 +1,21 @@
 import _config from "../../../figma-config.json";
 import { FigmaConfigEntry, FigmaTokenConfig } from "../figma-config.types";
-import { FigmaVariablePluginInterface } from "./FigmaVariableInterface";
+import { FigmaPluginInterface } from "./FigmaPluginInterface";
 
 type ScopedFigmaTokenConfig = Omit<FigmaTokenConfig, "version" | "timestamp">;
 
-export class AkselVariablesInterface extends FigmaVariablePluginInterface {
+export class AkselVariablesInterface {
+  private Figma: FigmaPluginInterface;
   private config: FigmaTokenConfig;
   private meta: Pick<FigmaTokenConfig, "version" | "timestamp">;
   private remoteConfigURL =
     "https://cdn.nav.no/designsystem/@navikt/tokens/figma-config.json";
 
   constructor() {
-    super();
     const config = _config as FigmaTokenConfig;
     this.config = config;
     this.meta = { timestamp: config.timestamp, version: config.version };
+    this.Figma = new FigmaPluginInterface();
   }
 
   async useRemoteConfig(): Promise<void> {
@@ -39,10 +40,10 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   }
 
   private updateGlobalColorCollection(entry: FigmaConfigEntry): void {
-    let collection = super.getCollection(entry.name);
+    let collection = this.Figma.getCollection(entry.name);
 
     if (!collection) {
-      collection = super.createCollection(entry.name);
+      collection = this.Figma.createCollection(entry.name);
     }
 
     /**
@@ -63,23 +64,23 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
         throw new Error(`Token value is not a string: ${token}`);
       }
 
-      let variable = super.getVariable(token.name, collection.id);
+      let variable = this.Figma.getVariable(token.name, collection.id);
 
       if (!variable) {
-        variable = super.createVariable(
+        variable = this.Figma.createVariable(
           token.name,
           collection,
           token.figmaType,
         );
       }
 
-      super.setVariableValue(
+      this.Figma.setVariableValue(
         variable,
         figma.util.rgba(token.value),
         collection.defaultModeId,
       );
 
-      super.setVariableMetadata(variable, {
+      this.Figma.setVariableMetadata(variable, {
         codeSyntax: { WEB: token.code.web },
         description: token.comment ?? "",
         hiddenFromPublishing: collection.hiddenFromPublishing,
@@ -93,10 +94,10 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   private updateScaleCollection(
     entry: ScopedFigmaTokenConfig["radius"] | ScopedFigmaTokenConfig["spacing"],
   ): void {
-    let collection = super.getCollection(entry.name);
+    let collection = this.Figma.getCollection(entry.name);
 
     if (!collection) {
-      collection = super.createCollection(entry.name);
+      collection = this.Figma.createCollection(entry.name);
     }
 
     const sortedTokens = entry.tokens.sort((a, b) => {
@@ -107,19 +108,23 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
     });
 
     for (const token of sortedTokens) {
-      let variable = super.getVariable(token.name, collection.id);
+      let variable = this.Figma.getVariable(token.name, collection.id);
 
       if (!variable) {
-        variable = super.createVariable(
+        variable = this.Figma.createVariable(
           token.name,
           collection,
           token.figmaType,
         );
       }
 
-      super.setVariableValue(variable, token.value, collection.defaultModeId);
+      this.Figma.setVariableValue(
+        variable,
+        token.value,
+        collection.defaultModeId,
+      );
 
-      super.setVariableMetadata(variable, {
+      this.Figma.setVariableMetadata(variable, {
         codeSyntax: { WEB: token.code.web },
         description: token.comment ?? "",
         hiddenFromPublishing: collection.hiddenFromPublishing,
@@ -133,14 +138,16 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
   private updateSemanticColorCollection(
     entry: ScopedFigmaTokenConfig["colors"],
   ): void {
-    let collection = super.getCollection(entry.light.name);
+    let collection = this.Figma.getCollection(entry.light.name);
 
     if (!collection) {
-      collection = super.createCollection(entry.light.name);
+      collection = this.Figma.createCollection(entry.light.name);
     }
 
     for (const modeName of Object.values(entry).map((x) => x.name)) {
-      const globalCollection = super.getCollection(entry[modeName].global.name);
+      const globalCollection = this.Figma.getCollection(
+        entry[modeName].global.name,
+      );
 
       if (!globalCollection) {
         throw new Error(
@@ -148,17 +155,17 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
         );
       }
 
-      let mode = super.getModeWithName(modeName, collection);
+      let mode = this.Figma.getModeWithName(modeName, collection);
 
       if (!mode) {
-        mode = super.createMode(modeName, collection);
+        mode = this.Figma.createMode(modeName, collection);
       }
 
       for (const token of entry[modeName].semantic.tokens) {
-        let variable = super.getVariable(token.name, collection.id);
+        let variable = this.Figma.getVariable(token.name, collection.id);
 
         if (!variable) {
-          variable = super.createVariable(
+          variable = this.Figma.createVariable(
             token.name,
             collection,
             token.figmaType,
@@ -172,7 +179,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
             );
           }
 
-          super.setVariableValue(
+          this.Figma.setVariableValue(
             variable,
             figma.util.rgba(token.value),
             mode.modeId,
@@ -180,7 +187,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
           continue;
         }
 
-        const globalVariable = super.getVariable(
+        const globalVariable = this.Figma.getVariable(
           token.alias,
           globalCollection.id,
         );
@@ -191,13 +198,13 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
           );
         }
 
-        super.setVariableValue(
+        this.Figma.setVariableValue(
           variable,
-          super.createVariableAlias(globalVariable),
+          this.Figma.createVariableAlias(globalVariable),
           mode.modeId,
         );
 
-        super.setVariableMetadata(variable, {
+        this.Figma.setVariableMetadata(variable, {
           codeSyntax: { WEB: token.code.web },
           description: token.comment ?? "",
           hiddenFromPublishing: collection.hiddenFromPublishing,
@@ -206,7 +213,7 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
       }
 
       /* Make sure to remove "default" modes if they exist */
-      super.removeNonMatchingModes(
+      this.Figma.removeNonMatchingModes(
         Object.values(entry).map((x) => x.name),
         collection,
       );
@@ -215,12 +222,21 @@ export class AkselVariablesInterface extends FigmaVariablePluginInterface {
     console.info("Updated collection: ", collection.name);
   }
 
+  /**
+   * Deletes all local collections in the Figma file.
+   * @important Use with caution! If the current variables are not published in figma,
+   * they will be lost forever!
+   */
+  resetVariables(): void {
+    this.Figma.resetVariables();
+  }
+
   exitWithMessage(message: string): void {
-    super.exit(message);
+    this.Figma.exit(message);
   }
 
   exit(): void {
-    super.exit(
+    this.Figma.exit(
       `Finished updating variables for version${this.meta.version}, last updated at ${this.meta.timestamp}`,
     );
   }

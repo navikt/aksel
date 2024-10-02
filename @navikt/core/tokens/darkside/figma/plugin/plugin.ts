@@ -11,6 +11,8 @@ async function main() {
     await plugin.useRemoteConfig();
   }
 
+  plugin.resetVariables();
+
   plugin.updateVariables();
   plugin.exit();
 }
