@@ -187,19 +187,24 @@
 }
 
 .navds-action-menu__indicator-icon {
-  display: none;
   font-size: 14px;
 }
 
-.navds-action-menu__indicator[data-state="unchecked"] > .navds-action-menu__indicator-icon--unchecked {
+.navds-action-menu__indicator-icon--unchecked,
+.navds-action-menu__indicator-icon--checked,
+.navds-action-menu__indicator-icon--indeterminate {
+  display: none;
+}
+
+.navds-action-menu__indicator[data-state="unchecked"] .navds-action-menu__indicator-icon--unchecked {
   display: block;
 }
 
-.navds-action-menu__indicator:where([data-state="checked"]) > .navds-action-menu__indicator-icon--checked {
+.navds-action-menu__indicator:where([data-state="checked"]) .navds-action-menu__indicator-icon--checked {
   display: block;
 }
 
-.navds-action-menu__indicator:where([data-state="indeterminate"]) > .navds-action-menu__indicator-icon--indeterminate {
+.navds-action-menu__indicator:where([data-state="indeterminate"]) .navds-action-menu__indicator-icon--indeterminate {
   display: block;
 }
 
