@@ -165,6 +165,8 @@ export class FigmaPluginInterface {
       console.info("Deleting collection: ", collection.name);
       collection.remove();
     });
+    this.collections = [];
+    this.variables = [];
   }
 
   exit(message?: string) {

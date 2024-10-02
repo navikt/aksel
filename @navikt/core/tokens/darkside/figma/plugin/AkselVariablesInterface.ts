@@ -239,7 +239,7 @@ export class AkselVariablesInterface {
 
   exit(): void {
     this.Figma.exit(
-      `Finished updating variables for version${this.meta.version}, last updated at ${this.meta.timestamp}`,
+      `Finished updating variables for version ${this.meta.version}, last updated at ${this.meta.timestamp}`,
     );
   }
 }
