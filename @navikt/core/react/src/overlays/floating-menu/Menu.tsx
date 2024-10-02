@@ -59,7 +59,12 @@ const [
   useMenuDescendantsContext,
   useMenuDescendants,
   useMenuDescendant,
-] = createDescendantContext<SlottedDivElementRef>();
+] = createDescendantContext<
+  SlottedDivElementRef,
+  {
+    closeMenu: () => void;
+  }
+>();
 
 type MenuContentElementRef = React.ElementRef<typeof Floating.Content>;
 
@@ -529,7 +534,15 @@ const MenuItemInternal = forwardRef<
     }: MenuItemInternalProps,
     forwardedRef,
   ) => {
-    const { register } = useMenuDescendant({ disabled });
+    const menuContext = useMenuContext();
+    const { register } = useMenuDescendant({
+      disabled,
+      closeMenu: () => {
+        rest["data-submenu-trigger"] &&
+          menuContext.open &&
+          menuContext.onOpenChange(false);
+      },
+    });
 
     const context = useMenuContext();
     const ref = useRef<HTMLDivElement>(null);
@@ -786,6 +799,8 @@ const MenuSub: React.FC<MenuSubProps> = ({
 }: MenuSubProps) => {
   const parentMenuContext = useMenuContext();
 
+  const { values } = useMenuDescendantsContext();
+
   const [trigger, setTrigger] = useState<MenuItemElement | null>(null);
   const [content, setContent] = useState<MenuContentInternalElement | null>(
     null,
@@ -804,7 +819,17 @@ const MenuSub: React.FC<MenuSubProps> = ({
     <Floating>
       <MenuProvider
         open={open}
-        onOpenChange={handleOpenChange}
+        onOpenChange={(e) => {
+          handleOpenChange(e);
+          if (e) {
+            /* Makes sure to close all adjacent submenus if they are open */
+            values().forEach((descendant) => {
+              if (descendant.node !== trigger) {
+                descendant.closeMenu();
+              }
+            });
+          }
+        }}
         content={content}
         onContentChange={setContent}
       >
@@ -843,6 +868,7 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
           data-state={getOpenState(context.open)}
           {...props}
           ref={composedRefs}
+          data-submenu-trigger
           onClick={(event) => {
             if (props.disabled || event.defaultPrevented) {
               return;
