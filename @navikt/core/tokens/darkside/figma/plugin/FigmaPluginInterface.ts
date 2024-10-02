@@ -1,3 +1,7 @@
+/**
+ * Acts as a wrapper for interfacing with the Figma PluginAPI
+ * @see https://www.figma.com/plugin-docs/api/api-reference/
+ */
 export class FigmaPluginInterface {
   private collections: VariableCollection[];
   private variables: Variable[];
@@ -20,11 +24,14 @@ export class FigmaPluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                             Collection handling                            */
   /* -------------------------------------------------------------------------- */
-
   getCollection(name: string): VariableCollection | undefined {
     return this.collections.find((col) => col.name === name);
   }
 
+  /**
+   * Creates a new collection if it doesn't already exist.
+   * If it does exist, it will return the existing collection.
+   */
   createCollection(name: string): VariableCollection {
     const existingCollection = this.getCollection(name);
     if (existingCollection) {
@@ -42,6 +49,10 @@ export class FigmaPluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                              Variable handling                             */
   /* -------------------------------------------------------------------------- */
+  /**
+   * Returns a variable if it exists in the specified collection.
+   * Since variables can have the same name in different collections, the collectionId is required.
+   */
   getVariable(name: string, collectionId: string): Variable | undefined {
     return this.variables.find(
       (figmaVariable) =>
@@ -50,6 +61,10 @@ export class FigmaPluginInterface {
     );
   }
 
+  /**
+   * Creates a new variable if it doesn't already exist.
+   * If it does exist, it will return the existing variable.
+   */
   createVariable(
     name: string,
     collection: VariableCollection,
@@ -85,12 +100,13 @@ export class FigmaPluginInterface {
       "scopes" | "codeSyntax" | "hiddenFromPublishing" | "description"
     >,
   ): void {
-    metadata.codeSyntax.WEB &&
-      variable.setVariableCodeSyntax("WEB", metadata.codeSyntax.WEB);
-    metadata.codeSyntax.ANDROID &&
-      variable.setVariableCodeSyntax("ANDROID", metadata.codeSyntax.ANDROID);
-    metadata.codeSyntax.iOS &&
-      variable.setVariableCodeSyntax("iOS", metadata.codeSyntax.iOS);
+    const platforms: CodeSyntaxPlatform[] = ["WEB", "ANDROID", "iOS"];
+    platforms.forEach((platform: CodeSyntaxPlatform) => {
+      if (metadata.codeSyntax?.[platform]) {
+        variable.setVariableCodeSyntax(platform, metadata.codeSyntax[platform]);
+      }
+    });
+
     variable.scopes = metadata.scopes;
     variable.description = metadata.description ?? "";
     variable.hiddenFromPublishing = metadata.hiddenFromPublishing;
@@ -99,7 +115,6 @@ export class FigmaPluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                                Mode handling                               */
   /* -------------------------------------------------------------------------- */
-
   getModes(collection: VariableCollection) {
     return collection.modes;
   }
@@ -120,6 +135,10 @@ export class FigmaPluginInterface {
     return foundMode ? { modeId: foundMode.modeId, name } : undefined;
   }
 
+  /**
+   * Creates a new mode if it doesn't already exist.
+   * If it does exist, it will return the existing mode.
+   */
   createMode<T extends string>(
     name: T,
     collection: VariableCollection,
@@ -140,6 +159,10 @@ export class FigmaPluginInterface {
     };
   }
 
+  /**
+   * Removes all modes that are not in the provided list.
+   * Usefull for removing "default" modes, while preserving the custom modes.
+   */
   removeNonMatchingModes(
     modes: string[],
     collection: VariableCollection,
@@ -160,6 +183,9 @@ export class FigmaPluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                                  Utilities                                 */
   /* -------------------------------------------------------------------------- */
+  /**
+   * Resets all variables and collections in the document. Use with caution!
+   */
   resetVariables() {
     this.collections.forEach((collection) => {
       console.info("Deleting collection: ", collection.name);
