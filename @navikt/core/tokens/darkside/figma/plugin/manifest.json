@@ -6,6 +6,7 @@
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": ["https://cdn.nav.no"]
   }

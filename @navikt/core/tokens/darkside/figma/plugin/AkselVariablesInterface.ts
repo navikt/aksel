@@ -18,6 +18,15 @@ export class AkselVariablesInterface {
     this.Figma = new FigmaPluginInterface();
   }
 
+  /**
+   * Because of "dynamic-page" loading in Figma,
+   * we need to initialize the plugin trough async methods.
+   * This method should be called before any other methods.
+   */
+  async init(): Promise<void> {
+    await this.Figma.init();
+  }
+
   async useRemoteConfig(): Promise<void> {
     const newConfig = await fetch(this.remoteConfigURL)
       .then((res) => res.json())

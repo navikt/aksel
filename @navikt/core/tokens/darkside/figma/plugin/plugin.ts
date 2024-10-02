@@ -7,6 +7,7 @@ main().catch((err) =>
 );
 
 async function main() {
+  await plugin.init();
   if (process.env.NODE_ENV === "production") {
     await plugin.useRemoteConfig();
   }

@@ -7,18 +7,26 @@ export class FigmaPluginInterface {
   private variables: Variable[];
 
   constructor() {
-    const collections = figma.variables.getLocalVariableCollections();
+    this.collections = [];
+    this.variables = [];
+  }
+
+  async init() {
+    console.info("Initializing plugin...");
+    const collections =
+      await figma.variables.getLocalVariableCollectionsAsync();
     const variables: Variable[] = [];
 
     for (const collection of collections) {
       for (const id of collection.variableIds) {
-        const variable = figma.variables.getVariableById(id);
+        const variable = await figma.variables.getVariableByIdAsync(id);
         variable && variables.push(variable);
       }
     }
 
     this.collections = collections;
     this.variables = variables;
+    console.info("Plugin initialized!");
   }
 
   /* -------------------------------------------------------------------------- */
@@ -196,6 +204,7 @@ export class FigmaPluginInterface {
   }
 
   exit(message?: string) {
+    console.info("Exiting plugin...");
     figma.closePlugin(message);
   }
 }
