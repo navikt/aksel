@@ -1,8 +1,7 @@
 import { loadCsf } from "@storybook/csf-tools";
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from "@storybook/experimental-nextjs-vite";
 import { readFileSync } from "fs";
-import { resolve } from "path";
-import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import TsconfigPathsPlugin from "vite-tsconfig-paths";
 
 const indexRegex = /export const args = {\s+index: (\d+),/;
 
@@ -60,20 +59,13 @@ const sbConfig: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
   ],
-  framework: "@storybook/nextjs",
+  framework: "@storybook/experimental-nextjs-vite",
   docs: {
     autodocs: "tag",
   },
-  webpackFinal: (async (config) => {
-    if (!config?.resolve) {
-      return config;
-    }
-    config.resolve.plugins = [
-      new TsconfigPathsPlugin({
-        configFile: resolve(__dirname, "../tsconfig.json"),
-      }),
-    ];
-    return config;
-  }) satisfies StorybookConfig["webpackFinal"],
+  viteFinal: async (config) => {
+    const { mergeConfig } = await import("vite");
+    return mergeConfig(config, { plugins: [TsconfigPathsPlugin()] });
+  },
 };
 export default sbConfig;
