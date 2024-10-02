@@ -208,9 +208,7 @@ const MenuRootContentNonModal = React.forwardRef<
       {...props}
       ref={ref}
       disableOutsidePointerEvents={false}
-      onDismiss={() => {
-        context.onOpenChange(false);
-      }}
+      onDismiss={() => context.onOpenChange(false)}
     />
   );
 });
