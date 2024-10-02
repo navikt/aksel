@@ -34,9 +34,9 @@ export class AkselVariablesInterface {
     this.updateGlobalColorCollection(this.config.colors.light.global);
     this.updateGlobalColorCollection(this.config.colors.dark.global);
     this.updateSemanticColorCollection(this.config.colors);
-
     this.updateScaleCollection(this.config.radius);
     this.updateScaleCollection(this.config.spacing);
+    console.info("Updated variables!");
   }
 
   private updateGlobalColorCollection(entry: FigmaConfigEntry): void {
@@ -138,10 +138,12 @@ export class AkselVariablesInterface {
   private updateSemanticColorCollection(
     entry: ScopedFigmaTokenConfig["colors"],
   ): void {
-    let collection = this.Figma.getCollection(entry.light.name);
+    const semanticCollectionName = entry.light.semantic.name;
+
+    let collection = this.Figma.getCollection(semanticCollectionName);
 
     if (!collection) {
-      collection = this.Figma.createCollection(entry.light.name);
+      collection = this.Figma.createCollection(semanticCollectionName);
     }
 
     for (const modeName of Object.values(entry).map((x) => x.name)) {
