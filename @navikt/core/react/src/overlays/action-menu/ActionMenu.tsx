@@ -291,6 +291,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
       onPointerDown,
       onKeyDown,
       style,
+      onClick,
       ...rest
     }: ActionMenuTriggerProps,
     ref,
@@ -349,38 +350,14 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
               }
             }
           })}
-          /* TODO: Use onClick instead of these two */
+          onClick={composeEventHandlers(onClick, () => context.onOpenToggle())}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
             if (event.currentTarget.disabled) {
               return;
             }
-            if (["Enter"].includes(event.key)) {
-              context.onOpenToggle();
-            }
             if (event.key === "ArrowDown") {
               context.onOpenChange(true);
-            }
-            /**
-             * Stop keydown from scrolling window
-             */
-            if (["Enter", "ArrowDown"].includes(event.key)) {
-              event.preventDefault();
-            }
-          })}
-          onKeyUp={composeEventHandlers(onKeyDown, (event) => {
-            if (event.currentTarget.disabled) {
-              return;
-            }
-            if ([" "].includes(event.key)) {
-              context.onOpenToggle();
-            }
-            if (event.key === "ArrowDown") {
-              context.onOpenChange(true);
-            }
-            /**
-             * Stop keydown from scrolling window
-             */
-            if ([" ", "ArrowDown"].includes(event.key)) {
+              /* Stop keydown from scrolling window */
               event.preventDefault();
             }
           })}
