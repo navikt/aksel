@@ -22,7 +22,7 @@ let ActivityColumn;
     width: 300px;
     height: fit-content;
     border-radius: 8px;
-    background-color: ${tokens.BgNeutral};
+    background-color: ${tokens.BgSunken};
     padding: 8px;
     padding-bottom: 16px;
   `;
@@ -104,12 +104,12 @@ let BlueDotHeader;
 }
 
 const ScMainCard = styled.div`
-  border: 1px solid ${tokens.BorderDefault};
-  border-radius: 4px;
+  border: 2px dashed ${tokens.BorderDefault};
+  border-radius: 8px;
 `;
 
 const ScSelect = styled.select`
-  background-color: ${tokens.BgDefault};
+  background-color: ${tokens.BgInput};
   border: 1px solid ${tokens.BorderDefault};
   border-radius: 4px;
   padding: 8px;
