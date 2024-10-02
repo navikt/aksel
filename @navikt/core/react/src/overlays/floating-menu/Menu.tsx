@@ -25,7 +25,6 @@ const FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 const LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 
-type SubMenuSide = "left" | "right";
 type CheckedState = boolean | "indeterminate";
 
 /* -------------------------------------------------------------------------- */
@@ -302,8 +301,6 @@ const MenuContentInternal = forwardRef<
       contentRef,
       context.onContentChange,
     );
-    const pointerDirRef = React.useRef<SubMenuSide>("right");
-    const lastPointerXRef = React.useRef(0);
 
     return (
       <FocusScope
@@ -366,28 +363,6 @@ const MenuContentInternal = forwardRef<
                 }
                 descendants.firstEnabled()?.node?.focus();
               })}
-              onPointerMove={composeEventHandlers(
-                rest.onPointerMove,
-                whenMouse((event) => {
-                  const target = event.target as HTMLElement;
-                  const pointerXHasChanged =
-                    lastPointerXRef.current !== event.clientX;
-
-                  // We don't use `event.movementX` for this check because Safari will
-                  // always return `0` on a pointer event.
-                  if (
-                    event.currentTarget.contains(target) &&
-                    pointerXHasChanged
-                  ) {
-                    const newDir =
-                      event.clientX > lastPointerXRef.current
-                        ? "right"
-                        : "left";
-                    pointerDirRef.current = newDir;
-                    lastPointerXRef.current = event.clientX;
-                  }
-                }),
-              )}
             />
           </RovingFocus>
         </DismissableLayer>
