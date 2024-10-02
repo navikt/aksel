@@ -70,7 +70,7 @@ export const withDsExample = (
           style={{ background: getBg(background) }}
         >
           <Icon aria-hidden fontSize="1.5rem" /> {`${breakpoint}`}
-          <Box marginInline="2 0" style={{ color: "var(--a-text-subtle)" }}>
+          <Box marginInline="2 0" className="text-text-subtle">
             {width}px
           </Box>
         </HStack>
