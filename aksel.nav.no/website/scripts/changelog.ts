@@ -43,7 +43,7 @@ export async function main() {
     .fields.find((field) => field.name === "body").type;
 
   const blocks = htmlToBlocks(html, blockContentType, {
-    parseHtml: (htmlStr) => new JSDOM(htmlStr).window.document,
+    parseHtml: (htmlStr) => new JSDOM(htmlStr).window._document,
   });
   blocks.shift();
 

@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { fetchDownloadUrls, fetchIcon, fetchIcons } from "./fetch-icons.mjs";
@@ -6,7 +5,6 @@ import { resolveName } from "./icon-name.mjs";
 import { makeConfig } from "./make-configs.mjs";
 import { paginate } from "./paginate.mjs";
 
-config();
 /* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
 
 const iconFolder = "./icons";
@@ -16,6 +14,7 @@ if (!process.env.FIGMA_TOKEN) {
 }
 
 async function main() {
+  console.info("Started icon-update from Figma");
   let icons = await fetchIcons();
 
   const totalIcons = icons.length;

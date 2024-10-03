@@ -1,6 +1,7 @@
 const file_key = "wEdyFjCQSBR3U7FvrMbPXa";
 
 export const fetchIcons = async () => {
+  console.info("Fetching new icons from Figma...");
   const data = await fetch(
     `https://api.figma.com/v1/files/${file_key}/components`,
     {
