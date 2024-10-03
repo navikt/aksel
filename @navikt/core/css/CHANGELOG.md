@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 7.1.1
+
+### Patch Changes
+
+- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+- Datepicker/Select: :lipstick: dim non-interactable icons when readonly is set. ([#3187](https://github.com/navikt/aksel/pull/3187))
+
+- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
 ## 7.1.0
 
 ### Patch Changes
