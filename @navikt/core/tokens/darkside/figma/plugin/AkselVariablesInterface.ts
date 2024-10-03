@@ -45,7 +45,7 @@ export class AkselVariablesInterface {
     this.updateSemanticColorCollection(this.config.colors);
     this.updateScaleCollection(this.config.radius);
     this.updateScaleCollection(this.config.spacing);
-    console.info("Updated variables!");
+    console.info("Variables updated!");
   }
 
   private updateGlobalColorCollection(
