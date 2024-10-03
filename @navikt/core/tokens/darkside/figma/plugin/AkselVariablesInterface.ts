@@ -159,7 +159,9 @@ export class AkselVariablesInterface {
       collection = this.Figma.createCollection(semanticCollectionName);
     }
 
-    for (const modeName of Object.values(colorsConfig).map((x) => x.name)) {
+    for (const colorEntry of Object.values(colorsConfig)) {
+      const modeName = colorEntry.name;
+
       const globalCollection = this.Figma.getCollection(
         colorsConfig[modeName].global.name,
       );
