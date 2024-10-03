@@ -107,6 +107,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     }, [simulated?.seconds]);
 
     return (
+      /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
       <div
         ref={ref}
         className={cl(

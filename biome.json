@@ -26,8 +26,7 @@
         "useKeyWithClickEvents": "off",
         "noNoninteractiveTabindex": "off",
         "useAriaPropsForRole": "off",
-        "useSemanticElements": "off",
-        "useFocusableInteractive": "off"
+        "useSemanticElements": "off"
       },
       "style": {
         "useImportType": "off",
