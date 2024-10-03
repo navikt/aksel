@@ -38,7 +38,7 @@ export const artikkelPreview = (_type: string, threshold: number = 12) => {
             media: () =>
               isAfter(updateInfo, threshold) ? (
                 <HourglassBottomFilledIcon aria-hidden />
-              ) : null,
+              ) : undefined,
           };
         }
         return {
