@@ -6,7 +6,7 @@ export const Alert = defineType({
   name: "alert",
   title: "Alert",
   type: "object",
-  icon: ExclamationmarkTriangleIcon,
+  icon: () => <ExclamationmarkTriangleIcon aria-hidden />,
   fields: [
     defineField({
       title: "Variant",
@@ -62,7 +62,7 @@ export const Alert = defineType({
       return {
         title: toPlainText(selection?.body),
         subtitle: `Alert - ${selection.variant}`,
-        media: ExclamationmarkTriangleIcon,
+        media: () => <ExclamationmarkTriangleIcon aria-hidden />,
       };
     },
   },
