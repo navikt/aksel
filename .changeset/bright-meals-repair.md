@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Performance: Optimized memoization for rerendring in some components.
+Performance: :zap: Optimized memoization for rerendring in some components.
