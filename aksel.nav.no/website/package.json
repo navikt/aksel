@@ -18,7 +18,7 @@
     "e2e:full": "yarn build && yarn generate-testpaths && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "e2e:ci-full": "yarn generate-testpaths && FULL_TEST=true yarn start-server-and-test start http://localhost:3000 playwright",
     "update:rss": "yarn tsx --env-file=.env ./scripts/generate-rss-feed",
-    "update:props": "ts-node --project tsconfig.tsnode.json ./scripts/update-props",
+    "update:props": "yarn tsx --env-file=.env ./scripts/update-props",
     "update:tokens": "ts-node --project tsconfig.tsnode.json ./scripts/update-tokens",
     "update:eksempler": "ts-node --project tsconfig.tsnode.json ./scripts/update-examples/update-sanity",
     "validate:eksempler": "ts-node --project tsconfig.tsnode.json ./scripts/update-examples/validate",
