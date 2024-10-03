@@ -128,9 +128,6 @@ export class FigmaPluginInterface {
   /* -------------------------------------------------------------------------- */
   /*                                Mode handling                               */
   /* -------------------------------------------------------------------------- */
-  getModes(collection: VariableCollection) {
-    return collection.modes;
-  }
 
   getModeWithName<T extends string>(
     name: T,
@@ -141,9 +138,7 @@ export class FigmaPluginInterface {
         name: T;
       }
     | undefined {
-    const foundMode = this.getModes(collection).find(
-      (mode) => mode.name === name,
-    );
+    const foundMode = collection.modes.find((mode) => mode.name === name);
 
     return foundMode ? { modeId: foundMode.modeId, name } : undefined;
   }
@@ -159,13 +154,12 @@ export class FigmaPluginInterface {
     modeId: string;
     name: T;
   } {
-    const existingMode = this.getModes(collection).find(
-      (mode) => mode.name === name,
-    );
+    const existingMode = collection.modes.find((mode) => mode.name === name);
     if (existingMode) {
       console.info("Mode already exists, skipping creation: ", name);
       return { modeId: existingMode.modeId, name };
     }
+
     return {
       modeId: collection.addMode(name),
       name,
