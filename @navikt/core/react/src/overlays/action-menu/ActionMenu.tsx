@@ -533,7 +533,7 @@ type MarkerProps = {
 
 const Marker = ({ children, className, placement }: MarkerProps) => {
   return (
-    <span
+    <div
       aria-hidden
       className={cl(
         className,
@@ -542,7 +542,7 @@ const Marker = ({ children, className, placement }: MarkerProps) => {
       )}
     >
       {children}
-    </span>
+    </div>
   );
 };
 
@@ -674,7 +674,7 @@ const ActionMenuCheckboxItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__checkbox",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
         aria-keyshortcuts={shortcut}
@@ -811,7 +811,7 @@ const ActionMenuRadioItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__radio",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
       >

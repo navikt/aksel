@@ -106,7 +106,7 @@
   flex-shrink: 0;
 }
 
-.navds-action-menu__item:where(.navds-action-menu__checkbox, .navds-action-menu__radio, .navds-action-menu__item--has-icon) {
+.navds-action-menu__item:where(.navds-action-menu__item--has-icon) {
   --__ac-action-menu-item-pl: var(--a-spacing-6);
 }
 
@@ -184,6 +184,11 @@
   margin-block: var(--a-spacing-2);
   background-color: var(--a-border-divider);
   margin-inline: calc(var(--__ac-action-menu-content-p) * -1);
+}
+
+.navds-action-menu__indicator {
+  display: grid;
+  place-content: center;
 }
 
 .navds-action-menu__indicator-icon {
