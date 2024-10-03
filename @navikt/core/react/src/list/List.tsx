@@ -1,15 +1,18 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyShort, Heading } from "../typography";
-import { useId } from "../util/hooks";
+import { BodyLong, BodyShort, Heading } from "../typography";
 import { ListItem } from "./ListItem";
 import { ListContext } from "./context";
-import { ListProps } from "./types";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { ListItemProps, ListProps } from "./types";
 
 export interface ListComponent
   extends React.ForwardRefExoticComponent<
     ListProps & React.RefAttributes<HTMLDivElement>
   > {
+  /**
+   * @see 🏷️ {@link ListItemProps}
+   */
   Item: typeof ListItem;
 }
 
@@ -42,47 +45,34 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
     },
     ref,
   ) => {
-    const ariaId = useId();
+    const { size: contextSize } = useContext(ListContext);
 
-    const { isNested, size: _size } = useContext(ListContext);
-
-    const listSize = size ?? _size ?? "medium";
+    const listSize = size ?? contextSize;
     return (
       <ListContext.Provider
         value={{
           listType: ListTag,
-          isNested: isNested === null ? false : true,
           size: listSize,
         }}
       >
-        <div
+        <BodyLong
+          as="div"
           {...rest}
+          size={size}
           ref={ref}
-          className={cl("navds-list", `navds-list--${listSize}`, className, {
-            "navds-list--nested": isNested === null ? false : true,
-          })}
+          className={cl("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
             <Heading
-              id={`tittel-${ariaId}`}
               size={listSize === "medium" ? "small" : "xsmall"}
               as={headingTag}
             >
               {title}
             </Heading>
           )}
-          {description && (
-            <BodyShort size={listSize} id={`description-${ariaId}`}>
-              {description}
-            </BodyShort>
-          )}
-          <ListTag
-            aria-labelledby={title && `tittel-${ariaId}`}
-            aria-describedby={description && `description-${ariaId}`}
-          >
-            {children}
-          </ListTag>
-        </div>
+          {description && <BodyShort size={listSize}>{description}</BodyShort>}
+          <ListTag role="list">{children}</ListTag>
+        </BodyLong>
       </ListContext.Provider>
     );
   },
