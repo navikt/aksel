@@ -3832,8 +3832,8 @@ __metadata:
     react-router-dom: "npm:^6.3.0"
     rimraf: "npm:6.0.1"
     swr: "npm:^1.1.2"
-    ts-node: "npm:^10.9.1"
     tsc-alias: "npm:1.8.8"
+    tsx: "npm:^4.19.1"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.2.2"
   peerDependencies:
