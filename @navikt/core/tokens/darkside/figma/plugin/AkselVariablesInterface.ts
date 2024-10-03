@@ -99,7 +99,7 @@ export class AkselVariablesInterface {
       });
     }
 
-    console.info("Updated collection: ", collection.name);
+    console.info("Updated collection:", collection.name);
   }
 
   private updateScaleCollection(
