@@ -3853,7 +3853,7 @@ __metadata:
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
-    ts-node: "npm:^10.9.1"
+    tsx: "npm:^4.19.1"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.2.2"
   languageName: unknown
