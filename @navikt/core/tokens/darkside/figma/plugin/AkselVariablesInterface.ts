@@ -205,7 +205,7 @@ export class AkselVariablesInterface {
 
       /* Make sure to remove "default" modes if they exist */
       this.Figma.removeNonMatchingModes(
-        Object.values(colorsConfig).map((x) => x.name),
+        Object.values(colorsConfig).map((colorConfig) => colorConfig.name),
         collection,
       );
     }
