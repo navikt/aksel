@@ -61,13 +61,13 @@ export class AkselVariablesInterface {
      * Correctly sorts the token-scale for global colors
      * 000 - 100 - 200... etc.
      */
-    const sortedTokens = globalColorTheme.tokens.sort((a, b) => {
-      const getLastNumber = (name: string) => {
-        const matches = name.match(/\d+/g);
-        return matches ? parseInt(matches[matches.length - 1], 10) : 0;
-      };
-      return getLastNumber(a.name) - getLastNumber(b.name);
-    });
+    const getLastNumber = (name: string) => {
+      const matches = name.match(/\d+/g);
+      return matches ? parseInt(matches[matches.length - 1], 10) : 0;
+    };
+    const sortedTokens = globalColorTheme.tokens.sort(
+      (a, b) => getLastNumber(a.name) - getLastNumber(b.name),
+    );
 
     for (const token of sortedTokens) {
       /* Color values can only be defined by strings */
