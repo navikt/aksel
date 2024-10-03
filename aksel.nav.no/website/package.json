@@ -21,7 +21,7 @@
     "update:props": "yarn tsx --env-file=.env ./scripts/update-props",
     "update:tokens": "yarn tsx --env-file=.env ./scripts/update-tokens",
     "update:eksempler": "yarn tsx --env-file=.env ./scripts/update-examples/update-sanity",
-    "validate:eksempler": "yarn tsx --env-file=.env ./scripts/update-examples/validate",
+    "validate:eksempler": "yarn tsx ./scripts/update-examples/validate",
     "update:changelog": "yarn tsx --env-file=.env ./scripts/changelog",
     "update:sanity": "yarn update:tokens && yarn update:props && yarn update:eksempler && yarn update:changelog",
     "analyze": "cross-env ANALYZE=true yarn build",
