@@ -98,61 +98,6 @@ export const SizeSmall = () => <TableComponent size="small" />;
 
 export const Buttons = () => <TableComponent size="small" button />;
 
-export const WithDivs = () => {
-  return (
-    <div className="navds-table" role="table">
-      <div className="navds-table__header" role="rowgroup">
-        <div className="navds-table__row" role="row">
-          <div className="navds-table__header-cell" role="columnheader">
-            Fornavn
-          </div>
-          <div className="navds-table__header-cell" role="columnheader">
-            Etternavn
-          </div>
-          <div className="navds-table__header-cell" role="columnheader">
-            Rolle
-          </div>
-        </div>
-      </div>
-      <div className="navds-table__body" role="rowgroup">
-        <div className="navds-table__row" role="row">
-          <div className="navds-table__data-cell" role="cell">
-            Jean-Luc
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            Picard
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            Kaptein
-          </div>
-        </div>
-        <div className="navds-table__row" role="row">
-          <div className="navds-table__data-cell" role="cell">
-            William
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            Riker
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            Kommandør
-          </div>
-        </div>
-        <div className="navds-table__row" role="row">
-          <div className="navds-table__data-cell" role="cell">
-            Geordi
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            La Forge
-          </div>
-          <div className="navds-table__data-cell" role="cell">
-            Sjefsingeniør
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
   const useToggleList = (initialState) => {
     const [list, setList] = useState(initialState);
@@ -258,10 +203,6 @@ export const Chromatic = {
       <div>
         <h3>With Buttons</h3>
         <Buttons />
-      </div>
-      <div>
-        <h3>Custom with divs</h3>
-        <WithDivs />
       </div>
       <div>
         <h3>Selection</h3>

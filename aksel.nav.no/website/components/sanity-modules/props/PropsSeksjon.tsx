@@ -16,16 +16,13 @@ const PropsSeksjon = ({ node }: PropsSeksjonProps) => {
 
   return (
     <div className="mb-16">
-      {node?.komponenter?.length > 0 && (
-        <>
-          {node.komponenter.map((prop) => (
-            <PropTableV2
-              komponent={prop as unknown as PropTableT}
-              key={prop?._key}
-            />
-          ))}
-        </>
-      )}
+      {node?.komponenter?.length > 0 &&
+        node.komponenter.map((prop) => (
+          <PropTableV2
+            komponent={prop as unknown as PropTableT}
+            key={prop?._key}
+          />
+        ))}
     </div>
   );
 };

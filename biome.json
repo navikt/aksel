@@ -26,7 +26,8 @@
         "useKeyWithClickEvents": "off",
         "noNoninteractiveTabindex": "off",
         "useAriaPropsForRole": "off",
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "useFocusableInteractive": "off"
       },
       "style": {
         "useImportType": "off",
@@ -57,7 +58,8 @@
         "useExhaustiveDependencies": "off",
         "noInnerDeclarations": "off",
         "useJsxKeyInIterable": "off",
-        "noSelfAssign": "off"
+        "noSelfAssign": "off",
+        "noUnknownMediaFeatureName": "info"
       }
     },
     "ignore": [
