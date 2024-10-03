@@ -23,7 +23,6 @@
     "build:figma-config": "tsx ./darkside/figma",
     "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",
     "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='darkside/figma/plugin/plugin.js'",
-    "build:plugin-watch": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js' --watch",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
