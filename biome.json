@@ -25,7 +25,8 @@
         "useMediaCaption": "off",
         "useKeyWithClickEvents": "off",
         "noNoninteractiveTabindex": "off",
-        "useAriaPropsForRole": "off"
+        "useAriaPropsForRole": "off",
+        "useSemanticElements": "off"
       },
       "style": {
         "useImportType": "off",
