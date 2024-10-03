@@ -51,11 +51,9 @@ export class AkselVariablesInterface {
   private updateGlobalColorCollection(
     globalColorTheme: FigmaConfigEntry,
   ): void {
-    let collection = this.Figma.getCollection(globalColorTheme.name);
-
-    if (!collection) {
-      collection = this.Figma.createCollection(globalColorTheme.name);
-    }
+    const collection =
+      this.Figma.getCollection(globalColorTheme.name) ??
+      this.Figma.createCollection(globalColorTheme.name);
 
     /**
      * Correctly sorts the token-scale for global colors
@@ -75,15 +73,9 @@ export class AkselVariablesInterface {
         throw new Error(`Token value is not a string: ${token}`);
       }
 
-      let variable = this.Figma.getVariable(token.name, collection.id);
-
-      if (!variable) {
-        variable = this.Figma.createVariable(
-          token.name,
-          collection,
-          token.figmaType,
-        );
-      }
+      const variable =
+        this.Figma.getVariable(token.name, collection.id) ??
+        this.Figma.createVariable(token.name, collection, token.figmaType);
 
       this.Figma.setVariableValue(
         variable,
@@ -107,11 +99,9 @@ export class AkselVariablesInterface {
       | ScopedFigmaTokenConfig["radius"]
       | ScopedFigmaTokenConfig["spacing"],
   ): void {
-    let collection = this.Figma.getCollection(globalScale.name);
-
-    if (!collection) {
-      collection = this.Figma.createCollection(globalScale.name);
-    }
+    const collection =
+      this.Figma.getCollection(globalScale.name) ??
+      this.Figma.createCollection(globalScale.name);
 
     const sortedTokens = globalScale.tokens.sort((a, b) => {
       if (typeof a.value === "number" && typeof b.value === "number") {
@@ -121,15 +111,9 @@ export class AkselVariablesInterface {
     });
 
     for (const token of sortedTokens) {
-      let variable = this.Figma.getVariable(token.name, collection.id);
-
-      if (!variable) {
-        variable = this.Figma.createVariable(
-          token.name,
-          collection,
-          token.figmaType,
-        );
-      }
+      const variable =
+        this.Figma.getVariable(token.name, collection.id) ??
+        this.Figma.createVariable(token.name, collection, token.figmaType);
 
       this.Figma.setVariableValue(
         variable,
@@ -153,11 +137,9 @@ export class AkselVariablesInterface {
   ): void {
     const semanticCollectionName = colorsConfig.light.semantic.name;
 
-    let collection = this.Figma.getCollection(semanticCollectionName);
-
-    if (!collection) {
-      collection = this.Figma.createCollection(semanticCollectionName);
-    }
+    const collection =
+      this.Figma.getCollection(semanticCollectionName) ??
+      this.Figma.createCollection(semanticCollectionName);
 
     for (const colorEntry of Object.values(colorsConfig)) {
       const modeName = colorEntry.name;
@@ -172,22 +154,14 @@ export class AkselVariablesInterface {
         );
       }
 
-      let mode = this.Figma.getModeWithName(modeName, collection);
-
-      if (!mode) {
-        mode = this.Figma.createMode(modeName, collection);
-      }
+      const mode =
+        this.Figma.getModeWithName(modeName, collection) ??
+        this.Figma.createMode(modeName, collection);
 
       for (const token of colorsConfig[modeName].semantic.tokens) {
-        let variable = this.Figma.getVariable(token.name, collection.id);
-
-        if (!variable) {
-          variable = this.Figma.createVariable(
-            token.name,
-            collection,
-            token.figmaType,
-          );
-        }
+        const variable =
+          this.Figma.getVariable(token.name, collection.id) ??
+          this.Figma.createVariable(token.name, collection, token.figmaType);
 
         if (!token.alias) {
           if (typeof token.value !== "string") {
