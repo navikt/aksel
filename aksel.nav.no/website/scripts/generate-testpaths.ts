@@ -1,11 +1,16 @@
-import dotenv from "dotenv";
 import fs from "fs";
 import { sitemapPages } from "../sanity/interface/interface";
 
-dotenv.config();
-
 const token = process.env.SANITY_READ_NO_DRAFTS;
 
+if (!token) {
+  console.error("Missing SANITY_READ_NO_DRAFTS");
+  process.exit(1);
+}
+
+/**
+ * Generate a list of urls for e2e tests
+ */
 sitemapPages(token)
   .then((pages) =>
     fs.writeFileSync(
