@@ -125,47 +125,57 @@ const Paragraph = ({
   return <p className={twMerge("text-xl", className, `mb-9`)}>{children}</p>;
 };
 
-const LinkList = ({
-  title,
-  links,
-  borderTop = false,
-}: {
-  title: string;
-  links: string[];
-  borderTop?: boolean;
-}) => {
-  return (
-    <div
-      className={clsx("bg-[#fef5ef] px-5 py-4 mb-4", {
-        ["border-t-[#99185e] border-t-[5px]"]: borderTop,
-      })}
-    >
-      <h2
-        className="mb-4 text-xl font-semibold"
-        id="heading-page-navigation-menu"
+let LinkList: ReactNode;
+{
+  const ScList = styled.div`
+    background-color: ${tokens.BgBrandTwo};
+    &.borderTop {
+      border-top: 4px solid ${tokens.BgBrandOneStrong};
+    }
+  `;
+
+  LinkList = ({
+    title,
+    links,
+    borderTop = false,
+  }: {
+    title: string;
+    links: string[];
+    borderTop?: boolean;
+  }) => {
+    return (
+      <ScList
+        className={clsx("px-5 py-4 mb-4", {
+          ["borderTop"]: borderTop,
+        })}
       >
-        {title}
-      </h2>
-      <ul
-        className="flex flex-col gap-3"
-        aria-labelledby="heading-page-navigation-menu"
-      >
-        {links.map((link) => (
-          <li key={link}>
-            <Link
-              className="flex gap-[6px] items-center text-xl no-underline hover:underline"
-              inverted
-              href={`#${link}`}
-            >
-              <ArrowDownRightIcon aria-hidden />
-              {link}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+        <h2
+          className="mb-4 text-xl font-semibold"
+          id="heading-page-navigation-menu"
+        >
+          {title}
+        </h2>
+        <ul
+          className="flex flex-col gap-3"
+          aria-labelledby="heading-page-navigation-menu"
+        >
+          {links.map((link) => (
+            <li key={link}>
+              <Link
+                className="flex gap-[6px] items-center text-xl no-underline hover:underline"
+                inverted
+                href={`#${link}`}
+              >
+                <ArrowDownRightIcon aria-hidden />
+                {link}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </ScList>
+    );
+  };
+}
 
 let PlainList: ReactNode;
 {
@@ -205,49 +215,89 @@ let PlainOrderedList: ReactNode;
   };
 }
 
-const AccordionItem = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) => {
-  return (
-    <details className="group/details text-xl">
-      <summary
-        className={clsx(
-          "group/summary",
-          "flex gap-2 items-center",
-          "group-open/details:border-b-0 group-open/details:mb-4",
-          "hover:bg-blue-100 hover:cursor-pointer p-3 rounded",
-          "sticky top-0 z-10",
-          "focus:z-20",
-          "bg-white",
-          "border-opacity-0 border-x-black border",
-        )}
-      >
-        {/* TODO: use tokens here */}
-        <div className="bg-blue-100 group-hover/summary:bg-[#0056b4] w-5 h-5 rounded-lg">
-          <span className="w-4 h-4 block" aria-hidden="true">
-            <ChevronDownIcon
-              className={clsx([
-                "group-open/details:-rotate-180",
-                "group-hover/summary:text-white",
-                "transition-transform",
-                "w-5 h-5",
-                "text-[#0056b4]",
-              ])}
-            />
-          </span>
+let AccordionItem: ReactNode;
+{
+  const ScDetails = styled.details`
+    border-top: 1px solid ${tokens.BorderSubtle};
+    border-bottom: 1px solid ${tokens.BorderSubtle};
+
+    &:hover,
+    &:focus-within {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+    }
+
+    &:hover + details,
+    &:focus-within + details {
+      border-top: 1px solid transparent;
+    }
+    details:has(+ &) {
+      border-bottom: 1px solid transparent;
+    }
+
+    &:hover .icon-bg {
+      background-color: ${tokens.BgAccentStrongHover};
+      color: ${tokens.BgDefault};
+    }
+
+    &:not(first-child) {
+      margin-top: -1px;
+    }
+  `;
+
+  const ScSummary = styled.summary`
+    background-color: ${tokens.BgDefault};
+    &:hover {
+      background-color: ${tokens.BgAccentHover};
+    }
+  `;
+
+  const ScIconDiv = styled.div`
+    background-color: ${tokens.BgAccentModerate};
+  `;
+
+  const ScTitle = styled.span`
+    color: ${tokens.TextAccent};
+  `;
+
+  AccordionItem = ({
+    title,
+    children,
+  }: {
+    title: string;
+    children: ReactNode;
+  }) => {
+    return (
+      <ScDetails className="group/details text-xl">
+        <ScSummary
+          className={clsx(
+            "flex gap-2 items-center",
+            "group-open/details:border-b-0 group-open/details:mb-4",
+            "hover:cursor-pointer p-3 rounded",
+            "sticky top-0 z-10 focus:z-20",
+          )}
+        >
+          {/* TODO: use tokens here */}
+          <ScIconDiv className="icon-bg w-5 h-5 rounded-lg">
+            <span className="w-4 h-4 block" aria-hidden="true">
+              <ChevronDownIcon
+                className={clsx([
+                  "group-open/details:-rotate-180",
+                  "transition-transform",
+                  "w-5 h-5",
+                ])}
+              />
+            </span>
+          </ScIconDiv>
+          <ScTitle className="text-[#0056b4]">{title}</ScTitle>
+        </ScSummary>
+        <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] mr-12 pl-5 pt-3">
+          {children}
         </div>
-        <span className="text-[#0056b4]">{title}</span>
-      </summary>
-      <div className="border-l-[0.125rem] border-l-[#aaa] ml-[1.35rem] mr-12 pl-5 pt-3">
-        {children}
-      </div>
-    </details>
-  );
-};
+      </ScDetails>
+    );
+  };
+}
 
 const Accordion = ({ children }: { children: ReactNode }) => {
   return <div>{children}</div>;
@@ -654,6 +704,7 @@ function SykepengerPage() {
             helsetilstanden din, og om den vil hindre planlagt behandling.
           </li>
         </PlainOrderedList>
+        <p>hello</p>
       </Page>
     </Dekoratoren>
   );

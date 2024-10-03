@@ -7,7 +7,7 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
-import { HStack } from "@navikt/ds-react";
+import { Box, HStack } from "@navikt/ds-react";
 import styles from "./examples.module.css";
 
 type withDsT = {
@@ -70,6 +70,9 @@ export const withDsExample = (
           style={{ background: getBg(background) }}
         >
           <Icon aria-hidden fontSize="1.5rem" /> {`${breakpoint}`}
+          <Box marginInline="2 0" className="text-text-subtle">
+            {width}px
+          </Box>
         </HStack>
       );
     };

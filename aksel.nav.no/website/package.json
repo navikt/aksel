@@ -101,7 +101,6 @@
     "showdown": "^2.1.0",
     "start-server-and-test": "^2.0.3",
     "ts-node": "^10.9.1",
-    "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   }

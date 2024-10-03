@@ -45,6 +45,7 @@ export const InputController = forwardRef<
     size = "medium",
     inputRef,
     toggleOpenButtonRef,
+    readOnly,
   } = useInputContext();
 
   const { activeDecendantId } = useFilteredOptionsContext();
@@ -65,6 +66,7 @@ export const InputController = forwardRef<
           id={inputProps.id}
           ref={mergedInputRef}
           inputClassName={inputClassName}
+          readOnly={readOnly}
           {...rest}
         />
       ) : (
@@ -74,6 +76,7 @@ export const InputController = forwardRef<
             ref={mergedInputRef}
             inputClassName={inputClassName}
             shouldShowSelectedOptions={shouldShowSelectedOptions}
+            readOnly={readOnly}
             {...rest}
           />
         </SelectedOptions>

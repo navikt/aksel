@@ -1,4 +1,4 @@
-FROM denoland/deno:1.40.2
+FROM denoland/deno:latest
 
 WORKDIR /app
 RUN chown -R deno:deno /app
