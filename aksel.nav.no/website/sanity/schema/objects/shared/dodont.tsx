@@ -6,7 +6,7 @@ export const DoDont = defineType({
   title: "Do / Dont",
   name: "do_dont",
   type: "object",
-  icon: CheckmarkCircleIcon,
+  icon: () => <CheckmarkCircleIcon aria-hidden />,
   fields: [
     defineField({
       type: "array",

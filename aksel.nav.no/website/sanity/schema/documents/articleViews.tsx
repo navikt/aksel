@@ -15,7 +15,7 @@ export const ArticleViews = defineType({
     prepare: (selected) => ({
       title: selected.title,
       subtitle: selected.url,
-      media: LineGraphIcon,
+      media: () => <LineGraphIcon aria-hidden />,
     }),
   },
   orderings: [

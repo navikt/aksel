@@ -35,7 +35,10 @@ export const artikkelPreview = (_type: string, threshold: number = 12) => {
                 ? `${(tema ?? kategori) && "/ "}${tema ?? kategori ?? ``}`
                 : ""
             }`,
-            media: isAfter(updateInfo, threshold) && HourglassBottomFilledIcon,
+            media: () =>
+              isAfter(updateInfo, threshold) ? (
+                <HourglassBottomFilledIcon aria-hidden />
+              ) : null,
           };
         }
         return {

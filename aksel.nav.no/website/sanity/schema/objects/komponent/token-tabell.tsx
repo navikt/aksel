@@ -7,5 +7,5 @@ export const TokenTabell = defineType({
   type: "reference",
   to: [{ type: "token_kategori" }],
   validation: (Rule) => Rule.required(),
-  icon: TokenIcon,
+  icon: () => <TokenIcon aria-hidden />,
 });

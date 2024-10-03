@@ -28,7 +28,7 @@ export const Video = defineType({
   name: "video",
   title: "Video",
   type: "object",
-  icon: VideoplayerIcon,
+  icon: () => <VideoplayerIcon aria-hidden />,
   fields: [
     defineField({
       name: "webm",

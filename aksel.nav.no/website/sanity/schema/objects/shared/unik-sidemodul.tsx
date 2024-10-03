@@ -6,7 +6,7 @@ export const UnikSidemodul = defineType({
   title: "Unik Sidemodul",
   type: "object",
   name: "spesial_seksjon",
-  icon: StarIcon,
+  icon: () => <StarIcon aria-hidden />,
   validation: (Rule) => Rule.required(),
   fields: [
     defineField({
