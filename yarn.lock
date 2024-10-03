@@ -25351,6 +25351,7 @@ __metadata:
     tailwindcss: "npm:^3.3.3"
     tinycolor2: "npm:^1.6.0"
     ts-node: "npm:^10.9.1"
+    tsx: "npm:^4.19.1"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.2.2"
     zod: "npm:^3.22.4"
