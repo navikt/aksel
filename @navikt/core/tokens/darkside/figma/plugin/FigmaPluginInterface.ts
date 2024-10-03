@@ -177,14 +177,15 @@ export class FigmaPluginInterface {
     modeId: string;
     name: string;
   }[] {
-    const existingModes = this.getModes(collection);
+    const existingModes = collection.modes;
 
     for (const mode of existingModes) {
       if (!modes.find((m) => m === mode.name)) {
         collection.removeMode(mode.modeId);
       }
     }
-    return this.getModes(collection);
+
+    return collection.modes;
   }
 
   /* -------------------------------------------------------------------------- */
