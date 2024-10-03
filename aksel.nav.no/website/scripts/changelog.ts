@@ -1,12 +1,9 @@
 import { htmlToBlocks } from "@sanity/block-tools";
 import { Schema } from "@sanity/schema";
-import dotenv from "dotenv";
 import fs from "fs";
 import { JSDOM } from "jsdom";
 import showdown from "showdown";
 import { noCdnClient } from "../sanity/interface/client.server";
-
-dotenv.config();
 
 main();
 

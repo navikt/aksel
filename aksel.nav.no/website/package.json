@@ -91,7 +91,6 @@
     "babel-loader": "^8.2.0",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.0",
-    "dotenv": "^10.0.0",
     "jsdom": "^22.1.0",
     "json5": "2.2.1",
     "pino-pretty": "^10.0.0",
@@ -101,7 +100,6 @@
     "rss": "^1.2.2",
     "showdown": "^2.1.0",
     "start-server-and-test": "^2.0.3",
-    "ts-node": "^10.9.1",
     "tsx": "^4.19.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
