@@ -20,7 +20,12 @@ export class FigmaPluginInterface {
     for (const collection of collections) {
       for (const id of collection.variableIds) {
         const variable = await figma.variables.getVariableByIdAsync(id);
-        variable && variables.push(variable);
+        if (!variable) {
+          throw new Error(
+            `Variable with id ${id} not found in collection ${collection.name}`,
+          );
+        }
+        variables.push(variable);
       }
     }
 
