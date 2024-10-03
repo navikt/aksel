@@ -1,4 +1,6 @@
 import Avatar from "boring-avatars";
+import { SanityDocument } from "sanity";
+import { Iframe } from "sanity-plugin-iframe-pane";
 import { StructureResolver } from "sanity/structure";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import {
@@ -7,7 +9,6 @@ import {
   previews,
   prinsippKategorier,
 } from "../../config";
-import { Iframe } from "./IFrame";
 import { adminStructure } from "./admin";
 import { gpStructure } from "./god-praksis";
 import { grunnleggendeStructure } from "./grunnleggende";
@@ -134,19 +135,17 @@ export const structure: StructureResolver = async (
     ]);
 };
 
-export const resolveProductionUrl = (doc) => {
-  const basePath = "https://aksel.nav.no";
-  const devPath = "http://localhost:3000";
-
+export const resolveProductionUrl = (
+  doc: SanityDocument & { slug?: { current?: string } },
+) => {
+  const rootPath = `${window.location.protocol}//${window.location.host}`;
   if (previews.includes(doc._type)) {
-    const slug = doc.slug?.current;
+    const slug = doc?.slug?.current;
     const previewUrl = `/preview/${slug}`;
     if (!slug) {
       return "";
     }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
+    return `${rootPath}${previewUrl}`;
   }
   if (landingsider.find((x) => x.name === doc._type)) {
     const slug = landingsider.find((x) => x.name === doc._type)?.url;
@@ -154,9 +153,7 @@ export const resolveProductionUrl = (doc) => {
     if (!slug) {
       return "";
     }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
+    return `${rootPath}${previewUrl}`;
   }
 
   if ("gp.tema" === doc._type) {
@@ -165,9 +162,7 @@ export const resolveProductionUrl = (doc) => {
     if (!slug) {
       return "";
     }
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}${previewUrl}`
-      : `${devPath}${previewUrl}`;
+    return `${rootPath}${previewUrl}`;
   }
 };
 
@@ -179,7 +174,11 @@ export const defaultDocumentNode = (S, { schemaType }) => {
       S.view
         .component(Iframe)
         .options({
-          url: (doc) => resolveProductionUrl(doc),
+          url: (doc: SanityDocument) => resolveProductionUrl(doc),
+          reload: { button: true },
+          attributes: {
+            allow: "fullscreen",
+          },
         })
         .title("Forhåndsvisning"),
     ]);

@@ -109,7 +109,7 @@ const App = () => {
         icon.removeEventListener("dragend", dragEvent);
       }
     };
-  }, [categories]);
+  }, []);
 
   return (
     <main tabIndex={-1} className="wrapper">

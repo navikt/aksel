@@ -101,13 +101,16 @@ const SelectedOptionsProvider = ({
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
-  const isLimitReached =
-    (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
-    (!isMultiSelect && selectedOptions.length > 0);
+  const isLimitReached = useMemo(() => {
+    return (
+      (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
+      (!isMultiSelect && selectedOptions.length > 0)
+    );
+  }, [maxSelected, selectedOptions, isMultiSelect]);
 
   useEffect(() => {
     setHideCaret(isLimitReached);
-  }, [selectedOptions, setHideCaret, isLimitReached]);
+  }, [isLimitReached, setHideCaret]);
 
   const toggleOption = useCallback(
     (

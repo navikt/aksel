@@ -54,7 +54,6 @@
         "noUselessTernary": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off",
         "noInnerDeclarations": "off",
         "useJsxKeyInIterable": "off",
         "noSelfAssign": "off"

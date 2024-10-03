@@ -59,7 +59,7 @@ const Example = () => {
   }
 
   useEffect(() => {
-    errorSummaryRef.current?.focus();
+    formState.tries > 0 && errorSummaryRef.current?.focus();
   }, [formState.tries]);
 
   if (formState.submitted)

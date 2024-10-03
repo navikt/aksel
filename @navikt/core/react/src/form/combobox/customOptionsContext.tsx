@@ -35,7 +35,7 @@ const CustomOptionsProvider = ({
       );
       focusInput();
     },
-    [focusInput, setCustomOptions],
+    [focusInput],
   );
 
   const addCustomOption = useCallback(
@@ -47,7 +47,7 @@ const CustomOptionsProvider = ({
       }
       focusInput();
     },
-    [focusInput, isMultiSelect, setCustomOptions],
+    [focusInput, isMultiSelect],
   );
 
   const customOptionsState = {

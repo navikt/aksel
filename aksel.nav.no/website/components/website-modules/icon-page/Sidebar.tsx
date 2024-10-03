@@ -21,6 +21,7 @@ export const IconSidebar = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [blob, setBlob]: any = useState();
   const router = useRouter();
+  const prevNameRef = useRef(name);
 
   const currentIcon = useMemo(
     () => Object.values(meta).find((x) => x.name === name),
@@ -44,9 +45,10 @@ export const IconSidebar = ({
   }
 
   useEffect(() => {
-    if (wrapperRef.current) {
+    if (prevNameRef.current !== name && wrapperRef.current) {
       wrapperRef.current.focus({ preventScroll: true });
     }
+    prevNameRef.current = name;
   }, [name]);
 
   const logDownload = (icon, format) => {

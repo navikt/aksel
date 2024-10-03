@@ -43,8 +43,9 @@ export function createContext<T>(options: CreateContextOptions<T> = {}) {
   const Provider = forwardRef<unknown, ProviderProps<T>>(
     ({ children, ...context }, ref) => {
       // Only re-memoize when prop values change
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      const value = React.useMemo(() => context, Object.values(context)) as T;
+
+      // biome-ignore lint/correctness/useExhaustiveDependencies: Object.values(context) includes all dependencies.
+      const value = React.useMemo(() => context, Object.values(context)) as T; // eslint-disable-line react-hooks/exhaustive-deps
 
       return (
         <Context.Provider value={ref ? { ...value, ref } : value}>
