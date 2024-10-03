@@ -48,18 +48,20 @@ export class AkselVariablesInterface {
     console.info("Updated variables!");
   }
 
-  private updateGlobalColorCollection(entry: FigmaConfigEntry): void {
-    let collection = this.Figma.getCollection(entry.name);
+  private updateGlobalColorCollection(
+    globalColorTheme: FigmaConfigEntry,
+  ): void {
+    let collection = this.Figma.getCollection(globalColorTheme.name);
 
     if (!collection) {
-      collection = this.Figma.createCollection(entry.name);
+      collection = this.Figma.createCollection(globalColorTheme.name);
     }
 
     /**
      * Correctly sorts the token-scale for global colors
      * 000 - 100 - 200... etc.
      */
-    const sortedTokens = entry.tokens.sort((a, b) => {
+    const sortedTokens = globalColorTheme.tokens.sort((a, b) => {
       const getLastNumber = (name: string) => {
         const matches = name.match(/\d+/g);
         return matches ? parseInt(matches[matches.length - 1], 10) : 0;
@@ -90,7 +92,7 @@ export class AkselVariablesInterface {
       );
 
       this.Figma.setVariableMetadata(variable, {
-        codeSyntax: { WEB: token.code.web },
+        codeSyntax: token.code,
         description: token.comment ?? "",
         hiddenFromPublishing: collection.hiddenFromPublishing,
         scopes: token.scopes,
@@ -101,15 +103,17 @@ export class AkselVariablesInterface {
   }
 
   private updateScaleCollection(
-    entry: ScopedFigmaTokenConfig["radius"] | ScopedFigmaTokenConfig["spacing"],
+    globalScale:
+      | ScopedFigmaTokenConfig["radius"]
+      | ScopedFigmaTokenConfig["spacing"],
   ): void {
-    let collection = this.Figma.getCollection(entry.name);
+    let collection = this.Figma.getCollection(globalScale.name);
 
     if (!collection) {
-      collection = this.Figma.createCollection(entry.name);
+      collection = this.Figma.createCollection(globalScale.name);
     }
 
-    const sortedTokens = entry.tokens.sort((a, b) => {
+    const sortedTokens = globalScale.tokens.sort((a, b) => {
       if (typeof a.value === "number" && typeof b.value === "number") {
         return a.value - b.value;
       }
@@ -134,7 +138,7 @@ export class AkselVariablesInterface {
       );
 
       this.Figma.setVariableMetadata(variable, {
-        codeSyntax: { WEB: token.code.web },
+        codeSyntax: token.code,
         description: token.comment ?? "",
         hiddenFromPublishing: collection.hiddenFromPublishing,
         scopes: token.scopes,
@@ -145,9 +149,9 @@ export class AkselVariablesInterface {
   }
 
   private updateSemanticColorCollection(
-    entry: ScopedFigmaTokenConfig["colors"],
+    colorsConfig: ScopedFigmaTokenConfig["colors"],
   ): void {
-    const semanticCollectionName = entry.light.semantic.name;
+    const semanticCollectionName = colorsConfig.light.semantic.name;
 
     let collection = this.Figma.getCollection(semanticCollectionName);
 
@@ -155,14 +159,14 @@ export class AkselVariablesInterface {
       collection = this.Figma.createCollection(semanticCollectionName);
     }
 
-    for (const modeName of Object.values(entry).map((x) => x.name)) {
+    for (const modeName of Object.values(colorsConfig).map((x) => x.name)) {
       const globalCollection = this.Figma.getCollection(
-        entry[modeName].global.name,
+        colorsConfig[modeName].global.name,
       );
 
       if (!globalCollection) {
         throw new Error(
-          `Global collection not found for: ${entry[modeName].global.name}`,
+          `Global collection not found for: ${colorsConfig[modeName].global.name}`,
         );
       }
 
@@ -172,7 +176,7 @@ export class AkselVariablesInterface {
         mode = this.Figma.createMode(modeName, collection);
       }
 
-      for (const token of entry[modeName].semantic.tokens) {
+      for (const token of colorsConfig[modeName].semantic.tokens) {
         let variable = this.Figma.getVariable(token.name, collection.id);
 
         if (!variable) {
@@ -216,7 +220,7 @@ export class AkselVariablesInterface {
         );
 
         this.Figma.setVariableMetadata(variable, {
-          codeSyntax: { WEB: token.code.web },
+          codeSyntax: token.code,
           description: token.comment ?? "",
           hiddenFromPublishing: collection.hiddenFromPublishing,
           scopes: token.scopes,
@@ -225,7 +229,7 @@ export class AkselVariablesInterface {
 
       /* Make sure to remove "default" modes if they exist */
       this.Figma.removeNonMatchingModes(
-        Object.values(entry).map((x) => x.name),
+        Object.values(colorsConfig).map((x) => x.name),
         collection,
       );
     }
