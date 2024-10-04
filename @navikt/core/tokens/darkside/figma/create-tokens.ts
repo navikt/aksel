@@ -77,7 +77,7 @@ function prepareToken(
     comment: token.comment,
     group: token.group,
     code: {
-      web: `var(${cssVariable.trim().split(": ")[0]})`,
+      WEB: `var(${cssVariable.trim().split(": ")[0]})`,
     },
     ...figmaSettings(token),
   };
