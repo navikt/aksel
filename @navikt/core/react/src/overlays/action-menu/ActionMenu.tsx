@@ -533,7 +533,7 @@ type MarkerProps = {
 
 const Marker = ({ children, className, placement }: MarkerProps) => {
   return (
-    <span
+    <div
       aria-hidden
       className={cl(
         className,
@@ -542,7 +542,7 @@ const Marker = ({ children, className, placement }: MarkerProps) => {
       )}
     >
       {children}
-    </span>
+    </div>
   );
 };
 
@@ -674,7 +674,7 @@ const ActionMenuCheckboxItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__checkbox",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
         aria-keyshortcuts={shortcut}
@@ -761,7 +761,7 @@ type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
 const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
   ActionMenuRadioGroupProps
->(({ children, className, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
+>(({ children, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
   const labelId = useId();
 
   return (
@@ -769,7 +769,6 @@ const ActionMenuRadioGroup = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-action-menu__radio-group", className)}
       aria-labelledby={label ? labelId : undefined}
     >
       {label && (
@@ -811,7 +810,7 @@ const ActionMenuRadioItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__radio",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
       >
