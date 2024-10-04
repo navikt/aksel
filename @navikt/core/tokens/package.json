@@ -32,7 +32,6 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
-    "@adobe/leonardo-contrast-colors": "^1.0.0",
     "@figma/plugin-typings": "^1.100.2",
     "color": "4.2.3",
     "esbuild": "^0.24.0",

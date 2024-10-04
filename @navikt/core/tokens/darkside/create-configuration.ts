@@ -1,29 +1,11 @@
-import { getGlobalScaleForColor } from "./leonardo";
 import { contrastTokenConfig } from "./tokens/contrast";
-import { neutralTokenConfig } from "./tokens/neutral";
+import { globalColorDarkModeConfig } from "./tokens/global-dark";
+import { globalColorLightModeConfig } from "./tokens/global-light";
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { spacingTokenConfig } from "./tokens/spacing";
-import {
-  ColorTheme,
-  GlobalColorVariable,
-  globalColorRoles,
-  mergeConfigs,
-  tokensWithPrefix,
-} from "./util";
-
-export const globalScale = (
-  theme: ColorTheme,
-): Record<string, GlobalColorVariable> => {
-  return globalColorRoles.reduce(
-    (acc, role) => {
-      acc[role] = getGlobalScaleForColor(role, theme);
-      return acc;
-    },
-    {} as Record<string, GlobalColorVariable>,
-  );
-};
+import { mergeConfigs, tokensWithPrefix } from "./util";
 
 /**
  * Collection of configs for:
@@ -37,8 +19,7 @@ export const lightModeTokens = () => {
       semanticTokensForAllRolesConfig(),
       contrastTokenConfig(),
       semanticTokenConfig("light"),
-      neutralTokenConfig("light"),
-      globalScale("light"),
+      globalColorLightModeConfig,
     ]),
   );
 };
@@ -53,8 +34,7 @@ export const darkModeTokens = () => {
       semanticTokensForAllRolesConfig(),
       contrastTokenConfig(),
       semanticTokenConfig("dark"),
-      neutralTokenConfig("dark"),
-      globalScale("dark"),
+      globalColorDarkModeConfig,
     ]),
   );
 };

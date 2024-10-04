@@ -44,6 +44,7 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           source_keep_parent_name: false
+          no_cache_paths: "./@navikt/tokens/figma-config.json"
 
       - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
         shell: bash
