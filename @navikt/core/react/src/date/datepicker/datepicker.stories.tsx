@@ -90,13 +90,11 @@ export const Default: StoryObj<DefaultStoryProps> = {
                     />
                   </div>
                 ) : (
-                  <>
-                    <DatePicker.Input
-                      label="Velg dato"
-                      size={props?.size}
-                      {...singleCtx.inputProps}
-                    />
-                  </>
+                  <DatePicker.Input
+                    label="Velg dato"
+                    size={props?.size}
+                    {...singleCtx.inputProps}
+                  />
                 )}
               </>
             ) : (
