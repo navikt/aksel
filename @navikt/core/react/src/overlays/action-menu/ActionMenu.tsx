@@ -761,7 +761,7 @@ type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
 const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
   ActionMenuRadioGroupProps
->(({ children, className, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
+>(({ children, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
   const labelId = useId();
 
   return (
@@ -769,7 +769,6 @@ const ActionMenuRadioGroup = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-action-menu__radio-group", className)}
       aria-labelledby={label ? labelId : undefined}
     >
       {label && (
