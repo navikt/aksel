@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import Combobox from "./Combobox";
 import { FilteredOptionsProvider } from "./FilteredOptions/filteredOptionsContext";
 import { InputContextProvider } from "./Input/Input.context";
@@ -58,6 +58,12 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
     const options = mapToComboboxOptionArray(externalOptions) || [];
     const filteredOptions = mapToComboboxOptionArray(externalFilteredOptions);
     const selectedOptions = mapToComboboxOptionArray(externalSelectedOptions);
+
+    const [isFirefoxOnAndroid, setIsFirefoxOnAndroid] = useState(false);
+    useEffect(() => {
+      setIsFirefoxOnAndroid(/Android.+Firefox\//.test(navigator.userAgent));
+    }, []);
+
     return (
       <InputContextProvider
         value={{
@@ -71,7 +77,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
           value,
           onChange,
           onClear,
-          shouldAutocomplete,
+          shouldAutocomplete: !isFirefoxOnAndroid && shouldAutocomplete,
           size,
         }}
       >
