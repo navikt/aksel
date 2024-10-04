@@ -22,13 +22,15 @@
 
 ### @navikt/ds-css
 
-- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+- List: Explicitly set list-style on ol to override reset-CSS ([#3202](https://github.com/navikt/aksel/pull/3202))
 
-- Datepicker/Select: :lipstick: dim non-interactable icons when readonly is set. ([#3187](https://github.com/navikt/aksel/pull/3187))
+* List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
 
-- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+* Datepicker/Select: :lipstick: dim non-interactable icons when readonly is set. ([#3187](https://github.com/navikt/aksel/pull/3187))
 
-* Accordion: Remove 'relative' positioning when focused. This resolves some issues where floating elements like popover ended up clipping. ([`9c1eba445`](https://github.com/navikt/aksel/commit/9c1eba44508f295cc6261ff96822b18557bd7ddc))
+* Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
+- Accordion: Remove 'relative' positioning when focused. This resolves some issues where floating elements like popover ended up clipping. ([`9c1eba445`](https://github.com/navikt/aksel/commit/9c1eba44508f295cc6261ff96822b18557bd7ddc))
 
 ## 7.0
 
