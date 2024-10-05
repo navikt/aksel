@@ -352,9 +352,6 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
           })}
           onClick={composeEventHandlers(onClick, () => context.onOpenToggle())}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-            if (event.currentTarget.disabled) {
-              return;
-            }
             if (event.key === "ArrowDown") {
               context.onOpenChange(true);
               /* Stop keydown from scrolling window */
