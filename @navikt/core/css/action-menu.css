@@ -106,11 +106,11 @@
   flex-shrink: 0;
 }
 
-.navds-action-menu__item:where(.navds-action-menu__item--has-icon) {
+.navds-action-menu__item--has-icon {
   --__ac-action-menu-item-pl: var(--a-spacing-6);
 }
 
-.navds-action-menu__item:where(.navds-action-menu__sub-trigger) {
+.navds-action-menu__sub-trigger {
   --__ac-action-menu-item-pr: var(--a-spacing-05);
 }
 
