@@ -16,6 +16,10 @@ export const fetchIcons = async () => {
       throw e.message;
     });
 
+  if (data?.err) {
+    throw new Error(data.err);
+  }
+
   if (!data?.meta?.components || data?.meta?.components.length === 0) {
     throw new Error("Fant ingen publiserte ikoner");
   }
