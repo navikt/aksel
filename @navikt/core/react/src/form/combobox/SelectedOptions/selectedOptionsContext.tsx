@@ -108,9 +108,10 @@ const SelectedOptionsProvider = ({
     );
   }, [maxSelected, selectedOptions, isMultiSelect]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
     setHideCaret(isLimitReached);
-  }, [isLimitReached, setHideCaret]);
+  }, [isLimitReached, selectedOptions, setHideCaret]);
 
   const toggleOption = useCallback(
     (
