@@ -286,14 +286,7 @@ interface ActionMenuTriggerProps
 
 const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
   (
-    {
-      children,
-      onPointerDown,
-      onKeyDown,
-      style,
-      onClick,
-      ...rest
-    }: ActionMenuTriggerProps,
+    { children, onKeyDown, style, onClick, ...rest }: ActionMenuTriggerProps,
     ref,
   ) => {
     const context = useActionMenuContext();
@@ -312,45 +305,7 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
           ref={mergedRefs}
           {...rest}
           style={{ ...style, pointerEvents: context.open ? "auto" : undefined }}
-          onPointerDown={composeEventHandlers(onPointerDown, (event) => {
-            const disabled = event.currentTarget.disabled;
-            /**
-             * Only call handler with left button (onPointerDown gets triggered by all mouse buttons),
-             * but not when the control key is pressed (avoiding MacOS right click)
-             */
-            if (!disabled && event.button === 0 && event.ctrlKey === false) {
-              context.onOpenToggle();
-              /**
-               * Prevent trigger focusing when opening, allowing the content to be given focus without competition
-               */
-              if (!context.open) {
-                event.preventDefault();
-
-                /**
-                 * Close the menu if pointerUp happens outside of the menu or the trigger
-                 */
-                const pointerUpCallback = (e: PointerEvent) => {
-                  const triggerRef = context.triggerRef?.current;
-                  const closestContent = (e.target as Element)?.closest(
-                    "[data-aksel-menu-content]",
-                  );
-                  const isInsideSafezone =
-                    closestContent?.contains(e.target as Node) ||
-                    triggerRef?.contains(e.target as Node) ||
-                    e.target === triggerRef ||
-                    e.target === closestContent;
-
-                  if (!isInsideSafezone) {
-                    context.onOpenChange(false);
-                  }
-                };
-                document.addEventListener("pointerup", pointerUpCallback, {
-                  once: true,
-                });
-              }
-            }
-          })}
-          onClick={composeEventHandlers(onClick, () => context.onOpenToggle())}
+          onClick={composeEventHandlers(onClick, context.onOpenToggle)}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
             if (event.key === "ArrowDown") {
               context.onOpenChange(true);
