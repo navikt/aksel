@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileObject, UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
+import { FileObject, FileUpload, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -7,14 +7,14 @@ const Example = () => {
 
   return (
     <VStack gap="6">
-      <UNSAFE_FileUpload.Dropzone
+      <FileUpload.Dropzone
         label="Last opp fødselsattest"
         fileLimit={{ max: 1, current: files.length }}
         multiple={false}
         onSelect={setFiles}
       />
       {files.map((file) => (
-        <UNSAFE_FileUpload.Item
+        <FileUpload.Item
           key={file.file.name}
           file={file.file}
           button={{

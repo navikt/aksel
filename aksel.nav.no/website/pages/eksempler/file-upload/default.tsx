@@ -3,8 +3,8 @@ import {
   FileObject,
   FileRejected,
   FileRejectionReason,
+  FileUpload,
   Heading,
-  UNSAFE_FileUpload,
   VStack,
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -21,7 +21,7 @@ const Example = () => {
 
   return (
     <VStack gap="6">
-      <UNSAFE_FileUpload.Dropzone
+      <FileUpload.Dropzone
         label="Last opp filer til søknaden"
         description={`Du kan laste opp Word- og PDF-filer. Maks 3 filer. Maks størrelse ${MAX_SIZE_MB} MB.`}
         accept=".doc,.docx,.pdf"
@@ -37,7 +37,7 @@ const Example = () => {
           </Heading>
           <VStack as="ul" gap="3">
             {acceptedFiles.map((file, index) => (
-              <UNSAFE_FileUpload.Item
+              <FileUpload.Item
                 as="li"
                 key={index}
                 file={file.file}
@@ -57,7 +57,7 @@ const Example = () => {
           </Heading>
           <VStack as="ul" gap="3">
             {rejectedFiles.map((rejected, index) => (
-              <UNSAFE_FileUpload.Item
+              <FileUpload.Item
                 as="li"
                 key={index}
                 file={rejected.file}

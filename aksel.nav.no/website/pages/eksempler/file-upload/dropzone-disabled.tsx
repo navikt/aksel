@@ -1,15 +1,15 @@
-import { UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
+import { FileUpload, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
   <VStack gap="12">
-    <UNSAFE_FileUpload.Dropzone
+    <FileUpload.Dropzone
       label="Last opp filer"
       onSelect={console.info}
       disabled
     />
 
-    <UNSAFE_FileUpload.Dropzone
+    <FileUpload.Dropzone
       label="Last opp filer"
       onSelect={console.info}
       fileLimit={{ max: 1, current: 1 }}

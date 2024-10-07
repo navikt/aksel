@@ -127,7 +127,7 @@ export {
 export { ErrorSummary, type ErrorSummaryProps } from "./form/error-summary";
 export { Fieldset, type FieldsetProps } from "./form/fieldset";
 export {
-  UNSAFE_FileUpload,
+  FileUpload,
   type FileAccepted,
   type FileItem,
   type FileMetadata,
