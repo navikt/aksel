@@ -916,8 +916,7 @@ const MenuSubContent = forwardRef<
           }
           event.preventDefault();
         }}
-        // The menu might close because of focusing another menu item in the parent menu. We
-        // don't want it to refocus the trigger in that case so we handle trigger focus ourselves.
+        /* Since we manually focus Subtrigger, we prevent use of auto-focus */
         onCloseAutoFocus={(event) => event.preventDefault()}
         onEscapeKeyDown={composeEventHandlers(
           props.onEscapeKeyDown,
