@@ -783,9 +783,9 @@ const MenuSub: React.FC<MenuSubProps> = ({
     <Floating>
       <MenuProvider
         open={open}
-        onOpenChange={(e) => {
-          handleOpenChange(e);
-          if (e) {
+        onOpenChange={(open) => {
+          handleOpenChange(open);
+          if (open) {
             /* Makes sure to close all adjacent submenus if they are open */
             values().forEach((descendant) => {
               if (descendant.node !== trigger) {
