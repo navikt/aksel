@@ -26,20 +26,34 @@ async function buildFigmaConfig() {
       timestamp: new Date().toLocaleString("no-NO", {
         timeZone: "Europe/Oslo",
       }),
-      globalLight: {
-        name: "Global colors light",
-        hideFromPublishing: true,
-        tokens: lightTokens.filter(isGlobalColor),
-      },
-      globalDark: {
-        name: "Global colors dark",
-        hideFromPublishing: true,
-        tokens: darkTokens.filter(isGlobalColor),
-      },
-      semanticColors: {
-        name: "Semantic colors",
-        hideFromPublishing: false,
-        tokens: lightTokens.filter(isSemanticColor),
+
+      colors: {
+        light: {
+          name: "light",
+          global: {
+            name: "Global colors light",
+            hideFromPublishing: true,
+            tokens: lightTokens.filter(isGlobalColor),
+          },
+          semantic: {
+            name: "Semantic colors",
+            hideFromPublishing: false,
+            tokens: lightTokens.filter(isSemanticColor),
+          },
+        },
+        dark: {
+          name: "dark",
+          global: {
+            name: "Global colors dark",
+            hideFromPublishing: true,
+            tokens: darkTokens.filter(isGlobalColor),
+          },
+          semantic: {
+            name: "Semantic colors",
+            hideFromPublishing: false,
+            tokens: darkTokens.filter(isSemanticColor),
+          },
+        },
       },
       radius: {
         name: "Radius",

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { globalScale } from "../create-configuration";
 import { contrastTokenConfig } from "../tokens/contrast";
-import { neutralTokenConfig } from "../tokens/neutral";
+import { globalColorDarkModeConfig } from "../tokens/global-dark";
+import { globalColorLightModeConfig } from "../tokens/global-light";
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
@@ -11,9 +11,15 @@ const configKeysWithGroup = ["value", "type", "group"];
 const configKeys = ["value", "type"];
 
 describe("Validate token configurations", () => {
-  test(`Semantic tokens`, () => {
+  test(`Semantic tokens lightmode`, () => {
     expect(
-      validateConfig(semanticTokenConfig(), configKeysWithGroup),
+      validateConfig(semanticTokenConfig("light"), configKeysWithGroup),
+    ).toBeTruthy();
+  });
+
+  test(`Semantic tokens darkmode`, () => {
+    expect(
+      validateConfig(semanticTokenConfig("dark"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
@@ -31,25 +37,13 @@ describe("Validate token configurations", () => {
 
   test(`Global lightmode scale`, () => {
     expect(
-      validateConfig(globalScale("light"), configKeysWithGroup),
+      validateConfig(globalColorLightModeConfig, configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Global darkmode scale`, () => {
     expect(
-      validateConfig(globalScale("dark"), configKeysWithGroup),
-    ).toBeTruthy();
-  });
-
-  test(`Neutral light unique tokens`, () => {
-    expect(
-      validateConfig(neutralTokenConfig("light"), configKeysWithGroup),
-    ).toBeTruthy();
-  });
-
-  test(`Neutral dark unique tokens`, () => {
-    expect(
-      validateConfig(neutralTokenConfig("dark"), configKeysWithGroup),
+      validateConfig(globalColorDarkModeConfig, configKeysWithGroup),
     ).toBeTruthy();
   });
 

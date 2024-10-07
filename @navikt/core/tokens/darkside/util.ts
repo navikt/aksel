@@ -1,5 +1,15 @@
-import { CssColor } from "@adobe/leonardo-contrast-colors";
 import _ from "lodash";
+
+type GlobalColorEntryT = {
+  value: string;
+  type: "global-color";
+  group: GlobalColorRoles;
+};
+
+export type GlobalConfigT = Record<
+  GlobalColorRoles,
+  Record<GlobalColorScale, GlobalColorEntryT> & { "000"?: GlobalColorEntryT }
+>;
 
 export const colorThemes = ["light", "dark"] as const;
 export type ColorTheme = (typeof colorThemes)[number];
@@ -48,11 +58,6 @@ export type TokenGroup =
   | GlobalColorRoles
   | SemanticTokenGroups
   | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
-
-export type GlobalColorConfig = Record<
-  GlobalColorRoles,
-  { colorKeys: CssColor[]; ratios: number[]; smooth: boolean }
->;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   value: string;

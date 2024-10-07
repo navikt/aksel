@@ -15,7 +15,7 @@ export const PrinsipperLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside prinsipper",
-      media: HouseIcon,
+      media: () => <HouseIcon aria-hidden />,
     }),
   },
 });

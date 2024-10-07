@@ -134,7 +134,8 @@
       "**/dist/**",
       "**/@navikt/codemod/**",
       "**/@navikt/aksel/**",
-      "**/examples/**"
+      "**/examples/**",
+      "plugin.js"
     ]
   },
   "repository": {
@@ -142,7 +143,7 @@
     "url": "https://github.com/navikt/aksel.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.0",
+    "@biomejs/biome": "1.9.3",
     "@changesets/cli": "2.26.2",
     "@storybook/addon-a11y": "^8.3.4",
     "@storybook/addon-essentials": "^8.3.4",

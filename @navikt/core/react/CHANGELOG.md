@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 7.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.2
+  - @navikt/aksel-icons@7.1.2
+
+## 7.1.1
+
+### Patch Changes
+
+- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.1
+  - @navikt/aksel-icons@7.1.1
+
 ## 7.1.0
 
 ### Minor Changes

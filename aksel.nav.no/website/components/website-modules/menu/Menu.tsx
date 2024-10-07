@@ -42,7 +42,8 @@ export function MenuUl({ children, id, className }: MenuListProps) {
     <ul
       className={cl(styles.menuList, className)}
       id={id}
-      role="list" // WebKit browsers remove list semantics when list-style-type is none
+      // biome-ignore lint/a11y/noRedundantRoles: WebKit browsers remove list semantics when list-style-type is none
+      role="list"
     >
       {children}
     </ul>
