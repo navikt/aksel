@@ -101,12 +101,9 @@ const SelectedOptionsProvider = ({
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
-  const isLimitReached = useMemo(() => {
-    return (
-      (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
-      (!isMultiSelect && selectedOptions.length > 0)
-    );
-  }, [maxSelected, selectedOptions, isMultiSelect]);
+  const isLimitReached =
+    (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
+    (!isMultiSelect && selectedOptions.length > 0);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
