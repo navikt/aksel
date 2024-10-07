@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "6.16.3",
+  "version": "7.1.2",
   "description": "Design-tokens for NAV designsystem",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -18,9 +18,11 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "node ./config/build.js > /dev/null && node ./config/version-tag.js",
-    "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
-    "token": "cd config && style-dictionary build",
+    "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
+    "build:darkside": "tsx ./darkside && yarn build:figma-config && yarn build:plugin",
+    "build:figma-config": "tsx ./darkside/figma",
+    "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",
+    "build:plugin": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='darkside/figma/plugin/plugin.js'",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -30,11 +32,13 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
+    "@figma/plugin-typings": "^1.100.2",
     "color": "4.2.3",
+    "esbuild": "^0.24.0",
+    "lightningcss": "^1.27.0",
     "lodash": "^4.17.21",
-    "nodemon": "^3.0.1",
-    "style-dictionary": "^3.0.2",
-    "ts-node": "^10.9.1",
+    "style-dictionary": "^4.1.1",
+    "tsx": "^4.19.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },

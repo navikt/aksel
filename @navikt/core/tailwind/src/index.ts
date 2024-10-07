@@ -18,7 +18,7 @@ const tokens = Object.entries(TokensBuild).reduce((old, [key, val]) => {
 const config = {
   theme: {
     colors: getColors(tokens),
-    screen: getBreakpoints(tokens),
+    screens: getBreakpoints(tokens),
     extend: {
       spacing: Reducer(tokens, ["spacing"]),
       zIndex: Reducer(tokens, ["z-index"]),

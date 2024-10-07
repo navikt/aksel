@@ -16,13 +16,10 @@ export function extractArgs(
     return {};
   }
 
-  const parsedArgs = JSON5.parse(`{${args}}`);
-
-  if (!parsedArgs) {
-    env !== "test" &&
-      console.warn(`Unable to parse args for example/template: ${fileName}`);
-    return {};
+  try {
+    return JSON5.parse(`{${args}}`);
+  } catch (e) {
+    console.warn(`Unable to parse args for example/template: ${fileName}`);
+    throw e;
   }
-
-  return parsedArgs;
 }

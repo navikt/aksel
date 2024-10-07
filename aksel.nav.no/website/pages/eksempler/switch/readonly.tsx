@@ -1,14 +1,14 @@
-import { Switch } from "@navikt/ds-react";
+import { Switch, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="grid gap-4">
+    <VStack gap="4">
       <Switch readOnly>Slå på notifikasjoner</Switch>
       <Switch readOnly checked>
         Slå på notifikasjoner
       </Switch>
-    </div>
+    </VStack>
   );
 };
 
@@ -22,4 +22,5 @@ export const Demo = {
 
 export const args = {
   index: 98,
+  desc: "Readonly-attributtet gjør at tilstanden ikke kan endres. Til forskjell fra 'disabled' vil brukere fortsatt kunne tabbe til feltet, og verdien vil inkluderes når skjemaet sendes inn.",
 };

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import fastglob from "fast-glob";
 import fs from "fs";
 import jsYaml from "js-yaml";

@@ -1,20 +1,13 @@
-import { createContext, useContext } from "react";
+import { useContext } from "react";
+import { LanguageProviderContext } from "../../provider/i18n/LanguageProvider";
 import { get } from "./get";
-import {
-  Component,
-  ComponentTranslation,
-  TranslationDictionary,
-} from "./i18n.types";
+import { Component, ComponentTranslation } from "./i18n.types";
 import nb from "./locales/nb";
 
 /**
  * https://regex101.com/r/LYKWi3/1
  */
 const REPLACE_REGEX = /{[^}]*}/g;
-
-export const I18nContext = createContext<
-  TranslationDictionary | TranslationDictionary[]
->(nb);
 
 /* https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3 */
 type NestedKeyOf<ObjectType extends object> = {
@@ -27,7 +20,8 @@ export function useI18n<T extends Component>(
   componentName: T,
   ...local: (ComponentTranslation<T> | undefined)[]
 ) {
-  const i18n = useContext(I18nContext);
+  const languageProviderContext = useContext(LanguageProviderContext);
+  const i18n = languageProviderContext.translations;
 
   /**
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24

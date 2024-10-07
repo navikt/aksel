@@ -17,7 +17,7 @@ export const ExampletextBlock = defineType({
   name: "exampletext_block",
   title: "Eksempel/Standard tekst",
   type: "object",
-  icon: Chat2Icon,
+  icon: () => <Chat2Icon aria-hidden />,
   fields: [
     defineField({
       title: "Tittel",

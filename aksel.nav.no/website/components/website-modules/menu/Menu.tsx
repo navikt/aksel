@@ -38,7 +38,13 @@ type MenuListProps = {
 
 export function MenuUl({ children, id, className }: MenuListProps) {
   return (
-    <ul className={cl(styles.menuList, className)} id={id}>
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+    <ul
+      className={cl(styles.menuList, className)}
+      id={id}
+      // biome-ignore lint/a11y/noRedundantRoles: WebKit browsers remove list semantics when list-style-type is none
+      role="list"
+    >
       {children}
     </ul>
   );

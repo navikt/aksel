@@ -107,6 +107,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     }, [simulated?.seconds]);
 
     return (
+      /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
       <div
         ref={ref}
         className={cl(
@@ -121,6 +122,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
             ? `Fremdrift kan ikke beregnes, antatt tid er: ${simulated?.seconds} sekunder`
             : `${Math.round(value)} av ${Math.round(valueMax)}`
         }
+        // biome-ignore lint/a11y/useAriaPropsForRole: We found that adding valueMin was not needed
         role="progressbar"
         aria-labelledby={ariaLabelledBy}
         aria-label={ariaLabel}

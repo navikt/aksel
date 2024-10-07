@@ -235,23 +235,21 @@ const Page = ({
         </a>
       )}
       {pack && (
-        <>
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            href={pack.changelog}
-            className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
-            onClick={() =>
-              amplitude.track(AmplitudeEvents.link, {
-                kilde: "intro-lenker komponenter",
-                til: "endringslogg",
-              })
-            }
-          >
-            <ChangelogIcon />
-            Endringslogg
-          </a>
-        </>
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={pack.changelog}
+          className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
+          onClick={() =>
+            amplitude.track(AmplitudeEvents.link, {
+              kilde: "intro-lenker komponenter",
+              til: "endringslogg",
+            })
+          }
+        >
+          <ChangelogIcon />
+          Endringslogg
+        </a>
       )}
     </BodyShort>
   );

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Box } from "../../../layout/box";
 import { HStack } from "../../../layout/stack";
 import { createDescendantContext } from "./useDescendant";
 
@@ -16,7 +15,10 @@ const [
   _useDescendantsContext,
   useDescendants,
   useDescendant,
-] = createDescendantContext<HTMLDivElement, { value?: string }>();
+] = createDescendantContext<
+  HTMLButtonElement | HTMLInputElement,
+  { value?: string }
+>();
 
 function Select({ children }: { children?: React.ReactNode }) {
   const descendants = useDescendants();
@@ -37,9 +39,8 @@ function Option({ value, disabled }: { value?: string; disabled?: boolean }) {
   });
 
   return (
-    <Box
+    <button
       ref={register}
-      role="button"
       tabIndex={0}
       data-value={value}
       onKeyDown={(event) => {
@@ -51,7 +52,7 @@ function Option({ value, disabled }: { value?: string; disabled?: boolean }) {
       }}
     >
       Option {index + 1}
-    </Box>
+    </button>
   );
 }
 

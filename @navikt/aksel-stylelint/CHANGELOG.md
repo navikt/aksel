@@ -1,5 +1,25 @@
 # @navikt/aksel-stylelint
 
+## 7.1.2
+
+## 7.1.1
+
+### Patch Changes
+
+- List: :boom: Removed class names "navds-list--nested" and "navds-list\_\_item-content" ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+## 7.1.0
+
+### Minor Changes
+
+- Pagination: :boom: Added some classNames to list of deprecated (removed) classes. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+## 7.0.1
+
+## 7.0.0
+
+## 6.17.0
+
 ## 6.16.3
 
 ## 6.16.2

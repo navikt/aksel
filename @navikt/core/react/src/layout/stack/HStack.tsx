@@ -26,8 +26,8 @@ export type HStackProps = PrimitiveAsChildProps & Omit<StackProps, "direction">;
  * </HStack>
  */
 export const HStack: OverridableComponent<HStackProps, HTMLDivElement> =
-  forwardRef((props, ref) => {
-    return <Stack {...props} ref={ref} direction="row" />;
+  forwardRef(({ as = "div", ...rest }, ref) => {
+    return <Stack as={as} {...rest} ref={ref} direction="row" />;
   });
 
 export default HStack;

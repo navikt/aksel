@@ -54,6 +54,7 @@ const FilteredOptions = () => {
       )}
 
       {shouldRenderFilteredOptionsList && (
+        /* biome-ignore lint/a11y/useFocusableInteractive: Interaction is not handeled by listbox itself. */
         <ul
           ref={setFilteredOptionsRef}
           role="listbox"

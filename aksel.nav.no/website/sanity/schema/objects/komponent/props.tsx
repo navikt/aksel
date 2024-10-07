@@ -5,7 +5,7 @@ export const PropsSeksjon = defineType({
   title: "Props",
   name: "props_seksjon",
   type: "object",
-  icon: BulletListIcon,
+  icon: () => <BulletListIcon aria-hidden />,
   fields: [
     defineField({
       title: "Tittel (h2)",
@@ -51,7 +51,7 @@ export const PropsSeksjon = defineType({
     prepare() {
       return {
         title: "Props",
-        media: BulletListIcon,
+        media: () => <BulletListIcon aria-hidden />,
       };
     },
   },

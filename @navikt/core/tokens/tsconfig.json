@@ -2,7 +2,11 @@
   "compilerOptions": {
     "jsx": "react",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strict": true,
+    "types": ["@figma/plugin-typings"],
+    "moduleResolution": "Bundler",
+    "module": "Preserve"
   },
-  "include": ["./stories"]
+  "include": ["./stories", "./darkside/figma"]
 }

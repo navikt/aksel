@@ -5,24 +5,11 @@ jobs:
   execute:
     runs-on: ubuntu-latest
     permissions:
-      packages: "write"
-      contents: "read"
       id-token: "write"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.x
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-
       - uses: nais/docker-build-push@v0
         id: docker-push
         with:
