@@ -1,19 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React, { useRef, useState } from "react";
-import {
-  MenuElipsisHorizontalCircleIcon,
-  PencilIcon,
-  PlusIcon,
-  PushPinIcon,
-  StarIcon,
-  TasklistStartIcon,
-  TrashIcon,
-} from "@navikt/aksel-icons";
+import { PencilIcon, StarIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { HStack, VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
-import { Table } from "../../table";
-import { Tag } from "../../tag";
 import { Tooltip } from "../../tooltip";
 import { BodyShort } from "../../typography";
 import { ActionMenu } from "./ActionMenu";
@@ -28,7 +18,7 @@ export default {
 
 type Story = StoryObj<typeof ActionMenu>;
 
-const DemoDecorator = (Story: any, { name }) => {
+const DemoDecorator: Story["decorators"] = (Story, { name }) => {
   return (
     <VStack gap="4" align="start">
       <h2>{name}</h2>
@@ -102,14 +92,13 @@ export const GroupedItems: Story = {
   decorators: [DemoDecorator],
 };
 
-export const Shortcut: Story = {
+export const ShortcutsAndIcons: Story = {
   render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
       checkbox2: false,
     });
 
-    // Step 3: Handle change
     const handleCheckboxChange = (checkboxId: string) => {
       setCheckedItems((prevState) => ({
         ...prevState,
@@ -172,81 +161,7 @@ export const Shortcut: Story = {
   decorators: [DemoDecorator],
 };
 
-export const CheckboxGroups: Story = {
-  render: (props) => {
-    const [checkedItems, setCheckedItems] = useState({
-      checkbox1: false,
-      checkbox2: true,
-      checkbox3: false,
-      checkbox4: true,
-      checkbox5: false,
-      checkbox6: true,
-    });
-
-    // Step 3: Handle change
-    const handleCheckboxChange = (checkboxId: string) => {
-      setCheckedItems((prevState) => ({
-        ...prevState,
-        [checkboxId]: !prevState[checkboxId],
-      }));
-    };
-
-    return (
-      <ActionMenu open={props.open}>
-        <ActionMenu.Trigger>
-          <button>Open action</button>
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Group label="Group 1">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox1}
-              onCheckedChange={() => handleCheckboxChange("checkbox1")}
-            >
-              Checkbox 1
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox2}
-              onCheckedChange={() => handleCheckboxChange("checkbox2")}
-            >
-              Checkbox 1
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-          <ActionMenu.Group label="Group 2">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox3}
-              onCheckedChange={() => handleCheckboxChange("checkbox3")}
-            >
-              Checkbox 3
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox4}
-              onCheckedChange={() => handleCheckboxChange("checkbox4")}
-            >
-              Checkbox 4
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-          <ActionMenu.Group label="Group 3">
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox5}
-              onCheckedChange={() => handleCheckboxChange("checkbox5")}
-            >
-              Checkbox 5
-            </ActionMenu.CheckboxItem>
-            <ActionMenu.CheckboxItem
-              checked={checkedItems.checkbox6}
-              onCheckedChange={() => handleCheckboxChange("checkbox6")}
-            >
-              Checkbox 6
-            </ActionMenu.CheckboxItem>
-          </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    );
-  },
-  decorators: [DemoDecorator],
-};
-
-export const CheckboxIndeterminateGroups: Story = {
+export const Checkboxes: Story = {
   render: (props) => {
     const [checkedItems, setCheckedItems] = useState({
       checkbox1: false,
@@ -255,7 +170,6 @@ export const CheckboxIndeterminateGroups: Story = {
       checkbox4: false,
     });
 
-    // Step 3: Handle change
     const handleCheckboxChange = (checkboxId: string) => {
       setCheckedItems((prevState) => ({
         ...prevState,
@@ -279,10 +193,21 @@ export const CheckboxIndeterminateGroups: Story = {
             }
             onCheckedChange={() =>
               Object.values(checkedItems).every(Boolean)
-                ? checkedItems
+                ? setCheckedItems((prevState) =>
+                    Object.keys(prevState).reduce(
+                      (acc, key) => {
+                        acc[key] = false;
+                        return acc;
+                      },
+                      {} as typeof checkedItems,
+                    ),
+                  )
                 : setCheckedItems((prevState) =>
                     Object.keys(prevState).reduce(
-                      (acc, key) => ({ ...acc, [key]: true }),
+                      (acc, key) => {
+                        acc[key] = true;
+                        return acc;
+                      },
                       {} as typeof checkedItems,
                     ),
                   )
@@ -330,15 +255,6 @@ export const RadioGroups: Story = {
     const [group1Value, setGroup1Value] = useState("1");
     const [group2Value, setGroup2Value] = useState("4");
 
-    // Step 3: Handle value change
-    const handleGroup1ValueChange = (value: string) => {
-      setGroup1Value(value);
-    };
-
-    const handleGroup2ValueChange = (value: string) => {
-      setGroup2Value(value);
-    };
-
     return (
       <ActionMenu open={props.open}>
         <ActionMenu.Trigger>
@@ -346,7 +262,7 @@ export const RadioGroups: Story = {
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.RadioGroup
-            onValueChange={handleGroup1ValueChange}
+            onValueChange={setGroup1Value}
             value={group1Value}
             label="Group 1"
           >
@@ -354,7 +270,7 @@ export const RadioGroups: Story = {
             <ActionMenu.RadioItem value="2">Radio 2</ActionMenu.RadioItem>
           </ActionMenu.RadioGroup>
           <ActionMenu.RadioGroup
-            onValueChange={handleGroup2ValueChange}
+            onValueChange={setGroup2Value}
             value={group2Value}
             label="Group 2"
           >
@@ -368,7 +284,7 @@ export const RadioGroups: Story = {
   decorators: [DemoDecorator],
 };
 
-export const DividerWithGroupedItems: Story = {
+export const Dividers: Story = {
   render: (props) => {
     return (
       <ActionMenu open={props.open}>
@@ -399,31 +315,17 @@ export const DividerWithGroupedItems: Story = {
               Item 6
             </ActionMenu.Item>
           </ActionMenu.Group>
-        </ActionMenu.Content>
-      </ActionMenu>
-    );
-  },
-  decorators: [DemoDecorator],
-};
-
-export const DividerWithItems: Story = {
-  render: (props) => {
-    return (
-      <ActionMenu open={props.open}>
-        <ActionMenu.Trigger>
-          <button>Open action</button>
-        </ActionMenu.Trigger>
-        <ActionMenu.Content>
-          <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
-            Item 1
+          <ActionMenu.Divider />
+          <ActionMenu.Item onSelect={() => console.log("Item 7 clicked")}>
+            Item 7
           </ActionMenu.Item>
           <ActionMenu.Divider />
-          <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
-            Item 2
+          <ActionMenu.Item onSelect={() => console.log("Item 8 clicked")}>
+            Item 8
           </ActionMenu.Item>
           <ActionMenu.Divider />
-          <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
-            Item 3
+          <ActionMenu.Item onSelect={() => console.log("Item 9 clicked")}>
+            Item 9
           </ActionMenu.Item>
         </ActionMenu.Content>
       </ActionMenu>
@@ -492,11 +394,7 @@ export const Disabled: Story = {
           <button>Open action</button>
         </ActionMenu.Trigger>
         <ActionMenu.Content>
-          <ActionMenu.Item
-            onSelect={() => console.log("Item 1 clicked")}
-            disabled
-            shortcut="T+W"
-          >
+          <ActionMenu.Item disabled shortcut="T+W">
             Item 1
           </ActionMenu.Item>
           <ActionMenu.Sub>
@@ -594,175 +492,6 @@ export const ModalTrigger: Story = {
   decorators: [DemoDecorator],
 };
 
-const data = [
-  {
-    task: "Finish the report",
-    status: "New",
-  },
-  {
-    task: "Call the client",
-    status: "In progress",
-  },
-  {
-    task: "Prepare the presentation",
-    status: "Done",
-  },
-  {
-    task: "Review the budget",
-    status: "Done",
-  },
-  {
-    task: "Update website",
-    status: "Backlog",
-  },
-] satisfies { task: string; status: Status }[];
-
-const StatusArray = ["New", "In progress", "Done", "Backlog"] as const;
-
-type Status = (typeof StatusArray)[number];
-
-const StatusTag = ({ status }: { status: Status }) => {
-  return (
-    <Tag
-      variant={
-        status === "Done"
-          ? "success"
-          : status === "New"
-            ? "alt1"
-            : status === "Backlog"
-              ? "warning"
-              : "info"
-      }
-    >
-      {status}
-    </Tag>
-  );
-};
-
-type Task = {
-  id: number;
-  task: string;
-  status: Status;
-};
-
-export const ViewDemo: Story = {
-  render: () => {
-    const [tasks, setTasks] = useState<Task[]>(
-      data.map((task, i) => ({ id: i, ...task })),
-    );
-
-    const updateTaskStatus = (taskId: number, newStatus: Status) => {
-      setTasks(
-        tasks.map((task) =>
-          task.id === taskId ? { ...task, status: newStatus } : task,
-        ),
-      );
-    };
-
-    return (
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell scope="col">Task</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Status</Table.HeaderCell>
-            <Table.HeaderCell scope="col" align="right">
-              Actions
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {tasks.map(({ task, status, id }, i) => (
-            <Table.Row key={i + task}>
-              <Table.HeaderCell scope="row">{task}</Table.HeaderCell>
-              <Table.DataCell>
-                <StatusTag status={status} />
-              </Table.DataCell>
-              <Table.DataCell align="right">
-                <ActionMenu>
-                  <ActionMenu.Trigger>
-                    <Button
-                      icon={<MenuElipsisHorizontalCircleIcon title="Meny" />}
-                      size="small"
-                      variant="tertiary-neutral"
-                    />
-                  </ActionMenu.Trigger>
-                  <ActionMenu.Content>
-                    <ActionMenu.Group label="Dashboard">
-                      <ActionMenu.Item
-                        onSelect={() => console.log("Edit")}
-                        icon={<PlusIcon />}
-                      >
-                        Add to dashboard
-                      </ActionMenu.Item>
-                      <ActionMenu.Item
-                        onSelect={() => console.log("Edit")}
-                        icon={<PushPinIcon />}
-                      >
-                        Pin task
-                      </ActionMenu.Item>
-                    </ActionMenu.Group>
-
-                    <ActionMenu.Group label="Actions">
-                      <ActionMenu.Item
-                        onSelect={() => updateTaskStatus(id, "In progress")}
-                        icon={<TasklistStartIcon />}
-                      >
-                        Start task
-                      </ActionMenu.Item>
-                      <ActionMenu.Sub>
-                        <ActionMenu.SubTrigger icon={<PencilIcon />}>
-                          Edit status
-                        </ActionMenu.SubTrigger>
-                        <ActionMenu.SubContent>
-                          {StatusArray.map((_status) => (
-                            <ActionMenu.Item
-                              key={_status}
-                              onSelect={() => updateTaskStatus(id, _status)}
-                              disabled={status === _status}
-                            >
-                              {_status}
-                            </ActionMenu.Item>
-                          ))}
-                          <ActionMenu.Sub>
-                            <ActionMenu.SubTrigger>
-                              Nested submenu demo
-                            </ActionMenu.SubTrigger>
-                            <ActionMenu.SubContent>
-                              {StatusArray.map((_status) => (
-                                <ActionMenu.Item
-                                  key={_status}
-                                  onSelect={() => updateTaskStatus(id, _status)}
-                                  disabled={status === _status}
-                                >
-                                  {_status}
-                                </ActionMenu.Item>
-                              ))}
-                            </ActionMenu.SubContent>
-                          </ActionMenu.Sub>
-                        </ActionMenu.SubContent>
-                      </ActionMenu.Sub>
-                      <ActionMenu.Divider />
-                      <ActionMenu.Item
-                        variant="danger"
-                        onSelect={() =>
-                          setTasks(tasks.filter((_task) => _task.id !== id))
-                        }
-                        icon={<TrashIcon />}
-                      >
-                        Delete
-                      </ActionMenu.Item>
-                    </ActionMenu.Group>
-                  </ActionMenu.Content>
-                </ActionMenu>
-              </Table.DataCell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    );
-  },
-};
-
 export const Links: Story = {
   render: (props) => {
     return (
@@ -803,17 +532,13 @@ export const Chromatic: Story = {
           </div>
           <div>
             <h2>Shortcut</h2>
-            {Shortcut.render?.(newArgs, context)}
+            {ShortcutsAndIcons.render?.(newArgs, context)}
           </div>
         </HStack>
         <HStack gap="12">
           <div>
-            <h2>CheckboxGroups</h2>
-            {CheckboxGroups.render?.(newArgs, context)}
-          </div>
-          <div>
-            <h2>CheckboxIndeterminateGroups</h2>
-            {CheckboxIndeterminateGroups.render?.(newArgs, context)}
+            <h2>Checkboxes</h2>
+            {Checkboxes.render?.(newArgs, context)}
           </div>
           <div>
             <h2>RadioGroups</h2>
@@ -822,12 +547,8 @@ export const Chromatic: Story = {
         </HStack>
         <HStack gap="12">
           <div>
-            <h2>DividerWithGroupedItems</h2>
-            {DividerWithGroupedItems.render?.(newArgs, context)}
-          </div>
-          <div>
-            <h2>DividerWithItems</h2>
-            {DividerWithItems.render?.(newArgs, context)}
+            <h2>Dividers</h2>
+            {Dividers.render?.(newArgs, context)}
           </div>
         </HStack>
         <div>

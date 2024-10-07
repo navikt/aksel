@@ -11,7 +11,7 @@ import { requireReactElement } from "../../util/requireReactElement";
 import { Menu } from "../floating-menu/Menu";
 
 /* -------------------------------------------------------------------------- */
-/*                                ActionMenu                                */
+/*                                 ActionMenu                                 */
 /* -------------------------------------------------------------------------- */
 type ActionMenuContextValue = {
   triggerId: string;
@@ -49,7 +49,7 @@ interface ActionMenuProps {
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
    * Acts as a trigger and anchor for the menu.
-   * Must be wrapped around a React.ReactNode, ex. a button or similar element.
+   * Must be wrapped around a button. If you use your own component, make sure to forward ref and props.
    * @example
    * ```jsx
    * <ActionMenu.Trigger>
@@ -177,7 +177,7 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
    */
   RadioGroup: typeof ActionMenuRadioGroup;
   /**
-   * A radio item in the menu. Should always be grouped with a `ActionMenu.RadioGroup`.
+   * A radio item in the menu. Should always be grouped with an `ActionMenu.RadioGroup`.
    * @example
    * ```jsx
    * <ActionMenu.RadioGroup
@@ -267,7 +267,7 @@ const ActionMenuRoot = ({
       onOpenChange={setOpen}
       onOpenToggle={() => setOpen((prevOpen) => !prevOpen)}
     >
-      <Menu open={open} onOpenChange={setOpen} modal={false}>
+      <Menu open={open} onOpenChange={setOpen} modal>
         {children}
       </Menu>
     </ActionMenuProvider>
@@ -277,7 +277,7 @@ const ActionMenuRoot = ({
 const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
-/*                             ActionMenuTrigger                            */
+/*                             ActionMenuTrigger                              */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuTriggerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -286,7 +286,7 @@ interface ActionMenuTriggerProps
 
 const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
   (
-    { children, onPointerDown, onKeyDown, ...rest }: ActionMenuTriggerProps,
+    { children, onKeyDown, style, onClick, ...rest }: ActionMenuTriggerProps,
     ref,
   ) => {
     const context = useActionMenuContext();
@@ -304,59 +304,12 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
           data-state={context.open ? "open" : "closed"}
           ref={mergedRefs}
           {...rest}
-          onPointerDown={composeEventHandlers(onPointerDown, (event) => {
-            const disabled = event.currentTarget.disabled;
-            /**
-             * Only call handler with left button (onPointerDown gets triggered by all mouse buttons),
-             * but not when the control key is pressed (avoiding MacOS right click)
-             */
-            if (!disabled && event.button === 0 && event.ctrlKey === false) {
-              context.onOpenToggle();
-              /**
-               * Prevent trigger focusing when opening, allowing the content to be given focus without competition
-               */
-              if (!context.open) {
-                event.preventDefault();
-
-                /**
-                 * Allows user to open with pointerDown, while preserving the
-                 * pointerup event to close the menu if user wants to cancel action by moving pointer outside menu
-                 */
-                const pointerUpCallback = (e: PointerEvent) => {
-                  const triggerRef = context.triggerRef?.current;
-                  const closestContent = (e.target as Element)?.closest(
-                    "[data-aksel-menu-content]",
-                  );
-                  const isInsideSafezone =
-                    closestContent?.contains(e.target as Node) ||
-                    triggerRef?.contains(e.target as Node) ||
-                    e.target === triggerRef ||
-                    e.target === closestContent;
-
-                  if (!isInsideSafezone) {
-                    context.onOpenChange(false);
-                  }
-                };
-                document.addEventListener("pointerup", pointerUpCallback, {
-                  once: true,
-                });
-              }
-            }
-          })}
+          style={{ ...style, pointerEvents: context.open ? "auto" : undefined }}
+          onClick={composeEventHandlers(onClick, context.onOpenToggle)}
           onKeyDown={composeEventHandlers(onKeyDown, (event) => {
-            if (event.currentTarget.disabled) {
-              return;
-            }
-            if (["Enter", " "].includes(event.key)) {
-              context.onOpenToggle();
-            }
             if (event.key === "ArrowDown") {
               context.onOpenChange(true);
-            }
-            /**
-             * Stop keydown from scrolling window
-             */
-            if (["Enter", " ", "ArrowDown"].includes(event.key)) {
+              /* Stop keydown from scrolling window */
               event.preventDefault();
             }
           })}
@@ -369,10 +322,10 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                             ActionMenuContent                            */
+/*                             ActionMenuContent                              */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id">,
     Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
   children?: React.ReactNode;
 }
@@ -389,7 +342,6 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
     ref,
   ) => {
     const context = useActionMenuContext();
-    const hasInteractedOutsideRef = useRef(false);
 
     return (
       <Menu.Portal rootElement={rootElement} asChild>
@@ -402,46 +354,17 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
           align="start"
           sideOffset={4}
           collisionPadding={10}
-          onCloseAutoFocus={(event) => {
-            /**
-             * In the case of a click outside the menu or trigger,
-             * we make sure to not override any native focus behavior
-             */
-            if (!hasInteractedOutsideRef.current) {
-              context.triggerRef.current?.focus();
-            }
-            hasInteractedOutsideRef.current = false;
-            event.preventDefault();
-          }}
-          onInteractOutside={(event) => {
-            /**
-             * We assume that all clicks outside the menu are intentionally made to close it,
-             * and that we should still focus the trigger when the menu closes. This is to ensure
-             * that the user can easily reopen the menu with keyboard navigation.
-             * The exception is when the user right-clicks, as we can assume the user wants complete control.
-             */
-            const originalEvent = event.detail.originalEvent as PointerEvent;
-            const ctrlLeftClick =
-              originalEvent.button === 0 && originalEvent.ctrlKey === true;
-            const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-            if (isRightClick) {
-              hasInteractedOutsideRef.current = true;
-            }
+          onCloseAutoFocus={() => {
+            context.triggerRef.current?.focus();
           }}
           safeZone={{ anchor: context.triggerRef.current }}
           style={{
             ...style,
             ...{
-              "--ac-action-menu-content-transform-origin":
+              "--__ac-action-menu-content-transform-origin":
                 "var(--ac-floating-transform-origin)",
-              "--ac-action-menu-content-available-width":
-                "var(--ac-floating-available-width)",
-              "--ac-action-menu-content-available-height":
+              "--__ac-action-menu-content-available-height":
                 "var(--ac-floating-available-height)",
-              "--ac-action-menu-trigger-width":
-                "var(--ac-floating-anchor-width)",
-              "--ac-action-menu-trigger-height":
-                "var(--ac-floating-anchor-height)",
             },
           }}
         >
@@ -453,7 +376,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuLabel                             */
+/*                              ActionMenuLabel                               */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -474,7 +397,7 @@ const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
 );
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuGroup                             */
+/*                              ActionMenuGroup                               */
 /* -------------------------------------------------------------------------- */
 type ActionMenuGroupElement = React.ElementRef<typeof Menu.Group>;
 type MenuGroupProps = React.ComponentPropsWithoutRef<typeof Menu.Group>;
@@ -528,7 +451,9 @@ const ActionMenuGroup = forwardRef<
   );
 });
 
-/* --------------------------- Utility-components --------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                             Utility components                             */
+/* -------------------------------------------------------------------------- */
 type MarkerProps = {
   children: React.ReactNode;
   className?: string;
@@ -537,7 +462,7 @@ type MarkerProps = {
 
 const Marker = ({ children, className, placement }: MarkerProps) => {
   return (
-    <span
+    <div
       aria-hidden
       className={cl(
         className,
@@ -546,7 +471,7 @@ const Marker = ({ children, className, placement }: MarkerProps) => {
       )}
     >
       {children}
-    </span>
+    </div>
   );
 };
 
@@ -556,15 +481,10 @@ type ShortcutProps = {
 
 const Shortcut = ({ children }: ShortcutProps) => {
   /**
-   * Assumes the user will input either
-   * - a single character
-   * - characters separated by "space"
-   * - characters separated by "+"
+   * Assumes the user will input either a single keyboard key
+   * or keys separated by "+"
    */
-  const parsed = children
-    .replace(/\+/g, " ")
-    .split(" ")
-    .filter((str) => str !== "");
+  const parsed = children.split("+").filter((str) => str !== "");
 
   return (
     <Marker placement="right">
@@ -578,24 +498,23 @@ const Shortcut = ({ children }: ShortcutProps) => {
 };
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuItem                              */
+/*                               ActionMenuItem                               */
 /* -------------------------------------------------------------------------- */
 type ActionMenuItemElement = React.ElementRef<typeof Menu.Item>;
 type MenuItemProps = React.ComponentPropsWithoutRef<typeof Menu.Item>;
 
 interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   /**
-   * Shows connected shortcut-keys to the items
+   * Shows connected shortcut-keys for the item.
    * This is only a visual representation, you will have to implement the actual shortcut yourself.
    */
   shortcut?: string;
   /**
-   * Adds a danger variant to the item,
-   * usefull for destructive actions like "delete"
+   * Styles the item as a destructive action.
    */
   variant?: "danger";
   /**
-   *
+   * Adds an icon on the left side. The icon will always have aria-hidden.
    */
   icon?: React.ReactNode;
 }
@@ -621,7 +540,7 @@ const ActionMenuItem: OverridableComponent<
         {...rest}
         className={cl("navds-action-menu__item", className, {
           "navds-action-menu__item--danger": variant === "danger",
-          "navds-action-menu--marker": icon,
+          "navds-action-menu__item--has-icon": icon,
         })}
         aria-keyshortcuts={shortcut ?? undefined}
         asChild
@@ -647,11 +566,12 @@ type ActionMenuCheckboxItemElement = React.ElementRef<typeof Menu.CheckboxItem>;
 type MenuCheckboxItemProps = React.ComponentPropsWithoutRef<
   typeof Menu.CheckboxItem
 >;
+
 interface ActionMenuCheckboxItemProps
   extends Omit<MenuCheckboxItemProps, "asChild"> {
   children: React.ReactNode;
   /**
-   * Shows connected shortcut-keys to the items
+   * Shows connected shortcut-keys for the item.
    * This is only a visual representation, you will have to implement the actual shortcut yourself.
    */
   shortcut?: string;
@@ -683,10 +603,10 @@ const ActionMenuCheckboxItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__checkbox",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
-        aria-keyshortcuts={shortcut ?? undefined}
+        aria-keyshortcuts={shortcut}
       >
         {children}
         <Marker placement="left">
@@ -697,69 +617,54 @@ const ActionMenuCheckboxItem = forwardRef<
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
+              className="navds-action-menu__indicator-icon"
               aria-hidden
             >
-              <rect
-                width="24"
-                height="24"
-                rx="4"
-                fill="var(--a-border-default)"
-              />
-              <rect
-                x="1"
-                y="1"
-                width="22"
-                height="22"
-                rx="3"
-                fill="var(--a-surface-default)"
-                strokeWidth="2"
-              />
-            </svg>
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--indeterminate"
-              aria-hidden
-            >
-              <rect
-                width="24"
-                height="24"
-                rx="4"
-                fill="var(--a-surface-action-selected)"
-              />
-              <rect
-                x="6"
-                y="10"
-                width="12"
-                height="4"
-                rx="1"
-                fill="var(--a-surface-default)"
-              />
-            </svg>
-
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
-              aria-hidden
-            >
-              <rect
-                width="24"
-                height="24"
-                rx="4"
-                fill="var(--a-surface-action-selected)"
-              />
-              <path
-                d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
-                fill="var(--a-surface-default)"
-              />
+              <g className="navds-action-menu__indicator-icon--unchecked">
+                <rect
+                  width="24"
+                  height="24"
+                  rx="4"
+                  fill="var(--a-border-default)"
+                />
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="3"
+                  fill="var(--a-surface-default)"
+                  strokeWidth="2"
+                />
+              </g>
+              <g className="navds-action-menu__indicator-icon--indeterminate">
+                <rect
+                  width="24"
+                  height="24"
+                  rx="4"
+                  fill="var(--a-surface-action-selected)"
+                />
+                <rect
+                  x="6"
+                  y="10"
+                  width="12"
+                  height="4"
+                  rx="1"
+                  fill="var(--a-surface-default)"
+                />
+              </g>
+              <g className="navds-action-menu__indicator-icon--checked">
+                <rect
+                  width="24"
+                  height="24"
+                  rx="4"
+                  fill="var(--a-surface-action-selected)"
+                />
+                <path
+                  d="M10.0352 13.4148L16.4752 7.40467C17.0792 6.83965 18.029 6.86933 18.5955 7.47478C19.162 8.08027 19.1296 9.03007 18.5245 9.59621L11.0211 16.5993C10.741 16.859 10.3756 17 10.0002 17C9.60651 17 9.22717 16.8462 8.93914 16.5611L6.43914 14.0611C5.85362 13.4756 5.85362 12.5254 6.43914 11.9399C7.02467 11.3544 7.97483 11.3544 8.56036 11.9399L10.0352 13.4148Z"
+                  fill="var(--a-surface-default)"
+                />
+              </g>
             </svg>
           </Menu.ItemIndicator>
         </Marker>
@@ -771,7 +676,7 @@ const ActionMenuCheckboxItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuRadioGroup                           */
+/*                            ActionMenuRadioGroup                            */
 /* -------------------------------------------------------------------------- */
 type ActionMenuRadioGroupElement = React.ElementRef<typeof Menu.RadioGroup>;
 type MenuRadioGroupProps = React.ComponentPropsWithoutRef<
@@ -785,7 +690,7 @@ type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
 const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
   ActionMenuRadioGroupProps
->(({ children, className, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
+>(({ children, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
   const labelId = useId();
 
   return (
@@ -793,7 +698,6 @@ const ActionMenuRadioGroup = forwardRef<
       ref={ref}
       {...rest}
       asChild={false}
-      className={cl("navds-action-menu__radio-group", className)}
       aria-labelledby={label ? labelId : undefined}
     >
       {label && (
@@ -835,7 +739,7 @@ const ActionMenuRadioItem = forwardRef<
         })}
         asChild={false}
         className={cl(
-          "navds-action-menu__item navds-action-menu__radio",
+          "navds-action-menu__item navds-action-menu__item--has-icon",
           className,
         )}
       >
@@ -848,55 +752,49 @@ const ActionMenuRadioItem = forwardRef<
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--unchecked"
+              className="navds-action-menu__indicator-icon"
               aria-hidden
             >
-              <rect
-                width="24"
-                height="24"
-                rx="12"
-                fill="var(--a-border-default)"
-              />
-              <rect
-                x="1"
-                y="1"
-                width="22"
-                height="22"
-                rx="11"
-                strokeWidth="2"
-                fill="var(--a-surface-default)"
-              />
-            </svg>
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="navds-action-menu__indicator-icon navds-action-menu__indicator-icon--checked"
-              aria-hidden
-            >
-              <rect
-                x="1"
-                y="1"
-                width="22"
-                height="22"
-                rx="11"
-                fill="var(--a-surface-default)"
-              />
-              <rect
-                x="1"
-                y="1"
-                width="22"
-                height="22"
-                rx="11"
-                stroke="var(--a-surface-action-selected)"
-                strokeWidth="2"
-              />
-              <path
-                d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-                fill="var(--a-surface-action-selected)"
-              />
+              <g className="navds-action-menu__indicator-icon--unchecked">
+                <rect
+                  width="24"
+                  height="24"
+                  rx="12"
+                  fill="var(--a-border-default)"
+                />
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="11"
+                  strokeWidth="2"
+                  fill="var(--a-surface-default)"
+                />
+              </g>
+              <g className="navds-action-menu__indicator-icon--checked">
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="11"
+                  fill="var(--a-surface-default)"
+                />
+                <rect
+                  x="1"
+                  y="1"
+                  width="22"
+                  height="22"
+                  rx="11"
+                  stroke="var(--a-surface-action-selected)"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+                  fill="var(--a-surface-action-selected)"
+                />
+              </g>
             </svg>
           </Menu.ItemIndicator>
         </Marker>
@@ -906,7 +804,7 @@ const ActionMenuRadioItem = forwardRef<
 );
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuDivider                            */
+/*                             ActionMenuDivider                              */
 /* -------------------------------------------------------------------------- */
 type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
 type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
@@ -927,7 +825,7 @@ const ActionMenuDivider = forwardRef<
 });
 
 /* -------------------------------------------------------------------------- */
-/*                              ActionMenuSub                               */
+/*                               ActionMenuSub                                */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuSubProps {
   children?: React.ReactNode;
@@ -985,7 +883,7 @@ const ActionMenuSubTrigger = forwardRef<
       className={cl(
         "navds-action-menu__item navds-action-menu__sub-trigger",
         className,
-        { "navds-action-menu--marker": icon },
+        { "navds-action-menu__item--has-icon": icon },
       )}
     >
       {children}
@@ -997,14 +895,12 @@ const ActionMenuSubTrigger = forwardRef<
       <Marker placement="right" className="navds-action-menu__marker-icon">
         <ChevronRightIcon aria-hidden />
       </Marker>
-      {/* <div className="navds-action-menu__sub-trigger-icon">
-      </div> */}
     </Menu.SubTrigger>
   );
 });
 
 /* -------------------------------------------------------------------------- */
-/*                           ActionMenuSubContent                           */
+/*                            ActionMenuSubContent                            */
 /* -------------------------------------------------------------------------- */
 type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 
@@ -1081,24 +977,24 @@ export {
   ActionMenu,
   ActionMenuCheckboxItem,
   ActionMenuContent,
+  ActionMenuDivider,
   ActionMenuGroup,
   ActionMenuItem,
   ActionMenuLabel,
   ActionMenuRadioGroup,
   ActionMenuRadioItem,
-  ActionMenuDivider,
   ActionMenuSub,
   ActionMenuSubContent,
   ActionMenuSubTrigger,
   ActionMenuTrigger,
   type ActionMenuCheckboxItemProps,
   type ActionMenuContentProps,
+  type ActionMenuDividerProps,
   type ActionMenuGroupProps,
   type ActionMenuLabelProps,
   type ActionMenuProps,
   type ActionMenuRadioGroupProps,
   type ActionMenuRadioItemProps,
-  type ActionMenuDividerProps,
   type ActionMenuSubContentProps,
   type ActionMenuSubProps,
   type ActionMenuSubTriggerProps,

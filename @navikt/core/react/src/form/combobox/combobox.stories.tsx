@@ -7,7 +7,7 @@ import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { BodyLong } from "../../typography";
 import { TextField } from "../textfield";
-import { UNSAFE_Combobox } from "./index";
+import { ComboboxProps, UNSAFE_Combobox } from "./index";
 
 export default {
   title: "ds-react/Combobox",
@@ -38,14 +38,16 @@ const options = [
   "grapefruit",
 ];
 
-export const Default: StoryFunction = (props) => (
+export const Default: StoryFn<ComboboxProps & { maxSelected?: number }> = ({
+  maxSelected,
+  ...rest
+}) => (
   <UNSAFE_Combobox
-    {...props}
-    maxSelected={{ limit: Number(props.maxSelected) }}
+    {...rest}
+    maxSelected={maxSelected && { limit: maxSelected }}
     id="combobox"
   />
 );
-
 Default.args = {
   options,
   label: "Hva er din favorittfrukt?",
@@ -63,6 +65,9 @@ Default.argTypes = {
     control: { type: "text" },
   },
   disabled: {
+    control: { type: "boolean" },
+  },
+  readOnly: {
     control: { type: "boolean" },
   },
   isListOpen: {
@@ -482,12 +487,50 @@ export const InModal: StoryFn = () => {
 };
 
 export const Disabled: StoryFn = () => {
+  const selectedOptionsMultiple = ["napoleonskake", "donut"];
+  const selectedOptionsSingle = ["pushups"];
   return (
-    <UNSAFE_Combobox
-      options={options}
-      label="Hva er dine favorittfrukter?"
-      disabled
-    />
+    <VStack gap="2">
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
+        selectedOptions={selectedOptionsMultiple}
+        isMultiSelect
+        disabled
+      />
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er din favoritthobby?"
+        description="Her snakker vi ting du bruker minst én time på hver dag."
+        selectedOptions={selectedOptionsSingle}
+        disabled
+      />
+    </VStack>
+  );
+};
+
+export const Readonly: StoryFn = () => {
+  const selectedOptionsMultiple = ["napoleonskake", "donut"];
+  const selectedOptionsSingle = ["pushups"];
+  return (
+    <VStack gap="2">
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er dine favorittfrukter?"
+        description="Bare de fruktene som du spiser minst 5 av om dagen teller vi som en favorittfrukt."
+        selectedOptions={selectedOptionsMultiple}
+        isMultiSelect
+        readOnly
+      />
+      <UNSAFE_Combobox
+        options={options}
+        label="Hva er din favoritthobby?"
+        description="Her snakker vi ting du bruker minst én time på hver dag."
+        selectedOptions={selectedOptionsSingle}
+        readOnly
+      />
+    </VStack>
   );
 };
 
@@ -523,6 +566,8 @@ export const Chromatic: StoryFn = () => {
       <WithError />
       <H2>Disabled</H2>
       <Disabled />
+      <H2>Readonly</H2>
+      <Readonly />
     </VStack>
   );
 };

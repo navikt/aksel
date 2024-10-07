@@ -1,5 +1,79 @@
 # @navikt/ds-react
 
+## 7.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.2
+  - @navikt/aksel-icons@7.1.2
+
+## 7.1.1
+
+### Patch Changes
+
+- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.1
+  - @navikt/aksel-icons@7.1.1
+
+## 7.1.0
+
+### Minor Changes
+
+- Pagination: :lipstick: Updated font-weight to 600 and marked 'page'-prop on 'Item' as deprecated. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+### Patch Changes
+
+- Combobox: :label: Better typing for maxSelected prop ([#3169](https://github.com/navikt/aksel/pull/3169))
+
+- ErrorSummary: Remove aria-attributes. ([#3171](https://github.com/navikt/aksel/pull/3171))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.0
+  - @navikt/aksel-icons@7.1.0
+
+## 7.0.1
+
+### Patch Changes
+
+- Combobox: Fix issue with whitespace in the ID of options with multiple spaces ([#3162](https://github.com/navikt/aksel/pull/3162))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.0.1
+  - @navikt/aksel-icons@7.0.1
+
+## 7.0.0
+
+### Major Changes
+
+- ErrorSummary: Added fallback text for `heading`. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+- Tooltip: :boom: Updated labeling of items inside Tooltip. [See migration guide for how to update](https://aksel.nav.no/grunnleggende/kode/migrering#3b5cf05fd100). ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+### Patch Changes
+
+- ErrorSummary: Focus heading instead of container for improved experience with screen reader. ([#3139](https://github.com/navikt/aksel/pull/3139))
+
+- Updated dependencies [[`1c11a6a3b`](https://github.com/navikt/aksel/commit/1c11a6a3b95fe6d0f5015d3b073e05fe5912071b)]:
+  - @navikt/aksel-icons@7.0.0
+  - @navikt/ds-tokens@7.0.0
+
+## 6.17.0
+
+### Minor Changes
+
+- Combobox: Add support for `onBlur`, and omit props that have no effect. ([#3125](https://github.com/navikt/aksel/pull/3125))
+
+### Patch Changes
+
+- Updated dependencies [[`1b2dc8896`](https://github.com/navikt/aksel/commit/1b2dc88968ca99d8b24f94ca51843063472dfa95)]:
+  - @navikt/aksel-icons@6.17.0
+  - @navikt/ds-tokens@6.17.0
+
 ## 6.16.3
 
 ### Patch Changes

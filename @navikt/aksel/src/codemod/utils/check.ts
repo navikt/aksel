@@ -1,6 +1,7 @@
 import { applyTransform } from "jscodeshift/dist/testUtils";
 import fs from "node:fs";
 import path from "node:path";
+// eslint-disable-next-line import/default
 import prettier from "prettier";
 import { describe, expect, test } from "vitest";
 

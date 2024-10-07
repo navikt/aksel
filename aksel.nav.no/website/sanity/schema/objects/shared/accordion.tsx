@@ -8,7 +8,7 @@ export const Accordion = defineType({
   description:
     "Accordion brukes hvis man har flere seksjoner man ønsker å skjule. Bruke ExpansionCard om du bare skal vise en seksjon",
   type: "object",
-  icon: Density3Icon,
+  icon: () => <Density3Icon aria-hidden />,
   fields: [
     defineField({
       title: "Accordion-liste",
@@ -69,7 +69,11 @@ export const Accordion = defineType({
       list: "list",
     },
     prepare({ ...props }) {
-      return { title: "Accordion", media: Density3Icon, list: props?.list };
+      return {
+        title: "Accordion",
+        media: () => <Density3Icon aria-hidden />,
+        list: props?.list,
+      };
     },
   },
 });

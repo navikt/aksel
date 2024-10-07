@@ -16,17 +16,6 @@ export type ComboboxOption = {
   value: string;
 };
 
-export type MaxSelected = {
-  /**
-   * The limit for maximum selected options
-   */
-  limit: number;
-  /**
-   * Override the message to display when the limit for maximum selected options has been reached
-   */
-  message?: string;
-};
-
 export interface ComboboxProps
   extends FormFieldProps,
     Omit<
@@ -135,7 +124,16 @@ export interface ComboboxProps
   /**
    * Options for the maximum number of selected options.
    */
-  maxSelected?: MaxSelected;
+  maxSelected?: {
+    /**
+     * The limit for maximum selected options
+     */
+    limit: number;
+    /**
+     * Override the message to display when the limit for maximum selected options has been reached
+     */
+    message?: string;
+  };
   /**
    * Set to `true` to enable inline autocomplete.
    *

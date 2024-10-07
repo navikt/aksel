@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100%;
+  font-family: "Source Sans 3", system-ui;
+  font-size: 18px;
+  color: var(--a-text-default);
+}
+
+:where(:root) *:focus {
+  outline: 4px solid var(--a-bg-accent-strong-hover);
+  z-index: 200;
+}
+
+*:focus {
+  outline-offset: 4px;
+}

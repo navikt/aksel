@@ -19,7 +19,7 @@ export const BloggLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside produktbloggen",
-      media: HouseIcon,
+      media: () => <HouseIcon aria-hidden />,
     }),
   },
 });

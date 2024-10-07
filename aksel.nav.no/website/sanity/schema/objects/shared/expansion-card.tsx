@@ -16,7 +16,7 @@ export const ExpansionCard = defineType({
   description:
     "ExpansionCard brukes hvis man har en seksjon man ønsker å skjule. Bruke Accordion om du trenger flere seksjoner etter hverandre",
   type: "object",
-  icon: ChevronDownIcon,
+  icon: () => <ChevronDownIcon aria-hidden />,
   fields: [
     defineField({
       title: "Heading",
@@ -65,7 +65,7 @@ export const ExpansionCard = defineType({
       return {
         title: selection?.heading,
         subtitle: `ExpansionCard`,
-        media: ChevronDownIcon,
+        media: () => <ChevronDownIcon aria-hidden />,
       };
     },
   },

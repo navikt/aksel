@@ -12,7 +12,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { showBreakpoints: true });
 
 /* Storybook story */
 export const Demo = {

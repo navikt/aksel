@@ -25,6 +25,13 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
             className="navds-modal__button"
             size="small"
             variant="tertiary-neutral"
+            onKeyDown={(event) => {
+              /* Prevents autofocus used in combination with holding down keys from closing modal */
+              if (!["Enter", " "].includes(event.key)) {
+                return;
+              }
+              event.repeat && event.preventDefault();
+            }}
             onClick={context.closeHandler}
             icon={<XMarkIcon title="Lukk" />}
           />

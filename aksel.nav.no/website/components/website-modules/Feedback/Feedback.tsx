@@ -155,23 +155,22 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
       >
         Send inn
       </Button>
-      <>
-        {state === "error" && (
-          <Alert variant="error" className="mt-4" role="alert">
-            Noe gikk galt. Hvis feilen oppstår flere ganger eller du har lyst
-            til å sende tilbakemeldingen direkte finner du oss under{" "}
-            <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
-              #aksel-designsystemet
-            </Link>{" "}
-            på slack.
-            <BodyShort
-              textColor="subtle"
-              size="small"
-              className="mt-3"
-            >{`Feil-id: ${APIError}`}</BodyShort>
-          </Alert>
-        )}
-      </>
+
+      {state === "error" && (
+        <Alert variant="error" className="mt-4" role="alert">
+          Noe gikk galt. Hvis feilen oppstår flere ganger eller du har lyst til
+          å sende tilbakemeldingen direkte finner du oss under{" "}
+          <Link inlineText href="https://nav-it.slack.com/archives/C7NE7A8UF">
+            #aksel-designsystemet
+          </Link>{" "}
+          på slack.
+          <BodyShort
+            textColor="subtle"
+            size="small"
+            className="mt-3"
+          >{`Feil-id: ${APIError}`}</BodyShort>
+        </Alert>
+      )}
     </form>
   );
 };
