@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-FileUpload: :boom: Remove UNSAFE prefix
+FileUpload: :boom: Remove UNSAFE-prefix
