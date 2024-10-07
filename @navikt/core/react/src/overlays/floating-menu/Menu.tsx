@@ -499,17 +499,16 @@ const MenuItemInternal = forwardRef<
     }: MenuItemInternalProps,
     forwardedRef,
   ) => {
-    const menuContext = useMenuContext();
+    const context = useMenuContext();
     const { register } = useMenuDescendant({
       disabled,
       closeMenu: () => {
         rest["data-submenu-trigger"] &&
-          menuContext.open &&
-          menuContext.onOpenChange(false);
+          context.open &&
+          context.onOpenChange(false);
       },
     });
 
-    const context = useMenuContext();
     const ref = useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(forwardedRef, ref, register);
 
