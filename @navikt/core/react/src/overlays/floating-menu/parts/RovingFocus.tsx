@@ -7,12 +7,7 @@ import { DescendantsManager } from "../../../util/hooks/descendants/descendant";
 interface RovingFocusProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "tabIndex"> {
   asChild?: boolean;
-  descendants: DescendantsManager<
-    HTMLDivElement,
-    {
-      closeMenu: () => void;
-    }
-  >;
+  descendants: DescendantsManager<HTMLDivElement, any>;
   onEntryFocus?: (event: Event) => void;
 }
 
@@ -30,8 +25,8 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
       onMouseDown,
       onFocus,
       ...rest
-    }: RovingFocusProps,
-    ref,
+    },
+    ref: React.Ref<HTMLDivElement>,
   ) => {
     const _ref = React.useRef<HTMLDivElement>(null);
     const composedRefs = useMergeRefs(ref, _ref);
