@@ -32,7 +32,7 @@ jobs:
           yarn boot
 
       - name: Create empty .env file (Can be removed when env-file-if-exists is implemented in node v22)
-        run: echo "" > .env
+        run: echo "" > ./aksel.nav.no/website/.env
 
       - name: Build application
         env:
