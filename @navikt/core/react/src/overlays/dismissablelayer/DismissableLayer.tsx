@@ -338,7 +338,7 @@ const DismissableLayerNode = forwardRef<HTMLDivElement, DismissableLayerProps>(
      * we want to disable pointer events on the body when the first layer is opened.
      */
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Every time the descendandts change, we want to update the body pointer events since we might have added or removed a layer.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Every time the descendants change, we want to update the body pointer events since we might have added or removed a layer.
     useEffect(() => {
       if (!node || !enabled || !disableOutsidePointerEvents) return;
 
