@@ -62,7 +62,7 @@
     "update-metadata": "node config/metadata.js",
     "write-packagejson": "echo '{\"type\": \"module\"}' > dist/react/esm/package.json",
     "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
-    "fetch-new:icons": "yarn tsx --env-file=.env config/figma/index.mjs",
+    "fetch-new:icons": "tsx --env-file=.env config/figma/index.mjs",
     "zip:icons": "node config/zip.js",
     "test": "vitest run",
     "test:watch": "vitest watch"
