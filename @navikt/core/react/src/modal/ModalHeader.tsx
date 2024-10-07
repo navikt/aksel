@@ -27,10 +27,9 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
             variant="tertiary-neutral"
             onKeyDown={(event) => {
               /* Prevents autofocus used in combination with holding down keys from closing modal */
-              if (!["Enter", " "].includes(event.key)) {
-                return;
+              if (["Enter", " "].includes(event.key) && event.repeat) {
+                event.preventDefault();
               }
-              event.repeat && event.preventDefault();
             }}
             onClick={context.closeHandler}
             icon={<XMarkIcon title="Lukk" />}
