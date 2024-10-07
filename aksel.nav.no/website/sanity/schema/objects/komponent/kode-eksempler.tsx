@@ -5,7 +5,7 @@ export const KodeEksempler = defineType({
   title: "Komponent-eksempel",
   name: "kode_eksempler",
   type: "object",
-  icon: ComponentIcon,
+  icon: () => <ComponentIcon aria-hidden />,
   fields: [
     defineField({
       title: "tittel",
@@ -38,7 +38,7 @@ export const KodeEksempler = defineType({
       return {
         title: "Komponent-demo",
         subtitle: `${variant} | ${dir}`,
-        media: ComponentIcon,
+        media: () => <ComponentIcon aria-hidden />,
       };
     },
   },

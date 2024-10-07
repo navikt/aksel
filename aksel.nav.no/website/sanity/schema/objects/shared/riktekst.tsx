@@ -228,7 +228,7 @@ export const RiktekstStandard = {
   name: "riktekst_standard",
   type: "array",
   of: Riktekst("standard"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstPrinsipp = {
@@ -236,7 +236,7 @@ export const RiktekstPrinsipp = {
   name: "riktekst_prinsipp",
   type: "array",
   of: Riktekst("prinsipp"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstGrunnleggende = {
@@ -244,7 +244,7 @@ export const RiktekstGrunnleggende = {
   name: "riktekst_grunnleggende",
   type: "array",
   of: Riktekst("grunnleggende"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstKomponent = {
@@ -252,7 +252,7 @@ export const RiktekstKomponent = {
   name: "riktekst_komponent",
   type: "array",
   of: Riktekst("komponent"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstEnkel = {
@@ -260,7 +260,7 @@ export const RiktekstEnkel = {
   name: "riktekst_enkel",
   type: "array",
   of: [block],
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstAccordion = {
@@ -268,7 +268,7 @@ export const RiktekstAccordion = {
   name: "riktekst_accordion",
   type: "array",
   of: Riktekst("accordion"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstStandalone = {
@@ -276,7 +276,7 @@ export const RiktekstStandalone = {
   name: "riktekst_standalone",
   type: "array",
   of: Riktekst("standalone"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };
 
 export const RiktekstTemplates = {
@@ -284,5 +284,5 @@ export const RiktekstTemplates = {
   name: "riktekst_templates",
   type: "array",
   of: Riktekst("templates"),
-  icon: FileTextIcon,
+  icon: () => <FileTextIcon aria-hidden />,
 };

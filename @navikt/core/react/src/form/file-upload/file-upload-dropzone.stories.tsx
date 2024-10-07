@@ -2,11 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { fireEvent, within } from "@storybook/test";
 import React from "react";
 import { ImageIcon } from "@navikt/aksel-icons";
-import {
-  type FileObject,
-  UNSAFE_FileUpload as FileUpload,
-  type FilesPartitioned,
-} from ".";
+import { type FileObject, FileUpload, type FilesPartitioned } from ".";
 
 const meta: Meta<typeof FileUpload.Dropzone> = {
   title: "ds-react/FileUpload/Dropzone",

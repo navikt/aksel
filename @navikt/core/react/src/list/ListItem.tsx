@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
 import { ListContext } from "./context";
-import { ListItemProps } from "./types";
+import type { ListItemProps } from "./types";
 
 /**
  * @see 🏷️ {@link ListItemProps}
@@ -21,7 +21,7 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
       <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
         {listType === "ul" && (
           <div
-            className={cl({
+            className={cl("navds-list__item-marker", {
               "navds-list__item-marker--icon": icon,
               "navds-list__item-marker--bullet": !icon,
             })}
@@ -30,8 +30,8 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
               icon
             ) : (
               <svg
-                width="6"
-                height="6"
+                width="0.375rem"
+                height="0.375rem"
                 viewBox="0 0 6 6"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,14 +45,14 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
           </div>
         )}
 
-        <BodyLong as="div" size={size} className="navds-list__item-content">
+        <div>
           {title && (
             <BodyLong as="p" size={size} weight="semibold">
               {title}
             </BodyLong>
           )}
           {children}
-        </BodyLong>
+        </div>
       </li>
     );
   },

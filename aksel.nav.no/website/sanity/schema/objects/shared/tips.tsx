@@ -5,7 +5,7 @@ export const Tips = defineType({
   name: "tips",
   title: "Tips",
   type: "object",
-  icon: LightBulbIcon,
+  icon: () => <LightBulbIcon aria-hidden />,
   fields: [
     defineField({
       title: "Innhold",

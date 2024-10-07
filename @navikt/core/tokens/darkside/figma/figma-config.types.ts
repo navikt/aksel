@@ -3,15 +3,13 @@ import { StyleDictionaryToken, TokenTypes } from "../util";
 export type FigmaToken = Omit<StyleDictionaryToken<TokenTypes>, "value"> & {
   name: string;
   alias?: string;
-  code: {
-    web: string;
-  };
+  code: Variable["codeSyntax"];
   value: string | number;
   figmaType: VariableResolvedDataType;
   scopes: VariableScope[];
 };
 
-type FigmaConfigEntry = {
+export type FigmaConfigEntry = {
   name: string;
   hideFromPublishing: boolean;
   tokens: FigmaToken[];
@@ -20,9 +18,13 @@ type FigmaConfigEntry = {
 export type FigmaTokenConfig = {
   version: string;
   timestamp: string;
-  globalLight: FigmaConfigEntry;
-  globalDark: FigmaConfigEntry;
-  semanticColors: FigmaConfigEntry;
+  colors: { light: ColorThemeEntry; dark: ColorThemeEntry };
   radius: FigmaConfigEntry;
   spacing: FigmaConfigEntry;
+};
+
+type ColorThemeEntry = {
+  name: "light" | "dark";
+  global: FigmaConfigEntry;
+  semantic: FigmaConfigEntry;
 };

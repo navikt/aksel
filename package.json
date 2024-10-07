@@ -134,7 +134,8 @@
       "**/dist/**",
       "**/@navikt/codemod/**",
       "**/@navikt/aksel/**",
-      "**/examples/**"
+      "**/examples/**",
+      "plugin.js"
     ]
   },
   "repository": {

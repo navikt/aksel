@@ -6,7 +6,7 @@ export const Kode = defineType({
   title: "Kode",
   name: "kode",
   type: "object",
-  icon: TerminalIcon,
+  icon: () => <TerminalIcon aria-hidden />,
   fields: [
     defineField({
       name: "code",

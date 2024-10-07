@@ -8,7 +8,7 @@ export const RelatertInnhold = defineType({
   title: "Relaterte lenker",
   description: "Liste med relevante lenker til innholdet",
   type: "object",
-  icon: LinkIcon,
+  icon: () => <LinkIcon aria-hidden />,
   fields: [
     defineField({
       title: "Tittel",

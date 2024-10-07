@@ -38,15 +38,6 @@ html:has(.globalstyles) {
   scroll-margin-block: 5rem;
 }
 
-/* Unset for Safari 11+ */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    .globalstyles img {
-      image-rendering: unset !important;
-    }
-  }
-}
-
 .skiplink {
   @apply absolute left-0 -translate-y-full bg-border-focus p-4 text-text-on-inverted no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }

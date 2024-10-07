@@ -11,7 +11,7 @@ function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
     bg: {
       ...baseline.bg,
       default: {
-        value: "#141b26",
+        value: "#0E151F",
         type: "color",
         group: "background",
       },

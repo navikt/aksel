@@ -156,5 +156,6 @@ module.exports = {
     "**/codemod/**/*.js",
     "!.storybook",
     "**/playwright-report/**",
+    "**/tokens/**/plugin.js",
   ],
 };

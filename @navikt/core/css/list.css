@@ -4,92 +4,81 @@
   margin-block: var(--a-spacing-4);
 }
 
-.navds-list--nested ul,
-.navds-list--nested ol {
-  margin-block: var(--a-spacing-2);
-}
-
 .navds-list--small ul,
 .navds-list--small ol {
   margin-block: var(--a-spacing-3);
 }
 
-.navds-list li {
-  margin-block-end: var(--a-spacing-2);
-}
-
-.navds-list:last-child > ul > li:last-child,
-.navds-list:last-child > ol > li:last-child {
-  margin-bottom: 0;
-}
-
-.navds-list ul .navds-list__item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--a-spacing-3);
-  padding-left: 0;
-}
-
-.navds-list ul .navds-list__item::marker {
-  content: none;
-}
-
-.navds-list ol .navds-list__item-marker--icon {
-  grid-column: 1 / 2;
-  display: flex;
-}
-
-.navds-list .navds-list__item-marker--bullet {
-  display: flex;
-  align-items: center;
-  height: var(--a-font-line-height-xlarge);
-  grid-column: 1 / 2;
-  color: var(--ac-list-marker-ul-color, var(--ac-list-marker-color, var(--a-icon-default)));
-}
-
-.navds-list--small .navds-list__item-marker--bullet {
-  height: var(--a-font-line-height-large);
-}
-
-.navds-list__item-marker--icon {
-  color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
-  display: flex;
-  align-items: center;
-  height: var(--a-font-line-height-xlarge);
-  padding-block-end: 1px;
-  font-size: 1.5rem;
-}
-
-.navds-list--small .navds-list__item-marker--icon {
-  height: var(--a-font-line-height-large);
-}
-
-.navds-list__item-marker--icon svg {
-  flex-shrink: 0;
-}
-
-.navds-list ul .navds-list__item-content {
-  grid-column: 2 / 3;
+.navds-list .navds-list :where(ul, ol) {
+  margin-block: var(--a-spacing-2) 0;
 }
 
 .navds-list ol {
-  padding-left: var(--a-spacing-2);
-  list-style: decimal;
+  list-style: decimal; /* This is the default value, but some frameworks have `ol,ul { list-style:none }` */
+  padding-left: 1.7rem;
 }
 
-.navds-list ol li {
-  padding-left: var(--a-spacing-1);
-  margin-left: var(--a-spacing-2);
+.navds-list ol > .navds-list__item {
+  padding-left: 0.3rem;
+}
+
+/* SAFARI HACK START */
+/* stylelint-disable selector-type-no-unknown */
+
+_::-webkit-full-page-media,
+_:future,
+:root .navds-list ol {
+  padding-left: 2.1rem;
+}
+
+_::-webkit-full-page-media,
+_:future,
+:root .navds-list ol .navds-list__item {
+  padding-left: 0;
+}
+
+/* SAFARI HACK END */
+/* stylelint-enable selector-type-no-unknown */
+
+.navds-list__item {
+  margin-block-end: var(--a-spacing-2);
+}
+
+.navds-list__item:last-child {
+  margin-block-end: 0;
+}
+
+.navds-list ul > .navds-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--a-spacing-2);
 }
 
 .navds-list ol li::marker {
   font-weight: var(--a-font-weight-bold);
-  font-size: var(--a-font-size-large);
   color: var(--ac-list-marker-ol-color, var(--ac-list-marker-color, var(--a-icon-default)));
-  line-height: var(--a-font-line-height-xlarge);
 }
 
-.navds-list--small ol li::marker {
-  font-size: var(--a-font-size-small);
-  line-height: var(--a-font-line-height-large);
+.navds-list__item-marker {
+  width: 1.5rem;
+}
+
+.navds-list ul > li > .navds-list__item-marker {
+  display: flex;
+  align-items: center;
+  height: var(--a-font-line-height-xlarge);
+}
+
+.navds-list--small ul > li > .navds-list__item-marker {
+  height: var(--a-font-line-height-large);
+}
+
+.navds-list__item-marker--bullet {
+  padding-left: 0.8rem;
+  color: var(--ac-list-marker-ul-color, var(--ac-list-marker-color, var(--a-icon-default)));
+}
+
+.navds-list__item-marker--icon {
+  font-size: 1.5rem;
+  color: var(--ac-list-marker-icon-color, var(--ac-list-marker-color, var(--a-icon-default)));
 }

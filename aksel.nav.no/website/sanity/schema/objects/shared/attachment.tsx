@@ -5,7 +5,7 @@ export const Attachment = defineType({
   title: "Vedlegg med nedlastning",
   name: "attachment",
   type: "file",
-  icon: DownloadIcon,
+  icon: () => <DownloadIcon aria-hidden />,
   fields: [
     defineField({
       title: "Tittel",
@@ -34,7 +34,7 @@ export const Attachment = defineType({
       return {
         title: selection.title,
         subtitle: "Vedlegg med nedlastning",
-        media: DownloadIcon,
+        media: () => <DownloadIcon aria-hidden />,
       };
     },
   },
