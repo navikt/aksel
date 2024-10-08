@@ -74,37 +74,36 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const animationClassesTimeoutID = useRef<Timeout>();
   const timeoutID = useRef<Timeout>();
 
+  const initialHeight = useRef<Height>(height);
+  const initialOverflow = useRef<Overflow>("visible");
+
   const duration = prefersReducedMotion ? 0 : userDuration;
 
-  let initHeight: Height = height;
-  let initOverflow: Overflow = "visible";
-
-  if (typeof initHeight === "number") {
+  if (typeof initialHeight.current === "number") {
     // Reset negative height to 0
     if (typeof height !== "string") {
-      initHeight = height < 0 ? 0 : height;
+      initialHeight.current = height < 0 ? 0 : height;
     }
-    initOverflow = "hidden";
-  } else if (isPercentage(initHeight)) {
+    initialOverflow.current = "hidden";
+  } else if (isPercentage(initialHeight.current)) {
     // If value is string "0%" make sure we convert it to number 0
-    initHeight = height === "0%" ? 0 : height;
-    initOverflow = "hidden";
+    initialHeight.current = height === "0%" ? 0 : height;
+    initialOverflow.current = "hidden";
   }
 
-  const [currentHeight, setCurrentHeight] = useState<Height>(initHeight);
-  const [overflow, setOverflow] = useState<Overflow>(initOverflow);
+  const [currentHeight, setCurrentHeight] = useState<Height>(
+    initialHeight.current,
+  );
+  const [overflow, setOverflow] = useState<Overflow>(initialOverflow.current);
   const [useTransitions, setUseTransitions] = useState<boolean>(false);
 
-  // ------------------ Did mount
   useEffect(() => {
     // Hide content if height is 0 (to prevent tabbing into it)
-    hideContent(contentElement.current, currentHeight);
-
-    // This should be explicitly run only on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    hideContent(contentElement.current, initialHeight.current);
   }, []);
 
   // ------------------ Height update
+  // biome-ignore lint/correctness/useExhaustiveDependencies: This should be explicitly run only on height change
   useEffect(() => {
     if (height !== prevHeight.current && contentElement.current) {
       showContent(contentElement.current, prevHeight.current);

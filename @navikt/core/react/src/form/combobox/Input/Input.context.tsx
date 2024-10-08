@@ -99,7 +99,7 @@ const InputProvider = ({ children, value: props }: Props) => {
       setInternalValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setInternalValue],
+    [externalOnChange, onClear],
   );
 
   const focusInput = useCallback(() => {

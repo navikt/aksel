@@ -3880,7 +3880,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.1.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.1.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3909,8 +3909,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.1.1"
-    "@navikt/ds-tokens": "npm:^7.1.1"
+    "@navikt/ds-css": "npm:^7.1.2"
+    "@navikt/ds-tokens": "npm:^7.1.2"
     concurrently: "npm:7.2.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3925,7 +3925,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:7.1.1"
+    "@navikt/ds-css": "npm:7.1.2"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3946,11 +3946,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.1.1, @navikt/ds-css@npm:^7.1.1, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.1.2, @navikt/ds-css@npm:^7.1.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.1.1"
+    "@navikt/ds-tokens": "npm:^7.1.2"
     cssnano: "npm:6.0.0"
     fast-glob: "npm:3.2.11"
     lodash: "npm:4.17.21"
@@ -3963,14 +3963,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.1.1, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.1.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.1.1"
-    "@navikt/ds-tokens": "npm:^7.1.1"
+    "@navikt/aksel-icons": "npm:^7.1.2"
+    "@navikt/ds-tokens": "npm:^7.1.2"
     "@testing-library/dom": "npm:9.3.4"
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
@@ -4000,11 +4000,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.1.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.1.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.1.1"
+    "@navikt/ds-tokens": "npm:^7.1.2"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -4014,7 +4014,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.1.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.1.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -4711,7 +4711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/icons@npm:^2.0.0, @sanity/icons@npm:^2.4.1":
+"@sanity/icons@npm:^2.0.0, @sanity/icons@npm:^2.4.1, @sanity/icons@npm:^2.7.0":
   version: 2.11.8
   resolution: "@sanity/icons@npm:2.11.8"
   peerDependencies:
@@ -4921,7 +4921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/preview-url-secret@npm:^1.6.21":
+"@sanity/preview-url-secret@npm:^1.6.21, @sanity/preview-url-secret@npm:^1.6.4":
   version: 1.6.21
   resolution: "@sanity/preview-url-secret@npm:1.6.21"
   dependencies:
@@ -5015,7 +5015,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^2.8.9":
+"@sanity/ui@npm:^2.0.10, @sanity/ui@npm:^2.8.9":
   version: 2.8.9
   resolution: "@sanity/ui@npm:2.8.9"
   dependencies:
@@ -7914,11 +7914,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.1.1"
-    "@navikt/ds-css": "npm:^7.1.1"
-    "@navikt/ds-react": "npm:^7.1.1"
-    "@navikt/ds-tailwind": "npm:^7.1.1"
-    "@navikt/ds-tokens": "npm:^7.1.1"
+    "@navikt/aksel-icons": "npm:^7.1.2"
+    "@navikt/ds-css": "npm:^7.1.2"
+    "@navikt/ds-react": "npm:^7.1.2"
+    "@navikt/ds-tailwind": "npm:^7.1.2"
+    "@navikt/ds-tokens": "npm:^7.1.2"
   languageName: unknown
   linkType: soft
 
@@ -21644,6 +21644,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sanity-plugin-iframe-pane@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "sanity-plugin-iframe-pane@npm:3.1.6"
+  dependencies:
+    "@sanity/icons": "npm:^2.7.0"
+    "@sanity/incompatible-plugin": "npm:^1.0.4"
+    "@sanity/preview-url-secret": "npm:^1.6.4"
+    "@sanity/ui": "npm:^2.0.10"
+    framer-motion: "npm:11.0.8"
+    suspend-react: "npm:0.1.3"
+    usehooks-ts: "npm:3.0.1"
+  peerDependencies:
+    react: ^18.2.0
+    sanity: ^3.20.0
+    styled-components: ^5.2 || ^6.0.0
+  checksum: 10/b12420270664d6bc6d7ec8ecb3031a02feda0e811c81928713d90ec556d9df0cc9edd2b586691412f2c4d7e2dc5042df01a1ac7525c5b9d4a00804f41390ca1f
+  languageName: node
+  linkType: hard
+
 "sanity-plugin-media@npm:^2.3.2":
   version: 2.3.2
   resolution: "sanity-plugin-media@npm:2.3.2"
@@ -24846,6 +24865,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"usehooks-ts@npm:3.0.1":
+  version: 3.0.1
+  resolution: "usehooks-ts@npm:3.0.1"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+  peerDependencies:
+    react: ^16.8.0  || ^17 || ^18
+  checksum: 10/ad80424c4e7613118a1333af63220efb06a63368d1cd0b9baa96bf40615e656ab93429a32821061e86127f8de77058423accc959d7c06aa6e15823f4765d9e5b
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -25538,6 +25568,7 @@ __metadata:
     remark-gfm: "npm:^4.0.0"
     rss: "npm:^1.2.2"
     sanity: "npm:3.59.0"
+    sanity-plugin-iframe-pane: "npm:^3.1.6"
     sanity-plugin-media: "npm:^2.3.2"
     sharp: "npm:0.32.6"
     showdown: "npm:^2.1.0"

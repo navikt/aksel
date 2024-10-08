@@ -24,6 +24,7 @@ function Select({ children }: { children?: React.ReactNode }) {
   const descendants = useDescendants();
   const count = descendants.count();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want count to be a trigger for focusing the last descendant here.
   React.useEffect(() => {
     descendants.last()?.node.focus();
   }, [descendants, count]);
