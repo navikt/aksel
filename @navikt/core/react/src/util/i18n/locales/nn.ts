@@ -1,3 +1,5 @@
+import type nb from "./nb";
+
 export default {
   FileUpload: {
     dropzone: {
@@ -22,4 +24,4 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-};
+} satisfies typeof nb;
