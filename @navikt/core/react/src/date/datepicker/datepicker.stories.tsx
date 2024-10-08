@@ -73,40 +73,35 @@ export const Default: StoryObj<DefaultStoryProps> = {
           locale={props.locale}
           disableWeekends={props.disableWeekends}
         >
-          {!props.standalone && (
-            <>
-              {props.inputfield && props.mode !== "multiple" ? (
-                <>
-                  {props.mode === "range" ? (
-                    <div style={{ display: "flex", gap: "1rem" }}>
-                      <DatePicker.Input
-                        label="Fra"
-                        size={props?.size}
-                        {...rangeCtx.fromInputProps}
-                      />
-                      <DatePicker.Input
-                        label="Til"
-                        size={props?.size}
-                        {...rangeCtx.toInputProps}
-                      />
-                    </div>
-                  ) : (
-                    <>
-                      <DatePicker.Input
-                        label="Velg dato"
-                        size={props?.size}
-                        {...singleCtx.inputProps}
-                      />
-                    </>
-                  )}
-                </>
-              ) : (
-                <Button onClick={() => setOpen((x) => !x)}>
-                  Åpne datovelger
-                </Button>
-              )}
-            </>
-          )}
+          {!props.standalone &&
+            (props.inputfield && props.mode !== "multiple" ? (
+              <>
+                {props.mode === "range" ? (
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <DatePicker.Input
+                      label="Fra"
+                      size={props?.size}
+                      {...rangeCtx.fromInputProps}
+                    />
+                    <DatePicker.Input
+                      label="Til"
+                      size={props?.size}
+                      {...rangeCtx.toInputProps}
+                    />
+                  </div>
+                ) : (
+                  <DatePicker.Input
+                    label="Velg dato"
+                    size={props?.size}
+                    {...singleCtx.inputProps}
+                  />
+                )}
+              </>
+            ) : (
+              <Button onClick={() => setOpen((x) => !x)}>
+                Åpne datovelger
+              </Button>
+            ))}
         </Comp>
       </div>
     );

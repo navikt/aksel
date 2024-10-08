@@ -11,7 +11,7 @@ const ScButton = styled.button`
   width: fit-content;
 
   &[data-variant="primary"] {
-    color: ${tokens.ContrastAccent};
+    color: ${tokens.TextAccentContrast};
     background-color: ${tokens.BgAccentStrong};
 
     &:hover {

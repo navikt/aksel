@@ -1,10 +1,6 @@
-import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import { noCdnClient } from "../sanity/interface/client.server";
-
-dotenv.config();
-dotenv.config({ path: `.env.local` });
 
 updateProps();
 

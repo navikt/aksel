@@ -1,5 +1,29 @@
 # @navikt/ds-react
 
+## 7.2.0
+
+### Minor Changes
+
+- FileUpload: :boom: Remove UNSAFE-prefix ([#3205](https://github.com/navikt/aksel/pull/3205))
+
+- List: :sparkles: New size 'large' ([#3207](https://github.com/navikt/aksel/pull/3207))
+
+### Patch Changes
+
+- Performance: :zap: Optimized memoization for rerendring in some components. ([#3197](https://github.com/navikt/aksel/pull/3197))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.2.0
+  - @navikt/aksel-icons@7.2.0
+
+## 7.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.2
+  - @navikt/aksel-icons@7.1.2
+
 ## 7.1.1
 
 ### Patch Changes

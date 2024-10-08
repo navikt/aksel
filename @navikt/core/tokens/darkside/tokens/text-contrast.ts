@@ -1,69 +1,69 @@
 import { GlobalColorRoles, StyleDictionaryToken } from "../util";
 
-export const contrastTokenConfig = (): {
-  contrast: {
-    [key in GlobalColorRoles]: StyleDictionaryToken<"color">;
+export const textContrastTokenConfig = (): {
+  text: {
+    [key in `${GlobalColorRoles}-contrast`]: StyleDictionaryToken<"color">;
   };
 } => ({
-  contrast: {
+  text: {
     /* core */
-    accent: {
+    "accent-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    neutral: {
+    "neutral-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
     /* Status */
-    danger: {
+    "danger-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    info: {
+    "info-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    success: {
+    "success-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    warning: {
+    "warning-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
     /* Brand */
-    brandOne: {
+    "brandOne-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    brandTwo: {
+    "brandTwo-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    brandThree: {
+    "brandThree-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
     /* Data */
-    dataOne: {
+    "dataOne-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
-    dataTwo: {
+    "dataTwo-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "contrast",
+      group: "text",
     },
   },
 });

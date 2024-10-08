@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.2.0
+
+## 7.1.2
+
+### Patch Changes
+
+- List: Explicitly set list-style on ol to override reset-CSS ([#3202](https://github.com/navikt/aksel/pull/3202))
+
 ## 7.1.1
 
 ### Patch Changes

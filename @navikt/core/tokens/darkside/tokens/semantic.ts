@@ -11,9 +11,14 @@ function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
     bg: {
       ...baseline.bg,
       default: {
-        value: "#141b26",
+        value: "#0E151F",
         type: "color",
         group: "background",
+        /**
+         * Allows token to be used on 'effect' properties in Figma,
+         * Bg-default is used between element and focus-marking.
+         */
+        scopes: ["EFFECT_COLOR"],
       },
       raised: {
         value: "{a.neutral.200.value}",
@@ -53,6 +58,11 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         value: "{a.neutral.000.value}",
         type: "color",
         group: "background",
+        /**
+         * Allows token to be used on 'effect' properties in Figma,
+         * Bg-default is used between element and focus-marking.
+         */
+        scopes: ["EFFECT_COLOR"],
       },
       input: {
         value: "{a.neutral.000.value}",
@@ -99,6 +109,10 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         value: "{a.accent.700.value}",
         type: "color",
         group: "border",
+        /**
+         * Allows token to be used on 'effect' properties in Figma, used for creating focus markings.
+         */
+        scopes: ["EFFECT_COLOR"],
       },
     },
   };

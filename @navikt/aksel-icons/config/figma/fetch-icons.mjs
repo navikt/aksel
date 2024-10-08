@@ -1,6 +1,7 @@
 const file_key = "wEdyFjCQSBR3U7FvrMbPXa";
 
 export const fetchIcons = async () => {
+  console.info("Fetching new icons from Figma...");
   const data = await fetch(
     `https://api.figma.com/v1/files/${file_key}/components`,
     {
@@ -14,6 +15,10 @@ export const fetchIcons = async () => {
     .catch((e) => {
       throw e.message;
     });
+
+  if (data?.err) {
+    throw new Error(data.err);
+  }
 
   if (!data?.meta?.components || data?.meta?.components.length === 0) {
     throw new Error("Fant ingen publiserte ikoner");

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "7.1.1",
+  "version": "7.2.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | NAV designsystem team",
   "keywords": [
@@ -15,7 +15,7 @@
     "tailwind.config.d.ts"
   ],
   "scripts": {
-    "build": "ts-node ./src",
+    "build": "yarn tsx ./src",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -25,11 +25,11 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.1.1",
+    "@navikt/ds-tokens": "^7.2.0",
     "color": "4.2.3",
     "lodash": "^4.17.21",
     "tailwindcss": "^3.3.3",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.19.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },
