@@ -15,6 +15,10 @@ import { getClient } from "@/sanity/client.server";
 import { NextPageT } from "@/types";
 import { dateStr } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
+import {
+  ArticleSortOrder,
+  getArticleSortOrder,
+} from "../../components/utils/sort-by-cookie";
 
 const sanityQuery = groq`
 {
@@ -46,7 +50,9 @@ const sanityQuery = groq`
 }
 `;
 
-type PageProps = NextPageT<GpSlugQueryResponse>;
+type PageProps = NextPageT<
+  GpSlugQueryResponse & { articleSortOrdering: ArticleSortOrder }
+>;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
@@ -70,6 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (
           displayDate: await dateStr(a.displayDate),
         })),
       ),
+      articleSortOrdering: getArticleSortOrder(ctx.req.cookies) ?? {},
       slug,
       preview,
       id: tema?._id ?? "",
@@ -130,6 +137,8 @@ const GpPage = (props: PageProps["props"]) => {
                   <ArticleSections
                     articles={articles}
                     undertemaList={props.tema.undertema}
+                    tema={props.tema.title}
+                    articleSortOrdering={props.articleSortOrdering}
                   />
                 </VStack>
               </Box>
