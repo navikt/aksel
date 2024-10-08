@@ -25,10 +25,10 @@ const fgMap = {
   ["warning-moderate"]: tokens.TextDefault,
   ["success-moderate"]: tokens.TextDefault,
   ["neutral-moderate"]: tokens.TextDefault,
-  ["info-strong"]: tokens.ContrastNeutral,
-  ["warning-strong"]: tokens.ContrastNeutral,
-  ["success-strong"]: tokens.ContrastNeutral,
-  ["neutral-strong"]: tokens.ContrastNeutral,
+  ["info-strong"]: tokens.TextNeutralContrast,
+  ["warning-strong"]: tokens.TextNeutralContrast,
+  ["success-strong"]: tokens.TextNeutralContrast,
+  ["neutral-strong"]: tokens.TextNeutralContrast,
 };
 
 const borderMap = {
