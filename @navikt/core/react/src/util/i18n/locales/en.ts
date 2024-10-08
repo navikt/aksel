@@ -8,6 +8,7 @@ export default {
       dragAndDrop: "Drag and drop file here",
       dragAndDropMultiple: "Drag and drop files here",
       drop: "Drop",
+      or: "or",
       disabled: "File upload disabled",
       disabledFilelimit: "You cannot upload more files",
     },
