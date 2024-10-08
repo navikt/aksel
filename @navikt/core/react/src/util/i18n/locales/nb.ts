@@ -1,4 +1,4 @@
-import { TranslationDictionary } from "../i18n.types";
+import type { TranslationDictionary } from "../i18n.types";
 
 export default {
   FileUpload: {

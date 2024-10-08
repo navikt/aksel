@@ -1,4 +1,4 @@
-import nb from "./locales/nb";
+import type nb from "./locales/nb";
 
 export interface PartialTranslationObject {
   [key: string]: string | PartialTranslationObject | undefined;
