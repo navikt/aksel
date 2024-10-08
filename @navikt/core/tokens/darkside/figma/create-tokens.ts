@@ -50,15 +50,22 @@ export const getTokensForCollection = async (
      */
     return reference.length > 0
       ? prepareToken(
-          { ...token, alias: createTokenName(reference[0]) },
+          {
+            ...(token as TransformedTokenWithScopes),
+            alias: createTokenName(reference[0]),
+          },
           dictionary,
         )
-      : prepareToken(token, dictionary);
+      : prepareToken(token as TransformedTokenWithScopes, dictionary);
   });
 };
 
+type TransformedTokenWithScopes = TransformedToken & {
+  scopes: StyleDictionaryToken<TokenTypes>["scopes"];
+};
+
 function prepareToken(
-  token: TransformedToken,
+  token: TransformedTokenWithScopes,
   dictionary: Dictionary,
 ): FigmaToken {
   const formatter = createPropertyFormatter({
@@ -109,35 +116,34 @@ export function figmaValue(token: TransformedToken): string | number {
  * Scopes allows us to define where in Figma the token can be used.
  * @see https://www.figma.com/plugin-docs/api/VariableScope
  */
-function figmaSettings(token: TransformedToken): {
+function figmaSettings(token: TransformedTokenWithScopes): {
   figmaType: VariableResolvedDataType;
   scopes: VariableScope[];
 } {
+  let setting: ReturnType<typeof figmaSettings> | undefined;
+
   if (isGlobalColor(token)) {
-    return createFigmaSettings("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
+    setting = createFigmaSettings("COLOR", ["ALL_FILLS", "STROKE_COLOR"]);
+  } else if (isTokenOfSemanticColorGroup(token, "background")) {
+    setting = createFigmaSettings("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
+  } else if (isTokenOfSemanticColorGroup(token, "border")) {
+    setting = createFigmaSettings("COLOR", ["STROKE_COLOR"]);
+  } else if (isTokenOfSemanticColorGroup(token, "text")) {
+    setting = createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
+  } else if (isRadiusToken(token)) {
+    setting = createFigmaSettings("FLOAT", ["CORNER_RADIUS"]);
+  } else if (isSpacingToken(token)) {
+    setting = createFigmaSettings("FLOAT", ["GAP"]);
   }
 
-  if (isTokenOfSemanticColorGroup(token, "background")) {
-    return createFigmaSettings("COLOR", ["FRAME_FILL", "SHAPE_FILL"]);
-  }
-  if (isTokenOfSemanticColorGroup(token, "border")) {
-    return createFigmaSettings("COLOR", ["STROKE_COLOR"]);
-  }
-  if (
-    isTokenOfSemanticColorGroup(token, "contrast") ||
-    isTokenOfSemanticColorGroup(token, "text")
-  ) {
-    return createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
-  }
-  if (isRadiusToken(token)) {
-    return createFigmaSettings("FLOAT", ["CORNER_RADIUS"]);
-  }
-  if (isSpacingToken(token)) {
-    return createFigmaSettings("FLOAT", ["GAP"]);
+  if (!setting) {
+    console.warn(`No fitting type or scope found for token: ${token.name}`);
+    return createFigmaSettings("STRING", []);
   }
 
-  console.warn(`No fitting type or scope found for token: ${token.name}`);
-  return createFigmaSettings("STRING", []);
+  token.scopes && setting.scopes.push(...token.scopes);
+
+  return setting;
 }
 
 function createFigmaSettings(
