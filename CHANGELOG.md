@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.2
+
+### @navikt/ds-react
+
+- FileUpload: :boom: Remove UNSAFE-prefix ([#3205](https://github.com/navikt/aksel/pull/3205))
+
+- List: :sparkles: New size 'large' ([#3207](https://github.com/navikt/aksel/pull/3207))
+
+* Performance: :zap: Optimized memoization for rerendring in some components. ([#3197](https://github.com/navikt/aksel/pull/3197))
+
 ## 7.1
 
 ### @navikt/aksel-stylelint
