@@ -64,7 +64,7 @@ export const Default: Story = {
     description: "",
   },
   argTypes: {
-    size: { control: { type: "radio" }, options: ["small", "medium"] },
+    size: { control: { type: "radio" }, options: ["small", "medium", "large"] },
     as: { control: { type: "radio" }, options: ["ul", "ol"] },
   },
 };
@@ -138,6 +138,21 @@ export const SizesUl: Story = {
     return (
       <VStack gap="8">
         <List
+          title="Large list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="large"
+        >
+          <List.Item title="Lorem Ipsum Dolor Sit Amet">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item title="Consectetur Adipiscing Elit">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
+        <List
           title="Medium list"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
           size="medium"
@@ -176,6 +191,22 @@ export const SizesOl: Story = {
   render: () => {
     return (
       <VStack gap="8">
+        <List
+          title="Large list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="large"
+          as="ol"
+        >
+          <List.Item title="Lorem Ipsum Dolor Sit Amet">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item title="Consectetur Adipiscing Elit">
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
         <List
           title="Medium list"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
@@ -217,6 +248,27 @@ export const SizesIcons: Story = {
   render: () => {
     return (
       <VStack gap="8">
+        <List
+          title="Large list"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
+          size="large"
+        >
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Lorem Ipsum Dolor Sit Amet"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item
+            icon={<HeadHeartIcon aria-hidden />}
+            title="Consectetur Adipiscing Elit"
+          >
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+          <List.Item icon={<HeadHeartIcon aria-hidden />}>
+            Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
+          </List.Item>
+        </List>
         <List
           title="Medium list"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel risus volutpat."
@@ -328,6 +380,33 @@ export const Spacing: Story = {
   render: () => {
     return (
       <>
+        <h2>Large</h2>
+        <BodyLong size="large" spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
+        <List size="large">
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+          <List.Item>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto
+            fugiat atque accusantium iure sunt, ipsum voluptas, impedit harum,
+            minus rerum recusandae. Consequuntur sint distinctio nulla
+            reprehenderit eum suscipit quae libero.
+          </List.Item>
+        </List>
+        <BodyLong size="large" spacing>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus
+          aliquid, veniam quibusdam saepe autem quia odio? Tenetur dicta
+          voluptates iste maiores perspiciatis? Sapiente in possimus iusto
+          numquam? Esse, voluptatibus.
+        </BodyLong>
         <h2>Medium</h2>
         <BodyLong spacing>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit minus

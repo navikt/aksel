@@ -26,6 +26,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
+  index: 3,
   desc: "Du kan bruke 'as' for å endre til 'ol' (nummerert liste).",
 };
