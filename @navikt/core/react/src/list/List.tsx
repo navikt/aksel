@@ -1,10 +1,19 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { BodyLong, BodyShort, Heading } from "../typography";
+import { BodyLong, BodyShort, Heading, HeadingProps } from "../typography";
 import { ListItem } from "./ListItem";
 import { ListContext } from "./context";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { ListItemProps, ListProps } from "./types";
+
+const headingSizeMap: Record<
+  Exclude<ListProps["size"], undefined>,
+  HeadingProps["size"]
+> = {
+  small: "xsmall",
+  medium: "small",
+  large: "medium",
+};
 
 export interface ListComponent
   extends React.ForwardRefExoticComponent<
@@ -63,16 +72,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           className={cl("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
-            <Heading
-              size={
-                listSize === "large"
-                  ? "medium"
-                  : listSize === "medium"
-                    ? "small"
-                    : "xsmall"
-              }
-              as={headingTag}
-            >
+            <Heading size={headingSizeMap[listSize]} as={headingTag}>
               {title}
             </Heading>
           )}
