@@ -1,5 +1,9 @@
 import nb from "./locales/nb";
 
+export interface PartialTranslationObject {
+  [key: string]: string | PartialTranslationObject | undefined;
+}
+
 export interface TranslationObject {
   [key: string]: string | TranslationObject;
 }
