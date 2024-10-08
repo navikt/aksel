@@ -58,13 +58,19 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
         <BodyLong
           as="div"
           {...rest}
-          size={size}
+          size={listSize}
           ref={ref}
           className={cl("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
             <Heading
-              size={listSize === "medium" ? "small" : "xsmall"}
+              size={
+                listSize === "large"
+                  ? "medium"
+                  : listSize === "medium"
+                    ? "small"
+                    : "xsmall"
+              }
               as={headingTag}
             >
               {title}
