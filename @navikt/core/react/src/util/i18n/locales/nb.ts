@@ -1,4 +1,4 @@
-import type { TranslationDictionary } from "../i18n.types";
+import type { GenericTranslationObject } from "../i18n.types";
 
 export default {
   FileUpload: {
@@ -24,4 +24,4 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-} satisfies TranslationDictionary;
+} satisfies GenericTranslationObject;

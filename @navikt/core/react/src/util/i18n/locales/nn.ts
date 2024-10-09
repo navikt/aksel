@@ -1,4 +1,4 @@
-import type nb from "./nb";
+import type { TranslationObject } from "../i18n.types";
 
 export default {
   FileUpload: {
@@ -24,4 +24,4 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-} satisfies typeof nb;
+} satisfies TranslationObject;
