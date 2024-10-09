@@ -33,6 +33,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
   desc: "Du kan også sette en tittel på hvert element i listen.",
 };

@@ -4,7 +4,7 @@ import { usePrevious } from "../../../util/hooks";
 import { useInputContext } from "../Input/Input.context";
 import { isInList } from "../combobox-utils";
 import { useComboboxCustomOptions } from "../customOptionsContext";
-import { ComboboxOption, ComboboxProps, MaxSelected } from "../types";
+import { ComboboxOption, ComboboxProps } from "../types";
 
 type SelectedOptionsContextValue = {
   addSelectedOption: (option: ComboboxOption) => void;
@@ -12,7 +12,7 @@ type SelectedOptionsContextValue = {
   removeSelectedOption: (option: ComboboxOption) => void;
   prevSelectedOptions?: ComboboxOption[];
   selectedOptions: ComboboxOption[];
-  maxSelected?: MaxSelected & { isLimitReached: boolean };
+  maxSelected?: ComboboxProps["maxSelected"] & { isLimitReached: boolean };
   setSelectedOptions: (any) => void;
   toggleOption: (
     option: ComboboxOption,
@@ -105,9 +105,10 @@ const SelectedOptionsProvider = ({
     (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
     (!isMultiSelect && selectedOptions.length > 0);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
     setHideCaret(isLimitReached);
-  }, [selectedOptions, setHideCaret, isLimitReached]);
+  }, [isLimitReached, selectedOptions, setHideCaret]);
 
   const toggleOption = useCallback(
     (

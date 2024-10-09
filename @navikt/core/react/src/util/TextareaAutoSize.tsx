@@ -205,6 +205,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       syncHeight();
     });
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Since value is an external prop, we want to reset the renders on every time it changes, even when it is undefined or empty.
     useEffect(() => {
       renders.current = 0;
     }, [value]);

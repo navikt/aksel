@@ -19,7 +19,7 @@ const App = () => {
 };
 
 describe("Render datepicker", () => {
-  // eslint-disable-next-line vitest/expect-expect
+  // eslint-disable-next-line @vitest/expect-expect
   test("Should not crash when e.target is window", async () => {
     render(<App />);
 

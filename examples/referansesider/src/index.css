@@ -4,49 +4,16 @@
 
 #root {
   width: 100%;
-  font-family: "Source Sans Pro";
+  font-family: "Source Sans 3", system-ui;
   font-size: 18px;
+  color: var(--a-text-default);
 }
 
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-Regular.otf");
+:where(:root) *:focus {
+  outline: 4px solid var(--a-bg-accent-strong-hover);
+  z-index: 200;
 }
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-Bold.otf");
-  font-weight: bold;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-Light.otf");
-  font-weight: 300;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-ExtraLight.otf");
-  font-weight: 200;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-It.otf");
-  font-style: italic;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-BoldIt.otf");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-LightIt.otf");
-  font-weight: 300;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("./assets/SourceSansPro-ExtraLightIt.otf");
-  font-weight: 200;
-  font-style: italic;
+
+*:focus {
+  outline-offset: 4px;
 }

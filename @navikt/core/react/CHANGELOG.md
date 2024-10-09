@@ -1,5 +1,57 @@
 # @navikt/ds-react
 
+## 7.2.0
+
+### Minor Changes
+
+- FileUpload: :boom: Remove UNSAFE-prefix ([#3205](https://github.com/navikt/aksel/pull/3205))
+
+- List: :sparkles: New size 'large' ([#3207](https://github.com/navikt/aksel/pull/3207))
+
+### Patch Changes
+
+- Performance: :zap: Optimized memoization for rerendring in some components. ([#3197](https://github.com/navikt/aksel/pull/3197))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.2.0
+  - @navikt/aksel-icons@7.2.0
+
+## 7.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.2
+  - @navikt/aksel-icons@7.1.2
+
+## 7.1.1
+
+### Patch Changes
+
+- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.1
+  - @navikt/aksel-icons@7.1.1
+
+## 7.1.0
+
+### Minor Changes
+
+- Pagination: :lipstick: Updated font-weight to 600 and marked 'page'-prop on 'Item' as deprecated. ([#3164](https://github.com/navikt/aksel/pull/3164))
+
+### Patch Changes
+
+- Combobox: :label: Better typing for maxSelected prop ([#3169](https://github.com/navikt/aksel/pull/3169))
+
+- ErrorSummary: Remove aria-attributes. ([#3171](https://github.com/navikt/aksel/pull/3171))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.1.0
+  - @navikt/aksel-icons@7.1.0
+
 ## 7.0.1
 
 ### Patch Changes

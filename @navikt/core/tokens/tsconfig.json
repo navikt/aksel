@@ -3,7 +3,10 @@
     "jsx": "react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "types": ["@figma/plugin-typings"],
+    "moduleResolution": "Bundler",
+    "module": "Preserve"
   },
-  "include": ["./stories"]
+  "include": ["./stories", "./darkside/figma"]
 }

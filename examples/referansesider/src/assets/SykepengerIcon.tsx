@@ -1,25 +1,34 @@
+import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
+import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 
-export const Ikon = ({
-  className,
-  colorFill = "fill-red-500",
-  colorStroke = "stroke-red-500",
-}: {
-  className?: string;
-  colorFill?: string;
-  colorStroke?: string;
-}) => {
+/**
+ * @note
+ * - Unsure of token use here.
+ */
+const ScSVG = styled.svg`
+  stroke: ${tokens.TextBrandOneStrong};
+`;
+
+/**
+ * @note
+ * - BgBrandOneModerate virker litt rart å bruke her.
+ */
+const ScPlusSVG = styled.svg`
+  fill: ${tokens.BgBrandOneModerate};
+`;
+
+export const Ikon = ({ className }: { className?: string }) => {
   return (
     <span className={twMerge(`absolute block`, className)} aria-hidden="true">
       <span className="absolute">
-        <svg
+        <ScPlusSVG
           role="img"
           width="96"
           height="96"
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={twMerge(`opacity-20`, colorFill)}
         >
           <rect x="16" y="36" width="64" height="24"></rect>
           <rect
@@ -29,17 +38,16 @@ export const Ikon = ({
             height="24"
             transform="rotate(90 60 16)"
           ></rect>
-        </svg>
+        </ScPlusSVG>
       </span>
       <span className="absolute" id=":R8imm:">
-        <svg
+        <ScSVG
           role="img"
           width="96"
           height="96"
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`${colorStroke}`}
         >
           <circle
             cx="50.3637"
@@ -94,7 +102,7 @@ export const Ikon = ({
           ></path>
           <path d="M86 38L82 38" strokeWidth="3" strokeLinecap="round"></path>
           <path d="M82 2L82 14" strokeWidth="3" strokeLinecap="round"></path>
-        </svg>
+        </ScSVG>
       </span>
     </span>
   );

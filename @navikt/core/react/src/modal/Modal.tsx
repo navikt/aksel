@@ -127,7 +127,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
       // We have to use JS because it doesn't work to set it with a prop (React bug?)
       // Currently doesn't seem to work in Chrome. See also Tooltip.tsx
       if (modalRef.current && portalNode) modalRef.current.autofocus = true;
-    }, [modalRef, portalNode]);
+    }, [portalNode]);
 
     useEffect(() => {
       // We need to have this in a useEffect so that the content renders before the modal is displayed,
@@ -140,7 +140,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           modalRef.current.close();
         }
       }
-    }, [modalRef, portalNode, open]);
+    }, [portalNode, open]);
 
     useBodyScrollLock(modalRef, portalNode, isNested);
 

@@ -32,6 +32,7 @@ interface Props {
     defaultValue: ComboboxProps["defaultValue"];
     description: ComboboxProps["description"];
     disabled: ComboboxProps["disabled"];
+    readOnly: ComboboxProps["readOnly"];
     error: ComboboxProps["error"];
     errorId: ComboboxProps["errorId"];
     id: ComboboxProps["id"];
@@ -48,6 +49,7 @@ const InputProvider = ({ children, value: props }: Props) => {
     defaultValue = "",
     description,
     disabled,
+    readOnly,
     error,
     errorId,
     id: externalId,
@@ -61,6 +63,7 @@ const InputProvider = ({ children, value: props }: Props) => {
     {
       description,
       disabled,
+      readOnly,
       error,
       errorId,
       id: externalId,
@@ -96,7 +99,7 @@ const InputProvider = ({ children, value: props }: Props) => {
       setInternalValue("");
       setSearchTerm("");
     },
-    [externalOnChange, onClear, setInternalValue],
+    [externalOnChange, onClear],
   );
 
   const focusInput = useCallback(() => {

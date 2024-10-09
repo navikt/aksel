@@ -43,7 +43,7 @@ export const TemplatesLandingSide = defineType({
   preview: {
     prepare: () => ({
       title: "Landingsside Mønster og Maler",
-      media: HouseIcon,
+      media: () => <HouseIcon aria-hidden />,
     }),
   },
 });

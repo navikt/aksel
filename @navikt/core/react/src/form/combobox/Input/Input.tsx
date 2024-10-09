@@ -49,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       setValue,
       hideCaret,
       setHideCaret,
+      readOnly,
     } = useInputContext();
     const {
       selectedOptions,
@@ -141,6 +142,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLInputElement>) => {
         setIsMouseLastUsedInputDevice(false);
+        if (readOnly) {
+          return;
+        }
         if (e.key === "Backspace") {
           if (value === "" && shouldShowSelectedOptions) {
             const lastSelectedOption =
@@ -225,6 +229,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         setValue,
         searchTerm,
         shouldShowSelectedOptions,
+        readOnly,
       ],
     );
 
@@ -273,6 +278,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         aria-activedescendant={activeDecendantId}
         aria-describedby={ariaDescribedBy}
         aria-invalid={inputProps["aria-invalid"]}
+        readOnly={readOnly}
       />
     );
   },

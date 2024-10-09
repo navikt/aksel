@@ -6,11 +6,11 @@ const Example = () => {
     <List as="ul" title="Det kan også være aktuelt hvis du:">
       <List.Item>
         står i fare for å miste jobben etter å ha vært sykmeldt helt eller
-        delvis i 12 måneder, eller
+        delvis i 12 måneder,
       </List.Item>
       <List.Item>
         har full eller gradert uføretrygd, men ønsker å jobbe. NAV må ha vurdert
-        om andre arbeidsmarkedstiltak og virkemidler er aktuelle.
+        om andre arbeidsmarkedstiltak og virkemidler er aktuelle, eller
       </List.Item>
       <List.Item>
         er en arbeidssøker med varig og vesentlig nedsatt arbeidsevne som kan

@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@navikt/aksel-icons";
-import { UNSAFE_FileUpload as FileUpload, FileUploadItemProps } from ".";
+import { FileUpload, FileUploadItemProps } from ".";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { VStack } from "../../layout/stack";

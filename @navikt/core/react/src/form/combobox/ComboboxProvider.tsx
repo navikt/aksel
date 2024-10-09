@@ -36,6 +36,7 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       children,
       defaultValue,
       disabled,
+      readOnly,
       error,
       errorId,
       filteredOptions: externalFilteredOptions,
@@ -50,19 +51,28 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       value,
       onChange,
       onClear,
-      shouldAutocomplete,
+      shouldAutocomplete: externalShouldAutocomplete,
       size,
       ...rest
     } = props;
     const options = mapToComboboxOptionArray(externalOptions) || [];
     const filteredOptions = mapToComboboxOptionArray(externalFilteredOptions);
     const selectedOptions = mapToComboboxOptionArray(externalSelectedOptions);
+
+    const userAgent =
+      typeof navigator === "undefined" ? "" : navigator.userAgent;
+    const isFirefoxOnAndroid =
+      userAgent.includes("Android") && userAgent.includes("Firefox/");
+    const shouldAutocomplete =
+      !isFirefoxOnAndroid && externalShouldAutocomplete;
+
     return (
       <InputContextProvider
         value={{
           defaultValue,
           description: rest.description,
           disabled,
+          readOnly,
           error,
           errorId,
           id,

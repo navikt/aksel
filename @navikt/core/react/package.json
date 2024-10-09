@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.0.1",
+  "version": "7.2.0",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -583,7 +583,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "docgen": "yarn ts-node ../../../scripts/docgen.ts",
+    "docgen": "yarn tsx ../../../scripts/docgen.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
     "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
@@ -594,8 +594,8 @@
   "dependencies": {
     "@floating-ui/react": "0.25.4",
     "@floating-ui/react-dom": "^2.0.9",
-    "@navikt/aksel-icons": "^7.0.1",
-    "@navikt/ds-tokens": "^7.0.1",
+    "@navikt/aksel-icons": "^7.2.0",
+    "@navikt/ds-tokens": "^7.2.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.0"
@@ -614,8 +614,8 @@
     "react-router-dom": "^6.3.0",
     "rimraf": "6.0.1",
     "swr": "^1.1.2",
-    "ts-node": "^10.9.1",
     "tsc-alias": "1.8.8",
+    "tsx": "^4.19.1",
     "typescript": "^5.1.6",
     "vitest": "^1.2.2"
   },

@@ -1,5 +1,29 @@
 # @navikt/ds-css
 
+## 7.2.0
+
+## 7.1.2
+
+### Patch Changes
+
+- List: Explicitly set list-style on ol to override reset-CSS ([#3202](https://github.com/navikt/aksel/pull/3202))
+
+## 7.1.1
+
+### Patch Changes
+
+- List: Add indentation and remove overly verbose aria attributes ([#3184](https://github.com/navikt/aksel/pull/3184))
+
+- Datepicker/Select: :lipstick: dim non-interactable icons when readonly is set. ([#3187](https://github.com/navikt/aksel/pull/3187))
+
+- Combobox: :bug: implement missing readonly and disabled ([#3180](https://github.com/navikt/aksel/pull/3180))
+
+## 7.1.0
+
+### Patch Changes
+
+- Accordion: Remove 'relative' positioning when focused. This resolves some issues where floating elements like popover ended up clipping. ([`9c1eba445`](https://github.com/navikt/aksel/commit/9c1eba44508f295cc6261ff96822b18557bd7ddc))
+
 ## 7.0.1
 
 ### Patch Changes

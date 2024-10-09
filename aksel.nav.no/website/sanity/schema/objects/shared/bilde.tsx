@@ -5,7 +5,7 @@ export const Bilde = defineType({
   title: "Bilde",
   name: "bilde",
   type: "image",
-  icon: ImageIcon,
+  icon: () => <ImageIcon aria-hidden />,
   options: {
     hotspot: true,
   },

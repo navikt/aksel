@@ -1,11 +1,11 @@
-import { Heading, UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
+import { FileUpload, Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
   <VStack gap="6">
     <div>
       <Heading size="small">retry</Heading>
-      <UNSAFE_FileUpload.Item
+      <FileUpload.Item
         file={new File(["abc".repeat(100000)], "eksempel1.pdf")}
         button={{
           action: "retry",
@@ -15,7 +15,7 @@ const Example = () => (
     </div>
     <div>
       <Heading size="small">delete</Heading>
-      <UNSAFE_FileUpload.Item
+      <FileUpload.Item
         file={{ name: "eksempel2.pdf", size: 200000 }}
         href="#"
         button={{

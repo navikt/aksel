@@ -5,7 +5,7 @@ export const TastaturUU = defineType({
   title: "Tastatur",
   name: "tastatur_modul",
   type: "object",
-  icon: KeyHorizontalIcon,
+  icon: () => <KeyHorizontalIcon aria-hidden />,
   fields: [
     defineField({
       type: "array",

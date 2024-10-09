@@ -34,7 +34,7 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
-    [`${role}-moderate-active`]: {
+    [`${role}-moderate-pressed`]: {
       value: `{a.${role}.400.value}`,
       type: "color",
       group: `background.${role}`,
@@ -46,17 +46,17 @@ const configForRole = (
       group: `background.${role}`,
     },
     [`${role}-strong`]: {
-      value: `{a.${role}.700.value}`,
+      value: `{a.${role}.600.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-strong-hover`]: {
-      value: `{a.${role}.800.value}`,
+      value: `{a.${role}.700.value}`,
       type: "color",
       group: `background.${role}`,
     },
-    [`${role}-strong-active`]: {
-      value: `{a.${role}.900.value}`,
+    [`${role}-strong-pressed`]: {
+      value: `{a.${role}.800.value}`,
       type: "color",
       group: `background.${role}`,
     },
@@ -73,11 +73,11 @@ const configForRole = (
   },
   text: {
     [role]: {
-      value: `{a.${role}.1000.value}`,
+      value: `{a.${role}.700.value}`,
       type: "color",
       group: `text.${role}`,
     },
-    [`${role}-subtle`]: {
+    [`${role}-strong`]: {
       value: `{a.${role}.900.value}`,
       type: "color",
       group: `text.${role}`,

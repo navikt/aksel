@@ -15,4 +15,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
+  desc: "Label må være meningsfull selv om den skjules, siden den fortsatt leses av skjermlesere.",
 };

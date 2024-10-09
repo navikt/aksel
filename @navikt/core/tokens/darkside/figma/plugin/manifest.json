@@ -1,0 +1,13 @@
+{
+  "name": "Aksel tokens to variables",
+  "id": "1416051171368451170",
+  "api": "1.0.0",
+  "main": "plugin.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["https://cdn.nav.no"]
+  }
+}
