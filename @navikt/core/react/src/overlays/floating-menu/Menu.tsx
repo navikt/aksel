@@ -454,7 +454,13 @@ const MenuItem = forwardRef<MenuItemElement, MenuItemProps>(
         tabIndex={disabled ? -1 : 0}
         ref={composedRefs}
         disabled={disabled}
-        onClick={composeEventHandlers(onClick, handleSelect)}
+        onClick={composeEventHandlers(onClick, handleSelect, {
+          /**
+           * Nextjs prevents default on click when using Link component, so we have to force click-event
+           * https://github.com/vercel/next.js/blob/77dcd4c66a35d0e8ef639bda4d05873bd3c0f52d/packages/next/src/client/link.tsx#L211
+           */
+          checkForDefaultPrevented: false,
+        })}
         onPointerDown={composeEventHandlers(
           onPointerDown,
           () => {
