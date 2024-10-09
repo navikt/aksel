@@ -66,6 +66,7 @@
       "**/esm/**",
       "**/cjs/**",
       "**/dist/**",
+      "**/figma/**/plugin.js",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
       "**/.next/**",
