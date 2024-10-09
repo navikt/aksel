@@ -20,8 +20,8 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     const originalPublishDescription = action(props);
     const [verifyOpen, setVerifyOpen] = useState(false);
     const [publishOpen, setPublishOpen] = useState(false);
-    const lastVerified = props.published?.updateInfo?.["lastVerified"];
-    const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
+    const lastVerified = props.published?.updateInfo?.lastVerified;
+    const lastVerifiedDraft = props.draft?.updateInfo?.lastVerified;
 
     const cancelAction = () => {
       setVerifyOpen(false);

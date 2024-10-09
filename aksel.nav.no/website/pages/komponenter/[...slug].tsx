@@ -319,7 +319,7 @@ const Page = ({
             reference={`<${page?.heading} />`}
           />
         )}
-        <SanityBlockContent blocks={page["content"]} />
+        <SanityBlockContent blocks={page.content} />
       </WithSidebar>
       <Footer />
     </>

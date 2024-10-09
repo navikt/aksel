@@ -137,7 +137,7 @@ export async function cssImportsCommand() {
 
   let foundComponents: string[] = [];
 
-  if (answers["autoscan"] === "yes") {
+  if (answers.autoscan === "yes") {
     foundComponents = await new Promise((resolve) => {
       exec(`node ${__dirname}/scan-code.js ${answers.scandir}`, (_, stdout) => {
         resolve(

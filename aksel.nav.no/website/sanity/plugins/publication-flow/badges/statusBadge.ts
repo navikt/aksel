@@ -6,7 +6,7 @@ export const CreateStatusBadge = () => {
     props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null => {
     const { published, draft } = props;
-    const lastVerified = draft?.updateInfo?.["lastVerified"];
+    const lastVerified = draft?.updateInfo?.lastVerified;
 
     if (!published && !!lastVerified) {
       return {

@@ -15,7 +15,7 @@ export const createWrappedApproveAction = () => {
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const lastVerified = props.published?.updateInfo?.["lastVerified"];
+    const lastVerified = props.published?.updateInfo?.lastVerified;
     if (!props.published) {
       return null;
     }

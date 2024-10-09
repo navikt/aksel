@@ -60,7 +60,7 @@ export class DescendantsManager<
     this.descendants.forEach((descendant) => {
       const index = descendants.indexOf(descendant.node);
       descendant.index = index;
-      descendant.node.dataset["index"] = descendant.index.toString();
+      descendant.node.dataset.index = descendant.index.toString();
     });
   };
 

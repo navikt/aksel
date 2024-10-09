@@ -52,7 +52,7 @@ export function createDescendantContext<
 
     useClientLayoutEffect(() => {
       if (!ref.current) return;
-      const dataIndex = Number(ref.current.dataset["index"]);
+      const dataIndex = Number(ref.current.dataset.index);
       if (index !== dataIndex && !Number.isNaN(dataIndex)) {
         setIndex(dataIndex);
       }
