@@ -149,7 +149,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
         <IntroSeksjon node={page?.intro} />
         <SanityBlockContent blocks={page["content"]} />
 
-        {metadata && metadata.changelog && (
+        {metadata?.changelog && (
           <>
             <Heading
               tabIndex={-1}

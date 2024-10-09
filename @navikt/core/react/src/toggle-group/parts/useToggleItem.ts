@@ -55,19 +55,19 @@ export function useToggleItem<P extends UseToggleItemProps>(
 
       const nextTab = () => {
         const next = descendants.nextEnabled(idx, false);
-        next && next.node?.focus();
+        next?.node?.focus();
       };
       const prevTab = () => {
         const prev = descendants.prevEnabled(idx, false);
-        prev && prev.node?.focus();
+        prev?.node?.focus();
       };
       const firstTab = () => {
         const first = descendants.firstEnabled();
-        first && first.node?.focus();
+        first?.node?.focus();
       };
       const lastTab = () => {
         const last = descendants.lastEnabled();
-        last && last.node?.focus();
+        last?.node?.focus();
       };
 
       const keyMap: Record<string, React.KeyboardEventHandler> = {

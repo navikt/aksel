@@ -34,7 +34,7 @@ type Prop = Partial<{
 }>;
 
 export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
-  if (prop?.description && prop.description.includes("@private")) {
+  if (prop?.description?.includes("@private")) {
     return null;
   }
 

@@ -31,7 +31,7 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
       const example_regex = /@example((.|\n)*?(?=\n{2,}))|@example((.|\n)*)/;
       const example = prop.description.match(example_regex);
       prop.description = prop.description.replace(example_regex, "").trim();
-      if ((example && example[1]) || (example && example[3])) {
+      if (example?.[1] || example?.[3]) {
         // @ts-expect-error adding a field here to a type that doesn't have it
         prop.example = (example[1] || example[3]).trim();
       }
