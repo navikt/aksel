@@ -49,8 +49,7 @@
         "noForEach": "off",
         "useLiteralKeys": "off",
         "useOptionalChain": "off",
-        "useArrowFunction": "off",
-        "noUselessTernary": "off"
+        "useArrowFunction": "off"
       }
     },
     "ignore": [
