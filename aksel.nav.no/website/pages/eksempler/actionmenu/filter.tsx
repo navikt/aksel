@@ -39,21 +39,18 @@ const Example = () => {
                   ? "indeterminate"
                   : false
             }
-            onCheckedChange={() =>
-              Object.values(views).every(Boolean)
-                ? setViews((prevState) =>
-                    Object.keys(prevState).reduce(
-                      (acc, key) => ({ ...acc, [key]: false }),
-                      {} as typeof views,
-                    ),
-                  )
-                : setViews((prevState) =>
-                    Object.keys(prevState).reduce(
-                      (acc, key) => ({ ...acc, [key]: true }),
-                      {} as typeof views,
-                    ),
-                  )
-            }
+            onCheckedChange={() => {
+              const allChecked = Object.values(views).every(Boolean);
+              setViews((prevState) =>
+                Object.keys(prevState).reduce(
+                  (acc, key) => {
+                    acc[key] = !allChecked;
+                    return acc;
+                  },
+                  {} as typeof views,
+                ),
+              );
+            }}
           >
             Velg alle
           </ActionMenu.CheckboxItem>
