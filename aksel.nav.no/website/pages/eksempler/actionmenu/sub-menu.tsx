@@ -9,7 +9,7 @@ const Example = () => {
         <Table.Row>
           <Table.HeaderCell scope="col">ID</Table.HeaderCell>
           <Table.HeaderCell scope="col">Status</Table.HeaderCell>
-          <Table.HeaderCell aria-label="" />
+          <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
       <Table.Body>
