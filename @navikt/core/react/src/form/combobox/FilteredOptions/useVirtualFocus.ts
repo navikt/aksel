@@ -70,7 +70,10 @@ const useVirtualFocus = (
     setActiveElement(elementsAbleToReceiveFocus[_currentIndex + 1]);
   };
 
-  const moveFocusToTop = () => setActiveElement(undefined);
+  const moveFocusToTop = () => {
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    setActiveElement(elementsAbleToReceiveFocus[0]);
+  };
   const moveFocusToBottom = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     setActiveElement(

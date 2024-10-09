@@ -196,7 +196,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           }
         } else if (e.key === "Home") {
           e.preventDefault();
-          toggleIsListOpen(false);
           virtualFocus.moveFocusToTop();
         } else if (e.key === "End") {
           e.preventDefault();
