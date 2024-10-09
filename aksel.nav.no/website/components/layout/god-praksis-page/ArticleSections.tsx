@@ -156,25 +156,35 @@ export function ArticleSections({
           : undefined
       }
     >
-      <IntroSection title={ut.title} description={ut.description} />
-      <Button
-        variant="secondary-neutral"
-        onClick={() => {
-          const newCookie = getUpdatedSortOrderCookie(
-            `${tema}:${ut.title}`,
-            localOrdering,
-          );
-          if (newCookie) {
-            globalThis.document.cookie = newCookie;
-            const updatedCookies = getCookies(globalThis.document.cookie);
-            setLocalOrdering(
-              (prevOrder) => getArticleSortOrder(updatedCookies) ?? prevOrder,
+      <div className="flex justify-between">
+        <Heading level="2" size="medium" className="mb-2 text-aksel-heading">
+          {ut.title}
+        </Heading>
+        <Button
+          variant="tertiary-neutral"
+          onClick={() => {
+            const newCookie = getUpdatedSortOrderCookie(
+              `${tema}:${ut.title}`,
+              localOrdering,
             );
-          }
-        }}
-      >
-        Update sortorder
-      </Button>
+
+            if (newCookie) {
+              globalThis.document.cookie = newCookie;
+              setLocalOrdering(
+                (prevOrder) =>
+                  getArticleSortOrder(getCookies(newCookie)) ?? prevOrder,
+              );
+            }
+          }}
+          size="small"
+        >
+          {localOrdering[`${tema}:${ut.title}`]
+            ? "Alfabetisk"
+            : "Sist oppdatert"}
+        </Button>
+      </div>
+      {ut.description && <BodyLong spacing>{ut.description}</BodyLong>}
+
       <GpCardGrid>
         {utArticles.map((article) => (
           <li key={article.slug}>
@@ -192,23 +202,6 @@ export function ArticleSections({
       </GpCardGrid>
     </SectionTag>
   ));
-}
-
-function IntroSection({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) {
-  return (
-    <>
-      <Heading level="2" size="medium" className="mb-2 text-aksel-heading">
-        {title}
-      </Heading>
-      {description && <BodyLong spacing>{description}</BodyLong>}
-    </>
-  );
 }
 
 export function GpCardGrid({ children }: { children: React.ReactNode }) {

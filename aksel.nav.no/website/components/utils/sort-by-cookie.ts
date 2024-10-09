@@ -16,7 +16,6 @@ export function getUpdatedSortOrderCookie(
 ): string | null {
   try {
     const newSortOrder = { ...currentSortOrder };
-
     if (newSortOrder[category] === "name") {
       delete newSortOrder[category];
     } else if (
