@@ -6,7 +6,10 @@ export const Page = ({
   options,
 }: {
   children: ReactNode;
-  options?: { width?: "large" | "medium" | "xlarge"; footer?: "none" };
+  options?: {
+    width?: "large" | "medium" | "xlarge" | "2xlarge";
+    footer?: "none";
+  };
 }) => {
   const _options = options ?? {
     width: "medium",
@@ -21,7 +24,8 @@ export const Page = ({
         "lg:px-0",
         { [`lg:w-[874px]`]: width === "medium" },
         { [`lg:w-[921px]`]: width === "large" },
-        { [`lg:w-[1872px]`]: width === "xlarge" },
+        { [`lg:w-[1440px]`]: width === "xlarge" },
+        { [`lg:w-[1872px]`]: width === "2xlarge" },
         { ["min-h-screen"]: footer !== "none" },
       )}
     >
