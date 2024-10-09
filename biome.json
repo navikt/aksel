@@ -51,9 +51,6 @@
         "useOptionalChain": "off",
         "useArrowFunction": "off",
         "noUselessTernary": "off"
-      },
-      "correctness": {
-        "noInnerDeclarations": "off"
       }
     },
     "ignore": [
