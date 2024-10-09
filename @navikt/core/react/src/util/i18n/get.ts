@@ -1,4 +1,4 @@
-import { TranslationObject } from "./i18n.types";
+import { PartialTranslationObject } from "./i18n.types";
 
 /**
  * https://github.com/Shopify/polaris/blob/main/polaris-react/src/utilities/get.ts#L3
@@ -7,7 +7,7 @@ const OBJECT_NOTATION_MATCHER = /(\w+)/g;
 
 export function get(
   keypath: string | string[],
-  ...objs: (TranslationObject | undefined)[]
+  ...objs: (PartialTranslationObject | undefined)[]
 ) {
   const keys = Array.isArray(keypath) ? keypath : getKeypath(keypath);
 
@@ -16,7 +16,7 @@ export function get(
       continue;
     }
 
-    let acc: string | TranslationObject = obj;
+    let acc: string | PartialTranslationObject = obj;
 
     for (let i = 0; i < keys.length; i++) {
       const val = acc[keys[i]];
