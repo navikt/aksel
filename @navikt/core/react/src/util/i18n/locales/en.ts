@@ -3,8 +3,8 @@ import type nb from "./nb";
 export default {
   FileUpload: {
     dropzone: {
-      button: "Select file",
-      buttonMultiple: "Select files",
+      button: "Choose file",
+      buttonMultiple: "Choose files",
       dragAndDrop: "Drag and drop file here",
       dragAndDropMultiple: "Drag and drop files here",
       drop: "Drop",
