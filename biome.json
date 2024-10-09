@@ -53,8 +53,7 @@
         "noUselessTernary": "off"
       },
       "correctness": {
-        "noInnerDeclarations": "off",
-        "useJsxKeyInIterable": "off"
+        "noInnerDeclarations": "off"
       }
     },
     "ignore": [
