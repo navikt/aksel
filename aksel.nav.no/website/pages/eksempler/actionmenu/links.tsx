@@ -16,7 +16,7 @@ const Example = () => {
         </Button>
       </ActionMenu.Trigger>
       <ActionMenu.Content>
-        <ActionMenu.Group label="See code for implementation">
+        <ActionMenu.Group label="Se kode for implementasjon">
           <ActionMenu.Item as="a" href="#">
             # lenke
           </ActionMenu.Item>
