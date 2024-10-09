@@ -21,11 +21,8 @@ const Example = () => {
             # lenke
           </ActionMenu.Item>
           <Link href="#123" passHref legacyBehavior>
-            <ActionMenu.Item as="a">Nextjs Pages router</ActionMenu.Item>
+            <ActionMenu.Item as="a">Nextjs</ActionMenu.Item>
           </Link>
-          <ActionMenu.Item>
-            Nextjs App router (se kommentert kode)
-          </ActionMenu.Item>
           <ActionMenu.Item>React router (se kommentert kode)</ActionMenu.Item>
           <ActionMenu.Item>Remix (se kommentert kode)</ActionMenu.Item>
         </ActionMenu.Group>
