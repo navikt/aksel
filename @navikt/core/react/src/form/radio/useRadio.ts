@@ -41,8 +41,8 @@ export const useRadio = (props: RadioProps) => {
         if (readOnly) {
           return;
         }
-        props.onChange && props.onChange(e);
-        radioGroup?.onChange && radioGroup.onChange(props.value);
+        props.onChange?.(e);
+        radioGroup?.onChange?.(props.value);
       },
       onClick: (e) => {
         if (readOnly) {

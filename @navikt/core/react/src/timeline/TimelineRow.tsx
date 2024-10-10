@@ -91,27 +91,26 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
               }
             }}
           >
-            {periods &&
-              periods.map((period) => {
-                return (
-                  <li key={`period-${period.id}`}>
-                    <PeriodContext.Provider
-                      value={{
-                        periodId: period.id,
-                        firstFocus: firstFocusable?.id === period.id,
-                        restProps: period?.restProps,
-                      }}
-                    >
-                      <Period
-                        start={period.start}
-                        end={period.endInclusive}
-                        icon={period.icon}
-                        ref={period?.ref}
-                      />
-                    </PeriodContext.Provider>
-                  </li>
-                );
-              })}
+            {periods?.map((period) => {
+              return (
+                <li key={`period-${period.id}`}>
+                  <PeriodContext.Provider
+                    value={{
+                      periodId: period.id,
+                      firstFocus: firstFocusable?.id === period.id,
+                      restProps: period?.restProps,
+                    }}
+                  >
+                    <Period
+                      start={period.start}
+                      end={period.endInclusive}
+                      icon={period.icon}
+                      ref={period?.ref}
+                    />
+                  </PeriodContext.Provider>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </>

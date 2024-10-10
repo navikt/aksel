@@ -54,7 +54,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         }
       }
 
-      if (exampleWrapper && exampleWrapper.offsetHeight) {
+      if (exampleWrapper?.offsetHeight) {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
         setFrameState(Math.min(Math.max(newHeight, 300), 900));

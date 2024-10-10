@@ -43,7 +43,7 @@ export function validateGit(options: any, program: Command) {
   try {
     clean = isGitClean.sync(process.cwd());
   } catch (err: any) {
-    if (err && err.stderr && err.stderr.indexOf("Not a git repository") >= 0) {
+    if (err?.stderr && err.stderr.indexOf("Not a git repository") >= 0) {
       clean = true;
     }
   }

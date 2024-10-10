@@ -40,7 +40,7 @@ const checkState = (
  * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerWindow/ownerWindow.ts
  */
 const ownerWindow = (node: Node | undefined): Window => {
-  const doc = (node && node.ownerDocument) || document;
+  const doc = node?.ownerDocument || document;
   return doc.defaultView || window;
 };
 
