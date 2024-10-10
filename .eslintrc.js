@@ -1,4 +1,10 @@
-// TODO: Convert to new format: https://eslint.org/docs/latest/use/configure/migration-guide
+/**
+ * TODO:
+ * - Convert to new format (v9): https://eslint.org/docs/latest/use/configure/migration-guide
+ * - Look into opinionated stylistic plugin
+ * - Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
+ * - "plugin:react/jsx-runtime" Not sure if this will cause problems for projects not using the new JSX transform
+ */
 module.exports = {
   env: {
     browser: true,
@@ -8,15 +14,13 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
-    //"plugin:react/jsx-runtime", // Not sure if this will cause problems for projects not using the new JSX transform
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:storybook/recommended",
-    // TODO: Look into opinionated stylistic plugin
-    // TODO: Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
   ],
+  /* Allows eslint-plugin-react to detect installed react-version */
   settings: { react: { version: "detect" } },
   rules: {
     "import/no-unresolved": "off",
@@ -31,7 +35,6 @@ module.exports = {
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/no-named-as-default": "off",
-    // "import/no-cycle": [1],
     "no-else-return": "error",
     "no-console": [
       "warn",
@@ -54,6 +57,7 @@ module.exports = {
       },
     ],
   },
+  /* https://eslint.org/docs/latest/use/configure/rules#report-unused-eslint-disable-comments */
   reportUnusedDisableDirectives: true,
   overrides: [
     {
