@@ -19,10 +19,9 @@ export interface ColumnHeaderProps extends HeaderCellProps {
   sortable?: boolean;
 }
 
-export interface ColumnHeaderType
-  extends React.ForwardRefExoticComponent<
-    ColumnHeaderProps & React.RefAttributes<HTMLTableCellElement>
-  > {}
+export type ColumnHeaderType = React.ForwardRefExoticComponent<
+  ColumnHeaderProps & React.RefAttributes<HTMLTableCellElement>
+>;
 
 export const ColumnHeader: ColumnHeaderType = forwardRef(
   ({ className, children, sortable = false, sortKey, ...rest }, ref) => {

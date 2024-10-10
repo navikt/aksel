@@ -57,7 +57,7 @@ export async function middleware(req: NextRequest) {
     }
 
     return NextResponse.next();
-  } catch (e) {
+  } catch {
     return NextResponse.next();
   }
 }

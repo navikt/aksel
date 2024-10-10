@@ -34,7 +34,7 @@ export const editorField = defineField({
           email: currentUser.email,
           title: currentUser.name,
         });
-      } catch (error) {
+      } catch {
         const { logger } = await import("@navikt/next-logger");
         logger.error({
           message: "Failed to create sanity profile for user.",
