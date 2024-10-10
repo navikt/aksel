@@ -70,6 +70,11 @@ const StyleMappings = {
     },
     { component: "Alert", main: "alert.css", dependencies: [typoCss] },
     {
+      component: "ActionMenu",
+      main: "action-menu.css",
+      dependencies: [typoCss],
+    },
+    {
       component: "BodyLong",
       main: typoCss,
     },

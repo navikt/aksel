@@ -22,7 +22,7 @@ export const Styled = () => (
     <Menu.Item className="item" onSelect={() => window.alert("redo")}>
       Redo
     </Menu.Item>
-    <Menu.Separator className="separator" />
+    <Menu.Divider className="separator" />
     <Menu.Item className="item" disabled onSelect={() => window.alert("cut")}>
       Cut
     </Menu.Item>
@@ -103,7 +103,7 @@ export const Submenus = () => {
         </Menu.Item>
       </Submenu>
 
-      <Menu.Separator className="separator" />
+      <Menu.Divider className="separator" />
       <Menu.Item className="item" disabled onSelect={() => window.alert("cut")}>
         Cut
       </Menu.Item>
@@ -179,7 +179,7 @@ export const WithLabels = () => (
           </Menu.Item>
         ))}
         {index < foodGroups.length - 1 && (
-          <Menu.Separator className="separator" />
+          <Menu.Divider className="separator" />
         )}
       </Menu.Group>
     ))}
@@ -217,7 +217,7 @@ export const CheckboxItems = () => {
         Select all
         {selection.length === options.length ? <TickIcon /> : <div>—</div>}
       </Menu.CheckboxItem>
-      <Menu.Separator className="separator" />
+      <Menu.Divider className="separator" />
       {options.map((option) => (
         <Menu.CheckboxItem
           key={option}
@@ -256,7 +256,7 @@ export const RadioItems = () => {
       <Menu.Item className="item" onSelect={() => window.alert("smaller")}>
         Smaller
       </Menu.Item>
-      <Menu.Separator className="separator" />
+      <Menu.Divider className="separator" />
       <Menu.RadioGroup value={file} onValueChange={setFile}>
         {files.map((_file) => (
           <Menu.RadioItem key={_file} className="item" value={_file}>
@@ -426,7 +426,7 @@ export const MenuWithOpenButton = () => {
           <Menu.Item className="item" onSelect={() => window.alert("redo")}>
             Redo
           </Menu.Item>
-          <Menu.Separator className="separator" />
+          <Menu.Divider className="separator" />
           <Menu.Item
             className="item"
             disabled
