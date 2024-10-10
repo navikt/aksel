@@ -81,14 +81,14 @@ export const fetchDownloadUrls = async (
  * Splits an array of strings into parts where each part is a comma-separated string of all the strings for that part.
  * @returns An array of comma-separated strings.
  */
-export function splitIntoParts(arr: string[], pages: number): string[] {
-  const partSize = Math.ceil(arr.length / pages);
-  const parts: string[] = [];
+export function splitIntoParts(arr: string[], parts: number): string[] {
+  const partSize = Math.ceil(arr.length / parts);
+  const blocks: string[] = [];
 
-  for (let i = 0; i < pages && i * partSize < arr.length; i++) {
+  for (let i = 0; i < parts && i * partSize < arr.length; i++) {
     const part = arr.slice(i * partSize, (i + 1) * partSize);
-    parts.push(part.join(","));
+    blocks.push(part.join(","));
   }
 
-  return parts;
+  return blocks;
 }
