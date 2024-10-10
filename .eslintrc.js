@@ -3,7 +3,7 @@
  * - Convert to new format (v9): https://eslint.org/docs/latest/use/configure/migration-guide
  * - Look into opinionated stylistic plugin
  * - Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
- * - "plugin:react/jsx-runtime" Not sure if this will cause problems for projects not using the new JSX transform
+ * - We should add "plugin:react/jsx-runtime", but not sure if this will cause problems for projects not using the new JSX transform
  * - Consider adding the rule "id-length"
  */
 module.exports = {
