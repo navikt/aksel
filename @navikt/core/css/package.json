@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.2.0",
+    "autoprefixer": "^10.4.20",
     "cssnano": "6.0.0",
     "fast-glob": "3.2.11",
     "lodash": "4.17.21",
