@@ -1,12 +1,19 @@
 import { differenceInMonths } from "date-fns";
-import { DocumentBadgeDescription, DocumentBadgeProps } from "sanity";
+import {
+  DocumentBadgeDescription,
+  DocumentBadgeProps,
+  SanityDocument,
+} from "sanity";
+import { Oppdateringsvarsel } from "../../../schema/documents/presets/oppdateringsvarsel";
 
 export const CreateStatusBadge = () => {
   const WrappedStatusBadge = (
     props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null => {
     const { published, draft } = props;
-    const lastVerified = draft?.updateInfo?.lastVerified;
+    const verifiedDocument = draft as SanityDocument & Oppdateringsvarsel;
+
+    const lastVerified = verifiedDocument.updateInfo?.lastVerified;
 
     if (!published && !!lastVerified) {
       return {
