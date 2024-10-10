@@ -22,8 +22,9 @@ export const createWrappedApproveAction = () => {
       return null;
     }
 
-    const verifiedDocument = props.published as SanityDocument &
-      Oppdateringsvarsel;
+    const verifiedDocument = props.published as
+      | (SanityDocument & Oppdateringsvarsel)
+      | null;
 
     const lastVerified = verifiedDocument.updateInfo?.lastVerified;
 

@@ -11,7 +11,9 @@ export const CreateStatusBadge = () => {
     props: DocumentBadgeProps,
   ): DocumentBadgeDescription | null => {
     const { published, draft } = props;
-    const verifiedDocument = draft as SanityDocument & Oppdateringsvarsel;
+    const verifiedDocument = draft as
+      | (SanityDocument & Oppdateringsvarsel)
+      | null;
 
     const lastVerified = verifiedDocument.updateInfo?.lastVerified;
 
