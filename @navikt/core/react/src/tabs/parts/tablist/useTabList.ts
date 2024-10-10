@@ -26,19 +26,19 @@ export function useTabList() {
 
       const nextTab = () => {
         const next = descendants.nextEnabled(idx, loop);
-        next && next.node?.focus();
+        next?.node?.focus();
       };
       const prevTab = () => {
         const prev = descendants.prevEnabled(idx, loop);
-        prev && prev.node?.focus();
+        prev?.node?.focus();
       };
       const firstTab = () => {
         const first = descendants.firstEnabled();
-        first && first.node?.focus();
+        first?.node?.focus();
       };
       const lastTab = () => {
         const last = descendants.lastEnabled();
-        last && last.node?.focus();
+        last?.node?.focus();
       };
 
       const keyMap: Record<string, React.KeyboardEventHandler> = {

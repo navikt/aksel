@@ -44,8 +44,8 @@ const useCheckbox = (props: CheckboxProps) => {
         if (readOnly) {
           return;
         }
-        props.onChange && props.onChange(e);
-        checkboxGroup && checkboxGroup.toggleValue(props.value);
+        props.onChange?.(e);
+        checkboxGroup?.toggleValue(props.value);
       },
       onClick: (e) => {
         if (readOnly) {
