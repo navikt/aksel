@@ -19,10 +19,7 @@
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   padding: var(--__ac-action-menu-content-p);
-  scrollbar-gutter: stable;
-  scrollbar-width: thin;
   overflow: auto;
-  padding-right: 0;
   max-height: var(--__ac-action-menu-content-available-height);
 }
 
