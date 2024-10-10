@@ -51,11 +51,6 @@
         "useOptionalChain": "off",
         "useArrowFunction": "off",
         "noUselessTernary": "off"
-      },
-      "correctness": {
-        "noInnerDeclarations": "off",
-        "useJsxKeyInIterable": "off",
-        "noSelfAssign": "off"
       }
     },
     "ignore": [
@@ -66,6 +61,7 @@
       "**/esm/**",
       "**/cjs/**",
       "**/dist/**",
+      "**/figma/**/plugin.js",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
       "**/.next/**",
