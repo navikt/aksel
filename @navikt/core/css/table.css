@@ -96,7 +96,9 @@
   padding: 0;
 }
 
-.navds-table__header-cell[aria-sort] {
+.navds-table__header-cell[aria-sort],
+.navds-table__header-cell:empty,
+.navds-table__data-cell:empty {
   padding: 0;
 }
 
