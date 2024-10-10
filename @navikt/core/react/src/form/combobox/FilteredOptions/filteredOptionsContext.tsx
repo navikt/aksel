@@ -140,7 +140,7 @@ const FilteredOptionsProvider = ({
       if (disabled || readOnly) {
         return;
       }
-      virtualFocus.moveFocusToTop();
+      virtualFocus.resetFocus();
       if (newState ?? !isInternalListOpen) {
         setHideCaret(!!maxSelected?.isLimitReached);
       }
