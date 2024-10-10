@@ -1,6 +1,12 @@
 import { defineField } from "sanity";
 import { UpdateInfo } from "../../custom-components";
 
+export type Oppdateringsvarsel = {
+  updateInfo: {
+    lastVerified: string;
+  };
+};
+
 export const oppdateringsvarsel = defineField({
   title: "Sist godkjent",
   name: "updateInfo",
