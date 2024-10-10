@@ -16,9 +16,11 @@ main();
 
 async function main() {
   console.info("Started icon-update from Figma");
-  const icons = await fetchIcons();
+  const publishedIconComponents = await fetchIcons();
 
-  const images = await fetchDownloadUrls(icons.map((x) => x.node_id));
+  const imagesUrls = await fetchDownloadUrls(
+    publishedIconComponents.map((x) => x.node_id),
+  );
 
   if (existsSync(iconFolder)) {
     rmSync(iconFolder, { recursive: true, force: true });
@@ -26,23 +28,25 @@ async function main() {
 
   mkdirSync(iconFolder);
 
-  console.info(`Downloading ${Object.keys(images).length} icons from Figma...`);
+  console.info(
+    `Downloading ${Object.keys(imagesUrls).length} icons from Figma...`,
+  );
 
   let counter = 0;
-  for (const [key, value] of Object.entries(images)) {
-    const icon = await fetch(value)
+  for (const [nodeId, iconUrl] of Object.entries(imagesUrls)) {
+    const iconSvg = await fetch(iconUrl)
       .then((x) => x.text())
       .catch((e) => {
         throw e.message;
       });
 
-    if (!icon) {
+    if (!iconSvg) {
       continue;
     }
 
     /*
      * Arbitrary delay to not get rate-limited by image hosting
-     * Currently accounts for ~18 seconds in theory, but in practice the bottleneck is fetching each icon 1 at a time
+     * Currently accounts for ~18 seconds in theory, but in practice the bottlenech is fetching each icon 1 at a time
      */
     await new Promise((r) => setTimeout(r, 20));
 
@@ -52,33 +56,35 @@ async function main() {
       process.stdout.write(`Processed ${counter} icons\r`);
     }
 
-    const matchingIcon = icons.find((x) => x.node_id === key);
+    const matchingIcon = publishedIconComponents.find(
+      (x) => x.node_id === nodeId,
+    );
 
     if (!matchingIcon) {
       throw new Error(
-        `No matching icon found for ${key}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
+        `No matching icon found for ${nodeId}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
       );
     }
 
-    writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), icon, {
+    writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), iconSvg, {
       encoding: "utf8",
     });
   }
   console.info(`Completed processing of ${counter} icons`);
 
-  makeConfig(icons, iconFolder);
+  makeConfig(publishedIconComponents, iconFolder);
 
   const filesInDir = readdirSync(iconFolder);
 
-  if (filesInDir.length * 2 !== icons.length) {
+  if (filesInDir.length * 2 !== publishedIconComponents.length) {
     throw new Error(
-      `Icons written to directory (${filesInDir.length}) does not match the amount of icons located in Figma (${icons.length})`,
+      `Icons written to director (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length})`,
     );
   }
 
   console.info(
     `Success! A total of ${
-      Object.keys(images).length
+      Object.keys(imagesUrls).length
     } were fetched and downloaded from Figma 🎉`,
   );
 }
