@@ -21,9 +21,7 @@ describe(`Each icons has a valid code`, () => {
 
       test(`has valid attributes on root-node`, () => {
         const root = select(":root", iconAst);
-        const properties = root?.properties
-          ? Object.keys(root.properties).sort()
-          : [];
+        const properties = Object.keys(root?.properties ?? []).sort();
 
         expect(properties).toStrictEqual(
           ["viewBox", "xmlns", "height", "width", "fill"].sort(),
@@ -32,44 +30,41 @@ describe(`Each icons has a valid code`, () => {
 
       test(`has valid xml-attr`, () => {
         const root = select(":root", iconAst);
-        const xmlns = root?.properties?.xmlns;
-        expect(xmlns).toBe("http://www.w3.org/2000/svg");
+        expect(root?.properties?.xmlns).toBe("http://www.w3.org/2000/svg");
       });
 
       test(`has valid viewbox`, () => {
         const root = select(":root", iconAst);
-        const viewbox = root?.properties ? root.properties.viewBox : null;
-        expect(viewbox).toBe("0 0 24 24");
+        expect(root?.properties?.viewBox).toBe("0 0 24 24");
       });
 
       test(`root fill is none`, () => {
         const root = select(":root", iconAst);
-        const fill = root?.properties ? root.properties.fill : null;
-        expect(fill).toBe("none");
+        expect(root?.properties?.fill).toBe("none");
       });
 
       test(`has valid width and height`, () => {
         const root = select(":root", iconAst);
-        const width = root?.properties ? root.properties.width : null;
-        const height = root?.properties ? root.properties.height : null;
-        expect(width).toBe("24");
-        expect(height).toBe("24");
+        expect(root?.properties?.width).toBe("24");
+        expect(root?.properties?.height).toBe("24");
       });
 
       test(`has valid stroke`, () => {
         const nodes = selectAll("*", iconAst);
 
         nodes.forEach((n) => {
-          n.properties?.stroke &&
+          if (n.properties?.stroke) {
             expect(n.properties.stroke).toEqual("#23262A");
+          }
         });
       });
 
       test(`has valid stroke-width`, () => {
         const nodes = selectAll("*", iconAst);
         nodes.forEach((n) => {
-          n.properties?.strokeWidth &&
+          if (n.properties?.strokeWidth) {
             expect(n.properties?.strokeWidth).toEqual("1.5");
+          }
         });
       });
     });
