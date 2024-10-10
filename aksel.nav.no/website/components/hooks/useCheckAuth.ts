@@ -18,7 +18,7 @@ export const useCheckAuth = (skipCheck?: boolean) => {
       try {
         setUser(!!JSON.parse(response)?.id);
         return;
-      } catch (e) {
+      } catch {
         setUser(false);
       }
       setUser(false);

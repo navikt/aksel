@@ -27,7 +27,7 @@ export function extractMetadata(
 
   try {
     return JSON5.parse(metadata);
-  } catch (e) {
+  } catch {
     console.error(`Could not parse JSON5 in ${dirName}`);
   }
 }

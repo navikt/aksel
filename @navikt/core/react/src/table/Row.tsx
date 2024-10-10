@@ -14,10 +14,9 @@ export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   shadeOnHover?: boolean;
 }
 
-export interface RowType
-  extends React.ForwardRefExoticComponent<
-    RowProps & React.RefAttributes<HTMLTableRowElement>
-  > {}
+export type RowType = React.ForwardRefExoticComponent<
+  RowProps & React.RefAttributes<HTMLTableRowElement>
+>;
 
 export const Row: RowType = forwardRef(
   ({ className, selected = false, shadeOnHover = true, ...rest }, ref) => (

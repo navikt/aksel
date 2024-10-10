@@ -518,7 +518,7 @@ dialogPolyfill.isInlinePositionSetByStylesheet = function (element) {
     // Some browsers throw on cssRules.
     try {
       cssRules = styleSheet.cssRules;
-    } catch (e) {
+    } catch {
       /* empty */
     }
     if (!cssRules) {
@@ -530,7 +530,7 @@ dialogPolyfill.isInlinePositionSetByStylesheet = function (element) {
       // Ignore errors on invalid selector texts.
       try {
         selectedNodes = document.querySelectorAll(rule.selectorText);
-      } catch (e) {
+      } catch {
         /* empty */
       }
       if (!selectedNodes || !inNodeList(selectedNodes, element)) {
