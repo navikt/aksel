@@ -4,6 +4,7 @@ import {
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
+  SanityDocument,
   useClient,
   useDocumentOperation,
 } from "sanity";
@@ -11,6 +12,7 @@ import useSWR from "swr";
 import { Button } from "@navikt/ds-react";
 import { SanityBlockContent } from "@/sanity-block";
 import { SANITY_API_VERSION } from "@/sanity/config";
+import { Oppdateringsvarsel } from "../../../schema/documents/presets/oppdateringsvarsel";
 
 export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   const WrappedFocus = (
@@ -20,8 +22,17 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     const originalPublishDescription = action(props);
     const [verifyOpen, setVerifyOpen] = useState(false);
     const [publishOpen, setPublishOpen] = useState(false);
-    const lastVerified = props.published?.updateInfo?.["lastVerified"];
-    const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
+
+    const verifiedDocument = props.published as
+      | (SanityDocument & Oppdateringsvarsel)
+      | null;
+
+    const verifiedDraftDocument = props.published as
+      | (SanityDocument & Oppdateringsvarsel)
+      | null;
+
+    const lastVerified = verifiedDocument?.updateInfo?.lastVerified;
+    const lastVerifiedDraft = verifiedDraftDocument?.updateInfo?.lastVerified;
 
     const cancelAction = () => {
       setVerifyOpen(false);
@@ -97,8 +108,12 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     // Update content action
     if (
       props.published &&
-      (differenceInMonths(new Date(), new Date(lastVerified)) < 6 ||
-        differenceInMonths(new Date(), new Date(lastVerifiedDraft)) < 6)
+      (differenceInMonths(new Date(), new Date(lastVerified ?? new Date())) <
+        6 ||
+        differenceInMonths(
+          new Date(),
+          new Date(lastVerifiedDraft ?? new Date()),
+        ) < 6)
     ) {
       return {
         ...originalPublishDescription,
@@ -112,7 +127,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     }
 
     const verifiedStatus =
-      differenceInMonths(new Date(), new Date(lastVerified)) < 6
+      differenceInMonths(new Date(), new Date(lastVerified ?? new Date())) < 6
         ? "pre"
         : "post";
     // Approve content action
