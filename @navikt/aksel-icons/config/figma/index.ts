@@ -72,7 +72,7 @@ async function main() {
 
   if (filesInDir.length * 2 !== icons.length) {
     throw new Error(
-      `Icons written to director (${filesInDir.length}) does not match the amount of icons located in Figma (${icons.length})`,
+      `Icons written to directory (${filesInDir.length}) does not match the amount of icons located in Figma (${icons.length})`,
     );
   }
 
