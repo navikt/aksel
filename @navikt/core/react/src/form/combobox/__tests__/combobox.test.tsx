@@ -291,4 +291,40 @@ describe("Render combobox", () => {
       );
     });
   });
+
+  describe("has keyboard navigation", () => {
+    test("for PageDown and PageUp", async () => {
+      render(<App options={options} />);
+
+      const combobox = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+      const pressKey = async (key: string) => {
+        await act(async () => {
+          await userEvent.keyboard(`{${key}}`);
+        });
+      };
+
+      const hasVirtualFocus = (option: string) =>
+        expect(combobox.getAttribute("aria-activedescendant")).toBe(
+          screen.getByRole("option", { name: option }).id,
+        );
+
+      await act(async () => {
+        await userEvent.click(combobox);
+      });
+
+      await pressKey("ArrowDown");
+      hasVirtualFocus("apple");
+      await pressKey("PageDown");
+      hasVirtualFocus("mango");
+      await pressKey("PageDown");
+      hasVirtualFocus("watermelon");
+      await pressKey("PageUp");
+      hasVirtualFocus("mango");
+      await pressKey("PageUp");
+      hasVirtualFocus("apple");
+    });
+  });
 });

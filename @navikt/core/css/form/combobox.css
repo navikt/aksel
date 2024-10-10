@@ -263,6 +263,7 @@
   border-radius: var(--a-border-radius-medium);
   background-color: var(--ac-combobox-list-bg, var(--a-surface-default));
   color: var(--ac-combobox-list-text, var(--a-text-default));
+  overscroll-behavior: contain;
 }
 
 .navds-combobox__list--closed {

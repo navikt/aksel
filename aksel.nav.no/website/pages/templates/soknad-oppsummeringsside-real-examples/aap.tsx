@@ -92,7 +92,7 @@ function Example() {
                 <FormSummary.Value>Luke Skywalker</FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
-                <FormSummary.Label>Personnummer</FormSummary.Label>
+                <FormSummary.Label>Fødselsnummer</FormSummary.Label>
                 <FormSummary.Value>123456 78912</FormSummary.Value>
               </FormSummary.Answer>
               <FormSummary.Answer>
