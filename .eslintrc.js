@@ -20,7 +20,6 @@ module.exports = {
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:storybook/recommended",
-    "plugin:@typescript-eslint/recommended",
   ],
   /* Allows eslint-plugin-react to detect installed react-version */
   settings: { react: { version: "detect" } },
