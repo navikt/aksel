@@ -4,6 +4,7 @@
  * - Look into opinionated stylistic plugin
  * - Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
  * - "plugin:react/jsx-runtime" Not sure if this will cause problems for projects not using the new JSX transform
+ * - Consider adding the rule "id-length"
  */
 module.exports = {
   env: {
@@ -19,6 +20,7 @@ module.exports = {
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:storybook/recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
   /* Allows eslint-plugin-react to detect installed react-version */
   settings: { react: { version: "detect" } },
@@ -30,7 +32,6 @@ module.exports = {
     ],
     "array-callback-return": "error",
     "object-shorthand": "error",
-    // TODO: Consider adding the rule "id-length"
     // Temporary:
     "react/prop-types": "off",
     "react/display-name": "off",
@@ -70,7 +71,11 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
-        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
+        /*
+         * TODO:
+         * - Consider { builtinGlobals: true }
+         */
+        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], //
         "@typescript-eslint/no-explicit-any": "off", // Temporary
         "@typescript-eslint/array-type": "error",
       },
@@ -79,8 +84,9 @@ module.exports = {
       files: ["**/*.test.*", "**/__tests__/*"],
       plugins: ["@vitest"],
       extends: [
-        "plugin:@vitest/legacy-recommended",
         "plugin:testing-library/react",
+        /* Needed to support v8 eslint config-syntax */
+        "plugin:@vitest/legacy-recommended",
       ],
     },
 
