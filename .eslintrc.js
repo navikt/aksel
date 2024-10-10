@@ -31,10 +31,6 @@ module.exports = {
     ],
     "array-callback-return": "error",
     "object-shorthand": "error",
-    // Temporary:
-    "react/prop-types": "off",
-    "react/display-name": "off",
-    "import/no-named-as-default": "off",
     "no-else-return": "error",
     "no-console": [
       "warn",
@@ -56,6 +52,10 @@ module.exports = {
         ],
       },
     ],
+    /* Temporarily turned off until code is updated */
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "import/no-named-as-default": "off",
   },
   /* https://eslint.org/docs/latest/use/configure/rules#report-unused-eslint-disable-comments */
   reportUnusedDisableDirectives: true,
