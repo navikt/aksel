@@ -134,14 +134,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case "Accept":
           onEnter(e);
           break;
-        case "Home":
-          toggleIsListOpen(false);
-          virtualFocus.moveFocusToTop();
-          break;
-        case "End":
-          toggleIsListOpen(true);
-          virtualFocus.moveFocusToBottom();
-          break;
         default:
           break;
       }
@@ -202,6 +194,24 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }
             virtualFocus.moveFocusUp();
           }
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          virtualFocus.moveFocusToTop();
+        } else if (e.key === "End") {
+          e.preventDefault();
+          if (virtualFocus.activeElement === null || !isListOpen) {
+            toggleIsListOpen(true);
+          }
+          virtualFocus.moveFocusToBottom();
+        } else if (e.key === "PageUp") {
+          e.preventDefault();
+          virtualFocus.moveFocusUpBy(6);
+        } else if (e.key === "PageDown") {
+          e.preventDefault();
+          if (virtualFocus.activeElement === null || !isListOpen) {
+            toggleIsListOpen(true);
+          }
+          virtualFocus.moveFocusDownBy(6);
         }
       },
       [
@@ -230,10 +240,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (filteredOptions.length === 0) {
           toggleIsListOpen(false);
         }
-        virtualFocus.moveFocusToTop();
         onChange(newValue);
       },
-      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen],
+      [filteredOptions.length, onChange, toggleIsListOpen],
     );
 
     return (

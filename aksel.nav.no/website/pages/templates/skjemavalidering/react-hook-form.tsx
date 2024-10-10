@@ -15,7 +15,7 @@ import {
 import { withDsExample } from "@/web/examples/withDsExample";
 
 type Inputs = {
-  personnummer: string;
+  fødselsnummer: string;
   transportmiddel: string;
 };
 
@@ -64,16 +64,16 @@ const Example = () => {
       >
         <VStack gap="8">
           <TextField
-            id="personnummer"
-            label="Personnummer"
+            id="fødselsnummer"
+            label="Fødselsnummer"
             htmlSize={11}
-            error={errors.personnummer?.message}
-            {...register("personnummer", {
-              required: "Du må fylle ut personnummer.",
+            error={errors.fødselsnummer?.message}
+            {...register("fødselsnummer", {
+              required: "Du må fylle ut fødselsnummer.",
               pattern: {
                 value: /^\d{11}$/,
-                message: "Personnummer må være 11 siffer.",
-              }, // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
+                message: "Fødselsnummer må være 11 siffer.",
+              }, // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere fødselsnummer.
             })}
           />
           <RadioGroup
