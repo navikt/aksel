@@ -26,7 +26,7 @@ export const createWrappedApproveAction = () => {
       | (SanityDocument & Oppdateringsvarsel)
       | null;
 
-    const lastVerified = verifiedDocument.updateInfo?.lastVerified;
+    const lastVerified = verifiedDocument?.updateInfo?.lastVerified;
 
     const verifyContent = () => {
       patch.execute(
@@ -44,7 +44,7 @@ export const createWrappedApproveAction = () => {
     };
 
     const verifiedStatus =
-      differenceInMonths(new Date(), new Date(lastVerified)) < 6
+      differenceInMonths(new Date(), new Date(lastVerified ?? new Date())) < 6
         ? "pre"
         : "post";
 

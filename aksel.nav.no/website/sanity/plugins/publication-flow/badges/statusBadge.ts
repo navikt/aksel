@@ -15,7 +15,7 @@ export const CreateStatusBadge = () => {
       | (SanityDocument & Oppdateringsvarsel)
       | null;
 
-    const lastVerified = verifiedDocument.updateInfo?.lastVerified;
+    const lastVerified = verifiedDocument?.updateInfo?.lastVerified;
 
     if (!published && !!lastVerified) {
       return {
@@ -33,7 +33,7 @@ export const CreateStatusBadge = () => {
       };
     }
     const outDated =
-      differenceInMonths(new Date(), new Date(lastVerified)) >= 6;
+      differenceInMonths(new Date(), new Date(lastVerified ?? new Date())) >= 6;
 
     return {
       label: outDated ? "Publisert og gammel" : "Publisert",
