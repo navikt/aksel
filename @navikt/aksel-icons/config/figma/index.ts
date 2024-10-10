@@ -42,7 +42,7 @@ async function main() {
 
     /*
      * Arbitrary delay to not get rate-limited by image hosting
-     * Currently accounts for ~18 seconds in theory, but in practice the bottlenech is fetching each icon 1 at a time
+     * Currently accounts for ~18 seconds in theory, but in practice the bottleneck is fetching each icon 1 at a time
      */
     await new Promise((r) => setTimeout(r, 20));
 
