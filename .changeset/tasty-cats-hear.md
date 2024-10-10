@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Combobox: Support PageUp/PageDown in dropdown list
+Combobox: Support PageUp/PageDown in dropdown list.
