@@ -12,6 +12,7 @@ export type VirtualFocusType = {
   moveFocusToBottom: () => void;
   moveFocusUpBy: (numberOfElements: number) => void;
   moveFocusDownBy: (numberOfElements: number) => void;
+  resetFocus: () => void;
 };
 
 const useVirtualFocus = (
@@ -70,6 +71,7 @@ const useVirtualFocus = (
     setActiveElement(elementsAbleToReceiveFocus[_currentIndex + 1]);
   };
 
+  const resetFocus = () => setActiveElement(undefined);
   const moveFocusToTop = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     setActiveElement(elementsAbleToReceiveFocus[0]);
@@ -127,6 +129,7 @@ const useVirtualFocus = (
     moveFocusToBottom,
     moveFocusUpBy,
     moveFocusDownBy,
+    resetFocus,
   };
 };
 

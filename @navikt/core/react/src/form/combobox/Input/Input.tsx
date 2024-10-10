@@ -240,10 +240,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         } else if (filteredOptions.length === 0) {
           toggleIsListOpen(false);
         }
-        virtualFocus.moveFocusToTop();
         onChange(newValue);
       },
-      [filteredOptions.length, virtualFocus, onChange, toggleIsListOpen],
+      [filteredOptions.length, onChange, toggleIsListOpen],
     );
 
     return (
