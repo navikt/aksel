@@ -32,7 +32,7 @@ describe(`Each icons has a valid code`, () => {
 
       test(`has valid xml-attr`, () => {
         const root = select(":root", iconAst);
-        const xmlns = root?.properties ? root.properties.xmlns : null;
+        const xmlns = root?.properties?.xmlns;
         expect(xmlns).toBe("http://www.w3.org/2000/svg");
       });
 
