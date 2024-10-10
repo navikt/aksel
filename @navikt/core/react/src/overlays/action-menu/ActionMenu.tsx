@@ -368,7 +368,7 @@ const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
             },
           }}
         >
-          {children}
+          <div className="navds-action-menu__content-inner">{children}</div>
         </Menu.Content>
       </Menu.Portal>
     );
@@ -952,7 +952,7 @@ const ActionMenuSubContent = forwardRef<
             },
           }}
         >
-          {children}
+          <div className="navds-action-menu__content-inner">{children}</div>
         </Menu.SubContent>
       </Menu.Portal>
     );

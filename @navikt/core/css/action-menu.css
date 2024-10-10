@@ -1,22 +1,26 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .navds-action-menu__content {
+  overflow: hidden;
+  box-shadow: var(--a-shadow-medium);
+  border-radius: var(--a-border-radius-large);
+}
+
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+.navds-action-menu__content > .navds-action-menu__content-inner {
   --__ac-action-menu-content-p: var(--a-spacing-2);
   --__ac-action-menu-item-pr: var(--a-spacing-3);
   --__ac-action-menu-item-pl: var(--a-spacing-2);
   --__ac-action-menu-item-height: 2rem;
 
-  padding: var(--__ac-action-menu-content-p);
-  box-shadow: var(--a-shadow-medium);
   border-radius: var(--a-border-radius-large);
   background-color: var(--a-surface-default);
-  overflow: auto;
   min-width: 128px;
   max-width: min(95vw, 640px);
-  width: calc(100% + 17px);
-  max-height: var(--__ac-action-menu-content-available-height);
   transform-origin: var(--__ac-action-menu-content-transform-origin);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  padding: var(--__ac-action-menu-content-p);
+  overflow: auto;
+  max-height: var(--__ac-action-menu-content-available-height);
 }
 
 .navds-action-menu__content:where([data-state="open"]):where([data-side="bottom"]) {
@@ -183,7 +187,6 @@
   height: 1px;
   margin-block: var(--a-spacing-2);
   background-color: var(--a-border-divider);
-  margin-inline: calc(var(--__ac-action-menu-content-p) * -1);
 }
 
 .navds-action-menu__indicator {
