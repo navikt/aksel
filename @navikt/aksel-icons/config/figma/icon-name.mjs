@@ -6,7 +6,7 @@ export const resolveName = (icon) => {
 
   if (isVariant) {
     const variant = icon.name.replace("Variant=", "").replace("Stroke", "");
-    const actualName = icon["containing_frame"]?.["containingStateGroup"]?.name;
+    const actualName = icon.containing_frame?.containingStateGroup?.name;
     const name = `${actualName}${variant}`;
     return `${startCase(camelCase(name)).replace(/ /g, "")}.svg`;
   }

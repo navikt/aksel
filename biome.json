@@ -47,7 +47,6 @@
       },
       "complexity": {
         "noForEach": "off",
-        "useLiteralKeys": "off",
         "useArrowFunction": "off"
       }
     },
