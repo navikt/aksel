@@ -33,8 +33,8 @@ export const makeConfig = (
 
     const config: IconYml = {
       name,
-      category: icon.containing_frame?.pageName,
-      sub_category: icon.containing_frame?.name,
+      category: icon.containing_frame.pageName,
+      sub_category: icon.containing_frame.name,
       keywords: keywords.length > 0 ? keywords : [name],
       variant: icon.name.includes("Variant=")
         ? icon.name.replace("Variant=", "")
