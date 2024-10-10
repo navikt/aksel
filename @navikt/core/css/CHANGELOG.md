@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.2.1
+
+### Patch Changes
+
+- Combobox: Support PageUp/PageDown in dropdown list. ([#3158](https://github.com/navikt/aksel/pull/3158))
+
 ## 7.2.0
 
 ## 7.1.2
