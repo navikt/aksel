@@ -21,4 +21,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
+  desc: "Komponenten blir tilpasset mobil på brekkpunkt sm (<480px). Da blir avataren og paddingen mindre. Avataren flyttes også øverst (poster-variant), hvis ikke du overstyrer det.",
 };
