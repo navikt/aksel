@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { CodeExampleSchemaT } from "../../components/types";
 import { noCdnClient } from "../../sanity/interface/client.server";
 import { extractMetadata } from "./parts/extract-metadata";
@@ -6,8 +5,6 @@ import { getDirectories } from "./parts/get-directories";
 import { parseCodeFiles } from "./parts/parse-code-files";
 import { validateExamples } from "./parts/validate-examples";
 import { RootDirectoriesT, rootDirectories } from "./types";
-
-dotenv.config();
 
 const isDryRun = process.argv.includes("--dry-run");
 

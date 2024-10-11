@@ -55,19 +55,19 @@ const RovingFocus = forwardRef<HTMLDivElement, RovingFocusProps>(
 
         const nextItem = () => {
           const next = descendants.nextEnabled(idx, loop);
-          next && next.node?.focus();
+          next?.node?.focus();
         };
         const prevItem = () => {
           const prev = descendants.prevEnabled(idx, loop);
-          prev && prev.node?.focus();
+          prev?.node?.focus();
         };
         const firstItem = () => {
           const first = descendants.firstEnabled();
-          first && first.node?.focus();
+          first?.node?.focus();
         };
         const lastItem = () => {
           const last = descendants.lastEnabled();
-          last && last.node?.focus();
+          last?.node?.focus();
         };
 
         const keyMap: Record<string, React.KeyboardEventHandler> = {

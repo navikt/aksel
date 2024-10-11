@@ -152,14 +152,14 @@ export const FontWeight: Story = {
     return (
       <>
         {fontWeights.map((weight) => (
-          <>
+          <React.Fragment key={weight}>
             <h2>{weight}</h2>
             <FontComponent
               key={weight}
               weight={weight}
               family="Source Sans 3"
             />
-          </>
+          </React.Fragment>
         ))}
       </>
     );

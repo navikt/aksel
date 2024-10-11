@@ -1,4 +1,11 @@
-// TODO: Convert to new format: https://eslint.org/docs/latest/use/configure/migration-guide
+/**
+ * TODO:
+ * - Convert to new format (v9): https://eslint.org/docs/latest/use/configure/migration-guide
+ * - Look into opinionated stylistic plugin
+ * - Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
+ * - We should add "plugin:react/jsx-runtime", but not sure if this will cause problems for projects not using the new JSX transform
+ * - Consider adding the rule "id-length"
+ */
 module.exports = {
   env: {
     browser: true,
@@ -8,15 +15,13 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
-    //"plugin:react/jsx-runtime", // Not sure if this will cause problems for projects not using the new JSX transform
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:storybook/recommended",
-    // TODO: Look into opinionated stylistic plugin
-    // TODO: Replace @typescript-eslint/recommended with @typescript-eslint/recommended-type-checked
   ],
+  /* Allows eslint-plugin-react to detect installed react-version */
   settings: { react: { version: "detect" } },
   rules: {
     "import/no-unresolved": "off",
@@ -26,12 +31,6 @@ module.exports = {
     ],
     "array-callback-return": "error",
     "object-shorthand": "error",
-    // TODO: Consider adding the rule "id-length"
-    // Temporary:
-    "react/prop-types": "off",
-    "react/display-name": "off",
-    "import/no-named-as-default": "off",
-    // "import/no-cycle": [1],
     "no-else-return": "error",
     "no-console": [
       "warn",
@@ -53,7 +52,12 @@ module.exports = {
         ],
       },
     ],
+    /* Temporarily turned off until code is updated */
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "import/no-named-as-default": "off",
   },
+  /* https://eslint.org/docs/latest/use/configure/rules#report-unused-eslint-disable-comments */
   reportUnusedDisableDirectives: true,
   overrides: [
     {
@@ -66,7 +70,11 @@ module.exports = {
       files: ["**/*.ts?(x)"],
       extends: ["plugin:@typescript-eslint/recommended"],
       rules: {
-        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }], // TODO: Consider { builtinGlobals: true }
+        /*
+         * TODO:
+         * - Consider { builtinGlobals: true }
+         */
+        "@typescript-eslint/no-shadow": ["error", { hoist: "all" }],
         "@typescript-eslint/no-explicit-any": "off", // Temporary
         "@typescript-eslint/array-type": "error",
       },
@@ -75,8 +83,9 @@ module.exports = {
       files: ["**/*.test.*", "**/__tests__/*"],
       plugins: ["@vitest"],
       extends: [
-        "plugin:@vitest/legacy-recommended",
         "plugin:testing-library/react",
+        /* Needed to support v8 eslint config-syntax */
+        "plugin:@vitest/legacy-recommended",
       ],
     },
 

@@ -58,7 +58,7 @@ export const Size: Story = {
   render: () => (
     <VStack gap="4">
       {SIZES.map((size) => (
-        <>
+        <React.Fragment key={size}>
           <h3>{size}</h3>
           <Chat
             avatar="ON"
@@ -75,7 +75,7 @@ export const Size: Story = {
               laboris labore nisi ut.
             </Chat.Bubble>
           </Chat>
-        </>
+        </React.Fragment>
       ))}
     </VStack>
   ),
@@ -85,7 +85,7 @@ export const Variants: Story = {
   render: () => (
     <VStack gap="4">
       {VARIANTS.map((variant) => (
-        <>
+        <React.Fragment key={variant}>
           <h3>{variant}</h3>
           <Chat
             avatar="NAV"
@@ -97,7 +97,7 @@ export const Variants: Story = {
               Aute minim nisi sunt mollit duis sunt nulla minim non proident.
             </Chat.Bubble>
           </Chat>
-        </>
+        </React.Fragment>
       ))}
     </VStack>
   ),

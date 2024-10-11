@@ -144,7 +144,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       (event: SearchClearEvent) => {
         onClear?.(event);
         handleChange("");
-        searchRef.current && searchRef.current?.focus?.();
+        searchRef.current?.focus?.();
       },
       [handleChange, onClear],
     );

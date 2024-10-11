@@ -1,9 +1,6 @@
-import dotenv from "dotenv";
 import core from "@navikt/ds-css/tokens.json";
 import tokens from "@navikt/ds-tokens/docs.json";
 import { noCdnClient } from "../sanity/interface/client.server";
-
-dotenv.config();
 
 const allTokens: { title: string; kategori: string }[] = [
   ...Object.keys(tokens).map((x) => ({ title: x, kategori: "core" })),
@@ -47,7 +44,7 @@ export const updateTokens = async () => {
 
   await transactionClient
     .commit()
-    .then(() => console.info(`Updated tokens`))
+    .then(() => console.info(`Updated tokens!`))
     .catch((e) => console.error(e.message));
 };
 

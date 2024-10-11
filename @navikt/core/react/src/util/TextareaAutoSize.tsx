@@ -40,7 +40,7 @@ const checkState = (
  * https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/ownerWindow/ownerWindow.ts
  */
 const ownerWindow = (node: Node | undefined): Window => {
-  const doc = (node && node.ownerDocument) || document;
+  const doc = node?.ownerDocument || document;
   return doc.defaultView || window;
 };
 
@@ -205,6 +205,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
       syncHeight();
     });
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Since value is an external prop, we want to reset the renders on every time it changes, even when it is undefined or empty.
     useEffect(() => {
       renders.current = 0;
     }, [value]);
@@ -222,7 +223,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
     };
 
     const mainStyle: React.CSSProperties = {
-      ["--__ac-textarea-height"]: state.outerHeightStyle + "px",
+      "--__ac-textarea-height": state.outerHeightStyle + "px",
       // Need a large enough difference to allow scrolling.
       // This prevents infinite rendering loop.
       overflow:

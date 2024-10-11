@@ -47,16 +47,7 @@
       },
       "complexity": {
         "noForEach": "off",
-        "useLiteralKeys": "off",
-        "useOptionalChain": "off",
-        "useArrowFunction": "off",
-        "noUselessTernary": "off"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "off",
-        "noInnerDeclarations": "off",
-        "useJsxKeyInIterable": "off",
-        "noSelfAssign": "off"
+        "useArrowFunction": "off"
       }
     },
     "ignore": [
@@ -67,6 +58,7 @@
       "**/esm/**",
       "**/cjs/**",
       "**/dist/**",
+      "**/figma/**/plugin.js",
       "**/codemod/**/*.js",
       "**/tailwind/tailwind.config.js",
       "**/.next/**",

@@ -13,13 +13,13 @@ import {
 } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-const validatePersonnummer = (p: string) => {
-  // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere personnummer.
+const validateFødselsnummer = (p: string) => {
+  // Det er anbefalt å bruke https://github.com/navikt/fnrvalidator for å validere fødselsnummer.
   if (p.length === 0) {
-    return "Du må fylle ut personnummer.";
+    return "Du må fylle ut fødselsnummer.";
   }
   if (!/^\d{11}$/.test(p)) {
-    return "Personnummer må være 11 siffer.";
+    return "Fødselsnummer må være 11 siffer.";
   }
   return "";
 };
@@ -32,11 +32,11 @@ const Example = () => {
     tries: 0,
   });
   const [values, setValues] = React.useState({
-    personnummer: "",
+    fødselsnummer: "",
     transportmiddel: "",
   });
   const [errors, setErrors] = React.useState({
-    personnummer: "",
+    fødselsnummer: "",
     transportmiddel: "",
   });
 
@@ -44,7 +44,7 @@ const Example = () => {
     event.preventDefault();
 
     const newErrors = {
-      personnummer: validatePersonnummer(values.personnummer),
+      fødselsnummer: validateFødselsnummer(values.fødselsnummer),
       transportmiddel: values.transportmiddel
         ? ""
         : "Du må velge et transportmiddel.",
@@ -59,7 +59,7 @@ const Example = () => {
   }
 
   useEffect(() => {
-    errorSummaryRef.current?.focus();
+    formState.tries > 0 && errorSummaryRef.current?.focus();
   }, [formState.tries]);
 
   if (formState.submitted)
@@ -84,21 +84,21 @@ const Example = () => {
       <form onSubmit={onSubmit}>
         <VStack gap="8">
           <TextField
-            id="personnummer"
-            label="Personnummer"
+            id="fødselsnummer"
+            label="Fødselsnummer"
             htmlSize={11}
-            value={values.personnummer}
+            value={values.fødselsnummer}
             onChange={(e) =>
-              setValues({ ...values, personnummer: e.currentTarget.value })
+              setValues({ ...values, fødselsnummer: e.currentTarget.value })
             }
             onBlur={() => {
               formState.tries &&
                 setErrors({
                   ...errors,
-                  personnummer: validatePersonnummer(values.personnummer),
+                  fødselsnummer: validateFødselsnummer(values.fødselsnummer),
                 });
             }}
-            error={errors.personnummer}
+            error={errors.fødselsnummer}
           />
           <RadioGroup
             id="transportmiddel"

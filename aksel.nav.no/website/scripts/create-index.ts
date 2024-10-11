@@ -1,15 +1,15 @@
-import dotenv from "dotenv";
 import fs from "fs";
 import { groupBy, omit } from "lodash";
 import { allArticleDocuments } from "../sanity/config";
 import { noCdnClient } from "../sanity/interface/client.server";
 
-dotenv.config();
-
 main();
 
 async function main() {
   await createIndex();
+  console.info(
+    "Successfully created searchindex and added it to public folder",
+  );
 }
 
 async function createIndex() {

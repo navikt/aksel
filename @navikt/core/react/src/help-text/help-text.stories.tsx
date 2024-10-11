@@ -49,7 +49,7 @@ Default.argTypes = {
 export const Open: StoryFn = () => {
   const ref = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
-    ref.current && ref.current.click();
+    ref.current?.click();
   }, []);
 
   return (

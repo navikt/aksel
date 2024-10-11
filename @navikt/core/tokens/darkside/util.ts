@@ -51,19 +51,38 @@ export type TokenTypes =
   | "global-radius"
   | "global-spacing";
 
-export type SemanticTokenGroups = "background" | "border" | "text" | "contrast";
-type SemanticTokenGroupsWithRoles = Exclude<SemanticTokenGroups, "contrast">;
+export type SemanticTokenGroups = "background" | "border" | "text";
 
 export type TokenGroup =
   | GlobalColorRoles
   | SemanticTokenGroups
-  | `${SemanticTokenGroupsWithRoles}.${GlobalColorRoles}`;
+  | `${SemanticTokenGroups}.${GlobalColorRoles}`;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
+  /**
+   * Token value
+   * @example "#000000"
+   * @example "1px"
+   * @example "{a.neutral.100.value}"
+   */
   value: string;
+  /**
+   * Token type
+   */
   type: T;
+  /**
+   * Group the token belongs to. Used for auto-documentation and categorization in Figma.
+   */
   group?: TokenGroup;
+  /**
+   * Optional comment for the token. Will be included in the generated documentation and in Figma.
+   */
   comment?: string;
+  /**
+   * Optional extra scopes for the token.
+   * Token will include all default scopes based on `type`, and any extra specified here.
+   */
+  scopes?: VariableScope[];
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {

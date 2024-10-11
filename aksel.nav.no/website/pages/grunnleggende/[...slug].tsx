@@ -131,7 +131,7 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
         variant="page"
       >
         <IntroSeksjon node={page?.intro} />
-        <SanityBlockContent blocks={page["content"]} />
+        <SanityBlockContent blocks={page.content} />
       </WithSidebar>
       <Footer />
     </>

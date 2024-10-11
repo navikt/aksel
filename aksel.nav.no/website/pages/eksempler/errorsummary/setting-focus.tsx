@@ -7,7 +7,9 @@ const Example = () => {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    errorRef.current && errorRef.current.focus();
+    if (hasError && errorRef.current) {
+      errorRef.current.focus();
+    }
   }, [hasError]);
 
   return (

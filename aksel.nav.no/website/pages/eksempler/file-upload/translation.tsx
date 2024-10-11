@@ -1,8 +1,8 @@
-import { Heading, UNSAFE_FileUpload, VStack } from "@navikt/ds-react";
+import { FileUpload, Heading, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => (
-  <UNSAFE_FileUpload
+  <FileUpload
     translations={{
       dropzone: {
         dragAndDropMultiple: "Dra og slipp bilder i format .png",
@@ -14,21 +14,18 @@ const Example = () => (
     }}
   >
     <VStack gap="6">
-      <UNSAFE_FileUpload.Dropzone
-        label="Last opp bilder"
-        onSelect={console.info}
-      />
+      <FileUpload.Dropzone label="Last opp bilder" onSelect={console.info} />
       <div>
         <Heading level="3" size="xsmall" spacing>
           Vedlegg
         </Heading>
         <VStack as="ul" gap="2">
-          <UNSAFE_FileUpload.Item
+          <FileUpload.Item
             as="li"
             file={{ name: "eksempel.png", size: 200000 }}
             status="uploading"
           />
-          <UNSAFE_FileUpload.Item
+          <FileUpload.Item
             as="li"
             file={{ name: "eksempel.png", size: 200000 }}
             status="uploading"
@@ -37,7 +34,7 @@ const Example = () => (
         </VStack>
       </div>
     </VStack>
-  </UNSAFE_FileUpload>
+  </FileUpload>
 );
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
