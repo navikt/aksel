@@ -2,6 +2,7 @@ import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import {
   BaggageIcon,
+  BandageIcon,
   BriefcaseIcon,
   CalendarIcon,
   ChevronDownIcon,
@@ -13,6 +14,7 @@ import {
   PencilLineIcon,
   PersonCircleFillIcon,
   PersonIcon,
+  PersonPencilFillIcon,
   PersonPencilIcon,
   PlateFillIcon,
 } from "@navikt/aksel-icons";
@@ -241,8 +243,120 @@ const RightSide = () => {
   );
 };
 
+const DummyRow = () => {
+  return (
+    <tr>
+      <th>02.11.2022</th>
+      <th>
+        <div className="flex items-center gap-1">
+          <BandageIcon />
+          <span>Syk</span>
+        </div>
+      </th>
+      <th>100%</th>
+      <th>
+        <MiniTag $variant="info">SØ</MiniTag>
+      </th>
+      <th>100%</th>
+      <th>923,00 kr</th>
+      <th>-</th>
+      <th>123</th>
+      <th></th>
+    </tr>
+  );
+};
+
+const DummyRowWeekend = () => {
+  return (
+    <tr className="weekend">
+      <th>02.11.2022</th>
+      <th>
+        <span className="ml-4">Helg</span>
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  );
+};
+
 const Center = () => {
-  return <div>center</div>;
+  return (
+    <div>
+      <table className="m-4">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Dagtype</th>
+            <th>Grad</th>
+            <th>Kilde</th>
+            <th>Total grad</th>
+            <th>Refusjon</th>
+            <th>Utbetaling</th>
+            <th>Dager igjen</th>
+            <th>Merknader</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>TOTAL</th>
+            <th>2 dager</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>2 769,00 kr</th>
+            <th>-</th>
+            <th>123</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th>24.10.2022</th>
+            <th>Arbeid</th>
+            <th></th>
+            <th>
+              <PersonPencilFillIcon />
+            </th>
+            <th></th>
+            <th>-</th>
+            <th>-</th>
+            <th>126</th>
+            <th></th>
+          </tr>
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRowWeekend />
+          <DummyRowWeekend />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRowWeekend />
+          <DummyRowWeekend />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRowWeekend />
+          <DummyRowWeekend />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRow />
+          <DummyRowWeekend />
+          <DummyRowWeekend />
+          <DummyRow />
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 const DagoversiktPage = () => {
