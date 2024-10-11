@@ -82,11 +82,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
     >
       <BodyShort size={size}>
         {start}
-        {highlight && (
-          <mark style={{ backgroundColor: "transparent", fontWeight: "bold" }}>
-            {highlight}
-          </mark>
-        )}
+        {highlight && <mark>{highlight}</mark>}
         {end}
       </BodyShort>
       {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
