@@ -1,11 +1,7 @@
 import { useContext } from "react";
 import { LanguageProviderContext } from "../../provider/i18n/LanguageProvider";
 import { get } from "./get";
-import {
-  Component,
-  ComponentTranslation,
-  TranslationObject,
-} from "./i18n.types";
+import { Component, ComponentTranslation, Translations } from "./i18n.types";
 
 /**
  * https://regex101.com/r/LYKWi3/1
@@ -30,7 +26,7 @@ export function useI18n<T extends Component>(
    * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24
    */
   const translate = (
-    keypath: NestedKeyOf<TranslationObject[T]>,
+    keypath: NestedKeyOf<Translations[T]>,
     options?: { replacements: Record<string, string | number> },
   ) => {
     const text = get(

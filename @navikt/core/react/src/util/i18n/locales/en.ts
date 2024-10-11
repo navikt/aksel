@@ -1,4 +1,4 @@
-import type { TranslationObject } from "../i18n.types";
+import type { Translations } from "../i18n.types";
 
 export default {
   FileUpload: {
@@ -24,4 +24,4 @@ export default {
     showAllSteps: "Show all steps",
     hideAllSteps: "Hide all steps",
   },
-} satisfies TranslationObject;
+} satisfies Translations;

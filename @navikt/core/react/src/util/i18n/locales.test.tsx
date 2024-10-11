@@ -1,11 +1,11 @@
 /* eslint-disable @vitest/expect-expect */
 import { describe, expect, test } from "vitest";
-import { GenericNestedTranslationObject } from "./i18n.types";
+import { Translations } from "./i18n.types";
 import en from "./locales/en";
 import nb from "./locales/nb";
 import nn from "./locales/nn";
 
-function checkValues(obj: GenericNestedTranslationObject) {
+function checkValues(obj: Translations | Record<string, string>) {
   Object.values(obj).forEach((value) => {
     if (typeof value === "object") {
       checkValues(value);

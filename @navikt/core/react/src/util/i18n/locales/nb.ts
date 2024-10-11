@@ -1,4 +1,10 @@
-import type { GenericTranslationObject } from "../i18n.types";
+interface TranslationMap {
+  [component: string]:
+    | Record<string, string>
+    | {
+        [subComponent: string]: Record<string, string>;
+      };
+}
 
 export default {
   FileUpload: {
@@ -24,4 +30,4 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-} satisfies GenericTranslationObject;
+} satisfies TranslationMap;

@@ -1,12 +1,12 @@
 import React, { createContext, useContext } from "react";
-import { PartialTranslationObject } from "../../util/i18n/i18n.types";
+import { PartialTranslations } from "../../util/i18n/i18n.types";
 import nb from "../../util/i18n/locales/nb";
 
 export interface LanguageProviderContextType {
   /**
    * Merged with the default language translations object (officially provided translations).
    */
-  translations: PartialTranslationObject | PartialTranslationObject[];
+  translations: PartialTranslations | PartialTranslations[];
 }
 
 export const LanguageProviderContext =
@@ -16,7 +16,7 @@ export const LanguageProviderContext =
 
 export interface LanguageProviderProps {
   children?: React.ReactNode;
-  translations?: PartialTranslationObject | PartialTranslationObject[];
+  translations?: PartialTranslations | PartialTranslations[];
 }
 
 export const useProvider = () => useContext(LanguageProviderContext);
