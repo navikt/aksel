@@ -9,10 +9,24 @@ import { ComboboxOption } from "../types";
 import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
+const useTextHighlight = (text: string, searchTerm: string) => {
+  const indexOfHighlightedText = text
+    .toLowerCase()
+    .indexOf(searchTerm.toLowerCase());
+  const start = text.substring(0, indexOfHighlightedText);
+  const highlight = text.substring(
+    indexOfHighlightedText,
+    indexOfHighlightedText + searchTerm.length,
+  );
+  const end = text.substring(indexOfHighlightedText + searchTerm.length);
+  return [start, highlight, end];
+};
+
 const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const {
     inputProps: { id },
     size,
+    searchTerm,
   } = useInputContext();
   const {
     setIsMouseLastUsedInputDevice,
@@ -22,9 +36,11 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   } = useFilteredOptionsContext();
   const { isMultiSelect, maxSelected, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
+  const [start, highlight, end] = useTextHighlight(option.label, searchTerm);
 
   const isDisabled = (_option: ComboboxOption) =>
     maxSelected?.isLimitReached && !isInList(_option.value, selectedOptions);
+
   return (
     <li
       className={cl("navds-combobox__list-item", {
@@ -64,7 +80,15 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}
     >
-      <BodyShort size={size}>{option.label}</BodyShort>
+      <BodyShort size={size}>
+        {start}
+        {highlight && (
+          <mark style={{ backgroundColor: "transparent", fontWeight: "bold" }}>
+            {highlight}
+          </mark>
+        )}
+        {end}
+      </BodyShort>
       {isInList(option.value, selectedOptions) && <CheckmarkIcon />}
     </li>
   );
