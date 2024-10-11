@@ -7,14 +7,19 @@ import {
   ChevronDownIcon,
   ChevronLeftCircleIcon,
   ChevronRightCircleIcon,
+  ClockIcon,
   FilesIcon,
+  FolderIcon,
+  PencilLineIcon,
   PersonCircleFillIcon,
   PersonIcon,
+  PersonPencilIcon,
   PlateFillIcon,
 } from "@navikt/aksel-icons";
 import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
 import { Button } from "../components/Button";
 import { Link } from "../components/Link";
+import { MiniTag } from "../components/MiniTag";
 import { Page } from "../components/Page";
 import { Tag } from "../components/Tag";
 
@@ -96,15 +101,15 @@ const Timeline = () => {
   );
 };
 
-const ScSmallCaps = styled.span`
+const ScSmallCaps = styled.span<{ ["$font-weight"]: "normal" }>`
   color: ${tokens.TextSubtle};
-  font-weight: 600;
+  font-weight: ${(props) => (props["$font-weight"] === "normal" ? 400 : 600)};
   font-variant-caps: all-small-caps;
 `;
 
 const LeftSide = () => {
   return (
-    <div>
+    <>
       <div className="flex gap-2 mb-4">
         <Tag $variant="neutral">Forlengelse</Tag>
         <Tag $variant="info">Revurdering</Tag>
@@ -166,12 +171,70 @@ const LeftSide = () => {
           Kan ikke behandles her
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 
+const ScKebabButtons = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 16px;
+  gap: 24px;
+
+  & .iconWrapper {
+    padding: 8px;
+    background-color: ${tokens.BgNeutral};
+    border-radius: 9999px;
+  }
+
+  & .iconWrapper[data-active="true"] {
+    background-color: ${tokens.BgAccentStrong};
+    color: ${tokens.TextAccentContrast};
+  }
+`;
+
+const ScTextSubtle = styled.span`
+  color: ${tokens.TextSubtle};
+`;
+
 const RightSide = () => {
-  return <div>Historikk</div>;
+  return (
+    <div className="flex h-full">
+      <div className="flex flex-col h-full border-gray-300 border-0 border-r p-4">
+        <ScSmallCaps $font-weight="normal" className="text-xl">
+          Historikk
+        </ScSmallCaps>
+        <div className="flex p-2 border-b">
+          <MiniTag $variant="warning">IM</MiniTag>
+          <div className="flex flex-col">
+            <span>Inntektsmelding mottatt</span>
+            <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>
+          </div>
+        </div>
+        <div className="flex p-2 border-b">
+          <MiniTag $variant="info">IM</MiniTag>
+          <div className="flex flex-col">
+            <span>Søknad mottatt</span>
+            <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>
+          </div>
+        </div>
+      </div>
+      <ScKebabButtons>
+        <div className="iconWrapper" data-active="true">
+          <ClockIcon />
+        </div>
+        <div className="iconWrapper">
+          <FolderIcon />
+        </div>
+        <div className="iconWrapper">
+          <PencilLineIcon />
+        </div>
+        <div className="iconWrapper">
+          <PersonPencilIcon />
+        </div>
+      </ScKebabButtons>
+    </div>
+  );
 };
 
 const Center = () => {
