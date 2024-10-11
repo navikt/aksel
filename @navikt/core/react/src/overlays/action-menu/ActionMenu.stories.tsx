@@ -504,7 +504,7 @@ export const Chromatic: Story = {
   render: (args, context) => {
     const newArgs = { ...args, open: true };
     return (
-      <VStack style={{ gap: "32rem" }}>
+      <VStack style={{ gap: "32rem", marginBottom: "20rem" }}>
         <HStack gap="12">
           <div>
             <h2>OnlyItems</h2>
@@ -529,16 +529,11 @@ export const Chromatic: Story = {
             {RadioGroups.render?.(newArgs, context)}
           </div>
         </HStack>
-        <HStack gap="12">
-          <div>
-            <h2>Dividers</h2>
-            {Dividers.render?.(newArgs, context)}
-          </div>
-          <div>
-            <h2>Submenus</h2>
-            {Submenus.render?.(newArgs, context)}
-          </div>
-        </HStack>
+        <div>
+          <h2>Dividers</h2>
+          {Dividers.render?.(newArgs, context)}
+        </div>
+
         <HStack gap="12">
           <div>
             <h2>Links</h2>
@@ -549,6 +544,10 @@ export const Chromatic: Story = {
             {Disabled.render?.(newArgs, context)}
           </div>
         </HStack>
+        <div>
+          <h2>Submenus</h2>
+          {Submenus.render?.(newArgs, context)}
+        </div>
       </VStack>
     );
   },

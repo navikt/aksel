@@ -205,6 +205,7 @@ const MenuRootContentNonModal = React.forwardRef<
       ref={ref}
       disableOutsidePointerEvents={false}
       onDismiss={() => context.onOpenChange(false)}
+      flipAlignment={false}
     />
   );
 });
@@ -231,6 +232,7 @@ const MenuRootContentModal = forwardRef<
         { checkForDefaultPrevented: false },
       )}
       onDismiss={() => context.onOpenChange(false)}
+      flipAlignment={false}
     />
   );
 });
