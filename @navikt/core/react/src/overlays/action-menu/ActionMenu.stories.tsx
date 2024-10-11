@@ -296,23 +296,11 @@ export const Dividers: Story = {
             <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
               Item 1
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
-              Item 2
-            </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
-              Item 3
-            </ActionMenu.Item>
           </ActionMenu.Group>
           <ActionMenu.Divider />
           <ActionMenu.Group label="Group 2">
             <ActionMenu.Item onSelect={() => console.log("Item 4 clicked")}>
               Item 4
-            </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => console.log("Item 5 clicked")}>
-              Item 5
-            </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => console.log("Item 6 clicked")}>
-              Item 6
             </ActionMenu.Item>
           </ActionMenu.Group>
           <ActionMenu.Divider />
@@ -322,10 +310,6 @@ export const Dividers: Story = {
           <ActionMenu.Divider />
           <ActionMenu.Item onSelect={() => console.log("Item 8 clicked")}>
             Item 8
-          </ActionMenu.Item>
-          <ActionMenu.Divider />
-          <ActionMenu.Item onSelect={() => console.log("Item 9 clicked")}>
-            Item 9
           </ActionMenu.Item>
         </ActionMenu.Content>
       </ActionMenu>
@@ -520,7 +504,7 @@ export const Chromatic: Story = {
   render: (args, context) => {
     const newArgs = { ...args, open: true };
     return (
-      <VStack style={{ gap: "25rem" }}>
+      <VStack style={{ gap: "32rem" }}>
         <HStack gap="12">
           <div>
             <h2>OnlyItems</h2>
@@ -550,20 +534,21 @@ export const Chromatic: Story = {
             <h2>Dividers</h2>
             {Dividers.render?.(newArgs, context)}
           </div>
+          <div>
+            <h2>Submenus</h2>
+            {Submenus.render?.(newArgs, context)}
+          </div>
         </HStack>
-        <div>
-          <h2>Submenus</h2>
-          {Submenus.render?.(newArgs, context)}
-        </div>
-
-        <div>
-          <h2>Disabled</h2>
-          {Disabled.render?.(newArgs, context)}
-        </div>
-        <div>
-          <h2>Links</h2>
-          {Links.render?.(newArgs, context)}
-        </div>
+        <HStack gap="12">
+          <div>
+            <h2>Links</h2>
+            {Links.render?.(newArgs, context)}
+          </div>
+          <div>
+            <h2>Disabled</h2>
+            {Disabled.render?.(newArgs, context)}
+          </div>
+        </HStack>
       </VStack>
     );
   },

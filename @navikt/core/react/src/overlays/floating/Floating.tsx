@@ -256,6 +256,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       altBoundary: hasExplicitBoundaries,
       /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
       fallbackAxisSideDirection: "end",
+      flipAlignment: false,
     };
 
     const { refs, floatingStyles, placement, isPositioned, middlewareData } =
