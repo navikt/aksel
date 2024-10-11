@@ -505,6 +505,10 @@ export const Chromatic: Story = {
     const newArgs = { ...args, open: true };
     return (
       <VStack style={{ gap: "32rem" }}>
+        <div>
+          <h2>Submenus</h2>
+          {Submenus.render?.(newArgs, context)}
+        </div>
         <HStack gap="12">
           <div>
             <h2>OnlyItems</h2>
@@ -532,10 +536,6 @@ export const Chromatic: Story = {
         <div>
           <h2>Dividers</h2>
           {Dividers.render?.(newArgs, context)}
-        </div>
-        <div>
-          <h2>Submenus</h2>
-          {Submenus.render?.(newArgs, context)}
         </div>
 
         <HStack gap="12">
