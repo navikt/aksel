@@ -197,28 +197,32 @@ const ScTextSubtle = styled.span`
   color: ${tokens.TextSubtle};
 `;
 
+const ScBordered = styled.div`
+  border-color: ${tokens.BorderSubtle};
+`;
+
 const RightSide = () => {
   return (
     <div className="flex h-full">
-      <div className="flex flex-col h-full border-gray-300 border-0 border-r p-4">
+      <ScBordered className="flex flex-col h-full border-0 border-r p-4">
         <ScSmallCaps $font-weight="normal" className="text-xl">
           Historikk
         </ScSmallCaps>
-        <div className="flex p-2 border-b">
+        <ScBordered className="flex p-2 border-b">
           <MiniTag $variant="warning">IM</MiniTag>
           <div className="flex flex-col">
             <span>Inntektsmelding mottatt</span>
             <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>
           </div>
-        </div>
-        <div className="flex p-2 border-b">
+        </ScBordered>
+        <ScBordered className="flex p-2 border-b">
           <MiniTag $variant="info">IM</MiniTag>
           <div className="flex flex-col">
             <span>Søknad mottatt</span>
             <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>
           </div>
-        </div>
-      </div>
+        </ScBordered>
+      </ScBordered>
       <ScKebabButtons>
         <div className="iconWrapper" data-active="true">
           <ClockIcon />
@@ -247,17 +251,17 @@ const DagoversiktPage = () => {
       <div>
         <Breadcrumb />
         <Timeline />
-        <div className="flex border-1 border-gray-300">
-          <div className="flex flex-col border border-gray-300 p-4">
+        <ScBordered className="flex border-1 border-gray-300">
+          <ScBordered className="flex flex-col border p-4">
             <LeftSide />
-          </div>
-          <div className="border grow border-gray-300">
+          </ScBordered>
+          <ScBordered className="border grow">
             <Center />
-          </div>
-          <div className="border border-gray-300">
+          </ScBordered>
+          <ScBordered className="border">
             <RightSide />
-          </div>
-        </div>
+          </ScBordered>
+        </ScBordered>
       </div>
     </Page>
   );
