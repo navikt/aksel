@@ -28,49 +28,50 @@ async function main() {
 
   mkdirSync(iconFolder);
 
-  console.info(
-    `Downloading ${Object.keys(imagesUrls).length} icons from Figma...`,
+  console.group(`Processing ${Object.keys(imagesUrls).length} icons...`);
+
+  const fileNames = new Set<string>();
+
+  await Promise.all(
+    Object.entries(imagesUrls).map(async ([nodeId, iconUrl]) => {
+      const iconSvg = await fetch(iconUrl)
+        .then((x) => x.text())
+        .catch((e) => {
+          throw e.message;
+        });
+
+      const matchingIcon = publishedIconComponents.find(
+        (x) => x.node_id === nodeId,
+      );
+
+      if (!matchingIcon) {
+        throw new Error(
+          `No matching icon found for ${nodeId}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
+        );
+      }
+
+      const fileName = resolveName(matchingIcon);
+
+      if (fileNames.has(fileName)) {
+        console.warn(`Duplicate name detected: ${fileName}.`);
+      }
+
+      fileNames.add(fileName);
+
+      writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), iconSvg, {
+        encoding: "utf8",
+      });
+    }),
   );
 
-  let counter = 0;
-  for (const [nodeId, iconUrl] of Object.entries(imagesUrls)) {
-    const iconSvg = await fetch(iconUrl)
-      .then((x) => x.text())
-      .catch((e) => {
-        throw e.message;
-      });
-
-    if (!iconSvg) {
-      continue;
-    }
-
-    /*
-     * Arbitrary delay to not get rate-limited by image hosting
-     * Currently accounts for ~18 seconds in theory, but in practice the bottlenech is fetching each icon 1 at a time
-     */
-    await new Promise((r) => setTimeout(r, 20));
-
-    counter++;
-
-    if (counter % 20 === 0) {
-      process.stdout.write(`Processed ${counter} icons\r`);
-    }
-
-    const matchingIcon = publishedIconComponents.find(
-      (x) => x.node_id === nodeId,
+  if (fileNames.size !== publishedIconComponents.length) {
+    console.warn(
+      `Duplicate icon names from Figma leads to them being overwritten. This will cause the icon-library to be out of sync with Figma.`,
     );
-
-    if (!matchingIcon) {
-      throw new Error(
-        `No matching icon found for ${nodeId}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
-      );
-    }
-
-    writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), iconSvg, {
-      encoding: "utf8",
-    });
   }
-  console.info(`Completed processing of ${counter} icons`);
+
+  console.info(`Completed processing 🎉`);
+  console.groupEnd();
 
   makeConfig(publishedIconComponents, iconFolder);
 
@@ -78,7 +79,7 @@ async function main() {
 
   if (filesInDir.length * 2 !== publishedIconComponents.length) {
     throw new Error(
-      `Icons written to director (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length})`,
+      `Icons written to directory (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length}).\nThis is most likely caused by duplicate icon names from figma.`,
     );
   }
 
