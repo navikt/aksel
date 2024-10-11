@@ -77,7 +77,6 @@ module.exports = {
         "@typescript-eslint/no-shadow": ["error", { hoist: "all" }],
         "@typescript-eslint/no-explicit-any": "off", // Temporary
         "@typescript-eslint/array-type": "error",
-        "no-unused-expressions": "off",
         "@typescript-eslint/no-unused-expressions": [
           "error",
           /* https://eslint.org/docs/latest/rules/no-unused-expressions#allowshortcircuit-and-allowternary */
