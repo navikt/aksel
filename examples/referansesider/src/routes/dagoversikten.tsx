@@ -210,15 +210,15 @@ const RightSide = () => {
         <ScSmallCaps $font-weight="normal" className="text-xl">
           Historikk
         </ScSmallCaps>
-        <ScBordered className="flex p-2 border-b">
+        <ScBordered className="flex p-2 border-b gap-1">
           <MiniTag $variant="warning">IM</MiniTag>
           <div className="flex flex-col">
             <span>Inntektsmelding mottatt</span>
             <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>
           </div>
         </ScBordered>
-        <ScBordered className="flex p-2 border-b">
-          <MiniTag $variant="info">IM</MiniTag>
+        <ScBordered className="flex p-2 border-b gap-1">
+          <MiniTag $variant="info">SØ</MiniTag>
           <div className="flex flex-col">
             <span>Søknad mottatt</span>
             <ScTextSubtle className="text-sm">19.11.2022 kl 12.05</ScTextSubtle>

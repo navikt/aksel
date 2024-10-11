@@ -55,7 +55,7 @@ export const MiniTag = styled.span<{
 }>`
   font-variant-caps: all-small-caps;
   display: inline-block;
-  width: fit-content;
+  width: 1.5em;
   height: fit-content;
   background-color: ${(prop) => bgMap[prop.$variant]};
   color: ${(prop) => fgMap[prop.$variant]};
@@ -65,8 +65,9 @@ export const MiniTag = styled.span<{
   }}
   padding-inline: 3px;
   padding-block: 0px;
-  line-height: 16px;
+  line-height: 18px;
   font-size: 16px;
   border-radius: 3px;
   margin: 3px;
+  text-align: center;
 `;
