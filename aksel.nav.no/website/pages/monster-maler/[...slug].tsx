@@ -147,9 +147,9 @@ const Page = ({ page, sidebar, seo, publishDate, toc }: PageProps["props"]) => {
             <SuggestionBlock variant="mønster-beta" reference={page.heading} />
           )}
         <IntroSeksjon node={page?.intro} />
-        <SanityBlockContent blocks={page["content"]} />
+        <SanityBlockContent blocks={page.content} />
 
-        {metadata && metadata.changelog && (
+        {metadata?.changelog && (
           <>
             <Heading
               tabIndex={-1}

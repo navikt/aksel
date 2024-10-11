@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type VirtualFocusType = {
   activeElement: HTMLElement | undefined;
@@ -10,6 +10,9 @@ export type VirtualFocusType = {
   moveFocusToElement: (id: string) => void;
   moveFocusToTop: () => void;
   moveFocusToBottom: () => void;
+  moveFocusUpBy: (numberOfElements: number) => void;
+  moveFocusDownBy: (numberOfElements: number) => void;
+  resetFocus: () => void;
 };
 
 const useVirtualFocus = (
@@ -40,11 +43,6 @@ const useVirtualFocus = (
       : false;
   };
 
-  const _moveFocusAndScrollTo = (_element?: HTMLElement) => {
-    setActiveElement(_element);
-    _element?.scrollIntoView?.({ block: "nearest" });
-  };
-
   const moveFocusUp = () => {
     if (!activeElement) {
       return;
@@ -55,14 +53,14 @@ const useVirtualFocus = (
     if (_currentIndex === 0) {
       setActiveElement(undefined);
     } else {
-      _moveFocusAndScrollTo(elementAbove);
+      setActiveElement(elementAbove);
     }
   };
 
   const moveFocusDown = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
     if (!activeElement) {
-      _moveFocusAndScrollTo(elementsAbleToReceiveFocus[0]);
+      setActiveElement(elementsAbleToReceiveFocus[0]);
       return;
     }
     const _currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
@@ -70,13 +68,17 @@ const useVirtualFocus = (
       return;
     }
 
-    _moveFocusAndScrollTo(elementsAbleToReceiveFocus[_currentIndex + 1]);
+    setActiveElement(elementsAbleToReceiveFocus[_currentIndex + 1]);
   };
 
-  const moveFocusToTop = () => _moveFocusAndScrollTo(undefined);
+  const resetFocus = () => setActiveElement(undefined);
+  const moveFocusToTop = () => {
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    setActiveElement(elementsAbleToReceiveFocus[0]);
+  };
   const moveFocusToBottom = () => {
     const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
-    return _moveFocusAndScrollTo(
+    setActiveElement(
       elementsAbleToReceiveFocus[elementsAbleToReceiveFocus.length - 1],
     );
   };
@@ -89,6 +91,32 @@ const useVirtualFocus = (
     }
   };
 
+  const moveFocusUpBy = (numberOfElements: number) => {
+    if (!activeElement) {
+      return;
+    }
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    const currentIndex = elementsAbleToReceiveFocus.indexOf(activeElement);
+    const newIndex = Math.max(currentIndex - numberOfElements, 0);
+    setActiveElement(elementsAbleToReceiveFocus[newIndex]);
+  };
+
+  const moveFocusDownBy = (numberOfElements: number) => {
+    const elementsAbleToReceiveFocus = getElementsAbleToReceiveFocus();
+    const currentIndex = activeElement
+      ? elementsAbleToReceiveFocus.indexOf(activeElement)
+      : -1;
+    const newIndex = Math.min(
+      currentIndex + numberOfElements,
+      elementsAbleToReceiveFocus.length - 1,
+    );
+    setActiveElement(elementsAbleToReceiveFocus[newIndex]);
+  };
+
+  useEffect(() => {
+    activeElement?.scrollIntoView?.({ block: "nearest" });
+  }, [activeElement]);
+
   return {
     activeElement,
     getElementById,
@@ -99,6 +127,9 @@ const useVirtualFocus = (
     moveFocusToElement,
     moveFocusToTop,
     moveFocusToBottom,
+    moveFocusUpBy,
+    moveFocusDownBy,
+    resetFocus,
   };
 };
 

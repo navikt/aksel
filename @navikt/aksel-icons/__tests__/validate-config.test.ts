@@ -1,9 +1,9 @@
-/* eslint-disable import/no-named-as-default-member */
 import fastglob from "fast-glob";
 import fs from "fs";
-import jsYaml from "js-yaml";
+import { JSON_SCHEMA, load } from "js-yaml";
 import path from "path";
 import { describe, expect, test } from "vitest";
+import { IconYml } from "../config/figma/make-configs";
 
 const basePath = path.resolve(__dirname, "../icons");
 
@@ -14,9 +14,10 @@ const ymlList = fastglob
 describe(`Each icons YML-config is valid`, () => {
   ymlList.forEach((file) => {
     test(`${file} has valid YML-config`, () => {
-      const ymlData = jsYaml.load(fs.readFileSync(`${basePath}/${file}`), {
-        schema: jsYaml.JSON_SCHEMA,
-      });
+      const ymlData = load(fs.readFileSync(`${basePath}/${file}`).toString(), {
+        schema: JSON_SCHEMA,
+      }) as IconYml;
+
       expect(ymlData.name).toBeTruthy();
       expect(ymlData.category).toBeTruthy();
       expect(ymlData.sub_category).toBeTruthy();
@@ -31,7 +32,7 @@ describe(`Each icons YML-config is valid`, () => {
   });
 });
 
-function isDate(dateStr) {
+function isDate(dateStr: string) {
   return !Number.isNaN(
     new Date(dateStr.split(".").reverse().join(".")).getDate(),
   );

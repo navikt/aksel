@@ -82,7 +82,7 @@ export const Menu = forwardRef<HTMLDivElement, DropdownMenuProps>(
         open={isOpen}
         onClose={() => {
           handleToggle(false);
-          onClose && onClose();
+          onClose?.();
         }}
       />
     );

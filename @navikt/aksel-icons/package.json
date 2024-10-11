@@ -1,6 +1,6 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "author": "Aksel | NAV",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
@@ -62,13 +62,15 @@
     "update-metadata": "node config/metadata.js",
     "write-packagejson": "echo '{\"type\": \"module\"}' > dist/react/esm/package.json",
     "build": "yarn copy && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && node config/cleanTypes.js && yarn update-metadata && yarn parse-svg",
-    "fetch-new:icons": "tsx --env-file=.env config/figma/index.mjs",
+    "fetch-new:icons": "tsx --env-file=.env config/figma/index.ts",
     "zip:icons": "node config/zip.js",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
   "devDependencies": {
+    "@figma/rest-api-spec": "^0.19.0",
     "@svgr/cli": "8.1.0",
+    "@types/js-yaml": "^4.0.9",
     "adm-zip": "^0.5.10",
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
@@ -76,8 +78,7 @@
     "fast-glob": "3.2.11",
     "hast-util-select": "5.0.5",
     "js-yaml": "^4.1.0",
-    "lodash.camelcase": "4.3.0",
-    "lodash.startcase": "4.4.0",
+    "lodash": "^4.17.21",
     "prettier": "3.1.1",
     "react": "^18.0.0",
     "rehype-parse": "8.0.4",

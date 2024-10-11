@@ -122,7 +122,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               return;
             }
             setChecked(e.target.checked);
-            props.onChange && props.onChange(e);
+            props.onChange?.(e);
           }}
           onClick={(e) => {
             if (readOnly) {

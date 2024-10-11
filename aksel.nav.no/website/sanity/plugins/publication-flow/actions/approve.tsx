@@ -3,10 +3,12 @@ import { useState } from "react";
 import {
   DocumentActionDescription,
   DocumentActionProps,
+  SanityDocument,
   useDocumentOperation,
 } from "sanity";
 import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
+import { Oppdateringsvarsel } from "../../../schema/documents/presets/oppdateringsvarsel";
 import { QualityCheckContent } from "./focusAction";
 
 export const createWrappedApproveAction = () => {
@@ -15,10 +17,16 @@ export const createWrappedApproveAction = () => {
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const lastVerified = props.published?.updateInfo?.["lastVerified"];
+
     if (!props.published) {
       return null;
     }
+
+    const verifiedDocument = props.published as
+      | (SanityDocument & Oppdateringsvarsel)
+      | null;
+
+    const lastVerified = verifiedDocument?.updateInfo?.lastVerified;
 
     const verifyContent = () => {
       patch.execute(
@@ -36,7 +44,7 @@ export const createWrappedApproveAction = () => {
     };
 
     const verifiedStatus =
-      differenceInMonths(new Date(), new Date(lastVerified)) < 6
+      differenceInMonths(new Date(), new Date(lastVerified ?? new Date())) < 6
         ? "pre"
         : "post";
 

@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.2.1
+
+### Patch Changes
+
+- Combobox: Disable autocomple in Firefox on Android to prevent bug ([#3201](https://github.com/navikt/aksel/pull/3201))
+
+- Combobox: Support PageUp/PageDown in dropdown list. ([#3158](https://github.com/navikt/aksel/pull/3158))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.2.1
+  - @navikt/aksel-icons@7.2.1
+
 ## 7.2.0
 
 ### Minor Changes

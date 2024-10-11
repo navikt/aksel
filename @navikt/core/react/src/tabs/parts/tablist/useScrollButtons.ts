@@ -41,7 +41,7 @@ export function useScrollButtons(listRef: React.RefObject<HTMLDivElement>) {
 
     return () => {
       win.removeEventListener("resize", handleResize);
-      resizeObserver && resizeObserver.disconnect();
+      resizeObserver?.disconnect();
       updateScrollButtonState.clear();
     };
   }, [listRef, updateScrollButtonState]);
