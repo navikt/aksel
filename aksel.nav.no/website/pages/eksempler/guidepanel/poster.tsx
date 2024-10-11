@@ -21,4 +21,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
+  desc: "I poster-varianten er avataren plassert øverst i midten.",
 };
