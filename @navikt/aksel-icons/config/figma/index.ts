@@ -22,7 +22,7 @@ async function main() {
   /* Icons are published as 'components' in Figma */
   const publishedIconComponents = await fetchIcons();
 
-  /* When we have all the published icons, we can ask figma for URL's for downling them as assets */
+  /* When we have all the published icons, we can ask figma for URL's for downloading them as assets */
   const imagesUrls = await fetchDownloadUrls(
     publishedIconComponents.map((x) => x.node_id),
   );
@@ -86,8 +86,13 @@ async function main() {
   makeConfig(publishedIconComponents, iconFolder);
 
   const filesInDir = readdirSync(iconFolder);
+  const svgFiles = filesInDir.filter((x) => x.endsWith(".svg"));
+  const ymlFiles = filesInDir.filter((x) => x.endsWith(".yml"));
 
-  if (filesInDir.length * 2 !== publishedIconComponents.length) {
+  if (
+    svgFiles.length !== publishedIconComponents.length ||
+    ymlFiles.length !== publishedIconComponents.length
+  ) {
     throw new Error(
       `Icons written to directory (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length}).\nThis is most likely caused by duplicate icon names from figma.`,
     );
