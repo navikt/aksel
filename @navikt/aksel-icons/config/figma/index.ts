@@ -4,7 +4,10 @@ import { fetchDownloadUrls, fetchIcons } from "./fetch-icons";
 import { resolveName } from "./icon-name";
 import { makeConfig } from "./make-configs";
 
-/* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
+/**
+ * https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0
+ * This is the current source for all icons we are working with.
+ */
 
 const iconFolder = "./icons";
 
@@ -16,16 +19,18 @@ main();
 
 async function main() {
   console.info("Started icon-update from Figma");
+  /* Icons are published as 'components' in Figma */
   const publishedIconComponents = await fetchIcons();
 
+  /* When we have all the published icons, we can ask figma for URL's for downling them as assets */
   const imagesUrls = await fetchDownloadUrls(
     publishedIconComponents.map((x) => x.node_id),
   );
 
+  /* Lets do a clean install */
   if (existsSync(iconFolder)) {
     rmSync(iconFolder, { recursive: true, force: true });
   }
-
   mkdirSync(iconFolder);
 
   console.group(`Processing ${Object.keys(imagesUrls).length} icons...`);
@@ -34,6 +39,7 @@ async function main() {
 
   await Promise.all(
     Object.entries(imagesUrls).map(async ([nodeId, iconUrl]) => {
+      /* Each icon is now a raw string for a complete SVG */
       const iconSvg = await fetch(iconUrl)
         .then((x) => x.text())
         .catch((e) => {
@@ -52,6 +58,10 @@ async function main() {
 
       const fileName = resolveName(matchingIcon);
 
+      /*
+       * In some cases if multiple icons are published in Figma with the same name,
+       * the we will end up overwriting the icon with the same name.
+       */
       if (fileNames.has(fileName)) {
         console.warn(`Duplicate name detected: ${fileName}.`);
       }
