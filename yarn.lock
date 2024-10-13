@@ -4377,6 +4377,7 @@ __metadata:
   dependencies:
     "@figma/plugin-typings": "npm:^1.100.2"
     color: "npm:4.2.3"
+    colorjs.io: "npm:^0.5.2"
     esbuild: "npm:^0.24.0"
     lightningcss: "npm:^1.27.0"
     lodash: "npm:^4.17.21"
@@ -10018,6 +10019,13 @@ __metadata:
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
   checksum: 10/0b8de48bfa5d10afc160b8eaa2b9938f34a892530b2f7d7897e0458d9535a066e3998b49da9d21161c78225b272df19ae3a64d6df28b4c9734c0e55bbd02406f
+  languageName: node
+  linkType: hard
+
+"colorjs.io@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "colorjs.io@npm:0.5.2"
+  checksum: 10/a6f6345865b177d19481008cb299c46ec9ff1fd206f472cd9ef69ddbca65832c81237b19fdcd24f3f9540c3e6343a22eb486cd800f5eab9815ce7c98c16a0f0e
   languageName: node
   linkType: hard
 

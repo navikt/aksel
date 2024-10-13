@@ -19,6 +19,11 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
+    [`${role}-hoverA`]: {
+      value: `{a.${role}.200A.value}`,
+      type: "color",
+      group: `background.${role}`,
+    },
     /**
      * TODO: Consider a role-selected token
      * - For static selected elements like links, combobox ++
@@ -29,8 +34,18 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
+    [`${role}-moderateA`]: {
+      value: `{a.${role}.200A.value}`,
+      type: "color",
+      group: `background.${role}`,
+    },
     [`${role}-moderate-hover`]: {
       value: `{a.${role}.300.value}`,
+      type: "color",
+      group: `background.${role}`,
+    },
+    [`${role}-moderate-hoverA`]: {
+      value: `{a.${role}.300A.value}`,
       type: "color",
       group: `background.${role}`,
     },
@@ -39,9 +54,8 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
-    /* Should match role-strong */
-    [`${role}-moderate-selected`]: {
-      value: `{a.${role}.700.value}`,
+    [`${role}-moderate-pressedA`]: {
+      value: `{a.${role}.400A.value}`,
       type: "color",
       group: `background.${role}`,
     },
@@ -96,6 +110,11 @@ const configForRole = (
     },
     [`${role}-subtle`]: {
       value: `{a.${role}.400.value}`,
+      type: "color",
+      group: `border.${role}`,
+    },
+    [`${role}-subtleA`]: {
+      value: `{a.${role}.400A.value}`,
       type: "color",
       group: `border.${role}`,
     },

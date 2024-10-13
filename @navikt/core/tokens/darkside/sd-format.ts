@@ -1,6 +1,12 @@
-import { File, FormatFn, TransformedToken } from "style-dictionary/types";
+import {
+  File,
+  FormatFn,
+  PlatformConfig,
+  Transform,
+  TransformedToken,
+} from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
-import { kebabCase } from "../config/kebabCase";
+import { kebabCaseForAlpha } from "../config/kebabCase";
 
 const generateHeader = async (file: File): Promise<string> => {
   return await fileHeader({ file });
@@ -23,7 +29,7 @@ export const generateTokenString = (
    * test token
    */
   const comment = createComment(token.comment);
-  const kebabName = kebabCase(token.name);
+  const kebabName = kebabCaseForAlpha(token.name);
   if (format === "es6") {
     return `${comment}export const ${token.name.slice(
       1,
@@ -50,4 +56,11 @@ export const formatCJS: FormatFn = async ({ dictionary, file }) => {
     )
     .join("\n");
   return `${header}module.exports = {\n${tokens}\n};\n`;
+};
+
+export const transformCSS: Transform = {
+  name: "name/alpha-suffix",
+  type: "name",
+  transform: (token: TransformedToken, options: PlatformConfig) =>
+    kebabCaseForAlpha([options.prefix].concat(token.path).join(" ")),
 };
