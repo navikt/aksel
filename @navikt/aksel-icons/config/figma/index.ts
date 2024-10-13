@@ -94,7 +94,7 @@ async function main() {
     ymlFiles.length !== publishedIconComponents.length
   ) {
     throw new Error(
-      `Icons written to directory (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length}).\nThis is most likely caused by duplicate icon names from figma.`,
+      `Icons (${svgFiles.length}) and configs (${ymlFiles.length}) written to directory does not match the expected amount of icons located in Figma (${publishedIconComponents.length}).\nThis is most likely caused by duplicate icon names from figma.`,
     );
   }
 
