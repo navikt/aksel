@@ -30,6 +30,14 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
+  Alert: {
+    closeAlert: "Lukk varsel",
+    closeMessage: "Lukk melding",
+    error: "Feil",
+    info: "Informasjon",
+    success: "Suksess",
+    warning: "Advarsel",
+  },
   Chips: {
     Removable: {
       /** Will be appended to the accessible name for the button. */

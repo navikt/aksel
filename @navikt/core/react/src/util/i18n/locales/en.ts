@@ -24,6 +24,14 @@ export default {
     showAllSteps: "Show all steps",
     hideAllSteps: "Hide all steps",
   },
+  Alert: {
+    closeAlert: "Close alert",
+    closeMessage: "Close message",
+    error: "Error",
+    info: "Information",
+    success: "Success",
+    warning: "Warning",
+  },
   Chips: {
     Removable: {
       labelSuffix: "delete",
