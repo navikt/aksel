@@ -173,7 +173,7 @@ const MenuAnchor = forwardRef<MenuAnchorElement, MenuAnchorProps>(
 /*                                Menu Content                                */
 /* -------------------------------------------------------------------------- */
 type MenuContentElement = MenuContentInternalElement;
-interface MenuContentProps extends MenuContentInternalTypeProps {}
+type MenuContentProps = MenuContentInternalTypeProps;
 
 const MenuContent = React.forwardRef<
   MenuContentInternalElement,
@@ -370,11 +370,10 @@ const MenuContentInternal = forwardRef<
   },
 );
 
-interface MenuContentInternalTypeProps
-  extends Omit<
-    MenuContentInternalProps,
-    keyof MenuContentInternalPrivateProps
-  > {}
+type MenuContentInternalTypeProps = Omit<
+  MenuContentInternalProps,
+  keyof MenuContentInternalPrivateProps
+>;
 
 /* -------------------------------------------------------------------------- */
 /*                                  Menu item                                 */
@@ -560,7 +559,7 @@ const MenuItemInternal = forwardRef<
 /* -------------------------------------------------------------------------- */
 /*                                  Menu Group                                 */
 /* -------------------------------------------------------------------------- */
-interface MenuGroupProps extends SlottedDivProps {}
+type MenuGroupProps = SlottedDivProps;
 
 const MenuGroup = forwardRef<SlottedDivElementRef, MenuGroupProps>(
   (props: MenuGroupProps, ref) => {
@@ -634,7 +633,7 @@ const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] = createContext<{
   hookName: "useMenuItemIndicatorContext",
 });
 
-interface MenuItemIndicatorProps extends SlottedDivProps {}
+type MenuItemIndicatorProps = SlottedDivProps;
 
 const MenuItemIndicator = forwardRef<
   SlottedDivElementRef,
@@ -726,7 +725,7 @@ const MenuCheckboxItem = forwardRef<MenuItemElement, MenuCheckboxItemProps>(
 /* -------------------------------------------------------------------------- */
 /*                               Menu Divider                               */
 /* -------------------------------------------------------------------------- */
-interface MenuDividerProps extends SlottedDivProps {}
+type MenuDividerProps = SlottedDivProps;
 
 const MenuDivider = forwardRef<SlottedDivElementRef, MenuDividerProps>(
   (props: MenuDividerProps, ref) => {
@@ -821,7 +820,7 @@ const MenuSub: React.FC<MenuSubProps> = ({
 /* -------------------------------------------------------------------------- */
 /*                            Menu SubMenu Trigger                            */
 /* -------------------------------------------------------------------------- */
-interface MenuSubTriggerProps extends MenuItemInternalProps {}
+type MenuSubTriggerProps = MenuItemInternalProps;
 
 const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
   (props: MenuSubTriggerProps, forwardedRef) => {
@@ -885,15 +884,14 @@ const MenuSubTrigger = forwardRef<MenuItemElement, MenuSubTriggerProps>(
 /* -------------------------------------------------------------------------- */
 /*                            Menu SubMenu Content                            */
 /* -------------------------------------------------------------------------- */
-interface MenuSubContentProps
-  extends Omit<
-    MenuContentInternalProps,
-    | keyof MenuContentInternalPrivateProps
-    | "onCloseAutoFocus"
-    | "onEntryFocus"
-    | "side"
-    | "align"
-  > {}
+type MenuSubContentProps = Omit<
+  MenuContentInternalProps,
+  | keyof MenuContentInternalPrivateProps
+  | "onCloseAutoFocus"
+  | "onEntryFocus"
+  | "side"
+  | "align"
+>;
 
 const MenuSubContent = forwardRef<
   MenuContentInternalElement,

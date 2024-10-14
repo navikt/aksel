@@ -49,10 +49,9 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   colSpan?: number;
 }
 
-export interface ExpandableRowType
-  extends React.ForwardRefExoticComponent<
-    ExpandableRowProps & React.RefAttributes<HTMLTableRowElement>
-  > {}
+export type ExpandableRowType = React.ForwardRefExoticComponent<
+  ExpandableRowProps & React.RefAttributes<HTMLTableRowElement>
+>;
 
 export const ExpandableRow: ExpandableRowType = forwardRef(
   (

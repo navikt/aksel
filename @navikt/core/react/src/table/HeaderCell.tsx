@@ -15,10 +15,9 @@ export interface HeaderCellProps
   textSize?: "medium" | "small";
 }
 
-export interface HeaderCellType
-  extends React.ForwardRefExoticComponent<
-    HeaderCellProps & React.RefAttributes<HTMLTableCellElement>
-  > {}
+export type HeaderCellType = React.ForwardRefExoticComponent<
+  HeaderCellProps & React.RefAttributes<HTMLTableCellElement>
+>;
 
 export const HeaderCell: HeaderCellType = forwardRef(
   ({ className, children, align, textSize, ...rest }, ref) => {

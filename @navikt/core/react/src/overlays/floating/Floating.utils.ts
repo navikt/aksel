@@ -1,10 +1,7 @@
 import type { Middleware, Placement } from "@floating-ui/react-dom";
 
-const SIDE_OPTIONS = ["top", "right", "bottom", "left"] as const;
-const ALIGN_OPTIONS = ["start", "center", "end"] as const;
-
-type Side = (typeof SIDE_OPTIONS)[number];
-type Align = (typeof ALIGN_OPTIONS)[number];
+type Side = "top" | "right" | "bottom" | "left";
+type Align = "start" | "center" | "end";
 type Measurable = { getBoundingClientRect(): DOMRect };
 
 /**
