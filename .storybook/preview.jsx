@@ -52,18 +52,14 @@ export const decorators = [
     defaultTheme: "light",
   }),
   (StoryFn, context) => {
-    return (
-      <div>
-        {context.globals.mode === "darkside" ? (
-          <DarkSideDekorator>
-            <StoryFn />
-          </DarkSideDekorator>
-        ) : (
-          <DefaultDekorator>
-            <StoryFn />
-          </DefaultDekorator>
-        )}
-      </div>
+    return context.globals.mode === "darkside" ? (
+      <DarkSideDekorator>
+        <StoryFn />
+      </DarkSideDekorator>
+    ) : (
+      <DefaultDekorator>
+        <StoryFn />
+      </DefaultDekorator>
     );
   },
 ];
