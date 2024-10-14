@@ -1,7 +1,7 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
-import React from "react";
-import { DarkSideDekorator } from "./PreviewDarkside";
-import { DefaultDekorator } from "./PreviewDefault";
+import React, { useLayoutEffect } from "react";
+import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
+import defaultCss from "@navikt/ds-css/index.css?inline";
 import "./layout.css";
 
 export const parameters = {
@@ -43,6 +43,32 @@ export const initialGlobals = {
   mode: "default",
 };
 
+const ThemeDecorator = ({ children, mode }) => {
+  useLayoutEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+      document.body.style.removeProperty("background");
+    };
+  }, [mode]);
+
+  useLayoutEffect(() => {
+    if (mode !== "darkside") {
+      return;
+    }
+
+    document.body.style.setProperty("background", "var(--a-bg-default)");
+    return () => {
+      document.body.style.removeProperty("background");
+    };
+  }, [mode]);
+
+  return children;
+};
+
 export const decorators = [
   withThemeByClassName({
     themes: {
@@ -53,17 +79,9 @@ export const decorators = [
   }),
   (StoryFn, context) => {
     return (
-      <div>
-        {context.globals.mode === "darkside" ? (
-          <DarkSideDekorator>
-            <StoryFn />
-          </DarkSideDekorator>
-        ) : (
-          <DefaultDekorator>
-            <StoryFn />
-          </DefaultDekorator>
-        )}
-      </div>
+      <ThemeDecorator mode={context.globals.mode}>
+        <StoryFn />
+      </ThemeDecorator>
     );
   },
 ];
