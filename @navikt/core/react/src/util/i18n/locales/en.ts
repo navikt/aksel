@@ -24,4 +24,9 @@ export default {
     showAllSteps: "Show all steps",
     hideAllSteps: "Hide all steps",
   },
+  Chips: {
+    Removable: {
+      labelSuffix: "delete",
+    },
+  },
 } satisfies Translations;

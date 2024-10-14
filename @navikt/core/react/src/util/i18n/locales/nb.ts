@@ -30,4 +30,10 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
+  Chips: {
+    Removable: {
+      /** Will be appended to the accessible name for the button. */
+      labelSuffix: "slett",
+    },
+  },
 } satisfies TranslationMap;

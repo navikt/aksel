@@ -24,4 +24,9 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
+  Chips: {
+    Removable: {
+      labelSuffix: "slett",
+    },
+  },
 } satisfies Translations;
