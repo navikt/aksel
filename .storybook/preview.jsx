@@ -49,25 +49,15 @@ const ThemeDecorator = ({ children, mode }) => {
     style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
     document.head.appendChild(style);
 
+    if (mode === "darkside") {
+      document.body.style.setProperty("background", "var(--a-bg-default)");
+    }
+
     return () => {
       document.head.removeChild(style);
       document.body.style.removeProperty("background");
     };
   }, [mode]);
-
-  useLayoutEffect(() => {
-    if (mode !== "darkside") {
-      return;
-    }
-
-    document.body.style.setProperty("background", "var(--a-bg-default)");
-    return () => {
-      document.body.style.removeProperty("background");
-    };
-  }, [mode]);
-
-  return children;
-};
 
 export const decorators = [
   withThemeByClassName({
