@@ -149,6 +149,7 @@
     "@storybook/addon-essentials": "^8.3.4",
     "@storybook/addon-interactions": "^8.3.4",
     "@storybook/addon-storysource": "^8.3.4",
+    "@storybook/addon-themes": "^8.3.4",
     "@storybook/blocks": "^8.3.4",
     "@storybook/csf-tools": "^8.3.4",
     "@storybook/experimental-nextjs-vite": "^8.3.4",
