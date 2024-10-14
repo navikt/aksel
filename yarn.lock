@@ -5832,6 +5832,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-themes@npm:^8.3.4":
+  version: 8.3.5
+  resolution: "@storybook/addon-themes@npm:8.3.5"
+  dependencies:
+    ts-dedent: "npm:^2.0.0"
+  peerDependencies:
+    storybook: ^8.3.5
+  checksum: 10/8aaa5c685fd9ad1f7387a16e41a2f434ff3ccc8eee90f9507f8803275771f95bfef76915e01fce870bac5a24e1f183e1bc12d95b89cd0195b73da70e8f3729f5
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-toolbars@npm:8.3.4":
   version: 8.3.4
   resolution: "@storybook/addon-toolbars@npm:8.3.4"
@@ -8317,6 +8328,7 @@ __metadata:
     "@storybook/addon-essentials": "npm:^8.3.4"
     "@storybook/addon-interactions": "npm:^8.3.4"
     "@storybook/addon-storysource": "npm:^8.3.4"
+    "@storybook/addon-themes": "npm:^8.3.4"
     "@storybook/blocks": "npm:^8.3.4"
     "@storybook/csf-tools": "npm:^8.3.4"
     "@storybook/experimental-nextjs-vite": "npm:^8.3.4"
