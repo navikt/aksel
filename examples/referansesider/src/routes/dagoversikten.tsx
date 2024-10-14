@@ -1,13 +1,10 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import {
-  BaggageIcon,
   BandageIcon,
   BriefcaseIcon,
   CalendarIcon,
   ChevronDownIcon,
-  ChevronLeftCircleIcon,
-  ChevronRightCircleIcon,
   ClockIcon,
   FilesIcon,
   FolderIcon,
@@ -63,43 +60,7 @@ let Breadcrumb: ReactNode;
 
 const Timeline = () => {
   return (
-    <div className="flex flex-col my-4">
-      <div className="flex">
-        <span>Nov 22</span>
-        <span>Okt 22</span>
-        <span>Sep 22</span>
-        <span>Nov 22</span>
-        <span>Aug 22</span>
-        <span>Jun 22</span>
-        <span>Mai 22</span>
-        <span>Apr 22</span>
-        <span>Feb 22</span>
-        <span>Jan 22</span>
-        <span>Des 21</span>
-      </div>
-      <div className="flex">
-        <div className="flex">
-          <BaggageIcon />
-          <span>SYKEPLEIERHUSET AS</span>
-        </div>
-        <div className="flex bg-blue-200 grow">test</div>
-      </div>
-      <div className="flex justify-end">
-        <ChevronLeftCircleIcon />
-        <ChevronRightCircleIcon />
-        <div className="flex">
-          <span className="border-black border px-2 py-1">2 mnd</span>
-          <span className="border-black border px-2 py-1">6 mnd</span>
-          <span className="border-black border px-2 py-1 bg-black text-white">
-            1 år
-          </span>
-          <span className="border-black border px-2 py-1">4 år</span>
-        </div>
-      </div>
-      <h1>
-        copy paste litt HTML/CSS fra rendered Timelinecomponent (+ tokens)
-      </h1>
-    </div>
+    <p>TODO: insert Timeline component when we have updated it to use tokens</p>
   );
 };
 
@@ -137,7 +98,9 @@ const LeftSide = () => {
         <span>Månedsbeløp:</span>
         <span>10 000,00 kr</span>
       </div>
-      <ScSmallCaps className="mt-4 text-lg">UTBETALINGSINFORMASJON</ScSmallCaps>
+      <ScSmallCaps $font-weight="normal" className="mt-4 text-lg">
+        UTBETALINGSINFORMASJON
+      </ScSmallCaps>
       <div className="flex justify-between">
         <span>Sykepengegrunnlag:</span>
         <span>240 123,00 kr</span>
@@ -284,80 +247,92 @@ const DummyRowWeekend = () => {
   );
 };
 
-const Center = () => {
-  return (
-    <div>
-      <table className="m-4">
-        <thead>
-          <tr>
-            <th>Dato</th>
-            <th>Dagtype</th>
-            <th>Grad</th>
-            <th>Kilde</th>
-            <th>Total grad</th>
-            <th>Refusjon</th>
-            <th>Utbetaling</th>
-            <th>Dager igjen</th>
-            <th>Merknader</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>TOTAL</th>
-            <th>2 dager</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>2 769,00 kr</th>
-            <th>-</th>
-            <th>123</th>
-            <th></th>
-          </tr>
-          <tr>
-            <th>24.10.2022</th>
-            <th>Arbeid</th>
-            <th></th>
-            <th>
-              <PersonPencilFillIcon />
-            </th>
-            <th></th>
-            <th>-</th>
-            <th>-</th>
-            <th>126</th>
-            <th></th>
-          </tr>
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRowWeekend />
-          <DummyRowWeekend />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRowWeekend />
-          <DummyRowWeekend />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRowWeekend />
-          <DummyRowWeekend />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRow />
-          <DummyRowWeekend />
-          <DummyRowWeekend />
-          <DummyRow />
-        </tbody>
-      </table>
-    </div>
-  );
-};
+let Center: ReactNode;
+{
+  const ScTable = styled.table`
+    & * {
+      font-weight: 400;
+    }
+    & .weekend {
+      // CSS custom filter (fragment shader?) for diagonal repeating lines?
+    }
+  `;
+
+  Center = () => {
+    return (
+      <div>
+        <ScTable className="m-4">
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>Dagtype</th>
+              <th>Grad</th>
+              <th>Kilde</th>
+              <th>Total grad</th>
+              <th>Refusjon</th>
+              <th>Utbetaling</th>
+              <th>Dager igjen</th>
+              <th>Merknader</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>TOTAL</th>
+              <th>2 dager</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>2 769,00 kr</th>
+              <th>-</th>
+              <th>123</th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>24.10.2022</th>
+              <th>Arbeid</th>
+              <th></th>
+              <th>
+                <PersonPencilFillIcon />
+              </th>
+              <th></th>
+              <th>-</th>
+              <th>-</th>
+              <th>126</th>
+              <th></th>
+            </tr>
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRowWeekend />
+            <DummyRowWeekend />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRowWeekend />
+            <DummyRowWeekend />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRowWeekend />
+            <DummyRowWeekend />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRow />
+            <DummyRowWeekend />
+            <DummyRowWeekend />
+            <DummyRow />
+          </tbody>
+        </ScTable>
+      </div>
+    );
+  };
+}
 
 const DagoversiktPage = () => {
   return (
