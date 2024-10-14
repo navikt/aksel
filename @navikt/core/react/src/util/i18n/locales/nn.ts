@@ -24,4 +24,12 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
+  Alert: {
+    closeAlert: "Lukk varsel",
+    closeMessage: "Lukk melding",
+    error: "Feil",
+    info: "Informasjon",
+    success: "Suksess",
+    warning: "Åtvaring",
+  },
 } satisfies Translations;
