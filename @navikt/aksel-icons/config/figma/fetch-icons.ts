@@ -10,7 +10,7 @@ import {
 const FIGMA_FILE_KEY = "wEdyFjCQSBR3U7FvrMbPXa";
 
 export const fetchIcons = async (): Promise<PublishedComponent[]> => {
-  console.info("Fetching list of published icons from Figma...");
+  console.group("Fetching list of published icons from Figma...");
   const data:
     | GetFileComponentsResponse
     | BadRequestErrorResponseWithErrMessage = await fetch(
@@ -35,7 +35,26 @@ export const fetchIcons = async (): Promise<PublishedComponent[]> => {
     throw new Error("No published icons found");
   }
 
-  return data.meta.components;
+  /* Filtes out any 'random' icons not meant for the icon-library */
+  const validIcons = data.meta.components.filter((icon) => {
+    const validIcon =
+      !!icon.containing_frame?.pageName && !!icon.containing_frame?.name;
+
+    if (!validIcon) {
+      console.warn(`Ignoring icon '${icon.name}' as it is missing metadata`);
+    }
+    return validIcon;
+  });
+
+  console.info(
+    `Found ${validIcons.length} published icons in Figma. ${
+      data.meta.components.length - validIcons.length
+    } icons were ignored due to missing metadata.`,
+  );
+
+  console.groupEnd();
+
+  return validIcons;
 };
 
 export const fetchDownloadUrls = async (
@@ -69,6 +88,7 @@ export const fetchDownloadUrls = async (
 
     for (const [key, value] of Object.entries(data.images)) {
       if (!value) {
+        console.warn(`No image found for ${key}`);
         continue;
       }
       idUrlPairs[key] = value;

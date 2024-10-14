@@ -18,6 +18,9 @@ export const makeConfig = (
   icons: PublishedComponent[],
   dirLocation: string,
 ) => {
+  console.group("Creating icon yml...");
+
+  let counter = 0;
   for (const icon of icons) {
     const name = resolveName(icon).replace(".svg", "");
     const keywords = icon.description
@@ -62,5 +65,9 @@ export const makeConfig = (
     writeFileSync(resolve(dirLocation, `${config.name}.yml`), yml, {
       encoding: "utf8",
     });
+    counter++;
   }
+
+  console.info(`Created ${counter} icon yml files`);
+  console.groupEnd();
 };
