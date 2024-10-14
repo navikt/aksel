@@ -6,7 +6,7 @@ import {
   lightModeTokens,
   scaleTokens,
 } from "./create-configuration";
-import { formatCJS, formatES6 } from "./sd-format";
+import { formatCJS, formatES6, transformCSS } from "./sd-format";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -41,6 +41,7 @@ const SDictionaryLightMode = new StyleDictionary({
   platforms: {
     css: {
       transformGroup: "css",
+      transforms: ["name/alpha-suffix"],
       buildPath: DARKSIDE_DIST,
       files: [
         {
@@ -79,6 +80,7 @@ const SDictionaryDarkMode = new StyleDictionary({
   platforms: {
     css: {
       transformGroup: "css",
+      transforms: ["name/alpha-suffix"],
       buildPath: DARKSIDE_DIST,
       files: [
         {
@@ -121,6 +123,9 @@ const main = async () => {
     SDictionaryDarkMode.hasInitialized,
     SDictionaryScaleTokens.hasInitialized,
   ]);
+
+  SDictionaryLightMode.registerTransform(transformCSS);
+  SDictionaryDarkMode.registerTransform(transformCSS);
 
   /**
    * To support theming in the future, we need to export the tokens as CSS variables.

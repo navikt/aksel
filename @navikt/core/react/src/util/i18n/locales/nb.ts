@@ -1,3 +1,11 @@
+interface TranslationMap {
+  [component: string]:
+    | Record<string, string>
+    | {
+        [subComponent: string]: Record<string, string>;
+      };
+}
+
 export default {
   FileUpload: {
     dropzone: {
@@ -22,4 +30,4 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-};
+} satisfies TranslationMap;

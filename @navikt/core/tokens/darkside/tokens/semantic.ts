@@ -20,6 +20,11 @@ function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
          */
         scopes: ["EFFECT_COLOR"],
       },
+      input: {
+        value: "rgba(0, 0, 0, 0.50)",
+        type: "color",
+        group: "background",
+      },
       raised: {
         value: "{a.neutral.200.value}",
         type: "color",
@@ -55,7 +60,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
     },
     bg: {
       default: {
-        value: "{a.neutral.000.value}",
+        value: "#ffffff",
         type: "color",
         group: "background",
         /**
@@ -65,7 +70,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         scopes: ["EFFECT_COLOR"],
       },
       input: {
-        value: "{a.neutral.000.value}",
+        value: "rgba(255, 255, 255, 0.85)",
         type: "color",
         group: "background",
       },

@@ -7,6 +7,7 @@ import {
   lightModeTokens,
   scaleTokens,
 } from "../create-configuration";
+import { transformCSS } from "../sd-format";
 import {
   type SemanticTokenGroups,
   type StyleDictionaryToken,
@@ -28,6 +29,7 @@ const createStyleDictionaryForCollection = (
     platforms: {
       [collection]: {
         transformGroup: "css",
+        transforms: ["name/alpha-suffix"],
         files: [],
       },
     },
@@ -40,6 +42,7 @@ export const getTokensForCollection = async (
   const SD = createStyleDictionaryForCollection(collection);
 
   await SD.hasInitialized;
+  SD.registerTransform(transformCSS);
 
   const dictionary = await SD.getPlatformTokens(collection);
 

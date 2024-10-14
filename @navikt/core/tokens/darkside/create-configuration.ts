@@ -1,5 +1,7 @@
-import { globalColorDarkModeConfig } from "./tokens/global-dark";
-import { globalColorLightModeConfig } from "./tokens/global-light";
+import {
+  globalColorDarkModeConfig,
+  globalColorLightModeConfig,
+} from "./tokens/global";
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
