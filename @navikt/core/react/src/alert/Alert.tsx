@@ -9,6 +9,7 @@ import {
 } from "@navikt/aksel-icons";
 import { Button } from "../button";
 import { BodyLong } from "../typography";
+import { useI18n } from "../util/i18n/i18n.context";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -54,24 +55,12 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
-const Icon = ({ variant, ...props }) => {
-  switch (variant) {
-    case "error":
-      return <XMarkOctagonFillIcon title="Feil" {...props} />;
-    case "warning":
-      return <ExclamationmarkTriangleFillIcon title="Advarsel" {...props} />;
-    case "info":
-      return <InformationSquareFillIcon title="Informasjon" {...props} />;
-    case "success":
-      return <CheckmarkCircleFillIcon title="Suksess" {...props} />;
-    default:
-      return null;
-  }
+const IconMap = {
+  error: XMarkOctagonFillIcon,
+  warning: ExclamationmarkTriangleFillIcon,
+  info: InformationSquareFillIcon,
+  success: CheckmarkCircleFillIcon,
 };
-
-export interface AlertContextProps {
-  size: "medium" | "small";
-}
 
 /**
  * A component for displaying alerts
@@ -98,6 +87,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     },
     ref,
   ) => {
+    const translate = useI18n("Alert");
+    const Icon = IconMap[variant];
     return (
       <div
         {...rest}
@@ -114,7 +105,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           },
         )}
       >
-        <Icon variant={variant} className="navds-alert__icon" />
+        <Icon title={translate(variant)} className="navds-alert__icon" />
         <BodyLong
           as="div"
           size={size}
@@ -137,8 +128,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
                 <XMarkIcon
                   title={
                     ["error", "warning"].includes(variant)
-                      ? "Lukk varsel"
-                      : "Lukk melding"
+                      ? translate("closeAlert")
+                      : translate("closeMessage")
                   }
                 />
               }
