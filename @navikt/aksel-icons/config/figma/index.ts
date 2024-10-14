@@ -60,7 +60,7 @@ async function main() {
 
       /*
        * In some cases if multiple icons are published in Figma with the same name,
-       * the we will end up overwriting the icon with the same name.
+       * we will end up overwriting the icon with the same name.
        */
       if (fileNames.has(fileName)) {
         console.warn(`Duplicate name detected: ${fileName}.`);
