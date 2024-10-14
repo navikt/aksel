@@ -1,6 +1,7 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import React from "react";
-import "@navikt/ds-css/index.css";
+import { DarkSideDekorator } from "./PreviewDarkside";
+import { DefaultDekorator } from "./PreviewDefault";
 import "./layout.css";
 
 export const parameters = {
@@ -17,6 +18,29 @@ export const parameters = {
     },
   },
   layout: "centered",
+  backgrounds: { disable: true },
+};
+
+export const globalTypes = {
+  mode: {
+    name: "Darkside",
+    toolbar: {
+      items: [
+        {
+          value: "default",
+          icon: "hourglass",
+          title: "Default (old)",
+        },
+        { value: "darkside", icon: "beaker", title: "Darkside (new)" },
+      ],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+};
+
+export const initialGlobals = {
+  mode: "default",
 };
 
 export const decorators = [
@@ -27,9 +51,19 @@ export const decorators = [
     },
     defaultTheme: "light",
   }),
-  (StoryFn) => (
-    <div style={{ background: "var(--a-bg-default) !important" }}>
-      <StoryFn />
-    </div>
-  ),
+  (StoryFn, context) => {
+    return (
+      <div>
+        {context.globals.mode === "darkside" ? (
+          <DarkSideDekorator>
+            <StoryFn />
+          </DarkSideDekorator>
+        ) : (
+          <DefaultDekorator>
+            <StoryFn />
+          </DefaultDekorator>
+        )}
+      </div>
+    );
+  },
 ];
