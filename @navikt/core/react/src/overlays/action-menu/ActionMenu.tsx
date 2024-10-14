@@ -808,7 +808,7 @@ const ActionMenuRadioItem = forwardRef<
 /* -------------------------------------------------------------------------- */
 type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
 type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
-interface ActionMenuDividerProps extends Omit<MenuDividerProps, "asChild"> {}
+type ActionMenuDividerProps = Omit<MenuDividerProps, "asChild">;
 
 const ActionMenuDivider = forwardRef<
   ActionMenuDividerElement,
