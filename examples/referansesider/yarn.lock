@@ -741,15 +741,15 @@ __metadata:
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.2.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=bfd055&locator=referansesider%40workspace%3A."
-  checksum: 10/79cecf82ef945e2398f6b14350270bd0f928b9ff5809f98ec5f0a7e8b854e48c5ba621d8afde51043a9847232be334cde26b2b7b218f30ab2d75ddd4a872aa35
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=3f9624&locator=referansesider%40workspace%3A."
+  checksum: 10/1d2a45011f9f76dd7fda011bc294b0b4517e58b4900797f4b289cb73f44f17f93870c146dd553288f22a42d2455905878e7a1eac6df9305c60fd448746279823
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.2.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=f9330d&locator=referansesider%40workspace%3A."
-  checksum: 10/aad7460ac3dad8ab20e0b708b7872a00b556a21c54794e54049cd8f0a0ed7bc143d8a4c1793d7849baa095b6a119d73601dc598712deeb236a9f21690edd214f
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9d37d1&locator=referansesider%40workspace%3A."
+  checksum: 10/462ed14328a17dba77f55ed8866425a0ffc2e7a523066f86078c850a2b5ef00ff372ad6530a1e02a1f897d9fc22fb1b392f7b651346de373ac297bdf7164b2bf
   languageName: node
   linkType: hard
 
