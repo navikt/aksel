@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
 
 export const DarkSideDekorator = ({ children }) => {
@@ -14,9 +14,5 @@ export const DarkSideDekorator = ({ children }) => {
     };
   }, []);
 
-  return (
-    <div style={{ background: "var(--a-bg-default) !important" }}>
-      {children}
-    </div>
-  );
+  return children;
 };
