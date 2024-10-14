@@ -59,6 +59,9 @@ const ThemeDecorator = ({ children, mode }) => {
     };
   }, [mode]);
 
+  return children;
+};
+
 export const decorators = [
   withThemeByClassName({
     themes: {
