@@ -1,5 +1,6 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 /* stylelint-disable aksel/design-token-exists */
-.aksel-button {
+
+.navds-button {
   background-color: var(--a-bg-accent-strong);
 }
