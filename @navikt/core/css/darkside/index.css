@@ -1,2 +1,3 @@
 @import "@navikt/ds-tokens/dist/darkside/tokens.css";
+@import "./baseline/index.css";
 @import "./button.darkside.css";
