@@ -38,7 +38,6 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
         <span className="navds-accordion__icon-wrapper">
           <ChevronDownIcon
             className="navds-accordion__header-chevron"
-            title="Vis mer"
             aria-hidden
           />
         </span>
