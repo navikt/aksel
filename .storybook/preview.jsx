@@ -43,7 +43,7 @@ export const initialGlobals = {
   mode: "default",
 };
 
-const ThemeDecorator = ({ children, mode }) => {
+const ModeDecorator = ({ children, mode }) => {
   useLayoutEffect(() => {
     const style = document.createElement("style");
     style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
@@ -72,9 +72,9 @@ export const decorators = [
   }),
   (StoryFn, context) => {
     return (
-      <ThemeDecorator mode={context.globals.mode}>
+      <ModeDecorator mode={context.globals.mode}>
         <StoryFn />
-      </ThemeDecorator>
+      </ModeDecorator>
     );
   },
 ];
