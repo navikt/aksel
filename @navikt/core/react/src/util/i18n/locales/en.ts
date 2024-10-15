@@ -32,4 +32,9 @@ export default {
     success: "Success",
     warning: "Warning",
   },
+  Chips: {
+    Removable: {
+      labelSuffix: "delete",
+    },
+  },
 } satisfies Translations;

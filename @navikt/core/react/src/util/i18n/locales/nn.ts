@@ -32,4 +32,9 @@ export default {
     success: "Suksess",
     warning: "Åtvaring",
   },
+  Chips: {
+    Removable: {
+      labelSuffix: "slett",
+    },
+  },
 } satisfies Translations;
