@@ -12,6 +12,10 @@ Files will not be included in `/dist` for now to avoid it potentially polluting 
 1. Write new CSS for component. Use same prefix `.navds` as before.
 2. Run storybook and change from "Default (old)" to "Darkside (new)" in toolbar. You are now developing new CSS 🎉
 
+## Syntax
+
+- Test using outline + outline-offset for focus-markings.
+
 ## Checklist
 
 - Add new CSS-files under `core/css/darkside`.
