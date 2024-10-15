@@ -82,7 +82,7 @@ export function listOutdatedArticles(
       S.documentTypeList(type)
         .title("Artikler")
         .filter(
-          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*${threshold})`,
+          `_type == $type && (dateTime(updateInfo.lastVerified + "T00:00:00Z") < dateTime(now()) - 60*60*24*$threshold) && !(_id in path("drafts.**"))`,
         )
         .apiVersion(SANITY_API_VERSION)
         .params({ type, threshold })
