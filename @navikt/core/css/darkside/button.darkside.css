@@ -2,5 +2,498 @@
 /* stylelint-disable aksel/design-token-exists */
 
 .navds-button {
+  padding: var(--a-spacing-3) var(--a-spacing-5);
+  border-style: none;
+  border-radius: var(--a-border-radius-medium);
+  display: inline-flex;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-spacing-2);
+  font-weight: 600;
+
+  /* TODO: fonts should be done globally elsewhere */
+  font-size: 18px;
+  line-height: 24px;
+  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
+}
+
+.navds-button--small {
+  padding: var(--a-spacing-1) var(--a-spacing-3);
+  min-height: 2rem;
+  min-width: 2rem;
+}
+
+.navds-button--xsmall {
+  padding: var(--a-spacing-05) var(--a-spacing-2);
+  gap: var(--a-spacing-1);
+}
+
+.navds-button--icon-only {
+  padding: var(--a-spacing-3);
+}
+
+.navds-button--small.navds-button--icon-only {
+  padding: var(--a-spacing-1);
+}
+
+.navds-button--xsmall.navds-button--icon-only {
+  padding: var(--a-spacing-05);
+}
+
+.navds-button:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button:focus {
+    outline: none;
+    box-shadow: var(--a-shadow-focus);
+  }
+}
+
+.navds-button__icon {
+  margin: -4px;
+  font-size: 1.5rem;
+  display: flex;
+}
+
+.navds-button__icon:first-child {
+  margin-left: -4px;
+}
+
+.navds-button__icon:last-child {
+  margin-right: -4px;
+}
+
+.navds-button__icon:only-child {
+  margin: 0;
+}
+
+:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
+  margin: -2px;
+  font-size: 1.25rem;
+}
+
+/*************************
+ * .navds-button--primary *
+ *************************/
+
+.navds-button--primary {
   background-color: var(--a-bg-accent-strong);
+  color: var(--a-text-accent-contrast);
+}
+
+@media (forced-colors: active) {
+  .navds-button.navds-button--primary {
+    background-color: highlight;
+    color: highlighttext;
+  }
+
+  .navds-button.navds-button--primary span {
+    forced-color-adjust: none;
+  }
+}
+
+.navds-button--primary:hover {
+  background-color: var(--a-bg-accent-strong-hover);
+}
+
+.navds-button--primary:active {
+  background-color: var(--a-bg-accent-strong-pressed);
+}
+
+.navds-button--primary:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    var(--a-shadow-focus);
+}
+@media (forced-colors: active) {
+  .navds-button--primary:focus-visible {
+    box-shadow: none;
+  }
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--primary:focus {
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--primary:hover:where(:disabled, .navds-button--disabled),
+.navds-button--primary:active:where(:disabled, .navds-button--disabled) {
+  background-color: var(--a-bg-accent-strong);
+}
+
+/*************************
+ * .navds-button--primary-neutral *
+ *************************/
+
+.navds-button--primary-neutral {
+  background-color: var(--a-bg-neutral-strong);
+  color: var(--a-text-neutral-contrast);
+}
+
+.navds-button--primary-neutral:hover {
+  background-color: var(--a-bg-neutral-strong-hover);
+}
+
+.navds-button--primary-neutral:active {
+  background-color: var(--a-bg-neutral-strong-pressed);
+}
+
+.navds-button--primary-neutral:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--primary-neutral:focus {
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--primary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--primary-neutral:active:where(:disabled, .navds-button--disabled) {
+  background-color: var(--a-bg-neutral-strong);
+}
+
+/**************************
+* .navds-button--secondary *
+ **************************/
+
+.navds-button--secondary {
+  background-color: transparent;
+  color: var(--a-text-accent);
+  box-shadow: inset 0 0 0 2px var(--a-border-accent);
+}
+
+.navds-button--secondary:hover {
+  background-color: var(--a-bg-accent-moderate-hover);
+  color: var(--a-bg-accent-strong-hover);
+  box-shadow: inset 0 0 0 2px var(--a-bg-accent-strong-hover);
+}
+
+.navds-button--secondary:focus-visible {
+  box-shadow:
+    inset 0 0 0 2px var(--a-bg-accent-strong),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary:focus {
+    box-shadow:
+      inset 0 0 0 2px var(--a-bg-accent-strong),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--secondary:active {
+  background-color: var(--a-bg-accent-strong-pressed);
+  color: var(--a-text-accent-contrast);
+  box-shadow: none;
+}
+
+/* --------- */
+
+.navds-button--secondary:focus-visible:active {
+  box-shadow:
+    inset 0 0 0 1px
+      var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary:focus:active {
+    box-shadow:
+      inset 0 0 0 1px
+        var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--secondary:where(:disabled, .navds-button--disabled),
+.navds-button--secondary:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-secondary-text, var(--__ac-button-secondary-text, var(--a-text-action)));
+  background-color: var(--ac-button-secondary-bg, var(--__ac-button-secondary-bg, var(--a-surface-transparent)));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--__ac-button-secondary-border, var(--a-border-action)));
+}
+
+/**************************
+* .navds-button--secondary-neutral *
+ **************************/
+
+.navds-button--secondary-neutral {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
+}
+
+.navds-button--secondary-neutral:hover {
+  background-color: var(--ac-button-secondary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-button--secondary-neutral:focus-visible {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  box-shadow:
+    inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary-neutral:focus {
+    color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+    box-shadow:
+      inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--secondary-neutral:active {
+  color: var(--ac-button-secondary-neutral-active-text, var(--a-text-on-neutral));
+  background-color: var(--ac-button-secondary-neutral-active-bg, var(--a-surface-neutral-active));
+  box-shadow: none;
+}
+
+.navds-button--secondary-neutral:focus-visible:active {
+  box-shadow:
+    inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--secondary-neutral:focus:active {
+    box-shadow:
+      inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--secondary-neutral:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
+}
+
+/****************************
+ * .navds-button--tertiary *
+ ****************************/
+
+.navds-button--tertiary {
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
+  background-color: var(--ac-button-tertiary-bg, var(--a-surface-transparent));
+}
+
+.navds-button--tertiary:hover {
+  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-on-action-subtle));
+  background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
+}
+
+.navds-button--tertiary:focus-visible {
+  box-shadow:
+    inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary:focus {
+    box-shadow:
+      inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--tertiary:active {
+  color: var(--ac-button-tertiary-active-text, var(--a-text-on-action));
+  background-color: var(--ac-button-tertiary-active-bg, var(--a-surface-action-active));
+}
+
+.navds-button--tertiary:active:hover {
+  background-color: var(--ac-button-tertiary-active-hover-bg, var(--a-surface-action-active));
+}
+
+.navds-button--tertiary:focus-visible:active {
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary:focus:active {
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--tertiary:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:hover:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:active:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:active:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
+  background: none;
+  box-shadow: none;
+}
+
+/****************************
+ * .navds-button--tertiary-neutral *
+ ****************************/
+
+.navds-button--tertiary-neutral {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+}
+
+.navds-button--tertiary-neutral:hover {
+  color: var(--ac-button-tertiary-neutral-hover-text, var(--a-text-default));
+  background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+}
+
+.navds-button--tertiary-neutral:focus-visible {
+  box-shadow:
+    inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary-neutral:focus {
+    box-shadow:
+      inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--tertiary-neutral:active {
+  color: var(--ac-button-tertiary-neutral-active-text, var(--a-text-on-neutral));
+  background-color: var(--ac-button-tertiary-neutral-active-bg, var(--a-surface-neutral-active));
+}
+
+.navds-button--tertiary-neutral:active:hover {
+  background-color: var(--ac-button-tertiary-neutral-active-hover-bg, var(--a-surface-neutral-active));
+}
+
+.navds-button--tertiary-neutral:focus-visible:active {
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--tertiary-neutral:focus:active {
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--tertiary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+  background: none;
+  box-shadow: none;
+}
+
+/*************************
+ * .navds-button--danger *
+ *************************/
+
+.navds-button--danger {
+  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
+  color: var(--ac-button-danger-text, var(--a-text-on-danger));
+}
+
+.navds-button--danger:hover {
+  background-color: var(--ac-button-danger-hover-bg, var(--a-surface-danger-hover));
+}
+
+.navds-button--danger:active {
+  background-color: var(--ac-button-danger-active-bg, var(--a-surface-danger-active));
+}
+
+.navds-button--danger:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px var(--a-surface-default),
+    var(--a-shadow-focus);
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button--danger:focus {
+    box-shadow:
+      inset 0 0 0 1px var(--a-surface-default),
+      var(--a-shadow-focus);
+  }
+}
+
+.navds-button--danger:active:where(:disabled, .navds-button--disabled),
+.navds-button--danger:hover:where(:disabled, .navds-button--disabled) {
+  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
+}
+
+/**************************
+ * .navds-button:disabled *
+ **************************/
+
+.navds-button:where(:disabled, .navds-button--disabled) {
+  cursor: not-allowed;
+}
+
+.navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+  opacity: 0.3;
+}
+
+/* Loader overrides */
+.navds-button .navds-loader .navds-loader__foreground {
+  stroke: var(--ac-button-loader-stroke, currentColor);
+}
+
+.navds-button--primary .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
+  stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
+}
+
+@media (forced-colors: active) {
+  .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  .navds-button {
+    border: 1px solid transparent;
+    color: ButtonText;
+    background-color: ButtonFace;
+  }
+
+  .navds-button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    box-shadow: none;
+  }
+
+  .navds-button:hover span {
+    forced-color-adjust: none;
+  }
+
+  .navds-button .navds-loader .navds-loader__foreground {
+    stroke: canvas;
+  }
+
+  .navds-button--primary .navds-loader .navds-loader__background,
+  .navds-button--danger .navds-loader .navds-loader__background {
+    stroke: canvastext;
+  }
 }
