@@ -19,8 +19,8 @@ interface MonthPickerComponent
    * ```jsx
    * <MonthPicker.Standalone
    *   dropdownCaption
-   *   fromDate={new Date("1 Oct 2020")}
-   *   toDate={new Date("1 Oct 2024")}
+   *   fromDate={new Date("1 Oct 2022")}
+   *   toDate={new Date("1 Oct 2026")}
    * />
    * ```
    */
