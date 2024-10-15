@@ -132,4 +132,11 @@ export const KomponentArtikkel = defineType({
     }),
     BaseSEOPreset,
   ],
+  orderings: [
+    {
+      title: "Sist godkjent",
+      name: "lastVerified",
+      by: [{ field: "updateInfo.lastVerified", direction: "asc" }],
+    },
+  ],
 });
