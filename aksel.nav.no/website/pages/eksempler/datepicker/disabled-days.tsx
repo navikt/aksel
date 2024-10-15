@@ -1,16 +1,16 @@
 import { DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-const Example = () => {
-  const disabledDays = [
-    new Date("Oct 10 2022"),
-    { from: new Date("Oct 17 2022"), to: new Date("Nov 10 2022") },
-    (date) => isFriday(date),
-  ];
+const disabledDays = [
+  new Date("Oct 14 2024"),
+  { from: new Date("Oct 21 2024"), to: new Date("Nov 10 2024") },
+  (date) => isFriday(date),
+];
 
+const Example = () => {
   return (
     <DatePicker.Standalone
-      today={new Date("Oct 9 2022")}
+      today={new Date("Oct 9 2024")}
       disabled={disabledDays}
       onSelect={console.info}
     />
