@@ -274,7 +274,7 @@ const ActionMenuRoot = ({
   );
 };
 
-const ActionMenu = ActionMenuRoot as ActionMenuComponent;
+export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
 /*                             ActionMenuTrigger                              */
@@ -284,7 +284,10 @@ interface ActionMenuTriggerProps
   children: React.ReactElement;
 }
 
-const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
+export const ActionMenuTrigger = forwardRef<
+  HTMLButtonElement,
+  ActionMenuTriggerProps
+>(
   (
     { children, onKeyDown, style, onClick, ...rest }: ActionMenuTriggerProps,
     ref,
@@ -330,7 +333,10 @@ interface ActionMenuContentProps
   children?: React.ReactNode;
 }
 
-const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
+export const ActionMenuContent = forwardRef<
+  HTMLDivElement,
+  ActionMenuContentProps
+>(
   (
     {
       children,
@@ -382,7 +388,7 @@ interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
+export const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
   ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
     return (
       <div
@@ -427,7 +433,7 @@ type ActionMenuGroupLabelingProps =
 type ActionMenuGroupProps = Omit<MenuGroupProps, "asChild"> &
   ActionMenuGroupLabelingProps;
 
-const ActionMenuGroup = forwardRef<
+export const ActionMenuGroup = forwardRef<
   ActionMenuGroupElement,
   ActionMenuGroupProps
 >(({ children, className, label, ...rest }: ActionMenuGroupProps, ref) => {
@@ -519,7 +525,7 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   icon?: React.ReactNode;
 }
 
-const ActionMenuItem: OverridableComponent<
+export const ActionMenuItem: OverridableComponent<
   ActionMenuItemProps,
   ActionMenuItemElement
 > = forwardRef(
@@ -577,7 +583,7 @@ interface ActionMenuCheckboxItemProps
   shortcut?: string;
 }
 
-const ActionMenuCheckboxItem = forwardRef<
+export const ActionMenuCheckboxItem = forwardRef<
   ActionMenuCheckboxItemElement,
   ActionMenuCheckboxItemProps
 >(
@@ -687,7 +693,7 @@ type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
     children: React.ReactNode;
   };
 
-const ActionMenuRadioGroup = forwardRef<
+export const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
   ActionMenuRadioGroupProps
 >(({ children, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
@@ -719,7 +725,7 @@ interface ActionMenuRadioItemProps extends Omit<MenuRadioItemProps, "asChild"> {
   children: React.ReactNode;
 }
 
-const ActionMenuRadioItem = forwardRef<
+export const ActionMenuRadioItem = forwardRef<
   ActionMenuRadioItemElement,
   ActionMenuRadioItemProps
 >(
@@ -810,7 +816,7 @@ type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
 type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
 type ActionMenuDividerProps = Omit<MenuDividerProps, "asChild">;
 
-const ActionMenuDivider = forwardRef<
+export const ActionMenuDivider = forwardRef<
   ActionMenuDividerElement,
   ActionMenuDividerProps
 >(({ className, ...rest }: ActionMenuDividerProps, ref) => {
@@ -843,7 +849,7 @@ interface ActionMenuSubProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-const ActionMenuSub = (props: ActionMenuSubProps) => {
+export const ActionMenuSub = (props: ActionMenuSubProps) => {
   const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
 
   const [open = false, setOpen] = useControllableState({
@@ -871,7 +877,7 @@ interface ActionMenuSubTriggerProps
   icon?: React.ReactNode;
 }
 
-const ActionMenuSubTrigger = forwardRef<
+export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
 >(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
@@ -910,7 +916,7 @@ interface ActionMenuSubContentProps
   children: React.ReactNode;
 }
 
-const ActionMenuSubContent = forwardRef<
+export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
 >(
@@ -973,30 +979,18 @@ ActionMenu.Sub = ActionMenuSub;
 ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
 
-export {
-  ActionMenu,
-  ActionMenuCheckboxItem,
-  ActionMenuContent,
-  ActionMenuDivider,
-  ActionMenuGroup,
-  ActionMenuItem,
-  ActionMenuLabel,
-  ActionMenuRadioGroup,
-  ActionMenuRadioItem,
-  ActionMenuSub,
-  ActionMenuSubContent,
-  ActionMenuSubTrigger,
-  ActionMenuTrigger,
-  type ActionMenuCheckboxItemProps,
-  type ActionMenuContentProps,
-  type ActionMenuDividerProps,
-  type ActionMenuGroupProps,
-  type ActionMenuLabelProps,
-  type ActionMenuProps,
-  type ActionMenuRadioGroupProps,
-  type ActionMenuRadioItemProps,
-  type ActionMenuSubContentProps,
-  type ActionMenuSubProps,
-  type ActionMenuSubTriggerProps,
-  type ActionMenuTriggerProps,
+export type {
+  ActionMenuItemProps,
+  ActionMenuCheckboxItemProps,
+  ActionMenuContentProps,
+  ActionMenuDividerProps,
+  ActionMenuGroupProps,
+  ActionMenuLabelProps,
+  ActionMenuProps,
+  ActionMenuRadioGroupProps,
+  ActionMenuRadioItemProps,
+  ActionMenuSubContentProps,
+  ActionMenuSubProps,
+  ActionMenuSubTriggerProps,
+  ActionMenuTriggerProps,
 };
