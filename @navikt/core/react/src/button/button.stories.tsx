@@ -190,3 +190,19 @@ export const ChromaticForcedColors: Story = {
     chromatic: { disable: false, forcedColors: "active" },
   },
 };
+
+export const ChromaticDarksideDark: Story = {
+  render: Chromatic.render,
+  parameters: {
+    chromatic: { disable: false },
+  },
+  globals: { theme: "dark", mode: "darkside" },
+};
+
+export const ChromaticDarksideLight: Story = {
+  render: Chromatic.render,
+  parameters: {
+    chromatic: { disable: false },
+  },
+  globals: { theme: "light", mode: "darkside" },
+};
