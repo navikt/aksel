@@ -5,7 +5,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <ActionMenu defaultOpen>
+    <ActionMenu>
       <ActionMenu.Trigger>
         <Button
           variant="secondary-neutral"
@@ -52,7 +52,7 @@ const RemixExample = () => (
 */
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example);
+export default withDsExample(Example, { variant: "static" });
 
 /* Storybook story */
 export const Demo = {
