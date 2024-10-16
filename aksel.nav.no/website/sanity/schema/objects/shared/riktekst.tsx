@@ -188,7 +188,7 @@ const Riktekst = (
 
   const templates = ["kode_eksempler", "exampletext_block"];
 
-  const grunnleggende = ["spesial_seksjon", "attachment"];
+  const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
 
   fields.push(...standard);
 

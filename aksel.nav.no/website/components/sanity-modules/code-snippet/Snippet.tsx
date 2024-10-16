@@ -88,6 +88,7 @@ const CodeSnippet = ({ node: { code, title } }: CodeSnippetProps) => {
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token })} />
                   ))}
+                  {`\n` /* Needed for copy-pasting in some browsers */}
                 </span>
               ))}
             </code>

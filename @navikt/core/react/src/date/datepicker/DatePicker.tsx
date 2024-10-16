@@ -27,8 +27,8 @@ interface DatePickerComponent
    * ```jsx
    * <DatePicker.Standalone
    *   dropdownCaption
-   *   fromDate={new Date("2020-10-01")}
-   *   toDate={new Date("2024-10-01")}
+   *   fromDate={new Date("2022-10-01")}
+   *   toDate={new Date("2026-10-01")}
    * />
    * ```
    */

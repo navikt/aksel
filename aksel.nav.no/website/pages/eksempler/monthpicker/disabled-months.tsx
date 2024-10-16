@@ -1,18 +1,20 @@
 import { MonthPicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
-const Example = () => {
-  const disabledDays = [
-    new Date("May 10 2022"),
-    { from: new Date("Nov 17 2022"), to: new Date("Feb 10 2023") },
-  ];
+const year = new Date().getFullYear();
 
+const disabledDays = [
+  new Date(`May 10 ${year}`),
+  { from: new Date(`Nov 17 ${year}`), to: new Date(`Feb 10 ${year + 1}`) },
+];
+
+const Example = () => {
   return (
     <MonthPicker.Standalone
       onMonthSelect={console.info}
       dropdownCaption
-      fromDate={new Date("1 Oct 2020")}
-      toDate={new Date("1 Oct 2024")}
+      fromDate={new Date(`1 Oct ${year - 2}`)}
+      toDate={new Date(`1 Oct ${year + 2}`)}
       disabled={disabledDays}
     />
   );
