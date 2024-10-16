@@ -18,7 +18,7 @@ import { mergeConfigs, tokensWithPrefix } from "./util";
 export const lightModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
-      semanticTokensForAllRolesConfig(),
+      semanticTokensForAllRolesConfig("light"),
       textContrastTokenConfig(),
       semanticTokenConfig("light"),
       globalColorLightModeConfig,
@@ -33,7 +33,7 @@ export const lightModeTokens = () => {
 export const darkModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
-      semanticTokensForAllRolesConfig(),
+      semanticTokensForAllRolesConfig("dark"),
       textContrastTokenConfig(),
       semanticTokenConfig("dark"),
       globalColorDarkModeConfig,

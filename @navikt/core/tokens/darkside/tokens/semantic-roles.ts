@@ -1,12 +1,14 @@
 import _ from "lodash";
 import {
-  GlobalColorRoles,
-  StyleDictionaryTokenConfig,
+  type ColorTheme,
+  type GlobalColorRoles,
+  type StyleDictionaryTokenConfig,
   globalColorRoles,
 } from "../util";
 
 const configForRole = (
   role: GlobalColorRoles,
+  theme: ColorTheme,
 ): StyleDictionaryTokenConfig<"color"> => ({
   bg: {
     [role]: {
@@ -24,11 +26,6 @@ const configForRole = (
       type: "color",
       group: `background.${role}`,
     },
-    /**
-     * TODO: Consider a role-selected token
-     * - For static selected elements like links, combobox ++
-     * - Might just be static bg-selected
-     */
     [`${role}-moderate`]: {
       value: `{a.${role}.200.value}`,
       type: "color",
@@ -75,12 +72,13 @@ const configForRole = (
       group: `background.${role}`,
     },
     [`${role}-raised`]: {
-      value: `{a.${role}.100.value}`,
+      /* We bump raised for darkmode */
+      value: `{a.${role}.${theme === "light" ? "100" : "200"}.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-raised-hover`]: {
-      value: `{a.${role}.200.value}`,
+      value: `{a.${role}.${theme === "light" ? "200" : "300"}.value}`,
       type: "color",
       group: `background.${role}`,
     },
@@ -129,8 +127,8 @@ const configForRole = (
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
-export const semanticTokensForAllRolesConfig = () =>
+export const semanticTokensForAllRolesConfig = (theme: ColorTheme) =>
   globalColorRoles.reduce(
-    (acc, role) => _.merge(acc, configForRole(role)),
+    (acc, role) => _.merge(acc, configForRole(role, theme)),
     {} as ReturnType<typeof configForRole>,
   );
