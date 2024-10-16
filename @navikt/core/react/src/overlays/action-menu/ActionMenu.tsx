@@ -37,10 +37,6 @@ interface ActionMenuProps {
    */
   open?: boolean;
   /**
-   * Whether the menu should be open by default.
-   */
-  defaultOpen?: boolean;
-  /**
    * Callback for when the menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
@@ -247,14 +243,13 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
 const ActionMenuRoot = ({
   children,
   open: openProp,
-  defaultOpen = false,
   onOpenChange,
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const [open = false, setOpen] = useControllableState({
     value: openProp,
-    defaultValue: defaultOpen,
+    defaultValue: false,
     onChange: onOpenChange,
   });
 
@@ -840,21 +835,17 @@ interface ActionMenuSubProps {
    */
   open?: boolean;
   /**
-   * Whether the sub-menu should be open by default.
-   */
-  defaultOpen?: boolean;
-  /**
    * Callback for when the sub-menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
 }
 
 export const ActionMenuSub = (props: ActionMenuSubProps) => {
-  const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
+  const { children, open: openProp, onOpenChange } = props;
 
   const [open = false, setOpen] = useControllableState({
     value: openProp,
-    defaultValue: defaultOpen,
+    defaultValue: false,
     onChange: onOpenChange,
   });
 
