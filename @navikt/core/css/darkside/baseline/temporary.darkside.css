@@ -1,0 +1,4 @@
+:root {
+  --a-shadow-focus: 0 0 0 3px var(--a-border-focus);
+  --a-shadow-inset: inset 0 0 0 1px var(--a-bg-default);
+}
