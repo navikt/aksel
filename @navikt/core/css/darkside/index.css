@@ -9,9 +9,11 @@
 @import url("./baseline/theme.darkside.css") layer(aksel.theme);
 @import url("./typography.darkside.css") layer(aksel.typography);
 @import url("./baseline/utilities.darkside.css") layer(aksel.utilities);
+@import url("./baseline/temporary.darkside.css") layer(aksel.components);
 
 /* Theming */
 @import url("@navikt/ds-tokens/dist/darkside/tokens.css") layer(aksel.theme);
 
 /* Components */
 @import url("./button.darkside.css") layer(aksel.components);
+@import url("./primitives/stack.darkside.css") layer(aksel.components);

@@ -111,9 +111,7 @@
 .navds-button--primary:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 @media (forced-colors: active) {
   .navds-button--primary:focus-visible {
@@ -123,9 +121,7 @@
 
 @supports not selector(:focus-visible) {
   .navds-button--primary:focus {
-    box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
@@ -152,16 +148,12 @@
 }
 
 .navds-button--primary-neutral:focus-visible {
-  box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--primary-neutral:focus {
-    box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
@@ -206,29 +198,25 @@
   box-shadow: none;
 }
 
-/* --------- */
-
 .navds-button--secondary:focus-visible:active {
   box-shadow:
-    inset 0 0 0 1px
-      var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
+    inset 0 0 0 1px var(--a-border-accent),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--secondary:focus:active {
     box-shadow:
-      inset 0 0 0 1px
-        var(--ac-button-secondary-active-focus-border, var(--__ac-button-secondary-active-focus-border, var(--a-surface-default))),
+      inset 0 0 0 1px var(--a-border-accent),
       var(--a-shadow-focus);
   }
 }
 
 .navds-button--secondary:where(:disabled, .navds-button--disabled),
 .navds-button--secondary:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--ac-button-secondary-text, var(--__ac-button-secondary-text, var(--a-text-action)));
-  background-color: var(--ac-button-secondary-bg, var(--__ac-button-secondary-bg, var(--a-surface-transparent)));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--__ac-button-secondary-border, var(--a-border-action)));
+  background-color: transparent;
+  color: var(--a-text-accent);
+  box-shadow: inset 0 0 0 2px var(--a-border-accent);
 }
 
 /**************************
@@ -236,56 +224,52 @@
  **************************/
 
 .navds-button--secondary-neutral {
-  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
-  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
+  background-color: transparent;
+  color: var(--a-text-default);
+  box-shadow: inset 0 0 0 2px var(--a-border-neutral);
 }
 
 .navds-button--secondary-neutral:hover {
-  background-color: var(--ac-button-secondary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+  background-color: var(--a-bg-neutral-hover);
 }
 
 .navds-button--secondary-neutral:focus-visible {
-  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+  color: var(--a-text-default);
   box-shadow:
-    inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
+    inset 0 0 0 2px var(--a-border-neutral),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--secondary-neutral:focus {
-    color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
+    color: var(--a-text-default);
     box-shadow:
-      inset 0 0 0 2px var(--ac-button-secondary-neutral-focus-border, var(--a-border-strong)),
+      inset 0 0 0 2px var(--a-border-neutral),
       var(--a-shadow-focus);
   }
 }
 
 .navds-button--secondary-neutral:active {
-  color: var(--ac-button-secondary-neutral-active-text, var(--a-text-on-neutral));
-  background-color: var(--ac-button-secondary-neutral-active-bg, var(--a-surface-neutral-active));
+  color: var(--a-text-neutral-contrast);
+  background-color: var(--a-bg-neutral-strong-pressed);
   box-shadow: none;
 }
 
 .navds-button--secondary-neutral:focus-visible:active {
-  box-shadow:
-    inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--secondary-neutral:focus:active {
-    box-shadow:
-      inset 0 0 0 1px var(--ac-button-secondary-neutral-active-focus-border, var(--a-surface-default)),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
 .navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
 .navds-button--secondary-neutral:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--ac-button-secondary-neutral-text, var(--a-text-default));
-  background-color: var(--ac-button-secondary-neutral-bg, var(--a-surface-transparent));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-neutral-border, var(--a-border-strong));
+  color: var(--a-text-default);
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--a-border-strong);
 }
 
 /****************************
@@ -293,49 +277,45 @@
  ****************************/
 
 .navds-button--tertiary {
-  color: var(--ac-button-tertiary-text, var(--a-text-action));
-  background-color: var(--ac-button-tertiary-bg, var(--a-surface-transparent));
+  background-color: transparent;
+  color: var(--a-text-accent);
 }
 
 .navds-button--tertiary:hover {
-  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-on-action-subtle));
-  background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
+  background-color: var(--a-bg-accent-hover);
+  color: var(--a-text-accent);
 }
 
 .navds-button--tertiary:focus-visible {
   box-shadow:
-    inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)),
+    inset 0 0 0 2px var(--a-border-accent),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--tertiary:focus {
     box-shadow:
-      inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)),
+      inset 0 0 0 2px var(--a-border-accent),
       var(--a-shadow-focus);
   }
 }
 
 .navds-button--tertiary:active {
-  color: var(--ac-button-tertiary-active-text, var(--a-text-on-action));
-  background-color: var(--ac-button-tertiary-active-bg, var(--a-surface-action-active));
+  background-color: var(--a-bg-accent-strong-pressed);
+  color: var(--a-text-accent-contrast);
 }
 
 .navds-button--tertiary:active:hover {
-  background-color: var(--ac-button-tertiary-active-hover-bg, var(--a-surface-action-active));
+  background-color: var(--a-bg-accent-strong-pressed);
 }
 
 .navds-button--tertiary:focus-visible:active {
-  box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--tertiary:focus:active {
-    box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
@@ -343,7 +323,7 @@
 .navds-button--tertiary:hover:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--ac-button-tertiary-text, var(--a-text-action));
+  color: var(--a-text-accent);
   background: none;
   box-shadow: none;
 }
@@ -353,48 +333,44 @@
  ****************************/
 
 .navds-button--tertiary-neutral {
-  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+  color: var(--a-text-default);
 }
 
 .navds-button--tertiary-neutral:hover {
-  color: var(--ac-button-tertiary-neutral-hover-text, var(--a-text-default));
-  background-color: var(--ac-button-tertiary-neutral-hover-bg, var(--a-surface-neutral-subtle-hover));
+  background-color: var(--a-bg-neutral-hover);
 }
 
 .navds-button--tertiary-neutral:focus-visible {
   box-shadow:
-    inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
+    inset 0 0 0 2px var(--a-border-strong),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--tertiary-neutral:focus {
     box-shadow:
-      inset 0 0 0 2px var(--ac-button-tertiary-neutral-focus-border, var(--a-border-strong)),
+      inset 0 0 0 2px var(--a-border-strong),
       var(--a-shadow-focus);
   }
 }
 
 .navds-button--tertiary-neutral:active {
-  color: var(--ac-button-tertiary-neutral-active-text, var(--a-text-on-neutral));
-  background-color: var(--ac-button-tertiary-neutral-active-bg, var(--a-surface-neutral-active));
+  background-color: var(--a-bg-neutral-strong-pressed);
+  color: var(--a-text-neutral-contrast);
 }
 
+/* TODO: do we need this selector? */
 .navds-button--tertiary-neutral:active:hover {
-  background-color: var(--ac-button-tertiary-neutral-active-hover-bg, var(--a-surface-neutral-active));
+  background-color: var(--a-bg-neutral-strong-pressed);
 }
 
 .navds-button--tertiary-neutral:focus-visible:active {
-  box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--tertiary-neutral:focus:active {
-    box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
@@ -402,7 +378,7 @@
 .navds-button--tertiary-neutral:hover:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary-neutral:active:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary-neutral:active:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--ac-button-tertiary-neutral-text, var(--a-text-default));
+  color: var(--a-text-default);
   background: none;
   box-shadow: none;
 }
@@ -412,35 +388,31 @@
  *************************/
 
 .navds-button--danger {
-  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
-  color: var(--ac-button-danger-text, var(--a-text-on-danger));
+  background-color: var(--a-bg-danger-strong);
+  color: var(--a-text-danger-contrast);
 }
 
 .navds-button--danger:hover {
-  background-color: var(--ac-button-danger-hover-bg, var(--a-surface-danger-hover));
+  background-color: var(--a-bg-danger-strong-hover);
 }
 
 .navds-button--danger:active {
-  background-color: var(--ac-button-danger-active-bg, var(--a-surface-danger-active));
+  background-color: var(--a-bg-danger-strong-pressed);
 }
 
 .navds-button--danger:focus-visible {
-  box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+  box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-button--danger:focus {
-    box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+    box-shadow: var(--a-shadow-inset), var(--a-shadow-focus);
   }
 }
 
 .navds-button--danger:active:where(:disabled, .navds-button--disabled),
 .navds-button--danger:hover:where(:disabled, .navds-button--disabled) {
-  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
+  background-color: var(--a-bg-danger-strong);
 }
 
 /**************************
@@ -457,12 +429,12 @@
 
 /* Loader overrides */
 .navds-button .navds-loader .navds-loader__foreground {
-  stroke: var(--ac-button-loader-stroke, currentColor);
+  stroke: currentColor;
 }
 
 .navds-button--primary .navds-loader .navds-loader__background,
 .navds-button--danger .navds-loader .navds-loader__background {
-  stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
+  stroke: rgb(255 255 255 / 0.3);
 }
 
 @media (forced-colors: active) {
