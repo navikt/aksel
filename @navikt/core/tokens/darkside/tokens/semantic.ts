@@ -101,6 +101,11 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         type: "color",
         group: "border",
       },
+      subtleA: {
+        value: "{a.neutral.400A.value}",
+        type: "color",
+        group: "border",
+      },
       strong: {
         value: "{a.neutral.600.value}",
         type: "color",
