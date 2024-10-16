@@ -37,4 +37,7 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ErrorSummary: {
+    Heading: "You must correct the following errors before you can continue:",
+  },
 } satisfies Translations;
