@@ -5,7 +5,7 @@ import {
   allTokens,
   darkModeTokens,
   lightModeTokens,
-  scaleTokens,
+  rootTokens,
 } from "./create-configuration";
 import { formatCJS, formatES6, transformCSS } from "./sd-format";
 
@@ -21,8 +21,8 @@ const filenames = {
   dark: {
     css: "dark-tokens.css",
   },
-  scale: {
-    css: "scale-tokens.css",
+  root: {
+    css: "root-tokens.css",
   },
 };
 
@@ -79,15 +79,15 @@ const SDictionaryDarkMode = new StyleDictionary({
   },
 });
 
-const SDictionaryScaleTokens = new StyleDictionary({
-  tokens: scaleTokens(),
+const SDRootTokens = new StyleDictionary({
+  tokens: rootTokens(),
   platforms: {
     css: {
       transformGroup: "css",
       buildPath: DARKSIDE_DIST,
       files: [
         {
-          destination: "scale-tokens.css",
+          destination: "root-tokens.css",
           format: "css/variables",
           options: {
             outputReferences: true,
@@ -142,7 +142,7 @@ const main = async () => {
   await Promise.all([
     SDictionaryLightMode.hasInitialized,
     SDictionaryDarkMode.hasInitialized,
-    SDictionaryScaleTokens.hasInitialized,
+    SDRootTokens.hasInitialized,
     SDDictionaryNonCSSFormats.hasInitialized,
   ]);
 
@@ -173,7 +173,7 @@ const main = async () => {
   await Promise.all([
     SDictionaryLightMode.buildAllPlatforms(),
     SDictionaryDarkMode.buildAllPlatforms(),
-    SDictionaryScaleTokens.buildAllPlatforms(),
+    SDRootTokens.buildAllPlatforms(),
     SDDictionaryNonCSSFormats.buildAllPlatforms(),
   ]);
 

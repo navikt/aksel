@@ -1,3 +1,5 @@
+import { breakpointsTokenConfig } from "./tokens/breakpoints";
+import { fontTokenConfig } from "./tokens/font";
 import {
   globalColorDarkModeConfig,
   globalColorLightModeConfig,
@@ -52,6 +54,19 @@ export const scaleTokens = () => {
   );
 };
 
+export const rootTokens = () => {
+  return tokensWithPrefix(
+    mergeConfigs([scaleTokens().a, breakpointsTokenConfig, fontTokenConfig]),
+  );
+};
+
 export const allTokens = () => {
-  return tokensWithPrefix(mergeConfigs([lightModeTokens().a, scaleTokens().a]));
+  return tokensWithPrefix(
+    mergeConfigs([
+      lightModeTokens().a,
+      scaleTokens().a,
+      breakpointsTokenConfig,
+      fontTokenConfig,
+    ]),
+  );
 };
