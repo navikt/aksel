@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "yarn tsx ./src",
+    "build:darkside": "yarn tsx ./darkside",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
