@@ -12,7 +12,7 @@ const AddNewOption = () => {
   const {
     inputProps: { id },
     size,
-    value,
+    searchTerm,
   } = useInputContext();
   const {
     setIsMouseLastUsedInputDevice,
@@ -34,8 +34,8 @@ const AddNewOption = () => {
         }
       }}
       onPointerUp={(event) => {
-        toggleOption(toComboboxOption(value), event);
-        if (!isMultiSelect && !isInList(value, selectedOptions))
+        toggleOption(toComboboxOption(searchTerm), event);
+        if (!isMultiSelect && !isInList(searchTerm, selectedOptions))
           toggleIsListOpen(false);
       }}
       id={filteredOptionsUtil.getAddNewOptionId(id)}
@@ -53,7 +53,7 @@ const AddNewOption = () => {
       <BodyShort size={size}>
         Legg til{" "}
         <Label as="span" size={size}>
-          &#8220;{value}&#8221;
+          &#8220;{searchTerm}&#8221;
         </Label>
       </BodyShort>
     </li>

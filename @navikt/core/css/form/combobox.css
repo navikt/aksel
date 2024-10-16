@@ -372,6 +372,11 @@
   border-radius: calc(var(--a-border-radius-medium) - 1px);
 }
 
+.navds-combobox__list-item mark {
+  background-color: transparent;
+  font-weight: bold;
+}
+
 /* Mobile */
 
 @media (max-width: 479px) {
