@@ -1,4 +1,5 @@
 import { Box, HStack, Heading, VStack } from "@navikt/ds-react";
+import { Placeholder } from "@/web/examples/__parts/StackPlaceholder";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -34,16 +35,6 @@ const Example = () => {
     </Box>
   );
 };
-
-const Placeholder = () => (
-  <Box
-    background="surface-alt-3"
-    height="3rem"
-    width="3rem"
-    borderRadius="medium"
-    flexShrink="0"
-  />
-);
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { showBreakpoints: true });
