@@ -19,42 +19,41 @@ import {
   SurfaceColorToken,
 } from "../utilities/types";
 
-export type BoxProps = PrimitiveProps &
-  PrimitiveAsChildProps &
-  React.HTMLAttributes<HTMLDivElement> & {
-    /**
-     * CSS `background-color` property.
-     * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
-     */
-    background?: BackgroundColorToken | SurfaceColorToken;
-    /**
-     * CSS `border-color` property.
-     * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
-     */
-    borderColor?: BorderColorToken;
-    /**
-     * CSS `border-radius` property.
-     * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
-     * or an object of radius tokens for different breakpoints.
-     * @example
-     * borderRadius='full'
-     * borderRadius='0 full large small'
-     * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
-     */
-    borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
-    /**
-     * CSS `border-width` property. If this is not set there will be no border.
-     * @example
-     * borderWidth='2'
-     * borderWidth='1 2 3 4'
-     */
-    borderWidth?: SpaceDelimitedAttribute<"0" | "1" | "2" | "3" | "4" | "5">;
-    /** Shadow on box. Accepts a shadow token.
-     * @example
-     * shadow='small'
-     */
-    shadow?: ShadowToken;
-  };
+export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
+  /**
+   * CSS `background-color` property.
+   * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   */
+  background?: BackgroundColorToken | SurfaceColorToken;
+  /**
+   * CSS `border-color` property.
+   * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   */
+  borderColor?: BorderColorToken;
+  /**
+   * CSS `border-radius` property.
+   * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
+   * or an object of radius tokens for different breakpoints.
+   * @example
+   * borderRadius='full'
+   * borderRadius='0 full large small'
+   * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   */
+  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
+  /**
+   * CSS `border-width` property. If this is not set there will be no border.
+   * @example
+   * borderWidth='2'
+   * borderWidth='1 2 3 4'
+   */
+  borderWidth?: SpaceDelimitedAttribute<"0" | "1" | "2" | "3" | "4" | "5">;
+  /** Shadow on box. Accepts a shadow token.
+   * @example
+   * shadow='small'
+   */
+  shadow?: ShadowToken;
+} & PrimitiveProps &
+  PrimitiveAsChildProps;
 
 /**
  * Foundational Layout-primitive for generic encapsulation & styling.
