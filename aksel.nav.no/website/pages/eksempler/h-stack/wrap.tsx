@@ -1,6 +1,6 @@
 import { Box, HStack, Heading, VStack } from "@navikt/ds-react";
-import { Placeholder } from "@/web/examples/__parts/StackPlaceholder";
 import { withDsExample } from "@/web/examples/withDsExample";
+import { Placeholder } from "../../../components/website-modules/examples/__parts/StackPlaceholder";
 
 const Example = () => {
   return (
