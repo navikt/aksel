@@ -2,6 +2,7 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import {
+  allTokens,
   darkModeTokens,
   lightModeTokens,
   scaleTokens,
@@ -54,24 +55,6 @@ const SDictionaryLightMode = new StyleDictionary({
         },
       ],
     },
-    js: {
-      transformGroup: "js",
-      buildPath: DARKSIDE_DIST,
-      files: [
-        {
-          destination: "tokens.js",
-          format: "format-ES6",
-        },
-        {
-          destination: "tokens-cjs.js",
-          format: "format-CJS",
-        },
-        {
-          destination: "tokens.d.ts",
-          format: "format-ES6",
-        },
-      ],
-    },
   },
 });
 
@@ -117,22 +100,62 @@ const SDictionaryScaleTokens = new StyleDictionary({
   },
 });
 
+const SDDictionaryNonCSSFormats = new StyleDictionary({
+  tokens: allTokens(),
+  platforms: {
+    /* We don't want to build any files with CSS here, only add the formatting support */
+    css: {
+      transformGroup: "css",
+      transforms: ["name/alpha-suffix"],
+      files: [
+        {
+          format: "css/variables",
+          options: {
+            outputReferences: true,
+            outputReferenceFallbacks: true,
+          },
+        },
+      ],
+    },
+    js: {
+      transformGroup: "js",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "tokens.js",
+          format: "format-ES6",
+        },
+        {
+          destination: "tokens-cjs.js",
+          format: "format-CJS",
+        },
+        {
+          destination: "tokens.d.ts",
+          format: "format-ES6",
+        },
+      ],
+    },
+  },
+});
+
 const main = async () => {
   await Promise.all([
     SDictionaryLightMode.hasInitialized,
     SDictionaryDarkMode.hasInitialized,
     SDictionaryScaleTokens.hasInitialized,
+    SDDictionaryNonCSSFormats.hasInitialized,
   ]);
 
   SDictionaryLightMode.registerTransform(transformCSS);
   SDictionaryDarkMode.registerTransform(transformCSS);
+  SDDictionaryNonCSSFormats.registerTransform(transformCSS);
 
   /**
    * To support theming in the future, we need to export the tokens as CSS variables.
    * By default StyleDictionary does not support this and only outputs to color-values,
    * so we need to create a custom format.
    */
-  SDictionaryLightMode.registerFormat({
+  SDDictionaryNonCSSFormats.registerFormat({
     name: "format-ES6",
     format: formatES6,
   });
@@ -142,7 +165,7 @@ const main = async () => {
    * By default StyleDictionary does not support this and only outputs to color-values,
    * so we need to create a custom format.
    */
-  SDictionaryLightMode.registerFormat({
+  SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
   });
@@ -151,6 +174,7 @@ const main = async () => {
     SDictionaryLightMode.buildAllPlatforms(),
     SDictionaryDarkMode.buildAllPlatforms(),
     SDictionaryScaleTokens.buildAllPlatforms(),
+    SDDictionaryNonCSSFormats.buildAllPlatforms(),
   ]);
 
   const importPaths = Object.values(filenames)

@@ -51,3 +51,7 @@ export const scaleTokens = () => {
     mergeConfigs([spacingTokenConfig, radiusTokenConfig]),
   );
 };
+
+export const allTokens = () => {
+  return tokensWithPrefix(mergeConfigs([lightModeTokens().a, scaleTokens().a]));
+};
