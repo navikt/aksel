@@ -1,4 +1,4 @@
-import { HStack, VStack } from "@navikt/ds-react";
+import { Box, HStack, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -34,10 +34,10 @@ const Example = () => {
       </HStack>
       <HStack gap="3" align="baseline">
         <Placeholder text="baseline" />
-        <Placeholder text="text" noPadding />
-        <Placeholder text="text" noPadding />
-        <Placeholder text="text" noPadding />
-        <Placeholder text="text" noPadding />
+        <Placeholder text="text" padding="0" />
+        <Placeholder text="text" padding="0 0 1rem" />
+        <Placeholder text="text" padding="1rem 0 0" />
+        <Placeholder text="text" padding="0" />
       </HStack>
     </VStack>
   );
@@ -45,18 +45,20 @@ const Example = () => {
 
 const Placeholder = ({
   text,
-  noPadding,
+  padding = "0.5rem",
 }: {
   text?: string;
-  noPadding?: boolean;
+  padding?: string;
 }) => {
   return (
-    <div
-      className="h-auto min-h-4 w-auto rounded bg-teal-600 text-text-on-action"
-      style={{ padding: noPadding ? 0 : "0.5rem" }}
+    <Box
+      background="surface-alt-3"
+      borderRadius="medium"
+      minHeight="1rem"
+      style={{ color: "var(--a-text-on-action)", padding }}
     >
       {text}
-    </div>
+    </Box>
   );
 };
 

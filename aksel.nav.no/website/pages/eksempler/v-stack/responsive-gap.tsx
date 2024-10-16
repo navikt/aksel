@@ -1,9 +1,9 @@
-import { VStack } from "@navikt/ds-react";
+import { Box, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <VStack gap={{ xs: "4", sm: "6", md: "8", lg: "10", xl: "12" }}>
+    <VStack gap={{ xs: "2", sm: "6", md: "10", lg: "14", xl: "18" }}>
       <Placeholder />
       <Placeholder />
       <Placeholder />
@@ -12,9 +12,14 @@ const Example = () => {
   );
 };
 
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
-};
+const Placeholder = () => (
+  <Box
+    background="surface-alt-3"
+    height="3rem"
+    width="3rem"
+    borderRadius="medium"
+  />
+);
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { showBreakpoints: true });
@@ -26,5 +31,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Med responsive gap kan man redusere/øke mellomrom basert på brekkpunktene våre",
+  desc: "På noen props, feks. gap, kan du sette ulike verdier per brekkpunkt. Implementasjonen er mobile-first, slik at 'sm: 8' vil også gjelde for 'md', 'lg' og 'xl'.",
 };
