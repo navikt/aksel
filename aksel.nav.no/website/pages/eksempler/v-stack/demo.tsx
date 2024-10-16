@@ -1,4 +1,4 @@
-import { VStack } from "@navikt/ds-react";
+import { Box, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
@@ -12,9 +12,14 @@ const Example = () => {
   );
 };
 
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
-};
+const Placeholder = () => (
+  <Box
+    background="surface-alt-3"
+    height="3rem"
+    width="3rem"
+    borderRadius="medium"
+  />
+);
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, { showBreakpoints: true });
