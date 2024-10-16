@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -244,9 +245,12 @@ const ActionMenuRoot = ({
   children,
   open: openProp,
   onOpenChange,
-  rootElement,
+  rootElement: rootElementProp,
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const modalContext = useModalContext(false);
+  const rootElement = modalContext ? modalContext.ref.current : rootElementProp;
 
   const [open = false, setOpen] = useControllableState({
     value: openProp,
