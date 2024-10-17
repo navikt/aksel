@@ -105,6 +105,8 @@
       "function-url-quotes": null,
       "property-no-vendor-prefix": null,
       "alpha-value-notation": "number",
+      "media-feature-range-notation": "prefix",
+      "import-notation": "string",
       "declaration-property-value-disallowed-list": {
         "justify-content": [
           "start",

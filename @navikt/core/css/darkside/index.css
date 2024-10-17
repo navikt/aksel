@@ -3,15 +3,15 @@
 @layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.utilities;
 
 /* CSS foundations */
-@import url("./baseline/reset.darkside.css") layer(aksel.reset);
-@import url("./baseline/print.darkside.css") layer(aksel.reset);
-@import url("./baseline/fonts.darkside.css") layer(aksel.typography);
-@import url("./baseline/theme.darkside.css") layer(aksel.theme);
-@import url("./typography.darkside.css") layer(aksel.typography);
-@import url("./baseline/utilities.darkside.css") layer(aksel.utilities);
+@import "./baseline/reset.darkside.css" layer(aksel.reset);
+@import "./baseline/print.darkside.css" layer(aksel.reset);
+@import "./baseline/fonts.darkside.css" layer(aksel.typography);
+@import "./baseline/theme.darkside.css" layer(aksel.theme);
+@import "./typography.darkside.css" layer(aksel.typography);
+@import "./baseline/utilities.darkside.css" layer(aksel.utilities);
 
 /* Theming */
-@import url("@navikt/ds-tokens/dist/darkside/tokens.css") layer(aksel.theme);
+@import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
 
 /* Components */
-@import url("./button.darkside.css") layer(aksel.components);
+@import "./button.darkside.css" layer(aksel.components);
