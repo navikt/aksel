@@ -1,45 +1,8 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-export function semanticTokenConfig(theme: ColorTheme) {
-  return theme === "light" ? semanticTokensLight() : semanticTokensDark();
-}
-
-function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
-  const baseline = semanticTokensLight();
-  return {
-    ...baseline,
-    bg: {
-      ...baseline.bg,
-      default: {
-        value: "#0E151F",
-        type: "color",
-        group: "background",
-        /**
-         * Allows token to be used on 'effect' properties in Figma,
-         * Bg-default is used between element and focus-marking.
-         */
-        scopes: ["EFFECT_COLOR"],
-      },
-      input: {
-        value: "rgba(0, 0, 0, 0.50)",
-        type: "color",
-        group: "background",
-      },
-      raised: {
-        value: "{a.neutral.200.value}",
-        type: "color",
-        group: "background",
-      },
-      sunken: {
-        value: "#07090D",
-        type: "color",
-        group: "background",
-      },
-    },
-  };
-}
-
-function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
+export function semanticTokenConfig(
+  theme: ColorTheme,
+): StyleDictionaryTokenConfig<"color"> {
   return {
     text: {
       default: {
@@ -60,7 +23,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
     },
     bg: {
       default: {
-        value: "#ffffff",
+        value: theme === "light" ? "#ffffff" : "#0E151F",
         type: "color",
         group: "background",
         /**
@@ -70,17 +33,21 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         scopes: ["EFFECT_COLOR"],
       },
       input: {
-        value: "rgba(255, 255, 255, 0.85)",
+        value:
+          theme === "light"
+            ? "rgba(255, 255, 255, 0.85)"
+            : "rgba(14, 21, 31, 0.50)",
         type: "color",
         group: "background",
       },
       raised: {
-        value: "{a.neutral.000.value}",
+        value:
+          theme === "light" ? "{a.neutral.000.value}" : "{a.neutral.200.value}",
         type: "color",
         group: "background",
       },
       sunken: {
-        value: "{a.neutral.200.value}",
+        value: theme === "light" ? "{a.neutral.200.value}" : "#07090D",
         type: "color",
         group: "background",
       },
@@ -98,6 +65,11 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
       },
       subtle: {
         value: "{a.neutral.400.value}",
+        type: "color",
+        group: "border",
+      },
+      subtleA: {
+        value: "{a.neutral.400A.value}",
         type: "color",
         group: "border",
       },

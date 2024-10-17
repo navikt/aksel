@@ -7,38 +7,7 @@ import {
 } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCaseForAlpha } from "../config/kebabCase";
-
-const generateHeader = async (file: File): Promise<string> => {
-  return await fileHeader({ file });
-};
-
-const createComment = (comment?: string): string => {
-  if (!comment) {
-    return "";
-  }
-
-  return `/**\n * ${comment}\n */\n`;
-};
-
-export const generateTokenString = (
-  token: TransformedToken,
-  format: "es6" | "cjs",
-  isLast: boolean,
-): string => {
-  /**
-   * test token
-   */
-  const comment = createComment(token.comment);
-  const kebabName = kebabCaseForAlpha(token.name);
-  if (format === "es6") {
-    return `${comment}export const ${token.name.slice(
-      1,
-    )} = "var(--${kebabName})";`;
-  }
-  return `  ${comment}"${token.name.slice(1)}": "var(--${kebabName})"${
-    isLast ? "" : ","
-  }`;
-};
+import { TokenTypes } from "./util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
   const header = await generateHeader(file);
@@ -64,3 +33,43 @@ export const transformCSS: Transform = {
   transform: (token: TransformedToken, options: PlatformConfig) =>
     kebabCaseForAlpha([options.prefix].concat(token.path).join(" ")),
 };
+
+async function generateHeader(file: File): Promise<string> {
+  return await fileHeader({ file });
+}
+
+function createComment(comment?: string): string {
+  if (!comment) {
+    return "";
+  }
+
+  return `/**\n * ${comment}\n */\n`;
+}
+
+function createTokenValue(token: TransformedToken): string {
+  const kebabName = kebabCaseForAlpha(token.name);
+
+  /*
+   * Breakpoints can in most cases not be used as variables, so we need to return the value directly.
+   */
+  if ((token.type as TokenTypes) === "global-breakpoints") {
+    return token.value ?? token.$value;
+  }
+  return `var(--${kebabName})`;
+}
+
+export function generateTokenString(
+  token: TransformedToken,
+  format: "es6" | "cjs",
+  isLast: boolean,
+): string {
+  const comment = createComment(token.comment);
+  if (format === "es6") {
+    return `${comment}export const ${token.name.slice(1)} = "${createTokenValue(
+      token,
+    )}";`;
+  }
+  return `  ${comment}"${token.name.slice(1)}": "${createTokenValue(token)}"${
+    isLast ? "" : ","
+  }`;
+}

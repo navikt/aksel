@@ -52,7 +52,9 @@ export type TokenTypes =
   | "color"
   | "global-color"
   | "global-radius"
-  | "global-spacing";
+  | "global-spacing"
+  | "global-breakpoints"
+  | "global-font";
 
 export type SemanticTokenGroups = "background" | "border" | "text";
 

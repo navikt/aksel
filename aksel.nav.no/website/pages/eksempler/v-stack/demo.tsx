@@ -1,5 +1,6 @@
 import { VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import { Placeholder } from "../../../components/website-modules/examples/__parts/StackPlaceholder";
 
 const Example = () => {
   return (
@@ -10,10 +11,6 @@ const Example = () => {
       <Placeholder />
     </VStack>
   );
-};
-
-const Placeholder = () => {
-  return <div className="aspect-square h-12 rounded bg-teal-500" />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
