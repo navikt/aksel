@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.3
+
+### @navikt/ds-react
+
+- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- Chips.Removable: Added new i18n API ([#3232](https://github.com/navikt/aksel/pull/3232))
+
+* Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+* Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### @navikt/ds-css
+
+- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
 ## 7.2
 
 ### @navikt/ds-react
