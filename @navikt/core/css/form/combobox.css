@@ -81,13 +81,13 @@
   cursor: text;
 }
 
-.navds-combobox--error .navds-text-field__input:not(:hover):not(:disabled) {
+.navds-combobox--error .navds-text-field__input:not(:hover, :disabled) {
   border-color: var(--ac-combobox-error-border, var(--a-border-danger));
   box-shadow: 0 0 0 1px var(--ac-combobox-error-border, var(--a-border-danger));
 }
 
 .navds-combobox--error
-  .navds-text-field__input:not(:hover):not(:disabled):not(.navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
+  .navds-text-field__input:not(:hover, :disabled, .navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow:

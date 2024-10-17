@@ -172,7 +172,7 @@
   }
 
   .navds-toggle-group__button:active {
-    background-color: none !important;
+    background-color: unset !important;
   }
 
   .navds-toggle-group__button:focus-visible {

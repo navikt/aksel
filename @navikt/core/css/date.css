@@ -75,14 +75,14 @@
   border-radius: var(--a-border-radius-xlarge);
 }
 
-.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus-visible,
-.navds-date .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus-visible {
+.navds-date .rdp-button:not(.rdp-day_selected, [disabled]):focus-visible,
+.navds-date .navds-date__month-button:not(.rdp-day_selected, [disabled]):focus-visible {
   box-shadow: var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
-  .navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
-  .navds-date .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus {
+  .navds-date .rdp-button:not(.rdp-day_selected, [disabled]):focus,
+  .navds-date .navds-date__month-button:not(.rdp-day_selected, [disabled]):focus {
     box-shadow: var(--a-shadow-focus);
   }
 }
@@ -167,8 +167,8 @@
   color: var(--ac-date-disabled-text, var(--a-text-subtle));
 }
 
-.navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,
-.navds-date__month-button:where(:not(.rdp-day_selected):not([disabled])):hover {
+.navds-date .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
+.navds-date__month-button:where(:not(.rdp-day_selected, [disabled])):hover {
   background: var(--ac-date-hover-bg, var(--a-surface-action-subtle-hover));
   cursor: pointer;
 }
@@ -201,19 +201,19 @@
 }
 
 /* Error-handling */
-.navds-date__field--error .navds-date__field-input:not(:hover):not(:disabled) {
+.navds-date__field--error .navds-date__field-input:not(:hover, :disabled) {
   border-color: var(--ac-date-input-error-border, var(--a-border-danger));
   box-shadow: inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger));
 }
 
-.navds-date__field--error .navds-date__field-input:focus-visible:not(:hover):not(:disabled) {
+.navds-date__field--error .navds-date__field-input:focus-visible:not(:hover, :disabled) {
   box-shadow:
     inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
-  .navds-date__field--error .navds-date__field-input:focus:not(:hover):not(:disabled) {
+  .navds-date__field--error .navds-date__field-input:focus:not(:hover, :disabled) {
     box-shadow:
       inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)),
       var(--a-shadow-focus);

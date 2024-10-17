@@ -45,10 +45,7 @@
 ._dialog_overlay {
   /* From polyfill */
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 }
 
 .navds-modal--small {
@@ -95,10 +92,7 @@
 
   /* From polyfill: */
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 }
 
 .navds-modal__button {
@@ -176,7 +170,7 @@
 }
 
 @keyframes akselModalFadeIn {
-  from {
+  0% {
     opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
     transform: translate3d(0, calc(5% + 4px), 0);
   }
@@ -185,7 +179,7 @@
     opacity: 1;
   }
 
-  to {
+  100% {
     transform: none;
   }
 }

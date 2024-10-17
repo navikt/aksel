@@ -4,7 +4,7 @@
 
 /* https://web.dev/prefers-reduced-motion/ */
 @media (prefers-reduced-motion: reduce) {
-  *:not(.navds-loader *):not(.navds-loader):not(.navds-progress-bar *):not(.navds-progress-bar),
+  *:not(.navds-loader *, .navds-loader, .navds-progress-bar *, .navds-progress-bar),
   ::before,
   ::after {
     animation-delay: -1ms !important;

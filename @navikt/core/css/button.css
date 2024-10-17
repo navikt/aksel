@@ -154,6 +154,7 @@
     inset 0 0 0 1px var(--ac-button-primary-focus-border, var(--__ac-button-primary-focus-border, var(--a-surface-default))),
     var(--a-shadow-focus);
 }
+
 @media (forced-colors: active) {
   .navds-button--primary:focus-visible {
     box-shadow: none;

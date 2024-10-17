@@ -61,19 +61,19 @@
 /**
   Error handling
 */
-.navds-text-field--error > .navds-text-field__input:not(:hover):not(:disabled) {
+.navds-text-field--error > .navds-text-field__input:not(:hover, :disabled) {
   border-color: var(--ac-textfield-error-border, var(--__ac-textfield-error-border, var(--a-border-danger)));
   box-shadow: 0 0 0 1px var(--ac-textfield-error-border, var(--__ac-textfield-error-border, var(--a-border-danger)));
 }
 
-.navds-text-field--error > .navds-text-field__input:focus-visible:not(:hover):not(:disabled) {
+.navds-text-field--error > .navds-text-field__input:focus-visible:not(:hover, :disabled) {
   box-shadow:
     0 0 0 1px var(--a-border-danger),
     var(--a-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
-  .navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
+  .navds-text-field--error > .navds-text-field__input:focus:not(:hover, :disabled) {
     box-shadow:
       0 0 0 1px var(--a-border-danger),
       var(--a-shadow-focus);

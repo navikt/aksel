@@ -80,7 +80,7 @@
 /**
   Error handling
 */
-.navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
+.navds-select--error > * select:not(:hover, :focus, :disabled) {
   box-shadow: 0 0 0 1px var(--ac-select-error-border, var(--a-surface-danger));
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
