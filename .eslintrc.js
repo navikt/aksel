@@ -6,6 +6,11 @@
  * - We should add "plugin:react/jsx-runtime", but not sure if this will cause problems for projects not using the new JSX transform
  * - Consider adding the rule "id-length"
  */
+
+/**
+ * V9 migration WIP
+ * -
+ */
 module.exports = {
   env: {
     browser: true,
