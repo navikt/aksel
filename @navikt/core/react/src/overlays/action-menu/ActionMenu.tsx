@@ -21,8 +21,7 @@ type ActionMenuContextValue = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onOpenToggle: () => void;
-  rootElement: MenuPortalProps["rootElement"];
-};
+} & Pick<MenuPortalProps, "rootElement">;
 
 const [ActionMenuProvider, useActionMenuContext] =
   createContext<ActionMenuContextValue>({
@@ -31,7 +30,7 @@ const [ActionMenuProvider, useActionMenuContext] =
       "ActionMenu sub-components cannot be rendered outside the ActionMenu component.",
   });
 
-interface ActionMenuProps {
+type ActionMenuProps = {
   children?: React.ReactNode;
   /**
    * Whether the menu is open or not.
@@ -42,11 +41,7 @@ interface ActionMenuProps {
    * Callback for when the menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
-  /**
-   * An optional container where the portaled content should be appended.
-   */
-  rootElement?: MenuPortalProps["rootElement"];
-}
+} & Pick<MenuPortalProps, "rootElement">;
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
