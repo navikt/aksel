@@ -37,7 +37,7 @@
   "devDependencies": {
     "@navikt/ds-css": "^7.2.1",
     "@navikt/ds-tokens": "^7.2.1",
-    "concurrently": "7.2.1",
+    "concurrently": "9.0.1",
     "postcss-selector-parser": "^6.0.13",
     "postcss-value-parser": "^4.2.0",
     "stylelint": "^14.8.5",
