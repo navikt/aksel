@@ -44,4 +44,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ErrorSummary: {
+    Heading: "Du må rette disse feilene før du kan fortsette:",
+  },
 } satisfies TranslationMap;
