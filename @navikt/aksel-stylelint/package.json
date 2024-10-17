@@ -43,6 +43,6 @@
     "stylelint": "^14.8.5",
     "stylelint-test-rule-node": "^0.2.1",
     "tsx": "^4.7.1",
-    "typescript": "^5.1.6"
+    "typescript": "5.5.4"
   }
 }
