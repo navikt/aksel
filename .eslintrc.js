@@ -6,6 +6,14 @@
  * - We should add "plugin:react/jsx-runtime", but not sure if this will cause problems for projects not using the new JSX transform
  * - Consider adding the rule "id-length"
  */
+
+/**
+ * V9 migration WIP
+ * - eslint-plugin-storybook does not support v9 yet: https://github.com/storybookjs/eslint-plugin-storybook/issues/157
+ * - eslint-plugin-testing-library does not support v9 yet: https://github.com/testing-library/eslint-plugin-testing-library/issues?q=is%3Aissue+is%3Aopen+v9
+ * - @vitest/eslint-plugin supports v9, just need to replace @vitest/legacy-recommended: https://github.com/vitest-dev/eslint-plugin-vitest?tab=readme-ov-file#usage
+ * - Looks like @typescript-eslint/eslint-plugin and @typescript-eslint/parser can both be replaced by just typescript-eslint in v9: https://typescript-eslint.io/getting-started#step-2-configuration
+ */
 module.exports = {
   env: {
     browser: true,
