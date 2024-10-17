@@ -10,33 +10,32 @@ import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
-export type HGridProps = PrimitiveProps &
-  PrimitiveAsChildProps &
-  React.HTMLAttributes<HTMLDivElement> & {
-    /**
-     * Number of columns to display. Can be a number, a string, or an object with values for specific breakpoints.
-     * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
-     * @example
-     * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
-     * columns={3}
-     * columns="repeat(3, minmax(0, 1fr))"
-     */
-    columns?: ResponsiveProp<number | string>;
-    /**
-     * Spacing between columns.
-     * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
-     * or an object of spacing tokens for different breakpoints.
-     * @example
-     * gap="6"
-     * gap="8 4"
-     * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
-     */
-    gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
-    /**
-     * Vertical alignment of children. Elements will by default stretch to the height of parent-element.
-     */
-    align?: "start" | "center" | "end";
-  };
+export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
+  /**
+   * Number of columns to display. Can be a number, a string, or an object with values for specific breakpoints.
+   * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
+   * @example
+   * columns={{ sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto"}}
+   * columns={3}
+   * columns="repeat(3, minmax(0, 1fr))"
+   */
+  columns?: ResponsiveProp<number | string>;
+  /**
+   * Spacing between columns.
+   * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+   * or an object of spacing tokens for different breakpoints.
+   * @example
+   * gap="6"
+   * gap="8 4"
+   * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
+   */
+  gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
+  /**
+   * Vertical alignment of children. Elements will by default stretch to the height of parent-element.
+   */
+  align?: "start" | "center" | "end";
+} & PrimitiveProps &
+  PrimitiveAsChildProps;
 /**
  * Horizontal Grid Primitive with dynamic columns and gap based on breakpoints.
  *
