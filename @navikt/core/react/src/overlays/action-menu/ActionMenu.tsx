@@ -21,7 +21,8 @@ type ActionMenuContextValue = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onOpenToggle: () => void;
-} & Pick<MenuPortalProps, "rootElement">;
+  rootElement: MenuPortalProps["rootElement"];
+};
 
 const [ActionMenuProvider, useActionMenuContext] =
   createContext<ActionMenuContextValue>({
