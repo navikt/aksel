@@ -15,8 +15,7 @@
     "tailwind.config.d.ts"
   ],
   "scripts": {
-    "build": "yarn tsx ./src",
-    "build:darkside": "yarn tsx ./darkside",
+    "build": "yarn tsx ./src && yarn tsx darkside.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
