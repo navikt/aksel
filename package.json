@@ -196,6 +196,10 @@
     "vite-plugin-turbosnap": "^1.0.3",
     "vite-tsconfig-paths": "^4.3.2"
   },
+  "resolutions": {
+    "axe-core": "4.10.0"
+  },
+  "_note2": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@4.4.0"
 }
