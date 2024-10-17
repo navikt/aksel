@@ -616,7 +616,7 @@
     "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^14.2.0",
     "@types/faker": "5.5.8",
-    "concurrently": "7.2.1",
+    "concurrently": "9.0.1",
     "faker": "5.5.3",
     "fast-glob": "3.2.11",
     "jsdom": "24.0.0",
@@ -626,7 +626,7 @@
     "swr": "^1.1.2",
     "tsc-alias": "1.8.8",
     "tsx": "^4.19.1",
-    "typescript": "^5.1.6",
+    "typescript": "5.5.4",
     "vitest": "^1.2.2"
   },
   "peerDependencies": {
