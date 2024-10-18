@@ -10,60 +10,60 @@ export const textContrastTokenConfig = (): {
     "accent-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: `text.accent`,
     },
     "neutral-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.neutral",
     },
     /* Status */
     "danger-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.danger",
     },
     "info-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.info",
     },
     "success-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.success",
     },
     "warning-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.warning",
     },
     /* Brand */
     "brandOne-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.brandOne",
     },
     "brandTwo-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.brandTwo",
     },
     "brandThree-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.brandThree",
     },
     /* Data */
     "dataOne-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.dataOne",
     },
     "dataTwo-contrast": {
       value: "{a.neutral.000.value}",
       type: "color",
-      group: "text",
+      group: "text.dataTwo",
     },
   },
 });

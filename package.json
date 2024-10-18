@@ -165,7 +165,7 @@
     "@vitest/eslint-plugin": "^1.1.4",
     "@whitespace/storybook-addon-html": "^6.1.1",
     "chromatic": "11.5.4",
-    "concurrently": "7.2.1",
+    "concurrently": "9.0.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
     "eslint-plugin-aksel-local": "*",
@@ -191,11 +191,15 @@
     "stylelint-config-standard": "^25.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
     "stylelint-value-no-unknown-custom-properties": "^4.0.0",
-    "typescript": "^5.1.6",
+    "typescript": "5.5.4",
     "vite": "^5.4.6",
     "vite-plugin-turbosnap": "^1.0.3",
     "vite-tsconfig-paths": "^4.3.2"
   },
+  "resolutions": {
+    "axe-core": "4.10.0"
+  },
+  "_note2": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@4.4.0"
 }
