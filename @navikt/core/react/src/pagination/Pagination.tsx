@@ -69,7 +69,10 @@ export const getSteps = ({
   count,
   boundaryCount = 1,
   siblingCount = 1,
-}) => {
+}: Pick<
+  PaginationProps,
+  "page" | "count" | "boundaryCount" | "siblingCount"
+>) => {
   const range = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
