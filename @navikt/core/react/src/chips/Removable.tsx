@@ -33,7 +33,6 @@ export const RemovableChips = forwardRef<
       variant = "action",
       onDelete,
       removeLabel,
-      translations,
       className,
       onClick,
       type = "button",
@@ -41,7 +40,7 @@ export const RemovableChips = forwardRef<
     },
     ref,
   ) => {
-    const translate = useI18n("Chips", { Removable: translations });
+    const translate = useI18n("Chips");
     return (
       <button
         {...rest}
