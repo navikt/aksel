@@ -1,3 +1,4 @@
 src/tokens.ts
 tailwind.config.js
+tailwind.darkside.config.js
 !tailwind.config.d.ts
