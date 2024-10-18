@@ -56,7 +56,7 @@
 
 .navds-stack__spacer {
   flex: 1;
-  align-self: stretch;
+  place-content: stretch stretch;
 }
 
 .navds-stack > .navds-stack__spacer {
