@@ -158,9 +158,9 @@ const FilteredOptionsProvider = ({
 
   const isValueNew = useMemo(
     () =>
-      Boolean(value) &&
-      !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, value)],
-    [filteredOptionsMap, id, value],
+      Boolean(searchTerm) &&
+      !filteredOptionsMap[filteredOptionsUtils.getOptionId(id, searchTerm)],
+    [filteredOptionsMap, id, searchTerm],
   );
 
   const ariaDescribedBy = useMemo(() => {
