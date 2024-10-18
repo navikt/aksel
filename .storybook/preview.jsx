@@ -63,13 +63,6 @@ const ModeDecorator = ({ children, mode }) => {
 };
 
 export const decorators = [
-  withThemeByClassName({
-    themes: {
-      light: "light",
-      dark: "dark",
-    },
-    defaultTheme: "light",
-  }),
   (StoryFn, context) => {
     return (
       <ModeDecorator mode={context.globals.mode}>
@@ -77,4 +70,11 @@ export const decorators = [
       </ModeDecorator>
     );
   },
+  withThemeByClassName({
+    themes: {
+      light: "light",
+      dark: "dark",
+    },
+    defaultTheme: "light",
+  }),
 ];
