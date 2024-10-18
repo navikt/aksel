@@ -38,6 +38,6 @@ export default {
     },
   },
   ErrorSummary: {
-    Heading: "Du må retta desse feila før du kan halda fram:",
+    Heading: "Du må rette desse feila før du kan halde fram:",
   },
 } satisfies Translations;
