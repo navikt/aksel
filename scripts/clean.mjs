@@ -7,13 +7,13 @@ import { join } from "path";
  * - Removes all node_modules folders if `--reset`-argv is passed
  */
 const globPatterns = [
+  "**/dist",
   "./@navikt/**/lib",
   "./@navikt/**/esm",
   "./@navikt/**/cjs",
   "./@navikt/aksel-icons/src",
   "**/playwright-report",
   "**/.next",
-  "**/dist",
 ];
 
 console.group("Cleaning up build artifacts");
@@ -24,15 +24,11 @@ for (const globPattern of globPatterns) {
     onlyDirectories: true,
     ignore: ["**/node_modules"],
   });
-  folders
-    .filter((folder) => !folder.includes("node_modules"))
-    .forEach((folder) => {
-      console.info(`Deleting folder ${folder}`);
-      deleteFolder(folder);
-    });
+  folders.forEach((folder) => {
+    console.info(`Deleting folder ${folder}`);
+    deleteFolder(folder);
+  });
 }
-
-console.info(`Everything looks squeaky clean 🧼`);
 
 console.groupEnd();
 
