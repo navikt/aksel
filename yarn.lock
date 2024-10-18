@@ -3767,11 +3767,9 @@ __metadata:
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
     "@testing-library/user-event": "npm:^14.2.0"
-    "@types/faker": "npm:5.5.8"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
     date-fns: "npm:^3.0.0"
-    faker: "npm:5.5.3"
     fast-glob: "npm:3.2.11"
     jsdom: "npm:24.0.0"
     react-day-picker: "npm:8.10.0"
@@ -6199,13 +6197,6 @@ __metadata:
     "@types/qs": "npm:*"
     "@types/serve-static": "npm:*"
   checksum: 10/7a6d26cf6f43d3151caf4fec66ea11c9d23166e4f3102edfe45a94170654a54ea08cf3103d26b3928d7ebcc24162c90488e33986b7e3a5f8941225edd5eb18c7
-  languageName: node
-  linkType: hard
-
-"@types/faker@npm:5.5.8":
-  version: 5.5.8
-  resolution: "@types/faker@npm:5.5.8"
-  checksum: 10/d8c9acfc57d61278f17a03292889c0d6482948ee0753cae704b06089b60d52d935a2ad5994fd78ed906bdc9c7a109cd60a2cba5473afa19f23e19ea82995f143
   languageName: node
   linkType: hard
 
@@ -12234,13 +12225,6 @@ __metadata:
     iconv-lite: "npm:^0.4.24"
     tmp: "npm:^0.0.33"
   checksum: 10/776dff1d64a1d28f77ff93e9e75421a81c062983fd1544279d0a32f563c0b18c52abbb211f31262e2827e48edef5c9dc8f960d06dd2d42d1654443b88568056b
-  languageName: node
-  linkType: hard
-
-"faker@npm:5.5.3":
-  version: 5.5.3
-  resolution: "faker@npm:5.5.3"
-  checksum: 10/fc46449712aa0971a106dc84ae988bd3f08ba0f0862ed107cd2e5dc2df39424efb0687634f5a6c2d8d24a9b59a5474b5b003b9bc142ecebcea2d42af116b3966
   languageName: node
   linkType: hard
 
