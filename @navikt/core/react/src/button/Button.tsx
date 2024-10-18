@@ -87,7 +87,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       const mergedRef = useMergeRefs(buttonRef, ref);
 
       useClientLayoutEffect(() => {
-        if (loading) {
+        if (loading && buttonRef?.current?.getBoundingClientRect()?.width) {
           const requestID = window.requestAnimationFrame(() => {
             setWidthOverride(
               buttonRef?.current?.getBoundingClientRect()?.width,
@@ -98,7 +98,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             cancelAnimationFrame(requestID);
           };
         }
-      }, [loading, children]);
+      }, [loading, children, buttonRef?.current]);
 
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
