@@ -3,7 +3,6 @@ import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useI18n } from "../util/i18n/i18n.context";
-import { ComponentTranslation } from "../util/i18n/i18n.types";
 
 export interface ChipsRemovableProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,13 +19,8 @@ export interface ChipsRemovableProps
   /**
    * Replaces label read for screen-readers
    * @default "slett"
-   * @deprecated Use `translations` instead
    */
   removeLabel?: string;
-  /**
-   * i18n API for customizing texts and labels.
-   */
-  translations?: ComponentTranslation<"Chips">["Removable"];
 }
 
 export const RemovableChips = forwardRef<
