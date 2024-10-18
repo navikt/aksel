@@ -132,7 +132,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           }}
           disabled={disabled ?? widthOverride ? true : undefined}
         >
-          {widthOverride ? (
+          {loading ? (
             <Loader size={size} />
           ) : (
             <>
