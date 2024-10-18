@@ -1,5 +1,21 @@
 # @navikt/ds-react
 
+## 7.3.0
+
+### Minor Changes
+
+- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### Patch Changes
+
+- Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+- Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.3.0
+  - @navikt/aksel-icons@7.3.0
+
 ## 7.2.1
 
 ### Patch Changes
