@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 7.3.0
+
+### Minor Changes
+
+- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### Patch Changes
+
+- List.Item: Center icon horizontally inside it's container ([#3253](https://github.com/navikt/aksel/pull/3253))
+
 ## 7.2.1
 
 ### Patch Changes
