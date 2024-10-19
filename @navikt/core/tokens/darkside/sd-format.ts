@@ -64,12 +64,13 @@ export function generateTokenString(
   isLast: boolean,
 ): string {
   const comment = createComment(token.comment);
+  const nameWithoutPrefix = token.name.slice(2);
   if (format === "es6") {
-    return `${comment}export const ${token.name.slice(1)} = "${createTokenValue(
+    return `${comment}export const ${nameWithoutPrefix} = "${createTokenValue(
       token,
     )}";`;
   }
-  return `  ${comment}"${token.name.slice(1)}": "${createTokenValue(token)}"${
+  return `  ${comment}"${nameWithoutPrefix}": "${createTokenValue(token)}"${
     isLast ? "" : ","
   }`;
 }
