@@ -56,15 +56,15 @@ export const scaleTokens = () => {
 
 export const rootTokens = () => {
   return tokensWithPrefix(
-    mergeConfigs([scaleTokens().a, breakpointsTokenConfig, fontTokenConfig]),
+    mergeConfigs([scaleTokens().ax, breakpointsTokenConfig, fontTokenConfig]),
   );
 };
 
 export const allTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
-      lightModeTokens().a,
-      scaleTokens().a,
+      lightModeTokens().ax,
+      scaleTokens().ax,
       breakpointsTokenConfig,
       fontTokenConfig,
     ]),

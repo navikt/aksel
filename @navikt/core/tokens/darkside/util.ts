@@ -94,8 +94,8 @@ export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
   [key: string]: Record<string, StyleDictionaryToken<T>>;
 };
 
-export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {
-  return { a: input };
+export const tokensWithPrefix = <T>(input: T): Record<"ax", T> => {
+  return { ax: input };
 };
 
 export const mergeConfigs = (
