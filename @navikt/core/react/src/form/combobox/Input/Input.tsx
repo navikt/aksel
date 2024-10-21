@@ -253,7 +253,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         type="text"
         role="combobox"
         value={value}
-        onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
+        onBlur={composeEventHandlers(onBlur, (event) => {
+          if (isListOpen && event.relatedTarget?.tagName === "BUTTON") {
+            // Remove virtual focus when focus is moved to a chip.
+            // This prevents a value from being selected when pressing enter to remove a chip.
+            virtualFocus.resetFocus();
+          }
+        })}
         onClick={() => {
           setHideCaret(!!maxSelected?.isLimitReached);
           value !== searchTerm && onChange(value);
