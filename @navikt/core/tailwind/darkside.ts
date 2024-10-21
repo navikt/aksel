@@ -29,7 +29,7 @@ const transformedTokens = Object.fromEntries(
  */
 const config = {
   theme: {
-    colors: getColors(),
+    colors: extractColorTokens(),
     screens: {
       sm: breakpointsTokenConfig.breakpoint.sm.value,
       md: breakpointsTokenConfig.breakpoint.md.value,
@@ -38,12 +38,12 @@ const config = {
       "2xl": breakpointsTokenConfig.breakpoint["2xl"].value,
     },
     extend: {
-      spacing: Reducer(["spacing"]),
-      fontWeight: Reducer(["font-weight"]),
-      fontSize: Reducer(["font-size"]),
-      lineHeight: Reducer(["font-line-height"]),
-      fontFamily: Reducer(["font-family"]),
-      borderRadius: Reducer(["border-radius"]),
+      spacing: extractTokensForCategory("spacing"),
+      fontWeight: extractTokensForCategory("font-weight"),
+      fontSize: extractTokensForCategory("font-size"),
+      lineHeight: extractTokensForCategory("font-line-height"),
+      fontFamily: extractTokensForCategory("font-family"),
+      borderRadius: extractTokensForCategory("border-radius"),
     },
   },
 };
@@ -56,30 +56,19 @@ writeFileSync("tailwind.darkside.config.js", outputString);
  * Assumes that all remaining names not in nonColorTokens are colors
  * TODO: Should probably write some tests on this when tokens are more stable
  */
-function getColors() {
-  return Object.fromEntries(
-    Object.entries(transformedTokens).filter(([key]) => {
-      return !nonColorTokens.find((prefix) =>
-        key.toLowerCase().includes(prefix),
-      );
-    }, []),
-  );
-}
-
-function replaceKey(s: string, keys: string[]) {
-  let key = s;
-  keys.forEach((k) => {
-    key = key.replace(`${k}-`, "");
+function extractColorTokens() {
+  const colorTokens = Object.entries(transformedTokens).filter(([key]) => {
+    return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
   });
-  return key;
+  return Object.fromEntries(colorTokens);
 }
 
 /* Cherry-picks object keys we want */
-function Reducer(replace: string[]) {
-  return Object.entries(transformedTokens).reduce((old, [key, value]) => {
-    if (replace.find((v) => key.startsWith(v))) {
-      old[replaceKey(key, replace)] = value;
-    }
-    return old;
-  }, {});
+function extractTokensForCategory(tokenName: string) {
+  const tokens = Object.entries(transformedTokens)
+    .filter(([key]) => key.startsWith(tokenName))
+    /* We want extract only the value from each token, so we replace the name: "spacing-4" -> "4" */
+    .map(([key, value]) => [key.replace(`${tokenName}-`, ""), value]);
+
+  return Object.fromEntries(tokens);
 }
