@@ -253,7 +253,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         type="text"
         role="combobox"
         value={value}
-        onBlur={composeEventHandlers(onBlur, virtualFocus.moveFocusToTop)}
+        onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
         onClick={() => {
           setHideCaret(!!maxSelected?.isLimitReached);
           value !== searchTerm && onChange(value);
