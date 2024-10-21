@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.3.1
+
+### Patch Changes
+
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.3.1
+  - @navikt/aksel-icons@7.3.1
+
 ## 7.3.0
 
 ### Minor Changes
