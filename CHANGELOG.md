@@ -4,17 +4,21 @@
 
 ### @navikt/ds-react
 
-- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
 
-* Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
 
-* Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+- Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+- Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
 
 ### @navikt/ds-css
 
-- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+- Updated to Selectors Level 4 syntax. ([#3250](https://github.com/navikt/aksel/pull/3250))
 
-* List.Item: Center icon horizontally inside it's container ([#3253](https://github.com/navikt/aksel/pull/3253))
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- List.Item: Center icon horizontally inside it's container ([#3253](https://github.com/navikt/aksel/pull/3253))
 
 ## 7.2
 

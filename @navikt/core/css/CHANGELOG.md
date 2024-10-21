@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.3.1
+
+### Patch Changes
+
+- Updated to Selectors Level 4 syntax. ([#3250](https://github.com/navikt/aksel/pull/3250))
+
 ## 7.3.0
 
 ### Minor Changes
