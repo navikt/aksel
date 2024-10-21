@@ -89,7 +89,6 @@
     ],
     "extends": [
       "stylelint-config-standard",
-      "stylelint-config-prettier",
       "./@navikt/aksel-stylelint/dist/recommended"
     ],
     "plugins": [
@@ -97,6 +96,7 @@
       "stylelint-declaration-block-no-ignored-properties"
     ],
     "rules": {
+      "declaration-property-value-no-unknown": true,
       "plugin/declaration-block-no-ignored-properties": true,
       "no-descending-specificity": null,
       "selector-class-pattern": null,
@@ -105,6 +105,8 @@
       "function-url-quotes": null,
       "property-no-vendor-prefix": null,
       "alpha-value-notation": "number",
+      "media-feature-range-notation": "prefix",
+      "import-notation": "string",
       "declaration-property-value-disallowed-list": {
         "justify-content": [
           "start",
@@ -186,11 +188,10 @@
     "react-syntax-highlighter": "^15.5.0",
     "storybook": "^8.3.4",
     "storybook-addon-pseudo-states": "^4.0.2",
-    "stylelint": "^14.8.5",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
-    "stylelint-value-no-unknown-custom-properties": "^4.0.0",
+    "stylelint-value-no-unknown-custom-properties": "^6.0.0",
     "typescript": "5.5.4",
     "vite": "^5.4.6",
     "vite-plugin-turbosnap": "^1.0.3",

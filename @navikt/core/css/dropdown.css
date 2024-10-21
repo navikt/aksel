@@ -13,7 +13,7 @@
   border-bottom: 1px solid var(--a-border-divider);
 }
 
-.navds-dropdown__menu > :not(.navds-dropdown__divider):not(.navds-dropdown__list) {
+.navds-dropdown__menu > :not(.navds-dropdown__divider, .navds-dropdown__list) {
   margin: 0 var(--a-spacing-4) var(--a-spacing-3);
 }
 
