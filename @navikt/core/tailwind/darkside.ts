@@ -3,6 +3,16 @@ import { kebabCaseForAlpha } from "@navikt/ds-tokens/config/kebabCase";
 import { breakpointsTokenConfig } from "@navikt/ds-tokens/darkside/tokens/breakpoints";
 import * as TokensBuild from "@navikt/ds-tokens/dist/darkside/tokens";
 
+const transformedTokens = Object.fromEntries(
+  Object.entries(TokensBuild).map(([key, value]) => {
+    return [kebabCaseForAlpha(key), value];
+  }),
+);
+
+/**
+ * Assumes that all remaining names not in nonColorTokens are colors
+ * TODO: Should probably write some tests on this when tokens are more stable
+ */
 const nonColorTokens = [
   "spacing",
   "shadow",
@@ -14,11 +24,10 @@ const nonColorTokens = [
   "breakpoint",
 ];
 
-const transformedTokens = Object.fromEntries(
-  Object.entries(TokensBuild).map(([key, value]) => {
-    return [kebabCaseForAlpha(key), value];
-  }),
-);
+const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
+  return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
+});
+const colors = Object.fromEntries(colorTokensEntries);
 
 /**
  * TODO features
@@ -29,7 +38,7 @@ const transformedTokens = Object.fromEntries(
  */
 const config = {
   theme: {
-    colors: extractColorTokens(),
+    colors,
     screens: {
       sm: breakpointsTokenConfig.breakpoint.sm.value,
       md: breakpointsTokenConfig.breakpoint.md.value,
@@ -52,16 +61,9 @@ const outputString = `module.exports = ${JSON.stringify(config, null, 2)};`;
 
 writeFileSync("tailwind.darkside.config.js", outputString);
 
-/**
- * Assumes that all remaining names not in nonColorTokens are colors
- * TODO: Should probably write some tests on this when tokens are more stable
- */
-function extractColorTokens() {
-  const colorTokens = Object.entries(transformedTokens).filter(([key]) => {
-    return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
-  });
-  return Object.fromEntries(colorTokens);
-}
+/* -------------------------------------------------------------------------- */
+/*                                  Utilities                                 */
+/* -------------------------------------------------------------------------- */
 
 /* Cherry-picks object keys we want */
 function extractTokensForCategory(tokenName: string) {
