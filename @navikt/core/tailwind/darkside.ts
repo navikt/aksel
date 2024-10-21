@@ -9,10 +9,6 @@ const transformedTokens = Object.fromEntries(
   }),
 );
 
-/**
- * Assumes that all remaining names not in nonColorTokens are colors
- * TODO: Should probably write some tests on this when tokens are more stable
- */
 const nonColorTokens = [
   "spacing",
   "shadow",
@@ -23,7 +19,10 @@ const nonColorTokens = [
   "border-radius",
   "breakpoint",
 ];
-
+/*
+ * Assumes that all remaining names not in nonColorTokens are colors
+ * TODO: Should probably write some tests on this when tokens are more stable
+ */
 const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
   return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
 });
