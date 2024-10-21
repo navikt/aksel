@@ -45,7 +45,7 @@ export interface ComboboxProps
    */
   allowNewValues?: boolean;
   /**
-   * Adds a button to clear the value in the input field when it's not empty.
+   * Adds a button to clear the input value when not empty.
    * NB: Will not clear selected values.
    * @default true
    */
