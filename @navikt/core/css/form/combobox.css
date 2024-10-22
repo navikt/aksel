@@ -291,7 +291,6 @@
   padding-inline: var(--__ac-combobox-list-item-padding-inline);
   width: 100%;
   background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
-  scroll-margin-top: 50px;
 }
 
 .navds-combobox__list-item--loading {
@@ -304,6 +303,10 @@
   border-start-start-radius: calc(var(--a-border-radius-medium) - 1px);
   border-start-end-radius: calc(var(--a-border-radius-medium) - 1px);
   border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
+}
+
+.navds-combobox__list--max-selected .navds-combobox__list-item {
+  scroll-margin-top: 50px;
 }
 
 .navds-combobox__list_non-selectables:hover {
