@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Date/MonthPicker: Upgrade react-day-picker to fix issue with Nextjs 15
+Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19
