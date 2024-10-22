@@ -37,4 +37,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ErrorSummary: {
+    Heading: "Du må rette desse feila før du kan halde fram:",
+  },
 } satisfies Translations;
