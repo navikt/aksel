@@ -50,6 +50,9 @@ const serializers: Partial<PortableTextReactComponents> = {
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
     attachment: ({ value }) => <Attachment node={value} />,
+    language: ({ value }) => (
+      <SanityBlockContent lang={value.language} blocks={value.body} />
+    ),
   },
   unknownType: () => null,
   block: {
@@ -119,17 +122,20 @@ export const SanityBlockContent = ({
   blocks,
   isIngress = false,
   className,
+  lang,
 }: {
   blocks: any;
   className?: string;
   isIngress?: boolean;
+  lang?: string;
 }) => {
   return (
     <div
-      className={cl(
-        className,
-        isIngress && "aksel-block-ingress group/ingress",
-      )}
+      className={
+        cl(className, isIngress && "aksel-block-ingress group/ingress") ||
+        undefined
+      }
+      lang={lang}
     >
       <PortableText
         value={blocks ?? []}
