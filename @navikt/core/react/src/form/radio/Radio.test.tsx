@@ -1,14 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import faker from "faker";
 import React from "react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { Radio, RadioGroup } from ".";
 
-const value1 = faker.datatype.string();
-const label1 = faker.datatype.string();
-const value2 = faker.datatype.string();
-const label2 = faker.datatype.string();
+const value1 = "My first value";
+const label1 = "World's best radio label";
+const value2 = "Life changing value";
+const label2 = "Radio label of the year";
 
 const Group = (props) => (
   <RadioGroup {...props} legend="legend">

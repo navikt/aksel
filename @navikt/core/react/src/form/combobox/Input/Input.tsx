@@ -177,10 +177,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (value !== searchTerm) {
             setValue(searchTerm);
           }
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusDown, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDown();
           }
-          virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
           if (value !== "" && value !== searchTerm) {
             onChange(value);
@@ -199,19 +201,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           virtualFocus.moveFocusToTop();
         } else if (e.key === "End") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusToBottom, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusToBottom();
           }
-          virtualFocus.moveFocusToBottom();
         } else if (e.key === "PageUp") {
           e.preventDefault();
           virtualFocus.moveFocusUpBy(6);
         } else if (e.key === "PageDown") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(() => virtualFocus.moveFocusDownBy(6), 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDownBy(6);
           }
-          virtualFocus.moveFocusDownBy(6);
         }
       },
       [
@@ -253,7 +259,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         type="text"
         role="combobox"
         value={value}
-        onBlur={composeEventHandlers(onBlur, virtualFocus.moveFocusToTop)}
+        onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
         onClick={() => {
           setHideCaret(!!maxSelected?.isLimitReached);
           value !== searchTerm && onChange(value);

@@ -1,53 +1,67 @@
-import { HStack, VStack } from "@navikt/ds-react";
+import { Box, HStack, VStack } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div className="flex h-72 bg-deepblue-50">
+    <Box
+      style={{ display: "flex" }}
+      height="18rem"
+      background="surface-alt-3-subtle"
+    >
       <HStack gap="2" wrap={false}>
-        <VStack justify="center">
+        <VStack justify="center" gap="1">
           <Placeholder text="center" />
           <Placeholder />
-        </VStack>
-        <Divider />
-        <VStack justify="end">
-          <Placeholder text="end" />
           <Placeholder />
         </VStack>
         <Divider />
-        <VStack justify="start">
+        <VStack justify="end" gap="1">
+          <Placeholder text="end" />
+          <Placeholder />
+          <Placeholder />
+        </VStack>
+        <Divider />
+        <VStack justify="start" gap="1">
           <Placeholder text="start" />
+          <Placeholder />
+          <Placeholder />
         </VStack>
         <Divider />
         <VStack justify="space-around">
           <Placeholder text="around" />
+          <Placeholder />
           <Placeholder />
         </VStack>
         <Divider />
         <VStack justify="space-between">
           <Placeholder text="between" />
           <Placeholder />
+          <Placeholder />
         </VStack>
         <Divider />
         <VStack justify="space-evenly">
           <Placeholder text="evenly" />
           <Placeholder />
+          <Placeholder />
         </VStack>
       </HStack>
-    </div>
+    </Box>
   );
 };
 
-const Placeholder = ({ text }: { text?: string }) => {
-  return (
-    <div className="h-auto min-h-4 w-auto rounded bg-teal-600 p-2 text-text-on-action">
-      {text}
-    </div>
-  );
-};
+const Placeholder = ({ text }: { text?: string }) => (
+  <Box
+    background="surface-alt-3"
+    borderRadius="medium"
+    padding="2"
+    style={{ color: "var(--a-text-on-action)" }}
+  >
+    {text}
+  </Box>
+);
 
 const Divider = () => {
-  return <hr className="m-0 h-full border-r border-r-border-divider" />;
+  return <Box borderWidth="0 1 0 0" borderColor="border-divider" />;
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE

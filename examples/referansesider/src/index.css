@@ -1,12 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tw-base, framework, tw-components, tw-utilities;
+
+@import url("tailwindcss/base") layer(tw-base);
+@import url("@navikt/ds-css/darkside/index.css") layer(framework);
+@import url("tailwindcss/components") layer(tw-components);
+@import url("tailwindcss/utilities") layer(tw-utilities);
 
 #root {
   width: 100%;
-  font-family: "Source Sans 3", system-ui;
-  font-size: 18px;
-  color: var(--a-text-default);
 }
 
 :where(:root) *:focus {

@@ -4,7 +4,10 @@ import { fetchDownloadUrls, fetchIcons } from "./fetch-icons";
 import { resolveName } from "./icon-name";
 import { makeConfig } from "./make-configs";
 
-/* https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0 */
+/**
+ * https://www.figma.com/file/wEdyFjCQSBR3U7FvrMbPXa/Core-Icons-Next?node-id=277%3A1221&t=mUJzFvnsceYYXNL5-0
+ * This is the current source for all icons we are working with.
+ */
 
 const iconFolder = "./icons";
 
@@ -16,69 +19,82 @@ main();
 
 async function main() {
   console.info("Started icon-update from Figma");
+  /* Icons are published as 'components' in Figma */
   const publishedIconComponents = await fetchIcons();
 
+  /* When we have all the published icons, we can ask figma for URL's for downloading them as assets */
   const imagesUrls = await fetchDownloadUrls(
     publishedIconComponents.map((x) => x.node_id),
   );
 
+  /* Lets do a clean install */
   if (existsSync(iconFolder)) {
     rmSync(iconFolder, { recursive: true, force: true });
   }
-
   mkdirSync(iconFolder);
 
-  console.info(
-    `Downloading ${Object.keys(imagesUrls).length} icons from Figma...`,
+  console.group(`Processing ${Object.keys(imagesUrls).length} icons...`);
+
+  const fileNames = new Set<string>();
+
+  await Promise.all(
+    Object.entries(imagesUrls).map(async ([nodeId, iconUrl]) => {
+      /* Each icon is now a raw string for a complete SVG */
+      const iconSvg = await fetch(iconUrl)
+        .then((x) => x.text())
+        .catch((e) => {
+          throw e.message;
+        });
+
+      const matchingIcon = publishedIconComponents.find(
+        (x) => x.node_id === nodeId,
+      );
+
+      if (!matchingIcon) {
+        throw new Error(
+          `No matching icon found for ${nodeId}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
+        );
+      }
+
+      const fileName = resolveName(matchingIcon);
+
+      /*
+       * In some cases if multiple icons are published in Figma with the same name,
+       * we will end up overwriting the icon with the same name.
+       */
+      if (fileNames.has(fileName)) {
+        console.warn(`Duplicate name detected: ${fileName}.`);
+      }
+
+      fileNames.add(fileName);
+
+      writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), iconSvg, {
+        encoding: "utf8",
+      });
+    }),
   );
 
-  let counter = 0;
-  for (const [nodeId, iconUrl] of Object.entries(imagesUrls)) {
-    const iconSvg = await fetch(iconUrl)
-      .then((x) => x.text())
-      .catch((e) => {
-        throw e.message;
-      });
-
-    if (!iconSvg) {
-      continue;
-    }
-
-    /*
-     * Arbitrary delay to not get rate-limited by image hosting
-     * Currently accounts for ~18 seconds in theory, but in practice the bottlenech is fetching each icon 1 at a time
-     */
-    await new Promise((r) => setTimeout(r, 20));
-
-    counter++;
-
-    if (counter % 20 === 0) {
-      process.stdout.write(`Processed ${counter} icons\r`);
-    }
-
-    const matchingIcon = publishedIconComponents.find(
-      (x) => x.node_id === nodeId,
+  if (fileNames.size !== publishedIconComponents.length) {
+    console.warn(
+      `Duplicate icon names from Figma leads to them being overwritten. This will cause the icon-library to be out of sync with Figma.`,
     );
-
-    if (!matchingIcon) {
-      throw new Error(
-        `No matching icon found for ${nodeId}. It should not be possible to dowload icon without a matching icon in the list of icons fetched from Figma.`,
-      );
-    }
-
-    writeFileSync(resolve(iconFolder, resolveName(matchingIcon)), iconSvg, {
-      encoding: "utf8",
-    });
   }
-  console.info(`Completed processing of ${counter} icons`);
+
+  console.info(`Completed processing 🎉`);
+  console.groupEnd();
 
   makeConfig(publishedIconComponents, iconFolder);
 
   const filesInDir = readdirSync(iconFolder);
+  const svgFiles = filesInDir.filter((x) => x.endsWith(".svg"));
+  const ymlFiles = filesInDir.filter((x) => x.endsWith(".yml"));
 
-  if (filesInDir.length * 2 !== publishedIconComponents.length) {
+  if (
+    svgFiles.length !== publishedIconComponents.length ||
+    ymlFiles.length !== publishedIconComponents.length
+  ) {
     throw new Error(
-      `Icons written to director (${filesInDir.length}) does not match the amount of icons located in Figma (${publishedIconComponents.length})`,
+      `Icons (${svgFiles.length}) and configs (${ymlFiles.length}) written to directory does not match the expected amount of icons located in Figma (${publishedIconComponents.length}).\nThis is most likely caused by duplicate icon names from figma.`,
     );
   }
 

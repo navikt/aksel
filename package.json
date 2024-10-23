@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "husky install",
     "boot": "yarn workspaces foreach -vv -pA --topological-dev --no-private run build",
-    "clean": "node scripts/clean.js",
+    "clean": "node scripts/clean.mjs",
     "storybook": "storybook dev -p 6006",
     "storybook:aksel": "yarn concurrently \"yarn watch:tw\" \"yarn storybook dev -c aksel.nav.no/website/.storybook -p 6007\"",
     "dev": "yarn workspace aksel.nav.no dev",
@@ -89,7 +89,6 @@
     ],
     "extends": [
       "stylelint-config-standard",
-      "stylelint-config-prettier",
       "./@navikt/aksel-stylelint/dist/recommended"
     ],
     "plugins": [
@@ -97,6 +96,7 @@
       "stylelint-declaration-block-no-ignored-properties"
     ],
     "rules": {
+      "declaration-property-value-no-unknown": true,
       "plugin/declaration-block-no-ignored-properties": true,
       "no-descending-specificity": null,
       "selector-class-pattern": null,
@@ -105,6 +105,8 @@
       "function-url-quotes": null,
       "property-no-vendor-prefix": null,
       "alpha-value-notation": "number",
+      "media-feature-range-notation": "prefix",
+      "import-notation": "string",
       "declaration-property-value-disallowed-list": {
         "justify-content": [
           "start",
@@ -149,6 +151,7 @@
     "@storybook/addon-essentials": "^8.3.4",
     "@storybook/addon-interactions": "^8.3.4",
     "@storybook/addon-storysource": "^8.3.4",
+    "@storybook/addon-themes": "^8.3.4",
     "@storybook/blocks": "^8.3.4",
     "@storybook/csf-tools": "^8.3.4",
     "@storybook/experimental-nextjs-vite": "^8.3.4",
@@ -159,21 +162,21 @@
     "@storybook/theming": "^8.3.4",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
     "@vitest/eslint-plugin": "^1.1.4",
     "@whitespace/storybook-addon-html": "^6.1.1",
     "chromatic": "11.5.4",
-    "concurrently": "7.2.1",
+    "concurrently": "9.0.1",
     "cross-env": "^7.0.0",
     "eslint": "^8.50.0",
     "eslint-plugin-aksel-local": "*",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-storybook": "^0.9.0",
-    "eslint-plugin-testing-library": "^6.0.2",
+    "eslint-plugin-testing-library": "^6.3.2",
     "fast-glob": "3.2.11",
     "husky": "^8.0.0",
     "lint-staged": "13.0.3",
@@ -185,16 +188,19 @@
     "react-syntax-highlighter": "^15.5.0",
     "storybook": "^8.3.4",
     "storybook-addon-pseudo-states": "^4.0.2",
-    "stylelint": "^14.8.5",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^25.0.0",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.6.0",
-    "stylelint-value-no-unknown-custom-properties": "^4.0.0",
-    "typescript": "^5.1.6",
+    "stylelint-value-no-unknown-custom-properties": "^6.0.0",
+    "typescript": "5.5.4",
     "vite": "^5.4.6",
     "vite-plugin-turbosnap": "^1.0.3",
     "vite-tsconfig-paths": "^4.3.2"
   },
+  "resolutions": {
+    "axe-core": "4.10.0"
+  },
+  "_note2": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
   "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
   "packageManager": "yarn@4.4.0"
 }

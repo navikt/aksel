@@ -203,8 +203,7 @@ button.navds-stepper__step {
   grid-template-columns:
     [content-start] auto [circle] var(--navds-stepper-circle-size)
     [content-end] auto;
-  justify-items: center;
-  align-items: center;
+  place-items: center center;
   margin-bottom: 0;
 }
 

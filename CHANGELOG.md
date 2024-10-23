@@ -1,5 +1,25 @@
 # Changelog
 
+## 7.3
+
+### @navikt/ds-react
+
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
+
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+- Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### @navikt/ds-css
+
+- Updated to Selectors Level 4 syntax. ([#3250](https://github.com/navikt/aksel/pull/3250))
+
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- List.Item: Center icon horizontally inside it's container ([#3253](https://github.com/navikt/aksel/pull/3253))
+
 ## 7.2
 
 ### @navikt/ds-react

@@ -1,7 +1,6 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "@navikt/ds-tokens/dist/darkside/tokens.css";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 import { ThemeProvider } from "./theme/ThemeProvider";

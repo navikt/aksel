@@ -8,7 +8,13 @@ type GlobalColorEntryT = {
 
 export type GlobalConfigT = Record<
   GlobalColorRoles,
-  Record<GlobalColorScale, GlobalColorEntryT> & { "000"?: GlobalColorEntryT }
+  Record<GlobalColorScale, GlobalColorEntryT> & {
+    "000"?: GlobalColorEntryT;
+    "100A"?: GlobalColorEntryT;
+    "200A"?: GlobalColorEntryT;
+    "300A"?: GlobalColorEntryT;
+    "400A"?: GlobalColorEntryT;
+  }
 >;
 
 export const colorThemes = ["light", "dark"] as const;
@@ -30,26 +36,25 @@ export const globalColorRoles = [
 
 export type GlobalColorRoles = (typeof globalColorRoles)[number];
 
-export const globalColorScales = [
-  "100",
-  "200",
-  "300",
-  "400",
-  "500",
-  "600",
-  "700",
-  "800",
-  "900",
-  "1000",
-] as const;
-
-export type GlobalColorScale = (typeof globalColorScales)[number];
+type GlobalColorScale =
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "1000";
 
 export type TokenTypes =
   | "color"
   | "global-color"
   | "global-radius"
-  | "global-spacing";
+  | "global-spacing"
+  | "global-breakpoints"
+  | "global-font";
 
 export type SemanticTokenGroups = "background" | "border" | "text";
 
@@ -89,13 +94,8 @@ export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
   [key: string]: Record<string, StyleDictionaryToken<T>>;
 };
 
-export type GlobalColorVariable = Record<
-  GlobalColorScale,
-  StyleDictionaryToken<"global-color">
->;
-
-export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {
-  return { a: input };
+export const tokensWithPrefix = <T>(input: T): Record<"ax", T> => {
+  return { ax: input };
 };
 
 export const mergeConfigs = (

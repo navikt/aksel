@@ -1,6 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { globalColorDarkModeConfig } from "../tokens/global-dark";
-import { globalColorLightModeConfig } from "../tokens/global-light";
+import {
+  globalColorDarkModeConfig,
+  globalColorLightModeConfig,
+} from "../tokens/global";
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
@@ -23,9 +25,21 @@ describe("Validate token configurations", () => {
     ).toBeTruthy();
   });
 
-  test(`Semantic tokens for all roles`, () => {
+  test(`Semantic tokens for all roles: Lightmode`, () => {
     expect(
-      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
+      validateConfig(
+        semanticTokensForAllRolesConfig("light"),
+        configKeysWithGroup,
+      ),
+    ).toBeTruthy();
+  });
+
+  test(`Semantic tokens for all roles: Darkmode`, () => {
+    expect(
+      validateConfig(
+        semanticTokensForAllRolesConfig("dark"),
+        configKeysWithGroup,
+      ),
     ).toBeTruthy();
   });
 

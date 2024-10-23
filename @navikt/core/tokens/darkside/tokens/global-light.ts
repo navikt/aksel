@@ -1,6 +1,6 @@
 import { GlobalConfigT } from "../util";
 
-export const globalColorLightModeConfig: GlobalConfigT = {
+export const globalColorLightModeConfigWithoutAlpha: GlobalConfigT = {
   neutral: {
     "000": {
       value: "white",

@@ -170,44 +170,42 @@
   color: var(--ac-radio-checkbox-action, var(--a-surface-action-hover));
 }
 
-.navds-checkbox__input:hover:not(:disabled):not(:checked):not(:indeterminate):not(:focus) + .navds-checkbox__label::before,
-.navds-radio__input:hover:not(:disabled):not(:checked):not(:focus) + .navds-radio__label::before {
+.navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate, :focus) + .navds-checkbox__label::before,
+.navds-radio__input:hover:not(:disabled, :checked, :focus) + .navds-radio__label::before {
   box-shadow: 0 0 0 2px var(--ac-radio-checkbox-action, var(--a-surface-action-hover));
 }
 
-.navds-checkbox__input:hover:not(:disabled):not(:checked):not(:indeterminate) + .navds-checkbox__label::before,
-.navds-radio__input:hover:not(:disabled):not(:checked) + .navds-radio__label::before {
+.navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-radio__input:hover:not(:disabled, :checked) + .navds-radio__label::before {
   background-color: var(--ac-radio-checkbox-action-hover-bg, var(--a-surface-action-subtle));
 }
 
-.navds-checkbox--error
-  > .navds-checkbox__input:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
-  + .navds-checkbox__label::before,
-.navds-radio--error > .navds-radio__input:not(:hover):not(:disabled):not(:checked) + .navds-radio__label::before {
+.navds-checkbox--error > .navds-checkbox__input:not(:hover, :disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-radio--error > .navds-radio__input:not(:hover, :disabled, :checked) + .navds-radio__label::before {
   box-shadow: 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger));
 }
 
 .navds-checkbox--error
-  > .navds-checkbox__input:focus:not(:hover):not(:disabled):not(:checked):not(:indeterminate)
+  > .navds-checkbox__input:focus:not(:hover, :disabled, :checked, :indeterminate)
   + .navds-checkbox__label::before,
-.navds-radio--error > .navds-radio__input:focus:not(:hover):not(:disabled):not(:checked) + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:focus:not(:hover, :disabled, :checked) + .navds-radio__label::before {
   box-shadow:
     0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger)),
     0 0 0 4px var(--a-border-focus);
 }
 
 .navds-checkbox--error
-  > .navds-checkbox__input:hover:not(:disabled):not(:checked):not(:indeterminate):not(:focus)
+  > .navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate, :focus)
   + .navds-checkbox__label::before,
-.navds-radio--error > .navds-radio__input:hover:not(:disabled):not(:checked):not(:focus) + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:hover:not(:disabled, :checked, :focus) + .navds-radio__label::before {
   background-color: var(--ac-radio-checkbox-error-hover-bg, var(--a-surface-danger-subtle));
   box-shadow: 0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger));
 }
 
 .navds-checkbox--error
-  > .navds-checkbox__input:focus:hover:not(:disabled):not(:checked):not(:indeterminate)
+  > .navds-checkbox__input:focus:hover:not(:disabled, :checked, :indeterminate)
   + .navds-checkbox__label::before,
-.navds-radio--error > .navds-radio__input:focus:hover:not(:disabled):not(:checked) + .navds-radio__label::before {
+.navds-radio--error > .navds-radio__input:focus:hover:not(:disabled, :checked) + .navds-radio__label::before {
   background-color: var(--ac-radio-checkbox-error-hover-bg, var(--a-surface-danger-subtle));
   box-shadow:
     0 0 0 2px var(--ac-radio-checkbox-error-border, var(--a-border-danger)),
@@ -241,14 +239,10 @@
   color: var(--a-text-default);
 }
 
-.navds-checkbox--readonly
-  > .navds-checkbox__input:not(:disabled):not(:checked):not(:indeterminate)
-  + .navds-checkbox__label::before,
-.navds-checkbox--readonly
-  > .navds-checkbox__input:hover:not(:checked):not(:indeterminate):not(:focus)
-  + .navds-checkbox__label::before,
-.navds-radio--readonly > .navds-radio__input:not(:disabled):not(:checked) + .navds-radio__label::before,
-.navds-radio--readonly > .navds-radio__input:hover:not(:checked):not(:focus) + .navds-radio__label::before {
+.navds-checkbox--readonly > .navds-checkbox__input:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-checkbox--readonly > .navds-checkbox__input:hover:not(:checked, :indeterminate, :focus) + .navds-checkbox__label::before,
+.navds-radio--readonly > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before,
+.navds-radio--readonly > .navds-radio__input:hover:not(:checked, :focus) + .navds-radio__label::before {
   background-color: var(--__ac-radio-checkbox-readonly-bg);
   box-shadow: 0 0 0 2px var(--__ac-radio-checkbox-readonly-border);
 }

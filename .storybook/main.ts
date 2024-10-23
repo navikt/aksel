@@ -53,6 +53,7 @@ export default {
     "@storybook/addon-a11y",
     "@whitespace/storybook-addon-html",
     "@storybook/addon-interactions",
+    "@storybook/addon-themes",
     {
       name: "@storybook/addon-storysource",
       options: {

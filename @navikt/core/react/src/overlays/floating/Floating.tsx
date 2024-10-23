@@ -1,4 +1,5 @@
 import {
+  FlipOptions,
   Placement,
   autoUpdate,
   flip,
@@ -217,9 +218,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
   ) => {
     const context = useFloatingContext();
 
-    const [content, setContent] = useState<HTMLDivElement | null>(null);
-    const mergeRefs = useMergeRefs(forwardedRef, setContent);
-
     const arrowDefaults = {
       padding: 5,
       width: 0,
@@ -251,11 +249,13 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       return value !== null;
     }
 
-    const detectOverflowOptions = {
+    const detectOverflowOptions: FlipOptions = {
       padding: collisionPadding,
       boundary: boundary.filter(isNotNull),
       // with `strategy: 'fixed'`, this is the only way to get it to respect boundaries
       altBoundary: hasExplicitBoundaries,
+      /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
+      fallbackAxisSideDirection: "end",
     };
 
     const { refs, floatingStyles, placement, isPositioned, middlewareData } =
@@ -282,7 +282,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
               mainAxis: true,
               crossAxis: false,
               limiter: limitShift(),
-              ...detectOverflowOptions,
             }),
           avoidCollisions && flip({ ...detectOverflowOptions }),
           size({
@@ -332,11 +331,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
     const arrowY = middlewareData.arrow?.y;
     const cannotCenterArrow = middlewareData.arrow?.centerOffset !== 0;
 
-    const [contentZIndex, setContentZIndex] = useState<string>();
-    useClientLayoutEffect(() => {
-      if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
-    }, [content]);
-
     return (
       <div
         ref={refs.setFloating}
@@ -347,7 +341,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
             ? floatingStyles.transform
             : "translate(0, -200%)", // keep off the page when measuring
           minWidth: "max-content",
-          zIndex: contentZIndex,
+          zIndex: "9999999",
           ["--ac-floating-transform-origin" as any]: [
             middlewareData.transformOrigin?.x,
             middlewareData.transformOrigin?.y,
@@ -365,7 +359,7 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
           hideArrow={cannotCenterArrow}
         >
           <div
-            ref={mergeRefs}
+            ref={forwardedRef}
             data-side={placedSide}
             data-align={placedAlign}
             {...contentProps}

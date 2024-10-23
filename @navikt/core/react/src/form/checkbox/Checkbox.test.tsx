@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import faker from "faker";
 import React from "react";
 import { describe, expect, test, vi } from "vitest";
 import { Checkbox, CheckboxGroup } from ".";
@@ -10,8 +9,8 @@ const firstArgumentOfFirstCall = (fn: ReturnType<typeof vi.fn>) =>
 test("checkbox group chains onChange calls", async () => {
   const onGroupChange = vi.fn();
   const onChange = vi.fn();
-  const value = faker.datatype.string();
-  const label = faker.datatype.string();
+  const value = "Checkbox value";
+  const label = "My pretty label";
 
   render(
     <CheckboxGroup legend="legend" onChange={onGroupChange}>

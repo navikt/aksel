@@ -1,5 +1,7 @@
-import React from "react";
-import "@navikt/ds-css/index.css";
+import { withThemeByClassName } from "@storybook/addon-themes";
+import React, { useLayoutEffect } from "react";
+import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
+import defaultCss from "@navikt/ds-css/index.css?inline";
 import "./layout.css";
 
 export const parameters = {
@@ -16,44 +18,61 @@ export const parameters = {
     },
   },
   layout: "centered",
-  backgrounds: {
-    values: [
-      {
-        name: "Canvas",
-        value: "#ffffff",
-      },
-      {
-        name: "Darkmode",
-        value: "#23262a",
-      },
-    ],
-  },
+  backgrounds: { disable: true },
 };
 
 export const globalTypes = {
-  theme: {
-    name: "Theme",
+  mode: {
+    name: "Darkside",
     toolbar: {
-      icon: "circlehollow",
       items: [
-        { value: "light", icon: "circlehollow", title: "light" },
-        { value: "dark", icon: "circle", title: "dark" },
+        {
+          value: "default",
+          icon: "hourglass",
+          title: "Default (old)",
+        },
+        { value: "darkside", icon: "beaker", title: "Darkside (new)" },
       ],
       showName: true,
+      dynamicTitle: true,
     },
   },
 };
 
-export const withTheme = (StoryFn, context) => {
-  return (
-    <div
-      data-theme={context.parameters.theme || context.globals.theme || "light"}
-      lang="no"
-      id="root"
-    >
-      <StoryFn />
-    </div>
-  );
+export const initialGlobals = {
+  mode: "default",
 };
 
-export const decorators = [withTheme];
+const ModeDecorator = ({ children, mode }) => {
+  useLayoutEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
+    document.head.appendChild(style);
+
+    if (mode === "darkside") {
+      document.body.style.setProperty("background", "var(--a-bg-default)");
+    }
+
+    return () => {
+      document.head.removeChild(style);
+      document.body.style.removeProperty("background");
+    };
+  }, [mode]);
+
+  return children;
+};
+
+export const decorators = [
+  (StoryFn, context) => (
+    <ModeDecorator mode={context.globals.mode}>
+      <StoryFn />
+    </ModeDecorator>
+  ),
+  withThemeByClassName({
+    themes: {
+      light: "light",
+      dark: "dark",
+    },
+    defaultTheme: "light",
+  }),
+];

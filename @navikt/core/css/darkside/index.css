@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.utilities;
+
+/* CSS foundations */
+@import "./baseline/reset.darkside.css" layer(aksel.reset);
+@import "./baseline/print.darkside.css" layer(aksel.reset);
+@import "./baseline/fonts.darkside.css" layer(aksel.typography);
+@import "./baseline/theme.darkside.css" layer(aksel.theme);
+@import "./typography.darkside.css" layer(aksel.typography);
+@import "./baseline/utilities.darkside.css" layer(aksel.utilities);
+
+/* Theming */
+@import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
+
+/* Components */
+@import "./button.darkside.css" layer(aksel.components);
