@@ -80,7 +80,8 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
       aria-selected={isInList(option.value, selectedOptions)}
       aria-disabled={isDisabled(option) || undefined}
     >
-      <BodyShort size={size}>
+      {/* Aria-label is used to fix testing-library wrongly evaluating the accessible name of the option when highlighting text */}
+      <BodyShort size={size} aria-label={option.label}>
         {start}
         {highlight && <mark>{highlight}</mark>}
         {end}
