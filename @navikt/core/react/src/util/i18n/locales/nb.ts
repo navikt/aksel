@@ -44,4 +44,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Modal: {
+    close: "Lukk",
+  },
 } satisfies TranslationMap;

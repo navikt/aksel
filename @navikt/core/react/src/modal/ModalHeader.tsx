@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
+import { useI18n } from "../util/i18n/i18n.context";
 import { useModalContext } from "./Modal.context";
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,6 +17,7 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ children, className, closeButton = true, ...rest }, ref) => {
     const context = useModalContext();
+    const translate = useI18n("Modal");
 
     return (
       <div {...rest} ref={ref} className={cl("navds-modal__header", className)}>
@@ -32,7 +34,7 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
               }
             }}
             onClick={context.closeHandler}
-            icon={<XMarkIcon title="Lukk" />}
+            icon={<XMarkIcon title={translate("close")} />}
           />
         )}
         {children}

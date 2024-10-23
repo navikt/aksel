@@ -37,4 +37,7 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Modal: {
+    close: "Close",
+  },
 } satisfies Translations;

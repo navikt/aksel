@@ -37,4 +37,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Modal: {
+    close: "Lukk",
+  },
 } satisfies Translations;
