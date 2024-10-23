@@ -6,7 +6,6 @@ import Loader, { LoaderProps } from "./Loader";
 export default {
   title: "ds-react/Loader",
   component: Loader,
-
   parameters: {
     chromatic: { disable: false },
   },
@@ -14,8 +13,9 @@ export default {
 
 type Story = StoryObj<typeof Loader>;
 
-export const Default = {
+export const Default: Story = {
   render: (props: LoaderProps) => <Loader {...props} />,
+
   argTypes: {
     size: {
       control: { type: "radio" },
