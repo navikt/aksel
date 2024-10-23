@@ -178,6 +178,7 @@ const complexOptions = [
 
 export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
   const comboboxRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState<string | undefined>("hello");
   return (
     <UNSAFE_Combobox
       id="combobox-with-add-new-options"
@@ -185,6 +186,8 @@ export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
       options={options}
       allowNewValues={true}
       shouldAutocomplete={true}
+      value={value}
+      onChange={setValue}
       isListOpen={open ?? (comboboxRef.current ? true : undefined)}
       ref={comboboxRef}
     />
@@ -196,6 +199,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
 }: {
   open?: boolean;
 }) => {
+  const [value, setValue] = useState<string | undefined>("world");
   const [selectedOptions, setSelectedOptions] = useState<string[]>(["hello"]);
   const comboboxRef = useRef<HTMLInputElement>(null);
   return (
@@ -205,8 +209,10 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       label="Multiselect komboboks med mulighet for å legge til nye verdier"
       options={options}
       allowNewValues={true}
+      value={value}
       shouldAutocomplete={true}
       selectedOptions={selectedOptions}
+      onChange={setValue}
       onToggleSelected={(option, isSelected) =>
         isSelected
           ? setSelectedOptions([...selectedOptions, option])
