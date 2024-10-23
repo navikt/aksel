@@ -225,6 +225,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
+                    /* Remember to update RenderItemProps if you make changes to props sent into Item */
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}
