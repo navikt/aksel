@@ -37,4 +37,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis meir",
+    },
+  },
 } satisfies Translations;
