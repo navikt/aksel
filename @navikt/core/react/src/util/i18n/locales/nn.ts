@@ -37,4 +37,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Loader: {
+    title: "Ventar…",
+  },
 } satisfies Translations;

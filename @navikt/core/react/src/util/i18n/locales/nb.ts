@@ -44,4 +44,7 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Loader: {
+    title: "Venter…",
+  },
 } satisfies TranslationMap;

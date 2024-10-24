@@ -37,4 +37,7 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Loader: {
+    title: "Waiting…",
+  },
 } satisfies Translations;
