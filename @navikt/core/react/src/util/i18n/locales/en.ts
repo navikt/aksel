@@ -37,4 +37,9 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ProgressBar: {
+    progress: "{value} of {valueMax}",
+    progressUnknown:
+      "Progress is unknown, estimated time is {seconds} seconds.",
+  },
 } satisfies Translations;

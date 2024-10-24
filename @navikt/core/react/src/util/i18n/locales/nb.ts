@@ -44,4 +44,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ProgressBar: {
+    progress: "{value} av {valueMax}",
+    progressUnknown:
+      "Framdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
 } satisfies TranslationMap;
