@@ -3,9 +3,11 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Alert } from "../../alert";
 import { Button } from "../../button";
 import { Chips } from "../../chips";
+import { Page } from "../../layout/page";
 import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
-import { BodyLong } from "../../typography";
+import { BodyLong, Heading } from "../../typography";
+import { Textarea } from "../textarea";
 import { TextField } from "../textfield";
 import { ComboboxProps, UNSAFE_Combobox } from "./index";
 
@@ -577,4 +579,41 @@ Chromatic.parameters = {
   chromatic: {
     disable: false,
   },
+};
+
+export const InAFullPage: StoryFn = () => {
+  return (
+    <Page>
+      <Page.Block>
+        <VStack gap="4">
+          <Heading level="1" size="large">
+            Multiselect komboboks
+          </Heading>
+          <BodyLong>
+            Multiselect kan brukes til å velge flere alternativer samtidig.
+            Dette er nyttig i situasjoner hvor brukeren trenger å gjøre flere
+            valg fra en liste med alternativer.
+          </BodyLong>
+          <VStack as="form" gap="4">
+            <TextField label="Fornavn" />
+            <TextField label="Etternavn" />
+            <TextField label="Telefonnummer" />
+            <TextField label="Adresse" />
+            <TextField label="Postnummer" maxLength={4} />
+            <TextField label="Poststed" />
+            <UNSAFE_Combobox
+              id="combobox-with-multiselect"
+              label="Komboboks - velg flere"
+              options={options}
+              shouldAutocomplete
+            />
+            <Textarea label="Beskrivelse" />
+            <TextField label="E-post" />
+            <TextField label="Bekreft e-post" />
+            <Button>Send</Button>
+          </VStack>
+        </VStack>
+      </Page.Block>
+    </Page>
+  );
 };
