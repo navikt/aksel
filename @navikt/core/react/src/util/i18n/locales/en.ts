@@ -37,4 +37,8 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
 } satisfies Translations;
