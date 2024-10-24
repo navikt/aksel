@@ -1,5 +1,6 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import { useI18n } from "../util/i18n/i18n.context";
 
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {
@@ -92,11 +93,12 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     },
     ref,
   ) => {
-    const translate = 100 - (Math.round(value) / valueMax) * 100;
+    const translateX = 100 - (Math.round(value) / valueMax) * 100;
     const onTimeoutRef = useRef<() => void>();
     onTimeoutRef.current = simulated?.onTimeout;
+    const translate = useI18n("ProgressBar");
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (simulated?.seconds && onTimeoutRef.current) {
         const timeout = setTimeout(
           onTimeoutRef.current,
@@ -119,8 +121,15 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuenow={simulated?.seconds ? 0 : Math.round(value)}
         aria-valuetext={
           simulated?.seconds
-            ? `Fremdrift kan ikke beregnes, antatt tid er: ${simulated?.seconds} sekunder`
-            : `${Math.round(value)} av ${Math.round(valueMax)}`
+            ? translate("progressUnknown", {
+                replacements: { seconds: Math.round(simulated?.seconds) },
+              })
+            : translate("progress", {
+                replacements: {
+                  value: Math.round(value),
+                  valueMax: Math.round(valueMax),
+                },
+              })
         }
         // biome-ignore lint/a11y/useAriaPropsForRole: We found that adding valueMin was not needed
         role="progressbar"
@@ -130,17 +139,13 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate": Number.isInteger(
-              simulated?.seconds,
-            ),
+            "navds-progress-bar__foreground--indeterminate": simulated?.seconds,
           })}
           style={{
-            "--__ac-progress-bar-simulated": Number.isInteger(
-              simulated?.seconds,
-            )
+            "--__ac-progress-bar-simulated": simulated?.seconds
               ? `${simulated?.seconds}s`
               : undefined,
-            "--__ac-progress-bar-translate": `-${translate}%`,
+            "--__ac-progress-bar-translate": `-${translateX}%`,
           }}
         />
       </div>

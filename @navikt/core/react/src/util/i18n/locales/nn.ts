@@ -37,4 +37,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ProgressBar: {
+    progress: "{value} av {valueMax}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
 } satisfies Translations;
