@@ -165,6 +165,7 @@ const Riktekst = (
     "tabell_v2",
     "video",
     "exampletext_block",
+    "language",
   ];
 
   const accordion = [
@@ -265,7 +266,7 @@ export const RiktekstEnkel = {
 
 export const RiktekstAccordion = {
   title: "Riktekst",
-  name: "riktekst_accordion",
+  name: "riktekst_accordion", // NB: Used in expansion-card
   type: "array",
   of: Riktekst("accordion"),
   icon: () => <FileTextIcon aria-hidden />,

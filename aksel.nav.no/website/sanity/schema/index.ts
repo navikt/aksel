@@ -61,6 +61,7 @@ export const schema: SchemaPluginOptions = {
     object.Tips,
     object.UnikSidemodul,
     object.Attachment,
+    object.Language,
 
     /* Riktekst */
     object.RiktekstKomponent,
