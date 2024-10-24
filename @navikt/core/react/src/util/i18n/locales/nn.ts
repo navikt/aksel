@@ -37,4 +37,10 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Search: {
+    clear: "Tøm",
+    Button: {
+      search: "Søk",
+    },
+  },
 } satisfies Translations;

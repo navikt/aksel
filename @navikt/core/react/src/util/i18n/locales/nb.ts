@@ -1,9 +1,5 @@
 interface TranslationMap {
-  [component: string]:
-    | Record<string, string>
-    | {
-        [subComponent: string]: Record<string, string>;
-      };
+  [component: string]: Record<string, string | Record<string, string>>;
 }
 
 export default {
@@ -42,6 +38,12 @@ export default {
     Removable: {
       /** Will be appended to the accessible name for the button. */
       labelSuffix: "slett",
+    },
+  },
+  Search: {
+    clear: "Tøm",
+    Button: {
+      search: "Søk",
     },
   },
 } satisfies TranslationMap;

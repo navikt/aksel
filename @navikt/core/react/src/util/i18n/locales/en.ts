@@ -37,4 +37,10 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Search: {
+    clear: "Clear",
+    Button: {
+      search: "Search",
+    },
+  },
 } satisfies Translations;
