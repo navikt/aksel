@@ -2,7 +2,6 @@ import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
-  useCallback,
   useRef,
   useState,
 } from "react";
@@ -10,6 +9,7 @@ import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";
@@ -68,13 +68,9 @@ export interface SearchProps
    */
   variant?: "primary" | "secondary" | "simple";
   /**
-   * Exposes the HTML size attribute. Specifies the width of the element, in characters.
+   * HTML size attribute. Specifies the width of the input, in characters.
    */
   htmlSize?: number | string;
-  /*
-   * Exposes role attribute.
-   */
-  role?: string;
 }
 
 interface SearchComponent
@@ -123,31 +119,24 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onChange,
       onSearchClick,
       htmlSize,
-      role,
       ...rest
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
-
+    const translate = useI18n("Search");
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
-    const handleChange = useCallback(
-      (v: string) => {
-        value === undefined && setInternalValue(v);
-        onChange?.(v);
-      },
-      [onChange, value],
-    );
+    const handleChange = (newValue: string) => {
+      value === undefined && setInternalValue(newValue);
+      onChange?.(newValue);
+    };
 
-    const handleClear = useCallback(
-      (event: SearchClearEvent) => {
-        onClear?.(event);
-        handleChange("");
-        searchRef.current?.focus?.();
-      },
-      [handleChange, onClear],
-    );
+    const handleClear = (clearEvent: SearchClearEvent) => {
+      onClear?.(clearEvent);
+      handleChange("");
+      searchRef.current?.focus?.();
+    };
 
     const handleClick = () => {
       onSearchClick?.(`${value ?? internalValue}`);
@@ -156,26 +145,22 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
-        onKeyDown={(e) => {
-          if (e.key !== "Escape") {
+        onKeyDown={(event) => {
+          if (event.key !== "Escape") {
             return;
           }
-          searchRef.current?.value &&
-            searchRef.current?.value !== "" &&
-            e.preventDefault();
-
-          handleClear({ trigger: "Escape", event: e });
+          searchRef.current?.value && event.preventDefault();
+          handleClear({ trigger: "Escape", event });
         }}
         className={cl(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
           "navds-search",
-
           {
             "navds-search--error": hasError,
-            "navds-search--disabled": !!inputProps.disabled,
-            "navds-search--with-size": !!htmlSize,
+            "navds-search--disabled": inputProps.disabled,
+            "navds-search--with-size": htmlSize,
           },
         )}
       >
@@ -215,7 +200,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              role={role ?? "searchbox"}
               className={cl(
                 className,
                 "navds-search__input",
@@ -229,11 +213,11 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             {(value ?? internalValue) && clearButton && (
               <button
                 type="button"
-                onClick={(e) => handleClear({ trigger: "Click", event: e })}
+                onClick={(event) => handleClear({ trigger: "Click", event })}
                 className="navds-search__button-clear"
               >
                 <span className="navds-sr-only">
-                  {clearButtonLabel ? clearButtonLabel : "Tøm"}
+                  {clearButtonLabel || translate("clear")}
                 </span>
                 <XMarkIcon aria-hidden />
               </button>
