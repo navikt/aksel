@@ -44,4 +44,8 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
 } satisfies TranslationMap;
