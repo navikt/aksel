@@ -37,4 +37,10 @@ export default {
       labelSuffix: "delete",
     },
   },
+  Table: {
+    ExpandableRow: {
+      expand: "Show more",
+      collapse: "Show less",
+    },
+  },
 } satisfies Translations;

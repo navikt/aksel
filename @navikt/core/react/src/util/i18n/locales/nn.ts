@@ -37,4 +37,10 @@ export default {
       labelSuffix: "slett",
     },
   },
+  Table: {
+    ExpandableRow: {
+      expand: "Vis meir",
+      collapse: "Vis mindre",
+    },
+  },
 } satisfies Translations;
