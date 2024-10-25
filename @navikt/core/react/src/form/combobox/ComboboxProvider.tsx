@@ -63,8 +63,9 @@ const ComboboxProvider = forwardRef<HTMLInputElement, ComboboxProps>(
       typeof navigator === "undefined" ? "" : navigator.userAgent;
     const isFirefoxOnAndroid =
       userAgent.includes("Android") && userAgent.includes("Firefox/");
+    const isIos = /(iPad|iPhone|iPod)/g.test(userAgent);
     const shouldAutocomplete =
-      !isFirefoxOnAndroid && externalShouldAutocomplete;
+      !isFirefoxOnAndroid && !isIos && externalShouldAutocomplete;
 
     return (
       <InputContextProvider
