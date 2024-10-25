@@ -45,6 +45,8 @@ const useVirtualFocus = (
 
   const setActiveAndScrollToElement = (element?: HTMLElement) => {
     setActiveElement(element);
+    // eslint-disable-next-line no-console
+    console.log("scrolling to element", element);
     element?.scrollIntoView?.({ block: "nearest" });
   };
 
