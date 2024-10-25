@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
 import React from "react";
+import { BodyLong, Heading } from "../../typography";
 import { UNSAFE_Combobox } from "./index";
 
 export default {
@@ -402,3 +403,118 @@ export const EnterNotSubmittingForm: StoryObj<{
     expect(args.onSubmit).toHaveBeenCalledOnce();
   },
 };
+
+export const InputNeverLeavesViewport: StoryObj = {
+  render: () => {
+    return (
+      <>
+        <Heading size="xlarge" level="1">
+          TOP OF PAGE
+        </Heading>
+        <BodyLong>
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text{" "}
+        </BodyLong>
+        <BodyLong>
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text{" "}
+        </BodyLong>
+        <BodyLong>
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text
+          this is lots of filler text this is lots of filler text this is lots
+          of filler text this is lots of filler text this is lots of filler text{" "}
+          <BodyLong>
+            this is lots of filler text this is lots of filler text this is lots
+            of filler text this is lots of filler text this is lots of filler
+            text this is lots of filler text this is lots of filler text this is
+            lots of filler text this is lots of filler text this is lots of
+            filler text this is lots of filler text this is lots of filler text
+            this is lots of filler text this is lots of filler text this is lots
+            of filler text this is lots of filler text this is lots of filler
+            text this is lots of filler text this is lots of filler text this is
+            lots of filler text this is lots of filler text this is lots of
+            filler text this is lots of filler text this is lots of filler text
+            this is lots of filler text this is lots of filler text this is lots
+            of filler text this is lots of filler text this is lots of filler
+            text this is lots of filler text{" "}
+          </BodyLong>
+        </BodyLong>
+        <UNSAFE_Combobox
+          options={options}
+          label="Hva er dine favorittfrukter?"
+          shouldAutocomplete
+          id="combobox"
+        />
+        <Heading size="xlarge" level="1">
+          BOTTOM OF PAGE
+        </Heading>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const waitTime = 0; // Change for debugging
+
+    const isElementInViewport = (el: HTMLElement) => {
+      const rect = el.getBoundingClientRect();
+
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight ||
+            document.documentElement
+              .clientHeight) /* or $(window).height() */ &&
+        rect.right <=
+          (window.innerWidth ||
+            document.documentElement.clientWidth) /* or $(window).width() */
+      );
+    };
+
+    await sleep(waitTime);
+
+    const getInput = () =>
+      canvas.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+    await userEvent.click(getInput(), { delay: waitTime });
+    expect(isElementInViewport(getInput())).toBeTruthy();
+    await userEvent.keyboard("b");
+    expect(isElementInViewport(getInput())).toBeTruthy();
+    await userEvent.keyboard("a");
+    expect(isElementInViewport(getInput())).toBeTruthy();
+    await userEvent.keyboard("n");
+    expect(isElementInViewport(getInput())).toBeTruthy();
+  },
+};
+
+InputNeverLeavesViewport.storyName = "(iOS only) Input Never Leaves Viewport";
