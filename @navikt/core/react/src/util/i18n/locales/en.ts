@@ -37,4 +37,9 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Show more",
+    },
+  },
 } satisfies Translations;
