@@ -47,6 +47,6 @@ export default {
   ProgressBar: {
     progress: "{value} av {valueMax}",
     progressUnknown:
-      "Framdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
   },
 } satisfies TranslationMap;
