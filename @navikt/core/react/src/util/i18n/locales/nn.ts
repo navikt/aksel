@@ -37,6 +37,11 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis meir",
+    },
+  },
   Loader: {
     title: "Ventar…",
   },
