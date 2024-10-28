@@ -52,7 +52,9 @@ export type TokenTypes =
   | "color"
   | "global-color"
   | "global-radius"
-  | "global-spacing";
+  | "global-spacing"
+  | "global-breakpoints"
+  | "global-font";
 
 export type SemanticTokenGroups = "background" | "border" | "text";
 
@@ -92,8 +94,8 @@ export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
   [key: string]: Record<string, StyleDictionaryToken<T>>;
 };
 
-export const tokensWithPrefix = <T>(input: T): Record<"a", T> => {
-  return { a: input };
+export const tokensWithPrefix = <T>(input: T): Record<"ax", T> => {
+  return { ax: input };
 };
 
 export const mergeConfigs = (

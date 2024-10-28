@@ -13,7 +13,7 @@
   min-width: 0;
 }
 
-.navds-fieldset > :not(:first-child):not(:empty) {
+.navds-fieldset > :not(:first-child, :empty) {
   margin-top: var(--a-spacing-2);
 }
 
@@ -26,7 +26,7 @@
 }
 
 /* Applied when hideLegend is applied to fieldset */
-.navds-fieldset > .navds-sr-only + :not(:first-child):not(:empty) {
+.navds-fieldset > .navds-sr-only + :not(:first-child, :empty) {
   margin-top: 0;
 }
 

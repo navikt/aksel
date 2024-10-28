@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { useModalContext } from "../../modal/Modal.context";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -8,7 +9,7 @@ import { createContext } from "../../util/create-context";
 import { useMergeRefs } from "../../util/hooks";
 import { useControllableState } from "../../util/hooks/useControllableState";
 import { requireReactElement } from "../../util/requireReactElement";
-import { Menu } from "../floating-menu/Menu";
+import { Menu, MenuPortalProps } from "../floating-menu/Menu";
 
 /* -------------------------------------------------------------------------- */
 /*                                 ActionMenu                                 */
@@ -20,6 +21,7 @@ type ActionMenuContextValue = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onOpenToggle: () => void;
+  rootElement: MenuPortalProps["rootElement"];
 };
 
 const [ActionMenuProvider, useActionMenuContext] =
@@ -29,7 +31,7 @@ const [ActionMenuProvider, useActionMenuContext] =
       "ActionMenu sub-components cannot be rendered outside the ActionMenu component.",
   });
 
-interface ActionMenuProps {
+type ActionMenuProps = {
   children?: React.ReactNode;
   /**
    * Whether the menu is open or not.
@@ -37,14 +39,10 @@ interface ActionMenuProps {
    */
   open?: boolean;
   /**
-   * Whether the menu should be open by default.
-   */
-  defaultOpen?: boolean;
-  /**
    * Callback for when the menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
-}
+} & Pick<MenuPortalProps, "rootElement">;
 
 interface ActionMenuComponent extends React.FC<ActionMenuProps> {
   /**
@@ -247,14 +245,17 @@ interface ActionMenuComponent extends React.FC<ActionMenuProps> {
 const ActionMenuRoot = ({
   children,
   open: openProp,
-  defaultOpen = false,
   onOpenChange,
+  rootElement: rootElementProp,
 }: ActionMenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  const modalContext = useModalContext(false);
+  const rootElement = modalContext ? modalContext.ref.current : rootElementProp;
+
   const [open = false, setOpen] = useControllableState({
     value: openProp,
-    defaultValue: defaultOpen,
+    defaultValue: false,
     onChange: onOpenChange,
   });
 
@@ -266,6 +267,7 @@ const ActionMenuRoot = ({
       open={open}
       onOpenChange={setOpen}
       onOpenToggle={() => setOpen((prevOpen) => !prevOpen)}
+      rootElement={rootElement}
     >
       <Menu open={open} onOpenChange={setOpen} modal>
         {children}
@@ -274,7 +276,7 @@ const ActionMenuRoot = ({
   );
 };
 
-const ActionMenu = ActionMenuRoot as ActionMenuComponent;
+export const ActionMenu = ActionMenuRoot as ActionMenuComponent;
 
 /* -------------------------------------------------------------------------- */
 /*                             ActionMenuTrigger                              */
@@ -284,7 +286,10 @@ interface ActionMenuTriggerProps
   children: React.ReactElement;
 }
 
-const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
+export const ActionMenuTrigger = forwardRef<
+  HTMLButtonElement,
+  ActionMenuTriggerProps
+>(
   (
     { children, onKeyDown, style, onClick, ...rest }: ActionMenuTriggerProps,
     ref,
@@ -325,55 +330,46 @@ const ActionMenuTrigger = forwardRef<HTMLButtonElement, ActionMenuTriggerProps>(
 /*                             ActionMenuContent                              */
 /* -------------------------------------------------------------------------- */
 interface ActionMenuContentProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id">,
-    Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   children?: React.ReactNode;
 }
 
-const ActionMenuContent = forwardRef<HTMLDivElement, ActionMenuContentProps>(
-  (
-    {
-      children,
-      className,
-      style,
-      rootElement,
-      ...rest
-    }: ActionMenuContentProps,
-    ref,
-  ) => {
-    const context = useActionMenuContext();
+export const ActionMenuContent = forwardRef<
+  HTMLDivElement,
+  ActionMenuContentProps
+>(({ children, className, style, ...rest }: ActionMenuContentProps, ref) => {
+  const context = useActionMenuContext();
 
-    return (
-      <Menu.Portal rootElement={rootElement} asChild>
-        <Menu.Content
-          ref={ref}
-          id={context.contentId}
-          aria-labelledby={context.triggerId}
-          className={cl("navds-action-menu__content", className)}
-          {...rest}
-          align="start"
-          sideOffset={4}
-          collisionPadding={10}
-          onCloseAutoFocus={() => {
-            context.triggerRef.current?.focus();
-          }}
-          safeZone={{ anchor: context.triggerRef.current }}
-          style={{
-            ...style,
-            ...{
-              "--__ac-action-menu-content-transform-origin":
-                "var(--ac-floating-transform-origin)",
-              "--__ac-action-menu-content-available-height":
-                "var(--ac-floating-available-height)",
-            },
-          }}
-        >
-          <div className="navds-action-menu__content-inner">{children}</div>
-        </Menu.Content>
-      </Menu.Portal>
-    );
-  },
-);
+  return (
+    <Menu.Portal rootElement={context.rootElement} asChild>
+      <Menu.Content
+        ref={ref}
+        id={context.contentId}
+        aria-labelledby={context.triggerId}
+        className={cl("navds-action-menu__content", className)}
+        {...rest}
+        align="start"
+        sideOffset={4}
+        collisionPadding={10}
+        onCloseAutoFocus={() => {
+          context.triggerRef.current?.focus();
+        }}
+        safeZone={{ anchor: context.triggerRef.current }}
+        style={{
+          ...style,
+          ...{
+            "--__ac-action-menu-content-transform-origin":
+              "var(--ac-floating-transform-origin)",
+            "--__ac-action-menu-content-available-height":
+              "var(--ac-floating-available-height)",
+          },
+        }}
+      >
+        <div className="navds-action-menu__content-inner">{children}</div>
+      </Menu.Content>
+    </Menu.Portal>
+  );
+});
 
 /* -------------------------------------------------------------------------- */
 /*                              ActionMenuLabel                               */
@@ -382,7 +378,7 @@ interface ActionMenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
+export const ActionMenuLabel = forwardRef<HTMLDivElement, ActionMenuLabelProps>(
   ({ children, className, ...rest }: ActionMenuLabelProps, ref) => {
     return (
       <div
@@ -427,7 +423,7 @@ type ActionMenuGroupLabelingProps =
 type ActionMenuGroupProps = Omit<MenuGroupProps, "asChild"> &
   ActionMenuGroupLabelingProps;
 
-const ActionMenuGroup = forwardRef<
+export const ActionMenuGroup = forwardRef<
   ActionMenuGroupElement,
   ActionMenuGroupProps
 >(({ children, className, label, ...rest }: ActionMenuGroupProps, ref) => {
@@ -519,7 +515,7 @@ interface ActionMenuItemProps extends Omit<MenuItemProps, "asChild"> {
   icon?: React.ReactNode;
 }
 
-const ActionMenuItem: OverridableComponent<
+export const ActionMenuItem: OverridableComponent<
   ActionMenuItemProps,
   ActionMenuItemElement
 > = forwardRef(
@@ -577,7 +573,7 @@ interface ActionMenuCheckboxItemProps
   shortcut?: string;
 }
 
-const ActionMenuCheckboxItem = forwardRef<
+export const ActionMenuCheckboxItem = forwardRef<
   ActionMenuCheckboxItemElement,
   ActionMenuCheckboxItemProps
 >(
@@ -687,7 +683,7 @@ type ActionMenuRadioGroupProps = ActionMenuGroupLabelingProps &
     children: React.ReactNode;
   };
 
-const ActionMenuRadioGroup = forwardRef<
+export const ActionMenuRadioGroup = forwardRef<
   ActionMenuRadioGroupElement,
   ActionMenuRadioGroupProps
 >(({ children, label, ...rest }: ActionMenuRadioGroupProps, ref) => {
@@ -719,7 +715,7 @@ interface ActionMenuRadioItemProps extends Omit<MenuRadioItemProps, "asChild"> {
   children: React.ReactNode;
 }
 
-const ActionMenuRadioItem = forwardRef<
+export const ActionMenuRadioItem = forwardRef<
   ActionMenuRadioItemElement,
   ActionMenuRadioItemProps
 >(
@@ -810,7 +806,7 @@ type ActionMenuDividerElement = React.ElementRef<typeof Menu.Divider>;
 type MenuDividerProps = React.ComponentPropsWithoutRef<typeof Menu.Divider>;
 type ActionMenuDividerProps = Omit<MenuDividerProps, "asChild">;
 
-const ActionMenuDivider = forwardRef<
+export const ActionMenuDivider = forwardRef<
   ActionMenuDividerElement,
   ActionMenuDividerProps
 >(({ className, ...rest }: ActionMenuDividerProps, ref) => {
@@ -834,21 +830,17 @@ interface ActionMenuSubProps {
    */
   open?: boolean;
   /**
-   * Whether the sub-menu should be open by default.
-   */
-  defaultOpen?: boolean;
-  /**
    * Callback for when the sub-menu is opened or closed.
    */
   onOpenChange?: (open: boolean) => void;
 }
 
-const ActionMenuSub = (props: ActionMenuSubProps) => {
-  const { children, open: openProp, onOpenChange, defaultOpen = false } = props;
+export const ActionMenuSub = (props: ActionMenuSubProps) => {
+  const { children, open: openProp, onOpenChange } = props;
 
   const [open = false, setOpen] = useControllableState({
     value: openProp,
-    defaultValue: defaultOpen,
+    defaultValue: false,
     onChange: onOpenChange,
   });
 
@@ -871,7 +863,7 @@ interface ActionMenuSubTriggerProps
   icon?: React.ReactNode;
 }
 
-const ActionMenuSubTrigger = forwardRef<
+export const ActionMenuSubTrigger = forwardRef<
   ActionMenuSubTriggerElement,
   ActionMenuSubTriggerProps
 >(({ children, className, icon, ...rest }: ActionMenuSubTriggerProps, ref) => {
@@ -905,59 +897,48 @@ const ActionMenuSubTrigger = forwardRef<
 type ActionMenuSubContentElement = React.ElementRef<typeof Menu.Content>;
 
 interface ActionMenuSubContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    Pick<React.ComponentPropsWithoutRef<typeof Menu.Portal>, "rootElement"> {
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ActionMenuSubContent = forwardRef<
+export const ActionMenuSubContent = forwardRef<
   ActionMenuSubContentElement,
   ActionMenuSubContentProps
->(
-  (
-    {
-      children,
-      className,
-      style,
-      rootElement,
-      ...rest
-    }: ActionMenuSubContentProps,
-    ref,
-  ) => {
-    return (
-      <Menu.Portal rootElement={rootElement}>
-        <Menu.SubContent
-          ref={ref}
-          alignOffset={-4}
-          sideOffset={1}
-          collisionPadding={10}
-          {...rest}
-          className={cl(
-            "navds-action-menu__content navds-action-menu__sub-content",
-            className,
-          )}
-          style={{
-            ...style,
-            ...{
-              "--ac-action-menu-content-transform-origin":
-                "var(--ac-floating-transform-origin)",
-              "--ac-action-menu-content-available-width":
-                "var(--ac-floating-available-width)",
-              "--ac-action-menu-content-available-height":
-                "var(--ac-floating-available-height)",
-              "--ac-action-menu-trigger-width":
-                "var(--ac-floating-anchor-width)",
-              "--ac-action-menu-trigger-height":
-                "var(--ac-floating-anchor-height)",
-            },
-          }}
-        >
-          <div className="navds-action-menu__content-inner">{children}</div>
-        </Menu.SubContent>
-      </Menu.Portal>
-    );
-  },
-);
+>(({ children, className, style, ...rest }: ActionMenuSubContentProps, ref) => {
+  const context = useActionMenuContext();
+
+  return (
+    <Menu.Portal rootElement={context.rootElement}>
+      <Menu.SubContent
+        ref={ref}
+        alignOffset={-4}
+        sideOffset={1}
+        collisionPadding={10}
+        {...rest}
+        className={cl(
+          "navds-action-menu__content navds-action-menu__sub-content",
+          className,
+        )}
+        style={{
+          ...style,
+          ...{
+            "--ac-action-menu-content-transform-origin":
+              "var(--ac-floating-transform-origin)",
+            "--ac-action-menu-content-available-width":
+              "var(--ac-floating-available-width)",
+            "--ac-action-menu-content-available-height":
+              "var(--ac-floating-available-height)",
+            "--ac-action-menu-trigger-width": "var(--ac-floating-anchor-width)",
+            "--ac-action-menu-trigger-height":
+              "var(--ac-floating-anchor-height)",
+          },
+        }}
+      >
+        <div className="navds-action-menu__content-inner">{children}</div>
+      </Menu.SubContent>
+    </Menu.Portal>
+  );
+});
 
 /* -------------------------------------------------------------------------- */
 ActionMenu.Trigger = ActionMenuTrigger;
@@ -973,30 +954,18 @@ ActionMenu.Sub = ActionMenuSub;
 ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
 
-export {
-  ActionMenu,
-  ActionMenuCheckboxItem,
-  ActionMenuContent,
-  ActionMenuDivider,
-  ActionMenuGroup,
-  ActionMenuItem,
-  ActionMenuLabel,
-  ActionMenuRadioGroup,
-  ActionMenuRadioItem,
-  ActionMenuSub,
-  ActionMenuSubContent,
-  ActionMenuSubTrigger,
-  ActionMenuTrigger,
-  type ActionMenuCheckboxItemProps,
-  type ActionMenuContentProps,
-  type ActionMenuDividerProps,
-  type ActionMenuGroupProps,
-  type ActionMenuLabelProps,
-  type ActionMenuProps,
-  type ActionMenuRadioGroupProps,
-  type ActionMenuRadioItemProps,
-  type ActionMenuSubContentProps,
-  type ActionMenuSubProps,
-  type ActionMenuSubTriggerProps,
-  type ActionMenuTriggerProps,
+export type {
+  ActionMenuItemProps,
+  ActionMenuCheckboxItemProps,
+  ActionMenuContentProps,
+  ActionMenuDividerProps,
+  ActionMenuGroupProps,
+  ActionMenuLabelProps,
+  ActionMenuProps,
+  ActionMenuRadioGroupProps,
+  ActionMenuRadioItemProps,
+  ActionMenuSubContentProps,
+  ActionMenuSubProps,
+  ActionMenuSubTriggerProps,
+  ActionMenuTriggerProps,
 };

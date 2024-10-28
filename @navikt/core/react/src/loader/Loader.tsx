@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { SVGProps, forwardRef } from "react";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
+import { useI18n } from "../util/i18n/i18n.context";
 
 export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
   /**
@@ -19,7 +20,7 @@ export interface LoaderProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
     | "xsmall";
   /**
    * Title prop on svg
-   * @default "venter..."
+   * @default "Venter…"
    */
   title?: React.ReactNode;
   /**
@@ -47,7 +48,7 @@ export type LoaderType = React.ForwardRefExoticComponent<
  *
  * @example
  * ```jsx
- * <Loader size="3xlarge" title="Venter..." />
+ * <Loader size="3xlarge" title="Venter…" />
  * ```
  */
 export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
@@ -55,7 +56,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     {
       className,
       size = "medium",
-      title = "venter...",
+      title,
       transparent = false,
       variant = "neutral",
       id,
@@ -64,6 +65,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     ref,
   ) => {
     const internalId = useId();
+    const translate = useI18n("Loader");
 
     return (
       <svg
@@ -83,7 +85,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
         preserveAspectRatio="xMidYMid"
         {...omit(rest, ["children"])}
       >
-        <title id={id ?? `loader-${internalId}`}>{title}</title>
+        <title id={id ?? `loader-${internalId}`}>
+          {title || translate("title")}
+        </title>
         <circle
           className="navds-loader__background"
           xmlns="http://www.w3.org/2000/svg"

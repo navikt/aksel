@@ -16,7 +16,7 @@ export function createDescendantContext<
   K extends Record<string, any> = object,
 >() {
   const [DescendantsContextProvider, useDescendantsContext] = createContext<
-    ReturnType<typeof _useDescendants>
+    ReturnType<typeof useDescendants>
   >({
     name: "DescendantsProvider",
     errorMessage:
@@ -38,7 +38,7 @@ export function createDescendantContext<
    * - ref callback to register the descendant
    * - Its enabled index compared to other enabled descendants
    */
-  function _useDescendant(options?: DescendantOptions<K>) {
+  function useDescendant(options?: DescendantOptions<K>) {
     const descendants = useDescendantsContext();
     const [index, setIndex] = useState(-1);
     const ref = useRef<T>(null);
@@ -74,7 +74,7 @@ export function createDescendantContext<
    * @internal
    * Initializing DescendantsManager
    */
-  function _useDescendants() {
+  function useDescendants() {
     const descendants = useRef(new DescendantsManager<T, K>()).current;
 
     return descendants;
@@ -86,8 +86,8 @@ export function createDescendantContext<
     // call this when you need to read from context
     useDescendantsContext,
     // descendants state information, to be called and passed to `ContextProvider`
-    _useDescendants,
+    useDescendants,
     // descendant index information
-    _useDescendant,
+    useDescendant,
   ] as const;
 }

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PencilIcon, StarIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { HStack, VStack } from "../../layout/stack";
@@ -435,11 +435,6 @@ export const TriggerWithTooltip: Story = {
   decorators: [DemoDecorator],
 };
 
-/**
- * TODO: Bugs
- * - When keydown "space" on open modal button, the modal is closed instantly.
- * Unsure if this is because of the keydown-event repeats or if its caused by eventbubbling
- */
 export const ModalTrigger: Story = {
   render: () => {
     const ref = useRef<HTMLDialogElement>(null);
@@ -463,6 +458,62 @@ export const ModalTrigger: Story = {
         <Modal ref={ref} header={{ heading: "Heading" }}>
           <Modal.Body>
             Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button type="button" onClick={() => ref.current?.close()}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
+export const OpenInsideModal: Story = {
+  render: () => {
+    const ref = useRef<HTMLDialogElement>(null);
+
+    useEffect(() => {
+      ref.current?.showModal();
+    }, []);
+
+    return (
+      <div>
+        <button onClick={() => ref.current?.showModal()}>Open modal</button>
+        <Modal ref={ref} header={{ heading: "Heading" }}>
+          <Modal.Body>
+            Culpa aliquip ut cupidatat laborum minim quis ex in aliqua.
+            <ActionMenu>
+              <ActionMenu.Trigger>
+                <button>Open action</button>
+              </ActionMenu.Trigger>
+              <ActionMenu.Content>
+                <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+                  Item 1
+                </ActionMenu.Item>
+                <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+                  Item 2
+                </ActionMenu.Item>
+                <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+                  Item 3
+                </ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+                <ActionMenu.Item>Item</ActionMenu.Item>
+              </ActionMenu.Content>
+            </ActionMenu>
           </Modal.Body>
           <Modal.Footer>
             <Button type="button" onClick={() => ref.current?.close()}>

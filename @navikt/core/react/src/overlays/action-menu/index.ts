@@ -13,6 +13,7 @@ export {
   ActionMenuSubContent,
   ActionMenuSubTrigger,
   ActionMenuTrigger,
+  type ActionMenuItemProps,
   type ActionMenuCheckboxItemProps,
   type ActionMenuContentProps,
   type ActionMenuGroupProps,
