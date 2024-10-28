@@ -2,9 +2,9 @@
 /* stylelint-disable aksel/design-token-exists */
 
 .navds-button {
-  padding: var(--a-spacing-3) var(--a-spacing-5);
+  padding: var(--ax-spacing-3) var(--ax-spacing-5);
   border-style: none;
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-medium);
   display: inline-flex;
   cursor: pointer;
   text-decoration: none;
@@ -12,7 +12,7 @@
   background: none;
   align-items: center;
   justify-content: center;
-  gap: var(--a-spacing-2);
+  gap: var(--ax-spacing-2);
   font-weight: 600;
 
   /* TODO: fonts should be done globally elsewhere */
@@ -22,36 +22,36 @@
 }
 
 .navds-button--small {
-  padding: var(--a-spacing-1) var(--a-spacing-3);
+  padding: var(--ax-spacing-1) var(--ax-spacing-3);
   min-height: 2rem;
   min-width: 2rem;
 }
 
 .navds-button--xsmall {
-  padding: var(--a-spacing-05) var(--a-spacing-2);
-  gap: var(--a-spacing-1);
+  padding: var(--ax-spacing-05) var(--ax-spacing-2);
+  gap: var(--ax-spacing-1);
 }
 
 .navds-button--icon-only {
-  padding: var(--a-spacing-3);
+  padding: var(--ax-spacing-3);
 }
 
 .navds-button--small.navds-button--icon-only {
-  padding: var(--a-spacing-1);
+  padding: var(--ax-spacing-1);
 }
 
 .navds-button--xsmall.navds-button--icon-only {
-  padding: var(--a-spacing-05);
+  padding: var(--ax-spacing-05);
 }
 
 .navds-button:focus-visible {
-  outline: 4px solid var(--a-border-focus);
+  outline: 4px solid var(--ax-border-focus);
   outline-offset: 2px;
 }
 
 @supports not selector(:focus-visible) {
   .navds-button:focus {
-    outline: 4px solid var(--a-border-focus);
+    outline: 4px solid var(--ax-border-focus);
   }
 }
 
@@ -83,8 +83,8 @@
  *************************/
 
 .navds-button--primary {
-  background-color: var(--a-bg-accent-strong);
-  color: var(--a-text-accent-contrast);
+  background-color: var(--ax-bg-accent-strong);
+  color: var(--ax-text-accent-contrast);
 }
 
 @media (forced-colors: active) {
@@ -99,16 +99,16 @@
 }
 
 .navds-button--primary:hover {
-  background-color: var(--a-bg-accent-strong-hover);
+  background-color: var(--ax-bg-accent-strong-hover);
 }
 
 .navds-button--primary:active {
-  background-color: var(--a-bg-accent-strong-pressed);
+  background-color: var(--ax-bg-accent-strong-pressed);
 }
 
 .navds-button--primary:hover:where(:disabled, .navds-button--disabled),
 .navds-button--primary:active:where(:disabled, .navds-button--disabled) {
-  background-color: var(--a-bg-accent-strong);
+  background-color: var(--ax-bg-accent-strong);
 }
 
 /*************************
@@ -116,21 +116,21 @@
  *************************/
 
 .navds-button--primary-neutral {
-  background-color: var(--a-bg-neutral-strong);
-  color: var(--a-text-neutral-contrast);
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
 }
 
 .navds-button--primary-neutral:hover {
-  background-color: var(--a-bg-neutral-strong-hover);
+  background-color: var(--ax-bg-neutral-strong-hover);
 }
 
 .navds-button--primary-neutral:active {
-  background-color: var(--a-bg-neutral-strong-pressed);
+  background-color: var(--ax-bg-neutral-strong-pressed);
 }
 
 .navds-button--primary-neutral:hover:where(:disabled, .navds-button--disabled),
 .navds-button--primary-neutral:active:where(:disabled, .navds-button--disabled) {
-  background-color: var(--a-bg-neutral-strong);
+  background-color: var(--ax-bg-neutral-strong);
 }
 
 /**************************
@@ -139,26 +139,26 @@
 
 .navds-button--secondary {
   background-color: transparent;
-  color: var(--a-text-accent);
-  box-shadow: inset 0 0 0 2px var(--a-border-accent);
+  color: var(--ax-text-accent);
+  box-shadow: inset 0 0 0 2px var(--ax-border-accent);
 }
 
 .navds-button--secondary:hover {
-  background-color: var(--a-bg-accent-moderate-hover);
-  color: var(--a-bg-accent-strong-hover);
-  box-shadow: inset 0 0 0 2px var(--a-bg-accent-strong-hover);
+  background-color: var(--ax-bg-accent-moderate-hover);
+  color: var(--ax-bg-accent-strong-hover);
+  box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
 }
 
 .navds-button--secondary:active {
-  background-color: var(--a-bg-accent-strong-pressed);
-  color: var(--a-text-accent-contrast);
+  background-color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-text-accent-contrast);
   box-shadow: none;
 }
 
 .navds-button--secondary:where(:disabled, .navds-button--disabled),
 .navds-button--secondary:hover:where(:disabled, .navds-button--disabled) {
   background-color: transparent;
-  color: var(--a-text-accent);
+  color: var(--ax-text-accent);
 }
 
 /**************************
@@ -167,25 +167,25 @@
 
 .navds-button--secondary-neutral {
   background-color: transparent;
-  color: var(--a-text-default);
-  box-shadow: inset 0 0 0 2px var(--a-border-neutral);
+  color: var(--ax-text-default);
+  box-shadow: inset 0 0 0 2px var(--ax-border-neutral);
 }
 
 .navds-button--secondary-neutral:hover {
-  background-color: var(--a-bg-neutral-hover);
+  background-color: var(--ax-bg-neutral-hover);
 }
 
 .navds-button--secondary-neutral:active {
-  color: var(--a-text-neutral-contrast);
-  background-color: var(--a-bg-neutral-strong-pressed);
+  color: var(--ax-text-neutral-contrast);
+  background-color: var(--ax-bg-neutral-strong-pressed);
   box-shadow: none;
 }
 
 .navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
 .navds-button--secondary-neutral:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--a-text-default);
+  color: var(--ax-text-default);
   background-color: transparent;
-  box-shadow: inset 0 0 0 2px var(--a-border-strong);
+  box-shadow: inset 0 0 0 2px var(--ax-border-strong);
 }
 
 /****************************
@@ -194,28 +194,28 @@
 
 .navds-button--tertiary {
   background-color: transparent;
-  color: var(--a-text-accent);
+  color: var(--ax-text-accent);
 }
 
 .navds-button--tertiary:hover {
-  background-color: var(--a-bg-accent-hover);
-  color: var(--a-text-accent);
+  background-color: var(--ax-bg-accent-hover);
+  color: var(--ax-text-accent);
 }
 
 .navds-button--tertiary:active {
-  background-color: var(--a-bg-accent-strong-pressed);
-  color: var(--a-text-accent-contrast);
+  background-color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-text-accent-contrast);
 }
 
 .navds-button--tertiary:active:hover {
-  background-color: var(--a-bg-accent-strong-pressed);
+  background-color: var(--ax-bg-accent-strong-pressed);
 }
 
 .navds-button--tertiary:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:hover:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--a-text-accent);
+  color: var(--ax-text-accent);
   background: none;
   box-shadow: none;
 }
@@ -225,28 +225,28 @@
  ****************************/
 
 .navds-button--tertiary-neutral {
-  color: var(--a-text-default);
+  color: var(--ax-text-default);
 }
 
 .navds-button--tertiary-neutral:hover {
-  background-color: var(--a-bg-neutral-hover);
+  background-color: var(--ax-bg-neutral-hover);
 }
 
 .navds-button--tertiary-neutral:active {
-  background-color: var(--a-bg-neutral-strong-pressed);
-  color: var(--a-text-neutral-contrast);
+  background-color: var(--ax-bg-neutral-strong-pressed);
+  color: var(--ax-text-neutral-contrast);
 }
 
 /* TODO: do we need this selector? */
 .navds-button--tertiary-neutral:active:hover {
-  background-color: var(--a-bg-neutral-strong-pressed);
+  background-color: var(--ax-bg-neutral-strong-pressed);
 }
 
 .navds-button--tertiary-neutral:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary-neutral:hover:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary-neutral:active:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary-neutral:active:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--a-text-default);
+  color: var(--ax-text-default);
   background: none;
   box-shadow: none;
 }
@@ -256,21 +256,21 @@
  *************************/
 
 .navds-button--danger {
-  background-color: var(--a-bg-danger-strong);
-  color: var(--a-text-danger-contrast);
+  background-color: var(--ax-bg-danger-strong);
+  color: var(--ax-text-danger-contrast);
 }
 
 .navds-button--danger:hover {
-  background-color: var(--a-bg-danger-strong-hover);
+  background-color: var(--ax-bg-danger-strong-hover);
 }
 
 .navds-button--danger:active {
-  background-color: var(--a-bg-danger-strong-pressed);
+  background-color: var(--ax-bg-danger-strong-pressed);
 }
 
 .navds-button--danger:active:where(:disabled, .navds-button--disabled),
 .navds-button--danger:hover:where(:disabled, .navds-button--disabled) {
-  background-color: var(--a-bg-danger-strong);
+  background-color: var(--ax-bg-danger-strong);
 }
 
 /**************************
