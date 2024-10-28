@@ -18,4 +18,5 @@ export * from "./shared/tabell";
 export * from "./shared/tips";
 export * from "./shared/unik-sidemodul";
 export * from "./shared/video";
+export * from "./shared/language";
 export * from "./templates/ExampletextBlock";
