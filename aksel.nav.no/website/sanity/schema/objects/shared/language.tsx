@@ -1,6 +1,6 @@
-import { defineField, defineType, useFormValue } from "sanity";
+import { toPlainText } from "@portabletext/react";
+import { defineField, defineType } from "sanity";
 import { LanguageIcon } from "@navikt/aksel-icons";
-import { SanityBlockContent } from "@/sanity-block";
 
 export const Language = defineType({
   name: "language",
@@ -19,6 +19,7 @@ export const Language = defineType({
       name: "language",
       type: "string",
       options: { list: [{ title: "Engelsk", value: "en" }] },
+      initialValue: "en",
       validation: (Rule) => Rule.required(),
     }),
   ],
@@ -26,28 +27,12 @@ export const Language = defineType({
     select: {
       body: "body",
       language: "language",
-      arrayKey: "_key",
     },
-  },
-  components: {
-    preview: (values: any) => {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const content: any = useFormValue(["content", { _key: values.arrayKey }]);
-
-      return (
-        <>
-          {values.language && (
-            <div className="float-right border px-1">
-              lang={values.language}
-            </div>
-          )}
-          {content?.body ? (
-            <SanityBlockContent blocks={content.body} />
-          ) : (
-            <div>Tomt innhold eller kan ikke forhåndsvise</div>
-          )}
-        </>
-      );
+    prepare(selection) {
+      return {
+        title: selection.body ? toPlainText(selection.body) : "Tomt innhold",
+        subtitle: `lang=${selection.language}`,
+      };
     },
   },
 });
