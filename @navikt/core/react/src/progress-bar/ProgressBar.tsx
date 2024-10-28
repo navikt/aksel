@@ -139,12 +139,14 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       >
         <div
           className={cl("navds-progress-bar__foreground", {
-            "navds-progress-bar__foreground--indeterminate": simulated?.seconds,
+            "navds-progress-bar__foreground--indeterminate":
+              simulated?.seconds !== undefined,
           })}
           style={{
-            "--__ac-progress-bar-simulated": simulated?.seconds
-              ? `${simulated?.seconds}s`
-              : undefined,
+            "--__ac-progress-bar-simulated":
+              simulated?.seconds !== undefined
+                ? `${simulated?.seconds}s`
+                : undefined,
             "--__ac-progress-bar-translate": `-${translateX}%`,
           }}
         />
