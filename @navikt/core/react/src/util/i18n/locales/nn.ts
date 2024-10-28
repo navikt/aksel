@@ -39,8 +39,6 @@ export default {
   },
   Search: {
     clear: "Tøm",
-    Button: {
-      search: "Søk",
-    },
+    search: "Søk",
   },
 } satisfies Translations;
