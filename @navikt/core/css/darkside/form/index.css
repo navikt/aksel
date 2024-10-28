@@ -1,17 +1,16 @@
-/*
-  Order matters; rearrange with care
-*/
-@import "fieldset.css";
-@import "file-upload.css";
-@import "form.css";
-@import "error-summary.css";
-@import "confirmation-panel.css";
-@import "radio-checkbox.css";
-@import "select.css";
-@import "switch.css";
-@import "text-field.css";
-@import "textarea.css";
-@import "search.css";
-@import "combobox.css";
-@import "form-summary.css";
-@import "form-progress.css";
+@layer aksel.forms.base, aksel.forms.component;
+
+@import "./fieldset.darkside.css" layer(aksel.forms.base);
+@import "./file-upload.darkside.css" layer(aksel.forms.component);
+@import "./form.darkside.css" layer(aksel.forms.component);
+@import "./error-summary.darkside.css" layer(aksel.forms.component);
+@import "./confirmation-panel.darkside.css" layer(aksel.forms.component);
+@import "./radio-checkbox.darkside.css" layer(aksel.forms.component);
+@import "./select.darkside.css" layer(aksel.forms.component);
+@import "./switch.darkside.css" layer(aksel.forms.component);
+@import "./text-field.darkside.css" layer(aksel.forms.component);
+@import "./textarea.darkside.css" layer(aksel.forms.component);
+@import "./search.darkside.css" layer(aksel.forms.component);
+@import "./combobox.darkside.css" layer(aksel.forms.component);
+@import "./form-summary.darkside.css" layer(aksel.forms.component);
+@import "./form-progress.darkside.css" layer(aksel.forms.component);

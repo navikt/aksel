@@ -1,7 +1,9 @@
-@import "box.css";
-@import "bleed.css";
-@import "page.css";
-@import "hgrid.css";
-@import "stack.css";
-@import "responsive.css";
-@import "base.css";
+@layer aksel.layout.component, aksel.layout.base;
+
+@import "./base.darkside.css" layer(aksel.layout.base);
+@import "./box.darkside.css" layer(aksel.layout.component);
+@import "./bleed.darkside.css" layer(aksel.layout.component);
+@import "./page.darkside.css" layer(aksel.layout.component);
+@import "./hgrid.darkside.css" layer(aksel.layout.component);
+@import "./stack.darkside.css" layer(aksel.layout.component);
+@import "./responsive.darkside.css" layer(aksel.layout.component);
