@@ -42,4 +42,7 @@ export default {
       buttonTitle: "Show more",
     },
   },
+  Loader: {
+    title: "Waiting…",
+  },
 } satisfies Translations;

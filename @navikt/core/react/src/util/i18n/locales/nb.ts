@@ -49,4 +49,7 @@ export default {
       buttonTitle: "Vis mer",
     },
   },
+  Loader: {
+    title: "Venter…",
+  },
 } satisfies TranslationMap;

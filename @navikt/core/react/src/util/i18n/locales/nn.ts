@@ -42,4 +42,7 @@ export default {
       buttonTitle: "Vis meir",
     },
   },
+  Loader: {
+    title: "Ventar…",
+  },
 } satisfies Translations;
