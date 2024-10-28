@@ -126,8 +126,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               })
             : translate("progress", {
                 replacements: {
-                  value: Math.round(value),
-                  valueMax: Math.round(valueMax),
+                  current: Math.round(value),
+                  max: Math.round(valueMax),
                 },
               })
         }

@@ -38,7 +38,7 @@ export default {
     },
   },
   ProgressBar: {
-    progress: "{value} av {valueMax}",
+    progress: "{current} av {max}",
     progressUnknown:
       "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
   },

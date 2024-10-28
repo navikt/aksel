@@ -38,7 +38,7 @@ export default {
     },
   },
   ProgressBar: {
-    progress: "{value} of {valueMax}",
+    progress: "{current} of {max}",
     progressUnknown:
       "Progress is unknown, estimated time is {seconds} seconds.",
   },
