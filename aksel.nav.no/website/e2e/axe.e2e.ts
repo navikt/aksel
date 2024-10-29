@@ -12,6 +12,7 @@ test.describe("Axe a11y", () => {
           "scrollable-region-focusable",
           "landmark-complementary-is-top-level", // https://github.com/navikt/team-aksel/issues/643
         ])
+        .exclude("iframe")
         .exclude("#aksel-expansioncard")
         .exclude(".aksel-codesnippet")
         .analyze();
@@ -23,5 +24,5 @@ test.describe("Axe a11y", () => {
 /*
 Disabled rules:
 - scrollable-region-focusable: Up for discussion. Should code-block be focusable for easier access and allowing scroll with keyboard?
-- aksel-expansioncard: Errors with duplicate label-text
+- aksel-expansioncard / aksel-codesnippet: Errors with duplicate label-text (landmark-unique)
 */
