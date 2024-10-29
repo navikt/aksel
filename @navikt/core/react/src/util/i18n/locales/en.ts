@@ -45,4 +45,8 @@ export default {
   Loader: {
     title: "Waiting…",
   },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
 } satisfies Translations;

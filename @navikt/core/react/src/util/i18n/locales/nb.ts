@@ -52,4 +52,8 @@ export default {
   Loader: {
     title: "Venter…",
   },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
 } satisfies TranslationMap;

@@ -45,4 +45,8 @@ export default {
   Loader: {
     title: "Ventar…",
   },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
 } satisfies Translations;
