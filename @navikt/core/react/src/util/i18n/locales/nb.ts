@@ -52,4 +52,20 @@ export default {
   Loader: {
     title: "Venter…",
   },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
 } satisfies TranslationMap;

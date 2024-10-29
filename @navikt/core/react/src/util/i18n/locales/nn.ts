@@ -45,4 +45,20 @@ export default {
   Loader: {
     title: "Ventar…",
   },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
 } satisfies Translations;

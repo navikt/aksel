@@ -45,4 +45,20 @@ export default {
   Loader: {
     title: "Waiting…",
   },
+  Modal: {
+    close: "Close",
+  },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
+  ProgressBar: {
+    progress: "{current} of {max}",
+    progressUnknown:
+      "Progress is unknown, estimated time is {seconds} seconds.",
+  },
+  Search: {
+    clear: "Clear",
+    search: "Search",
+  },
 } satisfies Translations;
