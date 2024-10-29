@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-parse-date: add allowed month input format MMyyyy
+Monthpicker:  Add allowed input format 'MMyyyy'.
