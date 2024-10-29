@@ -1,46 +1,18 @@
-import cl from "clsx";
 import { HGrid, Hide, Show } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import { Placeholder } from "../../../components/website-modules/examples/__parts/ShowHidePlaceholder";
 
 const Example = () => {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+    <HGrid columns={2} gap="4">
       <Show below="md" asChild>
         <Placeholder mobil text="Synlig bare på mobil" />
       </Show>
       <Placeholder text="Alltid synlig" />
       <Hide below="md" asChild>
-        <Placeholder desktop text="Synlig bare på Desktop" />
+        <Placeholder desktop text="Synlig bare på desktop" />
       </Hide>
     </HGrid>
-  );
-};
-
-const Placeholder = ({
-  text,
-  mobil,
-  desktop,
-  className,
-}: {
-  text?: string;
-  mobil?: boolean;
-  desktop?: boolean;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cl(
-        "grid aspect-video h-auto min-h-24 w-auto place-content-center rounded p-2 text-text-on-action",
-        className,
-        {
-          "bg-pink-600": mobil,
-          "bg-violet-600": desktop,
-          "bg-teal-600": !desktop && !mobil,
-        },
-      )}
-    >
-      {text}
-    </div>
   );
 };
 
@@ -54,6 +26,6 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet.",
+  desc: "Vi anbelfaler konsistent bruk av 'above' og 'below' for bedre lesbarhet i koden.",
   sandbox: false,
 };
