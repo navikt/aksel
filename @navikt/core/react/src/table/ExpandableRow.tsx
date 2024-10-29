@@ -77,7 +77,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       value: open,
       onChange: onOpenChange,
     });
-    const translate = useI18n("Table");
+    const translate = useI18n("global");
     const id = useId();
 
     const expansionHandler = (event: React.MouseEvent<HTMLElement>) => {
@@ -122,11 +122,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               >
                 <ChevronDownIcon
                   className="navds-table__expandable-icon"
-                  title={
-                    _open
-                      ? translate("ExpandableRow.collapse")
-                      : translate("ExpandableRow.expand")
-                  }
+                  title={_open ? translate("showLess") : translate("showMore")}
                 />
               </button>
             )}

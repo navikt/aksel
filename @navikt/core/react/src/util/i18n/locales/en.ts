@@ -1,6 +1,11 @@
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    showMore: "Show more",
+    showLess: "Show less",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Choose file",
@@ -35,19 +40,6 @@ export default {
   Chips: {
     Removable: {
       labelSuffix: "delete",
-    },
-  },
-
-  Table: {
-    ExpandableRow: {
-      expand: "Show more",
-      collapse: "Show less",
-    },
-  },
-
-  ExpansionCard: {
-    Header: {
-      buttonTitle: "Show more",
     },
   },
   Loader: {
