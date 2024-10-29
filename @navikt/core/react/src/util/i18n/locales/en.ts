@@ -57,4 +57,8 @@ export default {
     progressUnknown:
       "Progress is unknown, estimated time is {seconds} seconds.",
   },
+  Search: {
+    clear: "Clear",
+    search: "Search",
+  },
 } satisfies Translations;

@@ -57,4 +57,8 @@ export default {
     progressUnknown:
       "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
   },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
 } satisfies Translations;

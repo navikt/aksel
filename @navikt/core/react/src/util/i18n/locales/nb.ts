@@ -64,4 +64,8 @@ export default {
     progressUnknown:
       "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
   },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
 } satisfies TranslationMap;
