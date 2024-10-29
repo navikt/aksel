@@ -1,3 +1,5 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+
 [data-theme="dark"] {
   --__ac-button-primary-text: var(--a-gray-900);
   --__ac-button-primary-bg: var(--a-blue-200);
