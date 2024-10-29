@@ -44,7 +44,7 @@ const SearchButton: SearchButtonType = forwardRef(
           <MagnifyingGlassIcon
             {...(children
               ? { "aria-hidden": true }
-              : { title: translate("Button.search") })}
+              : { title: translate("search") })}
           />
         }
       >

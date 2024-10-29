@@ -39,8 +39,6 @@ export default {
   },
   Search: {
     clear: "Clear",
-    Button: {
-      search: "Search",
-    },
+    search: "Search",
   },
 } satisfies Translations;
