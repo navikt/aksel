@@ -68,12 +68,9 @@
   margin-right: var(--__axc-button-icon-margin);
 }
 
-:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon:first-child,
-:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon:last-child {
-  --__axc-button-icon-margin: -2px;
-}
-
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
+  --__axc-button-icon-margin: -2px;
+
   font-size: 1.25rem;
 }
 
@@ -175,7 +172,7 @@
 }
 
 .navds-button--secondary-neutral:hover {
-  background-color: var(--ax-bg-neutral-hoverA);
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .navds-button--secondary-neutral:active {
