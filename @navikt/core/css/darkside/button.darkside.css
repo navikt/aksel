@@ -98,10 +98,6 @@
   margin-right: -4px;
 }
 
-.navds-button__icon:only-child {
-  margin: 0;
-}
-
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
   &:first-child {
     margin-left: -2px;
@@ -112,6 +108,10 @@
   }
 
   font-size: 1.25rem;
+}
+
+.navds-button__icon:only-child {
+  margin: 0;
 }
 
 /*************************
