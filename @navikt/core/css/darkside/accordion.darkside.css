@@ -1,5 +1,15 @@
 /* stylelint-disable csstools/value-no-unknown-custom-properties */
 
+/* TODO:  */
+
+/* Validate that each 'size' variant is correct */
+
+/* refactor code for 'line' above and below */
+
+/* Discuss animation */
+
+/* Avoid animation from triggering on initial render if default open */
+
 /* ---------------------------- Accordion header ---------------------------- */
 .navds-accordion__header {
   width: 100%;
