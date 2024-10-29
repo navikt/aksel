@@ -44,6 +44,14 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis mer",
+    },
+  },
+  Loader: {
+    title: "Venter…",
+  },
   Pagination: {
     previous: "Forrige",
     next: "Neste",

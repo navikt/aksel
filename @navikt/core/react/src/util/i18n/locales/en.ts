@@ -37,6 +37,14 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Show more",
+    },
+  },
+  Loader: {
+    title: "Waiting…",
+  },
   Pagination: {
     previous: "Previous",
     next: "Next",

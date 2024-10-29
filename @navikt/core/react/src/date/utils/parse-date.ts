@@ -18,6 +18,7 @@ const ALLOWED_INPUT_FORMATS_MONTH = [
   "M-yyyy",
   "MM-yyyy",
   "MM.yyyy",
+  "MMyyyy",
   INPUT_DATE_STRING_FORMAT_MONTH,
   ...ALLOWED_INPUT_FORMATS_DATE,
 ];
