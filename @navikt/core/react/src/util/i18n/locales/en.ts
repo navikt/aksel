@@ -52,4 +52,9 @@ export default {
     previous: "Previous",
     next: "Next",
   },
+  ProgressBar: {
+    progress: "{current} of {max}",
+    progressUnknown:
+      "Progress is unknown, estimated time is {seconds} seconds.",
+  },
 } satisfies Translations;

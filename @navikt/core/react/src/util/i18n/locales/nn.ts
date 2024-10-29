@@ -52,4 +52,9 @@ export default {
     previous: "Førre",
     next: "Neste",
   },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
 } satisfies Translations;

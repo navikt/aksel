@@ -59,4 +59,9 @@ export default {
     previous: "Forrige",
     next: "Neste",
   },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
 } satisfies TranslationMap;
