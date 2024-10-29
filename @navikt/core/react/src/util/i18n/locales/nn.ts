@@ -37,6 +37,21 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis meir",
+    },
+  },
+  Loader: {
+    title: "Ventar…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
   ProgressBar: {
     progress: "{current} av {max}",
     progressUnknown:

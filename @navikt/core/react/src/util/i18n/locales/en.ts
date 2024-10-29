@@ -37,6 +37,21 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Show more",
+    },
+  },
+  Loader: {
+    title: "Waiting…",
+  },
+  Modal: {
+    close: "Close",
+  },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
   ProgressBar: {
     progress: "{current} of {max}",
     progressUnknown:

@@ -6,11 +6,19 @@ import Loader, { LoaderProps } from "./Loader";
 export default {
   title: "ds-react/Loader",
   component: Loader,
+  parameters: {
+    chromatic: { disable: false },
+  },
+} satisfies Meta<typeof Loader>;
+
+type Story = StoryObj<typeof Loader>;
+
+export const Default: Story = {
+  render: (props: LoaderProps) => <Loader {...props} />,
+
   argTypes: {
     size: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: [
         "3xlarge",
         "2xlarge",
@@ -22,26 +30,15 @@ export default {
       ],
     },
     variant: {
-      control: {
-        type: "radio",
-      },
+      control: { type: "radio" },
       options: ["neutral", "interaction", "inverted"],
     },
-  },
-  parameters: {
-    chromatic: { disable: false },
-  },
-} satisfies Meta<typeof Loader>;
-
-type Story = StoryObj<typeof Loader>;
-
-export const Default = {
-  render: (props: LoaderProps) => {
-    return <Loader {...props} />;
-  },
-
-  args: {
-    transparent: false,
+    transparent: {
+      control: { type: "boolean" },
+    },
+    title: {
+      control: { type: "text" },
+    },
   },
 };
 
