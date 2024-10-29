@@ -1,5 +1,9 @@
 interface TranslationMap {
-  [component: string]: Record<string, string | Record<string, string>>;
+  [component: string]:
+    | Record<string, string>
+    | {
+        [subComponent: string]: Record<string, string>;
+      };
 }
 
 export default {
