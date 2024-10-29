@@ -9,7 +9,6 @@ test.describe("Axe a11y", () => {
       await page.waitForLoadState("domcontentloaded");
       const accessibilityScanResults = await new AxeBuilder({ page })
         .disableRules([
-          "definition-list",
           "scrollable-region-focusable",
           "landmark-complementary-is-top-level", // https://github.com/navikt/team-aksel/issues/643
         ])
