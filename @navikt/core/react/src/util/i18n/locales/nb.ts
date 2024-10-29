@@ -52,6 +52,9 @@ export default {
   Loader: {
     title: "Venter…",
   },
+  Modal: {
+    close: "Lukk",
+  },
   Pagination: {
     previous: "Forrige",
     next: "Neste",

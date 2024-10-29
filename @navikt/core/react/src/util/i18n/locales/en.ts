@@ -45,6 +45,9 @@ export default {
   Loader: {
     title: "Waiting…",
   },
+  Modal: {
+    close: "Close",
+  },
   Pagination: {
     previous: "Previous",
     next: "Next",
