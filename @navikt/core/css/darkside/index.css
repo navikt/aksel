@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.utilities;
+@layer aksel.reset, aksel.typography, aksel.theme, aksel.forms, aksel.components, aksel.layout, aksel.utilities;
 
 /* CSS foundations */
 @import "./baseline/reset.darkside.css" layer(aksel.reset);
@@ -10,9 +10,43 @@
 @import "./typography.darkside.css" layer(aksel.typography);
 @import "./baseline/utilities.darkside.css" layer(aksel.utilities);
 
+/* Test: Handles layers itself */
+@import "./form/index.css";
+@import "./primitives/index.css";
+
 /* Theming */
 @import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
 
 /* Components */
-@import "./button.darkside.css" layer(aksel.components);
 @import "../primitives/stack.css" layer(aksel.components);
+@import "./accordion.darkside.css" layer(aksel.components);
+@import "./button.darkside.css" layer(aksel.components);
+@import "./alert.darkside.css" layer(aksel.components);
+@import "./chat.darkside.css" layer(aksel.components);
+@import "./chips.darkside.css" layer(aksel.components);
+@import "./copybutton.darkside.css" layer(aksel.components);
+@import "./dropdown.darkside.css" layer(aksel.components);
+@import "./action-menu.darkside.css" layer(aksel.components);
+@import "./expansioncard.darkside.css" layer(aksel.components);
+@import "./guide-panel.darkside.css" layer(aksel.components);
+@import "./help-text.darkside.css" layer(aksel.components);
+@import "./internalheader.darkside.css" layer(aksel.components);
+@import "./link.darkside.css" layer(aksel.components);
+@import "./loader.darkside.css" layer(aksel.components);
+@import "./modal.darkside.css" layer(aksel.components);
+@import "./pagination.darkside.css" layer(aksel.components);
+@import "./popover.darkside.css" layer(aksel.components);
+@import "./date.darkside.css" layer(aksel.components);
+@import "./tag.darkside.css" layer(aksel.components);
+@import "./timeline.darkside.css" layer(aksel.components);
+@import "./tooltip.darkside.css" layer(aksel.components);
+@import "./toggle-group.darkside.css" layer(aksel.components);
+@import "./panel.darkside.css" layer(aksel.components);
+@import "./link-panel.darkside.css" layer(aksel.components);
+@import "./read-more.darkside.css" layer(aksel.components);
+@import "./progress-bar.darkside.css" layer(aksel.components);
+@import "./skeleton.darkside.css" layer(aksel.components);
+@import "./stepper.darkside.css" layer(aksel.components);
+@import "./table.darkside.css" layer(aksel.components);
+@import "./tabs.darkside.css" layer(aksel.components);
+@import "./list.darkside.css" layer(aksel.components);

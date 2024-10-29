@@ -1,5 +1,36 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable aksel/design-token-exists */
+[data-theme="dark"] {
+  --__ac-button-primary-text: var(--a-gray-900);
+  --__ac-button-primary-bg: var(--a-blue-200);
+  --__ac-button-primary-focus-border: var(--a-gray-900);
+  --__ac-button-primary-hover-bg: var(--a-blue-300);
+  --__ac-button-primary-active-bg: var(--a-blue-400);
+  --__ac-button-secondary-text: var(--a-white);
+  --__ac-button-secondary-hover-text: var(--a-white);
+  --__ac-button-secondary-active-text: var(--a-white);
+  --__ac-button-secondary-active-focus-border: var(--a-gray-900);
+  --__ac-button-secondary-bg: var(--a-gray-900);
+  --__ac-button-secondary-border: var(--a-blue-200);
+  --__ac-button-secondary-hover-bg: var(--a-gray-800);
+  --__ac-button-secondary-focus-border: var(--a-blue-200);
+  --__ac-button-secondary-active-bg: var(--a-gray-700);
+}
+
+[data-theme="light"] {
+  --__ac-button-primary-text: initial;
+  --__ac-button-primary-bg: initial;
+  --__ac-button-primary-focus-border: initial;
+  --__ac-button-primary-hover-bg: initial;
+  --__ac-button-primary-active-bg: initial;
+  --__ac-button-secondary-text: initial;
+  --__ac-button-secondary-hover-text: initial;
+  --__ac-button-secondary-active-text: initial;
+  --__ac-button-secondary-active-focus-border: initial;
+  --__ac-button-secondary-bg: initial;
+  --__ac-button-secondary-border: initial;
+  --__ac-button-secondary-hover-bg: initial;
+  --__ac-button-secondary-focus-border: initial;
+  --__ac-button-secondary-active-bg: initial;
+}
 
 .navds-button {
   padding: var(--ax-spacing-3) var(--ax-spacing-5);
