@@ -44,7 +44,19 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis mer",
+    },
+  },
+  Loader: {
+    title: "Venter…",
+  },
   Modal: {
     close: "Lukk",
+  },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
   },
 } satisfies TranslationMap;

@@ -1,6 +1,8 @@
 "use client";
 
 import { ExpansionCard } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react/Box";
+import { DatePicker, useDatepicker } from "@navikt/ds-react/DatePicker";
 import { omit, useClientLayoutEffect } from "@navikt/ds-react/Utils";
 
 export const ClientComponent = () => {
@@ -18,6 +20,22 @@ export const ClientComponent = () => {
         </ExpansionCard.Header>
         <ExpansionCard.Content>innhold</ExpansionCard.Content>
       </ExpansionCard>
+    </div>
+  );
+};
+
+export const MyDatePicker = () => {
+  const { datepickerProps, inputProps, selectedDay } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.info,
+  });
+
+  return (
+    <div>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+      <Box paddingBlock="4 0">{selectedDay?.toLocaleDateString()}</Box>
     </div>
   );
 };
