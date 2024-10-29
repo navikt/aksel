@@ -106,6 +106,7 @@
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon:last-child {
   --__axc-button-icon-margin: -2px;
 }
+
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
   font-size: 1.25rem;
 }
