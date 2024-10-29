@@ -8,6 +8,14 @@ markDefs[]{
   },
 }`;
 
+const language = `_type == "language" =>{
+  ...,
+  body[]{
+    ...,
+    ${markDef}
+  }
+}`;
+
 const alert = `_type == "alert" =>{
   ...,
   body[]{
@@ -160,6 +168,7 @@ const propsSeksjon = `_type == "props_seksjon" =>{
 const tokenRef = `_type == "token_ref"=>@->`;
 
 export const destructureBlocks = `
+${language},
 ${alert},
 ${attachment},
 ${tips},

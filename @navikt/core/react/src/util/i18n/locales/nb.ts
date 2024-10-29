@@ -40,6 +40,26 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ExpansionCard: {
+    Header: {
+      buttonTitle: "Vis mer",
+    },
+  },
+  Loader: {
+    title: "Venter…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
   Search: {
     clear: "Tøm",
     search: "Søk",
