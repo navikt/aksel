@@ -90,23 +90,23 @@
   display: flex;
 }
 
+:root {
+  --__axc-button-icon-margin: -4px;
+}
+
 .navds-button__icon:first-child {
-  margin-left: -4px;
+  margin-left: var(--__axc-button-icon-margin);
 }
 
 .navds-button__icon:last-child {
-  margin-right: -4px;
+  margin-right: var(--__axc-button-icon-margin);
 }
 
+:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon:first-child,
+:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon:last-child {
+  --__axc-button-icon-margin: -2px;
+}
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
-  &:first-child {
-    margin-left: -2px;
-  }
-
-  &:last-child {
-    margin-right: -2px;
-  }
-
   font-size: 1.25rem;
 }
 
