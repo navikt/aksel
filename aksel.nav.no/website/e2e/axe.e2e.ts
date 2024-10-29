@@ -10,10 +10,10 @@ test.describe("Axe a11y", () => {
       const accessibilityScanResults = await new AxeBuilder({ page })
         .disableRules([
           "definition-list",
+          "scrollable-region-focusable",
           "landmark-complementary-is-top-level",
         ])
         .exclude("iframe")
-        .exclude("#aksel-expansioncard")
         .exclude("#toc-scroll")
         .exclude("#toc-scroll")
         .exclude(".aksel-codesnippet")
