@@ -12,9 +12,7 @@ test.describe("Axe a11y", () => {
           "scrollable-region-focusable",
           "landmark-complementary-is-top-level", // https://github.com/navikt/team-aksel/issues/643
         ])
-        .exclude("iframe")
         .exclude("#aksel-expansioncard")
-        .exclude("#toc-scroll")
         .exclude(".aksel-codesnippet")
         .analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
@@ -24,8 +22,6 @@ test.describe("Axe a11y", () => {
 
 /*
 Disabled rules:
-- definition-list: 'div' as a direct child of 'dl' should be valid. Ignoring failed test.
 - scrollable-region-focusable: Up for discussion. Should code-block be focusable for easier access and allowing scroll with keyboard?
 - aksel-expansioncard: Errors with duplicate label-text
-- toc-scroll: Axe does not wait for fadein animation to finish before scanning. This causes false positives for low contrast.
 */
