@@ -34,7 +34,6 @@
 
 .navds-button {
   padding: var(--ax-spacing-3) var(--ax-spacing-5);
-  border-style: none;
   border-radius: var(--ax-border-radius-medium);
   display: inline-flex;
   cursor: pointer;
@@ -87,7 +86,6 @@
 }
 
 .navds-button__icon {
-  margin: -4px;
   font-size: 1.5rem;
   display: flex;
 }
@@ -105,7 +103,14 @@
 }
 
 :where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
-  margin: -2px;
+  &:first-child {
+    margin-left: -2px;
+  }
+
+  &:last-child {
+    margin-right: -2px;
+  }
+
   font-size: 1.25rem;
 }
 
