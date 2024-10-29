@@ -7,6 +7,11 @@ interface TranslationMap {
 }
 
 export default {
+  global: {
+    showMore: "Vis mer",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Velg fil",
@@ -42,11 +47,6 @@ export default {
     Removable: {
       /** Will be appended to the accessible name for the button. */
       labelSuffix: "slett",
-    },
-  },
-  ExpansionCard: {
-    Header: {
-      buttonTitle: "Vis mer",
     },
   },
   Loader: {
