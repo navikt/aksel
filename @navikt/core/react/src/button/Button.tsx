@@ -1,10 +1,9 @@
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { OverridableComponent } from "../util/types";
 
@@ -82,29 +81,14 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       ref,
     ) => {
       const buttonRef = useRef<HTMLButtonElement | null>(null);
-      const [widthOverride, setWidthOverride] = useState<number>();
 
       const mergedRef = useMergeRefs(buttonRef, ref);
 
-      useClientLayoutEffect(() => {
-        if (loading && buttonRef?.current?.getBoundingClientRect()?.width) {
-          const requestID = window.requestAnimationFrame(() => {
-            setWidthOverride(
-              buttonRef?.current?.getBoundingClientRect()?.width,
-            );
-          });
-          return () => {
-            setWidthOverride(undefined);
-            cancelAnimationFrame(requestID);
-          };
-        }
-      }, [loading, children, buttonRef?.current]);
-
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-        disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
+        disabled ?? loading ? omit(rest, ["href"]) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (e.key === " " && !disabled && !widthOverride) {
+        if (e.key === " " && !disabled && !loading) {
           e.currentTarget.click();
         }
       };
@@ -121,33 +105,25 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             `navds-button--${variant}`,
             `navds-button--${size}`,
             {
-              "navds-button--loading": widthOverride,
+              "navds-button--loading": loading,
               "navds-button--icon-only": !!icon && !children,
-              "navds-button--disabled": disabled ?? widthOverride,
+              "navds-button--disabled": disabled ?? loading,
             },
           )}
-          style={{
-            ...style,
-            width: widthOverride,
-          }}
-          disabled={disabled ?? widthOverride ? true : undefined}
+          style={style}
+          disabled={disabled ?? loading ? true : undefined}
         >
-          {loading ? (
-            <Loader size={size} />
-          ) : (
-            <>
-              {icon && iconPosition === "left" && (
-                <span className="navds-button__icon">{icon}</span>
-              )}
-              {children && (
-                <Label as="span" size={size === "medium" ? "medium" : "small"}>
-                  {children}
-                </Label>
-              )}
-              {icon && iconPosition === "right" && (
-                <span className="navds-button__icon">{icon}</span>
-              )}
-            </>
+          {icon && iconPosition === "left" && (
+            <span className="navds-button__icon">{icon}</span>
+          )}
+          {loading && <Loader size={size} />}
+          {children && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {children}
+            </Label>
+          )}
+          {icon && iconPosition === "right" && (
+            <span className="navds-button__icon">{icon}</span>
           )}
         </Component>
       );
