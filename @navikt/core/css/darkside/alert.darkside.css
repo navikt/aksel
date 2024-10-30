@@ -97,7 +97,7 @@
     margin-block-start: var(--ax-spacing-05);
   }
 
-  > .-navds-alert__icon {
+  > .navds-alert__icon {
     margin-block-start: var(--ax-spacing-05);
   }
 
