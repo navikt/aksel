@@ -77,12 +77,13 @@
     "tinycolor2": "^1.6.0",
     "zod": "^3.22.4"
   },
+  "_note": "When upgrading @axe-core/playwright, try removing the resolution entry in the root package.json",
   "devDependencies": {
-    "@axe-core/playwright": "^4.5.2",
+    "@axe-core/playwright": "4.10.0",
     "@babel/core": "^7.19.0",
     "@next/bundle-analyzer": "^14.2.3",
     "@next/eslint-plugin-next": "^14.2.3",
-    "@playwright/test": "1.35.1",
+    "@playwright/test": "1.48.1",
     "@sanity/block-tools": "3.59.0",
     "@sanity/schema": "3.59.0",
     "@types/jscodeshift": "^0.11.11",
@@ -102,7 +103,7 @@
     "showdown": "^2.1.0",
     "start-server-and-test": "^2.0.3",
     "tsx": "^4.19.1",
-    "typescript": "^5.1.6",
+    "typescript": "5.5.4",
     "vitest": "^1.2.2"
   }
 }

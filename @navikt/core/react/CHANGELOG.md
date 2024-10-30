@@ -1,5 +1,69 @@
 # @navikt/ds-react
 
+## 7.4.1
+
+### Patch Changes
+
+- Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
+
+- Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
+- Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
+
+- Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.1
+  - @navikt/aksel-icons@7.4.1
+
+## 7.4.0
+
+### Minor Changes
+
+- Combobox: Enable option to add a new value while autocompleting and highlight matches in FilteredOptions. ([#3225](https://github.com/navikt/aksel/pull/3225))
+
+### Patch Changes
+
+- Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+- Combobox: Don't scroll when browsing list with mouse ([#3265](https://github.com/navikt/aksel/pull/3265))
+
+- Avoid warning about element.ref in React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+- Checkbox: Remove redundant attribute aria-checked ([#3274](https://github.com/navikt/aksel/pull/3274))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.0
+  - @navikt/aksel-icons@7.4.0
+
+## 7.3.1
+
+### Patch Changes
+
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.3.1
+  - @navikt/aksel-icons@7.3.1
+
+## 7.3.0
+
+### Minor Changes
+
+- ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### Patch Changes
+
+- Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+- Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.3.0
+  - @navikt/aksel-icons@7.3.0
+
 ## 7.2.1
 
 ### Patch Changes

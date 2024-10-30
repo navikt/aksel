@@ -6,17 +6,17 @@ export function semanticTokenConfig(
   return {
     text: {
       default: {
-        value: "{a.neutral.1000.value}",
+        value: "{ax.neutral.1000.value}",
         type: "color",
         group: "text",
       },
       subtle: {
-        value: "{a.neutral.900.value}",
+        value: "{ax.neutral.900.value}",
         type: "color",
         group: "text",
       },
       icon: {
-        value: "{a.neutral.600.value}",
+        value: "{ax.neutral.600.value}",
         type: "color",
         group: "text",
       },
@@ -42,12 +42,14 @@ export function semanticTokenConfig(
       },
       raised: {
         value:
-          theme === "light" ? "{a.neutral.000.value}" : "{a.neutral.200.value}",
+          theme === "light"
+            ? "{ax.neutral.000.value}"
+            : "{ax.neutral.200.value}",
         type: "color",
         group: "background",
       },
       sunken: {
-        value: theme === "light" ? "{a.neutral.200.value}" : "#07090D",
+        value: theme === "light" ? "{ax.neutral.200.value}" : "#07090D",
         type: "color",
         group: "background",
       },
@@ -59,22 +61,22 @@ export function semanticTokenConfig(
     },
     border: {
       default: {
-        value: "{a.neutral.500.value}",
+        value: "{ax.neutral.500.value}",
         type: "color",
         group: "border",
       },
       subtle: {
-        value: "{a.neutral.400.value}",
+        value: "{ax.neutral.400.value}",
         type: "color",
         group: "border",
       },
       subtleA: {
-        value: "{a.neutral.400A.value}",
+        value: "{ax.neutral.400A.value}",
         type: "color",
         group: "border",
       },
       strong: {
-        value: "{a.neutral.600.value}",
+        value: "{ax.neutral.600.value}",
         type: "color",
         group: "border",
       },
@@ -83,7 +85,7 @@ export function semanticTokenConfig(
        * - Discuss with brand
        */
       focus: {
-        value: "{a.accent.700.value}",
+        value: "{ax.accent.700.value}",
         type: "color",
         group: "border",
         /**

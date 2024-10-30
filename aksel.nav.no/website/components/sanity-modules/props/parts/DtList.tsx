@@ -34,10 +34,6 @@ type Prop = Partial<{
 }>;
 
 export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
-  if (prop?.description?.includes("@private")) {
-    return null;
-  }
-
   return (
     <BodyShort as="ul" className="dtlist overflow-x-auto">
       {prop.type && (

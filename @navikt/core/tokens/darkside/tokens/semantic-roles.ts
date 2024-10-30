@@ -12,112 +12,112 @@ const configForRole = (
 ): StyleDictionaryTokenConfig<"color"> => ({
   bg: {
     [role]: {
-      value: `{a.${role}.100.value}`,
+      value: `{ax.${role}.100.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-hover`]: {
-      value: `{a.${role}.200.value}`,
+      value: `{ax.${role}.200.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-hoverA`]: {
-      value: `{a.${role}.200A.value}`,
+      value: `{ax.${role}.200A.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderate`]: {
-      value: `{a.${role}.200.value}`,
+      value: `{ax.${role}.200.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderateA`]: {
-      value: `{a.${role}.200A.value}`,
+      value: `{ax.${role}.200A.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderate-hover`]: {
-      value: `{a.${role}.300.value}`,
+      value: `{ax.${role}.300.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderate-hoverA`]: {
-      value: `{a.${role}.300A.value}`,
+      value: `{ax.${role}.300A.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderate-pressed`]: {
-      value: `{a.${role}.400.value}`,
+      value: `{ax.${role}.400.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-moderate-pressedA`]: {
-      value: `{a.${role}.400A.value}`,
+      value: `{ax.${role}.400A.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-strong`]: {
-      value: `{a.${role}.600.value}`,
+      value: `{ax.${role}.600.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-strong-hover`]: {
-      value: `{a.${role}.700.value}`,
+      value: `{ax.${role}.700.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-strong-pressed`]: {
-      value: `{a.${role}.800.value}`,
+      value: `{ax.${role}.800.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-raised`]: {
       /* We bump raised for darkmode */
-      value: `{a.${role}.${theme === "light" ? "100" : "200"}.value}`,
+      value: `{ax.${role}.${theme === "light" ? "100" : "200"}.value}`,
       type: "color",
       group: `background.${role}`,
     },
     [`${role}-raised-hover`]: {
-      value: `{a.${role}.${theme === "light" ? "200" : "300"}.value}`,
+      value: `{ax.${role}.${theme === "light" ? "200" : "300"}.value}`,
       type: "color",
       group: `background.${role}`,
     },
   },
   text: {
     [role]: {
-      value: `{a.${role}.700.value}`,
+      value: `{ax.${role}.700.value}`,
       type: "color",
       group: `text.${role}`,
     },
     [`${role}-strong`]: {
-      value: `{a.${role}.900.value}`,
+      value: `{ax.${role}.900.value}`,
       type: "color",
       group: `text.${role}`,
     },
     [`${role}-icon`]: {
-      value: `{a.${role}.600.value}`,
+      value: `{ax.${role}.600.value}`,
       type: "color",
       group: `text.${role}`,
     },
   },
   border: {
     [role]: {
-      value: `{a.${role}.500.value}`,
+      value: `{ax.${role}.500.value}`,
       type: "color",
       group: `border.${role}`,
     },
     [`${role}-subtle`]: {
-      value: `{a.${role}.400.value}`,
+      value: `{ax.${role}.400.value}`,
       type: "color",
       group: `border.${role}`,
     },
     [`${role}-subtleA`]: {
-      value: `{a.${role}.400A.value}`,
+      value: `{ax.${role}.400A.value}`,
       type: "color",
       group: `border.${role}`,
     },
     [`${role}-strong`]: {
-      value: `{a.${role}.600.value}`,
+      value: `{ax.${role}.600.value}`,
       type: "color",
       group: `border.${role}`,
     },

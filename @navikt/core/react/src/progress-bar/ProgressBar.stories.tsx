@@ -100,7 +100,7 @@ Sizes.args = {
 
 export const IndeterminateState: Story = {
   render: () => {
-    const values = [0, 5, 10, 20];
+    const values = [0, 5.7, 10, 20];
     return (
       <>
         {values.map((value) => (

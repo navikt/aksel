@@ -1,6 +1,11 @@
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    showMore: "Vis meir",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Vel fil",
@@ -36,5 +41,32 @@ export default {
     Removable: {
       labelSuffix: "slett",
     },
+  },
+  ErrorSummary: {
+    heading: "Du må rette desse feila før du kan halde fram:",
+  },
+  Loader: {
+    title: "Ventar…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
+  Textarea: {
+    maxLength: "Tekstområde med plass til {maxLength} teikn.",
+    charsTooMany: "{chars} teikn for mykje",
+    charsLeft: "{chars} teikn igjen",
   },
 } satisfies Translations;

@@ -50,7 +50,7 @@ const ModeDecorator = ({ children, mode }) => {
     document.head.appendChild(style);
 
     if (mode === "darkside") {
-      document.body.style.setProperty("background", "var(--a-bg-default)");
+      document.body.style.setProperty("background", "var(--ax-bg-default)");
     }
 
     return () => {
@@ -63,6 +63,11 @@ const ModeDecorator = ({ children, mode }) => {
 };
 
 export const decorators = [
+  (StoryFn, context) => (
+    <ModeDecorator mode={context.globals.mode}>
+      <StoryFn />
+    </ModeDecorator>
+  ),
   withThemeByClassName({
     themes: {
       light: "light",
@@ -70,11 +75,4 @@ export const decorators = [
     },
     defaultTheme: "light",
   }),
-  (StoryFn, context) => {
-    return (
-      <ModeDecorator mode={context.globals.mode}>
-        <StoryFn />
-      </ModeDecorator>
-    );
-  },
 ];

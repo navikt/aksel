@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
-  BrailleIcon,
   CheckmarkIcon,
   ForkIcon,
   HeadHeartIcon,
@@ -322,7 +321,19 @@ export const Icons: Story = {
       <List title="Best title">
         <List.Item
           title="Lorem Ipsum Dolor Sit Amet"
-          icon={<BrailleIcon aria-hidden />}
+          icon={
+            <svg
+              width="12"
+              height="8"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ transform: "rotate(45deg)" }}
+              aria-hidden
+            >
+              <rect width="24" height="24" rx="6" fill="var(--a-icon-alt-3)" />
+            </svg>
+          }
         >
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
         </List.Item>

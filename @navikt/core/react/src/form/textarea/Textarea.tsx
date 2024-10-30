@@ -180,17 +180,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...(describedBy ? { "aria-describedby": describedBy } : {})}
         />
         {hasMaxLength && !readOnly && !inputProps.disabled && (
-          <>
-            <span id={maxLengthId} className="navds-sr-only">
-              {`Tekstområde med plass til ${maxLength} tegn.`}
-            </span>
-            <Counter
-              maxLength={maxLength}
-              currentLength={props.value?.length ?? uncontrolledValue.length}
-              size={size}
-              i18n={i18n}
-            />
-          </>
+          <Counter
+            maxLengthId={maxLengthId}
+            maxLength={maxLength}
+            currentLength={props.value?.length ?? uncontrolledValue.length}
+            size={size}
+            i18n={i18n}
+          />
         )}
         <div
           className="navds-form-field__error"

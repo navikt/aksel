@@ -7,6 +7,11 @@ interface TranslationMap {
 }
 
 export default {
+  global: {
+    showMore: "Vis mer",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Velg fil",
@@ -43,5 +48,33 @@ export default {
       /** Will be appended to the accessible name for the button. */
       labelSuffix: "slett",
     },
+  },
+  ErrorSummary: {
+    heading: "Du må rette disse feilene før du kan fortsette:",
+  },
+  Loader: {
+    title: "Venter…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
+  Textarea: {
+    /** Screen readers only */
+    maxLength: "Tekstområde med plass til {maxLength} tegn.",
+    charsTooMany: "{chars} tegn for mye",
+    charsLeft: "{chars} tegn igjen",
   },
 } satisfies TranslationMap;

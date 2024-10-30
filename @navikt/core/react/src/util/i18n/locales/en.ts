@@ -1,6 +1,11 @@
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    showMore: "Show more",
+    showLess: "Show less",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Choose file",
@@ -36,5 +41,32 @@ export default {
     Removable: {
       labelSuffix: "delete",
     },
+  },
+  ErrorSummary: {
+    heading: "You must correct the following errors before you can continue:",
+  },
+  Loader: {
+    title: "Waiting…",
+  },
+  Modal: {
+    close: "Close",
+  },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
+  ProgressBar: {
+    progress: "{current} of {max}",
+    progressUnknown:
+      "Progress is unknown, estimated time is {seconds} seconds.",
+  },
+  Search: {
+    clear: "Clear",
+    search: "Search",
+  },
+  Textarea: {
+    maxLength: "Text area with a {maxLength} character limit.",
+    charsTooMany: "{chars} characters too many",
+    charsLeft: "{chars} characters left",
   },
 } satisfies Translations;

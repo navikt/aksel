@@ -10,6 +10,7 @@ const views = () => {
     list.push(
       defineField({
         title: `Ingress ${kat.title}`,
+        description: "Støtter markdown-lenker",
         name: `ingress_${kat.value}`,
         type: "text",
         rows: 2,

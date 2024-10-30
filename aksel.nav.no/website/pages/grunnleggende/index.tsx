@@ -15,6 +15,7 @@ import {
   SidebarT,
 } from "@/types";
 import { generateSidebar } from "@/utils";
+import { TextWithMarkdownLink } from "@/web/TextWithMarkdownLink";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import { grunnleggendeKategorier } from "../../sanity/config";
@@ -97,7 +98,9 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
               <div>
                 {page?.[`ingress_${kat.value}`] && (
                   <BodyLong size="large" className="mb-4 only:mb-7">
-                    {page[`ingress_${kat.value}`]}
+                    <TextWithMarkdownLink>
+                      {page[`ingress_${kat.value}`]}
+                    </TextWithMarkdownLink>
                   </BodyLong>
                 )}
                 {page?.[`intro_${kat.value}`] && (

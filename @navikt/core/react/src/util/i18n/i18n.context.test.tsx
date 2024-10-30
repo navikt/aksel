@@ -79,17 +79,15 @@ describe("useI18n", () => {
     };
     const { result } = renderHook(() => useI18n("FileUpload", i18n));
     const translate = result.current;
-    expect(
-      translate("item.uploading", { replacements: { name: "John", cnt: 3 } }),
-    ).toBe("Hello, John. You have 3 messages.");
+    expect(translate("item.uploading", { name: "John", cnt: 3 })).toBe(
+      "Hello, John. You have 3 messages.",
+    );
   });
 
   test("should throw an error if replacement key is not found", () => {
     const i18n = { item: { uploading: "Hello, {name}" } };
     const { result } = renderHook(() => useI18n("FileUpload", i18n));
     const translate = result.current;
-    expect(() =>
-      translate("item.uploading", { replacements: { other: "John" } }),
-    ).toThrowError();
+    expect(() => translate("item.uploading", { other: "John" })).toThrowError();
   });
 });

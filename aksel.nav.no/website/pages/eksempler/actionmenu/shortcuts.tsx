@@ -4,7 +4,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div style={{ minHeight: "28rem" }}>
+    <div style={{ minHeight: "20rem" }}>
       <ActionMenu>
         <ActionMenu.Trigger>
           <Button
