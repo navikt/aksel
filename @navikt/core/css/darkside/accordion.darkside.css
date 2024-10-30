@@ -18,6 +18,12 @@
     font-weight: var(--ax-font-weight-regular);
   }
 
+  @media (forced-colors: active) {
+    border: 1px solid buttonborder;
+    background-color: canvas;
+    color: canvastext;
+  }
+
   &:hover {
     background-color: var(--ax-bg-accent-hoverA);
     color: var(--ax-text-accent-strong);
@@ -30,6 +36,12 @@
     > .navds-accordion__icon-wrapper {
       background-color: var(--ax-bg-accent-strong-hover);
       color: var(--ax-text-accent-contrast);
+    }
+
+    @media (forced-colors: active) {
+      background-color: canvas;
+      border: 1px solid highlight;
+      color: highlight;
     }
   }
 
@@ -132,6 +144,10 @@
   height: calc(100% - var(--ax-spacing-7));
   width: var(--__acx-accordion-content-line-width);
   background-color: var(--ax-border-subtleA);
+
+  @media (forced-colors: active) {
+    background-color: canvastext;
+  }
 }
 
 .navds-accordion__item--open > .navds-accordion__content {
