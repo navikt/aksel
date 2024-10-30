@@ -42,6 +42,9 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ErrorSummary: {
+    heading: "You must correct the following errors before you can continue:",
+  },
   Loader: {
     title: "Waiting…",
   },

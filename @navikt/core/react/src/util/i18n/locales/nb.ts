@@ -49,6 +49,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ErrorSummary: {
+    heading: "Du må rette disse feilene før du kan fortsette:",
+  },
   Loader: {
     title: "Venter…",
   },
