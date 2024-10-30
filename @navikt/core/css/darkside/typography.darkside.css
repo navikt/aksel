@@ -1,4 +1,6 @@
-/* New in darkside */
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+
+/* ------------------------- Global typo-definitions ------------------------ */
 body,
 :host {
   font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
@@ -6,207 +8,198 @@ body,
   font-size: 1.125rem;
 }
 
-/* Start old CSS (pre darkside) */
-[data-theme="dark"] {
-  --__ac-typo-error-text: var(--a-red-300);
-  --__ac-typo-text-subtle: var(--a-gray-300);
-}
-
-[data-theme="light"] {
-  --__ac-typo-error-text: initial;
-  --__ac-typo-text-subtle: initial;
-}
+/* ----------------------------- Typo-components ---------------------------- */
 
 /* Heading */
 .navds-heading {
-  font-weight: var(--a-font-weight-bold);
+  font-weight: var(--ax-font-weight-bold);
   margin: 0;
 }
 
 .navds-heading--xlarge {
-  font-size: var(--a-font-size-heading-2xlarge);
+  font-size: var(--ax-font-size-heading-2xlarge);
   letter-spacing: -0.01em;
-  line-height: var(--a-font-line-height-heading-2xlarge);
+  line-height: var(--ax-font-line-height-heading-2xlarge);
 }
 
 .navds-heading--xlarge.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-5);
+  margin-bottom: var(--ax-spacing-5);
 }
 
 .navds-heading--large {
-  font-size: var(--a-font-size-heading-xlarge);
+  font-size: var(--ax-font-size-heading-xlarge);
   letter-spacing: -0.008em;
-  line-height: var(--a-font-line-height-heading-xlarge);
+  line-height: var(--ax-font-line-height-heading-xlarge);
 }
 
 .navds-heading--large.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-4);
+  margin-bottom: var(--ax-spacing-4);
 }
 
 /* Mobile scale */
 @media (max-width: 480px) {
   .navds-heading--xlarge {
-    font-size: var(--a-font-size-heading-xlarge);
+    font-size: var(--ax-font-size-heading-xlarge);
     letter-spacing: -0.008em;
-    line-height: var(--a-font-line-height-heading-xlarge);
+    line-height: var(--ax-font-line-height-heading-xlarge);
   }
 
   .navds-heading--xlarge.navds-typo--spacing {
-    margin-bottom: var(--a-spacing-4);
+    margin-bottom: var(--ax-spacing-4);
   }
 
   .navds-heading--large {
-    font-size: var(--a-font-size-heading-large);
+    font-size: var(--ax-font-size-heading-large);
     letter-spacing: -0.004em;
-    line-height: var(--a-font-line-height-heading-large);
+    line-height: var(--ax-font-line-height-heading-large);
   }
 
   .navds-heading--large.navds-typo--spacing {
-    margin-bottom: var(--a-spacing-3);
+    margin-bottom: var(--ax-spacing-3);
   }
 }
 
 .navds-heading--medium {
-  font-size: var(--a-font-size-heading-medium);
+  font-size: var(--ax-font-size-heading-medium);
   letter-spacing: -0.002em;
-  line-height: var(--a-font-line-height-heading-medium);
+  line-height: var(--ax-font-line-height-heading-medium);
 }
 
 .navds-heading--medium.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--ax-spacing-3);
 }
 
 .navds-heading--small {
-  font-size: var(--a-font-size-heading-small);
+  font-size: var(--ax-font-size-heading-small);
   letter-spacing: -0.001em;
-  line-height: var(--a-font-line-height-heading-small);
+  line-height: var(--ax-font-line-height-heading-small);
 }
 
 .navds-heading--small.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--ax-spacing-3);
 }
 
 .navds-heading--xsmall {
-  font-size: var(--a-font-size-heading-xsmall);
+  font-size: var(--ax-font-size-heading-xsmall);
   letter-spacing: -0.001em;
-  line-height: var(--a-font-line-height-heading-xsmall);
+  line-height: var(--ax-font-line-height-heading-xsmall);
 }
 
 .navds-heading--xsmall.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--ax-spacing-3);
 }
 
 /* Ingress */
 .navds-ingress {
-  font-size: var(--a-font-size-xlarge);
-  font-weight: var(--a-font-weight-regular);
+  font-size: var(--ax-font-size-xlarge);
+  font-weight: var(--ax-font-weight-regular);
   letter-spacing: -0.001em;
-  line-height: var(--a-font-line-height-xlarge);
+  line-height: var(--ax-font-line-height-xlarge);
   margin: 0;
 }
 
 .navds-ingress.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-10);
+  margin-bottom: var(--ax-spacing-10);
 }
 
 /* Body */
 .navds-body-long {
-  font-size: var(--a-font-size-large);
-  font-weight: var(--a-font-weight-regular);
+  font-size: var(--ax-font-size-large);
+  font-weight: var(--ax-font-weight-regular);
   letter-spacing: 0;
-  line-height: var(--a-font-line-height-xlarge);
+  line-height: var(--ax-font-line-height-xlarge);
   margin: 0;
 }
 
 .navds-body-long.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-7);
+  margin-bottom: var(--ax-spacing-7);
 }
 
 .navds-body-long--large {
-  font-size: var(--a-font-size-xlarge);
+  font-size: var(--ax-font-size-xlarge);
   letter-spacing: -0.0013em;
-  line-height: var(--a-font-line-height-xlarge);
+  line-height: var(--ax-font-line-height-xlarge);
 }
 
 .navds-body-long--large.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-10);
+  margin-bottom: var(--ax-spacing-10);
 }
 
 .navds-body-long--small {
-  font-size: var(--a-font-size-medium);
+  font-size: var(--ax-font-size-medium);
   letter-spacing: 0.002em;
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--ax-font-line-height-large);
 }
 
 .navds-body-long--small.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-6);
+  margin-bottom: var(--ax-spacing-6);
 }
 
 .navds-body-short {
-  font-size: var(--a-font-size-large);
-  font-weight: var(--a-font-weight-regular);
+  font-size: var(--ax-font-size-large);
+  font-weight: var(--ax-font-weight-regular);
   letter-spacing: 0;
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--ax-font-line-height-large);
   margin: 0;
 }
 
 .navds-body-short.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--ax-spacing-3);
 }
 
 .navds-body-short--large {
-  font-size: var(--a-font-size-xlarge);
+  font-size: var(--ax-font-size-xlarge);
   letter-spacing: -0.0013em;
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--ax-font-line-height-large);
 }
 
 .navds-body-short--large.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-4);
+  margin-bottom: var(--ax-spacing-4);
 }
 
 .navds-body-short--small {
-  font-size: var(--a-font-size-medium);
+  font-size: var(--ax-font-size-medium);
   letter-spacing: 0.002em;
-  line-height: var(--a-font-line-height-medium);
+  line-height: var(--ax-font-line-height-medium);
 }
 
 .navds-body-short--small.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-2);
+  margin-bottom: var(--ax-spacing-2);
 }
 
 /* Label */
 .navds-label {
-  font-size: var(--a-font-size-large);
-  font-weight: var(--a-font-weight-bold);
+  font-size: var(--ax-font-size-large);
+  font-weight: var(--ax-font-weight-bold);
   letter-spacing: 0;
-  line-height: var(--a-font-line-height-large);
+  line-height: var(--ax-font-line-height-large);
   margin: 0;
 }
 
 .navds-label.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-3);
+  margin-bottom: var(--ax-spacing-3);
 }
 
 .navds-label--small {
-  font-size: var(--a-font-size-medium);
+  font-size: var(--ax-font-size-medium);
   letter-spacing: 0.002em;
-  line-height: var(--a-font-line-height-medium);
+  line-height: var(--ax-font-line-height-medium);
 }
 
 .navds-label--small.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-2);
+  margin-bottom: var(--ax-spacing-2);
 }
 
 /* Small text */
 .navds-detail {
-  font-size: var(--a-font-size-small);
+  font-size: var(--ax-font-size-small);
   letter-spacing: 0.004em;
-  line-height: var(--a-font-line-height-medium);
+  line-height: var(--ax-font-line-height-medium);
   margin: 0;
 }
 
 .navds-detail.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-2);
+  margin-bottom: var(--ax-spacing-2);
 }
 
 .navds-detail.navds-typo--uppercase {
@@ -214,17 +207,18 @@ body,
 }
 
 .navds-detail--small {
-  font-weight: var(--a-font-weight-regular);
+  font-weight: var(--ax-font-weight-regular);
 }
 
 .navds-detail--small.navds-typo--spacing {
-  margin-bottom: var(--a-spacing-2);
+  margin-bottom: var(--ax-spacing-2);
 }
 
 .navds-error-message {
-  color: var(--ac-typo-error-text, var(--__ac-typo-error-text, var(--a-text-danger)));
+  color: var(--ax-text-danger);
 }
 
+/* -------------------------------- Utilities ------------------------------- */
 .navds-typo--truncate {
   overflow: hidden;
   white-space: nowrap;
@@ -232,7 +226,7 @@ body,
 }
 
 .navds-typo--semibold {
-  font-weight: var(--a-font-weight-bold);
+  font-weight: var(--ax-font-weight-bold);
 }
 
 .navds-typo--align-start {
@@ -261,5 +255,5 @@ body,
 }
 
 .navds-typo--color-subtle {
-  color: var(--__ac-typo-text-subtle, var(--a-text-subtle));
+  color: var(--ax-text-subtle);
 }

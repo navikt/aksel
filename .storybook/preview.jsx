@@ -50,7 +50,7 @@ const ModeDecorator = ({ children, mode }) => {
     document.head.appendChild(style);
 
     if (mode === "darkside") {
-      document.body.style.setProperty("background", "var(--a-bg-default)");
+      document.body.style.setProperty("background", "var(--ax-bg-default)");
     }
 
     return () => {

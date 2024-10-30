@@ -1,10 +1,12 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+
 /* To support nested theming, we want to declare color on each scoped elements */
 :root,
 :host,
 .light {
-  color: var(--a-text-default);
+  color: var(--ax-text-default);
 }
 
 .dark {
-  color: var(--a-text-default);
+  color: var(--ax-text-default);
 }
