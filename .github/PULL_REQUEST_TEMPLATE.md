@@ -6,7 +6,7 @@
 
 - [ ] JSDoc
 - [ ] Examples
-- [ ] Documentation
+- [ ] Documentation / Decision Records
 - [ ] Storybook
 - [ ] Style mappings (`@navikt/core/css/config/_mappings.js`)
 - [ ] Component tokens (`@navikt/core/css/tokens.json`)

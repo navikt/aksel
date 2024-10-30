@@ -14,7 +14,7 @@ const ExpansionCardHeader = forwardRef<
   ExpansionCardHeaderProps
 >(({ children, className, ...rest }, ref) => {
   const panelContext = useContext(ExpansionCardContext);
-  const translate = useI18n("ExpansionCard");
+  const translate = useI18n("global");
 
   if (panelContext === null) {
     console.error(
@@ -39,7 +39,7 @@ const ExpansionCardHeader = forwardRef<
       >
         <ChevronDownIcon
           className="navds-expansioncard__header-chevron"
-          title={translate("Header.buttonTitle")}
+          title={translate("showMore")}
         />
       </button>
     </div>

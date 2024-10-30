@@ -1,6 +1,11 @@
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    showMore: "Vis meir",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Vel fil",
@@ -35,11 +40,6 @@ export default {
   Chips: {
     Removable: {
       labelSuffix: "slett",
-    },
-  },
-  ExpansionCard: {
-    Header: {
-      buttonTitle: "Vis meir",
     },
   },
   Loader: {
