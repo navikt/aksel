@@ -71,7 +71,7 @@ export default {
   Textarea: {
     /** Screen readers only */
     maxLength: "Tekstområde med plass til {maxLength} tegn.",
-    charsTooMany: "{chars} tegn for mye.",
-    charsLeft: "{chars} tegn igjen.",
+    charsTooMany: "{chars} tegn for mye",
+    charsLeft: "{chars} tegn igjen",
   },
 } satisfies TranslationMap;

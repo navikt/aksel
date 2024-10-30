@@ -63,7 +63,7 @@ export default {
   },
   Textarea: {
     maxLength: "Tekstområde med plass til {maxLength} teikn.",
-    charsTooMany: "{chars} teikn for mykje.",
-    charsLeft: "{chars} teikn igjen.",
+    charsTooMany: "{chars} teikn for mykje",
+    charsLeft: "{chars} teikn igjen",
   },
 } satisfies Translations;

@@ -63,7 +63,7 @@ export default {
   },
   Textarea: {
     maxLength: "Text area with a {maxLength} character limit.",
-    charsTooMany: "{chars} characters too many.",
-    charsLeft: "{chars} characters left.",
+    charsTooMany: "{chars} characters too many",
+    charsLeft: "{chars} characters left",
   },
 } satisfies Translations;
