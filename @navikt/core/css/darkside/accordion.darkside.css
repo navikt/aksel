@@ -30,6 +30,11 @@
     &::after {
       display: none;
     }
+
+    > .navds-accordion__icon-wrapper {
+      background-color: var(--ax-bg-accent-strong-hover);
+      color: var(--ax-text-accent-contrast);
+    }
   }
 
   &:focus-visible {
@@ -90,11 +95,6 @@
   align-self: center;
   background-color: var(--ax-bg-accent-moderate);
   color: var(--ax-text-accent-strong);
-}
-
-.navds-accordion__header:hover > .navds-accordion__icon-wrapper {
-  background-color: var(--ax-bg-accent-strong-hover);
-  color: var(--ax-text-accent-contrast);
 }
 
 .navds-accordion__header-chevron {
