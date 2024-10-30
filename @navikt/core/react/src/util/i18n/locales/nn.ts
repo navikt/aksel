@@ -61,4 +61,9 @@ export default {
     clear: "Tøm",
     search: "Søk",
   },
+  Textarea: {
+    maxLength: "Tekstområde med plass til {maxLength} teikn.",
+    charsTooMany: "{chars} teikn for mykje",
+    charsLeft: "{chars} teikn igjen",
+  },
 } satisfies Translations;

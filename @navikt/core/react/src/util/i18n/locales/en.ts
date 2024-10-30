@@ -61,4 +61,9 @@ export default {
     clear: "Clear",
     search: "Search",
   },
+  Textarea: {
+    maxLength: "Text area with a {maxLength} character limit.",
+    charsTooMany: "{chars} characters too many",
+    charsLeft: "{chars} characters left",
+  },
 } satisfies Translations;

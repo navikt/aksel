@@ -68,4 +68,10 @@ export default {
     clear: "Tøm",
     search: "Søk",
   },
+  Textarea: {
+    /** Screen readers only */
+    maxLength: "Tekstområde med plass til {maxLength} tegn.",
+    charsTooMany: "{chars} tegn for mye",
+    charsLeft: "{chars} tegn igjen",
+  },
 } satisfies TranslationMap;
