@@ -6,10 +6,6 @@
 
 /* refactor code for 'line' above and below */
 
-/* Discuss animation */
-
-/* Avoid animation from triggering on initial render if default open */
-
 /* ---------------------------- Accordion header ---------------------------- */
 .navds-accordion__header {
   width: 100%;
@@ -116,10 +112,8 @@
 .navds-accordion__content {
   --__acx-accordion-content-line-width: 2px;
 
-  padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
-
-  /* TODO: Will this cause issues? */
   position: relative;
+  padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
   opacity: 0.01;
   display: none;
   overflow: hidden;
