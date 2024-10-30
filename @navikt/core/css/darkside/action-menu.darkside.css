@@ -39,10 +39,10 @@
 }
 
 .navds-action-menu__content > .navds-action-menu__content-inner {
-  --__acx-action-menu-content-p: var(--ax-spacing-2);
-  --__acx-action-menu-item-pr: var(--ax-spacing-2);
-  --__acx-action-menu-item-pl: var(--ax-spacing-2);
-  --__acx-action-menu-item-height: 2rem;
+  --__axc-action-menu-content-p: var(--ax-spacing-2);
+  --__axc-action-menu-item-pr: var(--ax-spacing-2);
+  --__axc-action-menu-item-pl: var(--ax-spacing-2);
+  --__axc-action-menu-item-height: 2rem;
 
   border-radius: var(--ax-border-radius-large);
   background-color: var(--ax-bg-raised);
@@ -52,7 +52,7 @@
   transform-origin: var(--__ac-action-menu-content-transform-origin);
   animation-duration: 160ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  padding: var(--__acx-action-menu-content-p);
+  padding: var(--__axc-action-menu-content-p);
   overflow: auto;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   max-height: var(--__ac-action-menu-content-available-height);
@@ -63,14 +63,14 @@
   display: flex;
   align-items: center;
   gap: var(--ax-spacing-2);
-  min-height: var(--__acx-action-menu-item-height);
+  min-height: var(--__axc-action-menu-item-height);
   cursor: default;
   border-radius: var(--ax-border-radius-medium);
   position: relative;
-  padding-left: var(--__acx-action-menu-item-pl);
-  padding-right: var(--__acx-action-menu-item-pr);
+  padding-left: var(--__axc-action-menu-item-pl);
+  padding-right: var(--__axc-action-menu-item-pr);
   font-size: var(--ax-font-size-medium);
-  scroll-margin-block: var(--__acx-action-menu-content-p);
+  scroll-margin-block: var(--__axc-action-menu-content-p);
   line-height: 1.5;
   color: var(--ax-text-default);
   text-decoration: none;
@@ -93,11 +93,11 @@
 }
 
 .navds-action-menu__item--has-icon {
-  --__acx-action-menu-item-pl: var(--ax-spacing-6);
+  --__axc-action-menu-item-pl: var(--ax-spacing-6);
 }
 
 .navds-action-menu__sub-trigger {
-  --__acx-action-menu-item-pr: var(--ax-spacing-05);
+  --__axc-action-menu-item-pr: var(--ax-spacing-05);
 
   &[data-state="open"] {
     background-color: var(--ax-bg-neutral-moderate-pressed);
@@ -132,7 +132,7 @@
 .navds-action-menu__marker--left {
   position: absolute;
   left: 0;
-  width: var(--__acx-action-menu-item-pl);
+  width: var(--__axc-action-menu-item-pl);
   display: inline-flex;
   justify-content: center;
 }
@@ -161,9 +161,9 @@
 .navds-action-menu__label {
   display: flex;
   align-items: center;
-  min-height: calc(var(--__acx-action-menu-item-height) - 6px);
-  padding-right: var(--__acx-action-menu-item-pr);
-  padding-left: var(--__acx-action-menu-item-pl);
+  min-height: calc(var(--__axc-action-menu-item-height) - 6px);
+  padding-right: var(--__axc-action-menu-item-pr);
+  padding-left: var(--__axc-action-menu-item-pl);
   color: var(--ax-text-subtle);
   border-radius: var(--ax-border-radius-medium);
   user-select: none;
