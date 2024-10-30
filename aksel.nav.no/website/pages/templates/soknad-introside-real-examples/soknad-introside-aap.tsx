@@ -34,7 +34,7 @@ function Example() {
         <VStack as="main" gap="8">
           <Bleed
             marginInline={{ lg: "24" }}
-            data-aksel-template="form-intropage-v1"
+            data-aksel-template="form-intropage-v2"
           >
             <Stack
               gap="6"
