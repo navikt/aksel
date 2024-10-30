@@ -144,6 +144,10 @@
   &[data-state="open"] {
     background-color: var(--ax-bg-neutral-moderate-pressed);
   }
+
+  &:focus {
+    background-color: var(--ax-bg-accent-moderate-hoverA);
+  }
 }
 
 .navds-action-menu__item--danger {
