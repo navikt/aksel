@@ -100,9 +100,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               value,
               filteredOptions,
             );
+
+          /*
+           * User can have matching results, while not using the autocomplete result
+           * E.g. User types "Oslo", list has is "Oslo kommune", but user hits backspace, canceling autocomplete.
+           */
+          const autoCompleteMatchesValue =
+            filteredOptionsUtil.normalizeText(value) ===
+            filteredOptionsUtil.normalizeText(autoCompletedOption?.label ?? "");
+
           let selectedValue: ComboboxOption | undefined;
 
-          if (shouldAutocomplete && autoCompletedOption) {
+          if (
+            shouldAutocomplete &&
+            autoCompletedOption &&
+            autoCompleteMatchesValue
+          ) {
             selectedValue = autoCompletedOption;
           } else if (allowNewValues && isValueNew) {
             selectedValue = { label: value, value };
