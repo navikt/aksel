@@ -154,7 +154,7 @@
 }
 
 @starting-style {
-  .navds-accordion__item--open > .navds-accordion__content {
+  .navds-accordion__item--open:not(.navds-accordion__item--no-animation) > .navds-accordion__content {
     padding-block: 0;
     max-height: 0;
     opacity: 0.01;
