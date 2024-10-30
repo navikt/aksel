@@ -1,5 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-
 .navds-button {
   padding: var(--ax-spacing-3) var(--ax-spacing-5);
   border-radius: var(--ax-border-radius-medium);
@@ -11,12 +9,6 @@
   align-items: center;
   justify-content: center;
   gap: var(--ax-spacing-2);
-  font-weight: 600;
-
-  /* TODO: fonts should be done globally elsewhere */
-  font-size: 18px;
-  line-height: 24px;
-  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
 }
 
 .navds-button--small {
@@ -237,7 +229,6 @@
   color: var(--ax-text-neutral-contrast);
 }
 
-/* TODO: do we need this selector? */
 .navds-button--tertiary-neutral:active:hover {
   background-color: var(--ax-bg-neutral-strong-pressed);
 }
