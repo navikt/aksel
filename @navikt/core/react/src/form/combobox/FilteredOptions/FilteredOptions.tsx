@@ -58,9 +58,7 @@ const FilteredOptions = () => {
         <ul
           ref={setFilteredOptionsRef}
           role="listbox"
-          className={cl("navds-combobox__list-options", {
-            "navds-combobox__list--max-selected": maxSelected?.isLimitReached,
-          })}
+          className="navds-combobox__list-options"
         >
           {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
             <AddNewOption />
