@@ -22,7 +22,6 @@
   cursor: pointer;
   border: none;
   position: relative;
-  z-index: 1;
   border-radius: var(--ax-border-radius-large);
   background: transparent;
   color: var(--ax-text-accent);
@@ -40,6 +39,7 @@
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
+    z-index: 1;
 
     &::before,
     &::after {
@@ -78,7 +78,7 @@
   display: none;
 }
 
-.navds-accordion__item[data-expanded="false"]:has(.navds-accordion__header:hover)
+.navds-accordion__item[data-expanded="false"]:has(.navds-accordion__header:where(:hover, :focus-visible))
   + .navds-accordion__item
   > .navds-accordion__header::before {
   display: none;
