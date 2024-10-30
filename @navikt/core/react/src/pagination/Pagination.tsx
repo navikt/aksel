@@ -3,6 +3,7 @@ import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
+import { useI18n } from "../util/i18n/i18n.context";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
@@ -69,7 +70,10 @@ export const getSteps = ({
   count,
   boundaryCount = 1,
   siblingCount = 1,
-}) => {
+}: Pick<
+  PaginationProps,
+  "page" | "count" | "boundaryCount" | "siblingCount"
+>) => {
   const range = (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
@@ -135,6 +139,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     ref,
   ) => {
     const headingId = useId();
+    const translate = useI18n("Pagination");
 
     if (page < 1) {
       console.error("page cannot be less than 1");
@@ -191,11 +196,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronLeftIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Forrige" })}
+                    : { title: translate("previous") })}
                 />
               }
             >
-              {prevNextTexts && `Forrige`}
+              {prevNextTexts && translate("previous")}
             </Item>
           </li>
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
@@ -238,12 +243,12 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronRightIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Neste" })}
+                    : { title: translate("next") })}
                 />
               }
               iconPosition="right"
             >
-              {prevNextTexts && `Neste`}
+              {prevNextTexts && translate("next")}
             </Item>
           </li>
         </ul>

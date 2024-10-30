@@ -11,6 +11,7 @@ import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
 interface InputProps
@@ -93,19 +94,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
-          // Autocompleting or adding a new value
-          const selectedValue =
-            allowNewValues && isValueNew
-              ? { label: value, value }
-              : filteredOptionsUtil.getFirstValueStartingWith(
-                  value,
-                  filteredOptions,
-                ) || filteredOptions[0];
+
+          const autoCompletedOption =
+            filteredOptionsUtil.getFirstValueStartingWith(
+              value,
+              filteredOptions,
+            );
+          let selectedValue: ComboboxOption | undefined;
+
+          if (shouldAutocomplete && autoCompletedOption) {
+            selectedValue = autoCompletedOption;
+          } else if (allowNewValues && isValueNew) {
+            selectedValue = { label: value, value };
+          }
 
           if (!selectedValue) {
             return;
           }
-
           toggleOption(selectedValue, event);
           if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
             toggleIsListOpen(false);
@@ -177,10 +182,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           if (value !== searchTerm) {
             setValue(searchTerm);
           }
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusDown, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDown();
           }
-          virtualFocus.moveFocusDown();
         } else if (e.key === "ArrowUp") {
           if (value !== "" && value !== searchTerm) {
             onChange(value);
@@ -199,19 +206,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           virtualFocus.moveFocusToTop();
         } else if (e.key === "End") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(virtualFocus.moveFocusToBottom, 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusToBottom();
           }
-          virtualFocus.moveFocusToBottom();
         } else if (e.key === "PageUp") {
           e.preventDefault();
           virtualFocus.moveFocusUpBy(6);
         } else if (e.key === "PageDown") {
           e.preventDefault();
-          if (virtualFocus.activeElement === null || !isListOpen) {
+          if (!isListOpen) {
             toggleIsListOpen(true);
+            setTimeout(() => virtualFocus.moveFocusDownBy(6), 0); // Wait until list is visible so that scrollIntoView works
+          } else {
+            virtualFocus.moveFocusDownBy(6);
           }
-          virtualFocus.moveFocusDownBy(6);
         }
       },
       [
@@ -253,7 +264,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         type="text"
         role="combobox"
         value={value}
-        onBlur={composeEventHandlers(onBlur, virtualFocus.moveFocusToTop)}
+        onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
         onClick={() => {
           setHideCaret(!!maxSelected?.isLimitReached);
           value !== searchTerm && onChange(value);

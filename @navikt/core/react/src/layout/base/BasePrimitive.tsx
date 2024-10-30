@@ -5,6 +5,9 @@ import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
 export type PrimitiveProps = {
+  /**
+   * @private Hides prop from documentation
+   */
   className?: string;
   /**
    * Padding around children.

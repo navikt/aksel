@@ -7,6 +7,11 @@ interface TranslationMap {
 }
 
 export default {
+  global: {
+    showMore: "Vis mer",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Velg fil",
@@ -46,5 +51,23 @@ export default {
   },
   ErrorSummary: {
     Heading: "Du må rette disse feilene før du kan fortsette:",
+  Loader: {
+    title: "Venter…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Forrige",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
   },
 } satisfies TranslationMap;

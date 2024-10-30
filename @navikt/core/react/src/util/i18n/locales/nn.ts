@@ -1,6 +1,11 @@
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    showMore: "Vis meir",
+    showLess: "Vis mindre",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Vel fil",
@@ -39,5 +44,23 @@ export default {
   },
   ErrorSummary: {
     Heading: "Du må rette desse feila før du kan halde fram:",
+  Loader: {
+    title: "Ventar…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
   },
 } satisfies Translations;

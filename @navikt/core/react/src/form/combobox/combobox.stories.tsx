@@ -177,8 +177,8 @@ const complexOptions = [
 ];
 
 export const WithAddNewOptions: StoryFn = ({ open }: { open?: boolean }) => {
-  const [value, setValue] = useState<string | undefined>("hello");
   const comboboxRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState<string | undefined>("hello");
   return (
     <UNSAFE_Combobox
       id="combobox-with-add-new-options"
@@ -210,6 +210,7 @@ export const MultiSelectWithAddNewOptions: StoryFn = ({
       options={options}
       allowNewValues={true}
       value={value}
+      shouldAutocomplete={true}
       selectedOptions={selectedOptions}
       onChange={setValue}
       onToggleSelected={(option, isSelected) =>

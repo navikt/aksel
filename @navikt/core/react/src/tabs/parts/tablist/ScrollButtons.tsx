@@ -17,11 +17,7 @@ function ScrollButton({ hidden, onClick, dir }: ScrollButtonProps) {
       onClick={onClick}
       aria-hidden
     >
-      {dir === "left" ? (
-        <ChevronLeftIcon title="scroll tilbake" />
-      ) : (
-        <ChevronRightIcon title="scroll neste" />
-      )}
+      {dir === "left" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
     </div>
   );
 }

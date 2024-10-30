@@ -1,5 +1,39 @@
 # Changelog
 
+## 7.4
+
+### @navikt/ds-react
+
+- Combobox: Enable option to add a new value while autocompleting and highlight matches in FilteredOptions. ([#3225](https://github.com/navikt/aksel/pull/3225))
+
+* Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+* Combobox: Don't scroll when browsing list with mouse ([#3265](https://github.com/navikt/aksel/pull/3265))
+
+* Avoid warning about element.ref in React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+* Checkbox: Remove redundant attribute aria-checked ([#3274](https://github.com/navikt/aksel/pull/3274))
+
+## 7.3
+
+### @navikt/ds-react
+
+- Combobox: :bug: Remove virtual focus on input blur instead of moving it ([#3261](https://github.com/navikt/aksel/pull/3261))
+
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- Accordion: Remove redundant icon title ([#3230](https://github.com/navikt/aksel/pull/3230))
+
+- Modal: Close button now avoids triggering when repeated keystrokes are detected. This helps stop accidental closing of Modal when 'Enter'-key is held down. ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+### @navikt/ds-css
+
+- Updated to Selectors Level 4 syntax. ([#3250](https://github.com/navikt/aksel/pull/3250))
+
+* ActionMenu: :tada: New component! Replaces DropdownMenu as the go-to solution for floating menus. Includes support for grouping, sub-menus, checkboxes, radios and dividers. Read more in the [documentation](https://aksel.nav.no/komponenter/core/actionmenu). ([#3081](https://github.com/navikt/aksel/pull/3081))
+
+- List.Item: Center icon horizontally inside it's container ([#3253](https://github.com/navikt/aksel/pull/3253))
+
 ## 7.2
 
 ### @navikt/ds-react

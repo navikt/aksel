@@ -7,7 +7,7 @@ const Example = () => {
   return (
     <ConfirmationPanel
       checked={state}
-      label="Jeg bekrefter at jeg vil svare så godt jeg kan på spørsmålene i søknaden."
+      label="Jeg bekrefter at jeg vil svare så riktig som jeg kan."
       onChange={() => setState((x) => !x)}
       error={!state && "Du må bekrefte før du kan fortsette."}
     >

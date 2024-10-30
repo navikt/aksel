@@ -1,3 +1,5 @@
+import { breakpointsTokenConfig } from "./tokens/breakpoints";
+import { fontTokenConfig } from "./tokens/font";
 import {
   globalColorDarkModeConfig,
   globalColorLightModeConfig,
@@ -18,7 +20,7 @@ import { mergeConfigs, tokensWithPrefix } from "./util";
 export const lightModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
-      semanticTokensForAllRolesConfig(),
+      semanticTokensForAllRolesConfig("light"),
       textContrastTokenConfig(),
       semanticTokenConfig("light"),
       globalColorLightModeConfig,
@@ -33,7 +35,7 @@ export const lightModeTokens = () => {
 export const darkModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
-      semanticTokensForAllRolesConfig(),
+      semanticTokensForAllRolesConfig("dark"),
       textContrastTokenConfig(),
       semanticTokenConfig("dark"),
       globalColorDarkModeConfig,
@@ -52,6 +54,19 @@ export const scaleTokens = () => {
   );
 };
 
+export const rootTokens = () => {
+  return tokensWithPrefix(
+    mergeConfigs([scaleTokens().ax, breakpointsTokenConfig, fontTokenConfig]),
+  );
+};
+
 export const allTokens = () => {
-  return tokensWithPrefix(mergeConfigs([lightModeTokens().a, scaleTokens().a]));
+  return tokensWithPrefix(
+    mergeConfigs([
+      lightModeTokens().ax,
+      scaleTokens().ax,
+      breakpointsTokenConfig,
+      fontTokenConfig,
+    ]),
+  );
 };

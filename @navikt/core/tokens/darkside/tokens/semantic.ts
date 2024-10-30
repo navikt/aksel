@@ -1,66 +1,29 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-export function semanticTokenConfig(theme: ColorTheme) {
-  return theme === "light" ? semanticTokensLight() : semanticTokensDark();
-}
-
-function semanticTokensDark(): StyleDictionaryTokenConfig<"color"> {
-  const baseline = semanticTokensLight();
-  return {
-    ...baseline,
-    bg: {
-      ...baseline.bg,
-      default: {
-        value: "#0E151F",
-        type: "color",
-        group: "background",
-        /**
-         * Allows token to be used on 'effect' properties in Figma,
-         * Bg-default is used between element and focus-marking.
-         */
-        scopes: ["EFFECT_COLOR"],
-      },
-      input: {
-        value: "rgba(0, 0, 0, 0.50)",
-        type: "color",
-        group: "background",
-      },
-      raised: {
-        value: "{a.neutral.200.value}",
-        type: "color",
-        group: "background",
-      },
-      sunken: {
-        value: "#07090D",
-        type: "color",
-        group: "background",
-      },
-    },
-  };
-}
-
-function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
+export function semanticTokenConfig(
+  theme: ColorTheme,
+): StyleDictionaryTokenConfig<"color"> {
   return {
     text: {
       default: {
-        value: "{a.neutral.1000.value}",
+        value: "{ax.neutral.1000.value}",
         type: "color",
         group: "text",
       },
       subtle: {
-        value: "{a.neutral.900.value}",
+        value: "{ax.neutral.900.value}",
         type: "color",
         group: "text",
       },
       icon: {
-        value: "{a.neutral.600.value}",
+        value: "{ax.neutral.600.value}",
         type: "color",
         group: "text",
       },
     },
     bg: {
       default: {
-        value: "#ffffff",
+        value: theme === "light" ? "#ffffff" : "#0E151F",
         type: "color",
         group: "background",
         /**
@@ -70,17 +33,23 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
         scopes: ["EFFECT_COLOR"],
       },
       input: {
-        value: "rgba(255, 255, 255, 0.85)",
+        value:
+          theme === "light"
+            ? "rgba(255, 255, 255, 0.85)"
+            : "rgba(14, 21, 31, 0.50)",
         type: "color",
         group: "background",
       },
       raised: {
-        value: "{a.neutral.000.value}",
+        value:
+          theme === "light"
+            ? "{ax.neutral.000.value}"
+            : "{ax.neutral.200.value}",
         type: "color",
         group: "background",
       },
       sunken: {
-        value: "{a.neutral.200.value}",
+        value: theme === "light" ? "{ax.neutral.200.value}" : "#07090D",
         type: "color",
         group: "background",
       },
@@ -92,22 +61,22 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
     },
     border: {
       default: {
-        value: "{a.neutral.500.value}",
+        value: "{ax.neutral.500.value}",
         type: "color",
         group: "border",
       },
       subtle: {
-        value: "{a.neutral.400.value}",
+        value: "{ax.neutral.400.value}",
         type: "color",
         group: "border",
       },
       subtleA: {
-        value: "{a.neutral.400A.value}",
+        value: "{ax.neutral.400A.value}",
         type: "color",
         group: "border",
       },
       strong: {
-        value: "{a.neutral.600.value}",
+        value: "{ax.neutral.600.value}",
         type: "color",
         group: "border",
       },
@@ -116,7 +85,7 @@ function semanticTokensLight(): StyleDictionaryTokenConfig<"color"> {
        * - Discuss with brand
        */
       focus: {
-        value: "{a.accent.700.value}",
+        value: "{ax.accent.700.value}",
         type: "color",
         group: "border",
         /**

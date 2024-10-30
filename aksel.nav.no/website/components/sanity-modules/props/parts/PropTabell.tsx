@@ -1,4 +1,4 @@
-import { BodyShort, Heading } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
 import { DtList } from "./DtList";
@@ -8,6 +8,15 @@ type PropTableProps = {
 };
 
 const PropTable = ({ komponent }: PropTableProps) => {
+  const propList =
+    komponent?.propref?.proplist?.filter(
+      (prop) => !prop.description?.includes("@private"),
+    ) ?? [];
+
+  if (propList.length === 0) {
+    return null;
+  }
+
   return (
     <div lang="en">
       <Heading
@@ -20,12 +29,6 @@ const PropTable = ({ komponent }: PropTableProps) => {
       </Heading>
 
       <div className="toc-ignore relative mb-8">
-        {komponent?.propref?.proplist?.length === 0 && (
-          <div className="mb-8 rounded-b-lg border border-gray-300 p-2">
-            <BodyShort>Fant ingen props for denne komponenten.</BodyShort>
-          </div>
-        )}
-
         <dl>
           {komponent?.overridable && (
             <div className="border border-t-0 border-gray-300 p-2">
@@ -51,7 +54,7 @@ const PropTable = ({ komponent }: PropTableProps) => {
               </dd>
             </div>
           )}
-          {komponent?.propref?.proplist?.map((prop) => (
+          {propList.map((prop) => (
             <div
               className="border border-t-0 border-gray-300 p-2 last-of-type:rounded-b-lg"
               key={prop.name}

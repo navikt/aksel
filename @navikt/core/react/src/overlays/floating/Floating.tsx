@@ -187,7 +187,6 @@ interface FloatingContentProps extends HTMLAttributes<HTMLDivElement> {
   collisionBoundary?: Boundary | Boundary[];
   collisionPadding?: number | Partial<Record<Side, number>>;
   hideWhenDetached?: boolean;
-  flipAlignment?: boolean;
   updatePositionStrategy?: "optimized" | "always";
   onPlaced?: () => void;
   arrow?: {
@@ -213,7 +212,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       updatePositionStrategy = "optimized",
       onPlaced,
       arrow: _arrow,
-      flipAlignment,
       ...contentProps
     }: FloatingContentProps,
     forwardedRef,
@@ -258,7 +256,6 @@ const FloatingContent = forwardRef<HTMLDivElement, FloatingContentProps>(
       altBoundary: hasExplicitBoundaries,
       /* https://floating-ui.com/docs/flip#fallbackaxissidedirection */
       fallbackAxisSideDirection: "end",
-      flipAlignment,
     };
 
     const { refs, floatingStyles, placement, isPositioned, middlewareData } =
