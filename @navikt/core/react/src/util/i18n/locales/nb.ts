@@ -51,6 +51,7 @@ export default {
   },
   ErrorSummary: {
     Heading: "Du må rette disse feilene før du kan fortsette:",
+  },
   Loader: {
     title: "Venter…",
   },

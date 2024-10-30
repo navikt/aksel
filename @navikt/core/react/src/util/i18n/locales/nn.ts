@@ -44,6 +44,7 @@ export default {
   },
   ErrorSummary: {
     Heading: "Du må rette desse feila før du kan halde fram:",
+  },
   Loader: {
     title: "Ventar…",
   },

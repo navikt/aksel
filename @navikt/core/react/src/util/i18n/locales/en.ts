@@ -44,6 +44,7 @@ export default {
   },
   ErrorSummary: {
     Heading: "You must correct the following errors before you can continue:",
+  },
   Loader: {
     title: "Waiting…",
   },
