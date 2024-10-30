@@ -82,7 +82,7 @@
 
 .navds-action-menu__content > .navds-action-menu__content-inner {
   --__acx-action-menu-content-p: var(--ax-spacing-2);
-  --__acx-action-menu-item-pr: var(--ax-spacing-3);
+  --__acx-action-menu-item-pr: var(--ax-spacing-2);
   --__acx-action-menu-item-pl: var(--ax-spacing-2);
   --__acx-action-menu-item-height: 2rem;
 
@@ -135,11 +135,11 @@
 }
 
 .navds-action-menu__item--has-icon {
-  --__ac-action-menu-item-pl: var(--ax-spacing-6);
+  --__acx-action-menu-item-pl: var(--ax-spacing-6);
 }
 
 .navds-action-menu__sub-trigger {
-  --__ac-action-menu-item-pr: var(--ax-spacing-05);
+  --__acx-action-menu-item-pr: var(--ax-spacing-05);
 
   &[data-state="open"] {
     background-color: var(--ax-bg-neutral-moderate-pressed);
@@ -167,7 +167,7 @@
   padding-left: var(--ax-spacing-4);
 }
 
-.---navds-action-menu__marker--left {
+.navds-action-menu__marker--left {
   position: absolute;
   left: 0;
   width: var(--__acx-action-menu-item-pl);
@@ -216,6 +216,13 @@
 }
 
 /* -------------------------- ActionMenu indicator -------------------------- */
+
+.navds-action-menu__indicator-icon--unchecked,
+.navds-action-menu__indicator-icon--checked,
+.navds-action-menu__indicator-icon--indeterminate {
+  display: none;
+}
+
 .navds-action-menu__indicator {
   display: grid;
   place-content: center;
@@ -231,12 +238,6 @@
   &[data-state="indeterminate"] .navds-action-menu__indicator-icon--indeterminate {
     display: block;
   }
-}
-
-.navds-action-menu__indicator-icon--unchecked,
-.navds-action-menu__indicator-icon--checked,
-.navds-action-menu__indicator-icon--indeterminate {
-  display: none;
 }
 
 .navds-action-menu__indicator-icon {
