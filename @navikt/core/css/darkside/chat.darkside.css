@@ -1,33 +1,30 @@
 .navds-chat {
   display: flex;
   align-items: flex-end;
-  gap: var(--a-spacing-3);
+  gap: var(--ax-spacing-3);
   max-width: 40.75rem;
 }
 
 .navds-chat--right {
   flex-direction: row-reverse;
+
+  .navds-chat__bubble-wrapper {
+    align-items: flex-end;
+  }
+
+  .navds-chat__bubble {
+    border-radius: var(--ax-border-radius-xlarge);
+    border-bottom-right-radius: var(--ax-border-radius-small);
+  }
 }
 
-.navds-chat__bubble-wrapper {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-spacing-3);
-}
-
-.navds-chat--right .navds-chat__bubble-wrapper {
-  align-items: flex-end;
-}
-
+/* ------------------------------- Chat avatar ------------------------------ */
 .navds-chat__avatar {
   align-items: center;
-  box-shadow: var(--a-shadow-xsmall);
-  background-color: var(--ac-chat-avatar-bg, var(--a-surface-neutral-subtle));
-  border-radius: var(--a-border-radius-full);
-  color: var(--ac-chat-avatar-color, var(--a-text-default));
+  background-color: var(--ax-bg-raised);
+  border-radius: var(--ax-border-radius-full);
+  border: 1px solid var(--ax-border-subtleA);
+  color: var(--ax-text-default);
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -37,50 +34,61 @@
   line-height: 2.5rem; /* Makes text properly vertically centered in Chrome */
   font-size: 1.06rem;
   letter-spacing: 0.024rem;
+
+  svg {
+    align-self: center;
+    width: 100%;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+  }
 }
 
-.navds-chat__avatar svg {
-  align-self: center;
-  width: 100%;
-  max-width: 1.5rem;
-  max-height: 1.5rem;
+/* ------------------------------- Chat bubble ------------------------------ */
+.navds-chat__bubble-wrapper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-spacing-3);
 }
 
 .navds-chat__bubble {
-  padding: var(--a-spacing-4);
-  box-shadow: var(--a-shadow-xsmall);
+  padding: var(--ax-spacing-4);
   width: fit-content;
-  background-color: var(--ac-chat-bubble-bg, var(--a-surface-neutral-subtle));
-  border-radius: var(--a-border-radius-xlarge);
-  border-bottom-left-radius: 2px;
+  background-color: var(--ax-bg-raised);
   display: flex;
   flex-direction: column;
-  gap: var(--a-spacing-2);
-}
-
-.navds-chat--right .navds-chat__bubble {
-  border-radius: var(--a-border-radius-xlarge);
-  border-bottom-right-radius: 2px;
+  gap: var(--ax-spacing-2);
+  border-radius: var(--ax-border-radius-xlarge);
+  border-bottom-left-radius: var(--ax-border-radius-small);
+  border: 1px solid var(--ax-border-subtleA);
 }
 
 .navds-chat--small .navds-chat__bubble {
-  padding: var(--a-spacing-3);
+  padding: var(--ax-spacing-3);
 }
 
-.navds-chat--info .navds-chat__bubble,
-.navds-chat--info .navds-chat__avatar {
-  background-color: var(--a-surface-info-subtle);
+/* -------------------------- Chat bubble variants -------------------------- */
+.navds-chat--info {
+  .navds-chat__bubble,
+  .navds-chat__avatar {
+    background-color: var(--ax-bg-info-raised);
+  }
 }
 
-.navds-chat--subtle .navds-chat__bubble,
-.navds-chat--subtle .navds-chat__avatar {
-  background-color: var(--a-surface-default);
+.navds-chat--neutral {
+  .navds-chat__bubble,
+  .navds-chat__avatar {
+    background-color: var(--ax-bg-neutral-raised);
+  }
 }
 
+/* ------------------------------ Chat top text ----------------------------- */
 .navds-chat__top-text {
-  color: var(--ac-chat-top-text, var(--a-text-default));
+  color: var(--ax-text-default);
   display: flex;
-  gap: var(--a-spacing-2);
+  gap: var(--ax-spacing-2);
   align-items: baseline;
   font-weight: normal;
   margin: 0;
@@ -104,17 +112,4 @@
 
 .navds-chat--right .navds-chat__top-text--left {
   align-self: flex-start;
-}
-
-@media (forced-colors: active) {
-  .navds-chat__bubble,
-  .navds-chat__avatar {
-    border: 1px solid canvastext;
-    background-color: canvas;
-    color: canvastext;
-  }
-
-  .navds-chat__avatar svg {
-    forced-color-adjust: none;
-  }
 }
