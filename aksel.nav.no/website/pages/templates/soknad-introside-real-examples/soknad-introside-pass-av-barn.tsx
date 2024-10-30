@@ -158,7 +158,7 @@ function Example() {
             </BodyLong>
             <Box paddingBlock="4 8">
               <Checkbox>
-                Jeg vil svare så godt jeg kan på spørsmålene i søknaden.
+                Jeg bekrefter at jeg vil svare så riktig som jeg kan.
               </Checkbox>
             </Box>
             <Button
