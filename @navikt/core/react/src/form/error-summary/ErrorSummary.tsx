@@ -107,7 +107,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           ref={headingRef}
           tabIndex={-1}
         >
-          {heading ?? translate("Heading")}
+          {heading ?? translate("heading")}
         </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {children}
