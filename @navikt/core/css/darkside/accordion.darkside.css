@@ -1,11 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-
-/* TODO:  */
-
-/* Validate that each 'size' variant is correct */
-
-/* refactor code for 'line' above and below */
-
 /* ---------------------------- Accordion header ---------------------------- */
 .navds-accordion__header {
   width: 100%;
@@ -13,7 +5,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: var(--ax-spacing-3);
-  padding: var(--ax-spacing-2) var(--ax-spacing-3);
+  padding: var(--ax-spacing-3);
   text-align: left;
   cursor: pointer;
   border: none;
@@ -22,8 +14,12 @@
   background: transparent;
   color: var(--ax-text-accent);
 
+  > * {
+    font-weight: var(--ax-font-weight-regular);
+  }
+
   &:hover {
-    background-color: var(--ax-bg-accent-hover);
+    background-color: var(--ax-bg-accent-hoverA);
     color: var(--ax-text-accent-strong);
 
     &::before,
@@ -93,7 +89,7 @@
   width: 22px;
   height: 22px;
   align-self: center;
-  background-color: var(--ax-bg-accent-moderate);
+  background-color: var(--ax-bg-accent-moderateA);
   color: var(--ax-text-accent-strong);
 }
 
