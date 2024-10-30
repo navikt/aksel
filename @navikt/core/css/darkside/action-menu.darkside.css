@@ -9,74 +9,32 @@
     0 0 1px 0 rgb(7 9 13/ 0.02),
     0 2px 5px 0 rgb(7 9 13/ 0.1),
     0 10px 16px 0 rgb(7 9 13/ 0.12);
+  transition: transform 250ms cubic-bezier(0, 0, 0, 1) allow-discrete;
 
   &[data-state="open"] {
-    /* TODO: rewrite to starting-style transition */
     &[data-side="bottom"] {
-      animation-name: aksel-action-from-bottom, aksel-action-fade-in;
+      @starting-style {
+        transform: translateY(-4px);
+      }
     }
 
     &[data-side="top"] {
-      animation-name: aksel-action-from-top, aksel-action-fade-in;
+      @starting-style {
+        transform: translateY(4px);
+      }
     }
 
     &[data-side="right"] {
-      animation-name: aksel-action-from-left, aksel-action-fade-in;
+      @starting-style {
+        transform: translateX(-4px);
+      }
     }
 
     &[data-side="left"] {
-      animation-name: aksel-action-from-right, aksel-action-fade-in;
+      @starting-style {
+        transform: translateX(4px);
+      }
     }
-  }
-}
-
-@keyframes aksel-action-from-bottom {
-  from {
-    transform: translateY(-4px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes aksel-action-from-top {
-  from {
-    transform: translateY(4px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes aksel-action-from-left {
-  from {
-    transform: translateX(4px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes aksel-action-from-right {
-  from {
-    transform: translateX(-4px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes aksel-action-fade-in {
-  from {
-    opacity: 0.01;
-  }
-
-  to {
-    opacity: 1;
   }
 }
 
