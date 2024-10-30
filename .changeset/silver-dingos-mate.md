@@ -3,4 +3,4 @@
 "@navikt/ds-css": patch
 ---
 
-Combobox: only apply filteredOptions scroll offset when max options is rendered
+Combobox: :bug: Fix scroll issue when using arrow keys to navigate list
