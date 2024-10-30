@@ -48,6 +48,12 @@ export const OnlyItems: Story = {
           <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
           </ActionMenu.Item>
+          <ActionMenu.Item
+            onSelect={() => console.log("Item 3 clicked")}
+            variant="danger"
+          >
+            Item 4
+          </ActionMenu.Item>
         </ActionMenu.Content>
       </ActionMenu>
     );
