@@ -7,12 +7,7 @@ import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
   createWrappedDefaultPublish,
-  createWrappedDeleteAction,
-  createWrappedDiscardChangesAction,
-  createWrappedDuplicateAction,
   createWrappedFocusAction,
-  createWrappedRestoreAction,
-  createWrappedUnpublishAction,
   createWrappedUpdateAction,
 } from "./actions";
 import { CreateStatusBadge, createBadgeComponent } from "./badges";
@@ -28,21 +23,6 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
   const defaultActions = prev.map((action) => {
     if (action.action === "publish") {
       return createWrappedFocusAction(action);
-    }
-    if (action.action === "unpublish") {
-      return createWrappedUnpublishAction(action);
-    }
-    if (action.action === "delete") {
-      return createWrappedDeleteAction(action);
-    }
-    if (action.action === "duplicate") {
-      return createWrappedDuplicateAction(action);
-    }
-    if (action.action === "restore") {
-      return createWrappedRestoreAction(action);
-    }
-    if (action.action === "discardChanges") {
-      return createWrappedDiscardChangesAction(action);
     }
     return action;
   });
