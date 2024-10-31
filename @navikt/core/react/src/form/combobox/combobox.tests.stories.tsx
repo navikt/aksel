@@ -109,7 +109,7 @@ export const RemoveSelectedMultiSelect: StoryObject = {
     await sleep(250);
     expect(appleOption).not.toBeVisible();
 
-    const bananaSlett = canvas.getByLabelText("banana slett1");
+    const bananaSlett = canvas.getByLabelText("banana slett");
     expect(bananaSlett).toBeInTheDocument();
     const appleSlettAgain = canvas.queryByLabelText("apple slett");
     expect(appleSlettAgain).not.toBeInTheDocument();
