@@ -1,6 +1,5 @@
 export * from "./blogg/artikkel";
 export * from "./blogg/landingsside";
-export * from "./editors";
 export * from "./forside";
 export * from "./god-praksis/artikkel";
 export * from "./god-praksis/landingsside";
@@ -17,9 +16,12 @@ export * from "./komponenter/tokens";
 export * from "./prinsipper/artikkel";
 export * from "./prinsipper/landingsside";
 export * from "./publiseringsflyt";
-export * from "./redirects";
 export * from "./skrivehjelp";
 export * from "./standalone-artikkel";
 export * from "./templates/artikkel";
 export * from "./templates/landingsside";
-export * from "./articleViews";
+
+/* Admin tools */
+export * from "./admin/editors";
+export * from "./admin/redirects";
+export * from "./admin/articleViews";

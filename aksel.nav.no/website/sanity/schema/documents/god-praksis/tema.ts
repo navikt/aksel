@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 import SanityTabGroups from "../../../schema/documents/presets/groups";
 import BaseSEOPreset from "../../../schema/documents/presets/seo";
-import { sanitizeSlug } from "../../../schema/util";
+import { sanitizeSlug } from "../../../util";
 
 export const Tema = defineType({
   name: "gp.tema",
