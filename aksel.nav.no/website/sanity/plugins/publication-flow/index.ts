@@ -39,38 +39,34 @@ const withCustomPublishAction = (prev: DocumentActionComponent[]) => {
   return [createWrappedDefaultPublish(prev[0]), ...prev.slice(1)];
 };
 
-interface PublicationFlowOptions {
-  hasQualityControl: string[];
-  hasPublishedAt: string[];
-}
+export const publicationFlow = definePlugin(() => {
+  const hasQualityControl = [
+    "komponent_artikkel",
+    "ds_artikkel",
+    "aksel_artikkel",
+  ];
+  const hasPublishedAt = allArticleDocuments;
 
-export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
-  ({ hasQualityControl, hasPublishedAt }) => ({
+  return {
     name: "publication-flow",
     document: {
       actions: (prev, { schemaType }) => {
-        if (hasQualityControl.some((e) => e === schemaType)) {
+        if (hasQualityControl.some((docType) => docType === schemaType)) {
           return getCustomActions(prev);
         }
 
-        if (hasPublishedAt.some((e) => e === schemaType)) {
+        if (hasPublishedAt.some((docType) => docType === schemaType)) {
           return withCustomPublishAction(prev);
         }
 
         return prev;
       },
       badges: (prev, { schemaType }) => {
-        if (hasQualityControl.some((e) => e === schemaType)) {
+        if (hasQualityControl.some((docType) => docType === schemaType)) {
           return generateBadges(prev);
         }
         return prev;
       },
     },
-  }),
-);
-
-export const publicationFlow = () =>
-  publicationFlowConfig({
-    hasQualityControl: ["komponent_artikkel", "ds_artikkel", "aksel_artikkel"],
-    hasPublishedAt: [...allArticleDocuments],
-  });
+  };
+});
