@@ -109,9 +109,9 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   selected={active === fil.navn}
                   id={id}
                   onClick={() => {
-                    const newPath = `${router.asPath.split("#")[0]}#${id}`;
-                    if (newPath === router.asPath) return;
+                    if (active === fil.navn) return;
                     setUnloaded(true);
+                    const newPath = `${router.asPath.split("#")[0]}#${id}`;
                     router.replace(newPath);
                   }}
                 >
