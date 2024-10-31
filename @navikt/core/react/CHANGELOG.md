@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.4.2
+
+### Patch Changes
+
+- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.2
+  - @navikt/aksel-icons@7.4.2
+
 ## 7.4.1
 
 ### Patch Changes
