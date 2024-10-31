@@ -80,7 +80,7 @@ export const workspaceConfig = defineConfig([
 function authStore(): AuthConfig {
   return {
     redirectOnSingle: false,
-    mode: "replace" as const,
+    mode: "replace",
     providers: [
       {
         name: "saml",
