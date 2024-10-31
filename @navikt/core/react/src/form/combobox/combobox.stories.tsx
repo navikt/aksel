@@ -116,7 +116,6 @@ export const MultiSelect: StoryFn = () => {
     "pear",
     "kiwi",
   ]);
-  test();
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect"
