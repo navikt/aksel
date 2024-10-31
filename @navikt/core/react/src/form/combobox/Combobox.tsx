@@ -58,7 +58,7 @@ export const Combobox = forwardRef<
           id={inputDescriptionId}
           size={size}
         >
-          {description}Test
+          {description}
         </BodyShort>
       )}
       <div className="navds-combobox__wrapper">
