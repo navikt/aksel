@@ -93,6 +93,7 @@ export const WithPlaceholder: StoryFunction = () => {
     allowNewValues: false,
     onChange: console.log,
   };
+  test();
   return (
     <VStack gap="8" align="center">
       <Alert variant="warning" style={{ width: "70ch" }}>
