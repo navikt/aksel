@@ -55,7 +55,7 @@ export const CancelInput: StoryObject = {
     await sleep(1000);
     userEvent.keyboard("{ArrowDown}");
     await sleep(500);
-    const banana = canvas.getByText("banana");
+    const banana = canvas.getByText("banana1");
     userEvent.click(banana);
   },
 };
@@ -130,7 +130,7 @@ export const AllowNewValuesMultiSelect: StoryObject = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter1?");
 
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });
