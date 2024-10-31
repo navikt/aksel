@@ -9,9 +9,6 @@ import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
-/**
- * TODO: Mulighet for lokalisering av sr-only/counter text
- */
 export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -144,7 +141,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
         {!!description && (
