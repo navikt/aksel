@@ -109,5 +109,7 @@ jobs:
 
             ### [Endringer til review](${{steps.chromatic_tests.outputs.url}}): ${{steps.chromatic_tests.outputs.changeCount}}
 
+            ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### Tester med feil: {0} {1}', steps.chromatic_tests.outputs.errorCount, steps.chromatic_tests.outputs.errorCount) }}
+
             [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
