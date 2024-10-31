@@ -10,6 +10,7 @@ export default {
   global: {
     showMore: "Vis mer",
     showLess: "Vis mindre",
+    readOnly: "Skrivebeskyttet",
   },
 
   FileUpload: {

@@ -4,6 +4,7 @@ export default {
   global: {
     showMore: "Show more",
     showLess: "Show less",
+    readOnly: "Read-only",
   },
 
   FileUpload: {
