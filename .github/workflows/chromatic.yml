@@ -61,15 +61,6 @@ jobs:
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
-      - name: replace storybook url
-        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
-        uses: frabert/replace-string-action@v2
-        id: storybook_url
-        with:
-          pattern: "(iframe.html)"
-          string: ${{ steps.chromatic_tests.outputs.storybookUrl }}
-          replace-with: ""
-
       - name: Get commit sha
         if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         id: vars
@@ -93,7 +84,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ## [Storybook demo](${{steps.storybook_url.outputs.replaced}})
+            ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}})
 
             [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
@@ -105,7 +96,7 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ## [Storybook demo](${{steps.storybook_url.outputs.replaced}}) / [Chromatic](${{steps.chromatic_tests.outputs.url}})
+            ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}}) / [Chromatic](${{steps.chromatic_tests.outputs.url}})
 
             ### 📝 Endringer til review: ${{steps.chromatic_tests.outputs.changeCount}}
 
