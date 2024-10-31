@@ -101,17 +101,18 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
           <Chips>
             {node.dir.filer.map((fil) => {
               const id = `${node.dir.title.toLowerCase()}demo-${fil.navn}`;
+              const isSelected = active === fil.navn;
               return (
                 <Chips.Toggle
                   checkmark={false}
                   key={fil._key}
                   value={fil.navn}
-                  selected={active === fil.navn}
+                  selected={isSelected}
                   id={id}
                   onClick={() => {
-                    const newPath = `${router.asPath.split("#")[0]}#${id}`;
-                    if (newPath === router.asPath) return;
+                    if (isSelected) return;
                     setUnloaded(true);
+                    const newPath = `${router.asPath.split("#")[0]}#${id}`;
                     router.replace(newPath);
                   }}
                 >
