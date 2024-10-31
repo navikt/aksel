@@ -55,7 +55,7 @@ export const CancelInput: StoryObject = {
     await sleep(1000);
     userEvent.keyboard("{ArrowDown}");
     await sleep(500);
-    const banana = canvas.getByText("banana1");
+    const banana = canvas.getByText("banana");
     userEvent.click(banana);
   },
 };
@@ -109,7 +109,7 @@ export const RemoveSelectedMultiSelect: StoryObject = {
     await sleep(250);
     expect(appleOption).not.toBeVisible();
 
-    const bananaSlett = canvas.getByLabelText("banana slett1");
+    const bananaSlett = canvas.getByLabelText("banana slett");
     expect(bananaSlett).toBeInTheDocument();
     const appleSlettAgain = canvas.queryByLabelText("apple slett");
     expect(appleSlettAgain).not.toBeInTheDocument();
@@ -130,7 +130,7 @@ export const AllowNewValuesMultiSelect: StoryObject = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const input = canvas.getByLabelText("Hva er dine favorittfrukter1?");
+    const input = canvas.getByLabelText("Hva er dine favorittfrukter?");
 
     userEvent.click(input);
     await userEvent.type(input, "aaa", { delay: 200 });

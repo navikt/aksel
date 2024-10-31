@@ -93,7 +93,6 @@ export const WithPlaceholder: StoryFunction = () => {
     allowNewValues: false,
     onChange: console.log,
   };
-  test();
   return (
     <VStack gap="8" align="center">
       <Alert variant="warning" style={{ width: "70ch" }}>
@@ -117,6 +116,7 @@ export const MultiSelect: StoryFn = () => {
     "pear",
     "kiwi",
   ]);
+  test();
   return (
     <UNSAFE_Combobox
       id="combobox-with-multiselect"
