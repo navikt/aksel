@@ -1,10 +1,10 @@
 import cl from "clsx";
 import React from "react";
-import { Detail } from "../../../typography";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { ComboboxOption } from "../types";
 import AddNewOption from "./AddNewOption";
+import FilteredOptionsGroup from "./FilteredOptionsGroup";
 import FilteredOptionsItem from "./FilteredOptionsItem";
 import LoadingMessage from "./LoadingMessage";
 import MaxSelectedMessage from "./MaxSelectedMessage";
@@ -77,26 +77,13 @@ const FilteredOptions = () => {
           )}
           {groups.length > 0 &&
             groups.map((group) => (
-              <div
-                role="group"
-                className="navds-combobox__list__group"
+              <FilteredOptionsGroup
                 key={group}
-                aria-labelledby={`group-${group}`}
-              >
-                <Detail
-                  id={`group-${group}`}
-                  className="navds-combobox__list__group__heading"
-                  data-no-focus="true"
-                  weight="semibold"
-                >
-                  {group}
-                </Detail>
-                {filteredOptions
-                  .filter((option) => option.group === group)
-                  .map((option) => (
-                    <FilteredOptionsItem key={option.value} option={option} />
-                  ))}
-              </div>
+                group={group}
+                options={filteredOptions.filter(
+                  (option) => option.group === group,
+                )}
+              />
             ))}
           {groups.length === 0 &&
             filteredOptions.map((option) => (
