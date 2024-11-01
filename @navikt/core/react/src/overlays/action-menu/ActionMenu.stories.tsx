@@ -387,6 +387,9 @@ export const Disabled: Story = {
           <ActionMenu.Item disabled shortcut="T+W">
             Item 1
           </ActionMenu.Item>
+          <ActionMenu.Item disabled variant="danger">
+            Delete
+          </ActionMenu.Item>
           <ActionMenu.Sub>
             <ActionMenu.SubTrigger disabled>Submenu 1</ActionMenu.SubTrigger>
             <ActionMenu.SubContent>

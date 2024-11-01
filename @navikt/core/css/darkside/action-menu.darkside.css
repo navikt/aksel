@@ -86,7 +86,6 @@
   }
 
   &[aria-disabled="true"] {
-    color: var(--ax-text-subtle);
     opacity: 0.5;
     pointer-events: none;
   }
