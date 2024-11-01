@@ -36,7 +36,6 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   variant?: "default" | "neutral";
   /**
-   * @deprecated Prop will be removed and replaced by `size` in future versions.
    * @default "small"
    */
   headingSize?: "large" | "medium" | "small" | "xsmall";
