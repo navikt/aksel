@@ -309,6 +309,17 @@
   cursor: default;
 }
 
+/* Group / category */
+.navds-combobox__list__group {
+  width: 100%;
+}
+
+.navds-combobox__list__group__heading {
+  background-color: var(--a-surface-subtle);
+  padding-block: var(--a-spacing-05);
+  padding-inline: var(--a-spacing-3);
+}
+
 /* ul-list and selectable li-items */
 
 .navds-combobox__list-options {

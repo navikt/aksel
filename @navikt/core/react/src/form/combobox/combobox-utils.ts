@@ -24,9 +24,14 @@ const toComboboxOption = (value: string): ComboboxOption => ({
 });
 
 const mapToComboboxOptionArray = (options?: string[] | ComboboxOption[]) => {
-  return options?.map((option: string | ComboboxOption) =>
-    typeof option === "string" ? toComboboxOption(option) : option,
-  );
+  return options
+    ?.map((option: string | ComboboxOption) =>
+      typeof option === "string" ? toComboboxOption(option) : option,
+    )
+    .map((option: ComboboxOption) => ({
+      ...option,
+      group: option.group,
+    }));
 };
 
 export { isInList, mapToComboboxOptionArray, toComboboxOption };

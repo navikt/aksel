@@ -14,6 +14,11 @@ export type ComboboxOption = {
    * The programmatic value of the option, for use internally. Will be returned from onToggleSelected.
    */
   value: string;
+  /**
+   * Group options under a "heading" by adding this prop.
+   * Can also be searched for.
+   */
+  group?: string;
 };
 
 export interface ComboboxProps

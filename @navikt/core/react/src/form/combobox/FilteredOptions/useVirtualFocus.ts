@@ -23,7 +23,15 @@ const useVirtualFocus = (
   );
 
   const getListOfAllChildren = (): HTMLElement[] =>
-    Array.from(containerRef?.children ?? []) as HTMLElement[];
+    (Array.from(containerRef?.children ?? []) as HTMLElement[]).reduce(
+      (acc: HTMLElement[], el) => {
+        if (el.role === "group") {
+          return [...acc, ...(Array.from(el.children) as HTMLElement[])];
+        }
+        return [...acc, el];
+      },
+      [],
+    );
   const getElementsAbleToReceiveFocus = () =>
     getListOfAllChildren().filter(
       (child) => child.getAttribute("data-no-focus") !== "true",

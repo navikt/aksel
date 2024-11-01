@@ -578,3 +578,43 @@ Chromatic.parameters = {
     disable: false,
   },
 };
+
+export const GroupedOptions: StoryFn<ComboboxProps> = ({ ...rest }) => (
+  <UNSAFE_Combobox
+    {...rest}
+    id="combobox"
+    isMultiSelect
+    options={[
+      {
+        label: "Apple",
+        value: "apple",
+        group: "Fruit",
+      },
+      {
+        label: "Banana",
+        value: "banana",
+        group: "Fruit",
+      },
+      {
+        label: "Orange",
+        value: "orange",
+        group: "Fruit",
+      },
+      {
+        label: "Carrot",
+        value: "carrot",
+        group: "Vegetable",
+      },
+      {
+        label: "Cucumber",
+        value: "cucumber",
+        group: "Vegetable",
+      },
+      {
+        label: "Tomato",
+        value: "tomato",
+        group: "Vegetable",
+      },
+    ]}
+  />
+);
