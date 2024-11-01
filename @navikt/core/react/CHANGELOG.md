@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.4.3
+
+### Patch Changes
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.3
+  - @navikt/aksel-icons@7.4.3
+
 ## 7.4.2
 
 ### Patch Changes
