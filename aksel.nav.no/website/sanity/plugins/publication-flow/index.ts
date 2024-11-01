@@ -6,10 +6,10 @@ import {
 import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
-  createWrappedDefaultPublish,
   createWrappedFocusAction,
   createWrappedUpdateAction,
 } from "./actions";
+import { createPublishWithDateAction } from "./actions/createPublishWithDateAction";
 import { CreateStatusBadge, createBadgeComponent } from "./badges";
 
 const generateBadges = (prev: DocumentBadgeComponent[]) => {
@@ -35,10 +35,6 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
   return [...customActions, ...defaultActions.slice(1)];
 };
 
-const withCustomPublishAction = (prev: DocumentActionComponent[]) => {
-  return [createWrappedDefaultPublish(prev[0]), ...prev.slice(1)];
-};
-
 export const publicationFlow = definePlugin(() => {
   const hasQualityControl = [
     "komponent_artikkel",
@@ -50,19 +46,27 @@ export const publicationFlow = definePlugin(() => {
   return {
     name: "publication-flow",
     document: {
-      actions: (prev, { schemaType }) => {
-        if (hasQualityControl.some((docType) => docType === schemaType)) {
+      actions: (prev, context) => {
+        if (
+          hasQualityControl.some((docType) => docType === context.schemaType)
+        ) {
           return getCustomActions(prev);
         }
 
-        if (hasPublishedAt.some((docType) => docType === schemaType)) {
-          return withCustomPublishAction(prev);
+        if (hasPublishedAt.some((docType) => docType === context.schemaType)) {
+          return prev.map((originalAction) =>
+            originalAction.action === "publish"
+              ? createPublishWithDateAction(originalAction)
+              : originalAction,
+          );
         }
 
         return prev;
       },
-      badges: (prev, { schemaType }) => {
-        if (hasQualityControl.some((docType) => docType === schemaType)) {
+      badges: (prev, context) => {
+        if (
+          hasQualityControl.some((docType) => docType === context.schemaType)
+        ) {
           return generateBadges(prev);
         }
         return prev;
