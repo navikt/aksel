@@ -11,7 +11,7 @@
   border: none;
   position: relative;
   border-radius: var(--ax-border-radius-large);
-  background: white;
+  background: transparent;
   color: var(--ax-text-accent);
 
   > * {
