@@ -95,8 +95,6 @@
 
 /* ------------------------- Accordion chevron icon ------------------------- */
 .navds-accordion__icon-wrapper {
-  display: grid;
-  place-content: center;
   border-radius: var(--ax-border-radius-large);
   width: 22px;
   height: 22px;
