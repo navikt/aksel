@@ -10,3 +10,9 @@
 .dark {
   color: var(--ax-text-default);
 }
+
+.navds-theme {
+  &[data-background="true"] {
+    background-color: var(--ax-bg-default);
+  }
+}
