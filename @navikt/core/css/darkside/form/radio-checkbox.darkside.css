@@ -23,15 +23,15 @@
   display: flex;
   gap: var(--ax-spacing-2);
 
-  --__ac-radio-checkbox-readonly-bg: var(--ax-bg-neutral-moderate);
-  --__ac-radio-checkbox-readonly-border: var(--ax-border-subtle);
+  --__axc-radio-checkbox-input-bg: var(--ax-bg-input);
+  --__axc-radio-checkbox-input-border-color: var(--ax-border-default);
 
   &::before {
     content: "";
-    background-color: var(--ax-bg-input);
+    background-color: var(--__axc-radio-checkbox-input-bg);
     border-radius: var(--ax-border-radius-medium);
     flex-shrink: 0;
-    box-shadow: 0 0 0 2px var(--ax-border-default);
+    box-shadow: 0 0 0 2px var(--__axc-radio-checkbox-input-border-color);
     width: calc(1.5rem - 0.25rem);
     height: calc(1.5rem - 0.25rem);
     margin-block: 2px;
@@ -90,12 +90,12 @@
 
 .navds-checkbox__input {
   &:is(:checked, :indeterminate) + .navds-checkbox__label::before {
-    background-color: var(--ax-bg-accent-strong-pressed);
-    box-shadow: 0 0 0 2px var(--ax-bg-accent-strong-pressed);
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-strong-pressed);
+    --__axc-radio-checkbox-input-border-color: var(--ax-bg-accent-strong-pressed);
   }
 
   &:is(:checked, :indeterminate):hover + .navds-checkbox__label::before {
-    background-color: var(--ax-bg-accent-strong-hover);
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-strong-hover);
   }
 
   &:not(:checked) + .navds-checkbox__label > .navds-checkbox__icon {
@@ -119,8 +119,8 @@
   }
 
   &:hover:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before {
-    box-shadow: 0 0 0 2px var(--ax-border-accent-strong);
-    background-color: var(--ax-bg-accent-moderate-hover);
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-moderate-hover);
+    --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
   }
 
   &:focus-visible + .navds-checkbox__label::before {
@@ -133,7 +133,7 @@
     position: absolute;
     top: 50%;
     transform: translate(var(--ax-spacing-1-alt), -50%);
-    background-color: var(--ax-bg-input);
+    background-color: var(--__axc-radio-checkbox-input-bg);
     width: 0.75rem;
     height: 0.25rem;
     border-radius: 1px;
@@ -153,8 +153,8 @@
   }
 
   &:hover:not(:disabled, :checked) + .navds-radio__label::before {
-    box-shadow: 0 0 0 2px var(--ax-border-accent-strong);
-    background-color: var(--ax-bg-accent-moderate-hover);
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-moderate-hover);
+    --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
   }
 
   &:focus-visible + .navds-radio__label::before {
@@ -164,7 +164,7 @@
 
   &:checked {
     & + .navds-radio__label::before {
-      box-shadow: 0 0 0 2px var(--ax-border-accent-strong);
+      --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
     }
 
     & + .navds-radio__label::after {
@@ -183,21 +183,21 @@
 
 .navds-checkbox--error {
   > .navds-checkbox__input:not(:hover, :disabled, :checked, :indeterminate) + .navds-checkbox__label::before {
-    box-shadow: 0 0 0 2px var(--ax-border-danger-strong);
+    --__axc-radio-checkbox-input-border-color: var(--ax-border-danger-strong);
   }
 
-  > .navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate, :focus) + .navds-checkbox__label::before {
-    background-color: var(--ax-bg-danger-moderate-hover);
+  > .navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before {
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-danger-moderate-hover);
   }
 }
 
 .navds-radio--error {
   > .navds-radio__input:not(:hover, :disabled, :checked) + .navds-radio__label::before {
-    box-shadow: 0 0 0 2px var(--ax-border-danger-strong);
+    --__axc-radio-checkbox-input-border-color: var(--ax-border-danger-strong);
   }
 
   > .navds-radio__input:hover:not(:disabled, :checked, :focus) + .navds-radio__label::before {
-    background-color: var(--ax-bg-danger-moderate-hover);
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-danger-moderate-hover);
   }
 }
 
@@ -234,13 +234,13 @@
 .navds-checkbox--readonly > .navds-checkbox__input:hover:not(:checked, :indeterminate, :focus) + .navds-checkbox__label::before,
 .navds-radio--readonly > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before,
 .navds-radio--readonly > .navds-radio__input:hover:not(:checked, :focus) + .navds-radio__label::before {
-  background-color: var(--__ac-radio-checkbox-readonly-bg);
-  box-shadow: 0 0 0 2px var(--__ac-radio-checkbox-readonly-border);
+  --__axc-radio-checkbox-input-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-input-border-color: var(--ax-border-subtle);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label::before {
-  background-color: var(--__ac-radio-checkbox-readonly-bg);
-  box-shadow: 0 0 0 2px var(--__ac-radio-checkbox-readonly-border);
+  --__axc-radio-checkbox-input-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-input-border-color: var(--ax-border-subtle);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
@@ -248,8 +248,8 @@
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
-  box-shadow: 0 0 0 2px var(--__ac-radio-checkbox-readonly-border);
-  background-color: var(--__ac-radio-checkbox-readonly-bg);
+  --__axc-radio-checkbox-input-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-input-border-color: var(--ax-border-subtle);
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::after {
@@ -257,8 +257,8 @@
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::before {
-  box-shadow: 0 0 0 2px var(--__ac-radio-checkbox-readonly-border);
-  background-color: var(--__ac-radio-checkbox-readonly-bg);
+  --__axc-radio-checkbox-input-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-input-border-color: var(--ax-border-subtle);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
