@@ -71,7 +71,7 @@
   }
 
   > .navds-input__label {
-    padding: var(--a-spacing-1-alt) 0;
+    padding: var(--ax-spacing-1-alt) 0;
 
     &::before {
       width: calc(1.25rem - 0.25rem);
@@ -226,6 +226,12 @@
   .navds-input__label::before {
     border: 1px solid fieldtext;
     background-color: field;
+  }
+
+  .navds-input__container[data-error="true"] {
+    .navds-input__element:not(:checked) + .navds-input__label::before {
+      forced-color-adjust: none;
+    }
   }
 
   .navds-input__container[data-type="checkbox"] {
