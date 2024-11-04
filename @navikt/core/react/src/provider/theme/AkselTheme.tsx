@@ -7,8 +7,8 @@ type AkselThemeContext = {
 };
 
 const [ThemeProvider, useAkselTheme] = createContext<AkselThemeContext>({
-  errorMessage: "useAkselThemeProvider must be within AkselThemeProvider",
-  hookName: "useAkselThemeProvider",
+  errorMessage: "useAkselTheme must be used within AkselThemeProvider",
+  hookName: "useAkselTheme",
   name: "AkselThemeProvider",
   providerName: "AkselThemeProvider",
 });
