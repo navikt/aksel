@@ -230,6 +230,40 @@ export const Readonly = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="colgap">
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      disabled
+    >
+      <Checkbox value="banan">Banan</Checkbox>
+      <Checkbox value="eple">Eple</Checkbox>
+      <Checkbox value="druer" indeterminate>
+        Druer
+      </Checkbox>
+    </CheckboxGroup>
+    <CheckboxGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue={["Eple"]}
+      disabled
+    >
+      <Checkbox value="eple" description="Epler kommer i 4 varianter">
+        Eple
+      </Checkbox>
+      <Checkbox value="banan">Banan</Checkbox>
+    </CheckboxGroup>
+    <hr />
+    <Checkbox value="tekst1" disabled>
+      Eple single
+    </Checkbox>
+    <Checkbox value="tekst1" checked disabled>
+      Banan single
+    </Checkbox>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -272,6 +306,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Readonly</h2>
         <Readonly />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
       </div>
     </div>
   ),
