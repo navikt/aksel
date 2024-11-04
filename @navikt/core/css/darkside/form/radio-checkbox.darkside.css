@@ -12,6 +12,15 @@
   z-index: 1;
   opacity: 0;
   cursor: pointer;
+
+  &:hover:not(:disabled, :checked, :indeterminate) + .navds-input__label::before {
+    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-moderate-hover);
+    --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
+  }
+
+  &:hover:not(:disabled) + .navds-input__label {
+    color: var(--ax-text-accent-strong);
+  }
 }
 
 .navds-input__label {
@@ -52,6 +61,7 @@
   vertical-align: initial;
 }
 
+/* ---------------------------- Input size small ---------------------------- */
 .navds-input__container[data-size="small"] {
   > .navds-input__element {
     width: 2rem;
@@ -75,7 +85,7 @@
     }
 
     &:checked + .navds-input__label > .navds-checkbox__icon {
-      transform: translate(0.25rem, -10%);
+      transform: translate(0.24rem, -10%);
     }
 
     &:checked + .navds-input__label::before {
@@ -93,6 +103,7 @@
   }
 }
 
+/* ----------------------- Input Checkbox specific styles ---------------------- */
 .navds-input__container[data-type="checkbox"] .navds-input__element {
   &:is(:checked, :indeterminate) + .navds-input__label::before {
     --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-strong-pressed);
@@ -119,15 +130,6 @@
     align-items: center;
   }
 
-  &:where(:hover:not(:disabled)) + .navds-input__label {
-    color: var(--ax-text-accent-strong);
-  }
-
-  &:where(:hover:not(:disabled, :checked, :indeterminate)) + .navds-input__label::before {
-    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-moderate-hover);
-    --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
-  }
-
   &:focus-visible + .navds-input__label::before {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 4px;
@@ -146,16 +148,8 @@
   }
 }
 
+/* ----------------------- Input Radio specific styles ---------------------- */
 .navds-input__container[data-type="radio"] .navds-input__element {
-  &:where(:hover:not(:disabled)) + .navds-input__label {
-    color: var(--ax-text-accent-strong);
-  }
-
-  &:where(:hover:not(:disabled, :checked)) + .navds-input__label::before {
-    --__axc-radio-checkbox-input-bg: var(--ax-bg-accent-moderate-hover);
-    --__axc-radio-checkbox-input-border-color: var(--ax-border-accent-strong);
-  }
-
   &:focus-visible + .navds-input__label::before {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 4px;
