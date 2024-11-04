@@ -20,12 +20,16 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           props.className,
           "navds-checkbox",
           `navds-checkbox--${size}`,
+          "navds-input-container",
           {
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
             "navds-checkbox--readonly": readOnly,
           },
         )}
+        data-error={hasError}
+        data-disabled={inputProps.disabled}
+        data-readonly={readOnly}
       >
         <input
           {...omit(props, [
@@ -40,7 +44,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ])}
           {...omit(inputProps, ["aria-invalid"])}
           type="checkbox"
-          className="navds-checkbox__input"
+          className="navds-input-element navds-checkbox__input"
           ref={(el) => {
             if (el) {
               el.indeterminate = props.indeterminate ?? false;
@@ -60,7 +64,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             },
           )}
         />
-        <label htmlFor={inputProps.id} className="navds-checkbox__label">
+        <label
+          htmlFor={inputProps.id}
+          className="navds-input-label navds-checkbox__label"
+        >
           <span className="navds-checkbox__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"

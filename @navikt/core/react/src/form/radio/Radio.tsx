@@ -14,11 +14,20 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
 
   return (
     <div
-      className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
-        "navds-radio--error": hasError,
-        "navds-radio--disabled": inputProps.disabled,
-        "navds-radio--readonly": readOnly,
-      })}
+      className={cl(
+        props.className,
+        "navds-radio",
+        `navds-radio--${size}`,
+        "navds-input-container",
+        {
+          "navds-radio--error": hasError,
+          "navds-radio--disabled": inputProps.disabled,
+          "navds-radio--readonly": readOnly,
+        },
+      )}
+      data-error={hasError}
+      data-disabled={inputProps.disabled}
+      data-readonly={readOnly}
     >
       <input
         {...omit(props, ["children", "size", "description", "readOnly"])}
@@ -30,10 +39,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
             [descriptionId]: props.description,
           },
         )}
-        className="navds-radio__input"
+        className="navds-input__element navds-radio__input"
         ref={ref}
       />
-      <label htmlFor={inputProps.id} className="navds-radio__label">
+      <label
+        htmlFor={inputProps.id}
+        className="navds-input__label navds-radio__label"
+      >
         <span className="navds-radio__content">
           <BodyShort as="span" id={labelId} size={size} aria-hidden>
             {props.children}
