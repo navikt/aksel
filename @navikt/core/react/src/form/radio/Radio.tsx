@@ -18,7 +18,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         props.className,
         "navds-radio",
         `navds-radio--${size}`,
-        "navds-input-container",
+        "navds-input__container",
         {
           "navds-radio--error": hasError,
           "navds-radio--disabled": inputProps.disabled,
@@ -28,6 +28,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       data-error={hasError}
       data-disabled={inputProps.disabled}
       data-readonly={readOnly}
+      data-type="radio"
+      data-size={size}
     >
       <input
         {...omit(props, ["children", "size", "description", "readOnly"])}
@@ -46,7 +48,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         htmlFor={inputProps.id}
         className="navds-input__label navds-radio__label"
       >
-        <span className="navds-radio__content">
+        <span className="navds-input__label-content navds-radio__content">
           <BodyShort as="span" id={labelId} size={size} aria-hidden>
             {props.children}
           </BodyShort>

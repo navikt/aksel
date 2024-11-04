@@ -20,7 +20,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           props.className,
           "navds-checkbox",
           `navds-checkbox--${size}`,
-          "navds-input-container",
+          "navds-input__container",
           {
             "navds-checkbox--error": hasError,
             "navds-checkbox--disabled": inputProps.disabled,
@@ -30,6 +30,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         data-error={hasError}
         data-disabled={inputProps.disabled}
         data-readonly={readOnly}
+        data-type="checkbox"
+        data-size={size}
       >
         <input
           {...omit(props, [
@@ -44,7 +46,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ])}
           {...omit(inputProps, ["aria-invalid"])}
           type="checkbox"
-          className="navds-input-element navds-checkbox__input"
+          className="navds-input__element navds-checkbox__input"
           ref={(el) => {
             if (el) {
               el.indeterminate = props.indeterminate ?? false;
@@ -66,7 +68,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <label
           htmlFor={inputProps.id}
-          className="navds-input-label navds-checkbox__label"
+          className="navds-input__label navds-checkbox__label"
         >
           <span className="navds-checkbox__icon">
             <svg
@@ -86,9 +88,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             </svg>
           </span>
           <span
-            className={cl("navds-checkbox__content", {
-              "navds-sr-only": props.hideLabel,
-            })}
+            className={cl(
+              "navds-input__label-content navds-checkbox__content",
+              {
+                "navds-sr-only": props.hideLabel,
+              },
+            )}
           >
             <BodyShort
               as="span"
