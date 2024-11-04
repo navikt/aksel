@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { createContext } from "../../util/create-context";
 
 type AkselThemeContext = {
-  appearance: "light" | "dark";
+  theme: "light" | "dark";
 };
 
 const [ThemeProvider, useAkselTheme] = createContext<AkselThemeContext>({
@@ -26,23 +26,20 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
     const {
       children,
       className,
-      appearance = context?.appearance ?? "light",
+      theme = context?.theme ?? "light",
       hasBackground: hasBackgroundProp = true,
     } = props;
 
     const isRoot = context === undefined;
 
     const hasBackground =
-      hasBackgroundProp ?? (isRoot || props.appearance !== undefined);
+      hasBackgroundProp ?? (isRoot || props.theme !== undefined);
 
     return (
-      <ThemeProvider appearance={appearance}>
+      <ThemeProvider theme={theme}>
         <div
           ref={ref}
-          className={cl("navds-theme", className, {
-            light: appearance === "light",
-            dark: appearance === "dark",
-          })}
+          className={cl("navds-theme", className, theme)}
           data-background={hasBackground}
         >
           {children}
