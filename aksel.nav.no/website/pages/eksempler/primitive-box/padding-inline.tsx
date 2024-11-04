@@ -35,5 +35,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "'paddingInline' gir deg mer kontroll over horisontal padding",
+  desc: "Propen 'paddingInline' gir deg mer kontroll over horisontal padding.",
 };

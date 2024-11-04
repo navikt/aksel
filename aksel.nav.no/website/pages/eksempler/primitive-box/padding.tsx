@@ -30,5 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "'padding'-prop lar deg endre padding responsivt basert på brekkpunkt",
+  desc: "Propen 'padding' lar deg sette padding responsivt basert på brekkpunkt. Verdien mapper til tokens, så f.eks. '4' tilsvarer '--a-spacing-4' som er '1rem'.",
 };
