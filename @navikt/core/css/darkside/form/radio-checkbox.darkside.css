@@ -223,79 +223,52 @@
 }
 
 @media (forced-colors: active) {
-  .-navds-checkbox__input:focus + .-navds-checkbox__label::before,
-  .-navds-radio__input:focus + .-navds-radio__label::before {
-    outline-color: highlight;
+  .navds-input__label::before {
+    border: 1px solid fieldtext;
+    background-color: field;
   }
 
-  .-navds-checkbox,
-  .-navds-radio {
-    --__ac-radio-checkbox-high-contrast-bg: field;
-    --__ac-radio-checkbox-high-contrast-text: fieldtext;
-    --__ac-radio-checkbox-high-contrast-highlight: highlight;
+  .navds-input__container[data-type="checkbox"] {
+    .navds-input__element:indeterminate + .navds-input__label::after {
+      background-color: fieldtext;
+    }
+
+    &[data-disabled="true"] {
+      .navds-input__element + .navds-input__label > .navds-checkbox__icon {
+        color: graytext;
+      }
+
+      .navds-input__element + .navds-input__label::after {
+        background-color: graytext;
+      }
+    }
   }
 
-  .-navds-checkbox__label::before,
-  .-navds-radio__label::before {
-    border: 1px solid var(--__ac-radio-checkbox-high-contrast-text);
-    background-color: var(--__ac-radio-checkbox-high-contrast-bg);
+  .navds-input__container[data-type="radio"] {
+    .navds-input__element:checked + .navds-input__label::after {
+      background-color: fieldtext;
+    }
+
+    &[data-disabled="true"] {
+      .navds-input__element:checked + .navds-input__label::after {
+        background-color: graytext;
+      }
+    }
   }
 
-  .-navds-checkbox__input:checked + .-navds-checkbox__label > .-navds-checkbox__icon {
-    color: var(--__ac-radio-checkbox-high-contrast-text);
-  }
-
-  .-navds-checkbox__input:indeterminate + .-navds-checkbox__label::after {
-    background-color: var(--__ac-radio-checkbox-high-contrast-text);
-  }
-
-  .-navds-radio__input:checked + .-navds-radio__label::before {
-    border: 1px solid var(--__ac-radio-checkbox-high-contrast-text);
-    outline: 3px solid var(--__ac-radio-checkbox-high-contrast-bg);
-    outline-offset: -4px;
-    background-color: var(--__ac-radio-checkbox-high-contrast-text);
-  }
-
-  .-navds-radio__input:checked:focus + .-navds-radio__label::before {
-    border: 1px solid var(--__ac-radio-checkbox-high-contrast-bg);
-    outline: 2px solid highlight;
-    outline-offset: 2px;
-  }
-
-  :not(.-navds-checkbox--readonly) > .-navds-checkbox__input:hover:not(:disabled) + .-navds-checkbox__label,
-  :not(.-navds-radio--readonly) > .-navds-radio__input:hover:not(:disabled) + .-navds-radio__label {
+  .navds-input__container:not([data-readonly="true"]) > .navds-input__element:hover:not(:disabled) + .navds-input__label {
     color: highlight;
   }
 
-  .-navds-checkbox__input:focus + .-navds-checkbox__label::before {
-    outline: 2px solid var(--__ac-radio-checkbox-high-contrast-highlight);
-  }
-
-  .-navds-checkbox--readonly > .-navds-checkbox__input:checked + .-navds-checkbox__label::before {
-    border: 1px solid var(--__ac-radio-checkbox-high-contrast-text);
-    background-color: var(--__ac-radio-checkbox-high-contrast-bg);
-  }
-
-  .-navds-checkbox--readonly > .-navds-checkbox__input:indeterminate + .-navds-checkbox__label::after {
-    background-color: var(--__ac-radio-checkbox-high-contrast-text);
-  }
-
-  .-navds-radio--readonly > .-navds-radio__input:checked + .-navds-radio__label::before {
-    border: 1px solid var(--__ac-radio-checkbox-high-contrast-text);
-    outline: 3px solid var(--__ac-radio-checkbox-high-contrast-bg);
-    outline-offset: -4px;
-    background-color: var(--__ac-radio-checkbox-high-contrast-text);
-  }
-
-  .-navds-checkbox--disabled,
-  .-navds-radio--disabled {
+  .navds-input__container[data-disabled="true"] {
     opacity: 1;
 
-    --__ac-radio-checkbox-high-contrast-bg: field;
-    --__ac-radio-checkbox-high-contrast-text: graytext;
+    .navds-input__label::before {
+      border: 1px solid graytext;
+    }
   }
 
-  :is(.-navds-checkbox--disabled, .-navds-radio--disabled) :is(.-navds-checkbox__label, .-navds-radio__label) {
+  .navds-input__container[data-disabled="true"] .navds-input__label {
     color: graytext;
   }
 }
