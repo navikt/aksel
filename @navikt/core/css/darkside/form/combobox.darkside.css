@@ -306,7 +306,7 @@
   gap: inherit;
   background-color: inherit;
   align-items: flex-start;
-  overflow: scroll hidden;
+  overflow: hidden scroll;
   padding-inline: 0 var(--ax-spacing-4);
 
   /* TODO: expected this to work
