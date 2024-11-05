@@ -122,13 +122,11 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuetext={
           simulated?.seconds
             ? translate("progressUnknown", {
-                replacements: { seconds: Math.round(simulated?.seconds) },
+                seconds: Math.round(simulated?.seconds),
               })
             : translate("progress", {
-                replacements: {
-                  current: Math.round(value),
-                  max: Math.round(valueMax),
-                },
+                current: Math.round(value),
+                max: Math.round(valueMax),
               })
         }
         // biome-ignore lint/a11y/useAriaPropsForRole: We found that adding valueMin was not needed

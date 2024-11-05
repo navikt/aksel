@@ -10,6 +10,7 @@ export default {
   global: {
     showMore: "Vis mer",
     showLess: "Vis mindre",
+    readOnly: "Skrivebeskyttet",
   },
 
   FileUpload: {
@@ -49,6 +50,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ErrorSummary: {
+    heading: "Du må rette disse feilene før du kan fortsette:",
+  },
   Loader: {
     title: "Venter…",
   },
@@ -67,5 +71,11 @@ export default {
   Search: {
     clear: "Tøm",
     search: "Søk",
+  },
+  Textarea: {
+    /** Screen readers only */
+    maxLength: "Tekstområde med plass til {maxLength} tegn.",
+    charsTooMany: "{chars} tegn for mye",
+    charsLeft: "{chars} tegn igjen",
   },
 } satisfies TranslationMap;

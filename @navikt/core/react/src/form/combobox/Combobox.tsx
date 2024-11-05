@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import ComboboxWrapper from "./ComboboxWrapper";
 import FilteredOptions from "./FilteredOptions/FilteredOptions";
 import { useFilteredOptionsContext } from "./FilteredOptions/filteredOptionsContext";
@@ -46,7 +46,7 @@ export const Combobox = forwardRef<
           "navds-sr-only": hideLabel,
         })}
       >
-        <ReadOnlyIcon nativeReadOnly={false} readOnly={readOnly} />
+        {readOnly && <ReadOnlyIconWithTitle />}
         {label}
       </Label>
       {!!description && (

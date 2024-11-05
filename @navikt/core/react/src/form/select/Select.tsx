@@ -3,7 +3,7 @@ import React, { SelectHTMLAttributes, forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SelectProps
@@ -112,7 +112,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+          {readOnly && <ReadOnlyIconWithTitle />}
           {label}
         </Label>
         {!!description && (

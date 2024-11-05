@@ -27,7 +27,7 @@ export function useI18n<T extends Component>(
    */
   const translate = (
     keypath: NestedKeyOf<Translations[T]>,
-    options?: { replacements: Record<string, string | number> },
+    replacements?: Record<string, string | number>,
   ) => {
     const text = get(
       keypath,
@@ -37,19 +37,19 @@ export function useI18n<T extends Component>(
         : [i18n[componentName]]),
     );
 
-    if (options?.replacements) {
+    if (replacements) {
       return text.replace(REPLACE_REGEX, (match) => {
         const replacement = match.substring(1, match.length - 1);
 
-        if (options.replacements[replacement] === undefined) {
-          const replacementData = JSON.stringify(options.replacements);
+        if (replacements[replacement] === undefined) {
+          const replacementData = JSON.stringify(replacements);
 
           throw new Error(
             `Error translating key '${keypath}'. No replacement syntax ({}) found for key '${replacement}'. The following replacements were passed: '${replacementData}'`,
           );
         }
 
-        return options.replacements[replacement] as string; // can also be a number, but JS doesn't mind...
+        return replacements[replacement] as string; // can also be a number, but JS doesn't mind...
       });
     }
 
