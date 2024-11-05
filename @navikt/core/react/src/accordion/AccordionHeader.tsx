@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { AccordionContext } from "./AccordionContext";
@@ -19,11 +20,20 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
+    const themeContext = UNSAFE_useAkselTheme(false);
+
     if (itemContext === null) {
       console.error(
         "<Accordion.Header> has to be used within an <Accordion.Item>, which in turn must be within an <Accordion>",
       );
       return null;
+    }
+
+    let headingSize = accordionContext?.headingSize ?? "small";
+
+    if (themeContext) {
+      /* Fallback to "medium" if any other sizes are used */
+      headingSize = accordionContext?.size === "small" ? "xsmall" : "small";
     }
 
     return (
@@ -42,7 +52,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           />
         </span>
         <Heading
-          size={accordionContext?.headingSize ?? "small"}
+          size={headingSize}
           as="span"
           className="navds-accordion__header-content"
         >

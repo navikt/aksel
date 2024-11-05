@@ -57,6 +57,10 @@
   }
 }
 
+.navds-accordion--small .navds-accordion__header {
+  padding-block: var(--a-spacing-2);
+}
+
 .navds-accordion__header-content {
   overflow: hidden;
   text-overflow: ellipsis;
