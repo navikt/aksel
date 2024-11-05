@@ -61,7 +61,7 @@ const ModeDecorator = ({ children, mode, theme }) => {
   }, [mode]);
 
   return mode === "darkside" ? (
-    <UNSAFE_AkselTheme appearance={theme || undefined} hasBackground={false}>
+    <UNSAFE_AkselTheme theme={theme || undefined} hasBackground={false}>
       {children}
     </UNSAFE_AkselTheme>
   ) : (
