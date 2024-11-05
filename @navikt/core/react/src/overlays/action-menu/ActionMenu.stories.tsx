@@ -49,7 +49,7 @@ export const OnlyItems: Story = {
             Item 3
           </ActionMenu.Item>
           <ActionMenu.Item
-            onSelect={() => console.log("Item 3 clicked")}
+            onSelect={() => console.log("Item 4 clicked")}
             variant="danger"
           >
             Item 4
