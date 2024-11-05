@@ -2,7 +2,7 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import React, { useLayoutEffect } from "react";
 import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
 import defaultCss from "@navikt/ds-css/index.css?inline";
-import { UNSAFE_AkselTheme } from "@navikt/ds-react/Provider";
+import { UNSAFE_AkselTheme } from "../@navikt/core/react/src/provider";
 import "./layout.css";
 
 export const parameters = {

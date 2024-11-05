@@ -128,6 +128,8 @@
   animation: navds-accordion-content-animation 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* navds-accordion__content-inner */
+
 .navds-accordion__item--no-animation {
   animation: none;
 }
@@ -147,22 +149,18 @@
 }
 
 .navds-accordion--indent > .navds-accordion__item > .navds-accordion__content {
-  /* Since we use psuedo-element for "border", we add the width to left-padding. This alignes with the header-text */
-  padding-inline: calc(var(--ax-spacing-11) + var(--__acx-accordion-content-line-width)) var(--ax-spacing-8);
+  padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
 }
 
-.navds-accordion--indent > .navds-accordion__item > .navds-accordion__content::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: var(--ax-spacing-2);
-  left: calc(var(--ax-spacing-6) - var(--__acx-accordion-content-line-width));
-  height: calc(100% - var(--ax-spacing-7));
-  width: var(--__acx-accordion-content-line-width);
-  background-color: var(--ax-border-subtleA);
+.navds-accordion--indent > .navds-accordion__item .navds-accordion__content-inner {
+  box-shadow: -2px 0 0 0 var(--ax-border-subtleA);
+  padding-block: var(--ax-spacing-2);
+
+  /* Aligns content with heading-section */
+  padding-inline: calc(var(--ax-spacing-5) + 2px) var(--ax-spacing-5);
 
   @media (forced-colors: active) {
-    background-color: canvastext;
+    border-left: 1px solid canvastext;
   }
 }
 
@@ -171,8 +169,8 @@
   opacity: 1;
   overflow: visible;
   max-height: fit-content;
-  padding-block: var(--ax-spacing-4);
-  padding-block-end: var(--ax-spacing-7);
+  padding-block: var(--ax-spacing-2);
+  padding-block-end: var(--ax-spacing-6);
 }
 
 @starting-style {
