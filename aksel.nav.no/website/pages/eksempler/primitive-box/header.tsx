@@ -113,5 +113,5 @@ export const Demo = {
 
 export const args = {
   index: 8,
-  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt",
+  desc: "Box lar deg enklere bygge opp kjente grensesnitt gjennom felles tokens og brekkpunkt.",
 };
