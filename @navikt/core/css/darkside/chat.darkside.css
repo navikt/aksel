@@ -8,11 +8,11 @@
 .navds-chat--right {
   flex-direction: row-reverse;
 
-  .navds-chat__bubble-wrapper {
+  & .navds-chat__bubble-wrapper {
     align-items: flex-end;
   }
 
-  .navds-chat__bubble {
+  & .navds-chat__bubble {
     border-radius: var(--ax-border-radius-xlarge);
     border-bottom-right-radius: var(--ax-border-radius-small);
   }
@@ -35,7 +35,7 @@
   font-size: 1.06rem;
   letter-spacing: 0.024rem;
 
-  svg {
+  & svg {
     align-self: center;
     width: 100%;
     max-width: 1.5rem;
@@ -71,15 +71,15 @@
 
 /* -------------------------- Chat bubble variants -------------------------- */
 .navds-chat--info {
-  .navds-chat__bubble,
-  .navds-chat__avatar {
+  & .navds-chat__bubble,
+  & .navds-chat__avatar {
     background-color: var(--ax-bg-info-raised);
   }
 }
 
 .navds-chat--neutral {
-  .navds-chat__bubble,
-  .navds-chat__avatar {
+  & .navds-chat__bubble,
+  & .navds-chat__avatar {
     background-color: var(--ax-bg-neutral-raised);
   }
 }
