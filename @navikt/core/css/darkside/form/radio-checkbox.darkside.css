@@ -132,7 +132,7 @@
 
 .navds-radio__input:checked + .navds-radio__label::before {
   background-color: var(--ax-bg-input);
-  border: 8px solid var(--ax-bg-accent-strong);
+  border: 8px solid var(--ax-bg-accent-strong-pressed);
 }
 
 .navds-radio--small > .navds-radio__input:checked + .navds-radio__label::before {
