@@ -187,6 +187,29 @@ export const Readonly = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="colgap">
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      defaultValue={["banan"]}
+      disabled
+    >
+      <Radio value="banan">Banan</Radio>
+      <Radio value="eple">Eple</Radio>
+      <Radio value="druer">Druer</Radio>
+    </RadioGroup>
+    <RadioGroup
+      legend="Hvilken frukt liker du?"
+      error="feilmelding"
+      defaultValue="eple"
+      disabled
+    >
+      <Radio value="eple">Eple</Radio>
+      <Radio value="banan">Banan</Radio>
+    </RadioGroup>
+  </div>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <div>
@@ -221,6 +244,10 @@ export const Chromatic: Story = {
       <div>
         <h2>Readonly</h2>
         <Readonly />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
       </div>
     </div>
   ),

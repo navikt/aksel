@@ -110,7 +110,7 @@
   background-color: var(--ax-bg-accent-strong-pressed);
 }
 
-.navds-checkbox__input:where(:checked, :indeterminate):hover + .navds-checkbox__label::before {
+.navds-checkbox__input:where(:checked, :indeterminate):not(:disabled):hover + .navds-checkbox__label::before {
   box-shadow: 0 0 0 2px var(--ax-bg-accent-strong-hover);
   background-color: var(--ax-bg-accent-strong-hover);
 }
@@ -169,7 +169,10 @@
   background-color: var(--ax-bg-accent-moderate-hover);
 }
 
-.navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before {
+  box-shadow: 0 0 0 2px var(--ax-border-danger-strong);
+}
+
 .navds-radio--error > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before {
   border-color: var(--ax-border-danger-strong);
 }
