@@ -48,6 +48,12 @@ export const OnlyItems: Story = {
           <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
             Item 3
           </ActionMenu.Item>
+          <ActionMenu.Item
+            onSelect={() => console.log("Item 4 clicked")}
+            variant="danger"
+          >
+            Item 4
+          </ActionMenu.Item>
         </ActionMenu.Content>
       </ActionMenu>
     );
@@ -380,6 +386,9 @@ export const Disabled: Story = {
         <ActionMenu.Content>
           <ActionMenu.Item disabled shortcut="T+W">
             Item 1
+          </ActionMenu.Item>
+          <ActionMenu.Item disabled variant="danger">
+            Delete
           </ActionMenu.Item>
           <ActionMenu.Sub>
             <ActionMenu.SubTrigger disabled>Submenu 1</ActionMenu.SubTrigger>

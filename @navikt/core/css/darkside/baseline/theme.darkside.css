@@ -1,12 +1,15 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-
-/* To support nested theming, we want to declare color on each scoped elements */
-:root,
-:host,
-.light {
+.navds-theme {
   color: var(--ax-text-default);
-}
 
-.dark {
-  color: var(--ax-text-default);
+  &[data-background="true"] {
+    background-color: var(--ax-bg-default);
+  }
+
+  &.light {
+    color-scheme: light;
+  }
+
+  &.dark {
+    color-scheme: dark;
+  }
 }

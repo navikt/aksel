@@ -4,31 +4,35 @@
 
 ### @navikt/ds-react
 
-- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
 
-* Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
+* Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
 
-* Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
+- Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
 
-* Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+- Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
 
-* Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
 
-* Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
+- Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
 
-- Combobox: Enable option to add a new value while autocompleting and highlight matches in FilteredOptions. ([#3225](https://github.com/navikt/aksel/pull/3225))
+- Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
 
-* Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+* Combobox: Enable option to add a new value while autocompleting and highlight matches in FilteredOptions. ([#3225](https://github.com/navikt/aksel/pull/3225))
 
-* Combobox: Don't scroll when browsing list with mouse ([#3265](https://github.com/navikt/aksel/pull/3265))
+- Date/MonthPicker: Upgrade react-day-picker to fix issue with React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
 
-* Avoid warning about element.ref in React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+- Combobox: Don't scroll when browsing list with mouse ([#3265](https://github.com/navikt/aksel/pull/3265))
 
-* Checkbox: Remove redundant attribute aria-checked ([#3274](https://github.com/navikt/aksel/pull/3274))
+- Avoid warning about element.ref in React 19 ([#3268](https://github.com/navikt/aksel/pull/3268))
+
+- Checkbox: Remove redundant attribute aria-checked ([#3274](https://github.com/navikt/aksel/pull/3274))
 
 ### @navikt/ds-css
 
-- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+- Table.ColumnHeader: Inherit text alignment in button ([#3319](https://github.com/navikt/aksel/pull/3319))
+
+* Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
 
 ## 7.3
 

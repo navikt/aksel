@@ -4,6 +4,7 @@ export default {
   global: {
     showMore: "Vis meir",
     showLess: "Vis mindre",
+    readOnly: "Skrivebeskytta",
   },
 
   FileUpload: {

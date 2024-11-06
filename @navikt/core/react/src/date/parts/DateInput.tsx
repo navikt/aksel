@@ -94,7 +94,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-sr-only": hideLabel,
         })}
       >
-        <ReadOnlyIcon readOnly={readOnly} />
+        {readOnly && <ReadOnlyIcon />}
         {label}
       </Label>
       {!!description && (
