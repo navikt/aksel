@@ -1,6 +1,6 @@
 import Avatar from "boring-avatars";
 import { defineField, defineType } from "sanity";
-import { EditorPage } from "../custom-components/EditorPage";
+import { showForDevsOnly } from "../../../util";
 
 export const Editors = defineType({
   title: "Forfattere",
@@ -40,39 +40,7 @@ export const Editors = defineType({
       name: "alt_email",
       type: "string",
       validation: (Rule) => Rule.email(),
-      hidden: ({ currentUser }) => {
-        const user = currentUser;
-        return !user?.roles.find(({ name }) =>
-          ["developer", "administrator"].includes(name),
-        );
-      },
-    }),
-    defineField({
-      name: "profilside",
-      type: "string",
-      title: "",
-      components: {
-        field: EditorPage,
-      },
-      readOnly: true,
-      hidden: ({ currentUser, parent }) => {
-        const user = currentUser;
-
-        if (!parent?.email || !parent?.title) {
-          return true;
-        }
-        if (
-          user?.roles.find(({ name }) =>
-            ["developer", "administrator"].includes(name),
-          )
-        ) {
-          return false;
-        }
-
-        return (
-          parent?.email === user?.email || parent?.alt_email === user?.email
-        );
-      },
+      hidden: showForDevsOnly(),
     }),
   ],
   preview: {
