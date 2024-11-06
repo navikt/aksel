@@ -175,6 +175,11 @@
   background-color: var(--ax-bg-danger-moderate-hover);
 }
 
+.navds-checkbox--error > .navds-checkbox__input:is(:checked, :indeterminate):not(:disabled) + .navds-checkbox__label::before {
+  background-color: var(--ax-bg-danger-strong);
+  box-shadow: 0 0 0 2px var(--ax-border-danger-strong);
+}
+
 .navds-checkbox--disabled,
 .navds-radio--disabled {
   opacity: 0.3;
