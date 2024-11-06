@@ -51,11 +51,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
             aria-hidden
           />
         </span>
-        <Heading
-          size={headingSize}
-          as="span"
-          className="navds-accordion__header-content"
-        >
+        <Heading size={headingSize} as="span">
           {children}
         </Heading>
       </button>

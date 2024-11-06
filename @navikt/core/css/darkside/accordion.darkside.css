@@ -61,11 +61,6 @@
   padding-block: var(--a-spacing-2);
 }
 
-.navds-accordion__header-content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .navds-accordion__header::before,
 .navds-accordion__header::after {
   content: "";
