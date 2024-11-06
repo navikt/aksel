@@ -1,31 +1,42 @@
-[data-theme="dark"] {
-  --__ac-copybutton-action-text: var(--a-blue-300);
-  --__ac-copybutton-bg-hover: rgb(214 231 255 /0.13);
-  --__ac-copybutton-icon-success: rgb(51 170 95 /1);
-  --__ac-copybutton-neutral-text: rgb(231 240 254 /0.69);
-  --__ac-copybutton-text: rgb(251 252 254 /0.96);
-}
-
-[data-theme="light"] {
-  --__ac-copybutton-action-text: initial;
-  --__ac-copybutton-bg-hover: initial;
-  --__ac-copybutton-icon-success: initial;
-  --__ac-copybutton-neutral-text: initial;
-  --__ac-copybutton-text: initial;
-}
-
 .navds-copybutton {
-  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-5) var(--a-spacing-3) var(--a-spacing-4);
+  --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-5) var(--ax-spacing-3) var(--ax-spacing-4);
 
   cursor: pointer;
   margin: 0;
   text-decoration: none;
   border: none;
-  background: none;
-  border-radius: var(--ac-copybutton-border-radius, var(--a-border-radius-medium));
-  padding: var(--__ac-copybutton-padding);
+  border-radius: var(--ax-border-radius-medium);
+  padding: var(--__axc-copybutton-padding);
   display: grid;
   place-content: center;
+  background-color: transparent;
+  transition: color 0.2s cubic-bezier(0.05, 0.7, 0.1, 1);
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-5);
+  }
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:disabled:hover {
+    background-color: transparent;
+  }
 }
 
 @media (forced-colors: active) {
@@ -33,76 +44,82 @@
     background-color: ButtonFace;
     border: solid 1px ButtonText;
     color: ButtonText;
-  }
 
-  .navds-copybutton.navds-copybutton:focus-visible {
-    box-shadow: none;
-    outline: 2px solid highlight;
-    outline-offset: 2px;
+    &:disabled {
+      opacity: 1;
+      border-color: GrayText;
+    }
   }
 }
 
-.navds-copybutton--icon-right {
-  --__ac-copybutton-padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-5);
-}
-
+/* -------------------------- CopyButton small size ------------------------- */
 .navds-copybutton--small {
-  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-3) var(--a-spacing-1) var(--a-spacing-2);
-
   min-height: 2rem;
   min-width: 2rem;
+
+  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-3) var(--ax-spacing-1) var(--ax-spacing-2);
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-2) var(--ax-spacing-1) var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-1);
+  }
+
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1-alt);
+  }
 }
 
-.navds-copybutton--small.navds-copybutton--icon-right {
-  --__ac-copybutton-padding: var(--a-spacing-1) var(--a-spacing-2) var(--a-spacing-1) var(--a-spacing-3);
-}
-
+/* ------------------------- CopyButton xsmall size ------------------------- */
 .navds-copybutton--xsmall {
-  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-2) var(--a-spacing-05) var(--a-spacing-1);
-
   min-height: 1.5rem;
   min-width: 1.5rem;
+
+  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-2) var(--ax-spacing-05) var(--ax-spacing-1);
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-1) var(--ax-spacing-05) var(--ax-spacing-2);
+  }
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-05);
+  }
+
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1);
+  }
 }
 
-.navds-copybutton--xsmall.navds-copybutton--icon-right {
-  --__ac-copybutton-padding: var(--a-spacing-05) var(--a-spacing-1) var(--a-spacing-05) var(--a-spacing-2);
-}
-
-.navds-copybutton--icon-only {
-  --__ac-copybutton-padding: var(--a-spacing-3);
-}
-
-.navds-copybutton--small.navds-copybutton--icon-only {
-  --__ac-copybutton-padding: var(--a-spacing-1);
-}
-
-.navds-copybutton--xsmall.navds-copybutton--icon-only {
-  --__ac-copybutton-padding: var(--a-spacing-05);
-}
-
+/* ----------------------------- CopyButton Icon ---------------------------- */
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
-}
 
-:where(.navds-copybutton--xsmall, .navds-copybutton--small) .navds-copybutton__icon {
-  font-size: 1.25rem;
-}
+  &:first-of-type {
+    margin-left: -0.25rem;
+  }
 
-.navds-copybutton__icon:first-of-type {
-  margin-left: -0.25rem;
-}
+  &:last-of-type {
+    margin-right: -0.25rem;
+  }
 
-.navds-copybutton__icon:last-of-type {
-  margin-right: -0.25rem;
-}
-
-.navds-copybutton__icon:only-child {
-  margin: 0;
+  &:only-child {
+    margin: 0;
+  }
 }
 
 .navds-copybutton--active .navds-copybutton__icon {
-  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.05, 0.7, 0.1, 1);
 }
 
 @keyframes akselCopyButtonIconAnimation {
@@ -123,104 +140,44 @@
   }
 }
 
-:where(.navds-copybutton--small, .navds-copybutton--xsmall):where(:not(:only-child)) {
-  margin: -0.125rem;
-}
+/* ---------------------------- CopyButton Action --------------------------- */
+.navds-copybutton--action {
+  color: var(--ax-text-accent);
 
-.navds-copybutton:focus-visible {
-  outline: none;
-  box-shadow: var(--a-shadow-focus);
-}
+  &.navds-copybutton--active {
+    color: var(--ax-text-success);
 
-@supports not selector(:focus-visible) {
-  .navds-copybutton:focus {
-    outline: none;
-    box-shadow: var(--a-shadow-focus);
+    &:hover {
+      color: var(--ax-text-success-strong);
+    }
+  }
+
+  &:hover {
+    color: var(--ax-text-accent-strong);
+  }
+
+  &:disabled {
+    color: var(--ax-text-accent);
   }
 }
 
-/* Variant/action */
-.navds-copybutton--action {
-  color: var(--ac-copybutton-action-text, var(--__ac-copybutton-action-text, var(--a-text-action)));
-  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
-}
-
-.navds-copybutton--action:hover {
-  color: var(--ac-copybutton-action-hover-text, var(--__ac-copybutton-action-text, var(--a-text-action-hover)));
-  background-color: var(--ac-copybutton-action-hover-bg, var(--__ac-copybutton-bg-hover, var(--a-surface-hover)));
-}
-
-.navds-copybutton--action:where(:disabled),
-.navds-copybutton--action:hover:where(:disabled) {
-  color: var(--ac-copybutton-action-text, var(--__ac-copybutton-action-text, var(--a-text-action)));
-  background-color: var(--ac-copybutton-action-bg, var(--a-surface-transparent));
-  box-shadow: none;
-}
-
-.navds-copybutton--active.navds-copybutton--action {
-  color: var(--ac-copybutton-action-active-text, var(--__ac-copybutton-icon-success, var(--a-icon-success)));
-}
-
-/* Variant/neutral */
+/* --------------------------- CopyButton Neutral --------------------------- */
 .navds-copybutton--neutral {
-  color: var(--ac-copybutton-neutral-text, var(--__ac-copybutton-neutral-text, var(--a-text-subtle)));
-  background-color: var(--ac-copybutton-neutral-bg, var(--a-surface-transparent));
-}
+  color: var(--ax-text-subtle);
 
-.navds-copybutton--neutral:hover {
-  color: var(--ac-copybutton-neutral-hover-text, var(--__ac-copybutton-text, var(--a-text-default)));
-  background-color: var(--ac-copybutton-neutral-hover-bg, var(--__ac-copybutton-bg-hover, var(--a-surface-hover)));
-}
+  &:hover,
+  &.navds-copybutton--active {
+    color: var(--ax-text-default);
+  }
 
-.navds-copybutton--neutral:where(:disabled, .navds-copybutton--disabled),
-.navds-copybutton--neutral:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ac-copybutton-neutral-text, var(--__ac-copybutton-text, var(--a-text-default)));
-  background-color: var(--ac-copybutton-neutral-bg, var(--a-surface-transparent));
-  box-shadow: none;
-}
-
-.navds-copybutton--active.navds-copybutton--neutral {
-  color: var(--ac-copybutton-neutral-active-text, var(--__ac-copybutton-text, var(--a-text-default)));
+  &:disabled {
+    color: var(--ax-text-subtle);
+  }
 }
 
 .navds-copybutton__content {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--a-spacing-2);
-}
-
-.navds-copybutton--small > .navds-copybutton__content {
-  gap: var(--a-spacing-1-alt);
-}
-
-.navds-copybutton--xsmall > .navds-copybutton__content {
-  gap: var(--a-spacing-1);
-}
-
-.navds-copybutton--active > .navds-copybutton__content {
-  animation: var(--ac-copybutton-animation, akselCopyButtonAnimation 0.4s linear);
-}
-
-@keyframes akselCopyButtonAnimation {
-  0% {
-    opacity: 0.4;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Disabled */
-.navds-copybutton:where(:disabled) {
-  cursor: not-allowed;
-  opacity: 0.3;
-}
-
-@media (forced-colors: active) {
-  .navds-copybutton:where(:disabled) {
-    opacity: 1;
-    border-color: GrayText;
-  }
+  gap: var(--ax-spacing-2);
 }
