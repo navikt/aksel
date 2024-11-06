@@ -255,6 +255,9 @@
     --__axc-radio-checkbox-high-contrast-bg: field;
     --__axc-radio-checkbox-high-contrast-text: fieldtext;
     --__axc-radio-checkbox-high-contrast-highlight: highlight;
+
+    /* TODO: Consider adding this to global scope */
+    --ax-border-focus: Highlight;
   }
 
   .navds-checkbox__label::before,
@@ -272,14 +275,7 @@
   }
 
   .navds-radio__input:checked + .navds-radio__label::before {
-    border: 1px solid var(--__axc-radio-checkbox-high-contrast-text);
-    outline: 3px solid var(--__axc-radio-checkbox-high-contrast-bg);
-    outline-offset: -4px;
-    background-color: var(--__axc-radio-checkbox-high-contrast-text);
-  }
-
-  .navds-radio__input:checked + .navds-radio__label::after {
-    background-color: var(--__axc-radio-checkbox-high-contrast-text);
+    border: 6px solid var(--__axc-radio-checkbox-high-contrast-text);
   }
 
   :not(.navds-checkbox--readonly) > .navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label,
@@ -293,17 +289,6 @@
   }
 
   .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
-    background-color: var(--__axc-radio-checkbox-high-contrast-text);
-  }
-
-  .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
-    border: 1px solid var(--__axc-radio-checkbox-high-contrast-text);
-    outline: 3px solid var(--__axc-radio-checkbox-high-contrast-bg);
-    outline-offset: -4px;
-    background-color: var(--__axc-radio-checkbox-high-contrast-text);
-  }
-
-  .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::after {
     background-color: var(--__axc-radio-checkbox-high-contrast-text);
   }
 
