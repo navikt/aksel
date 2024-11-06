@@ -146,6 +146,14 @@
 
   &.navds-copybutton--active {
     color: var(--ax-text-success);
+
+    &:hover {
+      color: var(--ax-text-success-strong);
+    }
+  }
+
+  &:hover {
+    color: var(--ax-text-accent-strong);
   }
 
   &:disabled {
