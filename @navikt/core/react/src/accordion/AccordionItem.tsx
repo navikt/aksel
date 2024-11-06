@@ -65,6 +65,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           "navds-accordion__item--neutral": context?.variant === "neutral",
           "navds-accordion__item--no-animation": !shouldAnimate.current,
         })}
+        data-expanded={_open}
         ref={ref}
         {...omit(rest, ["onClick"])}
       >
