@@ -86,7 +86,7 @@
 }
 
 .navds-copybutton--active .navds-copybutton__icon {
-  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.05, 0.7, 0.1, 1);
 }
 
 @keyframes akselCopyButtonIconAnimation {
@@ -170,20 +170,6 @@
 
 .navds-copybutton--xsmall > .navds-copybutton__content {
   gap: var(--ax-spacing-1);
-}
-
-.navds-copybutton--active > .navds-copybutton__content {
-  animation: akselCopyButtonAnimation 0.4s linear;
-}
-
-@keyframes akselCopyButtonAnimation {
-  0% {
-    opacity: 0.4;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 /* Disabled */
