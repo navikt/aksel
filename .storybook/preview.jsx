@@ -2,6 +2,7 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import React, { useLayoutEffect } from "react";
 import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
 import defaultCss from "@navikt/ds-css/index.css?inline";
+import { UNSAFE_AkselTheme } from "@navikt/ds-react/Provider";
 import "./layout.css";
 
 export const parameters = {
@@ -43,7 +44,7 @@ export const initialGlobals = {
   mode: "default",
 };
 
-const ModeDecorator = ({ children, mode }) => {
+const ModeDecorator = ({ children, mode, theme }) => {
   useLayoutEffect(() => {
     const style = document.createElement("style");
     style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
@@ -59,12 +60,18 @@ const ModeDecorator = ({ children, mode }) => {
     };
   }, [mode]);
 
-  return children;
+  return mode === "darkside" ? (
+    <UNSAFE_AkselTheme theme={theme || undefined} hasBackground={false}>
+      {children}
+    </UNSAFE_AkselTheme>
+  ) : (
+    children
+  );
 };
 
 export const decorators = [
   (StoryFn, context) => (
-    <ModeDecorator mode={context.globals.mode}>
+    <ModeDecorator mode={context.globals.mode} theme={context.globals.theme}>
       <StoryFn />
     </ModeDecorator>
   ),
