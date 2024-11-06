@@ -230,7 +230,7 @@
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::after {
-  background-color: var(--ax-text-subtle);
+  background-color: var(--ax-bg-neutral-strong);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::before {
