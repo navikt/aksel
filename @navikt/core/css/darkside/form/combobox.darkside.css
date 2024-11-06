@@ -85,9 +85,11 @@
   cursor: text;
 }
 
-.navds-combobox__wrapper:has(.navds-combobox--error .navds-text-field__input:not(:hover, :disabled)) {
-  border-color: var(--ax-border-danger-strong);
-  border-width: 2px;
+.navds-combobox--error {
+  .navds-combobox__wrapper {
+    border-radius: var(--ax-border-radius-medium);
+    outline: 3px solid var(--ax-border-danger-strong);
+  }
 }
 
 .navds-combobox--error
@@ -142,7 +144,7 @@
 }
 
 .navds-combobox__input:focus-visible {
-  outline: none;
+  outline: 2px solid var(--ax-border-accent-strong);
   border: none;
 }
 
@@ -223,7 +225,7 @@
 }
 
 .navds-combobox__button-toggle-list:focus-visible {
-  outline: none;
+  outline: 2px solid var(--ax-border-accent-strong);
 }
 
 @supports not selector(:focus-visible) {
@@ -240,13 +242,13 @@
   position: absolute;
   left: 0;
   right: 0;
-  z-index: var(--ax-z-index-popover);
+  z-index: 10;
   top: calc(100% + var(--ax-spacing-2));
   border: 1px solid var(--ax-border-default);
   display: flex;
   flex-direction: column;
   border-radius: var(--ax-border-radius-medium);
-  background-color: var(--axc-combobox-list-bg, var(--ax-surface-default));
+  background-color: var(--ax-bg-default);
   color: var(--ax-text-default);
   overscroll-behavior: contain;
 }
@@ -305,7 +307,6 @@
 .navds-combobox__list-options {
   list-style: none;
   margin: 0;
-  padding: 0;
   display: inherit;
   flex-direction: inherit;
   gap: inherit;
@@ -313,6 +314,7 @@
   align-items: flex-start;
   overflow: hidden scroll;
   padding-inline: 0 var(--ax-spacing-4);
+  padding-block: var(--ax-spacing-1);
 
   /* TODO: expected this to work
 *
@@ -325,6 +327,8 @@
   .navds-combobox__list-item:where(:not([data-no-focus="true"], .navds-combobox__list-item--new-option)):hover {
   background-color: var(--ax-bg-neutral-moderate-hoverA);
   cursor: pointer;
+  outline: 3px solid var(--ax-border-accent-strong);
+  outline-offset: 2px;
 }
 
 .navds-combobox__list-item[data-no-focus="true"] {
@@ -368,10 +372,12 @@
 .navds-combobox__list-item mark {
   background-color: transparent;
   font-weight: bold;
+
+  /* TODO: arguably not the right token for "highlighted" text */
+  color: var(--ax-text-action-selected);
 }
 
 /* Mobile */
-
 @media (max-width: 479px) {
   .navds-combobox__button-toggle-list {
     right: 0.5rem;
