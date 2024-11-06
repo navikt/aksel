@@ -315,17 +315,11 @@
   overflow: hidden scroll;
   padding-inline: 0 var(--ax-spacing-4);
   padding-block: var(--ax-spacing-1);
-
-  /* TODO: expected this to work
-*
-* scrollbar-gutter: stable;
-* */
 }
 
 .navds-combobox__list-item--focus,
 .navds-combobox__list--with-hover
   .navds-combobox__list-item:where(:not([data-no-focus="true"], .navds-combobox__list-item--new-option)):hover {
-  background-color: var(--ax-bg-neutral-moderate-hoverA);
   cursor: pointer;
   outline: 3px solid var(--ax-border-accent-strong);
   outline-offset: 2px;
@@ -342,11 +336,6 @@
 
 .navds-combobox__list-item--selected p {
   font-weight: var(--ax-font-weight-bold);
-}
-
-.navds-combobox__list-item--selected.navds-combobox__list-item--focus,
-.navds-combobox__list--with-hover .navds-combobox__list-item--selected:hover {
-  background-color: var(--ax-bg-accent-moderateA);
 }
 
 .navds-combobox__list-item--new-option {
@@ -375,6 +364,10 @@
 
   /* TODO: arguably not the right token for "highlighted" text */
   color: var(--ax-text-action-selected);
+}
+
+.navds-combobox__list-item svg {
+  color: var(--ax-text-accent);
 }
 
 /* Mobile */
