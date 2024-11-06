@@ -10,6 +10,34 @@
   padding: var(--__axc-copybutton-padding);
   display: grid;
   place-content: center;
+  background-color: transparent;
+  transition: color 0.2s cubic-bezier(0.05, 0.7, 0.1, 1);
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-5);
+  }
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:disabled:hover {
+    background-color: transparent;
+  }
 }
 
 @media (forced-colors: active) {
@@ -17,72 +45,77 @@
     background-color: ButtonFace;
     border: solid 1px ButtonText;
     color: ButtonText;
-  }
 
-  .navds-copybutton.navds-copybutton:focus-visible {
-    box-shadow: none;
-    outline: 2px solid highlight;
-    outline-offset: 2px;
+    &:disabled {
+      opacity: 1;
+      border-color: GrayText;
+    }
   }
 }
 
-.navds-copybutton--icon-right {
-  --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-5);
-}
-
+/* -------------------------- CopyButton small size ------------------------- */
 .navds-copybutton--small {
-  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-3) var(--ax-spacing-1) var(--ax-spacing-2);
-
   min-height: 2rem;
   min-width: 2rem;
+
+  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-3) var(--ax-spacing-1) var(--ax-spacing-2);
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-2) var(--ax-spacing-1) var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-1);
+  }
+
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1-alt);
+  }
 }
 
-.navds-copybutton--small.navds-copybutton--icon-right {
-  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-2) var(--ax-spacing-1) var(--ax-spacing-3);
-}
-
+/* ------------------------- CopyButton xsmall size ------------------------- */
 .navds-copybutton--xsmall {
-  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-2) var(--ax-spacing-05) var(--ax-spacing-1);
-
   min-height: 1.5rem;
   min-width: 1.5rem;
-}
 
-.navds-copybutton--xsmall.navds-copybutton--icon-right {
-  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-1) var(--ax-spacing-05) var(--ax-spacing-2);
-}
+  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-2) var(--ax-spacing-05) var(--ax-spacing-1);
 
-.navds-copybutton--icon-only {
-  --__axc-copybutton-padding: var(--ax-spacing-3);
-}
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-1) var(--ax-spacing-05) var(--ax-spacing-2);
+  }
 
-.navds-copybutton--small.navds-copybutton--icon-only {
-  --__axc-copybutton-padding: var(--ax-spacing-1);
-}
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-05);
+  }
 
-.navds-copybutton--xsmall.navds-copybutton--icon-only {
-  --__axc-copybutton-padding: var(--ax-spacing-05);
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1);
+  }
 }
 
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
-}
 
-:where(.navds-copybutton--xsmall, .navds-copybutton--small) .navds-copybutton__icon {
-  font-size: 1.25rem;
-}
+  &:first-of-type {
+    margin-left: -0.25rem;
+  }
 
-.navds-copybutton__icon:first-of-type {
-  margin-left: -0.25rem;
-}
+  &:last-of-type {
+    margin-right: -0.25rem;
+  }
 
-.navds-copybutton__icon:last-of-type {
-  margin-right: -0.25rem;
-}
-
-.navds-copybutton__icon:only-child {
-  margin: 0;
+  &:only-child {
+    margin: 0;
+  }
 }
 
 .navds-copybutton--active .navds-copybutton__icon {
@@ -107,54 +140,31 @@
   }
 }
 
-:where(.navds-copybutton--small, .navds-copybutton--xsmall):where(:not(:only-child)) {
-  margin: -0.125rem;
-}
-
-.navds-copybutton:focus-visible {
-  outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
-}
-
-/* Variant/action */
+/* ---------------------------- CopyButton Action --------------------------- */
 .navds-copybutton--action {
   color: var(--ax-text-accent);
-  background-color: transparent;
+
+  &.navds-copybutton--active {
+    color: var(--ax-text-success);
+  }
+
+  &:disabled {
+    color: var(--ax-text-accent);
+  }
 }
 
-.navds-copybutton--action:hover {
-  background-color: var(--ax-bg-neutral-moderate-hover);
-}
-
-.navds-copybutton--action:where(:disabled),
-.navds-copybutton--action:hover:where(:disabled) {
-  color: var(--ax-text-accent);
-  background-color: transparent;
-}
-
-.navds-copybutton--active.navds-copybutton--action {
-  color: var(--ax-text-success);
-}
-
-/* Variant/neutral */
+/* --------------------------- CopyButton Neutral --------------------------- */
 .navds-copybutton--neutral {
   color: var(--ax-text-subtle);
-  background-color: transparent;
-}
 
-.navds-copybutton--neutral:hover {
-  color: var(--ax-text-default);
-  background-color: var(--ax-bg-neutral-moderate-hover);
-}
+  &:hover,
+  &.navds-copybutton--active {
+    color: var(--ax-text-default);
+  }
 
-.navds-copybutton--neutral:where(:disabled, .navds-copybutton--disabled),
-.navds-copybutton--neutral:hover:where(:disabled, .navds-copybutton--disabled) {
-  color: var(--ax-text-subtle);
-  background-color: transparent;
-}
-
-.navds-copybutton--active.navds-copybutton--neutral {
-  color: var(--ax-text-default);
+  &:disabled {
+    color: var(--ax-text-subtle);
+  }
 }
 
 .navds-copybutton__content {
@@ -162,25 +172,4 @@
   align-items: center;
   justify-content: center;
   gap: var(--ax-spacing-2);
-}
-
-.navds-copybutton--small > .navds-copybutton__content {
-  gap: var(--ax-spacing-1-alt);
-}
-
-.navds-copybutton--xsmall > .navds-copybutton__content {
-  gap: var(--ax-spacing-1);
-}
-
-/* Disabled */
-.navds-copybutton:where(:disabled) {
-  cursor: not-allowed;
-  opacity: 0.3;
-}
-
-@media (forced-colors: active) {
-  .navds-copybutton:where(:disabled) {
-    opacity: 1;
-    border-color: GrayText;
-  }
 }
