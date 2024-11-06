@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -81,8 +81,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMergeRefs(wrapperRef, ref);
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const mergedRef = useMergeRefs(setWrapperRef, ref);
 
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
       defaultSelected,
@@ -118,7 +118,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           {children}
           <DateWrapper
             open={_open ?? open}
-            anchor={wrapperRef.current}
+            anchor={wrapperRef}
             onClose={() => onClose?.() ?? setOpen(false)}
             locale={locale}
             variant="month"
