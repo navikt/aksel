@@ -31,7 +31,7 @@ const BaseSEOPreset = {
       description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
       validation: (Rule) =>
-        Rule.max(160).warning("OG beskrivelse bør være kortere enn 160 tegn."),
+        Rule.max(160).warning("OG-beskrivelse bør være kortere enn 160 tegn."),
     }),
     {
       title: "OG-image",
