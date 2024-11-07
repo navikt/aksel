@@ -113,15 +113,11 @@
 }
 
 .navds-expansioncard__header-chevron {
-  transition: transform 150ms ease-in-out;
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .navds-expansioncard--open > :where(.navds-expansioncard__header) :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(0) rotate(180deg);
-}
-
-.navds-expansioncard__header-button:hover > :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(1px);
+  transform: rotateX(-180deg);
 }
 
 .navds-expansioncard__header-button:focus-visible {
@@ -134,13 +130,6 @@
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
   }
-}
-
-.navds-expansioncard--open
-  > :where(.navds-expansioncard__header)
-  > :where(.navds-expansioncard__header-button):hover
-  :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(-1px) rotate(180deg);
 }
 
 .navds-expansioncard__header-button::after {
