@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Datepicker: Bruk av 'open'-prop ved første render kunne føre til at dialog ikke åpnet seg.
+Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening.
