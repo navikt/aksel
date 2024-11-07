@@ -1,22 +1,23 @@
 .navds-expansioncard {
-  --__ac-expansioncard-border-color: var(--ax-border-default);
-  --__ac-expansioncard-border-width: 1px;
-  --__ac-expansioncard-border-radius: var(--ax-border-radius-xlarge);
-  --__ac-expansioncard-padding-block: var(--ax-spacing-4);
-  --__ac-expansioncard-padding-inline: var(--ax-spacing-6);
+  --__axc-expansioncard-border-radius: var(--ax-border-radius-xlarge);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-4);
+  --__axc-expansioncard-padding-inline: var(--ax-spacing-6);
 
-  border-radius: var(--__ac-expansioncard-border-radius);
+  border-radius: var(--__axc-expansioncard-border-radius);
   background-color: var(--ax-bg-raised);
   height: fit-content;
+  outline: 1px solid var(--ax-border-default);
 
-  &:hover {
-    --__ac-expansioncard-border-color: var(--ax-border-strong);
+  &:has(.navds-expansioncard__header:hover) {
+    outline-color: var(--ax-border-strong);
+    outline-width: 2px;
   }
 }
 
+/* ------------------------ ExpansionCard Small-size ------------------------ */
 .navds-expansioncard--small {
-  --__ac-expansioncard-padding-block: var(--a-spacing-3);
-  --__ac-expansioncard-padding-inline: var(--a-spacing-4);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-3);
+  --__axc-expansioncard-padding-inline: var(--ax-spacing-4);
 
   & > .navds-expansioncard__header .navds-expansioncard__title--small {
     margin-top: var(--ax-spacing-05);
@@ -30,6 +31,10 @@
     min-height: 2rem;
     min-width: 2rem;
   }
+
+  & .navds-expansioncard__content {
+    --__axc-expansioncard-padding-block: var(--ax-spacing-4);
+  }
 }
 
 /* -------------------------- ExpansionCard Header -------------------------- */
@@ -37,39 +42,29 @@
   width: 100%;
   display: flex;
   gap: var(--ax-spacing-4);
-  padding: var(--__ac-expansioncard-padding-block) var(--__ac-expansioncard-padding-inline);
-  border-radius: var(--__ac-expansioncard-border-radius);
+  padding: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
+  border-radius: var(--__axc-expansioncard-border-radius);
   background-color: transparent;
   position: relative;
-  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
   justify-content: space-between;
 
   &:hover {
     background-color: var(--ax-bg-neutral-raised-hover);
-    box-shadow: 0 0 0 1px var(--__ac-expansioncard-border-color);
   }
 
   &[data-open="true"] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
     border-bottom: none;
-
-    &:hover {
-      box-shadow:
-        1px 0 0 0 var(--__ac-expansioncard-border-color),
-        -1px 0 0 0 var(--__ac-expansioncard-border-color),
-        0 -1px 0 0 var(--__ac-expansioncard-border-color);
-    }
 
     /* Divider between header and content */
     &::after {
       content: "";
       background-color: var(--ax-border-subtle);
       bottom: 0;
-      left: var(--__ac-expansioncard-padding-inline);
+      left: var(--__axc-expansioncard-padding-inline);
       height: 1px;
-      width: calc(100% - 2 * var(--__ac-expansioncard-padding-inline));
+      width: calc(100% - 2 * var(--__axc-expansioncard-padding-inline));
       position: absolute;
       opacity: 1;
       transition: opacity 0.1s linear;
@@ -81,7 +76,7 @@
   }
 }
 
-/* ---------------------- ExpansionCard Head typography --------------------- */
+/* --------------------- ExpansionCard Header typography -------------------- */
 .navds-expansioncard__title--small {
   margin-top: 0.625rem;
 }
@@ -150,17 +145,14 @@
 
 /* -------------------------- ExpansionCard Content ------------------------- */
 .navds-expansioncard__content {
-  --__ac-expansioncard-padding-block: var(--a-spacing-5);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-5);
 
-  border-end-end-radius: var(--__ac-expansioncard-border-radius);
-  border-end-start-radius: var(--__ac-expansioncard-border-radius);
-  padding-inline: var(--__ac-expansioncard-padding-inline);
+  border-end-end-radius: var(--__axc-expansioncard-border-radius);
+  border-end-start-radius: var(--__axc-expansioncard-border-radius);
+  padding-inline: var(--__axc-expansioncard-padding-inline);
   padding-block: 0;
-  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
-  border-top: none;
   display: grid;
   grid-template-rows: 0fr;
-  overflow: hidden;
   visibility: hidden;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
@@ -169,7 +161,7 @@
   &[data-open="true"] {
     grid-template-rows: 1fr;
     visibility: visible;
-    padding-block: var(--__ac-expansioncard-padding-block) var(--__ac-expansioncard-padding-inline);
+    padding-block: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
 
     & .navds-expansioncard__content-inner {
       opacity: 1;
@@ -177,20 +169,8 @@
   }
 
   &[data-open="false"] {
-    border: none;
     transition-duration: 0ms;
   }
-}
-
-.navds-expansioncard--small .navds-expansioncard__content {
-  --__ac-expansioncard-padding-block: var(--a-spacing-4);
-}
-
-.navds-expansioncard__header:hover + .navds-expansioncard__content {
-  box-shadow:
-    1px 0 0 0 var(--__ac-expansioncard-border-color),
-    -1px 0 0 0 var(--__ac-expansioncard-border-color),
-    0 1px 0 0 var(--__ac-expansioncard-border-color);
 }
 
 .navds-expansioncard__content-inner {
@@ -199,17 +179,9 @@
   transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
+/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
 .navds-expansioncard--no-animation {
   & :is(.navds-expansioncard__content, .navds-expansioncard__content-inner) {
     transition: none;
-  }
-}
-
-/* ------------------- ExpansionCard High-contrast support ------------------ */
-@media (forced-colors: active) {
-  .navds-expansioncard:hover {
-    --__ac-expansioncard-border-color: highlight;
-
-    outline: 1px solid highlight;
   }
 }
