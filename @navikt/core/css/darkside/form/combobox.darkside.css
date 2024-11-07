@@ -10,13 +10,11 @@
   flex-direction: column;
   width: 100%;
   position: relative;
-  border: 1px solid var(--ax-border-default);
-  border-radius: var(--ax-border-radius-medium);
 }
 
 .navds-form-field:not(:is(.navds-combobox--disabled, .navds-combobox--readonly)) {
   & .navds-combobox__wrapper:hover {
-    border-color: var(--ax-border-accent-strong);
+    border-color: var(--ax-border-focus);
   }
 }
 
@@ -70,10 +68,12 @@
 }
 
 .navds-combobox__wrapper-inner {
+  border: 1px solid var(--ax-border-default);
   border-radius: var(--ax-border-radius-medium);
 
   &:has(.navds-combobox__input:focus-visible) {
-    outline: 3px solid var(--ax-border-accent);
+    outline: 3px solid var(--ax-border-focus);
+    border-color: var(--ax-border-focus);
   }
 
   &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
@@ -106,7 +106,7 @@
 }
 
 .navds-combobox__wrapper-inner:has(input:focus) {
-  outline: 3px solid var(--ax-border-accent-strong);
+  outline: 3px solid var(--ax-border-focus);
 }
 
 .navds-combobox--error {
@@ -115,7 +115,8 @@
   }
 
   & .navds-combobox__wrapper-inner {
-    outline: 3px solid var(--ax-border-danger-strong);
+    border-color: var(--ax-border-danger-strong);
+    box-shadow: 0 0 0 3px var(--ax-border-danger-strong);
   }
 
   & .navds-text-field__input:not(:hover, :disabled, .navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
@@ -250,7 +251,7 @@
 }
 
 .navds-combobox__button-toggle-list:focus-visible {
-  outline: 3px solid var(--ax-border-accent-strong);
+  outline: 3px solid var(--ax-border-focus);
 }
 
 @supports not selector(:focus-visible) {
@@ -345,7 +346,7 @@
 
 .navds-combobox__list-item--focus {
   cursor: pointer;
-  outline: 3px solid var(--ax-border-accent-strong);
+  outline: 3px solid var(--ax-border-focus);
   outline-offset: 2px;
 }
 
@@ -393,7 +394,7 @@
 
 .navds-combobox__list-item--new-option--focus {
   border-radius: calc(var(--ax-border-radius-medium) - 1px);
-  outline: 3px solid var(--ax-border-accent-strong);
+  outline: 3px solid var(--ax-border-focus);
   outline-offset: -5px;
 }
 
