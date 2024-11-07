@@ -370,13 +370,15 @@
 }
 
 .navds-combobox__list-item--new-option {
-  border-bottom: 1px solid var(--ax-border-accent-subtleA);
+  border-block: 1px solid var(--ax-border-accent-subtleA);
   background: var(--ax-bg-accent-moderateA);
   cursor: pointer;
   justify-content: flex-start;
   gap: 0.25rem;
   margin: 0;
   border-radius: 0;
+  margin-block: calc(var(--ax-spacing-1) * -1);
+  padding-block: var(--ax-spacing-4);
 }
 
 .navds-combobox__list--with-hover .navds-combobox__list-item--new-option:hover {
@@ -386,6 +388,8 @@
 
 .navds-combobox__list-item--new-option--focus {
   border-radius: calc(var(--ax-border-radius-medium) - 1px);
+  outline: 3px solid var(--ax-border-accent-strong);
+  outline-offset: -5px;
 }
 
 /* Mobile */
