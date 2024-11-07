@@ -88,9 +88,7 @@
   margin-top: 0;
 }
 
-/*************************
- * Header/Button *
- *************************/
+/* ----------------------- ExpansionCard Header Button ---------------------- */
 .navds-expansioncard__header-button {
   display: grid;
   place-content: center;
@@ -155,9 +153,7 @@
   cursor: pointer;
 }
 
-/*************************
- * Content *
- *************************/
+/* -------------------------- ExpansionCard Content ------------------------- */
 .navds-expansioncard__content {
   --__ac-expansioncard-padding-block: var(--a-spacing-5);
 
@@ -208,6 +204,7 @@
   }
 }
 
+/* ------------------- ExpansionCard High-contrast support ------------------ */
 @media (forced-colors: active) {
   .navds-expansioncard:hover {
     --__ac-expansioncard-border-color: highlight;
