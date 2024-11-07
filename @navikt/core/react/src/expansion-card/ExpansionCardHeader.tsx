@@ -28,6 +28,7 @@ const ExpansionCardHeader = forwardRef<
       ref={ref}
       {...rest}
       className={cl("navds-expansioncard__header", className)}
+      data-open={panelContext.open}
     >
       <div className="navds-expansioncard__header-content">{children}</div>
 
@@ -36,6 +37,7 @@ const ExpansionCardHeader = forwardRef<
         onClick={panelContext.toggleOpen}
         type="button"
         aria-expanded={panelContext.open}
+        data-open={panelContext.open}
       >
         <ChevronDownIcon
           className="navds-expansioncard__header-chevron"
