@@ -628,8 +628,8 @@
     "vitest": "^1.2.2"
   },
   "peerDependencies": {
-    "@types/react": "^17.0.30 || ^18.0.0",
-    "react": "^17.0.0 || ^18.0.0"
+    "@types/react": ">=17.0.30",
+    "react": ">=17.0.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
