@@ -11,6 +11,7 @@ import { useMergeRefs } from "../../../util/hooks";
 import filteredOptionsUtil from "../FilteredOptions/filtered-options-util";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { ComboboxOption } from "../types";
 import { useInputContext } from "./Input.context";
 
 interface InputProps
@@ -93,19 +94,36 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           clearInput(event);
         } else if ((allowNewValues || shouldAutocomplete) && value !== "") {
           event.preventDefault();
-          // Autocompleting or adding a new value
-          const selectedValue =
-            allowNewValues && isValueNew
-              ? { label: value, value }
-              : filteredOptionsUtil.getFirstValueStartingWith(
-                  value,
-                  filteredOptions,
-                ) || filteredOptions[0];
+
+          const autoCompletedOption =
+            filteredOptionsUtil.getFirstValueStartingWith(
+              value,
+              filteredOptions,
+            );
+
+          /*
+           * User can have matching results, while not using the autocomplete result
+           * E.g. User types "Oslo", list has is "Oslo kommune", but user hits backspace, canceling autocomplete.
+           */
+          const autoCompleteMatchesValue =
+            filteredOptionsUtil.normalizeText(value) ===
+            filteredOptionsUtil.normalizeText(autoCompletedOption?.label ?? "");
+
+          let selectedValue: ComboboxOption | undefined;
+
+          if (
+            shouldAutocomplete &&
+            autoCompletedOption &&
+            autoCompleteMatchesValue
+          ) {
+            selectedValue = autoCompletedOption;
+          } else if (allowNewValues && isValueNew) {
+            selectedValue = { label: value, value };
+          }
 
           if (!selectedValue) {
             return;
           }
-
           toggleOption(selectedValue, event);
           if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
             toggleIsListOpen(false);

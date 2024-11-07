@@ -18,6 +18,7 @@
 @import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
 
 /* Components */
+@import "../primitives/stack.css" layer(aksel.components);
 @import "./accordion.darkside.css" layer(aksel.components);
 @import "./button.darkside.css" layer(aksel.components);
 @import "./alert.darkside.css" layer(aksel.components);

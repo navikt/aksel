@@ -305,10 +305,6 @@
   border: 1px solid var(--ac-combobox-list-item-max-selected-border, var(--a-border-info));
 }
 
-.navds-combobox__list--max-selected .navds-combobox__list-item {
-  scroll-margin-top: 50px;
-}
-
 .navds-combobox__list_non-selectables:hover {
   cursor: default;
 }

@@ -4,6 +4,7 @@ export default {
   global: {
     showMore: "Vis meir",
     showLess: "Vis mindre",
+    readOnly: "Skrivebeskytta",
   },
 
   FileUpload: {
@@ -42,6 +43,9 @@ export default {
       labelSuffix: "slett",
     },
   },
+  ErrorSummary: {
+    heading: "Du må rette desse feila før du kan halde fram:",
+  },
   Loader: {
     title: "Ventar…",
   },
@@ -60,5 +64,10 @@ export default {
   Search: {
     clear: "Tøm",
     search: "Søk",
+  },
+  Textarea: {
+    maxLength: "Tekstområde med plass til {maxLength} teikn.",
+    charsTooMany: "{chars} teikn for mykje",
+    charsLeft: "{chars} teikn igjen",
   },
 } satisfies Translations;

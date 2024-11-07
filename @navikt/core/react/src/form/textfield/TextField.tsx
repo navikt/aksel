@@ -91,7 +91,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
 

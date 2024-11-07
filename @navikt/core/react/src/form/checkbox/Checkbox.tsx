@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { CheckboxProps } from "./types";
 import useCheckbox from "./useCheckbox";
 
@@ -90,9 +90,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               className="navds-checkbox__label-text"
               aria-hidden
             >
-              {!nested && (
-                <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
-              )}
+              {!nested && readOnly && <ReadOnlyIconWithTitle />}
               {props.children}
             </BodyShort>
             {props.description && (

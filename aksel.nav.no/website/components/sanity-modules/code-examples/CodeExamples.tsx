@@ -99,25 +99,27 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
       {node.dir.filer.length > 1 && (
         <div className="mb-5 max-w-xl">
           <Chips>
-            {node.dir.filer.map((fil) => (
-              <Chips.Toggle
-                checkmark={false}
-                key={fil._key}
-                value={fil.navn}
-                selected={active === fil.navn}
-                id={`${node.dir.title.toLowerCase()}demo-${fil.navn}`}
-                onClick={async () => {
-                  setUnloaded(true);
-                  await router.replace(
-                    `${
-                      router.asPath.split("#")[0]
-                    }#${node.dir.title.toLowerCase()}demo-${fil.navn}`,
-                  );
-                }}
-              >
-                {fil.title}
-              </Chips.Toggle>
-            ))}
+            {node.dir.filer.map((fil) => {
+              const id = `${node.dir.title.toLowerCase()}demo-${fil.navn}`;
+              const isSelected = active === fil.navn;
+              return (
+                <Chips.Toggle
+                  checkmark={false}
+                  key={fil._key}
+                  value={fil.navn}
+                  selected={isSelected}
+                  id={id}
+                  onClick={() => {
+                    if (isSelected) return;
+                    setUnloaded(true);
+                    const newPath = `${router.asPath.split("#")[0]}#${id}`;
+                    router.replace(newPath);
+                  }}
+                >
+                  {fil.title}
+                </Chips.Toggle>
+              );
+            })}
           </Chips>
         </div>
       )}

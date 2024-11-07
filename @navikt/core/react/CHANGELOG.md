@@ -1,5 +1,43 @@
 # @navikt/ds-react
 
+## 7.4.3
+
+### Patch Changes
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.3
+  - @navikt/aksel-icons@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.2
+  - @navikt/aksel-icons@7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
+
+- Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
+- Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
+
+- Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.1
+  - @navikt/aksel-icons@7.4.1
+
 ## 7.4.0
 
 ### Minor Changes

@@ -4,6 +4,7 @@ export default {
   global: {
     showMore: "Show more",
     showLess: "Show less",
+    readOnly: "Read-only",
   },
 
   FileUpload: {
@@ -42,6 +43,9 @@ export default {
       labelSuffix: "delete",
     },
   },
+  ErrorSummary: {
+    heading: "You must correct the following errors before you can continue:",
+  },
   Loader: {
     title: "Waiting…",
   },
@@ -60,5 +64,10 @@ export default {
   Search: {
     clear: "Clear",
     search: "Search",
+  },
+  Textarea: {
+    maxLength: "Text area with a {maxLength} character limit.",
+    charsTooMany: "{chars} characters too many",
+    charsLeft: "{chars} characters left",
   },
 } satisfies Translations;

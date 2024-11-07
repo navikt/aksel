@@ -8,7 +8,7 @@ import React, {
 import { Loader } from "../../loader";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 const SelectedIcon = () => (
@@ -21,7 +21,6 @@ const SelectedIcon = () => (
     focusable={false}
     role="img"
     aria-hidden
-    aria-label="Deaktiver valg"
   >
     <path
       fillRule="evenodd"
@@ -117,19 +116,19 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           defaultChecked={defaultChecked}
           ref={ref}
           type="checkbox"
-          onChange={(e) => {
+          onChange={(event) => {
             if (readOnly) {
               return;
             }
-            setChecked(e.target.checked);
-            props.onChange?.(e);
+            setChecked(event.target.checked);
+            props.onChange?.(event);
           }}
-          onClick={(e) => {
+          onClick={(event) => {
             if (readOnly) {
-              e.preventDefault();
+              event.preventDefault();
               return;
             }
-            props?.onClick?.(e);
+            props.onClick?.(event);
           }}
           className={cl(className, "navds-switch__input")}
         />
@@ -150,11 +149,11 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           <div
             className={cl("navds-switch__content", {
               "navds-sr-only": hideLabel,
-              "navds-switch--with-description": !!description && !hideLabel,
+              "navds-switch--with-description": description && !hideLabel,
             })}
           >
             <BodyShort as="div" size={size} className="navds-switch__label">
-              <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={false} />
+              {readOnly && <ReadOnlyIconWithTitle />}
               {children}
             </BodyShort>
             {description && (

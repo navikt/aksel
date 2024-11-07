@@ -15,9 +15,7 @@ const Example = () => {
 };
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
-export default withDsExample(Example, {
-  showBreakpoints: true,
-});
+export default withDsExample(Example);
 
 /* Storybook story */
 export const Demo = {
@@ -26,5 +24,5 @@ export const Demo = {
 
 export const args = {
   index: 4,
-  desc: "'borderWidth' gir deg kontroll over border på Box",
+  desc: "Propen 'borderWidth' gir deg kontroll over border.",
 };

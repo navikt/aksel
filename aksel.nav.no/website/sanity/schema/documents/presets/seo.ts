@@ -30,10 +30,8 @@ const BaseSEOPreset = {
       title: "OG-description (valgfri)",
       description: "Erstatter ingress som OG-description og meta-tag",
       rows: 3,
-      options: {
-        // @ts-expect-error - maxLength is a custom prop not officially supported
-        maxLength: 160,
-      },
+      validation: (Rule) =>
+        Rule.max(160).warning("OG-beskrivelse bør være kortere enn 160 tegn."),
     }),
     {
       title: "OG-image",
