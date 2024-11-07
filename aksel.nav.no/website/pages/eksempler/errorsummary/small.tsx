@@ -8,7 +8,7 @@ const Example = () => {
         Felt må fylles ut med alder
       </ErrorSummary.Item>
       <ErrorSummary.Item href="#2">
-        Tekstfeltet må ha en godkjent e-mail
+        Tekstfeltet må ha en godkjent e-post
       </ErrorSummary.Item>
     </ErrorSummary>
   );
