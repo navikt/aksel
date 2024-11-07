@@ -152,17 +152,18 @@
 
 .navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
 .navds-radio--error > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before {
-  border-color: var(--ax-border-danger-strong);
+  border-color: var(--ax-border-danger);
 }
 
 .navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate):hover + .navds-checkbox__label::before,
 .navds-radio--error > .navds-radio__input:not(:disabled, :checked):hover + .navds-radio__label::before {
   background-color: var(--ax-bg-danger-moderate-hover);
+  border-color: var(--ax-border-danger-strong);
 }
 
 .navds-checkbox--error > .navds-checkbox__input:is(:checked, :indeterminate):not(:disabled) + .navds-checkbox__label::before {
-  background-color: var(--ax-bg-danger-strong);
-  border-color: var(--ax-border-danger-strong);
+  background-color: var(--ax-bg-danger-strong-pressed);
+  border-color: var(--ax-bg-danger-strong-pressed);
 }
 
 .navds-checkbox--disabled,
