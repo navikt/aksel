@@ -88,6 +88,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
+    /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const mergedRef = useMergeRefs(setWrapperRef, ref);
 
