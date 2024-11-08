@@ -9,14 +9,14 @@
 
 /* --------------------------- FileUpload Dropzone -------------------------- */
 .navds-dropzone__area {
-  --__ac-dropzone-background: var(--ax-bg-neutral);
-  --__ac-dropzone-text-color: var(--ax-text-default);
-  --__ac-dropzone-padding: var(--ax-spacing-6);
-  --__ac-dropzone-icon-padding: var(--ax-spacing-2);
-  --__ac-dropzone-animation-length-long: 400ms;
-  --__ac-dropzone-animation-length-short: 250ms;
-  --__ac-dropzone-animation-ease-out: cubic-bezier(0.3, 1, 0.3, 1);
-  --__ac-dropzone-animation-over-under: cubic-bezier(0.3, 1, 0.3, 1);
+  --__axc-dropzone-background: var(--ax-bg-neutral);
+  --__axc-dropzone-text-color: var(--ax-text-default);
+  --__axc-dropzone-padding: var(--ax-spacing-6);
+  --__axc-dropzone-icon-padding: var(--ax-spacing-2);
+  --__axc-dropzone-animation-length-long: 400ms;
+  --__axc-dropzone-animation-length-short: 250ms;
+  --__axc-dropzone-animation-ease-out: cubic-bezier(0.3, 1, 0.3, 1);
+  --__axc-dropzone-animation-over-under: cubic-bezier(0.3, 1, 0.3, 1);
 
   position: relative;
   width: 100%;
@@ -25,12 +25,12 @@
   flex-direction: column;
   gap: var(--ax-spacing-4);
   text-align: center;
-  padding: var(--__ac-dropzone-padding);
+  padding: var(--__axc-dropzone-padding);
   border: 1px dashed var(--ax-border-default);
   border-radius: var(--ax-border-radius-xlarge);
-  background-color: var(--__ac-dropzone-background);
-  color: var(--__ac-dropzone-text-color);
-  transition: background-color var(--__ac-dropzone-animation-length-short) var(--__ac-dropzone-animation-ease-out);
+  background-color: var(--__axc-dropzone-background);
+  color: var(--__axc-dropzone-text-color);
+  transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .navds-dropzone--dragging > .navds-dropzone__area {
-  --__ac-dropzone-background: var(--ax-bg-input);
+  --__axc-dropzone-background: var(--ax-bg-input);
 }
 
 .navds-dropzone--dragging > .navds-dropzone__area::after {
@@ -51,7 +51,7 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: var(--ax-border-radius-xlarge);
-  animation: akselDropzoneDragoverAnimation var(--__ac-dropzone-animation-length-short) var(--__ac-dropzone-animation-ease-out);
+  animation: akselDropzoneDragoverAnimation var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
 }
 
 @keyframes akselDropzoneDragoverAnimation {
@@ -73,7 +73,7 @@
 
 .navds-dropzone__area-icon {
   display: grid;
-  padding: var(--__ac-dropzone-icon-padding);
+  padding: var(--__axc-dropzone-icon-padding);
   visibility: hidden;
 }
 
@@ -97,24 +97,24 @@
 }
 
 .navds-dropzone__area-release {
-  top: var(--__ac-dropzone-padding);
+  top: var(--__axc-dropzone-padding);
   display: grid;
   position: absolute;
   z-index: 1;
   pointer-events: none;
   transition:
-    top var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under),
-    transform var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
+    top var(--__axc-dropzone-animation-length-long) var(--__axc-dropzone-animation-over-under),
+    transform var(--__axc-dropzone-animation-length-long) var(--__axc-dropzone-animation-over-under);
 }
 
 .navds-dropzone__area-release__icon {
   display: grid;
-  padding: var(--__ac-dropzone-icon-padding);
+  padding: var(--__axc-dropzone-icon-padding);
   border-radius: var(--ax-border-radius-full);
   background-color: var(--ax-bg-neutral-moderateA);
   transition:
-    background-color 300ms var(--__ac-dropzone-animation-ease-out),
-    font-size 300ms var(--__ac-dropzone-animation-ease-out);
+    background-color 300ms var(--__axc-dropzone-animation-ease-out),
+    font-size 300ms var(--__axc-dropzone-animation-ease-out);
   font-size: 1.5rem;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .navds-dropzone--dragging .navds-dropzone__area-release > .navds-dropzone__area-release__text {
-  transition: visibility var(--__ac-dropzone-animation-length-long) var(--__ac-dropzone-animation-over-under);
+  transition: visibility var(--__axc-dropzone-animation-length-long) var(--__axc-dropzone-animation-over-under);
   visibility: visible;
 }
 
