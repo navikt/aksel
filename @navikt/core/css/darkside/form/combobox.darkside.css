@@ -10,6 +10,7 @@
   flex-direction: column;
   width: 100%;
   position: relative;
+  border-radius: var(--ax-border-radius-medium);
 }
 
 .navds-form-field:not(:is(.navds-combobox--disabled, .navds-combobox--readonly)) {
@@ -78,6 +79,7 @@
 
   &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
     outline: none;
+    border-color: var(--ax-border-default);
   }
 
   &.navds-text-field__input {
@@ -105,23 +107,14 @@
   }
 }
 
-.navds-combobox__wrapper-inner:has(input:focus) {
-  outline: 3px solid var(--ax-border-focus);
-}
-
 .navds-combobox--error {
-  & .navds-combobox__wrapper {
-    border-radius: var(--ax-border-radius-medium);
-  }
-
   & .navds-combobox__wrapper-inner {
     border-color: var(--ax-border-danger-strong);
     box-shadow: 0 0 0 3px var(--ax-border-danger-strong);
-  }
 
-  & .navds-text-field__input:not(:hover, :disabled, .navds-combobox__wrapper-inner--virtually-unfocused):focus-within {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
+      border-color: var(--ax-border-danger-strong);
+    }
   }
 }
 
@@ -247,16 +240,6 @@
     &:active {
       color: var(--ax-text-accent-strong);
     }
-  }
-}
-
-.navds-combobox__button-toggle-list:focus-visible {
-  outline: 3px solid var(--ax-border-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-combobox__button-toggle-list:focus {
-    outline: none;
   }
 }
 
@@ -394,6 +377,10 @@
 
 .navds-combobox__list-item--new-option--focus {
   border-radius: calc(var(--ax-border-radius-medium) - 1px);
+
+  /* TODO: new option should get a wrapper div later to
+* style it properly with a nice rounded border radius
+* */
   outline: 3px solid var(--ax-border-focus);
   outline-offset: -5px;
 }
