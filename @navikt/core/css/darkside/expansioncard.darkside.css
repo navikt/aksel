@@ -6,11 +6,11 @@
   border-radius: var(--__axc-expansioncard-border-radius);
   background-color: var(--ax-bg-raised);
   height: fit-content;
-  outline: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-default);
 
   &:has(.navds-expansioncard__header:hover) {
-    outline-color: var(--ax-border-strong);
-    outline-width: 2px;
+    box-shadow: 0 0 0 1px var(--ax-border-strong);
+    border-color: var(--ax-border-strong);
   }
 }
 
