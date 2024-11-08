@@ -1,7 +1,9 @@
+import { nn } from "date-fns/locale";
 import type { Translations } from "../i18n.types";
 
 export default {
   global: {
+    dateLocale: nn,
     showMore: "Vis meir",
     showLess: "Vis mindre",
     readOnly: "Skrivebeskytta",
@@ -69,5 +71,33 @@ export default {
     maxLength: "Tekstområde med plass til {maxLength} teikn.",
     charsTooMany: "{chars} teikn for mykje",
     charsLeft: "{chars} teikn igjen",
+  },
+  Timeline: {
+    dayFormat: "dd.MM",
+    monthFormat: "MMM yy",
+    yearFormat: "yyyy",
+    Row: {
+      noPeriods: "Ingen periodar",
+      period: "{start} til {end}",
+      dateFormat: "dd.MM.yyyy",
+    },
+    Period: {
+      success: "Suksess",
+      warning: "Åtvaring",
+      danger: "Fare",
+      info: "Info",
+      neutral: "Nøytral",
+      period: "{status} frå {start} til {end}",
+      dateFormat: "dd.MM.yyyy",
+    },
+    Pin: {
+      pin: "Pin: {date}",
+      dateFormat: "dd.MM.yyyy",
+    },
+    Zoom: {
+      zoom: "Zoom tidslina {start} til {end}",
+      reset: "Tilbakestill zoom",
+      dateFormat: "dd.MM.yyyy",
+    },
   },
 } satisfies Translations;

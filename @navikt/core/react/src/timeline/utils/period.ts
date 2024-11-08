@@ -1,5 +1,7 @@
 import cl from "clsx";
 import { format } from "date-fns";
+import { TFunction } from "../../util/i18n/i18n.context";
+import { PeriodProps } from "../period/types";
 
 export const getConditionalClasses = (
   cropped: string,
@@ -17,32 +19,19 @@ export const getConditionalClasses = (
   });
 };
 
-const translateStatus = (status: string): string => {
-  switch (status) {
-    case "success":
-      return "Suksess";
-    case "warning":
-      return "Advarsel";
-    case "danger":
-      return "Fare";
-    case "info":
-      return "Info";
-    case "neutral":
-      return "Nøytral";
-    default:
-      return status;
-  }
-};
-
 export const ariaLabel = (
   startDate: Date,
   endDate: Date,
-  status: string,
-  statusLabel?: string,
+  status: PeriodProps["status"],
+  statusLabel: string | undefined,
+  translate: TFunction<"Timeline">,
 ): string => {
-  const start = format(startDate, "dd.MM.yyyy");
-  const end = format(endDate, "dd.MM.yyyy");
-  return `${
-    statusLabel ? statusLabel : translateStatus(status)
-  } fra ${start} til ${end}`;
+  const dateFormat = translate("Period.dateFormat");
+  const start = format(startDate, dateFormat);
+  const end = format(endDate, dateFormat);
+  return translate("Period.period", {
+    status: statusLabel || translate(`Period.${status}`),
+    start,
+    end,
+  });
 };

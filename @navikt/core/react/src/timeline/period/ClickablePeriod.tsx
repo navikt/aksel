@@ -16,6 +16,7 @@ import {
 import cl from "clsx";
 import React, { useRef, useState } from "react";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -52,6 +53,7 @@ const ClickablePeriod = React.memo(
     const { firstFocus } = usePeriodContext();
     const { initiate, addFocusable } = useTimelineContext();
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const translate = useI18n("Timeline");
 
     const {
       context,
@@ -107,7 +109,7 @@ const ClickablePeriod = React.memo(
             firstFocus && addFocusable(r, index);
             mergedRef(r);
           }}
-          aria-label={ariaLabel(start, end, status, statusLabel)}
+          aria-label={ariaLabel(start, end, status, statusLabel, translate)}
           className={cl(
             "navds-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),

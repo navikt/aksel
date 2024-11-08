@@ -16,6 +16,7 @@ import {
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
+import { useI18n } from "../util/i18n/i18n.context";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";
@@ -44,6 +45,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const translate = useI18n("Timeline");
 
     const {
       context,
@@ -100,7 +102,9 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             {...rest}
             ref={mergedRef}
             className="navds-timeline__pin-button"
-            aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
+            aria-label={translate("Pin.pin", {
+              date: format(date, translate("Pin.dateFormat")),
+            })}
             type="button"
             aria-expanded={children ? open : undefined}
             {...getReferenceProps({

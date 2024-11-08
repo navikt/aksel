@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React from "react";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./types";
 
@@ -20,6 +21,8 @@ const NonClickablePeriod = ({
   restProps,
   periodRef,
 }: TimelineNonClickablePeriodProps) => {
+  const translate = useI18n("Timeline");
+
   return (
     <div
       ref={periodRef}
@@ -36,7 +39,7 @@ const NonClickablePeriod = ({
       <span className="navds-timeline__period--inner">
         {icon}
         <span className="sr-only">
-          {ariaLabel(start, end, status, statusLabel)}
+          {ariaLabel(start, end, status, statusLabel, translate)}
         </span>
       </span>
     </div>
