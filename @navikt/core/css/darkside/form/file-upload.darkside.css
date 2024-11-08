@@ -31,26 +31,41 @@
   color: var(--ax-text-default);
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
+
+  &:hover > .navds-dropzone__area-button {
+    color: var(--ax-text-accent-strong);
+    background-color: var(--ax-bg-accent-moderate-hover);
+    box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
+  }
+
+  &:active .navds-dropzone__area-button {
+    background-color: var(--ax-bg-accent-strong-pressed);
+    color: var(--ax-text-accent-contrast);
+    box-shadow: none;
+  }
+
+  &[data-disabled="true"] {
+    cursor: default;
+  }
 }
 
-.navds-dropzone--disabled > .navds-dropzone__area:hover {
-  cursor: default;
-}
+.navds-dropzone--dragging {
+  & > .navds-dropzone__area {
+    --__axc-dropzone-background: var(--ax-bg-input);
+  }
 
-.navds-dropzone--dragging > .navds-dropzone__area {
-  --__axc-dropzone-background: var(--ax-bg-input);
-}
-
-.navds-dropzone--dragging > .navds-dropzone__area::after {
-  color: var(--ax-text-accent-strong);
-  background-color: var(--ax-bg-accent-moderateA);
-  content: "";
-  inset: 0;
-  position: absolute;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border-radius: var(--ax-border-radius-xlarge);
-  animation: akselDropzoneDragoverAnimation var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
+  & > .navds-dropzone__area::after {
+    color: var(--ax-text-accent-strong);
+    background-color: var(--ax-bg-accent-moderateA);
+    content: "";
+    inset: 0;
+    position: absolute;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-radius: var(--ax-border-radius-xlarge);
+    animation: akselDropzoneDragoverAnimation var(--__axc-dropzone-animation-length-short)
+      var(--__axc-dropzone-animation-ease-out);
+  }
 }
 
 @keyframes akselDropzoneDragoverAnimation {
@@ -76,23 +91,10 @@
   visibility: hidden;
 }
 
-/* TODO: resolve this in figma */
-.navds-dropzone--error:where(:not(.navds-dropzone--dragging)) > .navds-dropzone__area {
+.navds-dropzone--error > .navds-dropzone__area {
   border-color: transparent;
   outline: 2px solid var(--ax-border-danger);
   outline-offset: -1px;
-}
-
-.navds-dropzone__area:hover > .navds-dropzone__area-button {
-  color: var(--ax-text-accent-strong);
-  background-color: var(--ax-bg-accent-moderate-hover);
-  box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
-}
-
-.navds-dropzone__area:active .navds-dropzone__area-button {
-  background-color: var(--ax-bg-accent-strong-pressed);
-  color: var(--ax-text-accent-contrast);
-  box-shadow: none;
 }
 
 .navds-dropzone__area-release {
@@ -198,21 +200,21 @@
   transition-timing-function: cubic-bezier(0, 0.3, 0.15, 1);
   overflow: hidden;
   grid-template-rows: 0fr;
-}
 
-.navds-file-item--error .navds-file-item__error {
-  grid-template-rows: 1fr;
-  padding-top: var(--ax-spacing-1);
-}
-
-.navds-file-item__error-content > svg {
-  flex-shrink: 0;
-  height: 1rem;
-  margin-top: 0.1rem;
+  & .navds-file-item__error {
+    grid-template-rows: 1fr;
+    padding-top: var(--ax-spacing-1);
+  }
 }
 
 .navds-file-item__error-content {
   min-height: 0;
   display: flex;
   gap: var(--ax-spacing-1);
+
+  & > svg {
+    flex-shrink: 0;
+    height: 1rem;
+    margin-top: 0.1rem;
+  }
 }

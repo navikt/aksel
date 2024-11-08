@@ -107,6 +107,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
             onClick,
             () => inputRef.current?.click(),
           )}
+          data-disabled={inputProps.disabled}
         >
           {!inputProps.disabled && (
             <>
