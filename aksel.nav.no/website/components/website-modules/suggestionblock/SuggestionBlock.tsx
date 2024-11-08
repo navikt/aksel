@@ -210,7 +210,7 @@ const options: {
     icon: <TestFlaskIcon aria-hidden />,
   },
   "komponent-beta-unsafe": {
-    text: "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må ta selv ta stilling til om dere ønsker å bruke denne i produksjon.",
+    text: "Komponenten er under utvikling. Så lenge komponenten er prefikset med UNSAFE kan det også medføre breaking-changes i minor versjon av kodepakker og i Figma. Teamet ditt må selv ta stilling til om dere ønsker å bruke denne i produksjon.",
     link: `${issueUrl}?labels=forespørsel+🥰%2Ckomponenter+🧩%2Cbeta+🧪&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+`,
     heading: "Beta",
     icon: (
