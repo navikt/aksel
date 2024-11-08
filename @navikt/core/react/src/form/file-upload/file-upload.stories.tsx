@@ -79,6 +79,14 @@ export const Default: StoryFn = () => {
   const acceptedFiles = files.filter((file) => !file.error);
   const rejectedFiles = files.filter((f): f is FileRejected => f.error);
 
+  /*   const [error, setError] = useState(false); */
+
+  /*   useEffect(() => {
+    setInterval(() => {
+      setError((x) => !x);
+    }, 400);
+  }, []); */
+
   return (
     <FileUpload style={{ width: 500, maxWidth: "100%", margin: "0 auto" }}>
       <VStack gap="6">
@@ -89,6 +97,7 @@ export const Default: StoryFn = () => {
           maxSizeInBytes={MAX_SIZE}
           fileLimit={{ max: MAX_FILES, current: acceptedFiles.length }}
           onSelect={addFiles}
+          /* error={error ? "asda" : undefined} */
         />
 
         {getListError(acceptedFiles) && (
