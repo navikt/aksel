@@ -10,7 +10,6 @@
 /* --------------------------- FileUpload Dropzone -------------------------- */
 .navds-dropzone__area {
   --__axc-dropzone-background: var(--ax-bg-neutral);
-  --__axc-dropzone-text-color: var(--ax-text-default);
   --__axc-dropzone-padding: var(--ax-spacing-6);
   --__axc-dropzone-icon-padding: var(--ax-spacing-2);
   --__axc-dropzone-animation-length-long: 400ms;
@@ -29,7 +28,7 @@
   border: 1px dashed var(--ax-border-default);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
-  color: var(--__axc-dropzone-text-color);
+  color: var(--ax-text-default);
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 }
