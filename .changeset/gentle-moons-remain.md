@@ -2,4 +2,4 @@
 "@navikt/aksel-icons": minor
 ---
 
-Icons: 🎉 Added FileJpeg and FilePng.
+Icons: 🎉 Added FileJpeg, FilePng and MedicalThermometer.
