@@ -2,7 +2,7 @@ import cl from "clsx";
 import React from "react";
 import { useI18n } from "../../util/i18n/i18n.context";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./types";
+import type { PeriodProps } from "./types";
 
 interface TimelineNonClickablePeriodProps extends PeriodProps {
   periodRef?: React.ForwardedRef<HTMLDivElement>;

@@ -21,7 +21,7 @@ import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
-import { PeriodProps } from "./types";
+import type { PeriodProps } from "./types";
 
 interface TimelineClickablePeriodProps extends PeriodProps {
   onSelectPeriod?: (

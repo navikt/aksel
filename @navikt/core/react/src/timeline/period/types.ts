@@ -1,4 +1,4 @@
-import { TimelinePeriodProps } from ".";
+import type { TimelinePeriodProps } from ".";
 
 export interface PeriodProps {
   start: Date;

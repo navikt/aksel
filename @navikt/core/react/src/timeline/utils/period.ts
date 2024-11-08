@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { format } from "date-fns";
-import { TFunction } from "../../util/i18n/i18n.context";
-import { PeriodProps } from "../period/types";
+import type { TFunction } from "../../util/i18n/i18n.context";
+import type { PeriodProps } from "../period/types";
 
 export const getConditionalClasses = (
   cropped: string,
