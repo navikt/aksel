@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.5.0
+
+### Minor Changes
+
+- Icons: 🎉 Added FileJpeg, FilePng and MedicalThermometer. ([#3332](https://github.com/navikt/aksel/pull/3332))
+
 ## 7.4.3
 
 ## 7.4.2
