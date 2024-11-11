@@ -25,7 +25,7 @@
   gap: var(--ax-spacing-4);
   text-align: center;
   padding: var(--__axc-dropzone-padding);
-  border: 1px dashed var(--ax-border-default);
+  border: 1px dashed var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
   color: var(--ax-text-default);
@@ -59,6 +59,8 @@
     background-color: var(--ax-bg-accent-moderateA);
     content: "";
     inset: 0;
+    margin: -1px;
+    border: 1px dashed var(--ax-border-subtleA);
     position: absolute;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
