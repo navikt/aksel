@@ -3,8 +3,8 @@ import AkselLink from "@/web/AkselLink";
 import InlineCode from "./InlineCode";
 
 /**
- * Splits a string into text and links,
- * and returns an array of React elements.
+ * Takes a string and replaces markdown links with Link components
+ * and backticks with InlineCode components.
  */
 const TextWithMarkdownLink = ({ children: input }: { children: string }) => {
   const regex = /\[([^\]]+)\]\(([^\s)]+)\)|`([^`]+)`/g;
