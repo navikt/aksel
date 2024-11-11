@@ -249,7 +249,7 @@
 
 .navds-combobox__list {
   max-height: 290px;
-  overflow-y: auto;
+  overflow: clip;
   position: absolute;
   left: 0;
   right: 0;
@@ -266,6 +266,10 @@
     0 0 1px 0 rgb(7 9 13 / 0.02),
     0 2px 5px 0 rgb(7 9 13 / 0.1),
     0 10px 16px 0 rgb(7 9 13 / 0.12);
+
+  & .navds-combobox__list-options {
+    overflow-y: auto;
+  }
 }
 
 .navds-combobox__list--closed {
@@ -294,7 +298,7 @@
   justify-content: space-between;
   padding-block: var(--__axc-combobox-list-item-padding-block);
   padding-inline: var(--__axc-combobox-list-item-padding-inline);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: calc(var(--ax-border-radius-medium) - 2px);
   border: 0;
   margin-inline: var(--ax-spacing-2);
   margin-block: var(--ax-spacing-1);
@@ -370,6 +374,14 @@
   border-radius: 0;
   margin-block: calc(var(--ax-spacing-1) * -1);
   padding-block: var(--ax-spacing-4);
+
+  & svg {
+    stroke: var(--ax-text-default);
+  }
+
+  &:only-child {
+    border: none;
+  }
 }
 
 .navds-combobox__list--with-hover .navds-combobox__list-item--new-option:hover {
@@ -384,7 +396,7 @@
 * style it properly with a nice rounded border radius
 * */
   outline: 3px solid var(--ax-border-focus);
-  outline-offset: -5px;
+  outline-offset: -3px;
 }
 
 /* Mobile */
@@ -450,7 +462,7 @@
 
   .navds-combobox__list-item--new-option--focus {
     outline: 2px solid highlight;
-    outline-offset: -3px;
+    outline-offset: 0;
   }
 
   .navds-combobox--disabled {
