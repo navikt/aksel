@@ -50,8 +50,7 @@
 
   & .navds-combobox__selected-options {
     & .navds-chips__chip {
-      /* TODO: remove !important and add readonly prop to Chips as well? == code changes */
-      background-color: var(--ax-bg-neutral-moderateA) !important;
+      background-color: var(--ax-bg-neutral-moderateA);
     }
   }
 
