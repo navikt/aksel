@@ -26,7 +26,7 @@ export const ariaLabel = (
   statusLabel: string | undefined,
   translate: TFunction<"Timeline">,
 ): string => {
-  const dateFormat = translate("Period.dateFormat");
+  const dateFormat = translate("dateFormat");
   const start = format(startDate, dateFormat);
   const end = format(endDate, dateFormat);
   return translate("Period.period", {

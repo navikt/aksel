@@ -73,13 +73,13 @@ export default {
     charsLeft: "{chars} characters left",
   },
   Timeline: {
+    dateFormat: "yyyy-MM-dd",
     dayFormat: "d MMM",
     monthFormat: "yyyy-MM",
     yearFormat: "yyyy",
     Row: {
       noPeriods: "No periods",
       period: "{start} to {end}",
-      dateFormat: "yyyy-MM-dd",
     },
     Period: {
       success: "Success",
@@ -88,16 +88,13 @@ export default {
       info: "Info",
       neutral: "Neutral",
       period: "{status} from {start} to {end}",
-      dateFormat: "yyyy-MM-dd",
     },
     Pin: {
       pin: "Pin: {date}",
-      dateFormat: "yyyy-MM-dd",
     },
     Zoom: {
       zoom: "Zoom timeline {start} to {end}",
       reset: "Reset zoom",
-      dateFormat: "yyyy-MM-dd",
     },
   },
 } satisfies Translations;

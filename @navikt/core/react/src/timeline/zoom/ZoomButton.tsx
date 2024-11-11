@@ -35,7 +35,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
   ({ label, interval, count, ...rest }, ref) => {
     const { setStart, endDate, startDate, direction } = useTimelineContext();
     const translate = useI18n("Timeline");
-    const dateFormat = translate("Zoom.dateFormat");
+    const dateFormat = translate("dateFormat");
 
     let startOfRange: Date;
 

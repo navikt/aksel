@@ -81,8 +81,8 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
               periods.length === 0
                 ? translate("Row.noPeriods")
                 : translate("Row.period", {
-                    start: format(earliest.start, translate("Row.dateFormat")),
-                    end: format(latest.end, translate("Row.dateFormat")),
+                    start: format(earliest.start, translate("dateFormat")),
+                    end: format(latest.end, translate("dateFormat")),
                   })
             }
             className={cl("navds-timeline__row-periods", className)}

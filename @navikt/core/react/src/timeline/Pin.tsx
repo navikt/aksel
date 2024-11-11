@@ -103,7 +103,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             ref={mergedRef}
             className="navds-timeline__pin-button"
             aria-label={translate("Pin.pin", {
-              date: format(date, translate("Pin.dateFormat")),
+              date: format(date, translate("dateFormat")),
             })}
             type="button"
             aria-expanded={children ? open : undefined}

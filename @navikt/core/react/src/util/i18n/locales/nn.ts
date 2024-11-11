@@ -73,13 +73,13 @@ export default {
     charsLeft: "{chars} teikn igjen",
   },
   Timeline: {
+    dateFormat: "dd.MM.yyyy",
     dayFormat: "dd.MM",
     monthFormat: "MMM yy",
     yearFormat: "yyyy",
     Row: {
       noPeriods: "Ingen periodar",
       period: "{start} til {end}",
-      dateFormat: "dd.MM.yyyy",
     },
     Period: {
       success: "Suksess",
@@ -88,16 +88,13 @@ export default {
       info: "Info",
       neutral: "Nøytral",
       period: "{status} frå {start} til {end}",
-      dateFormat: "dd.MM.yyyy",
     },
     Pin: {
       pin: "Pin: {date}",
-      dateFormat: "dd.MM.yyyy",
     },
     Zoom: {
       zoom: "Zoom tidslina {start} til {end}",
-      reset: "Tilbakestill zoom",
-      dateFormat: "dd.MM.yyyy",
+      reset: "Tilbakestill tidsperspektiv",
     },
   },
 } satisfies Translations;
