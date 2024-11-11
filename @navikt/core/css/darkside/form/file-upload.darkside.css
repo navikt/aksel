@@ -32,10 +32,14 @@
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 
-  &:hover > .navds-dropzone__area-button {
-    color: var(--ax-text-accent-strong);
-    background-color: var(--ax-bg-accent-moderate-hover);
-    box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
+  &:hover {
+    border-color: var(--ax-border-accent-strong);
+
+    & > .navds-dropzone__area-button {
+      color: var(--ax-text-accent-strong);
+      background-color: var(--ax-bg-accent-moderate-hover);
+      box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
+    }
   }
 
   &:active .navds-dropzone__area-button {
@@ -60,7 +64,7 @@
     content: "";
     inset: 0;
     margin: -1px;
-    border: 1px dashed var(--ax-border-subtleA);
+    border: 1px dashed var(--ax-border-accent-strong);
     position: absolute;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
