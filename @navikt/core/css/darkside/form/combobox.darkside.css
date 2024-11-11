@@ -110,7 +110,7 @@
 .navds-combobox--error {
   & .navds-combobox__wrapper-inner {
     border-color: var(--ax-border-danger-strong);
-    box-shadow: 0 0 0 3px var(--ax-border-danger-strong);
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
 
     &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
       border-color: var(--ax-border-danger-strong);
