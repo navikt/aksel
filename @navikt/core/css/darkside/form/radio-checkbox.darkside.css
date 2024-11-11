@@ -215,8 +215,11 @@
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
-  background-color: var(--ax-bg-neutral-moderate);
-  border-color: var(--ax-bg-neutral-strong);
+  background-color: var(--ax-bg-neutral-strong);
+  border-width: 0;
+  box-shadow:
+    inset 0 0 0 2px var(--ax-border-subtle),
+    inset 0 0 0 8px var(--ax-bg-neutral-moderate);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
@@ -264,6 +267,10 @@
 
   .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
     background-color: var(--__axc-radio-checkbox-high-contrast-text);
+  }
+
+  .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
+    border-width: 6px;
   }
 
   .navds-checkbox--disabled,
