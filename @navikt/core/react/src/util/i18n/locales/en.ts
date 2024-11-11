@@ -75,7 +75,7 @@ export default {
   Timeline: {
     dateFormat: "yyyy-MM-dd",
     dayFormat: "d MMM",
-    monthFormat: "yyyy-MM",
+    monthFormat: "MMM yyyy",
     yearFormat: "yyyy",
     Row: {
       noPeriods: "No periods",
