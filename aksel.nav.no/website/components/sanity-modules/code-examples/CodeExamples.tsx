@@ -161,6 +161,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                       invisible: unloaded,
                     },
                   )}
+                  style={{ maxHeight: "calc(100vh - 200px)" }}
                 />
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
