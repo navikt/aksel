@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { HelpTextIcon } from "./HelpTextIcon";
@@ -52,6 +53,8 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
 
     const [open, setOpen] = useState(false);
 
+    const themeContext = UNSAFE_useAkselTheme(false);
+
     return (
       <div className={cl("navds-help-text", wrapperClassName)}>
         <button
@@ -72,7 +75,8 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
-          offset={12}
+          offset={themeContext ? 8 : 12}
+          arrow={!themeContext}
         >
           <Popover.Content className="navds-body-short">
             {children}

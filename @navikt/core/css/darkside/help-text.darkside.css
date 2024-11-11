@@ -16,16 +16,10 @@
   border-radius: var(--ax-border-radius-full);
 }
 
-.navds-help-text__popover > .navds-popover__arrow {
-  background-color: var(--ax-bg-info-moderate);
-}
-
 .navds-help-text__popover.navds-popover {
   background-color: var(--ax-bg-info-moderate);
   max-width: min(65ch, calc(100vw - 1.5rem));
   border-radius: var(--ax-border-radius-large);
-
-  /* TODO: This breaks arrow-border now */
   border: 1px solid var(--ax-border-info);
 }
 
