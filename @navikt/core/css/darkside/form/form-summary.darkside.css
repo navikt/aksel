@@ -73,10 +73,10 @@
 .navds-form-summary__value .navds-form-summary__answers {
   margin-top: var(--ax-spacing-2);
   padding: var(--ax-spacing-4);
-  background: var(--ax-bg-accent-moderateA);
+  background: var(--ax-bg-info-moderateA);
   border-radius: var(--ax-border-radius-large);
 
   & .navds-form-summary__answer {
-    border-color: var(--ax-border-accent-subtleA);
+    border-color: var(--ax-border-info-subtleA);
   }
 }
