@@ -32,7 +32,7 @@
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 
-  &:hover {
+  &:hover:not([data-disabled="true"]) {
     border-color: var(--ax-border-accent-strong);
 
     & > .navds-dropzone__area-button {
