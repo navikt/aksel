@@ -166,6 +166,10 @@
   border-color: var(--ax-bg-danger-strong-pressed);
 }
 
+.navds-radio--error > .navds-radio__input:checked + .navds-radio__label::before {
+  border-color: var(--ax-bg-danger-strong-pressed);
+}
+
 .navds-checkbox--disabled,
 .navds-radio--disabled {
   opacity: 0.3;
