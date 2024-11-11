@@ -3,6 +3,10 @@
 }
 
 .navds-form-progress__button {
+  &:focus-visible {
+    z-index: 1;
+  }
+
   &[data-state="open"] {
     & svg {
       transform: rotate(-180deg);
@@ -49,7 +53,7 @@
 }
 
 .navds-form-progress__stepper {
-  border: 2px solid var(--ax-border-subtle);
+  border: 1px solid var(--ax-border-subtle);
   border-radius: var(--ax-border-radius-large);
   padding: var(--ax-spacing-4);
   margin-top: var(--ax-spacing-1);
