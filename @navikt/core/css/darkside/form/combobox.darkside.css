@@ -446,4 +446,14 @@
     outline: 2px solid highlight;
     outline-offset: -3px;
   }
+
+  .navds-combobox--disabled {
+    opacity: 1;
+
+    & * {
+      border-color: graytext;
+      color: graytext;
+      opacity: 1;
+    }
+  }
 }
