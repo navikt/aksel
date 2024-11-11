@@ -46,6 +46,8 @@
 }
 
 .navds-combobox--readonly {
+  pointer-events: none;
+
   & .navds-combobox__button-toggle-list {
     color: var(--ax-bg-neutral-moderate);
   }
@@ -424,8 +426,12 @@
   }
 
   .navds-combobox__list-item--selected {
-    background-color: selecteditem;
+    background-color: highlight;
     color: selecteditemtext;
+
+    & * {
+      color: black;
+    }
 
     & > * {
       forced-color-adjust: none;
@@ -454,6 +460,20 @@
       border-color: graytext;
       color: graytext;
       opacity: 1;
+    }
+  }
+
+  .navds-combobox__list-item--new-option {
+    svg {
+      stroke: canvastext;
+    }
+
+    &:hover {
+      color: highlight;
+
+      svg {
+        stroke: highlight;
+      }
     }
   }
 }
