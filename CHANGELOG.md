@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.5
+
+### @navikt/aksel-icons
+
+- Icons: 🎉 Added FileJpeg, FilePng and MedicalThermometer. ([#3332](https://github.com/navikt/aksel/pull/3332))
+
+### @navikt/aksel
+
+- Chore: Manually bump version to sync npm and github-releases ([`aa7c2d9`](https://github.com/navikt/aksel/commit/aa7c2d9598434d6304432daa20e0a1eeedd03b1b))
+
+### @navikt/ds-react
+
+- React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
+
+* Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
 ## 7.4
 
 ### @navikt/ds-react

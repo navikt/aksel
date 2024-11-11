@@ -1,5 +1,21 @@
 # @navikt/aksel
 
+## 7.5.1
+
+### Patch Changes
+
+- Chore: Manually bump version to sync npm and github-releases ([`aa7c2d9`](https://github.com/navikt/aksel/commit/aa7c2d9598434d6304432daa20e0a1eeedd03b1b))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.1
+
+## 7.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.0
+
 ## 7.4.3
 
 ### Patch Changes

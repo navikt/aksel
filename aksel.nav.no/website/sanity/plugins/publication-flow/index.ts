@@ -6,15 +6,10 @@ import {
 import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
-  createWrappedDefaultPublish,
-  createWrappedDeleteAction,
-  createWrappedDiscardChangesAction,
-  createWrappedDuplicateAction,
   createWrappedFocusAction,
-  createWrappedRestoreAction,
-  createWrappedUnpublishAction,
   createWrappedUpdateAction,
 } from "./actions";
+import { createPublishWithDateAction } from "./actions/createPublishWithDateAction";
 import { CreateStatusBadge, createBadgeComponent } from "./badges";
 
 const generateBadges = (prev: DocumentBadgeComponent[]) => {
@@ -29,21 +24,6 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
     if (action.action === "publish") {
       return createWrappedFocusAction(action);
     }
-    if (action.action === "unpublish") {
-      return createWrappedUnpublishAction(action);
-    }
-    if (action.action === "delete") {
-      return createWrappedDeleteAction(action);
-    }
-    if (action.action === "duplicate") {
-      return createWrappedDuplicateAction(action);
-    }
-    if (action.action === "restore") {
-      return createWrappedRestoreAction(action);
-    }
-    if (action.action === "discardChanges") {
-      return createWrappedDiscardChangesAction(action);
-    }
     return action;
   });
 
@@ -55,42 +35,42 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
   return [...customActions, ...defaultActions.slice(1)];
 };
 
-const withCustomPublishAction = (prev: DocumentActionComponent[]) => {
-  return [createWrappedDefaultPublish(prev[0]), ...prev.slice(1)];
-};
+export const publicationFlow = definePlugin(() => {
+  const hasQualityControl = [
+    "komponent_artikkel",
+    "ds_artikkel",
+    "aksel_artikkel",
+  ];
+  const hasPublishedAt = allArticleDocuments;
 
-interface PublicationFlowOptions {
-  hasQualityControl: string[];
-  hasPublishedAt: string[];
-}
-
-export const publicationFlowConfig = definePlugin<PublicationFlowOptions>(
-  ({ hasQualityControl, hasPublishedAt }) => ({
+  return {
     name: "publication-flow",
     document: {
-      actions: (prev, { schemaType }) => {
-        if (hasQualityControl.some((e) => e === schemaType)) {
+      actions: (prev, context) => {
+        if (
+          hasQualityControl.some((docType) => docType === context.schemaType)
+        ) {
           return getCustomActions(prev);
         }
 
-        if (hasPublishedAt.some((e) => e === schemaType)) {
-          return withCustomPublishAction(prev);
+        if (hasPublishedAt.some((docType) => docType === context.schemaType)) {
+          return prev.map((originalAction) =>
+            originalAction.action === "publish"
+              ? createPublishWithDateAction(originalAction)
+              : originalAction,
+          );
         }
 
         return prev;
       },
-      badges: (prev, { schemaType }) => {
-        if (hasQualityControl.some((e) => e === schemaType)) {
+      badges: (prev, context) => {
+        if (
+          hasQualityControl.some((docType) => docType === context.schemaType)
+        ) {
           return generateBadges(prev);
         }
         return prev;
       },
     },
-  }),
-);
-
-export const publicationFlow = () =>
-  publicationFlowConfig({
-    hasQualityControl: ["komponent_artikkel", "ds_artikkel", "aksel_artikkel"],
-    hasPublishedAt: [...allArticleDocuments],
-  });
+  };
+});

@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { komponentKategorier } from "../../../config";
-import { devsOnly } from "../../../util";
+import { showForDevsOnly } from "../../../util";
 import { artikkelPreview } from "../presets/artikkel-preview";
 import { editorField } from "../presets/editors";
 import SanityTabGroups from "../presets/groups";
@@ -95,7 +95,7 @@ export const KomponentArtikkel = defineType({
       type: "boolean",
       initialValue: false,
       group: "settings",
-      hidden: devsOnly,
+      hidden: showForDevsOnly(),
     }),
     defineField({
       name: "intro",

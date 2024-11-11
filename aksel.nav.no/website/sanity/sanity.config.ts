@@ -3,60 +3,28 @@ import { colorInput } from "@sanity/color-input";
 import { nbNOLocale } from "@sanity/locale-nb-no";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
-import React from "react";
-import { FieldProps, defineConfig } from "sanity";
+import { AuthConfig, defineConfig } from "sanity";
 import { media } from "sanity-plugin-media";
 import { structureTool } from "sanity/structure";
-import { DatabaseIcon, TestFlaskIcon } from "@navikt/aksel-icons";
-import { SANITY_API_VERSION, SANITY_PROJECT_ID } from "./config";
+import { TestFlaskIcon } from "@navikt/aksel-icons";
+import { SANITY_PROJECT_ID } from "./config";
+import { AkselLogo } from "./logo";
 import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
 import { schema } from "./schema";
-import { InputWithCounter } from "./schema/custom-components";
 import { newDocumentsCreator } from "./util";
 
 export const workspaceConfig = defineConfig([
   {
-    ...defaultConfig(),
+    projectId: SANITY_PROJECT_ID,
     title: "Aksel",
+    description: "Production environment for Aksel",
     name: "default",
     dataset: "production",
     basePath: "/admin/prod",
-    icon: DatabaseIcon,
-    auth: authStore("production"),
-  },
-  {
-    ...defaultConfig(),
-    title: "Aksel Dev-miljø",
-    name: "dev",
-    dataset: "development",
-    basePath: "/admin/dev",
-    icon: TestFlaskIcon,
-    auth: authStore("development"),
-  },
-]);
-
-function defaultConfig() {
-  return {
-    projectId: SANITY_PROJECT_ID,
-    apiVersion: SANITY_API_VERSION,
-    schema,
+    icon: AkselLogo,
+    auth: authStore(),
     scheduledPublishing: { enabled: false },
-    form: {
-      components: {
-        field: (props: FieldProps) => {
-          const name = props.schemaType?.name;
-
-          if (name === "string" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props} />;
-          }
-
-          if (name === "text" && props.schemaType?.options?.maxLength) {
-            return <InputWithCounter {...props} size="large" />;
-          }
-          return props.renderDefault(props);
-        },
-      },
-    },
+    schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
     },
@@ -76,15 +44,43 @@ function defaultConfig() {
       colorInput(),
       nbNOLocale(),
     ],
-  };
-}
+  },
+  {
+    projectId: SANITY_PROJECT_ID,
+    title: "Aksel Development",
+    description: "Development environment for Aksel",
+    name: "dev",
+    dataset: "development",
+    basePath: "/admin/dev",
+    icon: TestFlaskIcon,
+    auth: authStore(),
+    schema,
+    document: {
+      newDocumentOptions: newDocumentsCreator,
+    },
+    plugins: [
+      structureTool({
+        title: "Editor",
+        structure,
+        defaultDocumentNode,
+      }),
+      publicationFlow(),
 
-function authStore(dataset: string) {
+      /* 3rd-party */
+      table(),
+      codeInput(),
+      media(),
+      visionTool(),
+      colorInput(),
+      nbNOLocale(),
+    ],
+  },
+]);
+
+function authStore(): AuthConfig {
   return {
     redirectOnSingle: false,
-    mode: "replace" as const,
-    projectId: SANITY_PROJECT_ID,
-    dataset,
+    mode: "replace",
     providers: [
       {
         name: "saml",

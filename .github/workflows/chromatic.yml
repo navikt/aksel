@@ -55,8 +55,8 @@ jobs:
           exitZeroOnChanges: false
           buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
-          untraced: "**/package.json|yarn.lock|**/*.md|**/core/css/**/*.darkside.css"
-          externals: \@navikt/core/css/**/*.css
+          untraced: "**/package.json|yarn.lock|**/*.md"
+          externals: "**/core/css/*.css|**/core/css/baseline/*.css|**/core/css/form/*.css|**/core/css/primitives/*.css"
           traceChanged: true
         env:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
