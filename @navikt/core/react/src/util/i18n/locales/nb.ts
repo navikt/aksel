@@ -1,13 +1,12 @@
+import { Locale, nb } from "date-fns/locale";
+
 interface TranslationMap {
-  [component: string]:
-    | Record<string, string>
-    | {
-        [subComponent: string]: Record<string, string>;
-      };
+  [component: string]: Record<string, string | Record<string, string> | Locale>;
 }
 
 export default {
   global: {
+    dateLocale: nb,
     showMore: "Vis mer",
     showLess: "Vis mindre",
     readOnly: "Skrivebeskyttet",
@@ -77,5 +76,30 @@ export default {
     maxLength: "Tekstområde med plass til {maxLength} tegn.",
     charsTooMany: "{chars} tegn for mye",
     charsLeft: "{chars} tegn igjen",
+  },
+  Timeline: {
+    dateFormat: "dd.MM.yyyy",
+    dayFormat: "dd.MM",
+    monthFormat: "MMM yy",
+    yearFormat: "yyyy",
+    Row: {
+      noPeriods: "Ingen perioder",
+      period: "{start} til {end}",
+    },
+    Period: {
+      success: "Suksess",
+      warning: "Advarsel",
+      danger: "Fare",
+      info: "Info",
+      neutral: "Nøytral", // TODO: Consider making these global
+      period: "{status} fra {start} til {end}",
+    },
+    Pin: {
+      pin: "Pin: {date}",
+    },
+    Zoom: {
+      zoom: "Zoom tidslinjen {start} til {end}",
+      reset: "Tilbakestill tidsperspektiv",
+    },
   },
 } satisfies TranslationMap;

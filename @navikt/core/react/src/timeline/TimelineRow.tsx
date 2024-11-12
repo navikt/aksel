@@ -2,6 +2,7 @@ import cl from "clsx";
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
 import { BodyShort } from "../typography/BodyShort";
+import { useI18n } from "../util/i18n/i18n.context";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -39,6 +40,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
     const { periods, id, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
+    const translate = useI18n("Timeline");
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
@@ -77,11 +79,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
             ref={ref}
             aria-label={
               periods.length === 0
-                ? "Ingen perioder"
-                : `${format(earliest.start, "dd.MM.yyyy")} til ${format(
-                    latest.end,
-                    "dd.MM.yyyy",
-                  )}`
+                ? translate("Row.noPeriods")
+                : translate("Row.period", {
+                    start: format(earliest.start, translate("dateFormat")),
+                    end: format(latest.end, translate("dateFormat")),
+                  })
             }
             className={cl("navds-timeline__row-periods", className)}
             onKeyDown={(e) => {

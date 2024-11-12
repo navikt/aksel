@@ -6,7 +6,10 @@ import nb from "./locales/nb";
 import nn from "./locales/nn";
 
 function checkValues(obj: Translations | Record<string, string>) {
-  Object.values(obj).forEach((value) => {
+  Object.entries(obj).forEach(([key, value]) => {
+    if (key === "dateLocale") {
+      return;
+    }
     if (typeof value === "object") {
       checkValues(value);
     } else {
