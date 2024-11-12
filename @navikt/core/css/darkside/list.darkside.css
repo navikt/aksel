@@ -9,17 +9,38 @@
   margin-block: var(--ax-spacing-3);
 }
 
-.navds-list .navds-list :where(ul, ol) {
-  margin-block: var(--ax-spacing-2) 0;
-}
+.navds-list {
+  & .navds-list :where(ul, ol) {
+    margin-block: var(--ax-spacing-2) 0;
+  }
 
-.navds-list ol {
-  list-style: decimal; /* This is the default value, but some frameworks have `ol,ul { list-style:none }` */
-  padding-left: 1.7rem;
-}
+  & ol {
+    list-style: decimal; /* This is the default value, but some frameworks have `ol,ul { list-style:none }` */
+    padding-left: 1.7rem;
 
-.navds-list ol > .navds-list__item {
-  padding-left: 0.3rem;
+    & > .navds-list__item {
+      padding-left: 0.3rem;
+    }
+
+    & li::marker {
+      font-weight: var(--ax-font-weight-bold);
+      color: var(--ax-text-default);
+    }
+  }
+
+  & ul {
+    & > .navds-list__item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--ax-spacing-2);
+    }
+
+    & > li > .navds-list__item-marker {
+      display: flex;
+      align-items: center;
+      height: var(--ax-font-line-height-xlarge);
+    }
+  }
 }
 
 /* SAFARI HACK START */
@@ -42,31 +63,14 @@ _:future,
 
 .navds-list__item {
   margin-block-end: var(--ax-spacing-2);
-}
 
-.navds-list__item:last-child {
-  margin-block-end: 0;
-}
-
-.navds-list ul > .navds-list__item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--ax-spacing-2);
-}
-
-.navds-list ol li::marker {
-  font-weight: var(--ax-font-weight-bold);
-  color: var(--ax-text-default);
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .navds-list__item-marker {
   width: 1.5rem;
-}
-
-.navds-list ul > li > .navds-list__item-marker {
-  display: flex;
-  align-items: center;
-  height: var(--ax-font-line-height-xlarge);
 }
 
 .navds-list--small ul > li > .navds-list__item-marker {
