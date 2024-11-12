@@ -8,6 +8,7 @@ import {
 } from "date-fns";
 import React, { forwardRef } from "react";
 import { Detail } from "../../typography/Detail";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 
 export interface TimelineZoomButtonProps {
@@ -33,6 +34,8 @@ export type ZoomButtonType = React.ForwardRefExoticComponent<
 export const ZoomButton: ZoomButtonType = forwardRef(
   ({ label, interval, count, ...rest }, ref) => {
     const { setStart, endDate, startDate, direction } = useTimelineContext();
+    const translate = useI18n("Timeline");
+    const dateFormat = translate("dateFormat");
 
     let startOfRange: Date;
 
@@ -59,11 +62,11 @@ export const ZoomButton: ZoomButtonType = forwardRef(
           type="button"
           aria-label={
             !currentZoom
-              ? `Zoom tidslinjen ${format(
-                  startOfRange,
-                  "dd.MM.yyyy",
-                )} til ${format(endDate, "dd.MM.yyyy")}`
-              : "Tilbakestill til initiell tidsperspektiv"
+              ? translate("Zoom.zoom", {
+                  start: format(startOfRange, dateFormat),
+                  end: format(endDate, dateFormat),
+                })
+              : translate("Zoom.reset")
           }
           ref={ref}
           {...rest}
