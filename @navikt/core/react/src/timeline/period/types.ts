@@ -1,7 +1,9 @@
+import type { TimelinePeriodProps } from ".";
+
 export interface PeriodProps {
   start: Date;
   end: Date;
-  status: string;
+  status: Exclude<TimelinePeriodProps["status"], undefined>;
   cropped: string;
   direction: string;
   width: number;
