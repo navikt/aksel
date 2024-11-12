@@ -481,10 +481,6 @@ export const Chromatic: Story = {
         {Icons.render?.(...args)}
       </div>
       <div>
-        <h2>Tokens</h2>
-        {Tokens.render?.(...args)}
-      </div>
-      <div>
         <h2>Spacing</h2>
         {Spacing.render?.(...args)}
       </div>
