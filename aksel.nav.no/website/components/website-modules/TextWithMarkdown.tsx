@@ -6,8 +6,8 @@ import InlineCode from "./InlineCode";
  * Takes a string and replaces markdown links with Link components
  * and backticks with InlineCode components.
  */
-const TextWithMarkdownLink = ({ children: input }: { children: string }) => {
-  const regex = /\[([^\]]+)\]\(([^\s)]+)\)|`([^`]+)`/g;
+const TextWithMarkdown = ({ children: input }: { children: string }) => {
+  const regex = /\[([^\]]+)\]\(([^\s)]+)\)|`([^`]+)`/g; // The part before the pipe finds links, the part after finds backticks.
   let lastIndex = 0;
   const elements: React.ReactNode[] = [];
 
@@ -37,4 +37,4 @@ const TextWithMarkdownLink = ({ children: input }: { children: string }) => {
   return <>{elements}</>;
 };
 
-export { TextWithMarkdownLink };
+export { TextWithMarkdown };

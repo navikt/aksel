@@ -11,7 +11,7 @@ import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
-import { TextWithMarkdownLink } from "@/web/TextWithMarkdownLink";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 
@@ -133,7 +133,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         >
           {fil?.description && (
             <BodyLong className="mb-2">
-              <TextWithMarkdownLink>{fil.description}</TextWithMarkdownLink>
+              <TextWithMarkdown>{fil.description}</TextWithMarkdown>
             </BodyLong>
           )}
 
@@ -156,12 +156,11 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   aria-label={`${node.dir?.title} ${fil.title} eksempel`}
                   title="Demo"
                   className={cl(
-                    "block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    "block max-h-[calc(100vh-200px)] w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     {
                       invisible: unloaded,
                     },
                   )}
-                  style={{ maxHeight: "calc(100vh - 200px)" }}
                 />
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
