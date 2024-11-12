@@ -1,28 +1,20 @@
 .navds-link {
   color: var(--ax-text-accent);
-  text-decoration: underline;
   display: inline-flex;
   align-items: center;
   gap: var(--ax-spacing-1);
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.05em;
 
-  &:hover {
-    text-decoration: none;
-  }
-
+  &:hover,
   &:active {
-    outline: 2px solid transparent;
-    color: var(--ac-link-active-text, var(--a-text-on-action));
-    text-decoration: none;
-    background-color: var(--ac-link-active-bg, var(--a-border-focus));
-    box-shadow: 0 0 0 2px var(--ac-link-active-border, var(--a-border-focus));
+    text-decoration-thickness: 0.111em;
   }
 
   &:focus-visible {
-    outline: 2px solid transparent;
-    color: var(--ac-link-focus-text, var(--a-text-on-action));
-    text-decoration: none;
-    background-color: var(--ac-link-focus-bg, var(--a-border-focus));
-    box-shadow: 0 0 0 2px var(--ac-link-focus-border, var(--a-border-focus));
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
   }
 
   &.navds-link--inline-text {
@@ -51,9 +43,11 @@
   }
 }
 
-.navds-alert .navds-link,
-.navds-confirmation-panel .navds-link {
-  color: var(--ax-text-default);
+.navds-alert,
+.navds-confirmation-panel {
+  & .navds-link {
+    color: var(--ax-text-default);
+  }
 }
 
 .navds-link--action {
