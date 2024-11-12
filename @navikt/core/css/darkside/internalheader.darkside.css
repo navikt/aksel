@@ -1,10 +1,8 @@
 .navds-internalheader {
   display: flex;
   align-self: stretch;
-  background: var(--ac-internalheader-bg, var(--a-surface-inverted));
+  background: var(--ax-bg-default);
   min-height: 3rem;
-
-  --navds-internalheader-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
 }
 
 @media (forced-colors: active) {
@@ -13,18 +11,6 @@
     border: solid 1px ButtonText;
     color: ButtonText;
   }
-
-  .navds-internalheader a:focus-visible {
-    box-shadow: none;
-    outline: 2px solid highlight;
-    outline-offset: 2px;
-  }
-
-  .navds-internalheader .navds-internalheader__button:focus-visible {
-    box-shadow: none;
-    outline: 2px solid highlight;
-    outline-offset: 2px;
-  }
 }
 
 .navds-internalheader__title {
@@ -32,25 +18,31 @@
   overflow: visible;
   background: transparent;
   font: inherit;
-  font-weight: var(--a-font-weight-bold);
+  font-weight: var(--ax-font-weight-bold);
   line-height: normal;
   text-align: left;
-  padding: 0 var(--a-spacing-5) 0 var(--a-spacing-6);
-  border-right: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
+  padding-block: 0;
+  padding-inline: var(--ax-spacing-6) var(--ax-spacing-5);
+  border-right: 1px solid var(--ax-border-default);
   display: flex;
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--ac-internalheader-text, var(--a-text-on-inverted));
-}
+  color: var(--ax-text-default);
 
-button.navds-internalheader__title {
-  cursor: pointer;
+  &:is(button) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hover);
+  }
 }
 
 .navds-internalheader__user {
-  padding: 0 var(--a-spacing-5);
-  border-left: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
+  padding-block: 0;
+  padding-inline: var(--ax-spacing-5);
+  border-left: 1px solid var(--ax-border-default);
   display: flex;
   align-items: center;
 }
@@ -58,7 +50,8 @@ button.navds-internalheader__title {
 .navds-internalheader__button {
   border: none;
   margin: 0;
-  padding: 0 var(--a-spacing-3);
+  padding-block: 0;
+  padding: var(--ax-spacing-3);
   overflow: visible;
   background: transparent;
   font: inherit;
@@ -68,38 +61,28 @@ button.navds-internalheader__title {
   display: flex;
   align-items: center;
   justify-self: center;
-  gap: var(--a-spacing-2);
-  border-left: 1px solid var(--ac-internalheader-divider, var(--a-gray-600));
-  color: var(--ac-internalheader-text, var(--a-text-on-inverted));
-}
+  gap: var(--ax-spacing-2);
+  border-left: 1px solid var(--ax-border-default);
+  color: var(--ax-text-default);
 
-a.navds-internalheader__title:hover,
-button.navds-internalheader__title:hover,
-.navds-internalheader__button:hover {
-  background-color: var(--ac-internalheader-hover-bg, var(--a-surface-inverted-hover));
-}
-
-.navds-internalheader__title:focus-visible,
-.navds-internalheader__button:focus-visible {
-  box-shadow: var(--navds-internalheader-focus);
-  outline: none;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-internalheader__title:focus,
-  .navds-internalheader__button:focus {
-    box-shadow: var(--navds-internalheader-focus);
-    outline: none;
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hover);
   }
 }
 
-a.navds-internalheader__title:active,
-button.navds-internalheader__title:active,
-.navds-internalheader__button:active {
-  background-color: var(--ac-internalheader-active-bg, var(--a-surface-inverted-active));
+.navds-internalheader__title,
+.navds-internalheader__button {
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: -3px;
+  }
+
+  &:active {
+    background: var(--ax-bg-neutral-moderate-pressed);
+  }
 }
 
 .navds-internalheader__user-button {
-  padding-left: var(--a-spacing-5);
-  gap: var(--a-spacing-4);
+  padding-left: var(--ax-spacing-5);
+  gap: var(--ax-spacing-4);
 }
