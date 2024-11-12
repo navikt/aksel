@@ -152,7 +152,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                 <div
                   ref={resizerRef} // Resize directly on iframe doesn't work in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=680823)
                   className={cl(
-                    "block max-h-[calc(100vh-200px)] w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    "max-w-4xl resize-x overflow-hidden shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
                     { invisible: unloaded },
                   )}
                 >
