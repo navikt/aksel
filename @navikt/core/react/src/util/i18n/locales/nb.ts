@@ -91,7 +91,7 @@ export default {
       warning: "Advarsel",
       danger: "Fare",
       info: "Info",
-      neutral: "Nøytral",
+      neutral: "Nøytral", // TODO: Consider making these global
       period: "{status} fra {start} til {end}",
     },
     Pin: {
