@@ -5,88 +5,81 @@
   animation: loader-rotate 1.8s linear infinite;
   stroke-width: 6;
 
-  --ac-loader-background-stroke-width: 5.9;
+  --__acx-loader-stroke-width: 5.9;
 }
 
 .navds-loader__foreground {
-  animation: loader-dasharray 1.8s ease-in-out infinite;
+  animation: loader-dasharray 1.5s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
-  stroke: var(--ac-loader-stroke, var(--a-border-default));
+  stroke: var(--ax-border-strong);
+  stroke-linecap: round;
 }
 
 .navds-loader__background {
-  stroke: var(--ac-loader-stroke-bg, var(--a-surface-active));
-  stroke-width: var(--ac-loader-background-stroke-width);
+  stroke: var(--ax-border-neutral-subtleA);
+  stroke-width: var(--__acx-loader-stroke-width);
 }
 
 .navds-loader--neutral .navds-loader__foreground {
-  stroke: var(--ac-loader-neutral-stroke, var(--a-border-default));
+  stroke: var(--ax-border-strong);
 }
 
 .navds-loader--interaction .navds-loader__foreground {
-  stroke: var(--ac-loader-interaction-stroke, var(--a-border-action));
-}
-
-.navds-loader--inverted .navds-loader__foreground {
-  stroke: var(--ac-loader-inverted-stroke, var(--a-border-on-inverted));
-}
-
-.navds-loader--inverted .navds-loader__background {
-  stroke: var(--ac-loader-inverted-stroke-bg, var(--a-border-on-inverted-subtle));
+  stroke: var(--ax-border-accent-strong);
 }
 
 .navds-loader--transparent .navds-loader__background {
-  stroke: var(--a-surface-transparent);
+  stroke: transparent;
 }
 
 .navds-loader--3xlarge {
   width: 5.5rem;
   stroke-width: 5;
 
-  --ac-loader-background-stroke-width: 4.8;
+  --__acx-loader-stroke-width: 4.8;
 }
 
 .navds-loader--2xlarge {
   width: 4rem;
   stroke-width: 6;
 
-  --ac-loader-background-stroke-width: 5.8;
+  --__acx-loader-stroke-width: 5.8;
 }
 
 .navds-loader--xlarge {
   width: 2.5rem;
   stroke-width: 6;
 
-  --ac-loader-background-stroke-width: 5.8;
+  --__acx-loader-stroke-width: 5.8;
 }
 
 .navds-loader--large {
   width: 2rem;
   stroke-width: 7;
 
-  --ac-loader-background-stroke-width: 6.8;
+  --__acx-loader-stroke-width: 6.8;
 }
 
 .navds-loader--medium {
   width: 1.5rem;
   stroke-width: 7;
 
-  --ac-loader-background-stroke-width: 6.8;
+  --__acx-loader-stroke-width: 6.8;
 }
 
 .navds-loader--small {
   width: 1.25rem;
   stroke-width: 8;
 
-  --ac-loader-background-stroke-width: 7.8;
+  --__acx-loader-stroke-width: 7.8;
 }
 
 .navds-loader--xsmall {
   width: 1rem;
   stroke-width: 8;
 
-  --ac-loader-background-stroke-width: 7.8;
+  --__acx-loader-stroke-width: 7.8;
 }
 
 @keyframes loader-rotate {

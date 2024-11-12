@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { SVGProps, forwardRef } from "react";
+import { UNSAFE_AkselTheme, UNSAFE_useAkselTheme } from "../provider";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.context";
@@ -67,7 +68,9 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     const internalId = useId();
     const translate = useI18n("Loader");
 
-    return (
+    const themeContext = UNSAFE_useAkselTheme(false);
+
+    const Svg = (
       <svg
         aria-labelledby={id ?? `loader-${internalId}`}
         ref={ref}
@@ -105,6 +108,18 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
           strokeDasharray="50 155"
         />
       </svg>
+    );
+
+    /* TODO: This does not work now since we need to add asChild support in AkselTheme */
+    return themeContext && variant === "inverted" ? (
+      <UNSAFE_AkselTheme
+        theme={themeContext.theme === "dark" ? "light" : "dark"}
+        hasBackground={false}
+      >
+        {Svg}
+      </UNSAFE_AkselTheme>
+    ) : (
+      Svg
     );
   },
 );
