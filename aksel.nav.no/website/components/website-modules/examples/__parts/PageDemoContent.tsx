@@ -1,0 +1,23 @@
+function Content({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="decorator-content">
+      <style>
+        {`.decorator-content {
+          width: 100%;
+          padding-block: 5rem;
+          padding-inline: 2rem;
+          height: 100%;
+          background: repeating-linear-gradient(
+            45deg,
+            #eee,
+            #eee 10px,
+            #fff 10px,
+            #fff 20px
+          );`}
+      </style>
+      {children}
+    </div>
+  );
+}
+
+export { Content };
