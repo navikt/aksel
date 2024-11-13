@@ -5,5 +5,5 @@ CHANGED=`git diff $1 $2 --stat -- yarn.lock | wc -l`
 if [ $CHANGED -gt 0 ];
 then
     echo
-    echo "*** yarn.lock has changed ***"
+    echo "*** 🟡 yarn.lock has changed 🟡 ***"
 fi
