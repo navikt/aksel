@@ -29,7 +29,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -40,5 +40,5 @@ export const Demo = {
 export const args = {
   index: 5,
   title: "Bakgrunn",
-  desc: "Background-prop lar deg velge mellom `default` og `subtle` bakgrunn.",
+  desc: "Propen `background` lar deg velge mellom `default` og `subtle` bakgrunn.",
 };

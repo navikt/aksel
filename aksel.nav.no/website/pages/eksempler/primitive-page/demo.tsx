@@ -34,7 +34,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -45,5 +45,4 @@ export const Demo = {
 export const args = {
   index: 0,
   title: "Standard",
-  desc: "Page gjør det enklere å bygge opp layout med riktig maksbredde og gutters.",
 };

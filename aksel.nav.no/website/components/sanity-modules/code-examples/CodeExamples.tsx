@@ -11,7 +11,7 @@ import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
-import { TextWithMarkdownLink } from "@/web/TextWithMarkdownLink";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 
@@ -134,7 +134,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         >
           {fil?.description && (
             <BodyLong className="mb-2">
-              <TextWithMarkdownLink>{fil.description}</TextWithMarkdownLink>
+              <TextWithMarkdown>{fil.description}</TextWithMarkdown>
             </BodyLong>
           )}
 
