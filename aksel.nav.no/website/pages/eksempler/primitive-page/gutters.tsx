@@ -34,7 +34,7 @@ const Example = () => {
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
 export default withDsExample(Example, {
   showBreakpoints: true,
-  variant: "full",
+  variant: "fullscreen",
 });
 
 /* Storybook story */
@@ -45,5 +45,5 @@ export const Demo = {
 export const args = {
   index: 2,
   title: "Gutters",
-  desc: "Gutters-prop på Page.Block setter responsive gutters (padding-inline)",
+  desc: "Propen `gutters` på Page.Block setter responsive gutters (padding-inline).",
 };
