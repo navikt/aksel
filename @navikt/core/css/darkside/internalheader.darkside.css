@@ -38,6 +38,10 @@
   &:hover {
     background: var(--ax-bg-neutral-moderate-hover);
   }
+
+  &:is(:hover, :active):not(button, a) {
+    background: initial;
+  }
 }
 
 .navds-internalheader__user {
