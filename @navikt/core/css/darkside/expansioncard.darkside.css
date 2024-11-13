@@ -1,9 +1,9 @@
 .navds-expansioncard {
-  --__axc-expansioncard-border-radius: var(--ax-border-radius-xlarge);
+  --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   --__axc-expansioncard-padding-block: var(--ax-spacing-4);
   --__axc-expansioncard-padding-inline: var(--ax-spacing-6);
 
-  border-radius: var(--__axc-expansioncard-border-radius);
+  border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
   height: fit-content;
   border: 1px solid var(--ax-border-default);
@@ -66,7 +66,6 @@
       width: calc(100% - 2 * var(--__axc-expansioncard-padding-inline));
       position: absolute;
       opacity: 1;
-      transition: opacity 0.1s linear;
     }
 
     &:hover::after {

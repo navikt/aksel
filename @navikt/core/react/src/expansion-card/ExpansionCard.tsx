@@ -147,7 +147,6 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
               "navds-expansioncard--no-animation": !shouldFade.current,
             },
           )}
-          data-open={open ?? _open}
           ref={ref}
         />
       </ExpansionCardContext.Provider>

@@ -37,7 +37,6 @@ const ExpansionCardHeader = forwardRef<
         onClick={panelContext.toggleOpen}
         type="button"
         aria-expanded={panelContext.open}
-        data-open={panelContext.open}
       >
         <ChevronDownIcon
           className="navds-expansioncard__header-chevron"
