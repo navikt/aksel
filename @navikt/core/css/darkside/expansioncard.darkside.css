@@ -1,114 +1,93 @@
 .navds-expansioncard {
-  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-color, var(--a-border-default));
-  --__ac-expansioncard-border-radius: var(--ac-expansioncard-border-radius, var(--a-border-radius-large));
-  --__ac-expansioncard-border-width: 1px;
-  --__ac-expansioncard-padding-block: var(--a-spacing-4);
-  --__ac-expansioncard-padding-inline: var(--a-spacing-6);
+  --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-4);
+  --__axc-expansioncard-padding-inline: var(--ax-spacing-6);
 
-  border-radius: var(--__ac-expansioncard-border-radius);
-  background-color: var(--ac-expansioncard-bg, var(--a-surface-default));
+  border-radius: var(--ax-border-radius-xlarge);
+  background-color: var(--ax-bg-raised);
   height: fit-content;
+  border: 1px solid var(--ax-border-default);
+
+  &:has(.navds-expansioncard__header:hover) {
+    box-shadow: 0 0 0 1px var(--ax-border-strong);
+    border-color: var(--ax-border-strong);
+  }
 }
 
-.navds-expansioncard--open {
-  --__ac-expansioncard-border-color: var(
-    --ac-expansioncard-border-open-color,
-    var(--ac-expansioncard-border-color, var(--a-border-default))
-  );
+/* ------------------------ ExpansionCard Small-size ------------------------ */
+.navds-expansioncard--small {
+  --__axc-expansioncard-padding-block: var(--ax-spacing-3);
+  --__axc-expansioncard-padding-inline: var(--ax-spacing-4);
+
+  & > .navds-expansioncard__header .navds-expansioncard__title--small {
+    margin-top: var(--ax-spacing-05);
+  }
+
+  & :is(.navds-expansioncard__title--medium, .navds-expansioncard__title--large) {
+    margin-top: 0;
+  }
+
+  & > .navds-expansioncard__header > .navds-expansioncard__header-button {
+    min-height: 2rem;
+    min-width: 2rem;
+  }
+
+  & .navds-expansioncard__content {
+    --__axc-expansioncard-padding-block: var(--ax-spacing-4);
+  }
 }
 
-.navds-expansioncard:hover {
-  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
-}
-
-:where(.navds-expansioncard.navds-expansioncard--open):hover {
-  --__ac-expansioncard-border-color: var(--ac-expansioncard-border-hover-color, var(--a-border-strong));
-}
-
-/*************************
- * Header *
- *************************/
+/* -------------------------- ExpansionCard Header -------------------------- */
 .navds-expansioncard__header {
   width: 100%;
   display: flex;
-  gap: var(--a-spacing-4);
-  padding: var(--__ac-expansioncard-padding-block) var(--__ac-expansioncard-padding-inline);
-  border-radius: var(--__ac-expansioncard-border-radius);
-  background-color: var(--ac-expansioncard-header-bg, var(--a-surface-transparent));
+  gap: var(--ax-spacing-4);
+  padding: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
+  border-radius: var(--__axc-expansioncard-border-radius);
+  background-color: transparent;
   position: relative;
-  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
   justify-content: space-between;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-raised-hover);
+  }
+
+  &[data-open="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    /* Divider between header and content */
+    &::after {
+      content: "";
+      background-color: var(--ax-border-subtle);
+      bottom: 0;
+      left: var(--__axc-expansioncard-padding-inline);
+      height: 1px;
+      width: calc(100% - 2 * var(--__axc-expansioncard-padding-inline));
+      position: absolute;
+      opacity: 1;
+    }
+
+    &:hover::after {
+      opacity: 0;
+    }
+  }
 }
 
-.navds-expansioncard--small {
-  --__ac-expansioncard-padding-block: var(--a-spacing-3);
-  --__ac-expansioncard-padding-inline: var(--a-spacing-4);
-}
-
-.navds-expansioncard__header:hover {
-  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
-  box-shadow: 0 0 0 1px var(--__ac-expansioncard-border-color);
-}
-
-.navds-expansioncard--open > :where(.navds-expansioncard__header) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
-  border-bottom: none;
-  background-color: var(--ac-expansioncard-header-open-bg, var(--a-surface-transparent));
-}
-
-.navds-expansioncard--open > :where(.navds-expansioncard__header):hover {
-  background-color: var(--ac-expansioncard-header-bg-hover, var(--a-surface-hover));
-  box-shadow:
-    1px 0 0 0 var(--__ac-expansioncard-border-color),
-    -1px 0 0 0 var(--__ac-expansioncard-border-color),
-    0 -1px 0 0 var(--__ac-expansioncard-border-color);
-}
-
-.navds-expansioncard--open > :where(.navds-expansioncard__header)::after {
-  content: "";
-  background-color: var(--a-border-divider);
-  bottom: 0;
-  left: var(--__ac-expansioncard-padding-inline);
-  height: 1px;
-  width: calc(100% - 2 * var(--__ac-expansioncard-padding-inline));
-  position: absolute;
-  opacity: 1;
-  transition: opacity 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.navds-expansioncard--open > :where(.navds-expansioncard__header:hover)::after {
-  opacity: 0;
-}
-
-/*************************
- * Header/Typography *
- *************************/
-
+/* --------------------- ExpansionCard Header typography -------------------- */
 .navds-expansioncard__title--small {
   margin-top: 0.625rem;
 }
 
 .navds-expansioncard__title--medium {
-  margin-top: var(--a-spacing-2);
+  margin-top: var(--ax-spacing-2);
 }
 
 .navds-expansioncard__title--large {
-  margin-top: var(--a-spacing-1);
+  margin-top: var(--ax-spacing-1);
 }
 
-.navds-expansioncard--small > :where(.navds-expansioncard__header) :where(.navds-expansioncard__title--small) {
-  margin-top: var(--a-spacing-05);
-}
-
-.navds-expansioncard--small :where(.navds-expansioncard__title--medium, .navds-expansioncard__title--large) {
-  margin-top: 0;
-}
-
-/*************************
- * Header/Button *
- *************************/
+/* ----------------------- ExpansionCard Header Button ---------------------- */
 .navds-expansioncard__header-button {
   display: grid;
   place-content: center;
@@ -116,120 +95,91 @@
   margin: 0;
   background: transparent;
   border: none;
-  border-radius: var(--ac-expansioncard-button-border-radius, var(--a-border-radius-medium));
+  border-radius: var(--ax-border-radius-large);
   min-height: 3rem;
   min-width: 3rem;
   font-size: 1.5rem;
   align-self: flex-start;
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  @supports not selector(:focus-visible) {
+    &:focus {
+      outline: 2px solid var(--ax-border-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Makes the whole header clickable */
+  &::after {
+    inset: 0;
+    z-index: 1;
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
 }
 
-.navds-expansioncard--small > :where(.navds-expansioncard__header) > :where(.navds-expansioncard__header-button) {
-  min-height: 2rem;
-  min-width: 2rem;
-}
-
-:where(.navds-expansioncard__header):hover > :where(.navds-expansioncard__header-button) {
-  background-color: var(--a-surface-hover);
+.navds-expansioncard__header:hover > .navds-expansioncard__header-button {
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .navds-expansioncard__header-chevron {
-  transition: transform 150ms ease-in-out;
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.navds-expansioncard--open > :where(.navds-expansioncard__header) :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(0) rotate(180deg);
+.navds-expansioncard__header[data-open="true"] .navds-expansioncard__header-chevron {
+  transform: rotateX(-180deg);
 }
 
-.navds-expansioncard__header-button:hover > :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(1px);
+.navds-expansioncard__header[data-open="false"] .navds-expansioncard__header-chevron {
+  transition-duration: 0ms;
 }
 
-.navds-expansioncard__header-button:focus-visible {
-  outline: 3px solid transparent;
-  box-shadow: var(--a-shadow-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-expansioncard__header-button:focus {
-    outline: 3px solid transparent;
-    box-shadow: var(--a-shadow-focus);
-  }
-}
-
-.navds-expansioncard--open
-  > :where(.navds-expansioncard__header)
-  > :where(.navds-expansioncard__header-button):hover
-  :where(.navds-expansioncard__header-chevron) {
-  transform: translateY(-1px) rotate(180deg);
-}
-
-.navds-expansioncard__header-button::after {
-  inset: 0;
-  z-index: 1;
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-}
-
-/*************************
- * Content *
- *************************/
+/* -------------------------- ExpansionCard Content ------------------------- */
 .navds-expansioncard__content {
-  --__ac-expansioncard-padding-block: var(--a-spacing-5);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-5);
 
-  border-end-end-radius: var(--__ac-expansioncard-border-radius);
-  border-end-start-radius: var(--__ac-expansioncard-border-radius);
-  padding: var(--__ac-expansioncard-padding-block) var(--__ac-expansioncard-padding-inline)
-    var(--__ac-expansioncard-padding-inline);
-  border: var(--__ac-expansioncard-border-width) solid var(--__ac-expansioncard-border-color);
-  border-top: none;
-}
+  border-end-end-radius: var(--__axc-expansioncard-border-radius);
+  border-end-start-radius: var(--__axc-expansioncard-border-radius);
+  padding-inline: var(--__axc-expansioncard-padding-inline);
+  padding-block: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-property: padding-block, grid-template-rows;
 
-.navds-expansioncard--small .navds-expansioncard__content {
-  --__ac-expansioncard-padding-block: var(--a-spacing-4);
-}
+  &[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    padding-block: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
 
-.navds-expansioncard__content--closed {
-  display: none;
-}
+    & .navds-expansioncard__content-inner {
+      opacity: 1;
+    }
+  }
 
-:where(.navds-expansioncard__header):hover + .navds-expansioncard__content {
-  box-shadow:
-    1px 0 0 0 var(--__ac-expansioncard-border-color),
-    -1px 0 0 0 var(--__ac-expansioncard-border-color),
-    0 1px 0 0 var(--__ac-expansioncard-border-color);
+  &[data-open="false"] {
+    transition-duration: 0ms;
+  }
 }
 
 .navds-expansioncard__content-inner {
-  animation: fadeExpansionCard 250ms ease;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.navds-expansioncard--no-animation :where(.navds-expansioncard__content-inner) {
-  animation: none;
-}
-
-@keyframes fadeExpansionCard {
-  0% {
-    opacity: 0.25;
-    transform: translateY(-8px);
-  }
-
-  40% {
-    opacity: 0.7;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (forced-colors: active) {
-  .navds-expansioncard:hover {
-    --__ac-expansioncard-border-color: highlight;
-
-    outline: 1px solid highlight;
+/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
+.navds-expansioncard--no-animation {
+  & :is(.navds-expansioncard__content, .navds-expansioncard__content-inner) {
+    transition: none;
   }
 }
