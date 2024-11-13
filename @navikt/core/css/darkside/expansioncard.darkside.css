@@ -55,7 +55,6 @@
   &[data-open="true"] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: none;
 
     /* Divider between header and content */
     &::after {
