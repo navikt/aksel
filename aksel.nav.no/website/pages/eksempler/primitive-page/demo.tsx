@@ -1,32 +1,28 @@
-import { Box, Page } from "@navikt/ds-react";
+import { Heading, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import {
+  Content,
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/Dekorator";
 
 const Example = () => {
+  useDekorator();
+
   return (
-    <Page
-      footer={
-        <Box background="surface-neutral-moderate" padding="8" as="footer">
-          <Page.Block gutters width="lg">
-            Footer
-          </Page.Block>
-        </Box>
-      }
-    >
-      <Box background="surface-neutral-moderate" padding="8" as="header">
-        <Page.Block gutters width="lg">
-          Header
-        </Page.Block>
-      </Box>
-      <Box
-        background="surface-alt-3-moderate"
-        padding="8"
-        paddingBlock="16"
-        as="main"
-      >
-        <Page.Block gutters width="lg">
-          Content
-        </Page.Block>
-      </Box>
+    <Page footer={<Footer />}>
+      <Header />
+
+      <Page.Block as="main" width="xl" gutters>
+        <Content>
+          <Heading level="1" size="large" spacing>
+            Page.Block
+          </Heading>
+        </Content>
+      </Page.Block>
+      <Env />
     </Page>
   );
 };
