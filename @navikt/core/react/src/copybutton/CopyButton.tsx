@@ -151,6 +151,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         type="button"
         {...rest}
         aria-live="polite"
+        aria-relevant="text"
         className={cl(
           "navds-copybutton",
           className,
@@ -166,24 +167,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       >
         <span className="navds-copybutton__content">
           {iconPosition === "left" && copyIcon}
-          {text &&
-            (active ? (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {activeText}
-              </Label>
-            ) : (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {text}
-              </Label>
-            ))}
+          {text && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {active ? activeText : text}
+            </Label>
+          )}
           {iconPosition === "right" && copyIcon}
         </span>
       </button>
