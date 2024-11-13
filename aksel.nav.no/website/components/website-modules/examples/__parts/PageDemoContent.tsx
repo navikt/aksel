@@ -1,3 +1,5 @@
+import React from "react";
+
 function Content({ children }: { children: React.ReactNode }) {
   return (
     <div className="decorator-content">
@@ -5,8 +7,10 @@ function Content({ children }: { children: React.ReactNode }) {
         {`.decorator-content {
           width: 100%;
           padding-block: 5rem;
-          padding-inline: 2rem;
+          padding-inline: 0.25rem;
           height: 100%;
+          display: grid;
+          place-content: center;
           background: repeating-linear-gradient(
             45deg,
             #eee,

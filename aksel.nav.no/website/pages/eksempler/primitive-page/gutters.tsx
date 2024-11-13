@@ -1,4 +1,4 @@
-import { Heading, Page } from "@navikt/ds-react";
+import { HStack, Heading, Page } from "@navikt/ds-react";
 import { Content } from "@/web/examples/__parts/PageDemoContent";
 import { withDsExample } from "@/web/examples/withDsExample";
 import {
@@ -14,20 +14,22 @@ const Example = () => {
   return (
     <Page footer={<Footer />}>
       <Header />
-      <Page.Block as="main" width="xl" gutters>
-        <Content>
-          <Heading level="1" size="large" spacing>
-            Page.Block med gutter
-          </Heading>
-        </Content>
-      </Page.Block>
-      <Page.Block as="main" width="xl">
-        <Content>
-          <Heading level="1" size="large" spacing>
-            Page.Block uten gutter
-          </Heading>
-        </Content>
-      </Page.Block>
+      <HStack gap="4">
+        <Page.Block as="main" width="xl" gutters>
+          <Content>
+            <Heading level="1" size="large" spacing>
+              Page.Block med gutter
+            </Heading>
+          </Content>
+        </Page.Block>
+        <Page.Block as="main" width="xl">
+          <Content>
+            <Heading level="1" size="large" spacing>
+              Page.Block uten gutter
+            </Heading>
+          </Content>
+        </Page.Block>
+      </HStack>
       <Env />
     </Page>
   );
