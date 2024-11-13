@@ -29,6 +29,18 @@
   stroke: var(--ax-border-accent-strong);
 }
 
+.navds-loader--interaction .navds-loader__background {
+  stroke: var(--ax-border-accent-subtleA);
+}
+
+.navds-loader--inverted .navds-loader__foreground {
+  stroke: var(--ax-border-subtle);
+}
+
+.navds-loader--inverted .navds-loader__background {
+  stroke: var(--ax-border-strong);
+}
+
 .navds-loader--transparent .navds-loader__background {
   stroke: transparent;
 }
