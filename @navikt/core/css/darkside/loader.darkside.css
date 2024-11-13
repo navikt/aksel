@@ -5,7 +5,56 @@
   animation: loader-rotate 1.8s linear infinite;
   stroke-width: 6;
 
-  --__acx-loader-stroke-width: 5.9;
+  --__axc-loader-stroke-width: 5.9;
+
+  &.navds-loader--3xlarge {
+    width: 5.5rem;
+    stroke-width: 5;
+
+    --__axc-loader-stroke-width: 4.8;
+  }
+
+  &.navds-loader--2xlarge {
+    width: 4rem;
+    stroke-width: 6;
+
+    --__axc-loader-stroke-width: 5.8;
+  }
+
+  &.navds-loader--xlarge {
+    width: 2.5rem;
+    stroke-width: 6;
+
+    --__axc-loader-stroke-width: 5.8;
+  }
+
+  &.navds-loader--large {
+    width: 2rem;
+    stroke-width: 7;
+
+    --__axc-loader-stroke-width: 6.8;
+  }
+
+  &.navds-loader--medium {
+    width: 1.5rem;
+    stroke-width: 7;
+
+    --__axc-loader-stroke-width: 6.8;
+  }
+
+  &.navds-loader--small {
+    width: 1.25rem;
+    stroke-width: 8;
+
+    --__axc-loader-stroke-width: 7.8;
+  }
+
+  &.navds-loader--xsmall {
+    width: 1rem;
+    stroke-width: 8;
+
+    --__axc-loader-stroke-width: 7.8;
+  }
 }
 
 .navds-loader__foreground {
@@ -18,80 +67,39 @@
 
 .navds-loader__background {
   stroke: var(--ax-border-neutral-subtleA);
-  stroke-width: var(--__acx-loader-stroke-width);
+  stroke-width: var(--__axc-loader-stroke-width);
 }
 
-.navds-loader--neutral .navds-loader__foreground {
-  stroke: var(--ax-border-strong);
+.navds-loader--neutral {
+  & .navds-loader__foreground {
+    stroke: var(--ax-border-strong);
+  }
 }
 
-.navds-loader--interaction .navds-loader__foreground {
-  stroke: var(--ax-border-accent-strong);
+.navds-loader--interaction {
+  & .navds-loader__foreground {
+    stroke: var(--ax-border-accent-strong);
+  }
+
+  & .navds-loader__background {
+    stroke: var(--ax-border-accent-subtleA);
+  }
 }
 
-.navds-loader--interaction .navds-loader__background {
-  stroke: var(--ax-border-accent-subtleA);
+.navds-loader--inverted {
+  & .navds-loader__foreground {
+    stroke: var(--ax-border-subtle);
+  }
+
+  & .navds-loader__background {
+    stroke: var(--ax-border-strong);
+  }
 }
 
-.navds-loader--inverted .navds-loader__foreground {
-  stroke: var(--ax-border-subtle);
-}
-
-.navds-loader--inverted .navds-loader__background {
-  stroke: var(--ax-border-strong);
-}
-
-.navds-loader--transparent .navds-loader__background {
-  stroke: transparent;
-}
-
-.navds-loader--3xlarge {
-  width: 5.5rem;
-  stroke-width: 5;
-
-  --__acx-loader-stroke-width: 4.8;
-}
-
-.navds-loader--2xlarge {
-  width: 4rem;
-  stroke-width: 6;
-
-  --__acx-loader-stroke-width: 5.8;
-}
-
-.navds-loader--xlarge {
-  width: 2.5rem;
-  stroke-width: 6;
-
-  --__acx-loader-stroke-width: 5.8;
-}
-
-.navds-loader--large {
-  width: 2rem;
-  stroke-width: 7;
-
-  --__acx-loader-stroke-width: 6.8;
-}
-
-.navds-loader--medium {
-  width: 1.5rem;
-  stroke-width: 7;
-
-  --__acx-loader-stroke-width: 6.8;
-}
-
-.navds-loader--small {
-  width: 1.25rem;
-  stroke-width: 8;
-
-  --__acx-loader-stroke-width: 7.8;
-}
-
-.navds-loader--xsmall {
-  width: 1rem;
-  stroke-width: 8;
-
-  --__acx-loader-stroke-width: 7.8;
+.navds-loader--transparent {
+  & .navds-loader__background {
+    stroke: transparent;
+  }
 }
 
 @keyframes loader-rotate {
