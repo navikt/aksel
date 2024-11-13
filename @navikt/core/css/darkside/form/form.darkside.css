@@ -1,27 +1,19 @@
-[data-theme="dark"] {
-  --__ac-form-description: var(--a-text-on-inverted);
-}
-
-[data-theme="light"] {
-  --__ac-form-description: initial;
-}
-
 .navds-form-field {
   display: grid;
   justify-items: start;
-  gap: var(--a-spacing-2);
+  gap: var(--ax-spacing-2);
 }
 
 .navds-form-field__description {
   margin-top: -0.375rem;
-  color: var(--ac-form-description, var(--__ac-form-description, var(--a-text-subtle)));
+  color: var(--ax-text-subtle);
 }
 
 .navds-form-field .navds-error-message,
 .navds-fieldset .navds-error-message,
 .navds-file-item .navds-error-message {
   display: flex;
-  gap: var(--a-spacing-2);
+  gap: var(--ax-spacing-2);
 }
 
 .navds-form-field .navds-error-message::before,
@@ -40,7 +32,7 @@
 }
 
 .navds-form-field__subdescription {
-  color: var(--ac-form-subdescription, var(--a-text-subtle));
+  color: var(--ax-text-subtle);
 }
 
 .navds-form-field--readonly > :where(.navds-form-field__label) {
@@ -48,8 +40,8 @@
 }
 
 .navds-form-field__readonly-icon {
-  margin-top: var(--a-spacing-05);
-  margin-right: var(--a-spacing-2);
+  margin-top: var(--ax-spacing-05);
+  margin-right: var(--ax-spacing-2);
   flex-shrink: 0;
   align-self: flex-start;
 }
