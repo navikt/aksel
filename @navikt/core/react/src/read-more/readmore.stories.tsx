@@ -67,6 +67,7 @@ export const Open: Story = {
 };
 
 export const BrandVolumeLow: Story = {
+  render: () => <ReadMore header={Default.args?.header}>{Content}</ReadMore>,
   args: {
     ...Default.args,
     open: true,
@@ -81,10 +82,7 @@ export const BrandVolumeLow: Story = {
 };
 
 export const BrandVolumeHigh: Story = {
-  args: {
-    ...Default.args,
-    open: true,
-  },
+  render: () => <ReadMore header={Default.args?.header}>{Content}</ReadMore>,
   decorators: [
     (StoryFn) => (
       <UNSAFE_AkselTheme volume="low">
