@@ -1,34 +1,29 @@
-import { Box, Page } from "@navikt/ds-react";
+import { BodyLong, Page } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import {
+  Env,
+  Footer,
+  Header,
+  useDekorator,
+} from "../../../components/website-modules/examples/__parts/Dekorator";
+import { Content } from "../../../components/website-modules/examples/__parts/PageDemoContent";
 
 const Example = () => {
+  useDekorator();
+
   return (
-    <Page
-      footer={
-        <Box as="footer" background="surface-neutral-moderate" padding="8">
-          <Page.Block gutters width="2xl">
-            Footer
-          </Page.Block>
-        </Box>
-      }
-    >
-      <Box as="header" background="surface-neutral-moderate" padding="8">
-        <Page.Block gutters width="2xl">
-          Header
-        </Page.Block>
-      </Box>
-      <Box
-        as="main"
-        background="surface-alt-3-moderate"
-        padding="8"
-        paddingBlock="16"
-      >
-        <Page.Block gutters width="text">
-          Vi anbefaler å bruke <code>width=&quot;text&quot;</code> på
-          tekstblokker. Dette setter maksbredden til 576px + padding og skal gi
-          en behagelig linjelengde.
-        </Page.Block>
-      </Box>
+    <Page footer={<Footer />}>
+      <Header />
+      <Page.Block as="main" width="text" gutters>
+        <Content>
+          <BodyLong>
+            Vi anbefaler å bruke <code>width=&quot;text&quot;</code> på
+            tekstblokker. Dette setter maksbredden til 576px + padding og skal
+            gi en behagelig linjelengde.
+          </BodyLong>
+        </Content>
+      </Page.Block>
+      <Env />
     </Page>
   );
 };
