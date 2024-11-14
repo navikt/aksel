@@ -113,6 +113,12 @@ export const getSteps = ({
 };
 
 /**
+ * TODO: These classes can be removed in darkside update
+ * - navds-pagination--prev-next--with-text
+ * - navds-pagination__prev-next
+ */
+
+/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)

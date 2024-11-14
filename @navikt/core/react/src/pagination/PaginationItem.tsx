@@ -47,6 +47,7 @@ export const Item: PaginationItemType = forwardRef(
         as={Component}
         variant={themeContext ? "tertiary-neutral" : "tertiary"}
         aria-current={selected}
+        data-selected={selected}
         ref={ref}
         className={cl("navds-pagination__item", className, {
           "navds-pagination__item--selected": selected,
