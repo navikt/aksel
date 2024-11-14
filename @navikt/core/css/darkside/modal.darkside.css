@@ -6,9 +6,7 @@
   --__axc-modal-bg: var(--ax-bg-raised);
 
   background-color: var(--__axc-modal-bg);
-
-  /* TODO: Consider border subtle here, especially for darkmode */
-  border: none;
+  border: 1px solid var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   box-shadow:
     0 0 1px 0 rgb(0 0 0/ 0.08),
