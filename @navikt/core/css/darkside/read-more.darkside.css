@@ -1,3 +1,4 @@
+/* ----------------------------- ReadMore Button ---------------------------- */
 .navds-read-more__button {
   cursor: pointer;
   margin: 0;
@@ -21,39 +22,25 @@
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
   }
-}
 
-.navds-read-more--large .navds-read-more__button {
-  padding-block: var(--ax-spacing-3);
-}
-
-.navds-read-more--small .navds-read-more__button {
-  padding-block: var(--ax-spacing-05);
-}
-
-@media (forced-colors: active) {
-  .navds-read-more__button {
-    background-color: ButtonFace;
-    border: solid 1px ButtonText;
-    color: ButtonText;
+  &[data-state="open"] {
+    & > .navds-read-more__expand-icon {
+      transform: rotateX(-180deg);
+    }
   }
 }
 
+/* ---------------------------- ReadMore Content ---------------------------- */
 .navds-read-more__content {
   margin-top: var(--ax-spacing-2);
   border-left: 2px solid var(--ax-border-neutral-subtleA);
   margin-left: calc(0.75rem - 1px);
   padding-left: calc(1rem - 1px);
   color: var(--ax-text-default);
-}
 
-.navds-read-more--small .navds-read-more__content {
-  margin-left: calc(0.5rem + 1px);
-  padding-left: calc(0.75rem + 1px);
-}
-
-.navds-read-more__content--closed {
-  display: none;
+  &[data-state="closed"] {
+    display: none;
+  }
 }
 
 .navds-read-more__expand-icon {
@@ -62,10 +49,33 @@
   transition: transform 100ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.navds-read-more--small .navds-read-more__expand-icon {
-  font-size: 1.25rem;
+/* ----------------------------- ReadMore Sizes ----------------------------- */
+.navds-read-more--large {
+  & .navds-read-more__button {
+    padding-block: var(--ax-spacing-3);
+  }
 }
 
-.navds-read-more--open > .navds-read-more__button > .navds-read-more__expand-icon {
-  transform: rotateX(-180deg);
+.navds-read-more--small {
+  & .navds-read-more__button {
+    padding-block: var(--ax-spacing-05);
+  }
+
+  & .navds-read-more__content {
+    margin-left: calc(0.5rem + 1px);
+    padding-left: calc(0.75rem + 1px);
+  }
+
+  & .navds-read-more__expand-icon {
+    font-size: 1.25rem;
+  }
+}
+
+/* ------------------------- ReadMore high-contrast ------------------------- */
+@media (forced-colors: active) {
+  .navds-read-more__button {
+    background-color: ButtonFace;
+    border: solid 1px ButtonText;
+    color: ButtonText;
+  }
 }

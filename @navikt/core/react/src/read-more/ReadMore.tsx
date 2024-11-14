@@ -92,6 +92,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
+          data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
             className="navds-read-more__expand-icon"
@@ -107,6 +108,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
             "navds-read-more__content--closed": !_open,
           })}
           size={size}
+          data-state={_open ? "open" : "closed"}
         >
           {children}
         </BodyLong>
