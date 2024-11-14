@@ -7,7 +7,7 @@ type AkselThemeContext = {
    * Available color-themes
    * @default "light"
    */
-  theme: "light" | "dark";
+  theme?: "light" | "dark";
   /**
    * Brand volume
    * @default "low"

@@ -3,6 +3,7 @@ import { fn } from "@storybook/test";
 import React from "react";
 import { ReadMore } from ".";
 import { VStack } from "../layout/stack";
+import { UNSAFE_AkselTheme } from "../provider";
 
 export default {
   title: "ds-react/ReadMore",
@@ -58,8 +59,36 @@ export const Open: Story = {
   },
 };
 
+export const BrandVolumeLow: Story = {
+  args: {
+    ...Default.args,
+    open: true,
+  },
+  decorators: [
+    (StoryFn) => (
+      <UNSAFE_AkselTheme volume="low">
+        <StoryFn />
+      </UNSAFE_AkselTheme>
+    ),
+  ],
+};
+
+export const BrandVolumeHigh: Story = {
+  args: {
+    ...Default.args,
+    open: true,
+  },
+  decorators: [
+    (StoryFn) => (
+      <UNSAFE_AkselTheme volume="low">
+        <StoryFn />
+      </UNSAFE_AkselTheme>
+    ),
+  ],
+};
+
 export const Chromatic: Story = {
-  render: () => {
+  render: (...props) => {
     return (
       <VStack gap="4">
         <div>
@@ -81,6 +110,14 @@ export const Chromatic: Story = {
           <h2>Controlled open</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...Open.args} />
+        </div>
+        <div>
+          <h2>BrandVolumeLow</h2>
+          {BrandVolumeLow?.render?.(...props)}
+        </div>
+        <div>
+          <h2>BrandVolumeHigh</h2>
+          {BrandVolumeHigh?.render?.(...props)}
         </div>
       </VStack>
     );
