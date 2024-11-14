@@ -3,26 +3,23 @@
 }
 
 .navds-modal {
-  --__axc-modal-bg: var(--ax-bg-raised);
+  --__ac-modal-bg: var(--ac-modal-bg, var(--a-surface-default));
 
-  background-color: var(--__axc-modal-bg);
-  border: 1px solid var(--ax-border-subtleA);
-  border-radius: var(--ax-border-radius-xlarge);
-  box-shadow:
-    0 0 1px 0 rgb(0 0 0/ 0.08),
-    0 2px 5px 0 rgb(0 0 0/ 0.15),
-    0 10px 24px 0 rgb(0 0 0/ 0.18);
+  background-color: var(--__ac-modal-bg);
+  border: none;
+  border-radius: var(--a-border-radius-large);
+  box-shadow: var(--a-shadow-xlarge);
   padding: 0;
   position: fixed;
   max-height: 100%;
   max-width: 100%;
-  color: var(--ax-text-default);
+  color: var(--a-text-default);
+}
 
-  &[open] {
-    display: flex;
-    flex-direction: column;
-    animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
-  }
+.navds-modal[open] {
+  display: flex;
+  flex-direction: column;
+  animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled {
@@ -35,14 +32,14 @@
   width: fit-content;
   height: fit-content;
   margin: auto;
+}
 
-  &:not([open]) {
-    display: none; /* from polyfill */
-  }
+.navds-modal--polyfilled .navds-modal--polyfilled {
+  overflow: auto;
+}
 
-  & .navds-modal--polyfilled {
-    overflow: auto;
-  }
+.navds-modal--polyfilled:not([open]) {
+  display: none; /* from polyfill */
 }
 
 ._dialog_overlay {
@@ -55,24 +52,12 @@
   left: 0;
 }
 
-.navds-modal--medium {
-  width: 700px;
+.navds-modal--small {
+  width: var(--ac-modal-width-small, 450px);
 }
 
-.navds-modal--small {
-  width: 450px;
-
-  & .navds-modal__header {
-    padding: var(--ax-spacing-4) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-4);
-  }
-
-  & .navds-modal__body {
-    padding: var(--ax-spacing-2) var(--ax-spacing-4) var(--ax-spacing-4);
-  }
-
-  & .navds-modal__footer {
-    padding: var(--ax-spacing-4);
-  }
+.navds-modal--medium {
+  width: var(--ac-modal-width-medium, 700px);
 }
 
 @media (min-width: 480px) {
@@ -98,16 +83,16 @@
 
 .navds-modal::backdrop {
   /*
-   * Cannot use --ax-bg-overlay because ::backdrop does not inherit from anything but itself.
-   * TODO: Consider adding `::backdrop` to global token definitions.
-   * TODO: Check that overlay-color is correct after the new colors is set in stone.
+   * Cannot use --a-surface-backdrop because ::backdrop does not inherit from anything but itself.
+   * But consumers can do `::backdrop { --ac-modal-backdrop: white; }`
+   * We can add ::backdrop to tokens.css when we remove the polyfill.
    */
-  background: #0214317d;
+  background: var(--ac-modal-backdrop, rgb(2 20 49 / 0.49));
   animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .navds-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
-  background: #0214317d;
+  background: var(--ac-modal-backdrop, rgb(2 20 49 / 0.49));
 
   /* From polyfill: */
   position: fixed;
@@ -119,35 +104,37 @@
 }
 
 .navds-modal__button {
-  margin-left: var(--ax-spacing-4);
+  margin-left: var(--a-spacing-4);
   float: right;
 }
 
 .navds-modal__header {
-  padding: var(--ax-spacing-6) var(--ax-spacing-6) var(--ax-spacing-4) var(--ax-spacing-6);
+  padding: var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-4) var(--a-spacing-6);
 }
 
-.navds-modal__header-icon {
-  & svg {
-    display: inline;
-    vertical-align: -0.25rem;
-    margin-right: var(--ax-spacing-1);
-  }
+.navds-modal--small .navds-modal__header {
+  padding: var(--a-spacing-4) var(--a-spacing-4) var(--a-spacing-3) var(--a-spacing-4);
+}
+
+.navds-modal__header-icon svg {
+  display: inline;
+  vertical-align: -0.25rem;
+  margin-right: var(--a-spacing-1);
 }
 
 .navds-modal__label {
-  font-weight: var(--ax-font-weight-bold);
-  color: var(--ax-text-subtle);
+  font-weight: 600;
+  color: var(--a-text-subtle);
 }
 
 .navds-modal__body {
-  padding: var(--ax-spacing-6);
+  padding: var(--a-spacing-6);
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
   background:
-    linear-gradient(var(--__axc-modal-bg) 30%, transparent) top,
-    linear-gradient(transparent, var(--__axc-modal-bg) 60%) bottom,
+    linear-gradient(var(--__ac-modal-bg) 30%, transparent) top,
+    linear-gradient(transparent, var(--__ac-modal-bg) 60%) bottom,
     radial-gradient(farthest-side at 50% 0, rgba(0 0 0 / 0.3), transparent) top,
     radial-gradient(farthest-side at 50% 100%, rgba(0 0 0 / 0.3), transparent) bottom;
   background-size:
@@ -159,15 +146,23 @@
   background-repeat: no-repeat;
 }
 
+.navds-modal--small .navds-modal__body {
+  padding: var(--a-spacing-2) var(--a-spacing-4) var(--a-spacing-4);
+}
+
 .navds-modal__header + .navds-modal__body {
-  padding-top: var(--ax-spacing-0);
+  padding-top: var(--a-spacing-0);
 }
 
 .navds-modal__footer {
   display: flex;
   flex-flow: row-reverse wrap;
-  gap: var(--ax-spacing-4);
-  padding: var(--ax-spacing-4) var(--ax-spacing-6) var(--ax-spacing-6) var(--ax-spacing-6);
+  gap: var(--a-spacing-4);
+  padding: var(--a-spacing-4) var(--a-spacing-6) var(--a-spacing-6) var(--a-spacing-6);
+}
+
+.navds-modal--small .navds-modal__footer {
+  padding: var(--a-spacing-4);
 }
 
 .navds-modal__footer :nth-of-type(2) {
@@ -185,7 +180,7 @@
 @keyframes akselModalFadeIn {
   0% {
     opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
-    transform: translate3d(0, calc(2% + 4px), 0);
+    transform: translate3d(0, calc(5% + 4px), 0);
   }
 
   50% {
