@@ -1,3 +1,10 @@
+.navds-read-more {
+  --__axc-read-more-icon-size: 1.5rem;
+  --__axc-read-more-pi-start: 0px;
+  --__axc-read-more-pi-end: var(--ax-spacing-1);
+  --__axc-read-more-pb: var(--ax-spacing-1);
+}
+
 /* ----------------------------- ReadMore Button ---------------------------- */
 .navds-read-more__button {
   cursor: pointer;
@@ -8,56 +15,27 @@
   align-items: flex-start;
   gap: var(--ax-spacing-1);
   color: var(--ax-text-accent);
-  border-radius: var(--ax-border-radius-medium);
-  padding-inline: 0 var(--ax-spacing-1);
-  padding-block: var(--ax-spacing-1);
+  padding-inline: var(--__axc-read-more-pi-start) var(--__axc-read-more-pi-end);
+  padding-block: var(--__axc-read-more-pb);
   text-align: start;
-
-  &:hover {
-    background-color: var(--ax-bg-neutral-hoverA);
-    color: var(--ax-text-accent-strong);
-  }
 
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
   }
 
-  &[data-state="open"] {
-    & > .navds-read-more__expand-icon {
-      transform: rotateX(-180deg);
-    }
+  &[data-state="open"] .navds-read-more__expand-icon {
+    transform: rotateX(-180deg);
   }
 }
 
-.navds-read-more[data-volume="low"] {
-  &.navds-read-more--small {
-    & .navds-read-more__button {
-      padding-block: var(--ax-spacing-05);
-    }
+.navds-read-more:is([data-volume="low"], :not([data-volume])) {
+  & .navds-read-more__button {
+    border-radius: var(--ax-border-radius-medium);
 
-    & .navds-read-more__content {
-      margin-left: calc(0.5rem + 1px);
-      padding-left: calc(0.75rem + 1px);
-    }
-  }
-
-  &.navds-read-more--medium {
-    & .navds-read-more__button {
-      padding-block: var(--ax-spacing-1);
-    }
-  }
-
-  &.navds-read-more--large {
-    & .navds-read-more__button {
-      padding-block: var(--ax-spacing-3);
-    }
-  }
-
-  &:is(.navds-read-more--medium, .navds-read-more--large) {
-    & .navds-read-more__content {
-      margin-left: calc(0.75rem - 1px);
-      padding-left: calc(1rem - 1px);
+    &:hover {
+      background-color: var(--ax-bg-neutral-hoverA);
+      color: var(--ax-text-accent-strong);
     }
   }
 }
@@ -72,35 +50,15 @@
     }
   }
 
-  &.navds-read-more--small {
-    & .navds-read-more__content {
-      margin-left: calc(1rem + 1px);
-      padding-left: calc(0.75rem + 1px);
-    }
-  }
-
-  &.navds-read-more--medium {
-    & .navds-read-more__content {
-      margin-left: calc(1.25rem - 1px);
-      padding-left: calc(1rem - 1px);
-    }
-  }
-
   &.navds-read-more--large {
-    & .navds-read-more__button {
-      padding-inline: var(--ax-spacing-3) var(--ax-spacing-6);
-    }
-
-    & .navds-read-more__content {
-      margin-left: calc(1.5rem - 1px);
-      padding-left: calc(1rem - 1px);
-    }
+    --__axc-read-more-pi-start: var(--ax-spacing-3);
+    --__axc-read-more-pi-end: var(--ax-spacing-6);
   }
 
-  &:is(.navds-read-more--small, .navds-read-more--medium) {
-    & .navds-read-more__button {
-      padding-inline: var(--ax-spacing-2) var(--ax-spacing-4);
-    }
+  &.navds-read-more--small,
+  &.navds-read-more--medium {
+    --__axc-read-more-pi-start: var(--ax-spacing-2);
+    --__axc-read-more-pi-end: var(--ax-spacing-4);
   }
 }
 
@@ -108,9 +66,9 @@
 .navds-read-more__content {
   margin-top: var(--ax-spacing-2);
   border-left: 2px solid var(--ax-border-neutral-subtleA);
-  margin-left: calc(0.75rem - 1px);
-  padding-left: calc(1rem - 1px);
   color: var(--ax-text-default);
+  margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
+  padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-spacing-1));
 
   &[data-state="closed"] {
     display: none;
@@ -118,31 +76,19 @@
 }
 
 .navds-read-more__expand-icon {
-  font-size: 1.5rem;
+  font-size: var(--__axc-read-more-icon-size);
   flex-shrink: 0;
   transition: transform 100ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* ----------------------------- ReadMore Sizes ----------------------------- */
 .navds-read-more--large {
-  & .navds-read-more__button {
-    padding-block: var(--ax-spacing-3);
-  }
+  --__axc-read-more-pb: var(--ax-spacing-3);
 }
 
 .navds-read-more--small {
-  & .navds-read-more__button {
-    padding-block: var(--ax-spacing-05);
-  }
-
-  & .navds-read-more__content {
-    margin-left: calc(0.5rem + 1px);
-    padding-left: calc(0.75rem + 1px);
-  }
-
-  & .navds-read-more__expand-icon {
-    font-size: 1.25rem;
-  }
+  --__axc-read-more-icon-size: 1.25rem;
+  --__axc-read-more-pb: var(--ax-spacing-05);
 }
 
 /* ------------------------- ReadMore high-contrast ------------------------- */
