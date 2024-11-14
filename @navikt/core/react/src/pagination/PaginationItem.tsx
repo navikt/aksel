@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { OverridableComponent } from "../util/types";
 
 export interface PaginationItemProps extends ButtonProps {
@@ -39,10 +40,12 @@ export const Item: PaginationItemType = forwardRef(
     },
     ref,
   ) => {
+    const themeContext = UNSAFE_useAkselTheme(false);
+
     return (
       <Button
         as={Component}
-        variant="tertiary"
+        variant={themeContext ? "tertiary-neutral" : "tertiary"}
         aria-current={selected}
         ref={ref}
         className={cl("navds-pagination__item", className, {
