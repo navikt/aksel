@@ -27,6 +27,7 @@
 }
 
 .navds-text-field__input:focus-visible {
+  border-color: var(--ax-border-accent-strong);
   outline: 2px solid var(--ax-border-focus);
   outline-offset: 2px;
 }
