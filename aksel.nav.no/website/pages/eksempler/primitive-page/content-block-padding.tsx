@@ -16,7 +16,7 @@ const Example = () => {
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Content>
-          <Heading level="1" size="large" spacing>
+          <Heading level="1" size="large">
             Page.Block
           </Heading>
         </Content>

@@ -17,14 +17,14 @@ const Example = () => {
       <HStack gap="4">
         <Page.Block as="main" width="xl" gutters>
           <Content>
-            <Heading level="1" size="large" spacing>
+            <Heading level="1" size="large">
               Page.Block med gutter
             </Heading>
           </Content>
         </Page.Block>
         <Page.Block as="main" width="xl">
           <Content>
-            <Heading level="1" size="large" spacing>
+            <Heading level="1" size="large">
               Page.Block uten gutter
             </Heading>
           </Content>
