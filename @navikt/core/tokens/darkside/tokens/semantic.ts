@@ -20,6 +20,11 @@ export function semanticTokenConfig(
         type: "color",
         group: "text",
       },
+      logo: {
+        value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
+        type: "color",
+        group: "text",
+      },
     },
     bg: {
       default: {
