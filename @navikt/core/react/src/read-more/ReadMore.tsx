@@ -33,7 +33,7 @@ export interface ReadMoreProps
    * Changes fontsize for content.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
 }
 
 /**

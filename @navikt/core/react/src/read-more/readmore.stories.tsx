@@ -38,6 +38,13 @@ export const Default: Story = {
   },
 };
 
+export const Large: Story = {
+  args: {
+    ...Default.args,
+    size: "large",
+  },
+};
+
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -100,6 +107,11 @@ export const Chromatic: Story = {
           <h2>Small</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...Small.args} />
+        </div>
+        <div>
+          <h2>Large</h2>
+          {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
+          <ReadMore {...Large.args} />
         </div>
         <div>
           <h2>DefaultOpen</h2>
