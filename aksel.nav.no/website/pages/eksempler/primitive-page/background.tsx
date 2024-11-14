@@ -1,5 +1,4 @@
 import { Heading, Page } from "@navikt/ds-react";
-import { Content } from "@/web/examples/__parts/PageDemoContent";
 import { withDsExample } from "@/web/examples/withDsExample";
 import {
   Env,
@@ -7,6 +6,7 @@ import {
   Header,
   useDekorator,
 } from "../../../components/website-modules/examples/__parts/Dekorator";
+import { Content } from "../../../components/website-modules/examples/__parts/PageDemoContent";
 
 const Example = () => {
   useDekorator();
