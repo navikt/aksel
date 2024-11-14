@@ -67,29 +67,39 @@ export const Open: Story = {
 };
 
 export const BrandVolumeLow: Story = {
-  render: () => <ReadMore header={Default.args?.header}>{Content}</ReadMore>,
+  render: () => (
+    <UNSAFE_AkselTheme volume="low">
+      <VStack gap="4">
+        <ReadMore size="large" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+        <ReadMore size="small" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+      </VStack>
+    </UNSAFE_AkselTheme>
+  ),
   args: {
     ...Default.args,
     open: true,
   },
-  decorators: [
-    (StoryFn) => (
-      <UNSAFE_AkselTheme volume="low">
-        <StoryFn />
-      </UNSAFE_AkselTheme>
-    ),
-  ],
 };
 
 export const BrandVolumeHigh: Story = {
-  render: () => <ReadMore header={Default.args?.header}>{Content}</ReadMore>,
-  decorators: [
-    (StoryFn) => (
-      <UNSAFE_AkselTheme volume="low">
-        <StoryFn />
-      </UNSAFE_AkselTheme>
-    ),
-  ],
+  render: () => (
+    <UNSAFE_AkselTheme volume="high">
+      <VStack gap="4">
+        <ReadMore size="large" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+        <ReadMore size="small" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+      </VStack>
+    </UNSAFE_AkselTheme>
+  ),
 };
 
 export const Chromatic: Story = {

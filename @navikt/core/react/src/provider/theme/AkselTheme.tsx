@@ -47,7 +47,7 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
       hasBackgroundProp ?? (isRoot || props.theme !== undefined);
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} volume={volume}>
         <div
           ref={ref}
           className={cl("navds-theme", className, theme)}
