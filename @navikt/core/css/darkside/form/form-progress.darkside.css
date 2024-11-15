@@ -11,10 +11,6 @@
     & svg {
       transform: rotate(-180deg);
     }
-
-    &:hover svg {
-      transform: rotate(-180deg);
-    }
   }
 }
 
