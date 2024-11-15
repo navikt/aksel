@@ -7,14 +7,30 @@
   min-height: 3rem;
   width: 100%;
   color: var(--ax-text-default);
-}
 
-.navds-text-field__input[size] {
-  width: auto;
-}
+  &:hover {
+    border-color: var(--ax-border-accent-strong);
+  }
 
-.navds-text-field__input::placeholder {
-  color: var(--ax-text-subtle);
+  &:focus-visible {
+    border-color: var(--ax-border-accent-strong);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background-color: var(--ax-bg-input);
+    border-color: var(--ax-border-default);
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: var(--ax-text-subtle);
+  }
+
+  &[size] {
+    width: auto;
+  }
 }
 
 .navds-form-field--small .navds-text-field__input {
@@ -22,29 +38,9 @@
   min-height: 2rem;
 }
 
-.navds-text-field__input:hover {
-  border-color: var(--ax-border-accent-strong);
-}
-
-.navds-text-field__input:focus-visible {
-  border-color: var(--ax-border-accent-strong);
-  outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
-}
-
-/**
-  Error handling
-*/
 .navds-text-field--error > .navds-text-field__input:not(:hover, :disabled) {
   border-color: var(--ax-border-danger);
   box-shadow: 0 0 0 1px var(--ax-border-danger);
-}
-
-/* Disabled handling */
-.navds-text-field__input:disabled {
-  background-color: var(--ax-bg-input);
-  border-color: var(--ax-border-default);
-  cursor: not-allowed;
 }
 
 .navds-text-field--readonly .navds-text-field__input {
@@ -56,11 +52,13 @@
 /**
   * Removes default search icon
   */
-.navds-text-field__input[type="search"]::-webkit-search-decoration,
-.navds-text-field__input[type="search"]::-webkit-search-cancel-button,
-.navds-text-field__input[type="search"]::-webkit-search-results-button,
-.navds-text-field__input[type="search"]::-webkit-search-results-decoration {
-  -webkit-appearance: none;
+.navds-text-field__input[type="search"] {
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
 }
 
 @media (forced-colors: active) {
