@@ -1,4 +1,7 @@
 .navds-button {
+  --__axc-button-icon-size: 1.5rem;
+  --__axc-button-icon-margin: -4px;
+
   padding: var(--ax-spacing-3) var(--ax-spacing-5);
   border-radius: var(--ax-border-radius-medium);
   display: inline-flex;
@@ -9,6 +12,17 @@
   align-items: center;
   justify-content: center;
   gap: var(--ax-spacing-2);
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.navds-button--small,
+.navds-button--xsmall {
+  --__axc-button-icon-margin: -2px;
+  --__axc-button-icon-size: 1.25rem;
 }
 
 .navds-button--small {
@@ -24,19 +38,14 @@
 
 .navds-button--icon-only {
   padding: var(--ax-spacing-3);
-}
 
-.navds-button--small.navds-button--icon-only {
-  padding: var(--ax-spacing-1);
-}
+  &.navds-button--small {
+    padding: var(--ax-spacing-1);
+  }
 
-.navds-button--xsmall.navds-button--icon-only {
-  padding: var(--ax-spacing-05);
-}
-
-.navds-button:focus-visible {
-  outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
+  &.navds-button--xsmall {
+    padding: var(--ax-spacing-05);
+  }
 }
 
 @supports not selector(:focus-visible) {
@@ -46,28 +55,20 @@
 }
 
 .navds-button__icon {
-  font-size: 1.5rem;
+  font-size: var(--__axc-button-icon-size);
   display: flex;
 
-  --__axc-button-icon-margin: -4px;
-}
+  &:first-child {
+    margin-left: var(--__axc-button-icon-margin);
+  }
 
-.navds-button__icon:first-child {
-  margin-left: var(--__axc-button-icon-margin);
-}
+  &:last-child {
+    margin-right: var(--__axc-button-icon-margin);
+  }
 
-.navds-button__icon:last-child {
-  margin-right: var(--__axc-button-icon-margin);
-}
-
-:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
-  --__axc-button-icon-margin: -2px;
-
-  font-size: 1.25rem;
-}
-
-.navds-button__icon:only-child {
-  margin: 0;
+  &:only-child {
+    margin: 0;
+  }
 }
 
 /*************************
