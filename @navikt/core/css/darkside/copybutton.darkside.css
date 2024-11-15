@@ -21,7 +21,7 @@
   }
 
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hover);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:focus-visible {

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@layer aksel.reset, aksel.typography, aksel.theme, aksel.forms, aksel.components, aksel.layout, aksel.utilities;
+@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.forms, aksel.layout, aksel.utilities;
 
 /* CSS foundations */
 @import "./baseline/reset.darkside.css" layer(aksel.reset);

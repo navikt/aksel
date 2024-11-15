@@ -293,6 +293,10 @@
   background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
 }
 
+.navds-combobox__list:has(.navds-combobox__list_non-selectables) .navds-combobox__list-item {
+  scroll-margin-top: 48px;
+}
+
 .navds-combobox__list-item--loading {
   justify-content: center;
   background-color: var(--ac-combobox-list-item-loading-bg, var(--a-surface-default));

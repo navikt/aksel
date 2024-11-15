@@ -11,7 +11,7 @@ import { BodyLong, Button, Chips, HStack } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import ErrorBoundary from "@/error-boundary";
 import { CodeExamplesT } from "@/types";
-import { TextWithMarkdownLink } from "@/web/TextWithMarkdownLink";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { CodeSandbox } from "./parts/CodeSandbox";
 import { Sandbox } from "./parts/Sandbox";
 
@@ -30,6 +30,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
 
   const router = useRouter();
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const resizerRef = useRef<HTMLDivElement>(null);
 
   const handleExampleLoad = () => {
     const iframePadding = node.compact
@@ -133,7 +134,7 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
         >
           {fil?.description && (
             <BodyLong className="mb-2">
-              <TextWithMarkdownLink>{fil.description}</TextWithMarkdownLink>
+              <TextWithMarkdown>{fil.description}</TextWithMarkdown>
             </BodyLong>
           )}
 
@@ -148,20 +149,28 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   },
                 )}
               >
-                <iframe
-                  ref={iframeRef}
-                  src={`/${demoVariant}/${node.dir.title}/${fil.navn}`}
-                  height={frameState}
-                  onLoad={handleExampleLoad}
-                  aria-label={`${node.dir?.title} ${fil.title} eksempel`}
-                  title="Demo"
+                <div
+                  ref={resizerRef} // Resize directly on iframe doesn't work in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=680823)
                   className={cl(
-                    "block w-full max-w-full resize-x bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
-                    {
-                      invisible: unloaded,
-                    },
+                    "max-w-4xl resize-x overflow-hidden shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
+                    { invisible: unloaded },
                   )}
-                />
+                >
+                  <iframe
+                    ref={iframeRef}
+                    src={`/${demoVariant}/${node.dir.title}/${fil.navn}`}
+                    height={frameState}
+                    onLoad={handleExampleLoad}
+                    aria-label={`${node.dir?.title} ${fil.title} eksempel`}
+                    title="Demo"
+                    className="block max-h-[calc(100vh-200px)] w-full bg-white"
+                    style={{
+                      // Prevent the iframe from covering up the resize handle in Safari
+                      clipPath:
+                        "polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)",
+                    }}
+                  />
+                </div>
                 {unloaded && (
                   <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
                     <div className="grid w-3/5 gap-2">
@@ -182,8 +191,8 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                           <MobileSmallIcon title="Sett eksempel til mobilbredde" />
                         }
                         onClick={() => {
-                          if (iframeRef.current) {
-                            iframeRef.current.style.width = "360px";
+                          if (resizerRef.current) {
+                            resizerRef.current.style.width = "360px";
                           }
                         }}
                       />
@@ -195,8 +204,8 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                           <LaptopIcon title="Sett eksempel til desktopbredde" />
                         }
                         onClick={() => {
-                          if (iframeRef.current) {
-                            iframeRef.current.style.width = "";
+                          if (resizerRef.current) {
+                            resizerRef.current.style.width = "";
                           }
                         }}
                       />
