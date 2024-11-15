@@ -175,6 +175,13 @@ export class AkselVariablesInterface {
             figma.util.rgba(token.value),
             mode.modeId,
           );
+
+          this.Figma.setVariableMetadata(variable, {
+            codeSyntax: token.code,
+            description: token.comment ?? "",
+            hiddenFromPublishing: collection.hiddenFromPublishing,
+            scopes: token.scopes,
+          });
           continue;
         }
 
