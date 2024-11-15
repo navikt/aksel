@@ -8,6 +8,11 @@
   list-style: none;
   display: flex;
   gap: var(--ax-spacing-3);
+
+  & li {
+    list-style: none;
+    display: flex;
+  }
 }
 
 .navds-pagination__ellipsis {
