@@ -1,23 +1,13 @@
-[data-theme="dark"] {
-  --__ac-search-button-border: var(--a-border-on-inverted);
-  --__ac-search-button-border-hover: var(--a-blue-200);
-  --__ac-search-clear-icon: var(--a-white);
-  --__ac-search-clear-icon-hover: var(--a-blue-200);
-  --__ac-search-error-border: var(--a-red-300);
-}
-
-[data-theme="light"] {
-  --__ac-search-button-border: initial;
-  --__ac-search-button-border-hover: initial;
-  --__ac-search-clear-icon: initial;
-  --__ac-search-clear-icon-hover: initial;
-  --__ac-search-error-border: initial;
-}
-
 .navds-search {
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-radius: var(--ax-border-radius-medium);
+
+  &:has(.navds-search__input:focus-visible) {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
 }
 
 .navds-search__wrapper-inner {
@@ -35,29 +25,34 @@
 }
 
 .navds-search__input {
-  padding-right: var(--a-spacing-10);
+  padding-right: var(--ax-spacing-9);
+
+  &:focus-visible {
+    outline-color: transparent;
+  }
+
+  &:not(.navds-search__input--simple) {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 .navds-form-field--small .navds-search__input {
-  padding-right: var(--a-spacing-8);
+  padding-right: var(--ax-spacing-7);
 }
 
 .navds-search__input--simple {
-  padding-left: var(--a-spacing-11);
+  padding-left: var(--ax-spacing-10);
 }
 
 .navds-form-field--small .navds-search__input--simple {
-  padding-left: var(--a-spacing-7);
-}
-
-.navds-search__input:not(.navds-search__input--simple) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  padding-left: var(--ax-spacing-7);
 }
 
 .navds-search__search-icon {
   position: absolute;
-  left: var(--a-spacing-3);
+  left: var(--ax-spacing-2);
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -65,15 +60,15 @@
 }
 
 .navds-form-field--small .navds-search__search-icon {
-  left: var(--a-spacing-2);
-  font-size: 1rem;
+  left: var(--ax-spacing-1);
+  font-size: 1.25rem;
 }
 
 .navds-search__button-clear {
   position: absolute;
   right: 0.75rem;
-  border-radius: var(--a-border-radius-medium);
-  color: var(--ac-search-clear-icon, var(--__ac-search-clear-icon, var(--a-text-default)));
+  border-radius: var(--ax-border-radius-medium);
+  color: var(--ax-text-default);
   height: 32px;
   width: 32px;
   top: 50%;
@@ -95,19 +90,12 @@
 }
 
 .navds-search__button-clear:hover {
-  color: var(--ac-search-clear-icon-hover, var(--__ac-search-clear-icon-hover, var(--a-text-action-hover)));
+  color: var(--ax-text-accent);
 }
 
 .navds-search__button-clear:focus-visible {
-  outline: 2px solid transparent;
-  box-shadow: var(--a-shadow-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-search__button-clear:focus {
-    outline: 2px solid transparent;
-    box-shadow: var(--a-shadow-focus);
-  }
+  outline: 2px solid var(--ax-border-focus);
+  outline-offset: 2px;
 }
 
 .navds-search__button-search {
@@ -115,18 +103,23 @@
   min-width: 4rem;
   min-height: 2rem;
   border-radius: 0;
-  border-top-right-radius: var(--a-border-radius-medium);
-  border-bottom-right-radius: var(--a-border-radius-medium);
-}
+  border-top-right-radius: var(--ax-border-radius-medium);
+  border-bottom-right-radius: var(--ax-border-radius-medium);
 
-.navds-form-field--small .navds-search__button-search svg {
-  font-size: 1rem;
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* margin-left: -1px; */
+  z-index: 1;
 }
 
 .navds-form-field--small .navds-search__button-search {
   min-width: 2.5rem;
 }
 
+/*
 .navds-search__button-search.navds-button--secondary {
   box-shadow:
     -1px 0 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
@@ -142,15 +135,10 @@
     -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover)));
   z-index: 1;
 }
+ */
 
 .navds-search__wrapper-inner:focus-within + .navds-search__button-search.navds-button--secondary:hover {
   z-index: auto;
-}
-
-.navds-search__button-search.navds-button--secondary:focus-visible {
-  box-shadow:
-    0 0 0 1px var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
-    var(--a-shadow-focus);
 }
 
 .navds-search__button-search.navds-button--secondary:focus-visible:hover {
