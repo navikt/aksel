@@ -18,7 +18,7 @@
 
 .navds-help-text__popover.navds-popover {
   background-color: var(--ax-bg-info-moderate);
-  max-width: min(65ch, calc(100vw - 1.5rem));
+  max-width: min(65ch, calc(100vw - var(--ax-spacing-6)));
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info);
   box-shadow:
