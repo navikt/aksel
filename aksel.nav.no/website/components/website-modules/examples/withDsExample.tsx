@@ -12,11 +12,12 @@ import styles from "./examples.module.css";
 
 type withDsT = {
   /**
-   * Full: No horizontal centering (i.e. full width).
+   * Full: No horizontal centering (i.e. full width with padding).
    * Static: No vertical centering and static (but responsive) width. Used for dynamic-height examples like ExpansionCard.
    * Static-full: No centering in any direction.
+   * Fullscreen: No centering and no padding.
    */
-  variant?: "full" | "static" | "static-full";
+  variant?: "full" | "static" | "static-full" | "fullscreen";
   background?: "inverted" | "subtle";
   showBreakpoints?: boolean;
 };
@@ -84,6 +85,7 @@ export const withDsExample = (
           [styles.containerStatic]: variant === "static",
           [styles.containerFull]: variant === "full",
           [styles.containerStaticFull]: variant === "static-full",
+          [styles.containerFullscreen]: variant === "fullscreen",
         })}
         style={{ background: getBg(background) }}
       >
