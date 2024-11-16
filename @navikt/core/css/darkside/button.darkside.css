@@ -2,6 +2,7 @@
   --__axc-button-icon-size: 1.5rem;
   --__axc-button-icon-margin: -4px;
   --__axc-button-border-color: transparent;
+  --__axc-button-border-width: 2px;
 
   padding: var(--ax-spacing-3) var(--ax-spacing-5);
   border-radius: var(--ax-border-radius-medium);
@@ -13,7 +14,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--ax-spacing-2);
-  box-shadow: inset 0 0 0 2px var(--__axc-button-border-color);
+  box-shadow: inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
 
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);
