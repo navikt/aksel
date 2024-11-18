@@ -340,7 +340,7 @@
   & mark {
     background-color: transparent;
     font-weight: bold;
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-strong);
   }
 
   & svg {
@@ -377,7 +377,7 @@
 }
 
 .navds-combobox__list-item--new-option--focus {
-  border-radius: calc(var(--ax-border-radius-medium) - 1px);
+  border-radius: calc(var(--ax-border-radius-large) - 1px) calc(var(--ax-border-radius-large) - 1px) 0 0;
 
   /* TODO: new option should get a wrapper div later to
 * style it properly with a nice rounded border radius
