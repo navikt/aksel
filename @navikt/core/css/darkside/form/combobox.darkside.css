@@ -370,7 +370,7 @@
   padding-block: var(--ax-spacing-4);
 
   & svg {
-    stroke: var(--ax-text-default);
+    color: var(--ax-text-default);
   }
 
   &:only-child {
@@ -466,14 +466,14 @@
 
   .navds-combobox__list-item--new-option {
     svg {
-      stroke: canvastext;
+      color: canvastext;
     }
 
     &:hover {
       color: highlight;
 
       svg {
-        stroke: highlight;
+        color: highlight;
       }
     }
   }
