@@ -195,21 +195,6 @@
   }
 }
 
-/* TODO: this needs to be rewritten & tested 
-*
-@supports not selector(:has(.navds-combobox__wrapper-inner)) {
-  .navds-combobox--focused {
-    & .navds-combobox__wrapper-inner {
-      outline: 3px solid transparent;
-    }
-
-    & .navds-combobox__wrapper-inner.navds-combobox__wrapper-inner--virtually-unfocused {
-      outline: none;
-    }
-  }
-} 
-*/
-
 .navds-combobox__button-clear {
   border-radius: var(--ax-border-radius-medium);
   color: var(--ax-text-subtle);
@@ -264,7 +249,7 @@
   border: 1px solid var(--ax-border-default);
   display: flex;
   flex-direction: column;
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-default);
   overscroll-behavior: contain;
@@ -372,13 +357,13 @@
 }
 
 .navds-combobox__list-item--new-option {
-  border-block: 1px solid var(--ax-border-accent-subtleA);
+  border-bottom: 1px solid var(--ax-border-accent-subtleA);
+  border-radius: 0;
   background: var(--ax-bg-accent-moderateA);
   cursor: pointer;
   justify-content: flex-start;
   gap: 0.25rem;
   margin: 0;
-  border-radius: 0;
   margin-block: calc(var(--ax-spacing-1) * -1);
   padding-block: var(--ax-spacing-4);
 
