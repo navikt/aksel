@@ -47,6 +47,7 @@
 
     &:hover {
       background-color: var(--ax-bg-accent-moderate-hoverA);
+      color: var(--ax-text-accent-strong);
     }
   }
 
