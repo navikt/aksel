@@ -77,6 +77,8 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
 
     const themeContext = UNSAFE_useAkselTheme(false);
 
+    const typoSize = size === "small" ? "small" : "medium";
+
     return (
       <div
         className={cl(
@@ -111,7 +113,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className={cl("navds-read-more__content", {
             "navds-read-more__content--closed": !_open,
           })}
-          size={size}
+          size={typoSize}
           data-state={_open ? "open" : "closed"}
         >
           {children}
