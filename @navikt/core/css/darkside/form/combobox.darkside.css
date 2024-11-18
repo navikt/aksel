@@ -332,6 +332,8 @@
 }
 
 .navds-combobox__list-item {
+  user-select: none;
+
   &[data-no-focus="true"] {
     cursor: not-allowed;
     opacity: 0.4;
