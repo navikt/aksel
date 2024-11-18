@@ -29,7 +29,7 @@
   height: auto;
   transform-origin: 0 55%;
   transform: scale(1, 0.6);
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
 
   &:empty::before {
     content: "\00a0";
@@ -37,7 +37,7 @@
 }
 
 .navds-skeleton--circle {
-  border-radius: var(--a-border-radius-full);
+  border-radius: var(--ax-border-radius-full);
 }
 
 .navds-skeleton--rectangle {
@@ -45,7 +45,7 @@
 }
 
 .navds-skeleton--rounded {
-  border-radius: var(--a-border-radius-xlarge);
+  border-radius: var(--ax-border-radius-xlarge);
 }
 
 @keyframes akselSkeletonAnimation {
