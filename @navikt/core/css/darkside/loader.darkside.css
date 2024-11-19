@@ -63,6 +63,7 @@
   stroke-dashoffset: 0;
   stroke: var(--ax-border-strong);
   stroke-linecap: round;
+  stroke-width: var(--__axc-loader-stroke-width);
 }
 
 .navds-loader__background {
