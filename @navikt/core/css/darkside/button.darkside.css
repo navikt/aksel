@@ -89,7 +89,7 @@
     background-color: var(--ax-bg-accent-strong-pressed);
   }
 
-  &:is(:hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     background-color: var(--ax-bg-accent-strong);
   }
 }
@@ -120,7 +120,7 @@
     background-color: var(--ax-bg-neutral-strong-pressed);
   }
 
-  &:is(&, :hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     background-color: var(--ax-bg-neutral-strong);
   }
 }
@@ -148,7 +148,7 @@
     color: var(--ax-text-accent-contrast);
   }
 
-  &:is(&, :hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     --__axc-button-border-color: var(--ax-border-accent);
 
     background-color: transparent;
@@ -179,7 +179,7 @@
     background-color: var(--ax-bg-neutral-strong-pressed);
   }
 
-  &:is(&, :hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     --__axc-button-border-color: var(--ax-border-neutral);
 
     color: var(--ax-text-default);
@@ -204,7 +204,7 @@
     color: var(--ax-text-accent-contrast);
   }
 
-  &:is(&, :hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     color: var(--ax-text-accent);
     background-color: transparent;
   }
@@ -227,7 +227,7 @@
     color: var(--ax-text-neutral-contrast);
   }
 
-  &:is(&, :hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     color: var(--ax-text-default);
     background-color: transparent;
   }
@@ -248,7 +248,7 @@
     background-color: var(--ax-bg-danger-strong-pressed);
   }
 
-  &:is(:hover, :active):is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .navds-button--disabled) {
     background-color: var(--ax-bg-danger-strong);
   }
 }
