@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
 ## 7.5.1
 
 ## 7.5.0
