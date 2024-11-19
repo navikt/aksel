@@ -137,8 +137,9 @@
   transform: rotateX(-180deg);
 }
 
+/* Even if animation always takes 250ms, the perceived effect of current timing function makes the 'closing'-animation take longer */
 .navds-expansioncard__header[data-open="false"] .navds-expansioncard__header-chevron {
-  transition-duration: 0ms;
+  transition-duration: 400ms;
 }
 
 /* -------------------------- ExpansionCard Content ------------------------- */
@@ -154,7 +155,8 @@
   visibility: hidden;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-property: padding-block, grid-template-rows;
+  transition-property: visibility, padding-block, grid-template-rows;
+  overflow: hidden;
 
   &[data-open="true"] {
     grid-template-rows: 1fr;
@@ -164,10 +166,6 @@
     & .navds-expansioncard__content-inner {
       opacity: 1;
     }
-  }
-
-  &[data-open="false"] {
-    transition-duration: 0ms;
   }
 }
 

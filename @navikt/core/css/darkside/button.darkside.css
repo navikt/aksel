@@ -35,13 +35,13 @@
 }
 
 .navds-button:focus-visible {
-  outline: 4px solid var(--ax-border-focus);
+  outline: 2px solid var(--ax-border-focus);
   outline-offset: 2px;
 }
 
 @supports not selector(:focus-visible) {
   .navds-button:focus {
-    outline: 4px solid var(--ax-border-focus);
+    outline: 2px solid var(--ax-border-focus);
   }
 }
 
@@ -137,7 +137,7 @@
 
 .navds-button--secondary:hover {
   background-color: var(--ax-bg-accent-moderate-hoverA);
-  color: var(--ax-bg-accent-strong-hover);
+  color: var(--ax-text-accent-strong);
   box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
 }
 
@@ -159,12 +159,13 @@
 
 .navds-button--secondary-neutral {
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   box-shadow: inset 0 0 0 2px var(--ax-border-neutral);
 }
 
 .navds-button--secondary-neutral:hover {
   background-color: var(--ax-bg-neutral-moderate-hoverA);
+  color: var(--ax-text-neutral-strong);
 }
 
 .navds-button--secondary-neutral:active {
@@ -191,7 +192,7 @@
 
 .navds-button--tertiary:hover {
   background-color: var(--ax-bg-accent-hoverA);
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-strong);
 }
 
 .navds-button--tertiary:active {
@@ -217,11 +218,12 @@
  ****************************/
 
 .navds-button--tertiary-neutral {
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 .navds-button--tertiary-neutral:hover {
   background-color: var(--ax-bg-neutral-hoverA);
+  color: var(--ax-text-neutral-strong);
 }
 
 .navds-button--tertiary-neutral:active {
