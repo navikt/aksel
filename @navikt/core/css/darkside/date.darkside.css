@@ -1,17 +1,21 @@
-/* expected full comment */
+.navds-date__wrapper {
+  --axc-shadow-focus: 0 0 0 3px var(--ax-border-focus);
+}
+
 .navds-date {
-  padding: var(--a-spacing-4) var(--a-spacing-3);
+  padding: var(--ax-spacing-4) var(--ax-spacing-3);
 }
 
 .navds-date .rdp-day_range_middle.rdp-day_disabled {
-  color: var(--ac-date-middle-text, var(--a-text-on-action));
-  background: var(--ac-date-middle-bg, var(--a-surface-action-selected));
+  color: var(--ax-text-default);
+  background: var(--ax-bg-neutral-moderateA);
 }
 
+/* TODO: is this a strange selector? both on same + nested? BEM probably doesn't allow this */
 .navds-date .rdp-month,
 .navds-date.rdp-month {
   display: grid;
-  gap: var(--a-spacing-5);
+  gap: var(--ax-spacing-5);
 }
 
 .navds-date__caption-label {
@@ -20,32 +24,32 @@
 
 .navds-date .rdp-head_cell {
   text-transform: capitalize;
-  font-size: var(--a-font-size-small);
+  font-size: var(--ax-font-size-small);
 }
 
 .navds-date .rdp-weeknumber {
-  font-size: var(--a-font-size-small);
+  font-size: var(--ax-font-size-small);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--a-border-radius-medium);
-  margin: var(--a-spacing-2);
-  color: var(--a-text-subtle);
+  border-radius: var(--ax-border-radius-medium);
+  margin: var(--ax-spacing-2);
+  color: var(--ax-text-subtle);
 }
 
 .navds-date .rdp-weeknumber.rdp-button {
   width: 2rem;
   height: 2rem;
-  box-shadow: 0 0 0 1px var(--a-border-default);
-  color: var(--a-text-subtle);
-  font-size: var(--a-font-size-small);
+  box-shadow: 0 0 0 1px var(--ax-border-default);
+  color: var(--ax-text-subtle);
+  font-size: var(--ax-font-size-small);
 }
 
 .navds-date .rdp-weeknumber.rdp-button:active {
-  background-color: var(--a-surface-action-active);
-  color: var(--a-text-on-action);
+  background-color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-text-accent-contrast);
   box-shadow: none;
 }
 
@@ -59,48 +63,48 @@
   width: 2.5rem;
   height: 2.5rem;
   text-align: center;
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-medium);
 }
 
 .navds-date .rdp-day_range_start {
-  border-radius: var(--a-border-radius-xlarge) var(--a-border-radius-medium) var(--a-border-radius-medium)
-    var(--a-border-radius-xlarge);
+  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-medium) var(--ax-border-radius-medium)
+    var(--ax-border-radius-xlarge);
 }
 
 .navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
-  border-radius: var(--a-border-radius-medium) var(--a-border-radius-xlarge) var(--a-border-radius-xlarge)
-    var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-medium) var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge)
+    var(--ax-border-radius-medium);
 }
 
 .navds-date .rdp-day_range_start.rdp-day_range_end {
-  border-radius: var(--a-border-radius-xlarge);
+  border-radius: var(--ax-border-radius-xlarge);
 }
 
 .navds-date .rdp-button:not(.rdp-day_selected, [disabled]):focus-visible,
 .navds-date .navds-date__month-button:not(.rdp-day_selected, [disabled]):focus-visible {
-  box-shadow: var(--a-shadow-focus);
+  box-shadow: var(--axc-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-date .rdp-button:not(.rdp-day_selected, [disabled]):focus,
   .navds-date .navds-date__month-button:not(.rdp-day_selected, [disabled]):focus {
-    box-shadow: var(--a-shadow-focus);
+    box-shadow: var(--axc-shadow-focus);
   }
 }
 
 .navds-date .rdp-button.rdp-day_selected:not([disabled]):focus-visible,
 .navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus-visible {
   box-shadow:
-    inset 0 0 0 1px var(--a-surface-default),
-    var(--a-shadow-focus);
+    inset 0 0 0 1px var(--ax-bg-default),
+    var(--axc-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-date .rdp-button.rdp-day_selected:not([disabled]):focus,
   .navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus {
     box-shadow:
-      inset 0 0 0 1px var(--a-surface-default),
-      var(--a-shadow-focus);
+      inset 0 0 0 1px var(--ax-bg-default),
+      var(--axc-shadow-focus);
   }
 }
 
@@ -111,20 +115,20 @@
   width: 3rem;
   height: 3rem;
   text-transform: capitalize;
-  border-radius: var(--a-border-radius-medium);
+  border-radius: var(--ax-border-radius-medium);
   cursor: pointer;
 }
 
 .navds-date__month-button:focus-visible,
 .navds-monthpicker__caption-button:focus-visible {
-  box-shadow: var(--a-shadow-focus);
+  box-shadow: var(--axc-shadow-focus);
   z-index: 1;
 }
 
 @supports not selector(:focus-visible) {
   .navds-date__month-button:focus,
   .navds-monthpicker__caption-button:focus {
-    box-shadow: var(--a-shadow-focus);
+    box-shadow: var(--axc-shadow-focus);
     z-index: 1;
   }
 }
@@ -147,35 +151,28 @@
   position: relative;
 }
 
-.navds-date__field-wrapper {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  width: fit-content;
-}
-
 .navds-date .rdp-day_selected,
 .navds-monthpicker__month--selected {
-  color: var(--ac-date-selected-text, var(--a-text-on-action));
-  background: var(--ac-date-selected-bg, var(--a-surface-action-selected));
+  color: var(--ax-text-accent-contrast);
+  background: var(--ax-bg-accent-strong-pressed);
   cursor: pointer;
 }
 
 .navds-date .rdp-day_disabled {
   cursor: not-allowed;
   text-decoration: line-through;
-  background-color: var(--ac-date-disabled-bg, var(--a-surface-neutral-subtle));
-  color: var(--ac-date-disabled-text, var(--a-text-subtle));
+  background-color: var(--ax-bg-neutral-moderateA);
+  color: var(--ax-text-subtle);
 }
 
 .navds-date .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
 .navds-date__month-button:where(:not(.rdp-day_selected, [disabled])):hover {
-  background: var(--ac-date-hover-bg, var(--a-surface-action-subtle-hover));
+  background: var(--ax-bg-accent-moderate-hover);
   cursor: pointer;
 }
 
 .navds-date .rdp-day_today {
-  box-shadow: 0 0 0 1px var(--ac-date-today-border, var(--a-border-action-selected));
+  box-shadow: 0 0 0 1px var(--ax-bg-accent-strong-pressed);
   text-decoration: underline;
 }
 
@@ -183,41 +180,41 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--a-spacing-1);
-  padding-inline: var(--a-spacing-1);
+  gap: var(--ax-spacing-1);
+  padding-inline: var(--ax-spacing-1);
 }
 
 .navds-date__caption-button,
 .navds-date__caption-button:disabled,
 .navds-date__caption-button:disabled:hover {
-  color: var(--ac-date-caption-text, var(--a-text-default));
+  color: var(--ax-text-default);
 }
 
 .navds-date__field-input {
-  padding-right: var(--a-spacing-12);
+  padding-right: var(--ax-spacing-12);
 }
 
 .navds-form-field--small .navds-date__field-input {
-  padding-right: var(--a-spacing-8);
+  padding-right: var(--ax-spacing-8);
 }
 
 /* Error-handling */
 .navds-date__field--error .navds-date__field-input:not(:hover, :disabled) {
-  border-color: var(--ac-date-input-error-border, var(--a-border-danger));
-  box-shadow: inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger));
+  border-color: var(--ax-border-danger);
+  box-shadow: inset 0 0 0 1px var(--ax-border-danger);
 }
 
 .navds-date__field--error .navds-date__field-input:focus-visible:not(:hover, :disabled) {
   box-shadow:
-    inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)),
-    var(--a-shadow-focus);
+    inset 0 0 0 1px var(--ax-border-danger),
+    var(--axc-shadow-focus);
 }
 
 @supports not selector(:focus-visible) {
   .navds-date__field--error .navds-date__field-input:focus:not(:hover, :disabled) {
     box-shadow:
-      inset 0 0 0 1px var(--ac-date-input-error-border, var(--a-border-danger)),
-      var(--a-shadow-focus);
+      inset 0 0 0 1px var(--ax-border-danger),
+      var(--axc-shadow-focus);
   }
 }
 
@@ -226,15 +223,15 @@
   right: 0.0625rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--ac-date-input-button-text, var(--a-text-default));
+  color: var(--ax-text-default);
   display: inline-flex;
   cursor: pointer;
   margin: 0;
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: calc(var(--a-border-radius-medium) - 1px);
-  padding: var(--a-spacing-3);
+  border-radius: calc(var(--ax-border-radius-medium) - 1px);
+  padding: var(--ax-spacing-3);
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
@@ -244,12 +241,22 @@
 }
 
 .navds-form-field--small .navds-date__field-button {
-  padding: var(--a-spacing-1);
+  padding: var(--ax-spacing-1);
 }
 
-.navds-date__field-button:hover:where(:not([disabled])) {
-  color: var(--ac-date-input-button-hover-text, var(--a-text-action-on-action-subtle));
-  background-color: var(--ac-date-input-button-hover-bg, var(--a-surface-action-subtle-hover));
+.navds-date__field-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-border-radius-medium);
+
+  &:has(.navds-date__field-input:focus-visible) {
+    border-radius: var(--ax-border-radius-medium);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
 }
 
 .navds-form-field--disabled .navds-date__field-button {
@@ -258,15 +265,14 @@
 }
 
 .navds-date__field-button:focus-visible {
-  outline: none;
-  box-shadow: var(--a-shadow-focus);
-  border-radius: var(--a-border-radius-medium);
+  outline: 2px solid var(--ax-border-focus);
+  border-radius: var(--ax-border-radius-medium);
 }
 
 @supports not selector(:focus-visible) {
   .navds-date__field-button:focus {
     outline: none;
-    box-shadow: var(--a-shadow-focus);
+    box-shadow: var(--axc-shadow-focus);
   }
 }
 
@@ -282,7 +288,6 @@
 /* Readonly */
 .navds-date__field--readonly .navds-date__field-button {
   cursor: default;
-  color: var(--a-gray-500);
 }
 
 .navds-date__caption-button {
@@ -293,7 +298,7 @@
 .navds-date__week-row {
   display: flex;
   align-items: center;
-  gap: var(--a-spacing-05);
+  gap: var(--ax-spacing-05);
 }
 
 .navds-date__week-wrapper {
@@ -312,8 +317,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: var(--a-spacing-4);
-  gap: var(--a-spacing-2);
+  padding: var(--ax-spacing-4);
+  gap: var(--ax-spacing-2);
 }
 
 .navds-date__modal-body > .navds-date {
@@ -326,15 +331,15 @@
 
 @media (min-width: 480px) {
   .navds-date {
-    padding: var(--a-spacing-5) var(--a-spacing-4);
+    padding: var(--ax-spacing-5) var(--ax-spacing-4);
   }
 
   .navds-date__modal-body {
-    padding: var(--a-spacing-6);
+    padding: var(--ax-spacing-6);
   }
 
   .navds-date__caption {
-    gap: var(--a-spacing-2);
+    gap: var(--ax-spacing-2);
   }
 
   .navds-date .rdp-button,
