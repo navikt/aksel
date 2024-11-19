@@ -146,7 +146,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onSearchClick?.(`${value ?? internalValue}`);
     };
 
-    const showClearButton = clearButton && (value ?? internalValue);
+    const showClearButton =
+      clearButton && !inputProps.disabled && (value ?? internalValue);
 
     const ClearButton = () =>
       themeContext ? (
@@ -156,6 +157,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           size={size === "medium" ? "small" : "xsmall"}
           icon={<XMarkIcon aria-hidden />}
           aria-label={clearButtonLabel || translate("clear")}
+          hidden={!showClearButton}
         />
       ) : (
         <button
