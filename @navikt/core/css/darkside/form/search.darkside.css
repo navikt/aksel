@@ -1,3 +1,6 @@
+/* TODO: update paddings, sizings
+- Refactoring selectors */
+
 .navds-search {
   display: flex;
   flex-direction: column;
@@ -9,50 +12,75 @@
   width: 100%;
 }
 
-.navds-search--with-size :where(.navds-search__wrapper-inner) {
-  width: inherit;
+.navds-search--with-size {
+  & .navds-search__wrapper-inner {
+    width: inherit;
+  }
 }
 
 .navds-search__wrapper {
   display: inline-flex;
   align-items: center;
+  border-radius: var(--ax-border-radius-medium);
+
+  /* We have to outline the whole container to include the Search-buttons */
+  &:has(.navds-search__input:focus-visible) {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
 }
 
+/* ------------------------------ Search input ------------------------------ */
 .navds-search__input {
-  padding-right: var(--a-spacing-10);
-}
+  padding-right: var(--ax-spacing-10);
 
-.navds-form-field--small .navds-search__input {
-  padding-right: var(--a-spacing-8);
+  &:focus-visible {
+    outline: none;
+  }
+
+  &.navds-search__input--primary,
+  &.navds-search__input--secondary {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
 }
 
 .navds-search__input--simple {
-  padding-left: var(--a-spacing-11);
+  padding-left: var(--ax-spacing-11);
 }
 
-.navds-form-field--small .navds-search__input--simple {
-  padding-left: var(--a-spacing-7);
+/* ------------------------------ Search sizing ----------------------------- */
+.navds-form-field--small {
+  & .navds-search__input {
+    padding-right: var(--ax-spacing-8);
+  }
+
+  & .navds-search__input--simple {
+    padding-left: var(--ax-spacing-7);
+  }
+
+  & .navds-search__search-icon {
+    left: var(--ax-spacing-2);
+    font-size: 1rem;
+  }
+
+  & .navds-search__button-clear {
+    right: 0.5rem;
+  }
 }
 
-.navds-search__input:not(.navds-search__input--simple) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
+/* ------------------------------- Search icon ------------------------------ */
 .navds-search__search-icon {
   position: absolute;
-  left: var(--a-spacing-3);
+  left: var(--ax-spacing-3);
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 1.5rem;
 }
 
-.navds-form-field--small .navds-search__search-icon {
-  left: var(--a-spacing-2);
-  font-size: 1rem;
-}
-
+/* --------------------------- Search Clear-button -------------------------- */
 .navds-search__button-clear {
   position: absolute;
   right: 0.75rem;
@@ -60,139 +88,50 @@
   transform: translateY(-50%);
 }
 
-.navds-form-field--small .navds-search__button-clear {
-  right: 0.5rem;
-}
-
-.navds-search__button-clear:hover {
-  color: var(--ac-search-clear-icon-hover, var(--__ac-search-clear-icon-hover, var(--a-text-action-hover)));
-}
-
-.navds-search__button-clear:focus-visible {
-  outline: 2px solid transparent;
-  box-shadow: var(--a-shadow-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-search__button-clear:focus {
-    outline: 2px solid transparent;
-    box-shadow: var(--a-shadow-focus);
-  }
-}
-
+/* ------------------------------ Search Button ----------------------------- */
 .navds-search__button-search {
   flex-shrink: 0;
-  min-width: 4rem;
-  min-height: 2rem;
   border-radius: 0;
-  border-top-right-radius: var(--a-border-radius-medium);
-  border-bottom-right-radius: var(--a-border-radius-medium);
-}
-
-.navds-form-field--small .navds-search__button-search svg {
-  font-size: 1rem;
-}
-
-.navds-form-field--small .navds-search__button-search {
-  min-width: 2.5rem;
+  border-top-right-radius: var(--ax-border-radius-medium);
+  border-bottom-right-radius: var(--ax-border-radius-medium);
 }
 
 .navds-search__button-search.navds-button--secondary {
-  box-shadow:
-    -1px 0 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
-    0 1px 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
-    0 -1px 0 0 var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset;
-}
+  --__axc-button-border-width: 1px;
+  --__axc-button-border-color: var(--ax-border-default);
 
-.navds-search__button-search.navds-button--secondary:where(:hover, :active) {
-  box-shadow:
-    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
-    0 1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
-    0 -1px 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
-    -1px 0 0 0 var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover)));
-  z-index: 1;
-}
-
-.navds-search__wrapper-inner:focus-within + .navds-search__button-search.navds-button--secondary:hover {
-  z-index: auto;
-}
-
-.navds-search__button-search.navds-button--secondary:focus-visible {
-  box-shadow:
-    0 0 0 1px var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
-    var(--a-shadow-focus);
-}
-
-.navds-search__button-search.navds-button--secondary:focus-visible:hover {
-  box-shadow:
-    0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action-hover))) inset,
-    var(--a-shadow-focus);
-}
-
-.navds-search__button-search.navds-button--secondary:focus-visible:active {
-  box-shadow:
-    0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset,
-    var(--a-shadow-focus);
-}
-
-@supports not selector(:focus-visible) {
-  .navds-search__button-search.navds-button--secondary:focus {
-    box-shadow:
-      0 0 0 1px var(--ac-search-button-border, var(--__ac-search-button-border, var(--a-border-default))) inset,
-      var(--a-shadow-focus);
+  &:hover {
+    --__axc-button-border-color: var(--ax-border-accent-strong);
   }
 
-  .navds-search__button-search.navds-button--secondary:focus:hover {
-    box-shadow:
-      0 0 0 1px var(--ac-search-button-border-hover, var(--__ac-search-button-border-hover, var(--a-border-action))) inset,
-      var(--a-shadow-focus);
-  }
-
-  .navds-search__button-search.navds-button--secondary:focus:active {
-    box-shadow:
-      0 0 0 1px var(--ac-search-button-focus-active-border, var(--a-surface-default)) inset,
-      var(--a-shadow-focus);
+  &:active {
+    --__axc-button-border-color: transparent;
   }
 }
 
-/* Error-handling */
-.navds-search--error .navds-search__input:not(:hover, :disabled) {
-  border-color: var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger)));
-  box-shadow: inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger)));
+/* Special-case where we hover input, and want the left-border of secondary-button to match input-border */
+.navds-search:not(.navds-search--error) .navds-search__wrapper:has(.navds-search__input:is(:hover, :focus-visible)) {
+  & > .navds-search__button-search.navds-button--secondary:not(:hover, :active) {
+    box-shadow:
+      inset 1px 0 0 0 var(--ax-border-accent-strong),
+      inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
+  }
 }
 
-.navds-search--error .navds-search__input:focus-visible:not(:hover, :disabled) {
-  box-shadow:
-    inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger))),
-    var(--a-shadow-focus);
+/* --------------------------- Search Error-state --------------------------- */
+.navds-search--error .navds-search__input:not(:disabled) {
+  border-color: var(--ax-border-danger);
+  box-shadow: inset 0 0 0 1px var(--ax-border-danger);
+
+  &:not(.navds-search__input--simple) {
+    box-shadow:
+      inset -2px 0 0 0 var(--ax-border-danger),
+      inset 0 0 0 1px var(--ax-border-danger);
+  }
 }
 
-/* Focus layering */
+/* -------------------------- Search Focus layering ------------------------- */
 .navds-search__input:focus-visible,
-.navds-search__button-clear,
 .navds-search__button-search:focus-visible {
   z-index: 1;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-search--error .navds-search__input:focus:not(:hover, :disabled) {
-    box-shadow:
-      inset 0 0 0 1px var(--ac-search-error-border, var(--__ac-search-error-border, var(--a-border-danger))),
-      var(--a-shadow-focus);
-  }
-
-  .navds-search__input:focus,
-  .navds-search__button-search:focus {
-    z-index: 1;
-  }
-}
-
-@media (forced-colors: active) {
-  .navds-modal {
-    outline: 2px solid transparent;
-  }
-
-  .navds-search__button-clear:hover {
-    color: highlight;
-  }
 }
