@@ -190,7 +190,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           aria-hidden={!open || !anchorEl}
         >
           {children}
-          {/* Hide arrow in new design, prop will be remove din breaking change update */}
+          {/* Hide arrow in new design, prop will be removed in breaking change update */}
           {arrow && !themeContext && (
             <div
               ref={(node) => {
