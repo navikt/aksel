@@ -120,6 +120,14 @@
   padding-left: 0.25rem;
 }
 
+.navds-combobox__selected-options--single-select {
+  gap: 0;
+}
+
+.navds-combobox__selected-options--single-select .navds-combobox__input {
+  margin-left: 0;
+}
+
 .navds-combobox__input-wrapper {
   width: 100%;
 }

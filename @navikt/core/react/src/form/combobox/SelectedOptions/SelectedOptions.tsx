@@ -1,3 +1,4 @@
+import cl from "clsx";
 import React from "react";
 import { Chips } from "../../../chips";
 import { useInputContext } from "../Input/Input.context";
@@ -45,7 +46,12 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   const { value } = useInputContext();
   const { isMultiSelect } = useSelectedOptionsContext();
   return (
-    <Chips className="navds-combobox__selected-options" size={size}>
+    <Chips
+      className={cl("navds-combobox__selected-options", {
+        "navds-combobox__selected-options--single-select": !isMultiSelect,
+      })}
+      size={size}
+    >
       {value.length === 0 || (isMultiSelect && selectedOptions.length)
         ? selectedOptions.map((option, i) => (
             <Option key={option.label + i} option={option} />
