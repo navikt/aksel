@@ -13,6 +13,7 @@
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
   stroke: var(--ac-loader-stroke, var(--a-border-default));
+  stroke-width: var(--ac-loader-background-stroke-width);
 }
 
 .navds-loader__background {
