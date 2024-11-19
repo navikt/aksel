@@ -1,19 +1,3 @@
-[data-theme="dark"] {
-  --__ac-search-button-border: var(--a-border-on-inverted);
-  --__ac-search-button-border-hover: var(--a-blue-200);
-  --__ac-search-clear-icon: var(--a-white);
-  --__ac-search-clear-icon-hover: var(--a-blue-200);
-  --__ac-search-error-border: var(--a-red-300);
-}
-
-[data-theme="light"] {
-  --__ac-search-button-border: initial;
-  --__ac-search-button-border-hover: initial;
-  --__ac-search-clear-icon: initial;
-  --__ac-search-clear-icon-hover: initial;
-  --__ac-search-error-border: initial;
-}
-
 .navds-search {
   display: flex;
   flex-direction: column;
@@ -72,26 +56,12 @@
 .navds-search__button-clear {
   position: absolute;
   right: 0.75rem;
-  border-radius: var(--a-border-radius-medium);
-  color: var(--ac-search-clear-icon, var(--__ac-search-clear-icon, var(--a-text-default)));
-  height: 32px;
-  width: 32px;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  padding: 0;
 }
 
 .navds-form-field--small .navds-search__button-clear {
   right: 0.5rem;
-  height: 24px;
-  width: 24px;
 }
 
 .navds-search__button-clear:hover {
