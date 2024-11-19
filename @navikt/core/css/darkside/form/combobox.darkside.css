@@ -81,7 +81,8 @@
   border-radius: var(--ax-border-radius-medium);
 
   &:has(.navds-combobox__input:focus-visible) {
-    outline: 3px solid var(--ax-border-focus);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
     border-color: var(--ax-border-focus);
   }
 
@@ -117,12 +118,12 @@
 
 .navds-combobox--error {
   & .navds-combobox__wrapper-inner {
-    border-color: var(--ax-border-danger-strong);
-    border-width: 2px;
-    outline-offset: 2px;
+    border-color: var(--ax-border-danger);
+    box-shadow: 0 0 0 1px var(--ax-border-danger);
+    outline-offset: 3px;
 
     &:has(.navds-combobox__input:focus-visible) {
-      border-color: var(--ax-border-danger-strong);
+      border-color: var(--ax-border-danger);
     }
   }
 }
@@ -310,6 +311,8 @@
   margin: 0;
   border-radius: 0;
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  padding-block: var(--ax-spacing-2);
+  line-height: var(--ax-font-line-height-large);
 }
 
 /* ul-list and selectable li-items */
@@ -328,7 +331,7 @@
 
 .navds-combobox__list-item--focus {
   cursor: pointer;
-  outline: 3px solid var(--ax-border-focus);
+  outline: 2px solid var(--ax-border-focus);
   outline-offset: 2px;
 }
 
@@ -342,8 +345,7 @@
 
   & mark {
     background-color: transparent;
-    font-weight: bold;
-    color: var(--ax-text-accent-strong);
+    font-weight: var(--ax-font-weight-bold);
   }
 
   & svg {
@@ -385,7 +387,7 @@
   /* TODO: new option should get a wrapper div later to
 * style it properly with a nice rounded border radius
 * */
-  outline: 3px solid var(--ax-border-focus);
+  outline: 2px solid var(--ax-border-focus);
   outline-offset: -2px;
 
   &:only-child {
