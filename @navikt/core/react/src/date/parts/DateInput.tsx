@@ -5,6 +5,7 @@ import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { useDateInputContext } from "../context";
 
 export interface DateInputProps
@@ -46,16 +47,17 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
   } = props;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const translate = useI18n("DatePicker");
 
   const isDatepickerVariant = variant === "datepicker";
 
   const conditionalVariables = {
     prefix: isDatepickerVariant ? "datepicker-input" : "monthpicker-input",
     iconTitle: {
-      open: isDatepickerVariant ? "Åpne datovelger" : "Åpne månedsvelger",
-      close: isDatepickerVariant ? "Lukk datovelger" : "Lukk månedsvelger",
+      open: isDatepickerVariant ? "openDatePicker" : "openMonthPicker",
+      close: isDatepickerVariant ? "closeDatePicker" : "closeMonthPicker",
     },
-  };
+  } as const;
 
   const context = useDateInputContext();
 
@@ -137,12 +139,9 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           ref={buttonRef}
         >
           <CalendarIcon
-            pointerEvents="none"
-            title={
-              context?.open
-                ? conditionalVariables.iconTitle.close
-                : conditionalVariables.iconTitle.open
-            }
+            title={translate(
+              conditionalVariables.iconTitle[context?.open ? "close" : "open"],
+            )}
           />
         </button>
       </div>

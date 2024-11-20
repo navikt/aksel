@@ -3,7 +3,8 @@ import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
-import { getLocaleFromString, labels } from "../utils";
+import { useDateLocale } from "../../util/i18n/i18n.context";
+import { getLocaleFromString } from "../utils";
 import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
@@ -49,7 +50,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
   (
     {
       className,
-      locale = "nb",
+      locale,
       dropdownCaption,
       disabled = [],
       disableWeekends = false,
@@ -63,6 +64,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     },
     ref,
   ) => {
+    const langProviderLocale = useDateLocale();
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
@@ -83,7 +85,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
         className={cl("navds-date__standalone-wrapper", className)}
       >
         <DayPicker
-          locale={getLocaleFromString(locale)}
+          locale={locale ? getLocaleFromString(locale) : langProviderLocale}
           mode={mode}
           onSelect={handleSelect}
           selected={selected ?? selectedDates}
@@ -103,7 +105,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           }}
           weekStartsOn={1}
           initialFocus={false}
-          labels={labels as any}
           modifiers={{
             weekend: (day) => disableWeekends && isWeekend(day),
           }}
