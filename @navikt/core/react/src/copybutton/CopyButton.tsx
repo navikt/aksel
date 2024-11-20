@@ -10,6 +10,7 @@ import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
+import { useI18n } from "../util/i18n/i18n.context";
 
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
@@ -91,15 +92,15 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       className,
       copyText,
       text,
-      activeText = "Kopiert!",
+      activeText,
       variant = "neutral",
       size = "medium",
       onActiveChange,
       icon,
       activeIcon,
       activeDuration = 2000,
-      title = "Kopier",
-      activeTitle = "Kopiert",
+      title,
+      activeTitle,
       iconPosition = "left",
       onClick,
       ...rest
@@ -108,6 +109,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   ) => {
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
+    const translate = useI18n("CopyButton");
 
     useEffect(() => {
       return () => {
@@ -133,13 +135,15 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           ? activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
-                title={text ? undefined : activeTitle}
+                title={
+                  text ? undefined : activeTitle ?? translate("activeTitle")
+                }
               />
             )
           : icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
-                title={text ? undefined : title}
+                title={text ? undefined : title ?? translate("title")}
               />
             )}
       </span>
@@ -173,7 +177,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
                 size={size === "medium" ? "medium" : "small"}
                 aria-live="polite"
               >
-                {activeText}
+                {activeText ?? translate("activeText")}
               </Label>
             ) : (
               <Label
