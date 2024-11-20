@@ -116,13 +116,12 @@
   }
 }
 
-/* Special-case where we hover input, and want the left-border of secondary-button to match input-border */
-.navds-search:not(.navds-search--error, .navds-search--disabled)
-  .navds-search__wrapper:has(.navds-search__input:is(:hover, :focus-visible)) {
-  & > .navds-search__button-search.navds-button--secondary:not(:hover, :active) {
-    box-shadow:
-      inset 1px 0 0 0 var(--ax-border-accent-strong),
-      inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
+/* Special-case where we hover/focus input, and want the secondary-button to match input-border */
+.navds-search:not(.navds-search--error, .navds-search--disabled) {
+  & .navds-search__wrapper:has(.navds-search__input:is(:hover, :focus-visible)) {
+    & .navds-search__button-search.navds-button--secondary:not(:hover, :active) {
+      --__axc-button-border-color: var(--ax-border-accent-strong);
+    }
   }
 }
 
