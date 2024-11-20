@@ -93,6 +93,7 @@ export const Stepper: StepperComponent = forwardRef<
           orientation === "horizontal" ? "navds-stepper--horizontal" : "",
           className,
         )}
+        data-orientation={orientation}
       >
         {React.Children.map(children, (step, index) => {
           const stepProps: Partial<StepperStepProps> =
@@ -101,10 +102,12 @@ export const Stepper: StepperComponent = forwardRef<
           return (
             <li
               className={cl("navds-stepper__item", {
+                /* TODO: Remove these 3 classNames in darkmode update */
                 "navds-stepper__item--behind": activeStep > index,
                 "navds-stepper__item--completed": stepProps.completed,
-                "navds-stepper__item--non-interactive":
-                  stepProps.interactive ?? interactive,
+                "navds-stepper__item--non-interactive": !(
+                  stepProps.interactive ?? interactive
+                ),
               })}
               key={index + (children?.toString?.() ?? "")}
             >
