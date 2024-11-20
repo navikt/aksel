@@ -33,17 +33,11 @@ function checkPlaceholders(
       checkPlaceholders(baseVal, trans[key]);
     } else {
       const correctPlaceholders = baseVal.match(/{[^}]*}/g) || [];
-      const transToCheck = trans[key];
-      // Check that all placeholders in base translation is present in the translation being checked
-      correctPlaceholders.forEach((placeholder) => {
-        expect(transToCheck).toContain(placeholder);
-      });
-      // Check that the translation does not have any extra (hence invalid) placeholders
-      const transPlaceholders = transToCheck.match(/{[^}]*}/g) || [];
+      const transPlaceholders = trans[key].match(/{[^}]*}/g) || [];
       expect(
-        transPlaceholders.length,
-        `Invalid placeholder(s): "${transToCheck}" (key=${key})`,
-      ).toBe(correctPlaceholders.length);
+        transPlaceholders.sort(),
+        `Wrong placeholders in "${trans[key]}" (key=${key})`,
+      ).toEqual(correctPlaceholders.sort());
     }
   });
 }
