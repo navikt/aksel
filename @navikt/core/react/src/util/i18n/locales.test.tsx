@@ -40,7 +40,10 @@ function checkPlaceholders(
       });
       // Check that the translation does not have any extra (hence invalid) placeholders
       const transPlaceholders = transToCheck.match(/{[^}]*}/g) || [];
-      expect(correctPlaceholders.length).toBe(transPlaceholders.length);
+      expect(
+        transPlaceholders.length,
+        `Invalid placeholder(s): "${transToCheck}" (key=${key})`,
+      ).toBe(correctPlaceholders.length);
     }
   });
 }
