@@ -14,3 +14,6 @@
 @import "./combobox.darkside.css" layer(aksel.forms.component);
 @import "./form-summary.darkside.css" layer(aksel.forms.component);
 @import "./form-progress.darkside.css" layer(aksel.forms.component);
+
+/* TODO: remove this extra dot for date (shuffle code location) */
+@import "../date.darkside.css" layer(aksel.forms.components);

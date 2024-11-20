@@ -36,7 +36,6 @@
 @import "./modal.darkside.css" layer(aksel.components);
 @import "./pagination.darkside.css" layer(aksel.components);
 @import "./popover.darkside.css" layer(aksel.components);
-@import "./date.darkside.css" layer(aksel.components);
 @import "./tag.darkside.css" layer(aksel.components);
 @import "./timeline.darkside.css" layer(aksel.components);
 @import "./tooltip.darkside.css" layer(aksel.components);
