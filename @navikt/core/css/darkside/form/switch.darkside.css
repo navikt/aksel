@@ -158,7 +158,7 @@
   cursor: not-allowed;
 }
 
-/* Readonly */
+/* -------------------------- Switch Readonly state ------------------------- */
 .navds-switch--readonly > .navds-switch__track,
 .navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__track,
 .navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track,
@@ -199,6 +199,7 @@
   }
 }
 
+/* ------------------------ Switch Forced colors mode ----------------------- */
 @media (forced-colors: active) {
   .navds-switch__input:hover ~ .navds-switch__label-wrapper,
   .navds-switch__label-wrapper:hover {
