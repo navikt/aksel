@@ -5,11 +5,10 @@
 }
 
 .navds-switch--small {
-  position: relative;
   min-height: 2rem;
 }
 
-/* Input */
+/* ------------------------------ Switch Input ------------------------------ */
 .navds-switch__input {
   cursor: pointer;
   position: absolute;
@@ -25,7 +24,7 @@
   }
 }
 
-/* Label */
+/* -------------------------- Switch content/label -------------------------- */
 .navds-switch__label-wrapper {
   cursor: pointer;
   color: var(--ax-text-default);
@@ -63,7 +62,7 @@
   color: inherit;
 }
 
-/* Track */
+/* ------------------------------ Switch Track ------------------------------ */
 .navds-switch__track {
   width: 2.75rem;
   height: 1.5rem;
@@ -77,44 +76,34 @@
   .navds-switch--small > & {
     top: var(--ax-spacing-1);
   }
-}
 
-.navds-switch--right {
-  width: auto;
+  .navds-switch__input:checked ~ & {
+    background-color: var(--ax-bg-accent-strong-pressed);
+  }
 
-  & .navds-switch__input,
-  & .navds-switch__track {
-    right: 0;
-    left: auto;
+  .navds-switch__input:hover ~ & {
+    background-color: var(--ax-bg-neutral-strong-hover);
+  }
+
+  .navds-switch__input:hover:checked ~ & {
+    background-color: var(--ax-bg-accent-strong-hover);
+  }
+
+  .navds-switch__input:disabled ~ & {
+    background-color: var(--ax-bg-neutral-strong-pressed);
+  }
+
+  .navds-switch__input:checked:disabled ~ & {
+    background-color: var(--ax-bg-accent-strong-pressed);
+  }
+
+  .navds-switch__input:focus-visible ~ & {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
   }
 }
 
-.navds-switch__input:checked ~ .navds-switch__track {
-  background-color: var(--ax-bg-accent-strong-pressed);
-}
-
-.navds-switch__input:hover ~ .navds-switch__track {
-  background-color: var(--ax-bg-neutral-strong-hover);
-}
-
-.navds-switch__input:hover:checked ~ .navds-switch__track {
-  background-color: var(--ax-bg-accent-strong-hover);
-}
-
-.navds-switch__input:disabled ~ .navds-switch__track {
-  background-color: var(--ax-bg-neutral-strong-pressed);
-}
-
-.navds-switch__input:checked:disabled ~ .navds-switch__track {
-  background-color: var(--ax-bg-accent-strong-pressed);
-}
-
-.navds-switch__input:focus-visible ~ .navds-switch__track {
-  outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
-}
-
-/* Thumb */
+/* ------------------------------ Switch Thumb ------------------------------ */
 .navds-switch__thumb {
   background-color: var(--ax-bg-default);
   border-radius: var(--ax-border-radius-full);
@@ -128,32 +117,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(1.25rem);
-  color: var(--ax-text-accent-strong);
+  .navds-switch__input:checked ~ .navds-switch__track > & {
+    transform: translateX(1.25rem);
+    color: var(--ax-text-accent-strong);
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
+  .navds-switch__input:hover:not(:disabled) ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(0.125rem);
   }
 
-  .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
+  .navds-switch__input:checked:hover:not(:disabled) ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(1.125rem);
   }
 }
 
-.navds-switch__input:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(0);
+.navds-switch--right {
+  width: auto;
+
+  & .navds-switch__input,
+  & .navds-switch__track {
+    right: 0;
+    left: auto;
+  }
 }
 
-.navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(1.25rem);
-}
-
-/* Disabled */
+/* -------------------------- Switch Disabled-state ------------------------- */
 .navds-switch__input:disabled {
   appearance: none;
 }
