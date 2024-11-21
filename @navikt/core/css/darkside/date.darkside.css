@@ -8,7 +8,6 @@
     background: var(--ax-bg-neutral-moderateA);
   }
 
-  /* TODO: is this a strange selector? both on same + nested? BEM probably doesn't allow this */
   .rdp-month,
   &.rdp-month {
     display: grid;
