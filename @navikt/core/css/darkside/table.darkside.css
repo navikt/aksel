@@ -239,8 +239,6 @@
 
 /* -------------------------- Table ExpandableRow New -------------------------- */
 .navds-table__expanded-table-cell {
-  --__axc-expansioncard-padding-block: var(--ax-spacing-4);
-
   display: grid;
   grid-template-rows: 0fr;
   visibility: hidden;
@@ -256,12 +254,12 @@
     grid-template-rows: 1fr;
     visibility: visible;
     max-height: fit-content;
-    padding-block: var(--__axc-expansioncard-padding-block);
+    padding-block: var(--ax-spacing-4);
     opacity: 1;
     border-bottom: 1px solid var(--ax-border-default);
   }
 
   .navds-table--small & {
-    --__axc-expansioncard-padding-block: var(--ax-spacing-2);
+    padding-block: var(--ax-spacing-2);
   }
 }
