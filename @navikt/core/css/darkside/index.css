@@ -1,29 +1,35 @@
 @charset "UTF-8";
 
-@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.forms, aksel.layout, aksel.utilities;
+/* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
+
+@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.layout, aksel.utilities;
 
 /* CSS foundations */
 @import "./baseline/reset.darkside.css" layer(aksel.reset);
 @import "./baseline/print.darkside.css" layer(aksel.reset);
 @import "./baseline/fonts.darkside.css" layer(aksel.typography);
-@import "./baseline/theme.darkside.css" layer(aksel.theme);
 @import "./typography.darkside.css" layer(aksel.typography);
-@import "./baseline/utilities.darkside.css" layer(aksel.utilities);
-
-/* Test: Handles layers itself */
-@import "./form/index.css";
-@import "./primitives/index.css";
 
 /* Theming */
 @import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
+@import "./baseline/theme.darkside.css" layer(aksel.theme);
+
+/* TODO: Remove this reference after stack is updated with darkside support */
+@import "../primitives/stack.css" layer(aksel.components);
 
 /* Components */
-@import "../primitives/stack.css" layer(aksel.components);
-@import "./accordion.darkside.css" layer(aksel.components);
 @import "./button.darkside.css" layer(aksel.components);
+@import "./chips.darkside.css" layer(aksel.components);
+
+/**
+  * Form-components edits
+  * - Button
+  * - Chips
+*/
+@import "./form/index.css" layer(aksel.components);
+@import "./accordion.darkside.css" layer(aksel.components);
 @import "./alert.darkside.css" layer(aksel.components);
 @import "./chat.darkside.css" layer(aksel.components);
-@import "./chips.darkside.css" layer(aksel.components);
 @import "./copybutton.darkside.css" layer(aksel.components);
 @import "./dropdown.darkside.css" layer(aksel.components);
 @import "./action-menu.darkside.css" layer(aksel.components);
@@ -50,3 +56,9 @@
 @import "./table.darkside.css" layer(aksel.components);
 @import "./tabs.darkside.css" layer(aksel.components);
 @import "./list.darkside.css" layer(aksel.components);
+
+/* Layout CSS */
+@import "./primitives/index.css" layer(aksel.layout);
+
+/* Utility-CSS */
+@import "./baseline/utilities.darkside.css" layer(aksel.utilities);
