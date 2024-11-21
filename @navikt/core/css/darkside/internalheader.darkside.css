@@ -73,6 +73,16 @@
   }
 }
 
+@media (forced-colors: active) {
+  .navds-internalheader__button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    outline: 1px solid highlight;
+    isolation: isolate;
+  }
+}
+
 .navds-internalheader__title,
 .navds-internalheader__button {
   &:focus-visible {
