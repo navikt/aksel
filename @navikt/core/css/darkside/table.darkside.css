@@ -16,7 +16,7 @@
   }
 
   & .navds-table__row--shade-on-hover.navds-table__row--selected:hover {
-    background-color: var(--ax-bg-accent-hover);
+    background-color: var(--ax-bg-accent-hoverA);
   }
 }
 
