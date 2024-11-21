@@ -120,7 +120,6 @@
   & .navds-combobox__wrapper-inner {
     border-color: var(--ax-border-danger);
     box-shadow: 0 0 0 1px var(--ax-border-danger);
-    outline-offset: 3px;
 
     &:has(.navds-combobox__input:focus-visible) {
       border-color: var(--ax-border-danger);
