@@ -59,7 +59,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
           variant="tertiary"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
-          icon={<ArrowLeftIcon title={translate("previousMonth")} />}
+          icon={<ArrowLeftIcon title={translate("goToPreviousMonth")} />}
           className="navds-date__caption-button"
           type="button"
         />
@@ -94,7 +94,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         </div>
 
         <Button
-          icon={<ArrowRightIcon title={translate("nextMonth")} />}
+          icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
           variant="tertiary"

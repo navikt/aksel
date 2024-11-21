@@ -65,7 +65,7 @@ export const MonthCaption = () => {
         className="navds-date__caption-button"
         disabled={disablePreviousYear()}
         onClick={() => handleButtonClick(-1)}
-        icon={<ArrowLeftIcon title={translate("previousYear")} />}
+        icon={<ArrowLeftIcon title={translate("goToPreviousYear")} />}
         variant="tertiary"
         type="button"
       />
@@ -93,7 +93,7 @@ export const MonthCaption = () => {
         className="navds-date__caption-button"
         disabled={disableNextYear()}
         onClick={() => handleButtonClick(1)}
-        icon={<ArrowRightIcon title={translate("nextYear")} />}
+        icon={<ArrowRightIcon title={translate("goToNextYear")} />}
         variant="tertiary"
         type="button"
       />
