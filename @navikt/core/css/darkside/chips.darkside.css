@@ -33,6 +33,12 @@
   }
 }
 
+.navds-chips--readonly {
+  .navds-chips__chip {
+    background-color: var(--ax-bg-neutral-moderateA);
+  }
+}
+
 .navds-chips--small {
   .navds-chips__chip {
     min-height: 1.5rem;
