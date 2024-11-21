@@ -23,7 +23,7 @@ const Example = () => {
         flip={false}
         placement="right"
       >
-        <Popover.Content>
+        <Popover.Content style={{ maxWidth: "calc(50vw - 80px)" }}>
           Denne popoveren holder seg til høyre selv om det er bedre plass under,
           fordi <code>flip</code> er satt til <code>false</code>.
         </Popover.Content>
@@ -38,6 +38,7 @@ export default withDsExample(Example);
 /* Storybook story */
 export const Demo = {
   render: Example,
+  desc: "Ved å sette `flip` til `false` tvinger du popoveren til å respektere valgt `placement` selv om det ikke er plass.",
 };
 
 export const args = {

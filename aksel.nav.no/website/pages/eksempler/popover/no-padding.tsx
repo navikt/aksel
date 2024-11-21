@@ -20,11 +20,8 @@ const Example = () => {
         open={openState}
         onClose={() => setOpenState(false)}
         anchorEl={buttonRef.current}
-        offset={0}
-        arrow={false}
-        placement="bottom"
       >
-        <Popover.Content>offset = 0</Popover.Content>
+        Innhold uten padding.
       </Popover>
     </>
   );
@@ -39,6 +36,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 2,
-  desc: "Offset er avstanden mellom elementet og popoveren, og kan overstyres.",
+  index: 5,
+  desc: "`Popover.Content` legger bare på litt padding, så den kan utelates.",
 };
