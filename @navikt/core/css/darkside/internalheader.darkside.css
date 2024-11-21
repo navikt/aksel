@@ -45,8 +45,7 @@
 }
 
 .navds-internalheader__user {
-  padding-block: 0;
-  padding-inline: var(--ax-spacing-5);
+  padding: 0 var(--ax-spacing-5);
   border-left: 1px solid var(--ax-border-subtleA);
   display: flex;
   align-items: center;
@@ -55,8 +54,7 @@
 .navds-internalheader__button {
   border: none;
   margin: 0;
-  padding-block: 0;
-  padding-inline: var(--ax-spacing-3);
+  padding: 0 var(--ax-spacing-3);
   overflow: visible;
   background: transparent;
   font: inherit;
