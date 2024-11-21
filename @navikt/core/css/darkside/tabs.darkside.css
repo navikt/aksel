@@ -1,5 +1,5 @@
 .navds-tabs__tablist-wrapper {
-  box-shadow: inset 0 -1px 0 0 var(--ax-border-neutral-subtle);
+  box-shadow: inset 0 -1px var(--ax-border-neutral-subtle);
   width: 100%;
   display: flex;
 }
@@ -114,9 +114,11 @@
   font-size: 1rem;
 }
 
-.navds-tabs__tab--icon-only svg,
-.navds-tabs__tab-icon--top svg {
-  font-size: 1.5rem;
+.navds-tabs__tab--icon-only,
+.navds-tabs__tab-icon--top {
+  & svg {
+    font-size: 1.5rem;
+  }
 }
 
 .navds-tabs__tab--fill {
