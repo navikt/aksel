@@ -268,18 +268,6 @@
   display: none;
 }
 
-.navds-combobox__list_non-selectables {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-
-  &:hover {
-    cursor: default;
-  }
-}
-
 .navds-combobox__list-item,
 .navds-combobox__list-item--loading,
 .navds-combobox__list-item--no-options,
