@@ -290,6 +290,45 @@ describe("Render combobox", () => {
         false,
       );
     });
+
+    test("and pressing enter to select autocompleted word will select existing word when addNewOptions is true", async () => {
+      const onToggleSelected = vi.fn();
+      render(
+        <App
+          onToggleSelected={onToggleSelected}
+          options={options.map((opt) => ({
+            label: `${opt} (${opt})`,
+            value: opt,
+          }))}
+          shouldAutocomplete
+          allowNewValues
+        />,
+      );
+
+      const combobox = screen.getByRole("combobox", {
+        name: "Hva er dine favorittfrukter?",
+      });
+
+      await act(async () => {
+        await userEvent.click(combobox);
+
+        await userEvent.type(combobox, "p");
+      });
+
+      expect(combobox.getAttribute("value")).toBe(
+        "passion fruit (passion fruit)",
+      );
+
+      await act(async () => {
+        await userEvent.keyboard("{Enter}");
+      });
+
+      expect(onToggleSelected).toHaveBeenCalledWith(
+        "passion fruit",
+        true,
+        false,
+      );
+    });
   });
 
   describe("has keyboard navigation", () => {

@@ -1,0 +1,183 @@
+.navds-copybutton {
+  --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-5) var(--ax-spacing-3) var(--ax-spacing-4);
+
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--ax-border-radius-medium);
+  padding: var(--__axc-copybutton-padding);
+  display: grid;
+  place-content: center;
+  background-color: transparent;
+  transition: color 0.2s cubic-bezier(0.05, 0.7, 0.1, 1);
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-5);
+  }
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:disabled:hover {
+    background-color: transparent;
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-copybutton {
+    background-color: ButtonFace;
+    border: solid 1px ButtonText;
+    color: ButtonText;
+
+    &:disabled {
+      opacity: 1;
+      border-color: GrayText;
+    }
+  }
+}
+
+/* -------------------------- CopyButton small size ------------------------- */
+.navds-copybutton--small {
+  min-height: 2rem;
+  min-width: 2rem;
+
+  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-3) var(--ax-spacing-1) var(--ax-spacing-2);
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-2) var(--ax-spacing-1) var(--ax-spacing-3);
+  }
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-1);
+  }
+
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1-alt);
+  }
+}
+
+/* ------------------------- CopyButton xsmall size ------------------------- */
+.navds-copybutton--xsmall {
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+
+  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-2) var(--ax-spacing-05) var(--ax-spacing-1);
+
+  &.navds-copybutton--icon-right {
+    --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-1) var(--ax-spacing-05) var(--ax-spacing-2);
+  }
+
+  &.navds-copybutton--icon-only {
+    --__axc-copybutton-padding: var(--ax-spacing-05);
+  }
+
+  & .navds-copybutton__icon {
+    font-size: 1.25rem;
+  }
+
+  & > .navds-copybutton__content {
+    gap: var(--ax-spacing-1);
+  }
+}
+
+/* ----------------------------- CopyButton Icon ---------------------------- */
+.navds-copybutton__icon {
+  font-size: 1.5rem;
+  display: flex;
+
+  &:first-of-type {
+    margin-left: -0.25rem;
+  }
+
+  &:last-of-type {
+    margin-right: -0.25rem;
+  }
+
+  &:only-child {
+    margin: 0;
+  }
+}
+
+.navds-copybutton--active .navds-copybutton__icon {
+  animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+
+@keyframes akselCopyButtonIconAnimation {
+  8% {
+    transform: translateY(0);
+  }
+
+  17% {
+    transform: translateY(-10%);
+  }
+
+  25% {
+    transform: translateY(2%);
+  }
+
+  30% {
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------- CopyButton Action --------------------------- */
+.navds-copybutton--action {
+  color: var(--ax-text-accent);
+
+  &.navds-copybutton--active {
+    color: var(--ax-text-success);
+
+    &:hover {
+      color: var(--ax-text-success-strong);
+    }
+  }
+
+  &:hover {
+    color: var(--ax-text-accent-strong);
+  }
+
+  &:disabled {
+    color: var(--ax-text-accent);
+  }
+}
+
+/* --------------------------- CopyButton Neutral --------------------------- */
+.navds-copybutton--neutral {
+  color: var(--ax-text-subtle);
+
+  &:hover,
+  &.navds-copybutton--active {
+    color: var(--ax-text-default);
+  }
+
+  &:disabled {
+    color: var(--ax-text-subtle);
+  }
+}
+
+.navds-copybutton__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ax-spacing-2);
+}

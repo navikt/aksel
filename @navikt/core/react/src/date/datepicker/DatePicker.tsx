@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { isWeekend } from "date-fns";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
@@ -88,8 +88,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = useMergeRefs(wrapperRef, ref);
+    /* We use state here to insure that anchor is defined if open is true on initial render */
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const mergedRef = useMergeRefs(setWrapperRef, ref);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -167,7 +168,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           {children}
           <DateWrapper
             open={_open ?? open}
-            anchor={wrapperRef.current}
+            anchor={wrapperRef}
             onClose={() => onClose?.() ?? setOpen(false)}
             locale={locale}
             variant={mode}

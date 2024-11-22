@@ -3,10 +3,22 @@ import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
+import { useI18n } from "../util/i18n/i18n.context";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
 } from "./PaginationItem";
+
+interface RenderItemProps
+  extends Pick<
+    PaginationItemProps,
+    "className" | "disabled" | "selected" | "icon" | "iconPosition"
+  > {
+  children: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  page: number;
+  size: Exclude<PaginationProps["size"], undefined>;
+}
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -45,9 +57,9 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   prevNextTexts?: boolean;
   /**
    * Override pagination item rendering.
-   * @default (item: PaginationItemProps) => <PaginationItem {...item} />
+   * @default PaginationItem
    */
-  renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
+  renderItem?: (item: RenderItemProps) => ReturnType<React.FC>;
   /**
    * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
    */
@@ -101,6 +113,12 @@ export const getSteps = ({
 };
 
 /**
+ * TODO: These classes can be removed in darkside update
+ * - navds-pagination--prev-next--with-text
+ * - navds-pagination__prev-next
+ */
+
+/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
@@ -110,7 +128,7 @@ export const getSteps = ({
  * ```jsx
  * <Pagination
  *   page={pageState}
- *   onPageChange={(x) => setPageState(x)}
+ *   onPageChange={setPageState}
  *   count={9}
  *   boundaryCount={1}
  *   siblingCount={1}
@@ -130,14 +148,13 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       prevNextTexts = false,
       srHeading,
       "aria-labelledby": ariaLabelledBy,
-      renderItem: Item = (item: PaginationItemProps) => (
-        <PaginationItem {...item} />
-      ),
+      renderItem: Item = PaginationItem,
       ...rest
     },
     ref,
   ) => {
     const headingId = useId();
+    const translate = useI18n("Pagination");
 
     if (page < 1) {
       console.error("page cannot be less than 1");
@@ -194,11 +211,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronLeftIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Forrige" })}
+                    : { title: translate("previous") })}
                 />
               }
             >
-              {prevNextTexts && `Forrige`}
+              {prevNextTexts && translate("previous")}
             </Item>
           </li>
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
@@ -216,6 +233,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
+                    /* Remember to update RenderItemProps if you make changes to props sent into Item */
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}
@@ -241,12 +259,12 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 <ChevronRightIcon
                   {...(prevNextTexts
                     ? { "aria-hidden": true }
-                    : { title: "Neste" })}
+                    : { title: translate("next") })}
                 />
               }
               iconPosition="right"
             >
-              {prevNextTexts && `Neste`}
+              {prevNextTexts && translate("next")}
             </Item>
           </li>
         </ul>

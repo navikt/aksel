@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
+import { useI18n } from "../util/i18n/i18n.context";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";
@@ -20,7 +21,7 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   togglePlacement?: "left" | "right";
   /**
    * Opens component if 'true', closes if 'false'
-   * Using this props removes automatic control of open-state
+   * Using this prop removes automatic control of open-state
    */
   open?: boolean;
   /**
@@ -76,21 +77,19 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       value: open,
       onChange: onOpenChange,
     });
-
+    const translate = useI18n("global");
     const id = useId();
 
-    const expansionHandler = (e) => {
-      _setOpen((x) => !x);
-      e.stopPropagation();
+    const expansionHandler = (event: React.MouseEvent<HTMLElement>) => {
+      _setOpen((oldOpen) => !oldOpen);
+      event.stopPropagation();
     };
 
-    const onRowClick = (e) =>
-      !isInteractiveTarget(e.target) && expansionHandler(e);
-
-    const handleRowClick = (
-      e: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
-    ) => {
-      !expansionDisabled && expandOnRowClick && onRowClick(e);
+    const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>) => {
+      expandOnRowClick &&
+        !expansionDisabled &&
+        !isInteractiveTarget(event.target as HTMLElement) &&
+        expansionHandler(event);
     };
 
     return (
@@ -123,7 +122,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
               >
                 <ChevronDownIcon
                   className="navds-table__expandable-icon"
-                  title={_open ? "Vis mindre" : "Vis mer"}
+                  title={_open ? translate("showLess") : translate("showMore")}
                 />
               </button>
             )}

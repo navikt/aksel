@@ -105,9 +105,7 @@ export const FormProgress = forwardRef<HTMLDivElement, FormProgressProps>(
         <Collapsible lazy open={open} onOpenChange={onOpenChange}>
           <HStack justify="space-between" align="center">
             <BodyShort as="span">
-              {translate("step", {
-                replacements: { activeStep, totalSteps },
-              })}
+              {translate("step", { activeStep, totalSteps })}
             </BodyShort>
             <Collapsible.Trigger asChild aria-expanded={undefined}>
               <Button

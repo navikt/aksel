@@ -1,0 +1,206 @@
+/* --------------------------- ActionMenu content --------------------------- */
+.navds-action-menu__content {
+  overflow: hidden;
+  border-radius: var(--ax-border-radius-large);
+  border: 1px solid var(--ax-border-subtleA);
+
+  /* TODO: Use token here when added */
+  box-shadow:
+    0 0 1px 0 rgb(7 9 13/ 0.02),
+    0 2px 5px 0 rgb(7 9 13/ 0.1),
+    0 10px 16px 0 rgb(7 9 13/ 0.12);
+  transition: transform 250ms cubic-bezier(0, 0, 0, 1) allow-discrete;
+
+  &[data-state="open"] {
+    &[data-side="bottom"] {
+      @starting-style {
+        transform: translateY(-4px);
+      }
+    }
+
+    &[data-side="top"] {
+      @starting-style {
+        transform: translateY(4px);
+      }
+    }
+
+    &[data-side="right"] {
+      @starting-style {
+        transform: translateX(-4px);
+      }
+    }
+
+    &[data-side="left"] {
+      @starting-style {
+        transform: translateX(4px);
+      }
+    }
+  }
+}
+
+.navds-action-menu__content > .navds-action-menu__content-inner {
+  --__axc-action-menu-content-p: var(--ax-spacing-2);
+  --__axc-action-menu-item-pr: var(--ax-spacing-2);
+  --__axc-action-menu-item-pl: var(--ax-spacing-2);
+  --__axc-action-menu-item-height: 2rem;
+
+  border-radius: var(--ax-border-radius-large);
+  background-color: var(--ax-bg-raised);
+  min-width: 128px;
+  max-width: min(95vw, 640px);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  transform-origin: var(--__ac-action-menu-content-transform-origin);
+  animation-duration: 160ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  padding: var(--__axc-action-menu-content-p);
+  overflow: auto;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  max-height: var(--__ac-action-menu-content-available-height);
+}
+
+/* ----------------------------- ActionMenu Item ---------------------------- */
+.navds-action-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-spacing-2);
+  min-height: var(--__axc-action-menu-item-height);
+  cursor: default;
+  border-radius: var(--ax-border-radius-medium);
+  position: relative;
+  padding-left: var(--__axc-action-menu-item-pl);
+  padding-right: var(--__axc-action-menu-item-pr);
+  font-size: var(--ax-font-size-medium);
+  scroll-margin-block: var(--__axc-action-menu-content-p);
+  line-height: 1.5;
+  color: var(--ax-text-default);
+  text-decoration: none;
+
+  & svg {
+    flex-shrink: 0;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--ax-bg-accent-moderate-hoverA);
+    color: var(--ax-text-default);
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.navds-action-menu__item--has-icon {
+  --__axc-action-menu-item-pl: var(--ax-spacing-6);
+}
+
+.navds-action-menu__sub-trigger {
+  --__axc-action-menu-item-pr: var(--ax-spacing-05);
+
+  &[data-state="open"] {
+    background-color: var(--ax-bg-neutral-moderate-pressed);
+  }
+
+  &:focus {
+    background-color: var(--ax-bg-accent-moderate-hoverA);
+  }
+}
+
+.navds-action-menu__item--danger {
+  color: var(--ax-text-danger);
+
+  &:focus {
+    background-color: var(--ax-bg-danger-moderate-hoverA);
+    color: var(--ax-text-danger-strong);
+  }
+}
+
+/* ---------------------------- ActionMenu marker --------------------------- */
+.navds-action-menu__marker {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-spacing-1);
+}
+
+.navds-action-menu__marker--right {
+  margin-left: auto;
+  padding-left: var(--ax-spacing-4);
+}
+
+.navds-action-menu__marker--left {
+  position: absolute;
+  left: 0;
+  width: var(--__axc-action-menu-item-pl);
+  display: inline-flex;
+  justify-content: center;
+}
+
+.navds-action-menu__marker-icon svg {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* --------------------------- ActionMenu shortcut -------------------------- */
+.navds-action-menu__shortcut {
+  background-color: var(--ax-bg-neutral-moderateA);
+  color: var(--ax-text-default);
+  border-radius: var(--ax-border-radius-small);
+  padding: 0 var(--ax-spacing-1);
+  min-width: 1.125rem;
+  height: 1.125rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ax-font-size-small);
+}
+
+/* ---------------------------- ActionMenu Grouping ---------------------------- */
+.navds-action-menu__label {
+  display: flex;
+  align-items: center;
+  min-height: calc(var(--__axc-action-menu-item-height) - 6px);
+  padding-right: var(--__axc-action-menu-item-pr);
+  padding-left: var(--__axc-action-menu-item-pl);
+  color: var(--ax-text-subtle);
+  border-radius: var(--ax-border-radius-medium);
+  user-select: none;
+  cursor: default;
+  font-size: var(--ax-font-size-small);
+}
+
+.navds-action-menu__divider {
+  height: 1px;
+  margin-block: var(--ax-spacing-2);
+  background-color: var(--ax-border-subtleA);
+}
+
+/* -------------------------- ActionMenu indicator -------------------------- */
+
+.navds-action-menu__indicator-icon--unchecked,
+.navds-action-menu__indicator-icon--checked,
+.navds-action-menu__indicator-icon--indeterminate {
+  display: none;
+}
+
+.navds-action-menu__indicator {
+  display: grid;
+  place-content: center;
+
+  &[data-state="unchecked"] .navds-action-menu__indicator-icon--unchecked {
+    display: block;
+  }
+
+  &[data-state="checked"] .navds-action-menu__indicator-icon--checked {
+    display: block;
+  }
+
+  &[data-state="indeterminate"] .navds-action-menu__indicator-icon--indeterminate {
+    display: block;
+  }
+}
+
+.navds-action-menu__indicator-icon {
+  font-size: 14px;
+}

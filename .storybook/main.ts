@@ -71,7 +71,11 @@ export default {
         },
       },
     },
-    "storybook-addon-pseudo-states",
+    /**
+     * https://github.com/chromaui/storybook-addon-pseudo-states/issues/101
+     * Currently disabled to avoid interference with darkmode update
+     */
+    /* "storybook-addon-pseudo-states", */
   ],
   framework: {
     name: "@storybook/react-vite",

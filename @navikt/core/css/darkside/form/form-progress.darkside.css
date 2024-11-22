@@ -1,0 +1,57 @@
+.navds-form-progress__bar {
+  margin-bottom: var(--ax-spacing-2);
+}
+
+.navds-form-progress__button {
+  &:focus-visible {
+    z-index: 1;
+  }
+
+  &[data-state="open"] {
+    & svg {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.navds-form-progress__button[data-state="closed"] .navds-form-progress__btn-txt-hide,
+.navds-form-progress__button[data-state="open"] .navds-form-progress__btn-txt-show {
+  display: none;
+}
+
+.navds-form-progress__collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 250ms cubic-bezier(0.2, 0, 0, 1);
+
+  &[hidden] {
+    display: grid !important;
+  }
+
+  &[data-state="open"] {
+    grid-template-rows: 1fr;
+  }
+}
+
+.navds-form-progress__collapsible-content {
+  min-height: 0;
+  opacity: 0.01;
+  visibility: hidden;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-duration: 250ms;
+  transition-property: opacity, visibility;
+}
+
+.navds-form-progress__collapsible[data-state="open"] .navds-form-progress__collapsible-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.navds-form-progress__stepper {
+  border: 1px solid var(--ax-border-subtle);
+  border-radius: var(--ax-border-radius-large);
+  padding: var(--ax-spacing-4);
+  margin-top: var(--ax-spacing-1);
+  background: var(--ax-bg-raised);
+}

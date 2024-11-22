@@ -1,6 +1,14 @@
+import { enGB } from "date-fns/locale";
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    dateLocale: enGB,
+    showMore: "Show more",
+    showLess: "Show less",
+    readOnly: "Read-only",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Choose file",
@@ -35,6 +43,58 @@ export default {
   Chips: {
     Removable: {
       labelSuffix: "delete",
+    },
+  },
+  ErrorSummary: {
+    heading: "You must correct the following errors before you can continue:",
+  },
+  Loader: {
+    title: "Waiting…",
+  },
+  Modal: {
+    close: "Close",
+  },
+  Pagination: {
+    previous: "Previous",
+    next: "Next",
+  },
+  ProgressBar: {
+    progress: "{current} of {max}",
+    progressUnknown:
+      "Progress is unknown, estimated time is {seconds} seconds.",
+  },
+  Search: {
+    clear: "Clear",
+    search: "Search",
+  },
+  Textarea: {
+    maxLength: "Text area with a {maxLength} character limit.",
+    charsTooMany: "{chars} characters too many",
+    charsLeft: "{chars} characters left",
+  },
+  Timeline: {
+    dateFormat: "yyyy-MM-dd",
+    dayFormat: "d MMM",
+    monthFormat: "MMM yyyy",
+    yearFormat: "yyyy",
+    Row: {
+      noPeriods: "No periods",
+      period: "{start} to {end}",
+    },
+    Period: {
+      success: "Success",
+      warning: "Warning",
+      danger: "Danger",
+      info: "Info",
+      neutral: "Neutral",
+      period: "{status} from {start} to {end}",
+    },
+    Pin: {
+      pin: "Pin: {date}",
+    },
+    Zoom: {
+      zoom: "Zoom timeline {start} to {end}",
+      reset: "Reset zoom",
     },
   },
 } satisfies Translations;

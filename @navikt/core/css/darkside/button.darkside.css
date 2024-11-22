@@ -1,6 +1,322 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-/* stylelint-disable aksel/design-token-exists */
-
 .navds-button {
-  background-color: var(--a-bg-accent-strong);
+  padding: var(--ax-spacing-3) var(--ax-spacing-5);
+  border-radius: var(--ax-border-radius-medium);
+  display: inline-flex;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ax-spacing-2);
+}
+
+.navds-button--small {
+  padding: var(--ax-spacing-1) var(--ax-spacing-3);
+  min-height: 2rem;
+  min-width: 2rem;
+}
+
+.navds-button--xsmall {
+  padding: var(--ax-spacing-05) var(--ax-spacing-2);
+  gap: var(--ax-spacing-1);
+}
+
+.navds-button--icon-only {
+  padding: var(--ax-spacing-3);
+}
+
+.navds-button--small.navds-button--icon-only {
+  padding: var(--ax-spacing-1);
+}
+
+.navds-button--xsmall.navds-button--icon-only {
+  padding: var(--ax-spacing-05);
+}
+
+.navds-button:focus-visible {
+  outline: 2px solid var(--ax-border-focus);
+  outline-offset: 2px;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-button:focus {
+    outline: 2px solid var(--ax-border-focus);
+  }
+}
+
+.navds-button__icon {
+  font-size: 1.5rem;
+  display: flex;
+
+  --__axc-button-icon-margin: -4px;
+}
+
+.navds-button__icon:first-child {
+  margin-left: var(--__axc-button-icon-margin);
+}
+
+.navds-button__icon:last-child {
+  margin-right: var(--__axc-button-icon-margin);
+}
+
+:where(.navds-button--xsmall, .navds-button--small) .navds-button__icon {
+  --__axc-button-icon-margin: -2px;
+
+  font-size: 1.25rem;
+}
+
+.navds-button__icon:only-child {
+  margin: 0;
+}
+
+/*************************
+ * .navds-button--primary *
+ *************************/
+
+.navds-button--primary {
+  background-color: var(--ax-bg-accent-strong);
+  color: var(--ax-text-accent-contrast);
+}
+
+@media (forced-colors: active) {
+  .navds-button.navds-button--primary {
+    background-color: highlight;
+    color: highlighttext;
+  }
+
+  .navds-button.navds-button--primary span {
+    forced-color-adjust: none;
+  }
+}
+
+.navds-button--primary:hover {
+  background-color: var(--ax-bg-accent-strong-hover);
+}
+
+.navds-button--primary:active {
+  background-color: var(--ax-bg-accent-strong-pressed);
+}
+
+.navds-button--primary:hover:where(:disabled, .navds-button--disabled),
+.navds-button--primary:active:where(:disabled, .navds-button--disabled) {
+  background-color: var(--ax-bg-accent-strong);
+}
+
+/*************************
+ * .navds-button--primary-neutral *
+ *************************/
+
+.navds-button--primary-neutral {
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
+}
+
+.navds-button--primary-neutral:hover {
+  background-color: var(--ax-bg-neutral-strong-hover);
+}
+
+.navds-button--primary-neutral:active {
+  background-color: var(--ax-bg-neutral-strong-pressed);
+}
+
+.navds-button--primary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--primary-neutral:active:where(:disabled, .navds-button--disabled) {
+  background-color: var(--ax-bg-neutral-strong);
+}
+
+/**************************
+* .navds-button--secondary *
+ **************************/
+
+.navds-button--secondary {
+  background-color: transparent;
+  color: var(--ax-text-accent);
+  box-shadow: inset 0 0 0 2px var(--ax-border-accent);
+}
+
+.navds-button--secondary:hover {
+  background-color: var(--ax-bg-accent-moderate-hoverA);
+  color: var(--ax-text-accent-strong);
+  box-shadow: inset 0 0 0 2px var(--ax-bg-accent-strong-hover);
+}
+
+.navds-button--secondary:active {
+  background-color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-text-accent-contrast);
+  box-shadow: none;
+}
+
+.navds-button--secondary:where(:disabled, .navds-button--disabled),
+.navds-button--secondary:hover:where(:disabled, .navds-button--disabled) {
+  background-color: transparent;
+  color: var(--ax-text-accent);
+}
+
+/**************************
+* .navds-button--secondary-neutral *
+ **************************/
+
+.navds-button--secondary-neutral {
+  background-color: transparent;
+  color: var(--ax-text-neutral);
+  box-shadow: inset 0 0 0 2px var(--ax-border-neutral);
+}
+
+.navds-button--secondary-neutral:hover {
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
+  color: var(--ax-text-neutral-strong);
+}
+
+.navds-button--secondary-neutral:active {
+  color: var(--ax-text-neutral-contrast);
+  background-color: var(--ax-bg-neutral-strong-pressed);
+  box-shadow: none;
+}
+
+.navds-button--secondary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--secondary-neutral:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ax-text-default);
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--ax-border-strong);
+}
+
+/****************************
+ * .navds-button--tertiary *
+ ****************************/
+
+.navds-button--tertiary {
+  background-color: transparent;
+  color: var(--ax-text-accent);
+}
+
+.navds-button--tertiary:hover {
+  background-color: var(--ax-bg-accent-hoverA);
+  color: var(--ax-text-accent-strong);
+}
+
+.navds-button--tertiary:active {
+  background-color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-text-accent-contrast);
+}
+
+.navds-button--tertiary:active:hover {
+  background-color: var(--ax-bg-accent-strong-pressed);
+}
+
+.navds-button--tertiary:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:hover:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:active:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary:active:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ax-text-accent);
+  background: none;
+  box-shadow: none;
+}
+
+/****************************
+ * .navds-button--tertiary-neutral *
+ ****************************/
+
+.navds-button--tertiary-neutral {
+  color: var(--ax-text-neutral);
+}
+
+.navds-button--tertiary-neutral:hover {
+  background-color: var(--ax-bg-neutral-hoverA);
+  color: var(--ax-text-neutral-strong);
+}
+
+.navds-button--tertiary-neutral:active {
+  background-color: var(--ax-bg-neutral-strong-pressed);
+  color: var(--ax-text-neutral-contrast);
+}
+
+.navds-button--tertiary-neutral:active:hover {
+  background-color: var(--ax-bg-neutral-strong-pressed);
+}
+
+.navds-button--tertiary-neutral:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:hover:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:where(:disabled, .navds-button--disabled),
+.navds-button--tertiary-neutral:active:hover:where(:disabled, .navds-button--disabled) {
+  color: var(--ax-text-default);
+  background: none;
+  box-shadow: none;
+}
+
+/*************************
+ * .navds-button--danger *
+ *************************/
+
+.navds-button--danger {
+  background-color: var(--ax-bg-danger-strong);
+  color: var(--ax-text-danger-contrast);
+}
+
+.navds-button--danger:hover {
+  background-color: var(--ax-bg-danger-strong-hover);
+}
+
+.navds-button--danger:active {
+  background-color: var(--ax-bg-danger-strong-pressed);
+}
+
+.navds-button--danger:active:where(:disabled, .navds-button--disabled),
+.navds-button--danger:hover:where(:disabled, .navds-button--disabled) {
+  background-color: var(--ax-bg-danger-strong);
+}
+
+/**************************
+ * .navds-button:disabled *
+ **************************/
+
+.navds-button:where(:disabled, .navds-button--disabled) {
+  cursor: not-allowed;
+}
+
+.navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+  opacity: 0.3;
+}
+
+/* Loader overrides */
+.navds-button .navds-loader .navds-loader__foreground {
+  stroke: currentColor;
+}
+
+.navds-button--primary .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
+  stroke: rgb(255 255 255 / 0.3);
+}
+
+@media (forced-colors: active) {
+  .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  .navds-button {
+    border: 1px solid transparent;
+    color: ButtonText;
+    background-color: ButtonFace;
+  }
+
+  .navds-button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    box-shadow: none;
+  }
+
+  .navds-button:hover span {
+    forced-color-adjust: none;
+  }
+
+  .navds-button .navds-loader .navds-loader__foreground {
+    stroke: canvas;
+  }
+
+  .navds-button--primary .navds-loader .navds-loader__background,
+  .navds-button--danger .navds-loader .navds-loader__background {
+    stroke: canvastext;
+  }
 }

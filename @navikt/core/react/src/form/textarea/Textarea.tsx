@@ -9,9 +9,6 @@ import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
-/**
- * TODO: Mulighet for lokalisering av sr-only/counter text
- */
 export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -144,7 +141,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
         {!!description && (
@@ -180,17 +177,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...(describedBy ? { "aria-describedby": describedBy } : {})}
         />
         {hasMaxLength && !readOnly && !inputProps.disabled && (
-          <>
-            <span id={maxLengthId} className="navds-sr-only">
-              {`Tekstområde med plass til ${maxLength} tegn.`}
-            </span>
-            <Counter
-              maxLength={maxLength}
-              currentLength={props.value?.length ?? uncontrolledValue.length}
-              size={size}
-              i18n={i18n}
-            />
-          </>
+          <Counter
+            maxLengthId={maxLengthId}
+            maxLength={maxLength}
+            currentLength={props.value?.length ?? uncontrolledValue.length}
+            size={size}
+            i18n={i18n}
+          />
         )}
         <div
           className="navds-form-field__error"

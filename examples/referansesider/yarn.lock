@@ -733,23 +733,23 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.2.1
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=4fe8d6&locator=referansesider%40workspace%3A."
-  checksum: 10/88b894c508559bcb04df0300442f39b760ff2758a2196a824127fc79df1d9609aca2c9dd3d0e9b00846d41bdb9647c501a783bf4ee9e70184568e1ce11eda0c6
+  version: 7.5.2
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=0bab30&locator=referansesider%40workspace%3A."
+  checksum: 10/70db9a90e2d908fad8312982f47676c91cd4dac15cad1c7e571ba95f48ba4883a18e78a7658e79104bb2b7af0f6689ad36ded87734ad562701d6682e78c019ed
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.2.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=3f9624&locator=referansesider%40workspace%3A."
-  checksum: 10/1d2a45011f9f76dd7fda011bc294b0b4517e58b4900797f4b289cb73f44f17f93870c146dd553288f22a42d2455905878e7a1eac6df9305c60fd448746279823
+  version: 7.5.2
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=5ee6b4&locator=referansesider%40workspace%3A."
+  checksum: 10/79c78a69ff085ae3f5188b575da218a3132b7e6884021a960e16f94e4f9e5f72674f1cad1f8231ab5bc43521537f1f8e4cc4f9847cd47918a3d9022f2b9f9c7c
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.2.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9d37d1&locator=referansesider%40workspace%3A."
-  checksum: 10/462ed14328a17dba77f55ed8866425a0ffc2e7a523066f86078c850a2b5ef00ff372ad6530a1e02a1f897d9fc22fb1b392f7b651346de373ac297bdf7164b2bf
+  version: 7.5.2
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ea7f7c&locator=referansesider%40workspace%3A."
+  checksum: 10/6124c8c1945acdf326c6c7a207f0be4e024b1958c04006a522cd73ab8f9e5abe42101e01c84ef3df3bd4f8d45e6082ccb87e6892b48f6a897ff53b374030b5ab
   languageName: node
   linkType: hard
 
@@ -1771,13 +1771,13 @@ __metadata:
   linkType: hard
 
 "cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2":
-  version: 7.0.3
-  resolution: "cross-spawn@npm:7.0.3"
+  version: 7.0.6
+  resolution: "cross-spawn@npm:7.0.6"
   dependencies:
     path-key: "npm:^3.1.0"
     shebang-command: "npm:^2.0.0"
     which: "npm:^2.0.1"
-  checksum: 10/e1a13869d2f57d974de0d9ef7acbf69dc6937db20b918525a01dacb5032129bd552d290d886d981e99f1b624cb03657084cc87bd40f115c07ecf376821c729ce
+  checksum: 10/0d52657d7ae36eb130999dffff1168ec348687b48dd38e2ff59992ed916c88d328cf1d07ff4a4a10bc78de5e1c23f04b306d569e42f7a2293915c081e4dfee86
   languageName: node
   linkType: hard
 
@@ -3388,7 +3388,7 @@ __metadata:
     styled-components: "npm:^6.1.13"
     tailwind-merge: "npm:^2.5.2"
     tailwindcss: "npm:^3.4.11"
-    typescript: "npm:^5.5.3"
+    typescript: "npm:5.5.4"
     typescript-eslint: "npm:^8.0.1"
     vite: "npm:^5.4.8"
   languageName: unknown
@@ -3923,23 +3923,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.3":
-  version: 5.6.2
-  resolution: "typescript@npm:5.6.2"
+"typescript@npm:5.5.4":
+  version: 5.5.4
+  resolution: "typescript@npm:5.5.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/f95365d4898f357823e93d334ecda9fcade54f009b397c7d05b7621cd9e865981033cf89ccde0f3e3a7b73b1fdbae18e92bc77db237b43e912f053fef0f9a53b
+  checksum: 10/1689ccafef894825481fc3d856b4834ba3cc185a9c2878f3c76a9a1ef81af04194849840f3c69e7961e2312771471bb3b460ca92561e1d87599b26c37d0ffb6f
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
-  version: 5.6.2
-  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=74658d"
+"typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>":
+  version: 5.5.4
+  resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/060a7349adf698477b411be4ace470aee6c2c1bd99917fdf5d33697c17ec55c64fe724eb10399387530b50e9913b41528dd8bfcca0a5fc8f8bac63fbb4580a2e
+  checksum: 10/746fdd0865c5ce4f15e494c57ede03a9e12ede59cfdb40da3a281807853fe63b00ef1c912d7222143499aa82f18b8b472baa1830df8804746d09b55f6cf5b1cc
   languageName: node
   linkType: hard
 

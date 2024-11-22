@@ -1,0 +1,69 @@
+.navds-text-field__input {
+  appearance: none;
+  padding: var(--ax-spacing-2);
+  background: var(--ax-bg-input);
+  border-radius: var(--ax-border-radius-medium);
+  border: 1px solid var(--ax-border-default);
+  min-height: 3rem;
+  width: 100%;
+  color: var(--ax-text-default);
+
+  &:hover {
+    border-color: var(--ax-border-accent-strong);
+  }
+
+  &:focus-visible {
+    border-color: var(--ax-border-accent-strong);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background-color: var(--ax-bg-input);
+    border-color: var(--ax-border-default);
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: var(--ax-text-subtle);
+  }
+
+  &[size] {
+    width: auto;
+  }
+}
+
+.navds-form-field--small .navds-text-field__input {
+  padding: 0 var(--ax-spacing-2);
+  min-height: 2rem;
+}
+
+.navds-text-field--error > .navds-text-field__input:not(:hover, :disabled) {
+  border-color: var(--ax-border-danger);
+  box-shadow: 0 0 0 1px var(--ax-border-danger);
+}
+
+.navds-text-field--readonly .navds-text-field__input {
+  background-color: var(--ax-bg-neutral-moderate);
+  border-color: var(--ax-border-neutral-subtleA);
+  cursor: default;
+}
+
+/**
+  * Removes default search icon
+  */
+.navds-text-field__input[type="search"] {
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-text-field__input {
+    background-color: field;
+    color: fieldtext;
+  }
+}

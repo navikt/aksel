@@ -1,0 +1,287 @@
+.navds-checkbox,
+.navds-radio {
+  position: relative;
+  width: fit-content;
+}
+
+.navds-checkbox__input,
+.navds-radio__input {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 0;
+  left: -0.75rem;
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.navds-checkbox__label,
+.navds-radio__label {
+  padding: var(--ax-spacing-3) 0;
+  cursor: pointer;
+  display: flex;
+  gap: var(--ax-spacing-2);
+
+  --__axc-radio-checkbox-readonly-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-readonly-border: var(--ax-border-subtle);
+}
+
+.navds-checkbox__label::before,
+.navds-radio__label::before {
+  content: "";
+  border-radius: var(--ax-border-radius-medium);
+  background-color: var(--ax-bg-input);
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--ax-border-default);
+}
+
+.navds-radio__label::before {
+  border-radius: var(--ax-border-radius-full);
+}
+
+.navds-checkbox__content,
+.navds-radio__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.navds-checkbox--small > .navds-checkbox__input,
+.navds-radio--small > .navds-radio__input {
+  width: 2rem;
+  height: 2rem;
+  top: 0;
+  left: -0.375rem;
+}
+
+.navds-checkbox--small > .navds-checkbox__label,
+.navds-radio--small > .navds-radio__label {
+  padding: var(--ax-spacing-1-alt) 0;
+}
+
+.navds-checkbox--small > .navds-checkbox__label::before,
+.navds-radio--small > .navds-radio__label::before {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.navds-checkbox__input:focus + .navds-checkbox__label::before,
+.navds-radio__input:focus + .navds-radio__label::before {
+  outline: 2px solid var(--ax-border-focus);
+  outline-offset: 2px;
+}
+
+.navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translate(var(--ax-spacing-1-alt), -50%);
+  background-color: var(--ax-bg-default);
+  width: 0.75rem;
+  height: 0.25rem;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.navds-checkbox--small .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+  transform: translate(0.25rem, -50%);
+}
+
+.navds-checkbox__input:where(:checked, :indeterminate) + .navds-checkbox__label::before {
+  background-color: var(--ax-bg-accent-strong-pressed);
+  border-color: var(--ax-bg-accent-strong-pressed);
+}
+
+.navds-checkbox__input:where(:checked, :indeterminate):not(:disabled):hover + .navds-checkbox__label::before {
+  border-color: var(--ax-bg-accent-strong-hover);
+  background-color: var(--ax-bg-accent-strong-hover);
+}
+
+.navds-checkbox__input:where(:not(:checked)) + .navds-checkbox__label > .navds-checkbox__icon {
+  display: none;
+}
+
+.navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
+  color: var(--ax-bg-default);
+  position: absolute;
+  height: 1.5rem;
+  transform: translate(var(--ax-spacing-1-alt));
+  pointer-events: none;
+
+  /* Fixed edcase where when using in shadow-dom, svg will not center */
+  display: flex;
+  align-items: center;
+}
+
+.navds-checkbox--small .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
+  transform: translate(0.25rem, -10%);
+}
+
+/* Tailwind sets all svg to block */
+.navds-checkbox__icon > svg {
+  display: inline;
+  vertical-align: initial;
+}
+
+.navds-checkbox--small > .navds-checkbox__input:checked + .navds-checkbox__label::before {
+  background-position: 0.25rem center;
+}
+
+.navds-radio__input:checked + .navds-radio__label::before {
+  background-color: var(--ax-bg-input);
+  border: 8px solid var(--ax-bg-accent-strong-pressed);
+}
+
+.navds-radio--small > .navds-radio__input:checked + .navds-radio__label::before {
+  border-width: 6px;
+}
+
+.navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label,
+.navds-radio__input:hover:not(:disabled) + .navds-radio__label {
+  color: var(--ax-text-accent-strong);
+}
+
+.navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-radio__input:hover:not(:disabled, :checked) + .navds-radio__label::before {
+  border-color: var(--ax-border-accent-strong);
+  background-color: var(--ax-bg-accent-moderate-hoverA);
+}
+
+.navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,
+.navds-radio--error > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before {
+  border-color: var(--ax-border-danger);
+}
+
+.navds-checkbox--error > .navds-checkbox__input:not(:disabled, :checked, :indeterminate):hover + .navds-checkbox__label::before,
+.navds-radio--error > .navds-radio__input:not(:disabled, :checked):hover + .navds-radio__label::before {
+  background-color: var(--ax-bg-danger-moderate-hoverA);
+  border-color: var(--ax-border-danger-strong);
+}
+
+.navds-checkbox--error > .navds-checkbox__input:is(:checked, :indeterminate):not(:disabled) + .navds-checkbox__label::before {
+  background-color: var(--ax-bg-danger-strong-pressed);
+  border-color: var(--ax-bg-danger-strong-pressed);
+}
+
+.navds-radio--error > .navds-radio__input:checked + .navds-radio__label::before {
+  border-color: var(--ax-bg-danger-strong-pressed);
+}
+
+.navds-checkbox--disabled,
+.navds-radio--disabled {
+  opacity: 0.3;
+}
+
+.navds-checkbox--disabled > .navds-checkbox__input,
+.navds-checkbox--disabled > .navds-checkbox__label,
+.navds-radio--disabled > .navds-radio__input,
+.navds-radio--disabled > .navds-radio__label {
+  cursor: not-allowed;
+}
+
+/* Readonly */
+.navds-checkbox--readonly > :where(.navds-checkbox__input, .navds-checkbox__label),
+.navds-radio--readonly > :where(.navds-radio__input, .navds-radio__label) {
+  cursor: default;
+}
+
+.navds-checkbox--readonly .navds-checkbox__label-text {
+  display: inline-flex;
+}
+
+.navds-checkbox--readonly > .navds-checkbox__input:hover + .navds-checkbox__label,
+.navds-radio--readonly > .navds-radio__input:hover + .navds-radio__label {
+  color: var(--ax-text-default);
+}
+
+.navds-checkbox--readonly > .navds-checkbox__input:not(:disabled) + .navds-checkbox__label::before,
+.navds-checkbox--readonly > .navds-checkbox__input:hover .navds-checkbox__label::before,
+.navds-radio--readonly > .navds-radio__input:not(:disabled, :checked) + .navds-radio__label::before,
+.navds-radio--readonly > .navds-radio__input:hover:not(:checked, :focus) + .navds-radio__label::before {
+  background-color: var(--__axc-radio-checkbox-readonly-bg);
+  border-color: var(--__axc-radio-checkbox-readonly-border);
+}
+
+.navds-checkbox--readonly > .navds-checkbox__input:where(:checked, :indeterminate) + .navds-checkbox__label::before {
+  border-color: var(--__axc-radio-checkbox-readonly-border);
+  background-color: var(--__axc-radio-checkbox-readonly-bg);
+}
+
+.navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
+  color: var(--ax-text-subtle);
+}
+
+.navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
+  background-color: var(--ax-bg-neutral-strong);
+  border-width: 0;
+  box-shadow:
+    inset 0 0 0 2px var(--ax-border-subtle),
+    inset 0 0 0 8px var(--ax-bg-neutral-moderate);
+}
+
+.navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+  background-color: var(--ax-text-subtle);
+}
+
+@media (forced-colors: active) {
+  .navds-checkbox,
+  .navds-radio {
+    --__axc-radio-checkbox-high-contrast-bg: field;
+    --__axc-radio-checkbox-high-contrast-text: fieldtext;
+    --__axc-radio-checkbox-high-contrast-highlight: highlight;
+
+    /* TODO: Consider adding this to global scope */
+    --ax-border-focus: Highlight;
+  }
+
+  .navds-checkbox__label::before,
+  .navds-radio__label::before {
+    border: 1px solid var(--__axc-radio-checkbox-high-contrast-text);
+    background-color: var(--__axc-radio-checkbox-high-contrast-bg);
+  }
+
+  .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
+    color: var(--__axc-radio-checkbox-high-contrast-text);
+  }
+
+  .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+    background-color: var(--__axc-radio-checkbox-high-contrast-text);
+  }
+
+  .navds-radio__input:checked + .navds-radio__label::before {
+    border: 6px solid var(--__axc-radio-checkbox-high-contrast-text);
+  }
+
+  :not(.navds-checkbox--readonly) > .navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label,
+  :not(.navds-radio--readonly) > .navds-radio__input:hover:not(:disabled) + .navds-radio__label {
+    color: highlight;
+  }
+
+  .navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label::before {
+    border: 1px solid var(--__axc-radio-checkbox-high-contrast-text);
+    background-color: var(--__axc-radio-checkbox-high-contrast-bg);
+  }
+
+  .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
+    background-color: var(--__axc-radio-checkbox-high-contrast-text);
+  }
+
+  .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
+    border-width: 6px;
+  }
+
+  .navds-checkbox--disabled,
+  .navds-radio--disabled {
+    opacity: 1;
+
+    --__axc-radio-checkbox-high-contrast-bg: field;
+    --__axc-radio-checkbox-high-contrast-text: graytext;
+  }
+
+  :is(.navds-checkbox--disabled, .navds-radio--disabled) :is(.navds-checkbox__label, .navds-radio__label) {
+    color: graytext;
+  }
+}

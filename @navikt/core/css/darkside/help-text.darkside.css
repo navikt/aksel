@@ -1,0 +1,61 @@
+.navds-help-text__button {
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: var(--ax-border-radius-full);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ax-bg-accent-strong);
+  font-size: 1.25rem;
+  padding: calc(var(--ax-spacing-1) / 2);
+}
+
+.navds-help-text__icon {
+  border-radius: var(--ax-border-radius-full);
+}
+
+.navds-help-text__popover.navds-popover {
+  background-color: var(--ax-bg-info-moderate);
+  max-width: min(65ch, calc(100vw - var(--ax-spacing-6)));
+  border-radius: var(--ax-border-radius-large);
+  border: 1px solid var(--ax-border-info);
+  box-shadow:
+    0 0 1px 0 rgba(7 9 13/ 0.15),
+    0 1px 3px 0 rgba(7 9 13/ 0.1),
+    0 5px 12px 0 rgba(7 9 13/ 0.13),
+    0 0.5px 0 0 rgba(255 255 255/ 0) inset,
+    0 0 1px 0 rgba(255 255 255/ 0) inset;
+}
+
+.navds-help-text__icon--filled {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+  display: inherit;
+  color: var(--ax-bg-accent-strong-hover);
+}
+
+.navds-help-text__button[aria-expanded="true"] > .navds-help-text__icon--filled {
+  color: var(--ax-bg-accent-strong-pressed);
+}
+
+@media (forced-colors: active) {
+  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
+    display: inherit;
+  }
+
+  .navds-help-text__button:hover > .navds-help-text__icon {
+    color: highlight;
+  }
+
+  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+    display: none;
+  }
+}

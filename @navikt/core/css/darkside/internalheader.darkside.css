@@ -1,0 +1,101 @@
+.navds-internalheader {
+  display: flex;
+  align-self: stretch;
+  background: var(--ax-bg-raised);
+  min-height: 3rem;
+  border-bottom: 1px solid var(--ax-border-subtleA);
+}
+
+@media (forced-colors: active) {
+  .navds-internalheader {
+    background-color: ButtonFace;
+    border: solid 1px ButtonText;
+    color: ButtonText;
+  }
+}
+
+.navds-internalheader__title {
+  border: none;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  font-weight: var(--ax-font-weight-bold);
+  line-height: normal;
+  text-align: left;
+  padding-block: 0;
+  padding-inline: var(--ax-spacing-6) var(--ax-spacing-5);
+  border-right: 1px solid var(--ax-border-subtleA);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 0;
+  color: var(--ax-text-default);
+
+  &:is(button) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hover);
+  }
+
+  &:is(:hover, :active):not(button, a) {
+    background: initial;
+  }
+}
+
+.navds-internalheader__user {
+  padding: 0 var(--ax-spacing-5);
+  border-left: 1px solid var(--ax-border-subtleA);
+  display: flex;
+  align-items: center;
+}
+
+.navds-internalheader__button {
+  border: none;
+  margin: 0;
+  padding: 0 var(--ax-spacing-3);
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: var(--ax-spacing-2);
+  border-left: 1px solid var(--ax-border-subtleA);
+  color: var(--ax-text-default);
+
+  &:hover {
+    background: var(--ax-bg-neutral-moderate-hover);
+  }
+}
+
+@media (forced-colors: active) {
+  .navds-internalheader__button:hover {
+    background-color: highlighttext;
+    border-color: highlight;
+    color: highlight;
+    outline: 1px solid highlight;
+    isolation: isolate;
+  }
+}
+
+.navds-internalheader__title,
+.navds-internalheader__button {
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: -3px;
+  }
+
+  &:active {
+    background: var(--ax-bg-neutral-moderate-pressed);
+  }
+}
+
+.navds-internalheader__user-button {
+  padding-left: var(--ax-spacing-5);
+  gap: var(--ax-spacing-4);
+}

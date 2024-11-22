@@ -16,7 +16,7 @@ export const globalColorDarkModeConfigWithoutAlpha: GlobalConfigT = {
     "700": { value: "#8a92a0", type: "global-color", group: "neutral" },
     "800": { value: "#949ba8", type: "global-color", group: "neutral" },
     "900": { value: "#a5acb6", type: "global-color", group: "neutral" },
-    "1000": { value: "#c4c9d0", type: "global-color", group: "neutral" },
+    "1000": { value: "#dfe1e5", type: "global-color", group: "neutral" },
   },
   accent: {
     "100": { value: "#101d2d", type: "global-color", group: "accent" },
@@ -68,10 +68,10 @@ export const globalColorDarkModeConfigWithoutAlpha: GlobalConfigT = {
   },
   /* Info is currently just a copy of brandThree */
   info: {
-    "100": { value: "#131e26", type: "global-color", group: "brandThree" },
-    "200": { value: "#18242c", type: "global-color", group: "brandThree" },
-    "300": { value: "#1e2c35", type: "global-color", group: "brandThree" },
-    "400": { value: "#273843", type: "global-color", group: "brandThree" },
+    "100": { value: "#071e2d", type: "global-color", group: "brandThree" },
+    "200": { value: "#0d2534", type: "global-color", group: "brandThree" },
+    "300": { value: "#122d3e", type: "global-color", group: "brandThree" },
+    "400": { value: "#19394c", type: "global-color", group: "brandThree" },
     "500": { value: "#43718d", type: "global-color", group: "brandThree" },
     "600": { value: "#5a839b", type: "global-color", group: "brandThree" },
     "700": { value: "#7396ab", type: "global-color", group: "brandThree" },
@@ -104,10 +104,10 @@ export const globalColorDarkModeConfigWithoutAlpha: GlobalConfigT = {
     "1000": { value: "#e3c2b1", type: "global-color", group: "brandTwo" },
   },
   brandThree: {
-    "100": { value: "#131e26", type: "global-color", group: "brandThree" },
-    "200": { value: "#18242c", type: "global-color", group: "brandThree" },
-    "300": { value: "#1e2c35", type: "global-color", group: "brandThree" },
-    "400": { value: "#273843", type: "global-color", group: "brandThree" },
+    "100": { value: "#071e2d", type: "global-color", group: "brandThree" },
+    "200": { value: "#0d2534", type: "global-color", group: "brandThree" },
+    "300": { value: "#122d3e", type: "global-color", group: "brandThree" },
+    "400": { value: "#19394c", type: "global-color", group: "brandThree" },
     "500": { value: "#43718d", type: "global-color", group: "brandThree" },
     "600": { value: "#5a839b", type: "global-color", group: "brandThree" },
     "700": { value: "#7396ab", type: "global-color", group: "brandThree" },

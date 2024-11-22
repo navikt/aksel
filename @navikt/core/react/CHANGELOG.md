@@ -1,5 +1,85 @@
 # @navikt/ds-react
 
+## 7.5.3
+
+### Patch Changes
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.3
+  - @navikt/aksel-icons@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.2
+  - @navikt/aksel-icons@7.5.2
+
+## 7.5.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.1
+  - @navikt/aksel-icons@7.5.1
+
+## 7.5.0
+
+### Minor Changes
+
+- React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
+
+### Patch Changes
+
+- Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
+- Updated dependencies [[`47a4dd6`](https://github.com/navikt/aksel/commit/47a4dd6c4c37a9ced9df1f21529e8a6244b342b1)]:
+  - @navikt/aksel-icons@7.5.0
+  - @navikt/ds-tokens@7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.3
+  - @navikt/aksel-icons@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.2
+  - @navikt/aksel-icons@7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
+
+- Combobox: onToggleSelected is now called with correct value when autocomplete and new values are allowed. ([#3287](https://github.com/navikt/aksel/pull/3287))
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
+- Search: Remove redundant role attribute ([#3280](https://github.com/navikt/aksel/pull/3280))
+
+- Monthpicker: Add allowed input format 'MMyyyy'. ([#3285](https://github.com/navikt/aksel/pull/3285))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.1
+  - @navikt/aksel-icons@7.4.1
+
 ## 7.4.0
 
 ### Minor Changes

@@ -16,16 +16,11 @@ export default meta;
 
 type Story = StoryObj<typeof Textarea>;
 
-export const Default: StoryObj<typeof Textarea> = {
-  render: (props) => {
-    return <Textarea {...props} />;
-  },
-
+export const Default: Story = {
   args: {
     maxLength: 0,
     label: "Ipsum enim quis culpa",
   },
-
   argTypes: {
     resize: {
       control: { type: "radio" },

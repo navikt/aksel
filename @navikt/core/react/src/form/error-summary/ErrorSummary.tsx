@@ -3,6 +3,7 @@ import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { BodyShort, Heading } from "../../typography";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
+import { useI18n } from "../../util/i18n/i18n.context";
 import ErrorSummaryItem from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps
@@ -60,7 +61,7 @@ interface ErrorSummaryComponent
  *     Felt må fylles ut med alder
  *   </ErrorSummary.Item>
  *   <ErrorSummary.Item href="#2">
- *     Tekstfeltet må ha en godkjent e-mail
+ *     Tekstfeltet må ha en godkjent e-post
  *   </ErrorSummary.Item>
  * </ErrorSummary>
  * ```
@@ -72,11 +73,12 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       className,
       size = "medium",
       headingTag = "h2",
-      heading = "Du må rette disse feilene før du kan fortsette:",
+      heading,
       ...rest
     },
     ref,
   ) => {
+    const translate = useI18n("ErrorSummary");
     const wrapperRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -105,7 +107,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           ref={headingRef}
           tabIndex={-1}
         >
-          {heading}
+          {heading ?? translate("heading")}
         </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {children}

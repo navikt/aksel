@@ -1,5 +1,56 @@
 # @navikt/aksel
 
+## 7.5.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Updated dependencies [[`9c93342`](https://github.com/navikt/aksel/commit/9c9334289246103856c149f5ddcf93dc42087342)]:
+  - @navikt/ds-css@7.5.2
+
+## 7.5.1
+
+### Patch Changes
+
+- Chore: Manually bump version to sync npm and github-releases ([`aa7c2d9`](https://github.com/navikt/aksel/commit/aa7c2d9598434d6304432daa20e0a1eeedd03b1b))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.1
+
+## 7.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`6d9f900`](https://github.com/navikt/aksel/commit/6d9f9001fed4ccfa4245ab97399b24012ceb9edf)]:
+  - @navikt/ds-css@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`81c79d8`](https://github.com/navikt/aksel/commit/81c79d8355e5533bb85081d58f82f37202ff812c)]:
+  - @navikt/ds-css@7.4.1
+
 ## 7.4.0
 
 ### Patch Changes

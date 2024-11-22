@@ -1,0 +1,21 @@
+.navds-popover {
+  z-index: 1000;
+  background: var(--ax-bg-raised);
+  box-shadow:
+    0 0 1px 0 rgba(7 9 13/ 0.02),
+    0 2px 5px 0 rgba(7 9 13/ 0.1),
+    0 5px 12px 0 rgba(7 9 13/ 0.12);
+  border: 1px solid var(--ax-border-subtleA);
+  border-radius: var(--ax-border-radius-xlarge);
+
+  /* Creates a small gutter between screen-edges on smaller devices */
+  max-width: calc(100vw - var(--ax-spacing-6));
+}
+
+.navds-popover__content {
+  padding: var(--ax-spacing-4);
+}
+
+.navds-popover--hidden {
+  display: none;
+}

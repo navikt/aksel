@@ -1,43 +1,15 @@
-import cl from "clsx";
 import { HGrid, Show } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
+import { Placeholder } from "../../../components/website-modules/examples/__parts/ShowHidePlaceholder";
 
 const Example = () => {
   return (
-    <HGrid columns={{ xs: 1, md: 2 }} gap="4">
+    <HGrid columns={2} gap="4">
       <Placeholder text="Alltid synlig" />
-      <Show above="md" asChild>
-        <Placeholder desktop text="Synlig bare på desktop" />
+      <Show below="md" asChild>
+        <Placeholder desktop text="Synlig bare på mobil" />
       </Show>
     </HGrid>
-  );
-};
-
-const Placeholder = ({
-  text,
-  mobil,
-  desktop,
-  className,
-}: {
-  text?: string;
-  mobil?: boolean;
-  desktop?: boolean;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cl(
-        "grid aspect-video h-auto min-h-24 w-auto place-content-center rounded p-2 text-text-on-action",
-        className,
-        {
-          "bg-pink-600": mobil,
-          "bg-violet-600": desktop,
-          "bg-teal-600": !desktop && !mobil,
-        },
-      )}
-    >
-      {text}
-    </div>
   );
 };
 
@@ -51,6 +23,6 @@ export const Demo = {
 
 export const args = {
   index: 1,
-  desc: "Endre størrelse på nettleservindu for å se komponent i aksjon",
+  desc: "Endre størrelsen på eksempelvinduet for å se komponenten i aksjon. [Les mer om asChild her](https://aksel.nav.no/grunnleggende/kode/layout-primitives#613715c234c8).",
   sandbox: false,
 };

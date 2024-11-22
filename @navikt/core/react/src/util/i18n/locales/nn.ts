@@ -1,6 +1,14 @@
+import { nn } from "date-fns/locale";
 import type { Translations } from "../i18n.types";
 
 export default {
+  global: {
+    dateLocale: nn,
+    showMore: "Vis meir",
+    showLess: "Vis mindre",
+    readOnly: "Skrivebeskytta",
+  },
+
   FileUpload: {
     dropzone: {
       button: "Vel fil",
@@ -35,6 +43,58 @@ export default {
   Chips: {
     Removable: {
       labelSuffix: "slett",
+    },
+  },
+  ErrorSummary: {
+    heading: "Du må rette desse feila før du kan halde fram:",
+  },
+  Loader: {
+    title: "Ventar…",
+  },
+  Modal: {
+    close: "Lukk",
+  },
+  Pagination: {
+    previous: "Førre",
+    next: "Neste",
+  },
+  ProgressBar: {
+    progress: "{current} av {max}",
+    progressUnknown:
+      "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
+  },
+  Search: {
+    clear: "Tøm",
+    search: "Søk",
+  },
+  Textarea: {
+    maxLength: "Tekstområde med plass til {maxLength} teikn.",
+    charsTooMany: "{chars} teikn for mykje",
+    charsLeft: "{chars} teikn igjen",
+  },
+  Timeline: {
+    dateFormat: "dd.MM.yyyy",
+    dayFormat: "dd.MM",
+    monthFormat: "MMM yy",
+    yearFormat: "yyyy",
+    Row: {
+      noPeriods: "Ingen periodar",
+      period: "{start} til {end}",
+    },
+    Period: {
+      success: "Suksess",
+      warning: "Åtvaring",
+      danger: "Fare",
+      info: "Info",
+      neutral: "Nøytral",
+      period: "{status} frå {start} til {end}",
+    },
+    Pin: {
+      pin: "Pin: {date}",
+    },
+    Zoom: {
+      zoom: "Zoom tidslina {start} til {end}",
+      reset: "Tilbakestill tidsperspektiv",
     },
   },
 } satisfies Translations;

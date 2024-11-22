@@ -1,5 +1,31 @@
 # @navikt/ds-css
 
+## 7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Table.ColumnHeader: Inherit text alignment in button ([#3319](https://github.com/navikt/aksel/pull/3319))
+
+## 7.4.2
+
+## 7.4.1
+
+### Patch Changes
+
+- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+
 ## 7.4.0
 
 ## 7.3.1

@@ -291,7 +291,10 @@
   padding-inline: var(--__ac-combobox-list-item-padding-inline);
   width: 100%;
   background-color: var(--ac-combobox-list-item-bg, var(--a-surface-default));
-  scroll-margin-top: 50px;
+}
+
+.navds-combobox__list:has(.navds-combobox__list_non-selectables) .navds-combobox__list-item {
+  scroll-margin-top: 48px;
 }
 
 .navds-combobox__list-item--loading {

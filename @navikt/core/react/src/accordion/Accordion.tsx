@@ -31,6 +31,7 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * @deprecated Prop will be removed in future versions. "default" will be the only variant.
    * @default "default"
    */
   variant?: "default" | "neutral";
