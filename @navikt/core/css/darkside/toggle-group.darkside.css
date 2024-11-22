@@ -31,7 +31,7 @@
   min-height: 2.5rem;
   border: none;
   cursor: pointer;
-  background-color: var(--ax-bg-input);
+  background-color: transparent;
   color: var(--ax-text-default);
   border-radius: var(--ax-border-radius-small);
   min-width: fit-content;
@@ -71,34 +71,20 @@
 /* Modifier neutral variant */
 .navds-toggle-group--neutral {
   background-color: transparent;
-  box-shadow: inset 0 0 0 1px var(--ax-border-neutral);
+  box-shadow: inset 0 0 0 1px var(--ax-border-default);
 
   & .navds-toggle-group__button {
-    background-color: var(--ax-bg-input);
+    background-color: transparent;
     color: var(--ax-text-default);
 
     &:hover {
-      background-color: var(--ax-bg-neutral-hover);
-      color: var(--ax-text-default);
+      background-color: var(--ax-bg-neutral-moderate-hoverA);
     }
 
     &[aria-checked="true"] {
       background-color: var(--ax-bg-neutral-strong-pressed);
       color: var(--ax-text-neutral-contrast);
     }
-  }
-}
-
-/* Modifier medium size */
-.navds-toggle-group--medium {
-  > :where(.navds-toggle-group__button:first-of-type:focus-visible) {
-    border-start-start-radius: 1px;
-    border-end-start-radius: 1px;
-  }
-
-  > :where(.navds-toggle-group__button:last-of-type:focus-visible) {
-    border-start-end-radius: 1px;
-    border-end-end-radius: 1px;
   }
 }
 
