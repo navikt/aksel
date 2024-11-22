@@ -1,30 +1,30 @@
 @charset "UTF-8";
 
 /* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
-
 @layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.layout, aksel.utilities;
 
-/* CSS foundations */
+/* ----------------------------- CSS foundations ---------------------------- */
 @import "./baseline/reset.darkside.css" layer(aksel.reset);
 @import "./baseline/print.darkside.css" layer(aksel.reset);
 @import "./baseline/fonts.darkside.css" layer(aksel.typography);
 @import "./typography.darkside.css" layer(aksel.typography);
 
-/* Theming */
+/* --------------------------------- Theming -------------------------------- */
 @import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
 @import "./baseline/theme.darkside.css" layer(aksel.theme);
 
 /* TODO: Remove this reference after stack is updated with darkside support */
 @import "../primitives/stack.css" layer(aksel.components);
 
-/* Components */
+/* ------------------------------- Components ------------------------------- */
 @import "./button.darkside.css" layer(aksel.components);
 @import "./chips.darkside.css" layer(aksel.components);
 
 /**
-  * Form-components edits
+  * `./form/index.css` edits the following components:
   * - Button
   * - Chips
+  * To avoid specificity conflicts, we import those components before form.
 */
 @import "./form/index.css" layer(aksel.components);
 @import "./accordion.darkside.css" layer(aksel.components);
@@ -57,8 +57,8 @@
 @import "./tabs.darkside.css" layer(aksel.components);
 @import "./list.darkside.css" layer(aksel.components);
 
-/* Layout CSS */
+/* --------------------------------- Layout --------------------------------- */
 @import "./primitives/index.css" layer(aksel.layout);
 
-/* Utility-CSS */
+/* --------------------------------- Utility -------------------------------- */
 @import "./baseline/utilities.darkside.css" layer(aksel.utilities);
