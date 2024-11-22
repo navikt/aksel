@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { Slot } from "../../slot/Slot";
 import { createContext } from "../../util/create-context";
 
 type AkselThemeContext = {
@@ -17,6 +18,8 @@ type AkselThemeProps = {
   children: React.ReactNode;
   className?: string;
   hasBackground?: boolean;
+  /* TODO: Handle this correctly with types */
+  asChild?: boolean;
 } & AkselThemeContext;
 
 const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
@@ -26,6 +29,7 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
     const {
       children,
       className,
+      asChild = false,
       theme = context?.theme ?? "light",
       hasBackground: hasBackgroundProp = true,
     } = props;
@@ -35,15 +39,17 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
     const hasBackground =
       hasBackgroundProp ?? (isRoot || props.theme !== undefined);
 
+    const SlotElement = asChild ? Slot : "div";
+
     return (
       <ThemeProvider theme={theme}>
-        <div
+        <SlotElement
           ref={ref}
           className={cl("navds-theme", className, theme)}
           data-background={hasBackground}
         >
           {children}
-        </div>
+        </SlotElement>
       </ThemeProvider>
     );
   },
