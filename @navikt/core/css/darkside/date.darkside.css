@@ -146,46 +146,6 @@
   }
 }
 
-.navds-date__caption__month .navds-select__container select {
-  text-transform: capitalize;
-}
-
-/* Monthpicker */
-.navds-date__month-button {
-  all: unset;
-  text-align: center;
-  width: 3rem;
-  height: 3rem;
-  text-transform: capitalize;
-  border-radius: var(--ax-border-radius-medium);
-  cursor: pointer;
-}
-
-.navds-date__month-button:focus-visible,
-.navds-monthpicker__caption-button:focus-visible {
-  box-shadow: var(--axc-shadow-focus);
-  z-index: 1;
-}
-
-@supports not selector(:focus-visible) {
-  .navds-date__month-button:focus,
-  .navds-monthpicker__caption-button:focus {
-    box-shadow: var(--axc-shadow-focus);
-    z-index: 1;
-  }
-}
-
-.navds-date__year-label {
-  display: flex;
-  align-items: center;
-}
-
-.navds-date__wrapper,
-.navds-date__standalone-wrapper {
-  height: fit-content;
-  width: fit-content;
-}
-
 .navds-date__caption {
   display: flex;
   justify-content: space-between;
@@ -204,6 +164,57 @@
   &:hover {
     color: var(--ax-text-default);
   }
+}
+
+.navds-date__caption__month .navds-select__container select {
+  text-transform: capitalize;
+}
+
+.navds-date__caption__year {
+  width: 5rem;
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-border-radius-medium);
+}
+
+.navds-date__caption__month {
+  border: 1px solid var(--ax-border-default);
+  border-radius: var(--ax-border-radius-medium);
+}
+
+.navds-date__month-button:focus-visible,
+.navds-monthpicker__caption-button:focus-visible {
+  box-shadow: var(--axc-shadow-focus);
+  z-index: 1;
+}
+
+@supports not selector(:focus-visible) {
+  .navds-date__month-button:focus,
+  .navds-monthpicker__caption-button:focus {
+    box-shadow: var(--axc-shadow-focus);
+    z-index: 1;
+  }
+}
+
+/* Monthpicker */
+.navds-date__month-button {
+  all: unset;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  text-transform: capitalize;
+  border-radius: var(--ax-border-radius-medium);
+  cursor: pointer;
+}
+
+.navds-date__year-label {
+  display: flex;
+  align-items: center;
+}
+
+.navds-date__wrapper,
+.navds-date__standalone-wrapper {
+  height: fit-content;
+  width: fit-content;
 }
 
 .navds-date__field-input {
@@ -295,10 +306,6 @@
     outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
   }
-}
-
-.navds-date__caption__year {
-  width: 5rem;
 }
 
 .navds-date__week-row {
