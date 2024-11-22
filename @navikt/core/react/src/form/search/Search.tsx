@@ -156,7 +156,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           variant="tertiary-neutral"
           size={size === "medium" ? "small" : "xsmall"}
           icon={<XMarkIcon aria-hidden />}
-          aria-label={clearButtonLabel || translate("clear")}
+          title={clearButtonLabel || translate("clear")}
           hidden={!showClearButton}
         />
       ) : (
