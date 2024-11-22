@@ -51,7 +51,6 @@ export default {
   ],
   addons: [
     "@storybook/addon-a11y",
-    "@whitespace/storybook-addon-html",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
     {
