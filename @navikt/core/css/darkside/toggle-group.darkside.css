@@ -47,27 +47,6 @@
     outline-offset: 2px;
   }
 
-  /* &:focus-visible:hover[aria-checked="false"] {
-    background-color: red !important;
-    box-shadow:
-      0 0 0 1px var(--ax-bg-neutral-hover),
-      0 0 0 4px var(--ax-border-focus);
-  } */
-
-  @supports not selector(:focus-visible) {
-    &:focus {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: 2px;
-    }
-
-    /* &:focus:hover[aria-checked="false"] {
-      background-color: red !important;
-      box-shadow:
-        0 0 0 1px var(--ax-bg-neutral-hover),
-        0 0 0 4px var(--ax-border-focus);
-    } */
-  }
-
   &[aria-checked="true"] {
     background-color: var(--ax-bg-accent-strong-pressed);
     color: var(--ax-text-accent-contrast);
@@ -103,23 +82,9 @@
       color: var(--ax-text-default);
     }
 
-    &:focus-visible:hover[aria-checked="false"] {
-      box-shadow:
-        0 0 0 1px var(--ax-bg-neutral-hover),
-        0 0 0 4px var(--ax-border-focus);
-    }
-
     &[aria-checked="true"] {
       background-color: var(--ax-bg-neutral-strong-pressed);
       color: var(--ax-text-neutral-contrast);
-    }
-
-    @supports not selector(:focus-visible) {
-      &:focus:hover[aria-checked="false"] {
-        box-shadow:
-          0 0 0 1px var(--ax-bg-neutral-hover),
-          0 0 0 4px var(--ax-border-focus);
-      }
     }
   }
 }
