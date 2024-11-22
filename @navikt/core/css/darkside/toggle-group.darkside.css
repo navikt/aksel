@@ -20,8 +20,6 @@
   grid-auto-columns: 1fr;
 }
 
-/* ######################################################### */
-
 /* Button */
 .navds-toggle-group__button {
   display: inline-flex;
