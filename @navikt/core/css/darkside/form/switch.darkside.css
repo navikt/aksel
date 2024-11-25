@@ -159,43 +159,45 @@
 }
 
 /* -------------------------- Switch Readonly state ------------------------- */
-.navds-switch--readonly > .navds-switch__track,
-.navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__track,
-.navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track,
-.navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track {
-  background-color: var(--ax-bg-neutral-moderate);
-  box-shadow: inset 0 0 0 2px var(--ax-border-subtleA);
-}
-
-.navds-switch--readonly > .navds-switch__label-wrapper,
-.navds-switch--readonly > .navds-switch__input {
-  cursor: default;
-}
-
-.navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__label-wrapper,
-.navds-switch--readonly .navds-switch__label-wrapper:hover {
-  color: var(--ax-text-default);
-}
-
-.navds-switch--readonly .navds-switch__label {
-  display: inline-flex;
-}
-
-.navds-switch--readonly .navds-switch__thumb {
-  background-color: var(--ax-bg-neutral-strong);
-}
-
-.navds-switch--readonly > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-  color: var(--ax-text-neutral-contrast);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .navds-switch--readonly > .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
-    transform: translateX(0);
+.navds-switch--readonly {
+  & > .navds-switch__track,
+  & > .navds-switch__input:hover ~ .navds-switch__track,
+  & > .navds-switch__input:checked ~ .navds-switch__track,
+  & > .navds-switch__input:checked:hover ~ .navds-switch__track {
+    background-color: var(--ax-bg-neutral-moderate);
+    box-shadow: inset 0 0 0 2px var(--ax-border-subtleA);
   }
 
-  .navds-switch--readonly > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
-    transform: translateX(1.25rem);
+  & > .navds-switch__label-wrapper,
+  & > .navds-switch__input {
+    cursor: default;
+  }
+
+  & > .navds-switch__input:hover ~ .navds-switch__label-wrapper,
+  & .navds-switch__label-wrapper:hover {
+    color: var(--ax-text-default);
+  }
+
+  & .navds-switch__label {
+    display: inline-flex;
+  }
+
+  & .navds-switch__thumb {
+    background-color: var(--ax-bg-neutral-strong);
+  }
+
+  & > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+    color: var(--ax-text-neutral-contrast);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    & > .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
+      transform: translateX(0);
+    }
+
+    & > .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
+      transform: translateX(1.25rem);
+    }
   }
 }
 
