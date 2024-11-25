@@ -331,7 +331,12 @@ export const Icons: Story = {
               style={{ transform: "rotate(45deg)" }}
               aria-hidden
             >
-              <rect width="24" height="24" rx="6" fill="var(--a-icon-alt-3)" />
+              <rect
+                width="24"
+                height="24"
+                rx="6"
+                fill="var(--ax-text-info, var(--a-icon-alt-3))"
+              />
             </svg>
           }
         >
@@ -348,39 +353,6 @@ export const Icons: Story = {
         </List.Item>
         <List.Item icon={<SplitHorizontalIcon aria-hidden />}>
           Beskrivelsen på punkter er nærmere forklart <a href="/">her</a>
-        </List.Item>
-      </List>
-    );
-  },
-};
-
-export const Tokens: Story = {
-  render: () => {
-    return (
-      <List style={{ "--ac-list-marker-color": "red" }}>
-        <List.Item>Consectetur Adipiscing Elit</List.Item>
-        <List.Item>
-          Impedit nemo eos sit adipisci non dolores.
-          <List
-            style={{
-              "--ac-list-marker-icon-color": "blue",
-              "--ac-list-marker-ul-color": "pink",
-            }}
-          >
-            <List.Item>Error assumenda officia</List.Item>
-            <List.Item icon={<HeadHeartIcon aria-hidden />}>
-              Suscipit odit voluptatum
-            </List.Item>
-          </List>
-        </List.Item>
-        <List.Item style={{ "--ac-list-marker-ol-color": "green" }}>
-          Iusto fugiat atque accusantium iure sunt.
-          <List as="ol">
-            <List.Item>Error assumenda officia</List.Item>
-          </List>
-          <List>
-            <List.Item>Suscipit odit voluptatum</List.Item>
-          </List>
         </List.Item>
       </List>
     );
@@ -507,10 +479,6 @@ export const Chromatic: Story = {
       <div>
         <h2>Icons</h2>
         {Icons.render?.(...args)}
-      </div>
-      <div>
-        <h2>Tokens</h2>
-        {Tokens.render?.(...args)}
       </div>
       <div>
         <h2>Spacing</h2>

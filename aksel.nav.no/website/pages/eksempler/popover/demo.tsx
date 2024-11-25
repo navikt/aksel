@@ -37,5 +37,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "Popover kan kobles til de fleste typer elementer med bruk av ref.",
+  desc: "Popover kan kobles til de fleste typer elementer med bruk av `ref`.",
 };

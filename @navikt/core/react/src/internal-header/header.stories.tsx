@@ -232,6 +232,34 @@ export const UserWithMenuGridIconMenu = () => (
   </InternalHeader>
 );
 
+export const UserButton = () => (
+  <InternalHeader style={{ width: 600 }}>
+    <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
+    <Spacer />
+    <Dropdown>
+      <InternalHeader.UserButton
+        as={Dropdown.Toggle}
+        name="Ola N."
+        description="Enhet: Skien"
+      />
+      <Dropdown.Menu>
+        <dl>
+          <BodyShort as="dt" size="small">
+            Ola Normann
+          </BodyShort>
+          <Detail as="dd">D123456</Detail>
+        </dl>
+        <Dropdown.Menu.Divider />
+        <Dropdown.Menu.List>
+          <Dropdown.Menu.List.Item>
+            Logg ut <Spacer /> <LeaveIcon aria-hidden fontSize="1.5rem" />
+          </Dropdown.Menu.List.Item>
+        </Dropdown.Menu.List>
+      </Dropdown.Menu>
+    </Dropdown>
+  </InternalHeader>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="4">
@@ -258,6 +286,10 @@ export const Chromatic: Story = {
       <div>
         <h2>UserWithMenuGridIconMenu</h2>
         <UserWithMenuGridIconMenu />
+      </div>
+      <div>
+        <h2>UserButton</h2>
+        <UserButton />
       </div>
     </VStack>
   ),
