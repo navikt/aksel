@@ -104,17 +104,17 @@
   border-radius: var(--ax-border-radius-medium);
   text-decoration: none;
 
+  & .navds-stepper__content {
+    text-decoration: underline;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: 0.05em;
+  }
+
   &:hover,
   &:active {
     & .navds-stepper__content {
       text-decoration-thickness: 0.111em;
     }
-  }
-
-  &:not([data-active="true"]) .navds-stepper__content {
-    text-decoration: underline;
-    text-underline-offset: 0.1em;
-    text-decoration-thickness: 0.05em;
   }
 
   &:hover {
@@ -133,6 +133,7 @@
   &[data-active="true"] {
     & .navds-stepper__content {
       color: var(--ax-text-accent-strong);
+      text-decoration: none;
     }
 
     & .navds-stepper__circle {
