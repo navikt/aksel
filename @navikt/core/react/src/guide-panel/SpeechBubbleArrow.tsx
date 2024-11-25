@@ -20,7 +20,7 @@ export const SpeechBubbleArrow: DefaultSpeechBubbleArrowType = ({
     >
       <path
         d="M20.0001 31V2C10.0296 2.09817 7.00012 3 2.00012 6C12.5001 8 20.0001 20 20.0001 31Z"
-        fill="white"
+        fill="currentColor"
       />
       <path
         fillRule="evenodd"
