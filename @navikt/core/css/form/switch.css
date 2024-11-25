@@ -149,6 +149,14 @@
   color: var(--ac-switch-thumb-icon-checked, var(--a-icon-action-selected));
 }
 
+.navds-switch__input:checked ~ .navds-switch__track .navds-switch__checkmark {
+  visibility: visible;
+}
+
+.navds-switch__checkmark {
+  visibility: hidden;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(0.125rem);
