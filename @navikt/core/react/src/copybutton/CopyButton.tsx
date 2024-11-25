@@ -151,8 +151,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         type="button"
         {...rest}
         aria-live="assertive"
-        aria-relevant="additions"
-        aria-atomic="true"
         className={cl(
           "navds-copybutton",
           className,
