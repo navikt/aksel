@@ -282,6 +282,7 @@
   border: 0;
   margin-inline: var(--ax-spacing-2);
   margin-block: var(--ax-spacing-1);
+  scroll-margin-block: 8px; /* outline + outline-offset + margin-block */
 }
 
 .navds-combobox__list-item--no-options {

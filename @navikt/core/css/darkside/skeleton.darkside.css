@@ -1,7 +1,7 @@
 .navds-skeleton {
-  background-color: var(--ac-skeleton-bg, var(--a-surface-neutral-moderate));
+  background-color: var(--ax-bg-neutral-moderateA);
   height: 1.3em;
-  animation: akselSkeletonAnimation 0.8s linear infinite alternate;
+  animation: akselSkeletonAnimation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   pointer-events: none;
 }
 
@@ -11,33 +11,33 @@
 
 .navds-skeleton--has-children {
   color: transparent;
-}
 
-.navds-skeleton--has-children > * {
-  visibility: hidden;
-}
+  & > * {
+    visibility: hidden;
+  }
 
-.navds-skeleton--has-children.navds-skeleton--no-height {
-  height: auto;
-}
+  &.navds-skeleton--no-height {
+    height: auto;
+  }
 
-.navds-skeleton--has-children.navds-skeleton--no-width {
-  width: fit-content;
+  &.navds-skeleton--no-width {
+    width: fit-content;
+  }
 }
 
 .navds-skeleton--text {
   height: auto;
   transform-origin: 0 55%;
   transform: scale(1, 0.6);
-  border-radius: var(--a-border-radius-medium);
-}
+  border-radius: var(--ax-border-radius-large);
 
-.navds-skeleton--text:empty::before {
-  content: "\00a0";
+  &:empty::before {
+    content: "\00a0";
+  }
 }
 
 .navds-skeleton--circle {
-  border-radius: var(--a-border-radius-full);
+  border-radius: var(--ax-border-radius-full);
 }
 
 .navds-skeleton--rectangle {
@@ -45,23 +45,20 @@
 }
 
 .navds-skeleton--rounded {
-  border-radius: var(--a-border-radius-xlarge);
+  border-radius: var(--ax-border-radius-xlarge);
 }
 
 @keyframes akselSkeletonAnimation {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.4;
+  50% {
+    opacity: 0.5;
   }
 }
 
 @media (forced-colors: active) {
   .navds-skeleton {
     forced-color-adjust: none;
-    background-color: var(--a-surface-neutral);
+    background-color: canvastext;
     animation-duration: 2s;
+    opacity: 0.2;
   }
 }

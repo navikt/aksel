@@ -4,7 +4,17 @@ import { Slot } from "../../slot/Slot";
 import { createContext } from "../../util/create-context";
 
 type AkselThemeContext = {
-  theme: "light" | "dark";
+  /**
+   * Color theme
+   * @default "light"
+   */
+  theme?: "light" | "dark";
+  /**
+   * Brand volume
+   * @default "low"
+   * This is experimental and subject to changes
+   */
+  volume?: "high" | "low";
 };
 
 const [ThemeProvider, useAkselTheme] = createContext<AkselThemeContext>({
@@ -31,6 +41,7 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
       className,
       asChild = false,
       theme = context?.theme ?? "light",
+      volume = context?.volume ?? "low",
       hasBackground: hasBackgroundProp = true,
     } = props;
 
@@ -42,11 +53,12 @@ const AkselTheme = forwardRef<HTMLDivElement, AkselThemeProps>(
     const SlotElement = asChild ? Slot : "div";
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} volume={volume}>
         <SlotElement
           ref={ref}
           className={cl("navds-theme", className, theme)}
           data-background={hasBackground}
+          data-volume={volume}
         >
           {children}
         </SlotElement>
