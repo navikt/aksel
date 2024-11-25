@@ -12,7 +12,7 @@ type AkselThemeContext = {
   /**
    * Brand volume
    * @default "low"
-   * This is experimental and subject name changes
+   * This is experimental and subject to changes
    */
   volume?: "high" | "low";
 };
