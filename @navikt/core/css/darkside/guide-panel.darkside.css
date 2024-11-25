@@ -1,6 +1,8 @@
 .navds-guide-panel {
   --__axc-guide-panel-guide-size: 4rem;
   --__axc-guide-panel-guide-padding-top: calc((var(--__axc-guide-panel-guide-size) + 1rem) + var(--ax-spacing-05));
+  --__axc-guide-panel-arrow-width: 20px;
+  --__axc-guide-panel-arrow-height: 33px;
 
   position: relative;
   padding-top: var(--__axc-guide-panel-guide-padding-top);
@@ -24,11 +26,24 @@
   }
 
   .navds-guide-panel__content {
+    position: relative;
     background-color: var(--ax-bg-raised);
     border: 2px solid var(--ax-border-info);
     border-radius: var(--ax-border-radius-xlarge);
     padding-block: var(--ax-spacing-3);
     padding-inline: var(--ax-spacing-4);
+  }
+
+  .navds-guide-panel__arrow {
+    position: absolute;
+    top: calc(
+      (
+          -1 * (var(--__axc-guide-panel-arrow-height) -
+                ((var(--__axc-guide-panel-arrow-height) / 2) - (var(--__axc-guide-panel-arrow-width) / 2)))
+        ) + 0.8px
+    );
+    left: calc(50% + (-1 * var(--__axc-guide-panel-arrow-width)) + var(--ax-spacing-2));
+    transform: rotate(90deg) rotateX(180deg);
   }
 }
 
@@ -43,7 +58,14 @@
 
   .navds-guide-panel__content {
     min-height: calc(var(--__axc-guide-panel-guide-size) + var(--ax-spacing-5) + var(--ax-spacing-5));
-    margin-left: var(--ax-spacing-9);
+    margin-left: calc(var(--ax-spacing-12) + var(--ax-spacing-1));
+  }
+
+  .navds-guide-panel__arrow {
+    position: absolute;
+    top: calc(var(--ax-spacing-5));
+    left: calc(-1 * var(--__axc-guide-panel-arrow-width));
+    transform: rotate(0);
   }
 }
 
@@ -61,7 +83,7 @@
     --__axc-guide-panel-guide-size: 5rem;
 
     .navds-guide-panel__content {
-      margin-left: calc(var(--ax-spacing-14) + var(--ax-spacing-05));
+      margin-left: calc(var(--ax-spacing-14) + var(--ax-spacing-1));
     }
   }
 
@@ -78,7 +100,14 @@
 
     .navds-guide-panel__content {
       min-height: calc(var(--__axc-guide-panel-guide-size) + var(--ax-spacing-5) + var(--ax-spacing-5));
-      margin-left: calc(var(--ax-spacing-14) + var(--ax-spacing-05));
+      margin-left: calc(var(--ax-spacing-14) + var(--ax-spacing-1));
+    }
+
+    .navds-guide-panel__arrow {
+      position: absolute;
+      top: calc(var(--ax-spacing-5));
+      left: calc(-1 * var(--__axc-guide-panel-arrow-width));
+      transform: rotate(0);
     }
   }
 }

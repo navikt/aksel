@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { DefaultIllustration } from "./Illustration";
+import { SpeechBubbleArrow } from "./SpeechBubbleArrow";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -47,7 +48,10 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       <div className="navds-guide">
         {illustration ?? <DefaultIllustration />}
       </div>
-      <div className="navds-guide-panel__content">{children}</div>
+      <div className="navds-guide-panel__content">
+        <SpeechBubbleArrow />
+        {children}
+      </div>
     </div>
   ),
 );
