@@ -45,6 +45,10 @@
     left: calc(50% + (-1 * var(--__axc-guide-panel-arrow-width)) + var(--ax-spacing-2));
     transform: rotate(90deg) rotateX(180deg);
     color: var(--ax-bg-raised);
+
+    .strokePath {
+      color: var(--ax-border-info);
+    }
   }
 }
 
