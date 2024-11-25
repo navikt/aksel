@@ -135,7 +135,7 @@
   color: var(--ax-text-accent);
 
   &:hover {
-    --__axc-button-border-color: var(--ax-bg-accent-strong-hover);
+    --__axc-button-border-color: var(--ax-border-accent-strong);
 
     background-color: var(--ax-bg-accent-moderate-hoverA);
     color: var(--ax-text-accent-strong);
