@@ -16,7 +16,7 @@ export const globalColorDarkModeConfigWithoutAlpha: GlobalConfigT = {
     "700": { value: "#8a92a0", type: "global-color", group: "neutral" },
     "800": { value: "#949ba8", type: "global-color", group: "neutral" },
     "900": { value: "#a5acb6", type: "global-color", group: "neutral" },
-    "1000": { value: "#c4c9d0", type: "global-color", group: "neutral" },
+    "1000": { value: "#dfe1e5", type: "global-color", group: "neutral" },
   },
   accent: {
     "100": { value: "#101d2d", type: "global-color", group: "accent" },
