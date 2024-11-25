@@ -5,7 +5,7 @@ import { createContext } from "../../util/create-context";
 
 type AkselThemeContext = {
   /**
-   * Available color-themes
+   * Color theme
    * @default "light"
    */
   theme?: "light" | "dark";
