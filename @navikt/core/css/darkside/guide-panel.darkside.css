@@ -40,10 +40,10 @@
       (
           -1 * (var(--__axc-guide-panel-arrow-height) -
                 ((var(--__axc-guide-panel-arrow-height) / 2) - (var(--__axc-guide-panel-arrow-width) / 2)))
-        ) + 0.8px
+        ) + 0px
     );
     left: calc(50% + (-1 * var(--__axc-guide-panel-arrow-width)) + var(--ax-spacing-2));
-    transform: rotate(90deg) rotateX(180deg);
+    transform: rotate(90deg) rotateX(180deg) translateX(1.5px);
     color: var(--ax-bg-raised);
 
     .strokePath {

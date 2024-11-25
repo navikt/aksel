@@ -9,15 +9,16 @@ export const SpeechBubbleArrow: DefaultSpeechBubbleArrowType = ({
 }) => {
   return (
     <svg
-      width="20"
+      width="22"
       height="33"
-      viewBox="0 0 20 33"
+      viewBox="0 0 22 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
       className="navds-guide-panel__arrow"
       {...props}
     >
+      <path d="M22 0H19L20 33H22V0Z" fill="currentColor" />
       <path
         d="M20.0001 31V2C10.0296 2.09817 7.00012 3 2.00012 6C12.5001 8 20.0001 20 20.0001 31Z"
         fill="currentColor"
