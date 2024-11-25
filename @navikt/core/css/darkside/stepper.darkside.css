@@ -34,6 +34,13 @@
   }
 }
 
+/* Line before non-interactive step */
+.navds-stepper__item:has(+ .navds-stepper__item > .navds-stepper__step[data-interactive="false"]) {
+  .navds-stepper__line--2 {
+    background-color: var(--ax-border-neutral);
+  }
+}
+
 .navds-stepper__line--1 {
   grid-row: line-1;
   display: none;
