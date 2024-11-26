@@ -12,13 +12,13 @@ export function getResponsiveValue<T = string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__ac-${componentName}-${componentProp}-xs`]: responsiveProp,
+      [`--__${prefix}-${componentName}-${componentProp}-xs`]: responsiveProp,
     };
   }
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
-      `--__ac-${componentName}-${componentProp}-${breakpointAlias}`,
+      `--__${prefix}-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
     ]),
   );
@@ -85,7 +85,7 @@ export function getResponsiveProps<T extends string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__ac-${componentName}-${componentProp}-xs`]:
+      [`--__${prefix}-${componentName}-${componentProp}-xs`]:
         translateTokenStringToCSS(
           componentProp,
           responsiveProp,
@@ -98,14 +98,15 @@ export function getResponsiveProps<T extends string>(
 
   const styleProps = {};
   Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
-    styleProps[`--__ac-${componentName}-${componentProp}-${breakpointAlias}`] =
-      translateTokenStringToCSS(
-        componentProp,
-        aliasOrScale,
-        tokenSubgroup,
-        tokenExceptions,
-        invert,
-      );
+    styleProps[
+      `--__${prefix}-${componentName}-${componentProp}-${breakpointAlias}`
+    ] = translateTokenStringToCSS(
+      componentProp,
+      aliasOrScale,
+      tokenSubgroup,
+      tokenExceptions,
+      invert,
+    );
   });
   return styleProps;
 }

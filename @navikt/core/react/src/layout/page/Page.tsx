@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { OverridableComponent } from "../../util";
 import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
@@ -52,9 +53,12 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
+      const themeContext = UNSAFE_useAkselTheme();
+      const prefix = themeContext ? "acx" : "ac";
+
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-page-background": `var(--a-${background})`,
+        [`--__${prefix}-page-background`]: `var(--a-${background})`,
       };
 
       const belowFold = footerPosition === "belowFold";
