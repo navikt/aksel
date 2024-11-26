@@ -132,6 +132,9 @@
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+}
+
+.navds-modal:not(.navds-modal--polyfilled) .navds-modal__body {
   background:
     linear-gradient(var(--__ac-modal-bg) 30%, transparent) top,
     linear-gradient(transparent, var(--__ac-modal-bg) 60%) bottom,
