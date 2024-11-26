@@ -35,25 +35,32 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
-  ({ children, className, illustration, poster, ...rest }, ref) => (
-    <div
-      {...rest}
-      ref={ref}
-      className={cl("navds-guide-panel", className, {
-        "navds-guide-panel--poster": poster === true,
-        "navds-guide-panel--not-poster": poster === false,
-        "navds-guide-panel--responsive-poster": poster === undefined,
-      })}
-    >
-      <div className="navds-guide">
-        {illustration ?? <DefaultIllustration />}
+  ({ children, className, illustration, poster, ...rest }, ref) => {
+    let layout: "responsive" | "poster" | "not-poster";
+    if (poster === undefined) {
+      layout = "responsive";
+    } else if (poster) {
+      layout = "poster";
+    } else {
+      layout = "not-poster";
+    }
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        data-layout={layout}
+        className={cl("navds-guide-panel", className)}
+      >
+        <div className="navds-guide">
+          {illustration ?? <DefaultIllustration />}
+        </div>
+        <div className="navds-guide-panel__content">
+          <SpeechBubbleArrow />
+          {children}
+        </div>
       </div>
-      <div className="navds-guide-panel__content">
-        <SpeechBubbleArrow />
-        {children}
-      </div>
-    </div>
-  ),
+    );
+  },
 );
 
 export default GuidePanel;

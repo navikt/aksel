@@ -57,7 +57,7 @@
   }
 }
 
-.navds-guide-panel--not-poster {
+.navds-guide-panel[data-layout="not-poster"] {
   padding-top: 0;
   padding-left: calc(var(--__axc-guide-panel-guide-size) / 2);
 
@@ -89,7 +89,7 @@
     }
   }
 
-  .navds-guide-panel--not-poster {
+  .navds-guide-panel[data-layout="not-poster"] {
     --__axc-guide-panel-guide-size: 5rem;
 
     .navds-guide-panel__content {
@@ -97,7 +97,7 @@
     }
   }
 
-  .navds-guide-panel--responsive-poster {
+  .navds-guide-panel[data-layout="responsive"] {
     --__axc-guide-panel-guide-size: 5rem;
 
     padding-top: 0;
