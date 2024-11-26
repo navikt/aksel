@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-Modal: Modal now shows up while screensharing with Vergic"
+Modal: Now shows up while screensharing with Vergic"
