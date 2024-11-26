@@ -252,7 +252,7 @@
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__track {
-    border-color: graytext;
+    border-color: graytext !important;
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__label-wrapper,
