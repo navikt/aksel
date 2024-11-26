@@ -36,20 +36,19 @@
 
   .navds-guide-panel__arrow {
     position: absolute;
-    top: calc(
-      (
-          -1 * (var(--__axc-guide-panel-arrow-height) -
-                ((var(--__axc-guide-panel-arrow-height) / 2) - (var(--__axc-guide-panel-arrow-width) / 2)))
-        ) + 0px
-    );
+    top: -26px; /* carefully chosen value from calculation */
+
+    /*
+     * formula to recalculate a new top:
+       calc(
+             (
+                 -1 * (var(--__axc-guide-panel-arrow-height) -
+                       ((var(--__axc-guide-panel-arrow-height) / 2) - (var(--__axc-guide-panel-arrow-width) / 2)))
+               )
+           )
+    */
     left: calc(50% + (-1 * var(--__axc-guide-panel-arrow-width)) + var(--ax-spacing-2));
-    transform: rotate(90deg) rotateX(180deg) translateX(1.5px);
-
-    /* stylelint-disable-next-line */
-    @-moz-document url-prefix() {
-      transform: rotate(90deg) rotateX(180deg) translateX(0.5px);
-    }
-
+    transform: rotate(90deg) rotateX(180deg) translateX(0.5px);
     color: var(--ax-bg-raised);
 
     .strokePath {
