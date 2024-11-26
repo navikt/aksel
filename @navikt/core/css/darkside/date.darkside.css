@@ -70,15 +70,6 @@
     border-radius: var(--ax-border-radius-xlarge);
   }
 
-  .navds-date__caption__month,
-  .navds-date__caption__year,
-  .rdp-button {
-    &:focus-within {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: 2px;
-    }
-  }
-
   .navds-date__field {
     display: flex;
     flex-direction: column;
@@ -184,7 +175,7 @@
   .rdp-cell > button {
     &:focus-within {
       outline: 2px solid var(--ax-border-focus);
-      outline-offset: -1px;
+      outline-offset: 1px;
     }
   }
 }
