@@ -13,7 +13,7 @@
   gap: 0 var(--ax-spacing-3);
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .navds-form-summary__header {
     padding: var(--ax-spacing-3) var(--ax-spacing-4);
     flex-direction: column;
@@ -35,7 +35,7 @@
   margin: 0;
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .navds-form-summary__answers {
     padding: var(--ax-spacing-4);
   }
@@ -55,7 +55,7 @@
   padding-bottom: 0;
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .navds-form-summary__answer:not(:last-child) {
     margin-bottom: var(--ax-spacing-3);
     padding-bottom: var(--ax-spacing-3);
