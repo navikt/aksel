@@ -5,28 +5,3 @@
 @import "./hgrid.darkside.css";
 @import "./stack.darkside.css";
 @import "./responsive.darkside.css";
-
-/* TODO: Custom override to avoid having to edit react-syntax in Primtives. Remove after fix */
-:root {
-  --a-spacing-1-alt: var(--ax-spacing-1-alt);
-  --a-spacing-05: var(--ax-spacing-05);
-  --a-spacing-32: var(--ax-spacing-32);
-  --a-spacing-24: var(--ax-spacing-24);
-  --a-spacing-20: var(--ax-spacing-20);
-  --a-spacing-18: var(--ax-spacing-18);
-  --a-spacing-16: var(--ax-spacing-16);
-  --a-spacing-14: var(--ax-spacing-14);
-  --a-spacing-12: var(--ax-spacing-12);
-  --a-spacing-11: var(--ax-spacing-11);
-  --a-spacing-10: var(--ax-spacing-10);
-  --a-spacing-9: var(--ax-spacing-9);
-  --a-spacing-8: var(--ax-spacing-8);
-  --a-spacing-7: var(--ax-spacing-7);
-  --a-spacing-6: var(--ax-spacing-6);
-  --a-spacing-5: var(--ax-spacing-5);
-  --a-spacing-4: var(--ax-spacing-4);
-  --a-spacing-3: var(--ax-spacing-3);
-  --a-spacing-2: var(--ax-spacing-2);
-  --a-spacing-1: var(--ax-spacing-1);
-  --a-spacing-0: var(--ax-spacing-0);
-}

@@ -253,7 +253,7 @@ export const BasePrimitive = ({
   gridColumn,
 }: BasePrimitiveProps) => {
   const themeContext = UNSAFE_useAkselTheme();
-  const prefix = themeContext ? "acx" : "ac";
+  const prefix = themeContext ? "axc" : "ac";
 
   const style: React.CSSProperties = {
     /* Padding */
