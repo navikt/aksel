@@ -120,12 +120,12 @@
 /* --------------------------- Search Error-state --------------------------- */
 .navds-search--error .navds-search__input:not(:disabled) {
   border-color: var(--ax-border-danger);
-  box-shadow: inset 0 0 0 1px var(--ax-border-danger);
+  box-shadow:
+    inset -2px 0 0 0 var(--ax-border-danger),
+    inset 0 0 0 1px var(--ax-border-danger);
 
-  &:not(.navds-search__input--simple) {
-    box-shadow:
-      inset -2px 0 0 0 var(--ax-border-danger),
-      inset 0 0 0 1px var(--ax-border-danger);
+  &.navds-search__input--simple {
+    box-shadow: inset 0 0 0 1px var(--ax-border-danger);
   }
 }
 
