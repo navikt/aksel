@@ -158,6 +158,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           icon={<XMarkIcon aria-hidden />}
           title={clearButtonLabel || translate("clear")}
           hidden={!showClearButton}
+          onClick={(event) => handleClear({ trigger: "Click", event })}
         />
       ) : (
         <button
