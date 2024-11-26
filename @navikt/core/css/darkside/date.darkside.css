@@ -181,9 +181,10 @@
   height: fit-content;
   width: fit-content;
 
-  button {
+  .rdp-cell > button {
     &:focus-within {
       outline: 2px solid var(--ax-border-focus);
+      outline-offset: -1px;
     }
   }
 }
