@@ -28,6 +28,7 @@
 
 .navds-modal--polyfilled {
   top: 50%;
+  bottom: unset; /* Overrides inset: 0 from .navds-modal */
   transform: translate(0, -50%);
 
   /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
