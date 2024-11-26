@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 0.125rem;
+  left: 0.0625rem;
   top: 0.0625rem;
 
   .navds-switch__input:checked ~ .navds-switch__track > & {
