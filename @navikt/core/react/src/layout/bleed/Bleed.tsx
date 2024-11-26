@@ -81,8 +81,8 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme();
-    const prefix = themeContext ? "axc" : "ac";
+    const themeContext = UNSAFE_useAkselTheme(false);
+    const prefix = themeContext ? "ax" : "a";
 
     let style: React.CSSProperties = {
       ..._style,

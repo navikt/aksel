@@ -12,13 +12,13 @@ export function getResponsiveValue<T = string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__${prefix}-${componentName}-${componentProp}-xs`]: responsiveProp,
+      [`--__${prefix}c-${componentName}-${componentProp}-xs`]: responsiveProp,
     };
   }
 
   return Object.fromEntries(
     Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
-      `--__${prefix}-${componentName}-${componentProp}-${breakpointAlias}`,
+      `--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`,
       responsiveValue,
     ]),
   );
@@ -38,6 +38,7 @@ const translateTokenStringToCSS = (
   tokenSubgroup: string,
   tokenExceptions: string[],
   invert: boolean,
+  prefix: string,
 ) => {
   return tokenString
     .split(" ")
@@ -55,7 +56,7 @@ const translateTokenStringToCSS = (
         return "auto";
       }
 
-      let output = `var(--a-${tokenSubgroup}-${x})`;
+      let output = `var(--${prefix}-${tokenSubgroup}-${x})`;
       if (tokenExceptions.includes(x)) {
         output = translateExceptionToCSS(x);
       }
@@ -85,13 +86,14 @@ export function getResponsiveProps<T extends string>(
 
   if (typeof responsiveProp === "string") {
     return {
-      [`--__${prefix}-${componentName}-${componentProp}-xs`]:
+      [`--__${prefix}c-${componentName}-${componentProp}-xs`]:
         translateTokenStringToCSS(
           componentProp,
           responsiveProp,
           tokenSubgroup,
           tokenExceptions,
           invert,
+          prefix,
         ),
     };
   }
@@ -99,13 +101,14 @@ export function getResponsiveProps<T extends string>(
   const styleProps = {};
   Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
     styleProps[
-      `--__${prefix}-${componentName}-${componentProp}-${breakpointAlias}`
+      `--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`
     ] = translateTokenStringToCSS(
       componentProp,
       aliasOrScale,
       tokenSubgroup,
       tokenExceptions,
       invert,
+      prefix,
     );
   });
   return styleProps;

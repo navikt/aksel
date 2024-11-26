@@ -78,8 +78,8 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme();
-      const prefix = themeContext ? "axc" : "ac";
+      const themeContext = UNSAFE_useAkselTheme(false);
+      const prefix = themeContext ? "ax" : "a";
 
       const styles: React.CSSProperties = {
         ...style,

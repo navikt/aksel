@@ -100,8 +100,8 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     },
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme();
-    const prefix = themeContext ? "axc" : "ac";
+    const themeContext = UNSAFE_useAkselTheme(false);
+    const prefix = themeContext ? "ax" : "a";
 
     const style: React.CSSProperties = {
       ..._style,
