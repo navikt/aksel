@@ -1,9 +1,17 @@
 .navds-date {
   padding: var(--ax-spacing-4) var(--ax-spacing-3);
 
-  .rdp-day_range_middle.rdp-day_disabled {
-    color: var(--ax-text-default);
-    background: var(--ax-bg-neutral-moderateA);
+  .rdp-day_range_middle {
+    &.rdp-day_disabled {
+      color: var(--ax-text-default);
+      background: var(--ax-bg-neutral-moderateA);
+    }
+
+    &.rdp-day_selected {
+      background-color: var(--ax-bg-accent-moderateA);
+      box-shadow: inset 0 0 0 1px var(--ax-border-accent-subtleA);
+      color: var(--ax-text-default);
+    }
   }
 
   .rdp-month,
@@ -93,13 +101,31 @@
 
   .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
   .navds-date__month-button:where(:not(.rdp-day_selected, [disabled])):hover {
-    background: var(--ax-bg-accent-moderate-hover);
+    background: var(--ax-bg-accent-moderate-hoverA);
     cursor: pointer;
   }
 
   .rdp-day_today {
-    box-shadow: 0 0 0 1px var(--ax-bg-accent-strong-pressed);
-    text-decoration: underline;
+    position: relative;
+
+    &::before {
+      width: 6px;
+      height: 6px;
+      display: block;
+      background-color: var(--ax-text-accent);
+      border-radius: var(--ax-border-radius-full);
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.rdp-day_selected {
+      &::before {
+        background-color: var(--ax-text-accent-contrast);
+      }
+    }
   }
 
   .rdp-day_outside {
