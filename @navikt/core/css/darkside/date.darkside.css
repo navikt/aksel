@@ -141,7 +141,7 @@
 }
 
 .navds-date__caption__year {
-  width: 5rem;
+  width: 5.5rem;
   border: 1px solid var(--ax-border-default);
   border-radius: var(--ax-border-radius-medium);
 }
