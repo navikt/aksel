@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
@@ -251,39 +252,42 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
+  const themeContext = UNSAFE_useAkselTheme();
+  const prefix = themeContext ? "acx" : "ac";
+
   const style: React.CSSProperties = {
     /* Padding */
-    ...getResponsiveProps("r", "p", "spacing", padding),
-    ...getResponsiveProps("r", "pi", "spacing", paddingInline),
-    ...getResponsiveProps("r", "pb", "spacing", paddingBlock),
+    ...getResponsiveProps(prefix, "r", "p", "spacing", padding),
+    ...getResponsiveProps(prefix, "r", "pi", "spacing", paddingInline),
+    ...getResponsiveProps(prefix, "r", "pb", "spacing", paddingBlock),
     /* Margin */
-    ...getResponsiveProps("r", "m", "spacing", margin),
-    ...getResponsiveProps("r", "mi", "spacing", marginInline),
-    ...getResponsiveProps("r", "mb", "spacing", marginBlock),
+    ...getResponsiveProps(prefix, "r", "m", "spacing", margin),
+    ...getResponsiveProps(prefix, "r", "mi", "spacing", marginInline),
+    ...getResponsiveProps(prefix, "r", "mb", "spacing", marginBlock),
     /* Width & height */
-    ...getResponsiveValue("r", "w", width),
-    ...getResponsiveValue("r", "minw", minWidth),
-    ...getResponsiveValue("r", "maxw", maxWidth),
-    ...getResponsiveValue("r", "h", height),
-    ...getResponsiveValue("r", "minh", minHeight),
-    ...getResponsiveValue("r", "maxh", maxHeight),
+    ...getResponsiveValue(prefix, "r", "w", width),
+    ...getResponsiveValue(prefix, "r", "minw", minWidth),
+    ...getResponsiveValue(prefix, "r", "maxw", maxWidth),
+    ...getResponsiveValue(prefix, "r", "h", height),
+    ...getResponsiveValue(prefix, "r", "minh", minHeight),
+    ...getResponsiveValue(prefix, "r", "maxh", maxHeight),
     /* Positon & inset */
-    ...getResponsiveValue("r", "position", position),
-    ...getResponsiveProps("r", "inset", "spacing", inset),
-    ...getResponsiveProps("r", "top", "spacing", top),
-    ...getResponsiveProps("r", "right", "spacing", right),
-    ...getResponsiveProps("r", "bottom", "spacing", bottom),
-    ...getResponsiveProps("r", "left", "spacing", left),
+    ...getResponsiveValue(prefix, "r", "position", position),
+    ...getResponsiveProps(prefix, "r", "inset", "spacing", inset),
+    ...getResponsiveProps(prefix, "r", "top", "spacing", top),
+    ...getResponsiveProps(prefix, "r", "right", "spacing", right),
+    ...getResponsiveProps(prefix, "r", "bottom", "spacing", bottom),
+    ...getResponsiveProps(prefix, "r", "left", "spacing", left),
     /* Overflow */
-    ...getResponsiveValue("r", "overflow", overflow),
-    ...getResponsiveValue("r", "overflowx", overflowX),
-    ...getResponsiveValue("r", "overflowy", overflowY),
+    ...getResponsiveValue(prefix, "r", "overflow", overflow),
+    ...getResponsiveValue(prefix, "r", "overflowx", overflowX),
+    ...getResponsiveValue(prefix, "r", "overflowy", overflowY),
     /* Flex */
-    ...getResponsiveValue("r", "flex-basis", flexBasis),
-    ...getResponsiveValue("r", "flex-grow", flexGrow),
-    ...getResponsiveValue("r", "flex-shrink", flexShrink),
+    ...getResponsiveValue(prefix, "r", "flex-basis", flexBasis),
+    ...getResponsiveValue(prefix, "r", "flex-grow", flexGrow),
+    ...getResponsiveValue(prefix, "r", "flex-shrink", flexShrink),
     /* Grid */
-    ...getResponsiveValue("r", "grid-column", gridColumn),
+    ...getResponsiveValue(prefix, "r", "grid-column", gridColumn),
   };
 
   return (

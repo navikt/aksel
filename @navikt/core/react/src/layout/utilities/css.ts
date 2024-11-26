@@ -1,6 +1,7 @@
 import { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
+  prefix: string,
   componentName: string,
   componentProp: string,
   responsiveProp?: ResponsiveProp<T>,
@@ -70,6 +71,7 @@ const translateTokenStringToCSS = (
 };
 
 export function getResponsiveProps<T extends string>(
+  prefix: string,
   componentName: string,
   componentProp: string,
   tokenSubgroup: string,

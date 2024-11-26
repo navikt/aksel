@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
@@ -77,11 +78,14 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const themeContext = UNSAFE_useAkselTheme();
+      const prefix = themeContext ? "acx" : "ac";
+
       const styles: React.CSSProperties = {
         ...style,
         "--__ac-hgrid-align": align,
-        ...getResponsiveProps(`hgrid`, "gap", "spacing", gap),
-        ...getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
+        ...getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),
+        ...getResponsiveValue(prefix, `hgrid`, "columns", formatGrid(columns)),
       };
 
       const Comp = asChild ? Slot : Component;

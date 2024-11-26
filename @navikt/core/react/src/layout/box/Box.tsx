@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -99,6 +100,9 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     },
     ref,
   ) => {
+    const themeContext = UNSAFE_useAkselTheme();
+    const prefix = themeContext ? "acx" : "ac";
+
     const style: React.CSSProperties = {
       ..._style,
       "--__ac-box-background": background
@@ -115,6 +119,7 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
             .join(" ")
         : undefined,
       ...getResponsiveProps(
+        prefix,
         "box",
         "border-radius",
         "border-radius",
