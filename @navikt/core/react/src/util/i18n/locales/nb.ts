@@ -106,7 +106,7 @@ export default {
     /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
     addOption: "Legg til",
     /** Loader title */
-    searching: "Søker…",
+    loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",
     clear: "Tøm",
     options: "Alternativer",

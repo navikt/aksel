@@ -99,7 +99,7 @@ export default {
   },
   Combobox: {
     addOption: "Add",
-    searching: "Searching…",
+    loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
     clear: "Clear",
     options: "Options",

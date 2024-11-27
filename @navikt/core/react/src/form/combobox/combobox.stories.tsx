@@ -88,9 +88,6 @@ Default.argTypes = {
   clearButtonLabel: {
     control: { type: "text" },
   },
-  toggleListButtonLabel: {
-    control: { type: "text" },
-  },
 };
 
 export const WithPlaceholder: StoryFunction = () => {

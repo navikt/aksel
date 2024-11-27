@@ -157,8 +157,8 @@ export interface ComboboxProps
   toggleListButton?: boolean;
   /**
    * Custom name for the toggle list-button. Requires "toggleListButton" to be `true`.
-   *
    * @default "Alternativer"
+   * @deprecated The name will be removed in a future major release.
    */
   toggleListButtonLabel?: string;
   /**

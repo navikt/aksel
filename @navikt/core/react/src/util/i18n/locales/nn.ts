@@ -99,7 +99,7 @@ export default {
   },
   Combobox: {
     addOption: "Legg til",
-    searching: "Søker…",
+    loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
     clear: "Tøm",
     options: "Alternativ",

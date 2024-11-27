@@ -14,7 +14,7 @@ const LoadingMessage = () => {
       className="navds-combobox__list-item--loading"
       id={filteredOptionsUtil.getIsLoadingId(id)}
     >
-      <Loader title={translate("searching")} />
+      <Loader title={translate("loading")} />
     </div>
   );
 };
