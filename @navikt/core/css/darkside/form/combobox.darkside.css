@@ -247,17 +247,14 @@
   right: 0;
   z-index: 10;
   top: calc(100% + var(--ax-spacing-2));
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-subtleA);
   display: flex;
   flex-direction: column;
   border-radius: var(--ax-border-radius-large);
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-default);
   overscroll-behavior: contain;
-  box-shadow:
-    0 0 1px 0 rgb(7 9 13 / 0.02),
-    0 2px 5px 0 rgb(7 9 13 / 0.1),
-    0 10px 16px 0 rgb(7 9 13 / 0.12);
+  box-shadow: var(--ax-shadow-dialog);
 
   & .navds-combobox__list-options {
     overflow-y: auto;
