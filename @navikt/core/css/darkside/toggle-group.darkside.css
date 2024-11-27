@@ -65,8 +65,8 @@
 }
 
 /* Modifier neutral variant */
-.navds-toggle-group--neutral {
-  & .navds-toggle-group__button:hover {
+.navds-toggle-group--neutral .navds-toggle-group__button {
+  &:hover {
     background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
