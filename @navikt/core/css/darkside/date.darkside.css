@@ -133,7 +133,7 @@
     pointer-events: none;
   }
 
-  .navds-date__modal& {
+  .navds-date__modal & {
     padding: 0;
   }
 
@@ -153,13 +153,7 @@
 .navds-date__caption-button {
   width: 2rem;
   height: 2rem;
-
-  /* TODO: ?? */
-  &,
-  &:disabled,
-  &:hover {
-    color: var(--ax-text-default);
-  }
+  color: var(--ax-text-default);
 }
 
 .navds-date__caption__month .navds-select__container select {
