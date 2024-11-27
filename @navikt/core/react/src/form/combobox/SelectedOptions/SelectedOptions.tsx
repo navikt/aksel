@@ -14,12 +14,6 @@ const Option = ({ option }: { option: ComboboxOption }) => {
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
   const { focusInput, readOnly, inputProps } = useInputContext();
 
-  const onClick = (e) => {
-    e.stopPropagation();
-    removeSelectedOption(option);
-    focusInput();
-  };
-
   if (!isMultiSelect) {
     return (
       <div className="navds-combobox__selected-options--no-bg">
@@ -28,12 +22,24 @@ const Option = ({ option }: { option: ComboboxOption }) => {
     );
   }
 
-  return readOnly || inputProps.disabled ? (
-    <Chips.Toggle variant="neutral" checkmark={false} as="div">
+  if (readOnly || inputProps.disabled) {
+    return (
+      <Chips.Toggle variant="neutral" checkmark={false} as="div">
+        {option.label}
+      </Chips.Toggle>
+    );
+  }
+
+  return (
+    <Chips.Removable
+      onClick={(event) => {
+        event.stopPropagation();
+        removeSelectedOption(option);
+        focusInput();
+      }}
+    >
       {option.label}
-    </Chips.Toggle>
-  ) : (
-    <Chips.Removable onClick={onClick}>{option.label}</Chips.Removable>
+    </Chips.Removable>
   );
 };
 

@@ -97,4 +97,11 @@ export default {
       reset: "Tilbakestill tidsperspektiv",
     },
   },
+  Combobox: {
+    addOption: "Legg til",
+    searching: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valt.",
+    clear: "Tøm",
+    options: "Alternativ",
+  },
 } satisfies Translations;

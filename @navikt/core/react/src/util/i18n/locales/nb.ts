@@ -102,4 +102,13 @@ export default {
       reset: "Tilbakestill tidsperspektiv",
     },
   },
+  Combobox: {
+    /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
+    addOption: "Legg til",
+    /** Loader title */
+    searching: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valgt.",
+    clear: "Tøm",
+    options: "Alternativer",
+  },
 } satisfies TranslationMap;

@@ -97,4 +97,11 @@ export default {
       reset: "Reset zoom",
     },
   },
+  Combobox: {
+    addOption: "Add",
+    searching: "Searching…",
+    maxSelected: "{selected} of max {limit} are selected.",
+    clear: "Clear",
+    options: "Options",
+  },
 } satisfies Translations;

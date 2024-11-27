@@ -38,13 +38,14 @@ const options = [
   "grapefruit",
 ];
 
-export const Default: StoryFn<ComboboxProps & { maxSelected?: number }> = ({
-  maxSelected,
-  ...rest
-}) => (
+export const Default: StoryFn<
+  ComboboxProps & { maxSelected?: number; maxSelectedMessage?: string }
+> = ({ maxSelected, maxSelectedMessage, ...rest }) => (
   <UNSAFE_Combobox
     {...rest}
-    maxSelected={maxSelected && { limit: maxSelected }}
+    maxSelected={
+      maxSelected && { limit: maxSelected, message: maxSelectedMessage }
+    }
     id="combobox"
   />
 );
@@ -76,10 +77,19 @@ Default.argTypes = {
   maxSelected: {
     control: { type: "number" },
   },
+  maxSelectedMessage: {
+    control: { type: "text" },
+  },
   size: {
     options: ["medium", "small"],
     defaultValue: "medium",
     control: { type: "radio" },
+  },
+  clearButtonLabel: {
+    control: { type: "text" },
+  },
+  toggleListButtonLabel: {
+    control: { type: "text" },
   },
 };
 

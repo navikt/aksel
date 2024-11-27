@@ -132,7 +132,8 @@ export interface ComboboxProps
      */
     limit: number;
     /**
-     * Override the message to display when the limit for maximum selected options has been reached
+     * Message to display when the limit for maximum selected options has been reached
+     * @default "{selected} av maks {limit} er valgt."
      */
     message?: string;
   };

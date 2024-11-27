@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
+import { useI18n } from "../../../util/i18n/i18n.context";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import { useInputContext } from "./Input.context";
 
@@ -13,8 +14,14 @@ export const ToggleListButton = forwardRef<
 >(({ toggleListButtonLabel }, ref) => {
   const { isListOpen, toggleIsListOpen } = useFilteredOptionsContext();
   const { focusInput } = useInputContext();
+  const translate = useI18n(
+    "Combobox",
+    toggleListButtonLabel ? { options: toggleListButtonLabel } : undefined,
+  );
+
   return (
     <button
+      ref={ref}
       type="button"
       onPointerUp={() => {
         toggleIsListOpen();
@@ -24,11 +31,9 @@ export const ToggleListButton = forwardRef<
       className="navds-combobox__button-toggle-list"
       aria-expanded={isListOpen}
       tabIndex={-1}
-      ref={ref}
+      aria-hidden
+      title={translate("options")}
     >
-      <span className="navds-sr-only">
-        {toggleListButtonLabel ?? "Alternativer"}
-      </span>
       {isListOpen ? (
         <ChevronUpIcon aria-hidden />
       ) : (
