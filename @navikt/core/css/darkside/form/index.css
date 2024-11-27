@@ -12,6 +12,3 @@
 @import "./combobox.darkside.css";
 @import "./form-summary.darkside.css";
 @import "./form-progress.darkside.css";
-
-/* TODO: remove this extra dot for date (shuffle code location) */
-@import "../date.darkside.css";
