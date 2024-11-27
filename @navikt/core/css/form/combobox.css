@@ -120,11 +120,11 @@
   padding-left: 0.25rem;
 }
 
-.navds-combobox__selected-options--single-select {
+.navds-combobox__selected-options[data-type="single"] {
   gap: 0;
 }
 
-.navds-combobox__selected-options--single-select .navds-combobox__input {
+.navds-combobox__selected-options > li:not(:only-child) > .navds-combobox__input {
   margin-left: 0;
 }
 
