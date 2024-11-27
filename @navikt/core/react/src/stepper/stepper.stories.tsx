@@ -180,7 +180,9 @@ export const CompletedSteps: StoryFn<Story> = () => {
         <Stepper.Step completed={activeStep >= 4}>
           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+        <Stepper.Step completed={activeStep > 5} interactive={false}>
+          Vedlegg
+        </Stepper.Step>
         <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
         <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
       </Stepper>
