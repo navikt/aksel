@@ -98,10 +98,6 @@
 .navds-combobox__selected-options {
   gap: var(--__ac-combobox-wrapper-inner-padding);
   align-items: center;
-
-  &[data-type="single"] {
-    gap: 0;
-  }
 }
 
 .navds-combobox__selected-options > li {
@@ -137,10 +133,6 @@
   min-width: 10ch;
   width: 100%;
   height: var(--__ac-combobox-input-height);
-
-  .navds-combobox__selected-options > li:not(:only-child) > & {
-    margin-left: 0;
-  }
 }
 
 .navds-combobox__input--hide-caret {
