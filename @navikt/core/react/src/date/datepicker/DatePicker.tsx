@@ -5,10 +5,11 @@ import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useDateLocale } from "../../util/i18n/i18n.context";
 import { DateContext } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
-import { getLocaleFromString, labels } from "../utils";
+import { getLocaleFromString } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";
@@ -66,7 +67,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
     {
       children,
-      locale = "nb",
+      locale,
       dropdownCaption,
       disabled = [],
       disableWeekends = false,
@@ -85,6 +86,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     },
     ref,
   ) => {
+    const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
@@ -114,7 +116,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const DatePickerComponent = (
       <DayPicker
-        locale={getLocaleFromString(locale)}
+        locale={locale ? getLocaleFromString(locale) : langProviderLocale}
         mode={mode}
         onSelect={handleSelect}
         selected={selected ?? selectedDates}
@@ -134,7 +136,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }}
         weekStartsOn={1}
         initialFocus={false}
-        labels={labels as any}
         modifiers={{
           weekend: (day) => disableWeekends && isWeekend(day),
         }}
