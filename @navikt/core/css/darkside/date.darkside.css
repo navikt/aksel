@@ -214,12 +214,6 @@
   .navds-form-field--small & {
     padding-right: var(--ax-spacing-8);
   }
-
-  /* Error-handling */
-  .navds-date__field--error &:not(:hover, :disabled) {
-    border-color: var(--ax-border-danger);
-    box-shadow: inset 0 0 0 1px var(--ax-border-danger);
-  }
 }
 
 .navds-date__field-button {
