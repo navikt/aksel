@@ -1,6 +1,7 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
 import React from "react";
-import { Button, useDayPicker } from "react-day-picker";
+import { useDayPicker } from "react-day-picker";
+import { Button } from "../../../button";
 import { labelWeekNumber, labelWeekNumberButton } from "../../utils/labels";
 
 export interface WeekNumberProps {
@@ -49,26 +50,13 @@ function WeekNumber(props: WeekNumberProps): JSX.Element {
     onWeekNumberClick(weekNumber, dates, e);
   };
 
-  if (props?.headerVersion) {
-    return (
-      <Button
-        name="week-number"
-        aria-label={label}
-        className={classNames.weeknumber}
-        style={styles.weeknumber}
-        onClick={handleClick}
-      >
-        {weekNumber}
-      </Button>
-    );
-  }
-
   return (
     <Button
+      variant="secondary-neutral"
       name="week-number"
       aria-label={label}
-      className={classNames.weeknumber}
       style={styles.weeknumber}
+      className="navds-date__weeknumber"
       onClick={handleClick}
     >
       {weekNumber}

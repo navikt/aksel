@@ -29,35 +29,10 @@
     font-size: var(--ax-font-size-small);
   }
 
-  .rdp-weeknumber {
-    font-size: var(--ax-font-size-small);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: var(--ax-border-radius-medium);
-    margin: var(--ax-spacing-2);
-    color: var(--ax-text-subtle);
-  }
-
-  .rdp-weeknumber.rdp-button {
-    width: 2rem;
-    height: 2rem;
-    box-shadow: 0 0 0 1px var(--ax-border-default);
-    color: var(--ax-text-neutral);
-    font-size: var(--ax-font-size-small);
-    line-height: 2.1rem;
-  }
-
-  .rdp-weeknumber.rdp-button:hover {
-    background-color: var(--ax-bg-neutral-moderate-hoverA);
-  }
-
-  .rdp-weeknumber.rdp-button:active {
-    background-color: var(--ax-bg-neutral-strong-pressed);
-    color: var(--ax-text-neutral-contrast);
-    box-shadow: none;
+  .navds-date__weeknumber {
+    width: 20px;
+    height: 20px;
+    padding: var(--ax-spacing-4);
   }
 
   .rdp-button {
@@ -206,14 +181,6 @@
     &:active {
       color: var(--ax-text-accent-contrast);
       background-color: var(--ax-bg-accent-strong-pressed);
-    }
-  }
-
-  .rdp-cell > button.rdp-weeknumber {
-    outline-offset: 2px;
-
-    &:focus-visible {
-      outline: 2px solid var(--ax-border-focus);
     }
   }
 }
