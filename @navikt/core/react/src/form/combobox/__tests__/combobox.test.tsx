@@ -3,6 +3,7 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { useId } from "react";
 import { describe, expect, test, vi } from "vitest";
+import nb from "../../../util/i18n/locales/nb";
 import { ComboboxProps, UNSAFE_Combobox } from "../index";
 
 const options = [
@@ -73,7 +74,9 @@ describe("Render combobox", () => {
     test("Should show loading icon when loading (used for async search)", async () => {
       render(<App options={[]} isListOpen isLoading />);
 
-      expect(await screen.findByText("Søker...")).toBeInTheDocument();
+      expect(
+        await screen.findByText(nb.Combobox.searching),
+      ).toBeInTheDocument();
     });
 
     test("Should not select previous focused element when closes", async () => {
