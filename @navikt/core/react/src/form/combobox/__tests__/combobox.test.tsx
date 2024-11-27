@@ -74,9 +74,7 @@ describe("Render combobox", () => {
     test("Should show loading icon when loading (used for async search)", async () => {
       render(<App options={[]} isListOpen isLoading />);
 
-      expect(
-        await screen.findByText(nb.Combobox.searching),
-      ).toBeInTheDocument();
+      expect(await screen.findByText(nb.Combobox.loading)).toBeInTheDocument();
     });
 
     test("Should not select previous focused element when closes", async () => {
