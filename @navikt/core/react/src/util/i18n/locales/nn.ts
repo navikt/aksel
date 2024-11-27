@@ -122,6 +122,5 @@ export default {
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
     clear: "Tøm",
-    options: "Alternativ",
   },
 } satisfies Translations;

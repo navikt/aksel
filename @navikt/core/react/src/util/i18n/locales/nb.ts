@@ -129,6 +129,5 @@ export default {
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",
     clear: "Tøm",
-    options: "Alternativer",
   },
 } satisfies TranslationMap;

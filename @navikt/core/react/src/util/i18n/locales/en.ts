@@ -122,6 +122,5 @@ export default {
     loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
     clear: "Clear",
-    options: "Options",
   },
 } satisfies Translations;
