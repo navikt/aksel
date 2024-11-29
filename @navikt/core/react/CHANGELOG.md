@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 7.5.3
+
+### Patch Changes
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.3
+  - @navikt/aksel-icons@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.2
+  - @navikt/aksel-icons@7.5.2
+
 ## 7.5.1
 
 ### Patch Changes

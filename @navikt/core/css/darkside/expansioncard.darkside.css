@@ -1,7 +1,7 @@
 .navds-expansioncard {
   --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   --__axc-expansioncard-padding-block: var(--ax-spacing-4);
-  --__axc-expansioncard-padding-inline: var(--ax-spacing-6);
+  --__axc-expansioncard-padding-inline: var(--ax-spacing-5);
 
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
@@ -16,7 +16,6 @@
 
 /* ------------------------ ExpansionCard Small-size ------------------------ */
 .navds-expansioncard--small {
-  --__axc-expansioncard-padding-block: var(--ax-spacing-3);
   --__axc-expansioncard-padding-inline: var(--ax-spacing-4);
 
   & > .navds-expansioncard__header .navds-expansioncard__title--small {
@@ -30,10 +29,6 @@
   & > .navds-expansioncard__header > .navds-expansioncard__header-button {
     min-height: 2rem;
     min-width: 2rem;
-  }
-
-  & .navds-expansioncard__content {
-    --__axc-expansioncard-padding-block: var(--ax-spacing-4);
   }
 }
 
@@ -137,14 +132,13 @@
   transform: rotateX(-180deg);
 }
 
+/* Even if animation always takes 250ms, the perceived effect of current timing function makes the 'closing'-animation take longer */
 .navds-expansioncard__header[data-open="false"] .navds-expansioncard__header-chevron {
-  transition-duration: 0ms;
+  transition-duration: 400ms;
 }
 
 /* -------------------------- ExpansionCard Content ------------------------- */
 .navds-expansioncard__content {
-  --__axc-expansioncard-padding-block: var(--ax-spacing-5);
-
   border-end-end-radius: var(--__axc-expansioncard-border-radius);
   border-end-start-radius: var(--__axc-expansioncard-border-radius);
   padding-inline: var(--__axc-expansioncard-padding-inline);
@@ -154,20 +148,17 @@
   visibility: hidden;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-property: padding-block, grid-template-rows;
+  transition-property: visibility, padding-block, grid-template-rows;
+  overflow: hidden;
 
   &[data-open="true"] {
     grid-template-rows: 1fr;
     visibility: visible;
-    padding-block: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
+    padding-block: var(--__axc-expansioncard-padding-block);
 
     & .navds-expansioncard__content-inner {
       opacity: 1;
     }
-  }
-
-  &[data-open="false"] {
-    transition-duration: 0ms;
   }
 }
 

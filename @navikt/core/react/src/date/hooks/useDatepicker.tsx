@@ -1,6 +1,7 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { DayClickEventHandler, isMatch } from "react-day-picker";
+import { useDateLocale } from "../../util/i18n/i18n.context";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import { DateInputProps } from "../parts/DateInput";
 import {
@@ -130,7 +131,7 @@ export const useDatepicker = (
   opt: UseDatepickerOptions = {},
 ): UseDatepickerValue => {
   const {
-    locale: _locale = "nb",
+    locale: _locale,
     required,
     defaultSelected: _defaultSelected,
     today = new Date(),
@@ -146,7 +147,8 @@ export const useDatepicker = (
   } = opt;
 
   const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
-  const locale = getLocaleFromString(_locale);
+  const localeFromProvider = useDateLocale();
+  const locale = _locale ? getLocaleFromString(_locale) : localeFromProvider;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 

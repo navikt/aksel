@@ -1,5 +1,5 @@
 .navds-error-summary {
-  background-color: var(--ax-bg-raised);
+  background-color: var(--ax-bg-default);
   padding: var(--ax-spacing-5);
   border: 4px solid var(--ax-border-danger);
   border-radius: var(--ax-border-radius-xlarge);
@@ -46,8 +46,4 @@
   gap: var(--ax-spacing-3);
   padding-left: var(--ax-spacing-6);
   list-style: inherit;
-
-  & > * {
-    color: var(--ax-text-accent);
-  }
 }
