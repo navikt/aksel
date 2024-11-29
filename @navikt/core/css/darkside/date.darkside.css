@@ -29,12 +29,6 @@
     font-size: var(--ax-font-size-small);
   }
 
-  .navds-date__weeknumber {
-    width: 20px;
-    height: 20px;
-    padding: var(--ax-spacing-4);
-  }
-
   .rdp-button {
     all: unset;
     display: block;
@@ -231,6 +225,10 @@
   .navds-date__field--readonly & {
     cursor: default;
   }
+
+  &:focus-visible {
+    outline-color: var(--ax-border-focus);
+  }
 }
 
 .navds-date__field-wrapper {
@@ -244,6 +242,19 @@
   display: flex;
   align-items: center;
   gap: var(--ax-spacing-05);
+}
+
+.navds-date__weeknumber {
+  --__axc-button-border-width: 1px;
+}
+
+.navds-date__weeknumber-number {
+  font-size: 0.875rem;
+  color: var(--ax-text-subtle);
+
+  .navds-date__weeknumber:active & {
+    color: var(--ax-text-neutral-contrast);
+  }
 }
 
 .navds-date__week-wrapper {
