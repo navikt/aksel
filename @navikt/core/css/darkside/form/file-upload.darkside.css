@@ -10,7 +10,6 @@
 /* --------------------------- FileUpload Dropzone -------------------------- */
 .navds-dropzone__area {
   --__axc-dropzone-background: var(--ax-bg-input);
-  --__axc-dropzone-padding: var(--ax-spacing-6);
   --__axc-dropzone-icon-padding: var(--ax-spacing-2);
   --__axc-dropzone-animation-length-long: 400ms;
   --__axc-dropzone-animation-length-short: 250ms;
@@ -24,7 +23,7 @@
   flex-direction: column;
   gap: var(--ax-spacing-4);
   text-align: center;
-  padding: var(--__axc-dropzone-padding);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
   border: 1px dashed var(--ax-border-default);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
@@ -104,7 +103,7 @@
 }
 
 .navds-dropzone__area-release {
-  top: var(--__axc-dropzone-padding);
+  top: var(--ax-spacing-4);
   display: grid;
   position: absolute;
   z-index: 1;
@@ -160,7 +159,7 @@
   outline-offset: -1px;
   transition: outline-color 250ms cubic-bezier(0, 0.3, 0.15, 1);
   border-radius: var(--ax-border-radius-xlarge);
-  padding: var(--ax-spacing-3);
+  padding: var(--ax-spacing-3) var(--ax-spacing-4);
   display: flex;
   gap: var(--ax-spacing-3);
   align-items: flex-start;
