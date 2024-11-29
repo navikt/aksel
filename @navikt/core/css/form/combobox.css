@@ -124,8 +124,8 @@
   gap: var(--__ac-combobox-wrapper-inner-padding);
 }
 
-.navds-combobox__selected-options > li:not(:only-child) > .navds-combobox__input {
-  margin-left: 0;
+.navds-combobox__selected-options > li:only-child > .navds-combobox__input {
+  margin-left: var(--a-spacing-1);
 }
 
 .navds-combobox__input-wrapper {
@@ -137,7 +137,6 @@
   border: none;
   padding: 0;
   margin: 0;
-  margin-left: var(--a-spacing-1);
   min-width: 10ch;
   width: 100%;
   height: var(--__ac-combobox-input-height);

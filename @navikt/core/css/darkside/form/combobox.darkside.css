@@ -165,7 +165,6 @@
   border: none;
   padding: 0;
   margin: 0;
-  margin-left: var(--ax-spacing-1);
   min-width: 10ch;
   width: 100%;
   height: var(--__axc-combobox-input-height);
@@ -176,8 +175,8 @@
     border: none;
   }
 
-  .navds-combobox__selected-options > li:not(:only-child) > & {
-    margin-left: 0;
+  .navds-combobox__selected-options > li:only-child > & {
+    margin-left: var(--ax-spacing-1);
   }
 }
 
