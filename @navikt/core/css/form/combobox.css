@@ -96,7 +96,7 @@
 }
 
 .navds-combobox__selected-options {
-  gap: var(--__ac-combobox-wrapper-inner-padding);
+  gap: 0;
   align-items: center;
 }
 
@@ -120,8 +120,8 @@
   padding-left: 0.25rem;
 }
 
-.navds-combobox__selected-options[data-type="single"] {
-  gap: 0;
+.navds-combobox__selected-options[data-type="multiple"] {
+  gap: var(--__ac-combobox-wrapper-inner-padding);
 }
 
 .navds-combobox__selected-options > li:not(:only-child) > .navds-combobox__input {

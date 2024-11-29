@@ -128,7 +128,7 @@
 }
 
 .navds-combobox__selected-options {
-  gap: var(--__axc-combobox-wrapper-inner-padding);
+  gap: 0;
   align-items: center;
 
   & > li {
@@ -141,8 +141,8 @@
     flex: 1;
   }
 
-  &[data-type="single"] {
-    gap: 0;
+  &[data-type="multiple"] {
+    gap: var(--__axc-combobox-wrapper-inner-padding);
   }
 }
 
