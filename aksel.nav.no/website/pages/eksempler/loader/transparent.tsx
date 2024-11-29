@@ -10,5 +10,5 @@ export default withDsExample(Example);
 
 export const args = {
   index: 3,
-  desc: "Prop-en 'transparent' fjerner bakgrunnselementet på Loader.",
+  desc: "Prop-en `transparent` skjuler bakgrunnselementet på Loader.",
 };
