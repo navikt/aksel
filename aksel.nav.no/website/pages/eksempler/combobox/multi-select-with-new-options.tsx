@@ -3,30 +3,28 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <UNSAFE_Combobox
-        allowNewValues
-        label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
-        options={initialOptions}
-        isMultiSelect
-      />
-    </div>
+    <UNSAFE_Combobox
+      allowNewValues
+      label="Hva er dine favorittdrikker? Legg gjerne til flere alternativer."
+      options={initialOptions}
+      isMultiSelect
+    />
   );
 };
 
 const initialOptions = [
-  "tea",
-  "coffee",
-  "hot chocolate",
+  "te",
+  "kaffe",
+  "varm sjokolade",
   "lemonade",
-  "orange juice",
-  "apple juice",
+  "appelsinjuice",
+  "eplejuice",
   "smoothie",
-  "milk",
-  "water",
-  "soda",
-  "beer",
-  "wine",
+  "melk",
+  "vann",
+  "brus",
+  "øl",
+  "vin",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -39,5 +37,5 @@ export const Demo = {
 
 export const args = {
   index: 6,
-  desc: "Ved Multi Select kan brukeren velge flere valg fra nedtrekkslisten.",
+  desc: "Med `allowNewValues` kan brukeren legge til egne verdier som ikke finnes i listen.",
 };
