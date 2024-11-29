@@ -1,7 +1,7 @@
 .navds-alert {
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid;
-  padding: var(--ax-spacing-4);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
   display: flex;
   gap: var(--ax-spacing-3);
   align-items: center;
@@ -25,7 +25,7 @@
 }
 
 .navds-alert--small {
-  padding: var(--ax-spacing-2) var(--ax-spacing-4);
+  padding: var(--ax-spacing-3) var(--ax-spacing-4);
   gap: var(--ax-spacing-2);
 
   > .navds-alert__icon {
