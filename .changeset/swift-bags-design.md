@@ -2,4 +2,4 @@
 "@navikt/aksel-icons": minor
 ---
 
-Icons: Added new icons 'TruckPercent', 'ShieldLock' and 'ShieldCheckmark' 🎉.
+Icons: Added new icons 'TruckPercent' and 'ShieldCheckmark' 🎉.
