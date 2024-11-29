@@ -333,44 +333,56 @@ export const ActionMenuTrigger = forwardRef<
 interface ActionMenuContentProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   children?: React.ReactNode;
+  align?: "start" | "end";
 }
 
 export const ActionMenuContent = forwardRef<
   HTMLDivElement,
   ActionMenuContentProps
->(({ children, className, style, ...rest }: ActionMenuContentProps, ref) => {
-  const context = useActionMenuContext();
+>(
+  (
+    {
+      children,
+      className,
+      style,
+      align = "start",
+      ...rest
+    }: ActionMenuContentProps,
+    ref,
+  ) => {
+    const context = useActionMenuContext();
 
-  return (
-    <Menu.Portal rootElement={context.rootElement} asChild>
-      <Menu.Content
-        ref={ref}
-        id={context.contentId}
-        aria-labelledby={context.triggerId}
-        className={cl("navds-action-menu__content", className)}
-        {...rest}
-        align="start"
-        sideOffset={4}
-        collisionPadding={10}
-        onCloseAutoFocus={() => {
-          context.triggerRef.current?.focus();
-        }}
-        safeZone={{ anchor: context.triggerRef.current }}
-        style={{
-          ...style,
-          ...{
-            "--__ac-action-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--__ac-action-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-          },
-        }}
-      >
-        <div className="navds-action-menu__content-inner">{children}</div>
-      </Menu.Content>
-    </Menu.Portal>
-  );
-});
+    return (
+      <Menu.Portal rootElement={context.rootElement} asChild>
+        <Menu.Content
+          ref={ref}
+          id={context.contentId}
+          aria-labelledby={context.triggerId}
+          className={cl("navds-action-menu__content", className)}
+          {...rest}
+          align={align}
+          sideOffset={4}
+          collisionPadding={10}
+          onCloseAutoFocus={() => {
+            context.triggerRef.current?.focus();
+          }}
+          safeZone={{ anchor: context.triggerRef.current }}
+          style={{
+            ...style,
+            ...{
+              "--__ac-action-menu-content-transform-origin":
+                "var(--ac-floating-transform-origin)",
+              "--__ac-action-menu-content-available-height":
+                "var(--ac-floating-available-height)",
+            },
+          }}
+        >
+          <div className="navds-action-menu__content-inner">{children}</div>
+        </Menu.Content>
+      </Menu.Portal>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              ActionMenuLabel                               */
@@ -977,11 +989,11 @@ ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
 
 export type {
-  ActionMenuItemProps,
   ActionMenuCheckboxItemProps,
   ActionMenuContentProps,
   ActionMenuDividerProps,
   ActionMenuGroupProps,
+  ActionMenuItemProps,
   ActionMenuLabelProps,
   ActionMenuProps,
   ActionMenuRadioGroupProps,
