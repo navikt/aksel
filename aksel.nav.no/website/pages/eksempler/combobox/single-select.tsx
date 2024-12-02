@@ -3,28 +3,24 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er din favorittfrukt?"
-        options={initialOptions}
-      />
-    </div>
+    <UNSAFE_Combobox label="Hva er din favorittfrukt?" options={options} />
   );
 };
 
-const initialOptions = [
-  "banana",
-  "apple",
-  "tangerine",
-  "pear",
-  "grape",
+const options = [
+  "ananas",
+  "banan",
+  "bringebær",
+  "drue",
+  "eple",
+  "grapefrukt",
+  "jordbær",
   "kiwi",
+  "mandarin",
   "mango",
-  "passion fruit",
-  "pineapple",
-  "strawberry",
-  "watermelon",
-  "grape fruit",
+  "pære",
+  "pasjonsfrukt",
+  "vannmelon",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
