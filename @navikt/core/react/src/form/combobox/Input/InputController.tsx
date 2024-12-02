@@ -31,7 +31,6 @@ export const InputController = forwardRef<
     clearButton = true,
     clearButtonLabel,
     toggleListButton = true,
-    toggleListButtonLabel,
     inputClassName,
     shouldShowSelectedOptions = true,
     ...rest
@@ -89,23 +88,16 @@ export const InputController = forwardRef<
       )}
       <div>
         {value && clearButton && (
-          <button
-            type="button"
+          <div
             onClick={clearInput}
             className="navds-combobox__button-clear"
-            tabIndex={-1}
             aria-hidden
             title={translate("clear")}
           >
-            <XMarkIcon aria-hidden />
-          </button>
+            <XMarkIcon />
+          </div>
         )}
-        {toggleListButton && (
-          <ToggleListButton
-            toggleListButtonLabel={toggleListButtonLabel}
-            ref={toggleOpenButtonRef}
-          />
-        )}
+        {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
       </div>
     </div>
   );

@@ -156,11 +156,6 @@ export interface ComboboxProps
    */
   toggleListButton?: boolean;
   /**
-   * Custom name for the toggle list-button. Requires "toggleListButton" to be `true`.
-   * @deprecated The name will be removed in a future major release.
-   */
-  toggleListButtonLabel?: string;
-  /**
    * Set this to override the value of the input field.
    *
    * This converts the input to a controlled input, so you have to use onChange to update the value.
