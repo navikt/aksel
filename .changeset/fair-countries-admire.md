@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-InternalHeader: Remove redundant `title` in UserButton
+InternalHeader.UserButton: Remove `title` on icon and fix types
