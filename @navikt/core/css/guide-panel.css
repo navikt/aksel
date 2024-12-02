@@ -5,6 +5,10 @@
   padding-top: calc(var(--__ac-guide-panel-guide-size) / 2);
 }
 
+.navds-guide-panel .navds-guide-panel__arrow {
+  display: none;
+}
+
 .navds-guide {
   background: var(--ac-guide-panel-illustration-bg, var(--a-surface-alt-3-subtle));
   border: 2px solid var(--ac-guide-panel-border, var(--a-border-alt-3));
