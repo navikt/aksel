@@ -135,17 +135,6 @@
   text-transform: capitalize;
 }
 
-.navds-date__caption__year {
-  width: 5.5rem;
-  border: 1px solid var(--ax-border-default);
-  border-radius: var(--ax-border-radius-medium);
-}
-
-.navds-date__caption__month {
-  border: 1px solid var(--ax-border-default);
-  border-radius: var(--ax-border-radius-medium);
-}
-
 /* Monthpicker */
 .navds-date__month-button {
   all: unset;
@@ -174,7 +163,7 @@
       outline-offset: 1px;
     }
 
-    &:active {
+    &:active:not(:disabled) {
       color: var(--ax-text-accent-contrast);
       background-color: var(--ax-bg-accent-strong-pressed);
     }
