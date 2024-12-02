@@ -1,8 +1,6 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-export function semanticTokenConfig(
-  theme: ColorTheme,
-): StyleDictionaryTokenConfig<"color"> {
+export function semanticTokenConfig(theme: ColorTheme) {
   return {
     text: {
       default: {
@@ -99,5 +97,5 @@ export function semanticTokenConfig(
         scopes: ["EFFECT_COLOR"],
       },
     },
-  };
+  } satisfies StyleDictionaryTokenConfig<"color">;
 }

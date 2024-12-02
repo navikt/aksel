@@ -1,6 +1,5 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -11,13 +10,12 @@ import BasePrimitive, {
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  BackgroundColorToken,
-  BorderColorToken,
   BorderRadiiToken,
+  DarksideBgTokens,
+  DarksideBorderTokens,
+  DarksideShadowTokens,
   ResponsiveProp,
-  ShadowToken,
   SpaceDelimitedAttribute,
-  SurfaceColorToken,
 } from "../utilities/types";
 
 export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -25,12 +23,12 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    */
-  background?: BackgroundColorToken | SurfaceColorToken;
+  background?: DarksideBgTokens;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    */
-  borderColor?: BorderColorToken;
+  borderColor?: DarksideBorderTokens;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -52,7 +50,7 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * @example
    * shadow='small'
    */
-  shadow?: ShadowToken;
+  shadow?: DarksideShadowTokens;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
@@ -83,7 +81,7 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
  *  </Box>
  * </VStack>
  */
-export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
+export const Box2: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
   (
     {
       children,
@@ -100,26 +98,18 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
     },
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
-
-    if (process.env.NODE_ENV !== "production" && themeContext) {
-      console.warn(
-        "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box2>'",
-      );
-    }
-
-    const prefix = "a";
+    const prefix = "ax";
 
     const style: React.CSSProperties = {
       ..._style,
       [`--__${prefix}-box-background`]: background
-        ? `var(--a-${background})`
+        ? `var(--a-bg-${background})`
         : undefined,
       [`--__${prefix}-box-shadow`]: shadow
         ? `var(--a-shadow-${shadow})`
         : undefined,
       [`--__${prefix}-box-border-color`]: borderColor
-        ? `var(--a-${borderColor})`
+        ? `var(--a-border-${borderColor})`
         : undefined,
       [`--__${prefix}-box-border-width`]: borderWidth
         ? borderWidth
@@ -161,4 +151,4 @@ export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
   },
 );
 
-export default Box;
+export default Box2;

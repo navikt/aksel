@@ -1,8 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { OverridableComponent } from "../../util";
-import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {
@@ -11,12 +9,6 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * @default "div"
    */
   as?: "div" | "body";
-  /**
-   * Background color.
-   * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
-   * @default "bg-default"
-   */
-  background?: BackgroundColorToken;
   /**
    * Allows better positioning of footer
    */
@@ -43,40 +35,18 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       {
         as: Component = "div",
         className,
-        style: _style,
         footer,
         children,
         footerPosition,
-        background = "bg-default",
         contentBlockPadding = "end",
         ...rest
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme(false);
-
-      if (process.env.NODE_ENV !== "production" && themeContext) {
-        console.warn(
-          "Page can not be used with AkselTheme (darkmode-support). Migrate to '<Page2>'",
-        );
-      }
-
-      const prefix = "a";
-
-      const style: React.CSSProperties = {
-        ..._style,
-        [`--__${prefix}-page-background`]: `var(--a-${background})`,
-      };
-
       const belowFold = footerPosition === "belowFold";
 
       return (
-        <Component
-          {...rest}
-          className={cl("navds-page", className)}
-          ref={ref}
-          style={style}
-        >
+        <Component {...rest} className={cl("navds-page", className)} ref={ref}>
           <div
             className={cl({
               "navds-page__content--fullheight": belowFold,
@@ -120,8 +90,8 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
  * </Page>
  * ```
  */
-const Page = PageComponent as PageComponentType;
+const Page2 = PageComponent as PageComponentType;
 
-Page.Block = PageBlock;
+Page2.Block = PageBlock;
 
-export default Page;
+export default Page2;

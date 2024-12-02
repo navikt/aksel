@@ -3,9 +3,6 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100lvh;
-
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background-color: var(--__axc-page-background);
 }
 
 /* Page.Block */
@@ -27,11 +24,11 @@
 }
 
 .navds-page__content--padding {
-  padding-block-end: var(--a-spacing-16);
+  padding-block-end: var(--ax-spacing-16);
 }
 
 .navds-pageblock--text {
-  max-width: calc(var(--a-text-width-max) + var(--__axc-page-padding-inline) + var(--__axc-page-padding-inline));
+  max-width: calc(576px + var(--__axc-page-padding-inline) + var(--__axc-page-padding-inline));
 }
 
 .navds-pageblock--md {
