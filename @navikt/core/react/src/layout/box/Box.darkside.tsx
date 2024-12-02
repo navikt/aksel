@@ -55,6 +55,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   PrimitiveAsChildProps;
 
 /**
+ *
  * Foundational Layout-primitive for generic encapsulation & styling.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
