@@ -111,24 +111,24 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
 
       if (process.env.NODE_ENV !== "production" && themeContext) {
         console.warn(
-          "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box2>'",
+          "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box.New>'",
         );
       }
 
-      const prefix = "a";
+      const prefix = themeContext ? "ax" : "a";
 
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}-box-background`]: background
+        [`--__${prefix}c-box-background`]: background
           ? `var(--a-${background})`
           : undefined,
-        [`--__${prefix}-box-shadow`]: shadow
+        [`--__${prefix}c-box-shadow`]: shadow
           ? `var(--a-shadow-${shadow})`
           : undefined,
-        [`--__${prefix}-box-border-color`]: borderColor
+        [`--__${prefix}c-box-border-color`]: borderColor
           ? `var(--a-${borderColor})`
           : undefined,
-        [`--__${prefix}-box-border-width`]: borderWidth
+        [`--__${prefix}c-box-border-width`]: borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)

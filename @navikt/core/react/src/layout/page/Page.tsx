@@ -56,9 +56,9 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
     ) => {
       const themeContext = UNSAFE_useAkselTheme(false);
 
-      if (process.env.NODE_ENV !== "production" && themeContext) {
+      if (process.env.NODE_ENV !== "production" && themeContext && background) {
         console.warn(
-          "Page can not be used with AkselTheme (darkmode-support). Migrate to '<Page2>'",
+          `Prop \`background\` is deprecated for use with theme-support. Instead wrap component with \`<Box asChild background>\``,
         );
       }
 
@@ -66,7 +66,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
 
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}-page-background`]: `var(--a-${background})`,
+        [`--__${prefix}c-page-background`]: `var(--a-${background})`,
       };
 
       const belowFold = footerPosition === "belowFold";

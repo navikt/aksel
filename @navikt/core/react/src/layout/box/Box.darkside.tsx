@@ -103,16 +103,16 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
 
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}-box-background`]: background
-          ? `var(--a-bg-${background})`
+        [`--__${prefix}c-box-background`]: background
+          ? `var(--ax-bg-${background})`
           : undefined,
-        [`--__${prefix}-box-shadow`]: shadow
-          ? `var(--a-shadow-${shadow})`
+        [`--__${prefix}c-box-shadow`]: shadow
+          ? `var(--ax-shadow-${shadow})`
           : undefined,
-        [`--__${prefix}-box-border-color`]: borderColor
-          ? `var(--a-border-${borderColor})`
+        [`--__${prefix}c-box-border-color`]: borderColor
+          ? `var(--ax-border-${borderColor})`
           : undefined,
-        [`--__${prefix}-box-border-width`]: borderWidth
+        [`--__${prefix}c-box-border-width`]: borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)
