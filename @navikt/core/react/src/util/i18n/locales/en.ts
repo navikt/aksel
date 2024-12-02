@@ -117,4 +117,10 @@ export default {
     closeDatePicker: "Close date picker",
     closeMonthPicker: "Close month picker",
   },
+  Combobox: {
+    addOption: "Add",
+    loading: "Searching…",
+    maxSelected: "{selected} of max {limit} are selected.",
+    clear: "Clear",
+  },
 } satisfies Translations;

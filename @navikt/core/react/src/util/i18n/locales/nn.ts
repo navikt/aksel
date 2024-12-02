@@ -117,4 +117,10 @@ export default {
     closeDatePicker: "Lukk datoveljar",
     closeMonthPicker: "Lukk månadsveljar",
   },
+  Combobox: {
+    addOption: "Legg til",
+    loading: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valt.",
+    clear: "Tøm",
+  },
 } satisfies Translations;

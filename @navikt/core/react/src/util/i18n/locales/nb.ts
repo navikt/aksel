@@ -122,4 +122,12 @@ export default {
     closeDatePicker: "Lukk datovelger",
     closeMonthPicker: "Lukk månedsvelger",
   },
+  Combobox: {
+    /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
+    addOption: "Legg til",
+    /** Loader title */
+    loading: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valgt.",
+    clear: "Tøm",
+  },
 } satisfies TranslationMap;

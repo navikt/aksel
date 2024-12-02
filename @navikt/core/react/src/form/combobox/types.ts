@@ -132,7 +132,8 @@ export interface ComboboxProps
      */
     limit: number;
     /**
-     * Override the message to display when the limit for maximum selected options has been reached
+     * Message to display when the limit for maximum selected options has been reached
+     * @default "{selected} av maks {limit} er valgt."
      */
     message?: string;
   };
@@ -154,12 +155,6 @@ export interface ComboboxProps
    * @default true
    */
   toggleListButton?: boolean;
-  /**
-   * Custom name for the toggle list-button. Requires "toggleListButton" to be `true`.
-   *
-   * @default "Alternativer"
-   */
-  toggleListButtonLabel?: string;
   /**
    * Set this to override the value of the input field.
    *
