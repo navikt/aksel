@@ -402,6 +402,38 @@ export const AsChild = () => (
   </VStack>
 );
 
+export const BoxNewDarksideLight: Story = {
+  render: () => (
+    <Box.New
+      background="accent-moderate"
+      shadow="dialog"
+      borderColor="brandOne-strong"
+      borderWidth="2"
+      padding="5"
+      paddingInline="20"
+    >
+      Box
+    </Box.New>
+  ),
+  globals: { theme: "light", mode: "darkside" },
+};
+
+export const BoxNewDarksideDark: Story = {
+  render: () => (
+    <Box.New
+      background="accent-moderate"
+      shadow="dialog"
+      borderColor="brandOne-strong"
+      borderWidth="2"
+      padding="5"
+      paddingInline="20"
+    >
+      Box
+    </Box.New>
+  ),
+  globals: { theme: "dark", mode: "darkside" },
+};
+
 export const Chromatic: Story = {
   render: () => (
     <VStack gap="2">

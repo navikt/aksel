@@ -35,7 +35,7 @@ type BorderKeysT =
   | `${GlobalColorRoles}-subtleA`
   | `${GlobalColorRoles}-strong`;
 
-type ConfigT<T extends TokenTypes> = {
+export type SemanticTokensForAllRolesConfigT<T extends TokenTypes> = {
   bg: {
     [k in BgKeysT]: Record<string, StyleDictionaryToken<T>>;
   };
@@ -170,5 +170,5 @@ const configForRole = (role: GlobalColorRoles, theme: ColorTheme) => {
 export const semanticTokensForAllRolesConfig = (theme: ColorTheme) =>
   globalColorRoles.reduce(
     (acc, role) => _.merge(acc, configForRole(role, theme)),
-    {} as ConfigT<"color">,
+    {} as ReturnType<typeof configForRole>,
   );
