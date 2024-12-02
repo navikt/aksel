@@ -323,7 +323,7 @@
   border: none;
 }
 
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .navds-date {
     padding: var(--a-spacing-5) var(--a-spacing-4);
   }
