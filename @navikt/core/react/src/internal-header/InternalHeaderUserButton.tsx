@@ -6,7 +6,7 @@ import { OverridableComponent } from "../util/types";
 import InternalHeaderButton from "./InternalHeaderButton";
 
 export interface InternalHeaderUserButtonProps
-  extends React.AnchorHTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * User name
    */
@@ -33,7 +33,7 @@ export const InternalHeaderUserButton: OverridableComponent<
       </BodyShort>
       {description && <Detail as="div">{description}</Detail>}
     </div>
-    <ChevronDownIcon title="vis meny" />
+    <ChevronDownIcon aria-hidden />
   </InternalHeaderButton>
 ));
 

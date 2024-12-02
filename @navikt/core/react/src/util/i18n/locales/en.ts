@@ -123,4 +123,10 @@ export default {
     maxSelected: "{selected} of max {limit} are selected.",
     clear: "Clear",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustration of advisor",
+  },
+  HelpText: {
+    title: "Help",
+  },
 } satisfies Translations;

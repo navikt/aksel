@@ -123,4 +123,10 @@ export default {
     maxSelected: "{selected} av maks {limit} er valt.",
     clear: "Tøm",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustrasjon av rettleiar",
+  },
+  HelpText: {
+    title: "Hjelp",
+  },
 } satisfies Translations;
