@@ -19,6 +19,7 @@ import {
   SpaceDelimitedAttribute,
   SurfaceColorToken,
 } from "../utilities/types";
+import BoxNew from "./Box.darkside";
 
 export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
@@ -56,6 +57,11 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
+interface BoxComponentType
+  extends OverridableComponent<BoxProps, HTMLDivElement> {
+  New: typeof BoxNew;
+}
+
 /**
  * Foundational Layout-primitive for generic encapsulation & styling.
  *
@@ -83,82 +89,87 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
  *  </Box>
  * </VStack>
  */
-export const Box: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
-  (
-    {
-      children,
-      className,
-      as: Component = "div",
-      background,
-      borderColor,
-      borderWidth,
-      borderRadius,
-      shadow,
-      style: _style,
-      asChild,
-      ...rest
-    },
-    ref,
-  ) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
-
-    if (process.env.NODE_ENV !== "production" && themeContext) {
-      console.warn(
-        "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box2>'",
-      );
-    }
-
-    const prefix = "a";
-
-    const style: React.CSSProperties = {
-      ..._style,
-      [`--__${prefix}-box-background`]: background
-        ? `var(--a-${background})`
-        : undefined,
-      [`--__${prefix}-box-shadow`]: shadow
-        ? `var(--a-shadow-${shadow})`
-        : undefined,
-      [`--__${prefix}-box-border-color`]: borderColor
-        ? `var(--a-${borderColor})`
-        : undefined,
-      [`--__${prefix}-box-border-width`]: borderWidth
-        ? borderWidth
-            .split(" ")
-            .map((x) => `${x}px`)
-            .join(" ")
-        : undefined,
-      ...getResponsiveProps(
-        prefix,
-        "box",
-        "border-radius",
-        "border-radius",
+export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        children,
+        className,
+        as: Component = "div",
+        background,
+        borderColor,
+        borderWidth,
         borderRadius,
-        false,
-        ["0"],
-      ),
-    };
+        shadow,
+        style: _style,
+        asChild,
+        ...rest
+      },
+      ref,
+    ) => {
+      const themeContext = UNSAFE_useAkselTheme(false);
 
-    const Comp = asChild ? Slot : Component;
+      if (process.env.NODE_ENV !== "production" && themeContext) {
+        console.warn(
+          "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box2>'",
+        );
+      }
 
-    return (
-      <BasePrimitive {...rest}>
-        <Comp
-          {...omit(rest, PRIMITIVE_PROPS)}
-          ref={ref}
-          style={style}
-          className={cl("navds-box", className, {
-            "navds-box-bg": background,
-            "navds-box-border-color": borderColor,
-            "navds-box-border-width": borderWidth,
-            "navds-box-border-radius": borderRadius,
-            "navds-box-shadow": shadow,
-          })}
-        >
-          {children}
-        </Comp>
-      </BasePrimitive>
-    );
-  },
-);
+      const prefix = "a";
+
+      const style: React.CSSProperties = {
+        ..._style,
+        [`--__${prefix}-box-background`]: background
+          ? `var(--a-${background})`
+          : undefined,
+        [`--__${prefix}-box-shadow`]: shadow
+          ? `var(--a-shadow-${shadow})`
+          : undefined,
+        [`--__${prefix}-box-border-color`]: borderColor
+          ? `var(--a-${borderColor})`
+          : undefined,
+        [`--__${prefix}-box-border-width`]: borderWidth
+          ? borderWidth
+              .split(" ")
+              .map((x) => `${x}px`)
+              .join(" ")
+          : undefined,
+        ...getResponsiveProps(
+          prefix,
+          "box",
+          "border-radius",
+          "border-radius",
+          borderRadius,
+          false,
+          ["0"],
+        ),
+      };
+
+      const Comp = asChild ? Slot : Component;
+
+      return (
+        <BasePrimitive {...rest}>
+          <Comp
+            {...omit(rest, PRIMITIVE_PROPS)}
+            ref={ref}
+            style={style}
+            className={cl("navds-box", className, {
+              "navds-box-bg": background,
+              "navds-box-border-color": borderColor,
+              "navds-box-border-width": borderWidth,
+              "navds-box-border-radius": borderRadius,
+              "navds-box-shadow": shadow,
+            })}
+          >
+            {children}
+          </Comp>
+        </BasePrimitive>
+      );
+    },
+  );
+
+export const Box = BoxComponent as BoxComponentType;
+
+Box.New = BoxNew;
 
 export default Box;

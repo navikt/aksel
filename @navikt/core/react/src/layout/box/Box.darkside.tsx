@@ -18,7 +18,7 @@ import {
   SpaceDelimitedAttribute,
 } from "../utilities/types";
 
-export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
+export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
@@ -81,74 +81,75 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
  *  </Box>
  * </VStack>
  */
-export const Box2: OverridableComponent<BoxProps, HTMLDivElement> = forwardRef(
-  (
-    {
-      children,
-      className,
-      as: Component = "div",
-      background,
-      borderColor,
-      borderWidth,
-      borderRadius,
-      shadow,
-      style: _style,
-      asChild,
-      ...rest
-    },
-    ref,
-  ) => {
-    const prefix = "ax";
-
-    const style: React.CSSProperties = {
-      ..._style,
-      [`--__${prefix}-box-background`]: background
-        ? `var(--a-bg-${background})`
-        : undefined,
-      [`--__${prefix}-box-shadow`]: shadow
-        ? `var(--a-shadow-${shadow})`
-        : undefined,
-      [`--__${prefix}-box-border-color`]: borderColor
-        ? `var(--a-border-${borderColor})`
-        : undefined,
-      [`--__${prefix}-box-border-width`]: borderWidth
-        ? borderWidth
-            .split(" ")
-            .map((x) => `${x}px`)
-            .join(" ")
-        : undefined,
-      ...getResponsiveProps(
-        prefix,
-        "box",
-        "border-radius",
-        "border-radius",
+export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        children,
+        className,
+        as: Component = "div",
+        background,
+        borderColor,
+        borderWidth,
         borderRadius,
-        false,
-        ["0"],
-      ),
-    };
+        shadow,
+        style: _style,
+        asChild,
+        ...rest
+      },
+      ref,
+    ) => {
+      const prefix = "ax";
 
-    const Comp = asChild ? Slot : Component;
+      const style: React.CSSProperties = {
+        ..._style,
+        [`--__${prefix}-box-background`]: background
+          ? `var(--a-bg-${background})`
+          : undefined,
+        [`--__${prefix}-box-shadow`]: shadow
+          ? `var(--a-shadow-${shadow})`
+          : undefined,
+        [`--__${prefix}-box-border-color`]: borderColor
+          ? `var(--a-border-${borderColor})`
+          : undefined,
+        [`--__${prefix}-box-border-width`]: borderWidth
+          ? borderWidth
+              .split(" ")
+              .map((x) => `${x}px`)
+              .join(" ")
+          : undefined,
+        ...getResponsiveProps(
+          prefix,
+          "box",
+          "border-radius",
+          "border-radius",
+          borderRadius,
+          false,
+          ["0"],
+        ),
+      };
 
-    return (
-      <BasePrimitive {...rest}>
-        <Comp
-          {...omit(rest, PRIMITIVE_PROPS)}
-          ref={ref}
-          style={style}
-          className={cl("navds-box", className, {
-            "navds-box-bg": background,
-            "navds-box-border-color": borderColor,
-            "navds-box-border-width": borderWidth,
-            "navds-box-border-radius": borderRadius,
-            "navds-box-shadow": shadow,
-          })}
-        >
-          {children}
-        </Comp>
-      </BasePrimitive>
-    );
-  },
-);
+      const Comp = asChild ? Slot : Component;
 
-export default Box2;
+      return (
+        <BasePrimitive {...rest}>
+          <Comp
+            {...omit(rest, PRIMITIVE_PROPS)}
+            ref={ref}
+            style={style}
+            className={cl("navds-box", className, {
+              "navds-box-bg": background,
+              "navds-box-border-color": borderColor,
+              "navds-box-border-width": borderWidth,
+              "navds-box-border-radius": borderRadius,
+              "navds-box-shadow": shadow,
+            })}
+          >
+            {children}
+          </Comp>
+        </BasePrimitive>
+      );
+    },
+  );
+
+export default BoxNew;
