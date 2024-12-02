@@ -407,7 +407,7 @@ export const BoxNewDarksideLight: Story = {
     <Box.New
       background="accent-moderate"
       shadow="dialog"
-      borderColor="brandOne-strong"
+      borderColor="brand-one-strong"
       borderWidth="2"
       padding="5"
       paddingInline="20"
@@ -423,7 +423,7 @@ export const BoxNewDarksideDark: Story = {
     <Box.New
       background="accent-moderate"
       shadow="dialog"
-      borderColor="brandOne-strong"
+      borderColor="brand-one-strong"
       borderWidth="2"
       padding="5"
       paddingInline="20"
