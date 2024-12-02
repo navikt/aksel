@@ -1,85 +1,58 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
-import cl from "clsx";
 import React from "react";
-import { Button as RDPButton, useDayPicker } from "react-day-picker";
+import { useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
-import { UNSAFE_useAkselTheme } from "../../../provider";
-import { labelWeekNumber, labelWeekNumberButton } from "../../utils/labels";
+import { useI18n } from "../../../util/i18n/i18n.context";
+import { getTranslations } from "../../utils";
 
 export interface WeekNumberProps {
   /** The number of the week. */
   number: number;
   /** The dates in the week. */
   dates: Date[];
-  headerVersion?: boolean;
 }
 
 /**
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/WeekNumber
  */
-function WeekNumber(props: WeekNumberProps): JSX.Element {
-  const themeContext = UNSAFE_useAkselTheme(false);
-  const { number: weekNumber, dates } = props;
+function WeekNumber({
+  number: weekNumber,
+  dates,
+}: WeekNumberProps): JSX.Element {
   const {
     onWeekNumberClick,
     styles,
     classNames,
     locale: { code },
   } = useDayPicker();
-
-  const weekLabel = labelWeekNumber({
-    week: Number(weekNumber),
-    localeCode: code,
-  });
+  const translate = useI18n("DatePicker", getTranslations(code));
 
   if (!onWeekNumberClick) {
     return (
       <span
-        className={cl(classNames.weeknumber, "navds-date__weeknumber-number")}
+        className={classNames.weeknumber}
         style={styles.weeknumber}
-        aria-label={weekLabel}
+        aria-label={translate("weekNumber", { week: weekNumber })}
       >
         {weekNumber}
       </span>
     );
   }
 
-  const label = labelWeekNumberButton({
-    week: Number(weekNumber),
-    localeCode: code,
-  });
-
-  const handleClick: React.MouseEventHandler = function (e) {
-    onWeekNumberClick(weekNumber, dates, e);
-  };
-
-  if (themeContext) {
-    return (
-      <Button
-        variant="secondary-neutral"
-        name="week-number"
-        aria-label={label}
-        style={styles.weeknumber}
-        className="navds-date__weeknumber"
-        onClick={handleClick}
-        size="small"
-        icon={
-          <span className="navds-date__weeknumber-number">{weekNumber}</span>
-        }
-      />
-    );
-  }
-
   return (
-    <RDPButton
+    <Button
       name="week-number"
-      aria-label={label}
-      style={styles.weeknumber}
+      aria-label={translate("selectWeekNumber", { week: weekNumber })}
       className={classNames.weeknumber}
-      onClick={handleClick}
+      style={styles.weeknumber}
+      onClick={(event) => {
+        onWeekNumberClick(weekNumber, dates, event);
+      }}
+      variant="secondary-neutral"
+      size="small"
     >
       {weekNumber}
-    </RDPButton>
+    </Button>
   );
 }
 

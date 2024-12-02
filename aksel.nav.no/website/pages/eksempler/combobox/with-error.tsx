@@ -3,29 +3,28 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er din favorittfrukt?"
-        options={initialOptions}
-        error="Du må velge en favorittfrukt."
-      />
-    </div>
+    <UNSAFE_Combobox
+      label="Hva er din favorittfrukt?"
+      options={options}
+      error="Du må velge en favorittfrukt."
+    />
   );
 };
 
-const initialOptions = [
-  "banana",
-  "apple",
-  "tangerine",
-  "pear",
-  "grape",
+const options = [
+  "ananas",
+  "banan",
+  "bringebær",
+  "drue",
+  "eple",
+  "grapefrukt",
+  "jordbær",
   "kiwi",
+  "mandarin",
   "mango",
-  "passion fruit",
-  "pineapple",
-  "strawberry",
-  "watermelon",
-  "grape fruit",
+  "pære",
+  "pasjonsfrukt",
+  "vannmelon",
 ];
 
 // EXAMPLES DO NOT INCLUDE CONTENT BELOW THIS LINE
@@ -38,5 +37,4 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "Ved Single Select velger brukeren kun ett valg fra nedtrekkslisten.",
 };

@@ -3,6 +3,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { useMergeRefs } from "../../../util/hooks";
+import { useI18n } from "../../../util/i18n/i18n.context";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -11,7 +12,6 @@ import Input from "./Input";
 import { useInputContext } from "./Input.context";
 import ToggleListButton from "./ToggleListButton";
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 export const InputController = forwardRef<
   HTMLInputElement,
   Omit<
@@ -31,7 +31,6 @@ export const InputController = forwardRef<
     clearButton = true,
     clearButtonLabel,
     toggleListButton = true,
-    toggleListButtonLabel,
     inputClassName,
     shouldShowSelectedOptions = true,
     ...rest
@@ -53,7 +52,13 @@ export const InputController = forwardRef<
 
   const mergedInputRef = useMergeRefs(inputRef, ref);
 
+  const translate = useI18n(
+    "Combobox",
+    clearButtonLabel ? { clear: clearButtonLabel } : undefined,
+  );
+
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       className={cl("navds-combobox__wrapper-inner navds-text-field__input", {
         "navds-combobox__wrapper-inner--virtually-unfocused":
@@ -83,24 +88,16 @@ export const InputController = forwardRef<
       )}
       <div>
         {value && clearButton && (
-          <button
-            type="button"
+          <div
             onClick={clearInput}
             className="navds-combobox__button-clear"
-            tabIndex={-1}
+            aria-hidden
+            title={translate("clear")}
           >
-            <span className="navds-sr-only">
-              {clearButtonLabel ? clearButtonLabel : "Tøm"}
-            </span>
-            <XMarkIcon aria-hidden />
-          </button>
+            <XMarkIcon />
+          </div>
         )}
-        {toggleListButton && (
-          <ToggleListButton
-            toggleListButtonLabel={toggleListButtonLabel}
-            ref={toggleOpenButtonRef}
-          />
-        )}
+        {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
       </div>
     </div>
   );

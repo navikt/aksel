@@ -233,17 +233,9 @@
   gap: var(--ax-spacing-05);
 }
 
-.navds-date__weeknumber {
-  --__axc-button-border-width: 1px;
-}
-
-.navds-date__weeknumber-number {
-  font-size: 0.875rem;
-  color: var(--ax-text-subtle);
-
-  .navds-date__weeknumber:active & {
-    color: var(--ax-text-neutral-contrast);
-  }
+.navds-button.rdp-weeknumber {
+  width: 20px;
+  height: 20px;
 }
 
 .navds-date__week-wrapper {
