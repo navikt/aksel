@@ -121,3 +121,107 @@
     }
   }
 }
+
+.navds-guide-panel-nosvg {
+  --__axc-guide-panel-guide-size: 4rem;
+  --__axc-guide-panel-guide-padding-top: calc((var(--__axc-guide-panel-guide-size) + 1rem) + var(--ax-spacing-05));
+  --__axc-guide-panel-arrow-width: 20px;
+  --__axc-guide-panel-arrow-height: 33px;
+
+  position: relative;
+  padding-top: var(--__axc-guide-panel-guide-padding-top);
+
+  .navds-guide {
+    background: var(--ax-bg-info-moderate);
+    border: 2px solid var(--ax-border-info);
+    border-radius: var(--ax-border-radius-full);
+    overflow: hidden;
+    position: absolute;
+    width: var(--__axc-guide-panel-guide-size);
+    height: var(--__axc-guide-panel-guide-size);
+    left: 50%;
+    transform: translate(-50%, calc(-1 * var(--__axc-guide-panel-guide-padding-top)));
+
+    svg,
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .navds-guide-panel__content {
+    position: relative;
+    background-color: var(--ax-bg-raised);
+    border: 2px solid var(--ax-border-info);
+    border-radius: var(--ax-border-radius-xlarge);
+    padding-block: var(--ax-spacing-3);
+    padding-inline: var(--ax-spacing-4);
+
+    .arrow-container {
+      --border-color: var(--ax-border-info);
+
+      position: absolute;
+      height: 50px;
+      width: calc(7px + 27px);
+      top: calc(50px * -1);
+      left: calc(50% - 20px);
+      background: transparent;
+      overflow: hidden;
+
+      .arrow-node-1 {
+        position: absolute;
+        height: 26px;
+        width: 7px;
+        overflow: hidden;
+        top: calc(100% - 26px);
+
+        &::before {
+          content: "";
+          position: absolute;
+          border-top-left-radius: 50px;
+          border: solid var(--border-color);
+          border-width: 2px 0 0 2px;
+          width: 50px;
+          height: 26px;
+          background: var(--ax-bg-raised);
+        }
+      }
+
+      .arrow-node-2 {
+        position: absolute;
+        left: 7px;
+        height: 18px;
+        top: calc(100% - 18px);
+        width: 27px;
+        overflow: hidden;
+        background: var(--ax-bg-raised);
+
+        &::before {
+          content: "";
+          position: absolute;
+          border-bottom-left-radius: 30px;
+          border: solid var(--border-color);
+          border-width: 0 0 2px 2px;
+          width: 50px;
+          height: 20px;
+          bottom: 0;
+          left: -1px;
+          transform: rotateZ(0);
+          background: var(--ax-bg-default);
+        }
+      }
+
+      &::after {
+        display: block;
+        content: "";
+        width: 100%;
+        height: calc(100% + 2px);
+        background: transparent;
+      }
+    }
+  }
+
+  .navds-guide-panel__arrow {
+    display: none;
+  }
+}

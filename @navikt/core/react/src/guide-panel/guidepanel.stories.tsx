@@ -31,14 +31,17 @@ export const Default: StoryObj<{ poster?: boolean; colorOverride?: boolean }> =
         : {};
 
       return (
-        <GuidePanel style={style} poster={props?.poster}>
-          {panelText}
-        </GuidePanel>
+        <VStack gap="2">
+          <GuidePanel style={style} poster={props?.poster}>
+            {panelText}
+          </GuidePanel>
+          <GuidePanel noSVG>{panelText}</GuidePanel>
+        </VStack>
       );
     },
 
     args: {
-      poster: false,
+      poster: undefined,
       colorOverride: false,
     },
   };

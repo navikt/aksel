@@ -17,6 +17,8 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
    * @default true on mobile (<480px)
    */
   poster?: boolean;
+
+  noSVG?: boolean;
 }
 
 /**
@@ -35,7 +37,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  * ```
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
-  ({ children, className, illustration, poster, ...rest }, ref) => {
+  ({ children, className, illustration, poster, noSVG, ...rest }, ref) => {
     let layout: "responsive" | "poster" | "not-poster";
     if (poster === undefined) {
       layout = "responsive";
@@ -49,13 +51,20 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         {...rest}
         ref={ref}
         data-layout={layout}
-        className={cl("navds-guide-panel", className)}
+        className={cl(
+          noSVG ? "navds-guide-panel-nosvg" : "navds-guide-panel",
+          className,
+        )}
       >
         <div className="navds-guide">
           {illustration ?? <DefaultIllustration />}
         </div>
         <div className="navds-guide-panel__content">
           <SpeechBubbleArrow />
+          <div className="arrow-container">
+            <div className="arrow-node-1" />
+            <div className="arrow-node-2" />
+          </div>
           {children}
         </div>
       </div>
