@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
+import { useDateLocale } from "../../util/i18n/i18n.context";
 import { DateContext, SharedMonthProvider } from "../context";
 import { MonthPickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
@@ -67,7 +68,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       id,
       onClose,
       onOpenToggle,
-      locale = "nb",
+      locale,
       onMonthSelect,
       className,
       wrapperClassName,
@@ -78,6 +79,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     },
     ref,
   ) => {
+    const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
@@ -130,7 +132,9 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           >
             <DayPickerProvider
               initialProps={{
-                locale: getLocaleFromString(locale),
+                locale: locale
+                  ? getLocaleFromString(locale)
+                  : langProviderLocale,
                 selected: selected ?? selectedMonth,
                 toDate,
                 fromDate,

@@ -4,8 +4,8 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
-import { getMonths, getYears } from "../../utils/get-dates";
-import { labelMonthDropdown, labelYearDropdown } from "../../utils/labels";
+import { useI18n } from "../../../util/i18n/i18n.context";
+import { getMonths, getTranslations, getYears } from "../../utils";
 import WeekRow from "./WeekRow";
 
 /**
@@ -17,9 +17,9 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
     fromDate,
     toDate,
     formatters: { formatYearCaption, formatMonthCaption, formatCaption },
-    labels: { labelPrevious, labelNext },
     locale,
   } = useDayPicker();
+  const translate = useI18n("DatePicker", getTranslations(locale.code));
 
   if (!fromDate || !toDate) {
     console.warn("Using dropdownCaption required fromDate and toDate");
@@ -44,11 +44,6 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   ).reverse();
   const months = getMonths(fromDate, toDate, displayMonth);
 
-  const previousLabel = labelPrevious(previousMonth, { locale });
-  const nextLabel = labelNext(nextMonth, { locale });
-  const yearDropdownLabel = labelYearDropdown(locale);
-  const MonthDropdownLabel = labelMonthDropdown(locale);
-
   return (
     <>
       <div className="navds-date__caption">
@@ -64,14 +59,14 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
           variant="tertiary"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
-          icon={<ArrowLeftIcon title={previousLabel} />}
+          icon={<ArrowLeftIcon title={translate("goToPreviousMonth")} />}
           className="navds-date__caption-button"
           type="button"
         />
 
         <div className="navds-date__caption">
           <Select
-            label={MonthDropdownLabel}
+            label={translate("month")}
             hideLabel
             className="navds-date__caption__month"
             value={displayMonth.getMonth()}
@@ -84,7 +79,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
             ))}
           </Select>
           <Select
-            label={yearDropdownLabel}
+            label={translate("year")}
             hideLabel
             value={displayMonth.getFullYear()}
             onChange={handleYearChange}
@@ -99,7 +94,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         </div>
 
         <Button
-          icon={<ArrowRightIcon title={nextLabel} />}
+          icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
           variant="tertiary"

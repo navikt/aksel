@@ -21,12 +21,6 @@
   max-width: min(65ch, calc(100vw - var(--ax-spacing-6)));
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info);
-  box-shadow:
-    0 0 1px 0 rgba(7 9 13/ 0.15),
-    0 1px 3px 0 rgba(7 9 13/ 0.1),
-    0 5px 12px 0 rgba(7 9 13/ 0.13),
-    0 0.5px 0 0 rgba(255 255 255/ 0) inset,
-    0 0 1px 0 rgba(255 255 255/ 0) inset;
 }
 
 .navds-help-text__icon--filled {

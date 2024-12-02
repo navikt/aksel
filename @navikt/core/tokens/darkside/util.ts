@@ -50,6 +50,7 @@ type GlobalColorScale =
 
 export type TokenTypes =
   | "color"
+  | "shadow"
   | "global-color"
   | "global-radius"
   | "global-spacing"
@@ -88,6 +89,11 @@ export type StyleDictionaryToken<T extends TokenTypes> = {
    * Token will include all default scopes based on `type`, and any extra specified here.
    */
   scopes?: VariableScope[];
+  /**
+   * In some cases, we want to hide tokens from the Figma plugin.
+   * Currently only relevant for shadow-tokens.
+   */
+  figmaIgnore?: boolean;
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
