@@ -65,7 +65,7 @@
 }
 
 /* Modifier neutral variant */
-.navds-toggle-group--neutral .navds-toggle-group__button {
+:where(.navds-toggle-group--neutral) .navds-toggle-group__button {
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
@@ -94,21 +94,17 @@
     border: 2px solid transparent;
   }
 
+  .navds-toggle-group__button[aria-checked="true"]:hover,
   .navds-toggle-group__button:hover {
+    background-color: highlighttext;
     color: highlight;
+    outline: 1px solid highlight;
   }
 
   .navds-toggle-group__button[aria-checked="true"] {
     background-color: selecteditem;
     color: selecteditemtext;
-
-    > * {
-      forced-color-adjust: none;
-    }
-  }
-
-  .navds-toggle-group__button:active {
-    background-color: unset !important;
+    forced-color-adjust: none;
   }
 
   .navds-toggle-group__button:focus-visible {
