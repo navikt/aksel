@@ -10,7 +10,7 @@
 @import "./typography.darkside.css" layer(aksel.typography);
 
 /* --------------------------------- Theming -------------------------------- */
-@import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
+@import "../../tokens/dist/darkside/tokens.css" layer(aksel.theme);
 @import "./baseline/theme.darkside.css" layer(aksel.theme);
 
 /* TODO: Remove this reference after stack is updated with darkside support */
