@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { BorderKeys } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -11,10 +12,11 @@ import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
   BorderRadiiToken,
-  DarksideBgTokens,
-  DarksideBorderTokens,
-  DarksideShadowTokens,
   ResponsiveProp,
+  SemanticRoleBgDarkside,
+  SemanticShadowTokens,
+  SemanticStaticBgDarkside,
+  SemanticStaticBorderDarkside,
   SpaceDelimitedAttribute,
 } from "../utilities/types";
 
@@ -23,12 +25,12 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    */
-  background?: DarksideBgTokens;
+  background?: SemanticStaticBgDarkside | SemanticRoleBgDarkside;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    */
-  borderColor?: DarksideBorderTokens;
+  borderColor?: BorderKeys | SemanticStaticBorderDarkside;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -50,7 +52,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * @example
    * shadow='small'
    */
-  shadow?: DarksideShadowTokens;
+  shadow?: SemanticShadowTokens;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 

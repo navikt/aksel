@@ -37,28 +37,17 @@ export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
 /**
  * Darkside tokens
  */
-export type DarksideShadowTokens = keyof ReturnType<
+export type SemanticShadowTokens = keyof ReturnType<
   typeof shadowTokenConfig
 >["shadow"];
 
-type SemanticStaticBgDarkside = keyof ReturnType<
+export type SemanticStaticBgDarkside = keyof ReturnType<
   typeof semanticTokenConfig
 >["bg"];
 
-type SemanticRoleBgDarkside =
+export type SemanticRoleBgDarkside =
   keyof SemanticTokensForAllRolesConfigT<"color">["bg"];
-
-export type DarksideBgTokens =
-  | SemanticStaticBgDarkside
-  | SemanticRoleBgDarkside;
 
 export type SemanticStaticBorderDarkside = keyof ReturnType<
   typeof semanticTokenConfig
 >["border"];
-
-export type SemanticRoleBorderDarkside =
-  keyof SemanticTokensForAllRolesConfigT<"color">["border"];
-
-export type DarksideBorderTokens =
-  | SemanticStaticBorderDarkside
-  | SemanticRoleBorderDarkside;

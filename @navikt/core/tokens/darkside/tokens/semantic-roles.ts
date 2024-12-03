@@ -8,7 +8,7 @@ import {
   globalColorRoles,
 } from "../util";
 
-type BgKeys =
+export type BgKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-hover`
   | `${GlobalColorRoles}-hoverA`
@@ -24,12 +24,12 @@ type BgKeys =
   | `${GlobalColorRoles}-raised`
   | `${GlobalColorRoles}-raised-hover`;
 
-type TextKeys =
+export type TextKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-strong`
   | `${GlobalColorRoles}-icon`;
 
-type BorderKeys =
+export type BorderKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-subtle`
   | `${GlobalColorRoles}-subtleA`
