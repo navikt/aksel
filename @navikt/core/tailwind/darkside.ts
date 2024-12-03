@@ -46,6 +46,7 @@ const config = {
       "2xl": breakpointsTokenConfig.breakpoint["2xl"].value,
     },
     extend: {
+      shadow: extractTokensForCategory("shadow"),
       spacing: extractTokensForCategory("spacing"),
       fontWeight: extractTokensForCategory("font-weight"),
       fontSize: extractTokensForCategory("font-size"),
