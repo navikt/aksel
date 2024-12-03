@@ -3,7 +3,7 @@ import fs from "fs";
 import { Features, browserslistToTargets, bundle } from "lightningcss";
 
 console.log(
-  browserslist(">= 0.3% in NO, safari >= 15.4, iOS >= 15.4, not dead"),
+  browserslist(">= 0.4% in NO, safari >= 15.4, iOS >= 15.4, not dead"),
 );
 const { code } = bundle({
   filename: `./index.css`,
@@ -12,7 +12,7 @@ const { code } = bundle({
     Features.Nesting | Features.MediaRangeSyntax | Features.HexAlphaColors,
 
   targets: browserslistToTargets(
-    browserslist(">= 0.3% in NO, safari >= 15.4, iOS >= 15.4, not dead"),
+    browserslist(">= 0.4% in NO, safari >= 15.4, iOS >= 15.4, not dead"),
   ),
 });
 
