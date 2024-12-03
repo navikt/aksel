@@ -34,20 +34,6 @@ type FixedResponsiveT<T> = {
 
 export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
 
-/* Darkside update */
-/* Border overlap */
-/* default */
-/* focus */
-/* strong */
-/* subtle */
-/* info */
-/* danger */
-/* warning */
-/* success */
-
-/* Bg overlap */
-/* bg-default */
-
 /**
  * Darkside tokens
  */
