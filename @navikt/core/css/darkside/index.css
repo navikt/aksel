@@ -31,6 +31,7 @@
 @import "./alert.darkside.css" layer(aksel.components);
 @import "./chat.darkside.css" layer(aksel.components);
 @import "./copybutton.darkside.css" layer(aksel.components);
+@import "./date.darkside.css" layer(aksel.components);
 @import "./dropdown.darkside.css" layer(aksel.components);
 @import "./action-menu.darkside.css" layer(aksel.components);
 @import "./expansioncard.darkside.css" layer(aksel.components);
@@ -55,7 +56,6 @@
 @import "./table.darkside.css" layer(aksel.components);
 @import "./tabs.darkside.css" layer(aksel.components);
 @import "./list.darkside.css" layer(aksel.components);
-@import "./date.darkside.css" layer(aksel.components);
 
 /* --------------------------------- Layout --------------------------------- */
 @import "./primitives/index.css" layer(aksel.layout);
