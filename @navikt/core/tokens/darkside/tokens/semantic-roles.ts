@@ -8,7 +8,7 @@ import {
   globalColorRoles,
 } from "../util";
 
-type BgKeysT =
+type BgKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-hover`
   | `${GlobalColorRoles}-hoverA`
@@ -24,12 +24,12 @@ type BgKeysT =
   | `${GlobalColorRoles}-raised`
   | `${GlobalColorRoles}-raised-hover`;
 
-type TextKeysT =
+type TextKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-strong`
   | `${GlobalColorRoles}-icon`;
 
-type BorderKeysT =
+type BorderKeys =
   | GlobalColorRoles
   | `${GlobalColorRoles}-subtle`
   | `${GlobalColorRoles}-subtleA`
@@ -37,13 +37,13 @@ type BorderKeysT =
 
 export type SemanticTokensForAllRolesConfigT<T extends TokenTypes> = {
   bg: {
-    [k in BgKeysT]: Record<string, StyleDictionaryToken<T>>;
+    [k in BgKeys]: Record<string, StyleDictionaryToken<T>>;
   };
   text: {
-    [k in TextKeysT]: Record<string, StyleDictionaryToken<T>>;
+    [k in TextKeys]: Record<string, StyleDictionaryToken<T>>;
   };
   border: {
-    [k in BorderKeysT]: Record<string, StyleDictionaryToken<T>>;
+    [k in BorderKeys]: Record<string, StyleDictionaryToken<T>>;
   };
 };
 
