@@ -105,6 +105,21 @@ export const ErrorVariants = () => (
   </div>
 );
 
+export const Disabled = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search disabled label="Søk" />
+      <Search disabled label="Søk" variant="secondary" />
+      <Search disabled label="Søk" variant="simple" />
+    </div>
+    <div className="colgap">
+      <Search disabled error="errormsg" label="Søk" />
+      <Search disabled error="errormsg" label="Søk" variant="secondary" />
+      <Search disabled error="errormsg" label="Søk" variant="simple" />
+    </div>
+  </div>
+);
+
 export const Placeholder = () => (
   <div className="rowgap">
     <div className="colgap">
@@ -209,6 +224,10 @@ export const Chromatic: Story = {
       <div>
         <h2>ErrorVariants</h2>
         <ErrorVariants />
+      </div>
+      <div>
+        <h2>Disabled</h2>
+        <Disabled />
       </div>
       <div>
         <h2>Placeholder</h2>
