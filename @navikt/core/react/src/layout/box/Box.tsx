@@ -111,7 +111,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
 
       if (process.env.NODE_ENV !== "production" && themeContext) {
         console.warn(
-          "Box can not be used with AkselTheme (darkmode-support). Migrate to '<Box.New>'",
+          "Box cannot be used with AkselTheme (darkmode-support). Migrate to '<Box.New>'",
         );
       }
 
