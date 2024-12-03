@@ -100,27 +100,23 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const prefix = "ax";
-
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}c-box-background`]: background
+        "--__axc-box-background": background
           ? `var(--ax-bg-${background})`
           : undefined,
-        [`--__${prefix}c-box-shadow`]: shadow
-          ? `var(--ax-shadow-${shadow})`
-          : undefined,
-        [`--__${prefix}c-box-border-color`]: borderColor
+        "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+        "--__axc-box-border-color": borderColor
           ? `var(--ax-border-${borderColor})`
           : undefined,
-        [`--__${prefix}c-box-border-width`]: borderWidth
+        "--__axc-box-border-width": borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
         ...getResponsiveProps(
-          prefix,
+          "ax",
           "box",
           "border-radius",
           "border-radius",

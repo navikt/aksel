@@ -62,11 +62,9 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         );
       }
 
-      const prefix = "a";
-
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}c-page-background`]: `var(--a-${background})`,
+        "--__ac-page-background": `var(--a-${background})`,
       };
 
       const belowFold = footerPosition === "belowFold";
