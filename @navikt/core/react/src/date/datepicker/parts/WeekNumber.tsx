@@ -1,7 +1,9 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
 import React from "react";
-import { useDayPicker } from "react-day-picker";
+import { Button as RDPButton, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
+import { UNSAFE_useAkselTheme } from "../../../provider";
+import { Detail } from "../../../typography";
 import { useI18n } from "../../../util/i18n/i18n.context";
 import { getTranslations } from "../../utils";
 
@@ -25,34 +27,54 @@ function WeekNumber({
     classNames,
     locale: { code },
   } = useDayPicker();
+  const themeContext = UNSAFE_useAkselTheme(false);
   const translate = useI18n("DatePicker", getTranslations(code));
 
   if (!onWeekNumberClick) {
     return (
-      <span
+      <Detail
+        as="span"
+        textColor="subtle"
         className={classNames.weeknumber}
         style={styles.weeknumber}
         aria-label={translate("weekNumber", { week: weekNumber })}
       >
         {weekNumber}
-      </span>
+      </Detail>
+    );
+  }
+
+  if (themeContext) {
+    return (
+      <Button
+        variant="secondary-neutral"
+        size="small"
+        name="week-number"
+        aria-label={translate("selectWeekNumber", { week: weekNumber })}
+        style={styles.weeknumber}
+        className="navds-date__weeknumber"
+        onClick={(event) => {
+          onWeekNumberClick(weekNumber, dates, event);
+        }}
+        icon={
+          <span className="navds-date__weeknumber-number">{weekNumber}</span>
+        }
+      />
     );
   }
 
   return (
-    <Button
+    <RDPButton
       name="week-number"
       aria-label={translate("selectWeekNumber", { week: weekNumber })}
-      className={classNames.weeknumber}
       style={styles.weeknumber}
+      className={classNames.weeknumber}
       onClick={(event) => {
         onWeekNumberClick(weekNumber, dates, event);
       }}
-      variant="secondary-neutral"
-      size="small"
     >
       {weekNumber}
-    </Button>
+    </RDPButton>
   );
 }
 
