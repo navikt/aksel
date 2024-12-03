@@ -58,7 +58,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
 
       if (process.env.NODE_ENV !== "production" && themeContext && background) {
         console.warn(
-          `Prop \`background\` is deprecated for use with theme-support. Instead wrap component with \`<Box asChild background>\``,
+          `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
         );
       }
 
