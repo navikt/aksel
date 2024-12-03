@@ -92,16 +92,16 @@
   &:is(:disabled, .navds-button--disabled) {
     background-color: var(--ax-bg-accent-strong);
   }
-}
 
-@media (forced-colors: active) {
-  .navds-button.navds-button--primary {
-    background-color: highlight;
-    color: highlighttext;
-  }
+  @media (forced-colors: active) {
+    &:not(:disabled) {
+      background-color: highlight;
+      color: highlighttext;
+    }
 
-  .navds-button.navds-button--primary span {
-    forced-color-adjust: none;
+    & span {
+      forced-color-adjust: none;
+    }
   }
 }
 
@@ -287,14 +287,14 @@
     background-color: ButtonFace;
   }
 
-  .navds-button:hover {
+  .navds-button:not(:disabled):hover {
     background-color: highlighttext;
     border-color: highlight;
     color: highlight;
     box-shadow: none;
   }
 
-  .navds-button:hover span {
+  .navds-button:not(:disabled):hover span {
     forced-color-adjust: none;
   }
 
