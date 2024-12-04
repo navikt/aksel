@@ -130,4 +130,10 @@ export default {
     maxSelected: "{selected} av maks {limit} er valgt.",
     clear: "Tøm",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustrasjon av veileder",
+  },
+  HelpText: {
+    title: "Mer informasjon",
+  },
 } satisfies TranslationMap;
