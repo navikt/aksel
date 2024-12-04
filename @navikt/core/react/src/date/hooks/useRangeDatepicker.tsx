@@ -5,6 +5,7 @@ import {
 } from "date-fns";
 import React, { useState } from "react";
 import { DateRange, isMatch } from "react-day-picker";
+import { useDateLocale } from "../../util/i18n/i18n.context";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import { DateInputProps } from "../parts/DateInput";
 import {
@@ -220,7 +221,7 @@ export const useRangeDatepicker = (
   opt: UseRangeDatepickerOptions = {},
 ): UseRangeDatepickerValue => {
   const {
-    locale: _locale = "nb",
+    locale: _locale,
     defaultSelected: _defaultSelected,
     today = new Date(),
     fromDate,
@@ -236,7 +237,8 @@ export const useRangeDatepicker = (
 
   const [anchorRef, setAnchorRef] = useState<HTMLButtonElement | null>(null);
 
-  const locale = getLocaleFromString(_locale);
+  const localeFromProvider = useDateLocale();
+  const locale = _locale ? getLocaleFromString(_locale) : localeFromProvider;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 

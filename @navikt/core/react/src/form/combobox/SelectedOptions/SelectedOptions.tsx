@@ -14,12 +14,6 @@ const Option = ({ option }: { option: ComboboxOption }) => {
   const { isMultiSelect, removeSelectedOption } = useSelectedOptionsContext();
   const { focusInput, readOnly, inputProps } = useInputContext();
 
-  const onClick = (e) => {
-    e.stopPropagation();
-    removeSelectedOption(option);
-    focusInput();
-  };
-
   if (!isMultiSelect) {
     return (
       <div className="navds-combobox__selected-options--no-bg">
@@ -28,12 +22,24 @@ const Option = ({ option }: { option: ComboboxOption }) => {
     );
   }
 
-  return readOnly || inputProps.disabled ? (
-    <Chips.Toggle variant="neutral" checkmark={false} as="div">
+  if (readOnly || inputProps.disabled) {
+    return (
+      <Chips.Toggle variant="neutral" checkmark={false} as="div">
+        {option.label}
+      </Chips.Toggle>
+    );
+  }
+
+  return (
+    <Chips.Removable
+      onClick={(event) => {
+        event.stopPropagation();
+        removeSelectedOption(option);
+        focusInput();
+      }}
+    >
       {option.label}
-    </Chips.Toggle>
-  ) : (
-    <Chips.Removable onClick={onClick}>{option.label}</Chips.Removable>
+    </Chips.Removable>
   );
 };
 
@@ -45,7 +51,11 @@ const SelectedOptions: React.FC<SelectedOptionsProps> = ({
   const { value } = useInputContext();
   const { isMultiSelect } = useSelectedOptionsContext();
   return (
-    <Chips className="navds-combobox__selected-options" size={size}>
+    <Chips
+      className="navds-combobox__selected-options"
+      size={size}
+      data-type={isMultiSelect ? "multiple" : "single"}
+    >
       {value.length === 0 || (isMultiSelect && selectedOptions.length)
         ? selectedOptions.map((option, i) => (
             <Option key={option.label + i} option={option} />

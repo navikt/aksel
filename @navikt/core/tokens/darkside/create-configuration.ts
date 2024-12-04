@@ -7,6 +7,7 @@ import {
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
+import { shadowTokenConfig } from "./tokens/shadow";
 import { spacingTokenConfig } from "./tokens/spacing";
 import { textContrastTokenConfig } from "./tokens/text-contrast";
 import { mergeConfigs, tokensWithPrefix } from "./util";
@@ -23,6 +24,7 @@ export const lightModeTokens = () => {
       semanticTokensForAllRolesConfig("light"),
       textContrastTokenConfig(),
       semanticTokenConfig("light"),
+      shadowTokenConfig("light"),
       globalColorLightModeConfig,
     ]),
   );
@@ -38,6 +40,7 @@ export const darkModeTokens = () => {
       semanticTokensForAllRolesConfig("dark"),
       textContrastTokenConfig(),
       semanticTokenConfig("dark"),
+      shadowTokenConfig("dark"),
       globalColorDarkModeConfig,
     ]),
   );

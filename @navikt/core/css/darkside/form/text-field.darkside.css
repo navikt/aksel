@@ -25,7 +25,7 @@
   }
 
   &::placeholder {
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral);
   }
 
   &[size] {
@@ -38,7 +38,7 @@
   min-height: 2rem;
 }
 
-.navds-text-field--error > .navds-text-field__input:not(:hover, :disabled) {
+.navds-text-field--error .navds-text-field__input:not(:disabled) {
   border-color: var(--ax-border-danger);
   box-shadow: 0 0 0 1px var(--ax-border-danger);
 }

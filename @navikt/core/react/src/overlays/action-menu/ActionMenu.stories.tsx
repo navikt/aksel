@@ -560,6 +560,48 @@ export const Links: Story = {
   decorators: [DemoDecorator],
 };
 
+export const Align: Story = {
+  render: (props) => {
+    return (
+      <HStack gap="24">
+        <ActionMenu open={props.open}>
+          <ActionMenu.Trigger>
+            <button>Start</button>
+          </ActionMenu.Trigger>
+          <ActionMenu.Content align="start">
+            <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+              Item 2
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+              Item 3
+            </ActionMenu.Item>
+          </ActionMenu.Content>
+        </ActionMenu>
+        <ActionMenu open={props.open}>
+          <ActionMenu.Trigger>
+            <button>End</button>
+          </ActionMenu.Trigger>
+          <ActionMenu.Content align="end">
+            <ActionMenu.Item onSelect={() => console.log("Item 1 clicked")}>
+              Item 1
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 2 clicked")}>
+              Item 2
+            </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => console.log("Item 3 clicked")}>
+              Item 3
+            </ActionMenu.Item>
+          </ActionMenu.Content>
+        </ActionMenu>
+      </HStack>
+    );
+  },
+  decorators: [DemoDecorator],
+};
+
 export const Chromatic: Story = {
   render: (args, context) => {
     const newArgs = { ...args, open: true };
@@ -608,6 +650,10 @@ export const Chromatic: Story = {
             {Disabled.render?.(newArgs, context)}
           </div>
         </HStack>
+        <div style={{ marginBottom: "10rem" }}>
+          <h2>Align</h2>
+          {Align.render?.(newArgs, context)}
+        </div>
       </VStack>
     );
   },

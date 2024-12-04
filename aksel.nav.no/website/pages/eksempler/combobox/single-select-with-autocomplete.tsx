@@ -3,17 +3,15 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <div>
-      <UNSAFE_Combobox
-        label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
-        options={initialOptions}
-        shouldAutocomplete={true}
-      />
-    </div>
+    <UNSAFE_Combobox
+      label="Hva er den aller kuleste Star Wars-filmen noensinne, helt objektivt?"
+      options={options}
+      shouldAutocomplete
+    />
   );
 };
 
-const initialOptions = [
+const options = [
   "A New Hope",
   "The Empire Strikes Back",
   "Return of the Jedi",
@@ -37,5 +35,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
-  desc: "Ved Single Select velger brukeren ett valg fra listen. Med autocomplete foreslås et valg fra listen som matcher det brukeren skriver.",
+  desc: "Med `shouldAutocomplete` foreslås et valg fra listen som matcher det brukeren skriver.",
 };
