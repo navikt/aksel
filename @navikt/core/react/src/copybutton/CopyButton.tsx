@@ -136,7 +136,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
               <CheckmarkIcon
                 aria-hidden={!!text}
                 title={
-                  text ? undefined : activeTitle ?? translate("activeTitle")
+                  text ? undefined : activeTitle ?? translate("activeText")
                 }
               />
             )

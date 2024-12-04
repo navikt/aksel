@@ -52,7 +52,6 @@ export default {
   CopyButton: {
     title: "Kopier",
     activeText: "Kopiert!",
-    activeTitle: "Kopiert",
   },
   ErrorSummary: {
     heading: "Du må rette disse feilene før du kan fortsette:",

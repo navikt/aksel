@@ -48,7 +48,6 @@ export default {
   CopyButton: {
     title: "Copy",
     activeText: "Copied!",
-    activeTitle: "Copied",
   },
   ErrorSummary: {
     heading: "You must correct the following errors before you can continue:",
