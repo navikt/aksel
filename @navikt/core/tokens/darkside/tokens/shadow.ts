@@ -1,8 +1,6 @@
 import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
 
-export function shadowTokenConfig(
-  theme: ColorTheme,
-): StyleDictionaryTokenConfig<"shadow"> {
+export function shadowTokenConfig(theme: ColorTheme) {
   return {
     shadow: {
       dialog: {
@@ -15,5 +13,5 @@ export function shadowTokenConfig(
         figmaIgnore: true,
       },
     },
-  };
+  } satisfies StyleDictionaryTokenConfig<"shadow">;
 }

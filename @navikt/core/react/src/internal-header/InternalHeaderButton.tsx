@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/types";
 
 export interface InternalHeaderButtonProps
-  extends React.AnchorHTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Application Button
    */
