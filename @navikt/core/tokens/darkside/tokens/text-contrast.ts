@@ -39,31 +39,31 @@ export const textContrastTokenConfig = (): {
       group: "text.warning",
     },
     /* Brand */
-    "brandOne-contrast": {
+    "brand-one-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandOne",
+      group: "text.brand-one",
     },
-    "brandTwo-contrast": {
+    "brand-two-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandTwo",
+      group: "text.brand-two",
     },
-    "brandThree-contrast": {
+    "brand-three-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandThree",
+      group: "text.brand-three",
     },
     /* Data */
-    "dataOne-contrast": {
+    "data-one-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.dataOne",
+      group: "text.data-one",
     },
-    "dataTwo-contrast": {
+    "data-two-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.dataTwo",
+      group: "text.data-two",
     },
   },
 });

@@ -3,15 +3,12 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100lvh;
-
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background-color: var(--__ac-page-background);
 }
 
 /* Page.Block */
 .navds-pageblock {
   /* stylelint-disable-next-line length-zero-no-unit */
-  --__ac-page-padding-inline: 0px;
+  --__axc-page-padding-inline: 0px;
 
   margin-inline: auto;
   width: 100%;
@@ -27,11 +24,11 @@
 }
 
 .navds-page__content--padding {
-  padding-block-end: var(--a-spacing-16);
+  padding-block-end: var(--ax-spacing-16);
 }
 
 .navds-pageblock--text {
-  max-width: calc(var(--a-text-width-max) + var(--__ac-page-padding-inline) + var(--__ac-page-padding-inline));
+  max-width: calc(576px + var(--__axc-page-padding-inline) + var(--__axc-page-padding-inline));
 }
 
 .navds-pageblock--md {
@@ -51,13 +48,13 @@
 }
 
 .navds-pageblock--gutters {
-  --__ac-page-padding-inline: var(--a-spacing-4);
+  --__axc-page-padding-inline: var(--a-spacing-4);
 
-  padding-inline: var(--__ac-page-padding-inline);
+  padding-inline: var(--__axc-page-padding-inline);
 }
 
 @media (min-width: 1024px) {
   .navds-pageblock--gutters {
-    --__ac-page-padding-inline: var(--a-spacing-12);
+    --__axc-page-padding-inline: var(--a-spacing-12);
   }
 }

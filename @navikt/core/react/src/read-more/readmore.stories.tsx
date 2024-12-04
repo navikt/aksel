@@ -3,6 +3,7 @@ import { fn } from "@storybook/test";
 import React from "react";
 import { ReadMore } from ".";
 import { VStack } from "../layout/stack";
+import { UNSAFE_AkselTheme } from "../provider";
 
 export default {
   title: "ds-react/ReadMore",
@@ -37,6 +38,13 @@ export const Default: Story = {
   },
 };
 
+export const Large: Story = {
+  args: {
+    ...Default.args,
+    size: "large",
+  },
+};
+
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -58,8 +66,44 @@ export const Open: Story = {
   },
 };
 
+export const BrandVolumeLow: Story = {
+  render: () => (
+    <UNSAFE_AkselTheme volume="low">
+      <VStack gap="4">
+        <ReadMore size="large" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+        <ReadMore size="small" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+      </VStack>
+    </UNSAFE_AkselTheme>
+  ),
+  args: {
+    ...Default.args,
+    open: true,
+  },
+};
+
+export const BrandVolumeHigh: Story = {
+  render: () => (
+    <UNSAFE_AkselTheme volume="high">
+      <VStack gap="4">
+        <ReadMore size="large" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+        <ReadMore size="small" header={Default.args?.header}>
+          {Content}
+        </ReadMore>
+      </VStack>
+    </UNSAFE_AkselTheme>
+  ),
+};
+
 export const Chromatic: Story = {
-  render: () => {
+  render: (...props) => {
     return (
       <VStack gap="4">
         <div>
@@ -73,6 +117,11 @@ export const Chromatic: Story = {
           <ReadMore {...Small.args} />
         </div>
         <div>
+          <h2>Large</h2>
+          {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
+          <ReadMore {...Large.args} />
+        </div>
+        <div>
           <h2>DefaultOpen</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...DefaultOpen.args} />
@@ -81,6 +130,14 @@ export const Chromatic: Story = {
           <h2>Controlled open</h2>
           {/* @ts-expect-error Args are partial, leading to required prop mismatch */}
           <ReadMore {...Open.args} />
+        </div>
+        <div>
+          <h2>BrandVolumeLow</h2>
+          {BrandVolumeLow?.render?.(...props)}
+        </div>
+        <div>
+          <h2>BrandVolumeHigh</h2>
+          {BrandVolumeHigh?.render?.(...props)}
         </div>
       </VStack>
     );

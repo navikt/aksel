@@ -52,16 +52,16 @@ const Example = () => {
 };
 
 const options = [
-  "car",
-  "bus",
-  "train",
+  "bil",
+  "buss",
+  "tog",
   "skateboard",
-  "bicycle",
-  "motorcycle",
-  "boat",
-  "airplane",
-  "helicopter",
-  "truck",
+  "sykkel",
+  "motorsykkel",
+  "båt",
+  "fly",
+  "helikopter",
+  "lastebil",
   "van",
   "scooter",
 ];

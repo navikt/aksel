@@ -2,6 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
@@ -332,44 +333,56 @@ export const ActionMenuTrigger = forwardRef<
 interface ActionMenuContentProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "id"> {
   children?: React.ReactNode;
+  align?: "start" | "end";
 }
 
 export const ActionMenuContent = forwardRef<
   HTMLDivElement,
   ActionMenuContentProps
->(({ children, className, style, ...rest }: ActionMenuContentProps, ref) => {
-  const context = useActionMenuContext();
+>(
+  (
+    {
+      children,
+      className,
+      style,
+      align = "start",
+      ...rest
+    }: ActionMenuContentProps,
+    ref,
+  ) => {
+    const context = useActionMenuContext();
 
-  return (
-    <Menu.Portal rootElement={context.rootElement} asChild>
-      <Menu.Content
-        ref={ref}
-        id={context.contentId}
-        aria-labelledby={context.triggerId}
-        className={cl("navds-action-menu__content", className)}
-        {...rest}
-        align="start"
-        sideOffset={4}
-        collisionPadding={10}
-        onCloseAutoFocus={() => {
-          context.triggerRef.current?.focus();
-        }}
-        safeZone={{ anchor: context.triggerRef.current }}
-        style={{
-          ...style,
-          ...{
-            "--__ac-action-menu-content-transform-origin":
-              "var(--ac-floating-transform-origin)",
-            "--__ac-action-menu-content-available-height":
-              "var(--ac-floating-available-height)",
-          },
-        }}
-      >
-        <div className="navds-action-menu__content-inner">{children}</div>
-      </Menu.Content>
-    </Menu.Portal>
-  );
-});
+    return (
+      <Menu.Portal rootElement={context.rootElement} asChild>
+        <Menu.Content
+          ref={ref}
+          id={context.contentId}
+          aria-labelledby={context.triggerId}
+          className={cl("navds-action-menu__content", className)}
+          {...rest}
+          align={align}
+          sideOffset={4}
+          collisionPadding={10}
+          onCloseAutoFocus={() => {
+            context.triggerRef.current?.focus();
+          }}
+          safeZone={{ anchor: context.triggerRef.current }}
+          style={{
+            ...style,
+            ...{
+              "--__ac-action-menu-content-transform-origin":
+                "var(--ac-floating-transform-origin)",
+              "--__ac-action-menu-content-available-height":
+                "var(--ac-floating-available-height)",
+            },
+          }}
+        >
+          <div className="navds-action-menu__content-inner">{children}</div>
+        </Menu.Content>
+      </Menu.Portal>
+    );
+  },
+);
 
 /* -------------------------------------------------------------------------- */
 /*                              ActionMenuLabel                               */
@@ -723,6 +736,8 @@ export const ActionMenuRadioItem = forwardRef<
     { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
+    const themeContext = UNSAFE_useAkselTheme(false);
+
     return (
       <Menu.RadioItem
         ref={ref}
@@ -768,29 +783,48 @@ export const ActionMenuRadioItem = forwardRef<
                   fill="var(--ax-bg-default, var(--a-surface-default))"
                 />
               </g>
-              <g className="navds-action-menu__indicator-icon--checked">
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="11"
-                  fill="var(--ax-bg-default, var(--a-surface-default))"
-                />
-                <rect
-                  x="1"
-                  y="1"
-                  width="22"
-                  height="22"
-                  rx="11"
-                  stroke="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-                  fill="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
-                />
-              </g>
+              {themeContext ? (
+                <g className="navds-action-menu__indicator-icon--checked">
+                  <rect
+                    width="24"
+                    height="24"
+                    rx="12"
+                    fill="var(--ax-bg-accent-strong-pressed)"
+                  />
+                  <rect
+                    x="8"
+                    y="8"
+                    width="8"
+                    height="8"
+                    rx="4"
+                    fill="var(--ax-bg-default, var(--a-surface-default))"
+                  />
+                </g>
+              ) : (
+                <g className="navds-action-menu__indicator-icon--checked">
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="11"
+                    fill="var(--ax-bg-default, var(--a-surface-default))"
+                  />
+                  <rect
+                    x="1"
+                    y="1"
+                    width="22"
+                    height="22"
+                    rx="11"
+                    stroke="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+                    fill="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
+                  />
+                </g>
+              )}
             </svg>
           </Menu.ItemIndicator>
         </Marker>
@@ -955,11 +989,11 @@ ActionMenu.SubTrigger = ActionMenuSubTrigger;
 ActionMenu.SubContent = ActionMenuSubContent;
 
 export type {
-  ActionMenuItemProps,
   ActionMenuCheckboxItemProps,
   ActionMenuContentProps,
   ActionMenuDividerProps,
   ActionMenuGroupProps,
+  ActionMenuItemProps,
   ActionMenuLabelProps,
   ActionMenuProps,
   ActionMenuRadioGroupProps,

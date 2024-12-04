@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { OverridableComponent } from "../../util";
 import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
@@ -14,6 +15,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
    * @default "bg-default"
+   * @deprecated 'background'-prop will be removed in future major-versions. Use `<Box asChild background="...">` wrapped around `<Page>`.
    */
   background?: BackgroundColorToken;
   /**
@@ -52,6 +54,14 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
+      const themeContext = UNSAFE_useAkselTheme(false);
+
+      if (process.env.NODE_ENV !== "production" && themeContext && background) {
+        console.warn(
+          `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
+        );
+      }
+
       const style: React.CSSProperties = {
         ..._style,
         "--__ac-page-background": `var(--a-${background})`,

@@ -8,10 +8,7 @@
   background-color: var(--__axc-modal-bg);
   border: 1px solid var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
-  box-shadow:
-    0 0 1px 0 rgb(0 0 0/ 0.08),
-    0 2px 5px 0 rgb(0 0 0/ 0.15),
-    0 10px 24px 0 rgb(0 0 0/ 0.18);
+  box-shadow: var(--ax-shadow-dialog);
   padding: 0;
   position: fixed;
   max-height: 100%;

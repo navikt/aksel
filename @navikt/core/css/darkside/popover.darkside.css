@@ -1,10 +1,7 @@
 .navds-popover {
   z-index: 1000;
   background: var(--ax-bg-raised);
-  box-shadow:
-    0 0 1px 0 rgba(7 9 13/ 0.02),
-    0 2px 5px 0 rgba(7 9 13/ 0.1),
-    0 5px 12px 0 rgba(7 9 13/ 0.12);
+  box-shadow: var(--ax-shadow-dialog);
   border: 1px solid var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
 

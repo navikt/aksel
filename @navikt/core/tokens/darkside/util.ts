@@ -27,11 +27,11 @@ export const globalColorRoles = [
   "warning",
   "danger",
   "info",
-  "brandOne",
-  "brandTwo",
-  "brandThree",
-  "dataOne",
-  "dataTwo",
+  "brand-one",
+  "brand-two",
+  "brand-three",
+  "data-one",
+  "data-two",
 ] as const;
 
 export type GlobalColorRoles = (typeof globalColorRoles)[number];
@@ -50,6 +50,7 @@ type GlobalColorScale =
 
 export type TokenTypes =
   | "color"
+  | "shadow"
   | "global-color"
   | "global-radius"
   | "global-spacing"
@@ -87,7 +88,35 @@ export type StyleDictionaryToken<T extends TokenTypes> = {
    * Optional extra scopes for the token.
    * Token will include all default scopes based on `type`, and any extra specified here.
    */
-  scopes?: VariableScope[];
+  scopes?: (
+    | "ALL_SCOPES"
+    | "TEXT_CONTENT"
+    | "CORNER_RADIUS"
+    | "WIDTH_HEIGHT"
+    | "GAP"
+    | "ALL_FILLS"
+    | "FRAME_FILL"
+    | "SHAPE_FILL"
+    | "TEXT_FILL"
+    | "STROKE_COLOR"
+    | "STROKE_FLOAT"
+    | "EFFECT_FLOAT"
+    | "EFFECT_COLOR"
+    | "OPACITY"
+    | "FONT_FAMILY"
+    | "FONT_STYLE"
+    | "FONT_WEIGHT"
+    | "FONT_SIZE"
+    | "LINE_HEIGHT"
+    | "LETTER_SPACING"
+    | "PARAGRAPH_SPACING"
+    | "PARAGRAPH_INDENT"
+  )[];
+  /**
+   * In some cases, we want to hide tokens from the Figma plugin.
+   * Currently only relevant for shadow-tokens.
+   */
+  figmaIgnore?: boolean;
 };
 
 export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
