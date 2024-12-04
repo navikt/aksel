@@ -21,7 +21,6 @@ const nonColorTokens = [
 ];
 /*
  * Assumes that all remaining names not in nonColorTokens are colors
- * TODO: Should probably write some tests on this when tokens are more stable
  */
 const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
   return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
@@ -29,13 +28,11 @@ const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
 const colors = Object.fromEntries(colorTokensEntries);
 
 /**
- * TODO features
- * - Shadow
  * TODO deprecations:
  * - max-width
  * - z-index
  */
-const config = {
+export const config = {
   theme: {
     colors,
     screens: {
@@ -46,6 +43,7 @@ const config = {
       "2xl": breakpointsTokenConfig.breakpoint["2xl"].value,
     },
     extend: {
+      shadow: extractTokensForCategory("shadow"),
       spacing: extractTokensForCategory("spacing"),
       fontWeight: extractTokensForCategory("font-weight"),
       fontSize: extractTokensForCategory("font-size"),
@@ -65,7 +63,7 @@ writeFileSync("tailwind.darkside.config.js", outputString);
 /* -------------------------------------------------------------------------- */
 
 /* Cherry-picks object keys we want */
-function extractTokensForCategory(tokenName: string) {
+export function extractTokensForCategory(tokenName: string) {
   const tokens = Object.entries(transformedTokens)
     .filter(([key]) => key.startsWith(tokenName))
     /* We want extract only the value from each token, so we replace the name: "spacing-4" -> "4" */
