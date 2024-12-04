@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
+import { BorderKeys } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -11,27 +11,26 @@ import BasePrimitive, {
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
 import {
-  BackgroundColorToken,
-  BorderColorToken,
   BorderRadiiToken,
   ResponsiveProp,
-  ShadowToken,
+  SemanticRoleBgDarkside,
+  SemanticShadowTokens,
+  SemanticStaticBgDarkside,
+  SemanticStaticBorderDarkside,
   SpaceDelimitedAttribute,
-  SurfaceColorToken,
 } from "../utilities/types";
-import BoxNew from "./Box.darkside";
 
-export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
+export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    */
-  background?: BackgroundColorToken | SurfaceColorToken;
+  background?: SemanticStaticBgDarkside | SemanticRoleBgDarkside;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    */
-  borderColor?: BorderColorToken;
+  borderColor?: BorderKeys | SemanticStaticBorderDarkside;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -53,16 +52,12 @@ export type BoxProps = React.HTMLAttributes<HTMLDivElement> & {
    * @example
    * shadow='small'
    */
-  shadow?: ShadowToken;
+  shadow?: SemanticShadowTokens;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 
-interface BoxComponentType
-  extends OverridableComponent<BoxProps, HTMLDivElement> {
-  New: typeof BoxNew;
-}
-
 /**
+ *
  * Foundational Layout-primitive for generic encapsulation & styling.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/primitives/box)
@@ -89,7 +84,7 @@ interface BoxComponentType
  *  </Box>
  * </VStack>
  */
-export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
+export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
   forwardRef(
     (
       {
@@ -107,35 +102,23 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme(false);
-
-      if (process.env.NODE_ENV !== "production" && themeContext) {
-        console.warn(
-          "Box cannot be used with AkselTheme (darkmode-support). Migrate to '<Box.New>'",
-        );
-      }
-
-      const prefix = themeContext ? "ax" : "a";
-
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}c-box-background`]: background
-          ? `var(--a-${background})`
+        "--__axc-box-background": background
+          ? `var(--ax-bg-${background})`
           : undefined,
-        [`--__${prefix}c-box-shadow`]: shadow
-          ? `var(--a-shadow-${shadow})`
+        "--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+        "--__axc-box-border-color": borderColor
+          ? `var(--ax-border-${borderColor})`
           : undefined,
-        [`--__${prefix}c-box-border-color`]: borderColor
-          ? `var(--a-${borderColor})`
-          : undefined,
-        [`--__${prefix}c-box-border-width`]: borderWidth
+        "--__axc-box-border-width": borderWidth
           ? borderWidth
               .split(" ")
               .map((x) => `${x}px`)
               .join(" ")
           : undefined,
         ...getResponsiveProps(
-          prefix,
+          "ax",
           "box",
           "border-radius",
           "border-radius",
@@ -168,8 +151,4 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
     },
   );
 
-export const Box = BoxComponent as BoxComponentType;
-
-Box.New = BoxNew;
-
-export default Box;
+export default BoxNew;

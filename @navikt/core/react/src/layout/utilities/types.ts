@@ -1,3 +1,9 @@
+/* Darkside tokens */
+import { semanticTokenConfig } from "@navikt/ds-tokens/darkside/tokens/semantic";
+import { SemanticTokensForAllRolesConfigT } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
+import { shadowTokenConfig } from "@navikt/ds-tokens/darkside/tokens/shadow";
+
+/* Old */
 import borderRadii from "@navikt/ds-tokens/src/border.json";
 import bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import borderColors from "@navikt/ds-tokens/src/colors-border.json";
@@ -28,16 +34,20 @@ type FixedResponsiveT<T> = {
 
 export type ResponsiveProp<T> = T | FixedResponsiveT<T>;
 
-/* Darkside update */
-/* Border overlap */
-/* default */
-/* focus */
-/* strong */
-/* subtle */
-/* info */
-/* danger */
-/* warning */
-/* success */
+/**
+ * Darkside tokens
+ */
+export type SemanticShadowTokens = keyof ReturnType<
+  typeof shadowTokenConfig
+>["shadow"];
 
-/* Bg overlap */
-/* bg-default */
+export type SemanticStaticBgDarkside = keyof ReturnType<
+  typeof semanticTokenConfig
+>["bg"];
+
+export type SemanticRoleBgDarkside =
+  keyof SemanticTokensForAllRolesConfigT<"color">["bg"];
+
+export type SemanticStaticBorderDarkside = keyof ReturnType<
+  typeof semanticTokenConfig
+>["border"];

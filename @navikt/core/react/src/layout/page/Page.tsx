@@ -15,6 +15,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
    * @default "bg-default"
+   * @deprecated 'background'-prop will be removed in future major-versions. Use `<Box asChild background="...">` wrapped around `<Page>`.
    */
   background?: BackgroundColorToken;
   /**
@@ -54,11 +55,16 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       ref,
     ) => {
       const themeContext = UNSAFE_useAkselTheme(false);
-      const prefix = themeContext ? "ax" : "a";
+
+      if (process.env.NODE_ENV !== "production" && themeContext && background) {
+        console.warn(
+          `Prop \`background\` is deprecated and cannot be used with theme-support. Instead wrap component with \`<Box asChild background>\``,
+        );
+      }
 
       const style: React.CSSProperties = {
         ..._style,
-        [`--__${prefix}-page-background`]: `var(--a-${background})`,
+        "--__ac-page-background": `var(--a-${background})`,
       };
 
       const belowFold = footerPosition === "belowFold";
