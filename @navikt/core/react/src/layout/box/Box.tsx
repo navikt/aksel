@@ -109,9 +109,13 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
     ) => {
       const themeContext = UNSAFE_useAkselTheme(false);
 
-      if (process.env.NODE_ENV !== "production" && themeContext) {
+      if (
+        process.env.NODE_ENV !== "production" &&
+        themeContext &&
+        (background || borderColor || shadow)
+      ) {
         console.warn(
-          "Box cannot be used with AkselTheme (darkmode-support). Migrate to '<Box.New>'",
+          `<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with AkselTheme (darkmode-support). To continue using these properties, migrate to '<Box.New>'`,
         );
       }
 
