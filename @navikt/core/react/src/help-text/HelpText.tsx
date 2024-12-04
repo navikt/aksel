@@ -13,7 +13,7 @@ export interface HelpTextProps
   children: React.ReactNode;
   /**
    * Adds a title-tooltip with the given text
-   * @default "Hjelp"
+   * @default "Mer informasjon"
    */
   title?: string;
   /**

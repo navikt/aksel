@@ -134,6 +134,6 @@ export default {
     illustrationLabel: "Illustrasjon av veileder",
   },
   HelpText: {
-    title: "Hjelp",
+    title: "Mer informasjon",
   },
 } satisfies TranslationMap;
