@@ -163,13 +163,12 @@
   --__axc-button-border-color: var(--ax-border-default);
 
   background-color: transparent;
-  color: var(--ax-text-neutral);
+  color: var(--ax-text-default);
 
   &:hover {
     --__axc-button-border-color: var(--ax-border-strong);
 
     background-color: var(--ax-bg-neutral-moderate-hoverA);
-    color: var(--ax-text-neutral-strong);
   }
 
   &:active {
@@ -215,11 +214,10 @@
  ****************************/
 .navds-button--tertiary-neutral {
   background-color: transparent;
-  color: var(--ax-text-neutral);
+  color: var(--ax-text-default);
 
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hoverA);
-    color: var(--ax-text-neutral-strong);
   }
 
   &:active {

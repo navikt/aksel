@@ -10,7 +10,7 @@
 }
 
 .navds-popover__content {
-  padding: var(--ax-spacing-4);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
 }
 
 .navds-popover--hidden {

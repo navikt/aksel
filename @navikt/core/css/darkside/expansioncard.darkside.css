@@ -17,6 +17,7 @@
 /* ------------------------ ExpansionCard Small-size ------------------------ */
 .navds-expansioncard--small {
   --__axc-expansioncard-padding-inline: var(--ax-spacing-4);
+  --__axc-expansioncard-padding-block: var(--ax-spacing-3);
 
   & > .navds-expansioncard__header .navds-expansioncard__title--small {
     margin-top: var(--ax-spacing-05);
