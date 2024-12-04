@@ -60,6 +60,9 @@ export const Step: OverridableComponent<StepperStepProps, HTMLAnchorElement> =
             "navds-stepper__step--non-interactive": !isInteractive,
             "navds-stepper__step--completed": completed,
           })}
+          data-active={activeStep === context.index}
+          data-completed={completed}
+          data-interactive={isInteractive}
           onClick={composeEventHandlers(onClick, handleStepClick)}
         >
           {completed ? (

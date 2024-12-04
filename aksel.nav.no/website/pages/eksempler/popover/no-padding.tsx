@@ -7,7 +7,7 @@ const Example = () => {
   const [openState, setOpenState] = useState(false);
 
   return (
-    <div className="mb-10">
+    <>
       <Button
         ref={buttonRef}
         onClick={() => setOpenState(!openState)}
@@ -20,15 +20,10 @@ const Example = () => {
         open={openState}
         onClose={() => setOpenState(false)}
         anchorEl={buttonRef.current}
-        flip={false}
-        placement="right"
       >
-        <Popover.Content>
-          Denne popoveren holder seg til høyre selv om det er bedre plass under,
-          fordi <code>flip</code> er satt til <code>false</code>.
-        </Popover.Content>
+        Innhold uten padding.
       </Popover>
-    </div>
+    </>
   );
 };
 
@@ -41,5 +36,6 @@ export const Demo = {
 };
 
 export const args = {
-  index: 4,
+  index: 5,
+  desc: "`Popover.Content` legger bare på litt padding, så den kan utelates.",
 };

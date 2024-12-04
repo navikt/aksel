@@ -46,21 +46,23 @@ export const getTokensForCollection = async (
 
   const dictionary = await SD.getPlatformTokens(collection);
 
-  return dictionary.allTokens.map((token) => {
-    const reference = getReferences(token.original, dictionary.tokens);
-    /*
-     * Currently only supports 1 level of references.
-     */
-    return reference.length > 0
-      ? prepareToken(
-          {
-            ...(token as TransformedTokenWithScopes),
-            alias: createTokenName(reference[0]),
-          },
-          dictionary,
-        )
-      : prepareToken(token as TransformedTokenWithScopes, dictionary);
-  });
+  return dictionary.allTokens
+    .filter((token) => !token.figmaIgnore)
+    .map((token) => {
+      const reference = getReferences(token.original, dictionary.tokens);
+      /*
+       * Currently only supports 1 level of references.
+       */
+      return reference.length > 0
+        ? prepareToken(
+            {
+              ...(token as TransformedTokenWithScopes),
+              alias: createTokenName(reference[0]),
+            },
+            dictionary,
+          )
+        : prepareToken(token as TransformedTokenWithScopes, dictionary);
+    });
 };
 
 type TransformedTokenWithScopes = TransformedToken & {

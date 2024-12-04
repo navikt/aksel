@@ -2,6 +2,7 @@ import cl from "clsx";
 import React from "react";
 import { PlusIcon } from "@navikt/aksel-icons";
 import { BodyShort, Label } from "../../../typography";
+import { useI18n } from "../../../util/i18n/i18n.context";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
@@ -22,6 +23,7 @@ const AddNewOption = () => {
   } = useFilteredOptionsContext();
   const { isMultiSelect, selectedOptions, toggleOption } =
     useSelectedOptionsContext();
+  const translate = useI18n("Combobox");
   return (
     <li
       tabIndex={-1}
@@ -51,7 +53,7 @@ const AddNewOption = () => {
     >
       <PlusIcon aria-hidden />
       <BodyShort size={size}>
-        Legg til{" "}
+        {translate("addOption")}{" "}
         <Label as="span" size={size}>
           &#8220;{searchTerm}&#8221;
         </Label>

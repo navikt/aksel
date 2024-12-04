@@ -92,6 +92,7 @@ export const Placement = () => {
   );
 };
 
+/* TODO: All stories with Arrow can be removed after darkside update */
 export const Arrow = () => {
   return (
     <div className="colgap" style={{ gap: "12rem" }}>

@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { useDateLocale } from "../../util/i18n/i18n.context";
 import { MonthPickerProps } from "../monthpicker/types";
 import { DateInputProps } from "../parts/DateInput";
 import {
@@ -126,7 +127,7 @@ export const useMonthpicker = (
   opt: UseMonthPickerOptions = {},
 ): UseMonthPickerValue => {
   const {
-    locale: _locale = "nb",
+    locale: _locale,
     defaultSelected: _defaultSelected,
     fromDate,
     toDate,
@@ -143,7 +144,8 @@ export const useMonthpicker = (
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   const today = useMemo(() => new Date(), []);
-  const locale = getLocaleFromString(_locale);
+  const localeFromProvider = useDateLocale();
+  const locale = _locale ? getLocaleFromString(_locale) : localeFromProvider;
 
   // Initialize states
   const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);

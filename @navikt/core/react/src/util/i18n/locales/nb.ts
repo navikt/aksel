@@ -107,4 +107,32 @@ export default {
       reset: "Tilbakestill tidsperspektiv",
     },
   },
+  DatePicker: {
+    close: "Lukk", // TODO: Consider making global
+    chooseDate: "Velg dato",
+    chooseDates: "Velg datoer",
+    chooseDateRange: "Velg start- og sluttdato",
+    chooseMonth: "Velg måned",
+    week: "Uke",
+    weekNumber: "Uke {week}",
+    selectWeekNumber: "Velg uke {week}",
+    month: "Måned",
+    goToNextMonth: "Gå til neste måned",
+    goToPreviousMonth: "Gå til forrige måned",
+    year: "År",
+    goToNextYear: "Gå til neste år",
+    goToPreviousYear: "Gå til forrige år",
+    openDatePicker: "Åpne datovelger",
+    openMonthPicker: "Åpne månedsvelger",
+    closeDatePicker: "Lukk datovelger",
+    closeMonthPicker: "Lukk månedsvelger",
+  },
+  Combobox: {
+    /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
+    addOption: "Legg til",
+    /** Loader title */
+    loading: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valgt.",
+    clear: "Tøm",
+  },
 } satisfies TranslationMap;

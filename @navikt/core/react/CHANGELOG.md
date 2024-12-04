@@ -1,5 +1,43 @@
 # @navikt/ds-react
 
+## 7.6.0
+
+### Minor Changes
+
+- ActionMenu: Added 'align'-prop to 'ActionMenu.Content'. This allows menu to 'start' or 'end' align in reference to anchor. ([#3414](https://github.com/navikt/aksel/pull/3414))
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Remove pointerEvents=none on CalendarIcon so that the title shows up as tooltip on hover ([#3390](https://github.com/navikt/aksel/pull/3390))
+
+- Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+- Updated dependencies [[`9c5b32f`](https://github.com/navikt/aksel/commit/9c5b32f9bae885585b5f50b637505017482b1d59)]:
+  - @navikt/aksel-icons@7.6.0
+  - @navikt/ds-tokens@7.6.0
+
+## 7.5.3
+
+### Patch Changes
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.3
+  - @navikt/aksel-icons@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.2
+  - @navikt/aksel-icons@7.5.2
+
 ## 7.5.1
 
 ### Patch Changes

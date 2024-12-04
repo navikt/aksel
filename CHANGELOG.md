@@ -1,5 +1,35 @@
 # Changelog
 
+## 7.6
+
+### @navikt/aksel-icons
+
+- Icons: Added new icons 'TruckPercent' and 'ShieldCheckmark' 🎉. ([#3416](https://github.com/navikt/aksel/pull/3416))
+
+### @navikt/ds-react
+
+- ActionMenu: Added 'align'-prop to 'ActionMenu.Content'. This allows menu to 'start' or 'end' align in reference to anchor. ([#3414](https://github.com/navikt/aksel/pull/3414))
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+* DatePicker/MonthPicker: Remove pointerEvents=none on CalendarIcon so that the title shows up as tooltip on hover ([#3390](https://github.com/navikt/aksel/pull/3390))
+
+* Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+### @navikt/ds-css
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+* Select: Now shows focus-outline when ':focus' is set trough pointer or label in all browsers. Chrome and Firefox handles `:focus-visible` differently for 'select', previously causing outline-border not to show in Firefox. ([#3415](https://github.com/navikt/aksel/pull/3415))
+
+* Modal: Don't add scroll shadow when polyfilled ([#3408](https://github.com/navikt/aksel/pull/3408))
+
+* Modal: Now shows up while screensharing with Vergic ([#3407](https://github.com/navikt/aksel/pull/3407))
+
+* FileUpload: Remove browser styling from FileUpload.Item when used in list. ([#3413](https://github.com/navikt/aksel/pull/3413))
+
+* Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
 ## 7.5
 
 ### @navikt/aksel-icons
@@ -12,9 +42,17 @@
 
 ### @navikt/ds-react
 
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+* Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
 - React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
 
 * Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
+### @navikt/ds-css
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
 
 ## 7.4
 

@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { BodyLong } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -33,7 +34,7 @@ export interface ReadMoreProps
    * Changes fontsize for content.
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
 }
 
 /**
@@ -74,6 +75,10 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       onChange: onOpenChange,
     });
 
+    const themeContext = UNSAFE_useAkselTheme(false);
+
+    const typoSize = size === "small" ? "small" : "medium";
+
     return (
       <div
         className={cl(
@@ -82,6 +87,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className,
           { "navds-read-more--open": _open },
         )}
+        data-volume={themeContext?.volume}
       >
         <button
           {...rest}
@@ -92,6 +98,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           })}
           onClick={composeEventHandlers(onClick, () => _setOpen((x) => !x))}
           aria-expanded={_open}
+          data-state={_open ? "open" : "closed"}
         >
           <ChevronDownIcon
             className="navds-read-more__expand-icon"
@@ -106,7 +113,8 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className={cl("navds-read-more__content", {
             "navds-read-more__content--closed": !_open,
           })}
-          size={size}
+          size={typoSize}
+          data-state={_open ? "open" : "closed"}
         >
           {children}
         </BodyLong>
