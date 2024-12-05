@@ -3,7 +3,12 @@ import CleanCss from "clean-css";
 import fs from "fs";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
 import path from "path";
-import { StyleMappings, componentsCss } from "../config/_mappings";
+import {
+  StyleMappings,
+  componentsCss,
+  formCss,
+  primitivesCss,
+} from "../config/_mappings";
 
 const buildDir = path.join(__dirname, "..", "dist/darkside");
 
@@ -118,6 +123,7 @@ StyleMappings.baseline.forEach((style) => {
   function parser(input: string) {
     return input
       .split("\n")
+      .filter((line) => line.startsWith("@import"))
       .filter((line) =>
         line.replace(".darkside.css", ".css").includes(style.main),
       )
@@ -131,3 +137,37 @@ StyleMappings.baseline.forEach((style) => {
     });
   });
 });
+
+/* ------------------------------ form build ----------------------------- */
+function rootFormParser(input: string) {
+  return input
+    .split("\n")
+    .filter((line) => line.startsWith("@import"))
+    .filter((line) => line.includes("form/index.css"))
+    .join("\n");
+}
+
+bundleCSS(rootFormParser).then((file) => {
+  writeFile({
+    file,
+    filePath: `component/${formCss}`,
+  });
+});
+
+/* ------------------------------ Primitives build ----------------------------- */
+function rootPrimitivesParser(input: string) {
+  return input
+    .split("\n")
+    .filter((line) => line.startsWith("@import"))
+    .filter((line) => line.includes("primitives/index.css"))
+    .join("\n");
+}
+
+bundleCSS(rootPrimitivesParser).then((file) => {
+  writeFile({
+    file,
+    filePath: `component/${primitivesCss}`,
+  });
+});
+
+/* ---------------------------- /component build ---------------------------- */
