@@ -3,7 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import { CheckmarkCircleFillIcon } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
-import UNSAFE_AkselLanguageProvider from "../provider/i18n/LanguageProvider";
+import { Provider } from "../provider";
 import en from "../util/i18n/locales/en";
 import Timeline from "./Timeline";
 
@@ -154,9 +154,9 @@ Default.argTypes = {
 
 export const English: StoryFn = () => {
   return (
-    <UNSAFE_AkselLanguageProvider translations={[en]}>
+    <Provider locale={en}>
       <Default />
-    </UNSAFE_AkselLanguageProvider>
+    </Provider>
   );
 };
 
@@ -420,9 +420,7 @@ export const WithDayLabels: StoryFn = () => {
 
       <div>
         EN:
-        <UNSAFE_AkselLanguageProvider translations={[en]}>
-          {component}
-        </UNSAFE_AkselLanguageProvider>
+        <Provider locale={en}>{component}</Provider>
       </div>
     </VStack>
   );
