@@ -20,7 +20,6 @@
     "type": "git",
     "url": "git+https://github.com/navikt/aksel.git"
   },
-  "main": "./dist/index.css",
   "scripts": {
     "build": "node config/bundle.js && yarn build:darkside",
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
@@ -53,5 +52,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "main": "./dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./dist/*": "./dist/**/*.css",
+    "./darkside": "./dist/darkside/index.min.css"
+  }
 }
