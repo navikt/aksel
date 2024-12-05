@@ -13,9 +13,6 @@
 @import "../../tokens/dist/darkside/tokens.css" layer(aksel.theme);
 @import "./baseline/theme.darkside.css" layer(aksel.theme);
 
-/* TODO: Remove this reference after stack is updated with darkside support */
-@import "../primitives/stack.css" layer(aksel.components);
-
 /* ------------------------------- Components ------------------------------- */
 @import "./button.darkside.css" layer(aksel.components);
 @import "./chips.darkside.css" layer(aksel.components);

@@ -40,22 +40,22 @@ export const Default = {
             >
               <MenuGridIcon
                 style={{ fontSize: "1.5rem" }}
-                title="MenuGridIconer og oppslagsverk"
+                title="Systemer og oppslagsverk"
               />
             </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <Dropdown.Menu.List>
                 <Dropdown.Menu.List.Item>
                   <span>A.Inntekt</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Aa-registeret</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
                 <Dropdown.Menu.List.Item>
                   <span>Gosys</span>
-                  <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+                  <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
                 </Dropdown.Menu.List.Item>
               </Dropdown.Menu.List>
             </Dropdown.Menu>
@@ -86,7 +86,7 @@ export const Default = {
               }}
             >
               <BodyShort title="Ola Normann">KH</BodyShort>
-              <ChevronDownIcon />
+              <ChevronDownIcon title="Brukermeny" />
             </InternalHeader.Button>
             <Dropdown.Menu strategy="fixed">
               <div>
@@ -172,7 +172,7 @@ export const UserWithMenu = () => (
         }}
       >
         <BodyShort title="Ola Normann">KH</BodyShort>
-        <ChevronDownIcon />
+        <ChevronDownIcon title="Brukermeny" />
       </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <div>
@@ -208,22 +208,22 @@ export const UserWithMenuGridIconMenu = () => (
       >
         <MenuGridIcon
           style={{ fontSize: "1.5rem" }}
-          title="MenuGridIconer og oppslagsverk"
+          title="Systemer og oppslagsverk"
         />
       </InternalHeader.Button>
       <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>
             <span>A.Inntekt</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Aa-registeret</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>
             <span>Gosys</span>
-            <ExternalLinkIcon style={{ fontSize: "0.875rem" }} />
+            <ExternalLinkIcon aria-hidden fontSize="0.875rem" />
           </Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>
       </Dropdown.Menu>

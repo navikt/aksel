@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
@@ -80,9 +81,13 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref,
   ) => {
+    const themeContext = UNSAFE_useAkselTheme(false);
+    const prefix = themeContext ? "ax" : "a";
+
     let style: React.CSSProperties = {
       ..._style,
       ...getResponsiveProps(
+        prefix,
         "bleed",
         "margin-inline",
         "spacing",
@@ -92,6 +97,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       ),
 
       ...getResponsiveProps(
+        prefix,
         "bleed",
         "margin-block",
         "spacing",
@@ -105,6 +111,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
       style = {
         ...style,
         ...getResponsiveProps(
+          prefix,
           "bleed",
           "padding-inline",
           "spacing",
@@ -113,6 +120,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
           ["0", "full", "px"],
         ),
         ...getResponsiveProps(
+          prefix,
           "bleed",
           "padding-block",
           "spacing",
