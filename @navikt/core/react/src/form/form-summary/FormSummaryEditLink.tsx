@@ -4,7 +4,6 @@ import { Link } from "../../link";
 import { useI18n } from "../../util/i18n/i18n.context";
 import { OverridableComponent } from "../../util/types";
 
-// export type FormSummaryEditProps = Partial<LinkProps>;
 export interface FormSummaryEditProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
