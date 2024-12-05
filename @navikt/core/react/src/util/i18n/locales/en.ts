@@ -45,6 +45,10 @@ export default {
       labelSuffix: "delete",
     },
   },
+  CopyButton: {
+    title: "Copy",
+    activeText: "Copied!",
+  },
   ErrorSummary: {
     heading: "You must correct the following errors before you can continue:",
   },

@@ -45,6 +45,10 @@ export default {
       labelSuffix: "slett",
     },
   },
+  CopyButton: {
+    title: "Kopier",
+    activeText: "Kopiert!",
+  },
   ErrorSummary: {
     heading: "Du må rette desse feila før du kan halde fram:",
   },
