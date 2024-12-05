@@ -7,8 +7,6 @@
     "tailwind",
     "design-tokens"
   ],
-  "main": "tailwind.config.js",
-  "types": "tailwind.config.d.ts",
   "license": "MIT",
   "files": [
     "tailwind.config.js",
@@ -36,5 +34,29 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "main": "tailwind.config.js",
+  "types": "tailwind.config.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.config.js"
+      }
+    },
+    "./darkside": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      }
+    }
   }
 }
