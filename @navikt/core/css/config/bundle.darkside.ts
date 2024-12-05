@@ -79,7 +79,11 @@ async function bundleDarkside() {
   function writeFile({ file, filePath }: { file: string; filePath: string }) {
     fs.writeFileSync(`${buildDir}/${filePath}`, file);
 
-    /* We use CleanCss package here since we only want it to optimize filesize, not transform any CSS like LightningCSS minifier does */
+    /**
+     * We use CleanCss package here since we only want it to optimize filesize, not transform any CSS like LightningCSS minifier does.
+     * This is because we want to keep the CSS as close to the original as possible.
+     * Since CleanCSS is not part of the PostCSS ecosystem, we use it in replacement for cssnano.
+     */
     const minifiedCss = new CleanCss({}).minify(file);
 
     if (minifiedCss.errors.length > 0) {
