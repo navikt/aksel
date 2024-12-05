@@ -11,7 +11,18 @@ if (!fs.existsSync(buildDir)) {
   fs.mkdirSync(buildDir);
 }
 
-async function bundleCSS() {
+const rootFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
+
+const layerDefinition = rootFile
+  .split("\n")
+  .find((line) => line.startsWith("@layer"));
+
+if (!layerDefinition) {
+  console.error("No layer definition found in index.css. Stopped bundling");
+  process.exit(1);
+}
+
+async function bundleCSS(rootParser?: (rootFile: string) => string) {
   const { code } = await bundleAsync({
     filename: `${__dirname}/index.css`,
     minify: false,
@@ -27,6 +38,10 @@ async function bundleCSS() {
     resolver: {
       read(filePath) {
         const file = fs.readFileSync(filePath, "utf8");
+        if (filePath === `${__dirname}/index.css` && rootParser) {
+          return rootParser(file);
+        }
+
         return file;
       },
     },
@@ -73,7 +88,23 @@ bundleCSS().then((file) => {
 });
 
 /* Build Component files */
-bundleCSS().then((file) => {
+
+const rootComponentsParser = (rootString: string) => {
+  const parsed = rootString
+    .split("\n")
+    .filter((line) => {
+      return (
+        line.endsWith("layer(aksel.components);") ||
+        line.endsWith("layer(aksel.layout);")
+      );
+    })
+    .join("\n");
+
+  /* console.log(parsed); */
+  return parsed;
+};
+
+bundleCSS(rootComponentsParser).then((file) => {
   writeFile({
     file,
     filePath: componentsCss,
