@@ -39,6 +39,7 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Templates for label texts. The templates are passed to the date-fns `format` function.
    * Defaults to { day: "dd.MM", month: "MMM yy", year: "yyyy" }.
+   * @deprecated Use Provider instead
    */
   axisLabelTemplates?: AxisLabelTemplates;
 }
