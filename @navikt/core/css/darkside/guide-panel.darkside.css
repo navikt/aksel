@@ -17,7 +17,7 @@
   }
 
   @media (min-width: 480px) {
-    .navds-guide-panel {
+    & {
       --__axc-guide-panel-guide-size: 5rem;
     }
 
@@ -78,7 +78,7 @@
   }
 
   @media (min-width: 480px) {
-    .navds-guide-panel__content-inner {
+    & {
       padding: var(--ax-spacing-4) var(--ax-spacing-5);
     }
 
