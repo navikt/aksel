@@ -126,6 +126,7 @@ const accordionBlock = `_type == "accordion"=>{
     ...,
     content[]{
       ...,
+      ${markDef},
       ${defaultBlock}
     }
   }
