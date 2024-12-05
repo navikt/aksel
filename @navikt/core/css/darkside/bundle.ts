@@ -10,25 +10,25 @@ import {
   primitivesCss,
 } from "../config/_mappings";
 
+/**
+ * TODO:
+ * - Does not currently support CDN (versions-dir). Add this when exiting trial period
+ */
+
 const buildDir = path.join(__dirname, "..", "dist/darkside");
 
+/* Make sure every dir is created to make node happy */
 [buildDir, `${buildDir}/global`, `${buildDir}/component`].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 });
 
-const rootFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
-
-const layerDefinition = rootFile
-  .split("\n")
-  .find((line) => line.startsWith("@layer"));
-
-if (!layerDefinition) {
-  console.error("No layer definition found in index.css. Stopped bundling");
-  process.exit(1);
-}
-
+/**
+ * Bundles the ./index.css file with LightningCSS.
+ * @param rootParser: Custom parsers that allows for editing the index.css file before bundling it. This allows removing unwanted CSS from being bundled.
+ * @returns Parsed CSS file output. Must be valid CSS.
+ */
 async function bundleCSS(rootParser?: (rootFile: string) => string) {
   const { code } = await bundleAsync({
     filename: `${__dirname}/index.css`,
@@ -69,9 +69,15 @@ async function bundleCSS(rootParser?: (rootFile: string) => string) {
   return codeString;
 }
 
+/**
+ * Writes the CSS file to the build directory. Includes a minified version with the .min.css suffix.
+ * @param file: CSS file content
+ * @param filePath: Path to the file in the build directory
+ */
 function writeFile({ file, filePath }: { file: string; filePath: string }) {
   fs.writeFileSync(`${buildDir}/${filePath}`, file);
 
+  /* We use CleanCss package here since we only want it to optimize filesize, not transform any CSS like LightningCSS minifier does */
   const minifiedCss = new CleanCss({}).minify(file);
 
   if (minifiedCss.errors.length > 0) {
@@ -99,12 +105,25 @@ function rootComponentsParser(rootString: string) {
   let parsed = rootString
     .split("\n")
     .filter((line) => {
+      /* We assume that all components is added under the layer components or layout */
       return (
         line.endsWith("layer(aksel.components);") ||
         line.endsWith("layer(aksel.layout);")
       );
     })
     .join("\n");
+
+  const rootFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
+
+  /* In the off-chance one imports this file standalone, we would like to make sure the layering order is included.  */
+  const layerDefinition = rootFile
+    .split("\n")
+    .find((line) => line.startsWith("@layer"));
+
+  if (!layerDefinition) {
+    console.error("No layer definition found in index.css. Stopped bundling");
+    process.exit(1);
+  }
 
   parsed = layerDefinition + "\n" + parsed;
 
@@ -171,3 +190,48 @@ bundleCSS(rootPrimitivesParser).then((file) => {
 });
 
 /* ---------------------------- /component build ---------------------------- */
+
+function componentFiles(): string[] {
+  const indexFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
+
+  /* Since forms and primitives is under the same layers, but diffferent files we filter them out to avoid duplicates */
+  const formLine = rootFormParser(indexFile);
+  const primitivesLine = rootPrimitivesParser(indexFile);
+
+  return indexFile
+    .split("\n")
+    .filter((line) => line.startsWith("@import"))
+    .filter((line) => !formLine.includes(line))
+    .filter((line) => !primitivesLine.includes(line))
+    .filter((line) => line.endsWith("layer(aksel.components);"));
+}
+
+for (const componentLine of componentFiles()) {
+  // eslint-disable-next-line no-inner-declarations
+  function parser(input: string) {
+    return input
+      .split("\n")
+      .filter((line) => line === componentLine)
+      .join("\n");
+  }
+
+  bundleCSS(parser).then((file) => {
+    const componentName = componentLine
+      /* Matches everything between " */
+      .match(/".*"/gm)?.[0]
+      /* Replaces every " with nothing */
+      .replace(/"/gm, "")
+      /* Removes start of import-string */
+      .replace("./", "");
+
+    if (!componentName) {
+      console.error(`Could not find component name for line: ${componentLine}`);
+      process.exit(1);
+    }
+
+    writeFile({
+      file,
+      filePath: `component/${componentName}`,
+    });
+  });
+}
