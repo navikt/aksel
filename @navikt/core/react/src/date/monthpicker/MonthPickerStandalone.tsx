@@ -1,8 +1,10 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
 import { SharedMonthProvider } from "../context";
-import { getLocaleFromString } from "../utils";
+import { DateTranslationContextProvider } from "../context/useDateTranslationContext";
+import { getLocaleFromString, getTranslations } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthSelector from "./MonthSelector";
 import { MonthPickerProps } from "./types";
@@ -34,7 +36,8 @@ export const MonthPickerStandalone = forwardRef<
       disabled = [],
       selected,
       className,
-      locale = "nb",
+      locale,
+      translations,
       onMonthSelect,
       defaultSelected,
       year,
@@ -42,6 +45,12 @@ export const MonthPickerStandalone = forwardRef<
     },
     ref,
   ) => {
+    const translate = useI18n(
+      "DatePicker",
+      translations,
+      getTranslations(locale),
+    );
+    const langProviderLocale = useDateLocale();
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
       defaultSelected,
     );
@@ -58,29 +67,31 @@ export const MonthPickerStandalone = forwardRef<
 
     return (
       <div ref={ref} className={cl("navds-date__wrapper", className)}>
-        <DayPickerProvider
-          initialProps={{
-            locale: getLocaleFromString(locale),
-            selected: selected ?? selectedMonth,
-            toDate,
-            fromDate,
-            month: selected ?? selectedMonth,
-          }}
-        >
-          <div className="navds-date rdp-month">
-            <SharedMonthProvider
-              dropdownCaption={dropdownCaption}
-              disabled={disabled}
-              selected={selected ?? selectedMonth}
-              onSelect={handleSelect}
-              year={year}
-              onYearChange={onYearChange}
-            >
-              <MonthCaption />
-              <MonthSelector />
-            </SharedMonthProvider>
-          </div>
-        </DayPickerProvider>
+        <DateTranslationContextProvider translate={translate}>
+          <DayPickerProvider
+            initialProps={{
+              locale: locale ? getLocaleFromString(locale) : langProviderLocale,
+              selected: selected ?? selectedMonth,
+              toDate,
+              fromDate,
+              month: selected ?? selectedMonth,
+            }}
+          >
+            <div className="navds-date rdp-month">
+              <SharedMonthProvider
+                dropdownCaption={dropdownCaption}
+                disabled={disabled}
+                selected={selected ?? selectedMonth}
+                onSelect={handleSelect}
+                year={year}
+                onYearChange={onYearChange}
+              >
+                <MonthCaption />
+                <MonthSelector />
+              </SharedMonthProvider>
+            </div>
+          </DayPickerProvider>
+        </DateTranslationContextProvider>
       </div>
     );
   },

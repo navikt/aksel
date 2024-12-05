@@ -3,8 +3,9 @@ import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
-import { useDateLocale } from "../../util/i18n/i18n.context";
-import { getLocaleFromString } from "../utils";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { DateTranslationContextProvider } from "../context/useDateTranslationContext";
+import { getLocaleFromString, getTranslations } from "../utils";
 import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";
 import { HeadRow } from "./parts/HeadRow";
@@ -51,6 +52,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     {
       className,
       locale,
+      translations,
       dropdownCaption,
       disabled = [],
       disableWeekends = false,
@@ -64,6 +66,11 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     },
     ref,
   ) => {
+    const translate = useI18n(
+      "DatePicker",
+      translations,
+      getTranslations(locale),
+    );
     const langProviderLocale = useDateLocale();
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -84,41 +91,43 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
         ref={ref}
         className={cl("navds-date__standalone-wrapper", className)}
       >
-        <DayPicker
-          locale={locale ? getLocaleFromString(locale) : langProviderLocale}
-          mode={mode}
-          onSelect={handleSelect}
-          selected={selected ?? selectedDates}
-          components={{
-            Caption: dropdownCaption ? DropdownCaption : Caption,
-            Head: TableHead,
-            HeadRow,
-            WeekNumber,
-            Row,
-          }}
-          className="navds-date"
-          classNames={{ vhidden: "navds-sr-only" }}
-          disabled={(day) => {
-            return (
-              (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
-            );
-          }}
-          weekStartsOn={1}
-          initialFocus={false}
-          modifiers={{
-            weekend: (day) => disableWeekends && isWeekend(day),
-          }}
-          modifiersClassNames={{
-            weekend: "rdp-day__weekend",
-          }}
-          showWeekNumber={showWeekNumber}
-          onWeekNumberClick={
-            mode === "multiple" ? onWeekNumberClick : undefined
-          }
-          fixedWeeks={fixedWeeks}
-          showOutsideDays
-          {...omit(rest, ["children", "id"])}
-        />
+        <DateTranslationContextProvider translate={translate}>
+          <DayPicker
+            locale={locale ? getLocaleFromString(locale) : langProviderLocale}
+            mode={mode}
+            onSelect={handleSelect}
+            selected={selected ?? selectedDates}
+            components={{
+              Caption: dropdownCaption ? DropdownCaption : Caption,
+              Head: TableHead,
+              HeadRow,
+              WeekNumber,
+              Row,
+            }}
+            className="navds-date"
+            classNames={{ vhidden: "navds-sr-only" }}
+            disabled={(day) => {
+              return (
+                (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
+              );
+            }}
+            weekStartsOn={1}
+            initialFocus={false}
+            modifiers={{
+              weekend: (day) => disableWeekends && isWeekend(day),
+            }}
+            modifiersClassNames={{
+              weekend: "rdp-day__weekend",
+            }}
+            showWeekNumber={showWeekNumber}
+            onWeekNumberClick={
+              mode === "multiple" ? onWeekNumberClick : undefined
+            }
+            fixedWeeks={fixedWeeks}
+            showOutsideDays
+            {...omit(rest, ["children", "id"])}
+          />
+        </DateTranslationContextProvider>
       </div>
     );
   },

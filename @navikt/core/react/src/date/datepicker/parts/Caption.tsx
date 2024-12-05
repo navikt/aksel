@@ -3,8 +3,7 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Label } from "../../../typography";
-import { useI18n } from "../../../util/i18n/i18n.context";
-import { getTranslations } from "../../utils";
+import { useDateTranslationContext } from "../../context/useDateTranslationContext";
 import WeekRow from "./WeekRow";
 
 /**
@@ -16,7 +15,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
     formatters: { formatCaption },
     locale,
   } = useDayPicker();
-  const translate = useI18n("DatePicker", getTranslations(locale.code));
+  const translate = useDateTranslationContext().translate;
 
   return (
     <>

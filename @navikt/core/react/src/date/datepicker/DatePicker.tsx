@@ -5,11 +5,12 @@ import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useDateLocale } from "../../util/i18n/i18n.context";
-import { DateContext } from "../context";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { DateInputContext } from "../context";
+import { DateTranslationContextProvider } from "../context/useDateTranslationContext";
 import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
-import { getLocaleFromString } from "../utils";
+import { getLocaleFromString, getTranslations } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
 import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";
@@ -68,6 +69,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     {
       children,
       locale,
+      translations,
       dropdownCaption,
       disabled = [],
       disableWeekends = false,
@@ -86,6 +88,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     },
     ref,
   ) => {
+    const translate = useI18n(
+      "DatePicker",
+      translations,
+      getTranslations(locale),
+    );
     const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
@@ -151,37 +158,40 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     );
 
     return (
-      <DateContext.Provider
-        value={{
-          open: _open ?? open,
-          onOpen: () => {
-            setOpen((x) => !x);
-            onOpenToggle?.();
-          },
-          ariaId,
-          defined: true,
-        }}
-      >
-        <div
-          ref={mergedRef}
-          className={cl("navds-date__wrapper", wrapperClassName)}
+      <DateTranslationContextProvider translate={translate}>
+        <DateInputContext.Provider
+          value={{
+            open: _open ?? open,
+            onOpen: () => {
+              setOpen((x) => !x);
+              onOpenToggle?.();
+            },
+            ariaId,
+            defined: true,
+          }}
         >
-          {children}
-          <DateWrapper
-            open={_open ?? open}
-            anchor={wrapperRef}
-            onClose={() => onClose?.() ?? setOpen(false)}
-            locale={locale}
-            variant={mode}
-            popoverProps={{
-              id: ariaId,
-              strategy,
-            }}
+          <div
+            ref={mergedRef}
+            className={cl("navds-date__wrapper", wrapperClassName)}
           >
-            {DatePickerComponent}
-          </DateWrapper>
-        </div>
-      </DateContext.Provider>
+            {children}
+            <DateWrapper
+              open={_open ?? open}
+              anchor={wrapperRef}
+              onClose={() => onClose?.() ?? setOpen(false)}
+              locale={locale}
+              translate={translate}
+              variant={mode}
+              popoverProps={{
+                id: ariaId,
+                strategy,
+              }}
+            >
+              {DatePickerComponent}
+            </DateWrapper>
+          </div>
+        </DateInputContext.Provider>
+      </DateTranslationContextProvider>
     );
   },
 ) as DatePickerComponent;

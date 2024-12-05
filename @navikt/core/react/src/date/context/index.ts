@@ -1,4 +1,4 @@
-export { useDateInputContext, DateContext } from "./useDateInputContext";
+export { useDateInputContext, DateInputContext } from "./useDateInputContext";
 export {
   useSharedMonthContext,
   SharedMonthProvider,

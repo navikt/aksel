@@ -4,8 +4,8 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
-import { useI18n } from "../../../util/i18n/i18n.context";
-import { getMonths, getTranslations, getYears } from "../../utils";
+import { useDateTranslationContext } from "../../context/useDateTranslationContext";
+import { getMonths, getYears } from "../../utils";
 import WeekRow from "./WeekRow";
 
 /**
@@ -19,7 +19,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
     formatters: { formatYearCaption, formatMonthCaption, formatCaption },
     locale,
   } = useDayPicker();
-  const translate = useI18n("DatePicker", getTranslations(locale.code));
+  const translate = useDateTranslationContext().translate;
 
   if (!fromDate || !toDate) {
     console.warn("Using dropdownCaption required fromDate and toDate");
