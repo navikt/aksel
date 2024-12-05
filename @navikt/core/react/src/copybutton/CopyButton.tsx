@@ -33,7 +33,7 @@ export interface CopyButtonProps
   text?: string;
   /**
    * Text shown when button is clicked.
-   * Only set if used with `text`-prop.
+   * Will be used as accessible label (title) if `text`-prop is not set.
    * @default "Kopiert!"
    */
   activeText?: string;
@@ -65,7 +65,8 @@ export interface CopyButtonProps
   title?: string;
   /**
    * Accessible label for icon in active-state (ignored if text is set).
-   * @default "Kopiert"
+   * @default "Kopiert!"
+   * @deprecated Use `activeText` instead
    */
   activeTitle?: string;
   /**
@@ -100,7 +101,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       activeIcon,
       activeDuration = 2000,
       title,
-      activeTitle,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      activeTitle, // TODO remove in next major version
       iconPosition = "left",
       onClick,
       ...rest
@@ -129,21 +131,21 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       }, activeDuration);
     };
 
+    const activeString = activeText || translate("activeText");
+
     const copyIcon = (
       <span className="navds-copybutton__icon">
         {active
           ? activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
-                title={
-                  text ? undefined : activeTitle ?? translate("activeText")
-                }
+                title={text ? undefined : activeString}
               />
             )
           : icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
-                title={text ? undefined : title ?? translate("title")}
+                title={text ? undefined : title || translate("title")}
               />
             )}
       </span>
@@ -171,7 +173,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           {iconPosition === "left" && copyIcon}
           {text && (
             <Label as="span" size={size === "medium" ? "medium" : "small"}>
-              {active ? activeText || translate("activeText") : text}
+              {active ? activeString : text}
             </Label>
           )}
           {iconPosition === "right" && copyIcon}
