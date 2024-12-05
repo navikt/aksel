@@ -3,13 +3,15 @@ import CleanCss from "clean-css";
 import fs from "fs";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
 import path from "path";
-import { componentsCss } from "../config/_mappings";
+import { StyleMappings, componentsCss } from "../config/_mappings";
 
 const buildDir = path.join(__dirname, "..", "dist/darkside");
 
-if (!fs.existsSync(buildDir)) {
-  fs.mkdirSync(buildDir);
-}
+[buildDir, `${buildDir}/global`, `${buildDir}/component`].forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
 
 const rootFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
 
@@ -88,7 +90,7 @@ bundleCSS().then((file) => {
 });
 
 /* --------------------------- component.css build -------------------------- */
-const rootComponentsParser = (rootString: string) => {
+function rootComponentsParser(rootString: string) {
   let parsed = rootString
     .split("\n")
     .filter((line) => {
@@ -102,11 +104,30 @@ const rootComponentsParser = (rootString: string) => {
   parsed = layerDefinition + "\n" + parsed;
 
   return parsed;
-};
+}
 
 bundleCSS(rootComponentsParser).then((file) => {
   writeFile({
     file,
     filePath: componentsCss,
+  });
+});
+
+/* ------------------------------ /global build ----------------------------- */
+StyleMappings.baseline.forEach((style) => {
+  function parser(input: string) {
+    return input
+      .split("\n")
+      .filter((line) =>
+        line.replace(".darkside.css", ".css").includes(style.main),
+      )
+      .join("\n");
+  }
+
+  bundleCSS(parser).then((file) => {
+    writeFile({
+      file,
+      filePath: `global/${style.main}`,
+    });
   });
 });
