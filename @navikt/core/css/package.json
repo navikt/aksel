@@ -22,10 +22,10 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "node config/bundle.js",
+    "build": "node config/bundle.js && yarn build:darkside",
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
     "css:get-version": "node config/get-version.js",
-    "build:darkside": "tsx ./darkside/bundle.ts",
+    "build:darkside": "tsx ./config/bundle.darkside.ts",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },

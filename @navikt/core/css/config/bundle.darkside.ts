@@ -17,6 +17,7 @@ bundleDarkside();
 
 async function bundleDarkside() {
   const buildDir = path.join(__dirname, "..", "dist/darkside");
+  const darksideDir = path.join(__dirname, "..", "darkside");
 
   /* Make sure every dir is created to make node happy */
   [buildDir, `${buildDir}/global`, `${buildDir}/component`].forEach((dir) => {
@@ -32,7 +33,7 @@ async function bundleDarkside() {
    */
   async function bundleCSS(rootParser?: (rootFile: string) => string) {
     const { code } = await bundleAsync({
-      filename: `${__dirname}/index.css`,
+      filename: `${darksideDir}/index.css`,
       minify: false,
       include:
         Features.Nesting | Features.MediaRangeSyntax | Features.HexAlphaColors,
@@ -46,7 +47,7 @@ async function bundleDarkside() {
       resolver: {
         read(filePath) {
           const file = fs.readFileSync(filePath, "utf8");
-          if (filePath === `${__dirname}/index.css` && rootParser) {
+          if (filePath === `${darksideDir}/index.css` && rootParser) {
             return rootParser(file);
           }
 
@@ -114,7 +115,7 @@ async function bundleDarkside() {
       })
       .join("\n");
 
-    const rootFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
+    const rootFile = fs.readFileSync(`${darksideDir}/index.css`, "utf8");
 
     /* In the off-chance one imports this file standalone, we would like to make sure the layering order is included.  */
     const layerDefinition = rootFile
@@ -194,7 +195,7 @@ async function bundleDarkside() {
   /* ---------------------------- /component build ---------------------------- */
 
   function componentFiles(): string[] {
-    const indexFile = fs.readFileSync(`${__dirname}/index.css`, "utf8");
+    const indexFile = fs.readFileSync(`${darksideDir}/index.css`, "utf8");
 
     /* Since forms and primitives is under the same layers, but diffferent files we filter them out to avoid duplicates */
     const formLine = rootFormParser(indexFile);
