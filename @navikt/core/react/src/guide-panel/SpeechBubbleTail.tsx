@@ -1,12 +1,10 @@
 import React, { SVGProps } from "react";
 
-export type DefaultSpeechBubbleArrowType = React.FunctionComponent<
+export type DefaultSpeechBubbleTailType = React.FunctionComponent<
   SVGProps<SVGSVGElement>
 >;
 
-export const SpeechBubbleArrow: DefaultSpeechBubbleArrowType = ({
-  ...props
-}) => {
+export const SpeechBubbleTail: DefaultSpeechBubbleTailType = ({ ...props }) => {
   return (
     <svg
       width="22"
@@ -15,7 +13,7 @@ export const SpeechBubbleArrow: DefaultSpeechBubbleArrowType = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      className="navds-guide-panel__arrow"
+      className="navds-speech-bubble__tail"
       {...props}
     >
       <path d="M22 0H19L20 33H22V0Z" fill="currentColor" />

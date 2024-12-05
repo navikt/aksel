@@ -35,7 +35,6 @@ export const Default: StoryObj<{ poster?: boolean; colorOverride?: boolean }> =
           <GuidePanel style={style} poster={props?.poster}>
             {panelText}
           </GuidePanel>
-          <GuidePanel noSVG>{panelText}</GuidePanel>
         </VStack>
       );
     },

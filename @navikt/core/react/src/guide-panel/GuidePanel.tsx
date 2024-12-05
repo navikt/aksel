@@ -1,7 +1,7 @@
 import cl from "clsx";
-import React, { HTMLAttributes, forwardRef } from "react";
+import React, { HTMLAttributes, ReactNode, forwardRef } from "react";
 import { DefaultIllustration } from "./Illustration";
-import { SpeechBubbleArrow } from "./SpeechBubbleArrow";
+import { SpeechBubbleTail } from "./SpeechBubbleTail";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -20,6 +20,17 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
 
   noSVG?: boolean;
 }
+
+const SpeechBubble = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="flex-initial navds-speech-bubble">
+      <div className="navds-speech-bubble__tail">
+        <SpeechBubbleTail />
+      </div>
+      <div className="navds-speech-bubble__content">{children}</div>
+    </div>
+  );
+};
 
 /**
  * A component for guiding users on the website
@@ -59,14 +70,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         <div className="navds-guide">
           {illustration ?? <DefaultIllustration />}
         </div>
-        <div className="navds-guide-panel__content">
-          <SpeechBubbleArrow />
-          <div className="arrow-container">
-            <div className="arrow-node-1" />
-            <div className="arrow-node-2" />
-          </div>
-          {children}
-        </div>
+        <SpeechBubble>{children}</SpeechBubble>
       </div>
     );
   },
