@@ -7,8 +7,54 @@ export default {
     showMore: "Show more",
     showLess: "Show less",
     readOnly: "Read-only",
+    close: "Close",
   },
 
+  Alert: {
+    closeAlert: "Close alert",
+    closeMessage: "Close message",
+    error: "Error",
+    info: "Information",
+    success: "Success",
+    warning: "Warning",
+  },
+  Chips: {
+    Removable: {
+      labelSuffix: "delete",
+    },
+  },
+  Combobox: {
+    addOption: "Add",
+    loading: "Searching…",
+    maxSelected: "{selected} of max {limit} are selected.",
+    clear: "Clear",
+  },
+  CopyButton: {
+    title: "Copy",
+    activeText: "Copied!",
+  },
+  DatePicker: {
+    chooseDate: "Choose date",
+    chooseDates: "Choose dates",
+    chooseDateRange: "Choose start and end date",
+    chooseMonth: "Choose month",
+    week: "Week",
+    weekNumber: "Week {week}",
+    selectWeekNumber: "Select week {week}",
+    month: "Month",
+    goToNextMonth: "Go to next month",
+    goToPreviousMonth: "Go to previous month",
+    year: "Year",
+    goToNextYear: "Go to next year",
+    goToPreviousYear: "Go to previous year",
+    openDatePicker: "Open date picker",
+    openMonthPicker: "Open month picker",
+    closeDatePicker: "Close date picker",
+    closeMonthPicker: "Close month picker",
+  },
+  ErrorSummary: {
+    heading: "You must correct the following errors before you can continue:",
+  },
   FileUpload: {
     dropzone: {
       button: "Choose file",
@@ -32,34 +78,17 @@ export default {
     showAllSteps: "Show all steps",
     hideAllSteps: "Hide all steps",
   },
-  Alert: {
-    closeAlert: "Close alert",
-    closeMessage: "Close message",
-    error: "Error",
-    info: "Information",
-    success: "Success",
-    warning: "Warning",
-  },
-  Chips: {
-    Removable: {
-      labelSuffix: "delete",
-    },
-  },
-  CopyButton: {
-    title: "Copy",
-    activeText: "Copied!",
-  },
-  ErrorSummary: {
-    heading: "You must correct the following errors before you can continue:",
-  },
   FormSummary: {
     editAnswer: "Edit answer",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustration of advisor",
+  },
+  HelpText: {
+    title: "More information",
+  },
   Loader: {
     title: "Waiting…",
-  },
-  Modal: {
-    close: "Close",
   },
   Pagination: {
     previous: "Previous",
@@ -71,7 +100,7 @@ export default {
       "Progress is unknown, estimated time is {seconds} seconds.",
   },
   Search: {
-    clear: "Clear",
+    clear: "Clear field",
     search: "Search",
   },
   Textarea: {
@@ -103,37 +132,5 @@ export default {
       zoom: "Zoom timeline {start} to {end}",
       reset: "Reset zoom",
     },
-  },
-  DatePicker: {
-    close: "Close",
-    chooseDate: "Choose date",
-    chooseDates: "Choose dates",
-    chooseDateRange: "Choose start and end date",
-    chooseMonth: "Choose month",
-    week: "Week",
-    weekNumber: "Week {week}",
-    selectWeekNumber: "Select week {week}",
-    month: "Month",
-    goToNextMonth: "Go to next month",
-    goToPreviousMonth: "Go to previous month",
-    year: "Year",
-    goToNextYear: "Go to next year",
-    goToPreviousYear: "Go to previous year",
-    openDatePicker: "Open date picker",
-    openMonthPicker: "Open month picker",
-    closeDatePicker: "Close date picker",
-    closeMonthPicker: "Close month picker",
-  },
-  Combobox: {
-    addOption: "Add",
-    loading: "Searching…",
-    maxSelected: "{selected} of max {limit} are selected.",
-    clear: "Clear",
-  },
-  GuidePanel: {
-    illustrationLabel: "Illustration of advisor",
-  },
-  HelpText: {
-    title: "More information",
   },
 } satisfies Translations;

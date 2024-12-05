@@ -10,8 +10,57 @@ export default {
     showMore: "Vis mer",
     showLess: "Vis mindre",
     readOnly: "Skrivebeskyttet",
+    close: "Lukk",
   },
 
+  Alert: {
+    closeAlert: "Lukk varsel",
+    closeMessage: "Lukk melding",
+    error: "Feil",
+    info: "Informasjon",
+    success: "Suksess",
+    warning: "Advarsel",
+  },
+  Chips: {
+    Removable: {
+      /** Will be appended to the accessible name for the button. */
+      labelSuffix: "slett",
+    },
+  },
+  Combobox: {
+    /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
+    addOption: "Legg til",
+    /** Loader title */
+    loading: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valgt.",
+    clear: "Tøm",
+  },
+  CopyButton: {
+    title: "Kopier",
+    activeText: "Kopiert!",
+  },
+  DatePicker: {
+    chooseDate: "Velg dato",
+    chooseDates: "Velg datoer",
+    chooseDateRange: "Velg start- og sluttdato",
+    chooseMonth: "Velg måned",
+    week: "Uke",
+    weekNumber: "Uke {week}",
+    selectWeekNumber: "Velg uke {week}",
+    month: "Måned",
+    goToNextMonth: "Gå til neste måned",
+    goToPreviousMonth: "Gå til forrige måned",
+    year: "År",
+    goToNextYear: "Gå til neste år",
+    goToPreviousYear: "Gå til forrige år",
+    openDatePicker: "Åpne datovelger",
+    openMonthPicker: "Åpne månedsvelger",
+    closeDatePicker: "Lukk datovelger",
+    closeMonthPicker: "Lukk månedsvelger",
+  },
+  ErrorSummary: {
+    heading: "Du må rette disse feilene før du kan fortsette:",
+  },
   FileUpload: {
     dropzone: {
       button: "Velg fil",
@@ -35,35 +84,17 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
-    error: "Feil",
-    info: "Informasjon",
-    success: "Suksess",
-    warning: "Advarsel",
-  },
-  Chips: {
-    Removable: {
-      /** Will be appended to the accessible name for the button. */
-      labelSuffix: "slett",
-    },
-  },
-  CopyButton: {
-    title: "Kopier",
-    activeText: "Kopiert!",
-  },
-  ErrorSummary: {
-    heading: "Du må rette disse feilene før du kan fortsette:",
-  },
   FormSummary: {
     editAnswer: "Endre svar",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustrasjon av veileder",
+  },
+  HelpText: {
+    title: "Mer informasjon",
+  },
   Loader: {
     title: "Venter…",
-  },
-  Modal: {
-    close: "Lukk",
   },
   Pagination: {
     previous: "Forrige",
@@ -75,7 +106,7 @@ export default {
       "Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder.",
   },
   Search: {
-    clear: "Tøm",
+    clear: "Tøm feltet",
     search: "Søk",
   },
   Textarea: {
@@ -98,7 +129,7 @@ export default {
       warning: "Advarsel",
       danger: "Fare",
       info: "Info",
-      neutral: "Nøytral", // TODO: Consider making these global
+      neutral: "Nøytral",
       period: "{status} fra {start} til {end}",
     },
     Pin: {
@@ -108,39 +139,5 @@ export default {
       zoom: "Zoom tidslinjen {start} til {end}",
       reset: "Tilbakestill tidsperspektiv",
     },
-  },
-  DatePicker: {
-    close: "Lukk", // TODO: Consider making global
-    chooseDate: "Velg dato",
-    chooseDates: "Velg datoer",
-    chooseDateRange: "Velg start- og sluttdato",
-    chooseMonth: "Velg måned",
-    week: "Uke",
-    weekNumber: "Uke {week}",
-    selectWeekNumber: "Velg uke {week}",
-    month: "Måned",
-    goToNextMonth: "Gå til neste måned",
-    goToPreviousMonth: "Gå til forrige måned",
-    year: "År",
-    goToNextYear: "Gå til neste år",
-    goToPreviousYear: "Gå til forrige år",
-    openDatePicker: "Åpne datovelger",
-    openMonthPicker: "Åpne månedsvelger",
-    closeDatePicker: "Lukk datovelger",
-    closeMonthPicker: "Lukk månedsvelger",
-  },
-  Combobox: {
-    /** The input value will be appended to the end of this text, e.g. `Legg til "input value"`. */
-    addOption: "Legg til",
-    /** Loader title */
-    loading: "Søker…",
-    maxSelected: "{selected} av maks {limit} er valgt.",
-    clear: "Tøm",
-  },
-  GuidePanel: {
-    illustrationLabel: "Illustrasjon av veileder",
-  },
-  HelpText: {
-    title: "Mer informasjon",
   },
 } satisfies TranslationMap;

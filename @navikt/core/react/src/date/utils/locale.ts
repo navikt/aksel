@@ -29,3 +29,19 @@ export const getTranslations = (locale: string | undefined) => {
       return undefined;
   }
 };
+
+/**
+ * @private
+ * Temporary for backwards compatibility with locale prop
+ */
+export const getGlobalTranslations = (locale: string | undefined) => {
+  switch (locale) {
+    case "nn":
+      return nn_translations.global;
+    case "en":
+    case "en-GB":
+      return en_translations.global;
+    default:
+      return undefined;
+  }
+};
