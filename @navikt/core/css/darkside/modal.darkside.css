@@ -60,15 +60,15 @@
   width: 450px;
 
   & .navds-modal__header {
-    padding: var(--ax-spacing-4) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-4);
+    padding: var(--ax-spacing-3) var(--ax-spacing-4);
   }
 
   & .navds-modal__body {
-    padding: var(--ax-spacing-2) var(--ax-spacing-4) var(--ax-spacing-4);
+    padding: var(--ax-spacing-3) var(--ax-spacing-4);
   }
 
   & .navds-modal__footer {
-    padding: var(--ax-spacing-4);
+    padding: var(--ax-spacing-3) var(--ax-spacing-4);
   }
 }
 
@@ -121,7 +121,7 @@
 }
 
 .navds-modal__header {
-  padding: var(--ax-spacing-6) var(--ax-spacing-6) var(--ax-spacing-4) var(--ax-spacing-6);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
 }
 
 .navds-modal__header-icon {
@@ -138,7 +138,7 @@
 }
 
 .navds-modal__body {
-  padding: var(--ax-spacing-6);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
@@ -164,7 +164,7 @@
   display: flex;
   flex-flow: row-reverse wrap;
   gap: var(--ax-spacing-4);
-  padding: var(--ax-spacing-4) var(--ax-spacing-6) var(--ax-spacing-6) var(--ax-spacing-6);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
 }
 
 .navds-modal__footer :nth-of-type(2) {

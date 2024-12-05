@@ -52,6 +52,9 @@ export default {
   ErrorSummary: {
     heading: "Du må rette desse feila før du kan halde fram:",
   },
+  FormSummary: {
+    editAnswer: "Endre svar",
+  },
   Loader: {
     title: "Ventar…",
   },
