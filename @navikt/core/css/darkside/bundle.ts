@@ -3,6 +3,7 @@ import CleanCss from "clean-css";
 import fastglob from "fast-glob";
 import fs from "fs";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
+import { camelCase } from "lodash";
 import path from "path";
 import {
   StyleMappings,
@@ -233,9 +234,13 @@ async function bundleDarkside() {
         process.exit(1);
       }
 
+      const sanitizedName = camelCase(componentName.replace(".css", ""))
+        .toLowerCase()
+        .replace(/ /g, "");
+
       writeFile({
         file,
-        filePath: `component/${componentName}`,
+        filePath: `component/${sanitizedName}.css`,
       });
     });
   }

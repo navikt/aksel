@@ -3799,6 +3799,7 @@ __metadata:
     postcss-combine-duplicated-selectors: "npm:10.0.3"
     postcss-import: "npm:^14.1.0"
     tsx: "npm:^4.7.1"
+    vitest: "npm:^1.2.2"
   languageName: unknown
   linkType: soft
 

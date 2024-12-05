@@ -102,6 +102,7 @@ function buildFragmentFiles() {
   const files = fastglob
     .sync("*.css", { cwd: ".", ignore: "**/*.min.css" })
     .map((fileN) => path.basename(fileN))
+    .filter((fileName) => !fileName.includes("index.css"))
     .map((x) => ({
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(

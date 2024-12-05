@@ -25,7 +25,9 @@
     "build": "node config/bundle.js",
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
     "css:get-version": "node config/get-version.js",
-    "build:darkside": "tsx ./darkside/bundle.ts"
+    "build:darkside": "tsx ./darkside/bundle.ts",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.6.0",
@@ -43,7 +45,8 @@
     "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
     "postcss-import": "^14.1.0",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "vitest": "^1.2.2"
   },
   "browserslist": [
     ">0.2%",
