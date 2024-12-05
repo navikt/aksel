@@ -1,23 +1,23 @@
 @charset "UTF-8";
 
 /* CSS is ordered by specificity, so that browsers without layers fall backs to good defaults */
-@layer aksel.reset, aksel.typography, aksel.theme, aksel.components, aksel.layout, aksel.utilities;
+@layer aksel.reset, aksel.theming, aksel.baseline, aksel.print, aksel.typography, aksel.components, aksel.layout;
 
 /* ----------------------------- CSS foundations ---------------------------- */
-@import "./baseline/reset.darkside.css" layer(aksel.reset);
-@import "./baseline/print.darkside.css" layer(aksel.reset);
 @import "./baseline/fonts.darkside.css" layer(aksel.typography);
-@import "./typography.darkside.css" layer(aksel.typography);
-
-/* --------------------------------- Theming -------------------------------- */
-@import "@navikt/ds-tokens/dist/darkside/tokens.css" layer(aksel.theme);
-@import "./baseline/theme.darkside.css" layer(aksel.theme);
+@import "./baseline/reset.darkside.css" layer(aksel.reset);
+@import "./baseline/tokens.darkside.css" layer(aksel.theming);
+@import "./baseline/baseline.darkside.css" layer(aksel.baseline);
+@import "./baseline/print.darkside.css" layer(aksel.print);
 
 /* ------------------------------- Components ------------------------------- */
+@import "./typography.darkside.css" layer(aksel.components);
 @import "./button.darkside.css" layer(aksel.components);
 @import "./chips.darkside.css" layer(aksel.components);
 
 /**
+  * Most components depend on typo-styles, so we import them first.
+  *
   * `./form/index.css` edits the following components:
   * - Button
   * - Chips
@@ -53,9 +53,7 @@
 @import "./table.darkside.css" layer(aksel.components);
 @import "./tabs.darkside.css" layer(aksel.components);
 @import "./list.darkside.css" layer(aksel.components);
+@import "./theme.darkside.css" layer(aksel.components);
 
 /* --------------------------------- Layout --------------------------------- */
 @import "./primitives/index.css" layer(aksel.layout);
-
-/* --------------------------------- Utility -------------------------------- */
-@import "./baseline/utilities.darkside.css" layer(aksel.utilities);
