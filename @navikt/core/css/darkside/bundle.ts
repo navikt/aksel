@@ -79,7 +79,7 @@ function writeFile({ file, filePath }: { file: string; filePath: string }) {
   );
 }
 
-/* Build index files */
+/* ----------------------------- index.css build ---------------------------- */
 bundleCSS().then((file) => {
   writeFile({
     file,
@@ -87,10 +87,9 @@ bundleCSS().then((file) => {
   });
 });
 
-/* Build Component files */
-
+/* --------------------------- component.css build -------------------------- */
 const rootComponentsParser = (rootString: string) => {
-  const parsed = rootString
+  let parsed = rootString
     .split("\n")
     .filter((line) => {
       return (
@@ -100,7 +99,8 @@ const rootComponentsParser = (rootString: string) => {
     })
     .join("\n");
 
-  /* console.log(parsed); */
+  parsed = layerDefinition + "\n" + parsed;
+
   return parsed;
 };
 

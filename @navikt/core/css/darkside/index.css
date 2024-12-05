@@ -6,7 +6,7 @@
 /* ----------------------------- CSS foundations ---------------------------- */
 @import "./baseline/fonts.darkside.css" layer(aksel.typography);
 @import "./baseline/reset.darkside.css" layer(aksel.reset);
-@import "../../tokens/dist/darkside/tokens.css" layer(aksel.theming);
+@import "./baseline/tokens.darkside.css" layer(aksel.theming);
 @import "./baseline/baseline.darkside.css" layer(aksel.baseline);
 @import "./baseline/print.darkside.css" layer(aksel.print);
 
