@@ -154,7 +154,7 @@ async function bundleMinified() {
 function copyToVersionFolder() {
   const files = fastglob.sync("**/*.css", {
     cwd: `./${rootDir}`,
-    ignore: "**/version/**",
+    ignore: ["**/version/**", "**/darkside/**"],
   });
 
   for (let file of files) {
