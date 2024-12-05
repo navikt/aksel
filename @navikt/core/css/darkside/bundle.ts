@@ -1,6 +1,6 @@
 import browserslist from "browserslist";
-
-/* import fs from "fs"; */
+import CleanCss from "clean-css";
+import fs from "fs";
 import { Features, browserslistToTargets, bundle } from "lightningcss";
 
 const { code } = bundle({
@@ -24,11 +24,20 @@ let codeString = code.toString();
  * --lightningcss-light: initial;
  * --lightningcss-dark: ;
  */
+
 codeString = codeString
   .split("\n")
   .filter((line) => !line.includes("--lightningcss-"))
   .join("\n");
 
-/* fs.writeFileSync("./OUTPUT.css", codeString); */
+if (!fs.existsSync("../dist/darkside")) {
+  fs.mkdirSync("../dist/darkside");
+}
 
-console.info(codeString);
+const minifiedCss = new CleanCss({}).minify(codeString);
+
+if (minifiedCss.errors.length > 0) {
+  console.error("Errors found when minifying CSS. Stopped bundling");
+}
+
+fs.writeFileSync("../dist/darkside/index.css", minifiedCss.styles);

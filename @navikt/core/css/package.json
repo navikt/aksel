@@ -24,12 +24,15 @@
   "scripts": {
     "build": "node config/bundle.js",
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
-    "css:get-version": "node config/get-version.js"
+    "css:get-version": "node config/get-version.js",
+    "build:darkside": "tsx ./darkside/bundle.ts"
   },
   "devDependencies": {
-    "browserslist": "^4.24.2",
     "@navikt/ds-tokens": "^7.6.0",
+    "@types/clean-css": "4.2.11",
     "autoprefixer": "^10.4.20",
+    "browserslist": "^4.24.2",
+    "clean-css": "5.3.3",
     "cssnano": "6.0.0",
     "fast-glob": "3.2.11",
     "lightningcss": "^1.28.0",
