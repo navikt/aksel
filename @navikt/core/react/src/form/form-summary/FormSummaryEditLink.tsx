@@ -3,7 +3,6 @@ import React, { forwardRef } from "react";
 import { Link } from "../../link";
 import { OverridableComponent } from "../../util/types";
 
-// export type FormSummaryEditProps = Partial<LinkProps>;
 export interface FormSummaryEditProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
