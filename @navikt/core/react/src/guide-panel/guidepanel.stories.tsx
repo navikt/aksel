@@ -75,7 +75,7 @@ export const ColorOverride: Story = {
           "--ac-guide-panel-border": "var(--a-purple-400)",
         }}
       >
-        123
+        {panelText}
       </GuidePanel>
     </div>
   ),

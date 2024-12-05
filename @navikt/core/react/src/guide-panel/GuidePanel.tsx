@@ -52,11 +52,12 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         data-poster={poster}
       >
         <div className="navds-guide">
-          {illustration ?? themeContext ? (
-            <DarksideGudiepanelIllustration />
-          ) : (
-            <DefaultIllustration />
-          )}
+          {illustration ??
+            (themeContext ? (
+              <DarksideGudiepanelIllustration />
+            ) : (
+              <DefaultIllustration />
+            ))}
         </div>
         <div className="navds-guide-panel__content">
           {themeContext && (
