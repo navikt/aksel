@@ -32,7 +32,7 @@ export const FormSummaryEditLink: OverridableComponent<
       {...rest}
       className={cl("navds-form-summary__edit", className)}
     >
-      {children || translate("changeAnswer")}
+      {children || translate("editAnswer")}
     </Link>
   );
 });

@@ -49,7 +49,7 @@ export default {
     heading: "Du må rette desse feila før du kan halde fram:",
   },
   FormSummary: {
-    changeAnswer: "Endre svar",
+    editAnswer: "Endre svar",
   },
   Loader: {
     title: "Ventar…",

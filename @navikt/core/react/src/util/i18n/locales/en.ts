@@ -49,7 +49,7 @@ export default {
     heading: "You must correct the following errors before you can continue:",
   },
   FormSummary: {
-    changeAnswer: "Change answer",
+    editAnswer: "Edit answer",
   },
   Loader: {
     title: "Waiting…",
