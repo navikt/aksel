@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-CopyButton: Deprecated prop `activeTitle`. Use `activeText` instead.
+CopyButton: Removed prop `activeTitle`. Use `activeText` instead.

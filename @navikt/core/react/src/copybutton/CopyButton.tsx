@@ -64,12 +64,6 @@ export interface CopyButtonProps
    */
   title?: string;
   /**
-   * Accessible label for icon in active-state (ignored if text is set).
-   * @default "Kopiert!"
-   * @deprecated Use `activeText` instead
-   */
-  activeTitle?: string;
-  /**
    * Icon position in button.
    * @default "left"
    */
@@ -101,8 +95,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       activeIcon,
       activeDuration = 2000,
       title,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      activeTitle, // TODO remove in next major version
       iconPosition = "left",
       onClick,
       ...rest
