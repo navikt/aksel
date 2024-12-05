@@ -15,22 +15,18 @@ export const ProviderContext = createContext<ProviderContextType>({
 export type ProviderProps = {
   children: React.ReactNode;
   /**
-   * Global root-element to attach portals to (Tooltip)
+   * Global root-element to attach portals to. Used by Tooltip, Modal (optionally) and ActionMenu.
    */
   rootElement?: HTMLElement;
 } & (
   | {
-      /**
-       * Language translations
-       */
+      /** Locale provided by Aksel */
       locale: Translations;
+      /** Custom translations */
       translations?: PartialTranslations | PartialTranslations[];
     }
   | {
       locale?: never;
-      /**
-       * Your translation overrides
-       */
       translations?: never;
     }
 );
