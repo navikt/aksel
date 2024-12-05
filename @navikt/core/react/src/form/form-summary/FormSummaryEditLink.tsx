@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Link } from "../../link";
+import { useI18n } from "../../util/i18n/i18n.context";
 import { OverridableComponent } from "../../util/types";
 
 // export type FormSummaryEditProps = Partial<LinkProps>;
@@ -22,17 +23,18 @@ export interface FormSummaryEditProps
 export const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
-> = forwardRef(
-  ({ children = "Endre svar", className, as = "a", ...rest }, ref) => (
+> = forwardRef(({ children, className, as = "a", ...rest }, ref) => {
+  const translate = useI18n("FormSummary");
+  return (
     <Link
       ref={ref}
       as={as}
       {...rest}
       className={cl("navds-form-summary__edit", className)}
     >
-      {children}
+      {children || translate("changeAnswer")}
     </Link>
-  ),
-);
+  );
+});
 
 export default FormSummaryEditLink;

@@ -48,6 +48,9 @@ export default {
   ErrorSummary: {
     heading: "You must correct the following errors before you can continue:",
   },
+  FormSummary: {
+    changeAnswer: "Change answer",
+  },
   Loader: {
     title: "Waiting…",
   },
