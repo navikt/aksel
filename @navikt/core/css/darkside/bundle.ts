@@ -3,6 +3,7 @@ import CleanCss from "clean-css";
 import fs from "fs";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
 import path from "path";
+import { componentsCss } from "../config/_mappings";
 
 const buildDir = path.join(__dirname, "..", "dist/darkside");
 
@@ -68,5 +69,13 @@ bundleCSS().then((file) => {
   writeFile({
     file,
     filePath: "index.css",
+  });
+});
+
+/* Build Component files */
+bundleCSS().then((file) => {
+  writeFile({
+    file,
+    filePath: componentsCss,
   });
 });
