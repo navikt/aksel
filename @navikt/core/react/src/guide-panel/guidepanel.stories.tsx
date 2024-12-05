@@ -68,14 +68,16 @@ export const PosterVariants: Story = {
 
 export const ColorOverride: Story = {
   render: () => (
-    <GuidePanel
-      style={{
-        "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
-        "--ac-guide-panel-border": "var(--a-purple-400)",
-      }}
-    >
-      {panelText}
-    </GuidePanel>
+    <div>
+      <GuidePanel
+        style={{
+          "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
+          "--ac-guide-panel-border": "var(--a-purple-400)",
+        }}
+      >
+        123
+      </GuidePanel>
+    </div>
   ),
 };
 
