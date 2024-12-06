@@ -33,7 +33,6 @@ export default {
     /** Loader title */
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valgt.",
-    clear: "Tøm",
   },
   CopyButton: {
     title: "Kopier",

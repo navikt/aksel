@@ -27,7 +27,6 @@ export default {
     addOption: "Add",
     loading: "Searching…",
     maxSelected: "{selected} of max {limit} are selected.",
-    clear: "Clear",
   },
   CopyButton: {
     title: "Copy",

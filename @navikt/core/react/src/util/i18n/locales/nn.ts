@@ -27,7 +27,6 @@ export default {
     addOption: "Legg til",
     loading: "Søker…",
     maxSelected: "{selected} av maks {limit} er valt.",
-    clear: "Tøm",
   },
   CopyButton: {
     title: "Kopier",
