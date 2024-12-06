@@ -2,4 +2,4 @@
 "@navikt/ds-css": patch
 ---
 
-CSS: Resolved regressions where them complete stylesheet was included in scoped 'components.css' file.
+CSS: Resolved regression where the complete stylesheet was included in scoped 'components.css' file.
