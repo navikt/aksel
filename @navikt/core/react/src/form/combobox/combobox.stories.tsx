@@ -74,8 +74,8 @@ Default.argTypes = {
     defaultValue: "medium",
     control: { type: "radio" },
   },
-  clearButtonLabel: {
-    control: { type: "text" },
+  toggleListButton: {
+    control: { type: "boolean" },
   },
 };
 

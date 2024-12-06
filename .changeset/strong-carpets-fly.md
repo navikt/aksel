@@ -2,4 +2,4 @@
 "@navikt/ds-react": minor
 ---
 
-Combobox: Deprecated props `clearButton` and `clearButtonLabel`, and changed `maxSelected` to number.
+Combobox: Changed prop `maxSelected` to number
