@@ -93,7 +93,7 @@ const InputProvider = ({ children, value: props }: Props) => {
   );
 
   const clearInput = useCallback(
-    (event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent) => {
+    (event: React.PointerEvent | React.KeyboardEvent | React.FocusEvent) => {
       onClear?.(event);
       externalOnChange?.("");
       setInternalValue("");

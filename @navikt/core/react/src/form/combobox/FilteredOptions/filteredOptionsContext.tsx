@@ -142,13 +142,13 @@ const FilteredOptionsProvider = ({
       }
       virtualFocus.resetFocus();
       if (newState ?? !isInternalListOpen) {
-        setHideCaret(!!maxSelected?.isLimitReached);
+        setHideCaret(maxSelected.isLimitReached);
       }
       setInternalListOpen((oldState) => newState ?? !oldState);
     },
     [
       virtualFocus,
-      maxSelected?.isLimitReached,
+      maxSelected.isLimitReached,
       isInternalListOpen,
       setHideCaret,
       disabled,
@@ -178,7 +178,7 @@ const FilteredOptionsProvider = ({
       }
     }
     const maybeMaxSelectedOptionsId =
-      maxSelected?.isLimitReached &&
+      maxSelected.isLimitReached &&
       filteredOptionsUtils.getMaxSelectedOptionsId(id);
 
     return (
@@ -188,7 +188,7 @@ const FilteredOptionsProvider = ({
   }, [
     isListOpen,
     isLoading,
-    maxSelected?.isLimitReached,
+    maxSelected.isLimitReached,
     value,
     partialAriaDescribedBy,
     shouldAutocomplete,
