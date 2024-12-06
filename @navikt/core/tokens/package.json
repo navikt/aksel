@@ -9,7 +9,6 @@
     "javascript",
     "design-tokens"
   ],
-  "main": "dist/tokens.css",
   "license": "MIT",
   "files": [
     "/dist",
@@ -46,5 +45,26 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "main": "dist/tokens.css",
+  "exports": {
+    ".": "./dist/tokens.css",
+    "./dist/tokens.css": "./dist/tokens.css",
+    "./dist/tokens.less": "./dist/tokens.less",
+    "./dist/tokens.scss": "./dist/tokens.scss",
+    "./dist/tokens": {
+      "default": "./dist/tokens.js",
+      "types": "./dist/tokens.d.ts",
+      "require": "./dist/tokens-cjs.js"
+    },
+    "./dist/*": "./dist/*",
+    "./darkside-css": "./dist/darkside/tokens.css",
+    "./darkside-js": {
+      "default": "./dist/darkside/tokens.js",
+      "require": "./dist/darkside/tokens-cjs.js",
+      "types": "./dist/darkside/tokens.d.ts"
+    },
+    "./darkside-scss": "./dist/darkside/tokens.scss",
+    "./darkside-less": "./dist/darkside/tokens.less"
   }
 }
