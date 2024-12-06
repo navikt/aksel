@@ -53,16 +53,16 @@
     "./dist/tokens.less": "./dist/tokens.less",
     "./dist/tokens.scss": "./dist/tokens.scss",
     "./dist/tokens": {
-      "default": "./dist/tokens.js",
       "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js",
       "require": "./dist/tokens-cjs.js"
     },
     "./dist/*": "./dist/*",
     "./darkside-css": "./dist/darkside/tokens.css",
     "./darkside-js": {
-      "default": "./dist/darkside/tokens.js",
-      "require": "./dist/darkside/tokens-cjs.js",
-      "types": "./dist/darkside/tokens.d.ts"
+      "types": "./dist/darkside/tokens.d.ts",
+      "import": "./dist/darkside/tokens.js",
+      "require": "./dist/darkside/tokens-cjs.js"
     },
     "./darkside-scss": "./dist/darkside/tokens.scss",
     "./darkside-less": "./dist/darkside/tokens.less"

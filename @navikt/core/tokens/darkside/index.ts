@@ -7,7 +7,13 @@ import {
   lightModeTokens,
   rootTokens,
 } from "./create-configuration";
-import { formatCJS, formatES6, transformCSS } from "./sd-format";
+import {
+  formatCJS,
+  formatES6,
+  formatLESS,
+  formatSCSS,
+  transformCSS,
+} from "./sd-format";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -135,6 +141,27 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
+    scss: {
+      transformGroup: "scss",
+      buildPath: DARKSIDE_DIST,
+
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "format-SCSS",
+        },
+      ],
+    },
+    less: {
+      transformGroup: "less",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "format-LESS",
+        },
+      ],
+    },
   },
 });
 
@@ -160,14 +187,19 @@ const main = async () => {
     format: formatES6,
   });
 
-  /**
-   * To support theming in the future, we need to export the tokens as CSS variables.
-   * By default StyleDictionary does not support this and only outputs to color-values,
-   * so we need to create a custom format.
-   */
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-SCSS",
+    format: formatSCSS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-LESS",
+    format: formatLESS,
   });
 
   await Promise.all([
