@@ -4,7 +4,7 @@ import { Button as RDPButton, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
 import { UNSAFE_useAkselTheme } from "../../../provider";
 import { Detail } from "../../../typography";
-import { useDateTranslationContext } from "../../context/useDateTranslationContext";
+import { useDateTranslationContext } from "../../context";
 
 export interface WeekNumberProps {
   /** The number of the week. */

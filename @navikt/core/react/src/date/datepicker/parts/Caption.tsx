@@ -3,7 +3,7 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Label } from "../../../typography";
-import { useDateTranslationContext } from "../../context/useDateTranslationContext";
+import { useDateTranslationContext } from "../../context";
 import WeekRow from "./WeekRow";
 
 /**

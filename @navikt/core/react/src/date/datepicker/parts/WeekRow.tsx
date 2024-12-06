@@ -3,7 +3,7 @@ import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
-import { useDateTranslationContext } from "../../context/useDateTranslationContext";
+import { useDateTranslationContext } from "../../context";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
 import WeekNumber from "./WeekNumber";
 

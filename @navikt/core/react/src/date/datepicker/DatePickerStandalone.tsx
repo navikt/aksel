@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
-import { DateTranslationContextProvider } from "../context/useDateTranslationContext";
+import { DateTranslationContextProvider } from "../context";
 import { getLocaleFromString, getTranslations } from "../utils";
 import Caption from "./parts/Caption";
 import DropdownCaption from "./parts/DropdownCaption";

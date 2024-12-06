@@ -10,8 +10,7 @@ import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
-import { useSharedMonthContext } from "../context";
-import { useDateTranslationContext } from "../context/useDateTranslationContext";
+import { useDateTranslationContext, useSharedMonthContext } from "../context";
 
 export const MonthCaption = () => {
   const {

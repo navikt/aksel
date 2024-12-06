@@ -4,7 +4,7 @@ import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
-import { useDateTranslationContext } from "../../context/useDateTranslationContext";
+import { useDateTranslationContext } from "../../context";
 import { getMonths, getYears } from "../../utils";
 import WeekRow from "./WeekRow";
 

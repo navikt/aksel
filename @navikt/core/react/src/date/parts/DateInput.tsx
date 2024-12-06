@@ -5,8 +5,7 @@ import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { useDateInputContext } from "../context";
-import { useDateTranslationContext } from "../context/useDateTranslationContext";
+import { useDateInputContext, useDateTranslationContext } from "../context";
 
 export interface DateInputProps
   extends FormFieldProps,

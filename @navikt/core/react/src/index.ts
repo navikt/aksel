@@ -155,9 +155,6 @@ export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
 
-// Locales
-export { nb, nn, en } from "./util/i18n/locales";
-
 /**
  * @deprecated
  */

@@ -20,9 +20,23 @@ export type ProviderProps = {
   rootElement?: HTMLElement;
 } & (
   | {
-      /** Locale provided by Aksel */
+      /**
+       * Aksel locale
+       * @default nb
+       * @example
+       * ```jsx
+       * import { en } from "@navikt/ds-react/locales";
+       * <Provider locale={en}>
+       *  {app}
+       * </Provider>
+       * ```
+       */
       locale: Translations;
-      /** Custom translations */
+      /**
+       * Use this if you need to override some of the default translations.
+       * Can be a single object or an array of objects.
+       * Must be used together with the `locale` prop.
+       */
       translations?: PartialTranslations | PartialTranslations[];
     }
   | {
@@ -46,9 +60,21 @@ export const useProvider = () => useContext(ProviderContext);
  * </Provider>
  * ```
  */
-export const Provider = ({ children, ...rest }: ProviderProps) => {
+export const Provider = ({
+  children,
+  rootElement,
+  locale,
+  translations,
+}: ProviderProps) => {
+  const parentContext = useProvider();
   return (
-    <ProviderContext.Provider value={{ ...rest, locale: rest.locale || nb }}>
+    <ProviderContext.Provider
+      value={{
+        rootElement: rootElement || parentContext.rootElement,
+        locale: locale || parentContext.locale || nb,
+        translations: translations || parentContext.translations,
+      }}
+    >
       {children}
     </ProviderContext.Provider>
   );
