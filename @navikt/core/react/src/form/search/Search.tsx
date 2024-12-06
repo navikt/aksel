@@ -53,7 +53,7 @@ export interface SearchProps
   /**
    * Sets the `aria-label` for the clear button.
    * @default "Tøm feltet"
-   * @deprecated Use Provider instead
+   * @deprecated Use `<Provider />`-component
    */
   clearButtonLabel?: string;
   /**

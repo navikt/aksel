@@ -53,13 +53,14 @@ export interface DatePickerDefaultProps
   /**
    * Changes datepicker locale
    * @default "nb" (norsk bokmål)
-   * @deprecated Use Provider instead
+   * @deprecated Use `<Provider />`-component
    */
   locale?: "nb" | "nn" | "en";
   /**
    * i18n-API for customizing texts and labels.
    *
    * **NB: If you need to change the language, use the Provider instead.**
+   * @see [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)
    */
   translations?: ComponentTranslation<"DatePicker">;
   /**

@@ -33,6 +33,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * i18n-API for customizing texts and labels.
    *
    * **NB: If you need to change the language, use the Provider instead.**
+   * @see [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)
    */
   translations?: ComponentTranslation<"DatePicker">;
   /**

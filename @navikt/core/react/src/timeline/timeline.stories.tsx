@@ -419,7 +419,7 @@ export const WithDayLabels: StoryFn = () => {
       {component}
 
       <div>
-        EN:
+        <h3>EN:</h3>
         <Provider locale={en}>{component}</Provider>
       </div>
     </VStack>
