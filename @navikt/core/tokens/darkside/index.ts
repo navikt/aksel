@@ -141,6 +141,20 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
+    jsStatic: {
+      transformGroup: "js",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.js",
+          format: "javascript/es6",
+        },
+        {
+          destination: "tokens-cjs.js",
+          format: "javascript/module-flat",
+        },
+      ],
+    },
     scss: {
       transformGroup: "scss",
       buildPath: DARKSIDE_DIST,
@@ -152,6 +166,16 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
+    scssStatic: {
+      transformGroup: "scss",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "scss/variables",
+        },
+      ],
+    },
     less: {
       transformGroup: "less",
       buildPath: DARKSIDE_DIST,
@@ -159,6 +183,16 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         {
           destination: "tokens.less",
           format: "format-LESS",
+        },
+      ],
+    },
+    lessStatic: {
+      transformGroup: "less",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "less/variables",
         },
       ],
     },
@@ -224,6 +258,12 @@ const main = async () => {
   });
 
   fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
+
+  /* Create static type-file for darkside */
+  fs.writeFileSync(
+    `${DARKSIDE_DIST}static/tokens.d.ts`,
+    fs.readFileSync(`${DARKSIDE_DIST}static/tokens.js`, "utf-8"),
+  );
 };
 
 main();
