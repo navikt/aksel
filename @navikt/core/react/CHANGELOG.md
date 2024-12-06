@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 7.7.0
+
+### Minor Changes
+
+- CopyButton: Removed prop `activeTitle`. Use `activeText` instead. ([#3426](https://github.com/navikt/aksel/pull/3426))
+
+- Combobox: :boom: Removed prop `toggleListButtonLabel` ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+### Patch Changes
+
+- Combobox: Hid buttons from screen readers, added `title` on clear button, removed sr-only text on toggle list button. ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+- InternalHeader.UserButton: Remove `title`-attribute on icon and improved types. ([#3424](https://github.com/navikt/aksel/pull/3424))
+
+- CopyButton: Fix issue where state changes are announced multiple times using VO in Chrome ([#3374](https://github.com/navikt/aksel/pull/3374))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.7.0
+  - @navikt/aksel-icons@7.7.0
+
 ## 7.6.0
 
 ### Minor Changes
