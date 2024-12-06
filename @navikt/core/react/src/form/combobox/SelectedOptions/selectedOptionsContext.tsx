@@ -117,6 +117,8 @@ const SelectedOptionsProvider = ({
     ) => {
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
+      } else if (isMultiSelect && isLimitReached) {
+        return;
       } else {
         addSelectedOption(option);
       }
@@ -129,6 +131,8 @@ const SelectedOptionsProvider = ({
       focusInput,
       removeSelectedOption,
       selectedOptions,
+      isLimitReached,
+      isMultiSelect,
     ],
   );
 
