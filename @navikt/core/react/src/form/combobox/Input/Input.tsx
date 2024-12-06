@@ -75,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        const isTextInSelectedOptions = (text: string) =>
+        const isSelected = (text: string) =>
           selectedOptions.some(
             (option) =>
               option.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
@@ -85,10 +85,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
+          if (!isMultiSelect && !isSelected(currentOption.label)) {
             toggleIsListOpen(false);
           }
-        } else if (isTextInSelectedOptions(value)) {
+        } else if (isSelected(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
@@ -109,23 +109,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             filteredOptionsUtil.normalizeText(value) ===
             filteredOptionsUtil.normalizeText(autoCompletedOption?.label ?? "");
 
-          let selectedValue: ComboboxOption | undefined;
+          let optionToToggle: ComboboxOption | undefined;
 
           if (
             shouldAutocomplete &&
             autoCompletedOption &&
             autoCompleteMatchesValue
           ) {
-            selectedValue = autoCompletedOption;
+            optionToToggle = autoCompletedOption;
           } else if (allowNewValues && isValueNew) {
-            selectedValue = { label: value, value };
+            optionToToggle = { label: value, value };
           }
 
-          if (!selectedValue) {
+          if (!optionToToggle) {
             return;
           }
-          toggleOption(selectedValue, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
+          toggleOption(optionToToggle, event);
+          if (!isMultiSelect && !isSelected(optionToToggle.label)) {
             toggleIsListOpen(false);
           }
         }
