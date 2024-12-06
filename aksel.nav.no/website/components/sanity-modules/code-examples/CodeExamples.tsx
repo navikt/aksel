@@ -109,7 +109,6 @@ const ComponentExamples = ({ node }: CodeExamplesProps) => {
                   key={fil._key}
                   value={fil.navn}
                   selected={isSelected}
-                  id={id}
                   onClick={() => {
                     if (isSelected) return;
                     setUnloaded(true);
