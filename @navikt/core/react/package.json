@@ -40,6 +40,16 @@
         "default": "./cjs/index.js"
       }
     },
+    "./locales": {
+      "import": {
+        "types": "./esm/util/i18n/locales/index.d.ts",
+        "default": "./esm/util/i18n/locales/index.js"
+      },
+      "require": {
+        "types": "./cjs/util/i18n/locales/index.d.ts",
+        "default": "./cjs/util/i18n/locales/index.js"
+      }
+    },
     "./Accordion": {
       "import": {
         "types": "./esm/accordion/index.d.ts",

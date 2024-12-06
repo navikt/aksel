@@ -1,6 +1,5 @@
 import { Locale } from "date-fns";
-import { useContext } from "react";
-import { LanguageProviderContext } from "../../provider/i18n/LanguageProvider";
+import { useProvider } from "../../provider/Provider";
 import { get } from "./get";
 import {
   Component,
@@ -28,15 +27,16 @@ export type TFunction<T extends Component> = (
 
 export function useI18n<T extends Component>(
   componentName: T,
-  ...local: (ComponentTranslation<T> | undefined)[]
+  ...localTranslations: (ComponentTranslation<T> | undefined)[]
 ) {
-  const languageProviderContext = useContext(LanguageProviderContext);
-  const i18n = languageProviderContext.translations;
+  const context = useProvider();
+  const contextTranslations = context.translations || [];
   const i18nObjects: (PartialTranslations | undefined)[] = [
-    ...local,
-    ...(Array.isArray(i18n)
-      ? i18n.map((t) => t[componentName])
-      : [i18n[componentName]]),
+    ...localTranslations,
+    ...(Array.isArray(contextTranslations)
+      ? contextTranslations.map((t) => t[componentName])
+      : [contextTranslations[componentName]]),
+    context.locale[componentName],
   ];
 
   /**
@@ -67,11 +67,12 @@ export function useI18n<T extends Component>(
 }
 
 export function useDateLocale() {
-  const languageProviderContext = useContext(LanguageProviderContext);
-  const i18n = languageProviderContext.translations;
-  const i18nObjects = Array.isArray(i18n)
-    ? i18n.map((t) => t.global)
-    : [i18n.global];
+  const context = useProvider();
+  const contextTranslations = context.translations || [];
+  const i18nObjects = Array.isArray(contextTranslations)
+    ? contextTranslations.map((t) => t.global)
+    : [contextTranslations.global];
+  i18nObjects.push(context.locale.global);
 
   for (const obj of i18nObjects) {
     if (obj?.dateLocale) {

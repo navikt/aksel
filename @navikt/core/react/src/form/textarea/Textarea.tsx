@@ -54,6 +54,7 @@ export interface TextareaProps
   UNSAFE_autoScrollbar?: boolean;
   /**
    * i18n-translations for counter-text
+   * @deprecated Use `<Provider />`-component
    */
   i18n?: {
     /** @default tegn igjen */

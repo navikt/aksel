@@ -3,14 +3,13 @@ import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
-import { useI18n } from "../../../util/i18n/i18n.context";
-import { getTranslations } from "../../utils";
+import { useDateTranslationContext } from "../../context";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
 import WeekNumber from "./WeekNumber";
 
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();
-  const translate = useI18n("DatePicker", getTranslations(locale.code));
+  const translate = useDateTranslationContext().translate;
   const labelId = useId();
 
   if (!onWeekNumberClick) {

@@ -5,8 +5,7 @@ import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { useI18n } from "../../util/i18n/i18n.context";
-import { useDateInputContext } from "../context";
+import { useDateInputContext, useDateTranslationContext } from "../context";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -47,7 +46,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
   } = props;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const translate = useI18n("DatePicker");
+  const translate = useDateTranslationContext().translate;
 
   const isDatepickerVariant = variant === "datepicker";
 

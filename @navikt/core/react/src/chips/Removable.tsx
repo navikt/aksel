@@ -16,11 +16,6 @@ export interface ChipsRemovableProps
    * Click callback
    */
   onDelete?: () => void;
-  /**
-   * Replaces label read for screen-readers
-   * @default "slett"
-   */
-  removeLabel?: string;
 }
 
 export const RemovableChips = forwardRef<
@@ -32,7 +27,6 @@ export const RemovableChips = forwardRef<
       children,
       variant = "action",
       onDelete,
-      removeLabel,
       className,
       onClick,
       type = "button",
@@ -51,9 +45,7 @@ export const RemovableChips = forwardRef<
           className,
           `navds-chips__removable--${variant}`,
         )}
-        aria-label={`${children} ${
-          removeLabel ?? translate("Removable.labelSuffix")
-        }`}
+        aria-label={`${children} ${translate("Removable.labelSuffix")}`}
         onClick={composeEventHandlers(onClick, onDelete)}
       >
         <span className="navds-chips__chip-text">{children}</span>

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-interface DateContextContextProps {
+interface DateInputContextProps {
   /**
    * Open state for popover
    */
@@ -19,13 +19,15 @@ interface DateContextContextProps {
   defined: boolean;
 }
 
-export const DateContext = createContext<DateContextContextProps | null>(null);
+export const DateInputContext = createContext<DateInputContextProps | null>(
+  null,
+);
 
 export const useDateInputContext = () => {
-  const context = useContext(DateContext);
+  const context = useContext(DateInputContext);
 
   if (!context) {
-    console.warn("useDateInputContext must be used with DateContext");
+    console.warn("useDateInputContext must be used with DateInputContext");
   }
 
   return context;

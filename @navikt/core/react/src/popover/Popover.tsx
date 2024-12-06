@@ -8,7 +8,7 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
-import { DateContext } from "../date/context";
+import { DateInputContext } from "../date/context";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
 import { UNSAFE_useAkselTheme } from "../provider";
@@ -121,7 +121,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
-    const isInDatepicker = useContext(DateContext) !== null;
+    const isInDatepicker = useContext(DateInputContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
 

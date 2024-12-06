@@ -52,7 +52,8 @@ export interface SearchProps
   onSearchClick?: (value: string) => void;
   /**
    * Sets the `aria-label` for the clear button.
-   * @default "Tøm"
+   * @default "Tøm feltet"
+   * @deprecated Use `<Provider />`-component
    */
   clearButtonLabel?: string;
   /**

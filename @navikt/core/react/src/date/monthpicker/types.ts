@@ -1,3 +1,4 @@
+import { ComponentTranslation } from "../../util/i18n/i18n.types";
 import { Matcher } from "../utils";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -25,8 +26,15 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Changes monthpicker locale
    * @default "nb" (norsk bokmål)
+   * @deprecated Use `<Provider />`-component
    */
   locale?: "nb" | "nn" | "en";
+  /**
+   * i18n-API for customizing texts and labels.
+   *
+   * **NB: If you need to change the language, use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) instead.**
+   */
+  translations?: ComponentTranslation<"DatePicker">;
   /**
    * Display dropdown for choosing year. Needs `fromDate` + `toDate` to work.
    * @default false
