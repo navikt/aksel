@@ -27,6 +27,28 @@ export const formatCJS: FormatFn = async ({ dictionary, file }) => {
   return `${header}module.exports = {\n${tokens}\n};\n`;
 };
 
+export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
+  const header = await generateHeader(file);
+  const tokens = dictionary.allTokens
+    .map((token, idx, arr) =>
+      generateTokenString(token, "scss", idx === arr.length - 1),
+    )
+    .join("\n");
+
+  return `${header}${tokens}\n`;
+};
+
+export const formatLESS: FormatFn = async ({ dictionary, file }) => {
+  const header = await generateHeader(file);
+  const tokens = dictionary.allTokens
+    .map((token, idx, arr) =>
+      generateTokenString(token, "less", idx === arr.length - 1),
+    )
+    .join("\n");
+
+  return `${header}${tokens}\n`;
+};
+
 export const transformCSS: Transform = {
   name: "name/alpha-suffix",
   type: "name",
@@ -60,7 +82,7 @@ function createTokenValue(token: TransformedToken): string {
 
 export function generateTokenString(
   token: TransformedToken,
-  format: "es6" | "cjs",
+  format: "es6" | "cjs" | "scss" | "less",
   isLast: boolean,
 ): string {
   const comment = createComment(token.comment);
@@ -70,6 +92,15 @@ export function generateTokenString(
       token,
     )}";`;
   }
+  if (format === "scss") {
+    const name = kebabCaseForAlpha(token.name).replace("--ax-", "ax-");
+    return `${comment} $${name}: ${createTokenValue(token)};`;
+  }
+  if (format === "less") {
+    const name = kebabCaseForAlpha(token.name).replace("--ax-", "ax-");
+    return `${comment} @${name}: ${createTokenValue(token)};`;
+  }
+
   return `  ${comment}"${nameWithoutPrefix}": "${createTokenValue(token)}"${
     isLast ? "" : ","
   }`;

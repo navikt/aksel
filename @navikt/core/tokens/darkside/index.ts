@@ -7,7 +7,13 @@ import {
   lightModeTokens,
   rootTokens,
 } from "./create-configuration";
-import { formatCJS, formatES6, transformCSS } from "./sd-format";
+import {
+  formatCJS,
+  formatES6,
+  formatLESS,
+  formatSCSS,
+  transformCSS,
+} from "./sd-format";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -135,6 +141,61 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
+    jsStatic: {
+      transformGroup: "js",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.js",
+          format: "javascript/es6",
+        },
+        {
+          destination: "tokens-cjs.js",
+          format: "javascript/module-flat",
+        },
+      ],
+    },
+    scss: {
+      transformGroup: "scss",
+      buildPath: DARKSIDE_DIST,
+
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "format-SCSS",
+        },
+      ],
+    },
+    scssStatic: {
+      transformGroup: "scss",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "scss/variables",
+        },
+      ],
+    },
+    less: {
+      transformGroup: "less",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "format-LESS",
+        },
+      ],
+    },
+    lessStatic: {
+      transformGroup: "less",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "less/variables",
+        },
+      ],
+    },
   },
 });
 
@@ -160,14 +221,19 @@ const main = async () => {
     format: formatES6,
   });
 
-  /**
-   * To support theming in the future, we need to export the tokens as CSS variables.
-   * By default StyleDictionary does not support this and only outputs to color-values,
-   * so we need to create a custom format.
-   */
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-SCSS",
+    format: formatSCSS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-LESS",
+    format: formatLESS,
   });
 
   await Promise.all([
@@ -192,6 +258,12 @@ const main = async () => {
   });
 
   fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
+
+  /* Create static type-file for darkside */
+  fs.writeFileSync(
+    `${DARKSIDE_DIST}static/tokens.d.ts`,
+    fs.readFileSync(`${DARKSIDE_DIST}static/tokens.js`, "utf-8"),
+  );
 };
 
 main();
