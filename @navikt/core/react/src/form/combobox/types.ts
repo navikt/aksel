@@ -45,15 +45,11 @@ export interface ComboboxProps
    */
   allowNewValues?: boolean;
   /**
-   * Adds a button to clear the input value when not empty.
-   * NB: Will not clear selected values.
-   * @default true
+   * @deprecated The clear button has been removed. This prop has no effect.
    */
   clearButton?: boolean;
   /**
-   * Custom name for the clear button. Requires `clearButton` to be `true`.
-   *
-   * @default "Tøm"
+   * @deprecated The clear button has been removed. This prop has no effect.
    */
   clearButtonLabel?: string;
   /**
@@ -102,7 +98,7 @@ export interface ComboboxProps
    * @param event
    */
   onClear?: (
-    event: React.PointerEvent | React.KeyboardEvent | React.MouseEvent,
+    event: React.PointerEvent | React.KeyboardEvent | React.FocusEvent,
   ) => void;
   /**
    * Callback function triggered whenever an option is selected or de-selected.
@@ -124,19 +120,15 @@ export interface ComboboxProps
    */
   selectedOptions?: string[] | ComboboxOption[];
   /**
-   * Options for the maximum number of selected options.
+   * Maximum number of selected options.
+   * @example maxSelected={3}
    */
-  maxSelected?: {
-    /**
-     * The limit for maximum selected options
-     */
-    limit: number;
-    /**
-     * Message to display when the limit for maximum selected options has been reached
-     * @default "{selected} av maks {limit} er valgt."
-     */
-    message?: string;
-  };
+  maxSelected?:
+    | {
+        /** @deprecated Provide a number instead of an object */
+        limit: number;
+      }
+    | number;
   /**
    * Set to `true` to enable inline autocomplete.
    *

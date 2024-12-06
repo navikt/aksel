@@ -9,14 +9,7 @@ const MaxSelectedMessage = () => {
     inputProps: { id },
   } = useInputContext();
   const { maxSelected, selectedOptions } = useSelectedOptionsContext();
-  const translate = useI18n(
-    "Combobox",
-    maxSelected?.message ? { maxSelected: maxSelected.message } : undefined,
-  );
-
-  if (!maxSelected) {
-    return null;
-  }
+  const translate = useI18n("Combobox");
 
   return (
     <div
@@ -25,7 +18,7 @@ const MaxSelectedMessage = () => {
     >
       {translate("maxSelected", {
         selected: selectedOptions.length,
-        limit: maxSelected.limit,
+        limit: maxSelected.limit || 0,
       })}
     </div>
   );

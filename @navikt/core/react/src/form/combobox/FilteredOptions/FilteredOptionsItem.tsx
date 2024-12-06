@@ -39,7 +39,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const [start, highlight, end] = useTextHighlight(option.label, searchTerm);
 
   const isDisabled = (_option: ComboboxOption) =>
-    maxSelected?.isLimitReached && !isInList(_option.value, selectedOptions);
+    maxSelected.isLimitReached && !isInList(_option.value, selectedOptions);
 
   return (
     <li

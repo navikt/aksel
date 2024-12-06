@@ -26,12 +26,12 @@ const FilteredOptions = () => {
   const { maxSelected } = useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
-    maxSelected?.isLimitReached || // Render maxSelected message
+    maxSelected.isLimitReached || // Render maxSelected message
     isLoading || // Render loading message
     (!isLoading && filteredOptions.length === 0 && !allowNewValues); // Render no hits message
 
   const shouldRenderFilteredOptionsList =
-    (allowNewValues && isValueNew && !maxSelected?.isLimitReached) || // Render add new option
+    (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
   return (
@@ -45,7 +45,7 @@ const FilteredOptions = () => {
     >
       {shouldRenderNonSelectables && (
         <div className="navds-combobox__list_non-selectables" role="status">
-          {maxSelected?.isLimitReached && <MaxSelectedMessage />}
+          {maxSelected.isLimitReached && <MaxSelectedMessage />}
           {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
             <NoSearchHitsMessage />
@@ -60,7 +60,7 @@ const FilteredOptions = () => {
           role="listbox"
           className="navds-combobox__list-options"
         >
-          {isValueNew && !maxSelected?.isLimitReached && allowNewValues && (
+          {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
             <AddNewOption />
           )}
           {filteredOptions.map((option) => (
