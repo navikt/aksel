@@ -25,11 +25,7 @@ export {
 } from "./date/monthpicker";
 export { Dropdown, type DropdownProps } from "./dropdown";
 export { ExpansionCard, type ExpansionCardProps } from "./expansion-card";
-export {
-  GuidePanel,
-  GuidePanelDefaultIllustration,
-  type GuidePanelProps,
-} from "./guide-panel";
+export { GuidePanel, type GuidePanelProps } from "./guide-panel";
 export { HelpText, type HelpTextProps } from "./help-text";
 export {
   InternalHeader,

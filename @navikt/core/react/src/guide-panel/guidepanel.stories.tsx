@@ -31,14 +31,16 @@ export const Default: StoryObj<{ poster?: boolean; colorOverride?: boolean }> =
         : {};
 
       return (
-        <GuidePanel style={style} poster={props?.poster}>
-          {panelText}
-        </GuidePanel>
+        <VStack gap="2">
+          <GuidePanel style={style} poster={props?.poster}>
+            {panelText}
+          </GuidePanel>
+        </VStack>
       );
     },
 
     args: {
-      poster: false,
+      poster: undefined,
       colorOverride: false,
     },
   };
@@ -66,14 +68,16 @@ export const PosterVariants: Story = {
 
 export const ColorOverride: Story = {
   render: () => (
-    <GuidePanel
-      style={{
-        "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
-        "--ac-guide-panel-border": "var(--a-purple-400)",
-      }}
-    >
-      {panelText}
-    </GuidePanel>
+    <div>
+      <GuidePanel
+        style={{
+          "--ac-guide-panel-illustration-bg": "var(--a-purple-200)",
+          "--ac-guide-panel-border": "var(--a-purple-400)",
+        }}
+      >
+        {panelText}
+      </GuidePanel>
+    </div>
   ),
 };
 
