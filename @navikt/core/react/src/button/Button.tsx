@@ -85,7 +85,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       const mergedRef = useMergeRefs(buttonRef, ref);
 
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-        disabled ?? loading ? omit(rest, ["href"]) : rest;
+        (disabled || loading) ? omit(rest, ["href"]) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === " " && !disabled && !loading) {
