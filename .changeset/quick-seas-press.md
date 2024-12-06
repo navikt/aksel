@@ -4,4 +4,4 @@
 "@navikt/ds-css": minor
 ---
 
-Combobox: Removed clear button, removed tokens `--ac-combobox-clear-icon*`, deprecated props `clearButton`/`clearButtonLabel`.
+Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`.
