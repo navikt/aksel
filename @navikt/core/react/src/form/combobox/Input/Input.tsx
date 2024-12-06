@@ -279,7 +279,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value={value}
         onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
         onClick={() => {
-          setHideCaret(!!maxSelected?.isLimitReached);
+          setHideCaret(maxSelected.isLimitReached);
           value !== searchTerm && onChange(value);
         }}
         onInput={onChangeHandler}
