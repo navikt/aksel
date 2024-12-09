@@ -66,7 +66,13 @@ async function bundleComponents() {
   const css = fs.readFileSync(indexSrc);
 
   /* Remove @charset, baseline */
-  const cssString = css.toString().split("\n").slice(2).join("\n");
+  const cssString = css
+    .toString()
+    .split("\n")
+    .filter((line) => {
+      return line.startsWith("@import") && !line.includes("baseline");
+    })
+    .join("\n");
 
   const result = await postcss([cssImports, combineSelectors]).process(
     cssString,

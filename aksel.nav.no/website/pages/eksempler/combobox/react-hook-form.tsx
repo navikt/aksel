@@ -10,7 +10,7 @@ const Example = () => {
     control,
     formState: { errors },
   } = useForm<Inputs>({
-    shouldFocusError: false,
+    shouldFocusError: true, // Sett denne til false hvis du bruker ErrorSummary
     defaultValues: { transportmiddel: [] },
   });
 

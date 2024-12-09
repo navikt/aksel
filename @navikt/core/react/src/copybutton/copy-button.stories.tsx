@@ -27,6 +27,10 @@ export const Default: Story = {
       control: { type: "radio" },
       options: ["neutral", "action"],
     },
+    iconPosition: {
+      control: { type: "radio" },
+      options: ["left", "right"],
+    },
   },
   args: {
     size: "medium",
@@ -34,6 +38,7 @@ export const Default: Story = {
     copyText: "3.14",
     text: "",
     activeText: "",
+    title: "",
   },
 };
 
