@@ -1,7 +1,11 @@
 import { Meta, StoryFn } from "@storybook/react";
 import * as React from "react";
 import { useState } from "react";
-import { CheckmarkCircleFillIcon } from "@navikt/aksel-icons";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import UNSAFE_AkselLanguageProvider from "../provider/i18n/LanguageProvider";
 import en from "../util/i18n/locales/en";
@@ -45,6 +49,7 @@ const row1 = [
     end: new Date("Mar 15 2022"),
     status: "danger",
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
+    icon: <XMarkOctagonFillIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
   {
@@ -70,7 +75,7 @@ const row1 = [
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
     statusLabel: "Sykemeldt",
   },
@@ -79,7 +84,7 @@ const row1 = [
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     statusLabel: "Sykemeldt",
   },
 ];
@@ -91,7 +96,7 @@ const row2 = [
     end: new Date("May 25 2022"),
     status: "warning",
     onSelectPeriod: () => console.info("PERIOD SELECTED!"),
-    icon: <CheckmarkCircleFillIcon aria-hidden />,
+    icon: <ExclamationmarkTriangleFillIcon aria-hidden />,
     children: <DummyLabel />,
   },
   {
