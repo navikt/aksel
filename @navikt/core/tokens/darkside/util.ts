@@ -51,6 +51,7 @@ type GlobalColorScale =
 export type TokenTypes =
   | "color"
   | "shadow"
+  | "opacity"
   | "global-color"
   | "global-radius"
   | "global-spacing"

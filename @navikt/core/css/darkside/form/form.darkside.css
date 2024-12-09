@@ -23,7 +23,7 @@
 }
 
 .navds-form-field--disabled {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
   cursor: not-allowed;
 }
 

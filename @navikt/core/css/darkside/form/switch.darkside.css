@@ -169,7 +169,7 @@
 }
 
 .navds-switch--disabled:not(.navds-switch--loading) {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
 }
 
 .navds-switch__input:disabled,

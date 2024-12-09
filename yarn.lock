@@ -3783,8 +3783,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@types/clean-css": "npm:4.2.11"
     "@navikt/ds-tokens": "npm:^7.7.0"
+    "@types/clean-css": "npm:4.2.11"
     autoprefixer: "npm:^10.4.20"
     browserslist: "npm:^4.24.2"
     clean-css: "npm:5.3.3"
