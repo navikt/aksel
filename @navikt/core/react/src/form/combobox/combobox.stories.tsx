@@ -38,16 +38,8 @@ const options = [
   "grapefruit",
 ];
 
-export const Default: StoryFn<
-  ComboboxProps & { maxSelected?: number; maxSelectedMessage?: string }
-> = ({ maxSelected, maxSelectedMessage, ...rest }) => (
-  <UNSAFE_Combobox
-    {...rest}
-    maxSelected={
-      maxSelected && { limit: maxSelected, message: maxSelectedMessage }
-    }
-    id="combobox"
-  />
+export const Default: StoryFn<ComboboxProps> = (props) => (
+  <UNSAFE_Combobox {...props} id="combobox" />
 );
 Default.args = {
   options,
@@ -77,16 +69,13 @@ Default.argTypes = {
   maxSelected: {
     control: { type: "number" },
   },
-  maxSelectedMessage: {
-    control: { type: "text" },
-  },
   size: {
     options: ["medium", "small"],
     defaultValue: "medium",
     control: { type: "radio" },
   },
-  clearButtonLabel: {
-    control: { type: "text" },
+  toggleListButton: {
+    control: { type: "boolean" },
   },
 };
 
@@ -426,7 +415,7 @@ export const MaxSelectedOptions: StoryFn = ({ open }: { open?: boolean }) => {
       id="combobox-with-max-selected-options"
       label="Komboboks med begrenset antall valg"
       options={options}
-      maxSelected={{ limit: 2 }}
+      maxSelected={2}
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
