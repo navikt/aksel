@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
+import { ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import TextareaAutosize from "../../util/TextareaAutoSize";
@@ -192,7 +193,17 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage
+              size={size}
+              icon={
+                <ExclamationmarkTriangleFillIcon
+                  color="var(--ax-text-danger)"
+                  aria-hidden
+                />
+              }
+            >
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

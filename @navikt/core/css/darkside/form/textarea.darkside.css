@@ -94,6 +94,29 @@
   border-color: var(--ax-border-danger);
 }
 
+.navds-textarea--error {
+  .navds-form-field__error {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 20px;
+  }
+
+  &.navds-form-field {
+    .navds-error-message {
+      gap: 0;
+
+      &::before {
+        content: "";
+      }
+    }
+
+    svg {
+      margin-bottom: 2px;
+    }
+  }
+}
+
 @media (forced-colors: active) {
   .navds-textarea__input {
     background-color: field;

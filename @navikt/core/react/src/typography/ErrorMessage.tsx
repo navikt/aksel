@@ -16,6 +16,8 @@ export interface ErrorMessageProps
    * Error text.
    */
   children: React.ReactNode;
+
+  icon?: React.ReactNode;
 }
 
 /**
@@ -36,22 +38,25 @@ export const ErrorMessage: OverridableComponent<
   ErrorMessageProps,
   HTMLParagraphElement
 > = forwardRef(
-  ({ className, size, spacing, as: Component = "p", ...rest }, ref) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(
-        "navds-error-message",
-        "navds-label",
-        className,
-        typoClassNames({
-          spacing,
-        }),
-        {
-          "navds-label--small": size === "small",
-        },
-      )}
-    />
+  ({ className, size, spacing, as: Component = "p", icon, ...rest }, ref) => (
+    <>
+      {icon}
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(
+          "navds-error-message",
+          "navds-label",
+          className,
+          typoClassNames({
+            spacing,
+          }),
+          {
+            "navds-label--small": size === "small",
+          },
+        )}
+      />
+    </>
   ),
 );
 
