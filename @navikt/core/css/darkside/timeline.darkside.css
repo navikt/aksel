@@ -372,7 +372,7 @@
 */
 
 .navds-timeline__popover {
-  z-index: 2;
+  z-index: 3;
   background-color: var(--ax-bg-default);
   box-shadow:
     0 5px 12px 0 rgb(0 0 0 / 0.13),
