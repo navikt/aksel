@@ -17,7 +17,7 @@ export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ children, className, closeButton = true, ...rest }, ref) => {
     const context = useModalContext();
-    const translate = useI18n("Modal");
+    const translate = useI18n("global");
 
     return (
       <div {...rest} ref={ref} className={cl("navds-modal__header", className)}>
