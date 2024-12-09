@@ -39,7 +39,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
         value:
           theme === "light"
             ? "rgba(255, 255, 255, 0.85)"
-            : "rgba(14, 21, 31, 0.50)",
+            : "rgba(7, 9, 13, 0.50)",
         type: "color",
         group: "background",
       },
