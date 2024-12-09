@@ -215,11 +215,6 @@
   border-top-left-radius: 0;
 }
 
-.navds-timeline__period--selected {
-  box-shadow: inset 0 0 0 2px var(--ac-timeline-period-selected-border, var(--a-border-action-selected));
-  z-index: 3;
-}
-
 .navds-timeline__pin-wrapper {
   position: absolute;
   grid-column: 2;
@@ -236,68 +231,45 @@
 .navds-timeline__pin-button {
   border: none;
   cursor: pointer;
-  background: var(--a-surface-default);
-  box-shadow:
-    inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 4px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 5px var(--a-surface-default);
+  background: var(--ax-bg-default);
+  box-shadow: inset 0 0 0 4px var(--ax-border-danger-strong);
   z-index: 2;
-  border-radius: var(--a-border-radius-full);
-  padding: var(--a-spacing-1);
+  border-radius: var(--ax-border-radius-full);
+  padding: var(--ax-spacing-2);
   position: relative;
-}
 
-.navds-timeline__pin-button::before {
-  content: "";
-  inset: 0;
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  border-radius: var(--a-border-radius-full);
-  left: calc(-12.5px + 3.5px);
-  top: calc(-12.5px + 3.5px);
-}
+  &::before {
+    content: "";
+    inset: 0;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: var(--ax-border-radius-full);
+    left: calc(-12.5px + 3.5px);
+    top: calc(-12.5px + 3.5px);
+  }
 
-.navds-timeline__pin-button:focus-visible {
-  box-shadow:
-    inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-    0 0 0 4px var(--a-surface-default),
-    0 0 0 6px var(--a-border-focus);
-  outline: none;
-}
+  &:hover {
+    /* TODO: missing --ax-border-danger-strong-hover ? */
+    box-shadow: inset 0 0 0 4px var(--ax-bg-danger-strong-hover);
+  }
 
-.navds-timeline__pin-button:hover {
-  box-shadow:
-    inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 4px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 5px var(--a-surface-default);
-}
-
-.navds-timeline__pin-button:hover:focus-visible {
-  box-shadow:
-    inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-    0 0 0 4px var(--a-surface-default),
-    0 0 0 6px var(--a-border-focus);
+  &:focus-visible {
+    box-shadow:
+      inset 0 0 0 4px var(--ax-border-danger-strong),
+      0 0 0 2px var(--ax-bg-default);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
+  }
 }
 
 @supports not selector(:focus-visible) {
   .navds-timeline__pin-button:focus {
     box-shadow:
-      inset 0 0 0 1px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-      0 0 0 3px var(--ac-timeline-pin-bg, var(--a-surface-danger)),
-      0 0 0 4px var(--a-surface-default),
-      0 0 0 6px var(--a-border-focus);
-    outline: none;
-  }
-
-  .navds-timeline__pin-button:hover:focus {
-    box-shadow:
-      inset 0 0 0 1px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-      0 0 0 3px var(--ac-timeline-pin-bg-hover, var(--a-surface-danger-hover)),
-      0 0 0 4px var(--a-surface-default),
-      0 0 0 6px var(--a-border-focus);
+      inset 0 0 0 4px var(--ax-border-danger-strong),
+      0 0 0 2px var(--ax-bg-default);
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: 2px;
   }
 }
 
