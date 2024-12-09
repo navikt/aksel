@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { XMarkIcon } from "@navikt/aksel-icons";
 import { useMergeRefs } from "../../../util/hooks";
-import { useI18n } from "../../../util/i18n/i18n.context";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
@@ -28,7 +26,9 @@ export const InputController = forwardRef<
   >
 >((props, ref) => {
   const {
-    clearButton = true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
+    clearButton,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Remove when prop has been removed from ComboboxProps.
     clearButtonLabel,
     toggleListButton = true,
     inputClassName,
@@ -37,10 +37,8 @@ export const InputController = forwardRef<
   } = props;
 
   const {
-    clearInput,
     focusInput,
     inputProps,
-    value,
     size = "medium",
     inputRef,
     toggleOpenButtonRef,
@@ -51,11 +49,6 @@ export const InputController = forwardRef<
   const { selectedOptions } = useSelectedOptionsContext();
 
   const mergedInputRef = useMergeRefs(inputRef, ref);
-
-  const translate = useI18n(
-    "Combobox",
-    clearButtonLabel ? { clear: clearButtonLabel } : undefined,
-  );
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -86,19 +79,7 @@ export const InputController = forwardRef<
           />
         </SelectedOptions>
       )}
-      <div>
-        {value && clearButton && (
-          <div
-            onClick={clearInput}
-            className="navds-combobox__button-clear"
-            aria-hidden
-            title={translate("clear")}
-          >
-            <XMarkIcon />
-          </div>
-        )}
-        {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
-      </div>
+      {toggleListButton && <ToggleListButton ref={toggleOpenButtonRef} />}
     </div>
   );
 });

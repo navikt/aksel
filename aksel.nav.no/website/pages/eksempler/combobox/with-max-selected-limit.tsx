@@ -12,7 +12,7 @@ const Example = () => {
       label="Hva er de kuleste transportmidlene? (Velg opptil 3)"
       options={options}
       isMultiSelect
-      maxSelected={{ limit: 3 }}
+      maxSelected={3}
       selectedOptions={selectedOptions}
       onToggleSelected={(option, isSelected) =>
         isSelected
