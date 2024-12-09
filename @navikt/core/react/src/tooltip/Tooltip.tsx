@@ -15,6 +15,7 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { Slot } from "../slot/Slot";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
@@ -123,6 +124,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref,
   ) => {
+    const themeContext = UNSAFE_useAkselTheme(false);
+    const showArrow = _arrow && !themeContext;
+
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
@@ -149,7 +153,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       open: _open,
       onOpenChange: (newState) => _setOpen(newState),
       middleware: [
-        offset(_offset ? _offset : _arrow ? 10 : 2),
+        offset(_offset ?? (themeContext ? 8 : _arrow ? 16 : 4)),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -228,6 +232,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 ),
               })}
               data-side={placement}
+              data-state="open"
             >
               {content}
               {keys && (
@@ -239,7 +244,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   ))}
                 </span>
               )}
-              {_arrow && (
+              {showArrow && (
                 <div
                   ref={(node) => {
                     arrowRef.current = node;
