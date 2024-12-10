@@ -16,7 +16,7 @@ export const getLocaleFromString = (locale: "nb" | "nn" | "en" = "nb") => {
 
 /**
  * @private
- * Temporary for backwards compatibility with locale prop
+ * Temporary for backwards compatibility with locale prop. Can be removed when locale prop has been removed.
  */
 export const getTranslations = (locale: string | undefined) => {
   switch (locale) {
@@ -25,6 +25,22 @@ export const getTranslations = (locale: string | undefined) => {
     case "en":
     case "en-GB":
       return en_translations.DatePicker;
+    default:
+      return undefined;
+  }
+};
+
+/**
+ * @private
+ * Temporary for backwards compatibility with locale prop. Can be removed when locale prop has been removed.
+ */
+export const getGlobalTranslations = (locale: string | undefined) => {
+  switch (locale) {
+    case "nn":
+      return nn_translations.global;
+    case "en":
+    case "en-GB":
+      return en_translations.global;
     default:
       return undefined;
   }
