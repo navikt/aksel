@@ -97,9 +97,8 @@
 .navds-textarea--error {
   .navds-form-field__error {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 4px;
-    line-height: 20px;
   }
 
   &.navds-form-field {
@@ -112,7 +111,18 @@
     }
 
     svg {
-      margin-bottom: 2px;
+      margin-top: 1px;
+      width: 18px;
+      flex: 1 0 auto;
+    }
+  }
+}
+
+.navds-textarea--error.navds-form-field--small {
+  &.navds-form-field {
+    svg {
+      margin-top: 0;
+      width: 16px;
     }
   }
 }

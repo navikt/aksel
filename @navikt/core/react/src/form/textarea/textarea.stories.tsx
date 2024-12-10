@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
+import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { Textarea } from "./index";
 
@@ -73,6 +74,24 @@ export const WithError: StoryFn = () => {
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
       />
+
+      <VStack
+        style={{
+          maxWidth: "400px",
+        }}
+        gap="4"
+      >
+        <Textarea
+          label="Ipsum enim quis culpa"
+          error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        />
+
+        <Textarea
+          label="Ipsum enim quis culpa"
+          error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+          size="small"
+        />
+      </VStack>
 
       <Textarea
         label="Ipsum enim quis culpa"

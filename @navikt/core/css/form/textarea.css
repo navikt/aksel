@@ -116,6 +116,12 @@
   border-color: var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
 }
 
+.navds-textarea--error {
+  svg {
+    display: none;
+  }
+}
+
 @supports not selector(:focus-visible) {
   .navds-textarea--error .navds-textarea__input:not(:hover, :focus, :disabled) {
     box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--__ac-textarea-error-border, var(--a-border-danger)));
