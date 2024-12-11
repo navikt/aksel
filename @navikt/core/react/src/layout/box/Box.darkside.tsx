@@ -1,6 +1,12 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BorderKeys } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
+import {
+  type BorderColorKeys,
+  type BorderColorWithRoleKeys,
+  type DefaultBgKeys,
+  type ShadowKeys,
+  type StaticBgKeys,
+} from "@navikt/ds-tokens/darkside/tokens.types";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -13,10 +19,6 @@ import { getResponsiveProps } from "../utilities/css";
 import {
   BorderRadiiToken,
   ResponsiveProp,
-  SemanticRoleBgDarkside,
-  SemanticShadowTokens,
-  SemanticStaticBgDarkside,
-  SemanticStaticBorderDarkside,
   SpaceDelimitedAttribute,
 } from "../utilities/types";
 
@@ -25,12 +27,12 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
    */
-  background?: SemanticStaticBgDarkside | SemanticRoleBgDarkside;
+  background?: DefaultBgKeys | StaticBgKeys;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    */
-  borderColor?: BorderKeys | SemanticStaticBorderDarkside;
+  borderColor?: BorderColorKeys | BorderColorWithRoleKeys;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -52,7 +54,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * @example
    * shadow='small'
    */
-  shadow?: SemanticShadowTokens;
+  shadow?: ShadowKeys;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 

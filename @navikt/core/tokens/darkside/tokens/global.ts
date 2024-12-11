@@ -1,5 +1,10 @@
 import Color from "colorjs.io";
-import { ColorTheme, GlobalConfigT } from "../util";
+import {
+  type ColorRoles,
+  type ColorTheme,
+  type GlobalColorScale,
+} from "../tokens.types";
+import { type GlobalColorEntry } from "../tokens.util";
 import { globalColorDarkModeConfigWithoutAlpha } from "./global-dark";
 import { globalColorLightModeConfigWithoutAlpha } from "./global-light";
 import { semanticTokenConfig } from "./semantic";
@@ -14,27 +19,48 @@ export const globalColorLightModeConfig = globalColorConfigWithAlphaTokens(
   "light",
 );
 
+type GlobalConfigWithAlpha = Record<
+  Extract<ColorRoles, "neutral">,
+  Record<GlobalColorScale, GlobalColorEntry>
+> &
+  Record<
+    Exclude<ColorRoles, "neutral">,
+    Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
+  >;
+
 /**
  * To avoid having to use 3rd party websites for generating alpha tokens,
  * we add alpha tokens by calulating them ourselves.
  */
 function globalColorConfigWithAlphaTokens(
-  globalConfig: GlobalConfigT,
+  globalConfig: typeof globalColorLightModeConfigWithoutAlpha,
   theme: ColorTheme,
-) {
-  return Object.entries(globalConfig).reduce((acc, [key, value]) => {
-    const globalScaleKey = key as keyof typeof globalConfig;
-    acc[globalScaleKey] = value;
+): GlobalConfigWithAlpha {
+  const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
-    for (const alphaKey of ["100", "200", "300", "400"] as const) {
-      acc[globalScaleKey][`${alphaKey}A`] = {
-        ...acc[globalScaleKey][alphaKey],
-        value: createAlphaColor(acc[globalScaleKey][alphaKey].value, theme),
-      };
-    }
+  Object.keys(globalConfig).forEach((key) => {
+    const _key = key as ColorRoles;
+    const scopedConfig = localConfig[_key];
 
-    return acc;
-  }, {} as GlobalConfigT);
+    scopedConfig["100A"] = {
+      ...scopedConfig?.["100"],
+      value: createAlphaColor(scopedConfig["100"].value, theme),
+    };
+    scopedConfig["200A"] = {
+      ...scopedConfig["200"],
+      value: createAlphaColor(scopedConfig["200"].value, theme),
+    };
+    scopedConfig["300A"] = {
+      ...scopedConfig["300"],
+      value: createAlphaColor(scopedConfig["300"].value, theme),
+    };
+    scopedConfig["400A"] = {
+      ...scopedConfig["400"],
+      value: createAlphaColor(scopedConfig["400"].value, theme),
+    };
+  });
+
+  return localConfig;
 }
 
 export function createAlphaColor(targetColor: string, theme: ColorTheme) {

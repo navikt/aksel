@@ -7,7 +7,7 @@ import {
 } from "style-dictionary/types";
 import { fileHeader } from "style-dictionary/utils";
 import { kebabCaseForAlpha } from "../config/kebabCase";
-import { TokenTypes } from "./util";
+import { type TokenTypes } from "./tokens.util";
 
 export const formatES6: FormatFn = async ({ dictionary, file }) => {
   const header = await generateHeader(file);

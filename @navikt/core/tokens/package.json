@@ -13,7 +13,7 @@
   "files": [
     "/dist",
     "/src",
-    "/tailwind",
+    "tokens.types.ts",
     "docs.json"
   ],
   "scripts": {

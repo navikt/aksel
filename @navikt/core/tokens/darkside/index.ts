@@ -2,18 +2,18 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import {
-  allTokens,
-  darkModeTokens,
-  lightModeTokens,
-  rootTokens,
-} from "./create-configuration";
-import {
   formatCJS,
   formatES6,
   formatLESS,
   formatSCSS,
   transformCSS,
-} from "./sd-format";
+} from "./style-dictionary.formats";
+import {
+  allTokens,
+  darkModeTokens,
+  lightModeTokens,
+  rootTokens,
+} from "./tokens.config";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";

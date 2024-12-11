@@ -1,4 +1,5 @@
-import { StyleDictionaryTokenConfig } from "../util";
+import { type BreakPointKeys } from "../tokens.types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
 export const breakpointsTokenConfig = {
   breakpoint: {
@@ -14,4 +15,9 @@ export const breakpointsTokenConfig = {
     "2xl": { value: "1440px", type: "global-breakpoints" },
     "2xl-down": { value: "1439px", type: "global-breakpoints" },
   },
-} satisfies StyleDictionaryTokenConfig<"global-breakpoints">;
+} satisfies {
+  breakpoint: Record<
+    BreakPointKeys,
+    StyleDictionaryToken<"global-breakpoints">
+  >;
+};
