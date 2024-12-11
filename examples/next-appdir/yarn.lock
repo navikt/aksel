@@ -292,7 +292,7 @@ __metadata:
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=next-appdir%40workspace%3A.":
   version: 7.8.0
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=685989&locator=next-appdir%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=0f4225&locator=next-appdir%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -307,14 +307,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/4f2a7c9952c76bea04b2174b471a696b039794442c6a58774a99efdb8ee2c74853da7046045fe3dd34be7b895f61823fa96addd4ac84e5e009024c40bba0a879
+  checksum: 10/e7f47a8a7f54baa78911a4c477a77043a0c5d1bbff47171e079abef372aa4a5a4b93f68be0a4e42622aa4f91659c4d2f2ac702338faa9addbb9048ddbde70487
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:./../../@navikt/core/tokens::locator=next-appdir%40workspace%3A.":
   version: 7.8.0
-  resolution: "@navikt/ds-tokens@file:./../../@navikt/core/tokens#./../../@navikt/core/tokens::hash=68542d&locator=next-appdir%40workspace%3A."
-  checksum: 10/4043669418cbcd0843187012e0cfe5572ba5077fc8b4957bcf48cf3746bb2c44f613229c163f64891e25d82787cdf31d487f5f05b60999f910779f7dc00c8e3c
+  resolution: "@navikt/ds-tokens@file:./../../@navikt/core/tokens#./../../@navikt/core/tokens::hash=f3ea26&locator=next-appdir%40workspace%3A."
+  checksum: 10/66964076ca87df47b517610a390ce041722684843ed62f310aa09c9dca376a15fe7c9482bfe7075c24b2a55767921ebae2cc67ac97f70edba859e05047584369
   languageName: node
   linkType: hard
 

@@ -50,6 +50,7 @@
   "exports": {
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
+    "./docs.json": "./docs.json",
     "./dist/tokens.css": "./dist/tokens.css",
     "./dist/tokens.less": "./dist/tokens.less",
     "./dist/tokens.scss": "./dist/tokens.scss",

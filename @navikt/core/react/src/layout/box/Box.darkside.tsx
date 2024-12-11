@@ -1,12 +1,12 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import {
-  type BorderColorKeys,
-  type BorderColorWithRoleKeys,
-  type BorderRadiusKeys,
-  type DefaultBgKeys,
-  type ShadowKeys,
-  type StaticBgKeys,
+import type {
+  BorderColorKeys,
+  BorderColorWithRoleKeys,
+  BorderRadiusKeys,
+  DefaultBgKeys,
+  ShadowKeys,
+  StaticBgKeys,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";

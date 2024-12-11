@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BorderRadiusKeys } from "@navikt/ds-tokens/types";
+import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
 import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
