@@ -2,26 +2,26 @@ import _ from "lodash";
 import {
   type ColorTheme,
   type GlobalColorRoles,
-  StyleDictionaryToken,
   type StyleDictionaryTokenConfig,
-  TokenTypes,
   globalColorRoles,
 } from "../util";
 
-export type BgKeys =
+export type StaticBgKeys =
   | GlobalColorRoles
-  | `${GlobalColorRoles}-hover`
-  | `${GlobalColorRoles}-hoverA`
   | `${GlobalColorRoles}-moderate`
   | `${GlobalColorRoles}-moderateA`
+  | `${GlobalColorRoles}-strong`
+  | `${GlobalColorRoles}-raised`;
+
+export type StateBgKeys =
+  | `${GlobalColorRoles}-hover`
+  | `${GlobalColorRoles}-hoverA`
   | `${GlobalColorRoles}-moderate-hover`
   | `${GlobalColorRoles}-moderate-hoverA`
   | `${GlobalColorRoles}-moderate-pressed`
   | `${GlobalColorRoles}-moderate-pressedA`
-  | `${GlobalColorRoles}-strong`
   | `${GlobalColorRoles}-strong-hover`
   | `${GlobalColorRoles}-strong-pressed`
-  | `${GlobalColorRoles}-raised`
   | `${GlobalColorRoles}-raised-hover`;
 
 export type TextKeys =
@@ -34,18 +34,6 @@ export type BorderKeys =
   | `${GlobalColorRoles}-subtle`
   | `${GlobalColorRoles}-subtleA`
   | `${GlobalColorRoles}-strong`;
-
-export type SemanticTokensForAllRolesConfigT<T extends TokenTypes> = {
-  bg: {
-    [k in BgKeys]: Record<string, StyleDictionaryToken<T>>;
-  };
-  text: {
-    [k in TextKeys]: Record<string, StyleDictionaryToken<T>>;
-  };
-  border: {
-    [k in BorderKeys]: Record<string, StyleDictionaryToken<T>>;
-  };
-};
 
 const configForRole = (role: GlobalColorRoles, theme: ColorTheme) => {
   return {

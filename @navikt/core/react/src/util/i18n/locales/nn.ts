@@ -7,8 +7,53 @@ export default {
     showMore: "Vis meir",
     showLess: "Vis mindre",
     readOnly: "Skrivebeskytta",
+    close: "Lukk",
   },
 
+  Alert: {
+    closeAlert: "Lukk varsel",
+    closeMessage: "Lukk melding",
+    error: "Feil",
+    info: "Informasjon",
+    success: "Suksess",
+    warning: "Åtvaring",
+  },
+  Chips: {
+    Removable: {
+      labelSuffix: "slett",
+    },
+  },
+  Combobox: {
+    addOption: "Legg til",
+    loading: "Søker…",
+    maxSelected: "{selected} av maks {limit} er valt.",
+  },
+  CopyButton: {
+    title: "Kopier",
+    activeText: "Kopiert!",
+  },
+  DatePicker: {
+    chooseDate: "Vel dato",
+    chooseDates: "Vel datoar",
+    chooseDateRange: "Vel start- og sluttdato",
+    chooseMonth: "Vel månad",
+    week: "Veke",
+    weekNumber: "Veke {week}",
+    selectWeekNumber: "Vel veke {week}",
+    month: "Månad",
+    goToNextMonth: "Gå til neste månad",
+    goToPreviousMonth: "Gå til førre månad",
+    year: "År",
+    goToNextYear: "Gå til neste år",
+    goToPreviousYear: "Gå til førre år",
+    openDatePicker: "Opne datoveljar",
+    openMonthPicker: "Opne månadsveljar",
+    closeDatePicker: "Lukk datoveljar",
+    closeMonthPicker: "Lukk månadsveljar",
+  },
+  ErrorSummary: {
+    heading: "Du må rette desse feila før du kan halde fram:",
+  },
   FileUpload: {
     dropzone: {
       button: "Vel fil",
@@ -32,34 +77,17 @@ export default {
     showAllSteps: "Vis alle steg",
     hideAllSteps: "Skjul alle steg",
   },
-  Alert: {
-    closeAlert: "Lukk varsel",
-    closeMessage: "Lukk melding",
-    error: "Feil",
-    info: "Informasjon",
-    success: "Suksess",
-    warning: "Åtvaring",
-  },
-  Chips: {
-    Removable: {
-      labelSuffix: "slett",
-    },
-  },
-  CopyButton: {
-    title: "Kopier",
-    activeText: "Kopiert!",
-  },
-  ErrorSummary: {
-    heading: "Du må rette desse feila før du kan halde fram:",
-  },
   FormSummary: {
     editAnswer: "Endre svar",
   },
+  GuidePanel: {
+    illustrationLabel: "Illustrasjon av rettleiar",
+  },
+  HelpText: {
+    title: "Meir informasjon",
+  },
   Loader: {
     title: "Ventar…",
-  },
-  Modal: {
-    close: "Lukk",
   },
   Pagination: {
     previous: "Førre",
@@ -71,7 +99,7 @@ export default {
       "Framdrift kan ikkje bereknast, antatt tid er {seconds} sekund.",
   },
   Search: {
-    clear: "Tøm",
+    clear: "Tøm feltet",
     search: "Søk",
   },
   Textarea: {
@@ -103,37 +131,5 @@ export default {
       zoom: "Zoom tidslina {start} til {end}",
       reset: "Tilbakestill tidsperspektiv",
     },
-  },
-  DatePicker: {
-    close: "Lukk",
-    chooseDate: "Vel dato",
-    chooseDates: "Vel datoar",
-    chooseDateRange: "Vel start- og sluttdato",
-    chooseMonth: "Vel månad",
-    week: "Veke",
-    weekNumber: "Veke {week}",
-    selectWeekNumber: "Vel veke {week}",
-    month: "Månad",
-    goToNextMonth: "Gå til neste månad",
-    goToPreviousMonth: "Gå til førre månad",
-    year: "År",
-    goToNextYear: "Gå til neste år",
-    goToPreviousYear: "Gå til førre år",
-    openDatePicker: "Opne datoveljar",
-    openMonthPicker: "Opne månadsveljar",
-    closeDatePicker: "Lukk datoveljar",
-    closeMonthPicker: "Lukk månadsveljar",
-  },
-  Combobox: {
-    addOption: "Legg til",
-    loading: "Søker…",
-    maxSelected: "{selected} av maks {limit} er valt.",
-    clear: "Tøm",
-  },
-  GuidePanel: {
-    illustrationLabel: "Illustrasjon av rettleiar",
-  },
-  HelpText: {
-    title: "Meir informasjon",
   },
 } satisfies Translations;

@@ -10,9 +10,7 @@ import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
-import { useI18n } from "../../util/i18n/i18n.context";
-import { useSharedMonthContext } from "../context";
-import { getTranslations } from "../utils";
+import { useDateTranslationContext, useSharedMonthContext } from "../context";
 
 export const MonthCaption = () => {
   const {
@@ -22,7 +20,7 @@ export const MonthCaption = () => {
     locale,
   } = useDayPicker();
   const { hasDropdown, year, toYear } = useSharedMonthContext();
-  const translate = useI18n("DatePicker", getTranslations(locale.code));
+  const translate = useDateTranslationContext().translate;
 
   const years: Date[] = [];
 

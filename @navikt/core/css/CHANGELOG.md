@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 7.8.0
+
+### Minor Changes
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+### Patch Changes
+
+- CSS: Resolved regression where the complete stylesheet was included in scoped 'components.css' file. ([#3427](https://github.com/navikt/aksel/pull/3427))
+
+## 7.7.0
+
 ## 7.6.0
 
 ### Minor Changes
