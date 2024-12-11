@@ -3,10 +3,11 @@ import React, { forwardRef } from "react";
 import {
   type BorderColorKeys,
   type BorderColorWithRoleKeys,
+  type BorderRadiusKeys,
   type DefaultBgKeys,
   type ShadowKeys,
   type StaticBgKeys,
-} from "@navikt/ds-tokens/darkside/tokens.types";
+} from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -16,11 +17,7 @@ import BasePrimitive, {
 } from "../base/BasePrimitive";
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
-import {
-  BorderRadiiToken,
-  ResponsiveProp,
-  SpaceDelimitedAttribute,
-} from "../utilities/types";
+import { ResponsiveProp, SpaceDelimitedAttribute } from "../utilities/types";
 
 export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
@@ -32,7 +29,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
    */
-  borderColor?: BorderColorKeys | BorderColorWithRoleKeys;
+  borderColor?: Exclude<BorderColorKeys, "focus"> | BorderColorWithRoleKeys;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -42,7 +39,9 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * borderRadius='0 full large small'
    * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
    */
-  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
+  borderRadius?: ResponsiveProp<
+    SpaceDelimitedAttribute<BorderRadiusKeys | "0">
+  >;
   /**
    * CSS `border-width` property. If this is not set there will be no border.
    * @example

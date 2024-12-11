@@ -1,4 +1,4 @@
-import { type ColorRoles } from "../tokens.types";
+import { type ColorRoles } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const textContrastTokenConfig = {

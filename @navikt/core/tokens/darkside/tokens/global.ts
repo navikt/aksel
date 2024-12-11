@@ -3,7 +3,7 @@ import {
   type ColorRoles,
   type ColorTheme,
   type GlobalColorScale,
-} from "../tokens.types";
+} from "../../types";
 import { type GlobalColorEntry } from "../tokens.util";
 import { globalColorDarkModeConfigWithoutAlpha } from "./global-dark";
 import { globalColorLightModeConfigWithoutAlpha } from "./global-light";

@@ -1,4 +1,4 @@
-import { ColorRoles } from "./tokens.types";
+import { ColorRoles } from "../types";
 
 export type GlobalColorEntry = {
   value: string;

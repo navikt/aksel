@@ -1,4 +1,4 @@
-import { type BreakPointKeys } from "../tokens.types";
+import { type BreakPointKeys } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const breakpointsTokenConfig = {

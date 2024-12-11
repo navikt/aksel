@@ -149,3 +149,11 @@ export type FontLineHeightKeys =
   | "line-height-medium";
 
 export type FontWeightKeys = "weight-bold" | "weight-regular";
+
+/* Legacy tokens */
+export type LegacyShadowKeys =
+  | "xsmall"
+  | "small"
+  | "medium"
+  | "large"
+  | "xlarge";

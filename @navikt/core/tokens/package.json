@@ -13,7 +13,7 @@
   "files": [
     "/dist",
     "/src",
-    "tokens.types.ts",
+    "types.ts",
     "docs.json"
   ],
   "scripts": {
@@ -49,6 +49,7 @@
   "main": "dist/tokens.css",
   "exports": {
     ".": "./dist/tokens.css",
+    "./types": "./types.ts",
     "./dist/tokens.css": "./dist/tokens.css",
     "./dist/tokens.less": "./dist/tokens.less",
     "./dist/tokens.scss": "./dist/tokens.scss",

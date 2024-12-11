@@ -1,4 +1,4 @@
-import { type BorderRadiusKeys } from "../tokens.types";
+import { type BorderRadiusKeys } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const radiusTokenConfig = {

@@ -1,4 +1,4 @@
-import { type SpacingKeys } from "../tokens.types";
+import { type SpacingKeys } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const spacingTokenConfig = {

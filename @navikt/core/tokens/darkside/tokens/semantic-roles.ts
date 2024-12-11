@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { type ColorRoles, type ColorTheme } from "../tokens.types";
+import { type ColorRoles, type ColorTheme } from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
 const configForRole = (role: ColorRoles, theme: ColorTheme) => {

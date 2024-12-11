@@ -1,4 +1,4 @@
-import { type ColorTheme, ShadowKeys } from "../tokens.types";
+import { type ColorTheme, ShadowKeys } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export function shadowTokenConfig(theme: ColorTheme) {
