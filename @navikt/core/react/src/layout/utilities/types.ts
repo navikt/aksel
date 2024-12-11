@@ -1,6 +1,6 @@
 /* Darkside tokens */
 import { semanticTokenConfig } from "@navikt/ds-tokens/darkside/tokens/semantic";
-import { SemanticTokensForAllRolesConfigT } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
+import { StaticBgKeys } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
 import { shadowTokenConfig } from "@navikt/ds-tokens/darkside/tokens/shadow";
 
 /* Old */
@@ -45,8 +45,7 @@ export type SemanticStaticBgDarkside = keyof ReturnType<
   typeof semanticTokenConfig
 >["bg"];
 
-export type SemanticRoleBgDarkside =
-  keyof SemanticTokensForAllRolesConfigT<"color">["bg"];
+export type SemanticRoleBgDarkside = StaticBgKeys;
 
 export type SemanticStaticBorderDarkside = keyof ReturnType<
   typeof semanticTokenConfig
