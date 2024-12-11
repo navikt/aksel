@@ -31,6 +31,12 @@ const variants: TagProps["variant"][] = [
   "alt1-moderate",
   "alt2-moderate",
   "alt3-moderate",
+  "purple",
+  "purple-filled",
+  "purple-moderate",
+  "lime",
+  "lime-filled",
+  "lime-moderate",
 ];
 
 export default {
