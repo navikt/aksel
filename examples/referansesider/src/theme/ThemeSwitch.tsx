@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { MoonIcon, SunIcon } from "@navikt/aksel-icons";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { ThemeProviderContext } from "./ThemeContext";
 
 const ScUl = styled.ul`
