@@ -16,7 +16,7 @@
   line-height: 1;
 
   &:has(.navds-tag__icon--left) {
-    gap: var(--a-spacing-05);
+    gap: var(--ax-spacing-05);
   }
 
   &[data-color="info"],
@@ -81,14 +81,14 @@
 
 .navds-tag--small {
   min-height: 1.5rem;
-  padding: 0 var(--a-spacing-1-alt);
+  padding: 0 var(--ax-spacing-1-alt);
 
   --__axc-tag-icon-size: 1.25rem;
 }
 
 .navds-tag--xsmall {
   min-height: 1.25rem;
-  padding: 0 var(--a-spacing-1);
+  padding: 0 var(--ax-spacing-1);
 
   --__axc-tag-icon-size: 1rem;
   --__axc-tag-icon-margin: -1px;
