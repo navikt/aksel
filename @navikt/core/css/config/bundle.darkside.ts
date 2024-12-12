@@ -119,10 +119,8 @@ async function bundleDarkside() {
       })
       .join("\n");
 
-    const rootFile = fs.readFileSync(`${darksideDir}/index.css`, "utf8");
-
     /* In the off-chance one imports this file standalone, we would like to make sure the layering order is included.  */
-    const layerDefinition = rootFile
+    const layerDefinition = rootString
       .split("\n")
       .find((line) => line.startsWith("@layer"));
 
