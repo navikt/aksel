@@ -733,23 +733,23 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.5.2
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=0bab30&locator=referansesider%40workspace%3A."
-  checksum: 10/70db9a90e2d908fad8312982f47676c91cd4dac15cad1c7e571ba95f48ba4883a18e78a7658e79104bb2b7af0f6689ad36ded87734ad562701d6682e78c019ed
+  version: 7.8.0
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=036b3c&locator=referansesider%40workspace%3A."
+  checksum: 10/2ae170383e2766a5eefe39791d320b0c8bc3011f616c70c4942522a34935c9a4c5d87b26560a6de9881f92c8c39a887e59d373213bbb19e3ee158152843f4bcb
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.5.2
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=5ee6b4&locator=referansesider%40workspace%3A."
-  checksum: 10/79c78a69ff085ae3f5188b575da218a3132b7e6884021a960e16f94e4f9e5f72674f1cad1f8231ab5bc43521537f1f8e4cc4f9847cd47918a3d9022f2b9f9c7c
+  version: 7.8.0
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=642af3&locator=referansesider%40workspace%3A."
+  checksum: 10/0bfdb7cb05ea87534c4b918909bfe1a38f5aa797e60dc8c788c6e53417eed74c3a508b7d1dd4068497a2ce703d8a72aa10e9b9c8fd7515cab887f798a5a3c563
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.5.2
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=ea7f7c&locator=referansesider%40workspace%3A."
-  checksum: 10/6124c8c1945acdf326c6c7a207f0be4e024b1958c04006a522cd73ab8f9e5abe42101e01c84ef3df3bd4f8d45e6082ccb87e6892b48f6a897ff53b374030b5ab
+  version: 7.8.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=a17954&locator=referansesider%40workspace%3A."
+  checksum: 10/9404244274c074c395b160920cd0bb0f3211bc6407ee9372a54a9e3d4f9c2577c87c05ca0498776b87a83feb58687916b8cffb29e8180d266f5da1fc45e07237
   languageName: node
   linkType: hard
 
@@ -2979,11 +2979,11 @@ __metadata:
   linkType: hard
 
 "nanoid@npm:^3.3.7":
-  version: 3.3.7
-  resolution: "nanoid@npm:3.3.7"
+  version: 3.3.8
+  resolution: "nanoid@npm:3.3.8"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 10/ac1eb60f615b272bccb0e2b9cd933720dad30bf9708424f691b8113826bb91aca7e9d14ef5d9415a6ba15c266b37817256f58d8ce980c82b0ba3185352565679
+  checksum: 10/2d1766606cf0d6f47b6f0fdab91761bb81609b2e3d367027aff45e6ee7006f660fb7e7781f4a34799fe6734f1268eeed2e37a5fdee809ade0c2d4eb11b0f9c40
   languageName: node
   linkType: hard
 
