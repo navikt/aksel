@@ -51,15 +51,10 @@
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
     "./docs.json": "./docs.json",
-    "./dist/tokens.css": "./dist/tokens.css",
-    "./dist/tokens.less": "./dist/tokens.less",
-    "./dist/tokens.scss": "./dist/tokens.scss",
-    "./dist/tokens": {
+    "./dist/*": {
       "types": "./dist/tokens.d.ts",
-      "import": "./dist/tokens.js",
-      "require": "./dist/tokens-cjs.js"
+      "default": "./dist/*"
     },
-    "./dist/*": "./dist/*",
     "./darkside-css": "./dist/darkside/tokens.css",
     "./darkside-js": {
       "types": "./dist/darkside/tokens.d.ts",
