@@ -2,7 +2,7 @@ import { useFloatingPortalNode } from "@floating-ui/react";
 import cl from "clsx";
 import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { DateContext } from "../date/context";
+import { DateInputContext } from "../date/context";
 import { useProvider } from "../provider/Provider";
 import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -106,7 +106,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const rootElement = useProvider()?.rootElement;
     const portalNode = useFloatingPortalNode({ root: rootElement });
 
-    const dateContext = useContext(DateContext);
+    const dateContext = useContext(DateInputContext);
     const isNested = useModalContext(false) !== undefined;
     if (isNested && !dateContext) {
       console.error("Modals should not be nested");
