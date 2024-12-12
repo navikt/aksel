@@ -50,7 +50,7 @@ export type StaticBgKeys =
   | `${ColorRoles}-strong`
   | `${ColorRoles}-raised`;
 
-export type StateFullBgKeys =
+export type StatefulBgKeys =
   | `${ColorRoles}-hover`
   | `${ColorRoles}-hoverA`
   | `${ColorRoles}-moderate-hover`
