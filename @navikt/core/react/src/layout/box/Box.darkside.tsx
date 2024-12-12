@@ -23,11 +23,13 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   * @see {@link DefaultBgKeys} and {@link StaticBgKeys}
    */
   background?: DefaultBgKeys | StaticBgKeys;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
    */
   borderColor?: Exclude<BorderColorKeys, "focus"> | BorderColorWithRoleKeys;
   /**
@@ -38,6 +40,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * borderRadius='full'
    * borderRadius='0 full large small'
    * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   * @see {@link BorderRadiusKeys}
    */
   borderRadius?: ResponsiveProp<
     SpaceDelimitedAttribute<BorderRadiusKeys | "0">
@@ -52,6 +55,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Shadow on box. Accepts a shadow token.
    * @example
    * shadow='small'
+   * @see {@link ShadowKeys}
    */
   shadow?: ShadowKeys;
 } & PrimitiveProps &
