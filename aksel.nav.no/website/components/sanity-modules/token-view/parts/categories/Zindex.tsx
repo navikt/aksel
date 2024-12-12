@@ -39,7 +39,13 @@ export const ZindexView = ({ cat }: { cat: string }) => {
                 <span className="flex min-h-8 items-center">
                   {sanitizeName(token.name.replace("z-index-", ""))}
                 </span>
-                <CopyButton copyText={token.name} size="small" />
+                <CopyButton
+                  copyText={token.name}
+                  title={`${sanitizeName(
+                    token.name.replace("z-index-", ""),
+                  )} kopier`}
+                  size="small"
+                />
               </dt>
               <dd className="mt-auto text-medium text-text-subtle">
                 {token.value}

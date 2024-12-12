@@ -34,7 +34,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   <span className="flex min-h-8 items-center">
                     {sanitizeName(x.name.replace("text-", ""))}
                   </span>
-                  <CopyButton copyText={x.name} size="small" />
+                  <CopyButton
+                    copyText={x.name}
+                    title={`${sanitizeName(
+                      x.name.replace("text-", ""),
+                    )} kopier`}
+                    size="small"
+                  />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -83,7 +89,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   <span className="flex min-h-8 items-center">
                     {sanitizeName(x.name.replace("icon-", ""))}
                   </span>
-                  <CopyButton copyText={x.name} size="small" />
+                  <CopyButton
+                    copyText={x.name}
+                    title={`${sanitizeName(
+                      x.name.replace("icon-", ""),
+                    )} kopier`}
+                    size="small"
+                  />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -124,7 +136,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   <span className="flex min-h-8 items-center">
                     {sanitizeName(x.name.replace("border-", ""))}
                   </span>
-                  <CopyButton copyText={x.name} size="small" />
+                  <CopyButton
+                    copyText={x.name}
+                    title={`${sanitizeName(
+                      x.name.replace("border-", ""),
+                    )} kopier`}
+                    size="small"
+                  />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -194,7 +212,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   <span className="flex min-h-8 items-center">
                     {sanitizeName(x.name.replace("surface-", ""))}
                   </span>
-                  <CopyButton copyText={x.name} size="small" />
+                  <CopyButton
+                    copyText={x.name}
+                    title={`${sanitizeName(
+                      x.name.replace("surface-", ""),
+                    )} kopier`}
+                    size="small"
+                  />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -246,7 +270,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                   <span className="flex min-h-8 items-center">
                     {sanitizeName(x.name.replace("surface-", ""))}
                   </span>
-                  <CopyButton copyText={x.name} size="small" />
+                  <CopyButton
+                    copyText={x.name}
+                    title={`${sanitizeName(
+                      x.name.replace("surface-", ""),
+                    )} kopier`}
+                    size="small"
+                  />
                 </dt>
                 <dd className="mt-auto text-medium text-text-subtle">
                   {ref ? (
@@ -289,7 +319,13 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 <span className="flex min-h-8 items-center">
                   {sanitizeName(x.name.replace("surface-", ""))}
                 </span>
-                <CopyButton copyText={x.name} size="small" />
+                <CopyButton
+                  copyText={x.name}
+                  title={`${sanitizeName(
+                    x.name.replace("surface-", ""),
+                  )} kopier`}
+                  size="small"
+                />
               </dt>
               <dd className="mt-auto text-medium text-text-subtle">
                 {ref ? (
