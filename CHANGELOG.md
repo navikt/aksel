@@ -8,21 +8,23 @@
 
 ### @navikt/ds-react
 
-- Chips.Removable: Removed prop `removeLabel` ([#3429](https://github.com/navikt/aksel/pull/3429))
+- Combobox: Fix issue where you could select more options than defined in maxSelected ([#3434](https://github.com/navikt/aksel/pull/3434))
 
-- i18n: :sparkles: Implemented i18n support for all components. Components come with support for nb, nn and en locales ([Docs](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)) ([#3429](https://github.com/navikt/aksel/pull/3429))
+* Chips.Removable: Removed prop `removeLabel` ([#3429](https://github.com/navikt/aksel/pull/3429))
 
-- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+* i18n: :sparkles: Implemented i18n support for all components. Components come with support for nb, nn and en locales ([Docs](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)) ([#3429](https://github.com/navikt/aksel/pull/3429))
 
-- Combobox: Changed prop `maxSelected` to number ([#3433](https://github.com/navikt/aksel/pull/3433))
+* Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
 
-- DatePicker/MonthPicker: Added new `translations` prop and deprecated `locale` prop ([#3429](https://github.com/navikt/aksel/pull/3429))
+* Combobox: Changed prop `maxSelected` to number ([#3433](https://github.com/navikt/aksel/pull/3433))
 
-* Timeline: Deprecated prop `axisLabelTemplates`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the date formats. ([#3429](https://github.com/navikt/aksel/pull/3429))
+* DatePicker/MonthPicker: Added new `translations` prop and deprecated `locale` prop ([#3429](https://github.com/navikt/aksel/pull/3429))
 
-* Search: Deprecated prop `clearButtonLabel`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the label. ([#3429](https://github.com/navikt/aksel/pull/3429))
+- Timeline: Deprecated prop `axisLabelTemplates`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the date formats. ([#3429](https://github.com/navikt/aksel/pull/3429))
 
-* Textarea: Deprecated prop `i18n`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change these texts. ([#3429](https://github.com/navikt/aksel/pull/3429))
+- Search: Deprecated prop `clearButtonLabel`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the label. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Textarea: Deprecated prop `i18n`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change these texts. ([#3429](https://github.com/navikt/aksel/pull/3429))
 
 ### @navikt/ds-css
 
