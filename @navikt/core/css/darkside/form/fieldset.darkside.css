@@ -32,7 +32,7 @@
 
 .navds-fieldset:disabled > .navds-fieldset__legend,
 .navds-fieldset:disabled > .navds-fieldset__description {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
 }
 
 @media (forced-colors: active) {

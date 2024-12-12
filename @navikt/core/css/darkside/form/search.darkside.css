@@ -81,7 +81,7 @@
   font-size: 1.5rem;
 
   .navds-search--disabled & {
-    opacity: 0.3;
+    opacity: var(--ax-opacity-disabled);
   }
 }
 
@@ -148,7 +148,7 @@
 /* We can't re-use disabled-state for form-fields since opacity multiplies on search-button */
 .navds-search--disabled {
   .navds-search__input {
-    opacity: 0.3;
+    opacity: var(--ax-opacity-disabled);
     cursor: not-allowed;
   }
 }

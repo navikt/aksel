@@ -2,9 +2,9 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react";
 import React, { useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
-import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
+import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
 // @ts-expect-error - Temporary
-import defaultCss from "@navikt/ds-css/index.css?inline";
+import defaultCss from "../@navikt/core/css/index.css?inline";
 import {
   Provider,
   UNSAFE_AkselTheme,

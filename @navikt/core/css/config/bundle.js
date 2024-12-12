@@ -108,6 +108,7 @@ function buildFragmentFiles() {
   const files = fastglob
     .sync("*.css", { cwd: ".", ignore: "**/*.min.css" })
     .map((fileN) => path.basename(fileN))
+    .filter((fileName) => !fileName.includes("index.css"))
     .map((x) => ({
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
@@ -160,7 +161,7 @@ async function bundleMinified() {
 function copyToVersionFolder() {
   const files = fastglob.sync("**/*.css", {
     cwd: `./${rootDir}`,
-    ignore: "**/version/**",
+    ignore: ["**/version/**", "**/darkside/**"],
   });
 
   for (let file of files) {
