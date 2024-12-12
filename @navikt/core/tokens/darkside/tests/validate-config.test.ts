@@ -45,7 +45,7 @@ describe("Validate token configurations", () => {
 
   test(`Text-contrast tokens`, () => {
     expect(
-      validateConfig(textContrastTokenConfig(), configKeysWithGroup),
+      validateConfig(textContrastTokenConfig, configKeysWithGroup),
     ).toBeTruthy();
   });
 

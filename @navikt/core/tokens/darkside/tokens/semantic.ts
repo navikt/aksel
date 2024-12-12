@@ -1,4 +1,10 @@
-import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
+import {
+  type BorderColorKeys,
+  type ColorTheme,
+  type DefaultBgKeys,
+  type DefaultTextColorKeys,
+} from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
 export function semanticTokenConfig(theme: ColorTheme) {
   return {
@@ -97,5 +103,9 @@ export function semanticTokenConfig(theme: ColorTheme) {
         scopes: ["EFFECT_COLOR"],
       },
     },
-  } satisfies StyleDictionaryTokenConfig<"color">;
+  } satisfies {
+    bg: Record<DefaultBgKeys, StyleDictionaryToken<"color">>;
+    border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
+    text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
+  };
 }

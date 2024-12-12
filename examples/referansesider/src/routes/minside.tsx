@@ -7,7 +7,7 @@ import {
   HeartIcon,
   PencilFillIcon,
 } from "@navikt/aksel-icons";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Link } from "../components/Link";
 import { Page } from "../components/Page";

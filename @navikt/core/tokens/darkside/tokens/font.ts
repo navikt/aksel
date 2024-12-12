@@ -1,9 +1,15 @@
-import { StyleDictionaryTokenConfig } from "../util";
+import {
+  type FontFamilyKeys,
+  type FontLineHeightKeys,
+  type FontSizeKeys,
+  type FontWeightKeys,
+} from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
 const baseFontSize = 16;
 const getFontSize = (size: number) => `${size / baseFontSize}rem`;
 
-export const fontTokenConfig: StyleDictionaryTokenConfig<"global-font"> = {
+export const fontTokenConfig = {
   font: {
     family: {
       value: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
@@ -52,4 +58,9 @@ export const fontTokenConfig: StyleDictionaryTokenConfig<"global-font"> = {
     "weight-bold": { value: "600", type: "global-font" },
     "weight-regular": { value: "400", type: "global-font" },
   },
+} satisfies {
+  font: Record<
+    FontFamilyKeys | FontSizeKeys | FontLineHeightKeys | FontWeightKeys,
+    StyleDictionaryToken<"global-font">
+  >;
 };

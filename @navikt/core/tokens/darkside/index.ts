@@ -2,12 +2,20 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import {
+  formatCJS,
+  formatCJSStatic,
+  formatES6,
+  formatES6Static,
+  formatLESS,
+  formatSCSS,
+  transformCSS,
+} from "./style-dictionary.formats";
+import {
   allTokens,
   darkModeTokens,
   lightModeTokens,
   rootTokens,
-} from "./create-configuration";
-import { formatCJS, formatES6, transformCSS } from "./sd-format";
+} from "./tokens.config";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -135,6 +143,65 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
+    jsStatic: {
+      transformGroup: "js",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.js",
+          format: "format-ES6-static",
+        },
+        {
+          destination: "tokens-cjs.js",
+          format: "format-CJS-static",
+        },
+        {
+          destination: "tokens.d.ts",
+          format: "format-ES6-static",
+        },
+      ],
+    },
+    scss: {
+      transformGroup: "scss",
+      buildPath: DARKSIDE_DIST,
+
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "format-SCSS",
+        },
+      ],
+    },
+    scssStatic: {
+      transformGroup: "scss",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.scss",
+          format: "scss/variables",
+        },
+      ],
+    },
+    less: {
+      transformGroup: "less",
+      buildPath: DARKSIDE_DIST,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "format-LESS",
+        },
+      ],
+    },
+    lessStatic: {
+      transformGroup: "less",
+      buildPath: `${DARKSIDE_DIST}static/`,
+      files: [
+        {
+          destination: "tokens.less",
+          format: "less/variables",
+        },
+      ],
+    },
   },
 });
 
@@ -160,14 +227,29 @@ const main = async () => {
     format: formatES6,
   });
 
-  /**
-   * To support theming in the future, we need to export the tokens as CSS variables.
-   * By default StyleDictionary does not support this and only outputs to color-values,
-   * so we need to create a custom format.
-   */
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-ES6-static",
+    format: formatES6Static,
+  });
+
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-CJS-static",
+    format: formatCJSStatic,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-SCSS",
+    format: formatSCSS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-LESS",
+    format: formatLESS,
   });
 
   await Promise.all([

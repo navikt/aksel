@@ -1,6 +1,13 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BorderKeys } from "@navikt/ds-tokens/darkside/tokens/semantic-roles";
+import type {
+  BorderColorKeys,
+  BorderColorWithRoleKeys,
+  BorderRadiusKeys,
+  DefaultBgKeys,
+  ShadowKeys,
+  StaticBgKeys,
+} from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -10,27 +17,21 @@ import BasePrimitive, {
 } from "../base/BasePrimitive";
 import { PrimitiveAsChildProps } from "../base/PrimitiveAsChildProps";
 import { getResponsiveProps } from "../utilities/css";
-import {
-  BorderRadiiToken,
-  ResponsiveProp,
-  SemanticRoleBgDarkside,
-  SemanticShadowTokens,
-  SemanticStaticBgDarkside,
-  SemanticStaticBorderDarkside,
-  SpaceDelimitedAttribute,
-} from "../utilities/types";
+import { ResponsiveProp, SpaceDelimitedAttribute } from "../utilities/types";
 
 export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+   * @see {@link DefaultBgKeys} and {@link StaticBgKeys}
    */
-  background?: SemanticStaticBgDarkside | SemanticRoleBgDarkside;
+  background?: DefaultBgKeys | StaticBgKeys;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+   * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
    */
-  borderColor?: BorderKeys | SemanticStaticBorderDarkside;
+  borderColor?: Exclude<BorderColorKeys, "focus"> | BorderColorWithRoleKeys;
   /**
    * CSS `border-radius` property.
    * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
@@ -39,8 +40,11 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
    * borderRadius='full'
    * borderRadius='0 full large small'
    * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
+   * @see {@link BorderRadiusKeys}
    */
-  borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiiToken>>;
+  borderRadius?: ResponsiveProp<
+    SpaceDelimitedAttribute<BorderRadiusKeys | "0">
+  >;
   /**
    * CSS `border-width` property. If this is not set there will be no border.
    * @example
@@ -51,8 +55,9 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Shadow on box. Accepts a shadow token.
    * @example
    * shadow='small'
+   * @see {@link ShadowKeys}
    */
-  shadow?: SemanticShadowTokens;
+  shadow?: ShadowKeys;
 } & PrimitiveProps &
   PrimitiveAsChildProps;
 

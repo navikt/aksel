@@ -1,18 +1,14 @@
 import lodash from "lodash";
 import StyleDictionary from "style-dictionary";
-import { Dictionary, TransformedToken } from "style-dictionary/types";
+import { type Dictionary, type TransformedToken } from "style-dictionary/types";
 import { createPropertyFormatter, getReferences } from "style-dictionary/utils";
-import {
-  darkModeTokens,
-  lightModeTokens,
-  scaleTokens,
-} from "../create-configuration";
-import { transformCSS } from "../sd-format";
+import { transformCSS } from "../style-dictionary.formats";
+import { darkModeTokens, lightModeTokens, scaleTokens } from "../tokens.config";
 import {
   type SemanticTokenGroups,
   type StyleDictionaryToken,
   type TokenTypes,
-} from "../util";
+} from "../tokens.util";
 import type { FigmaToken } from "./figma-config.types";
 
 const config = {

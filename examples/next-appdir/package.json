@@ -12,6 +12,7 @@
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons",
     "@navikt/ds-css": "file:./../../@navikt/core/css",
     "@navikt/ds-react": "file:./../../@navikt/core/react",
+    "@navikt/ds-tokens": "file:./../../@navikt/core/tokens",
     "@next/bundle-analyzer": "^15.0.0",
     "next": "15.0.0",
     "react": "^18",

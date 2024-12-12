@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-router";
 import React from "react";
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { RouteMapper } from "../components/RouteMapper";
 import { ThemeSwitch } from "../theme/ThemeSwitch";
 

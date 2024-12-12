@@ -7,7 +7,7 @@ import {
   ArrowRightIcon,
   ChevronDownIcon,
 } from "@navikt/aksel-icons";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
@@ -24,7 +24,7 @@ const EyeBrowText = styled.span`
 `;
 
 const H1 = styled.h1`
-  color: ${tokens.TextBrandOneStrong};
+  color: ${tokens.TextBrandMagentaStrong};
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -34,7 +34,7 @@ const H1 = styled.h1`
 
 const H2 = styled.h2`
   position: relative;
-  color: ${tokens.TextBrandOneStrong};
+  color: ${tokens.TextBrandMagentaStrong};
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -43,7 +43,7 @@ const H2 = styled.h2`
   letter-spacing: -0.288px;
 
   &::before {
-    background-color: ${tokens.BorderBrandOneSubtle};
+    background-color: ${tokens.BorderBrandMagentaSubtle};
     content: "";
     height: 7px;
     left: 0;
@@ -92,7 +92,7 @@ let PillLink: ReactNode;
       box-shadow: 0 0 0 3px ${tokens.Accent800};
     }
     &::before {
-      background-color: ${tokens.BrandOne900};
+      background-color: ${tokens.BrandMagenta900};
     }
   `;
 
@@ -128,9 +128,9 @@ const Paragraph = ({
 let LinkList: ReactNode;
 {
   const ScList = styled.div`
-    background-color: ${tokens.BgBrandTwo};
+    background-color: ${tokens.BgBrandBeige};
     &.borderTop {
-      border-top: 4px solid ${tokens.BgBrandOneStrong};
+      border-top: 4px solid ${tokens.BgBrandMagentaStrong};
     }
   `;
 
@@ -181,7 +181,7 @@ let PlainList: ReactNode;
 {
   const ScList = styled.ul`
     & li::marker {
-      color: ${tokens.BrandOne900};
+      color: ${tokens.BrandMagenta900};
     }
   `;
 
@@ -199,7 +199,7 @@ let PlainOrderedList: ReactNode;
   const ScList = styled.ol`
     & li::marker {
       font-weight: 800;
-      color: ${tokens.BrandOne900};
+      color: ${tokens.BrandMagenta900};
     }
     & li {
       padding-left: 4px;
