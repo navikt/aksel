@@ -25,8 +25,7 @@
     "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
     "css:get-version": "node config/get-version.js",
     "build:darkside": "tsx ./config/bundle.darkside.ts",
-    "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test": "yarn build && vitest run"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.7.0",
