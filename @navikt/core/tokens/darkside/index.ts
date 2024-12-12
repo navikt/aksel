@@ -3,7 +3,9 @@ import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import {
   formatCJS,
+  formatCJSStatic,
   formatES6,
+  formatES6Static,
   formatLESS,
   formatSCSS,
   transformCSS,
@@ -147,11 +149,15 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
       files: [
         {
           destination: "tokens.js",
-          format: "javascript/es6",
+          format: "format-ES6-static",
         },
         {
           destination: "tokens-cjs.js",
-          format: "javascript/module-flat",
+          format: "format-CJS-static",
+        },
+        {
+          destination: "tokens.d.ts",
+          format: "format-ES6-static",
         },
       ],
     },
@@ -222,8 +228,18 @@ const main = async () => {
   });
 
   SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-ES6-static",
+    format: formatES6Static,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-CJS-static",
+    format: formatCJSStatic,
   });
 
   SDDictionaryNonCSSFormats.registerFormat({
@@ -258,12 +274,6 @@ const main = async () => {
   });
 
   fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
-
-  /* Create static type-file for darkside */
-  fs.writeFileSync(
-    `${DARKSIDE_DIST}static/tokens.d.ts`,
-    fs.readFileSync(`${DARKSIDE_DIST}static/tokens.js`, "utf-8"),
-  );
 };
 
 main();

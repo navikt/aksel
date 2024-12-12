@@ -17,11 +17,29 @@ export const formatES6: FormatFn = async ({ dictionary, file }) => {
   return `${header}${tokens}\n`;
 };
 
+export const formatES6Static: FormatFn = async ({ dictionary, file }) => {
+  const header = await generateHeader(file);
+  const tokens = dictionary.allTokens
+    .map((token) => generateTokenString(token, "es6", false, true))
+    .join("\n");
+  return `${header}${tokens}\n`;
+};
+
 export const formatCJS: FormatFn = async ({ dictionary, file }) => {
   const header = await generateHeader(file);
   const tokens = dictionary.allTokens
     .map((token, idx, arr) =>
       generateTokenString(token, "cjs", idx === arr.length - 1),
+    )
+    .join("\n");
+  return `${header}module.exports = {\n${tokens}\n};\n`;
+};
+
+export const formatCJSStatic: FormatFn = async ({ dictionary, file }) => {
+  const header = await generateHeader(file);
+  const tokens = dictionary.allTokens
+    .map((token, idx, arr) =>
+      generateTokenString(token, "cjs", idx === arr.length - 1, true),
     )
     .join("\n");
   return `${header}module.exports = {\n${tokens}\n};\n`;
@@ -80,28 +98,35 @@ function createTokenValue(token: TransformedToken): string {
   return `var(--${kebabName})`;
 }
 
+/**
+ * @param isStatic Lets us set the token to a static value instead of CSS-variables
+ */
 export function generateTokenString(
   token: TransformedToken,
   format: "es6" | "cjs" | "scss" | "less",
   isLast: boolean,
+  isStatic?: boolean,
 ): string {
   const comment = createComment(token.comment);
   const nameWithoutPrefix = token.name.slice(2);
+
+  const tokenValue = isStatic
+    ? token.value ?? token.$value
+    : createTokenValue(token);
+
   if (format === "es6") {
-    return `${comment}export const ${nameWithoutPrefix} = "${createTokenValue(
-      token,
-    )}";`;
+    return `${comment}export const ${nameWithoutPrefix} = "${tokenValue}";`;
   }
   if (format === "scss") {
     const name = kebabCaseForAlpha(token.name).replace("--ax-", "ax-");
-    return `${comment} $${name}: ${createTokenValue(token)};`;
+    return `${comment} $${name}: ${tokenValue};`;
   }
   if (format === "less") {
     const name = kebabCaseForAlpha(token.name).replace("--ax-", "ax-");
-    return `${comment} @${name}: ${createTokenValue(token)};`;
+    return `${comment} @${name}: ${tokenValue};`;
   }
 
-  return `  ${comment}"${nameWithoutPrefix}": "${createTokenValue(token)}"${
+  return `  ${comment}"${nameWithoutPrefix}": "${tokenValue}"${
     isLast ? "" : ","
   }`;
 }
