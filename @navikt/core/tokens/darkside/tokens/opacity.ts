@@ -1,4 +1,5 @@
-import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
+import { ColorTheme } from "../../types";
+import { StyleDictionaryToken } from "../tokens.util";
 
 export function opacityTokenConfig(theme: ColorTheme) {
   return {
@@ -10,5 +11,7 @@ export function opacityTokenConfig(theme: ColorTheme) {
         figmaIgnore: true,
       },
     },
-  } satisfies StyleDictionaryTokenConfig<"opacity">;
+  } satisfies {
+    opacity: Record<"disabled", StyleDictionaryToken<"opacity">>;
+  };
 }
