@@ -9,6 +9,7 @@ export type GlobalColorEntry = {
 export type TokenTypes =
   | "color"
   | "shadow"
+  | "opacity"
   | "global-color"
   | "global-radius"
   | "global-spacing"

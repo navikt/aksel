@@ -74,7 +74,7 @@
 
 .navds-dropdown__item:disabled {
   color: var(--ac-dropdown-item-text, var(--a-text-action));
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
   background: transparent;
   cursor: not-allowed;
 }

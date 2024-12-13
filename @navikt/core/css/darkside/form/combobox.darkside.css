@@ -28,7 +28,7 @@
 }
 
 .navds-combobox--disabled {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
 
   & .navds-combobox__wrapper {
     & *:hover {

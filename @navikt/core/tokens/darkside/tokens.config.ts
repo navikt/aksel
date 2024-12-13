@@ -10,6 +10,7 @@ import {
   globalColorDarkModeConfig,
   globalColorLightModeConfig,
 } from "./tokens/global";
+import { opacityTokenConfig } from "./tokens/opacity";
 import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
@@ -32,10 +33,11 @@ const mergeConfigs = (
 export const lightModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
+      shadowTokenConfig("light"),
+      opacityTokenConfig("light"),
       semanticTokensForAllRolesConfig("light"),
       textContrastTokenConfig,
       semanticTokenConfig("light"),
-      shadowTokenConfig("light"),
       globalColorLightModeConfig,
     ]),
   );
@@ -48,10 +50,11 @@ export const lightModeTokens = () => {
 export const darkModeTokens = () => {
   return tokensWithPrefix(
     mergeConfigs([
+      shadowTokenConfig("dark"),
+      opacityTokenConfig("dark"),
       semanticTokensForAllRolesConfig("dark"),
       textContrastTokenConfig,
       semanticTokenConfig("dark"),
-      shadowTokenConfig("dark"),
       globalColorDarkModeConfig,
     ]),
   );
