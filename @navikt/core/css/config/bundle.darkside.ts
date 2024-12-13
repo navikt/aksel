@@ -239,7 +239,7 @@ async function bundleDarkside() {
       const sanitizedName = componentName
         /*
          * https://regex101.com/r/MAj58n/1
-         * Replaces every - and space with ""
+         * Removes every - and space
          */
         .replace(/[\s-]/g, "")
         .replace(".css", "")
