@@ -12,17 +12,23 @@ export const SemanticView = ({ cat }: { cat: string }) => {
   if (cat.startsWith("semantic-text")) {
     return (
       <Grid>
-        {colors.map((x) => {
-          const ref = getGlobalReference(x.value);
-          const c = color(x.value);
+        {colors.map((token) => {
+          const ref = getGlobalReference(token.value);
+          const c = color(token.value);
           const isLight = c.getLuminance() > 0.9;
 
+          const sanitizedName = sanitizeName(token.name.replace("text-", ""));
+
           return (
-            <div key={x.name} id={x.name} className="flex w-fit items-center">
+            <div
+              key={token.name}
+              id={token.name}
+              className="flex w-fit items-center"
+            >
               <div
                 style={{
                   background: isLight ? `var(--a-surface-inverted)` : undefined,
-                  color: x.value,
+                  color: token.value,
                   boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
                 }}
                 className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-2xl leading-none"
@@ -32,13 +38,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               <dl>
                 <dt className="inline-flex items-start gap-1 text-medium">
                   <span className="flex min-h-8 items-center">
-                    {sanitizeName(x.name.replace("text-", ""))}
+                    {sanitizedName}
                   </span>
                   <CopyButton
-                    copyText={x.name}
-                    title={`${sanitizeName(
-                      x.name.replace("text-", ""),
-                    )} kopier`}
+                    copyText={token.name}
+                    title={`${sanitizedName} kopier`}
                     size="small"
                   />
                 </dt>
@@ -51,7 +55,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                       {sanitizeName(ref.name)}
                     </Link>
                   ) : (
-                    getColorString(x.value)
+                    getColorString(token.value)
                   )}
                 </dd>
               </dl>
@@ -64,12 +68,19 @@ export const SemanticView = ({ cat }: { cat: string }) => {
   if (cat.startsWith("semantic-icon")) {
     return (
       <Grid>
-        {colors.map((x) => {
-          const ref = getGlobalReference(x.value);
-          const c = color(x.value);
+        {colors.map((token) => {
+          const ref = getGlobalReference(token.value);
+          const c = color(token.value);
           const isLight = c.getLuminance() > 0.9;
+
+          const sanitizedName = sanitizeName(token.name.replace("icon-", ""));
+
           return (
-            <div key={x.name} id={x.name} className="flex w-fit items-center">
+            <div
+              key={token.name}
+              id={token.name}
+              className="flex w-fit items-center"
+            >
               <div
                 style={{
                   background: isLight ? `var(--a-surface-inverted)` : undefined,
@@ -80,20 +91,18 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 <PersonCircleIcon
                   aria-hidden
                   style={{
-                    color: x.value,
+                    color: token.value,
                   }}
                 />
               </div>
               <dl>
                 <dt className="inline-flex items-start gap-1 text-medium">
                   <span className="flex min-h-8 items-center">
-                    {sanitizeName(x.name.replace("icon-", ""))}
+                    {sanitizedName}
                   </span>
                   <CopyButton
-                    copyText={x.name}
-                    title={`${sanitizeName(
-                      x.name.replace("icon-", ""),
-                    )} kopier`}
+                    copyText={token.name}
+                    title={`${sanitizedName} kopier`}
                     size="small"
                   />
                 </dt>
@@ -106,7 +115,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                       {sanitizeName(ref.name)}
                     </Link>
                   ) : (
-                    getColorString(x.value)
+                    getColorString(token.value)
                   )}
                 </dd>
               </dl>
@@ -120,27 +129,31 @@ export const SemanticView = ({ cat }: { cat: string }) => {
   if (cat.startsWith("semantic-border")) {
     return (
       <Grid>
-        {colors.map((x) => {
-          const ref = getGlobalReference(x.value);
+        {colors.map((token) => {
+          const ref = getGlobalReference(token.value);
+
+          const sanitizedName = sanitizeName(token.name.replace("border-", ""));
 
           return (
-            <div key={x.name} id={x.name} className="flex w-fit items-center">
+            <div
+              key={token.name}
+              id={token.name}
+              className="flex w-fit items-center"
+            >
               <div
                 style={{
-                  boxShadow: `inset 0 0 0 3px var(${x.name})`,
+                  boxShadow: `inset 0 0 0 3px var(${token.name})`,
                 }}
                 className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
               />
               <dl>
                 <dt className="inline-flex items-start gap-1 text-medium">
                   <span className="flex min-h-8 items-center">
-                    {sanitizeName(x.name.replace("border-", ""))}
+                    {sanitizedName}
                   </span>
                   <CopyButton
-                    copyText={x.name}
-                    title={`${sanitizeName(
-                      x.name.replace("border-", ""),
-                    )} kopier`}
+                    copyText={token.name}
+                    title={`${sanitizedName} kopier`}
                     size="small"
                   />
                 </dt>
@@ -153,7 +166,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                       {sanitizeName(ref.name)}
                     </Link>
                   ) : (
-                    getColorString(x.value)
+                    getColorString(token.value)
                   )}
                 </dd>
               </dl>
@@ -166,21 +179,25 @@ export const SemanticView = ({ cat }: { cat: string }) => {
   if (cat.startsWith("semantic-data-border")) {
     return (
       <Grid>
-        {colors.map((x) => {
-          const ref = getGlobalReference(x.value);
+        {colors.map((token) => {
+          const ref = getGlobalReference(token.value);
+
+          const sanitizedName = sanitizeName(
+            token.name.replace("surface-", ""),
+          );
 
           return (
             <div
-              key={x.name}
-              id={x.name}
+              key={token.name}
+              id={token.name}
               className="z-0 flex w-fit items-center"
             >
               <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
                 <span
                   className="h-full w-3 rounded-t-small"
                   style={{
-                    border: `1px solid var(${x.name})`,
-                    backgroundColor: `var(${x.name.replace(
+                    border: `1px solid var(${token.name})`,
+                    backgroundColor: `var(${token.name.replace(
                       "border",
                       "surface",
                     )}-subtle)`,
@@ -189,8 +206,8 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 <span
                   className="h-2/4 w-3 rounded-t-small"
                   style={{
-                    border: `1px solid var(${x.name})`,
-                    backgroundColor: `var(${x.name.replace(
+                    border: `1px solid var(${token.name})`,
+                    backgroundColor: `var(${token.name.replace(
                       "border",
                       "surface",
                     )}-subtle)`,
@@ -199,8 +216,8 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                 <span
                   className="h-2/3 w-3 rounded-t-small"
                   style={{
-                    border: `1px solid var(${x.name})`,
-                    backgroundColor: `var(${x.name.replace(
+                    border: `1px solid var(${token.name})`,
+                    backgroundColor: `var(${token.name.replace(
                       "border",
                       "surface",
                     )}-subtle)`,
@@ -210,13 +227,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
               <dl>
                 <dt className="inline-flex items-start gap-1 text-medium">
                   <span className="flex min-h-8 items-center">
-                    {sanitizeName(x.name.replace("surface-", ""))}
+                    {sanitizedName}
                   </span>
                   <CopyButton
-                    copyText={x.name}
-                    title={`${sanitizeName(
-                      x.name.replace("surface-", ""),
-                    )} kopier`}
+                    copyText={token.name}
+                    title={`${sanitizedName} kopier`}
                     size="small"
                   />
                 </dt>
@@ -229,7 +244,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                       {sanitizeName(ref.name)}
                     </Link>
                   ) : (
-                    getColorString(x.value)
+                    getColorString(token.value)
                   )}
                 </dd>
               </dl>
@@ -242,39 +257,41 @@ export const SemanticView = ({ cat }: { cat: string }) => {
   if (cat.startsWith("semantic-data-surface")) {
     return (
       <Grid>
-        {colors.map((x) => {
-          const ref = getGlobalReference(x.value);
+        {colors.map((token) => {
+          const ref = getGlobalReference(token.value);
+
+          const sanitizedName = sanitizeName(
+            token.name.replace("surface-", ""),
+          );
 
           return (
             <div
-              key={x.name}
-              id={x.name}
+              key={token.name}
+              id={token.name}
               className="z-0 flex w-fit items-center"
             >
               <div className="mr-3 flex h-16 w-16 items-end justify-evenly rounded-lg text-4xl leading-none">
                 <span
                   className="h-full w-3 rounded-t-small"
-                  style={{ backgroundColor: `var(${x.name})` }}
+                  style={{ backgroundColor: `var(${token.name})` }}
                 />
                 <span
                   className="h-2/4 w-3 rounded-t-small"
-                  style={{ backgroundColor: `var(${x.name})` }}
+                  style={{ backgroundColor: `var(${token.name})` }}
                 />
                 <span
                   className="h-2/3 w-3 rounded-t-small"
-                  style={{ backgroundColor: `var(${x.name})` }}
+                  style={{ backgroundColor: `var(${token.name})` }}
                 />
               </div>
               <dl>
                 <dt className="inline-flex items-start gap-1 text-medium">
                   <span className="flex min-h-8 items-center">
-                    {sanitizeName(x.name.replace("surface-", ""))}
+                    {sanitizedName}
                   </span>
                   <CopyButton
-                    copyText={x.name}
-                    title={`${sanitizeName(
-                      x.name.replace("surface-", ""),
-                    )} kopier`}
+                    copyText={token.name}
+                    title={`${sanitizedName} kopier`}
                     size="small"
                   />
                 </dt>
@@ -287,7 +304,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                       {sanitizeName(ref.name)}
                     </Link>
                   ) : (
-                    getColorString(x.value)
+                    getColorString(token.value)
                   )}
                 </dd>
               </dl>
@@ -300,14 +317,20 @@ export const SemanticView = ({ cat }: { cat: string }) => {
 
   return (
     <Grid>
-      {colors.map((x) => {
-        const ref = getGlobalReference(x.value);
+      {colors.map((token) => {
+        const ref = getGlobalReference(token.value);
+
+        const sanitizedName = sanitizeName(token.name.replace("surface-", ""));
 
         return (
-          <div key={x.name} id={x.name} className="z-0 flex w-fit items-center">
+          <div
+            key={token.name}
+            id={token.name}
+            className="z-0 flex w-fit items-center"
+          >
             <div
               style={{
-                background: `var(${x.name})`,
+                background: `var(${token.name})`,
                 boxShadow: `inset 0 2px 4px 0 rgba(0,0,0,0.06)`,
               }}
               className="mr-3 grid h-16 w-16 place-content-center rounded-lg text-4xl leading-none"
@@ -317,13 +340,11 @@ export const SemanticView = ({ cat }: { cat: string }) => {
             <dl>
               <dt className="inline-flex items-start gap-1 text-medium">
                 <span className="flex min-h-8 items-center">
-                  {sanitizeName(x.name.replace("surface-", ""))}
+                  {sanitizedName}
                 </span>
                 <CopyButton
-                  copyText={x.name}
-                  title={`${sanitizeName(
-                    x.name.replace("surface-", ""),
-                  )} kopier`}
+                  copyText={token.name}
+                  title={`${sanitizedName} kopier`}
                   size="small"
                 />
               </dt>
@@ -336,7 +357,7 @@ export const SemanticView = ({ cat }: { cat: string }) => {
                     {sanitizeName(ref.name)}
                   </Link>
                 ) : (
-                  getColorString(x.value)
+                  getColorString(token.value)
                 )}
               </dd>
             </dl>
