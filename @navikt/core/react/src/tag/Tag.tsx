@@ -32,12 +32,12 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt3"
     | "alt3-filled"
     | "alt3-moderate"
-    | "purple"
-    | "purple-filled"
-    | "purple-moderate"
-    | "lime"
-    | "lime-filled"
-    | "lime-moderate";
+    | "meta-purple"
+    | "meta-purple-filled"
+    | "meta-purple-moderate"
+    | "meta-lime"
+    | "meta-lime-filled"
+    | "meta-lime-moderate";
   /**
    * @default "medium"
    */
@@ -63,7 +63,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ children, className, variant, size = "medium", icon, ...rest }, ref) => {
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
-    const color = variant?.split("-")[0];
+    const color = variant?.replace("-filled", "").replace("-moderate", "");
 
     return (
       <BodyShort
