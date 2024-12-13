@@ -86,8 +86,8 @@ async function bundleDarkside() {
     const minifiedCss = new CleanCss({}).minify(file);
 
     if (minifiedCss.errors.length > 0) {
-      console.error(
-        `Errors found when minifying for ${filePath} CSS. Stopped bundling`,
+      throw new Error(
+        `Errors found when minifying for ${filePath} CSS. Stopped bundling\n${minifiedCss.errors}`,
       );
     }
 
@@ -124,8 +124,9 @@ async function bundleDarkside() {
       .find((line) => line.startsWith("@layer"));
 
     if (!layerDefinition) {
-      console.error("No layer definition found in index.css. Stopped bundling");
-      process.exit(1);
+      throw new Error(
+        "No layer definition found in index.css. Stopped bundling",
+      );
     }
 
     parsed = layerDefinition + "\n" + parsed;
@@ -230,10 +231,9 @@ async function bundleDarkside() {
         .replace(".darkside.css", ".css");
 
       if (!componentName) {
-        console.error(
+        throw new Error(
           `Could not find component name for line: ${componentLine}`,
         );
-        process.exit(1);
       }
 
       const sanitizedName = componentName
