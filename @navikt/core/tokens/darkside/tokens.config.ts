@@ -1,3 +1,9 @@
+import _ from "lodash";
+import {
+  StyleDictionaryTokenConfig,
+  TokenTypes,
+  tokensWithPrefix,
+} from "./tokens.util";
 import { breakpointsTokenConfig } from "./tokens/breakpoints";
 import { fontTokenConfig } from "./tokens/font";
 import {
@@ -11,7 +17,12 @@ import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spacingTokenConfig } from "./tokens/spacing";
 import { textContrastTokenConfig } from "./tokens/text-contrast";
-import { mergeConfigs, tokensWithPrefix } from "./util";
+
+const mergeConfigs = (
+  configs: StyleDictionaryTokenConfig<TokenTypes>[],
+): StyleDictionaryTokenConfig<TokenTypes> => {
+  return configs.reduce((acc, config) => _.merge(acc, config), {});
+};
 
 /**
  * Collection of configs for:
@@ -25,7 +36,7 @@ export const lightModeTokens = () => {
       shadowTokenConfig("light"),
       opacityTokenConfig("light"),
       semanticTokensForAllRolesConfig("light"),
-      textContrastTokenConfig(),
+      textContrastTokenConfig,
       semanticTokenConfig("light"),
       globalColorLightModeConfig,
     ]),
@@ -42,7 +53,7 @@ export const darkModeTokens = () => {
       shadowTokenConfig("dark"),
       opacityTokenConfig("dark"),
       semanticTokensForAllRolesConfig("dark"),
-      textContrastTokenConfig(),
+      textContrastTokenConfig,
       semanticTokenConfig("dark"),
       globalColorDarkModeConfig,
     ]),

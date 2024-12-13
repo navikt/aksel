@@ -1,41 +1,8 @@
 import _ from "lodash";
-import {
-  type ColorTheme,
-  type GlobalColorRoles,
-  type StyleDictionaryTokenConfig,
-  globalColorRoles,
-} from "../util";
+import { type ColorRoles, ColorRolesList, type ColorTheme } from "../../types";
+import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
-export type StaticBgKeys =
-  | GlobalColorRoles
-  | `${GlobalColorRoles}-moderate`
-  | `${GlobalColorRoles}-moderateA`
-  | `${GlobalColorRoles}-strong`
-  | `${GlobalColorRoles}-raised`;
-
-export type StateBgKeys =
-  | `${GlobalColorRoles}-hover`
-  | `${GlobalColorRoles}-hoverA`
-  | `${GlobalColorRoles}-moderate-hover`
-  | `${GlobalColorRoles}-moderate-hoverA`
-  | `${GlobalColorRoles}-moderate-pressed`
-  | `${GlobalColorRoles}-moderate-pressedA`
-  | `${GlobalColorRoles}-strong-hover`
-  | `${GlobalColorRoles}-strong-pressed`
-  | `${GlobalColorRoles}-raised-hover`;
-
-export type TextKeys =
-  | GlobalColorRoles
-  | `${GlobalColorRoles}-strong`
-  | `${GlobalColorRoles}-icon`;
-
-export type BorderKeys =
-  | GlobalColorRoles
-  | `${GlobalColorRoles}-subtle`
-  | `${GlobalColorRoles}-subtleA`
-  | `${GlobalColorRoles}-strong`;
-
-const configForRole = (role: GlobalColorRoles, theme: ColorTheme) => {
+const configForRole = (role: ColorRoles, theme: ColorTheme) => {
   return {
     bg: {
       [role]: {
@@ -155,8 +122,9 @@ const configForRole = (role: GlobalColorRoles, theme: ColorTheme) => {
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
-export const semanticTokensForAllRolesConfig = (theme: ColorTheme) =>
-  globalColorRoles.reduce(
+export const semanticTokensForAllRolesConfig = (theme: ColorTheme) => {
+  return ColorRolesList.reduce(
     (acc, role) => _.merge(acc, configForRole(role, theme)),
     {} as ReturnType<typeof configForRole>,
   );
+};

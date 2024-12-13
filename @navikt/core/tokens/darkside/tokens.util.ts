@@ -1,52 +1,10 @@
-import _ from "lodash";
+import { ColorRoles } from "../types";
 
-type GlobalColorEntryT = {
+export type GlobalColorEntry = {
   value: string;
   type: "global-color";
-  group: GlobalColorRoles;
+  group: ColorRoles;
 };
-
-export type GlobalConfigT = Record<
-  GlobalColorRoles,
-  Record<GlobalColorScale, GlobalColorEntryT> & {
-    "000"?: GlobalColorEntryT;
-    "100A"?: GlobalColorEntryT;
-    "200A"?: GlobalColorEntryT;
-    "300A"?: GlobalColorEntryT;
-    "400A"?: GlobalColorEntryT;
-  }
->;
-
-export const colorThemes = ["light", "dark"] as const;
-export type ColorTheme = (typeof colorThemes)[number];
-
-export const globalColorRoles = [
-  "neutral",
-  "accent",
-  "success",
-  "warning",
-  "danger",
-  "info",
-  "brand-one",
-  "brand-two",
-  "brand-three",
-  "data-one",
-  "data-two",
-] as const;
-
-export type GlobalColorRoles = (typeof globalColorRoles)[number];
-
-type GlobalColorScale =
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "1000";
 
 export type TokenTypes =
   | "color"
@@ -61,9 +19,9 @@ export type TokenTypes =
 export type SemanticTokenGroups = "background" | "border" | "text";
 
 export type TokenGroup =
-  | GlobalColorRoles
+  | ColorRoles
   | SemanticTokenGroups
-  | `${SemanticTokenGroups}.${GlobalColorRoles}`;
+  | `${SemanticTokenGroups}.${ColorRoles}`;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   /**
@@ -126,10 +84,4 @@ export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
 
 export const tokensWithPrefix = <T>(input: T): Record<"ax", T> => {
   return { ax: input };
-};
-
-export const mergeConfigs = (
-  configs: StyleDictionaryTokenConfig<TokenTypes>[],
-): StyleDictionaryTokenConfig<TokenTypes> => {
-  return configs.reduce((acc, config) => _.merge(acc, config), {});
 };

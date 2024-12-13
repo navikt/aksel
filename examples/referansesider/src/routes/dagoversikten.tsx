@@ -15,7 +15,7 @@ import {
   PersonPencilIcon,
   PlateFillIcon,
 } from "@navikt/aksel-icons";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { Button } from "../components/Button";
 import { Link } from "../components/Link";
 import { MiniTag } from "../components/MiniTag";
