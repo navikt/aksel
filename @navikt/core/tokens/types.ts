@@ -1,17 +1,20 @@
 export type ColorTheme = "light" | "dark";
 
-export type ColorRoles =
-  | "neutral"
-  | "accent"
-  | "success"
-  | "warning"
-  | "danger"
-  | "info"
-  | "brand-magenta"
-  | "brand-beige"
-  | "brand-blue"
-  | "meta-purple"
-  | "meta-lime";
+export const ColorRolesList = [
+  "neutral",
+  "accent",
+  "success",
+  "warning",
+  "danger",
+  "info",
+  "brand-magenta",
+  "brand-beige",
+  "brand-blue",
+  "meta-purple",
+  "meta-lime",
+] as const;
+
+export type ColorRoles = (typeof ColorRolesList)[number];
 
 export type GlobalColorScale =
   | "100"
