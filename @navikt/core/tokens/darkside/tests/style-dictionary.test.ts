@@ -1,6 +1,6 @@
 import { TransformedToken } from "style-dictionary/types";
 import { describe, expect, test } from "vitest";
-import { generateTokenString } from "../sd-format";
+import { generateTokenString } from "../style-dictionary.formats";
 
 const token: TransformedToken = {
   name: "AXColorPrimary",

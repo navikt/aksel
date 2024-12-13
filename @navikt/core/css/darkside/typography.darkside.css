@@ -1,15 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-
-/* ------------------------- Global typo-definitions ------------------------ */
-body,
-:host {
-  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
-  line-height: 1.333;
-  font-size: 1.125rem;
-}
-
-/* ----------------------------- Typo-components ---------------------------- */
-
 /* Heading */
 .navds-heading {
   font-weight: var(--ax-font-weight-bold);

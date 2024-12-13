@@ -172,7 +172,7 @@
 
 .navds-checkbox--disabled,
 .navds-radio--disabled {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
 }
 
 .navds-checkbox--disabled > .navds-checkbox__input,
