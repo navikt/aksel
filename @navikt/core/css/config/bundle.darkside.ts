@@ -118,7 +118,7 @@ async function bundleDarkside() {
       })
       .join("\n");
 
-    /* In the off-chance one imports this file standalone, we would like to make sure the layering order is included.  */
+    /* If one imports this file standalone, we would like to make sure the layering order is included.  */
     const layerDefinition = rootString
       .split("\n")
       .find((line) => line.startsWith("@layer"));
