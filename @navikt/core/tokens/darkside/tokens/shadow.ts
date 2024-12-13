@@ -1,4 +1,5 @@
-import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
+import { type ColorTheme, ShadowKeys } from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
 export function shadowTokenConfig(theme: ColorTheme) {
   return {
@@ -13,5 +14,7 @@ export function shadowTokenConfig(theme: ColorTheme) {
         figmaIgnore: true,
       },
     },
-  } satisfies StyleDictionaryTokenConfig<"shadow">;
+  } satisfies {
+    shadow: Record<ShadowKeys, StyleDictionaryToken<"shadow">>;
+  };
 }
