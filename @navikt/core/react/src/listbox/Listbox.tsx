@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { createContext } from "../util/create-context";
-import { useMergeRefs } from "../util/hooks";
+import { useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 
 type ListboxContextProps = {
@@ -66,6 +66,7 @@ const [
   HTMLDivElement,
   {
     value: string;
+    id: string;
   }
 >();
 
@@ -110,6 +111,8 @@ export const ListboxOptionsInternal = forwardRef<
   const listboxCtx = useListbox();
   const listboxCollectionCtx = useListboxCollectionCtx();
 
+  const isPointerDown = useRef<boolean>(false);
+
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [focusedOption, setFocusedOption] = useState<string | null>(null);
 
@@ -130,6 +133,12 @@ export const ListboxOptionsInternal = forwardRef<
   };
 
   const handleOnFocus = () => {
+    /* Cancel autofocus on first item if use ris currently pressing option */
+    if (isPointerDown.current) {
+      return;
+    }
+
+    /* Listbos spec expects first selected value to be focused if possible  */
     if (selectedValues.length > 0) {
       setFocusedOption(selectedValues[0]);
       return;
@@ -148,7 +157,9 @@ export const ListboxOptionsInternal = forwardRef<
       .values()
       .find((option) => option.value === focusedOption);
 
-    /* This should in theory never happend */
+    /*
+     * This can happend if handleFocus is canceled when isPointerDown === true
+     */
     if (!currentFocusedNode) {
       setFocusedOption(listboxCollectionCtx.firstEnabled()?.value ?? null);
       return;
@@ -198,9 +209,14 @@ export const ListboxOptionsInternal = forwardRef<
   };
 
   /**
+   * Look to optimize this by setting if in updateFocus
+   */
+  const activeDescendant = listboxCollectionCtx
+    .values()
+    .find((option) => option.value === focusedOption);
+
+  /**
    * TODO:
-   * - aria-activedescendant
-   * - aria-labelledby?
    * - ComposeEventhandlers
    */
   return (
@@ -208,10 +224,18 @@ export const ListboxOptionsInternal = forwardRef<
       ref={forwardedRef}
       tabIndex={0}
       role="listbox"
+      aria-multiselectable={listboxCtx.mode === "multiple"}
+      aria-activedescendant={activeDescendant ? activeDescendant.id : ""}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
       onKeyDown={handleKeydown}
       onKeyUp={handleKeyup}
+      onPointerDown={() => {
+        isPointerDown.current = true;
+      }}
+      onPointerUp={() => {
+        isPointerDown.current = false;
+      }}
     >
       <ListboxOptionsProvider
         selectedValues={selectedValues}
@@ -228,12 +252,16 @@ export const ListboxOptionsInternal = forwardRef<
 type ListboxOptionProps = {
   children: React.ReactNode;
   value: string;
+  id?: string;
 };
 
 export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
   (userprops, forwardedRef) => {
+    const localId = useId();
+
     const { register } = useListboxCollectionItem({
       value: userprops.value,
+      id: userprops.id ?? localId,
     });
     const composedRefs = useMergeRefs(forwardedRef, register);
 
@@ -247,6 +275,7 @@ export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
     return (
       <div
         ref={composedRefs}
+        aria-selected={isSelected}
         data-selected={isSelected}
         data-focused={isFocused}
         onClick={() => {
