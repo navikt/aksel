@@ -321,10 +321,6 @@
   padding: var(--ax-spacing-3);
 }
 
-.navds-timeline__popover:focus {
-  outline: none;
-}
-
 .navds-timeline__popover-arrow {
   position: absolute;
   z-index: -1;
