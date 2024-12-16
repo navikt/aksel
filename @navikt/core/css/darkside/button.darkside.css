@@ -260,7 +260,7 @@
 }
 
 .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
 }
 
 /* Loader overrides */

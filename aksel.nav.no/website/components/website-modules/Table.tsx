@@ -69,7 +69,12 @@ export function AkselTableRow({
       ))}
       {useCopy && (
         <td className="hidden border-t border-gray-200 px-2 py-1 sm:table-cell">
-          <CopyButton copyText={copyText} size="small" className="ml-auto" />
+          <CopyButton
+            copyText={copyText}
+            title={`${copyText.replace("--a-", "")} kopier`}
+            size="small"
+            className="ml-auto"
+          />
         </td>
       )}
     </tr>

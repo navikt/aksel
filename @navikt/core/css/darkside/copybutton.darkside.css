@@ -31,7 +31,7 @@
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.3;
+    opacity: var(--ax-opacity-disabled);
   }
 
   &:disabled:hover {

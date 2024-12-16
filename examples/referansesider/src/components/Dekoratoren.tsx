@@ -1,6 +1,6 @@
 import { ReactNode } from "@tanstack/react-router";
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { Link } from "./Link";
 
 const ScLink = styled(Link)`
@@ -33,7 +33,7 @@ const ScScLink = styled(Link)`
 `;
 
 const ScFooter = styled.footer`
-  background-color: ${tokens.BrandThree900};
+  background-color: ${tokens.BrandBlue900};
 `;
 
 export const Dekoratoren = ({ children }: { children: ReactNode }) => {

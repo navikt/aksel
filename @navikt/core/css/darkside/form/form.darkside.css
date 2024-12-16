@@ -23,7 +23,7 @@
 }
 
 .navds-form-field--disabled {
-  opacity: 0.3;
+  opacity: var(--ax-opacity-disabled);
   cursor: not-allowed;
 }
 
@@ -41,7 +41,7 @@
 
 .navds-form-field__readonly-icon {
   margin-top: var(--ax-spacing-05);
-  margin-right: var(--ax-spacing-2);
+  margin-right: var(--ax-spacing-1);
   flex-shrink: 0;
   align-self: flex-start;
 }

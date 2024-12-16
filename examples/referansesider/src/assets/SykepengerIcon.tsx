@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 /**
  * @note
  * - Unsure of token use here.
  */
 const ScSVG = styled.svg`
-  stroke: ${tokens.TextBrandOneStrong};
+  stroke: ${tokens.TextBrandMagentaStrong};
 `;
 
 /**
  * @note
- * - BgBrandOneModerate virker litt rart å bruke her.
+ * - BgBrandMagentaModerate virker litt rart å bruke her.
  */
 const ScPlusSVG = styled.svg`
-  fill: ${tokens.BgBrandOneModerate};
+  fill: ${tokens.BgBrandMagentaModerate};
 `;
 
 export const Ikon = ({ className }: { className?: string }) => {

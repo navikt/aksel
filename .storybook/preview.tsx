@@ -2,11 +2,13 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { Preview } from "@storybook/react";
 import React, { useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
-import darksideCss from "@navikt/ds-css/darkside/index.css?inline";
+import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
 // @ts-expect-error - Temporary
-import defaultCss from "@navikt/ds-css/index.css?inline";
-import { UNSAFE_AkselTheme } from "../@navikt/core/react/src/provider";
-import UNSAFE_AkselLanguageProvider from "../@navikt/core/react/src/provider/i18n/LanguageProvider";
+import defaultCss from "../@navikt/core/css/index.css?inline";
+import {
+  Provider,
+  UNSAFE_AkselTheme,
+} from "../@navikt/core/react/src/provider";
 import en from "../@navikt/core/react/src/util/i18n/locales/en";
 import nb from "../@navikt/core/react/src/util/i18n/locales/nb";
 import nn from "../@navikt/core/react/src/util/i18n/locales/nn";
@@ -46,9 +48,7 @@ const translations = {
 const LanguageDecorator = ({ children, language }) => {
   if (language) {
     return (
-      <UNSAFE_AkselLanguageProvider translations={translations[language]}>
-        {children}
-      </UNSAFE_AkselLanguageProvider>
+      <Provider translations={translations[language]}>{children}</Provider>
     );
   }
   return children;
