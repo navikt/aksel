@@ -77,8 +77,8 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
           `navds-tag--${variant}`,
           `navds-tag--${size}`,
           `navds-tag--${filledVariant || moderateVariant || "outline"}`,
+          `navds-tag--${color}`,
         )}
-        data-color={color}
       >
         {icon && <span className="navds-tag__icon--left">{icon}</span>}
         {children}
