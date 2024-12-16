@@ -213,7 +213,7 @@
   border: none;
   cursor: pointer;
   background: var(--ax-bg-default);
-  box-shadow: inset 0 0 0 4px var(--ax-border-danger-strong);
+  box-shadow: inset 0 0 0 4px var(--ax-bg-danger-strong);
   z-index: 2;
   border-radius: var(--ax-border-radius-full);
   padding: var(--ax-spacing-2);
@@ -231,7 +231,6 @@
   }
 
   &:hover {
-    /* TODO: missing --ax-border-danger-strong-hover ? */
     box-shadow: inset 0 0 0 4px var(--ax-bg-danger-strong-hover);
   }
 
@@ -342,7 +341,7 @@
 */
 
 .navds-timeline__popover {
-  z-index: 3;
+  z-index: 5;
   background-color: var(--ax-bg-default);
   box-shadow:
     0 5px 12px 0 rgb(0 0 0 / 0.13),
