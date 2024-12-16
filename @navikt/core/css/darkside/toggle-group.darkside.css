@@ -104,7 +104,6 @@
     border: 2px solid transparent;
   }
 
-  .navds-toggle-group__button[data-selected="true"]:hover,
   .navds-toggle-group__button:hover {
     background-color: highlighttext;
     color: highlight;
