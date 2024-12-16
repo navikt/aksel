@@ -22,7 +22,6 @@ describe("useEarliestDate", () => {
       [{ start: new Date(2022, 0, 1) }],
     ];
 
-    /* @ts-expect-error asdas */
     const { result } = renderHook(() => useEarliestDate({ rows }));
     expect(result.current).toEqual(new Date(2022, 0, 1));
   });
@@ -34,7 +33,6 @@ describe("useEarliestDate", () => {
       [{ start: addDays(earliestDate, 40) }],
     ];
 
-    /* @ts-expect-error asdas */
     const { result } = renderHook(() => useEarliestDate({ rows }));
     expect(result.current).toEqual(earliestDate);
   });
