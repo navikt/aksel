@@ -139,7 +139,7 @@ export const useEarliestDate = ({
   rows,
 }: {
   startDate?: Date;
-  rows: Omit<Period, "id" | "endInclusive">[][];
+  rows: Pick<Period, "start">[][];
 }) =>
   useMemo(() => {
     if (startDate) {
