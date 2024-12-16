@@ -111,12 +111,6 @@
     background: var(--ax-bg-success-moderate-hover);
   }
 
-  &.navds-timeline__period--clickable:active {
-    background: var(--ax-bg-success-strong);
-    border: none;
-    color: var(--ax-text-success-contrast);
-  }
-
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
     background: var(--ax-bg-success-strong-pressed);
     border: none;
@@ -131,12 +125,6 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-warning-moderate-hover);
-  }
-
-  &.navds-timeline__period--clickable:active {
-    background: var(--ax-bg-warning-strong);
-    border: none;
-    color: var(--ax-text-warning-contrast);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -155,12 +143,6 @@
     background: var(--ax-bg-danger-moderate-hover);
   }
 
-  &.navds-timeline__period--clickable:active {
-    background: var(--ax-bg-danger-strong);
-    border: none;
-    color: var(--ax-text-danger-contrast);
-  }
-
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
     background: var(--ax-bg-danger-strong-pressed);
     border: none;
@@ -177,12 +159,6 @@
     background: var(--ax-bg-info-moderate-hover);
   }
 
-  &.navds-timeline__period--clickable:active {
-    background: var(--ax-bg-info-strong);
-    border: none;
-    color: var(--ax-text-info-contrast);
-  }
-
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
     background: var(--ax-bg-info-strong-pressed);
     border: none;
@@ -197,12 +173,6 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-neutral-moderate-hover);
-  }
-
-  &.navds-timeline__period--clickable:active {
-    background: var(--ax-bg-neutral-strong);
-    border: none;
-    color: var(--ax-text-neutral-contrast);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
