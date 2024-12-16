@@ -20,7 +20,13 @@ export const ShapesView = ({ cat }: { cat: string }) => {
                 <span className="flex min-h-8 items-center">
                   {sanitizeName(x.name.replace("border-radius-", ""))}
                 </span>
-                <CopyButton copyText={x.name} size="small" />
+                <CopyButton
+                  copyText={x.name}
+                  title={`${sanitizeName(
+                    x.name.replace("border-radius-", ""),
+                  )} kopier`}
+                  size="small"
+                />
               </dt>
 
               <dd className="mt-auto text-medium text-text-subtle">
