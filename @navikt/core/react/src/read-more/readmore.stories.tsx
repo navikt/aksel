@@ -3,7 +3,6 @@ import { fn } from "@storybook/test";
 import React from "react";
 import { ReadMore } from ".";
 import { VStack } from "../layout/stack";
-import { UNSAFE_AkselTheme } from "../provider";
 
 export default {
   title: "ds-react/ReadMore",
@@ -68,17 +67,15 @@ export const Open: Story = {
 
 export const BrandVolumeLow: Story = {
   render: () => (
-    <UNSAFE_AkselTheme volume="low">
-      <VStack gap="4">
-        <ReadMore size="large" header={Default.args?.header}>
-          {Content}
-        </ReadMore>
-        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
-        <ReadMore size="small" header={Default.args?.header}>
-          {Content}
-        </ReadMore>
-      </VStack>
-    </UNSAFE_AkselTheme>
+    <VStack gap="4">
+      <ReadMore size="large" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+      <ReadMore header={Default.args?.header}>{Content}</ReadMore>
+      <ReadMore size="small" header={Default.args?.header}>
+        {Content}
+      </ReadMore>
+    </VStack>
   ),
   args: {
     ...Default.args,
@@ -86,7 +83,8 @@ export const BrandVolumeLow: Story = {
   },
 };
 
-export const BrandVolumeHigh: Story = {
+/* High volume temp disabled until we agree on concept */
+/* export const BrandVolumeHigh: Story = {
   render: () => (
     <UNSAFE_AkselTheme volume="high">
       <VStack gap="4">
@@ -100,7 +98,7 @@ export const BrandVolumeHigh: Story = {
       </VStack>
     </UNSAFE_AkselTheme>
   ),
-};
+}; */
 
 export const Chromatic: Story = {
   render: (...props) => {

@@ -18,14 +18,14 @@ const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
   providerName: "ThemeProvider",
 });
 
-type AkselThemeProps = {
+type ThemeProps = {
   className?: string;
   hasBackground?: boolean;
 } & ThemeContext &
   AsChildProps;
 
-const Theme = forwardRef<HTMLDivElement, AkselThemeProps>(
-  (props: AkselThemeProps, ref) => {
+const Theme = forwardRef<HTMLDivElement, ThemeProps>(
+  (props: ThemeProps, ref) => {
     const context = useThemeInternal(false);
 
     const {
@@ -39,7 +39,7 @@ const Theme = forwardRef<HTMLDivElement, AkselThemeProps>(
     const isRoot = context === undefined;
 
     const hasBackground =
-      hasBackgroundProp ?? (isRoot || props.theme !== undefined);
+      hasBackgroundProp ?? (isRoot && props.theme !== undefined);
 
     const SlotElement = asChild ? Slot : "div";
 
