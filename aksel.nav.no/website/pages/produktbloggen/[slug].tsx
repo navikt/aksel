@@ -127,7 +127,7 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               )}
             </div>
           </div>
-          <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl">
+          <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl rounded-2xl ring-1 ring-border-subtle">
             {blogg?.seo?.image ? (
               <Image
                 src={urlFor(blogg?.seo?.image)
