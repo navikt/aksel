@@ -133,10 +133,10 @@ export const Chromatic: Story = {
           <h2>BrandVolumeLow</h2>
           {BrandVolumeLow?.render?.(...props)}
         </div>
-        <div>
+        {/* <div>
           <h2>BrandVolumeHigh</h2>
           {BrandVolumeHigh?.render?.(...props)}
-        </div>
+        </div> */}
       </VStack>
     );
   },
