@@ -313,12 +313,12 @@
 
 .navds-timeline__popover {
   z-index: 5;
-  background-color: var(--ax-bg-default);
+  background-color: var(--ax-bg-raised);
   box-shadow: var(--ax-shadow-dialog);
   border: 1px solid;
   border-color: var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-large);
-  padding: var(--ax-spacing-3);
+  padding: var(--ax-spacing-4) var(--ax-spacing-5);
 }
 
 @media (forced-colors: active) {
