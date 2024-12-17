@@ -2,7 +2,7 @@
 import React from "react";
 import { Button as RDPButton, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
-import { UNSAFE_useAkselTheme } from "../../../provider";
+import { useThemeInternal } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
 
@@ -21,7 +21,7 @@ function WeekNumber({
   dates,
 }: WeekNumberProps): JSX.Element {
   const { onWeekNumberClick, styles, classNames } = useDayPicker();
-  const themeContext = UNSAFE_useAkselTheme(false);
+  const themeContext = useThemeInternal();
   const translate = useDateTranslationContext().translate;
 
   if (!onWeekNumberClick) {

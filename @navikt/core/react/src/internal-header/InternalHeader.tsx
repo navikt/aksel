@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { UNSAFE_AkselTheme, UNSAFE_useAkselTheme } from "../provider";
+import { Theme, useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
@@ -78,20 +78,20 @@ interface InternalHeaderComponent
  * ```
  */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
-  const themeContext = UNSAFE_useAkselTheme(false);
+  const themeContext = useThemeInternal();
 
   /*
    * Component is always in "dark" mode, so we manually override global theme.
    */
   if (themeContext) {
     return (
-      <UNSAFE_AkselTheme theme="dark" asChild>
+      <Theme theme="dark" asChild>
         <header
           {...rest}
           ref={ref}
           className={cl("navds-internalheader", className)}
         />
-      </UNSAFE_AkselTheme>
+      </Theme>
     );
   }
 

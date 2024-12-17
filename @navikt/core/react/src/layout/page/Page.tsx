@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
+import { useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent } from "../../util";
 import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
@@ -54,7 +54,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme(false);
+      const themeContext = useThemeInternal();
 
       if (process.env.NODE_ENV !== "production" && themeContext && background) {
         console.warn(

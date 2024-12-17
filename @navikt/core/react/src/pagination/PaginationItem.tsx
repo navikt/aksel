@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Button, ButtonProps } from "../button";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface PaginationItemProps extends ButtonProps {
@@ -40,7 +40,7 @@ export const Item: PaginationItemType = forwardRef(
     },
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal();
 
     return (
       <Button

@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
+import { useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -84,7 +84,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme(false);
+      const themeContext = useThemeInternal();
       const prefix = themeContext ? "ax" : "a";
 
       const style: React.CSSProperties = {

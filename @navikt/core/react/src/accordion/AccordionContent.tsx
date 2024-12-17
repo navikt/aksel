@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -16,7 +16,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal();
 
     if (context === null) {
       console.error(

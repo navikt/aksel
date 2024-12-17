@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { UNSAFE_useAkselTheme } from "../../provider";
+import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -125,7 +125,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal();
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
