@@ -69,7 +69,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       defaultChecked ?? checkedProp ?? false,
     );
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     useEffect(() => {
       checkedProp !== undefined && setChecked(checkedProp);

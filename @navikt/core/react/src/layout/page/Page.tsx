@@ -54,7 +54,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
+      const themeContext = useThemeInternal(false);
 
       if (process.env.NODE_ENV !== "production" && themeContext && background) {
         console.warn(

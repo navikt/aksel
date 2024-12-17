@@ -124,7 +124,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
     const showArrow = _arrow && !themeContext;
 
     const [_open, _setOpen] = useControllableState({

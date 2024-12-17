@@ -109,7 +109,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
+      const themeContext = useThemeInternal(false);
 
       if (
         process.env.NODE_ENV !== "production" &&

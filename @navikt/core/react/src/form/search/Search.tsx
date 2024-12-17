@@ -125,7 +125,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);

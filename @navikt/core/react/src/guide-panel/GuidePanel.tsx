@@ -37,7 +37,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
   ({ children, className, illustration, poster, ...rest }, ref) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     return (
       <div

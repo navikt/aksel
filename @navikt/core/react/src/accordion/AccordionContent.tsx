@@ -16,7 +16,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({ children, className, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     if (context === null) {
       console.error(

@@ -252,7 +252,7 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
-  const themeContext = useThemeInternal();
+  const themeContext = useThemeInternal(false);
   const prefix = themeContext ? "ax" : "a";
 
   const style: React.CSSProperties = {

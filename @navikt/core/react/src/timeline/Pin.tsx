@@ -48,7 +48,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const translate = useI18n("Timeline");
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
     const showArrow = !themeContext;
 
     const {

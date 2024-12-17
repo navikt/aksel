@@ -16,7 +16,7 @@ export type PortalProps = PortalBaseProps & AsChildProps;
 
 export const Portal = forwardRef<HTMLDivElement, PortalProps>(
   ({ rootElement, asChild, ...rest }, ref) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
     const contextRoot = useProvider()?.rootElement;
     const root = rootElement ?? contextRoot ?? globalThis?.document?.body;
 

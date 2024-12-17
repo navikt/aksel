@@ -78,7 +78,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
+      const themeContext = useThemeInternal(false);
       const prefix = themeContext ? "ax" : "a";
 
       const styles: React.CSSProperties = {

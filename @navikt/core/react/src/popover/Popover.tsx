@@ -125,7 +125,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     const {
       update,

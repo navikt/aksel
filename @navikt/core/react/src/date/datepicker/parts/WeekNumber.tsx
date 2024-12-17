@@ -21,7 +21,7 @@ function WeekNumber({
   dates,
 }: WeekNumberProps): JSX.Element {
   const { onWeekNumberClick, styles, classNames } = useDayPicker();
-  const themeContext = useThemeInternal();
+  const themeContext = useThemeInternal(false);
   const translate = useDateTranslationContext().translate;
 
   if (!onWeekNumberClick) {

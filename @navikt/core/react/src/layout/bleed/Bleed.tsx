@@ -81,7 +81,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
     const prefix = themeContext ? "ax" : "a";
 
     let style: React.CSSProperties = {

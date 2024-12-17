@@ -20,7 +20,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     if (itemContext === null) {
       console.error(

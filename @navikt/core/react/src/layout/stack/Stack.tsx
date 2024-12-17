@@ -84,7 +84,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = useThemeInternal();
+      const themeContext = useThemeInternal(false);
       const prefix = themeContext ? "ax" : "a";
 
       const style: React.CSSProperties = {

@@ -40,7 +40,7 @@ export const Item: PaginationItemType = forwardRef(
     },
     ref,
   ) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     return (
       <Button

@@ -78,7 +78,7 @@ interface InternalHeaderComponent
  * ```
  */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
-  const themeContext = useThemeInternal();
+  const themeContext = useThemeInternal(false);
 
   /*
    * Component is always in "dark" mode, so we manually override global theme.

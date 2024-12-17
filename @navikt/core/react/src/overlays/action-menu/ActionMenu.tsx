@@ -736,7 +736,7 @@ export const ActionMenuRadioItem = forwardRef<
     { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
-    const themeContext = useThemeInternal();
+    const themeContext = useThemeInternal(false);
 
     return (
       <Menu.RadioItem
