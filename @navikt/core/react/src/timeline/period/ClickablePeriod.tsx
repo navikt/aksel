@@ -15,6 +15,7 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, { useRef, useState } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.context";
 import { usePeriodContext } from "../hooks/usePeriodContext";
@@ -55,6 +56,9 @@ const ClickablePeriod = React.memo(
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const translate = useI18n("Timeline");
 
+    const themeContext = UNSAFE_useAkselTheme(false);
+    const showArrow = !themeContext;
+
     const {
       context,
       placement,
@@ -67,7 +71,7 @@ const ClickablePeriod = React.memo(
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [
-        offset(16),
+        offset(showArrow ? 16 : 8),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -164,15 +168,17 @@ const ClickablePeriod = React.memo(
               style={floatingStyles}
             >
               {children}
-              <div
-                ref={arrowRef}
-                style={{
-                  ...(arrowX != null ? { left: arrowX } : {}),
-                  ...(arrowY != null ? { top: arrowY } : {}),
-                  ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
-                }}
-                className="navds-timeline__popover-arrow"
-              />
+              {showArrow && (
+                <div
+                  ref={arrowRef}
+                  style={{
+                    ...(arrowX != null ? { left: arrowX } : {}),
+                    ...(arrowY != null ? { top: arrowY } : {}),
+                    ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+                  }}
+                  className="navds-timeline__popover-arrow"
+                />
+              )}
             </div>
           </FloatingFocusManager>
         )}
