@@ -1,18 +1,14 @@
 "use client";
-// https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/debounce.js
-export default function debounce(func, wait = 166) {
-  let timeout: ReturnType<typeof setTimeout>;
-  function debounced(this: any, ...args) {
-    const later = () => {
-      func.apply(this, args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  }
 
-  debounced.clear = () => {
-    clearTimeout(timeout);
-  };
+import _ from "lodash";
 
-  return debounced;
-}
+// 166 == 10 frames at 60fps
+const wrappedDebounce: typeof _.debounce = (
+  func: () => any,
+  wait = 166,
+  options?: { leading?: boolean; maxWait?: number; trailing?: boolean },
+) => {
+  return _.debounce(func, wait, options);
+};
+
+export default wrappedDebounce;

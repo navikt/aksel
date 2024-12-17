@@ -37,7 +37,7 @@ const TextareaCounter = ({
     debounceFunc();
 
     return () => {
-      debounceFunc.clear();
+      debounceFunc.cancel();
     };
   }, [difference]);
 
