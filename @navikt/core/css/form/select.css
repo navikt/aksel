@@ -78,6 +78,13 @@
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
 
+.navds-select--error .navds-select__input:focus {
+  border-color: var(--ac-select-error-border, var(--a-surface-danger));
+  box-shadow:
+    0 0 0 1px var(--a-border-danger),
+    var(--a-shadow-focus);
+}
+
 /**
   Disabled
 */
