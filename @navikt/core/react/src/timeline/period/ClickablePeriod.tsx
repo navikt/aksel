@@ -71,7 +71,7 @@ const ClickablePeriod = React.memo(
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,
       middleware: [
-        offset(16),
+        offset(showArrow ? 16 : 8),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),

@@ -316,7 +316,7 @@
   background-color: var(--ax-bg-default);
   box-shadow: var(--ax-shadow-dialog);
   border: 1px solid;
-  border-color: var(--ax-border-default);
+  border-color: var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-large);
   padding: var(--ax-spacing-3);
 }
