@@ -72,7 +72,7 @@ export const Combobox = forwardRef<
         aria-live="polite"
       >
         {showErrorMsg && (
-          <ErrorMessage size={size} icon>
+          <ErrorMessage size={size} showIcon>
             {error}
           </ErrorMessage>
         )}

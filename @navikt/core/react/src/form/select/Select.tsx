@@ -151,7 +151,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size} icon>
+            <ErrorMessage size={size} showIcon>
               {props.error}
             </ErrorMessage>
           )}

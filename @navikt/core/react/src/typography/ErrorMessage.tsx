@@ -21,7 +21,7 @@ export interface ErrorMessageProps
   /**
    * Render a triangular warning icon.
    */
-  icon?: boolean;
+  showIcon?: boolean;
 }
 
 /**
@@ -49,7 +49,7 @@ export const ErrorMessage: OverridableComponent<
       size,
       spacing,
       as: Component = "p",
-      icon = false,
+      showIcon = false,
       ...rest
     },
     ref,
@@ -69,7 +69,7 @@ export const ErrorMessage: OverridableComponent<
         },
       )}
     >
-      {icon && <ErrorMessageIcon />}
+      {showIcon && <ErrorMessageIcon />}
       {children}
     </Component>
   ),

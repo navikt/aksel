@@ -151,7 +151,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         aria-live="polite"
       >
         {showErrorMsg && (
-          <ErrorMessage size={size} icon>
+          <ErrorMessage size={size} showIcon>
             {props.error}
           </ErrorMessage>
         )}

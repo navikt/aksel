@@ -193,7 +193,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size} icon>
+            <ErrorMessage size={size} showIcon>
               {props.error}
             </ErrorMessage>
           )}

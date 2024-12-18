@@ -177,7 +177,7 @@ const Dropzone = forwardRef<HTMLInputElement, FileUploadDropzoneProps>(
           aria-relevant="additions removals"
           aria-live="polite"
         >
-          {showErrorMsg && <ErrorMessage icon>{error}</ErrorMessage>}
+          {showErrorMsg && <ErrorMessage showIcon>{error}</ErrorMessage>}
         </div>
       </div>
     );
