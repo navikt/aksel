@@ -1,3 +1,5 @@
+"use client";
+
 import { CSSProperties } from "react";
 
 export const CompareItem = ({
@@ -19,7 +21,7 @@ export const CompareItem = ({
   return (
     <div
       style={appliedStyle}
-      className="box-border max-w-full cursor-pointer select-none overflow-hidden"
+      className="box-border max-w-fit cursor-pointer select-none overflow-hidden"
     >
       {children}
     </div>

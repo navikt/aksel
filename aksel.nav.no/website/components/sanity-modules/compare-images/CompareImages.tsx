@@ -1,3 +1,5 @@
+"use client";
+
 import React, { CSSProperties, useRef, useState } from "react";
 import { CompareHandle } from "./CompareHandle";
 import { CompareItem } from "./CompareItem";
@@ -52,12 +54,12 @@ const CompareImages = ({
     const relativeX = clickX - elementLeft;
 
     // Get percentage
-    const percentageX = Math.round((relativeX / elementWidth) * 100);
+    const percentageX = (relativeX / elementWidth) * 100;
 
     // Clamp between 0 and 100
     const clampedPercentageX = Math.max(0, Math.min(100, percentageX));
 
-    internalPosition.current = clampedPercentageX;
+    internalPosition.current = Number(clampedPercentageX.toFixed(2));
     syncPosition();
   };
 
@@ -115,7 +117,7 @@ const CompareImages = ({
       onPointerDown={handlePointerDown}
       onPointerUp={() => setIsDragging(false)}
       onPointerMove={handlePointerMove}
-      className="group relative grid max-h-full max-w-full touch-pan-y select-none overflow-hidden"
+      className="group relative grid max-h-full max-w-fit touch-pan-y select-none overflow-hidden"
     >
       <CompareItem order="1">
         <img src={image1} alt="" className="object-cover object-center" />

@@ -1,3 +1,5 @@
+"use client";
+
 import cl from "clsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 
