@@ -13,6 +13,7 @@ import Bilde from "@/cms/bilde/Bilde";
 import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import CompareImages from "@/cms/compare-images/CompareImages";
 import DoDont from "@/cms/do-dont/DoDont";
 import ExampletextBlock from "@/cms/exampletext-block/ExampletextBlock";
 import ExpansionCard from "@/cms/expansioncard/ExpansionCard";
@@ -53,6 +54,7 @@ const serializers: Partial<PortableTextReactComponents> = {
     language: ({ value }) => (
       <SanityBlockContent lang={value.language} blocks={value.body} />
     ),
+    compare_images: ({ value }) => <CompareImages node={value} />,
   },
   unknownType: () => null,
   block: {
