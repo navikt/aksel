@@ -150,7 +150,11 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         aria-relevant="additions removals"
         aria-live="polite"
       >
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+        {showErrorMsg && (
+          <ErrorMessage size={size} icon>
+            {props.error}
+          </ErrorMessage>
+        )}
       </div>
     </div>
   );

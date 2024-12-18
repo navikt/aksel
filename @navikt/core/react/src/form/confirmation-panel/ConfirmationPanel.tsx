@@ -91,7 +91,11 @@ export const ConfirmationPanel = forwardRef<
         </Checkbox>
       </div>
       <div className="navds-form-field__error" id={errorId} role="alert">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+        {showErrorMsg && (
+          <ErrorMessage size={size} icon>
+            {props.error}
+          </ErrorMessage>
+        )}
       </div>
     </div>
   );

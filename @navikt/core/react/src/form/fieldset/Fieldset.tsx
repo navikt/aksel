@@ -113,7 +113,9 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             className="navds-fieldset__error"
           >
             {showErrorMsg && (
-              <ErrorMessage size={size}>{props.error}</ErrorMessage>
+              <ErrorMessage size={size} icon>
+                {props.error}
+              </ErrorMessage>
             )}
           </div>
         </fieldset>
