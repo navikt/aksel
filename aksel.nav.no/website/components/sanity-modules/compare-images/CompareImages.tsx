@@ -31,9 +31,34 @@ const CompareImages = ({
     );
   };
 
-  /* Container */
-  const handlePoinerUp = () => {
-    setIsDragging(false);
+  /**
+   * Update the position based on the cursor's current position within container.
+   */
+  const updateOnCursorPosition = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ) => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const elementLeft = rect.left;
+    const elementWidth = rect.width;
+
+    // Get X coordinate relative to viewport
+    const clickX = event.clientX;
+
+    // Calculate X coordinate relative to the div (0 = left edge)
+    const relativeX = clickX - elementLeft;
+
+    // Get percentage
+    const percentageX = Math.round((relativeX / elementWidth) * 100);
+
+    // Clamp between 0 and 100
+    const clampedPercentageX = Math.max(0, Math.min(100, percentageX));
+
+    internalPosition.current = clampedPercentageX;
+    syncPosition();
   };
 
   /* Container */
@@ -43,55 +68,16 @@ const CompareImages = ({
       return;
     }
 
-    if (!containerRef.current) {
-      return;
-    }
-
-    // 1. Get element's position and dimensions
-    const rect = containerRef.current.getBoundingClientRect();
-    const elementLeft = rect.left;
-    const elementWidth = rect.width;
-
-    // 2. Get the click's X coordinate relative to the viewport
-    const clickX = event.clientX;
-
-    // 3. Calculate the X coordinate relative to the div (0 = left edge)
-    const relativeX = clickX - elementLeft;
-
-    // 4. Calculate the percentage
-    const percentageX = Math.round((relativeX / elementWidth) * 100);
-
-    // Ensure percentage is between 0 and 100
-    const clampedPercentageX = Math.max(0, Math.min(100, percentageX));
-
-    internalPosition.current = clampedPercentageX;
-    syncPosition();
     setIsDragging(true);
+    updateOnCursorPosition(event);
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging || !containerRef.current) {
       return;
     }
-    // 1. Get element's position and dimensions
-    const rect = containerRef.current.getBoundingClientRect();
-    const elementLeft = rect.left;
-    const elementWidth = rect.width;
 
-    // 2. Get the click's X coordinate relative to the viewport
-    const clickX = event.clientX;
-
-    // 3. Calculate the X coordinate relative to the div (0 = left edge)
-    const relativeX = clickX - elementLeft;
-
-    // 4. Calculate the percentage
-    const percentageX = Math.round((relativeX / elementWidth) * 100);
-
-    // Ensure percentage is between 0 and 100
-    const clampedPercentageX = Math.max(0, Math.min(100, percentageX));
-
-    internalPosition.current = clampedPercentageX;
-    syncPosition();
+    updateOnCursorPosition(event);
   };
 
   const movePosition = (offset: number) => {
@@ -102,7 +88,7 @@ const CompareImages = ({
     syncPosition();
   };
 
-  /* Handle */
+  /* Set on CompareHandle */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
@@ -116,6 +102,7 @@ const CompareImages = ({
     }
   };
 
+  /* Initial styles, syncPosition() handles updates */
   const appliedStyle: CSSProperties = {
     "--image-clip-2": `${internalPosition.current}%`,
     "--image-clip-1": `${100 - internalPosition.current}%`,
@@ -126,7 +113,7 @@ const CompareImages = ({
       ref={containerRef}
       style={appliedStyle}
       onPointerDown={handlePointerDown}
-      onPointerUp={handlePoinerUp}
+      onPointerUp={() => setIsDragging(false)}
       onPointerMove={handlePointerMove}
       className="group relative grid max-h-full max-w-full touch-pan-y select-none overflow-hidden"
     >
@@ -140,11 +127,6 @@ const CompareImages = ({
         position={50}
         onKeyDown={handleKeyDown}
         isDragging={isDragging}
-        style={{
-          transform: "translate3d(-50%, 0, 0)",
-          left: `var(--image-clip-2)`,
-          transition: "opacity 200ms ease",
-        }}
       />
     </div>
   );
