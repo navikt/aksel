@@ -102,7 +102,7 @@
   background-color: var(--ac-switch-hover-bg, var(--a-surface-subtle));
 }
 
-.navds-switch__input:hover:checked ~ .navds-switch__track {
+.navds-switch__input:hover:checked:not(:disabled) ~ .navds-switch__track {
   background-color: var(--ac-switch-checked-hover-bg, var(--a-surface-action-selected-hover));
   border-color: var(--ac-switch-checked-hover-bg, var(--a-surface-action-selected-hover));
 }
@@ -248,7 +248,9 @@
   }
 
   .navds-switch__thumb,
-  .navds-switch--readonly .navds-switch__thumb {
+  .navds-switch--readonly .navds-switch__thumb,
+  .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb,
+  .navds-switch--readonly .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
     background-color: fieldtext;
   }
 
@@ -257,11 +259,8 @@
     color: field;
   }
 
-  .navds-switch__track {
-    width: calc(2.75rem + 4px);
-    height: calc(1.5rem + 4px);
-    top: var(--a-spacing-3);
-    border: 2px solid fieldtext;
+  .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
+    background-color: graytext;
   }
 
   .navds-switch__input:focus-visible ~ .navds-switch__track {
@@ -275,6 +274,7 @@
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__thumb {
     background-color: graytext;
+    border-color: graytext;
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__track {
