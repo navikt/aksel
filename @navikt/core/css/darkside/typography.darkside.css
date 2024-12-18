@@ -202,8 +202,31 @@
   margin-bottom: var(--ax-spacing-2);
 }
 
-.navds-error-message {
+.navds-error-message-wrapper {
+  align-items: flex-start;
   color: var(--ax-text-danger);
+
+  & svg {
+    margin-top: 2px;
+    flex: 1 0 auto;
+    width: 1em;
+    height: 1em;
+  }
+
+  & .navds-error-message.navds-error-message {
+    gap: 0;
+
+    &::before {
+      content: "";
+    }
+  }
+}
+
+.navds-error-message-wrapper--small {
+  & svg {
+    margin-top: 2px;
+    flex: 1 0 auto;
+  }
 }
 
 /* -------------------------------- Utilities ------------------------------- */

@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util/types";
+import { ErrorMessageIcon } from "./ErrorMessageIcon";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
 
@@ -17,7 +18,10 @@ export interface ErrorMessageProps
    */
   children: React.ReactNode;
 
-  icon?: React.ReactNode;
+  /**
+   * Render a triangular warning icon.
+   */
+  icon?: boolean;
 }
 
 /**
@@ -38,9 +42,23 @@ export const ErrorMessage: OverridableComponent<
   ErrorMessageProps,
   HTMLParagraphElement
 > = forwardRef(
-  ({ className, size, spacing, as: Component = "p", icon, ...rest }, ref) => (
-    <>
-      {icon}
+  (
+    {
+      children,
+      className,
+      size,
+      spacing,
+      as: Component = "p",
+      icon = false,
+      ...rest
+    },
+    ref,
+  ) => (
+    <span
+      className={cl("navds-error-message-wrapper", {
+        "navds-error-message-wrapper--small": size === "small",
+      })}
+    >
       <Component
         {...rest}
         ref={ref}
@@ -55,8 +73,11 @@ export const ErrorMessage: OverridableComponent<
             "navds-label--small": size === "small",
           },
         )}
-      />
-    </>
+      >
+        {icon && <ErrorMessageIcon />}
+        {children}
+      </Component>
+    </span>
   ),
 );
 

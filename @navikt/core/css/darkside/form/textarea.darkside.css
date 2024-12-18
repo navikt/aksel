@@ -94,39 +94,6 @@
   border-color: var(--ax-border-danger);
 }
 
-.navds-textarea--error {
-  .navds-form-field__error {
-    display: flex;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  &.navds-form-field {
-    .navds-error-message {
-      gap: 0;
-
-      &::before {
-        content: "";
-      }
-    }
-
-    svg {
-      margin-top: 1px;
-      width: 18px;
-      flex: 1 0 auto;
-    }
-  }
-}
-
-.navds-textarea--error.navds-form-field--small {
-  &.navds-form-field {
-    svg {
-      margin-top: 0;
-      width: 16px;
-    }
-  }
-}
-
 @media (forced-colors: active) {
   .navds-textarea__input {
     background-color: field;
