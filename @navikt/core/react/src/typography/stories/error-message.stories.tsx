@@ -99,12 +99,6 @@ export const WithIcon: Story = {
       <ErrorMessage size="medium" icon>
         {lorem}
       </ErrorMessage>
-      <ErrorMessage size="medium" icon>
-        {lorem}
-      </ErrorMessage>
-      <ErrorMessage size="small" icon>
-        {lorem}
-      </ErrorMessage>
       <ErrorMessage size="small" icon>
         {lorem}
       </ErrorMessage>
