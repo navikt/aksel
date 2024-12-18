@@ -202,23 +202,16 @@
   margin-bottom: var(--ax-spacing-2);
 }
 
-.navds-error-message-wrapper {
-  align-items: flex-start;
+.navds-error-message.navds-error-message {
+  display: flex;
   color: var(--ax-text-danger);
+  gap: var(--ax-spacing-1);
 
   & svg {
     margin-top: 2px;
     flex: 1 0 auto;
     width: 1em;
     height: 1em;
-  }
-
-  & .navds-error-message.navds-error-message {
-    gap: 0;
-
-    &::before {
-      content: "";
-    }
   }
 }
 

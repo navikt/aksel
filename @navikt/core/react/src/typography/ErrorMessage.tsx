@@ -54,30 +54,24 @@ export const ErrorMessage: OverridableComponent<
     },
     ref,
   ) => (
-    <span
-      className={cl("navds-error-message-wrapper", {
-        "navds-error-message-wrapper--small": size === "small",
-      })}
+    <Component
+      {...rest}
+      ref={ref}
+      className={cl(
+        "navds-error-message",
+        "navds-label",
+        className,
+        typoClassNames({
+          spacing,
+        }),
+        {
+          "navds-label--small": size === "small",
+        },
+      )}
     >
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(
-          "navds-error-message",
-          "navds-label",
-          className,
-          typoClassNames({
-            spacing,
-          }),
-          {
-            "navds-label--small": size === "small",
-          },
-        )}
-      >
-        {icon && <ErrorMessageIcon />}
-        {children}
-      </Component>
-    </span>
+      {icon && <ErrorMessageIcon />}
+      {children}
+    </Component>
   ),
 );
 
