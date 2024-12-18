@@ -1,49 +1,8 @@
-"use client";
-
-import cl from "clsx";
 import React, { CSSProperties, useRef, useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { CompareHandle } from "./CompareHandle";
+import { CompareItem } from "./CompareItem";
 
 /* eslint-disable @next/next/no-img-element */
-
-interface CompareHandleProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  position: number;
-  isDragging: boolean;
-}
-
-const CompareHandle = ({
-  position,
-  isDragging,
-  ...rest
-}: CompareHandleProps) => {
-  return (
-    <button
-      className={cl(
-        "group pointer-events-none absolute left-0 top-0 z-10 h-full appearance-none border-0 bg-none p-0 outline-none",
-        {
-          "opacity-100": isDragging,
-          "opacity-40 focus-visible:opacity-100": !isDragging,
-        },
-      )}
-      aria-label="Use arrow keys to adjust comparison"
-      aria-orientation="horizontal"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={position}
-      data-rcs="handle-container"
-      role="slider"
-      tabIndex={0}
-      {...rest}
-    >
-      <span className="absolute top-0 h-full w-[2px] bg-surface-subtle shadow-[rgba(0,_0,_0,_0.35)_0px_0px_4px]" />
-      <span className="relative z-10 flex items-center rounded-full bg-surface-subtle text-3xl outline-2 outline-offset-2 outline-border-focus group-focus-visible:outline">
-        <ChevronLeftIcon aria-hidden />
-        <ChevronRightIcon aria-hidden />
-      </span>
-    </button>
-  );
-};
 
 const CompareImages = ({
   image1,
@@ -76,9 +35,9 @@ const CompareImages = ({
   const handlePoinerUp = () => {
     setIsDragging(false);
   };
+
   /* Container */
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    event.preventDefault();
     // Only handle left mouse button (touch events also use 0).
     if (event.button !== 0) {
       return;
@@ -107,7 +66,6 @@ const CompareImages = ({
 
     internalPosition.current = clampedPercentageX;
     syncPosition();
-    /* updateInternalPosition({ isOffset: true, x: ev.pageX, y: ev.pageY }); */
     setIsDragging(true);
   };
 
@@ -136,32 +94,31 @@ const CompareImages = ({
     syncPosition();
   };
 
-  /* Handle */
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      internalPosition.current = Math.max(internalPosition.current - 5, 0);
-      syncPosition();
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      internalPosition.current = Math.min(internalPosition.current + 5, 100);
-      syncPosition();
-    }
-    return;
+  const movePosition = (offset: number) => {
+    internalPosition.current = Math.max(
+      0,
+      Math.min(100, internalPosition.current + offset),
+    );
+    syncPosition();
   };
 
   /* Handle */
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    console.info(event);
-    return;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+      movePosition(-5);
+    } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+      movePosition(5);
+    } else if (event.key === "Home") {
+      movePosition(-100);
+    } else if (event.key === "End") {
+      movePosition(100);
+    }
   };
 
   const appliedStyle: CSSProperties = {
     "--image-clip-2": `${internalPosition.current}%`,
     "--image-clip-1": `${100 - internalPosition.current}%`,
-    cursor: isDragging ? "ew-resize" : undefined,
   };
 
   return (
@@ -171,7 +128,7 @@ const CompareImages = ({
       onPointerDown={handlePointerDown}
       onPointerUp={handlePoinerUp}
       onPointerMove={handlePointerMove}
-      className="relative grid max-h-full max-w-full touch-pan-y select-none overflow-hidden"
+      className="group relative grid max-h-full max-w-full touch-pan-y select-none overflow-hidden"
     >
       <CompareItem order="1">
         <img src={image1} alt="" className="object-cover object-center" />
@@ -181,7 +138,6 @@ const CompareImages = ({
       </CompareItem>
       <CompareHandle
         position={50}
-        onClick={handleClick}
         onKeyDown={handleKeyDown}
         isDragging={isDragging}
         style={{
@@ -190,32 +146,6 @@ const CompareImages = ({
           transition: "opacity 200ms ease",
         }}
       />
-    </div>
-  );
-};
-
-const CompareItem = ({
-  children,
-  order,
-}: {
-  children: React.ReactNode;
-  order: "1" | "2";
-}) => {
-  const appliedStyle: CSSProperties = {
-    gridArea: "1 / 1 / 2 / 2",
-    willChange: "clip-path",
-    clipPath:
-      order === "1"
-        ? `inset(0 var(--image-clip-1) 0 0)`
-        : `inset(0 0 0 var(--image-clip-2))`,
-  };
-
-  return (
-    <div
-      style={appliedStyle}
-      className="box-border max-w-full select-none overflow-hidden"
-    >
-      {children}
     </div>
   );
 };
