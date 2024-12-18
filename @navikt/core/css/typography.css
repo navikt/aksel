@@ -212,13 +212,13 @@
   margin-bottom: var(--a-spacing-2);
 }
 
-.navds-error-message.navds-error-message {
+.navds-error-message {
   display: flex;
   color: var(--ac-typo-error-text, var(--__ac-typo-error-text, var(--a-text-danger)));
   gap: var(--a-spacing-1);
 }
 
-.navds-error-message.navds-error-message svg {
+.navds-error-message svg {
   margin-top: 0.15em;
   flex: 0 0 auto;
   width: 1em;

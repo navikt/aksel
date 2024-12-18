@@ -202,7 +202,7 @@
   margin-bottom: var(--ax-spacing-2);
 }
 
-.navds-error-message.navds-error-message {
+.navds-error-message {
   display: flex;
   color: var(--ax-text-danger);
   gap: var(--ax-spacing-1);
