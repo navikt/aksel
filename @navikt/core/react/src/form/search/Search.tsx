@@ -263,7 +263,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} icon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

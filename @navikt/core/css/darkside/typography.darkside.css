@@ -208,17 +208,10 @@
   gap: var(--ax-spacing-1);
 
   & svg {
-    margin-top: 2px;
-    flex: 1 0 auto;
+    margin-top: 0.15em;
+    flex: 0 0 auto;
     width: 1em;
     height: 1em;
-  }
-}
-
-.navds-error-message-wrapper--small {
-  & svg {
-    margin-top: 2px;
-    flex: 1 0 auto;
   }
 }
 
