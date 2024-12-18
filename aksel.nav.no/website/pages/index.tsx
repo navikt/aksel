@@ -191,7 +191,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
         title="Aksel"
         description={
           page?.seo?.meta ??
-          "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i NAV."
+          "En samling ressurser fra ulike fagdisipliner som hjelper oss å skape bedre, universelt tilgjengelige og sammenhengende produkter i Nav."
         }
         image={page?.seo?.image}
       />
@@ -286,7 +286,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                     </Heading>
                     <BodyLong size="large" className="max-w-3xl">
                       {page?.god_praksis_intro ??
-                        "Alle som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
+                        "Alle som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for andre. Derfor deler vi god praksis med hverandre her."}
                     </BodyLong>
                   </Box>
 

@@ -2,7 +2,7 @@
   "name": "@navikt/ds-tailwind",
   "version": "7.8.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
-  "author": "Aksel | NAV designsystem team",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "tailwind",
     "design-tokens"

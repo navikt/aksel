@@ -157,7 +157,7 @@ const AktivitetsplanPage = () => {
             </ActivityCard>
             <ActivityCard title="Servitør">
               <div>test</div>
-              <Tag $variant="info-strong">Avtalt med NAV</Tag>
+              <Tag $variant="info-strong">Avtalt med Nav</Tag>
             </ActivityCard>
           </ActivityColumn>
           <ActivityColumn title="Forslag">
@@ -187,7 +187,7 @@ const AktivitetsplanPage = () => {
           <ActivityColumn title="Forslag">
             <ActivityCard title="Servitør">
               <div>test</div>
-              <Tag $variant="info-strong">Avtalt med NAV</Tag>
+              <Tag $variant="info-strong">Avtalt med Nav</Tag>
               <Tag $variant="neutral-strong">Slettet</Tag>
             </ActivityCard>
           </ActivityColumn>

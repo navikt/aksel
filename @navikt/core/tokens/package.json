@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-tokens",
   "version": "7.8.0",
-  "description": "Design-tokens for NAV designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "description": "Design-tokens for Nav designsystem",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "css",
     "less",

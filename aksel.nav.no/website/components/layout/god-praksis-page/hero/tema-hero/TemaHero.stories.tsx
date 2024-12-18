@@ -63,7 +63,7 @@ export const Description: Story = {
         { description: "Lorem ipsum", title: "WCAG" },
         { description: "Lorem ipsum", title: "Testing" },
       ],
-      description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      description: `Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.`,
     },
@@ -98,19 +98,19 @@ export const LongDescription: Story = {
         { description: "Lorem ipsum", title: "Testing" },
       ],
 
-      description: `Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      description: `Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.
-      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.
-      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.
-      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.
-      Alle som jobber med produktutvikling i NAV sitter på kunnskap og
+      Alle som jobber med produktutvikling i Nav sitter på kunnskap og
       erfaring som er nyttig for andre. Derfor deler vi god praksis med
       hverandre her.`,
     },
