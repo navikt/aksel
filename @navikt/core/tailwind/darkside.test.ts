@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { breakpointsTokenConfig } from "@navikt/ds-tokens/darkside/tokens/breakpoints";
+import { breakpointsTokenConfig } from "../tokens/darkside/tokens/breakpoints";
 import { config, extractTokensForCategory } from "./darkside";
 
 describe("Darkside tailwind config", () => {

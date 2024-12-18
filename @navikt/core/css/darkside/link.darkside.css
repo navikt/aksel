@@ -2,7 +2,7 @@
   color: var(--ax-text-accent);
   display: inline-flex;
   align-items: center;
-  gap: var(--ax-spacing-1);
+  gap: var(--ax-spacing-05);
   text-decoration: underline;
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.05em;
@@ -43,7 +43,7 @@
   }
 }
 
-.navds-alert,
+.navds-alert:not(.navds-alert--inline),
 .navds-confirmation-panel {
   & .navds-link {
     color: var(--ax-text-default);

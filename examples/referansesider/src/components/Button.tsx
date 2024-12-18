@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 const ScButton = styled.button`
   display: inline-block;
