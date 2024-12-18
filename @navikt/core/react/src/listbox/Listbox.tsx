@@ -251,6 +251,7 @@ export const ListboxOptionsInternal = forwardRef<
 
 type ListboxOptionProps = {
   children: React.ReactNode;
+  className?: string;
   value: string;
   id?: string;
 };
@@ -267,7 +268,7 @@ export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
 
     const listboxOptionsCtx = useListboxOptions();
 
-    const { children, value } = userprops;
+    const { children, value, className } = userprops;
 
     const isSelected = listboxOptionsCtx.selectedValues.includes(value);
     const isFocused = listboxOptionsCtx.focusedOption === value;
@@ -275,6 +276,7 @@ export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
     return (
       <div
         ref={composedRefs}
+        className={className}
         aria-selected={isSelected}
         data-selected={isSelected}
         data-focused={isFocused}

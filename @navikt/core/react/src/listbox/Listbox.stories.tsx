@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react/*";
 import React from "react";
 import { Listbox, ListboxOption, ListboxOptions } from "./Listbox";
+import "./listbox.css";
 
 export default {
   title: "ds-react/ListBox",
@@ -16,53 +17,68 @@ export const Items: Story = {
   render: () => {
     return (
       <div>
-        <button onClick={console.log}>Focus before</button>
+        <button>Placeholder</button>
         <Listbox>
-          <style>
-            {`
-          [data-focused="true"]{
-            outline: 2px solid blue;
-          }
-          [data-selected="true"]{
-            color: blue;
-          }
-
-          *:focus {
-              outline: 0;
-
-          `}
-          </style>
           <ListboxOptions>
-            <ListboxOption value="value 1">Value 1</ListboxOption>
-            <ListboxOption value="value 2">Value 2</ListboxOption>
-            <ListboxOption value="value 3">Value 3</ListboxOption>
-            <ListboxOption value="value 4">Value 4</ListboxOption>
+            <ListboxOption className="l-item" value="value 1">
+              Value 1
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 2">
+              Value 2
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 3">
+              Value 3
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 4">
+              Value 4
+            </ListboxOption>
           </ListboxOptions>
         </Listbox>
-        <button>123</button>
+        <button>Placeholder</button>
         <Listbox mode="multiple">
-          <style>
-            {`
-          [data-focused="true"]{
-            outline: 2px solid blue;
-          }
-          [data-selected="true"]{
-            color: blue;
-          }
-
-          *:focus {
-              outline: 0;
-
-          `}
-          </style>
           <ListboxOptions>
-            <ListboxOption value="value 1">Value 1</ListboxOption>
-            <ListboxOption value="value 2">Value 2</ListboxOption>
-            <ListboxOption value="value 3">Value 3</ListboxOption>
-            <ListboxOption value="value 4">Value 4</ListboxOption>
+            <ListboxOption className="l-item" value="value 1">
+              Value 1
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 2">
+              Value 2
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 3">
+              Value 3
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 4">
+              Value 4
+            </ListboxOption>
           </ListboxOptions>
         </Listbox>
-        <button>Focus after</button>
+        <button>Placeholder</button>
+      </div>
+    );
+  },
+};
+
+export const Combobox: Story = {
+  render: () => {
+    return (
+      <div>
+        <button>Placeholder</button>
+        <Listbox mode="multiple">
+          <ListboxOptions>
+            <ListboxOption className="l-item" value="value 1">
+              Value 1
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 2">
+              Value 2
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 3">
+              Value 3
+            </ListboxOption>
+            <ListboxOption className="l-item" value="value 4">
+              Value 4
+            </ListboxOption>
+          </ListboxOptions>
+        </Listbox>
+        <button>Placeholder</button>
       </div>
     );
   },

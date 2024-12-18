@@ -1,0 +1,16 @@
+.l-item {
+  padding: 4px 8px;
+  margin: 4px 0;
+
+  &:hover {
+    background: var(--a-surface-action-subtle-hover);
+  }
+
+  &[data-focused="true"] {
+    box-shadow: -4px 0 0 0 var(--a-border-selected);
+  }
+
+  &[data-selected="true"] {
+    background: var(--a-surface-action-subtle);
+  }
+}
