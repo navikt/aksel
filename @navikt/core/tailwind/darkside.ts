@@ -4,9 +4,12 @@ import { kebabCaseForAlpha } from "../tokens/config/kebabCase";
 import { breakpointsTokenConfig } from "../tokens/darkside/tokens/breakpoints";
 
 const transformedTokens = Object.fromEntries(
-  Object.entries(TokensBuild).map(([key, value]) => {
-    return [kebabCaseForAlpha(key), value];
-  }),
+  Object.entries(TokensBuild)
+    .map(([key, value]) => {
+      return [kebabCaseForAlpha(key), value];
+    })
+    /* "* as" imports incldes key "default" where value is every token  */
+    .filter(([key]) => key !== "default"),
 );
 
 const nonColorTokens = [
@@ -18,6 +21,7 @@ const nonColorTokens = [
   "font-family",
   "border-radius",
   "breakpoint",
+  "opacity",
 ];
 /*
  * Assumes that all remaining names not in nonColorTokens are colors
@@ -50,6 +54,7 @@ export const config = {
       lineHeight: extractTokensForCategory("font-line-height"),
       fontFamily: extractTokensForCategory("font-family"),
       borderRadius: extractTokensForCategory("border-radius"),
+      opacity: extractTokensForCategory("opacity"),
     },
   },
 };
