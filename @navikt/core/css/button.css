@@ -510,7 +510,7 @@
   stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
 }
 
-.navds-button:has(.navds-loader) :is(.navds-button__icon, .navds-label) {
+.navds-button--loading :is(.navds-button__icon, .navds-label) {
   visibility: hidden;
 }
 
