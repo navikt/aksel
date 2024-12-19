@@ -72,7 +72,6 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         size = "medium",
         loading = false,
         disabled,
-        style,
         icon,
         iconPosition = "left",
         ...rest
@@ -105,7 +104,6 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
               "navds-button--disabled": disabled ?? loading,
             },
           )}
-          style={style}
           disabled={disabled ?? loading ? true : undefined}
         >
           {icon && iconPosition === "left" && (
