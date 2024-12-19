@@ -1,5 +1,6 @@
 import type { Types } from "@amplitude/analytics-browser";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 const batchedEvents: Parameters<Pick<Types.BrowserClient, "track">["track"]>[] =
   [];
@@ -26,49 +27,61 @@ const AMPLITUDE_PUBLIC_API_KEY = "1a9a84a5e557ac9635a250bc27d75030";
  * https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events
  * https://javascript.plainenglish.io/how-to-implement-amplitude-in-next-js-a-3-step-guide-6803c44ca862
  */
-const useAmplitudeInit = () => {
-  useEffect(() => {
-    const isProdUrl = () => window.location.host === "aksel.nav.no";
-    const isExample = () => window.location.pathname.includes("eksempler/");
-    const isTemplate = () => window.location.pathname.includes("templates/");
-    const isPreview = () => !!document.getElementById("exit-preview-id");
+const isProdUrl = () => window.location.host === "aksel.nav.no";
+const isExample = () => window.location.pathname.includes("eksempler/");
+const isTemplate = () => window.location.pathname.includes("templates/");
+const isPreview = () => !!document.getElementById("exit-preview-id");
 
-    const initAmplitude = async () => {
-      if (isExample() || isTemplate()) {
-        return;
-      }
+const initAmplitude = async () => {
+  //console.log("initAmplitude");
+  if (isExample() || isTemplate()) {
+    return;
+  }
 
-      if (!isProdUrl()) {
-        mockAmplitude();
-        return;
-      }
+  if (!isProdUrl()) {
+    mockAmplitude();
+    return;
+  }
 
-      amplitude = await import("@amplitude/analytics-browser");
-      amplitude
-        .init(AMPLITUDE_PUBLIC_API_KEY, undefined, {
-          useBatch: true,
-          serverUrl: "https://amplitude.nav.no/collect",
-          defaultTracking: {
-            pageViews: {
-              trackHistoryChanges: "pathOnly",
-              trackOn: () => {
-                return !isPreview();
-              },
-            },
+  amplitude = await import("@amplitude/analytics-browser");
+  amplitude
+    .init(AMPLITUDE_PUBLIC_API_KEY, undefined, {
+      useBatch: true,
+      serverUrl: "https://amplitude.nav.no/collect",
+      defaultTracking: {
+        pageViews: {
+          trackHistoryChanges: "pathOnly",
+          trackOn: () => {
+            return !isPreview();
           },
-        })
-        .promise.then(() =>
-          batchedEvents
-            .splice(0, batchedEvents.length)
-            .forEach(([event, eventData]) => amplitude.track(event, eventData)),
-        )
-        .catch(async () => {
-          const { logger } = await import("@navikt/next-logger");
-          logger.error("Failed logging batched events");
-        });
-    };
-    initAmplitude();
-  }, []);
+        },
+      },
+    })
+    .promise.then(() =>
+      batchedEvents
+        .splice(0, batchedEvents.length)
+        .forEach(([event, eventData]) => amplitude.track(event, eventData)),
+    )
+    .catch(async () => {
+      const { logger } = await import("@navikt/next-logger");
+      logger.error("Failed logging batched events");
+    });
+};
+
+const useAmplitudeInit = () => {
+  const [cookies, setCookie /*, removeCookie*/] = useCookies(["cookieConsent"]); // TODO: Make it possible to change
+
+  //console.log({ cookieConsent: cookies.cookieConsent });
+
+  useEffect(() => {
+    if (cookies.cookieConsent) initAmplitude();
+  }, [cookies.cookieConsent]);
+
+  return {
+    promptForConsent: cookies.cookieConsent === undefined,
+    allowCookies: () => setCookie("cookieConsent", true), // TODO: Set expiry
+    rejectCookies: () => setCookie("cookieConsent", false),
+  };
 };
 
 /**
