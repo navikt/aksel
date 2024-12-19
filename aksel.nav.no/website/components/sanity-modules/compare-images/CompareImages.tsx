@@ -149,6 +149,9 @@ const CompareImages = ({ node }: CompareImagesProps) => {
   const appliedStyle: CSSProperties = {
     "--image-clip-2": `${internalPosition.current}%`,
     "--image-clip-1": `${100 - internalPosition.current}%`,
+    backgroundColor: node.background
+      ? `rgba(${node.background.rgb.r},${node.background.rgb.g},${node.background.rgb.b},${node.background.rgb.a})`
+      : undefined,
   };
 
   return (
@@ -168,14 +171,14 @@ const CompareImages = ({ node }: CompareImagesProps) => {
         <CompareItem order="1">
           <img
             src={urlFor(node.image_1.asset).auto("format").url()}
-            alt=""
+            alt={node.image_1.alt}
             className="object-cover object-center"
           />
         </CompareItem>
         <CompareItem order="2">
           <img
             src={urlFor(node.image_2.asset).auto("format").url()}
-            alt=""
+            alt={node.image_2.alt}
             className="object-cover object-center"
           />
         </CompareItem>

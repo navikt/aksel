@@ -21,7 +21,7 @@ export const CompareHandle = forwardRef<HTMLButtonElement, CompareHandleProps>(
             "opacity-40 focus:opacity-100 group-hover:opacity-100": !isDragging,
           },
         )}
-        aria-label="Use arrow keys to adjust comparison"
+        aria-label="Endre verdi for å sammenligne bilder"
         aria-orientation="horizontal"
         aria-valuemin={0}
         aria-valuemax={100}
