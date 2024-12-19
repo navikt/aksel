@@ -93,7 +93,7 @@ export const OverrideTag: Story = {
   },
 };
 
-export const WithAndWithoutIcon: Story = {
+export const WithIcon: Story = {
   render: () => (
     <VStack gap="2">
       <ErrorMessage size="medium" showIcon>
@@ -102,8 +102,6 @@ export const WithAndWithoutIcon: Story = {
       <ErrorMessage size="small" showIcon>
         {lorem}
       </ErrorMessage>
-      <ErrorMessage size="medium">{lorem}</ErrorMessage>
-      <ErrorMessage size="small">{lorem}</ErrorMessage>
     </VStack>
   ),
 };
