@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import { Loader } from "../../loader";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
@@ -69,8 +68,6 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       defaultChecked ?? checkedProp ?? false,
     );
 
-    const themeContext = UNSAFE_useAkselTheme(false);
-
     useEffect(() => {
       checkedProp !== undefined && setChecked(checkedProp);
     }, [checkedProp]);
@@ -121,13 +118,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               <Loader
                 size="xsmall"
                 aria-live="polite"
-                variant={
-                  checked
-                    ? "interaction"
-                    : themeContext
-                      ? "inverted"
-                      : "neutral"
-                }
+                variant={checked ? "interaction" : "inverted"}
               />
             ) : (
               <svg
