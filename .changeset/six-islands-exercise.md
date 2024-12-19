@@ -4,3 +4,4 @@
 ---
 
 ErrorSummary: :sparkles: new prop to prefix error with a warning icon.
+all form components: replace dot with warning icon in error message.message
