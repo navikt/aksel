@@ -109,7 +109,7 @@
   margin-right: var(--ac-button-icon-margin);
 }
 
-.navds-button:not(:has(.navds-label)) .navds-button__icon {
+.navds-button--icon-only .navds-button__icon {
   margin: 0;
 }
 
