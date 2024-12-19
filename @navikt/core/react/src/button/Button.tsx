@@ -1,10 +1,9 @@
 import cl from "clsx";
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef } from "react";
 import { Loader } from "../loader";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { OverridableComponent } from "../util/types";
 
 export interface ButtonProps
@@ -80,12 +79,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       },
       ref,
     ) => {
-      const buttonRef = useRef<HTMLButtonElement | null>(null);
-
-      const mergedRef = useMergeRefs(buttonRef, ref);
-
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-        (disabled || loading) ? omit(rest, ["href"]) : rest;
+        disabled || loading ? omit(rest, ["href"]) : rest;
 
       const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === " " && !disabled && !loading) {
@@ -97,7 +92,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         <Component
           {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
-          ref={mergedRef}
+          ref={ref}
           onKeyUp={composeEventHandlers(filterProps.onKeyUp, handleKeyUp)}
           className={cl(
             className,
