@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.context";
@@ -52,7 +52,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMergeRefs(buttonRef, ref);
     const [open, setOpen] = useState(false);
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
     const translate = useI18n("HelpText");
 
     const titleWithFallback = title || translate("title");
