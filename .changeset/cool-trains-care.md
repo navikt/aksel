@@ -2,4 +2,4 @@
 "@navikt/ds-react": patch
 ---
 
-Textarea: resize immediately when resized (eg. inside modal opening).
+Textarea: resize immediately upon receiving resize event (eg. inside modal opening).
