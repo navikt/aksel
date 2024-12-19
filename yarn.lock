@@ -7786,6 +7786,7 @@ __metadata:
     react: "npm:^18.0.0"
     react-docgen-typescript: "npm:2.2.2"
     react-dom: "npm:^18.0.0"
+    react-snowfall: "npm:^2.2.0"
     storybook: "npm:^8.3.4"
     storybook-addon-pseudo-states: "npm:^4.0.2"
     stylelint: "npm:^16.10.0"
@@ -20271,7 +20272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fast-compare@npm:^3.1.1, react-fast-compare@npm:^3.2.0":
+"react-fast-compare@npm:^3.1.1, react-fast-compare@npm:^3.2.0, react-fast-compare@npm:^3.2.2":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: 10/a6826180ba75cefba1c8d3ac539735f9b627ca05d3d307fe155487f5d0228d376dac6c9708d04a283a7b9f9aee599b637446635b79c8c8753d0b4eece56c125c
@@ -20551,6 +20552,18 @@ __metadata:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
   checksum: 10/8c31aaec5b383d942ff1775b12c45022239d1250d1a00a238bac3c07e0fe266c71991e2814ae16a5d9b855bcd96ba95817d48ab3f34738f0bb32036ebb1abb1a
+  languageName: node
+  linkType: hard
+
+"react-snowfall@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-snowfall@npm:2.2.0"
+  dependencies:
+    react-fast-compare: "npm:^3.2.2"
+  peerDependencies:
+    react: ^16.8 || 17.x || 18.x
+    react-dom: ^16.8 || 17.x || 18.x
+  checksum: 10/ef9945ec75294e44ff17ec2b90f3e6ab9ec07f2a04804b253fc5737e9838baa20085351d019dc6a366f24874f0c58e8360d23b38a08242a022ff86e3a68ed22c
   languageName: node
   linkType: hard
 
