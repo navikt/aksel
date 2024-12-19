@@ -9,11 +9,9 @@ const version = packageJson.version;
 for (const path of cssFilePaths) {
   let cssContent = readFileSync(path, "utf8");
 
-  if (!cssContent.includes("--ax-version")) {
-    cssContent = cssContent.replace(
-      ":root, :host {",
-      `:root, :host {\n  --ax-version: "${version}";`,
-    );
-    writeFileSync(path, cssContent);
-  }
+  cssContent = cssContent.replace(
+    ":root, :host {",
+    `:root, :host {\n  --ax-version: "${version}";`,
+  );
+  writeFileSync(path, cssContent);
 }
