@@ -4,6 +4,7 @@ import {
   EnvelopeClosedIcon,
   EnvelopeOpenIcon,
   InboxUpIcon,
+  SparklesIcon,
 } from "@navikt/aksel-icons";
 import { VStack } from "../layout/stack";
 import ToggleGroup from "./ToggleGroup";
@@ -43,6 +44,11 @@ const Items = (icon?: boolean, both?: boolean) => {
         value="ulest"
         icon={(both ?? icon) && <EnvelopeClosedIcon {...iconProps} />}
         label={hasLabel && "Uleste"}
+      />
+      <ToggleGroup.Item
+        value="ny"
+        icon={(both ?? icon) && <SparklesIcon {...iconProps} />}
+        label={hasLabel && "Ny"}
       />
       <ToggleGroup.Item
         value="lest"

@@ -50,13 +50,13 @@
     color: var(--ax-text-accent-contrast);
   }
 
-  &:not([data-selected="true"], :last-child)::before {
+  &:not([data-selected="true"], :first-child, &[data-selected="true"] + &)::before {
     content: "";
     display: block;
     width: 1px;
     height: 50%;
     background-color: var(--ax-border-subtleA);
-    right: -1px;
+    left: -1px;
     position: absolute;
   }
 }
