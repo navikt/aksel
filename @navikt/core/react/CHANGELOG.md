@@ -1,5 +1,20 @@
 # @navikt/ds-react
 
+## 7.9.0
+
+### Minor Changes
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+### Patch Changes
+
+- Textarea: resize immediately upon receiving resize event (eg. inside modal opening). ([#3463](https://github.com/navikt/aksel/pull/3463))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.0
+  - @navikt/aksel-icons@7.9.0
+
 ## 7.8.1
 
 ### Patch Changes
