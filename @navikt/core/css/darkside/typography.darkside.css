@@ -208,13 +208,13 @@
   &.navds-error-message--show-icon {
     display: flex;
     gap: var(--ax-spacing-1);
-  }
 
-  &.navds-error-message--show-icon svg {
-    margin-top: 0.15em;
-    flex: 0 0 auto;
-    width: 1em;
-    height: 1em;
+    & svg {
+      margin-top: 0.15em;
+      flex: 0 0 auto;
+      width: 1em;
+      height: 1em;
+    }
   }
 }
 
