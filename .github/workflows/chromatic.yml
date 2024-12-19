@@ -86,9 +86,9 @@ jobs:
           body: |
             ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}}) / [Chromatic](${{steps.chromatic_tests.outputs.url}})
 
-            ${{ steps.chromatic_tests.outputs.changeCount > 0 && format('### 📝 Endringer til gjennomgang: {0}', steps.chromatic_tests.outputs.changeCount) || '' }}
-            ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### ❌ Stories med feil: {0}', steps.chromatic_tests.outputs.errorCount) || '' }}
-            ${{ steps.chromatic_tests.outputs.interactionTestFailuresCount > 0 && format('### ❌ Feilede interaksjonstester: {0}', steps.chromatic_tests.outputs.interactionTestFailuresCount) || '' }}
+            ${{ steps.chromatic_tests.outputs.changeCount > 0 && format('### 📝 Changes to review: {0}', steps.chromatic_tests.outputs.changeCount) || '' }}
+            ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### ❌ Stories with errors: {0}', steps.chromatic_tests.outputs.errorCount) || '' }}
+            ${{ steps.chromatic_tests.outputs.interactionTestFailuresCount > 0 && format('### ❌ Failed interaction tests: {0}', steps.chromatic_tests.outputs.interactionTestFailuresCount) || '' }}
 
-            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
+            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} components | ${{steps.chromatic_tests.outputs.specCount}} stories
           edit-mode: replace
