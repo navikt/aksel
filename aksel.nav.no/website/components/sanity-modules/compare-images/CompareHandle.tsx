@@ -15,7 +15,7 @@ export const CompareHandle = forwardRef<HTMLButtonElement, CompareHandleProps>(
       <button
         ref={ref}
         className={cl(
-          "group absolute left-0 top-0 z-10 h-full appearance-none border-0 bg-none p-0 outline-none transition-opacity",
+          "absolute left-0 top-0 z-10 h-full appearance-none border-0 bg-none p-0 outline-none transition-opacity",
           {
             "cursor-ew-resize opacity-100": isDragging,
             "opacity-40 focus:opacity-100 group-hover:opacity-100": !isDragging,
@@ -36,7 +36,7 @@ export const CompareHandle = forwardRef<HTMLButtonElement, CompareHandleProps>(
         {...rest}
       >
         <span className="absolute top-0 h-full w-[2px] bg-surface-subtle shadow-[rgba(0,_0,_0,_0.35)_0px_0px_4px]" />
-        <span className="pointer-events-none relative z-10 flex items-center rounded-full bg-surface-subtle text-3xl outline-[3px] outline-offset-2 outline-border-focus group-focus:outline">
+        <span className="pointer-events-none relative z-10 flex items-center rounded-full bg-surface-subtle text-3xl">
           <ChevronLeftIcon aria-hidden />
           <ChevronRightIcon aria-hidden />
         </span>

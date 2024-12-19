@@ -78,7 +78,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       const percentageX = (relativeX / elementWidth) * 100;
 
       // Clamp between 0 and 100
-      const clampedPercentageX = Math.max(0, Math.min(100, percentageX));
+      const clampedPercentageX = Math.max(-1, Math.min(100, percentageX));
 
       internalPosition.current = Number(clampedPercentageX.toFixed(2));
       syncPosition();
@@ -126,7 +126,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
 
   const movePosition = (offset: number) => {
     internalPosition.current = Math.max(
-      0,
+      -1,
       Math.min(100, internalPosition.current + offset),
     );
     syncPosition();
@@ -159,6 +159,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
         onPointerDown={handlePointerDown}
         className={cl(
           "group relative grid max-h-full max-w-fit touch-pan-y select-none overflow-hidden rounded-lg",
+          "outline-2 outline-offset-4 outline-border-focus focus-within:outline",
           {
             "ring-1 ring-border-subtle": node.border,
           },
