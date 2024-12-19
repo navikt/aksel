@@ -220,7 +220,7 @@ export const InsideModal: StoryFn<typeof Textarea> = () => {
           aria-label="Modal med textarea"
         >
           <Modal.Body>
-            <Textarea minRows={10} label="Har du noen tilbakemeldinger?" />
+            <Textarea label="Har du noen tilbakemeldinger?" />
           </Modal.Body>
         </Modal>
       </React.StrictMode>
