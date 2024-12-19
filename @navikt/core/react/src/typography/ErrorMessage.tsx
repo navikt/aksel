@@ -66,6 +66,7 @@ export const ErrorMessage: OverridableComponent<
         }),
         {
           "navds-label--small": size === "small",
+          "navds-error-message--show-icon": showIcon,
         },
       )}
     >

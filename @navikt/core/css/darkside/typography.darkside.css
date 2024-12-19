@@ -203,11 +203,14 @@
 }
 
 .navds-error-message {
-  display: flex;
   color: var(--ax-text-danger);
-  gap: var(--ax-spacing-1);
 
-  & svg {
+  &.navds-error-message--show-icon {
+    display: flex;
+    gap: var(--ax-spacing-1);
+  }
+
+  &.navds-error-message--show-icon svg {
     margin-top: 0.15em;
     flex: 0 0 auto;
     width: 1em;
