@@ -167,19 +167,23 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         });
       };
 
-      const handleResize = debounce(() => {
-        renders.current = 0;
+      const handleResize = debounce(
+        () => {
+          renders.current = 0;
 
-        if (inputRef.current?.style.height || inputRef.current?.style.width) {
-          // User has resized manually
-          if (inputRef.current?.style.overflow === "hidden") {
-            setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
+          if (inputRef.current?.style.height || inputRef.current?.style.width) {
+            // User has resized manually
+            if (inputRef.current?.style.overflow === "hidden") {
+              setState((oldState) => ({ ...oldState, overflow: false })); // The state update isn't important, we just need to trigger a rerender
+            }
+            return;
           }
-          return;
-        }
 
-        syncHeightWithFlushSync();
-      });
+          syncHeightWithFlushSync();
+        },
+        166,
+        true,
+      );
 
       const input = inputRef.current!;
       const containerWindow = ownerWindow(input);
