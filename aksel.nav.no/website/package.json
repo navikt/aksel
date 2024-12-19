@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Aksel.nav.no website",
-  "author": "Aksel | NAV designsystem team",
+  "author": "Aksel | Nav designsystem team",
   "scripts": {
     "dev": "next | pino-pretty",
     "build:old": "next build",

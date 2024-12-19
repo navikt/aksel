@@ -1,7 +1,7 @@
 {
   "name": "@navikt/aksel-icons",
-  "version": "7.8.0",
-  "author": "Aksel | NAV",
+  "version": "7.8.1",
+  "author": "Aksel | Nav",
   "homepage": "https://aksel.nav.no/ikoner",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "Icons",
-    "NAV",
+    "Nav",
     "Aksel",
     "designsystem",
     "react",

@@ -28,7 +28,7 @@ export const Default: StoryFn<ControllableProps> = (props) => (
         Saksopplysninger
       </FormProgress.Step>
       <FormProgress.Step interactive={false}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </FormProgress.Step>
       <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
       <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
@@ -57,7 +57,7 @@ export const ProvidedTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
@@ -79,7 +79,7 @@ export const DefaultTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>
@@ -118,7 +118,7 @@ export const ComponentTranslations: StoryFn = () => {
           Saksopplysninger
         </FormProgress.Step>
         <FormProgress.Step interactive={false}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </FormProgress.Step>
         <FormProgress.Step href="#">Vedlegg</FormProgress.Step>
         <FormProgress.Step href="#">Oppsummering</FormProgress.Step>

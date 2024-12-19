@@ -224,7 +224,7 @@ const Component = () => {
                   <ChevronRightIcon className="chevron size-6 mx-3 mt-1" />
                 </div>
               </Card>
-              <Card title="Dialogmøte med NAV" emphasis="warning">
+              <Card title="Dialogmøte med Nav" emphasis="warning">
                 <p className="m-5 text-gray-500">
                   Du har fått vedtak for en periode du ikke har sendt meldekort.
                 </p>
@@ -279,7 +279,7 @@ const Component = () => {
               </Link>
               <div>
                 <p>
-                  Informasjon fra NAV og svar på henvendelser og referater fra
+                  Informasjon fra Nav og svar på henvendelser og referater fra
                   samtaler du har på telefon, chat og “Skriv til oss”.
                 </p>
               </div>

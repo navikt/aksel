@@ -44,7 +44,7 @@ function Example() {
               </Show>
               <VStack gap="1">
                 <BodyShort size="small">
-                  NAV 10-07.03 (Om søknaden har ID)
+                  Nav 10-07.03 (Om søknaden har ID)
                 </BodyShort>
                 <Heading level="1" size="xlarge">
                   Søknad om [ytelse]

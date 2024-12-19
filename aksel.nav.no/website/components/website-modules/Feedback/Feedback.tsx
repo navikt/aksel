@@ -219,13 +219,13 @@ export const Feedback = ({ userState }: Props) => {
           <div>
             <IntroSection
               heading="Innspill til artikkelen"
-              description="Logg inn med NAV SSO for å gi innspill til artikkelen"
+              description="Logg inn med Nav SSO for å gi innspill til artikkelen"
             />
             <Button
               onClick={() => login()}
               className="bg-deepblue-600 hover:bg-deepblue-700 active:bg-deepblue-700"
             >
-              Logg inn med NAV SSO
+              Logg inn med Nav SSO
             </Button>
           </div>
         )}

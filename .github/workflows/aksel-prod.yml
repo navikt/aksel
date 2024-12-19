@@ -74,7 +74,7 @@ jobs:
           SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
         run: yarn workspace aksel.nav.no build:next
 
-      - name: Upload static files to NAV CDN
+      - name: Upload static files to Nav CDN
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
           team: designsystem
