@@ -247,7 +247,7 @@ export const Validering = () => {
         <DatePicker.Input
           error={
             error
-              ? "NAV-kontoret er ikke åpent i helger. Velg en annen dag."
+              ? "Nav-kontoret er ikke åpent i helger. Velg en annen dag."
               : undefined
           }
           {...inputProps}

@@ -41,7 +41,7 @@ export const Dekoratoren = ({ children }: { children: ReactNode }) => {
     <div>
       <div className="flex flex-nowrap justify-between max-w-[1440px] m-auto px-4">
         <div className="flex gap-4 items-baseline h-12">
-          <span className="text-red-600 font-bold">NAV</span>
+          <span className="text-red-600 font-bold">Nav</span>
           <div className="flex gap-4">
             <ScScLink data-active>Privat</ScScLink>
             <ScScLink>Arbeidsgiver</ScScLink>

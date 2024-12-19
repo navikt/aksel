@@ -83,7 +83,7 @@ export const IconPage = ({ name }: { name: string }) => {
     <>
       <SEO
         title={name.length > 0 ? `${name}Icon` : "Ikoner"}
-        description="800+ open source-ikoner designet og utviklet for NAV"
+        description="800+ open source-ikoner designet og utviklet for Nav"
         fallbackImage="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
         canonical="https://aksel.nav.no/ikoner"
       />
@@ -104,7 +104,7 @@ export const IconPage = ({ name }: { name: string }) => {
                 <div className="override-text-no-max mt-4 text-xl">
                   <p>{`${
                     Object.values(meta).length
-                  } open source-ikoner designet og utviklet for NAV`}</p>
+                  } open source-ikoner designet og utviklet for Nav`}</p>
                 </div>
               </div>
               <TitleLinks />

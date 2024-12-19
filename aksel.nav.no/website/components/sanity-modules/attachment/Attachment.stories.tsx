@@ -14,10 +14,10 @@ type Story = StoryObj<typeof meta>;
 export const Aksel: Story = {
   args: {
     node: {
-      title: "NAV-logo (for digitale flater)",
+      title: "Nav-logo (for digitale flater)",
       body: getBlocks({ length: 1 }),
       downloadLink: "1234.zip",
-      fileName: "NAV logopakke digitale flater",
+      fileName: "Nav logopakke digitale flater",
       size: "4321",
     },
   },
@@ -27,9 +27,9 @@ export const Aksel: Story = {
 export const NoBody: Story = {
   args: {
     node: {
-      title: "NAV-logo (for digitale flater)",
+      title: "Nav-logo (for digitale flater)",
       downloadLink: "1234.zip",
-      fileName: "NAV logopakke digitale flater",
+      fileName: "Nav logopakke digitale flater",
       size: "4321",
     },
   },

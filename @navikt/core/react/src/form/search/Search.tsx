@@ -92,7 +92,7 @@ interface SearchComponent
  * @example
  * ```jsx
  * <form role="search">
- *   <Search label="Søk alle NAV sine sider" variant="primary" />
+ *   <Search label="Søk alle Nav sine sider" variant="primary" />
  * </form>
  * ```
  */

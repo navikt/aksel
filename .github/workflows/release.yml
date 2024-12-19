@@ -78,7 +78,7 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         run: yarn zip:icons
 
-      - name: Upload updated icon.zip to NAV CDN
+      - name: Upload updated icon.zip to Nav CDN
         if: steps.changesets.outputs.published == 'true'
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
@@ -94,7 +94,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "Version of @navikt/ds-css: ${{ env.version }}"
 
-      - name: Upload CSS to NAV CDN
+      - name: Upload CSS to Nav CDN
         if: steps.changesets.outputs.published == 'true'
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:

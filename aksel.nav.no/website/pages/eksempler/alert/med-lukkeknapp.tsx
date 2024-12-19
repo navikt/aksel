@@ -14,7 +14,7 @@ const Example = () => {
         Søknad er sendt inn!
       </AlertWithCloseButton>
       <AlertWithCloseButton variant="warning">
-        Du må være registrert hos NAV for å bruke aktivitetsplanen.
+        Du må være registrert hos Nav for å bruke aktivitetsplanen.
       </AlertWithCloseButton>
       <AlertWithCloseButton variant="error">
         Noe gikk galt! Prøv igjen om noen minutter.
