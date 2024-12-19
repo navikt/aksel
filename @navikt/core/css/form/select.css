@@ -73,9 +73,13 @@
 /**
   Error handling
 */
-.navds-select--error > * select:not(:hover, :focus, :disabled) {
+.navds-select--error > * .navds-select__input:not(:hover, :disabled) {
   box-shadow: 0 0 0 1px var(--ac-select-error-border, var(--a-surface-danger));
   border-color: var(--ac-select-error-border, var(--a-surface-danger));
+}
+
+.navds-select--error .navds-select__input:focus {
+  box-shadow: var(--a-shadow-focus);
 }
 
 /**
