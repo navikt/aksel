@@ -46,7 +46,7 @@ const SmallContent = () => (
 
 const Item = ({ defaultOpen = false }) => (
   <Accordion.Item defaultOpen={defaultOpen} onOpenChange={console.log}>
-    <Accordion.Header>Accordion header text - test change</Accordion.Header>
+    <Accordion.Header>Accordion header text</Accordion.Header>
     {defaultOpen ? <SmallContent /> : <Content />}
   </Accordion.Item>
 );
