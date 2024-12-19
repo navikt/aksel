@@ -47,12 +47,12 @@ jobs:
       - name: Chromatic
         uses: chromaui/action@latest
         id: chromatic_tests
-        continue-on-error: true
+        continue-on-error: false
         with:
           autoAcceptChanges: "main"
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          exitZeroOnChanges: false
+          exitZeroOnChanges: true
           buildScriptName: "build:storybook-chromatic"
           onlyChanged: true
           untraced: "**/package.json|yarn.lock|**/*.md"
