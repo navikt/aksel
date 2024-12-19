@@ -62,14 +62,14 @@ jobs:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
       - name: Get commit sha
-        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
+        if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Find Comment
-        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
+        if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
         uses: peter-evans/find-comment@v2
         id: fc
         with:
@@ -78,19 +78,7 @@ jobs:
           body-includes: Storybook demo
 
       - name: Create or update comment
-        if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}})
-
-            [${{ steps.vars.outputs.sha_short }}](https://github.com/navikt/aksel/commit/${{ steps.vars.outputs.sha_short }}) | ${{steps.chromatic_tests.outputs.componentCount}} komponenter | ${{steps.chromatic_tests.outputs.specCount}} stories
-          edit-mode: replace
-
-      - name: Create or update failed comment
-        if: steps.chromatic_tests.outcome != 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
+        if: github.event_name != 'push' && !contains(github.event.head_commit.message, '[ci skip]')
         uses: peter-evans/create-or-update-comment@v3
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -98,8 +86,7 @@ jobs:
           body: |
             ## [Storybook demo](${{steps.chromatic_tests.outputs.storybookUrl}}) / [Chromatic](${{steps.chromatic_tests.outputs.url}})
 
-            ### 📝 Endringer til review: ${{steps.chromatic_tests.outputs.changeCount}}
-
+            ${{ steps.chromatic_tests.outputs.changeCount > 0 && format('### 📝 Endringer til gjennomgang: {0}', steps.chromatic_tests.outputs.changeCount) || '' }}
             ${{ steps.chromatic_tests.outputs.errorCount > 0 && format('### ❌ Stories med feil: {0}', steps.chromatic_tests.outputs.errorCount) || '' }}
             ${{ steps.chromatic_tests.outputs.interactionTestFailuresCount > 0 && format('### ❌ Feilede interaksjonstester: {0}', steps.chromatic_tests.outputs.interactionTestFailuresCount) || '' }}
 
