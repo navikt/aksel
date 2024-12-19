@@ -74,6 +74,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         disabled,
         icon,
         iconPosition = "left",
+        onKeyUp,
         ...rest
       },
       ref,
@@ -92,7 +93,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...(Component !== "button" ? { role: "button" } : {})}
           {...filterProps}
           ref={ref}
-          onKeyUp={composeEventHandlers(filterProps.onKeyUp, handleKeyUp)}
+          onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
           className={cl(
             className,
             "navds-button",
