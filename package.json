@@ -200,5 +200,8 @@
     "axe-core": "4.10.0"
   },
   "_note1": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.4.0",
+  "dependencies": {
+    "react-snowfall": "^2.2.0"
+  }
 }
