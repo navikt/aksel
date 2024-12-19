@@ -1,13 +1,32 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
+import { Slot } from "../slot/Slot";
 import { createContext } from "../util/create-context";
 import { useId, useMergeRefs } from "../util/hooks";
 import { createDescendantContext } from "../util/hooks/descendants/useDescendant";
 
+const [
+  ListboxCollectionProvider,
+  useListboxCollectionCtx,
+  useListboxInitializeCollection,
+  useListboxCollectionItem,
+] = createDescendantContext<
+  HTMLDivElement,
+  {
+    value: string;
+    id: string;
+  }
+>();
+
 type ListboxContextProps = {
   mode: "single" | "multiple";
+  selectedValues: string[];
+  updateSelectedValues: (value: string) => void;
+  focusedOption: string | null;
+  updateFocusedOption: (value: string | null) => void;
+  role: "listbox" | "combobox";
 };
 
 const [ListboxProvider, useListbox] = createContext<ListboxContextProps>({
@@ -21,14 +40,48 @@ type ListboxProps = {
    * @default "single"
    */
   mode?: ListboxContextProps["mode"];
+
+  role: "listbox" | "combobox";
 };
 
 export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(
   (userprops, forwardedRef) => {
-    const { children, mode = "single" } = userprops;
+    const { children, mode = "single", role = "listbox" } = userprops;
+
+    const collection = useListboxInitializeCollection();
+    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [focusedOption, setFocusedOption] = useState<string | null>(null);
+
+    const handleSelectedValuesUpdate = (value: string) => {
+      const allreadyExists = selectedValues.includes(value);
+      if (mode === "single") {
+        allreadyExists ? setSelectedValues([]) : setSelectedValues([value]);
+        return;
+      }
+
+      allreadyExists
+        ? setSelectedValues((options) => options.filter((opt) => opt !== value))
+        : setSelectedValues((options) => [...options, value]);
+    };
+
+    const handleFocusedOptionUpdate = (value: string | null) => {
+      value && setFocusedOption(value);
+    };
+
     return (
       <div ref={forwardedRef}>
-        <ListboxProvider mode={mode}>{children}</ListboxProvider>
+        <ListboxCollectionProvider value={collection}>
+          <ListboxProvider
+            mode={mode}
+            selectedValues={selectedValues}
+            updateSelectedValues={handleSelectedValuesUpdate}
+            focusedOption={focusedOption}
+            updateFocusedOption={handleFocusedOptionUpdate}
+            role={role}
+          >
+            {children}
+          </ListboxProvider>
+        </ListboxCollectionProvider>
       </div>
     );
   },
@@ -53,35 +106,108 @@ export const ListboxAnchor = forwardRef<HTMLDivElement, ListboxAnchorProps>(
   (userprops, forwardedRef) => {
     const { children } = userprops;
 
-    return <div ref={forwardedRef}>{children}</div>;
+    const listboxCtx = useListbox();
+    const listboxCollectionCtx = useListboxCollectionCtx();
+
+    const handleOnFocus = () => {
+      /* Listbos spec expects first selected value to be focused if possible  */
+      if (listboxCtx.selectedValues.length > 0) {
+        listboxCtx.updateFocusedOption(listboxCtx.selectedValues[0]);
+        return;
+      }
+      const firstOption = listboxCollectionCtx.firstEnabled()?.value;
+
+      firstOption && listboxCtx.updateFocusedOption(firstOption);
+    };
+
+    const handleOnBlur = () => {
+      listboxCtx.updateFocusedOption(null);
+    };
+
+    const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const currentFocusedNode = listboxCollectionCtx
+        .values()
+        .find((option) => option.value === listboxCtx.focusedOption);
+
+      /*
+       * This can happend if handleFocus is canceled when isPointerDown === true
+       */
+      if (!currentFocusedNode) {
+        listboxCtx.updateFocusedOption(
+          listboxCollectionCtx.firstEnabled()?.value ?? null,
+        );
+        return;
+      }
+      const index = currentFocusedNode.index;
+      switch (event.key) {
+        case "ArrowDown": {
+          const nextOption = listboxCollectionCtx.nextEnabled(index, false);
+          nextOption && listboxCtx.updateFocusedOption(nextOption.value);
+          break;
+        }
+        case "ArrowUp": {
+          const prevOption = listboxCollectionCtx.prevEnabled(index, false);
+          prevOption && listboxCtx.updateFocusedOption(prevOption.value);
+          break;
+        }
+        case "Home": {
+          const firstOption = listboxCollectionCtx.firstEnabled();
+          firstOption && listboxCtx.updateFocusedOption(firstOption.value);
+          break;
+        }
+        case "End": {
+          const lastOption = listboxCollectionCtx.lastEnabled();
+          lastOption && listboxCtx.updateFocusedOption(lastOption.value);
+          break;
+        }
+        case "Enter": {
+          listboxCtx.focusedOption &&
+            listboxCtx.updateSelectedValues(listboxCtx.focusedOption);
+          break;
+        }
+
+        default:
+          return;
+      }
+    };
+
+    const handleKeyup = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      switch (event.key) {
+        case " ": {
+          listboxCtx.focusedOption &&
+            listboxCtx.updateSelectedValues(listboxCtx.focusedOption);
+          break;
+        }
+
+        default:
+          return;
+      }
+    };
+
+    /**
+     * Look to optimize this by setting if in updateFocus
+     */
+    const activeDescendant = listboxCollectionCtx
+      .values()
+      .find((option) => option.value === listboxCtx.focusedOption);
+
+    return (
+      <Slot
+        ref={forwardedRef}
+        role={listboxCtx.role}
+        tabIndex={0}
+        aria-multiselectable={listboxCtx.mode === "multiple"}
+        aria-activedescendant={activeDescendant ? activeDescendant.id : ""}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
+        onKeyDown={handleKeydown}
+        onKeyUp={handleKeyup}
+      >
+        {children}
+      </Slot>
+    );
   },
 );
-
-const [
-  ListboxCollectionProvider,
-  useListboxCollectionCtx,
-  useListboxInitializeCollection,
-  useListboxCollectionItem,
-] = createDescendantContext<
-  HTMLDivElement,
-  {
-    value: string;
-    id: string;
-  }
->();
-
-type ListboxOptionsContextProps = {
-  selectedValues: string[];
-  updateSelectedValues: (value: string) => void;
-  focusedOption: string | null;
-  updateFocusedOption: (value: string) => void;
-};
-
-const [ListboxOptionsProvider, useListboxOptions] =
-  createContext<ListboxOptionsContextProps>({
-    hookName: "useListboxOptions",
-    providerName: "ListboxOptionsProvider",
-  });
 
 type ListboxOptionsProps = {
   children: React.ReactNode;
@@ -91,14 +217,10 @@ export const ListboxOptions = forwardRef<HTMLDivElement, ListboxOptionsProps>(
   (userprops, forwardedRef) => {
     const { children } = userprops;
 
-    const collection = useListboxInitializeCollection();
-
     return (
-      <ListboxCollectionProvider value={collection}>
-        <ListboxOptionsInternal ref={forwardedRef} {...userprops}>
-          {children}
-        </ListboxOptionsInternal>
-      </ListboxCollectionProvider>
+      <ListboxOptionsInternal ref={forwardedRef} {...userprops}>
+        {children}
+      </ListboxOptionsInternal>
     );
   },
 );
@@ -108,143 +230,14 @@ export const ListboxOptionsInternal = forwardRef<
   ListboxOptionsProps
 >((userprops, forwardedRef) => {
   const { children } = userprops;
-  const listboxCtx = useListbox();
-  const listboxCollectionCtx = useListboxCollectionCtx();
-
-  const isPointerDown = useRef<boolean>(false);
-
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const [focusedOption, setFocusedOption] = useState<string | null>(null);
-
-  const handleSelectedValuesUpdate = (value: string) => {
-    const allreadyExists = selectedValues.includes(value);
-    if (listboxCtx.mode === "single") {
-      allreadyExists ? setSelectedValues([]) : setSelectedValues([value]);
-      return;
-    }
-
-    allreadyExists
-      ? setSelectedValues((options) => options.filter((opt) => opt !== value))
-      : setSelectedValues((options) => [...options, value]);
-  };
-
-  const handleFocusedOptionUpdate = (value: string) => {
-    setFocusedOption(value);
-  };
-
-  const handleOnFocus = () => {
-    /* Cancel autofocus on first item if use ris currently pressing option */
-    if (isPointerDown.current) {
-      return;
-    }
-
-    /* Listbos spec expects first selected value to be focused if possible  */
-    if (selectedValues.length > 0) {
-      setFocusedOption(selectedValues[0]);
-      return;
-    }
-    const firstOption = listboxCollectionCtx.firstEnabled()?.value;
-
-    firstOption && setFocusedOption(firstOption);
-  };
-
-  const handleOnBlur = () => {
-    setFocusedOption(null);
-  };
-
-  const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    const currentFocusedNode = listboxCollectionCtx
-      .values()
-      .find((option) => option.value === focusedOption);
-
-    /*
-     * This can happend if handleFocus is canceled when isPointerDown === true
-     */
-    if (!currentFocusedNode) {
-      setFocusedOption(listboxCollectionCtx.firstEnabled()?.value ?? null);
-      return;
-    }
-    const index = currentFocusedNode.index;
-    switch (event.key) {
-      case "ArrowDown": {
-        const nextOption = listboxCollectionCtx.nextEnabled(index, false);
-        nextOption && setFocusedOption(nextOption.value);
-        break;
-      }
-      case "ArrowUp": {
-        const prevOption = listboxCollectionCtx.prevEnabled(index, false);
-        prevOption && setFocusedOption(prevOption.value);
-        break;
-      }
-      case "Home": {
-        const firstOption = listboxCollectionCtx.firstEnabled();
-        firstOption && setFocusedOption(firstOption.value);
-        break;
-      }
-      case "End": {
-        const lastOption = listboxCollectionCtx.lastEnabled();
-        lastOption && setFocusedOption(lastOption.value);
-        break;
-      }
-      case "Enter": {
-        focusedOption && handleSelectedValuesUpdate(focusedOption);
-        break;
-      }
-
-      default:
-        return;
-    }
-  };
-
-  const handleKeyup = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    switch (event.key) {
-      case " ": {
-        focusedOption && handleSelectedValuesUpdate(focusedOption);
-        break;
-      }
-
-      default:
-        return;
-    }
-  };
-
-  /**
-   * Look to optimize this by setting if in updateFocus
-   */
-  const activeDescendant = listboxCollectionCtx
-    .values()
-    .find((option) => option.value === focusedOption);
 
   /**
    * TODO:
    * - ComposeEventhandlers
    */
   return (
-    <div
-      ref={forwardedRef}
-      tabIndex={0}
-      role="listbox"
-      aria-multiselectable={listboxCtx.mode === "multiple"}
-      aria-activedescendant={activeDescendant ? activeDescendant.id : ""}
-      onFocus={handleOnFocus}
-      onBlur={handleOnBlur}
-      onKeyDown={handleKeydown}
-      onKeyUp={handleKeyup}
-      onPointerDown={() => {
-        isPointerDown.current = true;
-      }}
-      onPointerUp={() => {
-        isPointerDown.current = false;
-      }}
-    >
-      <ListboxOptionsProvider
-        selectedValues={selectedValues}
-        updateSelectedValues={handleSelectedValuesUpdate}
-        focusedOption={focusedOption}
-        updateFocusedOption={handleFocusedOptionUpdate}
-      >
-        {children}
-      </ListboxOptionsProvider>
+    <div ref={forwardedRef} {...userprops}>
+      {children}
     </div>
   );
 });
@@ -266,12 +259,12 @@ export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
     });
     const composedRefs = useMergeRefs(forwardedRef, register);
 
-    const listboxOptionsCtx = useListboxOptions();
+    const listboxCtx = useListbox();
 
     const { children, value, className } = userprops;
 
-    const isSelected = listboxOptionsCtx.selectedValues.includes(value);
-    const isFocused = listboxOptionsCtx.focusedOption === value;
+    const isSelected = listboxCtx.selectedValues.includes(value);
+    const isFocused = listboxCtx.focusedOption === value;
 
     return (
       <div
@@ -281,8 +274,8 @@ export const ListboxOption = forwardRef<HTMLDivElement, ListboxOptionProps>(
         data-selected={isSelected}
         data-focused={isFocused}
         onClick={() => {
-          listboxOptionsCtx.updateSelectedValues(value);
-          listboxOptionsCtx.updateFocusedOption(value);
+          listboxCtx.updateSelectedValues(value);
+          listboxCtx.updateFocusedOption(value);
         }}
       >
         {children}

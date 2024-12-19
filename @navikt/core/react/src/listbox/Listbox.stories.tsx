@@ -1,6 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react/*";
 import React from "react";
-import { Listbox, ListboxOption, ListboxOptions } from "./Listbox";
+import { Search } from "../form/search";
+import {
+  Listbox,
+  ListboxAnchor,
+  ListboxOption,
+  ListboxOptions,
+} from "./Listbox";
 import "./listbox.css";
 
 export default {
@@ -18,38 +24,42 @@ export const Items: Story = {
     return (
       <div>
         <button>Placeholder</button>
-        <Listbox>
-          <ListboxOptions>
-            <ListboxOption className="l-item" value="value 1">
-              Value 1
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 2">
-              Value 2
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 3">
-              Value 3
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 4">
-              Value 4
-            </ListboxOption>
-          </ListboxOptions>
+        <Listbox role="listbox">
+          <ListboxAnchor>
+            <ListboxOptions>
+              <ListboxOption className="l-item" value="value 1">
+                Value 1
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 2">
+                Value 2
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 3">
+                Value 3
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 4">
+                Value 4
+              </ListboxOption>
+            </ListboxOptions>
+          </ListboxAnchor>
         </Listbox>
         <button>Placeholder</button>
-        <Listbox mode="multiple">
-          <ListboxOptions>
-            <ListboxOption className="l-item" value="value 1">
-              Value 1
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 2">
-              Value 2
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 3">
-              Value 3
-            </ListboxOption>
-            <ListboxOption className="l-item" value="value 4">
-              Value 4
-            </ListboxOption>
-          </ListboxOptions>
+        <Listbox mode="multiple" role="listbox">
+          <ListboxAnchor>
+            <ListboxOptions>
+              <ListboxOption className="l-item" value="value 1">
+                Value 1
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 2">
+                Value 2
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 3">
+                Value 3
+              </ListboxOption>
+              <ListboxOption className="l-item" value="value 4">
+                Value 4
+              </ListboxOption>
+            </ListboxOptions>
+          </ListboxAnchor>
         </Listbox>
         <button>Placeholder</button>
       </div>
@@ -62,7 +72,15 @@ export const Combobox: Story = {
     return (
       <div>
         <button>Placeholder</button>
-        <Listbox mode="multiple">
+        <Listbox mode="multiple" role="combobox">
+          <ListboxAnchor>
+            <Search
+              variant="simple"
+              label="Combobox"
+              htmlSize="20"
+              autoComplete="off"
+            />
+          </ListboxAnchor>
           <ListboxOptions>
             <ListboxOption className="l-item" value="value 1">
               Value 1
