@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { DefaultIllustration } from "./Illustration";
 import { DarksideGudiepanelIllustration } from "./Illustration.darkside";
 
@@ -37,7 +37,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
   ({ children, className, illustration, poster, ...rest }, ref) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     return (
       <div

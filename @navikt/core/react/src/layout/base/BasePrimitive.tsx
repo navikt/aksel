@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React from "react";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
+import { useThemeInternal } from "../../theme/Theme";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -252,7 +252,7 @@ export const BasePrimitive = ({
   flexShrink,
   gridColumn,
 }: BasePrimitiveProps) => {
-  const themeContext = UNSAFE_useAkselTheme(false);
+  const themeContext = useThemeInternal(false);
   const prefix = themeContext ? "ax" : "a";
 
   const style: React.CSSProperties = {

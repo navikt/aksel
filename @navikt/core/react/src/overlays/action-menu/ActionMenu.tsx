@@ -2,8 +2,8 @@ import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { useModalContext } from "../../modal/Modal.context";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
+import { useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, useId } from "../../util";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { createContext } from "../../util/create-context";
@@ -736,7 +736,7 @@ export const ActionMenuRadioItem = forwardRef<
     { children, className, onSelect, ...rest }: ActionMenuRadioItemProps,
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     return (
       <Menu.RadioItem

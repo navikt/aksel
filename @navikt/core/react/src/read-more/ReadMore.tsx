@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { UNSAFE_useAkselTheme } from "../provider";
 import { BodyLong } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -75,8 +74,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       onChange: onOpenChange,
     });
 
-    const themeContext = UNSAFE_useAkselTheme(false);
-
     const typoSize = size === "small" ? "small" : "medium";
 
     return (
@@ -87,7 +84,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           className,
           { "navds-read-more--open": _open },
         )}
-        data-volume={themeContext?.volume}
+        data-volume="low"
       >
         <button
           {...rest}

@@ -15,8 +15,8 @@ import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
-import { UNSAFE_useAkselTheme } from "../provider";
 import { Slot } from "../slot/Slot";
+import { useThemeInternal } from "../theme/Theme";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -124,7 +124,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref,
   ) => {
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
     const showArrow = _arrow && !themeContext;
 
     const [_open, _setOpen] = useControllableState({

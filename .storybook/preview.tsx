@@ -5,10 +5,8 @@ import React, { useLayoutEffect } from "react";
 import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
 // @ts-expect-error - Temporary
 import defaultCss from "../@navikt/core/css/index.css?inline";
-import {
-  Provider,
-  UNSAFE_AkselTheme,
-} from "../@navikt/core/react/src/provider";
+import { Provider } from "../@navikt/core/react/src/provider";
+import { Theme } from "../@navikt/core/react/src/theme";
 import en from "../@navikt/core/react/src/util/i18n/locales/en";
 import nb from "../@navikt/core/react/src/util/i18n/locales/nb";
 import nn from "../@navikt/core/react/src/util/i18n/locales/nn";
@@ -31,9 +29,9 @@ const ModeDecorator = ({ children, mode, theme }) => {
   }, [mode]);
 
   return mode === "darkside" ? (
-    <UNSAFE_AkselTheme theme={theme || undefined} hasBackground={false}>
+    <Theme theme={theme || undefined} hasBackground={false}>
       {children}
-    </UNSAFE_AkselTheme>
+    </Theme>
   ) : (
     children
   );
