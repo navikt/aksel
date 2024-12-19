@@ -226,6 +226,27 @@ AutoScrollbar.argTypes = {
   minRows: { type: "number" },
 };
 
+export const InsideModal: StoryFn<typeof Textarea> = () => {
+  const ref = React.useRef<HTMLDialogElement>(null);
+
+  return (
+    <>
+      <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
+      <React.StrictMode>
+        <Modal
+          ref={ref}
+          header={{ heading: "Skjema" }}
+          aria-label="Modal med textarea"
+        >
+          <Modal.Body>
+            <Textarea label="Har du noen tilbakemeldinger?" />
+          </Modal.Body>
+        </Modal>
+      </React.StrictMode>
+    </>
+  );
+};
+
 export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
   // Story added after fixing an issue where TextareaAutoSize would reach max re-renders
   // and set the height to 2px when used in StrictMode in a Modal that is initially open.
