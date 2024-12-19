@@ -1,5 +1,7 @@
 # @navikt/aksel-stylelint
 
+## 7.8.1
+
 ## 7.8.0
 
 ### Minor Changes

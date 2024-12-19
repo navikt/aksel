@@ -18,7 +18,7 @@ export const Editors = defineType({
     }),
     defineField({
       title: "Epostaddresse",
-      description: "Bruk NAV-epostaddresse.",
+      description: "Bruk Nav-epostaddresse.",
       name: "email",
       type: "string",
       initialValue: (_, { currentUser }) => {
@@ -29,7 +29,7 @@ export const Editors = defineType({
           .email()
           .custom((email) => {
             if (!email?.includes("@nav.no")) {
-              return "Epostaddresse må være en NAV-epostaddresse. Må slutte på '@nav.no'";
+              return "Epostaddresse må være en Nav-epostaddresse. Må slutte på '@nav.no'";
             }
             return true;
           }),

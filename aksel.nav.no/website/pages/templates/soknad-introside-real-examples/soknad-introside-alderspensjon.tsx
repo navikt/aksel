@@ -67,7 +67,7 @@ function Example() {
                 Du tjener opp alderspensjon fra inntekt og botid i Norge.
               </List.Item>
               <List.Item>
-                Du kan jobbe samtidig som du tar ut alderspensjon fra NAV.
+                Du kan jobbe samtidig som du tar ut alderspensjon fra Nav.
               </List.Item>
               <List.Item>
                 Det er ulike regler for alderspensjon avhengig av når du er
@@ -118,7 +118,7 @@ function Example() {
                 ut pensjon.
               </List.Item>
               <List.Item>
-                Du kan søke opptil fire måneder før du skal ta ut pensjon. NAV
+                Du kan søke opptil fire måneder før du skal ta ut pensjon. Nav
                 må ha mottatt søknaden senest måneden før uttak. Det er ikke
                 mulig å søke tilbake i tid, fordi alderspensjon først kan
                 innvilges fra måneden etter at søknad er fremsatt. Du må alltid

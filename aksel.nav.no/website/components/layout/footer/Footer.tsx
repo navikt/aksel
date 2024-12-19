@@ -24,7 +24,7 @@ const Footer = () => {
           <VStack gap="4">
             <AkselLogo className="fill-white" />
             <div>
-              <p>&copy; {new Date().getFullYear()} NAV</p>
+              <p>&copy; {new Date().getFullYear()} Nav</p>
               <p>Arbeids- og velferdsetaten</p>
             </div>
           </VStack>

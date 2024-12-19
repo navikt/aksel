@@ -5,7 +5,7 @@
 
 <div align="center">
     <p>
-        NAVs designsystem + Aksel.nav.no
+        Navs designsystem + Aksel.nav.no
     </p>
     <div align="center">
       <a href="https://aksel.nav.no/storybook/">

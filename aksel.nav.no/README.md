@@ -11,7 +11,7 @@ CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ### /website/sanity
 
-Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever NAV SSO for innlogging).
+Det publiserte studioet finner man på [aksel.nav.no/admin](https://aksel.nav.no/admin)(krever Nav SSO for innlogging).
 
 `production`-datasettet er privat, så man må ha riktige tilganger for å kunne lese/jobbe med dataen der.
 

@@ -12,10 +12,10 @@ const Example = () => {
     >
       <BodyLong spacing>
         Hvis du er helt eller delvis arbeidsledig eller permittert, kan du ha
-        rett til pengestøtte fra NAV.
+        rett til pengestøtte fra Nav.
       </BodyLong>
       <BodyLong spacing>
-        NAV kan også gi deg råd og veiledning i situasjonen din.
+        Nav kan også gi deg råd og veiledning i situasjonen din.
       </BodyLong>
       <BodyLong spacing>
         Hvis du ikke får dagpenger kan du ha rett til tiltakspenger. Dette er en

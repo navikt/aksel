@@ -43,7 +43,7 @@
   }
 }
 
-.navds-alert,
+.navds-alert:not(.navds-alert--inline),
 .navds-confirmation-panel {
   & .navds-link {
     color: var(--ax-text-default);

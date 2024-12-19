@@ -32,7 +32,6 @@ const ComboboxWrapper = ({
       !wrapperRef.current?.contains(event.relatedTarget) &&
       toggleOpenButtonRef?.current !== event.target
     ) {
-      toggleIsListOpen(true);
       setHasFocusWithin(true);
     }
   }

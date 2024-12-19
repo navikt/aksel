@@ -7,12 +7,12 @@ const Example = () => {
       title="Vilkår for erstatning"
       description="Alle vilkårene må være oppfylt."
     >
-      <List.Item>NAV må ha gjort en feil og ha et ansvar for feilen.</List.Item>
+      <List.Item>Nav må ha gjort en feil og ha et ansvar for feilen.</List.Item>
       <List.Item>
         Du må ha hatt et økonomisk eller ikke-økonomisk tap.
       </List.Item>
       <List.Item>
-        Det må være en direkte sammenheng mellom NAV sitt ansvar og det
+        Det må være en direkte sammenheng mellom Nav sitt ansvar og det
         økonomiske tapet ditt.
       </List.Item>
     </List>

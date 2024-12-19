@@ -97,7 +97,7 @@ async function sendSlackbotFeedback(
 
   /**
    * We find the sender in list of slack members
-   * Since everyone in NAV has access to login,
+   * Since everyone in Nav has access to login,
    * but might not use slack we can have some cases where no user is found
    */
   const senderSlackUser = findUserByEmail(user.email, slackMembers.members);

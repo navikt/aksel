@@ -31,7 +31,13 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt2-moderate"
     | "alt3"
     | "alt3-filled"
-    | "alt3-moderate";
+    | "alt3-moderate"
+    | "meta-purple"
+    | "meta-purple-filled"
+    | "meta-purple-moderate"
+    | "meta-lime"
+    | "meta-lime-filled"
+    | "meta-lime-moderate";
   /**
    * @default "medium"
    */
@@ -54,23 +60,31 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  * ```
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => (
-    <BodyShort
-      {...rest}
-      ref={ref}
-      as="span"
-      size={size === "medium" ? "medium" : "small"}
-      className={cl(
-        "navds-tag",
-        className,
-        `navds-tag--${variant}`,
-        `navds-tag--${size}`,
-      )}
-    >
-      {icon && <span className="navds-tag__icon--left">{icon}</span>}
-      {children}
-    </BodyShort>
-  ),
+  ({ children, className, variant, size = "medium", icon, ...rest }, ref) => {
+    const filledVariant = variant?.endsWith("-filled") && "strong";
+    const moderateVariant = variant?.endsWith("-moderate") && "moderate";
+    const color = variant?.replace("-filled", "").replace("-moderate", "");
+
+    return (
+      <BodyShort
+        {...rest}
+        ref={ref}
+        as="span"
+        size={size === "medium" ? "medium" : "small"}
+        className={cl(
+          "navds-tag",
+          className,
+          `navds-tag--${variant}`,
+          `navds-tag--${size}`,
+          `navds-tag--${filledVariant || moderateVariant || "outline"}`,
+          `navds-tag--${color}`,
+        )}
+      >
+        {icon && <span className="navds-tag__icon--left">{icon}</span>}
+        {children}
+      </BodyShort>
+    );
+  },
 );
 
 export default Tag;
