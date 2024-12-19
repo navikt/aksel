@@ -39,7 +39,7 @@ export const Blogg = defineType({
       description:
         "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
-      type: "riktekst_standard",
+      type: "riktekst_blogg",
       group: "innhold",
     }),
     BaseSEOPreset,
