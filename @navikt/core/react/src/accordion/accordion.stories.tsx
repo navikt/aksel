@@ -47,6 +47,7 @@ const SmallContent = () => (
 const Item = ({ defaultOpen = false }) => (
   <Accordion.Item defaultOpen={defaultOpen} onOpenChange={console.log}>
     <Accordion.Header>Accordion header text</Accordion.Header>
+    {/* Change that will not cause snapshot change */}
     {defaultOpen ? <SmallContent /> : <Content />}
   </Accordion.Item>
 );
