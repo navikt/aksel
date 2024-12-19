@@ -9,7 +9,7 @@ type ThemeContext = {
    * Color theme
    * @default "light"
    */
-  theme?: "light" | "dark";
+  theme: "light" | "dark";
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
