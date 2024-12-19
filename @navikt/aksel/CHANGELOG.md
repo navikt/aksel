@@ -1,5 +1,77 @@
 # @navikt/aksel
 
+## 7.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`06193ae`](https://github.com/navikt/aksel/commit/06193ae3001cee4b1f411a75d51ab54391483dd7), [`a82126b`](https://github.com/navikt/aksel/commit/a82126b893490b9786d31cb74ba31695b90f8c60)]:
+  - @navikt/ds-css@7.8.1
+
+## 7.8.0
+
+### Patch Changes
+
+- Updated dependencies [[`f720562`](https://github.com/navikt/aksel/commit/f720562908ccb0c7c62cabd386920d0c1fdcdaf9), [`5dedfa1`](https://github.com/navikt/aksel/commit/5dedfa104a187d23e3028ffa2b4a85e44e206b31)]:
+  - @navikt/ds-css@7.8.0
+
+## 7.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.7.0
+
+## 7.6.0
+
+### Patch Changes
+
+- Updated dependencies [[`dce149f`](https://github.com/navikt/aksel/commit/dce149fca40147440148371db846fb452ab7b5f2), [`34538a1`](https://github.com/navikt/aksel/commit/34538a1cbe30e0c951477cb4a379d648c93733fd), [`641276b`](https://github.com/navikt/aksel/commit/641276bb44919302d19bbc76d30452a5c15536af), [`9f088a9`](https://github.com/navikt/aksel/commit/9f088a93733a038bd0c4f4cd70f7fd3894ee9997), [`6d74cb7`](https://github.com/navikt/aksel/commit/6d74cb72ad522a73a926bbfbd2eaf526388c4826), [`fa2904d`](https://github.com/navikt/aksel/commit/fa2904d54b282da06fc04cfc99be5dd0b3e8d352)]:
+  - @navikt/ds-css@7.6.0
+
+## 7.5.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Updated dependencies [[`9c93342`](https://github.com/navikt/aksel/commit/9c9334289246103856c149f5ddcf93dc42087342)]:
+  - @navikt/ds-css@7.5.2
+
+## 7.5.1
+
+### Patch Changes
+
+- Chore: Manually bump version to sync npm and github-releases ([`aa7c2d9`](https://github.com/navikt/aksel/commit/aa7c2d9598434d6304432daa20e0a1eeedd03b1b))
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.1
+
+## 7.5.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`6d9f900`](https://github.com/navikt/aksel/commit/6d9f9001fed4ccfa4245ab97399b24012ceb9edf)]:
+  - @navikt/ds-css@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.4.2
+
 ## 7.4.1
 
 ### Patch Changes

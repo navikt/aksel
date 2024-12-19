@@ -1,10 +1,7 @@
-import { GlobalColorRoles, StyleDictionaryToken } from "../util";
+import { type ColorRoles } from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
-export const textContrastTokenConfig = (): {
-  text: {
-    [key in `${GlobalColorRoles}-contrast`]: StyleDictionaryToken<"color">;
-  };
-} => ({
+export const textContrastTokenConfig = {
   text: {
     /* core */
     "accent-contrast": {
@@ -39,31 +36,33 @@ export const textContrastTokenConfig = (): {
       group: "text.warning",
     },
     /* Brand */
-    "brandOne-contrast": {
+    "brand-magenta-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandOne",
+      group: "text.brand-magenta",
     },
-    "brandTwo-contrast": {
+    "brand-beige-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandTwo",
+      group: "text.brand-beige",
     },
-    "brandThree-contrast": {
+    "brand-blue-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brandThree",
+      group: "text.brand-blue",
     },
-    /* Data */
-    "dataOne-contrast": {
+    /* Meta  */
+    "meta-purple-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.dataOne",
+      group: "text.meta-purple",
     },
-    "dataTwo-contrast": {
+    "meta-lime-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.dataTwo",
+      group: "text.meta-lime",
     },
   },
-});
+} satisfies {
+  text: Record<`${ColorRoles}-contrast`, StyleDictionaryToken<"color">>;
+};

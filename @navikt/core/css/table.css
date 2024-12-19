@@ -114,6 +114,7 @@
   align-items: center;
   line-height: inherit;
   font-weight: inherit;
+  text-align: inherit;
 }
 
 .navds-table--small .navds-table__sort-button {
@@ -205,7 +206,7 @@
   transition: transform 150ms ease-in-out;
 }
 
-.navds-table__toggle-expand-cell:hover {
+.navds-table__expandable-row:not(.navds-table__expandable-row--expansion-disabled) .navds-table__toggle-expand-cell:hover {
   cursor: pointer;
 }
 

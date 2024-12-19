@@ -5,7 +5,7 @@ import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { useDateInputContext } from "../context";
+import { useDateInputContext, useDateTranslationContext } from "../context";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -46,16 +46,17 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
   } = props;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const translate = useDateTranslationContext().translate;
 
   const isDatepickerVariant = variant === "datepicker";
 
   const conditionalVariables = {
     prefix: isDatepickerVariant ? "datepicker-input" : "monthpicker-input",
     iconTitle: {
-      open: isDatepickerVariant ? "Åpne datovelger" : "Åpne månedsvelger",
-      close: isDatepickerVariant ? "Lukk datovelger" : "Lukk månedsvelger",
+      open: isDatepickerVariant ? "openDatePicker" : "openMonthPicker",
+      close: isDatepickerVariant ? "closeDatePicker" : "closeMonthPicker",
     },
-  };
+  } as const;
 
   const context = useDateInputContext();
 
@@ -94,7 +95,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           "navds-sr-only": hideLabel,
         })}
       >
-        <ReadOnlyIcon readOnly={readOnly} />
+        {readOnly && <ReadOnlyIcon />}
         {label}
       </Label>
       {!!description && (
@@ -137,12 +138,9 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           ref={buttonRef}
         >
           <CalendarIcon
-            pointerEvents="none"
-            title={
-              context?.open
-                ? conditionalVariables.iconTitle.close
-                : conditionalVariables.iconTitle.open
-            }
+            title={translate(
+              conditionalVariables.iconTitle[context?.open ? "close" : "open"],
+            )}
           />
         </button>
       </div>
@@ -152,7 +150,11 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         aria-relevant="additions removals"
         aria-live="polite"
       >
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+        {showErrorMsg && (
+          <ErrorMessage size={size} showIcon>
+            {props.error}
+          </ErrorMessage>
+        )}
       </div>
     </div>
   );

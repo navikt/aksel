@@ -6,6 +6,8 @@ import React, {
   useState,
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -50,7 +52,8 @@ export interface SearchProps
   onSearchClick?: (value: string) => void;
   /**
    * Sets the `aria-label` for the clear button.
-   * @default "Tøm"
+   * @default "Tøm feltet"
+   * @deprecated Use `<Provider />`-component
    */
   clearButtonLabel?: string;
   /**
@@ -89,7 +92,7 @@ interface SearchComponent
  * @example
  * ```jsx
  * <form role="search">
- *   <Search label="Søk alle NAV sine sider" variant="primary" />
+ *   <Search label="Søk alle Nav sine sider" variant="primary" />
  * </form>
  * ```
  */
@@ -122,6 +125,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
+    const themeContext = UNSAFE_useAkselTheme(false);
+
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
     const translate = useI18n("Search");
@@ -141,6 +146,34 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     const handleClick = () => {
       onSearchClick?.(`${value ?? internalValue}`);
     };
+
+    const showClearButton =
+      clearButton && !inputProps.disabled && (value ?? internalValue);
+
+    const ClearButton = () =>
+      themeContext ? (
+        <Button
+          className="navds-search__button-clear"
+          variant="tertiary-neutral"
+          size={size === "medium" ? "small" : "xsmall"}
+          icon={<XMarkIcon aria-hidden />}
+          title={clearButtonLabel || translate("clear")}
+          hidden={!showClearButton}
+          onClick={(event) => handleClear({ trigger: "Click", event })}
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={(event) => handleClear({ trigger: "Click", event })}
+          className="navds-search__button-clear"
+          hidden={!showClearButton}
+        >
+          <span className="navds-sr-only">
+            {clearButtonLabel || translate("clear")}
+          </span>
+          <XMarkIcon aria-hidden />
+        </button>
+      );
 
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -210,18 +243,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               )}
               {...(htmlSize ? { size: Number(htmlSize) } : {})}
             />
-            {(value ?? internalValue) && clearButton && (
-              <button
-                type="button"
-                onClick={(event) => handleClear({ trigger: "Click", event })}
-                className="navds-search__button-clear"
-              >
-                <span className="navds-sr-only">
-                  {clearButtonLabel || translate("clear")}
-                </span>
-                <XMarkIcon aria-hidden />
-              </button>
-            )}
+            <ClearButton />
           </div>
           <SearchContext.Provider
             value={{
@@ -241,7 +263,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

@@ -14,6 +14,10 @@
   max-height: 100%;
   max-width: 100%;
   color: var(--a-text-default);
+
+  /* In case Modal is opened with `show()`, in eg. Vergic screensharing */
+  inset: 0;
+  z-index: 9999;
 }
 
 .navds-modal[open] {
@@ -24,6 +28,7 @@
 
 .navds-modal--polyfilled {
   top: 50%;
+  bottom: unset; /* Overrides inset: 0 from .navds-modal */
   transform: translate(0, -50%);
 
   /* From polyfill (dialog-polyfill/dist/dialog-polyfill.css): */
@@ -132,6 +137,9 @@
   overflow: auto;
   overscroll-behavior: contain;
   position: relative; /* Needed to make sr-only elements position correctly - see Storybook */
+}
+
+.navds-modal:not(.navds-modal--polyfilled) .navds-modal__body {
   background:
     linear-gradient(var(--__ac-modal-bg) 30%, transparent) top,
     linear-gradient(transparent, var(--__ac-modal-bg) 60%) bottom,

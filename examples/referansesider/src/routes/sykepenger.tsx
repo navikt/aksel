@@ -7,7 +7,7 @@ import {
   ArrowRightIcon,
   ChevronDownIcon,
 } from "@navikt/aksel-icons";
-import * as tokens from "@navikt/ds-tokens/dist/darkside/tokens";
+import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
@@ -24,7 +24,7 @@ const EyeBrowText = styled.span`
 `;
 
 const H1 = styled.h1`
-  color: ${tokens.TextBrandOneStrong};
+  color: ${tokens.TextBrandMagentaStrong};
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -34,7 +34,7 @@ const H1 = styled.h1`
 
 const H2 = styled.h2`
   position: relative;
-  color: ${tokens.TextBrandOneStrong};
+  color: ${tokens.TextBrandMagentaStrong};
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -43,7 +43,7 @@ const H2 = styled.h2`
   letter-spacing: -0.288px;
 
   &::before {
-    background-color: ${tokens.BorderBrandOneSubtle};
+    background-color: ${tokens.BorderBrandMagentaSubtle};
     content: "";
     height: 7px;
     left: 0;
@@ -92,7 +92,7 @@ let PillLink: ReactNode;
       box-shadow: 0 0 0 3px ${tokens.Accent800};
     }
     &::before {
-      background-color: ${tokens.BrandOne900};
+      background-color: ${tokens.BrandMagenta900};
     }
   `;
 
@@ -128,9 +128,9 @@ const Paragraph = ({
 let LinkList: ReactNode;
 {
   const ScList = styled.div`
-    background-color: ${tokens.BgBrandTwo};
+    background-color: ${tokens.BgBrandBeige};
     &.borderTop {
-      border-top: 4px solid ${tokens.BgBrandOneStrong};
+      border-top: 4px solid ${tokens.BgBrandMagentaStrong};
     }
   `;
 
@@ -181,7 +181,7 @@ let PlainList: ReactNode;
 {
   const ScList = styled.ul`
     & li::marker {
-      color: ${tokens.BrandOne900};
+      color: ${tokens.BrandMagenta900};
     }
   `;
 
@@ -199,7 +199,7 @@ let PlainOrderedList: ReactNode;
   const ScList = styled.ol`
     & li::marker {
       font-weight: 800;
-      color: ${tokens.BrandOne900};
+      color: ${tokens.BrandMagenta900};
     }
     & li {
       padding-left: 4px;
@@ -445,7 +445,7 @@ function SykepengerPage() {
           </li>
         </PlainList>
         <Paragraph>
-          Det er NAV som avgjør om sykmeldingen gir deg rett til sykepenger. Det
+          Det er Nav som avgjør om sykmeldingen gir deg rett til sykepenger. Det
           er ulike regler avhengig av hva slags arbeid du har eller hvilken
           situasjon du er i.
         </Paragraph>
@@ -459,10 +459,10 @@ function SykepengerPage() {
         <Accordion>
           <AccordionItem title="Arbeidstaker">
             <Paragraph>
-              For å ha rett til sykepenger fra NAV må du ha jobbet minst fire
+              For å ha rett til sykepenger fra Nav må du ha jobbet minst fire
               uker rett før du ble sykmeldt. Du må også ha en årsinntekt som
               tilsvarer femti prosent av grunnbeløpet i folketrygden, det vil si
-              62&nbsp;014 kroner. For å beregne årsinntekten din bruker NAV
+              62&nbsp;014 kroner. For å beregne årsinntekten din bruker Nav
               gjennomsnittet av de tre siste månedene.
             </Paragraph>{" "}
             <Paragraph>
@@ -480,7 +480,7 @@ function SykepengerPage() {
             </Paragraph>{" "}
             <Paragraph>
               Hvis du har hyppige og/eller uforutsigbare sykefravær, kan du
-              eller arbeidsgiveren din søke om at NAV dekker sykepengene
+              eller arbeidsgiveren din søke om at Nav dekker sykepengene
               arbeidsgiveren har utbetalt i arbeidsgiverperioden.
             </Paragraph>{" "}
             <PillLink>Dekking av sykepenger i arbeidsgiverperioden</PillLink>
@@ -542,7 +542,7 @@ function SykepengerPage() {
             </PlainList>{" "}
             <H4>Hvis du er mellom 67 og 70 år</H4>{" "}
             <Paragraph>
-              Du kan få sykepenger fra NAV i opptil 60 dager hvis gjennomsnittet
+              Du kan få sykepenger fra Nav i opptil 60 dager hvis gjennomsnittet
               av inntekten din de siste 3 månedene før du ble syk omgjort til
               årsinntekt overstiger 248&nbsp;056 kroner (2 ganger grunnbeløpet i
               folketrygden). Dette gjelder hvis du er mellom 67 og 70 år,
@@ -602,7 +602,7 @@ function SykepengerPage() {
               </Paragraph>{" "}
               <h4>Hvis du er mellom 67 og 70 år</h4>{" "}
               <Paragraph>
-                Du kan få sykepenger fra NAV i opptil 60 dager hvis
+                Du kan få sykepenger fra Nav i opptil 60 dager hvis
                 gjennomsnittet av inntekten din de siste 3 månedene før du ble
                 syk omgjort til årsinntekt overstiger 248&nbsp;056 kroner (2
                 ganger grunnbeløpet i folketrygden). Dette gjelder hvis du er
@@ -696,7 +696,7 @@ function SykepengerPage() {
           <li>
             Du må delta aktivt for å komme tilbake i arbeid for å få sykepenger.
             Du må forsikre deg om at reisen ikke vil hindre aktiviteter du har
-            avtalt med NAV. Hvis du er usikker, kan du skrive til oss fra
+            avtalt med Nav. Hvis du er usikker, kan du skrive til oss fra
             nav.no.
           </li>
           <li>

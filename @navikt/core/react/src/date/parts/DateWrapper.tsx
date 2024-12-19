@@ -5,14 +5,24 @@ import { Modal } from "../../modal";
 import { useModalContext } from "../../modal/Modal.context";
 import { Popover } from "../../popover";
 import { useMedia } from "../../util/hooks";
-import { modalCloseButtonLabel, modalLabel } from "../utils/labels";
+import { TFunction, useI18n } from "../../util/i18n/i18n.context";
+import { getGlobalTranslations } from "../utils";
+
+const variantToLabel = {
+  single: "chooseDate",
+  multiple: "chooseDates",
+  range: "chooseDateRange",
+  month: "chooseMonth",
+} as const;
 
 type DateWrapperProps = {
   open: boolean;
   children: React.ReactNode;
   onClose: () => void;
   anchor: HTMLDivElement | null;
-  locale: "nb" | "nn" | "en";
+  /** @deprecated Temporary to support locale prop */
+  locale: "nb" | "nn" | "en" | undefined;
+  translate: TFunction<"DatePicker">;
   variant: "single" | "multiple" | "range" | "month";
   popoverProps: {
     id?: string;
@@ -26,9 +36,11 @@ export const DateWrapper = ({
   onClose,
   anchor,
   locale,
+  translate,
   variant,
   popoverProps,
 }: DateWrapperProps) => {
+  const translateGlobal = useI18n("global", getGlobalTranslations(locale));
   const modalRef = useRef<HTMLDialogElement>(null);
   const isInModal = useModalContext(false) !== undefined;
   const hideModal =
@@ -61,7 +73,7 @@ export const DateWrapper = ({
         event.stopPropagation();
         onClose();
       }}
-      aria-label={modalLabel(locale, variant)}
+      aria-label={translate(variantToLabel[variant])}
       className={cl("navds-date__modal", {
         "navds-date__nested-modal": isInModal,
         "navds-date": variant === "month",
@@ -76,7 +88,7 @@ export const DateWrapper = ({
           size="small"
           type="button"
         >
-          {modalCloseButtonLabel(locale)}
+          {translateGlobal("close")}
         </Button>
       </div>
     </Modal>

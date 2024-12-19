@@ -1,5 +1,145 @@
 # @navikt/ds-react
 
+## 7.8.1
+
+### Patch Changes
+
+- Combobox: Only open dropdown-list onClick, not onFocus. ([#3440](https://github.com/navikt/aksel/pull/3440))
+
+- Combobox: Fix issue where you could select more options than defined in maxSelected ([#3434](https://github.com/navikt/aksel/pull/3434))
+
+- Timeline: In cases where earliest found date were after current date, timeline-start ended up defaulting to current date. ([#3458](https://github.com/navikt/aksel/pull/3458))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.8.1
+  - @navikt/aksel-icons@7.8.1
+
+## 7.8.0
+
+### Minor Changes
+
+- Chips.Removable: Removed prop `removeLabel` ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- i18n: :sparkles: Implemented i18n support for all components. Components come with support for nb, nn and en locales ([Docs](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)) ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+- Combobox: Changed prop `maxSelected` to number ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+- DatePicker/MonthPicker: Added new `translations` prop and deprecated `locale` prop ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+### Patch Changes
+
+- Timeline: Deprecated prop `axisLabelTemplates`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the date formats. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Search: Deprecated prop `clearButtonLabel`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the label. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Textarea: Deprecated prop `i18n`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change these texts. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.8.0
+  - @navikt/aksel-icons@7.8.0
+
+## 7.7.0
+
+### Minor Changes
+
+- CopyButton: Removed prop `activeTitle`. Use `activeText` instead. ([#3426](https://github.com/navikt/aksel/pull/3426))
+
+- Combobox: :boom: Removed prop `toggleListButtonLabel` ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+### Patch Changes
+
+- Combobox: Hid buttons from screen readers, added `title` on clear button, removed sr-only text on toggle list button. ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+- InternalHeader.UserButton: Remove `title`-attribute on icon and improved types. ([#3424](https://github.com/navikt/aksel/pull/3424))
+
+- CopyButton: Fix issue where state changes are announced multiple times using VO in Chrome ([#3374](https://github.com/navikt/aksel/pull/3374))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.7.0
+  - @navikt/aksel-icons@7.7.0
+
+## 7.6.0
+
+### Minor Changes
+
+- ActionMenu: Added 'align'-prop to 'ActionMenu.Content'. This allows menu to 'start' or 'end' align in reference to anchor. ([#3414](https://github.com/navikt/aksel/pull/3414))
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+### Patch Changes
+
+- DatePicker/MonthPicker: Remove pointerEvents=none on CalendarIcon so that the title shows up as tooltip on hover ([#3390](https://github.com/navikt/aksel/pull/3390))
+
+- Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+- Updated dependencies [[`9c5b32f`](https://github.com/navikt/aksel/commit/9c5b32f9bae885585b5f50b637505017482b1d59)]:
+  - @navikt/aksel-icons@7.6.0
+  - @navikt/ds-tokens@7.6.0
+
+## 7.5.3
+
+### Patch Changes
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.3
+  - @navikt/aksel-icons@7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.2
+  - @navikt/aksel-icons@7.5.2
+
+## 7.5.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.5.1
+  - @navikt/aksel-icons@7.5.1
+
+## 7.5.0
+
+### Minor Changes
+
+- React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
+
+### Patch Changes
+
+- Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
+- Updated dependencies [[`47a4dd6`](https://github.com/navikt/aksel/commit/47a4dd6c4c37a9ced9df1f21529e8a6244b342b1)]:
+  - @navikt/aksel-icons@7.5.0
+  - @navikt/ds-tokens@7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.3
+  - @navikt/aksel-icons@7.4.3
+
+## 7.4.2
+
+### Patch Changes
+
+- Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.4.2
+  - @navikt/aksel-icons@7.4.2
+
 ## 7.4.1
 
 ### Patch Changes

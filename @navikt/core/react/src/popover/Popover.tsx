@@ -8,9 +8,10 @@ import {
 } from "@floating-ui/react";
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
-import { DateContext } from "../date/context";
+import { DateInputContext } from "../date/context";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
+import { UNSAFE_useAkselTheme } from "../provider";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -120,9 +121,11 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
-    const isInDatepicker = useContext(DateContext) !== null;
+    const isInDatepicker = useContext(DateInputContext) !== null;
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
+
+    const themeContext = UNSAFE_useAkselTheme(false);
 
     const {
       update,
@@ -135,7 +138,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement,
       open,
       middleware: [
-        flOffset(offset ?? (arrow ? 16 : 4)),
+        flOffset(offset ?? (themeContext ? 8 : arrow ? 16 : 4)),
         chosenFlip &&
           flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         shift({ padding: 12 }),
@@ -187,7 +190,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           aria-hidden={!open || !anchorEl}
         >
           {children}
-          {arrow && (
+          {/* Hide arrow in new design, prop will be removed in breaking change update */}
+          {arrow && !themeContext && (
             <div
               ref={(node) => {
                 arrowRef.current = node;

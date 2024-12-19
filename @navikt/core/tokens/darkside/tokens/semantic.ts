@@ -1,8 +1,12 @@
-import { ColorTheme, StyleDictionaryTokenConfig } from "../util";
+import {
+  type BorderColorKeys,
+  type ColorTheme,
+  type DefaultBgKeys,
+  type DefaultTextColorKeys,
+} from "../../types";
+import { type StyleDictionaryToken } from "../tokens.util";
 
-export function semanticTokenConfig(
-  theme: ColorTheme,
-): StyleDictionaryTokenConfig<"color"> {
+export function semanticTokenConfig(theme: ColorTheme) {
   return {
     text: {
       default: {
@@ -17,6 +21,11 @@ export function semanticTokenConfig(
       },
       icon: {
         value: "{ax.neutral.600.value}",
+        type: "color",
+        group: "text",
+      },
+      logo: {
+        value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
         type: "color",
         group: "text",
       },
@@ -36,7 +45,7 @@ export function semanticTokenConfig(
         value:
           theme === "light"
             ? "rgba(255, 255, 255, 0.85)"
-            : "rgba(14, 21, 31, 0.50)",
+            : "rgba(7, 9, 13, 0.50)",
         type: "color",
         group: "background",
       },
@@ -94,5 +103,9 @@ export function semanticTokenConfig(
         scopes: ["EFFECT_COLOR"],
       },
     },
+  } satisfies {
+    bg: Record<DefaultBgKeys, StyleDictionaryToken<"color">>;
+    border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
+    text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
   };
 }

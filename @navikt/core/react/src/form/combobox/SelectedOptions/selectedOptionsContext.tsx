@@ -12,7 +12,7 @@ type SelectedOptionsContextValue = {
   removeSelectedOption: (option: ComboboxOption) => void;
   prevSelectedOptions?: ComboboxOption[];
   selectedOptions: ComboboxOption[];
-  maxSelected?: ComboboxProps["maxSelected"] & { isLimitReached: boolean };
+  maxSelected: { limit: number | undefined; isLimitReached: boolean };
   setSelectedOptions: (any) => void;
   toggleOption: (
     option: ComboboxOption,
@@ -101,14 +101,17 @@ const SelectedOptionsProvider = ({
     [customOptions, onToggleSelected, removeCustomOption],
   );
 
+  const maxSelectedLimit =
+    typeof maxSelected === "object" ? maxSelected.limit : maxSelected;
   const isLimitReached =
-    (!!maxSelected?.limit && selectedOptions.length >= maxSelected.limit) ||
-    (!isMultiSelect && selectedOptions.length > 0);
+    !!maxSelectedLimit && selectedOptions.length >= maxSelectedLimit;
+  const newHideCaret =
+    isLimitReached || (!isMultiSelect && selectedOptions.length > 0);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We explicitly want to run this effect when selectedOptions changes to match the view with the selected options.
   useEffect(() => {
-    setHideCaret(isLimitReached);
-  }, [isLimitReached, selectedOptions, setHideCaret]);
+    setHideCaret(newHideCaret);
+  }, [newHideCaret, selectedOptions, setHideCaret]);
 
   const toggleOption = useCallback(
     (
@@ -117,6 +120,8 @@ const SelectedOptionsProvider = ({
     ) => {
       if (isInList(option.value, selectedOptions)) {
         removeSelectedOption(option);
+      } else if (isMultiSelect && isLimitReached) {
+        return;
       } else {
         addSelectedOption(option);
       }
@@ -129,6 +134,8 @@ const SelectedOptionsProvider = ({
       focusInput,
       removeSelectedOption,
       selectedOptions,
+      isLimitReached,
+      isMultiSelect,
     ],
   );
 
@@ -142,8 +149,8 @@ const SelectedOptionsProvider = ({
     selectedOptions,
     setSelectedOptions,
     toggleOption,
-    maxSelected: maxSelected && {
-      ...maxSelected,
+    maxSelected: {
+      limit: maxSelectedLimit,
       isLimitReached,
     },
   };

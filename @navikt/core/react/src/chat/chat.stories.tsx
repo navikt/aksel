@@ -88,8 +88,8 @@ export const Variants: Story = {
         <React.Fragment key={variant}>
           <h3>{variant}</h3>
           <Chat
-            avatar="NAV"
-            name="NAV"
+            avatar="Ls"
+            name="Ls"
             timestamp="01.01.21 14:00"
             variant={variant}
           >

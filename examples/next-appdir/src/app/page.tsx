@@ -84,7 +84,7 @@ export default function Home() {
           <Accordion.AccordionContent>
             Hvis du er mellom 62 og 67 år når du søker, må du som hovedregel ha
             hatt en pensjonsgivende inntekt som tilsvarer x G, året før du fikk
-            nedsatt arbeidsevnen. NAV kan gjøre <a href="#Unntak">unntak</a>.
+            nedsatt arbeidsevnen. Nav kan gjøre <a href="#Unntak">unntak</a>.
           </Accordion.AccordionContent>
         </Accordion.AccordionItem>
         <Accordion.AccordionItem>

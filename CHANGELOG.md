@@ -1,8 +1,120 @@
 # Changelog
 
+## 7.8
+
+### @navikt/aksel-stylelint
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+### @navikt/ds-react
+
+- Combobox: Only open dropdown-list onClick, not onFocus. ([#3440](https://github.com/navikt/aksel/pull/3440))
+
+- Combobox: Fix issue where you could select more options than defined in maxSelected ([#3434](https://github.com/navikt/aksel/pull/3434))
+
+- Timeline: In cases where earliest found date were after current date, timeline-start ended up defaulting to current date. ([#3458](https://github.com/navikt/aksel/pull/3458))
+
+* Chips.Removable: Removed prop `removeLabel` ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+* i18n: :sparkles: Implemented i18n support for all components. Components come with support for nb, nn and en locales ([Docs](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517)) ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+* Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+* Combobox: Changed prop `maxSelected` to number ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+* DatePicker/MonthPicker: Added new `translations` prop and deprecated `locale` prop ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Timeline: Deprecated prop `axisLabelTemplates`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the date formats. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Search: Deprecated prop `clearButtonLabel`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change the label. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+- Textarea: Deprecated prop `i18n`. Use [Provider](https://aksel.nav.no/komponenter/core/provider#84d7ea5ec517) if you still need to change these texts. ([#3429](https://github.com/navikt/aksel/pull/3429))
+
+### @navikt/ds-css
+
+- Alert: Link-components used within Alert variant='inline' now preserves default coloring ([#3461](https://github.com/navikt/aksel/pull/3461))
+
+- Table: :fire: Removed cursor 'pointer' when 'ExpandableRow' is disabled. ([#3462](https://github.com/navikt/aksel/pull/3462))
+
+* Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+- CSS: Resolved regression where the complete stylesheet was included in scoped 'components.css' file. ([#3427](https://github.com/navikt/aksel/pull/3427))
+
+## 7.7
+
+### @navikt/ds-react
+
+- CopyButton: Removed prop `activeTitle`. Use `activeText` instead. ([#3426](https://github.com/navikt/aksel/pull/3426))
+
+- Combobox: :boom: Removed prop `toggleListButtonLabel` ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+* Combobox: Hid buttons from screen readers, added `title` on clear button, removed sr-only text on toggle list button. ([#3409](https://github.com/navikt/aksel/pull/3409))
+
+* InternalHeader.UserButton: Remove `title`-attribute on icon and improved types. ([#3424](https://github.com/navikt/aksel/pull/3424))
+
+* CopyButton: Fix issue where state changes are announced multiple times using VO in Chrome ([#3374](https://github.com/navikt/aksel/pull/3374))
+
+## 7.6
+
+### @navikt/aksel-icons
+
+- Icons: Added new icons 'TruckPercent' and 'ShieldCheckmark' 🎉. ([#3416](https://github.com/navikt/aksel/pull/3416))
+
+### @navikt/ds-react
+
+- ActionMenu: Added 'align'-prop to 'ActionMenu.Content'. This allows menu to 'start' or 'end' align in reference to anchor. ([#3414](https://github.com/navikt/aksel/pull/3414))
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+* DatePicker/MonthPicker: Remove pointerEvents=none on CalendarIcon so that the title shows up as tooltip on hover ([#3390](https://github.com/navikt/aksel/pull/3390))
+
+* Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+### @navikt/ds-css
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+* Select: Now shows focus-outline when ':focus' is set trough pointer or label in all browsers. Chrome and Firefox handles `:focus-visible` differently for 'select', previously causing outline-border not to show in Firefox. ([#3415](https://github.com/navikt/aksel/pull/3415))
+
+* Modal: Don't add scroll shadow when polyfilled ([#3408](https://github.com/navikt/aksel/pull/3408))
+
+* Modal: Now shows up while screensharing with Vergic ([#3407](https://github.com/navikt/aksel/pull/3407))
+
+* FileUpload: Remove browser styling from FileUpload.Item when used in list. ([#3413](https://github.com/navikt/aksel/pull/3413))
+
+* Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+## 7.5
+
+### @navikt/aksel-icons
+
+- Icons: 🎉 Added FileJpeg, FilePng and MedicalThermometer. ([#3332](https://github.com/navikt/aksel/pull/3332))
+
+### @navikt/aksel
+
+- Chore: Manually bump version to sync npm and github-releases ([`aa7c2d9`](https://github.com/navikt/aksel/commit/aa7c2d9598434d6304432daa20e0a1eeedd03b1b))
+
+### @navikt/ds-react
+
+- Allow RC versions of React 19 through peerDependencies ([#3391](https://github.com/navikt/aksel/pull/3391))
+
+* Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+- React: Allow all react versions above 17.0.0 trough peerDependencies. ([#3334](https://github.com/navikt/aksel/pull/3334))
+
+* Datepicker: Use of 'open'-prop set to 'true' on first render could lead to the dialog not opening. ([#3333](https://github.com/navikt/aksel/pull/3333))
+
+### @navikt/ds-css
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
 ## 7.4
 
 ### @navikt/ds-react
+
+- Pagination: More precise type for renderItem ([#3275](https://github.com/navikt/aksel/pull/3275))
+
+* Combobox: Pressing 'Enter' after canceling autocomplete could result in using matching options in list. ([#3306](https://github.com/navikt/aksel/pull/3306))
 
 - Tabs.List: Remove redundant icon titles ([#3282](https://github.com/navikt/aksel/pull/3282))
 
@@ -26,7 +138,9 @@
 
 ### @navikt/ds-css
 
-- Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
+- Table.ColumnHeader: Inherit text alignment in button ([#3319](https://github.com/navikt/aksel/pull/3319))
+
+* Combobox: :bug: Fix scroll issue when using arrow keys to navigate list ([#3269](https://github.com/navikt/aksel/pull/3269))
 
 ## 7.3
 

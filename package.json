@@ -1,6 +1,6 @@
 {
   "name": "aksel",
-  "description": "NAV designystem + Aksel.nav.no",
+  "description": "Nav designystem + Aksel.nav.no",
   "version": "1.1.0",
   "private": true,
   "scripts": {
@@ -20,7 +20,7 @@
     "lint": "yarn eslint --max-warnings=0 --rule \"import/no-cycle:error\" . && yarn stylelint '@navikt/**/*.css'",
     "lint:css": "yarn stylelint '@navikt/**/*.css'",
     "changeset": "changeset",
-    "create-version": "changeset version && yarn changelog",
+    "create-version": "changeset version && yarn changelog && yarn",
     "release": "yarn boot && yarn docgen && changeset publish",
     "biome:lint": "yarn biome lint ."
   },
@@ -166,7 +166,6 @@
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
     "@vitest/eslint-plugin": "^1.1.4",
-    "@whitespace/storybook-addon-html": "^6.1.1",
     "chromatic": "11.5.4",
     "concurrently": "9.0.1",
     "cross-env": "^7.0.0",
@@ -186,7 +185,6 @@
     "react": "^18.0.0",
     "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.0.0",
-    "react-syntax-highlighter": "^15.5.0",
     "storybook": "^8.3.4",
     "storybook-addon-pseudo-states": "^4.0.2",
     "stylelint": "^16.10.0",
@@ -201,7 +199,6 @@
   "resolutions": {
     "axe-core": "4.10.0"
   },
-  "_note2": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
-  "_notes": "react-syntax-highlighter is a dependency of @whitespace/storybook-addon-html",
+  "_note1": "Forcing axe-core to 4.10.0 fixes this error: `frame.evaluate: TypeError: Cannot read properties of null (reading 'children')`",
   "packageManager": "yarn@4.4.0"
 }

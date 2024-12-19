@@ -66,7 +66,13 @@ async function bundleComponents() {
   const css = fs.readFileSync(indexSrc);
 
   /* Remove @charset, baseline */
-  const cssString = css.toString().split("\n").slice(2).join("\n");
+  const cssString = css
+    .toString()
+    .split("\n")
+    .filter((line) => {
+      return line.startsWith("@import") && !line.includes("baseline");
+    })
+    .join("\n");
 
   const result = await postcss([cssImports, combineSelectors]).process(
     cssString,
@@ -102,6 +108,7 @@ function buildFragmentFiles() {
   const files = fastglob
     .sync("*.css", { cwd: ".", ignore: "**/*.min.css" })
     .map((fileN) => path.basename(fileN))
+    .filter((fileName) => !fileName.includes("index.css"))
     .map((x) => ({
       input: path.resolve(__dirname, `../${x}`),
       output: path.resolve(
@@ -154,7 +161,7 @@ async function bundleMinified() {
 function copyToVersionFolder() {
   const files = fastglob.sync("**/*.css", {
     cwd: `./${rootDir}`,
-    ignore: "**/version/**",
+    ignore: ["**/version/**", "**/darkside/**"],
   });
 
   for (let file of files) {

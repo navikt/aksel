@@ -75,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onEnter = useCallback(
       (event: React.KeyboardEvent) => {
-        const isTextInSelectedOptions = (text: string) =>
+        const isSelected = (text: string) =>
           selectedOptions.some(
             (option) =>
               option.label.toLocaleLowerCase() === text.toLocaleLowerCase(),
@@ -85,10 +85,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           event.preventDefault();
           // Selecting a value from the dropdown / FilteredOptions
           toggleOption(currentOption, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(currentOption.label)) {
+          if (!isMultiSelect && !isSelected(currentOption.label)) {
             toggleIsListOpen(false);
           }
-        } else if (isTextInSelectedOptions(value)) {
+        } else if (isSelected(value)) {
           event.preventDefault();
           // Trying to set the same value that is already set, so just clearing the input
           clearInput(event);
@@ -100,19 +100,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               value,
               filteredOptions,
             );
-          let selectedValue: ComboboxOption | undefined;
 
-          if (shouldAutocomplete && autoCompletedOption) {
-            selectedValue = autoCompletedOption;
+          /*
+           * User can have matching results, while not using the autocomplete result
+           * E.g. User types "Oslo", list has is "Oslo kommune", but user hits backspace, canceling autocomplete.
+           */
+          const autoCompleteMatchesValue =
+            filteredOptionsUtil.normalizeText(value) ===
+            filteredOptionsUtil.normalizeText(autoCompletedOption?.label ?? "");
+
+          let optionToToggle: ComboboxOption | undefined;
+
+          if (
+            shouldAutocomplete &&
+            autoCompletedOption &&
+            autoCompleteMatchesValue
+          ) {
+            optionToToggle = autoCompletedOption;
           } else if (allowNewValues && isValueNew) {
-            selectedValue = { label: value, value };
+            optionToToggle = { label: value, value };
           }
 
-          if (!selectedValue) {
+          if (!optionToToggle) {
             return;
           }
-          toggleOption(selectedValue, event);
-          if (!isMultiSelect && !isTextInSelectedOptions(selectedValue.label)) {
+          toggleOption(optionToToggle, event);
+          if (!isMultiSelect && !isSelected(optionToToggle.label)) {
             toggleIsListOpen(false);
           }
         }
@@ -266,7 +279,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         value={value}
         onBlur={composeEventHandlers(onBlur, virtualFocus.resetFocus)}
         onClick={() => {
-          setHideCaret(!!maxSelected?.isLimitReached);
+          setHideCaret(maxSelected.isLimitReached);
           value !== searchTerm && onChange(value);
         }}
         onInput={onChangeHandler}

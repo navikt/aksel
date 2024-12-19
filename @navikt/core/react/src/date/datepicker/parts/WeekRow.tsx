@@ -3,13 +3,13 @@ import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
+import { useDateTranslationContext } from "../../context";
 import { getMonthWeeks } from "../../utils/get-month-weeks";
-import { labelWeek } from "../../utils/labels";
 import WeekNumber from "./WeekNumber";
 
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();
-
+  const translate = useDateTranslationContext().translate;
   const labelId = useId();
 
   if (!onWeekNumberClick) {
@@ -32,7 +32,7 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
               className="rdp-cell navds-date__week-cell"
             >
               <span className="navds-date__week-wrapper" id={labelId}>
-                {labelWeek(locale?.code)}
+                {`${translate("week")}:`}
               </span>
             </Detail>
 
@@ -42,11 +42,7 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
                 className="rdp-cell navds-date__week-cell"
               >
                 <span className="navds-date__week-wrapper">
-                  <WeekNumber
-                    number={week.weekNumber}
-                    dates={week.dates}
-                    headerVersion
-                  />
+                  <WeekNumber number={week.weekNumber} dates={week.dates} />
                 </span>
               </td>
             ))}

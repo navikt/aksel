@@ -35,5 +35,5 @@ export const Demo = {
 
 export const args = {
   index: 3,
-  desc: "'paddingBlock' gir deg mer kontroll over vertikal padding.",
+  desc: "Propen 'paddingBlock' gir deg mer kontroll over vertikal padding.",
 };

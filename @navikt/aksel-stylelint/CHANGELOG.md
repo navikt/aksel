@@ -1,5 +1,29 @@
 # @navikt/aksel-stylelint
 
+## 7.8.1
+
+## 7.8.0
+
+### Minor Changes
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+## 7.7.0
+
+## 7.6.0
+
+## 7.5.3
+
+## 7.5.2
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+## 7.4.2
+
 ## 7.4.1
 
 ## 7.4.0

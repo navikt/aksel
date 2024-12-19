@@ -91,7 +91,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
 
@@ -127,7 +127,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

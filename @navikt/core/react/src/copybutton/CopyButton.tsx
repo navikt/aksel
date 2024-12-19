@@ -10,6 +10,7 @@ import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
+import { useI18n } from "../util/i18n/i18n.context";
 
 export interface CopyButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
@@ -32,7 +33,7 @@ export interface CopyButtonProps
   text?: string;
   /**
    * Text shown when button is clicked.
-   * Only set if used with `text`-prop.
+   * Will be used as accessible label (title) if `text`-prop is not set.
    * @default "Kopiert!"
    */
   activeText?: string;
@@ -63,11 +64,6 @@ export interface CopyButtonProps
    */
   title?: string;
   /**
-   * Accessible label for icon in active-state (ignored if text is set).
-   * @default "Kopiert"
-   */
-  activeTitle?: string;
-  /**
    * Icon position in button.
    * @default "left"
    */
@@ -91,15 +87,14 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       className,
       copyText,
       text,
-      activeText = "Kopiert!",
+      activeText,
       variant = "neutral",
       size = "medium",
       onActiveChange,
       icon,
       activeIcon,
       activeDuration = 2000,
-      title = "Kopier",
-      activeTitle = "Kopiert",
+      title,
       iconPosition = "left",
       onClick,
       ...rest
@@ -108,6 +103,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
   ) => {
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
+    const translate = useI18n("CopyButton");
 
     useEffect(() => {
       return () => {
@@ -127,19 +123,21 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       }, activeDuration);
     };
 
+    const activeString = activeText || translate("activeText");
+
     const copyIcon = (
       <span className="navds-copybutton__icon">
         {active
           ? activeIcon ?? (
               <CheckmarkIcon
                 aria-hidden={!!text}
-                title={text ? undefined : activeTitle}
+                title={text ? undefined : activeString}
               />
             )
           : icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
-                title={text ? undefined : title}
+                title={text ? undefined : title || translate("title")}
               />
             )}
       </span>
@@ -150,7 +148,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         ref={ref}
         type="button"
         {...rest}
-        aria-live="polite"
         className={cl(
           "navds-copybutton",
           className,
@@ -166,24 +163,11 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       >
         <span className="navds-copybutton__content">
           {iconPosition === "left" && copyIcon}
-          {text &&
-            (active ? (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {activeText}
-              </Label>
-            ) : (
-              <Label
-                as="span"
-                size={size === "medium" ? "medium" : "small"}
-                aria-live="polite"
-              >
-                {text}
-              </Label>
-            ))}
+          {text && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {active ? activeString : text}
+            </Label>
+          )}
           {iconPosition === "right" && copyIcon}
         </span>
       </button>

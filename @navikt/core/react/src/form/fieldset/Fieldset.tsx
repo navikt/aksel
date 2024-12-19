@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
-import { ReadOnlyIcon } from "../ReadOnlyIcon";
+import { ReadOnlyIcon, ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
 import { FormFieldProps } from "../useFormField";
 import { FieldsetContext } from "./context";
 import { useFieldset } from "./useFieldset";
@@ -89,7 +89,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
               "navds-sr-only": !!hideLegend,
             })}
           >
-            <ReadOnlyIcon readOnly={readOnly} nativeReadOnly={nativeReadOnly} />
+            {readOnly &&
+              (nativeReadOnly ? <ReadOnlyIcon /> : <ReadOnlyIconWithTitle />)}
             {legend}
           </Label>
           {!!description && (
@@ -112,7 +113,9 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             className="navds-fieldset__error"
           >
             {showErrorMsg && (
-              <ErrorMessage size={size}>{props.error}</ErrorMessage>
+              <ErrorMessage size={size} showIcon>
+                {props.error}
+              </ErrorMessage>
             )}
           </div>
         </fieldset>

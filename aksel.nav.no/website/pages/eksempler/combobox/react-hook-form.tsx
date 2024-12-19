@@ -10,7 +10,7 @@ const Example = () => {
     control,
     formState: { errors },
   } = useForm<Inputs>({
-    shouldFocusError: false,
+    shouldFocusError: true, // Sett denne til false hvis du bruker ErrorSummary
     defaultValues: { transportmiddel: [] },
   });
 
@@ -52,16 +52,16 @@ const Example = () => {
 };
 
 const options = [
-  "car",
-  "bus",
-  "train",
+  "bil",
+  "buss",
+  "tog",
   "skateboard",
-  "bicycle",
-  "motorcycle",
-  "boat",
-  "airplane",
-  "helicopter",
-  "truck",
+  "sykkel",
+  "motorsykkel",
+  "båt",
+  "fly",
+  "helikopter",
+  "lastebil",
   "van",
   "scooter",
 ];

@@ -1,5 +1,8 @@
 {
-  "cssVariables.lookupFiles": ["@navikt/core/css/dist/index.css"],
+  "cssVariables.lookupFiles": [
+    "@navikt/core/tokens/dist/tokens.css",
+    "@navikt/core/tokens/dist/darkside/tokens.css"
+  ],
   "eslint.problems.shortenToSingleLine": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.watcherExclude": {

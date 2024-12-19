@@ -1,5 +1,63 @@
 # @navikt/ds-css
 
+## 7.8.1
+
+### Patch Changes
+
+- Alert: Link-components used within Alert variant='inline' now preserves default coloring ([#3461](https://github.com/navikt/aksel/pull/3461))
+
+- Table: :fire: Removed cursor 'pointer' when 'ExpandableRow' is disabled. ([#3462](https://github.com/navikt/aksel/pull/3462))
+
+## 7.8.0
+
+### Minor Changes
+
+- Combobox: Removed clear button, removed tokens staring with `--ac-combobox-clear`, deprecated props `clearButton`/`clearButtonLabel`. ([#3433](https://github.com/navikt/aksel/pull/3433))
+
+### Patch Changes
+
+- CSS: Resolved regression where the complete stylesheet was included in scoped 'components.css' file. ([#3427](https://github.com/navikt/aksel/pull/3427))
+
+## 7.7.0
+
+## 7.6.0
+
+### Minor Changes
+
+- ReadMore: Added size 'large'. ([#3372](https://github.com/navikt/aksel/pull/3372))
+
+### Patch Changes
+
+- Select: Now shows focus-outline when ':focus' is set trough pointer or label in all browsers. Chrome and Firefox handles `:focus-visible` differently for 'select', previously causing outline-border not to show in Firefox. ([#3415](https://github.com/navikt/aksel/pull/3415))
+
+- Modal: Don't add scroll shadow when polyfilled ([#3408](https://github.com/navikt/aksel/pull/3408))
+
+- Modal: Now shows up while screensharing with Vergic ([#3407](https://github.com/navikt/aksel/pull/3407))
+
+- FileUpload: Remove browser styling from FileUpload.Item when used in list. ([#3413](https://github.com/navikt/aksel/pull/3413))
+
+- Combobox: Single-select now shows cursor closer to selected item. ([#3384](https://github.com/navikt/aksel/pull/3384))
+
+## 7.5.3
+
+## 7.5.2
+
+### Patch Changes
+
+- Combobox: Fix issue where using arrow keys in list would make the entire page scroll ([#3364](https://github.com/navikt/aksel/pull/3364))
+
+## 7.5.1
+
+## 7.5.0
+
+## 7.4.3
+
+### Patch Changes
+
+- Table.ColumnHeader: Inherit text alignment in button ([#3319](https://github.com/navikt/aksel/pull/3319))
+
+## 7.4.2
+
 ## 7.4.1
 
 ### Patch Changes

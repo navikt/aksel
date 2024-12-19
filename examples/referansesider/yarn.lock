@@ -733,23 +733,23 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.4.0
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=a6ad73&locator=referansesider%40workspace%3A."
-  checksum: 10/9cb97afbb3e938797e333fefb7475ce75e35407a9e6e0acd250e3aba1d6e97f0665c485cb418d122ce2082e8b87b0f710e45d49476de871a604e55271b32f925
+  version: 7.8.0
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=bac186&locator=referansesider%40workspace%3A."
+  checksum: 10/e31e6a82d5945df984a8139615867428a0aee90f22091501c51f31c2b6a157aeec4cd3c3427f520d2139eb73bfce57c41cdb4543718d58441c2635a7c7f2cdc5
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.4.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=d8edcf&locator=referansesider%40workspace%3A."
-  checksum: 10/0c5216a65167da860bfe331da2cd1d65ca84a47aab200601f9b94321ed908b92bd4beba44c18ab220941bf3a463284f315b65b924b31d4d41d6f1edab67e8c1a
+  version: 7.8.0
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=7413d6&locator=referansesider%40workspace%3A."
+  checksum: 10/7079efa87adac336780587e201d3591268e69b47f4dd0fdcccd44c5d4ad28766abfff04845643e2439880eb5a2fe22b2f55fa07fe76a9daa98b6f8ed0e883d99
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.4.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=0c9ca3&locator=referansesider%40workspace%3A."
-  checksum: 10/ad2fd0d8cb7f3d4b0f8daedae159c3b05b7fe9d23e961ec11b31082779858a91a92db2f3b056d79142c8d2731ac1149ff814f3e113a1edcb5991fd614ac4e988
+  version: 7.8.0
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=2b97bf&locator=referansesider%40workspace%3A."
+  checksum: 10/015b8b0a4908c58ee294a11cf679dfd78072c43dc0eccfa4c75c5bd7edbf77c34e99f035efbe271d30dd24fd87ea65a205c755c7705412f4d6740c6a42e34cd2
   languageName: node
   linkType: hard
 
@@ -1771,13 +1771,13 @@ __metadata:
   linkType: hard
 
 "cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2":
-  version: 7.0.3
-  resolution: "cross-spawn@npm:7.0.3"
+  version: 7.0.6
+  resolution: "cross-spawn@npm:7.0.6"
   dependencies:
     path-key: "npm:^3.1.0"
     shebang-command: "npm:^2.0.0"
     which: "npm:^2.0.1"
-  checksum: 10/e1a13869d2f57d974de0d9ef7acbf69dc6937db20b918525a01dacb5032129bd552d290d886d981e99f1b624cb03657084cc87bd40f115c07ecf376821c729ce
+  checksum: 10/0d52657d7ae36eb130999dffff1168ec348687b48dd38e2ff59992ed916c88d328cf1d07ff4a4a10bc78de5e1c23f04b306d569e42f7a2293915c081e4dfee86
   languageName: node
   linkType: hard
 

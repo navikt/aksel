@@ -2,7 +2,7 @@ import ErrorBoundary from "@/error-boundary";
 import { SanityBlockContent } from "@/sanity-block";
 import { AkselGrunnleggendeDocT, AkselKomponentDocT } from "@/types";
 import { List, ListItem } from "@/web/List";
-import { TextWithMarkdownLink } from "@/web/TextWithMarkdownLink";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 
 type IntroProps = {
   node: AkselKomponentDocT["intro"] | AkselGrunnleggendeDocT["intro"];
@@ -25,7 +25,7 @@ const Intro = ({ node, internal }: IntroProps) => {
           {internal && <ListItem icon>Bruk på interne flater</ListItem>}
           {node.brukes_til.map((x) => (
             <ListItem icon key={x}>
-              <TextWithMarkdownLink>{x}</TextWithMarkdownLink>
+              <TextWithMarkdown>{x}</TextWithMarkdown>
             </ListItem>
           ))}
         </List>
@@ -33,7 +33,7 @@ const Intro = ({ node, internal }: IntroProps) => {
           <List title="Uegnet til:">
             {node.brukes_ikke_til.map((x) => (
               <ListItem icon key={x}>
-                <TextWithMarkdownLink>{x}</TextWithMarkdownLink>
+                <TextWithMarkdown>{x}</TextWithMarkdown>
               </ListItem>
             ))}
           </List>

@@ -1,15 +1,3 @@
-/* stylelint-disable csstools/value-no-unknown-custom-properties */
-
-/* ------------------------- Global typo-definitions ------------------------ */
-body,
-:host {
-  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
-  line-height: 1.333;
-  font-size: 1.125rem;
-}
-
-/* ----------------------------- Typo-components ---------------------------- */
-
 /* Heading */
 .navds-heading {
   font-weight: var(--ax-font-weight-bold);
@@ -216,6 +204,18 @@ body,
 
 .navds-error-message {
   color: var(--ax-text-danger);
+
+  &.navds-error-message--show-icon {
+    display: flex;
+    gap: var(--ax-spacing-1);
+
+    & svg {
+      margin-top: 0.15em;
+      flex: 0 0 auto;
+      width: 1em;
+      height: 1em;
+    }
+  }
 }
 
 /* -------------------------------- Utilities ------------------------------- */

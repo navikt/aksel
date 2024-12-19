@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
@@ -83,12 +84,15 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const themeContext = UNSAFE_useAkselTheme(false);
+      const prefix = themeContext ? "ax" : "a";
+
       const style: React.CSSProperties = {
         ..._style,
-        ...getResponsiveProps(`stack`, "gap", "spacing", gap),
-        ...getResponsiveValue(`stack`, "direction", direction),
-        ...getResponsiveValue(`stack`, "align", align),
-        ...getResponsiveValue(`stack`, "justify", justify),
+        ...getResponsiveProps(prefix, `stack`, "gap", "spacing", gap),
+        ...getResponsiveValue(prefix, `stack`, "direction", direction),
+        ...getResponsiveValue(prefix, `stack`, "align", align),
+        ...getResponsiveValue(prefix, `stack`, "justify", justify),
       };
 
       const Comp = asChild ? Slot : Component;

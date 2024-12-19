@@ -1,78 +1,74 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
 import React from "react";
-import { Button, useDayPicker } from "react-day-picker";
-import { labelWeekNumber, labelWeekNumberButton } from "../../utils/labels";
+import { Button as RDPButton, useDayPicker } from "react-day-picker";
+import { Button } from "../../../button";
+import { UNSAFE_useAkselTheme } from "../../../provider";
+import { Detail } from "../../../typography";
+import { useDateTranslationContext } from "../../context";
 
 export interface WeekNumberProps {
   /** The number of the week. */
   number: number;
   /** The dates in the week. */
   dates: Date[];
-  headerVersion?: boolean;
 }
 
 /**
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/WeekNumber
  */
-function WeekNumber(props: WeekNumberProps): JSX.Element {
-  const { number: weekNumber, dates } = props;
-  const {
-    onWeekNumberClick,
-    styles,
-    classNames,
-    locale: { code },
-  } = useDayPicker();
-
-  const weekLabel = labelWeekNumber({
-    week: Number(weekNumber),
-    localeCode: code,
-  });
+function WeekNumber({
+  number: weekNumber,
+  dates,
+}: WeekNumberProps): JSX.Element {
+  const { onWeekNumberClick, styles, classNames } = useDayPicker();
+  const themeContext = UNSAFE_useAkselTheme(false);
+  const translate = useDateTranslationContext().translate;
 
   if (!onWeekNumberClick) {
     return (
-      <span
+      <Detail
+        as="span"
+        textColor="subtle"
         className={classNames.weeknumber}
         style={styles.weeknumber}
-        aria-label={weekLabel}
+        aria-label={translate("weekNumber", { week: weekNumber })}
       >
         {weekNumber}
-      </span>
+      </Detail>
     );
   }
 
-  const label = labelWeekNumberButton({
-    week: Number(weekNumber),
-    localeCode: code,
-  });
-
-  const handleClick: React.MouseEventHandler = function (e) {
-    onWeekNumberClick(weekNumber, dates, e);
-  };
-
-  if (props?.headerVersion) {
+  if (themeContext) {
     return (
       <Button
+        variant="secondary-neutral"
+        size="small"
         name="week-number"
-        aria-label={label}
-        className={classNames.weeknumber}
+        aria-label={translate("selectWeekNumber", { week: weekNumber })}
         style={styles.weeknumber}
-        onClick={handleClick}
-      >
-        {weekNumber}
-      </Button>
+        className="navds-date__weeknumber"
+        onClick={(event) => {
+          onWeekNumberClick(weekNumber, dates, event);
+        }}
+        icon={
+          <span className="navds-date__weeknumber-number">{weekNumber}</span>
+        }
+      />
     );
   }
 
   return (
-    <Button
+    <RDPButton
       name="week-number"
-      aria-label={label}
-      className={classNames.weeknumber}
+      aria-label={translate("selectWeekNumber", { week: weekNumber })}
       style={styles.weeknumber}
-      onClick={handleClick}
+      className={classNames.weeknumber}
+      onClick={(event) => {
+        onWeekNumberClick(weekNumber, dates, event);
+      }}
     >
       {weekNumber}
-    </Button>
+    </RDPButton>
   );
 }
 

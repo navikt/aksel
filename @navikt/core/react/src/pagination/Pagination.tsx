@@ -9,6 +9,17 @@ import PaginationItem, {
   PaginationItemType,
 } from "./PaginationItem";
 
+interface RenderItemProps
+  extends Pick<
+    PaginationItemProps,
+    "className" | "disabled" | "selected" | "icon" | "iconPosition"
+  > {
+  children: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  page: number;
+  size: Exclude<PaginationProps["size"], undefined>;
+}
+
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Current page.
@@ -46,9 +57,9 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   prevNextTexts?: boolean;
   /**
    * Override pagination item rendering.
-   * @default (item: PaginationItemProps) => <PaginationItem {...item} />
+   * @default PaginationItem
    */
-  renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
+  renderItem?: (item: RenderItemProps) => ReturnType<React.FC>;
   /**
    * Pagination heading. We recommend adding heading instead of `aria-label` to help assistive technologies with an extra navigation-stop.
    */
@@ -102,6 +113,12 @@ export const getSteps = ({
 };
 
 /**
+ * TODO: These classes can be removed in darkside update
+ * - navds-pagination--prev-next--with-text
+ * - navds-pagination__prev-next
+ */
+
+/**
  * A component that displays pagination controls.
  *
  * @see [📝 Documentation](https://aksel.nav.no/komponenter/core/pagination)
@@ -111,7 +128,7 @@ export const getSteps = ({
  * ```jsx
  * <Pagination
  *   page={pageState}
- *   onPageChange={(x) => setPageState(x)}
+ *   onPageChange={setPageState}
  *   count={9}
  *   boundaryCount={1}
  *   siblingCount={1}
@@ -131,9 +148,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       prevNextTexts = false,
       srHeading,
       "aria-labelledby": ariaLabelledBy,
-      renderItem: Item = (item: PaginationItemProps) => (
-        <PaginationItem {...item} />
-      ),
+      renderItem: Item = PaginationItem,
       ...rest
     },
     ref,
@@ -218,6 +233,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
+                    /* Remember to update RenderItemProps if you make changes to props sent into Item */
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}

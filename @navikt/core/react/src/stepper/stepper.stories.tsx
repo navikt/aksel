@@ -60,7 +60,7 @@ export const Default = ({ asButton, ...props }) => {
           Saksopplysninger
         </Stepper.Step>
         <Stepper.Step {...newProps} completed={props.completed}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives og
+          Søknadstekst for en veldig spesifikk prosess i Nav som må beskrives og
           forklares i sitt fulle i denne labelen
         </Stepper.Step>
         <Stepper.Step {...newProps}>Vedlegg</Stepper.Step>
@@ -93,7 +93,7 @@ export const Horizontal: StoryFn<Story> = () => {
       <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
       <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
       <Stepper.Step {...props}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </Stepper.Step>
       <Stepper.Step {...props}>Vedlegg</Stepper.Step>
       <Stepper.Step {...props}>Oppsummering</Stepper.Step>
@@ -116,7 +116,7 @@ export const Vertical: StoryFn<Story> = () => {
       <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
       <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
       <Stepper.Step {...props}>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
       </Stepper.Step>
       <Stepper.Step {...props}>Vedlegg</Stepper.Step>
       <Stepper.Step {...props}>Oppsummering</Stepper.Step>
@@ -138,7 +138,7 @@ export const DisplayOnly: StoryFn<Story> = () => {
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step>Saksopplysninger</Stepper.Step>
         <Stepper.Step>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step>Vedlegg</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
@@ -154,7 +154,7 @@ export const DisplayOnly: StoryFn<Story> = () => {
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step>Saksopplysninger</Stepper.Step>
         <Stepper.Step>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step>Vedlegg</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
@@ -178,9 +178,11 @@ export const CompletedSteps: StoryFn<Story> = () => {
         <Stepper.Step completed>Personopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+        <Stepper.Step completed={activeStep > 5} interactive={false}>
+          Vedlegg
+        </Stepper.Step>
         <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
         <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
       </Stepper>
@@ -196,7 +198,7 @@ export const CompletedSteps: StoryFn<Story> = () => {
         </Stepper.Step>
         <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
         <Stepper.Step completed={activeStep >= 4}>
-          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+          Søknadstekst for en veldig spesifikk prosess i Nav som har lang tekst
         </Stepper.Step>
         <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
         <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>

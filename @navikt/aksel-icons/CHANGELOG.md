@@ -1,5 +1,33 @@
 # @navikt/aksel-icons
 
+## 7.8.1
+
+## 7.8.0
+
+## 7.7.0
+
+## 7.6.0
+
+### Minor Changes
+
+- Icons: Added new icons 'TruckPercent' and 'ShieldCheckmark' 🎉. ([#3416](https://github.com/navikt/aksel/pull/3416))
+
+## 7.5.3
+
+## 7.5.2
+
+## 7.5.1
+
+## 7.5.0
+
+### Minor Changes
+
+- Icons: 🎉 Added FileJpeg, FilePng and MedicalThermometer. ([#3332](https://github.com/navikt/aksel/pull/3332))
+
+## 7.4.3
+
+## 7.4.2
+
 ## 7.4.1
 
 ## 7.4.0

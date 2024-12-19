@@ -1435,7 +1435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.20.1, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.25.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.20.1, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.25.7, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.25.7
   resolution: "@babel/runtime@npm:7.25.7"
   dependencies:
@@ -3711,7 +3711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.4.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.8.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3742,8 +3742,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.4.0"
-    "@navikt/ds-tokens": "npm:^7.4.0"
+    "@navikt/ds-css": "npm:^7.8.1"
+    "@navikt/ds-tokens": "npm:^7.8.1"
     concurrently: "npm:9.0.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3758,7 +3758,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:7.4.0"
+    "@navikt/ds-css": "npm:7.8.1"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3779,14 +3779,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.4.0, @navikt/ds-css@npm:^7.4.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.8.1, @navikt/ds-css@npm:^7.8.1, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.4.0"
+    "@navikt/ds-tokens": "npm:^7.8.1"
+    "@types/clean-css": "npm:4.2.11"
     autoprefixer: "npm:^10.4.20"
+    browserslist: "npm:^4.24.2"
+    clean-css: "npm:5.3.3"
     cssnano: "npm:6.0.0"
     fast-glob: "npm:3.2.11"
+    lightningcss: "npm:^1.28.0"
     lodash: "npm:^4.17.21"
     nodemon: "npm:^3.0.1"
     normalize.css: "npm:^8.0.1"
@@ -3794,17 +3798,19 @@ __metadata:
     postcss-cli: "npm:^9.0.0"
     postcss-combine-duplicated-selectors: "npm:10.0.3"
     postcss-import: "npm:^14.1.0"
+    tsx: "npm:^4.7.1"
+    vitest: "npm:^1.2.2"
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.4.0, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.8.1, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.4.0"
-    "@navikt/ds-tokens": "npm:^7.4.0"
+    "@navikt/aksel-icons": "npm:^7.8.1"
+    "@navikt/ds-tokens": "npm:^7.8.1"
     "@testing-library/dom": "npm:9.3.4"
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
@@ -3824,19 +3830,19 @@ __metadata:
     typescript: "npm:5.5.4"
     vitest: "npm:^1.2.2"
   peerDependencies:
-    "@types/react": ^17.0.30 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
+    "@types/react": ">=17.0.30"
+    react: ">=17.0.0 || >19.0.0-rc"
   peerDependenciesMeta:
     "@types/react":
       optional: true
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.4.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.8.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.4.0"
+    "@navikt/ds-tokens": "npm:^7.8.1"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3846,7 +3852,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.4.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.8.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -3854,7 +3860,7 @@ __metadata:
     color: "npm:4.2.3"
     colorjs.io: "npm:^0.5.2"
     esbuild: "npm:^0.24.0"
-    lightningcss: "npm:^1.27.0"
+    lightningcss: "npm:^1.28.0"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
     tsx: "npm:^4.19.1"
@@ -6099,6 +6105,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/clean-css@npm:4.2.11":
+  version: 4.2.11
+  resolution: "@types/clean-css@npm:4.2.11"
+  dependencies:
+    "@types/node": "npm:*"
+    source-map: "npm:^0.6.0"
+  checksum: 10/385337a881c7870664d8987f12b9c814d835104dcf5f1737b74ab759ca68424ce93636cbff73ea9c41290c3dc2a92a4cc6246869bd9982255cfa28dcc2ccec93
+  languageName: node
+  linkType: hard
+
 "@types/codemirror@npm:^5.60.5":
   version: 5.60.15
   resolution: "@types/codemirror@npm:5.60.15"
@@ -7477,16 +7493,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@whitespace/storybook-addon-html@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "@whitespace/storybook-addon-html@npm:6.1.1"
-  peerDependencies:
-    prettier: ^3.0.0
-    react-syntax-highlighter: ^15.0.0
-  checksum: 10/c0f006d2cfd7f7b04fae41beb20b60d701d12a3b5a0974e3e2d09f93431e214dde101574eea9d6ae532583d513c107f00a89c95223454bbe0e3b8a45ab7f1067
-  languageName: node
-  linkType: hard
-
 "@xobotyi/scrollbar-width@npm:^1.9.5":
   version: 1.9.5
   resolution: "@xobotyi/scrollbar-width@npm:1.9.5"
@@ -7729,11 +7735,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.4.0"
-    "@navikt/ds-css": "npm:^7.4.0"
-    "@navikt/ds-react": "npm:^7.4.0"
-    "@navikt/ds-tailwind": "npm:^7.4.0"
-    "@navikt/ds-tokens": "npm:^7.4.0"
+    "@navikt/aksel-icons": "npm:^7.8.1"
+    "@navikt/ds-css": "npm:^7.8.1"
+    "@navikt/ds-react": "npm:^7.8.1"
+    "@navikt/ds-tailwind": "npm:^7.8.1"
+    "@navikt/ds-tokens": "npm:^7.8.1"
   languageName: unknown
   linkType: soft
 
@@ -7761,7 +7767,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.8.1"
     "@typescript-eslint/parser": "npm:^8.8.1"
     "@vitest/eslint-plugin": "npm:^1.1.4"
-    "@whitespace/storybook-addon-html": "npm:^6.1.1"
     chromatic: "npm:11.5.4"
     concurrently: "npm:9.0.1"
     cross-env: "npm:^7.0.0"
@@ -7781,7 +7786,6 @@ __metadata:
     react: "npm:^18.0.0"
     react-docgen-typescript: "npm:2.2.2"
     react-dom: "npm:^18.0.0"
-    react-syntax-highlighter: "npm:^15.5.0"
     storybook: "npm:^8.3.4"
     storybook-addon-pseudo-states: "npm:^4.0.2"
     stylelint: "npm:^16.10.0"
@@ -8715,6 +8719,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browserslist@npm:^4.24.2":
+  version: 4.24.2
+  resolution: "browserslist@npm:4.24.2"
+  dependencies:
+    caniuse-lite: "npm:^1.0.30001669"
+    electron-to-chromium: "npm:^1.5.41"
+    node-releases: "npm:^2.0.18"
+    update-browserslist-db: "npm:^1.1.1"
+  bin:
+    browserslist: cli.js
+  checksum: 10/f8a9d78bbabe466c57ffd5c50a9e5582a5df9aa68f43078ca62a9f6d0d6c70ba72eca72d0a574dbf177cf55cdca85a46f7eb474917a47ae5398c66f8b76f7d1c
+  languageName: node
+  linkType: hard
+
 "buffer-alloc-unsafe@npm:^1.1.0":
   version: 1.1.0
   resolution: "buffer-alloc-unsafe@npm:1.1.0"
@@ -8931,6 +8949,13 @@ __metadata:
   version: 1.0.30001669
   resolution: "caniuse-lite@npm:1.0.30001669"
   checksum: 10/cd0b481bb997703cb7651e55666b4aa4e7b4ecf9784796e2393179a15e55c71a6abc6ff865c922bbd3bbfa4a4bf0530d8da13989b97ff8c7850c8a5bd4e00491
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001669":
+  version: 1.0.30001686
+  resolution: "caniuse-lite@npm:1.0.30001686"
+  checksum: 10/dc34d4daa992256b94def2894e478ba4d9786581dff3b180d642d74c7578f7d8958be985d9da5d08f09b81dd9811b653e4980616bae26b1896968cfdf8d535da
   languageName: node
   linkType: hard
 
@@ -9183,7 +9208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clean-css@npm:^5.2.2":
+"clean-css@npm:5.3.3, clean-css@npm:^5.2.2":
   version: 5.3.3
   resolution: "clean-css@npm:5.3.3"
   dependencies:
@@ -11047,6 +11072,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"electron-to-chromium@npm:^1.5.41":
+  version: 1.5.68
+  resolution: "electron-to-chromium@npm:1.5.68"
+  checksum: 10/405fbed1feda987c586e40fdf19a8cbf83bfa77458d5f873cdf8801d083c6e49258a7de285b86405e00655d12eaede864c45af58a32f8e83c12e6d07f39482af
+  languageName: node
+  linkType: hard
+
 "emoji-regex@npm:^8.0.0":
   version: 8.0.0
   resolution: "emoji-regex@npm:8.0.0"
@@ -12408,15 +12440,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fault@npm:^1.0.0":
-  version: 1.0.4
-  resolution: "fault@npm:1.0.4"
-  dependencies:
-    format: "npm:^0.2.0"
-  checksum: 10/5ac610d8b09424e0f2fa8cf913064372f2ee7140a203a79957f73ed557c0e79b1a3d096064d7f40bde8132a69204c1fe25ec23634c05c6da2da2039cff26c4e7
-  languageName: node
-  linkType: hard
-
 "faye-websocket@npm:^0.11.3":
   version: 0.11.4
   resolution: "faye-websocket@npm:0.11.4"
@@ -12762,13 +12785,6 @@ __metadata:
     combined-stream: "npm:^1.0.8"
     mime-types: "npm:^2.1.12"
   checksum: 10/6adb1cff557328bc6eb8a68da205f9ae44ab0e88d4d9237aaf91eed591ffc64f77411efb9016af7d87f23d0a038c45a788aa1c6634e51175c4efa36c2bc53774
-  languageName: node
-  linkType: hard
-
-"format@npm:^0.2.0":
-  version: 0.2.2
-  resolution: "format@npm:0.2.2"
-  checksum: 10/5f878b8fc1a672c8cbefa4f293bdd977c822862577d70d53456a48b4169ec9b51677c0c995bf62c633b4e5cd673624b7c273f57923b28735a6c0c0a72c382a4a
   languageName: node
   linkType: hard
 
@@ -13745,20 +13761,6 @@ __metadata:
   version: 5.0.0
   resolution: "help-me@npm:5.0.0"
   checksum: 10/5f99bd91dae93d02867175c3856c561d7e3a24f16999b08f5fc79689044b938d7ed58457f4d8c8744c01403e6e0470b7896baa344d112b2355842fd935a75d69
-  languageName: node
-  linkType: hard
-
-"highlight.js@npm:^10.4.1, highlight.js@npm:~10.7.0":
-  version: 10.7.3
-  resolution: "highlight.js@npm:10.7.3"
-  checksum: 10/db8d10a541936b058e221dbde77869664b2b45bca75d660aa98065be2cd29f3924755fbc7348213f17fd931aefb6e6597448ba6fe82afba6d8313747a91983ee
-  languageName: node
-  linkType: hard
-
-"highlightjs-vue@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "highlightjs-vue@npm:1.0.0"
-  checksum: 10/44c9187a19fa3c7eac16bf1d327c03cb07c4b444f744624eaf873eb55e4e449a0bb6573b8ba5982006b65743707d6cad39cfc404f3fe5fb8aeb740a57ff6bc24
   languageName: node
   linkType: hard
 
@@ -15668,91 +15670,91 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss-darwin-arm64@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-darwin-arm64@npm:1.27.0"
+"lightningcss-darwin-arm64@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-darwin-arm64@npm:1.28.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-darwin-x64@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-darwin-x64@npm:1.27.0"
+"lightningcss-darwin-x64@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-darwin-x64@npm:1.28.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-freebsd-x64@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-freebsd-x64@npm:1.27.0"
+"lightningcss-freebsd-x64@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-freebsd-x64@npm:1.28.2"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm-gnueabihf@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.27.0"
+"lightningcss-linux-arm-gnueabihf@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.28.2"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm64-gnu@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-linux-arm64-gnu@npm:1.27.0"
+"lightningcss-linux-arm64-gnu@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-linux-arm64-gnu@npm:1.28.2"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm64-musl@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-linux-arm64-musl@npm:1.27.0"
+"lightningcss-linux-arm64-musl@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-linux-arm64-musl@npm:1.28.2"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-linux-x64-gnu@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-linux-x64-gnu@npm:1.27.0"
+"lightningcss-linux-x64-gnu@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-linux-x64-gnu@npm:1.28.2"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-linux-x64-musl@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-linux-x64-musl@npm:1.27.0"
+"lightningcss-linux-x64-musl@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-linux-x64-musl@npm:1.28.2"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-win32-arm64-msvc@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-win32-arm64-msvc@npm:1.27.0"
+"lightningcss-win32-arm64-msvc@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-win32-arm64-msvc@npm:1.28.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-win32-x64-msvc@npm:1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss-win32-x64-msvc@npm:1.27.0"
+"lightningcss-win32-x64-msvc@npm:1.28.2":
+  version: 1.28.2
+  resolution: "lightningcss-win32-x64-msvc@npm:1.28.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss@npm:^1.27.0":
-  version: 1.27.0
-  resolution: "lightningcss@npm:1.27.0"
+"lightningcss@npm:^1.28.0":
+  version: 1.28.2
+  resolution: "lightningcss@npm:1.28.2"
   dependencies:
     detect-libc: "npm:^1.0.3"
-    lightningcss-darwin-arm64: "npm:1.27.0"
-    lightningcss-darwin-x64: "npm:1.27.0"
-    lightningcss-freebsd-x64: "npm:1.27.0"
-    lightningcss-linux-arm-gnueabihf: "npm:1.27.0"
-    lightningcss-linux-arm64-gnu: "npm:1.27.0"
-    lightningcss-linux-arm64-musl: "npm:1.27.0"
-    lightningcss-linux-x64-gnu: "npm:1.27.0"
-    lightningcss-linux-x64-musl: "npm:1.27.0"
-    lightningcss-win32-arm64-msvc: "npm:1.27.0"
-    lightningcss-win32-x64-msvc: "npm:1.27.0"
+    lightningcss-darwin-arm64: "npm:1.28.2"
+    lightningcss-darwin-x64: "npm:1.28.2"
+    lightningcss-freebsd-x64: "npm:1.28.2"
+    lightningcss-linux-arm-gnueabihf: "npm:1.28.2"
+    lightningcss-linux-arm64-gnu: "npm:1.28.2"
+    lightningcss-linux-arm64-musl: "npm:1.28.2"
+    lightningcss-linux-x64-gnu: "npm:1.28.2"
+    lightningcss-linux-x64-musl: "npm:1.28.2"
+    lightningcss-win32-arm64-msvc: "npm:1.28.2"
+    lightningcss-win32-x64-msvc: "npm:1.28.2"
   dependenciesMeta:
     lightningcss-darwin-arm64:
       optional: true
@@ -15774,7 +15776,7 @@ __metadata:
       optional: true
     lightningcss-win32-x64-msvc:
       optional: true
-  checksum: 10/275a0103c7dc1dfcf8e456a0523d1719a1caff916c45229ec62cdb28a814dce12b7065b88865fb74fc03a2a658ac3361caff5c348f1646313513c125d4f27954
+  checksum: 10/6d3b083901c4c9cdee0652100803bd7bc89b2acbf9937b5a2e0bd82ff9b27e99a5e04ed9d032d291464cf0abc30b2d9c54b52f2d0b1318a1534af90c0b0a3477
   languageName: node
   linkType: hard
 
@@ -16096,16 +16098,6 @@ __metadata:
   dependencies:
     tslib: "npm:^2.0.3"
   checksum: 10/83a0a5f159ad7614bee8bf976b96275f3954335a84fad2696927f609ddae902802c4f3312d86668722e668bef41400254807e1d3a7f2e8c3eede79691aa1f010
-  languageName: node
-  linkType: hard
-
-"lowlight@npm:^1.17.0":
-  version: 1.20.0
-  resolution: "lowlight@npm:1.20.0"
-  dependencies:
-    fault: "npm:^1.0.0"
-    highlight.js: "npm:~10.7.0"
-  checksum: 10/3294677be15bbc256556f097d9b675f23f14309aceeada7880473c57bdbdd7761f200d903fe26d8fa5e82259f70a39465d1d40754c4c049ad2bbd33d77e2c06f
   languageName: node
   linkType: hard
 
@@ -19839,13 +19831,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prismjs@npm:^1.27.0":
-  version: 1.29.0
-  resolution: "prismjs@npm:1.29.0"
-  checksum: 10/2080db382c2dde0cfc7693769e89b501ef1bfc8ff4f8d25c07fd4c37ca31bc443f6133d5b7c145a73309dc396e829ddb7cc18560026d862a887ae08864ef6b07
-  languageName: node
-  linkType: hard
-
 "prismjs@npm:~1.27.0":
   version: 1.27.0
   resolution: "prismjs@npm:1.27.0"
@@ -20575,22 +20560,6 @@ __metadata:
   dependencies:
     prop-types: "npm:^15.5.4"
   checksum: 10/c068f10a639f743b311b3a6dd8bdd1b87436ab8d30a10ff4f30840a89decdd2e2eea33a2cefb504274ff58b624680d27f29daefece0f7435cfc8efae070d4e8d
-  languageName: node
-  linkType: hard
-
-"react-syntax-highlighter@npm:^15.5.0":
-  version: 15.6.1
-  resolution: "react-syntax-highlighter@npm:15.6.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.1"
-    highlight.js: "npm:^10.4.1"
-    highlightjs-vue: "npm:^1.0.0"
-    lowlight: "npm:^1.17.0"
-    prismjs: "npm:^1.27.0"
-    refractor: "npm:^3.6.0"
-  peerDependencies:
-    react: ">= 0.14.0"
-  checksum: 10/9a89c81f7dcc109b038dc2a73189fa1ea916e6485d8a39856ab3d01d2c753449b5ae1c0df9c9ee0ed5c8c9808a68422b19af9a168ec091a274bddc7ad092eb86
   languageName: node
   linkType: hard
 
@@ -24663,7 +24632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"update-browserslist-db@npm:^1.1.0":
+"update-browserslist-db@npm:^1.1.0, update-browserslist-db@npm:^1.1.1":
   version: 1.1.1
   resolution: "update-browserslist-db@npm:1.1.1"
   dependencies:

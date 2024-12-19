@@ -78,6 +78,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       onChange: onOpenChange,
     });
     const translate = useI18n("global");
+
     const id = useId();
 
     const expansionHandler = (event: React.MouseEvent<HTMLElement>) => {
@@ -110,7 +111,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
             className={cl("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
-            onClick={expansionHandler}
+            onClick={!expansionDisabled ? expansionHandler : () => null}
           >
             {!expansionDisabled && (
               <button
@@ -129,13 +130,19 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           </DataCell>
           {togglePlacement === "left" && children}
         </Row>
-        <tr className="navds-table__expanded-row" aria-hidden={!_open} id={id}>
+        <tr
+          data-state={_open ? "open" : "closed"}
+          className="navds-table__expanded-row"
+          aria-hidden={!_open}
+          id={id}
+        >
           <td colSpan={colSpan} className="navds-table__expanded-row-cell">
             <AnimateHeight
               className="navds-table__expanded-row-collapse"
               innerClassName="navds-table__expanded-row-content"
               height={_open ? "auto" : 0}
-              duration={250}
+              duration={150}
+              easing="cubic-bezier(0.39,0.57,0.56,1)"
             >
               {content}
             </AnimateHeight>

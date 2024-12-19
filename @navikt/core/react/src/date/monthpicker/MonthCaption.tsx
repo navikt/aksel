@@ -10,8 +10,7 @@ import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
-import { useSharedMonthContext } from "../context";
-import { labelNextYear, labelPrevYear } from "../utils";
+import { useDateTranslationContext, useSharedMonthContext } from "../context";
 
 export const MonthCaption = () => {
   const {
@@ -20,8 +19,8 @@ export const MonthCaption = () => {
     formatters: { formatYearCaption },
     locale,
   } = useDayPicker();
-
   const { hasDropdown, year, toYear } = useSharedMonthContext();
+  const translate = useDateTranslationContext().translate;
 
   const years: Date[] = [];
 
@@ -38,8 +37,8 @@ export const MonthCaption = () => {
     years.sort((a, b) => b.getFullYear() - a.getFullYear());
   }
 
-  const handleYearChange = (e) =>
-    toYear(setYear(startOfMonth(new Date()), Number(e.target.value)));
+  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    toYear(setYear(startOfMonth(new Date()), Number(event.target.value)));
 
   const handleButtonClick = (val: number) => {
     const newYear = Number(year.getFullYear() + val);
@@ -64,17 +63,16 @@ export const MonthCaption = () => {
         className="navds-date__caption-button"
         disabled={disablePreviousYear()}
         onClick={() => handleButtonClick(-1)}
-        aria-label={labelPrevYear(locale?.code)}
-        icon={<ArrowLeftIcon aria-hidden />}
+        icon={<ArrowLeftIcon title={translate("goToPreviousYear")} />}
         variant="tertiary"
         type="button"
       />
 
       {hasDropdown ? (
         <Select
-          label="velg år"
+          label={translate("year")}
           hideLabel
-          value={year?.getFullYear()}
+          value={year.getFullYear()}
           onChange={handleYearChange}
           className="navds-date__caption__year"
         >
@@ -93,8 +91,7 @@ export const MonthCaption = () => {
         className="navds-date__caption-button"
         disabled={disableNextYear()}
         onClick={() => handleButtonClick(1)}
-        aria-label={labelNextYear(locale?.code)}
-        icon={<ArrowRightIcon aria-hidden />}
+        icon={<ArrowRightIcon title={translate("goToNextYear")} />}
         variant="tertiary"
         type="button"
       />

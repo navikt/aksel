@@ -2,8 +2,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import React, { useRef } from "react";
 import { VStack } from "../../layout/stack";
-import UNSAFE_AkselLanguageProvider from "../../provider/i18n/LanguageProvider";
-import nn from "../../util/i18n/locales/nn";
 import { ErrorSummary } from "./ErrorSummary";
 
 export default {
@@ -21,7 +19,7 @@ export const Default: Story = {
     <ErrorSummary headingTag={headingTag || undefined} {...rest}>
       <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
       <ErrorSummary.Item href="#2">
-        Tekstfeltet må ha en godkjent e-mail
+        Tekstfeltet må ha en godkjent e-post
       </ErrorSummary.Item>
     </ErrorSummary>
   ),
@@ -50,7 +48,7 @@ export const Small: Story = {
     <ErrorSummary heading="Feiloppsummering komponent" size="small">
       <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
       <ErrorSummary.Item href="#2">
-        Tekstfeltet må ha en godkjent e-mail
+        Tekstfeltet må ha en godkjent e-post
       </ErrorSummary.Item>
     </ErrorSummary>
   ),
@@ -72,7 +70,7 @@ export const A11yDemo: Story = {
         <ErrorSummary heading="Feiloppsummering tittel" ref={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
+            Tekstfeltet må ha en godkjent e-post
           </ErrorSummary.Item>
         </ErrorSummary>
       </div>
@@ -89,7 +87,7 @@ export const FocusDemo: Story = {
         <ErrorSummary heading="Feiloppsummering tittel" ref={ref}>
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
+            Tekstfeltet må ha en godkjent e-post
           </ErrorSummary.Item>
         </ErrorSummary>
       </div>
@@ -117,7 +115,7 @@ export const Chromatic: Story = {
         <ErrorSummary heading="Feiloppsummering komponent">
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
+            Tekstfeltet må ha en godkjent e-post
           </ErrorSummary.Item>
         </ErrorSummary>
       </div>
@@ -126,7 +124,7 @@ export const Chromatic: Story = {
         <ErrorSummary heading="Feiloppsummering komponent" size="small">
           <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
           <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
+            Tekstfeltet må ha en godkjent e-post
           </ErrorSummary.Item>
         </ErrorSummary>
       </div>
@@ -134,20 +132,5 @@ export const Chromatic: Story = {
   ),
   parameters: {
     chromatic: { disable: false },
-  },
-};
-
-export const ProvidedTranslations: Story = {
-  render: () => {
-    return (
-      <UNSAFE_AkselLanguageProvider translations={nn}>
-        <ErrorSummary size="small">
-          <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
-          <ErrorSummary.Item href="#2">
-            Tekstfeltet må ha en godkjent e-mail
-          </ErrorSummary.Item>
-        </ErrorSummary>
-      </UNSAFE_AkselLanguageProvider>
-    );
   },
 };

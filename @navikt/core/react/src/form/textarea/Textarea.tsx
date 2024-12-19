@@ -9,9 +9,6 @@ import { ReadOnlyIcon } from "../ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "./../useFormField";
 import Counter from "./TextareaCounter";
 
-/**
- * TODO: Mulighet for lokalisering av sr-only/counter text
- */
 export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -57,6 +54,7 @@ export interface TextareaProps
   UNSAFE_autoScrollbar?: boolean;
   /**
    * i18n-translations for counter-text
+   * @deprecated Use `<Provider />`-component
    */
   i18n?: {
     /** @default tegn igjen */
@@ -144,7 +142,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             "navds-sr-only": hideLabel,
           })}
         >
-          <ReadOnlyIcon readOnly={readOnly} />
+          {readOnly && <ReadOnlyIcon />}
           {label}
         </Label>
         {!!description && (
@@ -195,7 +193,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

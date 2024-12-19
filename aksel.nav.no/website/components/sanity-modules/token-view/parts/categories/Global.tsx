@@ -24,7 +24,11 @@ export const GlobalView = ({ cat }: { cat: string }) => {
                 <span className="flex min-h-8 items-center">
                   {sanitizeName(x.name)}
                 </span>
-                <CopyButton copyText={x.name} size="small" />
+                <CopyButton
+                  copyText={x.name}
+                  title={`${sanitizeName(x.name)} kopier`}
+                  size="small"
+                />
               </dt>
 
               <dd className="mt-auto text-medium text-text-subtle">

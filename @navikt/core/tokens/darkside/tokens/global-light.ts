@@ -1,6 +1,17 @@
-import { GlobalConfigT } from "../util";
+import { type ColorRoles, type GlobalColorScale } from "../../types";
+import { type GlobalColorEntry } from "../tokens.util";
 
-export const globalColorLightModeConfigWithoutAlpha: GlobalConfigT = {
+export const globalColorLightModeConfigWithoutAlpha: Record<
+  ColorRoles,
+  Record<
+    Exclude<GlobalColorScale, "000" | "100A" | "200A" | "300A" | "400A">,
+    GlobalColorEntry
+  >
+> & {
+  neutral: {
+    [key in Extract<GlobalColorScale, "000">]: GlobalColorEntry;
+  };
+} = {
   neutral: {
     "000": {
       value: "white",
@@ -78,64 +89,64 @@ export const globalColorLightModeConfigWithoutAlpha: GlobalConfigT = {
     "900": { value: "#00557d", type: "global-color", group: "info" },
     "1000": { value: "#002942", type: "global-color", group: "info" },
   },
-  brandOne: {
-    "100": { value: "#fbf3f6", type: "global-color", group: "brandOne" },
-    "200": { value: "#f8eaef", type: "global-color", group: "brandOne" },
-    "300": { value: "#f3dde5", type: "global-color", group: "brandOne" },
-    "400": { value: "#eccad6", type: "global-color", group: "brandOne" },
-    "500": { value: "#c26f92", type: "global-color", group: "brandOne" },
-    "600": { value: "#b65781", type: "global-color", group: "brandOne" },
-    "700": { value: "#a93d70", type: "global-color", group: "brandOne" },
-    "800": { value: "#a33069", type: "global-color", group: "brandOne" },
-    "900": { value: "#98185d", type: "global-color", group: "brandOne" },
-    "1000": { value: "#52002b", type: "global-color", group: "brandOne" },
+  "brand-magenta": {
+    "100": { value: "#fbf3f6", type: "global-color", group: "brand-magenta" },
+    "200": { value: "#f8eaef", type: "global-color", group: "brand-magenta" },
+    "300": { value: "#f3dde5", type: "global-color", group: "brand-magenta" },
+    "400": { value: "#eccad6", type: "global-color", group: "brand-magenta" },
+    "500": { value: "#c26f92", type: "global-color", group: "brand-magenta" },
+    "600": { value: "#b65781", type: "global-color", group: "brand-magenta" },
+    "700": { value: "#a93d70", type: "global-color", group: "brand-magenta" },
+    "800": { value: "#a33069", type: "global-color", group: "brand-magenta" },
+    "900": { value: "#98185d", type: "global-color", group: "brand-magenta" },
+    "1000": { value: "#52002b", type: "global-color", group: "brand-magenta" },
   },
-  brandTwo: {
-    "100": { value: "#fff4ee", type: "global-color", group: "brandTwo" },
-    "200": { value: "#fdebe0", type: "global-color", group: "brandTwo" },
-    "300": { value: "#fcddcd", type: "global-color", group: "brandTwo" },
-    "400": { value: "#f8c8b1", type: "global-color", group: "brandTwo" },
-    "500": { value: "#c0765d", type: "global-color", group: "brandTwo" },
-    "600": { value: "#a9654e", type: "global-color", group: "brandTwo" },
-    "700": { value: "#915541", type: "global-color", group: "brandTwo" },
-    "800": { value: "#874e3b", type: "global-color", group: "brandTwo" },
-    "900": { value: "#764332", type: "global-color", group: "brandTwo" },
-    "1000": { value: "#3c1f15", type: "global-color", group: "brandTwo" },
+  "brand-beige": {
+    "100": { value: "#fff4ee", type: "global-color", group: "brand-beige" },
+    "200": { value: "#fdebe0", type: "global-color", group: "brand-beige" },
+    "300": { value: "#fcddcd", type: "global-color", group: "brand-beige" },
+    "400": { value: "#f8c8b1", type: "global-color", group: "brand-beige" },
+    "500": { value: "#c0765d", type: "global-color", group: "brand-beige" },
+    "600": { value: "#a9654e", type: "global-color", group: "brand-beige" },
+    "700": { value: "#915541", type: "global-color", group: "brand-beige" },
+    "800": { value: "#874e3b", type: "global-color", group: "brand-beige" },
+    "900": { value: "#764332", type: "global-color", group: "brand-beige" },
+    "1000": { value: "#3c1f15", type: "global-color", group: "brand-beige" },
   },
-  brandThree: {
-    "100": { value: "#eef6fc", type: "global-color", group: "brandThree" },
-    "200": { value: "#e3eff7", type: "global-color", group: "brandThree" },
-    "300": { value: "#d7e6f0", type: "global-color", group: "brandThree" },
-    "400": { value: "#c0d6e4", type: "global-color", group: "brandThree" },
-    "500": { value: "#5a8fae", type: "global-color", group: "brandThree" },
-    "600": { value: "#417da0", type: "global-color", group: "brandThree" },
-    "700": { value: "#246b91", type: "global-color", group: "brandThree" },
-    "800": { value: "#156389", type: "global-color", group: "brandThree" },
-    "900": { value: "#00557d", type: "global-color", group: "brandThree" },
-    "1000": { value: "#002942", type: "global-color", group: "brandThree" },
+  "brand-blue": {
+    "100": { value: "#eef6fc", type: "global-color", group: "brand-blue" },
+    "200": { value: "#e3eff7", type: "global-color", group: "brand-blue" },
+    "300": { value: "#d7e6f0", type: "global-color", group: "brand-blue" },
+    "400": { value: "#c0d6e4", type: "global-color", group: "brand-blue" },
+    "500": { value: "#5a8fae", type: "global-color", group: "brand-blue" },
+    "600": { value: "#417da0", type: "global-color", group: "brand-blue" },
+    "700": { value: "#246b91", type: "global-color", group: "brand-blue" },
+    "800": { value: "#156389", type: "global-color", group: "brand-blue" },
+    "900": { value: "#00557d", type: "global-color", group: "brand-blue" },
+    "1000": { value: "#002942", type: "global-color", group: "brand-blue" },
   },
-  dataOne: {
-    "100": { value: "#f7f5f9", type: "global-color", group: "dataOne" },
-    "200": { value: "#f0edf4", type: "global-color", group: "dataOne" },
-    "300": { value: "#e6e1ed", type: "global-color", group: "dataOne" },
-    "400": { value: "#d7cfe3", type: "global-color", group: "dataOne" },
-    "500": { value: "#9580b1", type: "global-color", group: "dataOne" },
-    "600": { value: "#846ca4", type: "global-color", group: "dataOne" },
-    "700": { value: "#725a91", type: "global-color", group: "dataOne" },
-    "800": { value: "#6a5289", type: "global-color", group: "dataOne" },
-    "900": { value: "#5e467c", type: "global-color", group: "dataOne" },
-    "1000": { value: "#331a4d", type: "global-color", group: "dataOne" },
+  "meta-purple": {
+    "100": { value: "#f7f5f9", type: "global-color", group: "meta-purple" },
+    "200": { value: "#f0edf4", type: "global-color", group: "meta-purple" },
+    "300": { value: "#e6e1ed", type: "global-color", group: "meta-purple" },
+    "400": { value: "#d7cfe3", type: "global-color", group: "meta-purple" },
+    "500": { value: "#9580b1", type: "global-color", group: "meta-purple" },
+    "600": { value: "#846ca4", type: "global-color", group: "meta-purple" },
+    "700": { value: "#725a91", type: "global-color", group: "meta-purple" },
+    "800": { value: "#6a5289", type: "global-color", group: "meta-purple" },
+    "900": { value: "#5e467c", type: "global-color", group: "meta-purple" },
+    "1000": { value: "#331a4d", type: "global-color", group: "meta-purple" },
   },
-  dataTwo: {
-    "100": { value: "#f4f9d1", type: "global-color", group: "dataTwo" },
-    "200": { value: "#ebf4a9", type: "global-color", group: "dataTwo" },
-    "300": { value: "#e0ec6b", type: "global-color", group: "dataTwo" },
-    "400": { value: "#d0dc00", type: "global-color", group: "dataTwo" },
-    "500": { value: "#878f00", type: "global-color", group: "dataTwo" },
-    "600": { value: "#757c00", type: "global-color", group: "dataTwo" },
-    "700": { value: "#646900", type: "global-color", group: "dataTwo" },
-    "800": { value: "#5c6100", type: "global-color", group: "dataTwo" },
-    "900": { value: "#515400", type: "global-color", group: "dataTwo" },
-    "1000": { value: "#2a2800", type: "global-color", group: "dataTwo" },
+  "meta-lime": {
+    "100": { value: "#f4f9d1", type: "global-color", group: "meta-lime" },
+    "200": { value: "#ebf4a9", type: "global-color", group: "meta-lime" },
+    "300": { value: "#e0ec6b", type: "global-color", group: "meta-lime" },
+    "400": { value: "#d0dc00", type: "global-color", group: "meta-lime" },
+    "500": { value: "#878f00", type: "global-color", group: "meta-lime" },
+    "600": { value: "#757c00", type: "global-color", group: "meta-lime" },
+    "700": { value: "#646900", type: "global-color", group: "meta-lime" },
+    "800": { value: "#5c6100", type: "global-color", group: "meta-lime" },
+    "900": { value: "#515400", type: "global-color", group: "meta-lime" },
+    "1000": { value: "#2a2800", type: "global-color", group: "meta-lime" },
   },
-};
+} as const;
