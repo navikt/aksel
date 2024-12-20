@@ -603,10 +603,11 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "docgen": "yarn tsx ../../../scripts/docgen.ts",
+    "docgen": "tsx ../../../scripts/docgen.ts",
+    "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
+    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
     "test:watch": "vitest watch"
