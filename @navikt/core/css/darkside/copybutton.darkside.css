@@ -1,5 +1,5 @@
 .navds-copybutton {
-  --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-5) var(--ax-spacing-3) var(--ax-spacing-4);
+  --__axc-copybutton-padding: var(--ax-space-12) var(--ax-space-20) var(--ax-space-12) var(--ax-space-16);
 
   cursor: pointer;
   margin: 0;
@@ -13,11 +13,11 @@
   transition: color 0.2s cubic-bezier(0.05, 0.7, 0.1, 1);
 
   &.navds-copybutton--icon-only {
-    --__axc-copybutton-padding: var(--ax-spacing-3);
+    --__axc-copybutton-padding: var(--ax-space-12);
   }
 
   &.navds-copybutton--icon-right {
-    --__axc-copybutton-padding: var(--ax-spacing-3) var(--ax-spacing-4) var(--ax-spacing-3) var(--ax-spacing-5);
+    --__axc-copybutton-padding: var(--ax-space-12) var(--ax-space-16) var(--ax-space-12) var(--ax-space-20);
   }
 
   &:hover {
@@ -57,14 +57,14 @@
   min-height: 2rem;
   min-width: 2rem;
 
-  --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-3) var(--ax-spacing-1) var(--ax-spacing-2);
+  --__axc-copybutton-padding: var(--ax-space-4) var(--ax-space-12) var(--ax-space-4) var(--ax-space-8);
 
   &.navds-copybutton--icon-right {
-    --__axc-copybutton-padding: var(--ax-spacing-1) var(--ax-spacing-2) var(--ax-spacing-1) var(--ax-spacing-3);
+    --__axc-copybutton-padding: var(--ax-space-4) var(--ax-space-8) var(--ax-space-4) var(--ax-space-12);
   }
 
   &.navds-copybutton--icon-only {
-    --__axc-copybutton-padding: var(--ax-spacing-1);
+    --__axc-copybutton-padding: var(--ax-space-4);
   }
 
   & .navds-copybutton__icon {
@@ -72,7 +72,7 @@
   }
 
   & > .navds-copybutton__content {
-    gap: var(--ax-spacing-1-alt);
+    gap: var(--ax-space-6);
   }
 }
 
@@ -81,14 +81,14 @@
   min-height: 1.5rem;
   min-width: 1.5rem;
 
-  --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-2) var(--ax-spacing-05) var(--ax-spacing-1);
+  --__axc-copybutton-padding: var(--ax-space-2) var(--ax-space-8) var(--ax-space-2) var(--ax-space-4);
 
   &.navds-copybutton--icon-right {
-    --__axc-copybutton-padding: var(--ax-spacing-05) var(--ax-spacing-1) var(--ax-spacing-05) var(--ax-spacing-2);
+    --__axc-copybutton-padding: var(--ax-space-2) var(--ax-space-4) var(--ax-space-2) var(--ax-space-8);
   }
 
   &.navds-copybutton--icon-only {
-    --__axc-copybutton-padding: var(--ax-spacing-05);
+    --__axc-copybutton-padding: var(--ax-space-2);
   }
 
   & .navds-copybutton__icon {
@@ -96,7 +96,7 @@
   }
 
   & > .navds-copybutton__content {
-    gap: var(--ax-spacing-1);
+    gap: var(--ax-space-4);
   }
 }
 
@@ -179,5 +179,5 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 }

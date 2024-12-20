@@ -9,7 +9,7 @@
   align-items: center;
   color: var(--ax-bg-accent-strong);
   font-size: 1.25rem;
-  padding: calc(var(--ax-spacing-1) / 2);
+  padding: calc(var(--ax-space-4) / 2);
 }
 
 .navds-help-text__icon {
@@ -18,7 +18,7 @@
 
 .navds-help-text__popover.navds-popover {
   background-color: var(--ax-bg-info-moderate);
-  max-width: min(65ch, calc(100vw - var(--ax-spacing-6)));
+  max-width: min(65ch, calc(100vw - var(--ax-space-24)));
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info);
 }

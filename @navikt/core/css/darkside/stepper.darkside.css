@@ -18,7 +18,7 @@
     [line-2 step-end] auto;
   grid-template-columns: var(--__axc-stepper-circle-size) auto;
   justify-items: flex-start;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 }
 
 .navds-stepper__line {
@@ -60,7 +60,7 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: [circle] var(--__axc-stepper-circle-size) [content] auto;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   justify-content: flex-start;
   cursor: pointer;
   padding: var(--__axc-stepper-border-width);

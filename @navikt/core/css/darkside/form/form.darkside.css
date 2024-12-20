@@ -1,7 +1,7 @@
 .navds-form-field {
   display: grid;
   justify-items: start;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 }
 
 .navds-form-field__description {
@@ -27,8 +27,8 @@
 }
 
 .navds-form-field__readonly-icon {
-  margin-top: var(--ax-spacing-05);
-  margin-right: var(--ax-spacing-1);
+  margin-top: var(--ax-space-2);
+  margin-right: var(--ax-space-4);
   flex-shrink: 0;
   align-self: flex-start;
 }

@@ -1,5 +1,5 @@
 .navds-date {
-  padding: var(--ax-spacing-4) var(--ax-spacing-3);
+  padding: var(--ax-space-16) var(--ax-space-12);
 
   .rdp-day_range_middle {
     &.rdp-day_disabled {
@@ -17,7 +17,7 @@
   .rdp-month,
   &.rdp-month {
     display: grid;
-    gap: var(--ax-spacing-5);
+    gap: var(--ax-space-20);
   }
 
   .navds-date__caption-label {
@@ -121,8 +121,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--ax-spacing-1);
-  padding-inline: var(--ax-spacing-1);
+  gap: var(--ax-space-4);
+  padding-inline: var(--ax-space-4);
 }
 
 .navds-date__caption-button {
@@ -172,11 +172,11 @@
 
 .navds-date__field-input {
   &.navds-text-field__input {
-    padding-right: var(--ax-spacing-12);
+    padding-right: var(--ax-space-48);
   }
 
   .navds-form-field--small & {
-    padding-right: var(--ax-spacing-8);
+    padding-right: var(--ax-space-32);
   }
 }
 
@@ -193,7 +193,7 @@
   border: none;
   background: none;
   border-radius: calc(var(--ax-border-radius-medium) - 1px);
-  padding: var(--ax-spacing-3);
+  padding: var(--ax-space-12);
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
@@ -202,7 +202,7 @@
   border-end-start-radius: 0;
 
   .navds-form-field--small & {
-    padding: var(--ax-spacing-1);
+    padding: var(--ax-space-4);
   }
 
   .navds-form-field--disabled & {
@@ -230,7 +230,7 @@
 .navds-date__week-row {
   display: flex;
   align-items: center;
-  gap: var(--ax-spacing-05);
+  gap: var(--ax-space-2);
 }
 
 .navds-date__weeknumber {
@@ -258,21 +258,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: var(--ax-spacing-4);
-  gap: var(--ax-spacing-2);
+  padding: var(--ax-space-16);
+  gap: var(--ax-space-8);
 }
 
 @media (min-width: 480px) {
   .navds-date {
-    padding: var(--ax-spacing-5) var(--ax-spacing-4);
+    padding: var(--ax-space-20) var(--ax-space-16);
   }
 
   .navds-date__modal-body {
-    padding: var(--ax-spacing-6);
+    padding: var(--ax-space-24);
   }
 
   .navds-date__caption {
-    gap: var(--ax-spacing-2);
+    gap: var(--ax-space-8);
   }
 
   .navds-date .rdp-button,
