@@ -20,7 +20,7 @@ export type FigmaTokenConfig = {
   timestamp: string;
   colors: { light: ColorThemeEntry; dark: ColorThemeEntry };
   radius: FigmaConfigEntry;
-  spacing: FigmaConfigEntry;
+  space: FigmaConfigEntry;
 };
 
 type ColorThemeEntry = {
