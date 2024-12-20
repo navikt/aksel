@@ -71,7 +71,11 @@ export const Combobox = forwardRef<
         aria-relevant="additions removals"
         aria-live="polite"
       >
-        {showErrorMsg && <ErrorMessage size={size}>{error}</ErrorMessage>}
+        {showErrorMsg && (
+          <ErrorMessage size={size} showIcon>
+            {error}
+          </ErrorMessage>
+        )}
       </div>
     </ComboboxWrapper>
   );

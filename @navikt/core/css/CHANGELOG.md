@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.8.1
+
+### Patch Changes
+
+- Alert: Link-components used within Alert variant='inline' now preserves default coloring ([#3461](https://github.com/navikt/aksel/pull/3461))
+
+- Table: :fire: Removed cursor 'pointer' when 'ExpandableRow' is disabled. ([#3462](https://github.com/navikt/aksel/pull/3462))
+
 ## 7.8.0
 
 ### Minor Changes

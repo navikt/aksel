@@ -216,6 +216,18 @@
   color: var(--ac-typo-error-text, var(--__ac-typo-error-text, var(--a-text-danger)));
 }
 
+.navds-error-message.navds-error-message--show-icon {
+  display: flex;
+  gap: var(--a-spacing-1);
+}
+
+.navds-error-message.navds-error-message--show-icon svg {
+  margin-top: 0.15em;
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+}
+
 .navds-typo--truncate {
   overflow: hidden;
   white-space: nowrap;

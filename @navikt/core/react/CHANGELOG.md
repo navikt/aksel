@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.8.1
+
+### Patch Changes
+
+- Combobox: Only open dropdown-list onClick, not onFocus. ([#3440](https://github.com/navikt/aksel/pull/3440))
+
+- Combobox: Fix issue where you could select more options than defined in maxSelected ([#3434](https://github.com/navikt/aksel/pull/3434))
+
+- Timeline: In cases where earliest found date were after current date, timeline-start ended up defaulting to current date. ([#3458](https://github.com/navikt/aksel/pull/3458))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.8.1
+  - @navikt/aksel-icons@7.8.1
+
 ## 7.8.0
 
 ### Minor Changes

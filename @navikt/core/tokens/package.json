@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "7.8.0",
-  "description": "Design-tokens for NAV designsystem",
-  "author": "Aksel | NAV designsystem team",
+  "version": "7.8.1",
+  "description": "Design-tokens for Nav designsystem",
+  "author": "Aksel | Nav designsystem team",
   "keywords": [
     "css",
     "less",
@@ -17,7 +17,7 @@
     "docs.json"
   ],
   "scripts": {
-    "build": "tsx ./config/build.ts > /dev/null && tsx ./config/version-tag.ts && yarn build:darkside",
+    "build": "tsx ./config/build.ts > /dev/null && yarn build:darkside && tsx ./config/version-tag.ts",
     "build:darkside": "tsx ./darkside && yarn build:figma-config && yarn build:plugin",
     "build:figma-config": "tsx ./darkside/figma",
     "build:plugin-dev": "esbuild darkside/figma/plugin/plugin.ts --target=es2016 --bundle --define:process.env.NODE_ENV=\\\"development\\\" --outfile='darkside/figma/plugin/plugin.js'",

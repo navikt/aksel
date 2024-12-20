@@ -9,7 +9,7 @@ const Example = () => {
         delvis i 12 måneder,
       </List.Item>
       <List.Item>
-        har full eller gradert uføretrygd, men ønsker å jobbe. NAV må ha vurdert
+        har full eller gradert uføretrygd, men ønsker å jobbe. Nav må ha vurdert
         om andre arbeidsmarkedstiltak og virkemidler er aktuelle, eller
       </List.Item>
       <List.Item>

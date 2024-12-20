@@ -204,6 +204,18 @@
 
 .navds-error-message {
   color: var(--ax-text-danger);
+
+  &.navds-error-message--show-icon {
+    display: flex;
+    gap: var(--ax-spacing-1);
+
+    & svg {
+      margin-top: 0.15em;
+      flex: 0 0 auto;
+      width: 1em;
+      height: 1em;
+    }
+  }
 }
 
 /* -------------------------------- Utilities ------------------------------- */

@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { UNSAFE_useAkselTheme } from "../../provider";
+import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -92,7 +92,7 @@ interface SearchComponent
  * @example
  * ```jsx
  * <form role="search">
- *   <Search label="Søk alle NAV sine sider" variant="primary" />
+ *   <Search label="Søk alle Nav sine sider" variant="primary" />
  * </form>
  * ```
  */
@@ -125,7 +125,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = useMergeRefs(searchRef, ref);
@@ -263,7 +263,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           aria-live="polite"
         >
           {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+            <ErrorMessage size={size} showIcon>
+              {props.error}
+            </ErrorMessage>
           )}
         </div>
       </div>

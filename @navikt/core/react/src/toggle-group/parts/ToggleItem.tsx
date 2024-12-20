@@ -76,6 +76,7 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(
         type="button"
         role="radio"
         aria-checked={itemCtx.isSelected}
+        data-selected={itemCtx.isSelected}
         tabIndex={itemCtx.isFocused ? 0 : -1}
         onClick={itemCtx.onClick}
         onFocus={itemCtx.onFocus}

@@ -33,6 +33,7 @@ export const InputController = forwardRef<
     toggleListButton = true,
     inputClassName,
     shouldShowSelectedOptions = true,
+
     ...rest
   } = props;
 
@@ -45,7 +46,7 @@ export const InputController = forwardRef<
     readOnly,
   } = useInputContext();
 
-  const { activeDecendantId } = useFilteredOptionsContext();
+  const { activeDecendantId, toggleIsListOpen } = useFilteredOptionsContext();
   const { selectedOptions } = useSelectedOptionsContext();
 
   const mergedInputRef = useMergeRefs(inputRef, ref);
@@ -57,7 +58,14 @@ export const InputController = forwardRef<
         "navds-combobox__wrapper-inner--virtually-unfocused":
           activeDecendantId !== undefined,
       })}
-      onClick={focusInput}
+      onClick={() => {
+        if (inputProps.disabled || readOnly) {
+          return;
+        }
+
+        toggleIsListOpen(true);
+        focusInput();
+      }}
     >
       {!shouldShowSelectedOptions ? (
         <Input

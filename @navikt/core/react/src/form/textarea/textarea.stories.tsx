@@ -2,6 +2,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import React, { useState } from "react";
 import { Button } from "../../button";
+import { VStack } from "../../layout/stack";
 import { Modal } from "../../modal";
 import { Textarea } from "./index";
 
@@ -73,6 +74,24 @@ export const WithError: StoryFn = () => {
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
       />
+
+      <VStack
+        style={{
+          maxWidth: "400px",
+        }}
+        gap="4"
+      >
+        <Textarea
+          label="Ipsum enim quis culpa"
+          error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        />
+
+        <Textarea
+          label="Ipsum enim quis culpa"
+          error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+          size="small"
+        />
+      </VStack>
 
       <Textarea
         label="Ipsum enim quis culpa"
@@ -205,6 +224,27 @@ AutoScrollbar.argTypes = {
   hideLabel: { type: "boolean" },
   maxRows: { type: "number" },
   minRows: { type: "number" },
+};
+
+export const InsideModal: StoryFn<typeof Textarea> = () => {
+  const ref = React.useRef<HTMLDialogElement>(null);
+
+  return (
+    <>
+      <Button onClick={() => ref.current?.showModal()}>Open modal</Button>
+      <React.StrictMode>
+        <Modal
+          ref={ref}
+          header={{ heading: "Skjema" }}
+          aria-label="Modal med textarea"
+        >
+          <Modal.Body>
+            <Textarea label="Har du noen tilbakemeldinger?" />
+          </Modal.Body>
+        </Modal>
+      </React.StrictMode>
+    </>
+  );
 };
 
 export const ModalStrictMode: StoryFn<typeof Textarea> = () => {
