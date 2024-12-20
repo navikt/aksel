@@ -51,23 +51,23 @@
   position: relative;
 
   .navds-guide-panel:is([data-poster="true"], [data-responsive="true"]) > & {
-    margin-top: var(--ax-spacing-5);
+    margin-top: var(--ax-space-20);
   }
 
   .navds-guide-panel[data-poster="false"] > & {
-    margin-left: var(--ax-spacing-5);
+    margin-left: var(--ax-space-20);
   }
 
   @media (min-width: 480px) {
     .navds-guide-panel[data-responsive="true"] > & {
       margin-top: 0;
-      margin-left: var(--ax-spacing-5);
+      margin-left: var(--ax-space-20);
     }
   }
 }
 
 .navds-guide-panel__content-inner {
-  padding: var(--ax-spacing-3) var(--ax-spacing-4);
+  padding: var(--ax-space-12) var(--ax-space-16);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
   position: relative;
@@ -79,7 +79,7 @@
 
   @media (min-width: 480px) {
     & {
-      padding: var(--ax-spacing-4) var(--ax-spacing-5);
+      padding: var(--ax-space-16) var(--ax-space-20);
     }
 
     .navds-guide-panel[data-responsive="true"] & {
@@ -94,20 +94,20 @@
 
   .navds-guide-panel:is([data-poster="true"], [data-responsive="true"]) & {
     left: 50%;
-    top: calc(var(--ax-spacing-4) * -1 - 2px);
+    top: calc(var(--ax-space-16) * -1 - 2px);
     transform: translateX(-48%);
   }
 
   .navds-guide-panel[data-poster="false"] & {
     top: calc(var(--__axc-guide-panel-guide-size) / 2);
-    left: calc(var(--ax-spacing-5) * -1 - 2px);
+    left: calc(var(--ax-space-20) * -1 - 2px);
     transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
   }
 
   @media (min-width: 480px) {
     .navds-guide-panel[data-responsive="true"] & {
       top: calc(var(--__axc-guide-panel-guide-size) / 2);
-      left: calc(var(--ax-spacing-5) * -1 - 2px);
+      left: calc(var(--ax-space-20) * -1 - 2px);
       transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
     }
   }

@@ -1,7 +1,7 @@
 .navds-chat {
   display: flex;
   align-items: flex-end;
-  gap: var(--ax-spacing-3);
+  gap: var(--ax-space-12);
   max-width: 40.75rem;
 }
 
@@ -50,23 +50,23 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--ax-spacing-3);
+  gap: var(--ax-space-12);
 }
 
 .navds-chat__bubble {
-  padding: var(--ax-spacing-4) var(--ax-spacing-5);
+  padding: var(--ax-space-16) var(--ax-space-20);
   width: fit-content;
   background-color: var(--ax-bg-raised);
   display: flex;
   flex-direction: column;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   border-radius: var(--ax-border-radius-xlarge);
   border-bottom-left-radius: var(--ax-border-radius-small);
   border: 1px solid var(--ax-border-subtleA);
 }
 
 .navds-chat--small .navds-chat__bubble {
-  padding: var(--ax-spacing-3) var(--ax-spacing-4);
+  padding: var(--ax-space-12) var(--ax-space-16);
 }
 
 /* -------------------------- Chat bubble variants -------------------------- */
@@ -88,7 +88,7 @@
 .navds-chat__top-text {
   color: var(--ax-text-default);
   display: flex;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   align-items: baseline;
   font-weight: normal;
   margin: 0;

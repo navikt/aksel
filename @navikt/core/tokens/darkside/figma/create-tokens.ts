@@ -98,7 +98,7 @@ function prepareToken(
  * @see https://www.figma.com/plugin-docs/api/properties/figma-util-rgba
  */
 export function figmaValue(token: TransformedToken): string | number {
-  if (isRadiusToken(token) || isSpacingToken(token)) {
+  if (isRadiusToken(token) || isSpaceToken(token)) {
     const float = parseFloat(token.value.replace("px", "").replace("rem", ""));
 
     /*
@@ -133,7 +133,7 @@ function figmaSettings(token: TransformedTokenWithScopes): {
     setting = createFigmaSettings("COLOR", ["SHAPE_FILL", "TEXT_FILL"]);
   } else if (isRadiusToken(token)) {
     setting = createFigmaSettings("FLOAT", ["CORNER_RADIUS"]);
-  } else if (isSpacingToken(token)) {
+  } else if (isSpaceToken(token)) {
     setting = createFigmaSettings("FLOAT", ["GAP"]);
   }
 
@@ -188,8 +188,8 @@ export function createTokenName(token: TransformedToken) {
     return "Radius " + name;
   }
 
-  if (isSpacingToken(token)) {
-    return "Spacing " + name;
+  if (isSpaceToken(token)) {
+    return "Space " + name;
   }
 
   return name;
@@ -236,7 +236,7 @@ export function isRadiusToken(token: TransformedToken | FigmaToken): boolean {
   return type === "global-radius";
 }
 
-export function isSpacingToken(token: TransformedToken | FigmaToken): boolean {
+export function isSpaceToken(token: TransformedToken | FigmaToken): boolean {
   const type = token.type as TokenTypes;
-  return type === "global-spacing";
+  return type === "global-space";
 }

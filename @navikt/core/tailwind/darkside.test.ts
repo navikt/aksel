@@ -37,9 +37,6 @@ describe("Darkside tailwind config", () => {
     expect(config.theme.extend.shadow).toEqual(
       extractTokensForCategory("shadow"),
     );
-    expect(config.theme.extend.spacing).toEqual(
-      extractTokensForCategory("spacing"),
-    );
     expect(config.theme.extend.fontWeight).toEqual(
       extractTokensForCategory("font-weight"),
     );

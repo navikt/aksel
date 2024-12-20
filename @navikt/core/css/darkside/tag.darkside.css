@@ -11,12 +11,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--ax-spacing-05) var(--ax-spacing-2);
+  padding: var(--ax-space-2) var(--ax-space-8);
   min-height: 2rem;
   line-height: 1;
 
   &:has(.navds-tag__icon--left) {
-    gap: var(--ax-spacing-05);
+    gap: var(--ax-space-2);
   }
 }
 
@@ -81,14 +81,14 @@
 
 .navds-tag--small {
   min-height: 1.5rem;
-  padding: 0 var(--ax-spacing-1-alt);
+  padding: 0 var(--ax-space-6);
 
   --__axc-tag-icon-size: 1.25rem;
 }
 
 .navds-tag--xsmall {
   min-height: 1.25rem;
-  padding: 0 var(--ax-spacing-1);
+  padding: 0 var(--ax-space-4);
 
   --__axc-tag-icon-size: 1rem;
   --__axc-tag-icon-margin: -1px;

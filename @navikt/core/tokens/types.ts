@@ -85,28 +85,12 @@ export type BorderColorWithRoleKeys =
   | `${ColorRoles}-subtleA`
   | `${ColorRoles}-strong`;
 
-export type SpacingKeys =
-  | "0"
-  | "05"
-  | "1"
-  | "1-alt"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11"
-  | "12"
-  | "14"
-  | "16"
-  | "18"
-  | "20"
-  | "24"
-  | "32";
+export const spaceInPixels = [
+  0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,
+  128,
+] as const;
+
+export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
 
 export type ShadowKeys = "dialog";
 
@@ -220,3 +204,26 @@ export type LegacyBorderColorKeys =
   | "border-alt-1"
   | "border-alt-2"
   | "border-alt-3";
+
+export type LegacySpacingKeys =
+  | "0"
+  | "05"
+  | "1"
+  | "1-alt"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10"
+  | "11"
+  | "12"
+  | "14"
+  | "16"
+  | "18"
+  | "20"
+  | "24"
+  | "32";

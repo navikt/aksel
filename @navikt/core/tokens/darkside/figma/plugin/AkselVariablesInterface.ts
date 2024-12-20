@@ -44,7 +44,7 @@ export class AkselVariablesInterface {
     this.updateGlobalColorCollection(this.config.colors.dark.global);
     this.updateSemanticColorCollection(this.config.colors);
     this.updateScaleCollection(this.config.radius);
-    this.updateScaleCollection(this.config.spacing);
+    this.updateScaleCollection(this.config.space);
     console.info("Variables updated!");
   }
 
@@ -97,7 +97,7 @@ export class AkselVariablesInterface {
   private updateScaleCollection(
     globalScale:
       | ScopedFigmaTokenConfig["radius"]
-      | ScopedFigmaTokenConfig["spacing"],
+      | ScopedFigmaTokenConfig["space"],
   ): void {
     const collection =
       this.Figma.getCollection(globalScale.name) ??

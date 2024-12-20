@@ -1,6 +1,6 @@
 .navds-chips {
   display: flex;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -20,9 +20,9 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: var(--ax-spacing-05);
+  gap: var(--ax-space-2);
   margin: 0;
-  padding: 0 var(--ax-spacing-3);
+  padding: 0 var(--ax-space-12);
   text-decoration: none;
   border-radius: var(--ax-border-radius-full);
   min-height: 2rem;
@@ -42,7 +42,7 @@
 .navds-chips--small {
   .navds-chips__chip {
     min-height: 1.5rem;
-    padding: 0 var(--ax-spacing-2);
+    padding: 0 var(--ax-space-8);
   }
 
   .navds-chips__toggle-icon {
@@ -51,7 +51,7 @@
   }
 
   .navds-chips__toggle--with-checkmark {
-    padding-left: var(--ax-spacing-1);
+    padding-left: var(--ax-space-4);
   }
 
   .navds-chips__removable-icon {
@@ -64,7 +64,7 @@
   }
 
   .navds-chips--icon-right {
-    padding-right: var(--ax-spacing-05);
+    padding-right: var(--ax-space-2);
   }
 }
 
@@ -110,7 +110,7 @@
 }
 
 .navds-chips--medium .navds-chips__toggle--with-checkmark {
-  padding-left: var(--ax-spacing-1-alt);
+  padding-left: var(--ax-space-6);
 }
 
 /* -------------------------- start old CSS --------------------------  */
@@ -148,11 +148,11 @@
 }
 
 .navds-chips--icon-left {
-  padding-left: var(--ax-spacing-1-alt);
+  padding-left: var(--ax-space-6);
 }
 
 .navds-chips--icon-right {
-  padding-right: var(--ax-spacing-1-alt);
+  padding-right: var(--ax-space-6);
 }
 
 @media (forced-colors: active) {

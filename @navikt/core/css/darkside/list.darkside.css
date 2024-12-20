@@ -1,17 +1,17 @@
 .navds-list ul,
 .navds-list ol {
   padding: 0;
-  margin-block: var(--ax-spacing-4);
+  margin-block: var(--ax-space-16);
 }
 
 .navds-list--small ul,
 .navds-list--small ol {
-  margin-block: var(--ax-spacing-3);
+  margin-block: var(--ax-space-12);
 }
 
 .navds-list {
   & .navds-list :where(ul, ol) {
-    margin-block: var(--ax-spacing-2) 0;
+    margin-block: var(--ax-space-8) 0;
   }
 
   & ol {
@@ -31,7 +31,7 @@
     & > .navds-list__item {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: var(--ax-spacing-2);
+      gap: var(--ax-space-8);
     }
 
     & > li > .navds-list__item-marker {
@@ -61,7 +61,7 @@ _:future,
 /* stylelint-enable selector-type-no-unknown */
 
 .navds-list__item {
-  margin-block-end: var(--ax-spacing-2);
+  margin-block-end: var(--ax-space-8);
 
   &:last-child {
     margin-block-end: 0;

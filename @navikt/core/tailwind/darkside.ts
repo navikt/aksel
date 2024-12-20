@@ -13,7 +13,7 @@ const transformedTokens = Object.fromEntries(
 );
 
 const nonColorTokens = [
-  "spacing",
+  "space",
   "shadow",
   "font-weight",
   "font-size",
@@ -31,11 +31,6 @@ const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
 });
 const colors = Object.fromEntries(colorTokensEntries);
 
-/**
- * TODO deprecations:
- * - max-width
- * - z-index
- */
 export const config = {
   theme: {
     colors,
@@ -48,7 +43,6 @@ export const config = {
     },
     extend: {
       shadow: extractTokensForCategory("shadow"),
-      spacing: extractTokensForCategory("spacing"),
       fontWeight: extractTokensForCategory("font-weight"),
       fontSize: extractTokensForCategory("font-size"),
       lineHeight: extractTokensForCategory("font-line-height"),

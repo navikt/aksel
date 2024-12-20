@@ -1,7 +1,7 @@
 .navds-toggle-group__wrapper {
   display: grid;
   justify-items: start;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 }
 
 .navds-toggle-group__wrapper--fill {
@@ -24,7 +24,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--ax-spacing-1) var(--ax-spacing-3);
+  padding: var(--ax-space-4) var(--ax-space-12);
   min-height: 3rem;
   border: none;
   cursor: pointer;
@@ -64,7 +64,7 @@
 .navds-toggle-group__button-inner {
   display: flex;
   align-items: center;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 
   > * {
     flex-shrink: 0;
@@ -90,7 +90,7 @@
 /* Modifier small size */
 .navds-toggle-group--small {
   & .navds-toggle-group__button {
-    padding: var(--ax-spacing-05) var(--ax-spacing-3);
+    padding: var(--ax-space-2) var(--ax-space-12);
     min-height: 2rem;
   }
 

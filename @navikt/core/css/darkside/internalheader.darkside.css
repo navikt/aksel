@@ -23,7 +23,7 @@
   line-height: normal;
   text-align: left;
   padding-block: 0;
-  padding-inline: var(--ax-spacing-6) var(--ax-spacing-5);
+  padding-inline: var(--ax-space-24) var(--ax-space-20);
   border-right: 1px solid var(--ax-border-subtleA);
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
 }
 
 .navds-internalheader__user {
-  padding: 0 var(--ax-spacing-5);
+  padding: 0 var(--ax-space-20);
   border-left: 1px solid var(--ax-border-subtleA);
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
 .navds-internalheader__button {
   border: none;
   margin: 0;
-  padding: 0 var(--ax-spacing-3);
+  padding: 0 var(--ax-space-12);
   overflow: visible;
   background: transparent;
   font: inherit;
@@ -64,7 +64,7 @@
   display: flex;
   align-items: center;
   justify-self: center;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   border-left: 1px solid var(--ax-border-subtleA);
   color: var(--ax-text-default);
 
@@ -96,6 +96,6 @@
 }
 
 .navds-internalheader__user-button {
-  padding-left: var(--ax-spacing-5);
-  gap: var(--ax-spacing-4);
+  padding-left: var(--ax-space-20);
+  gap: var(--ax-space-16);
 }

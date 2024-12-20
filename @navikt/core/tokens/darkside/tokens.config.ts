@@ -15,7 +15,7 @@ import { radiusTokenConfig } from "./tokens/radius";
 import { semanticTokenConfig } from "./tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { shadowTokenConfig } from "./tokens/shadow";
-import { spacingTokenConfig } from "./tokens/spacing";
+import { spaceTokenConfig } from "./tokens/space";
 import { textContrastTokenConfig } from "./tokens/text-contrast";
 
 const mergeConfigs = (
@@ -62,13 +62,11 @@ export const darkModeTokens = () => {
 
 /**
  * Collection of configs for:
- * - Spacing
+ * - Space
  * - Radius
  */
 export const scaleTokens = () => {
-  return tokensWithPrefix(
-    mergeConfigs([spacingTokenConfig, radiusTokenConfig]),
-  );
+  return tokensWithPrefix(mergeConfigs([spaceTokenConfig, radiusTokenConfig]));
 };
 
 export const rootTokens = () => {
