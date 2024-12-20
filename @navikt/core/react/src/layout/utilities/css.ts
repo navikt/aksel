@@ -42,26 +42,34 @@ const translateTokenStringToCSS = (
 ) => {
   return tokenString
     .split(" ")
-    .map((x, _, arr) => {
-      if (componentProp === "margin-inline" && x === "full") {
+    .map((propValue, _, arr) => {
+      if (componentProp === "margin-inline" && propValue === "full") {
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/-2)`;
       }
 
-      if (componentProp === "padding-inline" && x === "full") {
+      if (componentProp === "padding-inline" && propValue === "full") {
         const width = 100 / arr.length;
         return `calc((100vw - ${width}%)/2)`;
       }
-      if (["mi", "mb"].includes(componentProp) && x === "auto") {
+      if (["mi", "mb"].includes(componentProp) && propValue === "auto") {
         return "auto";
       }
 
-      let output = `var(--${prefix}-${tokenSubgroup}-${x})`;
-      if (tokenExceptions.includes(x)) {
-        output = translateExceptionToCSS(x);
+      let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
+
+      /**
+       * While migrating to the new tokens, we need to handle some exceptions
+       * where new "space-x" tokens are used as propValues replacing old "spacing-x" tokens.
+       */
+      if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
+        output = `var(--${prefix}-${propValue})`;
+      }
+      if (tokenExceptions.includes(propValue)) {
+        output = translateExceptionToCSS(propValue);
       }
       if (invert) {
-        if (x === "0") {
+        if (propValue === "0") {
           return `0`;
         }
         return `calc(-1 * ${output})`;
