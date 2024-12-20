@@ -6,10 +6,10 @@ const Example = () => {
 
   return (
     <VStack gap="5">
-      <ErrorMessage showIcon>Medium (18px): {exampeText}</ErrorMessage>
+      <ErrorMessage showIcon>{exampeText}</ErrorMessage>
 
       <ErrorMessage showIcon size="small">
-        Small (16px): {exampeText}
+        {exampeText}
       </ErrorMessage>
     </VStack>
   );
