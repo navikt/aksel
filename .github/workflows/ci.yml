@@ -11,25 +11,23 @@ on:
 jobs:
   build:
     name: "Validate build"
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: "write"
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: yarn
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Boot (build packages)
         run: yarn boot
