@@ -31,11 +31,6 @@ const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
 });
 const colors = Object.fromEntries(colorTokensEntries);
 
-/**
- * TODO deprecations:
- * - max-width
- * - z-index
- */
 export const config = {
   theme: {
     colors,
