@@ -19,6 +19,8 @@ jobs:
           fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
       - name: Lint
         run: yarn lint
 
@@ -32,6 +34,8 @@ jobs:
           fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
       - name: Validate example code
         run: yarn validate:eksempler
 
@@ -45,5 +49,7 @@ jobs:
           fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
+        with:
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
       - name: Test
         run: yarn test

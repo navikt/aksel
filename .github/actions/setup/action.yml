@@ -1,5 +1,10 @@
 name: "Setup Project"
 description: "Checks out repo, sets up Node, installs dependencies and runs boot command."
+inputs:
+  npm_auth_token:
+    description: "NPM Auth Token"
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -14,7 +19,7 @@ runs:
       run: yarn
       shell: bash
       env:
-        NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ inputs.npm_auth_token }}
 
     - name: Boot (build packages)
       run: yarn boot
