@@ -16,7 +16,6 @@ export interface ErrorMessageProps
    * Error text.
    */
   children: React.ReactNode;
-
   /**
    * Render a triangular warning icon.
    */

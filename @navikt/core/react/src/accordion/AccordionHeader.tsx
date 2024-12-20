@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { AccordionContext } from "./AccordionContext";
@@ -20,7 +20,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
     const itemContext = useContext(AccordionItemContext);
     const accordionContext = useContext(AccordionContext);
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     if (itemContext === null) {
       console.error(
