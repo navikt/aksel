@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Loader } from "../../loader";
-import { UNSAFE_useAkselTheme } from "../../provider";
+import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
@@ -69,7 +69,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       defaultChecked ?? checkedProp ?? false,
     );
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     useEffect(() => {
       checkedProp !== undefined && setChecked(checkedProp);
