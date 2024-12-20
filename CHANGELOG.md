@@ -1,5 +1,29 @@
 # Changelog
 
+## 7.9
+
+### @navikt/ds-react
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+* Button: Fix edge-case where setting "loading={true}" in a Modal caused the button to get 0 width and not show spinner ([#3252](https://github.com/navikt/aksel/pull/3252))
+
+* Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+* Textarea: resize immediately upon receiving resize event (eg. inside modal opening). ([#3463](https://github.com/navikt/aksel/pull/3463))
+
+### @navikt/ds-css
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+* Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+* Select: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
+* Textarea: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
 ## 7.8
 
 ### @navikt/aksel-stylelint

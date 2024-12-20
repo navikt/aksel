@@ -1,5 +1,20 @@
 # @navikt/ds-css
 
+## 7.9.0
+
+### Minor Changes
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+### Patch Changes
+
+- Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+- Select: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
+- Textarea: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+
 ## 7.8.1
 
 ### Patch Changes
