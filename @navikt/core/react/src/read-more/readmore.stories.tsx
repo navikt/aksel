@@ -83,23 +83,6 @@ export const BrandVolumeLow: Story = {
   },
 };
 
-/* High volume temp disabled until we agree on concept */
-/* export const BrandVolumeHigh: Story = {
-  render: () => (
-    <UNSAFE_AkselTheme volume="high">
-      <VStack gap="4">
-        <ReadMore size="large" header={Default.args?.header}>
-          {Content}
-        </ReadMore>
-        <ReadMore header={Default.args?.header}>{Content}</ReadMore>
-        <ReadMore size="small" header={Default.args?.header}>
-          {Content}
-        </ReadMore>
-      </VStack>
-    </UNSAFE_AkselTheme>
-  ),
-}; */
-
 export const Chromatic: Story = {
   render: (...props) => {
     return (
@@ -133,10 +116,6 @@ export const Chromatic: Story = {
           <h2>BrandVolumeLow</h2>
           {BrandVolumeLow?.render?.(...props)}
         </div>
-        {/* <div>
-          <h2>BrandVolumeHigh</h2>
-          {BrandVolumeHigh?.render?.(...props)}
-        </div> */}
       </VStack>
     );
   },
