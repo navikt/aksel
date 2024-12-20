@@ -1,8 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
-import { UNSAFE_useAkselTheme } from "../../provider";
 import { Slot } from "../../slot/Slot";
+import { useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -109,7 +109,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       },
       ref,
     ) => {
-      const themeContext = UNSAFE_useAkselTheme(false);
+      const themeContext = useThemeInternal(false);
 
       if (
         process.env.NODE_ENV !== "production" &&

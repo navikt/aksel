@@ -11,7 +11,7 @@ import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
 import { DateInputContext } from "../date/context";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { UNSAFE_useAkselTheme } from "../provider";
+import { useThemeInternal } from "../theme/Theme";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -125,7 +125,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
     const chosenFlip = isInDatepicker ? false : _flip;
 
-    const themeContext = UNSAFE_useAkselTheme(false);
+    const themeContext = useThemeInternal(false);
 
     const {
       update,
