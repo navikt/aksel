@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    name: "Lint"
+    name: "Linter: eslint, stylelint"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
         run: yarn lint
 
   validate-examples:
-    name: "Validate Examples"
+    name: "Validate Aksel.nav.no component examples"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -40,7 +40,7 @@ jobs:
         run: yarn validate:eksempler
 
   test:
-    name: "Test"
+    name: "Unit tests"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
