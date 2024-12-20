@@ -13,7 +13,7 @@ const transformedTokens = Object.fromEntries(
 );
 
 const nonColorTokens = [
-  "spacing",
+  "space",
   "shadow",
   "font-weight",
   "font-size",
@@ -48,7 +48,6 @@ export const config = {
     },
     extend: {
       shadow: extractTokensForCategory("shadow"),
-      spacing: extractTokensForCategory("spacing"),
       fontWeight: extractTokensForCategory("font-weight"),
       fontSize: extractTokensForCategory("font-size"),
       lineHeight: extractTokensForCategory("font-line-height"),
