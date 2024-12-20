@@ -13,6 +13,10 @@ jobs:
     name: "Lint"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
       - name: Lint
@@ -22,6 +26,10 @@ jobs:
     name: "Validate Examples"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
       - name: Validate example code
@@ -31,6 +39,10 @@ jobs:
     name: "Test"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Setup project
         uses: ./.github/actions/setup
       - name: Test

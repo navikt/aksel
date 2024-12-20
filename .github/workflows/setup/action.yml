@@ -3,11 +3,6 @@ description: "Checks out repo, sets up Node, installs dependencies and runs boot
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 1
-
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
