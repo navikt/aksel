@@ -9,34 +9,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: "Validate build"
+  lint:
+    name: "Lint"
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: "write"
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-
-      - name: Boot (build packages)
-        run: yarn boot
-
+      - name: Setup project
+        uses: ./.github/actions/setup
       - name: Lint
         run: yarn lint
 
+  validate-examples:
+    name: "Validate Examples"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup project
+        uses: ./.github/actions/setup
       - name: Validate example code
         run: yarn validate:eksempler
 
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup project
+        uses: ./.github/actions/setup
       - name: Test
         run: yarn test
