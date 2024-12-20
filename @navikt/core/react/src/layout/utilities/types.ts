@@ -5,6 +5,7 @@ import type {
   LegacyShadowKeys,
   LegacySpacingKeys,
   LegacySurfaceColorKeys,
+  SpaceKeys,
 } from "@navikt/ds-tokens/types";
 
 export type BackgroundColorToken = LegacyBgColorKeys;
@@ -17,7 +18,7 @@ export type BreakpointsAlias = Extract<
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type SpacingScale = LegacySpacingKeys;
+export type SpacingScale = LegacySpacingKeys | SpaceKeys;
 
 export type SpaceDelimitedAttribute<T extends string> =
   | T

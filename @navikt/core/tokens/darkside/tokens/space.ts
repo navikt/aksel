@@ -1,4 +1,4 @@
-import { type SpaceKeys, spaceInPixels } from "../../types";
+import { spaceInPixels } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 function pxToRem(px: number) {
@@ -8,14 +8,20 @@ function pxToRem(px: number) {
 export const spaceTokenConfig = {
   space: spaceInPixels.reduce(
     (acc, px) => {
-      acc[`${px}`] = {
+      acc[px] = {
         value: pxToRem(px),
         type: "global-space",
       };
       return acc;
     },
-    {} as Record<SpaceKeys, StyleDictionaryToken<"global-space">>,
+    {} as Record<
+      (typeof spaceInPixels)[number],
+      StyleDictionaryToken<"global-space">
+    >,
   ),
 } satisfies {
-  space: Record<SpaceKeys, StyleDictionaryToken<"global-space">>;
+  space: Record<
+    (typeof spaceInPixels)[number],
+    StyleDictionaryToken<"global-space">
+  >;
 };

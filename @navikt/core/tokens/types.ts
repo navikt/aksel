@@ -90,7 +90,7 @@ export const spaceInPixels = [
   128,
 ] as const;
 
-export type SpaceKeys = (typeof spaceInPixels)[number];
+export type SpaceKeys = `space-${(typeof spaceInPixels)[number]}`;
 
 export type ShadowKeys = "dialog";
 
