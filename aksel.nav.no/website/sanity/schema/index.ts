@@ -62,6 +62,7 @@ export const schema: SchemaPluginOptions = {
     object.UnikSidemodul,
     object.Attachment,
     object.Language,
+    object.CompareImages,
 
     /* Riktekst */
     object.RiktekstKomponent,
@@ -72,6 +73,7 @@ export const schema: SchemaPluginOptions = {
     object.RiktekstPrinsipp,
     object.RiktekstStandalone,
     object.RiktekstAccordion,
+    object.RiktekstBlogg,
 
     /* Komponentsider */
     object.PropsSeksjon,
