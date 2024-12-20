@@ -207,13 +207,6 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
               wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
               snowflakeCount={600}
             />
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <audio autoPlay>
-              <source
-                src="https://cdn.pixabay.com/audio/2024/11/18/audio_954cf67490.mp3"
-                type="audio/mp3"
-              />
-            </audio>
           </div>
         )}
         <div className="z-20 pb-28">
