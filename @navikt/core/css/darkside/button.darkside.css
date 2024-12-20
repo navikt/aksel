@@ -277,7 +277,7 @@
   stroke: rgb(255 255 255 / 0.3);
 }
 
-.navds-button--loading > :is(:not(.navds-loader)) {
+.navds-button--loading > :not(.navds-loader) {
   visibility: hidden;
 }
 
