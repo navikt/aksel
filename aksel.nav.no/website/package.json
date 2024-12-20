@@ -61,6 +61,7 @@
     "pino": "^8.21.0",
     "prism-react-renderer": "^2.0.0",
     "react": "^18.0.0",
+    "react-cookie": "^7.2.2",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.53.0",
     "react-markdown": "^9.0.1",
