@@ -25,6 +25,10 @@ runs:
       with:
         npm_auth_token: ${{ inputs.npm_auth_token }}
 
+    - name: Run website tests
+      run: yarn workspace website test
+      shell: bash
+
     - name: Make Next.js app use CDN assets
       if: inputs.use_cdn_assets
       run: |

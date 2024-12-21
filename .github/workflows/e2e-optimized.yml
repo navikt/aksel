@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
       - name: Setup and build Next.js application
         uses: ./.github/actions/build-website
         with:
