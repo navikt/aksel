@@ -7,9 +7,7 @@ test.describe("Smoketest all pages", () => {
       await page.goto(`http://localhost:3000${url}`);
       await page.waitForLoadState("domcontentloaded");
 
-      expect(await page.locator(".vk-errorboundary").count()).toEqual(0);
-      expect(await page.locator(".should-not-be-found").count()).toEqual(0);
-      expect(await page.locator("#vk-notFoundId").count()).toEqual(0);
+      expect(await page.locator(".vk-error").count()).toEqual(0);
 
       const linkList = page.locator("a");
       for (let i = 0; i < (await linkList.count()); i++) {

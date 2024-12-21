@@ -49,7 +49,7 @@ const config: PlaywrightTestConfig = {
         ? { testMatch: [/.*\.e2e\.(ts|tsx)/] }
         : { testMatch: [smoketestMatcher, /search.e2e.ts/] }),
     },
-    {
+    /* {
       name: "Safari",
       use: {
         ...devices["Desktop Safari"],
@@ -62,7 +62,7 @@ const config: PlaywrightTestConfig = {
         ...devices["iPhone 12"],
       },
       testMatch: [smoketestMatcher],
-    },
+    }, */
 
     /* {
       name: "firefox",

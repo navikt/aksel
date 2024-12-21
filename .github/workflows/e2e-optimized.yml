@@ -34,6 +34,7 @@ jobs:
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
           SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
+
         run: yarn workspace website e2e:ci-full
 
       - uses: actions/upload-artifact@v4
