@@ -14,34 +14,27 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.48.1-jammy
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          node-version: lts/*
-          cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build packages
-        run: |
-          yarn boot
-
-      - name: Build application
-        env:
-          SANITY_READ: ${{ secrets.SANITY_READ }}
-          SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
-        run: yarn workspace aksel.nav.no build:next
+          fetch-depth: 1
+      - name: Setup and build Next.js application
+        uses: ./.github/actions/build-website
+        with:
+          use_cdn_assets: false
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
+          nais_id_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          sanity_read_token: ${{ secrets.SANITY_READ }}
+          sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
       - name: Run Playwright tests
         env:
           SANITY_READ: ${{ secrets.SANITY_READ }}
           SANITY_READ_NO_DRAFTS: ${{ secrets.SANITY_READ_NO_DRAFTS }}
         run: yarn workspace website e2e:ci-full
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
