@@ -33,7 +33,7 @@ runs:
       shell: bash
 
     - name: Make Next.js app use CDN assets
-      if: ${{ inputs.use_cdn_assets }}
+      if: ${{ inputs.use_cdn_assets == 'true' }}
       run: |
         echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
       shell: bash
@@ -46,7 +46,7 @@ runs:
       shell: bash
 
     - name: Upload static files to Nav CDN
-      if: ${{ inputs.use_cdn_assets }}
+      if: ${{ inputs.use_cdn_assets == 'true' }}
       uses: nais/deploy/actions/cdn-upload/v2@master
       with:
         team: designsystem
