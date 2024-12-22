@@ -39,21 +39,21 @@ const config: PlaywrightTestConfig = {
 
   /* Configure projects for major browsers */
   projects: [
-    /* {
+    {
       name: "Chromium",
       use: {
         ...devices["Desktop Chrome"],
       },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
-    }, */
+    },
 
-    {
+    /* {
       name: "Mobile",
       use: {
         ...devices["iPhone 12"],
       },
       testMatch: [/.*\.e2e\.(ts|tsx)/],
-    },
+    }, */
   ],
 };
 

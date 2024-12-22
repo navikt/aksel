@@ -25,6 +25,7 @@ test.describe("Check website search", () => {
 
     /* Check that we have more than 0 search-results */
     const artikleSection = page.getByLabel("Søkeresultater");
+    await page.waitForTimeout(1000);
     expect(artikleSection).not.toBeNull();
     const links = await artikleSection.locator("li").all();
 
