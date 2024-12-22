@@ -10,6 +10,9 @@ inputs:
   nais_id_provider:
     description: "NAIS_WORKLOAD_IDENTITY_PROVIDER token"
     required: true
+  nais_project_id:
+    description: "NAIS_MANAGEMENT_PROJECT_ID token"
+    required: true
   sanity_read_token:
     description: "Sanity read-only token allowing published and un-published documents"
     required: true
@@ -49,5 +52,5 @@ runs:
         team: designsystem
         source: ./aksel.nav.no/website/.next/static
         destination: "/website/_next"
-        project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+        project_id: ${{ inputs.nais_project_id }}
         identity_provider: ${{ inputs.nais_id_provider }}

@@ -56,6 +56,7 @@ jobs:
           use_cdn_assets: true
           npm_auth_token: ${{ secrets.READER_TOKEN }}
           nais_id_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           sanity_read_token: ${{ secrets.SANITY_READ }}
           sanity_read_no_drafts_token: ${{ secrets.SANITY_READ_NO_DRAFTS }}
 
