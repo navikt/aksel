@@ -2,7 +2,6 @@ import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 import path from "path";
 
-const smoketestMatcher = /smoketest(-\w+)?\.test\.ts/;
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -40,83 +39,22 @@ const config: PlaywrightTestConfig = {
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "chromium",
+    /* {
+      name: "Chromium",
       use: {
         ...devices["Desktop Chrome"],
       },
-      ...(process.env.FULL_TEST
-        ? { testMatch: [/.*\.e2e\.(ts|tsx)/] }
-        : { testMatch: [smoketestMatcher, /search.e2e.ts/] }),
-    },
-    /* {
-      name: "Safari",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-      testMatch: [smoketestMatcher],
-    },
+      testMatch: [/.*\.e2e\.(ts|tsx)/],
+    }, */
+
     {
       name: "Mobile",
       use: {
         ...devices["iPhone 12"],
       },
-      testMatch: [smoketestMatcher],
-    }, */
-
-    /* {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-      testMatch: /.*\.e2e\.(ts|tsx)/,
+      testMatch: [/.*\.e2e\.(ts|tsx)/],
     },
-
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-      testMatch: /.*\.e2e\.(ts|tsx)/,
-    }, */
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12,Pixel 5'],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
-
-  /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/',
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
 };
 
 export default config;
