@@ -143,7 +143,11 @@ module.exports = {
       },
     },
     {
-      files: ["**/examples/__parts*/*.tsx"],
+      files: [
+        "**/examples/__parts*/*.tsx",
+        "**/pages/templates/**/*.tsx",
+        "**/pages/eksempler/**/*.tsx",
+      ],
       plugins: ["aksel-local"],
       rules: {
         "aksel-local/import-check": ["error"], // Only allow imports from @navikt and react
