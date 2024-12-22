@@ -17,25 +17,30 @@ module.exports = {
           });
         }
 
-        if (isExampleHOC && !isAliasImport) {
+        const sourceCode = context.getSourceCode();
+        const fileContent = sourceCode.getText();
+        const hasSandbox = !fileContent.includes("sandbox: false");
+
+        if (!hasSandbox) {
+          return;
+        } else if (isExampleHOC && !isAliasImport) {
           context.report({
             node,
             message:
               "When using 'withDsExample'-HOC, import must be '@/web/examples/withDsExample'",
           });
-        }
-
-        if (
+        } else if (
           !usNavikt &&
           !isReact &&
           !isInlineParts &&
           !isExampleHOC &&
           !isAliasImport
         ) {
+          console.error({ fileContent, hasSandbox });
           context.report({
             node,
             message:
-              "You can only import from '@navikt', 'react', '__parts' or '@/web/examples/withDsExample'",
+              "You can only import from '@navikt', 'react', '__parts' or '@/web/examples/withDsExample' when sandbox is enabled.",
           });
         }
       },
