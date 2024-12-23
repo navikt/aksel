@@ -16,21 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup project
+        uses: ./.github/actions/setup
         with:
-          node-version: lts/*
-          cache: yarn
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Run docgen
-        run: |
-          yarn boot
-          yarn docgen
+      - name: Run ts-docgen
+        run: yarn docgen
 
       - name: Update sanity sync
         env:
