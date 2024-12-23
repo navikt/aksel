@@ -622,10 +622,10 @@
     "react-day-picker": "8.10.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "9.3.4",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "^14.2.0",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "^0.11.11",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",

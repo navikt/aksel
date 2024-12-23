@@ -1,5 +1,4 @@
-/* eslint-disable testing-library/no-unnecessary-act -- https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning */
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test } from "vitest";
@@ -29,10 +28,8 @@ describe("Writing in input sets correct values", () => {
 
     const fraInput = screen.getByRole("textbox", { name: "Fra" });
     const tilInput = screen.getByRole("textbox", { name: "Til" });
-    await act(async () => {
-      await userEvent.type(fraInput, "03.08.2022");
-      await userEvent.type(tilInput, "03.08.2022");
-    });
+    await userEvent.type(fraInput, "03.08.2022");
+    await userEvent.type(tilInput, "03.08.2022");
     const res = screen.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
@@ -47,10 +44,8 @@ describe("Writing in input sets correct values", () => {
 
     const fraInput = screen.getByRole("textbox", { name: "Fra" });
     const tilInput = screen.getByRole("textbox", { name: "Til" });
-    await act(async () => {
-      await userEvent.type(fraInput, "03.08.2022");
-      await userEvent.type(tilInput, "02.08.2022");
-    });
+    await userEvent.type(fraInput, "03.08.2022");
+    await userEvent.type(tilInput, "02.08.2022");
     const res = screen.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
