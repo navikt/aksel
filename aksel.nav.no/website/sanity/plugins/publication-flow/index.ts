@@ -1,23 +1,11 @@
-import {
-  DocumentActionComponent,
-  DocumentBadgeComponent,
-  definePlugin,
-} from "sanity";
+import { DocumentActionComponent, definePlugin } from "sanity";
 import { allArticleDocuments } from "@/sanity/config";
 import {
   createWrappedApproveAction,
   createWrappedFocusAction,
   createWrappedUpdateAction,
 } from "./actions";
-import { createPublishWithDateAction } from "./actions/createPublishWithDateAction";
-import { CreateStatusBadge, createBadgeComponent } from "./badges";
-
-const generateBadges = (prev: DocumentBadgeComponent[]) => {
-  const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
-    return createBadgeComponent(badge);
-  });
-  return [...defaultBadges, CreateStatusBadge()];
-};
+import { setPublishedAt } from "./actions/publishedAt";
 
 const getCustomActions = (prev: DocumentActionComponent[]) => {
   const defaultActions = prev.map((action) => {
@@ -46,30 +34,29 @@ export const publicationFlow = definePlugin(() => {
   return {
     name: "publication-flow",
     document: {
-      actions: (prev, context) => {
+      actions: (originalActions, context) => {
+        const newActions = originalActions;
+
         if (
           hasQualityControl.some((docType) => docType === context.schemaType)
         ) {
-          return getCustomActions(prev);
+          return getCustomActions(newActions);
         }
 
-        if (hasPublishedAt.some((docType) => docType === context.schemaType)) {
-          return prev.map((originalAction) =>
-            originalAction.action === "publish"
-              ? createPublishWithDateAction(originalAction)
-              : originalAction,
-          );
+        const shouldSetPublishedAt = hasPublishedAt.some(
+          (docType) => docType === context.schemaType,
+        );
+
+        if (!shouldSetPublishedAt) {
+          return newActions;
         }
 
-        return prev;
-      },
-      badges: (prev, context) => {
-        if (
-          hasQualityControl.some((docType) => docType === context.schemaType)
-        ) {
-          return generateBadges(prev);
-        }
-        return prev;
+        return newActions.map((originalAction) => {
+          if (originalAction.action === "publish") {
+            return setPublishedAt(originalAction);
+          }
+          return originalAction;
+        });
       },
     },
   };
