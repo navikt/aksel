@@ -5,25 +5,11 @@ import {
   Component,
   ComponentTranslation,
   PartialTranslations,
-  Translations,
+  TFunction,
 } from "./i18n.types";
 
-/**
- * https://regex101.com/r/LYKWi3/1
- */
+/* https://regex101.com/r/LYKWi3/1 */
 const REPLACE_REGEX = /{[^}]*}/g;
-
-/* https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3 */
-type NestedKeyOf<ObjectType extends object> = {
-  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
-    ? `${Key}.${NestedKeyOf<ObjectType[Key]>}`
-    : `${Key}`;
-}[keyof ObjectType & (string | number)];
-
-export type TFunction<T extends Component> = (
-  keypath: NestedKeyOf<Translations[T]>,
-  replacements?: Record<string, string | number>,
-) => string;
 
 export function useI18n<T extends Component>(
   componentName: T,
@@ -39,9 +25,7 @@ export function useI18n<T extends Component>(
     context.locale[componentName],
   ];
 
-  /**
-   * https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24
-   */
+  /* https://github.com/Shopify/polaris/blob/2115f9ba2f5bcbf2ad15745233501bff2db81ecf/polaris-react/src/utilities/i18n/I18n.ts#L24 */
   const translate: TFunction<T> = (keypath, replacements) => {
     const text = get(keypath, i18nObjects);
 

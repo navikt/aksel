@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../button";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import { useModalContext } from "./Modal.context";
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
