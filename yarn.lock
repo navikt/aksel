@@ -3815,7 +3815,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^5.16.0"
     "@testing-library/react": "npm:^15.0.7"
     "@testing-library/user-event": "npm:^14.2.0"
-    "@types/jscodeshift": "npm:^0.12.0"
+    "@types/jscodeshift": "npm:^0.11.11"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
     date-fns: "npm:^3.0.0"
@@ -6402,16 +6402,6 @@ __metadata:
     ast-types: "npm:^0.14.1"
     recast: "npm:^0.20.3"
   checksum: 10/9e3c7c3e61f9a37d792b7c7cccb0f1383d8b52abc56a492a481a8c340bcbbbd12341e6a69570fa057c12e77abdd4bb6592d44baf2c678f4f950d0c9f79594204
-  languageName: node
-  linkType: hard
-
-"@types/jscodeshift@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "@types/jscodeshift@npm:0.12.0"
-  dependencies:
-    ast-types: "npm:^0.14.1"
-    recast: "npm:^0.20.3"
-  checksum: 10/1e0fd4a5ee2863db792ad5666fa98ee61d3d5a4d5f24a9b8d11cf6ebae25bff55a3e5e27a59fef3aed37637458e7ab52b30181640be39cddbe9956f4a47fd1ab
   languageName: node
   linkType: hard
 
