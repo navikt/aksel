@@ -1,9 +1,10 @@
 import { differenceInDays, differenceInMonths } from "date-fns";
-import { useFormValue } from "sanity";
+import { ComponentType } from "react";
+import { ObjectFieldProps, useFormValue } from "sanity";
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 
-export function UpdateInfo() {
+export const UpdateInfo: ComponentType<ObjectFieldProps> = (props) => {
   const articleType = useFormValue(["_type"]);
 
   const verified: any = useFormValue(["updateInfo", "lastVerified"]);
@@ -14,7 +15,7 @@ export function UpdateInfo() {
   const diffInDays = differenceInDays(new Date(), new Date(verified));
   const outDated = diff >= (articleType === "aksel_artikkel" ? 12 : 6);
   if (!outDated) {
-    return null;
+    return props.renderDefault(props);
   }
 
   return (
@@ -37,4 +38,4 @@ export function UpdateInfo() {
       </BodyLong>
     </div>
   );
-}
+};

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { useState } from "react";
 import { DocumentActionComponent, useDocumentOperation } from "sanity";
+import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 import { Button, Heading, List, Stack } from "@navikt/ds-react";
 
 /**
@@ -65,6 +66,58 @@ export function setLastVerified(
           </>
         ) : (
           <BeforePublish />
+        ),
+      },
+    };
+  };
+}
+
+export function setLastVerifiedWithoutPublish(): DocumentActionComponent {
+  return (props) => {
+    const { patch } = useDocumentOperation(props.id, props.type);
+
+    const [isDialogOpen, setDialogOpen] = useState(false);
+
+    if (!props.published) {
+      return null;
+    }
+
+    const toggleDialog = () => setDialogOpen((isOpen) => !isOpen);
+
+    const update = () => {
+      toggleDialog();
+      patch.execute([
+        {
+          set: {
+            updateInfo: {
+              lastVerified: format(new Date(), "yyyy-MM-dd"),
+            },
+          },
+        },
+      ]);
+      props.onComplete();
+    };
+
+    return {
+      label: "Godkjenn innhold uten å publisere",
+      onHandle: toggleDialog,
+      icon: () => <SealCheckmarkIcon data-sanity-icon aria-hidden />,
+      dialog: isDialogOpen && {
+        header: "Kvalitetssjekk før publisering",
+        onClose: toggleDialog,
+        footer: (
+          <Stack justify="end" gap="4">
+            <Button variant="tertiary" onClick={toggleDialog}>
+              Nei, jeg vil endre noe først
+            </Button>
+            <Button onClick={update}>Oppdatert godkjent dato</Button>
+          </Stack>
+        ),
+        content: (
+          <>
+            <AfterPublish />
+            <BeforePublish title="Huskeliste" />
+          </>
         ),
       },
     };

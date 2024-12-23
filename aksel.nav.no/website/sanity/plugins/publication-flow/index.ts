@@ -1,7 +1,10 @@
 import { DocumentActionComponent, definePlugin } from "sanity";
 import { allArticleDocuments } from "@/sanity/config";
 import { forcedPublishActions } from "./actions/forcedPublish";
-import { setLastVerified } from "./actions/lastVerified";
+import {
+  setLastVerified,
+  setLastVerifiedWithoutPublish,
+} from "./actions/lastVerified";
 import { setPublishedAt } from "./actions/publishedAt";
 
 /**
@@ -31,6 +34,7 @@ export const publicationFlow = definePlugin(() => {
             if (originalAction.action === "publish") {
               prev.push(setLastVerified(originalAction));
               prev.push(forcedPublishActions(originalAction));
+              prev.push(setLastVerifiedWithoutPublish());
             } else {
               prev.push(originalAction);
             }

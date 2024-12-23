@@ -16,6 +16,7 @@ export function forcedPublishActions(
 
     return {
       ...originalResult,
+      shortcut: undefined,
       label: "Publiser uten oppdatert godkjenning",
     };
   };
