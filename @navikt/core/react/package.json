@@ -629,7 +629,7 @@
     "@types/jscodeshift": "^0.12.0",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",
-    "jscodeshift": "^17.1.1",
+    "jscodeshift": "^0.15.1",
     "jsdom": "24.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
