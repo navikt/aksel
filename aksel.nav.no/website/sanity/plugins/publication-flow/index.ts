@@ -1,51 +1,44 @@
 import { DocumentActionComponent, definePlugin } from "sanity";
 import { allArticleDocuments } from "@/sanity/config";
-import {
-  createWrappedApproveAction,
-  createWrappedFocusAction,
-  createWrappedUpdateAction,
-} from "./actions";
+import { forcedPublishActions } from "./actions/forcedPublish";
+import { setLastVerified } from "./actions/lastVerified";
 import { setPublishedAt } from "./actions/publishedAt";
 
-const getCustomActions = (prev: DocumentActionComponent[]) => {
-  const defaultActions = prev.map((action) => {
-    if (action.action === "publish") {
-      return createWrappedFocusAction(action);
-    }
-    return action;
-  });
-
-  const customActions = [
-    defaultActions[0],
-    createWrappedApproveAction(),
-    createWrappedUpdateAction(),
-  ];
-  return [...customActions, ...defaultActions.slice(1)];
-};
-
+/**
+ * Plugin that adds customized publication flow to documents.
+ * For document-types that require a quality check before publishing, it adds a dialog for the user to confirm the publish action.
+ * For remaining documents in 'allArticleDocuments', it sets the publishedAt field to the current date on first publish.
+ */
 export const publicationFlow = definePlugin(() => {
-  const hasQualityControl = [
-    "komponent_artikkel",
-    "ds_artikkel",
-    "aksel_artikkel",
-  ];
-  const hasPublishedAt = allArticleDocuments;
-
   return {
     name: "publication-flow",
     document: {
       actions: (originalActions, context) => {
-        const newActions = originalActions;
+        let newActions = originalActions;
 
-        if (
-          hasQualityControl.some((docType) => docType === context.schemaType)
-        ) {
-          return getCustomActions(newActions);
-        }
+        const shouldUseQualityControl = [
+          "komponent_artikkel",
+          "ds_artikkel",
+          "aksel_artikkel",
+        ].some((docType) => docType === context.schemaType);
 
-        const shouldSetPublishedAt = hasPublishedAt.some(
+        const shouldSetPublishedAt = allArticleDocuments.some(
           (docType) => docType === context.schemaType,
         );
+
+        if (shouldUseQualityControl) {
+          newActions = newActions.reduce((prev, originalAction) => {
+            if (originalAction.action === "publish") {
+              prev.push(setLastVerified(originalAction));
+              prev.push(forcedPublishActions(originalAction));
+            } else {
+              prev.push(originalAction);
+            }
+            return prev;
+          }, [] as DocumentActionComponent[]);
+
+          return newActions;
+        }
 
         if (!shouldSetPublishedAt) {
           return newActions;
