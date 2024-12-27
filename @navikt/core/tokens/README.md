@@ -1,16 +1,16 @@
 # Aksel tokens
 
-Design-tokens for NAVs designsystem and used when implementing @navikt/ds-css.
+Design-tokens for Nav's design system.
 
-Node: This package is consumed by `@navikt/ds-css`, so not needed separately for regular use of css-variables.
+Node: This package is consumed by `@navikt/ds-css`, so not needed separately for regular use of CSS-variables.
 
-Formats
+Formats:
 
 - CSS-variables <- Used in `@navikt/ds-css`
-- Commonjs
+- CommonJS
 - ESM
 - Less
-- Scss
+- Sass
 
 ## Installation
 
@@ -23,7 +23,7 @@ Formats
 
 ```css
 color: var(--a-text-default);
-backgroundcolor: var(--a-surface-default);
+background-color: var(--a-surface-default);
 ```
 
 ## Learn more
