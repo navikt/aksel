@@ -3784,6 +3784,7 @@ __metadata:
     "@testing-library/react": "npm:^16.1.0"
     "@testing-library/user-event": "npm:^14.5.2"
     "@types/jscodeshift": "npm:^0.11.11"
+    aksel: "workspace:^"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
     date-fns: "npm:^3.0.0"
@@ -7657,7 +7658,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aksel@workspace:.":
+"aksel@workspace:., aksel@workspace:^":
   version: 0.0.0-use.local
   resolution: "aksel@workspace:."
   dependencies:

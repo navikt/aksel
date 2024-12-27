@@ -627,6 +627,7 @@
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "^0.11.11",
+    "aksel": "workspace:^",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",
     "jscodeshift": "^0.15.1",
@@ -648,5 +649,6 @@
     "@types/react": {
       "optional": true
     }
-  }
+  },
+  "_comment": "The 'aksel' dependency tells yarn to install the root deps when installing deps for this package. Helps make it possible to contribute without access to GPR."
 }
