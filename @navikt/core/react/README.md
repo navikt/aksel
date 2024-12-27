@@ -1,6 +1,6 @@
 # Aksel React-components
 
-React-components for Nav's designsystem.
+React-components for Nav's design system.
 
 - Uses styling defined in `@navikt/ds-css`
 - All components are implemented with React.forwardRef!

@@ -1,6 +1,6 @@
 # Aksel icons
 
-800+ open source icons made by Aksel, Nav's designsystem team.
+800+ open source icons made by Aksel, Nav's design system team.
 
 - Designed for 24x24px
 - Available in React and SVG

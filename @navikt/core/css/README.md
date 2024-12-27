@@ -1,6 +1,6 @@
 # Aksel styling
 
-CSS for Nav's designsystem.
+CSS for Nav's design system.
 
 - Css tokens (Colors, border, shadows etc.)
 - Component styling for `@navikt/ds-react` packages
