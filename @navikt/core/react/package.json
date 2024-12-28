@@ -622,15 +622,15 @@
     "react-day-picker": "8.10.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "9.3.4",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "^14.2.0",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "^0.11.11",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",
     "jscodeshift": "^0.15.1",
-    "jsdom": "24.0.0",
+    "jsdom": "25.0.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "6.0.1",
@@ -638,7 +638,7 @@
     "tsc-alias": "1.8.8",
     "tsx": "^4.19.1",
     "typescript": "5.5.4",
-    "vitest": "^1.2.2"
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "@types/react": ">=17.0.30",
