@@ -5,7 +5,7 @@ import { Button } from "../../../../button";
 import { BodyShort, ErrorMessage, Label } from "../../../../typography";
 import { composeEventHandlers } from "../../../../util/composeEventHandlers";
 import { useId } from "../../../../util/hooks";
-import { useI18n } from "../../../../util/i18n/i18n.context";
+import { useI18n } from "../../../../util/i18n/i18n.hooks";
 import { omit } from "../../../../util/omit";
 import { useFormField } from "../../../useFormField";
 import { useFileUploadTranslation } from "../../FileUpload.context";

@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import AnimateHeight from "./AnimateHeight";
 import DataCell from "./DataCell";
 import Row, { RowProps } from "./Row";

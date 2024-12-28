@@ -3,7 +3,7 @@ import React, { MouseEvent, forwardRef } from "react";
 import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
-import { useI18n } from "../../../../util/i18n/i18n.context";
+import { useI18n } from "../../../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
 import { useFileUploadTranslation } from "../../FileUpload.context";
 import { FileItem } from "./Item.types";

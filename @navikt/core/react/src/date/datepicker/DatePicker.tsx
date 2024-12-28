@@ -5,7 +5,7 @@ import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateInputContext, DateTranslationContextProvider } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
