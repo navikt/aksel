@@ -25434,7 +25434,6 @@ __metadata:
     "@sanity/preview-url-secret": "npm:^1.6.21"
     "@sanity/schema": "npm:3.59.0"
     "@sanity/table": "npm:1.1.2"
-    "@sanity/uuid": "npm:^3.0.2"
     "@sanity/vision": "npm:3.59.0"
     "@slack/web-api": "npm:^7.0.2"
     "@types/jscodeshift": "npm:^0.11.11"

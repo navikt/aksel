@@ -1,8 +1,13 @@
 import { format } from "date-fns";
 import { useState } from "react";
-import { DocumentActionComponent, useDocumentOperation } from "sanity";
+import {
+  DocumentActionComponent,
+  DocumentActionsContext,
+  useDocumentOperation,
+} from "sanity";
 import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 import { Button, Heading, List, Stack } from "@navikt/ds-react";
+import { SANITY_API_VERSION } from "@/sanity/config";
 
 /**
  * Adds "lastVerified" to the document's on first publish, and updates it on subsequent publishes.
@@ -72,9 +77,14 @@ export function setLastVerified(
   };
 }
 
-export function setLastVerifiedWithoutPublish(): DocumentActionComponent {
+export function setLastVerifiedWithoutPublish(
+  originalAction: DocumentActionComponent,
+  context: DocumentActionsContext,
+): DocumentActionComponent {
   return (props) => {
-    const { patch } = useDocumentOperation(props.id, props.type);
+    const client = context.getClient({ apiVersion: SANITY_API_VERSION });
+
+    const originalResult = originalAction(props);
 
     const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -84,21 +94,27 @@ export function setLastVerifiedWithoutPublish(): DocumentActionComponent {
 
     const toggleDialog = () => setDialogOpen((isOpen) => !isOpen);
 
-    const update = () => {
+    const update = async () => {
       toggleDialog();
-      patch.execute([
-        {
-          set: {
-            updateInfo: {
-              lastVerified: format(new Date(), "yyyy-MM-dd"),
-            },
+
+      if (!props.published) {
+        return;
+      }
+
+      await client
+        .patch(props.published._id)
+        .set({
+          updateInfo: {
+            lastVerified: format(new Date(), "yyyy-MM-dd"),
           },
-        },
-      ]);
+        })
+        .commit();
+
       props.onComplete();
     };
 
     return {
+      disabled: originalResult?.disabled,
       label: "Godkjenn innhold uten å publisere",
       onHandle: toggleDialog,
       icon: () => <SealCheckmarkIcon data-sanity-icon aria-hidden />,
