@@ -3,7 +3,10 @@ import { useState } from "react";
 import {
   DocumentActionComponent,
   DocumentActionsContext,
+  InsufficientPermissionsMessage,
+  useCurrentUser,
   useDocumentOperation,
+  useDocumentPairPermissions,
 } from "sanity";
 import { SealCheckmarkIcon } from "@navikt/aksel-icons";
 import { Button, Heading, List, Stack } from "@navikt/ds-react";
@@ -78,13 +81,18 @@ export function setLastVerified(
 }
 
 export function setLastVerifiedWithoutPublish(
-  originalAction: DocumentActionComponent,
   context: DocumentActionsContext,
 ): DocumentActionComponent {
   return (props) => {
     const client = context.getClient({ apiVersion: SANITY_API_VERSION });
 
-    const originalResult = originalAction(props);
+    const currentUser = useCurrentUser();
+
+    const [permissions, isPermissionsLoading] = useDocumentPairPermissions({
+      id: props.id,
+      type: props.type,
+      permission: "publish",
+    });
 
     const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -98,7 +106,7 @@ export function setLastVerifiedWithoutPublish(
       toggleDialog();
 
       if (!props.published) {
-        return;
+        return null;
       }
 
       await client
@@ -110,11 +118,36 @@ export function setLastVerifiedWithoutPublish(
         })
         .commit();
 
+      if (props.draft) {
+        await client
+          .patch(props.draft._id)
+          .set({
+            updateInfo: {
+              lastVerified: format(new Date(), "yyyy-MM-dd"),
+            },
+          })
+          .commit();
+      }
+
       props.onComplete();
     };
 
+    if (!isPermissionsLoading && !permissions?.granted) {
+      return {
+        tone: "default",
+        label: "Godkjenn innhold uten å publisere",
+        title: (
+          <InsufficientPermissionsMessage
+            context="publish-document"
+            currentUser={currentUser}
+          />
+        ),
+        disabled: true,
+      };
+    }
+
     return {
-      disabled: originalResult?.disabled,
+      disabled: isPermissionsLoading,
       label: "Godkjenn innhold uten å publisere",
       onHandle: toggleDialog,
       icon: () => <SealCheckmarkIcon data-sanity-icon aria-hidden />,

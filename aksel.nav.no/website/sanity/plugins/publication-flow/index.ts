@@ -34,7 +34,7 @@ export const publicationFlow = definePlugin(() => {
             if (originalAction.action === "publish") {
               prev.push(setLastVerified(originalAction));
               prev.push(forcedPublishActions(originalAction));
-              prev.push(setLastVerifiedWithoutPublish(originalAction, context));
+              prev.push(setLastVerifiedWithoutPublish(context));
             } else {
               prev.push(originalAction);
             }
