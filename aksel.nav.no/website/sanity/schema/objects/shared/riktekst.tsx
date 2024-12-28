@@ -143,6 +143,7 @@ export const headingStyles = [
 
 const Riktekst = (
   type:
+    | "blogg"
     | "god-praksis"
     | "grunnleggende"
     | "templates"
@@ -188,8 +189,8 @@ const Riktekst = (
   ];
 
   const templates = ["kode_eksempler", "exampletext_block"];
-
   const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
+  const blogg = ["compare_images"];
 
   fields.push(...standard);
 
@@ -208,6 +209,9 @@ const Riktekst = (
       break;
     case "templates":
       fields.push(...templates);
+      break;
+    case "blogg":
+      fields.push(...blogg);
       break;
     default:
       break;
@@ -285,5 +289,13 @@ export const RiktekstTemplates = {
   name: "riktekst_templates",
   type: "array",
   of: Riktekst("templates"),
+  icon: () => <FileTextIcon aria-hidden />,
+};
+
+export const RiktekstBlogg = {
+  title: "Riktekst",
+  name: "riktekst_blogg",
+  type: "array",
+  of: Riktekst("blogg"),
   icon: () => <FileTextIcon aria-hidden />,
 };
