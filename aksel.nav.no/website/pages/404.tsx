@@ -21,7 +21,7 @@ export default function NotFound() {
   }, []);
 
   return (
-    <Page data-aksel-template="404-v2" footer={<Footer />} id="vk-notFoundId">
+    <Page data-aksel-template="404-v2" footer={<Footer />} className="vk-error">
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 16">

@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { useState } from "react";
 import { Box, Button, DatePicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
@@ -21,10 +19,8 @@ const Example = () => {
       </DatePicker>
       {days && (
         <Box paddingBlock="4 0">
-          {days.map((x) => (
-            <div key={x.toString()}>
-              {format(x, "dd.MM.yyyy", { locale: nb })}
-            </div>
+          {days.map((day) => (
+            <div key={day.toString()}>{day.toISOString().split("T")[0]}</div>
           ))}
         </Box>
       )}

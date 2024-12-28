@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-import { nb } from "date-fns/locale";
 import { Box, DatePicker, HStack, useRangeDatepicker } from "@navikt/ds-react";
 import { withDsExample } from "@/web/examples/withDsExample";
 
@@ -22,11 +20,10 @@ const Example = () => {
         <Box paddingBlock="4 0">
           <div>
             {selectedRange?.from &&
-              format(selectedRange.from, "dd.MM.yyyy", { locale: nb })}
+              selectedRange.from.toISOString().split("T")[0]}
           </div>
           <div>
-            {selectedRange?.to &&
-              format(selectedRange.to, "dd.MM.yyyy", { locale: nb })}
+            {selectedRange?.to && selectedRange.to.toISOString().split("T")[0]}
           </div>
         </Box>
       )}

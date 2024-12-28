@@ -23,7 +23,7 @@ function ErrorPage({ statusCode }) {
   }, []);
 
   return (
-    <Page data-aksel-template="500-v2" footer={<Footer />} id="vk-notFoundId">
+    <Page data-aksel-template="500-v2" footer={<Footer />} className="vk-error">
       <Header />
       <Page.Block as="main" width="xl" gutters>
         <Box paddingBlock="20 8">

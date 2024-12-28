@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   render(): React.ReactNode {
     if (this.state.hasError) {
-      return <div className="vk-errorboundary" />;
+      return <div className="vk-error" />;
     }
     return this.props.children;
   }
