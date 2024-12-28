@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { useDateLocale } from "../../util/i18n/i18n.context";
+import { useDateLocale } from "../../util/i18n/i18n.hooks";
 import { MonthPickerProps } from "../monthpicker/types";
 import { DateInputProps } from "../parts/DateInput";
 import {

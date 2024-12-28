@@ -17,7 +17,7 @@ import cl from "clsx";
 import React, { useRef, useState } from "react";
 import { useThemeInternal } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useI18n } from "../../util/i18n/i18n.context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import { useTimelineContext } from "../hooks/useTimelineContext";

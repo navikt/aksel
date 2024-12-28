@@ -3,7 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import {
   DateInputContext,
   DateTranslationContextProvider,

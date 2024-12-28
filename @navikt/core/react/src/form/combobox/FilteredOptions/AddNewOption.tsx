@@ -2,7 +2,7 @@ import cl from "clsx";
 import React from "react";
 import { PlusIcon } from "@navikt/aksel-icons";
 import { BodyShort, Label } from "../../../typography";
-import { useI18n } from "../../../util/i18n/i18n.context";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import { isInList, toComboboxOption } from "../combobox-utils";
