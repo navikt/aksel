@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDataContext } from "@/hooks/useSanityData";
-import { useAmplitudeInit } from "@/logging";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
 
 function App({ Component, pageProps, router }: AppProps) {
   useHashScroll();
-  useAmplitudeInit();
+
+  /* As of 01.01.25, removed until cookie compliance is implemented */
+  /* useAmplitudeInit(); */
 
   useEffect(() => {
     window.location.host === "design.nav.no" &&
