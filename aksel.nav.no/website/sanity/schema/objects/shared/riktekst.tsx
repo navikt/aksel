@@ -128,15 +128,15 @@ export const block = {
 export const headingStyles = [
   ...block.styles,
   {
-    title: "H2",
+    title: "Heading 2",
     value: "h2",
   },
   {
-    title: "H3",
+    title: "Heading 3",
     value: "h3",
   },
   {
-    title: "H4",
+    title: "Heading 4",
     value: "h4",
   },
 ];

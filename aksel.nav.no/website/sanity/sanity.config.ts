@@ -9,7 +9,8 @@ import { structureTool } from "sanity/structure";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_PROJECT_ID } from "./config";
 import { AkselLogo } from "./logo";
-import { defaultDocumentNode, publicationFlow, structure } from "./plugins";
+import { publicationFlow } from "./plugins/publication-flow";
+import { defaultDocumentNode, structure } from "./plugins/structure";
 import { schema } from "./schema";
 import { newDocumentsCreator } from "./util";
 
@@ -54,6 +55,7 @@ export const workspaceConfig = defineConfig([
     basePath: "/admin/dev",
     icon: TestFlaskIcon,
     auth: authStore(),
+    scheduledPublishing: { enabled: false },
     schema,
     document: {
       newDocumentOptions: newDocumentsCreator,
