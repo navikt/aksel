@@ -1,6 +1,7 @@
 {
   "name": "eslint-plugin-aksel-local",
   "version": "0.1.0",
+  "private": true,
   "main": "index.js",
   "module": "index.js"
 }

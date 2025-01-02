@@ -1,6 +1,6 @@
 # Aksel icons
 
-800+ open source icons made by Aksel, NAVs designsystem-team
+800+ open source icons made by Aksel, Nav's design system team.
 
 - Designed for 24x24px
 - Available in React and SVG
@@ -30,7 +30,7 @@ Tip: Use the `title` prop for accessible icons.
 
 ### Sizing
 
-Each icons `width` and `height` is default `1em`. This allows you to use the native `fontSize`-prop to adjust sizing. We recommend using at least 1.5rem/24px for best possible visual representation.
+Each icon's `width` and `height` is default `1em`. This allows you to use the native `fontSize`-prop to adjust sizing. We recommend using at least 1.5rem/24px for the best possible visual representation.
 
 ```jsx
 <StarIcon fontSize="1.5rem" />
