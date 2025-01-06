@@ -68,10 +68,7 @@
     "*.ts": "eslint --max-warnings=0",
     "*.tsx": "eslint --max-warnings=0",
     "*.css": "stylelint",
-    "*": [
-      "prettier --write --ignore-unknown",
-      "yarn tsx ./scripts/in-sync-versions.ts --verbose"
-    ]
+    "*": "prettier --write --ignore-unknown"
   },
   "stylelint": {
     "overrides": [
