@@ -1,4 +1,4 @@
-import { type ColorRoles } from "../../types";
+import { type SemanticColorRoles } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
 export const textContrastTokenConfig = {
@@ -8,11 +8,6 @@ export const textContrastTokenConfig = {
       value: "{ax.neutral.000.value}",
       type: "color",
       group: `text.accent`,
-    },
-    "neutral-contrast": {
-      value: "{ax.neutral.000.value}",
-      type: "color",
-      group: "text.neutral",
     },
     /* Status */
     "danger-contrast": {
@@ -64,5 +59,5 @@ export const textContrastTokenConfig = {
     },
   },
 } satisfies {
-  text: Record<`${ColorRoles}-contrast`, StyleDictionaryToken<"color">>;
+  text: Record<`${SemanticColorRoles}-contrast`, StyleDictionaryToken<"color">>;
 };

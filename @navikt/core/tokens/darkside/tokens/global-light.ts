@@ -1,8 +1,8 @@
-import { type ColorRoles, type GlobalColorScale } from "../../types";
+import { type GlobalColorRoles, type GlobalColorScale } from "../../types";
 import { type GlobalColorEntry } from "../tokens.util";
 
 export const globalColorLightModeConfigWithoutAlpha: Record<
-  ColorRoles,
+  GlobalColorRoles,
   Record<
     Exclude<GlobalColorScale, "000" | "100A" | "200A" | "300A" | "400A">,
     GlobalColorEntry

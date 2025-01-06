@@ -1,8 +1,12 @@
 import _ from "lodash";
-import { type ColorRoles, ColorRolesList, type ColorTheme } from "../../types";
+import {
+  ColorRolesList,
+  type ColorTheme,
+  type SemanticColorRoles,
+} from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
-const configForRole = (role: ColorRoles, theme: ColorTheme) => {
+const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
   return {
     bg: {
       [role]: {
@@ -123,7 +127,7 @@ const configForRole = (role: ColorRoles, theme: ColorTheme) => {
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
 export const semanticTokensForAllRolesConfig = (theme: ColorTheme) => {
-  return ColorRolesList.reduce(
+  return ColorRolesList.filter((name) => name !== "neutral").reduce(
     (acc, role) => _.merge(acc, configForRole(role, theme)),
     {} as ReturnType<typeof configForRole>,
   );

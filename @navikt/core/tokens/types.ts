@@ -14,7 +14,8 @@ export const ColorRolesList = [
   "meta-lime",
 ] as const;
 
-export type ColorRoles = (typeof ColorRolesList)[number];
+export type GlobalColorRoles = (typeof ColorRolesList)[number];
+export type SemanticColorRoles = Exclude<GlobalColorRoles, "neutral">;
 
 export type GlobalColorScale =
   | "100"
@@ -34,43 +35,65 @@ export type GlobalColorScale =
   | "400A";
 
 export type GlobalColorKeys =
-  | `${Extract<ColorRoles, "neutral">}-${Extract<GlobalColorScale, "000">}`
-  | `${ColorRoles}-${Exclude<GlobalColorScale, "000">}`;
+  | `${Extract<GlobalColorRoles, "neutral">}-${Extract<
+      GlobalColorScale,
+      "000"
+    >}`
+  | `${GlobalColorRoles}-${Exclude<GlobalColorScale, "000">}`;
 
 /* Semantic tokens */
 
-export type DefaultBgKeys =
+export type StaticDefaultBgKeys =
   | "default"
   | "input"
   | "raised"
   | "sunken"
-  | "overlay";
+  | "overlay"
+  | "moderate"
+  | "moderateA"
+  | "moderate-subtle"
+  | "strong";
+
+export type StatefulDefaultBgKeys =
+  | "hover"
+  | "hoverA"
+  | "moderate-hover"
+  | "moderate-hoverA"
+  | "moderate-pressed"
+  | "moderate-pressedA"
+  | "strong-hover"
+  | "strong-pressed";
 
 export type StaticBgKeys =
-  | ColorRoles
-  | `${ColorRoles}-moderate`
-  | `${ColorRoles}-moderateA`
-  | `${ColorRoles}-strong`
-  | `${ColorRoles}-raised`;
+  | SemanticColorRoles
+  | `${SemanticColorRoles}-moderate`
+  | `${SemanticColorRoles}-moderateA`
+  | `${SemanticColorRoles}-strong`
+  | `${SemanticColorRoles}-raised`;
 
 export type StatefulBgKeys =
-  | `${ColorRoles}-hover`
-  | `${ColorRoles}-hoverA`
-  | `${ColorRoles}-moderate-hover`
-  | `${ColorRoles}-moderate-hoverA`
-  | `${ColorRoles}-moderate-pressed`
-  | `${ColorRoles}-moderate-pressedA`
-  | `${ColorRoles}-strong-hover`
-  | `${ColorRoles}-strong-pressed`
-  | `${ColorRoles}-raised-hover`;
+  | `${SemanticColorRoles}-hover`
+  | `${SemanticColorRoles}-hoverA`
+  | `${SemanticColorRoles}-moderate-hover`
+  | `${SemanticColorRoles}-moderate-hoverA`
+  | `${SemanticColorRoles}-moderate-pressed`
+  | `${SemanticColorRoles}-moderate-pressedA`
+  | `${SemanticColorRoles}-strong-hover`
+  | `${SemanticColorRoles}-strong-pressed`
+  | `${SemanticColorRoles}-raised-hover`;
 
-export type DefaultTextColorKeys = "default" | "subtle" | "icon" | "logo";
+export type DefaultTextColorKeys =
+  | "default"
+  | "subtle"
+  | "icon"
+  | "logo"
+  | "contrast";
 
 export type TextColorKeys =
-  | ColorRoles
-  | `${ColorRoles}-strong`
-  | `${ColorRoles}-icon`
-  | `${ColorRoles}-contrast`;
+  | SemanticColorRoles
+  | `${SemanticColorRoles}-strong`
+  | `${SemanticColorRoles}-icon`
+  | `${SemanticColorRoles}-contrast`;
 
 export type BorderColorKeys =
   | "default"
@@ -80,10 +103,10 @@ export type BorderColorKeys =
   | "focus";
 
 export type BorderColorWithRoleKeys =
-  | ColorRoles
-  | `${ColorRoles}-subtle`
-  | `${ColorRoles}-subtleA`
-  | `${ColorRoles}-strong`;
+  | SemanticColorRoles
+  | `${SemanticColorRoles}-subtle`
+  | `${SemanticColorRoles}-subtleA`
+  | `${SemanticColorRoles}-strong`;
 
 export const spaceInPixels = [
   0, 1, 2, 4, 6, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 72, 80, 96,

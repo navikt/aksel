@@ -1,8 +1,9 @@
 import {
   type BorderColorKeys,
   type ColorTheme,
-  type DefaultBgKeys,
   type DefaultTextColorKeys,
+  type StatefulDefaultBgKeys,
+  type StaticDefaultBgKeys,
 } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
 
@@ -26,6 +27,11 @@ export function semanticTokenConfig(theme: ColorTheme) {
       },
       logo: {
         value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
+        type: "color",
+        group: "text",
+      },
+      contrast: {
+        value: "{ax.neutral.000.value}",
         type: "color",
         group: "text",
       },
@@ -53,7 +59,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
         value:
           theme === "light"
             ? "{ax.neutral.000.value}"
-            : "{ax.neutral.200.value}",
+            : "{ax.neutral.100.value}",
         type: "color",
         group: "background",
       },
@@ -66,6 +72,66 @@ export function semanticTokenConfig(theme: ColorTheme) {
         value: "rgba(2, 20, 49 , 0.49)",
         type: "color",
         group: "background",
+      },
+      hover: {
+        value: `{ax.neutral.200.value}`,
+        type: "color",
+        group: `background`,
+      },
+      hoverA: {
+        value: `{ax.neutral.200A.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "moderate-subtle": {
+        value: `{ax.neutral.100.value}`,
+        type: "color",
+        group: `background`,
+      },
+      moderate: {
+        value: `{ax.neutral.200.value}`,
+        type: "color",
+        group: `background`,
+      },
+      moderateA: {
+        value: `{ax.neutral.200A.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "moderate-hover": {
+        value: `{ax.neutral.300.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "moderate-hoverA": {
+        value: `{ax.neutral.300A.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "moderate-pressed": {
+        value: `{ax.neutral.400.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "moderate-pressedA": {
+        value: `{ax.neutral.400A.value}`,
+        type: "color",
+        group: `background`,
+      },
+      strong: {
+        value: `{ax.neutral.600.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "strong-hover": {
+        value: `{ax.neutral.700.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "strong-pressed": {
+        value: `{ax.neutral.800.value}`,
+        type: "color",
+        group: `background`,
       },
     },
     border: {
@@ -104,7 +170,10 @@ export function semanticTokenConfig(theme: ColorTheme) {
       },
     },
   } satisfies {
-    bg: Record<DefaultBgKeys, StyleDictionaryToken<"color">>;
+    bg: Record<
+      StaticDefaultBgKeys | StatefulDefaultBgKeys,
+      StyleDictionaryToken<"color">
+    >;
     border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
     text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
   };
