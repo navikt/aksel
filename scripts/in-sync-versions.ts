@@ -94,12 +94,12 @@ function validateVersions() {
 
   if (warnings.length > 0) {
     console.warn(
-      "\nWorkspaces local dependencies versions not synced across repository:",
+      "\nWorkspaces local dependency versions not synced across repository:",
     );
     warnings.forEach(({ dependency, filteredVersions }) => {
       logWarning(dependency, filteredVersions);
     });
-    console.warn(
+    console.error(
       "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
     );
   }
