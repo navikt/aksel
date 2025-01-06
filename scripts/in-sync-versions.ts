@@ -93,13 +93,13 @@ function validateVersions() {
   });
 
   if (warnings.length > 0) {
-    console.info(
+    console.warn(
       "\nWorkspaces dep, devDep and peerDep versions not synced across repository:",
     );
     warnings.forEach(({ dependency, filteredVersions }) => {
       logWarning(dependency, filteredVersions);
     });
-    console.info(
+    console.warn(
       "\nPlease make sure all workspaces have the same version for each dependency.",
     );
   }
