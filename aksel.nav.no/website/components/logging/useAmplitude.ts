@@ -1,6 +1,5 @@
 import type { Types } from "@amplitude/analytics-browser";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
 
 const batchedEvents: Parameters<Pick<Types.BrowserClient, "track">["track"]>[] =
   [];
@@ -68,19 +67,38 @@ const initAmplitude = async () => {
     });
 };
 
-const useAmplitudeInit = () => {
-  const [cookies, setCookie /*, removeCookie*/] = useCookies(["cookieConsent"]); // TODO: Make it possible to change
+function getCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? decodeURIComponent(match[2]) : null;
+}
 
-  //console.log({ cookieConsent: cookies.cookieConsent });
+function setCookie(name: string, value: string, days = 365): void {
+  const timeUntilExpiry = days * 24 * 60 * 60 * 1000;
+  const expiry = new Date();
+  expiry.setTime(expiry.getTime() + timeUntilExpiry);
+  value = encodeURIComponent(value);
+  document.cookie = `${name}=${value}; expires=${expiry.toUTCString()}; path=/`;
+}
+
+const useAmplitudeInit = () => {
+  const [consent, setConsent] = useState<string | null>(() =>
+    getCookie("cookieConsent"),
+  );
 
   useEffect(() => {
-    if (cookies.cookieConsent) initAmplitude();
-  }, [cookies.cookieConsent]);
+    if (consent === "true") initAmplitude();
+  }, [consent]);
 
   return {
-    promptForConsent: cookies.cookieConsent === undefined,
-    allowCookies: () => setCookie("cookieConsent", true), // TODO: Set expiry
-    rejectCookies: () => setCookie("cookieConsent", false),
+    promptForConsent: consent === null,
+    allowCookies: () => {
+      setCookie("cookieConsent", "true");
+      setConsent("true");
+    },
+    rejectCookies: () => {
+      setCookie("cookieConsent", "false");
+      setConsent("false");
+    },
   };
 };
 
