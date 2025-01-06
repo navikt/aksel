@@ -100,7 +100,7 @@ function validateVersions() {
       logWarning(dependency, filteredVersions);
     });
     console.warn(
-      "\nPlease make sure all workspaces have the same version for each dependency.",
+      "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
     );
   }
 }
