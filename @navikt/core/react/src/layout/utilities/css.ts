@@ -1,3 +1,4 @@
+import type { LegacySpacingKeys, SpaceKeys } from "@navikt/ds-tokens/types";
 import { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
@@ -23,6 +24,36 @@ export function getResponsiveValue<T = string>(
     ]),
   );
 }
+
+/**
+ * Temporary lookup for mapping legacy spacing tokens to new space tokens.
+ */
+const legacySpacingTokenLookup: Record<
+  `--ax-spacing-${LegacySpacingKeys}`,
+  `--ax-${SpaceKeys}`
+> = {
+  "--ax-spacing-32": "--ax-space-128",
+  "--ax-spacing-24": "--ax-space-96",
+  "--ax-spacing-20": "--ax-space-80",
+  "--ax-spacing-18": "--ax-space-72",
+  "--ax-spacing-16": "--ax-space-64",
+  "--ax-spacing-14": "--ax-space-56",
+  "--ax-spacing-12": "--ax-space-48",
+  "--ax-spacing-11": "--ax-space-44",
+  "--ax-spacing-10": "--ax-space-40",
+  "--ax-spacing-9": "--ax-space-36",
+  "--ax-spacing-8": "--ax-space-32",
+  "--ax-spacing-7": "--ax-space-28",
+  "--ax-spacing-6": "--ax-space-24",
+  "--ax-spacing-5": "--ax-space-20",
+  "--ax-spacing-4": "--ax-space-16",
+  "--ax-spacing-3": "--ax-space-12",
+  "--ax-spacing-2": "--ax-space-8",
+  "--ax-spacing-1-alt": "--ax-space-6",
+  "--ax-spacing-1": "--ax-space-4",
+  "--ax-spacing-05": "--ax-space-2",
+  "--ax-spacing-0": "--ax-space-0",
+};
 
 const translateExceptionToCSS = (exception: string) => {
   switch (exception) {
@@ -58,16 +89,23 @@ const translateTokenStringToCSS = (
 
       let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
 
-      /**
-       * While migrating to the new tokens, we need to handle some exceptions
-       * where new "space-x" tokens are used as propValues replacing old "spacing-x" tokens.
-       */
-      if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
-        output = `var(--${prefix}-${propValue})`;
-      }
       if (tokenExceptions.includes(propValue)) {
         output = translateExceptionToCSS(propValue);
+      } else if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
+        /**
+         * While migrating to the new tokens, we need to handle some exceptions
+         * where new "space-x" tokens are used as propValues replacing old "spacing-x" tokens.
+         */
+        output = `var(--${prefix}-${propValue})`;
+      } else if (tokenSubgroup === "spacing") {
+        const spacingTokenName = `--${prefix}-spacing-${propValue}`;
+
+        /* If using new tokens, use of "legacy"-spacing like 2, 4, 8 etc needs to be translated to new space-tokens */
+        output = `var(${
+          legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName
+        })`;
       }
+
       if (invert) {
         if (propValue === "0") {
           return `0`;
