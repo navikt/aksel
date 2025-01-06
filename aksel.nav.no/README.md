@@ -39,19 +39,19 @@ yarn serve:next
 
 **Rettigheter**
 
-Sanity-datasettet er privat, noe som betyr du må ha tilgang til Sanity-applikasjonen + følgende tokens for å få data lokalt:
+Sanity-datasettet er privat, noe som betyr du må ha tilgang til Sanity-applikasjonen og følgende tokens:
 
 ```env
 SANITY_READ
 SANITY_READ_NO_DRAFTS
 ```
-
+`SANITY_READ` er bare nødvendig for lokal forhåndsvisning.
 ### .env
 
 Det blir brukt flere keys i .env under `./website`, men kun `SANITY_READ_NO_DRAFTS` trengs for å teste lokalt.
 
 - SANITY_WRITE:
-  For å sende dokumenter til Sanity. Blir brukt i noen scripts til å synke diverse data til nettsiden, som f.eks. kode-eksempler og changelog. Trengs normalt ikke lokalt.
+  For å sende dokumenter til Sanity. Blir brukt i lokale scripts til å synke data til nettsiden, som f.eks. kode-eksempler og changelog. Trengs normalt ikke lokalt.
 - SANITY_READ: Gir appen tilgang til å lese både publisert og upublisert innhold fra Sanity. Trengs for å teste ikke-publiserte sider i "preview"-mode.
 - SANITY_READ_NO_DRAFTS: Gir appen tilgang til å lese kun publisert innhold fra Sanity.
 
