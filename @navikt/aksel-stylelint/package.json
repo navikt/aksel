@@ -42,7 +42,7 @@
     "postcss-value-parser": "^4.2.0",
     "stylelint": "^14.8.5",
     "stylelint-test-rule-node": "^0.2.1",
-    "tsx": "^4.7.1",
+    "tsx": "^4.19.1",
     "typescript": "5.5.4"
   }
 }

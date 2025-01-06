@@ -92,6 +92,7 @@ function validateVersions() {
     if (!versionsAreEqual) {
       warnings.push({
         dependency,
+        /* To keep console simple, we hide duplicates */
         filteredVersions: [...new Set(filteredVersions)],
       });
     }

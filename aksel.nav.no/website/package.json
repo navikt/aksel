@@ -88,7 +88,7 @@
     "@sanity/block-tools": "3.59.0",
     "@sanity/schema": "3.59.0",
     "@types/jscodeshift": "^0.11.11",
-    "@types/react": "^18.0.0",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^8.2.0",

@@ -16,7 +16,7 @@
     "@navikt/aksel-icons": "file:./../../@navikt/aksel-icons",
     "@navikt/ds-css": "file:./../../@navikt/core/css",
     "@navikt/ds-react": "file:./../../@navikt/core/react",
-    "@types/react": "^18.2.48",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.2.18",
     "astro": "^4.15.8",
     "react": "^18.2.0",
