@@ -70,7 +70,7 @@
     "*.css": "stylelint",
     "*": [
       "prettier --write --ignore-unknown",
-      "yarn tsx ./scripts/in-sync-versions.ts"
+      "yarn tsx ./scripts/in-sync-versions.ts --verbose"
     ]
   },
   "stylelint": {
