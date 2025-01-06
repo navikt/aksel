@@ -6,13 +6,11 @@ const colors = {
   reset: "\x1b[0m",
   red: "\x1b[31m",
   yellow: "\x1b[33m",
-  green: "\x1b[32m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  white: "\x1b[37m",
 };
 
+/**
+ * Adds some colors to better highlight the warning
+ */
 function logWarning(dependency: string, filteredVersions: any) {
   const coloredDependency = `${colors.yellow}${dependency}${colors.reset}`;
   const coloredVersions = `${colors.red}${filteredVersions}${colors.reset}`;
@@ -20,6 +18,9 @@ function logWarning(dependency: string, filteredVersions: any) {
   console.warn(`- ${coloredDependency}: ${coloredVersions}`);
 }
 
+/**
+ * Get the list of workspaces in the repository by using the `yarn workspaces list` command
+ */
 function getYarnWorkspacesList(): { location: string; name: string }[] {
   try {
     const execCommand = execSync("yarn workspaces list --json", {
@@ -46,7 +47,7 @@ function validateVersions() {
 
   if (workspaces.length === 0) {
     console.error("No workspaces found");
-    process.exit(1);
+    return;
   }
 
   const dependencies = new Map<string, string[]>();
@@ -76,6 +77,10 @@ function validateVersions() {
   const warnings: { dependency: string; filteredVersions: string[] }[] = [];
 
   dependencies.forEach((versions, dependency) => {
+    /**
+     * While we could resolve these cases using "semver" or other packages,
+     * we are going to keep it simple and just check "regular" cases.
+     */
     const filteredVersions = versions.filter(
       (version) => version !== "*" && !version.includes(">="),
     );
@@ -99,7 +104,7 @@ function validateVersions() {
     warnings.forEach(({ dependency, filteredVersions }) => {
       logWarning(dependency, filteredVersions);
     });
-    console.error(
+    console.warn(
       "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
     );
   }
