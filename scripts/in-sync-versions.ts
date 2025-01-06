@@ -94,7 +94,7 @@ function validateVersions() {
 
   if (warnings.length > 0) {
     console.warn(
-      "\nWorkspaces dep, devDep and peerDep versions not synced across repository:",
+      "\nWorkspaces local dependencies versions not synced across repository:",
     );
     warnings.forEach(({ dependency, filteredVersions }) => {
       logWarning(dependency, filteredVersions);
