@@ -116,37 +116,6 @@
 }
 
 /* ---------------------------- Accordion content --------------------------- */
-.navds-accordion__content {
-  --__acx-accordion-content-line-width: 2px;
-
-  padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
-  display: none;
-  overflow: hidden;
-  padding-block: 0;
-  max-height: 0;
-  border-color: transparent;
-  transition: all 250ms cubic-bezier(0.2, 0, 0, 1) allow-discrete;
-  animation: navds-accordion-content-animation 250ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.navds-accordion__item--no-animation {
-  animation: none;
-}
-
-@keyframes navds-accordion-content-animation {
-  0% {
-    opacity: 0.01;
-  }
-
-  20% {
-    opacity: 0.01;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 .navds-accordion--indent > .navds-accordion__item > .navds-accordion__content {
   padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
 }
@@ -163,20 +132,34 @@
   }
 }
 
-.navds-accordion__item[data-expanded="true"] > .navds-accordion__content {
-  display: block;
-  opacity: 1;
-  overflow: visible;
-  max-height: fit-content;
-  padding-block: var(--ax-spacing-2);
-  padding-block-end: var(--ax-spacing-6);
-  border-color: var(--ax-border-subtleA);
+.navds-accordion__item {
+  & > .navds-accordion__content {
+    --__acx-accordion-content-line-width: 2px;
+
+    padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
+    overflow: hidden;
+    max-height: 0;
+    padding-block: 0;
+    transition: all 250ms cubic-bezier(0.2, 0, 0, 1);
+    border-color: transparent;
+    opacity: 0;
+  }
+
+  &[data-expanded="true"] > .navds-accordion__content {
+    display: block;
+    overflow: visible;
+    max-height: fit-content;
+    padding-block: var(--ax-spacing-2);
+    padding-block-end: var(--ax-spacing-6);
+    border-color: var(--ax-border-subtleA);
+    opacity: 1;
+  }
 }
 
-@starting-style {
-  .navds-accordion__item[data-expanded="true"]:not(.navds-accordion__item--no-animation) > .navds-accordion__content {
-    padding-block: 0;
-    max-height: 0;
-    border-color: transparent;
+/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
+
+.navds-accordion__item--no-animation {
+  & > .navds-accordion__content {
+    transition: none;
   }
 }
