@@ -78,12 +78,12 @@
 /* Modifier neutral variant */
 :where(.navds-toggle-group--neutral) .navds-toggle-group__button {
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 
   &[data-selected="true"] {
-    background-color: var(--ax-bg-neutral-strong-pressed);
-    color: var(--ax-text-neutral-contrast);
+    background-color: var(--ax-bg-strong-pressed);
+    color: var(--ax-text-contrast);
   }
 }
 

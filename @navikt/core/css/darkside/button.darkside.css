@@ -109,19 +109,19 @@
  * .navds-button--primary-neutral *
  *************************/
 .navds-button--primary-neutral {
-  background-color: var(--ax-bg-neutral-strong);
-  color: var(--ax-text-neutral-contrast);
+  background-color: var(--ax-bg-strong);
+  color: var(--ax-text-contrast);
 
   &:hover {
-    background-color: var(--ax-bg-neutral-strong-hover);
+    background-color: var(--ax-bg-strong-hover);
   }
 
   &:active {
-    background-color: var(--ax-bg-neutral-strong-pressed);
+    background-color: var(--ax-bg-strong-pressed);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    background-color: var(--ax-bg-neutral-strong);
+    background-color: var(--ax-bg-strong);
   }
 }
 
@@ -168,18 +168,18 @@
   &:hover {
     --__axc-button-border-color: var(--ax-border-strong);
 
-    background-color: var(--ax-bg-neutral-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 
   &:active {
     --__axc-button-border-color: transparent;
 
-    color: var(--ax-text-neutral-contrast);
-    background-color: var(--ax-bg-neutral-strong-pressed);
+    color: var(--ax-text-contrast);
+    background-color: var(--ax-bg-strong-pressed);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    --__axc-button-border-color: var(--ax-border-neutral);
+    --__axc-button-border-color: var(--ax-border-default);
 
     color: var(--ax-text-default);
     background-color: transparent;
@@ -217,12 +217,12 @@
   color: var(--ax-text-default);
 
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hoverA);
+    background-color: var(--ax-bg-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-neutral-strong-pressed);
-    color: var(--ax-text-neutral-contrast);
+    background-color: var(--ax-bg-strong-pressed);
+    color: var(--ax-text-contrast);
   }
 
   &:is(:disabled, .navds-button--disabled) {

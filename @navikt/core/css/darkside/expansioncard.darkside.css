@@ -45,7 +45,7 @@
   justify-content: space-between;
 
   &:hover {
-    background-color: var(--ax-bg-neutral-raised-hover);
+    background-color: var(--ax-bg-hover);
   }
 
   &[data-open="true"] {
@@ -122,7 +122,7 @@
 }
 
 .navds-expansioncard__header:hover > .navds-expansioncard__header-button {
-  background-color: var(--ax-bg-neutral-moderate-hoverA);
+  background-color: var(--ax-bg-moderate-hoverA);
 }
 
 .navds-expansioncard__header-chevron {

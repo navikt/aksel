@@ -108,7 +108,7 @@
 
 /* ------------------------------ Switch Thumb ------------------------------ */
 .navds-switch__thumb {
-  background-color: var(--ax-bg-neutral-strong);
+  background-color: var(--ax-bg-strong);
   border-radius: var(--ax-border-radius-full);
   width: 1.125rem;
   height: 1.125rem;
@@ -183,8 +183,8 @@
   & > .navds-switch__input:hover ~ .navds-switch__track,
   & > .navds-switch__input:checked ~ .navds-switch__track,
   & > .navds-switch__input:checked:hover ~ .navds-switch__track {
-    background-color: var(--ax-bg-neutral-moderate);
-    border-color: var(--ax-border-neutral-subtleA);
+    background-color: var(--ax-bg-moderate);
+    border-color: var(--ax-border-subtleA);
   }
 
   & > .navds-switch__label-wrapper,
@@ -202,12 +202,12 @@
   }
 
   & .navds-switch__thumb {
-    background-color: var(--ax-bg-neutral-strong);
+    background-color: var(--ax-bg-strong);
   }
 
   & > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-    background-color: var(--ax-bg-neutral-strong);
-    color: var(--ax-text-neutral-contrast);
+    background-color: var(--ax-bg-strong);
+    color: var(--ax-text-contrast);
   }
 
   @media (hover: hover) and (pointer: fine) {
