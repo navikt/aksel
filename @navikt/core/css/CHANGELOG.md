@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.9.1
+
+### Patch Changes
+
+- Link: :bug: Use inside Alert got wrong text-color while focused or active. ([#3489](https://github.com/navikt/aksel/pull/3489))
+
 ## 7.9.0
 
 ### Minor Changes
