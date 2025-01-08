@@ -38,7 +38,7 @@
 
 .navds-timeline__row {
   display: flex;
-  background: var(--ax-bg-moderate-subtle);
+  background: var(--ax-bg-soft);
   margin: var(--ax-space-16) 0;
   grid-column: 2;
 }
