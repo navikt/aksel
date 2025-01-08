@@ -55,18 +55,10 @@ const legacySpacingTokenLookup: Record<
   "--ax-spacing-0": "--ax-space-0",
 };
 
-const translateExceptionToCSS = (exception: string) => {
-  switch (exception) {
-    case "px":
-      return "1px";
-  }
-  return exception;
-};
-
 const translateTokenStringToCSS = (
-  componentProp: string,
+  specialLayout: string,
   tokenString: string,
-  tokenSubgroup: string,
+  tokenSubgroup: "spacing" | "border-radius",
   tokenExceptions: string[],
   invert: boolean,
   prefix: string,
@@ -74,42 +66,33 @@ const translateTokenStringToCSS = (
   return tokenString
     .split(" ")
     .map((propValue, _, arr) => {
-      if (componentProp === "margin-inline" && propValue === "full") {
-        const width = 100 / arr.length;
-        return `calc((100vw - ${width}%)/-2)`;
-      }
-
-      if (componentProp === "padding-inline" && propValue === "full") {
-        const width = 100 / arr.length;
-        return `calc((100vw - ${width}%)/2)`;
-      }
-      if (["mi", "mb"].includes(componentProp) && propValue === "auto") {
+      // Handle special layout cases
+      if (specialLayout === "margin-inline" && propValue === "full")
+        return `calc((100vw - ${100 / arr.length}%)/-2)`;
+      if (specialLayout === "padding-inline" && propValue === "full")
+        return `calc((100vw - ${100 / arr.length}%)/2)`;
+      if (["mi", "mb"].includes(specialLayout) && propValue === "auto")
         return "auto";
-      }
 
+      // Handle exceptions and space tokens
       let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
 
       if (tokenExceptions.includes(propValue)) {
-        output = translateExceptionToCSS(propValue);
+        output = propValue === "px" ? "1px" : propValue;
       } else if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
-        /**
-         * While migrating to the new tokens, we need to handle some exceptions
-         * where new "space-x" tokens are used as propValues replacing old "spacing-x" tokens.
-         */
+        /* Use new "space-x" tokens */
         output = `var(--${prefix}-${propValue})`;
       } else if (tokenSubgroup === "spacing") {
+        /* Translate old "spacing" tokens to new "space" tokens */
         const spacingTokenName = `--${prefix}-spacing-${propValue}`;
-
-        /* If using new tokens, use of "legacy"-spacing like 2, 4, 8 etc needs to be translated to new space-tokens */
         output = `var(${
           legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName
         })`;
       }
 
+      // Handle inversion for negative values
       if (invert) {
-        if (propValue === "0") {
-          return `0`;
-        }
+        if (propValue === "0") return `0`;
         return `calc(-1 * ${output})`;
       }
       return output;
@@ -121,7 +104,7 @@ export function getResponsiveProps<T extends string>(
   prefix: string,
   componentName: string,
   componentProp: string,
-  tokenSubgroup: string,
+  tokenSubgroup: "spacing" | "border-radius",
   responsiveProp?: ResponsiveProp<T>,
   invert = false,
   tokenExceptions: string[] = [],
