@@ -277,6 +277,28 @@ export const Grid = () => (
   </VStack>
 );
 
+export const NewSpaceTokens = () => (
+  <VStack align="center" gap="space-8">
+    <BasePrimitive padding="space-80">
+      <Box borderWidth="1">Padding all around</Box>
+    </BasePrimitive>
+    <BasePrimitive padding="1" paddingBlock="space-80 space-0">
+      <Box borderWidth="1">Padding to the North</Box>
+    </BasePrimitive>
+    <BasePrimitive padding="1" paddingInline="space-0 space-80">
+      <Box borderWidth="1">Padding to the East</Box>
+    </BasePrimitive>
+    <BasePrimitive padding="1" paddingInline="20 space-80">
+      <Box borderWidth="1">mix</Box>
+    </BasePrimitive>
+    <BasePrimitive padding={{ md: "space-8", lg: "space-16", xl: "space-32" }}>
+      <Box background="surface-alt-3-subtle">
+        <ResponsiveBreakpointDisplay />
+      </Box>
+    </BasePrimitive>
+  </VStack>
+);
+
 export const Chromatic: Story = {
   render: () => (
     <VStack align="center" gap="6">

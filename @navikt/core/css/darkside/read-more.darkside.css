@@ -1,8 +1,8 @@
 .navds-read-more {
   --__axc-read-more-icon-size: 1.5rem;
   --__axc-read-more-pi-start: 0px;
-  --__axc-read-more-pi-end: var(--ax-spacing-1);
-  --__axc-read-more-pb: var(--ax-spacing-1);
+  --__axc-read-more-pi-end: var(--ax-space-4);
+  --__axc-read-more-pb: var(--ax-space-4);
 }
 
 /* ----------------------------- ReadMore Button ---------------------------- */
@@ -13,7 +13,7 @@
   background: none;
   display: flex;
   align-items: flex-start;
-  gap: var(--ax-spacing-1);
+  gap: var(--ax-space-4);
   color: var(--ax-text-accent);
   padding-inline: var(--__axc-read-more-pi-start) var(--__axc-read-more-pi-end);
   padding-block: var(--__axc-read-more-pb);
@@ -52,24 +52,24 @@
   }
 
   &.navds-read-more--large {
-    --__axc-read-more-pi-start: var(--ax-spacing-3);
-    --__axc-read-more-pi-end: var(--ax-spacing-6);
+    --__axc-read-more-pi-start: var(--ax-space-12);
+    --__axc-read-more-pi-end: var(--ax-space-24);
   }
 
   &.navds-read-more--small,
   &.navds-read-more--medium {
-    --__axc-read-more-pi-start: var(--ax-spacing-2);
-    --__axc-read-more-pi-end: var(--ax-spacing-4);
+    --__axc-read-more-pi-start: var(--ax-space-8);
+    --__axc-read-more-pi-end: var(--ax-space-16);
   }
 }
 
 /* ---------------------------- ReadMore Content ---------------------------- */
 .navds-read-more__content {
-  margin-top: var(--ax-spacing-2);
+  margin-top: var(--ax-space-8);
   border-left: 2px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-default);
   margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
-  padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-spacing-1));
+  padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-space-4));
 
   &[data-state="closed"] {
     display: none;
@@ -84,12 +84,12 @@
 
 /* ----------------------------- ReadMore Sizes ----------------------------- */
 .navds-read-more--large {
-  --__axc-read-more-pb: var(--ax-spacing-3);
+  --__axc-read-more-pb: var(--ax-space-12);
 }
 
 .navds-read-more--small {
   --__axc-read-more-icon-size: 1.25rem;
-  --__axc-read-more-pb: var(--ax-spacing-05);
+  --__axc-read-more-pb: var(--ax-space-2);
 }
 
 /* ------------------------- ReadMore high-contrast ------------------------- */

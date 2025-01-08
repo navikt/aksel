@@ -5,7 +5,7 @@ import {
   isGlobalColor,
   isRadiusToken,
   isSemanticColor,
-  isSpacingToken,
+  isSpaceToken,
 } from "./create-tokens";
 import { FigmaTokenConfig } from "./figma-config.types";
 
@@ -60,10 +60,10 @@ async function buildFigmaConfig() {
         hideFromPublishing: false,
         tokens: scaleTokens.filter(isRadiusToken),
       },
-      spacing: {
-        name: "Spacing",
+      space: {
+        name: "Space",
         hideFromPublishing: false,
-        tokens: scaleTokens.filter(isSpacingToken),
+        tokens: scaleTokens.filter(isSpaceToken),
       },
     };
 

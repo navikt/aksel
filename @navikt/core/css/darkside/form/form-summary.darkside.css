@@ -7,22 +7,22 @@
 
 .navds-form-summary__header {
   background: var(--ax-bg-neutral-moderateA);
-  padding: var(--ax-spacing-4) var(--ax-spacing-6);
+  padding: var(--ax-space-16) var(--ax-space-24);
   display: flex;
   justify-content: space-between;
-  gap: 0 var(--ax-spacing-3);
+  gap: 0 var(--ax-space-12);
 }
 
 @media (max-width: 479px) {
   .navds-form-summary__header {
-    padding: var(--ax-spacing-3) var(--ax-spacing-4);
+    padding: var(--ax-space-12) var(--ax-space-16);
     flex-direction: column;
   }
 }
 
 .navds-form-summary__edit {
   flex-shrink: 0;
-  margin-top: var(--ax-spacing-1);
+  margin-top: var(--ax-space-4);
   align-self: flex-start;
 }
 
@@ -31,24 +31,24 @@
 }
 
 .navds-form-summary__answers {
-  padding: var(--ax-spacing-4) var(--ax-spacing-5);
+  padding: var(--ax-space-16) var(--ax-space-20);
   margin: 0;
 }
 
 @media (max-width: 479px) {
   .navds-form-summary__answers {
-    padding: var(--ax-spacing-4);
+    padding: var(--ax-space-16);
   }
 }
 
 .navds-form-summary__answer:not(:last-child) {
-  margin-bottom: var(--ax-spacing-4);
-  padding-bottom: var(--ax-spacing-4);
+  margin-bottom: var(--ax-space-16);
+  padding-bottom: var(--ax-space-16);
   border-bottom: 1px solid var(--ax-border-subtleA);
 }
 
 .navds-form-summary__answer:has(.navds-form-summary__answer) {
-  padding-bottom: var(--ax-spacing-6);
+  padding-bottom: var(--ax-space-24);
 }
 
 .navds-form-summary__answer:has(.navds-form-summary__answer):last-child {
@@ -57,22 +57,22 @@
 
 @media (max-width: 479px) {
   .navds-form-summary__answer:not(:last-child) {
-    margin-bottom: var(--ax-spacing-3);
-    padding-bottom: var(--ax-spacing-3);
+    margin-bottom: var(--ax-space-12);
+    padding-bottom: var(--ax-space-12);
   }
 
   .navds-form-summary__answer:has(.navds-form-summary__answer) {
-    padding-bottom: var(--ax-spacing-5);
+    padding-bottom: var(--ax-space-20);
   }
 }
 
 .navds-form-summary__value:first-of-type {
-  margin-top: var(--ax-spacing-1);
+  margin-top: var(--ax-space-4);
 }
 
 .navds-form-summary__value .navds-form-summary__answers {
-  margin-top: var(--ax-spacing-2);
-  padding: var(--ax-spacing-4) var(--ax-spacing-5);
+  margin-top: var(--ax-space-8);
+  padding: var(--ax-space-16) var(--ax-space-20);
   background: var(--ax-bg-info-moderateA);
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info-subtleA);
