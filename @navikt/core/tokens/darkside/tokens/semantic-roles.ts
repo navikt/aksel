@@ -9,7 +9,7 @@ import { type StyleDictionaryTokenConfig } from "../tokens.util";
 const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
   return {
     bg: {
-      [role]: {
+      [`${role}-soft`]: {
         value: `{ax.${role}.100.value}`,
         type: "color",
         group: `background.${role}`,
