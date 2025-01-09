@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
   retries: 1,
   workers: 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? "github" : "list",
+  reporter: process.env.CI ? "github" : "html",
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
