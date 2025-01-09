@@ -81,7 +81,8 @@ export const Bilde = defineType({
     }),
     defineField({
       name: "border",
-      title: "Border",
+      title: "Bilderamme",
+      description: "Legger til en subtil ramme rundt bildet",
       type: "boolean",
       initialValue: true,
     }),
