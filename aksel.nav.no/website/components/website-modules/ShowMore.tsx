@@ -138,7 +138,7 @@ export const ShowMore =
         <div
           className="navds-show-more__content"
           style={isOpen ? {} : { height: collapsedHeight }}
-          // @ts-expect-error https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
+          // @ts-expect-error React 18 does not support inert
           inert={isOpen ? undefined : inertValue}
         >
           {children}
