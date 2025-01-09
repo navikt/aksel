@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, version } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button, type HeadingProps } from "@navikt/ds-react";
 
@@ -96,6 +96,8 @@ export const ShowMore =
 
     const ChevronIcon = isOpen ? ChevronUpIcon : ChevronDownIcon;
 
+    const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
+
     return (
       <Component
         ref={localRef}
@@ -137,7 +139,7 @@ export const ShowMore =
           className="navds-show-more__content"
           style={isOpen ? {} : { height: collapsedHeight }}
           // @ts-expect-error https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
-          inert={isOpen ? undefined : ""}
+          inert={isOpen ? undefined : inertValue}
         >
           {children}
         </div>
