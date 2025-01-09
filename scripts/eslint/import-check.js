@@ -2,7 +2,7 @@ module.exports = {
   create(context) {
     return {
       ImportDeclaration(node) {
-        const usNavikt = node.source.value.startsWith("@navikt");
+        const isNavikt = node.source.value.startsWith("@navikt");
         const isReact = node.source.value === "react";
         const isInlineParts = node.source.value.includes("__parts");
         const isExampleHOC =
@@ -30,7 +30,7 @@ module.exports = {
               "When using 'withDsExample'-HOC, import must be '@/web/examples/withDsExample'",
           });
         } else if (
-          !usNavikt &&
+          !isNavikt &&
           !isReact &&
           !isInlineParts &&
           !isExampleHOC &&
