@@ -15,8 +15,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * padding='4'
-   * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * padding='space-16'
+   * padding={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   padding?: ResponsiveProp<SpacingScale>;
   /**
@@ -24,9 +24,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * paddingInline='4'
-   * paddingInline='4 5'
-   * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * paddingInline='space-16'
+   * paddingInline='space-16 space-20'
+   * paddingInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   paddingInline?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
@@ -36,9 +36,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * paddingBlock='4'
-   * paddingBlock='4 5'
-   * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * paddingBlock='space-16'
+   * paddingBlock='space-16 space-20'
+   * paddingBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   paddingBlock?: ResponsiveProp<
     SpacingScale | `${SpacingScale} ${SpacingScale}`
@@ -48,8 +48,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * margin='4'
-   * margin={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * margin='space-16'
+   * margin={{xs: '0', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   margin?: ResponsiveProp<SpacingScale>;
   /**
@@ -57,9 +57,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * marginInline='4'
-   * marginInline='4 5'
-   * marginInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * marginInline='space-16'
+   * marginInline='space-16 space-20'
+   * marginInline={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   marginInline?: ResponsiveProp<
     | SpacingScale
@@ -73,9 +73,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * marginBlock='4'
-   * marginBlock='4 5'
-   * marginBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * marginBlock='space-16'
+   * marginBlock='space-16 space-20'
+   * marginBlock={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   marginBlock?: ResponsiveProp<
     | SpacingScale
@@ -119,9 +119,9 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * inset='4'
-   * inset='4 5'
-   * inset={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
+   * inset='space-16'
+   * inset='space-16 space-20'
+   * inset={{xs: '0 space-8', sm: 'space-12', md: 'space-16 space-20', lg: 'space-20', xl: 'space-24'}}
    */
   inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**
@@ -129,8 +129,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * top='4'
-   * top={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * top='space-16'
+   * top={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   top?: ResponsiveProp<SpacingScale>;
   /**
@@ -138,8 +138,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * right='4'
-   * right={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * right='space-16'
+   * right={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   right?: ResponsiveProp<SpacingScale>;
   /**
@@ -147,8 +147,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * bottom='4'
-   * bottom={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * bottom='space-16'
+   * bottom={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   bottom?: ResponsiveProp<SpacingScale>;
   /**
@@ -156,8 +156,8 @@ export type PrimitiveProps = {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * left='4'
-   * left={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * left='space-16'
+   * left={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   left?: ResponsiveProp<SpacingScale>;
   /**

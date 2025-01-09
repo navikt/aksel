@@ -33,7 +33,7 @@
 
 /* ------------------------------ Search input ------------------------------ */
 .navds-search__input {
-  padding-right: var(--ax-spacing-10);
+  padding-right: var(--ax-space-40);
 
   &:focus-visible {
     outline: none;
@@ -48,33 +48,33 @@
 }
 
 .navds-search__input--simple {
-  padding-left: var(--ax-spacing-10);
+  padding-left: var(--ax-space-40);
 }
 
 /* ------------------------------ Search sizing ----------------------------- */
 .navds-form-field--small {
   & .navds-search__input {
-    padding-right: var(--ax-spacing-7);
+    padding-right: var(--ax-space-28);
   }
 
   & .navds-search__input--simple {
-    padding-left: var(--ax-spacing-7);
+    padding-left: var(--ax-space-28);
   }
 
   & .navds-search__search-icon {
-    left: var(--ax-spacing-1);
+    left: var(--ax-space-4);
     font-size: 1.25rem;
   }
 
   & .navds-search__button-clear {
-    right: var(--ax-spacing-1);
+    right: var(--ax-space-4);
   }
 }
 
 /* ------------------------------- Search icon ------------------------------ */
 .navds-search__search-icon {
   position: absolute;
-  left: var(--ax-spacing-2);
+  left: var(--ax-space-8);
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -88,7 +88,7 @@
 /* --------------------------- Search Clear-button -------------------------- */
 .navds-search__button-clear {
   position: absolute;
-  right: var(--ax-spacing-2);
+  right: var(--ax-space-8);
   top: 50%;
   transform: translateY(-50%);
 }

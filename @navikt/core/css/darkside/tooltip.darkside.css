@@ -3,7 +3,7 @@
   background-color: var(--ax-bg-raised);
   color: var(--ax-text-default);
   border-radius: var(--ax-border-radius-medium);
-  padding: 0 var(--ax-spacing-1-alt);
+  padding: 0 var(--ax-space-6);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -81,15 +81,15 @@
 }
 
 .navds-tooltip__keys {
-  padding-bottom: var(--ax-spacing-1);
+  padding-bottom: var(--ax-space-4);
   display: flex;
-  gap: var(--ax-spacing-1);
+  gap: var(--ax-space-4);
 }
 
 .navds-tooltip__key {
   font-family: var(--ax-font-family);
   color: var(--ax-text-default);
-  padding: 0 var(--ax-spacing-1);
+  padding: 0 var(--ax-space-4);
   min-width: 1.125rem;
   height: 1.125rem;
   display: inline-flex;

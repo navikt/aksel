@@ -6,7 +6,7 @@
 }
 
 .navds-fieldset > :not(:first-child, :empty) {
-  margin-top: var(--ax-spacing-2);
+  margin-top: var(--ax-space-8);
 }
 
 .navds-fieldset__description {

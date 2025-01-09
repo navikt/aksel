@@ -4,8 +4,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: var(--ax-spacing-3);
-  padding: var(--ax-spacing-3);
+  gap: var(--ax-space-12);
+  padding: var(--ax-space-12);
   text-align: left;
   cursor: pointer;
   border: none;
@@ -58,7 +58,7 @@
 }
 
 .navds-accordion--small .navds-accordion__header {
-  padding-block: var(--a-spacing-2);
+  padding-block: var(--ax-space-8);
 }
 
 .navds-accordion__header::before,
@@ -116,16 +116,17 @@
 }
 
 /* ---------------------------- Accordion content --------------------------- */
+
 .navds-accordion--indent > .navds-accordion__item > .navds-accordion__content {
-  padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
+  padding-inline: var(--ax-space-24) var(--ax-space-12);
 }
 
 .navds-accordion--indent > .navds-accordion__item .navds-accordion__content-inner {
   box-shadow: -2px 0 0 0 var(--ax-border-subtleA);
-  padding-block: var(--ax-spacing-2);
+  padding-block: var(--ax-space-8);
 
   /* Aligns content with heading-section */
-  padding-inline: calc(var(--ax-spacing-5) + 2px) var(--ax-spacing-5);
+  padding-inline: calc(var(--ax-space-20) + 2px) var(--ax-space-20);
 
   @media (forced-colors: active) {
     border-left: 1px solid canvastext;
@@ -136,7 +137,7 @@
   & > .navds-accordion__content {
     --__acx-accordion-content-line-width: 2px;
 
-    padding-inline: var(--ax-spacing-6) var(--ax-spacing-3);
+    padding-inline: var(--ax-space-24) var(--ax-space-12);
     overflow: hidden;
     max-height: 0;
     padding-block: 0;
@@ -149,8 +150,8 @@
     display: block;
     overflow: visible;
     max-height: fit-content;
-    padding-block: var(--ax-spacing-2);
-    padding-block-end: var(--ax-spacing-6);
+    padding-block: var(--ax-space-8);
+    padding-block-end: var(--ax-space-24);
     border-color: var(--ax-border-subtleA);
     opacity: 1;
   }

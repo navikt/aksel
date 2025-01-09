@@ -1,9 +1,9 @@
 .navds-alert {
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid;
-  padding: var(--ax-spacing-4) var(--ax-spacing-5);
+  padding: var(--ax-space-16) var(--ax-space-20);
   display: flex;
-  gap: var(--ax-spacing-3);
+  gap: var(--ax-space-12);
   align-items: center;
 
   @media (forced-colors: active) {
@@ -25,8 +25,8 @@
 }
 
 .navds-alert--small {
-  padding: var(--ax-spacing-3) var(--ax-spacing-4);
-  gap: var(--ax-spacing-2);
+  padding: var(--ax-space-12) var(--ax-space-16);
+  gap: var(--ax-space-8);
 
   > .navds-alert__icon {
     margin-block-start: 0;
@@ -94,22 +94,22 @@
 
 .navds-alert--close-button {
   > .navds-alert__wrapper {
-    margin-block-start: var(--ax-spacing-05);
+    margin-block-start: var(--ax-space-2);
   }
 
   > .navds-alert__icon {
-    margin-block-start: var(--ax-spacing-05);
+    margin-block-start: var(--ax-space-2);
   }
 
   &.navds-alert--small {
     align-items: flex-start;
 
     > .navds-alert__wrapper {
-      margin-block-start: var(--ax-spacing-1);
+      margin-block-start: var(--ax-space-4);
     }
 
     > .navds-alert__icon {
-      margin-block-start: var(--ax-spacing-1);
+      margin-block-start: var(--ax-space-4);
     }
   }
 }

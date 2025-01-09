@@ -6,7 +6,7 @@ import {
 import { radiusTokenConfig } from "../tokens/radius";
 import { semanticTokenConfig } from "../tokens/semantic";
 import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
-import { spacingTokenConfig } from "../tokens/spacing";
+import { spaceTokenConfig } from "../tokens/space";
 import { textContrastTokenConfig } from "../tokens/text-contrast";
 
 const configKeysWithGroup = ["value", "type", "group"];
@@ -61,8 +61,8 @@ describe("Validate token configurations", () => {
     ).toBeTruthy();
   });
 
-  test(`Spacing scale`, () => {
-    expect(validateConfig(spacingTokenConfig, configKeys)).toBeTruthy();
+  test(`Space scale`, () => {
+    expect(validateConfig(spaceTokenConfig, configKeys)).toBeTruthy();
   });
 
   test(`Radius scale`, () => {

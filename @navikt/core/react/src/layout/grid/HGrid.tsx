@@ -26,9 +26,9 @@ export type HGridProps = React.HTMLAttributes<HTMLDivElement> & {
    * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
    * or an object of spacing tokens for different breakpoints.
    * @example
-   * gap="6"
-   * gap="8 4"
-   * gap={{ sm: "2", md: "2", lg: "6", xl: "6"}}
+   * gap="space-20"
+   * gap="space-32 space-16"
+   * gap={{ sm: "space-8", md: "space-12", lg: "space-20", xl: "space-24"}}
    */
   gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**

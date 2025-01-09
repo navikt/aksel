@@ -11,7 +11,7 @@
 }
 
 .navds-heading--xlarge.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-5);
+  margin-bottom: var(--ax-space-20);
 }
 
 .navds-heading--large {
@@ -21,7 +21,7 @@
 }
 
 .navds-heading--large.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-4);
+  margin-bottom: var(--ax-space-16);
 }
 
 /* Mobile scale */
@@ -33,7 +33,7 @@
   }
 
   .navds-heading--xlarge.navds-typo--spacing {
-    margin-bottom: var(--ax-spacing-4);
+    margin-bottom: var(--ax-space-16);
   }
 
   .navds-heading--large {
@@ -43,7 +43,7 @@
   }
 
   .navds-heading--large.navds-typo--spacing {
-    margin-bottom: var(--ax-spacing-3);
+    margin-bottom: var(--ax-space-12);
   }
 }
 
@@ -54,7 +54,7 @@
 }
 
 .navds-heading--medium.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-3);
+  margin-bottom: var(--ax-space-12);
 }
 
 .navds-heading--small {
@@ -64,7 +64,7 @@
 }
 
 .navds-heading--small.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-3);
+  margin-bottom: var(--ax-space-12);
 }
 
 .navds-heading--xsmall {
@@ -74,7 +74,7 @@
 }
 
 .navds-heading--xsmall.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-3);
+  margin-bottom: var(--ax-space-12);
 }
 
 /* Ingress */
@@ -87,7 +87,7 @@
 }
 
 .navds-ingress.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-10);
+  margin-bottom: var(--ax-space-40);
 }
 
 /* Body */
@@ -100,7 +100,7 @@
 }
 
 .navds-body-long.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-7);
+  margin-bottom: var(--ax-space-28);
 }
 
 .navds-body-long--large {
@@ -110,7 +110,7 @@
 }
 
 .navds-body-long--large.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-10);
+  margin-bottom: var(--ax-space-40);
 }
 
 .navds-body-long--small {
@@ -120,7 +120,7 @@
 }
 
 .navds-body-long--small.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-6);
+  margin-bottom: var(--ax-space-24);
 }
 
 .navds-body-short {
@@ -132,7 +132,7 @@
 }
 
 .navds-body-short.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-3);
+  margin-bottom: var(--ax-space-12);
 }
 
 .navds-body-short--large {
@@ -142,7 +142,7 @@
 }
 
 .navds-body-short--large.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-4);
+  margin-bottom: var(--ax-space-16);
 }
 
 .navds-body-short--small {
@@ -152,7 +152,7 @@
 }
 
 .navds-body-short--small.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-2);
+  margin-bottom: var(--ax-space-8);
 }
 
 /* Label */
@@ -165,7 +165,7 @@
 }
 
 .navds-label.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-3);
+  margin-bottom: var(--ax-space-12);
 }
 
 .navds-label--small {
@@ -175,7 +175,7 @@
 }
 
 .navds-label--small.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-2);
+  margin-bottom: var(--ax-space-8);
 }
 
 /* Small text */
@@ -187,7 +187,7 @@
 }
 
 .navds-detail.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-2);
+  margin-bottom: var(--ax-space-8);
 }
 
 .navds-detail.navds-typo--uppercase {
@@ -199,7 +199,7 @@
 }
 
 .navds-detail--small.navds-typo--spacing {
-  margin-bottom: var(--ax-spacing-2);
+  margin-bottom: var(--ax-space-8);
 }
 
 .navds-error-message {
@@ -207,7 +207,7 @@
 
   &.navds-error-message--show-icon {
     display: flex;
-    gap: var(--ax-spacing-1);
+    gap: var(--ax-space-4);
 
     & svg {
       margin-top: 0.15em;

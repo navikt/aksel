@@ -24,7 +24,7 @@
 }
 
 .navds-page__content--padding {
-  padding-block-end: var(--ax-spacing-16);
+  padding-block-end: var(--ax-space-64);
 }
 
 .navds-pageblock--text {

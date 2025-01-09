@@ -6,11 +6,11 @@
   border-radius: var(--ax-border-radius-xlarge);
 
   /* Creates a small gutter between screen-edges on smaller devices */
-  max-width: calc(100vw - var(--ax-spacing-6));
+  max-width: calc(100vw - var(--ax-space-24));
 }
 
 .navds-popover__content {
-  padding: var(--ax-spacing-4) var(--ax-spacing-5);
+  padding: var(--ax-space-16) var(--ax-space-20);
 }
 
 .navds-popover--hidden {

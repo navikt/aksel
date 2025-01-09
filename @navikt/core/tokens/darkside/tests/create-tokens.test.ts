@@ -49,13 +49,13 @@ describe("createTokenName", () => {
     expect(createTokenName(token)).toBe("Radius Small");
   });
 
-  test("should add 'Spacing' prefix for global-spacing type tokens", () => {
+  test("should add 'Space' prefix for global-space type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
       attributes: { item: "4" },
-      type: "global-spacing",
+      type: "global-space",
     };
-    expect(createTokenName(token)).toBe("Spacing 4");
+    expect(createTokenName(token)).toBe("Space 4");
   });
 });
 
@@ -69,16 +69,16 @@ describe("extracting figma value for token", () => {
     expect(figmaValue(token)).toBe(4);
   });
 
-  test("should convert px to number for global-spacing type tokens", () => {
+  test("should convert px to number for global-space type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
       value: "32px",
-      type: "global-spacing",
+      type: "global-space",
     };
     expect(figmaValue(token)).toBe(32);
   });
 
-  test("should return the original value for non-radius and non-spacing type tokens", () => {
+  test("should return the original value for non-radius and non-space type tokens", () => {
     const token: TransformedToken = {
       ...baseToken,
       type: "color",
