@@ -248,6 +248,7 @@ export interface BildeT {
     link?: string;
   };
   dekorativt?: boolean;
+  border?: boolean;
   background?: {
     rgb: { a: number; b: number; g: number; r: number };
     alpha: number;
