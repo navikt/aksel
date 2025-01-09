@@ -21,6 +21,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
+
       - name: Lint
         run: yarn lint
 
