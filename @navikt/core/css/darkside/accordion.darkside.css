@@ -156,7 +156,7 @@
   }
 }
 
-/* ---------------- ExpansionCard No Animation (defaultOpen) ---------------- */
+/* ---------------- Accordion No Animation (defaultOpen) ---------------- */
 
 .navds-accordion__item--no-animation {
   & > .navds-accordion__content {
