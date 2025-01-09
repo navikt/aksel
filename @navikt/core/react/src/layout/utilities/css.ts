@@ -67,12 +67,15 @@ const translateTokenStringToCSS = (
     .split(" ")
     .map((propValue, _, arr) => {
       // Handle special layout cases
-      if (specialLayout === "margin-inline" && propValue === "full")
+      if (specialLayout === "margin-inline" && propValue === "full") {
         return `calc((100vw - ${100 / arr.length}%)/-2)`;
-      if (specialLayout === "padding-inline" && propValue === "full")
+      }
+      if (specialLayout === "padding-inline" && propValue === "full") {
         return `calc((100vw - ${100 / arr.length}%)/2)`;
-      if (["mi", "mb"].includes(specialLayout) && propValue === "auto")
+      }
+      if (["mi", "mb"].includes(specialLayout) && propValue === "auto") {
         return "auto";
+      }
 
       // Handle exceptions and space tokens
       let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
