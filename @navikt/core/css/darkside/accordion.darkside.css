@@ -134,12 +134,15 @@
 }
 
 .navds-accordion__item {
-  & > .navds-accordion__content {
-    --__acx-accordion-content-line-width: 2px;
+  height: fit-content;
 
-    padding-inline: var(--ax-space-24) var(--ax-space-12);
+  & > .navds-accordion__content {
+    height: fit-content;
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
     overflow: hidden;
-    max-height: 0;
+    padding-inline: var(--ax-space-24) var(--ax-space-12);
     padding-block: 0;
     transition: all 250ms cubic-bezier(0.2, 0, 0, 1);
     border-color: transparent;
@@ -147,9 +150,8 @@
   }
 
   &[data-expanded="true"] > .navds-accordion__content {
-    display: block;
-    overflow: visible;
-    max-height: fit-content;
+    grid-template-rows: 1fr;
+    visibility: visible;
     padding-block: var(--ax-space-8);
     padding-block-end: var(--ax-space-24);
     border-color: var(--ax-border-subtleA);
