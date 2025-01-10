@@ -1,7 +1,9 @@
 import cl from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, version } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button, type HeadingProps } from "@navikt/ds-react";
+
+const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
@@ -136,8 +138,8 @@ export const ShowMore =
         <div
           className="navds-show-more__content"
           style={isOpen ? {} : { height: collapsedHeight }}
-          // @ts-expect-error https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
-          inert={isOpen ? undefined : ""}
+          // @ts-expect-error React 18 does not support inert
+          inert={isOpen ? undefined : inertValue}
         >
           {children}
         </div>
