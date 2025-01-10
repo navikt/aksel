@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState, version } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { Button, type HeadingProps } from "@navikt/ds-react";
 
+const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
+
 export interface ShowMoreProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "onClick"> {
   /**
@@ -95,8 +97,6 @@ export const ShowMore =
     }, [shouldScroll]);
 
     const ChevronIcon = isOpen ? ChevronUpIcon : ChevronDownIcon;
-
-    const inertValue = parseInt(version.split(".")[0]) > 18 ? true : ""; // Support for inert was added in React 19
 
     return (
       <Component
