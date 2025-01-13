@@ -2,7 +2,6 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { Theme } from "@navikt/ds-react/Theme";
-// import { Theme } from "../../../../@navikt/core/react";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
 
