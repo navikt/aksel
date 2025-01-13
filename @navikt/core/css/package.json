@@ -56,7 +56,7 @@
   "exports": {
     ".": "./dist/index.css",
     "./dist/*": "./dist/*",
-    "./darkside": "./dist/darkside/index.min.css",
+    "./darkside": "./dist/darkside/index.css",
     "./tokens.json": "./tokens.json"
   }
 }
