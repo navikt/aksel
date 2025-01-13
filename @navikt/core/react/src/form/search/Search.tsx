@@ -11,7 +11,7 @@ import { useThemeInternal } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
-import { useI18n } from "../../util/i18n/i18n.context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { SearchContext } from "./context";

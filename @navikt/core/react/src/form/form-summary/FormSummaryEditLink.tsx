@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Link } from "../../link";
-import { useI18n } from "../../util/i18n/i18n.context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { OverridableComponent } from "../../util/types";
 
 export interface FormSummaryEditProps

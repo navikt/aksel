@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
   extends Omit<HTMLAttributes<HTMLDivElement>, "role"> {

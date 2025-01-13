@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { XMarkIcon } from "@navikt/aksel-icons";
 import { composeEventHandlers } from "../util/composeEventHandlers";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface ChipsRemovableProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

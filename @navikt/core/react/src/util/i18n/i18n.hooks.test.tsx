@@ -2,9 +2,8 @@ import { renderHook } from "@testing-library/react";
 import React from "react";
 import { describe, expect, test } from "vitest";
 import { Provider } from "../../provider";
-import { useI18n } from "./i18n.context";
-import en from "./locales/en";
-import nb from "./locales/nb";
+import { useDateLocale, useI18n } from "./i18n.hooks";
+import { en, nb, nn } from "./locales";
 
 describe("useI18n", () => {
   test("should throw error if key is not found", () => {
@@ -110,5 +109,65 @@ describe("useI18n", () => {
     const { result } = renderHook(() => useI18n("FileUpload", i18n));
     const translate = result.current;
     expect(() => translate("item.uploading", { other: "John" })).toThrowError();
+  });
+});
+
+describe("useDateLocale", () => {
+  test("should return the default NB date locale when Provider is not used", () => {
+    const { result } = renderHook(() => useDateLocale());
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(nb.global.dateLocale);
+  });
+
+  test("should return the default NB date locale when Provider is used without the locale prop", () => {
+    const { result } = renderHook(() => useDateLocale(), {
+      wrapper: ({ children }) => <Provider>{children}</Provider>,
+    });
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(nb.global.dateLocale);
+  });
+
+  test("should return date locale from context.locale when using Provider with just locale prop", () => {
+    const { result } = renderHook(() => useDateLocale(), {
+      wrapper: ({ children }) => <Provider locale={en}>{children}</Provider>,
+    });
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(en.global.dateLocale);
+  });
+
+  test("should return date locale from context.locale when it does not exist in translations", () => {
+    const { result } = renderHook(() => useDateLocale(), {
+      wrapper: ({ children }) => (
+        <Provider locale={en} translations={{ global: {} }}>
+          {children}
+        </Provider>
+      ),
+    });
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(en.global.dateLocale);
+  });
+
+  test("should return date locale from context.translations", () => {
+    const { result } = renderHook(() => useDateLocale(), {
+      wrapper: ({ children }) => (
+        <Provider locale={en} translations={nn}>
+          {children}
+        </Provider>
+      ),
+    });
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(nn.global.dateLocale);
+  });
+
+  test("should return date locale from second object in context.translations", () => {
+    const { result } = renderHook(() => useDateLocale(), {
+      wrapper: ({ children }) => (
+        <Provider locale={nb} translations={[{}, nn, en]}>
+          {children}
+        </Provider>
+      ),
+    });
+    const dateLocale = result.current;
+    expect(dateLocale).toBe(nn.global.dateLocale);
   });
 });

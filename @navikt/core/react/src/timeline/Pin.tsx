@@ -17,7 +17,7 @@ import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
 import { useThemeInternal } from "../theme/Theme";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { position } from "./utils/calc";
 import { TimelineComponentTypes } from "./utils/types.internal";

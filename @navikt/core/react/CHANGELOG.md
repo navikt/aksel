@@ -1,5 +1,32 @@
 # @navikt/ds-react
 
+## 7.9.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.1
+  - @navikt/aksel-icons@7.9.1
+
+## 7.9.0
+
+### Minor Changes
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+  All form components: replace dot with warning icon in error message.
+
+### Patch Changes
+
+- Button: Fix edge-case where setting "loading={true}" in a Modal caused the button to get 0 width and not show spinner ([#3252](https://github.com/navikt/aksel/pull/3252))
+
+- Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+
+- Textarea: resize immediately upon receiving resize event (eg. inside modal opening). ([#3463](https://github.com/navikt/aksel/pull/3463))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.9.0
+  - @navikt/aksel-icons@7.9.0
+
 ## 7.8.1
 
 ### Patch Changes

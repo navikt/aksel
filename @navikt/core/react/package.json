@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.8.1",
+  "version": "7.9.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -603,10 +603,11 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "docgen": "yarn tsx ../../../scripts/docgen.ts",
+    "docgen": "tsx ../../../scripts/docgen.ts",
+    "i18n-jsdoc": "tsx ./scripts/addJsdocToLocales.ts",
     "write-packagejson": "echo '{\"type\": \"module\"}' > esm/package.json",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" ",
+    "build": "yarn i18n-jsdoc && concurrently \"tsc -p tsconfig.build.json\" \"tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && yarn write-packagejson\" && yarn i18n-jsdoc --cleanup",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "TZ=UTC vitest run -c tests/vitest.config.ts",
     "test:watch": "vitest watch"
@@ -614,20 +615,23 @@
   "dependencies": {
     "@floating-ui/react": "0.25.4",
     "@floating-ui/react-dom": "^2.0.9",
-    "@navikt/aksel-icons": "^7.8.1",
-    "@navikt/ds-tokens": "^7.8.1",
+    "@navikt/aksel-icons": "^7.9.1",
+    "@navikt/ds-tokens": "^7.9.1",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.1"
   },
   "devDependencies": {
-    "@testing-library/dom": "9.3.4",
-    "@testing-library/jest-dom": "^5.16.0",
-    "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "^14.2.0",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jscodeshift": "^0.11.11",
+    "aksel": "workspace:^",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",
-    "jsdom": "24.0.0",
+    "jscodeshift": "^0.15.1",
+    "jsdom": "25.0.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "6.0.1",
@@ -635,7 +639,7 @@
     "tsc-alias": "1.8.8",
     "tsx": "^4.19.1",
     "typescript": "5.5.4",
-    "vitest": "^1.2.2"
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "@types/react": ">=17.0.30",
@@ -645,5 +649,6 @@
     "@types/react": {
       "optional": true
     }
-  }
+  },
+  "_comment": "The 'aksel' dependency tells yarn to install the root deps when installing deps for this package. Helps make it possible to contribute without access to GPR."
 }

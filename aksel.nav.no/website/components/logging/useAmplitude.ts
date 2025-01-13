@@ -5,8 +5,9 @@ const batchedEvents: Parameters<Pick<Types.BrowserClient, "track">["track"]>[] =
   [];
 
 export let amplitude: Pick<Types.BrowserClient, "init" | "track"> = {
-  track: (...eventsData) => {
-    batchedEvents.push(eventsData);
+  track: (/* ...eventsData */) => {
+    /* Until re-enabled in _app.tsx, we can skip storing events */
+    /* batchedEvents.push(eventsData); */
     return {
       promise: new Promise<Types.Result>((resolve) =>
         resolve({

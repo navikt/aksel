@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import {
   DateTranslationContextProvider,
   SharedMonthProvider,

@@ -4,7 +4,7 @@ import { Popover, PopoverProps } from "../popover";
 import { useThemeInternal } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import { HelpTextIcon } from "./HelpTextIcon";
 
 export interface HelpTextProps

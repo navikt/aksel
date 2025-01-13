@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import { ExpansionCardContext } from "./context";
 
 export interface ExpansionCardHeaderProps

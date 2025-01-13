@@ -1,5 +1,5 @@
 import React from "react";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 
 export const DarksideGudiepanelIllustration = () => {
   const translate = useI18n("GuidePanel");
