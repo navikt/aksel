@@ -3,7 +3,7 @@ import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
 import { omit } from "../../util";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.context";
+import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
 import { getLocaleFromString, getTranslations } from "../utils";
 import Caption from "./parts/Caption";

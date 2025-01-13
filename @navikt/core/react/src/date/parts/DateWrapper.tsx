@@ -5,7 +5,8 @@ import { Modal } from "../../modal";
 import { useModalContext } from "../../modal/Modal.context";
 import { Popover } from "../../popover";
 import { useMedia } from "../../util/hooks";
-import { TFunction, useI18n } from "../../util/i18n/i18n.context";
+import { useI18n } from "../../util/i18n/i18n.hooks";
+import { TFunction } from "../../util/i18n/i18n.types";
 import { getGlobalTranslations } from "../utils";
 
 const variantToLabel = {

@@ -128,21 +128,22 @@ export const block = {
 export const headingStyles = [
   ...block.styles,
   {
-    title: "H2",
+    title: "Heading 2",
     value: "h2",
   },
   {
-    title: "H3",
+    title: "Heading 3",
     value: "h3",
   },
   {
-    title: "H4",
+    title: "Heading 4",
     value: "h4",
   },
 ];
 
 const Riktekst = (
   type:
+    | "blogg"
     | "god-praksis"
     | "grunnleggende"
     | "templates"
@@ -188,8 +189,8 @@ const Riktekst = (
   ];
 
   const templates = ["kode_eksempler", "exampletext_block"];
-
   const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
+  const blogg = ["compare_images"];
 
   fields.push(...standard);
 
@@ -208,6 +209,9 @@ const Riktekst = (
       break;
     case "templates":
       fields.push(...templates);
+      break;
+    case "blogg":
+      fields.push(...blogg);
       break;
     default:
       break;
@@ -285,5 +289,13 @@ export const RiktekstTemplates = {
   name: "riktekst_templates",
   type: "array",
   of: Riktekst("templates"),
+  icon: () => <FileTextIcon aria-hidden />,
+};
+
+export const RiktekstBlogg = {
+  title: "Riktekst",
+  name: "riktekst_blogg",
+  type: "array",
+  of: Riktekst("blogg"),
   icon: () => <FileTextIcon aria-hidden />,
 };

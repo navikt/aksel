@@ -1,75 +1,59 @@
-import {
-  DocumentActionComponent,
-  DocumentBadgeComponent,
-  definePlugin,
-} from "sanity";
+import { DocumentActionComponent, definePlugin } from "sanity";
 import { allArticleDocuments } from "@/sanity/config";
+import { forcedPublishActions } from "./actions/forcedPublish";
 import {
-  createWrappedApproveAction,
-  createWrappedFocusAction,
-  createWrappedUpdateAction,
-} from "./actions";
-import { createPublishWithDateAction } from "./actions/createPublishWithDateAction";
-import { CreateStatusBadge, createBadgeComponent } from "./badges";
+  setLastVerified,
+  setLastVerifiedWithoutPublish,
+} from "./actions/lastVerified";
+import { setPublishedAt } from "./actions/publishedAt";
 
-const generateBadges = (prev: DocumentBadgeComponent[]) => {
-  const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
-    return createBadgeComponent(badge);
-  });
-  return [...defaultBadges, CreateStatusBadge()];
-};
-
-const getCustomActions = (prev: DocumentActionComponent[]) => {
-  const defaultActions = prev.map((action) => {
-    if (action.action === "publish") {
-      return createWrappedFocusAction(action);
-    }
-    return action;
-  });
-
-  const customActions = [
-    defaultActions[0],
-    createWrappedApproveAction(),
-    createWrappedUpdateAction(),
-  ];
-  return [...customActions, ...defaultActions.slice(1)];
-};
-
+/**
+ * Plugin that adds customized publication flow to documents.
+ * For document-types that require a quality check before publishing, it adds a dialog for the user to confirm the publish action.
+ * For remaining documents in 'allArticleDocuments', it sets the publishedAt field to the current date on first publish.
+ */
 export const publicationFlow = definePlugin(() => {
-  const hasQualityControl = [
-    "komponent_artikkel",
-    "ds_artikkel",
-    "aksel_artikkel",
-  ];
-  const hasPublishedAt = allArticleDocuments;
-
   return {
     name: "publication-flow",
     document: {
-      actions: (prev, context) => {
-        if (
-          hasQualityControl.some((docType) => docType === context.schemaType)
-        ) {
-          return getCustomActions(prev);
+      actions: (originalActions, context) => {
+        let newActions = originalActions;
+
+        const shouldUseQualityControl = [
+          "komponent_artikkel",
+          "ds_artikkel",
+          "aksel_artikkel",
+        ].some((docType) => docType === context.schemaType);
+
+        const shouldSetPublishedAt = allArticleDocuments.some(
+          (docType) => docType === context.schemaType,
+        );
+
+        if (shouldUseQualityControl) {
+          newActions = newActions.reduce((prev, originalAction) => {
+            if (originalAction.action === "publish") {
+              prev.push(setLastVerified(originalAction));
+              prev.push(forcedPublishActions(originalAction));
+              prev.push(setLastVerifiedWithoutPublish(context));
+            } else {
+              prev.push(originalAction);
+            }
+            return prev;
+          }, [] as DocumentActionComponent[]);
+
+          return newActions;
         }
 
-        if (hasPublishedAt.some((docType) => docType === context.schemaType)) {
-          return prev.map((originalAction) =>
-            originalAction.action === "publish"
-              ? createPublishWithDateAction(originalAction)
-              : originalAction,
-          );
+        if (!shouldSetPublishedAt) {
+          return newActions;
         }
 
-        return prev;
-      },
-      badges: (prev, context) => {
-        if (
-          hasQualityControl.some((docType) => docType === context.schemaType)
-        ) {
-          return generateBadges(prev);
-        }
-        return prev;
+        return newActions.map((originalAction) => {
+          if (originalAction.action === "publish") {
+            return setPublishedAt(originalAction);
+          }
+          return originalAction;
+        });
       },
     },
   };

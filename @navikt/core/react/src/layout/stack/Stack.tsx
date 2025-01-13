@@ -47,9 +47,9 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
    * or an object of spacing tokens for different breakpoints.
    *
    * @example
-   * gap='4'
-   * gap='8 4'
-   * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
+   * gap='space-16'
+   * gap='space-32 space-16'
+   * gap={{xs: 'space-8', sm: 'space-12', md: 'space-16', lg: 'space-20', xl: 'space-24'}}
    */
   gap?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
   /**

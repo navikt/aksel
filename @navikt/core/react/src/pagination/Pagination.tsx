@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
-import { useI18n } from "../util/i18n/i18n.context";
+import { useI18n } from "../util/i18n/i18n.hooks";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,

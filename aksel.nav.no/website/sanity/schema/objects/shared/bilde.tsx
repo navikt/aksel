@@ -80,6 +80,13 @@ export const Bilde = defineType({
       initialValue: false,
     }),
     defineField({
+      name: "border",
+      title: "Bilderamme",
+      description: "Legger til en subtil ramme rundt bildet",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
       name: "background",
       title: "Bakgrunnsfarge",
       description: "Husk å dobbelsjekke kontrast!",
