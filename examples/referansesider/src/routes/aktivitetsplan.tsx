@@ -1,80 +1,19 @@
-import { ReactNode, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
-import {
-  BodyShort,
-  Box,
-  Detail,
-  Stack,
-  Tag,
-  TagProps,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyShort, Detail, Stack, Tag, TagProps } from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
+import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
 
 const Header1 = styled.h1`
   font-size: 40px;
   font-weight: 600;
 `;
-
-let ActivityColumn;
-{
-  ActivityColumn = ({
-    children,
-    title,
-  }: {
-    children: ReactNode;
-    title: string;
-  }) => {
-    return (
-      <Box.New
-        background="accent"
-        borderRadius="medium"
-        borderWidth="1"
-        padding="space-12"
-      >
-        <VStack gap="4">
-          <h2>{title}</h2>
-          {children}
-        </VStack>
-      </Box.New>
-    );
-  };
-}
-
-/*let ActivityCard;
-{
-  const ScCard = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 4px;
-    border: 1px solid ${tokens.BorderDefault};
-    border-radius: 8px;
-    background-color: ${tokens.BgDefault};
-    padding: 16px;
-    width: 100%;
-  `;
-
-  ActivityCard = ({
-    children,
-    title,
-  }: {
-    children: ReactNode;
-    title: string;
-  }) => {
-    return (
-      <ScCard>
-        <h3 className="uppercase text-sm text-gray-600">{title}</h3>
-        {children}
-      </ScCard>
-    );
-  };
-}*/
 
 let BlueDotHeader;
 {
