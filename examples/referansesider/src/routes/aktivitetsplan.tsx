@@ -1,12 +1,21 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
+import {
+  BodyShort,
+  Box,
+  Detail,
+  Stack,
+  Tag,
+  TagProps,
+  VStack,
+} from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
-import { Tag } from "../components/Tag";
+import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 
 const Header1 = styled.h1`
   font-size: 40px;
@@ -15,18 +24,6 @@ const Header1 = styled.h1`
 
 let ActivityColumn;
 {
-  const ScCol = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 10px;
-    width: 300px;
-    height: fit-content;
-    border-radius: 8px;
-    background-color: ${tokens.BgSunken};
-    padding: 8px;
-    padding-bottom: 16px;
-  `;
-
   ActivityColumn = ({
     children,
     title,
@@ -35,15 +32,22 @@ let ActivityColumn;
     title: string;
   }) => {
     return (
-      <ScCol>
-        <h2>{title}</h2>
-        {children}
-      </ScCol>
+      <Box.New
+        background="accent"
+        borderRadius="medium"
+        borderWidth="1"
+        padding="space-12"
+      >
+        <VStack gap="4">
+          <h2>{title}</h2>
+          {children}
+        </VStack>
+      </Box.New>
     );
   };
 }
 
-let ActivityCard;
+/*let ActivityCard;
 {
   const ScCard = styled.div`
     display: flex;
@@ -70,7 +74,7 @@ let ActivityCard;
       </ScCard>
     );
   };
-}
+}*/
 
 let BlueDotHeader;
 {
@@ -116,6 +120,64 @@ const ScSelect = styled.select`
   min-width: 300px;
 `;
 
+type Activities = {
+  column: string;
+  cards: {
+    category: string;
+    title: string;
+    tag?: { variant: TagProps["variant"]; text: string };
+    date?: { start: string; end?: string };
+  }[];
+}[];
+
+const activities: Activities = [
+  {
+    column: "Forslag",
+    cards: [],
+  },
+  {
+    column: "Planlagt",
+    cards: [
+      {
+        category: "Stilling fra Nav",
+        title: "Servitør",
+        tag: {
+          variant: "success",
+          text: "Venter på å bli kontaktet",
+        },
+      },
+      {
+        category: "Behandling",
+        title: "Medisinsk behandling",
+        date: {
+          start: "13.09.2022",
+          end: "14.09.2022",
+        },
+        tag: { variant: "info-filled", text: "Avtalt med Nav" },
+      },
+      {
+        category: "Møte med Nav",
+        title: "Beste møtet ever",
+        date: {
+          start: "21.08.2030",
+        },
+      },
+    ],
+  },
+  {
+    column: "Gjennomfører",
+    cards: [],
+  },
+  {
+    column: "Fullført",
+    cards: [],
+  },
+  {
+    column: "Avbrutt",
+    cards: [],
+  },
+];
+
 const AktivitetsplanPage = () => {
   return (
     <Dekoratoren>
@@ -147,51 +209,27 @@ const AktivitetsplanPage = () => {
         </div>
       </Page>
       <Page options={{ width: "xlarge" }}>
-        <div className="flex gap-5 justify-center">
-          <ActivityColumn title="Forslag">
-            <ActivityCard title="Servitør">
-              <BlueDotHeader dot level={3}>
-                Servitør (ikke svart)
-              </BlueDotHeader>
-              <Tag $variant="success">Venter på å bli kontaktet</Tag>
-            </ActivityCard>
-            <ActivityCard title="Servitør">
-              <div>test</div>
-              <Tag $variant="info-strong">Avtalt med Nav</Tag>
-            </ActivityCard>
-          </ActivityColumn>
-          <ActivityColumn title="Forslag">
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-          </ActivityColumn>
-          <ActivityColumn title="Forslag">
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-          </ActivityColumn>
-          <ActivityColumn title="Forslag">
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-            <ActivityCard title="Servitør">
-              <div>test</div>
-            </ActivityCard>
-          </ActivityColumn>
-          <ActivityColumn title="Forslag">
-            <ActivityCard title="Servitør">
-              <div>test</div>
-              <Tag $variant="info-strong">Avtalt med Nav</Tag>
-              <Tag $variant="neutral-strong">Slettet</Tag>
-            </ActivityCard>
-          </ActivityColumn>
-        </div>
+        <Stack gap="space-8" direction={{ xs: "column", md: "row" }}>
+          {activities.map(({ column, cards }) => (
+            <ActivityColumn key={column} title={column}>
+              {cards.map(({ category, title, date, tag }) => (
+                <ActivityCard key={`${title} ${date}`}>
+                  <Detail uppercase>{category}</Detail>
+                  <BlueDotHeader dot level={3}>
+                    {title}
+                  </BlueDotHeader>
+                  {date && (
+                    <BodyShort>
+                      {date.start}
+                      {date.end && ` - ${date.end}`}
+                    </BodyShort>
+                  )}
+                  {tag && <Tag variant={tag.variant}>{tag.text}</Tag>}
+                </ActivityCard>
+              ))}
+            </ActivityColumn>
+          ))}
+        </Stack>
       </Page>
     </Dekoratoren>
   );
