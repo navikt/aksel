@@ -7,6 +7,8 @@ const ActivityCard = ({ children }: { children: ReactNode }) => {
       background="default"
       borderRadius="medium"
       borderWidth="1"
+      // paddingBlock="space-12"
+      // paddingInline="space-12"
       padding="space-12"
     >
       <VStack gap="4">{children}</VStack>

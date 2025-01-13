@@ -12,6 +12,7 @@
   "dependencies": {
     "@navikt/aksel-icons": "../../@navikt/aksel-icons",
     "@navikt/ds-css": "../../@navikt/core/css",
+    "@navikt/ds-react": "../../@navikt/core/react",
     "@navikt/ds-tokens": "../../@navikt/core/tokens",
     "@tanstack/react-router": "^1.57.17",
     "clsx": "^2.1.1",
