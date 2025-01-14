@@ -83,12 +83,12 @@ const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
     },
     text: {
       [role]: {
-        value: `{ax.${role}.700.value}`,
+        value: `{ax.${role}.800.value}`,
         type: "color",
         group: `text.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.900.value}`,
+        value: `{ax.${role}.1000.value}`,
         type: "color",
         group: `text.${role}`,
       },
@@ -100,7 +100,7 @@ const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
     },
     border: {
       [role]: {
-        value: `{ax.${role}.500.value}`,
+        value: `{ax.${role}.600.value}`,
         type: "color",
         group: `border.${role}`,
       },
@@ -115,7 +115,7 @@ const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
         group: `border.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.600.value}`,
+        value: `{ax.${role}.700.value}`,
         type: "color",
         group: `border.${role}`,
       },
