@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
-import { BodyShort, Detail, Stack, Tag, TagProps } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Detail,
+  Heading,
+  Select,
+  Stack,
+  Tag,
+  TagProps,
+  VStack,
+} from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
@@ -9,11 +18,7 @@ import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
-
-const Header1 = styled.h1`
-  font-size: 40px;
-  font-weight: 600;
-`;
+import { MainCard } from "../components/aktivitetsplan/MainCard";
 
 let BlueDotHeader;
 {
@@ -45,19 +50,6 @@ let BlueDotHeader;
     );
   };
 }
-
-const ScMainCard = styled.div`
-  border: 2px dashed ${tokens.BorderDefault};
-  border-radius: 8px;
-`;
-
-const ScSelect = styled.select`
-  background-color: ${tokens.BgInput};
-  border: 1px solid ${tokens.BorderDefault};
-  border-radius: 4px;
-  padding: 8px;
-  min-width: 300px;
-`;
 
 type Activities = {
   column: string;
@@ -121,30 +113,32 @@ const AktivitetsplanPage = () => {
   return (
     <Dekoratoren>
       <Page options={{ width: "medium", footer: "none" }}>
-        <Header1>Aktivitetsplan</Header1>
-        <ScMainCard className="p-2 flex mt-6">
-          <SykepengerIcon className="w-40 relative translate-x-5 translate-y-3" />
-          <div className="flex flex-col gap-2 justify-between my-2">
+        <Heading as="h1" size="xlarge">
+          Aktivitetsplan
+        </Heading>
+        <MainCard>
+          <SykepengerIcon />
+          <VStack gap="space-16" marginBlock="0 space-4">
             <BlueDotHeader dot level={2}>
               Mitt mål
             </BlueDotHeader>
-            <p>jeg vil bli sjørøver</p>
+            <BodyShort>Jeg vil bli sjørøver</BodyShort>
             <Button variant="secondary" size="small">
               Endre målet
             </Button>
-          </div>
-        </ScMainCard>
+          </VStack>
+        </MainCard>
         <div className="flex justify-between mt-6">
           <div className="flex gap-4">
             <Button>Legg til aktivitet</Button>
             <Button variant="secondary">Filtrer</Button>
           </div>
-          <ScSelect>
+          <Select label="Velg periode" hideLabel>
             <option value="dog">Nåværende periode</option>
             <option value="dog2">Cat</option>
             <option value="dog3">Border Collie</option>
             <option value="dog4">Maine Coon</option>
-          </ScSelect>
+          </Select>
         </div>
       </Page>
       <Page options={{ width: "xlarge" }}>

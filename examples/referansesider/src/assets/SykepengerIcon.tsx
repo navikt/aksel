@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { twMerge } from "tailwind-merge";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 /**
@@ -18,10 +17,10 @@ const ScPlusSVG = styled.svg`
   fill: ${tokens.BgBrandMagentaModerate};
 `;
 
-export const Ikon = ({ className }: { className?: string }) => {
+export const Ikon = () => {
   return (
-    <span className={twMerge(`absolute block`, className)} aria-hidden="true">
-      <span className="absolute">
+    <div className="relative w-40" aria-hidden="true">
+      <div className="absolute">
         <ScPlusSVG
           role="img"
           width="96"
@@ -39,8 +38,8 @@ export const Ikon = ({ className }: { className?: string }) => {
             transform="rotate(90 60 16)"
           ></rect>
         </ScPlusSVG>
-      </span>
-      <span className="absolute" id=":R8imm:">
+      </div>
+      <div className="absolute" id=":R8imm:">
         <ScSVG
           role="img"
           width="96"
@@ -103,8 +102,8 @@ export const Ikon = ({ className }: { className?: string }) => {
           <path d="M86 38L82 38" strokeWidth="3" strokeLinecap="round"></path>
           <path d="M82 2L82 14" strokeWidth="3" strokeLinecap="round"></path>
         </ScSVG>
-      </span>
-    </span>
+      </div>
+    </div>
   );
 };
 
