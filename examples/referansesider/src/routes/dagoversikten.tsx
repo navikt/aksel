@@ -15,9 +15,9 @@ import {
   PersonPencilIcon,
   PlateFillIcon,
 } from "@navikt/aksel-icons";
+import { Link } from "@navikt/ds-react/Link";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { Button } from "../components/Button";
-import { Link } from "../components/Link";
 import { MiniTag } from "../components/MiniTag";
 import { Page } from "../components/Page";
 import { Tag } from "../components/Tag";
@@ -127,7 +127,7 @@ const LeftSide = () => {
         </div>
         <span>-</span>
       </div>
-      <Link className="my-4">Simulering</Link>
+      <Link href="#">Simulering</Link>
       <div className="flex gap-4">
         <Button variant="primary" size="small">
           Fatt vedtak

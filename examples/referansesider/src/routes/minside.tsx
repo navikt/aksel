@@ -7,9 +7,9 @@ import {
   HeartIcon,
   PencilFillIcon,
 } from "@navikt/aksel-icons";
+import { Link } from "@navikt/ds-react/Link";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import { Dekoratoren } from "../components/Dekoratoren";
-import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 import { Tag } from "../components/Tag";
 
@@ -249,12 +249,12 @@ const Component = () => {
               <div>
                 <div className="flex justify-between">
                   <p>Siste utbetaling</p>
-                  <Link neutral>Se alle</Link>
+                  <Link href="#">Se alle</Link>
                 </div>
                 <span className="font-semibold text-3xl">1 234 kr</span>
                 <p>14. november til kontonummer 1234</p>
               </div>
-              <Link className="hoverable">
+              <Link href="#">
                 <div className="flex justify-between">
                   <p>Arbeidsavklaringspenger</p>
                   <div className="flex align-middle gap-1">
@@ -268,7 +268,7 @@ const Component = () => {
               $variant="info"
               className="flex flex-col gap-0.5 max-w-[592px] m-auto"
             >
-              <Link className="hoverable">
+              <Link href="#">
                 <div className="flex justify-between">
                   <p>Innboks</p>
                   <div className="flex align-middle gap-1">
@@ -312,7 +312,7 @@ const Component = () => {
                   <ChevronRightIcon className="chevron mx-3 size-6 mt-[0.5px]" />
                 </AccordionLinkalike>
               </div>
-              <Link neutral>Gå til dokumentarkivet</Link>
+              <Link href="#">Gå til dokumentarkivet</Link>
             </div>
           </div>
         </div>

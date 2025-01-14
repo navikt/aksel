@@ -1,7 +1,7 @@
 import { ReactNode } from "@tanstack/react-router";
 import styled from "styled-components";
+import { Link } from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
-import { Link } from "./Link";
 
 const ScLink = styled(Link)`
   font-weight: 500;
@@ -59,7 +59,7 @@ export const Dekoratoren = ({ children }: { children: ReactNode }) => {
       <ScFooter>
         <span>this</span>
         <div>is</div>
-        <Link>the footer</Link>
+        <Link href="#">the footer</Link>
       </ScFooter>
     </div>
   );

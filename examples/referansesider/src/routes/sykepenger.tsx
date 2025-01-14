@@ -7,11 +7,11 @@ import {
   ArrowRightIcon,
   ChevronDownIcon,
 } from "@navikt/aksel-icons";
+import { Link } from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
-import { Link } from "../components/Link";
 import { Page } from "../components/Page";
 
 const EyeBrowText = styled.span`
@@ -163,7 +163,6 @@ let LinkList: ReactNode;
             <li key={link}>
               <Link
                 className="flex gap-[6px] items-center text-xl no-underline hover:underline"
-                inverted
                 href={`#${link}`}
               >
                 <ArrowDownRightIcon aria-hidden />
@@ -398,7 +397,9 @@ function SykepengerPage() {
     <Dekoratoren>
       <Page>
         <div className="mt-16 relative">
-          <SykepengerIcon className="-translate-x-32 translate-y-1" />
+          <div className="-translate-x-32 translate-y-1">
+            <SykepengerIcon />
+          </div>
           <EyeBrowText>PENGESTØTTE — FOR ARBEIDSGIVERE</EyeBrowText>
           <H1>Sykepenger</H1>
           <PreAmble>
