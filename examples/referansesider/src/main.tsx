@@ -1,9 +1,9 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { Theme } from "@navikt/ds-react/Theme";
 import "./index.css";
 import { routeTree } from "./routeTree.gen";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 // import { ThemeProvider } from "./theme/ThemeProvider";
 
@@ -20,9 +20,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <Theme theme="dark">
+      <ThemeProvider>
         <RouterProvider router={router} />
-      </Theme>
+      </ThemeProvider>
     </StrictMode>,
   );
 }
