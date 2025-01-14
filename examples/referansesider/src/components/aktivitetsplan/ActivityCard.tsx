@@ -5,13 +5,13 @@ const ActivityCard = ({ children }: { children: ReactNode }) => {
   return (
     <Box.New
       background="default"
-      borderRadius="medium"
+      borderRadius="large"
       borderWidth="1"
-      // paddingBlock="space-12"
-      // paddingInline="space-12"
       padding="space-12"
     >
-      <VStack gap="4">{children}</VStack>
+      <VStack gap="space-8" align="start">
+        {children}
+      </VStack>
     </Box.New>
   );
 };

@@ -4,9 +4,9 @@ import styled from "styled-components";
 import {
   BodyShort,
   Detail,
+  HGrid,
   Heading,
   Select,
-  Stack,
   Tag,
   TagProps,
   VStack,
@@ -56,8 +56,9 @@ type Activities = {
   cards: {
     category: string;
     title: string;
-    tag?: { variant: TagProps["variant"]; text: string };
     date?: { start: string; end?: string };
+    hasChange?: boolean;
+    tag?: { variant: TagProps["variant"]; text: string };
   }[];
 }[];
 
@@ -72,6 +73,7 @@ const activities: Activities = [
       {
         category: "Stilling fra Nav",
         title: "Servitør",
+        hasChange: true,
         tag: {
           variant: "success",
           text: "Venter på å bli kontaktet",
@@ -97,11 +99,48 @@ const activities: Activities = [
   },
   {
     column: "Gjennomfører",
-    cards: [],
+    cards: [
+      {
+        category: "Stilling fra Nav",
+        hasChange: true,
+        title: "Servitør",
+        tag: {
+          variant: "success",
+          text: "Venter på å bli kontaktet",
+        },
+      },
+      {
+        category: "Stilling fra Nav",
+        hasChange: true,
+        title: "Assisterende skipskokk",
+        tag: {
+          variant: "success",
+          text: "Venter på å bli kontaktet",
+        },
+      },
+      {
+        category: "Stilling fra Nav",
+        hasChange: true,
+        title: "Servitør",
+        tag: {
+          variant: "success",
+          text: "Venter på å bli kontaktet",
+        },
+      },
+    ],
   },
   {
     column: "Fullført",
-    cards: [],
+    cards: [
+      {
+        category: "Stilling fra Nav",
+        title: "Greve av Gral",
+        tag: {
+          variant: "neutral",
+          text: "Ikke fått jobben",
+        },
+      },
+    ],
   },
   {
     column: "Avbrutt",
@@ -142,27 +181,33 @@ const AktivitetsplanPage = () => {
         </div>
       </Page>
       <Page options={{ width: "xlarge" }}>
-        <Stack gap="space-8" direction={{ xs: "column", md: "row" }}>
+        <HGrid as="div" gap="space-8" columns={{ md: "repeat(5, 1fr)" }}>
           {activities.map(({ column, cards }) => (
             <ActivityColumn key={column} title={column}>
-              {cards.map(({ category, title, date, tag }) => (
+              {cards.map(({ category, hasChange, title, date, tag }) => (
                 <ActivityCard key={`${title} ${date}`}>
-                  <Detail uppercase>{category}</Detail>
-                  <BlueDotHeader dot level={3}>
-                    {title}
-                  </BlueDotHeader>
+                  <div>
+                    <Detail uppercase>{category}</Detail>
+                    <BlueDotHeader dot={hasChange} level={3}>
+                      {title}
+                    </BlueDotHeader>
+                  </div>
                   {date && (
                     <BodyShort>
                       {date.start}
                       {date.end && ` - ${date.end}`}
                     </BodyShort>
                   )}
-                  {tag && <Tag variant={tag.variant}>{tag.text}</Tag>}
+                  {tag && (
+                    <Tag variant={tag.variant} size="small">
+                      {tag.text}
+                    </Tag>
+                  )}
                 </ActivityCard>
               ))}
             </ActivityColumn>
           ))}
-        </Stack>
+        </HGrid>
       </Page>
     </Dekoratoren>
   );

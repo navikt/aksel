@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Box, VStack } from "@navikt/ds-react";
+import { Box, Heading, VStack } from "@navikt/ds-react";
 
 const ActivityColumn = ({
   children,
@@ -9,9 +9,11 @@ const ActivityColumn = ({
   title: string;
 }) => {
   return (
-    <Box.New background="brand-beige" borderRadius="medium" padding="space-16">
+    <Box.New background="sunken" borderRadius="medium" padding="space-16">
       <VStack gap="space-8">
-        <h2>{title}</h2>
+        <Heading as="h2" size="small">
+          {title}
+        </Heading>
         {children}
       </VStack>
     </Box.New>
