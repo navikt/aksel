@@ -1,5 +1,6 @@
 import { ReactNode, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
+import { useContext } from "react";
 import styled from "styled-components";
 import { twMerge } from "tailwind-merge";
 import {
@@ -13,6 +14,7 @@ import SykepengerIcon from "../assets/SykepengerIcon";
 import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
+import { ThemeProviderContext } from "../theme/ThemeContext";
 
 const EyeBrowText = styled.span`
   color: ${tokens.TextSubtle};
@@ -393,12 +395,14 @@ export const Route = createFileRoute("/sykepenger")({
 });
 
 function SykepengerPage() {
+  const theme = useContext(ThemeProviderContext);
+
   return (
     <Dekoratoren>
       <Page>
         <div className="mt-16 relative">
           <div className="-translate-x-32 translate-y-1">
-            <SykepengerIcon />
+            <SykepengerIcon darkmode={theme.theme === "dark"} />
           </div>
           <EyeBrowText>PENGESTØTTE — FOR ARBEIDSGIVERE</EyeBrowText>
           <H1>Sykepenger</H1>
@@ -409,8 +413,8 @@ function SykepengerPage() {
         </div>
         <Paragraph className="my-6 text-lg">
           Det finnes også informasjon om sykepenger til{" "}
-          <Link href="#abc">arbeidsgivere</Link> og{" "}
-          <Link href="#123">leger og tannleger eller andre behandlere</Link>.
+          <Link href="#">arbeidsgivere</Link> og{" "}
+          <Link href="#">leger og tannleger eller andre behandlere</Link>.
         </Paragraph>
         <LinkList
           title="Innhold på siden"

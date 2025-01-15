@@ -5,19 +5,25 @@ import * as tokens from "@navikt/ds-tokens/darkside-js";
  * @note
  * - Unsure of token use here.
  */
-const ScSVG = styled.svg`
-  stroke: ${tokens.TextBrandMagentaStrong};
+const ScSVG = styled.svg<{ darkmode: boolean }>`
+  stroke: ${(props) =>
+    props.darkmode
+      ? "var(--ax-brand-magenta-500)"
+      : tokens.TextBrandMagentaStrong};
 `;
 
 /**
  * @note
  * - BgBrandMagentaModerate virker litt rart å bruke her.
  */
-const ScPlusSVG = styled.svg`
-  fill: ${tokens.BgBrandMagentaModerate};
+const ScPlusSVG = styled.svg<{ darkmode: boolean }>`
+  fill: ${(props) =>
+    props.darkmode
+      ? "var(--ax-brand-magenta-900)"
+      : "var(--ax-brand-magenta-400)"};
 `;
 
-export const Ikon = () => {
+export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
   return (
     <div className="relative w-40" aria-hidden="true">
       <div className="absolute">
@@ -28,6 +34,7 @@ export const Ikon = () => {
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          darkmode={darkmode}
         >
           <rect x="16" y="36" width="64" height="24"></rect>
           <rect
@@ -47,6 +54,7 @@ export const Ikon = () => {
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          darkmode={darkmode}
         >
           <circle
             cx="50.3637"
