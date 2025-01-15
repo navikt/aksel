@@ -8,12 +8,3 @@
 #root {
   width: 100%;
 }
-
-:where(:root) *:focus {
-  outline: 4px solid var(--a-bg-accent-strong-hover);
-  z-index: 200;
-}
-
-*:focus {
-  outline-offset: 4px;
-}
