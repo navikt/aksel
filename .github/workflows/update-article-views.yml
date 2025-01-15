@@ -18,6 +18,7 @@ jobs:
           dockerfile: scripts/article-views/Dockerfile.update-article-views
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
       - name: start naisjob prod-gcp
         uses: nais/deploy/actions/deploy@master
         env:

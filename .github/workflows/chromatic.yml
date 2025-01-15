@@ -18,31 +18,21 @@ concurrency:
 
 jobs:
   chromatic:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'ignore-chromatic') }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup project
+        uses: ./.github/actions/setup
         with:
-          node-version: lts/*
-          cache: yarn
-
-      - name: set-env for yarn install to @navikt scope
-        shell: bash
-        run: echo "NPM_AUTH_TOKEN=${{ secrets.READER_TOKEN }}" >> $GITHUB_ENV
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build packages
-        run: yarn boot
+          npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - name: Chromatic
         uses: chromaui/action@latest
