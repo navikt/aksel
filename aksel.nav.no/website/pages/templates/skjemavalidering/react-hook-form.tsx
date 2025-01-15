@@ -148,4 +148,5 @@ export const Demo = {
 
 export const args = {
   index: 2,
+  sandbox: false,
 };
