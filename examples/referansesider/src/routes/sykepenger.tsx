@@ -409,8 +409,8 @@ function SykepengerPage() {
         </div>
         <Paragraph className="my-6 text-lg">
           Det finnes også informasjon om sykepenger til{" "}
-          <Link>arbeidsgivere</Link> og{" "}
-          <Link>leger og tannleger eller andre behandlere</Link>.
+          <Link href="#abc">arbeidsgivere</Link> og{" "}
+          <Link href="#123">leger og tannleger eller andre behandlere</Link>.
         </Paragraph>
         <LinkList
           title="Innhold på siden"
@@ -429,8 +429,8 @@ function SykepengerPage() {
         </Paragraph>
         <PlainList>
           <li>
-            Du er <Link>medlem av folketrygden</Link> eller er EU/EØS-borger og
-            jobber i Norge.
+            Du er <Link href="#">medlem av folketrygden</Link> eller er
+            EU/EØS-borger og jobber i Norge.
           </li>
           <li>Du er under 70 år.</li>
           <li>
@@ -451,10 +451,10 @@ function SykepengerPage() {
           situasjon du er i.
         </Paragraph>
         <Paragraph>
-          Får du <Link>fosterhjemsgodtgjørelse</Link>? Da regnes du som
-          frilanser. Det samme gjelder hvis du får <Link>omsorgsstønad</Link> og
-          du ikke er ansatt hos en arbeidsgiver. Se egen informasjon for
-          frilansere.
+          Får du <Link href="#">fosterhjemsgodtgjørelse</Link>? Da regnes du som
+          frilanser. Det samme gjelder hvis du får{" "}
+          <Link href="#">omsorgsstønad</Link> og du ikke er ansatt hos en
+          arbeidsgiver. Se egen informasjon for frilansere.
         </Paragraph>
         <Paragraph>Se hvilke regler som gjelder for deg:</Paragraph>
         <Accordion>
@@ -498,7 +498,7 @@ function SykepengerPage() {
                 beskjed om at du er syk, derfor må du gi beskjed til
                 arbeidsgiveren din så snart som mulig.&nbsp;Du&nbsp;leverer
                 enten&nbsp;
-                <Link>egenmelding</Link>
+                <Link href="#">egenmelding</Link>
                 &nbsp;eller sykmelding. Hvis du er syk ut over
                 egenmeldingsdagene, må du kontakte lege.
               </li>{" "}
@@ -557,8 +557,9 @@ function SykepengerPage() {
             <H4>Friskmelding til arbeidsformidling</H4>{" "}
             <Paragraph>
               Hvis alle muligheter for å komme tilbake til arbeidsplassen din er
-              forsøkt, kan du få <Link>sykepenger i inntil 12 uker</Link> mens
-              du søker ny jobb.
+              forsøkt, kan du få{" "}
+              <Link href="#">sykepenger i inntil 12 uker</Link> mens du søker ny
+              jobb.
             </Paragraph>{" "}
             <PillLink>Friskmelding til arbeidsformidling</PillLink>
             <h4>Dette gjør du når du blir syk</h4>{" "}
