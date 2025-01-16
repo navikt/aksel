@@ -67,7 +67,7 @@
 }
 
 .navds-loader__background {
-  stroke: var(--ax-border-neutral-subtleA);
+  stroke: var(--ax-border-subtleA);
   stroke-width: var(--__axc-loader-stroke-width);
 }
 

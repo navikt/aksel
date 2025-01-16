@@ -4,9 +4,9 @@ import type {
   BorderColorKeys,
   BorderColorWithRoleKeys,
   BorderRadiusKeys,
-  DefaultBgKeys,
   ShadowKeys,
   StaticBgKeys,
+  StaticDefaultBgKeys,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
 import { omit } from "../../util";
@@ -23,9 +23,9 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
-   * @see {@link DefaultBgKeys} and {@link StaticBgKeys}
+   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
    */
-  background?: DefaultBgKeys | StaticBgKeys;
+  background?: StaticDefaultBgKeys | StaticBgKeys;
   /**
    * CSS `border-color` property.
    * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).

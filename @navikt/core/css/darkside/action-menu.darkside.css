@@ -94,7 +94,7 @@
   --__axc-action-menu-item-pr: var(--ax-space-2);
 
   &[data-state="open"] {
-    background-color: var(--ax-bg-neutral-moderate-pressed);
+    background-color: var(--ax-bg-moderate-pressed);
   }
 
   &:focus {
@@ -138,7 +138,7 @@
 
 /* --------------------------- ActionMenu shortcut -------------------------- */
 .navds-action-menu__shortcut {
-  background-color: var(--ax-bg-neutral-moderateA);
+  background-color: var(--ax-bg-moderateA);
   color: var(--ax-text-default);
   border-radius: var(--ax-border-radius-small);
   padding: 0 var(--ax-space-4);

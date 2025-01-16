@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--ax-border-radius-small);
-  background: var(--ax-bg-neutral-moderateA);
+  background: var(--ax-bg-moderateA);
 
   @media (forced-colors: active) {
     & {
