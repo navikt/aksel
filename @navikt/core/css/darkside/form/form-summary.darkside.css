@@ -1,12 +1,12 @@
 .navds-form-summary {
   overflow: hidden;
-  border: 1px solid var(--ax-border-neutral-subtleA);
+  border: 1px solid var(--ax-border-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   background: var(--ax-bg-raised);
 }
 
 .navds-form-summary__header {
-  background: var(--ax-bg-neutral-moderateA);
+  background: var(--ax-bg-moderateA);
   padding: var(--ax-space-16) var(--ax-space-24);
   display: flex;
   justify-content: space-between;

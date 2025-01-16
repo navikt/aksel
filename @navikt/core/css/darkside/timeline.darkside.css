@@ -38,7 +38,7 @@
 
 .navds-timeline__row {
   display: flex;
-  background: var(--ax-bg-neutral);
+  background: var(--ax-bg-soft);
   margin: var(--ax-space-16) 0;
   grid-column: 2;
 }
@@ -167,18 +167,18 @@
 }
 
 .navds-timeline__period--neutral {
-  background: var(--ax-bg-neutral-moderate);
-  border: solid 1px var(--ax-border-neutral);
-  color: var(--ax-text-neutral-icon);
+  background: var(--ax-bg-moderate);
+  border: solid 1px var(--ax-border-default);
+  color: var(--ax-text-icon);
 
   &.navds-timeline__period--clickable:hover {
-    background: var(--ax-bg-neutral-moderate-hover);
+    background: var(--ax-bg-moderate-hover);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
-    background: var(--ax-bg-neutral-strong-pressed);
+    background: var(--ax-bg-strong-pressed);
     border: none;
-    color: var(--ax-text-neutral-contrast);
+    color: var(--ax-text-contrast);
   }
 }
 
@@ -282,13 +282,13 @@
 }
 
 .navds-timeline__zoom-button:not([aria-pressed="true"]):hover {
-  background: var(--ax-bg-neutral-moderate-hoverA);
+  background: var(--ax-bg-moderate-hoverA);
 }
 
 .navds-timeline__zoom-button[aria-pressed="true"] {
-  background: var(--ax-bg-neutral-strong-pressed);
-  border-color: var(--ax-bg-neutral-strong-pressed);
-  color: var(--ax-text-neutral-contrast);
+  background: var(--ax-bg-strong-pressed);
+  border-color: var(--ax-bg-strong-pressed);
+  color: var(--ax-text-contrast);
 }
 
 .navds-timeline__zoom li:focus-within {
