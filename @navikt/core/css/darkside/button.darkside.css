@@ -138,7 +138,6 @@
     --__axc-button-border-color: var(--ax-border-accent-strong);
 
     background-color: var(--ax-bg-accent-moderate-hoverA);
-    color: var(--ax-text-accent-strong);
   }
 
   &:active {
@@ -195,7 +194,6 @@
 
   &:hover {
     background-color: var(--ax-bg-accent-moderate-hoverA);
-    color: var(--ax-text-accent-strong);
   }
 
   &:active {
