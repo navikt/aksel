@@ -25,7 +25,7 @@ type PageProps = NextPageT<{
 
 export const query = `*[_type == "blogg_landingsside"][0]{
   "page": {..., intro[]{...,${destructureBlocks}}},
-  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
+  "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
     seo,
     heading,
     ingress,

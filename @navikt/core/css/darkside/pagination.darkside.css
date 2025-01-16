@@ -7,7 +7,7 @@
   padding: 0;
   list-style: none;
   display: flex;
-  gap: var(--ax-spacing-3);
+  gap: var(--ax-space-12);
 
   & li {
     list-style: none;

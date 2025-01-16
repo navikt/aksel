@@ -15,7 +15,7 @@ export const HighlightedBlogg = ({
   return (
     <div>
       <div className="col-span-1 hidden md:block">
-        <div className="relative mb-10 block aspect-video">
+        <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
           {blogg?.seo?.image ? (
             <Image
               src={urlFor(blogg.seo.image).quality(100).auto("format").url()}
@@ -64,7 +64,7 @@ export const HighlightedBlogg = ({
       </div>
       {/* Mobile view */}
       <div className="w-full md:hidden">
-        <div className="relative mb-10 block aspect-video">
+        <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
           {blogg?.seo?.image ? (
             <Image
               src={urlFor(blogg.seo.image).quality(100).auto("format").url()}

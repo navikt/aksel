@@ -41,11 +41,11 @@
   }
 
   .navds-switch--small & {
-    padding: calc(var(--ax-spacing-2) - var(--ax-spacing-05)) 0 calc(var(--ax-spacing-2) - var(--ax-spacing-05)) 3.25rem;
+    padding: calc(var(--ax-space-8) - var(--ax-space-2)) 0 calc(var(--ax-space-8) - var(--ax-space-2)) 3.25rem;
   }
 
   .navds-switch--right.navds-switch--small & {
-    padding: calc(var(--ax-spacing-2) - var(--ax-spacing-05)) 3.25rem calc(var(--ax-spacing-2) - var(--ax-spacing-05)) 0;
+    padding: calc(var(--ax-space-8) - var(--ax-space-2)) 3.25rem calc(var(--ax-space-8) - var(--ax-space-2)) 0;
   }
 }
 
@@ -68,7 +68,7 @@
   height: 1.5rem;
   background-color: var(--ax-bg-input);
   position: absolute;
-  top: var(--ax-spacing-3);
+  top: var(--ax-space-12);
   left: 0;
   border-radius: var(--ax-border-radius-full);
   border: 2px solid var(--ax-border-default);
@@ -77,7 +77,7 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
   .navds-switch--small > & {
-    top: var(--ax-spacing-1);
+    top: var(--ax-space-4);
   }
 
   .navds-switch__input:checked ~ & {

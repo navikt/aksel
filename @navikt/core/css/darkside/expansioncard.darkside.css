@@ -1,7 +1,7 @@
 .navds-expansioncard {
   --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-  --__axc-expansioncard-padding-block: var(--ax-spacing-4);
-  --__axc-expansioncard-padding-inline: var(--ax-spacing-5);
+  --__axc-expansioncard-padding-block: var(--ax-space-16);
+  --__axc-expansioncard-padding-inline: var(--ax-space-20);
 
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
@@ -16,11 +16,11 @@
 
 /* ------------------------ ExpansionCard Small-size ------------------------ */
 .navds-expansioncard--small {
-  --__axc-expansioncard-padding-inline: var(--ax-spacing-4);
-  --__axc-expansioncard-padding-block: var(--ax-spacing-3);
+  --__axc-expansioncard-padding-inline: var(--ax-space-16);
+  --__axc-expansioncard-padding-block: var(--ax-space-12);
 
   & > .navds-expansioncard__header .navds-expansioncard__title--small {
-    margin-top: var(--ax-spacing-05);
+    margin-top: var(--ax-space-2);
   }
 
   & :is(.navds-expansioncard__title--medium, .navds-expansioncard__title--large) {
@@ -37,7 +37,7 @@
 .navds-expansioncard__header {
   width: 100%;
   display: flex;
-  gap: var(--ax-spacing-4);
+  gap: var(--ax-space-16);
   padding: var(--__axc-expansioncard-padding-block) var(--__axc-expansioncard-padding-inline);
   border-radius: var(--__axc-expansioncard-border-radius);
   background-color: transparent;
@@ -76,11 +76,11 @@
 }
 
 .navds-expansioncard__title--medium {
-  margin-top: var(--ax-spacing-2);
+  margin-top: var(--ax-space-8);
 }
 
 .navds-expansioncard__title--large {
-  margin-top: var(--ax-spacing-1);
+  margin-top: var(--ax-space-4);
 }
 
 /* ----------------------- ExpansionCard Header Button ---------------------- */

@@ -18,10 +18,10 @@
 
 .navds-checkbox__label,
 .navds-radio__label {
-  padding: var(--ax-spacing-3) 0;
+  padding: var(--ax-space-12) 0;
   cursor: pointer;
   display: flex;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
 
   --__axc-radio-checkbox-readonly-bg: var(--ax-bg-neutral-moderate);
   --__axc-radio-checkbox-readonly-border: var(--ax-border-subtle);
@@ -59,7 +59,7 @@
 
 .navds-checkbox--small > .navds-checkbox__label,
 .navds-radio--small > .navds-radio__label {
-  padding: var(--ax-spacing-1-alt) 0;
+  padding: var(--ax-space-6) 0;
 }
 
 .navds-checkbox--small > .navds-checkbox__label::before,
@@ -78,7 +78,7 @@
   content: "";
   position: absolute;
   top: 50%;
-  transform: translate(var(--ax-spacing-1-alt), -50%);
+  transform: translate(var(--ax-space-6), -50%);
   background-color: var(--ax-bg-default);
   width: 0.75rem;
   height: 0.25rem;
@@ -108,7 +108,7 @@
   color: var(--ax-bg-default);
   position: absolute;
   height: 1.5rem;
-  transform: translate(var(--ax-spacing-1-alt));
+  transform: translate(var(--ax-space-6));
   pointer-events: none;
 
   /* Fixed edcase where when using in shadow-dom, svg will not center */

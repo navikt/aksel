@@ -4,7 +4,7 @@
   --__axc-button-border-color: transparent;
   --__axc-button-border-width: 2px;
 
-  padding: var(--ax-spacing-3) var(--ax-spacing-5);
+  padding: var(--ax-space-12) var(--ax-space-20);
   border-radius: var(--ax-border-radius-medium);
   display: inline-flex;
   cursor: pointer;
@@ -13,7 +13,7 @@
   background: none;
   align-items: center;
   justify-content: center;
-  gap: var(--ax-spacing-2);
+  gap: var(--ax-space-8);
   box-shadow: inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
 
   &:focus-visible {
@@ -29,25 +29,25 @@
 }
 
 .navds-button--small {
-  padding: var(--ax-spacing-1) var(--ax-spacing-3);
+  padding: var(--ax-space-4) var(--ax-space-12);
   min-height: 2rem;
   min-width: 2rem;
 }
 
 .navds-button--xsmall {
-  padding: var(--ax-spacing-05) var(--ax-spacing-2);
-  gap: var(--ax-spacing-1);
+  padding: var(--ax-space-2) var(--ax-space-8);
+  gap: var(--ax-space-4);
 }
 
 .navds-button--icon-only {
-  padding: var(--ax-spacing-3);
+  padding: var(--ax-space-12);
 
   &.navds-button--small {
-    padding: var(--ax-spacing-1);
+    padding: var(--ax-space-4);
   }
 
   &.navds-button--xsmall {
-    padding: var(--ax-spacing-05);
+    padding: var(--ax-space-2);
   }
 }
 

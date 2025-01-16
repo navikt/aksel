@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "7.9.0",
+  "version": "7.9.1",
   "description": "React components from the Norwegian Labour and Welfare Administration.",
   "author": "Aksel, a team part of the Norwegian Labour and Welfare Administration.",
   "license": "MIT",
@@ -615,8 +615,8 @@
   "dependencies": {
     "@floating-ui/react": "0.25.4",
     "@floating-ui/react-dom": "^2.0.9",
-    "@navikt/aksel-icons": "^7.9.0",
-    "@navikt/ds-tokens": "^7.9.0",
+    "@navikt/aksel-icons": "^7.9.1",
+    "@navikt/ds-tokens": "^7.9.1",
     "clsx": "^2.1.0",
     "date-fns": "^3.0.0",
     "react-day-picker": "8.10.1"
@@ -627,6 +627,7 @@
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/jscodeshift": "^0.11.11",
+    "aksel": "workspace:^",
     "concurrently": "9.0.1",
     "fast-glob": "3.2.11",
     "jscodeshift": "^0.15.1",
@@ -648,5 +649,6 @@
     "@types/react": {
       "optional": true
     }
-  }
+  },
+  "_comment": "The 'aksel' dependency tells yarn to install the root deps when installing deps for this package. Helps make it possible to contribute without access to GPR."
 }

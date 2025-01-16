@@ -12,7 +12,7 @@ export type TokenTypes =
   | "opacity"
   | "global-color"
   | "global-radius"
-  | "global-spacing"
+  | "global-space"
   | "global-breakpoints"
   | "global-font";
 
