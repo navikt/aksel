@@ -45,7 +45,9 @@ Sanity-datasettet er privat, noe som betyr du må ha tilgang til Sanity-applikas
 SANITY_READ
 SANITY_READ_NO_DRAFTS
 ```
+
 `SANITY_READ` er bare nødvendig for lokal forhåndsvisning.
+
 ### .env
 
 Det blir brukt flere keys i .env under `./website`, men kun `SANITY_READ_NO_DRAFTS` trengs for å teste lokalt.

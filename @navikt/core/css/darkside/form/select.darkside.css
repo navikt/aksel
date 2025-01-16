@@ -102,8 +102,8 @@
 /* ----------------------------- Select Readonly ---------------------------- */
 .navds-select--readonly {
   & .navds-select__input {
-    background-color: var(--ax-bg-neutral-moderate);
-    border-color: var(--ax-border-neutral-subtleA);
+    background-color: var(--ax-bg-moderate);
+    border-color: var(--ax-border-subtleA);
     cursor: default;
 
     @media (forced-colors: active) {

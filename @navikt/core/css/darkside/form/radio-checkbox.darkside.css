@@ -23,7 +23,7 @@
   display: flex;
   gap: var(--ax-space-8);
 
-  --__axc-radio-checkbox-readonly-bg: var(--ax-bg-neutral-moderate);
+  --__axc-radio-checkbox-readonly-bg: var(--ax-bg-moderate);
   --__axc-radio-checkbox-readonly-border: var(--ax-border-subtle);
 }
 
@@ -215,11 +215,11 @@
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
-  background-color: var(--ax-bg-neutral-strong);
+  background-color: var(--ax-bg-strong);
   border-width: 0;
   box-shadow:
     inset 0 0 0 2px var(--ax-border-subtle),
-    inset 0 0 0 8px var(--ax-bg-neutral-moderate);
+    inset 0 0 0 8px var(--ax-bg-moderate);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
