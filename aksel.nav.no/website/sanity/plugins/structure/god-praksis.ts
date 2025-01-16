@@ -54,7 +54,7 @@ function godPraksisPanes(S: StructureBuilder) {
     S.divider(),
     S.listItem({
       id: "article_tema_complete_view",
-      title: "Artikler via Tema",
+      title: "Artikler via tema",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -69,7 +69,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_undertema_view",
-      title: "Artikler via Undertema",
+      title: "Artikler via undertema",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.tema")
@@ -98,7 +98,7 @@ function godPraksisPanes(S: StructureBuilder) {
     }),
     S.listItem({
       id: "article_innholdstype_view",
-      title: "Artikler via Innholdstype",
+      title: "Artikler via innholdstype",
       schemaType: "aksel_artikkel",
       child: () =>
         S.documentTypeList("gp.innholdstype")
