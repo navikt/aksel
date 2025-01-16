@@ -23,7 +23,7 @@ export type BoxNewProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
    * CSS `background-color` property.
    * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
-   * @see {@link DefaultBgKeys} and {@link StaticBgKeys}
+   * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
    */
   background?: StaticDefaultBgKeys | StaticBgKeys;
   /**
