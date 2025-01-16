@@ -1,9 +1,9 @@
-import { ColorRoles } from "../types";
+import type { GlobalColorRoles, SemanticColorRoles } from "../types";
 
 export type GlobalColorEntry = {
   value: string;
   type: "global-color";
-  group: ColorRoles;
+  group: GlobalColorRoles;
 };
 
 export type TokenTypes =
@@ -19,9 +19,9 @@ export type TokenTypes =
 export type SemanticTokenGroups = "background" | "border" | "text";
 
 export type TokenGroup =
-  | ColorRoles
+  | GlobalColorRoles
   | SemanticTokenGroups
-  | `${SemanticTokenGroups}.${ColorRoles}`;
+  | `${SemanticTokenGroups}.${SemanticColorRoles}`;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   /**

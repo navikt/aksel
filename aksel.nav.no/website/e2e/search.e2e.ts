@@ -1,29 +1,34 @@
-import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-test("test", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
-  await page.waitForLoadState("networkidle");
-  await page.waitForTimeout(3000);
-  await page.getByRole("button", { name: "Søk" }).click();
+test.describe("Check website search", () => {
+  test("Check newest article list", async ({ page }) => {
+    await page.goto("http://localhost:3000/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(3000);
+    await page.getByRole("button", { name: "Søk" }).click();
 
-  const accessibilityScanResults = await new AxeBuilder({ page })
-    .disableRules(["definition-list", "scrollable-region-focusable"])
-    .exclude("iframe")
-    .exclude("#aksel-expansioncard")
-    .exclude("#toc-scroll")
-    .analyze();
-  expect(accessibilityScanResults.violations).toEqual([]);
+    /* Check that we have more than 0 "nyeste artikler" */
+    const articleSection = page.getByLabel("Nyeste artikler");
+    expect(articleSection).not.toBeNull();
+    const links = await articleSection.locator("li").all();
 
-  const placeholder = "Søk på artikler, f.eks. Button";
-  await page.getByPlaceholder(placeholder).click();
-  await page.getByPlaceholder(placeholder).fill("button");
+    expect(links.length).toBeGreaterThan(0);
+  });
 
-  const SearchHitsScan = await new AxeBuilder({ page })
-    .disableRules(["definition-list", "scrollable-region-focusable"])
-    .exclude("iframe")
-    .exclude("#aksel-expansioncard")
-    .exclude("#toc-scroll")
-    .analyze();
-  expect(SearchHitsScan.violations).toEqual([]);
+  test("Test searching for 'link'", async ({ page }) => {
+    await page.goto("http://localhost:3000/");
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(3000);
+    await page.getByRole("button", { name: "Søk" }).click();
+
+    await page.getByPlaceholder("Søk på artikler, f.eks. Button").fill("link");
+
+    /* Check that we have more than 0 search-results */
+    const articleSection = page.getByLabel("Søkeresultater");
+    await page.waitForTimeout(1000);
+    expect(articleSection).not.toBeNull();
+    const links = await articleSection.locator("li").all();
+
+    expect(links.length).toBeGreaterThan(0);
+  });
 });

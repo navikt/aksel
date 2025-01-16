@@ -50,12 +50,12 @@
 
   & .navds-combobox__selected-options {
     & .navds-chips__chip {
-      background-color: var(--ax-bg-neutral-moderateA);
+      background-color: var(--ax-bg-moderateA);
     }
   }
 
   & .navds-combobox__button-toggle-list {
-    color: var(--ax-bg-neutral-moderate);
+    color: var(--ax-bg-moderate);
   }
 
   & .navds-combobox__wrapper {
@@ -65,7 +65,7 @@
 
   & .navds-text-field__input,
   & .navds-combobox__input {
-    background-color: var(--ax-bg-neutral-moderate);
+    background-color: var(--ax-bg-moderate);
   }
 }
 
@@ -282,10 +282,10 @@
 }
 
 .navds-combobox__list-item--max-selected {
-  background-color: var(--ax-bg-neutral-moderateA);
+  background-color: var(--ax-bg-moderateA);
   margin: 0;
   border-radius: 0;
-  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 1px solid var(--ax-border-subtle);
   padding-block: var(--ax-space-8);
   line-height: var(--ax-font-line-height-large);
 }

@@ -1,7 +1,7 @@
 import Color from "colorjs.io";
 import {
-  type ColorRoles,
   type ColorTheme,
+  type GlobalColorRoles,
   type GlobalColorScale,
 } from "../../types";
 import { type GlobalColorEntry } from "../tokens.util";
@@ -20,11 +20,11 @@ export const globalColorLightModeConfig = globalColorConfigWithAlphaTokens(
 );
 
 type GlobalConfigWithAlpha = Record<
-  Extract<ColorRoles, "neutral">,
+  Extract<GlobalColorRoles, "neutral">,
   Record<GlobalColorScale, GlobalColorEntry>
 > &
   Record<
-    Exclude<ColorRoles, "neutral">,
+    Exclude<GlobalColorRoles, "neutral">,
     Record<Exclude<GlobalColorScale, "000">, GlobalColorEntry>
   >;
 
@@ -39,7 +39,7 @@ function globalColorConfigWithAlphaTokens(
   const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
   Object.keys(globalConfig).forEach((key) => {
-    const _key = key as ColorRoles;
+    const _key = key as GlobalColorRoles;
     const scopedConfig = localConfig[_key];
 
     scopedConfig["100A"] = {

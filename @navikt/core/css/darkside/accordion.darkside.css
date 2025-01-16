@@ -26,7 +26,6 @@
 
   &:hover {
     background-color: var(--ax-bg-accent-hoverA);
-    color: var(--ax-text-accent-strong);
 
     &::before,
     &::after {

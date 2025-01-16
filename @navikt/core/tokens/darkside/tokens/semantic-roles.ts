@@ -1,11 +1,15 @@
 import _ from "lodash";
-import { type ColorRoles, ColorRolesList, type ColorTheme } from "../../types";
+import {
+  ColorRolesList,
+  type ColorTheme,
+  type SemanticColorRoles,
+} from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
-const configForRole = (role: ColorRoles, theme: ColorTheme) => {
+const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
   return {
     bg: {
-      [role]: {
+      [`${role}-soft`]: {
         value: `{ax.${role}.100.value}`,
         type: "color",
         group: `background.${role}`,
@@ -79,12 +83,12 @@ const configForRole = (role: ColorRoles, theme: ColorTheme) => {
     },
     text: {
       [role]: {
-        value: `{ax.${role}.700.value}`,
+        value: `{ax.${role}.800.value}`,
         type: "color",
         group: `text.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.900.value}`,
+        value: `{ax.${role}.1000.value}`,
         type: "color",
         group: `text.${role}`,
       },
@@ -96,7 +100,7 @@ const configForRole = (role: ColorRoles, theme: ColorTheme) => {
     },
     border: {
       [role]: {
-        value: `{ax.${role}.500.value}`,
+        value: `{ax.${role}.600.value}`,
         type: "color",
         group: `border.${role}`,
       },
@@ -111,7 +115,7 @@ const configForRole = (role: ColorRoles, theme: ColorTheme) => {
         group: `border.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.600.value}`,
+        value: `{ax.${role}.700.value}`,
         type: "color",
         group: `border.${role}`,
       },
@@ -123,7 +127,7 @@ const configForRole = (role: ColorRoles, theme: ColorTheme) => {
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
 export const semanticTokensForAllRolesConfig = (theme: ColorTheme) => {
-  return ColorRolesList.reduce(
+  return ColorRolesList.filter((name) => name !== "neutral").reduce(
     (acc, role) => _.merge(acc, configForRole(role, theme)),
     {} as ReturnType<typeof configForRole>,
   );
