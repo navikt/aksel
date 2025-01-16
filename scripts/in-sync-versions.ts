@@ -2,20 +2,78 @@ import { execSync } from "child_process";
 import { readFileSync } from "fs";
 import { join } from "path";
 
-const colors = {
-  reset: "\x1b[0m",
-  red: "\x1b[31m",
-  yellow: "\x1b[33m",
-};
+validateVersions();
 
-/**
- * Adds some colors to better highlight the warning
- */
-function logWarning(dependency: string, filteredVersions: any) {
-  const coloredDependency = `${colors.yellow}${dependency}${colors.reset}`;
-  const coloredVersions = `${colors.red}${filteredVersions}${colors.reset}`;
+function validateVersions() {
+  const workspaces = getYarnWorkspacesList();
 
-  console.warn(`- ${coloredDependency}: ${coloredVersions}`);
+  if (workspaces.length === 0) {
+    console.error("No workspaces found");
+    return;
+  }
+
+  const dependencies = new Map<string, string[]>();
+
+  for (const { location } of workspaces) {
+    const packageJson = JSON.parse(
+      readFileSync(join(location, "./package.json"), { encoding: "utf-8" }),
+    );
+
+    for (const localDependency of [
+      packageJson.dependencies,
+      packageJson.devDependencies,
+      packageJson.peerDependencies,
+    ]) {
+      if (!localDependency) {
+        continue;
+      }
+
+      for (const [dependency, version] of Object.entries(localDependency)) {
+        if (!dependencies.has(dependency)) {
+          dependencies.set(dependency, []);
+        }
+        dependencies.get(dependency)?.push(version as string);
+      }
+    }
+  }
+
+  const warnings: { dependency: string; filteredVersions: string[] }[] = [];
+
+  for (const [dependency, versions] of dependencies) {
+    /**
+     * While we could resolve these cases using "semver" or other packages,
+     * we are going to keep it simple and just check "regular" cases.
+     */
+    const filteredVersions = versions.filter(
+      (version) => version !== "*" && !version.includes(">="),
+    );
+
+    const versionsAreEqual = filteredVersions.every(
+      (version) => version === filteredVersions[0],
+    );
+
+    if (!versionsAreEqual) {
+      warnings.push({
+        dependency,
+        /* To keep console simple, we hide duplicates */
+        filteredVersions: [...new Set(filteredVersions)],
+      });
+    }
+  }
+
+  if (warnings.length > 0) {
+    console.warn(
+      "\nWorkspaces local dependency versions not synced across repository:",
+    );
+
+    for (const { dependency, filteredVersions } of warnings) {
+      logWarning(dependency, filteredVersions);
+    }
+
+    console.warn(
+      "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
+    );
+  }
 }
 
 /**
@@ -42,73 +100,20 @@ function getYarnWorkspacesList(): { location: string; name: string }[] {
   return [];
 }
 
-function validateVersions() {
-  const workspaces = getYarnWorkspacesList();
+/**
+ * Adds some colors to better highlight the warning
+ */
+function logWarning(dependency: string, filteredVersions: string[]) {
+  const colors = {
+    reset: "\x1b[0m",
+    red: "\x1b[31m",
+    yellow: "\x1b[33m",
+  };
 
-  if (workspaces.length === 0) {
-    console.error("No workspaces found");
-    return;
-  }
+  const coloredDependency = `${colors.yellow}${dependency}${colors.reset}`;
+  const coloredVersions = `${colors.red}${filteredVersions.join(", ")}${
+    colors.reset
+  }`;
 
-  const dependencies = new Map<string, string[]>();
-
-  workspaces.forEach(({ location }) => {
-    const packageJson = JSON.parse(
-      readFileSync(join(location, "./package.json"), { encoding: "utf-8" }),
-    );
-    [
-      packageJson.dependencies,
-      packageJson.devDependencies,
-      packageJson.peerDependencies,
-    ].forEach((localDeps) => {
-      if (!localDeps) {
-        return;
-      }
-
-      Object.entries(localDeps).forEach(([dependency, version]) => {
-        if (!dependencies.has(dependency)) {
-          dependencies.set(dependency, []);
-        }
-        dependencies.get(dependency)?.push(version as string);
-      });
-    });
-  });
-
-  const warnings: { dependency: string; filteredVersions: string[] }[] = [];
-
-  dependencies.forEach((versions, dependency) => {
-    /**
-     * While we could resolve these cases using "semver" or other packages,
-     * we are going to keep it simple and just check "regular" cases.
-     */
-    const filteredVersions = versions.filter(
-      (version) => version !== "*" && !version.includes(">="),
-    );
-
-    const versionsAreEqual = filteredVersions.every(
-      (version) => version === filteredVersions[0],
-    );
-
-    if (!versionsAreEqual) {
-      warnings.push({
-        dependency,
-        /* To keep console simple, we hide duplicates */
-        filteredVersions: [...new Set(filteredVersions)],
-      });
-    }
-  });
-
-  if (warnings.length > 0) {
-    console.warn(
-      "\nWorkspaces local dependency versions not synced across repository:",
-    );
-    warnings.forEach(({ dependency, filteredVersions }) => {
-      logWarning(dependency, filteredVersions);
-    });
-    console.warn(
-      "\nPlease make sure all workspaces have the same version for each dependency.\n\n",
-    );
-  }
+  console.warn(`- ${coloredDependency}: ${coloredVersions}`);
 }
-
-validateVersions();
