@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.9.2
+
+### Patch Changes
+
+- Table: Removed border-bottom for HeaderCell used in ExpandableRow. ([#3503](https://github.com/navikt/aksel/pull/3503))
+
 ## 7.9.1
 
 ### Patch Changes
