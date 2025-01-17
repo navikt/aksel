@@ -23,10 +23,10 @@ const FilteredOptions = () => {
     isMouseLastUsedInputDevice,
     isValueNew,
   } = useFilteredOptionsContext();
-  const { maxSelected } = useSelectedOptionsContext();
+  const { maxSelected, isMultiSelect } = useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
-    maxSelected.isLimitReached || // Render maxSelected message
+    isMultiSelect || // Render maxSelected message
     isLoading || // Render loading message
     (!isLoading && filteredOptions.length === 0 && !allowNewValues); // Render no hits message
 
@@ -45,7 +45,7 @@ const FilteredOptions = () => {
     >
       {shouldRenderNonSelectables && (
         <div className="navds-combobox__list_non-selectables" role="status">
-          {maxSelected.isLimitReached && <MaxSelectedMessage />}
+          {isMultiSelect && <MaxSelectedMessage />}
           {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
             <NoSearchHitsMessage />
