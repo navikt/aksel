@@ -32,9 +32,13 @@ export const Expandable = () => {
             togglePlacement="right"
             defaultOpen
           >
-            {columns.map(({ key }) => (
-              <Table.DataCell key={key}>{row[key]}</Table.DataCell>
-            ))}
+            {columns.map(({ key }, index) =>
+              index === 0 ? (
+                <Table.HeaderCell key={key}>{row[key]}</Table.HeaderCell>
+              ) : (
+                <Table.DataCell key={key}>{row[key]}</Table.DataCell>
+              ),
+            )}
           </Table.ExpandableRow>
         ))}
       </Table.Body>

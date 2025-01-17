@@ -2128,15 +2128,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/selector-specificity@npm:^2.0.2":
-  version: 2.2.0
-  resolution: "@csstools/selector-specificity@npm:2.2.0"
-  peerDependencies:
-    postcss-selector-parser: ^6.0.10
-  checksum: 10/84ae0e902e8879d375406bd7d2e117b862e18cf8e5f82cecad62fcf729a8fc1527e2b3e2774b0e869a17e2006bd27ac5240f79220638183b273aeece97acd3f2
-  languageName: node
-  linkType: hard
-
 "@csstools/selector-specificity@npm:^4.0.0":
   version: 4.0.0
   resolution: "@csstools/selector-specificity@npm:4.0.0"
@@ -3677,7 +3668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.9.1, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.9.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3697,7 +3688,7 @@ __metadata:
     react: "npm:^18.0.0"
     rehype-parse: "npm:8.0.4"
     tsc-alias: "npm:1.8.8"
-    tsx: "npm:^4.7.1"
+    tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
     unified: "npm:10.1.2"
     vitest: "npm:^2.1.8"
@@ -3708,14 +3699,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.9.1"
-    "@navikt/ds-tokens": "npm:^7.9.1"
+    "@navikt/ds-css": "npm:^7.9.2"
+    "@navikt/ds-tokens": "npm:^7.9.2"
     concurrently: "npm:9.0.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
-    stylelint: "npm:^14.8.5"
+    stylelint: "npm:^16.10.0"
     stylelint-test-rule-node: "npm:^0.2.1"
-    tsx: "npm:^4.7.1"
+    tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
   languageName: unknown
   linkType: soft
@@ -3724,7 +3715,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:7.9.1"
+    "@navikt/ds-css": "npm:^7.9.2"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3735,7 +3726,7 @@ __metadata:
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:^0.15.1"
     jscodeshift-add-imports: "npm:1.0.11"
-    lodash: "npm:4.17.21"
+    lodash: "npm:^4.17.21"
     react-scanner: "npm:^1.1.0"
     rimraf: "npm:6.0.1"
     typescript: "npm:5.5.4"
@@ -3745,11 +3736,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:7.9.1, @navikt/ds-css@npm:^7.9.1, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^7.9.2, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.9.1"
+    "@navikt/ds-tokens": "npm:^7.9.2"
     "@types/clean-css": "npm:4.2.11"
     autoprefixer: "npm:^10.4.20"
     browserslist: "npm:^4.24.2"
@@ -3764,19 +3755,19 @@ __metadata:
     postcss-cli: "npm:^9.0.0"
     postcss-combine-duplicated-selectors: "npm:10.0.3"
     postcss-import: "npm:^14.1.0"
-    tsx: "npm:^4.7.1"
+    tsx: "npm:^4.19.1"
     vitest: "npm:^2.1.8"
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.9.1, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.9.2, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.9.1"
-    "@navikt/ds-tokens": "npm:^7.9.1"
+    "@navikt/aksel-icons": "npm:^7.9.2"
+    "@navikt/ds-tokens": "npm:^7.9.2"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.1.0"
@@ -3807,11 +3798,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.9.1, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.9.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.9.1"
+    "@navikt/ds-tokens": "npm:^7.9.2"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3821,7 +3812,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.9.1, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.9.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -6298,7 +6289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
+"@types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 10/1a3c3e06236e4c4aab89499c428d585527ce50c24fe8259e8b3926d3df4cfbbbcf306cfc73ddfb66cbafc973116efd15967020b0f738f63e09e64c7d260519e7
@@ -6522,7 +6513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, @types/react@npm:^18.0.0, @types/react@npm:^18.0.25, @types/react@npm:^18.0.26, @types/react@npm:^18.3.11, @types/react@npm:^18.3.5":
+"@types/react@npm:*, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, @types/react@npm:^18.0.25, @types/react@npm:^18.0.26, @types/react@npm:^18.3.11, @types/react@npm:^18.3.5":
   version: 18.3.11
   resolution: "@types/react@npm:18.3.11"
   dependencies:
@@ -7597,7 +7588,7 @@ __metadata:
     "@svgr/core": "npm:^8.1.0"
     "@types/node": "npm:^18.15.11"
     "@types/postcss-url": "npm:^10.0.4"
-    "@types/react": "npm:^18.0.0"
+    "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.0.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
     fuse.js: "npm:^7.0.0"
@@ -7616,11 +7607,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.9.1"
-    "@navikt/ds-css": "npm:^7.9.1"
-    "@navikt/ds-react": "npm:^7.9.1"
-    "@navikt/ds-tailwind": "npm:^7.9.1"
-    "@navikt/ds-tokens": "npm:^7.9.1"
+    "@navikt/aksel-icons": "npm:^7.9.2"
+    "@navikt/ds-css": "npm:^7.9.2"
+    "@navikt/ds-react": "npm:^7.9.2"
+    "@navikt/ds-tailwind": "npm:^7.9.2"
+    "@navikt/ds-tokens": "npm:^7.9.2"
   languageName: unknown
   linkType: soft
 
@@ -7673,6 +7664,7 @@ __metadata:
     stylelint-config-standard: "npm:^36.0.0"
     stylelint-declaration-block-no-ignored-properties: "npm:^2.6.0"
     stylelint-value-no-unknown-custom-properties: "npm:^6.0.0"
+    tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
     vite: "npm:^5.4.6"
     vite-plugin-turbosnap: "npm:^1.0.3"
@@ -8223,21 +8215,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10/2a1cb879019dffb08d17bec36e13c3a6d74c94773f41c1fd8b14de13f149cc34b705b0a1e07b42fcf35917b49d78db6ff0c5c3b00b202a5235013d517b5c6bbb
-  languageName: node
-  linkType: hard
-
-"babel-loader@npm:^8.2.0":
-  version: 8.4.1
-  resolution: "babel-loader@npm:8.4.1"
-  dependencies:
-    find-cache-dir: "npm:^3.3.1"
-    loader-utils: "npm:^2.0.4"
-    make-dir: "npm:^3.1.0"
-    schema-utils: "npm:^2.6.5"
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    webpack: ">=2"
-  checksum: 10/b54ae3796a351e5b5186cd7a8d53a902b679a33a187424c2858e385850142139a4343524c9fddd0eb4356250e51e67e47a9efeef79d01e132976c406212cba1d
   languageName: node
   linkType: hard
 
@@ -9628,7 +9605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:^7.0.0, cosmiconfig@npm:^7.1.0":
+"cosmiconfig@npm:^7.0.0":
   version: 7.1.0
   resolution: "cosmiconfig@npm:7.1.0"
   dependencies:
@@ -9813,7 +9790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-functions-list@npm:^3.1.0, css-functions-list@npm:^3.2.3":
+"css-functions-list@npm:^3.2.3":
   version: 3.2.3
   resolution: "css-functions-list@npm:3.2.3"
   checksum: 10/25f12fb0ef1384b1cf45a6e7e0afd596a19bee90b90316d9e50f7820888f4a8f265be7a6a96b10a5c81e403bd7a5ff8010fa936144f84959d9d91c9350cda0d4
@@ -12325,7 +12302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-cache-dir@npm:^3.0.0, find-cache-dir@npm:^3.3.1":
+"find-cache-dir@npm:^3.0.0":
   version: 3.3.2
   resolution: "find-cache-dir@npm:3.3.2"
   dependencies:
@@ -13570,7 +13547,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-tags@npm:^3.1.0, html-tags@npm:^3.2.0, html-tags@npm:^3.3.1":
+"html-tags@npm:^3.1.0, html-tags@npm:^3.3.1":
   version: 3.3.1
   resolution: "html-tags@npm:3.3.1"
   checksum: 10/d0e808544b92d8b999cbcc86d539577255a2f0f2f4f73110d10749d1d36e6fe6ad706a0355a8477afb6e000ecdc93d8455b3602951f9a2b694ac9e28f1b52878
@@ -13823,7 +13800,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^5.1.1, ignore@npm:^5.1.9, ignore@npm:^5.2.0, ignore@npm:^5.2.1, ignore@npm:^5.3.1":
+"ignore@npm:^5.1.1, ignore@npm:^5.1.9, ignore@npm:^5.2.0, ignore@npm:^5.3.1":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
   checksum: 10/cceb6a457000f8f6a50e1196429750d782afce5680dd878aa4221bd79972d68b3a55b4b1458fc682be978f4d3c6a249046aa0880637367216444ab7b014cfc98
@@ -13876,13 +13853,6 @@ __metadata:
     parent-module: "npm:^1.0.0"
     resolve-from: "npm:^4.0.0"
   checksum: 10/2cacfad06e652b1edc50be650f7ec3be08c5e5a6f6d12d035c440a42a8cc028e60a5b99ca08a77ab4d6b1346da7d971915828f33cdab730d3d42f08242d09baa
-  languageName: node
-  linkType: hard
-
-"import-lazy@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "import-lazy@npm:4.0.0"
-  checksum: 10/943309cc8eb01ada12700448c288b0384f77a1bc33c7e00fa4cb223c665f467a13ce9aaceb8d2e4cf586b07c1d2828040263dcc069873ce63cfc2ac6fd087971
   languageName: node
   linkType: hard
 
@@ -15142,13 +15112,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"known-css-properties@npm:^0.26.0":
-  version: 0.26.0
-  resolution: "known-css-properties@npm:0.26.0"
-  checksum: 10/40222e80385ecfafb70c9663839d2f79388251c0f6ae2297559b76b6477c9d2f7aa6d6e5c11022dfd3e11346928b5cd272853d331725127d18bb4d872873dbee
-  languageName: node
-  linkType: hard
-
 "known-css-properties@npm:^0.34.0":
   version: 0.34.0
   resolution: "known-css-properties@npm:0.34.0"
@@ -15425,7 +15388,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.4":
+"loader-utils@npm:^2.0.0":
   version: 2.0.4
   resolution: "loader-utils@npm:2.0.4"
   dependencies:
@@ -15552,7 +15515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.0.1, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:^4.0.1, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
@@ -15721,7 +15684,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0, make-dir@npm:~3.1.0":
+"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:~3.1.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
   dependencies:
@@ -18749,13 +18712,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-media-query-parser@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "postcss-media-query-parser@npm:0.2.3"
-  checksum: 10/39f9e9c383ec98d85103c5f3d1eb5a9088a47357ed26d3c7501aeba1302840521cffa1b851bc2d8146f1ccdef263fe3088f4d435bda1c0dc0b6f9387865574c8
-  languageName: node
-  linkType: hard
-
 "postcss-merge-longhand@npm:^6.0.5":
   version: 6.0.5
   resolution: "postcss-merge-longhand@npm:6.0.5"
@@ -19030,19 +18986,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-resolve-nested-selector@npm:^0.1.1, postcss-resolve-nested-selector@npm:^0.1.6":
+"postcss-resolve-nested-selector@npm:^0.1.6":
   version: 0.1.6
   resolution: "postcss-resolve-nested-selector@npm:0.1.6"
   checksum: 10/85453901afe2a4db497b4e0d2c9cf2a097a08fa5d45bc646547025176217050334e423475519a1e6c74a1f31ade819d16bb37a39914e5321e250695ee3feea14
-  languageName: node
-  linkType: hard
-
-"postcss-safe-parser@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "postcss-safe-parser@npm:6.0.0"
-  peerDependencies:
-    postcss: ^8.3.3
-  checksum: 10/06c733eaad83a3954367e7ee02ddfe3796e7a44d4299ccf9239f40964a4daac153c7d77613f32964b5a86c0c6c2f6167738f31d578b73b17cb69d0c4446f0ebe
   languageName: node
   linkType: hard
 
@@ -19131,7 +19078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.0.0, postcss@npm:^8.4.19, postcss@npm:^8.4.23, postcss@npm:^8.4.27, postcss@npm:^8.4.31, postcss@npm:^8.4.33, postcss@npm:^8.4.43, postcss@npm:^8.4.47":
+"postcss@npm:^8.0.0, postcss@npm:^8.4.23, postcss@npm:^8.4.27, postcss@npm:^8.4.31, postcss@npm:^8.4.33, postcss@npm:^8.4.43, postcss@npm:^8.4.47":
   version: 8.4.47
   resolution: "postcss@npm:8.4.47"
   dependencies:
@@ -21194,17 +21141,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"schema-utils@npm:^2.6.5":
-  version: 2.7.1
-  resolution: "schema-utils@npm:2.7.1"
-  dependencies:
-    "@types/json-schema": "npm:^7.0.5"
-    ajv: "npm:^6.12.4"
-    ajv-keywords: "npm:^3.5.2"
-  checksum: 10/86c3038798981dbc702d5f6a86d4e4a308a2ec6e8eb1bf7d1a3ea95cb3f1972491833b76ce1c86a068652417019126d5b68219c33a9ad069358dd10429d4096d
-  languageName: node
-  linkType: hard
-
 "schema-utils@npm:^3.1.1, schema-utils@npm:^3.2.0":
   version: 3.3.0
   resolution: "schema-utils@npm:3.3.0"
@@ -22439,13 +22375,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-search@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "style-search@npm:0.1.0"
-  checksum: 10/841049768c863737389558fafffa0b765f553bde041b7997c4cd54606b64b0d139936e2efee74dc1ce59fcde78aaa88484d9894838c31d5c98c1ccace312a59b
-  languageName: node
-  linkType: hard
-
 "style-to-object@npm:^1.0.0":
   version: 1.0.8
   resolution: "style-to-object@npm:1.0.8"
@@ -22569,54 +22498,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^14.8.5":
-  version: 14.16.1
-  resolution: "stylelint@npm:14.16.1"
-  dependencies:
-    "@csstools/selector-specificity": "npm:^2.0.2"
-    balanced-match: "npm:^2.0.0"
-    colord: "npm:^2.9.3"
-    cosmiconfig: "npm:^7.1.0"
-    css-functions-list: "npm:^3.1.0"
-    debug: "npm:^4.3.4"
-    fast-glob: "npm:^3.2.12"
-    fastest-levenshtein: "npm:^1.0.16"
-    file-entry-cache: "npm:^6.0.1"
-    global-modules: "npm:^2.0.0"
-    globby: "npm:^11.1.0"
-    globjoin: "npm:^0.1.4"
-    html-tags: "npm:^3.2.0"
-    ignore: "npm:^5.2.1"
-    import-lazy: "npm:^4.0.0"
-    imurmurhash: "npm:^0.1.4"
-    is-plain-object: "npm:^5.0.0"
-    known-css-properties: "npm:^0.26.0"
-    mathml-tag-names: "npm:^2.1.3"
-    meow: "npm:^9.0.0"
-    micromatch: "npm:^4.0.5"
-    normalize-path: "npm:^3.0.0"
-    picocolors: "npm:^1.0.0"
-    postcss: "npm:^8.4.19"
-    postcss-media-query-parser: "npm:^0.2.3"
-    postcss-resolve-nested-selector: "npm:^0.1.1"
-    postcss-safe-parser: "npm:^6.0.0"
-    postcss-selector-parser: "npm:^6.0.11"
-    postcss-value-parser: "npm:^4.2.0"
-    resolve-from: "npm:^5.0.0"
-    string-width: "npm:^4.2.3"
-    strip-ansi: "npm:^6.0.1"
-    style-search: "npm:^0.1.0"
-    supports-hyperlinks: "npm:^2.3.0"
-    svg-tags: "npm:^1.0.0"
-    table: "npm:^6.8.1"
-    v8-compile-cache: "npm:^2.3.0"
-    write-file-atomic: "npm:^4.0.2"
-  bin:
-    stylelint: bin/stylelint.js
-  checksum: 10/72883bfe2a723c2222688fa038d9da5352ae73e63255171a1488dc98133f22b917ecd8eda9af5dae174bac6dbb4b1421f9628d6fb51fd3e65083e40188b1f1ab
-  languageName: node
-  linkType: hard
-
 "stylelint@npm:^16.10.0":
   version: 16.10.0
   resolution: "stylelint@npm:16.10.0"
@@ -22731,16 +22612,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supports-hyperlinks@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "supports-hyperlinks@npm:2.3.0"
-  dependencies:
-    has-flag: "npm:^4.0.0"
-    supports-color: "npm:^7.0.0"
-  checksum: 10/3e7df6e9eaa177d7bfbbe065c91325e9b482f48de0f7c9133603e3ffa8af31cbceac104a0941cd0266a57f8e691de6eb58b79fec237852dc84ed7ad152b116b0
-  languageName: node
-  linkType: hard
-
 "supports-hyperlinks@npm:^3.1.0":
   version: 3.1.0
   resolution: "supports-hyperlinks@npm:3.1.0"
@@ -22833,7 +22704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"table@npm:^6.8.1, table@npm:^6.8.2":
+"table@npm:^6.8.2":
   version: 6.8.2
   resolution: "table@npm:6.8.2"
   dependencies:
@@ -23510,7 +23381,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.19.1, tsx@npm:^4.7.1":
+"tsx@npm:^4.19.1":
   version: 4.19.1
   resolution: "tsx@npm:4.19.1"
   dependencies:
@@ -24260,13 +24131,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"v8-compile-cache@npm:^2.3.0":
-  version: 2.4.0
-  resolution: "v8-compile-cache@npm:2.4.0"
-  checksum: 10/49e726d7b2825ef7bc92187ecd57c59525957badbddb18fa529b0458b9280c59a1607ad3da4abe7808e9f9a00ec99b0fc07e485ffb7358cd5c11b2ef68d2145f
-  languageName: node
-  linkType: hard
-
 "valibot@npm:0.31.1":
   version: 0.31.1
   resolution: "valibot@npm:0.31.1"
@@ -24845,10 +24709,10 @@ __metadata:
     "@sanity/vision": "npm:3.59.0"
     "@slack/web-api": "npm:^7.0.2"
     "@types/jscodeshift": "npm:^0.11.11"
-    "@types/react": "npm:^18.0.0"
+    "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.0.0"
     autoprefixer: "npm:^10.4.20"
-    babel-loader: "npm:^8.2.0"
+    babel-loader: "npm:^9.1.3"
     boring-avatars: "npm:1.10.1"
     clsx: "npm:^2.1.0"
     codesandbox-import-utils: "npm:^2.2.3"
@@ -25138,16 +25002,6 @@ __metadata:
     signal-exit: "npm:^3.0.2"
     typedarray-to-buffer: "npm:^3.1.5"
   checksum: 10/0955ab94308b74d32bc252afe69d8b42ba4b8a28b8d79f399f3f405969f82623f981e35d13129a52aa2973450f342107c06d86047572637584e85a1c0c246bf3
-  languageName: node
-  linkType: hard
-
-"write-file-atomic@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "write-file-atomic@npm:4.0.2"
-  dependencies:
-    imurmurhash: "npm:^0.1.4"
-    signal-exit: "npm:^3.0.7"
-  checksum: 10/3be1f5508a46c190619d5386b1ac8f3af3dbe951ed0f7b0b4a0961eed6fc626bd84b50cf4be768dabc0a05b672f5d0c5ee7f42daa557b14415d18c3a13c7d246
   languageName: node
   linkType: hard
 

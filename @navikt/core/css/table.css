@@ -156,7 +156,7 @@
   flex-shrink: 0;
 }
 
-.navds-table__expandable-row:not(.navds-table__expandable-row--open) .navds-table__data-cell {
+.navds-table__expandable-row:not(.navds-table__expandable-row--open) :where(.navds-table__data-cell, .navds-table__header-cell) {
   transition: border-bottom-color 190ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
 }
 
@@ -164,12 +164,8 @@
   cursor: pointer;
 }
 
-.navds-table__expandable-row--open .navds-table__data-cell {
+.navds-table__expandable-row--open :where(.navds-table__data-cell, .navds-table__header-cell) {
   border-bottom-color: transparent;
-}
-
-.navds-table__expandable-row--open .navds-table__header-cell {
-  border-color: var(--ac-table-row-border, var(--a-border-default));
 }
 
 .navds-table__expandable-row--open .navds-table__toggle-expand-cell--open {
