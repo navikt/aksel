@@ -26,7 +26,7 @@ const FilteredOptions = () => {
   const { maxSelected, isMultiSelect } = useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
-    isMultiSelect || // Render maxSelected message
+    (isMultiSelect && maxSelected.limit) || // Render maxSelected message
     isLoading || // Render loading message
     (!isLoading && filteredOptions.length === 0 && !allowNewValues); // Render no hits message
 
@@ -45,7 +45,7 @@ const FilteredOptions = () => {
     >
       {shouldRenderNonSelectables && (
         <div className="navds-combobox__list_non-selectables" role="status">
-          {isMultiSelect && <MaxSelectedMessage />}
+          {isMultiSelect && maxSelected.limit && <MaxSelectedMessage />}
           {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
             <NoSearchHitsMessage />
