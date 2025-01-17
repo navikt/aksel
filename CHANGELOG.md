@@ -4,16 +4,18 @@
 
 ### @navikt/ds-css
 
-- Link: :bug: Use inside Alert got wrong text-color while focused or active. ([#3489](https://github.com/navikt/aksel/pull/3489))
+- Table: Removed border-bottom for HeaderCell used in ExpandableRow. ([#3503](https://github.com/navikt/aksel/pull/3503))
 
-* ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
+* Link: :bug: Use inside Alert got wrong text-color while focused or active. ([#3489](https://github.com/navikt/aksel/pull/3489))
+
+- ErrorSummary: :sparkles: new prop to prefix error with a warning icon. ([#3445](https://github.com/navikt/aksel/pull/3445))
   All form components: replace dot with warning icon in error message.
 
-- Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
+* Switch: Update switch to better reflect unchecked state. ([#3468](https://github.com/navikt/aksel/pull/3468))
 
-- Select: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+* Select: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
 
-- Textarea: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
+* Textarea: :bug: Focus-border no longer cancels out error-border. ([#3465](https://github.com/navikt/aksel/pull/3465))
 
 ### @navikt/ds-react
 
