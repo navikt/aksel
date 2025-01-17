@@ -19,7 +19,7 @@ const Example = () => {
               key={i + fnr}
               content="Innhold i ekspanderbar rad"
             >
-              <Table.DataCell scope="row">{name}</Table.DataCell>
+              <Table.HeaderCell scope="row">{name}</Table.HeaderCell>
               <Table.DataCell>{fnr}</Table.DataCell>
               <Table.DataCell>{format(new Date(start))}</Table.DataCell>
             </Table.ExpandableRow>
