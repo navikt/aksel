@@ -136,7 +136,7 @@
     margin-block: 0;
     transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
     transition-duration: 250ms;
-    transition-property: visibility, opacity, height, grid-template-rows, margin, min-height;
+    transition-property: visibility, opacity, grid-template-rows, margin, min-height;
     border-color: transparent;
     opacity: 0;
 
