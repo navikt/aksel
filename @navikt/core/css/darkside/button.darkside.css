@@ -17,8 +17,8 @@
   box-shadow: inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 }
 

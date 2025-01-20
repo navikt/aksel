@@ -160,7 +160,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
        * - Discuss with brand
        */
       focus: {
-        value: "{ax.accent.700.value}",
+        value: "{ax.neutral.1000.value}",
         type: "color",
         group: "border",
         /**
