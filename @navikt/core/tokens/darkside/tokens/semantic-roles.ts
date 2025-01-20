@@ -1,12 +1,8 @@
 import _ from "lodash";
-import {
-  ColorRolesList,
-  type ColorTheme,
-  type SemanticColorRoles,
-} from "../../types";
+import { ColorRolesList, type SemanticColorRoles } from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
-const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
+const configForRole = (role: SemanticColorRoles) => {
   return {
     bg: {
       [`${role}-soft`]: {
@@ -69,17 +65,6 @@ const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
         type: "color",
         group: `background.${role}`,
       },
-      [`${role}-raised`]: {
-        /* We bump raised for darkmode */
-        value: `{ax.${role}.${theme === "light" ? "100" : "200"}.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-raised-hover`]: {
-        value: `{ax.${role}.${theme === "light" ? "200" : "300"}.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
     },
     text: {
       [role]: {
@@ -126,9 +111,9 @@ const configForRole = (role: SemanticColorRoles, theme: ColorTheme) => {
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
-export const semanticTokensForAllRolesConfig = (theme: ColorTheme) => {
+export const semanticTokensForAllRolesConfig = () => {
   return ColorRolesList.filter((name) => name !== "neutral").reduce(
-    (acc, role) => _.merge(acc, configForRole(role, theme)),
+    (acc, role) => _.merge(acc, configForRole(role)),
     {} as ReturnType<typeof configForRole>,
   );
 };
