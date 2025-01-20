@@ -119,17 +119,17 @@ export function semanticTokenConfig(theme: ColorTheme) {
         group: `background`,
       },
       strong: {
-        value: `{ax.neutral.600.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "strong-hover": {
         value: `{ax.neutral.700.value}`,
         type: "color",
         group: `background`,
       },
-      "strong-pressed": {
+      "strong-hover": {
         value: `{ax.neutral.800.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "strong-pressed": {
+        value: `{ax.neutral.900.value}`,
         type: "color",
         group: `background`,
       },
