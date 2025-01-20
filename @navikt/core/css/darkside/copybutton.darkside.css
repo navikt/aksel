@@ -67,12 +67,8 @@
     --__axc-copybutton-padding: var(--ax-space-4);
   }
 
-  & .navds-copybutton__icon {
-    font-size: 1.25rem;
-  }
-
   & > .navds-copybutton__content {
-    gap: var(--ax-space-6);
+    gap: var(--ax-space-4);
   }
 }
 
@@ -96,7 +92,7 @@
   }
 
   & > .navds-copybutton__content {
-    gap: var(--ax-space-4);
+    gap: var(--ax-space-2);
   }
 }
 
@@ -104,18 +100,6 @@
 .navds-copybutton__icon {
   font-size: 1.5rem;
   display: flex;
-
-  &:first-of-type {
-    margin-left: -0.25rem;
-  }
-
-  &:last-of-type {
-    margin-right: -0.25rem;
-  }
-
-  &:only-child {
-    margin: 0;
-  }
 }
 
 .navds-copybutton--active .navds-copybutton__icon {
@@ -166,5 +150,5 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ax-space-8);
+  gap: var(--ax-space-6);
 }
