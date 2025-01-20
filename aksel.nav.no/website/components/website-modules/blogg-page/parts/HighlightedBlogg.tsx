@@ -13,7 +13,7 @@ export const HighlightedBlogg = ({
 }) => {
   const date = useFormatedDate(blogg?.publishedAt ?? blogg._createdAt);
   return (
-    <div>
+    <article>
       <div className="col-span-1 hidden md:block">
         <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
           {blogg?.seo?.image ? (
@@ -109,6 +109,6 @@ export const HighlightedBlogg = ({
           </BodyShort>
         )}
       </div>
-    </div>
+    </article>
   );
 };

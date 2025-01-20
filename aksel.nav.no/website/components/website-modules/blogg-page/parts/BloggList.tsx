@@ -13,7 +13,7 @@ export const BloggList = ({
 }) => {
   const date = useFormatedDate(blogg?.publishedAt ?? blogg._createdAt);
   return (
-    <div>
+    <li>
       <div className="hidden gap-6 md:flex">
         <div className="relative hidden aspect-square h-[11.75rem] rounded-lg ring-1 ring-border-subtle lg:block">
           {blogg?.seo?.image ? (
@@ -86,6 +86,6 @@ export const BloggList = ({
           </BodyShort>
         )}
       </div>
-    </div>
+    </li>
   );
 };
