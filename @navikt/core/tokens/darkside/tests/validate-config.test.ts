@@ -27,19 +27,13 @@ describe("Validate token configurations", () => {
 
   test(`Semantic tokens for all roles: Lightmode`, () => {
     expect(
-      validateConfig(
-        semanticTokensForAllRolesConfig("light"),
-        configKeysWithGroup,
-      ),
+      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Semantic tokens for all roles: Darkmode`, () => {
     expect(
-      validateConfig(
-        semanticTokensForAllRolesConfig("dark"),
-        configKeysWithGroup,
-      ),
+      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
