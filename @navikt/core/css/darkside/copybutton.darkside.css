@@ -146,14 +146,6 @@
 
   &.navds-copybutton--active {
     color: var(--ax-text-success);
-
-    &:hover {
-      color: var(--ax-text-success-strong);
-    }
-  }
-
-  &:hover {
-    color: var(--ax-text-accent-strong);
   }
 
   &:disabled {
@@ -164,11 +156,6 @@
 /* --------------------------- CopyButton Neutral --------------------------- */
 .navds-copybutton--neutral {
   color: var(--ax-text-subtle);
-
-  &:hover,
-  &.navds-copybutton--active {
-    color: var(--ax-text-default);
-  }
 
   &:disabled {
     color: var(--ax-text-subtle);
