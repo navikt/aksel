@@ -48,6 +48,11 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
    * @default 999
    */
   colSpan?: number;
+  /**
+   * Optional left, right-gutter for content
+   * @default Opposite of `togglePlacement`
+   */
+  contentGutter?: "left" | "right" | "none";
 }
 
 export type ExpandableRowType = React.ForwardRefExoticComponent<
@@ -67,6 +72,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       expansionDisabled = false,
       expandOnRowClick = false,
       colSpan = 999,
+      contentGutter,
       onClick,
       ...rest
     },
@@ -139,7 +145,9 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           <td colSpan={colSpan} className="navds-table__expanded-row-cell">
             <AnimateHeight
               className="navds-table__expanded-row-collapse"
-              innerClassName="navds-table__expanded-row-content"
+              innerClassName={`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
+                contentGutter ?? togglePlacement
+              }`}
               height={_open ? "auto" : 0}
               duration={150}
               easing="cubic-bezier(0.39,0.57,0.56,1)"
