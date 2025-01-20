@@ -37,15 +37,15 @@ export const BloggList = ({
           )}
         </div>
 
-        <div>
+        <div className="w-full">
           <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-deepblue-500 underline hover:no-underline">
-              <Heading size="small" level="2">
+            <Link className="text-aksel-heading underline hover:no-underline">
+              <Heading size="medium" level="2">
                 {blogg.heading}
               </Heading>
             </Link>
           </NextLink>
-          <BodyLong className="mt-4" size="small">
+          <BodyLong className="mt-4" size="medium">
             {blogg?.ingress}
           </BodyLong>
           {getAuthors(blogg).length > 0 ? (
@@ -63,53 +63,28 @@ export const BloggList = ({
           )}
         </div>
       </div>
-      <div className="md:hidden">
-        <div className="relative mb-6 block aspect-video">
-          {blogg?.seo?.image ? (
-            <Image
-              src={urlFor(blogg.seo.image).auto("format").url()}
-              layout="fill"
-              objectFit="cover"
-              aria-hidden
-              priority
-              className="rounded-lg"
-            />
-          ) : (
-            <Image
-              src={getImage(blogg?.heading ?? "", "thumbnail")}
-              layout="fill"
-              objectFit="cover"
-              aria-hidden
-              priority
-              className="rounded-lg"
-            />
-          )}
-        </div>
-        <div className="md:hidden">
-          <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-            <Link className="text-deepblue-500 underline hover:no-underline">
-              <Heading size="small" level="2">
-                {blogg.heading}
-              </Heading>
-            </Link>
-          </NextLink>
-          <BodyLong className="mt-4" size="small">
-            {blogg?.ingress}
-          </BodyLong>
-          {getAuthors(blogg).length > 0 ? (
-            <BodyShort
-              size="small"
-              className="mt-4 flex gap-2 text-text-subtle"
-            >
-              <span className="font-semibold">{getAuthors(blogg)[0]}</span>
-              <span>{date}</span>
-            </BodyShort>
-          ) : (
-            <BodyShort size="small" className="mt-4 text-text-subtle">
-              <span>{date}</span>
-            </BodyShort>
-          )}
-        </div>
+
+      <div className="w-full md:hidden">
+        <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
+          <Link className="text-aksel-heading underline hover:no-underline">
+            <Heading size="medium" level="2">
+              {blogg.heading}
+            </Heading>
+          </Link>
+        </NextLink>
+        <BodyLong className="mt-4" size="medium">
+          {blogg?.ingress}
+        </BodyLong>
+        {getAuthors(blogg).length > 0 ? (
+          <BodyShort size="small" className="mt-4 flex gap-2 text-text-subtle">
+            <span className="font-semibold">{getAuthors(blogg)[0]}</span>
+            <span>{date}</span>
+          </BodyShort>
+        ) : (
+          <BodyShort size="small" className="mt-4 text-text-subtle">
+            <span>{date}</span>
+          </BodyShort>
+        )}
       </div>
     </div>
   );
