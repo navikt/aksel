@@ -50,7 +50,7 @@ export interface ExpandableRowProps extends Omit<RowProps, "content"> {
   colSpan?: number;
   /**
    * Optional left, right-gutter for content
-   * @default Opposite of `togglePlacement`
+   * @default Same as `togglePlacement`
    */
   contentGutter?: "left" | "right" | "none";
 }
