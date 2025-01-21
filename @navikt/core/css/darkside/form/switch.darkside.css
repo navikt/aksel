@@ -31,26 +31,41 @@
 }
 
 .navds-switch__content {
+  --__axc-switch-block-padding: 0.75rem;
+
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
-  padding: 0.75rem 0 0.75rem 3.25rem;
+  gap: var(--ax-space-2);
+  padding: var(--__axc-switch-block-padding) 0 var(--__axc-switch-block-padding) 3.25rem;
 
   .navds-switch--right & {
-    padding: 0.75rem 3.25rem 0.75rem 0;
+    padding: var(--__axc-switch-block-padding) 3.25rem var(--__axc-switch-block-padding) 0;
   }
 
   .navds-switch--small & {
-    padding: calc(var(--ax-space-8) - var(--ax-space-2)) 0 calc(var(--ax-space-8) - var(--ax-space-2)) 3.25rem;
+    --__axc-switch-block-padding: 0.375rem;
   }
 
-  .navds-switch--right.navds-switch--small & {
-    padding: calc(var(--ax-space-8) - var(--ax-space-2)) 3.25rem calc(var(--ax-space-8) - var(--ax-space-2)) 0;
+  &.navds-switch--with-description {
+    padding-bottom: 0;
   }
-}
 
-.navds-switch--with-description {
-  padding-bottom: 0;
+  .navds-switch__input:focus ~ .navds-switch__label-wrapper > &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(100% - var(--__axc-switch-block-padding) * 2);
+    border-radius: var(--ax-border-radius-medium);
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    pointer-events: none;
+  }
+
+  .navds-switch__input:focus ~ .navds-switch__label-wrapper > &.navds-switch--with-description::after {
+    height: calc(100% - var(--__axc-switch-block-padding) * 1);
+  }
 }
 
 .navds-switch__input:hover ~ .navds-switch__label-wrapper,
@@ -100,9 +115,9 @@
     border-color: var(--ax-bg-accent-strong-pressed);
   }
 
-  .navds-switch__input:focus-visible ~ & {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+  .navds-switch--standalone > .navds-switch__input:focus ~ & {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 }
 
@@ -238,9 +253,9 @@
     color: field;
   }
 
-  .navds-switch__input:focus-visible ~ .navds-switch__track {
-    outline: 2px solid highlight;
-    outline-offset: 2px;
+  .navds-switch__input:focus ~ .navds-switch__label-wrapper > .navds-switch__content::after,
+  .navds-switch--standalone > .navds-switch__input:focus ~ .navds-switch__track {
+    outline: 3px solid highlight;
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) {
@@ -248,7 +263,7 @@
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__thumb {
-    background-color: graytext;
+    background-color: graytext !important;
   }
 
   .navds-switch--disabled:not(.navds-switch--loading) .navds-switch__track {

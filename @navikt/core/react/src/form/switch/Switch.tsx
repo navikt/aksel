@@ -85,6 +85,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             "navds-switch--loading": loading,
             "navds-switch--disabled": inputProps.disabled ?? loading,
             "navds-switch--readonly": readOnly,
+            "navds-switch--standalone": hideLabel,
           },
         )}
       >
