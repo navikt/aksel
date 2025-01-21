@@ -1,6 +1,4 @@
 import cl from "clsx";
-import type { FuseResultMatch } from "fuse.js";
-import React from "react";
 import { searchOptions } from "@/types";
 
 function splitStr(str: string, query: string) {
@@ -46,52 +44,5 @@ export function highlightStr(
           </span>
         ))}
     </>
-  );
-}
-
-export function highlightMatches(hitMatch: FuseResultMatch) {
-  const text = hitMatch.value;
-
-  if (!text) {
-    return null;
-  }
-
-  const result: { text: string; highlight: boolean }[] = [];
-  const matches = [...hitMatch.indices];
-
-  let index = 0;
-  matches.forEach((match, i) => {
-    const str = text.substring(match[0], match[1] - 1);
-    let preText = text.substring(index, match[0]);
-
-    if (i === 0) {
-      const preLength = preText.length;
-      preText = preText.substring(preText.length - 23);
-      if (preText.length < preLength) {
-        preText = `...${preText}`;
-      }
-    }
-
-    result.push({ text: preText, highlight: false });
-    result.push({ text: str, highlight: true });
-    index = match[1] - 1;
-    if (i === matches.length - 1) {
-      result.push({ text: text.substring(index), highlight: false });
-    }
-  });
-
-  return (
-    <span>
-      {result.map((part, i) => (
-        <span
-          key={i}
-          className={cl({
-            "font-semibold text-text-default": part.highlight,
-          })}
-        >
-          {part.text}
-        </span>
-      ))}
-    </span>
   );
 }

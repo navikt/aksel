@@ -2,12 +2,13 @@ import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { forwardRef, useContext } from "react";
+import { Show } from "@navikt/ds-react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT, searchOptions } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { SearchContext, SearchLoggingContext } from "../providers";
-import { highlightMatches, highlightStr } from "../utils";
+import { highlightStr } from "../utils";
 
 export const Hit = forwardRef<
   HTMLLIElement,
@@ -33,10 +34,11 @@ export const Hit = forwardRef<
         "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 has-[+_*_:focus-visible]:border-b-transparent has-[:focus-visible]:border-b-transparent",
       )}
     >
-      <div className="w-full truncate px-2 py-3">
+      <div className="w-full px-2 py-3">
         <span
           className={cl({
-            "flex flex-col": simple,
+            "flex flex-col gap-1 md:flex-row md:justify-between md:gap-4":
+              simple,
             "flex items-center gap-2": !simple,
           })}
         >
@@ -44,12 +46,13 @@ export const Hit = forwardRef<
             href={href}
             onClick={() => logSuccess(index, `/${hit.item.slug}`)}
             className={cl(
-              "group scroll-my-32 truncate text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
+              "group scroll-my-32 break-words text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
               "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",
             )}
           >
             {highlightStr(hit.item.heading, query, tag)}
           </NextLink>
+
           {simple ? (
             <Tag
               type={hit.item._type}
@@ -65,7 +68,9 @@ export const Hit = forwardRef<
           )}
         </span>
 
-        {!simple && <HeadingLinks hit={hit} />}
+        <Show above="md" asChild>
+          <p className="line-clamp-2">{hit.description}</p>
+        </Show>
       </div>
 
       {!simple && (
@@ -87,19 +92,3 @@ export const Hit = forwardRef<
     </li>
   );
 });
-
-function HeadingLinks({
-  hit,
-}: {
-  hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
-}) {
-  if (hit.matches && hit.matches?.[0].key !== "heading") {
-    return highlightMatches(hit.matches[0]);
-  }
-
-  return (
-    <span className="max-w-full text-lg font-regular text-text-subtle">
-      {hit.description}
-    </span>
-  );
-}
