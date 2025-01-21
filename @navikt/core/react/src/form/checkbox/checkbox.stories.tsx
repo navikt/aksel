@@ -24,7 +24,7 @@ export const Default = (props) => {
   const [state, setState] = useState(["checkbox1"]);
 
   return (
-    <div style={{ maxWidth: 400 }}>
+    <div>
       <CheckboxGroup
         legend={props.legend}
         description={props.description}
@@ -38,10 +38,8 @@ export const Default = (props) => {
           value="checkbox1"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description="aldkaspdkslø aød køasdk asøkdkd øas køask aøsk daøslk døaslk dasø kasødk aøsdk øasd kasødl asød kasød aø"
         >
-          {props.children ||
-            "Apple kløasdkadj asl djlkasdj lasjdlasjd lkasj dlasjd lkasjd lkasjd lkasjdlkasj laksjd lasjd lasjdlasjdlka sdlkasd lkasjd lasjdlkasjd la sj dlasj dlkasjd lasjd lasjd lkasjd lasjd alksjd lasjd lasjd alks dlasd"}
+          {props.children || "Apple"}
         </Checkbox>
         <Checkbox
           value="checkbox2"

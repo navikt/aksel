@@ -78,6 +78,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               />
             </svg>
           </span>
+          <span className="navds-checkbox__icon-indeterminate" />
           <span
             className={cl("navds-checkbox__content", {
               "navds-sr-only": props.hideLabel,
