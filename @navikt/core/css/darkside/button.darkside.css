@@ -17,26 +17,28 @@
   box-shadow: inset 0 0 0 var(--__axc-button-border-width) var(--__axc-button-border-color);
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 }
 
 .navds-button--small,
 .navds-button--xsmall {
   --__axc-button-icon-margin: -2px;
-  --__axc-button-icon-size: 1.25rem;
 }
 
 .navds-button--small {
   padding: var(--ax-space-4) var(--ax-space-12);
   min-height: 2rem;
   min-width: 2rem;
+  gap: var(--ax-space-6);
 }
 
 .navds-button--xsmall {
   padding: var(--ax-space-2) var(--ax-space-8);
   gap: var(--ax-space-4);
+
+  --__axc-button-icon-size: 1.25rem;
 }
 
 .navds-button--icon-only {
@@ -159,7 +161,7 @@
 * .navds-button--secondary-neutral *
  **************************/
 .navds-button--secondary-neutral {
-  --__axc-button-border-color: var(--ax-border-default);
+  --__axc-button-border-color: var(--ax-border-strong);
 
   background-color: transparent;
   color: var(--ax-text-default);
@@ -178,7 +180,7 @@
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    --__axc-button-border-color: var(--ax-border-default);
+    --__axc-button-border-color: var(--ax-border-strong);
 
     color: var(--ax-text-default);
     background-color: transparent;

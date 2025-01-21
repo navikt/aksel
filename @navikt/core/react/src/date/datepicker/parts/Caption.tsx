@@ -21,7 +21,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
     <>
       <div className="navds-date__caption">
         <Button
-          variant="tertiary"
+          variant="tertiary-neutral"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<ArrowLeftIcon title={translate("goToPreviousMonth")} />}
@@ -41,7 +41,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
-          variant="tertiary"
+          variant="tertiary-neutral"
           className="navds-date__caption-button"
           type="button"
         />

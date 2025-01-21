@@ -20,8 +20,8 @@
   text-align: start;
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 
   &[data-state="open"] .navds-read-more__expand-icon {
