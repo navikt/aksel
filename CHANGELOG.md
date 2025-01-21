@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.10
+
+### @navikt/ds-css
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+### @navikt/ds-react
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
 ## 7.9
 
 ### @navikt/ds-css
