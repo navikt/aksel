@@ -2,4 +2,4 @@
 "@fake-scope/fake-pkg": patch
 ---
 
-always render the maxSelected message when isMultiSelect
+Combobox: Always render `maxSelected` message when `isMultiSelect` is set. 
