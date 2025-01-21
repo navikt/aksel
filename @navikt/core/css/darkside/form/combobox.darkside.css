@@ -117,11 +117,11 @@
 
 .navds-combobox--error {
   & .navds-combobox__wrapper-inner {
-    border-color: var(--ax-border-danger);
-    box-shadow: 0 0 0 1px var(--ax-border-danger);
+    border-color: var(--ax-border-danger-strong);
+    box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
 
     &:has(.navds-combobox__input:focus-visible) {
-      border-color: var(--ax-border-danger);
+      border-color: var(--ax-border-danger-strong);
     }
   }
 }
