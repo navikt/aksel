@@ -792,58 +792,23 @@ __metadata:
   linkType: hard
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
-  version: 7.9.1
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=221ebd&locator=referansesider%40workspace%3A."
-  checksum: 10/7f421aec3002de9a28ac5ece86699eae9da4dc77d28311b687aa7d0845410b0cae40a3b57e2ffd83f8450061c05589dd9605423eebc371babe7e1244c024529f
-  languageName: node
-  linkType: hard
-
-"@navikt/aksel-icons@npm:^7.9.1":
-  version: 7.9.1
-  resolution: "@navikt/aksel-icons@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.9.1%2F10d623cfc6f0786e7ae238ddf73491be74afe282"
-  checksum: 10/c5ecda9e4c251cac74626fdf8406d82fd35b2a42087ce7de730082f885ed35e9b85e6946bd5088dcedb9bffc3ee5e2a7d8d70c71ef2886460f0af472679cf953
+  version: 7.9.2
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=aff5eb&locator=referansesider%40workspace%3A."
+  checksum: 10/99c2ca45b4ef0debbf78b183733ef1f9bb35246efaf19e914c4f269124b4fd90699b7e5e12a231618e796365c9b22d764b3525689367b184ad907dc45afdfc6f
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
-  version: 7.9.1
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=99a76e&locator=referansesider%40workspace%3A."
-  checksum: 10/30be4bccdc4e7942b08b7a177547478ce1ec668945807fe89a53ee7ff84705708338bf38242011ffac161dd82492b3c763e671ba61a03968ab043c4f1fcd2d80
-  languageName: node
-  linkType: hard
-
-"@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
-  version: 7.9.1
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=c82864&locator=referansesider%40workspace%3A."
-  dependencies:
-    "@floating-ui/react": "npm:0.25.4"
-    "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.9.1"
-    "@navikt/ds-tokens": "npm:^7.9.1"
-    clsx: "npm:^2.1.0"
-    date-fns: "npm:^3.0.0"
-    react-day-picker: "npm:8.10.1"
-  peerDependencies:
-    "@types/react": ">=17.0.30"
-    react: ">=17.0.0 || >19.0.0-rc"
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10/fc6dda76027d9cb1af2e91a4ad3eb1ede5b359d71f24cc906640a5170126b30ed2bc8f4eb25f29a4f45f16b9eede523d11f3b7013b4692b6e0730cf4353b9d68
+  version: 7.9.2
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=d4b3e1&locator=referansesider%40workspace%3A."
+  checksum: 10/2faff79f5081fd4dcbe512478e8aa17dd6df32c2f2db874e24469bb24d4a6b7de09ffb242683eb3512481fc95fad4266c6ab1747bbfc2a86f9781e46b9282af5
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
-  version: 7.9.1
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=7f352f&locator=referansesider%40workspace%3A."
-  checksum: 10/1da54741fe5ac50a4437b8bcb49544c0a6ce104cfe2364b3326e184276ec416df9bf4d2c362ec7d44ec2e52777e287b1a91b4043ab71f8cff05fd93a8583bfc2
-  languageName: node
-  linkType: hard
-
-"@navikt/ds-tokens@npm:^7.9.1":
-  version: 7.9.1
-  resolution: "@navikt/ds-tokens@npm:7.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.9.1%2F78fb2d1aabb0a187cfe20a553344fb2d6ae16762"
-  checksum: 10/0f02394f5b2f63bbc0461d7a12162255633b7cbb53c802de88178c3583cd258392ab48635988ebb241a8b0fdf7e8a250815989bccc2a231962be526dfb1f4857
+  version: 7.9.2
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9c3497&locator=referansesider%40workspace%3A."
+  checksum: 10/99c62f4207165fa675989c0f0ba1e65497dad8f1233583f506f5631d5dbaca3c0ac8d0b683f8a3f03ace0c2296bc49f8f12a439d73e41be4a0a47fb957fd9869
   languageName: node
   linkType: hard
 
@@ -1327,13 +1292,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.3.3":
+"@types/react@npm:*":
   version: 18.3.6
   resolution: "@types/react@npm:18.3.6"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10/ba0d337244347ecbf921de174d9db9bb80b03d41ad3ae7aa65500b3339925852c97e501d7657b5cd629ffed9f7fe3820a63069847e7b8529e4d02934d0f182e9
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.3.11":
+  version: 18.3.18
+  resolution: "@types/react@npm:18.3.18"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10/7fdd8b853e0d291d4138133f93f8d5c333da918e5804afcea61a923aab4bdfc9bb15eb21a5640959b452972b8715ddf10ffb12b3bd071898b9e37738636463f2
   languageName: node
   linkType: hard
 
@@ -3484,7 +3459,7 @@ __metadata:
     "@tanstack/react-router": "npm:^1.57.17"
     "@tanstack/router-devtools": "npm:^1.57.17"
     "@tanstack/router-plugin": "npm:^1.57.15"
-    "@types/react": "npm:^18.3.3"
+    "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     "@vitest/eslint-plugin": "npm:^1.1.4"
@@ -3502,7 +3477,7 @@ __metadata:
     tailwindcss: "npm:^3.4.11"
     typescript: "npm:5.5.4"
     typescript-eslint: "npm:^8.0.1"
-    vite: "npm:^5.4.8"
+    vite: "npm:^5.4.12"
   languageName: unknown
   linkType: soft
 
@@ -4134,9 +4109,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.8":
-  version: 5.4.8
-  resolution: "vite@npm:5.4.8"
+"vite@npm:^5.4.12":
+  version: 5.4.14
+  resolution: "vite@npm:5.4.14"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -4173,7 +4148,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/17fdffa558abaf854f04ead7d3ddd76e4556a59871f9ac63cca3fc20a79979984837d8dddaae4b171e3d73061f781e4eec0f6d3babdbce2b4d111d29cf474c1c
+  checksum: 10/ce382f4059eb6c939823b8f62163794752243755d84c71a4b73ad0f7d4d9f4c7a557a6ef4c78e0640f4bcf5ae5ec6b20c7ee4816419af3c81ba275f478b73468
   languageName: node
   linkType: hard
 
