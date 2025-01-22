@@ -80,7 +80,7 @@
 .navds-chat--neutral {
   & .navds-chat__bubble,
   & .navds-chat__avatar {
-    background-color: var(--ax-bg-moderate);
+    background-color: var(--ax-bg-moderateA);
   }
 }
 

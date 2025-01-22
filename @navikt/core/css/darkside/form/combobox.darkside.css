@@ -15,7 +15,7 @@
 
 .navds-form-field:not(:is(.navds-combobox--disabled, .navds-combobox--readonly)) {
   & .navds-combobox__wrapper:hover {
-    border-color: var(--ax-border-focus);
+    border-color: var(--ax-border-accent-strong);
   }
 }
 
@@ -31,6 +31,10 @@
   opacity: var(--ax-opacity-disabled);
 
   & .navds-combobox__wrapper {
+    &:hover {
+      border-color: var(--ax-border-default);
+    }
+
     & *:hover {
       cursor: not-allowed;
     }
@@ -80,9 +84,9 @@
   border-radius: var(--ax-border-radius-medium);
 
   &:has(.navds-combobox__input:focus-visible) {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
-    border-color: var(--ax-border-focus);
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+    border-color: var(--ax-border-accent-strong);
   }
 
   &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
@@ -112,6 +116,10 @@
 
   &:hover {
     cursor: text;
+  }
+
+  .navds-combobox--disabled &:hover {
+    border-color: var(--ax-border-default);
   }
 }
 
@@ -230,7 +238,7 @@
 /* dropdown & non selectable dropdown items */
 
 .navds-combobox__list {
-  max-height: 290px;
+  max-height: 316px;
   overflow: clip;
   position: absolute;
   left: 0;
@@ -268,7 +276,7 @@
   border-radius: var(--ax-border-radius-medium);
   border: 0;
   margin-inline: var(--ax-space-8);
-  margin-block: var(--ax-space-4);
+  margin-block: var(--ax-space-2);
   scroll-margin-block: 8px; /* outline + outline-offset + margin-block */
 }
 
@@ -307,7 +315,6 @@
 .navds-combobox__list-item--focus {
   cursor: pointer;
   outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
 }
 
 .navds-combobox__list-item {
@@ -321,10 +328,11 @@
   & mark {
     background-color: transparent;
     font-weight: var(--ax-font-weight-bold);
+    color: var(--ax-text-default);
   }
 
   & svg {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-default);
   }
 }
 
@@ -344,14 +352,14 @@
   justify-content: flex-start;
   gap: 0.25rem;
   margin: 0;
-  margin-block: calc(var(--ax-space-4) * -1);
-  padding-block: var(--ax-space-16);
+  margin-block-start: calc(var(--ax-space-4) * -1);
 
   & svg {
     color: var(--ax-text-default);
   }
 
   &:only-child {
+    margin-block: calc(var(--ax-space-4) * -1);
     border: none;
   }
 }
