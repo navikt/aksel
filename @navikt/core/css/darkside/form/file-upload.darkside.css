@@ -89,7 +89,7 @@
 
 .navds-dropzone--error > .navds-dropzone__area {
   border-color: transparent;
-  outline: 2px solid var(--ax-border-danger);
+  outline: 2px solid var(--ax-border-danger-strong);
   outline-offset: -1px;
 }
 
@@ -165,7 +165,7 @@ li.navds-file-item {
 }
 
 .navds-file-item--error > .navds-file-item__inner {
-  outline: 2px solid var(--ax-border-danger);
+  outline: 2px solid var(--ax-border-danger-strong);
 }
 
 .navds-file-item__icon {
