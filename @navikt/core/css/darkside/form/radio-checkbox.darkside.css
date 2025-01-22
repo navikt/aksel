@@ -238,7 +238,6 @@
     inset 0 0 0 8px var(--ax-bg-moderate);
 }
 
-/* LASDØLKASØDAØ */
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label > .navds-checkbox__icon-indeterminate {
   background-color: var(--ax-text-subtle);
 }
