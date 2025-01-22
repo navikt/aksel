@@ -159,8 +159,8 @@
   .rdp-cell > button.rdp-day,
   button.navds-date__month-button {
     &:focus-visible {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: 1px;
+      outline: 3px solid var(--ax-border-focus);
+      outline-offset: 3px;
     }
 
     &:active:not(:disabled) {

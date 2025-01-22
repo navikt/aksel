@@ -26,8 +26,8 @@
 
   /* We have to outline the whole container to include the Search-buttons */
   &:has(.navds-search__input:focus-visible) {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 }
 

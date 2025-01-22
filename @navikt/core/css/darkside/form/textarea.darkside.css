@@ -20,8 +20,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
     border-color: var(--ax-border-accent-strong);
   }
 

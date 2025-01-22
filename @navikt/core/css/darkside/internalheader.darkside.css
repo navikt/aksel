@@ -87,7 +87,7 @@
 .navds-internalheader__button {
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
-    outline-offset: -3px;
+    outline-offset: -4px;
   }
 
   &:active {

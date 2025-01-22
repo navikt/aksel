@@ -55,7 +55,7 @@
 
 @supports not selector(:focus-visible) {
   .navds-button:focus {
-    outline: 2px solid var(--ax-border-focus);
+    outline: 3px solid var(--ax-border-focus);
   }
 }
 
