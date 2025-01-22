@@ -46,6 +46,7 @@ export const komponentKategorier = [
   { title: "Primitives", value: "primitives" },
   { title: "Core", value: "core" },
   { title: "Alpha", value: "alpha" },
+  { title: "Legacy", value: "legacy" },
 ];
 
 export const grunnleggendeKategorier = [
