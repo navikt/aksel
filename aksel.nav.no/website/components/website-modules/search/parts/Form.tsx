@@ -25,11 +25,7 @@ export const SearchForm = () => {
   }
 
   return (
-    <form
-      role="search"
-      onSubmit={(e) => e.preventDefault()}
-      className="px-6 pb-4"
-    >
+    <form role="search" onSubmit={(e) => e.preventDefault()} className="w-full">
       <Search
         label={
           <span className="flex items-center gap-2">

@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Modal } from "@navikt/ds-react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button, Heading, Modal } from "@navikt/ds-react";
 import { AkselSearchButton } from "@/web/search/parts/SearchButton";
 import { SearchContext, SearchNavigationContext } from "../providers";
 import { SearchForm } from "./Form";
@@ -22,16 +23,28 @@ export const Search = () => {
             e.stopPropagation();
           }
         }}
-        className="h-[90%] max-h-[52rem]"
+        className="md:h-[90%] md:max-h-[52rem]"
         width="medium"
+        aria-labelledby="aksel-search-heading"
         closeOnBackdropClick
-        header={{
-          heading: "Søk",
-          closeButton: true,
-        }}
       >
+        <Heading
+          level="1"
+          size="medium"
+          id="aksel-search-heading"
+          visuallyHidden
+        >
+          Søk
+        </Heading>
         <Skeleton />
-        <SearchForm />
+        <div className="flex items-center gap-2 px-2 py-1 md:px-4 md:py-4">
+          <SearchForm />
+          <Button
+            variant="tertiary-neutral"
+            onClick={close}
+            icon={<XMarkIcon title="Lukk" />}
+          />
+        </div>
         <Results />
       </Modal>
     </>
