@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.10.0
+
+### Minor Changes
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+### Patch Changes
+
+- Combobox: Always render `maxSelected` message when `isMultiSelect` is set. ([#3506](https://github.com/navikt/aksel/pull/3506))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.10.0
+  - @navikt/aksel-icons@7.10.0
+
 ## 7.9.2
 
 ### Patch Changes
