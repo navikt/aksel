@@ -276,7 +276,7 @@
   border-radius: var(--ax-border-radius-medium);
   border: 0;
   margin-inline: var(--ax-space-8);
-  margin-block: var(--ax-space-4);
+  margin-block: var(--ax-space-2);
   scroll-margin-block: 8px; /* outline + outline-offset + margin-block */
 }
 
@@ -315,7 +315,6 @@
 .navds-combobox__list-item--focus {
   cursor: pointer;
   outline: 2px solid var(--ax-border-focus);
-  outline-offset: 2px;
 }
 
 .navds-combobox__list-item {
@@ -329,6 +328,7 @@
   & mark {
     background-color: transparent;
     font-weight: var(--ax-font-weight-bold);
+    color: var(--ax-text-default);
   }
 
   & svg {
@@ -352,14 +352,14 @@
   justify-content: flex-start;
   gap: 0.25rem;
   margin: 0;
-  margin-block: calc(var(--ax-space-4) * -1);
-  padding-block: var(--ax-space-16);
+  margin-block-start: calc(var(--ax-space-4) * -1);
 
   & svg {
     color: var(--ax-text-default);
   }
 
   &:only-child {
+    margin-block: calc(var(--ax-space-4) * -1);
     border: none;
   }
 }
