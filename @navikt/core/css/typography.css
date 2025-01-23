@@ -35,7 +35,7 @@
 }
 
 /* Mobile scale */
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .navds-heading--xlarge {
     font-size: var(--a-font-size-heading-xlarge);
     letter-spacing: -0.008em;

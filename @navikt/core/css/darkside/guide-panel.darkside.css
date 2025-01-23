@@ -16,7 +16,7 @@
     align-items: flex-start;
   }
 
-  @media (min-width: 480px) {
+  @media (width >= 480px) {
     & {
       --__axc-guide-panel-guide-size: 5rem;
     }
@@ -58,7 +58,7 @@
     margin-left: var(--ax-space-20);
   }
 
-  @media (min-width: 480px) {
+  @media (width >= 480px) {
     .navds-guide-panel[data-responsive="true"] > & {
       margin-top: 0;
       margin-left: var(--ax-space-20);
@@ -77,7 +77,7 @@
     min-height: var(--__axc-guide-panel-guide-size);
   }
 
-  @media (min-width: 480px) {
+  @media (width >= 480px) {
     & {
       padding: var(--ax-space-16) var(--ax-space-20);
     }
@@ -104,7 +104,7 @@
     transform: translateY(-48%) rotateZ(-90deg) scaleX(-1);
   }
 
-  @media (min-width: 480px) {
+  @media (width >= 480px) {
     .navds-guide-panel[data-responsive="true"] & {
       top: calc(var(--__axc-guide-panel-guide-size) / 2);
       left: calc(var(--ax-space-20) * -1 - 2px);
