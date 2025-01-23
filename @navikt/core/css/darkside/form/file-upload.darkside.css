@@ -134,7 +134,7 @@
 }
 
 .navds-dropzone--dragging .navds-dropzone__area-release {
-  color: var(--ax-text-accent-strong);
+  color: var(--ax-text-accent);
   top: 50%;
   transform: translateY(-50%);
 }
