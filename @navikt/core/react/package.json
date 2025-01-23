@@ -618,7 +618,7 @@
     "@navikt/aksel-icons": "^7.10.0",
     "@navikt/ds-tokens": "^7.10.0",
     "clsx": "^2.1.0",
-    "date-fns": "^3.0.0",
+    "date-fns": "^4.0.0",
     "react-day-picker": "8.10.1"
   },
   "devDependencies": {
