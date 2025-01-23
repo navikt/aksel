@@ -2,6 +2,9 @@ import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
+import { Button } from "../../button";
+import { Select } from "../../form/select";
 import { omit } from "../../util";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
@@ -93,16 +96,84 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       >
         <DateTranslationContextProvider translate={translate}>
           <DayPicker
+            captionLayout="dropdown"
             locale={locale ? getLocaleFromString(locale) : langProviderLocale}
             mode={mode}
             onSelect={handleSelect}
             selected={selected ?? selectedDates}
             components={{
-              Caption: dropdownCaption ? DropdownCaption : Caption,
+              MonthsDropdown: ({ options, value, onChange }) => (
+                <Select
+                  label={translate("month")}
+                  hideLabel
+                  className="navds-date__caption__month"
+                  value={value}
+                  onChange={onChange}
+                >
+                  {options?.map((option) => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      disabled={option.disabled}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </Select>
+              ),
+              YearsDropdown: ({ options, value, onChange }) => (
+                <Select
+                  label={translate("year")}
+                  hideLabel
+                  className="navds-date__caption__year"
+                  value={value}
+                  onChange={onChange}
+                >
+                  {options?.map((option) => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      disabled={option.disabled}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </Select>
+              ),
+              DropdownNav: ({ children }) => {
+                return <div className="navds-date__caption">{children}</div>;
+              },
+              PreviousMonthButton: ({ onClick, disabled: _disabled }) => (
+                <Button
+                  variant="tertiary-neutral"
+                  disabled={_disabled}
+                  onClick={onClick}
+                  icon={
+                    <ArrowLeftIcon title={translate("goToPreviousMonth")} />
+                  }
+                  className="navds-date__caption-button"
+                  type="button"
+                />
+              ),
+              NextMonthButton: ({ onClick, disabled: _disabled }) => (
+                <Button
+                  variant="tertiary-neutral"
+                  disabled={_disabled}
+                  onClick={onClick}
+                  icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
+                  className="navds-date__caption-button"
+                  type="button"
+                />
+              ),
+              MonthCaption: ({ calendarMonth, displayIndex, children }) => {
+                return <div>test</div>;
+              },
+
+              /* Caption: dropdownCaption ? DropdownCaption : Caption,
               Head: TableHead,
               HeadRow,
               WeekNumber,
-              Row,
+              Row, */
             }}
             className="navds-date"
             classNames={{ vhidden: "navds-sr-only" }}

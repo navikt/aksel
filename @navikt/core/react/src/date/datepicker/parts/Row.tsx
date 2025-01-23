@@ -38,7 +38,7 @@ function Row(props: RowProps): JSX.Element {
           style={styles.cell}
           key={getUnixTime(date)}
         >
-          <DayButton displayMonth={props.displayMonth} date={date} />
+          {/* <DayButton displayMonth={props.displayMonth} date={date} /> */}
         </td>
       ))}
     </tr>

@@ -1,10 +1,15 @@
 /* https://github.com/gpbl/react-day-picker/blob/7f78cd5/src/components/WeekNumber/WeekNumber.tsx#L21 */
 import React from "react";
-import { Button as RDPButton, useDayPicker } from "react-day-picker";
+import {
+  CalendarWeek,
+  Button as RDPButton,
+  useDayPicker,
+} from "react-day-picker";
 import { Button } from "../../../button";
 import { useThemeInternal } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
+import { MultipleMode } from "../types";
 
 export interface WeekNumberProps {
   /** The number of the week. */
@@ -17,10 +22,13 @@ export interface WeekNumberProps {
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/WeekNumber
  */
 function WeekNumber({
-  number: weekNumber,
-  dates,
-}: WeekNumberProps): JSX.Element {
-  const { onWeekNumberClick, styles, classNames } = useDayPicker();
+  week: { weekNumber, days },
+  onWeekNumberClick,
+}: {
+  week: CalendarWeek;
+  onWeekNumberClick: MultipleMode["onWeekNumberClick"];
+}): JSX.Element {
+  const { styles, classNames } = useDayPicker();
   const themeContext = useThemeInternal(false);
   const translate = useDateTranslationContext().translate;
 
@@ -29,8 +37,8 @@ function WeekNumber({
       <Detail
         as="span"
         textColor="subtle"
-        className={classNames.weeknumber}
-        style={styles.weeknumber}
+        className={classNames.week_number}
+        style={styles?.week_number}
         aria-label={translate("weekNumber", { week: weekNumber })}
       >
         {weekNumber}
@@ -45,10 +53,10 @@ function WeekNumber({
         size="small"
         name="week-number"
         aria-label={translate("selectWeekNumber", { week: weekNumber })}
-        style={styles.weeknumber}
+        style={styles?.week_number}
         className="navds-date__weeknumber"
-        onClick={(event) => {
-          onWeekNumberClick(weekNumber, dates, event);
+        onClick={() => {
+          onWeekNumberClick(weekNumber, days);
         }}
         icon={
           <span className="navds-date__weeknumber-number">{weekNumber}</span>
@@ -61,10 +69,10 @@ function WeekNumber({
     <RDPButton
       name="week-number"
       aria-label={translate("selectWeekNumber", { week: weekNumber })}
-      style={styles.weeknumber}
-      className={classNames.weeknumber}
-      onClick={(event) => {
-        onWeekNumberClick(weekNumber, dates, event);
+      className={classNames.week_number}
+      style={styles?.week_number}
+      onClick={() => {
+        onWeekNumberClick(weekNumber, days);
       }}
     >
       {weekNumber}

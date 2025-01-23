@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
-import { isSameDay } from "date-fns";
+import { getWeek, isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { HGrid } from "../../layout/grid";
@@ -402,8 +402,8 @@ export const StandaloneOptions = () => {
 export const WeekDayClick = () => {
   const [days, setDays] = useState<Date[]>([]);
 
-  const handleWeekClick = (dates: Date[]) => {
-    const hasDayInWeek = !!days.find((x) => dates.find((y) => isSameDay(x, y)));
+  const handleWeekClick = (week: number) => {
+    const hasDayInWeek = !!days.find((day) => getWeek(day) === week);
 
     const cleanup = days.filter((y) => !dates.find((z) => isSameDay(y, z)));
     if (hasDayInWeek) {
@@ -418,7 +418,7 @@ export const WeekDayClick = () => {
       <DatePicker.Standalone
         showWeekNumber
         mode="multiple"
-        onWeekNumberClick={(_, dates) => handleWeekClick(dates)}
+        onWeekNumberClick={(week) => handleWeekClick(week)}
         onSelect={(dates) => dates && setDays(dates)}
         selected={days}
         today={new Date("Nov 23 2022")}
@@ -426,7 +426,7 @@ export const WeekDayClick = () => {
       <DatePicker.Standalone
         showWeekNumber
         mode="multiple"
-        onWeekNumberClick={(_, dates) => handleWeekClick(dates)}
+        onWeekNumberClick={(week) => handleWeekClick(week)}
         onSelect={(dates) => dates && setDays(dates)}
         selected={days}
         today={new Date("Nov 23 2022")}

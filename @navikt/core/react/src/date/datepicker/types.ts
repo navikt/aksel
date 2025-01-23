@@ -1,4 +1,4 @@
-import { DateRange, DayPickerBase, Matcher } from "react-day-picker";
+import { CalendarWeek, DateRange, Matcher, PropsBase } from "react-day-picker";
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
 
 export type SingleMode = {
@@ -18,8 +18,13 @@ export type MultipleMode = {
   max?: number;
   /**
    * Allows selecting a week at a time. Only used with `mode` is set to "multiple".
+   * @param week Current week number
+   * @param days Dates in the week
    */
-  onWeekNumberClick?: DayPickerBase["onWeekNumberClick"];
+  onWeekNumberClick?: (
+    week: CalendarWeek["weekNumber"],
+    days: CalendarWeek["days"],
+  ) => void;
 };
 
 export type RangeMode = {
@@ -34,10 +39,10 @@ export type RangeMode = {
 
 export type ConditionalModeProps = SingleMode | MultipleMode | RangeMode;
 
-//github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
+// https://daypicker.dev/api/interfaces/PropsBase
 export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
-    Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
+    Pick<PropsBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
   /**
    * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle, or make your own with the open/onClose props
    */

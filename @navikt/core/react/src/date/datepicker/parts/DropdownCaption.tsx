@@ -1,6 +1,11 @@
 import { max, min, setMonth, setYear, startOfMonth } from "date-fns";
 import React from "react";
-import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
+import {
+  CalendarMonth,
+  CaptionProps,
+  useDayPicker,
+  useNavigation,
+} from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
@@ -11,38 +16,47 @@ import WeekRow from "./WeekRow";
 /**
  * https://github.com/gpbl/react-day-picker/tree/main/src/components/CaptionDropdowns
  */
-export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
+export const DropdownCaption = ({
+  calendarMonth,
+  displayIndex,
+}: {
+  /** The month where the grid is displayed. */
+  calendarMonth: CalendarMonth;
+  /** The index where this month is displayed. */
+  displayIndex: number;
+}) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
-    fromDate,
-    toDate,
-    formatters: { formatYearCaption, formatMonthCaption, formatCaption },
-    locale,
+    dayPickerProps: { startMonth, endMonth },
+    formatters: { formatYearDropdown, formatCaption },
   } = useDayPicker();
   const translate = useDateTranslationContext().translate;
 
-  if (!fromDate || !toDate) {
+  if (!startMonth || !endMonth) {
     console.warn("Using dropdownCaption required fromDate and toDate");
-    return null;
+    return <div />;
   }
 
   const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     const newMonth = setYear(
-      startOfMonth(displayMonth),
+      startOfMonth(calendarMonth.date),
       Number(e.target.value),
     );
-    goToMonth(startOfMonth(min([max([newMonth, fromDate]), toDate])));
+    goToMonth(startOfMonth(min([max([newMonth, startMonth]), endMonth])));
   };
 
   const handleMonthChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
-    goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
+    goToMonth(
+      setMonth(startOfMonth(calendarMonth.date), Number(e.target.value)),
+    );
 
   const years = getYears(
-    fromDate,
-    toDate,
-    displayMonth.getFullYear(),
+    startMonth,
+    endMonth,
+    calendarMonth.date.getFullYear(),
   ).reverse();
-  const months = getMonths(fromDate, toDate, displayMonth);
+
+  const months = getMonths(startMonth, endMonth, calendarMonth.date);
 
   return (
     <>
@@ -50,10 +64,10 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         <span
           aria-live="polite"
           aria-atomic="true"
-          id={id}
+          id={`caption-${displayIndex}`}
           className="navds-sr-only"
         >
-          {formatCaption(displayMonth, { locale })}
+          {formatCaption(calendarMonth.date)}
         </span>
         <Button
           variant="tertiary-neutral"
@@ -69,25 +83,25 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
             label={translate("month")}
             hideLabel
             className="navds-date__caption__month"
-            value={displayMonth.getMonth()}
+            value={calendarMonth.date.getMonth()}
             onChange={handleMonthChange}
           >
             {months.map((m) => (
               <option key={m.getMonth()} value={m.getMonth()}>
-                {formatMonthCaption(m, { locale })}
+                {formatCaption(m)}
               </option>
             ))}
           </Select>
           <Select
             label={translate("year")}
             hideLabel
-            value={displayMonth.getFullYear()}
+            value={calendarMonth.date.getFullYear()}
             onChange={handleYearChange}
             className="navds-date__caption__year"
           >
             {years.map((year) => (
               <option key={year.getFullYear()} value={year.getFullYear()}>
-                {formatYearCaption(year, { locale })}
+                {formatYearDropdown(year)}
               </option>
             ))}
           </Select>
@@ -102,7 +116,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
           type="button"
         />
       </div>
-      <WeekRow displayMonth={displayMonth} />
+      <WeekRow displayMonth={calendarMonth.date} />
     </>
   );
 };

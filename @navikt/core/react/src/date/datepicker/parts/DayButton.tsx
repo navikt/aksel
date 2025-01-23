@@ -4,11 +4,12 @@ import { Button, DayProps, useDayPicker, useDayRender } from "react-day-picker";
 
 const DayButton = (props: DayProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
-  const { locale } = useDayPicker();
-  const dateTime = format(props.date, "cccc d", { locale });
+  /* const dayRender = useDayRender(props.date, props.displayMonth, buttonRef); */
+  /* const { locale } = useDayPicker();
+  const dateTime = format(props.date, "cccc d", { locale }); */
 
-  if (dayRender.isHidden) {
+  return <div />;
+  /* if (dayRender.isHidden) {
     return <></>;
   }
   if (!dayRender.isButton) {
@@ -26,7 +27,7 @@ const DayButton = (props: DayProps) => {
       aria-selected={undefined}
       aria-pressed={!!dayRender.activeModifiers.selected}
     />
-  );
+  ); */
 };
 
 export default DayButton;

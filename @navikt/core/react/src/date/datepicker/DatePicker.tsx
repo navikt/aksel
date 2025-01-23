@@ -83,6 +83,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onOpenToggle,
       strategy,
       onWeekNumberClick,
+      fromDate,
+      toDate,
       ...rest
     },
     ref,
@@ -122,17 +124,27 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const DatePickerComponent = (
       <DayPicker
+        captionLayout="dropdown"
+        hideNavigation
         locale={locale ? getLocaleFromString(locale) : langProviderLocale}
         mode={mode}
         onSelect={handleSelect}
-        selected={selected ?? selectedDates}
-        components={{
-          Caption: dropdownCaption ? DropdownCaption : Caption,
-          Head: TableHead,
-          HeadRow,
-          WeekNumber,
-          Row,
-        }}
+        startMonth={fromDate}
+        endMonth={toDate}
+        /* selected={selected ?? selectedDates} */
+        // components={{
+        //   MonthCaption:
+        //     DropdownCaption /*  dropdownCaption ? DropdownCaption : Caption, */,
+        //   /* Head: TableHead, */
+        //   /* HeadRow, */
+        //   /* WeekNumber: (props) => (
+        //     <WeekNumber
+        //       week={props.week}
+        //       onWeekNumberClick={onWeekNumberClick}
+        //     />
+        //   ), */
+        //   /* Row, */
+        // }}
         className={cl("navds-date", className)}
         classNames={{
           vhidden: "navds-sr-only",
@@ -152,7 +164,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         onWeekNumberClick={mode === "multiple" ? onWeekNumberClick : undefined}
         fixedWeeks
         showOutsideDays
-        {...omit(rest, ["onSelect"])}
+        {...omit(rest, ["onSelect", "role"])}
       />
     );
 

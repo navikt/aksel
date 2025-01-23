@@ -619,7 +619,7 @@
     "@navikt/ds-tokens": "^7.10.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.0.0",
-    "react-day-picker": "8.10.1"
+    "react-day-picker": "9.5.0"
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.0",
