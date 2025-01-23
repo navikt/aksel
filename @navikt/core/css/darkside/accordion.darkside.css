@@ -100,7 +100,7 @@
   height: 22px;
   align-self: center;
   background-color: var(--ax-bg-accent-moderateA);
-  color: var(--ax-text-accent-strong);
+  color: var(--ax-text-accent);
 }
 
 .navds-accordion__header-chevron {

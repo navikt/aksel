@@ -107,7 +107,7 @@
 
   &:focus {
     background-color: var(--ax-bg-danger-moderate-hoverA);
-    color: var(--ax-text-danger-strong);
+    color: var(--ax-text-danger);
   }
 }
 

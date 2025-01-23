@@ -120,6 +120,68 @@ export const ExpandableSmall = () => {
   );
 };
 
+export const ExpandableContentGutter = () => {
+  return (
+    <Table zebraStripes>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell></Table.HeaderCell>
+          <Table.HeaderCell>Cell</Table.HeaderCell>
+          <Table.HeaderCell>Cell</Table.HeaderCell>
+          <Table.HeaderCell></Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.ExpandableRow
+          defaultOpen
+          content="ContentContent ContentContent ContentContent"
+          togglePlacement="left"
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+        <Table.ExpandableRow
+          content="ContentContent ContentContent ContentContent"
+          togglePlacement="right"
+          defaultOpen
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+        <Table.ExpandableRow
+          content="ContentContent ContentContent ContentContent"
+          defaultOpen
+          contentGutter="left"
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+        <Table.ExpandableRow
+          content="ContentContent ContentContent ContentContent"
+          defaultOpen
+          contentGutter="right"
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+        <Table.ExpandableRow
+          content="ContentContent ContentContent ContentContent Con.."
+          defaultOpen
+          contentGutter="none"
+        >
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+          <Table.DataCell>Cell</Table.DataCell>
+        </Table.ExpandableRow>
+      </Table.Body>
+    </Table>
+  );
+};
+
 const columns = [
   {
     name: "Navn",

@@ -497,7 +497,7 @@
 }
 
 /* Loader overrides */
-.navds-button .navds-loader {
+.navds-button > .navds-loader {
   position: absolute;
 }
 

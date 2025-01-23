@@ -1,7 +1,6 @@
 import Image from "next/legacy/image";
 import { GetServerSideProps } from "next/types";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -15,7 +14,7 @@ import {
   ResolveSlugT,
 } from "@/types";
 import { abbrName, dateStr, getImage } from "@/utils";
-import { BloggAd } from "@/web/BloggAd";
+import { BloggList } from "@/web/blogg-page/parts/BloggList";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
@@ -43,6 +42,7 @@ export const query = `{
     _createdAt,
     _id,
     ingress,
+    seo,
     ${contributorsAll},
   }
 }`;
@@ -207,17 +207,13 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
               <Heading level="2" size="large">
                 Flere blogginnlegg
               </Heading>
-              <ul className="mt-12 grid gap-x-6 gap-y-6 md:grid-cols-2 md:gap-x-6 md:gap-y-10 lg:grid-cols-3">
+              <ul className="mt-12 grid gap-12">
                 {morePosts.map((post) => (
-                  <BloggCard key={post._id} blog={post} />
+                  <BloggList key={post._id} blogg={post} />
                 ))}
               </ul>
             </div>
           )}
-
-          <div className="mx-auto grid w-full max-w-4xl">
-            <BloggAd />
-          </div>
         </div>
       </main>
       <Footer />

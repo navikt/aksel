@@ -1,6 +1,4 @@
 import { GetStaticProps } from "next/types";
-import { Heading } from "@navikt/ds-react";
-import BloggCard from "@/cms/cards/BloggCard";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { getClient } from "@/sanity/client.server";
@@ -12,8 +10,8 @@ import {
   ResolveContributorsT,
   ResolveSlugT,
 } from "@/types";
-import { BloggAd } from "@/web/BloggAd";
 import { LatestBloggposts } from "@/web/blogg-page/BloggPage";
+import { BloggList } from "@/web/blogg-page/parts/BloggList";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 import NotFotfund from "../404";
@@ -62,7 +60,7 @@ const Page = (props: PageProps["props"]) => {
     return <NotFotfund />;
   }
 
-  const remainingPosts = props?.bloggposts?.slice(3, props?.bloggposts.length);
+  const remainingPosts = props?.bloggposts?.slice(2, props?.bloggposts.length);
 
   return (
     <>
@@ -82,24 +80,17 @@ const Page = (props: PageProps["props"]) => {
           <div className="mx-auto mb-40 grid w-full max-w-screen-2xl px-4 sm:px-6">
             <LatestBloggposts
               bloggs={props?.bloggposts}
-              title="Blogg"
+              title="Produktbloggen"
               intro={props?.page?.intro}
             />
-            {/* Skriv for bloggen */}
 
-            <BloggAd />
             {/* Flere blogger */}
             {remainingPosts && (
-              <div>
-                <Heading level="2" size="xlarge" className="text-deepblue-800">
-                  Flere blogginnlegg
-                </Heading>
-                <ul className="mt-12 grid gap-x-3 gap-y-6 md:grid-cols-2 md:gap-x-6 md:gap-y-10 lg:grid-cols-3">
-                  {remainingPosts.map((blog) => (
-                    <BloggCard key={blog._id} blog={blog} />
-                  ))}
-                </ul>
-              </div>
+              <ul className="mt-8 grid gap-12 md:grid-cols-2">
+                {remainingPosts.map((blogg) => (
+                  <BloggList blogg={blogg} key={blogg._id} />
+                ))}
+              </ul>
             )}
           </div>
         </main>

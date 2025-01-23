@@ -90,8 +90,8 @@
 }
 
 .navds-textarea--error .navds-textarea__input:not(:disabled) {
-  box-shadow: 0 0 0 1px var(--ax-border-danger);
-  border-color: var(--ax-border-danger);
+  box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
+  border-color: var(--ax-border-danger-strong);
 }
 
 @media (forced-colors: active) {

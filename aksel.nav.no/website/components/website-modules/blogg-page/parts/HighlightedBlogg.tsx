@@ -13,7 +13,7 @@ export const HighlightedBlogg = ({
 }) => {
   const date = useFormatedDate(blogg?.publishedAt ?? blogg._createdAt);
   return (
-    <div>
+    <article>
       <div className="col-span-1 hidden md:block">
         <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
           {blogg?.seo?.image ? (
@@ -46,7 +46,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-deepblue-500 underline hover:no-underline">
+          <Link className="text-aksel-heading underline hover:no-underline">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
@@ -93,7 +93,7 @@ export const HighlightedBlogg = ({
           )}
         </div>
         <NextLink href={`/${blogg.slug}`} passHref legacyBehavior>
-          <Link className="text-deepblue-500 underline hover:no-underline">
+          <Link className="text-aksel-heading underline hover:no-underline">
             <Heading size="large" level="2">
               {blogg.heading}
             </Heading>
@@ -109,6 +109,6 @@ export const HighlightedBlogg = ({
           </BodyShort>
         )}
       </div>
-    </div>
+    </article>
   );
 };

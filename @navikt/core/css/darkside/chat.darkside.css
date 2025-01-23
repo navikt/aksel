@@ -73,14 +73,14 @@
 .navds-chat--info {
   & .navds-chat__bubble,
   & .navds-chat__avatar {
-    background-color: var(--ax-bg-info-raised);
+    background-color: var(--ax-bg-info-moderate);
   }
 }
 
 .navds-chat--neutral {
   & .navds-chat__bubble,
   & .navds-chat__avatar {
-    background-color: var(--ax-bg-raised);
+    background-color: var(--ax-bg-moderateA);
   }
 }
 
