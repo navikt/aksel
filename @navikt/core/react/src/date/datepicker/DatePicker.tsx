@@ -1,7 +1,7 @@
 import cl from "clsx";
-import { isWeekend } from "date-fns";
+import { isAfter, isBefore, isWeekend, startOfMonth } from "date-fns";
 import React, { forwardRef, useState } from "react";
-import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { DateRange, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -11,12 +11,6 @@ import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, getTranslations } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
-import Caption from "./parts/Caption";
-import DropdownCaption from "./parts/DropdownCaption";
-import { HeadRow } from "./parts/HeadRow";
-import Row from "./parts/Row";
-import TableHead from "./parts/TableHead";
-import WeekNumber from "./parts/WeekNumber";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -85,6 +79,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       onWeekNumberClick,
       fromDate,
       toDate,
+      month,
       ...rest
     },
     ref,
@@ -122,38 +117,55 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       rest?.onSelect?.(newSelected);
     };
 
+    const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
+
+    /**
+     * Normalize the starting month so that its between the fromDate and toDate
+     */
+    const normalizeMonth = (_month?: Date) => {
+      if (!_month) {
+        return undefined;
+      }
+
+      let _today = _month;
+
+      if (fromDate && isBefore(_today, fromDate)) {
+        _today = fromDate;
+      } else if (toDate && isAfter(_today, toDate)) {
+        _today = toDate;
+      }
+
+      return startOfMonth(_today);
+    };
+
     const DatePickerComponent = (
       <DayPicker
-        captionLayout="dropdown"
-        hideNavigation
-        locale={locale ? getLocaleFromString(locale) : langProviderLocale}
+        captionLayout={dropdownCaption ? "dropdown" : "label"}
+        /* hideNavigation */
+        locale={_locale}
         mode={mode}
         onSelect={handleSelect}
-        startMonth={fromDate}
-        endMonth={toDate}
-        /* selected={selected ?? selectedDates} */
-        // components={{
-        //   MonthCaption:
-        //     DropdownCaption /*  dropdownCaption ? DropdownCaption : Caption, */,
-        //   /* Head: TableHead, */
-        //   /* HeadRow, */
-        //   /* WeekNumber: (props) => (
-        //     <WeekNumber
-        //       week={props.week}
-        //       onWeekNumberClick={onWeekNumberClick}
-        //     />
-        //   ), */
-        //   /* Row, */
-        // }}
+        selected={selected ?? selectedDates}
+        /* components={{
+          MonthCaption: () => <></>,
+          DayButton: (props) => <DayButton {...props} locale={_locale} />,
+          Month: Months,
+        }} */
         className={cl("navds-date", className)}
         classNames={{
           vhidden: "navds-sr-only",
         }}
         disabled={(day) => {
-          return (disableWeekends && isWeekend(day)) || isMatch(day, disabled);
+          return (
+            (disableWeekends && isWeekend(day)) ||
+            dateMatchModifiers(day, disabled)
+          );
         }}
         weekStartsOn={1}
-        initialFocus={false}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={false}
+        startMonth={fromDate}
+        endMonth={toDate}
         modifiers={{
           weekend: (day) => disableWeekends && isWeekend(day),
         }}
@@ -164,6 +176,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         onWeekNumberClick={mode === "multiple" ? onWeekNumberClick : undefined}
         fixedWeeks
         showOutsideDays
+        month={normalizeMonth(month)}
         {...omit(rest, ["onSelect", "role"])}
       />
     );

@@ -1,26 +1,13 @@
 import cl from "clsx";
-import { format, isWeekend } from "date-fns";
+import { isAfter, isBefore, isWeekend, startOfMonth } from "date-fns";
 import React, { forwardRef } from "react";
-import {
-  CalendarDay,
-  DateRange,
-  DayPicker,
-  Modifiers,
-  isMatch,
-} from "react-day-picker";
-import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { Select } from "../../form/select";
+import { DateRange, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { omit } from "../../util";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
 import { getLocaleFromString, getTranslations } from "../utils";
-import Caption from "./parts/Caption";
-import DropdownCaption from "./parts/DropdownCaption";
-import { HeadRow } from "./parts/HeadRow";
-import Row from "./parts/Row";
-import TableHead from "./parts/TableHead";
-import WeekNumber from "./parts/WeekNumber";
+import { Months } from "./parts/Months";
+import { DayButton } from "./parts/NewDayButton";
 import {
   DatePickerDefaultProps,
   MultipleMode,
@@ -71,6 +58,9 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       onSelect,
       fixedWeeks = false,
       onWeekNumberClick,
+      fromDate,
+      toDate,
+      month,
       ...rest
     },
     ref,
@@ -97,6 +87,25 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
 
     const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
 
+    /**
+     * Normalize the starting month so that its between the fromDate and toDate
+     */
+    const normalizeMonth = (_month?: Date) => {
+      if (!_month) {
+        return undefined;
+      }
+
+      let _today = _month;
+
+      if (fromDate && isBefore(_today, fromDate)) {
+        _today = fromDate;
+      } else if (toDate && isAfter(_today, toDate)) {
+        _today = toDate;
+      }
+
+      return startOfMonth(_today);
+    };
+
     return (
       <div
         ref={ref}
@@ -104,146 +113,28 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       >
         <DateTranslationContextProvider translate={translate}>
           <DayPicker
-            captionLayout="dropdown"
+            captionLayout={dropdownCaption ? "dropdown" : "label"}
+            hideNavigation
             locale={_locale}
             mode={mode}
             onSelect={handleSelect}
             selected={selected ?? selectedDates}
             classNames={{
               vhidden: "navds-sr-only",
-              months: "navds-date__months",
-              month: "navds-date__month",
-              dropdowns: "navds-date-dropdowns",
-              nav: "navds-date__nav",
-              weekday: "navds-date__weekday",
-              months_dropdown: "navds-date__month-dropdown",
-              years_dropdown: "navds-date__years-dropdown",
-              day_button: "navds-date__day-button",
             }}
             components={{
-              MonthsDropdown: ({
-                options,
-                value,
-                onChange,
-                className: _className,
-              }) => (
-                <Select
-                  label={translate("month")}
-                  hideLabel
-                  className={_className}
-                  value={value}
-                  onChange={onChange}
-                >
-                  {options?.map((option) => (
-                    <option
-                      key={option.value}
-                      value={option.value}
-                      disabled={option.disabled}
-                    >
-                      {option.label}
-                    </option>
-                  ))}
-                </Select>
-              ),
-              YearsDropdown: ({
-                options,
-                value,
-                onChange,
-                className: _className,
-              }) => (
-                <Select
-                  label={translate("year")}
-                  hideLabel
-                  className={_className}
-                  value={value}
-                  onChange={onChange}
-                >
-                  {options?.map((option) => (
-                    <option
-                      key={option.value}
-                      value={option.value}
-                      disabled={option.disabled}
-                    >
-                      {option.label}
-                    </option>
-                  ))}
-                </Select>
-              ),
-              DropdownNav: ({ children, className: _className }) => {
-                return <div className={_className}>{children}</div>;
-              },
-              /* MonthCaption: ({ calendarMonth, displayIndex, children }) => {
-                return <div>test</div>;
-              }, */
-
-              DayButton: ({ day, modifiers, ..._rest }) => {
-                if (modifiers.hidden) {
-                  return <></>;
-                }
-                const dateTime = format(day.date, "cccc d", {
-                  locale: _locale,
-                });
-
-                return (
-                  <button
-                    {..._rest}
-                    aria-hidden={day.outside}
-                    aria-pressed={modifiers.selected}
-                    aria-label={dateTime}
-                    data-pressed={modifiers.selected}
-                  >
-                    123
-                  </button>
-                );
-              },
-
-              Nav: ({
-                nextMonth,
-                onNextClick,
-                previousMonth,
-                onPreviousClick,
-                className: _className,
-              }) => {
-                return (
-                  <div className={_className}>
-                    <Button
-                      variant="tertiary-neutral"
-                      disabled={!previousMonth}
-                      onClick={onPreviousClick}
-                      icon={
-                        <ArrowLeftIcon title={translate("goToPreviousMonth")} />
-                      }
-                      className="navds-date__caption-button"
-                      type="button"
-                    />
-                    <Button
-                      variant="tertiary-neutral"
-                      disabled={!nextMonth}
-                      onClick={onNextClick}
-                      icon={
-                        <ArrowRightIcon title={translate("goToNextMonth")} />
-                      }
-                      className="navds-date__caption-button"
-                      type="button"
-                    />
-                  </div>
-                );
-              },
-
-              /* Caption: dropdownCaption ? DropdownCaption : Caption,
-              Head: TableHead,
-              HeadRow,
-              WeekNumber,
-              Row, */
+              MonthCaption: () => <></>,
+              DayButton: (props) => <DayButton {...props} locale={_locale} />,
+              Month: Months,
             }}
             className="navds-date"
             disabled={(day) => {
               return (
-                (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
+                (disableWeekends && isWeekend(day)) ||
+                dateMatchModifiers(day, disabled)
               );
             }}
             weekStartsOn={1}
-            initialFocus={false}
             modifiers={{
               weekend: (day) => disableWeekends && isWeekend(day),
             }}
@@ -256,7 +147,12 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             }
             fixedWeeks={fixedWeeks}
             showOutsideDays
-            {...omit(rest, ["children", "id"])}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus={false}
+            startMonth={fromDate}
+            endMonth={toDate}
+            month={normalizeMonth(month)}
+            {...omit(rest, ["children", "id", "role"])}
           />
         </DateTranslationContextProvider>
       </div>
