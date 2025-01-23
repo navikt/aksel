@@ -1,7 +1,13 @@
 import cl from "clsx";
-import { isWeekend } from "date-fns";
+import { format, isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
-import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import {
+  CalendarDay,
+  DateRange,
+  DayPicker,
+  Modifiers,
+  isMatch,
+} from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
@@ -89,6 +95,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       onSelect?.(newSelected);
     };
 
+    const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
+
     return (
       <div
         ref={ref}
@@ -97,16 +105,32 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
         <DateTranslationContextProvider translate={translate}>
           <DayPicker
             captionLayout="dropdown"
-            locale={locale ? getLocaleFromString(locale) : langProviderLocale}
+            locale={_locale}
             mode={mode}
             onSelect={handleSelect}
             selected={selected ?? selectedDates}
+            classNames={{
+              vhidden: "navds-sr-only",
+              months: "navds-date__months",
+              month: "navds-date__month",
+              dropdowns: "navds-date-dropdowns",
+              nav: "navds-date__nav",
+              weekday: "navds-date__weekday",
+              months_dropdown: "navds-date__month-dropdown",
+              years_dropdown: "navds-date__years-dropdown",
+              day_button: "navds-date__day-button",
+            }}
             components={{
-              MonthsDropdown: ({ options, value, onChange }) => (
+              MonthsDropdown: ({
+                options,
+                value,
+                onChange,
+                className: _className,
+              }) => (
                 <Select
                   label={translate("month")}
                   hideLabel
-                  className="navds-date__caption__month"
+                  className={_className}
                   value={value}
                   onChange={onChange}
                 >
@@ -121,11 +145,16 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
                   ))}
                 </Select>
               ),
-              YearsDropdown: ({ options, value, onChange }) => (
+              YearsDropdown: ({
+                options,
+                value,
+                onChange,
+                className: _className,
+              }) => (
                 <Select
                   label={translate("year")}
                   hideLabel
-                  className="navds-date__caption__year"
+                  className={_className}
                   value={value}
                   onChange={onChange}
                 >
@@ -140,33 +169,65 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
                   ))}
                 </Select>
               ),
-              DropdownNav: ({ children }) => {
-                return <div className="navds-date__caption">{children}</div>;
+              DropdownNav: ({ children, className: _className }) => {
+                return <div className={_className}>{children}</div>;
               },
-              PreviousMonthButton: ({ onClick, disabled: _disabled }) => (
-                <Button
-                  variant="tertiary-neutral"
-                  disabled={_disabled}
-                  onClick={onClick}
-                  icon={
-                    <ArrowLeftIcon title={translate("goToPreviousMonth")} />
-                  }
-                  className="navds-date__caption-button"
-                  type="button"
-                />
-              ),
-              NextMonthButton: ({ onClick, disabled: _disabled }) => (
-                <Button
-                  variant="tertiary-neutral"
-                  disabled={_disabled}
-                  onClick={onClick}
-                  icon={<ArrowRightIcon title={translate("goToNextMonth")} />}
-                  className="navds-date__caption-button"
-                  type="button"
-                />
-              ),
-              MonthCaption: ({ calendarMonth, displayIndex, children }) => {
+              /* MonthCaption: ({ calendarMonth, displayIndex, children }) => {
                 return <div>test</div>;
+              }, */
+
+              DayButton: ({ day, modifiers, ..._rest }) => {
+                if (modifiers.hidden) {
+                  return <></>;
+                }
+                const dateTime = format(day.date, "cccc d", {
+                  locale: _locale,
+                });
+
+                return (
+                  <button
+                    {..._rest}
+                    aria-hidden={day.outside}
+                    aria-pressed={modifiers.selected}
+                    aria-label={dateTime}
+                    data-pressed={modifiers.selected}
+                  >
+                    123
+                  </button>
+                );
+              },
+
+              Nav: ({
+                nextMonth,
+                onNextClick,
+                previousMonth,
+                onPreviousClick,
+                className: _className,
+              }) => {
+                return (
+                  <div className={_className}>
+                    <Button
+                      variant="tertiary-neutral"
+                      disabled={!previousMonth}
+                      onClick={onPreviousClick}
+                      icon={
+                        <ArrowLeftIcon title={translate("goToPreviousMonth")} />
+                      }
+                      className="navds-date__caption-button"
+                      type="button"
+                    />
+                    <Button
+                      variant="tertiary-neutral"
+                      disabled={!nextMonth}
+                      onClick={onNextClick}
+                      icon={
+                        <ArrowRightIcon title={translate("goToNextMonth")} />
+                      }
+                      className="navds-date__caption-button"
+                      type="button"
+                    />
+                  </div>
+                );
               },
 
               /* Caption: dropdownCaption ? DropdownCaption : Caption,
@@ -176,7 +237,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
               Row, */
             }}
             className="navds-date"
-            classNames={{ vhidden: "navds-sr-only" }}
             disabled={(day) => {
               return (
                 (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
