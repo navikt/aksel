@@ -1,17 +1,17 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { DateRange } from "react-day-picker";
-import { useControllableState } from "../../util/hooks";
-import { useI18n } from "../../util/i18n/i18n.hooks";
-import { DateTranslationContextProvider } from "../context";
-import { getTranslations } from "../utils";
-import { ReactDayPicker } from "./ReactDayPicker";
+import { useControllableState } from "../../../util/hooks";
+import { useI18n } from "../../../util/i18n/i18n.hooks";
+import { DateTranslationContextProvider } from "../../context";
+import { getTranslations } from "../../utils";
 import {
   DatePickerDefaultProps,
   MultipleMode,
   RangeMode,
   SingleMode,
-} from "./types";
+} from "../types";
+import { ReactDayPicker } from "./ReactDayPicker";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<

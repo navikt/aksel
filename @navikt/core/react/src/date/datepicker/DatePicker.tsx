@@ -8,8 +8,8 @@ import { DateInputContext, DateTranslationContextProvider } from "../context";
 import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
 import { getTranslations } from "../utils";
-import DatePickerStandalone from "./DatePickerStandalone";
-import { ReactDayPicker } from "./ReactDayPicker";
+import DatePickerStandalone from "./parts/DatePicker.Standalone";
+import { ReactDayPicker } from "./parts/ReactDayPicker";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;

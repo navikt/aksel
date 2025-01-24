@@ -2,47 +2,16 @@ import cl from "clsx";
 import { isAfter, isBefore, isWeekend } from "date-fns";
 import React from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
-import { Show } from "../../layout/responsive";
-import { omit } from "../../util";
-import { useDateLocale } from "../../util/i18n/i18n.hooks";
-import { getLocaleFromString } from "../utils";
-import { clampMonth } from "./new-util/clampMonth";
-import { DayButton } from "./parts/DayButton";
-import { Months } from "./parts/Months";
-import WeekNumber from "./parts/WeekNumber";
-import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
+import { Show } from "../../../layout/responsive";
+import { omit } from "../../../util";
+import { useDateLocale } from "../../../util/i18n/i18n.hooks";
+import { getLocaleFromString } from "../../utils";
+import { clampMonth } from "../new-util/clampMonth";
+import { DayButton } from "../parts/DayButton";
+import { Months } from "../parts/Months";
+import WeekNumber from "../parts/WeekNumber";
+import { ConditionalModeProps, DatePickerDefaultProps } from "../types";
 
-/*
-button	button_previous, button_next
-button_reset	button_previous, button_next
-caption	month_caption
-caption_between	Removed
-caption_dropdowns	dropdowns
-caption_end	Removed
-caption_start	Removed
-day_disabled	disabled
-day_hidden	hidden
-day_outside	outside
-head	Removed
-head_cell	weekday
-head_row	weekdays
-multiple_months	Removed. Use data-multiple-months data attribute.
-nav_button	button_previous, button_next
-nav_button_next	button_next
-nav_button_previous	button_previous
-nav_icon	chevron, button_next, button_previous
-row	week
-tbody	weeks
-table	month_grid
-tfoot	footer
-vhidden	Removed
-
-cell	day – ⚠️ The previous day element is now day_button.
-
-weeknumber	week_number
-with_weeknumber	Removed. Use data-week-numbers data attribute. */
-
-/* rdp-button_reset rdp-button rdp-day rdp-day_disabled */
 const LegacyClassNames: Partial<ClassNames> = {
   button_next: "button",
   day: "rdp-cell",
