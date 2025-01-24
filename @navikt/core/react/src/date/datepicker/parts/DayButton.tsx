@@ -1,33 +1,46 @@
-import { format } from "date-fns";
-import React, { useRef } from "react";
-import { Button, DayProps, useDayPicker, useDayRender } from "react-day-picker";
+import cl from "clsx";
+import { Locale, format } from "date-fns";
+import React from "react";
+import { CalendarDay, Modifiers } from "react-day-picker";
 
-const DayButton = (props: DayProps) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  /* const dayRender = useDayRender(props.date, props.displayMonth, buttonRef); */
-  /* const { locale } = useDayPicker();
-  const dateTime = format(props.date, "cccc d", { locale }); */
-
-  return <div />;
-  /* if (dayRender.isHidden) {
+const DayButton = ({
+  day,
+  modifiers,
+  locale,
+  children,
+  ...rest
+}: {
+  day: CalendarDay;
+  modifiers: Modifiers;
+  locale: Locale;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  if (modifiers.hidden) {
     return <></>;
   }
-  if (!dayRender.isButton) {
-    return <div {...dayRender.divProps} />;
-  }
+  const dateTime = format(day.date, "cccc d", {
+    locale,
+  });
 
   return (
-    <Button
-      name="day"
-      ref={buttonRef}
-      {...dayRender.buttonProps}
-      role={undefined}
+    <button
+      {...rest}
+      aria-hidden={day.outside}
+      aria-pressed={modifiers.selected}
       aria-label={dateTime}
-      aria-hidden={dayRender.activeModifiers.outside}
-      aria-selected={undefined}
-      aria-pressed={!!dayRender.activeModifiers.selected}
-    />
-  ); */
+      data-pressed={modifiers.selected}
+      className={cl(rest.className, {
+        "rdp-day_disabled": modifiers.disabled,
+        "rdp-day_selected": modifiers.selected,
+        "rdp-day_range_start": modifiers.range_start,
+        "rdp-day_range_middle": modifiers.range_middle,
+        "rdp-day_range_end": modifiers.range_end,
+        "rdp-day_today": modifiers.today,
+        "rdp-day_outside": modifiers.outside,
+      })}
+    >
+      {children}
+    </button>
+  );
 };
 
-export default DayButton;
+export { DayButton };

@@ -7,8 +7,8 @@ import { omit } from "../../util";
 import { useDateLocale } from "../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../utils";
 import { clampMonth } from "./new-util/clampMonth";
+import { DayButton } from "./parts/DayButton";
 import { Months } from "./parts/Months";
-import { DayButton } from "./parts/NewDayButton";
 import WeekNumber from "./parts/WeekNumber";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
