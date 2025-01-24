@@ -7,18 +7,14 @@ import React, {
   useState,
 } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
-import { Label } from "../typography";
+import { Button, ButtonProps } from "../button";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 export interface CopyButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
-  /**
-   * `"xsmall"` should _only_ be used in tables.
-   * @default "medium"
-   */
-  size?: "medium" | "small" | "xsmall";
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">,
+    Pick<ButtonProps, "iconPosition" | "size"> {
   /**
    * @default "neutral"
    */
@@ -63,11 +59,6 @@ export interface CopyButtonProps
    * @default "Kopier"
    */
   title?: string;
-  /**
-   * Icon position in button.
-   * @default "left"
-   */
-  iconPosition?: "left" | "right";
 }
 
 /**
@@ -89,7 +80,6 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       text,
       activeText,
       variant = "neutral",
-      size = "medium",
       onActiveChange,
       icon,
       activeIcon,
@@ -125,29 +115,43 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const activeString = activeText || translate("activeText");
 
-    const copyIcon = (
-      <span className="navds-copybutton__icon">
-        {active
-          ? activeIcon ?? (
-              <CheckmarkIcon
-                aria-hidden={!!text}
-                title={text ? undefined : activeString}
-              />
-            )
-          : icon ?? (
-              <FilesIcon
-                aria-hidden={!!text}
-                title={text ? undefined : title || translate("title")}
-              />
-            )}
-      </span>
-    );
+    const copyIcon = active
+      ? activeIcon ?? (
+          <CheckmarkIcon
+            aria-hidden={!!text}
+            title={text ? undefined : activeString}
+            className="navds-copybutton__icon"
+          />
+        )
+      : icon ?? (
+          <FilesIcon
+            aria-hidden={!!text}
+            title={text ? undefined : title || translate("title")}
+            className="navds-copybutton__icon"
+          />
+        );
 
     return (
-      <button
+      <Button
         ref={ref}
         type="button"
+        className={cl("navds-copybutton", className)}
         {...rest}
+        variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
+        onClick={composeEventHandlers(onClick, handleClick)}
+        iconPosition={iconPosition}
+        icon={copyIcon}
+        data-active={active}
+      >
+        {text ? (active ? activeString : text) : null}
+      </Button>
+    );
+  },
+);
+
+export default CopyButton;
+/* <button
+
         className={cl(
           "navds-copybutton",
           className,
@@ -170,9 +174,4 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           )}
           {iconPosition === "right" && copyIcon}
         </span>
-      </button>
-    );
-  },
-);
-
-export default CopyButton;
+      </button> */
