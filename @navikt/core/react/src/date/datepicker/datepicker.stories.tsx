@@ -200,7 +200,10 @@ export const EN = () => (
 );
 
 export const Standalone = () => (
-  <DatePicker.Standalone today={new Date("2006-07-01")} />
+  <DatePicker.Standalone
+    today={new Date("2006-07-01")}
+    onSelect={console.info}
+  />
 );
 
 export const StandaloneRange = () => (

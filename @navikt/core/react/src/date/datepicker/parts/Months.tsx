@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
 import { BodyShort } from "../../../typography";
+import { omit } from "../../../util";
 import { useDateTranslationContext } from "../../context";
 import { getMonthOptions } from "../new-util/getMonthOptions";
 import { getNavMonths } from "../new-util/getNavMonths";
@@ -13,7 +14,6 @@ import { getYearOptions } from "../new-util/getYearOptions";
 const Months = ({
   children,
   calendarMonth,
-  displayIndex,
   ...rest
 }: {
   calendarMonth: CalendarMonth;
@@ -22,11 +22,9 @@ const Months = ({
   const { dayPickerProps, goToMonth, formatters, previousMonth, nextMonth } =
     useDayPicker();
 
-  const { month, captionLayout } = dayPickerProps;
+  const { captionLayout } = dayPickerProps;
 
   const translate = useDateTranslationContext().translate;
-
-  console.info(month, displayIndex);
 
   const handleMonthChange = useCallback(
     (date: Date, e: ChangeEvent<HTMLSelectElement>) => {
@@ -102,7 +100,7 @@ const Months = ({
   );
 
   return (
-    <div {...rest}>
+    <div {...omit(rest, ["displayIndex"])}>
       <div className="navds-date__caption">
         <Button
           variant="tertiary-neutral"

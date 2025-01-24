@@ -123,7 +123,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const DatePickerComponent = (
       <DayPicker
         captionLayout={dropdownCaption ? "dropdown" : "label"}
-        /* hideNavigation */
+        hideNavigation
         locale={_locale}
         mode={mode}
         onSelect={handleSelect}

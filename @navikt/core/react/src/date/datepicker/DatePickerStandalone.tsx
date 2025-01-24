@@ -1,14 +1,11 @@
 import cl from "clsx";
-import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
-import { DateRange, DayPicker, dateMatchModifiers } from "react-day-picker";
-import { omit } from "../../util";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
+import { DateRange } from "react-day-picker";
+import { useControllableState } from "../../util/hooks";
+import { useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
-import { getLocaleFromString, getTranslations } from "../utils";
-import { clampMonth } from "./new-util/clampMonth";
-import { Months } from "./parts/Months";
-import { DayButton } from "./parts/NewDayButton";
+import { getTranslations } from "../utils";
+import { ReactDayPicker } from "./ReactDayPicker";
 import {
   DatePickerDefaultProps,
   MultipleMode,
@@ -50,18 +47,10 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       className,
       locale,
       translations,
-      dropdownCaption,
-      disabled = [],
-      disableWeekends = false,
-      showWeekNumber = false,
       selected,
       defaultSelected,
       onSelect,
-      fixedWeeks = false,
-      onWeekNumberClick,
-      fromDate,
-      toDate,
-      month,
+      mode,
       ...rest
     },
     ref,
@@ -71,73 +60,30 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       translations,
       getTranslations(locale),
     );
-    const langProviderLocale = useDateLocale();
-    const [selectedDates, setSelectedDates] = React.useState<
+
+    const [value, setValue] = useControllableState<
       Date | Date[] | DateRange | undefined
-    >(defaultSelected);
-
-    const mode = rest.mode ?? ("single" as any);
-
-    /**
-     * @param newSelected Date | Date[] | DateRange | undefined
-     */
-    const handleSelect = (newSelected) => {
-      setSelectedDates(newSelected);
-      onSelect?.(newSelected);
-    };
-
-    const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
+    >({
+      defaultValue: defaultSelected,
+      value: selected,
+      onChange: (v) => onSelect?.(v as any),
+    });
 
     return (
-      <div
-        ref={ref}
-        className={cl("navds-date__standalone-wrapper", className)}
-      >
-        <DateTranslationContextProvider translate={translate}>
-          <DayPicker
-            captionLayout={dropdownCaption ? "dropdown" : "label"}
-            hideNavigation
-            locale={_locale}
-            mode={mode}
-            onSelect={handleSelect}
-            selected={selected ?? selectedDates}
-            classNames={{
-              vhidden: "navds-sr-only",
-            }}
-            components={{
-              MonthCaption: () => <></>,
-              DayButton: (props) => <DayButton {...props} locale={_locale} />,
-              Month: Months,
-            }}
-            className="navds-date"
-            disabled={(day) => {
-              return (
-                (disableWeekends && isWeekend(day)) ||
-                dateMatchModifiers(day, disabled)
-              );
-            }}
-            weekStartsOn={1}
-            modifiers={{
-              weekend: (day) => disableWeekends && isWeekend(day),
-            }}
-            modifiersClassNames={{
-              weekend: "rdp-day__weekend",
-            }}
-            showWeekNumber={showWeekNumber}
-            onWeekNumberClick={
-              mode === "multiple" ? onWeekNumberClick : undefined
-            }
-            fixedWeeks={fixedWeeks}
-            showOutsideDays
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus={false}
-            startMonth={fromDate}
-            endMonth={toDate}
-            month={clampMonth({ month, start: fromDate, end: toDate })}
-            {...omit(rest, ["children", "id", "role"])}
+      <DateTranslationContextProvider translate={translate}>
+        <div
+          ref={ref}
+          className={cl("navds-date__standalone-wrapper", className)}
+        >
+          <ReactDayPicker
+            {...rest}
+            locale={locale}
+            handleSelect={setValue}
+            selected={value as any}
+            mode={mode as any}
           />
-        </DateTranslationContextProvider>
-      </div>
+        </div>
+      </DateTranslationContextProvider>
     );
   },
 );
