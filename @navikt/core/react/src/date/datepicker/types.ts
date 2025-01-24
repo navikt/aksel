@@ -21,10 +21,7 @@ export type MultipleMode = {
    * @param week Current week number
    * @param days Dates in the week
    */
-  onWeekNumberClick?: (
-    week: CalendarWeek["weekNumber"],
-    days: CalendarWeek["days"],
-  ) => void;
+  onWeekNumberClick?: (week: CalendarWeek["weekNumber"], days: Date[]) => void;
 };
 
 export type RangeMode = {

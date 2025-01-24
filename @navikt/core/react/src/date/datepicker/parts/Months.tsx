@@ -1,4 +1,11 @@
-import { getMonth, getYear, setMonth, setYear, startOfMonth } from "date-fns";
+import {
+  Locale,
+  getMonth,
+  getYear,
+  setMonth,
+  setYear,
+  startOfMonth,
+} from "date-fns";
 import React, { ChangeEvent, useCallback } from "react";
 import { CalendarMonth, useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
@@ -14,10 +21,12 @@ import { getYearOptions } from "../new-util/getYearOptions";
 const Months = ({
   children,
   calendarMonth,
+  locale,
   ...rest
 }: {
   calendarMonth: CalendarMonth;
   displayIndex: number;
+  locale: Locale;
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const { dayPickerProps, goToMonth, formatters, previousMonth, nextMonth } =
     useDayPicker();
@@ -95,13 +104,18 @@ const Months = ({
       role="status"
       className="navds-date__caption-label"
     >
-      {formatters.formatCaption(calendarMonth.date)}
+      {formatters.formatCaption(calendarMonth.date, { locale })}
     </BodyShort>
   );
 
   return (
     <div {...omit(rest, ["displayIndex"])}>
       <div className="navds-date__caption">
+        {captionLayout?.startsWith("dropdown") && (
+          <span aria-live="polite" aria-atomic="true" className="navds-sr-only">
+            {formatters.formatCaption(calendarMonth.date)}
+          </span>
+        )}
         <Button
           variant="tertiary-neutral"
           disabled={!previousMonth}
