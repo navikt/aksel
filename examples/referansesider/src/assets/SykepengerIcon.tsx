@@ -1,40 +1,20 @@
-import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
-
-/**
- * @note
- * - Unsure of token use here.
- */
-const ScSVG = styled.svg<{ darkmode: boolean }>`
-  stroke: ${(props) =>
-    props.darkmode
-      ? "var(--ax-brand-magenta-500)"
-      : tokens.TextBrandMagentaStrong};
-`;
-
-/**
- * @note
- * - BgBrandMagentaModerate virker litt rart å bruke her.
- */
-const ScPlusSVG = styled.svg<{ darkmode: boolean }>`
-  fill: ${(props) =>
-    props.darkmode
-      ? "var(--ax-brand-magenta-900)"
-      : "var(--ax-brand-magenta-400)"};
-`;
 
 export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
   return (
     <div className="relative w-40" aria-hidden="true">
       <div className="absolute">
-        <ScPlusSVG
+        <svg
           role="img"
           width="96"
           height="96"
           viewBox="0 0 96 96"
-          fill="none"
+          fill={
+            darkmode
+              ? "var(--ax-brand-magenta-900)"
+              : "var(--ax-brand-magenta-400)"
+          }
           xmlns="http://www.w3.org/2000/svg"
-          darkmode={darkmode}
         >
           <rect x="16" y="36" width="64" height="24"></rect>
           <rect
@@ -44,17 +24,21 @@ export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
             height="24"
             transform="rotate(90 60 16)"
           ></rect>
-        </ScPlusSVG>
+        </svg>
       </div>
       <div className="absolute" id=":R8imm:">
-        <ScSVG
+        <svg
           role="img"
           width="96"
           height="96"
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          darkmode={darkmode}
+          stroke={
+            darkmode
+              ? "var(--ax-brand-magenta-500)"
+              : tokens.TextBrandMagentaStrong
+          }
         >
           <circle
             cx="50.3637"
@@ -109,7 +93,7 @@ export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
           ></path>
           <path d="M86 38L82 38" strokeWidth="3" strokeLinecap="round"></path>
           <path d="M82 2L82 14" strokeWidth="3" strokeLinecap="round"></path>
-        </ScSVG>
+        </svg>
       </div>
     </div>
   );
