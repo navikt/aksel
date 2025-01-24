@@ -425,6 +425,7 @@ export const WeekDayClick = () => {
         onSelect={(dates) => dates && setDays(dates)}
         selected={days}
         today={new Date("Nov 23 2022")}
+        toDate={new Date("Nov 19 2023")}
       />
       <DatePicker.Standalone
         showWeekNumber

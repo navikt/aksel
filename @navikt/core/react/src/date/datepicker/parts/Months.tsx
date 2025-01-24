@@ -17,16 +17,20 @@ import { useDateTranslationContext } from "../../context";
 import { getMonthOptions } from "../new-util/getMonthOptions";
 import { getNavMonths } from "../new-util/getNavMonths";
 import { getYearOptions } from "../new-util/getYearOptions";
+import { MultipleMode } from "../types";
+import WeekRow from "./WeekRow";
 
 const Months = ({
   children,
   calendarMonth,
   locale,
+  onWeekNumberClick,
   ...rest
 }: {
   calendarMonth: CalendarMonth;
   displayIndex: number;
   locale: Locale;
+  onWeekNumberClick: MultipleMode["onWeekNumberClick"];
 } & React.HTMLAttributes<HTMLDivElement>) => {
   const { dayPickerProps, goToMonth, formatters, previousMonth, nextMonth } =
     useDayPicker();
@@ -135,6 +139,10 @@ const Months = ({
           type="button"
         />
       </div>
+      <WeekRow
+        weeks={calendarMonth.weeks}
+        onWeekNumberClick={onWeekNumberClick}
+      />
       {children}
     </div>
   );

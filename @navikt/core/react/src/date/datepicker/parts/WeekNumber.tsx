@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React from "react";
-import { CalendarWeek } from "react-day-picker";
+import React, { useMemo } from "react";
+import { CalendarWeek, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
-import { Show } from "../../../layout/responsive";
+import { Hide, Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
 import { MultipleMode } from "../types";
@@ -12,15 +12,33 @@ function WeekNumber({
   onWeekNumberClick,
   className,
   style,
+  showOnDesktop,
 }: {
   week: CalendarWeek;
   onWeekNumberClick: MultipleMode["onWeekNumberClick"];
+  showOnDesktop: boolean;
 } & React.ThHTMLAttributes<HTMLTableCellElement>): JSX.Element {
   const translate = useDateTranslationContext().translate;
 
-  if (!onWeekNumberClick) {
+  const { getModifiers } = useDayPicker();
+
+  const hideWeek = useMemo(() => {
+    if (
+      days.filter((day) => {
+        const mods = getModifiers(day);
+        return !(mods.hidden || mods.outside || mods.disabled);
+      }).length === 0
+    ) {
+      return true;
+    }
+    return false;
+  }, [days, getModifiers]);
+
+  const DisplayMode = showOnDesktop ? Show : Hide;
+
+  if (!onWeekNumberClick || hideWeek) {
     return (
-      <Show above="sm" asChild>
+      <DisplayMode above="sm" asChild>
         <td className="rdp-cell">
           <Detail
             as="span"
@@ -32,12 +50,12 @@ function WeekNumber({
             {weekNumber}
           </Detail>
         </td>
-      </Show>
+      </DisplayMode>
     );
   }
 
   return (
-    <Show above="sm" asChild>
+    <DisplayMode above="sm" asChild>
       <td className="rdp-cell">
         <Button
           variant="secondary-neutral"
@@ -57,7 +75,7 @@ function WeekNumber({
           }
         />
       </td>
-    </Show>
+    </DisplayMode>
   );
 }
 

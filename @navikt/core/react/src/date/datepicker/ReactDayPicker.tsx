@@ -107,13 +107,22 @@ const ReactDayPicker = ({
       components={{
         MonthCaption: () => <></>,
         DayButton: (props) => <DayButton {...props} locale={locale} />,
-        Month: (props) => <Months {...props} locale={locale} />,
+        Month: (props) => (
+          <Months
+            {...props}
+            locale={locale}
+            onWeekNumberClick={
+              mode === "multiple" ? onWeekNumberClick : undefined
+            }
+          />
+        ),
         Day: (props) => (
           <td {...omit(props, ["day", "modifiers"])} className="rdp-cell" />
         ),
         WeekNumber: (props) => (
           <WeekNumber
             {...props}
+            showOnDesktop
             onWeekNumberClick={
               mode === "multiple" ? onWeekNumberClick : undefined
             }

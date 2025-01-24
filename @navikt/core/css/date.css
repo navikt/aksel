@@ -291,7 +291,6 @@ span.rdp-weeknumber {
   place-content: center;
   width: 2rem;
   height: 2rem;
-  margin: var(--a-spacing-2);
 }
 
 .navds-date__modal.navds-date {
