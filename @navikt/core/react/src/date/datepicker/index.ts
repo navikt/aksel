@@ -9,5 +9,5 @@ export {
 export {
   DatePickerStandalone,
   type DatePickerStandaloneProps,
-} from "./DatePickerStandalone";
+} from "./parts/DatePicker.Standalone";
 export { DatePickerInput, type DateInputProps } from "../parts/DateInput";
