@@ -21,37 +21,35 @@
 
 .navds-form-progress__collapsible {
   display: grid;
-  grid-template-rows: 0fr;
+  visibility: hidden;
   overflow: hidden;
-  transition: grid-template-rows 250ms cubic-bezier(0.2, 0, 0, 1);
+  border: 1px solid var(--ax-border-subtleA);
+  border-radius: var(--ax-border-radius-large);
+  background: var(--ax-bg-raised);
+  padding-inline: var(--ax-space-20);
+  padding-block: 0;
+  opacity: 0.001;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-property: margin-top, opacity, visibility, padding-block-start, grid-template-rows;
+  grid-template-rows: 0fr;
+
+  /* border-block leaves 2px of space when closes, so offset 2px with margin */
+  margin-top: -2px;
 
   &[hidden] {
-    display: grid !important;
+    display: grid;
   }
 
   &[data-state="open"] {
+    margin-top: var(--ax-space-4);
     grid-template-rows: 1fr;
+    visibility: visible;
+    padding-block: var(--ax-space-16);
+    opacity: 1;
   }
 }
 
 .navds-form-progress__collapsible-content {
   min-height: 0;
-  opacity: 0.01;
-  visibility: hidden;
-  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  transition-duration: 250ms;
-  transition-property: opacity, visibility;
-}
-
-.navds-form-progress__collapsible[data-state="open"] .navds-form-progress__collapsible-content {
-  visibility: visible;
-  opacity: 1;
-}
-
-.navds-form-progress__stepper {
-  border: 1px solid var(--ax-border-subtleA);
-  border-radius: var(--ax-border-radius-large);
-  padding: var(--ax-space-16) var(--ax-space-20);
-  margin-top: var(--ax-space-4);
-  background: var(--ax-bg-raised);
 }
