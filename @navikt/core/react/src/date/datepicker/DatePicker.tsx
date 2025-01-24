@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { isAfter, isBefore, isWeekend, startOfMonth } from "date-fns";
+import { isWeekend } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { DateRange, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { omit } from "../../util";
@@ -11,6 +11,7 @@ import { DatePickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, getTranslations } from "../utils";
 import DatePickerStandalone from "./DatePickerStandalone";
+import { clampMonth } from "./new-util/clampMonth";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./types";
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -119,25 +120,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
 
-    /**
-     * Normalize the starting month so that its between the fromDate and toDate
-     */
-    const normalizeMonth = (_month?: Date) => {
-      if (!_month) {
-        return undefined;
-      }
-
-      let _today = _month;
-
-      if (fromDate && isBefore(_today, fromDate)) {
-        _today = fromDate;
-      } else if (toDate && isAfter(_today, toDate)) {
-        _today = toDate;
-      }
-
-      return startOfMonth(_today);
-    };
-
     const DatePickerComponent = (
       <DayPicker
         captionLayout={dropdownCaption ? "dropdown" : "label"}
@@ -176,7 +158,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         onWeekNumberClick={mode === "multiple" ? onWeekNumberClick : undefined}
         fixedWeeks
         showOutsideDays
-        month={normalizeMonth(month)}
+        month={clampMonth({ month, start: fromDate, end: toDate })}
         {...omit(rest, ["onSelect", "role"])}
       />
     );

@@ -1,11 +1,12 @@
 import cl from "clsx";
-import { isAfter, isBefore, isWeekend, startOfMonth } from "date-fns";
+import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { omit } from "../../util";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
 import { getLocaleFromString, getTranslations } from "../utils";
+import { clampMonth } from "./new-util/clampMonth";
 import { Months } from "./parts/Months";
 import { DayButton } from "./parts/NewDayButton";
 import {
@@ -87,25 +88,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
 
     const _locale = locale ? getLocaleFromString(locale) : langProviderLocale;
 
-    /**
-     * Normalize the starting month so that its between the fromDate and toDate
-     */
-    const normalizeMonth = (_month?: Date) => {
-      if (!_month) {
-        return undefined;
-      }
-
-      let _today = _month;
-
-      if (fromDate && isBefore(_today, fromDate)) {
-        _today = fromDate;
-      } else if (toDate && isAfter(_today, toDate)) {
-        _today = toDate;
-      }
-
-      return startOfMonth(_today);
-    };
-
     return (
       <div
         ref={ref}
@@ -151,7 +133,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             autoFocus={false}
             startMonth={fromDate}
             endMonth={toDate}
-            month={normalizeMonth(month)}
+            month={clampMonth({ month, start: fromDate, end: toDate })}
             {...omit(rest, ["children", "id", "role"])}
           />
         </DateTranslationContextProvider>
