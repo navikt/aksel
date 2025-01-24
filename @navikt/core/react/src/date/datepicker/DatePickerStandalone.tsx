@@ -66,7 +66,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     >({
       defaultValue: defaultSelected,
       value: selected,
-      onChange: (v) => onSelect?.(v as any),
+      onChange: (newValue) => onSelect?.(newValue as any),
     });
 
     return (

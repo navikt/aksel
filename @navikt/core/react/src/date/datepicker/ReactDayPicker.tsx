@@ -18,7 +18,7 @@ type ReactDayPickerProps = DatePickerDefaultProps &
      */
     fixedWeeks?: boolean;
     /**
-     *
+     * Update selected date
      */
     handleSelect: (newSelected: any) => void;
   };
