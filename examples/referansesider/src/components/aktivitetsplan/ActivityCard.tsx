@@ -8,6 +8,7 @@ const ActivityCard = ({ children }: { children: ReactNode }) => {
       borderRadius="large"
       borderWidth="1"
       padding="space-12"
+      style={{ position: "relative" }}
     >
       <VStack gap="space-8" align="start">
         {children}

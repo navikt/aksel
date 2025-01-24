@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import styled from "styled-components";
 import {
@@ -8,7 +8,6 @@ import {
   Heading,
   Select,
   Tag,
-  TagProps,
   VStack,
 } from "@navikt/ds-react";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
@@ -19,6 +18,7 @@ import { Page } from "../components/Page";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
 import { MainCard } from "../components/aktivitetsplan/MainCard";
+import { Activity, activities } from "../data/activities";
 
 let BlueDotHeader;
 {
@@ -51,96 +51,27 @@ let BlueDotHeader;
   };
 }
 
-type Activities = {
+type Board = {
   column: string;
-  cards: {
-    category: string;
-    title: string;
-    date?: { start: string; end?: string };
-    hasChange?: boolean;
-    tag?: { variant: TagProps["variant"]; text: string };
-  }[];
+  cards: Activity[];
 }[];
 
-const activities: Activities = [
+const board: Board = [
   {
     column: "Forslag",
     cards: [],
   },
   {
     column: "Planlagt",
-    cards: [
-      {
-        category: "Stilling fra Nav",
-        title: "Servitør",
-        hasChange: true,
-        tag: {
-          variant: "success",
-          text: "Venter på å bli kontaktet",
-        },
-      },
-      {
-        category: "Behandling",
-        title: "Medisinsk behandling",
-        date: {
-          start: "13.09.2022",
-          end: "14.09.2022",
-        },
-        tag: { variant: "info-filled", text: "Avtalt med Nav" },
-      },
-      {
-        category: "Møte med Nav",
-        title: "Beste møtet ever",
-        date: {
-          start: "21.08.2030",
-        },
-      },
-    ],
+    cards: [activities[0], activities[1], activities[2]],
   },
   {
     column: "Gjennomfører",
-    cards: [
-      {
-        category: "Stilling fra Nav",
-        hasChange: true,
-        title: "Servitør",
-        tag: {
-          variant: "success",
-          text: "Venter på å bli kontaktet",
-        },
-      },
-      {
-        category: "Stilling fra Nav",
-        hasChange: true,
-        title: "Assisterende skipskokk",
-        tag: {
-          variant: "success",
-          text: "Venter på å bli kontaktet",
-        },
-      },
-      {
-        category: "Stilling fra Nav",
-        hasChange: true,
-        title: "Servitør",
-        tag: {
-          variant: "success",
-          text: "Venter på å bli kontaktet",
-        },
-      },
-    ],
+    cards: [activities[3], activities[4], activities[5]],
   },
   {
     column: "Fullført",
-    cards: [
-      {
-        category: "Stilling fra Nav",
-        title: "Greve av Gral",
-        tag: {
-          variant: "neutral",
-          text: "Ikke fått jobben",
-        },
-      },
-    ],
+    cards: [activities[6]],
   },
   {
     column: "Avbrutt",
@@ -182,15 +113,20 @@ const AktivitetsplanPage = () => {
       </Page>
       <Page options={{ width: "xlarge" }}>
         <HGrid as="div" gap="space-8" columns={{ md: "repeat(5, 1fr)" }}>
-          {activities.map(({ column, cards }) => (
+          {board.map(({ column, cards }) => (
             <ActivityColumn key={column} title={column}>
-              {cards.map(({ category, hasChange, title, date, tag }) => (
-                <ActivityCard key={`${title} ${date}`}>
+              {cards.map(({ category, hasChange, title, date, tag, id }) => (
+                <ActivityCard key={`${id}`}>
                   <div>
                     <Detail uppercase>{category}</Detail>
-                    <BlueDotHeader dot={hasChange} level={3}>
-                      {title}
-                    </BlueDotHeader>
+                    <Link
+                      className="activity-card__link"
+                      to={`/aktivitetsplan/${id}`}
+                    >
+                      <BlueDotHeader dot={hasChange} level={3}>
+                        {title}
+                      </BlueDotHeader>
+                    </Link>
                   </div>
                   {date && (
                     <BodyShort>
@@ -209,6 +145,7 @@ const AktivitetsplanPage = () => {
           ))}
         </HGrid>
       </Page>
+      <Outlet />
     </Dekoratoren>
   );
 };
