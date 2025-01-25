@@ -5,9 +5,9 @@ import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
-import { DatePickerInput } from "../Date.Input";
+import { DateInputContextProvider, DatePickerInput } from "../Date.Input";
 import { getTranslations } from "../Date.locale";
-import { DateInputContext, DateTranslationContextProvider } from "../context";
+import { DateTranslationContextProvider } from "../context";
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
@@ -84,7 +84,14 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       getTranslations(locale),
     );
     const ariaId = useId(id);
-    const [open, setOpen] = useState(_open ?? false);
+
+    const [open, setOpen] = useControllableState({
+      defaultValue: false,
+      value: _open,
+      onChange: () => {
+        onOpenToggle?.();
+      },
+    });
 
     /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
@@ -113,7 +120,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }
 
         if (closeDialog) {
-          onClose?.() ?? setOpen(false);
+          onClose?.();
+          setOpen(false);
         }
 
         rest?.onSelect?.(newValue as any);
@@ -122,16 +130,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     return (
       <DateTranslationContextProvider translate={translate}>
-        <DateInputContext.Provider
-          value={{
-            open: _open ?? open,
-            onOpen: () => {
-              setOpen((x) => !x);
-              onOpenToggle?.();
-            },
-            ariaId,
-            defined: true,
-          }}
+        <DateInputContextProvider
+          open={_open ?? open}
+          onOpen={() => setOpen((x) => !x)}
+          ariaId={ariaId}
+          defined={true}
         >
           <div
             ref={mergedRef}
@@ -141,7 +144,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <DateDialog
               open={_open ?? open}
               anchor={wrapperRef}
-              onClose={() => onClose?.() ?? setOpen(false)}
+              onClose={() => {
+                onClose?.();
+                setOpen(false);
+              }}
               locale={locale}
               translate={translate}
               variant={mode ?? "single"}
@@ -160,7 +166,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               />
             </DateDialog>
           </div>
-        </DateInputContext.Provider>
+        </DateInputContextProvider>
       </DateTranslationContextProvider>
     );
   },

@@ -4,9 +4,9 @@ import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateDialog } from "../Date.Dialog";
-import { MonthPickerInput } from "../Date.Input";
+import { DateInputContextProvider, MonthPickerInput } from "../Date.Input";
 import { getLocaleFromString, getTranslations } from "../Date.locale";
-import { DateInputContext, DateTranslationContextProvider } from "../context";
+import { DateTranslationContextProvider } from "../context";
 import { MonthPickerProvider } from "./MonthPicker.context";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
@@ -116,13 +116,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 
     return (
       <DateTranslationContextProvider translate={translate}>
-        <DateInputContext.Provider
-          value={{
-            open,
-            onOpen: () => setOpen((x) => !x),
-            ariaId,
-            defined: true,
-          }}
+        <DateInputContextProvider
+          open={open}
+          onOpen={() => setOpen((x) => !x)}
+          ariaId={ariaId}
+          defined={true}
         >
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}
@@ -163,7 +161,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               </DateDialog>
             </div>
           </MonthPickerProvider>
-        </DateInputContext.Provider>
+        </DateInputContextProvider>
       </DateTranslationContextProvider>
     );
   },

@@ -5,7 +5,32 @@ import { ReadOnlyIcon } from "../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
-import { useDateInputContext, useDateTranslationContext } from "./context";
+import { createContext } from "../util/create-context";
+import { useDateTranslationContext } from "./context";
+
+interface DateInputContextProps {
+  /**
+   * Open state for popover
+   */
+  open: boolean;
+  /**
+   * Callback for onOpen toggle
+   */
+  onOpen: () => void;
+  /**
+   * Aria-connected ID
+   */
+  ariaId?: string;
+  /**
+   * Flag for enabled-check
+   */
+  defined: boolean;
+}
+
+export const [DateInputContextProvider, useDateInputContext] =
+  createContext<DateInputContextProps>({
+    errorMessage: "useDateInputContext must be used with DateInputContext",
+  });
 
 export interface DateInputProps
   extends FormFieldProps,
