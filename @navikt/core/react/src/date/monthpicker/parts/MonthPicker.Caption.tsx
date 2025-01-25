@@ -8,12 +8,12 @@ import {
 } from "date-fns";
 import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
-import { Button } from "../../button";
-import { Select } from "../../form/select";
-import { useDateTranslationContext } from "../context";
-import { useMonthPickerContext } from "./MonthPickerProvider";
+import { Button } from "../../../button";
+import { Select } from "../../../form/select";
+import { useDateTranslationContext } from "../../context";
+import { useMonthPickerContext } from "../MonthPicker.Context";
 
-export const MonthCaption = () => {
+const MonthPickerCaption = () => {
   const { fromDate, toDate, locale, year, onYearChange, caption } =
     useMonthPickerContext();
 
@@ -63,7 +63,7 @@ export const MonthCaption = () => {
         disabled={disablePreviousYear()}
         onClick={() => handleButtonClick(-1)}
         icon={<ArrowLeftIcon title={translate("goToPreviousYear")} />}
-        variant="tertiary"
+        variant="tertiary-neutral"
         type="button"
       />
 
@@ -91,11 +91,11 @@ export const MonthCaption = () => {
         disabled={disableNextYear()}
         onClick={() => handleButtonClick(1)}
         icon={<ArrowRightIcon title={translate("goToNextYear")} />}
-        variant="tertiary"
+        variant="tertiary-neutral"
         type="button"
       />
     </div>
   );
 };
 
-export default MonthCaption;
+export { MonthPickerCaption };

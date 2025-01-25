@@ -6,7 +6,7 @@ import { Button } from "../../button";
 import { useMonthpicker } from "../hooks";
 import { DateInputProps } from "../parts/DateInput";
 import MonthPicker from "./MonthPicker";
-import { MonthPickerProps } from "./types";
+import { MonthPickerProps } from "./MonthPicker.types";
 
 export default {
   title: "ds-react/Monthpicker",

@@ -3,7 +3,7 @@ import React from "react";
 import { createContext } from "../../util/create-context";
 import { useControllableState } from "../../util/hooks";
 import { clampDisplayYear } from "../datepicker/new-util/clampDisplayDate";
-import { MonthPickerProps } from "./types";
+import { MonthPickerProps } from "./MonthPicker.types";
 
 type MonthPickerProviderProps = Pick<
   MonthPickerProps,

@@ -4,7 +4,11 @@ import {
   isSameDay,
   isSameMonth,
 } from "date-fns";
-import { DateAfter, DateBefore, DateRange } from "../monthpicker/types";
+import {
+  DateAfter,
+  DateBefore,
+  DateRange,
+} from "../monthpicker/MonthPicker.types";
 import { isDateAfterType, isDateBeforeType, isDateRange } from "./typeguards";
 
 export type Matcher =

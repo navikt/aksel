@@ -1,12 +1,12 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
-import { DateTranslationContextProvider } from "../context";
-import { getLocaleFromString, getTranslations } from "../utils";
-import MonthCaption from "./MonthCaption";
-import { MonthPickerProvider } from "./MonthPickerProvider";
-import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+import { useDateLocale, useI18n } from "../../../util/i18n/i18n.hooks";
+import { DateTranslationContextProvider } from "../../context";
+import { getLocaleFromString, getTranslations } from "../../utils";
+import { MonthPickerProvider } from "../MonthPicker.Context";
+import { MonthPickerProps } from "../MonthPicker.types";
+import { MonthPickerCaption } from "./MonthPicker.Caption";
+import { MonthPickerTable } from "./MonthPicker.Table";
 
 export interface MonthPickerStandaloneProps
   extends Omit<
@@ -72,8 +72,8 @@ export const MonthPickerStandalone = forwardRef<
             locale={locale ? getLocaleFromString(locale) : langProviderLocale}
           >
             <div className="navds-date rdp-month">
-              <MonthCaption />
-              <MonthSelector />
+              <MonthPickerCaption />
+              <MonthPickerTable />
             </div>
           </MonthPickerProvider>
         </DateTranslationContextProvider>
@@ -81,5 +81,3 @@ export const MonthPickerStandalone = forwardRef<
     );
   },
 );
-
-export default MonthPickerStandalone;

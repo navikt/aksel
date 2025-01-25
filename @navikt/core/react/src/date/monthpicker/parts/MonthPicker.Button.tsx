@@ -7,8 +7,8 @@ import {
   setYear,
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
-import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
-import { useMonthPickerContext } from "./MonthPickerProvider";
+import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../../utils";
+import { useMonthPickerContext } from "../MonthPicker.Context";
 
 interface MonthType {
   month: Date;

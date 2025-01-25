@@ -7,11 +7,11 @@ import { DateInputContext, DateTranslationContextProvider } from "../context";
 import { MonthPickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, getTranslations } from "../utils";
-import MonthCaption from "./MonthCaption";
-import { MonthPickerProvider } from "./MonthPickerProvider";
-import MonthPickerStandalone from "./MonthPickerStandalone";
-import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+import { MonthPickerProvider } from "./MonthPicker.Context";
+import { MonthPickerProps } from "./MonthPicker.types";
+import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
+import { MonthPickerStandalone } from "./parts/MonthPicker.Standalone";
+import { MonthPickerTable } from "./parts/MonthPicker.Table";
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerProps> {
@@ -157,8 +157,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 }}
               >
                 <div className={cl("rdp-month", className)}>
-                  <MonthCaption />
-                  <MonthSelector />
+                  <MonthPickerCaption />
+                  <MonthPickerTable />
                 </div>
               </DateWrapper>
             </div>

@@ -1,4 +1,8 @@
-import { DateAfter, DateBefore, DateRange } from "../monthpicker/types";
+import {
+  DateAfter,
+  DateBefore,
+  DateRange,
+} from "../monthpicker/MonthPicker.types";
 
 export function isDateAfterType(value: unknown): value is DateAfter {
   return Boolean(value && typeof value === "object" && "after" in value);
