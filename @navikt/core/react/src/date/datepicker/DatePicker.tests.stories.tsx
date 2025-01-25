@@ -145,6 +145,123 @@ export const Required: Story = {
   },
 };
 
+export const DomStructure: Story = {
+  render: () => (
+    <DatePicker.Standalone
+      data-testid="date-table"
+      selected={new Date("3 Jan 2025")}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const picker = canvas.getByTestId("date-table");
+
+    expect(picker.className).toEqual("rdp navds-date");
+
+    const months = picker.firstChild;
+    expect(months).toBeInTheDocument();
+
+    if (months) {
+      expect(
+        (months as HTMLDivElement).className.startsWith("rdp-months"),
+      ).toBeTruthy();
+      expect(months.nodeName).toBe("DIV");
+    }
+
+    const month = months?.firstChild;
+    expect(month).toBeInTheDocument();
+
+    if (month) {
+      expect(
+        (month as HTMLDivElement).className.startsWith("rdp-month"),
+      ).toBeTruthy();
+      expect(month.nodeName).toBe("DIV");
+    }
+
+    const table = month?.lastChild;
+    expect(table).toBeInTheDocument();
+
+    if (table) {
+      const typedTable = table as HTMLTableElement;
+      expect(typedTable.className.startsWith("rdp-table")).toBeTruthy();
+      expect((table as HTMLTableElement).nodeName).toBe("TABLE");
+
+      expect(typedTable.role).toEqual("grid");
+    }
+
+    const tHead = table?.firstChild;
+    expect(tHead).toBeInTheDocument();
+
+    if (tHead) {
+      expect(tHead.nodeName).toBe("THEAD");
+      expect((tHead as HTMLElement).className).toEqual("rdp-head");
+      expect((tHead as HTMLElement).ariaHidden).toBe("true");
+    }
+
+    const tBody = table?.lastChild;
+    expect(tBody).toBeInTheDocument();
+
+    if (tBody) {
+      expect(tBody.nodeName).toBe("TBODY");
+      expect((tBody as HTMLElement).className).toEqual("rdp-tbody");
+    }
+
+    const row = tBody?.firstChild;
+    expect(row).toBeInTheDocument();
+
+    if (row) {
+      expect(row.nodeName).toBe("TR");
+      expect((row as HTMLElement).className).toEqual("rdp-row");
+    }
+
+    const cells = row?.childNodes;
+
+    /**
+     * Since default selected date is 3 Jan 2025:
+     * - node 0 and 1 is "invisible"
+     * - node 2 and 3 is unselected
+     * - node 4 is selected
+     * - node 5 and 6 is unselected
+     */
+    if (cells) {
+      expect(cells.length).toBe(7);
+
+      cells.forEach((cell, index) => {
+        expect(cell.nodeName).toBe("TD");
+        expect((cell as HTMLElement).className).toEqual("rdp-cell");
+
+        const button = cell.firstChild;
+
+        expect(button).toBeInTheDocument();
+
+        if (button) {
+          const typedButton = button as HTMLButtonElement;
+          expect(button.nodeName).toBe("BUTTON");
+          expect(typedButton.type).toBe("button");
+          expect(typedButton.classList.contains("rdp-button")).toBeTruthy();
+          expect(typedButton.ariaLabel).toBeTruthy();
+
+          if (index <= 1) {
+            expect(typedButton.ariaHidden).toBe("true");
+          }
+
+          if (index !== 4) {
+            expect(typedButton.ariaPressed).toBe("false");
+            expect(typedButton.tabIndex).toBe(-1);
+          } else {
+            expect(
+              typedButton.classList.contains("rdp-day_selected"),
+            ).toBeTruthy();
+            expect(typedButton.ariaPressed).toBe("true");
+            expect(typedButton.tabIndex).toBe(0);
+          }
+        }
+      });
+    }
+  },
+};
+
 // /**
 //  * Validate that the monthpicker shows the previous year when `year`-prop is set to the previous year
 //  */
