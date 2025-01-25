@@ -1,6 +1,7 @@
 import {
   isBefore as checkIsBefore,
   differenceInCalendarDays,
+  isSameDay,
   isWeekend,
 } from "date-fns";
 import React, { useState } from "react";
@@ -372,8 +373,10 @@ export const useRangeDatepicker = (
 
   const handleSelect = (range) => {
     if (range?.from && range?.to) {
-      setOpen(false);
-      anchorRef?.focus();
+      if (!isSameDay(range.from, range.to)) {
+        setOpen(false);
+        anchorRef?.focus();
+      }
     }
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;

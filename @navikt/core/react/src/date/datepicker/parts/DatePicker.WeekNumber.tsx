@@ -56,7 +56,11 @@ const DatePickerWeekNumber = ({
 
   return (
     <DisplayMode above="sm" asChild>
-      <td className="rdp-cell">
+      <td
+        className={cl("rdp-cell", {
+          "navds-date__week-wrapper": !showOnDesktop,
+        })}
+      >
         <Button
           variant="secondary-neutral"
           size="small"

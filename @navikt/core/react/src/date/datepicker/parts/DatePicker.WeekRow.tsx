@@ -37,18 +37,13 @@ const DatePickerWeekRow = ({
             </Detail>
 
             {weeks?.map((week) => (
-              <td
+              <DatePickerWeekNumber
                 key={week.weekNumber}
-                className="rdp-cell navds-date__week-cell"
-              >
-                <span className="navds-date__week-wrapper">
-                  <DatePickerWeekNumber
-                    week={week}
-                    onWeekNumberClick={onWeekNumberClick}
-                    showOnDesktop={false}
-                  />
-                </span>
-              </td>
+                week={week}
+                onWeekNumberClick={onWeekNumberClick}
+                showOnDesktop={false}
+                className="navds-date__week-wrapper"
+              />
             ))}
           </tr>
         </tbody>

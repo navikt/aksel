@@ -1,4 +1,5 @@
 import cl from "clsx";
+import { isSameDay } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { useControllableState, useId } from "../../util/hooks";
@@ -119,6 +120,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           closeDialog = true;
         } else if (isDateRange(newValue) && newValue.from && newValue.to) {
           closeDialog = true;
+
+          if (isSameDay(newValue.from, newValue.to)) {
+            closeDialog = false;
+          }
         }
 
         if (closeDialog) {
@@ -133,7 +138,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     return (
       <DateTranslationContextProvider translate={translate}>
         <DateInputContextProvider
-          open={_open ?? open}
+          open={open}
           onOpen={() => setOpen((x) => !x)}
           ariaId={ariaId}
           defined={true}
@@ -144,11 +149,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           >
             {children}
             <DateDialog
-              open={_open ?? open}
+              open={open}
               anchor={wrapperRef}
               onClose={() => {
                 onClose?.();
-                setOpen(false);
+                open && setOpen(false);
               }}
               locale={locale}
               translate={translate}

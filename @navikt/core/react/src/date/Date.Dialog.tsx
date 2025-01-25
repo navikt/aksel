@@ -66,6 +66,7 @@ const DateDialog = ({
       </Popover>
     );
   }
+
   return (
     <Modal
       ref={modalRef}

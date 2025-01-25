@@ -25,7 +25,7 @@ const DatePickerDayButton = ({
     <button
       {...rest}
       aria-hidden={day.outside}
-      aria-pressed={modifiers.selected}
+      aria-pressed={!!modifiers.selected}
       aria-label={dateTime}
       data-pressed={modifiers.selected}
       className={cl(rest.className, {

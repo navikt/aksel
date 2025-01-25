@@ -467,10 +467,12 @@ export const Required = {
 
     expect(button17?.ariaPressed).toBe("false");
 
-    button17 && (await userEvent.click(button17));
+    if (button17) {
+      await userEvent.click(button17);
+    }
 
-    expect(button17?.ariaPressed).toBe("true");
-    expect(button10.ariaPressed).toBe("false");
+    expect(canvas.getByText("17").closest("button")?.ariaPressed).toBe("true");
+    expect(canvas.getByText("10").closest("button")?.ariaPressed).toBe("false");
   },
 };
 

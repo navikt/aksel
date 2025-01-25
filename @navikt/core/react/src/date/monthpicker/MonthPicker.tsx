@@ -147,7 +147,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                 anchor={wrapperRef}
                 onClose={() => {
                   onClose?.();
-                  setOpen(false);
+                  open && setOpen(false);
                 }}
                 locale={locale}
                 translate={translate}
