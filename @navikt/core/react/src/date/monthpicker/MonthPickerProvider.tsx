@@ -44,6 +44,7 @@ const MonthPickerProvider = ({
   children,
   disabled = [],
   year,
+  onYearChange,
   fromDate,
   toDate,
   selected,
@@ -63,7 +64,7 @@ const MonthPickerProvider = ({
         end: toDate,
       }) ?? new Date(),
     value: year,
-    /* TODO: add onChange */
+    onChange: onYearChange,
   });
 
   /**
@@ -72,7 +73,6 @@ const MonthPickerProvider = ({
   const [month, setMonth] = useControllableState({
     defaultValue: defaultSelected,
     value: selected,
-    /* TODO: Validate this */
     onChange: onMonthSelect,
   });
 

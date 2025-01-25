@@ -25,11 +25,12 @@ export const Default: StoryFn<{
   const { inputProps, monthpickerProps } = useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
     locale: props.locale,
+    onMonthChange: console.log,
   });
 
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps} onMonthSelect={console.log}>
+      <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           label="Velg måned"
           variant="monthpicker"

@@ -34,11 +34,13 @@ export const MonthCaption = () => {
     years.sort((a, b) => b.getFullYear() - a.getFullYear());
   }
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onYearChange(setYear(startOfMonth(new Date()), Number(event.target.value)));
+  };
 
   const handleButtonClick = (val: number) => {
     const newYear = Number(year.getFullYear() + val);
+
     onYearChange(setYear(year, newYear));
   };
 
@@ -75,7 +77,7 @@ export const MonthCaption = () => {
         >
           {years.map((yearOpt) => (
             <option key={yearOpt.getFullYear()} value={yearOpt.getFullYear()}>
-              {format(year, "yyyy", { locale })}
+              {format(yearOpt, "yyyy", { locale })}
             </option>
           ))}
         </Select>

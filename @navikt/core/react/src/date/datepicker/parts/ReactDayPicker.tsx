@@ -6,7 +6,7 @@ import { Show } from "../../../layout/responsive";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../utils";
-import { clampMonth } from "../new-util/clampMonth";
+import { clampDisplayMonth } from "../new-util/clampDisplayDate";
 import { DayButton } from "../parts/DayButton";
 import { Months } from "../parts/Months";
 import WeekNumber from "../parts/WeekNumber";
@@ -130,7 +130,7 @@ const ReactDayPicker = ({
       showOutsideDays
       startMonth={fromDate}
       endMonth={toDate}
-      month={clampMonth({ month, start: fromDate, end: toDate })}
+      month={clampDisplayMonth({ month, start: fromDate, end: toDate })}
       {...omit(rest, ["onSelect", "role", "id", "defaultSelected"])}
     />
   );

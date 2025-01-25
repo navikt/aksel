@@ -47,8 +47,17 @@ export const MonthButton = ({
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const { fromDate, toDate, locale, selected, disabled, year, onMonthSelect } =
-    useMonthPickerContext();
+  const {
+    fromDate,
+    toDate,
+    locale,
+    selected,
+    disabled,
+    year,
+    onYearChange,
+    onMonthSelect,
+    caption,
+  } = useMonthPickerContext();
   const isSelected = selected && isSameMonth(month, selected);
 
   useEffect(() => {
@@ -85,9 +94,9 @@ export const MonthButton = ({
           e.key,
           disabled,
           month,
-          toYear,
+          onYearChange,
           year,
-          hasDropdown,
+          caption === "dropdown",
           fromDate,
           toDate,
         );
