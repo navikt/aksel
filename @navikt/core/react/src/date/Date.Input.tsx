@@ -6,7 +6,7 @@ import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
 import { createContext } from "../util/create-context";
-import { useDateTranslationContext } from "./context";
+import { useDateTranslationContext } from "./Date.locale";
 
 interface DateInputContextProps {
   /**

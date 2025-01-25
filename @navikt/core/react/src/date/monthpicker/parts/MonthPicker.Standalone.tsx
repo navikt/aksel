@@ -1,8 +1,11 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { useDateLocale, useI18n } from "../../../util/i18n/i18n.hooks";
-import { getLocaleFromString, getTranslations } from "../../Date.locale";
-import { DateTranslationContextProvider } from "../../context";
+import {
+  DateTranslationContextProvider,
+  getLocaleFromString,
+  getTranslations,
+} from "../../Date.locale";
 import { MonthPickerProvider } from "../MonthPicker.context";
 import { MonthPickerProps } from "../MonthPicker.types";
 import { MonthPickerCaption } from "./MonthPicker.Caption";
