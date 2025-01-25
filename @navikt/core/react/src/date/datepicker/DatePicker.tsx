@@ -91,9 +91,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const [open, setOpen] = useControllableState({
       defaultValue: false,
       value: _open,
-      onChange: () => {
-        onOpenToggle?.();
-      },
     });
 
     /* We use state here to insure that anchor is defined if open is true on initial render */
@@ -139,7 +136,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DateTranslationContextProvider translate={translate}>
         <DateInputContextProvider
           open={open}
-          onOpen={() => setOpen((x) => !x)}
+          onOpen={() => {
+            setOpen((x) => !x);
+            onOpenToggle?.();
+          }}
           ariaId={ariaId}
           defined={true}
         >
