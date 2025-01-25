@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { isAfter, isBefore, isWeekend } from "date-fns";
-import React from "react";
+import React, { useCallback } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { omit } from "../../../util";
@@ -78,35 +78,48 @@ const ReactDayPicker = ({
       classNames={LegacyClassNames}
       components={{
         MonthCaption: () => <></>,
-        DayButton: (props) => (
-          <DatePickerDayButton {...props} locale={locale} />
+        DayButton: useCallback(
+          (props) => <DatePickerDayButton {...props} locale={locale} />,
+          [locale],
         ),
-        Month: (props) => (
-          <DatePickerMonths
-            {...props}
-            locale={locale}
-            onWeekNumberClick={
-              mode === "multiple" ? onWeekNumberClick : undefined
-            }
-          />
+        Month: useCallback(
+          (props) => (
+            <DatePickerMonths
+              {...props}
+              locale={locale}
+              onWeekNumberClick={
+                mode === "multiple" ? onWeekNumberClick : undefined
+              }
+            />
+          ),
+          [locale, mode, onWeekNumberClick],
         ),
-        Day: (props) => (
-          <td {...omit(props, ["day", "modifiers"])} className="rdp-cell" />
+        Day: useCallback(
+          (props) => (
+            <td {...omit(props, ["day", "modifiers"])} className="rdp-cell" />
+          ),
+          [],
         ),
-        WeekNumber: (props) => (
-          <DatePickerWeekNumber
-            {...props}
-            showOnDesktop
-            onWeekNumberClick={
-              mode === "multiple" ? onWeekNumberClick : undefined
-            }
-          />
+        WeekNumber: useCallback(
+          (props) => (
+            <DatePickerWeekNumber
+              {...props}
+              showOnDesktop
+              onWeekNumberClick={
+                mode === "multiple" ? onWeekNumberClick : undefined
+              }
+            />
+          ),
+          [mode, onWeekNumberClick],
         ),
         /* On smaller screens we hide it to accomedate our custom week-selector */
-        WeekNumberHeader: (props) => (
-          <Show above="sm" asChild>
-            <th {...props} />
-          </Show>
+        WeekNumberHeader: useCallback(
+          (props) => (
+            <Show above="sm" asChild>
+              <th {...props} />
+            </Show>
+          ),
+          [],
         ),
       }}
       className={cl("navds-date", className)}

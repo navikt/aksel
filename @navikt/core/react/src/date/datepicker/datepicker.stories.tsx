@@ -154,7 +154,7 @@ export const ShowWeekNumber = () => (
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
-    toDate: new Date("Feb 23 2024"),
+    toDate: new Date("Feb 23 2029"),
     onDateChange: console.log,
     onValidate: console.log,
   });
