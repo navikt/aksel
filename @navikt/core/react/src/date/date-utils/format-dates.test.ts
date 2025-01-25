@@ -1,7 +1,7 @@
 import { nb } from "date-fns/locale";
 import { describe, expect, test } from "vitest";
-import { formatDateForInput } from "../format-date";
-import { parseDate } from "../parse-date";
+import { formatDateForInput } from "./format-date";
+import { parseDate } from "./parse-date";
 
 const parse = (inp: string) => parseDate(inp, new Date(), nb, "date", false);
 const parseTwoDigit = (inp: string) =>

@@ -1,15 +1,11 @@
 import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useState } from "react";
-import { DayClickEventHandler, isMatch } from "react-day-picker";
+import { DayEventHandler, dateMatchModifiers } from "react-day-picker";
 import { useDateLocale } from "../../util/i18n/i18n.hooks";
+import { DateInputProps } from "../Date.Input";
+import { getLocaleFromString } from "../Date.locale";
+import { formatDateForInput, isValidDate, parseDate } from "../date-utils";
 import { DatePickerProps } from "../datepicker/DatePicker";
-import { DateInputProps } from "../parts/DateInput";
-import {
-  formatDateForInput,
-  getLocaleFromString,
-  isValidDate,
-  parseDate,
-} from "../utils";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -230,7 +226,10 @@ export const useDatepicker = (
   };
 
   /* Only allow de-selecting if not required */
-  const handleDayClick: DayClickEventHandler = (day, { selected }) => {
+  const handleDayClick: DayEventHandler<React.MouseEvent> = (
+    day,
+    { selected },
+  ) => {
     if (selected && required) {
       return;
     }
@@ -274,13 +273,13 @@ export const useDatepicker = (
     if (
       !isValidDate(day) ||
       (disableWeekends && isWeekend(day)) ||
-      (disabled && isMatch(day, disabled))
+      (disabled && dateMatchModifiers(day, disabled))
     ) {
       updateDate(undefined);
       updateValidation({
         isInvalid: !isValidDate(day),
         isWeekend: disableWeekends && isWeekend(day),
-        isDisabled: disabled && isMatch(day, disabled),
+        isDisabled: disabled && dateMatchModifiers(day, disabled),
         isValidDate: false,
         isEmpty: !e.target.value,
         isBefore: isBefore ?? false,

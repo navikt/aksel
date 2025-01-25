@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { disableDate } from "..";
+import { disableDate } from "./dates-disabled";
 
 describe("Returns if date should be disabled", () => {
   test("Should be disabled using Date (true)", () => {

@@ -55,18 +55,3 @@ const clampDisplayYear = ({
 };
 
 export { clampDisplayYear, clampDisplayMonth };
-
-/*
-  const isAfter = toDate && toDate.getFullYear() < initialMonth.getFullYear();
-
-  const isBefore =
-    fromDate && fromDate.getFullYear() > initialMonth.getFullYear();
-
-  if (isAfter) {
-    initialMonth = toDate;
-  }
-  if (isBefore) {
-    initialMonth = fromDate;
-  }
-
-  return startOfYear(initialMonth); */

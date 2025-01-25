@@ -6,4 +6,4 @@ export {
   MonthPickerStandalone,
   type MonthPickerStandaloneProps,
 } from "./parts/MonthPicker.Standalone";
-export { MonthPickerInput } from "../parts/DateInput";
+export { MonthPickerInput } from "../Date.Input";

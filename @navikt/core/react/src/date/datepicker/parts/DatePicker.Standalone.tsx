@@ -3,8 +3,8 @@ import React, { forwardRef } from "react";
 import { DateRange } from "react-day-picker";
 import { useControllableState } from "../../../util/hooks";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
+import { getTranslations } from "../../Date.locale";
 import { DateTranslationContextProvider } from "../../context";
-import { getTranslations } from "../../utils";
 import {
   DatePickerDefaultProps,
   MultipleMode,

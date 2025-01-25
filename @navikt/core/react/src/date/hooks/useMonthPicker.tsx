@@ -1,14 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { dateMatchModifiers } from "react-day-picker";
 import { useDateLocale } from "../../util/i18n/i18n.hooks";
+import { DateInputProps } from "../Date.Input";
+import { getLocaleFromString } from "../Date.locale";
+import { formatDateForInput, isValidDate, parseDate } from "../date-utils";
 import { MonthPickerProps } from "../monthpicker/MonthPicker.types";
-import { DateInputProps } from "../parts/DateInput";
-import {
-  formatDateForInput,
-  getLocaleFromString,
-  isMatch,
-  isValidDate,
-  parseDate,
-} from "../utils";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -267,11 +263,14 @@ export const useMonthpicker = (
     const isBefore = getIsBefore({ fromDate, date: month });
     const isAfter = getIsAfter({ toDate, date: month });
 
-    if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
+    if (
+      !isValidDate(month) ||
+      (disabled && dateMatchModifiers(month, disabled))
+    ) {
       updateMonth(undefined);
       updateValidation({
         isInvalid: isValidDate(month),
-        isDisabled: disabled && isMatch(month, disabled),
+        isDisabled: disabled && dateMatchModifiers(month, disabled),
         isValidMonth: false,
         isEmpty: !e.target.value,
         isBefore: isBefore ?? false,
@@ -283,7 +282,9 @@ export const useMonthpicker = (
     if (
       isAfter ||
       isBefore ||
-      (fromDate && toDate && !isMatch(month, [{ from: fromDate, to: toDate }]))
+      (fromDate &&
+        toDate &&
+        !dateMatchModifiers(month, [{ from: fromDate, to: toDate }]))
     ) {
       updateMonth(undefined);
       updateValidation({

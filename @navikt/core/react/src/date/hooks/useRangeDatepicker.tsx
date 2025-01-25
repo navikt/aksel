@@ -4,16 +4,13 @@ import {
   isWeekend,
 } from "date-fns";
 import React, { useState } from "react";
-import { DateRange, isMatch } from "react-day-picker";
+import { dateMatchModifiers } from "react-day-picker";
 import { useDateLocale } from "../../util/i18n/i18n.hooks";
+import { DateInputProps } from "../Date.Input";
+import { getLocaleFromString } from "../Date.locale";
+import { DateRange } from "../Date.typeutils";
+import { formatDateForInput, isValidDate, parseDate } from "../date-utils";
 import { DatePickerProps } from "../datepicker/DatePicker";
-import { DateInputProps } from "../parts/DateInput";
-import {
-  formatDateForInput,
-  getLocaleFromString,
-  isValidDate,
-  parseDate,
-} from "../utils";
 import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
 
 export type RangeValidationT = {
@@ -128,13 +125,13 @@ const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
   if (
     isValidDate(day) &&
     !(opt?.disableWeekends && isWeekend(day)) &&
-    !(opt?.disabled && isMatch(day, opt.disabled))
+    !(opt?.disabled && dateMatchModifiers(day, opt.disabled))
   ) {
     return {
       isValidDate: false,
       isInvalid: !isValidDate(day),
       isWeekend: opt?.disableWeekends && isWeekend(day),
-      isDisabled: opt?.disabled && isMatch(day, opt.disabled),
+      isDisabled: opt?.disabled && dateMatchModifiers(day, opt.disabled),
       isBefore,
       isAfter,
     };
@@ -164,13 +161,13 @@ const toValidation = (
   if (
     isValidDate(day) &&
     !(opt?.disableWeekends && isWeekend(day)) &&
-    !(opt?.disabled && isMatch(day, opt.disabled))
+    !(opt?.disabled && dateMatchModifiers(day, opt.disabled))
   ) {
     return {
       isValidDate: false,
       isInvalid: !isValidDate(day),
       isWeekend: opt?.disableWeekends && isWeekend(day),
-      isDisabled: opt?.disabled && isMatch(day, opt.disabled),
+      isDisabled: opt?.disabled && dateMatchModifiers(day, opt.disabled),
       isBefore,
       isAfter,
       isBeforeFrom,
@@ -369,7 +366,7 @@ export const useRangeDatepicker = (
     return (
       isValidDate(day) &&
       !(disableWeekends && isWeekend(day)) &&
-      !(disabled && isMatch(day, disabled))
+      !(disabled && dateMatchModifiers(day, disabled))
     );
   };
 
@@ -415,7 +412,7 @@ export const useRangeDatepicker = (
           isValidDate: false,
           isInvalid: !isValidDate(day),
           isWeekend: disableWeekends && isWeekend(day),
-          isDisabled: disabled && isMatch(day, disabled),
+          isDisabled: disabled && dateMatchModifiers(day, disabled),
           isBefore,
           isAfter,
         },
@@ -481,7 +478,7 @@ export const useRangeDatepicker = (
         isValidDate: false,
         isInvalid: !isValidDate(day),
         isWeekend: disableWeekends && isWeekend(day),
-        isDisabled: disabled && isMatch(day, disabled),
+        isDisabled: disabled && dateMatchModifiers(day, disabled),
         isBefore,
         isAfter,
       });

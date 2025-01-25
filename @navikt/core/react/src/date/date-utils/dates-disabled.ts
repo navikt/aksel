@@ -1,5 +1,5 @@
 import { isSameDay } from "date-fns";
-import { isDateRange } from "./typeguards";
+import { isDateRange } from "../Date.typeutils";
 
 export const disableDate = (
   disabledSelection: Date | any[],

@@ -1,5 +1,6 @@
-import { CalendarWeek, DateRange, Matcher, PropsBase } from "react-day-picker";
+import { CalendarWeek, Matcher, PropsBase } from "react-day-picker";
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
+import { DateRange } from "../Date.typeutils";
 
 export type SingleMode = {
   mode?: "single";

@@ -1,5 +1,5 @@
 import { ComponentTranslation } from "../../util/i18n/i18n.types";
-import { Matcher } from "../utils";
+import { Matcher } from "../Date.typeutils";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -85,16 +85,3 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   strategy?: "absolute" | "fixed";
 }
-
-export type DateRange = {
-  from: Date | undefined;
-  to?: Date | undefined;
-};
-
-export type DateBefore = {
-  before: Date;
-};
-
-export type DateAfter = {
-  after: Date;
-};

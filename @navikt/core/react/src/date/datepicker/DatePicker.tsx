@@ -4,10 +4,10 @@ import { DateRange } from "react-day-picker";
 import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
+import { DateDialog } from "../Date.Dialog";
+import { DatePickerInput } from "../Date.Input";
+import { getTranslations } from "../Date.locale";
 import { DateInputContext, DateTranslationContextProvider } from "../context";
-import { DatePickerInput } from "../parts/DateInput";
-import { DateWrapper } from "../parts/DateWrapper";
-import { getTranslations } from "../utils";
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
@@ -138,7 +138,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             className={cl("navds-date__wrapper", wrapperClassName)}
           >
             {children}
-            <DateWrapper
+            <DateDialog
               open={_open ?? open}
               anchor={wrapperRef}
               onClose={() => onClose?.() ?? setOpen(false)}
@@ -158,7 +158,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 mode={mode as any}
                 fixedWeeks
               />
-            </DateWrapper>
+            </DateDialog>
           </div>
         </DateInputContext.Provider>
       </DateTranslationContextProvider>

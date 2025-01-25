@@ -5,19 +5,12 @@ import {
   isSameMonth,
 } from "date-fns";
 import {
-  DateAfter,
-  DateBefore,
   DateRange,
-} from "../monthpicker/MonthPicker.types";
-import { isDateAfterType, isDateBeforeType, isDateRange } from "./typeguards";
-
-export type Matcher =
-  | ((date: Date) => boolean)
-  | Date
-  | Date[]
-  | DateRange
-  | DateBefore
-  | DateAfter;
+  Matcher,
+  isDateAfterType,
+  isDateBeforeType,
+  isDateRange,
+} from "../Date.typeutils";
 
 function isDateType(value: unknown): value is Date {
   return isDate(value);

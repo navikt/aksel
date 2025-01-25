@@ -3,8 +3,8 @@ import { expect, userEvent, within } from "@storybook/test";
 import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
+import { DateInputProps } from "../Date.Input";
 import { useMonthpicker } from "../hooks";
-import { DateInputProps } from "../parts/DateInput";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./MonthPicker.types";
 

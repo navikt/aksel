@@ -1,7 +1,7 @@
 import { isSameMonth, setMonth, setYear, startOfMonth } from "date-fns";
 import React, { useState } from "react";
 import { BodyShort } from "../../../typography";
-import { isMatch } from "../../utils";
+import { isMatch } from "../../date-utils";
 import { useMonthPickerContext } from "../MonthPicker.context";
 import MonthButton from "./MonthPicker.Button";
 

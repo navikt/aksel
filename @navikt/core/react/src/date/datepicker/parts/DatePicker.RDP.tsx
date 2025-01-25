@@ -5,12 +5,12 @@ import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
-import { getLocaleFromString } from "../../utils";
+import { getLocaleFromString } from "../../Date.locale";
+import { clampDisplayMonth } from "../../date-utils";
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
 } from "../Datepicker.types";
-import { clampDisplayMonth } from "../new-util/clampDisplayDate";
 import { DatePickerDayButton } from "./DatePicker.DayButton";
 import { DatePickerMonths } from "./DatePicker.Months";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";

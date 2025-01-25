@@ -3,10 +3,10 @@ import React, { forwardRef, useState } from "react";
 import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
+import { DateDialog } from "../Date.Dialog";
+import { MonthPickerInput } from "../Date.Input";
+import { getLocaleFromString, getTranslations } from "../Date.locale";
 import { DateInputContext, DateTranslationContextProvider } from "../context";
-import { MonthPickerInput } from "../parts/DateInput";
-import { DateWrapper } from "../parts/DateWrapper";
-import { getLocaleFromString, getTranslations } from "../utils";
 import { MonthPickerProvider } from "./MonthPicker.context";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
@@ -141,7 +141,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               className={cl("navds-date__wrapper", wrapperClassName)}
             >
               {children}
-              <DateWrapper
+              <DateDialog
                 open={open}
                 anchor={wrapperRef}
                 onClose={() => {
@@ -160,7 +160,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   <MonthPickerCaption />
                   <MonthPickerTable />
                 </div>
-              </DateWrapper>
+              </DateDialog>
             </div>
           </MonthPickerProvider>
         </DateInputContext.Provider>

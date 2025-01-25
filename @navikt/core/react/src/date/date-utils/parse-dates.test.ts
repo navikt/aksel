@@ -1,7 +1,8 @@
 import { getMonth } from "date-fns";
 import { nb } from "date-fns/locale";
 import { describe, expect, test } from "vitest";
-import { isValidDate, parseDate } from "..";
+import { isValidDate } from "./check-dates";
+import { parseDate } from "./parse-date";
 
 const check = (inp: string) =>
   // eslint-disable-next-line @vitest/valid-expect

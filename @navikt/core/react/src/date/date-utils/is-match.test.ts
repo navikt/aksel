@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { isMatch } from "..";
+import { isMatch } from "./is-match";
 
 const disabled = [
   new Date("Sep 8 2022"),
