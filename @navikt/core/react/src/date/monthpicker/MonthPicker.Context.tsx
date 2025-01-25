@@ -59,7 +59,7 @@ const MonthPickerProvider = ({
   const [displayYear, setDisplayYear] = useControllableState({
     defaultValue:
       clampDisplayYear({
-        month: year ?? selected,
+        month: year ?? selected ?? defaultSelected,
         start: fromDate,
         end: toDate,
       }) ?? new Date(),

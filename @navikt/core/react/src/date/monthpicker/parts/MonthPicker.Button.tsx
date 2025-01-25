@@ -72,6 +72,8 @@ export const MonthButton = ({
     isMatch(setYear(month, year.getFullYear()), disabled) ||
     disableMonth(month, fromDate, toDate);
 
+  const isThisMonth = dateIsInCurrentMonth(month, year);
+
   return (
     <button
       ref={ref}
@@ -79,8 +81,9 @@ export const MonthButton = ({
       onClick={() => onMonthSelect?.(isSelected ? undefined : month)}
       disabled={isDisabled}
       aria-pressed={!!isSelected}
+      data-current-month={isThisMonth}
       className={cl("navds-date__month-button", {
-        "rdp-day_today": dateIsInCurrentMonth(month, year),
+        "rdp-day_today": isThisMonth,
         "rdp-day_selected": isSelected,
         "rdp-day_disabled": isDisabled,
       })}
