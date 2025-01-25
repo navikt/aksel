@@ -10,7 +10,7 @@ import { clampDisplayMonth } from "../../date-utils";
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
-} from "../Datepicker.types";
+} from "../DatePicker.types";
 import { DatePickerDayButton } from "./DatePicker.DayButton";
 import { DatePickerMonths } from "./DatePicker.Months";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";

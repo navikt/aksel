@@ -13,7 +13,7 @@ import {
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
-} from "./Datepicker.types";
+} from "./DatePicker.types";
 import { ReactDayPicker } from "./parts/DatePicker.RDP";
 import DatePickerStandalone from "./parts/DatePicker.Standalone";
 

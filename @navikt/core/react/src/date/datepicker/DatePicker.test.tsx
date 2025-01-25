@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, test } from "vitest";
-import DatePicker from "../datepicker/DatePicker";
-import { useDatepicker } from "../hooks";
+import DatePicker from "./DatePicker";
+import { useDatepicker } from "./hooks/useDatepicker";
 
 const App = () => {
   const { datepickerProps, inputProps } = useDatepicker({

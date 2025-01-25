@@ -12,7 +12,7 @@ import {
   MultipleMode,
   RangeMode,
   SingleMode,
-} from "../Datepicker.types";
+} from "../DatePicker.types";
 import { ReactDayPicker } from "./DatePicker.RDP";
 
 interface DatePickerStandaloneDefaultProps

@@ -7,8 +7,9 @@ import { HGrid } from "../../layout/grid";
 import { VStack } from "../../layout/stack";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
-import { useDatepicker, useRangeDatepicker } from "../hooks";
 import DatePicker, { DatePickerProps } from "./DatePicker";
+import { useDatepicker } from "./hooks/useDatepicker";
+import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
 
 const disabledDays = [
   new Date("Oct 10 2022"),

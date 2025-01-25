@@ -3,8 +3,8 @@ import { CalendarWeek } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
-import { useDateTranslationContext } from "../../context";
-import { MultipleMode } from "../Datepicker.types";
+import { useDateTranslationContext } from "../../Date.locale";
+import { MultipleMode } from "../DatePicker.types";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
 
 const DatePickerWeekRow = ({
