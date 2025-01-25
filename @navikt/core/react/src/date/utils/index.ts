@@ -1,5 +1,4 @@
 export { formatDateForInput } from "./format-date";
-export { getMonths, getYears } from "./get-dates";
 export {
   INPUT_DATE_STRING_FORMAT_DATE,
   INPUT_DATE_STRING_FORMAT_MONTH,
@@ -13,6 +12,5 @@ export {
 export { disableDate } from "./dates-disabled";
 
 export { dateIsInCurrentMonth, isValidDate } from "./check-dates";
-export { getInitialYear } from "./get-initial-year";
 export { isMatch, isDateInRange, type Matcher } from "./is-match";
 export { nextEnabled } from "./navigation";

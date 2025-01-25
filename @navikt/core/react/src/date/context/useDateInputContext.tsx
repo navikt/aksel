@@ -6,7 +6,7 @@ interface DateInputContextProps {
    */
   open: boolean;
   /**
-   * Callback for opOpen toggle
+   * Callback for onOpen toggle
    */
   onOpen: () => void;
   /**
