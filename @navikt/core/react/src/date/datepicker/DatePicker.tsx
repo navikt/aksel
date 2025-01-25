@@ -164,7 +164,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 handleSelect={setValue}
                 selected={value as any}
                 mode={mode as any}
-                fixedWeeks
               />
             </DateDialog>
           </div>

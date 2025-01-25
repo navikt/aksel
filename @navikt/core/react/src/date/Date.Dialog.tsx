@@ -80,6 +80,7 @@ const DateDialog = ({
         "navds-date": variant === "month",
       })}
       closeOnBackdropClick
+      placement="top"
     >
       <div className="navds-date__modal-body">
         {children}
