@@ -12,8 +12,8 @@ import {
 } from "../Datepicker.types";
 import { clampDisplayMonth } from "../new-util/clampDisplayDate";
 import { DatePickerDayButton } from "./DatePicker.DayButton";
+import { DatePickerMonths } from "./DatePicker.Months";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
-import { DatePickerMonths } from "./Datepicker.Months";
 
 const LegacyClassNames: Partial<ClassNames> = {
   button_next: "button",
