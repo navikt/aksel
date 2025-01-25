@@ -9,6 +9,7 @@ import {
 
 /**
  * Generates the min and max-dates possible to show and navigate to in the calendar.
+ * In the cases there is not a startMonth or endMonth, and layout is "label" no min or max dates are set.
  * @returns Return the start and end months for the calendar navigation.
  */
 export function calendarRange({
