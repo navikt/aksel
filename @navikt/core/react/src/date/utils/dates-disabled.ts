@@ -1,7 +1,6 @@
 import { isSameDay } from "date-fns";
-import { isDateRange } from "react-day-picker";
+import { isDateRange } from "./typeguards";
 
-// TODO: ((date: Date) => boolean)
 export const disableDate = (
   disabledSelection: Date | any[],
   date: Date,

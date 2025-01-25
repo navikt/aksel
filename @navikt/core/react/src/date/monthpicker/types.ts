@@ -85,3 +85,16 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   strategy?: "absolute" | "fixed";
 }
+
+export type DateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
+};
+
+export type DateBefore = {
+  before: Date;
+};
+
+export type DateAfter = {
+  after: Date;
+};

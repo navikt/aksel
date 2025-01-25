@@ -4,31 +4,8 @@ import {
   isSameDay,
   isSameMonth,
 } from "date-fns";
-
-type DateRange = {
-  from: Date | undefined;
-  to?: Date | undefined;
-};
-
-type DateBefore = {
-  before: Date;
-};
-
-type DateAfter = {
-  after: Date;
-};
-
-function isDateAfterType(value: unknown): value is DateAfter {
-  return Boolean(value && typeof value === "object" && "after" in value);
-}
-
-function isDateBeforeType(value: unknown): value is DateBefore {
-  return Boolean(value && typeof value === "object" && "before" in value);
-}
-
-function isDateRange(value: unknown): value is DateRange {
-  return Boolean(value && typeof value === "object" && "from" in value);
-}
+import { DateAfter, DateBefore, DateRange } from "../monthpicker/types";
+import { isDateAfterType, isDateBeforeType, isDateRange } from "./typeguards";
 
 export type Matcher =
   | ((date: Date) => boolean)
