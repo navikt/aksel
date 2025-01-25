@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { describe, expect, test } from "vitest";
-import { DatePicker } from "../datepicker";
+import { DatePicker } from "../DatePicker";
 import { useRangeDatepicker } from "./useRangeDatepicker";
 
 const RangeDemo = () => {
