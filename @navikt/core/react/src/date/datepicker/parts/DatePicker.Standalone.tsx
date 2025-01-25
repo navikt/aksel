@@ -10,8 +10,8 @@ import {
   MultipleMode,
   RangeMode,
   SingleMode,
-} from "../types";
-import { ReactDayPicker } from "./ReactDayPicker";
+} from "../Datepicker.types";
+import { ReactDayPicker } from "./DatePicker.RDP";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<

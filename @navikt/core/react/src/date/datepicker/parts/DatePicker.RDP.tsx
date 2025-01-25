@@ -6,11 +6,14 @@ import { Show } from "../../../layout/responsive";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../utils";
+import {
+  ConditionalModeProps,
+  DatePickerDefaultProps,
+} from "../Datepicker.types";
 import { clampDisplayMonth } from "../new-util/clampDisplayDate";
-import { DayButton } from "../parts/DayButton";
-import { Months } from "../parts/Months";
-import WeekNumber from "../parts/WeekNumber";
-import { ConditionalModeProps, DatePickerDefaultProps } from "../types";
+import { DatePickerDayButton } from "./DatePicker.DayButton";
+import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
+import { DatePickerMonths } from "./Datepicker.Months";
 
 const LegacyClassNames: Partial<ClassNames> = {
   button_next: "button",
@@ -75,9 +78,11 @@ const ReactDayPicker = ({
       classNames={LegacyClassNames}
       components={{
         MonthCaption: () => <></>,
-        DayButton: (props) => <DayButton {...props} locale={locale} />,
+        DayButton: (props) => (
+          <DatePickerDayButton {...props} locale={locale} />
+        ),
         Month: (props) => (
-          <Months
+          <DatePickerMonths
             {...props}
             locale={locale}
             onWeekNumberClick={
@@ -89,7 +94,7 @@ const ReactDayPicker = ({
           <td {...omit(props, ["day", "modifiers"])} className="rdp-cell" />
         ),
         WeekNumber: (props) => (
-          <WeekNumber
+          <DatePickerWeekNumber
             {...props}
             showOnDesktop
             onWeekNumberClick={
@@ -97,6 +102,7 @@ const ReactDayPicker = ({
             }
           />
         ),
+        /* On smaller screens we hide it to accomedate our custom week-selector */
         WeekNumberHeader: (props) => (
           <Show above="sm" asChild>
             <th {...props} />

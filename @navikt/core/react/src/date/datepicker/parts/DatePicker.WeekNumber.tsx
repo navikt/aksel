@@ -5,9 +5,9 @@ import { Button } from "../../../button";
 import { Hide, Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
-import { MultipleMode } from "../types";
+import { MultipleMode } from "../Datepicker.types";
 
-function WeekNumber({
+const DatePickerWeekNumber = ({
   week: { weekNumber, days },
   onWeekNumberClick,
   className,
@@ -17,7 +17,7 @@ function WeekNumber({
   week: CalendarWeek;
   onWeekNumberClick: MultipleMode["onWeekNumberClick"];
   showOnDesktop: boolean;
-} & React.ThHTMLAttributes<HTMLTableCellElement>): JSX.Element {
+} & React.ThHTMLAttributes<HTMLTableCellElement>) => {
   const translate = useDateTranslationContext().translate;
 
   const { getModifiers } = useDayPicker();
@@ -77,6 +77,6 @@ function WeekNumber({
       </td>
     </DisplayMode>
   );
-}
+};
 
-export default WeekNumber;
+export { DatePickerWeekNumber };

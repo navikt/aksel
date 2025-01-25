@@ -3,7 +3,7 @@ import { Locale, format } from "date-fns";
 import React from "react";
 import { CalendarDay, Modifiers } from "react-day-picker";
 
-const DayButton = ({
+const DatePickerDayButton = ({
   day,
   modifiers,
   locale,
@@ -43,4 +43,4 @@ const DayButton = ({
   );
 };
 
-export { DayButton };
+export { DatePickerDayButton };

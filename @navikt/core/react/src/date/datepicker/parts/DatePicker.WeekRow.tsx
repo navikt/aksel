@@ -4,10 +4,10 @@ import { Show } from "../../../layout/responsive";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
 import { useDateTranslationContext } from "../../context";
-import { MultipleMode } from "../types";
-import WeekNumber from "./WeekNumber";
+import { MultipleMode } from "../Datepicker.types";
+import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
 
-const WeekRow = ({
+const DatePickerWeekRow = ({
   onWeekNumberClick,
   weeks,
 }: {
@@ -42,7 +42,7 @@ const WeekRow = ({
                 className="rdp-cell navds-date__week-cell"
               >
                 <span className="navds-date__week-wrapper">
-                  <WeekNumber
+                  <DatePickerWeekNumber
                     week={week}
                     onWeekNumberClick={onWeekNumberClick}
                     showOnDesktop={false}
@@ -57,4 +57,4 @@ const WeekRow = ({
   );
 };
 
-export default WeekRow;
+export { DatePickerWeekRow };

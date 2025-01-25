@@ -14,13 +14,13 @@ import { Select } from "../../../form/select";
 import { BodyShort } from "../../../typography";
 import { omit } from "../../../util";
 import { useDateTranslationContext } from "../../context";
+import { MultipleMode } from "../Datepicker.types";
 import { getMonthOptions } from "../new-util/getMonthOptions";
 import { getNavMonths } from "../new-util/getNavMonths";
 import { getYearOptions } from "../new-util/getYearOptions";
-import { MultipleMode } from "../types";
-import WeekRow from "./WeekRow";
+import { DatePickerWeekRow } from "./DatePicker.WeekRow";
 
-const Months = ({
+const DatePickerMonths = ({
   children,
   calendarMonth,
   locale,
@@ -139,7 +139,7 @@ const Months = ({
           type="button"
         />
       </div>
-      <WeekRow
+      <DatePickerWeekRow
         weeks={calendarMonth.weeks}
         onWeekNumberClick={onWeekNumberClick}
       />
@@ -148,4 +148,4 @@ const Months = ({
   );
 };
 
-export { Months };
+export { DatePickerMonths };
