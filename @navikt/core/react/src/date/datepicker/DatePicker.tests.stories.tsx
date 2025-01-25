@@ -39,9 +39,6 @@ export const LabelCaptionNavigation: Story = {
 
     expect(label).toBeInTheDocument();
 
-    const dropdown = canvas.getByDisplayValue("2025");
-    await userEvent.selectOptions(dropdown, "2023");
-
     const todayButton = canvas.getByRole("button", {
       name: format(currentDate, "cccc d", {
         locale: nb,

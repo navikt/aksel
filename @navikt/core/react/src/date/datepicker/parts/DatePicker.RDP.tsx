@@ -16,6 +16,7 @@ import { DatePickerMonths } from "./DatePicker.Months";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
 
 const LegacyClassNames: Partial<ClassNames> = {
+  root: "rdp",
   button_next: "button",
   day: "rdp-cell",
   day_button: "rdp-day rdp-button",
@@ -96,7 +97,11 @@ const ReactDayPicker = ({
         ),
         Day: useCallback(
           (props) => (
-            <td {...omit(props, ["day", "modifiers"])} className="rdp-cell" />
+            <td
+              {...omit(props, ["day", "modifiers"])}
+              className="rdp-cell"
+              role={undefined}
+            />
           ),
           [],
         ),
@@ -118,6 +123,14 @@ const ReactDayPicker = ({
             <Show above="sm" asChild>
               <th {...props} />
             </Show>
+          ),
+          [],
+        ),
+        Weekdays: useCallback(
+          (props) => (
+            <thead {...props} className="rdp-head" aria-hidden>
+              <tr className="rdp-head_row">{props.children}</tr>
+            </thead>
           ),
           [],
         ),
