@@ -1,5 +1,6 @@
 import {
   Locale,
+  format,
   getMonth,
   getYear,
   setMonth,
@@ -34,7 +35,7 @@ const DatePickerMonths = ({
   locale: Locale;
   onWeekNumberClick: MultipleMode["onWeekNumberClick"];
 } & React.HTMLAttributes<HTMLDivElement>) => {
-  const { dayPickerProps, goToMonth, formatters, previousMonth, nextMonth } =
+  const { dayPickerProps, goToMonth, previousMonth, nextMonth } =
     useDayPicker();
 
   const { captionLayout } = dayPickerProps;
@@ -66,41 +67,48 @@ const DatePickerMonths = ({
     today: dayPickerProps.today,
   });
 
-  const months = getMonthOptions(calendarMonth.date, navStart, navEnd, locale);
+  const Selects = () => {
+    const months = getMonthOptions(
+      calendarMonth.date,
+      navStart,
+      navEnd,
+      locale,
+    );
 
-  const dropdownYears = getYearOptions(navStart, navEnd, locale);
+    const dropdownYears = getYearOptions(navStart, navEnd, locale);
 
-  const Selects = () => (
-    <div className="navds-date__caption">
-      <Select
-        label={translate("month")}
-        hideLabel
-        className="navds-date__caption__month"
-        onChange={(event) => handleMonthChange(calendarMonth.date, event)}
-        value={getMonth(calendarMonth.date)}
-      >
-        {months?.map(({ value, label, disabled }) => (
-          <option key={value} value={value} disabled={disabled}>
-            {label}
-          </option>
-        ))}
-      </Select>
+    return (
+      <div className="navds-date__caption">
+        <Select
+          label={translate("month")}
+          hideLabel
+          className="navds-date__caption__month"
+          onChange={(event) => handleMonthChange(calendarMonth.date, event)}
+          value={getMonth(calendarMonth.date)}
+        >
+          {months?.map(({ value, label, disabled }) => (
+            <option key={value} value={value} disabled={disabled}>
+              {label}
+            </option>
+          ))}
+        </Select>
 
-      <Select
-        label={translate("year")}
-        hideLabel
-        className="navds-date__caption__year"
-        onChange={(event) => handleYearChange(calendarMonth.date, event)}
-        value={getYear(calendarMonth.date)}
-      >
-        {dropdownYears?.map(({ value, label, disabled }) => (
-          <option key={value} value={value} disabled={disabled}>
-            {label}
-          </option>
-        ))}
-      </Select>
-    </div>
-  );
+        <Select
+          label={translate("year")}
+          hideLabel
+          className="navds-date__caption__year"
+          onChange={(event) => handleYearChange(calendarMonth.date, event)}
+          value={getYear(calendarMonth.date)}
+        >
+          {dropdownYears?.map(({ value, label, disabled }) => (
+            <option key={value} value={value} disabled={disabled}>
+              {label}
+            </option>
+          ))}
+        </Select>
+      </div>
+    );
+  };
 
   const Label = () => (
     <BodyShort
@@ -110,7 +118,7 @@ const DatePickerMonths = ({
       role="status"
       className="navds-date__caption-label"
     >
-      {formatters.formatCaption(calendarMonth.date, { locale })}
+      {format(calendarMonth.date, "LLLL y", { locale })}
     </BodyShort>
   );
 
@@ -119,7 +127,7 @@ const DatePickerMonths = ({
       <div className="navds-date__caption">
         {captionLayout?.startsWith("dropdown") && (
           <span aria-live="polite" aria-atomic="true" className="navds-sr-only">
-            {formatters.formatCaption(calendarMonth.date)}
+            {format(calendarMonth.date, "LLLL y", { locale })}
           </span>
         )}
         <Button

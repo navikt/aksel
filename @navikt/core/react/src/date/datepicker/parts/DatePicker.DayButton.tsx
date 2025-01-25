@@ -28,6 +28,7 @@ const DatePickerDayButton = ({
       aria-pressed={!!modifiers.selected}
       aria-label={dateTime}
       data-pressed={modifiers.selected}
+      data-today={modifiers.today || undefined}
       className={cl(rest.className, {
         "rdp-day_disabled": modifiers.disabled,
         "rdp-day_selected": modifiers.selected,
