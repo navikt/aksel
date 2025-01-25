@@ -27,8 +27,10 @@ type MonthPickerContextProps = {
   onYearChange: (year: Date) => void;
   selected: MonthPickerProps["selected"];
   onMonthSelect: MonthPickerProps["onMonthSelect"];
-  disabled: MonthPickerProps["disabled"];
+  disabled: NonNullable<MonthPickerProps["disabled"]>;
   locale: Locale;
+  fromDate?: MonthPickerProps["fromDate"];
+  toDate?: MonthPickerProps["toDate"];
 };
 
 const [MonthPickerContextProvider, useMonthPickerContext] =
@@ -40,7 +42,7 @@ const [MonthPickerContextProvider, useMonthPickerContext] =
 
 const MonthPickerProvider = ({
   children,
-  disabled,
+  disabled = [],
   year,
   fromDate,
   toDate,
@@ -90,6 +92,8 @@ const MonthPickerProvider = ({
       year={displayYear}
       onYearChange={handleDisplayYearUpdate}
       locale={locale}
+      fromDate={fromDate}
+      toDate={toDate}
     >
       {children}
     </MonthPickerContextProvider>

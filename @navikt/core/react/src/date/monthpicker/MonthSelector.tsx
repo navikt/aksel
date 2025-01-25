@@ -1,9 +1,9 @@
 import { isSameMonth, setMonth, setYear, startOfMonth } from "date-fns";
 import React, { useState } from "react";
 import { BodyShort } from "../../typography";
-import { useSharedMonthContext } from "../context";
 import { isMatch } from "../utils";
 import MonthButton from "./MonthButton";
+import { useMonthPickerContext } from "./MonthPickerProvider";
 
 const getAllMonths = () => {
   const months: Date[] = [];
@@ -17,7 +17,7 @@ const getAllMonths = () => {
 export const MonthSelector = () => {
   const [focus, setFocus] = useState<Date>();
 
-  const { selected, year, disabled } = useSharedMonthContext();
+  const { selected, year, disabled } = useMonthPickerContext();
 
   const months: Date[] = getAllMonths();
 

@@ -7,9 +7,8 @@ import {
   setYear,
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
-import { useDayPicker } from "react-day-picker";
-import { useSharedMonthContext } from "../context";
 import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
+import { useMonthPickerContext } from "./MonthPickerProvider";
 
 interface MonthType {
   month: Date;
@@ -47,10 +46,9 @@ export const MonthButton = ({
   setTabRoot,
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const { hasDropdown, selected, onSelect, year, toYear, disabled } =
-    useSharedMonthContext();
 
-  const { fromDate, toDate, locale } = useDayPicker();
+  const { fromDate, toDate, locale, selected, disabled, year, onMonthSelect } =
+    useMonthPickerContext();
   const isSelected = selected && isSameMonth(month, selected);
 
   useEffect(() => {
@@ -68,7 +66,7 @@ export const MonthButton = ({
     <button
       ref={ref}
       type="button"
-      onClick={() => onSelect(isSelected ? undefined : month)}
+      onClick={() => onMonthSelect?.(isSelected ? undefined : month)}
       disabled={isDisabled}
       aria-pressed={!!isSelected}
       className={cl("navds-date__month-button", {

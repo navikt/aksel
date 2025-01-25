@@ -1,4 +1,5 @@
 import {
+  format,
   isAfter,
   isBefore,
   setYear,
@@ -6,25 +7,21 @@ import {
   startOfYear,
 } from "date-fns";
 import React from "react";
-import { useDayPicker } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
 import { Select } from "../../form/select";
-import { useDateTranslationContext, useSharedMonthContext } from "../context";
+import { useDateTranslationContext } from "../context";
+import { useMonthPickerContext } from "./MonthPickerProvider";
 
 export const MonthCaption = () => {
-  const {
-    fromDate,
-    toDate,
-    formatters: { formatYearCaption },
-    locale,
-  } = useDayPicker();
-  const { hasDropdown, year, toYear } = useSharedMonthContext();
+  const { fromDate, toDate, locale, year, onYearChange, caption } =
+    useMonthPickerContext();
+
   const translate = useDateTranslationContext().translate;
 
   const years: Date[] = [];
 
-  if (hasDropdown && fromDate && toDate) {
+  if (caption === "dropdown" && fromDate && toDate) {
     const fromYear = fromDate.getFullYear();
     const toDateYear = toDate.getFullYear();
     for (let currYear = fromYear; currYear <= toDateYear; currYear++) {
@@ -38,11 +35,11 @@ export const MonthCaption = () => {
   }
 
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    toYear(setYear(startOfMonth(new Date()), Number(event.target.value)));
+    onYearChange(setYear(startOfMonth(new Date()), Number(event.target.value)));
 
   const handleButtonClick = (val: number) => {
     const newYear = Number(year.getFullYear() + val);
-    toYear(setYear(year, newYear));
+    onYearChange(setYear(year, newYear));
   };
 
   const disablePreviousYear = () => {
@@ -68,7 +65,7 @@ export const MonthCaption = () => {
         type="button"
       />
 
-      {hasDropdown ? (
+      {caption === "dropdown" ? (
         <Select
           label={translate("year")}
           hideLabel
@@ -78,7 +75,7 @@ export const MonthCaption = () => {
         >
           {years.map((yearOpt) => (
             <option key={yearOpt.getFullYear()} value={yearOpt.getFullYear()}>
-              {formatYearCaption(yearOpt, { locale })}
+              {format(year, "yyyy", { locale })}
             </option>
           ))}
         </Select>
