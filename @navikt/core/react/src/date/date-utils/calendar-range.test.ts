@@ -27,12 +27,12 @@ describe("calendarRange", () => {
     expect(result[1]).toEqual(startOfDay(endOfYear(today)));
   });
 
-  test("should return start and end of the current month if no startMonth and endMonth are provided", () => {
+  test("should return undefined if no startMonth and endMonth are provided", () => {
     const today = new Date(2023, 6, 15);
     const result = calendarRange({ today });
 
-    expect(result[0]).toEqual(startOfDay(startOfMonth(today)));
-    expect(result[1]).toEqual(startOfDay(endOfMonth(today)));
+    expect(result[0]).toBeUndefined();
+    expect(result[1]).toBeUndefined();
   });
 
   test("should handle undefined today date", () => {

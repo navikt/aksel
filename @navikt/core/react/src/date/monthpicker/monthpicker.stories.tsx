@@ -4,9 +4,9 @@ import { setYear } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { DateInputProps } from "../Date.Input";
-import { useMonthpicker } from "../hooks";
 import MonthPicker from "./MonthPicker";
 import { MonthPickerProps } from "./MonthPicker.types";
+import { useMonthpicker } from "./hooks/useMonthPicker";
 
 export default {
   title: "ds-react/Monthpicker",

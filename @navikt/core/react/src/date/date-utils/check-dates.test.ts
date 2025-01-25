@@ -1,23 +1,29 @@
+import { setYear } from "date-fns";
 import { describe, expect, test } from "vitest";
 import { dateIsInCurrentMonth, isValidDate } from "./check-dates";
 
 describe("dateIsInCurrentMonth", () => {
   test("should return true if the date is in the same month and year as the date to compare", () => {
-    const date = new Date(2023, 9, 15); // October 15, 2023
-    const dateToCompare = new Date(2023, 9, 1); // October 1, 2023
+    const date = new Date();
+    const dateToCompare = new Date();
     expect(dateIsInCurrentMonth(date, dateToCompare)).toBe(true);
   });
 
   test("should return false if the date is not in the same month as the date to compare", () => {
-    const date = new Date(2023, 8, 15); // September 15, 2023
+    const date = new Date();
     const dateToCompare = new Date(2023, 9, 1); // October 1, 2023
     expect(dateIsInCurrentMonth(date, dateToCompare)).toBe(false);
   });
 
   test("should return false if the date is in the same month but different year as the date to compare", () => {
-    const date = new Date(2022, 9, 15); // October 15, 2022
-    const dateToCompare = new Date(2023, 9, 1); // October 1, 2023
-    expect(dateIsInCurrentMonth(date, dateToCompare)).toBe(false);
+    const date = new Date();
+    const dateToCompare = new Date();
+    expect(
+      dateIsInCurrentMonth(
+        date,
+        setYear(dateToCompare, dateToCompare.getFullYear() + 1),
+      ),
+    ).toBe(false);
   });
 });
 

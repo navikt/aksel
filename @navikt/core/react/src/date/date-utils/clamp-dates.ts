@@ -2,6 +2,7 @@ import { isAfter, isBefore, startOfMonth, startOfYear } from "date-fns";
 
 /**
  * Makes sure the month is within the min and max daterange to avoid showing disabled months
+ * @note We do not warn the user if start > end now
  */
 const clampDisplayMonth = ({
   month,
@@ -20,7 +21,9 @@ const clampDisplayMonth = ({
 
   if (start && isBefore(monthToShow, start)) {
     monthToShow = start;
-  } else if (end && isAfter(monthToShow, end)) {
+  }
+
+  if (end && isAfter(monthToShow, end)) {
     monthToShow = end;
   }
 
@@ -29,6 +32,7 @@ const clampDisplayMonth = ({
 
 /**
  * Makes sure the month is within the min and max daterange to avoid showing disabled months
+ * @note We do not warn the user if start > end now
  */
 const clampDisplayYear = ({
   month,
@@ -47,7 +51,9 @@ const clampDisplayYear = ({
 
   if (start && monthToShow.getFullYear() < start.getFullYear()) {
     monthToShow = start;
-  } else if (end && monthToShow.getFullYear() > end.getFullYear()) {
+  }
+
+  if (end && monthToShow.getFullYear() > end.getFullYear()) {
     monthToShow = end;
   }
 
