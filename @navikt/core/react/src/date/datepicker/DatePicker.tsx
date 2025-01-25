@@ -11,6 +11,7 @@ import {
   DateTranslationContextProvider,
   getTranslations,
 } from "../Date.locale";
+import { isDateRange } from "../Date.typeutils";
 import {
   ConditionalModeProps,
   DatePickerDefaultProps,
@@ -96,15 +97,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const mergedRef = useMergeRefs(setWrapperRef, ref);
-
-    function isDateRange(dateValue: any): dateValue is DateRange {
-      return (
-        dateValue &&
-        typeof dateValue === "object" &&
-        "from" in dateValue &&
-        "to" in dateValue
-      );
-    }
 
     const [value, setValue] = useControllableState<
       Date | Date[] | DateRange | undefined
