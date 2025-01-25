@@ -14,10 +14,12 @@ import { Select } from "../../../form/select";
 import { BodyShort } from "../../../typography";
 import { omit } from "../../../util";
 import { useDateTranslationContext } from "../../Date.locale";
+import {
+  calendarRange,
+  getMonthOptions,
+  getYearOptions,
+} from "../../date-utils";
 import { MultipleMode } from "../DatePicker.types";
-import { getMonthOptions } from "../new-util/getMonthOptions";
-import { getNavMonths } from "../new-util/getNavMonths";
-import { getYearOptions } from "../new-util/getYearOptions";
 import { DatePickerWeekRow } from "./DatePicker.WeekRow";
 
 const DatePickerMonths = ({
@@ -57,16 +59,16 @@ const DatePickerMonths = ({
     [goToMonth],
   );
 
-  const [navStart, navEnd] = getNavMonths(dayPickerProps);
+  const [navStart, navEnd] = calendarRange({
+    captionLayout: captionLayout === "dropdown" ? "dropdown" : "label",
+    startMonth: dayPickerProps.startMonth,
+    endMonth: dayPickerProps.endMonth,
+    today: dayPickerProps.today,
+  });
 
-  const months = getMonthOptions(
-    calendarMonth.date,
-    navStart,
-    navEnd,
-    formatters,
-  );
+  const months = getMonthOptions(calendarMonth.date, navStart, navEnd, locale);
 
-  const dropdownYears = getYearOptions(navStart, navEnd, formatters);
+  const dropdownYears = getYearOptions(navStart, navEnd, locale);
 
   const Selects = () => (
     <div className="navds-date__caption">

@@ -8,3 +8,5 @@ export { disableDate } from "./dates-disabled";
 export { dateIsInCurrentMonth, isValidDate } from "./check-dates";
 export { isMatch, isDateInRange } from "./is-match";
 export { clampDisplayMonth, clampDisplayYear } from "./clamp-dates";
+export { getMonthOptions, getYearOptions } from "./dropdown-options";
+export { calendarRange } from "./calendar-range";
