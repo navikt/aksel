@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { useDateLocale, useI18n } from "../../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../../context";
 import { getLocaleFromString, getTranslations } from "../../utils";
-import { MonthPickerProvider } from "../MonthPicker.Context";
+import { MonthPickerProvider } from "../MonthPicker.context";
 import { MonthPickerProps } from "../MonthPicker.types";
 import { MonthPickerCaption } from "./MonthPicker.Caption";
 import { MonthPickerTable } from "./MonthPicker.Table";

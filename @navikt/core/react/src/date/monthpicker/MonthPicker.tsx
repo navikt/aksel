@@ -7,7 +7,7 @@ import { DateInputContext, DateTranslationContextProvider } from "../context";
 import { MonthPickerInput } from "../parts/DateInput";
 import { DateWrapper } from "../parts/DateWrapper";
 import { getLocaleFromString, getTranslations } from "../utils";
-import { MonthPickerProvider } from "./MonthPicker.Context";
+import { MonthPickerProvider } from "./MonthPicker.context";
 import { MonthPickerProps } from "./MonthPicker.types";
 import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
 import { MonthPickerStandalone } from "./parts/MonthPicker.Standalone";

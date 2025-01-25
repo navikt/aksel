@@ -11,7 +11,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
 import { useDateTranslationContext } from "../../context";
-import { useMonthPickerContext } from "../MonthPicker.Context";
+import { useMonthPickerContext } from "../MonthPicker.context";
 
 const MonthPickerCaption = () => {
   const { fromDate, toDate, locale, year, onYearChange, caption } =
