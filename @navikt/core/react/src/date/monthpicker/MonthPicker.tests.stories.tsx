@@ -15,10 +15,6 @@ export default {
 
 type Story = StoryObj<typeof MonthPicker>;
 
-/* function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-} */
-
 const currentDate = new Date();
 const previousYear = setYear(currentDate, currentDate.getFullYear() - 1);
 const nextYear = setYear(currentDate, currentDate.getFullYear() + 1);

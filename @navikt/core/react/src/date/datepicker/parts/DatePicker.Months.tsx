@@ -67,60 +67,8 @@ const DatePickerMonths = ({
     today: dayPickerProps.today,
   });
 
-  const Selects = () => {
-    const months = getMonthOptions(
-      calendarMonth.date,
-      navStart,
-      navEnd,
-      locale,
-    );
-
-    const dropdownYears = getYearOptions(navStart, navEnd, locale);
-
-    return (
-      <div className="navds-date__caption">
-        <Select
-          label={translate("month")}
-          hideLabel
-          className="navds-date__caption__month"
-          onChange={(event) => handleMonthChange(calendarMonth.date, event)}
-          value={getMonth(calendarMonth.date)}
-        >
-          {months?.map(({ value, label, disabled }) => (
-            <option key={value} value={value} disabled={disabled}>
-              {label}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          label={translate("year")}
-          hideLabel
-          className="navds-date__caption__year"
-          onChange={(event) => handleYearChange(calendarMonth.date, event)}
-          value={getYear(calendarMonth.date)}
-        >
-          {dropdownYears?.map(({ value, label, disabled }) => (
-            <option key={value} value={value} disabled={disabled}>
-              {label}
-            </option>
-          ))}
-        </Select>
-      </div>
-    );
-  };
-
-  const Label = () => (
-    <BodyShort
-      weight="semibold"
-      as="span"
-      aria-live="polite"
-      role="status"
-      className="navds-date__caption-label"
-    >
-      {format(calendarMonth.date, "LLLL y", { locale })}
-    </BodyShort>
-  );
+  const months = getMonthOptions(calendarMonth.date, navStart, navEnd, locale);
+  const dropdownYears = getYearOptions(navStart, navEnd, locale);
 
   return (
     <div {...omit(rest, ["displayIndex"])}>
@@ -138,7 +86,47 @@ const DatePickerMonths = ({
           className="navds-date__caption-button"
           type="button"
         />
-        {captionLayout?.startsWith("dropdown") ? <Selects /> : <Label />}
+        {captionLayout?.startsWith("dropdown") ? (
+          <div className="navds-date__caption">
+            <Select
+              label={translate("month")}
+              hideLabel
+              className="navds-date__caption__month"
+              onChange={(event) => handleMonthChange(calendarMonth.date, event)}
+              value={getMonth(calendarMonth.date)}
+            >
+              {months?.map(({ value, label, disabled }) => (
+                <option key={value} value={value} disabled={disabled}>
+                  {label}
+                </option>
+              ))}
+            </Select>
+
+            <Select
+              label={translate("year")}
+              hideLabel
+              className="navds-date__caption__year"
+              onChange={(event) => handleYearChange(calendarMonth.date, event)}
+              value={getYear(calendarMonth.date)}
+            >
+              {dropdownYears?.map(({ value, label, disabled }) => (
+                <option key={value} value={value} disabled={disabled}>
+                  {label}
+                </option>
+              ))}
+            </Select>
+          </div>
+        ) : (
+          <BodyShort
+            weight="semibold"
+            as="span"
+            aria-live="polite"
+            role="status"
+            className="navds-date__caption-label"
+          >
+            {format(calendarMonth.date, "LLLL y", { locale })}
+          </BodyShort>
+        )}
 
         <Button
           variant="tertiary-neutral"

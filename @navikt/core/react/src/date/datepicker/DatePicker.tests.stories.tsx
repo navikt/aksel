@@ -16,10 +16,6 @@ export default {
 
 type Story = StoryObj<typeof DatePicker>;
 
-/* function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-} */
-
 const currentDate = new Date();
 const previousMonth = addMonths(currentDate, -1);
 const nextMonth = addMonths(currentDate, 1);
@@ -64,10 +60,6 @@ export const LabelCaptionNavigation: Story = {
   },
 };
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 /**
  * Validate that the monthpicker shows the current year by default
  * and that the navigation selects work as expected
@@ -82,8 +74,6 @@ export const DropdownCaptionNavigation: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
-    await sleep(50);
 
     let dropdown = canvas.getByDisplayValue("2025");
 
