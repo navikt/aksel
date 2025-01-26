@@ -1,6 +1,6 @@
 import cl from "clsx";
 import { Locale, format } from "date-fns";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CalendarDay, Modifiers } from "react-day-picker";
 
 const DatePickerDayButton = ({
@@ -14,19 +14,27 @@ const DatePickerDayButton = ({
   modifiers: Modifiers;
   locale: Locale;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (modifiers.focused) {
+      ref.current?.focus();
+    }
+  }, [modifiers.focused]);
+
   if (modifiers.hidden) {
     return <></>;
   }
-  const dateTime = format(day.date, "cccc d", {
-    locale,
-  });
 
   return (
     <button
       {...rest}
+      ref={ref}
       aria-hidden={day.outside}
       aria-pressed={!!modifiers.selected}
-      aria-label={dateTime}
+      aria-label={format(day.date, "cccc d", {
+        locale,
+      })}
       data-pressed={modifiers.selected}
       data-today={modifiers.today || undefined}
       className={cl(rest.className, {

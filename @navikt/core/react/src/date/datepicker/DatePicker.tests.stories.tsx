@@ -249,6 +249,170 @@ export const DomStructure: Story = {
   },
 };
 
+const oldDate = new Date("Oct 23 2022");
+
+export const HookDefaultMonth: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      onDateChange: console.log,
+      defaultMonth: oldDate,
+    });
+
+    return (
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <DatePicker {...datepickerProps}>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByLabelText("Åpne datovelger");
+
+    expect(button).toBeInTheDocument();
+
+    await userEvent.click(button);
+    const dialog = canvas.getByRole("dialog");
+
+    expect(dialog).toBeVisible();
+    expect(dialog.ariaHidden).toBe("false");
+
+    const label = within(dialog).getByText(
+      format(oldDate, "LLLL y", { locale: nb }),
+      {},
+    );
+
+    expect(label).toBeInTheDocument();
+  },
+};
+
+export const HookDefaultMonthWhenSelected: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      onDateChange: console.log,
+      defaultSelected: oldDate,
+    });
+
+    return (
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <DatePicker {...datepickerProps}>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByLabelText("Åpne datovelger");
+
+    expect(button).toBeInTheDocument();
+
+    await userEvent.click(button);
+    const dialog = canvas.getByRole("dialog");
+
+    expect(dialog).toBeVisible();
+    expect(dialog.ariaHidden).toBe("false");
+
+    const label = within(dialog).getByText(
+      format(oldDate, "LLLL y", { locale: nb }),
+      {},
+    );
+
+    expect(label).toBeInTheDocument();
+
+    const selectedButton = within(dialog).getByRole("button", {
+      pressed: true,
+    });
+
+    expect(selectedButton.ariaLabel).toEqual("søndag 23");
+  },
+};
+
+const fallbackToFromDate = new Date("Aug 23 2019");
+
+export const HookFallbackToFromDate: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      fromDate: fallbackToFromDate,
+      onDateChange: console.log,
+      defaultMonth: new Date("Oct 23 2010"),
+    });
+
+    return (
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <DatePicker {...datepickerProps}>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByLabelText("Åpne datovelger");
+
+    expect(button).toBeInTheDocument();
+
+    await userEvent.click(button);
+    const dialog = canvas.getByRole("dialog");
+
+    expect(dialog).toBeVisible();
+    expect(dialog.ariaHidden).toBe("false");
+
+    const label = within(dialog).getByText(
+      format(fallbackToFromDate, "LLLL y", { locale: nb }),
+      {},
+    );
+
+    expect(label).toBeInTheDocument();
+  },
+};
+
+const fallbackToToDate = new Date("Aug 23 2028");
+
+export const HookFallbackToDate: Story = {
+  render: () => {
+    const { datepickerProps, inputProps } = useDatepicker({
+      toDate: fallbackToToDate,
+      onDateChange: console.log,
+      defaultMonth: new Date("Oct 23 2030"),
+    });
+
+    return (
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <DatePicker {...datepickerProps}>
+          <DatePicker.Input {...inputProps} label="Velg dato" />
+        </DatePicker>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const button = canvas.getByLabelText("Åpne datovelger");
+
+    expect(button).toBeInTheDocument();
+
+    await userEvent.click(button);
+    const dialog = canvas.getByRole("dialog");
+
+    expect(dialog).toBeVisible();
+    expect(dialog.ariaHidden).toBe("false");
+
+    const label = within(dialog).getByText(
+      format(fallbackToToDate, "LLLL y", { locale: nb }),
+      {},
+    );
+
+    expect(label).toBeInTheDocument();
+  },
+};
+
 // /**
 //  * Validate that the monthpicker shows the previous year when `year`-prop is set to the previous year
 //  */

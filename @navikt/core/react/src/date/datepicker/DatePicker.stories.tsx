@@ -3,7 +3,6 @@ import { isSameDay } from "date-fns";
 import React, { useId, useState } from "react";
 import { Button } from "../../button";
 import { HGrid } from "../../layout/grid";
-import { VStack } from "../../layout/stack";
 import Modal from "../../modal/Modal";
 import { BodyLong } from "../../typography";
 import DatePicker, { DatePickerProps } from "./DatePicker";
@@ -145,10 +144,6 @@ export const DisabledDays = () => (
     disableWeekends
     today={new Date("2006-07-01")}
   />
-);
-
-export const ShowWeekNumber = () => (
-  <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
 );
 
 export const UseDatepicker = () => {
@@ -301,22 +296,6 @@ export const UseRangedDatepickerValidation = () => {
   );
 };
 
-export const DefaultShownMonth = () => {
-  const { datepickerProps, inputProps } = useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
-    onDateChange: console.log,
-    defaultMonth: new Date("Oct 23 2022"),
-  });
-
-  return (
-    <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...datepickerProps}>
-        <DatePicker.Input {...inputProps} label="Velg dato" />
-      </DatePicker>
-    </div>
-  );
-};
-
 export const Size = () => {
   const { datepickerProps, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
@@ -402,7 +381,7 @@ export const StandaloneOptions = () => {
   );
 };
 
-export const WeekDayClick = () => {
+export const WeekNumber = () => {
   const [days, setDays] = useState<Date[]>([]);
 
   const handleWeekClick = (dates: Date[]) => {
@@ -417,7 +396,8 @@ export const WeekDayClick = () => {
   };
 
   return (
-    <VStack gap="8">
+    <HGrid columns={{ xs: 1, md: 2 }} gap="space-80 space-16">
+      <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
       <DatePicker.Standalone
         showWeekNumber
         mode="multiple"
@@ -436,7 +416,26 @@ export const WeekDayClick = () => {
         today={new Date("Nov 23 2022")}
         disableWeekends
       />
-    </VStack>
+      <DatePicker
+        dropdownCaption
+        showWeekNumber
+        today={new Date("2006-07-01")}
+        open
+      >
+        <DatePicker.Input label="Velg dato" />
+      </DatePicker>
+      <DatePicker
+        dropdownCaption
+        showWeekNumber
+        today={new Date("2006-07-01")}
+        open
+        mode="multiple"
+        onWeekNumberClick={(_, dates) => handleWeekClick(dates)}
+        selected={days}
+      >
+        <DatePicker.Input label="Velg dato" />
+      </DatePicker>
+    </HGrid>
   );
 };
 
@@ -492,10 +491,6 @@ export const Chromatic: Story = {
         <DisabledDays />
       </div>
       <div>
-        <h2>ShowWeekNumber</h2>
-        <ShowWeekNumber />
-      </div>
-      <div>
         <h2>UseDatepicker</h2>
         <UseDatepicker />
       </div>
@@ -548,10 +543,6 @@ export const Chromatic: Story = {
         <UseRangedDatepickerValidation />
       </div>
       <div>
-        <h2>DefaultShownMonth</h2>
-        <DefaultShownMonth />
-      </div>
-      <div>
         <h2>Size</h2>
         <Size />
       </div>
@@ -564,8 +555,8 @@ export const Chromatic: Story = {
         <StandaloneOptions />
       </div>
       <div>
-        <h2>WeekDayClick</h2>
-        <WeekDayClick />
+        <h2>WeekNumber</h2>
+        <WeekNumber />
       </div>
     </div>
   ),
