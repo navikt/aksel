@@ -15,6 +15,10 @@ import { DatePickerDayButton } from "./DatePicker.DayButton";
 import { DatePickerMonths } from "./DatePicker.Months";
 import { DatePickerWeekNumber } from "./DatePicker.WeekNumber";
 
+/**
+ * To support backwards compatibility with the old datepicker,
+ * we need to provide a partial implementation of the classnames
+ */
 const LegacyClassNames: Partial<ClassNames> = {
   root: "rdp",
   button_next: "button",

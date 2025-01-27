@@ -45,6 +45,7 @@ const DatePickerDayButton = ({
         "rdp-day_range_end": modifiers.range_end,
         "rdp-day_today": modifiers.today,
         "rdp-day_outside": modifiers.outside,
+        "rdp-day__weekend": modifiers.weekend,
       })}
     >
       {children}
