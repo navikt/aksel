@@ -37,7 +37,7 @@ type ReactDayPickerProps = DatePickerDefaultProps &
   ConditionalModeProps & {
     /**
      * If datepicker should be fixed to 6 weeks, regardless of actual weeks in month
-     * @default true
+     * @default false
      */
     fixedWeeks?: boolean;
     /**
