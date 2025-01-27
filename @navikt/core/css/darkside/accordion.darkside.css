@@ -157,7 +157,6 @@
     }
 
     &:last-child {
-      margin-block-end: var(--ax-space-24);
       border-bottom: 1px solid var(--ax-border-subtleA);
     }
   }
