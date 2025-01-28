@@ -1,6 +1,6 @@
 .navds-expansioncard {
   --__axc-expansioncard-border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
-  --__axc-expansioncard-padding-block: var(--ax-space-16);
+  --__axc-expansioncard-padding-block: var(--ax-space-20);
   --__axc-expansioncard-padding-inline: var(--ax-space-20);
 
   border-radius: var(--ax-border-radius-xlarge);
@@ -17,7 +17,7 @@
 /* ------------------------ ExpansionCard Small-size ------------------------ */
 .navds-expansioncard--small {
   --__axc-expansioncard-padding-inline: var(--ax-space-16);
-  --__axc-expansioncard-padding-block: var(--ax-space-12);
+  --__axc-expansioncard-padding-block: var(--ax-space-16);
 
   & > .navds-expansioncard__header .navds-expansioncard__title--small {
     margin-top: var(--ax-space-2);
@@ -45,7 +45,7 @@
   justify-content: space-between;
 
   &:hover {
-    background-color: var(--ax-bg-hover);
+    background-color: var(--ax-bg-hoverA);
   }
 
   &[data-open="true"] {
@@ -55,7 +55,7 @@
     /* Divider between header and content */
     &::after {
       content: "";
-      background-color: var(--ax-border-subtle);
+      background-color: var(--ax-border-subtleA);
       bottom: 0;
       left: var(--__axc-expansioncard-padding-inline);
       height: 1px;

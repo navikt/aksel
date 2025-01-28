@@ -5,7 +5,7 @@
   margin: 0;
   text-decoration: none;
   border: none;
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   padding: var(--__axc-copybutton-padding);
   display: grid;
   place-content: center;

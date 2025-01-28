@@ -10,7 +10,7 @@
   flex-direction: column;
   width: 100%;
   position: relative;
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
 }
 
 .navds-form-field:not(:is(.navds-combobox--disabled, .navds-combobox--readonly)) {
@@ -81,7 +81,7 @@
 
 .navds-combobox__wrapper-inner {
   border: 1px solid var(--ax-border-default);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
 
   &:has(.navds-combobox__input:focus-visible) {
     outline: 3px solid var(--ax-border-focus);
@@ -215,7 +215,6 @@
 }
 
 .navds-combobox__button-toggle-list {
-  border-radius: var(--ax-border-radius-medium);
   color: var(--ax-text-default);
   display: flex;
   justify-content: center;
@@ -273,7 +272,7 @@
   justify-content: space-between;
   padding-block: var(--__axc-combobox-list-item-padding-block);
   padding-inline: var(--__axc-combobox-list-item-padding-inline);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   border: 0;
   margin-inline: var(--ax-space-8);
   margin-block: var(--ax-space-2);

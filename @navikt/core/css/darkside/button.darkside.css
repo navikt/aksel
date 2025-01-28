@@ -5,7 +5,7 @@
   --__axc-button-border-width: 2px;
 
   padding: var(--ax-space-12) var(--ax-space-20);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   display: inline-flex;
   cursor: pointer;
   text-decoration: none;
@@ -161,7 +161,7 @@
 * .navds-button--secondary-neutral *
  **************************/
 .navds-button--secondary-neutral {
-  --__axc-button-border-color: var(--ax-border-strong);
+  --__axc-button-border-color: var(--ax-border-default);
 
   background-color: transparent;
   color: var(--ax-text-default);
@@ -180,7 +180,7 @@
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    --__axc-button-border-color: var(--ax-border-strong);
+    --__axc-button-border-color: var(--ax-border-default);
 
     color: var(--ax-text-default);
     background-color: transparent;

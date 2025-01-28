@@ -136,7 +136,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
     },
     border: {
       default: {
-        value: "{ax.neutral.500.value}",
+        value: "{ax.neutral.600.value}",
         type: "color",
         group: "border",
       },

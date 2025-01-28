@@ -50,7 +50,7 @@
 
 .navds-form-progress__stepper {
   border: 1px solid var(--ax-border-subtle);
-  border-radius: var(--ax-border-radius-large);
+  border-radius: var(--ax-border-radius-xlarge);
   padding: var(--ax-space-16) var(--ax-space-20);
   margin-top: var(--ax-space-4);
   background: var(--ax-bg-raised);
