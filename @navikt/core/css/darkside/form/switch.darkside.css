@@ -70,7 +70,7 @@
 
 .navds-switch__input:hover ~ .navds-switch__label-wrapper,
 .navds-switch__label-wrapper:hover {
-  color: var(--ax-text-accent-strong);
+  color: var(--ax-text-accent);
 }
 
 .navds-switch__input:disabled:hover ~ .navds-switch__label-wrapper {
@@ -139,7 +139,7 @@
   .navds-switch__input:checked ~ .navds-switch__track > & {
     background-color: var(--ax-bg-raised);
     transform: translateX(1.25rem);
-    color: var(--ax-text-accent-strong);
+    color: var(--ax-text-accent);
     width: 1.25rem;
     height: 1.25rem;
     left: 0;

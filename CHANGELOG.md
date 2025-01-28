@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.10
+
+### @navikt/ds-css
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+* Button: Using `<Loader />` within `icon`-prop now supported. ([#3515](https://github.com/navikt/aksel/pull/3515))
+
+* Combobox: Always render `maxSelected` message when `isMultiSelect` is set. ([#3506](https://github.com/navikt/aksel/pull/3506))
+
+### @navikt/ds-react
+
+- Table: New prop `contentGutter` added to `ExpandableRow`-component. This allows user more control for content layout inside expandable element. ([#3507](https://github.com/navikt/aksel/pull/3507))
+
+* Combobox: Always render `maxSelected` message when `isMultiSelect` is set. ([#3506](https://github.com/navikt/aksel/pull/3506))
+
 ## 7.9
 
 ### @navikt/ds-css
