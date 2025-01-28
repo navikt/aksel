@@ -126,8 +126,8 @@
 }
 
 .navds-table__sort-button:focus-visible {
-  outline: 2px solid var(--ax-border-focus);
-  outline-offset: -4px;
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: -5px;
 }
 
 .navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
@@ -211,7 +211,7 @@
 }
 
 .navds-table__toggle-expand-button:focus-visible {
-  outline: 2px solid var(--ax-border-focus);
+  outline: 3px solid var(--ax-border-focus);
 }
 
 .navds-table__expanded-row-cell {
