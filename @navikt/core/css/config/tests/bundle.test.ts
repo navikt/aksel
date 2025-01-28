@@ -43,8 +43,9 @@ describe("Check that old and new (darkside) bundle matches", () => {
 
     /**
      * Check that darkside has the same amount of files as old bundle
-     * (minus the new files * 2 since .min.css is also included)
      */
-    expect(darksideFiles.length - newFiles.length * 2).toBe(oldFiles.length);
+    expect(
+      darksideFiles.length - newFiles.length * 2 + deprecatedFiles.length * 2,
+    ).toBe(oldFiles.length);
   });
 });
