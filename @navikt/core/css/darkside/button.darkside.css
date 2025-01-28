@@ -5,7 +5,7 @@
   --__axc-button-border-width: 2px;
 
   padding: var(--ax-space-12) var(--ax-space-20);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   display: inline-flex;
   cursor: pointer;
   text-decoration: none;
