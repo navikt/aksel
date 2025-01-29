@@ -9,6 +9,20 @@
   width: 100%;
 }
 
+.navds-list > ul {
+  margin-top: 0;
+}
+
+.activity-card:hover {
+  background-color: var(--ax-bg-accent-hover);
+  border-color: var(--ax-border-accent);
+}
+
+.activity-card:focus-within {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 3px;
+}
+
 .activity-card__link:before {
   content: "";
   position: absolute;
@@ -18,11 +32,6 @@
   bottom: 0;
 }
 
-.navds-list > ul {
-  margin-top: 0;
-}
-
-.activity-card:hover {
-  background-color: var(--ax-bg-accent-hover);
-  border-color: var(--ax-border-accent-subtleA);
+.activity-card__link:focus {
+  outline: none;
 }
