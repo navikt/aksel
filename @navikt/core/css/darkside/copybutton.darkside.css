@@ -5,7 +5,7 @@
   margin: 0;
   text-decoration: none;
   border: none;
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   padding: var(--__axc-copybutton-padding);
   display: grid;
   place-content: center;
@@ -25,8 +25,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 
   &:disabled {

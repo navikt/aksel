@@ -6,6 +6,7 @@ import { describe, expect, test } from "vitest";
  * Darkside config might have some new files added. We can skip these when checking for equality.
  */
 const newFiles = ["theme"];
+const deprecatedFiles = ["linkpanel"];
 
 describe("Check that old and new (darkside) bundle matches", () => {
   test("Darkside includes the same files as old bundle", () => {
@@ -27,6 +28,9 @@ describe("Check that old and new (darkside) bundle matches", () => {
 
     // Compare file names
     oldFiles.forEach((file) => {
+      if (deprecatedFiles.find((oldFile) => file.includes(oldFile))) {
+        return;
+      }
       expect(darksideFiles).toContain(file);
     });
 
@@ -39,8 +43,9 @@ describe("Check that old and new (darkside) bundle matches", () => {
 
     /**
      * Check that darkside has the same amount of files as old bundle
-     * (minus the new files * 2 since .min.css is also included)
      */
-    expect(darksideFiles.length - newFiles.length * 2).toBe(oldFiles.length);
+    expect(
+      darksideFiles.length - newFiles.length * 2 + deprecatedFiles.length * 2,
+    ).toBe(oldFiles.length);
   });
 });

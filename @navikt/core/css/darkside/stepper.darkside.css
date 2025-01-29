@@ -66,10 +66,11 @@
   padding: var(--__axc-stepper-border-width);
   margin: calc(var(--__axc-stepper-border-width) * -1) calc(var(--__axc-stepper-border-width) * -1)
     var(--__axc-stepper-circle-size);
+  width: 100%;
 
   &:focus-visible {
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 4px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
 
     /* Isolate item to make outline show above line--2 */
     isolation: isolate;
