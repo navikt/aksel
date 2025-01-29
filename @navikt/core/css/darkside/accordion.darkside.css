@@ -121,10 +121,13 @@
   }
 }
 
+.navds-accordion--indent > .navds-accordion__item > .navds-accordion__content {
+  box-shadow: -2px 0 0 0 var(--ax-border-subtleA);
+}
+
 .navds-accordion__item {
   & > .navds-accordion__content {
     display: grid;
-    box-shadow: -2px 0 0 0 var(--ax-border-subtleA);
     grid-template-rows: 0fr;
     visibility: hidden;
     overflow: hidden;
