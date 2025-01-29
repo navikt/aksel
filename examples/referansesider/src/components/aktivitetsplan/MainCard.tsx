@@ -6,7 +6,7 @@ const MainCard = ({ children }: { children: ReactNode }) => (
     background="raised"
     borderColor="subtleA"
     borderWidth="1"
-    borderRadius="medium"
+    borderRadius="xlarge"
     padding="space-16"
     marginBlock="space-32 space-4"
   >
