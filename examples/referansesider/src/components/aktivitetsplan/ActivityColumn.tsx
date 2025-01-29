@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
-import { Box, Heading, VStack } from "@navikt/ds-react";
+import { Box, HStack, Heading, HelpText, VStack } from "@navikt/ds-react";
 
 const ActivityColumn = ({
   children,
+  helpText,
   title,
 }: {
   children: ReactNode;
+  helpText?: string;
   title: string;
 }) => {
   return (
@@ -17,9 +19,12 @@ const ActivityColumn = ({
       padding="space-12"
     >
       <VStack gap="space-12">
-        <Heading as="h2" size="small">
-          {title}
-        </Heading>
+        <HStack align="center" justify="space-between">
+          <Heading as="h2" size="small">
+            {title}
+          </Heading>
+          {helpText && <HelpText placement="bottom-end">{helpText}</HelpText>}
+        </HStack>
         {children}
       </VStack>
     </Box.New>

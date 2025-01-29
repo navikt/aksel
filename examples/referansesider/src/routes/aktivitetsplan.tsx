@@ -50,30 +50,36 @@ let BlueDotHeader;
 }
 
 type Board = {
-  column: string;
   cards: Activity[];
+  column: string;
+  helpText: string;
 }[];
 
 const board: Board = [
   {
     column: "Forslag",
     cards: [],
+    helpText: `Her kan du legge til en aktivitet du tror du kommer til å gjøre. Dra aktiviteten til "Planlegger" når du bestemmer deg for å gjøre aktiviteten.`,
   },
   {
     column: "Planlagt",
     cards: [activities[0], activities[1], activities[2]],
+    helpText: `Her kan du legge aktiviteter som du har bestemt deg for å gjøre, men ikke har begynt på enda.`,
   },
   {
     column: "Gjennomfører",
     cards: [activities[3], activities[4], activities[5]],
+    helpText: `Aktiviteter som du holder på med, kan du sette til "Gjennomfører".`,
   },
   {
     column: "Fullført",
     cards: [activities[6]],
+    helpText: `Dra aktiviteter hit som du er ferdig med. Flytter du en aktivitet til "Fullført", blir den låst og kan ikke redigeres. Hvis du angrer, kan du legge til en ny aktivitet.`,
   },
   {
     column: "Avbrutt",
     cards: [],
+    helpText: `Dra aktiviteter hit som du avslutter eller ikke begynner på. Flytter du en aktivitet til "Avbrutt", blir den låst og kan ikke redigeres. Hvis du angrer, kan du legge til en ny aktivitet.`,
   },
 ];
 
@@ -126,8 +132,8 @@ const AktivitetsplanPage = () => {
       </Page>
       <Page options={{ width: "xlarge" }}>
         <HGrid as="div" gap="space-16" columns={{ md: "repeat(5, 1fr)" }}>
-          {board.map(({ column, cards }) => (
-            <ActivityColumn key={column} title={column}>
+          {board.map(({ column, cards, helpText }) => (
+            <ActivityColumn key={column} title={column} helpText={helpText}>
               {cards.map(({ category, hasChange, title, date, tag, id }) => (
                 <ActivityCard key={`${id}`}>
                   <div>
