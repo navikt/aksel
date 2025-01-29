@@ -35,7 +35,6 @@
 
     &:hover {
       background-color: var(--ax-bg-hoverA);
-      color: var(--ax-text-accent-strong);
     }
   }
 }

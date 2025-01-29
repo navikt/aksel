@@ -47,7 +47,7 @@
 .navds-table__data-cell {
   display: table-cell;
   padding: var(--ax-space-12) var(--ax-space-8);
-  border-bottom: 1px solid var(--ax-border-default);
+  border-bottom: 1px solid var(--ax-border-subtleA);
   text-align: left;
 }
 
@@ -64,11 +64,6 @@
 .navds-table__header-cell--align-center,
 .navds-table__data-cell--align-center {
   text-align: center;
-}
-
-:where(.navds-table__body .navds-table__row--shade-on-hover:hover) .navds-table__header-cell,
-:where(.navds-table__body .navds-table__row--shade-on-hover:hover) .navds-table__data-cell {
-  border-color: var(--ax-border-strong);
 }
 
 :where(.navds-table__expandable-row--open:hover) .navds-table__data-cell {
@@ -133,7 +128,6 @@
 .navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
 .navds-table__header-cell[aria-sort="descending"] .navds-table__sort-button {
   background-color: var(--ax-bg-accent-moderate);
-  color: var(--ax-text-accent-strong);
 }
 
 .navds-table__header-cell--align-right .navds-table__sort-button {
@@ -225,7 +219,7 @@
 /* -------------------------- Table ExpandableRow -------------------------- */
 .navds-table__expanded-row-collapse:not([style*="height: 0px;"]),
 .navds-table__expanded-row-collapse[style*="transition:"] {
-  border-bottom: 1px solid var(--ax-border-default);
+  border-bottom: 1px solid var(--ax-border-subtleA);
 }
 
 .navds-table__expanded-row-content {
