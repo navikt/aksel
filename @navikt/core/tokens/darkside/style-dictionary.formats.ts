@@ -95,6 +95,11 @@ function createTokenValue(token: TransformedToken): string {
   if ((token.type as TokenTypes) === "global-breakpoints") {
     return token.value ?? token.$value;
   }
+
+  if ((token.type as TokenTypes) === "global-color") {
+    return `var(--${token.path.join("-")})`;
+  }
+
   return `var(--${kebabName})`;
 }
 
