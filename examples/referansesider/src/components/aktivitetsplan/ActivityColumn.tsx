@@ -9,8 +9,14 @@ const ActivityColumn = ({
   title: string;
 }) => {
   return (
-    <Box.New background="sunken" borderRadius="medium" padding="space-8">
-      <VStack gap="space-8">
+    <Box.New
+      background="sunken"
+      borderColor="subtleA"
+      borderWidth="1"
+      borderRadius="xlarge"
+      padding="space-12"
+    >
+      <VStack gap="space-12">
         <Heading as="h2" size="small">
           {title}
         </Heading>

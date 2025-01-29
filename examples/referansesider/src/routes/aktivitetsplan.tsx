@@ -1,18 +1,22 @@
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import clsx from "clsx";
 import styled from "styled-components";
+import { StarIcon } from "@navikt/aksel-icons";
 import {
+  BodyLong,
   BodyShort,
+  Button,
   Detail,
   HGrid,
+  HStack,
   Heading,
+  List,
   Select,
   Tag,
   VStack,
 } from "@navikt/ds-react";
+import { ListItem } from "@navikt/ds-react/List";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
-import { Button } from "../components/Button";
 import { Dekoratoren } from "../components/Dekoratoren";
 import { Page } from "../components/Page";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
@@ -29,23 +33,17 @@ let BlueDotHeader;
   BlueDotHeader = ({
     children,
     dot,
-    level = 2,
   }: {
     children: string;
     level?: 2 | 3;
     dot?: boolean;
   }) => {
-    const Header: keyof JSX.IntrinsicElements = `h${level}`;
     return (
       <div className="flex items-center">
         {dot && <ScBlueDot className="w-[10px] h-[10px] mr-1 rounded-full" />}
-        <Header
-          className={clsx("font-semibold", {
-            "text-2xl": level === 2,
-          })}
-        >
+        <BodyShort as="span" size="small" weight="semibold">
           {children}
-        </Header>
+        </BodyShort>
       </div>
     );
   };
@@ -87,20 +85,35 @@ const AktivitetsplanPage = () => {
           Aktivitetsplan
         </Heading>
         <MainCard>
-          <SykepengerIcon />
-          <VStack gap="space-16" marginBlock="0 space-4">
-            <BlueDotHeader dot level={2}>
-              Mitt mål
-            </BlueDotHeader>
-            <BodyShort>Jeg vil bli sjørøver</BodyShort>
-            <Button variant="secondary" size="small">
-              Endre målet
-            </Button>
-          </VStack>
+          <HStack align="center" gap="space-32">
+            <div style={{ height: "96px", width: "96px" }}>
+              <SykepengerIcon />
+            </div>
+            <VStack gap="space-16" marginBlock="0 space-4">
+              <Heading as="h2" size="medium">
+                Mitt mål
+              </Heading>
+              <div>
+                <BodyLong>
+                  Skriv noen ord om hva som er målet ditt slik at vi kan veilede
+                  deg bedre.
+                </BodyLong>
+                <List>
+                  <ListItem>
+                    Hva er målet på kort sikt? Hva er målet på lengre sikt?
+                  </ListItem>
+                  <ListItem>Hva slags arbeidsoppgaver ønsker du deg?</ListItem>
+                </List>
+                <Button variant="secondary" size="small">
+                  Sett et mål
+                </Button>
+              </div>
+            </VStack>
+          </HStack>
         </MainCard>
         <div className="flex justify-between mt-6">
           <div className="flex gap-4">
-            <Button>Legg til aktivitet</Button>
+            <Button icon={<StarIcon />}>Legg til aktivitet</Button>
             <Button variant="secondary">Filtrer</Button>
           </div>
           <Select label="Velg periode" hideLabel>
@@ -112,7 +125,7 @@ const AktivitetsplanPage = () => {
         </div>
       </Page>
       <Page options={{ width: "xlarge" }}>
-        <HGrid as="div" gap="space-8" columns={{ md: "repeat(5, 1fr)" }}>
+        <HGrid as="div" gap="space-16" columns={{ md: "repeat(5, 1fr)" }}>
           {board.map(({ column, cards }) => (
             <ActivityColumn key={column} title={column}>
               {cards.map(({ category, hasChange, title, date, tag, id }) => (

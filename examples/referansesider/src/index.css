@@ -17,3 +17,12 @@
   right: 0;
   bottom: 0;
 }
+
+.navds-list > ul {
+  margin-top: 0;
+}
+
+.activity-card:hover {
+  background-color: var(--ax-bg-accent-hover);
+  border-color: var(--ax-border-accent-subtleA);
+}

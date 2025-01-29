@@ -4,10 +4,12 @@ import { Box, VStack } from "@navikt/ds-react";
 const ActivityCard = ({ children }: { children: ReactNode }) => {
   return (
     <Box.New
-      background="default"
-      borderRadius="large"
+      className="activity-card"
+      background="raised"
+      borderColor="subtleA"
+      borderRadius="xlarge"
       borderWidth="1"
-      padding="space-12"
+      padding="space-16 space-12 space-12"
       style={{ position: "relative" }}
     >
       <VStack gap="space-8" align="start">

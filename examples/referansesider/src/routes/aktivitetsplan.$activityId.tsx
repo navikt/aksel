@@ -40,6 +40,7 @@ function ActivityModal() {
       header={{ heading: title }}
       onClose={() => navigate({ to: "/aktivitetsplan/" })}
       closeOnBackdropClick={true}
+      placement="top"
     >
       <Modal.Body>
         <VStack gap="6">
