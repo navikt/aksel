@@ -1,4 +1,5 @@
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import { useContext } from "react";
 import styled from "styled-components";
 import { StarIcon } from "@navikt/aksel-icons";
 import {
@@ -23,6 +24,7 @@ import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
 import { MainCard } from "../components/aktivitetsplan/MainCard";
 import { Activity, activities } from "../data/activities";
+import { ThemeProviderContext } from "../theme/ThemeContext";
 
 let BlueDotHeader;
 {
@@ -84,6 +86,7 @@ const board: Board = [
 ];
 
 const AktivitetsplanPage = () => {
+  const { theme } = useContext(ThemeProviderContext);
   return (
     <Dekoratoren>
       <Page options={{ width: "medium", footer: "none" }}>
@@ -93,7 +96,7 @@ const AktivitetsplanPage = () => {
         <MainCard>
           <HStack align="center" gap="space-32">
             <div style={{ height: "96px", width: "96px" }}>
-              <SykepengerIcon />
+              <SykepengerIcon darkmode={theme === "dark"} />
             </div>
             <VStack gap="space-16" marginBlock="0 space-4">
               <Heading as="h2" size="medium">

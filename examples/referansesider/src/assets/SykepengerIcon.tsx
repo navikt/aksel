@@ -9,11 +9,7 @@ export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
           width="96"
           height="96"
           viewBox="0 0 96 96"
-          fill={
-            darkmode
-              ? "var(--ax-brand-magenta-900)"
-              : "var(--ax-brand-magenta-400)"
-          }
+          fill={darkmode ? tokens.Neutral400A : "var(--ax-brand-1-400A"}
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect x="16" y="36" width="64" height="24"></rect>
@@ -34,11 +30,7 @@ export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
           viewBox="0 0 96 96"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          stroke={
-            darkmode
-              ? "var(--ax-brand-magenta-500)"
-              : tokens.TextBrandMagentaStrong
-          }
+          stroke={darkmode ? tokens.Brand1500 : tokens.TextBrand1}
         >
           <circle
             cx="50.3637"
