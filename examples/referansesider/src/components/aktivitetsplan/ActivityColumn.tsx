@@ -20,7 +20,7 @@ const ActivityColumn = ({
     >
       <VStack gap="space-12">
         <HStack align="center" justify="space-between">
-          <Heading as="h2" size="small">
+          <Heading as="h2" size="small" textColor="subtle">
             {title}
           </Heading>
           {helpText && <HelpText placement="bottom-end">{helpText}</HelpText>}

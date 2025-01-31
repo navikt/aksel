@@ -140,7 +140,9 @@ const AktivitetsplanPage = () => {
               {cards.map(({ category, hasChange, title, date, tag, id }) => (
                 <ActivityCard key={`${id}`}>
                   <div>
-                    <Detail uppercase>{category}</Detail>
+                    <Detail textColor="subtle" uppercase>
+                      {category}
+                    </Detail>
                     <Link
                       className="activity-card__link"
                       to={`/aktivitetsplan/${id}`}
