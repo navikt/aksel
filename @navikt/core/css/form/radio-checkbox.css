@@ -87,6 +87,11 @@
     0 0 0 4px var(--a-border-focus);
 }
 
+/* Temp-fix to remove new darkside indeterminate node */
+.navds-checkbox__icon-indeterminate {
+  display: none;
+}
+
 .navds-checkbox__input:indeterminate + .navds-checkbox__label::after {
   content: "";
   position: absolute;

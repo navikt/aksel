@@ -45,7 +45,6 @@
 @import "./tooltip.darkside.css" layer(aksel.components);
 @import "./toggle-group.darkside.css" layer(aksel.components);
 @import "./panel.darkside.css" layer(aksel.components);
-@import "./link-panel.darkside.css" layer(aksel.components);
 @import "./read-more.darkside.css" layer(aksel.components);
 @import "./progress-bar.darkside.css" layer(aksel.components);
 @import "./skeleton.darkside.css" layer(aksel.components);

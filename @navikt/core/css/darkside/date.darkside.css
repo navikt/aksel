@@ -35,21 +35,19 @@
     width: 2.5rem;
     height: 2.5rem;
     text-align: center;
-    border-radius: var(--ax-border-radius-medium);
+    border-radius: var(--ax-border-radius-large);
   }
 
   .rdp-day_range_start {
-    border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-medium) var(--ax-border-radius-medium)
-      var(--ax-border-radius-xlarge);
+    border-radius: 100% var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 100%;
   }
 
   .rdp-day_range_end:not(.rdp-day_range_start) {
-    border-radius: var(--ax-border-radius-medium) var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge)
-      var(--ax-border-radius-medium);
+    border-radius: var(--ax-border-radius-large) 100% 100% var(--ax-border-radius-large);
   }
 
   .rdp-day_range_start.rdp-day_range_end {
-    border-radius: var(--ax-border-radius-xlarge);
+    border-radius: var(--ax-border-radius-large);
   }
 
   .navds-date__field {
@@ -142,7 +140,7 @@
   width: 3rem;
   height: 3rem;
   text-transform: capitalize;
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   cursor: pointer;
 }
 
@@ -159,8 +157,8 @@
   .rdp-cell > button.rdp-day,
   button.navds-date__month-button {
     &:focus-visible {
-      outline: 2px solid var(--ax-border-focus);
-      outline-offset: 1px;
+      outline: 3px solid var(--ax-border-focus);
+      outline-offset: 3px;
     }
 
     &:active:not(:disabled) {
@@ -192,7 +190,7 @@
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: calc(var(--ax-border-radius-medium) - 1px);
+  border-radius: calc(var(--ax-border-radius-large) - 1px);
   padding: var(--ax-space-12);
   align-items: center;
   justify-content: center;
