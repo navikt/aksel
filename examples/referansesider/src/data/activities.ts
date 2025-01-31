@@ -62,7 +62,7 @@ const activities: Activity[] = [
       start: "13.09.2022",
       end: "14.09.2022",
     },
-    description: "",
+    description: `CaCO3 løses i vann ved oppkok og avkjøles til 25˚C. Løsningen appliseres til tøystykker og legges rundt bruddstedet. Beinet holdes i ro til gipsen har stivnet. Dette burde ta en dag, men det er lurt å ta forbehold om at det kan gå flere dager. CaCO3 løses i vann ved oppkok og avkjøles til 25˚C.`,
     id: "2",
     tag: { variant: "info-filled", text: "Avtalt med Nav" },
   },
