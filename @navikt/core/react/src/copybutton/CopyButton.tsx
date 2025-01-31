@@ -89,7 +89,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       title,
       iconPosition = "left",
       onClick,
-      size,
+      size = "medium",
       ...rest
     },
     ref,
