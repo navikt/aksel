@@ -8,7 +8,6 @@ const MainCard = ({ children }: { children: ReactNode }) => (
     borderWidth="1"
     borderRadius="xlarge"
     padding="space-16"
-    marginBlock="space-32 space-4"
   >
     <HStack gap="space-24">{children}</HStack>
   </Box.New>
