@@ -2,7 +2,7 @@
   appearance: none;
   padding: var(--ax-space-8);
   background: var(--ax-bg-input);
-  border-radius: var(--ax-border-radius-medium);
+  border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-default);
   min-height: 3rem;
   width: 100%;
@@ -14,8 +14,8 @@
 
   &:focus-visible {
     border-color: var(--ax-border-accent-strong);
-    outline: 2px solid var(--ax-border-focus);
-    outline-offset: 2px;
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
   }
 
   &:disabled {

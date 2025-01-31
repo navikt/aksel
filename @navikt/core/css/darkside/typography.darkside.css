@@ -8,6 +8,7 @@
   font-size: var(--ax-font-size-heading-2xlarge);
   letter-spacing: -0.01em;
   line-height: var(--ax-font-line-height-heading-2xlarge);
+  font-weight: 650;
 }
 
 .navds-heading--xlarge.navds-typo--spacing {
@@ -18,6 +19,7 @@
   font-size: var(--ax-font-size-heading-xlarge);
   letter-spacing: -0.008em;
   line-height: var(--ax-font-line-height-heading-xlarge);
+  font-weight: 650;
 }
 
 .navds-heading--large.navds-typo--spacing {
@@ -51,6 +53,7 @@
   font-size: var(--ax-font-size-heading-medium);
   letter-spacing: -0.002em;
   line-height: var(--ax-font-line-height-heading-medium);
+  font-weight: 650;
 }
 
 .navds-heading--medium.navds-typo--spacing {

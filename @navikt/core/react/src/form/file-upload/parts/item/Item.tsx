@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { MouseEvent, forwardRef } from "react";
-import { ExclamationmarkTriangleIcon } from "@navikt/aksel-icons";
-import { BodyShort } from "../../../../typography";
+import { BodyShort, ErrorMessage } from "../../../../typography";
 import { OverridableComponent } from "../../../../util";
 import { useI18n } from "../../../../util/i18n/i18n.hooks";
 import { ComponentTranslation } from "../../../../util/i18n/i18n.types";
@@ -125,13 +124,9 @@ export const Item: OverridableComponent<FileUploadItemProps, HTMLDivElement> =
                 aria-live="polite"
               >
                 {showError && (
-                  <BodyShort
-                    size="small"
-                    className="navds-file-item__error-content"
-                  >
-                    <ExclamationmarkTriangleIcon aria-hidden />
+                  <ErrorMessage size="small" showIcon>
                     {error}
-                  </BodyShort>
+                  </ErrorMessage>
                 )}
               </div>
             </div>
