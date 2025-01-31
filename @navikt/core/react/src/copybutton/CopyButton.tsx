@@ -150,28 +150,3 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 );
 
 export default CopyButton;
-/* <button
-
-        className={cl(
-          "navds-copybutton",
-          className,
-          `navds-copybutton--${size}`,
-          `navds-copybutton--${variant}`,
-          {
-            "navds-copybutton--icon-only": !text,
-            "navds-copybutton--icon-right": iconPosition === "right",
-            "navds-copybutton--active": active,
-          },
-        )}
-        onClick={composeEventHandlers(onClick, handleClick)}
-      >
-        <span className="navds-copybutton__content">
-          {iconPosition === "left" && copyIcon}
-          {text && (
-            <Label as="span" size={size === "medium" ? "medium" : "small"}>
-              {active ? activeString : text}
-            </Label>
-          )}
-          {iconPosition === "right" && copyIcon}
-        </span>
-      </button> */
