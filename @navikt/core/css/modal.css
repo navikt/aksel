@@ -18,6 +18,7 @@
   /* In case Modal is opened with `show()`, in eg. Vergic screensharing */
   inset: 0;
   z-index: 9999;
+  margin: auto;
 }
 
 .navds-modal[open] {

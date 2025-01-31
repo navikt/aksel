@@ -15,8 +15,6 @@ const variants: TagProps["variant"][] = [
   "alt1",
   "alt2",
   "alt3",
-  "meta-1",
-  "meta-2",
   "warning-filled",
   "error-filled",
   "info-filled",
@@ -25,8 +23,6 @@ const variants: TagProps["variant"][] = [
   "alt1-filled",
   "alt2-filled",
   "alt3-filled",
-  "meta-1-filled",
-  "meta-2-filled",
   "warning-moderate",
   "error-moderate",
   "info-moderate",
@@ -35,8 +31,6 @@ const variants: TagProps["variant"][] = [
   "alt1-moderate",
   "alt2-moderate",
   "alt3-moderate",
-  "meta-1-moderate",
-  "meta-2-moderate",
 ];
 
 export default {
