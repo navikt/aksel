@@ -19,7 +19,6 @@ import {
 import { ListItem } from "@navikt/ds-react/List";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 import SykepengerIcon from "../assets/SykepengerIcon";
-import { Dekoratoren } from "../components/Dekoratoren";
 import { ActivityCard } from "../components/aktivitetsplan/ActivityCard";
 import { ActivityColumn } from "../components/aktivitetsplan/ActivityColumn";
 import { MainCard } from "../components/aktivitetsplan/MainCard";
@@ -88,100 +87,95 @@ const board: Board = [
 const AktivitetsplanPage = () => {
   const { theme } = useContext(ThemeProviderContext);
   return (
-    <Dekoratoren>
-      <Page>
-        <VStack gap="space-32">
-          <Page.Block width="md">
-            <VStack gap="space-32">
-              <Heading as="h1" size="xlarge">
-                Aktivitetsplan
-              </Heading>
-              <MainCard>
-                <HStack align="center" gap="space-32">
-                  <div style={{ height: "96px", width: "96px" }}>
-                    <SykepengerIcon darkmode={theme === "dark"} />
+    <Page>
+      <VStack gap="space-32">
+        <Page.Block width="md">
+          <VStack gap="space-32">
+            <Heading as="h1" size="xlarge">
+              Aktivitetsplan
+            </Heading>
+            <MainCard>
+              <HStack align="center" gap="space-32">
+                <div style={{ height: "96px", width: "96px" }}>
+                  <SykepengerIcon darkmode={theme === "dark"} />
+                </div>
+                <VStack gap="space-16" marginBlock="0 space-4">
+                  <Heading as="h2" size="medium">
+                    Mitt mål
+                  </Heading>
+                  <div>
+                    <BodyLong>
+                      Skriv noen ord om hva som er målet ditt slik at vi kan
+                      veilede deg bedre.
+                    </BodyLong>
+                    <List>
+                      <ListItem>
+                        Hva er målet på kort sikt? Hva er målet på lengre sikt?
+                      </ListItem>
+                      <ListItem>
+                        Hva slags arbeidsoppgaver ønsker du deg?
+                      </ListItem>
+                    </List>
+                    <Button variant="secondary" size="small">
+                      Sett et mål
+                    </Button>
                   </div>
-                  <VStack gap="space-16" marginBlock="0 space-4">
-                    <Heading as="h2" size="medium">
-                      Mitt mål
-                    </Heading>
-                    <div>
-                      <BodyLong>
-                        Skriv noen ord om hva som er målet ditt slik at vi kan
-                        veilede deg bedre.
-                      </BodyLong>
-                      <List>
-                        <ListItem>
-                          Hva er målet på kort sikt? Hva er målet på lengre
-                          sikt?
-                        </ListItem>
-                        <ListItem>
-                          Hva slags arbeidsoppgaver ønsker du deg?
-                        </ListItem>
-                      </List>
-                      <Button variant="secondary" size="small">
-                        Sett et mål
-                      </Button>
-                    </div>
-                  </VStack>
-                </HStack>
-              </MainCard>
-              <HStack align="center" justify="space-between">
-                <HStack gap="space-16">
-                  <Button icon={<StarIcon />}>Legg til aktivitet</Button>
-                  <Button variant="secondary">Filtrer</Button>
-                </HStack>
-                <Select label="Velg periode" hideLabel>
-                  <option value="dog">Nåværende periode</option>
-                  <option value="dog2">Cat</option>
-                  <option value="dog3">Border Collie</option>
-                  <option value="dog4">Maine Coon</option>
-                </Select>
+                </VStack>
               </HStack>
-            </VStack>
-          </Page.Block>
-          <Page.Block width="2xl">
-            <HGrid as="div" gap="space-16" columns={{ md: "repeat(5, 1fr)" }}>
-              {board.map(({ column, cards, helpText }) => (
-                <ActivityColumn key={column} title={column} helpText={helpText}>
-                  {cards.map(
-                    ({ category, hasChange, title, date, tag, id }) => (
-                      <ActivityCard key={`${id}`}>
-                        <div>
-                          <Detail textColor="subtle" uppercase>
-                            {category}
-                          </Detail>
-                          <Link
-                            className="activity-card__link"
-                            to={`/aktivitetsplan/${id}`}
-                          >
-                            <BlueDotHeader dot={hasChange} level={3}>
-                              {title}
-                            </BlueDotHeader>
-                          </Link>
-                        </div>
-                        {date && (
-                          <BodyShort>
-                            {date.start}
-                            {date.end && ` - ${date.end}`}
-                          </BodyShort>
-                        )}
-                        {tag && (
-                          <Tag variant={tag.variant} size="small">
-                            {tag.text}
-                          </Tag>
-                        )}
-                      </ActivityCard>
-                    ),
-                  )}
-                </ActivityColumn>
-              ))}
-            </HGrid>
-          </Page.Block>
-          <Outlet />
-        </VStack>
-      </Page>
-    </Dekoratoren>
+            </MainCard>
+            <HStack align="center" justify="space-between">
+              <HStack gap="space-16">
+                <Button icon={<StarIcon />}>Legg til aktivitet</Button>
+                <Button variant="secondary">Filtrer</Button>
+              </HStack>
+              <Select label="Velg periode" hideLabel>
+                <option value="dog">Nåværende periode</option>
+                <option value="dog2">Cat</option>
+                <option value="dog3">Border Collie</option>
+                <option value="dog4">Maine Coon</option>
+              </Select>
+            </HStack>
+          </VStack>
+        </Page.Block>
+        <Page.Block width="2xl">
+          <HGrid as="div" gap="space-16" columns={{ md: "repeat(5, 1fr)" }}>
+            {board.map(({ column, cards, helpText }) => (
+              <ActivityColumn key={column} title={column} helpText={helpText}>
+                {cards.map(({ category, hasChange, title, date, tag, id }) => (
+                  <ActivityCard key={`${id}`}>
+                    <div>
+                      <Detail textColor="subtle" uppercase>
+                        {category}
+                      </Detail>
+                      <Link
+                        className="activity-card__link"
+                        to={`/aktivitetsplan/${id}`}
+                      >
+                        <BlueDotHeader dot={hasChange} level={3}>
+                          {title}
+                        </BlueDotHeader>
+                      </Link>
+                    </div>
+                    {date && (
+                      <BodyShort>
+                        {date.start}
+                        {date.end && ` - ${date.end}`}
+                      </BodyShort>
+                    )}
+                    {tag && (
+                      <Tag variant={tag.variant} size="small">
+                        {tag.text}
+                      </Tag>
+                    )}
+                  </ActivityCard>
+                ))}
+              </ActivityColumn>
+            ))}
+          </HGrid>
+        </Page.Block>
+        <Outlet />
+      </VStack>
+    </Page>
   );
 };
 
