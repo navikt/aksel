@@ -8,6 +8,8 @@ import React, {
 } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../button";
+import { useThemeInternal } from "../theme/Theme";
+import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -87,6 +89,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
       title,
       iconPosition = "left",
       onClick,
+      size,
       ...rest
     },
     ref,
@@ -94,6 +97,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const [active, setActive] = useState(false);
     const timeoutRef = useRef<number>();
     const translate = useI18n("CopyButton");
+
+    const themeContext = useThemeInternal(false);
 
     useEffect(() => {
       return () => {
@@ -117,36 +122,86 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const copyIcon = active
       ? activeIcon ?? (
-          <CheckmarkIcon
-            aria-hidden={!!text}
-            title={text ? undefined : activeString}
-            className="navds-copybutton__icon"
-          />
+          <LegacyIconWrapper useLegacy={!!themeContext}>
+            <CheckmarkIcon
+              aria-hidden={!!text}
+              title={text ? undefined : activeString}
+              className={themeContext ? "navds-copybutton__icon" : undefined}
+            />
+          </LegacyIconWrapper>
         )
       : icon ?? (
-          <FilesIcon
-            aria-hidden={!!text}
-            title={text ? undefined : title || translate("title")}
-            className="navds-copybutton__icon"
-          />
+          <LegacyIconWrapper useLegacy={!!themeContext}>
+            <FilesIcon
+              aria-hidden={!!text}
+              title={text ? undefined : title || translate("title")}
+              className={themeContext ? "navds-copybutton__icon" : undefined}
+            />
+          </LegacyIconWrapper>
         );
 
+    if (themeContext) {
+      return (
+        <Button
+          ref={ref}
+          type="button"
+          className={cl("navds-copybutton", className)}
+          {...rest}
+          variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
+          onClick={composeEventHandlers(onClick, handleClick)}
+          iconPosition={iconPosition}
+          icon={copyIcon}
+          data-active={active}
+          size={size}
+        >
+          {text ? (active ? activeString : text) : null}
+        </Button>
+      );
+    }
+
     return (
-      <Button
+      <button
         ref={ref}
         type="button"
-        className={cl("navds-copybutton", className)}
         {...rest}
-        variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
+        className={cl(
+          "navds-copybutton",
+          className,
+          `navds-copybutton--${size}`,
+          `navds-copybutton--${variant}`,
+          {
+            "navds-copybutton--icon-only": !text,
+            "navds-copybutton--icon-right": iconPosition === "right",
+            "navds-copybutton--active": active,
+          },
+        )}
         onClick={composeEventHandlers(onClick, handleClick)}
-        iconPosition={iconPosition}
-        icon={copyIcon}
-        data-active={active}
       >
-        {text ? (active ? activeString : text) : null}
-      </Button>
+        <span className="navds-copybutton__content">
+          {iconPosition === "left" && copyIcon}
+          {text && (
+            <Label as="span" size={size === "medium" ? "medium" : "small"}>
+              {active ? activeString : text}
+            </Label>
+          )}
+          {iconPosition === "right" && copyIcon}
+        </span>
+      </button>
     );
   },
 );
+
+function LegacyIconWrapper({
+  children,
+  useLegacy,
+}: {
+  children: React.ReactNode;
+  useLegacy: boolean;
+}) {
+  if (useLegacy) {
+    return children;
+  }
+  return <span className="navds-copybutton__icon">{children}</span>;
+}
 
 export default CopyButton;
