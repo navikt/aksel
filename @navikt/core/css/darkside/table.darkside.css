@@ -80,6 +80,7 @@
   padding: var(--ax-space-4) var(--ax-space-8);
 }
 
+/* TODO: Look to handle "inline"-checkbox better than custom CSS-overrides in the future. */
 .navds-table :not(.navds-checkboxes) > .navds-checkbox .navds-checkbox__input {
   top: -0.75rem;
 }
@@ -90,6 +91,11 @@
 
 .navds-table :not(.navds-checkboxes) > .navds-checkbox .navds-checkbox__label {
   padding: 0;
+}
+
+.navds-table .navds-checkbox__input:focus + .navds-checkbox__label::after,
+.navds-table .navds-radio__input:focus + .navds-radio__label::after {
+  height: 100%;
 }
 
 .navds-table__header-cell[aria-sort] {
@@ -106,7 +112,7 @@
   padding: var(--ax-space-16) var(--ax-space-12);
   width: 100%;
   display: flex;
-  gap: var(--ax-space-8);
+  gap: var(--ax-space-4);
   align-items: center;
   line-height: inherit;
   font-weight: inherit;
@@ -139,7 +145,7 @@
 }
 
 .navds-table__sort-button svg {
-  font-size: 1rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
 }
 
