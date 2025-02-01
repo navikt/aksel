@@ -49,7 +49,7 @@
     "boring-avatars": "1.10.1",
     "clsx": "^2.1.0",
     "codesandbox-import-utils": "^2.2.3",
-    "date-fns": "^3.0.0",
+    "date-fns": "^4.0.0",
     "fuse.js": "^7.0.0",
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
