@@ -27,6 +27,10 @@
 
 .navds-table__row--selected {
   background-color: var(--ax-bg-accent-softA);
+
+  & + .navds-table__expanded-row {
+    background-color: var(--ax-bg-accent-softA);
+  }
 }
 
 .navds-table--zebra-stripes {
@@ -37,10 +41,14 @@
   & .navds-table__body :where(.navds-table__expandable-row:nth-child(4n + 1):not(.navds-table__row--selected)) {
     background-color: transparent;
   }
-}
 
-.navds-table--zebra-stripes .navds-table__body .navds-table__expanded-row:nth-child(4n) {
-  background-color: var(--ax-bg-softA);
+  & .navds-table__body .navds-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-softA);
+  }
+
+  & .navds-table__row--selected + .navds-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-accent-softA);
+  }
 }
 
 .navds-table__header-cell,
