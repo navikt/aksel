@@ -31,13 +31,15 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt2-moderate"
     | "alt3"
     | "alt3-filled"
-    | "alt3-moderate"
-    | "meta-1"
-    | "meta-1-filled"
-    | "meta-1-moderate"
-    | "meta-2"
-    | "meta-2-filled"
-    | "meta-2-moderate";
+    | "alt3-moderate";
+
+  /* Temp hide these until naming is resolved */
+  // | "meta-1"
+  // | "meta-1-filled"
+  // | "meta-1-moderate"
+  // | "meta-2"
+  // | "meta-2-filled"
+  // | "meta-2-moderate";
   /**
    * @default "medium"
    */
