@@ -78,6 +78,11 @@ export function semanticTokenConfig(theme: ColorTheme) {
         type: "color",
         group: `background`,
       },
+      softA: {
+        value: `{ax.neutral.100A.value}`,
+        type: "color",
+        group: `background`,
+      },
       hover: {
         value: `{ax.neutral.200.value}`,
         type: "color",

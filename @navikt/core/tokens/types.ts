@@ -50,6 +50,7 @@ export type StaticDefaultBgKeys =
   | "sunken"
   | "overlay"
   | "soft"
+  | "softA"
   | "moderate"
   | "moderateA"
   | "strong";
@@ -66,6 +67,7 @@ export type StatefulDefaultBgKeys =
 
 export type StaticBgKeys =
   | `${SemanticColorRoles}-soft`
+  | `${SemanticColorRoles}-softA`
   | `${SemanticColorRoles}-moderate`
   | `${SemanticColorRoles}-moderateA`
   | `${SemanticColorRoles}-strong`;
