@@ -88,7 +88,7 @@ const AktivitetsplanPage = () => {
   const { theme } = useContext(ThemeProviderContext);
   return (
     <Page>
-      <VStack gap="space-32">
+      <VStack gap="space-32" marginBlock="space-20">
         <Page.Block width="md">
           <VStack gap="space-32">
             <Heading as="h1" size="xlarge">
