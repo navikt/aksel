@@ -10,6 +10,11 @@ const configForRole = (role: SemanticColorRoles) => {
         type: "color",
         group: `background.${role}`,
       },
+      [`${role}-softA`]: {
+        value: `{ax.${role}.100A.value}`,
+        type: "color",
+        group: `background.${role}`,
+      },
       [`${role}-hover`]: {
         value: `{ax.${role}.200.value}`,
         type: "color",
