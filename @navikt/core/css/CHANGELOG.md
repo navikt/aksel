@@ -1,5 +1,13 @@
 # @navikt/ds-css
 
+## 7.11.0
+
+### Patch Changes
+
+- ExpansionCard: Removed dynamic padding on button-element. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
+- Modal: Defaults to `margin: auto` for tailwind 4 support. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
 ## 7.10.0
 
 ### Minor Changes
