@@ -159,7 +159,7 @@
     "@storybook/manager-api": "^8.3.4",
     "@storybook/react": "^8.3.4",
     "@storybook/react-vite": "^8.3.4",
-    "@storybook/test": "^8.3.4",
+    "@storybook/test": "^8.5.3",
     "@storybook/theming": "^8.3.4",
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
