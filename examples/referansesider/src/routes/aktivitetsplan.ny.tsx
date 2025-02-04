@@ -59,7 +59,9 @@ function ActivityModal() {
             description="For eksempel dag, kveld, helg, stillingsprosent eller oppgaver"
             maxLength={5000}
           />
-          <Button type="submit">Lagre</Button>
+          <HStack gap="4">
+            <Button type="submit">Lagre</Button>
+          </HStack>
         </VStack>
       </Modal.Body>
     </Modal>
