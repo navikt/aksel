@@ -117,7 +117,7 @@ const configForRole = (role: SemanticColorRoles) => {
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
 export const semanticTokensForAllRolesConfig = () => {
-  return ColorRolesList.filter((name) => name !== "neutral").reduce(
+  return ColorRolesList.reduce(
     (acc, role) => _.merge(acc, configForRole(role)),
     {} as ReturnType<typeof configForRole>,
   );
