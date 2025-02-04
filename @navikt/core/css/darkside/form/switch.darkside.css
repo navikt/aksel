@@ -123,7 +123,7 @@
 
 /* ------------------------------ Switch Thumb ------------------------------ */
 .navds-switch__thumb {
-  background-color: var(--ax-bg-strong);
+  background-color: var(--ax-bg-neutral-strong);
   border-radius: var(--ax-border-radius-full);
   width: 1.125rem;
   height: 1.125rem;
@@ -217,11 +217,11 @@
   }
 
   & .navds-switch__thumb {
-    background-color: var(--ax-bg-strong);
+    background-color: var(--ax-bg-neutral-strong);
   }
 
   & > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
-    background-color: var(--ax-bg-strong);
+    background-color: var(--ax-bg-neutral-strong);
     color: var(--ax-text-neutral-contrast);
   }
 

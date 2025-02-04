@@ -32,7 +32,7 @@
 }
 
 .navds-pagination__item[data-selected="true"] {
-  background-color: var(--ax-bg-strong-pressed);
+  background-color: var(--ax-bg-neutral-strong-pressed);
   color: var(--ax-text-neutral-contrast);
 }
 

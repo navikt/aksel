@@ -181,7 +181,7 @@
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
-    background: var(--ax-bg-strong-pressed);
+    background: var(--ax-bg-neutral-strong-pressed);
     border: none;
     color: var(--ax-text-neutral-contrast);
   }
@@ -291,8 +291,8 @@
 }
 
 .navds-timeline__zoom-button[aria-pressed="true"] {
-  background: var(--ax-bg-strong-pressed);
-  border-color: var(--ax-bg-strong-pressed);
+  background: var(--ax-bg-neutral-strong-pressed);
+  border-color: var(--ax-bg-neutral-strong-pressed);
   color: var(--ax-text-neutral-contrast);
 }
 

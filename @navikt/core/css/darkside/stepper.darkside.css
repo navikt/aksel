@@ -163,8 +163,8 @@
   &[data-active="true"] {
     & .navds-stepper__circle {
       color: var(--ax-text-neutral-contrast);
-      background-color: var(--ax-bg-strong-pressed);
-      border-color: var(--ax-bg-strong-pressed);
+      background-color: var(--ax-bg-neutral-strong-pressed);
+      border-color: var(--ax-bg-neutral-strong-pressed);
     }
   }
 }

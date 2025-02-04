@@ -100,11 +100,11 @@
 
   &[data-pressed="true"] {
     box-shadow: none;
-    background-color: var(--ax-bg-strong-pressed);
+    background-color: var(--ax-bg-neutral-strong-pressed);
     color: var(--ax-text-neutral-contrast);
 
     &:hover {
-      background-color: var(--ax-bg-strong-hover);
+      background-color: var(--ax-bg-neutral-strong-hover);
     }
   }
 }
@@ -130,11 +130,11 @@
 }
 
 .navds-chips__removable--neutral {
-  background: var(--ax-bg-strong-pressed);
+  background: var(--ax-bg-neutral-strong-pressed);
   color: var(--ax-text-neutral-contrast);
 
   &:hover {
-    background: var(--ax-bg-strong-hover);
+    background: var(--ax-bg-neutral-strong-hover);
   }
 }
 
