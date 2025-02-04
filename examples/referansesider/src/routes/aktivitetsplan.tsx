@@ -89,7 +89,7 @@ const AktivitetsplanPage = () => {
   return (
     <Page>
       <VStack gap="space-32" marginBlock="space-20">
-        <Page.Block width="md">
+        <Page.Block width="lg" gutters>
           <VStack gap="space-32">
             <Heading as="h1" size="xlarge">
               Aktivitetsplan
@@ -140,8 +140,13 @@ const AktivitetsplanPage = () => {
             </HStack>
           </VStack>
         </Page.Block>
-        <Page.Block width="2xl">
-          <HGrid as="div" gap="space-16" columns={{ md: "repeat(5, 1fr)" }}>
+        <Page.Block width="2xl" gutters>
+          <HGrid
+            as="div"
+            gap="space-16"
+            columns={{ xl: "repeat(5, 1fr)" }}
+            marginBlock="space-16"
+          >
             {board.map(({ column, cards, helpText }) => (
               <ActivityColumn key={column} title={column} helpText={helpText}>
                 {cards.map(({ category, hasChange, title, date, tag, id }) => (
