@@ -93,7 +93,9 @@ export const BecomeAPilotTeam = () => {
             You can import our new tokens and use them in isolation without
             affecting the rest of your system. This allows you to experiment
             with new design-tokens and darkmode on your own terms without
-            commiting to the update.
+            commiting to the update. You can also go all-inn on our new system,
+            and import the old tokens so that migrating from legacy-code is
+            easier.
           </BodyLong>
           <Heading size="medium" as="h3" spacing>
             Tailwind CSS
@@ -106,12 +108,12 @@ export const BecomeAPilotTeam = () => {
             yet.
           </BodyLong>
           <BodyLong spacing>
-            The new config is based on CSS-variables, so that when using
-            TailwindCSS v3, you can not change opacity on the fly. If using
-            TailwindCSS v4, this should now be possible. As a side-effect for
-            using tokens, you will now be required to import our tokens
-            seperatly for tailwind to work. You can either import the tokens
-            standalone, or get them as a passenger trough the CSS-package.
+            The new config is based on CSS-variables, so when using TailwindCSS
+            v3, you can not change opacity on the fly. If using TailwindCSS v4,
+            this should now be possible. As a side-effect for using tokens, you
+            will now be required to import our tokens seperatly for tailwind to
+            work. You can either import the tokens standalone, or get them as a
+            passenger trough the CSS-package.
           </BodyLong>
           <Heading size="medium" as="h3" spacing>
             @navikt/ds-css
@@ -172,11 +174,28 @@ export const Setup = () => {
         </Page.Block>
         <Page.Block width="md" gutters>
           <Heading size="large" as="h2" spacing>
-            Installation
+            Clean project install
           </Heading>
           <BodyLong spacing>
-            Here you have the basics to get started with the new system. We
-            provide more in-depth guides for each part in the sidebar.
+            <pre className="docs-pre">
+              <code className="docs-code">{`// index.tsx
+import "@navikt/ds-tokens/darkside-css";
+import { Theme } from "@navikt/ds-react";
+
+<Theme theme="light">
+  <App />
+</Theme>`}</code>
+            </pre>
+            Thats it, you are now using our new design tokens, CSS and updated
+            React-code.
+          </BodyLong>
+          <Heading size="large" as="h2" spacing>
+            Installation for existing projects
+          </Heading>
+          <BodyLong spacing>
+            Here you have the basics to test the new system inn already existing
+            projects. We provide more in-depth guides for each part in the
+            sidebar.
           </BodyLong>
         </Page.Block>
         <Page.Block width="md" gutters>
@@ -199,9 +218,9 @@ export const Setup = () => {
           </BodyLong>
           <BodyLong spacing weight="semibold">
             Note: If using SCSS, LESS or JS, you will also have to import the
-            CSS-version tokens or they will not work. If this is not possible,
-            you can import the static version of the tokens. You will not get
-            theming or darkmode support with this version built in.
+            CSS-version of the tokens or they will not work. If this is not
+            possible, you can import the static version of the tokens. You will
+            not get theming or darkmode support with this version built in.
           </BodyLong>
           <pre className="docs-pre">
             <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
@@ -318,7 +337,7 @@ export const ReactPackage = () => {
             Changes
           </Heading>
           <BodyLong spacing>
-            While most of these changes will not affect your application, we
+            While most of these changes might not affect your application, we
             list them here just in case.
           </BodyLong>
         </Page.Block>
