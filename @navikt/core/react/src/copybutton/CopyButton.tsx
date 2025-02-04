@@ -198,7 +198,7 @@ function LegacyIconWrapper({
   children: React.ReactNode;
   useLegacy: boolean;
 }) {
-  if (useLegacy) {
+  if (!useLegacy) {
     return children;
   }
   return <span className="navds-copybutton__icon">{children}</span>;
