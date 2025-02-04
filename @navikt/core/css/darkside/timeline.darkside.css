@@ -32,7 +32,7 @@
 
 .navds-timeline__axislabels-label {
   position: absolute;
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   white-space: nowrap;
 }
 

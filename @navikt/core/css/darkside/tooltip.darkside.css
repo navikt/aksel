@@ -1,7 +1,7 @@
 .navds-tooltip {
   z-index: 3000;
   background-color: var(--ax-bg-raised);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-medium);
   padding: 0 var(--ax-space-6);
   align-items: center;
@@ -88,7 +88,7 @@
 
 .navds-tooltip__key {
   font-family: var(--ax-font-family);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   padding: 0 var(--ax-space-4);
   min-width: 1.125rem;
   height: 1.125rem;

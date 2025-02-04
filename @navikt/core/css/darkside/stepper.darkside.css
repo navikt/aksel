@@ -153,7 +153,7 @@
 }
 
 .navds-stepper__step[data-interactive="false"] {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   cursor: default;
 
   & .navds-stepper__circle {

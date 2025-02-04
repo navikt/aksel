@@ -9,10 +9,10 @@
   resize: none;
   width: 100%;
   display: block;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &::placeholder {
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral-subtle);
   }
 
   &:hover {
@@ -44,7 +44,7 @@
 
 .navds-textarea__counter {
   margin-top: -0.25rem;
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navds-textarea__counter--error {

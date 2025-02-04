@@ -24,7 +24,7 @@
   background-color: var(--ax-bg-raised);
   border-radius: var(--ax-border-radius-full);
   border: 1px solid var(--ax-border-subtleA);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -86,7 +86,7 @@
 
 /* ------------------------------ Chat top text ----------------------------- */
 .navds-chat__top-text {
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   display: flex;
   gap: var(--ax-space-8);
   align-items: baseline;

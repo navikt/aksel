@@ -3,7 +3,7 @@
   background-color: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-default);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   width: 100%;
   box-sizing: border-box;
   min-height: 3rem;
@@ -36,7 +36,7 @@
   position: relative;
   display: flex;
   width: 100%;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 /* ------------------------------- Select Icon ------------------------------ */
@@ -46,7 +46,7 @@
   right: var(--ax-space-8);
   pointer-events: none;
   align-self: center;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   @media (forced-colors: active) {
     & {
@@ -86,10 +86,10 @@
 
   /* Chrome-fix */
   opacity: 1;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   & > option {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 
   @media (forced-colors: active) {
@@ -116,6 +116,6 @@
   }
 
   & .navds-select__chevron {
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral-subtle);
   }
 }

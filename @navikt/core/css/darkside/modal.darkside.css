@@ -13,7 +13,7 @@
   position: fixed;
   max-height: 100%;
   max-width: 100%;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   margin: auto;
 
   &[open] {
@@ -135,7 +135,7 @@
 
 .navds-modal__label {
   font-weight: var(--ax-font-weight-bold);
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navds-modal__body {

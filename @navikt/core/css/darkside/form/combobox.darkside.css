@@ -215,7 +215,7 @@
 }
 
 .navds-combobox__button-toggle-list {
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,7 +249,7 @@
   flex-direction: column;
   border-radius: var(--ax-border-radius-large);
   background-color: var(--ax-bg-raised);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   overscroll-behavior: contain;
   box-shadow: var(--ax-shadow-dialog);
 
@@ -327,11 +327,11 @@
   & mark {
     background-color: transparent;
     font-weight: var(--ax-font-weight-bold);
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 
   & svg {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 }
 
@@ -354,7 +354,7 @@
   margin-block-start: calc(var(--ax-space-4) * -1);
 
   & svg {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 
   &:only-child {

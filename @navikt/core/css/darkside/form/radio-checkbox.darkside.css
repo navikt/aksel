@@ -209,7 +209,7 @@
 
 .navds-checkbox--readonly > .navds-checkbox__input:hover + .navds-checkbox__label,
 .navds-radio--readonly > .navds-radio__input:hover + .navds-radio__label {
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:not(:disabled) + .navds-checkbox__label::before,
@@ -226,7 +226,7 @@
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:checked + .navds-checkbox__label > .navds-checkbox__icon {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navds-radio--readonly > .navds-radio__input:checked + .navds-radio__label::before {
@@ -238,7 +238,7 @@
 }
 
 .navds-checkbox--readonly > .navds-checkbox__input:indeterminate + .navds-checkbox__label > .navds-checkbox__icon-indeterminate {
-  background-color: var(--ax-text-subtle);
+  background-color: var(--ax-text-neutral-subtle);
 }
 
 @media (forced-colors: active) {

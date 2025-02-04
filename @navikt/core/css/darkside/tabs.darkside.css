@@ -49,7 +49,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   cursor: pointer;
 
   --__axc-tabs-line-width: 0;

@@ -29,14 +29,14 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-large);
   min-width: fit-content;
   position: relative;
 
   &:hover {
     background-color: var(--ax-bg-accent-moderate-hoverA);
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 
   &:focus-visible {

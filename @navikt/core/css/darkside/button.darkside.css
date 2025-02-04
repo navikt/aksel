@@ -161,7 +161,7 @@
   --__axc-button-border-color: var(--ax-border-default);
 
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
     --__axc-button-border-color: var(--ax-border-strong);
@@ -176,7 +176,7 @@
   &:is(:disabled, .navds-button--disabled) {
     --__axc-button-border-color: var(--ax-border-default);
 
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
     background-color: transparent;
   }
 }
@@ -207,7 +207,7 @@
  ****************************/
 .navds-button--tertiary-neutral {
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
     background-color: var(--ax-bg-moderate-hoverA);
@@ -218,7 +218,7 @@
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
     background-color: transparent;
   }
 }

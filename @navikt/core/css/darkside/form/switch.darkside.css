@@ -27,7 +27,7 @@
 /* -------------------------- Switch content/label -------------------------- */
 .navds-switch__label-wrapper {
   cursor: pointer;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 .navds-switch__content {
@@ -209,7 +209,7 @@
 
   & > .navds-switch__input:hover ~ .navds-switch__label-wrapper,
   & .navds-switch__label-wrapper:hover {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 
   & .navds-switch__label {

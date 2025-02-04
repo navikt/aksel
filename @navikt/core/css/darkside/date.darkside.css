@@ -3,14 +3,14 @@
 
   .rdp-day_range_middle {
     &.rdp-day_disabled {
-      color: var(--ax-text-default);
+      color: var(--ax-text-neutral);
       background: var(--ax-bg-moderateA);
     }
 
     &.rdp-day_selected {
       background-color: var(--ax-bg-accent-soft-pressedA);
       box-shadow: inset 0 0 0 1px var(--ax-border-accent-subtleA);
-      color: var(--ax-text-default);
+      color: var(--ax-text-neutral);
     }
   }
 
@@ -68,7 +68,7 @@
     cursor: not-allowed;
     text-decoration: line-through;
     background-color: var(--ax-bg-moderateA);
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral-subtle);
   }
 
   .rdp-button:where(:not(.rdp-day_selected, [disabled])):hover,
@@ -126,7 +126,7 @@
 .navds-date__caption-button {
   width: 2rem;
   height: 2rem;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 .navds-date__caption__month .navds-select__container select {
@@ -183,7 +183,7 @@
   right: 0.0625rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   display: inline-flex;
   cursor: pointer;
   margin: 0;
@@ -237,7 +237,7 @@
 
 .navds-date__weeknumber-number {
   font-size: 0.875rem;
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 
   .navds-date__weeknumber:active & {
     color: var(--ax-text-contrast);

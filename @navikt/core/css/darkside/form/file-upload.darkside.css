@@ -18,7 +18,7 @@
   border: 1px dashed var(--ax-border-default);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 
@@ -140,7 +140,7 @@
 }
 
 .navds-dropzone__area-disabled {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -174,7 +174,7 @@ li.navds-file-item {
 
 .navds-file-item__icon {
   background-color: var(--ax-bg-moderateA);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-full);
   min-height: 2.5rem;
   min-width: 2.5rem;
