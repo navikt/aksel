@@ -2,6 +2,7 @@ import { Meta } from "@storybook/react";
 import React from "react";
 import { Box } from "../../@navikt/core/react/src/layout/box";
 import { Page } from "../../@navikt/core/react/src/layout/page";
+import { Table } from "../../@navikt/core/react/src/table";
 import {
   BodyLong,
   BodyShort,
@@ -295,6 +296,271 @@ import { Theme } from "@navikt/ds-react";
   );
 };
 
+export const TokenPackage = () => {
+  return (
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
+      <Page>
+        <Page.Block width="md" gutters>
+          <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
+
+          <Heading size="xlarge" as="h1" spacing>
+            @navikt/ds-tokens
+          </Heading>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Setup
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">
+              {`@import "@navikt/ds-tokens/darkside-css";`}
+            </code>
+          </pre>
+
+          <BodyLong spacing weight="semibold">
+            Note: Since new tokens uses a different prefix, you can start using
+            the new tokens in your project without breaking the old tokens. This
+            will allow you to test the new tokens in isolation and migrate when
+            you are ready.
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            Other formats
+          </Heading>
+
+          <BodyLong spacing>
+            The design-tokens are avaliable in multiple formats. You can import
+            them in your project by using the import-paths above. All of these
+            formats are based on CSS-variables to support theming and darkmode.
+          </BodyLong>
+          <BodyLong spacing weight="semibold">
+            Note: If using SCSS, LESS or JS, you will also have to import the
+            CSS-version of the tokens or they will not work. If this is not
+            possible, you can import the static version of the tokens. You will
+            not get theming or darkmode support with the static versions.
+          </BodyLong>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss
+@navikt/ds-tokens/darkside-less
+@navikt/ds-tokens/darkside-js`}</code>
+          </pre>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
+@navikt/ds-tokens/darkside-less-static
+@navikt/ds-tokens/darkside-js-static`}</code>
+          </pre>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Changes
+          </Heading>
+          <BodyLong spacing>
+            We have made a complete re-write of our <code>background</code>,{" "}
+            <code>text</code>, <code>border-color</code> and{" "}
+            <code>spacing</code> tokens.
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            Roles
+          </Heading>
+          <BodyLong spacing>
+            We have updated each colors naming to better reflect their purpose.
+          </BodyLong>
+
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">Old name</Table.HeaderCell>
+                <Table.HeaderCell scope="col">New name (role)</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.DataCell>Gray</Table.DataCell>
+                <Table.DataCell>Neutral</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Blue</Table.DataCell>
+                <Table.DataCell>Accent</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Green</Table.DataCell>
+                <Table.DataCell>Success</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Light blue</Table.DataCell>
+                <Table.DataCell>Info</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Orange</Table.DataCell>
+                <Table.DataCell>Warning</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Red</Table.DataCell>
+                <Table.DataCell>Danger</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Alt1</Table.DataCell>
+                <Table.DataCell>Meta purple</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Alt2</Table.DataCell>
+                <Table.DataCell>Lime</Table.DataCell>
+              </Table.Row>
+              <Table.Row>
+                <Table.DataCell>Alt3</Table.DataCell>
+                <Table.DataCell>Brand blue</Table.DataCell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+          <br />
+          <BodyLong spacing>
+            We also have two new additions to our color-palette.{" "}
+            <code>Brand magenta</code> and <code>Brand beige</code>
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            Semantic tokens
+          </Heading>
+          <BodyLong spacing>
+            Each role has the same collection of tokens avaliable. This means
+            you only need to learn the naming once.
+            <pre className="docs-pre">
+              <code className="docs-code">{`// Standalone
+--ax-bg-default
+--ax-bg-input
+--ax-bg-overlay
+--ax-bg-raised
+--ax-bg-sunken
+--ax-text-logo
+--ax-border-focus
+
+// Backgrounds for roles
+--ax-bg-[role]-strong-pressed
+--ax-bg-[role]-strong-hover
+--ax-bg-[role]-strong
+--ax-bg-[role]-moderate-pressedA
+--ax-bg-[role]-moderate-pressed
+--ax-bg-[role]-moderate-hoverA
+--ax-bg-[role]-moderate-hover
+--ax-bg-[role]-moderateA
+--ax-bg-[role]-moderate
+--ax-bg-[role]-soft-pressedA
+--ax-bg-[role]-soft-pressed
+--ax-bg-[role]-soft-hoverA
+--ax-bg-[role]-soft-hover
+--ax-bg-[role]-softA
+--ax-bg-[role]-soft
+
+// Text for roles
+--ax-text-[role]
+--ax-text-[role]-subtle
+--ax-text-[role]-icon
+
+// Border for roles
+--ax-border-[role]
+--ax-border-[role]-strong
+--ax-border-[role]-subtle
+--ax-border-[role]-subtleA
+`}</code>
+            </pre>
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            Spacing
+          </Heading>
+          <BodyLong spacing>
+            In short, we now use the <code>space</code>-prefix for all our
+            spacing tokens. We have also updated the naming to use px-naming,
+            instead of a 1 to 4 scale. This allows for easier communication
+            between design and development since all tooling (figma, devtools)
+            uses px.
+          </BodyLong>
+          <BodyLong spacing>
+            <pre className="docs-pre">
+              <code className="docs-code">{`--a-spacing-32 ->: --ax-space-128
+--a-spacing-24: --ax-space-96
+--a-spacing-20: --ax-space-80
+--a-spacing-18: --ax-space-72
+--a-spacing-16: --ax-space-64
+--a-spacing-14: --ax-space-56
+--a-spacing-12: --ax-space-48
+--a-spacing-11: --ax-space-44
+--a-spacing-10: --ax-space-40
+--a-spacing-9: --ax-space-36
+--a-spacing-8: --ax-space-32
+--a-spacing-7: --ax-space-28
+--a-spacing-6: --ax-space-24
+--a-spacing-5: --ax-space-20
+--a-spacing-4: --ax-space-16
+--a-spacing-3: --ax-space-12
+--a-spacing-2: --ax-space-8
+--a-spacing-1-alt: --ax-space-6
+--a-spacing-1: --ax-space-4
+--a-spacing-05: --ax-space-2
+--a-spacing-0: --ax-space-0`}</code>
+            </pre>
+          </BodyLong>
+        </Page.Block>
+      </Page>
+    </Box.New>
+  );
+};
+
+export const TailwindPackage = () => {
+  return (
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
+      <Page>
+        <Page.Block width="md" gutters>
+          <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
+
+          <Heading size="xlarge" as="h1" spacing>
+            @navikt/ds-tailwind
+          </Heading>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Setup
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">
+              {`@import "@navikt/ds-tailwind/darkside";`}
+            </code>
+          </pre>
+          <BodyLong spacing>
+            For tailwind to work with our tokens and theming, you will have to
+            import our design-tokens in your project. This can be done by either
+            importing <code>@navikt/ds-tokens/darkside-css</code> directly or by
+            importing the CSS <code>@navikt/ds-css/darkside</code>.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Changes
+          </Heading>
+          <BodyLong spacing>
+            As this package is based on our tokens, all changes to tokens will
+            affect this package. We dont have any tooling ready for this yet, so
+            migration will have to be manual for now.
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            Tailwind 3
+          </Heading>
+          <BodyLong spacing>
+            Since we now use CSS-varaibles for the config, you will not be able
+            to add opacity on the fly.{" "}
+            <code>{`className="bg-surface-subtle/90"`}</code>
+            {". "} This is a limitation of TailwindCSS v3. If using TailwindCSS
+            v4 they have updated the implementation to now work with
+            CSS-variables.
+          </BodyLong>
+        </Page.Block>
+      </Page>
+    </Box.New>
+  );
+};
+
 export const ReactPackage = () => {
   return (
     <Box.New paddingBlock="space-48" asChild className="darkside-docs">
@@ -455,6 +721,61 @@ export const ReactPackage = () => {
               the new system if the <code>background</code>, <code>shadow</code>{" "}
               or <code>borderColor</code> properties are used.
             </strong>
+          </BodyLong>
+        </Page.Block>
+      </Page>
+    </Box.New>
+  );
+};
+
+export const CSSPackage = () => {
+  return (
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
+      <Page>
+        <Page.Block width="md" gutters>
+          <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
+
+          <Heading size="xlarge" as="h1" spacing>
+            @navikt/ds-css
+          </Heading>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Setup
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">
+              {`@import "@navikt/ds-css/darkside";`}
+            </code>
+          </pre>
+          <BodyLong spacing>
+            As with the previous iteration of our CSS-package, it comes with the
+            design-tokens built in. You will not need to explicitly import the
+            tokens in your project.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Changes
+          </Heading>
+          <BodyLong spacing>
+            We have re-written most of our CSS to facilitate the
+            theming-support. As a result, custom overrides based on overriding{" "}
+            <code>.navds</code>-classNames might break and you will have to
+            validate this yourself. As we strongly recommend avoiding custom
+            overrides where possible, we would like to encourage opening an
+            issue if you find that you have to override our CSS to achieve
+            something! Its these cases we want to know about so that we can fix
+            them for everyone.
+          </BodyLong>
+
+          <Heading size="medium" as="h3" spacing>
+            CSS layers
+          </Heading>
+          <BodyLong spacing>
+            The CSS-package now comes out of the box with CSS-layers. This means
+            its css-specificity is set to 0. This might affect your current
+            custom overrides, and you might have to make some changes.
           </BodyLong>
         </Page.Block>
       </Page>
