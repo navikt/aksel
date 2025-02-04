@@ -25,9 +25,9 @@ export default meta;
 
 export const BecomeAPilotTeam = () => {
   return (
-    <Box.New paddingBlock="space-48" asChild>
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
       <Page>
-        <Page.Block width="md">
+        <Page.Block width="md" gutters>
           <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
 
           <Heading size="xlarge" as="h1" spacing>
@@ -53,7 +53,7 @@ export const BecomeAPilotTeam = () => {
             and get your feedback.
           </BodyLong>
         </Page.Block>
-        <Page.Block width="md">
+        <Page.Block width="md" gutters>
           <Heading size="large" as="h2" spacing>
             Prerequisites
           </Heading>
@@ -72,7 +72,7 @@ export const BecomeAPilotTeam = () => {
           </BodyLong>
         </Page.Block>
 
-        <Page.Block width="md">
+        <Page.Block width="md" gutters>
           <Heading size="large" as="h2" spacing>
             Tiers of testing and integration
           </Heading>
@@ -94,6 +94,24 @@ export const BecomeAPilotTeam = () => {
             affecting the rest of your system. This allows you to experiment
             with new design-tokens and darkmode on your own terms without
             commiting to the update.
+          </BodyLong>
+          <Heading size="medium" as="h3" spacing>
+            Tailwind CSS
+          </Heading>
+          <BodyLong spacing>
+            Our new tokens are all avaliable for use in Tailwind CSS. As far as
+            we have tested, most of the new tokens can be used in isolation
+            without affecting the old tokens. There will be some tokens that
+            overlap and might cause issues, but we dont have a list of these
+            yet.
+          </BodyLong>
+          <BodyLong spacing>
+            The new config is based on CSS-variables, so that when using
+            TailwindCSS v3, you can not change opacity on the fly. If using
+            TailwindCSS v4, this should now be possible. As a side-effect for
+            using tokens, you will now be required to import our tokens
+            seperatly for tailwind to work. You can either import the tokens
+            standalone, or get them as a passenger trough the CSS-package.
           </BodyLong>
           <Heading size="medium" as="h3" spacing>
             @navikt/ds-css
@@ -143,50 +161,114 @@ export const BecomeAPilotTeam = () => {
 
 export const Setup = () => {
   return (
-    <Box.New paddingBlock="space-48">
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
       <Page>
-        <Page.Block width="md">
+        <Page.Block width="md" gutters>
           <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
 
           <Heading size="xlarge" as="h1" spacing>
-            Become a pilot team
+            Setup
           </Heading>
-
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Installation
+          </Heading>
           <BodyLong spacing>
-            We are looking for pilot teams to test our new theming and design
-            implementation, including darkmode. We are mainly looking for teams
-            that are in the early stages of developing a new product or service.
-            We want to test our system in a real-world scenario, and we need
-            your help to do so.
-          </BodyLong>
-
-          <BodyLong spacing>
-            As a pilot team, we want close communication with you to get
-            feedback on the system. We want to know all the bad or unclear parts
-            of our implementations, so that we can improve them incrementally.
-          </BodyLong>
-          <BodyLong spacing>
-            Because of this, we would like you to contact us if you are
-            interested in becoming a pilot team, so that we can keep connected
-            and get your feedback.
+            Here you have the basics to get started with the new system. We
+            provide more in-depth guides for each part in the sidebar.
           </BodyLong>
         </Page.Block>
-        <Page.Block width="md">
+        <Page.Block width="md" gutters>
           <Heading size="large" as="h2" spacing>
-            Prerequisites
+            Design tokens
           </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-css
+@navikt/ds-tokens/darkside-scss
+@navikt/ds-tokens/darkside-less
+@navikt/ds-tokens/darkside-js`}</code>
+          </pre>
           <BodyLong spacing>
-            Adopting the new system will require some effort from your team,
-            including the design and development side of things. We will try to
-            provide you with the necessary tools and resources to get you going,
-            but as this is still work in progress, some parts might still be
-            rough around the edges.
+            The design-tokens are avaliable in multiple formats. You can import
+            them in your project by using the import-paths above. All of these
+            formats are based on CSS-variables to support theming and darkmode.
           </BodyLong>
+          <BodyLong spacing weight="semibold">
+            Note: If using SCSS, LESS or JS, you will also have to import the
+            CSS-version tokens or they will not work. If this is not possible,
+            you can import the static version of the tokens. You will not get
+            theming or darkmode support with this version built in.
+          </BodyLong>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
+@navikt/ds-tokens/darkside-less-static
+@navikt/ds-tokens/darkside-js-static`}</code>
+          </pre>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-tailwind
+          </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">@navikt/ds-tailwind/darkside</code>
+          </pre>
           <BodyLong spacing>
-            Based on feedback, we will make changes as we go to the new system.
-            This will include breaking changes and new features. We will keep
-            you updated on these changes by updating a separate Changelog, but
-            we cannot guarantee that we will be able to do so in all cases.
+            Replace the old <code>@navikt/ds-tailwind</code>-import with the
+            above in your config, and you now have the new tailwind-config in
+            your project.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-css
+          </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">@navikt/ds-css/darkside</code>
+          </pre>
+          <BodyLong spacing>
+            Replace the old <code>@navikt/ds-css</code>-import with the above,
+            and you now have the new CSS-package in your project. Note that for
+            this to work in conjunction with <code>@navikt/ds-react</code>, you
+            will have to wrap your application in a <code>Theme</code>
+            -component.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-react
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">
+              {`import { Theme } from '@navikt/ds-react';
+
+// Light mode
+<Theme theme="light">
+  <App />
+</Theme>
+
+// Dark mode
+<Theme theme="dark">
+  <App />
+</Theme>`}
+            </code>
+          </pre>
+          <BodyLong spacing>
+            Wrap your application in a <code>Theme</code>-component to use the
+            new system. This component is required to use the new CSS and acts
+            as a <code>Feature flag</code> internally. Using this component, you
+            can also change between <code>theme=light</code> and{" "}
+            <code>theme=dark</code> when implementing theme-switching interally
+            in your application.
           </BodyLong>
         </Page.Block>
       </Page>
