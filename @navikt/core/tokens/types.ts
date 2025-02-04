@@ -95,7 +95,7 @@ export type DefaultTextColorKeys =
 
 export type TextColorKeys =
   | SemanticColorRoles
-  | `${SemanticColorRoles}-strong`
+  | `${SemanticColorRoles}-subtle`
   | `${SemanticColorRoles}-icon`
   | `${SemanticColorRoles}-contrast`;
 
