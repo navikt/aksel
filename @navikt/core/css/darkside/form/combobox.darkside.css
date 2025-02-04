@@ -32,7 +32,7 @@
 
   & .navds-combobox__wrapper {
     &:hover {
-      border-color: var(--ax-border-default);
+      border-color: var(--ax-border-neutral);
     }
 
     & *:hover {
@@ -80,7 +80,7 @@
 }
 
 .navds-combobox__wrapper-inner {
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   border-radius: var(--ax-border-radius-large);
 
   &:has(.navds-combobox__input:focus-visible) {
@@ -91,7 +91,7 @@
 
   &:has(.navds-combobox__input:focus-visible).navds-combobox__wrapper-inner--virtually-unfocused {
     outline: none;
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
   }
 
   &.navds-text-field__input {
@@ -119,7 +119,7 @@
   }
 
   .navds-combobox--disabled &:hover {
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
   }
 }
 

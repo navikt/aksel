@@ -3,7 +3,7 @@
   padding: var(--ax-space-8);
   background: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   min-height: 3rem;
   width: 100%;
   color: var(--ax-text-neutral);
@@ -20,7 +20,7 @@
 
   &:disabled {
     background-color: var(--ax-bg-input);
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
     cursor: not-allowed;
   }
 

@@ -6,7 +6,7 @@
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
   height: fit-content;
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
 
   &:has(.navds-expansioncard__header:hover) {
     box-shadow: 0 0 0 1px var(--ax-border-strong);

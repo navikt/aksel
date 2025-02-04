@@ -158,7 +158,7 @@
 * .navds-button--secondary-neutral *
  **************************/
 .navds-button--secondary-neutral {
-  --__axc-button-border-color: var(--ax-border-default);
+  --__axc-button-border-color: var(--ax-border-neutral);
 
   background-color: transparent;
   color: var(--ax-text-neutral);
@@ -174,7 +174,7 @@
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    --__axc-button-border-color: var(--ax-border-default);
+    --__axc-button-border-color: var(--ax-border-neutral);
 
     color: var(--ax-text-neutral);
     background-color: transparent;

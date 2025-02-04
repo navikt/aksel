@@ -54,7 +54,7 @@
 }
 
 .navds-tag--neutral {
-  --__axc-tag-border: var(--ax-border-default);
+  --__axc-tag-border: var(--ax-border-neutral);
   --__axc-tag-bg: var(--ax-bg-neutral-moderateA);
   --__axc-tag-bg-strong: var(--ax-bg-neutral-strong);
   --__axc-tag-text: var(--ax-text-neutral);

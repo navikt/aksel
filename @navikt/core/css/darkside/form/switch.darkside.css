@@ -86,7 +86,7 @@
   top: var(--ax-space-12);
   left: 0;
   border-radius: var(--ax-border-radius-full);
-  border: 2px solid var(--ax-border-default);
+  border: 2px solid var(--ax-border-neutral);
   transition-property: background-color, border-color;
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -107,7 +107,7 @@
 
   .navds-switch__input:disabled ~ & {
     background-color: var(--ax-bg-input);
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
   }
 
   .navds-switch__input:checked:disabled ~ & {

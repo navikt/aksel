@@ -2,7 +2,7 @@
   appearance: none;
   background-color: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   color: var(--ax-text-neutral);
   width: 100%;
   box-sizing: border-box;
@@ -80,7 +80,7 @@
 /* ----------------------------- Select disabled ---------------------------- */
 .navds-select__input:disabled {
   background-color: var(--ax-bg-input);
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   box-shadow: none;
   cursor: not-allowed;
 
