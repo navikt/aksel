@@ -58,7 +58,7 @@ export default {
       storySort: {
         method: "alphabetical",
         order: [
-          "Getting started",
+          "Docs",
           "ds-react",
           ["Primitives"],
           ["Default", "Controls"],
