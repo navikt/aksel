@@ -44,6 +44,7 @@
     "@navikt/aksel-icons": "../../@navikt/aksel-icons",
     "@navikt/ds-css": "../../@navikt/core/css",
     "@navikt/ds-react": "../../@navikt/core/react",
-    "@navikt/ds-tokens": "../../@navikt/core/tokens"
+    "@navikt/ds-tokens": "../../@navikt/core/tokens",
+    "vite": "^5.4.12"
   }
 }

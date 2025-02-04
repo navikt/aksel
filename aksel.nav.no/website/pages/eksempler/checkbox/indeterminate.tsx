@@ -23,7 +23,7 @@ const Example = () => {
                 selectedRows.length > 0 && selectedRows.length !== data.length
               }
               onChange={() => {
-                selectedRows.length
+                selectedRows.length === data.length
                   ? setSelectedRows([])
                   : setSelectedRows(data.map(({ fnr }) => fnr));
               }}

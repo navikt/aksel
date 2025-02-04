@@ -15,7 +15,7 @@ export const ColorRolesList = [
 ] as const;
 
 export type GlobalColorRoles = (typeof ColorRolesList)[number];
-export type SemanticColorRoles = Exclude<GlobalColorRoles, "neutral">;
+export type SemanticColorRoles = GlobalColorRoles;
 
 export type GlobalColorScale =
   | "100"
