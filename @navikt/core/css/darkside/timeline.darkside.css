@@ -177,7 +177,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-neutral-moderate-hover);
-    border-color: var(--ax-border-strong);
+    border-color: var(--ax-border-neutral-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -254,7 +254,7 @@
   height: calc(100% - var(--navdsc-timeline-pin-size) * 2);
   width: 1px;
   margin: 0 auto;
-  background: var(--ax-border-strong);
+  background: var(--ax-border-neutral-strong);
 }
 
 .navds-timeline__zoom {

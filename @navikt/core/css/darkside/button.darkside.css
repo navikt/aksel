@@ -164,7 +164,7 @@
   color: var(--ax-text-neutral);
 
   &:hover {
-    --__axc-button-border-color: var(--ax-border-strong);
+    --__axc-button-border-color: var(--ax-border-neutral-strong);
 
     background-color: var(--ax-bg-neutral-moderate-hoverA);
   }

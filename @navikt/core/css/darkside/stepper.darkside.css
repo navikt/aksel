@@ -30,14 +30,14 @@
   grid-column: 1;
 
   .navds-stepper__item--non-interactive & {
-    background-color: var(--ax-border-strong);
+    background-color: var(--ax-border-neutral-strong);
   }
 }
 
 /* Line before non-interactive step */
 .navds-stepper__item:has(+ .navds-stepper__item > .navds-stepper__step[data-interactive="false"]) {
   .navds-stepper__line--2 {
-    background-color: var(--ax-border-strong);
+    background-color: var(--ax-border-neutral-strong);
   }
 }
 
@@ -157,7 +157,7 @@
   cursor: default;
 
   & .navds-stepper__circle {
-    border-color: var(--ax-border-strong);
+    border-color: var(--ax-border-neutral-strong);
   }
 
   &[data-active="true"] {

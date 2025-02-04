@@ -61,7 +61,7 @@
   animation: loader-dasharray 1.5s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
-  stroke: var(--ax-border-strong);
+  stroke: var(--ax-border-neutral-strong);
   stroke-linecap: round;
   stroke-width: var(--__axc-loader-stroke-width);
 }
@@ -73,7 +73,7 @@
 
 .navds-loader--neutral {
   & .navds-loader__foreground {
-    stroke: var(--ax-border-strong);
+    stroke: var(--ax-border-neutral-strong);
   }
 }
 
@@ -93,7 +93,7 @@
   }
 
   & .navds-loader__background {
-    stroke: var(--ax-border-strong);
+    stroke: var(--ax-border-neutral-strong);
   }
 }
 
