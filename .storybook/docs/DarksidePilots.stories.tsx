@@ -307,7 +307,13 @@ export const TokenPackage = () => {
             @navikt/ds-tokens
           </Heading>
         </Page.Block>
+
         <Page.Block width="md" gutters>
+          <BodyLong spacing>
+            All of these tokens are subject to change, and based on feedback we
+            will have to make changes as we go. We will update the changelog
+            after each update to keep track.
+          </BodyLong>
           <Heading size="large" as="h2" spacing>
             Setup
           </Heading>
@@ -777,6 +783,27 @@ export const CSSPackage = () => {
             its css-specificity is set to 0. This might affect your current
             custom overrides, and you might have to make some changes.
           </BodyLong>
+        </Page.Block>
+      </Page>
+    </Box.New>
+  );
+};
+
+export const Changelog = () => {
+  return (
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
+      <Page>
+        <Page.Block width="md" gutters>
+          <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
+
+          <Heading size="xlarge" as="h1" spacing>
+            Changelog
+          </Heading>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Nothing to report
+          </Heading>
         </Page.Block>
       </Page>
     </Box.New>
