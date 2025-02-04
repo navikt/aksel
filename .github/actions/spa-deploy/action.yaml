@@ -30,6 +30,10 @@ inputs:
   identity_provider:
     description: "Google Workload Identity Provider"
     required: false
+  cache_invalidation:
+    description: "Cache invalidation"
+    required: false
+    default: "false"
 
 outputs:
   url:
@@ -61,7 +65,7 @@ runs:
         destination: ${{ steps.setup.outputs.cdn-destination }}
         project_id: ${{ inputs.project_id }}
         identity_provider: ${{ inputs.identity_provider }}
-        invalidate_cache: true
+        cache_invalidation: ${{ inputs.cache_invalidation == 'true' }}
 
     - id: nais-deploy
       name: Deploy SPA to NAIS
