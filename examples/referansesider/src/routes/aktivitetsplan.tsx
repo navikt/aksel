@@ -123,7 +123,7 @@ const AktivitetsplanPage = () => {
                 </VStack>
               </HStack>
             </MainCard>
-            <HStack align="center" justify="space-between">
+            <HStack align="center" justify="space-between" gap="space-16">
               <HStack gap="space-16">
                 <Button icon={<StarIcon />}>Legg til aktivitet</Button>
                 <Button variant="secondary">Filtrer</Button>
