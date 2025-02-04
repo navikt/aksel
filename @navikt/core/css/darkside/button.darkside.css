@@ -166,11 +166,11 @@
   &:hover {
     --__axc-button-border-color: var(--ax-border-strong);
 
-    background-color: var(--ax-bg-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-moderate-pressedA);
+    background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
@@ -210,11 +210,11 @@
   color: var(--ax-text-neutral);
 
   &:hover {
-    background-color: var(--ax-bg-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-moderate-pressedA);
+    background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {

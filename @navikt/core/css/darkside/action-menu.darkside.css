@@ -138,7 +138,7 @@
 
 /* --------------------------- ActionMenu shortcut -------------------------- */
 .navds-action-menu__shortcut {
-  background-color: var(--ax-bg-moderateA);
+  background-color: var(--ax-bg-neutral-moderateA);
   color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-small);
   padding: 0 var(--ax-space-4);

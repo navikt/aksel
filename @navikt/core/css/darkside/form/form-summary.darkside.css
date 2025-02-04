@@ -6,7 +6,7 @@
 }
 
 .navds-form-summary__header {
-  background: var(--ax-bg-moderateA);
+  background: var(--ax-bg-neutral-moderateA);
   padding: var(--ax-space-20) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
   display: flex;
   justify-content: space-between;

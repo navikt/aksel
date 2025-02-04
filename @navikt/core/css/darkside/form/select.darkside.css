@@ -102,7 +102,7 @@
 /* ----------------------------- Select Readonly ---------------------------- */
 .navds-select--readonly {
   & .navds-select__input {
-    background-color: var(--ax-bg-moderate);
+    background-color: var(--ax-bg-neutral-moderate);
     border-color: var(--ax-border-subtleA);
     cursor: default;
 

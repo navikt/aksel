@@ -1,5 +1,5 @@
 .navds-progress-bar {
-  background: var(--ax-bg-moderateA);
+  background: var(--ax-bg-neutral-moderateA);
   position: relative;
   border-radius: var(--ax-border-radius-full);
   overflow: hidden;

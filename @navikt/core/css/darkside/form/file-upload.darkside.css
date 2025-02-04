@@ -112,7 +112,7 @@
   display: grid;
   padding: var(--__axc-dropzone-icon-padding);
   border-radius: var(--ax-border-radius-full);
-  background-color: var(--ax-bg-moderateA);
+  background-color: var(--ax-bg-neutral-moderateA);
   transition:
     background-color 300ms var(--__axc-dropzone-animation-ease-out),
     font-size 300ms var(--__axc-dropzone-animation-ease-out);
@@ -173,7 +173,7 @@ li.navds-file-item {
 }
 
 .navds-file-item__icon {
-  background-color: var(--ax-bg-moderateA);
+  background-color: var(--ax-bg-neutral-moderateA);
   color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-full);
   min-height: 2.5rem;

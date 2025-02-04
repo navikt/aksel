@@ -171,12 +171,12 @@
 }
 
 .navds-timeline__period--neutral {
-  background: var(--ax-bg-moderate);
+  background: var(--ax-bg-neutral-moderate);
   border: solid 1px var(--ax-border-default);
   color: var(--ax-text-neutral-icon);
 
   &.navds-timeline__period--clickable:hover {
-    background: var(--ax-bg-moderate-hover);
+    background: var(--ax-bg-neutral-moderate-hover);
     border-color: var(--ax-border-strong);
   }
 
@@ -287,7 +287,7 @@
 }
 
 .navds-timeline__zoom-button:not([aria-pressed="true"]):hover {
-  background: var(--ax-bg-moderate-hoverA);
+  background: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .navds-timeline__zoom-button[aria-pressed="true"] {

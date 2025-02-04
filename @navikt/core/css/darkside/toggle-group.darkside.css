@@ -78,7 +78,7 @@
 /* Modifier neutral variant */
 :where(.navds-toggle-group--neutral) .navds-toggle-group__button {
   &:hover {
-    background-color: var(--ax-bg-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &[data-selected="true"] {

@@ -36,7 +36,7 @@
   }
 
   &:hover {
-    background: var(--ax-bg-moderate-hoverA);
+    background: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:is(:hover, :active):not(button, a) {
@@ -69,7 +69,7 @@
   color: var(--ax-text-neutral);
 
   &:hover {
-    background: var(--ax-bg-moderate-hoverA);
+    background: var(--ax-bg-neutral-moderate-hoverA);
   }
 }
 
@@ -91,7 +91,7 @@
   }
 
   &:active {
-    background: var(--ax-bg-moderate-pressedA);
+    background: var(--ax-bg-neutral-moderate-pressedA);
   }
 }
 

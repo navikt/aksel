@@ -114,7 +114,7 @@
 }
 
 .navds-expansioncard__header:hover > .navds-expansioncard__header-button {
-  background-color: var(--ax-bg-moderate-hoverA);
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .navds-expansioncard__header-chevron {
