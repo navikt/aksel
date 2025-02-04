@@ -34,3 +34,7 @@
 .activity-card__link:focus {
   outline: none;
 }
+
+.navds-modal::backdrop {
+  background-color: rgba(2, 10, 23, 0.88);
+}
