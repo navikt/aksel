@@ -32,7 +32,7 @@ const JobInterestBox = ({
       style={theme === "dark" ? { backgroundColor: "#c8cf f00b" } : undefined}
     >
       <VStack gap="4">
-        <Heading size="large" as="h2">
+        <Heading size="small" as="h2">
           Er du interessert i denne stillingen?
         </Heading>
         <BodyShort>
