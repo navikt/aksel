@@ -77,7 +77,7 @@ export const ToggleChips: OverridableComponent<
                 /* After removing old fallbacks, change to currentColor */
                 fill={`var(${
                   variant === "action"
-                    ? "--ax-text-accent-strong"
+                    ? "--ax-text-accent"
                     : "--ax-text-default"
                 }, var(--ac-chip-toggle-circle-border, var(--a-border-default)))`}
               />
