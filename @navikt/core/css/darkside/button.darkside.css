@@ -134,7 +134,7 @@
   --__axc-button-border-color: var(--ax-border-accent);
 
   background-color: transparent;
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 
   &:hover {
     --__axc-button-border-color: var(--ax-border-accent-strong);
@@ -150,7 +150,7 @@
     --__axc-button-border-color: var(--ax-border-accent);
 
     background-color: transparent;
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
   }
 }
 
@@ -186,7 +186,7 @@
  ****************************/
 .navds-button--tertiary {
   background-color: transparent;
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 
   &:hover {
     background-color: var(--ax-bg-accent-moderate-hoverA);
@@ -197,7 +197,7 @@
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
     background-color: transparent;
   }
 }

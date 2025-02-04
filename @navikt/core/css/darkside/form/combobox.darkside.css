@@ -226,10 +226,10 @@
   padding: 0;
 
   &:hover {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
 
     &:active {
-      color: var(--ax-text-accent-strong);
+      color: var(--ax-text-accent);
     }
   }
 }

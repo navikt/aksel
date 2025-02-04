@@ -53,7 +53,7 @@
   }
 
   & > .navds-dropzone__area::after {
-    color: var(--ax-text-accent-strong);
+    color: var(--ax-text-accent);
     background-color: var(--ax-bg-accent-moderateA);
     content: "";
     inset: 0;
@@ -134,7 +134,7 @@
 }
 
 .navds-dropzone--dragging .navds-dropzone__area-release {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   top: 50%;
   transform: translateY(-50%);
 }

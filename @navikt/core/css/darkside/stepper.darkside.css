@@ -3,7 +3,7 @@
   --__axc-stepper-border-width: 2px;
   --__axc-stepper-line-length: 1rem;
 
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   font-weight: var(--ax-font-weight-bold);
   line-height: 1;
   list-style: none;
@@ -108,7 +108,7 @@
 }
 
 .navds-stepper__step[data-interactive="true"] {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   border-radius: var(--ax-border-radius-medium);
   text-decoration: none;
 
@@ -126,7 +126,7 @@
   }
 
   & .navds-stepper__circle {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
     border-color: var(--ax-border-accent-strong);
   }
 

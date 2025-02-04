@@ -25,7 +25,7 @@ const EyeBrowText = styled.span`
 `;
 
 const H1 = styled.h1`
-  color: ${tokens.TextBrand1Strong};
+  color: ${tokens.TextBrand1};
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -35,7 +35,7 @@ const H1 = styled.h1`
 
 const H2 = styled.h2`
   position: relative;
-  color: ${tokens.TextBrand1Strong};
+  color: ${tokens.TextBrand1};
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -181,7 +181,7 @@ let PlainList: ReactNode;
 {
   const ScList = styled.ul`
     & li::marker {
-      color: ${tokens.TextBrand1Strong};
+      color: ${tokens.TextBrand1};
     }
   `;
 
@@ -199,7 +199,7 @@ let PlainOrderedList: ReactNode;
   const ScList = styled.ol`
     & li::marker {
       font-weight: 800;
-      color: ${tokens.TextBrand1Strong};
+      color: ${tokens.TextBrand1};
     }
     & li {
       padding-left: 4px;
@@ -257,7 +257,7 @@ let AccordionItem: ReactNode;
   `;
 
   const ScTitle = styled.span`
-    color: ${tokens.TextAccent};
+    color: ${tokens.TextAccentSubtle};
   `;
 
   AccordionItem = ({

@@ -17,17 +17,17 @@ const bgMap = {
 };
 
 const fgMap = {
-  info: tokens.TextInfo,
-  warning: tokens.TextWarning,
-  success: tokens.TextSuccess,
+  info: tokens.TextInfoSubtle,
+  warning: tokens.TextWarningSubtle,
+  success: tokens.TextSuccessSubtle,
   neutral: tokens.BgModerate,
-  ["info-moderate"]: tokens.TextInfoStrong,
-  ["warning-moderate"]: tokens.TextWarningStrong,
-  ["success-moderate"]: tokens.TextSuccessStrong,
+  ["info-moderate"]: tokens.TextInfo,
+  ["warning-moderate"]: tokens.TextWarning,
+  ["success-moderate"]: tokens.TextSuccess,
   ["neutral-moderate"]: tokens.BgDefault,
-  ["info-strong"]: tokens.TextInfoStrong,
-  ["warning-strong"]: tokens.TextWarningStrong,
-  ["success-strong"]: tokens.TextSuccessStrong,
+  ["info-strong"]: tokens.TextInfo,
+  ["warning-strong"]: tokens.TextWarning,
+  ["success-strong"]: tokens.TextSuccess,
   ["neutral-strong"]: tokens.BgModeratePressed,
 };
 

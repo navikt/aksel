@@ -83,12 +83,16 @@ const configForRole = (role: SemanticColorRoles) => {
     },
     text: {
       [role]: {
-        value: `{ax.${role}.800.value}`,
+        value: `{ax.${role}.1000.value}`,
         type: "color",
         group: `text.${role}`,
       },
-      [`${role}-strong`]: {
-        value: `{ax.${role}.1000.value}`,
+      [`${role}-subtle`]: {
+        /* Gray colors are percieved a little lighter than other colored versions. */
+        value:
+          role === "neutral"
+            ? `{ax.${role}.900.value}`
+            : `{ax.${role}.800.value}`,
         type: "color",
         group: `text.${role}`,
       },

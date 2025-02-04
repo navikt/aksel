@@ -48,7 +48,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--ax-text-danger);
+  color: var(--ax-text-danger-subtle);
 }
 
 .navds-textarea__sr-counter {
