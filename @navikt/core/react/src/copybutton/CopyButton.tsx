@@ -120,25 +120,25 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const activeString = activeText || translate("activeText");
 
-    const copyIcon = active
-      ? activeIcon ?? (
-          <LegacyIconWrapper useLegacy={!themeContext}>
-            <CheckmarkIcon
-              aria-hidden={!!text}
-              title={text ? undefined : activeString}
-              className={themeContext ? "navds-copybutton__icon" : undefined}
-            />
-          </LegacyIconWrapper>
-        )
-      : icon ?? (
-          <LegacyIconWrapper useLegacy={!themeContext}>
-            <FilesIcon
-              aria-hidden={!!text}
-              title={text ? undefined : title || translate("title")}
-              className={themeContext ? "navds-copybutton__icon" : undefined}
-            />
-          </LegacyIconWrapper>
-        );
+    const copyIcon = (
+      <LegacyIconWrapper useLegacy={!themeContext}>
+        {active
+          ? activeIcon ?? (
+              <CheckmarkIcon
+                aria-hidden={!!text}
+                title={text ? undefined : activeString}
+                className={themeContext ? "navds-copybutton__icon" : undefined}
+              />
+            )
+          : icon ?? (
+              <FilesIcon
+                aria-hidden={!!text}
+                title={text ? undefined : title || translate("title")}
+                className={themeContext ? "navds-copybutton__icon" : undefined}
+              />
+            )}
+      </LegacyIconWrapper>
+    );
 
     if (themeContext) {
       return (
