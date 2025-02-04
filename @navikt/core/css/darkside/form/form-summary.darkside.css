@@ -7,7 +7,7 @@
 
 .navds-form-summary__header {
   background: var(--ax-bg-moderateA);
-  padding: var(--ax-space-16) var(--ax-space-24);
+  padding: var(--ax-space-20) var(--ax-space-20) var(--ax-space-16) var(--ax-space-20);
   display: flex;
   justify-content: space-between;
   gap: 0 var(--ax-space-12);
@@ -15,7 +15,7 @@
 
 @media (max-width: 479px) {
   .navds-form-summary__header {
-    padding: var(--ax-space-12) var(--ax-space-16);
+    padding: var(--ax-space-16) var(--ax-space-16) var(--ax-space-12) var(--ax-space-16);
     flex-direction: column;
   }
 }
@@ -31,13 +31,13 @@
 }
 
 .navds-form-summary__answers {
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-16) var(--ax-space-20) var(--ax-space-20) var(--ax-space-20);
   margin: 0;
 }
 
 @media (max-width: 479px) {
   .navds-form-summary__answers {
-    padding: var(--ax-space-16);
+    padding: var(--ax-space-12) var(--ax-space-16) var(--ax-space-16) var(--ax-space-16);
   }
 }
 

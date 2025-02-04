@@ -125,12 +125,6 @@
     }
   }
 
-  &:hover {
-    & .navds-stepper__circle {
-      color: var(--ax-text-accent-strong);
-    }
-  }
-
   & .navds-stepper__circle {
     color: var(--ax-text-accent);
     border-color: var(--ax-border-accent-strong);
@@ -138,7 +132,6 @@
 
   &[data-active="true"] {
     & .navds-stepper__content {
-      color: var(--ax-text-accent-strong);
       text-decoration: none;
     }
 
@@ -160,19 +153,14 @@
 }
 
 .navds-stepper__step[data-interactive="false"] {
-  color: var(--ax-text-default);
+  color: var(--ax-text-subtle);
   cursor: default;
 
   & .navds-stepper__circle {
-    color: var(--ax-text-default);
     border-color: var(--ax-border-strong);
   }
 
   &[data-active="true"] {
-    & .navds-stepper__content {
-      color: var(--ax-text-subtle);
-    }
-
     & .navds-stepper__circle {
       color: var(--ax-text-contrast);
       background-color: var(--ax-bg-strong-pressed);
