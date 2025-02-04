@@ -4,7 +4,7 @@ import { Box, HStack } from "@navikt/ds-react";
 const MainCard = ({ children }: { children: ReactNode }) => (
   <Box.New
     background="raised"
-    borderColor="subtleA"
+    borderColor="neutral-subtleA"
     borderWidth="1"
     borderRadius="xlarge"
     padding="space-16"

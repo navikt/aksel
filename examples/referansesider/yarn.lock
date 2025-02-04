@@ -800,14 +800,14 @@ __metadata:
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=5839e3&locator=referansesider%40workspace%3A."
-  checksum: 10/a5a55307bd199c43d71b296042882dd7b8301e59200639da00358e3cddd3f7e57d4047a237bf5516f1968962a3c895ca3bcabf340419e6035676d38e8c6a3ac1
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=ebd133&locator=referansesider%40workspace%3A."
+  checksum: 10/99fe96ffed8ef2501edc931e6c4d55ea415a6f84c5b3ec562ad626503afa0c3fd028abb2b915fd72c22dd309f1e0db4253b7dca0e6233d3c1798610eedf801db
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=b4e778&locator=referansesider%40workspace%3A."
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=238abe&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -822,14 +822,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/ac65c5f17b8b85f80d210324bf7ec76264351aa9324bf001682543436bc0bd1ff0dc95390a5f199ef342ff69894524677b187261e600fce5949e40b695088ef9
+  checksum: 10/e15199c1a167d08033344a062b739306f0579e79f3872b3207c79a5bf84c0a2a70df27aae4da181046b623dd3b48cec7c96d79016baed4393a8d9cb90daff50b
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=7948b3&locator=referansesider%40workspace%3A."
-  checksum: 10/095b0311b58150adc39c3ea4cbc55634a1fe4fd595832bfa0e1ae23782cd3ae2a61ec9cf4fa08500f41c9c90ee17d3d98a06fb4d299b08d8a219d13ad9c25dd5
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=9ed997&locator=referansesider%40workspace%3A."
+  checksum: 10/341e8cd508d509bf2af6b34ba7d58585318bce71e59d664ee546b1cf413fb9ab72e58fe29c72d377b9e6a98505e75846060492ef8c7f11233780938b165da288
   languageName: node
   linkType: hard
 

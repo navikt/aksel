@@ -2,6 +2,10 @@ import _ from "lodash";
 import { ColorRolesList, type SemanticColorRoles } from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
+/**
+ * Gray colors are percieved a little lighter than other colored versions,
+ * so we make some adjustments for neutral colors.
+ */
 const configForRole = (role: SemanticColorRoles) => {
   return {
     bg: {
@@ -66,17 +70,26 @@ const configForRole = (role: SemanticColorRoles) => {
         group: `background.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.600.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.700.value}`
+            : `{ax.${role}.600.value}`,
         type: "color",
         group: `background.${role}`,
       },
       [`${role}-strong-hover`]: {
-        value: `{ax.${role}.700.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.800.value}`
+            : `{ax.${role}.700.value}`,
         type: "color",
         group: `background.${role}`,
       },
       [`${role}-strong-pressed`]: {
-        value: `{ax.${role}.800.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.900.value}`
+            : `{ax.${role}.800.value}`,
         type: "color",
         group: `background.${role}`,
       },
@@ -88,7 +101,6 @@ const configForRole = (role: SemanticColorRoles) => {
         group: `text.${role}`,
       },
       [`${role}-subtle`]: {
-        /* Gray colors are percieved a little lighter than other colored versions. */
         value:
           role === "neutral"
             ? `{ax.${role}.900.value}`

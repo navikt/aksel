@@ -6,7 +6,7 @@ const ActivityCard = ({ children }: { children: ReactNode }) => {
     <Box.New
       className="activity-card"
       background="raised"
-      borderColor="subtleA"
+      borderColor="neutral-subtleA"
       borderRadius="xlarge"
       borderWidth="1"
       paddingInline="space-16"

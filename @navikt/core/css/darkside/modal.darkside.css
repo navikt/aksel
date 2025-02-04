@@ -6,14 +6,14 @@
   --__axc-modal-bg: var(--ax-bg-raised);
 
   background-color: var(--__axc-modal-bg);
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   box-shadow: var(--ax-shadow-dialog);
   padding: 0;
   position: fixed;
   max-height: 100%;
   max-width: 100%;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   margin: auto;
 
   &[open] {
@@ -135,7 +135,7 @@
 
 .navds-modal__label {
   font-weight: var(--ax-font-weight-bold);
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navds-modal__body {

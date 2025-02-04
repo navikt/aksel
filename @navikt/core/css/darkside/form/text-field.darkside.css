@@ -3,10 +3,10 @@
   padding: var(--ax-space-8);
   background: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   min-height: 3rem;
   width: 100%;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
     border-color: var(--ax-border-accent-strong);
@@ -20,12 +20,12 @@
 
   &:disabled {
     background-color: var(--ax-bg-input);
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
     cursor: not-allowed;
   }
 
   &::placeholder {
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral-subtle);
   }
 
   &[size] {
@@ -44,8 +44,8 @@
 }
 
 .navds-text-field--readonly .navds-text-field__input {
-  background-color: var(--ax-bg-moderate);
-  border-color: var(--ax-border-subtleA);
+  background-color: var(--ax-bg-neutral-moderate);
+  border-color: var(--ax-border-neutral-subtleA);
   cursor: default;
 }
 

@@ -78,7 +78,7 @@ export const ToggleChips: OverridableComponent<
                 fill={`var(${
                   variant === "action"
                     ? "--ax-text-accent"
-                    : "--ax-text-default"
+                    : "--ax-text-neutral"
                 }, var(--ac-chip-toggle-circle-border, var(--a-border-default)))`}
               />
             )}

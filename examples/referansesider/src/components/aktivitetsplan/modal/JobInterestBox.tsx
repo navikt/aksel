@@ -22,11 +22,11 @@ const JobInterestBox = ({
   const [shouldSave, setShouldSave] = React.useState(undefined);
   return (
     <Box.New
-      borderColor="subtleA"
+      borderColor="neutral-subtleA"
       borderWidth="1"
       borderRadius="xlarge"
       padding="space-12"
-      background="softA"
+      background="neutral-softA"
     >
       <VStack gap="4">
         <Heading size="small" as="h2">

@@ -634,7 +634,7 @@ export const ActionMenuCheckboxItem = forwardRef<
                   width="24"
                   height="24"
                   rx="4"
-                  fill="var(--ax-border-default, var(--a-border-default))"
+                  fill="var(--ax-border-neutral, var(--a-border-default))"
                 />
                 <rect
                   x="1"
@@ -771,7 +771,7 @@ export const ActionMenuRadioItem = forwardRef<
                   width="24"
                   height="24"
                   rx="12"
-                  fill="var(--ax-border-default, var(--a-border-default))"
+                  fill="var(--ax-border-neutral, var(--a-border-default))"
                 />
                 <rect
                   x="1"

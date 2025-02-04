@@ -6,11 +6,11 @@
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--ax-bg-raised);
   height: fit-content;
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
 
   &:has(.navds-expansioncard__header:hover) {
-    box-shadow: 0 0 0 1px var(--ax-border-strong);
-    border-color: var(--ax-border-strong);
+    box-shadow: 0 0 0 1px var(--ax-border-neutral-strong);
+    border-color: var(--ax-border-neutral-strong);
   }
 }
 
@@ -45,7 +45,7 @@
   justify-content: space-between;
 
   &:hover {
-    background-color: var(--ax-bg-soft-hoverA);
+    background-color: var(--ax-bg-neutral-soft-hoverA);
   }
 
   &[data-open="true"] {
@@ -55,7 +55,7 @@
     /* Divider between header and content */
     &::after {
       content: "";
-      background-color: var(--ax-border-subtleA);
+      background-color: var(--ax-border-neutral-subtleA);
       bottom: 0;
       left: var(--__axc-expansioncard-padding-inline);
       height: 1px;
@@ -114,7 +114,7 @@
 }
 
 .navds-expansioncard__header:hover > .navds-expansioncard__header-button {
-  background-color: var(--ax-bg-moderate-hoverA);
+  background-color: var(--ax-bg-neutral-moderate-hoverA);
 }
 
 .navds-expansioncard__header-chevron {
