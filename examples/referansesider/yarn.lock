@@ -793,21 +793,21 @@ __metadata:
 
 "@navikt/aksel-icons@file:../../@navikt/aksel-icons::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=befc7b&locator=referansesider%40workspace%3A."
-  checksum: 10/c0e2b254a2d22e8b9836c767242b3620e791607c2518bf604a4ba0ea8c34cf2f20dc07a2ec92f3d21ba9461d5e74f71c41f0da7608d10fcbc50676d2f68e3048
+  resolution: "@navikt/aksel-icons@file:../../@navikt/aksel-icons#../../@navikt/aksel-icons::hash=8e3ed1&locator=referansesider%40workspace%3A."
+  checksum: 10/bb552594a363dee42595eea06bfef54f23731a8a9129980dc2b6004d6cc5e962096524eb8a72ebbec1198b78eabec1130ef8a68ce3e11060a8a76c176ad8da79
   languageName: node
   linkType: hard
 
 "@navikt/ds-css@file:../../@navikt/core/css::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=f16c4a&locator=referansesider%40workspace%3A."
-  checksum: 10/6457cdfb99ece3895b103628f733b483f30f9a94df22a468f403767c9c0838bafa7dc43907ece7e682504c2ddb81692d144dfb7bb668adba9c6409dc1c162a2a
+  resolution: "@navikt/ds-css@file:../../@navikt/core/css#../../@navikt/core/css::hash=d629f0&locator=referansesider%40workspace%3A."
+  checksum: 10/087414b8d0ed304c0c769ee02651d9df03372570e6f6dcc157610b774886d0873ce84d8f8bdf84a5429ed1804edb0cfb444e763b7400a4e9d178e3a89b465292
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:../../@navikt/core/react::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=dd110c&locator=referansesider%40workspace%3A."
+  resolution: "@navikt/ds-react@file:../../@navikt/core/react#../../@navikt/core/react::hash=ce6755&locator=referansesider%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -822,14 +822,14 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/bd2d6a2717d147b53e7d7b2ec2517e037174c5afb7a017fafc81277dbd382d3828e41a72a54f1c3bb7865c3a3967abe4f97088fe2bcc65c667de8ea0af0955c0
+  checksum: 10/d8fca4f2b369c73a57ef1c35f3452c41c85d855408c3cebf5258a2f6c82fe711965c2f9f1e178036ae9d170790e507b9c188bc867d534d0292d9d9c9ecf03616
   languageName: node
   linkType: hard
 
 "@navikt/ds-tokens@file:../../@navikt/core/tokens::locator=referansesider%40workspace%3A.":
   version: 7.11.0
-  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=e5c5a0&locator=referansesider%40workspace%3A."
-  checksum: 10/3a3939edb39914a99615abf9400bedd5f34acb8a41a8fb616e3fb63232192355bbf69b4c41431d37941041ba06149129d50a5e5a997b6792a80b90ff55bbffcd
+  resolution: "@navikt/ds-tokens@file:../../@navikt/core/tokens#../../@navikt/core/tokens::hash=c02194&locator=referansesider%40workspace%3A."
+  checksum: 10/a99e7b508d871d8f4876e4ee43fd858c9b3fee9b42a7a974f4c7fb422cce2cac0d766d247e9dfcbc97f34317188acd63e3ea5e0b51d196b689cfafce4af5a927
   languageName: node
   linkType: hard
 
