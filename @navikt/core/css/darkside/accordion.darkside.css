@@ -12,7 +12,7 @@
   position: relative;
   border-radius: var(--ax-border-radius-large);
   background: transparent;
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 
   > * {
     font-weight: var(--ax-font-weight-regular);
@@ -96,7 +96,7 @@
   height: 22px;
   align-self: center;
   background-color: var(--ax-bg-accent-moderateA);
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 }
 
 .navds-accordion__header-chevron {

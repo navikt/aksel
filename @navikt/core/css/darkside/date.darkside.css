@@ -84,7 +84,7 @@
       width: 6px;
       height: 6px;
       display: block;
-      background-color: var(--ax-text-accent);
+      background-color: var(--ax-text-accent-subtle);
       border-radius: var(--ax-border-radius-full);
       content: "";
       position: absolute;

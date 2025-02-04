@@ -1,5 +1,5 @@
 .navds-link {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   display: inline-flex;
   align-items: center;
   gap: var(--ax-space-2);
@@ -52,7 +52,7 @@
 }
 
 .navds-link--action {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 }
 
 .navds-link--neutral {

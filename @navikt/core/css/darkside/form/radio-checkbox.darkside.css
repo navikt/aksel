@@ -157,7 +157,7 @@
 
 .navds-checkbox__input:hover:not(:disabled) + .navds-checkbox__label,
 .navds-radio__input:hover:not(:disabled, :checked) + .navds-radio__label {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 }
 
 .navds-checkbox__input:hover:not(:disabled, :checked, :indeterminate) + .navds-checkbox__label::before,

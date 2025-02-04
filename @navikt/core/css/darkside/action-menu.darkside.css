@@ -103,11 +103,11 @@
 }
 
 .navds-action-menu__item--danger {
-  color: var(--ax-text-danger);
+  color: var(--ax-text-danger-subtle);
 
   &:focus {
     background-color: var(--ax-bg-danger-moderate-hoverA);
-    color: var(--ax-text-danger);
+    color: var(--ax-text-danger-subtle);
   }
 }
 

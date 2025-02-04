@@ -206,7 +206,7 @@
 }
 
 .navds-error-message {
-  color: var(--ax-text-danger);
+  color: var(--ax-text-danger-subtle);
 
   &.navds-error-message--show-icon {
     display: flex;

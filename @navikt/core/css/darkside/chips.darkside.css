@@ -72,7 +72,7 @@
 .navds-chips__toggle--action {
   box-shadow: inset 0 0 0 1px var(--ax-border-accent-subtleA);
   background-color: var(--ax-bg-accent-moderate);
-  color: var(--ax-text-accent-strong);
+  color: var(--ax-text-accent);
 
   &:hover {
     background-color: var(--ax-bg-accent-moderate-hover);
