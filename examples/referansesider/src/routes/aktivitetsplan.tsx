@@ -92,7 +92,7 @@ const AktivitetsplanPage = () => {
         <Page.Block width="lg" gutters>
           <VStack gap="space-32">
             <Heading as="h1" size="xlarge">
-              Aktivitetsplan
+              Aktivitetsplan 2 (ny og forbedret)
             </Heading>
             <MainCard>
               <HStack align="center" gap="space-32">
