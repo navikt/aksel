@@ -3,8 +3,8 @@ import { Preview } from "@storybook/react";
 import React, { useLayoutEffect } from "react";
 // @ts-expect-error - Temporary
 import darksideCss from "../@navikt/core/css/darkside/index.css?inline";
-
-/* import defaultCss from "../@navikt/core/css/index.css?inline"; */
+// @ts-expect-error - Temporary
+import defaultCss from "../@navikt/core/css/index.css?inline";
 import { Provider } from "../@navikt/core/react/src/provider";
 import { Theme } from "../@navikt/core/react/src/theme";
 import en from "../@navikt/core/react/src/util/i18n/locales/en";
@@ -15,14 +15,12 @@ import "./layout.css";
 const ModeDecorator = ({ children, mode, theme }) => {
   useLayoutEffect(() => {
     const style = document.createElement("style");
-    /* style.innerHTML = mode === "darkside" ? darksideCss : defaultCss; */
-    style.innerHTML = darksideCss;
+    style.innerHTML = mode === "darkside" ? darksideCss : defaultCss;
     document.head.appendChild(style);
 
-    /* if (mode === "darkside") {
+    if (mode === "darkside") {
       document.body.style.setProperty("background", "var(--ax-bg-default)");
-      } */
-    document.body.style.setProperty("background", "var(--ax-bg-default)");
+    }
 
     return () => {
       document.head.removeChild(style);
@@ -30,19 +28,13 @@ const ModeDecorator = ({ children, mode, theme }) => {
     };
   }, [mode]);
 
-  return (
-    <Theme theme={theme || undefined} hasBackground={false}>
-      {children}
-    </Theme>
-  );
-
-  /* return mode === "darkside" ? (
+  return mode === "darkside" ? (
     <Theme theme={theme || undefined} hasBackground={false}>
       {children}
     </Theme>
   ) : (
     children
-  ); */
+  );
 };
 
 const translations = {
