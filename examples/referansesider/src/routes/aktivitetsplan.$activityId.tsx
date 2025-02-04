@@ -29,7 +29,7 @@ export const Route = createFileRoute("/aktivitetsplan/$activityId")({
 function ActivityModal() {
   const navigate = Route.useNavigate();
   const activity: Activity = Route.useLoaderData();
-  const { category, description, title } = activity;
+  const { actionText, category, title } = activity;
 
   return (
     <Modal
@@ -41,18 +41,19 @@ function ActivityModal() {
     >
       <Modal.Body>
         <VStack gap="6">
-          <BodyLong>{description}</BodyLong>
           <ActivityDetails activity={activity} />
           {category === "Stilling fra Nav" && (
             <JobInterestBox navigate={navigate} />
           )}
           <HStack gap="4">
-            <Button
-              variant="secondary"
-              onClick={() => navigate({ to: "/aktivitetsplan/" })}
-            >
-              Les mer om stillingen
-            </Button>
+            {actionText && (
+              <Button
+                variant="primary"
+                onClick={() => navigate({ to: "/aktivitetsplan/" })}
+              >
+                {actionText}
+              </Button>
+            )}
             <Button
               icon={<ChatIcon />}
               variant="secondary"

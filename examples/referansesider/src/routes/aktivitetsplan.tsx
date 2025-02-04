@@ -130,9 +130,12 @@ const AktivitetsplanPage = () => {
               </HStack>
               <Select label="Velg periode" hideLabel>
                 <option value="dog">Nåværende periode</option>
-                <option value="dog2">Cat</option>
-                <option value="dog3">Border Collie</option>
-                <option value="dog4">Maine Coon</option>
+                <option value="2017-01-30 - 2017-12-13">
+                  30. jan. 2017 - 31. des. 2017
+                </option>
+                <option value="2016-01-30 - 2016-12-31">
+                  30. jan. 2016 - 31. des. 2016
+                </option>
               </Select>
             </HStack>
           </VStack>

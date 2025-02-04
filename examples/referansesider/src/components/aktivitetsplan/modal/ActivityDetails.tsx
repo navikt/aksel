@@ -3,10 +3,11 @@ import { Activity } from "../../../data/activities";
 
 const mapActivityDetails = (
   activity: Activity,
-): { title: string; value?: string; span?: number }[] => {
+): { title?: string; value?: string; span?: number }[] => {
   switch (activity.category) {
     case "Stilling fra Nav":
       return [
+        { value: activity.description, span: 2 },
         { title: "Arbeidsgiver", value: activity.employer },
         { title: "Arbeidssted", value: activity.location },
       ];
@@ -22,6 +23,11 @@ const mapActivityDetails = (
     case "Møte med Nav":
       return [
         {
+          title: "Planlegger / Møte med Nav",
+          value: activity.description,
+          span: 2,
+        },
+        {
           title: "Dato",
           value: activity.date?.start,
         },
@@ -35,7 +41,7 @@ const mapActivityDetails = (
           title: "Møtested eller annen praktisk informasjon",
           value: activity.location,
         },
-        { title: "Hensikt med møtet", value: activity.description },
+        { title: "Hensikt med møtet", value: activity.description, span: 2 },
       ];
     default:
       return [];
@@ -51,9 +57,11 @@ const ActivityDetails = ({ activity }: { activity: Activity }) => {
           key={title}
           style={span ? { gridColumnStart: `span ${span}` } : undefined}
         >
-          <Heading size="xsmall" as="h2">
-            {title}
-          </Heading>
+          {title && (
+            <Heading size="xsmall" as="h2">
+              {title}
+            </Heading>
+          )}
           <BodyShort>{value}</BodyShort>
         </div>
       ))}
