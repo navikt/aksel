@@ -103,7 +103,7 @@
 .navds-select--readonly {
   & .navds-select__input {
     background-color: var(--ax-bg-neutral-moderate);
-    border-color: var(--ax-border-subtleA);
+    border-color: var(--ax-border-neutral-subtleA);
     cursor: default;
 
     @media (forced-colors: active) {

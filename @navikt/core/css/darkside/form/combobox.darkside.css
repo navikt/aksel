@@ -63,7 +63,7 @@
   }
 
   & .navds-combobox__wrapper {
-    border-color: var(--ax-border-subtle);
+    border-color: var(--ax-border-neutral-subtle);
     overflow: clip;
   }
 
@@ -244,7 +244,7 @@
   right: 0;
   z-index: 10;
   top: calc(100% + var(--ax-space-8));
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   flex-direction: column;
   border-radius: var(--ax-border-radius-large);
@@ -292,7 +292,7 @@
   background-color: var(--ax-bg-neutral-moderateA);
   margin: 0;
   border-radius: 0;
-  border-bottom: 1px solid var(--ax-border-subtle);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-block: var(--ax-space-8);
   line-height: var(--ax-font-line-height-large);
 }

@@ -55,7 +55,7 @@
 .navds-table__data-cell {
   display: table-cell;
   padding: var(--ax-space-12) var(--ax-space-8);
-  border-bottom: 1px solid var(--ax-border-subtleA);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
   text-align: left;
 }
 
@@ -233,7 +233,7 @@
 /* -------------------------- Table ExpandableRow -------------------------- */
 .navds-table__expanded-row-collapse:not([style*="height: 0px;"]),
 .navds-table__expanded-row-collapse[style*="transition:"] {
-  border-bottom: 1px solid var(--ax-border-subtleA);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .navds-table__expanded-row-content {

@@ -6,7 +6,7 @@
   --__axc-modal-bg: var(--ax-bg-raised);
 
   background-color: var(--__axc-modal-bg);
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   box-shadow: var(--ax-shadow-dialog);
   padding: 0;

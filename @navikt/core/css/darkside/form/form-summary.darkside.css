@@ -1,6 +1,6 @@
 .navds-form-summary {
   overflow: hidden;
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   background: var(--ax-bg-raised);
 }
@@ -27,7 +27,7 @@
 }
 
 .navds-form-summary > .navds-form-summary__answers {
-  border-top: 1px solid var(--ax-border-subtleA);
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .navds-form-summary__answers {
@@ -44,7 +44,7 @@
 .navds-form-summary__answer:not(:last-child) {
   margin-bottom: var(--ax-space-16);
   padding-bottom: var(--ax-space-16);
-  border-bottom: 1px solid var(--ax-border-subtleA);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .navds-form-summary__answer:has(.navds-form-summary__answer) {

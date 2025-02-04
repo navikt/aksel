@@ -65,7 +65,7 @@
 /* ---------------------------- ReadMore Content ---------------------------- */
 .navds-read-more__content {
   margin-top: var(--ax-space-8);
-  border-left: 2px solid var(--ax-border-subtleA);
+  border-left: 2px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
   padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-space-4));

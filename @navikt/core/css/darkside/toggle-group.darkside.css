@@ -55,7 +55,7 @@
     display: block;
     width: 1px;
     height: 50%;
-    background-color: var(--ax-border-subtleA);
+    background-color: var(--ax-border-neutral-subtleA);
     left: -1px;
     position: absolute;
   }

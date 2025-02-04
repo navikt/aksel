@@ -45,7 +45,7 @@
 
 .navds-text-field--readonly .navds-text-field__input {
   background-color: var(--ax-bg-neutral-moderate);
-  border-color: var(--ax-border-subtleA);
+  border-color: var(--ax-border-neutral-subtleA);
   cursor: default;
 }
 

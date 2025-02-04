@@ -55,7 +55,7 @@
     /* Divider between header and content */
     &::after {
       content: "";
-      background-color: var(--ax-border-subtleA);
+      background-color: var(--ax-border-neutral-subtleA);
       bottom: 0;
       left: var(--__axc-expansioncard-padding-inline);
       height: 1px;

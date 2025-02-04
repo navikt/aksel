@@ -67,7 +67,7 @@
 }
 
 .navds-loader__background {
-  stroke: var(--ax-border-subtleA);
+  stroke: var(--ax-border-neutral-subtleA);
   stroke-width: var(--__axc-loader-stroke-width);
 }
 
@@ -89,7 +89,7 @@
 
 .navds-loader--inverted {
   & .navds-loader__foreground {
-    stroke: var(--ax-border-subtle);
+    stroke: var(--ax-border-neutral-subtle);
   }
 
   & .navds-loader__background {

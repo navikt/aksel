@@ -10,7 +10,7 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 150ms;
   text-align: center;
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
 }
 

@@ -23,7 +23,7 @@
   align-items: center;
   background-color: var(--ax-bg-raised);
   border-radius: var(--ax-border-radius-full);
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   display: flex;
   flex-shrink: 0;
@@ -62,7 +62,7 @@
   gap: var(--ax-space-8);
   border-radius: var(--ax-border-radius-xlarge);
   border-bottom-left-radius: var(--ax-border-radius-small);
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 .navds-chat--small .navds-chat__bubble {

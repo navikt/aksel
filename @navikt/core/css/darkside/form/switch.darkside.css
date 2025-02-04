@@ -199,7 +199,7 @@
   & > .navds-switch__input:checked ~ .navds-switch__track,
   & > .navds-switch__input:checked:hover ~ .navds-switch__track {
     background-color: var(--ax-bg-neutral-moderate);
-    border-color: var(--ax-border-subtleA);
+    border-color: var(--ax-border-neutral-subtleA);
   }
 
   & > .navds-switch__label-wrapper,

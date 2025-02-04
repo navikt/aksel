@@ -321,7 +321,7 @@
   background-color: var(--ax-bg-raised);
   box-shadow: var(--ax-shadow-dialog);
   border: 1px solid;
-  border-color: var(--ax-border-subtleA);
+  border-color: var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-large);
   padding: var(--ax-space-16) var(--ax-space-20);
 }
