@@ -33,7 +33,7 @@
 
 .navds-pagination__item[data-selected="true"] {
   background-color: var(--ax-bg-strong-pressed);
-  color: var(--ax-text-contrast);
+  color: var(--ax-text-neutral-contrast);
 }
 
 .navds-pagination--invisible {

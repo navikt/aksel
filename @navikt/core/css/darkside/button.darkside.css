@@ -112,7 +112,7 @@
  *************************/
 .navds-button--primary-neutral {
   background-color: var(--ax-bg-strong);
-  color: var(--ax-text-contrast);
+  color: var(--ax-text-neutral-contrast);
 
   &:hover {
     background-color: var(--ax-bg-strong-hover);

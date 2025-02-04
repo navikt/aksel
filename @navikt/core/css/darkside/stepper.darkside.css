@@ -162,7 +162,7 @@
 
   &[data-active="true"] {
     & .navds-stepper__circle {
-      color: var(--ax-text-contrast);
+      color: var(--ax-text-neutral-contrast);
       background-color: var(--ax-bg-strong-pressed);
       border-color: var(--ax-bg-strong-pressed);
     }

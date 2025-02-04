@@ -238,10 +238,6 @@
 .navds-date__weeknumber-number {
   font-size: 0.875rem;
   color: var(--ax-text-neutral-subtle);
-
-  .navds-date__weeknumber:active & {
-    color: var(--ax-text-contrast);
-  }
 }
 
 .navds-date__week-wrapper {

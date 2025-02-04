@@ -101,7 +101,7 @@
   &[data-pressed="true"] {
     box-shadow: none;
     background-color: var(--ax-bg-strong-pressed);
-    color: var(--ax-text-contrast);
+    color: var(--ax-text-neutral-contrast);
 
     &:hover {
       background-color: var(--ax-bg-strong-hover);
@@ -131,7 +131,7 @@
 
 .navds-chips__removable--neutral {
   background: var(--ax-bg-strong-pressed);
-  color: var(--ax-text-contrast);
+  color: var(--ax-text-neutral-contrast);
 
   &:hover {
     background: var(--ax-bg-strong-hover);

@@ -4,6 +4,11 @@ import { type StyleDictionaryToken } from "../tokens.util";
 export const textContrastTokenConfig = {
   text: {
     /* core */
+    "neutral-contrast": {
+      value: "{ax.neutral.000.value}",
+      type: "color",
+      group: `text.accent`,
+    },
     "accent-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",

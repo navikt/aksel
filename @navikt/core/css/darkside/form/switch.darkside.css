@@ -222,7 +222,7 @@
 
   & > .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
     background-color: var(--ax-bg-strong);
-    color: var(--ax-text-contrast);
+    color: var(--ax-text-neutral-contrast);
   }
 
   @media (hover: hover) and (pointer: fine) {
