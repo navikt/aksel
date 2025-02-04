@@ -26,7 +26,8 @@ jobs:
           npm_auth_token: ${{ secrets.READER_TOKEN }}
 
       - run: cd ./examples/referansesider && yarn && yarn build
-      - uses: nais/deploy/actions/spa-deploy/v2@master
+      #- uses: nais/deploy/actions/spa-deploy/v2@master
+      - uses: ./.github/actions/spa-deploy
         with:
           app: aksel-referansesider
           team: designsystem
@@ -35,3 +36,4 @@ jobs:
           environment: dev
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          cache_invalidation: true
