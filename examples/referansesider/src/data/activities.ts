@@ -52,7 +52,7 @@ const activities: Activity[] = [
     actionText: "Les mer om stillingen",
     tag: {
       variant: "success",
-      text: "Venter på å bli kontaktet",
+      text: "Venter på Nav",
     },
   },
   {
@@ -97,7 +97,7 @@ const activities: Activity[] = [
     title: "Servitør",
     tag: {
       variant: "success",
-      text: "Venter på å bli kontaktet",
+      text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
   },
@@ -109,10 +109,10 @@ const activities: Activity[] = [
     location: "Kristiansand",
     hasChange: true,
     id: "5",
-    title: "Assisterende skipskokk",
+    title: "Ass. skipskokk",
     tag: {
       variant: "success",
-      text: "Venter på å bli kontaktet",
+      text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
   },
@@ -127,7 +127,7 @@ const activities: Activity[] = [
     title: "Servitør",
     tag: {
       variant: "success",
-      text: "Venter på å bli kontaktet",
+      text: "Venter på Nav",
     },
     actionText: "Les mer om stillingen",
   },
