@@ -40,7 +40,7 @@
   }
 
   &[data-disabled="true"] {
-    --__axc-dropzone-background: var(--ax-bg-soft);
+    --__axc-dropzone-background: var(--ax-bg-neutral-soft);
 
     border-color: var(--ax-border-subtleA);
     cursor: default;

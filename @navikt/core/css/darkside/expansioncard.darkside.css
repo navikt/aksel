@@ -45,7 +45,7 @@
   justify-content: space-between;
 
   &:hover {
-    background-color: var(--ax-bg-soft-hoverA);
+    background-color: var(--ax-bg-neutral-soft-hoverA);
   }
 
   &[data-open="true"] {
