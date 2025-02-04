@@ -275,3 +275,120 @@ export const Setup = () => {
     </Box.New>
   );
 };
+
+export const Tokens = () => {
+  return (
+    <Box.New paddingBlock="space-48" asChild className="darkside-docs">
+      <Page>
+        <Page.Block width="md" gutters>
+          <BodyShort as="time">{`Last update: ${LAST_UPDATED}`}</BodyShort>
+
+          <Heading size="xlarge" as="h1" spacing>
+            Setup
+          </Heading>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Installation
+          </Heading>
+          <BodyLong spacing>
+            Here you have the basics to get started with the new system. We
+            provide more in-depth guides for each part in the sidebar.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            Design tokens
+          </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-css
+@navikt/ds-tokens/darkside-scss
+@navikt/ds-tokens/darkside-less
+@navikt/ds-tokens/darkside-js`}</code>
+          </pre>
+          <BodyLong spacing>
+            The design-tokens are avaliable in multiple formats. You can import
+            them in your project by using the import-paths above. All of these
+            formats are based on CSS-variables to support theming and darkmode.
+          </BodyLong>
+          <BodyLong spacing weight="semibold">
+            Note: If using SCSS, LESS or JS, you will also have to import the
+            CSS-version tokens or they will not work. If this is not possible,
+            you can import the static version of the tokens. You will not get
+            theming or darkmode support with this version built in.
+          </BodyLong>
+          <pre className="docs-pre">
+            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
+@navikt/ds-tokens/darkside-less-static
+@navikt/ds-tokens/darkside-js-static`}</code>
+          </pre>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-tailwind
+          </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">@navikt/ds-tailwind/darkside</code>
+          </pre>
+          <BodyLong spacing>
+            Replace the old <code>@navikt/ds-tailwind</code>-import with the
+            above in your config, and you now have the new tailwind-config in
+            your project.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-css
+          </Heading>
+          <Heading size="medium" as="h3" spacing>
+            Import-paths
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">@navikt/ds-css/darkside</code>
+          </pre>
+          <BodyLong spacing>
+            Replace the old <code>@navikt/ds-css</code>-import with the above,
+            and you now have the new CSS-package in your project. Note that for
+            this to work in conjunction with <code>@navikt/ds-react</code>, you
+            will have to wrap your application in a <code>Theme</code>
+            -component.
+          </BodyLong>
+        </Page.Block>
+        <Page.Block width="md" gutters>
+          <Heading size="large" as="h2" spacing>
+            @navikt/ds-react
+          </Heading>
+          <pre className="docs-pre">
+            <code className="docs-code">
+              {`import { Theme } from '@navikt/ds-react';
+
+// Light mode
+<Theme theme="light">
+  <App />
+</Theme>
+
+// Dark mode
+<Theme theme="dark">
+  <App />
+</Theme>`}
+            </code>
+          </pre>
+          <BodyLong spacing>
+            Wrap your application in a <code>Theme</code>-component to use the
+            new system. This component is required to use the new CSS and acts
+            as a <code>Feature flag</code> internally. Using this component, you
+            can also change between <code>theme=light</code> and{" "}
+            <code>theme=dark</code> when implementing theme-switching interally
+            in your application.
+          </BodyLong>
+        </Page.Block>
+      </Page>
+    </Box.New>
+  );
+};
