@@ -48,7 +48,7 @@ function ActivityModal() {
           <HStack gap="4">
             {actionText && (
               <Button
-                variant="primary"
+                variant="secondary"
                 onClick={() => navigate({ to: "/aktivitetsplan/" })}
               >
                 {actionText}
