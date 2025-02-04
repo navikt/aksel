@@ -122,7 +122,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
 
     const copyIcon = active
       ? activeIcon ?? (
-          <LegacyIconWrapper useLegacy={!!themeContext}>
+          <LegacyIconWrapper useLegacy={!themeContext}>
             <CheckmarkIcon
               aria-hidden={!!text}
               title={text ? undefined : activeString}
@@ -131,7 +131,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
           </LegacyIconWrapper>
         )
       : icon ?? (
-          <LegacyIconWrapper useLegacy={!!themeContext}>
+          <LegacyIconWrapper useLegacy={!themeContext}>
             <FilesIcon
               aria-hidden={!!text}
               title={text ? undefined : title || translate("title")}
