@@ -173,7 +173,7 @@
 .navds-timeline__period--neutral {
   background: var(--ax-bg-moderate);
   border: solid 1px var(--ax-border-default);
-  color: var(--ax-text-icon);
+  color: var(--ax-text-neutral-icon);
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-moderate-hover);
