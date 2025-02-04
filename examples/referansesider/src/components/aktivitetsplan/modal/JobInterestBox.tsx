@@ -13,12 +13,14 @@ import {
   ReadMore,
   VStack,
 } from "@navikt/ds-react";
+import { ThemeProviderContext } from "../../../theme/ThemeContext";
 
 const JobInterestBox = ({
   navigate,
 }: {
   navigate: UseNavigateResult<"/aktivitetsplan/$activityId">;
 }) => {
+  const { theme } = React.useContext(ThemeProviderContext);
   const [shouldSave, setShouldSave] = React.useState(undefined);
   return (
     <Box.New
@@ -27,6 +29,7 @@ const JobInterestBox = ({
       borderRadius="xlarge"
       padding="space-12"
       background="soft"
+      style={theme === "dark" ? { backgroundColor: "#c8cf f00b" } : undefined}
     >
       <VStack gap="4">
         <Heading size="large" as="h2">
