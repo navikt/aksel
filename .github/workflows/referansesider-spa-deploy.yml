@@ -27,7 +27,7 @@ jobs:
 
       - run: cd ./examples/referansesider && yarn && yarn build
       #- uses: nais/deploy/actions/spa-deploy/v2@master
-      - uses: ../../actions/spa-deploy
+      - uses: ./.github/actions/spa-deploy
         with:
           app: aksel-referansesider
           team: designsystem
