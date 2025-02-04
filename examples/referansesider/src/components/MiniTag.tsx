@@ -2,40 +2,40 @@ import styled from "styled-components";
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 const bgMap = {
-  info: tokens.BgInfo,
-  warning: tokens.BgWarning,
-  success: tokens.BgSuccess,
-  neutral: tokens.BgNeutral,
+  info: tokens.BgInfoSoft,
+  warning: tokens.BgWarningSoft,
+  success: tokens.BgSuccessSoft,
+  neutral: tokens.BgModerate,
   ["info-moderate"]: tokens.BgInfoModerate,
   ["warning-moderate"]: tokens.BgWarningModerate,
   ["success-moderate"]: tokens.BgSuccessModerate,
-  ["neutral-moderate"]: tokens.BgNeutralModerate,
+  ["neutral-moderate"]: tokens.BgDefault,
   ["info-strong"]: tokens.BgInfoStrong,
   ["warning-strong"]: tokens.BgWarningStrong,
   ["success-strong"]: tokens.BgSuccessStrong,
-  ["neutral-strong"]: tokens.BgNeutralStrong,
+  ["neutral-strong"]: tokens.BgModeratePressed,
 };
 
 const fgMap = {
   info: tokens.TextInfo,
   warning: tokens.TextWarning,
   success: tokens.TextSuccess,
-  neutral: tokens.TextNeutral,
+  neutral: tokens.BgModerate,
   ["info-moderate"]: tokens.TextInfoStrong,
   ["warning-moderate"]: tokens.TextWarningStrong,
   ["success-moderate"]: tokens.TextSuccessStrong,
-  ["neutral-moderate"]: tokens.TextNeutralStrong,
+  ["neutral-moderate"]: tokens.BgDefault,
   ["info-strong"]: tokens.TextInfoStrong,
   ["warning-strong"]: tokens.TextWarningStrong,
   ["success-strong"]: tokens.TextSuccessStrong,
-  ["neutral-strong"]: tokens.TextNeutralStrong,
+  ["neutral-strong"]: tokens.BgModeratePressed,
 };
 
 const borderMap = {
   info: tokens.BorderInfo,
   warning: tokens.BorderWarning,
   success: tokens.BorderSuccess,
-  neutral: tokens.BorderNeutral,
+  neutral: tokens.BorderDefault,
 };
 
 export const MiniTag = styled.span<{

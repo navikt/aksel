@@ -600,7 +600,17 @@
         "default": "./cjs/form/form-progress/index.js"
       }
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./Theme": {
+      "import": {
+        "types": "./esm/theme/index.d.ts",
+        "default": "./esm/theme/index.js"
+      },
+      "require": {
+        "types": "./cjs/theme/index.d.ts",
+        "default": "./cjs/theme/index.js"
+      }
+    }
   },
   "scripts": {
     "docgen": "tsx ../../../scripts/docgen.ts",

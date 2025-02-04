@@ -19,6 +19,8 @@ export const RouteMapper = ({
     paths = paths.filter((path) => path !== "/");
   }
 
+  // paths = paths.filter((path) => path === "/aktivitetsplan");
+
   return (
     <>
       {paths.map((path) => {

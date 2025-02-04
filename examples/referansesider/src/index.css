@@ -9,11 +9,32 @@
   width: 100%;
 }
 
-:where(:root) *:focus {
-  outline: 4px solid var(--a-bg-accent-strong-hover);
-  z-index: 200;
+.navds-list > ul {
+  margin-top: 0;
 }
 
-*:focus {
-  outline-offset: 4px;
+.activity-card:hover {
+  border-color: var(--ax-border-accent);
+}
+
+.activity-card:focus-within {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 3px;
+}
+
+.activity-card__link:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.activity-card__link:focus {
+  outline: none;
+}
+
+.navds-modal::backdrop {
+  background-color: rgba(2, 10, 23, 0.88);
 }
