@@ -93,6 +93,16 @@ export function semanticTokenConfig(theme: ColorTheme) {
         type: "color",
         group: `background`,
       },
+      "soft-pressed": {
+        value: `{ax.neutral.300.value}`,
+        type: "color",
+        group: `background`,
+      },
+      "soft-pressedA": {
+        value: `{ax.neutral.300A.value}`,
+        type: "color",
+        group: `background`,
+      },
       moderate: {
         value: `{ax.neutral.200.value}`,
         type: "color",

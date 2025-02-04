@@ -25,6 +25,16 @@ const configForRole = (role: SemanticColorRoles) => {
         type: "color",
         group: `background.${role}`,
       },
+      [`${role}-soft-pressed`]: {
+        value: `{ax.${role}.300.value}`,
+        type: "color",
+        group: `background.${role}`,
+      },
+      [`${role}-soft-pressedA`]: {
+        value: `{ax.${role}.300A.value}`,
+        type: "color",
+        group: `background.${role}`,
+      },
       [`${role}-moderate`]: {
         value: `{ax.${role}.200.value}`,
         type: "color",

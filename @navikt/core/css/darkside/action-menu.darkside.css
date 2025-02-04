@@ -94,7 +94,7 @@
   --__axc-action-menu-item-pr: var(--ax-space-2);
 
   &[data-state="open"] {
-    background-color: var(--ax-bg-moderate-pressedA);
+    background-color: var(--ax-bg-soft-pressedA);
   }
 
   &:focus {
