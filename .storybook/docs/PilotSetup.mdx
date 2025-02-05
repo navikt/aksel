@@ -4,72 +4,86 @@ import { Markdown, Meta } from "@storybook/blocks";
 
 # Setup
 
-## React
+## Clean project
 
-We have made some updates to `@navikt/ds-react` that you should be aware of before testing.
+For new projects, setup is just as easy as before, but now requires `Theme`-component to be wrapped around your app.
+The component acts as a local feature-flag for the new implementation, with the added benefit of being able to switch between light and dark mode for you.
 
-### Accordion
+```tsx
+import "@navikt/ds-css/darkside;";
+import { Theme } from "@navikt/ds-react";
 
-#### Props
+export const App = () => (
+  <Theme theme="light">
+    <YourApp />
+  </Theme>
+);
+```
 
-- `variant` is deprecated and will be removed in the future. We have not implemented it in the new system.
-- `headingSize` is deprecated and will be removed in the future. Accordion-size medium now equals `small` heading, and size small equals `xsmall` heading.
+### Only Tokens/CSS
 
-#### Structural changes
+If you are not using any of our React-components, you can still switch between themes by setting `class="light"` or `class="dark"` on your root-element.
 
-`<Accordion.Content/>` now has an extra nested `div` to allow for better animations. Custom CSS might break.
+## Theme switching
 
-### Datepicker
+The `Theme`-component has a `theme`-prop that can be set to either `light` or `dark`. This only sets a `class` on the element of `light` or `dark`, and the rest is handled by the CSS.
 
-Weeknumber-button uses our own button-component, and no longer a
-custom button.
+You have the option of using `hasBackground` (defaults to true) to make `Theme` include a built on default background.
 
-### GuidePanel
+Since theme-switching often is framework-spesific, we have not included a theme-toggle component or advanced logic for cookies/localstorage.
+You will have to implement this yourself using a custom setup, or use a library like [next-themes](https://github.com/pacocoursey/next-themes)
 
-Component got a complete overhaul. Custom overrides might break.
+## I just want to test the new tokens
 
-### Popover, HelpText, Tooltip
+Since you can use the new tokens alongside the old tokens, you can start by importing the new tokens as you would the old system.
 
-`arrow`-prop is removed. All of our floating dialog-elements now come without arrow.
-If you have custom `offset`-values, you might have to update them to accomedate this.
+```css
+@import "@navikt/ds-tokens/darkside-css";
+```
 
-### Pagination
+For SCSS, Less and JS they are also available under the paths
 
-Button now uses our own button-component and `variant="tertiary-neutral".
+```
+@navikt/ds-tokens/darkside-scss
+@navikt/ds-tokens/darkside-less
+@navikt/ds-tokens/darkside-js
+```
 
-### Primitives
+**Note: To support theming, scss, less and js tokens are all now based on `css-variables`. This means you will have to import the css-version from `darkside-css` alongside them for everything to work.**
 
-Given that these are closely tied to our tokens, you will most
-likely have to update parts of them to test the new system.
+## I want to test the new React-changes
 
-All primitives using our current `spacing`-tokens now has
-the new <code>space</code>-tokens. You can use the old tokens while
-testing, but the full release will remove them from the prop-list
+For the new system to work with our components, you will have to use the new `Theme`-component, and import the new CSS from `ds-css/darkside`
 
-<Markdown>
-{`
-\`\`\`diff
-- <HStack gap="4">
-+ <HStack gap="space-16">
-\`\`\`
+```tsx
+import "@navikt/ds-css/darkside;";
+import { Theme } from "@navikt/ds-react";
 
-`}
+export const App = () => (
+  <Theme theme="light">
+    <YourApp />
+  </Theme>
+);
+```
 
-</Markdown>
+You will not be able to use the old CSS and the new CSS at the same time.
+You will have to check on all your custom overrides when making this switch.
 
-#### Page
+## I have to make some custom changes in darkmode
 
-`background`-prop is removed. Now just uses `bg-default`-token.
+Since our implementation is based on CSS, you can easily make custom adjustments where necessary.
 
-#### Box
+```css
+.my-component {
+  background-color: var(--ax-bg-raised);
+  color: var(--ax-text-neutral);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+}
 
-Since `<Box />` is directly tied to our tokens, we
-now offer `<Box.New />` as a temporary altenative. This
-component is based on our new tokens and can use the backgrounds,
-borders, border-radius and shadows from the new system. When the full release comes, we will update `<Box />` to use the new system, and provide tooling to handle this migration.
-
-**All instances of `<Box />` will break when using the new system if:**
-
-- `background`-prop is used
-- `shadow`-prop is used
-- `borderColor`-prop is used
+// Makes hover-state more visible only for darkmode
+.dark .my-component {
+  &:hover {
+    border-color: var(--ax-border-accent-default);
+  }
+}
+```
