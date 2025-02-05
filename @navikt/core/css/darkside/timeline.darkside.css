@@ -38,7 +38,7 @@
 
 .navds-timeline__row {
   display: flex;
-  background: var(--ax-bg-soft);
+  background: var(--ax-bg-softA);
   margin: var(--ax-space-16) 0;
   grid-column: 2;
 }
@@ -109,6 +109,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-success-moderate-hover);
+    border-color: var(--ax-border-success-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -125,6 +126,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-warning-moderate-hover);
+    border-color: var(--ax-border-warning-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -141,6 +143,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-danger-moderate-hover);
+    border-color: var(--ax-border-danger-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -157,6 +160,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-info-moderate-hover);
+    border-color: var(--ax-border-info-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {
@@ -173,6 +177,7 @@
 
   &.navds-timeline__period--clickable:hover {
     background: var(--ax-bg-moderate-hover);
+    border-color: var(--ax-border-strong);
   }
 
   &.navds-timeline__period--clickable.navds-timeline__period--selected {

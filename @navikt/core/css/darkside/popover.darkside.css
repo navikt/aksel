@@ -10,7 +10,13 @@
 }
 
 .navds-popover__content {
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-16);
+}
+
+@media (min-width: 480px) {
+  .navds-popover__content {
+    padding: var(--ax-space-20);
+  }
 }
 
 .navds-popover--hidden {
