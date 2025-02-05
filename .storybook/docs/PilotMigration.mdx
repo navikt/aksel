@@ -1,0 +1,77 @@
+import { Markdown, Meta } from "@storybook/blocks";
+
+<Meta title="Docs/Become a Pilot team/Migration" />
+
+# Migration
+
+### React
+
+We have made some updates to `@navikt/ds-react` that you should be aware of before testing.
+
+## Components
+
+### Accordion
+
+#### Props
+
+- `variant` is deprecated and will be removed in the future. We have not implemented it in the new system.
+- `headingSize` is deprecated and will be removed in the future. Accordion-size medium now equals `small` heading, and size small equals `xsmall` heading.
+
+#### Structural changes
+
+`<Accordion.Content/>` now has an extra nested `div` to allow for better animations. Custom CSS might break.
+
+### Datepicker
+
+Weeknumber-button uses our own button-component, and no longer a
+custom button.
+
+### GuidePanel
+
+Component got a complete overhaul. Custom overrides might break.
+
+### Popover, HelpText, Tooltip
+
+`arrow`-prop is removed. All of our floating dialog-elements now come without arrow.
+If you have custom `offset`-values, you might have to update them to accomedate this.
+
+### Pagination
+
+Button now uses our own button-component and `variant="tertiary-neutral".
+
+### Primitives
+
+Given that these are closely tied to our tokens, you will most
+likely have to update parts of them to test the new system.
+
+All primitives using our current `spacing`-tokens now has
+the new <code>space</code>-tokens. You can use the old tokens while
+testing, but the full release will remove them from the prop-list
+
+<Markdown>
+{`
+\`\`\`diff
+- <HStack gap="4">
++ <HStack gap="space-16">
+\`\`\`
+
+`}
+
+</Markdown>
+
+#### Page
+
+`background`-prop is removed. Now just uses `bg-default`-token.
+
+#### Box
+
+Since `<Box />` is directly tied to our tokens, we
+now offer `<Box.New />` as a temporary altenative. This
+component is based on our new tokens and can use the backgrounds,
+borders, border-radius and shadows from the new system. When the full release comes, we will update `<Box />` to use the new system, and provide tooling to handle this.
+
+**All instances of `<Box />` will break when using the new system if:**
+
+- `background`-prop is used
+- `shadow`-prop is used
+- `borderColor`-prop is used

@@ -46,7 +46,8 @@ export default {
   staticDirs: ["./public"],
   stories: () => [
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "./*.mdx",
+    "./docs/*.mdx",
+    "./docs/*.stories.tsx",
     "../aksel.nav.no/website/pages/templates/**/*.tsx",
   ],
   addons: [
