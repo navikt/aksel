@@ -143,10 +143,7 @@
   }
 
   &:active {
-    --__axc-button-border-color: transparent;
-
-    background-color: var(--ax-bg-accent-strong-pressed);
-    color: var(--ax-text-accent-contrast);
+    background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
@@ -173,10 +170,7 @@
   }
 
   &:active {
-    --__axc-button-border-color: transparent;
-
-    color: var(--ax-text-contrast);
-    background-color: var(--ax-bg-strong-pressed);
+    background-color: var(--ax-bg-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
@@ -199,8 +193,7 @@
   }
 
   &:active {
-    background-color: var(--ax-bg-accent-strong-pressed);
-    color: var(--ax-text-accent-contrast);
+    background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
@@ -221,8 +214,7 @@
   }
 
   &:active {
-    background-color: var(--ax-bg-strong-pressed);
-    color: var(--ax-text-contrast);
+    background-color: var(--ax-bg-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {

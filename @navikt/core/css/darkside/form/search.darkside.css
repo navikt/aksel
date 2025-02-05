@@ -112,10 +112,6 @@
   &:hover:not(:disabled) {
     --__axc-button-border-color: var(--ax-border-accent-strong);
   }
-
-  &:active:not(:disabled) {
-    --__axc-button-border-color: transparent;
-  }
 }
 
 /* Special-case where we hover/focus input, and want the secondary-button to match input-border */

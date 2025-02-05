@@ -85,7 +85,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
    */
   if (themeContext) {
     return (
-      <Theme theme="dark" asChild>
+      <Theme theme="dark" asChild hasBackground={false}>
         <header
           {...rest}
           ref={ref}

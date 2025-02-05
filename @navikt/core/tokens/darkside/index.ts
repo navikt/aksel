@@ -3,9 +3,7 @@ import { bundle } from "lightningcss";
 import StyleDictionary from "style-dictionary";
 import {
   formatCJS,
-  formatCJSStatic,
   formatES6,
-  formatES6Static,
   formatLESS,
   formatSCSS,
   transformCSS,
@@ -44,6 +42,10 @@ const filenames = {
  * - Shadows
  * - Typography
  * - Breakpoints
+ *
+ *
+ * @note We currrently avoid exporting 'static' tokens, as this step might not be needed.
+ * In the current implementation we don't account for light and dark mode for static exports. This will need to be added if we want static exports.
  */
 const SDictionaryLightMode = new StyleDictionary({
   tokens: lightModeTokens(),
@@ -143,24 +145,24 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
-    jsStatic: {
-      transformGroup: "js",
-      buildPath: `${DARKSIDE_DIST}static/`,
-      files: [
-        {
-          destination: "tokens.js",
-          format: "format-ES6-static",
-        },
-        {
-          destination: "tokens-cjs.js",
-          format: "format-CJS-static",
-        },
-        {
-          destination: "tokens.d.ts",
-          format: "format-ES6-static",
-        },
-      ],
-    },
+    // jsStatic: {
+    //   transformGroup: "js",
+    //   buildPath: `${DARKSIDE_DIST}static/`,
+    //   files: [
+    //     {
+    //       destination: "tokens.js",
+    //       format: "format-ES6-static",
+    //     },
+    //     {
+    //       destination: "tokens-cjs.js",
+    //       format: "format-CJS-static",
+    //     },
+    //     {
+    //       destination: "tokens.d.ts",
+    //       format: "format-ES6-static",
+    //     },
+    //   ],
+    // },
     scss: {
       transformGroup: "scss",
       buildPath: DARKSIDE_DIST,
@@ -172,16 +174,16 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
-    scssStatic: {
-      transformGroup: "scss",
-      buildPath: `${DARKSIDE_DIST}static/`,
-      files: [
-        {
-          destination: "tokens.scss",
-          format: "scss/variables",
-        },
-      ],
-    },
+    // scssStatic: {
+    //   transformGroup: "scss",
+    //   buildPath: `${DARKSIDE_DIST}static/`,
+    //   files: [
+    //     {
+    //       destination: "tokens.scss",
+    //       format: "scss/variables",
+    //     },
+    //   ],
+    // },
     less: {
       transformGroup: "less",
       buildPath: DARKSIDE_DIST,
@@ -192,16 +194,16 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
         },
       ],
     },
-    lessStatic: {
-      transformGroup: "less",
-      buildPath: `${DARKSIDE_DIST}static/`,
-      files: [
-        {
-          destination: "tokens.less",
-          format: "less/variables",
-        },
-      ],
-    },
+    // lessStatic: {
+    //   transformGroup: "less",
+    //   buildPath: `${DARKSIDE_DIST}static/`,
+    //   files: [
+    //     {
+    //       destination: "tokens.less",
+    //       format: "less/variables",
+    //     },
+    //   ],
+    // },
   },
 });
 
@@ -227,20 +229,20 @@ const main = async () => {
     format: formatES6,
   });
 
-  SDDictionaryNonCSSFormats.registerFormat({
-    name: "format-ES6-static",
-    format: formatES6Static,
-  });
+  // SDDictionaryNonCSSFormats.registerFormat({
+  //   name: "format-ES6-static",
+  //   format: formatES6Static,
+  // });
 
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-CJS",
     format: formatCJS,
   });
 
-  SDDictionaryNonCSSFormats.registerFormat({
-    name: "format-CJS-static",
-    format: formatCJSStatic,
-  });
+  // SDDictionaryNonCSSFormats.registerFormat({
+  //   name: "format-CJS-static",
+  //   format: formatCJSStatic,
+  // });
 
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-SCSS",

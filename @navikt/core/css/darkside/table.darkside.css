@@ -26,28 +26,36 @@
 }
 
 .navds-table__row--selected {
-  background-color: var(--ax-bg-accent-soft);
+  background-color: var(--ax-bg-accent-softA);
+
+  & + .navds-table__expanded-row {
+    background-color: var(--ax-bg-accent-softA);
+  }
 }
 
 .navds-table--zebra-stripes {
   & .navds-table__body :where(.navds-table__row:nth-child(odd):not(.navds-table__row--selected)) {
-    background-color: var(--ax-bg-soft);
+    background-color: var(--ax-bg-softA);
   }
 
   & .navds-table__body :where(.navds-table__expandable-row:nth-child(4n + 1):not(.navds-table__row--selected)) {
     background-color: transparent;
   }
-}
 
-.navds-table--zebra-stripes .navds-table__body .navds-table__expanded-row:nth-child(4n) {
-  background-color: var(--ax-bg-soft);
+  & .navds-table__body .navds-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-softA);
+  }
+
+  & .navds-table__row--selected + .navds-table__expanded-row:nth-child(4n) {
+    background-color: var(--ax-bg-accent-softA);
+  }
 }
 
 .navds-table__header-cell,
 .navds-table__data-cell {
   display: table-cell;
   padding: var(--ax-space-12) var(--ax-space-8);
-  border-bottom: 1px solid var(--ax-border-default);
+  border-bottom: 1px solid var(--ax-border-subtleA);
   text-align: left;
 }
 
@@ -66,11 +74,6 @@
   text-align: center;
 }
 
-:where(.navds-table__body .navds-table__row--shade-on-hover:hover) .navds-table__header-cell,
-:where(.navds-table__body .navds-table__row--shade-on-hover:hover) .navds-table__data-cell {
-  border-color: var(--ax-border-strong);
-}
-
 :where(.navds-table__expandable-row--open:hover) .navds-table__data-cell {
   border-bottom-color: transparent;
 }
@@ -85,6 +88,7 @@
   padding: var(--ax-space-4) var(--ax-space-8);
 }
 
+/* TODO: Look to handle "inline"-checkbox better than custom CSS-overrides in the future. */
 .navds-table :not(.navds-checkboxes) > .navds-checkbox .navds-checkbox__input {
   top: -0.75rem;
 }
@@ -95,6 +99,11 @@
 
 .navds-table :not(.navds-checkboxes) > .navds-checkbox .navds-checkbox__label {
   padding: 0;
+}
+
+.navds-table .navds-checkbox__input:focus + .navds-checkbox__label::after,
+.navds-table .navds-radio__input:focus + .navds-radio__label::after {
+  height: 100%;
 }
 
 .navds-table__header-cell[aria-sort] {
@@ -111,7 +120,7 @@
   padding: var(--ax-space-16) var(--ax-space-12);
   width: 100%;
   display: flex;
-  gap: var(--ax-space-8);
+  gap: var(--ax-space-4);
   align-items: center;
   line-height: inherit;
   font-weight: inherit;
@@ -133,7 +142,6 @@
 .navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
 .navds-table__header-cell[aria-sort="descending"] .navds-table__sort-button {
   background-color: var(--ax-bg-accent-moderate);
-  color: var(--ax-text-accent-strong);
 }
 
 .navds-table__header-cell--align-right .navds-table__sort-button {
@@ -145,7 +153,7 @@
 }
 
 .navds-table__sort-button svg {
-  font-size: 1rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
 }
 
@@ -225,7 +233,7 @@
 /* -------------------------- Table ExpandableRow -------------------------- */
 .navds-table__expanded-row-collapse:not([style*="height: 0px;"]),
 .navds-table__expanded-row-collapse[style*="transition:"] {
-  border-bottom: 1px solid var(--ax-border-default);
+  border-bottom: 1px solid var(--ax-border-subtleA);
 }
 
 .navds-table__expanded-row-content {
