@@ -1,7 +1,50 @@
-import { Meta, Title } from "@storybook/blocks";
+import { ColorItem, ColorPalette, Meta } from "@storybook/blocks";
+import * as Tokens from "@navikt/ds-tokens/darkside-js";
 
 <Meta title="Docs/Become a Pilot team/4.Tokens" />
 
 # Tokens
 
-Nothing to see here yet.
+<ColorPalette>
+  <ColorItem
+    title="Neutral"
+    subtitle="Grayscale"
+    colors={{
+      "--ax-bg-white": "#FFFFFF",
+      Alabaster: "#F8F8F8",
+      Concrete: "#F3F3F3",
+    }}
+  />
+  <ColorItem
+    title="theme.color.primary"
+    subtitle="Coral"
+    colors={{ WildWatermelon: Tokens.BgAccentSoft }}
+  />
+  <ColorItem
+    title="theme.color.secondary"
+    subtitle="Ocean"
+    colors={{ DodgerBlue: "#1EA7FD" }}
+  />
+  <ColorItem
+    title="theme.color.positive"
+    subtitle="Green"
+    colors={{
+      Apple: "rgba(102,191,60,1)",
+      Apple80: "rgba(102,191,60,.8)",
+      Apple60: "rgba(102,191,60,.6)",
+      Apple30: "rgba(102,191,60,.3)",
+    }}
+  />
+  <ColorItem
+    title="gradient"
+    subtitle="Grayscale"
+    colors={{
+      Gradient: "linear-gradient(to right,white,black)",
+    }}
+  />
+  <ColorItem
+    title="gradient"
+    subtitle="Grayscale"
+    colors={["linear-gradient(65deg,white,black)"]}
+  />
+</ColorPalette>
