@@ -59,6 +59,7 @@ export default {
         method: "alphabetical",
         order: [
           "Docs",
+          ["Getting started"],
           "ds-react",
           ["Primitives"],
           ["Default", "Controls"],

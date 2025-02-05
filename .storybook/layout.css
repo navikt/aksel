@@ -34,3 +34,15 @@
   padding-block: 0.125rem;
   padding-inline: 0.25rem;
 }
+
+.sbdocs-content:not(.sb-unstyled) :is(p, li) {
+  font-size: 1.125rem;
+}
+
+.sbdocs-content:not(.sb-unstyled) li > p {
+  margin-bottom: 0;
+}
+
+.sbdocs-content:not(.sb-unstyled) li > ul {
+  margin-top: 0.25rem;
+}
