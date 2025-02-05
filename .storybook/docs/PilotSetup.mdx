@@ -1,36 +1,8 @@
 import { Markdown, Meta } from "@storybook/blocks";
 
-<Meta title="Docs/Become a Pilot team/3.Migration" />
+<Meta title="Docs/Become a Pilot team/2.Setup" />
 
-# Migration
-
-## Tokens
-
-See tokens-tab TODO: link
-
-## CSS
-
-- Most of our CSS is re-written. This could potentially affect most custom overrides targeting `.navds`-classes.
-- You will not be able to use the old CSS and the new CSS at the same time.
-
-As we strongly recommend avoiding custom
-overrides where possible, we would like to encourage opening an
-issue if you find that you have to override our CSS to achieve
-something! It's these cases we want to know about so that we can fix
-them for everyone.
-
-### Removed component-tokens
-
-All component-spesific tokens are no longer supported. That means all tokens like these from `Button` are removed:
-
-```css
---ac-button-primary-bg
---ac-button-primary-text
---ac-button-primary-hover-bg
---ac-button-primary-active-bg
-```
-
-All component-based tokens are prefixed with `--ac`, so a global search in your codebase should find all of them.
+# Setup
 
 ## React
 

@@ -1,41 +1,44 @@
 import { Meta, Title } from "@storybook/blocks";
 
-<Meta title="Docs/Become a Pilot team/Intro" />
+<Meta title="Docs/Become a Pilot team/1.Intro" />
 
 # Becoming a pilot team
 
-We are looking for teams wanting to test our new theming implementation and design updates before we go live with them.
+We are looking for teams wanting to test our new theming implementation and darkmode before we go live with them later in 2025.
 
 ## What is a pilot team?
 
-- A pilot team is a team that tests new implementations before they are released to the public.
-- The team will test the new implementation in a real-world scenario and provide feedback to the development team.
-- The feedback will be used to improve the implementation before it is released to the public.
+- A pilot team is a team that tests new implementations before they are released.
+- The team will test the new implementation in a real-world scenario and provide feedback us with feedback.
+- The feedback will be used to improve the implementation before it replaces the old system.
 
 As a pilot team, we want close communication to get
-feedback on the system. We want to know all the unclear and bad parts
+feedback on the changes. We want to know all the unclear and bad parts
 of our implementations, so that we can improve them incrementally before the big release.
 
-## Who are we looking for?
+## Who are we mainly looking for?
 
 For teams wanting to test the new implementation, there are some key points to consider:
 
-- Is in the early stages of developing a new product or service.
-- Able to test either design tokens, dark mode, updated CSS or a combination of these
-- Have the capacity to test and provide feedback on the new implementation
+- They are in the early stages of developing a new product or service.
+- They are able to test either design tokens, darkmode, updated CSS or a combination of these.
+- Have the capacity to test and provide feedback on the new implementation.
+
+While some of these points are important, we are open to all teams wanting to test the new implementation.
+But be aware that there might be breaking changes as we go, and we won't have all tooling ready for adoption yet.
 
 ## What's new?
 
 - **Design tokens**: A complete re-write of our design tokens to allow for dark mode.
 - **Dark mode**: A new dark mode implementation.
-- **Updated CSS**: Updated CSS using the new tokens, and with built-in CSS-layers support.
-- **Updated components**: Updated components using the new tokens and CSS.
+- **Updated CSS**: Now uses the new tokens, and with built-in CSS-layers support.
+- **Updated components**: Components use the new tokens and CSS.
 - **New Theme-component**: A new `<Theme/>`-component to handle the theming-switch locally.
 - **Updated documentation**: Updated documentation for the new implementation.
 
 ## How testing could affect your application
 
-The updates are **opt in**, meaning you can choose to use nothing, some parts of the **new** implementation, or go all inn.
+All the changes are **opt in**, meaning you can choose to use nothing, some parts of the new implementation, or go all inn.
 You will still be able to recieve updates to the old implementation while we are in the testing phase.
 
 ### Tokens
@@ -43,15 +46,10 @@ You will still be able to recieve updates to the old implementation while we are
 We have made a complete re-write of our design tokens to allow for dark mode.
 This includes new backgrounds, text-colors, border-colors and updated spacing-tokens.
 
-- All tokens have a new prefix `--ax` to avoid conflicts with other tokens.
+- All tokens have a new prefix `--ax` to avoid conflicts with old tokens.
 - You will be able to use the new tokens at the same time as the old tokens.
-- All background, text-colors and border-colors have new names and "concepsts" to learn. Migration will not be 1-1 with old system.
+- All background, text-colors and border-colors have new names and "concepts" to learn. Migration will not be a quick one to one with old system.
 - New spacing tokens are now names `space` and based on `px`-names.
-
-### Tailwind CSS
-
-Since this package is based on our tokens, all changes made to tokens will affect tailwind.
-Using new and old config at the same time is not recommended, and could cause conflicts.
 
 ### CSS
 
@@ -60,8 +58,9 @@ We have updated our CSS to be based on the new tokens for theming.
 - Most of our CSS is re-written.
 - All custom overrides targeting `.navds`-classes might have to be updated locally.
 - You will not be able to use the old CSS and the new CSS at the same time.
+- Component-based tokens are no longer avaliable.
 
 ### React components
 
 We have made some prop-changes to some components to facilitate the new theming and updated CSS. You can read more about them under `migration` in the sidebar.
-To "feature-flag" the changes you will have to use the new `<Theme/>`-component when testing new CSS.
+We have hidden the changes behind a "feature-flag", so you will have to use the new `<Theme/>`-component when testing the new CSS.
