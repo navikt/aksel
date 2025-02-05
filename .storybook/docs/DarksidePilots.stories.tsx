@@ -219,15 +219,8 @@ import { Theme } from "@navikt/ds-react";
           </BodyLong>
           <BodyLong spacing weight="semibold">
             Note: If using SCSS, LESS or JS, you will also have to import the
-            CSS-version of the tokens or they will not work. If this is not
-            possible, you can import the static version of the tokens. You will
-            not get theming or darkmode support with this version built in.
+            CSS-version of the tokens or they will not work.
           </BodyLong>
-          <pre className="docs-pre">
-            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
-@navikt/ds-tokens/darkside-less-static
-@navikt/ds-tokens/darkside-js-static`}</code>
-          </pre>
         </Page.Block>
         <Page.Block width="md" gutters>
           <Heading size="large" as="h2" spacing>
@@ -341,19 +334,12 @@ export const TokenPackage = () => {
           </BodyLong>
           <BodyLong spacing weight="semibold">
             Note: If using SCSS, LESS or JS, you will also have to import the
-            CSS-version of the tokens or they will not work. If this is not
-            possible, you can import the static version of the tokens. You will
-            not get theming or darkmode support with the static versions.
+            CSS-version of the tokens or they will not work.
           </BodyLong>
           <pre className="docs-pre">
             <code className="docs-code">{`@navikt/ds-tokens/darkside-scss
 @navikt/ds-tokens/darkside-less
 @navikt/ds-tokens/darkside-js`}</code>
-          </pre>
-          <pre className="docs-pre">
-            <code className="docs-code">{`@navikt/ds-tokens/darkside-scss-static
-@navikt/ds-tokens/darkside-less-static
-@navikt/ds-tokens/darkside-js-static`}</code>
           </pre>
         </Page.Block>
         <Page.Block width="md" gutters>
