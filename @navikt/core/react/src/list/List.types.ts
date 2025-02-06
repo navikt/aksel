@@ -7,15 +7,18 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: "ul" | "ol";
   /**
    * List heading title.
+   * @deprecated Prop will be removed in future versions.
    */
   title?: string;
   /**
    * List heading description.
+   * @deprecated Prop will be removed in future versions.
    */
   description?: string;
   /**
    * Allows setting a different HTML h-tag.
    * @default "h3"
+   * @deprecated Prop will be removed in future versions.
    */
   headingTag?: React.ElementType<any>;
   /**

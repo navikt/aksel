@@ -1,12 +1,7 @@
 .navds-list ul,
 .navds-list ol {
   padding: 0;
-  margin-block: var(--ax-space-16);
-}
-
-.navds-list--small ul,
-.navds-list--small ol {
-  margin-block: var(--ax-space-12);
+  margin: 0;
 }
 
 .navds-list {
