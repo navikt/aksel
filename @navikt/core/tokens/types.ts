@@ -56,8 +56,8 @@ export type StaticDefaultBgKeys =
   | "strong";
 
 export type StatefulDefaultBgKeys =
-  | "hover"
-  | "hoverA"
+  | "soft-hover"
+  | "soft-hoverA"
   | "moderate-hover"
   | "moderate-hoverA"
   | "moderate-pressed"
@@ -73,8 +73,8 @@ export type StaticBgKeys =
   | `${SemanticColorRoles}-strong`;
 
 export type StatefulBgKeys =
-  | `${SemanticColorRoles}-hover`
-  | `${SemanticColorRoles}-hoverA`
+  | `${SemanticColorRoles}-soft-hover`
+  | `${SemanticColorRoles}-soft-hoverA`
   | `${SemanticColorRoles}-moderate-hover`
   | `${SemanticColorRoles}-moderate-hoverA`
   | `${SemanticColorRoles}-moderate-pressed`

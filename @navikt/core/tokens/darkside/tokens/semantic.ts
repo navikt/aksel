@@ -83,12 +83,12 @@ export function semanticTokenConfig(theme: ColorTheme) {
         type: "color",
         group: `background`,
       },
-      hover: {
+      "soft-hover": {
         value: `{ax.neutral.200.value}`,
         type: "color",
         group: `background`,
       },
-      hoverA: {
+      "soft-hoverA": {
         value: `{ax.neutral.200A.value}`,
         type: "color",
         group: `background`,
@@ -156,7 +156,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
         group: "border",
       },
       strong: {
-        value: "{ax.neutral.600.value}",
+        value: "{ax.neutral.700.value}",
         type: "color",
         group: "border",
       },
