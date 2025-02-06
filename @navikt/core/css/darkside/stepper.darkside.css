@@ -3,7 +3,7 @@
   --__axc-stepper-border-width: 2px;
   --__axc-stepper-line-length: 1rem;
 
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   font-weight: var(--ax-font-weight-bold);
   line-height: 1;
   list-style: none;
@@ -30,14 +30,14 @@
   grid-column: 1;
 
   .navds-stepper__item--non-interactive & {
-    background-color: var(--ax-border-strong);
+    background-color: var(--ax-border-neutral-strong);
   }
 }
 
 /* Line before non-interactive step */
 .navds-stepper__item:has(+ .navds-stepper__item > .navds-stepper__step[data-interactive="false"]) {
   .navds-stepper__line--2 {
-    background-color: var(--ax-border-strong);
+    background-color: var(--ax-border-neutral-strong);
   }
 }
 
@@ -108,7 +108,7 @@
 }
 
 .navds-stepper__step[data-interactive="true"] {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   border-radius: var(--ax-border-radius-medium);
   text-decoration: none;
 
@@ -126,7 +126,7 @@
   }
 
   & .navds-stepper__circle {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
     border-color: var(--ax-border-accent-strong);
   }
 
@@ -153,18 +153,18 @@
 }
 
 .navds-stepper__step[data-interactive="false"] {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   cursor: default;
 
   & .navds-stepper__circle {
-    border-color: var(--ax-border-strong);
+    border-color: var(--ax-border-neutral-strong);
   }
 
   &[data-active="true"] {
     & .navds-stepper__circle {
-      color: var(--ax-text-contrast);
-      background-color: var(--ax-bg-strong-pressed);
-      border-color: var(--ax-bg-strong-pressed);
+      color: var(--ax-text-neutral-contrast);
+      background-color: var(--ax-bg-neutral-strong-pressed);
+      border-color: var(--ax-bg-neutral-strong-pressed);
     }
   }
 }

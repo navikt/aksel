@@ -5,7 +5,7 @@ const bgMap = {
   info: tokens.BgInfoSoft,
   warning: tokens.BgWarningSoft,
   success: tokens.BgSuccessSoft,
-  neutral: tokens.BgModerate,
+  neutral: tokens.BgNeutralModerate,
   ["info-moderate"]: tokens.BgInfoModerate,
   ["warning-moderate"]: tokens.BgWarningModerate,
   ["success-moderate"]: tokens.BgSuccessModerate,
@@ -13,29 +13,29 @@ const bgMap = {
   ["info-strong"]: tokens.BgInfoStrong,
   ["warning-strong"]: tokens.BgWarningStrong,
   ["success-strong"]: tokens.BgSuccessStrong,
-  ["neutral-strong"]: tokens.BgModeratePressed,
+  ["neutral-strong"]: tokens.BgNeutralModeratePressed,
 };
 
 const fgMap = {
-  info: tokens.TextInfo,
-  warning: tokens.TextWarning,
-  success: tokens.TextSuccess,
-  neutral: tokens.BgModerate,
-  ["info-moderate"]: tokens.TextInfoStrong,
-  ["warning-moderate"]: tokens.TextWarningStrong,
-  ["success-moderate"]: tokens.TextSuccessStrong,
+  info: tokens.TextInfoSubtle,
+  warning: tokens.TextWarningSubtle,
+  success: tokens.TextSuccessSubtle,
+  neutral: tokens.BgNeutralModerate,
+  ["info-moderate"]: tokens.TextInfo,
+  ["warning-moderate"]: tokens.TextWarning,
+  ["success-moderate"]: tokens.TextSuccess,
   ["neutral-moderate"]: tokens.BgDefault,
-  ["info-strong"]: tokens.TextInfoStrong,
-  ["warning-strong"]: tokens.TextWarningStrong,
-  ["success-strong"]: tokens.TextSuccessStrong,
-  ["neutral-strong"]: tokens.BgModeratePressed,
+  ["info-strong"]: tokens.TextInfo,
+  ["warning-strong"]: tokens.TextWarning,
+  ["success-strong"]: tokens.TextSuccess,
+  ["neutral-strong"]: tokens.BgNeutralModeratePressed,
 };
 
 const borderMap = {
   info: tokens.BorderInfo,
   warning: tokens.BorderWarning,
   success: tokens.BorderSuccess,
-  neutral: tokens.BorderDefault,
+  neutral: tokens.BorderNeutral,
 };
 
 export const MiniTag = styled.span<{

@@ -13,7 +13,7 @@ const ActivityColumn = ({
   return (
     <Box.New
       background="sunken"
-      borderColor="subtleA"
+      borderColor="neutral-subtleA"
       borderWidth="1"
       borderRadius="xlarge"
       padding="space-12"

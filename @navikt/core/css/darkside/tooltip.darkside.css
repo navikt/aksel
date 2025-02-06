@@ -1,7 +1,7 @@
 .navds-tooltip {
   z-index: 3000;
   background-color: var(--ax-bg-raised);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-medium);
   padding: 0 var(--ax-space-6);
   align-items: center;
@@ -10,7 +10,7 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 150ms;
   text-align: center;
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
 }
 
@@ -88,7 +88,7 @@
 
 .navds-tooltip__key {
   font-family: var(--ax-font-family);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   padding: 0 var(--ax-space-4);
   min-width: 1.125rem;
   height: 1.125rem;
@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--ax-border-radius-small);
-  background: var(--ax-bg-moderateA);
+  background: var(--ax-bg-neutral-moderateA);
 
   @media (forced-colors: active) {
     & {

@@ -23,7 +23,7 @@
   display: grid;
   visibility: hidden;
   overflow: hidden;
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   border-radius: var(--ax-border-radius-xlarge);
   background: var(--ax-bg-raised);
   padding-inline: var(--ax-space-20);

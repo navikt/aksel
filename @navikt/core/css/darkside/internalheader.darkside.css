@@ -3,7 +3,7 @@
   align-self: stretch;
   background: var(--ax-bg-raised);
   min-height: 3rem;
-  border-bottom: 1px solid var(--ax-border-subtleA);
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }
 
 @media (forced-colors: active) {
@@ -24,19 +24,19 @@
   text-align: left;
   padding-block: 0;
   padding-inline: var(--ax-space-24) var(--ax-space-20);
-  border-right: 1px solid var(--ax-border-subtleA);
+  border-right: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:is(button) {
     cursor: pointer;
   }
 
   &:hover {
-    background: var(--ax-bg-moderate-hoverA);
+    background: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:is(:hover, :active):not(button, a) {
@@ -46,7 +46,7 @@
 
 .navds-internalheader__user {
   padding: 0 var(--ax-space-20);
-  border-left: 1px solid var(--ax-border-subtleA);
+  border-left: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   align-items: center;
 }
@@ -65,11 +65,11 @@
   align-items: center;
   justify-self: center;
   gap: var(--ax-space-8);
-  border-left: 1px solid var(--ax-border-subtleA);
-  color: var(--ax-text-default);
+  border-left: 1px solid var(--ax-border-neutral-subtleA);
+  color: var(--ax-text-neutral);
 
   &:hover {
-    background: var(--ax-bg-moderate-hoverA);
+    background: var(--ax-bg-neutral-moderate-hoverA);
   }
 }
 
@@ -91,7 +91,7 @@
   }
 
   &:active {
-    background: var(--ax-bg-moderate-pressedA);
+    background: var(--ax-bg-neutral-moderate-pressedA);
   }
 }
 

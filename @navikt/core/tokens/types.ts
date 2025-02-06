@@ -48,24 +48,7 @@ export type StaticDefaultBgKeys =
   | "input"
   | "raised"
   | "sunken"
-  | "overlay"
-  | "soft"
-  | "softA"
-  | "moderate"
-  | "moderateA"
-  | "strong";
-
-export type StatefulDefaultBgKeys =
-  | "soft-hover"
-  | "soft-hoverA"
-  | "soft-pressed"
-  | "soft-pressedA"
-  | "moderate-hover"
-  | "moderate-hoverA"
-  | "moderate-pressed"
-  | "moderate-pressedA"
-  | "strong-hover"
-  | "strong-pressed";
+  | "overlay";
 
 export type StaticBgKeys =
   | `${SemanticColorRoles}-soft`
@@ -86,25 +69,15 @@ export type StatefulBgKeys =
   | `${SemanticColorRoles}-strong-hover`
   | `${SemanticColorRoles}-strong-pressed`;
 
-export type DefaultTextColorKeys =
-  | "default"
-  | "subtle"
-  | "icon"
-  | "logo"
-  | "contrast";
+export type DefaultTextColorKeys = "logo";
 
 export type TextColorKeys =
   | SemanticColorRoles
-  | `${SemanticColorRoles}-strong`
+  | `${SemanticColorRoles}-subtle`
   | `${SemanticColorRoles}-icon`
   | `${SemanticColorRoles}-contrast`;
 
-export type BorderColorKeys =
-  | "default"
-  | "subtle"
-  | "subtleA"
-  | "strong"
-  | "focus";
+export type BorderColorKeys = "focus";
 
 export type BorderColorWithRoleKeys =
   | SemanticColorRoles
