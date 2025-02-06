@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.12.2
+
+### Patch Changes
+
+- Box: Added export for `BoxNew`. ([`8576400`](https://github.com/navikt/aksel/commit/857640026368153b64171f1cf954b9abac493ee8))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.2
+  - @navikt/aksel-icons@7.12.2
+
 ## 7.12.1
 
 ### Patch Changes
