@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.12.0
+
+### Minor Changes
+
+- List: Marked `title`, `headingTag` and `description` properties as deprecated. These will not be supported in future versions and should be migrated from when possible. ([#3537](https://github.com/navikt/aksel/pull/3537))
+
+### Patch Changes
+
+- Table: Updated sorting icons for ascending and descending. ([#3536](https://github.com/navikt/aksel/pull/3536))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.0
+  - @navikt/aksel-icons@7.12.0
+
 ## 7.11.0
 
 ### Patch Changes
