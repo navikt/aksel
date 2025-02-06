@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.12.1
+
+### Patch Changes
+
+- Theme: Theme-prop is now optional. ([`f269311`](https://github.com/navikt/aksel/commit/f269311dbbeb09e8fa0ba93a19aa430f0dd17255))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.1
+  - @navikt/aksel-icons@7.12.1
+
 ## 7.12.0
 
 ### Minor Changes
