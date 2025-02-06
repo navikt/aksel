@@ -20,21 +20,6 @@
   flex-wrap: wrap;
 }
 
-.docs-pre {
-  background-color: var(--ax-bg-neutral-moderate, var(--a-surface-subtle));
-  border: 1px solid var(--ax-border-neutral-subtle, var(--a-border-subtle));
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow: auto;
-}
-
-.darkside-docs code {
-  background-color: var(--ax-bg-neutral-moderate, var(--a-surface-subtle));
-  border-radius: 0.25rem;
-  padding-block: 0.125rem;
-  padding-inline: 0.25rem;
-}
-
 .sbdocs-content:not(.sb-unstyled) :is(p, li) {
   font-size: 1.125rem;
 }

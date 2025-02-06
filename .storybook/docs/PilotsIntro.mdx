@@ -24,18 +24,27 @@ Support for "Dekoratøren" is quite far down the road at the moment.
 
 For teams wanting to test the new implementation, there are some key points to consider:
 
-- They are in the early stages of developing a new product or service.
+- They might be in the early stages of developing a new product or service.
 - They are able to test either design tokens, darkmode, updated CSS or a combination of these.
 - Have the capacity to test and provide feedback on the new implementation.
 
-But be aware that there might be breaking changes as we go,
+Everyone is welcome to test the new implementation, but for some larger applications, it might be a bit early to adopt the new system.
+There might be breaking changes as we go,
 and we won't have all tooling ready for adoption yet so you might have to do some manual work.
+
+## How to give feedback
+
+We welcome all forms of feedback:
+
+- **Issues**: [Open an issue on Github](https://github.com/navikt/aksel/issues)
+- **Disussions**: [Start a discussion](https://github.com/navikt/aksel/discussions/categories/darkside).
+- **Slack**: [Reach out to us on Slack #Aksel-designsystemet](https://nav-it.slack.com/archives/C7NE7A8UF)
 
 ## What's new?
 
 - **Design tokens**: A complete re-write of our design tokens to allow for dark mode.
 - **Dark mode**: A new dark mode implementation.
-- **Updated CSS**: Now uses the new tokens, and with built-in CSS-layers support.
+- **Updated CSS**: Now uses new tokens, built-in CSS-layers support and most components are re-written.
 - **Updated components**: Components use the new tokens and CSS.
 - **New Theme-component**: A new `<Theme/>`-component to handle the theming-switch locally.
 - **Updated documentation**: Updated documentation for the new implementation.
@@ -53,7 +62,7 @@ This includes new backgrounds, text-colors, border-colors and updated spacing-to
 - All tokens have a new prefix `--ax` to avoid conflicts with old tokens.
 - You will be able to use the new tokens at the same time as the old tokens.
 - All background, text-colors and border-colors have new names and "concepts" to learn. Migration will not be a quick one to one with old system.
-- New spacing tokens are now names `space` and based on `px`-names.
+- New spacing tokens are now named `space` and based on `px` values.
 
 ### CSS
 
