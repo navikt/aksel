@@ -79,6 +79,12 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: "/darkside",
+        destination:
+          "https://main--66b4b3beb91603ed0ab5c45e.chromatic.com/?path=/docs/docs-become-a-pilot-team-1-intro--docs",
+        permanent: false,
+      },
+      {
         source: "/prinsipper",
         destination: "/",
         permanent: false,
