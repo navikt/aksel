@@ -10,7 +10,7 @@
 }
 
 .navds-fieldset__description {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }
 
 .navds-fieldset > .navds-fieldset__description:not(:empty) {

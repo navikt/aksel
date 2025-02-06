@@ -2,7 +2,6 @@ import {
   type BorderColorKeys,
   type ColorTheme,
   type DefaultTextColorKeys,
-  type StatefulDefaultBgKeys,
   type StaticDefaultBgKeys,
 } from "../../types";
 import { type StyleDictionaryToken } from "../tokens.util";
@@ -10,28 +9,8 @@ import { type StyleDictionaryToken } from "../tokens.util";
 export function semanticTokenConfig(theme: ColorTheme) {
   return {
     text: {
-      default: {
-        value: "{ax.neutral.1000.value}",
-        type: "color",
-        group: "text",
-      },
-      subtle: {
-        value: "{ax.neutral.900.value}",
-        type: "color",
-        group: "text",
-      },
-      icon: {
-        value: "{ax.neutral.600.value}",
-        type: "color",
-        group: "text",
-      },
       logo: {
         value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
-        type: "color",
-        group: "text",
-      },
-      contrast: {
-        value: "{ax.neutral.000.value}",
         type: "color",
         group: "text",
       },
@@ -73,107 +52,8 @@ export function semanticTokenConfig(theme: ColorTheme) {
         type: "color",
         group: "background",
       },
-      soft: {
-        value: `{ax.neutral.100.value}`,
-        type: "color",
-        group: `background`,
-      },
-      softA: {
-        value: `{ax.neutral.100A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "soft-hover": {
-        value: `{ax.neutral.200.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "soft-hoverA": {
-        value: `{ax.neutral.200A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "soft-pressed": {
-        value: `{ax.neutral.300.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "soft-pressedA": {
-        value: `{ax.neutral.300A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      moderate: {
-        value: `{ax.neutral.200.value}`,
-        type: "color",
-        group: `background`,
-      },
-      moderateA: {
-        value: `{ax.neutral.200A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "moderate-hover": {
-        value: `{ax.neutral.300.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "moderate-hoverA": {
-        value: `{ax.neutral.300A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "moderate-pressed": {
-        value: `{ax.neutral.400.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "moderate-pressedA": {
-        value: `{ax.neutral.400A.value}`,
-        type: "color",
-        group: `background`,
-      },
-      strong: {
-        value: `{ax.neutral.700.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "strong-hover": {
-        value: `{ax.neutral.800.value}`,
-        type: "color",
-        group: `background`,
-      },
-      "strong-pressed": {
-        value: `{ax.neutral.900.value}`,
-        type: "color",
-        group: `background`,
-      },
     },
     border: {
-      default: {
-        value: "{ax.neutral.600.value}",
-        type: "color",
-        group: "border",
-      },
-      subtle: {
-        value: "{ax.neutral.400.value}",
-        type: "color",
-        group: "border",
-      },
-      subtleA: {
-        value: "{ax.neutral.400A.value}",
-        type: "color",
-        group: "border",
-      },
-      strong: {
-        value: "{ax.neutral.700.value}",
-        type: "color",
-        group: "border",
-      },
-      /**
-       * TODO: Need to verify this value
-       * - Discuss with brand
-       */
       focus: {
         value: "{ax.neutral.1000.value}",
         type: "color",
@@ -185,10 +65,7 @@ export function semanticTokenConfig(theme: ColorTheme) {
       },
     },
   } satisfies {
-    bg: Record<
-      StaticDefaultBgKeys | StatefulDefaultBgKeys,
-      StyleDictionaryToken<"color">
-    >;
+    bg: Record<StaticDefaultBgKeys, StyleDictionaryToken<"color">>;
     border: Record<BorderColorKeys, StyleDictionaryToken<"color">>;
     text: Record<DefaultTextColorKeys, StyleDictionaryToken<"color">>;
   };

@@ -47,7 +47,7 @@
 .navds-alert:not(.navds-alert--inline),
 .navds-confirmation-panel {
   & .navds-link {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
   }
 }
 
@@ -56,9 +56,9 @@
 }
 
 .navds-link--neutral {
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 }
 
 .navds-link--subtle {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
 }

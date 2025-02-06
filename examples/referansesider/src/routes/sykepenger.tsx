@@ -16,7 +16,7 @@ import { Page } from "../components/Page";
 import { ThemeProviderContext } from "../theme/ThemeContext";
 
 const EyeBrowText = styled.span`
-  color: ${tokens.TextSubtle};
+  color: ${tokens.TextNeutralSubtle};
   font-size: 20px;
   font-weight: 400;
   line-height: 20px;
@@ -218,8 +218,8 @@ let PlainOrderedList: ReactNode;
 let AccordionItem: ReactNode;
 {
   const ScDetails = styled.details`
-    border-top: 1px solid ${tokens.BorderSubtle};
-    border-bottom: 1px solid ${tokens.BorderSubtle};
+    border-top: 1px solid ${tokens.BorderNeutralSubtle};
+    border-bottom: 1px solid ${tokens.BorderNeutralSubtle};
 
     &:hover,
     &:focus-within {
@@ -308,7 +308,7 @@ let MiniCard: ReactNode;
   const ScSubtitle = styled.span`
     font-variant-caps: all-small-caps;
     font-size: 20px;
-    color: ${tokens.TextSubtle};
+    color: ${tokens.TextNeutralSubtle};
   `;
 
   const ScTitle = styled.span`

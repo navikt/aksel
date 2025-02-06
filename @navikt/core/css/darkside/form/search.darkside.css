@@ -103,7 +103,7 @@
 
 .navds-search__button-search.navds-button--secondary {
   --__axc-button-border-width: 1px;
-  --__axc-button-border-color: var(--ax-border-default);
+  --__axc-button-border-color: var(--ax-border-neutral);
 
   &:not(:hover, :active) {
     background-color: var(--ax-bg-input);

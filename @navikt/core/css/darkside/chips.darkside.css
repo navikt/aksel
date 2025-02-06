@@ -35,7 +35,7 @@
 
 .navds-chips--readonly {
   .navds-chips__chip {
-    background-color: var(--ax-bg-moderateA);
+    background-color: var(--ax-bg-neutral-moderateA);
   }
 }
 
@@ -90,21 +90,21 @@
 }
 
 .navds-chips__toggle--neutral {
-  box-shadow: inset 0 0 0 1px var(--ax-border-subtleA);
-  background-color: var(--ax-bg-moderate);
-  color: var(--ax-text-default);
+  box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
+  background-color: var(--ax-bg-neutral-moderate);
+  color: var(--ax-text-neutral);
 
   &:hover {
-    background-color: var(--ax-bg-moderate-hover);
+    background-color: var(--ax-bg-neutral-moderate-hover);
   }
 
   &[data-pressed="true"] {
     box-shadow: none;
-    background-color: var(--ax-bg-strong-pressed);
-    color: var(--ax-text-contrast);
+    background-color: var(--ax-bg-neutral-strong-pressed);
+    color: var(--ax-text-neutral-contrast);
 
     &:hover {
-      background-color: var(--ax-bg-strong-hover);
+      background-color: var(--ax-bg-neutral-strong-hover);
     }
   }
 }
@@ -130,11 +130,11 @@
 }
 
 .navds-chips__removable--neutral {
-  background: var(--ax-bg-strong-pressed);
-  color: var(--ax-text-contrast);
+  background: var(--ax-bg-neutral-strong-pressed);
+  color: var(--ax-text-neutral-contrast);
 
   &:hover {
-    background: var(--ax-bg-strong-hover);
+    background: var(--ax-bg-neutral-strong-hover);
   }
 }
 
