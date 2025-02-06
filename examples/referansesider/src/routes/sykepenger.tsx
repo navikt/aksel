@@ -248,7 +248,7 @@ let AccordionItem: ReactNode;
   const ScSummary = styled.summary`
     background-color: ${tokens.BgDefault};
     &:hover {
-      background-color: ${tokens.BgAccentSoftHover};
+      background-color: ${tokens.BgAccentModerateHover};
     }
   `;
 

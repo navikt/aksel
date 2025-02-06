@@ -28,7 +28,7 @@ const ScButton = styled.button`
     box-shadow: inset 0 0 0 2px ${tokens.BorderAccent};
 
     &:hover {
-      background-color: ${tokens.BgAccentSoftHover};
+      background-color: ${tokens.BgAccentModerateHover};
     }
 
     &:active {
