@@ -1,8 +1,10 @@
 import * as tokens from "@navikt/ds-tokens/darkside-js";
 
 export const Ikon = ({ darkmode = false }: { darkmode?: boolean }) => {
-  const lightColor = darkmode ? tokens.Neutral400A : tokens.Brand1400A;
-  const strongColor = darkmode ? tokens.Brand1500 : tokens.Brand1800;
+  const lightColor = darkmode ? tokens.Neutral400A : tokens.BrandMagenta400A;
+  const strongColor = darkmode
+    ? tokens.BrandMagenta500
+    : tokens.BrandMagenta800;
   return (
     <svg
       role="img"
