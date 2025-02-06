@@ -19,3 +19,15 @@
 .rowgap-wrap {
   flex-wrap: wrap;
 }
+
+.sbdocs-content:not(.sb-unstyled) :is(p, li) {
+  font-size: 1.125rem;
+}
+
+.sbdocs-content:not(.sb-unstyled) li > p {
+  margin-bottom: 0;
+}
+
+.sbdocs-content:not(.sb-unstyled) li > ul {
+  margin-top: 0.25rem;
+}
