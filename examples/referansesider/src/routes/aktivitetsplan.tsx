@@ -99,7 +99,7 @@ const AktivitetsplanPage = () => {
                 <div style={{ height: "96px", width: "96px" }}>
                   <SykepengerIcon darkmode={theme === "dark"} />
                 </div>
-                <VStack gap="space-16" marginBlock="0 space-4">
+                <VStack gap="space-16" marginBlock="0 space-4" align="start">
                   <Heading as="h2" size="medium">
                     Mitt mål
                   </Heading>
@@ -116,10 +116,10 @@ const AktivitetsplanPage = () => {
                         Hva slags arbeidsoppgaver ønsker du deg?
                       </ListItem>
                     </List>
-                    <Button variant="secondary" size="small">
-                      Sett et mål
-                    </Button>
                   </div>
+                  <Button variant="secondary" size="small">
+                    Sett et mål
+                  </Button>
                 </VStack>
               </HStack>
             </MainCard>
