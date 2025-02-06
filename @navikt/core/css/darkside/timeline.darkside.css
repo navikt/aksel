@@ -44,7 +44,7 @@
 }
 
 .navds-timeline__row--active {
-  background: var(--ax-bg-accent-moderateA);
+  background: var(--ax-bg-accent-soft-pressedA);
 }
 
 .navds-timeline__row:last-of-type {
