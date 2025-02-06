@@ -199,7 +199,7 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       />
       <Header />
       <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-        <div className="bg-violet-600 py-4 text-center text-xl text-white">
+        <div className="bg-violet-600 p-4 text-center text-xl text-white">
           <Link
             href="/darkside"
             target="_blank"
