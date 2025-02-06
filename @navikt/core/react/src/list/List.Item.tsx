@@ -1,8 +1,8 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyLong } from "../typography";
-import { ListContext } from "./context";
-import type { ListItemProps } from "./types";
+import { ListContext } from "./List.context";
+import type { ListItemProps } from "./List.types";
 
 /**
  * @see 🏷️ {@link ListItemProps}

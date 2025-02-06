@@ -58,7 +58,8 @@ export default {
       storySort: {
         method: "alphabetical",
         order: [
-          "Getting started",
+          "Docs",
+          ["Getting started"],
           "ds-react",
           ["Primitives"],
           ["Default", "Controls"],
@@ -78,9 +79,9 @@ export default {
           {
             value: "default",
             icon: "hourglass",
-            title: "Default (old)",
+            title: "Legacy theme",
           },
-          { value: "darkside", icon: "beaker", title: "Darkside (new)" },
+          { value: "darkside", icon: "beaker", title: "Darkside theme" },
         ],
         showName: true,
         dynamicTitle: true,

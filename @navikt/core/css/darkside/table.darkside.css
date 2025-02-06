@@ -141,7 +141,8 @@
 
 .navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
 .navds-table__header-cell[aria-sort="descending"] .navds-table__sort-button {
-  background-color: var(--ax-bg-accent-soft-pressedA);
+  background-color: var(--ax-bg-accent-moderate-pressedA);
+  color: var(--ax-text-accent);
 }
 
 .navds-table__header-cell--align-right .navds-table__sort-button {
