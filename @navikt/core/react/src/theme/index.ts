@@ -1,2 +1,2 @@
 "use client";
-export { Theme } from "./Theme";
+export { Theme, ThemeProps } from "./Theme";

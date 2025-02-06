@@ -152,6 +152,11 @@ export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
 
 /**
+ * Theming
+ */
+export { Theme, type ThemeProps } from "./theme";
+
+/**
  * @deprecated
  */
 export { LinkPanel, type LinkPanelProps } from "./link-panel";
