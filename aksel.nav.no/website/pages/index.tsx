@@ -208,24 +208,6 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
             Vi trenger testere fra team i Nav for darkmode og theming!
           </Link>
         </div>
-        <div className="bg-violet-700 py-4 text-center text-xl text-white">
-          <Link
-            href="/darkside"
-            target="_blank"
-            className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
-          >
-            Vi trenger testere fra team i Nav for darkmode og theming!
-          </Link>
-        </div>
-        <div className="bg-violet-800 py-4 text-center text-xl text-white">
-          <Link
-            href="/darkside"
-            target="_blank"
-            className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
-          >
-            Vi trenger testere fra team i Nav for darkmode og theming!
-          </Link>
-        </div>
         {!pause && (
           <div aria-hidden>
             <Snowfall
