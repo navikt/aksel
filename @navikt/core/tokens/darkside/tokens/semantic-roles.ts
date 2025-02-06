@@ -19,26 +19,6 @@ const configForRole = (role: SemanticColorRoles) => {
         type: "color",
         group: `background.${role}`,
       },
-      [`${role}-soft-hover`]: {
-        value: `{ax.${role}.200.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-soft-hoverA`]: {
-        value: `{ax.${role}.200A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-soft-pressed`]: {
-        value: `{ax.${role}.300.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-soft-pressedA`]: {
-        value: `{ax.${role}.300A.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
       [`${role}-moderate`]: {
         value: `{ax.${role}.200.value}`,
         type: "color",

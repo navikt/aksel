@@ -25,7 +25,7 @@
   }
 
   &:hover {
-    background-color: var(--ax-bg-accent-soft-hoverA);
+    background-color: var(--ax-bg-accent-moderate-hoverA);
 
     &::before,
     &::after {
