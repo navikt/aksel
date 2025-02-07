@@ -6,18 +6,18 @@ import { Markdown, Meta } from "@storybook/blocks";
 
 ## Clean project
 
-For new projects, setup is just as easy as before, but now requires `Theme`-component to be wrapped around your app.
+For new projects, setup is just as easy as before, but now requires a `Theme`-component to be wrapped around your app.
 The component acts as a local feature-flag for the new implementation, with the added benefit of being able to switch between light and dark mode for you.
 
 Steps:
 
 - 1. Import new CSS `@navikt/ds-css/darkside`
-- 2. Import `Theme`-component from `@navikt/ds-react`
+- 2. Import `Theme`-component from `@navikt/ds-react/Theme`
 - 3. Wrap your app in the `Theme`-component. You do not have to set the theme, but it defaults to `light`.
 
 ```tsx
 import "@navikt/ds-css/darkside";
-import { Theme } from "@navikt/ds-react";
+import { Theme } from "@navikt/ds-react/Theme";
 
 export const App = () => (
   <Theme theme="light">
@@ -32,7 +32,7 @@ If you are not using any of our React-components, you can still switch between t
 
 ## Theme switching
 
-The `Theme`-component has a `theme`-prop that can be set to either `light` or `dark`. This only sets a `class` on the element of `light` or `dark`, and the rest is handled by the CSS.
+The `Theme`-component has a `theme`-prop that can be set to either `light` or `dark`. This only sets a `class` on the element of `light` or `dark` (in addition to a `navds-theme` class), and the rest is handled by the CSS.
 
 You have the option of using `hasBackground` (defaults to true) to make `Theme` include a built on default background.
 
