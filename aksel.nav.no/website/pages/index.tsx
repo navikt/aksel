@@ -1,9 +1,9 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
+import Link from "next/link";
 import { GetStaticProps } from "next/types";
 import { useState } from "react";
-import Snowfall from "react-snowfall";
 import {
   CompassIcon,
   ComponentIcon,
@@ -198,17 +198,15 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       />
       <Header />
       <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-        {!pause && (
-          <div aria-hidden>
-            <Snowfall
-              style={{ zIndex: 1 }}
-              color="rgba(230, 241, 248, 0.9)"
-              speed={reducedMotion || pause ? [0, 0] : [0.1, 0.2]}
-              wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
-              snowflakeCount={600}
-            />
-          </div>
-        )}
+        <div className="bg-violet-600 p-4 text-center text-xl text-white">
+          <Link
+            href="/darkside"
+            target="_blank"
+            className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
+          >
+            Vi trenger testere fra team i Nav for darkmode og theming!
+          </Link>
+        </div>
         <div className="z-20 pb-28">
           <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
             <Heading

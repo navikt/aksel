@@ -9,7 +9,7 @@ type ThemeContext = {
    * Color theme
    * @default "light"
    */
-  theme: "light" | "dark";
+  theme?: "light" | "dark";
 };
 
 const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
@@ -18,7 +18,7 @@ const [ThemeProvider, useThemeInternal] = createContext<ThemeContext>({
   providerName: "ThemeProvider",
 });
 
-type ThemeProps = {
+export type ThemeProps = {
   className?: string;
   hasBackground?: boolean;
 } & ThemeContext &

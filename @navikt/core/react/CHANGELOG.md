@@ -1,5 +1,39 @@
 # @navikt/ds-react
 
+## 7.12.2
+
+### Patch Changes
+
+- Box: Added export for `BoxNew`. ([`8576400`](https://github.com/navikt/aksel/commit/857640026368153b64171f1cf954b9abac493ee8))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.2
+  - @navikt/aksel-icons@7.12.2
+
+## 7.12.1
+
+### Patch Changes
+
+- Theme: Theme-prop is now optional. ([`f269311`](https://github.com/navikt/aksel/commit/f269311dbbeb09e8fa0ba93a19aa430f0dd17255))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.1
+  - @navikt/aksel-icons@7.12.1
+
+## 7.12.0
+
+### Minor Changes
+
+- List: Marked `title`, `headingTag` and `description` properties as deprecated. These will not be supported in future versions and should be migrated from when possible. ([#3537](https://github.com/navikt/aksel/pull/3537))
+
+### Patch Changes
+
+- Table: Updated sorting icons for ascending and descending. ([#3536](https://github.com/navikt/aksel/pull/3536))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.0
+  - @navikt/aksel-icons@7.12.0
+
 ## 7.11.0
 
 ### Patch Changes

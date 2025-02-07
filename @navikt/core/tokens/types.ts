@@ -7,11 +7,11 @@ export const ColorRolesList = [
   "warning",
   "danger",
   "info",
-  "brand-1",
-  "brand-2",
-  "brand-3",
-  "meta-1",
-  "meta-2",
+  "brand-magenta",
+  "brand-beige",
+  "brand-blue",
+  "meta-purple",
+  "meta-lime",
 ] as const;
 
 export type GlobalColorRoles = (typeof ColorRolesList)[number];
@@ -58,10 +58,6 @@ export type StaticBgKeys =
   | `${SemanticColorRoles}-strong`;
 
 export type StatefulBgKeys =
-  | `${SemanticColorRoles}-soft-hover`
-  | `${SemanticColorRoles}-soft-hoverA`
-  | `${SemanticColorRoles}-soft-pressed`
-  | `${SemanticColorRoles}-soft-pressedA`
   | `${SemanticColorRoles}-moderate-hover`
   | `${SemanticColorRoles}-moderate-hoverA`
   | `${SemanticColorRoles}-moderate-pressed`
