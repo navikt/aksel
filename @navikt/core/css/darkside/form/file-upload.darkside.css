@@ -15,10 +15,10 @@
   gap: var(--ax-space-16);
   text-align: center;
   padding: var(--ax-space-16) var(--ax-space-20);
-  border: 1px dashed var(--ax-border-default);
+  border: 1px dashed var(--ax-border-neutral);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   transition: background-color var(--__axc-dropzone-animation-length-short) var(--__axc-dropzone-animation-ease-out);
   cursor: pointer;
 
@@ -40,9 +40,9 @@
   }
 
   &[data-disabled="true"] {
-    --__axc-dropzone-background: var(--ax-bg-soft);
+    --__axc-dropzone-background: var(--ax-bg-neutral-soft);
 
-    border-color: var(--ax-border-subtleA);
+    border-color: var(--ax-border-neutral-subtleA);
     cursor: default;
   }
 }
@@ -53,7 +53,7 @@
   }
 
   & > .navds-dropzone__area::after {
-    color: var(--ax-text-accent-strong);
+    color: var(--ax-text-accent);
     background-color: var(--ax-bg-accent-moderateA);
     content: "";
     inset: 0;
@@ -112,7 +112,7 @@
   display: grid;
   padding: var(--__axc-dropzone-icon-padding);
   border-radius: var(--ax-border-radius-full);
-  background-color: var(--ax-bg-moderateA);
+  background-color: var(--ax-bg-neutral-moderateA);
   transition:
     background-color 300ms var(--__axc-dropzone-animation-ease-out),
     font-size 300ms var(--__axc-dropzone-animation-ease-out);
@@ -134,13 +134,13 @@
 }
 
 .navds-dropzone--dragging .navds-dropzone__area-release {
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .navds-dropzone__area-disabled {
-  color: var(--ax-text-subtle);
+  color: var(--ax-text-neutral-subtle);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -158,7 +158,7 @@ li.navds-file-item {
 
 .navds-file-item__inner {
   background-color: var(--ax-bg-raised);
-  border: 1px solid var(--ax-border-subtleA);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   outline-offset: -1px;
   transition: outline-color 250ms cubic-bezier(0, 0.3, 0.15, 1);
   border-radius: var(--ax-border-radius-xlarge);
@@ -173,8 +173,8 @@ li.navds-file-item {
 }
 
 .navds-file-item__icon {
-  background-color: var(--ax-bg-moderateA);
-  color: var(--ax-text-default);
+  background-color: var(--ax-bg-neutral-moderateA);
+  color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-full);
   min-height: 2.5rem;
   min-width: 2.5rem;

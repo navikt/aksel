@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext } from "react";
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
   ArrowsUpDownIcon,
+  SortDownIcon,
+  SortUpIcon,
 } from "@navikt/aksel-icons";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
@@ -58,9 +58,9 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
             {children}
             {context?.sort?.orderBy === sortKey ? (
               context?.sort?.direction === "descending" ? (
-                <ArrowDownIcon aria-hidden />
+                <SortDownIcon aria-hidden />
               ) : (
-                <ArrowUpIcon aria-hidden />
+                <SortUpIcon aria-hidden />
               )
             ) : (
               <ArrowsUpDownIcon aria-hidden />

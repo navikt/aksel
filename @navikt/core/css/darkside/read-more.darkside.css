@@ -14,7 +14,7 @@
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-4);
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   padding-inline: var(--__axc-read-more-pi-start) var(--__axc-read-more-pi-end);
   padding-block: var(--__axc-read-more-pb);
   text-align: start;
@@ -34,8 +34,7 @@
     border-radius: var(--ax-border-radius-medium);
 
     &:hover {
-      background-color: var(--ax-bg-hoverA);
-      color: var(--ax-text-accent-strong);
+      background-color: var(--ax-bg-neutral-moderate-hoverA);
     }
   }
 }
@@ -47,7 +46,7 @@
 
     &:hover {
       background-color: var(--ax-bg-accent-moderate-hoverA);
-      color: var(--ax-text-accent-strong);
+      color: var(--ax-text-accent);
     }
   }
 
@@ -66,8 +65,8 @@
 /* ---------------------------- ReadMore Content ---------------------------- */
 .navds-read-more__content {
   margin-top: var(--ax-space-8);
-  border-left: 2px solid var(--ax-border-subtleA);
-  color: var(--ax-text-default);
+  border-left: 2px solid var(--ax-border-neutral-subtleA);
+  color: var(--ax-text-neutral);
   margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
   padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-space-4));
 

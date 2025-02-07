@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--ax-bg-accent-strong);
+  color: var(--ax-bg-info-strong);
   font-size: 1.25rem;
   padding: calc(var(--ax-space-4) / 2);
 }
@@ -33,11 +33,11 @@
 
 .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
   display: inherit;
-  color: var(--ax-bg-accent-strong-hover);
+  color: var(--ax-bg-info-strong-hover);
 }
 
 .navds-help-text__button[aria-expanded="true"] > .navds-help-text__icon--filled {
-  color: var(--ax-bg-accent-strong-pressed);
+  color: var(--ax-bg-info-strong-pressed);
 }
 
 @media (forced-colors: active) {

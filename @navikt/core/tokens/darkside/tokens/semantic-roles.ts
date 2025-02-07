@@ -2,6 +2,10 @@ import _ from "lodash";
 import { ColorRolesList, type SemanticColorRoles } from "../../types";
 import { type StyleDictionaryTokenConfig } from "../tokens.util";
 
+/**
+ * Gray colors are percieved a little lighter than other colored versions,
+ * so we make some adjustments for neutral colors.
+ */
 const configForRole = (role: SemanticColorRoles) => {
   return {
     bg: {
@@ -10,13 +14,8 @@ const configForRole = (role: SemanticColorRoles) => {
         type: "color",
         group: `background.${role}`,
       },
-      [`${role}-hover`]: {
-        value: `{ax.${role}.200.value}`,
-        type: "color",
-        group: `background.${role}`,
-      },
-      [`${role}-hoverA`]: {
-        value: `{ax.${role}.200A.value}`,
+      [`${role}-softA`]: {
+        value: `{ax.${role}.100A.value}`,
         type: "color",
         group: `background.${role}`,
       },
@@ -51,29 +50,41 @@ const configForRole = (role: SemanticColorRoles) => {
         group: `background.${role}`,
       },
       [`${role}-strong`]: {
-        value: `{ax.${role}.600.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.700.value}`
+            : `{ax.${role}.600.value}`,
         type: "color",
         group: `background.${role}`,
       },
       [`${role}-strong-hover`]: {
-        value: `{ax.${role}.700.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.800.value}`
+            : `{ax.${role}.700.value}`,
         type: "color",
         group: `background.${role}`,
       },
       [`${role}-strong-pressed`]: {
-        value: `{ax.${role}.800.value}`,
+        value:
+          role === "neutral"
+            ? `{ax.${role}.900.value}`
+            : `{ax.${role}.800.value}`,
         type: "color",
         group: `background.${role}`,
       },
     },
     text: {
       [role]: {
-        value: `{ax.${role}.800.value}`,
+        value: `{ax.${role}.1000.value}`,
         type: "color",
         group: `text.${role}`,
       },
-      [`${role}-strong`]: {
-        value: `{ax.${role}.1000.value}`,
+      [`${role}-subtle`]: {
+        value:
+          role === "neutral"
+            ? `{ax.${role}.900.value}`
+            : `{ax.${role}.800.value}`,
         type: "color",
         group: `text.${role}`,
       },
@@ -112,7 +123,7 @@ const configForRole = (role: SemanticColorRoles) => {
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
 export const semanticTokensForAllRolesConfig = () => {
-  return ColorRolesList.filter((name) => name !== "neutral").reduce(
+  return ColorRolesList.reduce(
     (acc, role) => _.merge(acc, configForRole(role)),
     {} as ReturnType<typeof configForRole>,
   );

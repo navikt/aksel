@@ -4,6 +4,11 @@ import { type StyleDictionaryToken } from "../tokens.util";
 export const textContrastTokenConfig = {
   text: {
     /* core */
+    "neutral-contrast": {
+      value: "{ax.neutral.000.value}",
+      type: "color",
+      group: `text.accent`,
+    },
     "accent-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
@@ -31,31 +36,31 @@ export const textContrastTokenConfig = {
       group: "text.warning",
     },
     /* Brand */
-    "brand-1-contrast": {
+    "brand-magenta-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brand-1",
+      group: "text.brand-magenta",
     },
-    "brand-2-contrast": {
+    "brand-beige-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brand-2",
+      group: "text.brand-beige",
     },
-    "brand-3-contrast": {
+    "brand-blue-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.brand-3",
+      group: "text.brand-blue",
     },
     /* Meta  */
-    "meta-1-contrast": {
+    "meta-purple-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.meta-1",
+      group: "text.meta-purple",
     },
-    "meta-2-contrast": {
+    "meta-lime-contrast": {
       value: "{ax.neutral.000.value}",
       type: "color",
-      group: "text.meta-2",
+      group: "text.meta-lime",
     },
   },
 } satisfies {

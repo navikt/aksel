@@ -7,15 +7,15 @@ export const ColorRolesList = [
   "warning",
   "danger",
   "info",
-  "brand-1",
-  "brand-2",
-  "brand-3",
-  "meta-1",
-  "meta-2",
+  "brand-magenta",
+  "brand-beige",
+  "brand-blue",
+  "meta-purple",
+  "meta-lime",
 ] as const;
 
 export type GlobalColorRoles = (typeof ColorRolesList)[number];
-export type SemanticColorRoles = Exclude<GlobalColorRoles, "neutral">;
+export type SemanticColorRoles = GlobalColorRoles;
 
 export type GlobalColorScale =
   | "100"
@@ -48,31 +48,16 @@ export type StaticDefaultBgKeys =
   | "input"
   | "raised"
   | "sunken"
-  | "overlay"
-  | "soft"
-  | "moderate"
-  | "moderateA"
-  | "strong";
-
-export type StatefulDefaultBgKeys =
-  | "hover"
-  | "hoverA"
-  | "moderate-hover"
-  | "moderate-hoverA"
-  | "moderate-pressed"
-  | "moderate-pressedA"
-  | "strong-hover"
-  | "strong-pressed";
+  | "overlay";
 
 export type StaticBgKeys =
   | `${SemanticColorRoles}-soft`
+  | `${SemanticColorRoles}-softA`
   | `${SemanticColorRoles}-moderate`
   | `${SemanticColorRoles}-moderateA`
   | `${SemanticColorRoles}-strong`;
 
 export type StatefulBgKeys =
-  | `${SemanticColorRoles}-hover`
-  | `${SemanticColorRoles}-hoverA`
   | `${SemanticColorRoles}-moderate-hover`
   | `${SemanticColorRoles}-moderate-hoverA`
   | `${SemanticColorRoles}-moderate-pressed`
@@ -80,25 +65,15 @@ export type StatefulBgKeys =
   | `${SemanticColorRoles}-strong-hover`
   | `${SemanticColorRoles}-strong-pressed`;
 
-export type DefaultTextColorKeys =
-  | "default"
-  | "subtle"
-  | "icon"
-  | "logo"
-  | "contrast";
+export type DefaultTextColorKeys = "logo";
 
 export type TextColorKeys =
   | SemanticColorRoles
-  | `${SemanticColorRoles}-strong`
+  | `${SemanticColorRoles}-subtle`
   | `${SemanticColorRoles}-icon`
   | `${SemanticColorRoles}-contrast`;
 
-export type BorderColorKeys =
-  | "default"
-  | "subtle"
-  | "subtleA"
-  | "strong"
-  | "focus";
+export type BorderColorKeys = "focus";
 
 export type BorderColorWithRoleKeys =
   | SemanticColorRoles

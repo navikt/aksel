@@ -1,5 +1,5 @@
 .navds-tabs__tablist-wrapper {
-  box-shadow: inset 0 -1px var(--ax-border-subtle);
+  box-shadow: inset 0 -1px var(--ax-border-neutral-subtleA);
   width: 100%;
   display: flex;
 }
@@ -49,11 +49,11 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
   cursor: pointer;
 
   --__axc-tabs-line-width: 0;
-  --__axc-tabs-line-color: var(--ax-border-subtle);
+  --__axc-tabs-line-color: var(--ax-border-neutral-subtleA);
 
   box-shadow: inset 0 var(--__axc-tabs-line-width) var(--__axc-tabs-line-color);
   transition: box-shadow 200ms cubic-bezier(0.2, 0, 0, 1);

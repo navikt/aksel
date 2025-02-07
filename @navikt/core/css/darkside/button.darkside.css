@@ -111,19 +111,19 @@
  * .navds-button--primary-neutral *
  *************************/
 .navds-button--primary-neutral {
-  background-color: var(--ax-bg-strong);
-  color: var(--ax-text-contrast);
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
 
   &:hover {
-    background-color: var(--ax-bg-strong-hover);
+    background-color: var(--ax-bg-neutral-strong-hover);
   }
 
   &:active {
-    background-color: var(--ax-bg-strong-pressed);
+    background-color: var(--ax-bg-neutral-strong-pressed);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    background-color: var(--ax-bg-strong);
+    background-color: var(--ax-bg-neutral-strong);
   }
 }
 
@@ -134,7 +134,7 @@
   --__axc-button-border-color: var(--ax-border-accent);
 
   background-color: transparent;
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 
   &:hover {
     --__axc-button-border-color: var(--ax-border-accent-strong);
@@ -143,17 +143,14 @@
   }
 
   &:active {
-    --__axc-button-border-color: transparent;
-
-    background-color: var(--ax-bg-accent-strong-pressed);
-    color: var(--ax-text-accent-contrast);
+    background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
     --__axc-button-border-color: var(--ax-border-accent);
 
     background-color: transparent;
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
   }
 }
 
@@ -161,28 +158,25 @@
 * .navds-button--secondary-neutral *
  **************************/
 .navds-button--secondary-neutral {
-  --__axc-button-border-color: var(--ax-border-default);
+  --__axc-button-border-color: var(--ax-border-neutral);
 
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
-    --__axc-button-border-color: var(--ax-border-strong);
+    --__axc-button-border-color: var(--ax-border-neutral-strong);
 
-    background-color: var(--ax-bg-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:active {
-    --__axc-button-border-color: transparent;
-
-    color: var(--ax-text-contrast);
-    background-color: var(--ax-bg-strong-pressed);
+    background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    --__axc-button-border-color: var(--ax-border-default);
+    --__axc-button-border-color: var(--ax-border-neutral);
 
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
     background-color: transparent;
   }
 }
@@ -192,19 +186,18 @@
  ****************************/
 .navds-button--tertiary {
   background-color: transparent;
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
 
   &:hover {
     background-color: var(--ax-bg-accent-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-accent-strong-pressed);
-    color: var(--ax-text-accent-contrast);
+    background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    color: var(--ax-text-accent);
+    color: var(--ax-text-accent-subtle);
     background-color: transparent;
   }
 }
@@ -214,19 +207,18 @@
  ****************************/
 .navds-button--tertiary-neutral {
   background-color: transparent;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
-    background-color: var(--ax-bg-moderate-hoverA);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   &:active {
-    background-color: var(--ax-bg-strong-pressed);
-    color: var(--ax-text-contrast);
+    background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
   &:is(:disabled, .navds-button--disabled) {
-    color: var(--ax-text-default);
+    color: var(--ax-text-neutral);
     background-color: transparent;
   }
 }

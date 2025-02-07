@@ -1,5 +1,17 @@
 # @navikt/aksel-icons
 
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+### Minor Changes
+
+- Icons: Added new icons 'SortUp' and 'SortDown' 🎉. ([#3528](https://github.com/navikt/aksel/pull/3528))
+
 ## 7.10.0
 
 ## 7.9.2
