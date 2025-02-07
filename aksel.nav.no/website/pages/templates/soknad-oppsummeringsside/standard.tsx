@@ -156,7 +156,12 @@ function Example() {
           <FormNavigation />
         </VStack>
       </Page.Block>
-      <Env />
+      <Env
+        languages={[
+          { locale: "nb", url: "https://www.nav.no" },
+          { locale: "en", url: "https://www.nav.no/en" },
+        ]}
+      />
     </Page>
   );
 }
