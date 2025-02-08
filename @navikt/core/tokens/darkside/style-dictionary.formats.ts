@@ -92,7 +92,7 @@ function createTokenValue(token: TransformedToken): string {
   /*
    * Breakpoints can in most cases not be used as variables, so we need to return the value directly.
    */
-  if ((token.type as TokenTypes) === "global-breakpoints") {
+  if ((token.type as TokenTypes) === "global-breakpoint") {
     return token.value ?? token.$value;
   }
 

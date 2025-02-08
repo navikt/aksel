@@ -43,11 +43,6 @@ const filenames = {
  * The CSS tokens will be exported as CSS variables.
  * The JS and TS tokens will be exported as an object with the token name as key and the CSS variable as value.
  *
- * Future additions (not needed for testing):
- * - Shadows
- * - Typography
- * - Breakpoints
- *
  *
  * @note We currrently avoid exporting 'static' tokens, as this step might not be needed.
  * In the current implementation we don't account for light and dark mode for static exports. This will need to be added if we want static exports.
