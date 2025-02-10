@@ -6,7 +6,11 @@ import {
 } from "../../../types";
 import { type StyleDictionaryToken } from "../../tokens.util";
 
-export function semanticTokenConfig(theme: ColorTheme) {
+/**
+ * Static root-layer for semantic tokens.
+ * These tokens are the  "root"-layer in the sense that they are the only "unique" tokens in the semantic layer.
+ */
+export function semanticRootTokens(theme: ColorTheme) {
   return {
     text: {
       logo: {
