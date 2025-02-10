@@ -318,14 +318,14 @@ const main = async () => {
     ].join("\n"),
   );
 
+  await createThemedRoleConfigs();
+
   const { code } = bundle({
     filename: `${DARKSIDE_DIST}tokens.css`,
     minify: false,
   });
 
   fs.writeFileSync(`${DARKSIDE_DIST}tokens.css`, code);
-
-  await createThemedRoleConfigs();
 };
 
 main();
