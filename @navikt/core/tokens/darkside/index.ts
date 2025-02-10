@@ -17,8 +17,11 @@ import {
   rootTokens,
 } from "./tokens.config";
 import { tokensWithPrefix } from "./tokens.util";
+import {
+  configForRole,
+  themedConfigForRole,
+} from "./tokens/color-semantic-roles";
 import { globalColorLightModeConfig } from "./tokens/global";
-import { configForRole, themedConfigForRole } from "./tokens/semantic-roles";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";

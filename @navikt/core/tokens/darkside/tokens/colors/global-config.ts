@@ -3,11 +3,11 @@ import {
   type ColorTheme,
   type GlobalColorRoles,
   type GlobalColorScale,
-} from "../../types";
-import { type GlobalColorEntry } from "../tokens.util";
-import { globalColorDarkModeConfigWithoutAlpha } from "./global-dark";
-import { globalColorLightModeConfigWithoutAlpha } from "./global-light";
-import { semanticTokenConfig } from "./semantic";
+} from "../../../types";
+import { type GlobalColorEntry } from "../../tokens.util";
+import { globalColorDarkModeConfigWithoutAlpha } from "./global-dark.tokens";
+import { globalColorLightModeConfigWithoutAlpha } from "./global-light.tokens";
+import { semanticTokenConfig } from "./semantic.tokens";
 
 export const globalColorDarkModeConfig = globalColorConfigWithAlphaTokens(
   globalColorDarkModeConfigWithoutAlpha,
@@ -63,7 +63,7 @@ function globalColorConfigWithAlphaTokens(
   return localConfig;
 }
 
-export function createAlphaColor(targetColor: string, theme: ColorTheme) {
+function createAlphaColor(targetColor: string, theme: ColorTheme) {
   const backgroundColor = semanticTokenConfig(theme).bg.default.value;
 
   const [r, g, b, a] = getAlphaColor(

@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { ColorRolesList, type SemanticColorRoles } from "../../types";
-import { type StyleDictionaryTokenConfig } from "../tokens.util";
+import { ColorRolesList, type SemanticColorRoles } from "../../../types";
+import { type StyleDictionaryTokenConfig } from "../../tokens.util";
 
 /**
  * Gray colors are percieved a little lighter than other colored versions,

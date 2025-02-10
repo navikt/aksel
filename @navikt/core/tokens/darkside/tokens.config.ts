@@ -5,6 +5,8 @@ import {
   tokensWithPrefix,
 } from "./tokens.util";
 import { breakpointTokenConfig } from "./tokens/breakpoint";
+import { semanticTokenConfig } from "./tokens/color-semantic";
+import { semanticTokensForAllRolesConfig } from "./tokens/color-semantic-roles";
 import { fontTokenConfig } from "./tokens/font";
 import {
   globalColorDarkModeConfig,
@@ -12,8 +14,6 @@ import {
 } from "./tokens/global";
 import { opacityTokenConfig } from "./tokens/opacity";
 import { radiusTokenConfig } from "./tokens/radius";
-import { semanticTokenConfig } from "./tokens/semantic";
-import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
 import { textContrastTokenConfig } from "./tokens/text-contrast";

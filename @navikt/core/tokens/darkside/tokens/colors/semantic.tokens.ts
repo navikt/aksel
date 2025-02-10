@@ -3,8 +3,8 @@ import {
   type ColorTheme,
   type DefaultTextColorKeys,
   type StaticDefaultBgKeys,
-} from "../../types";
-import { type StyleDictionaryToken } from "../tokens.util";
+} from "../../../types";
+import { type StyleDictionaryToken } from "../../tokens.util";
 
 export function semanticTokenConfig(theme: ColorTheme) {
   return {

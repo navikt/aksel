@@ -1,5 +1,5 @@
-import { type GlobalColorRoles, type GlobalColorScale } from "../../types";
-import { type GlobalColorEntry } from "../tokens.util";
+import { type GlobalColorRoles, type GlobalColorScale } from "../../../types";
+import { type GlobalColorEntry } from "../../tokens.util";
 
 export const globalColorDarkModeConfigWithoutAlpha: Record<
   GlobalColorRoles,
