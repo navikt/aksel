@@ -1,11 +1,13 @@
+import _ from "lodash";
 import { type SemanticColorRoles } from "../../../types";
+import { ColorRolesList } from "../../../types";
 import { type StyleDictionaryTokenConfig } from "../../tokens.util";
 
 /**
  * Maps the semantic colors to the global color layer for a given role.
  * @note Gray is handled a little differently, as it is visually perceived a little lighter than other colors.
  */
-export function semanticRoleTokens(role: SemanticColorRoles) {
+export function semanticTokensForRole(role: SemanticColorRoles) {
   return {
     bg: {
       [`${role}-soft`]: {
@@ -92,6 +94,11 @@ export function semanticRoleTokens(role: SemanticColorRoles) {
         type: "color",
         group: `text.${role}`,
       },
+      [`${role}-contrast`]: {
+        value: "{ax.neutral.000.value}",
+        type: "color",
+        group: `text.${role}`,
+      },
     },
     border: {
       [role]: {
@@ -117,3 +124,13 @@ export function semanticRoleTokens(role: SemanticColorRoles) {
     },
   } satisfies StyleDictionaryTokenConfig<"color">;
 }
+
+/**
+ * We need to deep merge the token config for each role to get the complete token config for all roles.
+ */
+export const semanticTokensForAllRoles = () => {
+  return ColorRolesList.reduce(
+    (acc, role) => _.merge(acc, semanticTokensForRole(role)),
+    {} as ReturnType<typeof semanticTokensForRole>,
+  );
+};
