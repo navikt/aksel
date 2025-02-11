@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { breakpointsTokenConfig } from "../tokens/darkside/tokens/breakpoints";
+import { breakpointTokenConfig } from "../tokens/darkside/tokens/breakpoint";
 import { config, extractTokensForCategory } from "./darkside";
 
 describe("Darkside tailwind config", () => {
@@ -17,19 +17,19 @@ describe("Darkside tailwind config", () => {
 
   test("should have correct screen breakpoints", () => {
     expect(config.theme.screens.sm).toBe(
-      breakpointsTokenConfig.breakpoint.sm.value,
+      breakpointTokenConfig.breakpoint.sm.value,
     );
     expect(config.theme.screens.md).toBe(
-      breakpointsTokenConfig.breakpoint.md.value,
+      breakpointTokenConfig.breakpoint.md.value,
     );
     expect(config.theme.screens.lg).toBe(
-      breakpointsTokenConfig.breakpoint.lg.value,
+      breakpointTokenConfig.breakpoint.lg.value,
     );
     expect(config.theme.screens.xl).toBe(
-      breakpointsTokenConfig.breakpoint.xl.value,
+      breakpointTokenConfig.breakpoint.xl.value,
     );
     expect(config.theme.screens["2xl"]).toBe(
-      breakpointsTokenConfig.breakpoint["2xl"].value,
+      breakpointTokenConfig.breakpoint["2xl"].value,
     );
   });
 
