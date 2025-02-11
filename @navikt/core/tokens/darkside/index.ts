@@ -46,7 +46,7 @@ async function main() {
    * We set this to :root and :host as to make this the fallback and default.
    */
   await buildCSSBundleForTokens({
-    tokens: globalLightTokens,
+    tokens: tokensWithPrefix(globalLightTokens),
     filename: "light-tokens.css",
     selector: ":root, :host, .light",
   });
@@ -55,7 +55,7 @@ async function main() {
    * Global tokens only for "dark"-mode
    */
   await buildCSSBundleForTokens({
-    tokens: globalDarkTokens,
+    tokens: tokensWithPrefix(globalDarkTokens),
     filename: "dark-tokens.css",
     selector: ".dark, .dark-theme",
   });
