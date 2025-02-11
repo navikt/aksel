@@ -103,8 +103,8 @@ async function main() {
     selector: ":root, :host",
   });
 
-  await buildOtherTokenFormats();
   await buildThemedRolesCSS();
+  await buildOtherTokenFormats();
 
   fs.writeFileSync(
     `${DARKSIDE_DIST}tokens.css`,
@@ -307,8 +307,10 @@ async function buildCSSBundleForTokens({
 }) {
   const SDictionary = new StyleDictionary({
     tokens,
+    /* Since we end up filtering out references for some tokens, we filter out warnings */
+    log: { warnings: "disabled" },
     platforms: {
-      css: {
+      [filename]: {
         transformGroup: "css",
         transforms: ["name/alpha-suffix"],
         buildPath: DARKSIDE_DIST,
