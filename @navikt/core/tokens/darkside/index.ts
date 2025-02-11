@@ -2,6 +2,7 @@ import fs from "fs";
 import { bundle } from "lightningcss";
 import _ from "lodash";
 import StyleDictionary from "style-dictionary";
+import { DesignTokens, Filter } from "style-dictionary/types";
 import { ColorRolesList, SemanticColorRoles } from "../types";
 import {
   formatCJS,
@@ -15,9 +16,13 @@ import {
   darkModeTokens,
   lightModeTokens,
   rootTokens,
+  semanticRoleTokensWithGlobalReference,
 } from "./tokens.config";
 import { tokensWithPrefix } from "./tokens.util";
-import { globalLightTokens } from "./tokens/colors/global.tokens";
+import {
+  globalDarkTokens,
+  globalLightTokens,
+} from "./tokens/colors/global.tokens";
 import { semanticTokensForRole } from "./tokens/colors/semantic-role.tokens";
 import { semanticThemedBaseTokens } from "./tokens/colors/semantic-themed-base.tokens";
 
@@ -27,16 +32,60 @@ const DARKSIDE_DIST = "./dist/darkside/";
 const filenames = {
   light: {
     css: "light-tokens.css",
+    semanticCss: "semantic-light-tokens.css",
     js: "tokens.js",
     ts: "tokens.d.ts",
   },
   dark: {
     css: "dark-tokens.css",
+    semanticCss: "semantic-dark-tokens.css",
+  },
+  semantic: {
+    css: "semantic-tokens.css",
   },
   root: {
     css: "root-tokens.css",
   },
 };
+
+async function buildCSSBundleForTokens({
+  tokens,
+  filename,
+  selector,
+  filter,
+}: {
+  filename: string;
+  selector: string;
+  tokens: DesignTokens;
+  filter?: Filter["filter"];
+}) {
+  const SDictionary = new StyleDictionary({
+    tokens,
+    platforms: {
+      css: {
+        transformGroup: "css",
+        transforms: ["name/alpha-suffix"],
+        buildPath: DARKSIDE_DIST,
+        files: [
+          {
+            destination: filename,
+            format: "css/variables",
+            filter,
+            options: {
+              outputReferences: true,
+              selector,
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  await Promise.all([SDictionary.hasInitialized]);
+
+  SDictionary.registerTransform(transformCSS);
+  await SDictionary.buildAllPlatforms();
+}
 
 /**
  * StyleDictionary configuration
@@ -48,47 +97,6 @@ const filenames = {
  * @note We currrently avoid exporting 'static' tokens, as this step might not be needed.
  * In the current implementation we don't account for light and dark mode for static exports. This will need to be added if we want static exports.
  */
-const SDictionaryLightMode = new StyleDictionary({
-  tokens: lightModeTokens(),
-  platforms: {
-    css: {
-      transformGroup: "css",
-      transforms: ["name/alpha-suffix"],
-      buildPath: DARKSIDE_DIST,
-      files: [
-        {
-          destination: "light-tokens.css",
-          format: "css/variables",
-          options: {
-            outputReferences: true,
-            selector: ":root, :host, .light, .light-theme",
-          },
-        },
-      ],
-    },
-  },
-});
-
-const SDictionaryDarkMode = new StyleDictionary({
-  tokens: darkModeTokens(),
-  platforms: {
-    css: {
-      transformGroup: "css",
-      transforms: ["name/alpha-suffix"],
-      buildPath: DARKSIDE_DIST,
-      files: [
-        {
-          destination: "dark-tokens.css",
-          format: "css/variables",
-          options: {
-            outputReferences: true,
-            selector: ".dark, .dark-theme",
-          },
-        },
-      ],
-    },
-  },
-});
 
 const SDRootTokens = new StyleDictionary({
   tokens: rootTokens(),
@@ -251,15 +259,64 @@ const createThemedRoleConfigs = async () => {
 };
 
 const main = async () => {
+  /**
+   * Global tokens only for "light"-mode
+   * We set this to :root and :host as to make this the fallback and default.
+   */
+  await buildCSSBundleForTokens({
+    tokens: globalLightTokens,
+    filename: filenames.light.css,
+    selector: ":root, :host, .light",
+  });
+
+  /**
+   * Global tokens only for "dark"-mode
+   */
+  await buildCSSBundleForTokens({
+    tokens: globalDarkTokens,
+    filename: filenames.light.css,
+    selector: ".dark, .dark-theme",
+  });
+
+  /**
+   * Semantic "root" tokens for "light"-mode
+   * This includes shadows, default backgrounds etc
+   */
+  await buildCSSBundleForTokens({
+    tokens: lightModeTokens(false),
+    filename: filenames.light.semanticCss,
+    selector: ":root, :host, .light",
+    filter: async (token) => token.type !== "global-color",
+  });
+
+  /**
+   * Semantic "root" tokens for "dark"-mode
+   * This includes shadows, default backgrounds etc
+   */
+  await buildCSSBundleForTokens({
+    tokens: darkModeTokens(false),
+    filename: filenames.dark.semanticCss,
+    selector: ".dark, .dark-theme",
+    filter: async (token) => token.type !== "global-color",
+  });
+
+  /**
+   * Semantic tokens for all modes.
+   * Since the "global" layers is updated based on light/dark, we set this to also updated with
+   * `.light, .dark` selectors so that they inherit the correct values.
+   */
+  await buildCSSBundleForTokens({
+    tokens: semanticRoleTokensWithGlobalReference(),
+    filename: filenames.semantic.css,
+    selector: ":root, :host, .light, .dark",
+    filter: async (token) => token.type !== "global-color",
+  });
+
   await Promise.all([
-    SDictionaryLightMode.hasInitialized,
-    SDictionaryDarkMode.hasInitialized,
     SDRootTokens.hasInitialized,
     SDDictionaryNonCSSFormats.hasInitialized,
   ]);
 
-  SDictionaryLightMode.registerTransform(transformCSS);
-  SDictionaryDarkMode.registerTransform(transformCSS);
   SDDictionaryNonCSSFormats.registerTransform(transformCSS);
 
   /**
@@ -298,8 +355,6 @@ const main = async () => {
   });
 
   await Promise.all([
-    SDictionaryLightMode.buildAllPlatforms(),
-    SDictionaryDarkMode.buildAllPlatforms(),
     SDRootTokens.buildAllPlatforms(),
     SDDictionaryNonCSSFormats.buildAllPlatforms(),
   ]);

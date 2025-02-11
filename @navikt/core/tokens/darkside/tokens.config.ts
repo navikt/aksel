@@ -12,11 +12,11 @@ import { opacityTokenConfig } from "./tokens/opacity";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
 
-export const lightModeTokens = () => {
+export const lightModeTokens = (withSemanticRoles = true) => {
   const config = [
     shadowTokenConfig("light"),
     opacityTokenConfig("light"),
-    semanticTokensForAllRoles(),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("light"),
     globalLightTokens,
   ];
@@ -24,14 +24,20 @@ export const lightModeTokens = () => {
   return tokensWithPrefix(mergeConfigs(config));
 };
 
-export const darkModeTokens = () => {
+export const darkModeTokens = (withSemanticRoles = true) => {
   const config = [
     shadowTokenConfig("dark"),
     opacityTokenConfig("dark"),
-    semanticTokensForAllRoles(),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("dark"),
     globalDarkTokens,
   ];
+
+  return tokensWithPrefix(mergeConfigs(config));
+};
+
+export const semanticRoleTokensWithGlobalReference = () => {
+  const config = [globalLightTokens, semanticTokensForAllRoles()];
 
   return tokensWithPrefix(mergeConfigs(config));
 };
