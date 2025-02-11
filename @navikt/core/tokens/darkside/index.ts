@@ -98,27 +98,6 @@ async function buildCSSBundleForTokens({
  * In the current implementation we don't account for light and dark mode for static exports. This will need to be added if we want static exports.
  */
 
-const SDRootTokens = new StyleDictionary({
-  tokens: rootTokens(),
-  platforms: {
-    css: {
-      transformGroup: "css",
-      buildPath: DARKSIDE_DIST,
-      files: [
-        {
-          destination: "root-tokens.css",
-          format: "css/variables",
-          options: {
-            outputReferences: true,
-            outputReferenceFallbacks: true,
-            selector: ":root, :host",
-          },
-        },
-      ],
-    },
-  },
-});
-
 const SDDictionaryNonCSSFormats = new StyleDictionary({
   tokens: allTokens(),
   platforms: {
@@ -312,10 +291,16 @@ const main = async () => {
     filter: async (token) => token.type !== "global-color",
   });
 
-  await Promise.all([
-    SDRootTokens.hasInitialized,
-    SDDictionaryNonCSSFormats.hasInitialized,
-  ]);
+  /**
+   * Non-themable tokens like space, typo and breakpoints
+   */
+  await buildCSSBundleForTokens({
+    tokens: rootTokens(),
+    filename: filenames.root.css,
+    selector: ":root, :host",
+  });
+
+  await Promise.all([SDDictionaryNonCSSFormats.hasInitialized]);
 
   SDDictionaryNonCSSFormats.registerTransform(transformCSS);
 
@@ -354,10 +339,7 @@ const main = async () => {
     format: formatLESS,
   });
 
-  await Promise.all([
-    SDRootTokens.buildAllPlatforms(),
-    SDDictionaryNonCSSFormats.buildAllPlatforms(),
-  ]);
+  await Promise.all([SDDictionaryNonCSSFormats.buildAllPlatforms()]);
 
   const importPaths = Object.values(filenames)
     .map((scope) => scope.css)
