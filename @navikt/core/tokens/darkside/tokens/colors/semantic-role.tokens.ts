@@ -125,6 +125,89 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
   } satisfies StyleDictionaryTokenConfig<"color">;
 }
 
+export const themedConfigForRole = (role: SemanticColorRoles) => {
+  return {
+    bg: {
+      soft: {
+        value: `{ax.bg.${role}-soft.value}`,
+        type: "themed-role",
+      },
+      softA: {
+        value: `{ax.bg.${role}-softA.value}`,
+        type: "themed-role",
+      },
+      moderate: {
+        value: `{ax.bg.${role}-moderate.value}`,
+        type: "themed-role",
+      },
+      moderateA: {
+        value: `{ax.bg.${role}-moderateA.value}`,
+        type: "themed-role",
+      },
+      "moderate-hover": {
+        value: `{ax.bg.${role}-moderate-hover.value}`,
+        type: "themed-role",
+      },
+      "moderate-hoverA": {
+        value: `{ax.bg.${role}-moderate-hoverA.value}`,
+        type: "themed-role",
+      },
+      "moderate-pressed": {
+        value: `{ax.bg.${role}-moderate-pressed.value}`,
+        type: "themed-role",
+      },
+      "moderate-pressedA": {
+        value: `{ax.bg.${role}-moderate-pressedA.value}`,
+        type: "themed-role",
+      },
+      strong: {
+        value: `{ax.bg.${role}-strong.value}`,
+        type: "themed-role",
+      },
+      "strong-hover": {
+        value: `{ax.bg.${role}-strong-hover.value}`,
+        type: "themed-role",
+      },
+      "strong-pressed": {
+        value: `{ax.bg.${role}-strong-pressed.value}`,
+        type: "themed-role",
+      },
+    },
+    text: {
+      default: {
+        value: `{ax.text.${role}.value}`,
+        type: "themed-role",
+      },
+      subtle: {
+        value: `{ax.text.${role}-subtle.value}`,
+        type: "themed-role",
+      },
+      icon: {
+        value: `{ax.text.${role}-icon.value}`,
+        type: "themed-role",
+      },
+    },
+    border: {
+      default: {
+        value: `{ax.border.${role}.value}`,
+        type: "themed-role",
+      },
+      subtle: {
+        value: `{ax.border.${role}-subtle.value}`,
+        type: "themed-role",
+      },
+      subtleA: {
+        value: `{ax.border.${role}-subtleA.value}`,
+        type: "themed-role",
+      },
+      strong: {
+        value: `{ax.border.${role}-strong.value}`,
+        type: "themed-role",
+      },
+    },
+  };
+};
+
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
