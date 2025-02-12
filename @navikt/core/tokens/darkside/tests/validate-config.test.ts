@@ -24,24 +24,18 @@ describe("Validate token configurations", () => {
     ).toBeTruthy();
   });
 
-  test(`Semantic tokens for all roles: Lightmode`, () => {
-    expect(
-      validateConfig(semanticTokensForAllRoles(), configKeysWithGroup),
-    ).toBeTruthy();
-  });
-
-  test(`Semantic tokens for all roles: Darkmode`, () => {
+  test(`Semantic tokens for all roles`, () => {
     expect(
       validateConfig(semanticTokensForAllRoles(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Global lightmode scale`, () => {
-    expect(validateConfig(globalDarkTokens, configKeysWithGroup)).toBeTruthy();
+    expect(validateConfig(globalLightTokens, configKeysWithGroup)).toBeTruthy();
   });
 
   test(`Global darkmode scale`, () => {
-    expect(validateConfig(globalLightTokens, configKeysWithGroup)).toBeTruthy();
+    expect(validateConfig(globalDarkTokens, configKeysWithGroup)).toBeTruthy();
   });
 
   test(`Space scale`, () => {
