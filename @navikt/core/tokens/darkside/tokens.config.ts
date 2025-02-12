@@ -13,7 +13,7 @@ import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
 
 export const lightModeTokens = () => {
-  const config = [
+  const configs = [
     shadowTokenConfig("light"),
     opacityTokenConfig("light"),
     semanticTokensForAllRoles(),
@@ -21,11 +21,11 @@ export const lightModeTokens = () => {
     globalLightTokens,
   ];
 
-  return tokensWithPrefix(mergeConfigs(config));
+  return tokensWithPrefix(mergeConfigs(configs));
 };
 
 export const darkModeTokens = () => {
-  const config = [
+  const configs = [
     shadowTokenConfig("dark"),
     opacityTokenConfig("dark"),
     semanticTokensForAllRoles(),
@@ -33,7 +33,7 @@ export const darkModeTokens = () => {
     globalDarkTokens,
   ];
 
-  return tokensWithPrefix(mergeConfigs(config));
+  return tokensWithPrefix(mergeConfigs(configs));
 };
 
 /**
@@ -41,24 +41,24 @@ export const darkModeTokens = () => {
  * so we can use the fuction for creating Figma-variables
  */
 export const scaleTokens = () => {
-  const config = [spaceTokenConfig, radiusTokenConfig];
+  const configs = [spaceTokenConfig, radiusTokenConfig];
 
-  return tokensWithPrefix(mergeConfigs(config));
+  return tokensWithPrefix(mergeConfigs(configs));
 };
 
 export const rootTokens = () => {
-  const config = [scaleTokens().ax, breakpointTokenConfig, fontTokenConfig];
+  const configs = [scaleTokens().ax, breakpointTokenConfig, fontTokenConfig];
 
-  return tokensWithPrefix(mergeConfigs(config));
+  return tokensWithPrefix(mergeConfigs(configs));
 };
 
 export const allTokens = () => {
-  const config = [
+  const configs = [
     lightModeTokens().ax,
     scaleTokens().ax,
     breakpointTokenConfig,
     fontTokenConfig,
   ];
 
-  return tokensWithPrefix(mergeConfigs(config));
+  return tokensWithPrefix(mergeConfigs(configs));
 };
