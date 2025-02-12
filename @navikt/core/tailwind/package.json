@@ -10,7 +10,8 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts"
+    "tailwind.config.d.ts",
+    "tailwind.darkside.config.js"
   ],
   "scripts": {
     "build": "tsx ./src && yarn build:darkside",
