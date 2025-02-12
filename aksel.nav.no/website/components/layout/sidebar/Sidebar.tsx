@@ -50,7 +50,6 @@ function Section({ section }: { section: SidebarT[number] }) {
         {section.pages.map((page) => (
           <MenuLi
             aria-current={isActive(page.slug) ? "page" : undefined}
-            data-test="123"
             key={page.slug}
           >
             <MenuLink href={`/${page.slug}`} selected={isActive(page.slug)}>
