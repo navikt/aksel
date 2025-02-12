@@ -14,7 +14,9 @@
     "/dist",
     "/src",
     "types.ts",
-    "docs.json"
+    "docs.json",
+    "!/dist/darkside",
+    "/dist/darkside/tokens*"
   ],
   "scripts": {
     "build": "tsx ./config/build.ts > /dev/null && yarn build:darkside && tsx ./config/version-tag.ts",

@@ -1,6 +1,8 @@
 import fs from "fs";
 import { bundle } from "lightningcss";
+import _ from "lodash";
 import StyleDictionary from "style-dictionary";
+import { ColorRolesList, SemanticColorRoles } from "../types";
 import {
   formatCJS,
   formatES6,
@@ -14,6 +16,10 @@ import {
   lightModeTokens,
   rootTokens,
 } from "./tokens.config";
+import { tokensWithPrefix } from "./tokens.util";
+import { globalLightTokens } from "./tokens/colors/global.tokens";
+import { semanticTokensForRole } from "./tokens/colors/semantic-role.tokens";
+import { semanticThemedBaseTokens } from "./tokens/colors/semantic-themed-base.tokens";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -37,11 +43,6 @@ const filenames = {
  * This configuration will generate tokens for CSS, JS and TS.
  * The CSS tokens will be exported as CSS variables.
  * The JS and TS tokens will be exported as an object with the token name as key and the CSS variable as value.
- *
- * Future additions (not needed for testing):
- * - Shadows
- * - Typography
- * - Breakpoints
  *
  *
  * @note We currrently avoid exporting 'static' tokens, as this step might not be needed.
@@ -207,6 +208,48 @@ const SDDictionaryNonCSSFormats = new StyleDictionary({
   },
 });
 
+const themedRoleConfig = async (role: SemanticColorRoles) => {
+  const SDDictionary = new StyleDictionary({
+    tokens: tokensWithPrefix(
+      [
+        globalLightTokens,
+        semanticTokensForRole(role),
+        semanticThemedBaseTokens(role),
+      ].reduce((acc, config) => _.merge(acc, config), {}),
+    ),
+    /* We get warnings for filtering out referenced tokens now */
+    log: { warnings: "disabled" },
+    platforms: {
+      css: {
+        transformGroup: "css",
+        transforms: ["name/alpha-suffix"],
+        buildPath: DARKSIDE_DIST,
+        files: [
+          {
+            destination: `role-${role}.css`,
+            format: "css/variables",
+            filter: async (token) => token.type === "themed-role",
+            options: {
+              outputReferences: true,
+              selector: `[data-color-role=${role}]`,
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  await Promise.all([SDDictionary.hasInitialized]);
+  SDDictionary.registerTransform(transformCSS);
+  await Promise.all([SDDictionary.buildAllPlatforms()]);
+};
+
+const createThemedRoleConfigs = async () => {
+  await Promise.all(
+    ColorRolesList.map((role) => themedRoleConfig(role as SemanticColorRoles)),
+  );
+};
+
 const main = async () => {
   await Promise.all([
     SDictionaryLightMode.hasInitialized,
@@ -267,8 +310,13 @@ const main = async () => {
 
   fs.writeFileSync(
     `${DARKSIDE_DIST}tokens.css`,
-    importPaths.map((path) => `@import "${path}";`).join("\n"),
+    [
+      ...importPaths.map((path) => `@import "${path}";`),
+      ...ColorRolesList.map((role) => `@import "role-${role}.css";`),
+    ].join("\n"),
   );
+
+  await createThemedRoleConfigs();
 
   const { code } = bundle({
     filename: `${DARKSIDE_DIST}tokens.css`,

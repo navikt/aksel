@@ -1,3 +1,4 @@
+import _ from "lodash";
 import type { GlobalColorRoles, SemanticColorRoles } from "../types";
 
 export type GlobalColorEntry = {
@@ -13,7 +14,7 @@ export type TokenTypes =
   | "global-color"
   | "global-radius"
   | "global-space"
-  | "global-breakpoints"
+  | "global-breakpoint"
   | "global-font";
 
 export type SemanticTokenGroups = "background" | "border" | "text";
@@ -84,4 +85,10 @@ export type StyleDictionaryTokenConfig<T extends TokenTypes> = {
 
 export const tokensWithPrefix = <T>(input: T): Record<"ax", T> => {
   return { ax: input };
+};
+
+export const mergeConfigs = (
+  configs: StyleDictionaryTokenConfig<TokenTypes>[],
+): StyleDictionaryTokenConfig<TokenTypes> => {
+  return configs.reduce((acc, config) => _.merge(acc, config), {});
 };

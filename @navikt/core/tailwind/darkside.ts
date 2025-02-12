@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
 import * as TokensBuild from "@navikt/ds-tokens/darkside-js";
 import { kebabCaseForAlpha } from "../tokens/config/kebabCase";
-import { breakpointsTokenConfig } from "../tokens/darkside/tokens/breakpoints";
+import { breakpointTokenConfig } from "../tokens/darkside/tokens/breakpoint";
 
 const transformedTokens = Object.fromEntries(
   Object.entries(TokensBuild)
@@ -35,11 +35,11 @@ export const config = {
   theme: {
     colors,
     screens: {
-      sm: breakpointsTokenConfig.breakpoint.sm.value,
-      md: breakpointsTokenConfig.breakpoint.md.value,
-      lg: breakpointsTokenConfig.breakpoint.lg.value,
-      xl: breakpointsTokenConfig.breakpoint.xl.value,
-      "2xl": breakpointsTokenConfig.breakpoint["2xl"].value,
+      sm: breakpointTokenConfig.breakpoint.sm.value,
+      md: breakpointTokenConfig.breakpoint.md.value,
+      lg: breakpointTokenConfig.breakpoint.lg.value,
+      xl: breakpointTokenConfig.breakpoint.xl.value,
+      "2xl": breakpointTokenConfig.breakpoint["2xl"].value,
     },
     extend: {
       shadow: extractTokensForCategory("shadow"),
