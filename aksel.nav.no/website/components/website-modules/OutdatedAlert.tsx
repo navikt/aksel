@@ -1,5 +1,5 @@
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
-import { BodyLong, Button, Heading } from "@navikt/ds-react";
+import { BodyLong, Button, Heading, Link } from "@navikt/ds-react";
 import { useSanityData } from "@/hooks/useSanityData";
 
 export default function OutdatedAlert() {
@@ -20,9 +20,10 @@ export default function OutdatedAlert() {
         </BodyLong>
         {ctx?.validUser && (
           <>
-            <BodyLong className="mb-2">
-              Du ser også dette fordi du kan redigere denne artikkelen. Har du
-              lyst til å kontrollere innholdet nå?
+            <BodyLong className="mb-2 mt-2">
+              <Link href="https://aksel.nav.no/side/skriv-for-aksel#a5b79ddd59da">
+                Hvordan oppdaterer man innhold i Sanity?
+              </Link>
             </BodyLong>
             <Button
               as="a"
@@ -31,7 +32,7 @@ export default function OutdatedAlert() {
               size="small"
               variant="secondary-neutral"
             >
-              Kontroller innholdet
+              Har du lyst til å kontrollere innholdet nå?
             </Button>
           </>
         )}
