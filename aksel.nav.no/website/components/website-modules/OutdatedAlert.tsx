@@ -18,25 +18,24 @@ export default function OutdatedAlert() {
           Det er over 1 år siden innholdet ble revidert. Vi kan ikke være helt
           sikre på hvor nøyaktig artikkelen er lenger.
         </BodyLong>
-        {ctx?.validUser ||
-          (true && (
-            <>
-              <BodyLong className="mb-2 mt-2">
-                <Link href="https://aksel.nav.no/side/skriv-for-aksel#a5b79ddd59da">
-                  Hvordan oppdaterer man innhold i Sanity?
-                </Link>
-              </BodyLong>
-              <Button
-                as="a"
-                href={`https://aksel.nav.no/admin/prod/intent/edit/id=${ctx?.id}`}
-                target="_blank"
-                size="small"
-                variant="secondary-neutral"
-              >
-                Har du lyst til å kontrollere innholdet nå?
-              </Button>
-            </>
-          ))}
+        {ctx?.validUser && (
+          <>
+            <BodyLong className="mb-2 mt-2">
+              <Link href="https://aksel.nav.no/side/skriv-for-aksel#a5b79ddd59da">
+                Hvordan oppdaterer man innhold i Sanity?
+              </Link>
+            </BodyLong>
+            <Button
+              as="a"
+              href={`https://aksel.nav.no/admin/prod/intent/edit/id=${ctx?.id}`}
+              target="_blank"
+              size="small"
+              variant="secondary-neutral"
+            >
+              Har du lyst til å kontrollere innholdet nå?
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );
