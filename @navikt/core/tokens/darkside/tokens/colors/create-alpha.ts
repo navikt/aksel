@@ -1,23 +1,8 @@
 import Color from "colorjs.io";
-import {
-  type ColorTheme,
-  type GlobalColorRoles,
-  type GlobalColorScale,
-} from "../../types";
-import { type GlobalColorEntry } from "../tokens.util";
-import { globalColorDarkModeConfigWithoutAlpha } from "./global-dark";
-import { globalColorLightModeConfigWithoutAlpha } from "./global-light";
-import { semanticTokenConfig } from "./semantic";
-
-export const globalColorDarkModeConfig = globalColorConfigWithAlphaTokens(
-  globalColorDarkModeConfigWithoutAlpha,
-  "dark",
-);
-
-export const globalColorLightModeConfig = globalColorConfigWithAlphaTokens(
-  globalColorLightModeConfigWithoutAlpha,
-  "light",
-);
+import { ColorTheme, GlobalColorRoles, GlobalColorScale } from "../../../types";
+import { GlobalColorEntry } from "../../tokens.util";
+import { GlobalConfigWithoutAlpha } from "./colors.types";
+import { semanticRootTokens } from "./semantic-root.tokens";
 
 type GlobalConfigWithAlpha = Record<
   Extract<GlobalColorRoles, "neutral">,
@@ -32,10 +17,13 @@ type GlobalConfigWithAlpha = Record<
  * To avoid having to use 3rd party websites for generating alpha tokens,
  * we add alpha tokens by calulating them ourselves.
  */
-function globalColorConfigWithAlphaTokens(
-  globalConfig: typeof globalColorLightModeConfigWithoutAlpha,
-  theme: ColorTheme,
-): GlobalConfigWithAlpha {
+export function globalConfigWithAlphaTokens({
+  config: globalConfig,
+  theme,
+}: {
+  config: GlobalConfigWithoutAlpha;
+  theme: ColorTheme;
+}): GlobalConfigWithAlpha {
   const localConfig = structuredClone(globalConfig) as GlobalConfigWithAlpha;
 
   Object.keys(globalConfig).forEach((key) => {
@@ -63,8 +51,8 @@ function globalColorConfigWithAlphaTokens(
   return localConfig;
 }
 
-export function createAlphaColor(targetColor: string, theme: ColorTheme) {
-  const backgroundColor = semanticTokenConfig(theme).bg.default.value;
+function createAlphaColor(targetColor: string, theme: ColorTheme) {
+  const backgroundColor = semanticRootTokens(theme).bg.default.value;
 
   const [r, g, b, a] = getAlphaColor(
     new Color(targetColor).to("srgb").coords,

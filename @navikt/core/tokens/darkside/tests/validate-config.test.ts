@@ -1,13 +1,12 @@
 import { describe, expect, test } from "vitest";
+import { radiusTokenConfig } from "../tokens/border-radius";
 import {
-  globalColorDarkModeConfig,
-  globalColorLightModeConfig,
-} from "../tokens/global";
-import { radiusTokenConfig } from "../tokens/radius";
-import { semanticTokenConfig } from "../tokens/semantic";
-import { semanticTokensForAllRolesConfig } from "../tokens/semantic-roles";
+  globalDarkTokens,
+  globalLightTokens,
+} from "../tokens/colors/global.tokens";
+import { semanticTokensForAllRoles } from "../tokens/colors/semantic-role.tokens";
+import { semanticRootTokens } from "../tokens/colors/semantic-root.tokens";
 import { spaceTokenConfig } from "../tokens/space";
-import { textContrastTokenConfig } from "../tokens/text-contrast";
 
 const configKeysWithGroup = ["value", "type", "group"];
 const configKeys = ["value", "type"];
@@ -15,44 +14,28 @@ const configKeys = ["value", "type"];
 describe("Validate token configurations", () => {
   test(`Semantic tokens lightmode`, () => {
     expect(
-      validateConfig(semanticTokenConfig("light"), configKeysWithGroup),
+      validateConfig(semanticRootTokens("light"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Semantic tokens darkmode`, () => {
     expect(
-      validateConfig(semanticTokenConfig("dark"), configKeysWithGroup),
+      validateConfig(semanticRootTokens("dark"), configKeysWithGroup),
     ).toBeTruthy();
   });
 
-  test(`Semantic tokens for all roles: Lightmode`, () => {
+  test(`Semantic tokens for all roles`, () => {
     expect(
-      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
-    ).toBeTruthy();
-  });
-
-  test(`Semantic tokens for all roles: Darkmode`, () => {
-    expect(
-      validateConfig(semanticTokensForAllRolesConfig(), configKeysWithGroup),
-    ).toBeTruthy();
-  });
-
-  test(`Text-contrast tokens`, () => {
-    expect(
-      validateConfig(textContrastTokenConfig, configKeysWithGroup),
+      validateConfig(semanticTokensForAllRoles(), configKeysWithGroup),
     ).toBeTruthy();
   });
 
   test(`Global lightmode scale`, () => {
-    expect(
-      validateConfig(globalColorLightModeConfig, configKeysWithGroup),
-    ).toBeTruthy();
+    expect(validateConfig(globalLightTokens, configKeysWithGroup)).toBeTruthy();
   });
 
   test(`Global darkmode scale`, () => {
-    expect(
-      validateConfig(globalColorDarkModeConfig, configKeysWithGroup),
-    ).toBeTruthy();
+    expect(validateConfig(globalDarkTokens, configKeysWithGroup)).toBeTruthy();
   });
 
   test(`Space scale`, () => {

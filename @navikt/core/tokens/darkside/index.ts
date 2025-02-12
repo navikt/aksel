@@ -17,8 +17,9 @@ import {
   rootTokens,
 } from "./tokens.config";
 import { tokensWithPrefix } from "./tokens.util";
-import { globalColorLightModeConfig } from "./tokens/global";
-import { configForRole, themedConfigForRole } from "./tokens/semantic-roles";
+import { globalLightTokens } from "./tokens/colors/global.tokens";
+import { semanticTokensForRole } from "./tokens/colors/semantic-role.tokens";
+import { semanticThemedBaseTokens } from "./tokens/colors/semantic-themed-base.tokens";
 
 /* Temporary project location */
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -211,9 +212,9 @@ const themedRoleConfig = async (role: SemanticColorRoles) => {
   const SDDictionary = new StyleDictionary({
     tokens: tokensWithPrefix(
       [
-        globalColorLightModeConfig,
-        configForRole(role),
-        themedConfigForRole(role),
+        globalLightTokens,
+        semanticTokensForRole(role),
+        semanticThemedBaseTokens(role),
       ].reduce((acc, config) => _.merge(acc, config), {}),
     ),
     /* We get warnings for filtering out referenced tokens now */
