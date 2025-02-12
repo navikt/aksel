@@ -50,7 +50,7 @@
         "default": "./tailwind.config.js"
       }
     },
-    "./darkside": {
+    "./darkside-tw3": {
       "import": {
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.darkside.config.js"
