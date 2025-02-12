@@ -33,22 +33,24 @@ const colors = Object.fromEntries(colorTokensEntries);
 
 export const config = {
   theme: {
-    colors,
-    screens: {
-      sm: breakpointTokenConfig.breakpoint.sm.value,
-      md: breakpointTokenConfig.breakpoint.md.value,
-      lg: breakpointTokenConfig.breakpoint.lg.value,
-      xl: breakpointTokenConfig.breakpoint.xl.value,
-      "2xl": breakpointTokenConfig.breakpoint["2xl"].value,
-    },
-    extend: {
-      shadow: extractTokensForCategory("shadow"),
-      fontWeight: extractTokensForCategory("font-weight"),
-      fontSize: extractTokensForCategory("font-size"),
-      lineHeight: extractTokensForCategory("font-line-height"),
-      fontFamily: extractTokensForCategory("font-family"),
-      borderRadius: extractTokensForCategory("border-radius"),
-      opacity: extractTokensForCategory("opacity"),
+    ax: {
+      colors,
+      screens: {
+        sm: breakpointTokenConfig.breakpoint.sm.value,
+        md: breakpointTokenConfig.breakpoint.md.value,
+        lg: breakpointTokenConfig.breakpoint.lg.value,
+        xl: breakpointTokenConfig.breakpoint.xl.value,
+        "2xl": breakpointTokenConfig.breakpoint["2xl"].value,
+      },
+      extend: {
+        shadow: extractTokensForCategory("shadow"),
+        fontWeight: extractTokensForCategory("font-weight"),
+        fontSize: extractTokensForCategory("font-size"),
+        lineHeight: extractTokensForCategory("font-line-height"),
+        fontFamily: extractTokensForCategory("font-family"),
+        borderRadius: extractTokensForCategory("border-radius"),
+        opacity: extractTokensForCategory("opacity"),
+      },
     },
   },
 };

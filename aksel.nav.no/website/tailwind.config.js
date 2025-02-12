@@ -1,5 +1,5 @@
 module.exports = {
-  presets: [require("@navikt/ds-tailwind")],
+  presets: [require("@navikt/ds-tailwind/darkside")],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./sanity/**/*.{js,ts,jsx,tsx}",

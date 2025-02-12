@@ -48,6 +48,16 @@
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
       }
+    },
+    "./darkside": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      }
     }
   }
 }
