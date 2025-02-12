@@ -1,0 +1,8 @@
+.menuSection {
+  padding: var(--a-spacing-2);
+  border-radius: var(--a-border-radius-medium);
+}
+
+.menuSection[data-type="darkside"] {
+  background-color: var(--ax-bg-brand-magenta-moderate);
+}

@@ -3,6 +3,7 @@ import { Box, Show } from "@navikt/ds-react";
 import { SidebarT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import { Menu, MenuHeading, MenuLi, MenuLink, MenuUl } from "@/web/menu/Menu";
+import styles from "./Sidebar.module.css";
 
 const Sidebar = ({
   kategori,
@@ -21,7 +22,7 @@ const Sidebar = ({
         className="w-sidebar shrink-0 self-start"
       >
         <Menu loggingContext="meny" variant="action">
-          <ul className="space-y-6">
+          <ul className="space-y-4">
             {links.map((section) => (
               <Section key={section.value} section={section} />
             ))}
@@ -38,13 +39,18 @@ function Section({ section }: { section: SidebarT[number] }) {
   const isActive = (slug: string) => {
     return asPath.split("#")[0] === `/${slug}`;
   };
+
   return (
-    <li>
+    <li
+      className={styles.menuSection}
+      data-type={section.value === "darkside" ? "darkside" : undefined}
+    >
       <MenuHeading as="div">{section.title}</MenuHeading>
       <MenuUl>
         {section.pages.map((page) => (
           <MenuLi
             aria-current={isActive(page.slug) ? "page" : undefined}
+            data-test="123"
             key={page.slug}
           >
             <MenuLink href={`/${page.slug}`} selected={isActive(page.slug)}>
