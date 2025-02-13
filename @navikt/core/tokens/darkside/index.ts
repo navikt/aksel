@@ -57,7 +57,7 @@ async function main() {
   await buildCSSBundleForTokens({
     tokens: tokensWithPrefix(globalDarkTokens),
     filename: "dark-tokens.css",
-    selector: ".dark, .dark-theme",
+    selector: ".dark",
   });
 
   /**
