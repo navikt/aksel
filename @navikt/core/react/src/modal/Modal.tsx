@@ -1,9 +1,9 @@
 import { useFloatingPortalNode } from "@floating-ui/react";
-import cl from "clsx";
 import React, { forwardRef, useContext, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { DateInputContext } from "../date/context";
 import { useProvider } from "../provider/Provider";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail, Heading } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
@@ -99,6 +99,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     }: ModalProps,
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const modalRef = useRef<HTMLDialogElement>(null);
     const mergedRef = useMergeRefs(modalRef, ref);
 
@@ -147,7 +148,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     const isWidthPreset =
       typeof width === "string" && ["small", "medium"].includes(width);
 
-    const mergedClassName = cl("navds-modal", className, {
+    const mergedClassName = cn("navds-modal", className, {
       [polyfillClassName]: needPolyfill,
       "navds-modal--autowidth": !width,
       [`navds-modal--${width}`]: isWidthPreset,
@@ -238,7 +239,9 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
           {header && (
             <ModalHeader>
               {header.label && (
-                <Detail className="navds-modal__label">{header.label}</Detail>
+                <Detail className={cn("navds-modal__label")}>
+                  {header.label}
+                </Detail>
               )}
               <Heading
                 size={header.size ?? "medium"}
@@ -246,7 +249,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 id={ariaLabelId}
               >
                 {header.icon && (
-                  <span className="navds-modal__header-icon">
+                  <span className={cn("navds-modal__header-icon")}>
                     {header.icon}
                   </span>
                 )}
