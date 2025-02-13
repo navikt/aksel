@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import Step, { StepperStepProps } from "./Step";
 import { StepperContextProvider } from "./context";
 
@@ -83,12 +83,13 @@ export const Stepper: StepperComponent = forwardRef<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     activeStep = activeStep - 1;
     return (
       <ol
         {...rest}
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-stepper",
           orientation === "horizontal" ? "navds-stepper--horizontal" : "",
           className,
@@ -101,7 +102,7 @@ export const Stepper: StepperComponent = forwardRef<
 
           return (
             <li
-              className={cl("navds-stepper__item", {
+              className={cn("navds-stepper__item", {
                 /* TODO: Remove these 3 classNames in darkmode update */
                 "navds-stepper__item--behind": activeStep > index,
                 "navds-stepper__item--completed": stepProps.completed,
@@ -111,7 +112,9 @@ export const Stepper: StepperComponent = forwardRef<
               })}
               key={index + (children?.toString?.() ?? "")}
             >
-              <span className="navds-stepper__line navds-stepper__line--1" />
+              <span
+                className={cn("navds-stepper__line navds-stepper__line--1")}
+              />
               <StepperContextProvider
                 interactive={interactive}
                 activeStep={activeStep}
@@ -122,7 +125,9 @@ export const Stepper: StepperComponent = forwardRef<
               >
                 {step}
               </StepperContextProvider>
-              <span className="navds-stepper__line navds-stepper__line--2" />
+              <span
+                className={cn("navds-stepper__line navds-stepper__line--2")}
+              />
             </li>
           );
         })}
