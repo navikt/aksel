@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -86,6 +85,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
     ) => {
       const themeContext = useThemeInternal(false);
       const prefix = themeContext ? "ax" : "a";
+      const { cn } = useRenameCSS();
 
       const style: React.CSSProperties = {
         ..._style,
@@ -103,7 +103,7 @@ export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cl("navds-stack", className, {
+            className={cn("navds-stack", className, {
               "navds-vstack": direction === "column",
               "navds-hstack": direction === "row",
               "navds-stack-gap": gap,

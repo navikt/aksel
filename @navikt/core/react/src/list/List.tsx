@@ -1,6 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { BodyLong, BodyShort, Heading, HeadingProps } from "../typography";
 import { ListItem } from "./List.Item";
 import { ListContext } from "./List.context";
@@ -57,6 +56,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
   ) => {
     const { size: contextSize } = useContext(ListContext);
 
+    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal(false);
 
     const listSize = size ?? contextSize;
@@ -83,7 +83,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
             {...rest}
             size={listSize}
             ref={ref}
-            className={cl("navds-list", `navds-list--${listSize}`, className)}
+            className={cn("navds-list", `navds-list--${listSize}`, className)}
           >
             <ListTag role="list">{children}</ListTag>
           </BodyLong>
@@ -103,7 +103,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           {...rest}
           size={listSize}
           ref={ref}
-          className={cl("navds-list", `navds-list--${listSize}`, className)}
+          className={cn("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
             <Heading size={headingSizeMap[listSize]} as={headingTag}>
