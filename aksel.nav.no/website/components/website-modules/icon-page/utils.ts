@@ -43,14 +43,22 @@ export const categorizeIcons = (
 };
 
 const noFill = (icon: (typeof meta)[1], icons: (typeof meta)[1][]) => {
-  const foundFill = icons.find(
-    (x) => x.name.endsWith("Fill") && x.name.replace("Fill", "") === icon.name,
-  );
+  const foundFill = icons.find((x) => {
+    if (x.name.endsWith("Fill") || x.name.endsWith("Filled")) {
+      return (
+        x.name.replace("Fill", "") === icon.name ||
+        x.name.replace("Filled", "") === icon.name
+      );
+    }
+    return false;
+  });
+
   return !foundFill;
 };
 
+/* Some icons are mistakenly labeled with "filled", so we need to handle both "fill" and "filled" */
 export const getFillIcon = (icons: (typeof meta)[1][]) => {
   return icons.filter(
-    (x, _, z) => x.variant.toLowerCase() === "fill" || noFill(x, z),
+    (x, _, z) => x.variant.toLowerCase().startsWith("fill") || noFill(x, z),
   );
 };

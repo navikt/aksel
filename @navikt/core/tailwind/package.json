@@ -10,7 +10,8 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts"
+    "tailwind.config.d.ts",
+    "tailwind.darkside.config.js"
   ],
   "scripts": {
     "build": "tsx ./src && yarn build:darkside",
@@ -47,6 +48,16 @@
       "require": {
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
+      }
+    },
+    "./darkside-tw3": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
       }
     }
   }

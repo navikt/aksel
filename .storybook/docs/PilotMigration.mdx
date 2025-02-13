@@ -40,6 +40,15 @@ All component-spesific tokens are no longer supported. That means all tokens lik
 
 All component-based tokens are prefixed with `--ac`, so a global search in your codebase should find all of them.
 
+## Tailwind CSS
+
+Since our Tailwind CSS config is tied to our tokens, most changes made to the tokens will affect the Tailwind CSS config.
+We have decided to prefix all our classes with `ax-` in the new config, so it should be possible to use both packages at the same time. We will develop tooling to hopefuly make the migrations easier in the future.
+
+### Removed classes
+
+z-index, maxWidth and spacing classes are removed from the new config.
+
 ## React
 
 We have made some updates to `@navikt/ds-react` that you should be aware of before testing.
