@@ -31,11 +31,9 @@ export const compositeClassFunction = (
 };
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <RenameCSSProvider cn={compositeClassFunction}>
-      {children}
-    </RenameCSSProvider>
-  );
+  /* Replace function with this when implementation is complete and CSS is updated */
+  /* <RenameCSSProvider cn={compositeClassFunction}> */
+  return <RenameCSSProvider cn={cl}>{children}</RenameCSSProvider>;
 };
 
 /* -------------------------------------------------------------------------- */
