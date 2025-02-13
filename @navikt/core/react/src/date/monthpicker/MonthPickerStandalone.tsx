@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
+import { useRenameCSS } from "../../theme/Theme";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import {
   DateTranslationContextProvider,
@@ -53,6 +53,8 @@ export const MonthPickerStandalone = forwardRef<
       getTranslations(locale),
     );
     const langProviderLocale = useDateLocale();
+    const { cn } = useRenameCSS();
+
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
       defaultSelected,
     );
@@ -68,7 +70,7 @@ export const MonthPickerStandalone = forwardRef<
     }
 
     return (
-      <div ref={ref} className={cl("navds-date__wrapper", className)}>
+      <div ref={ref} className={cn("navds-date__wrapper", className)}>
         <DateTranslationContextProvider translate={translate}>
           <DayPickerProvider
             initialProps={{
@@ -79,7 +81,7 @@ export const MonthPickerStandalone = forwardRef<
               month: selected ?? selectedMonth,
             }}
           >
-            <div className="navds-date rdp-month">
+            <div className={cn("navds-date rdp-month")}>
               <SharedMonthProvider
                 dropdownCaption={dropdownCaption}
                 disabled={disabled}

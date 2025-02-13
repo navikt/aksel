@@ -1,4 +1,3 @@
-import cl from "clsx";
 import {
   compareAsc,
   compareDesc,
@@ -8,6 +7,7 @@ import {
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
+import { useRenameCSS } from "../../theme/Theme";
 import { useSharedMonthContext } from "../context";
 import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
 
@@ -50,6 +50,8 @@ export const MonthButton = ({
   const { hasDropdown, selected, onSelect, year, toYear, disabled } =
     useSharedMonthContext();
 
+  const { cn } = useRenameCSS();
+
   const { fromDate, toDate, locale } = useDayPicker();
   const isSelected = selected && isSameMonth(month, selected);
 
@@ -71,7 +73,7 @@ export const MonthButton = ({
       onClick={() => onSelect(isSelected ? undefined : month)}
       disabled={isDisabled}
       aria-pressed={!!isSelected}
-      className={cl("navds-date__month-button", {
+      className={cn("navds-date__month-button", {
         "rdp-day_today": dateIsInCurrentMonth(month, year),
         "rdp-day_selected": isSelected,
         "rdp-day_disabled": isDisabled,
@@ -105,7 +107,7 @@ export const MonthButton = ({
           .replace(".", "")
           .substring(0, 3)}
       </span>
-      <span className="navds-sr-only">
+      <span className={cn("navds-sr-only")}>
         {format(new Date(month), "LLLL", { locale })}
       </span>
     </button>

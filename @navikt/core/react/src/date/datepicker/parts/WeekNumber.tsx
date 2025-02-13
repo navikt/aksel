@@ -2,7 +2,7 @@
 import React from "react";
 import { Button as RDPButton, useDayPicker } from "react-day-picker";
 import { Button } from "../../../button";
-import { useThemeInternal } from "../../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
 
@@ -23,6 +23,7 @@ function WeekNumber({
   const { onWeekNumberClick, styles, classNames } = useDayPicker();
   const themeContext = useThemeInternal(false);
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
 
   if (!onWeekNumberClick) {
     return (
@@ -46,12 +47,14 @@ function WeekNumber({
         name="week-number"
         aria-label={translate("selectWeekNumber", { week: weekNumber })}
         style={styles.weeknumber}
-        className="navds-date__weeknumber"
+        className={cn("navds-date__weeknumber")}
         onClick={(event) => {
           onWeekNumberClick(weekNumber, dates, event);
         }}
         icon={
-          <span className="navds-date__weeknumber-number">{weekNumber}</span>
+          <span className={cn("navds-date__weeknumber-number")}>
+            {weekNumber}
+          </span>
         }
       />
     );

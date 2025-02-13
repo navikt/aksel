@@ -2,6 +2,7 @@ import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
+import { useRenameCSS } from "../../../theme/Theme";
 import { Label } from "../../../typography";
 import { useDateTranslationContext } from "../../context";
 import WeekRow from "./WeekRow";
@@ -16,16 +17,17 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
     locale,
   } = useDayPicker();
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
 
   return (
     <>
-      <div className="navds-date__caption">
+      <div className={cn("navds-date__caption")}>
         <Button
           variant="tertiary-neutral"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<ArrowLeftIcon title={translate("goToPreviousMonth")} />}
-          className="navds-date__caption-button"
+          className={cn("navds-date__caption-button")}
           type="button"
         />
         <Label
@@ -33,7 +35,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           aria-live="polite"
           aria-atomic="true"
           id={id}
-          className="navds-date__caption-label"
+          className={cn("navds-date__caption-label")}
         >
           {formatCaption(displayMonth, { locale })}
         </Label>
@@ -42,7 +44,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
           variant="tertiary-neutral"
-          className="navds-date__caption-button"
+          className={cn("navds-date__caption-button")}
           type="button"
         />
       </div>

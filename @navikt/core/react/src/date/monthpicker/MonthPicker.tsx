@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { DayPickerProvider } from "react-day-picker";
+import { useRenameCSS } from "../../theme/Theme";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
@@ -89,6 +89,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       translations,
       getTranslations(locale),
     );
+    const { cn } = useRenameCSS();
     const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
@@ -127,7 +128,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         >
           <div
             ref={mergedRef}
-            className={cl("navds-date__wrapper", wrapperClassName)}
+            className={cn("navds-date__wrapper", wrapperClassName)}
           >
             {children}
             <DateWrapper
@@ -153,7 +154,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
                   month: selected ?? selectedMonth,
                 }}
               >
-                <div className={cl("rdp-month", className)}>
+                <div className={cn("rdp-month", className)}>
                   <SharedMonthProvider
                     dropdownCaption={dropdownCaption}
                     disabled={disabled}

@@ -1,7 +1,7 @@
-import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -93,6 +93,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       getTranslations(locale),
     );
     const langProviderLocale = useDateLocale();
+    const { cn } = useRenameCSS();
+
     const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
@@ -133,7 +135,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           WeekNumber,
           Row,
         }}
-        className={cl("navds-date", className)}
+        className={cn("navds-date", className)}
         classNames={{
           vhidden: "navds-sr-only",
         }}
@@ -171,7 +173,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         >
           <div
             ref={mergedRef}
-            className={cl("navds-date__wrapper", wrapperClassName)}
+            className={cn("navds-date__wrapper", wrapperClassName)}
           >
             {children}
             <DateWrapper

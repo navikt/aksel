@@ -1,7 +1,7 @@
-import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef } from "react";
 import { DateRange, DayPicker, isMatch } from "react-day-picker";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
 import { DateTranslationContextProvider } from "../context";
@@ -72,6 +72,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       getTranslations(locale),
     );
     const langProviderLocale = useDateLocale();
+    const { cn } = useRenameCSS();
+
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
@@ -89,7 +91,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     return (
       <div
         ref={ref}
-        className={cl("navds-date__standalone-wrapper", className)}
+        className={cn("navds-date__standalone-wrapper", className)}
       >
         <DateTranslationContextProvider translate={translate}>
           <DayPicker
@@ -104,8 +106,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
               WeekNumber,
               Row,
             }}
-            className="navds-date"
-            classNames={{ vhidden: "navds-sr-only" }}
+            className={cn("navds-date")}
+            classNames={{ vhidden: cn("navds-sr-only") }}
             disabled={(day) => {
               return (
                 (disableWeekends && isWeekend(day)) || isMatch(day, disabled)

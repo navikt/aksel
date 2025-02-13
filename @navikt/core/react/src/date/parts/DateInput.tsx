@@ -1,8 +1,8 @@
-import cl from "clsx";
 import React, { InputHTMLAttributes, forwardRef, useRef } from "react";
 import { CalendarIcon } from "@navikt/aksel-icons";
 import { ReadOnlyIcon } from "../../form/ReadOnlyIcon";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useDateInputContext, useDateTranslationContext } from "../context";
@@ -47,6 +47,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
 
   const isDatepickerVariant = variant === "datepicker";
 
@@ -72,7 +73,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
 
   return (
     <div
-      className={cl(
+      className={cn(
         className,
         "navds-form-field",
         `navds-form-field--${size}`,
@@ -91,7 +92,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
       <Label
         htmlFor={inputProps.id}
         size={size}
-        className={cl("navds-form-field__label", {
+        className={cn("navds-form-field__label", {
           "navds-sr-only": hideLabel,
         })}
       >
@@ -101,7 +102,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
       {!!description && (
         <BodyShort
           as="div"
-          className={cl("navds-form-field__description", {
+          className={cn("navds-form-field__description", {
             "navds-sr-only": hideLabel,
           })}
           id={inputDescriptionId}
@@ -110,7 +111,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           {description}
         </BodyShort>
       )}
-      <div className="navds-date__field-wrapper">
+      <div className={cn("navds-date__field-wrapper")}>
         <input
           ref={ref}
           {...omit(rest, ["error", "errorId", "size"])}
@@ -118,7 +119,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
           autoComplete="off"
           aria-controls={context?.open ? context.ariaId : undefined}
           readOnly={readOnly}
-          className={cl(
+          className={cn(
             "navds-date__field-input",
             "navds-text-field__input",
             "navds-body-short",
@@ -134,7 +135,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
             setAnchorRef?.(buttonRef.current);
           }}
           type="button"
-          className="navds-date__field-button"
+          className={cn("navds-date__field-button")}
           ref={buttonRef}
         >
           <CalendarIcon
@@ -145,7 +146,7 @@ const DateInput = forwardRef<HTMLInputElement, DateInputProps>((props, ref) => {
         </button>
       </div>
       <div
-        className="navds-form-field__error"
+        className={cn("navds-form-field__error")}
         id={errorId}
         aria-relevant="additions removals"
         aria-live="polite"

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
+import { useRenameCSS } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
 import { useDateTranslationContext } from "../../context";
@@ -10,6 +11,7 @@ import WeekNumber from "./WeekNumber";
 const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
   const { locale, fixedWeeks, onWeekNumberClick } = useDayPicker();
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
   const labelId = useId();
 
   if (!onWeekNumberClick) {
@@ -25,13 +27,13 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
     <Show below="sm" asChild>
       <table className="rdp-table" role="grid">
         <tbody className="rdp-tbody">
-          <tr className="rdp-row navds-date__week-row">
+          <tr className={cn("rdp-row navds-date__week-row")}>
             <Detail
               as="th"
               weight="semibold"
-              className="rdp-cell navds-date__week-cell"
+              className={cn("rdp-cell navds-date__week-cell")}
             >
-              <span className="navds-date__week-wrapper" id={labelId}>
+              <span className={cn("navds-date__week-wrapper")} id={labelId}>
                 {`${translate("week")}:`}
               </span>
             </Detail>
@@ -39,9 +41,9 @@ const WeekRow = ({ displayMonth }: { displayMonth: Date }) => {
             {weeks.map((week) => (
               <td
                 key={week.weekNumber}
-                className="rdp-cell navds-date__week-cell"
+                className={cn("rdp-cell navds-date__week-cell")}
               >
-                <span className="navds-date__week-wrapper">
+                <span className={cn("navds-date__week-wrapper")}>
                   <WeekNumber number={week.weekNumber} dates={week.dates} />
                 </span>
               </td>
