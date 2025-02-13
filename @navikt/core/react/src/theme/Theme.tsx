@@ -5,7 +5,7 @@ import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
 
 /* -------------------------------------------------------------------------- */
-/*                               CSS Trsnalation                              */
+/*                               CSS Translation                              */
 /* -------------------------------------------------------------------------- */
 type RenameCSSContext = {
   /**
