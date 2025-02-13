@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface InternalHeaderButtonProps
@@ -12,12 +12,16 @@ export interface InternalHeaderButtonProps
 export const InternalHeaderButton: OverridableComponent<
   InternalHeaderButtonProps,
   HTMLButtonElement
-> = forwardRef(({ as: Component = "button", className, ...rest }, ref) => (
-  <Component
-    {...rest}
-    ref={ref}
-    className={cl("navds-internalheader__button", className)}
-  />
-));
+> = forwardRef(({ as: Component = "button", className, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
+
+  return (
+    <Component
+      {...rest}
+      ref={ref}
+      className={cn("navds-internalheader__button", className)}
+    />
+  );
+});
 
 export default InternalHeaderButton;
