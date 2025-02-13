@@ -29,26 +29,26 @@ const nonColorTokens = [
 const colorTokensEntries = Object.entries(transformedTokens).filter(([key]) => {
   return !nonColorTokens.find((prefix) => key.toLowerCase().includes(prefix));
 });
-const colors = Object.fromEntries(colorTokensEntries);
+const colors = Object.fromEntries(colorTokensEntries) as Record<string, string>;
 
 export const config = {
   theme: {
-    colors,
-    screens: {
+    colors: prefixTokens(colors),
+    screens: prefixTokens({
       sm: breakpointTokenConfig.breakpoint.sm.value,
       md: breakpointTokenConfig.breakpoint.md.value,
       lg: breakpointTokenConfig.breakpoint.lg.value,
       xl: breakpointTokenConfig.breakpoint.xl.value,
       "2xl": breakpointTokenConfig.breakpoint["2xl"].value,
-    },
+    }),
     extend: {
-      shadow: extractTokensForCategory("shadow"),
-      fontWeight: extractTokensForCategory("font-weight"),
-      fontSize: extractTokensForCategory("font-size"),
-      lineHeight: extractTokensForCategory("font-line-height"),
-      fontFamily: extractTokensForCategory("font-family"),
-      borderRadius: extractTokensForCategory("border-radius"),
-      opacity: extractTokensForCategory("opacity"),
+      boxShadow: prefixTokens(extractTokensForCategory("shadow")),
+      fontWeight: prefixTokens(extractTokensForCategory("font-weight")),
+      fontSize: prefixTokens(extractTokensForCategory("font-size")),
+      lineHeight: prefixTokens(extractTokensForCategory("font-line-height")),
+      fontFamily: prefixTokens(extractTokensForCategory("font-family")),
+      borderRadius: prefixTokens(extractTokensForCategory("border-radius")),
+      opacity: prefixTokens(extractTokensForCategory("opacity")),
     },
   },
 };
@@ -69,4 +69,17 @@ export function extractTokensForCategory(tokenName: string) {
     .map(([key, value]) => [key.replace(`${tokenName}-`, ""), value]);
 
   return Object.fromEntries(tokens);
+}
+
+/**
+ * Prefixes all keys in a token object with "ax-" to avoid conflicts with TailwindCSS
+ * While making the token more verbose, it communicates better that the token is from Aksel and not locally defined.
+ */
+function prefixTokens(tokens: Record<string, string>) {
+  const withPrefix: Record<string, string> = {};
+
+  for (const [key, value] of Object.entries(tokens)) {
+    withPrefix[`ax-${key}`] = value;
+  }
+  return withPrefix;
 }
