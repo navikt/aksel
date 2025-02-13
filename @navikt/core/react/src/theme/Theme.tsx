@@ -8,6 +8,9 @@ import { AsChildProps } from "../util/types";
 /*                               CSS Trsnalation                              */
 /* -------------------------------------------------------------------------- */
 type RenameCSSContext = {
+  /**
+   * Extends `clsx` with custom className handler
+   */
   cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
