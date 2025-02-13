@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import { useEffect } from "react";
+import "@navikt/ds-tokens/darkside-css";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDataContext } from "@/hooks/useSanityData";
