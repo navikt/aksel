@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { BodyShort } from "../../../typography";
 import { OverridableComponent } from "../../../util";
 import { useTabsContext } from "../../Tabs.context";
@@ -45,6 +45,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
       },
       ref: React.ForwardedRef<HTMLButtonElement>,
     ) => {
+      const { cn } = useRenameCSS();
       const tabCtx = useTab({ value, onClick, onFocus, disabled }, ref);
       const ctx = useTabsContext();
 
@@ -57,7 +58,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         <Component
           ref={tabCtx.ref}
           {...rest}
-          className={cl(
+          className={cn(
             "navds-tabs__tab",
             `navds-tabs__tab--${ctx?.size ?? "medium"}`,
             `navds-tabs__tab-icon--${ctx?.iconPosition}`,
@@ -79,7 +80,7 @@ export const Tab: OverridableComponent<TabProps, HTMLButtonElement> =
         >
           <BodyShort
             as="span"
-            className="navds-tabs__tab-inner"
+            className={cn("navds-tabs__tab-inner")}
             size={ctx?.size}
           >
             <span aria-hidden={!!label}>{icon}</span>
