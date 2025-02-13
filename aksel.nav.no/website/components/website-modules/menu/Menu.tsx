@@ -64,7 +64,6 @@ type MenuLinkProps = {
   href: string;
   id?: string;
   onClick?: () => void;
-  darksideHighlight?: boolean;
 };
 
 export function MenuLink({
