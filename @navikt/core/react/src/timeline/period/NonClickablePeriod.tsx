@@ -39,7 +39,7 @@ const NonClickablePeriod = ({
     >
       <span className={cn("navds-timeline__period--inner")}>
         {icon}
-        <span className={cn("sr-only")}>
+        <span className={cn("navds-sr-only")}>
           {ariaLabel(start, end, status, statusLabel, translate)}
         </span>
       </span>

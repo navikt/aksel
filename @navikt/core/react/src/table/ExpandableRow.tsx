@@ -149,9 +149,11 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           >
             <AnimateHeight
               className={cn("navds-table__expanded-row-collapse")}
-              innerClassName={`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
-                contentGutter ?? togglePlacement
-              }`}
+              innerClassName={cn(
+                `navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
+                  contentGutter ?? togglePlacement
+                }`,
+              )}
               height={_open ? "auto" : 0}
               duration={150}
               easing="cubic-bezier(0.39,0.57,0.56,1)"
