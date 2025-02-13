@@ -11,12 +11,11 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react";
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Slot } from "../slot/Slot";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -124,6 +123,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal(false);
     const showArrow = _arrow && !themeContext;
 
@@ -225,7 +225,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 },
                 role: "tooltip",
                 id: ariaId,
-                className: cl(
+                className: cn(
                   "navds-tooltip",
                   "navds-detail navds-detail--small",
                   className,
@@ -236,9 +236,13 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               {content}
               {keys && (
-                <span className="navds-tooltip__keys" aria-hidden>
+                <span className={cn("navds-tooltip__keys")} aria-hidden>
                   {keys.map((key) => (
-                    <Detail as="kbd" key={key} className="navds-tooltip__key">
+                    <Detail
+                      as="kbd"
+                      key={key}
+                      className={cn("navds-tooltip__key")}
+                    >
                       {key}
                     </Detail>
                   ))}
@@ -249,7 +253,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   ref={(node) => {
                     arrowRef.current = node;
                   }}
-                  className="navds-tooltip__arrow"
+                  className={cn("navds-tooltip__arrow")}
                   style={{
                     left: arrowX != null ? `${arrowX}px` : "",
                     top: arrowY != null ? `${arrowY}px` : "",
