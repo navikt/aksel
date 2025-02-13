@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -78,6 +78,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
       value: open,
@@ -104,7 +105,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         <Row
           {...rest}
           ref={ref}
-          className={cl("navds-table__expandable-row", className, {
+          className={cn("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": _open,
             "navds-table__expandable-row--expansion-disabled":
               expansionDisabled,
@@ -114,21 +115,21 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         >
           {togglePlacement === "right" && children}
           <DataCell
-            className={cl("navds-table__toggle-expand-cell", {
+            className={cn("navds-table__toggle-expand-cell", {
               "navds-table__toggle-expand-cell--open": _open,
             })}
             onClick={!expansionDisabled ? expansionHandler : () => null}
           >
             {!expansionDisabled && (
               <button
-                className="navds-table__toggle-expand-button"
+                className={cn("navds-table__toggle-expand-button")}
                 type="button"
                 aria-controls={id}
                 aria-expanded={_open}
                 onClick={expansionHandler}
               >
                 <ChevronDownIcon
-                  className="navds-table__expandable-icon"
+                  className={cn("navds-table__expandable-icon")}
                   title={_open ? translate("showLess") : translate("showMore")}
                 />
               </button>
@@ -138,13 +139,16 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         </Row>
         <tr
           data-state={_open ? "open" : "closed"}
-          className="navds-table__expanded-row"
+          className={cn("navds-table__expanded-row")}
           aria-hidden={!_open}
           id={id}
         >
-          <td colSpan={colSpan} className="navds-table__expanded-row-cell">
+          <td
+            colSpan={colSpan}
+            className={cn("navds-table__expanded-row-cell")}
+          >
             <AnimateHeight
-              className="navds-table__expanded-row-collapse"
+              className={cn("navds-table__expanded-row-collapse")}
               innerClassName={`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
                 contentGutter ?? togglePlacement
               }`}
