@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef } from "react";
 import { Slot } from "../slot/Slot";
 import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
@@ -8,7 +8,7 @@ import { AsChildProps } from "../util/types";
 /*                               CSS Trsnalation                              */
 /* -------------------------------------------------------------------------- */
 type RenameCSSContext = {
-  cn: (...inputs: Parameters<typeof cl>) => string;
+  cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
 const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
@@ -21,30 +21,18 @@ const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
 export const compositeClassFunction = (
   ...inputs: Parameters<typeof cl>
 ): string => {
-  const classes = cl(inputs).split(" ");
+  const classes = cl(inputs)
+    /* Replaces only if start of string  "navds- navds-"*/
+    .replace(/^navds-/g, "aksel-")
+    /* Replaces all " navds-" hits */
+    .replace(/\snavds-/g, " aksel-");
 
-  let newString = "";
-
-  for (const word of classes) {
-    newString += word.startsWith("navds-")
-      ? word.replace("navds-", "aksel-")
-      : word;
-
-    newString += " ";
-  }
-
-  return newString.trim();
+  return classes.trim();
 };
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
-  const shouldUseNewClassNames = !!useThemeInternal(false);
-
-  const memoizedCompositeClassFunction = useCallback(compositeClassFunction, [
-    shouldUseNewClassNames,
-  ]);
-
   return (
-    <RenameCSSProvider cn={memoizedCompositeClassFunction}>
+    <RenameCSSProvider cn={compositeClassFunction}>
       {children}
     </RenameCSSProvider>
   );
@@ -108,4 +96,4 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
   },
 );
 
-export { Theme, useThemeInternal, useRenameCSS };
+export { Theme, useRenameCSS, useThemeInternal };
