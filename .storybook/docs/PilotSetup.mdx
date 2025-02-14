@@ -83,10 +83,10 @@ For SCSS, Less and JS they are also available under the paths
 
 ## I want to test the new React-changes
 
-For the new system to work with our components, you will have to use the new `Theme`-component, and import the new CSS from `ds-css/darkside`
+For the new system to work with our components, you will have to use the new `Theme`-component, and import the new CSS from `@navikt/ds-css/darkside`
 
 ```tsx
-import "@navikt/ds-css/darkside;";
+import "@navikt/ds-css/darkside";
 import { Theme } from "@navikt/ds-react/Theme";
 
 export const App = () => (
@@ -96,7 +96,30 @@ export const App = () => (
 );
 ```
 
-You will not be able to use the old CSS and the new CSS at the same time.
+You will have to check on all your custom overrides when making this switch.
+
+### Partial update
+
+You can migrate parts of your application to use the new CSS classes without having to migrate everything at once.
+
+```tsx
+// Old setup
+import "@navikt/ds-css/darkside";
+// New setup
+import "@navikt/ds-css/darkside";
+import { Theme } from "@navikt/ds-react/Theme";
+
+export const App = () => (
+  <div>
+    <StillOnOldCSSComponent>
+    /* Only this part of your app now uses new styling */
+    <Theme>
+      <YourApp />
+    </Theme>
+  </div>
+);
+```
+
 You will have to check on all your custom overrides when making this switch.
 
 ## I have to make some custom changes in darkmode
