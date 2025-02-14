@@ -50,9 +50,6 @@ type PageProps = NextPageT<{
   blocks?: BlocksT[];
 }>;
 
-/**
- * Using `count` with references in groq query causes infinite loop when previewing
- */
 const query = groq`*[_type == "aksel_forside"][0]{
   "page": {
     ...,
@@ -84,34 +81,19 @@ const query = groq`*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": select(
-          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": undertema[]->tema->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          },
-          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...8]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": undertema[]->tema->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          }
-        ),
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          "tema": undertema[]->tema->title,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
           _type,
           _id,
@@ -313,12 +295,6 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   </ul>
                 </VStack>
               </Box>
-              {/* Kept commented here in case we want to show future questionnaires from uxtweaks */}
-              {/* <UxTweaks
-                href="https://study.uxtweak.com/treetest/..."
-                length={3}
-              /> */}
-
               {blocks && (
                 <Box paddingInline={{ xs: "2", lg: "18" }}>
                   <FrontpageBlock blocks={blocks} />
