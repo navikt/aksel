@@ -14,6 +14,12 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <script
+          defer
+          src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
+          data-host-url="https://umami.nav.no"
+          data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
+        ></script>
       </Head>
       <body data-theme="light" className="aksel antialiased">
         <Main />
