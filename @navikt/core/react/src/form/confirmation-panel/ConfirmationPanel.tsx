@@ -57,6 +57,12 @@ export const ConfirmationPanel = forwardRef<
 
   const id = useId();
 
+  const currentRole = hasError
+    ? "danger"
+    : props.checked
+      ? "success"
+      : "warning";
+
   return (
     <div
       className={cl("navds-confirmation-panel", "navds-form-field", className, {
@@ -64,6 +70,7 @@ export const ConfirmationPanel = forwardRef<
         "navds-confirmation-panel--error": hasError,
         "navds-confirmation-panel--checked": !!props.checked,
       })}
+      data-color-role={currentRole}
     >
       <div className="navds-confirmation-panel__inner">
         {children && (

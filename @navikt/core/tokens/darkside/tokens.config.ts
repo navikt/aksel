@@ -12,28 +12,34 @@ import { opacityTokenConfig } from "./tokens/opacity";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
 
-export const lightModeTokens = () => {
-  const configs = [
+export const lightModeTokens = (withSemanticRoles = true) => {
+  const config = [
     shadowTokenConfig("light"),
     opacityTokenConfig("light"),
-    semanticTokensForAllRoles(),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("light"),
     globalLightTokens,
   ];
 
-  return tokensWithPrefix(mergeConfigs(configs));
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
-export const darkModeTokens = () => {
-  const configs = [
+export const darkModeTokens = (withSemanticRoles = true) => {
+  const config = [
     shadowTokenConfig("dark"),
     opacityTokenConfig("dark"),
-    semanticTokensForAllRoles(),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
     semanticRootTokens("dark"),
     globalDarkTokens,
   ];
 
-  return tokensWithPrefix(mergeConfigs(configs));
+  return tokensWithPrefix(mergeConfigs(config));
+};
+
+export const semanticRoleTokensWithGlobalReference = () => {
+  const config = [globalLightTokens, semanticTokensForAllRoles()];
+
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 /**
@@ -41,24 +47,24 @@ export const darkModeTokens = () => {
  * so we can use the fuction for creating Figma-variables
  */
 export const scaleTokens = () => {
-  const configs = [spaceTokenConfig, radiusTokenConfig];
+  const config = [spaceTokenConfig, radiusTokenConfig];
 
-  return tokensWithPrefix(mergeConfigs(configs));
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 export const rootTokens = () => {
-  const configs = [scaleTokens().ax, breakpointTokenConfig, fontTokenConfig];
+  const config = [scaleTokens().ax, breakpointTokenConfig, fontTokenConfig];
 
-  return tokensWithPrefix(mergeConfigs(configs));
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 export const allTokens = () => {
-  const configs = [
+  const config = [
     lightModeTokens().ax,
     scaleTokens().ax,
     breakpointTokenConfig,
     fontTokenConfig,
   ];
 
-  return tokensWithPrefix(mergeConfigs(configs));
+  return tokensWithPrefix(mergeConfigs(config));
 };

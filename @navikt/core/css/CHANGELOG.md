@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
 ## 7.12.2
 
 ## 7.12.1
