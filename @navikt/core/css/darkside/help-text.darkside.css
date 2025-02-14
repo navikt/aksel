@@ -1,4 +1,4 @@
-.navds-help-text__button {
+.aksel-help-text__button {
   margin: 0;
   border: 0;
   cursor: pointer;
@@ -12,44 +12,44 @@
   padding: calc(var(--ax-space-4) / 2);
 }
 
-.navds-help-text__icon {
+.aksel-help-text__icon {
   border-radius: var(--ax-border-radius-full);
 }
 
-.navds-help-text__popover.navds-popover {
+.aksel-help-text__popover.aksel-popover {
   background-color: var(--ax-bg-info-moderate);
   max-width: min(65ch, calc(100vw - var(--ax-space-24)));
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info);
 }
 
-.navds-help-text__icon--filled {
+.aksel-help-text__icon--filled {
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
+.aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon {
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+.aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon--filled {
   display: inherit;
   color: var(--ax-bg-info-strong-hover);
 }
 
-.navds-help-text__button[aria-expanded="true"] > .navds-help-text__icon--filled {
+.aksel-help-text__button[aria-expanded="true"] > .aksel-help-text__icon--filled {
   color: var(--ax-bg-info-strong-pressed);
 }
 
 @media (forced-colors: active) {
-  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon {
+  .aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon {
     display: inherit;
   }
 
-  .navds-help-text__button:hover > .navds-help-text__icon {
+  .aksel-help-text__button:hover > .aksel-help-text__icon {
     color: highlight;
   }
 
-  .navds-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+  .aksel-help-text__button:where(:hover, :focus-visible, [aria-expanded="true"]) > .aksel-help-text__icon--filled {
     display: none;
   }
 }

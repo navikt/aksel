@@ -1,4 +1,4 @@
-.navds-chips {
+.aksel-chips {
   display: flex;
   gap: var(--ax-space-8);
   margin: 0;
@@ -7,14 +7,14 @@
   flex-wrap: wrap;
 }
 
-.navds-chips li {
+.aksel-chips li {
   margin: 0;
   padding: 0;
   list-style: none;
   display: block;
 }
 
-.navds-chips__chip {
+.aksel-chips__chip {
   all: unset;
   display: flex;
   cursor: pointer;
@@ -33,43 +33,43 @@
   }
 }
 
-.navds-chips--readonly {
-  .navds-chips__chip {
+.aksel-chips--readonly {
+  .aksel-chips__chip {
     background-color: var(--ax-bg-neutral-moderateA);
   }
 }
 
-.navds-chips--small {
-  .navds-chips__chip {
+.aksel-chips--small {
+  .aksel-chips__chip {
     min-height: 1.5rem;
     padding: 0 var(--ax-space-8);
   }
 
-  .navds-chips__toggle-icon {
+  .aksel-chips__toggle-icon {
     width: 1rem;
     height: 1rem;
   }
 
-  .navds-chips__toggle--with-checkmark {
+  .aksel-chips__toggle--with-checkmark {
     padding-left: var(--ax-space-4);
   }
 
-  .navds-chips__removable-icon {
+  .aksel-chips__removable-icon {
     width: 1.25rem;
     height: 1.25rem;
   }
 
-  .navds-chips__removable-icon > svg {
+  .aksel-chips__removable-icon > svg {
     width: 1rem;
   }
 
-  .navds-chips--icon-right {
+  .aksel-chips--icon-right {
     padding-right: var(--ax-space-2);
   }
 }
 
 /* ------------------------------ Chips Toggle ------------------------------ */
-.navds-chips__toggle--action {
+.aksel-chips__toggle--action {
   box-shadow: inset 0 0 0 1px var(--ax-border-accent-subtleA);
   background-color: var(--ax-bg-accent-moderate);
   color: var(--ax-text-accent);
@@ -89,7 +89,7 @@
   }
 }
 
-.navds-chips__toggle--neutral {
+.aksel-chips__toggle--neutral {
   box-shadow: inset 0 0 0 1px var(--ax-border-neutral-subtleA);
   background-color: var(--ax-bg-neutral-moderate);
   color: var(--ax-text-neutral);
@@ -109,18 +109,18 @@
   }
 }
 
-.navds-chips--medium .navds-chips__toggle--with-checkmark {
+.aksel-chips--medium .aksel-chips__toggle--with-checkmark {
   padding-left: var(--ax-space-6);
 }
 
 /* -------------------------- start old CSS --------------------------  */
 
 /* ----------------------------- Chips removable ---------------------------- */
-.navds-chips__removable {
+.aksel-chips__removable {
   gap: 0;
 }
 
-.navds-chips__removable--action {
+.aksel-chips__removable--action {
   background: var(--ax-bg-accent-strong-pressed);
   color: var(--ax-text-accent-contrast);
 
@@ -129,7 +129,7 @@
   }
 }
 
-.navds-chips__removable--neutral {
+.aksel-chips__removable--neutral {
   background: var(--ax-bg-neutral-strong-pressed);
   color: var(--ax-text-neutral-contrast);
 
@@ -138,7 +138,7 @@
   }
 }
 
-.navds-chips__removable-icon {
+.aksel-chips__removable-icon {
   width: 1.5rem;
   height: 1.5rem;
   font-size: 1.25rem;
@@ -147,16 +147,16 @@
   border-radius: var(--ax-border-radius-full);
 }
 
-.navds-chips--icon-left {
+.aksel-chips--icon-left {
   padding-left: var(--ax-space-6);
 }
 
-.navds-chips--icon-right {
+.aksel-chips--icon-right {
   padding-right: var(--ax-space-6);
 }
 
 @media (forced-colors: active) {
-  .navds-chips__chip {
+  .aksel-chips__chip {
     border: 1px solid transparent;
 
     &:hover {
@@ -165,11 +165,11 @@
     }
   }
 
-  .navds-chips__chip:where([data-pressed="true"], :active, :hover) > span {
+  .aksel-chips__chip:where([data-pressed="true"], :active, :hover) > span {
     forced-color-adjust: none;
   }
 
-  .navds-chips__toggle[data-pressed="true"] {
+  .aksel-chips__toggle[data-pressed="true"] {
     background-color: selecteditem;
     color: selecteditemtext;
     border: 1px solid selecteditem;
