@@ -2137,6 +2137,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-fns/tz@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@date-fns/tz@npm:1.2.0"
+  checksum: 10/a9c2d32f98a5a5c655a7d3843046a5a36779b2ef0db803c608291976e6254e594a085777bf738379f50c7e9fc2ffebbf8bb836e9e9759a5ef2b703f91bb785de
+  languageName: node
+  linkType: hard
+
 "@discoveryjs/json-ext@npm:0.5.7":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -3776,11 +3783,11 @@ __metadata:
     aksel: "workspace:^"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
-    date-fns: "npm:^3.0.0"
+    date-fns: "npm:^4.0.0"
     fast-glob: "npm:3.2.11"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:25.0.1"
-    react-day-picker: "npm:8.10.1"
+    react-day-picker: "npm:9.5.0"
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:^6.3.0"
     rimraf: "npm:6.0.1"
@@ -10111,6 +10118,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns-jalali@npm:^4.1.0-0":
+  version: 4.1.0-0
+  resolution: "date-fns-jalali@npm:4.1.0-0"
+  checksum: 10/0005e0e37d449aa998cfc353395b0292eea4778aba4283dad4fa0e3559cf0a7fc7ce9123fb6f22c235285219d4f4774c88bb9c01fa2694c6a5efbbcd33efe7fc
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^2.26.1, date-fns@npm:^2.27.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
@@ -10120,10 +10134,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^3.0.0":
-  version: 3.6.0
-  resolution: "date-fns@npm:3.6.0"
-  checksum: 10/cac35c58926a3b5d577082ff2b253612ec1c79eb6754fddef46b6a8e826501ea2cb346ecbd211205f1ba382ddd1f9d8c3f00bf433ad63cc3063454d294e3a6b8
+"date-fns@npm:^4.0.0, date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
   languageName: node
   linkType: hard
 
@@ -19632,13 +19646,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.10.1":
-  version: 8.10.1
-  resolution: "react-day-picker@npm:8.10.1"
+"react-day-picker@npm:9.5.0":
+  version: 9.5.0
+  resolution: "react-day-picker@npm:9.5.0"
+  dependencies:
+    "@date-fns/tz": "npm:^1.2.0"
+    date-fns: "npm:^4.1.0"
+    date-fns-jalali: "npm:^4.1.0-0"
   peerDependencies:
-    date-fns: ^2.28.0 || ^3.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/374056dca7fed70a154a3b0e98c6c746c26b4fc868548fa8f285ef3cab9679537e84c0c21ba7b6db67b3f7f54cc562f5d83efba2c7f2c7bd3705ac8992869607
+    react: ">=16.8.0"
+  checksum: 10/8f68fb0f723e89efa78f814ce8564c13f60901e1746ccebba68f05f0128cdbf5f9cbafdb5b93ac9187bda9373b4f882a2a961aea7198eed5dcd16ab299c84979
   languageName: node
   linkType: hard
 
@@ -24765,7 +24782,7 @@ __metadata:
     codesandbox-import-utils: "npm:^2.2.3"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^7.0.0"
-    date-fns: "npm:^3.0.0"
+    date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.0.0"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:25.0.1"
