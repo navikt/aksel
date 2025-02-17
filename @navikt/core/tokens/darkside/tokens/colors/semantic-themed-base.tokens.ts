@@ -79,6 +79,10 @@ export function semanticThemedBaseTokens(role: SemanticColorRoles) {
         value: `{ax.text.${role}-icon.value}`,
         type: "themed-role",
       },
+      contrast: {
+        value: `{ax.text.${role}-contrast.value}`,
+        type: "themed-role",
+      },
     },
     border: {
       default: {

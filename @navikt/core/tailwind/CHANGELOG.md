@@ -1,5 +1,11 @@
 # @navikt/ds-tailwind
 
+## 7.13.0
+
+### Patch Changes
+
+- Tailwind: Added `darkside`-support with import `@navikt/ds-tailwind/darkside-tw3`. ([#3580](https://github.com/navikt/aksel/pull/3580))
+
 ## 7.12.2
 
 ## 7.12.1

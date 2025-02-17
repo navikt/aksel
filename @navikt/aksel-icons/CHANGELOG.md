@@ -1,5 +1,11 @@
 # @navikt/aksel-icons
 
+## 7.13.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `ExpandVertical` and `QuestionmarkCircle` ([#3583](https://github.com/navikt/aksel/pull/3583))
+
 ## 7.12.2
 
 ## 7.12.1
