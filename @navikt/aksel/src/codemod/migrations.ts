@@ -97,6 +97,13 @@ export const migrations: {
         "Remember to update use of `variant`-prop to match previous use of colors. If needed the component exposes css-variables for custom overrides",
     },
   ],
+  darkside: [
+    {
+      description: "Updates all Primitives to use `space`-tokens.",
+      value: "primitive-spacing",
+      path: "darkside/primitives-spacing/spacing",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
