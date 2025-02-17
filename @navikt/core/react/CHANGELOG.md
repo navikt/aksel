@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
+- Updated dependencies [[`636eb05`](https://github.com/navikt/aksel/commit/636eb05bf56ba2c8513704c61882fde369c2e67b)]:
+  - @navikt/aksel-icons@7.13.0
+  - @navikt/ds-tokens@7.13.0
+
 ## 7.12.2
 
 ### Patch Changes

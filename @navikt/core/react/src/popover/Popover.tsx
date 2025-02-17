@@ -6,8 +6,8 @@ import {
   shift,
   useFloating,
 } from "@floating-ui/react";
-import React, { HTMLAttributes, forwardRef, useContext, useRef } from "react";
-import { DateInputContext } from "../date/context";
+import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import { useDateInputContext } from "../date/Date.Input";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
 import { useRenameCSS, useThemeInternal } from "../theme/Theme";
@@ -121,9 +121,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const { cn } = useRenameCSS();
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
-    const isInDatepicker = useContext(DateInputContext) !== null;
+    const datepickerContext = useDateInputContext(false);
     const chosenStrategy = userStrategy ?? (isInModal ? "fixed" : "absolute");
-    const chosenFlip = isInDatepicker ? false : _flip;
+    const chosenFlip = datepickerContext ? false : _flip;
 
     const themeContext = useThemeInternal(false);
 
