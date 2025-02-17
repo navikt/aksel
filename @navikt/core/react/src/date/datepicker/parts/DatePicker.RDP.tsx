@@ -1,8 +1,8 @@
-import cl from "clsx";
 import { isAfter, isBefore, isWeekend } from "date-fns";
 import React, { useCallback } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
+import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../Date.locale";
@@ -67,6 +67,7 @@ const ReactDayPicker = ({
   locale: _locale,
   ...rest
 }: ReactDayPickerProps) => {
+  const { cn } = useRenameCSS();
   const langProviderLocale = useDateLocale();
   const locale = _locale ? getLocaleFromString(_locale) : langProviderLocale;
 
@@ -139,7 +140,7 @@ const ReactDayPicker = ({
           [],
         ),
       }}
-      className={cl("navds-date", className)}
+      className={cn("navds-date", className)}
       disabled={(day) => {
         const isOutside =
           (toDate && isAfter(day, toDate)) ||
