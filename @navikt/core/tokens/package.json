@@ -15,6 +15,7 @@
     "/src",
     "types.ts",
     "docs.json",
+    "token_docs.js",
     "!/dist/darkside",
     "/dist/darkside/tokens*"
   ],
@@ -53,6 +54,7 @@
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
     "./docs.json": "./docs.json",
+    "./token_docs": "./token_docs.js",
     "./dist/*": {
       "types": "./dist/tokens.d.ts",
       "default": "./dist/*"

@@ -56,6 +56,25 @@ export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
   return `${header}${tokens}\n`;
 };
 
+export const formatDOCS: FormatFn = async ({ dictionary }) => {
+  const tokens = dictionary.allTokens
+    .map((token, index) => {
+      return (
+        JSON.stringify({
+          name: kebabCaseForAlpha(token.name.slice(2)),
+          value: createTokenValue(token),
+          rawValue: token.value,
+          comment: token.comment,
+          type: token.type,
+          group: token.group,
+        }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
+      );
+    })
+    .join("\n");
+
+  return `export const tokens = [${tokens}];\n`;
+};
+
 export const formatLESS: FormatFn = async ({ dictionary, file }) => {
   const header = await generateHeader(file);
   const tokens = dictionary.allTokens

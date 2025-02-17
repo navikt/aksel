@@ -15,7 +15,7 @@ import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useModalContext } from "../modal/Modal.context";
 import { Portal } from "../portal";
 import { Slot } from "../slot/Slot";
-import { useRenameCSS, useThemeInternal } from "../theme/Theme";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail } from "../typography";
 import { useId } from "../util/hooks";
 import { useControllableState } from "../util/hooks/useControllableState";
@@ -124,8 +124,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ref,
   ) => {
     const { cn } = useRenameCSS();
-    const themeContext = useThemeInternal(false);
-    const showArrow = _arrow && !themeContext;
 
     const [_open, _setOpen] = useControllableState({
       defaultValue: defaultOpen,
@@ -153,7 +151,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       open: _open,
       onOpenChange: (newState) => _setOpen(newState),
       middleware: [
-        offset(_offset ?? (themeContext ? 8 : _arrow ? 16 : 4)),
+        offset(_offset ?? (_arrow ? 8 : 4)),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -248,7 +246,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   ))}
                 </span>
               )}
-              {showArrow && (
+              {_arrow && (
                 <div
                   ref={(node) => {
                     arrowRef.current = node;
