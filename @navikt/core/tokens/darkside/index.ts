@@ -5,6 +5,7 @@ import { DesignTokens, Filter } from "style-dictionary/types";
 import { ColorRolesList } from "../types";
 import {
   formatCJS,
+  formatDOCS,
   formatES6,
   formatLESS,
   formatSCSS,
@@ -187,6 +188,16 @@ async function buildOtherTokenFormats() {
           },
         ],
       },
+      tokenDocs: {
+        transformGroup: "js",
+        buildPath: "./",
+        files: [
+          {
+            destination: "token_docs.js",
+            format: "format-DOCS",
+          },
+        ],
+      },
       // jsStatic: {
       //   transformGroup: "js",
       //   buildPath: `${DARKSIDE_DIST}static/`,
@@ -286,6 +297,11 @@ async function buildOtherTokenFormats() {
   SDDictionaryNonCSSFormats.registerFormat({
     name: "format-LESS",
     format: formatLESS,
+  });
+
+  SDDictionaryNonCSSFormats.registerFormat({
+    name: "format-DOCS",
+    format: formatDOCS,
   });
 
   await SDDictionaryNonCSSFormats.buildAllPlatforms();
