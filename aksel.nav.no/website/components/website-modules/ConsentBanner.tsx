@@ -1,16 +1,25 @@
 "use client";
 
-import Head from "next/head";
+import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
-import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { Cookies } from "typescript-cookie";
+import { FaceLaughIcon } from "@navikt/aksel-icons";
+import {
+  BodyLong,
+  Button,
+  Detail,
+  HStack,
+  Link,
+  Modal,
+} from "@navikt/ds-react";
 
 const CONSENT_TRACKER_ID = "acceptTracking";
 
 type CONSENT_TRACKER_STATE = "undecided" | "accepted" | "rejected";
 
 export const getStorageAcceptedTracking = () => {
-  const rawState = localStorage.getItem(CONSENT_TRACKER_ID);
-  if (rawState === null) {
+  const rawState = Cookies.get(CONSENT_TRACKER_ID);
+  if (!rawState) {
     return "undecided";
   }
 
@@ -18,7 +27,7 @@ export const getStorageAcceptedTracking = () => {
 };
 
 export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
-  return localStorage.setItem(CONSENT_TRACKER_ID, state);
+  Cookies.set(CONSENT_TRACKER_ID, state, { expires: 365 });
 };
 
 export const ConsentBanner = () => {
@@ -49,21 +58,53 @@ export const ConsentBanner = () => {
   return (
     <div>
       {refUmamiTag.current && (
-        <Head>
-          <script
-            defer
-            src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
-            data-host-url="https://umami.nav.no"
-            data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
-            data-auto-track={clientAcceptsTracking ? "true" : "false"}
-            data-tag={refUmamiTag.current}
-          ></script>
-        </Head>
+        <Script
+          defer
+          src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
+          data-host-url="https://umami.nav.no"
+          data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
+          data-auto-track={clientAcceptsTracking ? "true" : "false"}
+          data-tag={refUmamiTag.current}
+        ></Script>
       )}
-      <Modal ref={ref} header={{ heading: "Overskrift" }}>
+      <Modal
+        ref={ref}
+        header={{ heading: "Tørt, sprøtt bakverk, laget uten hevemiddel" }}
+      >
         <Modal.Body>
-          <BodyLong>Legg til cookie tekst her!</BodyLong>
+          <HStack className="mb-10" justify="center">
+            <FaceLaughIcon fontSize="10rem" />
+          </HStack>
+          <BodyLong className="mb-2">
+            Er det greit at vi logger litt brukeradferd under domenet
+            aksel.nav.no?
+          </BodyLong>
+          <BodyLong className="mb-2">
+            Vi bruker{" "}
+            <Link href="https://aksel.nav.no/god-praksis/artikler/male-brukeradferd-med-umami">
+              Umami
+            </Link>
+            , og dataene lagres på NAV sin sky i Google Cloud Platform.
+          </BodyLong>
+          <BodyLong className="mb-4">
+            Et par cookies blir lagret på nettleseren din uansett for at Aksel
+            nettsiden skal virke, og slik at vi ikke glemmer det valget du tar
+            akkurat nå!
+          </BodyLong>
+
+          <Detail>
+            Trykker du vekk denne modalen vil du få den på nytt ved neste
+            sidelasting, og vi logger da ikke brukeradferd.
+          </Detail>
+          <Detail>
+            Trykker du &quot;Nei&quot; vil vi <em>ikke </em>logge brukeradferd.
+          </Detail>
+          <Detail>
+            Trykker du &quot;Ja&quot; logger vi (helst ikke personlig
+            identifiserbar) brukeradferd under aksel.nav.no domenet.
+          </Detail>
         </Modal.Body>
+
         <Modal.Footer>
           <Button
             type="button"
@@ -77,7 +118,7 @@ export const ConsentBanner = () => {
               ref.current?.close();
             }}
           >
-            Aksepter
+            Ja
           </Button>
           <Button
             type="button"
@@ -87,7 +128,7 @@ export const ConsentBanner = () => {
               ref.current?.close();
             }}
           >
-            Avstå
+            Nei
           </Button>
         </Modal.Footer>
       </Modal>
