@@ -8,9 +8,14 @@ import type {
 } from "jscodeshift";
 
 /**
- *
+ * Finds a component import, accounting for sub-components and aliases.
+ * Returns the local name of the component. If the component is not found, returns null.
  */
-function findComponent(input: { j: API["j"]; file: FileInfo; name: string }) {
+function findComponentImport(input: {
+  j: API["j"];
+  file: FileInfo;
+  name: string;
+}) {
   const { j, file, name: _name } = input;
 
   /* Account for sub-components */
@@ -79,6 +84,9 @@ function findJSXElement(input: {
   });
 }
 
+/**
+ * Finds a prop in a JSX element.
+ */
 function findProp(input: {
   j: API["j"];
   path: ASTPath<JSXElement>;
@@ -93,6 +101,9 @@ function findProp(input: {
   });
 }
 
+/**
+ * Checks if an import is from @navikt/ds-react.
+ */
 function isAkselReactImport(path: ASTPath<ImportDeclaration>) {
   const importSource = path.node.source.value;
   return (
@@ -101,4 +112,4 @@ function isAkselReactImport(path: ASTPath<ImportDeclaration>) {
   );
 }
 
-export { findComponent, findJSXElement, findProp };
+export { findComponentImport, findJSXElement, findProp };

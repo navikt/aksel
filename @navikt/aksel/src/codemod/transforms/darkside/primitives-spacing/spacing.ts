@@ -1,6 +1,10 @@
 import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
-import { findComponent, findJSXElement, findProp } from "../darkside.utils";
+import {
+  findComponentImport,
+  findJSXElement,
+  findProp,
+} from "../darkside.utils";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
@@ -36,7 +40,7 @@ export default function transformer(file: FileInfo, api: API) {
   ];
 
   for (const primitive of primtives) {
-    const name = findComponent({ file, j, name: primitive });
+    const name = findComponentImport({ file, j, name: primitive });
     if (!name) {
       continue;
     }
