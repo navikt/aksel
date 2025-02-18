@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "@navikt/ds-tokens/darkside-css";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
@@ -17,7 +17,7 @@ function App({ Component, pageProps, router }: AppProps) {
   /* As of 01.01.25, removed until cookie compliance is implemented */
   /* useAmplitudeInit(); */
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.location.host === "design.nav.no" &&
       window.location.replace(`http://aksel.nav.no`);
 
@@ -59,9 +59,6 @@ function App({ Component, pageProps, router }: AppProps) {
           data-tag={umamiTag}
         ></script>
       </Head>
-      <h1 id="acceptTracking">
-        clientAcceptsTracking: {clientAcceptsTracking ? "true" : "false"}
-      </h1>
       <ConsentBanner />
       <BaseSEO path={router.asPath} />
       <SanityDataContext.Provider

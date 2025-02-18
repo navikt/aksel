@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 
 const CONSENT_TRACKER_ID = "acceptTracking";
@@ -21,7 +21,7 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 };
 
 export const ConsentBanner = () => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     const consentAnswer = getStorageAcceptedTracking();
     if (consentAnswer === "undecided") {
       ref.current?.showModal();
@@ -41,6 +41,11 @@ export const ConsentBanner = () => {
             type="button"
             onClick={() => {
               setStorageAcceptedTracking("accepted");
+              // NOTE: umami _should_ exist on window object here (loaded via <Head>)
+              // we call track manually this _one_ time to ensure the current page is
+              // accounted for, any new page loads will be captured by data-auto-track
+              // https://umami.is/docs/tracker-configuration
+              umami.track();
               ref.current?.close();
             }}
           >
