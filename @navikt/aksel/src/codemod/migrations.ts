@@ -99,7 +99,8 @@ export const migrations: {
   ],
   darkside: [
     {
-      description: "Updates all Primitives to use `space`-tokens.",
+      description:
+        "Updates all Primitives to use new `space`-tokens. (Works with old and new system)",
       value: "primitive-spacing",
       path: "darkside/primitives-spacing/spacing",
     },
