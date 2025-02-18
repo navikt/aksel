@@ -9,17 +9,37 @@ const CONSENT_TRACKER_ID = "aksel-consent";
 
 type CONSENT_TRACKER_STATE = "undecided" | "accepted" | "rejected";
 
+type CookieData = {
+  createdAt: string;
+  updatedAt: string;
+  version: number;
+  consents: {
+    tracking?: string;
+  };
+};
+
 export const getStorageAcceptedTracking = () => {
-  const rawState = Cookies.get(CONSENT_TRACKER_ID);
+  const rawState = Cookies.get(CONSENT_TRACKER_ID) as string;
   if (!rawState) {
     return "undecided";
   }
 
-  return rawState as CONSENT_TRACKER_STATE;
+  const cookieData = JSON.parse(rawState) as CookieData;
+
+  return cookieData.consents.tracking as CONSENT_TRACKER_STATE;
 };
 
 export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
-  Cookies.set(CONSENT_TRACKER_ID, state, { expires: 365 });
+  const cookieData: CookieData = {
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    version: 1,
+    consents: {},
+  };
+
+  cookieData.consents.tracking = state;
+
+  Cookies.set(CONSENT_TRACKER_ID, JSON.stringify(cookieData), { expires: 365 });
 };
 
 export const ConsentBanner = () => {
@@ -61,7 +81,7 @@ export const ConsentBanner = () => {
       )}
       <Modal
         ref={ref}
-        header={{ heading: "Velg hvilke informasjonskapsler Nav får bruke" }}
+        header={{ heading: "Velg hvilke informasjonskapsler Aksel får bruke" }}
       >
         <Modal.Body>
           <BodyLong className="mb-2">
