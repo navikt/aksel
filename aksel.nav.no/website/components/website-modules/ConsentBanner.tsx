@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 
 const CONSENT_TRACKER_ID = "acceptTracking";
@@ -21,17 +22,44 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 };
 
 export const ConsentBanner = () => {
+  const refUmamiTag = useRef<string>("");
+
   useEffect(() => {
     const consentAnswer = getStorageAcceptedTracking();
     if (consentAnswer === "undecided") {
       ref.current?.showModal();
     }
+
+    const isProdUrl = () => window.location.host === "aksel.nav.no";
+    const isPreview = () => !!document.getElementById("exit-preview-id");
+
+    refUmamiTag.current = isPreview()
+      ? "preview"
+      : isProdUrl()
+        ? "production"
+        : "development";
+
+    setClientAcceptsTracking(getStorageAcceptedTracking() === "accepted");
   }, []);
 
   const ref = useRef<HTMLDialogElement>(null);
 
+  const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
+
   return (
     <div>
+      {refUmamiTag.current && (
+        <Head>
+          <script
+            defer
+            src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
+            data-host-url="https://umami.nav.no"
+            data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
+            data-auto-track={clientAcceptsTracking ? "true" : "false"}
+            data-tag={refUmamiTag.current}
+          ></script>
+        </Head>
+      )}
       <Modal ref={ref} header={{ heading: "Overskrift" }}>
         <Modal.Body>
           <BodyLong>Legg til cookie tekst her!</BodyLong>
