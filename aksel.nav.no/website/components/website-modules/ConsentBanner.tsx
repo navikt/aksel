@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Cookies } from "typescript-cookie";
 import { BodyLong, Button, Link, Modal } from "@navikt/ds-react";
 
-const CONSENT_TRACKER_ID = "acceptTracking";
+const CONSENT_TRACKER_ID = "aksel-consent";
 
 type CONSENT_TRACKER_STATE = "undecided" | "accepted" | "rejected";
 
