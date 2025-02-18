@@ -3,15 +3,7 @@
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { Cookies } from "typescript-cookie";
-import { FaceLaughIcon } from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  Button,
-  Detail,
-  HStack,
-  Link,
-  Modal,
-} from "@navikt/ds-react";
+import { BodyLong, Button, Link, Modal } from "@navikt/ds-react";
 
 const CONSENT_TRACKER_ID = "acceptTracking";
 
@@ -69,40 +61,18 @@ export const ConsentBanner = () => {
       )}
       <Modal
         ref={ref}
-        header={{ heading: "Tørt, sprøtt bakverk, laget uten hevemiddel" }}
+        header={{ heading: "Velg hvilke informasjonskapsler Nav får bruke" }}
       >
         <Modal.Body>
-          <HStack className="mb-10" justify="center">
-            <FaceLaughIcon fontSize="10rem" />
-          </HStack>
           <BodyLong className="mb-2">
-            Er det greit at vi logger litt brukeradferd under domenet
-            aksel.nav.no?
-          </BodyLong>
-          <BodyLong className="mb-2">
-            Vi bruker{" "}
-            <Link href="https://aksel.nav.no/god-praksis/artikler/male-brukeradferd-med-umami">
-              Umami
+            Nødvendige informasjonskapsler sørger for at nettstedet fungerer og
+            er sikkert, og kan ikke velges bort. Andre brukes til statistikk og
+            analyse. Godkjenner du alle, hjelper du oss å lage bedre nettsider
+            og tjenester.{" "}
+            <Link href="https://www.nav.no/informasjonskapsler">
+              Mer om våre informasjonskapsler.
             </Link>
-            , og dataene lagres på NAV sin sky i Google Cloud Platform.
           </BodyLong>
-          <BodyLong className="mb-4">
-            Et par cookies blir lagret på nettleseren din uansett for at Aksel
-            nettsiden skal virke, og slik at vi ikke glemmer det valget du tar
-            akkurat nå!
-          </BodyLong>
-
-          <Detail>
-            Trykker du vekk denne modalen vil du få den på nytt ved neste
-            sidelasting, og vi logger da ikke brukeradferd.
-          </Detail>
-          <Detail>
-            Trykker du &quot;Nei&quot; vil vi <em>ikke </em>logge brukeradferd.
-          </Detail>
-          <Detail>
-            Trykker du &quot;Ja&quot; logger vi (helst ikke personlig
-            identifiserbar) brukeradferd under aksel.nav.no domenet.
-          </Detail>
         </Modal.Body>
 
         <Modal.Footer>
@@ -118,17 +88,16 @@ export const ConsentBanner = () => {
               ref.current?.close();
             }}
           >
-            Ja
+            Godkjenn alle
           </Button>
           <Button
             type="button"
-            variant="secondary"
             onClick={() => {
               setStorageAcceptedTracking("rejected");
               ref.current?.close();
             }}
           >
-            Nei
+            Bare nødvendige
           </Button>
         </Modal.Footer>
       </Modal>
