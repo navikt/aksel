@@ -88,8 +88,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
         <RenameCSS>
           <SlotElement
             ref={ref}
-            /* TODO: remove navds-theme after CSS-class prefix switch */
-            className={cl("navds-theme aksel-theme", className, theme)}
+            className={cl("aksel-theme", className, theme)}
             data-background={hasBackground}
           >
             {children}
