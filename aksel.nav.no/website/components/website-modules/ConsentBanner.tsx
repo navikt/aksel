@@ -68,7 +68,7 @@ export const ConsentBanner = () => {
           src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
           data-host-url="https://umami.nav.no"
           data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
-          data-auto-track={clientAcceptsTracking ? "true" : "false"}
+          data-auto-track={clientAcceptsTracking}
           data-tag={umamiTag}
         ></Script>
       )}
