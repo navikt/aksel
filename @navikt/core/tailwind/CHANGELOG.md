@@ -1,5 +1,7 @@
 # @navikt/ds-tailwind
 
+## 7.14.0
+
 ## 7.13.0
 
 ### Patch Changes
