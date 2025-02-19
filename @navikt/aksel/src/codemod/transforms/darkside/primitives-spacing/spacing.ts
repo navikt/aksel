@@ -4,6 +4,7 @@ import {
   findComponentImport,
   findJSXElement,
   findProp,
+  legacySpacingTokenMap,
 } from "../darkside.utils";
 
 export default function transformer(file: FileInfo, api: API) {
@@ -82,32 +83,6 @@ export default function transformer(file: FileInfo, api: API) {
   return root.toSource(getLineTerminator(file.source));
 }
 
-const legacySpacingTokenLookup = {
-  "32": "128",
-  "24": "96",
-  "20": "80",
-  "18": "72",
-  "16": "64",
-  "14": "56",
-  "12": "48",
-  "11": "44",
-  "10": "40",
-  "9": "36",
-  "8": "32",
-  "7": "28",
-  "6": "24",
-  "5": "20",
-  "4": "16",
-  "3": "12",
-  "2": "8",
-  "1-alt": "6",
-  "1": "4",
-  "05": "2",
-  "0": "0",
-};
-
-const uniqueSpacingOptions = ["auto", "full", "px"];
-
 /**
  * Takes an old valid spacing-token and returns the new converted space-token
  * oldValue: "8", "8 10", "8 auto", "auto auto", "full px"
@@ -118,16 +93,19 @@ function convertSpacingToSpace(oldValue: string): string {
 
   const newSpacing = [];
   for (const spacingToken of spacingTokens) {
-    if (
-      uniqueSpacingOptions.includes(spacingToken) ||
+    if (spacingToken === "px") {
+      /* We replace "px" with new `space-1` */
+      newSpacing.push(`space-1`);
+    } else if (
+      ["auto", "full", "px"].includes(spacingToken) ||
       spacingToken.startsWith("space-")
     ) {
       newSpacing.push(spacingToken);
-    } else if (!(spacingToken in legacySpacingTokenLookup)) {
+    } else if (!legacySpacingTokenMap.get(spacingToken)) {
       console.warn(`Possibly invalid spacing token found: ${spacingToken}\n`);
       newSpacing.push(spacingToken);
     } else {
-      newSpacing.push(`space-${legacySpacingTokenLookup[spacingToken]}`);
+      newSpacing.push(`space-${legacySpacingTokenMap.get(spacingToken)}`);
     }
   }
 
