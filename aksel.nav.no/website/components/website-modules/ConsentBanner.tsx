@@ -4,6 +4,7 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { Cookies } from "typescript-cookie";
 import { BodyLong, Button, Link, Modal } from "@navikt/ds-react";
+import { classifyTraffic } from "../utils/get-current-environment";
 
 const CONSENT_TRACKER_ID = "aksel-consent";
 
@@ -43,7 +44,8 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 };
 
 export const ConsentBanner = () => {
-  const refUmamiTag = useRef<string>("");
+  const [umamiTag, setUmamiTag] = useState<string | undefined>();
+  const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
 
   useEffect(() => {
     const consentAnswer = getStorageAcceptedTracking();
@@ -51,32 +53,23 @@ export const ConsentBanner = () => {
       ref.current?.showModal();
     }
 
-    const isProdUrl = () => window.location.host === "aksel.nav.no";
-    const isPreview = () => !!document.getElementById("exit-preview-id");
-
-    refUmamiTag.current = isPreview()
-      ? "preview"
-      : isProdUrl()
-        ? "production"
-        : "development";
+    setUmamiTag(classifyTraffic());
 
     setClientAcceptsTracking(getStorageAcceptedTracking() === "accepted");
   }, []);
 
   const ref = useRef<HTMLDialogElement>(null);
 
-  const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
-
   return (
     <div>
-      {refUmamiTag.current && (
+      {umamiTag && (
         <Script
           defer
           src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
           data-host-url="https://umami.nav.no"
           data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
           data-auto-track={clientAcceptsTracking ? "true" : "false"}
-          data-tag={refUmamiTag.current}
+          data-tag={umamiTag}
         ></Script>
       )}
       <Modal
