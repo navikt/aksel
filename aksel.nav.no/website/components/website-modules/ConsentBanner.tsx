@@ -62,7 +62,9 @@ export const ConsentBanner = () => {
     const observer = new MutationObserver(function () {
       if (location.pathname !== previousPath) {
         if (previousPath == "/side/personvernerklaering") {
-          ref.current?.showModal();
+          if (consentAnswer === "undecided" && !disabledModalParam) {
+            ref.current?.showModal();
+          }
         }
         previousPath = location.pathname;
       }
