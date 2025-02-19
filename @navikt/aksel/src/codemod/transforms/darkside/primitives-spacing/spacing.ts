@@ -13,7 +13,7 @@ export default function transformer(file: FileInfo, api: API) {
   /**
    * Migrate Primitives to `space` from `spacing`
    */
-  const primtives = [
+  const primitives = [
     "Box",
     "Box.New",
     "BoxNew",
@@ -39,7 +39,7 @@ export default function transformer(file: FileInfo, api: API) {
     "gap",
   ];
 
-  for (const primitive of primtives) {
+  for (const primitive of primitives) {
     const name = findComponentImport({ file, j, name: primitive });
     if (!name) {
       continue;
@@ -60,19 +60,18 @@ export default function transformer(file: FileInfo, api: API) {
             attrValue.value = convertSpacingToSpace(attrValue.value);
           } else if (attrValue.type === "JSXExpressionContainer") {
             /* padding={{xs: "16", sm: "32"}} */
-            if (attrValue.type === "JSXExpressionContainer") {
-              const expression = attrValue.expression;
-              if (expression.type === "ObjectExpression") {
-                expression.properties.forEach((property) => {
-                  if (property.type === "ObjectProperty") {
-                    if (property.value.type === "StringLiteral") {
-                      property.value.value = convertSpacingToSpace(
-                        property.value.value,
-                      );
-                    }
+            const expression = attrValue.expression;
+            if (expression.type === "ObjectExpression") {
+              /* xs, md, sm */
+              expression.properties.forEach((property) => {
+                if (property.type === "ObjectProperty") {
+                  if (property.value.type === "StringLiteral") {
+                    property.value.value = convertSpacingToSpace(
+                      property.value.value,
+                    );
                   }
-                });
-              }
+                }
+              });
             }
           }
         });
@@ -111,7 +110,7 @@ const uniqueSpacingOptions = ["auto", "full", "px"];
 
 /**
  * Takes an old valid spacing-token and returns the new converted space-token
- * oldValue: "8", "8 10"
+ * oldValue: "8", "8 10", "8 auto", "auto auto", "full px"
  * @returns "space-32", "space-32 space-40"
  */
 function convertSpacingToSpace(oldValue: string): string {
