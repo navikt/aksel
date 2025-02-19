@@ -107,7 +107,7 @@ export const migrations: {
     {
       description:
         "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
-      value: "css-spacing",
+      value: "token-spacing",
       path: "darkside/token-spacing/spacing",
     },
   ],
