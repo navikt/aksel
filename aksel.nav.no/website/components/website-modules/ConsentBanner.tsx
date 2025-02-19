@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { Cookies } from "typescript-cookie";
-import { BodyLong, Button, Link, Modal } from "@navikt/ds-react";
+import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import { classifyTraffic } from "../utils/get-current-environment";
 
 const CONSENT_TRACKER_ID = "aksel-consent";
@@ -44,21 +45,37 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 };
 
 export const ConsentBanner = () => {
+  const ref = useRef<HTMLDialogElement>(null);
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
   const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
 
   useEffect(() => {
     const consentAnswer = getStorageAcceptedTracking();
-    if (consentAnswer === "undecided") {
+
+    const disabledModalParam = new URLSearchParams(window.location.search).get(
+      "no_consent_modal",
+    );
+    if (consentAnswer === "undecided" && !disabledModalParam) {
       ref.current?.showModal();
     }
+    let previousPath = "";
+    const observer = new MutationObserver(function () {
+      if (location.pathname !== previousPath) {
+        if (previousPath == "/side/personvernerklaering") {
+          ref.current?.showModal();
+        }
+        previousPath = location.pathname;
+      }
+    });
+    observer.observe(document, { subtree: true, childList: true });
 
     setUmamiTag(classifyTraffic());
-
     setClientAcceptsTracking(getStorageAcceptedTracking() === "accepted");
-  }, []);
 
-  const ref = useRef<HTMLDialogElement>(null);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div>
@@ -82,7 +99,12 @@ export const ConsentBanner = () => {
             er sikkert, og kan ikke velges bort. Andre brukes til statistikk og
             analyse. Godkjenner du alle, hjelper du oss å lage bedre nettsider
             og tjenester.{" "}
-            <Link href="https://www.nav.no/informasjonskapsler">
+            <Link
+              href="/side/personvernerklaering?no_consent_modal=true"
+              onClick={() => {
+                ref.current?.close();
+              }}
+            >
               Mer om våre informasjonskapsler.
             </Link>
           </BodyLong>
