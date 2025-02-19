@@ -1,5 +1,25 @@
 # @navikt/ds-react
 
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+- Updated dependencies [[`5937d08`](https://github.com/navikt/aksel/commit/5937d085c0bee19fe3625574d58aadffee0c6cf9)]:
+  - @navikt/aksel-icons@7.14.0
+  - @navikt/ds-tokens@7.14.0
+
 ## 7.13.0
 
 ### Patch Changes
