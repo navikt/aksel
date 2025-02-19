@@ -14,7 +14,7 @@ type CookieData = {
   updatedAt: string;
   version: number;
   consents: {
-    tracking?: string;
+    tracking?: CONSENT_TRACKER_STATE;
   };
 };
 
