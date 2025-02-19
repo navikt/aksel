@@ -15,8 +15,9 @@ function findComponentImport(input: {
   j: API["j"];
   file: FileInfo;
   name: string;
+  packageType?: "react" | "tokens";
 }) {
-  const { j, file, name: _name } = input;
+  const { j, file, name: _name, packageType = "react" } = input;
 
   /* Account for sub-components */
   const name = _name.includes(".") ? _name.split(".")[0] : _name;
@@ -26,7 +27,11 @@ function findComponentImport(input: {
   let foundName: string | null = null;
 
   root.find(j.ImportDeclaration).forEach((path) => {
-    if (!isAkselReactImport(path)) {
+    if (packageType === "react" && !isAkselReactImport(path)) {
+      return;
+    }
+
+    if (packageType === "tokens" && !isAkselTokensImport(path)) {
       return;
     }
 
@@ -109,6 +114,17 @@ function isAkselReactImport(path: ASTPath<ImportDeclaration>) {
   return (
     typeof importSource === "string" &&
     importSource.startsWith("@navikt/ds-react")
+  );
+}
+
+/**
+ * Checks if an import is from @navikt/ds-tokens.
+ */
+function isAkselTokensImport(path: ASTPath<ImportDeclaration>) {
+  const importSource = path.node.source.value;
+  return (
+    typeof importSource === "string" &&
+    importSource.startsWith("@navikt/ds-tokens")
   );
 }
 
