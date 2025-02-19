@@ -3728,6 +3728,7 @@ __metadata:
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
+    esbuild: "npm:^0.24.0"
     fast-glob: "npm:3.2.11"
     figlet: "npm:1.6.0"
     is-git-clean: "npm:1.1.0"

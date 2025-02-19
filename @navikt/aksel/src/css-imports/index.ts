@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { exec } from "child_process";
-import { StyleMappings } from "@navikt/ds-css/config/_mappings";
+import { StyleMappings } from "../../../core/css/config/_mappings";
 import { AnswersT, ComponentPrefix } from "./config";
 import { generateImportOutput } from "./generate-output";
 import { getDirectories } from "./get-directories";
