@@ -104,6 +104,12 @@ export const migrations: {
       value: "primitive-spacing",
       path: "darkside/primitives-spacing/spacing",
     },
+    {
+      description:
+        "Updates css, scss and less-variables to use new `space`-tokens. (Works with old and new system)",
+      value: "token-spacing",
+      path: "darkside/token-spacing/spacing",
+    },
   ],
 };
 
