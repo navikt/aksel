@@ -41,7 +41,10 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 
   cookieData.consents.tracking = state;
 
-  Cookies.set(CONSENT_TRACKER_ID, JSON.stringify(cookieData), { expires: 365 });
+  Cookies.set(CONSENT_TRACKER_ID, JSON.stringify(cookieData), {
+    expires: 365,
+    domain: "aksel.ansatt.dev.nav.no",
+  });
 };
 
 export const ConsentBanner = () => {
