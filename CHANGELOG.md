@@ -4,15 +4,17 @@
 
 ### @navikt/ds-react
 
-- DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+- Datepicker: Fixed regression where some fromDate/toDate instances lead to that date ending up as disabled. ([#3602](https://github.com/navikt/aksel/pull/3602))
 
-- MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+* DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
 
-- Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+* MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
 
-- Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+* Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
 
-* Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+* Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
 
 ### @navikt/ds-css
 

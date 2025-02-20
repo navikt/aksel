@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.14.1
+
+### Patch Changes
+
+- Datepicker: Fixed regression where some fromDate/toDate instances lead to that date ending up as disabled. ([#3602](https://github.com/navikt/aksel/pull/3602))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.14.1
+  - @navikt/aksel-icons@7.14.1
+
 ## 7.14.0
 
 ### Minor Changes
