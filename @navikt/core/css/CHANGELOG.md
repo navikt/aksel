@@ -1,5 +1,7 @@
 # @navikt/ds-css
 
+## 7.14.1
+
 ## 7.14.0
 
 ### Minor Changes
