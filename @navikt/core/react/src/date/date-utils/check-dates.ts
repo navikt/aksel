@@ -1,4 +1,9 @@
-import { differenceInCalendarDays, isThisMonth, setYear } from "date-fns";
+import {
+  differenceInCalendarDays,
+  isThisMonth,
+  setYear,
+  startOfDay,
+} from "date-fns";
 
 export const dateIsInCurrentMonth = (
   date: Date,
@@ -21,8 +26,10 @@ export function isDateOutsideRange({
   fromDate?: Date;
   toDate?: Date;
 }): boolean {
-  const isDateAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
-  const isDateBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
+  const isDateAfter =
+    toDate && differenceInCalendarDays(day, startOfDay(toDate)) > 0;
+  const isDateBefore =
+    fromDate && differenceInCalendarDays(startOfDay(fromDate), day) > 0;
 
   return isDateAfter || isDateBefore || false;
 }
