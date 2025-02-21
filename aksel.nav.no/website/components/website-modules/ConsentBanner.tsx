@@ -61,25 +61,9 @@ export const ConsentBanner = () => {
     if (consentAnswer === "undecided" && !disabledModalParam) {
       ref.current?.showModal();
     }
-    let previousPath = "";
-    const observer = new MutationObserver(function () {
-      if (location.pathname !== previousPath) {
-        if (previousPath == "/side/personvernerklaering") {
-          if (consentAnswer === "undecided" && !disabledModalParam) {
-            ref.current?.showModal();
-          }
-        }
-        previousPath = location.pathname;
-      }
-    });
-    observer.observe(document, { subtree: true, childList: true });
 
     setUmamiTag(classifyTraffic());
     setClientAcceptsTracking(getStorageAcceptedTracking() === "accepted");
-
-    return () => {
-      observer.disconnect();
-    };
   }, []);
 
   return (
