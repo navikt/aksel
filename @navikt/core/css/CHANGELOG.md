@@ -1,5 +1,17 @@
 # @navikt/ds-css
 
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
 ## 7.13.0
 
 ### Patch Changes
