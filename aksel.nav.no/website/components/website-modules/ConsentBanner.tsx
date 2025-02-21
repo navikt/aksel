@@ -9,7 +9,11 @@ import { classifyTraffic } from "../utils/get-current-environment";
 
 const CONSENT_TRACKER_ID = "aksel-consent";
 
-type CONSENT_TRACKER_STATE = "undecided" | "accepted" | "rejected";
+type CONSENT_TRACKER_STATE =
+  | "undecided"
+  | "accepted"
+  | "rejected"
+  | "no_action";
 
 type CookieData = {
   createdAt: string;
@@ -21,7 +25,9 @@ type CookieData = {
 };
 
 export const getStorageAcceptedTracking = () => {
-  const rawState = Cookies.get(CONSENT_TRACKER_ID) as string;
+  const rawState = (Cookies.get(CONSENT_TRACKER_ID) ??
+    sessionStorage.getItem(CONSENT_TRACKER_ID)) as string;
+
   if (!rawState) {
     return "undecided";
   }
@@ -41,10 +47,35 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 
   cookieData.consents.tracking = state;
 
-  Cookies.set(CONSENT_TRACKER_ID, JSON.stringify(cookieData), {
+  const cookieJson = JSON.stringify(cookieData);
+
+  if (state === "no_action") {
+    sessionStorage.setItem(CONSENT_TRACKER_ID, cookieJson);
+    return;
+  }
+
+  Cookies.set(CONSENT_TRACKER_ID, cookieJson, {
     expires: 365,
     domain: "aksel.ansatt.dev.nav.no",
   });
+};
+
+/*
+ * close handler will always run after both clicking a button or the 'X'
+ * therefore we have to check if the user closed via one of the buttons
+ * (a cookie or sessionStorage was set) or if it was simply closed via the 'X' (no action taken)
+ * this is where we can then act on "no action taken"*/
+// NOTE: maybe we should have a specific handler for "no action",
+// that is run when either clicking the 'x' or clicking outside (when applicable)
+// now i have to check for side effects (or store separate state)
+// to detect it like checking for cookies/sessionStorage
+const closeHandler = () => {
+  const rawState = (Cookies.get(CONSENT_TRACKER_ID) ??
+    sessionStorage.getItem(CONSENT_TRACKER_ID)) as string;
+
+  if (!rawState) {
+    setStorageAcceptedTracking("no_action");
+  }
 };
 
 export const ConsentBanner = () => {
@@ -81,6 +112,7 @@ export const ConsentBanner = () => {
       <Modal
         ref={ref}
         header={{ heading: "Velg hvilke informasjonskapsler Aksel får bruke" }}
+        onClose={closeHandler}
       >
         <Modal.Body>
           <BodyLong className="mb-2">
