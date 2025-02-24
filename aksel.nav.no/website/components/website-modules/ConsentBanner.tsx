@@ -57,7 +57,7 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 
   Cookies.set(CONSENT_TRACKER_ID, cookieJson, {
     expires: 365,
-    domain: "aksel.ansatt.dev.nav.no",
+    domain: window.location.hostname,
   });
 };
 
@@ -127,6 +127,7 @@ export const ConsentBanner = () => {
                 type="button"
                 onClick={() => {
                   setStorageAcceptedTracking("rejected");
+                  setShowConsentBanner(false);
                 }}
               >
                 Bare nødvendige
@@ -136,6 +137,7 @@ export const ConsentBanner = () => {
                 type="button"
                 onClick={() => {
                   setStorageAcceptedTracking("accepted");
+                  setShowConsentBanner(false);
                   // NOTE: umami _should_ exist on window object here (loaded via <Script>)
                   // we call track manually this _one_ time to ensure the current page is
                   // accounted for, any new page loads will be captured by data-auto-track
