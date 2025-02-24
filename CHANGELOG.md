@@ -1,5 +1,31 @@
 # Changelog
 
+## 7.14
+
+### @navikt/ds-react
+
+- Datepicker: Fixed regression where some fromDate/toDate instances lead to that date ending up as disabled. ([#3602](https://github.com/navikt/aksel/pull/3602))
+
+* DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+* MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+* Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+* Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+### @navikt/ds-css
+
+- DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+* Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+### @navikt/aksel-icons
+
+- Icons: :tada: New icons `LineHeight`, `SpaceHorizontal` and `SpaceVertical`. ([#3587](https://github.com/navikt/aksel/pull/3587))
+
 ## 7.13
 
 ### @navikt/ds-react
