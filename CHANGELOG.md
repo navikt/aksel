@@ -16,6 +16,10 @@
 
 - Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
 
+### @navikt/ds-tokens
+
+- Darkside: :lipstick: Bumped `bg-raised` token to `neutral-200` in darkmode. ([`441d8b7`](https://github.com/navikt/aksel/commit/441d8b732cb4820e6fe37ad87200c5b5eb31e5cf))
+
 ### @navikt/ds-css
 
 - DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
