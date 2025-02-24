@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Script from "next/script";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Cookies } from "typescript-cookie";
-import { BodyLong, Button, Modal } from "@navikt/ds-react";
+import { BodyLong, Button, HStack, Heading, Page } from "@navikt/ds-react";
 import { classifyTraffic } from "../utils/get-current-environment";
 
 const CONSENT_TRACKER_ID = "aksel-consent";
@@ -25,8 +25,7 @@ type CookieData = {
 };
 
 export const getStorageAcceptedTracking = () => {
-  const rawState = (Cookies.get(CONSENT_TRACKER_ID) ??
-    sessionStorage.getItem(CONSENT_TRACKER_ID)) as string;
+  const rawState = Cookies.get(CONSENT_TRACKER_ID) as string;
 
   if (!rawState) {
     return "undecided";
@@ -49,39 +48,16 @@ export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
 
   const cookieJson = JSON.stringify(cookieData);
 
-  if (state === "no_action") {
-    sessionStorage.setItem(CONSENT_TRACKER_ID, cookieJson);
-    return;
-  }
-
   Cookies.set(CONSENT_TRACKER_ID, cookieJson, {
     expires: 365,
     domain: "aksel.ansatt.dev.nav.no",
   });
 };
 
-/*
- * close handler will always run after both clicking a button or the 'X'
- * therefore we have to check if the user closed via one of the buttons
- * (a cookie or sessionStorage was set) or if it was simply closed via the 'X' (no action taken)
- * this is where we can then act on "no action taken"*/
-// NOTE: maybe we should have a specific handler for "no action",
-// that is run when either clicking the 'x' or clicking outside (when applicable)
-// now i have to check for side effects (or store separate state)
-// to detect it like checking for cookies/sessionStorage
-const closeHandler = () => {
-  const rawState = (Cookies.get(CONSENT_TRACKER_ID) ??
-    sessionStorage.getItem(CONSENT_TRACKER_ID)) as string;
-
-  if (!rawState) {
-    setStorageAcceptedTracking("no_action");
-  }
-};
-
 export const ConsentBanner = () => {
-  const ref = useRef<HTMLDialogElement>(null);
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
   const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
+  const [showConsentBanner, setShowConsentBanner] = useState(false);
 
   useEffect(() => {
     const consentAnswer = getStorageAcceptedTracking();
@@ -90,7 +66,7 @@ export const ConsentBanner = () => {
       "no_consent_modal",
     );
     if (consentAnswer === "undecided" && !disabledModalParam) {
-      ref.current?.showModal();
+      setShowConsentBanner(true);
     }
 
     setUmamiTag(classifyTraffic());
@@ -98,7 +74,7 @@ export const ConsentBanner = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative z-10 bg-gray-200">
       {umamiTag && (
         <Script
           defer
@@ -109,54 +85,51 @@ export const ConsentBanner = () => {
           data-tag={umamiTag}
         ></Script>
       )}
-      <Modal
-        ref={ref}
-        header={{ heading: "Velg hvilke informasjonskapsler Aksel får bruke" }}
-        onClose={closeHandler}
-      >
-        <Modal.Body>
-          <BodyLong className="mb-2">
-            Nødvendige informasjonskapsler sørger for at nettstedet fungerer og
-            er sikkert, og kan ikke velges bort. Andre brukes til statistikk og
-            analyse. Godkjenner du alle, hjelper du oss å lage bedre nettsider
-            og tjenester.{" "}
-            <Link
-              href="/side/personvernerklaering?no_consent_modal=true"
+
+      {showConsentBanner && (
+        <Page.Block width="2xl" aria-labelledby="cookie_heading" as="section">
+          <HStack gap="8" wrap={false} className="px-6 py-10" align="center">
+            <div>
+              <Heading size="small" level="2">
+                Vi bruker cookies
+              </Heading>
+              <BodyLong className="mb-2">
+                Nødvendige informasjonskapsler sørger for at nettstedet fungerer
+                og er sikkert, og kan ikke velges bort. Andre brukes til
+                statistikk og analyse. Godkjenner du alle, hjelper du oss å lage
+                bedre nettsider og tjenester.{" "}
+                <Link href="/side/personvernerklaering">
+                  Mer om våre informasjonskapsler.
+                </Link>
+              </BodyLong>
+            </div>
+
+            <Button
+              className="h-fit min-w-fit"
+              type="button"
               onClick={() => {
-                ref.current?.close();
+                setStorageAcceptedTracking("rejected");
               }}
             >
-              Mer om våre informasjonskapsler.
-            </Link>
-          </BodyLong>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button
-            type="button"
-            onClick={() => {
-              setStorageAcceptedTracking("accepted");
-              // NOTE: umami _should_ exist on window object here (loaded via <Script>)
-              // we call track manually this _one_ time to ensure the current page is
-              // accounted for, any new page loads will be captured by data-auto-track
-              // https://umami.is/docs/tracker-configuration
-              umami.track();
-              ref.current?.close();
-            }}
-          >
-            Godkjenn alle
-          </Button>
-          <Button
-            type="button"
-            onClick={() => {
-              setStorageAcceptedTracking("rejected");
-              ref.current?.close();
-            }}
-          >
-            Bare nødvendige
-          </Button>
-        </Modal.Footer>
-      </Modal>
+              Bare nødvendige
+            </Button>
+            <Button
+              className="h-fit min-w-fit"
+              type="button"
+              onClick={() => {
+                setStorageAcceptedTracking("accepted");
+                // NOTE: umami _should_ exist on window object here (loaded via <Script>)
+                // we call track manually this _one_ time to ensure the current page is
+                // accounted for, any new page loads will be captured by data-auto-track
+                // https://umami.is/docs/tracker-configuration
+                umami.track();
+              }}
+            >
+              Godkjenn alle
+            </Button>
+          </HStack>
+        </Page.Block>
+      )}
     </div>
   );
 };
