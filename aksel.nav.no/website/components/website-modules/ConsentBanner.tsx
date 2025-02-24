@@ -4,7 +4,14 @@ import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import { Cookies } from "typescript-cookie";
-import { BodyLong, Button, HStack, Heading, Page } from "@navikt/ds-react";
+import {
+  BodyLong,
+  Button,
+  HStack,
+  Heading,
+  Page,
+  Stack,
+} from "@navikt/ds-react";
 import { classifyTraffic } from "../utils/get-current-environment";
 
 const CONSENT_TRACKER_ID = "aksel-consent";
@@ -88,7 +95,13 @@ export const ConsentBanner = () => {
 
       {showConsentBanner && (
         <Page.Block width="2xl" aria-labelledby="cookie_heading" as="section">
-          <HStack gap="8" wrap={false} className="px-6 py-10" align="center">
+          <Stack
+            gap={{ xs: "4", lg: "8" }}
+            wrap={false}
+            className="px-6 py-10"
+            align={{ xs: "start", lg: "center" }}
+            direction={{ xs: "column", lg: "row" }}
+          >
             <div>
               <Heading size="small" level="2">
                 Vi bruker cookies
@@ -104,30 +117,36 @@ export const ConsentBanner = () => {
               </BodyLong>
             </div>
 
-            <Button
-              className="h-fit min-w-fit"
-              type="button"
-              onClick={() => {
-                setStorageAcceptedTracking("rejected");
-              }}
+            <HStack
+              gap="2"
+              align={{ xs: "start", lg: "center" }}
+              className="min-w-fit"
             >
-              Bare nødvendige
-            </Button>
-            <Button
-              className="h-fit min-w-fit"
-              type="button"
-              onClick={() => {
-                setStorageAcceptedTracking("accepted");
-                // NOTE: umami _should_ exist on window object here (loaded via <Script>)
-                // we call track manually this _one_ time to ensure the current page is
-                // accounted for, any new page loads will be captured by data-auto-track
-                // https://umami.is/docs/tracker-configuration
-                umami.track();
-              }}
-            >
-              Godkjenn alle
-            </Button>
-          </HStack>
+              <Button
+                className="h-fit min-w-fit"
+                type="button"
+                onClick={() => {
+                  setStorageAcceptedTracking("rejected");
+                }}
+              >
+                Bare nødvendige
+              </Button>
+              <Button
+                className="h-fit min-w-fit"
+                type="button"
+                onClick={() => {
+                  setStorageAcceptedTracking("accepted");
+                  // NOTE: umami _should_ exist on window object here (loaded via <Script>)
+                  // we call track manually this _one_ time to ensure the current page is
+                  // accounted for, any new page loads will be captured by data-auto-track
+                  // https://umami.is/docs/tracker-configuration
+                  umami.track();
+                }}
+              >
+                Godkjenn alle
+              </Button>
+            </HStack>
+          </Stack>
         </Page.Block>
       )}
     </div>
