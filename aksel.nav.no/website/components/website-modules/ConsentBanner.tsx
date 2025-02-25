@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import NextLink from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import { Cookies } from "typescript-cookie";
@@ -9,6 +9,7 @@ import {
   Button,
   HStack,
   Heading,
+  Link,
   Page,
   Stack,
 } from "@navikt/ds-react";
@@ -111,7 +112,7 @@ export const ConsentBanner = () => {
                 og er sikkert, og kan ikke velges bort. Andre brukes til
                 statistikk og analyse. Godkjenner du alle, hjelper du oss å lage
                 bedre nettsider og tjenester.{" "}
-                <Link href="/side/personvernerklaering">
+                <Link as={NextLink} href="/side/personvernerklaering">
                   Mer om våre informasjonskapsler.
                 </Link>
               </BodyLong>
