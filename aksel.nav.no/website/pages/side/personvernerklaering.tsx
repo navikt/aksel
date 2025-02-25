@@ -1,7 +1,6 @@
 import NextLink from "next/link";
-import React from "react";
+import React, { FormEvent } from "react";
 import {
-  Bleed,
   BodyLong,
   Box,
   Button,
@@ -18,7 +17,7 @@ const handleChange = (e) => {
   console.log({ e });
 };
 
-const submitForm = (e: FormDataEvent) => {
+const submitForm = (e: FormEvent) => {
   e.preventDefault();
   // eslint-disable-next-line no-console
   console.log({ e });
@@ -93,28 +92,26 @@ const Page = () => {
                 verktøyet Amplitude i analysearbeidet.
               </BodyLong>
 
-              <Bleed asChild marginInline="8" reflectivePadding>
-                <Box
-                  borderRadius="large"
-                  background="surface-alt-1-subtle"
-                  className="py-8"
-                >
-                  <Heading size="large" level="2" className="mb-4">
-                    Mine informasjonskapsler
-                  </Heading>
-                  <form onSubmit={submitForm}>
-                    <RadioGroup
-                      className="mb-4"
-                      legend="Velg hvilke informasjonskapsler du vil lagre på aksel.nav.no"
-                      onChange={handleChange}
-                    >
-                      <Radio value="tracking_no">Bare nødvendige</Radio>
-                      <Radio value="tracking_yes">Godkjenn alle</Radio>
-                    </RadioGroup>
-                    <Button>Lagre</Button>
-                  </form>
-                </Box>
-              </Bleed>
+              <Box
+                borderRadius="large"
+                background="surface-neutral-subtle"
+                className="p-6"
+              >
+                <Heading size="large" level="2" className="mb-4">
+                  Mine informasjonskapsler
+                </Heading>
+                <form onSubmit={submitForm}>
+                  <RadioGroup
+                    className="mb-4"
+                    legend="Velg hvilke informasjonskapsler du vil lagre på aksel.nav.no"
+                    onChange={handleChange}
+                  >
+                    <Radio value="tracking_no">Bare nødvendige</Radio>
+                    <Radio value="tracking_yes">Godkjenn alle</Radio>
+                  </RadioGroup>
+                  <Button>Lagre</Button>
+                </form>
+              </Box>
             </div>
           </div>
         </div>
