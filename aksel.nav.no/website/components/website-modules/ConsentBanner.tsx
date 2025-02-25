@@ -82,7 +82,7 @@ export const ConsentBanner = () => {
   }, []);
 
   return (
-    <div className="relative z-10 bg-gray-200">
+    <div className="relative z-10 bg-[#ECEDEF]">
       {umamiTag && (
         <Script
           defer

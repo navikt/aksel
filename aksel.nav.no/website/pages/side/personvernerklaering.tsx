@@ -1,8 +1,8 @@
+import Head from "next/head";
 import NextLink from "next/link";
 import React, { FormEvent } from "react";
 import {
   BodyLong,
-  Box,
   Button,
   Heading,
   Link,
@@ -26,6 +26,9 @@ const submitForm = (e: FormEvent) => {
 const Page = () => {
   return (
     <>
+      <Head>
+        <title>Personvern og Sikkerhet på aksel.nav.no</title>
+      </Head>
       <Header variant="subtle" />
       <main
         tabIndex={-1}
@@ -53,14 +56,14 @@ const Page = () => {
                 kan du lese mer i{" "}
                 <Link
                   as={NextLink}
-                  href="https://www.nav.no/no/nav-og-samfunn/om-nav/personvern-i-arbeids-og-velferdsetaten"
+                  href="https://www.nav.no/informasjonskapsler"
                 >
                   NAVs generelle personvernerklæring
                 </Link>
                 .
               </BodyLong>
-              <Heading size="large" level="2" className="mb-4">
-                Bruk av informasjonskapsler (cookies)
+              <Heading size="large" level="2" spacing>
+                Bruk av informasjonskapsler
               </Heading>
               <BodyLong spacing>
                 Når du besøker nettsiden bruker vi informasjonskapsler
@@ -92,13 +95,52 @@ const Page = () => {
                 verktøyet Amplitude i analysearbeidet.
               </BodyLong>
 
-              <Box
-                borderRadius="large"
-                background="surface-neutral-subtle"
-                className="p-6"
-              >
-                <Heading size="large" level="2" className="mb-4">
-                  Mine informasjonskapsler
+              <Heading size="medium" level="3" spacing>
+                Bare nødvendige
+              </Heading>
+
+              <Heading size="small" level="4" spacing>
+                pause-animations
+              </Heading>
+              <BodyLong spacing>
+                For å huske om du har skrudd av animasjoner på forsiden.
+              </BodyLong>
+              <Heading size="small" level="4" spacing>
+                aksel-consent
+              </Heading>
+
+              <BodyLong spacing>
+                Brukes for å huske samtykket for informasjonskapsler du har gitt
+                eller avslått på aksel.nav.no. Versjonen hjelper oss med å
+                avgjøre om vi må vise banneret på nytt hvis det har kommet nye
+                cookies siden sist du ga ditt samtykke. Lagres til vi ber om
+                nytt samtykke etter 365 dager.
+              </BodyLong>
+
+              <Heading size="medium" level="3" spacing>
+                Godkjenn alle
+              </Heading>
+
+              <BodyLong spacing>
+                Ved å trykke &quot;godkjenn alle&quot; skrur vi på
+                analyseverktøyet Umami.
+              </BodyLong>
+
+              <Heading size="small" level="4" spacing>
+                Umami
+              </Heading>
+              <BodyLong spacing>
+                Umami brukes til statistikk og analyse av hvordan nav.no brukes.
+                Umami bruker ikke informasjonskapsler, men henter inn
+                opplysninger om nettleseren din for å lage en unik ID. Denne
+                ID-en brukes for å skille deg fra andre brukere. For å hindre
+                identifisering, bruker vi en egenutviklet proxy som vasker bort
+                deler av IP-adressen din før dataene sendes til verktøyet.
+              </BodyLong>
+
+              <div className="rounded-md border border-border-subtle bg-[#ecedef] p-6">
+                <Heading size="large" level="2" spacing>
+                  Mine valg
                 </Heading>
                 <form onSubmit={submitForm}>
                   <RadioGroup
@@ -111,7 +153,7 @@ const Page = () => {
                   </RadioGroup>
                   <Button>Lagre</Button>
                 </form>
-              </Box>
+              </div>
             </div>
           </div>
         </div>
