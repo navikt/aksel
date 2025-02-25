@@ -1,6 +1,6 @@
 import Head from "next/head";
 import NextLink from "next/link";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import {
   BodyLong,
   Button,
@@ -11,19 +11,49 @@ import {
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
+import {
+  getStorageAcceptedTracking,
+  setStorageAcceptedTracking,
+} from "@/web/ConsentBanner";
 
-const handleChange = (e) => {
-  // eslint-disable-next-line no-console
-  console.log({ e });
-};
+type TRACKING_CHOICES = "tracking_yes" | "tracking_no" | "";
 
-const submitForm = (e: FormEvent) => {
-  e.preventDefault();
-  // eslint-disable-next-line no-console
-  console.log({ e });
+const submitForm = (event: FormEvent) => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget as HTMLFormElement);
+
+  if (data.get("acceptedTracking") === "tracking_yes") {
+    setStorageAcceptedTracking("accepted");
+  } else if (data.get("acceptedTracking") === "tracking_no") {
+    setStorageAcceptedTracking("rejected");
+  }
+  return false;
 };
 
 const Page = () => {
+  const [userPreference, setUserPreference] = useState<TRACKING_CHOICES>("");
+
+  const handleChange = (event: TRACKING_CHOICES) => {
+    setUserPreference(event);
+  };
+
+  useEffect(() => {
+    const acceptedTracking = getStorageAcceptedTracking();
+
+    switch (acceptedTracking) {
+      case "accepted":
+        setUserPreference("tracking_yes");
+        break;
+      case "rejected":
+        setUserPreference("tracking_no");
+        break;
+      case "undecided":
+      default:
+        setUserPreference("");
+        break;
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -147,11 +177,13 @@ const Page = () => {
                     className="mb-4"
                     legend="Velg hvilke informasjonskapsler du vil lagre på aksel.nav.no"
                     onChange={handleChange}
+                    value={userPreference}
+                    name="acceptedTracking"
                   >
                     <Radio value="tracking_no">Bare nødvendige</Radio>
                     <Radio value="tracking_yes">Godkjenn alle</Radio>
                   </RadioGroup>
-                  <Button>Lagre</Button>
+                  <Button type="submit">Lagre</Button>
                 </form>
               </div>
             </div>
