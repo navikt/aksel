@@ -110,6 +110,12 @@ export const migrations: {
       value: "token-spacing",
       path: "darkside/token-spacing/spacing",
     },
+    {
+      description:
+        "Updates js-tokens to use new `space`-tokens. (Works with old and new system)",
+      value: "token-spacing-js",
+      path: "darkside/token-spacing-js/spacing",
+    },
   ],
 };
 
