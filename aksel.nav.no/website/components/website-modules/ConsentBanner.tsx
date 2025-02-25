@@ -104,7 +104,7 @@ export const ConsentBanner = () => {
             direction={{ xs: "column", lg: "row" }}
           >
             <div>
-              <Heading size="small" level="2">
+              <Heading id="cookie_heading" size="small" level="2">
                 Vi bruker cookies
               </Heading>
               <BodyLong className="mb-2">
