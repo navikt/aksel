@@ -112,7 +112,7 @@ export const ConsentBanner = () => {
                 og er sikkert, og kan ikke velges bort. Andre brukes til
                 statistikk og analyse. Godkjenner du alle, hjelper du oss å lage
                 bedre nettsider og tjenester.{" "}
-                <Link as={NextLink} href="/side/personvernerklaering">
+                <Link as={NextLink} href="/personvernerklaering">
                   Mer om våre informasjonskapsler.
                 </Link>
               </BodyLong>
