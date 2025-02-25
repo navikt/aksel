@@ -1,8 +1,28 @@
 import NextLink from "next/link";
 import React from "react";
-import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import {
+  Bleed,
+  BodyLong,
+  Box,
+  Button,
+  Heading,
+  Link,
+  Radio,
+  RadioGroup,
+} from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
+
+const handleChange = (e) => {
+  // eslint-disable-next-line no-console
+  console.log({ e });
+};
+
+const submitForm = (e: FormDataEvent) => {
+  e.preventDefault();
+  // eslint-disable-next-line no-console
+  console.log({ e });
+};
 
 const Page = () => {
   return (
@@ -72,6 +92,29 @@ const Page = () => {
                 aksel.nav.no brukes, uten å identifisere IP-adresser. Vi bruker
                 verktøyet Amplitude i analysearbeidet.
               </BodyLong>
+
+              <Bleed asChild marginInline="8" reflectivePadding>
+                <Box
+                  borderRadius="large"
+                  background="surface-alt-1-subtle"
+                  className="py-8"
+                >
+                  <Heading size="large" level="2" className="mb-4">
+                    Mine informasjonskapsler
+                  </Heading>
+                  <form onSubmit={submitForm}>
+                    <RadioGroup
+                      className="mb-4"
+                      legend="Velg hvilke informasjonskapsler du vil lagre på aksel.nav.no"
+                      onChange={handleChange}
+                    >
+                      <Radio value="tracking_no">Bare nødvendige</Radio>
+                      <Radio value="tracking_yes">Godkjenn alle</Radio>
+                    </RadioGroup>
+                    <Button>Lagre</Button>
+                  </form>
+                </Box>
+              </Bleed>
             </div>
           </div>
         </div>
