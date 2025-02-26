@@ -12,6 +12,13 @@ export default function transformer(file: FileInfo) {
   Object.entries(updatedTokens).forEach(([oldToken, config]) => {
     const oldCSSVar = `--a-${oldToken}`;
 
+    /* We update all re-definitions of a token to a "legacy" version */
+    const replaceRegex = new RegExp("(" + `${oldToken}:` + ")", "gm");
+    src = src.replace(
+      replaceRegex,
+      `--aksel-legacy${oldToken.replace("--", "__")}:`,
+    );
+
     if (config.ref.length > 0) {
       src = replaceTokenWithReference({
         src,
