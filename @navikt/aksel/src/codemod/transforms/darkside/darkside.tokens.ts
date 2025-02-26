@@ -434,7 +434,10 @@ export const newTokens = [
   "space-0",
 ];
 
-export const updatedTokens = {
+export const updatedTokens: Record<
+  string,
+  { ref: string; raw: string; replacement: string; comment?: string }
+> = {
   "purple-900": {
     ref: "",
     raw: "rgba(31, 20, 47, 1)",

@@ -38,6 +38,7 @@ export default function transformer(file: FileInfo) {
       documentLegacyReferences({
         src,
         oldToken: oldCSSVar,
+        comment: config.comment,
       });
     }
   });
@@ -86,9 +87,11 @@ function replaceTokenWithReference({
 function documentLegacyReferences({
   src,
   oldToken,
+  comment,
 }: {
   src: string;
   oldToken: string;
+  comment?: string;
 }) {
   const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
   const SCSSRgx = new RegExp(
@@ -101,16 +104,18 @@ function documentLegacyReferences({
   );
 
   if (CSSRgx.test(src)) {
-    messages.get("Token update")?.messages.push(oldToken);
+    addMessage(oldToken, comment);
   } else if (SCSSRgx.test(src)) {
-    messages
-      .get("Token update")
-      ?.messages.push(translateToken(oldToken, "scss"));
+    addMessage(translateToken(oldToken, "scss"), comment);
   } else if (LESSRgx.test(src)) {
-    messages
-      .get("Token update")
-      ?.messages.push(translateToken(oldToken, "less"));
+    addMessage(translateToken(oldToken, "less"), comment);
   }
+}
+
+function addMessage(message: string, comment?: string) {
+  messages
+    .get("Token update")
+    ?.messages.push(`${comment ? `/* ${comment} */\n` : ""}${message}`);
 }
 
 function formatMessage(input: string[]) {
