@@ -1,7 +1,7 @@
 .test {
-  margin: var(--a-space-16);
-  padding: var(--a-space-64);
-  padding: var(--a-space-0);
-  padding: var(--a-space-6);
-  padding: var(--a-space-2);
+  margin: var(--ax-space-16);
+  padding: var(--ax-space-64);
+  padding: var(--ax-space-0);
+  padding: var(--ax-space-6);
+  padding: var(--ax-space-2);
 }

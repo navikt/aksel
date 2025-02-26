@@ -4,20 +4,6 @@ import { messages } from "../../../run-codeshift";
 import { translateToken } from "../../../utils/translate-token";
 import { updatedTokens } from "../darkside.tokens";
 
-function formatMessage(input: string[]) {
-  if (input.length === 0) {
-    return;
-  }
-
-  console.info(chalk.green(`\nToken update`));
-  console.info(
-    chalk.green(
-      `Found use of ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
-    ),
-  );
-  console.info(`${input.map((token) => `\n${token}`).join("")}`);
-}
-
 /**
  * Updates old tokens to new names.
  * Replaces global and semantic tokens with avalaible replacement.
@@ -45,7 +31,7 @@ export default function transformer(file: FileInfo) {
     if (config.replacement.length > 0) {
       src = replaceTokenWithReference({
         src,
-        newToken: config.replacement,
+        newToken: `--ax-${config.replacement}`,
         oldToken: oldCSSVar,
       });
     } else {
@@ -82,6 +68,10 @@ function replaceTokenWithReference({
   );
 
   let fileSrc = src;
+
+  if (CSSRgx.test(fileSrc)) {
+    console.info("Found CSS token", oldToken, newToken);
+  }
 
   fileSrc = fileSrc.replace(CSSRgx, newToken);
   fileSrc = fileSrc.replace(SCSSRgx, translateToken(newToken, "scss"));
@@ -121,4 +111,18 @@ function documentLegacyReferences({
       .get("Token update")
       ?.messages.push(translateToken(oldToken, "less"));
   }
+}
+
+function formatMessage(input: string[]) {
+  if (input.length === 0) {
+    return;
+  }
+
+  console.info(chalk.green(`\nToken update`));
+  console.info(
+    chalk.green(
+      `Found use of ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
+    ),
+  );
+  console.info(`${input.map((token) => `\n${token}`).join("")}`);
 }
