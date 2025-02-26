@@ -115,7 +115,7 @@ function documentLegacyReferences({
 function addMessage(message: string, comment?: string) {
   messages
     .get("Token update")
-    ?.messages.push(`${comment ? `/* ${comment} */\n` : ""}${message}`);
+    ?.messages.push(`${comment ? `\n/* ${comment} */\n` : ""}${message}`);
 }
 
 function formatMessage(input: string[]) {
@@ -129,5 +129,10 @@ function formatMessage(input: string[]) {
       `Found use of ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
     ),
   );
-  console.info(`${input.map((token) => `\n${token}`).join("")}`);
+
+  console.info(
+    `${[...new Set(input)]
+      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
+      .join("")}`,
+  );
 }
