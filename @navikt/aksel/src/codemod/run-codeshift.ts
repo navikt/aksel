@@ -16,7 +16,7 @@ const ignoreNodeModules = [
 export const messages = new Map<
   string,
   {
-    format: (input: string[]) => string;
+    format: (input: string[]) => void;
     messages: string[];
   }
 >();

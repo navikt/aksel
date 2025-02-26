@@ -15,7 +15,7 @@ function formatMessage(input: string[]) {
       `\nFound ${input.length} tokens no longer supported. You will need to add this to your CSS/SCSS/LESS files manually to keep using them.`,
     ),
   );
-  return `${input.map((token) => `\n${token}`).join("")}`;
+  console.info(`${input.map((token) => `\n${token}`).join("")}`);
 }
 
 /**
