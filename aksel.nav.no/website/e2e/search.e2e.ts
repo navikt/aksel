@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Check website search", () => {
   test("Check newest article list", async ({ page }) => {
-    await page.goto("http://localhost:3000/?no_consent_modal=true");
+    await page.goto("http://localhost:3000/");
     await page.waitForLoadState("domcontentloaded");
     await page.waitForTimeout(5000);
     await page.getByRole("button", { name: "Søk" }).click();
@@ -16,7 +16,7 @@ test.describe("Check website search", () => {
   });
 
   test("Test searching for 'link'", async ({ page }) => {
-    await page.goto("http://localhost:3000/?no_consent_modal=true");
+    await page.goto("http://localhost:3000/");
     await page.waitForLoadState("domcontentloaded");
     await page.waitForTimeout(5000);
     await page.getByRole("button", { name: "Søk" }).click();
