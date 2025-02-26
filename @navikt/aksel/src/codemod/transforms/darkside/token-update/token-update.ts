@@ -12,7 +12,7 @@ function formatMessage(input: string[]) {
   console.info(chalk.green(`\nToken update`));
   console.info(
     chalk.green(
-      `Found ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
+      `Found use of ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
     ),
   );
   console.info(`${input.map((token) => `\n${token}`).join("")}`);
