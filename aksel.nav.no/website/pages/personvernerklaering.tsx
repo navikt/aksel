@@ -32,7 +32,6 @@ const Page = () => {
     } else if (data.get("acceptedTracking") === "tracking_no") {
       updateConsent("rejected");
     }
-    return false;
   };
 
   useEffect(() => {
@@ -118,7 +117,7 @@ const Page = () => {
               <BodyLong spacing>
                 Opplysningene brukes til å kartlegge hvordan og hvor mye
                 aksel.nav.no brukes, uten å identifisere IP-adresser. Vi bruker
-                verktøyet Amplitude i analysearbeidet.
+                verktøyet Umami i analysearbeidet.
               </BodyLong>
 
               <Heading size="medium" level="3" spacing>
