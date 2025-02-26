@@ -1,4 +1,5 @@
 import type { FileInfo } from "jscodeshift";
+import { messages } from "../../../run-codeshift";
 import { translateToken } from "../../../utils/translate-token";
 import { updatedTokens } from "../darkside.tokens";
 
@@ -11,6 +12,8 @@ export default function transformer(file: FileInfo) {
 
   Object.entries(updatedTokens).forEach(([oldToken, config]) => {
     const oldCSSVar = `--a-${oldToken}`;
+
+    messages.get("token-update")?.push(oldToken);
 
     /* We update all re-definitions of a token to a "legacy" version */
     const replaceRegex = new RegExp("(" + `${oldToken}:` + ")", "gm");
