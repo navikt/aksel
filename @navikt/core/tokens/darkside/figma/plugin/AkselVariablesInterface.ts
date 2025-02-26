@@ -86,7 +86,8 @@ export class AkselVariablesInterface {
       this.Figma.setVariableMetadata(variable, {
         codeSyntax: token.code,
         description: token.comment ?? "",
-        hiddenFromPublishing: collection.hiddenFromPublishing,
+        /* We always hide global colors from publishing in figma */
+        hiddenFromPublishing: true,
         scopes: token.scopes,
       });
     }
