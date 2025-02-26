@@ -1841,7 +1841,7 @@ export const updatedTokens: Record<
   "icon-default": {
     ref: "gray-900",
     raw: "rgba(35, 38, 42, 1)",
-    replacement: "text-neutral-default",
+    replacement: "text-neutral",
   },
   "border-alt-3": {
     ref: "deepblue-500",
