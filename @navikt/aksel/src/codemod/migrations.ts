@@ -116,6 +116,12 @@ export const migrations: {
       value: "token-spacing-js",
       path: "darkside/token-spacing-js/spacing",
     },
+    {
+      description:
+        "Updates css, scss and less-variables to use new token-prefix",
+      value: "token-update",
+      path: "darkside/token-update/token-update",
+    },
   ],
 };
 
