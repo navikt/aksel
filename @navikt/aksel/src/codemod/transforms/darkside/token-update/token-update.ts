@@ -120,7 +120,11 @@ function addMessage(message: string, comment?: string) {
 
 function formatMessage(input: string[]) {
   if (input.length === 0) {
-    return;
+    console.info(
+      chalk.green(
+        `Found no legacy-tokens 🎉, you are now migrated over to the darkside.`,
+      ),
+    );
   }
 
   console.info(chalk.green(`\nToken update`));
