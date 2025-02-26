@@ -10,6 +10,8 @@ import { updatedTokens } from "../darkside.tokens";
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
+  messages.set("token-update", []);
+
   Object.entries(updatedTokens).forEach(([oldToken, config]) => {
     const oldCSSVar = `--a-${oldToken}`;
 
