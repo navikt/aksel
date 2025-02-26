@@ -4,6 +4,7 @@ import "@navikt/ds-tokens/darkside-css";
 import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { SanityDataContext } from "@/hooks/useSanityData";
+import { ConsentBanner } from "@/web/ConsentBanner";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
 
@@ -33,6 +34,10 @@ function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <>
+      <ConsentBanner
+        hide={!useGlobalStyles}
+        defaultShow={pageProps.showCookieBanner}
+      />
       <BaseSEO path={router.asPath} />
       <SanityDataContext.Provider
         value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}

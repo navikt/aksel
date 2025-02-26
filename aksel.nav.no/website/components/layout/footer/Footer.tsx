@@ -54,7 +54,7 @@ const Footer = () => {
                 text: "Hva er Aksel?",
               },
               {
-                url: "/side/personvernerklaering",
+                url: "/personvernerklaering",
                 text: "Personvernerklæring",
               },
               {

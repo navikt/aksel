@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": ["node"],
+    "types": ["node", "umami"],
     "paths": {
       "@/sb-util": ["./.storybook/utils.tsx"],
       "@/types": ["./components/types/index.ts"],
