@@ -34,7 +34,10 @@ function App({ Component, pageProps, router }: AppProps) {
 
   return (
     <>
-      <ConsentBanner />
+      <ConsentBanner
+        hide={!useGlobalStyles}
+        defaultShow={pageProps.showCookieBanner}
+      />
       <BaseSEO path={router.asPath} />
       <SanityDataContext.Provider
         value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}

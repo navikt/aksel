@@ -15,10 +15,16 @@ import {
 import { classifyTraffic } from "../utils/get-current-environment";
 import useConsent from "./useConsent";
 
-export const ConsentBanner = () => {
+export const ConsentBanner = ({
+  defaultShow = false,
+  hide = false,
+}: {
+  defaultShow?: boolean;
+  hide?: boolean;
+}) => {
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
   const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
-  const [showConsentBanner, setShowConsentBanner] = useState(false);
+  const [showConsentBanner, setShowConsentBanner] = useState(defaultShow);
   const { consent, updateConsent } = useConsent();
 
   useEffect(() => {
@@ -48,7 +54,7 @@ export const ConsentBanner = () => {
         ></Script>
       )}
 
-      {showConsentBanner && (
+      {!hide && showConsentBanner && (
         <Page.Block width="2xl" aria-labelledby="cookie_heading" as="section">
           <Stack
             gap={{ xs: "4", lg: "8" }}

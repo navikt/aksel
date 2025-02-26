@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Cookies } from "typescript-cookie";
 
-const CONSENT_TRACKER_ID = "aksel-consent";
+export const CONSENT_TRACKER_ID = "aksel-consent";
 
 type CONSENT_TRACKER_STATE =
   | "undecided"
