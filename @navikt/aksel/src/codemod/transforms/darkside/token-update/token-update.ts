@@ -70,12 +70,6 @@ function replaceTokenWithReference({
 
   let fileSrc = src;
 
-  /* if (CSSRgx.test(fileSrc)) {
-    console.info("Found CSS token", oldToken, newToken);
-    console.info("before", fileSrc);
-    console.info("after", fileSrc.replace(CSSRgx, newToken));
-  } */
-
   fileSrc = fileSrc.replace(CSSRgx, newToken);
   fileSrc = fileSrc.replace(SCSSRgx, translateToken(newToken, "scss"));
   fileSrc = fileSrc.replace(LESSRgx, translateToken(newToken, "less"));
