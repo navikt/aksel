@@ -16,11 +16,10 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc -p tsconfig.json",
+    "build": "yarn clean && yarn esbuild src/index.ts --packages=external --platform=node --target=es2015 --target=node16 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='dist/index.js'",
     "dev": "tsc --watch -p tsconfig.json",
     "test": "vitest run",
-    "test:watch": "vitest watch",
-    "testbundle": "yarn esbuild src/index.ts --packages=external --platform=node --target=es2015 --target=node16 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='dist/index.js'"
+    "test:watch": "vitest watch"
   },
   "bin": "./dist/index.js",
   "repository": {
