@@ -42,10 +42,10 @@ export default function transformer(file: FileInfo) {
       `--aksel-legacy${oldToken.replace("--", "__")}:`,
     );
 
-    if (config.ref.length > 0) {
+    if (config.replacement.length > 0) {
       src = replaceTokenWithReference({
         src,
-        newToken: config.ref,
+        newToken: config.replacement,
         oldToken: oldCSSVar,
       });
     } else {
