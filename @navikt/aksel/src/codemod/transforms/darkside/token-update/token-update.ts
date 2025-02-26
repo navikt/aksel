@@ -12,24 +12,45 @@ export default function transformer(file: FileInfo) {
   Object.entries(updatedTokens).forEach(([oldToken, config]) => {
     const oldCSSVar = `--a-${oldToken}`;
 
-    if (config.ref.length > 1) {
-      const newCSSVar = `--ax-${config.ref}`;
-      const CSSRgx = new RegExp("(" + oldCSSVar + ")", "gm");
-      const SCSSRgx = new RegExp(
-        "(\\" + translateToken(oldCSSVar, "scss") + ")",
-        "gm",
-      );
-      const LESSRgx = new RegExp(
-        "(" + translateToken(oldCSSVar, "less") + ")",
-        "gm",
-      );
-
-      src = src.replace(CSSRgx, newCSSVar);
-      src = src.replace(SCSSRgx, translateToken(newCSSVar, "scss"));
-      src = src.replace(LESSRgx, translateToken(newCSSVar, "less"));
-      return;
+    if (config.ref.length > 0) {
+      src = replaceTokenWithReference({
+        src,
+        newToken: config.ref,
+        oldToken: oldCSSVar,
+      });
     }
   });
 
   return file.source;
+}
+
+/**
+ * Replaces old token with new token reference.
+ */
+function replaceTokenWithReference({
+  src,
+  newToken,
+  oldToken,
+}: {
+  src: string;
+  newToken: string;
+  oldToken: string;
+}) {
+  const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
+  const SCSSRgx = new RegExp(
+    "(\\" + translateToken(oldToken, "scss") + ")",
+    "gm",
+  );
+  const LESSRgx = new RegExp(
+    "(" + translateToken(oldToken, "less") + ")",
+    "gm",
+  );
+
+  let fileSrc = src;
+
+  fileSrc = fileSrc.replace(CSSRgx, newToken);
+  fileSrc = fileSrc.replace(SCSSRgx, translateToken(newToken, "scss"));
+  fileSrc = fileSrc.replace(LESSRgx, translateToken(newToken, "less"));
+
+  return fileSrc;
 }
