@@ -13,7 +13,13 @@ const ignoreNodeModules = [
   "**/.next/**",
 ];
 
-export const messages = new Map<string, string[]>();
+export const messages = new Map<
+  string,
+  {
+    format: (input: string[]) => string;
+    messages: string[];
+  }
+>();
 
 export async function runCodeshift(
   input: string,
@@ -53,9 +59,8 @@ export async function runCodeshift(
 
     warning && console.info(`\n${chalk.yellow(warning)}\n`);
 
-    messages.forEach((value, key) => {
-      console.info(chalk.green(`\n${key}:`));
-      value.forEach((message) => console.info(`- ${message}`));
+    messages.forEach((value) => {
+      value.format(value.messages);
     });
   } catch (error) {
     program.error(chalk.red("Error:", error.message));
