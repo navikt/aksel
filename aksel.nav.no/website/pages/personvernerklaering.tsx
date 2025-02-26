@@ -11,36 +11,32 @@ import {
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import {
-  getStorageAcceptedTracking,
-  setStorageAcceptedTracking,
-} from "@/web/ConsentBanner";
+import useConsent from "@/web/useConsent";
 
 type TRACKING_CHOICES = "tracking_yes" | "tracking_no" | "";
 
-const submitForm = (event: FormEvent) => {
-  event.preventDefault();
-  const data = new FormData(event.currentTarget as HTMLFormElement);
-
-  if (data.get("acceptedTracking") === "tracking_yes") {
-    setStorageAcceptedTracking("accepted");
-  } else if (data.get("acceptedTracking") === "tracking_no") {
-    setStorageAcceptedTracking("rejected");
-  }
-  return false;
-};
-
 const Page = () => {
   const [userPreference, setUserPreference] = useState<TRACKING_CHOICES>("");
+  const { consent, updateConsent } = useConsent();
 
   const handleChange = (event: TRACKING_CHOICES) => {
     setUserPreference(event);
   };
 
-  useEffect(() => {
-    const acceptedTracking = getStorageAcceptedTracking();
+  const submitForm = (event: FormEvent) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget as HTMLFormElement);
 
-    switch (acceptedTracking) {
+    if (data.get("acceptedTracking") === "tracking_yes") {
+      updateConsent("accepted");
+    } else if (data.get("acceptedTracking") === "tracking_no") {
+      updateConsent("rejected");
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    switch (consent) {
       case "accepted":
         setUserPreference("tracking_yes");
         break;
@@ -52,7 +48,7 @@ const Page = () => {
         setUserPreference("");
         break;
     }
-  }, []);
+  }, [consent]);
 
   return (
     <>

@@ -3,7 +3,6 @@
 import NextLink from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { Cookies } from "typescript-cookie";
 import {
   BodyLong,
   Button,
@@ -14,72 +13,27 @@ import {
   Stack,
 } from "@navikt/ds-react";
 import { classifyTraffic } from "../utils/get-current-environment";
-
-const CONSENT_TRACKER_ID = "aksel-consent";
-
-type CONSENT_TRACKER_STATE =
-  | "undecided"
-  | "accepted"
-  | "rejected"
-  | "no_action";
-
-type CookieData = {
-  createdAt: string;
-  updatedAt: string;
-  version: number;
-  consents: {
-    tracking?: CONSENT_TRACKER_STATE;
-  };
-};
-
-export const getStorageAcceptedTracking = () => {
-  const rawState = Cookies.get(CONSENT_TRACKER_ID) as string;
-
-  if (!rawState) {
-    return "undecided";
-  }
-
-  const cookieData = JSON.parse(rawState) as CookieData;
-
-  return cookieData.consents.tracking as CONSENT_TRACKER_STATE;
-};
-
-export const setStorageAcceptedTracking = (state: CONSENT_TRACKER_STATE) => {
-  const cookieData: CookieData = {
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    version: 1,
-    consents: {},
-  };
-
-  cookieData.consents.tracking = state;
-
-  const cookieJson = JSON.stringify(cookieData);
-
-  Cookies.set(CONSENT_TRACKER_ID, cookieJson, {
-    expires: 365,
-    domain: window.location.hostname,
-  });
-};
+import useConsent from "./useConsent";
 
 export const ConsentBanner = () => {
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
   const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(false);
+  const { consent, updateConsent } = useConsent();
 
   useEffect(() => {
-    const consentAnswer = getStorageAcceptedTracking();
-
     const disabledModalParam = new URLSearchParams(window.location.search).get(
       "no_consent_modal",
     );
-    if (consentAnswer === "undecided" && !disabledModalParam) {
+    if (consent === "undecided" && !disabledModalParam) {
       setShowConsentBanner(true);
+    } else if (["accepted", "rejected"].includes(consent)) {
+      setShowConsentBanner(false);
     }
 
     setUmamiTag(classifyTraffic());
-    setClientAcceptsTracking(getStorageAcceptedTracking() === "accepted");
-  }, []);
+    setClientAcceptsTracking(consent === "accepted");
+  }, [consent]);
 
   return (
     <div className="relative z-10 bg-[#ECEDEF]">
@@ -127,7 +81,7 @@ export const ConsentBanner = () => {
                 className="h-fit min-w-fit"
                 type="button"
                 onClick={() => {
-                  setStorageAcceptedTracking("rejected");
+                  updateConsent("rejected");
                   setShowConsentBanner(false);
                 }}
               >
@@ -137,7 +91,7 @@ export const ConsentBanner = () => {
                 className="h-fit min-w-fit"
                 type="button"
                 onClick={() => {
-                  setStorageAcceptedTracking("accepted");
+                  updateConsent("accepted");
                   setShowConsentBanner(false);
                   // NOTE: umami _should_ exist on window object here (loaded via <Script>)
                   // we call track manually this _one_ time to ensure the current page is
