@@ -57,6 +57,7 @@
     ".": "./dist/index.css",
     "./dist/*": "./dist/*",
     "./darkside": "./dist/darkside/index.css",
-    "./tokens.json": "./tokens.json"
+    "./tokens.json": "./tokens.json",
+    "./config/_mappings": "./config/_mappings.js"
   }
 }

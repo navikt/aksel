@@ -10,7 +10,7 @@ import {
   primitivesCss,
   rootDir,
   typoCss,
-} from "../../../core/css/config/_mappings";
+} from "@navikt/ds-css/config/_mappings";
 import { AnswersT, ComponentPrefix, layerSuffix } from "./config.js";
 import { inquiry } from "./inquiry";
 
