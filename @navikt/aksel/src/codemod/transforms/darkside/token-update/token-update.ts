@@ -12,7 +12,7 @@ function formatMessage(input: string[]) {
   console.info(chalk.green(`\nToken update`));
   console.info(
     chalk.green(
-      `\nFound ${input.length} tokens no longer supported. You will need to add this to your CSS/SCSS/LESS files manually to keep using them.`,
+      `Found ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
     ),
   );
   console.info(`${input.map((token) => `\n${token}`).join("")}`);
@@ -49,7 +49,7 @@ export default function transformer(file: FileInfo) {
         oldToken: oldCSSVar,
       });
     } else {
-      src = replaceTokenWithLegacyReference({
+      documentLegacyReferences({
         src,
         oldToken: oldCSSVar,
       });
@@ -93,14 +93,13 @@ function replaceTokenWithReference({
 /**
  * Replaces old token with new token reference.
  */
-function replaceTokenWithLegacyReference({
+function documentLegacyReferences({
   src,
   oldToken,
 }: {
   src: string;
   oldToken: string;
 }) {
-  const newToken = `--aksel-legacy${oldToken.replace("--", "__")}`;
   const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
   const SCSSRgx = new RegExp(
     "(\\" + translateToken(oldToken, "scss") + ")",
@@ -112,22 +111,14 @@ function replaceTokenWithLegacyReference({
   );
 
   if (CSSRgx.test(src)) {
-    messages.get("Token update")?.messages.push(newToken);
+    messages.get("Token update")?.messages.push(oldToken);
   } else if (SCSSRgx.test(src)) {
     messages
       .get("Token update")
-      ?.messages.push(translateToken(newToken, "scss"));
+      ?.messages.push(translateToken(oldToken, "scss"));
   } else if (LESSRgx.test(src)) {
     messages
       .get("Token update")
-      ?.messages.push(translateToken(newToken, "less"));
+      ?.messages.push(translateToken(oldToken, "less"));
   }
-
-  let fileSrc = src;
-
-  fileSrc = fileSrc.replace(CSSRgx, newToken);
-  fileSrc = fileSrc.replace(SCSSRgx, translateToken(newToken, "scss"));
-  fileSrc = fileSrc.replace(LESSRgx, translateToken(newToken, "less"));
-
-  return fileSrc;
 }
