@@ -16,8 +16,8 @@ const ignoreNodeModules = [
 export const messages = new Map<
   string,
   {
-    format: (input: string[]) => void;
-    messages: string[];
+    format: (input: any) => void;
+    data: any;
   }
 >();
 
@@ -60,7 +60,7 @@ export async function runCodeshift(
     warning && console.info(`\n${chalk.yellow(warning)}\n`);
 
     messages.forEach((value) => {
-      value.format(value.messages);
+      value.format(value.data);
     });
   } catch (error) {
     program.error(chalk.red("Error:", error.message));

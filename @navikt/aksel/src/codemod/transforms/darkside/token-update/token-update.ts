@@ -4,6 +4,13 @@ import { messages } from "../../../run-codeshift";
 import { translateToken } from "../../../utils/translate-token";
 import { updatedTokens } from "../darkside.tokens";
 
+type UpdateMessageData = {
+  scss: string[];
+  less: string[];
+  css: string[];
+  js: string[];
+};
+
 /**
  * Updates old tokens to new names.
  * Replaces global and semantic tokens with avalaible replacement.
@@ -14,7 +21,12 @@ export default function transformer(file: FileInfo) {
   if (!messages.has("Token update")) {
     messages.set("Token update", {
       format: formatMessage,
-      messages: [],
+      data: {
+        scss: [],
+        less: [],
+        css: [],
+        js: [],
+      } satisfies UpdateMessageData,
     });
   }
 
@@ -100,25 +112,44 @@ function documentLegacyReferences({
   );
 
   if (CSSRgx.test(src)) {
-    addMessage(oldToken, comment);
+    addMessage({ token: oldToken, comment, type: "css" });
   } else if (SCSSRgx.test(src)) {
-    addMessage(translateToken(oldToken, "scss"), comment);
+    addMessage({
+      token: translateToken(oldToken, "scss"),
+      comment,
+      type: "scss",
+    });
   } else if (LESSRgx.test(src)) {
-    addMessage(translateToken(oldToken, "less"), comment);
+    addMessage({
+      token: translateToken(oldToken, "less"),
+      comment,
+      type: "less",
+    });
   }
 }
 
-function addMessage(message: string, comment?: string) {
+function addMessage({
+  token,
+  comment,
+  type,
+}: {
+  token: string;
+  comment?: string;
+  type: keyof UpdateMessageData;
+}) {
   messages
     .get("Token update")
-    ?.messages.push(`${comment ? `\n/* ${comment} */\n` : ""}${message}`);
+    ?.data[type].push(`${comment ? `\n/* ${comment} */\n` : ""}${token}`);
 }
 
-function formatMessage(input: string[]) {
-  if (input.length === 0) {
+function formatMessage(input: UpdateMessageData) {
+  const total =
+    input.scss.length + input.less.length + input.css.length + input.js.length;
+
+  if (total === 0) {
     console.info(
       chalk.green(
-        `Found no legacy-tokens 🎉, you are now migrated over to the darkside.`,
+        `Found no legacy-tokens 🎉, you have now migrated over to the darkside.`,
       ),
     );
   }
@@ -126,12 +157,30 @@ function formatMessage(input: string[]) {
   console.info(chalk.green(`\nToken update`));
   console.info(
     chalk.green(
-      `Found use of ${input.length} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
+      `Found use of ${total} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
     ),
   );
 
   console.info(
-    `${[...new Set(input)]
+    `CSS:\n${[...new Set(input.css)]
+      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
+      .join("")}`,
+  );
+
+  console.info(
+    `SCSS:\n${[...new Set(input.css)]
+      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
+      .join("")}`,
+  );
+
+  console.info(
+    `LESS:\n${[...new Set(input.css)]
+      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
+      .join("")}`,
+  );
+
+  console.info(
+    `JS:\n${[...new Set(input.css)]
       .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
       .join("")}`,
   );
