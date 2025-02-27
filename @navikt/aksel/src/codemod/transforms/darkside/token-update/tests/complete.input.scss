@@ -1,0 +1,25 @@
+.test {
+  margin: var(--a-spacing-4);
+  padding: var(--a-spacing-0);
+  padding: var(--a-spacing-1-alt);
+  padding: var(--a-spacing-05);
+  /* Has replacement */
+  background-color: var(--a-surface-subtle);
+  /* Has no replacement */
+  background-color: var(--a-surface-transparent);
+
+  /* Is tagged as legacy */
+  --a-surface-neutral: red;
+  --a-surface-subtle: orange;
+}
+
+.test-scss {
+  margin: $a-spacing-4;
+  padding: $a-spacing-0;
+  padding: $a-spacing-1-alt;
+  padding: $a-spacing-05;
+  /* Has replacement */
+  background-color: $a-surface-subtle;
+  /* Has no replacement */
+  background-color: $a-surface-transparent;
+}
