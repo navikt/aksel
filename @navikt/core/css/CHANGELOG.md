@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.14.3
+
+### Patch Changes
+
+- Darkside: Changed outline-offset for tabpanel from -4px to -3px. ([`06fecf2`](https://github.com/navikt/aksel/commit/06fecf2af1972a5d06ea452fc5b7431b064e1fc0))
+
 ## 7.14.2
 
 ## 7.14.1
