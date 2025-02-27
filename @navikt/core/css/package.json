@@ -37,7 +37,7 @@
     "fast-glob": "3.2.11",
     "lightningcss": "^1.28.0",
     "lodash": "^4.17.21",
-    "nodemon": "^3.0.1",
+    "nodemon": "^3.1.9",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^9.0.0",
