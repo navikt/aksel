@@ -17,10 +17,11 @@ export default function transformer(file: FileInfo) {
     const oldCSSVar = `--a-${oldToken}`;
 
     /* We update all re-definitions of a token to a "legacy" version */
-    const replaceRegex = new RegExp("(" + `${oldToken}:` + ")", "gm");
+    const replaceRegex = new RegExp("(" + `${oldCSSVar}:` + ")", "gm");
+
     src = src.replace(
       replaceRegex,
-      `--aksel-legacy${oldToken.replace("--", "__")}:`,
+      `--aksel-legacy${oldCSSVar.replace("--", "__")}:`,
     );
 
     if (config.replacement.length > 0) {
