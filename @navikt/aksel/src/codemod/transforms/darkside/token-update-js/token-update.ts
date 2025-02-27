@@ -1,11 +1,9 @@
 import chalk from "chalk";
 import type { API, FileInfo } from "jscodeshift";
 import { messages } from "../../../run-codeshift";
-import {
-  getImportSpecifier,
-  getImportSpecifierName,
-} from "../../../utils/imports";
+import { getImportSpecifier } from "../../../utils/imports";
 import { getLineTerminator } from "../../../utils/lineterminator";
+import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 import { translateToken } from "../../../utils/translate-token";
 import { updatedTokens } from "../darkside.tokens";
 
@@ -50,44 +48,21 @@ export default function transformer(file: FileInfo, api: API) {
       continue;
     }
 
-    const localName =
-      getImportSpecifierName(
-        j,
-        root,
-        oldJsVar,
-        "@navikt/ds-tokens/dist/tokens",
-      ) || oldJsVar;
+    if (config.replacement.length > 0) {
+      const localName = moveAndRenameImport(j, root, {
+        fromImport: "@navikt/ds-tokens/dist/tokens",
+        toImport: "@navikt/ds-tokens/darkside-js",
+        fromName: foundName,
+        toName: translateToken(`--ax-${config.replacement}`, "js"),
+        ignoreAlias: true,
+      });
 
-    renameImportSpecifier(j, root, name, out, "@navikt/ds-tokens/dist/tokens");
+      let code = root.toSource(getLineTerminator(file.source));
 
-    let code = root.toSource(getLineTerminator(file.source));
-
-    const rgx = new RegExp("(" + localName + ")", "gm");
-    code = code.replace(rgx, out);
-    root = j(code);
-
-    /* We update all re-definitions of a token to a "legacy" version */
-    // const replaceRegex = new RegExp("(" + `${oldCSSVar}:` + ")", "gm");
-    //
-    // src = src.replace(
-    //   replaceRegex,
-    //   `--aksel-legacy${oldCSSVar.replace("--", "__")}:`,
-    // );
-    //
-    // if (config.replacement.length > 0) {
-    //   src = replaceTokenWithReference({
-    //     src,
-    //     newToken: `--ax-${config.replacement}`,
-    //     oldToken: oldCSSVar,
-    //   });
-    //   continue;
-    // }
-    //
-    // documentLegacyReferences({
-    //   src,
-    //   oldToken: oldCSSVar,
-    //   comment: config.comment,
-    // });
+      const rgx = new RegExp("(" + foundName + ")", "gm");
+      code = code.replace(rgx, localName);
+      root = j(code);
+    }
   }
 
   return src;
@@ -96,72 +71,41 @@ export default function transformer(file: FileInfo, api: API) {
 /**
  * Replaces old token with new token reference.
  */
-function replaceTokenWithReference({
-  src,
-  newToken,
-  oldToken,
-}: {
-  src: string;
-  newToken: string;
-  oldToken: string;
-}) {
-  const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
-  const SCSSRgx = new RegExp(
-    "(\\" + translateToken(oldToken, "scss") + ")",
-    "gm",
-  );
-  const LESSRgx = new RegExp(
-    "(" + translateToken(oldToken, "less") + ")",
-    "gm",
-  );
-
-  let fileSrc = src;
-
-  fileSrc = fileSrc.replace(CSSRgx, newToken);
-  fileSrc = fileSrc.replace(SCSSRgx, translateToken(newToken, "scss"));
-  fileSrc = fileSrc.replace(LESSRgx, translateToken(newToken, "less"));
-
-  return fileSrc;
-}
-
-/**
- * Replaces old token with new token reference.
- */
-function documentLegacyReferences({
-  src,
-  oldToken,
-  comment,
-}: {
-  src: string;
-  oldToken: string;
-  comment?: string;
-}) {
-  const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
-  const SCSSRgx = new RegExp(
-    "(\\" + translateToken(oldToken, "scss") + ")",
-    "gm",
-  );
-  const LESSRgx = new RegExp(
-    "(" + translateToken(oldToken, "less") + ")",
-    "gm",
-  );
-
-  if (CSSRgx.test(src)) {
-    addMessage({ token: oldToken, comment, type: "css" });
-  } else if (SCSSRgx.test(src)) {
-    addMessage({
-      token: translateToken(oldToken, "scss"),
-      comment,
-      type: "scss",
-    });
-  } else if (LESSRgx.test(src)) {
-    addMessage({
-      token: translateToken(oldToken, "less"),
-      comment,
-      type: "less",
-    });
-  }
-}
+// function documentLegacyReferences({
+//   src,
+//   oldToken,
+//   comment,
+// }: {
+//   src: string;
+//   oldToken: string;
+//   comment?: string;
+// }) {
+//   const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
+//   const SCSSRgx = new RegExp(
+//     "(\\" + translateToken(oldToken, "scss") + ")",
+//     "gm",
+//   );
+//   const LESSRgx = new RegExp(
+//     "(" + translateToken(oldToken, "less") + ")",
+//     "gm",
+//   );
+//
+//   if (CSSRgx.test(src)) {
+//     addMessage({ token: oldToken, comment, type: "css" });
+//   } else if (SCSSRgx.test(src)) {
+//     addMessage({
+//       token: translateToken(oldToken, "scss"),
+//       comment,
+//       type: "scss",
+//     });
+//   } else if (LESSRgx.test(src)) {
+//     addMessage({
+//       token: translateToken(oldToken, "less"),
+//       comment,
+//       type: "less",
+//     });
+//   }
+// }
 
 type UpdateMessageData = {
   scss: string[];
@@ -182,19 +126,19 @@ function initMessageSetup() {
   }
 }
 
-function addMessage({
-  token,
-  comment,
-  type,
-}: {
-  token: string;
-  comment?: string;
-  type: keyof UpdateMessageData;
-}) {
-  messages
-    .get("Token update")
-    ?.data[type].push(`${token}${comment ? ` (${comment})` : ""}`);
-}
+// function addMessage({
+//   token,
+//   comment,
+//   type,
+// }: {
+//   token: string;
+//   comment?: string;
+//   type: keyof UpdateMessageData;
+// }) {
+//   messages
+//     .get("Token update")
+//     ?.data[type].push(`${token}${comment ? ` (${comment})` : ""}`);
+// }
 
 function formatMessage(input: UpdateMessageData) {
   const css = [...new Set(input.css)];
