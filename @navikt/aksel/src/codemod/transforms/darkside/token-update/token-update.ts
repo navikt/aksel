@@ -4,33 +4,16 @@ import { messages } from "../../../run-codeshift";
 import { translateToken } from "../../../utils/translate-token";
 import { updatedTokens } from "../darkside.tokens";
 
-type UpdateMessageData = {
-  scss: string[];
-  less: string[];
-  css: string[];
-  js: string[];
-};
-
 /**
  * Updates old tokens to new names.
  * Replaces global and semantic tokens with avalaible replacement.
  */
 export default function transformer(file: FileInfo) {
+  initMessageSetup();
+
   let src = file.source;
 
-  if (!messages.has("Token update")) {
-    messages.set("Token update", {
-      format: formatMessage,
-      data: {
-        scss: [],
-        less: [],
-        css: [],
-        js: [],
-      } satisfies UpdateMessageData,
-    });
-  }
-
-  Object.entries(updatedTokens).forEach(([oldToken, config]) => {
+  for (const [oldToken, config] of Object.entries(updatedTokens)) {
     const oldCSSVar = `--a-${oldToken}`;
 
     /* We update all re-definitions of a token to a "legacy" version */
@@ -46,14 +29,15 @@ export default function transformer(file: FileInfo) {
         newToken: `--ax-${config.replacement}`,
         oldToken: oldCSSVar,
       });
-    } else {
-      documentLegacyReferences({
-        src,
-        oldToken: oldCSSVar,
-        comment: config.comment,
-      });
+      continue;
     }
-  });
+
+    documentLegacyReferences({
+      src,
+      oldToken: oldCSSVar,
+      comment: config.comment,
+    });
+  }
 
   return src;
 }
@@ -128,6 +112,25 @@ function documentLegacyReferences({
   }
 }
 
+type UpdateMessageData = {
+  scss: string[];
+  less: string[];
+  css: string[];
+};
+
+function initMessageSetup() {
+  if (!messages.has("Token update")) {
+    messages.set("Token update", {
+      format: formatMessage,
+      data: {
+        scss: [],
+        less: [],
+        css: [],
+      } satisfies UpdateMessageData,
+    });
+  }
+}
+
 function addMessage({
   token,
   comment,
@@ -143,8 +146,7 @@ function addMessage({
 }
 
 function formatMessage(input: UpdateMessageData) {
-  const total =
-    input.scss.length + input.less.length + input.css.length + input.js.length;
+  const total = input.scss.length + input.less.length + input.css.length;
 
   if (total === 0) {
     console.info(
@@ -175,12 +177,6 @@ function formatMessage(input: UpdateMessageData) {
 
   console.info(
     `LESS:\n${[...new Set(input.css)]
-      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
-      .join("")}`,
-  );
-
-  console.info(
-    `JS:\n${[...new Set(input.css)]
       .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
       .join("")}`,
   );
