@@ -125,7 +125,7 @@ export const migrations: {
     {
       description: "Updates js tokens to use new token-prefix and names",
       value: "token-update-js",
-      path: "darkside/token-update-js/token-update",
+      path: "darkside/token-update-js/token-update-js",
     },
   ],
 };
