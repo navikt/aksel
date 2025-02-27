@@ -9,9 +9,9 @@ const tokens = [
     js: "NavdsGlobalColorRed100",
   },
   {
-    name: "--a-blue-100",
-    scss: "$a-blue-100",
-    less: "@a-blue-100",
+    name: "--ax-accent-200",
+    scss: "$ax-accent-200",
+    less: "@ax-accent-200",
     js: "ABlue100",
   },
 ];

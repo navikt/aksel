@@ -147,7 +147,11 @@ function addMessage({
 }
 
 function formatMessage(input: UpdateMessageData) {
-  const total = input.scss.length + input.less.length + input.css.length;
+  const css = [...new Set(input.css)];
+  const scss = [...new Set(input.scss)];
+  const less = [...new Set(input.less)];
+
+  const total = css.length + scss.length + less.length;
 
   if (total === 0) {
     console.info(
@@ -164,21 +168,30 @@ function formatMessage(input: UpdateMessageData) {
     ),
   );
 
-  console.info(
-    `CSS:\n${[...new Set(input.css)]
-      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
-      .join("")}`,
-  );
+  css.length > 0 &&
+    console.info(
+      `CSS:\n${css
+        .map((token) =>
+          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
+        )
+        .join("")}`,
+    );
 
-  console.info(
-    `SCSS:\n${[...new Set(input.css)]
-      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
-      .join("")}`,
-  );
+  scss.length > 1 &&
+    console.info(
+      `SCSS:\n${scss
+        .map((token) =>
+          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
+        )
+        .join("")}`,
+    );
 
-  console.info(
-    `LESS:\n${[...new Set(input.css)]
-      .map((token) => (token.startsWith("/*") ? `\n\n${token}` : `\n${token}`))
-      .join("")}`,
-  );
+  less.length > 1 &&
+    console.info(
+      `LESS:\n${less
+        .map((token) =>
+          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
+        )
+        .join("")}`,
+    );
 }
