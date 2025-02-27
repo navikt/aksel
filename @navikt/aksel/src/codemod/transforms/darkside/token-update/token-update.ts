@@ -143,7 +143,7 @@ function addMessage({
 }) {
   messages
     .get("Token update")
-    ?.data[type].push(`${token}${comment ? `(${comment})` : ""}`);
+    ?.data[type].push(`${token}${comment ? ` (${comment})` : ""}`);
 }
 
 function formatMessage(input: UpdateMessageData) {
