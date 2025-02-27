@@ -143,7 +143,7 @@ function addMessage({
 }) {
   messages
     .get("Token update")
-    ?.data[type].push(`${comment ? `\n/* ${comment} */\n` : ""}${token}`);
+    ?.data[type].push(`${token}${comment ? `(${comment})` : ""}`);
 }
 
 function formatMessage(input: UpdateMessageData) {
@@ -169,29 +169,11 @@ function formatMessage(input: UpdateMessageData) {
   );
 
   css.length > 0 &&
-    console.info(
-      `CSS:\n${css
-        .map((token) =>
-          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
-        )
-        .join("")}`,
-    );
+    console.info(`\nCSS:${css.map((token) => `\n${token}`).join("")}`);
 
   scss.length > 1 &&
-    console.info(
-      `SCSS:\n${scss
-        .map((token) =>
-          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
-        )
-        .join("")}`,
-    );
+    console.info(`\nSCSS:${scss.map((token) => `\n${token}`).join("")}`);
 
   less.length > 1 &&
-    console.info(
-      `LESS:\n${less
-        .map((token) =>
-          token.startsWith("/*") ? `\n\n${token}` : `\n${token}`,
-        )
-        .join("")}`,
-    );
+    console.info(`\nLESS:${less.map((token) => `\n${token}`).join("")}`);
 }
