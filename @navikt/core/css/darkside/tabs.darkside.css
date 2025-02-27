@@ -127,7 +127,7 @@
 
 .navds-tabs__tabpanel:focus-visible {
   outline: 3px solid var(--ax-border-focus);
-  outline-offset: -4px;
+  outline-offset: -3px;
 }
 
 @media (forced-colors: active) {
