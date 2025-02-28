@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { getResponsiveProps } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -82,6 +81,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     ref,
   ) => {
     const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
     const prefix = themeContext ? "ax" : "a";
 
     let style: React.CSSProperties = {
@@ -136,7 +136,7 @@ export const Bleed = forwardRef<HTMLDivElement, BleedProps>(
     return (
       <Comp
         {...rest}
-        className={cl("navds-bleed", className, {
+        className={cn("navds-bleed", className, {
           "navds-bleed--padding": reflectivePadding,
         })}
         ref={ref}

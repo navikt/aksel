@@ -1,6 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { DefaultIllustration } from "./Illustration";
 import { DarksideGudiepanelIllustration } from "./Illustration.darkside";
 
@@ -37,13 +36,14 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
   ({ children, className, illustration, poster, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const themeContext = useThemeInternal(false);
 
     return (
       <div
         {...rest}
         ref={ref}
-        className={cl("navds-guide-panel", className, {
+        className={cn("navds-guide-panel", className, {
           "navds-guide-panel--poster": poster === true,
           "navds-guide-panel--not-poster": poster === false,
           "navds-guide-panel--responsive-poster": poster === undefined,
@@ -51,7 +51,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
         data-responsive={poster === undefined}
         data-poster={poster}
       >
-        <div className="navds-guide">
+        <div className={cn("navds-guide")}>
           {illustration ??
             (themeContext ? (
               <DarksideGudiepanelIllustration />
@@ -59,7 +59,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
               <DefaultIllustration />
             ))}
         </div>
-        <div className="navds-guide-panel__content">
+        <div className={cn("navds-guide-panel__content")}>
           {themeContext && (
             <svg
               viewBox="0 0 33 22"
@@ -67,7 +67,7 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
               height="22"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="navds-guide-panel__tail"
+              className={cn("navds-guide-panel__tail")}
             >
               <path
                 d="M8.74229e-08 22L0 20L33 20V22L8.74229e-08 22Z"
@@ -86,7 +86,9 @@ export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
             </svg>
           )}
           {themeContext ? (
-            <div className="navds-guide-panel__content-inner">{children}</div>
+            <div className={cn("navds-guide-panel__content-inner")}>
+              {children}
+            </div>
           ) : (
             children
           )}

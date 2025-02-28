@@ -1,6 +1,6 @@
-import cl from "clsx";
 import { format } from "date-fns";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyShort } from "../typography/BodyShort";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { PeriodContext } from "./hooks/usePeriodContext";
@@ -38,6 +38,7 @@ export interface TimelineRowType
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, className, headingTag = "h3", icon, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const { periods, id, active } = useRowContext();
     const { setActiveRow } = useTimelineContext();
     const translate = useI18n("Timeline");
@@ -60,7 +61,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           <BodyShort
             as={headingTag}
             id={`timeline-row-${id}`}
-            className="navds-timeline__row-label"
+            className={cn("navds-timeline__row-label")}
             size="small"
           >
             {icon}
@@ -68,7 +69,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           </BodyShort>
         )}
         <div
-          className={cl("navds-timeline__row", {
+          className={cn("navds-timeline__row", {
             "navds-timeline__row--active": active,
           })}
         >
@@ -85,7 +86,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                     end: format(latest.end, translate("dateFormat")),
                   })
             }
-            className={cl("navds-timeline__row-periods", className)}
+            className={cn("navds-timeline__row-periods", className)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();

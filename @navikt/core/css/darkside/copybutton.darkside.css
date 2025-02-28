@@ -1,4 +1,4 @@
-.navds-copybutton[data-active="true"] .navds-copybutton__icon {
+.aksel-copybutton[data-active="true"] .aksel-copybutton__icon {
   animation: akselCopyButtonIconAnimation 2s cubic-bezier(0.05, 0.7, 0.1, 1);
 }
 

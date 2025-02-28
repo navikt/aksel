@@ -1,4 +1,4 @@
-.navds-select__input {
+.aksel-select__input {
   appearance: none;
   background-color: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
@@ -32,7 +32,7 @@
   }
 }
 
-.navds-select__container {
+.aksel-select__container {
   position: relative;
   display: flex;
   width: 100%;
@@ -40,7 +40,7 @@
 }
 
 /* ------------------------------- Select Icon ------------------------------ */
-.navds-select__chevron {
+.aksel-select__chevron {
   position: absolute;
   font-size: 1.5rem;
   right: var(--ax-space-8);
@@ -56,15 +56,15 @@
 }
 
 /* ------------------------------ Select Sizing ----------------------------- */
-.navds-form-field--small {
-  & .navds-select__input {
+.aksel-form-field--small {
+  & .aksel-select__input {
     min-height: 2rem;
     padding-block: 0;
   }
 }
 
 /* --------------------------- Select Error-state --------------------------- */
-.navds-select--error {
+.aksel-select--error {
   > * select {
     box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
     border-color: var(--ax-border-danger-strong);
@@ -78,7 +78,7 @@
 }
 
 /* ----------------------------- Select disabled ---------------------------- */
-.navds-select__input:disabled {
+.aksel-select__input:disabled {
   background-color: var(--ax-bg-input);
   border: 1px solid var(--ax-border-neutral);
   box-shadow: none;
@@ -93,15 +93,15 @@
   }
 
   @media (forced-colors: active) {
-    & + .navds-select__chevron {
+    & + .aksel-select__chevron {
       color: GrayText;
     }
   }
 }
 
 /* ----------------------------- Select Readonly ---------------------------- */
-.navds-select--readonly {
-  & .navds-select__input {
+.aksel-select--readonly {
+  & .aksel-select__input {
     background-color: var(--ax-bg-neutral-moderate);
     border-color: var(--ax-border-neutral-subtleA);
     cursor: default;
@@ -115,7 +115,7 @@
     }
   }
 
-  & .navds-select__chevron {
+  & .aksel-select__chevron {
     color: var(--ax-text-neutral-subtle);
   }
 }

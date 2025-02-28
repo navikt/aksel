@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useMergeRefs } from "../../../util/hooks";
 import { useFilteredOptionsContext } from "../FilteredOptions/filteredOptionsContext";
 import SelectedOptions from "../SelectedOptions/SelectedOptions";
@@ -37,6 +37,8 @@ export const InputController = forwardRef<
     ...rest
   } = props;
 
+  const { cn } = useRenameCSS();
+
   const {
     focusInput,
     inputProps,
@@ -54,7 +56,7 @@ export const InputController = forwardRef<
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      className={cl("navds-combobox__wrapper-inner navds-text-field__input", {
+      className={cn("navds-combobox__wrapper-inner navds-text-field__input", {
         "navds-combobox__wrapper-inner--virtually-unfocused":
           activeDecendantId !== undefined,
       })}

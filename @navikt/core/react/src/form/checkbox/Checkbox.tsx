@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { useId } from "../../util/hooks";
@@ -9,6 +9,7 @@ import useCheckbox from "./useCheckbox";
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
+    const { cn } = useRenameCSS();
     const { inputProps, hasError, size, readOnly, nested } = useCheckbox(props);
 
     const labelId = useId();
@@ -16,7 +17,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           props.className,
           "navds-checkbox",
           `navds-checkbox--${size}`,
@@ -40,7 +41,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ])}
           {...omit(inputProps, ["aria-invalid"])}
           type="checkbox"
-          className="navds-checkbox__input"
+          className={cn("navds-checkbox__input")}
           ref={(el) => {
             if (el) {
               el.indeterminate = props.indeterminate ?? false;
@@ -52,7 +53,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               ref.current = el;
             }
           }}
-          aria-labelledby={cl(
+          aria-labelledby={cn(
             labelId,
             !!props["aria-labelledby"] && props["aria-labelledby"],
             {
@@ -60,8 +61,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             },
           )}
         />
-        <label htmlFor={inputProps.id} className="navds-checkbox__label">
-          <span className="navds-checkbox__icon">
+        <label htmlFor={inputProps.id} className={cn("navds-checkbox__label")}>
+          <span className={cn("navds-checkbox__icon")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="0.8125rem"
@@ -78,9 +79,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               />
             </svg>
           </span>
-          <span className="navds-checkbox__icon-indeterminate" />
+          <span className={cn("navds-checkbox__icon-indeterminate")} />
           <span
-            className={cl("navds-checkbox__content", {
+            className={cn("navds-checkbox__content", {
               "navds-sr-only": props.hideLabel,
             })}
           >
@@ -88,7 +89,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               as="span"
               id={labelId}
               size={size}
-              className="navds-checkbox__label-text"
+              className={cn("navds-checkbox__label-text")}
               aria-hidden
             >
               {!nested && readOnly && <ReadOnlyIconWithTitle />}
@@ -99,7 +100,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 as="span"
                 id={descriptionId}
                 size={size}
-                className="navds-form-field__subdescription navds-checkbox__description"
+                className={cn(
+                  "navds-form-field__subdescription navds-checkbox__description",
+                )}
                 aria-hidden
               >
                 {props.description}

@@ -4,6 +4,7 @@ import {
   SortDownIcon,
   SortUpIcon,
 } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 import { TableContext } from "./context";
 
@@ -26,6 +27,7 @@ export type ColumnHeaderType = React.ForwardRefExoticComponent<
 export const ColumnHeader: ColumnHeaderType = forwardRef(
   ({ className, children, sortable = false, sortKey, ...rest }, ref) => {
     const context = useContext(TableContext);
+    const { cn } = useRenameCSS();
 
     if (sortable && !sortKey) {
       console.warn("ColumnHeader with `sortable=true` must have a sortKey.");
@@ -35,7 +37,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
       <HeaderCell
         scope="col"
         ref={ref}
-        className={className}
+        className={cn(className)}
         aria-sort={
           sortable
             ? context?.sort?.orderBy === sortKey
@@ -48,7 +50,7 @@ export const ColumnHeader: ColumnHeaderType = forwardRef(
         {sortable ? (
           <button
             type="button"
-            className="navds-table__sort-button"
+            className={cn("navds-table__sort-button")}
             onClick={
               sortable && sortKey
                 ? () => context?.onSortChange?.(sortKey)

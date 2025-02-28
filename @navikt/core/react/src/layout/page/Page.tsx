@@ -1,6 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent } from "../../util";
 import { BackgroundColorToken } from "../utilities/types";
 import { PageBlock } from "./parts/PageBlock";
@@ -55,6 +54,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       ref,
     ) => {
       const themeContext = useThemeInternal(false);
+      const { cn } = useRenameCSS();
 
       if (process.env.NODE_ENV !== "production" && themeContext && background) {
         console.warn(
@@ -72,12 +72,12 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
       return (
         <Component
           {...rest}
-          className={cl("navds-page", className)}
+          className={cn("navds-page", className)}
           ref={ref}
           style={style}
         >
           <div
-            className={cl({
+            className={cn({
               "navds-page__content--fullheight": belowFold,
               "navds-page__content--grow": !belowFold,
               "navds-page__content--padding": contentBlockPadding === "end",

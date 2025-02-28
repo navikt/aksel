@@ -4,4 +4,25 @@ import { Meta, Title } from "@storybook/blocks";
 
 # Darkside changelog
 
-Nothing to see here yet.
+## 14.02.25
+
+To allow loading old and new CSS files that the same time, we have now renamed all classes to start with `.aksel` instead of `.navds`.
+Every React component has this now feature-flagged behind using the new `Theme`-component.
+
+- **With `<Theme />`**: All components uses `.aksel`-classes internally.
+- **Without `<Theme />`**: All components uses `.navds`-classes internally like before.
+
+This means you can now migrate parts of your application to use the new CSS classes without having to migrate everything at once.
+
+```
+// MyComponent.tsx
+<div>
+  // Uses old CSS
+  <Button>Click me</Button>
+
+  // Uses new CSS
+  <Theme>
+    <Button>Click me</Button>
+  </Theme>
+</div>
+```

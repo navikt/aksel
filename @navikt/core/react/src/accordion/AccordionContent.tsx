@@ -1,6 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
@@ -17,6 +16,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
     const context = useContext(AccordionItemContext);
 
     const themeContext = useThemeInternal(false);
+    const { cn } = useRenameCSS();
 
     if (context === null) {
       console.error(
@@ -30,7 +30,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         {...rest}
         as="div"
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-accordion__content",
           {
             "navds-accordion__content--closed": !context.open,
@@ -42,7 +42,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         } /* Added to fix bug with Radio component, where label text inside a span sometimes is ignored by screen readers after hiding/displaying the RadioGroup inside an Accordion */
       >
         {themeContext ? (
-          <div className="navds-accordion__content-inner">{children}</div>
+          <div className={cn("navds-accordion__content-inner")}>{children}</div>
         ) : (
           children
         )}

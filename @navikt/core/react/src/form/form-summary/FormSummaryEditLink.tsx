@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Link } from "../../link";
+import { useRenameCSS } from "../../theme/Theme";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { OverridableComponent } from "../../util/types";
 
@@ -23,13 +23,15 @@ export const FormSummaryEditLink: OverridableComponent<
   FormSummaryEditProps,
   HTMLAnchorElement
 > = forwardRef(({ children, className, as = "a", ...rest }, ref) => {
+  const { cn } = useRenameCSS();
   const translate = useI18n("FormSummary");
+
   return (
     <Link
       ref={ref}
       as={as}
       {...rest}
-      className={cl("navds-form-summary__edit", className)}
+      className={cn("navds-form-summary__edit", className)}
     >
       {children || translate("editAnswer")}
     </Link>

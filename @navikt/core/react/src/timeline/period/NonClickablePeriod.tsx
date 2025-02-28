@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import type { PeriodProps } from "./types";
@@ -23,11 +23,12 @@ const NonClickablePeriod = ({
 }: TimelineNonClickablePeriodProps) => {
   const translate = useI18n("Timeline");
 
+  const { cn } = useRenameCSS();
   return (
     <div
       ref={periodRef}
       {...restProps}
-      className={cl(
+      className={cn(
         getConditionalClasses(cropped, direction, status),
         restProps?.className,
       )}
@@ -36,9 +37,9 @@ const NonClickablePeriod = ({
         [direction]: `${left}%`,
       }}
     >
-      <span className="navds-timeline__period--inner">
+      <span className={cn("navds-timeline__period--inner")}>
         {icon}
-        <span className="sr-only">
+        <span className={cn("navds-sr-only")}>
           {ariaLabel(start, end, status, statusLabel, translate)}
         </span>
       </span>

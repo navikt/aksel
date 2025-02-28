@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail } from "../typography";
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
@@ -23,11 +23,13 @@ export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
 
 const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
   ({ children, className, name, timestamp, toptextPosition, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+
     return (
-      <div ref={ref} className={cl("navds-chat__bubble", className)} {...rest}>
+      <div ref={ref} className={cn("navds-chat__bubble", className)} {...rest}>
         {(timestamp || name) && (
           <h3
-            className={cl(
+            className={cn(
               `navds-chat__top-text`,
               toptextPosition && `navds-chat__top-text--${toptextPosition}`,
             )}

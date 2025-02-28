@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import type {
   BorderColorKeys,
@@ -9,6 +8,7 @@ import type {
   StaticDefaultBgKeys,
 } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -107,6 +107,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
       },
       ref,
     ) => {
+      const { cn } = useRenameCSS();
       const style: React.CSSProperties = {
         ..._style,
         "--__axc-box-background": background
@@ -141,7 +142,7 @@ export const BoxNew: OverridableComponent<BoxNewProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cl("navds-box", className, {
+            className={cn("navds-box", className, {
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,

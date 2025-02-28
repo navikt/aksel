@@ -10,6 +10,7 @@ import {
   FileXMarkIcon,
 } from "@navikt/aksel-icons";
 import { Loader } from "../../../../loader";
+import { useRenameCSS } from "../../../../theme/Theme";
 import { FileItem } from "./Item.types";
 
 interface ItemIconProps {
@@ -24,9 +25,12 @@ const iconProps = {
 };
 
 function ItemIcon({ isLoading, file, showError }: ItemIconProps) {
+  const { cn } = useRenameCSS();
   if (isLoading) {
     return (
-      <div className="navds-file-item__icon navds-file-item__icon--loading">
+      <div
+        className={cn("navds-file-item__icon navds-file-item__icon--loading")}
+      >
         <Loader size="large" />
       </div>
     );
@@ -34,13 +38,13 @@ function ItemIcon({ isLoading, file, showError }: ItemIconProps) {
 
   if (showError) {
     return (
-      <div className="navds-file-item__icon">
+      <div className={cn("navds-file-item__icon")}>
         <FileXMarkIcon {...iconProps} />
       </div>
     );
   }
   return (
-    <div className="navds-file-item__icon">
+    <div className={cn("navds-file-item__icon")}>
       <Icon file={file} />
     </div>
   );

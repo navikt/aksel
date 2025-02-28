@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, Heading } from "../../typography";
 import { composeEventHandlers } from "../../util/composeEventHandlers";
 import { useMergeRefs } from "../../util/hooks";
@@ -78,6 +78,8 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     const translate = useI18n("ErrorSummary");
     const wrapperRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
@@ -88,7 +90,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       <div
         ref={mergedRef}
         {...rest}
-        className={cl(
+        className={cn(
           className,
           "navds-error-summary",
           `navds-error-summary--${size}`,
@@ -101,7 +103,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         })}
       >
         <Heading
-          className="navds-error-summary__heading"
+          className={cn("navds-error-summary__heading")}
           as={headingTag}
           size="small"
           ref={headingRef}
@@ -109,7 +111,11 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         >
           {heading ?? translate("heading")}
         </Heading>
-        <BodyShort as="ul" size={size} className="navds-error-summary__list">
+        <BodyShort
+          as="ul"
+          size={size}
+          className={cn("navds-error-summary__list")}
+        >
           {children}
         </BodyShort>
       </div>

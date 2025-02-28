@@ -1,4 +1,4 @@
-.navds-link-panel {
+.aksel-link-panel {
   text-decoration: none;
   color: var(--ax-text-neutral);
   display: flex;
@@ -9,7 +9,7 @@
   &:hover {
     border-color: var(--ax-border-accent);
 
-    & .navds-link-panel__title {
+    & .aksel-link-panel__title {
       text-decoration: underline;
       color: var(--ax-text-accent-subtle);
     }
@@ -21,17 +21,17 @@
   }
 }
 
-.navds-link-panel__chevron {
+.aksel-link-panel__chevron {
   flex-shrink: 0;
   font-size: 1.5rem;
   transition: transform 200ms;
 }
 
-.navds-link-panel:hover > .navds-link-panel__chevron,
-.navds-link-panel:focus-within > .navds-link-panel__chevron {
+.aksel-link-panel:hover > .aksel-link-panel__chevron,
+.aksel-link-panel:focus-within > .aksel-link-panel__chevron {
   transform: translateX(4px);
 }
 
-.navds-link-panel__description {
+.aksel-link-panel__description {
   margin-top: var(--a-space-4);
 }

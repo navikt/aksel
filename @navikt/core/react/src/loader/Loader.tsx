@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { SVGProps, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { omit } from "../util";
 import { useId } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -64,6 +64,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const internalId = useId();
     const translate = useI18n("Loader");
 
@@ -71,7 +72,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
       <svg
         aria-labelledby={id ?? `loader-${internalId}`}
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-loader",
           className,
           `navds-loader--${size}`,
@@ -89,7 +90,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
           {title || translate("title")}
         </title>
         <circle
-          className="navds-loader__background"
+          className={cn("navds-loader__background")}
           xmlns="http://www.w3.org/2000/svg"
           cx="25"
           cy="25"
@@ -97,7 +98,7 @@ export const Loader: LoaderType = forwardRef<SVGSVGElement, LoaderProps>(
           fill="none"
         />
         <circle
-          className="navds-loader__foreground"
+          className={cn("navds-loader__foreground")}
           cx="25"
           cy="25"
           r="20"

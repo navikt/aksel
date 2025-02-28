@@ -7,6 +7,7 @@ import {
   subYears,
 } from "date-fns";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { Detail } from "../../typography/Detail";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { useTimelineContext } from "../hooks/useTimelineContext";
@@ -36,6 +37,8 @@ export const ZoomButton: ZoomButtonType = forwardRef(
     const { setStart, endDate, startDate, direction } = useTimelineContext();
     const translate = useI18n("Timeline");
     const dateFormat = translate("dateFormat");
+
+    const { cn } = useRenameCSS();
 
     let startOfRange: Date;
 
@@ -70,7 +73,7 @@ export const ZoomButton: ZoomButtonType = forwardRef(
           }
           ref={ref}
           {...rest}
-          className="navds-timeline__zoom-button"
+          className={cn("navds-timeline__zoom-button")}
           onClick={() => {
             setStart(startOfRange);
           }}

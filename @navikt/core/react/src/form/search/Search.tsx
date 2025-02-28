@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
@@ -7,7 +6,7 @@ import React, {
 } from "react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@navikt/aksel-icons";
 import { Button } from "../../button";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
@@ -125,6 +124,8 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       ...rest
     } = props;
 
+    const { cn } = useRenameCSS();
+
     const themeContext = useThemeInternal(false);
 
     const searchRef = useRef<HTMLInputElement | null>(null);
@@ -153,7 +154,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     const ClearButton = () =>
       themeContext ? (
         <Button
-          className="navds-search__button-clear"
+          className={cn("navds-search__button-clear")}
           variant="tertiary-neutral"
           size={size === "medium" ? "small" : "xsmall"}
           icon={<XMarkIcon aria-hidden />}
@@ -165,10 +166,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <button
           type="button"
           onClick={(event) => handleClear({ trigger: "Click", event })}
-          className="navds-search__button-clear"
+          className={cn("navds-search__button-clear")}
           hidden={!showClearButton}
         >
-          <span className="navds-sr-only">
+          <span className={cn("navds-sr-only")}>
             {clearButtonLabel || translate("clear")}
           </span>
           <XMarkIcon aria-hidden />
@@ -185,7 +186,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           searchRef.current?.value && event.preventDefault();
           handleClear({ trigger: "Escape", event });
         }}
-        className={cl(
+        className={cn(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
@@ -200,7 +201,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cl("navds-form-field__label", {
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
@@ -208,7 +209,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         </Label>
         {!!description && (
           <BodyShort
-            className={cl("navds-form-field__description", {
+            className={cn("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -218,12 +219,12 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-search__wrapper">
-          <div className="navds-search__wrapper-inner">
+        <div className={cn("navds-search__wrapper")}>
+          <div className={cn("navds-search__wrapper-inner")}>
             {variant === "simple" && (
               <MagnifyingGlassIcon
                 aria-hidden
-                className="navds-search__search-icon"
+                className={cn("navds-search__search-icon")}
               />
             )}
             <input
@@ -233,7 +234,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
               type="search"
-              className={cl(
+              className={cn(
                 className,
                 "navds-search__input",
                 `navds-search__input--${variant}`,
@@ -257,7 +258,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           </SearchContext.Provider>
         </div>
         <div
-          className="navds-form-field__error"
+          className={cn("navds-form-field__error")}
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

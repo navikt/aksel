@@ -1,4 +1,4 @@
-.navds-textarea__input {
+.aksel-textarea__input {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   height: var(--__axc-textarea-height);
   appearance: none;
@@ -31,51 +31,51 @@
     cursor: not-allowed;
   }
 
-  .navds-form-field--small & {
+  .aksel-form-field--small & {
     padding: var(--ax-space-6);
   }
 
-  .navds-textarea--readonly & {
+  .aksel-textarea--readonly & {
     background-color: var(--ax-bg-neutral-moderate);
     border-color: var(--ax-border-neutral-subtleA);
     cursor: default;
   }
 }
 
-.navds-textarea__counter {
+.aksel-textarea__counter {
   margin-top: -0.25rem;
   color: var(--ax-text-neutral-subtle);
 }
 
-.navds-textarea__counter--error {
+.aksel-textarea__counter--error {
   color: var(--ax-text-danger-subtle);
 }
 
-.navds-textarea__sr-counter {
+.aksel-textarea__sr-counter {
   display: none;
 }
 
-.navds-textarea__input:focus ~ .navds-textarea__sr-counter {
+.aksel-textarea__input:focus ~ .aksel-textarea__sr-counter {
   display: initial;
 }
 
-.navds-textarea--resize-both .navds-textarea__input {
+.aksel-textarea--resize-both .aksel-textarea__input {
   resize: both;
   border-end-end-radius: 0;
 }
 
-.navds-textarea--resize-horizontal .navds-textarea__input {
+.aksel-textarea--resize-horizontal .aksel-textarea__input {
   resize: horizontal;
   border-end-end-radius: 0;
 }
 
-.navds-textarea--resize-vertical .navds-textarea__input {
+.aksel-textarea--resize-vertical .aksel-textarea__input {
   resize: vertical;
   border-end-end-radius: 0;
 }
 
-.navds-textarea--autoscrollbar,
-.navds-textarea--autoscrollbar .navds-textarea__wrapper {
+.aksel-textarea--autoscrollbar,
+.aksel-textarea--autoscrollbar .aksel-textarea__wrapper {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -85,17 +85,17 @@
   margin: -3px;
 }
 
-.navds-textarea--autoscrollbar .navds-textarea__input {
+.aksel-textarea--autoscrollbar .aksel-textarea__input {
   scrollbar-gutter: stable; /* Needed to prevent scrollbar from appearing too early */
 }
 
-.navds-textarea--error .navds-textarea__input:not(:disabled) {
+.aksel-textarea--error .aksel-textarea__input:not(:disabled) {
   box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
   border-color: var(--ax-border-danger-strong);
 }
 
 @media (forced-colors: active) {
-  .navds-textarea__input {
+  .aksel-textarea__input {
     background-color: field;
     color: fieldtext;
   }

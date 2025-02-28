@@ -1,6 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
-import { Theme, useThemeInternal } from "../theme/Theme";
+import { Theme, useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import InternalHeaderButton, {
   InternalHeaderButtonProps,
@@ -59,7 +58,8 @@ interface InternalHeaderComponent
  * ```jsx
  * <InternalHeader>
  *   <InternalHeader.Title as="h1">Sykepenger</InternalHeader.Title>
- *   <InternalHeader.User name="Ola Normann" className="ml-auto" />
+ *   <Spacer />
+ *   <InternalHeader.User name="Ola Normann"  />
  * </InternalHeader>
  * ```
  * @example
@@ -79,6 +79,7 @@ interface InternalHeaderComponent
  */
 export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
   const themeContext = useThemeInternal(false);
+  const { cn } = useRenameCSS();
 
   /*
    * Component is always in "dark" mode, so we manually override global theme.
@@ -89,7 +90,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
         <header
           {...rest}
           ref={ref}
-          className={cl("navds-internalheader", className)}
+          className={cn("navds-internalheader", className)}
         />
       </Theme>
     );
@@ -100,7 +101,7 @@ export const InternalHeader = forwardRef(({ className, ...rest }, ref) => {
       data-theme="dark"
       {...rest}
       ref={ref}
-      className={cl("navds-internalheader", className)}
+      className={cn("navds-internalheader", className)}
     />
   );
 }) as InternalHeaderComponent;

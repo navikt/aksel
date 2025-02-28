@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React from "react";
 import { Slot } from "../../slot/Slot";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { getResponsiveProps, getResponsiveValue } from "../utilities/css";
 import { ResponsiveProp, SpacingScale } from "../utilities/types";
 
@@ -253,6 +252,7 @@ export const BasePrimitive = ({
   gridColumn,
 }: BasePrimitiveProps) => {
   const themeContext = useThemeInternal(false);
+  const { cn } = useRenameCSS();
   const prefix = themeContext ? "ax" : "a";
 
   const style: React.CSSProperties = {
@@ -292,7 +292,7 @@ export const BasePrimitive = ({
 
   return (
     <Slot
-      className={cl({
+      className={cn({
         className,
         "navds-r-p": padding,
         "navds-r-pi": paddingInline,

@@ -10,6 +10,7 @@ import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@navikt/aksel-icons";
 import { Button } from "../../../button";
 import { Select } from "../../../form/select";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useDateTranslationContext } from "../../Date.locale";
 import { useMonthPickerContext } from "../MonthPicker.context";
 
@@ -18,6 +19,7 @@ const MonthPickerCaption = () => {
     useMonthPickerContext();
 
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
 
   const years: Date[] = [];
 
@@ -57,9 +59,9 @@ const MonthPickerCaption = () => {
   };
 
   return (
-    <div className="navds-date__caption">
+    <div className={cn("navds-date__caption")}>
       <Button
-        className="navds-date__caption-button"
+        className={cn("navds-date__caption-button")}
         disabled={disablePreviousYear()}
         onClick={() => handleButtonClick(-1)}
         icon={<ArrowLeftIcon title={translate("goToPreviousYear")} />}
@@ -73,7 +75,7 @@ const MonthPickerCaption = () => {
           hideLabel
           value={year.getFullYear()}
           onChange={handleYearChange}
-          className="navds-date__caption__year"
+          className={cn("navds-date__caption__year")}
         >
           {years.map((yearOpt) => (
             <option key={yearOpt.getFullYear()} value={yearOpt.getFullYear()}>
@@ -82,12 +84,12 @@ const MonthPickerCaption = () => {
           ))}
         </Select>
       ) : (
-        <span className="navds-date__year-label" aria-live="polite">
+        <span className={cn("navds-date__year-label")} aria-live="polite">
           {year.getFullYear()}
         </span>
       )}
       <Button
-        className="navds-date__caption-button"
+        className={cn("navds-date__caption-button")}
         disabled={disableNextYear()}
         onClick={() => handleButtonClick(1)}
         icon={<ArrowRightIcon title={translate("goToNextYear")} />}

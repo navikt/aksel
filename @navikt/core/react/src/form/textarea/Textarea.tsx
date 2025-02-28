@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import TextareaAutosize from "../../util/TextareaAutoSize";
@@ -99,6 +100,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
+    const { cn } = useRenameCSS();
+
     const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
@@ -120,7 +123,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
@@ -138,7 +141,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cl("navds-form-field__label", {
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
@@ -147,7 +150,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         </Label>
         {!!description && (
           <BodyShort
-            className={cl("navds-form-field__description", {
+            className={cn("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -170,7 +173,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           autoScrollbar={UNSAFE_autoScrollbar}
           ref={ref}
           readOnly={readOnly}
-          className={cl(
+          className={cn(
             "navds-textarea__input",
             "navds-body-short",
             `navds-body-short--${size ?? "medium"}`,
@@ -187,7 +190,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
         )}
         <div
-          className="navds-form-field__error"
+          className={cn("navds-form-field__error")}
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

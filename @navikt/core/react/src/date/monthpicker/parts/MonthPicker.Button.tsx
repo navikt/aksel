@@ -1,4 +1,3 @@
-import cl from "clsx";
 import {
   compareAsc,
   compareDesc,
@@ -7,6 +6,7 @@ import {
   setYear,
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { dateIsInCurrentMonth, isMatch } from "../../date-utils";
 import { useMonthPickerContext } from "../MonthPicker.context";
 import { nextEnabled } from "../MonthPicker.util";
@@ -48,6 +48,7 @@ export const MonthButton = ({
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
 
+  const { cn } = useRenameCSS();
   const {
     fromDate,
     toDate,
@@ -82,7 +83,7 @@ export const MonthButton = ({
       disabled={isDisabled}
       aria-pressed={!!isSelected}
       data-current-month={isThisMonth}
-      className={cl("navds-date__month-button", {
+      className={cn("navds-date__month-button", {
         "rdp-day_today": isThisMonth,
         "rdp-day_selected": isSelected,
         "rdp-day_disabled": isDisabled,
@@ -116,7 +117,7 @@ export const MonthButton = ({
           .replace(".", "")
           .substring(0, 3)}
       </span>
-      <span className="navds-sr-only">
+      <span className={cn("navds-sr-only")}>
         {format(new Date(month), "LLLL", { locale })}
       </span>
     </button>

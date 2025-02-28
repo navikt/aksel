@@ -1,10 +1,10 @@
-import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
   useCallback,
   useRef,
 } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks";
@@ -38,6 +38,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     { inputClassName, shouldShowSelectedOptions, placeholder, onBlur, ...rest },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     const internalRef = useRef<HTMLInputElement>(null);
     const mergedRefs = useMergeRefs(ref, internalRef);
     const {
@@ -287,7 +289,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         onKeyDown={handleKeyDown}
         autoComplete="off"
         placeholder={selectedOptions.length ? undefined : placeholder}
-        className={cl(
+        className={cn(
           inputClassName,
           "navds-combobox__input",
           "navds-body-short",

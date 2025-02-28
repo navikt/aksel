@@ -13,9 +13,8 @@ import {
   useInteractions,
   useRole,
 } from "@floating-ui/react";
-import cl from "clsx";
 import React, { useRef, useState } from "react";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useI18n } from "../../util/i18n/i18n.hooks";
 import { usePeriodContext } from "../hooks/usePeriodContext";
@@ -49,6 +48,7 @@ const ClickablePeriod = React.memo(
     restProps,
     periodRef,
   }: TimelineClickablePeriodProps) => {
+    const { cn } = useRenameCSS();
     const [open, setOpen] = useState(false);
     const { index } = useRowContext();
     const { firstFocus } = usePeriodContext();
@@ -114,7 +114,7 @@ const ClickablePeriod = React.memo(
             mergedRef(r);
           }}
           aria-label={ariaLabel(start, end, status, statusLabel, translate)}
-          className={cl(
+          className={cn(
             "navds-timeline__period--clickable",
             getConditionalClasses(cropped, direction, status),
             restProps?.className,
@@ -151,7 +151,7 @@ const ClickablePeriod = React.memo(
             },
           })}
         >
-          <span className="navds-timeline__period--inner">{icon}</span>
+          <span className={cn("navds-timeline__period--inner")}>{icon}</span>
         </button>
         {children && open && (
           <FloatingFocusManager
@@ -161,7 +161,7 @@ const ClickablePeriod = React.memo(
             returnFocus={false}
           >
             <div
-              className="navds-timeline__popover"
+              className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
               {...getFloatingProps()}
@@ -176,7 +176,7 @@ const ClickablePeriod = React.memo(
                     ...(arrowY != null ? { top: arrowY } : {}),
                     ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
                   }}
-                  className="navds-timeline__popover-arrow"
+                  className={cn("navds-timeline__popover-arrow")}
                 />
               )}
             </div>

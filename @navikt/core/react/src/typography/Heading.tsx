@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -52,13 +52,14 @@ export const Heading: OverridableComponent<HeadingProps, HTMLHeadingElement> =
       },
       ref,
     ) => {
+      const { cn } = useRenameCSS();
       const HeadingTag = as ?? (`h${level}` as React.ElementType);
 
       return (
         <HeadingTag
           {...rest}
           ref={ref}
-          className={cl(
+          className={cn(
             className,
             "navds-heading",
             `navds-heading--${size}`,

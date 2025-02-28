@@ -1,4 +1,4 @@
-.navds-button {
+.aksel-button {
   --__axc-button-icon-size: 1.5rem;
   --__axc-button-icon-margin: -4px;
   --__axc-button-border-color: transparent;
@@ -22,44 +22,44 @@
   }
 }
 
-.navds-button--small,
-.navds-button--xsmall {
+.aksel-button--small,
+.aksel-button--xsmall {
   --__axc-button-icon-margin: -2px;
 }
 
-.navds-button--small {
+.aksel-button--small {
   padding: var(--ax-space-4) var(--ax-space-12);
   min-height: 2rem;
   min-width: 2rem;
   gap: var(--ax-space-6);
 }
 
-.navds-button--xsmall {
+.aksel-button--xsmall {
   padding: var(--ax-space-2) var(--ax-space-8);
   gap: var(--ax-space-4);
 
   --__axc-button-icon-size: 1.25rem;
 }
 
-.navds-button--icon-only {
+.aksel-button--icon-only {
   padding: var(--ax-space-12);
 
-  &.navds-button--small {
+  &.aksel-button--small {
     padding: var(--ax-space-4);
   }
 
-  &.navds-button--xsmall {
+  &.aksel-button--xsmall {
     padding: var(--ax-space-2);
   }
 }
 
 @supports not selector(:focus-visible) {
-  .navds-button:focus {
+  .aksel-button:focus {
     outline: 3px solid var(--ax-border-focus);
   }
 }
 
-.navds-button__icon {
+.aksel-button__icon {
   font-size: var(--__axc-button-icon-size);
   display: flex;
 
@@ -71,15 +71,15 @@
     margin-right: var(--__axc-button-icon-margin);
   }
 
-  .navds-button--icon-only & {
+  .aksel-button--icon-only & {
     margin: 0;
   }
 }
 
 /*************************
- * .navds-button--primary *
+ * .aksel-button--primary *
  *************************/
-.navds-button--primary {
+.aksel-button--primary {
   background-color: var(--ax-bg-accent-strong);
   color: var(--ax-text-accent-contrast);
 
@@ -91,7 +91,7 @@
     background-color: var(--ax-bg-accent-strong-pressed);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     background-color: var(--ax-bg-accent-strong);
   }
 
@@ -108,9 +108,9 @@
 }
 
 /*************************
- * .navds-button--primary-neutral *
+ * .aksel-button--primary-neutral *
  *************************/
-.navds-button--primary-neutral {
+.aksel-button--primary-neutral {
   background-color: var(--ax-bg-neutral-strong);
   color: var(--ax-text-neutral-contrast);
 
@@ -122,15 +122,15 @@
     background-color: var(--ax-bg-neutral-strong-pressed);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     background-color: var(--ax-bg-neutral-strong);
   }
 }
 
 /**************************
-* .navds-button--secondary *
+* .aksel-button--secondary *
  **************************/
-.navds-button--secondary {
+.aksel-button--secondary {
   --__axc-button-border-color: var(--ax-border-accent);
 
   background-color: transparent;
@@ -146,7 +146,7 @@
     background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     --__axc-button-border-color: var(--ax-border-accent);
 
     background-color: transparent;
@@ -155,9 +155,9 @@
 }
 
 /**************************
-* .navds-button--secondary-neutral *
+* .aksel-button--secondary-neutral *
  **************************/
-.navds-button--secondary-neutral {
+.aksel-button--secondary-neutral {
   --__axc-button-border-color: var(--ax-border-neutral);
 
   background-color: transparent;
@@ -173,7 +173,7 @@
     background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     --__axc-button-border-color: var(--ax-border-neutral);
 
     color: var(--ax-text-neutral);
@@ -182,9 +182,9 @@
 }
 
 /****************************
- * .navds-button--tertiary *
+ * .aksel-button--tertiary *
  ****************************/
-.navds-button--tertiary {
+.aksel-button--tertiary {
   background-color: transparent;
   color: var(--ax-text-accent-subtle);
 
@@ -196,16 +196,16 @@
     background-color: var(--ax-bg-accent-moderate-pressedA);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     color: var(--ax-text-accent-subtle);
     background-color: transparent;
   }
 }
 
 /****************************
- * .navds-button--tertiary-neutral *
+ * .aksel-button--tertiary-neutral *
  ****************************/
-.navds-button--tertiary-neutral {
+.aksel-button--tertiary-neutral {
   background-color: transparent;
   color: var(--ax-text-neutral);
 
@@ -217,16 +217,16 @@
     background-color: var(--ax-bg-neutral-moderate-pressedA);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     color: var(--ax-text-neutral);
     background-color: transparent;
   }
 }
 
 /*************************
- * .navds-button--danger *
+ * .aksel-button--danger *
  *************************/
-.navds-button--danger {
+.aksel-button--danger {
   background-color: var(--ax-bg-danger-strong);
   color: var(--ax-text-danger-contrast);
 
@@ -238,70 +238,70 @@
     background-color: var(--ax-bg-danger-strong-pressed);
   }
 
-  &:is(:disabled, .navds-button--disabled) {
+  &:is(:disabled, .aksel-button--disabled) {
     background-color: var(--ax-bg-danger-strong);
   }
 }
 
 /**************************
- * .navds-button:disabled *
+ * .aksel-button:disabled *
  **************************/
 
-.navds-button:where(:disabled, .navds-button--disabled) {
+.aksel-button:where(:disabled, .aksel-button--disabled) {
   cursor: not-allowed;
 }
 
-.navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+.aksel-button:not(.aksel-button--loading):where(:disabled, .aksel-button--disabled) {
   opacity: var(--ax-opacity-disabled);
 }
 
 /* Loader overrides */
-.navds-button > .navds-loader {
+.aksel-button > .aksel-loader {
   position: absolute;
 }
 
-.navds-button .navds-loader .navds-loader__foreground {
+.aksel-button .aksel-loader .aksel-loader__foreground {
   stroke: currentColor;
 }
 
-.navds-button--primary .navds-loader .navds-loader__background,
-.navds-button--danger .navds-loader .navds-loader__background {
+.aksel-button--primary .aksel-loader .aksel-loader__background,
+.aksel-button--danger .aksel-loader .aksel-loader__background {
   stroke: rgb(255 255 255 / 0.3);
 }
 
-.navds-button--loading > :not(.navds-loader) {
+.aksel-button--loading > :not(.aksel-loader) {
   visibility: hidden;
 }
 
 @media (forced-colors: active) {
-  .navds-button:not(.navds-button--loading):where(:disabled, .navds-button--disabled) {
+  .aksel-button:not(.aksel-button--loading):where(:disabled, .aksel-button--disabled) {
     opacity: 1;
     color: GrayText;
   }
 
-  .navds-button {
+  .aksel-button {
     border: 1px solid transparent;
     color: ButtonText;
     background-color: ButtonFace;
   }
 
-  .navds-button:not(:disabled):hover {
+  .aksel-button:not(:disabled):hover {
     background-color: highlighttext;
     border-color: highlight;
     color: highlight;
     box-shadow: none;
   }
 
-  .navds-button:not(:disabled):hover span {
+  .aksel-button:not(:disabled):hover span {
     forced-color-adjust: none;
   }
 
-  .navds-button .navds-loader .navds-loader__foreground {
+  .aksel-button .aksel-loader .aksel-loader__foreground {
     stroke: canvas;
   }
 
-  .navds-button--primary .navds-loader .navds-loader__background,
-  .navds-button--danger .navds-loader .navds-loader__background {
+  .aksel-button--primary .aksel-loader .aksel-loader__background,
+  .aksel-button--danger .aksel-loader .aksel-loader__background {
     stroke: canvastext;
   }
 }

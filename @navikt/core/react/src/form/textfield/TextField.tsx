@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { InputHTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort, ErrorMessage, Label } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIcon } from "../ReadOnlyIcon";
@@ -48,6 +48,8 @@ export interface TextFieldProps
  */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
+    const { cn } = useRenameCSS();
+
     const {
       inputProps,
       errorId,
@@ -70,7 +72,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
@@ -87,7 +89,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          className={cl("navds-form-field__label", {
+          className={cn("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
@@ -97,7 +99,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
         {!!description && (
           <BodyShort
-            className={cl("navds-form-field__description", {
+            className={cn("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
@@ -113,7 +115,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ref={ref}
           type={type}
           readOnly={readOnly}
-          className={cl(
+          className={cn(
             "navds-text-field__input",
             "navds-body-short",
             `navds-body-short--${size ?? "medium"}`,
@@ -121,7 +123,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           size={htmlSize}
         />
         <div
-          className="navds-form-field__error"
+          className={cn("navds-form-field__error")}
           id={errorId}
           aria-relevant="additions removals"
           aria-live="polite"

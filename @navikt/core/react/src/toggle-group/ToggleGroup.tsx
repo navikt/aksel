@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
 import { useId } from "../util";
 import {
@@ -53,6 +54,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const descendants = useToggleGroupDescendants();
 
     const toggleGroupContext = useToggleGroup({
@@ -83,14 +85,14 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       <ToggleGroupDescendantsProvider value={descendants}>
         <ToggleGroupProvider {...context}>
           <div
-            className={cl("navds-toggle-group__wrapper", className, {
+            className={cn("navds-toggle-group__wrapper", className, {
               "navds-toggle-group__wrapper--fill": fill,
             })}
           >
             {label && (
               <Label
                 size={size}
-                className="navds-toggle-group__label"
+                className={cn("navds-toggle-group__label")}
                 id={labelId}
               >
                 {label}
@@ -99,7 +101,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             <div
               {...rest}
               ref={ref}
-              className={cl(
+              className={cn(
                 "navds-toggle-group",
                 `navds-toggle-group--${size}`,
                 `navds-toggle-group--${variant}`,

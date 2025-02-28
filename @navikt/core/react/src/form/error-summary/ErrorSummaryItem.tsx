@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { OverridableComponent } from "../../util/types";
 
 export interface ErrorSummaryItemProps
@@ -21,12 +21,14 @@ type ErrorSummaryItemType = OverridableComponent<
 
 export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+
     return (
       <li>
         <Component
           {...rest}
           ref={ref}
-          className={cl(className, "navds-error-summary__item", "navds-link")}
+          className={cn(className, "navds-error-summary__item", "navds-link")}
         >
           {children}
         </Component>

@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import { ListContext } from "./List.context";
 import type { ListItemProps } from "./List.types";
@@ -10,6 +10,7 @@ import type { ListItemProps } from "./List.types";
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
   ({ className, children, title, icon, ...rest }, ref) => {
     const { listType, size } = useContext(ListContext);
+    const { cn } = useRenameCSS();
 
     if (listType === "ol" && icon) {
       console.warn(
@@ -18,10 +19,10 @@ export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
     }
 
     return (
-      <li {...rest} ref={ref} className={cl("navds-list__item", className)}>
+      <li {...rest} ref={ref} className={cn("navds-list__item", className)}>
         {listType === "ul" && (
           <div
-            className={cl("navds-list__item-marker", {
+            className={cn("navds-list__item-marker", {
               "navds-list__item-marker--icon": icon,
               "navds-list__item-marker--bullet": !icon,
             })}

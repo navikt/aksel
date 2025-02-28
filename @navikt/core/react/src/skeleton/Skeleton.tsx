@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -45,11 +45,12 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     return (
       <As
         {...rest}
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-skeleton",
           className,
           `navds-skeleton--${variant}`,

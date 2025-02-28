@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -19,16 +19,19 @@ export type RowType = React.ForwardRefExoticComponent<
 >;
 
 export const Row: RowType = forwardRef(
-  ({ className, selected = false, shadeOnHover = true, ...rest }, ref) => (
-    <tr
-      {...rest}
-      ref={ref}
-      className={cl("navds-table__row", className, {
-        "navds-table__row--selected": selected,
-        "navds-table__row--shade-on-hover": shadeOnHover,
-      })}
-    />
-  ),
+  ({ className, selected = false, shadeOnHover = true, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+    return (
+      <tr
+        {...rest}
+        ref={ref}
+        className={cn("navds-table__row", className, {
+          "navds-table__row--selected": selected,
+          "navds-table__row--shade-on-hover": shadeOnHover,
+        })}
+      />
+    );
+  },
 );
 
 export default Row;

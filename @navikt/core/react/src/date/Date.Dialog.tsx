@@ -1,9 +1,9 @@
-import cl from "clsx";
 import React, { useRef } from "react";
 import { Button } from "../button";
 import { Modal } from "../modal";
 import { useModalContext } from "../modal/Modal.context";
 import { Popover } from "../popover";
+import { useRenameCSS } from "../theme/Theme";
 import { useMedia } from "../util/hooks";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { TFunction } from "../util/i18n/i18n.types";
@@ -42,6 +42,8 @@ const DateDialog = ({
   popoverProps,
 }: DateWrapperProps) => {
   const translateGlobal = useI18n("global", getGlobalTranslations(locale));
+  const { cn } = useRenameCSS();
+
   const modalRef = useRef<HTMLDialogElement>(null);
   const isInModal = useModalContext(false) !== undefined;
   const hideModal =
@@ -56,7 +58,7 @@ const DateDialog = ({
         onClose={onClose}
         placement="bottom-start"
         role="dialog"
-        className={cl("navds-date__popover", {
+        className={cn("navds-date__popover", {
           "navds-date": variant === "month",
         })}
         flip={false}
@@ -76,14 +78,14 @@ const DateDialog = ({
         onClose();
       }}
       aria-label={translate(variantToLabel[variant])}
-      className={cl("navds-date__modal", {
+      className={cn("navds-date__modal", {
         "navds-date__nested-modal": isInModal,
         "navds-date": variant === "month",
       })}
       closeOnBackdropClick
       placement="top"
     >
-      <div className="navds-date__modal-body">
+      <div className={cn("navds-date__modal-body")}>
         {children}
         <Button
           variant="tertiary"

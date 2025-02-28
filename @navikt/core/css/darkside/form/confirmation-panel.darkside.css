@@ -1,4 +1,4 @@
-.navds-confirmation-panel__inner {
+.aksel-confirmation-panel__inner {
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-12);
@@ -11,12 +11,12 @@
   position: relative;
 }
 
-.navds-confirmation-panel__content {
+.aksel-confirmation-panel__content {
   max-width: 80ch;
 }
 
 @media (forced-colors: active) {
-  .navds-confirmation-panel__inner::before {
+  .aksel-confirmation-panel__inner::before {
     content: "";
     position: absolute;
     left: 0;
@@ -29,11 +29,11 @@
     border-end-start-radius: calc(var(--ax-border-radius-large) - 1px);
   }
 
-  .navds-confirmation-panel--checked .navds-confirmation-panel__inner::before {
+  .aksel-confirmation-panel--checked .aksel-confirmation-panel__inner::before {
     border-color: green;
   }
 
-  .navds-confirmation-panel--error .navds-confirmation-panel__inner::before {
+  .aksel-confirmation-panel--error .aksel-confirmation-panel__inner::before {
     border-color: red;
   }
 }

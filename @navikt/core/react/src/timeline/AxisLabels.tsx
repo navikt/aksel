@@ -15,6 +15,7 @@ import {
   subDays,
 } from "date-fns";
 import React from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { Detail } from "../typography/Detail";
 import { useDateLocale, useI18n } from "../util/i18n/i18n.hooks";
 import { TFunction } from "../util/i18n/i18n.types";
@@ -149,11 +150,13 @@ export const AxisLabels = ({
 
   const labels = getLabels(startDate, endDate, direction, locale, translate);
 
+  const { cn } = useRenameCSS();
+
   return (
-    <div className="navds-timeline__axislabels" aria-hidden="true">
+    <div className={cn("navds-timeline__axislabels")} aria-hidden="true">
       {labels.filter(isVisible).map((etikett) => (
         <Detail
-          className="navds-timeline__axislabels-label"
+          className={cn("navds-timeline__axislabels-label")}
           as="div"
           key={etikett.label}
           style={{

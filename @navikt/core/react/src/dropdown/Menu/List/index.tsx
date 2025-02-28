@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { OverridableComponent } from "../../../util/types";
 import ListItem, { ListItemProps } from "./Item";
 
@@ -21,11 +21,15 @@ export interface ListType
   Item: OverridableComponent<ListItemProps, HTMLButtonElement>;
 }
 
-export const List = forwardRef(({ className, children, ...rest }, ref) => (
-  <ul {...rest} ref={ref} className={cl("navds-dropdown__list", className)}>
-    {children}
-  </ul>
-)) as ListType;
+export const List = forwardRef(({ className, children, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
+
+  return (
+    <ul {...rest} ref={ref} className={cn("navds-dropdown__list", className)}>
+      {children}
+    </ul>
+  );
+}) as ListType;
 
 List.Item = ListItem;
 List.displayName = "Dropdown.Menu.List";

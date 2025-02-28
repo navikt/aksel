@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../../../theme/Theme";
 
 interface ScrollButtonProps {
   hidden: boolean;
@@ -9,9 +9,11 @@ interface ScrollButtonProps {
 }
 
 function ScrollButton({ hidden, onClick, dir }: ScrollButtonProps) {
+  const { cn } = useRenameCSS();
+
   return (
     <div
-      className={cl("navds-tabs__scroll-button", {
+      className={cn("navds-tabs__scroll-button", {
         "navds-tabs__scroll-button--hidden": hidden,
       })}
       onClick={onClick}

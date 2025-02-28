@@ -1,7 +1,7 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { Panel } from "../panel";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import {
   LinkPanelDescription,
@@ -59,16 +59,21 @@ export const LinkPanelComponent: OverridableComponent<
   HTMLAnchorElement
 > = forwardRef(
   ({ children, as = "a", border = true, className, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
+
     return (
       <Panel
         {...rest}
         as={as}
         border={border}
         ref={ref}
-        className={cl("navds-link-panel", className)}
+        className={cn("navds-link-panel", className)}
       >
-        <div className="navds-link-panel__content">{children}</div>
-        <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden />
+        <div className={cn("navds-link-panel__content")}>{children}</div>
+        <ChevronRightIcon
+          className={cn("navds-link-panel__chevron")}
+          aria-hidden
+        />
       </Panel>
     );
   },
