@@ -59,14 +59,24 @@ export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const tokens = dictionary.allTokens
     .map((token, index) => {
+      const name = kebabCaseForAlpha(token.name.slice(2));
+      const nameParts = name.split("-");
       return (
         JSON.stringify({
-          name: kebabCaseForAlpha(token.name.slice(2)),
+          name,
           value: createTokenValue(token),
           rawValue: token.value,
           comment: token.comment,
           type: token.type,
+          rawType: token.attributes?.type,
           group: token.group,
+          all: token,
+          category: nameParts[0],
+          role:
+            token.group?.indexOf(".") >= 0
+              ? token.group.split(".")[1]
+              : token.group,
+          modifier: nameParts[nameParts.length - 1],
         }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
       );
     })
