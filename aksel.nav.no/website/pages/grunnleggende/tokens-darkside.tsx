@@ -6,6 +6,7 @@ import {
   Box,
   Chips,
   CopyButton,
+  HGrid,
   HStack,
   Heading,
   Link,
@@ -35,6 +36,7 @@ import {
 import { generateSidebar } from "@/utils";
 // import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { SEO } from "@/web/seo/SEO";
+import TableOfContents from "@/web/toc/TableOfContents";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
 
@@ -274,7 +276,7 @@ const Section = ({
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
     <section>
-      <Heading level="2" size="large" spacing>
+      <Heading id={category} level="2" size="large" spacing>
         {Categories[category]}
       </Heading>
       <div>
@@ -324,6 +326,15 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
   const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
     addedCategories.includes(token.type),
   );
+  const tokensOfOtherTypes = tokenDocs
+    .filter((token) => !addedCategories.includes(token.type))
+    .map(({ type }) => type)
+    .reduce(
+      (acc, curr) => [...acc, ...(!acc.includes(curr) ? [curr] : [])],
+      [] as string[],
+    );
+  // eslint-disable-next-line no-console
+  console.log("Tokens of other types", tokensOfOtherTypes);
   const tokensByCategoryAndRole = tokensWithCategoryAndRole.reduce(
     (acc, curr) => {
       if (!curr.category) {
@@ -354,6 +365,18 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     },
     {} as Record<string, Record<string, (typeof tokenDocs)[number]>>,
   );
+  const toc = tokensWithCategoryAndRole
+    .map((token) => token.category)
+    .filter(
+      (category, index, array) =>
+        array.findIndex((cat) => cat === category) === index,
+    )
+    .map((category) => ({
+      title: Categories[category],
+      id: category,
+      children: [],
+    }));
+
   return (
     <>
       <SEO
@@ -378,21 +401,29 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
         }
         pageProps={page}
       >
-        <Toolbar />
-        <VStack gap="10">
-          {Object.entries(tokensByCategoryAndRole).map(
-            ([category, categoryRoles]) => {
-              return (
-                <Section
-                  key={category}
-                  category={category}
-                  description="Lorem ipsum"
-                  tokensByRole={categoryRoles}
-                />
-              );
-            },
-          )}
-        </VStack>
+        <HGrid columns="auto 15rem" as="main" gap="10">
+          <VStack gap="10">
+            <Toolbar />
+            {Object.entries(tokensByCategoryAndRole).map(
+              ([category, categoryRoles]) => {
+                // eslint-disable-next-line no-console
+                console.log("categoryRoles", categoryRoles);
+                return (
+                  <Section
+                    key={category}
+                    category={category}
+                    description="Lorem ipsum"
+                    tokensByRole={categoryRoles}
+                  />
+                );
+              },
+            )}
+          </VStack>
+
+          <nav>
+            <TableOfContents toc={toc} variant="subtle" />
+          </nav>
+        </HGrid>
       </WithSidebar>
       <Footer />
     </>
