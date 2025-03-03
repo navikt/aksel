@@ -19,8 +19,7 @@
     "build": "yarn clean && tsc -p tsconfig.json",
     "dev": "tsc --watch -p tsconfig.json",
     "test": "vitest run",
-    "test:watch": "vitest watch",
-    "testbundle": "yarn esbuild src/index.ts --packages=external --platform=node --target=es2015 --target=node16 --bundle --define:process.env.NODE_ENV=\\\"production\\\" --outfile='dist/index.js'"
+    "test:watch": "vitest watch"
   },
   "bin": "./dist/index.js",
   "repository": {
@@ -45,7 +44,6 @@
     "react-scanner": "^1.1.0"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0",
     "rimraf": "6.0.1",
     "typescript": "5.5.4",
     "vitest": "^2.1.8"
