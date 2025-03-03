@@ -31,10 +31,10 @@ import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
+import { CONSENT_TRACKER_ID } from "@/web/CookieProvider";
 import { IntroCards } from "@/web/IntroCards";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
 import { SEO } from "@/web/seo/SEO";
-import { CONSENT_TRACKER_ID } from "@/web/useConsent";
 
 type PageProps = NextPageT<{
   tema: {

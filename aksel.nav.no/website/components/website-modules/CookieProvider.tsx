@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+"use client";
+
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Cookies } from "typescript-cookie";
 
 export const CONSENT_TRACKER_ID = "aksel-consent";
@@ -18,7 +20,7 @@ type CookieData = {
   };
 };
 
-const getStorageAcceptedTracking = () => {
+const getCookieConsent = () => {
   const rawState = Cookies.get(CONSENT_TRACKER_ID) as string;
 
   if (!rawState) {
@@ -30,7 +32,7 @@ const getStorageAcceptedTracking = () => {
   return cookieData.consents.tracking as CONSENT_TRACKER_STATE;
 };
 
-const updateConsent = (state: CONSENT_TRACKER_STATE) => {
+const updateCookieConsent = (state: CONSENT_TRACKER_STATE) => {
   const cookieData: CookieData = {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -48,16 +50,47 @@ const updateConsent = (state: CONSENT_TRACKER_STATE) => {
   });
 };
 
-const useConsent = () => {
+type CookieContextType = {
+  consent: CONSENT_TRACKER_STATE;
+  updateConsent: (state: CONSENT_TRACKER_STATE) => void;
+};
+
+const CookieContext = createContext<CookieContextType | null>(null);
+
+export const CookieProvider = ({ children }: { children: React.ReactNode }) => {
   const [consent, setConsent] = useState<CONSENT_TRACKER_STATE>("undecided");
 
   useEffect(() => {
-    const acceptedTracking = getStorageAcceptedTracking();
+    const acceptedTracking = getCookieConsent();
 
     setConsent(acceptedTracking);
   }, []);
 
-  return { consent, updateConsent };
+  const updateConsent = (state: CONSENT_TRACKER_STATE) => {
+    updateCookieConsent(state);
+    setConsent(state);
+  };
+
+  const contextValue = useMemo(() => {
+    return {
+      consent,
+      updateConsent,
+    };
+  }, [consent]);
+
+  return (
+    <CookieContext.Provider value={contextValue}>
+      {children}
+    </CookieContext.Provider>
+  );
 };
 
-export default useConsent;
+export const useCookies = () => {
+  const context = useContext(CookieContext);
+
+  if (!context) {
+    throw new Error("useCookies must be used within a CookieProvider");
+  }
+
+  return context;
+};
