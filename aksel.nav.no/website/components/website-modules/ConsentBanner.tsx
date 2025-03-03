@@ -1,5 +1,6 @@
 "use client";
 
+import getConfig from "next/config";
 import NextLink from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
@@ -26,6 +27,7 @@ export const ConsentBanner = ({
   const [clientAcceptsTracking, setClientAcceptsTracking] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(defaultShow);
   const { consent, updateConsent } = useConsent();
+  const trackingId = getConfig().publicRuntimeConfig.UMAMI_TRACKING_ID;
 
   useEffect(() => {
     const disabledModalParam = new URLSearchParams(window.location.search).get(
@@ -48,7 +50,7 @@ export const ConsentBanner = ({
           defer
           src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
           data-host-url="https://umami.nav.no"
-          data-website-id="7b9fb2cd-40f4-4a30-b208-5b4dba026b57"
+          data-website-id={trackingId}
           data-auto-track={clientAcceptsTracking}
           data-tag={umamiTag}
         ></Script>
