@@ -1,5 +1,6 @@
 import { startOfMonth, startOfYear } from "date-fns";
 import { describe, expect, test } from "vitest";
+import { isDateOutsideRange } from "./check-dates";
 import { clampDisplayMonth, clampDisplayYear } from "./clamp-dates";
 
 describe("clampDisplayMonth", () => {
@@ -69,5 +70,87 @@ describe("clampDisplayYear", () => {
         end: new Date(2024, 0, 1),
       }),
     ).toEqual(startOfYear(month));
+  });
+});
+
+describe("isDateOutsideRange", () => {
+  test("returns false when day is within range", () => {
+    const day = new Date(2023, 5, 15);
+    const fromDate = new Date(2023, 0, 1);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, fromDate, toDate })).toBe(false);
+  });
+
+  test("returns true when day is after toDate", () => {
+    const day = new Date(2024, 0, 1);
+    const fromDate = new Date(2023, 0, 1);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, fromDate, toDate })).toBe(true);
+  });
+
+  test("returns true when day is before fromDate", () => {
+    const day = new Date(2022, 11, 31);
+    const fromDate = new Date(2023, 0, 1);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, fromDate, toDate })).toBe(true);
+  });
+
+  test("returns false when fromDate and toDate are not provided", () => {
+    const day = new Date(2023, 5, 15);
+
+    expect(isDateOutsideRange({ day })).toBe(false);
+  });
+
+  test("returns true when only toDate is provided and day is after toDate", () => {
+    const day = new Date(2024, 0, 1);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, toDate })).toBe(true);
+  });
+
+  test("returns false when only toDate is provided and day is before toDate", () => {
+    const day = new Date(2023, 5, 15);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, toDate })).toBe(false);
+  });
+
+  test("returns true when only fromDate is provided and day is before fromDate", () => {
+    const day = new Date(2022, 11, 31);
+    const fromDate = new Date(2023, 0, 1);
+
+    expect(isDateOutsideRange({ day, fromDate })).toBe(true);
+  });
+
+  test("returns false when only fromDate is provided and day is after fromDate", () => {
+    const day = new Date(2023, 5, 15);
+    const fromDate = new Date(2023, 0, 1);
+
+    expect(isDateOutsideRange({ day, fromDate })).toBe(false);
+  });
+
+  test("returns false when day is identical to fromDate", () => {
+    const day = new Date(2023, 0, 1);
+    const fromDate = new Date(2023, 0, 1);
+
+    expect(isDateOutsideRange({ day, fromDate })).toBe(false);
+  });
+
+  test("returns false when day is identical to toDate", () => {
+    const day = new Date(2023, 11, 31);
+    const toDate = new Date(2023, 11, 31);
+
+    expect(isDateOutsideRange({ day, toDate })).toBe(false);
+  });
+
+  test("returns false when day is identical to both fromDate and toDate", () => {
+    const day = new Date(2023, 5, 15);
+    const fromDate = new Date(2023, 5, 15);
+    const toDate = new Date(2023, 5, 15);
+
+    expect(isDateOutsideRange({ day, fromDate, toDate })).toBe(false);
   });
 });

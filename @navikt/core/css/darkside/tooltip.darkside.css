@@ -1,4 +1,4 @@
-.navds-tooltip {
+.aksel-tooltip {
   z-index: 3000;
   background-color: var(--ax-bg-neutral-strong);
   color: var(--ax-text-neutral-contrast);
@@ -34,19 +34,19 @@
   }
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="bottom"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="bottom"]) {
   animation-name: aksel-tooltip-from-bottom, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="top"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="top"]) {
   animation-name: aksel-tooltip-from-top, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="left"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="left"]) {
   animation-name: aksel-tooltip-from-left, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="right"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="right"]) {
   animation-name: aksel-tooltip-from-right, aksel-tooltip-fade-in;
 }
 
@@ -100,13 +100,13 @@
   }
 }
 
-.navds-tooltip__keys {
+.aksel-tooltip__keys {
   padding-bottom: var(--ax-space-4);
   display: flex;
   gap: var(--ax-space-4);
 }
 
-.navds-tooltip__key {
+.aksel-tooltip__key {
   font-family: var(--ax-font-family);
   color: var(--ax-text-neutral);
   padding: 0 var(--ax-space-4);

@@ -1,5 +1,19 @@
 # @navikt/aksel-icons
 
+## 7.15.0
+
+## 7.14.3
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `LineHeight`, `SpaceHorizontal` and `SpaceVertical`. ([#3587](https://github.com/navikt/aksel/pull/3587))
+
 ## 7.13.0
 
 ### Minor Changes

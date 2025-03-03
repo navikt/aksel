@@ -8,6 +8,7 @@ export const getConditionalClasses = (
   direction: string,
   status: string,
 ) => {
+  /* Renaming to aksel-* happends where these are used, so no need to rename here */
   return cl(`navds-timeline__period navds-timeline__period--${status}`, {
     "navds-timeline__period--connected-both": cropped === "both",
     "navds-timeline__period--connected-right":

@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
+import { useRenameCSS } from "../../theme/Theme";
 import { BreakpointsAlias } from "../utilities/types";
 
 export interface ResponsiveProps extends HTMLAttributes<HTMLDivElement> {
@@ -40,6 +40,7 @@ const Responsive = forwardRef<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const aboveProp = variant === "show" ? above : below;
     const belowProp = variant === "show" ? below : above;
 
@@ -49,7 +50,7 @@ const Responsive = forwardRef<
       <Comp
         {...rest}
         ref={ref}
-        className={cl("navds-responsive", className, {
+        className={cn("navds-responsive", className, {
           [`navds-responsive__above--${aboveProp}`]: aboveProp,
           [`navds-responsive__below--${belowProp}`]: belowProp,
         })}

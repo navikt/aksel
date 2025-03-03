@@ -2,6 +2,7 @@ import cl from "clsx";
 import { TypoProps } from "./types";
 
 export const typoClassNames = (props: TypoProps & { uppercase?: boolean }) => {
+  /* Renaming to aksel-* prefix is done in components themselves */
   return cl({
     "navds-typo--spacing": props.spacing,
     "navds-typo--truncate": props.truncate,

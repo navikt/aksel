@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { useRef, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { useInputContext } from "./Input/Input.context";
 
 type ComboboxWrapperProps = {
@@ -22,6 +22,7 @@ const ComboboxWrapper = ({
   inputSize,
   toggleIsListOpen,
 }: ComboboxWrapperProps) => {
+  const { cn } = useRenameCSS();
   const { toggleOpenButtonRef, clearInput, readOnly } = useInputContext();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -47,7 +48,7 @@ const ComboboxWrapper = ({
   return (
     <div
       ref={wrapperRef}
-      className={cl(
+      className={cn(
         className,
         "navds-form-field",
         `navds-form-field--${inputSize}`,

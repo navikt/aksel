@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyShort, Heading } from "../typography";
 import { useId } from "../util";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -153,6 +154,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const headingId = useId();
     const translate = useI18n("Pagination");
 
@@ -180,7 +182,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         aria-labelledby={
           srHeading ? cl(headingId, ariaLabelledBy) : ariaLabelledBy
         }
-        className={cl(
+        className={cn(
           "navds-pagination",
           `navds-pagination--${size}`,
           className,
@@ -196,10 +198,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             {srHeading.text}
           </Heading>
         )}
-        <ul className="navds-pagination__list">
+        <ul className={cn("navds-pagination__list")}>
           <li>
             <Item
-              className={cl("navds-pagination__prev-next", {
+              className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === 1,
                 "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
@@ -222,7 +224,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             (step, i) => {
               const n = Number(step);
               return Number.isNaN(n) ? (
-                <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
+                <li
+                  className={cn("navds-pagination__ellipsis")}
+                  key={`${step}${i}`}
+                >
                   <BodyShort
                     size={size === "xsmall" ? "small" : size}
                     as="span"
@@ -247,7 +252,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
           )}
           <li>
             <Item
-              className={cl("navds-pagination__prev-next", {
+              className={cn("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === count,
                 "navds-pagination--prev-next--with-text": prevNextTexts,
               })}

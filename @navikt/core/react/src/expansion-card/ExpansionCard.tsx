@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { useControllableState } from "../util/hooks";
 import { OverridableComponent } from "../util/types";
 import ExpansionCardContent, {
@@ -117,6 +117,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const shouldFade = useRef<boolean>(!(Boolean(open) || defaultOpen));
 
     const [_open, _setOpen] = useControllableState({
@@ -138,7 +139,7 @@ export const ExpansionCard = forwardRef<HTMLDivElement, ExpansionCardProps>(
       >
         <section
           {...rest}
-          className={cl(
+          className={cn(
             "navds-expansioncard",
             className,
             `navds-expansioncard--${size}`,

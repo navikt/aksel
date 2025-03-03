@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { createContext, forwardRef, useContext, useState } from "react";
+import { useRenameCSS } from "../../theme/Theme";
 import { Fieldset, FieldsetProps } from "../fieldset";
 import { FieldsetContext } from "../fieldset/context";
 
@@ -59,6 +59,7 @@ export const CheckboxGroup = forwardRef<
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const fieldset = useContext(FieldsetContext);
 
     const [state, setState] = useState<any[]>(defaultValue ?? []);
@@ -77,7 +78,7 @@ export const CheckboxGroup = forwardRef<
       <Fieldset
         {...rest}
         ref={ref}
-        className={cl(
+        className={cn(
           className,
           "navds-checkbox-group",
           `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`,
@@ -91,7 +92,7 @@ export const CheckboxGroup = forwardRef<
             toggleValue,
           }}
         >
-          <div className="navds-checkboxes">{children}</div>
+          <div className={cn("navds-checkboxes")}>{children}</div>
         </CheckboxGroupContext.Provider>
       </Fieldset>
     );

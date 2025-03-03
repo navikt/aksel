@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import AccordionContent, { AccordionContentProps } from "./AccordionContent";
 import { AccordionContext } from "./AccordionContext";
 import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
@@ -86,6 +86,8 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     return (
       <AccordionContext.Provider
         value={{
@@ -97,7 +99,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       >
         <div
           {...rest}
-          className={cl(
+          className={cn(
             "navds-accordion",
             className,
             `navds-accordion--${size}`,

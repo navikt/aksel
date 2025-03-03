@@ -1,6 +1,7 @@
 import React from "react";
 import { CalendarWeek } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
+import { useRenameCSS } from "../../../theme/Theme";
 import { Detail } from "../../../typography";
 import { useId } from "../../../util/hooks";
 import { useDateTranslationContext } from "../../Date.locale";
@@ -15,6 +16,7 @@ const DatePickerWeekRow = ({
   weeks?: CalendarWeek[];
 }) => {
   const translate = useDateTranslationContext().translate;
+  const { cn } = useRenameCSS();
   const labelId = useId();
 
   if (!onWeekNumberClick) {
@@ -25,13 +27,13 @@ const DatePickerWeekRow = ({
     <Show below="sm" asChild>
       <table className="rdp-table" role="grid">
         <tbody className="rdp-tbody">
-          <tr className="rdp-row navds-date__week-row">
+          <tr className={cn("rdp-row navds-date__week-row")}>
             <Detail
               as="th"
               weight="semibold"
-              className="rdp-cell navds-date__week-cell"
+              className={cn("rdp-cell navds-date__week-cell")}
             >
-              <span className="navds-date__week-wrapper" id={labelId}>
+              <span className={cn("navds-date__week-wrapper")} id={labelId}>
                 {translate("week")}
               </span>
             </Detail>
@@ -42,7 +44,7 @@ const DatePickerWeekRow = ({
                 week={week}
                 onWeekNumberClick={onWeekNumberClick}
                 showOnDesktop={false}
-                className="navds-date__week-wrapper"
+                className={cn("navds-date__week-wrapper")}
               />
             ))}
           </tr>
