@@ -27,41 +27,7 @@ export async function runTooling(
   options: any,
   program: Command,
 ) {
-  await Enquirer.prompt(
-    [
-      {
-        type: "select",
-        name: "output",
-        message: "Output format",
-        initial: "print-clipboard",
-        choices: [
-          { message: "Clipboard & Print", name: "clipboard-print" },
-          { message: "Clipboard", name: "clipboard" },
-          { message: "Print", name: "print" },
-        ],
-      },
-    ].map((x) => ({
-      ...x,
-      cancel: () => process.exit(1),
-      header: `\n${chalk.gray(
-        "Command 'css-imports' will not edit your files directly!",
-      )}\n`,
-    })),
-  )
-    .then((a) => {
-      Object.entries(a).forEach(([key, value]) => {
-        console.info(key, value);
-      });
-    })
-    .catch((error) => {
-      if (error.isTtyError) {
-        console.info(
-          "Oops, something went wrong! Looks like @navikt/aksel-cli can't run in this terminal. Contact Aksel",
-        );
-      } else {
-        console.error(error);
-      }
-    });
+  await getNextTask();
 
   // const codemodPath = path.join(
   //   __dirname,
@@ -114,4 +80,53 @@ function cleanExtensions(ext: string): string[] {
     .split(",")
     .map((e) => e.trim())
     .map((e) => e.replace(".", ""));
+}
+
+type TaskName =
+  | "status"
+  | "css-tokens"
+  | "scss-tokens"
+  | "less-tokens"
+  | "js-tokens";
+
+const questions = {
+  type: "select",
+  name: "task",
+  message: "Task",
+  initial: "status",
+  choices: [
+    { message: "Update status", name: "status" },
+    { message: "Migrate CSS tokens", name: "css-tokens" },
+    { message: "Migrate Scss tokens", name: "scss-tokens" },
+    { message: "Migrate Less tokens", name: "less-tokens" },
+    { message: "Migrate JS tokens", name: "js-tokens" },
+  ] satisfies { message: string; name: TaskName }[],
+} as const;
+
+async function getNextTask() {
+  await Enquirer.prompt(
+    [questions].map((x) => ({
+      ...x,
+      cancel: () => process.exit(1),
+      header: `\n${chalk.gray(
+        "Command 'css-imports' will not edit your files directly!",
+      )}\n`,
+    })),
+  )
+    .then((a) => {
+      console.log(a);
+      /* Object.entries(a).forEach(([key, value]) => {
+        console.info(key, value);
+      }); */
+    })
+    .catch((error) => {
+      if (error.isTtyError) {
+        console.info(
+          "Oops, something went wrong! Looks like @navikt/aksel can't run in this terminal. Contact Aksel for support if this persists, or try another terminal.",
+        );
+      } else {
+        console.error(error);
+      }
+      process.exit(1);
+    });
 }
