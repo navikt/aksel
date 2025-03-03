@@ -30,14 +30,11 @@ export const ConsentBanner = ({
   const trackingId = getConfig().publicRuntimeConfig.UMAMI_TRACKING_ID;
 
   useEffect(() => {
-    const disabledModalParam = new URLSearchParams(window.location.search).get(
-      "no_consent_modal",
-    );
-    if (consent === "undecided" && !disabledModalParam) {
-      setShowConsentBanner(true);
-    } else if (["accepted", "rejected"].includes(consent)) {
-      setShowConsentBanner(false);
+    let showConsent = true;
+    if (["accepted", "rejected"].includes(consent)) {
+      showConsent = false;
     }
+    setShowConsentBanner(showConsent);
 
     setUmamiTag(classifyTraffic());
     setClientAcceptsTracking(consent === "accepted");
