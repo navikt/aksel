@@ -47,7 +47,7 @@ const RenameCSS = ({ children }: { children: React.ReactNode }) => {
 type ThemeContext = {
   /**
    * Color theme
-   * @default "light"
+   * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
 };
