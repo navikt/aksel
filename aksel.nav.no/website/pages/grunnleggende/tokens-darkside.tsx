@@ -229,9 +229,10 @@ const ShadowToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
       <Box
         borderRadius="medium"
         borderWidth="1"
-        shadow={token.value}
+        borderColor="border-subtle"
         width="32px"
         height="32px"
+        style={{ boxShadow: token.value }}
       />
     </VStack>
   </ExampleContainer>
