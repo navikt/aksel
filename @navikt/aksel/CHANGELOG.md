@@ -1,5 +1,25 @@
 # @navikt/aksel
 
+## 7.15.0
+
+### Minor Changes
+
+- CLI: Added primitives migration to new space-tokens. Run `npx @navikt/aksel migration primitive-spacing` to start migrating now. This update is supported for old and new (darkside) system. ([#3597](https://github.com/navikt/aksel/pull/3597))
+
+- CLI: Added js/ts migration to new space-tokens. Run `npx @navikt/aksel migration token-spacing-js` to start migrating now. This update is supported for old and new (darkside) system. ([#3597](https://github.com/navikt/aksel/pull/3597))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-css@7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Updated dependencies [[`06fecf2`](https://github.com/navikt/aksel/commit/06fecf2af1972a5d06ea452fc5b7431b064e1fc0)]:
+  - @navikt/ds-css@7.14.3
+
 ## 7.14.2
 
 ### Patch Changes
