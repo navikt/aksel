@@ -42,7 +42,7 @@ export function semanticRootTokens(theme: ColorTheme) {
         value:
           theme === "light"
             ? "{ax.neutral.000.value}"
-            : "{ax.neutral.100.value}",
+            : "{ax.neutral.200.value}",
         type: "color",
         group: "background",
       },

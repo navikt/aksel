@@ -1,5 +1,17 @@
 # @navikt/ds-tokens
 
+## 7.14.3
+
+## 7.14.2
+
+### Patch Changes
+
+- Darkside: :lipstick: Bumped `bg-raised` token to `neutral-200` in darkmode. ([`441d8b7`](https://github.com/navikt/aksel/commit/441d8b732cb4820e6fe37ad87200c5b5eb31e5cf))
+
+## 7.14.1
+
+## 7.14.0
+
 ## 7.13.0
 
 ## 7.12.2
