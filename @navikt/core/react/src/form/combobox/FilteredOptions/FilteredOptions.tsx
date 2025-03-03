@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
 import AddNewOption from "./AddNewOption";
@@ -11,9 +11,11 @@ import filteredOptionsUtil from "./filtered-options-util";
 import { useFilteredOptionsContext } from "./filteredOptionsContext";
 
 const FilteredOptions = () => {
+  const { cn } = useRenameCSS();
   const {
     inputProps: { id },
   } = useInputContext();
+
   const {
     allowNewValues,
     isLoading,
@@ -23,6 +25,7 @@ const FilteredOptions = () => {
     isMouseLastUsedInputDevice,
     isValueNew,
   } = useFilteredOptionsContext();
+
   const { maxSelected, isMultiSelect } = useSelectedOptionsContext();
 
   const shouldRenderNonSelectables =
@@ -36,7 +39,7 @@ const FilteredOptions = () => {
 
   return (
     <div
-      className={cl("navds-combobox__list", {
+      className={cn("navds-combobox__list", {
         "navds-combobox__list--closed": !isListOpen,
         "navds-combobox__list--with-hover": isMouseLastUsedInputDevice,
       })}
@@ -44,7 +47,10 @@ const FilteredOptions = () => {
       tabIndex={-1}
     >
       {shouldRenderNonSelectables && (
-        <div className="navds-combobox__list_non-selectables" role="status">
+        <div
+          className={cn("navds-combobox__list_non-selectables")}
+          role="status"
+        >
           {isMultiSelect && maxSelected.limit && <MaxSelectedMessage />}
           {isLoading && <LoadingMessage />}
           {!isLoading && filteredOptions.length === 0 && !allowNewValues && (
@@ -58,7 +64,7 @@ const FilteredOptions = () => {
         <ul
           ref={setFilteredOptionsRef}
           role="listbox"
-          className="navds-combobox__list-options"
+          className={cn("navds-combobox__list-options")}
         >
           {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
             <AddNewOption />

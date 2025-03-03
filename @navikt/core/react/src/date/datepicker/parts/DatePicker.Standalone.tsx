@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { DateRange } from "react-day-picker";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useControllableState } from "../../../util/hooks";
 import { useI18n } from "../../../util/i18n/i18n.hooks";
 import {
@@ -57,6 +57,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const translate = useI18n(
       "DatePicker",
       translations,
@@ -75,7 +76,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       <DateTranslationContextProvider translate={translate}>
         <div
           ref={ref}
-          className={cl("navds-date__standalone-wrapper", className)}
+          className={cn("navds-date__standalone-wrapper", className)}
         >
           <ReactDayPicker
             {...rest}

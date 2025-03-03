@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyLong } from "../typography";
 import Bubble from "./Bubble";
 
@@ -91,41 +91,45 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       ...rest
     }: ChatProps,
     ref,
-  ) => (
-    <div
-      ref={ref}
-      className={cl(
-        "navds-chat",
-        className,
-        `navds-chat--${position}`,
-        `navds-chat--top-text-${toptextPosition ?? position}`,
-        `navds-chat--${size}`,
-        `navds-chat--${variant}`,
-      )}
-      {...rest}
-    >
-      {avatar && (
-        <div className="navds-chat__avatar" aria-hidden>
-          {avatar}
-        </div>
-      )}
-      <ol className="navds-chat__bubble-wrapper">
-        {React.Children.map(children, (child, i) => {
-          if (React.isValidElement(child)) {
-            return (
-              <BodyLong as="li" size={size}>
-                {React.cloneElement(child, {
-                  name: name && i === 0 ? name : undefined,
-                  timestamp: timestamp && i === 0 ? timestamp : undefined,
-                  ...child.props,
-                })}
-              </BodyLong>
-            );
-          }
-        })}
-      </ol>
-    </div>
-  ),
+  ) => {
+    const { cn } = useRenameCSS();
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "navds-chat",
+          className,
+          `navds-chat--${position}`,
+          `navds-chat--top-text-${toptextPosition ?? position}`,
+          `navds-chat--${size}`,
+          `navds-chat--${variant}`,
+        )}
+        {...rest}
+      >
+        {avatar && (
+          <div className={cn("navds-chat__avatar")} aria-hidden>
+            {avatar}
+          </div>
+        )}
+        <ol className={cn("navds-chat__bubble-wrapper")}>
+          {React.Children.map(children, (child, i) => {
+            if (React.isValidElement(child)) {
+              return (
+                <BodyLong as="li" size={size}>
+                  {React.cloneElement(child, {
+                    name: name && i === 0 ? name : undefined,
+                    timestamp: timestamp && i === 0 ? timestamp : undefined,
+                    ...child.props,
+                  })}
+                </BodyLong>
+              );
+            }
+          })}
+        </ol>
+      </div>
+    );
+  },
 ) as ChatComponent;
 
 Chat.Bubble = Bubble;

@@ -15,7 +15,7 @@ import {
 } from "@floating-ui/react";
 import { format } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -43,6 +43,7 @@ export interface PinType
 
 export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
   ({ date, children, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const { startDate, endDate, direction } = useTimelineContext();
     const [open, setOpen] = useState(false);
     const arrowRef = useRef<HTMLDivElement | null>(null);
@@ -99,13 +100,13 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
     return (
       <>
         <div
-          className="navds-timeline__pin-wrapper"
+          className={cn("navds-timeline__pin-wrapper")}
           style={{ [direction]: `${position(date, startDate, endDate)}%` }}
         >
           <button
             {...rest}
             ref={mergedRef}
-            className="navds-timeline__pin-button"
+            className={cn("navds-timeline__pin-button")}
             aria-label={translate("Pin.pin", {
               date: format(date, translate("dateFormat")),
             })}
@@ -131,7 +132,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
             returnFocus={false}
           >
             <div
-              className="navds-timeline__popover"
+              className={cn("navds-timeline__popover")}
               data-placement={placement}
               ref={refs.setFloating}
               {...getFloatingProps()}
@@ -147,7 +148,7 @@ export const Pin = forwardRef<HTMLButtonElement, TimelinePinProps>(
                     ...(arrowY != null ? { top: arrowY } : {}),
                     ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
                   }}
-                  className="navds-timeline__popover-arrow"
+                  className={cn("navds-timeline__popover-arrow")}
                 />
               )}
             </div>

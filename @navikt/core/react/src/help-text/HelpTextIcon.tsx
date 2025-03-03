@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { useId } from "../util/hooks";
 
 export const HelpTextIcon = ({
@@ -9,6 +9,8 @@ export const HelpTextIcon = ({
   title: string;
   filled?: boolean;
 }) => {
+  const { cn } = useRenameCSS();
+
   let titleId: string | undefined = useId();
   titleId = title ? `title-${titleId}` : undefined;
   return (
@@ -21,7 +23,7 @@ export const HelpTextIcon = ({
       focusable={false}
       role="img"
       aria-labelledby={titleId}
-      className={cl("navds-help-text__icon", {
+      className={cn("navds-help-text__icon", {
         "navds-help-text__icon--filled": filled,
       })}
     >

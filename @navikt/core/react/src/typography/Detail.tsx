@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 import { TypoProps } from "./types";
 import { typoClassNames } from "./util";
@@ -52,28 +52,32 @@ export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
         ...rest
       },
       ref,
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(
-          className,
-          "navds-detail",
-          typoClassNames({
-            spacing,
-            truncate,
-            weight,
-            align,
-            visuallyHidden,
-            textColor,
-            uppercase,
-          }),
-          {
-            "navds-detail--small": size === "small",
-          },
-        )}
-      />
-    ),
+    ) => {
+      const { cn } = useRenameCSS();
+
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cn(
+            className,
+            "navds-detail",
+            typoClassNames({
+              spacing,
+              truncate,
+              weight,
+              align,
+              visuallyHidden,
+              textColor,
+              uppercase,
+            }),
+            {
+              "navds-detail--small": size === "small",
+            },
+          )}
+        />
+      );
+    },
   );
 
 export default Detail;
