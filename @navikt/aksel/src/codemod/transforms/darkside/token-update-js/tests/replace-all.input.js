@@ -1,6 +1,8 @@
-/* Since all tokens has a replacement, we want to remove old import when empty */
 import { ASurfaceSubtle, ASurfaceNeutral } from "@navikt/ds-tokens/dist/tokens";
 
+/**
+ * Since all tokens has a replacement, we want to remove old import when empty
+ */
 const StyledDiv = styled.div`
     background-color: ${ASurfaceNeutral};
 `

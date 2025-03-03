@@ -1,6 +1,8 @@
-/* Since only some tokens has a replacement, we have to keep both imports */
 import { ASurfaceSubtle, ASurfaceNeutral, ASurfaceTransparent } from "@navikt/ds-tokens/dist/tokens";
 
+/**
+ * Since only some tokens has a replacement, we have to keep both imports
+ */
 const StyledDiv = styled.div`
     background-color: ${ASurfaceNeutral};
     color: ${ASurfaceTransparent};

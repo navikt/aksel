@@ -14,7 +14,7 @@ import { updatedTokens } from "../darkside.tokens";
 export default function transformer(file: FileInfo, api: API) {
   initMessageSetup();
 
-  const src = file.source;
+  let src = file.source;
 
   const j = api.jscodeshift;
 
@@ -29,6 +29,7 @@ export default function transformer(file: FileInfo, api: API) {
   if (!jsImport) {
     return src;
   }
+
   for (const [oldToken, config] of Object.entries(updatedTokens)) {
     const oldCSSVar = `--a-${oldToken}`;
     const oldJsVar = translateToken(oldCSSVar, "js");
@@ -49,23 +50,30 @@ export default function transformer(file: FileInfo, api: API) {
     }
 
     if (config.replacement.length > 0) {
+      /* We remove the prefix */
+      const jsToken = translateToken(`--ax-${config.replacement}`, "js").slice(
+        2,
+      );
+
       const localName = moveAndRenameImport(j, root, {
         fromImport: "@navikt/ds-tokens/dist/tokens",
         toImport: "@navikt/ds-tokens/darkside-js",
         fromName: foundName,
-        toName: translateToken(`--ax-${config.replacement}`, "js"),
+        toName: jsToken,
         ignoreAlias: true,
       });
 
-      let code = root.toSource(getLineTerminator(file.source));
+      let code = root.toSource(getLineTerminator(src));
 
-      const rgx = new RegExp("(" + foundName + ")", "gm");
-      code = code.replace(rgx, localName);
+      const rgx = new RegExp("(" + localName + ")", "gm");
+      code = code.replace(rgx, jsToken);
+      src = code;
+
       root = j(code);
     }
   }
 
-  return src;
+  return root.toSource(getLineTerminator(src));
 }
 
 /**
