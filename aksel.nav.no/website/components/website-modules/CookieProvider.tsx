@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Cookies } from "typescript-cookie";
 
 export const CONSENT_TRACKER_ID = "aksel-consent";
@@ -71,13 +71,15 @@ export const CookieProvider = ({ children }: { children: React.ReactNode }) => {
     setConsent(state);
   };
 
+  const contextValue = useMemo(() => {
+    return {
+      consent,
+      updateConsent,
+    };
+  }, [consent]);
+
   return (
-    <CookieContext.Provider
-      value={{
-        consent,
-        updateConsent,
-      }}
-    >
+    <CookieContext.Provider value={contextValue}>
       {children}
     </CookieContext.Provider>
   );

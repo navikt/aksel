@@ -15,7 +15,7 @@ export const Umami = () => {
   }, []);
 
   /* We only track with umami if optional cookies are accepted */
-  if (consent !== "accepted") {
+  if (consent !== "accepted" || !trackingId || !umamiTag) {
     return null;
   }
 
