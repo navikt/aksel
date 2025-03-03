@@ -1,10 +1,10 @@
-.navds-panel {
+.aksel-panel {
   background-color: var(--ax-bg-default);
   padding: var(--ax-space-16);
   border-radius: var(--ax-border-radius-small);
   border: 1px solid transparent;
 }
 
-.navds-panel--border {
+.aksel-panel--border {
   border-color: var(--ax-border-neutral);
 }

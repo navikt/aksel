@@ -5,9 +5,12 @@ import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
 
 /* -------------------------------------------------------------------------- */
-/*                               CSS Trsnalation                              */
+/*                               CSS Translation                              */
 /* -------------------------------------------------------------------------- */
 type RenameCSSContext = {
+  /**
+   * Extends `clsx` with custom className handler
+   */
   cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
 };
 
@@ -31,9 +34,11 @@ export const compositeClassFunction = (
 };
 
 const RenameCSS = ({ children }: { children: React.ReactNode }) => {
-  /* Replace function with this when implementation is complete and CSS is updated */
-  /* <RenameCSSProvider cn={compositeClassFunction}> */
-  return <RenameCSSProvider cn={cl}>{children}</RenameCSSProvider>;
+  return (
+    <RenameCSSProvider cn={compositeClassFunction}>
+      {children}
+    </RenameCSSProvider>
+  );
 };
 
 /* -------------------------------------------------------------------------- */
@@ -42,7 +47,7 @@ const RenameCSS = ({ children }: { children: React.ReactNode }) => {
 type ThemeContext = {
   /**
    * Color theme
-   * @default "light"
+   * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
 };
@@ -83,7 +88,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
         <RenameCSS>
           <SlotElement
             ref={ref}
-            className={cl("navds-theme", className, theme)}
+            className={cl("aksel-theme", className, theme)}
             data-background={hasBackground}
           >
             {children}

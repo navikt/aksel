@@ -6,12 +6,11 @@ import {
   shift,
   useFloating,
 } from "@floating-ui/react";
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useRef } from "react";
 import { useDateInputContext } from "../date/Date.Input";
 import { useModalContext } from "../modal/Modal.context";
 import { DismissableLayer } from "../overlays/dismissablelayer/DismissableLayer";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { useClientLayoutEffect } from "../util/hooks";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
@@ -119,6 +118,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const isInModal = useModalContext(false) !== undefined;
     const datepickerContext = useDateInputContext(false);
@@ -182,7 +182,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         <div
           ref={floatingRef}
           {...rest}
-          className={cl("navds-popover", className, {
+          className={cn("navds-popover", className, {
             "navds-popover--hidden": !open || !anchorEl,
           })}
           style={{ ...rest.style, ...floatingStyles }}
@@ -201,7 +201,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
                 ...(arrowY != null ? { top: arrowY } : {}),
                 ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
               }}
-              className="navds-popover__arrow"
+              className={cn("navds-popover__arrow")}
             />
           )}
         </div>

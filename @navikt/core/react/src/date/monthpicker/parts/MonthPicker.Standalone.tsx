@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { useDateLocale, useI18n } from "../../../util/i18n/i18n.hooks";
 import {
   DateTranslationContextProvider,
@@ -47,6 +47,7 @@ export const MonthPickerStandalone = forwardRef<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const translate = useI18n(
       "DatePicker",
       translations,
@@ -60,7 +61,7 @@ export const MonthPickerStandalone = forwardRef<
     }
 
     return (
-      <div ref={ref} className={cl("navds-date__wrapper", className)}>
+      <div ref={ref} className={cn("navds-date__wrapper", className)}>
         <DateTranslationContextProvider translate={translate}>
           <MonthPickerProvider
             dropdownCaption={dropdownCaption}
@@ -74,7 +75,7 @@ export const MonthPickerStandalone = forwardRef<
             onMonthSelect={onMonthSelect}
             locale={locale ? getLocaleFromString(locale) : langProviderLocale}
           >
-            <div className="navds-date rdp-month">
+            <div className={cn("navds-date rdp-month")}>
               <MonthPickerCaption />
               <MonthPickerTable />
             </div>

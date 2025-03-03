@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps } from "../popover";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import { useMergeRefs } from "../util/hooks/useMergeRefs";
 import { useI18n } from "../util/i18n/i18n.hooks";
@@ -49,6 +48,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMergeRefs(buttonRef, ref);
     const [open, setOpen] = useState(false);
@@ -58,12 +58,12 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const titleWithFallback = title || translate("title");
 
     return (
-      <div className={cl("navds-help-text", wrapperClassName)}>
+      <div className={cn("navds-help-text", wrapperClassName)}>
         <button
           {...rest}
           ref={mergedRef}
           onClick={composeEventHandlers(onClick, () => setOpen((x) => !x))}
-          className={cl(className, "navds-help-text__button")}
+          className={cn(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
         >
@@ -72,7 +72,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
         </button>
         <Popover
           onClose={() => setOpen(false)}
-          className="navds-help-text__popover"
+          className={cn("navds-help-text__popover")}
           open={open}
           anchorEl={buttonRef.current}
           placement={placement}
@@ -80,7 +80,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           offset={themeContext ? 8 : 12}
           arrow={!themeContext}
         >
-          <Popover.Content className="navds-body-short">
+          <Popover.Content className={cn("navds-body-short")}>
             {children}
           </Popover.Content>
         </Popover>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import cl from "clsx";
 import React, { forwardRef, useRef } from "react";
+import { useRenameCSS } from "../../../theme/Theme";
 import { composeEventHandlers } from "../../../util/composeEventHandlers";
 import { useMergeRefs } from "../../../util/hooks/useMergeRefs";
 import ScrollButton from "./ScrollButtons";
@@ -16,6 +16,7 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, onKeyDown, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const { onKeyDown: _onKeyDown } = useTabList();
 
     const listRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     const scrollCtx = useScrollButtons(listRef);
 
     return (
-      <div className="navds-tabs__tablist-wrapper">
+      <div className={cn("navds-tabs__tablist-wrapper")}>
         {scrollCtx.show && (
           <ScrollButton
             dir="left"
@@ -36,7 +37,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
           ref={mergedRef}
           {...rest}
           onScroll={scrollCtx.update}
-          className={cl("navds-tabs__tablist", className)}
+          className={cn("navds-tabs__tablist", className)}
           role="tablist"
           aria-orientation="horizontal"
           onKeyDown={composeEventHandlers(onKeyDown, _onKeyDown)}
