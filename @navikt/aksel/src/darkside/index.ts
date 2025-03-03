@@ -3,7 +3,7 @@ import { Command } from "commander";
 import figlet from "figlet";
 import { getMigrationString } from "./migrations.js";
 import { runTooling } from "./run-tooling.js";
-import { validateGit, validateMigration } from "./validation.js";
+import { validateGit } from "./validation.js";
 
 const program = new Command();
 
@@ -11,14 +11,6 @@ export function darksideCommand() {
   program.name(`${chalk.blueBright(`npx @navikt/aksel`)}`);
 
   program
-    .command("darkside")
-    .addHelpText("beforeAll", figlet.textSync("Darkside"))
-    .addHelpText(
-      "afterAll",
-      chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
-    )
-    .description("Update tool for darkside token updates")
-
     .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option(
       "-g, --glob [glob]",
@@ -26,11 +18,20 @@ export function darksideCommand() {
     )
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-f, --force", "Forcibly run updates without checking git-changes")
-    .action((str, options) => {
-      /* validateMigration(str, program); */
-      validateGit(options, program);
-      runTooling(str, options, program);
-    });
+    .command("darkside")
+    .addHelpText("beforeAll", figlet.textSync("Darkside"))
+    .addHelpText(
+      "afterAll",
+      chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
+    )
+    .description("Update tool for darkside token updates");
 
   program.parse();
+  const options = program.opts();
+
+  if (!options.force) {
+    validateGit(options, program);
+  }
+
+  runTooling(options as Parameters<typeof runTooling>["0"]);
 }

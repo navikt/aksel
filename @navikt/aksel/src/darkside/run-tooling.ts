@@ -1,10 +1,5 @@
-import chalk from "chalk";
-import { Command } from "commander";
 import Enquirer from "enquirer";
 import fg from "fast-glob";
-import * as jscodeshift from "jscodeshift/src/Runner";
-import path from "path";
-import { getMigrationPath, getWarning } from "./migrations";
 
 const ignoreNodeModules = [
   "**/node_modules/**",
@@ -22,22 +17,66 @@ export const messages = new Map<
   }
 >();
 
-export async function runTooling(
-  input: string,
-  options: any,
-  program: Command,
-) {
-  await getNextTask();
+export async function runTooling(options: {
+  force: boolean;
+  dryRun: boolean;
+  print: boolean;
+  glob: string;
+  ext: string;
+}) {
+  const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
+    cwd: process.cwd(),
+    ignore: ignoreNodeModules,
+  });
 
+  /* await showStatus() */
+  let task: Awaited<ReturnType<typeof getNextTask>>;
+
+  while (task !== "exit") {
+    task = await getNextTask();
+
+    if (task === "css-tokens") {
+      /* run css migrations */
+      /* show status */
+      continue;
+    }
+    if (task === "scss-tokens") {
+      /* run scss migrations */
+      /* show status */
+      continue;
+    }
+    if (task === "less-tokens") {
+      /* run less migrations */
+      /* show status */
+      continue;
+    }
+    if (task === "js-tokens") {
+      /* run js migrations */
+      /* show status */
+      continue;
+    }
+    if (task === "status") {
+      /* show status */
+      continue;
+    }
+    if (task === "print-remaining-tokens") {
+      /* print remaining tokens */
+      continue;
+    }
+
+    if (task === "exit") {
+      console.info("Exiting...");
+      break;
+    }
+  }
+
+  /* OLD */
   // const codemodPath = path.join(
   //   __dirname,
   //   `./transforms/${getMigrationPath(input)}.js`,
   // );
   //
-  // const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
-  //   cwd: process.cwd(),
-  //   ignore: ignoreNodeModules,
-  // });
+
   //
   // console.info("\nRunning migration:", chalk.green("input"));
   //
@@ -62,9 +101,6 @@ export async function runTooling(
   //
   //   warning && console.info(`\n${chalk.yellow(warning)}\n`);
   //
-  //   messages.forEach((value) => {
-  //     value.format(value.data);
-  //   });
   // } catch (error) {
   //   program.error(chalk.red("Error:", error.message));
   // }
@@ -84,40 +120,39 @@ function cleanExtensions(ext: string): string[] {
 
 type TaskName =
   | "status"
+  | "print-remaining-tokens"
   | "css-tokens"
   | "scss-tokens"
   | "less-tokens"
-  | "js-tokens";
+  | "js-tokens"
+  | "exit";
 
-const questions = {
+const taskQuestion = {
   type: "select",
   name: "task",
   message: "Task",
   initial: "status",
   choices: [
     { message: "Update status", name: "status" },
+    { message: "Print remaining tokens", name: "print-remaining-tokens" },
     { message: "Migrate CSS tokens", name: "css-tokens" },
     { message: "Migrate Scss tokens", name: "scss-tokens" },
     { message: "Migrate Less tokens", name: "less-tokens" },
     { message: "Migrate JS tokens", name: "js-tokens" },
+    { message: "Exit", name: "exit" },
   ] satisfies { message: string; name: TaskName }[],
 } as const;
 
 async function getNextTask() {
+  let task: TaskName;
   await Enquirer.prompt(
-    [questions].map((x) => ({
+    [taskQuestion].map((x) => ({
       ...x,
       cancel: () => process.exit(1),
-      header: `\n${chalk.gray(
-        "Command 'css-imports' will not edit your files directly!",
-      )}\n`,
     })),
   )
-    .then((a) => {
-      console.log(a);
-      /* Object.entries(a).forEach(([key, value]) => {
-        console.info(key, value);
-      }); */
+    .then((a: { task: TaskName }) => {
+      task = a.task;
     })
     .catch((error) => {
       if (error.isTtyError) {
@@ -129,4 +164,6 @@ async function getNextTask() {
       }
       process.exit(1);
     });
+
+  return task;
 }
