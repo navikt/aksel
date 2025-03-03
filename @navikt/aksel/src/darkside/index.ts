@@ -18,7 +18,6 @@ export function darksideCommand() {
       chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
     )
     .description("Update tool for darkside token updates")
-    .argument("<task>", "Task name")
 
     .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option(
@@ -28,7 +27,7 @@ export function darksideCommand() {
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-f, --force", "Forcibly run updates without checking git-changes")
     .action((str, options) => {
-      validateMigration(str, program);
+      /* validateMigration(str, program); */
       validateGit(options, program);
       runTooling(str, options, program);
     });
