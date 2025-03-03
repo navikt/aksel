@@ -70,7 +70,14 @@ export default function transformer(file: FileInfo, api: API) {
       src = code;
 
       root = j(code);
+      continue;
     }
+
+    documentLegacyReferences({
+      src,
+      oldToken: oldCSSVar,
+      comment: config.comment,
+    });
   }
 
   return root.toSource(getLineTerminator(src));
@@ -79,46 +86,22 @@ export default function transformer(file: FileInfo, api: API) {
 /**
  * Replaces old token with new token reference.
  */
-// function documentLegacyReferences({
-//   src,
-//   oldToken,
-//   comment,
-// }: {
-//   src: string;
-//   oldToken: string;
-//   comment?: string;
-// }) {
-//   const CSSRgx = new RegExp("(" + oldToken + ")", "gm");
-//   const SCSSRgx = new RegExp(
-//     "(\\" + translateToken(oldToken, "scss") + ")",
-//     "gm",
-//   );
-//   const LESSRgx = new RegExp(
-//     "(" + translateToken(oldToken, "less") + ")",
-//     "gm",
-//   );
-//
-//   if (CSSRgx.test(src)) {
-//     addMessage({ token: oldToken, comment, type: "css" });
-//   } else if (SCSSRgx.test(src)) {
-//     addMessage({
-//       token: translateToken(oldToken, "scss"),
-//       comment,
-//       type: "scss",
-//     });
-//   } else if (LESSRgx.test(src)) {
-//     addMessage({
-//       token: translateToken(oldToken, "less"),
-//       comment,
-//       type: "less",
-//     });
-//   }
-// }
+function documentLegacyReferences({
+  src,
+  oldToken,
+  comment,
+}: {
+  src: string;
+  oldToken: string;
+  comment?: string;
+}) {
+  const JSRgx = new RegExp("(" + translateToken(oldToken, "js") + ")", "gm");
+
+  JSRgx.test(src) && addMessage({ token: oldToken, comment, type: "js" });
+}
 
 type UpdateMessageData = {
-  scss: string[];
-  less: string[];
-  css: string[];
+  js: string[];
 };
 
 function initMessageSetup() {
@@ -126,34 +109,30 @@ function initMessageSetup() {
     messages.set("Token update", {
       format: formatMessage,
       data: {
-        scss: [],
-        less: [],
-        css: [],
+        js: [],
       } satisfies UpdateMessageData,
     });
   }
 }
 
-// function addMessage({
-//   token,
-//   comment,
-//   type,
-// }: {
-//   token: string;
-//   comment?: string;
-//   type: keyof UpdateMessageData;
-// }) {
-//   messages
-//     .get("Token update")
-//     ?.data[type].push(`${token}${comment ? ` (${comment})` : ""}`);
-// }
+function addMessage({
+  token,
+  comment,
+  type,
+}: {
+  token: string;
+  comment?: string;
+  type: keyof UpdateMessageData;
+}) {
+  messages
+    .get("Token update")
+    ?.data[type].push(`${token}${comment ? ` (${comment})` : ""}`);
+}
 
 function formatMessage(input: UpdateMessageData) {
-  const css = [...new Set(input.css)];
-  const scss = [...new Set(input.scss)];
-  const less = [...new Set(input.less)];
+  const js = [...new Set(input.js)];
 
-  const total = css.length + scss.length + less.length;
+  const total = js.length;
 
   if (total === 0) {
     console.info(
@@ -170,12 +149,6 @@ function formatMessage(input: UpdateMessageData) {
     ),
   );
 
-  css.length > 0 &&
-    console.info(`\nCSS:${css.map((token) => `\n${token}`).join("")}`);
-
-  scss.length > 1 &&
-    console.info(`\nSCSS:${scss.map((token) => `\n${token}`).join("")}`);
-
-  less.length > 1 &&
-    console.info(`\nLESS:${less.map((token) => `\n${token}`).join("")}`);
+  js.length > 0 &&
+    console.info(`\\JS:${js.map((token) => `\n${token}`).join("")}`);
 }
