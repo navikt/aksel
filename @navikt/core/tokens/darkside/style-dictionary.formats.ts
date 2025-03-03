@@ -61,6 +61,27 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
     .map((token, index) => {
       const name = kebabCaseForAlpha(token.name.slice(2));
       const nameParts = name.split("-");
+      const colorTypes = {
+        bg: "backgroundColor",
+        border: "borderColor",
+        text: "textColor",
+      };
+      let category;
+      switch (token.type) {
+        case "color":
+          category = token.attributes?.type
+            ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
+            : token.type;
+          break;
+        case "global-space":
+          category = "space";
+          break;
+        case "global-radius":
+          category = "radius";
+          break;
+        default:
+          category = token.type;
+      }
       return (
         JSON.stringify({
           name,
@@ -71,7 +92,7 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
           rawType: token.attributes?.type,
           group: token.group,
           all: token,
-          category: nameParts[0],
+          category,
           role:
             token.group?.indexOf(".") >= 0
               ? token.group.split(".")[1]

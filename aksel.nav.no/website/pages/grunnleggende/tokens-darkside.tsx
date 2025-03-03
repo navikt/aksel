@@ -1,11 +1,17 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
-import { MoonIcon, PaletteIcon, SunIcon } from "@navikt/aksel-icons";
+import {
+  MoonIcon,
+  PaletteIcon,
+  SpaceHorizontalIcon,
+  SunIcon,
+} from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
   Chips,
   CopyButton,
+  Detail,
   HGrid,
   HStack,
   Heading,
@@ -124,7 +130,7 @@ const ExampleContainer = ({
 
 const ColorToken = ({ token }: { token: any }) => {
   switch (token.category) {
-    case "bg":
+    case "backgroundColor":
       return (
         <ExampleContainer>
           <Box
@@ -137,7 +143,7 @@ const ColorToken = ({ token }: { token: any }) => {
           />
         </ExampleContainer>
       );
-    case "border":
+    case "borderColor":
       return (
         <ExampleContainer>
           <Box
@@ -149,7 +155,7 @@ const ColorToken = ({ token }: { token: any }) => {
           />
         </ExampleContainer>
       );
-    case "text":
+    case "textColor":
       switch (token.modifier) {
         case "contrast":
           return (
@@ -205,10 +211,60 @@ const ColorToken = ({ token }: { token: any }) => {
   }
 };
 
+const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
+  <ExampleContainer>
+    <VStack as="div" align="center" justify="center" height="100%">
+      <SpaceHorizontalIcon
+        title={token.name}
+        color={token.value}
+        fontSize="1.5rem"
+      />
+    </VStack>
+  </ExampleContainer>
+);
+
+const ShadowToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
+  <ExampleContainer>
+    <VStack as="div" align="center" justify="center" height="100%">
+      <Box
+        borderRadius="medium"
+        borderWidth="1"
+        shadow={token.value}
+        width="32px"
+        height="32px"
+      />
+    </VStack>
+  </ExampleContainer>
+);
+
+const RadiusToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
+  <ExampleContainer>
+    <VStack as="div" align="center" justify="center" height="100%">
+      <Box
+        as="div"
+        width="32px"
+        height="32px"
+        background="surface-neutral"
+        style={{
+          borderRadius: token.value,
+        }}
+      />
+    </VStack>
+  </ExampleContainer>
+);
+
 const TokenExample = ({ token }: { token: any }) => {
-  switch (token.type) {
-    case "color":
+  switch (token.category) {
+    case "backgroundColor":
+    case "borderColor":
+    case "textColor":
       return <ColorToken token={token} />;
+    case "space":
+      return <SpaceToken token={token} />;
+    case "shadow":
+      return <ShadowToken token={token} />;
+    case "radius":
+      return <RadiusToken token={token} />;
     default:
       return (
         <ExampleContainer>
@@ -243,6 +299,9 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
             iconPosition="right"
             size="xsmall"
           />
+          {token.rawValue && (
+            <Detail textColor="subtle">{token.rawValue}</Detail>
+          )}
           <BodyLong as="p">
             {token.comment || (
               <>
@@ -258,21 +317,40 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
 };
 
 const Categories = {
-  bg: "Background colors",
-  border: "Border colors",
-  text: "Text colors",
+  backgroundColor: "Background colors",
+  borderColor: "Border colors",
+  textColor: "Text colors",
+  shadow: "Shadows",
+  space: "Spacing",
+  radius: "Border radius",
 };
 
 const Section = ({
   category,
   description = "Lorem ipsum",
-  tokensByRole,
+  tokens,
 }: {
   category: string;
   description: string;
-  tokensByRole: Record<string, (typeof tokenDocs)[number]>;
+  tokens: (typeof tokenDocs)[number][];
 }) => {
-  const roles = Object.keys(tokensByRole);
+  const roles = tokens
+    .filter((token) => token.role !== undefined)
+    .map((token) => token.role)
+    .filter(
+      (role, index, array) => array.findIndex((r) => r === role) === index,
+    );
+  const sortByRole = (
+    a: (typeof tokens)[number] & { role: string },
+    b: (typeof tokens)[number] & { role: string },
+  ) => (a.role > b.role ? 1 : -1);
+  const sortByName = (
+    a: (typeof tokens)[number],
+    b: (typeof tokens)[number],
+  ) => (a.name > b.name ? 1 : -1);
+  const sortedTokens = tokens.sort((a, b) =>
+    a.role && b.role ? sortByRole(a, b) : sortByName(a, b),
+  );
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
     <section>
@@ -283,37 +361,29 @@ const Section = ({
         <VStack gap="4">
           <BodyLong as="p">{description}</BodyLong>
           <Chips>
-            {roles.map((role) => (
-              <Chips.Toggle
-                checkmark={false}
-                key={role}
-                selected={selectedRole === role}
-                onClick={() =>
-                  selectedRole !== role
-                    ? setSelectedRole(role)
-                    : setSelectedRole(null)
-                }
-              >
-                {role
-                  .split("-")
-                  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-                  .join(" ")}
-              </Chips.Toggle>
-            ))}
+            {roles.length > 0 &&
+              roles.map((role) => (
+                <Chips.Toggle
+                  checkmark={false}
+                  key={role}
+                  selected={selectedRole === role}
+                  onClick={() =>
+                    selectedRole !== role
+                      ? setSelectedRole(role)
+                      : setSelectedRole(null)
+                  }
+                >
+                  {role
+                    .split("-")
+                    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+                    .join(" ")}
+                </Chips.Toggle>
+              ))}
           </Chips>
           <div>
-            {roles
-              .filter((role) => (selectedRole ? role === selectedRole : true))
-              .sort((roleA, roleB) => (roleA > roleB ? 1 : -1))
-              .map((role, index) =>
-                Object.values(tokensByRole[role])
-                  .sort((a, b) => (a.name > b.name ? 1 : -1))
-                  .map((token) => {
-                    return (
-                      <Variant token={token} key={token.name} index={index} />
-                    );
-                  }),
-              )}
+            {sortedTokens.map((token, index) => {
+              return <Variant token={token} key={token.name} index={index} />;
+            })}
           </div>
         </VStack>
       </div>
@@ -322,60 +392,29 @@ const Section = ({
 };
 
 const Page = ({ page, sidebar }: PageProps["props"]) => {
-  const addedCategories = ["color"];
+  const addedCategories = [
+    "backgroundColor",
+    "borderColor",
+    "textColor",
+    "space",
+    "shadow",
+    "radius",
+  ];
   const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
-    addedCategories.includes(token.type),
+    addedCategories.includes(token.category),
   );
-  const tokensOfOtherTypes = tokenDocs
-    .filter((token) => !addedCategories.includes(token.type))
-    .map(({ type }) => type)
-    .reduce(
-      (acc, curr) => [...acc, ...(!acc.includes(curr) ? [curr] : [])],
-      [] as string[],
-    );
-  // eslint-disable-next-line no-console
-  console.log("Tokens of other types", tokensOfOtherTypes);
-  const tokensByCategoryAndRole = tokensWithCategoryAndRole.reduce(
-    (acc, curr) => {
-      if (!curr.category) {
-        // eslint-disable-next-line no-console
-        console.log("Missing category", curr);
-        return acc;
-      }
-      if (!curr.role) {
-        // eslint-disable-next-line no-console
-        console.log("Missing role", curr);
-        return acc;
-      }
-      if (!curr.modifier) {
-        // eslint-disable-next-line no-console
-        console.log("Missing modifier", curr);
-        return acc;
-      }
-      return {
-        ...acc,
-        [curr.category]: {
-          ...acc[curr.category],
-          [curr.role || 0]: {
-            ...(acc[curr.category] || [])[curr.role || 0],
-            [curr.modifier]: curr,
-          },
-        },
-      };
-    },
-    {} as Record<string, Record<string, (typeof tokenDocs)[number]>>,
-  );
-  const toc = tokensWithCategoryAndRole
+
+  const categories = tokensWithCategoryAndRole
     .map((token) => token.category)
     .filter(
       (category, index, array) =>
         array.findIndex((cat) => cat === category) === index,
-    )
-    .map((category) => ({
-      title: Categories[category],
-      id: category,
-      children: [],
-    }));
+    );
+  const toc = categories.map((category) => ({
+    title: Categories[category],
+    id: category,
+    children: [],
+  }));
 
   return (
     <>
@@ -404,22 +443,17 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
         <HGrid columns="auto 15rem" as="main" gap="10">
           <VStack gap="10">
             <Toolbar />
-            {Object.entries(tokensByCategoryAndRole).map(
-              ([category, categoryRoles]) => {
-                // eslint-disable-next-line no-console
-                console.log("categoryRoles", categoryRoles);
-                return (
-                  <Section
-                    key={category}
-                    category={category}
-                    description="Lorem ipsum"
-                    tokensByRole={categoryRoles}
-                  />
-                );
-              },
-            )}
+            {categories.map((category) => (
+              <Section
+                key={category}
+                category={category}
+                description="Lorem ipsum"
+                tokens={tokensWithCategoryAndRole.filter(
+                  (token) => token.category === category,
+                )}
+              />
+            ))}
           </VStack>
-
           <nav>
             <TableOfContents toc={toc} variant="subtle" />
           </nav>
