@@ -150,5 +150,5 @@ function formatMessage(input: UpdateMessageData) {
   );
 
   js.length > 0 &&
-    console.info(`\\JS:${js.map((token) => `\n${token}`).join("")}`);
+    console.info(`\nJS:${js.map((token) => `\n${token}`).join("")}`);
 }
