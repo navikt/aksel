@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 
 export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -7,11 +7,12 @@ export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
   ({ className, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     return (
       <div
         {...rest}
         ref={ref}
-        className={cl("navds-modal__footer", className)}
+        className={cn("navds-modal__footer", className)}
       />
     );
   },

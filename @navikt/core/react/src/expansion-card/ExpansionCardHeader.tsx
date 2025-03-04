@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { useRenameCSS } from "../theme/Theme";
 import { useI18n } from "../util/i18n/i18n.hooks";
 import { ExpansionCardContext } from "./context";
 
@@ -13,6 +13,7 @@ const ExpansionCardHeader = forwardRef<
   HTMLDivElement,
   ExpansionCardHeaderProps
 >(({ children, className, ...rest }, ref) => {
+  const { cn } = useRenameCSS();
   const panelContext = useContext(ExpansionCardContext);
   const translate = useI18n("global");
 
@@ -27,19 +28,21 @@ const ExpansionCardHeader = forwardRef<
     <div
       ref={ref}
       {...rest}
-      className={cl("navds-expansioncard__header", className)}
+      className={cn("navds-expansioncard__header", className)}
       data-open={panelContext.open}
     >
-      <div className="navds-expansioncard__header-content">{children}</div>
+      <div className={cn("navds-expansioncard__header-content")}>
+        {children}
+      </div>
 
       <button
-        className="navds-expansioncard__header-button"
+        className={cn("navds-expansioncard__header-button")}
         onClick={panelContext.toggleOpen}
         type="button"
         aria-expanded={panelContext.open}
       >
         <ChevronDownIcon
-          className="navds-expansioncard__header-chevron"
+          className={cn("navds-expansioncard__header-chevron")}
           title={translate("showMore")}
         />
       </button>

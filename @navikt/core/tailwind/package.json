@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "7.12.2",
+  "version": "7.16.0",
   "description": "Tailwind config based on @navikt/ds-tokens",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -10,7 +10,8 @@
   "license": "MIT",
   "files": [
     "tailwind.config.js",
-    "tailwind.config.d.ts"
+    "tailwind.config.d.ts",
+    "tailwind.darkside.config.js"
   ],
   "scripts": {
     "build": "tsx ./src && yarn build:darkside",
@@ -24,7 +25,7 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.12.2",
+    "@navikt/ds-tokens": "^7.16.0",
     "color": "4.2.3",
     "lodash": "^4.17.21",
     "tailwindcss": "^3.3.3",
@@ -47,6 +48,16 @@
       "require": {
         "types": "./tailwind.config.d.ts",
         "default": "./tailwind.config.js"
+      }
+    },
+    "./darkside-tw3": {
+      "import": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
+      },
+      "require": {
+        "types": "./tailwind.config.d.ts",
+        "default": "./tailwind.darkside.config.js"
       }
     }
   }

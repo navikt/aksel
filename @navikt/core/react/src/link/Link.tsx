@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface LinkProps
@@ -61,16 +61,19 @@ export const Link: OverridableComponent<LinkProps, HTMLAnchorElement> =
         ...rest
       },
       ref,
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl("navds-link", className, `navds-link--${variant}`, {
-          "navds-link--remove-underline": !underline,
-          "navds-link--inline-text": inlineText,
-        })}
-      />
-    ),
+    ) => {
+      const { cn } = useRenameCSS();
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cn("navds-link", className, `navds-link--${variant}`, {
+            "navds-link--remove-underline": !underline,
+            "navds-link--inline-text": inlineText,
+          })}
+        />
+      );
+    },
   );
 
 export default Link;

@@ -2137,6 +2137,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-fns/tz@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@date-fns/tz@npm:1.2.0"
+  checksum: 10/a9c2d32f98a5a5c655a7d3843046a5a36779b2ef0db803c608291976e6254e594a085777bf738379f50c7e9fc2ffebbf8bb836e9e9759a5ef2b703f91bb785de
+  languageName: node
+  linkType: hard
+
 "@discoveryjs/json-ext@npm:0.5.7":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -3668,7 +3675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.12.2, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
+"@navikt/aksel-icons@npm:^7.16.0, @navikt/aksel-icons@workspace:@navikt/aksel-icons":
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-icons@workspace:@navikt/aksel-icons"
   dependencies:
@@ -3699,8 +3706,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel-stylelint@workspace:@navikt/aksel-stylelint"
   dependencies:
-    "@navikt/ds-css": "npm:^7.12.2"
-    "@navikt/ds-tokens": "npm:^7.12.2"
+    "@navikt/ds-css": "npm:^7.16.0"
+    "@navikt/ds-tokens": "npm:^7.16.0"
     concurrently: "npm:9.0.1"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
@@ -3715,7 +3722,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
-    "@navikt/ds-css": "npm:^7.12.2"
+    "@navikt/ds-css": "npm:^7.16.0"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     clipboardy: "npm:^2.3.0"
@@ -3736,20 +3743,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^7.12.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@npm:*, @navikt/ds-css@npm:^7.16.0, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.12.2"
+    "@navikt/ds-tokens": "npm:^7.16.0"
     "@types/clean-css": "npm:4.2.11"
     autoprefixer: "npm:^10.4.20"
     browserslist: "npm:^4.24.2"
     clean-css: "npm:5.3.3"
     cssnano: "npm:7.0.6"
     fast-glob: "npm:3.2.11"
-    lightningcss: "npm:^1.28.0"
+    lightningcss: "npm:^1.29.1"
     lodash: "npm:^4.17.21"
-    nodemon: "npm:^3.0.1"
     normalize.css: "npm:^8.0.1"
     postcss: "npm:^8.4.31"
     postcss-cli: "npm:^9.0.0"
@@ -3760,14 +3766,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.12.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@npm:*, @navikt/ds-react@npm:^7.16.0, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
-    "@navikt/aksel-icons": "npm:^7.12.2"
-    "@navikt/ds-tokens": "npm:^7.12.2"
+    "@navikt/aksel-icons": "npm:^7.16.0"
+    "@navikt/ds-tokens": "npm:^7.16.0"
     "@testing-library/dom": "npm:10.4.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.1.0"
@@ -3776,11 +3782,11 @@ __metadata:
     aksel: "workspace:^"
     clsx: "npm:^2.1.0"
     concurrently: "npm:9.0.1"
-    date-fns: "npm:^3.0.0"
+    date-fns: "npm:^4.0.0"
     fast-glob: "npm:3.2.11"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:25.0.1"
-    react-day-picker: "npm:8.10.1"
+    react-day-picker: "npm:9.5.0"
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:^6.3.0"
     rimraf: "npm:6.0.1"
@@ -3798,11 +3804,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@npm:^7.12.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@npm:^7.16.0, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": "npm:^7.12.2"
+    "@navikt/ds-tokens": "npm:^7.16.0"
     color: "npm:4.2.3"
     lodash: "npm:^4.17.21"
     tailwindcss: "npm:^3.3.3"
@@ -3812,7 +3818,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@npm:^7.12.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@npm:^7.16.0, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -3820,7 +3826,7 @@ __metadata:
     color: "npm:4.2.3"
     colorjs.io: "npm:^0.5.2"
     esbuild: "npm:^0.24.0"
-    lightningcss: "npm:^1.28.0"
+    lightningcss: "npm:^1.29.1"
     lodash: "npm:^4.17.21"
     style-dictionary: "npm:^4.1.1"
     tsx: "npm:^4.19.1"
@@ -6636,6 +6642,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/umami@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "@types/umami@npm:2.10.0"
+  checksum: 10/8e489202966fb6429ac079f10dc0717fe44daeedbf37927e326017b9eed9c821dc6bf5d9aaad69fd4ce5eb92df0e53fafb57c9b47185f73a547969e4db365d66
+  languageName: node
+  linkType: hard
+
 "@types/unist@npm:*, @types/unist@npm:^3.0.0":
   version: 3.0.3
   resolution: "@types/unist@npm:3.0.3"
@@ -7614,11 +7627,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/aksel-icons": "npm:^7.12.2"
-    "@navikt/ds-css": "npm:^7.12.2"
-    "@navikt/ds-react": "npm:^7.12.2"
-    "@navikt/ds-tailwind": "npm:^7.12.2"
-    "@navikt/ds-tokens": "npm:^7.12.2"
+    "@navikt/aksel-icons": "npm:^7.16.0"
+    "@navikt/ds-css": "npm:^7.16.0"
+    "@navikt/ds-react": "npm:^7.16.0"
+    "@navikt/ds-tailwind": "npm:^7.16.0"
+    "@navikt/ds-tokens": "npm:^7.16.0"
   languageName: unknown
   linkType: soft
 
@@ -8966,7 +8979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.3.0, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3, chokidar@npm:^3.6.0":
+"chokidar@npm:^3.3.0, chokidar@npm:^3.5.3, chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -10111,6 +10124,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns-jalali@npm:^4.1.0-0":
+  version: 4.1.0-0
+  resolution: "date-fns-jalali@npm:4.1.0-0"
+  checksum: 10/0005e0e37d449aa998cfc353395b0292eea4778aba4283dad4fa0e3559cf0a7fc7ce9123fb6f22c235285219d4f4774c88bb9c01fa2694c6a5efbbcd33efe7fc
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^2.26.1, date-fns@npm:^2.27.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
@@ -10120,10 +10140,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^3.0.0":
-  version: 3.6.0
-  resolution: "date-fns@npm:3.6.0"
-  checksum: 10/cac35c58926a3b5d577082ff2b253612ec1c79eb6754fddef46b6a8e826501ea2cb346ecbd211205f1ba382ddd1f9d8c3f00bf433ad63cc3063454d294e3a6b8
+"date-fns@npm:^4.0.0, date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
   languageName: node
   linkType: hard
 
@@ -10166,7 +10186,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.3.7, debug@npm:^4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.7":
+"debug@npm:4, debug@npm:4.3.7, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.7":
   version: 4.3.7
   resolution: "debug@npm:4.3.7"
   dependencies:
@@ -13789,13 +13809,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore-by-default@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "ignore-by-default@npm:1.0.1"
-  checksum: 10/441509147b3615e0365e407a3c18e189f78c07af08564176c680be1fabc94b6c789cad1342ad887175d4ecd5225de86f73d376cec8e06b42fd9b429505ffcf8a
-  languageName: node
-  linkType: hard
-
 "ignore@npm:^5.1.1, ignore@npm:^5.1.9, ignore@npm:^5.2.0, ignore@npm:^5.3.1":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
@@ -15183,91 +15196,91 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss-darwin-arm64@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-darwin-arm64@npm:1.28.2"
+"lightningcss-darwin-arm64@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-darwin-arm64@npm:1.29.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-darwin-x64@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-darwin-x64@npm:1.28.2"
+"lightningcss-darwin-x64@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-darwin-x64@npm:1.29.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-freebsd-x64@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-freebsd-x64@npm:1.28.2"
+"lightningcss-freebsd-x64@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-freebsd-x64@npm:1.29.1"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm-gnueabihf@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.28.2"
+"lightningcss-linux-arm-gnueabihf@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-linux-arm-gnueabihf@npm:1.29.1"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm64-gnu@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-linux-arm64-gnu@npm:1.28.2"
+"lightningcss-linux-arm64-gnu@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-linux-arm64-gnu@npm:1.29.1"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-linux-arm64-musl@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-linux-arm64-musl@npm:1.28.2"
+"lightningcss-linux-arm64-musl@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-linux-arm64-musl@npm:1.29.1"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-linux-x64-gnu@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-linux-x64-gnu@npm:1.28.2"
+"lightningcss-linux-x64-gnu@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-linux-x64-gnu@npm:1.29.1"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"lightningcss-linux-x64-musl@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-linux-x64-musl@npm:1.28.2"
+"lightningcss-linux-x64-musl@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-linux-x64-musl@npm:1.29.1"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"lightningcss-win32-arm64-msvc@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-win32-arm64-msvc@npm:1.28.2"
+"lightningcss-win32-arm64-msvc@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-win32-arm64-msvc@npm:1.29.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"lightningcss-win32-x64-msvc@npm:1.28.2":
-  version: 1.28.2
-  resolution: "lightningcss-win32-x64-msvc@npm:1.28.2"
+"lightningcss-win32-x64-msvc@npm:1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss-win32-x64-msvc@npm:1.29.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"lightningcss@npm:^1.28.0":
-  version: 1.28.2
-  resolution: "lightningcss@npm:1.28.2"
+"lightningcss@npm:^1.29.1":
+  version: 1.29.1
+  resolution: "lightningcss@npm:1.29.1"
   dependencies:
     detect-libc: "npm:^1.0.3"
-    lightningcss-darwin-arm64: "npm:1.28.2"
-    lightningcss-darwin-x64: "npm:1.28.2"
-    lightningcss-freebsd-x64: "npm:1.28.2"
-    lightningcss-linux-arm-gnueabihf: "npm:1.28.2"
-    lightningcss-linux-arm64-gnu: "npm:1.28.2"
-    lightningcss-linux-arm64-musl: "npm:1.28.2"
-    lightningcss-linux-x64-gnu: "npm:1.28.2"
-    lightningcss-linux-x64-musl: "npm:1.28.2"
-    lightningcss-win32-arm64-msvc: "npm:1.28.2"
-    lightningcss-win32-x64-msvc: "npm:1.28.2"
+    lightningcss-darwin-arm64: "npm:1.29.1"
+    lightningcss-darwin-x64: "npm:1.29.1"
+    lightningcss-freebsd-x64: "npm:1.29.1"
+    lightningcss-linux-arm-gnueabihf: "npm:1.29.1"
+    lightningcss-linux-arm64-gnu: "npm:1.29.1"
+    lightningcss-linux-arm64-musl: "npm:1.29.1"
+    lightningcss-linux-x64-gnu: "npm:1.29.1"
+    lightningcss-linux-x64-musl: "npm:1.29.1"
+    lightningcss-win32-arm64-msvc: "npm:1.29.1"
+    lightningcss-win32-x64-msvc: "npm:1.29.1"
   dependenciesMeta:
     lightningcss-darwin-arm64:
       optional: true
@@ -15289,7 +15302,7 @@ __metadata:
       optional: true
     lightningcss-win32-x64-msvc:
       optional: true
-  checksum: 10/6d3b083901c4c9cdee0652100803bd7bc89b2acbf9937b5a2e0bd82ff9b27e99a5e04ed9d032d291464cf0abc30b2d9c54b52f2d0b1318a1534af90c0b0a3477
+  checksum: 10/c6428a695ca985fa28ea899eb72471e0c6a71715291cb62f938b038596a971b6b22d83415d882dec27841169b1b773989b16df173f5ce9075c3fdc22ff764cff
   languageName: node
   linkType: hard
 
@@ -17179,26 +17192,6 @@ __metadata:
   version: 2.0.18
   resolution: "node-releases@npm:2.0.18"
   checksum: 10/241e5fa9556f1c12bafb83c6c3e94f8cf3d8f2f8f904906ecef6e10bcaa1d59aa61212d4651bec70052015fc54bd3fdcdbe7fc0f638a17e6685aa586c076ec4e
-  languageName: node
-  linkType: hard
-
-"nodemon@npm:^3.0.1":
-  version: 3.1.7
-  resolution: "nodemon@npm:3.1.7"
-  dependencies:
-    chokidar: "npm:^3.5.2"
-    debug: "npm:^4"
-    ignore-by-default: "npm:^1.0.1"
-    minimatch: "npm:^3.1.2"
-    pstree.remy: "npm:^1.1.8"
-    semver: "npm:^7.5.3"
-    simple-update-notifier: "npm:^2.0.0"
-    supports-color: "npm:^5.5.0"
-    touch: "npm:^3.1.0"
-    undefsafe: "npm:^2.0.5"
-  bin:
-    nodemon: bin/nodemon.js
-  checksum: 10/07c6b14e4915bfe11abd0ee95bdfd96087dcdb7a37f9d1a57d9526f5f564268432556aa726a4019abf7e48deeff4628a5b34e88ccba8bf46c310c5910ad4a075
   languageName: node
   linkType: hard
 
@@ -19402,13 +19395,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pstree.remy@npm:^1.1.8":
-  version: 1.1.8
-  resolution: "pstree.remy@npm:1.1.8"
-  checksum: 10/ef13b1b5896b35f67dbd4fb7ba54bb2a5da1a5c317276cbad4bcad4159bf8f7b5e1748dc244bf36865f3d560d2fc952521581280a91468c9c2df166cc760c8c1
-  languageName: node
-  linkType: hard
-
 "pump@npm:^2.0.0":
   version: 2.0.1
   resolution: "pump@npm:2.0.1"
@@ -19632,13 +19618,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.10.1":
-  version: 8.10.1
-  resolution: "react-day-picker@npm:8.10.1"
+"react-day-picker@npm:9.5.0":
+  version: 9.5.0
+  resolution: "react-day-picker@npm:9.5.0"
+  dependencies:
+    "@date-fns/tz": "npm:^1.2.0"
+    date-fns: "npm:^4.1.0"
+    date-fns-jalali: "npm:^4.1.0-0"
   peerDependencies:
-    date-fns: ^2.28.0 || ^3.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/374056dca7fed70a154a3b0e98c6c746c26b4fc868548fa8f285ef3cab9679537e84c0c21ba7b6db67b3f7f54cc562f5d83efba2c7f2c7bd3705ac8992869607
+    react: ">=16.8.0"
+  checksum: 10/8f68fb0f723e89efa78f814ce8564c13f60901e1746ccebba68f05f0128cdbf5f9cbafdb5b93ac9187bda9373b4f882a2a961aea7198eed5dcd16ab299c84979
   languageName: node
   linkType: hard
 
@@ -21584,15 +21573,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-update-notifier@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "simple-update-notifier@npm:2.0.0"
-  dependencies:
-    semver: "npm:^7.5.3"
-  checksum: 10/40bd4f96aa89aedbf717ae9f4ab8fca70e8f7511e8b766feb15471cca3f6fe4fe673743309b08b4ba8abfe0965c9cd927e1de46550a757b819b70fc7430cc85d
-  languageName: node
-  linkType: hard
-
 "simple-wcswidth@npm:^1.0.1":
   version: 1.0.1
   resolution: "simple-wcswidth@npm:1.0.1"
@@ -22589,7 +22569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"supports-color@npm:^5.3.0, supports-color@npm:^5.5.0":
+"supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
   dependencies:
@@ -23178,15 +23158,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"touch@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "touch@npm:3.1.1"
-  bin:
-    nodetouch: bin/nodetouch.js
-  checksum: 10/853e763a1f4903302c5654ed353f84ad85baf757dac62c2d37ab67e0477cfd271e8c64771fcfad42310aff7c9d284ddb435ee5ca13ff36d0f3693fedd8e971d1
-  languageName: node
-  linkType: hard
-
 "tough-cookie@npm:^4.1.3":
   version: 4.1.4
   resolution: "tough-cookie@npm:4.1.4"
@@ -23548,6 +23519,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript-cookie@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "typescript-cookie@npm:1.0.6"
+  checksum: 10/105d4774ee847daf3e5e9a4433746eb34cd40feb1703bc7c9bde0bfc77c94ee4318386b94af66f9380fd24fa36600cc8e730ead7dfa67097ebbeff158e8020c3
+  languageName: node
+  linkType: hard
+
 "typescript@npm:5.5.4":
   version: 5.5.4
   resolution: "typescript@npm:5.5.4"
@@ -23648,13 +23626,6 @@ __metadata:
     buffer: "npm:^5.2.1"
     through: "npm:^2.3.8"
   checksum: 10/4ffc0e14f4af97400ed0f37be83b112b25309af21dd08fa55c4513e7cb4367333f63712aec010925dbe491ef6e92db1248e1e306e589f9f6a8da8b3a9c4db90b
-  languageName: node
-  linkType: hard
-
-"undefsafe@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "undefsafe@npm:2.0.5"
-  checksum: 10/f42ab3b5770fedd4ada175fc1b2eb775b78f609156f7c389106aafd231bfc210813ee49f54483d7191d7b76e483bc7f537b5d92d19ded27156baf57592eb02cc
   languageName: node
   linkType: hard
 
@@ -24758,6 +24729,7 @@ __metadata:
     "@types/jscodeshift": "npm:^0.11.11"
     "@types/react": "npm:^18.3.11"
     "@types/react-dom": "npm:^18.0.0"
+    "@types/umami": "npm:^2.10.0"
     autoprefixer: "npm:^10.4.20"
     babel-loader: "npm:^9.1.3"
     boring-avatars: "npm:1.10.1"
@@ -24765,7 +24737,7 @@ __metadata:
     codesandbox-import-utils: "npm:^2.2.3"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^7.0.0"
-    date-fns: "npm:^3.0.0"
+    date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.0.0"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:25.0.1"
@@ -24802,6 +24774,7 @@ __metadata:
     tinycolor2: "npm:^1.6.0"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
+    typescript-cookie: "npm:^1.0.6"
     vitest: "npm:^2.1.8"
     zod: "npm:^3.22.4"
   languageName: unknown

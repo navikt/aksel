@@ -1,5 +1,39 @@
 # @navikt/ds-css
 
+## 7.16.0
+
+### Minor Changes
+
+- Darkside: All classNames are now starts with `.aksel` instead of `.navds`. ([#3586](https://github.com/navikt/aksel/pull/3586))
+
+## 7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Darkside: Changed outline-offset for tabpanel from -4px to -3px. ([`06fecf2`](https://github.com/navikt/aksel/commit/06fecf2af1972a5d06ea452fc5b7431b064e1fc0))
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
 ## 7.12.2
 
 ## 7.12.1
