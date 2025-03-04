@@ -24,6 +24,9 @@ export const ConsentBanner = ({
   const { consent, updateConsent } = useCookies();
 
   useEffect(() => {
+    if (!consent) {
+      return;
+    }
     setShowBanner(!["accepted", "rejected"].includes(consent));
   }, [consent]);
 

@@ -1,11 +1,10 @@
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import "@navikt/ds-tokens/darkside-css";
-import { useCheckAuth } from "@/hooks/useCheckAuth";
 import { useHashScroll } from "@/hooks/useHashScroll";
-import { SanityDataContext } from "@/hooks/useSanityData";
 import { ConsentBanner } from "@/web/ConsentBanner";
 import { CookieProvider } from "@/web/CookieProvider";
+import { SanityDataProvider } from "@/web/SanityDataProvider";
 import { Umami } from "@/web/Umami";
 import { BaseSEO } from "@/web/seo/BaseSEO";
 import "../components/styles/index.css";
@@ -22,27 +21,23 @@ function App({ Component, pageProps, router }: AppProps) {
     !router.pathname.startsWith("/templates/") &&
     !router.pathname.startsWith("/eksempler/");
 
-  const validUser = useCheckAuth(!useGlobalStyles);
-
   return (
     <CookieProvider>
-      <SanityDataContext.Provider
-        value={{ id: pageProps?.id ?? pageProps?.page?._id, validUser }}
-      >
-        <BaseSEO path={router.asPath} />
-        <Umami />
-        <ConsentBanner
-          hide={!useGlobalStyles}
-          defaultShow={pageProps.showCookieBanner}
-        />
-        {useGlobalStyles ? (
+      <BaseSEO path={router.asPath} />
+      <Umami />
+      <ConsentBanner
+        hide={!useGlobalStyles}
+        defaultShow={pageProps.showCookieBanner}
+      />
+      {useGlobalStyles ? (
+        <SanityDataProvider id={pageProps?.id ?? pageProps?.page?._id}>
           <div className="globalstyles">
             <Component {...pageProps} />
           </div>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </SanityDataContext.Provider>
+        </SanityDataProvider>
+      ) : (
+        <Component {...pageProps} />
+      )}
     </CookieProvider>
   );
 }

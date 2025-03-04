@@ -15,9 +15,9 @@ import {
 } from "@navikt/ds-react";
 import { AuthUser, UserStateT } from "@/auth/auth.types";
 import { useAuth } from "@/auth/useAuth";
-import { useSanityData } from "@/hooks/useSanityData";
 import { AmplitudeEvents, amplitude } from "@/logging";
 import { SlackFeedbackResponse } from "@/slack";
+import { useSanityData } from "../SanityDataProvider";
 import styles from "./Feedback.module.css";
 
 type States = "feedbackSent" | "loggedIn" | "error" | "submittingForm";

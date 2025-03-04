@@ -51,14 +51,14 @@ const updateCookieConsent = (state: CONSENT_TRACKER_STATE) => {
 };
 
 type CookieContextType = {
-  consent: CONSENT_TRACKER_STATE;
+  consent: CONSENT_TRACKER_STATE | null;
   updateConsent: (state: CONSENT_TRACKER_STATE) => void;
 };
 
 const CookieContext = createContext<CookieContextType | null>(null);
 
 export const CookieProvider = ({ children }: { children: React.ReactNode }) => {
-  const [consent, setConsent] = useState<CONSENT_TRACKER_STATE>("undecided");
+  const [consent, setConsent] = useState<CONSENT_TRACKER_STATE | null>(null);
 
   useEffect(() => {
     const acceptedTracking = getCookieConsent();
