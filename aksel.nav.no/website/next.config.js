@@ -15,7 +15,7 @@ const ContentSecurityPolicy = `
   connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://*.hotjar.io wss://*.hotjar.com https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://in2.taskanalytics.com/03346;
   frame-ancestors 'self' localhost:3000;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ekstern.dev.nav.no;
+  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ansatt.dev.nav.no;
 `;
 
 const securityHeaders = [

@@ -3,24 +3,28 @@
 import getConfig from "next/config";
 import Script from "next/script";
 import { useEffect, useState } from "react";
-
-/* import { useCookies } from "./CookieProvider"; */
+import { useCookies } from "./CookieProvider";
 
 export const Umami = () => {
   const trackingId = getConfig().publicRuntimeConfig.UMAMI_TRACKING_ID;
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
-  /* const { consent } = useCookies(); */
+  const [umamiDomain, setUmamiDomain] = useState("aksel.ansatt.dev.nav.no");
+
+  const { consent } = useCookies();
 
   useEffect(() => {
+    if (window?.location?.hostname === "aksel.nav.no") {
+      setUmamiDomain("aksel.nav.no");
+    }
+
     setUmamiTag(classifyTraffic());
   }, []);
 
   /* We only track with umami if optional cookies are accepted */
-  /* if (consent !== "accepted" || !trackingId || !umamiTag) {
+  if (consent !== "accepted" || !trackingId || !umamiTag) {
     return null;
-  } */
+  }
 
-  /* TODO: Test this in prod */
   return (
     <Script
       defer
@@ -28,6 +32,7 @@ export const Umami = () => {
       data-host-url="https://umami.nav.no"
       data-website-id={trackingId}
       data-tag={umamiTag}
+      data-domains={umamiDomain}
     />
   );
 };
