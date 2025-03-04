@@ -3,22 +3,24 @@
 import getConfig from "next/config";
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { useCookies } from "./CookieProvider";
+
+/* import { useCookies } from "./CookieProvider"; */
 
 export const Umami = () => {
   const trackingId = getConfig().publicRuntimeConfig.UMAMI_TRACKING_ID;
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
-  const { consent } = useCookies();
+  /* const { consent } = useCookies(); */
 
   useEffect(() => {
     setUmamiTag(classifyTraffic());
   }, []);
 
   /* We only track with umami if optional cookies are accepted */
-  if (consent !== "accepted" || !trackingId || !umamiTag) {
+  /* if (consent !== "accepted" || !trackingId || !umamiTag) {
     return null;
-  }
+  } */
 
+  /* TODO: Test this in prod */
   return (
     <Script
       defer
