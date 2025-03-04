@@ -382,9 +382,13 @@ const Section = ({
               ))}
           </Chips>
           <div>
-            {sortedTokens.map((token, index) => {
-              return <Variant token={token} key={token.name} index={index} />;
-            })}
+            {sortedTokens
+              .filter(
+                (token) => selectedRole === null || token.role === selectedRole,
+              )
+              .map((token, index) => {
+                return <Variant token={token} key={token.name} index={index} />;
+              })}
           </div>
         </VStack>
       </div>
