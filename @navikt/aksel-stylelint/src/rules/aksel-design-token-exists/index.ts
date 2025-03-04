@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
 import { isCustomProperty, tokenExists } from "../../utils";
@@ -32,54 +31,52 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
     `\n\nVersion: ${packageVersion}`,
 });
 
-const checkDeclValue = (
-  value: string,
-  postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
-) => {
-  valueParser(value).walk((node) => {
-    if (
-      node.type === "word" &&
-      isCustomProperty(node.value) &&
-      controlledPrefixes.some((prefix) => node.value.startsWith(prefix)) &&
-      !tokenExists(controlledPrefixes, node.value)
-    ) {
-      stylelint.utils.report({
-        message: messages.valueNotExist(rootNode, node.value),
-        node: rootNode,
-        result: postcssResult,
-        ruleName,
-        word: node.value,
-      });
-    }
-  });
-};
-
-const checkDeclProp = (
-  prop: string,
-  postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
-) => {
-  if (
-    isCustomProperty(prop) &&
-    controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
-    !tokenExists(controlledPrefixes, prop)
-  ) {
-    stylelint.utils.report({
-      message: messages.propNotExist(rootNode),
-      node: rootNode,
-      result: postcssResult,
-      ruleName,
-      word: prop,
-    });
-  }
-};
-
 const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
     postcssRoot.walkDecls((node) => {
-      checkDeclValue(node.value, postcssResult, node);
-      checkDeclProp(node.prop, postcssResult, node);
+      const prop = node.prop;
+      const value = node.value;
+
+      /**
+       * Walk through the value and check if the value is a custom property
+       * and if it is a custom property, check if it is a valid token from Aksel
+       */
+      valueParser(value).walk((parserNode) => {
+        if (
+          parserNode.type === "word" &&
+          isCustomProperty(parserNode.value) &&
+          controlledPrefixes.some((prefix) =>
+            parserNode.value.startsWith(prefix),
+          ) &&
+          !tokenExists(controlledPrefixes, parserNode.value)
+        ) {
+          stylelint.utils.report({
+            message: messages.valueNotExist(node, parserNode.value),
+            node,
+            result: postcssResult,
+            ruleName,
+            word: node.value,
+          });
+        }
+      });
+
+      /**
+       * Check if the property is a custom property and if it is a custom property,
+       * And if it is a custom property, check if it is a valid token from Aksel
+       */
+      if (
+        isCustomProperty(prop) &&
+        controlledPrefixes.some((prefix) => prop.startsWith(prefix)) &&
+        !tokenExists(controlledPrefixes, prop)
+      ) {
+        stylelint.utils.report({
+          message: messages.propNotExist(node),
+          node,
+          result: postcssResult,
+          ruleName,
+          word: prop,
+        });
+      }
     });
   };
 };

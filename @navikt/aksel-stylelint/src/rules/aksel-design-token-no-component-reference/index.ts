@@ -1,4 +1,3 @@
-import { Node as PostCSSNode } from "postcss";
 import valueParser from "postcss-value-parser";
 import stylelint from "stylelint";
 import { getPackageVersion, isCustomProperty, tokenExists } from "../../utils";
@@ -18,34 +17,25 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
     `\n\nVersion: ${packageVersion}`,
 });
 
-const checkDeclValue = (
-  controlledPrefixes: string[],
-  value: string,
-  postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
-) => {
-  valueParser(value).walk((node) => {
-    if (
-      node.type === "word" &&
-      isCustomProperty(node.value) &&
-      node.value.startsWith(prefix_ac) &&
-      tokenExists(controlledPrefixes, node.value)
-    ) {
-      stylelint.utils.report({
-        message: messages.valueRefComponent(rootNode, node.value),
-        node: rootNode,
-        result: postcssResult,
-        ruleName,
-        word: node.value,
-      });
-    }
-  });
-};
-
 const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
-    postcssRoot.walkDecls((node) => {
-      checkDeclValue([prefix_ac], node.value, postcssResult, node);
+    postcssRoot.walkDecls((rootNode) => {
+      valueParser(rootNode.value).walk((node) => {
+        if (
+          node.type === "word" &&
+          isCustomProperty(node.value) &&
+          node.value.startsWith(prefix_ac) &&
+          tokenExists([prefix_ac], node.value)
+        ) {
+          stylelint.utils.report({
+            message: messages.valueRefComponent(rootNode, node.value),
+            node: rootNode,
+            result: postcssResult,
+            ruleName,
+            word: node.value,
+          });
+        }
+      });
     });
   };
 };

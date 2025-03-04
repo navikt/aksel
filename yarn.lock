@@ -3718,6 +3718,7 @@ __metadata:
     "@navikt/ds-css": "npm:^7.16.0"
     "@navikt/ds-tokens": "npm:^7.16.0"
     concurrently: "npm:9.0.1"
+    postcss: "npm:^8.4.31"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
     stylelint: "npm:^16.15.0"
