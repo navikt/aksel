@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, {
   ButtonHTMLAttributes,
   forwardRef,
@@ -8,7 +7,7 @@ import React, {
 } from "react";
 import { CheckmarkIcon, FilesIcon } from "@navikt/aksel-icons";
 import { Button, ButtonProps } from "../button";
-import { useThemeInternal } from "../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../theme/Theme";
 import { Label } from "../typography";
 import { composeEventHandlers } from "../util/composeEventHandlers";
 import copy from "../util/copy";
@@ -98,6 +97,8 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
     const timeoutRef = useRef<number>();
     const translate = useI18n("CopyButton");
 
+    const { cn } = useRenameCSS();
+
     const themeContext = useThemeInternal(false);
 
     useEffect(() => {
@@ -127,14 +128,18 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
               <CheckmarkIcon
                 aria-hidden={!!text}
                 title={text ? undefined : activeString}
-                className={themeContext ? "navds-copybutton__icon" : undefined}
+                className={
+                  themeContext ? cn("navds-copybutton__icon") : undefined
+                }
               />
             )
           : icon ?? (
               <FilesIcon
                 aria-hidden={!!text}
                 title={text ? undefined : title || translate("title")}
-                className={themeContext ? "navds-copybutton__icon" : undefined}
+                className={
+                  themeContext ? cn("navds-copybutton__icon") : undefined
+                }
               />
             )}
       </LegacyIconWrapper>
@@ -145,7 +150,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         <Button
           ref={ref}
           type="button"
-          className={cl("navds-copybutton", className)}
+          className={cn("navds-copybutton", className)}
           {...rest}
           variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
           onClick={composeEventHandlers(onClick, handleClick)}
@@ -164,7 +169,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         ref={ref}
         type="button"
         {...rest}
-        className={cl(
+        className={cn(
           "navds-copybutton",
           className,
           `navds-copybutton--${size}`,
@@ -177,7 +182,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
         )}
         onClick={composeEventHandlers(onClick, handleClick)}
       >
-        <span className="navds-copybutton__content">
+        <span className={cn("navds-copybutton__content")}>
           {iconPosition === "left" && copyIcon}
           {text && (
             <Label as="span" size={size === "medium" ? "medium" : "small"}>
@@ -198,10 +203,12 @@ function LegacyIconWrapper({
   children: React.ReactNode;
   useLegacy: boolean;
 }) {
+  const { cn } = useRenameCSS();
+
   if (!useLegacy) {
     return children;
   }
-  return <span className="navds-copybutton__icon">{children}</span>;
+  return <span className={cn("navds-copybutton__icon")}>{children}</span>;
 }
 
 export default CopyButton;

@@ -1,4 +1,3 @@
-import cl from "clsx";
 import React, {
   InputHTMLAttributes,
   forwardRef,
@@ -6,6 +5,7 @@ import React, {
   useState,
 } from "react";
 import { Loader } from "../../loader";
+import { useRenameCSS } from "../../theme/Theme";
 import { BodyShort } from "../../typography";
 import { omit } from "../../util";
 import { ReadOnlyIconWithTitle } from "../ReadOnlyIcon";
@@ -64,6 +64,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       ...rest
     } = props;
 
+    const { cn } = useRenameCSS();
+
     const [_checked, setChecked] = useState(
       defaultChecked ?? checkedProp ?? false,
     );
@@ -76,7 +78,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
 
     return (
       <div
-        className={cl(
+        className={cn(
           "navds-switch",
           props.className,
           `navds-switch--${size}`,
@@ -111,10 +113,10 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             }
             props.onClick?.(event);
           }}
-          className={cl(className, "navds-switch__input")}
+          className={cn(className, "navds-switch__input")}
         />
-        <span className="navds-switch__track">
-          <span className="navds-switch__thumb">
+        <span className={cn("navds-switch__track")}>
+          <span className={cn("navds-switch__thumb")}>
             {loading ? (
               <Loader
                 size="xsmall"
@@ -131,7 +133,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
                 focusable={false}
                 role="img"
                 aria-hidden
-                className="navds-switch__checkmark"
+                className={cn("navds-switch__checkmark")}
               >
                 <path
                   fillRule="evenodd"
@@ -143,14 +145,21 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             )}
           </span>
         </span>
-        <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
+        <label
+          htmlFor={inputProps.id}
+          className={cn("navds-switch__label-wrapper")}
+        >
           <div
-            className={cl("navds-switch__content", {
+            className={cn("navds-switch__content", {
               "navds-sr-only": hideLabel,
               "navds-switch--with-description": description && !hideLabel,
             })}
           >
-            <BodyShort as="div" size={size} className="navds-switch__label">
+            <BodyShort
+              as="div"
+              size={size}
+              className={cn("navds-switch__label")}
+            >
               {readOnly && <ReadOnlyIconWithTitle />}
               {children}
             </BodyShort>
@@ -158,7 +167,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
               <BodyShort
                 size={size}
                 as="div"
-                className="navds-form-field__subdescription navds-switch__description"
+                className={cn(
+                  "navds-form-field__subdescription navds-switch__description",
+                )}
               >
                 {description}
               </BodyShort>

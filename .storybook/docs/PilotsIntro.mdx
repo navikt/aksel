@@ -44,6 +44,7 @@ We welcome all forms of feedback:
 - **Design tokens**: A complete re-write of our design tokens to allow for dark mode.
 - **Dark mode**: A new dark mode implementation.
 - **Updated CSS**: Now uses new tokens, built-in CSS-layers support and most components are re-written.
+- **Updated Tailwind CSS config**: Now uses new tokens, now comes with built-in `ax`-prefix for easier separation between Aksel and your own config.
 - **Updated components**: Components use the new tokens and CSS.
 - **New Theme-component**: A new `<Theme/>`-component to handle the theming-switch locally.
 - **Updated documentation**: Updated documentation for the new implementation.
@@ -53,6 +54,11 @@ We welcome all forms of feedback:
 As we go, we will add more documentation to help you get started with the new implementation.
 
 - [Design i light og dark-mode](https://aksel.nav.no/god-praksis/artikler/design-i-dark-mode-og-light-mode)
+
+### Demo page
+
+We have a demo page to show off some of the new features and tokens. [You can find it here](https://aksel-referansesider.ansatt.dev.nav.no/aktivitetsplan/).
+We recommend using "inspect-tool" in browser to get a feel for the new tokens and CSS.
 
 ## How testing could affect your application
 
@@ -75,8 +81,12 @@ We have updated our CSS to be based on the new tokens for theming.
 
 - Most of our CSS is re-written.
 - All custom overrides targeting `.navds`-classes might have to be updated locally.
-- You will not be able to use the old CSS and the new CSS at the same time.
 - Component-based tokens are no longer avaliable.
+
+### Tailwind CSS
+
+We have made a new Tailwind CSS config based on the new tokens. Based on previous iterations, we have decided to try prefixing all our classes with `ax-`.
+While this will be a little more verbose, it makes it easier to separate your own config from ours, and hopefully makes it easier to maintain.
 
 ### React components
 

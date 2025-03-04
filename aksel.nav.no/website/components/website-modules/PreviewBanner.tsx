@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BodyShort, Button } from "@navikt/ds-react";
-import { useSanityData } from "@/hooks/useSanityData";
+import { useSanityData } from "./SanityDataProvider";
 
 function PreviewBanner({ loading = true }: { loading: boolean }) {
   const validUser = useSanityData()?.validUser;

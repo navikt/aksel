@@ -46,6 +46,7 @@ jobs:
         uses: ./.github/actions/build-website
         with:
           use_cdn_assets: true
+          production: true
           npm_auth_token: ${{ secrets.READER_TOKEN }}
           nais_id_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           nais_project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
