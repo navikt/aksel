@@ -33,7 +33,6 @@
     "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.2.3",
     "@navikt/next-logger": "1.24.0",
     "@navikt/oasis": "3.2.1",
     "@portabletext/react": "^3.1.0",

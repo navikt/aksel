@@ -10,17 +10,15 @@ import {
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { AmplitudeEvents, amplitude } from "@/logging";
 
 function ErrorPage({ statusCode }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    amplitude.track(AmplitudeEvents.error, {
-      side: window.location.pathname,
-    });
+    // eslint-disable-next-line
+    umami.track(statusCode, { url: window.location.pathname });
     setIsClient(true);
-  }, []);
+  }, [statusCode]);
 
   return (
     <Page data-aksel-template="500-v2" footer={<Footer />} className="vk-error">

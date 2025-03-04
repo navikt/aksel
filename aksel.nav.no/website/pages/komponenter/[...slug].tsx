@@ -6,7 +6,6 @@ import IntroSeksjon from "@/cms/intro-seksjon/IntroSeksjon";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
-import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { getDocuments } from "@/sanity/interface";
@@ -191,12 +190,6 @@ const Page = ({
             rel="noreferrer noopener"
             href={pack.git}
             className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
-            onClick={() =>
-              amplitude.track(AmplitudeEvents.link, {
-                kilde: "intro-lenker komponenter",
-                til: "github",
-              })
-            }
           >
             <GithubIcon /> Github
           </a>
@@ -205,12 +198,6 @@ const Page = ({
             rel="noreferrer noopener"
             href={`https://yarnpkg.com/package/${pack.title}`}
             className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
-            onClick={() =>
-              amplitude.track(AmplitudeEvents.link, {
-                kilde: "intro-lenker komponenter",
-                til: "yarn",
-              })
-            }
           >
             <YarnIcon />
             Yarn
@@ -224,12 +211,6 @@ const Page = ({
           rel="noreferrer noopener"
           href={page.figma_link}
           className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
-          onClick={() =>
-            amplitude.track(AmplitudeEvents.link, {
-              kilde: "intro-lenker komponenter",
-              til: "figma",
-            })
-          }
         >
           <FigmaIcon /> Figma
         </a>
@@ -240,12 +221,6 @@ const Page = ({
           rel="noreferrer noopener"
           href={pack.changelog}
           className="flex items-center gap-1 underline hover:text-text-default hover:no-underline focus:bg-blue-800 focus:text-text-on-inverted focus:no-underline focus:shadow-focus focus:outline-none"
-          onClick={() =>
-            amplitude.track(AmplitudeEvents.link, {
-              kilde: "intro-lenker komponenter",
-              til: "endringslogg",
-            })
-          }
         >
           <ChangelogIcon />
           Endringslogg
