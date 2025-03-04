@@ -8,15 +8,10 @@ import { useCookies } from "./CookieProvider";
 export const Umami = () => {
   const trackingId = getConfig().publicRuntimeConfig.UMAMI_TRACKING_ID;
   const [umamiTag, setUmamiTag] = useState<string | undefined>();
-  const [umamiDomain, setUmamiDomain] = useState("aksel.ansatt.dev.nav.no");
 
   const { consent } = useCookies();
 
   useEffect(() => {
-    if (window?.location?.hostname === "aksel.nav.no") {
-      setUmamiDomain("aksel.nav.no");
-    }
-
     setUmamiTag(classifyTraffic());
   }, []);
 
@@ -25,8 +20,6 @@ export const Umami = () => {
     return null;
   }
 
-  console.info("Tracking enabled", trackingId, umamiTag, umamiDomain);
-
   return (
     <Script
       defer
@@ -34,7 +27,6 @@ export const Umami = () => {
       data-host-url="https://umami.nav.no"
       data-website-id={trackingId}
       data-tag={umamiTag}
-      data-domains={umamiDomain}
     />
   );
 };
