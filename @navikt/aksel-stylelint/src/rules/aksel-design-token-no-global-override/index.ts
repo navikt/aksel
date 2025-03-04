@@ -21,24 +21,32 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
     `\n\nVersion: ${packageVersion}`,
 });
 
+const checkDeclProp = (
+  controlledPrefixes: string[],
+  prop: string,
+  postcssResult: stylelint.PostcssResult,
+  rootNode: stylelint.Problem["node"],
+) => {
+  if (
+    isCustomProperty(prop) &&
+    controlledPrefixes.some((prefix) => prop.startsWith(prefix))
+  ) {
+    if (prop.startsWith(prefix_a)) {
+      stylelint.utils.report({
+        message: messages.propOverrideGlobal(rootNode),
+        node: rootNode,
+        result: postcssResult,
+        ruleName,
+        word: prop,
+      });
+    }
+  }
+};
+
 const ruleFunction: stylelint.Rule = () => {
   return (postcssRoot, postcssResult) => {
-    postcssRoot.walkDecls((rootNode) => {
-      const prop = rootNode.prop;
-      if (
-        isCustomProperty(prop) &&
-        [prefix_a].some((prefix) => prop.startsWith(prefix))
-      ) {
-        if (prop.startsWith(prefix_a)) {
-          stylelint.utils.report({
-            message: messages.propOverrideGlobal(rootNode),
-            node: rootNode,
-            result: postcssResult,
-            ruleName,
-            word: prop,
-          });
-        }
-      }
+    postcssRoot.walkDecls((node) => {
+      checkDeclProp([prefix_a], node.prop, postcssResult, node);
     });
   };
 };

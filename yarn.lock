@@ -3718,11 +3718,10 @@ __metadata:
     "@navikt/ds-css": "npm:^7.16.0"
     "@navikt/ds-tokens": "npm:^7.16.0"
     concurrently: "npm:9.0.1"
-    postcss: "npm:^8.4.31"
     postcss-selector-parser: "npm:^6.0.13"
     postcss-value-parser: "npm:^4.2.0"
     stylelint: "npm:^16.15.0"
-    stylelint-test-rule-node: "npm:^0.2.1"
+    stylelint-test-rule-node: "npm:^0.4.0"
     tsx: "npm:^4.19.1"
     typescript: "npm:5.5.4"
   languageName: unknown
@@ -22539,12 +22538,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-test-rule-node@npm:^0.2.1":
-  version: 0.2.2
-  resolution: "stylelint-test-rule-node@npm:0.2.2"
+"stylelint-test-rule-node@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "stylelint-test-rule-node@npm:0.4.0"
   peerDependencies:
     stylelint: ^16.0.1
-  checksum: 10/f863949634fdc5365390c8ea3feae43ef43f6277c8072b18fedc1b34b90fb6fe6a9a5ae7e9413b60c2b81f3be9201b7169efc299011f60bfd6224c9741a02e42
+  checksum: 10/efa5a4c134169adf19235295c294eebf7b64d72ce8debb305c9d2a08ae84c39ef7b0544ada09a79e29b4c8c57edecb832ef1098534e8e2983fd388d358d78787
   languageName: node
   linkType: hard
 
