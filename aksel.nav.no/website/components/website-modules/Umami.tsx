@@ -25,7 +25,7 @@ export const Umami = () => {
     return null;
   }
 
-  console.info("Tracking enabled");
+  console.info("Tracking enabled", trackingId, umamiTag, umamiDomain);
 
   return (
     <Script
