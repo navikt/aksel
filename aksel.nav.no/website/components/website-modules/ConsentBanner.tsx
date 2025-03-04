@@ -77,11 +77,6 @@ export const ConsentBanner = ({
               onClick={() => {
                 updateConsent("accepted");
                 setShowBanner(false);
-                // NOTE: umami _should_ exist on window object here (loaded via <Script>)
-                // we call track manually this _one_ time to ensure the current page is
-                // accounted for, any new page loads will be captured by data-auto-track
-                // https://umami.is/docs/tracker-configuration
-                // umami.track();
               }}
             >
               Godkjenn alle
