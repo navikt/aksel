@@ -340,18 +340,28 @@ const Section = ({
     .map((token) => token.role)
     .filter(
       (role, index, array) => array.findIndex((r) => r === role) === index,
-    );
-  const sortByRole = (
-    a: (typeof tokens)[number] & { role: string },
-    b: (typeof tokens)[number] & { role: string },
-  ) => (a.role > b.role ? 1 : -1);
-  const sortByName = (
-    a: (typeof tokens)[number],
-    b: (typeof tokens)[number],
-  ) => (a.name > b.name ? 1 : -1);
-  const sortedTokens = tokens.sort((a, b) =>
-    a.role && b.role ? sortByRole(a, b) : sortByName(a, b),
-  );
+    )
+    .sort();
+  const sortedTokens = tokens.sort((a, b) => {
+    switch (a.category) {
+      case "backgroundColor":
+      case "borderColor":
+      case "textColor": {
+        if ((a.role || "") > (b.role || "")) {
+          return 1;
+        } else if ((a.role || "") < (b.role || "")) {
+          return -1;
+        }
+        return 0;
+      }
+
+      default:
+        return parseFloat(a.rawValue.replace("px", "")) >
+          parseFloat(b.rawValue.replace("px", ""))
+          ? 1
+          : -1;
+    }
+  });
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
     <section>
