@@ -1,4 +1,5 @@
 import React from "react";
+import { useRenameCSS } from "../../theme/Theme";
 
 /**
  * Layout-primitive for auto-spacing between elements
@@ -12,6 +13,9 @@ import React from "react";
  *  <MyComponent />
  * </HStack>
  */
-export const Spacer = () => <span className="navds-stack__spacer" />;
+export const Spacer = () => {
+  const { cn } = useRenameCSS();
+  return <span className={cn("navds-stack__spacer")} />;
+};
 
 export default Spacer;

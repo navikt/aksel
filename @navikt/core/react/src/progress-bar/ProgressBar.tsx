@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { useI18n } from "../util/i18n/i18n.hooks";
 
 interface ProgressBarPropsBase
@@ -93,6 +93,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
     const translateX = 100 - (Math.round(value) / valueMax) * 100;
     const onTimeoutRef = useRef<() => void>();
     onTimeoutRef.current = simulated?.onTimeout;
@@ -112,7 +113,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       /* biome-ignore lint/a11y/useFocusableInteractive: Progressbar is not interactive. */
       <div
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-progress-bar",
           `navds-progress-bar--${size}`,
           className,
@@ -136,7 +137,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         {...rest}
       >
         <div
-          className={cl("navds-progress-bar__foreground", {
+          className={cn("navds-progress-bar__foreground", {
             "navds-progress-bar__foreground--indeterminate":
               simulated?.seconds !== undefined,
           })}

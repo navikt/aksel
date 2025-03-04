@@ -1,21 +1,20 @@
-import cl from "clsx";
 import React, { forwardRef, useState } from "react";
-import { DayPickerProvider } from "react-day-picker";
-import { useId } from "../../util/hooks";
+import { useRenameCSS } from "../../theme/Theme";
+import { useControllableState, useId } from "../../util/hooks";
 import { useMergeRefs } from "../../util/hooks/useMergeRefs";
 import { useDateLocale, useI18n } from "../../util/i18n/i18n.hooks";
+import { DateDialog } from "../Date.Dialog";
+import { DateInputContextProvider, MonthPickerInput } from "../Date.Input";
 import {
-  DateInputContext,
   DateTranslationContextProvider,
-  SharedMonthProvider,
-} from "../context";
-import { MonthPickerInput } from "../parts/DateInput";
-import { DateWrapper } from "../parts/DateWrapper";
-import { getLocaleFromString, getTranslations } from "../utils";
-import MonthCaption from "./MonthCaption";
-import MonthPickerStandalone from "./MonthPickerStandalone";
-import MonthSelector from "./MonthSelector";
-import { MonthPickerProps } from "./types";
+  getLocaleFromString,
+  getTranslations,
+} from "../Date.locale";
+import { MonthPickerProvider } from "./MonthPicker.context";
+import { MonthPickerProps } from "./MonthPicker.types";
+import { MonthPickerCaption } from "./parts/MonthPicker.Caption";
+import { MonthPickerStandalone } from "./parts/MonthPicker.Standalone";
+import { MonthPickerTable } from "./parts/MonthPicker.Table";
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerProps> {
@@ -89,22 +88,29 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       translations,
       getTranslations(locale),
     );
+    const { cn } = useRenameCSS();
     const langProviderLocale = useDateLocale();
     const ariaId = useId(id);
-    const [open, setOpen] = useState(_open ?? false);
+
+    const [open, setOpen] = useControllableState({
+      defaultValue: false,
+      value: _open,
+      onChange: () => {
+        onOpenToggle?.();
+      },
+    });
 
     /* We use state here to insure that anchor is defined if open is true on initial render */
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
     const mergedRef = useMergeRefs(setWrapperRef, ref);
 
-    const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
-      defaultSelected,
-    );
-
     const handleSelect = (month?: Date) => {
-      !onMonthSelect && setSelectedMonth(month);
       onMonthSelect?.(month);
-      month && (onClose?.() ?? setOpen(false));
+
+      if (month) {
+        onClose?.();
+        setOpen(false);
+      }
     };
 
     if (dropdownCaption && (!fromDate || !toDate)) {
@@ -114,62 +120,52 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 
     return (
       <DateTranslationContextProvider translate={translate}>
-        <DateInputContext.Provider
-          value={{
-            open: _open ?? open,
-            onOpen: () => {
-              setOpen((x) => !x);
-              onOpenToggle?.();
-            },
-            ariaId,
-            defined: true,
-          }}
+        <DateInputContextProvider
+          open={open}
+          onOpen={() => setOpen((x) => !x)}
+          ariaId={ariaId}
+          defined={true}
         >
-          <div
-            ref={mergedRef}
-            className={cl("navds-date__wrapper", wrapperClassName)}
+          <MonthPickerProvider
+            dropdownCaption={dropdownCaption}
+            defaultSelected={defaultSelected}
+            selected={selected}
+            disabled={disabled}
+            fromDate={fromDate}
+            toDate={toDate}
+            year={year}
+            onYearChange={onYearChange}
+            onMonthSelect={handleSelect}
+            locale={locale ? getLocaleFromString(locale) : langProviderLocale}
           >
-            {children}
-            <DateWrapper
-              open={_open ?? open}
-              anchor={wrapperRef}
-              onClose={() => onClose?.() ?? setOpen(false)}
-              locale={locale}
-              translate={translate}
-              variant="month"
-              popoverProps={{
-                id: ariaId,
-                strategy,
-              }}
+            <div
+              ref={mergedRef}
+              className={cn("navds-date__wrapper", wrapperClassName)}
             >
-              <DayPickerProvider
-                initialProps={{
-                  locale: locale
-                    ? getLocaleFromString(locale)
-                    : langProviderLocale,
-                  selected: selected ?? selectedMonth,
-                  toDate,
-                  fromDate,
-                  month: selected ?? selectedMonth,
+              {children}
+              <DateDialog
+                open={open}
+                anchor={wrapperRef}
+                onClose={() => {
+                  onClose?.();
+                  open && setOpen(false);
+                }}
+                locale={locale}
+                translate={translate}
+                variant="month"
+                popoverProps={{
+                  id: ariaId,
+                  strategy,
                 }}
               >
-                <div className={cl("rdp-month", className)}>
-                  <SharedMonthProvider
-                    dropdownCaption={dropdownCaption}
-                    disabled={disabled}
-                    selected={selected ?? selectedMonth}
-                    onSelect={handleSelect}
-                    year={year}
-                    onYearChange={onYearChange}
-                  >
-                    <MonthCaption />
-                    <MonthSelector />
-                  </SharedMonthProvider>
+                <div className={cn("rdp-month", className)}>
+                  <MonthPickerCaption />
+                  <MonthPickerTable />
                 </div>
-              </DayPickerProvider>
-            </DateWrapper>
-          </div>
-        </DateInputContext.Provider>
+              </DateDialog>
+            </div>
+          </MonthPickerProvider>
+        </DateInputContextProvider>
       </DateTranslationContextProvider>
     );
   },

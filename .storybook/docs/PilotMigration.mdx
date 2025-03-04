@@ -4,22 +4,13 @@ import { Markdown, Meta } from "@storybook/blocks";
 
 # Migration
 
-## Missing features
-
-Some components are not yet implemented in the new system. These are:
-
-- ConfirmationPanel
-- Panel
-- Dropdown
-
 ## Tokens
 
 [See tokens docs here](https://main--66b4b3beb91603ed0ab5c45e.chromatic.com/?path=/docs/docs-become-a-pilot-team-4-tokens--docs).
 
 ## CSS
 
-- Most of our CSS is re-written. This could potentially affect most custom overrides targeting `.navds`-classes.
-- You will not be able to use the old CSS and the new CSS at the same time.
+- Most of our CSS is re-written. This includes renaming all `.navds`-classNames to `.aksel`. This will affect most custom overrides targeting `.navds`-classes.
 
 As we strongly recommend avoiding custom
 overrides where possible, we would like to encourage opening an
@@ -39,6 +30,15 @@ All component-spesific tokens are no longer supported. That means all tokens lik
 ```
 
 All component-based tokens are prefixed with `--ac`, so a global search in your codebase should find all of them.
+
+## Tailwind CSS
+
+Since our Tailwind CSS config is tied to our tokens, most changes made to the tokens will affect the Tailwind CSS config.
+We have decided to prefix all our classes with `ax-` in the new config, so it should be possible to use both packages at the same time. We will develop tooling to hopefuly make the migrations easier in the future.
+
+### Removed classes
+
+z-index, maxWidth and spacing classes are removed from the new config.
 
 ## React
 
@@ -64,9 +64,9 @@ custom button.
 
 Component got a complete overhaul. Custom overrides might break.
 
-### Popover, HelpText, Tooltip
+### Popover, HelpText
 
-`arrow`-prop is removed. All of our floating dialog-elements now come without arrow.
+`arrow`-prop is removed. All of our floating dialog-elements except for `Tooltip` now comes without arrow.
 If you have custom `offset`-values, you might have to update them to accommodate this.
 
 ### Pagination

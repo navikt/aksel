@@ -4,10 +4,50 @@ import { Slot } from "../slot/Slot";
 import { createContext } from "../util/create-context";
 import { AsChildProps } from "../util/types";
 
+/* -------------------------------------------------------------------------- */
+/*                               CSS Translation                              */
+/* -------------------------------------------------------------------------- */
+type RenameCSSContext = {
+  /**
+   * Extends `clsx` with custom className handler
+   */
+  cn: (...inputs: Parameters<typeof cl>) => ReturnType<typeof cl>;
+};
+
+const [RenameCSSProvider, useRenameCSS] = createContext<RenameCSSContext>({
+  hookName: "useRenameCSS",
+  name: "RenameCSS",
+  providerName: "RenameCSSProvider",
+  defaultValue: { cn: cl },
+});
+
+export const compositeClassFunction = (
+  ...inputs: Parameters<typeof cl>
+): string => {
+  const classes = cl(inputs)
+    /* Replaces only if start of string  "navds- navds-"*/
+    .replace(/^navds-/g, "aksel-")
+    /* Replaces all " navds-" hits */
+    .replace(/\snavds-/g, " aksel-");
+
+  return classes.trim();
+};
+
+const RenameCSS = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <RenameCSSProvider cn={compositeClassFunction}>
+      {children}
+    </RenameCSSProvider>
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                               Theme provider                               */
+/* -------------------------------------------------------------------------- */
 type ThemeContext = {
   /**
    * Color theme
-   * @default "light"
+   * @default Inherits parent theme, or "light" if root
    */
   theme?: "light" | "dark";
 };
@@ -45,16 +85,18 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
 
     return (
       <ThemeProvider theme={theme}>
-        <SlotElement
-          ref={ref}
-          className={cl("navds-theme", className, theme)}
-          data-background={hasBackground}
-        >
-          {children}
-        </SlotElement>
+        <RenameCSS>
+          <SlotElement
+            ref={ref}
+            className={cl("aksel-theme", className, theme)}
+            data-background={hasBackground}
+          >
+            {children}
+          </SlotElement>
+        </RenameCSS>
       </ThemeProvider>
     );
   },
 );
 
-export { Theme, useThemeInternal };
+export { Theme, useRenameCSS, useThemeInternal };

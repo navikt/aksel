@@ -1,87 +1,70 @@
-import _ from "lodash";
+import { mergeConfigs, tokensWithPrefix } from "./tokens.util";
+import { radiusTokenConfig } from "./tokens/border-radius";
+import { breakpointTokenConfig } from "./tokens/breakpoint";
 import {
-  StyleDictionaryTokenConfig,
-  TokenTypes,
-  tokensWithPrefix,
-} from "./tokens.util";
-import { breakpointsTokenConfig } from "./tokens/breakpoints";
+  globalDarkTokens,
+  globalLightTokens,
+} from "./tokens/colors/global.tokens";
+import { semanticTokensForAllRoles } from "./tokens/colors/semantic-role.tokens";
+import { semanticRootTokens } from "./tokens/colors/semantic-root.tokens";
 import { fontTokenConfig } from "./tokens/font";
-import {
-  globalColorDarkModeConfig,
-  globalColorLightModeConfig,
-} from "./tokens/global";
 import { opacityTokenConfig } from "./tokens/opacity";
-import { radiusTokenConfig } from "./tokens/radius";
-import { semanticTokenConfig } from "./tokens/semantic";
-import { semanticTokensForAllRolesConfig } from "./tokens/semantic-roles";
 import { shadowTokenConfig } from "./tokens/shadow";
 import { spaceTokenConfig } from "./tokens/space";
-import { textContrastTokenConfig } from "./tokens/text-contrast";
 
-const mergeConfigs = (
-  configs: StyleDictionaryTokenConfig<TokenTypes>[],
-): StyleDictionaryTokenConfig<TokenTypes> => {
-  return configs.reduce((acc, config) => _.merge(acc, config), {});
+export const lightModeTokens = (withSemanticRoles = true) => {
+  const config = [
+    shadowTokenConfig("light"),
+    opacityTokenConfig("light"),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
+    semanticRootTokens("light"),
+    globalLightTokens,
+  ];
+
+  return tokensWithPrefix(mergeConfigs(config));
+};
+
+export const darkModeTokens = (withSemanticRoles = true) => {
+  const config = [
+    shadowTokenConfig("dark"),
+    opacityTokenConfig("dark"),
+    withSemanticRoles ? semanticTokensForAllRoles() : {},
+    semanticRootTokens("dark"),
+    globalDarkTokens,
+  ];
+
+  return tokensWithPrefix(mergeConfigs(config));
+};
+
+export const semanticRoleTokensWithGlobalReference = () => {
+  const config = [globalLightTokens, semanticTokensForAllRoles()];
+
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 /**
- * Collection of configs for:
- * - Global lightmode colors
- * - Semantic tokens for each color-role
- * - Semantic tokens for standalone colors
- */
-export const lightModeTokens = () => {
-  return tokensWithPrefix(
-    mergeConfigs([
-      shadowTokenConfig("light"),
-      opacityTokenConfig("light"),
-      semanticTokensForAllRolesConfig(),
-      textContrastTokenConfig,
-      semanticTokenConfig("light"),
-      globalColorLightModeConfig,
-    ]),
-  );
-};
-
-/**
- * Collection of configs for:
- * - Global darkmode colors
- */
-export const darkModeTokens = () => {
-  return tokensWithPrefix(
-    mergeConfigs([
-      shadowTokenConfig("dark"),
-      opacityTokenConfig("dark"),
-      semanticTokensForAllRolesConfig(),
-      textContrastTokenConfig,
-      semanticTokenConfig("dark"),
-      globalColorDarkModeConfig,
-    ]),
-  );
-};
-
-/**
- * Collection of configs for:
- * - Space
- * - Radius
+ * We deliberately extract space and border-radius tokens from other "root" tokens like breakline, font etc
+ * so we can use the fuction for creating Figma-variables
  */
 export const scaleTokens = () => {
-  return tokensWithPrefix(mergeConfigs([spaceTokenConfig, radiusTokenConfig]));
+  const config = [spaceTokenConfig, radiusTokenConfig];
+
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 export const rootTokens = () => {
-  return tokensWithPrefix(
-    mergeConfigs([scaleTokens().ax, breakpointsTokenConfig, fontTokenConfig]),
-  );
+  const config = [scaleTokens().ax, breakpointTokenConfig, fontTokenConfig];
+
+  return tokensWithPrefix(mergeConfigs(config));
 };
 
 export const allTokens = () => {
-  return tokensWithPrefix(
-    mergeConfigs([
-      lightModeTokens().ax,
-      scaleTokens().ax,
-      breakpointsTokenConfig,
-      fontTokenConfig,
-    ]),
-  );
+  const config = [
+    lightModeTokens().ax,
+    scaleTokens().ax,
+    breakpointTokenConfig,
+    fontTokenConfig,
+  ];
+
+  return tokensWithPrefix(mergeConfigs(config));
 };

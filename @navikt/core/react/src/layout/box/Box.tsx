@@ -1,8 +1,7 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
 import { Slot } from "../../slot/Slot";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { omit } from "../../util";
 import { OverridableComponent } from "../../util/types";
 import BasePrimitive, {
@@ -110,6 +109,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
       ref,
     ) => {
       const themeContext = useThemeInternal(false);
+      const { cn } = useRenameCSS();
 
       if (
         process.env.NODE_ENV !== "production" &&
@@ -159,7 +159,7 @@ export const BoxComponent: OverridableComponent<BoxProps, HTMLDivElement> =
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
             style={style}
-            className={cl("navds-box", className, {
+            className={cn("navds-box", className, {
               "navds-box-bg": background,
               "navds-box-border-color": borderColor,
               "navds-box-border-width": borderWidth,

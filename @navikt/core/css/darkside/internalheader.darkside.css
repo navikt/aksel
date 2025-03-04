@@ -1,4 +1,4 @@
-.navds-internalheader {
+.aksel-internalheader {
   display: flex;
   align-self: stretch;
   background: var(--ax-bg-raised);
@@ -7,14 +7,14 @@
 }
 
 @media (forced-colors: active) {
-  .navds-internalheader {
+  .aksel-internalheader {
     background-color: ButtonFace;
     border: solid 1px ButtonText;
     color: ButtonText;
   }
 }
 
-.navds-internalheader__title {
+.aksel-internalheader__title {
   border: none;
   overflow: visible;
   background: transparent;
@@ -44,14 +44,14 @@
   }
 }
 
-.navds-internalheader__user {
+.aksel-internalheader__user {
   padding: 0 var(--ax-space-20);
   border-left: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   align-items: center;
 }
 
-.navds-internalheader__button {
+.aksel-internalheader__button {
   border: none;
   margin: 0;
   padding: 0 var(--ax-space-12);
@@ -74,7 +74,7 @@
 }
 
 @media (forced-colors: active) {
-  .navds-internalheader__button:hover {
+  .aksel-internalheader__button:hover {
     background-color: highlighttext;
     border-color: highlight;
     color: highlight;
@@ -83,8 +83,8 @@
   }
 }
 
-.navds-internalheader__title,
-.navds-internalheader__button {
+.aksel-internalheader__title,
+.aksel-internalheader__button {
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: -4px;
@@ -95,7 +95,7 @@
   }
 }
 
-.navds-internalheader__user-button {
+.aksel-internalheader__user-button {
   padding-left: var(--ax-space-20);
   gap: var(--ax-space-16);
 }

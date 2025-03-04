@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import { Node as PostCSSNode } from "postcss";
 import stylelint from "stylelint";
 import { isCustomProperty } from "../../utils";
 
@@ -26,7 +25,7 @@ const checkDeclProp = (
   controlledPrefixes: string[],
   prop: string,
   postcssResult: stylelint.PostcssResult,
-  rootNode: PostCSSNode,
+  rootNode: stylelint.Problem["node"],
 ) => {
   if (
     isCustomProperty(prop) &&

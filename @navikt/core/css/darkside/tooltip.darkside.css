@@ -1,7 +1,7 @@
-.navds-tooltip {
+.aksel-tooltip {
   z-index: 3000;
-  background-color: var(--ax-bg-raised);
-  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-neutral-strong);
+  color: var(--ax-text-neutral-contrast);
   border-radius: var(--ax-border-radius-medium);
   padding: 0 var(--ax-space-6);
   align-items: center;
@@ -10,23 +10,43 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 150ms;
   text-align: center;
-  border: 1px solid var(--ax-border-neutral-subtleA);
   box-shadow: var(--ax-shadow-dialog);
+  border: 1px solid transparent;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="bottom"]) {
+.navds-tooltip__arrow {
+  height: 0.5rem;
+  width: 0.5rem;
+  z-index: -1;
+  background-color: var(--ax-bg-neutral-strong);
+  position: absolute;
+  border-radius: 1px;
+  transform: rotate(45deg);
+
+  @media (forced-colors: active) {
+    & {
+      display: none;
+    }
+  }
+}
+
+.aksel-tooltip:where([data-state="open"]):where([data-side="bottom"]) {
   animation-name: aksel-tooltip-from-bottom, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="top"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="top"]) {
   animation-name: aksel-tooltip-from-top, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="left"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="left"]) {
   animation-name: aksel-tooltip-from-left, aksel-tooltip-fade-in;
 }
 
-.navds-tooltip:where([data-state="open"]):where([data-side="right"]) {
+.aksel-tooltip:where([data-state="open"]):where([data-side="right"]) {
   animation-name: aksel-tooltip-from-right, aksel-tooltip-fade-in;
 }
 
@@ -80,13 +100,13 @@
   }
 }
 
-.navds-tooltip__keys {
+.aksel-tooltip__keys {
   padding-bottom: var(--ax-space-4);
   display: flex;
   gap: var(--ax-space-4);
 }
 
-.navds-tooltip__key {
+.aksel-tooltip__key {
   font-family: var(--ax-font-family);
   color: var(--ax-text-neutral);
   padding: 0 var(--ax-space-4);
@@ -96,7 +116,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--ax-border-radius-small);
-  background: var(--ax-bg-neutral-moderateA);
+  background: var(--ax-bg-neutral-moderate);
 
   @media (forced-colors: active) {
     & {

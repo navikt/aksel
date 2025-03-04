@@ -30,6 +30,7 @@ spec:
         - host: apicdn.sanity.io
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
+        - host: umami.nav.no
       rules: []
   filesFrom:
     - emptyDir:
