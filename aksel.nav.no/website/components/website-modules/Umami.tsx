@@ -25,6 +25,8 @@ export const Umami = () => {
     return null;
   }
 
+  console.info("Tracking enabled");
+
   return (
     <Script
       defer
