@@ -194,7 +194,7 @@ li.aksel-file-item {
 }
 
 .aksel-file-item__file-info {
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .aksel-file-item__button {
