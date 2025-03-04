@@ -67,6 +67,7 @@ export const ConsentBanner = ({
             <Button
               className="h-fit min-w-fit"
               type="button"
+              variant="secondary-neutral"
               onClick={() => {
                 updateConsent("rejected");
                 setShowBanner(false);
@@ -77,6 +78,7 @@ export const ConsentBanner = ({
             <Button
               className="h-fit min-w-fit"
               type="button"
+              variant="secondary-neutral"
               onClick={() => {
                 updateConsent("accepted");
                 setShowBanner(false);
