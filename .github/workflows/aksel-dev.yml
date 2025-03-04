@@ -8,7 +8,7 @@ on:
 jobs:
   build_and_deploy:
     name: Build and deploy to dev-gcp
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       packages: "write"
       contents: "read"
