@@ -22,7 +22,6 @@
   },
   "scripts": {
     "build": "node config/bundle.js && yarn build:darkside",
-    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
     "css:get-version": "node config/get-version.js",
     "build:darkside": "tsx ./config/bundle.darkside.ts",
     "test": "yarn build && vitest run"
@@ -37,7 +36,6 @@
     "fast-glob": "3.2.11",
     "lightningcss": "^1.29.1",
     "lodash": "^4.17.21",
-    "nodemon": "^3.0.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^9.0.0",
