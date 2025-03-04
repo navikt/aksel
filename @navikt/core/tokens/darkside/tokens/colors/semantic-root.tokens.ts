@@ -17,6 +17,7 @@ export function semanticRootTokens(theme: ColorTheme) {
         value: theme === "light" ? "#C30000" : "{ax.neutral.1000.value}",
         type: "color",
         group: "text",
+        comment: "TODO: Sjur fyller ut",
       },
     },
     bg: {
@@ -29,6 +30,7 @@ export function semanticRootTokens(theme: ColorTheme) {
          * Bg-default is used between element and focus-marking.
          */
         scopes: ["EFFECT_COLOR"],
+        comment: "TODO: Sjur fyller ut",
       },
       input: {
         value:
@@ -37,6 +39,7 @@ export function semanticRootTokens(theme: ColorTheme) {
             : "rgba(7, 9, 13, 0.50)",
         type: "color",
         group: "background",
+        comment: "TODO: Sjur fyller ut",
       },
       raised: {
         value:
@@ -45,16 +48,19 @@ export function semanticRootTokens(theme: ColorTheme) {
             : "{ax.neutral.200.value}",
         type: "color",
         group: "background",
+        comment: "TODO: Sjur fyller ut",
       },
       sunken: {
         value: theme === "light" ? "{ax.neutral.200.value}" : "#07090D",
         type: "color",
         group: "background",
+        comment: "TODO: Sjur fyller ut",
       },
       overlay: {
         value: "rgba(2, 20, 49 , 0.49)",
         type: "color",
         group: "background",
+        comment: "TODO: Sjur fyller ut",
       },
     },
     border: {
@@ -66,6 +72,7 @@ export function semanticRootTokens(theme: ColorTheme) {
          * Allows token to be used on 'effect' properties in Figma, used for creating focus markings.
          */
         scopes: ["EFFECT_COLOR"],
+        comment: "TODO: Sjur fyller ut",
       },
     },
   } satisfies {

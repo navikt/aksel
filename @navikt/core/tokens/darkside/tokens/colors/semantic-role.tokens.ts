@@ -14,41 +14,49 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
         value: `{ax.${role}.100.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-softA`]: {
         value: `{ax.${role}.100A.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderate`]: {
         value: `{ax.${role}.200.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderateA`]: {
         value: `{ax.${role}.200A.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderate-hover`]: {
         value: `{ax.${role}.300.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderate-hoverA`]: {
         value: `{ax.${role}.300A.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderate-pressed`]: {
         value: `{ax.${role}.400.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-moderate-pressedA`]: {
         value: `{ax.${role}.400A.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-strong`]: {
         value:
@@ -57,6 +65,7 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
             : `{ax.${role}.600.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-strong-hover`]: {
         value:
@@ -65,6 +74,7 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
             : `{ax.${role}.700.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-strong-pressed`]: {
         value:
@@ -73,6 +83,7 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
             : `{ax.${role}.800.value}`,
         type: "color",
         group: `background.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
     },
     text: {
@@ -80,6 +91,7 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
         value: `{ax.${role}.1000.value}`,
         type: "color",
         group: `text.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-subtle`]: {
         value:
@@ -88,16 +100,19 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
             : `{ax.${role}.800.value}`,
         type: "color",
         group: `text.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-icon`]: {
         value: `{ax.${role}.600.value}`,
         type: "color",
         group: `text.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-contrast`]: {
         value: "{ax.neutral.000.value}",
         type: "color",
         group: `text.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
     },
     border: {
@@ -105,21 +120,25 @@ export function semanticTokensForRole(role: SemanticColorRoles) {
         value: `{ax.${role}.600.value}`,
         type: "color",
         group: `border.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-subtle`]: {
         value: `{ax.${role}.400.value}`,
         type: "color",
         group: `border.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-subtleA`]: {
         value: `{ax.${role}.400A.value}`,
         type: "color",
         group: `border.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
       [`${role}-strong`]: {
         value: `{ax.${role}.700.value}`,
         type: "color",
         group: `border.${role}`,
+        comment: "TODO: Sjur fyller ut",
       },
     },
   } satisfies StyleDictionaryTokenConfig<"color">;
