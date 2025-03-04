@@ -194,7 +194,7 @@ li.navds-file-item {
 }
 
 .navds-file-item__file-info {
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .navds-file-item__button {
