@@ -44,7 +44,7 @@ export const Hit = forwardRef<
           <NextLink
             href={href}
             data-umami-event="navigere"
-            data-umami-kilde="global sok"
+            data-umami-event-kilde="global sok"
             className={cl(
               "group scroll-my-32 break-words text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
               "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",

@@ -15,7 +15,7 @@ function ErrorPage({ statusCode }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    umami.track(statusCode, { url: window.location.pathname });
+    window.umami && umami.track(statusCode, { url: window.location.pathname });
     setIsClient(true);
   }, [statusCode]);
 

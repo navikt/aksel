@@ -27,7 +27,7 @@ export const useSearch = () => {
           ...createSearchResult(formatedResults, rawResults),
           query: value,
         });
-        umami.track("sok");
+        window.umami && umami.track("sok");
       }),
     [data],
   );

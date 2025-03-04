@@ -64,27 +64,30 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
           setAPIError(res.error);
           setState("error");
 
-          umami.track("skjema validering feilet", {
-            skjemanavn: "slack-feedback",
-            skjemaId: sanityDocumentId,
-          });
+          window.umami &&
+            umami.track("skjema validering feilet", {
+              skjemanavn: "slack-feedback",
+              skjemaId: sanityDocumentId,
+            });
         } else {
           setFormError(null);
           setState("feedbackSent");
 
-          umami.track("skjema fullfort", {
-            skjemanavn: "slack-feedback",
-            skjemaId: sanityDocumentId,
-          });
+          window.umami &&
+            umami.track("skjema fullfort", {
+              skjemanavn: "slack-feedback",
+              skjemaId: sanityDocumentId,
+            });
         }
       })
       .catch(() => {
         setAPIError("unknownError");
         setState("error");
-        umami.track("skjema validering feilet", {
-          skjemanavn: "slack-feedback",
-          skjemaId: sanityDocumentId,
-        });
+        window.umami &&
+          umami.track("skjema validering feilet", {
+            skjemanavn: "slack-feedback",
+            skjemaId: sanityDocumentId,
+          });
       });
   };
 

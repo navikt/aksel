@@ -2,7 +2,6 @@ import NextLink from "next/link";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
-import { amplitudeLogNavigation } from "@/logging";
 
 const Divider = () => (
   <div
@@ -21,9 +20,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <FigmaIcon className="ml-1" /> <span className="">Figma</span>
         </DsLink>
@@ -52,9 +50,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
         </DsLink>
@@ -69,9 +66,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
           <span className="ml-1">Bidra</span>
@@ -87,9 +83,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <BrailleIcon aria-hidden className="text-2xl" />{" "}
           <span>Tilgjengelighet</span>

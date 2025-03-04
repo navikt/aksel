@@ -14,7 +14,7 @@ import Header from "@/layout/header/Header";
 
 export default function NotFound() {
   useEffect(() => {
-    umami.track("404", { url: window.location.pathname });
+    window.umami && umami.track("404", { url: window.location.pathname });
   }, []);
 
   return (
