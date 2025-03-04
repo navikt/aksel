@@ -1,6 +1,6 @@
-const path = require("path");
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")();
+import BundleAnalyzer from "@next/bundle-analyzer";
+import type { NextConfig } from "next";
+import path from "path";
 
 const cdnUrl = "https://cdn.nav.no";
 const hotjarUrl = "https://*.hotjar.com";
@@ -53,7 +53,7 @@ const useCdn = process.env.USE_CDN_ASSETS === "true";
 const isProduction = process.env.PRODUCTION === "true";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
   publicRuntimeConfig: {
     NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
@@ -111,12 +111,12 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
   output: "standalone",
+  outputFileTracingRoot: path.join(__dirname, "../../"),
   experimental: {
-    outputFileTracingRoot: path.join(__dirname, "../../"),
     optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
     largePageDataBytes: 128 * 2000,
   },
 };
 
 module.exports =
-  process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig;
+  process.env.ANALYZE === "true" ? BundleAnalyzer()(nextConfig) : nextConfig;
