@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.16.1
+
+### Patch Changes
+
+- React 19: Resolve unknown-type in Slot. ([#3627](https://github.com/navikt/aksel/pull/3627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.1
+  - @navikt/aksel-icons@7.16.1
+
 ## 7.16.0
 
 ### Patch Changes
