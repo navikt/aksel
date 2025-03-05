@@ -50,6 +50,8 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       description,
       headingTag = "h3",
       size,
+      "aria-label": _ariaLabel,
+      "aria-labelledby": _ariaLabelledBy,
       ...rest
     },
     ref,
@@ -85,7 +87,13 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
             ref={ref}
             className={cn("navds-list", `navds-list--${listSize}`, className)}
           >
-            <ListTag role="list">{children}</ListTag>
+            <ListTag
+              role="list"
+              aria-label={_ariaLabel}
+              aria-labelledby={_ariaLabelledBy}
+            >
+              {children}
+            </ListTag>
           </BodyLong>
         </ListContext.Provider>
       );
@@ -111,7 +119,13 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
             </Heading>
           )}
           {description && <BodyShort size={listSize}>{description}</BodyShort>}
-          <ListTag role="list">{children}</ListTag>
+          <ListTag
+            role="list"
+            aria-label={_ariaLabel}
+            aria-labelledby={_ariaLabelledBy}
+          >
+            {children}
+          </ListTag>
         </BodyLong>
       </ListContext.Provider>
     );
