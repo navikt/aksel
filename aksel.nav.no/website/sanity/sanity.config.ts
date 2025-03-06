@@ -45,6 +45,9 @@ export const workspaceConfig = defineConfig([
       colorInput(),
       nbNOLocale(),
     ],
+    releases: {
+      enabled: false,
+    },
   },
   {
     projectId: SANITY_PROJECT_ID,
@@ -76,6 +79,9 @@ export const workspaceConfig = defineConfig([
       colorInput(),
       nbNOLocale(),
     ],
+    releases: {
+      enabled: false,
+    },
   },
 ]);
 
