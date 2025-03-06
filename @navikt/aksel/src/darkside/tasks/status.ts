@@ -169,13 +169,17 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
 }
 
 function createRegexes(variable: string): RegExp[] {
+  const cleanedVariable = variable.replace("--a-", "").replace("--ax-", "");
+
   return [
     new RegExp(`(${variable})`, "gm"),
     new RegExp(`(\\${translateToken(variable, "scss")})`, "gm"),
     new RegExp(`(${translateToken(variable, "less")})`, "gm"),
     new RegExp(`(${translateToken(variable, "js")})`, "gm"),
     new RegExp(
-      `(?<![-])\\b${variable.replace("--a-", "").replace("--ax-", "")}\\b`,
+      `(?<!(${
+        cleanedVariable === "transparent" ? "surface|" : ""
+      }meta|brand|--navds|__navds|global|semantic|legacy|migration|--a|@a|\\$a).*)-${cleanedVariable}`,
       "gm",
     ),
   ];
