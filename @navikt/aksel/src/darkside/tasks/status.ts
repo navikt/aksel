@@ -4,7 +4,7 @@ import {
   newTokens,
   updatedTokens,
 } from "../../codemod/transforms/darkside/darkside.tokens";
-import { translateToken } from "../../codemod/utils/translate-token";
+import { getAllTokenRegexes } from "../token-regex";
 
 type TokenData = {
   name: string;
@@ -122,7 +122,7 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
     const legacyCSSVariable = `--a-${legacyToken}`;
     const canAutoMigrate = config.replacement.length > 0;
 
-    const regexes = createRegexes(legacyCSSVariable);
+    const regexes = getAllTokenRegexes(legacyCSSVariable);
 
     lines.forEach((line, lineNumber) => {
       regexes.forEach((regex, index) => {
@@ -146,7 +146,7 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
 
   newTokens.forEach((newToken) => {
     const updatedCSSVariable = `--ax-${newToken}`;
-    const regexes = createRegexes(updatedCSSVariable);
+    const regexes = getAllTokenRegexes(updatedCSSVariable);
 
     lines.forEach((line, lineNumber) => {
       regexes.forEach((regex, index) => {
@@ -166,23 +166,6 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
       });
     });
   });
-}
-
-function createRegexes(variable: string): RegExp[] {
-  const cleanedVariable = variable.replace("--a-", "").replace("--ax-", "");
-
-  return [
-    new RegExp(`(${variable})`, "gm"),
-    new RegExp(`(\\${translateToken(variable, "scss")})`, "gm"),
-    new RegExp(`(${translateToken(variable, "less")})`, "gm"),
-    new RegExp(`(${translateToken(variable, "js")})`, "gm"),
-    new RegExp(
-      `(?<!(${
-        cleanedVariable === "transparent" ? "surface|" : ""
-      }meta|brand|--navds|__navds|global|semantic|legacy|migration|--a|@a|\\$a).*)-${cleanedVariable}`,
-      "gm",
-    ),
-  ];
 }
 
 function createTokenData(

@@ -1,5 +1,9 @@
+import chalk from "chalk";
+import { Command } from "commander";
 import Enquirer from "enquirer";
 import fg from "fast-glob";
+import * as jscodeshift from "jscodeshift/src/Runner";
+import path from "path";
 import { printRemaining } from "./tasks/print-remaining";
 import { status } from "./tasks/status";
 
@@ -11,50 +15,36 @@ const ignoreNodeModules = [
   "**/.next/**",
 ];
 
-export async function runTooling(options: {
-  force: boolean;
-  dryRun: boolean;
-  print: boolean;
-  glob: string;
-  ext: string;
-}) {
+type TaskT = Awaited<ReturnType<typeof getNextTask>>;
+
+export async function runTooling(
+  options: {
+    force: boolean;
+    dryRun: boolean;
+    print: boolean;
+    glob: string;
+    ext: string;
+  },
+  program: Command,
+) {
   const filepaths = fg.sync([options.glob ?? getDefaultGlob(options?.ext)], {
     cwd: process.cwd(),
     ignore: ignoreNodeModules,
   });
 
   /* await showStatus() */
-  let task: Awaited<ReturnType<typeof getNextTask>>;
+  let task: TaskT;
 
   status(filepaths);
 
   while (task !== "exit") {
     task = await getNextTask();
 
-    if (task === "css-tokens") {
-      /* run css migrations */
-      /* show status */
-      continue;
-    }
-    if (task === "scss-tokens") {
-      /* run scss migrations */
-      /* show status */
-      continue;
-    }
-    if (task === "less-tokens") {
-      /* run less migrations */
-      /* show status */
-      continue;
-    }
-    if (task === "js-tokens") {
-      /* run js migrations */
-      /* show status */
-      continue;
-    }
     if (task === "status") {
       status(filepaths);
       continue;
     }
+
     if (task === "print-remaining-tokens") {
       printRemaining(filepaths);
       continue;
@@ -63,42 +53,45 @@ export async function runTooling(options: {
     if (task === "exit") {
       process.exit(1);
     }
+
+    try {
+      runCodeshift(task, filepaths, {
+        dryRun: options.dryRun,
+        force: options.force,
+      });
+    } catch (error) {
+      program.error(chalk.red("Error:", error.message));
+    }
   }
+}
 
-  /* OLD */
-  // const codemodPath = path.join(
-  //   __dirname,
-  //   `./transforms/${getMigrationPath(input)}.js`,
-  // );
-  //
+const transforms = {
+  "css-tokens": "./transforms/darkside-tokens-css",
+  "scss-tokens": "./transforms/darkside-tokens-scss",
+  "less-tokens": "./transforms/darkside-tokens-less",
+  "js-tokens": "./transforms/darkside-tokens-js",
+} as const;
 
-  //
-  // console.info("\nRunning migration:", chalk.green("input"));
-  //
-  // options?.glob && console.info(`Using glob: ${chalk.green(options.glob)}\n`);
-  //
-  // const warning = getWarning(input);
-  //
-  // try {
-  //   await jscodeshift.run(codemodPath, filepaths, {
-  //     babel: true,
-  //     ignorePattern: ignoreNodeModules,
-  //     extensions: "tsx,ts,jsx,js",
-  //     parser: "tsx",
-  //     verbose: 2,
-  //     runInBand: true,
-  //     silent: false,
-  //     stdin: false,
-  //     dry: options?.dryRun,
-  //     force: options?.force,
-  //     print: options?.print,
-  //   });
-  //
-  //   warning && console.info(`\n${chalk.yellow(warning)}\n`);
-  //
-  // } catch (error) {
-  //   program.error(chalk.red("Error:", error.message));
-  // }
+async function runCodeshift(
+  task: TaskT,
+  filepaths: string[],
+  options: { dryRun: boolean; force: boolean },
+) {
+  const codemodPath = path.join(__dirname, `${transforms[task]}.js`);
+
+  await jscodeshift.run(codemodPath, filepaths, {
+    babel: true,
+    ignorePattern: ignoreNodeModules,
+    extensions: "tsx,ts,jsx,js",
+    parser: "tsx",
+    verbose: 2,
+    runInBand: true,
+    silent: false,
+    stdin: false,
+    dry: options?.dryRun,
+    force: options?.force,
+    print: false,
+  });
 }
 
 function getDefaultGlob(ext: string): string {

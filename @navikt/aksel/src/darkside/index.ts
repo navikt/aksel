@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { Command } from "commander";
-import figlet from "figlet";
-import { getMigrationString } from "./migrations.js";
+// import figlet from "figlet";
+// import { getMigrationString } from "./migrations.js";
 import { runTooling } from "./run-tooling.js";
 import { validateGit } from "./validation.js";
 
@@ -11,7 +11,6 @@ export function darksideCommand() {
   program.name(`${chalk.blueBright(`npx @navikt/aksel`)}`);
 
   program
-    .option("-e, --ext [extension]", "default: js,ts,jsx,tsx,css,scss,less")
     .option(
       "-g, --glob [glob]",
       "Globbing pattern, overrides --ext! Run with 'noglob' if using zsh-terminal. ",
@@ -19,11 +18,11 @@ export function darksideCommand() {
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-f, --force", "Forcibly run updates without checking git-changes")
     .command("darkside")
-    .addHelpText("beforeAll", figlet.textSync("Darkside"))
-    .addHelpText(
-      "afterAll",
-      chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
-    )
+    // .addHelpText("beforeAll", figlet.textSync("Darkside"))
+    // .addHelpText(
+    //   "afterAll",
+    //   chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
+    // )
     .description("Update tool for darkside token updates");
 
   program.parse();
@@ -34,5 +33,5 @@ export function darksideCommand() {
     validateGit(options, program);
   }
 
-  runTooling(options as Parameters<typeof runTooling>["0"]);
+  runTooling(options as Parameters<typeof runTooling>["0"], program);
 }
