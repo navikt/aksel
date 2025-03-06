@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.17
+
+### @navikt/ds-react
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
 ## 7.16
 
 ### @navikt/ds-react
