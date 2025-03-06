@@ -1,6 +1,9 @@
 import ProgressBar from "cli-progress";
 import fs from "fs";
-import { updatedTokens } from "../../codemod/transforms/darkside/darkside.tokens";
+import {
+  newTokens,
+  updatedTokens,
+} from "../../codemod/transforms/darkside/darkside.tokens";
 import { translateToken } from "../../codemod/utils/translate-token";
 
 type StatusData = {
@@ -22,10 +25,9 @@ type Status = {
 };
 
 async function status(files: string[]) {
-  console.info("Generating status...");
   const progressBar = new ProgressBar.SingleBar(
     {
-      clearOnComplete: false,
+      clearOnComplete: true,
       hideCursor: true,
       format: "{bar} | {value}/{total} | {filename}",
     },
@@ -40,6 +42,7 @@ async function status(files: string[]) {
     const readFile = fs.readFileSync(files[i], "utf8");
 
     updateLegacyStatus(readFile, statusStore);
+    updateUpdatedStatus(readFile, statusStore);
     /* Add a sleep function here */
     // await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -48,16 +51,68 @@ async function status(files: string[]) {
 
   progressBar.stop();
 
-  console.info(statusStore);
+  showStatusResults(
+    {
+      legacy: [].concat(
+        ...Object.values(statusStore).map((_status) => _status.legacy),
+      ),
+      updated: [].concat(
+        ...Object.values(statusStore).map((_status) => _status.updated),
+      ),
+    },
+    "Total",
+  );
+
+  showStatusResults(statusStore.css, "CSS");
+
+  showStatusResults(statusStore.scss, "SCSS");
+
+  showStatusResults(statusStore.less, "Less");
+
+  showStatusResults(statusStore.js, "JS");
+
+  showStatusResults(statusStore.tailwind, "Tailwind");
+
   return;
 }
 
-/**
- * Return an array of tokens that is found in the file with possible migration option.
- * If no migration is found, return null instead
- * @param framework Token framework to update
- * @returns {token: string, migration: string | null}[]
- */
+function showStatusResults(statusDataObj: StatusData, type: string) {
+  const multibar = new ProgressBar.MultiBar(
+    {
+      clearOnComplete: false,
+      hideCursor: true,
+      format: "{bar} {type} | {count} | {value}/{total}",
+    },
+    ProgressBar.Presets.shades_grey,
+  );
+
+  const totalTokens =
+    statusDataObj.legacy.length + statusDataObj.updated.length;
+
+  /* Create a const for the completed % */
+  const completedPercentage = (
+    totalTokens === 0 ? 100 : (statusDataObj.updated.length / totalTokens) * 100
+  ).toFixed(0);
+
+  console.info(`\n${type} (${completedPercentage}%)`);
+
+  multibar.create(totalTokens, statusDataObj.updated.length, {
+    type: "Tokens left to update",
+    count: statusDataObj.legacy.length,
+  });
+
+  const canBeAutomigratedN = statusDataObj.legacy.filter(
+    (legacy) => legacy.canAutoMigrate,
+  ).length;
+
+  multibar.create(statusDataObj.legacy.length, canBeAutomigratedN, {
+    type: "Can be auto-migrated ",
+    count: canBeAutomigratedN,
+  });
+
+  multibar.stop();
+}
+
 function updateLegacyStatus(file: string, statusObj: Status) {
   for (const [legacyToken, config] of Object.entries(updatedTokens)) {
     const legacyCSSVariable = `--a-${legacyToken}`;
@@ -128,6 +183,75 @@ function updateLegacyStatus(file: string, statusObj: Status) {
         ...Tailwindhits.map((hit) => ({
           name: hit,
           canAutoMigrate,
+        })),
+      );
+    }
+  }
+}
+
+function updateUpdatedStatus(file: string, statusObj: Status) {
+  for (const newToken of newTokens) {
+    const updatedCSSVariable = `--ax-${newToken}`;
+
+    const CSShits = new RegExp("(" + updatedCSSVariable + ")", "gm").exec(file);
+    if (CSShits) {
+      statusObj.css.updated.push(
+        ...CSShits.map((hit) => ({
+          name: hit,
+        })),
+      );
+    }
+
+    const SCSShits = new RegExp(
+      "(\\" + translateToken(updatedCSSVariable, "scss") + ")",
+      "gm",
+    ).exec(file);
+
+    if (SCSShits) {
+      statusObj.scss.updated.push(
+        ...SCSShits.map((hit) => ({
+          name: hit,
+        })),
+      );
+    }
+
+    const LESShits = new RegExp(
+      "(" + translateToken(updatedCSSVariable, "less") + ")",
+      "gm",
+    ).exec(file);
+
+    if (LESShits) {
+      statusObj.less.updated.push(
+        ...LESShits.map((hit) => ({
+          name: hit,
+        })),
+      );
+    }
+
+    const JShits = new RegExp(
+      "(" + translateToken(updatedCSSVariable, "js") + ")",
+      "gm",
+    ).exec(file);
+
+    if (JShits) {
+      /* We remove one instance since we "ignore" the import hit */
+      statusObj.js.updated.push(
+        ...JShits.map((hit) => ({
+          name: hit,
+        })).slice(1),
+      );
+    }
+
+    /* TODO: Account for breakpoint usage? md:, lg: etc */
+    const Tailwindhits = new RegExp(
+      "(?<![-])\b" + updatedCSSVariable.replace("--ax-", "") + "\b",
+      "gm",
+    ).exec(file);
+
+    if (Tailwindhits) {
+      statusObj.tailwind.updated.push(
+        ...Tailwindhits.map((hit) => ({
+          name: hit,
         })),
       );
     }
