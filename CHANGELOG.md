@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.17
+
+### @navikt/ds-react
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
+## 7.16
+
+### @navikt/ds-react
+
+- React 19: Resolve unknown-type in Slot. ([#3627](https://github.com/navikt/aksel/pull/3627))
+
+### @navikt/ds-css
+
+- Darkside: All classNames are now starts with `.aksel` instead of `.navds`. ([#3586](https://github.com/navikt/aksel/pull/3586))
+
 ## 7.15
 
 ### @navikt/aksel

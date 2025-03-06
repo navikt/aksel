@@ -164,16 +164,22 @@ function formatMessage(input: UpdateMessageData) {
   console.info(chalk.green(`\nToken update`));
   console.info(
     chalk.green(
-      `Found use of ${total} tokens no longer supported. Until these are updated, you will need to keep old tokens imported in your code.`,
+      `Found ${total} legacy tokens that are no longer supported. Until these are updated, you will need to keep the old tokens package imported in your code.`,
     ),
   );
 
   css.length > 0 &&
-    console.info(`\nCSS:${css.map((token) => `\n${token}`).join("")}`);
+    console.info(
+      `\nCSS tokens found:${css.map((token) => `\n${token}`).join("")}`,
+    );
 
   scss.length > 1 &&
-    console.info(`\nSCSS:${scss.map((token) => `\n${token}`).join("")}`);
+    console.info(
+      `\nSCSS tokens found:${scss.map((token) => `\n${token}`).join("")}`,
+    );
 
   less.length > 1 &&
-    console.info(`\nLESS:${less.map((token) => `\n${token}`).join("")}`);
+    console.info(
+      `\nLESS tokens found:${less.map((token) => `\n${token}`).join("")}`,
+    );
 }

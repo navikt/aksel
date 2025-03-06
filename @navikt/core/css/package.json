@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "7.15.0",
+  "version": "7.17.0",
   "description": "CSS for Nav Designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -22,22 +22,20 @@
   },
   "scripts": {
     "build": "node config/bundle.js && yarn build:darkside",
-    "watch": "nodemon --ignore dist -e css --watch . --exec \"yarn build\"",
     "css:get-version": "node config/get-version.js",
     "build:darkside": "tsx ./config/bundle.darkside.ts",
     "test": "yarn build && vitest run"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^7.15.0",
+    "@navikt/ds-tokens": "^7.17.0",
     "@types/clean-css": "4.2.11",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.24.2",
     "clean-css": "5.3.3",
     "cssnano": "7.0.6",
     "fast-glob": "3.2.11",
-    "lightningcss": "^1.28.0",
+    "lightningcss": "^1.29.1",
     "lodash": "^4.17.21",
-    "nodemon": "^3.0.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^9.0.0",

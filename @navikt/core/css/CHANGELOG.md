@@ -1,5 +1,15 @@
 # @navikt/ds-css
 
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+### Minor Changes
+
+- Darkside: All classNames are now starts with `.aksel` instead of `.navds`. ([#3586](https://github.com/navikt/aksel/pull/3586))
+
 ## 7.15.0
 
 ## 7.14.3

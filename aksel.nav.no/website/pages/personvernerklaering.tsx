@@ -11,13 +11,13 @@ import {
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import useConsent from "@/web/useConsent";
+import { useCookies } from "@/web/CookieProvider";
 
 type TRACKING_CHOICES = "tracking_yes" | "tracking_no" | "";
 
 const Page = () => {
   const [userPreference, setUserPreference] = useState<TRACKING_CHOICES>("");
-  const { consent, updateConsent } = useConsent();
+  const { consent, updateConsent } = useCookies();
 
   const handleChange = (event: TRACKING_CHOICES) => {
     setUserPreference(event);
