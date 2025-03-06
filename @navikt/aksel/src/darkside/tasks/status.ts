@@ -16,6 +16,9 @@ type StatusData = {
   }[];
   updated: {
     name: string;
+    fileName: string;
+    lineNumber: number;
+    columnNumber: number;
   }[];
 };
 
@@ -45,7 +48,7 @@ function status(files: string[]) {
     const readFile = fs.readFileSync(files[i], "utf8");
 
     updateLegacyStatus({ src: readFile, name: files[i] }, statusStore);
-    updateUpdatedStatus(readFile, statusStore);
+    updateUpdatedStatus({ src: readFile, name: files[i] }, statusStore);
 
     progressBar.update(i + 1, { filename: files[i] });
   }
@@ -65,13 +68,9 @@ function status(files: string[]) {
   );
 
   showStatusResults(statusStore.css, "CSS");
-
   showStatusResults(statusStore.scss, "SCSS");
-
   showStatusResults(statusStore.less, "Less");
-
   showStatusResults(statusStore.js, "JS");
-
   showStatusResults(statusStore.tailwind, "Tailwind");
 
   return statusStore;
@@ -172,72 +171,59 @@ function updateLegacyStatus(
   }
 }
 
-function updateUpdatedStatus(file: string, statusObj: Status) {
+function updateUpdatedStatus(
+  file: { src: string; name: string },
+  statusObj: Status,
+) {
+  const lines = file.src.split("\n");
+
   for (const newToken of newTokens) {
     const updatedCSSVariable = `--ax-${newToken}`;
 
-    const CSShits = new RegExp("(" + updatedCSSVariable + ")", "gm").exec(file);
-    if (CSShits) {
-      statusObj.css.updated.push(
-        ...CSShits.map((hit) => ({
-          name: hit,
-        })),
-      );
-    }
+    const regexes = [
+      new RegExp(`(${updatedCSSVariable})`, "gm"),
+      new RegExp(`(\\${translateToken(updatedCSSVariable, "scss")})`, "gm"),
+      new RegExp(`(${translateToken(updatedCSSVariable, "less")})`, "gm"),
+      new RegExp(`(${translateToken(updatedCSSVariable, "js")})`, "gm"),
+      new RegExp(
+        `(?<![-])\\b${updatedCSSVariable.replace("--ax-", "")}\\b`,
+        "gm",
+      ),
+    ];
 
-    const SCSShits = new RegExp(
-      "(\\" + translateToken(updatedCSSVariable, "scss") + ")",
-      "gm",
-    ).exec(file);
+    lines.forEach((line, lineNumber) => {
+      regexes.forEach((regex, index) => {
+        let match: RegExpExecArray | null;
 
-    if (SCSShits) {
-      statusObj.scss.updated.push(
-        ...SCSShits.map((hit) => ({
-          name: hit,
-        })),
-      );
-    }
+        while ((match = regex.exec(line)) !== null) {
+          const columnNumber = match.index + 1;
+          const hit = {
+            name: match[0],
+            fileName: file.name,
+            lineNumber: lineNumber + 1,
+            columnNumber,
+          };
 
-    const LESShits = new RegExp(
-      "(" + translateToken(updatedCSSVariable, "less") + ")",
-      "gm",
-    ).exec(file);
-
-    if (LESShits) {
-      statusObj.less.updated.push(
-        ...LESShits.map((hit) => ({
-          name: hit,
-        })),
-      );
-    }
-
-    const JShits = new RegExp(
-      "(" + translateToken(updatedCSSVariable, "js") + ")",
-      "gm",
-    ).exec(file);
-
-    if (JShits) {
-      /* We remove one instance since we "ignore" the import hit */
-      statusObj.js.updated.push(
-        ...JShits.map((hit) => ({
-          name: hit,
-        })).slice(1),
-      );
-    }
-
-    /* TODO: Account for breakpoint usage? md:, lg: etc */
-    const Tailwindhits = new RegExp(
-      "(?<![-])\b" + updatedCSSVariable.replace("--ax-", "") + "\b",
-      "gm",
-    ).exec(file);
-
-    if (Tailwindhits) {
-      statusObj.tailwind.updated.push(
-        ...Tailwindhits.map((hit) => ({
-          name: hit,
-        })),
-      );
-    }
+          switch (index) {
+            case 0:
+              statusObj.css.updated.push(hit);
+              break;
+            case 1:
+              statusObj.scss.updated.push(hit);
+              break;
+            case 2:
+              statusObj.less.updated.push(hit);
+              break;
+            case 3:
+              statusObj.js.updated.push(hit);
+              break;
+            case 4:
+              statusObj.tailwind.updated.push(hit);
+              break;
+          }
+        }
+      });
+    });
   }
 }
 
