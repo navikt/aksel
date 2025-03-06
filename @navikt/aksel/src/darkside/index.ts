@@ -29,6 +29,7 @@ export function darksideCommand() {
   program.parse();
   const options = program.opts();
 
+  /* Makes sure that you dont migrate lots of file while having other uncommited changes */
   if (!options.force) {
     validateGit(options, program);
   }

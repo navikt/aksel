@@ -1,5 +1,6 @@
 import Enquirer from "enquirer";
 import fg from "fast-glob";
+import { status } from "./tasks/status";
 
 const ignoreNodeModules = [
   "**/node_modules/**",
@@ -8,14 +9,6 @@ const ignoreNodeModules = [
   "**/lib/**",
   "**/.next/**",
 ];
-
-export const messages = new Map<
-  string,
-  {
-    format: (input: any) => void;
-    data: any;
-  }
->();
 
 export async function runTooling(options: {
   force: boolean;
@@ -31,6 +24,9 @@ export async function runTooling(options: {
 
   /* await showStatus() */
   let task: Awaited<ReturnType<typeof getNextTask>>;
+
+  await status(filepaths);
+  task = "exit";
 
   while (task !== "exit") {
     task = await getNextTask();

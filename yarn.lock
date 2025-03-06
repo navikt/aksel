@@ -3734,6 +3734,7 @@ __metadata:
     "@navikt/ds-css": "npm:^7.17.0"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
+    cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
@@ -9101,6 +9102,15 @@ __metadata:
   dependencies:
     restore-cursor: "npm:^3.1.0"
   checksum: 10/2692784c6cd2fd85cfdbd11f53aea73a463a6d64a77c3e098b2b4697a20443f430c220629e1ca3b195ea5ac4a97a74c2ee411f3807abf6df2b66211fec0c0a29
+  languageName: node
+  linkType: hard
+
+"cli-progress@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "cli-progress@npm:3.12.0"
+  dependencies:
+    string-width: "npm:^4.2.3"
+  checksum: 10/a6a549919a7461f5e798b18a4a19f83154bab145d3ec73d7f3463a8db8e311388c545ace1105557760a058cc4999b7f28c9d8d24d9783ee2912befb32544d4b8
   languageName: node
   linkType: hard
 

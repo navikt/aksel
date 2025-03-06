@@ -33,6 +33,7 @@
     "@navikt/ds-css": "^7.17.0",
     "axios": "1.7.4",
     "chalk": "4.1.0",
+    "cli-progress": "^3.12.0",
     "clipboardy": "^2.3.0",
     "commander": "10.0.1",
     "enquirer": "^2.3.6",
