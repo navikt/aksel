@@ -414,6 +414,8 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     "space",
     "shadow",
     "radius",
+    //"font",
+    //"breakpoint",
   ];
   const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
     addedCategories.includes(token.category),
@@ -424,7 +426,8 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     .filter(
       (category, index, array) =>
         array.findIndex((cat) => cat === category) === index,
-    );
+    )
+    .sort((a, b) => addedCategories.indexOf(a) - addedCategories.indexOf(b));
   const toc = categories.map((category) => ({
     title: Categories[category],
     id: category,
