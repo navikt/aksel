@@ -2,6 +2,7 @@ import path from "path";
 import { status } from "./status";
 
 function printRemaining(files: string[]) {
+  process.stdout.write("\nAnalyzing...");
   const statusObj = status(files, "no-print");
 
   Object.entries(statusObj).forEach(([tokenType, data]) => {
