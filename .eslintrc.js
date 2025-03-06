@@ -179,6 +179,8 @@ module.exports = {
     "esm",
     "cjs",
     "dist",
+    "@navikt/aksel/**/*.input.*",
+    "@navikt/aksel/**/*.output.*",
     "**/codemod/**/*.js",
     "!.storybook",
     "**/playwright-report/**",
