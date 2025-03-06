@@ -10,6 +10,9 @@ type StatusData = {
   legacy: {
     name: string;
     canAutoMigrate: boolean;
+    fileName: string;
+    lineNumber: number;
+    columnNumber: number;
   }[];
   updated: {
     name: string;
@@ -24,7 +27,7 @@ type Status = {
   tailwind: StatusData;
 };
 
-async function status(files: string[]) {
+function status(files: string[]) {
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -41,10 +44,8 @@ async function status(files: string[]) {
   for (let i = 0; i < files.length; i++) {
     const readFile = fs.readFileSync(files[i], "utf8");
 
-    updateLegacyStatus(readFile, statusStore);
+    updateLegacyStatus({ src: readFile, name: files[i] }, statusStore);
     updateUpdatedStatus(readFile, statusStore);
-    /* Add a sleep function here */
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
 
     progressBar.update(i + 1, { filename: files[i] });
   }
@@ -73,7 +74,7 @@ async function status(files: string[]) {
 
   showStatusResults(statusStore.tailwind, "Tailwind");
 
-  return;
+  return statusStore;
 }
 
 function showStatusResults(statusDataObj: StatusData, type: string) {
@@ -113,79 +114,61 @@ function showStatusResults(statusDataObj: StatusData, type: string) {
   multibar.stop();
 }
 
-function updateLegacyStatus(file: string, statusObj: Status) {
+function updateLegacyStatus(
+  file: { src: string; name: string },
+  statusObj: Status,
+) {
+  const lines = file.src.split("\n");
+
   for (const [legacyToken, config] of Object.entries(updatedTokens)) {
     const legacyCSSVariable = `--a-${legacyToken}`;
-
     const canAutoMigrate = config.replacement.length > 0;
 
-    const CSShits = new RegExp("(" + legacyCSSVariable + ")", "gm").exec(file);
-    if (CSShits) {
-      statusObj.css.legacy.push(
-        ...CSShits.map((hit) => ({
-          name: hit,
-          canAutoMigrate,
-        })),
-      );
-    }
+    const regexes = [
+      new RegExp(`(${legacyCSSVariable})`, "gm"),
+      new RegExp(`(\\${translateToken(legacyCSSVariable, "scss")})`, "gm"),
+      new RegExp(`(${translateToken(legacyCSSVariable, "less")})`, "gm"),
+      new RegExp(`(${translateToken(legacyCSSVariable, "js")})`, "gm"),
+      new RegExp(
+        `(?<![-])\\b${legacyCSSVariable.replace("--a-", "")}\\b`,
+        "gm",
+      ),
+    ];
 
-    const SCSShits = new RegExp(
-      "(\\" + translateToken(legacyCSSVariable, "scss") + ")",
-      "gm",
-    ).exec(file);
+    lines.forEach((line, lineNumber) => {
+      regexes.forEach((regex, index) => {
+        let match: RegExpExecArray | null;
 
-    if (SCSShits) {
-      statusObj.scss.legacy.push(
-        ...SCSShits.map((hit) => ({
-          name: hit,
-          canAutoMigrate,
-        })),
-      );
-    }
+        while ((match = regex.exec(line)) !== null) {
+          const columnNumber = match.index + 1;
+          const hit = {
+            name: match[0],
+            canAutoMigrate,
+            fileName: file.name,
+            lineNumber: lineNumber + 1,
+            columnNumber,
+          };
 
-    const LESShits = new RegExp(
-      "(" + translateToken(legacyCSSVariable, "less") + ")",
-      "gm",
-    ).exec(file);
-
-    if (LESShits) {
-      statusObj.less.legacy.push(
-        ...LESShits.map((hit) => ({
-          name: hit,
-          canAutoMigrate,
-        })),
-      );
-    }
-
-    const JShits = new RegExp(
-      "(" + translateToken(legacyCSSVariable, "js") + ")",
-      "gm",
-    ).exec(file);
-
-    if (JShits) {
-      /* We remove one instance since we "ignore" the import hit */
-      statusObj.js.legacy.push(
-        ...JShits.map((hit) => ({
-          name: hit,
-          canAutoMigrate,
-        })).slice(1),
-      );
-    }
-
-    /* TODO: Account for breakpoint usage? md:, lg: etc */
-    const Tailwindhits = new RegExp(
-      "(?<![-])\b" + legacyCSSVariable.replace("--a-", "") + "\b",
-      "gm",
-    ).exec(file);
-
-    if (Tailwindhits) {
-      statusObj.tailwind.legacy.push(
-        ...Tailwindhits.map((hit) => ({
-          name: hit,
-          canAutoMigrate,
-        })),
-      );
-    }
+          switch (index) {
+            case 0:
+              statusObj.css.legacy.push(hit);
+              break;
+            case 1:
+              statusObj.scss.legacy.push(hit);
+              break;
+            case 2:
+              statusObj.less.legacy.push(hit);
+              break;
+            case 3:
+              statusObj.js.legacy.push(hit);
+              break;
+            case 4:
+              statusObj.tailwind.legacy.push(hit);
+              break;
+          }
+        }
+      });
+    });
   }
 }
 
