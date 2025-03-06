@@ -27,7 +27,10 @@ type Status = {
   tailwind: StatusData;
 };
 
-function status(files: string[]): Status {
+function status(
+  files: string[],
+  action: "no-print" | "print" = "print",
+): Status {
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -37,7 +40,7 @@ function status(files: string[]): Status {
     ProgressBar.Presets.shades_classic,
   );
 
-  progressBar.start(files.length, 0);
+  action === "print" && progressBar.start(files.length, 0);
 
   const statusStore = initStatus();
 
@@ -46,8 +49,12 @@ function status(files: string[]): Status {
 
     updateStatus({ src: readFile, name: file }, statusStore);
 
-    progressBar.update(index + 1, { filename: file });
+    action === "print" && progressBar.update(index + 1, { filename: file });
   });
+
+  if (action === "no-print") {
+    return statusStore;
+  }
 
   progressBar.stop();
 
@@ -66,6 +73,8 @@ function status(files: string[]): Status {
   ["css", "scss", "less", "js", "tailwind"].forEach((type) => {
     showStatusResults(statusStore[type], type.toUpperCase());
   });
+
+  console.info("\n");
 
   return statusStore;
 }
@@ -219,3 +228,4 @@ function initStatus(): Status {
 }
 
 export { status };
+export type { Status };

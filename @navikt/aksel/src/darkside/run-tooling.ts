@@ -1,5 +1,6 @@
 import Enquirer from "enquirer";
 import fg from "fast-glob";
+import { printRemaining } from "./tasks/print-remaining";
 import { status } from "./tasks/status";
 
 const ignoreNodeModules = [
@@ -25,8 +26,7 @@ export async function runTooling(options: {
   /* await showStatus() */
   let task: Awaited<ReturnType<typeof getNextTask>>;
 
-  await status(filepaths);
-  task = "exit";
+  status(filepaths);
 
   while (task !== "exit") {
     task = await getNextTask();
@@ -52,17 +52,16 @@ export async function runTooling(options: {
       continue;
     }
     if (task === "status") {
-      /* show status */
+      status(filepaths);
       continue;
     }
     if (task === "print-remaining-tokens") {
-      /* print remaining tokens */
+      printRemaining(filepaths);
       continue;
     }
 
     if (task === "exit") {
-      console.info("Exiting...");
-      break;
+      process.exit(1);
     }
   }
 
