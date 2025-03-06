@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.17.0
+
+### Minor Changes
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.0
+  - @navikt/aksel-icons@7.17.0
+
 ## 7.16.1
 
 ### Patch Changes
