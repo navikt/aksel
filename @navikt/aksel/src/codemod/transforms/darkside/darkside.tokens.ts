@@ -436,7 +436,14 @@ export const newTokens = [
 
 export const updatedTokens: Record<
   string,
-  { ref: string; raw: string; replacement: string; comment?: string }
+  {
+    ref: string;
+    raw: string;
+    replacement: string;
+    comment?: string;
+    twTagOld?: string;
+    twTagNew?: string;
+  }
 > = {
   "purple-900": {
     ref: "",
@@ -1107,131 +1114,183 @@ export const updatedTokens: Record<
     ref: "",
     raw: "2px",
     replacement: "border-radius-small",
+    twTagOld: "rounded",
+    twTagNew: "z-[3000]",
   },
   "z-index-tooltip": {
     ref: "",
     raw: "3000",
     replacement: "",
+    twTagOld: "z-tooltip",
+    twTagNew: "z-[3000]",
   },
   "z-index-focus": {
     ref: "",
     raw: "10",
     replacement: "",
+    twTagOld: "z-focus",
+    twTagNew: "z-[10]",
   },
   "z-index-popover": {
     ref: "",
     raw: "1000",
     replacement: "",
+    twTagOld: "z-popover",
+    twTagNew: "z-[1000]",
   },
   "font-weight-regular": {
     ref: "",
     raw: "400",
     replacement: "font-weight-regular",
+    twTagOld: "font-regular",
+    twTagNew: "font-regular",
   },
   "font-weight-bold": {
     ref: "",
     raw: "600",
     replacement: "font-weight-bold",
+    twTagOld: "font-bold",
+    twTagNew: "font-bold",
   },
   "font-size-small": {
     ref: "",
     raw: "0.875rem",
     replacement: "font-size-small",
+    twTagOld: "text-small",
+    twTagNew: "text-small",
   },
   "font-size-medium": {
     ref: "",
     raw: "1rem",
     replacement: "font-size-medium",
+    twTagOld: "text-medium",
+    twTagNew: "text-medium",
   },
   "font-size-large": {
     ref: "",
     raw: "1.125rem",
     replacement: "font-size-large",
+    twTagOld: "text-large",
+    twTagNew: "text-large",
   },
   "font-size-xlarge": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-size-xlarge",
+    twTagOld: "text-xlarge",
+    twTagNew: "text-xlarge",
   },
   "font-size-heading-xsmall": {
     ref: "",
     raw: "1.125rem",
     replacement: "font-size-heading-xsmall",
+    twTagOld: "text-xsmall",
+    twTagNew: "text-xsmall",
   },
   "font-size-heading-small": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-size-heading-small",
+    twTagOld: "text-heading-small",
+    twTagNew: "text-heading-small",
   },
   "font-size-heading-medium": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-size-heading-medium",
+    twTagOld: "text-heading-medium",
+    twTagNew: "text-heading-medium",
   },
   "font-size-heading-large": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-size-heading-large",
+    twTagOld: "text-heading-large",
+    twTagNew: "text-heading-large",
   },
   "font-size-heading-xlarge": {
     ref: "",
     raw: "2rem",
     replacement: "font-size-heading-xlarge",
+    twTagOld: "text-heading-xlarge",
+    twTagNew: "text-heading-xlarge",
   },
   "font-size-heading-2xlarge": {
     ref: "",
     raw: "2.5rem",
     replacement: "font-size-heading-2xlarge",
+    twTagOld: "text-heading-2xlarge",
+    twTagNew: "text-heading-2xlarge",
   },
   "font-line-height-medium": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-line-height-medium",
+    twTagOld: "leading-medium",
+    twTagNew: "leading-medium",
   },
   "font-line-height-large": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-line-height-large",
+    twTagOld: "leading-large",
+    twTagNew: "leading-large",
   },
   "font-line-height-xlarge": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-line-height-xlarge",
+    twTagOld: "leading-xlarge",
+    twTagNew: "leading-xlarge",
   },
   "font-line-height-heading-xsmall": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-line-height-heading-xsmall",
+    twTagOld: "leading-heading-xsmall",
+    twTagNew: "leading-heading-xsmall",
   },
   "font-line-height-heading-small": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-line-height-heading-small",
+    twTagOld: "leading-heading-small",
+    twTagNew: "leading-heading-small",
   },
   "font-line-height-heading-medium": {
     ref: "",
     raw: "2rem",
     replacement: "font-line-height-heading-medium",
+    twTagOld: "leading-heading-medium",
+    twTagNew: "leading-heading-medium",
   },
   "font-line-height-heading-large": {
     ref: "",
     raw: "2.25rem",
     replacement: "font-line-height-heading-large",
+    twTagOld: "leading-heading-large",
+    twTagNew: "leading-heading-large",
   },
   "font-line-height-heading-xlarge": {
     ref: "",
     raw: "2.5rem",
     replacement: "font-line-height-heading-xlarge",
+    twTagOld: "leading-heading-xlarge",
+    twTagNew: "leading-heading-xlarge",
   },
   "font-line-height-heading-2xlarge": {
     ref: "",
     raw: "3.25rem",
     replacement: "font-line-height-heading-2xlarge",
+    twTagOld: "leading-heading-2xlarge",
+    twTagNew: "leading-heading-2xlarge",
   },
   "font-family": {
     ref: "",
     raw: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
     replacement: "font-family",
+    twTagOld: "font-font-family",
+    twTagNew: "font-font-family",
   },
   "text-width-max": {
     ref: "",
@@ -1967,3 +2026,8 @@ export const updatedTokens: Record<
     replacement: "",
   },
 };
+
+// function generateRoundedTwTags(name: string){
+//   const options = ["", "s", "e", "t", "r", "b", "l", "ss", "se", "ee", "es", "tl", "tr", "br", "bl"]
+//
+// }

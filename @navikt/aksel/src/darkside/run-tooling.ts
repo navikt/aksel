@@ -70,6 +70,7 @@ const transforms = {
   "scss-tokens": "./transforms/darkside-tokens-scss",
   "less-tokens": "./transforms/darkside-tokens-less",
   "js-tokens": "./transforms/darkside-tokens-js",
+  tailwind: "./transforms/darkside-tokens-tailwind",
 } as const;
 
 async function runCodeshift(
@@ -113,6 +114,7 @@ type TaskName =
   | "scss-tokens"
   | "less-tokens"
   | "js-tokens"
+  | "tailwind-tokens"
   | "exit";
 
 const taskQuestion = {
@@ -127,6 +129,7 @@ const taskQuestion = {
     { message: "Migrate Scss tokens", name: "scss-tokens" },
     { message: "Migrate Less tokens", name: "less-tokens" },
     { message: "Migrate JS tokens", name: "js-tokens" },
+    { message: "Migrate tailwind tokens", name: "tailwind-tokens" },
     { message: "Exit", name: "exit" },
   ] satisfies { message: string; name: TaskName }[],
 } as const;
