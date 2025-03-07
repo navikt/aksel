@@ -7,7 +7,6 @@ import meta from "@navikt/aksel-icons/metadata";
 import { Button, Heading } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import { useEscapeKeydown } from "@/hooks/useEscapeKeydown";
-import { AmplitudeEvents, amplitude } from "@/logging";
 import { SuggestionBlock } from "@/web/suggestionblock/SuggestionBlock";
 
 export const IconSidebar = ({
@@ -50,13 +49,6 @@ export const IconSidebar = ({
     }
     prevNameRef.current = name;
   }, [name]);
-
-  const logDownload = (icon: string, format: "svg") => {
-    amplitude.track(AmplitudeEvents.ikonnedlastning, {
-      icon,
-      format,
-    });
-  };
 
   useEscapeKeydown(() => {
     router.push("/ikoner", undefined, { shallow: true });
@@ -105,9 +97,10 @@ export const IconSidebar = ({
         variant="primary"
         className="mt-8 w-full"
         as="a"
-        onClick={() => {
-          logDownload(name, "svg");
-        }}
+        data-umami-event="last ned"
+        data-umami-event-tema="ikon"
+        data-umami-event-type="svg"
+        data-umami-event-tittel={name}
         href={blob ? URL.createObjectURL(blob) : "#"}
         download={name}
       >

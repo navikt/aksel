@@ -1,6 +1,5 @@
 import cl from "clsx";
 import Link from "next/link";
-import { amplitudeLogNavigation } from "@/logging";
 
 export const IntroCards = ({
   links,
@@ -30,12 +29,8 @@ export const IntroCards = ({
               },
             )}
             prefetch={false}
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "intro-kort",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            data-umami-event="navigere"
+            data-umami-event-kilde="introkort"
           >
             <span className="flex items-center gap-2">
               <Icon

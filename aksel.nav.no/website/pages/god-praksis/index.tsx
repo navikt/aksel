@@ -18,7 +18,6 @@ import GpArticleCard from "@/layout/god-praksis-page/cards/GpArticleCard";
 import GpHeroCard from "@/layout/god-praksis-page/cards/GpHeroCard";
 import IntroHero from "@/layout/god-praksis-page/hero/intro-hero/IntroHero";
 import Header from "@/layout/header/Header";
-import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { destructureBlocks } from "@/sanity/queries";
@@ -199,12 +198,8 @@ const GpPage = (props: PageProps["props"]) => {
                             href={`/god-praksis/${tema.slug}`}
                             as={NextLink}
                             className="group mt-4 w-fit text-deepblue-700"
-                            onClick={(e) =>
-                              amplitudeLogNavigation(
-                                "gp-se-alle-link",
-                                e.currentTarget.getAttribute("href"),
-                              )
-                            }
+                            data-umami-event="navigere"
+                            data-umami-event-kilde="god praksis forside"
                           >
                             <h3 className="flex items-center">
                               {`Alt fra ${tema.title} `}

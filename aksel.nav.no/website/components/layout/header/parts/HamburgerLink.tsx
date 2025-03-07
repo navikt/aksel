@@ -1,7 +1,6 @@
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { amplitudeLogNavigation } from "@/logging";
 
 function HamburgerLink({ name, href, onClick }) {
   const { asPath } = useRouter();
@@ -18,14 +17,9 @@ function HamburgerLink({ name, href, onClick }) {
             "": !asPath.startsWith(href),
           },
         )}
-        onClick={(e) => {
-          amplitudeLogNavigation(
-            "header",
-            e.currentTarget.getAttribute("href"),
-          );
-
-          onClick();
-        }}
+        onClick={() => onClick()}
+        data-umami-event="navigere"
+        data-umami-event-kilde="hamburger"
       >
         {name}
       </Link>

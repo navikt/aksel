@@ -1,7 +1,6 @@
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { amplitudeLogNavigation } from "@/logging";
 
 type HeaderLinkProps = {
   name: string;
@@ -25,9 +24,8 @@ function HeaderLink({ name, href, prefetch = undefined }: HeaderLinkProps) {
               !asPath.startsWith(href),
           },
         )}
-        onClick={(e) =>
-          amplitudeLogNavigation("header", e.currentTarget.getAttribute("href"))
-        }
+        data-umami-event="navigere"
+        data-umami-event-kilde="header"
       >
         {name}
       </Link>

@@ -2,7 +2,6 @@ import cl from "clsx";
 import Link from "next/link";
 import { HTMLAttributes, createContext, useContext } from "react";
 import { BodyShort, Label } from "@navikt/ds-react";
-import { amplitudeLogNavigation } from "@/logging";
 import styles from "./Menu.module.css";
 
 type MenuProps = {
@@ -90,13 +89,9 @@ export function MenuLink({
         as={Link}
         prefetch={false}
         href={href}
-        onClick={(e) => {
-          amplitudeLogNavigation(
-            ctx.loggingContext,
-            e.currentTarget.getAttribute("href"),
-          );
-          onClick?.();
-        }}
+        onClick={() => onClick?.()}
+        data-umami-event="navigere"
+        data-umami-event-kilde="sidebar"
         className={cl(
           styles.menuListItem,
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
