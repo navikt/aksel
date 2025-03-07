@@ -5,6 +5,11 @@ import { Cookies } from "typescript-cookie";
 
 export const CONSENT_TRACKER_ID = "aksel-consent";
 
+const API_ROUTES = {
+  accepted: "/api/cookie-click-accept",
+  rejected: "/api/cookie-click-decline",
+};
+
 type CONSENT_TRACKER_STATE =
   | "undecided"
   | "accepted"
@@ -69,6 +74,10 @@ export const CookieProvider = ({ children }: { children: React.ReactNode }) => {
   const updateConsent = (state: CONSENT_TRACKER_STATE) => {
     updateCookieConsent(state);
     setConsent(state);
+
+    if (state === "accepted" || state === "rejected") {
+      fetch(API_ROUTES[state]).catch(() => null);
+    }
   };
 
   const contextValue = useMemo(() => {
