@@ -6,6 +6,10 @@
 
 - List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
 
+### @navikt/ds-css
+
+- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+
 ## 7.16
 
 ### @navikt/ds-react
