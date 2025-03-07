@@ -16,6 +16,7 @@ const AkselLink = ({ href, children }: Props) => {
       href={href}
       inlineText
       data-umami-event="navigere"
+      data-umami-kilde="inline lenke"
       {...(isOutbound
         ? {
             target: "_blank",
