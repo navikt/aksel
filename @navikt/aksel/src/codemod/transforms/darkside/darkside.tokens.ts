@@ -1094,28 +1094,36 @@ export const updatedTokens: Record<
     ref: "",
     raw: "9999px",
     replacement: "border-radius-full",
+    twTagOld: generateRoundedTwTags("full"),
+    twTagNew: generateRoundedTwTags("full"),
   },
   "border-radius-xlarge": {
     ref: "",
     raw: "12px",
     replacement: "border-radius-xlarge",
+    twTagOld: generateRoundedTwTags("xlarge"),
+    twTagNew: generateRoundedTwTags("xlarge"),
   },
   "border-radius-large": {
     ref: "",
     raw: "8px",
     replacement: "border-radius-large",
+    twTagOld: generateRoundedTwTags("large"),
+    twTagNew: generateRoundedTwTags("large"),
   },
   "border-radius-medium": {
     ref: "",
     raw: "4px",
     replacement: "border-radius-medium",
+    twTagOld: generateRoundedTwTags("medium"),
+    twTagNew: generateRoundedTwTags("medium"),
   },
   "border-radius-small": {
     ref: "",
     raw: "2px",
     replacement: "border-radius-small",
-    twTagOld: "rounded",
-    twTagNew: "z-[3000]",
+    twTagOld: generateRoundedTwTags("small"),
+    twTagNew: generateRoundedTwTags("small"),
   },
   "z-index-tooltip": {
     ref: "",
@@ -2027,7 +2035,25 @@ export const updatedTokens: Record<
   },
 };
 
-// function generateRoundedTwTags(name: string){
-//   const options = ["", "s", "e", "t", "r", "b", "l", "ss", "se", "ee", "es", "tl", "tr", "br", "bl"]
-//
-// }
+function generateRoundedTwTags(name: string) {
+  const options = [
+    "s",
+    "e",
+    "t",
+    "r",
+    "b",
+    "l",
+    "ss",
+    "se",
+    "ee",
+    "es",
+    "tl",
+    "tr",
+    "br",
+    "bl",
+  ];
+
+  return `rounded-${name},${options
+    .map((option) => `rounded-${option}-${name}`)
+    .join(",")}`;
+}
