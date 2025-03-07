@@ -1,4 +1,5 @@
 import cl from "clsx";
+import { useRouter } from "next/router";
 
 type GpChipProps = {
   children: React.ReactNode;
@@ -9,6 +10,8 @@ type GpChipProps = {
 };
 
 export function GpChip(props: GpChipProps) {
+  const { asPath } = useRouter();
+
   return (
     <button
       aria-pressed={props.pressed}
@@ -25,6 +28,7 @@ export function GpChip(props: GpChipProps) {
       )}
       data-umami-event="god-praksis-chip"
       data-umami-event-type={props.type}
+      data-umami-event-url={asPath}
       disabled={props.disabled}
     >
       {props.children}
