@@ -25,7 +25,6 @@ export function GpChip(props: GpChipProps) {
       )}
       data-umami-event="god-praksis-chip"
       data-umami-event-type={props.type}
-      data-umami-event-url={window.location.pathname}
       disabled={props.disabled}
     >
       {props.children}
