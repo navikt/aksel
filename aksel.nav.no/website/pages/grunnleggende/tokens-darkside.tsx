@@ -334,14 +334,14 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
           {token.rawValue && (
             <Detail textColor="subtle">{token.rawValue}</Detail>
           )}
-          <BodyLong as="p">
+          <Detail>
             {token.comment || (
               <>
                 Beskrivelse av hva token brukes til. Kan også linke til{" "}
                 <Link href="#">komponenter</Link>.
               </>
             )}
-          </BodyLong>
+          </Detail>
         </VStack>
       </HStack>
     </Box>
