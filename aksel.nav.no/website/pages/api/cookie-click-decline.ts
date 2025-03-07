@@ -9,7 +9,8 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
 
   if (!token) {
     logger.error("No token found for API request");
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
   try {
@@ -18,9 +19,9 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
       .inc({ total: 1, decline: 1 })
       .commit();
 
-    return res.status(200).end();
+    res.status(200).end();
   } catch {
     logger.error("Cookie tracker document patch failed");
-    return res.status(200).end();
+    res.status(200).end();
   }
 }
