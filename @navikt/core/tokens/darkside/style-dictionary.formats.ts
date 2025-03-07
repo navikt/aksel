@@ -56,48 +56,76 @@ export const formatSCSS: FormatFn = async ({ dictionary, file }) => {
   return `${header}${tokens}\n`;
 };
 
+const formatCategory = (token: TransformedToken) => {
+  const colorTypes = {
+    bg: "backgroundColor",
+    border: "borderColor",
+    text: "textColor",
+  };
+  switch (token.type) {
+    case "color":
+      return token.attributes?.type
+        ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
+        : token.attributes?.type;
+      break;
+    case "global-space":
+      return "space";
+      break;
+    case "global-radius":
+      return "radius";
+      break;
+    case "global-breakpoint":
+      return "breakpoint";
+    default:
+      return token.type;
+  }
+};
+
+const formatRawValue = (token: TransformedToken) => {
+  if (token.type === "global-breakpoint") {
+    const isDesktopFirst =
+      typeof token.attributes?.item === "string" &&
+      token.attributes.item.split("-")[1] === "down";
+    return isDesktopFirst
+      ? `@media(max-width: ${token.value}) Desktop first`
+      : `@media(min-width: ${token.value}) Mobile first`;
+  }
+  return token.value;
+};
+
+const formatModifier = (
+  name: TransformedToken["name"],
+  type: TransformedToken["type"],
+) => {
+  const nameParts = name.split("-");
+  switch (type) {
+    case "global-breakpoint":
+      return nameParts.slice(1).join("-");
+    default:
+      return nameParts[nameParts.length - 1];
+  }
+};
+
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const tokens = dictionary.allTokens
     .map((token, index) => {
       const name = kebabCaseForAlpha(token.name.slice(2));
-      const nameParts = name.split("-");
-      const colorTypes = {
-        bg: "backgroundColor",
-        border: "borderColor",
-        text: "textColor",
-      };
-      let category;
-      switch (token.type) {
-        case "color":
-          category = token.attributes?.type
-            ? colorTypes[token.attributes?.type as keyof typeof colorTypes]
-            : token.type;
-          break;
-        case "global-space":
-          category = "space";
-          break;
-        case "global-radius":
-          category = "radius";
-          break;
-        default:
-          category = token.type;
-      }
       return (
         JSON.stringify({
           name,
           value: createTokenValue(token),
-          rawValue: token.value,
+          rawValue: formatRawValue(token),
           comment: token.comment,
           type: token.type,
           rawType: token.attributes?.type,
           group: token.group,
           all: token,
-          category,
+          category: formatCategory(token),
           role:
             token.group?.indexOf(".") >= 0
               ? token.group.split(".")[1]
               : token.group,
-          modifier: nameParts[nameParts.length - 1],
+          modifier: formatModifier(name, token.type),
         }) + (index === dictionary.allTokens.length - 1 ? "" : ",")
       );
     })

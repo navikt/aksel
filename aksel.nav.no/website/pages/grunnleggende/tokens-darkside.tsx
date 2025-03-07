@@ -1,10 +1,15 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
 import {
+  LaptopIcon,
+  MobileIcon,
+  MobileSmallIcon,
+  MonitorIcon,
   MoonIcon,
   PaletteIcon,
   SpaceHorizontalIcon,
   SunIcon,
+  TabletIcon,
 } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -254,6 +259,24 @@ const RadiusToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
   </ExampleContainer>
 );
 
+const BreakpointToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
+  switch (token.modifier.split("-")[0]) {
+    case "xs":
+      return <MobileSmallIcon width="32px" height="32px" title={token.name} />;
+    case "sm":
+      return <MobileIcon width="32px" height="32px" title={token.name} />;
+    case "md":
+      return <TabletIcon width="32px" height="32px" title={token.name} />;
+    case "lg":
+      return <LaptopIcon width="32px" height="32px" title={token.name} />;
+    case "xl":
+    case "2xl":
+      return <MonitorIcon width="32px" height="32px" title={token.name} />;
+    default:
+      return "";
+  }
+};
+
 const TokenExample = ({ token }: { token: any }) => {
   switch (token.category) {
     case "backgroundColor":
@@ -266,6 +289,14 @@ const TokenExample = ({ token }: { token: any }) => {
       return <ShadowToken token={token} />;
     case "radius":
       return <RadiusToken token={token} />;
+    case "breakpoint":
+      return (
+        <ExampleContainer>
+          <VStack as="div" align="center" justify="center" height="100%">
+            <BreakpointToken token={token} />
+          </VStack>
+        </ExampleContainer>
+      );
     default:
       return (
         <ExampleContainer>
@@ -323,7 +354,8 @@ const Categories = {
   textColor: "Text colors",
   shadow: "Shadows",
   space: "Spacing",
-  radius: "Border radius",
+  radius: "Radius",
+  breakpoint: "Breakpoints",
 };
 
 const Section = ({
@@ -354,7 +386,11 @@ const Section = ({
         }
         return 0;
       }
-
+      case "breakpoint":
+        return (
+          parseFloat(a.value.replace("px", "")) -
+          parseFloat(b.value.replace("px", ""))
+        );
       default:
         return parseFloat(a.rawValue.replace("px", "")) >
           parseFloat(b.rawValue.replace("px", ""))
@@ -415,7 +451,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     "shadow",
     "radius",
     //"font",
-    //"breakpoint",
+    "breakpoint",
   ];
   const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
     addedCategories.includes(token.category),
