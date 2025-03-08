@@ -434,17 +434,7 @@ export const newTokens = [
   "space-0",
 ];
 
-export const updatedTokens: Record<
-  string,
-  {
-    ref: string;
-    raw: string;
-    replacement: string;
-    comment?: string;
-    twTagOld?: string;
-    twTagNew?: string;
-  }
-> = {
+const colorTokens = {
   "purple-900": {
     ref: "",
     raw: "rgba(31, 20, 47, 1)",
@@ -944,421 +934,6 @@ export const updatedTokens: Record<
     ref: "",
     raw: "rgba(242, 243, 245, 1)",
     replacement: "neutral-100",
-  },
-  "spacing-1-alt": {
-    ref: "",
-    raw: "0.375rem",
-    replacement: "space-6",
-  },
-  "spacing-05": {
-    ref: "",
-    raw: "0.125rem",
-    replacement: "space-2",
-  },
-  "spacing-32": {
-    ref: "",
-    raw: "8rem",
-    replacement: "space-128",
-  },
-  "spacing-24": {
-    ref: "",
-    raw: "6rem",
-    replacement: "space-96",
-  },
-  "spacing-20": {
-    ref: "",
-    raw: "5rem",
-    replacement: "space-80",
-  },
-  "spacing-18": {
-    ref: "",
-    raw: "4.5rem",
-    replacement: "space-72",
-  },
-  "spacing-16": {
-    ref: "",
-    raw: "4rem",
-    replacement: "space-64",
-  },
-  "spacing-14": {
-    ref: "",
-    raw: "3.5rem",
-    replacement: "space-56",
-  },
-  "spacing-12": {
-    ref: "",
-    raw: "3rem",
-    replacement: "space-48",
-  },
-  "spacing-11": {
-    ref: "",
-    raw: "2.75rem",
-    replacement: "space-44",
-  },
-  "spacing-10": {
-    ref: "",
-    raw: "2.5rem",
-    replacement: "space-40",
-  },
-  "spacing-9": {
-    ref: "",
-    raw: "2.25rem",
-    replacement: "space-36",
-  },
-  "spacing-8": {
-    ref: "",
-    raw: "2rem",
-    replacement: "space-32",
-  },
-  "spacing-7": {
-    ref: "",
-    raw: "1.75rem",
-    replacement: "space-28",
-  },
-  "spacing-6": {
-    ref: "",
-    raw: "1.5rem",
-    replacement: "space-24",
-  },
-  "spacing-5": {
-    ref: "",
-    raw: "1.25rem",
-    replacement: "space-20",
-  },
-  "spacing-4": {
-    ref: "",
-    raw: "1rem",
-    replacement: "space-16",
-  },
-  "spacing-3": {
-    ref: "",
-    raw: "0.75rem",
-    replacement: "space-12",
-  },
-  "spacing-2": {
-    ref: "",
-    raw: "0.5rem",
-    replacement: "space-8",
-  },
-  "spacing-1": {
-    ref: "",
-    raw: "0.25rem",
-    replacement: "space-4",
-  },
-  "spacing-0": {
-    ref: "",
-    raw: "0",
-    replacement: "space-0",
-  },
-  "shadow-xlarge": {
-    ref: "",
-    raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 24px 0px rgba(0, 0, 0, 0.18), 0px 0px 1px 0px rgba(0, 0, 0, 0.08)",
-    replacement: "",
-  },
-  "shadow-large": {
-    ref: "",
-    raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 16px 0px rgba(0, 0, 0, 0.12), 0px 0px 1px 0px rgba(0, 0, 0, 0.12)",
-    replacement: "",
-  },
-  "shadow-medium": {
-    ref: "",
-    raw: "0px 5px 12px 0px rgba(0, 0, 0, 0.13), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.15)",
-    replacement: "",
-  },
-  "shadow-small": {
-    ref: "",
-    raw: "0px 3px 8px 0px rgba(0, 0, 0, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.18)",
-    replacement: "",
-  },
-  "shadow-xsmall": {
-    ref: "",
-    raw: "0px 1px 3px 0px rgba(0, 0, 0, 0.15), 0px 0px 1px 0px rgba(0, 0, 0, 0.20)",
-    replacement: "",
-  },
-  "nav-red": {
-    ref: "",
-    raw: "rgba(195, 0, 0, 1)",
-    replacement: "text-logo",
-  },
-  white: {
-    ref: "",
-    raw: "rgba(255, 255, 255, 1)",
-    replacement: "",
-  },
-  transparent: {
-    ref: "",
-    raw: "rgba(255, 255, 255, 0)",
-    replacement: "",
-  },
-  "border-radius-full": {
-    ref: "",
-    raw: "9999px",
-    replacement: "border-radius-full",
-    twTagOld: generateRoundedTwTags("full"),
-    twTagNew: generateRoundedTwTags("full"),
-  },
-  "border-radius-xlarge": {
-    ref: "",
-    raw: "12px",
-    replacement: "border-radius-xlarge",
-    twTagOld: generateRoundedTwTags("xlarge"),
-    twTagNew: generateRoundedTwTags("xlarge"),
-  },
-  "border-radius-large": {
-    ref: "",
-    raw: "8px",
-    replacement: "border-radius-large",
-    twTagOld: generateRoundedTwTags("large"),
-    twTagNew: generateRoundedTwTags("large"),
-  },
-  "border-radius-medium": {
-    ref: "",
-    raw: "4px",
-    replacement: "border-radius-medium",
-    twTagOld: generateRoundedTwTags("medium"),
-    twTagNew: generateRoundedTwTags("medium"),
-  },
-  "border-radius-small": {
-    ref: "",
-    raw: "2px",
-    replacement: "border-radius-small",
-    twTagOld: generateRoundedTwTags("small"),
-    twTagNew: generateRoundedTwTags("small"),
-  },
-  "z-index-tooltip": {
-    ref: "",
-    raw: "3000",
-    replacement: "",
-    twTagOld: "z-tooltip",
-    twTagNew: "z-[3000]",
-  },
-  "z-index-focus": {
-    ref: "",
-    raw: "10",
-    replacement: "",
-    twTagOld: "z-focus",
-    twTagNew: "z-[10]",
-  },
-  "z-index-popover": {
-    ref: "",
-    raw: "1000",
-    replacement: "",
-    twTagOld: "z-popover",
-    twTagNew: "z-[1000]",
-  },
-  "font-weight-regular": {
-    ref: "",
-    raw: "400",
-    replacement: "font-weight-regular",
-    twTagOld: "font-regular",
-    twTagNew: "font-regular",
-  },
-  "font-weight-bold": {
-    ref: "",
-    raw: "600",
-    replacement: "font-weight-bold",
-    twTagOld: "font-bold",
-    twTagNew: "font-bold",
-  },
-  "font-size-small": {
-    ref: "",
-    raw: "0.875rem",
-    replacement: "font-size-small",
-    twTagOld: "text-small",
-    twTagNew: "text-small",
-  },
-  "font-size-medium": {
-    ref: "",
-    raw: "1rem",
-    replacement: "font-size-medium",
-    twTagOld: "text-medium",
-    twTagNew: "text-medium",
-  },
-  "font-size-large": {
-    ref: "",
-    raw: "1.125rem",
-    replacement: "font-size-large",
-    twTagOld: "text-large",
-    twTagNew: "text-large",
-  },
-  "font-size-xlarge": {
-    ref: "",
-    raw: "1.25rem",
-    replacement: "font-size-xlarge",
-    twTagOld: "text-xlarge",
-    twTagNew: "text-xlarge",
-  },
-  "font-size-heading-xsmall": {
-    ref: "",
-    raw: "1.125rem",
-    replacement: "font-size-heading-xsmall",
-    twTagOld: "text-xsmall",
-    twTagNew: "text-xsmall",
-  },
-  "font-size-heading-small": {
-    ref: "",
-    raw: "1.25rem",
-    replacement: "font-size-heading-small",
-    twTagOld: "text-heading-small",
-    twTagNew: "text-heading-small",
-  },
-  "font-size-heading-medium": {
-    ref: "",
-    raw: "1.5rem",
-    replacement: "font-size-heading-medium",
-    twTagOld: "text-heading-medium",
-    twTagNew: "text-heading-medium",
-  },
-  "font-size-heading-large": {
-    ref: "",
-    raw: "1.75rem",
-    replacement: "font-size-heading-large",
-    twTagOld: "text-heading-large",
-    twTagNew: "text-heading-large",
-  },
-  "font-size-heading-xlarge": {
-    ref: "",
-    raw: "2rem",
-    replacement: "font-size-heading-xlarge",
-    twTagOld: "text-heading-xlarge",
-    twTagNew: "text-heading-xlarge",
-  },
-  "font-size-heading-2xlarge": {
-    ref: "",
-    raw: "2.5rem",
-    replacement: "font-size-heading-2xlarge",
-    twTagOld: "text-heading-2xlarge",
-    twTagNew: "text-heading-2xlarge",
-  },
-  "font-line-height-medium": {
-    ref: "",
-    raw: "1.25rem",
-    replacement: "font-line-height-medium",
-    twTagOld: "leading-medium",
-    twTagNew: "leading-medium",
-  },
-  "font-line-height-large": {
-    ref: "",
-    raw: "1.5rem",
-    replacement: "font-line-height-large",
-    twTagOld: "leading-large",
-    twTagNew: "leading-large",
-  },
-  "font-line-height-xlarge": {
-    ref: "",
-    raw: "1.75rem",
-    replacement: "font-line-height-xlarge",
-    twTagOld: "leading-xlarge",
-    twTagNew: "leading-xlarge",
-  },
-  "font-line-height-heading-xsmall": {
-    ref: "",
-    raw: "1.5rem",
-    replacement: "font-line-height-heading-xsmall",
-    twTagOld: "leading-heading-xsmall",
-    twTagNew: "leading-heading-xsmall",
-  },
-  "font-line-height-heading-small": {
-    ref: "",
-    raw: "1.75rem",
-    replacement: "font-line-height-heading-small",
-    twTagOld: "leading-heading-small",
-    twTagNew: "leading-heading-small",
-  },
-  "font-line-height-heading-medium": {
-    ref: "",
-    raw: "2rem",
-    replacement: "font-line-height-heading-medium",
-    twTagOld: "leading-heading-medium",
-    twTagNew: "leading-heading-medium",
-  },
-  "font-line-height-heading-large": {
-    ref: "",
-    raw: "2.25rem",
-    replacement: "font-line-height-heading-large",
-    twTagOld: "leading-heading-large",
-    twTagNew: "leading-heading-large",
-  },
-  "font-line-height-heading-xlarge": {
-    ref: "",
-    raw: "2.5rem",
-    replacement: "font-line-height-heading-xlarge",
-    twTagOld: "leading-heading-xlarge",
-    twTagNew: "leading-heading-xlarge",
-  },
-  "font-line-height-heading-2xlarge": {
-    ref: "",
-    raw: "3.25rem",
-    replacement: "font-line-height-heading-2xlarge",
-    twTagOld: "leading-heading-2xlarge",
-    twTagNew: "leading-heading-2xlarge",
-  },
-  "font-family": {
-    ref: "",
-    raw: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
-    replacement: "font-family",
-    twTagOld: "font-font-family",
-    twTagNew: "font-font-family",
-  },
-  "text-width-max": {
-    ref: "",
-    raw: "576px",
-    replacement: "",
-  },
-  "breakpoint-2xl-down": {
-    ref: "",
-    raw: "1439px",
-    replacement: "breakpoint-2xl-down",
-  },
-  "breakpoint-2xl": {
-    ref: "",
-    raw: "1440px",
-    replacement: "breakpoint-2xl",
-  },
-  "breakpoint-xl-down": {
-    ref: "",
-    raw: "1279px",
-    replacement: "breakpoint-xl-down",
-  },
-  "breakpoint-xl": {
-    ref: "",
-    raw: "1280px",
-    replacement: "breakpoint-xl",
-  },
-  "breakpoint-lg-down": {
-    ref: "",
-    raw: "1023px",
-    replacement: "breakpoint-lg-down",
-  },
-  "breakpoint-lg": {
-    ref: "",
-    raw: "1024px",
-    replacement: "breakpoint-lg",
-  },
-  "breakpoint-md-down": {
-    ref: "",
-    raw: "767px",
-    replacement: "breakpoint-md-down",
-  },
-  "breakpoint-md": {
-    ref: "",
-    raw: "768px",
-    replacement: "breakpoint-md",
-  },
-  "breakpoint-sm-down": {
-    ref: "",
-    raw: "479px",
-    replacement: "breakpoint-sm-down",
-  },
-  "breakpoint-sm": {
-    ref: "",
-    raw: "480px",
-    replacement: "breakpoint-sm",
-  },
-  "breakpoint-xs": {
-    ref: "",
-    raw: "0",
-    replacement: "breakpoint-xs",
   },
   "data-border-6": {
     ref: "purple-400",
@@ -2023,15 +1598,481 @@ export const updatedTokens: Record<
     raw: "rgba(255, 255, 255, 1)",
     replacement: "bg-default",
   },
+  "nav-red": {
+    ref: "",
+    raw: "rgba(195, 0, 0, 1)",
+    replacement: "text-logo",
+  },
+  white: {
+    ref: "",
+    raw: "rgba(255, 255, 255, 1)",
+    replacement: "",
+  },
+  transparent: {
+    ref: "",
+    raw: "rgba(255, 255, 255, 0)",
+    replacement: "",
+  },
+};
+
+const colorTokensWithTailwindConversion = Object.entries(colorTokens).reduce(
+  (acc, [key, value]) => {
+    const twOld = generateBgTwTags(key);
+    const twNew =
+      value.replacement.length > 0
+        ? generateBgTwTags(value.replacement)
+        : undefined;
+
+    acc[key] = {
+      ...value,
+      twOld,
+      twNew,
+    };
+
+    return acc;
+  },
+  {},
+);
+
+export const updatedTokens: Record<
+  string,
+  {
+    ref: string;
+    raw: string;
+    replacement: string;
+    comment?: string;
+    twOld?: string;
+    twNew?: string;
+  }
+> = {
+  ...colorTokensWithTailwindConversion,
+  "spacing-1-alt": {
+    ref: "",
+    raw: "0.375rem",
+    replacement: "space-6",
+  },
+  "spacing-05": {
+    ref: "",
+    raw: "0.125rem",
+    replacement: "space-2",
+  },
+  "spacing-32": {
+    ref: "",
+    raw: "8rem",
+    replacement: "space-128",
+  },
+  "spacing-24": {
+    ref: "",
+    raw: "6rem",
+    replacement: "space-96",
+  },
+  "spacing-20": {
+    ref: "",
+    raw: "5rem",
+    replacement: "space-80",
+  },
+  "spacing-18": {
+    ref: "",
+    raw: "4.5rem",
+    replacement: "space-72",
+  },
+  "spacing-16": {
+    ref: "",
+    raw: "4rem",
+    replacement: "space-64",
+  },
+  "spacing-14": {
+    ref: "",
+    raw: "3.5rem",
+    replacement: "space-56",
+  },
+  "spacing-12": {
+    ref: "",
+    raw: "3rem",
+    replacement: "space-48",
+  },
+  "spacing-11": {
+    ref: "",
+    raw: "2.75rem",
+    replacement: "space-44",
+  },
+  "spacing-10": {
+    ref: "",
+    raw: "2.5rem",
+    replacement: "space-40",
+  },
+  "spacing-9": {
+    ref: "",
+    raw: "2.25rem",
+    replacement: "space-36",
+  },
+  "spacing-8": {
+    ref: "",
+    raw: "2rem",
+    replacement: "space-32",
+  },
+  "spacing-7": {
+    ref: "",
+    raw: "1.75rem",
+    replacement: "space-28",
+  },
+  "spacing-6": {
+    ref: "",
+    raw: "1.5rem",
+    replacement: "space-24",
+  },
+  "spacing-5": {
+    ref: "",
+    raw: "1.25rem",
+    replacement: "space-20",
+  },
+  "spacing-4": {
+    ref: "",
+    raw: "1rem",
+    replacement: "space-16",
+  },
+  "spacing-3": {
+    ref: "",
+    raw: "0.75rem",
+    replacement: "space-12",
+  },
+  "spacing-2": {
+    ref: "",
+    raw: "0.5rem",
+    replacement: "space-8",
+  },
+  "spacing-1": {
+    ref: "",
+    raw: "0.25rem",
+    replacement: "space-4",
+  },
+  "spacing-0": {
+    ref: "",
+    raw: "0",
+    replacement: "space-0",
+  },
+  "shadow-xlarge": {
+    ref: "",
+    raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 24px 0px rgba(0, 0, 0, 0.18), 0px 0px 1px 0px rgba(0, 0, 0, 0.08)",
+    replacement: "",
+    twOld: "shadow-xlarge",
+  },
+  "shadow-large": {
+    ref: "",
+    raw: "0px 2px 5px 0px rgba(0, 0, 0, 0.15), 0px 10px 16px 0px rgba(0, 0, 0, 0.12), 0px 0px 1px 0px rgba(0, 0, 0, 0.12)",
+    replacement: "",
+    twOld: "shadow-large",
+  },
+  "shadow-medium": {
+    ref: "",
+    raw: "0px 5px 12px 0px rgba(0, 0, 0, 0.13), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.15)",
+    replacement: "",
+    twOld: "shadow-medium",
+  },
+  "shadow-small": {
+    ref: "",
+    raw: "0px 3px 8px 0px rgba(0, 0, 0, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.18)",
+    replacement: "",
+    twOld: "shadow-small",
+  },
+  "shadow-xsmall": {
+    ref: "",
+    raw: "0px 1px 3px 0px rgba(0, 0, 0, 0.15), 0px 0px 1px 0px rgba(0, 0, 0, 0.20)",
+    replacement: "",
+    twOld: "shadow-xsmall",
+  },
   "shadow-focus-inverted": {
     ref: "",
     raw: "0 0 0 3px rgba(153, 195, 255, 1)",
     replacement: "",
+    twOld: "shadow-focus-inverted",
   },
   "shadow-focus": {
     ref: "",
     raw: "0 0 0 3px rgba(0, 52, 125, 1)",
     replacement: "",
+    twOld: "shadow-focus",
+  },
+  "border-radius-full": {
+    ref: "",
+    raw: "9999px",
+    replacement: "border-radius-full",
+    twOld: generateRoundedTwTags("full"),
+    twNew: generateRoundedTwTags("full"),
+  },
+  "border-radius-xlarge": {
+    ref: "",
+    raw: "12px",
+    replacement: "border-radius-xlarge",
+    twOld: generateRoundedTwTags("xlarge"),
+    twNew: generateRoundedTwTags("xlarge"),
+  },
+  "border-radius-large": {
+    ref: "",
+    raw: "8px",
+    replacement: "border-radius-large",
+    twOld: generateRoundedTwTags("large"),
+    twNew: generateRoundedTwTags("large"),
+  },
+  "border-radius-medium": {
+    ref: "",
+    raw: "4px",
+    replacement: "border-radius-medium",
+    twOld: generateRoundedTwTags("medium"),
+    twNew: generateRoundedTwTags("medium"),
+  },
+  "border-radius-small": {
+    ref: "",
+    raw: "2px",
+    replacement: "border-radius-small",
+    twOld: generateRoundedTwTags("small"),
+    twNew: generateRoundedTwTags("small"),
+  },
+  "z-index-tooltip": {
+    ref: "",
+    raw: "3000",
+    replacement: "",
+    twOld: "z-tooltip",
+    twNew: "z-[3000]",
+  },
+  "z-index-focus": {
+    ref: "",
+    raw: "10",
+    replacement: "",
+    twOld: "z-focus",
+    twNew: "z-[10]",
+  },
+  "z-index-popover": {
+    ref: "",
+    raw: "1000",
+    replacement: "",
+    twOld: "z-popover",
+    twNew: "z-[1000]",
+  },
+  "font-weight-regular": {
+    ref: "",
+    raw: "400",
+    replacement: "font-weight-regular",
+    twOld: "font-regular",
+    twNew: "font-regular",
+  },
+  "font-weight-bold": {
+    ref: "",
+    raw: "600",
+    replacement: "font-weight-bold",
+    twOld: "font-bold",
+    twNew: "font-bold",
+  },
+  "font-size-small": {
+    ref: "",
+    raw: "0.875rem",
+    replacement: "font-size-small",
+    twOld: "text-small",
+    twNew: "text-small",
+  },
+  "font-size-medium": {
+    ref: "",
+    raw: "1rem",
+    replacement: "font-size-medium",
+    twOld: "text-medium",
+    twNew: "text-medium",
+  },
+  "font-size-large": {
+    ref: "",
+    raw: "1.125rem",
+    replacement: "font-size-large",
+    twOld: "text-large",
+    twNew: "text-large",
+  },
+  "font-size-xlarge": {
+    ref: "",
+    raw: "1.25rem",
+    replacement: "font-size-xlarge",
+    twOld: "text-xlarge",
+    twNew: "text-xlarge",
+  },
+  "font-size-heading-xsmall": {
+    ref: "",
+    raw: "1.125rem",
+    replacement: "font-size-heading-xsmall",
+    twOld: "text-xsmall",
+    twNew: "text-xsmall",
+  },
+  "font-size-heading-small": {
+    ref: "",
+    raw: "1.25rem",
+    replacement: "font-size-heading-small",
+    twOld: "text-heading-small",
+    twNew: "text-heading-small",
+  },
+  "font-size-heading-medium": {
+    ref: "",
+    raw: "1.5rem",
+    replacement: "font-size-heading-medium",
+    twOld: "text-heading-medium",
+    twNew: "text-heading-medium",
+  },
+  "font-size-heading-large": {
+    ref: "",
+    raw: "1.75rem",
+    replacement: "font-size-heading-large",
+    twOld: "text-heading-large",
+    twNew: "text-heading-large",
+  },
+  "font-size-heading-xlarge": {
+    ref: "",
+    raw: "2rem",
+    replacement: "font-size-heading-xlarge",
+    twOld: "text-heading-xlarge",
+    twNew: "text-heading-xlarge",
+  },
+  "font-size-heading-2xlarge": {
+    ref: "",
+    raw: "2.5rem",
+    replacement: "font-size-heading-2xlarge",
+    twOld: "text-heading-2xlarge",
+    twNew: "text-heading-2xlarge",
+  },
+  "font-line-height-medium": {
+    ref: "",
+    raw: "1.25rem",
+    replacement: "font-line-height-medium",
+    twOld: "leading-medium",
+    twNew: "leading-medium",
+  },
+  "font-line-height-large": {
+    ref: "",
+    raw: "1.5rem",
+    replacement: "font-line-height-large",
+    twOld: "leading-large",
+    twNew: "leading-large",
+  },
+  "font-line-height-xlarge": {
+    ref: "",
+    raw: "1.75rem",
+    replacement: "font-line-height-xlarge",
+    twOld: "leading-xlarge",
+    twNew: "leading-xlarge",
+  },
+  "font-line-height-heading-xsmall": {
+    ref: "",
+    raw: "1.5rem",
+    replacement: "font-line-height-heading-xsmall",
+    twOld: "leading-heading-xsmall",
+    twNew: "leading-heading-xsmall",
+  },
+  "font-line-height-heading-small": {
+    ref: "",
+    raw: "1.75rem",
+    replacement: "font-line-height-heading-small",
+    twOld: "leading-heading-small",
+    twNew: "leading-heading-small",
+  },
+  "font-line-height-heading-medium": {
+    ref: "",
+    raw: "2rem",
+    replacement: "font-line-height-heading-medium",
+    twOld: "leading-heading-medium",
+    twNew: "leading-heading-medium",
+  },
+  "font-line-height-heading-large": {
+    ref: "",
+    raw: "2.25rem",
+    replacement: "font-line-height-heading-large",
+    twOld: "leading-heading-large",
+    twNew: "leading-heading-large",
+  },
+  "font-line-height-heading-xlarge": {
+    ref: "",
+    raw: "2.5rem",
+    replacement: "font-line-height-heading-xlarge",
+    twOld: "leading-heading-xlarge",
+    twNew: "leading-heading-xlarge",
+  },
+  "font-line-height-heading-2xlarge": {
+    ref: "",
+    raw: "3.25rem",
+    replacement: "font-line-height-heading-2xlarge",
+    twOld: "leading-heading-2xlarge",
+    twNew: "leading-heading-2xlarge",
+  },
+  "font-family": {
+    ref: "",
+    raw: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
+    replacement: "font-family",
+    twOld: "font-font-family",
+    twNew: "font-font-family",
+  },
+  "text-width-max": {
+    ref: "",
+    raw: "576px",
+    replacement: "",
+    twOld: "max-w-text",
+  },
+  "breakpoint-2xl-down": {
+    ref: "",
+    raw: "1439px",
+    replacement: "breakpoint-2xl-down",
+  },
+  "breakpoint-2xl": {
+    ref: "",
+    raw: "1440px",
+    replacement: "breakpoint-2xl",
+    twOld: "2xl",
+    twNew: "2xl",
+  },
+  "breakpoint-xl-down": {
+    ref: "",
+    raw: "1279px",
+    replacement: "breakpoint-xl-down",
+  },
+  "breakpoint-xl": {
+    ref: "",
+    raw: "1280px",
+    replacement: "breakpoint-xl",
+    twOld: "xl",
+    twNew: "xl",
+  },
+  "breakpoint-lg-down": {
+    ref: "",
+    raw: "1023px",
+    replacement: "breakpoint-lg-down",
+  },
+  "breakpoint-lg": {
+    ref: "",
+    raw: "1024px",
+    replacement: "breakpoint-lg",
+    twOld: "lg",
+    twNew: "lg",
+  },
+  "breakpoint-md-down": {
+    ref: "",
+    raw: "767px",
+    replacement: "breakpoint-md-down",
+  },
+  "breakpoint-md": {
+    ref: "",
+    raw: "768px",
+    replacement: "breakpoint-md",
+    twOld: "md",
+    twNew: "md",
+  },
+  "breakpoint-sm-down": {
+    ref: "",
+    raw: "479px",
+    replacement: "breakpoint-sm-down",
+  },
+  "breakpoint-sm": {
+    ref: "",
+    raw: "480px",
+    replacement: "breakpoint-sm",
+    twOld: "sm",
+    twNew: "sm",
+  },
+  "breakpoint-xs": {
+    ref: "",
+    raw: "0",
+    replacement: "breakpoint-xs",
   },
 };
 
@@ -2056,4 +2097,36 @@ function generateRoundedTwTags(name: string) {
   return `rounded-${name},${options
     .map((option) => `rounded-${option}-${name}`)
     .join(",")}`;
+}
+
+function generateBgTwTags(name: string) {
+  const options = [
+    "bg",
+    "to",
+    "via",
+    "from",
+    "fill",
+    "text",
+    "caret",
+    "ring",
+    "divide",
+    "border",
+    "stroke",
+    "accent",
+    "shadow",
+    "outline",
+    "border-x",
+    "border-y",
+    "border-s",
+    "border-e",
+    "border-t",
+    "border-r",
+    "border-b",
+    "border-l",
+    "decoration",
+    "placeholder",
+    "ring-offset",
+  ];
+
+  return `${options.map((option) => `${option}-${name}`).join(",")}`;
 }

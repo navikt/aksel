@@ -6,7 +6,8 @@ function getAllTokenRegexes(variable: string): RegExp[] {
     getTokenRegex(variable, "scss"),
     getTokenRegex(variable, "less"),
     getTokenRegex(variable, "js"),
-    getTokenRegex(variable, "tailwind"),
+    /* TODO: We need a special handler for TW */
+    /* getTokenRegex(variable, "tailwind"), */
   ];
 }
 

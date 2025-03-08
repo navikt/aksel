@@ -141,6 +141,40 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
           addTokenToStatus(hit, statusObj, index, true);
         }
       });
+
+      if (!config.twOld) {
+        return;
+      }
+
+      const createTwRegex = (token: string) =>
+        new RegExp(`(?<!:)(\\s|^)?${token}(?=\\s|$)`, "g");
+      const createTwRegexWithPrefix = (token: string) =>
+        new RegExp(`(?<!:)(\\s|^)?:${token}(?=\\s|$)`, "g");
+
+      config.twOld.split(",").forEach((oldTwToken) => {
+        const twRegex = createTwRegex(oldTwToken);
+        const twRegexWithPrefix = createTwRegexWithPrefix(oldTwToken);
+
+        let match: RegExpExecArray | null;
+
+        const processMatch = (regex: RegExp, offset: number) => {
+          while ((match = regex.exec(line)) !== null) {
+            const columnNumber = match.index + offset;
+            const hit = createTokenData(
+              match[0],
+              file.name,
+              lineNumber + 1,
+              columnNumber,
+              !!config.twNew,
+            );
+
+            addTokenToStatus(hit, statusObj, 4, false);
+          }
+        };
+
+        processMatch(twRegex, 1);
+        processMatch(twRegexWithPrefix, 2);
+      });
     });
   });
 
