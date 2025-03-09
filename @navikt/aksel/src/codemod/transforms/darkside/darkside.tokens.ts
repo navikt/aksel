@@ -1634,17 +1634,16 @@ const colorTokensWithTailwindConversion = Object.entries(colorTokens).reduce(
   {},
 );
 
-export const updatedTokens: Record<
-  string,
-  {
-    ref: string;
-    raw: string;
-    replacement: string;
-    comment?: string;
-    twOld?: string;
-    twNew?: string;
-  }
-> = {
+export type UpdatedTokensData = {
+  ref: string;
+  raw: string;
+  replacement: string;
+  comment?: string;
+  twOld?: string;
+  twNew?: string;
+};
+
+export const updatedTokens: Record<string, UpdatedTokensData> = {
   ...colorTokensWithTailwindConversion,
   "spacing-1-alt": {
     ref: "",

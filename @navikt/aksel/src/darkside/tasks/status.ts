@@ -1,11 +1,10 @@
-/* eslint-disable no-useless-escape */
 import ProgressBar from "cli-progress";
 import fs from "fs";
 import {
   newTokens,
   updatedTokens,
 } from "../../codemod/transforms/darkside/darkside.tokens";
-import { getAllTokenRegexes } from "../token-regex";
+import { generateRegexes, getAllTokenRegexes } from "../token-regex";
 
 type TokenData = {
   name: string;
@@ -81,6 +80,9 @@ class TokenStatus {
 
 const StatusStore = new TokenStatus();
 
+/**
+ * Get the status of the tokens in the files
+ */
 function getStatus(
   files: string[],
   action: "no-print" | "print" = "print",
@@ -94,16 +96,18 @@ function getStatus(
     ProgressBar.Presets.shades_classic,
   );
 
-  action === "print" && progressBar.start(files.length, 0);
+  if (action === "print") {
+    progressBar.start(files.length, 0);
+  }
 
   StatusStore.initStatus();
 
   files.forEach((file, index) => {
-    const readFile = fs.readFileSync(file, "utf8");
+    updateStatus(file);
 
-    updateStatus({ src: readFile, name: file });
-
-    action === "print" && progressBar.update(index + 1, { filename: file });
+    if (action === "print") {
+      progressBar.update(index + 1, { filename: file });
+    }
   });
 
   if (action === "no-print") {
@@ -124,7 +128,7 @@ function getStatus(
     "Total",
   );
 
-  ["css", "scss", "less", "js", "tailwind"].forEach((type) => {
+  Object.keys(StatusStore.status).forEach((type) => {
     showStatusResults(StatusStore.status[type], type.toUpperCase());
   });
 
@@ -133,6 +137,9 @@ function getStatus(
   return StatusStore;
 }
 
+/**
+ * Show the results of the status
+ */
 function showStatusResults(statusDataObj: StatusData, type: string) {
   const multibar = new ProgressBar.MultiBar(
     {
@@ -169,78 +176,42 @@ function showStatusResults(statusDataObj: StatusData, type: string) {
   multibar.stop();
 }
 
-function updateStatus(file: { src: string; name: string }) {
-  const lines = file.src.split("\n");
+/**
+ * Update the status of the tokens in the file
+ */
+function updateStatus(fileName: string) {
+  const fileSrc = fs.readFileSync(fileName, "utf8");
+  const lines = fileSrc.split("\n");
 
-  Object.entries(updatedTokens).forEach(([legacyToken, config]) => {
+  for (const [legacyToken, config] of Object.entries(updatedTokens)) {
     const legacyCSSVariable = `--a-${legacyToken}`;
     const canAutoMigrate = config.replacement.length > 0;
 
-    const regexes = getAllTokenRegexes(legacyCSSVariable);
+    const regexes = generateRegexes(legacyCSSVariable, config);
 
-    lines.forEach((line, lineNumber) => {
-      Object.keys(regexes).forEach((regexKey) => {
-        let match: RegExpExecArray | null;
+    for (let lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+      const line = lines[lineNumber];
 
-        while ((match = regexes[regexKey].exec(line)) !== null) {
-          const columnNumber = match.index + 1;
-
-          StatusStore.add({
-            isLegacy: true,
-            type: regexKey as any /* TODO: Fix */,
-            columnNumber,
-            lineNumber: lineNumber + 1,
-            canAutoMigrate,
-            fileName: file.name,
-            name: match[0],
-          });
-        }
-      });
-
-      if (!config.twOld) {
-        return;
-      }
-
-      const createTwRegex = (token: string) =>
-        new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "g");
-      const createTwRegexWithPrefix = (token: string) =>
-        new RegExp(`(?<!:)(\s|^)?:${token}(?=\s|$)`, "g");
-      const createTwRegexForBreakpoints = (token: string) =>
-        new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "g");
-
-      config.twOld.split(",").forEach((oldTwToken) => {
-        const twRegex = createTwRegex(oldTwToken);
-        const twRegexWithPrefix = createTwRegexWithPrefix(oldTwToken);
-        const twRegexForBreakpoints = createTwRegexForBreakpoints(oldTwToken);
-
-        let match: RegExpExecArray | null;
-
-        const processMatch = (regex: RegExp, offset: number) => {
+      for (const [regexKey, regexList] of Object.entries(regexes)) {
+        for (const regex of regexList) {
+          let match: RegExpExecArray | null;
           while ((match = regex.exec(line)) !== null) {
-            const columnNumber = match.index + offset;
+            const columnNumber = match.index + 1;
 
             StatusStore.add({
               isLegacy: true,
-              type: "tailwind",
+              type: regexKey as keyof typeof regexes,
               columnNumber,
               lineNumber: lineNumber + 1,
-              canAutoMigrate: !!config.twNew,
-              fileName: file.name,
+              canAutoMigrate,
+              fileName,
               name: match[0],
             });
           }
-        };
-
-        if (legacyToken.includes("breakpoint")) {
-          processMatch(twRegexForBreakpoints, 1);
-          return;
         }
-
-        processMatch(twRegex, 1);
-        processMatch(twRegexWithPrefix, 2);
-      });
-    });
-  });
+      }
+    }
+  }
 
   newTokens.forEach((newToken) => {
     const updatedCSSVariable = `--ax-${newToken}`;
@@ -258,7 +229,7 @@ function updateStatus(file: { src: string; name: string }) {
             type: regexKey as any /* TODO: Fix */,
             columnNumber,
             lineNumber: lineNumber + 1,
-            fileName: file.name,
+            fileName,
             name: match[0],
           });
         }
