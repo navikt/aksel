@@ -4,7 +4,7 @@ import {
   newTokens,
   updatedTokens,
 } from "../../codemod/transforms/darkside/darkside.tokens";
-import { generateRegexes, getAllTokenRegexes } from "../token-regex";
+import { generateLegacyRegexes, generateNewRegexes } from "../token-regex";
 
 type TokenData = {
   name: string;
@@ -183,14 +183,14 @@ function updateStatus(fileName: string) {
   const fileSrc = fs.readFileSync(fileName, "utf8");
   const lines = fileSrc.split("\n");
 
-  for (const [legacyToken, config] of Object.entries(updatedTokens)) {
-    const legacyCSSVariable = `--a-${legacyToken}`;
-    const canAutoMigrate = config.replacement.length > 0;
+  for (let lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+    const line = lines[lineNumber];
 
-    const regexes = generateRegexes(legacyCSSVariable, config);
+    for (const [legacyToken, config] of Object.entries(updatedTokens)) {
+      const legacyCSSVariable = `--a-${legacyToken}`;
+      const canAutoMigrate = config.replacement.length > 0;
 
-    for (let lineNumber = 0; lineNumber < lines.length; lineNumber++) {
-      const line = lines[lineNumber];
+      const regexes = generateLegacyRegexes(legacyCSSVariable, config);
 
       for (const [regexKey, regexList] of Object.entries(regexes)) {
         for (const regex of regexList) {
@@ -211,31 +211,30 @@ function updateStatus(fileName: string) {
         }
       }
     }
-  }
 
-  newTokens.forEach((newToken) => {
-    const updatedCSSVariable = `--ax-${newToken}`;
-    const regexes = getAllTokenRegexes(updatedCSSVariable);
+    for (const [newTokenName, tailwindName] of Object.entries(newTokens)) {
+      const newCSSVariable = `--ax-${newTokenName}`;
+      const regexes = generateNewRegexes(newCSSVariable, tailwindName);
 
-    lines.forEach((line, lineNumber) => {
-      Object.keys(regexes).forEach((regexKey) => {
-        let match: RegExpExecArray | null;
+      for (const [regexKey, regexList] of Object.entries(regexes)) {
+        for (const regex of regexList) {
+          let match: RegExpExecArray | null;
+          while ((match = regex.exec(line)) !== null) {
+            const columnNumber = match.index + 1;
 
-        while ((match = regexes[regexKey].exec(line)) !== null) {
-          const columnNumber = match.index + 1;
-
-          StatusStore.add({
-            isLegacy: false,
-            type: regexKey as any /* TODO: Fix */,
-            columnNumber,
-            lineNumber: lineNumber + 1,
-            fileName,
-            name: match[0],
-          });
+            StatusStore.add({
+              isLegacy: false,
+              type: regexKey as keyof typeof regexes,
+              columnNumber,
+              lineNumber: lineNumber + 1,
+              fileName,
+              name: match[0],
+            });
+          }
         }
-      });
-    });
-  });
+      }
+    }
+  }
 }
 
 export { getStatus };

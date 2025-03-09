@@ -11,7 +11,7 @@ const createTwRegexWithPrefix = (token: string) =>
 const createTwRegexForBreakpoints = (token: string) =>
   new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "g");
 
-function generateRegexes(token: string, config: UpdatedTokensData) {
+function generateLegacyRegexes(token: string, config: UpdatedTokensData) {
   const regexes: Record<"css" | "scss" | "less" | "js" | "tailwind", RegExp[]> =
     {
       css: [getTokenRegex(token, "css")],
@@ -38,18 +38,38 @@ function generateRegexes(token: string, config: UpdatedTokensData) {
   return regexes;
 }
 
-function getAllTokenRegexes(variable: string): Record<string, RegExp> {
-  return {
-    css: getTokenRegex(variable, "css"),
-    scss: getTokenRegex(variable, "scss"),
-    less: getTokenRegex(variable, "less"),
-    js: getTokenRegex(variable, "js"),
-  };
+function generateNewRegexes(token: string, tailwindName: string | null) {
+  const regexes: Record<"css" | "scss" | "less" | "js" | "tailwind", RegExp[]> =
+    {
+      css: [getTokenRegex(token, "css")],
+      scss: [getTokenRegex(token, "scss")],
+      less: [getTokenRegex(token, "less")],
+      js: [getTokenRegex(token, "newJs")],
+      tailwind: [],
+    };
+
+  if (!tailwindName) {
+    return regexes;
+  }
+
+  for (const twToken of tailwindName.split(",")) {
+    const twTokenWithPrefix = `ax-${twToken}`;
+
+    if (token.includes("breakpoint")) {
+      regexes.tailwind.push(createTwRegexForBreakpoints(twTokenWithPrefix));
+      continue;
+    }
+
+    regexes.tailwind.push(createTwRegex(twTokenWithPrefix));
+    regexes.tailwind.push(createTwRegexWithPrefix(twTokenWithPrefix));
+  }
+
+  return regexes;
 }
 
 function getTokenRegex(
   variable: string,
-  format: "css" | "scss" | "less" | "js" | "tailwind",
+  format: "css" | "scss" | "less" | "js" | "newJs" | "tailwind",
 ) {
   switch (format) {
     case "css":
@@ -60,9 +80,14 @@ function getTokenRegex(
       return new RegExp(`(${translateToken(variable, "less")})`, "gm");
     case "js":
       return new RegExp(`(${translateToken(variable, "js")})`, "gm");
+    case "newJs":
+      return new RegExp(
+        `(${translateToken(variable.replace("--ax-", ""), "js")})`,
+        "gm",
+      );
     default:
       console.error("Invalid format");
   }
 }
 
-export { getTokenRegex, getAllTokenRegexes, generateRegexes };
+export { generateLegacyRegexes, getTokenRegex, generateNewRegexes };
