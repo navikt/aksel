@@ -1,14 +1,12 @@
 import { translateToken } from "../codemod/utils/translate-token";
 
-function getAllTokenRegexes(variable: string): RegExp[] {
-  return [
-    getTokenRegex(variable, "css"),
-    getTokenRegex(variable, "scss"),
-    getTokenRegex(variable, "less"),
-    getTokenRegex(variable, "js"),
-    /* TODO: We need a special handler for TW */
-    /* getTokenRegex(variable, "tailwind"), */
-  ];
+function getAllTokenRegexes(variable: string): Record<string, RegExp> {
+  return {
+    css: getTokenRegex(variable, "css"),
+    scss: getTokenRegex(variable, "scss"),
+    less: getTokenRegex(variable, "less"),
+    js: getTokenRegex(variable, "js"),
+  };
 }
 
 function getTokenRegex(

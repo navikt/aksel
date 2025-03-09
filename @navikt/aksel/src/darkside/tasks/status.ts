@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import ProgressBar from "cli-progress";
 import fs from "fs";
 import {
@@ -19,7 +20,7 @@ type StatusData = {
   updated: TokenData[];
 };
 
-type Status = {
+type StatusT = {
   css: StatusData;
   scss: StatusData;
   less: StatusData;
@@ -27,10 +28,63 @@ type Status = {
   tailwind: StatusData;
 };
 
-function status(
+class TokenStatus {
+  status: StatusT;
+
+  constructor() {
+    this.status = this.initStatus();
+  }
+
+  initStatus(): StatusT {
+    return {
+      css: { legacy: [], updated: [] },
+      scss: { legacy: [], updated: [] },
+      less: { legacy: [], updated: [] },
+      js: { legacy: [], updated: [] },
+      tailwind: { legacy: [], updated: [] },
+    };
+  }
+
+  add({
+    isLegacy,
+    type,
+    ...hit
+  }: {
+    type: keyof StatusT;
+    isLegacy: boolean;
+    name: string;
+    fileName: string;
+    lineNumber: number;
+    columnNumber: number;
+    canAutoMigrate?: boolean;
+  }) {
+    const statusType = isLegacy ? "legacy" : "updated";
+    switch (type) {
+      case "css":
+        this.status.css[statusType].push(hit);
+        break;
+      case "scss":
+        this.status.scss[statusType].push(hit);
+        break;
+      case "less":
+        this.status.less[statusType].push(hit);
+        break;
+      case "js":
+        this.status.js[statusType].push(hit);
+        break;
+      case "tailwind":
+        this.status.tailwind[statusType].push(hit);
+        break;
+    }
+  }
+}
+
+const StatusStore = new TokenStatus();
+
+function getStatus(
   files: string[],
   action: "no-print" | "print" = "print",
-): Status {
+): TokenStatus {
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -42,18 +96,18 @@ function status(
 
   action === "print" && progressBar.start(files.length, 0);
 
-  const statusStore = initStatus();
+  StatusStore.initStatus();
 
   files.forEach((file, index) => {
     const readFile = fs.readFileSync(file, "utf8");
 
-    updateStatus({ src: readFile, name: file }, statusStore);
+    updateStatus({ src: readFile, name: file });
 
     action === "print" && progressBar.update(index + 1, { filename: file });
   });
 
   if (action === "no-print") {
-    return statusStore;
+    return StatusStore;
   }
 
   progressBar.stop();
@@ -61,22 +115,22 @@ function status(
   showStatusResults(
     {
       legacy: [].concat(
-        ...Object.values(statusStore).map((_status) => _status.legacy),
+        ...Object.values(StatusStore.status).map((_status) => _status.legacy),
       ),
       updated: [].concat(
-        ...Object.values(statusStore).map((_status) => _status.updated),
+        ...Object.values(StatusStore.status).map((_status) => _status.updated),
       ),
     },
     "Total",
   );
 
   ["css", "scss", "less", "js", "tailwind"].forEach((type) => {
-    showStatusResults(statusStore[type], type.toUpperCase());
+    showStatusResults(StatusStore.status[type], type.toUpperCase());
   });
 
   console.info("\n");
 
-  return statusStore;
+  return StatusStore;
 }
 
 function showStatusResults(statusDataObj: StatusData, type: string) {
@@ -115,7 +169,7 @@ function showStatusResults(statusDataObj: StatusData, type: string) {
   multibar.stop();
 }
 
-function updateStatus(file: { src: string; name: string }, statusObj: Status) {
+function updateStatus(file: { src: string; name: string }) {
   const lines = file.src.split("\n");
 
   Object.entries(updatedTokens).forEach(([legacyToken, config]) => {
@@ -125,20 +179,21 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
     const regexes = getAllTokenRegexes(legacyCSSVariable);
 
     lines.forEach((line, lineNumber) => {
-      regexes.forEach((regex, index) => {
+      Object.keys(regexes).forEach((regexKey) => {
         let match: RegExpExecArray | null;
 
-        while ((match = regex.exec(line)) !== null) {
+        while ((match = regexes[regexKey].exec(line)) !== null) {
           const columnNumber = match.index + 1;
-          const hit = createTokenData(
-            match[0],
-            file.name,
-            lineNumber + 1,
-            columnNumber,
-            canAutoMigrate,
-          );
 
-          addTokenToStatus(hit, statusObj, index, true);
+          StatusStore.add({
+            isLegacy: true,
+            type: regexKey as any /* TODO: Fix */,
+            columnNumber,
+            lineNumber: lineNumber + 1,
+            canAutoMigrate,
+            fileName: file.name,
+            name: match[0],
+          });
         }
       });
 
@@ -147,30 +202,39 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
       }
 
       const createTwRegex = (token: string) =>
-        new RegExp(`(?<!:)(\\s|^)?${token}(?=\\s|$)`, "g");
+        new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "g");
       const createTwRegexWithPrefix = (token: string) =>
-        new RegExp(`(?<!:)(\\s|^)?:${token}(?=\\s|$)`, "g");
+        new RegExp(`(?<!:)(\s|^)?:${token}(?=\s|$)`, "g");
+      const createTwRegexForBreakpoints = (token: string) =>
+        new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "g");
 
       config.twOld.split(",").forEach((oldTwToken) => {
         const twRegex = createTwRegex(oldTwToken);
         const twRegexWithPrefix = createTwRegexWithPrefix(oldTwToken);
+        const twRegexForBreakpoints = createTwRegexForBreakpoints(oldTwToken);
 
         let match: RegExpExecArray | null;
 
         const processMatch = (regex: RegExp, offset: number) => {
           while ((match = regex.exec(line)) !== null) {
             const columnNumber = match.index + offset;
-            const hit = createTokenData(
-              match[0],
-              file.name,
-              lineNumber + 1,
-              columnNumber,
-              !!config.twNew,
-            );
 
-            addTokenToStatus(hit, statusObj, 4, false);
+            StatusStore.add({
+              isLegacy: true,
+              type: "tailwind",
+              columnNumber,
+              lineNumber: lineNumber + 1,
+              canAutoMigrate: !!config.twNew,
+              fileName: file.name,
+              name: match[0],
+            });
           }
         };
+
+        if (legacyToken.includes("breakpoint")) {
+          processMatch(twRegexForBreakpoints, 1);
+          return;
+        }
 
         processMatch(twRegex, 1);
         processMatch(twRegexWithPrefix, 2);
@@ -183,70 +247,25 @@ function updateStatus(file: { src: string; name: string }, statusObj: Status) {
     const regexes = getAllTokenRegexes(updatedCSSVariable);
 
     lines.forEach((line, lineNumber) => {
-      regexes.forEach((regex, index) => {
+      Object.keys(regexes).forEach((regexKey) => {
         let match: RegExpExecArray | null;
 
-        while ((match = regex.exec(line)) !== null) {
+        while ((match = regexes[regexKey].exec(line)) !== null) {
           const columnNumber = match.index + 1;
-          const hit = createTokenData(
-            match[0],
-            file.name,
-            lineNumber + 1,
-            columnNumber,
-          );
 
-          addTokenToStatus(hit, statusObj, index, false);
+          StatusStore.add({
+            isLegacy: false,
+            type: regexKey as any /* TODO: Fix */,
+            columnNumber,
+            lineNumber: lineNumber + 1,
+            fileName: file.name,
+            name: match[0],
+          });
         }
       });
     });
   });
 }
 
-function createTokenData(
-  name: string,
-  fileName: string,
-  lineNumber: number,
-  columnNumber: number,
-  canAutoMigrate?: boolean,
-): TokenData {
-  return { name, fileName, lineNumber, columnNumber, canAutoMigrate };
-}
-
-function addTokenToStatus(
-  hit: TokenData,
-  statusObj: Status,
-  index: number,
-  isLegacy: boolean,
-) {
-  const statusType = isLegacy ? "legacy" : "updated";
-  switch (index) {
-    case 0:
-      statusObj.css[statusType].push(hit);
-      break;
-    case 1:
-      statusObj.scss[statusType].push(hit);
-      break;
-    case 2:
-      statusObj.less[statusType].push(hit);
-      break;
-    case 3:
-      statusObj.js[statusType].push(hit);
-      break;
-    case 4:
-      statusObj.tailwind[statusType].push(hit);
-      break;
-  }
-}
-
-function initStatus(): Status {
-  return {
-    css: { legacy: [], updated: [] },
-    scss: { legacy: [], updated: [] },
-    less: { legacy: [], updated: [] },
-    js: { legacy: [], updated: [] },
-    tailwind: { legacy: [], updated: [] },
-  };
-}
-
-export { status };
-export type { Status };
+export { getStatus };
+export type { StatusT };

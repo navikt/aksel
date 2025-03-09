@@ -5,7 +5,7 @@ import fg from "fast-glob";
 import * as jscodeshift from "jscodeshift/src/Runner";
 import path from "path";
 import { printRemaining } from "./tasks/print-remaining";
-import { status } from "./tasks/status";
+import { getStatus } from "./tasks/status";
 
 const ignoreNodeModules = [
   "**/node_modules/**",
@@ -35,13 +35,13 @@ export async function runTooling(
   /* await showStatus() */
   let task: TaskT;
 
-  status(filepaths);
+  getStatus(filepaths);
 
   while (task !== "exit") {
     task = await getNextTask();
 
     if (task === "status") {
-      status(filepaths);
+      getStatus(filepaths);
       continue;
     }
 
