@@ -92,6 +92,7 @@ export async function runTooling(
         dryRun: options.dryRun,
         force: options.force,
       });
+      process.exit(1);
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
     }
