@@ -73,4 +73,36 @@ describe("createCompositeTwRegex", () => {
     const matches = [...input.matchAll(regex)];
     expect(matches.length).toBe(0);
   });
+
+  test("should match tokens with different prefixes", () => {
+    const regex = createCompositeTwRegex(["text-red", "text-blue"]);
+
+    expect("hover:text-red").toMatch(regex);
+    expect("focus:text-blue").toMatch(regex);
+    expect('class="hover:text-red focus:text-blue"').toMatch(regex);
+  });
+
+  test("should match tokens with multiple colons", () => {
+    const regex = createCompositeTwRegex(["text-red", "text-blue"]);
+
+    expect("md:hover:text-red").toMatch(regex);
+    expect("lg:focus:text-blue").toMatch(regex);
+    expect('class="md:hover:text-red lg:focus:text-blue"').toMatch(regex);
+  });
+
+  test("should match tokens with special characters", () => {
+    const regex = createCompositeTwRegex(["text-red", "text-blue"]);
+
+    expect("text-red!").toMatch(regex);
+    expect("text-blue?").toMatch(regex);
+    expect('class="text-red! text-blue?"').toMatch(regex);
+  });
+
+  test("should not match tokens with numbers", () => {
+    const regex = createCompositeTwRegex(["text-red", "text-blue"]);
+
+    expect("text-red-100").not.toMatch(regex);
+    expect("text-blue-200").not.toMatch(regex);
+    expect('class="text-red-100 text-blue-200"').not.toMatch(regex);
+  });
 });
