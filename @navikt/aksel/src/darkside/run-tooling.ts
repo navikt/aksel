@@ -134,14 +134,14 @@ async function executeTask(
         "less-tokens",
         "js-tokens",
         "tailwind-tokens",
-      ];
+      ] as const;
       for (const migrationTask of tasks) {
         if (!options.force) {
           validateGit(options, program);
         }
 
         console.info(`\nRunning ${migrationTask}...`);
-        await runCodeshift(task, filepaths, {
+        await runCodeshift(migrationTask, filepaths, {
           dryRun: options.dryRun,
           force: true,
         });
