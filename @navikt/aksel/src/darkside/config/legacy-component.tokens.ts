@@ -1,4 +1,4 @@
-export const legacyComponentTokens = [
+const legacyComponentTokenList = [
   "--ac-alert-error-border",
   "--ac-alert-error-bg",
   "--ac-alert-icon-error-color",
@@ -401,3 +401,5 @@ export const legacyComponentTokens = [
   "--ac-timeline-zoom-selected-text",
   "--ac-timeline-axislabel-text",
 ];
+
+export { legacyComponentTokenList };

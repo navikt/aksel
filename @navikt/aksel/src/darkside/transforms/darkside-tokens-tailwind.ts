@@ -1,17 +1,11 @@
 import type { FileInfo } from "jscodeshift";
-import { updatedTokens } from "../config/darkside.tokens";
-import { createSingleTwRegex } from "../config/tokenRegex";
+import { legacyTokenConfig } from "../config/legacy.tokens";
+import { createSingleTwRegex } from "../config/token-regex";
 
-/**
- * TODO: Add more tests
- * - Test for breakpoints
- * - Test composite tokens
- * - Test with important! tag
- */
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
-  for (const [name, config] of Object.entries(updatedTokens)) {
+  for (const [name, config] of Object.entries(legacyTokenConfig)) {
     if (!config.twOld || !config.twNew) {
       continue;
     }

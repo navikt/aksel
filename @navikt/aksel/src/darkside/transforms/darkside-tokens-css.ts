@@ -1,10 +1,10 @@
 import type { FileInfo } from "jscodeshift";
-import { updatedTokens } from "../config/darkside.tokens";
+import { legacyTokenConfig } from "../config/legacy.tokens";
 
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
-  for (const [oldToken, config] of Object.entries(updatedTokens)) {
+  for (const [oldToken, config] of Object.entries(legacyTokenConfig)) {
     const oldCSSVar = `--a-${oldToken}`;
 
     /* We update all re-definitions of a token to a "legacy" version */

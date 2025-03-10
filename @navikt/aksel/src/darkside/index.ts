@@ -17,12 +17,6 @@ export function darksideCommand() {
     )
     .option("-d, --dry-run", "Dry run, no changes will be made")
     .option("-f, --force", "Forcibly run updates without checking git-changes")
-    .command("darkside")
-    // .addHelpText("beforeAll", figlet.textSync("Darkside"))
-    // .addHelpText(
-    //   "afterAll",
-    //   chalk.gray(`\nAvailable migrations:\n${getMigrationString()}`),
-    // )
     .description("Update tool for darkside token updates");
 
   program.parse();

@@ -1,10 +1,10 @@
 import ProgressBar from "cli-progress";
 import fs from "fs";
 import { TokenStatus } from "../config/TokenStatus";
-import { newTokens, updatedTokens } from "../config/darkside.tokens";
-import { getWordPositionInFile } from "../config/findWordPosition";
-import { legacyComponentTokens } from "../config/legacyComponentTokens";
-import { getTokenRegex } from "../config/tokenRegex";
+import { darksideTokenConfig } from "../config/darkside.tokens";
+import { legacyComponentTokenList } from "../config/legacy-component.tokens";
+import { legacyTokenConfig } from "../config/legacy.tokens";
+import { getTokenRegex } from "../config/token-regex";
 
 const StatusStore = new TokenStatus();
 
@@ -36,7 +36,7 @@ function getStatus(
     /**
      * We first parse trough all legacy tokens (--a-) prefixed tokens
      */
-    for (const [legacyToken, config] of Object.entries(updatedTokens)) {
+    for (const [legacyToken, config] of Object.entries(legacyTokenConfig)) {
       if (!getTokenRegex(legacyToken, "css").test(fileSrc)) {
         continue;
       }
@@ -69,7 +69,7 @@ function getStatus(
     }
 
     const legacyRegex = new RegExp(
-      `(${legacyComponentTokens.map((t) => `${t}:`).join("|")})`,
+      `(${legacyComponentTokenList.map((t) => `${t}:`).join("|")})`,
       "gm",
     );
 
@@ -88,7 +88,7 @@ function getStatus(
       });
     }
 
-    for (const [newTokenName, config] of Object.entries(newTokens)) {
+    for (const [newTokenName, config] of Object.entries(darksideTokenConfig)) {
       if (!getTokenRegex(newTokenName, "css").test(fileSrc)) {
         continue;
       }

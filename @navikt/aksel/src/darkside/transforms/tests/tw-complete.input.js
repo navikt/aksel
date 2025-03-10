@@ -1,4 +1,3 @@
-
 const oldColorTokens = {
   js: "bg-red-500 group:hover:bg-surface-subtle hover:bg-surface-transparent",
 }

@@ -41,7 +41,7 @@ function getFrameworkRegexes({
 
 function getTokenRegex(
   variable: string,
-  format: "css" | "scss" | "less" | "js" | "tailwind",
+  format: "css" | "scss" | "less" | "js",
 ) {
   switch (format) {
     case "css":
@@ -61,8 +61,6 @@ function getTokenRegex(
         `(\\s|^)?(${translateToken(variable, "js")})(?=\\s|$|[^\\w-])`,
         "gm",
       );
-    default:
-      console.error("Invalid format");
   }
 }
 

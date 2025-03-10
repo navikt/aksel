@@ -3,7 +3,7 @@ import { getImportSpecifier } from "../../codemod/utils/imports";
 import { getLineTerminator } from "../../codemod/utils/lineterminator";
 import moveAndRenameImport from "../../codemod/utils/moveAndRenameImport";
 import { translateToken } from "../../codemod/utils/translate-token";
-import { updatedTokens } from "../config/darkside.tokens";
+import { legacyTokenConfig } from "../config/legacy.tokens";
 
 export default function transformer(file: FileInfo, api: API) {
   let src = file.source;
@@ -22,7 +22,7 @@ export default function transformer(file: FileInfo, api: API) {
     return src;
   }
 
-  for (const [oldToken, config] of Object.entries(updatedTokens)) {
+  for (const [oldToken, config] of Object.entries(legacyTokenConfig)) {
     const oldCSSVar = `--a-${oldToken}`;
     const oldJsVar = translateToken(oldCSSVar, "js");
 

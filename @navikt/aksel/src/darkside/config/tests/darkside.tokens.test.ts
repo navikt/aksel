@@ -1,12 +1,13 @@
 import { describe, expect, test } from "vitest";
-import { newTokens, updatedTokens } from "./darkside.tokens";
+import { darksideTokenConfig } from "../darkside.tokens";
+import { legacyTokenConfig } from "../legacy.tokens";
 
 describe("Darkside codemods", () => {
   test("Token migration references exists", () => {
-    Object.entries(updatedTokens).forEach(([oldToken, config]) => {
+    Object.entries(legacyTokenConfig).forEach(([oldToken, config]) => {
       if (config.replacement.length > 1) {
         expect(
-          config.replacement in newTokens,
+          config.replacement in darksideTokenConfig,
           `${oldToken} has valid replacement: ${config.replacement}`,
         ).toBeTruthy();
       }
@@ -14,7 +15,7 @@ describe("Darkside codemods", () => {
   });
 
   test("Has raw value if no reference is set", () => {
-    Object.values(updatedTokens).forEach((config) => {
+    Object.values(legacyTokenConfig).forEach((config) => {
       if (config.replacement.length === 0) {
         expect(config.raw.length > 0).toBeTruthy();
       }
