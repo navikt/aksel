@@ -55,7 +55,39 @@ export async function runTooling(
     }
 
     try {
-      runCodeshift(task, filepaths, {
+      const updatedStatus = getStatus(filepaths).status;
+
+      const scopedFiles = filepaths.filter((f) => {
+        switch (task) {
+          case "css-tokens":
+            return !!updatedStatus.css.legacy.find(
+              (config) => config.fileName === f,
+            );
+          case "scss-tokens":
+            return !!updatedStatus.scss.legacy.find(
+              (config) => config.fileName === f,
+            );
+          case "less-tokens":
+            return !!updatedStatus.less.legacy.find(
+              (config) => config.fileName === f,
+            );
+          case "js-tokens":
+            return !!updatedStatus.js.legacy.find(
+              (config) => config.fileName === f,
+            );
+          case "tailwind-tokens":
+            return !!updatedStatus.tailwind.legacy.find(
+              (config) => config.fileName === f,
+            );
+          default:
+            return false;
+        }
+      });
+      console.info(
+        `Running codeshift: Total files: ${scopedFiles.length}, Scoped files: ${scopedFiles.length}`,
+      );
+
+      runCodeshift(task, scopedFiles, {
         dryRun: options.dryRun,
         force: options.force,
       });
