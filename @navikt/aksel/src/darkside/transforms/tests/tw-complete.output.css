@@ -1,5 +1,5 @@
 .test {
   @apply bg-ax-bg-neutral-soft via-surface-transparent;
-  @apply font-ax-small font-ax-bold font-ax-font-family leading-ax-heading-small;
+  @apply text-ax-small font-ax-bold font-ax-font-family leading-ax-heading-small;
   @apply shadow-small z-[3000];
 }

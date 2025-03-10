@@ -1,4 +1,5 @@
 .test {
   @apply bg-surface-subtle via-surface-transparent;
-  @apply font-small font-bold font-font-family leading-heading-small;
+  @apply text-small font-bold font-font-family leading-heading-small;
+  @apply shadow-small z-tooltip;
 }

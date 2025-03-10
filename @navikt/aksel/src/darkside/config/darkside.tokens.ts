@@ -377,7 +377,7 @@ const newColorTokens = [
 type NewTokensWithTailwindToken = Record<string, string | null>;
 
 const newColorTokensWithTailwindNames = newColorTokens.reduce((acc, token) => {
-  acc[token] = generateBgTwTags(token);
+  acc[token] = generateBgTwTags(token, true);
   return acc;
 }, {} as NewTokensWithTailwindToken);
 
@@ -387,46 +387,46 @@ const newColorTokensWithTailwindNames = newColorTokens.reduce((acc, token) => {
  */
 const newTokensWithoutRegex: NewTokensWithTailwindToken = {
   ...newColorTokensWithTailwindNames,
-  "opacity-disabled": "opacity-disabled",
-  "shadow-dialog": "shadow-dialog",
-  "font-weight-regular": "font-regular",
-  "font-weight-bold": "font-bold",
-  "font-size-small": "text-small",
-  "font-size-medium": "text-medium",
-  "font-size-large": "text-large",
-  "font-size-xlarge": "text-xlarge",
-  "font-size-heading-xsmall": "text-heading-xsmall",
-  "font-size-heading-small": "text-heading-small",
-  "font-size-heading-medium": "text-heading-medium",
-  "font-size-heading-large": "text-heading-large",
-  "font-size-heading-xlarge": "text-heading-xlarge",
-  "font-size-heading-2xlarge": "text-heading-2xlarge",
-  "font-line-height-medium": "leading-medium",
-  "font-line-height-large": "leading-large",
-  "font-line-height-xlarge": "leading-xlarge",
-  "font-line-height-heading-xsmall": "leading-heading-xsmall",
-  "font-line-height-heading-small": "leading-heading-small",
-  "font-line-height-heading-medium": "leading-heading-medium",
-  "font-line-height-heading-large": "leading-heading-large",
-  "font-line-height-heading-xlarge": "leading-heading-xlarge",
-  "font-line-height-heading-2xlarge": "leading-heading-2xlarge",
+  "opacity-disabled": "opacity-ax-disabled",
+  "shadow-dialog": "shadow-ax-dialog",
+  "font-weight-regular": "font-ax-regular",
+  "font-weight-bold": "font-ax-bold",
+  "font-size-small": "text-ax-small",
+  "font-size-medium": "text-ax-medium",
+  "font-size-large": "text-ax-large",
+  "font-size-xlarge": "text-ax-xlarge",
+  "font-size-heading-xsmall": "text-ax-heading-xsmall",
+  "font-size-heading-small": "text-ax-heading-small",
+  "font-size-heading-medium": "text-ax-heading-medium",
+  "font-size-heading-large": "text-ax-heading-large",
+  "font-size-heading-xlarge": "text-ax-heading-xlarge",
+  "font-size-heading-2xlarge": "text-ax-heading-2xlarge",
+  "font-line-height-medium": "leading-ax-medium",
+  "font-line-height-large": "leading-ax-large",
+  "font-line-height-xlarge": "leading-ax-xlarge",
+  "font-line-height-heading-xsmall": "leading-ax-heading-xsmall",
+  "font-line-height-heading-small": "leading-ax-heading-small",
+  "font-line-height-heading-medium": "leading-ax-heading-medium",
+  "font-line-height-heading-large": "leading-ax-heading-large",
+  "font-line-height-heading-xlarge": "leading-ax-heading-xlarge",
+  "font-line-height-heading-2xlarge": "leading-ax-heading-2xlarge",
   "font-family": "font-font-family",
   "breakpoint-2xl-down": null,
-  "breakpoint-2xl": "2xl",
+  "breakpoint-2xl": "ax-2xl",
   "breakpoint-xl-down": null,
-  "breakpoint-xl": "xl",
+  "breakpoint-xl": "ax-xl",
   "breakpoint-lg-down": null,
-  "breakpoint-lg": "lg",
+  "breakpoint-lg": "ax-lg",
   "breakpoint-md-down": null,
-  "breakpoint-md": "md",
+  "breakpoint-md": "ax-md",
   "breakpoint-sm-down": null,
-  "breakpoint-sm": "sm",
+  "breakpoint-sm": "ax-sm",
   "breakpoint-xs": null,
-  "border-radius-full": generateRoundedTwTags("full"),
-  "border-radius-xlarge": generateRoundedTwTags("xlarge"),
-  "border-radius-large": generateRoundedTwTags("large"),
-  "border-radius-medium": generateRoundedTwTags("medium"),
-  "border-radius-small": generateRoundedTwTags("small"),
+  "border-radius-full": generateRoundedTwTags("full", true),
+  "border-radius-xlarge": generateRoundedTwTags("xlarge", true),
+  "border-radius-large": generateRoundedTwTags("large", true),
+  "border-radius-medium": generateRoundedTwTags("medium", true),
+  "border-radius-small": generateRoundedTwTags("small", true),
   "space-128": null,
   "space-96": null,
   "space-80": null,
@@ -1656,7 +1656,7 @@ const colorTokensWithTailwindConversion = Object.entries(colorTokens).reduce(
     const twOld = generateBgTwTags(key);
     const twNew =
       value.replacement.length > 0
-        ? generateBgTwTags(value.replacement)
+        ? generateBgTwTags(value.replacement, true)
         : undefined;
 
     acc[key] = {
@@ -1837,35 +1837,35 @@ const updatedTokensWithoutRegex: Record<
     raw: "9999px",
     replacement: "border-radius-full",
     twOld: generateRoundedTwTags("full"),
-    twNew: generateRoundedTwTags("full"),
+    twNew: generateRoundedTwTags("full", true),
   },
   "border-radius-xlarge": {
     ref: "",
     raw: "12px",
     replacement: "border-radius-xlarge",
     twOld: generateRoundedTwTags("xlarge"),
-    twNew: generateRoundedTwTags("xlarge"),
+    twNew: generateRoundedTwTags("xlarge", true),
   },
   "border-radius-large": {
     ref: "",
     raw: "8px",
     replacement: "border-radius-large",
     twOld: generateRoundedTwTags("large"),
-    twNew: generateRoundedTwTags("large"),
+    twNew: generateRoundedTwTags("large", true),
   },
   "border-radius-medium": {
     ref: "",
     raw: "4px",
     replacement: "border-radius-medium",
     twOld: generateRoundedTwTags("medium"),
-    twNew: generateRoundedTwTags("medium"),
+    twNew: generateRoundedTwTags("medium", true),
   },
   "border-radius-small": {
     ref: "",
     raw: "2px",
     replacement: "border-radius-small",
     twOld: generateRoundedTwTags("small"),
-    twNew: generateRoundedTwTags("small"),
+    twNew: generateRoundedTwTags("small", true),
   },
   "z-index-tooltip": {
     ref: "",
@@ -1893,154 +1893,154 @@ const updatedTokensWithoutRegex: Record<
     raw: "400",
     replacement: "font-weight-regular",
     twOld: "font-regular",
-    twNew: "font-regular",
+    twNew: "font-ax-regular",
   },
   "font-weight-bold": {
     ref: "",
     raw: "600",
     replacement: "font-weight-bold",
     twOld: "font-bold",
-    twNew: "font-bold",
+    twNew: "font-ax-bold",
   },
   "font-size-small": {
     ref: "",
     raw: "0.875rem",
     replacement: "font-size-small",
     twOld: "text-small",
-    twNew: "text-small",
+    twNew: "text-ax-small",
   },
   "font-size-medium": {
     ref: "",
     raw: "1rem",
     replacement: "font-size-medium",
     twOld: "text-medium",
-    twNew: "text-medium",
+    twNew: "text-ax-medium",
   },
   "font-size-large": {
     ref: "",
     raw: "1.125rem",
     replacement: "font-size-large",
     twOld: "text-large",
-    twNew: "text-large",
+    twNew: "text-ax-large",
   },
   "font-size-xlarge": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-size-xlarge",
     twOld: "text-xlarge",
-    twNew: "text-xlarge",
+    twNew: "text-ax-xlarge",
   },
   "font-size-heading-xsmall": {
     ref: "",
     raw: "1.125rem",
     replacement: "font-size-heading-xsmall",
     twOld: "text-xsmall",
-    twNew: "text-xsmall",
+    twNew: "text-ax-xsmall",
   },
   "font-size-heading-small": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-size-heading-small",
     twOld: "text-heading-small",
-    twNew: "text-heading-small",
+    twNew: "text-ax-heading-small",
   },
   "font-size-heading-medium": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-size-heading-medium",
     twOld: "text-heading-medium",
-    twNew: "text-heading-medium",
+    twNew: "text-ax-heading-medium",
   },
   "font-size-heading-large": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-size-heading-large",
     twOld: "text-heading-large",
-    twNew: "text-heading-large",
+    twNew: "text-ax-heading-large",
   },
   "font-size-heading-xlarge": {
     ref: "",
     raw: "2rem",
     replacement: "font-size-heading-xlarge",
     twOld: "text-heading-xlarge",
-    twNew: "text-heading-xlarge",
+    twNew: "text-ax-heading-xlarge",
   },
   "font-size-heading-2xlarge": {
     ref: "",
     raw: "2.5rem",
     replacement: "font-size-heading-2xlarge",
     twOld: "text-heading-2xlarge",
-    twNew: "text-heading-2xlarge",
+    twNew: "text-ax-heading-2xlarge",
   },
   "font-line-height-medium": {
     ref: "",
     raw: "1.25rem",
     replacement: "font-line-height-medium",
     twOld: "leading-medium",
-    twNew: "leading-medium",
+    twNew: "leading-ax-medium",
   },
   "font-line-height-large": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-line-height-large",
     twOld: "leading-large",
-    twNew: "leading-large",
+    twNew: "leading-ax-large",
   },
   "font-line-height-xlarge": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-line-height-xlarge",
     twOld: "leading-xlarge",
-    twNew: "leading-xlarge",
+    twNew: "leading-ax-xlarge",
   },
   "font-line-height-heading-xsmall": {
     ref: "",
     raw: "1.5rem",
     replacement: "font-line-height-heading-xsmall",
     twOld: "leading-heading-xsmall",
-    twNew: "leading-heading-xsmall",
+    twNew: "leading-ax-heading-xsmall",
   },
   "font-line-height-heading-small": {
     ref: "",
     raw: "1.75rem",
     replacement: "font-line-height-heading-small",
     twOld: "leading-heading-small",
-    twNew: "leading-heading-small",
+    twNew: "leading-ax-heading-small",
   },
   "font-line-height-heading-medium": {
     ref: "",
     raw: "2rem",
     replacement: "font-line-height-heading-medium",
     twOld: "leading-heading-medium",
-    twNew: "leading-heading-medium",
+    twNew: "leading-ax-heading-medium",
   },
   "font-line-height-heading-large": {
     ref: "",
     raw: "2.25rem",
     replacement: "font-line-height-heading-large",
     twOld: "leading-heading-large",
-    twNew: "leading-heading-large",
+    twNew: "leading-ax-heading-large",
   },
   "font-line-height-heading-xlarge": {
     ref: "",
     raw: "2.5rem",
     replacement: "font-line-height-heading-xlarge",
     twOld: "leading-heading-xlarge",
-    twNew: "leading-heading-xlarge",
+    twNew: "leading-ax-heading-xlarge",
   },
   "font-line-height-heading-2xlarge": {
     ref: "",
     raw: "3.25rem",
     replacement: "font-line-height-heading-2xlarge",
     twOld: "leading-heading-2xlarge",
-    twNew: "leading-heading-2xlarge",
+    twNew: "leading-ax-heading-2xlarge",
   },
   "font-family": {
     ref: "",
     raw: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
     replacement: "font-family",
     twOld: "font-font-family",
-    twNew: "font-font-family",
+    twNew: "font-ax-font-family",
   },
   "text-width-max": {
     ref: "",
@@ -2058,7 +2058,7 @@ const updatedTokensWithoutRegex: Record<
     raw: "1440px",
     replacement: "breakpoint-2xl",
     twOld: "2xl",
-    twNew: "2xl",
+    twNew: "ax-2xl",
   },
   "breakpoint-xl-down": {
     ref: "",
@@ -2070,7 +2070,7 @@ const updatedTokensWithoutRegex: Record<
     raw: "1280px",
     replacement: "breakpoint-xl",
     twOld: "xl",
-    twNew: "xl",
+    twNew: "ax-xl",
   },
   "breakpoint-lg-down": {
     ref: "",
@@ -2082,7 +2082,7 @@ const updatedTokensWithoutRegex: Record<
     raw: "1024px",
     replacement: "breakpoint-lg",
     twOld: "lg",
-    twNew: "lg",
+    twNew: "ax-lg",
   },
   "breakpoint-md-down": {
     ref: "",
@@ -2094,7 +2094,7 @@ const updatedTokensWithoutRegex: Record<
     raw: "768px",
     replacement: "breakpoint-md",
     twOld: "md",
-    twNew: "md",
+    twNew: "ax-md",
   },
   "breakpoint-sm-down": {
     ref: "",
@@ -2106,7 +2106,7 @@ const updatedTokensWithoutRegex: Record<
     raw: "480px",
     replacement: "breakpoint-sm",
     twOld: "sm",
-    twNew: "sm",
+    twNew: "ax-sm",
   },
   "breakpoint-xs": {
     ref: "",
@@ -2130,7 +2130,7 @@ export const updatedTokens: Record<string, UpdatedTokensData> = Object.entries(
   return acc;
 }, {});
 
-function generateRoundedTwTags(name: string) {
+function generateRoundedTwTags(name: string, addNewPrefix = false) {
   const options = [
     "s",
     "e",
@@ -2149,11 +2149,11 @@ function generateRoundedTwTags(name: string) {
   ];
 
   return `rounded-${name},${options
-    .map((option) => `rounded-${option}-${name}`)
+    .map((option) => `rounded-${option}-${addNewPrefix ? "ax-" : ""}${name}`)
     .join(",")}`;
 }
 
-function generateBgTwTags(name: string) {
+function generateBgTwTags(name: string, addNewPrefix = false) {
   const options = [
     "bg",
     "to",
@@ -2182,5 +2182,7 @@ function generateBgTwTags(name: string) {
     "ring-offset",
   ];
 
-  return `${options.map((option) => `${option}-${name}`).join(",")}`;
+  return `${options
+    .map((option) => `${option}-${addNewPrefix ? "ax-" : ""}${name}`)
+    .join(",")}`;
 }

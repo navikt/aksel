@@ -27,10 +27,7 @@ function getFrameworkRegexes({
     return regexes;
   }
 
-  const twTokens = twString.split(",").map((t) => {
-    /* New tailwind token have the `ax`-prefix */
-    return legacy ? t : `ax-${t}`;
-  });
+  const twTokens = twString.split(",");
 
   if (token.includes("breakpoint")) {
     /* We assume that breakpoint tw token only has a single declaration */
