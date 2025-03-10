@@ -1,13 +1,10 @@
 import ProgressBar from "cli-progress";
 import fs from "fs";
-import {
-  newTokens,
-  updatedTokens,
-} from "../../codemod/transforms/darkside/darkside.tokens";
 import { TokenStatus } from "../config/TokenStatus";
+import { newTokens, updatedTokens } from "../config/darkside.tokens";
 import { getWordPositionInFile } from "../config/findWordPosition";
 import { legacyComponentTokens } from "../config/legacyComponentTokens";
-import { getFrameworkRegexes, getTokenRegex } from "../config/tokenRegex";
+import { getTokenRegex } from "../config/tokenRegex";
 
 const StatusStore = new TokenStatus();
 
@@ -18,6 +15,7 @@ function getStatus(
   files: string[],
   action: "no-print" | "print" = "print",
 ): TokenStatus {
+  const start = performance.now();
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -40,19 +38,11 @@ function getStatus(
      * We first parse trough all legacy tokens (--a-) prefixed tokens
      */
     for (const [legacyToken, config] of Object.entries(updatedTokens)) {
-      const legacyCSSVariable = `--a-${legacyToken}`;
-
-      const regexes = getFrameworkRegexes({
-        legacy: true,
-        token: legacyCSSVariable,
-        twString: config.twOld,
-      });
-
       if (!getTokenRegex(legacyToken, "css").test(fileSrc)) {
         continue;
       }
 
-      for (const [regexKey, regex] of Object.entries(regexes)) {
+      for (const [regexKey, regex] of Object.entries(config.regexes)) {
         if (!regex) {
           continue;
         }
@@ -65,7 +55,7 @@ function getStatus(
           StatusStore.add({
             isLegacy: true,
             comment: config.comment,
-            type: regexKey as keyof typeof regexes,
+            type: regexKey as keyof typeof config.regexes,
             columnNumber: column,
             lineNumber: row,
             canAutoMigrate:
@@ -87,6 +77,7 @@ function getStatus(
     let legacyMatch: RegExpExecArray | null;
     while ((legacyMatch = legacyRegex.exec(fileSrc)) !== null) {
       const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
+
       StatusStore.add({
         isLegacy: true,
         type: "component",
@@ -98,20 +89,12 @@ function getStatus(
       });
     }
 
-    for (const [newTokenName, tailwindName] of Object.entries(newTokens)) {
-      const newCSSVariable = `--ax-${newTokenName}`;
-
-      const regexes = getFrameworkRegexes({
-        legacy: false,
-        token: newCSSVariable,
-        twString: tailwindName,
-      });
-
+    for (const [newTokenName, config] of Object.entries(newTokens)) {
       if (!getTokenRegex(newTokenName, "css").test(fileSrc)) {
         continue;
       }
 
-      for (const [regexKey, regex] of Object.entries(regexes)) {
+      for (const [regexKey, regex] of Object.entries(config.regexes)) {
         if (!regex) {
           continue;
         }
@@ -121,7 +104,7 @@ function getStatus(
 
           StatusStore.add({
             isLegacy: false,
-            type: regexKey as keyof typeof regexes,
+            type: regexKey as keyof typeof config.regexes,
             columnNumber: column,
             lineNumber: row,
             fileName,
@@ -144,6 +127,11 @@ function getStatus(
 
   StatusStore.printStatus("summary");
   StatusStore.printStatusForAll();
+
+  console.info(
+    "Performance: Total time",
+    (performance.now() - start).toFixed(1),
+  );
 
   return StatusStore;
 }
