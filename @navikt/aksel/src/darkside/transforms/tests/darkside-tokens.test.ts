@@ -41,3 +41,12 @@ for (const fixture of ["css-complete"]) {
     extension: "js",
   });
 }
+
+/* Tailwind transforms */
+for (const fixture of ["tw-complete"]) {
+  check(__dirname, {
+    fixture,
+    migration: "darkside-tokens-tailwind",
+    extension: "css",
+  });
+}

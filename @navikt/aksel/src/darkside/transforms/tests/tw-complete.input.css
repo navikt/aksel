@@ -1,0 +1,4 @@
+.test {
+  @apply bg-surface-subtle via-surface-transparent;
+  @apply font-small font-bold font-font-family leading-heading-small;
+}
