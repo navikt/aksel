@@ -2,6 +2,8 @@
 import { UpdatedTokensData } from "../codemod/transforms/darkside/darkside.tokens";
 import { translateToken } from "../codemod/utils/translate-token";
 
+/* (?=\s|$|[^\w-]) */
+/* Test batching regex-check */
 const createTwRegex = (token: string) =>
   new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "g");
 
