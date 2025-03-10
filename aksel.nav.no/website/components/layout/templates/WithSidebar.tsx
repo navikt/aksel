@@ -6,7 +6,7 @@ import Sidebar from "@/layout/sidebar/Sidebar";
 import { urlFor } from "@/sanity/interface";
 import { SidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
-import TableOfContents from "@/web/toc/TableOfContents";
+import { TableOfContents } from "@/web/toc/TableOfContents";
 
 export const WithSidebar = ({
   children,
