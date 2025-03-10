@@ -1,9 +1,9 @@
 import chalk from "chalk";
 import { Command } from "commander";
+import { validateGit } from "../codemod/validation.js";
 // import figlet from "figlet";
 // import { getMigrationString } from "./migrations.js";
 import { runTooling } from "./run-tooling.js";
-import { validateGit } from "./validation.js";
 
 const program = new Command();
 
