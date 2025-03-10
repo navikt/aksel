@@ -26,10 +26,16 @@ export default function transformer(file: FileInfo) {
       const index = beforeSplit.indexOf(match.trim());
 
       if (index >= 0) {
-        const withPrefix = match.startsWith(":");
+        const withPrefix = match.trim().startsWith(":");
+
+        const addSpace = match.startsWith(" ");
+
+        const replacementToken = afterSplit[index];
         src = src.replace(
           createSingleTwRegex(match),
-          withPrefix ? `:${afterSplit[index]}` : afterSplit[index],
+          withPrefix
+            ? `:${replacementToken}`
+            : `${addSpace ? " " : ""}${replacementToken}`,
         );
       }
     }
