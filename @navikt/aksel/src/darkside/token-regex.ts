@@ -1,25 +1,24 @@
-/* eslint-disable no-useless-escape */
 import { UpdatedTokensData } from "../codemod/transforms/darkside/darkside.tokens";
 import { translateToken } from "../codemod/utils/translate-token";
 
 /* (?=\s|$|[^\w-]) */
 /* Test batching regex-check */
 const createTwRegex = (token: string) =>
-  new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "gm");
+  new RegExp(`(?<!:)(\\s|^)?${token}(?=\\s|$)`, "gm");
 
 const createCompositeTwRegex = (tokens: string[]) =>
   new RegExp(
-    `/(?<!:)(\s|^)?(${tokens.join("|")}|${tokens
+    `/(?<!:)(\\s|^)?(${tokens.join("|")}|${tokens
       .map((t) => `:${t}`)
-      .join("|")})(?=\s|$|[^\w-])/gm`,
+      .join("|")})(?=\\s|$|[^\\w-])/gm`,
     "gm",
   );
 
 const createTwRegexWithPrefix = (token: string) =>
-  new RegExp(`(?<!:)(\s|^)?:${token}(?=\s|$)`, "gm");
+  new RegExp(`(?<!:)(\\s|^)?:${token}(?=\\s|$)`, "gm");
 
 const createTwRegexForBreakpoints = (token: string) =>
-  new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "gm");
+  new RegExp(`(?<!:)(?<=\\s|^)${token}:(?=\\w)`, "gm");
 
 function generateLegacyRegexes(token: string, config: UpdatedTokensData) {
   const regexes: Record<"css" | "scss" | "less" | "js" | "tailwind", RegExp[]> =
