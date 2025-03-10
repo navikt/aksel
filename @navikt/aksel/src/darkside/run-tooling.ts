@@ -38,6 +38,7 @@ export async function runTooling(
   getStatus(filepaths);
 
   while (task !== "exit") {
+    console.info("\n");
     task = await getNextTask();
 
     if (task === "status") {
