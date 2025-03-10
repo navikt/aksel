@@ -4,7 +4,7 @@ import {
   newTokens,
   updatedTokens,
 } from "../../codemod/transforms/darkside/darkside.tokens";
-import { StatusDataT, TokenStatus } from "../config/TokenStatus";
+import { TokenStatus } from "../config/TokenStatus";
 import { getWordPositionInFile } from "../config/findWordPosition";
 import { legacyComponentTokens } from "../config/legacyComponentTokens";
 import { getFrameworkRegexes, getTokenRegex } from "../config/tokenRegex";
@@ -18,7 +18,6 @@ function getStatus(
   files: string[],
   action: "no-print" | "print" = "print",
 ): TokenStatus {
-  const totalStart = performance.now();
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -37,6 +36,9 @@ function getStatus(
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
 
+    /**
+     * We first parse trough all legacy tokens (--a-) prefixed tokens
+     */
     for (const [legacyToken, config] of Object.entries(updatedTokens)) {
       const legacyCSSVariable = `--a-${legacyToken}`;
 
@@ -57,7 +59,6 @@ function getStatus(
 
         let match: RegExpExecArray | null;
 
-        /* TODO: Handle tw-regexes with : */
         while ((match = regex.exec(fileSrc))) {
           const { row, column } = getWordPositionInFile(fileSrc, match.index);
 
@@ -140,70 +141,10 @@ function getStatus(
 
   progressBar.stop();
 
-  showStatusResults(
-    {
-      legacy: [].concat(
-        ...Object.values(StatusStore.status).map((_status) => _status.legacy),
-      ),
-      updated: [].concat(
-        ...Object.values(StatusStore.status).map((_status) => _status.updated),
-      ),
-    },
-    "Total",
-  );
-
-  Object.keys(StatusStore.status).forEach((type) => {
-    showStatusResults(StatusStore.status[type], type.toUpperCase());
-  });
-
-  console.info("\n");
-
-  const totalEnd = performance.now();
-
-  console.info(
-    `Total execution time is ${(totalEnd - totalStart).toFixed(2)} ms`,
-  );
+  StatusStore.printStatus("summary");
+  StatusStore.printStatusForAll();
 
   return StatusStore;
-}
-
-/**
- * Show the results of the status
- */
-function showStatusResults(statusDataObj: StatusDataT, type: string) {
-  const multibar = new ProgressBar.MultiBar(
-    {
-      clearOnComplete: false,
-      hideCursor: true,
-      format: "{bar} {type} | {count} | {value}/{total}",
-    },
-    ProgressBar.Presets.shades_grey,
-  );
-
-  const totalTokens =
-    statusDataObj.legacy.length + statusDataObj.updated.length;
-
-  const completedPercentage = (
-    totalTokens === 0 ? 100 : (statusDataObj.updated.length / totalTokens) * 100
-  ).toFixed(0);
-
-  console.info(`\n${type} (${completedPercentage}%)`);
-
-  multibar.create(totalTokens, statusDataObj.updated.length, {
-    type: "Tokens left to update",
-    count: statusDataObj.legacy.length,
-  });
-
-  const canBeAutomigratedN = statusDataObj.legacy.filter(
-    (legacy) => legacy.canAutoMigrate,
-  ).length;
-
-  multibar.create(statusDataObj.legacy.length, canBeAutomigratedN, {
-    type: "Can be auto-migrated ",
-    count: canBeAutomigratedN,
-  });
-
-  multibar.stop();
 }
 
 export { getStatus };

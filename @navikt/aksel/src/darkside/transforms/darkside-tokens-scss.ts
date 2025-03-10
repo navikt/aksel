@@ -1,7 +1,7 @@
 import type { FileInfo } from "jscodeshift";
 import { updatedTokens } from "../../codemod/transforms/darkside/darkside.tokens";
 import { translateToken } from "../../codemod/utils/translate-token";
-import { getTokenRegex } from "../token-regex";
+import { getTokenRegex } from "../config/tokenRegex";
 
 export default function transformer(file: FileInfo) {
   let src = file.source;

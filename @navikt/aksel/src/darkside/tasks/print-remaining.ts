@@ -15,6 +15,11 @@ function printRemaining(files: string[]) {
       );
     });
 
+    if (fileLinks.length === 0) {
+      console.info("Nothing to update.");
+      console.groupEnd();
+    }
+
     // Ensure every string is unique
     const uniqueFileLinks = Array.from(new Set(fileLinks));
 

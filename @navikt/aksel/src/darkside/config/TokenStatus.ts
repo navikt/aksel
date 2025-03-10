@@ -1,3 +1,5 @@
+import ProgressBar from "cli-progress";
+
 type TokenDataT = {
   name: string;
   canAutoMigrate?: boolean;
@@ -69,6 +71,66 @@ class TokenStatus {
         this.status.tailwind[statusType].push(hit);
         break;
     }
+  }
+
+  printStatusForAll() {
+    Object.keys(this.status).forEach((type) => {
+      this.printStatus(type as keyof StatusT);
+    });
+
+    console.info("\n");
+  }
+
+  printStatus(type: keyof StatusT | "summary") {
+    let statusDataObj: StatusDataT;
+    if (type === "summary") {
+      statusDataObj = {
+        legacy: [].concat(
+          ...Object.values(this.status).map((_status) => _status.legacy),
+        ),
+        updated: [].concat(
+          ...Object.values(this.status).map((_status) => _status.updated),
+        ),
+      };
+    } else {
+      statusDataObj = this.status[type];
+    }
+
+    const multibar = new ProgressBar.MultiBar(
+      {
+        clearOnComplete: false,
+        hideCursor: true,
+        format: "{bar} {type} | {count} | {value}/{total}",
+      },
+      ProgressBar.Presets.shades_grey,
+    );
+
+    const totalTokens =
+      statusDataObj.legacy.length + statusDataObj.updated.length;
+
+    const completedPercentage = (
+      totalTokens === 0
+        ? 100
+        : (statusDataObj.updated.length / totalTokens) * 100
+    ).toFixed(0);
+
+    console.info(`\n${type.toUpperCase()} (${completedPercentage}%)`);
+
+    multibar.create(totalTokens, statusDataObj.updated.length, {
+      type: "Tokens left to update",
+      count: statusDataObj.legacy.length,
+    });
+
+    const canBeAutomigratedN = statusDataObj.legacy.filter(
+      (legacy) => legacy.canAutoMigrate,
+    ).length;
+
+    multibar.create(statusDataObj.legacy.length, canBeAutomigratedN, {
+      type: "Can be auto-migrated ",
+      count: canBeAutomigratedN,
+    });
+
+    multibar.stop();
   }
 }
 
