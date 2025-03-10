@@ -55,7 +55,7 @@ export async function runTooling(
     }
 
     try {
-      const updatedStatus = getStatus(filepaths).status;
+      const updatedStatus = getStatus(filepaths, "no-print").status;
 
       const scopedFiles = filepaths.filter((f) => {
         switch (task) {
