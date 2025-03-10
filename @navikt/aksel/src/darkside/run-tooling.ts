@@ -85,11 +85,10 @@ export async function runTooling(
         }
       });
 
-      runCodeshift(task, scopedFiles, {
+      await runCodeshift(task, scopedFiles, {
         dryRun: options.dryRun,
         force: options.force,
       });
-      process.exit(1);
     } catch (error) {
       program.error(chalk.red("Error:", error.message));
     }
