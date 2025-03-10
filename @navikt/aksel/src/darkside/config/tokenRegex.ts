@@ -1,7 +1,5 @@
 import { translateToken } from "../../codemod/utils/translate-token";
 
-/* TODO: Handle word-boundaries for non tailwind-tokens */
-
 const createTwRegexForBreakpoints = (token: string) =>
   new RegExp(`(?<!:)(?<=\\s|^)${token}:(?=\\w)`, "gm");
 
@@ -50,13 +48,22 @@ function getTokenRegex(
 ) {
   switch (format) {
     case "css":
-      return new RegExp(`(${variable})`, "gm");
+      return new RegExp(`(\\s|^)?(${variable})(?=\\s|$|[^\\w-])`, "gm");
     case "scss":
-      return new RegExp(`(\\${translateToken(variable, "scss")})`, "gm");
+      return new RegExp(
+        `(\\s|^)?(\\${translateToken(variable, "scss")})(?=\\s|$|[^\\w-])`,
+        "gm",
+      );
     case "less":
-      return new RegExp(`(${translateToken(variable, "less")})`, "gm");
+      return new RegExp(
+        `(\\s|^)?(${translateToken(variable, "less")})(?=\\s|$|[^\\w-])`,
+        "gm",
+      );
     case "js":
-      return new RegExp(`(${translateToken(variable, "js")})`, "gm");
+      return new RegExp(
+        `(\\s|^)?(${translateToken(variable, "js")})(?=\\s|$|[^\\w-])`,
+        "gm",
+      );
     default:
       console.error("Invalid format");
   }
