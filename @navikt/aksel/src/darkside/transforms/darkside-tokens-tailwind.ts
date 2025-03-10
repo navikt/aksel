@@ -1,19 +1,37 @@
 import type { FileInfo } from "jscodeshift";
-import { updatedTokens } from "../../codemod/transforms/darkside/darkside.tokens";
-import { translateToken } from "../../codemod/utils/translate-token";
-import { getTokenRegex } from "../config/tokenRegex";
+import { updatedTokens } from "../config/darkside.tokens";
+import { createSingleTwRegex } from "../config/tokenRegex";
 
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
-  for (const [oldToken, config] of Object.entries(updatedTokens)) {
-    const oldCSSVar = `--a-${oldToken}`;
+  for (const [name, config] of Object.entries(updatedTokens)) {
+    if (!config.twOld || !config.twNew) {
+      continue;
+    }
 
-    if (config.replacement.length > 0) {
-      src = src.replace(
-        getTokenRegex(oldCSSVar, "less"),
-        translateToken(`--ax-${config.replacement}`, "less"),
-      );
+    const isBreakpoint = name.includes("breakpoint");
+
+    if (isBreakpoint) {
+      src = src.replace(config.regexes.tailwind, `${config.twNew}:`);
+      continue;
+    }
+
+    const beforeSplit = config.twOld.split(",");
+    const afterSplit = config.twNew.split(",");
+
+    const matches = src.match(config.regexes.tailwind) || [];
+
+    for (const match of matches) {
+      const index = beforeSplit.indexOf(match.trim());
+
+      if (index >= 0) {
+        const withPrefix = match.startsWith(":");
+        src = src.replace(
+          createSingleTwRegex(match),
+          withPrefix ? `:${afterSplit[index]}` : afterSplit[index],
+        );
+      }
     }
   }
 

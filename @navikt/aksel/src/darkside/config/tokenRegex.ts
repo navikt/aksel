@@ -78,4 +78,13 @@ function createCompositeTwRegex(tokens: string[]) {
   );
 }
 
-export { createCompositeTwRegex, getFrameworkRegexes, getTokenRegex };
+function createSingleTwRegex(token: string) {
+  return new RegExp(`(?<!:)(\\s|^)?(${token})(?=\\s|$|[^\\w-])`, "gm");
+}
+
+export {
+  createCompositeTwRegex,
+  createSingleTwRegex,
+  getFrameworkRegexes,
+  getTokenRegex,
+};
