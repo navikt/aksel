@@ -5,9 +5,9 @@ import {
   updatedTokens,
 } from "../../codemod/transforms/darkside/darkside.tokens";
 import { StatusDataT, TokenStatus } from "../config/TokenStatus";
-import { legacyComponentTokens } from "../config/legacy-component-tokens";
-import { getLineNumberFromIndexSplit } from "../config/lineNumberFromIndex";
-import { getFrameworkRegexes, getTokenRegex } from "../token-regex";
+import { getWordPositionInFile } from "../config/findWordPosition";
+import { legacyComponentTokens } from "../config/legacyComponentTokens";
+import { getFrameworkRegexes, getTokenRegex } from "../config/tokenRegex";
 
 const StatusStore = new TokenStatus();
 
@@ -59,12 +59,13 @@ function getStatus(
 
         /* TODO: Handle tw-regexes with : */
         while ((match = regex.exec(fileSrc))) {
-          const columnNumber = match.index + 1;
+          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+
           StatusStore.add({
             isLegacy: true,
             type: regexKey as keyof typeof regexes,
-            columnNumber,
-            lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
+            columnNumber: column,
+            lineNumber: row,
             canAutoMigrate:
               regexKey === "tailwind"
                 ? !!config.twNew
@@ -83,12 +84,12 @@ function getStatus(
 
     let legacyMatch: RegExpExecArray | null;
     while ((legacyMatch = legacyRegex.exec(fileSrc)) !== null) {
-      const columnNumber = legacyMatch.index + 1;
+      const { row, column } = getWordPositionInFile(fileSrc, legacyMatch.index);
       StatusStore.add({
         isLegacy: true,
         type: "component",
-        columnNumber,
-        lineNumber: getLineNumberFromIndexSplit(fileSrc, legacyMatch.index) + 1,
+        columnNumber: column,
+        lineNumber: row,
         canAutoMigrate: false,
         fileName,
         name: legacyMatch[0],
@@ -114,12 +115,13 @@ function getStatus(
         }
         let match: RegExpExecArray | null;
         while ((match = regex.exec(fileSrc))) {
-          const columnNumber = match.index + 1;
+          const { row, column } = getWordPositionInFile(fileSrc, match.index);
+
           StatusStore.add({
             isLegacy: false,
             type: regexKey as keyof typeof regexes,
-            columnNumber,
-            lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
+            columnNumber: column,
+            lineNumber: row,
             fileName,
             name: match[0],
           });

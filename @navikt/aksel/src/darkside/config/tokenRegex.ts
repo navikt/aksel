@@ -1,4 +1,6 @@
-import { translateToken } from "../codemod/utils/translate-token";
+import { translateToken } from "../../codemod/utils/translate-token";
+
+/* TODO: Handle word-boundaries for non tailwind-tokens */
 
 const createTwRegexForBreakpoints = (token: string) =>
   new RegExp(`(?<!:)(?<=\\s|^)${token}:(?=\\w)`, "gm");

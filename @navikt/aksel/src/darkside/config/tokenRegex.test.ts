@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { createCompositeTwRegex } from "./token-regex";
+import { createCompositeTwRegex } from "./tokenRegex";
 
 describe("createCompositeTwRegex", () => {
   test("should generate a regex that matches simple tokens", () => {

@@ -4322,13 +4322,13 @@ __metadata:
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
     "@navikt/ds-css": "npm:^7.17.1"
+    "@types/cli-progress": "npm:3.11.6"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"
     cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
-    esbuild: "npm:^0.24.0"
     fast-glob: "npm:3.2.11"
     figlet: "npm:1.6.0"
     is-git-clean: "npm:1.1.0"
@@ -7368,6 +7368,15 @@ __metadata:
     "@types/node": "npm:*"
     source-map: "npm:^0.6.0"
   checksum: 10/385337a881c7870664d8987f12b9c814d835104dcf5f1737b74ab759ca68424ce93636cbff73ea9c41290c3dc2a92a4cc6246869bd9982255cfa28dcc2ccec93
+  languageName: node
+  linkType: hard
+
+"@types/cli-progress@npm:3.11.6":
+  version: 3.11.6
+  resolution: "@types/cli-progress@npm:3.11.6"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/0209929b252e61260cd9212ac220dfff97471cfe345323f35b37a65a83fcfa3117d129fea08824e2bd9841075db74ac04a8cc63d0d474493ef810d30e217bf7e
   languageName: node
   linkType: hard
 
