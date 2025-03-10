@@ -53,9 +53,7 @@ function getStatus(
       const regexes = generateLegacyRegexes(legacyCSSVariable, config);
 
       for (const [regexKey, regexList] of Object.entries(regexes)) {
-        const probeRegex = getTokenRegex(legacyToken, "css");
-
-        if (!probeRegex.test(line)) {
+        if (!getTokenRegex(legacyToken, "css").test(line)) {
           continue;
         }
 
@@ -85,9 +83,7 @@ function getStatus(
 
     const legacyLoopStartTime = performance.now();
 
-    const probeRegex = getTokenRegex("--ac-", "css");
-
-    if (probeRegex.test(line)) {
+    if (getTokenRegex("--ac-", "css").test(line)) {
       for (const legacyComponentToken of legacyComponentTokens) {
         const regex = new RegExp(`(${legacyComponentToken}:)`, "g");
 
@@ -115,9 +111,7 @@ function getStatus(
       const newCSSVariable = `--ax-${newTokenName}`;
       const regexes = generateNewRegexes(newCSSVariable, tailwindName);
 
-      const probeRegex = getTokenRegex(newTokenName, "css");
-
-      if (!probeRegex.test(line)) {
+      if (!getTokenRegex(newTokenName, "css").test(line)) {
         continue;
       }
 
