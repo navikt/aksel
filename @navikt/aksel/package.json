@@ -32,7 +32,7 @@
     "@navikt/ds-css": "^7.17.1",
     "axios": "1.7.4",
     "chalk": "4.1.0",
-    "clipboardy": "^2.3.0",
+    "clipboardy": "^4.0.0",
     "commander": "10.0.1",
     "enquirer": "^2.3.6",
     "fast-glob": "3.2.11",
