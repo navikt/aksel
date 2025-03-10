@@ -63,6 +63,7 @@ type MenuLinkProps = {
   href: string;
   id?: string;
   onClick?: () => void;
+  source: "sidebar" | "toc";
 };
 
 export function MenuLink({
@@ -71,6 +72,7 @@ export function MenuLink({
   selected,
   id,
   onClick,
+  source,
 }: MenuLinkProps) {
   const ctx = useContext(MenuContext);
 
@@ -91,7 +93,7 @@ export function MenuLink({
         href={href}
         onClick={() => onClick?.()}
         data-umami-event="navigere"
-        data-umami-event-kilde="sidebar"
+        data-umami-event-kilde={source}
         className={cl(
           styles.menuListItem,
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
