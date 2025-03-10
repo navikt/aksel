@@ -6,9 +6,9 @@ describe("Darkside codemods", () => {
     Object.entries(updatedTokens).forEach(([oldToken, config]) => {
       if (config.replacement.length > 1) {
         expect(
-          newTokens,
+          config.replacement in newTokens,
           `${oldToken} has valid replacement: ${config.replacement}`,
-        ).toContain(config.replacement);
+        ).toBeTruthy();
       }
     });
   });
