@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.17.1
+
+### Patch Changes
+
+- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+
 ## 7.17.0
 
 ## 7.16.1

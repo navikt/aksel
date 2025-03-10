@@ -15,7 +15,6 @@ import {
 } from "@navikt/ds-react";
 import { AuthUser, UserStateT } from "@/auth/auth.types";
 import { useAuth } from "@/auth/useAuth";
-import { AmplitudeEvents, amplitude } from "@/logging";
 import { SlackFeedbackResponse } from "@/slack";
 import { useSanityData } from "../SanityDataProvider";
 import styles from "./Feedback.module.css";
@@ -61,34 +60,34 @@ export const FeedbackForm = ({ user }: { user: AuthUser }) => {
     })
       .then((res) => res.json())
       .then((res: SlackFeedbackResponse) => {
-        const feedbackMetadata = {
-          side: window.location.pathname,
-          length: feedback.length,
-        };
         if (!res.ok) {
           setAPIError(res.error);
           setState("error");
-          amplitude.track(AmplitudeEvents.slackfeedback, {
-            result: "error",
-            ...feedbackMetadata,
-          });
+
+          window.umami &&
+            umami.track("skjema validering feilet", {
+              skjemanavn: "slack-feedback",
+              skjemaId: sanityDocumentId,
+            });
         } else {
           setFormError(null);
           setState("feedbackSent");
-          amplitude.track(AmplitudeEvents.slackfeedback, {
-            result: "success",
-            ...feedbackMetadata,
-          });
+
+          window.umami &&
+            umami.track("skjema fullfort", {
+              skjemanavn: "slack-feedback",
+              skjemaId: sanityDocumentId,
+            });
         }
       })
       .catch(() => {
         setAPIError("unknownError");
         setState("error");
-        amplitude.track(AmplitudeEvents.slackfeedback, {
-          result: "error",
-          side: window.location.pathname,
-          length: feedback.length,
-        });
+        window.umami &&
+          umami.track("skjema validering feilet", {
+            skjemanavn: "slack-feedback",
+            skjemaId: sanityDocumentId,
+          });
       });
   };
 

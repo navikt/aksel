@@ -4,6 +4,7 @@ import {
   EyeIcon,
   FileTextIcon,
   ImageIcon,
+  PieChartIcon,
 } from "@navikt/aksel-icons";
 import { SANITY_API_VERSION } from "@/sanity/config";
 
@@ -73,6 +74,11 @@ export function adminStructure(S: StructureBuilder) {
             .schemaType(`skrivehjelp`)
             .icon(FileTextIcon)
             .id(`skrivehjelp`),
+          S.documentListItem()
+            .title(`Cookie banner`)
+            .schemaType(`cookie_tracker`)
+            .icon(PieChartIcon)
+            .id(`cookie_tracker`),
           S.documentListItem()
             .title(`Publiseringsflyt`)
             .schemaType(`publication_flow`)

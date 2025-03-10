@@ -8,10 +8,10 @@ type AkselSearchButtonProps = {
 export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
   return (
     <>
-      <Show above="sm" asChild>
+      <Show above="xl" asChild>
         <Button
           variant="primary"
-          className="h-11 bg-deepblue-600 hover:bg-deepblue-700"
+          className="h-11 whitespace-nowrap bg-deepblue-600 hover:bg-deepblue-700"
           aria-keyshortcuts="Control+b"
           icon={
             <MagnifyingGlassIcon
@@ -23,10 +23,10 @@ export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
           iconPosition="left"
           onClick={onClick}
         >
-          Søk
+          Søk <span className="text-medium font-normal">(ctrl + b)</span>
         </Button>
       </Show>
-      <Hide above="sm" asChild>
+      <Hide above="xl" asChild>
         <Button
           variant="primary"
           className="h-11 bg-deepblue-600 hover:bg-deepblue-700"

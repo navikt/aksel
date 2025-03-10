@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Box, HStack, Page, Show, Spacer } from "@navikt/ds-react";
 import AkselLogo from "@/assets/Logo";
-import { amplitudeLogNavigation } from "@/logging";
 import { AkselSearchButton } from "@/web/search/parts/SearchButton";
 import { Hamburger } from "./parts/Hamburger";
 import HeaderLink from "./parts/HeaderLink";
@@ -38,12 +37,8 @@ const Header = ({
           <Link
             href="/"
             passHref
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "header",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            data-umami-event="navigere"
+            data-umami-event-kilde="header"
             className="mx-4 grid h-11 place-items-center rounded px-2 focus:outline-none focus-visible:shadow-focus sm:mr-6"
           >
             <AkselLogo className="text-deepblue-800" />

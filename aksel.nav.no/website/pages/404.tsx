@@ -11,13 +11,10 @@ import {
 } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
-import { AmplitudeEvents, amplitude } from "@/logging";
 
 export default function NotFound() {
   useEffect(() => {
-    amplitude.track(AmplitudeEvents.notfound, {
-      side: window.location.pathname,
-    });
+    window.umami && umami.track("404", { url: window.location.pathname });
   }, []);
 
   return (

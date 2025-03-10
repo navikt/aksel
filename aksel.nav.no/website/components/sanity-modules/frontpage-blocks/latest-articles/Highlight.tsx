@@ -3,7 +3,6 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { BodyLong, BodyShort, Heading, Link } from "@navikt/ds-react";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { getAuthors, getImage } from "@/utils";
 import { ArticleT } from "./Card";
@@ -93,12 +92,8 @@ export const Highlight = ({
         <Heading size="large" level="3">
           <Link
             as={NextLink}
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "artikkel-kort",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            data-umami-event="navigere"
+            data-umami-event-kilde="global sok"
             href={`/${article.slug.current}`}
             className="mb-5 mt-2 text-text-default underline hover:no-underline"
           >

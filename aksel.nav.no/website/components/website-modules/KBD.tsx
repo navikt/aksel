@@ -10,11 +10,6 @@ const KBD = (props: React.HTMLAttributes<HTMLElement>) => (
     )}
   >
     <span className="kbd">{props.children}</span>
-    <style jsx>{`
-      .kbd {
-        text-shadow: 0 1px 0px var(--a-grayalpha-200);
-      }
-    `}</style>
   </kbd>
 );
 

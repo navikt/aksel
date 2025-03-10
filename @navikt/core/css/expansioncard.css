@@ -172,6 +172,9 @@
   height: 100%;
   width: 100%;
   cursor: pointer;
+
+  /* Avoid @media print from styling after-element */
+  opacity: 0;
 }
 
 /*************************
