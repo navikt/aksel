@@ -7,11 +7,7 @@ import {
 import { StatusDataT, TokenStatus } from "../config/TokenStatus";
 import { legacyComponentTokens } from "../config/legacy-component-tokens";
 import { getLineNumberFromIndexSplit } from "../config/lineNumberFromIndex";
-import {
-  generateLegacyRegexes,
-  generateNewRegexes,
-  getTokenRegex,
-} from "../token-regex";
+import { getFrameworkRegexes, getTokenRegex } from "../token-regex";
 
 const StatusStore = new TokenStatus();
 
@@ -41,61 +37,38 @@ function getStatus(
   files.forEach((fileName, index) => {
     const fileSrc = fs.readFileSync(fileName, "utf8");
 
-    // const lines = fileSrc.split("\n");
-
-    const line = fileSrc;
-
-    const updatedLoopStartTime = performance.now();
     for (const [legacyToken, config] of Object.entries(updatedTokens)) {
       const legacyCSSVariable = `--a-${legacyToken}`;
-      let canAutoMigrate = config.replacement.length > 0;
 
-      const regexes = generateLegacyRegexes(legacyCSSVariable, config);
+      const regexes = getFrameworkRegexes({
+        legacy: true,
+        token: legacyCSSVariable,
+        twString: config.twOld,
+      });
 
-      for (const [regexKey, regexList] of Object.entries(regexes)) {
-        if (!getTokenRegex(legacyToken, "css").test(line)) {
+      if (!getTokenRegex(legacyToken, "css").test(fileSrc)) {
+        continue;
+      }
+
+      for (const [regexKey, regex] of Object.entries(regexes)) {
+        if (!regex) {
           continue;
         }
 
-        if (regexKey === "tailwind") {
-          canAutoMigrate = !!config.twNew;
-        }
-
-        for (const regex of regexList) {
-          let match: RegExpExecArray | null;
-
-          while ((match = regex.exec(line)) !== null) {
-            const columnNumber = match.index + 1;
-            StatusStore.add({
-              isLegacy: true,
-              type: regexKey as keyof typeof regexes,
-              columnNumber,
-              lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
-              canAutoMigrate,
-              fileName,
-              name: match[0],
-            });
-          }
-        }
-      }
-    }
-    const updatedLoopEndTime = performance.now();
-
-    const legacyLoopStartTime = performance.now();
-
-    if (getTokenRegex("--ac-", "css").test(line)) {
-      for (const legacyComponentToken of legacyComponentTokens) {
-        const regex = new RegExp(`(${legacyComponentToken}:)`, "g");
-
         let match: RegExpExecArray | null;
-        while ((match = regex.exec(line)) !== null) {
+
+        /* TODO: Handle tw-regexes with : */
+        while ((match = regex.exec(fileSrc))) {
           const columnNumber = match.index + 1;
           StatusStore.add({
             isLegacy: true,
-            type: "component",
+            type: regexKey as keyof typeof regexes,
             columnNumber,
             lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
-            canAutoMigrate: false,
+            canAutoMigrate:
+              regexKey === "tailwind"
+                ? !!config.twNew
+                : config.replacement.length > 0,
             fileName,
             name: match[0],
           });
@@ -103,54 +76,56 @@ function getStatus(
       }
     }
 
-    const legacyLoopEndTime = performance.now();
+    const legacyRegex = new RegExp(
+      `(${legacyComponentTokens.map((t) => `${t}:`).join("|")})`,
+      "gm",
+    );
 
-    const newTokensLoopStartTime = performance.now();
+    let legacyMatch: RegExpExecArray | null;
+    while ((legacyMatch = legacyRegex.exec(fileSrc)) !== null) {
+      const columnNumber = legacyMatch.index + 1;
+      StatusStore.add({
+        isLegacy: true,
+        type: "component",
+        columnNumber,
+        lineNumber: getLineNumberFromIndexSplit(fileSrc, legacyMatch.index) + 1,
+        canAutoMigrate: false,
+        fileName,
+        name: legacyMatch[0],
+      });
+    }
 
     for (const [newTokenName, tailwindName] of Object.entries(newTokens)) {
       const newCSSVariable = `--ax-${newTokenName}`;
-      const regexes = generateNewRegexes(newCSSVariable, tailwindName);
 
-      if (!getTokenRegex(newTokenName, "css").test(line)) {
+      const regexes = getFrameworkRegexes({
+        legacy: false,
+        token: newCSSVariable,
+        twString: tailwindName,
+      });
+
+      if (!getTokenRegex(newTokenName, "css").test(fileSrc)) {
         continue;
       }
 
-      for (const [regexKey, regexList] of Object.entries(regexes)) {
-        for (const regex of regexList) {
-          let match: RegExpExecArray | null;
-          while ((match = regex.exec(line)) !== null) {
-            const columnNumber = match.index + 1;
-            StatusStore.add({
-              isLegacy: false,
-              type: regexKey as keyof typeof regexes,
-              columnNumber,
-              lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
-              fileName,
-              name: match[0],
-            });
-          }
+      for (const [regexKey, regex] of Object.entries(regexes)) {
+        if (!regex) {
+          continue;
+        }
+        let match: RegExpExecArray | null;
+        while ((match = regex.exec(fileSrc))) {
+          const columnNumber = match.index + 1;
+          StatusStore.add({
+            isLegacy: false,
+            type: regexKey as keyof typeof regexes,
+            columnNumber,
+            lineNumber: getLineNumberFromIndexSplit(fileSrc, match.index) + 1,
+            fileName,
+            name: match[0],
+          });
         }
       }
     }
-    const newTokensLoopEndTime = performance.now();
-
-    console.info(
-      `\nUpdated tokens loop execution time: ${(
-        updatedLoopEndTime - updatedLoopStartTime
-      ).toFixed(2)} ms`,
-    );
-
-    console.info(
-      `Legacy tokens loop execution time: ${(
-        legacyLoopEndTime - legacyLoopStartTime
-      ).toFixed(2)} ms`,
-    );
-
-    console.info(
-      `New tokens loop execution time: ${(
-        newTokensLoopEndTime - newTokensLoopStartTime
-      ).toFixed(2)} ms`,
-    );
 
     if (action === "print") {
       progressBar.update(index + 1, { fileName });

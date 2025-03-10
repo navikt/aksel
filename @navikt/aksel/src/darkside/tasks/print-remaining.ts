@@ -3,7 +3,7 @@ import { getStatus } from "./status";
 
 function printRemaining(files: string[]) {
   process.stdout.write("\nAnalyzing...");
-  const statusObj = getStatus(files, "no-print");
+  const statusObj = getStatus(files, "no-print").status;
 
   Object.entries(statusObj).forEach(([tokenType, data]) => {
     console.group(`\n${tokenType.toUpperCase()}:`);
@@ -11,7 +11,7 @@ function printRemaining(files: string[]) {
 
     data.legacy.forEach((tokenData) => {
       fileLinks.push(
-        `${tokenData.fileName}:${tokenData.lineNumber}:${tokenData.columnNumber}`,
+        `${tokenData.name}:${tokenData.fileName}:${tokenData.lineNumber}:${tokenData.columnNumber}`,
       );
     });
 
@@ -34,10 +34,12 @@ function printRemaining(files: string[]) {
 
     // Print the unique and sorted fileLinks as clickable links with full path
     uniqueFileLinks.forEach((link) => {
-      const [fileName, lineNumber, columnNumber] = link.split(":");
+      const [tokenName, fileName, lineNumber, columnNumber] = link.split(":");
       const fullPath = path.resolve(process.cwd(), fileName);
 
-      console.info(`file://${fullPath}:${lineNumber}:${columnNumber}`);
+      console.info(
+        `${tokenName}: file://${fullPath}:${lineNumber}:${columnNumber}`,
+      );
     });
 
     console.groupEnd();
