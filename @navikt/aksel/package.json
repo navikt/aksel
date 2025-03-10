@@ -30,7 +30,7 @@
   "homepage": "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
   "dependencies": {
     "@navikt/ds-css": "^7.17.1",
-    "axios": "1.7.4",
+    "axios": "1.8.2",
     "chalk": "4.1.0",
     "clipboardy": "^2.3.0",
     "commander": "10.0.1",
