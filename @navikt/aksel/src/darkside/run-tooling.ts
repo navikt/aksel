@@ -52,7 +52,7 @@ const TASK_MENU = {
   message: "Task",
   initial: "status",
   choices: [
-    { message: "Update status", name: "status" },
+    { message: "Check status", name: "status" },
     { message: "Print remaining tokens", name: "print-remaining-tokens" },
     { message: "Migrate CSS tokens", name: "css-tokens" },
     { message: "Migrate Scss tokens", name: "scss-tokens" },
@@ -77,13 +77,19 @@ export async function runTooling(
     ignore: GLOB_IGNORE_PATTERNS,
   });
 
+  if (options.dryRun) {
+    console.info(
+      chalk.yellow("Running in dry-run mode, no changes will be made"),
+    );
+  }
+
   // Show initial status
   getStatus(filepaths);
 
   // Task execution loop
   let task: TaskName;
   while ((task = await getNextTask()) !== "exit") {
-    console.info("\n");
+    console.info("\n\n");
 
     try {
       await executeTask(task, filepaths, options, program);
