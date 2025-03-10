@@ -15,7 +15,6 @@ function getStatus(
   files: string[],
   action: "no-print" | "print" = "print",
 ): TokenStatus {
-  const start = performance.now();
   const progressBar = new ProgressBar.SingleBar(
     {
       clearOnComplete: true,
@@ -127,11 +126,6 @@ function getStatus(
 
   StatusStore.printStatus("summary");
   StatusStore.printStatusForAll();
-
-  console.info(
-    "Performance: Total time",
-    (performance.now() - start).toFixed(1),
-  );
 
   return StatusStore;
 }

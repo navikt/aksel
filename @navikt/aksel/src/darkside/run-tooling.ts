@@ -84,9 +84,6 @@ export async function runTooling(
             return false;
         }
       });
-      console.info(
-        `\nRunning codeshift: Total files: ${scopedFiles.length}, Scoped files: ${scopedFiles.length}\n`,
-      );
 
       runCodeshift(task, scopedFiles, {
         dryRun: options.dryRun,
