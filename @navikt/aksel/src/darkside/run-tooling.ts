@@ -84,7 +84,7 @@ export async function runTooling(
         }
       });
       console.info(
-        `Running codeshift: Total files: ${scopedFiles.length}, Scoped files: ${scopedFiles.length}`,
+        `\nRunning codeshift: Total files: ${scopedFiles.length}, Scoped files: ${scopedFiles.length}\n`,
       );
 
       runCodeshift(task, scopedFiles, {
