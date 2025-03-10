@@ -6,6 +6,7 @@ type TokenDataT = {
   fileName: string;
   lineNumber: number;
   columnNumber: number;
+  comment?: string;
 };
 
 type StatusDataT = {
@@ -52,6 +53,7 @@ class TokenStatus {
     lineNumber: number;
     columnNumber: number;
     canAutoMigrate?: boolean;
+    comment?: string;
   }) {
     const statusType = isLegacy ? "legacy" : "updated";
     switch (type) {

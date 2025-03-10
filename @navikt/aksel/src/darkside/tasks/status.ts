@@ -64,6 +64,7 @@ function getStatus(
 
           StatusStore.add({
             isLegacy: true,
+            comment: config.comment,
             type: regexKey as keyof typeof regexes,
             columnNumber: column,
             lineNumber: row,

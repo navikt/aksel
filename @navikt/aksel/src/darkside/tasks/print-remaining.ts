@@ -42,6 +42,13 @@ function printRemaining(files: string[]) {
       const [tokenName, fileName, lineNumber, columnNumber] = link.split(":");
       const fullPath = path.resolve(process.cwd(), fileName);
 
+      const withComment = data.legacy.find((token) => {
+        return token.name === tokenName && token.comment;
+      });
+
+      if (withComment) {
+        console.info(`\n/* ${withComment.comment} */`);
+      }
       console.info(
         `${tokenName}: file://${fullPath}:${lineNumber}:${columnNumber}`,
       );
