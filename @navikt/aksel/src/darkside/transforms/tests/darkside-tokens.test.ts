@@ -49,4 +49,10 @@ for (const fixture of ["tw-complete"]) {
     migration: "darkside-tokens-tailwind",
     extension: "css",
   });
+
+  check(__dirname, {
+    fixture,
+    migration: "darkside-tokens-tailwind",
+    extension: "js",
+  });
 }
