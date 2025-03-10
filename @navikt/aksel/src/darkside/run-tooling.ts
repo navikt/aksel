@@ -8,6 +8,7 @@ import {
   GLOB_IGNORE_PATTERNS,
   getDefaultGlob,
 } from "../codemod/codeshift.utils";
+import { validateGit } from "../codemod/validation";
 import { printRemaining } from "./tasks/print-remaining";
 import { getStatus } from "./tasks/status";
 
@@ -20,6 +21,7 @@ type TaskName =
   | "less-tokens"
   | "js-tokens"
   | "tailwind-tokens"
+  | "run-all-migrations"
   | "exit";
 
 type ToolingOptions = {
@@ -57,6 +59,7 @@ const TASK_MENU = {
     { message: "Migrate Less tokens", name: "less-tokens" },
     { message: "Migrate JS tokens", name: "js-tokens" },
     { message: "Migrate tailwind tokens", name: "tailwind-tokens" },
+    { message: "Run all migrations", name: "run-all-migrations" },
     { message: "Exit", name: "exit" },
   ] as { message: string; name: TaskName }[],
 };
@@ -122,6 +125,27 @@ async function executeTask(
         dryRun: options.dryRun,
         force: options.force,
       });
+      break;
+    }
+    case "run-all-migrations": {
+      const tasks = [
+        "css-tokens",
+        "scss-tokens",
+        "less-tokens",
+        "js-tokens",
+        "tailwind-tokens",
+      ];
+      for (const migrationTask of tasks) {
+        if (!options.force) {
+          validateGit(options, program);
+        }
+
+        console.info(`\nRunning ${migrationTask}...`);
+        await runCodeshift(task, filepaths, {
+          dryRun: options.dryRun,
+          force: true,
+        });
+      }
       break;
     }
 
