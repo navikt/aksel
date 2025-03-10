@@ -1,6 +1,6 @@
+import { Label } from "@navikt/ds-react";
 import { TableOfContentsT } from "@/types";
-import { Menu, MenuHeading } from "@/web/menu/Menu";
-import ScrollFade from "./parts/ScrollFade";
+import { ScrollFade } from "./parts/ScrollFade";
 import UlList from "./parts/UlList";
 import { useToc } from "./useToc";
 
@@ -31,13 +31,13 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
       className="sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block"
       style={style}
     >
-      <Menu loggingContext="toc" variant="neutral">
-        <MenuHeading as="h2">Innhold på siden</MenuHeading>
-        <div className="relative">
-          <ScrollFade />
-          <UlList toc={toc} tocProps={tocCtx} />
-        </div>
-      </Menu>
+      <Label as="h2" size="small" textColor="subtle" className="py-05">
+        Innhold på siden
+      </Label>
+      <div className="relative">
+        <ScrollFade />
+        <UlList toc={toc} tocProps={tocCtx} />
+      </div>
     </aside>
   );
 }
