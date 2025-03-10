@@ -18,7 +18,7 @@ export default function transformer(file: FileInfo, api: API) {
     );
   });
 
-  if (!jsImport) {
+  if (jsImport.size() === 0) {
     return src;
   }
 
