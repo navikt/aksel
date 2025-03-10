@@ -1,6 +1,5 @@
 import type { FileInfo } from "jscodeshift";
-import { updatedTokens } from "../../codemod/transforms/darkside/darkside.tokens";
-import { getTokenRegex } from "../config/tokenRegex";
+import { updatedTokens } from "../config/darkside.tokens";
 
 export default function transformer(file: FileInfo) {
   let src = file.source;
@@ -17,10 +16,7 @@ export default function transformer(file: FileInfo) {
     );
 
     if (config.replacement.length > 0) {
-      src = src.replace(
-        getTokenRegex(oldCSSVar, "css"),
-        `--ax-${config.replacement}`,
-      );
+      src = src.replace(config.regexes.css, `--ax-${config.replacement}`);
     }
   }
 

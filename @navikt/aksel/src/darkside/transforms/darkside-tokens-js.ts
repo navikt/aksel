@@ -1,9 +1,9 @@
 import type { API, FileInfo } from "jscodeshift";
-import { updatedTokens } from "../../codemod/transforms/darkside/darkside.tokens";
 import { getImportSpecifier } from "../../codemod/utils/imports";
 import { getLineTerminator } from "../../codemod/utils/lineterminator";
 import moveAndRenameImport from "../../codemod/utils/moveAndRenameImport";
 import { translateToken } from "../../codemod/utils/translate-token";
+import { updatedTokens } from "../config/darkside.tokens";
 
 export default function transformer(file: FileInfo, api: API) {
   let src = file.source;
@@ -57,7 +57,7 @@ export default function transformer(file: FileInfo, api: API) {
 
       let code = root.toSource(getLineTerminator(src));
 
-      const rgx = new RegExp("(" + localName + ")", "gm");
+      const rgx = new RegExp(`(\\s|^)?(${localName})(?=\\s|$|[^\\w-])`, "gm");
       code = code.replace(rgx, jsToken);
       src = code;
 

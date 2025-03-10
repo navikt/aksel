@@ -44,7 +44,7 @@ function getFrameworkRegexes({
 
 function getTokenRegex(
   variable: string,
-  format: "css" | "scss" | "less" | "js" | "newJs" | "tailwind",
+  format: "css" | "scss" | "less" | "js" | "tailwind",
 ) {
   switch (format) {
     case "css":
