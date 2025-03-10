@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { createCompositeTwRegex } from "./tokenRegex";
+import { createCompositeTwRegex, getTokenRegex } from "./tokenRegex";
 
 describe("createCompositeTwRegex", () => {
   test("should generate a regex that matches simple tokens", () => {
@@ -104,5 +104,107 @@ describe("createCompositeTwRegex", () => {
     expect("text-red-100").not.toMatch(regex);
     expect("text-blue-200").not.toMatch(regex);
     expect('class="text-red-100 text-blue-200"').not.toMatch(regex);
+  });
+});
+
+describe("getTokenRegex CSS", () => {
+  test("should match tokens with whitespace boundaries", () => {
+    const regex = getTokenRegex("--a-text-red", "css");
+
+    expect("var(--a-text-red)").toMatch(regex);
+    expect(" var(--a-text-red) ").toMatch(regex);
+    expect(" var(--a-text-red, var(--my-custom-token)) ").toMatch(regex);
+    expect(" var(--my-custom-token, var(--a-text-red)) ").toMatch(regex);
+    expect('style="var(--a-text-red)"').toMatch(regex);
+  });
+
+  test("should not match tokens that are part of other words", () => {
+    const regex = getTokenRegex("--a-text-red", "css");
+
+    expect("var(--a-text-red-200)").not.toMatch(regex);
+    expect("test-text-red-100").not.toMatch(regex);
+  });
+
+  test("should not match partial names", () => {
+    const regex = getTokenRegex("--a-text-red", "css");
+
+    expect("var(-a-text-red-200)").not.toMatch(regex);
+    expect("$a-text-red").not.toMatch(regex);
+    expect("@a-text-red").not.toMatch(regex);
+    expect("text-red").not.toMatch(regex);
+  });
+});
+
+describe("getTokenRegex SCSS", () => {
+  test("should match tokens with whitespace boundaries", () => {
+    const regex = getTokenRegex("--a-text-red", "scss");
+
+    expect("$a-text-red").toMatch(regex);
+    expect(" $a-text-red ").toMatch(regex);
+    expect("common.$a-text-red").toMatch(regex);
+    expect(" common.$a-text-red ").toMatch(regex);
+    expect(" common.$a-text-red").toMatch(regex);
+    expect("common.$a-text-red ").toMatch(regex);
+  });
+
+  test("should not match tokens that are part of other words", () => {
+    const regex = getTokenRegex("--a-text-red", "scss");
+
+    expect("$a-text-red-200").not.toMatch(regex);
+    expect("$a-a-text-red").not.toMatch(regex);
+    expect("$a-a-text-red-200").not.toMatch(regex);
+  });
+
+  test("should not match partial names", () => {
+    const regex = getTokenRegex("--a-text-red", "scss");
+
+    expect("var(--a-text-red-200)").not.toMatch(regex);
+    expect("@a-text-red").not.toMatch(regex);
+    expect("text-red").not.toMatch(regex);
+  });
+});
+
+describe("getTokenRegex Less", () => {
+  test("should match tokens with whitespace boundaries", () => {
+    const regex = getTokenRegex("--a-text-red", "less");
+
+    expect("@a-text-red").toMatch(regex);
+    expect(" @a-text-red ").toMatch(regex);
+  });
+
+  test("should not match tokens that are part of other words", () => {
+    const regex = getTokenRegex("--a-text-red", "less");
+
+    expect("@a-text-red-200").not.toMatch(regex);
+    expect("@a-a-text-red").not.toMatch(regex);
+    expect("@a-a-text-red-200").not.toMatch(regex);
+  });
+
+  test("should not match partial names", () => {
+    const regex = getTokenRegex("--a-text-red", "less");
+
+    expect("var(--a-text-red-200)").not.toMatch(regex);
+    expect("$a-text-red").not.toMatch(regex);
+    expect("text-red").not.toMatch(regex);
+  });
+});
+
+describe("getTokenRegex JS", () => {
+  test("should match tokens with whitespace boundaries", () => {
+    const regex = getTokenRegex("--a-text-red", "js");
+
+    expect("ATextRed").toMatch(regex);
+    expect(" ATextRed ").toMatch(regex);
+    expect(" background: `${ATextRed}` ").toMatch(regex);
+  });
+
+  test("should not match tokens that are part of other words", () => {
+    const regex = getTokenRegex("--a-text-red", "js");
+
+    expect("ATextRed200").not.toMatch(regex);
+    expect("AATextRed200").not.toMatch(regex);
+
+    /* Since we cant do a positive lookbehind, these cases will be matched */
+    expect("AATextRed").toMatch(regex);
   });
 });
