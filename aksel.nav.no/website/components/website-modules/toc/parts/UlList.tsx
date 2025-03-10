@@ -86,4 +86,4 @@ function UlList({
     </ul>
   );
 }
-export default UlList;
+export { UlList };

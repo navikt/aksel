@@ -2,7 +2,7 @@ import throttle from "lodash/throttle";
 import { useEffect, useRef, useState } from "react";
 import { TableOfContentsT } from "../../types/toc";
 
-export const useToc = (toc: TableOfContentsT) => {
+function useToc(toc: TableOfContentsT) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeSubId, setActiveSubId] = useState<string | null>(null);
 
@@ -92,7 +92,7 @@ export const useToc = (toc: TableOfContentsT) => {
       scrollToggle();
     },
   };
-};
+}
 
 function isVisible(ele, container) {
   const eleTop = ele.offsetTop;
@@ -107,3 +107,5 @@ function isVisible(ele, container) {
     (eleTop < containerBottom && containerBottom < eleBottom)
   );
 }
+
+export { useToc };
