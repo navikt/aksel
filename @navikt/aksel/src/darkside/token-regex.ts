@@ -5,13 +5,21 @@ import { translateToken } from "../codemod/utils/translate-token";
 /* (?=\s|$|[^\w-]) */
 /* Test batching regex-check */
 const createTwRegex = (token: string) =>
-  new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "g");
+  new RegExp(`(?<!:)(\s|^)?${token}(?=\s|$)`, "gm");
+
+const createCompositeTwRegex = (tokens: string[]) =>
+  new RegExp(
+    `/(?<!:)(\s|^)?(${tokens.join("|")}|${tokens
+      .map((t) => `:${t}`)
+      .join("|")})(?=\s|$|[^\w-])/gm`,
+    "gm",
+  );
 
 const createTwRegexWithPrefix = (token: string) =>
-  new RegExp(`(?<!:)(\s|^)?:${token}(?=\s|$)`, "g");
+  new RegExp(`(?<!:)(\s|^)?:${token}(?=\s|$)`, "gm");
 
 const createTwRegexForBreakpoints = (token: string) =>
-  new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "g");
+  new RegExp(`(?<!:)(?<=\s|^)${token}:(?=\w)`, "gm");
 
 function generateLegacyRegexes(token: string, config: UpdatedTokensData) {
   const regexes: Record<"css" | "scss" | "less" | "js" | "tailwind", RegExp[]> =
@@ -27,15 +35,21 @@ function generateLegacyRegexes(token: string, config: UpdatedTokensData) {
     return regexes;
   }
 
-  for (const twToken of config.twOld.split(",")) {
-    if (token.includes("breakpoint")) {
-      regexes.tailwind.push(createTwRegexForBreakpoints(twToken));
-      continue;
-    }
-
-    regexes.tailwind.push(createTwRegex(twToken));
-    regexes.tailwind.push(createTwRegexWithPrefix(twToken));
+  if (token.includes("breakpoint")) {
+    regexes.tailwind.push(createTwRegexForBreakpoints(config.twOld));
+  } else {
+    regexes.tailwind.push(createCompositeTwRegex(config.twOld.split(",")));
   }
+
+  // for (const twToken of config.twOld.split(",")) {
+  //   if (token.includes("breakpoint")) {
+  //     regexes.tailwind.push(createTwRegexForBreakpoints(twToken));
+  //     continue;
+  //   }
+  //
+  //   regexes.tailwind.push(createTwRegex(twToken));
+  //   regexes.tailwind.push(createTwRegexWithPrefix(twToken));
+  // }
 
   return regexes;
 }
@@ -54,17 +68,25 @@ function generateNewRegexes(token: string, tailwindName: string | null) {
     return regexes;
   }
 
-  for (const twToken of tailwindName.split(",")) {
-    const twTokenWithPrefix = `ax-${twToken}`;
+  const twTokens = tailwindName.split(",").map((t) => `ax-${t}`);
 
-    if (token.includes("breakpoint")) {
-      regexes.tailwind.push(createTwRegexForBreakpoints(twTokenWithPrefix));
-      continue;
-    }
-
-    regexes.tailwind.push(createTwRegex(twTokenWithPrefix));
-    regexes.tailwind.push(createTwRegexWithPrefix(twTokenWithPrefix));
+  if (token.includes("breakpoint")) {
+    regexes.tailwind.push(createTwRegexForBreakpoints(`ax-${tailwindName}`));
+  } else {
+    regexes.tailwind.push(createCompositeTwRegex(twTokens));
   }
+
+  // for (const twToken of tailwindName.split(",")) {
+  //   const twTokenWithPrefix = `ax-${twToken}`;
+  //
+  //   if (token.includes("breakpoint")) {
+  //     regexes.tailwind.push(createTwRegexForBreakpoints(twTokenWithPrefix));
+  //     continue;
+  //   }
+  //
+  //   regexes.tailwind.push(createTwRegex(twTokenWithPrefix));
+  //   regexes.tailwind.push(createTwRegexWithPrefix(twTokenWithPrefix));
+  // }
 
   return regexes;
 }
