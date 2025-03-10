@@ -2,6 +2,12 @@ import type { FileInfo } from "jscodeshift";
 import { updatedTokens } from "../config/darkside.tokens";
 import { createSingleTwRegex } from "../config/tokenRegex";
 
+/**
+ * TODO: Add more tests
+ * - Test for breakpoints
+ * - Test composite tokens
+ * - Test with important! tag
+ */
 export default function transformer(file: FileInfo) {
   let src = file.source;
 
@@ -23,7 +29,7 @@ export default function transformer(file: FileInfo) {
     const matches = src.match(config.regexes.tailwind) || [];
 
     for (const match of matches) {
-      const index = beforeSplit.indexOf(match.trim());
+      const index = beforeSplit.indexOf(match.trim().replace(":", ""));
 
       if (index >= 0) {
         const withPrefix = match.trim().startsWith(":");
