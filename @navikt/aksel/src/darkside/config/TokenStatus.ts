@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import ProgressBar from "cli-progress";
 
 type TokenDataT = {
@@ -94,6 +95,24 @@ class TokenStatus {
           ...Object.values(this.status).map((_status) => _status.updated),
         ),
       };
+
+      const uniqueFiles = new Set(
+        statusDataObj.legacy.map((token) => token.fileName),
+      );
+
+      const automigratedN = statusDataObj.legacy.filter(
+        (legacy) => legacy.canAutoMigrate,
+      ).length;
+
+      console.info(`Files with legacy tokens: ${uniqueFiles.size}`);
+
+      const autoMigratePercentage = statusDataObj.legacy.length
+        ? Math.round((automigratedN / statusDataObj.legacy.length) * 100)
+        : 0;
+
+      console.info(
+        `You have ${statusDataObj.legacy.length} total tokens that need to be updated. Of these, ${automigratedN} (${autoMigratePercentage}%) can be automatically migrated for you.`,
+      );
     } else {
       statusDataObj = this.status[type];
     }
@@ -133,6 +152,69 @@ class TokenStatus {
     });
 
     multibar.stop();
+  }
+
+  printMigrationHelp() {
+    const imports = {
+      css: {
+        old: `import "@navikt/ds-tokens";`,
+        new: `import "@navikt/ds-tokens/darkside-css";`,
+      },
+      scss: {
+        old: `@use '@navikt/ds-tokens/dist/tokens' as *;`,
+        new: `@use "@navikt/ds-tokens/darkside-scss" as *;`,
+      },
+      less: {
+        old: `@import "~@navikt/ds-tokens/dist/tokens.less";`,
+        new: `@import "~@navikt/ds-tokens/darkside-less";`,
+      },
+      js: {
+        old: `import { ... } from "@navikt/ds-tokens/dist/tokens";`,
+        new: `import { ... } from "@navikt/ds-tokens/darkside-js";`,
+      },
+      tailwind: {
+        old: `import config from "@navikt/ds-tailwind";`,
+        new: `import config from "@navikt/ds-tailwind/darkside-tw3";`,
+      },
+    } as const;
+
+    for (const key of Object.keys(imports)) {
+      const data = this.status[key] as StatusDataT;
+
+      const legacyNeeded = data.legacy.length > 0;
+      const foundUse = legacyNeeded || data.updated.length > 0;
+
+      if (!foundUse) {
+        continue;
+      }
+
+      console.info(chalk.underline(`\n${key.toUpperCase()} Tokens Migration`));
+
+      const importStrings = imports[key];
+      console.info(
+        `${chalk.blue("→")} Add new import: ${chalk.green(importStrings.new)}`,
+      );
+
+      if (legacyNeeded) {
+        console.info(
+          `${chalk.yellow(
+            "!",
+          )} Keep old import until fully migrated: ${chalk.dim(
+            importStrings.old,
+          )}`,
+        );
+      }
+    }
+
+    const componentTokens = this.status.component.legacy.length;
+    if (componentTokens > 0) {
+      console.info(chalk.underline(`COMPONENT Tokens Migration`));
+
+      console.info(
+        `We no longer support component tokens. Please migrate to the new darkside tokens. using theming or other methods.`,
+      );
+      console.info(`You can read more at https://aksel.nav.no/darkside`);
+    }
   }
 }
 

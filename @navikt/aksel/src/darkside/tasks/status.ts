@@ -126,6 +126,8 @@ function getStatus(
 
   StatusStore.printStatus("summary");
   StatusStore.printStatusForAll();
+  StatusStore.printMigrationHelp();
+  console.info("\n");
 
   return StatusStore;
 }
