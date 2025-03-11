@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { BodyShort } from "@navikt/ds-react";
+import { BodyShort, Detail } from "@navikt/ds-react";
 
 type SidebarInputNodeT = {
   heading: string;
@@ -33,6 +33,12 @@ type SidebarProps = {
 const NotchClasses =
   "before:bg-ax-bg-brand-blue-strong before:absolute before:-left-2 before:top-1/2 before:h-[calc(100%-8px)] before:w-[3px] before:-translate-y-1/2 before:rounded-full";
 
+/**
+ * TODO:
+ * - Synk with old sidebar features
+ * - Add support for tags
+ * - Add support for darkside colored group
+ */
 function Sidebar(props: SidebarProps) {
   const { sidebarData, className, ...rest } = props;
 
@@ -42,7 +48,7 @@ function Sidebar(props: SidebarProps) {
       aria-label="Sidemeny"
       className={cl(className, "relative w-sidebar shrink-0 self-start px-2")}
     >
-      <BodyShort as="ul" className="space-y-3">
+      <BodyShort as="ul" className="space-y-3" size="small">
         {sidebarData.map((section, index) => {
           return (
             <React.Fragment key={section.label}>
@@ -74,14 +80,14 @@ function SidebarGroup(props: DesignsystemSectionT) {
   const id = useId();
   return (
     <li>
-      <BodyShort
+      <Detail
         as="div"
         weight="semibold"
         className="py-0.5 pl-2 text-ax-text-neutral-subtle"
         id={id}
       >
         {label}
-      </BodyShort>
+      </Detail>
       <ul aria-labelledby={id}>
         {links.map((link) => {
           if (!("pages" in link)) {
@@ -138,10 +144,6 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
   );
 }
 
-/**
- * TODO:
- * - Add support for auto-left indenting if nested
- */
 function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
   const { page, isIndented = false } = props;
   const { asPath } = useRouter();
@@ -151,9 +153,13 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
   };
 
   const active = isActive(page.slug);
+
+  const Component = isIndented ? Detail : BodyShort;
   return (
-    <li
-      className={cl("group relative leading-5", { "text-medium": isIndented })}
+    <Component
+      as="li"
+      size={isIndented ? "medium" : "small"}
+      className="group relative leading-5"
     >
       <Link
         href={`/${page.slug}`}
@@ -167,7 +173,8 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
       >
         <span
           className={cl("block rounded-medium px-2 py-1", {
-            "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue": active,
+            "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue group-hover:bg-ax-bg-brand-blue-moderate-hoverA":
+              active,
             "group-hover:bg-ax-bg-neutral-moderate-hoverA": !active,
             "pl-4": isIndented,
           })}
@@ -175,7 +182,7 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
           {page.heading}
         </span>
       </Link>
-    </li>
+    </Component>
   );
 }
 
