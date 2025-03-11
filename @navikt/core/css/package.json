@@ -28,10 +28,8 @@
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^7.17.1",
-    "@types/clean-css": "4.2.11",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.24.4",
-    "clean-css": "5.3.3",
     "cssnano": "7.0.6",
     "esbuild": "^0.24.0",
     "fast-glob": "3.2.11",

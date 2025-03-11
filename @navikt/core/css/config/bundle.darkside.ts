@@ -1,5 +1,4 @@
 import browserslist from "browserslist";
-import CleanCss from "clean-css";
 import esbuild from "esbuild";
 import fastglob from "fast-glob";
 import fs from "fs";
