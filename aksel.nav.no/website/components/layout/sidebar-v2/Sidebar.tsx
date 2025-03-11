@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { Detail } from "@navikt/ds-react";
+import { BodyShort } from "@navikt/ds-react";
 import { SidebarT } from "@/types";
 
 type DesignsystemSidebarT = { label: string; links: SidebarT };
@@ -11,6 +11,9 @@ type DesignsystemSidebarT = { label: string; links: SidebarT };
 type SidebarProps = {
   sidebarData: DesignsystemSidebarT[];
 } & React.HTMLAttributes<HTMLDivElement>;
+
+const NotchClasses =
+  "before:bg-ax-bg-brand-blue-strong before:absolute before:-left-2 before:top-1/2 before:h-[calc(100%-8px)] before:w-[3px] before:-translate-y-1/2 before:rounded-full";
 
 function Sidebar(props: SidebarProps) {
   const { sidebarData, className, ...rest } = props;
@@ -27,30 +30,42 @@ function Sidebar(props: SidebarProps) {
       aria-label="Sidemeny"
       className={cl(className, "relative w-sidebar shrink-0 self-start px-2")}
     >
-      <ul className="space-y-3">
+      <BodyShort as="ul" className="space-y-3">
         {sidebarData.map((section, index) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const id = useId();
           return (
             <React.Fragment key={section.label}>
               <li>
-                <Detail
+                <BodyShort
                   as="div"
                   weight="semibold"
-                  className="py-0.5 pl-2 text-ax-text-neutral-subtle"
+                  className="text-ax-text-neutral-subtle py-0.5 pl-2"
                   id={id}
                 >
                   {section.label}
-                </Detail>
+                </BodyShort>
                 <ul aria-labelledby={id}>
                   {section.links.map((link) => {
                     // eslint-disable-next-line react-hooks/rules-of-hooks
                     const [open, setOpen] = useState(false);
+
+                    const isSectionActive = link.pages.some((page) =>
+                      isActive(page.slug),
+                    );
+
                     return (
                       <li key={link.title}>
                         <button
                           onClick={() => setOpen(!open)}
-                          className="focus-preset flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 text-medium leading-5 hover:bg-ax-bg-neutral-moderate-hoverA"
+                          className={cl(
+                            "focus-preset-tight hover:bg-ax-bg-neutral-moderate-hoverA relative flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 leading-5",
+                            isSectionActive && !open && NotchClasses,
+                            {
+                              "bg-ax-bg-neutral-moderate":
+                                isSectionActive && !open,
+                            },
+                          )}
                           aria-expanded={open}
                         >
                           {link.title}
@@ -61,27 +76,26 @@ function Sidebar(props: SidebarProps) {
                             const active = isActive(page.slug);
                             return (
                               <li
-                                className="relative text-medium leading-5"
+                                className="group relative text-medium leading-5"
                                 key={page.heading}
                               >
                                 <Link
                                   href={`/${page.slug}`}
                                   className={cl(
-                                    "focus-preset block rounded-medium py-0.5 pl-4",
+                                    "focus-preset-tight block rounded-medium py-0.5",
+                                    active && NotchClasses,
                                     {
-                                      "font-bold before:absolute before:left-2 before:top-1/2 before:h-3/4 before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-ax-bg-brand-blue-strong-pressed":
-                                        active,
-                                      "before:absolute before:left-[9px] before:top-0 before:h-full before:w-px before:bg-ax-border-neutral-subtleA":
-                                        !active,
+                                      "font-bold": active,
                                     },
                                   )}
                                 >
                                   <span
                                     className={cl(
-                                      "block rounded-medium px-2 py-1",
+                                      "block rounded-medium px-2 py-1 pl-4",
                                       {
-                                        "bg-ax-bg-neutral-moderateA": active,
-                                        "hover:bg-ax-bg-neutral-moderate-hoverA":
+                                        "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue":
+                                          active,
+                                        "group-hover:bg-ax-bg-neutral-moderate-hoverA":
                                           !active,
                                       },
                                     )}
@@ -101,13 +115,13 @@ function Sidebar(props: SidebarProps) {
               {index !== sidebarData.length - 1 && (
                 <li
                   aria-hidden
-                  className="w-ful h-px border-t border-ax-border-neutral-subtle"
+                  className="w-ful border-ax-border-neutral-subtle h-px border-t"
                 />
               )}
             </React.Fragment>
           );
         })}
-      </ul>
+      </BodyShort>
     </nav>
   );
 }

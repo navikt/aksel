@@ -42,7 +42,7 @@ export const WithSidebar = ({
     >
       <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
         {/* <SidebarOld kategori={pageType.type} links={sidebar} /> */}
-        <Show asChild above="md">
+        <Show asChild above="md" className="pl-4">
           <Sidebar
             sidebarData={[
               { label: "Grunnleggende", links: sidebar },
