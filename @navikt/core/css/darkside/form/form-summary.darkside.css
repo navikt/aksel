@@ -72,7 +72,7 @@
 
 .aksel-form-summary__value .aksel-form-summary__answers {
   margin-top: var(--ax-space-8);
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-16);
   background: var(--ax-bg-info-moderateA);
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-info-subtleA);
