@@ -76,6 +76,8 @@ const formatCategory = (token: TransformedToken) => {
       break;
     case "global-breakpoint":
       return "breakpoint";
+    case "global-font":
+      return "font";
     default:
       return token.type;
   }
@@ -101,6 +103,8 @@ const formatModifier = (
   switch (type) {
     case "global-breakpoint":
       return nameParts.slice(1).join("-");
+    case "global-font":
+      return nameParts.includes("heading") ? "heading" : "";
     default:
       return nameParts[nameParts.length - 1];
   }

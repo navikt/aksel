@@ -19,10 +19,19 @@ export type TokenTypes =
 
 export type SemanticTokenGroups = "background" | "border" | "text";
 
+export type FontGroups =
+  | "family"
+  | "line-height"
+  | "line-height-heading"
+  | "size"
+  | "size-heading"
+  | "weight";
+
 export type TokenGroup =
   | GlobalColorRoles
   | SemanticTokenGroups
-  | `${SemanticTokenGroups}.${SemanticColorRoles}`;
+  | `${SemanticTokenGroups}.${SemanticColorRoles}`
+  | FontGroups;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   /**

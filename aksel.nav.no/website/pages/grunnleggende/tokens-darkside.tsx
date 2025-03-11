@@ -2,6 +2,7 @@ import { GetStaticProps } from "next/types";
 import React from "react";
 import {
   LaptopIcon,
+  LineHeightIcon,
   MobileIcon,
   MobileSmallIcon,
   MonitorIcon,
@@ -216,6 +217,52 @@ const ColorToken = ({ token }: { token: any }) => {
   }
 };
 
+const FontToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
+  let fontStyling = {
+    fontSize: "24px",
+    fontFamily: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
+    fontWeight: "400",
+    lineHeight: "1.5",
+  };
+  switch (token.group) {
+    case "family":
+      fontStyling = {
+        ...fontStyling,
+        fontFamily: token.value,
+      };
+      break;
+    case "size":
+      fontStyling = {
+        ...fontStyling,
+        fontSize: token.value,
+      };
+      break;
+    case "weight":
+      fontStyling = {
+        ...fontStyling,
+        fontWeight: token.value,
+      };
+      break;
+    case "line-height":
+      return (
+        <ExampleContainer>
+          <VStack as="div" align="center" justify="center" height="100%">
+            <LineHeightIcon width="32px" height="32px" title={token.name} />
+          </VStack>
+        </ExampleContainer>
+      );
+  }
+  return (
+    <ExampleContainer>
+      <VStack as="div" align="center" justify="center" height="100%">
+        <Heading size="medium" style={fontStyling}>
+          Aa
+        </Heading>
+      </VStack>
+    </ExampleContainer>
+  );
+};
+
 const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
   <ExampleContainer>
     <VStack as="div" align="center" justify="center" height="100%">
@@ -283,6 +330,8 @@ const TokenExample = ({ token }: { token: any }) => {
     case "borderColor":
     case "textColor":
       return <ColorToken token={token} />;
+    case "font":
+      return <FontToken token={token} />;
     case "space":
       return <SpaceToken token={token} />;
     case "shadow":
@@ -355,6 +404,7 @@ const Categories = {
   shadow: "Shadows",
   space: "Spacing",
   radius: "Radius",
+  font: "Fonts",
   breakpoint: "Breakpoints",
 };
 
@@ -391,6 +441,18 @@ const Section = ({
           parseFloat(a.value.replace("px", "")) -
           parseFloat(b.value.replace("px", ""))
         );
+      case "font": {
+        if (a.group === b.group) {
+          if (a.modifier === b.modifier) {
+            return (
+              parseFloat(a.rawValue.replace("rem", "")) -
+              parseFloat(b.rawValue.replace("rem", ""))
+            );
+          }
+          return a.modifier?.localeCompare(b.modifier || "", "nb");
+        }
+        return a.group?.localeCompare(b.group || "", "nb");
+      }
       default:
         return parseFloat(a.rawValue.replace("px", "")) >
           parseFloat(b.rawValue.replace("px", ""))
@@ -450,7 +512,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     "space",
     "shadow",
     "radius",
-    //"font",
+    "font",
     "breakpoint",
   ];
   const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
