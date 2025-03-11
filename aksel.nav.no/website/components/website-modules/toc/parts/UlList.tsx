@@ -37,6 +37,7 @@ function UlList({
         <MenuLi key={node.id}>
           <>
             <MenuLink
+              source="toc"
               id={`toc-${node.id}`}
               href={`#${node.id}`}
               selected={isActive(node.id)}

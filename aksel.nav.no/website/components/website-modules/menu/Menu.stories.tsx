@@ -24,29 +24,37 @@ export const MenuDemo: Story = {
           <MenuHeading as="div">Primitives</MenuHeading>
           <ul onClick={() => setSelected((x) => (x === 0 ? 1 : 0))}>
             <MenuLi>
-              <MenuLink href="#">Bleed</MenuLink>
+              <MenuLink source="sidebar" href="#">
+                Bleed
+              </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#">Box</MenuLink>
+              <MenuLink source="sidebar" href="#">
+                Box
+              </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#" selected={selected === 1}>
+              <MenuLink source="sidebar" href="#" selected={selected === 1}>
                 HGrid
               </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#">Hide</MenuLink>
+              <MenuLink source="sidebar" href="#">
+                Hide
+              </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#" selected={selected === 0}>
+              <MenuLink source="sidebar" href="#" selected={selected === 0}>
                 HStack
               </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#">Show</MenuLink>
+              <MenuLink source="sidebar" href="#">
+                Show
+              </MenuLink>
             </MenuLi>
             <MenuLi>
-              <MenuLink href="#" selected>
+              <MenuLink source="sidebar" href="#" selected>
                 VStack
               </MenuLink>
             </MenuLi>
@@ -69,36 +77,42 @@ export const NestedMenuDemo: Story = {
         <MenuHeading as="h2">Innhold på siden</MenuHeading>
         <MenuUl>
           <MenuLi>
-            <MenuLink href="#" selected>
+            <MenuLink source="sidebar" href="#" selected>
               Så, hvordan går vi frem for å få det til?
             </MenuLink>
           </MenuLi>
           <MenuLi>
-            <MenuLink href="#">Bærekraftige team</MenuLink>
+            <MenuLink source="sidebar" href="#">
+              Bærekraftige team
+            </MenuLink>
           </MenuLi>
 
           <MenuLi>
             <MenuUl>
               <MenuLi>
-                <MenuLink href="#">Teamstørrelse</MenuLink>
+                <MenuLink source="sidebar" href="#">
+                  Teamstørrelse
+                </MenuLink>
               </MenuLi>
               <MenuLi>
-                <MenuLink href="#">Stabilitet Vs. fleksibilitet</MenuLink>
+                <MenuLink source="sidebar" href="#">
+                  Stabilitet Vs. fleksibilitet
+                </MenuLink>
               </MenuLi>
               <MenuLi>
-                <MenuLink href="#" selected>
+                <MenuLink source="sidebar" href="#" selected>
                   Myndighet og hensikt
                 </MenuLink>
               </MenuLi>
               <MenuLi>
-                <MenuLink href="#">
+                <MenuLink source="sidebar" href="#">
                   Ansvar tilpasset kognitiv kapasitet
                 </MenuLink>
               </MenuLi>
             </MenuUl>
           </MenuLi>
           <MenuLi>
-            <MenuLink href="#" selected>
+            <MenuLink source="sidebar" href="#" selected>
               Teamtyper
             </MenuLink>
           </MenuLi>

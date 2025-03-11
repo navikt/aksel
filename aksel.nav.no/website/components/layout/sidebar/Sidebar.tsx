@@ -52,7 +52,11 @@ function Section({ section }: { section: SidebarT[number] }) {
             aria-current={isActive(page.slug) ? "page" : undefined}
             key={page.slug}
           >
-            <MenuLink href={`/${page.slug}`} selected={isActive(page.slug)}>
+            <MenuLink
+              source="sidebar"
+              href={`/${page.slug}`}
+              selected={isActive(page.slug)}
+            >
               <span className="flex items-center justify-between">
                 {page.heading}
                 <StatusTag size="xsmall" status={page.tag} />
