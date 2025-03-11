@@ -4322,6 +4322,7 @@ __metadata:
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
     "@navikt/ds-css": "npm:^7.17.1"
+    "@navikt/ds-tokens": "npm:^7.17.1"
     "@types/cli-progress": "npm:3.11.6"
     axios: "npm:1.7.4"
     chalk: "npm:4.1.0"

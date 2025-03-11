@@ -1,8 +1,9 @@
 import { describe, expect, test } from "vitest";
+import inlineStyles from "@navikt/ds-tokens?inline";
 import { darksideTokenConfig } from "../darkside.tokens";
 import { legacyTokenConfig } from "../legacy.tokens";
 
-describe("Darkside codemods", () => {
+describe("Legacy token migration", () => {
   test("Token migration references exists", () => {
     Object.entries(legacyTokenConfig).forEach(([oldToken, config]) => {
       if (config.replacement.length > 1) {
@@ -21,4 +22,5 @@ describe("Darkside codemods", () => {
       }
     });
   });
+  console.info(inlineStyles);
 });
