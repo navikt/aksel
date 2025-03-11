@@ -11,7 +11,9 @@ function printRemaining(files: string[]) {
 
     data.legacy.forEach((tokenData) => {
       fileLinks.push(
-        `${tokenData.name}:${tokenData.fileName}:${tokenData.lineNumber}:${tokenData.columnNumber}`,
+        `${tokenData.name.replace(":", "")}:${tokenData.fileName}:${
+          tokenData.lineNumber
+        }:${tokenData.columnNumber}`,
       );
     });
 
