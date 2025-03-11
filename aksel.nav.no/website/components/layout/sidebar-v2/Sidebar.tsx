@@ -37,7 +37,7 @@ function Sidebar(props: SidebarProps) {
                 <Detail
                   as="div"
                   weight="semibold"
-                  className="text-ax-text-neutral-subtle py-0.5 pl-2"
+                  className="py-0.5 pl-2 text-ax-text-neutral-subtle"
                   id={id}
                 >
                   {section.label}
@@ -50,7 +50,7 @@ function Sidebar(props: SidebarProps) {
                       <li key={link.title}>
                         <button
                           onClick={() => setOpen(!open)}
-                          className="focus-preset hover:bg-ax-bg-neutral-moderate-hoverA flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 text-medium leading-5"
+                          className="focus-preset flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 text-medium leading-5 hover:bg-ax-bg-neutral-moderate-hoverA"
                           aria-expanded={open}
                         >
                           {link.title}
@@ -61,7 +61,7 @@ function Sidebar(props: SidebarProps) {
                             const active = isActive(page.slug);
                             return (
                               <li
-                                className="focus- relative text-medium leading-5"
+                                className="relative text-medium leading-5"
                                 key={page.heading}
                               >
                                 <Link
@@ -69,9 +69,9 @@ function Sidebar(props: SidebarProps) {
                                   className={cl(
                                     "focus-preset block rounded-medium py-0.5 pl-4",
                                     {
-                                      "before:bg-ax-bg-brand-blue-strong before:absolute before:left-2 before:top-1/2 before:h-5 before:w-1 before:-translate-y-1/2 before:rounded-full":
+                                      "font-bold before:absolute before:left-2 before:top-1/2 before:h-3/4 before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-ax-bg-brand-blue-strong-pressed":
                                         active,
-                                      "before:bg-ax-border-neutral-subtleA before:absolute before:left-3 before:h-full before:w-px":
+                                      "before:absolute before:left-[9px] before:top-0 before:h-full before:w-px before:bg-ax-border-neutral-subtleA":
                                         !active,
                                     },
                                   )}
@@ -80,7 +80,7 @@ function Sidebar(props: SidebarProps) {
                                     className={cl(
                                       "block rounded-medium px-2 py-1",
                                       {
-                                        "bg-ax-bg-brand-blue-moderateA": active,
+                                        "bg-ax-bg-neutral-moderateA": active,
                                         "hover:bg-ax-bg-neutral-moderate-hoverA":
                                           !active,
                                       },
@@ -101,7 +101,7 @@ function Sidebar(props: SidebarProps) {
               {index !== sidebarData.length - 1 && (
                 <li
                   aria-hidden
-                  className="w-ful border-ax-border-neutral-subtle h-px border-t"
+                  className="w-ful h-px border-t border-ax-border-neutral-subtle"
                 />
               )}
             </React.Fragment>
