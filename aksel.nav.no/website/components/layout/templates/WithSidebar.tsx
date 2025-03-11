@@ -1,12 +1,13 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
 import NextLink from "next/link";
-import { Box, Detail, Heading, Link } from "@navikt/ds-react";
-import SidebarOld from "@/layout/sidebar/Sidebar";
+import { Box, Detail, Heading, Link, Show } from "@navikt/ds-react";
+
+/* import SidebarOld from "@/layout/sidebar/Sidebar"; */
 import { urlFor } from "@/sanity/interface";
 import { SidebarT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
-import TableOfContents from "@/web/toc/TableOfContents";
+import { TableOfContents } from "@/web/toc/TableOfContents";
 import { Sidebar } from "../sidebar-v2/Sidebar";
 
 export const WithSidebar = ({
@@ -41,7 +42,14 @@ export const WithSidebar = ({
     >
       <div className="mx-auto flex w-full max-w-screen-2xl gap-6">
         {/* <SidebarOld kategori={pageType.type} links={sidebar} /> */}
-        <Sidebar />∏
+        <Show asChild above="md">
+          <Sidebar
+            sidebarData={[
+              { label: "Grunnleggende", links: sidebar },
+              { label: "Komponenter", links: sidebar },
+            ]}
+          />
+        </Show>
         <main
           tabIndex={-1}
           id="hovedinnhold"
