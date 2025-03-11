@@ -1,5 +1,6 @@
 import browserslist from "browserslist";
 import CleanCss from "clean-css";
+import esbuild from "esbuild";
 import fastglob from "fast-glob";
 import fs from "fs";
 import { Features, browserslistToTargets, bundleAsync } from "lightningcss";
@@ -76,25 +77,30 @@ async function bundleDarkside() {
    * @param filePath: Path to the file in the build directory
    */
   function writeFile({ file, filePath }: { file: string; filePath: string }) {
-    fs.writeFileSync(`${buildDir}/${filePath}`, file);
+    const buildPath = `${buildDir}/${filePath}`;
+    fs.writeFileSync(buildPath, file);
 
     /**
-     * We use CleanCss package here since we only want it to optimize filesize, not transform any CSS like LightningCSS minifier does.
+     * We use Esbuild package here since we only want it to optimize filesize, not transform any CSS like LightningCSS minifier does.
      * This is because we want to keep the CSS as close to the original as possible.
-     * Since CleanCSS is not part of the PostCSS ecosystem, we use it in replacement for cssnano.
      */
-    const minifiedCss = new CleanCss({}).minify(file);
+    const result = esbuild.buildSync({
+      entryPoints: [buildPath],
+      outfile: buildPath.replace(".css", ".min.css"),
+      minify: true, // Enable minification
+      bundle: false,
+      write: true,
+      format: "iife",
+      loader: {
+        ".css": "css",
+      },
+    });
 
-    if (minifiedCss.errors.length > 0) {
+    if (result.errors.length > 0) {
       throw new Error(
-        `Errors found when minifying for ${filePath} CSS. Stopped bundling\n${minifiedCss.errors}`,
+        `Errors found when minifying for ${filePath} CSS. Stopped bundling\n${result.errors}`,
       );
     }
-
-    fs.writeFileSync(
-      `${buildDir}/${filePath.replace(".css", ".min.css")}`,
-      minifiedCss.styles,
-    );
   }
 
   /* ----------------------------- index.css build ---------------------------- */
