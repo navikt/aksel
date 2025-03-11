@@ -14,7 +14,7 @@
   flex-direction: column;
   gap: var(--ax-space-16);
   text-align: center;
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-20);
   border: 1px dashed var(--ax-border-neutral);
   border-radius: var(--ax-border-radius-xlarge);
   background-color: var(--__axc-dropzone-background);
