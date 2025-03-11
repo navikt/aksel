@@ -46,7 +46,14 @@ export const WithSidebar = ({
           <Sidebar
             sidebarData={[
               { label: "Grunnleggende", links: sidebar },
-              { label: "Komponenter", links: sidebar },
+              {
+                label: "Komponenter",
+                links: [
+                  { slug: "test-slug", tag: "ready", heading: "Test heading" },
+                  ...sidebar,
+                  { slug: "test-slug", tag: "ready", heading: "Test heading" },
+                ],
+              },
             ]}
           />
         </Show>

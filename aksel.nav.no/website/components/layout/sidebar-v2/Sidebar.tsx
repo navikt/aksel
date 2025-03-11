@@ -4,12 +4,30 @@ import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
-import { SidebarT } from "@/types";
 
-type DesignsystemSidebarT = { label: string; links: SidebarT };
+type SidebarInputNodeT = {
+  heading: string;
+  slug: string;
+  kategori: string;
+  tag: "beta" | "new" | "ready" | "deprecated";
+  sidebarindex: number | null;
+};
+
+type SidebarPageT = Pick<SidebarInputNodeT, "heading" | "slug" | "tag">;
+
+type SidebarGroupedPagesT = {
+  title: string;
+  value: string;
+  pages: SidebarPageT[];
+};
+
+type DesignsystemSectionT = {
+  label: string;
+  links: (SidebarPageT | SidebarGroupedPagesT)[];
+};
 
 type SidebarProps = {
-  sidebarData: DesignsystemSidebarT[];
+  sidebarData: DesignsystemSectionT[];
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const NotchClasses =
@@ -17,12 +35,6 @@ const NotchClasses =
 
 function Sidebar(props: SidebarProps) {
   const { sidebarData, className, ...rest } = props;
-
-  const { asPath } = useRouter();
-
-  const isActive = (slug: string) => {
-    return asPath.split("#")[0] === `/${slug}`;
-  };
 
   return (
     <nav
@@ -32,97 +44,138 @@ function Sidebar(props: SidebarProps) {
     >
       <BodyShort as="ul" className="space-y-3">
         {sidebarData.map((section, index) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const id = useId();
           return (
             <React.Fragment key={section.label}>
-              <li>
-                <BodyShort
-                  as="div"
-                  weight="semibold"
-                  className="text-ax-text-neutral-subtle py-0.5 pl-2"
-                  id={id}
-                >
-                  {section.label}
-                </BodyShort>
-                <ul aria-labelledby={id}>
-                  {section.links.map((link) => {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    const [open, setOpen] = useState(false);
-
-                    const isSectionActive = link.pages.some((page) =>
-                      isActive(page.slug),
-                    );
-
-                    return (
-                      <li key={link.title}>
-                        <button
-                          onClick={() => setOpen(!open)}
-                          className={cl(
-                            "focus-preset-tight hover:bg-ax-bg-neutral-moderate-hoverA relative flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 leading-5",
-                            isSectionActive && !open && NotchClasses,
-                            {
-                              "bg-ax-bg-neutral-moderate":
-                                isSectionActive && !open,
-                            },
-                          )}
-                          aria-expanded={open}
-                        >
-                          {link.title}
-                          <ChevronDownIcon aria-hidden />
-                        </button>
-                        <ul hidden={!open} className="">
-                          {link.pages.map((page) => {
-                            const active = isActive(page.slug);
-                            return (
-                              <li
-                                className="group relative text-medium leading-5"
-                                key={page.heading}
-                              >
-                                <Link
-                                  href={`/${page.slug}`}
-                                  className={cl(
-                                    "focus-preset-tight block rounded-medium py-0.5",
-                                    active && NotchClasses,
-                                    {
-                                      "font-bold": active,
-                                    },
-                                  )}
-                                >
-                                  <span
-                                    className={cl(
-                                      "block rounded-medium px-2 py-1 pl-4",
-                                      {
-                                        "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue":
-                                          active,
-                                        "group-hover:bg-ax-bg-neutral-moderate-hoverA":
-                                          !active,
-                                      },
-                                    )}
-                                  >
-                                    {page.heading}
-                                  </span>
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
-              {index !== sidebarData.length - 1 && (
-                <li
-                  aria-hidden
-                  className="w-ful border-ax-border-neutral-subtle h-px border-t"
-                />
-              )}
+              <SidebarGroup
+                key={section.label}
+                label={section.label}
+                links={section.links}
+              />
+              {index !== sidebarData.length - 1 && <SidebarDivider />}
             </React.Fragment>
           );
         })}
       </BodyShort>
     </nav>
+  );
+}
+
+function SidebarDivider() {
+  return (
+    <li
+      aria-hidden
+      className="h-px w-full border-t border-ax-border-neutral-subtle"
+    />
+  );
+}
+
+function SidebarGroup(props: DesignsystemSectionT) {
+  const { label, links } = props;
+  const id = useId();
+  return (
+    <li>
+      <BodyShort
+        as="div"
+        weight="semibold"
+        className="py-0.5 pl-2 text-ax-text-neutral-subtle"
+        id={id}
+      >
+        {label}
+      </BodyShort>
+      <ul aria-labelledby={id}>
+        {links.map((link) => {
+          if (!("pages" in link)) {
+            return <SidebarItem key={link.heading} page={link} />;
+          }
+
+          return (
+            <SidebarSubNav
+              key={link.title}
+              pages={link.pages}
+              title={link.title}
+              value={link.value}
+            />
+          );
+        })}
+      </ul>
+    </li>
+  );
+}
+
+function SidebarSubNav(props: SidebarGroupedPagesT) {
+  const { pages, title } = props;
+  const [open, setOpen] = useState(false);
+  const { asPath } = useRouter();
+
+  const isActive = (slug: string) => {
+    return asPath.split("#")[0] === `/${slug}`;
+  };
+
+  const isSectionActive = pages.some((page) => isActive(page.slug));
+
+  return (
+    <li>
+      <button
+        onClick={() => setOpen(!open)}
+        className={cl(
+          "focus-preset-tight relative flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 leading-5 hover:bg-ax-bg-neutral-moderate-hoverA",
+          isSectionActive && !open && NotchClasses,
+          {
+            "bg-ax-bg-neutral-moderate": isSectionActive && !open,
+          },
+        )}
+        aria-expanded={open}
+      >
+        {title}
+        <ChevronDownIcon aria-hidden />
+      </button>
+      <ul hidden={!open}>
+        {pages.map((page) => (
+          <SidebarItem key={page.heading} page={page} isIndented />
+        ))}
+      </ul>
+    </li>
+  );
+}
+
+/**
+ * TODO:
+ * - Add support for auto-left indenting if nested
+ */
+function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
+  const { page, isIndented = false } = props;
+  const { asPath } = useRouter();
+
+  const isActive = (slug: string) => {
+    return asPath.split("#")[0] === `/${slug}`;
+  };
+
+  const active = isActive(page.slug);
+  return (
+    <li
+      className={cl("group relative leading-5", { "text-medium": isIndented })}
+    >
+      <Link
+        href={`/${page.slug}`}
+        className={cl(
+          "focus-preset-tight block rounded-medium py-0.5",
+          active && NotchClasses,
+          {
+            "font-bold": active,
+          },
+        )}
+      >
+        <span
+          className={cl("block rounded-medium px-2 py-1", {
+            "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue": active,
+            "group-hover:bg-ax-bg-neutral-moderate-hoverA": !active,
+            "pl-4": isIndented,
+          })}
+        >
+          {page.heading}
+        </span>
+      </Link>
+    </li>
   );
 }
 
