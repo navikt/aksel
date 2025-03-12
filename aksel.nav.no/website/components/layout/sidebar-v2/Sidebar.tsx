@@ -7,6 +7,9 @@ import { BodyShort, Detail } from "@navikt/ds-react";
 import { StatusTag } from "@/web/StatusTag";
 import styles from "./Sidebar.module.css";
 
+/**
+ * TODO: Implement "mobile"-size
+ */
 type SidebarInputNodeT = {
   heading: string;
   slug: string;
@@ -32,10 +35,6 @@ type SidebarProps = {
   sidebarData: DesignsystemSectionT[];
 } & React.HTMLAttributes<HTMLDivElement>;
 
-/**
- * TODO:
- * - Synk with old sidebar features
- */
 function Sidebar(props: SidebarProps) {
   const { sidebarData, className, ...rest } = props;
 
@@ -106,11 +105,9 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
   const [open, setOpen] = useState(false);
   const { asPath } = useRouter();
 
-  const isActive = (slug: string) => {
-    return asPath.split("#")[0] === `/${slug}`;
-  };
-
-  const isSectionActive = pages.some((page) => isActive(page.slug));
+  const isSectionActive = pages.some((page) => {
+    return asPath.split("#")[0] === `/${page.slug}`;
+  });
 
   return (
     <li>
@@ -140,11 +137,7 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
   const { page, isIndented = false } = props;
   const { asPath } = useRouter();
 
-  const isActive = (slug: string) => {
-    return asPath.split("#")[0] === `/${slug}`;
-  };
-
-  const active = isActive(page.slug);
+  const active = asPath.split("#")[0] === `/${page.slug}`;
 
   const Component = isIndented ? Detail : BodyShort;
   return (
