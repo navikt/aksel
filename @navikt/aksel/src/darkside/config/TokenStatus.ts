@@ -28,11 +28,11 @@ class TokenStatus {
   status: StatusT;
 
   constructor() {
-    this.status = this.initStatus();
+    this.initStatus();
   }
 
-  initStatus(): StatusT {
-    return {
+  initStatus() {
+    this.status = {
       css: { legacy: [], updated: [] },
       scss: { legacy: [], updated: [] },
       less: { legacy: [], updated: [] },
