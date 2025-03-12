@@ -121,6 +121,8 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
         })}
         data-state={isSectionActive ? "active" : "inactive"}
         aria-expanded={open}
+        data-umami-event="sidebar-subnav"
+        data-umami-event-kategori={title}
       >
         {title}
         <ChevronDownIcon aria-hidden />
@@ -158,6 +160,10 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
         className={cl(styles.navListItemLink, {
           [styles.navListNotch]: active,
         })}
+        prefetch={false}
+        data-current={active}
+        data-umami-event="navigere"
+        data-umami-event-kilde="sidebar"
       >
         <span
           className={cl(styles.navListItemInner, {
