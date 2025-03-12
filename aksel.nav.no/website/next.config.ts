@@ -19,7 +19,7 @@ const ContentSecurityPolicy = `
 `;
 
 const cspHeader = `
-    default-src 'self';
+    default-src 'self' https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io;
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;

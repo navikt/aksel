@@ -1,3 +1,5 @@
+import { SanityLive } from "./_test/live";
+
 export default function RootLayout({
   children,
 }: {
@@ -17,6 +19,7 @@ export default function RootLayout({
       </head> */}
       <body data-theme="light" className="aksel antialiased">
         {children}
+        <SanityLive />
       </body>
     </html>
   );
