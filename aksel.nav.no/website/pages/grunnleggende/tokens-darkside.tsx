@@ -138,81 +138,58 @@ const ColorToken = ({ token }: { token: any }) => {
   switch (token.category) {
     case "backgroundColor":
       return (
-        <ExampleContainer>
-          <Box
-            borderColor="border-subtle"
-            borderRadius="full"
-            borderWidth="1"
-            style={{ backgroundColor: token.value }}
-            width="32px"
-            height="32px"
-          />
-        </ExampleContainer>
+        <Box
+          borderColor="border-subtle"
+          borderRadius="full"
+          borderWidth="1"
+          style={{ backgroundColor: token.value }}
+          width="32px"
+          height="32px"
+        />
       );
     case "borderColor":
       return (
-        <ExampleContainer>
-          <Box
-            borderRadius="full"
-            borderWidth="4"
-            width="32px"
-            height="32px"
-            style={{ borderColor: token.value }}
-          />
-        </ExampleContainer>
+        <Box
+          borderRadius="full"
+          borderWidth="4"
+          width="32px"
+          height="32px"
+          style={{ borderColor: token.value }}
+        />
       );
-    case "textColor":
-      switch (token.modifier) {
-        case "contrast":
-          return (
-            <ExampleContainer background="surface-neutral">
-              <Box width="32px" height="32px">
-                <VStack as="div" align="center" justify="center" height="100%">
-                  <Heading size="medium" style={{ color: token.value }}>
-                    Aa
-                  </Heading>
-                </VStack>
-              </Box>
-            </ExampleContainer>
-          );
-        case "icon":
-          return (
-            <ExampleContainer>
-              <Box width="32px" height="32px">
-                <VStack as="div" align="center" justify="center" height="100%">
-                  <PaletteIcon
-                    title="a11y-title"
-                    color={token.value}
-                    fontSize="1.5rem"
-                  />
-                </VStack>
-              </Box>
-            </ExampleContainer>
-          );
-        default:
-          return (
-            <ExampleContainer>
-              <Box width="32px" height="32px">
-                <VStack as="div" align="center" justify="center" height="100%">
-                  <Heading size="medium" style={{ color: token.value }}>
-                    Aa
-                  </Heading>
-                </VStack>
-              </Box>
-            </ExampleContainer>
-          );
+    case "textColor": {
+      if (token.modifier === "icon") {
+        return (
+          <Box width="32px" height="32px">
+            <VStack as="div" align="center" justify="center" height="100%">
+              <PaletteIcon
+                title="a11y-title"
+                color={token.value}
+                fontSize="1.5rem"
+              />
+            </VStack>
+          </Box>
+        );
       }
+      return (
+        <Box width="32px" height="32px">
+          <VStack as="div" align="center" justify="center" height="100%">
+            <Heading size="medium" style={{ color: token.value }}>
+              Aa
+            </Heading>
+          </VStack>
+        </Box>
+      );
+    }
     default:
       return (
-        <ExampleContainer>
-          <Box
-            borderRadius="medium"
-            borderWidth="1"
-            background={token.value}
-            width="32px"
-            height="32px"
-          />
-        </ExampleContainer>
+        <Box
+          borderRadius="medium"
+          borderWidth="1"
+          background={token.value}
+          width="32px"
+          height="32px"
+        />
       );
   }
 };
@@ -245,65 +222,55 @@ const FontToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
       break;
     case "line-height":
       return (
-        <ExampleContainer>
-          <VStack as="div" align="center" justify="center" height="100%">
-            <LineHeightIcon width="32px" height="32px" title={token.name} />
-          </VStack>
-        </ExampleContainer>
+        <VStack as="div" align="center" justify="center" height="100%">
+          <LineHeightIcon width="32px" height="32px" title={token.name} />
+        </VStack>
       );
   }
   return (
-    <ExampleContainer>
-      <VStack as="div" align="center" justify="center" height="100%">
-        <Heading size="medium" style={fontStyling}>
-          Aa
-        </Heading>
-      </VStack>
-    </ExampleContainer>
+    <VStack as="div" align="center" justify="center" height="100%">
+      <Heading size="medium" style={fontStyling}>
+        Aa
+      </Heading>
+    </VStack>
   );
 };
 
 const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <ExampleContainer>
-    <VStack as="div" align="center" justify="center" height="100%">
-      <SpaceHorizontalIcon
-        title={token.name}
-        color={token.value}
-        fontSize="1.5rem"
-      />
-    </VStack>
-  </ExampleContainer>
+  <VStack as="div" align="center" justify="center" height="100%">
+    <SpaceHorizontalIcon
+      title={token.name}
+      color={token.value}
+      fontSize="1.5rem"
+    />
+  </VStack>
 );
 
 const ShadowToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <ExampleContainer>
-    <VStack as="div" align="center" justify="center" height="100%">
-      <Box
-        borderRadius="medium"
-        borderWidth="1"
-        borderColor="border-subtle"
-        width="32px"
-        height="32px"
-        style={{ boxShadow: token.value }}
-      />
-    </VStack>
-  </ExampleContainer>
+  <VStack as="div" align="center" justify="center" height="100%">
+    <Box
+      borderRadius="medium"
+      borderWidth="1"
+      borderColor="border-subtle"
+      width="32px"
+      height="32px"
+      style={{ boxShadow: token.value }}
+    />
+  </VStack>
 );
 
 const RadiusToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <ExampleContainer>
-    <VStack as="div" align="center" justify="center" height="100%">
-      <Box
-        as="div"
-        width="32px"
-        height="32px"
-        background="surface-neutral"
-        style={{
-          borderRadius: token.value,
-        }}
-      />
-    </VStack>
-  </ExampleContainer>
+  <VStack as="div" align="center" justify="center" height="100%">
+    <Box
+      as="div"
+      width="32px"
+      height="32px"
+      background="surface-neutral"
+      style={{
+        borderRadius: token.value,
+      }}
+    />
+  </VStack>
 );
 
 const BreakpointToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
@@ -340,24 +307,20 @@ const TokenExample = ({ token }: { token: any }) => {
       return <RadiusToken token={token} />;
     case "breakpoint":
       return (
-        <ExampleContainer>
-          <VStack as="div" align="center" justify="center" height="100%">
-            <BreakpointToken token={token} />
-          </VStack>
-        </ExampleContainer>
+        <VStack as="div" align="center" justify="center" height="100%">
+          <BreakpointToken token={token} />
+        </VStack>
       );
     default:
       return (
-        <ExampleContainer>
-          <Box
-            borderColor="border-subtle"
-            borderRadius="medium"
-            background="bg-default"
-            borderWidth="1"
-            width="32px"
-            height="32px"
-          />
-        </ExampleContainer>
+        <Box
+          borderColor="border-subtle"
+          borderRadius="medium"
+          background="bg-default"
+          borderWidth="1"
+          width="32px"
+          height="32px"
+        />
       );
   }
 };
@@ -372,7 +335,15 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
       paddingInline="2"
     >
       <HStack gap="3">
-        <TokenExample token={token} />
+        <ExampleContainer
+          background={
+            token.category === "textColor" && token.modifier === "contrast"
+              ? "surface-neutral"
+              : undefined
+          }
+        >
+          <TokenExample token={token} />
+        </ExampleContainer>
         <VStack align="start">
           <CopyButton
             copyText={tokenText}
