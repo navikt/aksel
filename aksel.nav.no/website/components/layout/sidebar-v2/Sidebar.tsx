@@ -1,7 +1,7 @@
 import cl from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useId, useState } from "react";
+import React, { useContext, useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { StatusTag } from "@/web/StatusTag";
@@ -33,32 +33,41 @@ type DesignsystemSectionT = {
 
 type SidebarProps = {
   sidebarData: DesignsystemSectionT[];
+  layout: "sidebar" | "mobile";
 } & React.HTMLAttributes<HTMLDivElement>;
 
+const SidebarContext = React.createContext<"sidebar" | "mobile" | null>(null);
+
 function Sidebar(props: SidebarProps) {
-  const { sidebarData, className, ...rest } = props;
+  const { sidebarData, className, layout = "sidebar", ...rest } = props;
 
   return (
-    <nav
-      {...rest}
-      aria-label="Sidemeny"
-      className={cl(className, styles.navElement)}
-    >
-      <BodyShort as="ul" className={styles.rootUl} size="small">
-        {sidebarData.map((section, index) => {
-          return (
-            <React.Fragment key={section.label}>
-              <SidebarGroup
-                key={section.label}
-                label={section.label}
-                links={section.links}
-              />
-              {index !== sidebarData.length - 1 && <SidebarDivider />}
-            </React.Fragment>
-          );
-        })}
-      </BodyShort>
-    </nav>
+    <SidebarContext.Provider value={layout}>
+      <nav
+        {...rest}
+        aria-label="Sidemeny"
+        className={cl(className, styles.navElement)}
+      >
+        <BodyShort
+          as="ul"
+          className={styles.rootUl}
+          size={layout === "sidebar" ? "small" : "medium"}
+        >
+          {sidebarData.map((section, index) => {
+            return (
+              <React.Fragment key={section.label}>
+                <SidebarGroup
+                  key={section.label}
+                  label={section.label}
+                  links={section.links}
+                />
+                {index !== sidebarData.length - 1 && <SidebarDivider />}
+              </React.Fragment>
+            );
+          })}
+        </BodyShort>
+      </nav>
+    </SidebarContext.Provider>
   );
 }
 
@@ -69,17 +78,25 @@ function SidebarDivider() {
 function SidebarGroup(props: DesignsystemSectionT) {
   const { label, links } = props;
   const id = useId();
+  const layout = useContext(SidebarContext);
 
   const isDarkside = label.toLowerCase() === "darkside";
+  const Component = layout === "sidebar" ? Detail : BodyShort;
 
   return (
     <li
       className={styles.navListGroup}
       data-type={isDarkside ? "darkside" : "neutral"}
+      data-layout={layout}
     >
-      <Detail as="div" className={styles.navListGroupLabel} id={id}>
+      <Component
+        as="div"
+        className={styles.navListGroupLabel}
+        id={id}
+        size={layout === "sidebar" ? "medium" : "small"}
+      >
         {label}
-      </Detail>
+      </Component>
       <ul aria-labelledby={id}>
         {links.map((link) => {
           if (!("pages" in link)) {
@@ -136,14 +153,25 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
 function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
   const { page, isIndented = false } = props;
   const { asPath } = useRouter();
+  const layout = useContext(SidebarContext);
 
   const active = asPath.split("#")[0] === `/${page.slug}`;
 
-  const Component = isIndented ? Detail : BodyShort;
+  const Component =
+    layout === "sidebar" ? (isIndented ? Detail : BodyShort) : BodyShort;
+
   return (
     <Component
       as="li"
-      size={isIndented ? "medium" : "small"}
+      size={
+        isIndented
+          ? layout === "mobile"
+            ? "small"
+            : "medium"
+          : layout === "mobile"
+            ? "medium"
+            : "small"
+      }
       data-state={active ? "active" : "inactive"}
       data-nested={isIndented ? "true" : undefined}
       className={styles.navListItem}
