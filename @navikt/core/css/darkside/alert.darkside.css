@@ -1,7 +1,7 @@
 .aksel-alert {
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid;
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--ax-space-20);
   display: flex;
   gap: var(--ax-space-12);
   align-items: center;
@@ -25,7 +25,7 @@
 }
 
 .aksel-alert--small {
-  padding: var(--ax-space-12) var(--ax-space-16);
+  padding: var(--ax-space-16);
   gap: var(--ax-space-8);
 
   > .aksel-alert__icon {
