@@ -22,7 +22,7 @@ export const KomponentArtikkel = defineType({
     oppdateringsvarsel,
     ...hiddenFields,
     titleField,
-    editorField,
+
     defineField({
       title: "Kategori",
       name: "kategori",
@@ -36,8 +36,16 @@ export const KomponentArtikkel = defineType({
         layout: "radio",
       },
     }),
+    defineField({
+      title: "Sidebar index",
+      description:
+        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
+      name: "sidebarindex",
+      type: "number",
+      group: "settings",
+    }),
     kategoriSlug(prefix),
-
+    editorField,
     defineField({
       title: "Metadata",
       name: "status",
@@ -54,7 +62,7 @@ export const KomponentArtikkel = defineType({
               { title: "Beta", value: "beta" },
               { title: "New", value: "new" },
               { title: "Stable", value: "ready" },
-              { title: "Deprecated", value: "deprecated" },
+              { title: "Legacy", value: "deprecated" },
             ],
             layout: "radio",
           },
@@ -81,14 +89,7 @@ export const KomponentArtikkel = defineType({
         }),
       ],
     }),
-    defineField({
-      title: "Sidebar index",
-      description:
-        "Overstyrer sortering av artikler i sidebar. Hvis feltet er tomt, sorteres den alfabetisk.",
-      name: "sidebarindex",
-      type: "number",
-      group: "settings",
-    }),
+
     defineField({
       title: "Ikke vis 'Send innspill'-modul på siden",
       name: "hide_feedback",
