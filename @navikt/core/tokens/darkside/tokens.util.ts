@@ -27,11 +27,14 @@ export type FontGroups =
   | "size-heading"
   | "weight";
 
+export type BreakpointGroups = "mobile first" | "desktop first";
+
 export type TokenGroup =
   | GlobalColorRoles
   | SemanticTokenGroups
   | `${SemanticTokenGroups}.${SemanticColorRoles}`
-  | FontGroups;
+  | FontGroups
+  | BreakpointGroups;
 
 export type StyleDictionaryToken<T extends TokenTypes> = {
   /**
