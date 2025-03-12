@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.17.2
+
+### Patch Changes
+
+- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
 ## 7.17.1
 
 ### Patch Changes
