@@ -33,7 +33,7 @@ type DesignsystemSectionT = {
 
 type SidebarProps = {
   sidebarData: DesignsystemSectionT[];
-  layout: "sidebar" | "mobile";
+  layout?: "sidebar" | "mobile";
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const SidebarContext = React.createContext<"sidebar" | "mobile" | null>(null);
