@@ -1,0 +1,116 @@
+.navElement {
+  position: relative;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-inline: var(--ax-space-8);
+  width: 16rem;
+  margin-left: var(--ax-space-16);
+}
+
+.rootUl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-12);
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+}
+
+.navListGroup {
+  border-radius: var(--ax-border-radius-medium);
+
+  &[data-type="darkside"] {
+    background-color: var(--ax-bg-brand-magenta-moderate);
+  }
+}
+
+.navListGroupLabel {
+  padding-block: var(--ax-space-2);
+  padding-inline-start: var(--ax-space-8);
+  color: var(--ax-text-neutral-subtle);
+  font-weight: var(--ax-font-weight-bold);
+}
+
+.navListSubButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  align-self: stretch;
+  border-radius: var(--ax-border-radius-medium);
+  padding-block: var(--ax-space-4);
+  padding-inline: var(--ax-space-8) var(--ax-space-4);
+  min-height: 1.75rem;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 0;
+    z-index: 1;
+  }
+
+  &[aria-expanded="false"][data-state="active"] {
+    background-color: var(--ax-bg-neutral-moderateA);
+  }
+}
+
+.navListNotch::before {
+  content: "";
+  position: absolute;
+  background-color: var(--ax-bg-brand-blue-strong);
+  width: 3px;
+  height: calc(100% - 8px);
+  left: calc(var(--ax-space-6) * -1);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: var(--ax-border-radius-full);
+}
+
+.navListItem {
+  position: relative;
+  min-height: 1.75rem;
+}
+
+.navListItemLink {
+  border-radius: var(--ax-border-radius-medium);
+  padding-block: var(--ax-space-2);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 0;
+    z-index: 1;
+  }
+}
+
+.navListItemInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--ax-border-radius-medium);
+  padding-block: var(--ax-space-4);
+  padding-inline: var(--ax-space-8);
+
+  [data-state="active"] & {
+    background-color: var(--ax-bg-brand-blue-moderateA);
+    color: var(--ax-text-brand-blue);
+  }
+
+  [data-state="active"]:hover & {
+    background-color: var(--ax-bg-brand-blue-moderate-hoverA);
+  }
+
+  [data-state="inactive"]:hover & {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  [data-nested="true"] & {
+    padding-inline-start: var(--ax-space-16);
+  }
+}

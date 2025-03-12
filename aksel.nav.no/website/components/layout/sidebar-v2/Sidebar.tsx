@@ -5,6 +5,7 @@ import React, { useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { StatusTag } from "@/web/StatusTag";
+import styles from "./Sidebar.module.css";
 
 type SidebarInputNodeT = {
   heading: string;
@@ -31,13 +32,9 @@ type SidebarProps = {
   sidebarData: DesignsystemSectionT[];
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const NotchClasses =
-  "before:bg-ax-bg-brand-blue-strong before:absolute before:-left-2 before:top-1/2 before:h-[calc(100%-8px)] before:w-[3px] before:-translate-y-1/2 before:rounded-full";
-
 /**
  * TODO:
  * - Synk with old sidebar features
- * - Add support for tags
  * - Add support for darkside colored group
  */
 function Sidebar(props: SidebarProps) {
@@ -47,9 +44,9 @@ function Sidebar(props: SidebarProps) {
     <nav
       {...rest}
       aria-label="Sidemeny"
-      className={cl(className, "relative w-sidebar shrink-0 self-start px-2")}
+      className={cl(className, styles.navElement)}
     >
-      <BodyShort as="ul" className="space-y-3" size="small">
+      <BodyShort as="ul" className={styles.rootUl} size="small">
         {sidebarData.map((section, index) => {
           return (
             <React.Fragment key={section.label}>
@@ -68,31 +65,27 @@ function Sidebar(props: SidebarProps) {
 }
 
 function SidebarDivider() {
-  return (
-    <li
-      aria-hidden
-      className="h-px w-full border-t border-ax-border-neutral-subtle"
-    />
-  );
+  return <li aria-hidden className={styles.divider} />;
 }
 
 function SidebarGroup(props: DesignsystemSectionT) {
   const { label, links } = props;
   const id = useId();
+
+  const isDarkside = label.toLowerCase() === "darkside";
+
   return (
-    <li>
-      <Detail
-        as="div"
-        weight="semibold"
-        className="py-0.5 pl-2 text-ax-text-neutral-subtle"
-        id={id}
-      >
+    <li
+      className={styles.navListGroup}
+      data-type={isDarkside ? "darkside" : "neutral"}
+    >
+      <Detail as="div" className={styles.navListGroupLabel} id={id}>
         {label}
       </Detail>
       <ul aria-labelledby={id}>
         {links.map((link) => {
           if (!("pages" in link)) {
-            return <SidebarItem key={link.heading} page={link} />;
+            return <SidebarItem key={link.slug} page={link} />;
           }
 
           return (
@@ -124,13 +117,10 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
     <li>
       <button
         onClick={() => setOpen(!open)}
-        className={cl(
-          "focus-preset-tight relative flex w-full items-center justify-between self-stretch rounded-medium py-1 pl-2 pr-1 leading-5 hover:bg-ax-bg-neutral-moderate-hoverA",
-          isSectionActive && !open && NotchClasses,
-          {
-            "bg-ax-bg-neutral-moderate": isSectionActive && !open,
-          },
-        )}
+        className={cl(styles.navListSubButton, {
+          [styles.navListNotch]: isSectionActive && !open,
+        })}
+        data-state={isSectionActive ? "active" : "inactive"}
         aria-expanded={open}
       >
         {title}
@@ -160,28 +150,20 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
     <Component
       as="li"
       size={isIndented ? "medium" : "small"}
-      className="group relative leading-5"
+      data-state={active ? "active" : "inactive"}
+      data-nested={isIndented ? "true" : undefined}
+      className={styles.navListItem}
     >
       <Link
         href={`/${page.slug}`}
-        className={cl(
-          "focus-preset-tight block rounded-medium py-0.5",
-          active && NotchClasses,
-          {
-            "font-bold": active,
-          },
-        )}
+        className={cl(styles.navListItemLink, {
+          [styles.navListNotch]: active,
+        })}
       >
         <span
-          className={cl(
-            "flex items-center justify-between rounded-medium px-2 py-1",
-            {
-              "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue group-hover:bg-ax-bg-brand-blue-moderate-hoverA":
-                active,
-              "group-hover:bg-ax-bg-neutral-moderate-hoverA": !active,
-              "pl-4": isIndented,
-            },
-          )}
+          className={cl(styles.navListItemInner, {
+            "pl-4": isIndented,
+          })}
         >
           {page.heading}
           <StatusTag size="xsmall" status={page.tag} />
