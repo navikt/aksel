@@ -417,9 +417,9 @@ const Section = ({
               parseFloat(b.rawValue.replace("rem", ""))
             );
           }
-          return a.modifier?.localeCompare(b.modifier || "", "nb");
+          return (a.modifier || "").localeCompare(b.modifier || "", "nb") || -1;
         }
-        return a.group?.localeCompare(b.group || "", "nb");
+        return (a.group || "").localeCompare(b.group || "", "nb");
       }
       default:
         return parseFloat(a.rawValue.replace("px", "")) >
