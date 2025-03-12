@@ -91,6 +91,7 @@
 .navListItemLink {
   border-radius: var(--ax-border-radius-medium);
   padding-block: var(--ax-space-2);
+  display: block;
 
   &:focus-visible {
     outline: 3px solid var(--ax-border-focus);
