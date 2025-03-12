@@ -35,7 +35,6 @@ type SidebarProps = {
 /**
  * TODO:
  * - Synk with old sidebar features
- * - Add support for darkside colored group
  */
 function Sidebar(props: SidebarProps) {
   const { sidebarData, className, ...rest } = props;

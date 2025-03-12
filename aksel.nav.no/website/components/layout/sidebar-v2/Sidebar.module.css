@@ -59,18 +59,28 @@
   &[aria-expanded="false"][data-state="active"] {
     background-color: var(--ax-bg-neutral-moderateA);
   }
+
+  [data-type="darkside"] &[aria-expanded="false"][data-state="active"] {
+    background-color: var(--ax-bg-brand-magenta-moderateA);
+  }
 }
 
-.navListNotch::before {
-  content: "";
-  position: absolute;
-  background-color: var(--ax-bg-brand-blue-strong);
-  width: 3px;
-  height: calc(100% - 8px);
-  left: calc(var(--ax-space-6) * -1);
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: var(--ax-border-radius-full);
+.navListNotch {
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: var(--ax-bg-brand-blue-strong);
+    width: 3px;
+    height: calc(100% - 8px);
+    left: calc(var(--ax-space-6) * -1);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: var(--ax-border-radius-full);
+  }
+
+  [data-type="darkside"] &::before {
+    background-color: var(--ax-bg-brand-magenta-strong);
+  }
 }
 
 .navListItem {
@@ -97,13 +107,22 @@
   padding-block: var(--ax-space-4);
   padding-inline: var(--ax-space-8);
 
-  [data-state="active"] & {
+  [data-type="neutral"] [data-state="active"] & {
     background-color: var(--ax-bg-brand-blue-moderateA);
     color: var(--ax-text-brand-blue);
   }
 
-  [data-state="active"]:hover & {
+  [data-type="neutral"] [data-state="active"]:hover & {
     background-color: var(--ax-bg-brand-blue-moderate-hoverA);
+  }
+
+  [data-type="darkside"] [data-state="active"] & {
+    background-color: var(--ax-bg-brand-magenta-moderateA);
+    color: var(--ax-text-brand-magenta);
+  }
+
+  [data-type="darkside"] [data-state="active"]:hover & {
+    background-color: var(--ax-bg-brand-magenta-moderate-hoverA);
   }
 
   [data-state="inactive"]:hover & {
