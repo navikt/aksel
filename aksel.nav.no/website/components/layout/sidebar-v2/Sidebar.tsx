@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "@navikt/ds-react";
+import { StatusTag } from "@/web/StatusTag";
 
 type SidebarInputNodeT = {
   heading: string;
@@ -172,14 +173,18 @@ function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
         )}
       >
         <span
-          className={cl("block rounded-medium px-2 py-1", {
-            "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue group-hover:bg-ax-bg-brand-blue-moderate-hoverA":
-              active,
-            "group-hover:bg-ax-bg-neutral-moderate-hoverA": !active,
-            "pl-4": isIndented,
-          })}
+          className={cl(
+            "flex items-center justify-between rounded-medium px-2 py-1",
+            {
+              "bg-ax-bg-brand-blue-moderateA text-ax-text-brand-blue group-hover:bg-ax-bg-brand-blue-moderate-hoverA":
+                active,
+              "group-hover:bg-ax-bg-neutral-moderate-hoverA": !active,
+              "pl-4": isIndented,
+            },
+          )}
         >
           {page.heading}
+          <StatusTag size="xsmall" status={page.tag} />
         </span>
       </Link>
     </Component>
