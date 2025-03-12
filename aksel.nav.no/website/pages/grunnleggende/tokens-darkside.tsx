@@ -351,9 +351,12 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
               iconPosition="right"
               size="xsmall"
             />
-            {token.rawValue && (
-              <Detail textColor="subtle">{token.rawValue}</Detail>
-            )}
+            {!["backgroundColor", "textColor", "borderColor"].includes(
+              token.category,
+            ) &&
+              token.rawValue && (
+                <Detail textColor="subtle">{token.rawValue}</Detail>
+              )}
           </VStack>
           {token.comment && <Detail>{token.comment}</Detail>}
         </VStack>
