@@ -1,4 +1,4 @@
-import { isWeekend } from "date-fns";
+import { isBefore, isSameDay, isWeekend } from "date-fns";
 import React, { useCallback } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
@@ -6,6 +6,7 @@ import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../Date.locale";
+import { DateRange, isDateRange } from "../../Date.typeutils";
 import { clampDisplayMonth, isDateOutsideRange } from "../../date-utils";
 import {
   ConditionalModeProps,
@@ -79,7 +80,36 @@ const ReactDayPicker = ({
       hideNavigation
       locale={locale}
       mode={mode as any}
-      onSelect={handleSelect}
+      onSelect={(selection, selectedDate: Date) => {
+        const controlledSelection = selected;
+
+        if (
+          mode !== "range" ||
+          selection ||
+          !isDateRange(controlledSelection)
+        ) {
+          console.info("ok");
+          handleSelect(selection);
+          return;
+        }
+
+        if (!controlledSelection.to) {
+          handleSelect({ from: selectedDate, to: undefined });
+          return;
+        }
+
+        let range: DateRange | undefined = selection;
+
+        if (isSameDay(controlledSelection.to, selectedDate)) {
+          range = undefined;
+        } else if (isBefore(selectedDate, controlledSelection.to)) {
+          range = { from: selectedDate, to: controlledSelection.to };
+        } else {
+          range = { from: controlledSelection.to, to: selectedDate };
+        }
+
+        handleSelect(range);
+      }}
       selected={selected}
       classNames={LegacyClassNames}
       components={{
