@@ -80,32 +80,32 @@ const ReactDayPicker = ({
       hideNavigation
       locale={locale}
       mode={mode as any}
-      onSelect={(selection, selectedDate: Date) => {
-        const controlledSelection = selected;
-
-        if (
-          mode !== "range" ||
-          selection ||
-          !isDateRange(controlledSelection)
-        ) {
-          console.info("ok");
-          handleSelect(selection);
+      onSelect={(newSelection, newDate: Date) => {
+        /**
+         * In the case where we have:
+         * - Mode: "range"
+         * - selected: { from: undefined, to: Date }
+         *
+         * RDP returns undefined for newSelection. We nee to manually handle this case.
+         */
+        if (mode !== "range" || newSelection || !isDateRange(selected)) {
+          handleSelect(newSelection);
           return;
         }
 
-        if (!controlledSelection.to) {
-          handleSelect({ from: selectedDate, to: undefined });
+        if (!selected.to) {
+          handleSelect({ from: newDate, to: undefined });
           return;
         }
 
-        let range: DateRange | undefined = selection;
+        let range: DateRange | undefined;
 
-        if (isSameDay(controlledSelection.to, selectedDate)) {
+        if (isSameDay(selected.to, newDate)) {
           range = undefined;
-        } else if (isBefore(selectedDate, controlledSelection.to)) {
-          range = { from: selectedDate, to: controlledSelection.to };
+        } else if (isBefore(newDate, selected.to)) {
+          range = { from: newDate, to: selected.to };
         } else {
-          range = { from: controlledSelection.to, to: selectedDate };
+          range = { from: selected.to, to: newDate };
         }
 
         handleSelect(range);
