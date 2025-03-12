@@ -41,17 +41,3 @@ html:has(.globalstyles) {
 .skiplink {
   @apply absolute left-0 -translate-y-full bg-border-focus p-4 text-text-on-inverted no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
 }
-
-.focus-preset {
-  &:focus-visible {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 3px;
-  }
-}
-
-.focus-preset-tight {
-  &:focus-visible {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 0;
-  }
-}
