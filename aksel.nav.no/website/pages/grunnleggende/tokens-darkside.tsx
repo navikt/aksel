@@ -21,7 +21,6 @@ import {
   HGrid,
   HStack,
   Heading,
-  Link,
   Search,
   Select,
   ToggleGroup,
@@ -344,24 +343,19 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
         >
           <TokenExample token={token} />
         </ExampleContainer>
-        <VStack align="start">
-          <CopyButton
-            copyText={tokenText}
-            text={tokenText}
-            iconPosition="right"
-            size="xsmall"
-          />
-          {token.rawValue && (
-            <Detail textColor="subtle">{token.rawValue}</Detail>
-          )}
-          <Detail>
-            {token.comment || (
-              <>
-                Beskrivelse av hva token brukes til. Kan også linke til{" "}
-                <Link href="#">komponenter</Link>.
-              </>
+        <VStack align="start" gap="2">
+          <VStack align="start">
+            <CopyButton
+              copyText={tokenText}
+              text={tokenText}
+              iconPosition="right"
+              size="xsmall"
+            />
+            {token.rawValue && (
+              <Detail textColor="subtle">{token.rawValue}</Detail>
             )}
-          </Detail>
+          </VStack>
+          {token.comment && <Detail>{token.comment}</Detail>}
         </VStack>
       </HStack>
     </Box>
