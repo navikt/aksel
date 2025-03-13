@@ -71,7 +71,7 @@ export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
         ...grunnleggendeKategorier,
         ...templatesKategorier,
       ]) {
-        if (slug.current === `${prefix}${section.value}`) {
+        if (slug?.current === `${prefix}${section.value}`) {
           return `Slug kan ikke være lik kategori: ${section.value}`;
         }
       }
