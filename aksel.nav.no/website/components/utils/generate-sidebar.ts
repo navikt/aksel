@@ -13,8 +13,16 @@ export function generateSidebar(
 
   const standalonePages: SidebarPageT[] = input
     .filter((page) => page.kategori === "standalone")
+    .sort((a, b) => {
+      return a?.heading.localeCompare(b?.heading);
+    })
     .sort(sortIndex)
-    .sort(sortDeprecated);
+    .sort(sortDeprecated)
+    .map((page) => ({
+      heading: page.heading,
+      slug: page.slug,
+      tag: page.tag,
+    }));
 
   const groupedPages = categories
     .map((x) => ({
