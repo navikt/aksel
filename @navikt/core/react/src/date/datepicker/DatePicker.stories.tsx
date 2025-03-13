@@ -166,10 +166,6 @@ export const UseDatepicker = () => {
 export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } = useRangeDatepicker({
     fromDate: new Date("Aug 23 2019"),
-    defaultSelected: {
-      from: new Date(),
-      to: new Date("03 23 2025"),
-    },
     onRangeChange: console.log,
     onValidate: console.log,
   });
