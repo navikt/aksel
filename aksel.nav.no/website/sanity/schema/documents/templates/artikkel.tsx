@@ -28,10 +28,13 @@ export const TemplatesArtikkel = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: templatesKategorier.map((x) => ({
-          title: x.title,
-          value: x.value,
-        })),
+        list: [
+          ...templatesKategorier.map((x) => ({
+            title: x.title,
+            value: x.value,
+          })),
+          { title: "Frittstående", value: "standalone" },
+        ],
         layout: "radio",
       },
     }),

@@ -42,14 +42,35 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) =>
     },
   });
 
+const isStandalone = (document) => {
+  return document?.kategori === "standalone";
+};
+
 export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
   Rule.required().custom((slug, { document }) => {
+    if (!slug?.current) {
+      return `URL må være definert`;
+    }
+    const slugLength = (slug.current.match(/\//g) || []).length;
+
+    if (isStandalone(document)) {
+      if (!slug?.current?.startsWith(`${prefix}`)) {
+        return `Slug må være: '${prefix}navn' for frittstående artikler`;
+      }
+      if (slugLength !== 1) {
+        return `Slug må være på 1 nivå for frittstående artikler`;
+      }
+      return true;
+    }
+
     if (!slug?.current?.startsWith(`${prefix}${document?.kategori}/`)) {
       return `Slug må starte med prefiks: ${prefix}${document?.kategori}`;
     }
-    if ((slug.current.match(/\//g) || []).length > 3 - 1) {
-      return `Siden kan bare være på ${3} nivå`;
+
+    if (slugLength !== 2) {
+      return `Siden kan bare være på 3 nivå`;
     }
+
     return true;
   });
 
@@ -63,8 +84,14 @@ export const kategoriSlug = (prefix: string) =>
     options: {
       source: "heading",
       slugify: (input, _, context) => {
-        const parent = context.parent as { kategori: string };
-        return `${prefix}${parent.kategori}/${input}`
+        let kategori = `${(context.parent as { kategori: string }).kategori}/`;
+
+        /* When an article is set to Standalone, we dont want the "category" in URL */
+        if (isStandalone(context.parent)) {
+          kategori = "";
+        }
+
+        return `${prefix}${kategori}${input}`
           .toLowerCase()
           .trim()
           .slice(0, 200)

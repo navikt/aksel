@@ -29,10 +29,13 @@ export const KomponentArtikkel = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: komponentKategorier.map((x) => ({
-          title: x.title,
-          value: x.value,
-        })),
+        list: [
+          ...komponentKategorier.map((x) => ({
+            title: x.title,
+            value: x.value,
+          })),
+          { title: "Frittstående", value: "standalone" },
+        ],
         layout: "radio",
       },
     }),

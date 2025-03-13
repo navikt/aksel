@@ -28,10 +28,13 @@ export const GrunnleggendeArtikkel = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: grunnleggendeKategorier.map((x) => ({
-          title: x.title,
-          value: x.value,
-        })),
+        list: [
+          ...grunnleggendeKategorier.map((x) => ({
+            title: x.title,
+            value: x.value,
+          })),
+          { title: "Frittstående", value: "standalone" },
+        ],
         layout: "radio",
       },
     }),
