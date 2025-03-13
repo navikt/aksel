@@ -127,6 +127,11 @@ export const migrations: {
       value: "token-update-js",
       path: "darkside/token-update-js/token-update-js",
     },
+    {
+      description: "marks deprecated prop usage with comments.",
+      value: "prop-deprecate",
+      path: "darkside/prop-deprecate/prop-deprecate",
+    },
   ],
 };
 
