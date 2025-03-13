@@ -1,11 +1,12 @@
 import Fuse from "fuse.js";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next/types";
 import React, { useMemo, useState } from "react";
+import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
+  ActionMenu,
   BodyShort,
   Box,
   Button,
@@ -82,7 +83,7 @@ const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
 });
 
 const Page = ({ sidebar }: PageProps["props"]) => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
 
   const [iconQuery, setIconQuery] = useState("");
 
@@ -186,7 +187,10 @@ const Page = ({ sidebar }: PageProps["props"]) => {
                   <ToggleGroup.Item value="fill" label="Fill" />
                 </ToggleGroup>
               </form>
-              <HGrid columns={{ xs: 1, lg: "1fr 300px" }} gap="space-40">
+              <HGrid
+                columns={{ xs: 1, lg: "3fr minmax(300px, 2fr)" }}
+                gap="space-40"
+              >
                 <section
                   aria-label="Ikonliste"
                   className="flex flex-col gap-10"
@@ -207,26 +211,30 @@ const Page = ({ sidebar }: PageProps["props"]) => {
                                   if (T === undefined) {
                                     return null;
                                   }
-
                                   return (
-                                    <Link
-                                      href={
-                                        !hasName ? `/icons/${i.id}` : "/icons"
-                                      }
-                                      scroll={false}
+                                    <button
+                                      onClick={() => {
+                                        const href =
+                                          name !== i.id
+                                            ? `/icons/${i.id}`
+                                            : "/icons";
+                                        push(href, undefined, {
+                                          scroll: false,
+                                        });
+                                      }}
                                       key={i.id}
-                                      prefetch={false}
                                       id={i.id}
                                       className={styles.iconButton}
                                       data-state={
                                         i.id === name ? "active" : "inactive"
                                       }
+                                      aria-pressed={name === i.id}
                                     >
                                       <span className="navds-sr-only">
                                         {i.name}
                                       </span>
                                       <T fontSize="1.5rem" aria-hidden alt="" />
-                                    </Link>
+                                    </button>
                                   );
                                 })}
                               </React.Fragment>
@@ -244,7 +252,7 @@ const Page = ({ sidebar }: PageProps["props"]) => {
                   as="section"
                   gap="space-48"
                 >
-                  <IconDetails iconName={name} />
+                  {hasName ? <IconDetails iconName={name} /> : <IntroCard />}
 
                   <div>
                     <BodyShort spacing>
@@ -278,6 +286,44 @@ const Page = ({ sidebar }: PageProps["props"]) => {
   );
 };
 
+function IntroCard() {
+  return (
+    <div className={`${styles.iconDetails} p-5`}>
+      <BodyShort spacing>
+        Alle ikonene er tilgjengelige som React-komponenter
+      </BodyShort>
+      <SnippetLazy
+        node={{
+          title: "",
+          code: {
+            code: `yarn install @navikt/aksel-icons`,
+            language: "bash",
+          },
+        }}
+      />
+      <SnippetLazy
+        node={{
+          title: "TSX",
+          code: {
+            code: `import { ChevronDownIcon, TrashIcon, FilterIcon } from "@navikt/aksel-icons";
+
+function MyComponent () {
+  return (
+    <div>
+  		<ChevronDownIcon />
+  		<TrashIcon />
+  		<FilterIcon />
+  	</div>
+  )
+}`,
+            language: "tsx",
+          },
+        }}
+      />
+    </div>
+  );
+}
+
 function IconDetails({ iconName }: { iconName: string }) {
   const T = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
   const metaData = useMemo(() => {
@@ -296,6 +342,10 @@ function IconDetails({ iconName }: { iconName: string }) {
     return null;
   }
 
+  const svgString = ReactDOMServer.renderToString(<T />)
+    .replaceAll("currentColor", "#000")
+    .replaceAll("1em", "24");
+
   return (
     <div className={styles.iconDetails}>
       <div className={styles.iconDetailsShowcase}>
@@ -310,16 +360,48 @@ function IconDetails({ iconName }: { iconName: string }) {
             <Icons.ArrowDownRightIcon fontSize="1.5rem" aria-hidden />
             <BodyShort>{metaData?.sub_category}</BodyShort>
           </div>
+          <HStack gap="space-8" marginBlock="space-12 0">
+            {metaData?.keywords.map((keyword) => (
+              <Tag size="small" variant="neutral-moderate" key={keyword}>
+                {keyword}
+              </Tag>
+            ))}
+          </HStack>
         </div>
-        <HStack gap="space-8">
-          {metaData?.keywords.map((keyword) => (
-            <Tag size="small" variant="neutral-moderate" key={keyword}>
-              {keyword}
-            </Tag>
-          ))}
-        </HStack>
-        <div>
-          <Button>Kopier react</Button>
+        <div className="flex gap-px">
+          <Button className="rounded-r-none">Kopier react</Button>
+          <ActionMenu>
+            <ActionMenu.Trigger>
+              <Button
+                className="rounded-l-none"
+                icon={<Icons.ChevronDownIcon title="Meny" />}
+              />
+            </ActionMenu.Trigger>
+            <ActionMenu.Content align="end">
+              <ActionMenu.Item
+                onSelect={() => {
+                  try {
+                    navigator.clipboard.writeText(svgString);
+                  } catch {
+                    console.error("Unable to copy using Clipboard API");
+                  }
+                }}
+              >
+                Kopier SVG
+              </ActionMenu.Item>
+              <ActionMenu.Item
+                as="a"
+                href={URL.createObjectURL(
+                  new Blob([svgString], {
+                    type: "image/svg+xml",
+                  }),
+                )}
+                download={iconName}
+              >
+                Last ned SVG
+              </ActionMenu.Item>
+            </ActionMenu.Content>
+          </ActionMenu>
         </div>
         <SnippetLazy
           node={{
