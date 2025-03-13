@@ -1,4 +1,4 @@
-import { isWeekend } from "date-fns";
+import { isBefore, isSameDay, isWeekend } from "date-fns";
 import React, { useCallback } from "react";
 import { ClassNames, DayPicker, dateMatchModifiers } from "react-day-picker";
 import { Show } from "../../../layout/responsive";
@@ -6,6 +6,7 @@ import { useRenameCSS } from "../../../theme/Theme";
 import { omit } from "../../../util";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
 import { getLocaleFromString } from "../../Date.locale";
+import { DateRange, isDateRange } from "../../Date.typeutils";
 import { clampDisplayMonth, isDateOutsideRange } from "../../date-utils";
 import {
   ConditionalModeProps,
@@ -79,7 +80,36 @@ const ReactDayPicker = ({
       hideNavigation
       locale={locale}
       mode={mode as any}
-      onSelect={handleSelect}
+      onSelect={(newSelection, newDate: Date) => {
+        /**
+         * In the case where we have:
+         * - Mode: "range"
+         * - selected: { from: undefined, to: Date }
+         *
+         * RDP returns undefined for newSelection. We need to manually handle this case.
+         */
+        if (mode !== "range" || newSelection || !isDateRange(selected)) {
+          handleSelect(newSelection);
+          return;
+        }
+
+        if (!selected.to) {
+          handleSelect({ from: newDate, to: undefined });
+          return;
+        }
+
+        let range: DateRange | undefined;
+
+        if (isSameDay(selected.to, newDate)) {
+          range = undefined;
+        } else if (isBefore(newDate, selected.to)) {
+          range = { from: newDate, to: selected.to };
+        } else {
+          range = { from: selected.to, to: newDate };
+        }
+
+        handleSelect(range);
+      }}
       selected={selected}
       classNames={LegacyClassNames}
       components={{

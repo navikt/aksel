@@ -4384,7 +4384,7 @@ __metadata:
     fast-glob: "npm:3.2.11"
     jscodeshift: "npm:^0.15.1"
     jsdom: "npm:25.0.1"
-    react-day-picker: "npm:9.5.0"
+    react-day-picker: "npm:9.6.1"
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:^6.3.0"
     rimraf: "npm:6.0.1"
@@ -21557,16 +21557,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:9.5.0":
-  version: 9.5.0
-  resolution: "react-day-picker@npm:9.5.0"
+"react-day-picker@npm:9.6.1":
+  version: 9.6.1
+  resolution: "react-day-picker@npm:9.6.1"
   dependencies:
     "@date-fns/tz": "npm:^1.2.0"
     date-fns: "npm:^4.1.0"
     date-fns-jalali: "npm:^4.1.0-0"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10/8f68fb0f723e89efa78f814ce8564c13f60901e1746ccebba68f05f0128cdbf5f9cbafdb5b93ac9187bda9373b4f882a2a961aea7198eed5dcd16ab299c84979
+  checksum: 10/2d73bdaceed64c6cd8185ae48edce19ac879414982643b88c05744df421f60921526278d88883120c848a17f7cbe382d095ca90f3a2106dc2869a62fbd9d488e
   languageName: node
   linkType: hard
 
