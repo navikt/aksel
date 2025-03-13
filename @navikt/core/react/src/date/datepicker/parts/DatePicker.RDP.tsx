@@ -86,7 +86,7 @@ const ReactDayPicker = ({
          * - Mode: "range"
          * - selected: { from: undefined, to: Date }
          *
-         * RDP returns undefined for newSelection. We nee to manually handle this case.
+         * RDP returns undefined for newSelection. We need to manually handle this case.
          */
         if (mode !== "range" || newSelection || !isDateRange(selected)) {
           handleSelect(newSelection);
