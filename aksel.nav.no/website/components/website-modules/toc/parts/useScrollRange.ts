@@ -7,7 +7,7 @@ function getOpacity(n: number): string {
   return Math.min(Math.min(Math.max(n, 0), 100) / 100, 1).toFixed(1);
 }
 
-export function useScrollRangeOpacity() {
+function useScrollRangeOpacity() {
   const [scrollBlock, setScrollBlock] = useState({ start: "0", end: "0" });
   const router = useRouter();
 
@@ -43,3 +43,5 @@ export function useScrollRangeOpacity() {
 
   return scrollBlock;
 }
+
+export { useScrollRangeOpacity };
