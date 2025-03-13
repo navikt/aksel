@@ -4,13 +4,17 @@
 
 ### @navikt/ds-react
 
-- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+- Datepicker: Fixed a bug where while ranged datepicker, setting `from` to `undefined` while `to` were defined did not allow selecting new dates. ([#3655](https://github.com/navikt/aksel/pull/3655))
+
+* List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
 
 ### @navikt/ds-css
 
-- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+- Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
 
-* ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+* Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
+- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
 
 ## 7.16
 
