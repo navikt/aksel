@@ -24,7 +24,7 @@ import { Feedback } from "@/web/Feedback/Feedback";
 import OutdatedAlert from "@/web/OutdatedAlert";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TableOfContents";
+import { TableOfContents } from "@/web/toc/TableOfContents";
 import NotFound from "../../404";
 
 type PageProps = NextPageT<{
