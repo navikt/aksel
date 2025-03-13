@@ -1,5 +1,10 @@
 import { SlugIsUniqueValidator, SlugRule, defineField } from "sanity";
-import { SANITY_API_VERSION } from "@/sanity/config";
+import {
+  SANITY_API_VERSION,
+  grunnleggendeKategorier,
+  komponentKategorier,
+  templatesKategorier,
+} from "@/sanity/config";
 import { sanitizeSlug } from "../../../util";
 
 export const validateSlug = (Rule: SlugRule, prefix: string, nesting: number) =>
@@ -60,6 +65,17 @@ export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
       if (slugLength !== 1) {
         return `Slug må være på 1 nivå for frittstående artikler`;
       }
+
+      for (const section of [
+        ...komponentKategorier,
+        ...grunnleggendeKategorier,
+        ...templatesKategorier,
+      ]) {
+        if (slug.current === `${prefix}${section.value}`) {
+          return `Slug kan ikke være lik kategori: ${section.value}`;
+        }
+      }
+
       return true;
     }
 
