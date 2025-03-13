@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import { Box, Detail, Heading, Link, Show } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
-import { SidebarT, TableOfContentsT } from "@/types";
+import { DesignsystemSidebarSectionT, TableOfContentsT } from "@/types";
 import { capitalize } from "@/utils";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import { Sidebar } from "../sidebar/Sidebar";
@@ -19,7 +19,7 @@ export const WithSidebar = ({
   toc,
 }: {
   children: React.ReactNode;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   toc?: TableOfContentsT;
   pageType: {
     type: "komponenter" | "grunnleggende" | "templates";

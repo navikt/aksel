@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { SidebarInputNodeT, SidebarT } from "../../types/sanity-schema";
+import { DesignsystemSidebarSectionT, SidebarInputNodeT } from "@/types";
 import {
   generateSidebar,
   sortDeprecated,
@@ -50,7 +50,7 @@ const outputIndex = [
   { ...baseItem, kategori: "core", heading: "c", tag: "deprecated" as const },
 ];
 
-const outputComplete: SidebarT = [
+const outputComplete: DesignsystemSidebarSectionT = [
   {
     pages: [
       { slug: "/123", tag: "beta", heading: "f" },

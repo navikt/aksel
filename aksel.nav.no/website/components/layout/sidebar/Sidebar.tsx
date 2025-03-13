@@ -4,32 +4,21 @@ import { useRouter } from "next/router";
 import React, { useContext, useId, useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail } from "@navikt/ds-react";
+import {
+  DesignsystemSidebarSectionT,
+  SidebarGroupedPagesT,
+  SidebarPageT,
+} from "@/types";
 import { StatusTag } from "@/web/StatusTag";
 import styles from "./Sidebar.module.css";
 
-type SidebarInputNodeT = {
-  heading: string;
-  slug: string;
-  kategori: string;
-  tag: "beta" | "new" | "ready" | "deprecated";
-  sidebarindex: number | null;
-};
-
-type SidebarPageT = Pick<SidebarInputNodeT, "heading" | "slug" | "tag">;
-
-type SidebarGroupedPagesT = {
-  title: string;
-  value: string;
-  pages: SidebarPageT[];
-};
-
-type DesignsystemSectionT = {
+type DesignsystemSidebarGroupT = {
   label: string;
-  links: (SidebarPageT | SidebarGroupedPagesT)[];
+  links: DesignsystemSidebarSectionT;
 };
 
 type SidebarProps = {
-  sidebarData: DesignsystemSectionT[];
+  sidebarData: DesignsystemSidebarGroupT[];
   layout?: "sidebar" | "mobile";
 } & React.HTMLAttributes<HTMLDivElement>;
 
@@ -72,7 +61,7 @@ function SidebarDivider() {
   return <li aria-hidden className={styles.navListDivider} />;
 }
 
-function SidebarGroup(props: DesignsystemSectionT) {
+function SidebarGroup(props: DesignsystemSidebarGroupT) {
   const { label, links } = props;
   const id = useId();
   const layout = useContext(SidebarContext);
