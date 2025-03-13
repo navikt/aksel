@@ -1,0 +1,81 @@
+.header {
+  background-color: var(--ax-bg-default);
+}
+
+.headerContainer {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  height: var(--website-header-height);
+}
+
+.headerLogoLink {
+  margin-inline: var(--ax-space-8) var(--ax-space-12);
+  padding-inline: var(--ax-space-8) var(--ax-space-12);
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ax-border-radius-small);
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.headerLogo {
+  color: var(--ax-text-neutral);
+}
+
+.headerLink {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 2.75rem;
+  border-radius: var(--ax-border-radius-small);
+  padding-inline: var(--ax-space-8);
+  color: var(--ax-text-neutral);
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    /* TODO: revisit with designer */
+    bottom: var(--ax-space-6);
+    z-index: 10;
+    height: 3px;
+    width: calc(100% - var(--ax-space-16));
+    border-radius: var(--ax-border-radius-full);
+    background-color: transparent;
+  }
+
+  &[data-current="true"] {
+    font-weight: var(--ax-font-weight-bold);
+
+    &::before {
+      background-color: var(--ax-text-neutral);
+    }
+  }
+
+  &:hover[data-current="false"]::before {
+    background-color: var(--ax-text-neutral);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.skiplink {
+  position: absolute;
+  left: 0;
+  transform: translateY(-100%);
+  background-color: var(--ax-bg-info-strong);
+  padding: var(--ax-space-16);
+  color: var(--ax-text-info-contrast);
+  text-decoration: none;
+
+  &:focus-within {
+    transform: translateY(0);
+    outline: none;
+  }
+}
