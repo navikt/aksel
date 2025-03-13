@@ -18,37 +18,30 @@ function IconPageDetails({ iconName }: { iconName?: string }) {
   return (
     <div>
       {iconName ? <Details iconName={iconName} /> : <InitialView />}
-      <Feedback />
+      <Feedback iconName={iconName} />
     </div>
   );
 }
 
 function Details({ iconName }: { iconName?: string }) {
-  const T = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
-  const metaData = useMemo(() => {
-    if (!iconName) {
-      return null;
-    }
-    const iconMeta = meta[iconName];
-    if (!iconMeta) {
-      return null;
-    }
+  const IconComponent = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
+  const metaData = useMemo(
+    () => (iconName ? meta[iconName] : null),
+    [iconName],
+  );
 
-    return iconMeta;
-  }, [iconName]);
-
-  if (T === undefined) {
+  if (!IconComponent) {
     return null;
   }
 
-  const svgString = ReactDOMServer.renderToString(<T />)
+  const svgString = ReactDOMServer.renderToString(<IconComponent />)
     .replaceAll("currentColor", "#000")
     .replaceAll("1em", "24");
 
   return (
     <div className={styles.iconDetails}>
       <div className={styles.iconDetailsShowcase}>
-        <T fontSize="2rem" />
+        <IconComponent fontSize="2rem" />
       </div>
       <VStack gap="space-24" className={styles.iconDetailsContent}>
         <div>
@@ -112,7 +105,6 @@ function Details({ iconName }: { iconName?: string }) {
           }}
         />
       </VStack>
-      <div className=""></div>
     </div>
   );
 }
@@ -156,17 +148,18 @@ function MyComponent () {
 }
 
 function Feedback({ iconName }: { iconName?: string }) {
-  let config = {
-    title: "Har du innspill til ikonene?",
-    href: "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
-  };
-
-  if (iconName) {
-    config = {
-      title: "Har du innspill til ikonet?",
-      href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`,
+  const config = useMemo(() => {
+    if (iconName) {
+      return {
+        title: "Har du innspill til ikonet?",
+        href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`,
+      };
+    }
+    return {
+      title: "Har du innspill til ikonene?",
+      href: "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
     };
-  }
+  }, [iconName]);
 
   return (
     <div className="mt-12">
