@@ -2,7 +2,7 @@ import { ClientConfig } from "@sanity/client";
 
 export const SANITY_PROJECT_ID = "hnbe3yhs";
 export const SANITY_API_VERSION = "2024-04-11";
-export const SANITY_DATASET = "production";
+export const SANITY_DATASET = "development";
 
 export const clientConfig: ClientConfig = {
   projectId: SANITY_PROJECT_ID,
