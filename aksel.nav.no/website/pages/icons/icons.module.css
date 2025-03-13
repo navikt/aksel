@@ -1,0 +1,18 @@
+.iconButton {
+  padding: var(--ax-space-8);
+  display: grid;
+  place-content: center;
+  background-color: var(--ax-bg-neutral-soft);
+  color: var(--ax-text-neutral);
+  border-radius: var(--ax-border-radius-large);
+
+  &[data-state="active"] {
+    background: var(--ax-bg-neutral-strong);
+    color: var(--ax-text-neutral-contrast);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
