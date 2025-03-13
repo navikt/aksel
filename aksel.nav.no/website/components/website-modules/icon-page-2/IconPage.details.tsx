@@ -150,6 +150,7 @@ function InitialView() {
           },
         }}
       />
+      <BodyShort spacing>Bruk ikonene i prosjektet ditt:</BodyShort>
       <SnippetLazy
         node={{
           title: "TSX",
