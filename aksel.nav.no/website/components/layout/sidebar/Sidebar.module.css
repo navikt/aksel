@@ -1,4 +1,4 @@
-.navElement {
+.navList {
   position: relative;
   flex-shrink: 0;
   align-self: flex-start;
@@ -8,13 +8,13 @@
   color: var(--ax-text-neutral);
 }
 
-.rootUl {
+.navListUl {
   display: flex;
   flex-direction: column;
   gap: var(--ax-space-12);
 }
 
-.divider {
+.navListDivider {
   height: 1px;
   width: 100%;
   border-top: 1px solid var(--ax-border-neutral-subtle);

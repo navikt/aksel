@@ -43,11 +43,11 @@ function Sidebar(props: SidebarProps) {
       <nav
         {...rest}
         aria-label="Sidemeny"
-        className={cl(className, styles.navElement)}
+        className={cl(className, styles.navList)}
       >
         <BodyShort
           as="ul"
-          className={styles.rootUl}
+          className={styles.navListUl}
           size={layout === "sidebar" ? "small" : "medium"}
         >
           {sidebarData.map((section, index) => {
@@ -69,7 +69,7 @@ function Sidebar(props: SidebarProps) {
 }
 
 function SidebarDivider() {
-  return <li aria-hidden className={styles.divider} />;
+  return <li aria-hidden className={styles.navListDivider} />;
 }
 
 function SidebarGroup(props: DesignsystemSectionT) {
