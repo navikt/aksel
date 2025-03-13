@@ -1,25 +1,7 @@
-import Fuse from "fuse.js";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next/types";
-import React, { useMemo, useState } from "react";
-import ReactDOMServer from "react-dom/server";
-import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
-import {
-  ActionMenu,
-  BodyShort,
-  Box,
-  Button,
-  HGrid,
-  HStack,
-  Heading,
-  Search,
-  Show,
-  Tag,
-  ToggleGroup,
-  VStack,
-} from "@navikt/ds-react";
-import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
+import { Box, Heading, Show } from "@navikt/ds-react";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { Sidebar } from "@/layout/sidebar/Sidebar";
@@ -28,10 +10,8 @@ import { sidebarQuery } from "@/sanity/queries";
 import { NextPageT, SidebarT } from "@/types";
 import { generateSidebar } from "@/utils";
 import { IconPage } from "@/web/icon-page-2/IconPage";
-import { categorizeIcons, getFillIcon } from "@/web/icon-page/utils";
 import { SEO } from "@/web/seo/SEO";
 import NotFound from "../404";
-import styles from "./icons.module.css";
 
 type PageProps = NextPageT<{
   sidebar: SidebarT;
@@ -55,33 +35,6 @@ export const getServerSideProps: GetServerSideProps =
       notFound: false,
     };
   };
-
-const fuseStroke = new Fuse(
-  Object.values(meta).filter((x) => x.variant.toLowerCase() === "stroke"),
-  {
-    threshold: 0.2,
-    keys: [
-      { name: "name", weight: 3 },
-      { name: "category", weight: 2 },
-      { name: "sub_category", weight: 2 },
-      { name: "keywords", weight: 3 },
-      { name: "variant", weight: 1 },
-    ],
-    shouldSort: false,
-  },
-);
-
-const fuseFill = new Fuse(getFillIcon(Object.values(meta)), {
-  threshold: 0.2,
-  keys: [
-    { name: "name", weight: 3 },
-    { name: "category", weight: 2 },
-    { name: "sub_category", weight: 2 },
-    { name: "keywords", weight: 3 },
-    { name: "variant", weight: 1 },
-  ],
-  shouldSort: false,
-});
 
 const Page = ({ sidebar }: PageProps["props"]) => {
   const { query } = useRouter();
@@ -132,43 +85,6 @@ const Page = ({ sidebar }: PageProps["props"]) => {
 
             <div className="flex flex-col gap-10 sm:px-6 md:px-10">
               <IconPage iconName={name} />
-
-              <HGrid
-                columns={{ xs: 1, lg: "3fr minmax(300px, 2fr)" }}
-                gap="space-40"
-              >
-                <VStack
-                  aria-label={
-                    hasName ? `Ikon ${name}` : "Kom i gang med ikoner"
-                  }
-                  as="section"
-                  gap="space-48"
-                >
-                  {hasName ? <IconDetails iconName={name} /> : <IntroCard />}
-
-                  <div>
-                    <BodyShort spacing>
-                      {hasName
-                        ? "Har du innspill til ikonet?"
-                        : "Har du innspill til ikonene?"}
-                    </BodyShort>
-                    <Button
-                      variant="secondary"
-                      as="a"
-                      href={
-                        hasName
-                          ? `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${name}`
-                          : "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+"
-                      }
-                      className="w-fit"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Send innspill
-                    </Button>
-                  </div>
-                </VStack>
-              </HGrid>
             </div>
           </main>
         </div>
@@ -177,137 +93,5 @@ const Page = ({ sidebar }: PageProps["props"]) => {
     </>
   );
 };
-
-function IntroCard() {
-  return (
-    <div className={`${styles.iconDetails} p-5`}>
-      <BodyShort spacing>
-        Alle ikonene er tilgjengelige som React-komponenter
-      </BodyShort>
-      <SnippetLazy
-        node={{
-          title: "",
-          code: {
-            code: `yarn install @navikt/aksel-icons`,
-            language: "bash",
-          },
-        }}
-      />
-      <SnippetLazy
-        node={{
-          title: "TSX",
-          code: {
-            code: `import { ChevronDownIcon, TrashIcon, FilterIcon } from "@navikt/aksel-icons";
-
-function MyComponent () {
-  return (
-    <div>
-  		<ChevronDownIcon />
-  		<TrashIcon />
-  		<FilterIcon />
-  	</div>
-  )
-}`,
-            language: "tsx",
-          },
-        }}
-      />
-    </div>
-  );
-}
-
-function IconDetails({ iconName }: { iconName: string }) {
-  const T = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
-  const metaData = useMemo(() => {
-    if (!iconName) {
-      return null;
-    }
-    const iconMeta = meta[iconName];
-    if (!iconMeta) {
-      return null;
-    }
-
-    return iconMeta;
-  }, [iconName]);
-
-  if (T === undefined) {
-    return null;
-  }
-
-  const svgString = ReactDOMServer.renderToString(<T />)
-    .replaceAll("currentColor", "#000")
-    .replaceAll("1em", "24");
-
-  return (
-    <div className={styles.iconDetails}>
-      <div className={styles.iconDetailsShowcase}>
-        <T fontSize="2rem" />
-      </div>
-      <VStack gap="space-24" className={styles.iconDetailsContent}>
-        <div>
-          <Heading level="3" size="small">
-            {iconName}
-          </Heading>
-          <div className="flex items-center gap-0.5">
-            <Icons.ArrowDownRightIcon fontSize="1.5rem" aria-hidden />
-            <BodyShort>{metaData?.sub_category}</BodyShort>
-          </div>
-          <HStack gap="space-8" marginBlock="space-12 0">
-            {metaData?.keywords.map((keyword) => (
-              <Tag size="small" variant="neutral-moderate" key={keyword}>
-                {keyword}
-              </Tag>
-            ))}
-          </HStack>
-        </div>
-        <div className="flex gap-px">
-          <Button className="rounded-r-none">Kopier react</Button>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                className="rounded-l-none"
-                icon={<Icons.ChevronDownIcon title="Meny" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content align="end">
-              <ActionMenu.Item
-                onSelect={() => {
-                  try {
-                    navigator.clipboard.writeText(svgString);
-                  } catch {
-                    console.error("Unable to copy using Clipboard API");
-                  }
-                }}
-              >
-                Kopier SVG
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                href={URL.createObjectURL(
-                  new Blob([svgString], {
-                    type: "image/svg+xml",
-                  }),
-                )}
-                download={iconName}
-              >
-                Last ned SVG
-              </ActionMenu.Item>
-            </ActionMenu.Content>
-          </ActionMenu>
-        </div>
-        <SnippetLazy
-          node={{
-            title: "TSX",
-            code: {
-              code: `import { ${iconName}Icon } from '@navikt/aksel-icons';`,
-              language: "jsx",
-            },
-          }}
-        />
-      </VStack>
-      <div className=""></div>
-    </div>
-  );
-}
 
 export default Page;

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
 import { HGrid, HStack, Heading } from "@navikt/ds-react";
+import { IconPageDetails } from "./IconPage.details";
 import { IconPageForm } from "./IconPage.form";
 import styles from "./IconPage.module.css";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
@@ -71,6 +72,11 @@ function IconPage({ iconName }: { iconName?: string }) {
               </div>
             );
           })}
+        </section>
+        <section
+          aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
+        >
+          <IconPageDetails iconName={iconName} />
         </section>
       </HGrid>
     </div>
