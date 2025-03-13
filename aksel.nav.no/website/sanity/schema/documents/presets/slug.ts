@@ -59,6 +59,7 @@ export const validateKategoriSlug = (Rule: SlugRule, prefix: string) =>
     const slugLength = (slug.current.match(/\//g) || []).length;
 
     if (isStandalone(document)) {
+      return "Frittstående artikler er ikke støttet enda";
       if (!slug?.current?.startsWith(`${prefix}`)) {
         return `Slug må være: '${prefix}navn' for frittstående artikler`;
       }
