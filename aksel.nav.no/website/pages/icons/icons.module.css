@@ -16,3 +16,22 @@
     outline-offset: 3px;
   }
 }
+
+.iconDetails {
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  background: var(--ax-bg-default);
+  overflow: clip;
+}
+
+.iconDetailsShowcase {
+  border-bottom: 1px solid var(--ax-border-neutral-subtleA);
+  background: var(--ax-bg-neutral-soft);
+  padding-block: var(--ax-space-8);
+  display: grid;
+  place-content: center;
+}
+
+.iconDetailsContent {
+  padding: var(--ax-space-24) var(--ax-space-20);
+}

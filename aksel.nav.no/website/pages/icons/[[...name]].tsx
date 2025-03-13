@@ -6,14 +6,19 @@ import React, { useMemo, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
+  BodyShort,
   Box,
+  Button,
+  HGrid,
   HStack,
   Heading,
   Search,
   Show,
+  Tag,
   ToggleGroup,
+  VStack,
 } from "@navikt/ds-react";
-import { useMedia } from "@/hooks/useMedia";
+import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { Sidebar } from "@/layout/sidebar/Sidebar";
@@ -88,7 +93,7 @@ const Page = ({ sidebar }: PageProps["props"]) => {
 
   const [fillIcons] = useState(getFillIcon(Object.values(meta)));
 
-  const hideModal = useMedia("screen and (min-width: 1024px)");
+  // const hideModal = useMedia("screen and (min-width: 1024px)");
 
   const categories = useMemo(() => {
     if (toggle === "fill") {
@@ -114,11 +119,12 @@ const Page = ({ sidebar }: PageProps["props"]) => {
   }
 
   const name = query?.name?.[0] ?? "";
+  const hasName = name.length > 0;
 
   return (
     <>
       <SEO
-        title={name.length > 0 ? `${name}Icon` : "Ikoner"}
+        title={hasName ? `${name}Icon` : "Ikoner"}
         description="800+ open source-ikoner designet og utviklet for Nav"
         fallbackImage="https://aksel.nav.no/images/og/ikoner/og-ikoner.png"
         canonical="https://aksel.nav.no/ikoner"
@@ -180,51 +186,89 @@ const Page = ({ sidebar }: PageProps["props"]) => {
                   <ToggleGroup.Item value="fill" label="Fill" />
                 </ToggleGroup>
               </form>
-              <div className="flex flex-col gap-10">
-                {categories.map((section) => {
-                  return (
-                    <div key={section.category}>
-                      <Heading level="2" size="large" spacing>
-                        {section.category}
-                      </Heading>
+              <HGrid columns={{ xs: 1, lg: "1fr 300px" }} gap="space-40">
+                <section
+                  aria-label="Ikonliste"
+                  className="flex flex-col gap-10"
+                >
+                  {categories.map((section) => {
+                    return (
+                      <div key={section.category}>
+                        <Heading level="2" size="large" spacing>
+                          {section.category}
+                        </Heading>
 
-                      <HStack gap="space-8" width="100%">
-                        {section.sub_categories.map((sub) => {
-                          return (
-                            <React.Fragment key={sub.sub_category}>
-                              {sub.icons.map((i) => {
-                                const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
-                                if (T === undefined) {
-                                  return null;
-                                }
+                        <HStack gap="space-8">
+                          {section.sub_categories.map((sub) => {
+                            return (
+                              <React.Fragment key={sub.sub_category}>
+                                {sub.icons.map((i) => {
+                                  const T = Icons[`${i.id}Icon`]; // eslint-disable-line import/namespace
+                                  if (T === undefined) {
+                                    return null;
+                                  }
 
-                                return (
-                                  <Link
-                                    href={`/icons/${i.id}`}
-                                    scroll={false}
-                                    key={i.id}
-                                    prefetch={false}
-                                    id={i.id}
-                                    className={styles.iconButton}
-                                    data-state={
-                                      i.id === name ? "active" : "inactive"
-                                    }
-                                  >
-                                    <span className="navds-sr-only">
-                                      {i.name}
-                                    </span>
-                                    <T fontSize="1.5rem" aria-hidden alt="" />
-                                  </Link>
-                                );
-                              })}
-                            </React.Fragment>
-                          );
-                        })}
-                      </HStack>
-                    </div>
-                  );
-                })}
-              </div>
+                                  return (
+                                    <Link
+                                      href={
+                                        !hasName ? `/icons/${i.id}` : "/icons"
+                                      }
+                                      scroll={false}
+                                      key={i.id}
+                                      prefetch={false}
+                                      id={i.id}
+                                      className={styles.iconButton}
+                                      data-state={
+                                        i.id === name ? "active" : "inactive"
+                                      }
+                                    >
+                                      <span className="navds-sr-only">
+                                        {i.name}
+                                      </span>
+                                      <T fontSize="1.5rem" aria-hidden alt="" />
+                                    </Link>
+                                  );
+                                })}
+                              </React.Fragment>
+                            );
+                          })}
+                        </HStack>
+                      </div>
+                    );
+                  })}
+                </section>
+                <VStack
+                  aria-label={
+                    hasName ? `Ikon ${name}` : "Kom i gang med ikoner"
+                  }
+                  as="section"
+                  gap="space-48"
+                >
+                  <IconDetails iconName={name} />
+
+                  <div>
+                    <BodyShort spacing>
+                      {hasName
+                        ? "Har du innspill til ikonet?"
+                        : "Har du innspill til ikonene?"}
+                    </BodyShort>
+                    <Button
+                      variant="secondary"
+                      as="a"
+                      href={
+                        hasName
+                          ? `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${name}`
+                          : "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+"
+                      }
+                      className="w-fit"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Send innspill
+                    </Button>
+                  </div>
+                </VStack>
+              </HGrid>
             </div>
           </main>
         </div>
@@ -233,5 +277,63 @@ const Page = ({ sidebar }: PageProps["props"]) => {
     </>
   );
 };
+
+function IconDetails({ iconName }: { iconName: string }) {
+  const T = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
+  const metaData = useMemo(() => {
+    if (!iconName) {
+      return null;
+    }
+    const iconMeta = meta[iconName];
+    if (!iconMeta) {
+      return null;
+    }
+
+    return iconMeta;
+  }, [iconName]);
+
+  if (T === undefined) {
+    return null;
+  }
+
+  return (
+    <div className={styles.iconDetails}>
+      <div className={styles.iconDetailsShowcase}>
+        <T fontSize="2rem" />
+      </div>
+      <VStack gap="space-24" className={styles.iconDetailsContent}>
+        <div>
+          <Heading level="3" size="small">
+            {iconName}
+          </Heading>
+          <div className="flex items-center gap-0.5">
+            <Icons.ArrowDownRightIcon fontSize="1.5rem" aria-hidden />
+            <BodyShort>{metaData?.sub_category}</BodyShort>
+          </div>
+        </div>
+        <HStack gap="space-8">
+          {metaData?.keywords.map((keyword) => (
+            <Tag size="small" variant="neutral-moderate" key={keyword}>
+              {keyword}
+            </Tag>
+          ))}
+        </HStack>
+        <div>
+          <Button>Kopier react</Button>
+        </div>
+        <SnippetLazy
+          node={{
+            title: "TSX",
+            code: {
+              code: `import { ${iconName}Icon } from '@navikt/aksel-icons';`,
+              language: "jsx",
+            },
+          }}
+        />
+      </VStack>
+      <div className=""></div>
+    </div>
+  );
+}
 
 export default Page;
