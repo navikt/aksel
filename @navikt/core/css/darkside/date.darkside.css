@@ -1,5 +1,5 @@
 .aksel-date {
-  padding: var(--ax-space-16) var(--ax-space-12);
+  padding: var(--ax-space-16);
 
   .rdp-day_range_middle {
     &.rdp-day_disabled {
@@ -258,11 +258,11 @@
 
 @media (min-width: 480px) {
   .aksel-date {
-    padding: var(--ax-space-20) var(--ax-space-16);
+    padding: var(--ax-space-20);
   }
 
   .aksel-date__modal-body {
-    padding: var(--ax-space-24);
+    padding: var(--ax-space-20);
   }
 
   .aksel-date__caption {

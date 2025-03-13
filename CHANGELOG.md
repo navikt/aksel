@@ -8,7 +8,9 @@
 
 ### @navikt/ds-css
 
-- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
+* ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
 
 ## 7.16
 
