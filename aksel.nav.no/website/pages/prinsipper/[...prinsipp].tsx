@@ -17,7 +17,7 @@ import {
 import { abbrName, dateStr, generateTableOfContents } from "@/utils";
 import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TableOfContents";
+import { TableOfContents } from "@/web/toc/TableOfContents";
 import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
