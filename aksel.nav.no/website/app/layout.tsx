@@ -1,4 +1,4 @@
-import { SanityLive } from "./_test/live";
+import { SanityLive } from "@/app/_sanity/live";
 
 export default function RootLayout({
   children,
