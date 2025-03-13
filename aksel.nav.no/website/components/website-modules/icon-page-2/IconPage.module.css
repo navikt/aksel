@@ -22,6 +22,11 @@
   border: 1px solid var(--ax-border-neutral-subtleA);
   background: var(--ax-bg-default);
   overflow: clip;
+
+  [data-modal="true"] & {
+    border-radius: 0;
+    border: none;
+  }
 }
 
 .iconDetailsShowcase {
@@ -34,4 +39,27 @@
 
 .iconDetailsContent {
   padding: var(--ax-space-24) var(--ax-space-20);
+
+  [data-modal="true"] & {
+    padding: 0;
+  }
+}
+
+.iconDetailsActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-24);
+
+  [data-modal="true"] & {
+    padding-inline: var(--ax-space-20);
+  }
+}
+
+.iconFeedback {
+  margin-top: var(--ax-space-16);
+
+  [data-modal="true"] & {
+    padding-inline: var(--ax-space-20);
+    padding-block: var(--ax-space-20);
+  }
 }

@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 import * as Icons from "@navikt/aksel-icons";
-import { HGrid, HStack, Heading } from "@navikt/ds-react";
+import { HGrid, HStack, Heading, Modal, Show } from "@navikt/ds-react";
+import { useMedia } from "@/hooks/useMedia";
 import { IconPageDetails } from "./IconPage.details";
 import { IconPageForm } from "./IconPage.form";
 import styles from "./IconPage.module.css";
@@ -9,6 +10,10 @@ import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
 function IconPage({ iconName }: { iconName?: string }) {
   const { push } = useRouter();
+
+  const focusRef = React.useRef<HTMLButtonElement | null>(null);
+
+  const hideModal = useMedia("screen and (min-width: 1024px)");
 
   const [searchState, setSearchState] = useState<{
     query: string;
@@ -47,6 +52,11 @@ function IconPage({ iconName }: { iconName?: string }) {
                     }
                     return (
                       <button
+                        ref={(el) => {
+                          if (iconName === icon.id) {
+                            focusRef.current = el;
+                          }
+                        }}
                         onClick={() => {
                           const href =
                             iconName !== icon.id
@@ -73,11 +83,26 @@ function IconPage({ iconName }: { iconName?: string }) {
             );
           })}
         </section>
-        <section
-          aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
-        >
-          <IconPageDetails iconName={iconName} />
-        </section>
+        <Show above="lg">
+          <section
+            aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
+          >
+            <IconPageDetails iconName={iconName} />
+          </section>
+        </Show>
+        {!hideModal && iconName && (
+          <Modal
+            open={!!iconName}
+            aria-label={`${iconName} ikon`}
+            onClose={() => {
+              push("/icons", undefined, { shallow: true });
+              focusRef.current?.focus();
+            }}
+            data-modal={true}
+          >
+            <IconPageDetails iconName={iconName} inModal />
+          </Modal>
+        )}
       </HGrid>
     </div>
   );

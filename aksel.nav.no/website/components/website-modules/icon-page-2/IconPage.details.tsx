@@ -8,22 +8,39 @@ import {
   Button,
   HStack,
   Heading,
+  Modal,
   Tag,
   VStack,
 } from "@navikt/ds-react";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import styles from "./IconPage.module.css";
 
-function IconPageDetails({ iconName }: { iconName?: string }) {
+function IconPageDetails({
+  iconName,
+  inModal = false,
+}: {
+  iconName?: string;
+  inModal?: boolean;
+}) {
   return (
     <div>
-      {iconName ? <Details iconName={iconName} /> : <InitialView />}
+      {iconName ? (
+        <Details iconName={iconName} inModal={inModal} />
+      ) : (
+        <InitialView />
+      )}
       <Feedback iconName={iconName} />
     </div>
   );
 }
 
-function Details({ iconName }: { iconName?: string }) {
+function Details({
+  iconName,
+  inModal = false,
+}: {
+  iconName?: string;
+  inModal?: boolean;
+}) {
   const IconComponent = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
   const metaData = useMemo(
     () => (iconName ? meta[iconName] : null),
@@ -38,13 +55,20 @@ function Details({ iconName }: { iconName?: string }) {
     .replaceAll("currentColor", "#000")
     .replaceAll("1em", "24");
 
+  const HeaderComponent = inModal ? Modal.Header : "div";
+
   return (
     <div className={styles.iconDetails}>
-      <div className={styles.iconDetailsShowcase}>
-        <IconComponent fontSize="2rem" />
-      </div>
+      {!inModal && (
+        <div className={styles.iconDetailsShowcase}>
+          <IconComponent fontSize="2rem" />
+        </div>
+      )}
       <VStack gap="space-24" className={styles.iconDetailsContent}>
-        <div>
+        <HeaderComponent>
+          {inModal && (
+            <IconComponent aria-hidden fontSize="2rem" className="mb-2" />
+          )}
           <Heading level="3" size="small">
             {iconName}
           </Heading>
@@ -59,51 +83,53 @@ function Details({ iconName }: { iconName?: string }) {
               </Tag>
             ))}
           </HStack>
+        </HeaderComponent>
+        <div className={styles.iconDetailsActions}>
+          <div className="flex gap-px">
+            <Button className="rounded-r-none">Kopier react</Button>
+            <ActionMenu>
+              <ActionMenu.Trigger>
+                <Button
+                  className="rounded-l-none"
+                  icon={<Icons.ChevronDownIcon title="Meny" />}
+                />
+              </ActionMenu.Trigger>
+              <ActionMenu.Content align="end">
+                <ActionMenu.Item
+                  onSelect={() => {
+                    try {
+                      navigator.clipboard.writeText(svgString);
+                    } catch {
+                      console.error("Unable to copy using Clipboard API");
+                    }
+                  }}
+                >
+                  Kopier SVG
+                </ActionMenu.Item>
+                <ActionMenu.Item
+                  as="a"
+                  href={URL.createObjectURL(
+                    new Blob([svgString], {
+                      type: "image/svg+xml",
+                    }),
+                  )}
+                  download={iconName}
+                >
+                  Last ned SVG
+                </ActionMenu.Item>
+              </ActionMenu.Content>
+            </ActionMenu>
+          </div>
+          <SnippetLazy
+            node={{
+              title: "TSX",
+              code: {
+                code: `import { ${iconName}Icon } from '@navikt/aksel-icons';`,
+                language: "jsx",
+              },
+            }}
+          />
         </div>
-        <div className="flex gap-px">
-          <Button className="rounded-r-none">Kopier react</Button>
-          <ActionMenu>
-            <ActionMenu.Trigger>
-              <Button
-                className="rounded-l-none"
-                icon={<Icons.ChevronDownIcon title="Meny" />}
-              />
-            </ActionMenu.Trigger>
-            <ActionMenu.Content align="end">
-              <ActionMenu.Item
-                onSelect={() => {
-                  try {
-                    navigator.clipboard.writeText(svgString);
-                  } catch {
-                    console.error("Unable to copy using Clipboard API");
-                  }
-                }}
-              >
-                Kopier SVG
-              </ActionMenu.Item>
-              <ActionMenu.Item
-                as="a"
-                href={URL.createObjectURL(
-                  new Blob([svgString], {
-                    type: "image/svg+xml",
-                  }),
-                )}
-                download={iconName}
-              >
-                Last ned SVG
-              </ActionMenu.Item>
-            </ActionMenu.Content>
-          </ActionMenu>
-        </div>
-        <SnippetLazy
-          node={{
-            title: "TSX",
-            code: {
-              code: `import { ${iconName}Icon } from '@navikt/aksel-icons';`,
-              language: "jsx",
-            },
-          }}
-        />
       </VStack>
     </div>
   );
@@ -162,7 +188,7 @@ function Feedback({ iconName }: { iconName?: string }) {
   }, [iconName]);
 
   return (
-    <div className="mt-12">
+    <div className={styles.iconFeedback}>
       <BodyShort spacing>{config.title}</BodyShort>
       <Button
         variant="secondary"
