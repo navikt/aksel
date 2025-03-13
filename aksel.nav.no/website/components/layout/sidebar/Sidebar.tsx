@@ -117,12 +117,15 @@ function SidebarGroup(props: DesignsystemSectionT) {
 
 function SidebarSubNav(props: SidebarGroupedPagesT) {
   const { pages, title } = props;
-  const [open, setOpen] = useState(true);
   const { asPath } = useRouter();
 
   const isSectionActive = pages.some((page) => {
     return asPath.split("#")[0] === `/${page.slug}`;
   });
+
+  /* Use this when sections are no longer default: open */
+  /* const [open, setOpen] = useState(isSectionActive); */
+  const [open, setOpen] = useState(true);
 
   return (
     <li>
