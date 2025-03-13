@@ -170,8 +170,8 @@ export const UseRangedDatepicker = () => {
       from: new Date(),
       to: new Date("03 23 2025"),
     },
-    // onRangeChange: console.log,
-    // onValidate: console.log,
+    onRangeChange: console.log,
+    onValidate: console.log,
   });
 
   return (
