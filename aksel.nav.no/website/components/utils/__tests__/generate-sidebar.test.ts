@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { SidebarInputNodeT, SidebarT } from "../../types/sanity-schema";
+import { DesignsystemSidebarSectionT, SidebarInputNodeT } from "@/types";
 import {
   generateSidebar,
   sortDeprecated,
@@ -50,7 +50,7 @@ const outputIndex = [
   { ...baseItem, kategori: "core", heading: "c", tag: "deprecated" as const },
 ];
 
-const outputComplete: SidebarT = [
+const outputComplete: DesignsystemSidebarSectionT = [
   {
     pages: [
       { slug: "/123", tag: "beta", heading: "f" },
@@ -89,5 +89,57 @@ describe("generateSidebar function", () => {
 
   test("generated output is correct", () => {
     expect(generateSidebar(input, "komponenter")).toEqual(outputComplete);
+  });
+
+  test("should place standalone articles on top", () => {
+    expect(
+      generateSidebar(
+        [
+          ...input,
+          {
+            ...baseItem,
+            kategori: "standalone",
+            heading: "B",
+          },
+          {
+            ...baseItem,
+            kategori: "standalone",
+            heading: "A",
+          },
+        ],
+        "komponenter",
+      ),
+    ).toEqual([
+      { slug: "/123", tag: "beta", heading: "A" },
+      { slug: "/123", tag: "beta", heading: "B" },
+      ...outputComplete,
+    ]);
+  });
+
+  test("should sort standalone articles by index", () => {
+    expect(
+      generateSidebar(
+        [
+          ...input,
+          {
+            ...baseItem,
+            kategori: "standalone",
+            heading: "B",
+            sidebarindex: 0,
+          },
+          {
+            ...baseItem,
+            kategori: "standalone",
+            heading: "A",
+            sidebarindex: 1,
+          },
+        ],
+        "komponenter",
+      ),
+    ).toEqual([
+      { slug: "/123", tag: "beta", heading: "B" },
+      { slug: "/123", tag: "beta", heading: "A" },
+      ...outputComplete,
+    ]);
   });
 });
