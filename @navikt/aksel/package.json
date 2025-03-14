@@ -30,8 +30,10 @@
   "homepage": "https://aksel.nav.no/grunnleggende/kode/kommandolinje",
   "dependencies": {
     "@navikt/ds-css": "^7.17.3",
+    "@navikt/ds-tokens": "^7.17.3",
     "axios": "1.8.2",
     "chalk": "4.1.0",
+    "cli-progress": "^3.12.0",
     "clipboardy": "^2.3.0",
     "commander": "10.0.1",
     "enquirer": "^2.3.6",
@@ -44,6 +46,7 @@
     "react-scanner": "^1.1.0"
   },
   "devDependencies": {
+    "@types/cli-progress": "3.11.6",
     "rimraf": "6.0.1",
     "typescript": "5.5.4",
     "vitest": "^2.1.8"

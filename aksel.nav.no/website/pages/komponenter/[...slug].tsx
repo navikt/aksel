@@ -13,10 +13,10 @@ import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselKomponentDocT,
   ArticleListT,
+  DesignsystemSidebarSectionT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
-  SidebarT,
   TableOfContentsT,
 } from "@/types";
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
@@ -55,7 +55,7 @@ const kodepakker = {
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselKomponentDocT>>;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
