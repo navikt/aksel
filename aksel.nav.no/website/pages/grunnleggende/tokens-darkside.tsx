@@ -47,7 +47,7 @@ import {
 import { generateSidebar } from "@/utils";
 // import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { SEO } from "@/web/seo/SEO";
-import TableOfContents from "@/web/toc/TableOfContents";
+import { TableOfContents } from "@/web/toc/TableOfContents";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
 
