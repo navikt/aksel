@@ -3,7 +3,6 @@ import Image from "next/legacy/image";
 import NextLink from "next/link";
 import ErrorBoundary from "@/error-boundary";
 import { FallbackPictogram } from "@/layout/god-praksis-page/FallbackPictogram";
-import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 
 type GpFrontpageCardProps = {
@@ -32,9 +31,8 @@ const GpFrontpageCard = ({ image, children, href }: GpFrontpageCardProps) => {
       <NextLink
         href={href}
         passHref
-        onClick={(e) =>
-          amplitudeLogNavigation("card", e.currentTarget.getAttribute("href"))
-        }
+        data-umami-event="navigere"
+        data-umami-event-kilde="god praksis forside"
         className="navds-heading--small navds-link navds-heading flex-wrap break-all text-deepblue-700 no-underline hover:underline focus:outline-none"
       >
         {children}

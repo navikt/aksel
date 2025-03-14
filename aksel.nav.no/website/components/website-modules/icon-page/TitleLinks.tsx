@@ -2,7 +2,6 @@ import NextLink from "next/link";
 import { BrailleIcon, DownloadIcon, PackageIcon } from "@navikt/aksel-icons";
 import { Link as DsLink } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
-import { AmplitudeEvents, amplitude, amplitudeLogNavigation } from "@/logging";
 
 const Divider = () => (
   <div
@@ -21,9 +20,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <FigmaIcon className="ml-1" /> <span className="">Figma</span>
         </DsLink>
@@ -35,12 +33,10 @@ export const TitleLinks = () => (
         className="text-text-default no-underline hover:underline"
         href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
         download="Ikonpakke"
-        onClick={() => {
-          amplitude.track(AmplitudeEvents.ikonnedlastning, {
-            icon: "Ikonpakke",
-            format: "zip",
-          });
-        }}
+        data-umami-event="last ned"
+        data-umami-event-tema="ikon"
+        data-umami-event-type="zip"
+        data-umami-event-tittel="ikonpakke"
       >
         <DownloadIcon className="text-2xl" aria-hidden /> Last ned ikonpakke
       </DsLink>
@@ -54,9 +50,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <PackageIcon className="text-2xl" aria-hidden /> Installer med NPM
         </DsLink>
@@ -71,9 +66,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <GithubIcon className="ml-[3px] h-[18px] w-[18px]" />{" "}
           <span className="ml-1">Bidra</span>
@@ -89,9 +83,8 @@ export const TitleLinks = () => (
       >
         <DsLink
           className="text-text-default no-underline hover:underline"
-          onClick={(e) =>
-            amplitudeLogNavigation("link", e.currentTarget.getAttribute("href"))
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="ikonside"
         >
           <BrailleIcon aria-hidden className="text-2xl" />{" "}
           <span>Tilgjengelighet</span>

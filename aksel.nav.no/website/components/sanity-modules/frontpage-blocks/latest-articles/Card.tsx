@@ -4,7 +4,6 @@ import NextLink from "next/link";
 import { BodyShort, Detail, Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { useFormatedDate } from "@/hooks/useFormatedDate";
-import { amplitudeLogNavigation } from "@/logging";
 import { urlFor } from "@/sanity/interface";
 import { abbrName, getImage } from "@/utils";
 import { Tag } from "./Tag";
@@ -123,12 +122,8 @@ const Card = ({ article, visible, index }: CardProps) => {
             href={`/${article.slug}`}
             passHref
             className="after:absolute after:inset-0 after:z-10 after:rounded-lg focus:outline-none"
-            onClick={(e) =>
-              amplitudeLogNavigation(
-                "forside-masonary",
-                e.currentTarget.getAttribute("href"),
-              )
-            }
+            data-umami-event="navigere"
+            data-umami-event-kilde="forsidekort"
           >
             <Heading
               level="3"

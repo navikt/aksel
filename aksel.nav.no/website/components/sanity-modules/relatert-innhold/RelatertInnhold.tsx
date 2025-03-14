@@ -2,7 +2,6 @@ import NextLink from "next/link";
 import { NewspaperIcon } from "@navikt/aksel-icons";
 import { Heading, Link } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { amplitudeLogNavigation } from "@/logging";
 import { RelatertInnholdT } from "@/types";
 
 type RelatertInnholdProps = {
@@ -34,12 +33,8 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
             <Link
               as={NextLink}
               href={getHref(x)}
-              onClick={(e) =>
-                amplitudeLogNavigation(
-                  "relatert-innhold",
-                  e.currentTarget.getAttribute("href"),
-                )
-              }
+              data-umami-event="navigere"
+              data-umami-event-kilde="relatert innhold"
               className="text-xl font-semibold text-gray-800 dark:text-text-on-inverted"
             >
               {x.title}

@@ -1,5 +1,5 @@
 import { PencilIcon } from "@navikt/aksel-icons";
-import { useSanityData } from "@/hooks/useSanityData";
+import { useSanityData } from "./SanityDataProvider";
 
 function EditButton() {
   const sanityCtx = useSanityData();

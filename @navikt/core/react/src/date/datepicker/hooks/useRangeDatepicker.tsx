@@ -1,9 +1,4 @@
-import {
-  isBefore as checkIsBefore,
-  differenceInCalendarDays,
-  isSameDay,
-  isWeekend,
-} from "date-fns";
+import { differenceInCalendarDays, isSameDay, isWeekend } from "date-fns";
 import React, { useState } from "react";
 import { dateMatchModifiers } from "react-day-picker";
 import { useDateLocale } from "../../../util/i18n/i18n.hooks";
@@ -378,25 +373,22 @@ export const useRangeDatepicker = (
         anchorRef?.focus();
       }
     }
-    const prevToRange =
-      !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
 
-    const resetTo = checkIsBefore(prevToRange, range?.from);
+    setFromInputValue(
+      range?.from
+        ? formatDateForInput(range.from, locale, "date", inputFormat)
+        : "",
+    );
+    setToInputValue(
+      range?.to
+        ? formatDateForInput(range.to, locale, "date", inputFormat)
+        : "",
+    );
 
-    range?.from
-      ? setFromInputValue(
-          formatDateForInput(range?.from, locale, "date", inputFormat),
-        )
-      : setFromInputValue("");
-    prevToRange && !resetTo
-      ? setToInputValue(
-          formatDateForInput(prevToRange, locale, "date", inputFormat),
-        )
-      : setToInputValue("");
-    updateRange({ from: range?.from, to: resetTo ? undefined : prevToRange });
+    updateRange({ from: range?.from, to: range?.to });
     updateValidation(
       { isValidDate: !!range?.from, isEmpty: !range?.from },
-      { isValidDate: !!range?.to, isEmpty: !prevToRange || resetTo },
+      { isValidDate: !!range?.to, isEmpty: !range?.to },
     );
   };
 

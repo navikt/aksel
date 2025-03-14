@@ -1,5 +1,61 @@
 # @navikt/ds-react
 
+## 7.17.3
+
+### Patch Changes
+
+- Datepicker: Fixed a bug where while ranged datepicker, setting `from` to `undefined` while `to` were defined did not allow selecting new dates. ([#3655](https://github.com/navikt/aksel/pull/3655))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.3
+  - @navikt/aksel-icons@7.17.3
+
+## 7.17.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.2
+  - @navikt/aksel-icons@7.17.2
+
+## 7.17.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.1
+  - @navikt/aksel-icons@7.17.1
+
+## 7.17.0
+
+### Minor Changes
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.0
+  - @navikt/aksel-icons@7.17.0
+
+## 7.16.1
+
+### Patch Changes
+
+- React 19: Resolve unknown-type in Slot. ([#3627](https://github.com/navikt/aksel/pull/3627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.1
+  - @navikt/aksel-icons@7.16.1
+
+## 7.16.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.0
+  - @navikt/aksel-icons@7.16.0
+
 ## 7.15.0
 
 ### Patch Changes

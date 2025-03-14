@@ -1,6 +1,5 @@
 import { Search } from "./parts/SearchToggle";
 import {
-  SearchLoggingProvider,
   SearchNavigationProvider,
   SearchProvider,
   SearchResultProvider,
@@ -8,13 +7,11 @@ import {
 
 const GlobalSearch = () => (
   <SearchProvider>
-    <SearchLoggingProvider>
-      <SearchResultProvider>
-        <SearchNavigationProvider>
-          <Search />
-        </SearchNavigationProvider>
-      </SearchResultProvider>
-    </SearchLoggingProvider>
+    <SearchResultProvider>
+      <SearchNavigationProvider>
+        <Search />
+      </SearchNavigationProvider>
+    </SearchResultProvider>
   </SearchProvider>
 );
 

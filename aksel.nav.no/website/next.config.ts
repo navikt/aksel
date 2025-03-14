@@ -1,6 +1,6 @@
-const path = require("path");
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")();
+import BundleAnalyzer from "@next/bundle-analyzer";
+import type { NextConfig } from "next";
+import path from "path";
 
 const cdnUrl = "https://cdn.nav.no";
 const hotjarUrl = "https://*.hotjar.com";
@@ -12,10 +12,10 @@ const ContentSecurityPolicy = `
   img-src 'self' cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl} ${hotjarUrl};
   script-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
   style-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} 'unsafe-inline';
-  connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://*.hotjar.io wss://*.hotjar.com https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://in2.taskanalytics.com/03346;
+  connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://*.hotjar.io wss://*.hotjar.com https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://in2.taskanalytics.com/03346 https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
   frame-ancestors 'self' localhost:3000;
   media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ekstern.dev.nav.no;
+  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ansatt.dev.nav.no;
 `;
 
 const securityHeaders = [
@@ -50,15 +50,19 @@ const securityHeaders = [
 ];
 
 const useCdn = process.env.USE_CDN_ASSETS === "true";
+const isProduction = process.env.PRODUCTION === "true";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   transpilePackages: ["@navikt/ds-tokens", "react-hotjar"],
   publicRuntimeConfig: {
     NEXT_PUBLIC_TEST: process.env.NEXT_PUBLIC_TEST,
+    UMAMI_TRACKING_ID: isProduction
+      ? "fb69e1e9-1bd3-4fd9-b700-9d035cbf44e1"
+      : "7b9fb2cd-40f4-4a30-b208-5b4dba026b57",
   },
   assetPrefix: useCdn ? "https://cdn.nav.no/designsystem/website" : undefined,
-  async headers() {
+  headers: async () => {
     return [
       {
         source: "/:path*",
@@ -66,7 +70,7 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
+  redirects: async () => {
     return [
       {
         source: "/studio",
@@ -107,12 +111,12 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
   output: "standalone",
+  outputFileTracingRoot: path.join(__dirname, "../../"),
   experimental: {
-    outputFileTracingRoot: path.join(__dirname, "../../"),
     optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
     largePageDataBytes: 128 * 2000,
   },
 };
 
 module.exports =
-  process.env.ANALYZE === "true" ? withBundleAnalyzer(nextConfig) : nextConfig;
+  process.env.ANALYZE === "true" ? BundleAnalyzer()(nextConfig) : nextConfig;

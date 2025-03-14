@@ -19,6 +19,10 @@ inputs:
   sanity_read_no_drafts_token:
     description: "Sanity read-only token allowing only published documents"
     required: true
+  production:
+    description: "Toggle to differentiate production build (inject stuff based on this)"
+    default: false
+    required: false
 
 runs:
   using: "composite"
@@ -36,6 +40,12 @@ runs:
       if: ${{ inputs.use_cdn_assets == 'true' }}
       run: |
         echo "USE_CDN_ASSETS=true" >> aksel.nav.no/website/.env
+      shell: bash
+
+    - name: Set production env var
+      if: ${{ inputs.production == 'true' }}
+      run: |
+        echo "PRODUCTION=true" >> aksel.nav.no/website/.env
       shell: bash
 
     - name: Build Next.js website

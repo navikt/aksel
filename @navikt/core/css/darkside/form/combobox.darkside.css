@@ -175,7 +175,7 @@
   min-width: 10ch;
   width: 100%;
   height: var(--__axc-combobox-input-height);
-  background: var(--ax-bg-input);
+  background: transparent;
 
   &:focus-visible {
     outline: 0;

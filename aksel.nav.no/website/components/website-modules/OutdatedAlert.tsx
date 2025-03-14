@@ -1,6 +1,6 @@
 import { HourglassBottomFilledIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Heading, Link } from "@navikt/ds-react";
-import { useSanityData } from "@/hooks/useSanityData";
+import { useSanityData } from "./SanityDataProvider";
 
 export default function OutdatedAlert() {
   const ctx = useSanityData();
