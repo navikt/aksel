@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { HTMLAttributes, forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { BodyShort } from "../typography";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
@@ -34,12 +34,12 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt3-moderate";
 
   /* Temp hide these until naming is resolved */
-  // | "meta-1"
-  // | "meta-1-filled"
-  // | "meta-1-moderate"
-  // | "meta-2"
-  // | "meta-2-filled"
-  // | "meta-2-moderate";
+  // | "meta-purple"
+  // | "meta-purple-filled"
+  // | "meta-purple-moderate"
+  // | "meta-lime"
+  // | "meta-lime-filled"
+  // | "meta-lime-moderate";
   /**
    * @default "medium"
    */
@@ -63,6 +63,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ children, className, variant, size = "medium", icon, ...rest }, ref) => {
+    const { cn } = useRenameCSS();
     const filledVariant = variant?.endsWith("-filled") && "strong";
     const moderateVariant = variant?.endsWith("-moderate") && "moderate";
     const color = variant?.replace("-filled", "").replace("-moderate", "");
@@ -73,7 +74,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         ref={ref}
         as="span"
         size={size === "medium" ? "medium" : "small"}
-        className={cl(
+        className={cn(
           "navds-tag",
           className,
           `navds-tag--${variant}`,
@@ -82,7 +83,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
           `navds-tag--${color}`,
         )}
       >
-        {icon && <span className="navds-tag__icon--left">{icon}</span>}
+        {icon && <span className={cn("navds-tag__icon--left")}>{icon}</span>}
         {children}
       </BodyShort>
     );

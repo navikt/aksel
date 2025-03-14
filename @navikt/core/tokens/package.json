@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "7.10.0",
+  "version": "7.17.3",
   "description": "Design-tokens for Nav designsystem",
   "author": "Aksel | Nav designsystem team",
   "keywords": [
@@ -14,7 +14,10 @@
     "/dist",
     "/src",
     "types.ts",
-    "docs.json"
+    "docs.json",
+    "token_docs.js",
+    "!/dist/darkside",
+    "/dist/darkside/tokens*"
   ],
   "scripts": {
     "build": "tsx ./config/build.ts > /dev/null && yarn build:darkside && tsx ./config/version-tag.ts",
@@ -35,7 +38,7 @@
     "color": "4.2.3",
     "colorjs.io": "^0.5.2",
     "esbuild": "^0.24.0",
-    "lightningcss": "^1.28.0",
+    "lightningcss": "^1.29.2",
     "lodash": "^4.17.21",
     "style-dictionary": "^4.1.1",
     "tsx": "^4.19.1",
@@ -51,6 +54,7 @@
     ".": "./dist/tokens.css",
     "./types": "./types.ts",
     "./docs.json": "./docs.json",
+    "./token_docs": "./token_docs.js",
     "./dist/*": {
       "types": "./dist/tokens.d.ts",
       "default": "./dist/*"
@@ -62,13 +66,6 @@
       "require": "./dist/darkside/tokens-cjs.js"
     },
     "./darkside-scss": "./dist/darkside/tokens.scss",
-    "./darkside-less": "./dist/darkside/tokens.less",
-    "./darkside-js-static": {
-      "types": "./dist/darkside/static/tokens.d.ts",
-      "import": "./dist/darkside/static/tokens.js",
-      "require": "./dist/darkside/static/tokens-cjs.js"
-    },
-    "./darkside-scss-static": "./dist/darkside/static/tokens.scss",
-    "./darkside-less-static": "./dist/darkside/static/tokens.less"
+    "./darkside-less": "./dist/darkside/tokens.less"
   }
 }

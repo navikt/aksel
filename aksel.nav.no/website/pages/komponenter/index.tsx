@@ -13,7 +13,6 @@ import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
-import { AmplitudeEvents, amplitude } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
@@ -166,12 +165,8 @@ function Links() {
         rel="noreferrer noopener"
         href="https://github.com/navikt/aksel/tree/main/%40navikt"
         className="flex items-center gap-1 underline hover:text-text-on-inverted hover:no-underline focus:bg-border-focus-on-inverted focus:text-text-default focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
-        onClick={() =>
-          amplitude.track(AmplitudeEvents.link, {
-            kilde: "intro-lenker ikonside",
-            til: "github",
-          })
-        }
+        data-umami-event="navigere"
+        data-umami-event-url="https://github.com/navikt/aksel/tree/main/%40navikt"
       >
         <GithubIcon /> Github
       </a>
@@ -180,12 +175,8 @@ function Links() {
         rel="noreferrer noopener"
         href="https://yarnpkg.com/package/@navikt/ds-react"
         className="flex items-center gap-1 underline hover:text-text-on-inverted hover:no-underline focus:bg-border-focus-on-inverted focus:text-text-default focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
-        onClick={() =>
-          amplitude.track(AmplitudeEvents.link, {
-            kilde: "intro-lenker ikonside",
-            til: "yarn",
-          })
-        }
+        data-umami-event="navigere"
+        data-umami-event-url="https://yarnpkg.com/package/@navikt/ds-react"
       >
         <YarnIcon />
         Yarn
@@ -195,12 +186,8 @@ function Links() {
         rel="noreferrer noopener"
         href="/grunnleggende/kode/endringslogg"
         className="flex items-center gap-1 underline hover:text-text-on-inverted hover:no-underline focus:bg-border-focus-on-inverted focus:text-text-default focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
-        onClick={() =>
-          amplitude.track(AmplitudeEvents.link, {
-            kilde: "intro-lenker komponenter",
-            til: "endringslogg",
-          })
-        }
+        data-umami-event="navigere"
+        data-umami-event-url="/grunnleggende/kode/endringslogg"
       >
         <ChangelogIcon />
         Endringslogg
@@ -211,12 +198,8 @@ function Links() {
         rel="noreferrer noopener"
         href="https://www.figma.com/@nav_aksel"
         className="flex items-center gap-1 underline hover:text-text-on-inverted hover:no-underline focus:bg-border-focus-on-inverted focus:text-text-default focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
-        onClick={() =>
-          amplitude.track(AmplitudeEvents.link, {
-            kilde: "intro-lenker ikonside",
-            til: "figma",
-          })
-        }
+        data-umami-event="navigere"
+        data-umami-event-url="https://www.figma.com/@nav_aksel"
       >
         <FigmaIcon /> Figma-community
       </a>
@@ -225,12 +208,7 @@ function Links() {
         rel="noreferrer noopener"
         href="/storybook"
         className="group flex items-center gap-1 underline hover:text-text-on-inverted hover:no-underline focus:bg-border-focus-on-inverted focus:text-text-default focus:no-underline focus:shadow-[0_0_0_2px_var(--a-border-focus-on-inverted)] focus:outline-none"
-        onClick={() =>
-          amplitude.track(AmplitudeEvents.link, {
-            kilde: "intro-lenker ikonside",
-            til: "storybook",
-          })
-        }
+        data-umami-event="navigere"
       >
         <StorybookIcon className="mr-1" /> Storybook
       </a>

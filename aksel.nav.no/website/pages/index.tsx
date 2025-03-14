@@ -1,9 +1,9 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
-import { GetStaticProps } from "next/types";
+import Link from "next/link";
+import { GetServerSideProps } from "next/types";
 import { useState } from "react";
-import Snowfall from "react-snowfall";
 import {
   CompassIcon,
   ComponentIcon,
@@ -31,9 +31,9 @@ import { getClient } from "@/sanity/client.server";
 import { contributorsAll } from "@/sanity/queries";
 import { NextPageT } from "@/types";
 import { userPrefersReducedMotion } from "@/utils";
+import { CONSENT_TRACKER_ID } from "@/web/CookieProvider";
 import { IntroCards } from "@/web/IntroCards";
 import { AkselCubeAnimated } from "@/web/aksel-cube/AkselCube";
-import { PagePreview } from "@/web/preview/PagePreview";
 import { SEO } from "@/web/seo/SEO";
 
 type PageProps = NextPageT<{
@@ -48,20 +48,10 @@ type PageProps = NextPageT<{
     seo: { meta: string; image: string };
   };
   blocks?: BlocksT[];
+  showCookieBanner?: boolean;
 }>;
 
-/**
- * Using `count` with references in groq query causes infinite loop when previewing
- */
-const query = groq`*[_type == "aksel_forside"][0]{
-  "page": {
-    ...,
-  },
-  "tema": select(
-    $preview == "true" => *[_type == "gp.tema"] | order(lower(title)),
-    $preview != "true" => *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title))
-  ),
+const blockQuery = groq`*[_type == "aksel_forside"][0]{
   blocks[]{
     ...,
     _type == "nytt_fra_aksel"=>{
@@ -84,34 +74,19 @@ const query = groq`*[_type == "aksel_forside"][0]{
           seo,
           ${contributorsAll}
         },
-        "artikler": select(
-          $preview == "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": undertema[]->tema->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          },
-          $preview != "true" => *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref) && count(*[references(^._id)]) > 0] | order(publishedAt desc)[0...8]{
-            _type,
-            _id,
-            heading,
-            _createdAt,
-            _updatedAt,
-            publishedAt,
-            "slug": slug.current,
-            "tema": undertema[]->tema->title,
-            ingress,
-            seo,
-            ${contributorsAll}
-          }
-        ),
+        "artikler": *[_type == "aksel_artikkel" && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...8]{
+          _type,
+          _id,
+          heading,
+          _createdAt,
+          _updatedAt,
+          publishedAt,
+          "slug": slug.current,
+          "tema": undertema[]->tema->title,
+          ingress,
+          seo,
+          ${contributorsAll}
+        },
         "komponenter": *[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(publishedAt) && !(_id in ^.highlights[]._ref)] | order(publishedAt desc)[0...7]{
           _type,
           _id,
@@ -128,22 +103,30 @@ const query = groq`*[_type == "aksel_forside"][0]{
       },
     }
   }
-}`;
+}.blocks
+  `;
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-}: {
-  preview?: boolean;
-}): Promise<PageProps> => {
+const pageDataQuery = groq`*[_type == "aksel_forside"][0]{
+  "page": {
+    ...,
+  }
+}.page`;
+
+const temaQuery = groq`*[_type == "aksel_forside"][0]{
+  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
+      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title))
+      }.tema`;
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx,
+): Promise<PageProps> => {
   const client = getClient();
 
-  const {
-    page = null,
-    tema = null,
-    blocks = null,
-  } = await client.fetch(query, {
-    preview: "false",
-  });
+  const [page, blocks, tema] = await Promise.all([
+    client.fetch(pageDataQuery),
+    client.fetch(blockQuery),
+    client.fetch(temaQuery),
+  ]);
 
   return {
     props: {
@@ -151,11 +134,11 @@ export const getStaticProps: GetStaticProps = async ({
       page,
       blocks,
       slug: "/",
-      preview,
+      preview: false,
       id: page?._id ?? "",
       title: "Forsiden",
+      showCookieBanner: !ctx.req.cookies[CONSENT_TRACKER_ID],
     },
-    revalidate: 600,
     notFound: false,
   };
 };
@@ -198,17 +181,15 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       />
       <Header />
       <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-        {!pause && (
-          <div aria-hidden>
-            <Snowfall
-              style={{ zIndex: 1 }}
-              color="rgba(230, 241, 248, 0.9)"
-              speed={reducedMotion || pause ? [0, 0] : [0.1, 0.2]}
-              wind={reducedMotion || pause ? [0, 0] : [-0.2, 0.2]}
-              snowflakeCount={600}
-            />
-          </div>
-        )}
+        <div className="bg-violet-600 p-4 text-center text-xl text-white">
+          <Link
+            href="/darkside"
+            target="_blank"
+            className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
+          >
+            Vi trenger testere fra team i Nav for darkmode og theming!
+          </Link>
+        </div>
         <div className="z-20 pb-28">
           <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
             <Heading
@@ -315,12 +296,6 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
                   </ul>
                 </VStack>
               </Box>
-              {/* Kept commented here in case we want to show future questionnaires from uxtweaks */}
-              {/* <UxTweaks
-                href="https://study.uxtweak.com/treetest/..."
-                length={3}
-              /> */}
-
               {blocks && (
                 <Box paddingInline={{ xs: "2", lg: "18" }}>
                   <FrontpageBlock blocks={blocks} />
@@ -335,11 +310,5 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
 };
 
 export default function HomePage(props: PageProps["props"]) {
-  return props?.preview ? (
-    <PagePreview query={query} props={props} params={{ preview: "true" }}>
-      {(previewProps) => <Forside {...previewProps} />}
-    </PagePreview>
-  ) : (
-    <Forside {...props} />
-  );
+  return <Forside {...props} />;
 }

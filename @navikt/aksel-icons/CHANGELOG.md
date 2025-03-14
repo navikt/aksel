@@ -1,5 +1,49 @@
 # @navikt/aksel-icons
 
+## 7.17.3
+
+## 7.17.2
+
+## 7.17.1
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+## 7.15.0
+
+## 7.14.3
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `LineHeight`, `SpaceHorizontal` and `SpaceVertical`. ([#3587](https://github.com/navikt/aksel/pull/3587))
+
+## 7.13.0
+
+### Minor Changes
+
+- Icons: :tada: New icons `ExpandVertical` and `QuestionmarkCircle` ([#3583](https://github.com/navikt/aksel/pull/3583))
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+### Minor Changes
+
+- Icons: Added new icons 'SortUp' and 'SortDown' 🎉. ([#3528](https://github.com/navikt/aksel/pull/3528))
+
 ## 7.10.0
 
 ## 7.9.2

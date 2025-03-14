@@ -1,16 +1,11 @@
-.navds-list ul,
-.navds-list ol {
+.aksel-list ul,
+.aksel-list ol {
   padding: 0;
-  margin-block: var(--ax-space-16);
+  margin: 0;
 }
 
-.navds-list--small ul,
-.navds-list--small ol {
-  margin-block: var(--ax-space-12);
-}
-
-.navds-list {
-  & .navds-list :where(ul, ol) {
+.aksel-list {
+  & .aksel-list :where(ul, ol) {
     margin-block: var(--ax-space-8) 0;
   }
 
@@ -18,7 +13,7 @@
     list-style: decimal; /* This is the default value, but some frameworks have `ol,ul { list-style:none }` */
     padding-left: 1.7rem;
 
-    & > .navds-list__item {
+    & > .aksel-list__item {
       padding-left: 0.3rem;
     }
 
@@ -28,13 +23,13 @@
   }
 
   & ul {
-    & > .navds-list__item {
+    & > .aksel-list__item {
       display: grid;
       grid-template-columns: auto 1fr;
       gap: var(--ax-space-8);
     }
 
-    & > li > .navds-list__item-marker {
+    & > li > .aksel-list__item-marker {
       display: flex;
       align-items: center;
       height: var(--ax-font-line-height-xlarge);
@@ -47,20 +42,20 @@
 
 _::-webkit-full-page-media,
 _:future,
-:root .navds-list ol {
+:root .aksel-list ol {
   padding-left: 2.1rem;
 }
 
 _::-webkit-full-page-media,
 _:future,
-:root .navds-list ol .navds-list__item {
+:root .aksel-list ol .aksel-list__item {
   padding-left: 0;
 }
 
 /* SAFARI HACK END */
 /* stylelint-enable selector-type-no-unknown */
 
-.navds-list__item {
+.aksel-list__item {
   margin-block-end: var(--ax-space-8);
 
   &:last-child {
@@ -68,19 +63,19 @@ _:future,
   }
 }
 
-.navds-list__item-marker {
+.aksel-list__item-marker {
   width: 1.5rem;
 }
 
-.navds-list--small ul > li > .navds-list__item-marker {
+.aksel-list--small ul > li > .aksel-list__item-marker {
   height: var(--ax-font-line-height-large);
 }
 
-.navds-list__item-marker--bullet {
+.aksel-list__item-marker--bullet {
   padding-left: 0.8rem;
 }
 
-.navds-list__item-marker--icon {
+.aksel-list__item-marker--icon {
   font-size: 1.5rem;
   justify-content: center;
 }

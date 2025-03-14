@@ -7,7 +7,7 @@ import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { SearchHitT, searchOptions } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
-import { SearchContext, SearchLoggingContext } from "../providers";
+import { SearchContext } from "../providers";
 import { highlightStr } from "../utils";
 
 export const Hit = forwardRef<
@@ -18,9 +18,8 @@ export const Hit = forwardRef<
     simple?: boolean;
     tag?: Partial<keyof typeof searchOptions>;
   }
->(({ hit, index, simple = false, tag }, ref) => {
+>(({ hit, simple = false, tag }, ref) => {
   const { query } = useContext(SearchContext);
-  const { logSuccess } = useContext(SearchLoggingContext);
 
   const href =
     "anchor" in hit && hit.anchor
@@ -44,7 +43,8 @@ export const Hit = forwardRef<
         >
           <NextLink
             href={href}
-            onClick={() => logSuccess(index, `/${hit.item.slug}`)}
+            data-umami-event="navigere"
+            data-umami-event-kilde="global sok"
             className={cl(
               "group scroll-my-32 break-words text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
               "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",

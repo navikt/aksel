@@ -1,5 +1,5 @@
-.navds-theme {
-  color: var(--ax-text-default);
+.aksel-theme {
+  color: var(--ax-text-neutral);
 
   &[data-background="true"] {
     background-color: var(--ax-bg-default);

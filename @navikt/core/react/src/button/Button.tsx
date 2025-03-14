@@ -1,6 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Loader } from "../loader";
+import { useRenameCSS } from "../theme/Theme";
 import { Label } from "../typography";
 import { omit } from "../util";
 import { composeEventHandlers } from "../util/composeEventHandlers";
@@ -79,6 +79,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       },
       ref,
     ) => {
+      const { cn } = useRenameCSS();
+
       const filterProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
         disabled || loading ? omit(rest, ["href"]) : rest;
 
@@ -94,7 +96,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           {...filterProps}
           ref={ref}
           onKeyUp={composeEventHandlers(onKeyUp, handleKeyUp)}
-          className={cl(
+          className={cn(
             className,
             "navds-button",
             `navds-button--${variant}`,
@@ -108,7 +110,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           disabled={disabled ?? loading ? true : undefined}
         >
           {icon && iconPosition === "left" && (
-            <span className="navds-button__icon">{icon}</span>
+            <span className={cn("navds-button__icon")}>{icon}</span>
           )}
           {loading && <Loader size={size} />}
           {children && (
@@ -117,7 +119,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             </Label>
           )}
           {icon && iconPosition === "right" && (
-            <span className="navds-button__icon">{icon}</span>
+            <span className={cn("navds-button__icon")}>{icon}</span>
           )}
         </Component>
       );

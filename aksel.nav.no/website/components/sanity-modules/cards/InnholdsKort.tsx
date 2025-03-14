@@ -1,7 +1,6 @@
 import NextLink from "next/link";
 import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
-import { amplitudeLogNavigation } from "@/logging";
 import { SanityBlockContent } from "@/sanity-block";
 import { InnholdsKortPrinsipperT } from "@/types";
 
@@ -26,12 +25,8 @@ const InnholdsKort = ({ node }: InnholdsKortProps) => {
         <NextLink
           href={`/${node?.lenke}`}
           passHref
-          onClick={(e) =>
-            amplitudeLogNavigation(
-              "prinsipp-kort",
-              e.currentTarget.getAttribute("href"),
-            )
-          }
+          data-umami-event="navigere"
+          data-umami-event-kilde="innholdskort"
           className="z-10 before:absolute before:inset-0 focus:outline-none"
         >
           {node.title}

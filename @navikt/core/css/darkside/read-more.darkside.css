@@ -1,4 +1,4 @@
-.navds-read-more {
+.aksel-read-more {
   --__axc-read-more-icon-size: 1.5rem;
   --__axc-read-more-pi-start: 0px;
   --__axc-read-more-pi-end: var(--ax-space-4);
@@ -6,7 +6,7 @@
 }
 
 /* ----------------------------- ReadMore Button ---------------------------- */
-.navds-read-more__button {
+.aksel-read-more__button {
   cursor: pointer;
   margin: 0;
   border: none;
@@ -14,7 +14,7 @@
   display: flex;
   align-items: flex-start;
   gap: var(--ax-space-4);
-  color: var(--ax-text-accent);
+  color: var(--ax-text-accent-subtle);
   padding-inline: var(--__axc-read-more-pi-start) var(--__axc-read-more-pi-end);
   padding-block: var(--__axc-read-more-pb);
   text-align: start;
@@ -24,50 +24,49 @@
     outline-offset: 3px;
   }
 
-  &[data-state="open"] .navds-read-more__expand-icon {
+  &[data-state="open"] .aksel-read-more__expand-icon {
     transform: rotateX(-180deg);
   }
 }
 
-.navds-read-more:is([data-volume="low"], :not([data-volume])) {
-  & .navds-read-more__button {
+.aksel-read-more:is([data-volume="low"], :not([data-volume])) {
+  & .aksel-read-more__button {
     border-radius: var(--ax-border-radius-medium);
 
     &:hover {
-      background-color: var(--ax-bg-hoverA);
-      color: var(--ax-text-accent-strong);
+      background-color: var(--ax-bg-neutral-moderate-hoverA);
     }
   }
 }
 
-.navds-read-more[data-volume="high"] {
-  & .navds-read-more__button {
+.aksel-read-more[data-volume="high"] {
+  & .aksel-read-more__button {
     background-color: var(--ax-bg-accent-moderate);
     border-radius: var(--ax-border-radius-full);
 
     &:hover {
       background-color: var(--ax-bg-accent-moderate-hoverA);
-      color: var(--ax-text-accent-strong);
+      color: var(--ax-text-accent);
     }
   }
 
-  &.navds-read-more--large {
+  &.aksel-read-more--large {
     --__axc-read-more-pi-start: var(--ax-space-12);
     --__axc-read-more-pi-end: var(--ax-space-24);
   }
 
-  &.navds-read-more--small,
-  &.navds-read-more--medium {
+  &.aksel-read-more--small,
+  &.aksel-read-more--medium {
     --__axc-read-more-pi-start: var(--ax-space-8);
     --__axc-read-more-pi-end: var(--ax-space-16);
   }
 }
 
 /* ---------------------------- ReadMore Content ---------------------------- */
-.navds-read-more__content {
+.aksel-read-more__content {
   margin-top: var(--ax-space-8);
-  border-left: 2px solid var(--ax-border-subtleA);
-  color: var(--ax-text-default);
+  border-left: 2px solid var(--ax-border-neutral-subtleA);
+  color: var(--ax-text-neutral);
   margin-left: calc(var(--__axc-read-more-pi-start) + var(--__axc-read-more-icon-size) / 2 - 1px);
   padding-left: calc(var(--__axc-read-more-icon-size) / 2 - 1px + var(--ax-space-4));
 
@@ -76,25 +75,25 @@
   }
 }
 
-.navds-read-more__expand-icon {
+.aksel-read-more__expand-icon {
   font-size: var(--__axc-read-more-icon-size);
   flex-shrink: 0;
   transition: transform 100ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* ----------------------------- ReadMore Sizes ----------------------------- */
-.navds-read-more--large {
+.aksel-read-more--large {
   --__axc-read-more-pb: var(--ax-space-12);
 }
 
-.navds-read-more--small {
+.aksel-read-more--small {
   --__axc-read-more-icon-size: 1.25rem;
   --__axc-read-more-pb: var(--ax-space-2);
 }
 
 /* ------------------------- ReadMore high-contrast ------------------------- */
 @media (forced-colors: active) {
-  .navds-read-more__button {
+  .aksel-read-more__button {
     background-color: ButtonFace;
     border: solid 1px ButtonText;
     color: ButtonText;

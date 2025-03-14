@@ -1,7 +1,6 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
 import { Slot } from "../../slot/Slot";
-import { useThemeInternal } from "../../theme/Theme";
+import { useRenameCSS, useThemeInternal } from "../../theme/Theme";
 import { OverridableComponent, omit } from "../../util";
 import BasePrimitive, {
   PRIMITIVE_PROPS,
@@ -80,6 +79,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
     ) => {
       const themeContext = useThemeInternal(false);
       const prefix = themeContext ? "ax" : "a";
+      const { cn } = useRenameCSS();
 
       const styles: React.CSSProperties = {
         ...style,
@@ -95,7 +95,7 @@ export const HGrid: OverridableComponent<HGridProps, HTMLDivElement> =
           <Comp
             {...omit(rest, PRIMITIVE_PROPS)}
             ref={ref}
-            className={cl("navds-hgrid", className, {
+            className={cn("navds-hgrid", className, {
               "navds-hgrid-gap": gap,
               "navds-hgrid-align": align,
             })}

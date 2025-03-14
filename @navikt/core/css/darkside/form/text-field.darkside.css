@@ -1,12 +1,12 @@
-.navds-text-field__input {
+.aksel-text-field__input {
   appearance: none;
   padding: var(--ax-space-8);
   background: var(--ax-bg-input);
   border-radius: var(--ax-border-radius-large);
-  border: 1px solid var(--ax-border-default);
+  border: 1px solid var(--ax-border-neutral);
   min-height: 3rem;
   width: 100%;
-  color: var(--ax-text-default);
+  color: var(--ax-text-neutral);
 
   &:hover {
     border-color: var(--ax-border-accent-strong);
@@ -20,12 +20,12 @@
 
   &:disabled {
     background-color: var(--ax-bg-input);
-    border-color: var(--ax-border-default);
+    border-color: var(--ax-border-neutral);
     cursor: not-allowed;
   }
 
   &::placeholder {
-    color: var(--ax-text-subtle);
+    color: var(--ax-text-neutral-subtle);
   }
 
   &[size] {
@@ -33,26 +33,26 @@
   }
 }
 
-.navds-form-field--small .navds-text-field__input {
+.aksel-form-field--small .aksel-text-field__input {
   padding: 0 var(--ax-space-8);
   min-height: 2rem;
 }
 
-.navds-text-field--error .navds-text-field__input:not(:disabled) {
+.aksel-text-field--error .aksel-text-field__input:not(:disabled) {
   border-color: var(--ax-border-danger-strong);
   box-shadow: 0 0 0 1px var(--ax-border-danger-strong);
 }
 
-.navds-text-field--readonly .navds-text-field__input {
-  background-color: var(--ax-bg-moderate);
-  border-color: var(--ax-border-subtleA);
+.aksel-text-field--readonly .aksel-text-field__input {
+  background-color: var(--ax-bg-neutral-moderate);
+  border-color: var(--ax-border-neutral-subtleA);
   cursor: default;
 }
 
 /**
   * Removes default search icon
   */
-.navds-text-field__input[type="search"] {
+.aksel-text-field__input[type="search"] {
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
@@ -62,7 +62,7 @@
 }
 
 @media (forced-colors: active) {
-  .navds-text-field__input {
+  .aksel-text-field__input {
     background-color: field;
     color: fieldtext;
   }

@@ -36,7 +36,7 @@ export {
   type InternalHeaderUserProps,
 } from "./internal-header";
 export { Bleed, type BleedProps } from "./layout/bleed";
-export { Box, type BoxProps } from "./layout/box";
+export { Box, type BoxProps, BoxNew, type BoxNewProps } from "./layout/box";
 export { HGrid, type HGridProps } from "./layout/grid";
 export { Page, type PageBlockProps, type PageProps } from "./layout/page";
 export { Hide, Show, type ResponsiveProps } from "./layout/responsive";
@@ -150,6 +150,11 @@ export { Select, type SelectProps } from "./form/select";
 export { Switch, type SwitchProps } from "./form/switch";
 export { Textarea, type TextareaProps } from "./form/textarea";
 export { TextField, type TextFieldProps } from "./form/textfield";
+
+/**
+ * Theming
+ */
+export { Theme, type ThemeProps } from "./theme";
 
 /**
  * @deprecated

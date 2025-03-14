@@ -8,12 +8,13 @@ body,
 
 /* ---------------------------- Inline utilities ---------------------------- */
 [hidden] {
-  display: none !important;
+  /* CSS-layers reverses "!important" ordering, so we can't set this to important if we want to override it later. */
+  display: none;
 }
 
 /* https://web.dev/prefers-reduced-motion/ */
 @media (prefers-reduced-motion: reduce) {
-  *:not(.navds-loader *, .navds-loader, .navds-progress-bar *, .navds-progress-bar),
+  *:not(.aksel-loader *, .aksel-loader, .aksel-progress-bar *, .aksel-progress-bar),
   ::before,
   ::after {
     animation-delay: -1ms !important;
@@ -38,7 +39,7 @@ body,
  */
 
 .sr-only,
-.navds-sr-only {
+.aksel-sr-only {
   border: 0;
   clip: rect(0, 0, 0, 0);
   clip-path: inset(50%);
@@ -61,8 +62,8 @@ body,
 
 .sr-only.focusable:active,
 .sr-only.focusable:focus,
-.navds-sr-only.focusable:active,
-.navds-sr-only.focusable:focus {
+.aksel-sr-only.focusable:active,
+.aksel-sr-only.focusable:focus {
   clip: auto;
   clip-path: none;
   height: auto;

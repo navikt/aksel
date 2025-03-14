@@ -25,3 +25,4 @@ export * from "./templates/landingsside";
 export * from "./admin/editors";
 export * from "./admin/redirects";
 export * from "./admin/articleViews";
+export * from "./admin/cookies";

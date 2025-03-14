@@ -1,78 +1,78 @@
-.navds-search {
+.aksel-search {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.navds-search__wrapper-inner {
+.aksel-search__wrapper-inner {
   position: relative;
   width: 100%;
 }
 
-.navds-search--with-size {
-  & .navds-search__wrapper-inner {
+.aksel-search--with-size {
+  & .aksel-search__wrapper-inner {
     width: inherit;
   }
 
-  & .navds-search__wrapper {
+  & .aksel-search__wrapper {
     width: fit-content;
   }
 }
 
-.navds-search__wrapper {
+.aksel-search__wrapper {
   display: inline-flex;
   align-items: center;
   border-radius: var(--ax-border-radius-large);
 
   /* We have to outline the whole container to include the Search-buttons */
-  &:has(.navds-search__input:focus-visible) {
+  &:has(.aksel-search__input:focus-visible) {
     outline: 3px solid var(--ax-border-focus);
     outline-offset: 3px;
   }
 }
 
 /* ------------------------------ Search input ------------------------------ */
-.navds-search__input {
+.aksel-search__input {
   padding-right: var(--ax-space-40);
 
   &:focus-visible {
     outline: none;
   }
 
-  &.navds-search__input--primary,
-  &.navds-search__input--secondary {
+  &.aksel-search__input--primary,
+  &.aksel-search__input--secondary {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: none;
   }
 }
 
-.navds-search__input--simple {
+.aksel-search__input--simple {
   padding-left: var(--ax-space-40);
 }
 
 /* ------------------------------ Search sizing ----------------------------- */
-.navds-form-field--small {
-  & .navds-search__input {
+.aksel-form-field--small {
+  & .aksel-search__input {
     padding-right: var(--ax-space-28);
   }
 
-  & .navds-search__input--simple {
+  & .aksel-search__input--simple {
     padding-left: var(--ax-space-28);
   }
 
-  & .navds-search__search-icon {
+  & .aksel-search__search-icon {
     left: var(--ax-space-4);
     font-size: 1.25rem;
   }
 
-  & .navds-search__button-clear {
+  & .aksel-search__button-clear {
     right: var(--ax-space-4);
   }
 }
 
 /* ------------------------------- Search icon ------------------------------ */
-.navds-search__search-icon {
+.aksel-search__search-icon {
   position: absolute;
   left: var(--ax-space-8);
   top: 50%;
@@ -80,13 +80,13 @@
   pointer-events: none;
   font-size: 1.5rem;
 
-  .navds-search--disabled & {
+  .aksel-search--disabled & {
     opacity: var(--ax-opacity-disabled);
   }
 }
 
 /* --------------------------- Search Clear-button -------------------------- */
-.navds-search__button-clear {
+.aksel-search__button-clear {
   position: absolute;
   right: var(--ax-space-8);
   top: 50%;
@@ -94,16 +94,16 @@
 }
 
 /* ------------------------------ Search Button ----------------------------- */
-.navds-search__button-search {
+.aksel-search__button-search {
   flex-shrink: 0;
   border-radius: 0;
   border-top-right-radius: var(--ax-border-radius-large);
   border-bottom-right-radius: var(--ax-border-radius-large);
 }
 
-.navds-search__button-search.navds-button--secondary {
+.aksel-search__button-search.aksel-button--secondary {
   --__axc-button-border-width: 1px;
-  --__axc-button-border-color: var(--ax-border-default);
+  --__axc-button-border-color: var(--ax-border-neutral);
 
   &:not(:hover, :active) {
     background-color: var(--ax-bg-input);
@@ -112,42 +112,38 @@
   &:hover:not(:disabled) {
     --__axc-button-border-color: var(--ax-border-accent-strong);
   }
-
-  &:active:not(:disabled) {
-    --__axc-button-border-color: transparent;
-  }
 }
 
 /* Special-case where we hover/focus input, and want the secondary-button to match input-border */
-.navds-search:not(.navds-search--error, .navds-search--disabled)
-  .navds-search__wrapper:has(.navds-search__input:is(:hover, :focus-visible))
-  .navds-search__button-search.navds-button--secondary:not(:hover, :active) {
+.aksel-search:not(.aksel-search--error, .aksel-search--disabled)
+  .aksel-search__wrapper:has(.aksel-search__input:is(:hover, :focus-visible))
+  .aksel-search__button-search.aksel-button--secondary:not(:hover, :active) {
   --__axc-button-border-color: var(--ax-border-accent-strong);
 }
 
 /* --------------------------- Search Error-state --------------------------- */
-.navds-search--error .navds-search__input:not(:disabled) {
+.aksel-search--error .aksel-search__input:not(:disabled) {
   border-color: var(--ax-border-danger-strong);
   box-shadow:
     inset -2px 0 0 0 var(--ax-border-danger-strong),
     inset 0 0 0 1px var(--ax-border-danger-strong);
 
-  &.navds-search__input--simple {
+  &.aksel-search__input--simple {
     box-shadow: inset 0 0 0 1px var(--ax-border-danger-strong);
   }
 }
 
 /* -------------------------- Search Focus layering ------------------------- */
-.navds-search__input:focus-visible,
-.navds-search__button-search:focus-visible {
+.aksel-search__input:focus-visible,
+.aksel-search__button-search:focus-visible {
   z-index: 1;
 }
 
 /* -------------------------- Search disabled state ------------------------- */
 
 /* We can't re-use disabled-state for form-fields since opacity multiplies on search-button */
-.navds-search--disabled {
-  .navds-search__input {
+.aksel-search--disabled {
+  .aksel-search__input {
     opacity: var(--ax-opacity-disabled);
     cursor: not-allowed;
   }

@@ -1,8 +1,7 @@
 import cl from "clsx";
 import Link from "next/link";
-import { createContext, useContext } from "react";
+import { HTMLAttributes, createContext, useContext } from "react";
 import { BodyShort, Label } from "@navikt/ds-react";
-import { amplitudeLogNavigation } from "@/logging";
 import styles from "./Menu.module.css";
 
 type MenuProps = {
@@ -52,10 +51,10 @@ export function MenuUl({ children, id, className }: MenuListProps) {
 
 type MenuLiProps = {
   children: React.ReactNode;
-};
+} & HTMLAttributes<HTMLLIElement>;
 
-export function MenuLi({ children }: MenuLiProps) {
-  return <li className="group">{children}</li>;
+export function MenuLi(props: MenuLiProps) {
+  return <li className="group" {...props} />;
 }
 
 type MenuLinkProps = {
@@ -64,6 +63,7 @@ type MenuLinkProps = {
   href: string;
   id?: string;
   onClick?: () => void;
+  source: "sidebar" | "toc";
 };
 
 export function MenuLink({
@@ -72,6 +72,7 @@ export function MenuLink({
   selected,
   id,
   onClick,
+  source,
 }: MenuLinkProps) {
   const ctx = useContext(MenuContext);
 
@@ -79,21 +80,20 @@ export function MenuLink({
     throw new Error("MenuListItem must be used inside a Menu component");
   }
 
+  const isDarksideOverride = href.includes("/darkside/");
+
   return (
     <div className="relative scroll-m-6 border-l border-border-subtle" id={id}>
       <BodyShort
-        data-type={ctx.variant}
+        data-type={isDarksideOverride ? "darkside" : ctx.variant}
+        data-current={selected}
         size="small"
         as={Link}
         prefetch={false}
         href={href}
-        onClick={(e) => {
-          amplitudeLogNavigation(
-            ctx.loggingContext,
-            e.currentTarget.getAttribute("href"),
-          );
-          onClick?.();
-        }}
+        onClick={() => onClick?.()}
+        data-umami-event="navigere"
+        data-umami-event-kilde={source}
         className={cl(
           styles.menuListItem,
           "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
@@ -102,24 +102,10 @@ export function MenuLink({
             "text-text-subtle before:w-0 before:bg-gray-400 before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
               !selected,
             "before:w-1": selected,
-            "text-deepblue-700 before:bg-deepblue-700":
-              selected && ctx.variant === "action",
-            "text-text-default before:bg-gray-700":
-              selected && ctx.variant === "neutral",
           },
         )}
       >
-        <span
-          className={cl(
-            "w-full rounded px-2 py-1 transition-colors duration-100 ease-out",
-            {
-              "bg-surface-selected": selected && ctx.variant === "action",
-              "bg-surface-neutral-subtle":
-                selected && ctx.variant === "neutral",
-              "bg-transparent": !selected,
-            },
-          )}
-        >
+        <span className="w-full rounded px-2 py-1 transition-colors duration-100 ease-out">
           {children}
         </span>
       </BodyShort>

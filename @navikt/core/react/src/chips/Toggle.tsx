@@ -1,5 +1,5 @@
-import cl from "clsx";
 import React, { forwardRef } from "react";
+import { useRenameCSS } from "../theme/Theme";
 import { OverridableComponent } from "../util/types";
 
 export interface ChipsToggleProps
@@ -37,11 +37,13 @@ export const ToggleChips: OverridableComponent<
     },
     ref,
   ) => {
+    const { cn } = useRenameCSS();
+
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cl(
+        className={cn(
           "navds-chips__chip navds-chips__toggle",
           className,
           `navds-chips__toggle--${variant}`,
@@ -53,7 +55,7 @@ export const ToggleChips: OverridableComponent<
         {checkmark && (
           <svg
             aria-hidden
-            className="navds-chips__toggle-icon"
+            className={cn("navds-chips__toggle-icon")}
             width="1.25em"
             height="1.25em"
             viewBox="0 0 20 20"
@@ -77,14 +79,14 @@ export const ToggleChips: OverridableComponent<
                 /* After removing old fallbacks, change to currentColor */
                 fill={`var(${
                   variant === "action"
-                    ? "--ax-text-accent-strong"
-                    : "--ax-text-default"
+                    ? "--ax-text-accent"
+                    : "--ax-text-neutral"
                 }, var(--ac-chip-toggle-circle-border, var(--a-border-default)))`}
               />
             )}
           </svg>
         )}
-        <span className="navds-chips__chip-text">{children}</span>
+        <span className={cn("navds-chips__chip-text")}>{children}</span>
       </Component>
     );
   },

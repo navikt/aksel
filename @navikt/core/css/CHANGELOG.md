@@ -1,5 +1,75 @@
 # @navikt/ds-css
 
+## 7.17.3
+
+### Patch Changes
+
+- Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
+
+## 7.17.2
+
+### Patch Changes
+
+- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
+## 7.17.1
+
+### Patch Changes
+
+- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+
+## 7.17.0
+
+## 7.16.1
+
+## 7.16.0
+
+### Minor Changes
+
+- Darkside: All classNames are now starts with `.aksel` instead of `.navds`. ([#3586](https://github.com/navikt/aksel/pull/3586))
+
+## 7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Darkside: Changed outline-offset for tabpanel from -4px to -3px. ([`06fecf2`](https://github.com/navikt/aksel/commit/06fecf2af1972a5d06ea452fc5b7431b064e1fc0))
+
+## 7.14.2
+
+## 7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Updated `date.css` to support `react-day-picker v9`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
+## 7.12.2
+
+## 7.12.1
+
+## 7.12.0
+
+## 7.11.0
+
+### Patch Changes
+
+- ExpansionCard: Removed dynamic padding on button-element. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
+- Modal: Defaults to `margin: auto` for tailwind 4 support. ([#3532](https://github.com/navikt/aksel/pull/3532))
+
 ## 7.10.0
 
 ### Minor Changes

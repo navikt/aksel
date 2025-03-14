@@ -1,5 +1,167 @@
 # @navikt/ds-react
 
+## 7.17.3
+
+### Patch Changes
+
+- Datepicker: Fixed a bug where while ranged datepicker, setting `from` to `undefined` while `to` were defined did not allow selecting new dates. ([#3655](https://github.com/navikt/aksel/pull/3655))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.3
+  - @navikt/aksel-icons@7.17.3
+
+## 7.17.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.2
+  - @navikt/aksel-icons@7.17.2
+
+## 7.17.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.1
+  - @navikt/aksel-icons@7.17.1
+
+## 7.17.0
+
+### Minor Changes
+
+- List: aria-label and aria-labelledby is forwarded to list-element. ([#3626](https://github.com/navikt/aksel/pull/3626))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.0
+  - @navikt/aksel-icons@7.17.0
+
+## 7.16.1
+
+### Patch Changes
+
+- React 19: Resolve unknown-type in Slot. ([#3627](https://github.com/navikt/aksel/pull/3627))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.1
+  - @navikt/aksel-icons@7.16.1
+
+## 7.16.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.16.0
+  - @navikt/aksel-icons@7.16.0
+
+## 7.15.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.15.0
+  - @navikt/aksel-icons@7.15.0
+
+## 7.14.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.14.3
+  - @navikt/aksel-icons@7.14.3
+
+## 7.14.2
+
+### Patch Changes
+
+- Updated dependencies [[`441d8b7`](https://github.com/navikt/aksel/commit/441d8b732cb4820e6fe37ad87200c5b5eb31e5cf)]:
+  - @navikt/ds-tokens@7.14.2
+  - @navikt/aksel-icons@7.14.2
+
+## 7.14.1
+
+### Patch Changes
+
+- Datepicker: Fixed regression where some fromDate/toDate instances lead to that date ending up as disabled. ([#3602](https://github.com/navikt/aksel/pull/3602))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.14.1
+  - @navikt/aksel-icons@7.14.1
+
+## 7.14.0
+
+### Minor Changes
+
+- DatePicker: Refactored locally to support `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- MonthPicker: Refactored locally and no longer depends on `react-day-picker v9`. No external API has been changed. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `react-day-picker` bumped to `v9.5.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+- Dependencies: `date-fns` bumped to `^4.0.0`. ([#3525](https://github.com/navikt/aksel/pull/3525))
+
+### Patch Changes
+
+- Darkside: Added 'arrow' back to Tooltip. ([#3589](https://github.com/navikt/aksel/pull/3589))
+
+- Updated dependencies [[`5937d08`](https://github.com/navikt/aksel/commit/5937d085c0bee19fe3625574d58aadffee0c6cf9)]:
+  - @navikt/aksel-icons@7.14.0
+  - @navikt/ds-tokens@7.14.0
+
+## 7.13.0
+
+### Patch Changes
+
+- Darkside: Added support for `ConfirmationpPanel`, `Linkpanel`, `Panel` and `Dropdown`. Note that all of these will be deprecated in the future. ([#3581](https://github.com/navikt/aksel/pull/3581))
+
+- Updated dependencies [[`636eb05`](https://github.com/navikt/aksel/commit/636eb05bf56ba2c8513704c61882fde369c2e67b)]:
+  - @navikt/aksel-icons@7.13.0
+  - @navikt/ds-tokens@7.13.0
+
+## 7.12.2
+
+### Patch Changes
+
+- Box: Added export for `BoxNew`. ([`8576400`](https://github.com/navikt/aksel/commit/857640026368153b64171f1cf954b9abac493ee8))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.2
+  - @navikt/aksel-icons@7.12.2
+
+## 7.12.1
+
+### Patch Changes
+
+- Theme: Theme-prop is now optional. ([`f269311`](https://github.com/navikt/aksel/commit/f269311dbbeb09e8fa0ba93a19aa430f0dd17255))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.1
+  - @navikt/aksel-icons@7.12.1
+
+## 7.12.0
+
+### Minor Changes
+
+- List: Marked `title`, `headingTag` and `description` properties as deprecated. These will not be supported in future versions and should be migrated from when possible. ([#3537](https://github.com/navikt/aksel/pull/3537))
+
+### Patch Changes
+
+- Table: Updated sorting icons for ascending and descending. ([#3536](https://github.com/navikt/aksel/pull/3536))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.12.0
+  - @navikt/aksel-icons@7.12.0
+
+## 7.11.0
+
+### Patch Changes
+
+- Updated dependencies [[`6c81fc0`](https://github.com/navikt/aksel/commit/6c81fc0b239a02499412d350af65389833d59b26)]:
+  - @navikt/aksel-icons@7.11.0
+  - @navikt/ds-tokens@7.11.0
+
 ## 7.10.0
 
 ### Minor Changes

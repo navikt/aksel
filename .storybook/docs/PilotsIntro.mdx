@@ -1,0 +1,94 @@
+import { Meta, Title } from "@storybook/blocks";
+
+<Meta title="Docs/Become a Pilot team/1.Intro" />
+
+# Becoming a pilot team
+
+We are looking for teams wanting to test our new theming implementation and darkmode before we go live with them later in 2025.
+
+## What is a pilot team?
+
+- A pilot team is a team that tests new implementations before they are released.
+- The team will test the new implementation in a real-world scenario and provide us with feedback.
+- The feedback will be used to improve the implementation before it replaces the old system.
+
+As a pilot team, we want close communication to get
+feedback on the changes. We want to know all the unclear and bad parts
+of our implementations, so that we can fix them all up before the big release.
+
+## Who are we mainly looking for?
+
+We are focusing on applications meant for our internal systems and services for now. This line is often a little blurry,
+but in short, all the public facing applications including those using "Dekoratøren" will not be considered internal.
+Support for "Dekoratøren" is quite far down the road at the moment.
+
+For teams wanting to test the new implementation, there are some key points to consider:
+
+- You _probably_ want to be in the earlier stages of developing a new product or service (to more easily test something in isolation).
+- You can test _any_ smaller subset of the new system as it's not an "all or nothing" ordeal. This could be: design tokens, darkmode, updated CSS or a combination of these.
+- You have the capacity to test and provide feedback on the new implementation (You'll be saving Nav countless hours for every hour spent!).
+
+Everyone is welcome to test the new implementation, but for some larger applications, it might be a bit early to adopt the new system. Keep in mind that there might be breaking changes as we go,
+and we won't have all tooling ready for adoption yet so you might have to do some manual work.
+
+## How to give feedback
+
+We welcome all forms of feedback:
+
+- **Issues**: [Open an issue on Github](https://github.com/navikt/aksel/issues)
+- **Disussions**: [Start a discussion](https://github.com/navikt/aksel/discussions/categories/darkside).
+- **Slack**: [Reach out to us on Slack #Aksel-designsystemet](https://nav-it.slack.com/archives/C7NE7A8UF)
+
+## What's new?
+
+- **Design tokens**: A complete re-write of our design tokens to allow for dark mode.
+- **Dark mode**: A new dark mode implementation.
+- **Updated CSS**: Now uses new tokens, built-in CSS-layers support and most components are re-written.
+- **Updated Tailwind CSS config**: Now uses new tokens, now comes with built-in `ax`-prefix for easier separation between Aksel and your own config.
+- **Updated components**: Components use the new tokens and CSS.
+- **New Theme-component**: A new `<Theme/>`-component to handle the theming-switch locally.
+- **Updated documentation**: Updated documentation for the new implementation.
+
+## Documentation
+
+As we go, we will add more documentation to help you get started with the new implementation.
+
+- [Design i light og dark-mode](https://aksel.nav.no/god-praksis/artikler/design-i-dark-mode-og-light-mode)
+
+### Demo page
+
+We have a demo page to show off some of the new features and tokens. [You can find it here](https://aksel-referansesider.ansatt.dev.nav.no/aktivitetsplan/).
+We recommend using "inspect-tool" in browser to get a feel for the new tokens and CSS.
+
+## How testing could affect your application
+
+All the changes are **opt in**, meaning you can choose to use nothing, some parts of the new implementation, or go all-in.
+You will still be able to recieve updates to the old implementation while we are in the testing phase.
+
+### Tokens
+
+We have made a complete re-write of our design tokens to allow for dark mode.
+This includes new backgrounds, text-colors, border-colors and updated spacing-tokens.
+
+- All tokens have a new prefix `--ax` to avoid conflicts with old tokens.
+- You will be able to use the new tokens at the same time as the old tokens.
+- All background, text-colors and border-colors have new names and "concepts" to learn. Migration will not be a quick one to one with old system.
+- New spacing tokens are now named `space` and based on `px` values (most devs think and deal in `px` values first, no more on-the-fly mental arithmetic! WYSIWYG).
+
+### CSS
+
+We have updated our CSS to be based on the new tokens for theming.
+
+- Most of our CSS is re-written.
+- All custom overrides targeting `.navds`-classes might have to be updated locally.
+- Component-based tokens are no longer avaliable.
+
+### Tailwind CSS
+
+We have made a new Tailwind CSS config based on the new tokens. Based on previous iterations, we have decided to try prefixing all our classes with `ax-`.
+While this will be a little more verbose, it makes it easier to separate your own config from ours, and hopefully makes it easier to maintain.
+
+### React components
+
+We have made some prop-changes to some components to facilitate the new theming and updated CSS. You can read more about them under `migration` in the sidebar.
+We have hidden the changes behind a "feature-flag", so you will have to use the new `<Theme/>`-component when testing the new CSS.
