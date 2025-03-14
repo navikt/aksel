@@ -1,10 +1,8 @@
 import cl from "clsx";
 import Image from "next/legacy/image";
-import NextLink from "next/link";
-import { Box, Detail, Heading, Link, Show } from "@navikt/ds-react";
+import { Box, Heading, Show } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
-import { SidebarT, TableOfContentsT } from "@/types";
-import { capitalize } from "@/utils";
+import { DesignsystemSidebarSectionT, TableOfContentsT } from "@/types";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import { Sidebar } from "../sidebar/Sidebar";
 
@@ -19,7 +17,7 @@ export const WithSidebar = ({
   toc,
 }: {
   children: React.ReactNode;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   toc?: TableOfContentsT;
   pageType: {
     type: "komponenter" | "grunnleggende" | "templates";
@@ -60,17 +58,6 @@ export const WithSidebar = ({
             )}
           >
             <div className="z-[1]">
-              {variant === "page" && pageProps?.kategori && (
-                <Detail as="div" className="mb-2">
-                  <NextLink href={pageType.rootUrl} passHref legacyBehavior>
-                    <Link className="text-text-default">
-                      {pageType.rootTitle}
-                    </Link>
-                  </NextLink>{" "}
-                  / {capitalize(pageProps.kategori)}
-                </Detail>
-              )}
-
               <Heading
                 level="1"
                 size="xlarge"

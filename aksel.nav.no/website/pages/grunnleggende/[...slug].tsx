@@ -11,10 +11,10 @@ import { destructureBlocks, sidebarQuery } from "@/sanity/queries";
 import {
   AkselGrunnleggendeDocT,
   ArticleListT,
+  DesignsystemSidebarSectionT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
-  SidebarT,
   TableOfContentsT,
 } from "@/types";
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
@@ -25,7 +25,7 @@ import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselGrunnleggendeDocT>>;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;
