@@ -5,7 +5,7 @@ import {
   findJSXElement,
   findProp,
   legacySpacingTokenMap,
-} from "../darkside.utils";
+} from "../spacing.utils";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;

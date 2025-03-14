@@ -7,6 +7,11 @@ const StyledDiv = styled.div`
     background-color: ${ASurfaceNeutral};
 `
 
+/* Should not be updated since its not imported */
+const oldColorTokens = {
+  js: "ABlue100",
+}
+
 export const testComponent = () => {
   return (
     <StyledDiv

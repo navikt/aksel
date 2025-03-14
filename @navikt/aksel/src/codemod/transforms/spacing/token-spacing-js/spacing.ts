@@ -1,7 +1,7 @@
 import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import { translateToken } from "../../../utils/translate-token";
-import { findComponentImport, legacySpacingTokenMap } from "../darkside.utils";
+import { findComponentImport, legacySpacingTokenMap } from "../spacing.utils";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;

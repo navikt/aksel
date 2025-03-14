@@ -4322,8 +4322,11 @@ __metadata:
   resolution: "@navikt/aksel@workspace:@navikt/aksel"
   dependencies:
     "@navikt/ds-css": "npm:^7.17.3"
+    "@navikt/ds-tokens": "npm:^7.17.3"
+    "@types/cli-progress": "npm:3.11.6"
     axios: "npm:1.8.2"
     chalk: "npm:4.1.0"
+    cli-progress: "npm:^3.12.0"
     clipboardy: "npm:^2.3.0"
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
@@ -7355,6 +7358,15 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/e827570e097bd7d625a673c9c208af2d1a22fa3885c0a1646533cf24394c839c3e5f60ac1bc60c0ddcc69c0615078c9fb2c01b42596c7c582d895d974f2409ee
+  languageName: node
+  linkType: hard
+
+"@types/cli-progress@npm:3.11.6":
+  version: 3.11.6
+  resolution: "@types/cli-progress@npm:3.11.6"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/0209929b252e61260cd9212ac220dfff97471cfe345323f35b37a65a83fcfa3117d129fea08824e2bd9841075db74ac04a8cc63d0d474493ef810d30e217bf7e
   languageName: node
   linkType: hard
 
@@ -10475,6 +10487,15 @@ __metadata:
   dependencies:
     restore-cursor: "npm:^3.1.0"
   checksum: 10/2692784c6cd2fd85cfdbd11f53aea73a463a6d64a77c3e098b2b4697a20443f430c220629e1ca3b195ea5ac4a97a74c2ee411f3807abf6df2b66211fec0c0a29
+  languageName: node
+  linkType: hard
+
+"cli-progress@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "cli-progress@npm:3.12.0"
+  dependencies:
+    string-width: "npm:^4.2.3"
+  checksum: 10/a6a549919a7461f5e798b18a4a19f83154bab145d3ec73d7f3463a8db8e311388c545ace1105557760a058cc4999b7f28c9d8d24d9783ee2912befb32544d4b8
   languageName: node
   linkType: hard
 

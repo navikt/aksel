@@ -1,6 +1,6 @@
 import type { FileInfo } from "jscodeshift";
 import { translateToken } from "../../../utils/translate-token";
-import { legacySpacingTokenMap } from "../darkside.utils";
+import { legacySpacingTokenMap } from "../spacing.utils";
 
 export default function transformer(file: FileInfo) {
   let src = file.source;
