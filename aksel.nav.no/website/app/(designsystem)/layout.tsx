@@ -2,6 +2,7 @@
 
 import { Header } from "@/app/_ui/header/Header";
 import { Sidebar } from "@/app/_ui/sidebar/Sidebar";
+import styles from "./layout.module.css";
 
 export default async function DesignsystemLayout({
   children,
@@ -11,10 +12,9 @@ export default async function DesignsystemLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <div className="flex flex-auto">
+      <div className={styles.pageLayout}>
         <Sidebar />
-
-        {children}
+        <main className="flex w-full flex-auto py-6">{children}</main>
       </div>
     </div>
   );

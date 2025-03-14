@@ -1,36 +1,26 @@
-import cl from "clsx";
 import React from "react";
 import { BodyShort } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { DESIGNSYSTEM_SIDEBAR_QUERY } from "@/app/_sanity/queries";
-import { generateSidebar } from "@/utils";
 import { SidebarGroup } from "./Sidebar.group";
 import styles from "./Sidebar.module.css";
+import { generateSidebar } from "./Sidebar.util";
 
 type SidebarProps = {
   layout?: "sidebar" | "mobile";
 } & React.HTMLAttributes<HTMLDivElement>;
 
 async function Sidebar(props: SidebarProps) {
-  const { className, layout = "sidebar", ...rest } = props;
+  const { layout = "sidebar" } = props;
 
   const { data } = await sanityFetch({
     query: DESIGNSYSTEM_SIDEBAR_QUERY,
   });
 
-  const sidebarData = [
-    {
-      label: "komponenter",
-      links: generateSidebar(data, "komponenter"),
-    },
-  ];
+  const sidebarData = generateSidebar(data);
 
   return (
-    <nav
-      {...rest}
-      aria-label="Sidemeny"
-      className={cl(className, styles.navList)}
-    >
+    <nav aria-label="Sidemeny" className={styles.navList} data-layout={layout}>
       <BodyShort
         as="ul"
         className={styles.navListUl}

@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .navList {
   position: relative;
   flex-shrink: 0;
@@ -6,6 +7,15 @@
   width: 16rem;
   margin-left: var(--ax-space-16);
   color: var(--ax-text-neutral);
+
+  &[data-layout="sidebar"] {
+    padding-block: var(--ax-space-24) 0;
+    position: sticky;
+    overflow: auto;
+    top: var(--website-header-height-width-border);
+    max-height: calc(100vh - var(--website-header-height-width-border));
+    overscroll-behavior: contain;
+  }
 }
 
 .navListUl {
@@ -33,7 +43,6 @@
   padding-inline-start: var(--ax-space-8);
   color: var(--ax-text-neutral-subtle);
   font-weight: var(--ax-font-weight-bold);
-  text-transform: capitalize;
 }
 
 .navListSubButton {

@@ -1,0 +1,19 @@
+.pageLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-inline: auto;
+  max-width: 1440px;
+  width: 100%;
+  gap: var(--ax-space-24);
+  z-index: 0;
+  position: relative;
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  min-height: calc(100vh - var(--website-header-height-width-border));
+}
+
+@media (min-width: 768px) {
+  .pageLayout {
+    grid-template-columns: 16rem 1fr;
+  }
+}

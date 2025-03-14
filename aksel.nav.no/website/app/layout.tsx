@@ -1,4 +1,3 @@
-import "@navikt/ds-css";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
 import "./globals.css";
