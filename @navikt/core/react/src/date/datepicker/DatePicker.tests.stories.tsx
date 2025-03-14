@@ -5,6 +5,7 @@ import { nb } from "date-fns/locale";
 import React from "react";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./hooks/useDatepicker";
+import { useRangeDatepicker } from "./hooks/useRangeDatepicker";
 
 export default {
   title: "ds-react/DatePicker/Tests",
@@ -332,6 +333,114 @@ export const HookDefaultMonthWhenSelected: Story = {
     });
 
     expect(selectedButton.ariaLabel).toEqual("søndag 23");
+  },
+};
+
+const RangedDatepicker = () => {
+  const { datepickerProps, fromInputProps, toInputProps } =
+    useRangeDatepicker();
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps} open>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
+        </div>
+      </DatePicker>
+    </div>
+  );
+};
+
+export const RangeHookCanSelectWithOnlyFrom: Story = {
+  render: () => <RangedDatepicker />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fromInput = canvas.getByLabelText("Fra");
+
+    await userEvent.type(fromInput, "23.10.2022");
+
+    const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
+      "onsdag 19",
+    );
+    expect(beforeButton).toBeInTheDocument();
+
+    await userEvent.click(beforeButton);
+    expect(beforeButton.ariaPressed).toBe("true");
+
+    const toInput = canvas.getByLabelText("Til");
+    expect(fromInput).toHaveValue("19.10.2022");
+    expect(toInput).toHaveValue("23.10.2022");
+  },
+};
+
+export const RangeHookCanSelectBeforeWithOnlyTo: Story = {
+  render: () => <RangedDatepicker />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fromInput = canvas.getByLabelText("Fra");
+    const toInput = canvas.getByLabelText("Til");
+
+    await userEvent.type(toInput, "23.10.2022");
+
+    const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
+      "onsdag 19",
+    );
+    expect(beforeButton).toBeInTheDocument();
+
+    await userEvent.click(beforeButton);
+    expect(beforeButton.ariaPressed).toBe("true");
+
+    expect(fromInput).toHaveValue("19.10.2022");
+    expect(toInput).toHaveValue("23.10.2022");
+  },
+};
+
+export const RangeHookCanSelectAfterWithOnlyTo: Story = {
+  render: () => <RangedDatepicker />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fromInput = canvas.getByLabelText("Fra");
+    const toInput = canvas.getByLabelText("Til");
+
+    await userEvent.type(toInput, "23.10.2022");
+
+    const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
+      "onsdag 26",
+    );
+    expect(beforeButton).toBeInTheDocument();
+
+    await userEvent.click(beforeButton);
+    expect(beforeButton.ariaPressed).toBe("true");
+
+    expect(fromInput).toHaveValue("23.10.2022");
+    expect(toInput).toHaveValue("26.10.2022");
+  },
+};
+
+export const RangeHookResetsOnSameDayClick: Story = {
+  render: () => <RangedDatepicker />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const fromInput = canvas.getByLabelText("Fra");
+    const toInput = canvas.getByLabelText("Til");
+
+    await userEvent.type(toInput, "23.10.2022");
+
+    const beforeButton = within(canvas.getByRole("dialog")).getByLabelText(
+      "søndag 23",
+    );
+    expect(beforeButton).toBeInTheDocument();
+
+    await userEvent.click(beforeButton);
+    expect(beforeButton.ariaPressed).toBe("false");
+
+    expect(fromInput).toHaveValue("");
+    expect(toInput).toHaveValue("");
   },
 };
 

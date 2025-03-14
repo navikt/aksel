@@ -28,3 +28,23 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   background: linear-gradient(0deg, var(--shadow-color), transparent);
 }
+
+.menuListItem {
+  padding-inline: var(--a-spacing-2);
+}
+
+.menuList .menuList .menuListItem {
+  padding-inline-start: var(--a-spacing-5);
+}
+
+.menuListItem[data-current="true"] {
+  color: var(--a-text-default);
+}
+
+.menuListItem[data-current="true"] > span {
+  background-color: var(--a-surface-neutral-subtle);
+}
+
+.menuListItem[data-current="true"]::before {
+  background-color: var(--a-gray-700);
+}

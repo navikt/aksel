@@ -1,5 +1,23 @@
 # @navikt/ds-react
 
+## 7.17.3
+
+### Patch Changes
+
+- Datepicker: Fixed a bug where while ranged datepicker, setting `from` to `undefined` while `to` were defined did not allow selecting new dates. ([#3655](https://github.com/navikt/aksel/pull/3655))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.3
+  - @navikt/aksel-icons@7.17.3
+
+## 7.17.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.17.2
+  - @navikt/aksel-icons@7.17.2
+
 ## 7.17.1
 
 ### Patch Changes
