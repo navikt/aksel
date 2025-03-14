@@ -14,17 +14,17 @@ import { successSemanticTokenConfig } from "./semantic-roles/success.tokens";
 import { warningSemanticTokenConfig } from "./semantic-roles/warning.tokens";
 
 const semanticRoleConfig: Record<GlobalColorRoles, any> = {
-  accent: accentSemanticTokenConfig,
   neutral: neutralSemanticTokenConfig,
-  "brand-beige": brandBeigeSemanticTokenConfig,
-  "brand-magenta": brandMagentaSemanticTokenConfig,
-  "brand-blue": brandBlueSemanticTokenConfig,
-  danger: dangerSemanticTokenConfig,
+  accent: accentSemanticTokenConfig,
   success: successSemanticTokenConfig,
   warning: warningSemanticTokenConfig,
+  danger: dangerSemanticTokenConfig,
   info: infoSemanticTokenConfig,
-  "meta-lime": metaLimeSemanticTokenConfig,
+  "brand-magenta": brandMagentaSemanticTokenConfig,
+  "brand-beige": brandBeigeSemanticTokenConfig,
+  "brand-blue": brandBlueSemanticTokenConfig,
   "meta-purple": metaPurpleSemanticTokenConfig,
+  "meta-lime": metaLimeSemanticTokenConfig,
 };
 
 /**
