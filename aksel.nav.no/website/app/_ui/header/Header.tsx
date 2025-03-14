@@ -8,10 +8,10 @@ import styles from "./Header.module.css";
 
 const LINKS = [
   { name: "God praksis", href: "/god-praksis" },
-  { name: "Grunnleggende", href: "/grunnleggende" },
-  { name: "Ikoner", href: "/ikoner" },
-  { name: "Komponenter", href: "/komponenter" },
-  { name: "Mønster & Maler", href: "/monster-maler" },
+  /* { name: "Grunnleggende", href: "/grunnleggende" }, */
+  /* { name: "Ikoner", href: "/ikoner" }, */
+  { name: "Designsystemet", href: "/komponenter-2" },
+  /* { name: "Mønster & Maler", href: "/monster-maler" }, */
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
@@ -49,10 +49,10 @@ function Header() {
             </HStack>
           </Box>
         </Show>
-        {/* <HStack align="center" gap="2">
-        <GlobalSearch />
-        <Hamburger />
-      </HStack> */}
+        <HStack align="center" gap="2">
+          {/* <GlobalSearch /> */}
+          {/* <Hamburger /> */}
+        </HStack>
       </div>
     </header>
   );
