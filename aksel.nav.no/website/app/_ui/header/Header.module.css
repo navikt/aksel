@@ -72,7 +72,7 @@
 .skiplink {
   position: absolute;
   left: 0;
-  transform: translateY(-100%);
+  transform: translateY(-125%);
   background-color: var(--ax-bg-info-strong);
   padding: var(--ax-space-16);
   color: var(--ax-text-info-contrast);

@@ -1,5 +1,6 @@
 "use server";
 
+import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { Sidebar } from "@/app/_ui/sidebar/Sidebar";
 import styles from "./layout.module.css";
@@ -18,7 +19,7 @@ export default async function DesignsystemLayout({
           {children}
         </main>
       </div>
-      <footer className="h-44 w-full bg-blue-800">asd</footer>
+      <Footer />
     </div>
   );
 }
