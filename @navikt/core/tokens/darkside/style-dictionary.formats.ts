@@ -108,7 +108,9 @@ const formatModifier = (
 };
 
 export const formatDOCS: FormatFn = async ({ dictionary }) => {
+  const ignoredTokenTypes = ["global-color", "opacity"];
   const tokens = dictionary.allTokens
+    .filter((token) => token.type && !ignoredTokenTypes.includes(token.type))
     .map((token, index) => {
       const name = kebabCaseForAlpha(token.name.slice(2));
       return (
