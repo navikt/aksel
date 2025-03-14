@@ -1,3 +1,4 @@
+import fs from "fs";
 import _ from "lodash";
 import { type SemanticColorRoles } from "../../../types";
 import { ColorRolesList } from "../../../types";
@@ -153,3 +154,16 @@ export const semanticTokensForAllRoles = () => {
     {} as ReturnType<typeof semanticTokensForRole>,
   );
 };
+
+const createFiles = () => {
+  for (const color of ColorRolesList) {
+    const fileName = `semantic-role-${color}.tokens.ts`;
+    const fileContent = JSON.stringify(semanticTokensForRole(color), null, 2);
+    const filePath = `./semantic-roles/${fileName}`;
+
+    fs.writeFileSync(filePath, fileContent);
+    console.info(`File ${fileName} created successfully!`);
+  }
+};
+
+createFiles();
