@@ -157,11 +157,14 @@ export const semanticTokensForAllRoles = () => {
 
 const createFiles = () => {
   for (const color of ColorRolesList) {
-    const fileName = `semantic-role-${color}.tokens.ts`;
+    const fileName = `${color}.tokens.ts`;
     const fileContent = JSON.stringify(semanticTokensForRole(color), null, 2);
     const filePath = `./semantic-roles/${fileName}`;
 
-    fs.writeFileSync(filePath, fileContent);
+    const formatedContent = `import { type StyleDictionaryTokenConfig } from "../../../tokens.util";
+export const warningSemanticTokenConfig = ${fileContent} satisfies StyleDictionaryTokenConfig<"color">;`;
+
+    fs.writeFileSync(filePath, formatedContent);
     console.info(`File ${fileName} created successfully!`);
   }
 };
