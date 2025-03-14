@@ -1,3 +1,5 @@
+"use server";
+
 import { sanityCategoryLookup } from "@/sanity/config";
 import {
   DesignsystemSidebarSectionT,
@@ -62,7 +64,7 @@ function generateSidebar(input: SidebarInputNodeT[]): {
   });
 }
 
-export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
+function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   if (a?.tag === "deprecated" && b?.tag === "deprecated") {
     return 0;
   }
@@ -78,7 +80,7 @@ export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   return 0;
 }
 
-export function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
+function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
   if (a.sidebarindex === null && b.sidebarindex === null) {
     return 0;
   }

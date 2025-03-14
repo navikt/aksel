@@ -9,6 +9,15 @@
 .headerContainer {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   height: var(--website-header-height);
+  display: flex;
+  align-items: center;
+  padding-inline: 0 var(--ax-space-16);
+  max-width: 1440px;
+  margin-inline: auto;
+
+  @media (min-width: 1024px) {
+    padding-inline: 0 var(--ax-space-24);
+  }
 }
 
 .headerLogoLink {

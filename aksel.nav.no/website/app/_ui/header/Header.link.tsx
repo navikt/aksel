@@ -7,16 +7,15 @@ import styles from "./Header.module.css";
 type HeaderLinkProps = {
   name: string;
   href: string;
-  prefetch?: boolean;
 };
 
-function HeaderLink({ name, href, prefetch = undefined }: HeaderLinkProps) {
+function HeaderLink({ name, href }: HeaderLinkProps) {
   const pathname = usePathname();
 
   return (
     <Link
       href={href}
-      prefetch={prefetch}
+      prefetch={false}
       data-current={pathname?.startsWith(href) ? "true" : "false"}
       className={styles.headerLink}
       data-umami-event="navigere"
