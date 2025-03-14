@@ -23,7 +23,7 @@ import {
   globalDarkTokens,
   globalLightTokens,
 } from "./tokens/colors/global.tokens";
-import { semanticTokensForRole } from "./tokens/colors/semantic-role.tokens";
+import { semanticRoleConfig } from "./tokens/colors/semantic-role.tokens";
 import { semanticThemedBaseTokens } from "./tokens/colors/semantic-themed-base.tokens";
 
 const DARKSIDE_DIST = "./dist/darkside/";
@@ -138,7 +138,7 @@ async function buildThemedRolesCSS() {
   for (const role of ColorRolesList) {
     const config = [
       globalLightTokens,
-      semanticTokensForRole(role),
+      semanticRoleConfig[role],
       semanticThemedBaseTokens(role),
     ];
 
