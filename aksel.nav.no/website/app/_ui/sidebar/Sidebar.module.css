@@ -9,7 +9,7 @@
   color: var(--ax-text-neutral);
 
   &[data-layout="sidebar"] {
-    padding-block: var(--ax-space-24) 0;
+    padding-block: var(--ax-space-24) var(--ax-space-64);
     position: sticky;
     overflow: auto;
     top: var(--website-header-height-width-border);
