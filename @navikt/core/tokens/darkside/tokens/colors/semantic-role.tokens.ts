@@ -1,172 +1,40 @@
-import fs from "fs";
 import _ from "lodash";
-import { type SemanticColorRoles } from "../../../types";
-import { ColorRolesList } from "../../../types";
+import { GlobalColorRoles } from "../../../types";
 import { type StyleDictionaryTokenConfig } from "../../tokens.util";
+import { accentSemanticTokenConfig } from "./semantic-roles/accent.tokens";
+import { brandBeigeSemanticTokenConfig } from "./semantic-roles/brand-beige.tokens";
+import { brandBlueSemanticTokenConfig } from "./semantic-roles/brand-blue.tokens";
+import { brandMagentaSemanticTokenConfig } from "./semantic-roles/brand-magenta.tokens";
+import { dangerSemanticTokenConfig } from "./semantic-roles/danger.tokens";
+import { infoSemanticTokenConfig } from "./semantic-roles/info.tokens";
+import { metaLimeSemanticTokenConfig } from "./semantic-roles/meta-lime.tokens";
+import { metaPurpleSemanticTokenConfig } from "./semantic-roles/meta-purple.tokens";
+import { neutralSemanticTokenConfig } from "./semantic-roles/neutral.tokens";
+import { successSemanticTokenConfig } from "./semantic-roles/success.tokens";
+import { warningSemanticTokenConfig } from "./semantic-roles/warning.tokens";
 
-/**
- * Maps the semantic colors to the global color layer for a given role.
- * @note Gray is handled a little differently, as it is visually perceived a little lighter than other colors.
- */
-export function semanticTokensForRole(role: SemanticColorRoles) {
-  return {
-    bg: {
-      [`${role}-soft`]: {
-        value: `{ax.${role}.100.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-softA`]: {
-        value: `{ax.${role}.100A.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderate`]: {
-        value: `{ax.${role}.200.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderateA`]: {
-        value: `{ax.${role}.200A.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderate-hover`]: {
-        value: `{ax.${role}.300.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderate-hoverA`]: {
-        value: `{ax.${role}.300A.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderate-pressed`]: {
-        value: `{ax.${role}.400.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-moderate-pressedA`]: {
-        value: `{ax.${role}.400A.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-strong`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.700.value}`
-            : `{ax.${role}.600.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-strong-hover`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.800.value}`
-            : `{ax.${role}.700.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-strong-pressed`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.900.value}`
-            : `{ax.${role}.800.value}`,
-        type: "color",
-        group: `background.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-    },
-    text: {
-      [role]: {
-        value: `{ax.${role}.1000.value}`,
-        type: "color",
-        group: `text.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-subtle`]: {
-        value:
-          role === "neutral"
-            ? `{ax.${role}.900.value}`
-            : `{ax.${role}.800.value}`,
-        type: "color",
-        group: `text.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-icon`]: {
-        value: `{ax.${role}.600.value}`,
-        type: "color",
-        group: `text.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-contrast`]: {
-        value: "{ax.neutral.000.value}",
-        type: "color",
-        group: `text.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-    },
-    border: {
-      [role]: {
-        value: `{ax.${role}.600.value}`,
-        type: "color",
-        group: `border.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-subtle`]: {
-        value: `{ax.${role}.400.value}`,
-        type: "color",
-        group: `border.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-subtleA`]: {
-        value: `{ax.${role}.400A.value}`,
-        type: "color",
-        group: `border.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-      [`${role}-strong`]: {
-        value: `{ax.${role}.700.value}`,
-        type: "color",
-        group: `border.${role}`,
-        comment: "TODO: Sjur fyller ut",
-      },
-    },
-  } satisfies StyleDictionaryTokenConfig<"color">;
-}
+const semanticRoleConfig: Record<GlobalColorRoles, any> = {
+  accent: accentSemanticTokenConfig,
+  neutral: neutralSemanticTokenConfig,
+  "brand-beige": brandBeigeSemanticTokenConfig,
+  "brand-magenta": brandMagentaSemanticTokenConfig,
+  "brand-blue": brandBlueSemanticTokenConfig,
+  danger: dangerSemanticTokenConfig,
+  success: successSemanticTokenConfig,
+  warning: warningSemanticTokenConfig,
+  info: infoSemanticTokenConfig,
+  "meta-lime": metaLimeSemanticTokenConfig,
+  "meta-purple": metaPurpleSemanticTokenConfig,
+};
 
 /**
  * We need to deep merge the token config for each role to get the complete token config for all roles.
  */
-export const semanticTokensForAllRoles = () => {
-  return ColorRolesList.reduce(
-    (acc, role) => _.merge(acc, semanticTokensForRole(role)),
-    {} as ReturnType<typeof semanticTokensForRole>,
+function semanticTokensForAllRoles() {
+  return Object.values(semanticRoleConfig).reduce(
+    (acc, config) => _.merge(acc, config),
+    {} as StyleDictionaryTokenConfig<"color">,
   );
-};
+}
 
-const createFiles = () => {
-  for (const color of ColorRolesList) {
-    const fileName = `${color}.tokens.ts`;
-    const fileContent = JSON.stringify(semanticTokensForRole(color), null, 2);
-    const filePath = `./semantic-roles/${fileName}`;
-
-    const formatedContent = `import { type StyleDictionaryTokenConfig } from "../../../tokens.util";
-export const warningSemanticTokenConfig = ${fileContent} satisfies StyleDictionaryTokenConfig<"color">;`;
-
-    fs.writeFileSync(filePath, formatedContent);
-    console.info(`File ${fileName} created successfully!`);
-  }
-};
-
-createFiles();
+export { semanticRoleConfig, semanticTokensForAllRoles };
