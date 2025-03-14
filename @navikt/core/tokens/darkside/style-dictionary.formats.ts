@@ -85,12 +85,9 @@ const formatCategory = (token: TransformedToken) => {
 
 const formatRawValue = (token: TransformedToken) => {
   if (token.type === "global-breakpoint") {
-    const isDesktopFirst =
-      typeof token.attributes?.item === "string" &&
-      token.attributes.item.split("-")[1] === "down";
-    return isDesktopFirst
-      ? `@media(max-width: ${token.value}) Desktop first`
-      : `@media(min-width: ${token.value}) Mobile first`;
+    return `@media(${token.group === "desktop first" ? "max" : "min"}-width: ${
+      token.value
+    }), ${token.group}`;
   }
   return token.value;
 };
