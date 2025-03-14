@@ -1,23 +1,14 @@
+import { useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Hide, Show } from "@navikt/ds-react";
+import { SearchContext } from "../providers";
 
 type AkselSearchButtonProps = {
   onClick?: () => void;
 };
 
-const erMac = () => {
-  if (typeof window === 'undefined') return false;
-  
-  // Moderne metode (ikke støttet i alle nettlesere ennå)
-  if (navigator.userAgentData?.platform) {
-    return navigator.userAgentData.platform.toLowerCase() === 'macos';
-  }
-  
-  // Fallback til userAgent (eldre metode)
-  return /Mac|iPhone|iPad|iPod/i.test(navigator.userAgent);
-};
-
 export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
+  const { os } = useContext(SearchContext);
   return (
     <>
       <Show above="xl" asChild>
@@ -35,7 +26,10 @@ export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
           iconPosition="left"
           onClick={onClick}
         >
-          Søk <span className="text-medium font-normal">{erMac() ? "⌘+B" : "Ctrl+B"}</span>
+          Søk{" "}
+          <span className="text-medium font-normal">
+            {os === "mac" ? "(CMD + B)" : "(CTRL + B)"}
+          </span>
         </Button>
       </Show>
       <Hide above="xl" asChild>
