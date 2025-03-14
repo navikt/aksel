@@ -1,0 +1,44 @@
+"use client";
+
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Button, Hide, Show } from "@navikt/ds-react";
+import { useGlobalSearch } from "./GlobalSearch.provider";
+
+function GlobalSearchButton() {
+  const { setOpen } = useGlobalSearch();
+
+  const renderButton = (showChildContent: boolean) => (
+    <Button
+      variant="secondary-neutral"
+      aria-keyshortcuts="Control+k"
+      icon={
+        <MagnifyingGlassIcon
+          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+          aria-label="Åpne søk"
+          aria-hidden
+        />
+      }
+      iconPosition="left"
+      onClick={() => setOpen(true)}
+    >
+      {showChildContent && (
+        <>
+          Søk <span className="text-medium font-normal">(ctrl + k)</span>
+        </>
+      )}
+    </Button>
+  );
+
+  return (
+    <>
+      <Show above="lg" asChild>
+        {renderButton(true)}
+      </Show>
+      <Hide above="lg" asChild>
+        {renderButton(false)}
+      </Hide>
+    </>
+  );
+}
+
+export { GlobalSearchButton };

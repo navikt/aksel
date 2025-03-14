@@ -1,3 +1,7 @@
+"use server";
+
+import { GlobalSearchButton } from "./GlobalSearch.button";
+import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 /* import { Search } from "./parts/SearchToggle";
 import {
   SearchNavigationProvider,
@@ -17,8 +21,28 @@ const GlobalSearch = () => (
 
 export default GlobalSearch; */
 
-function GlobalSearch() {
-  return <div>SEARCH{/* Global search component */}</div>;
+import { GlobalSearchProvider } from "./GlobalSearch.provider";
+import { GlobalSearchResults } from "./GlobalSearch.results";
+import { SearchPageT } from "./GlobalSearch.types";
+
+
+async function GlobalSearch() {
+
+  const {default: data} = await import("../../public/searchindex.json", {with: {type: 'json' }});
+
+  if (!data) {
+    console.error("Failed loading global search");
+    return null;
+  }
+
+  return (
+    <GlobalSearchProvider data={data as SearchPageT[]}>
+      <GlobalSearchButton />
+      <GlobalSearchDialog >
+        <GlobalSearchResults data={data as SearchPageT[]}/>
+      </GlobalSearchDialog>
+    </GlobalSearchProvider>
+  );
 }
 
 export { GlobalSearch };
