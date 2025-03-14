@@ -14,8 +14,11 @@ export default async function DesignsystemLayout({
       <Header />
       <div className={styles.pageLayout}>
         <Sidebar />
-        <main className="flex w-full flex-auto py-6">{children}</main>
+        <main id="hovedinnhold" className="flex w-full flex-auto py-6">
+          {children}
+        </main>
       </div>
+      <footer className="h-44 w-full bg-blue-800">asd</footer>
     </div>
   );
 }
