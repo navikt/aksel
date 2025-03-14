@@ -8,8 +8,10 @@ import { SidebarGroupedPagesT } from "@/types";
 import { SidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 
-function SidebarSubNav(props: SidebarGroupedPagesT) {
-  const { pages, title } = props;
+function SidebarSubNav(
+  props: SidebarGroupedPagesT & { layout: "sidebar" | "mobile" },
+) {
+  const { pages, title, layout } = props;
   const pathName = usePathname();
 
   const isSectionActive = pages.some((page) => {
@@ -37,7 +39,12 @@ function SidebarSubNav(props: SidebarGroupedPagesT) {
       </button>
       <ul hidden={!open}>
         {pages.map((page) => (
-          <SidebarItem key={page.heading} page={page} isIndented />
+          <SidebarItem
+            key={page.heading}
+            page={page}
+            isIndented
+            layout={layout}
+          />
         ))}
       </ul>
     </li>

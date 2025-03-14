@@ -114,6 +114,7 @@
   justify-content: space-between;
   padding-block: var(--ax-space-6);
   padding-inline: var(--ax-space-8);
+  color: var(--ax-text-neutral);
 
   [data-layout="mobile"] & {
     padding-block: var(--ax-space-12);

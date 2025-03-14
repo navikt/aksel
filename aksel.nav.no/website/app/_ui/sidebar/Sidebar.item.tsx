@@ -6,14 +6,15 @@ import { usePathname } from "next/navigation";
 import { BodyShort } from "@navikt/ds-react";
 import { SidebarPageT } from "@/types";
 import { StatusTag } from "@/web/StatusTag";
-import { useSidebarLayout } from "./Sidebar.context";
 import styles from "./Sidebar.module.css";
 
-function SidebarItem(props: { page: SidebarPageT; isIndented?: boolean }) {
-  const { page, isIndented = false } = props;
+function SidebarItem(props: {
+  page: SidebarPageT;
+  isIndented?: boolean;
+  layout: "sidebar" | "mobile";
+}) {
+  const { page, isIndented = false, layout } = props;
   const pathName = usePathname();
-
-  const layout = useSidebarLayout();
 
   const active = pathName?.split("#")[0] === `/${page.slug}`;
 

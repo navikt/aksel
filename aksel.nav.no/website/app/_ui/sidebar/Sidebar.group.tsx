@@ -1,7 +1,6 @@
 import { useId } from "react";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { DesignsystemSidebarSectionT } from "@/types";
-import { useSidebarLayout } from "./Sidebar.context";
 import { SidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 import { SidebarSubNav } from "./Sidebar.subnav";
@@ -9,12 +8,12 @@ import { SidebarSubNav } from "./Sidebar.subnav";
 type DesignsystemSidebarGroupT = {
   label: string;
   links: DesignsystemSidebarSectionT;
+  layout: "sidebar" | "mobile";
 };
 
 function SidebarGroup(props: DesignsystemSidebarGroupT) {
-  const { label, links } = props;
+  const { label, links, layout } = props;
   const id = useId();
-  const layout = useSidebarLayout();
 
   const isDarkside = label.toLowerCase() === "darkside";
 
@@ -37,7 +36,7 @@ function SidebarGroup(props: DesignsystemSidebarGroupT) {
       <ul aria-labelledby={id}>
         {links.map((link) => {
           if (!("pages" in link)) {
-            return <SidebarItem key={link.slug} page={link} />;
+            return <SidebarItem key={link.slug} page={link} layout={layout} />;
           }
 
           return (
@@ -46,6 +45,7 @@ function SidebarGroup(props: DesignsystemSidebarGroupT) {
               pages={link.pages}
               title={link.title}
               value={link.value}
+              layout={layout}
             />
           );
         })}
