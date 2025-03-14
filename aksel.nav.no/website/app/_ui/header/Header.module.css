@@ -72,11 +72,13 @@
 .skiplink {
   position: absolute;
   left: 0;
-  transform: translateY(-125%);
   background-color: var(--ax-bg-info-strong);
   padding: var(--ax-space-16);
   color: var(--ax-text-info-contrast);
   text-decoration: none;
+
+  /* We move it further away to avoid it showing when scroll "overshoots" */
+  transform: translateY(-300%);
 
   &:focus-within {
     transform: translateY(0);
