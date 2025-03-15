@@ -2,6 +2,7 @@
 
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
+import { GlobalSearchForm } from "./GlobalSearch.form";
 import { GlobalSearchProvider } from "./GlobalSearch.provider";
 import { GlobalSearchResults } from "./GlobalSearch.results";
 import { getRecentArticles } from "./GlobalSearch.utils";
@@ -22,6 +23,7 @@ async function GlobalSearch() {
     <GlobalSearchProvider>
       <GlobalSearchButton />
       <GlobalSearchDialog>
+        <GlobalSearchForm />
         <GlobalSearchResults mostRecentArticles={recentArticles} />
       </GlobalSearchDialog>
     </GlobalSearchProvider>

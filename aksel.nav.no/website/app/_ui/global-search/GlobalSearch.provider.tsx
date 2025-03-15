@@ -1,12 +1,28 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
+import { debounce } from "@navikt/ds-react";
+import { fuseGlobalSearch } from "./GlobalSearch.utils";
+
+type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 
 type SearchContextType = {
   open: boolean;
   openSearch: () => void;
   closeSearch: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
+  queryResults: ActionReturnT | null;
+  updateSearch: (query: string) => void;
+  resetSearch: () => void;
 };
 
 const SearchContext = createContext<SearchContextType | null>(null);
@@ -14,6 +30,9 @@ const SearchContext = createContext<SearchContextType | null>(null);
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState(false);
+
+  const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -44,6 +63,34 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
 
   const closeSearch = () => setOpen(false);
 
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        startTransition(async () => {
+          if (!query || query.length < 2) {
+            return setSearchResults(null);
+          }
+
+          const newResults = await fuseGlobalSearch(query);
+          setSearchResults(newResults);
+        });
+        window.umami && umami.track("sok");
+      }),
+    [startTransition],
+  );
+
+  const updateSearch = useCallback(
+    (query: string) => {
+      debouncedSearch(query);
+    },
+    [debouncedSearch],
+  );
+
+  const resetSearch = () => {
+    debouncedSearch.clear();
+    setSearchResults(null);
+  };
+
   return (
     <SearchContext.Provider
       value={{
@@ -51,6 +98,9 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
         closeSearch,
         openSearch,
         inputRef,
+        queryResults: searchResult,
+        updateSearch,
+        resetSearch,
       }}
     >
       {children}
