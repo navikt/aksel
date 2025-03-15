@@ -6,6 +6,10 @@ import { GlobalSearchProvider } from "./GlobalSearch.provider";
 import { GlobalSearchResults } from "./GlobalSearch.results";
 import { getRecentArticles } from "./GlobalSearch.utils";
 
+/**
+ * TODO:
+ * - Reset search on all closes
+ */
 async function GlobalSearch() {
   const recentArticles = await getRecentArticles();
 

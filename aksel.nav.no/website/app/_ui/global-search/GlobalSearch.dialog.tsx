@@ -4,13 +4,12 @@ import { Heading, Modal } from "@navikt/ds-react";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
-  const { open, setOpen } = useGlobalSearch();
-  const close = () => setOpen(false);
+  const { open, closeSearch } = useGlobalSearch();
 
   return (
     <Modal
       open={open}
-      onClose={close}
+      onClose={closeSearch}
       onKeyDown={(e) => {
         /* Avoids sideeffects when closing Modal */
         if (e.key === "Escape") {

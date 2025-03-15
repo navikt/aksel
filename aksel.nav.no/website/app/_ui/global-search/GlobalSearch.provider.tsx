@@ -4,7 +4,8 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 type SearchContextType = {
   open: boolean;
-  setOpen: (v: boolean) => void;
+  openSearch: () => void;
+  closeSearch: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
 };
 
@@ -23,7 +24,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
       ) {
         event.preventDefault();
         if (open) {
-          inputRef.current?.focus();
+          inputRef.current?.select();
         } else {
           setOpen(true);
         }
@@ -35,11 +36,20 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [inputRef, open, setOpen]);
 
+  /* When re-opening search for user so they can start new search instantly */
+  const openSearch = () => {
+    setOpen(true);
+    inputRef.current?.select();
+  };
+
+  const closeSearch = () => setOpen(false);
+
   return (
     <SearchContext.Provider
       value={{
         open,
-        setOpen,
+        closeSearch,
+        openSearch,
         inputRef,
       }}
     >

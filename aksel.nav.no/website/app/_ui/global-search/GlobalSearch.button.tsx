@@ -5,7 +5,7 @@ import { Button, Hide, Show } from "@navikt/ds-react";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchButton() {
-  const { setOpen } = useGlobalSearch();
+  const { openSearch } = useGlobalSearch();
 
   const renderButton = (showChildContent: boolean) => (
     <Button
@@ -19,7 +19,7 @@ function GlobalSearchButton() {
         />
       }
       iconPosition="left"
-      onClick={() => setOpen(true)}
+      onClick={openSearch}
     >
       {showChildContent && (
         <>

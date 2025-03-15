@@ -14,7 +14,7 @@ type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
   const { mostRecentArticles } = props;
 
-  const { inputRef, setOpen } = useGlobalSearch();
+  const { inputRef, closeSearch } = useGlobalSearch();
   const [localQuery, setLocalQuery] = useState<string>("");
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -82,7 +82,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
         </form>
         <Button
           variant="tertiary-neutral"
-          onClick={() => setOpen(false)}
+          onClick={closeSearch}
           icon={<XMarkIcon title="Lukk" />}
         />
       </div>
