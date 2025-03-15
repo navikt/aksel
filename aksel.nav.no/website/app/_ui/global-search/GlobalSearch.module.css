@@ -1,0 +1,25 @@
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+  padding: var(--ax-space-4) var(--ax-space-8);
+
+  @media (min-width: 768px) {
+    padding: var(--ax-space-16);
+  }
+
+  & > form {
+    width: 100%;
+  }
+}
+
+.searchResults {
+  /* className="flex h-full flex-col overflow-y-auto md:max-h-[70vh]" */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  @media (min-width: 768px) {
+    max-height: 70vh;
+  }
+}

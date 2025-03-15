@@ -6,6 +6,7 @@ import { Button, Heading, Label, Search, debounce } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
 import { SearchHitT, globalSearchConfig } from "./GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
+import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 import { fuseGlobalSearch } from "./GlobalSearch.utils";
 
@@ -17,9 +18,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
   const { inputRef, closeSearch } = useGlobalSearch();
   const [localQuery, setLocalQuery] = useState<string>("");
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
-  const [isPending, startTransition] = useTransition();
-
-  /* TODO: Add timeout that toggles if no results comes after x time */
+  const [, startTransition] = useTransition();
 
   const handleSearch = useMemo(
     () =>
@@ -37,22 +36,20 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
     [],
   );
 
+  const showMostRecent = !searchResult?.result;
+  const showEmptyState =
+    !searchResult?.result?.totalHits && searchResult?.query;
+
+  const showQueryResults =
+    searchResult?.result && searchResult?.result?.totalHits > 0;
+
   return (
     <div>
-      <div>{isPending && <div>loading</div>}</div>
-      <div className="flex items-center gap-2 px-2 py-1 md:px-4 md:py-4">
-        <form
-          role="search"
-          onSubmit={(e) => e.preventDefault()}
-          className="w-full"
-        >
+      <div className={styles.searchForm}>
+        <form role="search" onSubmit={(e) => e.preventDefault()}>
           <Search
             ref={inputRef}
-            label={
-              <span className="flex items-center gap-2">
-                <span>Søk i hele Aksel</span>
-              </span>
-            }
+            label="Søk i hele Aksel"
             aria-autocomplete="both"
             variant="simple"
             onChange={(value) => {
@@ -87,8 +84,8 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
         />
       </div>
 
-      <div className="flex h-full flex-col overflow-y-auto">
-        {!searchResult?.result && mostRecentArticles && (
+      <div className={styles.searchResults}>
+        {showMostRecent && (
           <section aria-label="Nyeste artikler" data-layout="simple">
             <GlobalSearchHitCollection
               heading={
@@ -101,7 +98,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
             />
           </section>
         )}
-        {!searchResult?.result?.totalHits && searchResult?.query && (
+        {showEmptyState && (
           <Heading
             size="medium"
             as="p"
@@ -113,7 +110,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
             <span className="break-all">&quot;{localQuery}&quot;</span>
           </Heading>
         )}
-        {searchResult?.result && searchResult?.result?.totalHits > 0 && (
+        {showQueryResults && (
           <section aria-label="Søkeresultater">
             <Label as="p" className="sr-only" aria-live="polite">
               {`${searchResult?.result?.totalHits} treff på "${searchResult?.query}"`}

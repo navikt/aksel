@@ -10,13 +10,13 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
     <Modal
       open={open}
       onClose={closeSearch}
+      placement="top"
       onKeyDown={(e) => {
         /* Avoids sideeffects when closing Modal */
         if (e.key === "Escape") {
           e.stopPropagation();
         }
       }}
-      className="md:h-[90%] md:max-h-[52rem]"
       width="medium"
       aria-labelledby="aksel-search-heading"
       closeOnBackdropClick

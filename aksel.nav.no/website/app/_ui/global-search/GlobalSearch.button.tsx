@@ -1,7 +1,7 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Button, Hide, Show } from "@navikt/ds-react";
+import { BodyShort, Button, Hide, Show } from "@navikt/ds-react";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchButton() {
@@ -23,7 +23,10 @@ function GlobalSearchButton() {
     >
       {showChildContent && (
         <>
-          Søk <span className="text-medium font-normal">(ctrl + k)</span>
+          Søk{" "}
+          <BodyShort size="small" as="span">
+            (ctrl + k)
+          </BodyShort>
         </>
       )}
     </Button>
