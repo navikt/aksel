@@ -1,26 +1,33 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { Search } from "@navikt/ds-react";
+import { useMemo, useState, useTransition } from "react";
+import { Search, debounce } from "@navikt/ds-react";
 import { SearchHitT } from "./GlobalSearch.types";
 import { updateSearch } from "./GlobalSearch.utils";
 
+type ActionReturnT = Awaited<ReturnType<typeof updateSearch>>;
+
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
-  const [results, setResults] = useState<SearchHitT[]>([]);
+  const [results, setResults] = useState<ActionReturnT | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const { mostRecentArticles } = props;
 
-  const handleSearch = (query: string) => {
-    startTransition(async () => {
-      if (!query || query.length < 2) {
-        return setResults([]);
-      }
-      /* TODO: add debounce */
-      const newResults = await updateSearch(query);
-      setResults(newResults);
-    });
-  };
+  const handleSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        startTransition(async () => {
+          if (!query || query.length < 2) {
+            return setResults(null);
+          }
+
+          const newResults = await updateSearch(query);
+          setResults(newResults);
+        });
+        window.umami && umami.track("sok");
+      }),
+    [],
+  );
 
   return (
     <div>
@@ -28,7 +35,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
         State
         <div>
           Length
-          {results.length}
+          <span>{`Hits: ${results?.totalHits}`}</span>
         </div>
         {isPending && "LOADING"}
       </div>
@@ -46,12 +53,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
           aria-autocomplete="both"
           variant="simple"
           onChange={handleSearch}
-          /* value={query} */
-          /* onChange={(v) => handleSearchStart(v)}
-          onClear={() => {
-            setQuery("");
-            reset();
-          }} */
+          onClear={() => setResults(null)}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */
             if (e.key === "Escape") {

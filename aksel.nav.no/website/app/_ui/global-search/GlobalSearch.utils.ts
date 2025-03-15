@@ -91,10 +91,10 @@ async function getRecentArticles(): Promise<SearchHitT[]> {
 }
 
 function fuseGlobalSearch(
-  results: SearchPageT[],
+  articles: SearchPageT[],
   query: string,
 ): ReturnType<typeof createSearchResult> {
-  const fuse = new Fuse(results, {
+  const fuse = new Fuse(articles, {
     keys: [
       { name: "heading", weight: 100 },
       { name: "lvl2.text", weight: 50 },
@@ -121,43 +121,34 @@ function fuseGlobalSearch(
 
 function createSearchResult(result: SearchHitT[]) {
   const groupedHits: GroupedSearchHitsT = result?.reduce((prev, cur) => {
-    if (cur.item._type in prev) {
-      prev[cur.item._type].push(cur);
-    } else {
-      prev[cur.item._type] = [cur];
+    const type = cur.item._type;
+    if (!prev[type]) {
+      prev[type] = [];
     }
+    prev[type].push(cur);
     return prev;
-  }, {});
+  }, {} as GroupedSearchHitsT);
+
+  const topResults =
+    result?.length > 4
+      ? result.filter((x) => x.score !== undefined && x.score < 0.1).slice(0, 4)
+      : [];
+
+  const countHitsByType = (type: string) =>
+    result.filter((x) => x.item._type === type).length;
 
   const response = {
     groupedHits,
-    topResults:
-      result?.length > 4
-        ? result
-            .filter((x) => x.score !== undefined && x.score < 0.1)
-            .slice(0, 4)
-        : [],
+    topResults,
     totalHits: result?.length ?? 0,
     hits: {
-      komponent_artikkel: result.filter(
-        (x: any) => x.item._type === "komponent_artikkel",
-      ).length,
-      aksel_artikkel: result.filter(
-        (x: any) => x.item._type === "aksel_artikkel",
-      ).length,
-      ds_artikkel: result.filter((x: any) => x.item._type === "ds_artikkel")
-        .length,
-      aksel_blogg: result.filter((x: any) => x.item._type === "aksel_blogg")
-        .length,
-      templates_artikkel: result.filter(
-        (x: any) => x.item._type === "templates_artikkel",
-      ).length,
-      aksel_prinsipp: result.filter(
-        (x: any) => x.item._type === "aksel_prinsipp",
-      ).length,
-      aksel_standalone: result.filter(
-        (x: any) => x.item._type === "aksel_prinsipp",
-      ).length,
+      komponent_artikkel: countHitsByType("komponent_artikkel"),
+      aksel_artikkel: countHitsByType("aksel_artikkel"),
+      ds_artikkel: countHitsByType("ds_artikkel"),
+      aksel_blogg: countHitsByType("aksel_blogg"),
+      templates_artikkel: countHitsByType("templates_artikkel"),
+      aksel_prinsipp: countHitsByType("aksel_prinsipp"),
+      aksel_standalone: countHitsByType("aksel_standalone"),
     },
   };
 
@@ -165,9 +156,7 @@ function createSearchResult(result: SearchHitT[]) {
 }
 
 async function updateSearch(query: string) {
-  console.info("Searching from server", query);
-
-  return [];
+  return fuseGlobalSearch(data as SearchPageT[], query);
 }
 
 export {
