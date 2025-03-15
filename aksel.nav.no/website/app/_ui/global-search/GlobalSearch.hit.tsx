@@ -51,7 +51,7 @@ function GlobalSearchHitCollection({
           {heading}
         </Heading>
       )}
-      <ul className="px-2 md:px-6">
+      <ul>
         {searchHits.map((x, xi) => (
           <GlobalSearchLink key={xi} hit={x} tag={tag} />
         ))}
@@ -75,14 +75,16 @@ function GlobalSearchLink(props: {
     <li className={styles.searchLinkLi}>
       <div className={styles.searchLinkText}>
         <span className={styles.searchLinkHeading}>
-          <Link
+          <Heading
+            size="small"
+            as={Link}
             href={href}
             data-umami-event="navigere"
             data-umami-event-kilde="global sok"
             className={styles.searchLink}
           >
             {hit.item.heading}
-          </Link>
+          </Heading>
 
           {hit.item?.status?.tag && (
             <StatusTag status={hit.item.status.tag} aria-hidden />

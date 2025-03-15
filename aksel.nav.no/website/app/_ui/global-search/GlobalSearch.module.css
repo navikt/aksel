@@ -63,6 +63,11 @@
   gap: var(--ax-space-12);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-inline: var(--ax-space-8);
+  margin-inline: var(--ax-space-8);
+
+  @media (width > 768px) {
+    margin-inline: var(--ax-space-24);
+  }
 
   &:last-of-type {
     border-bottom: none;
@@ -85,14 +90,16 @@
 }
 
 .searchLink {
-  /*
-  "group text-xl hover:decoration-[3px] focus:outline-none",
-
-            ) */
   scroll-margin-block: var(--ax-space-64);
   overflow-wrap: break-word;
   font-weight: var(--ax-font-weight-bold);
   text-decoration: underline;
+  color: var(--ax-text-neutral);
+  text-underline-offset: 0.1em;
+
+  &:hover {
+    text-decoration-thickness: 0.15em;
+  }
 
   &::after {
     content: "";
