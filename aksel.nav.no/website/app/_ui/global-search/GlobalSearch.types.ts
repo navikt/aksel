@@ -18,6 +18,10 @@ const searchOptions: {
   aksel_standalone: { display: "Unike sider", index: 6, hidden: true },
 };
 
+type GroupedSearchHitsT = Partial<
+  Record<keyof typeof searchOptions, SearchHitT[]>
+>;
+
 interface SearchPageT {
   _type: keyof typeof searchOptions;
   heading: string;
@@ -35,7 +39,9 @@ interface SearchPageT {
 type SearchHitT = {
   item: Omit<SearchPageT, "intro" | "ingress">;
   description: string;
+  score?: number;
+  anchor?: string;
 };
 
 export { searchOptions };
-export type { SearchPageT, SearchHitT };
+export type { SearchHitT, SearchPageT, GroupedSearchHitsT };
