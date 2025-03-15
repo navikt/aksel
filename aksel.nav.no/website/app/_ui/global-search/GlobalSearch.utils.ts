@@ -137,7 +137,10 @@ async function fuseGlobalSearch(query: string) {
         0,
       ),
       topResults,
-      groupedHits,
+      groupedHits: Object.entries(groupedHits).sort(
+        (a, b) =>
+          globalSearchConfig[a[0]].index - globalSearchConfig[b[0]].index,
+      ),
     },
     query,
   };

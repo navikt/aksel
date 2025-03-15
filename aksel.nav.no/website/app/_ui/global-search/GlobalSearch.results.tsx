@@ -23,24 +23,16 @@ function GlobalSearchResultsView() {
           heading={`Beste treff på "${queryResults?.query}"`}
           searchHits={queryResults?.result.topResults ?? []}
         />
-
-        <>
-          {Object.entries(queryResults?.result.groupedHits)
-            .sort(
-              (a, b) =>
-                globalSearchConfig[a[0]].index - globalSearchConfig[b[0]].index,
-            )
-            .map(([key, val]) => {
-              return (
-                <GlobalSearchHitCollection
-                  key={key}
-                  heading={`${globalSearchConfig[key].display} (${val.length})`}
-                  tag={key as keyof typeof globalSearchConfig}
-                  searchHits={val}
-                />
-              );
-            })}
-        </>
+        {queryResults?.result.groupedHits.map(([key, val]) => {
+          return (
+            <GlobalSearchHitCollection
+              key={key}
+              heading={`${globalSearchConfig[key].display} (${val.length})`}
+              tag={key as keyof typeof globalSearchConfig}
+              searchHits={val}
+            />
+          );
+        })}
       </div>
     </section>
   );
