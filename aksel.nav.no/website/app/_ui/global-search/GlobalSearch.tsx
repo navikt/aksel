@@ -2,6 +2,7 @@
 
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
+
 /* import { Search } from "./parts/SearchToggle";
 import {
   SearchNavigationProvider,
@@ -20,26 +21,23 @@ const GlobalSearch = () => (
 );
 
 export default GlobalSearch; */
-
 import { GlobalSearchProvider } from "./GlobalSearch.provider";
 import { GlobalSearchResults } from "./GlobalSearch.results";
-import { SearchPageT } from "./GlobalSearch.types";
-
+import { getRecentArticles } from "./GlobalSearch.utils";
 
 async function GlobalSearch() {
+  const recentArticles = await getRecentArticles();
 
-  const {default: data} = await import("../../public/searchindex.json", {with: {type: 'json' }});
-
-  if (!data) {
+  if (recentArticles.length === 0) {
     console.error("Failed loading global search");
     return null;
   }
 
   return (
-    <GlobalSearchProvider data={data as SearchPageT[]}>
+    <GlobalSearchProvider>
       <GlobalSearchButton />
-      <GlobalSearchDialog >
-        <GlobalSearchResults data={data as SearchPageT[]}/>
+      <GlobalSearchDialog>
+        <GlobalSearchResults mostRecentArticles={recentArticles} />
       </GlobalSearchDialog>
     </GlobalSearchProvider>
   );

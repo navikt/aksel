@@ -32,5 +32,10 @@ interface SearchPageT {
   lvl4: { text: string; id: string }[];
 }
 
+type SearchHitT = {
+  item: Omit<SearchPageT, "intro" | "ingress">;
+  description: string;
+};
+
 export { searchOptions };
-export type { SearchPageT };
+export type { SearchPageT, SearchHitT };

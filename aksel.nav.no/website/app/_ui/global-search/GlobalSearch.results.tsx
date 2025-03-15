@@ -1,17 +1,15 @@
 "use server";
 
-import { SearchPageT } from "./GlobalSearch.types";
-import { formatRawResults } from "./GlobalSearch.utils";
+import { SearchHitT } from "./GlobalSearch.types";
 
-const GlobalSearchResults = (props: { data: SearchPageT[] }) => {
-  const { data } = props;
+const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
+  const { mostRecentArticles } = props;
 
-  const mostResent = formatRawResults(data.slice(0, 20));
   return (
     <div className="flex h-full flex-col overflow-y-auto">
-      {mostResent && (
+      {mostRecentArticles && (
         <section aria-label="Nyeste artikler">
-          {mostResent.map((item) => (
+          {mostRecentArticles.map((item) => (
             <div key={item.item.heading}>{item.item.heading}</div>
           ))}
           {/* <Collection
