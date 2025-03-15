@@ -1,8 +1,6 @@
-"use server";
-
 import { allArticleDocuments } from "@/sanity/config";
 
-const searchOptions: {
+const globalSearchConfig: {
   [K in (typeof allArticleDocuments)[number]]: {
     display: string;
     index: number;
@@ -18,12 +16,8 @@ const searchOptions: {
   aksel_standalone: { display: "Unike sider", index: 6, hidden: true },
 };
 
-type GroupedSearchHitsT = Partial<
-  Record<keyof typeof searchOptions, SearchHitT[]>
->;
-
 interface SearchPageT {
-  _type: keyof typeof searchOptions;
+  _type: keyof typeof globalSearchConfig;
   heading: string;
   ingress: string | null;
   intro: string;
@@ -43,11 +37,7 @@ type SearchHitT = {
   anchor?: string;
 };
 
-type SearchResultPageTypesT = keyof typeof searchOptions;
+type SearchResultPageTypesT = keyof typeof globalSearchConfig;
 
-export type {
-  SearchHitT,
-  SearchPageT,
-  GroupedSearchHitsT,
-  SearchResultPageTypesT,
-};
+export { globalSearchConfig };
+export type { SearchHitT, SearchPageT, SearchResultPageTypesT };

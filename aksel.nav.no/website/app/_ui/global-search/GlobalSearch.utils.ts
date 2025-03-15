@@ -2,6 +2,7 @@
 
 import type { FuseResult, FuseResultMatch } from "fuse.js";
 import Fuse from "fuse.js";
+import omit from "lodash/omit";
 import { client } from "@/app/_sanity/client";
 import {
   GLOBAL_SEARCH_QUERY_ALL,
@@ -9,36 +10,26 @@ import {
 } from "@/app/_sanity/queries";
 import data from "../../public/searchindex.json";
 import {
-  GroupedSearchHitsT,
   SearchHitT,
   SearchPageT,
-} from "./GlobalSearch.types";
+  globalSearchConfig,
+} from "./GlobalSearch.config";
 
-function omit<T extends object, K extends keyof T>(
-  obj: T,
-  props: K[],
-): Omit<T, K> {
-  const filteredEntries = Object.entries(obj).filter(
-    ([key]) => !props.includes(key as K),
-  );
+function formatFuseResults(
+  rawResults: FuseResult<SearchPageT>[] | SearchPageT[],
+): SearchHitT[] {
+  return rawResults.map((result) => {
+    const item = result.item ?? result;
 
-  return Object.fromEntries(filteredEntries) as Omit<T, K>;
-}
-
-function formatRawResults(res: SearchPageT[]): SearchHitT[] {
-  return res.map((x) => ({
-    item: omit(x, ["intro", "ingress"]),
-    description: x?.intro || x.ingress || "",
-  }));
-}
-
-function formatFuseResults(res: FuseResult<SearchPageT>[]): SearchHitT[] {
-  return res.map((x) => ({
-    ...x,
-    item: omit(x.item, ["intro", "ingress"]),
-    anchor: x.matches?.[0] ? resolveAnchor(x.matches[0], x.item) : undefined,
-    description: x?.item.intro || x.item.ingress || "",
-  }));
+    return {
+      ...result,
+      item: omit(item, ["intro", "ingress"]),
+      anchor: result.matches?.[0]
+        ? resolveAnchor(result.matches[0], item)
+        : undefined,
+      description: item?.intro || item?.ingress || "",
+    };
+  });
 }
 
 function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
@@ -87,14 +78,11 @@ async function getArticles(): Promise<{
 }
 
 async function getRecentArticles(): Promise<SearchHitT[]> {
-  return formatRawResults((data as SearchPageT[]).slice(0, 20));
+  return formatFuseResults((data as SearchPageT[]).slice(0, 20));
 }
 
-function fuseGlobalSearch(
-  articles: SearchPageT[],
-  query: string,
-): ReturnType<typeof createSearchResult> {
-  const fuse = new Fuse(articles, {
+async function fuseGlobalSearch(query: string) {
+  const fuse = new Fuse(data as SearchPageT[], {
     keys: [
       { name: "heading", weight: 100 },
       { name: "lvl2.text", weight: 50 },
@@ -112,57 +100,44 @@ function fuseGlobalSearch(
     threshold: 0.3,
   });
 
-  const result = fuse
+  const fuseResults = fuse
     .search(query)
     .filter((x) => x.score !== undefined && x.score < 0.3);
 
-  return createSearchResult(formatFuseResults(result));
-}
+  const formatedResults = formatFuseResults(fuseResults);
 
-function createSearchResult(result: SearchHitT[]) {
-  const groupedHits: GroupedSearchHitsT = result?.reduce((prev, cur) => {
+  const groupedHits: Partial<
+    Record<keyof typeof globalSearchConfig, SearchHitT[]>
+  > = formatedResults?.reduce((prev, cur) => {
     const type = cur.item._type;
     if (!prev[type]) {
       prev[type] = [];
     }
+
+    // Limit the number of hits per type to 20
+    if (prev[type].length >= 20) {
+      return prev;
+    }
+
     prev[type].push(cur);
     return prev;
-  }, {} as GroupedSearchHitsT);
+  }, {});
 
   const topResults =
-    result?.length > 4
-      ? result.filter((x) => x.score !== undefined && x.score < 0.1).slice(0, 4)
+    formatedResults?.length > 4
+      ? formatedResults
+          .filter((x) => x.score !== undefined && x.score < 0.1)
+          .slice(0, 4)
       : [];
 
-  const countHitsByType = (type: string) =>
-    result.filter((x) => x.item._type === type).length;
-
-  const response = {
-    groupedHits,
-    topResults,
-    totalHits: result?.length ?? 0,
-    hits: {
-      komponent_artikkel: countHitsByType("komponent_artikkel"),
-      aksel_artikkel: countHitsByType("aksel_artikkel"),
-      ds_artikkel: countHitsByType("ds_artikkel"),
-      aksel_blogg: countHitsByType("aksel_blogg"),
-      templates_artikkel: countHitsByType("templates_artikkel"),
-      aksel_prinsipp: countHitsByType("aksel_prinsipp"),
-      aksel_standalone: countHitsByType("aksel_standalone"),
+  return {
+    result: {
+      totalHits: formatedResults?.length ?? 0,
+      topResults,
+      groupedHits,
     },
+    query,
   };
-
-  return response;
 }
 
-async function updateSearch(query: string) {
-  return { result: fuseGlobalSearch(data as SearchPageT[], query), query };
-}
-
-export {
-  formatRawResults,
-  getArticles,
-  getRecentArticles,
-  updateSearch,
-  fuseGlobalSearch,
-};
+export { fuseGlobalSearch, getArticles, getRecentArticles };

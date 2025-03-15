@@ -3,14 +3,11 @@
 import { useMemo, useState, useTransition } from "react";
 import { Heading, Label, Search, debounce } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
-import {
-  GlobalSearchHitCollection,
-  GlobalSearchHitCollectionMapper,
-} from "./GlobalSearch.hit";
-import { SearchHitT } from "./GlobalSearch.types";
-import { updateSearch } from "./GlobalSearch.utils";
+import { SearchHitT, globalSearchConfig } from "./GlobalSearch.config";
+import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
+import { fuseGlobalSearch } from "./GlobalSearch.utils";
 
-type ActionReturnT = Awaited<ReturnType<typeof updateSearch>>;
+type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
   const { mostRecentArticles } = props;
@@ -29,7 +26,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
             return setSearchResults(null);
           }
 
-          const newResults = await updateSearch(query);
+          const newResults = await fuseGlobalSearch(query);
           setSearchResults(newResults);
         });
         window.umami && umami.track("sok");
@@ -80,21 +77,19 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
       </form>
       <div className="flex h-full flex-col overflow-y-auto">
         {!searchResult?.result && mostRecentArticles && (
-          <section aria-label="Nyeste artikler">
+          <section aria-label="Nyeste artikler" data-layout="simple">
             <GlobalSearchHitCollection
-              startIndex={0}
               heading={
                 <span className="flex items-center gap-2">
                   Nyeste artikler
                   <ChangeLogIconOutline className="shrink-0" aria-hidden />
                 </span>
               }
-              simple
               hits={mostRecentArticles}
             />
           </section>
         )}
-        {!searchResult?.result.totalHits && localQuery && (
+        {!searchResult?.result?.totalHits && searchResult?.query && (
           <Heading
             size="medium"
             as="p"
@@ -114,7 +109,6 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
             <div className="pb-4">
               {searchResult?.result.topResults.length > 0 && (
                 <GlobalSearchHitCollection
-                  startIndex={1}
                   heading={
                     <span className="flex items-center gap-2">
                       Beste treff
@@ -124,14 +118,26 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
                   hits={searchResult?.result.topResults}
                 />
               )}
-              <GlobalSearchHitCollectionMapper
-                startIndex={
-                  searchResult?.result.topResults.length > 0
-                    ? searchResult?.result.topResults.length + 1
-                    : 1
-                }
-                groups={searchResult?.result.groupedHits}
-              />
+              <>
+                {Object.entries(searchResult?.result.groupedHits)
+                  .sort(
+                    (a, b) =>
+                      globalSearchConfig[a[0]].index -
+                      globalSearchConfig[b[0]].index,
+                  )
+                  .map(([key, val]) => {
+                    return (
+                      <GlobalSearchHitCollection
+                        key={key}
+                        heading={`${globalSearchConfig[key].display} (${val.length})`}
+                        tag={
+                          key as keyof ActionReturnT["result"]["groupedHits"]
+                        }
+                        hits={val}
+                      />
+                    );
+                  })}
+              </>
             </div>
           </section>
         )}
