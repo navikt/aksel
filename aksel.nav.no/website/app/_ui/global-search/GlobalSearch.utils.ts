@@ -132,7 +132,10 @@ async function fuseGlobalSearch(query: string) {
 
   return {
     result: {
-      totalHits: formatedResults?.length ?? 0,
+      totalHits: Object.values(groupedHits).reduce(
+        (acc, val) => acc + val.length,
+        0,
+      ),
       topResults,
       groupedHits,
     },

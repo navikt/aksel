@@ -3,21 +3,25 @@
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
+import styles from "./GlobalSearch.module.css";
 import { GlobalSearchProvider } from "./GlobalSearch.provider";
-import { GlobalSearchResults } from "./GlobalSearch.results";
+import {
+  GlobalSearchEmptySearchState,
+  GlobalSearchEmptyState,
+  GlobalSearchResultsView,
+} from "./GlobalSearch.results";
 
-/**
- * TODO:
- * - Reset search on all closes
- * - Suspense main loading
- */
 async function GlobalSearch() {
   return (
     <GlobalSearchProvider>
       <GlobalSearchButton />
       <GlobalSearchDialog>
         <GlobalSearchForm />
-        <GlobalSearchResults />
+        <div className={styles.searchResults}>
+          <GlobalSearchEmptyState />
+          <GlobalSearchEmptySearchState />
+          <GlobalSearchResultsView />
+        </div>
       </GlobalSearchDialog>
     </GlobalSearchProvider>
   );

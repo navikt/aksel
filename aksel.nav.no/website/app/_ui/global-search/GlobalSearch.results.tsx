@@ -1,70 +1,61 @@
 "use client";
 
-import { Heading, Label } from "@navikt/ds-react";
-import { ChangeLogIconOutline } from "@/assets/Icons";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import { globalSearchConfig } from "./GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
-const GlobalSearchResults = () => {
+function GlobalSearchResultsView() {
   const { queryResults } = useGlobalSearch();
 
-  const showEmptystate = !queryResults?.result;
+  if (!queryResults?.result || queryResults?.result?.totalHits === 0) {
+    return null;
+  }
+
+  return (
+    <section aria-label="Søkeresultater">
+      <BodyShort aria-live="polite" visuallyHidden>
+        {`${queryResults?.result?.totalHits} treff på "${queryResults?.query}"`}
+      </BodyShort>
+      <div>
+        <GlobalSearchHitCollection
+          heading={`Beste treff på "${queryResults?.query}"`}
+          searchHits={queryResults?.result.topResults ?? []}
+        />
+
+        <>
+          {Object.entries(queryResults?.result.groupedHits)
+            .sort(
+              (a, b) =>
+                globalSearchConfig[a[0]].index - globalSearchConfig[b[0]].index,
+            )
+            .map(([key, val]) => {
+              return (
+                <GlobalSearchHitCollection
+                  key={key}
+                  heading={`${globalSearchConfig[key].display} (${val.length})`}
+                  tag={key as keyof typeof globalSearchConfig}
+                  searchHits={val}
+                />
+              );
+            })}
+        </>
+      </div>
+    </section>
+  );
+}
+
+function GlobalSearchEmptySearchState() {
+  const { queryResults } = useGlobalSearch();
 
   const showEmptySearchState =
     !queryResults?.result?.totalHits && queryResults?.query;
 
-  const showQueryResults =
-    queryResults?.result && queryResults?.result?.totalHits > 0;
+  if (!showEmptySearchState) {
+    return null;
+  }
 
-  return (
-    <div className={styles.searchResults}>
-      {showEmptystate && <EmptyState />}
-      {showEmptySearchState && <EmptySearchState />}
-      {showQueryResults && (
-        <section aria-label="Søkeresultater">
-          <Label as="p" className="sr-only" aria-live="polite">
-            {`${queryResults?.result?.totalHits} treff på "${queryResults?.query}"`}
-          </Label>
-          <div className="pb-4">
-            {queryResults?.result.topResults.length > 0 && (
-              <GlobalSearchHitCollection
-                heading={
-                  <span className="flex items-center gap-2">
-                    Beste treff på {`"${queryResults?.query}"`}
-                    <ChangeLogIconOutline className="shrink-0" />
-                  </span>
-                }
-                hits={queryResults?.result.topResults}
-              />
-            )}
-            <>
-              {Object.entries(queryResults?.result.groupedHits)
-                .sort(
-                  (a, b) =>
-                    globalSearchConfig[a[0]].index -
-                    globalSearchConfig[b[0]].index,
-                )
-                .map(([key, val]) => {
-                  return (
-                    <GlobalSearchHitCollection
-                      key={key}
-                      heading={`${globalSearchConfig[key].display} (${val.length})`}
-                      tag={key as keyof typeof globalSearchConfig}
-                      hits={val}
-                    />
-                  );
-                })}
-            </>
-          </div>
-        </section>
-      )}
-    </div>
-  );
-};
-
-function EmptySearchState() {
   return (
     <div className={styles.searchEmptyState}>
       <Heading
@@ -138,7 +129,13 @@ function EmptySearchState() {
   );
 }
 
-function EmptyState() {
+function GlobalSearchEmptyState() {
+  const { queryResults } = useGlobalSearch();
+
+  if (queryResults?.result) {
+    return null;
+  }
+
   return (
     <div className={styles.searchEmptyState}>
       <Heading size="medium" as="span" aria-hidden data-state="hidden">
@@ -219,4 +216,8 @@ function EmptyState() {
   );
 }
 
-export { GlobalSearchResults };
+export {
+  GlobalSearchEmptySearchState,
+  GlobalSearchEmptyState,
+  GlobalSearchResultsView,
+};

@@ -90,13 +90,17 @@ function GlobalSearchLink(props: {
 
 function GlobalSearchHitCollection({
   heading,
-  hits,
+  searchHits,
   tag,
 }: {
   heading?: React.ReactNode;
-  hits: SearchHitT[];
+  searchHits: SearchHitT[];
   tag?: Partial<SearchResultPageTypesT>;
 }) {
+  if (!searchHits || searchHits.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       {heading && tag && (
@@ -125,7 +129,7 @@ function GlobalSearchHitCollection({
         </Heading>
       )}
       <ul className="px-2 md:px-6">
-        {hits.map((x, xi) => (
+        {searchHits.map((x, xi) => (
           <GlobalSearchLink key={xi} hit={x} tag={tag} />
         ))}
       </ul>

@@ -35,3 +35,21 @@
     max-height: 70vh;
   }
 }
+
+.searchButtonIcon {
+  pointer-events: none;
+  margin-top: -1px;
+  flex-shrink: 0;
+}
+
+.searchDialogShortcuts {
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+  padding: var(--ax-space-16);
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}

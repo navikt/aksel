@@ -2,6 +2,7 @@
 
 import { BodyShort, Heading, Modal } from "@navikt/ds-react";
 import { Kbd } from "@/app/_ui/kbd/Kbd";
+import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
@@ -28,7 +29,7 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
       {children}
       <BodyShort
         size="small"
-        className="flex items-baseline justify-between border-t border-t-border-subtle p-4 leading-none"
+        className={styles.searchDialogShortcuts}
         as="span"
       >
         <span>

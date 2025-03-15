@@ -2,6 +2,7 @@
 
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { BodyShort, Button, Hide, Show } from "@navikt/ds-react";
+import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchButton() {
@@ -13,7 +14,7 @@ function GlobalSearchButton() {
       aria-keyshortcuts="Control+k"
       icon={
         <MagnifyingGlassIcon
-          className="pointer-events-none -mt-[1px] shrink-0 text-2xl"
+          className={styles.searchButtonIcon}
           aria-label="Åpne søk"
           aria-hidden
         />
