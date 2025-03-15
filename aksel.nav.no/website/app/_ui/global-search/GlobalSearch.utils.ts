@@ -156,7 +156,7 @@ function createSearchResult(result: SearchHitT[]) {
 }
 
 async function updateSearch(query: string) {
-  return fuseGlobalSearch(data as SearchPageT[], query);
+  return { result: fuseGlobalSearch(data as SearchPageT[], query), query };
 }
 
 export {

@@ -1,28 +1,36 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { Search, debounce } from "@navikt/ds-react";
+import { Heading, Label, Search, debounce } from "@navikt/ds-react";
+import { ChangeLogIconOutline } from "@/assets/Icons";
+import {
+  GlobalSearchHitCollection,
+  GlobalSearchHitCollectionMapper,
+} from "./GlobalSearch.hit";
 import { SearchHitT } from "./GlobalSearch.types";
 import { updateSearch } from "./GlobalSearch.utils";
 
 type ActionReturnT = Awaited<ReturnType<typeof updateSearch>>;
 
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
-  const [results, setResults] = useState<ActionReturnT | null>(null);
+  const { mostRecentArticles } = props;
+
+  const [localQuery, setLocalQuery] = useState<string>("");
+  const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const { mostRecentArticles } = props;
+  console.info(isPending);
 
   const handleSearch = useMemo(
     () =>
       debounce((query: string) => {
         startTransition(async () => {
           if (!query || query.length < 2) {
-            return setResults(null);
+            return setSearchResults(null);
           }
 
           const newResults = await updateSearch(query);
-          setResults(newResults);
+          setSearchResults(newResults);
         });
         window.umami && umami.track("sok");
       }),
@@ -31,14 +39,6 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
 
   return (
     <div>
-      <div>
-        State
-        <div>
-          Length
-          <span>{`Hits: ${results?.totalHits}`}</span>
-        </div>
-        {isPending && "LOADING"}
-      </div>
       <form
         role="search"
         onSubmit={(e) => e.preventDefault()}
@@ -52,8 +52,14 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
           }
           aria-autocomplete="both"
           variant="simple"
-          onChange={handleSearch}
-          onClear={() => setResults(null)}
+          onChange={(value) => {
+            setLocalQuery(value);
+            handleSearch(value);
+          }}
+          onClear={() => {
+            setLocalQuery("");
+            setSearchResults(null);
+          }}
           onKeyDown={(e) => {
             /* Avoids sideeffects when clearing Search */
             if (e.key === "Escape") {
@@ -73,80 +79,62 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
         />
       </form>
       <div className="flex h-full flex-col overflow-y-auto">
-        {mostRecentArticles && (
+        {!searchResult?.result && mostRecentArticles && (
           <section aria-label="Nyeste artikler">
-            {mostRecentArticles.map((item) => (
-              <div key={item.item.heading}>{item.item.heading}</div>
-            ))}
-            {/* <Collection
-            startIndex={0}
-            heading={
-              <span className="flex items-center gap-2">
-                Nyeste artikler
-                <ChangeLogIconOutline className="shrink-0" aria-hidden />
-              </span>
-            }
-            simple
-            hits={mostResent}
-          /> */}
+            <GlobalSearchHitCollection
+              startIndex={0}
+              heading={
+                <span className="flex items-center gap-2">
+                  Nyeste artikler
+                  <ChangeLogIconOutline className="shrink-0" aria-hidden />
+                </span>
+              }
+              simple
+              hits={mostRecentArticles}
+            />
           </section>
         )}
-        {/* {!results && mostResent && (
-        <section aria-label="Nyeste artikler">
-          <Collection
-            startIndex={0}
-            heading={
-              <span className="flex items-center gap-2">
-                Nyeste artikler
-                <ChangeLogIconOutline className="shrink-0" aria-hidden />
-              </span>
-            }
-            simple
-            hits={mostResent}
-          />
-        </section>
-      )} */}
-        {/* {!results?.totalHits && query && (
-        <Heading
-          size="medium"
-          as="p"
-          className="mx-auto w-fit px-6 py-24"
-          aria-live="polite"
-          aria-atomic
-        >
-          <span className="text-text-subtle">Ingen treff på </span>
-          <span className="break-all">&quot;{query}&quot;</span>
-        </Heading>
-      )}
-      {results && results?.totalHits > 0 && (
-        <section aria-label="Søkeresultater">
-          <Label as="p" className="sr-only" aria-live="polite">
-            {`${results?.totalHits} treff på "${results.query}"`}
-          </Label>
-          <div className="pb-4">
-            {results?.topResults.length > 0 && (
-              <Collection
-                startIndex={1}
-                heading={
-                  <span className="flex items-center gap-2">
-                    Beste treff
-                    <ChangeLogIconOutline className="shrink-0" />
-                  </span>
+        {!searchResult?.result.totalHits && localQuery && (
+          <Heading
+            size="medium"
+            as="p"
+            className="mx-auto w-fit px-6 py-24"
+            aria-live="polite"
+            aria-atomic
+          >
+            <span className="text-text-subtle">Ingen treff på </span>
+            <span className="break-all">&quot;{localQuery}&quot;</span>
+          </Heading>
+        )}
+        {searchResult?.result && searchResult?.result?.totalHits > 0 && (
+          <section aria-label="Søkeresultater">
+            <Label as="p" className="sr-only" aria-live="polite">
+              {`${searchResult?.result?.totalHits} treff på "${searchResult?.query}"`}
+            </Label>
+            <div className="pb-4">
+              {searchResult?.result.topResults.length > 0 && (
+                <GlobalSearchHitCollection
+                  startIndex={1}
+                  heading={
+                    <span className="flex items-center gap-2">
+                      Beste treff
+                      <ChangeLogIconOutline className="shrink-0" />
+                    </span>
+                  }
+                  hits={searchResult?.result.topResults}
+                />
+              )}
+              <GlobalSearchHitCollectionMapper
+                startIndex={
+                  searchResult?.result.topResults.length > 0
+                    ? searchResult?.result.topResults.length + 1
+                    : 1
                 }
-                hits={results?.topResults}
+                groups={searchResult?.result.groupedHits}
               />
-            )}
-            <CollectionMapper
-              startIndex={
-                results.topResults.length > 0
-                  ? results.topResults.length + 1
-                  : 1
-              }
-              groups={results.groupedHits}
-            />
-          </div>
-        </section>
-      )} */}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

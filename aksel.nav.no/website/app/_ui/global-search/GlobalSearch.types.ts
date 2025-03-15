@@ -43,5 +43,11 @@ type SearchHitT = {
   anchor?: string;
 };
 
-export { searchOptions };
-export type { SearchHitT, SearchPageT, GroupedSearchHitsT };
+type SearchResultPageTypesT = keyof typeof searchOptions;
+
+export type {
+  SearchHitT,
+  SearchPageT,
+  GroupedSearchHitsT,
+  SearchResultPageTypesT,
+};
