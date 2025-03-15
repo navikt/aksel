@@ -1,18 +1,82 @@
-"use server";
+"use client";
 
+import { useState, useTransition } from "react";
+import { Search } from "@navikt/ds-react";
 import { SearchHitT } from "./GlobalSearch.types";
+import { updateSearch } from "./GlobalSearch.utils";
 
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
+  const [results, setResults] = useState<SearchHitT[]>([]);
+  const [isPending, startTransition] = useTransition();
+
   const { mostRecentArticles } = props;
 
+  const handleSearch = (query: string) => {
+    startTransition(async () => {
+      if (!query || query.length < 2) {
+        return setResults([]);
+      }
+      /* TODO: add debounce */
+      const newResults = await updateSearch(query);
+      setResults(newResults);
+    });
+  };
+
   return (
-    <div className="flex h-full flex-col overflow-y-auto">
-      {mostRecentArticles && (
-        <section aria-label="Nyeste artikler">
-          {mostRecentArticles.map((item) => (
-            <div key={item.item.heading}>{item.item.heading}</div>
-          ))}
-          {/* <Collection
+    <div>
+      <div>
+        State
+        <div>
+          Length
+          {results.length}
+        </div>
+        {isPending && "LOADING"}
+      </div>
+      <form
+        role="search"
+        onSubmit={(e) => e.preventDefault()}
+        className="w-full"
+      >
+        <Search
+          label={
+            <span className="flex items-center gap-2">
+              <span>Søk i hele Aksel</span>
+            </span>
+          }
+          aria-autocomplete="both"
+          variant="simple"
+          onChange={handleSearch}
+          /* value={query} */
+          /* onChange={(v) => handleSearchStart(v)}
+          onClear={() => {
+            setQuery("");
+            reset();
+          }} */
+          onKeyDown={(e) => {
+            /* Avoids sideeffects when clearing Search */
+            if (e.key === "Escape") {
+              if (e.currentTarget.value) {
+                e.stopPropagation();
+              }
+            }
+          }}
+          /* ref={inputRef} */
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
+          id="aksel-search-input"
+          clearButton={false}
+          placeholder="Søk på artikler, f.eks. Button"
+        />
+      </form>
+      <div className="flex h-full flex-col overflow-y-auto">
+        {mostRecentArticles && (
+          <section aria-label="Nyeste artikler">
+            {mostRecentArticles.map((item) => (
+              <div key={item.item.heading}>{item.item.heading}</div>
+            ))}
+            {/* <Collection
             startIndex={0}
             heading={
               <span className="flex items-center gap-2">
@@ -23,9 +87,9 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
             simple
             hits={mostResent}
           /> */}
-        </section>
-      )}
-      {/* {!results && mostResent && (
+          </section>
+        )}
+        {/* {!results && mostResent && (
         <section aria-label="Nyeste artikler">
           <Collection
             startIndex={0}
@@ -40,7 +104,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
           />
         </section>
       )} */}
-      {/* {!results?.totalHits && query && (
+        {/* {!results?.totalHits && query && (
         <Heading
           size="medium"
           as="p"
@@ -81,6 +145,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
           </div>
         </section>
       )} */}
+      </div>
     </div>
   );
 };

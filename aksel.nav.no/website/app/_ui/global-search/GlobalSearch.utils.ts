@@ -65,4 +65,10 @@ async function getRecentArticles(): Promise<SearchHitT[]> {
   return formatRawResults((data as SearchPageT[]).slice(0, 20));
 }
 
-export { formatRawResults, getArticles, getRecentArticles };
+async function updateSearch(query: string) {
+  console.info("Searching from server", query);
+
+  return [];
+}
+
+export { formatRawResults, getArticles, getRecentArticles, updateSearch };
