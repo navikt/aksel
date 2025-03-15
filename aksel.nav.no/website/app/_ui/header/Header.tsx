@@ -1,6 +1,7 @@
 "use server";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import AkselLogo from "@/assets/Logo";
@@ -51,7 +52,12 @@ function Header() {
           </Box>
         </Show>
         <HStack align="center" gap="2">
-          <GlobalSearch />
+          <Suspense
+            key="global-search"
+            fallback={<div className="h-6 w-6 animate-pulse">search</div>}
+          >
+            <GlobalSearch />
+          </Suspense>
           {/* <Hamburger /> */}
         </HStack>
       </div>

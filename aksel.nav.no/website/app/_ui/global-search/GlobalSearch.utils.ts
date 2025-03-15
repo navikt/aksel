@@ -82,6 +82,10 @@ async function getRecentArticles(): Promise<SearchHitT[]> {
 }
 
 async function fuseGlobalSearch(query: string) {
+  if (!query || query.length < 2) {
+    return null;
+  }
+
   const fuse = new Fuse(data as SearchPageT[], {
     keys: [
       { name: "heading", weight: 100 },

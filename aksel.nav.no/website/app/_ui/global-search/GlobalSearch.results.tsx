@@ -6,9 +6,6 @@ import { SearchHitT, globalSearchConfig } from "./GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";
-import { fuseGlobalSearch } from "./GlobalSearch.utils";
-
-type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
   const { mostRecentArticles } = props;
@@ -60,7 +57,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
                 <GlobalSearchHitCollection
                   heading={
                     <span className="flex items-center gap-2">
-                      Beste treff
+                      Beste treff på {`"${queryResults?.query}"`}
                       <ChangeLogIconOutline className="shrink-0" />
                     </span>
                   }
@@ -79,9 +76,7 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
                       <GlobalSearchHitCollection
                         key={key}
                         heading={`${globalSearchConfig[key].display} (${val.length})`}
-                        tag={
-                          key as keyof ActionReturnT["result"]["groupedHits"]
-                        }
+                        tag={key as keyof typeof globalSearchConfig}
                         hits={val}
                       />
                     );

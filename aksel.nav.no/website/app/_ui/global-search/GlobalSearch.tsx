@@ -10,6 +10,7 @@ import { getRecentArticles } from "./GlobalSearch.utils";
 /**
  * TODO:
  * - Reset search on all closes
+ * - Suspense main loading
  */
 async function GlobalSearch() {
   const recentArticles = await getRecentArticles();

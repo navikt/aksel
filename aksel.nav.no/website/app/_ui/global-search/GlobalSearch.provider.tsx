@@ -67,10 +67,6 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     () =>
       debounce((query: string) => {
         startTransition(async () => {
-          if (!query || query.length < 2) {
-            return setSearchResults(null);
-          }
-
           const newResults = await fuseGlobalSearch(query);
           setSearchResults(newResults);
         });
@@ -79,17 +75,10 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     [startTransition],
   );
 
-  const updateSearch = useCallback(
-    (query: string) => {
-      debouncedSearch(query);
-    },
-    [debouncedSearch],
-  );
-
-  const resetSearch = () => {
+  const resetSearch = useCallback(() => {
     debouncedSearch.clear();
     setSearchResults(null);
-  };
+  }, [debouncedSearch]);
 
   return (
     <SearchContext.Provider
@@ -99,7 +88,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
         openSearch,
         inputRef,
         queryResults: searchResult,
-        updateSearch,
+        updateSearch: debouncedSearch,
         resetSearch,
       }}
     >
