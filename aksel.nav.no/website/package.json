@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next --turbopack | pino-pretty",
     "build:old": "next build",
-    "build": "yarn workspace playroom build:playroom && next build && yarn update:searchindex && yarn update:rss && yarn cp:assets",
+    "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
     "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
