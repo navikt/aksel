@@ -19,7 +19,7 @@ function formatFuseResults(
   rawResults: FuseResult<SearchPageT>[] | SearchPageT[],
 ): SearchHitT[] {
   return rawResults.map((result) => {
-    const item = result.item ?? result;
+    const item = result.item;
 
     return {
       ...result,
@@ -75,10 +75,6 @@ async function getArticles(): Promise<{
   ]);
 
   return { mostRecentArticles, allArticles };
-}
-
-async function getRecentArticles(): Promise<SearchHitT[]> {
-  return formatFuseResults((data as SearchPageT[]).slice(0, 20));
 }
 
 async function fuseGlobalSearch(query: string) {
@@ -144,4 +140,4 @@ async function fuseGlobalSearch(query: string) {
   };
 }
 
-export { fuseGlobalSearch, getArticles, getRecentArticles };
+export { fuseGlobalSearch, getArticles };

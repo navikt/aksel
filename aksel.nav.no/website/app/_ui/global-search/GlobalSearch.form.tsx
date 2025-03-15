@@ -29,11 +29,11 @@ const GlobalSearchForm = () => {
           }}
           autoComplete="off"
           autoCorrect="off"
-          autoCapitalize="off"
+          autoCapitalize="none"
           spellCheck={false}
           id="aksel-search-input"
           clearButton={false}
-          placeholder="Søk på artikler, f.eks. Button"
+          placeholder="Søk i dokumentasjon..."
         />
       </form>
       <Button

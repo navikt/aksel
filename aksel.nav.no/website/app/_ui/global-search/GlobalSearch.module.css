@@ -3,6 +3,7 @@
   align-items: center;
   gap: var(--ax-space-8);
   padding: var(--ax-space-4) var(--ax-space-8);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
 
   @media (min-width: 768px) {
     padding: var(--ax-space-16);
@@ -13,8 +14,19 @@
   }
 }
 
+.searchEmptyState {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-inline: var(--ax-space-12);
+  margin-block: var(--ax-space-32) var(--ax-space-56);
+
+  & > [data-state="hidden"] {
+    visibility: hidden;
+  }
+}
+
 .searchResults {
-  /* className="flex h-full flex-col overflow-y-auto md:max-h-[70vh]" */
   display: flex;
   flex-direction: column;
   overflow-y: auto;

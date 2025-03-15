@@ -55,10 +55,12 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", listener);
   }, [inputRef, open, setOpen]);
 
-  /* When re-opening search for user so they can start new search instantly */
   const openSearch = () => {
     setOpen(true);
-    inputRef.current?.select();
+    searchResult?.query
+      ? /* When re-opening search for user so they can start new search instantly */
+        inputRef.current?.select()
+      : inputRef.current?.focus();
   };
 
   const closeSearch = () => setOpen(false);
