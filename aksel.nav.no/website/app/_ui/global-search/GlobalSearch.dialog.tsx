@@ -1,7 +1,7 @@
 "use client";
 
 import { BodyShort, Heading, Modal } from "@navikt/ds-react";
-import KBD from "@/web/KBD";
+import { Kbd } from "@/app/_ui/kbd/Kbd";
 import { useGlobalSearch } from "./GlobalSearch.provider";
 
 function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
@@ -31,19 +31,15 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
         className="flex items-baseline justify-between border-t border-t-border-subtle p-4 leading-none"
         as="span"
       >
-        <div>
+        <span>
           <Kbd>Ctrl</Kbd>+<Kbd>K</Kbd> for å søke
-        </div>
-        <div>
+        </span>
+        <span>
           <Kbd>Esc</Kbd> for å lukke
-        </div>
+        </span>
       </BodyShort>
     </Modal>
   );
-}
-
-function Kbd({ children }: { children: React.ReactNode }) {
-  return <KBD>{children}</KBD>;
 }
 
 export { GlobalSearchDialog };
