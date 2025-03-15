@@ -2,25 +2,6 @@
 
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
-
-/* import { Search } from "./parts/SearchToggle";
-import {
-  SearchNavigationProvider,
-  SearchProvider,
-  SearchResultProvider,
-} from "./providers";
-
-const GlobalSearch = () => (
-  <SearchProvider>
-    <SearchResultProvider>
-      <SearchNavigationProvider>
-        <Search />
-      </SearchNavigationProvider>
-    </SearchResultProvider>
-  </SearchProvider>
-);
-
-export default GlobalSearch; */
 import { GlobalSearchProvider } from "./GlobalSearch.provider";
 import { GlobalSearchResults } from "./GlobalSearch.results";
 import { getRecentArticles } from "./GlobalSearch.utils";

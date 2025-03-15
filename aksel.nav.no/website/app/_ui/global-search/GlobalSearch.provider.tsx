@@ -5,8 +5,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 type SearchContextType = {
   open: boolean;
   setOpen: (v: boolean) => void;
-  query: string;
-  setQuery: (v: string) => void;
+  inputRef: React.RefObject<HTMLInputElement>;
 };
 
 const SearchContext = createContext<SearchContextType | null>(null);
@@ -14,7 +13,6 @@ const SearchContext = createContext<SearchContextType | null>(null);
 function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
@@ -42,8 +40,7 @@ function GlobalSearchProvider({ children }: { children: React.ReactNode }) {
       value={{
         open,
         setOpen,
-        query,
-        setQuery,
+        inputRef,
       }}
     >
       {children}

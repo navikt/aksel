@@ -1,10 +1,12 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { Heading, Label, Search, debounce } from "@navikt/ds-react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button, Heading, Label, Search, debounce } from "@navikt/ds-react";
 import { ChangeLogIconOutline } from "@/assets/Icons";
 import { SearchHitT, globalSearchConfig } from "./GlobalSearch.config";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
+import { useGlobalSearch } from "./GlobalSearch.provider";
 import { fuseGlobalSearch } from "./GlobalSearch.utils";
 
 type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
@@ -12,11 +14,12 @@ type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
   const { mostRecentArticles } = props;
 
+  const { inputRef, setOpen } = useGlobalSearch();
   const [localQuery, setLocalQuery] = useState<string>("");
   const [searchResult, setSearchResults] = useState<ActionReturnT | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  console.info(isPending);
+  /* TODO: Add timeout that toggles if no results comes after x time */
 
   const handleSearch = useMemo(
     () =>
@@ -36,45 +39,54 @@ const GlobalSearchResults = (props: { mostRecentArticles: SearchHitT[] }) => {
 
   return (
     <div>
-      <form
-        role="search"
-        onSubmit={(e) => e.preventDefault()}
-        className="w-full"
-      >
-        <Search
-          label={
-            <span className="flex items-center gap-2">
-              <span>Søk i hele Aksel</span>
-            </span>
-          }
-          aria-autocomplete="both"
-          variant="simple"
-          onChange={(value) => {
-            setLocalQuery(value);
-            handleSearch(value);
-          }}
-          onClear={() => {
-            setLocalQuery("");
-            setSearchResults(null);
-          }}
-          onKeyDown={(e) => {
-            /* Avoids sideeffects when clearing Search */
-            if (e.key === "Escape") {
-              if (e.currentTarget.value) {
-                e.stopPropagation();
-              }
+      <div>{isPending && <div>loading</div>}</div>
+      <div className="flex items-center gap-2 px-2 py-1 md:px-4 md:py-4">
+        <form
+          role="search"
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full"
+        >
+          <Search
+            ref={inputRef}
+            label={
+              <span className="flex items-center gap-2">
+                <span>Søk i hele Aksel</span>
+              </span>
             }
-          }}
-          /* ref={inputRef} */
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          id="aksel-search-input"
-          clearButton={false}
-          placeholder="Søk på artikler, f.eks. Button"
+            aria-autocomplete="both"
+            variant="simple"
+            onChange={(value) => {
+              setLocalQuery(value);
+              handleSearch(value);
+            }}
+            onClear={() => {
+              setLocalQuery("");
+              setSearchResults(null);
+            }}
+            onKeyDown={(e) => {
+              /* Avoids sideeffects when clearing Search */
+              if (e.key === "Escape") {
+                if (e.currentTarget.value) {
+                  e.stopPropagation();
+                }
+              }
+            }}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck={false}
+            id="aksel-search-input"
+            clearButton={false}
+            placeholder="Søk på artikler, f.eks. Button"
+          />
+        </form>
+        <Button
+          variant="tertiary-neutral"
+          onClick={() => setOpen(false)}
+          icon={<XMarkIcon title="Lukk" />}
         />
-      </form>
+      </div>
+
       <div className="flex h-full flex-col overflow-y-auto">
         {!searchResult?.result && mostRecentArticles && (
           <section aria-label="Nyeste artikler" data-layout="simple">

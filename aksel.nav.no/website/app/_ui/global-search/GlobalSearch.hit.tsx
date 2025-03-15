@@ -78,8 +78,6 @@ function GlobalSearchLink(props: {
               decoding="sync"
               width="96"
               height="96"
-              layout="fixed"
-              objectFit="contain"
               alt={hit.item?.heading + " thumbnail"}
               aria-hidden
             />

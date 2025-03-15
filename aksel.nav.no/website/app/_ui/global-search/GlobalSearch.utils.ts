@@ -8,7 +8,7 @@ import {
   GLOBAL_SEARCH_QUERY_ALL,
   GLOBAL_SEARCH_QUERY_RECENT,
 } from "@/app/_sanity/queries";
-import data from "../../public/searchindex.json";
+import data from "../../../public/searchindex.json";
 import {
   SearchHitT,
   SearchPageT,
