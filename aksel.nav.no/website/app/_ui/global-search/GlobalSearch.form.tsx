@@ -14,7 +14,7 @@ const GlobalSearchForm = () => {
       <form role="search" onSubmit={(e) => e.preventDefault()}>
         <Search
           ref={inputRef}
-          label="Søk i hele Aksel"
+          label="Søk i dokumentasjon"
           aria-autocomplete="both"
           variant="simple"
           onChange={updateSearch}

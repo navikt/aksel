@@ -19,9 +19,9 @@ function GlobalSearchDialog({ children }: { children: React.ReactNode }) {
           e.stopPropagation();
         }
       }}
-      width="medium"
       aria-labelledby="aksel-search-heading"
       closeOnBackdropClick
+      width="60rem"
     >
       <Heading level="1" size="medium" id="aksel-search-heading" visuallyHidden>
         Søk

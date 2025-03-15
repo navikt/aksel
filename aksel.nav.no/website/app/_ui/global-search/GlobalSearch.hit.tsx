@@ -4,89 +4,12 @@ import cl from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Heading, Show } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import { Tag } from "@/cms/frontpage-blocks/latest-articles/Tag";
 import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
 import { SearchHitT, SearchResultPageTypesT } from "./GlobalSearch.config";
-
-function GlobalSearchLink(props: {
-  hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
-  tag?: Partial<SearchResultPageTypesT>;
-}) {
-  const { hit } = props;
-
-  const href =
-    "anchor" in hit && hit.anchor
-      ? `/${hit.item.slug}#${hit.anchor}`
-      : `/${hit.item.slug}`;
-
-  /* TODO: We now do this with data-layout="simple" */
-  const simple = false;
-
-  return (
-    <li
-      className={cl(
-        "relative flex scroll-my-10 items-center justify-between gap-3 border-b border-border-subtle px-2 last-of-type:border-b-0 has-[+_*_:focus-visible]:border-b-transparent has-[:focus-visible]:border-b-transparent",
-      )}
-    >
-      <div className="w-full px-2 py-3">
-        <span
-          className={cl({
-            "flex flex-col gap-1 md:flex-row md:justify-between md:gap-4":
-              simple,
-            "flex items-center gap-2": !simple,
-          })}
-        >
-          <Link
-            href={href}
-            data-umami-event="navigere"
-            data-umami-event-kilde="global sok"
-            className={cl(
-              "group scroll-my-32 break-words text-xl font-semibold underline hover:decoration-[3px] focus:outline-none",
-              "after:absolute after:inset-0 after:rounded-lg after:ring-inset focus-visible:after:ring-[3px] focus-visible:after:ring-border-focus",
-            )}
-          >
-            {hit.item.heading}
-          </Link>
-
-          {simple ? (
-            <Tag
-              type={hit.item._type}
-              size="xsmall"
-              text={hit.item.tema ? hit.item.tema[0] : undefined}
-              inline
-              aria-hidden
-            />
-          ) : (
-            hit.item?.status?.tag && (
-              <StatusTag status={hit.item.status.tag} aria-hidden />
-            )
-          )}
-        </span>
-
-        <Show above="md" asChild>
-          <p className="line-clamp-2">{hit.description}</p>
-        </Show>
-      </div>
-
-      {!simple && (
-        <div className="hidden aspect-square w-24 sm:block">
-          {hit.item?.status?.bilde && (
-            <Image
-              src={urlFor(hit.item.status.bilde).auto("format").url()}
-              decoding="sync"
-              width="96"
-              height="96"
-              alt={hit.item?.heading + " thumbnail"}
-              aria-hidden
-            />
-          )}
-        </div>
-      )}
-    </li>
-  );
-}
+import styles from "./GlobalSearch.module.css";
 
 function GlobalSearchHitCollection({
   heading,
@@ -134,6 +57,54 @@ function GlobalSearchHitCollection({
         ))}
       </ul>
     </div>
+  );
+}
+
+function GlobalSearchLink(props: {
+  hit: SearchHitT | Omit<SearchHitT, "score" | "anchor">;
+  tag?: Partial<SearchResultPageTypesT>;
+}) {
+  const { hit } = props;
+
+  const href =
+    "anchor" in hit && hit.anchor
+      ? `/${hit.item.slug}#${hit.anchor}`
+      : `/${hit.item.slug}`;
+
+  return (
+    <li className={styles.searchLinkLi}>
+      <div className={styles.searchLinkText}>
+        <span className={styles.searchLinkHeading}>
+          <Link
+            href={href}
+            data-umami-event="navigere"
+            data-umami-event-kilde="global sok"
+            className={styles.searchLink}
+          >
+            {hit.item.heading}
+          </Link>
+
+          {hit.item?.status?.tag && (
+            <StatusTag status={hit.item.status.tag} aria-hidden />
+          )}
+        </span>
+
+        <p className={styles.searchLinkDescription}>{hit.description}</p>
+      </div>
+
+      <div className={styles.searchThumbnail}>
+        {hit.item?.status?.bilde && (
+          <Image
+            src={urlFor(hit.item.status.bilde).auto("format").url()}
+            decoding="sync"
+            width="96"
+            height="96"
+            alt={hit.item?.heading + " thumbnail"}
+            aria-hidden
+          />
+        )}
+      </div>
+    </li>
   );
 }
 

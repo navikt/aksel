@@ -1,3 +1,4 @@
+/* stylelint-disable media-feature-range-notation */
 .searchForm {
   display: flex;
   align-items: center;
@@ -5,7 +6,7 @@
   padding: var(--ax-space-4) var(--ax-space-8);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
 
-  @media (min-width: 768px) {
+  @media (width > 768px) {
     padding: var(--ax-space-16);
   }
 
@@ -31,7 +32,7 @@
   flex-direction: column;
   overflow-y: auto;
 
-  @media (min-width: 768px) {
+  @media (width > 768px) {
     max-height: 70vh;
   }
 }
@@ -49,7 +50,86 @@
   padding: var(--ax-space-16);
   display: none;
 
-  @media (min-width: 768px) {
+  @media (width > 768px) {
     display: flex;
+  }
+}
+
+.searchLinkLi {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ax-space-12);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  padding-inline: var(--ax-space-8);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &:has(+ * :focus-visible),
+  &:has(:focus-visible) {
+    border-color: transparent;
+  }
+}
+
+.searchLinkText {
+  padding: var(--ax-space-12) var(--ax-space-8);
+}
+
+.searchLinkHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+}
+
+.searchLink {
+  /*
+  "group text-xl hover:decoration-[3px] focus:outline-none",
+
+            ) */
+  scroll-margin-block: var(--ax-space-64);
+  overflow-wrap: break-word;
+  font-weight: var(--ax-font-weight-bold);
+  text-decoration: underline;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--ax-border-radius-large);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::after {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: -3px;
+  }
+}
+
+.searchLinkDescription {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+
+  @media (width <= 768px) {
+    display: none;
+  }
+}
+
+.searchThumbnail {
+  display: none;
+  aspect-ratio: 1 / 1;
+  width: 6rem;
+  flex-shrink: 0;
+
+  @media (width > 480px) {
+    display: block;
   }
 }
