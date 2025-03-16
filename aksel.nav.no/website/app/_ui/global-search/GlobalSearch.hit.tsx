@@ -74,6 +74,7 @@ function GlobalSearchLink(props: {
             data-umami-event="navigere"
             data-umami-event-kilde="global sok"
             className={styles.searchLink}
+            prefetch={false}
           >
             {hit.item.heading}
           </Heading>

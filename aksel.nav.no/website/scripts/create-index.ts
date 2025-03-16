@@ -52,7 +52,7 @@ async function createIndex() {
   );
 }
 
-function sanitzeSanityData(data) {
+export function sanitzeSanityData(data) {
   return data
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
