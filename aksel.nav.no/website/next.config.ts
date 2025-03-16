@@ -4,6 +4,8 @@ import path from "path";
 
 const cdnUrl = "https://cdn.nav.no";
 const dekoratorUrl = "https://www.nav.no";
+const tempChromaticRedirect =
+  "https://main--66b4b3beb91603ed0ab5c45e.chromatic.com";
 
 const cspHeader = `
     default-src 'self' 'unsafe-inline' ${cdnUrl};
@@ -18,7 +20,7 @@ const cspHeader = `
     media-src 'self' ${cdnUrl} cdn.sanity.io;
     upgrade-insecure-requests;
     img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
-    connect-src 'self' ${dekoratorUrl} ${cdnUrl} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
+    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
 `;
 
 const securityHeaders = [
