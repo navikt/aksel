@@ -1,5 +1,3 @@
-"use server";
-
 import Link from "next/link";
 import { Heading } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";

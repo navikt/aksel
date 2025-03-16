@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import { BodyShort } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";

@@ -1,5 +1,3 @@
-"use server";
-
 import { useId } from "react";
 import { BodyShort, Detail } from "@navikt/ds-react";
 import { DesignsystemSidebarSectionT } from "@/types";

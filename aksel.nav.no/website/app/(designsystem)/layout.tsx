@@ -1,5 +1,3 @@
-"use server";
-
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { Sidebar } from "@/app/_ui/sidebar/Sidebar";
