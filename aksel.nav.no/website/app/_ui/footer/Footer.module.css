@@ -8,6 +8,7 @@
 
 .footerLayout {
   max-width: 1440px;
+  margin-inline: auto;
   display: grid;
   gap: var(--ax-space-24);
   grid-template-columns: repeat(auto-fit, minmax(250px, auto));

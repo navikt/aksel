@@ -1,5 +1,3 @@
-"use server";
-
 import Link from "next/link";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
