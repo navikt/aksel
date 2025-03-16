@@ -136,6 +136,7 @@
 }
 
 .searchLinkDescription {
+  color: var(--ax-text-neutral-subtle);
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

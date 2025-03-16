@@ -11,7 +11,7 @@ import {
   useTransition,
 } from "react";
 import { debounce } from "@navikt/ds-react";
-import { fuseGlobalSearch } from "./GlobalSearch.utils";
+import { fuseGlobalSearch } from "./GlobalSearch.actions";
 
 type ActionReturnT = Awaited<ReturnType<typeof fuseGlobalSearch>>;
 
