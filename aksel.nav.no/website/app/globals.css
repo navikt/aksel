@@ -21,3 +21,14 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+/* TODO: Copy theme from figma */
+[data-color-role="teal"] {
+  --ax-text-subtle: #0f766e;
+  --ax-bg-soft: #defcf6;
+}
+
+[data-color-role="pink"] {
+  --ax-text-subtle: #be185d;
+  --ax-bg-soft: #fdf2f8;
+}

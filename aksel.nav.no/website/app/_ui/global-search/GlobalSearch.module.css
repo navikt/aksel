@@ -55,6 +55,20 @@
   }
 }
 
+.searchSectionHeading {
+  top: 0;
+  z-index: 10;
+  background-color: var(--ax-bg-soft);
+  color: var(--ax-text-subtle);
+  padding-block: var(--ax-space-8);
+  padding-inline: var(--ax-space-24);
+
+  @media (width > 768px) {
+    position: sticky;
+    padding-inline: var(--ax-space-40);
+  }
+}
+
 .searchLinkLi {
   position: relative;
   display: flex;
