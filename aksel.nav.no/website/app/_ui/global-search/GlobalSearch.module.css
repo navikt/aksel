@@ -5,6 +5,7 @@
   gap: var(--ax-space-8);
   padding: var(--ax-space-4) var(--ax-space-8);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  background-color: var(--ax-bg-neutral-soft);
 
   @media (width > 768px) {
     padding: var(--ax-space-16);
@@ -46,6 +47,7 @@
 .searchDialogShortcuts {
   align-items: baseline;
   justify-content: space-between;
+  background-color: var(--ax-bg-neutral-soft);
   border-top: 1px solid var(--ax-border-neutral-subtle);
   padding: var(--ax-space-16);
   display: none;
