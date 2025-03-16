@@ -24,11 +24,11 @@
 
 /* TODO: Copy theme from figma */
 [data-color-role="teal"] {
-  --ax-text-subtle: #0f766e;
+  --ax-text-default: #0f766e;
   --ax-bg-soft: #defcf6;
 }
 
 [data-color-role="pink"] {
-  --ax-text-subtle: #be185d;
+  --ax-text-default: #be185d;
   --ax-bg-soft: #fdf2f8;
 }
