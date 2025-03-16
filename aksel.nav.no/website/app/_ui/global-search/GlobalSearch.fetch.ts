@@ -5,7 +5,6 @@ import omit from "lodash/omit";
 import NodeCache from "node-cache";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
-import data from "../../../public/searchindex.json";
 import { SearchPageT } from "./GlobalSearch.config";
 
 /**
@@ -14,25 +13,16 @@ import { SearchPageT } from "./GlobalSearch.config";
 const searchCache = new NodeCache();
 const CACHE_KEY = "globalSearchArticles";
 
-function byteSize(str: string) {
-  return new Blob([str]).size;
-}
-
 /**
  * When stable, use `use cache` with cache-life
  * https://nextjs.org/docs/app/api-reference/directives/use-cache#revalidating
  */
 async function fetchArticles(): Promise<SearchPageT[]> {
-  const before = performance.now();
   const cachedData = searchCache.get<SearchPageT[]>(CACHE_KEY);
 
   if (cachedData) {
-    console.info("Using cached search index");
-    console.info(`Cache hit: ${Math.round(performance.now() - before)}ms`);
-    console.log(byteSize(JSON.stringify(cachedData)), "bytes");
     return cachedData;
   }
-  console.log(byteSize(JSON.stringify(data)), "bytes-1");
 
   const allArticles = await client.fetch<SearchPageT[]>(
     GLOBAL_SEARCH_QUERY_ALL,
@@ -49,11 +39,6 @@ async function fetchArticles(): Promise<SearchPageT[]> {
 
   // Cache the data for 1 hour
   searchCache.set(CACHE_KEY, sanitizedData, 60 * 60);
-
-  console.log(byteSize(JSON.stringify(sanitizedData)), "bytes 2");
-  console.info("Using remote search index");
-
-  console.info(`Cache miss took ${Math.round(performance.now() - before)}ms`);
 
   return allArticles;
 }
