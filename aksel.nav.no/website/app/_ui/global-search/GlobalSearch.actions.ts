@@ -16,7 +16,7 @@ async function fuseGlobalSearch(query: string) {
     return null;
   }
 
-  const fuse = new Fuse(localData as SearchPageT[], {
+  const fuse = new Fuse(localData, {
     keys: [
       { name: "heading", weight: 100 },
       { name: "lvl2.text", weight: 50 },
@@ -107,4 +107,8 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
   return null;
 }
 
-export { fuseGlobalSearch };
+function preloadSearchIndex() {
+  void fetchArticles();
+}
+
+export { fuseGlobalSearch, preloadSearchIndex };

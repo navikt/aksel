@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { BodyShort, Heading } from "@navikt/ds-react";
+import { preloadSearchIndex } from "./GlobalSearch.actions";
 import { globalSearchConfig } from "./GlobalSearch.config";
-import { preloadSearchIndex } from "./GlobalSearch.fetch";
 import { GlobalSearchHitCollection } from "./GlobalSearch.hit";
 import styles from "./GlobalSearch.module.css";
 import { useGlobalSearch } from "./GlobalSearch.provider";

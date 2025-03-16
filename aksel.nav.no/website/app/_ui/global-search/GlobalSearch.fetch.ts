@@ -1,8 +1,7 @@
-"use server";
-
 import groupBy from "lodash/groupBy";
 import omit from "lodash/omit";
 import NodeCache from "node-cache";
+import "server-only";
 import { client } from "@/app/_sanity/client";
 import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
 import { SearchPageT } from "./GlobalSearch.config";
@@ -41,10 +40,6 @@ async function fetchArticles(): Promise<SearchPageT[]> {
   searchCache.set(CACHE_KEY, sanitizedData, 60 * 60);
 
   return allArticles;
-}
-
-function preloadSearchIndex() {
-  void fetchArticles();
 }
 
 function sanitzeSanityData(_data) {
@@ -110,4 +105,4 @@ function mapContent(blocks: any[]) {
   return mapped;
 }
 
-export { fetchArticles, preloadSearchIndex };
+export { fetchArticles };
