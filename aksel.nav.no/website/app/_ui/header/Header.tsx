@@ -7,10 +7,7 @@ import styles from "./Header.module.css";
 
 const LINKS = [
   { name: "God praksis", href: "/god-praksis" },
-  /* { name: "Grunnleggende", href: "/grunnleggende" }, */
-  /* { name: "Ikoner", href: "/ikoner" }, */
   { name: "Designsystemet", href: "/komponenter-2" },
-  /* { name: "Mønster & Maler", href: "/monster-maler" }, */
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
