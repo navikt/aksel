@@ -1,5 +1,3 @@
-"use server";
-
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
