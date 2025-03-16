@@ -1,5 +1,6 @@
 "use server";
 
+import { preloadGlobalSearch } from "./GlobalSearch.actions";
 import { GlobalSearchButton } from "./GlobalSearch.button";
 import { GlobalSearchDialog } from "./GlobalSearch.dialog";
 import { GlobalSearchForm } from "./GlobalSearch.form";
@@ -12,6 +13,9 @@ import {
 } from "./GlobalSearch.results";
 
 async function GlobalSearch() {
+  // Preload the global search data here if needed
+  preloadGlobalSearch();
+
   return (
     <GlobalSearchProvider>
       <GlobalSearchButton />

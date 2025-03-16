@@ -28,19 +28,8 @@ const searchContent = groq`{
   seo
 }`;
 
-const GLOBAL_SEARCH_QUERY_RECENT = defineQuery(
-  `*[_type in [${allArticleDocuments.map(
-    (x) => `"${x}"`,
-  )}]]| order(publishedAt desc)[0..20]${searchContent}`,
-);
-
 const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
   `*[_type in [${allArticleDocuments.map((x) => `"${x}"`)}]]${searchContent}`,
 );
 
-export {
-  POST_QUERY,
-  DESIGNSYSTEM_SIDEBAR_QUERY,
-  GLOBAL_SEARCH_QUERY_ALL,
-  GLOBAL_SEARCH_QUERY_RECENT,
-};
+export { POST_QUERY, DESIGNSYSTEM_SIDEBAR_QUERY, GLOBAL_SEARCH_QUERY_ALL };

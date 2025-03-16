@@ -3,12 +3,9 @@
 import type { FuseResult, FuseResultMatch } from "fuse.js";
 import Fuse from "fuse.js";
 import omit from "lodash/omit";
+import NodeCache from "node-cache";
 import { client } from "@/app/_sanity/client";
-import {
-  GLOBAL_SEARCH_QUERY_ALL,
-  GLOBAL_SEARCH_QUERY_RECENT,
-} from "@/app/_sanity/queries";
-import data from "../../../public/searchindex.json";
+import { GLOBAL_SEARCH_QUERY_ALL } from "@/app/_sanity/queries";
 import {
   SearchHitT,
   SearchPageT,
@@ -43,46 +40,55 @@ function resolveAnchor(match: FuseResultMatch, item: SearchPageT) {
 }
 
 /**
- * TODO:
- * - We probably want to always fetch from sanity, and configure caching for it locally
+ * We use node-cache here since nextjs built in cache only supports 2mb,
+ * while we need to cache ~ 3+ mb of data.
  */
-async function getArticles(): Promise<{
-  mostRecentArticles: SearchPageT[];
-  allArticles: SearchPageT[];
-}> {
-  const _data = data as SearchPageT[];
-  if (_data) {
-    return { mostRecentArticles: _data.slice(0, 20), allArticles: _data };
+const searchCache = new NodeCache();
+const CACHE_KEY = "globalSearchArticles";
+
+async function getArticles(): Promise<SearchPageT[]> {
+  const cachedData = searchCache.get<SearchPageT[]>(CACHE_KEY);
+
+  if (cachedData) {
+    console.info("Using cached search index");
+    return cachedData;
   }
 
-  const [mostRecentArticles, allArticles] = await Promise.all([
-    client.fetch<SearchPageT[]>(
-      GLOBAL_SEARCH_QUERY_RECENT,
-      {},
-      {
-        cache: "force-cache",
-        next: { revalidate: 3600 },
-      },
-    ),
-    client.fetch<SearchPageT[]>(
-      GLOBAL_SEARCH_QUERY_ALL,
-      {},
-      {
-        cache: "force-cache",
-        next: { revalidate: 3600 },
-      },
-    ),
-  ]);
+  /* const _data = data as SearchPageT[];
+  if (_data) {
+    return _data;
+  } */
 
-  return { mostRecentArticles, allArticles };
+  const allArticles = await client.fetch<SearchPageT[]>(
+    GLOBAL_SEARCH_QUERY_ALL,
+    {},
+    { useCdn: false },
+  );
+
+  if (!allArticles) {
+    console.error("Failed to fetch search index");
+    return [];
+  }
+
+  // Cache the data for 1 hour
+  searchCache.set(CACHE_KEY, allArticles, 60 * 60);
+
+  console.info("Using remote search index");
+
+  return allArticles;
+}
+
+async function preloadGlobalSearch() {
+  void getArticles();
 }
 
 async function fuseGlobalSearch(query: string) {
+  const localData = await getArticles();
   if (!query || query.length < 2) {
     return null;
   }
 
-  const fuse = new Fuse(data as SearchPageT[], {
+  const fuse = new Fuse(localData as SearchPageT[], {
     keys: [
       { name: "heading", weight: 100 },
       { name: "lvl2.text", weight: 50 },
@@ -146,4 +152,4 @@ async function fuseGlobalSearch(query: string) {
   };
 }
 
-export { fuseGlobalSearch, getArticles };
+export { fuseGlobalSearch, preloadGlobalSearch };
