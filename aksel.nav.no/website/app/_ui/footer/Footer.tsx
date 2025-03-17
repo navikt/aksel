@@ -60,7 +60,7 @@ const Footer = () => {
             },
             {
               url: "https://github.com/navikt/aksel",
-              text: "Github",
+              text: "GitHub",
               icon: <GithubIcon />,
             },
             {
