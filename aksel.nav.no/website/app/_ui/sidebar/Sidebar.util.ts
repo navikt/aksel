@@ -13,10 +13,12 @@ const pageTypes = {
   templates: { name: "Mønster og Maler", _type: "templates_artikkel" },
 } as const;
 
-function generateSidebar(input: SidebarInputNodeT[]): {
+type DesignsystemSidebarDataT = {
   label: string;
   links: DesignsystemSidebarSectionT;
-}[] {
+}[];
+
+function generateSidebar(input: SidebarInputNodeT[]): DesignsystemSidebarDataT {
   return Object.keys(pageTypes).map((type) => {
     const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
     const filteredInput = input.filter(
@@ -97,3 +99,4 @@ function sortIndex(a: SidebarInputNodeT, b: SidebarInputNodeT) {
 }
 
 export { generateSidebar };
+export type { DesignsystemSidebarDataT };

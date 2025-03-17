@@ -1,56 +1,36 @@
 "use client";
 
-import { Modal } from "@navikt/ds-react";
+import { XMarkIcon } from "@navikt/aksel-icons";
+import { Button, Heading, Modal } from "@navikt/ds-react";
+import styles from "./MobileNav.module.css";
 import { useMobileNav } from "./MobileNav.provider";
 
-function MobileNavDialog() {
+function MobileNavDialog({ children }: { children: React.ReactNode }) {
   const { open, toggleOpen } = useMobileNav();
 
   return (
     <Modal
       open={open}
       onClose={() => toggleOpen(false)}
-      header={{ heading: "Meny" }}
       width="small"
       closeOnBackdropClick
+      className={styles.mobileNavDialog}
+      aria-labelledby="mobile-nav-menu"
     >
-      <div>123</div>
-      {/* <Modal.Body>
-          <nav aria-label="hovedmeny">
-            <ul>
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="God praksis"
-                href="/god-praksis"
-              />
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="Grunnleggende"
-                href="/grunnleggende"
-              />
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="Ikoner"
-                href="/ikoner"
-              />
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="Komponenter"
-                href="/komponenter"
-              />
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="Mønster & Maler"
-                href="/monster-maler"
-              />
-              <HamburgerLink
-                onClick={() => setOpen(false)}
-                name="Blogg"
-                href="/produktbloggen"
-              />
-            </ul>
-          </nav>
-        </Modal.Body> */}
+      <Modal.Header
+        closeButton={false}
+        className={styles.mobileNavDialogHeader}
+      >
+        <Heading level="1" size="medium" id="mobile-nav-menu">
+          Aksel
+        </Heading>
+        <Button
+          onClick={() => toggleOpen(false)}
+          variant="secondary-neutral"
+          icon={<XMarkIcon title="Lukk" />}
+        />
+      </Modal.Header>
+      {children}
     </Modal>
   );
 }

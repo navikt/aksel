@@ -13,11 +13,7 @@ type SidebarProps = {
 async function Sidebar(props: SidebarProps) {
   const { layout = "sidebar" } = props;
 
-  const { data } = await sanityFetch({
-    query: DESIGNSYSTEM_SIDEBAR_QUERY,
-  });
-
-  const sidebarData = generateSidebar(data);
+  const sidebarData = await getSidebarData();
 
   return (
     <nav aria-label="Sidemeny" className={styles.navList} data-layout={layout}>
@@ -44,6 +40,17 @@ async function Sidebar(props: SidebarProps) {
       </BodyShort>
     </nav>
   );
+}
+
+async function getSidebarData() {
+  "use server";
+  const { data } = await sanityFetch({
+    query: DESIGNSYSTEM_SIDEBAR_QUERY,
+  });
+
+  const sidebarData = generateSidebar(data);
+
+  return sidebarData;
 }
 
 export { Sidebar };
