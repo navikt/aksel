@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
+import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import AkselLogo from "@/assets/Logo";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
 
 const LINKS = [
   { name: "God praksis", href: "/god-praksis" },
-  /* { name: "Grunnleggende", href: "/grunnleggende" }, */
-  /* { name: "Ikoner", href: "/ikoner" }, */
   { name: "Designsystemet", href: "/komponenter-2" },
-  /* { name: "Mønster & Maler", href: "/monster-maler" }, */
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
@@ -48,7 +46,7 @@ function Header() {
           </Box>
         </Show>
         <HStack align="center" gap="2">
-          {/* <GlobalSearch /> */}
+          <GlobalSearch />
           {/* <Hamburger /> */}
         </HStack>
       </div>

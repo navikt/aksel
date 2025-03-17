@@ -23423,6 +23423,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"server-only@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "server-only@npm:0.0.1"
+  checksum: 10/c432348956641ea3f460af8dc3765f3a1bdbcf7a1e0205b0756d868e6e6fe8934cdee6bff68401a1dd49ba4a831c75916517a877446d54b334f7de36fa273e53
+  languageName: node
+  linkType: hard
+
 "set-function-length@npm:^1.2.1":
   version: 1.2.2
   resolution: "set-function-length@npm:1.2.2"
@@ -26965,6 +26972,7 @@ __metadata:
     sanity: "npm:3.78.0"
     sanity-plugin-iframe-pane: "npm:^3.2.1"
     sanity-plugin-media: "npm:^2.3.2"
+    server-only: "npm:^0.0.1"
     sharp: "npm:0.33.5"
     showdown: "npm:^2.1.0"
     start-server-and-test: "npm:^2.0.3"

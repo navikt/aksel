@@ -11,6 +11,7 @@ export default async function DesignsystemLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
+
       <div className={styles.pageLayout}>
         <Sidebar />
         <main id="hovedinnhold" className="flex w-full flex-auto py-6">
