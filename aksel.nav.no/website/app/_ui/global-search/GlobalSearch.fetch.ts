@@ -42,7 +42,7 @@ async function fetchArticles(): Promise<SearchPageT[]> {
   return sanitizedData;
 }
 
-function sanitzeSanityData(_data) {
+function sanitizeSanityData(_data) {
   return _data
     .sort((a, b) => {
       if (!a.publishedAt && !b.publishedAt) {
