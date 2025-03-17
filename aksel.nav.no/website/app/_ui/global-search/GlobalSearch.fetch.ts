@@ -39,7 +39,7 @@ async function fetchArticles(): Promise<SearchPageT[]> {
   // Cache the data for 1 hour
   searchCache.set(CACHE_KEY, sanitizedData, 60 * 60);
 
-  return allArticles;
+  return sanitizedData;
 }
 
 function sanitzeSanityData(_data) {
