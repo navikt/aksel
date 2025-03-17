@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
+import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
 import AkselLogo from "@/assets/Logo";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
@@ -47,7 +48,7 @@ function Header() {
         </Show>
         <HStack align="center" gap="2">
           <GlobalSearch />
-          {/* <Hamburger /> */}
+          <MobileNav />
         </HStack>
       </div>
     </header>
