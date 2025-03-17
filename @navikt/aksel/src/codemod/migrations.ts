@@ -117,6 +117,14 @@ export const migrations: {
       path: "spacing/token-spacing-js/spacing",
     },
   ],
+  "box-to-boxnew": [
+    {
+      description:
+        "Update Box to to BoxNew (future Box) using the new token system",
+      value: "box-to-boxnew",
+      path: "box-to-boxnew/box-to-boxnew",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {
