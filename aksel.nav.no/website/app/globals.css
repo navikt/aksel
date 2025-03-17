@@ -22,7 +22,109 @@
   border-width: 0;
 }
 
-/* TODO: Copy theme from figma */
+/* ---------------------------- AkselBrand theme ---------------------------- */
+
+:root,
+.light {
+  /* Teal */
+  --aksel-brand-teal-100: #ddfcf5;
+  --aksel-brand-teal-200: #ccf6ed;
+  --aksel-brand-teal-300: #b7eee4;
+  --aksel-brand-teal-400: #90e1d2;
+  --aksel-brand-teal-500: #009a8c;
+  --aksel-brand-teal-600: #00857c;
+  --aksel-brand-teal-700: #0e716a;
+  --aksel-brand-teal-800: #116862;
+  --aksel-brand-teal-900: #105a56;
+  --aksel-brand-teal-1000: #052c2a;
+  --aksel-brand-teal-100A: hsl(166deg 90% 48% / 0.14);
+  --aksel-brand-teal-200A: hsl(167deg 100% 41% / 0.2);
+  --aksel-brand-teal-300A: hsl(169deg 93% 40% / 0.29);
+  --aksel-brand-teal-400A: hsl(169deg 97% 37% / 0.44);
+
+  /* Violet */
+  --aksel-brand-violet-100: #f9f3ff;
+  --aksel-brand-violet-200: #f4ebff;
+  --aksel-brand-violet-300: #ebdefc;
+  --aksel-brand-violet-400: #dfcaf9;
+  --aksel-brand-violet-500: #a370e2;
+  --aksel-brand-violet-600: #925ad6;
+  --aksel-brand-violet-700: #7f45c8;
+  --aksel-brand-violet-800: #763cc0;
+  --aksel-brand-violet-900: #682eb2;
+  --aksel-brand-violet-1000: #35086b;
+  --aksel-brand-violet-100A: hsl(270deg 100% 53% / 0.05);
+  --aksel-brand-violet-200A: hsl(267deg 100% 51% / 0.08);
+  --aksel-brand-violet-300A: hsl(266deg 99% 46% / 0.13);
+  --aksel-brand-violet-400A: hsl(267deg 97% 45% / 0.21);
+
+  /* Pink */
+  --aksel-brand-pink-100: #fef2f9;
+  --aksel-brand-pink-200: #fde9f4;
+  --aksel-brand-pink-300: #fcdaee;
+  --aksel-brand-pink-400: #fdc1e2;
+  --aksel-brand-pink-500: #ed4899;
+  --aksel-brand-pink-600: #d33785;
+  --aksel-brand-pink-700: #b72a71;
+  --aksel-brand-pink-800: #aa2568;
+  --aksel-brand-pink-900: #961d5b;
+  --aksel-brand-pink-1000: #4e082d;
+  --aksel-brand-pink-100A: hsl(325deg 86% 54% / 0.06);
+  --aksel-brand-pink-200A: hsl(327deg 91% 48% / 0.09);
+  --aksel-brand-pink-300A: hsl(325deg 93% 48% / 0.15);
+  --aksel-brand-pink-400A: hsl(327deg 95% 50% / 0.25);
+}
+
+.dark {
+  /* Teal */
+  --aksel-brand-teal-100: #09201e;
+  --aksel-brand-teal-200: #0d2725;
+  --aksel-brand-teal-300: #112f2d;
+  --aksel-brand-teal-400: #173;
+  --aksel-brand-teal-500: #2f7771;
+  --aksel-brand-teal-600: #2f7771;
+  --aksel-brand-teal-700: #38a194;
+  --aksel-brand-teal-800: #41ab9d;
+  --aksel-brand-teal-900: #58bbac;
+  --aksel-brand-teal-1000: #c3f2e9;
+  --aksel-brand-teal-100A: hsl(152deg 100% 10% / 0.36);
+  --aksel-brand-teal-200A: hsl(146deg 98% 49% / 0.08);
+  --aksel-brand-teal-300A: hsl(153deg 85% 54% / 0.12);
+  --aksel-brand-teal-400A: hsl(159deg 90% 61% / 0.17);
+
+  /* Violet */
+  --aksel-brand-violet-100: #1f1832;
+  --aksel-brand-violet-200: #261e3b;
+  --aksel-brand-violet-300: #2e2546;
+  --aksel-brand-violet-400: #3a2f55;
+  --aksel-brand-violet-500: #8157bb;
+  --aksel-brand-violet-600: #936aca;
+  --aksel-brand-violet-700: #a581d6;
+  --aksel-brand-violet-800: #ae8cdb;
+  --aksel-brand-violet-900: #bb9fe3;
+  --aksel-brand-violet-1000: #efe4fd;
+  --aksel-brand-violet-100A: hsl(288deg 88% 58%/ 0.09);
+  --aksel-brand-violet-200A: hsl(282deg 90% 66%/ 0.13);
+  --aksel-brand-violet-300A: hsl(276deg 91% 70%/ 0.18);
+  --aksel-brand-violet-400A: hsl(272deg 88% 73%/ 0.25);
+
+  /* Pink */
+  --aksel-brand-pink-100: #2b171f;
+  --aksel-brand-pink-200: #331c25;
+  --aksel-brand-pink-300: #3d232d;
+  --aksel-brand-pink-400: #4b2c38;
+  --aksel-brand-pink-500: #b44377;
+  --aksel-brand-pink-600: #cd528a;
+  --aksel-brand-pink-700: #e565a0;
+  --aksel-brand-pink-800: #ee71ab;
+  --aksel-brand-pink-900: #f986bd;
+  --aksel-brand-pink-1000: #fde1f1;
+  --aksel-brand-pink-100A: hsl(1deg 85% 53% / 0.13);
+  --aksel-brand-pink-200A: hsl(359deg 90% 61%/ 0.16);
+  --aksel-brand-pink-300A: hsl(356deg 93% 67%/ 0.2);
+  --aksel-brand-pink-400A: hsl(352deg 92% 70%/ 0.26);
+}
+
 [data-color-role="teal"] {
   --ax-text-default: #0f766e;
   --ax-bg-soft: #defcf6;
