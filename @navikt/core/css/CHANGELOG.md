@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.17.3
+
+### Patch Changes
+
+- Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
+
 ## 7.17.2
 
 ### Patch Changes

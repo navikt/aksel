@@ -1,5 +1,5 @@
 import cl from "clsx";
-import styles from "./table-of-contents.module.css";
+import styles from "../TableOfContents.module.css";
 import { useScrollRangeOpacity } from "./useScrollRange";
 
 function ScrollFade() {
@@ -21,4 +21,4 @@ function ScrollFade() {
   );
 }
 
-export default ScrollFade;
+export { ScrollFade };

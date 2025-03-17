@@ -1,11 +1,30 @@
+import {
+  DesignsystemSidebarSectionT,
+  SidebarInputNodeT,
+  SidebarPageT,
+} from "@/types";
 import { sanityCategoryLookup } from "../../sanity/config";
-import { SidebarInputNodeT, SidebarT } from "../types";
 
 export function generateSidebar(
   input: SidebarInputNodeT[],
   type: "komponenter" | "grunnleggende" | "templates",
-): SidebarT {
-  return sanityCategoryLookup(type)
+): DesignsystemSidebarSectionT {
+  const categories = sanityCategoryLookup(type);
+
+  const standalonePages: SidebarPageT[] = input
+    .filter((page) => page.kategori === "standalone")
+    .sort((a, b) => {
+      return a?.heading.localeCompare(b?.heading);
+    })
+    .sort(sortIndex)
+    .sort(sortDeprecated)
+    .map((page) => ({
+      heading: page.heading,
+      slug: page.slug,
+      tag: page.tag,
+    }));
+
+  const groupedPages = categories
     .map((x) => ({
       ...x,
       pages: input
@@ -25,6 +44,8 @@ export function generateSidebar(
         tag: page.tag,
       })),
     }));
+
+  return [...standalonePages, ...groupedPages];
 }
 
 export function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {

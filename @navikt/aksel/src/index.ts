@@ -3,6 +3,7 @@ import chalk from "chalk";
 import fs from "fs";
 import { codemodCommand } from "./codemod/index";
 import { cssImportsCommand } from "./css-imports/index";
+import { darksideCommand } from "./darkside";
 import { helpCommand } from "./help";
 
 run();
@@ -20,6 +21,11 @@ async function run() {
 
   if (process.argv[2] === "codemod") {
     codemodCommand();
+    return;
+  }
+
+  if (process.argv[2] === "darkside") {
+    darksideCommand();
     return;
   }
 
