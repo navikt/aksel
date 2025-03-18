@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .header {
   background-color: var(--ax-bg-default);
   position: sticky;
@@ -7,7 +8,6 @@
 }
 
 .headerContainer {
-  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   height: var(--website-header-height);
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 .headerLogo {
-  color: var(--ax-text-neutral);
+  color: var(--aksel-brand-logo);
 }
 
 .headerLink {
@@ -45,7 +45,7 @@
   height: 2.75rem;
   border-radius: var(--ax-border-radius-small);
   padding-inline: var(--ax-space-8);
-  color: var(--ax-text-neutral);
+  color: var(--aksel-brand-logo);
 
   &::before {
     content: "";
@@ -64,12 +64,12 @@
     font-weight: var(--ax-font-weight-bold);
 
     &::before {
-      background-color: var(--ax-text-neutral);
+      background-color: var(--aksel-brand-logo);
     }
   }
 
   &:hover[data-current="false"]::before {
-    background-color: var(--ax-text-neutral);
+    background-color: var(--ax-border-neutral-subtleA);
   }
 
   &:focus-visible {

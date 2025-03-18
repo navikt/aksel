@@ -14,8 +14,8 @@ const doctypeToRole: Record<SearchResultPageTypesT, string> = {
   ds_artikkel: "brand-blue",
   komponent_artikkel: "brand-blue",
   templates_artikkel: "brand-blue",
-  aksel_artikkel: "teal",
-  aksel_blogg: "pink",
+  aksel_artikkel: "aksel-brand-teal",
+  aksel_blogg: "aksel-brand-pink",
   aksel_prinsipp: "neutral",
   aksel_standalone: "neutral",
 };
