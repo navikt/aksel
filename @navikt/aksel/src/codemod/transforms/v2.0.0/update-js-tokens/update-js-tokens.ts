@@ -25,7 +25,7 @@ export default function transformer(file: JSCodeshift, api) {
     );
   });
 
-  if (!jsImport) {
+  if (jsImport.size() === 0) {
     return src;
   }
 
