@@ -47,6 +47,10 @@
   &:hover {
     background-color: var(--ax-bg-neutral-moderate-hover);
   }
+
+  & > span:empty {
+    width: 1.5rem;
+  }
 }
 
 .mobileNavSidebarMenu {
@@ -56,7 +60,7 @@
 
 .mobileNavDialog {
   max-height: 100dvh;
-  height: fit-content;
+  height: 100dvh;
   right: 0;
   left: auto;
   bottom: auto;

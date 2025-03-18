@@ -35,10 +35,10 @@ function GlobalSearchButton() {
 
   return (
     <>
-      <Show above="lg" asChild>
+      <Show above="md" asChild>
         {renderButton(true)}
       </Show>
-      <Hide above="lg" asChild>
+      <Hide above="md" asChild>
         {renderButton(false)}
       </Hide>
     </>
