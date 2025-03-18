@@ -138,7 +138,7 @@
   }
 
   [data-type="neutral"] [data-state="active"] & {
-    background-color: var(--ax-bg-brand-blue-moderateA);
+    background-color: var(--ax-bg-brand-blue-moderate-pressedA);
     color: var(--ax-text-brand-blue);
   }
 
@@ -147,7 +147,7 @@
   }
 
   [data-type="darkside"] [data-state="active"] & {
-    background-color: var(--ax-bg-brand-magenta-moderateA);
+    background-color: var(--ax-bg-brand-magenta-moderate-pressedA);
     color: var(--ax-text-brand-magenta);
   }
 
