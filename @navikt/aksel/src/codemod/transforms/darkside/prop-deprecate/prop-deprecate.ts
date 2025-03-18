@@ -1,7 +1,7 @@
 import type { API, FileInfo } from "jscodeshift";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import removePropsFromComponent from "../../../utils/removeProps";
-import { findComponentImport } from "../darkside.utils";
+import { findComponentImport } from "../../spacing/spacing.utils";
 
 const deprecationMap = {
   Accordion: ["headingSize", "variant"],
