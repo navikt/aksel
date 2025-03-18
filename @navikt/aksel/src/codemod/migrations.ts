@@ -117,7 +117,12 @@ export const migrations: {
       path: "spacing/token-spacing-js/spacing",
     },
   ],
-  "box-to-boxnew": [
+  darkside: [
+    {
+      description: "marks deprecated prop usage with comments.",
+      value: "prop-deprecate",
+      path: "darkside/prop-deprecate/prop-deprecate",
+    },
     {
       description:
         "Update Box to to BoxNew (future Box) using the new token system",
