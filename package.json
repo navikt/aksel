@@ -147,7 +147,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
-    "@changesets/cli": "2.27.11",
+    "@changesets/cli": "2.28.1",
     "@storybook/addon-a11y": "^8.3.4",
     "@storybook/addon-essentials": "^8.3.4",
     "@storybook/addon-interactions": "^8.3.4",
