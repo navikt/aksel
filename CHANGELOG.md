@@ -10,11 +10,13 @@
 
 ### @navikt/ds-css
 
-- Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
+- Modal: Updated animations for reduced movement. ([#3671](https://github.com/navikt/aksel/pull/3671))
 
-* Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+* Darkside: Synced padding with Figma. ([#3651](https://github.com/navikt/aksel/pull/3651))
 
-- ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
+- Darkside: Removed stacking backgrounds with transparency in Combobox. ([`e769eed`](https://github.com/navikt/aksel/commit/e769eed269d327403b89935502f8fe431eca8cc9))
+
+* ExpansionCard: Fixed bug where `@media print` would hide header content. ([#3634](https://github.com/navikt/aksel/pull/3634))
 
 ## 7.16
 
