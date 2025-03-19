@@ -1,7 +1,7 @@
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { Sidebar } from "@/app/_ui/sidebar/Sidebar";
-import styles from "./layout.module.css";
+import styles from "./_ui/Designsystemet.module.css";
 
 export default async function DesignsystemLayout({
   children,

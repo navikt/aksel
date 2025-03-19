@@ -11,4 +11,7 @@ if (!token) {
 export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: token,
+  /* Only add after draftmode is put behind auth */
+  /* browserToken: token, */
+  stega: false,
 });

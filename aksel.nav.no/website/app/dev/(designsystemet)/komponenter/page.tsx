@@ -1,7 +1,7 @@
 /* import { client } from "@/app/_sanity/client"; */
+import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPageLayout";
 
 /* import { disableDraftMode, enableDraftMode } from "@/app/actions"; */
-import { DesignsystemetPageLayout } from "../PageLayout";
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page(/* {

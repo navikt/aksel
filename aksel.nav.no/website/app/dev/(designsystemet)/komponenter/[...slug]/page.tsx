@@ -1,10 +1,12 @@
+import { notFound } from "next/navigation";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { DesignsystemetPageLayout } from "../../PageLayout";
+import { DesignsystemetPage } from "../../_ui/DesignsystemetPage";
+import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPageLayout";
 import { validateDesignsystemSlug } from "../../slug";
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
@@ -17,7 +19,7 @@ export default async function Page({
 
   const parsedSlug = validateDesignsystemSlug(slug, "komponenter");
 
-  const [{ data: page }, { data: toc }] = await Promise.all([
+  const [{ data: page }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
       query: KOMPONENT_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
@@ -27,6 +29,10 @@ export default async function Page({
       params: { slug: parsedSlug },
     }),
   ]);
+
+  if (!page?._id) {
+    notFound();
+  }
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
@@ -38,11 +44,7 @@ export default async function Page({
         showChangelogLink
         toc={toc}
       />
-      <div
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={0}
-        style={{ background: "red", width: "100%", height: 50 }}
-      ></div>
+      <DesignsystemetPage data={page} />
     </DesignsystemetPageLayout>
   );
 }

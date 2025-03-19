@@ -1,6 +1,6 @@
-import styles from "./layout.module.css";
+import styles from "./Designsystemet.module.css";
 
-type DesignsystemetPageLayoutProps = {
+type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
   layout?: "with-toc";
 };
@@ -8,7 +8,7 @@ type DesignsystemetPageLayoutProps = {
 function DesignsystemetPageLayout({
   children,
   layout,
-}: DesignsystemetPageLayoutProps) {
+}: DesignsystemetPageLayoutT) {
   return (
     <main
       id="hovedinnhold"

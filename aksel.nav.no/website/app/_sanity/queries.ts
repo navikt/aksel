@@ -36,9 +36,7 @@ const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
 const KOMPONENT_BY_SLUG_QUERY =
   defineQuery(`*[_type == "komponent_artikkel" && slug.current == $slug][0]
   {
-    heading,
-    status,
-    hide_feedback,
+    ...,
     intro{
       ...,
       body[]{
