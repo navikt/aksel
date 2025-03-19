@@ -6,10 +6,8 @@ import {
   MobileIcon,
   MobileSmallIcon,
   MonitorIcon,
-  MoonIcon,
   PaletteIcon,
   SpaceHorizontalIcon,
-  SunIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
 import {
@@ -21,9 +19,6 @@ import {
   HGrid,
   HStack,
   Heading,
-  Search,
-  Select,
-  ToggleGroup,
   VStack,
 } from "@navikt/ds-react";
 import { tokens as tokenDocs } from "@navikt/ds-tokens/token_docs";
@@ -48,6 +43,7 @@ import { generateSidebar } from "@/utils";
 // import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
+import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
 
@@ -81,36 +77,6 @@ export const getStaticProps: GetStaticProps = async ({
     revalidate: 60,
     notFound: false,
   };
-};
-
-const SearchField = () => {
-  return <Search label="Søk etter token" hideLabel />;
-};
-
-const Toolbar = () => {
-  return (
-    <HStack as="nav" align="center" justify="space-between" marginBlock="0 4">
-      <div style={{ width: "19rem" }}>
-        <SearchField />
-      </div>
-      <HStack gap="2" width="">
-        <Select label="Velg bostedsland" hideLabel style={{ width: "9rem" }}>
-          <option value="css">CSS</option>
-          <option value="js">JS</option>
-        </Select>
-        <ToggleGroup defaultValue="light" onChange={console.info}>
-          <ToggleGroup.Item
-            value="light"
-            icon={<SunIcon title="Lys modus" />}
-          />
-          <ToggleGroup.Item
-            value="dark"
-            icon={<MoonIcon title="Mørk modus" />}
-          />
-        </ToggleGroup>
-      </HStack>
-    </HStack>
-  );
 };
 
 const ExampleContainer = ({
@@ -526,7 +492,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
       >
         <HGrid columns="auto 15rem" as="main" gap="10">
           <VStack gap="10">
-            <Toolbar />
+            <Toolbar onSearch={() => {}} />
             {categories.map((category) => (
               <Section
                 key={category}
