@@ -12,8 +12,24 @@
   min-height: calc(100vh - var(--website-header-height-width-border));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .pageLayout {
     grid-template-columns: 16rem 1fr;
+  }
+}
+
+.pageLayoutMain {
+  width: 100%;
+  margin: 0 auto;
+  padding-block: var(--ax-space-24);
+  padding-inline: var(--ax-space-40);
+  display: grid;
+  grid-template-columns: minmax(0, 1024px);
+  gap: var(--ax-space-40);
+}
+
+@media (min-width: 1280px) {
+  .pageLayoutMain[data-layout="with-toc"] {
+    grid-template-columns: minmax(0, 1024px) 1fr;
   }
 }
