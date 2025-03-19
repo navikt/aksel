@@ -1,3 +1,25 @@
+.tocAside {
+  /* sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block */
+
+  position: sticky;
+  top: var(--ax-space-20);
+  order: 1;
+  display: none;
+  min-width: 15rem;
+
+  @media (min-width: 1280px) {
+    display: block;
+  }
+}
+
+.tocAsideLabel {
+  padding-block: var(--ax-space-2);
+}
+
+.tocAsideContent {
+  position: relative;
+}
+
 /* Chrome, Safari and Opera */
 .hideScrollbar::-webkit-scrollbar {
   display: none;
@@ -33,7 +55,14 @@
   padding-inline: var(--a-spacing-2);
 }
 
-.menuList .menuList .menuListItem {
+.tocMenuUl {
+  max-height: 70dvh;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  padding-block: var(--ax-space-4);
+}
+
+.tocMenuUl .tocMenuUl .menuListItem {
   padding-inline-start: var(--a-spacing-5);
 }
 

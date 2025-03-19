@@ -30,9 +30,12 @@ export default async function Page({
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <div style={{ background: "red", width: "100%", height: 50 }}></div>
-
       <TableOfContents toc={toc} />
+      <div
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={0}
+        style={{ background: "red", width: "100%", height: 50 }}
+      ></div>
     </DesignsystemetPageLayout>
   );
 }

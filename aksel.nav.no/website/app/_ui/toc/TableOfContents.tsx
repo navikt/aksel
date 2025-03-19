@@ -2,7 +2,7 @@
 
 import cl from "clsx";
 import Link from "next/link";
-import { BodyShort, Label } from "@navikt/ds-react";
+import { BodyShort, Detail } from "@navikt/ds-react";
 import { removeEmojies } from "@/utils";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
@@ -30,34 +30,28 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
         : "var(--a-surface-default)",
   } as React.CSSProperties;
 
-  const isActive = (_id: string) => {
-    return _id === tocCtx.activeId;
-  };
-
   return (
-    <aside
-      className="sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block"
-      style={style}
-    >
-      <Label as="h2" size="small" textColor="subtle" className="py-05">
+    <aside className={styles.tocAside} style={style}>
+      <Detail
+        as="h2"
+        textColor="subtle"
+        weight="semibold"
+        className={styles.tocAsideLabel}
+      >
         Innhold på siden
-      </Label>
-      <div className="relative">
+      </Detail>
+      <div className={styles.tocAsideContent}>
         <TableOfContentsScroll />
 
         {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul
-          className={cl(
-            styles.menuList,
-            styles.hideScrollbar,
-            "max-h-[70vh] overflow-y-scroll overscroll-contain py-1",
-          )}
+          className={cl(styles.tocMenuUl, styles.hideScrollbar)}
           id="toc-scroll-wrapper"
           // biome-ignore lint/a11y/noRedundantRoles: WebKit browsers remove list semantics when list-style-type is none
           role="list"
         >
           {toc.map((node) => {
-            const _isActive = isActive(node.id);
+            const isActive = node.id === tocCtx.activeId;
             return (
               <li key={node.id} className="group">
                 <div
@@ -65,7 +59,7 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
                   id={`toc-${node.id}`}
                 >
                   <BodyShort
-                    data-current={_isActive}
+                    data-current={isActive}
                     size="small"
                     as={Link}
                     prefetch={false}
@@ -79,8 +73,8 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
                       "before:absolute before:-left-px before:top-05 before:h-[calc(100%-0.25rem)] before:rounded-r-sm before:transition-all group-first:before:top-0 group-first:before:h-[calc(100%-0.125rem)] group-last:before:h-[calc(100%-0.125rem)]",
                       {
                         "text-text-subtle before:w-0 before:bg-gray-400 before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
-                          !_isActive,
-                        "before:w-1": _isActive,
+                          !isActive,
+                        "before:w-1": isActive,
                       },
                     )}
                   >
