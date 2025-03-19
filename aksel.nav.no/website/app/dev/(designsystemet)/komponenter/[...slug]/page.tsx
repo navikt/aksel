@@ -3,6 +3,7 @@ import {
   /* KOMPONENT_BY_SLUG_QUERY, */
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetPageLayout } from "../../PageLayout";
 import { validateDesignsystemSlug } from "../../slug";
 
@@ -28,11 +29,10 @@ export default async function Page({
   ]);
 
   return (
-    <DesignsystemetPageLayout>
+    <DesignsystemetPageLayout layout="with-toc">
       <div style={{ background: "red", width: "100%", height: 50 }}></div>
-      <div style={{ background: "blue", width: "240px", height: 50 }}>
-        {JSON.stringify(toc)}
-      </div>
+
+      <TableOfContents toc={toc} />
     </DesignsystemetPageLayout>
   );
 }

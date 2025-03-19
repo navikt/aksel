@@ -55,8 +55,8 @@ const KOMPONENT_BY_SLUG_QUERY = defineQuery(`{
 
 const TOC_BY_SLUG_QUERY =
   defineQuery(`*[slug.current == $slug][0].content[style match 'h2'][]{
-  _key,
-  "text": pt::text(@)
+  "id": _key,
+  "title": pt::text(@)
 }`);
 
 export {
