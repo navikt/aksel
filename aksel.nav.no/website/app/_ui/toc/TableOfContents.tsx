@@ -1,8 +1,9 @@
 "use client";
 
 import cl from "clsx";
-import Link from "next/link";
-import { BodyShort, Detail } from "@navikt/ds-react";
+import NextLink from "next/link";
+import { ClockDashedIcon, LightBulbIcon } from "@navikt/aksel-icons";
+import { BodyShort, Detail, Link } from "@navikt/ds-react";
 import { removeEmojies } from "@/utils";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
@@ -11,9 +12,19 @@ import { TableOfContentsT, useTableOfContents } from "./useTableOfContents";
 type TableOfContentsProps = {
   toc: TableOfContentsT;
   variant?: "default" | "subtle";
+  showChangelogLink?: boolean;
+  feedback?: {
+    name?: string;
+    text: string;
+  };
 };
 
-function TableOfContents({ toc, variant = "default" }: TableOfContentsProps) {
+function TableOfContents({
+  toc,
+  variant = "default",
+  showChangelogLink,
+  feedback,
+}: TableOfContentsProps) {
   const tocCtx = useTableOfContents(toc);
 
   if (toc.length === 0) {
@@ -51,7 +62,7 @@ function TableOfContents({ toc, variant = "default" }: TableOfContentsProps) {
                 data-state={active ? "active" : "inactive"}
                 className={styles.tocNavListItem}
               >
-                <Link
+                <NextLink
                   id={`toc-${node.id}`}
                   prefetch={false}
                   href={`#${node.id}`}
@@ -64,13 +75,46 @@ function TableOfContents({ toc, variant = "default" }: TableOfContentsProps) {
                   data-umami-event-kilde="toc"
                 >
                   {removeEmojies(node.title).trim()}
-                </Link>
+                </NextLink>
               </BodyShort>
             );
           })}
         </ul>
       </div>
+      <TableOfContentsLinks
+        feedback={feedback}
+        showChangelogLink={showChangelogLink}
+      />
     </aside>
+  );
+}
+
+function TableOfContentsLinks({
+  feedback,
+  showChangelogLink,
+}: Pick<TableOfContentsProps, "showChangelogLink" | "feedback">) {
+  if ((!feedback || !feedback.name) && !showChangelogLink) {
+    return null;
+  }
+
+  return (
+    <div className={styles.tocAsideLinks}>
+      {feedback?.name && (
+        <Link
+          href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3C${feedback.name}%20/%3E`}
+          variant="neutral"
+        >
+          <LightBulbIcon fontSize="1.5rem" aria-hidden />
+          {`${feedback.text}`}
+        </Link>
+      )}
+      {showChangelogLink && (
+        <Link href="/grunnleggende/kode/endringslogg" variant="neutral">
+          <ClockDashedIcon fontSize="1.5rem" aria-hidden />
+          Endringslogg
+        </Link>
+      )}
+    </div>
   );
 }
 

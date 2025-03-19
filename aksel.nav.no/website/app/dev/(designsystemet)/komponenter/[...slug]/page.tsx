@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  /* KOMPONENT_BY_SLUG_QUERY, */
+  KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -17,11 +17,11 @@ export default async function Page({
 
   const parsedSlug = validateDesignsystemSlug(slug, "komponenter");
 
-  const [/* { data: page }, */ { data: toc }] = await Promise.all([
-    /* sanityFetch({
+  const [{ data: page }, { data: toc }] = await Promise.all([
+    sanityFetch({
       query: KOMPONENT_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
-    }), */
+    }),
     sanityFetch({
       query: TOC_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
@@ -31,18 +31,12 @@ export default async function Page({
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <TableOfContents
-        toc={[
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-          ...toc,
-        ]}
+        feedback={{
+          name: page.heading,
+          text: "Innspill til siden",
+        }}
+        showChangelogLink
+        toc={toc}
       />
       <div
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex

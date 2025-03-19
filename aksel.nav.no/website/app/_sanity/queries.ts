@@ -33,24 +33,23 @@ const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
   `*[_type in [${allArticleDocuments.map((x) => `"${x}"`)}]]${searchContent}`,
 );
 
-const KOMPONENT_BY_SLUG_QUERY = defineQuery(`{
-  "page": *[_type == "komponent_artikkel" && slug.current == $slug][0]
-    {
-      heading,
-      status,
-      hide_feedback,
-      intro{
+const KOMPONENT_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "komponent_artikkel" && slug.current == $slug][0]
+  {
+    heading,
+    status,
+    hide_feedback,
+    intro{
+      ...,
+      body[]{
         ...,
-        body[]{
-          ...,
-        ${destructureBlocks}
-        }
-      },
-      content[]{
-        ...,
-        ${destructureBlocks}
-      },
-  },
+      ${destructureBlocks}
+      }
+    },
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
 }`);
 
 const TOC_BY_SLUG_QUERY =

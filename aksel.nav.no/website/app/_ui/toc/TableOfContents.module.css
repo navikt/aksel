@@ -121,3 +121,13 @@
     z-index: 1;
   }
 }
+
+.tocAsideLinks {
+  margin-block-start: var(--ax-space-16);
+  padding-block-start: var(--ax-space-16);
+  padding-inline: var(--ax-space-8);
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-4);
+}
