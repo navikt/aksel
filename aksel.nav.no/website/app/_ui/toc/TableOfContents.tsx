@@ -4,13 +4,14 @@ import cl from "clsx";
 import NextLink from "next/link";
 import { ClockDashedIcon, LightBulbIcon } from "@navikt/aksel-icons";
 import { BodyShort, Detail, Link } from "@navikt/ds-react";
+import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { removeEmojies } from "@/utils";
 import styles from "./TableOfContents.module.css";
 import { TableOfContentsScroll } from "./TableOfContents.scroll";
-import { TableOfContentsT, useTableOfContents } from "./useTableOfContents";
+import { useTableOfContents } from "./useTableOfContents";
 
 type TableOfContentsProps = {
-  toc: TableOfContentsT;
+  toc: TOC_BY_SLUG_QUERYResult;
   variant?: "default" | "subtle";
   showChangelogLink?: boolean;
   feedback?: {
@@ -25,9 +26,9 @@ function TableOfContents({
   showChangelogLink,
   feedback,
 }: TableOfContentsProps) {
-  const tocCtx = useTableOfContents(toc);
+  const tocCtx = useTableOfContents(toc ?? []);
 
-  if (toc.length === 0) {
+  if (!toc || toc.length === 0) {
     return null;
   }
 

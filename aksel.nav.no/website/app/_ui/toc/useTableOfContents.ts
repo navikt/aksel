@@ -2,13 +2,9 @@
 
 import throttle from "lodash/throttle";
 import { useEffect, useRef, useState } from "react";
+import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 
-type TableOfContentsT = {
-  title: string;
-  id: string;
-}[];
-
-function useTableOfContents(toc: TableOfContentsT) {
+function useTableOfContents(toc: NonNullable<TOC_BY_SLUG_QUERYResult>) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const tempDisableScroll = useRef(false);
@@ -91,4 +87,3 @@ function isVisible(ele: HTMLElement | null, container: HTMLElement | null) {
 }
 
 export { useTableOfContents };
-export type { TableOfContentsT };

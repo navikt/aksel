@@ -93,6 +93,13 @@ module.exports = {
       },
     },
     {
+      files: ["**/app/**/query-types.ts"],
+      extends: ["plugin:@typescript-eslint/recommended"],
+      rules: {
+        "@typescript-eslint/array-type": "off",
+      },
+    },
+    {
       files: ["**/*.test.*", "**/__tests__/*"],
       plugins: ["@vitest"],
       extends: [
