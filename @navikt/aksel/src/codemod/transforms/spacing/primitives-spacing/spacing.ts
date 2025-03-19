@@ -1,11 +1,11 @@
 import type { API, FileInfo } from "jscodeshift";
-import { getLineTerminator } from "../../../utils/lineterminator";
 import {
   findComponentImport,
   findJSXElement,
   findProp,
-  legacySpacingTokenMap,
-} from "../spacing.utils";
+} from "../../../utils/ast";
+import { getLineTerminator } from "../../../utils/lineterminator";
+import { legacySpacingTokenMap } from "../spacing.utils";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;

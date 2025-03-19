@@ -117,6 +117,13 @@ export const migrations: {
       path: "spacing/token-spacing-js/spacing",
     },
   ],
+  darkside: [
+    {
+      description: "marks deprecated prop usage with comments.",
+      value: "prop-deprecate",
+      path: "darkside/prop-deprecate/prop-deprecate",
+    },
+  ],
 };
 
 export function getMigrationPath(str: string) {

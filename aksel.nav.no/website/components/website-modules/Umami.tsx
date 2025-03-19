@@ -27,6 +27,7 @@ export const Umami = () => {
       data-host-url="https://umami.nav.no"
       data-website-id={trackingId}
       data-tag={umamiTag}
+      data-exclude-search="true"
     />
   );
 };

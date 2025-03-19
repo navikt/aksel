@@ -145,6 +145,7 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
 }
 
 export type SidebarInputNodeT = {
+  _type: string;
   heading: string;
   slug: string;
   kategori: string;

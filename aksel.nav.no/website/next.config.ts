@@ -3,19 +3,24 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const cdnUrl = "https://cdn.nav.no";
-const hotjarUrl = "https://*.hotjar.com";
 const dekoratorUrl = "https://www.nav.no";
+const tempChromaticRedirect =
+  "https://main--66b4b3beb91603ed0ab5c45e.chromatic.com";
 
-const ContentSecurityPolicy = `
-  default-src 'self' 'unsafe-inline' ${cdnUrl};
-  font-src 'self' ${cdnUrl} ${hotjarUrl} data:;
-  img-src 'self' cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl} ${hotjarUrl};
-  script-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://in2.taskanalytics.com/tm.js 'nonce-4e1aa203a32e' 'unsafe-eval';
-  style-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} 'unsafe-inline';
-  connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${hotjarUrl} https://*.hotjar.io wss://*.hotjar.com https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://in2.taskanalytics.com/03346 https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
-  frame-ancestors 'self' localhost:3000;
-  media-src 'self' ${cdnUrl} cdn.sanity.io;
-  frame-src 'self' https://web.microsoftstream.com localhost:3000 https://aksel.ansatt.dev.nav.no;
+const cspHeader = `
+    default-src 'self' 'unsafe-inline' ${cdnUrl};
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
+    font-src 'self' ${cdnUrl} data:;
+    style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'self' localhost:3000;
+    frame-src 'self' localhost:3000 https://aksel.ansatt.dev.nav.no;
+    media-src 'self' ${cdnUrl} cdn.sanity.io;
+    upgrade-insecure-requests;
+    img-src 'self' blob: data: cdn.sanity.io ${dekoratorUrl} https://avatars.githubusercontent.com data: ${cdnUrl};
+    connect-src 'self' ${dekoratorUrl} ${cdnUrl} ${tempChromaticRedirect} https://raw.githubusercontent.com/navikt/ https://hnbe3yhs.apicdn.sanity.io wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://umami.nav.no https://main--66b4b3beb91603ed0ab5c45e.chromatic.com;
 `;
 
 const securityHeaders = [
@@ -45,7 +50,7 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
+    value: cspHeader.replace(/\n/g, ""),
   },
 ];
 
