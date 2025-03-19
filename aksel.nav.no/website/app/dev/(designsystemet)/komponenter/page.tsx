@@ -1,5 +1,7 @@
 /* import { client } from "@/app/_sanity/client"; */
+
 /* import { disableDraftMode, enableDraftMode } from "@/app/actions"; */
+import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 
 export default async function Page() {
   /* const data = await client.fetch(
@@ -16,6 +18,7 @@ export default async function Page() {
 
       <pre>{data}</pre> */}
       DEV
+      <CodeBlock />
     </div>
   );
 }
