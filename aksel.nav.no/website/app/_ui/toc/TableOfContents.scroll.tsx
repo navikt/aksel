@@ -46,12 +46,12 @@ function TableOfContentsScroll() {
       <div
         style={{ opacity: scrollBlock.start }}
         aria-hidden
-        className={cl(styles.shadow, styles.shadowTop)}
+        className={cl(styles.tocShadow, styles.tocShadowTop)}
       />
       <div
         style={{ opacity: scrollBlock.end }}
         aria-hidden
-        className={cl(styles.shadow, styles.shadowBottom)}
+        className={cl(styles.tocShadow, styles.tocShadowBottom)}
       />
     </>
   );

@@ -1,11 +1,18 @@
 .tocAside {
   /* sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block */
-
   position: sticky;
   top: var(--ax-space-20);
   order: 1;
   display: none;
-  min-width: 15rem;
+  min-width: 12.5rem;
+
+  &[data-variant="subtle"] {
+    --aksel-toc-fade-shadow-color: var(--ax-bg-neutral-softA);
+  }
+
+  &[data-variant="default"] {
+    --aksel-toc-fade-shadow-color: var(--ax-bg-default);
+  }
 
   @media (min-width: 1280px) {
     display: block;
@@ -14,6 +21,7 @@
 
 .tocAsideLabel {
   padding-block: var(--ax-space-2);
+  padding-inline: var(--ax-space-8);
 }
 
 .tocAsideContent {
@@ -31,7 +39,7 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.shadow {
+.tocShadow {
   position: absolute;
   z-index: 100;
   width: 100%;
@@ -39,41 +47,77 @@
   pointer-events: none;
 }
 
-.shadowTop {
+.tocShadowTop {
   top: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(180deg, var(--shadow-color), transparent);
+  background: linear-gradient(180deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 
-.shadowBottom {
+.tocShadowBottom {
   bottom: 0;
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
-  background: linear-gradient(0deg, var(--shadow-color), transparent);
-}
-
-.menuListItem {
-  padding-inline: var(--a-spacing-2);
+  background: linear-gradient(0deg, var(--aksel-toc-fade-shadow-color), transparent);
 }
 
 .tocMenuUl {
-  max-height: 70dvh;
+  max-height: 60dvh;
   overflow-y: scroll;
   overscroll-behavior: contain;
   padding-block: var(--ax-space-4);
+  padding-inline: var(--ax-space-8);
 }
 
-.tocMenuUl .tocMenuUl .menuListItem {
-  padding-inline-start: var(--a-spacing-5);
+.tocNavListNotch {
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: var(--ax-bg-neutral-strong-pressed);
+    width: 3px;
+    height: calc(100% - 8px);
+    left: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: var(--ax-border-radius-full);
+  }
+
+  [data-type="darkside"] &::before {
+    background-color: var(--ax-bg-brand-magenta-strong-pressed);
+  }
 }
 
-.menuListItem[data-current="true"] {
-  color: var(--a-text-default);
+.tocNavListItem {
+  position: relative;
+  min-height: 1.75rem;
 }
 
-.menuListItem[data-current="true"] > span {
-  background-color: var(--a-surface-neutral-subtle);
-}
+.tocNavListItemLink {
+  border-radius: var(--ax-border-radius-medium);
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--ax-space-6);
+  padding-inline: var(--ax-space-8);
+  color: var(--ax-text-neutral);
+  scroll-margin-block: 5rem;
 
-.menuListItem[data-current="true"]::before {
-  background-color: var(--a-gray-700);
+  [data-state="active"] & {
+    font-weight: var(--ax-font-weight-bold);
+    background-color: var(--ax-bg-neutral-moderate-pressedA);
+    color: var(--ax-text-neutral);
+  }
+
+  [data-state="active"]:hover & {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  [data-state="inactive"]:hover & {
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 0;
+    z-index: 1;
+  }
 }

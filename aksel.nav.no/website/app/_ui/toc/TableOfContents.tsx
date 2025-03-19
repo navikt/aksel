@@ -13,25 +13,15 @@ type TableOfContentsProps = {
   variant?: "default" | "subtle";
 };
 
-function TableOfContents({ toc, variant }: TableOfContentsProps) {
+function TableOfContents({ toc, variant = "default" }: TableOfContentsProps) {
   const tocCtx = useTableOfContents(toc);
 
   if (toc.length === 0) {
     return null;
   }
 
-  /**
-   * We have to add this to account for different backgrounds for god-praksis and komponent-pages
-   */
-  const style = {
-    "--shadow-color":
-      variant === "subtle"
-        ? "var(--a-surface-subtle)"
-        : "var(--a-surface-default)",
-  } as React.CSSProperties;
-
   return (
-    <aside className={styles.tocAside} style={style}>
+    <aside className={styles.tocAside} data-variant={variant}>
       <Detail
         as="h2"
         textColor="subtle"
@@ -51,39 +41,31 @@ function TableOfContents({ toc, variant }: TableOfContentsProps) {
           role="list"
         >
           {toc.map((node) => {
-            const isActive = node.id === tocCtx.activeId;
+            const active = node.id === tocCtx.activeId;
+
             return (
-              <li key={node.id} className="group">
-                <div
-                  className="relative scroll-m-6 border-l border-border-subtle"
+              <BodyShort
+                key={node.id}
+                as="li"
+                size="small"
+                data-state={active ? "active" : "inactive"}
+                className={styles.tocNavListItem}
+              >
+                <Link
                   id={`toc-${node.id}`}
+                  prefetch={false}
+                  href={`#${node.id}`}
+                  onClick={() => tocCtx.setActiveId(node.id)}
+                  className={cl(styles.tocNavListItemLink, {
+                    [styles.tocNavListNotch]: active,
+                  })}
+                  data-current={active}
+                  data-umami-event="navigere"
+                  data-umami-event-kilde="toc"
                 >
-                  <BodyShort
-                    data-current={isActive}
-                    size="small"
-                    as={Link}
-                    prefetch={false}
-                    href={`#${node.id}`}
-                    onClick={() => tocCtx.setActiveId(node.id)}
-                    data-umami-event="navigere"
-                    data-umami-event-kilde="toc"
-                    className={cl(
-                      styles.menuListItem,
-                      "flex py-05 focus:outline-none *:focus-visible:shadow-focus group-first:pt-0 group-last:last:pb-0",
-                      "before:absolute before:-left-px before:top-05 before:h-[calc(100%-0.25rem)] before:rounded-r-sm before:transition-all group-first:before:top-0 group-first:before:h-[calc(100%-0.125rem)] group-last:before:h-[calc(100%-0.125rem)]",
-                      {
-                        "text-text-subtle before:w-0 before:bg-gray-400 before:duration-100 before:ease-linear hover:text-text-default hover:before:w-1":
-                          !isActive,
-                        "before:w-1": isActive,
-                      },
-                    )}
-                  >
-                    <span className="w-full rounded px-2 py-1 transition-colors duration-100 ease-out">
-                      {removeEmojies(node.title).trim()}
-                    </span>
-                  </BodyShort>
-                </div>
-              </li>
+                  {removeEmojies(node.title).trim()}
+                </Link>
+              </BodyShort>
             );
           })}
         </ul>

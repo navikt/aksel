@@ -30,7 +30,20 @@ export default async function Page({
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <TableOfContents toc={toc} />
+      <TableOfContents
+        toc={[
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+          ...toc,
+        ]}
+      />
       <div
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
