@@ -439,6 +439,18 @@ const Section = ({
 };
 
 const Page = ({ page, sidebar }: PageProps["props"]) => {
+  const [searchData, setSearchData] = React.useState<{
+    query: string;
+    tokenType: "css" | "js";
+  }>({
+    query: "",
+    tokenType: "css",
+  });
+  const filteredTokens = tokenDocs.filter((token) => {
+    const stringifiedToken = JSON.stringify(token);
+    const searchQuery = searchData.query.toLowerCase();
+    return stringifiedToken.includes(searchQuery);
+  });
   const addedCategories = [
     "backgroundColor",
     "borderColor",
@@ -449,7 +461,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     "font",
     "breakpoint",
   ];
-  const tokensWithCategoryAndRole = tokenDocs.filter((token) =>
+  const tokensWithCategoryAndRole = filteredTokens.filter((token) =>
     addedCategories.includes(token.category),
   );
 
@@ -492,7 +504,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
       >
         <HGrid columns="auto 15rem" as="main" gap="10">
           <VStack gap="10">
-            <Toolbar onSearch={() => {}} />
+            <Toolbar onSearch={setSearchData} />
             {categories.map((category) => (
               <Section
                 key={category}
