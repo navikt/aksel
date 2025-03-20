@@ -1,11 +1,8 @@
 "use server";
 
+import { DESIGNSYSTEM_SIDEBAR_QUERYResult } from "@/app/_sanity/query-types";
 import { sanityCategoryLookup } from "@/sanity/config";
-import {
-  DesignsystemSidebarSectionT,
-  SidebarInputNodeT,
-  SidebarPageT,
-} from "@/types";
+import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
 const pageTypes = {
   grunnleggende: { name: "Grunnleggende", _type: "ds_artikkel" },
@@ -18,7 +15,9 @@ type DesignsystemSidebarDataT = {
   links: DesignsystemSidebarSectionT;
 }[];
 
-function generateSidebar(input: SidebarInputNodeT[]): DesignsystemSidebarDataT {
+function generateSidebar(
+  input: DESIGNSYSTEM_SIDEBAR_QUERYResult,
+): DesignsystemSidebarDataT {
   return Object.keys(pageTypes).map((type) => {
     const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
     const filteredInput = input.filter(
@@ -26,9 +25,10 @@ function generateSidebar(input: SidebarInputNodeT[]): DesignsystemSidebarDataT {
     );
 
     const standalonePages: SidebarPageT[] = filteredInput
+      .filter(isValidPage)
       .filter((page) => page.kategori === "standalone")
       .sort((a, b) => {
-        return a?.heading.localeCompare(b?.heading);
+        return (a?.heading ?? "").localeCompare(b?.heading ?? "");
       })
       .sort(sortIndex)
       .sort(sortDeprecated)
@@ -43,8 +43,9 @@ function generateSidebar(input: SidebarInputNodeT[]): DesignsystemSidebarDataT {
         ...x,
         pages: filteredInput
           .filter((y) => y?.kategori === x.value)
+          .filter(isValidPage)
           .sort((a, b) => {
-            return a?.heading.localeCompare(b?.heading);
+            return (a?.heading ?? "").localeCompare(b?.heading ?? "");
           })
           .sort(sortIndex)
           .sort(sortDeprecated),
@@ -64,6 +65,16 @@ function generateSidebar(input: SidebarInputNodeT[]): DesignsystemSidebarDataT {
       links: [...standalonePages, ...groupedPages],
     };
   });
+}
+
+type SidebarInputNodeT = DESIGNSYSTEM_SIDEBAR_QUERYResult[number];
+
+function isValidPage(page: SidebarInputNodeT): page is SidebarInputNodeT & {
+  heading: string;
+  slug: string;
+  tag: string;
+} {
+  return !!(page?.heading && page?.slug && page?.tag);
 }
 
 function sortDeprecated(a: SidebarInputNodeT, b: SidebarInputNodeT) {

@@ -103,3 +103,5 @@ function authStore(): AuthConfig {
     ],
   };
 }
+
+export default workspaceConfig;
