@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
-import { LineHeightIcon, SpaceHorizontalIcon } from "@navikt/aksel-icons";
+import { LineHeightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
@@ -38,6 +38,7 @@ import BreakpointToken from "../../components/token-docs/token/example/Breakpoin
 import ColorToken from "../../components/token-docs/token/example/ColorToken";
 import RadiusToken from "../../components/token-docs/token/example/RadiusToken";
 import ShadowToken from "../../components/token-docs/token/example/ShadowToken";
+import SpaceToken from "../../components/token-docs/token/example/SpaceToken";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
@@ -135,16 +136,6 @@ const FontToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
     </VStack>
   );
 };
-
-const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <VStack as="div" align="center" justify="center" height="100%">
-    <SpaceHorizontalIcon
-      title={token.name}
-      color={token.value}
-      fontSize="1.5rem"
-    />
-  </VStack>
-);
 
 const TokenExample = ({ token }: { token: any }) => {
   switch (token.category) {
