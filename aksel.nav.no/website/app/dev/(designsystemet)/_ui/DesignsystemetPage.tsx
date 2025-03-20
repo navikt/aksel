@@ -1,5 +1,7 @@
+import { PortableTextBlock } from "next-sanity";
 import { Heading } from "@navikt/ds-react";
 import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import styles from "./Designsystemet.module.css";
 
 type DesignsystemetPageLayoutT = {
@@ -32,7 +34,13 @@ function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       <Heading level="1" size="xlarge" className={styles.pageHeaderHeading}>
         {data?.heading}
       </Heading>
-      {/* <BodyShort size="large">{        data?.intro?.body}123</BodyShort> */}
+      <CustomPortableText
+        value={data?.intro?.body as PortableTextBlock[]}
+        typoConfig={{
+          type: "short",
+          size: "large",
+        }}
+      />
     </div>
   );
 }
