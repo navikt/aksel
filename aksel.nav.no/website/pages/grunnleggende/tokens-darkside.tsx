@@ -43,6 +43,7 @@ import { generateSidebar } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import ColorToken from "../../components/token-docs/token/example/ColorToken";
+import ShadowToken from "../../components/token-docs/token/example/ShadowToken";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
@@ -147,19 +148,6 @@ const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
       title={token.name}
       color={token.value}
       fontSize="1.5rem"
-    />
-  </VStack>
-);
-
-const ShadowToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <VStack as="div" align="center" justify="center" height="100%">
-    <Box
-      borderRadius="medium"
-      borderWidth="1"
-      borderColor="border-subtle"
-      width="32px"
-      height="32px"
-      style={{ boxShadow: token.value }}
     />
   </VStack>
 );
