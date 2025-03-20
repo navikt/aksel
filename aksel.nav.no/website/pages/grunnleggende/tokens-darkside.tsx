@@ -1,14 +1,6 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
-import {
-  LaptopIcon,
-  LineHeightIcon,
-  MobileIcon,
-  MobileSmallIcon,
-  MonitorIcon,
-  SpaceHorizontalIcon,
-  TabletIcon,
-} from "@navikt/aksel-icons";
+import { LineHeightIcon, SpaceHorizontalIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
@@ -42,6 +34,7 @@ import { generateSidebar } from "@/utils";
 // import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
+import BreakpointToken from "../../components/token-docs/token/example/BreakpointToken";
 import ColorToken from "../../components/token-docs/token/example/ColorToken";
 import ShadowToken from "../../components/token-docs/token/example/ShadowToken";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
@@ -165,24 +158,6 @@ const RadiusToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
     />
   </VStack>
 );
-
-const BreakpointToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
-  switch (token.modifier.split("-")[0]) {
-    case "xs":
-      return <MobileSmallIcon width="32px" height="32px" title={token.name} />;
-    case "sm":
-      return <MobileIcon width="32px" height="32px" title={token.name} />;
-    case "md":
-      return <TabletIcon width="32px" height="32px" title={token.name} />;
-    case "lg":
-      return <LaptopIcon width="32px" height="32px" title={token.name} />;
-    case "xl":
-    case "2xl":
-      return <MonitorIcon width="32px" height="32px" title={token.name} />;
-    default:
-      return "";
-  }
-};
 
 const TokenExample = ({ token }: { token: any }) => {
   switch (token.category) {
