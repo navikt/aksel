@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyLong, Chips, Heading, VStack } from "@navikt/ds-react";
 import { TOKEN_CATEGORIES } from "./config";
+import { sortTokens } from "./token-utils";
 import TokenEntry from "./token/example/TokenEntry";
 
 const TokenCategory = ({
@@ -19,42 +20,7 @@ const TokenCategory = ({
       (role, index, array) => array.findIndex((r) => r === role) === index,
     )
     .sort();
-  const sortedTokens = tokens.sort((a, b) => {
-    switch (a.category) {
-      case "backgroundColor":
-      case "borderColor":
-      case "textColor": {
-        if ((a.role || "") > (b.role || "")) {
-          return 1;
-        } else if ((a.role || "") < (b.role || "")) {
-          return -1;
-        }
-        return 0;
-      }
-      case "breakpoint":
-        return (
-          parseFloat(a.value.replace("px", "")) -
-          parseFloat(b.value.replace("px", ""))
-        );
-      case "font": {
-        if (a.group === b.group) {
-          if (a.modifier === b.modifier) {
-            return (
-              parseFloat(a.rawValue.replace("rem", "")) -
-              parseFloat(b.rawValue.replace("rem", ""))
-            );
-          }
-          return (a.modifier || "").localeCompare(b.modifier || "", "nb") || -1;
-        }
-        return (a.group || "").localeCompare(b.group || "", "nb");
-      }
-      default:
-        return parseFloat(a.rawValue.replace("px", "")) >
-          parseFloat(b.rawValue.replace("px", ""))
-          ? 1
-          : -1;
-    }
-  });
+  const sortedTokens = tokens.sort(sortTokens);
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
     <section>
