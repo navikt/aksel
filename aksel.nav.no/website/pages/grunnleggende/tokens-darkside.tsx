@@ -12,10 +12,6 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { tokens as tokenDocs } from "@navikt/ds-tokens/token_docs";
-import {
-  LegacyBgColorKeys,
-  LegacySurfaceColorKeys,
-} from "@navikt/ds-tokens/types";
 // import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
@@ -75,26 +71,6 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-const ExampleContainer = ({
-  background,
-  children,
-}: {
-  background?: LegacyBgColorKeys | LegacySurfaceColorKeys;
-  children: React.ReactElement;
-}) => (
-  <Box
-    background={background}
-    padding="3"
-    borderColor="border-subtle"
-    borderRadius="medium"
-    borderWidth="1"
-    height="58px"
-    width="58px"
-  >
-    {children}
-  </Box>
-);
-
 const TokenExample = ({ token }: { token: any }) => {
   switch (token.category) {
     case "backgroundColor":
@@ -129,6 +105,24 @@ const TokenExample = ({ token }: { token: any }) => {
   }
 };
 
+const TokenPreview = ({ token }: { token: any }) => (
+  <Box
+    background={
+      token.category === "textColor" && token.modifier === "contrast"
+        ? "surface-neutral"
+        : undefined
+    }
+    padding="3"
+    borderColor="border-subtle"
+    borderRadius="medium"
+    borderWidth="1"
+    height="58px"
+    width="58px"
+  >
+    <TokenExample token={token} />
+  </Box>
+);
+
 const Variant = ({ index, token }: { index: number; token: any }) => {
   const tokenText = `--ax-${token.name}`;
   return (
@@ -139,15 +133,7 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
       paddingInline="2"
     >
       <HStack gap="3">
-        <ExampleContainer
-          background={
-            token.category === "textColor" && token.modifier === "contrast"
-              ? "surface-neutral"
-              : undefined
-          }
-        >
-          <TokenExample token={token} />
-        </ExampleContainer>
+        <TokenPreview token={token} />
         <VStack align="start" gap="2">
           <VStack align="start">
             <CopyButton
