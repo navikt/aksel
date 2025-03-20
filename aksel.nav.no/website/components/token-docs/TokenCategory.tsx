@@ -1,5 +1,6 @@
 import React from "react";
-import { BodyLong, Chips, Heading, VStack } from "@navikt/ds-react";
+import { BodyLong, Heading, VStack } from "@navikt/ds-react";
+import TokenRolesChips from "./TokenRolesChips";
 import { TOKEN_CATEGORIES } from "./config";
 import { sortTokens } from "./token-utils";
 import TokenEntry from "./token/example/TokenEntry";
@@ -30,27 +31,11 @@ const TokenCategory = ({
       <div>
         <VStack gap="4">
           <BodyLong as="p">{description}</BodyLong>
-          {roles.length > 0 && (
-            <Chips>
-              {roles.map((role) => (
-                <Chips.Toggle
-                  checkmark={false}
-                  key={role}
-                  selected={selectedRole === role}
-                  onClick={() =>
-                    selectedRole !== role
-                      ? setSelectedRole(role)
-                      : setSelectedRole(null)
-                  }
-                >
-                  {role
-                    .split("-")
-                    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-                    .join(" ")}
-                </Chips.Toggle>
-              ))}
-            </Chips>
-          )}
+          <TokenRolesChips
+            roles={roles}
+            selectedRole={selectedRole}
+            setSelectedRole={setSelectedRole}
+          />
           <div>
             {sortedTokens
               .filter(
