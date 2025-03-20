@@ -12,13 +12,18 @@ export const BloggList = ({
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
 }) => {
   const date = useFormatedDate(blogg?.publishedAt ?? blogg._createdAt);
+
+  const imageUrl = urlFor(blogg?.seo?.image)
+    ?.auto("format")
+    .url();
+
   return (
     <li>
       <div className="hidden gap-6 md:flex">
         <div className="relative hidden aspect-square h-[11.75rem] rounded-lg ring-1 ring-border-subtle lg:block">
-          {blogg?.seo?.image ? (
+          {imageUrl ? (
             <Image
-              src={urlFor(blogg.seo.image).auto("format").url()}
+              src={imageUrl}
               layout="fill"
               objectFit="cover"
               aria-hidden

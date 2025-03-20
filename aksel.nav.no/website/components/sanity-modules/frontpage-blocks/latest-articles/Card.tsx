@@ -44,6 +44,68 @@ const Card = ({ article, visible, index }: CardProps) => {
     "templates_artikkel",
   ].includes(article._type);
 
+  const statusImageUrl = urlFor(article.status?.bilde)
+    ?.auto("format")
+    .url();
+
+  const statusImageBlurUrl = urlFor(article.status?.bilde)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
+  const fallbackImageUrl = urlFor(article.seo?.image)
+    ?.auto("format")
+    .url();
+
+  const fallbackImageBlurUrl = urlFor(article.seo?.image)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
+  let Image = (
+    <div className="relative h-[200px] w-full">
+      <NextImage
+        layout="fill"
+        objectFit="cover"
+        src={getImage(article?.heading ?? "", "thumbnail")}
+        alt={article.heading + " thumbnail"}
+        aria-hidden
+        className="rounded-t-lg"
+      />
+    </div>
+  );
+
+  if (statusImageUrl) {
+    Image = (
+      <NextImage
+        src={statusImageUrl}
+        blurDataURL={statusImageBlurUrl}
+        placeholder="blur"
+        width="200"
+        height="200"
+        alt={article.heading + " thumbnail"}
+        aria-hidden
+      />
+    );
+  } else if (fallbackImageUrl) {
+    Image = (
+      <div className="relative h-[200px] w-full">
+        <NextImage
+          src={fallbackImageUrl}
+          blurDataURL={fallbackImageBlurUrl}
+          placeholder="blur"
+          layout="fill"
+          objectFit="cover"
+          alt={article.heading + " thumbnail"}
+          aria-hidden
+          className="rounded-t-lg"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cl(
@@ -67,53 +129,7 @@ const Card = ({ article, visible, index }: CardProps) => {
             },
           )}
         >
-          {article.status?.bilde ?? article.seo?.image ? (
-            article.status?.bilde ? (
-              <NextImage
-                src={urlFor(article.status.bilde).auto("format").url()}
-                blurDataURL={urlFor(article.status.bilde)
-                  .width(24)
-                  .height(24)
-                  .blur(10)
-                  .url()}
-                placeholder="blur"
-                width="200"
-                height="200"
-                alt={article.heading + " thumbnail"}
-                aria-hidden
-              />
-            ) : (
-              <div className="relative h-[200px] w-full">
-                <NextImage
-                  src={urlFor(article.seo?.image)
-                    .auto("format")
-                    .url()}
-                  blurDataURL={urlFor(article.seo?.image)
-                    .width(24)
-                    .height(24)
-                    .blur(10)
-                    .url()}
-                  placeholder="blur"
-                  layout="fill"
-                  objectFit="cover"
-                  alt={article.heading + " thumbnail"}
-                  aria-hidden
-                  className="rounded-t-lg"
-                />
-              </div>
-            )
-          ) : (
-            <div className="relative h-[200px] w-full">
-              <NextImage
-                layout="fill"
-                objectFit="cover"
-                src={getImage(article?.heading ?? "", "thumbnail")}
-                alt={article.heading + " thumbnail"}
-                aria-hidden
-                className="rounded-t-lg"
-              />
-            </div>
-          )}
+          {Image}
         </div>
       )}
       <div className={cl("p-3 sm:p-5", showFooter && "pb-16 sm:pb-16")}>

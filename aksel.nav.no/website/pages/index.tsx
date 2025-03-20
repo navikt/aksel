@@ -113,8 +113,7 @@ const pageDataQuery = groq`*[_type == "aksel_forside"][0]{
 }.page`;
 
 const temaQuery = groq`*[_type == "aksel_forside"][0]{
-  "tema": *[_type == "gp.tema" && count(*[_type=="aksel_artikkel"
-      && (^._id in undertema[]->tema._ref)]) > 0] | order(lower(title))
+  "tema": *[_type == "gp.tema"] | order(lower(title))
       }.tema`;
 
 export const getServerSideProps: GetServerSideProps = async (

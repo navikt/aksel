@@ -154,6 +154,13 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       : undefined,
   };
 
+  const imageOneUrl = urlFor(node.image_1.asset)?.auto("format").url();
+  const imageTwoUrl = urlFor(node.image_2.asset)?.auto("format").url();
+
+  if (!imageOneUrl || !imageTwoUrl) {
+    return null;
+  }
+
   return (
     <figure className="m-0 mb-8 flex flex-col group-[.aksel-artikkel]/aksel:mx-auto">
       <div
@@ -170,14 +177,14 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       >
         <CompareItem order="1">
           <img
-            src={urlFor(node.image_1.asset).auto("format").url()}
+            src={imageOneUrl}
             alt={node.image_1.alt}
             className="object-cover object-center"
           />
         </CompareItem>
         <CompareItem order="2">
           <img
-            src={urlFor(node.image_2.asset).auto("format").url()}
+            src={imageTwoUrl}
             alt={node.image_2.alt}
             className="object-cover object-center"
           />

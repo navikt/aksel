@@ -18,6 +18,7 @@ type GpHeroCardProps = {
 
 const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
   ({ href, articleCount, children, image, compact = false, ...rest }, ref) => {
+    const imageUrl = urlFor(image)?.auto("format").url();
     return (
       <Link
         ref={ref}
@@ -37,9 +38,9 @@ const GpHeroCard = forwardRef<HTMLAnchorElement, GpHeroCardProps>(
             "md:size-12": !compact,
           })}
         >
-          {image ? (
+          {imageUrl ? (
             <Image
-              src={urlFor(image).auto("format").url()}
+              src={imageUrl}
               decoding="sync"
               layout="fill"
               objectFit="contain"
