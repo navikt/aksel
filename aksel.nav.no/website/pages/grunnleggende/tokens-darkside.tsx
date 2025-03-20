@@ -36,6 +36,7 @@ import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import BreakpointToken from "../../components/token-docs/token/example/BreakpointToken";
 import ColorToken from "../../components/token-docs/token/example/ColorToken";
+import RadiusToken from "../../components/token-docs/token/example/RadiusToken";
 import ShadowToken from "../../components/token-docs/token/example/ShadowToken";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
@@ -141,20 +142,6 @@ const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
       title={token.name}
       color={token.value}
       fontSize="1.5rem"
-    />
-  </VStack>
-);
-
-const RadiusToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
-  <VStack as="div" align="center" justify="center" height="100%">
-    <Box
-      as="div"
-      width="32px"
-      height="32px"
-      background="surface-neutral"
-      style={{
-        borderRadius: token.value,
-      }}
     />
   </VStack>
 );
