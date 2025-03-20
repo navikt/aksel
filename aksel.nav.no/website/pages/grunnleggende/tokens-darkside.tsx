@@ -29,6 +29,7 @@ import { generateSidebar } from "@/utils";
 // import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
+import { TOKEN_CATEGORIES } from "../../components/token-docs/config";
 import TokenPreview from "../../components/token-docs/token/example/TokenPreview";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
@@ -99,17 +100,6 @@ const Variant = ({ index, token }: { index: number; token: any }) => {
   );
 };
 
-const Categories = {
-  backgroundColor: "Background colors",
-  borderColor: "Border colors",
-  textColor: "Text colors",
-  shadow: "Shadows",
-  space: "Spacing",
-  radius: "Radius",
-  font: "Fonts",
-  breakpoint: "Breakpoints",
-};
-
 const Section = ({
   category,
   description = "Lorem ipsum",
@@ -166,7 +156,7 @@ const Section = ({
   return (
     <section>
       <Heading id={category} level="2" size="large" spacing>
-        {Categories[category]}
+        {TOKEN_CATEGORIES[category]}
       </Heading>
       <div>
         <VStack gap="4">
@@ -241,7 +231,7 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     )
     .sort((a, b) => addedCategories.indexOf(a) - addedCategories.indexOf(b));
   const toc = categories.map((category) => ({
-    title: Categories[category],
+    title: TOKEN_CATEGORIES[category],
     id: category,
     children: [],
   }));
