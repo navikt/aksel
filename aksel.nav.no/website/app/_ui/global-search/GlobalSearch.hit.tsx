@@ -63,6 +63,10 @@ function GlobalSearchLink(props: {
       ? `/${hit.item.slug}#${hit.anchor}`
       : `/${hit.item.slug}`;
 
+  const imageUrl = urlFor(hit.item.status?.bilde)
+    ?.auto("format")
+    .url();
+
   return (
     <li className={styles.searchLinkLi}>
       <div className={styles.searchLinkText}>
@@ -88,9 +92,9 @@ function GlobalSearchLink(props: {
       </div>
 
       <div className={styles.searchThumbnail}>
-        {hit.item?.status?.bilde && (
+        {imageUrl && (
           <Image
-            src={urlFor(hit.item.status.bilde).auto("format").url()}
+            src={imageUrl}
             decoding="sync"
             width="96"
             height="96"
