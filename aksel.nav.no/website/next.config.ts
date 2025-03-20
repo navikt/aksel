@@ -14,7 +14,7 @@ const cspHeader = `
     style-src 'self' 'unsafe-inline' ${dekoratorUrl} ${cdnUrl};
     object-src 'none';
     base-uri 'self';
-    form-action 'self';
+    form-action 'self' https://codesandbox.io/api/v1/sandboxes/define;
     frame-ancestors 'self' localhost:3000;
     frame-src 'self' localhost:3000 https://aksel.ansatt.dev.nav.no;
     media-src 'self' ${cdnUrl} cdn.sanity.io;
