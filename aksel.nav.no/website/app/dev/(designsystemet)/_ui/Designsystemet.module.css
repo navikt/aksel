@@ -24,12 +24,24 @@
   padding-block: var(--ax-space-24);
   padding-inline: var(--ax-space-40);
   display: grid;
+  column-gap: var(--ax-space-40);
   grid-template-columns: minmax(0, 1024px);
-  gap: var(--ax-space-40);
+  grid-template-rows: min-content min-content;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  grid-template-areas:
+    "intro"
+    "content";
 }
 
 @media (min-width: 1280px) {
   .pageLayoutMain[data-layout="with-toc"] {
+    grid-template-areas:
+      "intro aside"
+      "content aside";
     grid-template-columns: minmax(0, 1024px) 1fr;
   }
+}
+
+.pageHeaderHeading {
+  color: var(--ax-text-brand-blue);
 }

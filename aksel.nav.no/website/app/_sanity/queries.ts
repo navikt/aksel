@@ -59,9 +59,14 @@ const TOC_BY_SLUG_QUERY =
   "title": pt::text(@)
 }`);
 
+const SLUG_BY_TYPE_QUERY = defineQuery(`
+  *[_type == $type && defined(slug.current)].slug.current
+`);
+
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
+  SLUG_BY_TYPE_QUERY,
 };

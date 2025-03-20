@@ -21,6 +21,8 @@ export const allArticleDocuments = [
   "templates_artikkel",
 ] as const;
 
+export type AllArticleDocumentsT = (typeof allArticleDocuments)[number];
+
 export const previews = [
   "aksel_artikkel",
   "komponent_artikkel",
