@@ -30,9 +30,9 @@ const TokenCategory = ({
       <div>
         <VStack gap="4">
           <BodyLong as="p">{description}</BodyLong>
-          <Chips>
-            {roles.length > 0 &&
-              roles.map((role) => (
+          {roles.length > 0 && (
+            <Chips>
+              {roles.map((role) => (
                 <Chips.Toggle
                   checkmark={false}
                   key={role}
@@ -49,7 +49,8 @@ const TokenCategory = ({
                     .join(" ")}
                 </Chips.Toggle>
               ))}
-          </Chips>
+            </Chips>
+          )}
           <div>
             {sortedTokens
               .filter(
