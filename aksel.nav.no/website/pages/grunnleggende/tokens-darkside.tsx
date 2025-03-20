@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
-import { LineHeightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
@@ -36,6 +35,7 @@ import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import BreakpointToken from "../../components/token-docs/token/example/BreakpointToken";
 import ColorToken from "../../components/token-docs/token/example/ColorToken";
+import FontToken from "../../components/token-docs/token/example/FontToken";
 import RadiusToken from "../../components/token-docs/token/example/RadiusToken";
 import ShadowToken from "../../components/token-docs/token/example/ShadowToken";
 import SpaceToken from "../../components/token-docs/token/example/SpaceToken";
@@ -94,48 +94,6 @@ const ExampleContainer = ({
     {children}
   </Box>
 );
-
-const FontToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
-  let fontStyling = {
-    fontSize: "24px",
-    fontFamily: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
-    fontWeight: "400",
-    lineHeight: "1.5",
-  };
-  switch (token.group) {
-    case "family":
-      fontStyling = {
-        ...fontStyling,
-        fontFamily: token.value,
-      };
-      break;
-    case "size":
-      fontStyling = {
-        ...fontStyling,
-        fontSize: token.value,
-      };
-      break;
-    case "weight":
-      fontStyling = {
-        ...fontStyling,
-        fontWeight: token.value,
-      };
-      break;
-    case "line-height":
-      return (
-        <VStack as="div" align="center" justify="center" height="100%">
-          <LineHeightIcon width="32px" height="32px" title={token.name} />
-        </VStack>
-      );
-  }
-  return (
-    <VStack as="div" align="center" justify="center" height="100%">
-      <Heading size="medium" style={fontStyling}>
-        Aa
-      </Heading>
-    </VStack>
-  );
-};
 
 const TokenExample = ({ token }: { token: any }) => {
   switch (token.category) {
