@@ -1,16 +1,6 @@
 import { GetStaticProps } from "next/types";
 import React from "react";
-import {
-  BodyLong,
-  Box,
-  Chips,
-  CopyButton,
-  Detail,
-  HGrid,
-  HStack,
-  Heading,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyLong, Chips, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { tokens as tokenDocs } from "@navikt/ds-tokens/token_docs";
 // import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
@@ -30,7 +20,7 @@ import { generateSidebar } from "@/utils";
 import { SEO } from "@/web/seo/SEO";
 import { TableOfContents } from "@/web/toc/TableOfContents";
 import { TOKEN_CATEGORIES } from "../../components/token-docs/config";
-import TokenPreview from "../../components/token-docs/token/example/TokenPreview";
+import TokenEntry from "../../components/token-docs/token/example/TokenEntry";
 import Toolbar from "../../components/token-docs/toolbar/Toolbar";
 
 // import { grunnleggendeKategorier } from "../../sanity/config";
@@ -65,39 +55,6 @@ export const getStaticProps: GetStaticProps = async ({
     revalidate: 60,
     notFound: false,
   };
-};
-
-const Variant = ({ index, token }: { index: number; token: any }) => {
-  const tokenText = `--ax-${token.name}`;
-  return (
-    <Box
-      borderWidth={`${index === 0 ? 1 : 0} 0 1`}
-      borderColor="border-subtle"
-      paddingBlock="4"
-      paddingInline="2"
-    >
-      <HStack gap="3">
-        <TokenPreview token={token} />
-        <VStack align="start" gap="2">
-          <VStack align="start">
-            <CopyButton
-              copyText={tokenText}
-              text={tokenText}
-              iconPosition="right"
-              size="xsmall"
-            />
-            {!["backgroundColor", "textColor", "borderColor"].includes(
-              token.category,
-            ) &&
-              token.rawValue && (
-                <Detail textColor="subtle">{token.rawValue}</Detail>
-              )}
-          </VStack>
-          {token.comment && <Detail>{token.comment}</Detail>}
-        </VStack>
-      </HStack>
-    </Box>
-  );
 };
 
 const Section = ({
@@ -187,7 +144,9 @@ const Section = ({
                 (token) => selectedRole === null || token.role === selectedRole,
               )
               .map((token, index) => {
-                return <Variant token={token} key={token.name} index={index} />;
+                return (
+                  <TokenEntry token={token} key={token.name} index={index} />
+                );
               })}
           </div>
         </VStack>
