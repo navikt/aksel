@@ -12,6 +12,12 @@
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 }
 
+[data-block-margin] {
+  &[data-block-margin="space-28"] {
+    margin-block: var(--ax-space-28);
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

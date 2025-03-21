@@ -6,6 +6,7 @@ import {
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Kbd } from "../kbd/Kbd";
+import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
@@ -25,7 +26,11 @@ function customPortableTextComponents({
   const marks = marksComponents();
 
   return {
+    types: {
+      relatert_innhold: RelatertInnhold,
+    } /* satisfies Record<PortableContentTypes, any> */,
     block,
+    marks,
     list: {
       bullet: ({ children }) => <List as="ul">{children}</List>,
       number: ({ children }) => <List as="ol">{children}</List>,
@@ -34,7 +39,6 @@ function customPortableTextComponents({
       bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
       number: ({ children }) => <ListItem>{children}</ListItem>,
     },
-    marks,
     unknownBlockStyle: ({ children }) =>
       withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
     unknownType: () => null,

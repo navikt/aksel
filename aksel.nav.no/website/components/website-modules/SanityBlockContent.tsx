@@ -32,6 +32,7 @@ import AkselLink from "./AkselLink";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
+    /* TODO: ^completed */
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
     innholdskort: ({ value }) => <InnholdsKort node={value} />,
     tastatur_modul: ({ value }) => <TastaturModul node={value} />,

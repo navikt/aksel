@@ -9,5 +9,6 @@ type AkselBrandColors =
 declare module "react" {
   interface HTMLAttributes {
     "data-color-role"?: GlobalColorRoles | AkselBrandColors;
+    "data-block-margin"?: "space-28";
   }
 }
