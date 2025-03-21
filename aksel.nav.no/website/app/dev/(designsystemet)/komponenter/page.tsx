@@ -1,5 +1,5 @@
 /* import { client } from "@/app/_sanity/client"; */
-import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPageLayout";
+import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
 
 /* import { disableDraftMode, enableDraftMode } from "@/app/actions"; */
 
