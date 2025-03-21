@@ -5,11 +5,8 @@ import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theme-config";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
-import {
-  DesignsystemetThumbnail,
-  KomponentIntro,
-  KomponentLinks,
-} from "./DesignsystemetPage.parts";
+import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
+import { KomponentLinks } from "./DesignsystemetPage.parts";
 
 type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
@@ -71,18 +68,8 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
       </HStack>
       <KomponentLinks data={data} />
       <DesignsystemetThumbnail />
-      <KomponentIntro data={data} />
     </div>
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function DesignsystemetPage(props: DesignsystemetPageT) {
-  return <div>123</div>;
-}
-
-export {
-  DesignsystemetPage,
-  DesignsystemetPageHeader,
-  DesignsystemetPageLayout,
-};
+export { DesignsystemetPageHeader, DesignsystemetPageLayout };

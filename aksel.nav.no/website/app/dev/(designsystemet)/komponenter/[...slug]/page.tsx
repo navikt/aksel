@@ -1,10 +1,13 @@
+import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { DesignsytemetKomponentIntro } from "../../_ui/Designsystemet.intro";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
@@ -51,6 +54,10 @@ export default async function Page({ params }: Props) {
         showChangelogLink
         toc={toc}
       />
+      <div>
+        <DesignsytemetKomponentIntro data={page} />
+        <CustomPortableText value={page.content as PortableTextBlock[]} />
+      </div>
     </DesignsystemetPageLayout>
   );
 }
