@@ -70,29 +70,11 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
     const searchQuery = searchData.query.toLowerCase();
     return stringifiedToken.includes(searchQuery);
   });
-  const addedCategories = [
-    "backgroundColor",
-    "borderColor",
-    "textColor",
-    "space",
-    "shadow",
-    "radius",
-    "font",
-    "breakpoint",
-  ];
-  const tokensWithCategoryAndRole = filteredTokens.filter((token) =>
-    addedCategories.includes(token.category),
+  const filteredCategories = Object.entries(TOKEN_CATEGORIES).filter(
+    ([category]) => filteredTokens.some((token) => token.category === category),
   );
-
-  const categories = tokensWithCategoryAndRole
-    .map((token) => token.category)
-    .filter(
-      (category, index, array) =>
-        array.findIndex((cat) => cat === category) === index,
-    )
-    .sort((a, b) => addedCategories.indexOf(a) - addedCategories.indexOf(b));
-  const toc = categories.map((category) => ({
-    title: TOKEN_CATEGORIES[category],
+  const toc = filteredCategories.map(([category, { title }]) => ({
+    title,
     id: category,
     children: [],
   }));
@@ -124,13 +106,15 @@ const Page = ({ page, sidebar }: PageProps["props"]) => {
         <HGrid columns="auto 15rem" as="main" gap="10">
           <VStack gap="10">
             <Toolbar onSearch={setSearchData} />
-            {categories.map((category) => (
+            {filteredCategories.map(([key, { title, description, roles }]) => (
               <TokenCategory
-                key={category}
-                category={category}
-                description="Lorem ipsum"
-                tokens={tokensWithCategoryAndRole.filter(
-                  (token) => token.category === category,
+                id={key}
+                key={key}
+                title={title}
+                description={description}
+                roles={roles}
+                tokens={filteredTokens.filter(
+                  (token) => token.category === key,
                 )}
               />
             ))}

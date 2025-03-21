@@ -1,41 +1,40 @@
 import React from "react";
 import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import TokenRolesChips from "./TokenRolesChips";
-import { TOKEN_CATEGORIES } from "./config";
+import { BreakpointRolesT, ColorRolesT, FontRolesT } from "./config";
 import { sortTokens } from "./token-utils";
 import TokenEntry from "./token/example/TokenEntry";
 
 const TokenCategory = ({
-  category,
+  id,
+  title,
   description = "Lorem ipsum",
+  roles,
   tokens,
 }: {
-  category: string;
+  id: string;
+  title: string;
   description: string;
+  roles?: ColorRolesT[] | FontRolesT[] | BreakpointRolesT[];
   tokens: (typeof tokenDocs)[number][];
 }) => {
-  const roles = tokens
-    .filter((token) => token.role !== undefined)
-    .map((token) => token.role)
-    .filter(
-      (role, index, array) => array.findIndex((r) => r === role) === index,
-    )
-    .sort();
   const sortedTokens = tokens.sort(sortTokens);
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
-    <section>
-      <Heading id={category} level="2" size="large" spacing>
-        {TOKEN_CATEGORIES[category]}
+    <section aria-labelledby={id}>
+      <Heading id={id} level="2" size="large" spacing>
+        {title}
       </Heading>
       <div>
         <VStack gap="4">
           <BodyLong as="p">{description}</BodyLong>
-          <TokenRolesChips
-            roles={roles}
-            selectedRole={selectedRole}
-            setSelectedRole={setSelectedRole}
-          />
+          {roles && (
+            <TokenRolesChips
+              roles={roles}
+              selectedRole={selectedRole}
+              setSelectedRole={setSelectedRole}
+            />
+          )}
           <div>
             {sortedTokens
               .filter(

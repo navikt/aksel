@@ -1,17 +1,18 @@
 import { Chips } from "@navikt/ds-react";
+import { BreakpointRolesT, ColorRolesT, FontRolesT } from "./config";
 
 const TokenRolesChips = ({
   roles,
   selectedRole,
   setSelectedRole,
 }: {
-  roles: string[];
+  roles: ColorRolesT[] | FontRolesT[] | BreakpointRolesT[];
   selectedRole: string | null;
   setSelectedRole: React.Dispatch<React.SetStateAction<typeof selectedRole>>;
 }) => {
   return (
     <Chips>
-      {roles.map((role) => (
+      {Object.entries(roles).map(([role, { title }]) => (
         <Chips.Toggle
           checkmark={false}
           key={role}
@@ -22,10 +23,7 @@ const TokenRolesChips = ({
               : setSelectedRole(null)
           }
         >
-          {role
-            .split("-")
-            .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-            .join(" ")}
+          {title}
         </Chips.Toggle>
       ))}
     </Chips>
