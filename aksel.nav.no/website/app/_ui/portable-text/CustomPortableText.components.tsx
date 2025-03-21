@@ -19,7 +19,8 @@ function customPortableTextComponents({
   const block = blockComponents({ typoConfig });
   return {
     block,
-    unknownBlockStyle: block.normal,
+    unknownBlockStyle: ({ children }) =>
+      withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
   };
 }
 
