@@ -1,12 +1,11 @@
 .tocAside {
-  /* sticky top-20 order-1 hidden min-w-60 self-start p-1 xl:block */
   position: sticky;
-  top: var(--ax-space-20);
-
-  /* order: 1; */
   grid-area: aside;
   display: none;
   min-width: 12.5rem;
+  height: fit-content;
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
 
   &[data-variant="subtle"] {
     --aksel-toc-fade-shadow-color: var(--ax-bg-neutral-softA);
