@@ -8,7 +8,7 @@ export const useShortcut = (
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
       if (
-        event.key === "b" &&
+        (event.key === "k" || event.key === "b") &&
         (event.metaKey || event.ctrlKey) &&
         !event.shiftKey
       ) {

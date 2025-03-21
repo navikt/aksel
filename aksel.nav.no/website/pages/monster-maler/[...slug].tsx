@@ -12,10 +12,10 @@ import {
   AkselTemplatesDocT,
   ArticleListT,
   CodeExampleSchemaT,
+  DesignsystemSidebarSectionT,
   NextPageT,
   ResolveContributorsT,
   ResolveSlugT,
-  SidebarT,
   TableOfContentsT,
 } from "@/types";
 import { dateStr, generateSidebar, generateTableOfContents } from "@/utils";
@@ -29,7 +29,7 @@ import NotFotfund from "../404";
 
 type PageProps = NextPageT<{
   page: ResolveContributorsT<ResolveSlugT<AkselTemplatesDocT>>;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   seo: any;
   refs: ArticleListT;
   publishDate: string;

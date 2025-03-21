@@ -19,7 +19,7 @@
   &[open] {
     display: flex;
     flex-direction: column;
-    animation: akselModalFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+    animation: akselModalFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
   }
 }
 
@@ -100,12 +100,12 @@
    * TODO: Consider adding `::backdrop` to global token definitions.
    * TODO: Check that overlay-color is correct after the new colors is set in stone.
    */
-  background: #0214317d;
-  animation: akselModalBackdropFadeIn 0.35s cubic-bezier(0.15, 1, 0.3, 1);
+  background: rgb(2 20 49 /0.8);
+  animation: akselModalBackdropFadeIn 0.7s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .aksel-modal--polyfilled + .backdrop /* Cannot be combined with ::backdrop selector */ {
-  background: #0214317d;
+  background: rgb(2 20 49 /0.8);
 
   /* From polyfill: */
   position: fixed;
@@ -183,7 +183,7 @@
 @keyframes akselModalFadeIn {
   0% {
     opacity: 0.0001; /* Safari will not set focus inside the modal when it opens if we set this to 0 */
-    transform: translate3d(0, calc(2% + 4px), 0);
+    transform: translate3d(0, 4px, 0);
   }
 
   50% {
@@ -196,11 +196,15 @@
 }
 
 @keyframes akselModalBackdropFadeIn {
-  from {
-    opacity: 0;
+  0% {
+    opacity: 0.0001;
   }
 
-  to {
+  50% {
+    opacity: 1;
+  }
+
+  100% {
     opacity: 1;
   }
 }

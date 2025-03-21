@@ -80,6 +80,17 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
 
   const authors = (blogg?.contributors as any)?.map((x) => x?.title) ?? [];
 
+  const imageUrl = urlFor(blogg?.seo?.image)
+    ?.auto("format")
+    .quality(100)
+    .url();
+
+  const imageBlurUrl = urlFor(blogg?.seo?.image)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
   return (
     <>
       <SEO
@@ -128,17 +139,10 @@ const Page = ({ blogg, morePosts, publishDate }: PageProps["props"]) => {
             </div>
           </div>
           <div className="relative mx-auto mt-20 aspect-video w-full max-w-3xl rounded-2xl ring-1 ring-border-subtle">
-            {blogg?.seo?.image ? (
+            {imageUrl ? (
               <Image
-                src={urlFor(blogg?.seo?.image)
-                  .auto("format")
-                  .quality(100)
-                  .url()}
-                blurDataURL={urlFor(blogg?.seo?.image)
-                  .width(24)
-                  .height(24)
-                  .blur(10)
-                  .url()}
+                src={imageUrl}
+                blurDataURL={imageBlurUrl}
                 placeholder="blur"
                 decoding="sync"
                 layout="fill"

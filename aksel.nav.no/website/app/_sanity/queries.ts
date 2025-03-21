@@ -1,0 +1,67 @@
+import { defineQuery, groq } from "next-sanity";
+import { destructureBlocks } from "@/sanity/queries";
+
+const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
+
+const DESIGNSYSTEM_SIDEBAR_QUERY =
+  defineQuery(`*[_type in [${DESIGNSYSTEM_TYPES}] && defined(kategori)] {
+  _type,
+  heading,
+  "slug": slug.current,
+  kategori,
+  "tag": status.tag,
+  "sidebarindex": sidebarindex,
+}`);
+
+const searchContent = groq`{
+  heading,
+  "slug": slug.current,
+  "tema": undertema[]->tema->title,
+  ingress,
+  status,
+  _type,
+  "intro": pt::text(intro.body),
+  content,
+  publishedAt,
+  seo
+}`;
+
+const GLOBAL_SEARCH_QUERY_ALL = defineQuery(
+  `*[_type in ["komponent_artikkel",
+  "ds_artikkel",
+  "aksel_artikkel",
+  "aksel_blogg",
+  "aksel_prinsipp",
+  "aksel_standalone",
+  "templates_artikkel"]]${searchContent}`,
+);
+
+const KOMPONENT_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "komponent_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    intro{
+      ...,
+      body[]{
+        ...,
+      ${destructureBlocks}
+      }
+    },
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
+const TOC_BY_SLUG_QUERY =
+  defineQuery(`*[slug.current == $slug][0].content[style match 'h2'][]{
+  "id": _key,
+  "title": pt::text(@)
+}`);
+
+export {
+  DESIGNSYSTEM_SIDEBAR_QUERY,
+  GLOBAL_SEARCH_QUERY_ALL,
+  KOMPONENT_BY_SLUG_QUERY,
+  TOC_BY_SLUG_QUERY,
+};

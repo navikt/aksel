@@ -22,6 +22,28 @@ export const Highlight = ({
 
   const date = useFormatedDate(article?.publishedAt ?? article._createdAt);
 
+  const imageUrl = urlFor(article.status?.bilde)
+    ?.quality(100)
+    .auto("format")
+    .url();
+
+  const imageBlurUrl = urlFor(article.status?.bilde)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
+  const seoImageUrl = urlFor(article?.seo?.image)
+    ?.quality(100)
+    .auto("format")
+    .url();
+
+  const seoImageBlurUrl = urlFor(article?.seo?.image)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
   return (
     <section
       aria-label={`Fremhevet artikkel: ${article?.heading}`}
@@ -31,17 +53,10 @@ export const Highlight = ({
       })}
     >
       <div className="relative block aspect-video">
-        {useStatusImage ? (
+        {useStatusImage && imageUrl ? (
           <Image
-            src={urlFor(article.status?.bilde)
-              .quality(100)
-              .auto("format")
-              .url()}
-            blurDataURL={urlFor(article.status?.bilde)
-              .width(24)
-              .height(24)
-              .blur(10)
-              .url()}
+            src={imageUrl}
+            blurDataURL={imageBlurUrl}
             placeholder="blur"
             quality={100}
             layout="fill"
@@ -54,14 +69,10 @@ export const Highlight = ({
             )}
             decoding="auto"
           />
-        ) : article?.seo?.image ? (
+        ) : seoImageUrl ? (
           <Image
-            src={urlFor(article.seo.image).quality(100).auto("format").url()}
-            blurDataURL={urlFor(article.seo.image)
-              .width(24)
-              .height(24)
-              .blur(10)
-              .url()}
+            src={seoImageUrl}
+            blurDataURL={seoImageBlurUrl}
             placeholder="blur"
             quality={100}
             layout="fill"

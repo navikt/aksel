@@ -11,8 +11,8 @@ import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
   AkselLandingPageDocT,
   ArticleListT,
+  DesignsystemSidebarSectionT,
   NextPageT,
-  SidebarT,
 } from "@/types";
 import { generateSidebar } from "@/utils";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
@@ -22,7 +22,7 @@ import { grunnleggendeKategorier } from "../../sanity/config";
 
 type PageProps = NextPageT<{
   page: AkselLandingPageDocT;
-  sidebar: SidebarT;
+  sidebar: DesignsystemSidebarSectionT;
   links: ArticleListT;
 }>;
 

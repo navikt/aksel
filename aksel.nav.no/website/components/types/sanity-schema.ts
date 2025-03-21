@@ -145,6 +145,7 @@ export interface AkselTemplatesDocT extends DocumentT<"ds_artikkel">, ArticleT {
 }
 
 export type SidebarInputNodeT = {
+  _type: string;
   heading: string;
   slug: string;
   kategori: string;
@@ -152,16 +153,18 @@ export type SidebarInputNodeT = {
   sidebarindex: number | null;
 };
 
-export type SidebarOutputNodeT = Pick<
-  SidebarInputNodeT,
-  "heading" | "slug" | "tag"
->;
+export type SidebarPageT = Pick<SidebarInputNodeT, "heading" | "slug" | "tag">;
 
-export type SidebarT = {
-  pages: SidebarOutputNodeT[];
+export type SidebarGroupedPagesT = {
   title: string;
   value: string;
-}[];
+  pages: SidebarPageT[];
+};
+
+export type DesignsystemSidebarSectionT = (
+  | SidebarPageT
+  | SidebarGroupedPagesT
+)[];
 
 export type ArticleListT = {
   _id: string;

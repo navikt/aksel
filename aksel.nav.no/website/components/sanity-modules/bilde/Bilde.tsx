@@ -12,7 +12,9 @@ type BildeProps = {
 };
 
 const Bilde = ({ node, className }: BildeProps) => {
-  if (!node || !node.asset) {
+  const imageUrl = urlFor(node)?.auto("format").url();
+
+  if (!node || !node.asset || !imageUrl) {
     return null;
   }
 
@@ -41,7 +43,7 @@ const Bilde = ({ node, className }: BildeProps) => {
         <img
           alt={!node?.dekorativt ? node.alt : ""}
           decoding="async"
-          src={urlFor(node).auto("format").url()}
+          src={imageUrl}
           className="rounded-lg"
         />
       </div>

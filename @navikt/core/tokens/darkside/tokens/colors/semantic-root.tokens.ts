@@ -57,7 +57,7 @@ export function semanticRootTokens(theme: ColorTheme) {
         comment: "TODO: Sjur fyller ut",
       },
       overlay: {
-        value: "rgba(2, 20, 49 , 0.49)",
+        value: "rgba(2, 20, 49 , 0.80)",
         type: "color",
         group: "background",
         comment: "TODO: Sjur fyller ut",

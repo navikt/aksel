@@ -11,7 +11,9 @@ import { urlFor } from "@/sanity/interface";
 import { DoDontT } from "@/types";
 
 const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
-  if (!block.picture) {
+  const imageUrl = urlFor(block.picture)?.auto("format").url();
+
+  if (!block.picture || !imageUrl) {
     return null;
   }
 
@@ -43,7 +45,7 @@ const Element = ({ block }: { block: DoDontT["blokker"][number] }) => {
           alt={block.alt}
           loading="lazy"
           decoding="async"
-          src={urlFor(block.picture).auto("format").url()}
+          src={imageUrl}
         />
       </div>
       {block.description && (
