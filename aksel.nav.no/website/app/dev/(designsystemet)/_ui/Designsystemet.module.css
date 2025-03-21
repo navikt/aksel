@@ -46,3 +46,29 @@
   color: var(--ax-text-brand-blue);
   margin-block-end: var(--ax-space-8);
 }
+
+.thumbnailContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 24 / 9;
+  border-radius: 16px;
+  background-color: var(--ax-bg-brand-blue-moderate);
+  margin-block-start: var(--ax-space-28);
+  overflow: hidden;
+}
+
+.thumbnailImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnailCube {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

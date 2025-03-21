@@ -5,7 +5,11 @@ import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { getStatusTag } from "@/app/_ui/theme-config";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
-import { KomponentIntro, KomponentLinks } from "./DesignsystemetPage.parts";
+import {
+  DesignsystemetThumbnail,
+  KomponentIntro,
+  KomponentLinks,
+} from "./DesignsystemetPage.parts";
 
 type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
@@ -66,7 +70,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
         )}
       </HStack>
       <KomponentLinks data={data} />
-      {/* TODO: thumbnail */}
+      <DesignsystemetThumbnail />
       <KomponentIntro data={data} />
     </div>
   );
