@@ -14,7 +14,7 @@
     "@navikt/ds-react": "file:./../../@navikt/core/react",
     "@navikt/ds-tokens": "file:./../../@navikt/core/tokens",
     "@next/bundle-analyzer": "^15.0.0",
-    "next": "15.1.2",
+    "next": "15.2.3",
     "react": "^18",
     "react-dom": "^18"
   },
