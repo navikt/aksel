@@ -1,9 +1,14 @@
 import {
   PortableTextBlockComponent,
   type PortableTextComponents,
+  PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { Kbd } from "../kbd/Kbd";
+import { Code } from "../typography/Code";
+import { List, ListItem } from "../typography/List";
+import { WebsiteLink } from "../typography/WebsiteLink";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -17,11 +22,45 @@ function customPortableTextComponents({
   typoConfig,
 }: CustomPortableTextComponentsProps): PortableTextComponents {
   const block = blockComponents({ typoConfig });
+  const marks = marksComponents();
+
   return {
     block,
+    list: {
+      bullet: ({ children }) => <List as="ul">{children}</List>,
+      number: ({ children }) => <List as="ol">{children}</List>,
+    },
+    listItem: {
+      bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
+      number: ({ children }) => <ListItem>{children}</ListItem>,
+    },
+    marks,
     unknownBlockStyle: ({ children }) =>
       withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
+    unknownType: () => null,
+    unknownMark: () => null,
   };
+}
+
+function marksComponents() {
+  return {
+    kbd: ({ text }) => <Kbd>{text}</Kbd>,
+    quote: ({ text }) => <q>{text}</q>,
+    code: ({ text }) => <Code>{text}</Code>,
+
+    link: ({ text, value: { href } }) => {
+      if (!href) {
+        return <span>{text}</span>;
+      }
+      return <WebsiteLink href={href}>{text}</WebsiteLink>;
+    },
+    internalLink: ({ text, value: { slug } }) => {
+      if (!slug || !slug.current) {
+        return <span>{text}</span>;
+      }
+      return <WebsiteLink href={`/${slug.current}`}>{text}</WebsiteLink>;
+    },
+  } satisfies Record<string, PortableTextMarkComponent>;
 }
 
 function blockComponents({
