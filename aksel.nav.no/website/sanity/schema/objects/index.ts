@@ -3,8 +3,6 @@ export * from "./komponent/kode-eksempler";
 export * from "./komponent/props";
 export * from "./komponent/tastatur";
 export * from "./komponent/token-tabell";
-export * from "./prinsipper/herobilde";
-export * from "./prinsipper/innholdskort";
 export * from "./shared/accordion";
 export * from "./shared/alert";
 export * from "./shared/attachment";

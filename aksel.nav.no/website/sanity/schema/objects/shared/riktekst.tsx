@@ -148,7 +148,6 @@ const Riktekst = (
     | "grunnleggende"
     | "templates"
     | "komponent"
-    | "prinsipp"
     | "standard"
     | "standalone"
     | "accordion",
@@ -201,9 +200,6 @@ const Riktekst = (
     case "grunnleggende":
       fields.push(...grunnleggende);
       break;
-    case "prinsipp":
-      fields.push("innholdskort");
-      break;
     case "accordion":
       fields = [...accordion];
       break;
@@ -240,7 +236,7 @@ export const RiktekstPrinsipp = {
   title: "Riktekst Aksel",
   name: "riktekst_prinsipp",
   type: "array",
-  of: Riktekst("prinsipp"),
+  of: Riktekst("standard"),
   icon: () => <FileTextIcon aria-hidden />,
 };
 

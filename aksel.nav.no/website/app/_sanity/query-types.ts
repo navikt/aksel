@@ -49,84 +49,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Innholdskort = {
-  _type: "innholdskort";
-  title?: string;
-  lenke?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-  };
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<
-      | {
-          reference?:
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "komponent_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "ds_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_artikkel";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_blogg";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_prinsipp";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "aksel_standalone";
-              }
-            | {
-                _ref: string;
-                _type: "reference";
-                _weak?: boolean;
-                [internalGroqTypeReferenceTo]?: "templates_artikkel";
-              };
-          _type: "internalLink";
-          _key: string;
-        }
-      | {
-          href?: string;
-          _type: "link";
-          _key: string;
-        }
-    >;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
-
 export type Exampletext_block = {
   _type: "exampletext_block";
   title?: string;
@@ -703,9 +625,6 @@ export type Riktekst_prinsipp = Array<
   | ({
       _key: string;
     } & Language)
-  | ({
-      _key: string;
-    } & Innholdskort)
 >;
 
 export type Riktekst_standard = Array<
@@ -2516,18 +2435,6 @@ export type Aksel_prinsipp = {
     prinsippvalg?: "brukeropplevelse";
     hovedside?: boolean;
   };
-  hero_bilde?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "herobilde";
-  };
   ingress?: string;
   content?: Riktekst_prinsipp;
   seo?: {
@@ -2631,19 +2538,6 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
-};
-
-export type Herobilde = {
-  _type: "herobilde";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
 };
 
 export type GpInnholdstype = {
@@ -2889,7 +2783,6 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
-  | Innholdskort
   | Exampletext_block
   | Token_ref
   | Tastatur_modul
@@ -2942,7 +2835,6 @@ export type AllSanitySchemaTypes =
   | Aksel_standalone
   | Templates_artikkel
   | SanityFileAsset
-  | Herobilde
   | GpInnholdstype
   | Intro_komponent
   | Redirect

@@ -85,10 +85,6 @@ export const schema: SchemaPluginOptions = {
 
     /* Templatesider */
     object.ExampletextBlock,
-
-    /* Prinsipper */
-    object.HeroBilde,
-    object.InnholdsKort,
   ],
   templates: [
     {

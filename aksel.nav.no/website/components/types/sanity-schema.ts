@@ -77,7 +77,6 @@ export interface AkselGodPraksisDocT
 export interface AkselPrinsippDocT
   extends DocumentT<"aksel_prinsipp">,
     ArticleT {
-  hero_bilde: any;
   prinsipp: { prinsippvalg: string; hovedside: boolean };
 }
 
@@ -257,12 +256,6 @@ export interface BildeT {
     alpha: number;
   };
 }
-
-export type InnholdsKortPrinsipperT = ArrayObjectT<{
-  title: string;
-  lenke: string;
-  body: any[];
-}>;
 
 export interface RelatertInnholdT {
   title?: string;

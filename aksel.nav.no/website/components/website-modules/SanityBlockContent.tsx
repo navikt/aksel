@@ -10,7 +10,6 @@ import Accordion from "@/cms/accordion/Accordion";
 import Alert from "@/cms/alert/Alert";
 import Attachment from "@/cms/attachment/Attachment";
 import Bilde from "@/cms/bilde/Bilde";
-import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import CompareImages from "@/cms/compare-images/CompareImages";
@@ -34,7 +33,6 @@ const serializers: Partial<PortableTextReactComponents> = {
   types: {
     /* TODO: ^completed */
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
-    innholdskort: ({ value }) => <InnholdsKort node={value} />,
     tastatur_modul: ({ value }) => <TastaturModul node={value} />,
     riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     do_dont: ({ value }) => <DoDont node={value} />,
