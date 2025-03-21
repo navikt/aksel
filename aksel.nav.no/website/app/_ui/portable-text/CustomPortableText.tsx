@@ -7,15 +7,26 @@ import {
 
 type CustomPortableTextProps = {
   value: PortableTextBlock[];
+  lang?: string;
+  className?: string;
 } & CustomPortableTextComponentsProps;
 
-function CustomPortableText({ value, typoConfig }: CustomPortableTextProps) {
+function CustomPortableText({
+  value,
+  typoConfig,
+  className,
+  lang,
+}: CustomPortableTextProps) {
   const customComponents = useMemo(
     () => customPortableTextComponents({ typoConfig }),
     [typoConfig],
   );
 
-  return <PortableText components={customComponents} value={value ?? []} />;
+  return (
+    <div className={className} lang={lang}>
+      <PortableText components={customComponents} value={value ?? []} />
+    </div>
+  );
 }
 
 export { CustomPortableText };

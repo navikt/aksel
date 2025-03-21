@@ -44,4 +44,5 @@
 
 .pageHeaderHeading {
   color: var(--ax-text-brand-blue);
+  margin-block-end: var(--ax-space-8);
 }
