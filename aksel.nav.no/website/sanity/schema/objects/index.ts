@@ -1,7 +1,6 @@
 export * from "./komponent/intro";
 export * from "./komponent/kode-eksempler";
 export * from "./komponent/props";
-export * from "./komponent/tastatur";
 export * from "./komponent/token-tabell";
 export * from "./shared/accordion";
 export * from "./shared/alert";

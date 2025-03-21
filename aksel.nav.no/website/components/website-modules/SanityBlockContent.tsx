@@ -20,7 +20,6 @@ import PropsSeksjon from "@/cms/props/PropsSeksjon";
 import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import SideModul from "@/cms/side-modul/SideModul";
 import Tabell from "@/cms/tabell/Tabell";
-import TastaturModul from "@/cms/tastatur-tabell/TastaturTabell";
 import Tips from "@/cms/tips/Tips";
 import TokenTable from "@/cms/token-tabell/TokenTable";
 import Video from "@/cms/video/Video";
@@ -33,7 +32,6 @@ const serializers: Partial<PortableTextReactComponents> = {
   types: {
     /* TODO: ^completed */
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
-    tastatur_modul: ({ value }) => <TastaturModul node={value} />,
     riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     do_dont: ({ value }) => <DoDont node={value} />,
     bilde: ({ value }) => <Bilde node={value} />,

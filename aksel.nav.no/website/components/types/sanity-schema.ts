@@ -229,10 +229,6 @@ export interface TableT {
   rows?: ArrayObjectT<{ cells: string[] }>[];
 }
 
-export interface UUTableT {
-  tastatur?: ArrayObjectT<{ key: string; action: string }>[];
-}
-
 export interface TokenTableT {
   title: string;
   kategori: string;

@@ -62,16 +62,6 @@ export type Token_ref = {
   _weak?: boolean;
 };
 
-export type Tastatur_modul = {
-  _type: "tastatur_modul";
-  tastatur?: Array<{
-    key?: string;
-    action?: string;
-    _type: "keys";
-    _key: string;
-  }>;
-};
-
 export type Kode_eksempler = {
   _type: "kode_eksempler";
   title?: string;
@@ -1316,9 +1306,6 @@ export type Riktekst_komponent = Array<
   | ({
       _key: string;
     } & Props_seksjon)
-  | ({
-      _key: string;
-    } & Tastatur_modul)
   | ({
       _key: string;
     } & Kode_eksempler)
@@ -2785,7 +2772,6 @@ export type AllSanitySchemaTypes =
   | Geopoint
   | Exampletext_block
   | Token_ref
-  | Tastatur_modul
   | Kode_eksempler
   | Props_seksjon
   | Riktekst_blogg
@@ -4273,17 +4259,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
         >;
         _type: "tabell_v2";
         _key: string;
-        markDefs: null;
-      }
-    | {
-        _key: string;
-        _type: "tastatur_modul";
-        tastatur?: Array<{
-          key?: string;
-          action?: string;
-          _type: "keys";
-          _key: string;
-        }>;
         markDefs: null;
       }
     | {
