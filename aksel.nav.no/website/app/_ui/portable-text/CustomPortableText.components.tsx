@@ -11,6 +11,7 @@ import { DoDont } from "../do-dont/DoDont";
 import { ExpansionCard } from "../expansioncard/ExpansionCard";
 import { Kbd } from "../kbd/Kbd";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
+import { TableV2 } from "../table-v2/TableV2";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
@@ -36,6 +37,7 @@ function customPortableTextComponents({
       bilde: Bilde,
       alert: Alert,
       expansioncard: ExpansionCard,
+      tabell_v2: TableV2,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
