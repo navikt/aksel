@@ -37,10 +37,10 @@ const serializers: Partial<PortableTextReactComponents> = {
     expansioncard: ({ value }) => <ExpansionCard node={value} />,
     tabell_v2: ({ value }) => <Tabell node={value} />,
     accordion: ({ value }) => <Accordion node={value} />,
+    props_seksjon: ({ value }) => <PropsSeksjon node={value} />,
     /* TODO: ^completed */
     riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     kode: ({ value }) => <SnippetLazy node={value} />,
-    props_seksjon: ({ value }) => <PropsSeksjon node={value} />,
     spesial_seksjon: ({ value }) => <SideModul node={value} />,
     token_kategori: ({ value }) => <TokenTable node={value} />,
     video: ({ value }) => <Video node={value} />,

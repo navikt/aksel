@@ -11,6 +11,7 @@ import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
 import { ExpansionCard } from "../expansioncard/ExpansionCard";
 import { Kbd } from "../kbd/Kbd";
+import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
 import { Code } from "../typography/Code";
@@ -40,6 +41,7 @@ function customPortableTextComponents({
       expansioncard: ExpansionCard,
       tabell_v2: TableV2,
       accordion: Accordion,
+      props_seksjon: PropsSeksjon,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
