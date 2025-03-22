@@ -8,6 +8,7 @@ import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Alert } from "../alert/Alert";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
+import { ExpansionCard } from "../expansioncard/ExpansionCard";
 import { Kbd } from "../kbd/Kbd";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { Code } from "../typography/Code";
@@ -34,6 +35,7 @@ function customPortableTextComponents({
       do_dont: DoDont,
       bilde: Bilde,
       alert: Alert,
+      expansioncard: ExpansionCard,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,

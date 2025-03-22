@@ -34,9 +34,9 @@ const serializers: Partial<PortableTextReactComponents> = {
     do_dont: ({ value }) => <DoDont node={value} />,
     bilde: ({ value }) => <Bilde node={value} />,
     alert: ({ value }) => <Alert node={value} />,
+    expansioncard: ({ value }) => <ExpansionCard node={value} />,
     /* TODO: ^completed */
     riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
-    expansioncard: ({ value }) => <ExpansionCard node={value} />,
     kode: ({ value }) => <SnippetLazy node={value} />,
     tabell_v2: ({ value }) => <Tabell node={value} />,
     accordion: ({ value }) => <Accordion node={value} />,
