@@ -1,6 +1,6 @@
 import { PortableTextBlock } from "next-sanity";
 import {
-  ExpansionCard as DsExpansionCard,
+  ExpansionCard,
   ExpansionCardContent,
   ExpansionCardDescription,
   ExpansionCardHeader,
@@ -16,7 +16,9 @@ const cardSize = {
   h4: "small",
 } as const;
 
-function ExpansionCard(props: ExtractPortableComponentProps<"expansioncard">) {
+function WebsiteExpansionCard(
+  props: ExtractPortableComponentProps<"expansioncard">,
+) {
   const { heading, body, heading_level, description } = props.value;
 
   if (!heading || !body || body.length === 0 || !heading_level) {
@@ -24,7 +26,7 @@ function ExpansionCard(props: ExtractPortableComponentProps<"expansioncard">) {
   }
 
   return (
-    <DsExpansionCard
+    <ExpansionCard
       id="aksel-expansioncard"
       aria-label={heading}
       data-block-margin="space-28"
@@ -40,8 +42,8 @@ function ExpansionCard(props: ExtractPortableComponentProps<"expansioncard">) {
       <ExpansionCardContent>
         <CustomPortableText value={body as PortableTextBlock[]} />
       </ExpansionCardContent>
-    </DsExpansionCard>
+    </ExpansionCard>
   );
 }
 
-export { ExpansionCard };
+export { WebsiteExpansionCard };

@@ -1,26 +1,48 @@
-import { Highlight, themes } from "prism-react-renderer";
+"use client";
 
-function PropsSeksjonExample({ code }: { code?: string }) {
+import { Highlight, themes } from "prism-react-renderer";
+import { Box } from "@navikt/ds-react";
+import styles from "./PropsSeksjon.module.css";
+
+function PropsSeksjonCode({
+  code,
+  title,
+  wrap = false,
+}: {
+  code?: string;
+  title: string;
+  wrap?: boolean;
+}) {
   if (!code) {
     return null;
   }
 
   return (
-    <li className="my-3 flex flex-col px-3 text-base md:flex-row">
-      <div className="min-w-24 font-semibold">Example: </div>
+    <li className={styles.propsSeksjonLi}>
+      <div className={styles.propsSeksjonLiTitle}>{`${title}:`}</div>
 
-      <div className="mt-05 grid text-sm">
-        <Highlight code={code} language="javascript" theme={themes.vsLight}>
+      <div className={styles.propsSeksjonCodeExample}>
+        <Highlight code={code} language="tsx" theme={themes.github}>
           {({ style, tokens, getLineProps, getTokenProps }) => (
-            <pre style={style} className="overflow-auto">
+            <Box
+              style={style}
+              overflowX="auto"
+              as={wrap ? "div" : "pre"}
+              paddingInline="space-8"
+              borderRadius="medium"
+            >
               {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line })}>
+                <code
+                  key={i}
+                  {...getLineProps({ line })}
+                  className={styles.propsSeksjonCode}
+                >
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token })} />
                   ))}
-                </div>
+                </code>
               ))}
-            </pre>
+            </Box>
           )}
         </Highlight>
       </div>
@@ -28,4 +50,4 @@ function PropsSeksjonExample({ code }: { code?: string }) {
   );
 }
 
-export { PropsSeksjonExample };
+export { PropsSeksjonCode };

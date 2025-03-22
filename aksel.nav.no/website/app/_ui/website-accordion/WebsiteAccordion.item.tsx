@@ -3,12 +3,12 @@
 import {
   AccordionContent,
   AccordionHeader,
-  AccordionItem as DsAccordionItem,
+  AccordionItem,
   /* @ts-expect-error Workspace cant resolve valid import */
 } from "@navikt/ds-react/Accordion";
-import { useAccordion } from "./Accordion.provider";
+import { useWebsiteAccordion } from "./WebsiteAccordion.provider";
 
-function AccordionItem({
+function WebsiteAccordionItem({
   children,
   index,
   title = "",
@@ -17,16 +17,16 @@ function AccordionItem({
   index: number;
   title?: string;
 }) {
-  const { currentOpen, openToggle } = useAccordion();
+  const { currentOpen, openToggle } = useWebsiteAccordion();
   return (
-    <DsAccordionItem
+    <AccordionItem
       open={currentOpen.includes(index)}
       onOpenChange={() => openToggle(index)}
     >
       <AccordionHeader>{title}</AccordionHeader>
       <AccordionContent>{children}</AccordionContent>
-    </DsAccordionItem>
+    </AccordionItem>
   );
 }
 
-export { AccordionItem };
+export { WebsiteAccordionItem };

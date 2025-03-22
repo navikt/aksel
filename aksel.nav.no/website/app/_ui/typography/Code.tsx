@@ -3,9 +3,19 @@ import styles from "./Typography.module.css";
 
 function Code({
   children,
-}: Pick<React.HTMLAttributes<HTMLElement>, "children">) {
+  as = "code",
+  highlighted,
+}: Pick<React.HTMLAttributes<HTMLElement>, "children"> & {
+  as?: React.ElementType;
+  highlighted?: boolean;
+}) {
   return (
-    <Detail as="code" weight="semibold" className={styles.typoCode}>
+    <Detail
+      as={as}
+      weight="semibold"
+      className={styles.typoCode}
+      data-highlighted={highlighted}
+    >
       {children}
     </Detail>
   );

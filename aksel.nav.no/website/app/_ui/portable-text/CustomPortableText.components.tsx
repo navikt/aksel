@@ -5,11 +5,8 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { Accordion } from "../accordion/Accordion";
-import { Alert } from "../alert/Alert";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
-import { ExpansionCard } from "../expansioncard/ExpansionCard";
 import { Kbd } from "../kbd/Kbd";
 import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
@@ -17,6 +14,9 @@ import { TableV2 } from "../table-v2/TableV2";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
+import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
+import { WebsiteAlert } from "../website-alert/WebsiteAlert";
+import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -37,10 +37,10 @@ function customPortableTextComponents({
       relatert_innhold: RelatertInnhold,
       do_dont: DoDont,
       bilde: Bilde,
-      alert: Alert,
-      expansioncard: ExpansionCard,
+      alert: WebsiteAlert,
+      expansioncard: WebsiteExpansionCard,
       tabell_v2: TableV2,
-      accordion: Accordion,
+      accordion: WebsiteAccordion,
       props_seksjon: PropsSeksjon,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,

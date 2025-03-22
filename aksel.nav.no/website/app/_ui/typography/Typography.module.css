@@ -6,6 +6,11 @@
   padding: var(--ax-space-2) var(--ax-space-4);
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   font-family: var(--website-font-mono);
+  display: inline;
+
+  &[data-highlighted="true"] {
+    background-color: var(--ax-bg-brand-blue-moderateA);
+  }
 }
 
 /* className="list-margin max-w-text" */

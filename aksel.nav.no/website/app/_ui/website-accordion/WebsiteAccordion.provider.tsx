@@ -9,7 +9,7 @@ type AccordionContextProps = {
 
 const AccordionContext = createContext<AccordionContextProps | null>(null);
 
-function AccordionProvider({
+function WebsiteAccordionProvider({
   children,
   options,
 }: {
@@ -46,12 +46,14 @@ function AccordionProvider({
   );
 }
 
-function useAccordion() {
+function useWebsiteAccordion() {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error("useAccordion must be used within an AccordionProvider");
+    throw new Error(
+      "useWebsiteAccordion must be used within an WebsiteAccordionProvider",
+    );
   }
   return context;
 }
 
-export { AccordionProvider, useAccordion };
+export { WebsiteAccordionProvider, useWebsiteAccordion };

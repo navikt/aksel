@@ -1,7 +1,8 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Link } from "@navikt/ds-react";
+import { Link, VStack } from "@navikt/ds-react";
 import { Code } from "../typography/Code";
+import styles from "./PropsSeksjon.module.css";
 
 function PropsSeksjonDescription({
   description,
@@ -15,11 +16,11 @@ function PropsSeksjonDescription({
   }
 
   return (
-    <li className="my-3 flex flex-col px-3 md:flex-row">
-      <div className="min-w-24 text-base font-semibold">Description:</div>
+    <li className={styles.propsSeksjonLi}>
+      <div className={styles.propsSeksjonLiTitle}>Description:</div>
 
       <div>
-        <div className="mr-2 flex flex-col gap-2 text-base">
+        <VStack gap="space-8" marginInline="0 space-8">
           <Markdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -29,7 +30,7 @@ function PropsSeksjonDescription({
           >
             {description}
           </Markdown>
-        </div>
+        </VStack>
         {params && (
           <ul>
             {params.map((param) => {
