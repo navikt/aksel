@@ -5,6 +5,7 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { Alert } from "../alert/Alert";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
@@ -32,6 +33,7 @@ function customPortableTextComponents({
       relatert_innhold: RelatertInnhold,
       do_dont: DoDont,
       bilde: Bilde,
+      alert: Alert,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
