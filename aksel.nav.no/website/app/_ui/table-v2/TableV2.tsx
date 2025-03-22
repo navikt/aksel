@@ -1,4 +1,13 @@
-import { Box, Table } from "@navikt/ds-react";
+import { Box } from "@navikt/ds-react";
+import {
+  Table,
+  TableBody,
+  TableDataCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+  /* @ts-expect-error: Workspace cant resolve import */
+} from "@navikt/ds-react/Table";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 
 function TableV2(props: ExtractPortableComponentProps<"tabell_v2">) {
@@ -18,24 +27,24 @@ function TableV2(props: ExtractPortableComponentProps<"tabell_v2">) {
   return (
     <Box overflowX="auto" data-block-margin="space-28" asChild>
       <Table>
-        <Table.Header>
-          <Table.Row>
+        <TableHeader>
+          <TableRow>
             {header?.map((cell, y) => (
-              <Table.HeaderCell key={y} scope="col">
+              <TableHeaderCell key={y} scope="col">
                 {cell}
-              </Table.HeaderCell>
+              </TableHeaderCell>
             ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {content?.map((row) => (
-            <Table.Row key={row?._key}>
+            <TableRow key={row?._key}>
               {row?.cells?.map((cell, y) => (
-                <Table.DataCell key={y}>{cell}</Table.DataCell>
+                <TableDataCell key={y}>{cell}</TableDataCell>
               ))}
-            </Table.Row>
+            </TableRow>
           ))}
-        </Table.Body>
+        </TableBody>
       </Table>
     </Box>
   );
