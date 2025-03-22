@@ -5,6 +5,7 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { Accordion } from "../accordion/Accordion";
 import { Alert } from "../alert/Alert";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
@@ -38,6 +39,7 @@ function customPortableTextComponents({
       alert: Alert,
       expansioncard: ExpansionCard,
       tabell_v2: TableV2,
+      accordion: Accordion,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
