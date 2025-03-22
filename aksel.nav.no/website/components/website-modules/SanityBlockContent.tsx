@@ -30,10 +30,10 @@ import AkselLink from "./AkselLink";
 
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
-    /* TODO: ^completed */
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
-    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     do_dont: ({ value }) => <DoDont node={value} />,
+    /* TODO: ^completed */
+    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     bilde: ({ value }) => <Bilde node={value} />,
     alert: ({ value }) => <Alert node={value} />,
     expansioncard: ({ value }) => <ExpansionCard node={value} />,

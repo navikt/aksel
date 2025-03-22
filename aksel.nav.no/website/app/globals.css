@@ -16,6 +16,10 @@
   &[data-block-margin="space-28"] {
     margin-block: var(--ax-space-28);
   }
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .sr-only {

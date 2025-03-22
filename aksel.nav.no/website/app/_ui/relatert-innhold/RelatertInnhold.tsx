@@ -34,7 +34,7 @@ function RelatertInnhold(
       <HStack gap="space-8" align="center" marginBlock="0 space-4">
         <LinkIcon fontSize="1.5rem" title="Lenker" aria-hidden />
         <Heading size="small" as="p">
-          {title || "Relevante lenker"}
+          {title || "Lenker"}
         </Heading>
       </HStack>
       <List as="ul">
