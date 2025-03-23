@@ -11,6 +11,7 @@ import { Kbd } from "../kbd/Kbd";
 import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
 import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
+import { Tips } from "../tips/Tips";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
@@ -44,6 +45,7 @@ function customPortableTextComponents({
       accordion: WebsiteAccordion,
       props_seksjon: PropsSeksjon,
       video: Video,
+      tips: Tips,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
