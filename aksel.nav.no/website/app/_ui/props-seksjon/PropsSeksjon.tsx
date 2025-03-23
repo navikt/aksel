@@ -1,8 +1,8 @@
 import { BodyShort, Box, Heading } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { Code } from "../typography/Code";
+import { PropsSeksjonCode } from "./PropsSeksjon.code";
 import { PropsSeksjonDescription } from "./PropsSeksjon.decription";
-import { PropsSeksjonCode } from "./PropsSeksjon.example";
 import styles from "./PropsSeksjon.module.css";
 
 type PropsSeksjonT = ExtractPortableComponentProps<"props_seksjon">;
