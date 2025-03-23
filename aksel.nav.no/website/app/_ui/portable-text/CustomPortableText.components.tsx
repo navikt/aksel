@@ -14,6 +14,7 @@ import { TableV2 } from "../table-v2/TableV2";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
+import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
 import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
@@ -42,6 +43,7 @@ function customPortableTextComponents({
       tabell_v2: TableV2,
       accordion: WebsiteAccordion,
       props_seksjon: PropsSeksjon,
+      video: Video,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
