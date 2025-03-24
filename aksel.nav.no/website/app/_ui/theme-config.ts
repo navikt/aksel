@@ -32,8 +32,8 @@ const statusToText: Record<NonNullable<StatusTagT>, string> = {
   ready: "Stabil",
 };
 
-function getStatusTag(statusTag: StatusTagT) {
-  if (!statusTag) {
+function getStatusTag(statusTag: StatusTagT, ignoreStable = false) {
+  if (!statusTag || (statusTag === "ready" && ignoreStable)) {
     return null;
   }
 

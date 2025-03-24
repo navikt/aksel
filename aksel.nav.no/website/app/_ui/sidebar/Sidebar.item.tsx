@@ -3,9 +3,9 @@
 import cl from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BodyShort } from "@navikt/ds-react";
+import { BodyShort, Tag } from "@navikt/ds-react";
 import { SidebarPageT } from "@/types";
-import { StatusTag } from "@/web/StatusTag";
+import { getStatusTag } from "../theme-config";
 import styles from "./Sidebar.module.css";
 
 function SidebarItem(props: {
@@ -17,6 +17,7 @@ function SidebarItem(props: {
   const pathName = usePathname();
 
   const active = pathName?.split("#")[0] === `/${page.slug}`;
+  const statusTag = getStatusTag(page.tag, true);
 
   return (
     <BodyShort
@@ -37,7 +38,15 @@ function SidebarItem(props: {
         data-umami-event-kilde="sidebar"
       >
         {page.heading}
-        <StatusTag size="xsmall" status={page.tag} />
+        {statusTag && (
+          <Tag
+            variant="info"
+            size="xsmall"
+            data-color-role={statusTag.colorRole}
+          >
+            {statusTag.text}
+          </Tag>
+        )}
       </Link>
     </BodyShort>
   );
