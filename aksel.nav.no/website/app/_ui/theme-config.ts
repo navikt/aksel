@@ -32,8 +32,13 @@ const statusToText: Record<NonNullable<StatusTagT>, string> = {
   ready: "Stabil",
 };
 
-function getStatusTag(statusTag: StatusTagT) {
-  if (!statusTag) {
+/**
+ * Gets config for use in Tag-components on Aksel based on article status.
+ * @param statusTag Current tag: beta, deprecated, new, ready
+ * @param ignoreStable Counts ready as null
+ */
+function getStatusTag(statusTag: StatusTagT, ignoreStable = false) {
+  if (!statusTag || (statusTag === "ready" && ignoreStable)) {
     return null;
   }
 

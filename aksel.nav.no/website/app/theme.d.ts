@@ -9,5 +9,9 @@ type AkselBrandColors =
 declare module "react" {
   interface HTMLAttributes {
     "data-color-role"?: GlobalColorRoles | AkselBrandColors;
+    /**
+     * Standarized margin for PortableText blocks.
+     */
+    "data-block-margin"?: "space-28";
   }
 }

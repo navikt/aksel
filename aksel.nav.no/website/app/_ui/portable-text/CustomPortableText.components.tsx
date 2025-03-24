@@ -5,10 +5,20 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { Bilde } from "../bilde/Bilde";
+import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
+import { PropsSeksjon } from "../props-seksjon/PropsSeksjon";
+import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
+import { TableV2 } from "../table-v2/TableV2";
+import { Tips } from "../tips/Tips";
 import { Code } from "../typography/Code";
 import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
+import { Video } from "../video/Video";
+import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
+import { WebsiteAlert } from "../website-alert/WebsiteAlert";
+import { WebsiteExpansionCard } from "../website-expansioncard/WebsiteExpansionCard";
 import styles from "./CustomPortableText.module.css";
 
 type CustomPortableTextComponentsProps = {
@@ -25,7 +35,20 @@ function customPortableTextComponents({
   const marks = marksComponents();
 
   return {
+    types: {
+      relatert_innhold: RelatertInnhold,
+      do_dont: DoDont,
+      bilde: Bilde,
+      alert: WebsiteAlert,
+      expansioncard: WebsiteExpansionCard,
+      tabell_v2: TableV2,
+      accordion: WebsiteAccordion,
+      props_seksjon: PropsSeksjon,
+      video: Video,
+      tips: Tips,
+    } /* satisfies Record<PortableContentTypes, any> */,
     block,
+    marks,
     list: {
       bullet: ({ children }) => <List as="ul">{children}</List>,
       number: ({ children }) => <List as="ol">{children}</List>,
@@ -34,7 +57,6 @@ function customPortableTextComponents({
       bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
       number: ({ children }) => <ListItem>{children}</ListItem>,
     },
-    marks,
     unknownBlockStyle: ({ children }) =>
       withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
     unknownType: () => null,

@@ -148,7 +148,6 @@ const Riktekst = (
     | "grunnleggende"
     | "templates"
     | "komponent"
-    | "prinsipp"
     | "standard"
     | "standalone"
     | "accordion",
@@ -181,12 +180,7 @@ const Riktekst = (
     "exampletext_block",
   ];
 
-  const komponent = [
-    "props_seksjon",
-    "tastatur_modul",
-    "kode_eksempler",
-    "token_ref",
-  ];
+  const komponent = ["props_seksjon", "kode_eksempler", "token_ref"];
 
   const templates = ["kode_eksempler", "exampletext_block"];
   const grunnleggende = ["spesial_seksjon", "attachment", "props_seksjon"];
@@ -200,9 +194,6 @@ const Riktekst = (
       break;
     case "grunnleggende":
       fields.push(...grunnleggende);
-      break;
-    case "prinsipp":
-      fields.push("innholdskort");
       break;
     case "accordion":
       fields = [...accordion];
@@ -240,7 +231,7 @@ export const RiktekstPrinsipp = {
   title: "Riktekst Aksel",
   name: "riktekst_prinsipp",
   type: "array",
-  of: Riktekst("prinsipp"),
+  of: Riktekst("standard"),
   icon: () => <FileTextIcon aria-hidden />,
 };
 

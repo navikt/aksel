@@ -9,7 +9,7 @@ export default async function DesignsystemLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={styles.websitePage}>
       <Header />
 
       <div className={styles.pageLayout}>
