@@ -127,7 +127,7 @@ export const migrations: {
       description:
         "Update Box to to BoxNew (future Box) using the new token system",
       value: "box-to-boxnew",
-      path: "box-to-boxnew/box-to-boxnew",
+      path: "darkside/box-to-boxnew/box-to-boxnew",
     },
   ],
 };
