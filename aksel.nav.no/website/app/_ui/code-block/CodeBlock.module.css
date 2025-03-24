@@ -1,0 +1,59 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
+
+.codeBlock {
+  background: var(--ax-bg-neutral-soft);
+  border-radius: var(--ax-border-radius-xlarge);
+}
+
+.codeBlockPre {
+  border: 1px solid var(--ax-border-neutral-subtleA);
+  padding: var(--ax-space-8);
+  font-size: var(--ax-font-size-medium);
+  font-family: var(--aksel-font-mono);
+}
+
+.codeBlockLineNumber {
+  padding-inline: var(--ax-space-16);
+  text-align: right;
+}
+
+.codeBlockWithLineNumbers {
+  & code {
+    counter-reset: line;
+    position: relative;
+  }
+
+  & .codeBlockLine {
+    counter-increment: line;
+    margin-left: var(--ax-space-40);
+
+    &::before {
+      content: counter(line);
+      width: 1.5rem;
+      text-align: right;
+      user-select: none;
+      color: var(--ax-text-neutral-subtle);
+      font-family: var(--aksel-font-mono);
+      font-size: var(--ax-font-size-small);
+      display: inline-block;
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.codeBlockHeader {
+  padding-inline: var(--ax-space-16) var(--ax-space-8);
+  display: flex;
+
+  /* Overrides box-shadow on Aksel tablist */
+  & > div {
+    box-shadow: none;
+  }
+}
+
+.codeBlockHeaderItem {
+  min-height: 3rem;
+  padding: var(--ax-space-12) var(--ax-space-16);
+  color: var(--ax-text-neutral);
+}
