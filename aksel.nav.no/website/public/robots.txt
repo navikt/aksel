@@ -21,5 +21,6 @@ Disallow: /templates
 Disallow: /sandbox
 Disallow: /admin
 Disallow: /gp
+Disallow: /dev
 
 Sitemap: https://aksel.nav.no/sitemap.xml

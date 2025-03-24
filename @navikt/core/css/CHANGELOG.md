@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.17.4
+
+### Patch Changes
+
+- Modal: Updated animations for reduced movement. ([#3671](https://github.com/navikt/aksel/pull/3671))
+
 ## 7.17.3
 
 ### Patch Changes

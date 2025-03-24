@@ -56,7 +56,7 @@ export const Editors = defineType({
         media: () => (
           <Avatar
             size={100}
-            name={title}
+            name={title ?? ""}
             square
             variant="beam"
             colors={["#D1DAB9", "#92BEA5", "#6F646C", "#671045", "#31233E"]}

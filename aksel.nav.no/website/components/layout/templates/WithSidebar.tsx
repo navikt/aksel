@@ -30,6 +30,10 @@ export const WithSidebar = ({
   footer?: React.ReactNode;
   variant?: "page" | "landingPage";
 }) => {
+  const imageUrl = urlFor(pageProps.status?.bilde)
+    ?.auto("format")
+    .url();
+
   return (
     <Box
       background="bg-default"
@@ -76,7 +80,7 @@ export const WithSidebar = ({
                 {intro}
               </div>
             </div>
-            {variant === "page" && pageProps.status?.bilde && (
+            {variant === "page" && imageUrl && (
               <div
                 className={cl(
                   "relative hidden aspect-square h-[12.5rem] lg:block xl:mr-40",
@@ -86,9 +90,7 @@ export const WithSidebar = ({
                 )}
               >
                 <Image
-                  src={urlFor(pageProps.status?.bilde)
-                    .auto("format")
-                    .url()}
+                  src={imageUrl}
                   decoding="async"
                   layout="fill"
                   objectFit="contain"

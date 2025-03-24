@@ -12,18 +12,25 @@ export const HighlightedBlogg = ({
   blogg: ResolveContributorsT<ResolveSlugT<AkselBloggDocT>>;
 }) => {
   const date = useFormatedDate(blogg?.publishedAt ?? blogg._createdAt);
+
+  const imageUrl = urlFor(blogg?.seo?.image)
+    ?.quality(100)
+    .auto("format")
+    .url();
+  const imageBlurUrl = urlFor(blogg?.seo?.image)
+    ?.width(24)
+    .height(24)
+    .blur(10)
+    .url();
+
   return (
     <article>
       <div className="col-span-1 hidden md:block">
         <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
-          {blogg?.seo?.image ? (
+          {imageUrl ? (
             <Image
-              src={urlFor(blogg.seo.image).quality(100).auto("format").url()}
-              blurDataURL={urlFor(blogg.seo.image)
-                .width(24)
-                .height(24)
-                .blur(10)
-                .url()}
+              src={imageUrl}
+              blurDataURL={imageBlurUrl}
               placeholder="blur"
               quality={100}
               layout="fill"
@@ -65,14 +72,10 @@ export const HighlightedBlogg = ({
       {/* Mobile view */}
       <div className="w-full md:hidden">
         <div className="relative mb-10 block aspect-video rounded-lg ring-1 ring-border-subtle">
-          {blogg?.seo?.image ? (
+          {imageUrl ? (
             <Image
-              src={urlFor(blogg.seo.image).quality(100).auto("format").url()}
-              blurDataURL={urlFor(blogg.seo.image)
-                .width(24)
-                .height(24)
-                .blur(10)
-                .url()}
+              src={imageUrl}
+              blurDataURL={imageBlurUrl}
               placeholder="blur"
               quality={100}
               layout="fill"

@@ -26,6 +26,9 @@ export const Hit = forwardRef<
       ? `/${hit.item.slug}#${hit.anchor}`
       : `/${hit.item.slug}`;
 
+  const imageUrl = urlFor(hit?.item?.status?.bilde)
+    ?.auto("format")
+    .url();
   return (
     <li
       ref={ref}
@@ -75,9 +78,9 @@ export const Hit = forwardRef<
 
       {!simple && (
         <div className="hidden aspect-square w-24 sm:block">
-          {hit.item?.status?.bilde && (
+          {imageUrl && (
             <Image
-              src={urlFor(hit.item.status.bilde).auto("format").url()}
+              src={imageUrl}
               decoding="sync"
               width="96"
               height="96"

@@ -1,0 +1,27 @@
+/* className="bg-surface-neutral-subtle px-1 py-05 font-mono text-sm font-semibold" */
+
+.typoCode {
+  border-radius: var(--ax-border-radius-small);
+  background-color: var(--ax-bg-neutral-softA);
+  padding: var(--ax-space-2) var(--ax-space-4);
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  font-family: var(--website-font-mono);
+}
+
+/* className="list-margin max-w-text" */
+.typoList {
+  max-width: 600px;
+
+  /* stylelint-disable-next-line aksel/no-class-override */
+  .navds-body-long.navds-typo--spacing + & {
+    margin-top: -1rem;
+  }
+}
+
+.typoListIcon {
+  transform: rotate(45deg);
+
+  & > * {
+    fill: var(--ax-bg-brand-blue-strong);
+  }
+}

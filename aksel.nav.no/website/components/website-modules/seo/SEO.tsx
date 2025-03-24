@@ -18,6 +18,12 @@ export function SEO({
   fallbackImage,
   canonical,
 }: SEOProps) {
+  const imageUrl = urlFor(image)
+    ?.width(1200)
+    .height(630)
+    .fit("crop")
+    .quality(100)
+    .url();
   return (
     <Head>
       <title>{`${title} - aksel.nav.no`}</title>
@@ -32,17 +38,8 @@ export function SEO({
       {description && (
         <meta property="og:description" content={description} key="ogdesc" />
       )}
-      {image && (
-        <meta
-          property="og:image"
-          content={urlFor(image)
-            .width(1200)
-            .height(630)
-            .fit("crop")
-            .quality(100)
-            .url()}
-          key="ogimage"
-        />
+      {imageUrl && (
+        <meta property="og:image" content={imageUrl} key="ogimage" />
       )}
       {!image && fallbackImage && (
         <meta property="og:image" content={fallbackImage} key="ogimage" />
