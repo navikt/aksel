@@ -1,7 +1,7 @@
 import { PortableTextBlock } from "next-sanity";
 import { Accordion } from "@navikt/ds-react";
+import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { CustomPortableText } from "../portable-text/CustomPortableText";
 import { WebsiteAccordionItem } from "./WebsiteAccordion.item";
 import { WebsiteAccordionProvider } from "./WebsiteAccordion.provider";
 

@@ -7,8 +7,8 @@ import {
   ExpansionCardTitle,
   /* @ts-expect-error Workspace cant resolve valid import */
 } from "@navikt/ds-react/ExpansionCard";
+import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { CustomPortableText } from "../portable-text/CustomPortableText";
 
 const cardSize = {
   h2: "large",

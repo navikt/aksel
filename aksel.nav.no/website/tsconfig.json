@@ -34,6 +34,9 @@
       "@/sanity/client.server": ["./sanity/interface/client.server.ts"],
       "@/sanity/interface": ["./sanity/interface/interface.ts"],
       "@/sanity/queries": ["./sanity/interface/queries.js"],
+      "@/app/CustomPortableText": [
+        "./app/_ui/portable-text/CustomPortableText.tsx"
+      ],
       "@/app/*": ["./app/*"]
     },
     "plugins": [

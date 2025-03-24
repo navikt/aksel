@@ -1,8 +1,8 @@
 import { PortableTextBlock } from "next-sanity";
 import { LightBulbIcon } from "@navikt/aksel-icons";
 import { HStack, Heading } from "@navikt/ds-react";
+import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { CustomPortableText } from "../portable-text/CustomPortableText";
 import styles from "./Tips.module.css";
 
 function Tips(props: ExtractPortableComponentProps<"tips">) {

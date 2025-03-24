@@ -1,7 +1,7 @@
 import { PortableTextBlock } from "next-sanity";
 import { Alert, Heading } from "@navikt/ds-react";
+import { CustomPortableText } from "@/app/CustomPortableText";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { CustomPortableText } from "../portable-text/CustomPortableText";
 
 function WebsiteAlert(props: ExtractPortableComponentProps<"alert">) {
   const { body, variant, heading, heading_level } = props.value;
