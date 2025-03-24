@@ -12,6 +12,12 @@ spec:
   port: 3000
   ingresses:
     - "https://aksel.ansatt.dev.nav.no"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
   liveness:
     path: /api/isAlive
     initialDelay: 10
@@ -36,6 +42,9 @@ spec:
     - emptyDir:
         medium: Memory
       mountPath: /app/aksel.nav.no/website/.next/cache
+    - emptyDir:
+        medium: Memory
+      mountPath: /app/aksel.nav.no/website/.next/server/pages
   azure:
     application:
       enabled: true

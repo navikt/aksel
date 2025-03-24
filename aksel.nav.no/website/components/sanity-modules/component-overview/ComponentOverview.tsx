@@ -126,6 +126,7 @@ const ComponentOverview = ({ node }: { node: ArticleListT }) => {
                       href={`/${x?.slug.current}`}
                       passHref
                       legacyBehavior
+                      prefetch={false}
                     >
                       <Heading
                         as="a"
