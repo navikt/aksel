@@ -1,16 +1,18 @@
 import type { API, FileInfo } from "jscodeshift";
-import { findComponentImport, findJSXElement } from "../../../utils/ast";
+import {
+  findComponentImport,
+  findJSXElement,
+  findProp,
+} from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
 // import { getLineTerminator } from "../../utils/lineterminator";
 // import renameProps from "../../utils/rename-props";
 
 // to look up in replacements
-const deprecationMap = ["background", "borderColor", "shadow"];
+const propsAffected = ["background", "borderColor", "shadow"];
 
 export default function transformer(file: FileInfo, api: API) {
-  console.log("### start transformer");
-
   const j = api.jscodeshift;
   const root = j(file.source);
 
@@ -23,22 +25,31 @@ export default function transformer(file: FileInfo, api: API) {
     packageType: "react",
   });
 
-  console.log({ sourceName });
-
   if (!sourceName) {
     return;
   }
 
-  const jsx = findJSXElement({
+  const astElements = findJSXElement({
     root,
     j,
     name: sourceName,
     originalName: "Box",
   });
-  console.log({ jsx });
 
-  for (const prop of deprecationMap) {
-    // conditional renameProps()
+  for (const astElement of astElements.paths()) {
+    for (const prop of propsAffected) {
+      findProp({ j, path: astElement, name: prop }).forEach((attr) => {
+        const attrvalue = attr.value.value;
+        if (attrvalue.type === "StringLiteral") {
+          if (
+            prop === "background" && // lookup instead (map)
+            (attrvalue.value as unknown as string) === "bg-subtle"
+          ) {
+            attrvalue.value = "bg-neutral-soft";
+          }
+        }
+      });
+    }
   }
 
   return root.toSource(toSourceOptions);
