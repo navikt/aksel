@@ -65,7 +65,8 @@ export type TokenCategoriesT = ColorCategoriesT &
 const COLOR_ROLES: ColorRolesT = {
   neutral: {
     title: "Neutral",
-    description: "Neutral brukes på elementer som ikke skal stikke seg ut eller har et bestemt budskap.",
+    description:
+      "Neutral brukes på elementer som ikke skal stikke seg ut eller har et bestemt budskap.",
   },
   accent: {
     title: "Accent",
@@ -73,7 +74,8 @@ const COLOR_ROLES: ColorRolesT = {
   },
   success: {
     title: "Success",
-    description: "Success brukes på elementer som har en positiv interaksjon eller budskap.",
+    description:
+      "Success brukes på elementer som har en positiv interaksjon eller budskap.",
   },
   warning: {
     title: "Warning",
@@ -81,38 +83,45 @@ const COLOR_ROLES: ColorRolesT = {
   },
   danger: {
     title: "Danger",
-    description: "Danger brukes på elementer som har en destruktiv interaksjon eller kommuniserer at noe gikk galt.",
+    description:
+      "Danger brukes på elementer som har en destruktiv interaksjon eller kommuniserer at noe gikk galt.",
   },
   info: {
     title: "Info",
-    description: "Info brukes på elementer som har informerer eller gir opplysning.",
+    description:
+      "Info brukes på elementer som har informerer eller gir opplysning.",
   },
   "brand-magenta": {
     title: "Brand magenta",
-    description: "Brand Magenta er den primære brand-fargen. Brukes sparsommelig.",
+    description:
+      "Brand Magenta er den primære brand-fargen. Brukes sparsommelig.",
   },
   "brand-beige": {
     title: "Brand beige",
-    description: "Brand Beige er den sekundære brand-fargen. Brukes sparsommelig.",
+    description:
+      "Brand Beige er den sekundære brand-fargen. Brukes sparsommelig.",
   },
   "brand-blue": {
     title: "Brand blue",
-    description: "Brand Blue er den tertiære brand-fargen. Kan brukes mer enn de andre brand-fargene.",
+    description:
+      "Brand Blue er den tertiære brand-fargen. Kan brukes mer enn de andre brand-fargene.",
   },
   "meta-lime": {
     title: "Meta lime",
-    description: "Meta Lime brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
+    description:
+      "Meta Lime brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
   "meta-purple": {
     title: "Meta purple",
-    description: "TODO: Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
+    description:
+      "TODO: Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
 };
 
 const FONT_ROLES: FontRolesT = {
   family: {
     title: "Family",
-    description: "Fonten som brukes i fontstilene.",
+    description: "Fonten som brukes i [fontstilene](https://www.nav.no).",
   },
   "line-height": {
     title: "Line height",
@@ -157,7 +166,8 @@ const TOKEN_CATEGORIES: TokenCategoriesT = {
   },
   shadow: {
     title: "Shadows",
-    description: "Skyggestil som brukes på svevende elementer (popovers og modaler).",
+    description:
+      "Skyggestil som brukes på svevende elementer (popovers og modaler).",
   },
   space: {
     title: "Spacing",
@@ -174,7 +184,8 @@ const TOKEN_CATEGORIES: TokenCategoriesT = {
   },
   breakpoint: {
     title: "Breakpoints",
-    description: "Skjermbreddeverdier som kan utløse endring i layout og innhold.",
+    description:
+      "Skjermbreddeverdier som kan utløse endring i layout og innhold.",
     roles: BREAKPOINT_ROLES,
   },
 };

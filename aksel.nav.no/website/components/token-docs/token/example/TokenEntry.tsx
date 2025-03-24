@@ -1,4 +1,5 @@
 import { Box, CopyButton, Detail, HStack, VStack } from "@navikt/ds-react";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import TokenPreview from "./TokenPreview";
 
 const TokenEntry = ({ index, token }: { index: number; token: any }) => {
@@ -27,7 +28,11 @@ const TokenEntry = ({ index, token }: { index: number; token: any }) => {
                 <Detail textColor="subtle">{token.rawValue}</Detail>
               )}
           </VStack>
-          {token.comment && <Detail>{token.comment}</Detail>}
+          {token.comment && (
+            <Detail>
+              <TextWithMarkdown>{token.comment}</TextWithMarkdown>
+            </Detail>
+          )}
         </VStack>
       </HStack>
     </Box>

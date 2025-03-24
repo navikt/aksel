@@ -1,5 +1,6 @@
 import React from "react";
 import { BodyLong, Heading, VStack } from "@navikt/ds-react";
+import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import TokenRolesChips from "./TokenRolesChips";
 import { BreakpointRolesT, ColorRolesT, FontRolesT } from "./config";
 import { sortTokens } from "./token-utils";
@@ -15,7 +16,7 @@ const TokenCategory = ({
   id: string;
   title: string;
   description: string;
-  roles?: ColorRolesT[] | FontRolesT[] | BreakpointRolesT[];
+  roles?: ColorRolesT | FontRolesT | BreakpointRolesT;
   tokens: (typeof tokenDocs)[number][];
 }) => {
   const sortedTokens = tokens.sort(sortTokens);
@@ -27,13 +28,24 @@ const TokenCategory = ({
       </Heading>
       <div>
         <VStack gap="4">
-          <BodyLong as="p">{description}</BodyLong>
+          {description && (
+            <BodyLong as="p">
+              <TextWithMarkdown>{description}</TextWithMarkdown>
+            </BodyLong>
+          )}
           {roles && (
             <TokenRolesChips
               roles={roles}
               selectedRole={selectedRole}
               setSelectedRole={setSelectedRole}
             />
+          )}
+          {selectedRole && roles && (
+            <BodyLong as="p">
+              <TextWithMarkdown>
+                {roles[selectedRole]?.description}
+              </TextWithMarkdown>
+            </BodyLong>
           )}
           <div>
             {sortedTokens
