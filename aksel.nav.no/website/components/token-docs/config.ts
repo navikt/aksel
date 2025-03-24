@@ -65,116 +65,116 @@ export type TokenCategoriesT = ColorCategoriesT &
 const COLOR_ROLES: ColorRolesT = {
   neutral: {
     title: "Neutral",
-    description: "TODO: Sjur fyller ut",
+    description: "Neutral brukes på elementer som ikke skal stikke seg ut eller har et bestemt budskap.",
   },
   accent: {
     title: "Accent",
-    description: "TODO: Sjur fyller ut",
+    description: "Accent brukes som standard farge på interaktive elementer.",
   },
   success: {
     title: "Success",
-    description: "TODO: Sjur fyller ut",
+    description: "Success brukes på elementer som har en positiv interaksjon eller budskap.",
   },
   warning: {
     title: "Warning",
-    description: "TODO: Sjur fyller ut",
+    description: "Warning brukes på elementer som kommuniserer advarsel.",
   },
   danger: {
     title: "Danger",
-    description: "TODO: Sjur fyller ut",
+    description: "Danger brukes på elementer som har en destruktiv interaksjon eller kommuniserer at noe gikk galt.",
   },
   info: {
     title: "Info",
-    description: "TODO: Sjur fyller ut",
+    description: "Info brukes på elementer som har informerer eller gir opplysning.",
   },
   "brand-magenta": {
     title: "Brand magenta",
-    description: "TODO: Sjur fyller ut",
+    description: "Brand Magenta er den primære brand-fargen. Brukes sparsommelig.",
   },
   "brand-beige": {
     title: "Brand beige",
-    description: "TODO: Sjur fyller ut",
+    description: "Brand Beige er den sekundære brand-fargen. Brukes sparsommelig.",
   },
   "brand-blue": {
     title: "Brand blue",
-    description: "TODO: Sjur fyller ut",
+    description: "Brand Blue er den tertiære brand-fargen. Kan brukes mer enn de andre brand-fargene.",
   },
   "meta-lime": {
     title: "Meta lime",
-    description: "TODO: Sjur fyller ut",
+    description: "Meta Lime brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
   "meta-purple": {
     title: "Meta purple",
-    description: "TODO: Sjur fyller ut",
+    description: "TODO: Meta Purple brukes gjerne på metadata. Team definerer selv hva fargen kommuniserer.",
   },
 };
 
 const FONT_ROLES: FontRolesT = {
   family: {
     title: "Family",
-    description: "TODO: Sjur fyller ut",
+    description: "Fonten som brukes i fontstilene.",
   },
   "line-height": {
     title: "Line height",
-    description: "TODO: Sjur fyller ut",
+    description: "Linjehøyder som brukes i fontstilene.",
   },
   size: {
     title: "Size",
-    description: "TODO: Sjur fyller ut",
+    description: "Tekststørrelser som brukes i fontstilene.",
   },
   weight: {
     title: "Weight",
-    description: "TODO: Sjur fyller ut",
+    description: "Fontvekter som brukes i fontstilene.",
   },
 };
 
 const BREAKPOINT_ROLES: BreakpointRolesT = {
   "mobile first": {
     title: "Mobile first",
-    description: "TODO: Sjur fyller ut",
+    description: "Brekkpunkter som tar utgangspunkt i mobil først.",
   },
   "desktop first": {
     title: "Desktop first",
-    description: "TODO: Sjur fyller ut",
+    description: "Brekkpunkter som tar utgangspunkt i desktop først.",
   },
 };
 
 const TOKEN_CATEGORIES: TokenCategoriesT = {
   backgroundColor: {
     title: "Background colors",
-    description: "TODO: Sjur fyller ut",
+    description: "Farge på bakgrunner.",
     roles: COLOR_ROLES,
   },
   borderColor: {
     title: "Border colors",
-    description: "TODO: Sjur fyller ut",
+    description: "Farge på border/stroke.",
     roles: COLOR_ROLES,
   },
   textColor: {
     title: "Text colors",
-    description: "TODO: Sjur fyller ut",
+    description: "Farge på tekst og ikoner.",
     roles: COLOR_ROLES,
   },
   shadow: {
     title: "Shadows",
-    description: "TODO: Sjur fyller ut",
+    description: "Skyggestil som brukes på svevende elementer (popovers og modaler).",
   },
   space: {
     title: "Spacing",
-    description: "TODO: Sjur fyller ut",
+    description: "Avstander som brukes til padding, margin og gap.",
   },
   radius: {
     title: "Radius",
-    description: "TODO: Sjur fyller ut",
+    description: "Hjørneavrundinger som brukes på elementer.",
   },
   font: {
     title: "Fonts",
-    description: "TODO: Sjur fyller ut",
+    description: "Byggeklossene til fonstilene.",
     roles: FONT_ROLES,
   },
   breakpoint: {
     title: "Breakpoints",
-    description: "TODO: Sjur fyller ut",
+    description: "Skjermbreddeverdier som kan utløse endring i layout og innhold.",
     roles: BREAKPOINT_ROLES,
   },
 };
