@@ -121,7 +121,7 @@ const COLOR_ROLES: ColorRolesT = {
 const FONT_ROLES: FontRolesT = {
   family: {
     title: "Family",
-    description: "Fonten som brukes i [fontstilene](https://www.nav.no).",
+    description: "Fonten som brukes i fontstilene.",
   },
   "line-height": {
     title: "Line height",
