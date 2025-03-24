@@ -20,8 +20,11 @@ spec:
     limits:
       memory: 1Gi
     requests:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 140m
+      memory: 640Mi
+    scalingStrategy:
+      cpu:
+        thresholdPercentage: 70
   liveness:
     path: /api/isAlive
     initialDelay: 20
