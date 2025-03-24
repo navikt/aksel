@@ -1,4 +1,4 @@
-import { Box } from "@navikt/ds-react"
+import { BoxNew as Box } from "@navikt/ds-react"
 
 export const MyComponent = () => {
   return (<>
