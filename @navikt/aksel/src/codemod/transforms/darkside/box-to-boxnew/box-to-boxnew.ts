@@ -1,4 +1,5 @@
 import type { API, FileInfo } from "jscodeshift";
+import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
 import {
   findComponentImport,
   findJSXElement,
@@ -6,10 +7,6 @@ import {
 } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 
-// import { getLineTerminator } from "../../utils/lineterminator";
-// import renameProps from "../../utils/rename-props";
-
-// to look up in replacements
 const propsAffected = ["background", "borderColor", "shadow"];
 
 export default function transformer(file: FileInfo, api: API) {
@@ -41,12 +38,16 @@ export default function transformer(file: FileInfo, api: API) {
       findProp({ j, path: astElement, name: prop }).forEach((attr) => {
         const attrvalue = attr.value.value;
         if (attrvalue.type === "StringLiteral") {
-          if (
-            prop === "background" && // lookup instead (map)
-            (attrvalue.value as unknown as string) === "bg-subtle"
-          ) {
-            attrvalue.value = "bg-neutral-soft";
+          const config = legacyTokenConfig[attrvalue.value];
+          if (config?.replacement) {
+            attrvalue.value = config.replacement;
           }
+          // else {
+          //   // TODO: should this be to insert a comment?
+          //   attrvalue.comments = [
+          //     j.commentLine(" TODO: no replacement for this token"),
+          //   ];
+          // }
         }
       });
     }
