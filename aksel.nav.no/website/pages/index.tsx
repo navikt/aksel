@@ -1,7 +1,6 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import cl from "clsx";
 import { groq } from "next-sanity";
-import Link from "next/link";
 import { GetServerSideProps } from "next/types";
 import { useState } from "react";
 import {
@@ -181,13 +180,13 @@ const Forside = ({ page, tema, blocks }: PageProps["props"]) => {
       <Header />
       <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
         <div className="bg-violet-600 p-4 text-center text-xl text-white">
-          <Link
+          <a
             href="/darkside"
             target="_blank"
             className="rounded p-1 underline hover:decoration-2 focus:shadow-focus-inverted focus:outline-none"
           >
             Vi trenger testere fra team i Nav for darkmode og theming!
-          </Link>
+          </a>
         </div>
         <div className="z-20 pb-28">
           <div className="relative mx-auto mb-12 mt-20 grid w-full place-items-center px-4 text-center sm:mt-36 sm:max-w-[632px] sm:px-6">
