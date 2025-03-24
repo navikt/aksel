@@ -2,6 +2,8 @@
 
 import cl from "clsx";
 import { Highlight, themes } from "prism-react-renderer";
+import { useState } from "react";
+import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
 import { Button, CopyButton, HStack, Spacer } from "@navikt/ds-react";
 
 /* @ts-expect-error Import is valid, workspace just can't resolve it */
@@ -27,46 +29,69 @@ function CodeBlock(props: CodeBlockT) {
   );
 }
 
-function CodeBlockEditor(props: { value: string; code: string }) {
-  const { value, code } = props;
+function CodeBlockEditor(props: {
+  value?: string;
+  code: string;
+  extraCode?: string;
+}) {
+  const { value, code, extraCode } = props;
   const showLineNumbers = true;
 
-  const HighlightedBlock = () => (
-    <Highlight code={code} language="button.css" theme={themes.jettwaveDark}>
-      {({ tokens, getLineProps, getTokenProps }) => (
-        <pre
-          className={cl(
-            styles.codeBlockPre,
-            showLineNumbers && styles.codeBlockWithLineNumbers,
-          )}
+  const [openDisclosure, setOpenDisclosure] = useState(false);
+
+  const showDisclosure = !!extraCode || code.split("\n").length > 16;
+  const showOverflow = !!extraCode || openDisclosure;
+  const visibleCode = openDisclosure ? extraCode ?? code : code;
+
+  const Wrapper = value ? TabsPanel : "div";
+
+  return (
+    <Wrapper value={value}>
+      <Highlight code={visibleCode} language="tsx" theme={themes.jettwaveDark}>
+        {({ tokens, getLineProps, getTokenProps }) => (
+          <pre
+            className={cl(
+              styles.codeBlockPre,
+              showLineNumbers && styles.codeBlockWithLineNumbers,
+            )}
+            data-overflow={showOverflow}
+          >
+            <code>
+              {tokens.map((line, i) => (
+                <div
+                  key={i}
+                  {...getLineProps({ line })}
+                  className={styles.codeBlockLine}
+                >
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </code>
+          </pre>
+        )}
+      </Highlight>
+      {showDisclosure && (
+        <button
+          className={styles.codeBlockDisclosure}
+          onClick={() => setOpenDisclosure(!openDisclosure)}
         >
-          <code>
-            {tokens.map((line, i) => (
-              <div
-                key={i}
-                {...getLineProps({ line })}
-                className={styles.codeBlockLine}
-              >
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </code>
-        </pre>
+          {openDisclosure ? (
+            <>
+              <span>Skjul ekstra kode</span>
+              <ChevronDownUpIcon aria-hidden="true" />
+            </>
+          ) : (
+            <>
+              <span>Vis all kode</span>
+              <ChevronUpDownIcon aria-hidden="true" />
+            </>
+          )}
+        </button>
       )}
-    </Highlight>
+    </Wrapper>
   );
-
-  if (value) {
-    return (
-      <TabsPanel value={value}>
-        <HighlightedBlock />
-      </TabsPanel>
-    );
-  }
-
-  return <HighlightedBlock />;
 }
 
 function CodeBlockHeader(props: Pick<CodeBlockT, "tabs">) {

@@ -68,10 +68,16 @@ export default async function DesignsystemLayout({
             tabs={[
               { text: "Index.tsx", value: "index" },
               { text: "index.css", value: "css" },
+              { text: "test.css", value: "test" },
             ]}
           >
             <CodeBlockEditor value="index" code={TEST_STRING_ONE} />
             <CodeBlockEditor value="css" code={TEST_STRING_TWO} />
+            <CodeBlockEditor
+              value="test"
+              code={TEST_STRING_ONE}
+              extraCode={TEST_STRING_TWO}
+            />
           </CodeBlock>
           <CodeBlock tabs={[{ text: "Index.tsx", value: "index" }]}>
             <CodeBlockEditor code={TEST_STRING_TWO} />

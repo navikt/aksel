@@ -3,6 +3,7 @@
 .codeBlock {
   background: var(--ax-bg-neutral-soft);
   border-radius: var(--ax-border-radius-xlarge);
+  overflow: hidden;
 }
 
 .codeBlockPre {
@@ -10,6 +11,12 @@
   padding: var(--ax-space-8);
   font-size: var(--ax-font-size-medium);
   font-family: var(--aksel-font-mono);
+  overflow-x: auto;
+
+  &[data-overflow="false"] {
+    overflow-y: auto;
+    max-height: calc(1rem * 1.33 * 18 - var(--ax-space-8) * 2);
+  }
 }
 
 .codeBlockLineNumber {
@@ -43,8 +50,10 @@
 }
 
 .codeBlockHeader {
+  background-color: var(--ax-bg-neutral-moderate);
   padding-inline: var(--ax-space-16) var(--ax-space-8);
   display: flex;
+  border-radius: var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge) 0 0;
 
   /* Overrides box-shadow on Aksel tablist */
   & > div {
@@ -56,4 +65,17 @@
   min-height: 3rem;
   padding: var(--ax-space-12) var(--ax-space-16);
   color: var(--ax-text-neutral);
+}
+
+.codeBlockDisclosure {
+  color: var(--ax-text-neutral);
+  background-color: var(--ax-bg-neutral-moderate);
+  width: 100%;
+  display: flex;
+  gap: var(--ax-space-4);
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--ax-space-4);
+  padding-inline: var(--ax-space-8);
+  border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
 }
