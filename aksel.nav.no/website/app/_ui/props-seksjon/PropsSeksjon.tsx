@@ -46,7 +46,7 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
   }
 
   return (
-    <div lang="en" data-block-margin="space-28">
+    <div lang="en" data-block-margin="space-28" className={styles.propsSeksjon}>
       <Heading
         size="xsmall"
         level="3"

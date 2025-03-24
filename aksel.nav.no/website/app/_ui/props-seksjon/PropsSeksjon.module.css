@@ -1,3 +1,9 @@
+.propsSeksjon {
+  background-color: var(--ax-bg-raised);
+  color: var(--ax-text-neutral);
+  border-radius: var(--ax-border-radius-large);
+}
+
 .propsSeksjonHeader {
   scroll-margin-block: var(--ax-space-32);
   border-radius: var(--ax-border-radius-large) var(--ax-border-radius-large) 0 0;

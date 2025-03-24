@@ -1,3 +1,10 @@
+/* TODO: This might be a global style, so move it out if needed  */
+.websitePage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .pageLayout {
   display: grid;
   grid-template-columns: 1fr;

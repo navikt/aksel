@@ -1,5 +1,6 @@
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
+import { Theme } from "@navikt/ds-react";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
 import "./globals.css";
@@ -21,11 +22,13 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head> */}
-      <body data-theme="light" className="aksel antialiased">
-        {children}
-        <SanityLive />
-        {(await draftMode()).isEnabled && <VisualEditing />}
-      </body>
+      <Theme asChild theme="light">
+        <body className="aksel antialiased">
+          {children}
+          <SanityLive />
+          {(await draftMode()).isEnabled && <VisualEditing />}
+        </body>
+      </Theme>
     </html>
   );
 }
