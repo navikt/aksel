@@ -54,12 +54,8 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
 
   if (useTabs) {
     return (
-      <section aria-label="Kode">
-        <Tabs
-          {...props}
-          defaultValue={tabs[0].value ?? ""}
-          onChange={codeSnippet.update}
-        >
+      <section aria-label="Kode" data-block-margin="space-28" {...props}>
+        <Tabs defaultValue={tabs[0].value ?? ""} onChange={codeSnippet.update}>
           <CodeBlockHeader />
           {tabs?.map((tab) => (
             <CodeBlockEditor
@@ -76,7 +72,7 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
   }
 
   return (
-    <section aria-label="Kode" {...props}>
+    <section aria-label="Kode" data-block-margin="space-28" {...props}>
       <CodeBlockHeader />
       {tabs?.map((tab) => (
         <CodeBlockEditor
