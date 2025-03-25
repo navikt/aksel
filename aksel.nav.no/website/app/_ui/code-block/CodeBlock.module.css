@@ -70,7 +70,7 @@
   color: var(--ax-text-neutral);
 }
 
-.codeBlockDisclosure {
+.codeBlockExpander {
   color: var(--ax-text-neutral);
   background-color: var(--ax-bg-neutral-moderate);
   width: 100%;
@@ -82,6 +82,10 @@
   padding-inline: var(--ax-space-8);
   border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
   min-height: 2rem;
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
 
   &:focus-visible {
     outline: 2px solid var(--ax-border-focus);

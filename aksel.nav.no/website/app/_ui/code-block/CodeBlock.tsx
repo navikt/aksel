@@ -101,7 +101,7 @@ function CodeBlockEditor(props: {
   const { expanded, codeSnippet, useTabs, showLineNumbers, wrapCode } =
     useCodeBlock();
 
-  const showDisclosure = !!extraCode || code.split("\n").length > 16;
+  const showExpander = !!extraCode || code.split("\n").length > 16;
   const showOverflow = !!extraCode || expanded.current;
   const visibleCode = (expanded.current ? extraCode ?? code : code).trim();
 
@@ -144,9 +144,9 @@ function CodeBlockEditor(props: {
           </pre>
         )}
       </Highlight>
-      {showDisclosure && (
+      {showExpander && (
         <button
-          className={styles.codeBlockDisclosure}
+          className={styles.codeBlockExpander}
           onClick={handleExpandUpdate}
         >
           {expanded.current ? (
