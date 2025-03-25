@@ -2,7 +2,9 @@ import React from "react";
 import { useRenameCSS } from "../../../theme/Theme";
 import { useInputContext } from "../Input/Input.context";
 import { useSelectedOptionsContext } from "../SelectedOptions/selectedOptionsContext";
+import { ComboboxOption } from "../types";
 import AddNewOption from "./AddNewOption";
+import FilteredOptionsGroup from "./FilteredOptionsGroup";
 import FilteredOptionsItem from "./FilteredOptionsItem";
 import LoadingMessage from "./LoadingMessage";
 import MaxSelectedMessage from "./MaxSelectedMessage";
@@ -37,6 +39,16 @@ const FilteredOptions = () => {
     (allowNewValues && isValueNew && !maxSelected.isLimitReached) || // Render add new option
     filteredOptions.length > 0; // Render filtered options
 
+  const groups = filteredOptions.reduce(
+    (_groups: string[], option: ComboboxOption): string[] => {
+      if (option.group && !_groups.includes(option.group)) {
+        return [..._groups, option.group];
+      }
+      return _groups;
+    },
+    [],
+  );
+
   return (
     <div
       className={cn("navds-combobox__list", {
@@ -69,9 +81,20 @@ const FilteredOptions = () => {
           {isValueNew && !maxSelected.isLimitReached && allowNewValues && (
             <AddNewOption />
           )}
-          {filteredOptions.map((option) => (
-            <FilteredOptionsItem key={option.value} option={option} />
-          ))}
+          {groups.length > 0 &&
+            groups.map((group) => (
+              <FilteredOptionsGroup
+                key={group}
+                group={group}
+                options={filteredOptions.filter(
+                  (option) => option.group === group,
+                )}
+              />
+            ))}
+          {groups.length === 0 &&
+            filteredOptions.map((option) => (
+              <FilteredOptionsItem key={option.value} option={option} />
+            ))}
         </ul>
       )}
     </div>
