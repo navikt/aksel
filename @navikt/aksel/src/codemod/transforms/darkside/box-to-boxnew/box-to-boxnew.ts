@@ -6,6 +6,7 @@ import {
   findProp,
 } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
+import moveAndRenameImport from "../../../utils/moveAndRenameImport";
 
 const propsAffected = ["background", "borderColor", "shadow"];
 
@@ -15,21 +16,21 @@ export default function transformer(file: FileInfo, api: API) {
 
   const toSourceOptions = getLineTerminator(file.source);
 
-  const sourceName = findComponentImport({
+  const localName = findComponentImport({
     file,
     j,
     name: "Box",
     packageType: "react",
   });
 
-  if (!sourceName) {
+  if (!localName) {
     return;
   }
 
   const astElements = findJSXElement({
     root,
     j,
-    name: sourceName,
+    name: localName,
     originalName: "Box",
   });
 
@@ -52,6 +53,13 @@ export default function transformer(file: FileInfo, api: API) {
       });
     }
   }
+
+  moveAndRenameImport(j, root, {
+    fromImport: "@navikt/ds-react",
+    toImport: "@navikt/ds-react",
+    fromName: "Box",
+    toName: "BoxNew",
+  });
 
   return root.toSource(toSourceOptions);
 }
