@@ -1,8 +1,11 @@
 "use client";
 
+import { BodyLong } from "@navikt/ds-react";
+
 /* @ts-expect-error Workspace cant resolve valid import */
 import { Chips, ChipsToggle } from "@navikt/ds-react/Chips";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { useKodeEksempler } from "./KodeEksempler.provider";
 
 function KodeEksemplerNavigation(props: {
@@ -15,9 +18,12 @@ function KodeEksemplerNavigation(props: {
     return null;
   }
 
+  /* const desc = activeExample.current?.description; */
+  const desc = "kjasdlkja jlkasdlk jsaljdkasjl ldajk";
+
   return (
-    <div className="mb-5 max-w-xl">
-      <Chips>
+    <div>
+      <Chips className="mb-5 max-w-xl">
         {dir.filer.map((fil) => {
           if (!fil.navn) {
             return null;
@@ -36,6 +42,11 @@ function KodeEksemplerNavigation(props: {
           );
         })}
       </Chips>
+      {desc && (
+        <BodyLong className="mb-2">
+          <MarkdownText>{desc}</MarkdownText>
+        </BodyLong>
+      )}
     </div>
   );
 }

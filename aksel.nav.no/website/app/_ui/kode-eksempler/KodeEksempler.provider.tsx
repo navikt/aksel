@@ -64,7 +64,7 @@ function KodeEksemplerProvider(props: {
     setActiveExample(foundExample);
 
     const id = nameToId(dir?.title ?? "", exampleName);
-    router.push(pathname + "?" + createQueryString(id));
+    router.push(pathname + "?" + createQueryString(id), { scroll: false });
   };
 
   useEffect(() => {
