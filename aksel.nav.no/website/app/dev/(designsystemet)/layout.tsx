@@ -99,7 +99,7 @@ export default async function DesignsystemLayout({
 
       <div className={styles.pageLayout}>
         <Sidebar />
-        {/* {children} */}
+        {children}
         <div className="max-w-4xl space-y-4 p-8">
           <CodeBlock
             tabs={[

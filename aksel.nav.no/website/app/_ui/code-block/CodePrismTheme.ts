@@ -1,8 +1,10 @@
 import { PrismTheme } from "prism-react-renderer";
 import {
   TextAccent,
+  TextBrandMagentaSubtle,
   TextDangerSubtle,
   TextInfo,
+  TextInfoSubtle,
   TextNeutral,
   TextNeutralSubtle,
   TextSuccess,
@@ -11,7 +13,7 @@ import {
 } from "@navikt/ds-tokens/darkside-js";
 
 const AkselPrismTheme: PrismTheme = {
-  plain: { color: TextNeutral, backgroundColor: "#011627" },
+  plain: { color: TextNeutral },
   styles: [
     { types: ["prolog"], style: { color: TextAccent } },
     { types: ["comment"], style: { color: TextNeutralSubtle } },
@@ -19,12 +21,30 @@ const AkselPrismTheme: PrismTheme = {
       types: ["builtin", "changed", "keyword", "interpolation-punctuation"],
       style: { color: TextInfo },
     },
-    { types: ["number", "inserted"], style: { color: TextSuccess } },
+    {
+      types: [
+        "entity",
+        "url",
+        "symbol",
+        "number",
+        "boolean",
+        "variable",
+        "constant",
+        "property",
+        "regex",
+        "inserted",
+      ],
+      style: { color: TextSuccess },
+    },
     { types: ["constant"], style: { color: TextNeutral } },
     { types: ["attr-name", "variable"], style: { color: TextAccent } },
     {
-      types: ["deleted", "string", "attr-value", "template-punctuation"],
+      types: ["deleted", "attr-value", "template-punctuation"],
       style: { color: TextNeutral },
+    },
+    {
+      types: ["string"],
+      style: { color: TextBrandMagentaSubtle },
     },
     { types: ["selector"], style: { color: TextWarning } },
     { types: ["tag"], style: { color: TextSuccess } },
@@ -40,6 +60,7 @@ const AkselPrismTheme: PrismTheme = {
     { types: ["char"], style: { color: TextDangerSubtle } },
     { types: ["script"], style: { color: TextAccent } },
     { types: ["property-access"], style: { color: TextNeutral } },
+    { types: ["maybe-class-name"], style: { color: TextInfoSubtle } },
   ],
 };
 
