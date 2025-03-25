@@ -1,6 +1,6 @@
 "use client";
 
-import { Highlight, themes } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 import { useId } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
 import {
@@ -20,12 +20,18 @@ import {
   CodeBlockTabsT,
   useCodeBlock,
 } from "./CodeBlock.provider";
+import { AkselJetwaveDarkTheme } from "./CodeTheme";
 
 type CodeBlockT = {
   tabs: CodeBlockTabsT;
   showLineNumbers?: boolean;
 };
 
+/**
+ * TODO: Future upgrades
+ * - Add support for highlighting lines
+ * - Add support for DIFF
+ */
 function CodeBlock(props: CodeBlockT) {
   const { tabs, showLineNumbers = true } = props;
 
@@ -48,26 +54,29 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
 
   if (useTabs) {
     return (
-      <Tabs
-        {...props}
-        defaultValue={tabs[0].value ?? ""}
-        onChange={codeSnippet.update}
-      >
-        <CodeBlockHeader />
-        {tabs?.map((tab) => (
-          <CodeBlockEditor
-            value={tab.value}
-            key={tab.value}
-            code={tab.code}
-            extraCode={tab.extraCode}
-          />
-        ))}
-      </Tabs>
+      <section aria-label="Kode">
+        <Tabs
+          {...props}
+          defaultValue={tabs[0].value ?? ""}
+          onChange={codeSnippet.update}
+        >
+          <CodeBlockHeader />
+          {tabs?.map((tab) => (
+            <CodeBlockEditor
+              value={tab.value}
+              key={tab.value}
+              code={tab.code}
+              extraCode={tab.extraCode}
+              lang={tab.lang ?? "tsx"}
+            />
+          ))}
+        </Tabs>
+      </section>
     );
   }
 
   return (
-    <div {...props}>
+    <section aria-label="Kode" {...props}>
       <CodeBlockHeader />
       {tabs?.map((tab) => (
         <CodeBlockEditor
@@ -75,9 +84,10 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
           key={tab.value}
           code={tab.code}
           extraCode={tab.extraCode}
+          lang={tab.lang ?? "tsx"}
         />
       ))}
-    </div>
+    </section>
   );
 }
 
@@ -85,14 +95,15 @@ function CodeBlockEditor(props: {
   value: string;
   code: string;
   extraCode?: string;
+  lang: string;
 }) {
-  const { value, code, extraCode } = props;
+  const { value, code, extraCode, lang } = props;
   const { expanded, codeSnippet, useTabs, showLineNumbers, wrapCode } =
     useCodeBlock();
 
   const showDisclosure = !!extraCode || code.split("\n").length > 16;
   const showOverflow = !!extraCode || expanded.current;
-  const visibleCode = expanded.current ? extraCode ?? code : code;
+  const visibleCode = (expanded.current ? extraCode ?? code : code).trim();
 
   const Wrapper = useTabs ? TabsPanel : "div";
 
@@ -104,9 +115,9 @@ function CodeBlockEditor(props: {
   return (
     <Wrapper value={value}>
       <Highlight
-        code={visibleCode.trim()}
-        language="tsx"
-        theme={themes.jettwaveDark}
+        code={visibleCode}
+        language={getLanguage(lang)}
+        theme={AkselJetwaveDarkTheme}
       >
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre
@@ -116,17 +127,19 @@ function CodeBlockEditor(props: {
             data-overflow={showOverflow}
           >
             <code>
-              {tokens.map((line, i) => (
-                <div
-                  key={i}
-                  {...getLineProps({ line })}
-                  className={styles.codeBlockLine}
-                >
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              ))}
+              {tokens.map((line, i) => {
+                return (
+                  <div
+                    key={i}
+                    {...getLineProps({ line })}
+                    className={styles.codeBlockLine}
+                  >
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                );
+              })}
             </code>
           </pre>
         )}
@@ -219,6 +232,25 @@ function ActionButtons() {
       )}
     </HStack>
   );
+}
+
+function getLanguage(lang: string) {
+  let language = lang;
+  switch (lang) {
+    case "js":
+      language = "jsx";
+      break;
+    case "scss":
+      language = "css";
+      break;
+    case "less":
+      language = "css";
+      break;
+    default:
+      break;
+  }
+
+  return language;
 }
 
 export { CodeBlock, CodeBlockEditor };

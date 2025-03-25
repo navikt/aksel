@@ -2,11 +2,26 @@
 
 import { createContext, useContext, useState } from "react";
 
+// https://github.com/FormidableLabs/prism-react-renderer/blob/e1c83a468b05df7f452b3ad7e4ae5ab874574d4e/packages/generate-prism-languages/index.ts#L9-L23
+export const languages = [
+  "markup",
+  "jsx",
+  "tsx",
+  "rust",
+  "graphql",
+  "yaml",
+  "go",
+  "markdown",
+  "python",
+  "json",
+] as const;
+
 type CodeBlockTabsT = {
   text: string;
   value: string;
   code: string;
   extraCode?: string;
+  lang: (typeof languages)[number];
 }[];
 
 type CodeBlockContextT = {

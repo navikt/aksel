@@ -48,6 +48,10 @@
   }
 }
 
+.codeBlockLine {
+  margin-left: var(--ax-space-20);
+}
+
 .codeBlockHeader {
   background-color: var(--ax-bg-neutral-moderate);
   padding-inline: var(--ax-space-16) var(--ax-space-8);
