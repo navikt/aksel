@@ -16,15 +16,15 @@ spec:
   replicas:
     min: 2
     max: 4
+    scalingStrategy:
+      cpu:
+        thresholdPercentage: 70
   resources:
     limits:
       memory: 1Gi
     requests:
       cpu: 140m
       memory: 640Mi
-    scalingStrategy:
-      cpu:
-        thresholdPercentage: 70
   liveness:
     path: /api/isAlive
     initialDelay: 20
