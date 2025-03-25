@@ -20,7 +20,7 @@ import {
   CodeBlockTabsT,
   useCodeBlock,
 } from "./CodeBlock.provider";
-import { AkselJetwaveDarkTheme } from "./CodeTheme";
+import { AkselPrismTheme } from "./CodePrismTheme";
 
 type CodeBlockT = {
   tabs: CodeBlockTabsT;
@@ -117,7 +117,7 @@ function CodeBlockEditor(props: {
       <Highlight
         code={visibleCode}
         language={getLanguage(lang)}
-        theme={AkselJetwaveDarkTheme}
+        theme={AkselPrismTheme}
       >
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre

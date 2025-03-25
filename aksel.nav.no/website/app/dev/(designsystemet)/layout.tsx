@@ -26,6 +26,15 @@ export default async function DesignsystemLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+  function name(params:type) {
+    return null;
+  }
+
+  const test = (param: {name: string, value: number}) => {
+    return param.string + param.value;
+  }
+
   return (
     <div className={styles.websitePage}>
       <Header />
