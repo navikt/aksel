@@ -42,13 +42,9 @@ export default function transformer(file: FileInfo, api: API) {
           const config = legacyTokenConfig[attrvalue.value];
           if (config?.replacement) {
             attrvalue.value = config.replacement;
+          } else if (config?.comment) {
+            attrvalue.comments = [j.commentLine(config.comment)];
           }
-          // else {
-          //   // TODO: should this be to insert a comment?
-          //   attrvalue.comments = [
-          //     j.commentLine(" TODO: no replacement for this token"),
-          //   ];
-          // }
         }
       });
     }
