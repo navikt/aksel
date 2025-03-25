@@ -63,25 +63,25 @@ export default async function DesignsystemLayout({
       <div className={styles.pageLayout}>
         <Sidebar />
         {/* {children} */}
-        <div className="max-w-4xl p-8">
+        <div className="max-w-4xl space-y-4 p-8">
           <CodeBlock
             tabs={[
-              { text: "Index.tsx", value: "index" },
-              { text: "index.css", value: "css" },
-              { text: "test.css", value: "test" },
+              { text: "Index.tsx", value: "index", code: TEST_STRING_ONE },
+              { text: "index.css", value: "css", code: TEST_STRING_TWO },
+              {
+                text: "test.css",
+                value: "test",
+                code: TEST_STRING_ONE,
+                extraCode: TEST_STRING_TWO,
+              },
             ]}
-          >
-            <CodeBlockEditor value="index" code={TEST_STRING_ONE} />
-            <CodeBlockEditor value="css" code={TEST_STRING_TWO} />
-            <CodeBlockEditor
-              value="test"
-              code={TEST_STRING_ONE}
-              extraCode={TEST_STRING_TWO}
-            />
-          </CodeBlock>
-          <CodeBlock tabs={[{ text: "Index.tsx", value: "index" }]}>
-            <CodeBlockEditor code={TEST_STRING_TWO} />
-          </CodeBlock>
+          />
+          <CodeBlock
+            showLineNumbers={false}
+            tabs={[
+              { text: "Index.tsx", value: "index", code: TEST_STRING_ONE },
+            ]}
+          />
         </div>
       </div>
       <Footer />

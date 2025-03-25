@@ -17,34 +17,33 @@
     overflow-y: auto;
     max-height: calc(1rem * 1.33 * 18 - var(--ax-space-8) * 2);
   }
-}
 
-.codeBlockLineNumber {
-  padding-inline: var(--ax-space-16);
-  text-align: right;
-}
-
-.codeBlockWithLineNumbers {
-  & code {
-    counter-reset: line;
-    position: relative;
+  &[data-wrap="true"] {
+    white-space: pre-wrap;
   }
 
-  & .codeBlockLine {
-    counter-increment: line;
-    margin-left: var(--ax-space-40);
+  &[data-line-numbers="true"] {
+    & code {
+      counter-reset: line;
+      position: relative;
+    }
 
-    &::before {
-      content: counter(line);
-      width: 1.5rem;
-      text-align: right;
-      user-select: none;
-      color: var(--ax-text-neutral-subtle);
-      font-family: var(--aksel-font-mono);
-      font-size: var(--ax-font-size-small);
-      display: inline-block;
-      position: absolute;
-      left: 0;
+    & .codeBlockLine {
+      counter-increment: line;
+      margin-left: var(--ax-space-40);
+
+      &::before {
+        content: counter(line);
+        width: 1.5rem;
+        text-align: right;
+        user-select: none;
+        color: var(--ax-text-neutral-subtle);
+        font-family: var(--aksel-font-mono);
+        font-size: var(--ax-font-size-small);
+        display: inline-block;
+        position: absolute;
+        left: 0;
+      }
     }
   }
 }
@@ -78,4 +77,10 @@
   padding-block: var(--ax-space-4);
   padding-inline: var(--ax-space-8);
   border-radius: 0 0 var(--ax-border-radius-xlarge) var(--ax-border-radius-xlarge);
+  min-height: 2rem;
+
+  &:focus-visible {
+    outline: 2px solid var(--ax-border-focus);
+    outline-offset: -4px;
+  }
 }

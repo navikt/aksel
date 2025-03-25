@@ -1,59 +1,118 @@
 "use client";
 
-import cl from "clsx";
 import { Highlight, themes } from "prism-react-renderer";
-import { useState } from "react";
+import { useId } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
-import { Button, CopyButton, HStack, Spacer } from "@navikt/ds-react";
+import {
+  Button,
+  CopyButton,
+  HStack,
+  Spacer,
+  Tabs,
+  Theme,
+} from "@navikt/ds-react";
 
 /* @ts-expect-error Import is valid, workspace just can't resolve it */
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
+import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
 import styles from "./CodeBlock.module.css";
+import {
+  CodeBlockProvider,
+  CodeBlockTabsT,
+  useCodeBlock,
+} from "./CodeBlock.provider";
 
 type CodeBlockT = {
-  tabs?: { text: string; value: string }[];
-  children: React.ReactNode;
+  tabs: CodeBlockTabsT;
+  showLineNumbers?: boolean;
 };
 
 function CodeBlock(props: CodeBlockT) {
-  const { tabs, children } = props;
+  const { tabs, showLineNumbers = true } = props;
 
   return (
-    <div className={`dark ${styles.codeBlock}`}>
-      <Tabs defaultValue={props.tabs?.[0]?.value}>
-        <CodeBlockHeader tabs={tabs} />
+    <CodeBlockProvider tabs={tabs} showLineNumbers={showLineNumbers}>
+      <Theme
+        theme="dark"
+        hasBackground={false}
+        asChild
+        className={styles.codeBlock}
+      >
+        <CodeBlockView />
+      </Theme>
+    </CodeBlockProvider>
+  );
+}
 
-        {children}
+function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
+  const { useTabs, tabs, codeSnippet } = useCodeBlock();
+
+  if (useTabs) {
+    return (
+      <Tabs
+        {...props}
+        defaultValue={tabs[0].value ?? ""}
+        onChange={codeSnippet.update}
+      >
+        <CodeBlockHeader />
+        {tabs?.map((tab) => (
+          <CodeBlockEditor
+            value={tab.value}
+            key={tab.value}
+            code={tab.code}
+            extraCode={tab.extraCode}
+          />
+        ))}
       </Tabs>
+    );
+  }
+
+  return (
+    <div {...props}>
+      <CodeBlockHeader />
+      {tabs?.map((tab) => (
+        <CodeBlockEditor
+          value={tab.value}
+          key={tab.value}
+          code={tab.code}
+          extraCode={tab.extraCode}
+        />
+      ))}
     </div>
   );
 }
 
 function CodeBlockEditor(props: {
-  value?: string;
+  value: string;
   code: string;
   extraCode?: string;
 }) {
   const { value, code, extraCode } = props;
-  const showLineNumbers = true;
-
-  const [openDisclosure, setOpenDisclosure] = useState(false);
+  const { expanded, codeSnippet, useTabs, showLineNumbers, wrapCode } =
+    useCodeBlock();
 
   const showDisclosure = !!extraCode || code.split("\n").length > 16;
-  const showOverflow = !!extraCode || openDisclosure;
-  const visibleCode = openDisclosure ? extraCode ?? code : code;
+  const showOverflow = !!extraCode || expanded.current;
+  const visibleCode = expanded.current ? extraCode ?? code : code;
 
-  const Wrapper = value ? TabsPanel : "div";
+  const Wrapper = useTabs ? TabsPanel : "div";
+
+  const handleExpandUpdate = () => {
+    codeSnippet.update(value, !expanded.current);
+    expanded.toggle();
+  };
 
   return (
     <Wrapper value={value}>
-      <Highlight code={visibleCode} language="tsx" theme={themes.jettwaveDark}>
+      <Highlight
+        code={visibleCode.trim()}
+        language="tsx"
+        theme={themes.jettwaveDark}
+      >
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={cl(
-              styles.codeBlockPre,
-              showLineNumbers && styles.codeBlockWithLineNumbers,
-            )}
+            className={styles.codeBlockPre}
+            data-line-numbers={showLineNumbers}
+            data-wrap={wrapCode.current}
             data-overflow={showOverflow}
           >
             <code>
@@ -75,9 +134,9 @@ function CodeBlockEditor(props: {
       {showDisclosure && (
         <button
           className={styles.codeBlockDisclosure}
-          onClick={() => setOpenDisclosure(!openDisclosure)}
+          onClick={handleExpandUpdate}
         >
-          {openDisclosure ? (
+          {expanded.current ? (
             <>
               <span>Skjul ekstra kode</span>
               <ChevronDownUpIcon aria-hidden="true" />
@@ -94,8 +153,8 @@ function CodeBlockEditor(props: {
   );
 }
 
-function CodeBlockHeader(props: Pick<CodeBlockT, "tabs">) {
-  const { tabs } = props;
+function CodeBlockHeader() {
+  const { tabs } = useCodeBlock();
 
   if (!tabs || tabs.length === 0) {
     return null;
@@ -124,11 +183,16 @@ function CodeBlockHeader(props: Pick<CodeBlockT, "tabs">) {
 }
 
 function ActionButtons() {
+  const { codeSnippet, wrapCode } = useCodeBlock();
+
+  const titleId = useId();
+
   return (
     <HStack gap="space-4" align="center" wrap={false}>
       <Button
         size="small"
         variant="tertiary-neutral"
+        onClick={wrapCode.toggle}
         icon={
           <svg
             width="1em"
@@ -136,7 +200,11 @@ function ActionButtons() {
             viewBox="0 0 32 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-labelledby={titleId}
           >
+            <title id={titleId}>
+              {wrapCode.current ? "Deaktiver linjeskift" : "Aktiver linjeskift"}
+            </title>
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -146,7 +214,9 @@ function ActionButtons() {
           </svg>
         }
       />
-      <CopyButton copyText="123" size="small" />
+      {codeSnippet.current && (
+        <CopyButton copyText={codeSnippet.current} size="small" />
+      )}
     </HStack>
   );
 }
