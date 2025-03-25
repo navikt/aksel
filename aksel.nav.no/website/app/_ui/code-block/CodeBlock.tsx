@@ -253,4 +253,4 @@ function getLanguage(lang: string) {
   return language;
 }
 
-export { CodeBlock, CodeBlockEditor };
+export { CodeBlock };

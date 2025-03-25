@@ -56,7 +56,7 @@ function CodeBlockProvider({
   const [currentCodeSnippet, setCurrentCodeSnippet] = useState<string | null>(
     tabs?.[0]?.code ?? null,
   );
-  const [wrapCode, setWrapCode] = useState(false);
+  const [wrapCode, setWrapCode] = useState(true);
   const [expanded, setExpanded] = useState(false);
 
   const updateCodeSnippet = (value: string, isExpanded?: boolean) => {

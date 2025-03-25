@@ -5,6 +5,7 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
@@ -46,6 +47,7 @@ function customPortableTextComponents({
       props_seksjon: PropsSeksjon,
       video: Video,
       tips: Tips,
+      kode: SingleCodeBlock,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
