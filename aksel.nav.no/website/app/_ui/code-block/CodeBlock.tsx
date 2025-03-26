@@ -3,14 +3,7 @@
 import { Highlight } from "prism-react-renderer";
 import { useId } from "react";
 import { ChevronDownUpIcon, ChevronUpDownIcon } from "@navikt/aksel-icons";
-import {
-  Button,
-  CopyButton,
-  HStack,
-  Spacer,
-  Tabs,
-  Theme,
-} from "@navikt/ds-react";
+import { Button, CopyButton, HStack, Spacer, Tabs } from "@navikt/ds-react";
 
 /* @ts-expect-error Import is valid, workspace just can't resolve it */
 import { TabsList, TabsPanel, TabsTab } from "@navikt/ds-react/Tabs";
@@ -37,14 +30,7 @@ function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
 
   return (
     <CodeBlockProvider tabs={tabs} showLineNumbers={showLineNumbers}>
-      <Theme
-        theme="dark"
-        hasBackground={false}
-        asChild
-        className={styles.codeBlock}
-      >
-        <CodeBlockView {...rest} />
-      </Theme>
+      <CodeBlockView {...rest} />
     </CodeBlockProvider>
   );
 }
@@ -54,7 +40,12 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
 
   if (useTabs) {
     return (
-      <section aria-label="Kode" data-block-margin="space-28" {...props}>
+      <section
+        aria-label="Kode"
+        data-block-margin="space-28"
+        className={styles.codeBlock}
+        {...props}
+      >
         <Tabs defaultValue={tabs[0].value ?? ""} onChange={codeSnippet.update}>
           <CodeBlockHeader />
           {tabs?.map((tab) => (
@@ -72,7 +63,12 @@ function CodeBlockView(props: React.HTMLAttributes<HTMLDivElement>) {
   }
 
   return (
-    <section aria-label="Kode" data-block-margin="space-28" {...props}>
+    <section
+      aria-label="Kode"
+      data-block-margin="space-28"
+      className={styles.codeBlock}
+      {...props}
+    >
       <CodeBlockHeader />
       {tabs?.map((tab) => (
         <CodeBlockEditor
