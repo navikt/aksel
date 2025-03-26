@@ -6,6 +6,7 @@ import { BodyLong } from "@navikt/ds-react";
 import { Chips, ChipsToggle } from "@navikt/ds-react/Chips";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
+import styles from "./KodeEksempler.module.css";
 import { useKodeEksempler } from "./KodeEksempler.provider";
 
 function KodeEksemplerNavigation(props: {
@@ -21,8 +22,8 @@ function KodeEksemplerNavigation(props: {
   const desc = activeExample.current?.description;
 
   return (
-    <div>
-      <Chips className="mb-5 max-w-xl">
+    <div className={styles.kodeEksemplerNavigation}>
+      <Chips>
         {dir.filer.map((fil) => {
           if (!fil.navn) {
             return null;
@@ -42,7 +43,7 @@ function KodeEksemplerNavigation(props: {
         })}
       </Chips>
       {desc && (
-        <BodyLong className="mb-2">
+        <BodyLong>
           <MarkdownText>{desc}</MarkdownText>
         </BodyLong>
       )}

@@ -1,4 +1,5 @@
 import { getParameters } from "codesandbox-import-utils/lib/api/define";
+import { useId } from "react";
 import {
   CodeIcon,
   ExternalLinkIcon,
@@ -6,9 +7,9 @@ import {
   MobileSmallIcon,
   PencilIcon,
 } from "@navikt/aksel-icons";
-import { Button, HStack } from "@navikt/ds-react";
-import { useKodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler.provider";
-import { CodeSandboxLogo } from "@/assets/Icons";
+import { Button, HStack, Show } from "@navikt/ds-react";
+import styles from "./KodeEksempler.module.css";
+import { useKodeEksempler } from "./KodeEksempler.provider";
 
 function KodeEksemplerToolbar({
   code,
@@ -26,9 +27,9 @@ function KodeEksemplerToolbar({
   }
 
   return (
-    <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
+    <div className={styles.kodeEksemplerToolbar}>
       <HStack gap="4" justify="space-between">
-        <div className="hidden sm:block">
+        <Show above="sm">
           <HStack gap="2">
             <Button
               variant="tertiary-neutral"
@@ -52,7 +53,7 @@ function KodeEksemplerToolbar({
               }}
             />
           </HStack>
-        </div>
+        </Show>
         <HStack gap="space-8">
           <Button
             variant="tertiary-neutral"
@@ -135,7 +136,7 @@ function CodeSandbox({ code }: { code: string }) {
       action="https://codesandbox.io/api/v1/sandboxes/define"
       method="POST"
       target="_blank"
-      className="h-8"
+      className={styles.kodeEksemplerCodeSandbox}
     >
       <input type="hidden" name="parameters" value={parameters} />
       <input type="hidden" name="query" value="module=App.tsx" />
@@ -143,9 +144,32 @@ function CodeSandbox({ code }: { code: string }) {
         variant="tertiary-neutral"
         size="small"
         type="submit"
-        icon={<CodeSandboxLogo title="CodeSandbox" />}
+        icon={<CodeSandboxLogo />}
       />
     </form>
+  );
+}
+
+function CodeSandboxLogo() {
+  const titleId = useId();
+  return (
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      focusable="false"
+      aria-labelledby={titleId}
+    >
+      <title id={titleId}>CodeSandbox</title>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.1248 2.7405C12.3568 2.60652 12.6427 2.60652 12.8748 2.7405L20.669 7.2405C20.9011 7.37447 21.044 7.62207 21.044 7.89001V16.89C21.044 17.158 20.9011 17.4056 20.669 17.5395L12.8748 22.0395C12.6427 22.1735 12.3568 22.1735 12.1248 22.0395L4.33057 17.5395C4.09852 17.4056 3.95557 17.158 3.95557 16.89V7.89001C3.95557 7.62207 4.09852 7.37447 4.33057 7.2405L12.1248 2.7405ZM12.4998 4.25604L6.20558 7.89001L12.5 11.524L18.794 7.89002L12.4998 4.25604ZM19.544 9.18907L13.25 12.823L13.2498 20.091L19.544 16.457V9.18907ZM11.7498 20.091L11.75 12.823L5.45557 9.18904V16.457L11.7498 20.091Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
 

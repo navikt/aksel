@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { BoxNew, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
+import styles from "./KodeEksempler.module.css";
 import { useKodeEksempler } from "./KodeEksempler.provider";
 import { KodeEksemplerToolbar } from "./KodeEksempler.toolbar";
 
@@ -71,10 +72,10 @@ function KodeEksemplerIFrame(props: {
 
   return (
     <div>
-      <div className="relative overflow-hidden rounded-t-lg border border-b-0 border-gray-300 bg-gray-50">
+      <div className={styles.kodeExampleContainer}>
         <div
           ref={resizerRef} // Resize directly on iframe doesn't work in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=680823)
-          className="max-w-4xl resize-x overflow-hidden shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
+          className={styles.kodeExampleRezizer}
         >
           <iframe
             key={iframeUrl}
@@ -85,7 +86,7 @@ function KodeEksemplerIFrame(props: {
             onLoad={handleExampleLoad}
             aria-label={`${dir?.title} ${current?.title} eksempel`}
             title="Demo"
-            className="block max-h-[calc(100vh-200px)] w-full bg-white"
+            className={styles.kodeExampleIframe}
             style={{
               // Prevent the iframe from covering up the resize handle in Safari
               clipPath:

@@ -4,6 +4,11 @@ import { KodeEksemplerIFrame } from "./KodeEksempler.iframe";
 import { KodeEksemplerNavigation } from "./KodeEksempler.navigation";
 import { KodeEksemplerProvider } from "./KodeEksempler.provider";
 
+/**
+ * TODO:
+ * - Add different code-views based on "expanded"-state for codesnippet. See Github Primer DS for example
+ * - - Do parsing serverside, to avoid exposing large npm packages in the client bundle
+ */
 function KodeEksempler(props: ExtractPortableComponentProps<"kode_eksempler">) {
   const { dir, compact } = props.value;
 
