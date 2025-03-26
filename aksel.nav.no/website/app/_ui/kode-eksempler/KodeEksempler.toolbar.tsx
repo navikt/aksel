@@ -1,3 +1,5 @@
+"use client";
+
 import { getParameters } from "codesandbox-import-utils/lib/api/define";
 import { useId } from "react";
 import {
