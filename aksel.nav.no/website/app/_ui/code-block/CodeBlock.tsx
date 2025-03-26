@@ -32,8 +32,8 @@ type CodeBlockT = {
  * - Add support for highlighting lines
  * - Add support for DIFF
  */
-function CodeBlock(props: CodeBlockT) {
-  const { tabs, showLineNumbers = true } = props;
+function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
+  const { tabs, showLineNumbers = true, ...rest } = props;
 
   return (
     <CodeBlockProvider tabs={tabs} showLineNumbers={showLineNumbers}>
@@ -43,7 +43,7 @@ function CodeBlock(props: CodeBlockT) {
         asChild
         className={styles.codeBlock}
       >
-        <CodeBlockView />
+        <CodeBlockView {...rest} />
       </Theme>
     </CodeBlockProvider>
   );

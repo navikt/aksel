@@ -1,16 +1,11 @@
 "use client";
 
-import cl from "clsx";
 import { useRef, useState } from "react";
-import {
-  ExternalLinkIcon,
-  LaptopIcon,
-  MobileSmallIcon,
-} from "@navikt/aksel-icons";
-import { Button, HStack } from "@navikt/ds-react";
+import { BoxNew, HStack, Skeleton, VStack } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import { useKodeEksempler } from "./KodeEksempler.provider";
+import { KodeEksemplerToolbar } from "./KodeEksempler.toolbar";
 
 const iframePaddingNormal = 192;
 const iframePaddingCompact = 60;
@@ -19,17 +14,19 @@ function KodeEksemplerIFrame(props: {
   dir: NonNullable<
     ExtractPortableComponentProps<"kode_eksempler">["value"]["dir"]
   >;
-  compact?: boolean;
 }) {
-  const { dir, compact = false } = props;
+  const { dir } = props;
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const resizerRef = useRef<HTMLDivElement>(null);
 
-  const [unloaded, setUnloaded] = useState(true);
   const [frameState, setFrameState] = useState(300);
 
-  const { current } = useKodeEksempler().activeExample;
+  const {
+    activeExample: { current, loaded, updateLoaded },
+    showCode,
+    compact,
+    resizerRef,
+  } = useKodeEksempler();
 
   const handleExampleLoad = () => {
     const iframePadding = compact ? iframePaddingCompact : iframePaddingNormal;
@@ -56,7 +53,7 @@ function KodeEksemplerIFrame(props: {
         const newHeight = iframePadding + exampleWrapper.offsetHeight;
         clearInterval(waitForExampleContentToRender);
         setFrameState(Math.min(Math.max(newHeight, 300), 900));
-        setUnloaded(false);
+        updateLoaded(true);
       }
 
       attempts++;
@@ -70,108 +67,55 @@ function KodeEksemplerIFrame(props: {
   };
 
   const demoVariant = dir.variant;
+  const iframeUrl = `/${demoVariant}/${dir.title}/${current?.navn}`;
 
   return (
     <div>
-      <>
+      <div className="relative overflow-hidden rounded-t-lg border border-b-0 border-gray-300 bg-gray-50">
         <div
-          className={cl(
-            "overflow-hidden rounded-t-lg border border-b-0 border-gray-300",
-            {
-              "relative animate-pulse": unloaded,
-              "bg-gray-50": !unloaded,
-            },
-          )}
+          ref={resizerRef} // Resize directly on iframe doesn't work in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=680823)
+          className="max-w-4xl resize-x overflow-hidden shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
         >
-          <div
-            ref={resizerRef} // Resize directly on iframe doesn't work in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=680823)
-            className={cl(
-              "max-w-4xl resize-x overflow-hidden shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]",
-              { invisible: unloaded },
-            )}
-          >
-            <iframe
-              ref={iframeRef}
-              src={`/${demoVariant}/${dir.title}/${current?.navn}`}
-              height={frameState}
-              onLoad={handleExampleLoad}
-              aria-label={`${dir?.title} ${current?.title} eksempel`}
-              title="Demo"
-              className="block max-h-[calc(100vh-200px)] w-full bg-white"
-              style={{
-                // Prevent the iframe from covering up the resize handle in Safari
-                clipPath:
-                  "polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)",
-              }}
-            />
-          </div>
-          {unloaded && (
-            <div className="absolute inset-0 mx-auto flex flex-col items-center justify-center gap-2">
-              <div className="grid w-3/5 gap-2">
-                <div className="h-6 w-2/3 rounded-xl bg-surface-neutral-subtle" />
-                <div className="h-16 w-full rounded-xl bg-surface-neutral-subtle" />
-              </div>
-            </div>
-          )}
+          <iframe
+            key={iframeUrl}
+            src={iframeUrl}
+            ref={iframeRef}
+            height={frameState}
+            /* @note: onLoad does no trigger for initial render in dev-mode */
+            onLoad={handleExampleLoad}
+            aria-label={`${dir?.title} ${current?.title} eksempel`}
+            title="Demo"
+            className="block max-h-[calc(100vh-200px)] w-full bg-white"
+            style={{
+              // Prevent the iframe from covering up the resize handle in Safari
+              clipPath:
+                "polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)",
+            }}
+          />
         </div>
-        <div className="mb-2 rounded-b-lg border border-gray-300 p-1">
-          <HStack gap="4" justify="space-between">
-            <div className="hidden sm:block">
-              <HStack gap="2">
-                <Button
-                  variant="tertiary-neutral"
-                  size="small"
-                  icon={
-                    <MobileSmallIcon title="Sett eksempel til mobilbredde" />
-                  }
-                  onClick={() => {
-                    if (resizerRef.current) {
-                      resizerRef.current.style.width = "360px";
-                    }
-                  }}
-                />
 
-                <Button
-                  variant="tertiary-neutral"
-                  size="small"
-                  icon={<LaptopIcon title="Sett eksempel til desktopbredde" />}
-                  onClick={() => {
-                    if (resizerRef.current) {
-                      resizerRef.current.style.width = "";
-                    }
-                  }}
-                />
-              </HStack>
-            </div>
-
-            <HStack gap="2">
-              {/* <Button
-                      variant="tertiary-neutral"
-                      size="small"
-                      icon={<CodeIcon aria-hidden />}
-                      onClick={() => setShowCode(!showCode)}
-                    >
-                      {showCode ? "Skjul" : "Vis"} kode
-                    </Button> */}
-              {/* {fil.sandboxEnabled && <Sandbox code={fil.sandboxBase64} />} */}
-              {/* <CodeSandbox code={fil.innhold.trim()} /> */}
-              <Button
-                variant="tertiary-neutral"
-                size="small"
-                icon={<ExternalLinkIcon title="Åpne eksempel i nytt vindu" />}
-                target="_blank"
-                className="si-ignore"
-                as="a"
-                href={`/${demoVariant}/${dir.title}/${current?.navn?.replace(
-                  ".tsx",
-                  "",
-                )}`}
-              />
-            </HStack>
+        {/* Skeleton loading */}
+        {!loaded && (
+          <HStack asChild justify="center" align="center">
+            <BoxNew inset="0" position="absolute" background="default">
+              <VStack gap="space-8" width="70%">
+                <Skeleton variant="rounded" width="66%" height="1.5rem" />
+                <Skeleton variant="rounded" width="100%" height="4rem" />
+              </VStack>
+            </BoxNew>
           </HStack>
-        </div>
+        )}
+      </div>
 
+      <KodeEksemplerToolbar
+        code={current?.innhold?.trim()}
+        base64={current?.sandboxEnabled ? current?.sandboxBase64 : undefined}
+        link={iframeUrl}
+      />
+
+      {showCode && (
         <CodeBlock
+          data-block-margin="space-0"
           tabs={[
             {
               text: "TSX",
@@ -181,7 +125,7 @@ function KodeEksemplerIFrame(props: {
             },
           ]}
         />
-      </>
+      )}
     </div>
   );
 }

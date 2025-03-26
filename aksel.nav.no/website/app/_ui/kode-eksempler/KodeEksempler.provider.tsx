@@ -6,6 +6,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
@@ -20,7 +21,13 @@ type KodeEksemplerContextT = {
   activeExample: {
     current: FileT | null;
     update: (name?: string) => void;
+    loaded: boolean;
+    updateLoaded: (loaded: boolean) => void;
   };
+  showCode: boolean;
+  toggleShowCode: () => void;
+  compact: boolean;
+  resizerRef?: React.RefObject<HTMLDivElement>;
 };
 
 const KodeEksemplerContext = createContext<KodeEksemplerContextT | null>(null);
@@ -28,17 +35,23 @@ const KodeEksemplerContext = createContext<KodeEksemplerContextT | null>(null);
 function KodeEksemplerProvider(props: {
   children: React.ReactNode;
   value: ExtractPortableComponentProps<"kode_eksempler">["value"];
+  compact?: boolean;
 }) {
   const { dir } = props.value;
-  const { children } = props;
+  const { children, compact = false } = props;
 
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const resizerRef = useRef<HTMLDivElement>(null);
+
   const [activeExample, setActiveExample] = useState<FileT | null>(
     dir?.filer?.[0] ?? null,
   );
+
+  const [loaded, setLoaded] = useState(false);
+  const [showCode, setShowCode] = useState(!compact);
 
   const createQueryString = useCallback(
     (value: string) => {
@@ -62,6 +75,7 @@ function KodeEksemplerProvider(props: {
     }
 
     setActiveExample(foundExample);
+    setLoaded(false);
 
     const id = nameToId(dir?.title ?? "", exampleName);
     router.push(pathname + "?" + createQueryString(id), { scroll: false });
@@ -89,7 +103,13 @@ function KodeEksemplerProvider(props: {
         activeExample: {
           current: activeExample,
           update: updateActiveExample,
+          loaded,
+          updateLoaded: setLoaded,
         },
+        showCode,
+        toggleShowCode: () => setShowCode((prev) => !prev),
+        compact,
+        resizerRef,
       }}
     >
       {children}

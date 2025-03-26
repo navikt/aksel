@@ -18,8 +18,7 @@ function KodeEksemplerNavigation(props: {
     return null;
   }
 
-  /* const desc = activeExample.current?.description; */
-  const desc = "kjasdlkja jlkasdlk jsaljdkasjl ldajk";
+  const desc = activeExample.current?.description;
 
   return (
     <div>
