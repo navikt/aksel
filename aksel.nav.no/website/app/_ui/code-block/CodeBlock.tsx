@@ -120,10 +120,12 @@ function CodeBlockEditor(props: {
           >
             <code>
               {tokens.map((line, i) => {
+                const lineProps = getLineProps({ line });
                 return (
                   <div
                     key={i}
-                    {...getLineProps({ line })}
+                    {...lineProps}
+                    style={{ ...lineProps.style, "--line": `"${i + 1}"` }}
                     className={styles.codeBlockLine}
                   >
                     {line.map((token, key) => (

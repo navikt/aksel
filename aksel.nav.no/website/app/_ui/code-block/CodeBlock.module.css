@@ -27,16 +27,14 @@
 
   &[data-line-numbers="true"] {
     & code {
-      counter-reset: line;
       position: relative;
     }
 
     & .codeBlockLine {
-      counter-increment: line;
       margin-left: var(--ax-space-40);
 
       &::before {
-        content: counter(line);
+        content: var(--line);
         width: 1.5rem;
         text-align: right;
         user-select: none;
