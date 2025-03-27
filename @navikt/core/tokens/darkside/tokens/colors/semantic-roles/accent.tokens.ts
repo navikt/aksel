@@ -106,7 +106,7 @@ export const accentSemanticTokenConfig = {
       value: "{ax.accent.400.value}",
       type: "color",
       group: "border.accent",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "accent-subtleA": {
       value: "{ax.accent.400A.value}",
