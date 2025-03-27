@@ -18,9 +18,7 @@ function SidebarSubNav(
     return pathName?.split("#")[0] === `/${page.slug}`;
   });
 
-  /* Use this when sections are no longer default: open */
-  /* const [open, setOpen] = useState(isSectionActive); */
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(isSectionActive);
 
   return (
     <li>
