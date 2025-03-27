@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { SidebarGroupedPagesT } from "@/types";
-import { SidebarItem } from "./Sidebar.item";
+import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 
-function SidebarSubNav(
+function DesignsystemSidebarSubNav(
   props: SidebarGroupedPagesT & { layout: "sidebar" | "mobile" },
 ) {
   const { pages, title, layout } = props;
@@ -37,7 +37,7 @@ function SidebarSubNav(
       </button>
       <ul hidden={!open}>
         {pages.map((page) => (
-          <SidebarItem
+          <DesignsystemSidebarItem
             key={page.heading}
             page={page}
             isIndented
@@ -49,4 +49,4 @@ function SidebarSubNav(
   );
 }
 
-export { SidebarSubNav };
+export { DesignsystemSidebarSubNav };
