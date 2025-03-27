@@ -16,8 +16,8 @@ import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
 import { Tips } from "../tips/Tips";
 import { Code } from "../typography/Code";
-import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
+import { WebsiteList, WebsiteListItem } from "../typography/WebsiteList";
 import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
@@ -56,12 +56,14 @@ function customPortableTextComponents({
     block,
     marks,
     list: {
-      bullet: ({ children }) => <List as="ul">{children}</List>,
-      number: ({ children }) => <List as="ol">{children}</List>,
+      bullet: ({ children }) => <WebsiteList as="ul">{children}</WebsiteList>,
+      number: ({ children }) => <WebsiteList as="ol">{children}</WebsiteList>,
     },
     listItem: {
-      bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
-      number: ({ children }) => <ListItem>{children}</ListItem>,
+      bullet: ({ children }) => (
+        <WebsiteListItem icon>{children}</WebsiteListItem>
+      ),
+      number: ({ children }) => <WebsiteListItem>{children}</WebsiteListItem>,
     },
     unknownBlockStyle: ({ children }) =>
       withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
