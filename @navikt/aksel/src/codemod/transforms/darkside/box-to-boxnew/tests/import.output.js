@@ -1,1 +1,1 @@
-import { BoxNew as AkselBox } from "@navikt/ds-react"
+import { BoxNew as AkselBox } from "@navikt/ds-react/Box"
