@@ -112,7 +112,7 @@ export const brandBeigeSemanticTokenConfig = {
       value: "{ax.brand-beige.400A.value}",
       type: "color",
       group: "border.brand-beige",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
     },
     "brand-beige-strong": {
       value: "{ax.brand-beige.700.value}",
