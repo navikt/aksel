@@ -67,7 +67,12 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
               <Box as="ul" overflowX="auto">
                 <PropsSeksjonCode code={prop.type} title="Type" wrap />
                 <PropsSeksjonCode
-                  code={prop.defaultValue}
+                  /* We assume that if type starts with ", its an union-type */
+                  code={
+                    (prop.type ?? "").startsWith('"')
+                      ? `"${prop.defaultValue}"`
+                      : prop.defaultValue
+                  }
                   title="Default"
                   wrap
                 />

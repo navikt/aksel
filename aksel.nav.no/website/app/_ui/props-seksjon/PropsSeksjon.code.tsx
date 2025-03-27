@@ -1,7 +1,8 @@
 "use client";
 
-import { Highlight, themes } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
 import { Box } from "@navikt/ds-react";
+import { AkselPrismTheme } from "@/app/_ui/code-block/CodePrismTheme";
 import styles from "./PropsSeksjon.module.css";
 
 function PropsSeksjonCode({
@@ -13,7 +14,7 @@ function PropsSeksjonCode({
   title: string;
   wrap?: boolean;
 }) {
-  if (!code) {
+  if (!code || code === `""`) {
     return null;
   }
 
@@ -22,7 +23,7 @@ function PropsSeksjonCode({
       <div className={styles.propsSeksjonLiTitle}>{`${title}:`}</div>
 
       <div className={styles.propsSeksjonCodeExample}>
-        <Highlight code={code} language="tsx" theme={themes.github}>
+        <Highlight code={code} language="tsx" theme={AkselPrismTheme}>
           {({ style, tokens, getLineProps, getTokenProps }) => (
             <Box
               style={style}

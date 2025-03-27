@@ -20,7 +20,7 @@ function PropsSeksjonDescription({
       <div className={styles.propsSeksjonLiTitle}>Description:</div>
 
       <div>
-        <VStack gap="space-8" marginInline="0 space-8">
+        <VStack gap="space-8" marginInline="space-8">
           <Markdown
             remarkPlugins={[remarkGfm]}
             components={{

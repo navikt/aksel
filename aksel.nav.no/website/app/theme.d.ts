@@ -12,6 +12,6 @@ declare module "react" {
     /**
      * Standarized margin for PortableText blocks.
      */
-    "data-block-margin"?: "space-28";
+    "data-block-margin"?: "space-28" | "space-0";
   }
 }
