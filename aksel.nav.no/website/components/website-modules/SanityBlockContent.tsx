@@ -10,7 +10,6 @@ import Accordion from "@/cms/accordion/Accordion";
 import Alert from "@/cms/alert/Alert";
 import Attachment from "@/cms/attachment/Attachment";
 import Bilde from "@/cms/bilde/Bilde";
-import InnholdsKort from "@/cms/cards/InnholdsKort";
 import CodeExamples from "@/cms/code-examples/CodeExamples";
 import SnippetLazy from "@/cms/code-snippet/SnippetLazy";
 import CompareImages from "@/cms/compare-images/CompareImages";
@@ -21,7 +20,6 @@ import PropsSeksjon from "@/cms/props/PropsSeksjon";
 import RelatertInnhold from "@/cms/relatert-innhold/RelatertInnhold";
 import SideModul from "@/cms/side-modul/SideModul";
 import Tabell from "@/cms/tabell/Tabell";
-import TastaturModul from "@/cms/tastatur-tabell/TastaturTabell";
 import Tips from "@/cms/tips/Tips";
 import TokenTable from "@/cms/token-tabell/TokenTable";
 import Video from "@/cms/video/Video";
@@ -33,21 +31,20 @@ import AkselLink from "./AkselLink";
 const serializers: Partial<PortableTextReactComponents> = {
   types: {
     relatert_innhold: ({ value }) => <RelatertInnhold node={value} />,
-    innholdskort: ({ value }) => <InnholdsKort node={value} />,
-    tastatur_modul: ({ value }) => <TastaturModul node={value} />,
-    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     do_dont: ({ value }) => <DoDont node={value} />,
     bilde: ({ value }) => <Bilde node={value} />,
     alert: ({ value }) => <Alert node={value} />,
     expansioncard: ({ value }) => <ExpansionCard node={value} />,
-    kode: ({ value }) => <SnippetLazy node={value} />,
     tabell_v2: ({ value }) => <Tabell node={value} />,
     accordion: ({ value }) => <Accordion node={value} />,
     props_seksjon: ({ value }) => <PropsSeksjon node={value} />,
-    spesial_seksjon: ({ value }) => <SideModul node={value} />,
-    token_kategori: ({ value }) => <TokenTable node={value} />,
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
+    kode: ({ value }) => <SnippetLazy node={value} />,
+    /* TODO: ^completed */
+    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
+    spesial_seksjon: ({ value }) => <SideModul node={value} />,
+    token_kategori: ({ value }) => <TokenTable node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
     attachment: ({ value }) => <Attachment node={value} />,

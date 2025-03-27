@@ -135,13 +135,6 @@ export const Prinsipp = defineType({
         }),
       ],
     }),
-    defineField({
-      title: "Hero bilde",
-      name: "hero_bilde",
-      type: "herobilde",
-      group: "innhold",
-      hidden: ({ parent }) => !parent?.prinsipp?.hovedside,
-    }),
     ingressField,
     defineField({
       title: "Innhold",

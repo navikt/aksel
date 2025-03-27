@@ -1,7 +1,7 @@
 @layer twBase, dsComponents, twComponents, twUtilities;
 
 @import "tailwindcss/base" layer(twBase);
-@import "@navikt/ds-css" layer(dsComponents);
+@import "@navikt/ds-css/darkside" layer(dsComponents);
 @import "tailwindcss/components" layer(twComponents);
 @import "tailwindcss/utilities" layer(twUtilities);
 
@@ -10,6 +10,16 @@
   --website-header-height-width-border: calc(var(--website-header-height) + 1px);
   --website-font-mono: ui-monospace, "Menlo", "Monaco", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
+
+[data-block-margin] {
+  &[data-block-margin="space-28"] {
+    margin-block: var(--ax-space-28);
+  }
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .sr-only {

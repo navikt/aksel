@@ -1,7 +1,5 @@
-import cl from "clsx";
 import { GetServerSideProps } from "next/types";
 import { BodyLong, BodyShort, Heading, Label } from "@navikt/ds-react";
-import Bilde from "@/cms/bilde/Bilde";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { SanityBlockContent } from "@/sanity-block";
@@ -81,7 +79,6 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
   }
 
   const authors = (data?.contributors as any)?.map((x) => x?.title) ?? [];
-  const mainPage = data?.prinsipp?.hovedside;
 
   return (
     <>
@@ -91,21 +88,14 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
         publishDate={publishDate}
         image={data?.seo?.image}
       />
-      <Header variant={mainPage ? "default" : "subtle"} />
+      <Header variant="subtle" />
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className={cl("aksel-artikkel group/aksel pt-4 focus:outline-none", {
-          "bg-white": mainPage,
-          "bg-surface-subtle": !mainPage,
-        })}
+        className="aksel-artikkel group/aksel bg-surface-subtle pt-4 focus:outline-none"
       >
         <article className="overflow-x-clip">
-          <div
-            className={cl("mx-auto max-w-aksel px-4 sm:w-[90%]", {
-              "pb-32": mainPage,
-            })}
-          >
+          <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
             <div className="pt-12">
               <div className="mx-auto mb-16 max-w-prose lg:ml-0">
                 <Heading
@@ -144,22 +134,12 @@ const Page = ({ prinsipp: data, publishDate, toc }: PageProps["props"]) => {
               </div>
             </div>
           </div>
-          <div
-            className={cl("pt-32", {
-              "bg-gray-100": mainPage,
-            })}
-          >
+          <div>
             <div className="mx-auto max-w-aksel px-4 sm:w-[90%]">
               <div className="pb-16 md:pb-32">
                 <div className="relative mx-auto mt-4 max-w-prose lg:ml-0 lg:grid lg:max-w-none lg:grid-flow-row-dense lg:grid-cols-3 lg:items-start lg:gap-x-12">
                   <TableOfContents toc={toc} />
                   <div className="max-w-prose lg:col-span-2 lg:col-start-1">
-                    {data?.hero_bilde && (
-                      <Bilde
-                        node={data.hero_bilde as any}
-                        className="-mt-36 mb-10 sm:-mt-72"
-                      />
-                    )}
                     <SanityBlockContent blocks={data?.content ?? []} />
                     <div className="mt-12">
                       {authors?.length > 0 && (

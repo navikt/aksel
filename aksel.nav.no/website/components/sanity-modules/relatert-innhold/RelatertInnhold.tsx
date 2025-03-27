@@ -25,7 +25,7 @@ const RelatertInnhold = ({ node }: RelatertInnholdProps) => {
         spacing
       >
         <NewspaperIcon fontSize="1.5rem" title="Lenker" aria-hidden />
-        {node.title || "Relevante lenker"}
+        {node.title || "Lenker"}
       </Heading>
       <ul className="grid gap-3 pl-8">
         {node.lenker.map((x) => (

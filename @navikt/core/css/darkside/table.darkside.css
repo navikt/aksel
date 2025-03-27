@@ -11,7 +11,7 @@
 .aksel-table__body {
   display: table-row-group;
 
-  & .aksel-table__row--shade-on-hover:not(.aksel-table__expandable-row--expansion-disabled):hover {
+  & .aksel-table__row--shade-on-hover:hover {
     background-color: var(--ax-bg-neutral-moderate-hoverA);
     transition: background-color 70ms cubic-bezier(0.2, 0, 0, 1);
   }
