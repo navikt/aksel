@@ -3,6 +3,7 @@
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-neutral-subtle);
   border-collapse: separate;
+  border-spacing: initial;
 
   & [data-hide="sm"] {
     display: none;

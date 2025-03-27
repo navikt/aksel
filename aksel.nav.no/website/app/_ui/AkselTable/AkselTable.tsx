@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext } from "react";
 import { CopyButton } from "@navikt/ds-react";
 import styles from "./AkselTable.module.css";

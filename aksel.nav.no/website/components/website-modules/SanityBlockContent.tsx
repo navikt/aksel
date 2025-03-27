@@ -42,9 +42,9 @@ const serializers: Partial<PortableTextReactComponents> = {
     tips: ({ value }) => <Tips node={value} />,
     kode: ({ value }) => <SnippetLazy node={value} />,
     kode_eksempler: ({ value }) => <CodeExamples node={value} />,
+    token_kategori: ({ value }) => <TokenTable node={value} />,
     /* TODO: ^completed */
     spesial_seksjon: ({ value }) => <SideModul node={value} />,
-    token_kategori: ({ value }) => <TokenTable node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
     attachment: ({ value }) => <Attachment node={value} />,
     language: ({ value }) => (
