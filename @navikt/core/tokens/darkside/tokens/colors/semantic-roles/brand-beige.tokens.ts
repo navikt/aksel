@@ -80,7 +80,7 @@ export const brandBeigeSemanticTokenConfig = {
       value: "{ax.brand-beige.800.value}",
       type: "color",
       group: "text.brand-beige",
-      comment: "Standard farge for tekst og ikoner med rollen brand baige. Godkjent på alle bakgrunner unntatt strong.",
+      comment: "Standard farge for tekst og ikoner med rollen brand beige. Godkjent på alle bakgrunner unntatt strong.",
     },
     "brand-beige-icon": {
       value: "{ax.brand-beige.600.value}",
