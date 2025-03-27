@@ -53,6 +53,16 @@ const KOMPONENT_BY_SLUG_QUERY =
     },
 }`);
 
+const GRUNNLEGGENDE_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "ds_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
 const TOC_BY_SLUG_QUERY =
   defineQuery(`*[slug.current == $slug][0].content[style match 'h2'][]{
   "id": _key,
@@ -69,4 +79,5 @@ export {
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
   SLUG_BY_TYPE_QUERY,
+  GRUNNLEGGENDE_BY_SLUG_QUERY,
 };
