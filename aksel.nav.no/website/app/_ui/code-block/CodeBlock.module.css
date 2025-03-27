@@ -16,6 +16,10 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
 
+  &:last-child {
+    border-bottom: none;
+  }
+
   &[data-overflow="false"] {
     overflow-y: auto;
     max-height: calc(1rem * 1.33 * 18 - var(--ax-space-8) * 2);

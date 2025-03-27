@@ -130,5 +130,5 @@
   border-top: 1px solid var(--ax-border-neutral-subtleA);
   display: flex;
   flex-direction: column;
-  gap: var(--ax-space-4);
+  gap: var(--ax-space-8);
 }
