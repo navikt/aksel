@@ -5,6 +5,7 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { Attachment } from "@/app/_ui/attachment/Attachment";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
 import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
@@ -56,6 +57,7 @@ function customPortableTextComponents({
       token_kategori: LegacyTokenTable,
       spesial_seksjon: LegacyTokenModule,
       exampletext_block: ExampleText,
+      attachment: Attachment,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,

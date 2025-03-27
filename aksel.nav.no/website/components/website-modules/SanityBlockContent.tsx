@@ -45,8 +45,8 @@ const serializers: Partial<PortableTextReactComponents> = {
     token_kategori: ({ value }) => <TokenTable node={value} />,
     spesial_seksjon: ({ value }) => <SideModul node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
-    /* TODO: ^completed */
     attachment: ({ value }) => <Attachment node={value} />,
+    /* TODO: ^completed */
     language: ({ value }) => (
       <SanityBlockContent lang={value.language} blocks={value.body} />
     ),
