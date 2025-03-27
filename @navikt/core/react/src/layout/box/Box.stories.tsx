@@ -19,7 +19,7 @@ export default meta;
 type Story = StoryObj<typeof Box>;
 
 export const Default = () => (
-  <Box background="surface-neutral-subtle">
+  <Box>
     <BodyLong>
       This is inside a box. Deserunt veniam eu fugiat ad est occaecat aliqua
       nisi aliquip. Aute amet occaecat ex aliqua irure elit labore pariatur.
