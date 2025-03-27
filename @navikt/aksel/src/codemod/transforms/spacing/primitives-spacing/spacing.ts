@@ -41,7 +41,7 @@ export default function transformer(file: FileInfo, api: API) {
   ];
 
   for (const primitive of primitives) {
-    const name = findComponentImport({ file, j, name: primitive });
+    const name = findComponentImport({ root, j, name: primitive });
     if (!name) {
       continue;
     }
