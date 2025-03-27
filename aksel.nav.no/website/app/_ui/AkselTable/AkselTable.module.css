@@ -1,0 +1,50 @@
+.akselTable {
+  width: 100%;
+  border-radius: var(--ax-border-radius-large);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  border-collapse: separate;
+
+  & [data-hide="sm"] {
+    display: none;
+
+    @media (min-width: 640px) {
+      display: table-cell;
+    }
+  }
+}
+
+.akselTableHeadTr {
+  border-top-left-radius: var(--ax-border-radius-large);
+  border-top-right-radius: var(--ax-border-radius-large);
+  text-align: left;
+}
+
+.akselTableTh {
+  background-color: var(--ax-bg-neutral-moderate);
+  padding: var(--ax-space-8);
+  font-size: var(--ax-font-size-medium);
+
+  &:first-of-type {
+    border-top-left-radius: var(--ax-border-radius-large);
+  }
+
+  &:last-of-type {
+    border-top-right-radius: var(--ax-border-radius-large);
+  }
+}
+
+.akselTableTr {
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  font-size: var(--ax-font-size-medium);
+
+  &:last-of-type {
+    border-radius: 0 0 var(--ax-border-radius-large) var(--ax-border-radius-large);
+  }
+}
+
+.akselTableTd {
+  border-top: 1px solid var(--ax-border-neutral-subtle);
+  padding-inline: var(--ax-space-8);
+  padding-block: var(--ax-space-4);
+}
