@@ -2,11 +2,11 @@
 
 import { createContext, useContext } from "react";
 import { CopyButton } from "@navikt/ds-react";
-import styles from "./AkselTable.module.css";
+import styles from "./WebsiteTable.module.css";
 
 const TableContext = createContext<boolean>(false);
 
-function AkselTable({
+function WebsiteTable({
   children,
   th,
   withCopy,
@@ -16,20 +16,20 @@ function AkselTable({
   withCopy?: boolean;
 }) {
   return (
-    <table data-block-margin="space-28" className={styles.akselTable}>
+    <table data-block-margin="space-28" className={styles.websiteTable}>
       <thead>
-        <tr className={styles.akselTableHeadTr}>
+        <tr className={styles.websiteTableHeadTr}>
           {th.map((x) => (
             <th
               key={x.text}
-              className={styles.akselTableTh}
+              className={styles.websiteTableTh}
               data-hide={x.hideOnSm ? "sm" : undefined}
             >
               {x?.sronly ? <span className="sr-only">{x.text}</span> : x.text}
             </th>
           ))}
           {withCopy && (
-            <th data-hide="sm" className={styles.akselTableTh}>
+            <th data-hide="sm" className={styles.websiteTableTh}>
               <span className="sr-only">Kopi</span>
             </th>
           )}
@@ -44,7 +44,7 @@ function AkselTable({
   );
 }
 
-function AkselTableRow({
+function WebsiteTableRow({
   tr,
   copyText = "",
 }: {
@@ -54,14 +54,14 @@ function AkselTableRow({
   const useCopy = useContext(TableContext);
 
   return (
-    <tr className={styles.akselTableTr}>
+    <tr className={styles.websiteTableTr}>
       {tr.map((x, xi) => (
-        <td key={xi} data-hide="sm" className={styles.akselTableTd}>
+        <td key={xi} data-hide="sm" className={styles.websiteTableTd}>
           {x.text}
         </td>
       ))}
       {useCopy && (
-        <td data-hide="sm" className={styles.akselTableTd}>
+        <td data-hide="sm" className={styles.websiteTableTd}>
           <CopyButton
             copyText={copyText}
             title={`${copyText.replace("--a-", "")} kopier`}
@@ -74,4 +74,4 @@ function AkselTableRow({
   );
 }
 
-export { AkselTable, AkselTableRow };
+export { WebsiteTable, WebsiteTableRow };

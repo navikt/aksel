@@ -1,4 +1,4 @@
-.akselTable {
+.websiteTable {
   width: 100%;
   border-radius: var(--ax-border-radius-large);
   border: 1px solid var(--ax-border-neutral-subtle);
@@ -14,13 +14,13 @@
   }
 }
 
-.akselTableHeadTr {
+.websiteTableHeadTr {
   border-top-left-radius: var(--ax-border-radius-large);
   border-top-right-radius: var(--ax-border-radius-large);
   text-align: left;
 }
 
-.akselTableTh {
+.websiteTableTh {
   background-color: var(--ax-bg-neutral-moderate);
   padding: var(--ax-space-8);
   font-size: var(--ax-font-size-medium);
@@ -34,7 +34,7 @@
   }
 }
 
-.akselTableTr {
+.websiteTableTr {
   border-top: 1px solid var(--ax-border-neutral-subtle);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
   font-size: var(--ax-font-size-medium);
@@ -44,7 +44,7 @@
   }
 }
 
-.akselTableTd {
+.websiteTableTd {
   border-top: 1px solid var(--ax-border-neutral-subtle);
   padding-inline: var(--ax-space-8);
   padding-block: var(--ax-space-4);

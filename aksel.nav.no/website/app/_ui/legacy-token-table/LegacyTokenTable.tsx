@@ -2,7 +2,10 @@ import { PortableTextComponentProps } from "next-sanity";
 import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, Link } from "@navikt/ds-react";
 import { Token_kategori } from "@/app/_sanity/query-types";
-import { AkselTable, AkselTableRow } from "@/app/_ui/AkselTable/AkselTable";
+import {
+  WebsiteTable,
+  WebsiteTableRow,
+} from "@/app/_ui/website-table/WebsiteTable";
 import styles from "./LegacyTokenTable.module.css";
 
 /**
@@ -37,11 +40,11 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
         </span>
         <Link href="/darkside">midlertidig dokumentasjon finner du her.</Link>
       </BodyLong>
-      <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
+      <WebsiteTable th={[{ text: "Token" }, { text: "Fallback" }]}>
         {Object.entries(tokens).map(([key, val]) => (
-          <AkselTableRow key={key} tr={[{ text: key }, { text: val }]} />
+          <WebsiteTableRow key={key} tr={[{ text: key }, { text: val }]} />
         ))}
-      </AkselTable>
+      </WebsiteTable>
     </>
   );
 }
