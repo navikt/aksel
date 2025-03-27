@@ -3,6 +3,7 @@ import core from "@navikt/ds-css/tokens.json";
 import { BodyLong, Link } from "@navikt/ds-react";
 import { Token_kategori } from "@/app/_sanity/query-types";
 import { AkselTable, AkselTableRow } from "@/app/_ui/AkselTable/AkselTable";
+import styles from "./LegacyTokenTable.module.css";
 
 /**
  * Lists out the "component"-level tokens.
@@ -24,8 +25,16 @@ function LegacyTokenTable(props: PortableTextComponentProps<Token_kategori>) {
   return (
     <>
       <BodyLong>
-        Deprecation warning! I vårt nye system for theming og darkmode, er
-        komponent-tokens fjernet. Mer dokumentasjon for dette kommer,{" "}
+        <strong
+          data-color-role="warning"
+          className={styles.legacyTokenTableWarning}
+        >
+          Deprecation warning:{" "}
+        </strong>
+        <span>
+          I det nye systemet for theming og darkmode, er komponent-tokens
+          fjernet. Mer dokumentasjon for dette kommer,{" "}
+        </span>
         <Link href="/darkside">midlertidig dokumentasjon finner du her.</Link>
       </BodyLong>
       <AkselTable th={[{ text: "Token" }, { text: "Fallback" }]}>
