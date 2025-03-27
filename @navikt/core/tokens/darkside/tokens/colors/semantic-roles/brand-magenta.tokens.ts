@@ -106,7 +106,7 @@ export const brandMagentaSemanticTokenConfig = {
       value: "{ax.brand-magenta.400.value}",
       type: "color",
       group: "border.brand-magenta",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "brand-magenta-subtleA": {
       value: "{ax.brand-magenta.400A.value}",
