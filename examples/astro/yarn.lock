@@ -1254,8 +1254,8 @@ __metadata:
 
 "@navikt/aksel-icons@file:./../../@navikt/aksel-icons::locator=irregular-iron%40workspace%3A.":
   version: 7.17.4
-  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=ac8bf1&locator=irregular-iron%40workspace%3A."
-  checksum: 10/5aa0eada02f6ebd94098751995716d9565f24ee9d58d7d3be5e393565054e96884efe9f3ed2bfcfde19b1ff2faefa717808cc729d8647fdbf0530bd926cfd537
+  resolution: "@navikt/aksel-icons@file:./../../@navikt/aksel-icons#./../../@navikt/aksel-icons::hash=5f7885&locator=irregular-iron%40workspace%3A."
+  checksum: 10/697189702e76829690f2cc67a1f3784709552a1cd5e6ce85c6bbba59b91b927929c901a74a84f10b47cad2f7576054c59c776378c61b42d81a67f26228478567
   languageName: node
   linkType: hard
 
@@ -1268,14 +1268,14 @@ __metadata:
 
 "@navikt/ds-css@file:./../../@navikt/core/css::locator=irregular-iron%40workspace%3A.":
   version: 7.17.4
-  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=89ae1f&locator=irregular-iron%40workspace%3A."
-  checksum: 10/2e7295da9eab845a7bcca765dd52acb304414563f1fc8f799cc428676781f0339349e95dbb8168fbe64f476a5ddb7c9c0b2c04894e8b00b7cba3e2dc1bf8080a
+  resolution: "@navikt/ds-css@file:./../../@navikt/core/css#./../../@navikt/core/css::hash=007468&locator=irregular-iron%40workspace%3A."
+  checksum: 10/064781faffb3d446ccd37e41ceb48af0d8f9fd3a3bae2a03ec3bde783b02e6bb04b9ecd9cd3d1711239f89b4557f0b5e0985a3af0f367bb53dc84fc55b3a18c3
   languageName: node
   linkType: hard
 
 "@navikt/ds-react@file:./../../@navikt/core/react::locator=irregular-iron%40workspace%3A.":
   version: 7.17.4
-  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=6117c2&locator=irregular-iron%40workspace%3A."
+  resolution: "@navikt/ds-react@file:./../../@navikt/core/react#./../../@navikt/core/react::hash=10c98d&locator=irregular-iron%40workspace%3A."
   dependencies:
     "@floating-ui/react": "npm:0.25.4"
     "@floating-ui/react-dom": "npm:^2.0.9"
@@ -1290,7 +1290,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/2625afb7e451ee40e263f434ae506d311a18f8fc03ac26ebcce7bf7dc97bc9cc3e528b1d685cf3fddead00ace47d80560f8ec601fe936dfd28a5e63ccadcaabe
+  checksum: 10/36c76ffdc59a92eba3c662798bfd7b24a0f9b66977d975a6a4c1e3ab7418bf19651e61aa5514e5a2dca09b8587870600b538fa76ac774186ba51e17514b7f7ef
   languageName: node
   linkType: hard
 
@@ -5895,8 +5895,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^5.4.11":
-  version: 5.4.14
-  resolution: "vite@npm:5.4.14"
+  version: 5.4.15
+  resolution: "vite@npm:5.4.15"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -5933,7 +5933,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/ce382f4059eb6c939823b8f62163794752243755d84c71a4b73ad0f7d4d9f4c7a557a6ef4c78e0640f4bcf5ae5ec6b20c7ee4816419af3c81ba275f478b73468
+  checksum: 10/ddc4e7b874ebc0dc5bff53568e7d90f6c622747912fdda7f4ce533e15293009aaabb677ca29b5f108b18c5d60c0c32a7c0156f802bc94df355ca36915a4ae293
   languageName: node
   linkType: hard
 
