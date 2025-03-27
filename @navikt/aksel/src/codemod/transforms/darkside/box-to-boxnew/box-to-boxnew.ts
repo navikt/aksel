@@ -31,7 +31,7 @@ export default function transformer(file: FileInfo, api: API) {
     openingElement: {
       name: {
         type: "JSXIdentifier",
-        name: "Box",
+        name: localName,
       },
     },
   });
@@ -96,6 +96,7 @@ export default function transformer(file: FileInfo, api: API) {
       toImport: "@navikt/ds-react/Box",
       fromName: "Box",
       toName: "BoxNew",
+      ignoreAlias: localName !== "Box",
     });
   }
 
