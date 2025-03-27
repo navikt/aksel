@@ -106,7 +106,7 @@ export const dangerSemanticTokenConfig = {
       value: "{ax.danger.400.value}",
       type: "color",
       group: "border.danger",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "danger-subtleA": {
       value: "{ax.danger.400A.value}",

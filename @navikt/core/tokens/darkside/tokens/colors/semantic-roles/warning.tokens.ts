@@ -112,7 +112,7 @@ export const warningSemanticTokenConfig = {
       value: "{ax.warning.400A.value}",
       type: "color",
       group: "border.warning",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
     },
     "warning-strong": {
       value: "{ax.warning.700.value}",

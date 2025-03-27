@@ -106,7 +106,7 @@ export const infoSemanticTokenConfig = {
       value: "{ax.info.400.value}",
       type: "color",
       group: "border.info",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "info-subtleA": {
       value: "{ax.info.400A.value}",

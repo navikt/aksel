@@ -106,7 +106,7 @@ export const metaPurpleSemanticTokenConfig = {
       value: "{ax.meta-purple.400.value}",
       type: "color",
       group: "border.meta-purple",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon.",
     },
     "meta-purple-subtleA": {
       value: "{ax.meta-purple.400A.value}",

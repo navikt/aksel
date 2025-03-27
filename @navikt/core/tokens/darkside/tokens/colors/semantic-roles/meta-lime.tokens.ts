@@ -112,7 +112,7 @@ export const metaLimeSemanticTokenConfig = {
       value: "{ax.meta-lime.400A.value}",
       type: "color",
       group: "border.meta-lime",
-      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
+      comment: "En svak border-farge som brukes til dekor. Om den brukes på interaktive elementer må den kombineres med elementer som tydelig signaliserer interaksjon. Er delvis gjennomsiktig.",
     },
     "meta-lime-strong": {
       value: "{ax.meta-lime.700.value}",
