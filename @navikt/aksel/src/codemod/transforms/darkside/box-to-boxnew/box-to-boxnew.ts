@@ -1,4 +1,4 @@
-import type { API, Collection, FileInfo, JSCodeshift } from "jscodeshift";
+import type { API, FileInfo, JSCodeshift } from "jscodeshift";
 import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
 import {
   findComponentImport,
@@ -6,7 +6,9 @@ import {
   findProps,
 } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
-import moveAndRenameImport from "../../../utils/moveAndRenameImport";
+import moveAndRenameImport, {
+  addPackageImport,
+} from "../../../utils/packageImports";
 
 const propsAffected = ["background", "borderColor", "shadow"];
 
@@ -184,31 +186,4 @@ const analyzePartialMigration = (
   }
 
   return "mixed";
-};
-
-// add import declaration after first existing import declaration, or
-// at the beginning of the file
-const addPackageImport = ({
-  j,
-  root,
-  packageName,
-  specifiers,
-}: {
-  j: JSCodeshift;
-  root: Collection<any>;
-  packageName: string;
-  specifiers: string[];
-}) => {
-  const existingImport = root.find(j.ImportDeclaration);
-
-  const importDecl = j.importDeclaration(
-    specifiers.map((specifier) => j.importSpecifier(j.identifier(specifier))),
-    j.stringLiteral(packageName),
-  );
-
-  if (existingImport.length === 0) {
-    root.get().node.program.body.unshift(importDecl);
-  } else {
-    existingImport.insertBefore(importDecl);
-  }
 };
