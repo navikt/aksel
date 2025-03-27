@@ -61,7 +61,7 @@ function WebsiteTableRow({
         </td>
       ))}
       {useCopy && (
-        <td data-hide="sm" className={styles.websiteTableTd}>
+        <td data-hide="sm" data-align="end" className={styles.websiteTableTd}>
           <CopyButton
             copyText={copyText}
             title={`${copyText.replace("--a-", "")} kopier`}

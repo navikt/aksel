@@ -12,6 +12,10 @@
       display: table-cell;
     }
   }
+
+  & [data-align="end"] {
+    text-align: end;
+  }
 }
 
 .websiteTableHeadTr {

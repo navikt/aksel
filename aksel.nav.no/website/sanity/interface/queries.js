@@ -132,18 +132,7 @@ const expansionCardBlock = `_type == "expansioncard"=>{
 
 const spesialSeksjon = `_type == "spesial_seksjon" =>{
   ...,
-  modul == "komponentoversikt" =>{
-    "komponenter": *[_type == 'komponent_artikkel' && !(_id in path("drafts.**"))]{
-      _id,
-      heading,
-      "ingress": intro.body,
-      status,
-      slug,
-    }
-  },
-  modul == "token_kategori" =>{
-    "token": token_ref->{...}
-}
+  "token": token_ref->{...}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{
