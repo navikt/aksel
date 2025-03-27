@@ -41,11 +41,10 @@ const serializers: Partial<PortableTextReactComponents> = {
     video: ({ value }) => <Video node={value} />,
     tips: ({ value }) => <Tips node={value} />,
     kode: ({ value }) => <SnippetLazy node={value} />,
+    kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     /* TODO: ^completed */
-    riktekst_blokk: ({ value }) => <SanityBlockContent blocks={value.body} />,
     spesial_seksjon: ({ value }) => <SideModul node={value} />,
     token_kategori: ({ value }) => <TokenTable node={value} />,
-    kode_eksempler: ({ value }) => <CodeExamples node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
     attachment: ({ value }) => <Attachment node={value} />,
     language: ({ value }) => (

@@ -69,13 +69,6 @@ const installSeksjon = `_type == "installasjon_seksjon" =>{
 }`;
 
 const defaultBlock = `
- _type == "riktekst_blokk" =>{
-    ...,
-    body[]{
-      ...,
-      ${markDef}
-    }
- },
  _type == "bilde" =>{
     ...,
     floating_text[]{
