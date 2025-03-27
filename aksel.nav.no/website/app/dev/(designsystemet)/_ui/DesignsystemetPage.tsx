@@ -74,6 +74,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
         )}
       </HStack>
       {isComponentPage && <KomponentLinks data={data} />}
+
       <DesignsystemetThumbnail />
     </div>
   );

@@ -53,7 +53,10 @@ export default async function Page({ params }: Props) {
         showChangelogLink
         toc={toc}
       />
-      <CustomPortableText value={page.content as PortableTextBlock[]} />
+      <CustomPortableText
+        value={page.content as PortableTextBlock[]}
+        data-block-margin="space-28"
+      />
     </DesignsystemetPageLayout>
   );
 }

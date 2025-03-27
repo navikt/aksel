@@ -9,13 +9,15 @@ type CustomPortableTextProps = {
   value: PortableTextBlock[];
   lang?: string;
   className?: string;
-} & CustomPortableTextComponentsProps;
+} & CustomPortableTextComponentsProps &
+  React.HTMLAttributes<HTMLDivElement>;
 
 function CustomPortableText({
   value,
   typoConfig,
   className,
   lang,
+  ...rest
 }: CustomPortableTextProps) {
   const customComponents = useMemo(
     () => customPortableTextComponents({ typoConfig }),
@@ -23,7 +25,7 @@ function CustomPortableText({
   );
 
   return (
-    <div className={className} lang={lang}>
+    <div className={className} lang={lang} {...rest}>
       <PortableText components={customComponents} value={value ?? []} />
     </div>
   );
