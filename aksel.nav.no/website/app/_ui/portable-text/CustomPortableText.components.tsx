@@ -6,6 +6,7 @@ import {
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
+import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
 import { LegacyTokenModule } from "@/app/_ui/legacy-token-module/LegacyTokenModule";
 import { LegacyTokenTable } from "@/app/_ui/legacy-token-table/LegacyTokenTable";
@@ -54,6 +55,7 @@ function customPortableTextComponents({
       kode_eksempler: KodeEksempler,
       token_kategori: LegacyTokenTable,
       spesial_seksjon: LegacyTokenModule,
+      exampletext_block: ExampleText,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
