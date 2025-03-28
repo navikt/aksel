@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { LinkIcon } from "@navikt/aksel-icons";
 import { HStack, Heading, Link } from "@navikt/ds-react";
 import { ExtractPortableComponentProps } from "@/app/_sanity/types";
-import { List, ListItem } from "../typography/List";
+import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import styles from "./RelatertInnhold.module.css";
 
 function RelatertInnhold(
@@ -37,9 +37,9 @@ function RelatertInnhold(
           {title || "Lenker"}
         </Heading>
       </HStack>
-      <List as="ul">
+      <WebsiteList as="ul">
         {lenker.map((pageLink) => (
-          <ListItem key={pageLink._key} icon>
+          <WebsiteListItem key={pageLink._key} icon>
             <Link
               as={NextLink}
               href={getHref(pageLink)}
@@ -49,9 +49,9 @@ function RelatertInnhold(
             >
               {pageLink.title || "Mangler tittel"}
             </Link>
-          </ListItem>
+          </WebsiteListItem>
         ))}
-      </List>
+      </WebsiteList>
     </div>
   );
 }

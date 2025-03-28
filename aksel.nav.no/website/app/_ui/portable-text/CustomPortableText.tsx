@@ -1,5 +1,4 @@
 import { PortableText, type PortableTextBlock } from "next-sanity";
-import { useMemo } from "react";
 import {
   CustomPortableTextComponentsProps,
   customPortableTextComponents,
@@ -7,24 +6,22 @@ import {
 
 type CustomPortableTextProps = {
   value: PortableTextBlock[];
-  lang?: string;
   className?: string;
-} & CustomPortableTextComponentsProps;
+} & CustomPortableTextComponentsProps &
+  React.HTMLAttributes<HTMLDivElement>;
 
 function CustomPortableText({
   value,
   typoConfig,
   className,
-  lang,
+  ...rest
 }: CustomPortableTextProps) {
-  const customComponents = useMemo(
-    () => customPortableTextComponents({ typoConfig }),
-    [typoConfig],
-  );
-
   return (
-    <div className={className} lang={lang}>
-      <PortableText components={customComponents} value={value ?? []} />
+    <div className={className} {...rest}>
+      <PortableText
+        components={customPortableTextComponents({ typoConfig })}
+        value={value ?? []}
+      />
     </div>
   );
 }

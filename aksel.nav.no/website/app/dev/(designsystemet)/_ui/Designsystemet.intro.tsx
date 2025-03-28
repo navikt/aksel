@@ -1,7 +1,7 @@
 import { Heading, VStack } from "@navikt/ds-react";
 import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
-import { List, ListItem } from "@/app/_ui/typography/List";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
+import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 
 function DesignsytemetKomponentIntro({
   data,
@@ -18,21 +18,23 @@ function DesignsytemetKomponentIntro({
   const internal = data?.status?.internal;
 
   return (
-    <VStack gap="space-8" marginBlock="space-28">
+    <VStack gap="space-8" data-block-margin="space-28">
       {useFor && (
         <div>
           <Heading size="small" level="3">
             Egnet til:
           </Heading>
 
-          <List as="ul">
-            {internal && <ListItem icon>Bruk på interne flater</ListItem>}
+          <WebsiteList as="ul">
+            {internal && (
+              <WebsiteListItem icon>Bruk på interne flater</WebsiteListItem>
+            )}
             {data?.intro?.brukes_til?.map((x) => (
-              <ListItem icon key={x}>
+              <WebsiteListItem icon key={x}>
                 <MarkdownText>{x}</MarkdownText>
-              </ListItem>
+              </WebsiteListItem>
             ))}
-          </List>
+          </WebsiteList>
         </div>
       )}
       {avoidUseFor && (
@@ -40,13 +42,13 @@ function DesignsytemetKomponentIntro({
           <Heading size="small" level="3">
             Uegnet til:
           </Heading>
-          <List as="ul">
+          <WebsiteList as="ul">
             {avoidUseFor.map((x) => (
-              <ListItem icon key={x}>
+              <WebsiteListItem icon key={x}>
                 <MarkdownText>{x}</MarkdownText>
-              </ListItem>
+              </WebsiteListItem>
             ))}
-          </List>
+          </WebsiteList>
         </div>
       )}
     </VStack>

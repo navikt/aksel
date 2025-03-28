@@ -4,11 +4,11 @@ import cl from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BodyShort, Tag } from "@navikt/ds-react";
+import { getStatusTag } from "@/app/_ui/theme-config";
 import { SidebarPageT } from "@/types";
-import { getStatusTag } from "../theme-config";
 import styles from "./Sidebar.module.css";
 
-function SidebarItem(props: {
+function DesignsystemSidebarItem(props: {
   page: SidebarPageT;
   isIndented?: boolean;
   layout: "sidebar" | "mobile";
@@ -52,4 +52,4 @@ function SidebarItem(props: {
   );
 }
 
-export { SidebarItem };
+export { DesignsystemSidebarItem };
