@@ -1,7 +1,6 @@
 import {
   API,
   ASTPath,
-  FileInfo,
   ImportDeclaration,
   JSXElement,
   JSXOpeningElement,
@@ -10,19 +9,18 @@ import {
 /**
  * Finds a component import, accounting for sub-components and aliases.
  * Returns the local name of the component. If the component is not found, returns null.
+ * root should ideally be the root of the file in most cases (imports happen at top level)
  */
 function findComponentImport(input: {
   j: API["j"];
-  file: FileInfo;
+  root: ReturnType<API["j"]>;
   name: string;
   packageType?: "react" | "tokens";
 }) {
-  const { j, file, name: _name, packageType = "react" } = input;
+  const { j, root, name: _name, packageType = "react" } = input;
 
   /* Account for sub-components */
   const name = _name.includes(".") ? _name.split(".")[0] : _name;
-
-  const root = j(file.source);
 
   let foundName: string | null = null;
 
@@ -92,7 +90,7 @@ function findJSXElement(input: {
 /**
  * Finds a prop in a JSX element.
  */
-function findProp(input: {
+function findProps(input: {
   j: API["j"];
   path: ASTPath<JSXElement>;
   name: string;
@@ -128,4 +126,4 @@ function isAkselTokensImport(path: ASTPath<ImportDeclaration>) {
   );
 }
 
-export { findComponentImport, findJSXElement, findProp };
+export { findComponentImport, findJSXElement, findProps };

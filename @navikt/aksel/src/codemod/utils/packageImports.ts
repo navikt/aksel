@@ -1,4 +1,31 @@
-import core, { Collection } from "jscodeshift";
+import core, { Collection, JSCodeshift } from "jscodeshift";
+
+// add import declaration after first existing import declaration, or
+// at the beginning of the file
+export const addPackageImport = ({
+  j,
+  root,
+  packageName,
+  specifiers,
+}: {
+  j: JSCodeshift;
+  root: Collection<any>;
+  packageName: string;
+  specifiers: string[];
+}) => {
+  const existingImport = root.find(j.ImportDeclaration);
+
+  const importDecl = j.importDeclaration(
+    specifiers.map((specifier) => j.importSpecifier(j.identifier(specifier))),
+    j.stringLiteral(packageName),
+  );
+
+  if (existingImport.length === 0) {
+    root.get().node.program.body.unshift(importDecl);
+  } else {
+    existingImport.insertBefore(importDecl);
+  }
+};
 
 export default function moveAndRenameImport(
   j: core.JSCodeshift,
