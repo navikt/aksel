@@ -1,0 +1,109 @@
+.compareImagesFigure {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.compareImagesContainer {
+  position: relative;
+  display: grid;
+  max-width: fit-content;
+  max-height: 100%;
+  touch-action: pan-y;
+  user-select: none;
+  overflow: hidden;
+  border-radius: var(--ax-border-radius-large);
+
+  &:focus-within {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  [data-border="true"] > & {
+    border: 1px solid var(--ax-border-neutral-subtle);
+  }
+}
+
+.compareImagesImgContainer {
+  grid-area: 1 / 1 / 2 / 2;
+  will-change: clip-path;
+  box-sizing: border-box;
+  max-width: fit-content;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  background-color: var(--image-bg, transparent);
+
+  &[data-position="left"] {
+    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+    clip-path: inset(0 var(--image-clip-1) 0 0);
+  }
+
+  &[data-position="right"] {
+    /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+    clip-path: inset(0 0 0 var(--image-clip-2));
+  }
+}
+
+.compareImagesImg {
+  object-position: center;
+  object-fit: cover;
+}
+
+.compareImagesHandle {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  height: 100%;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  transition: opacity 0.2s ease-in-out;
+  transform: translate3d(-50%, 0, 0);
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  left: var(--image-clip-2);
+
+  &[data-dragging="true"] {
+    cursor: ew-resize;
+    opacity: 1;
+  }
+
+  &[data-dragging="false"] {
+    opacity: 0.6;
+
+    &:focus,
+    .compareImagesContainer:hover & {
+      opacity: 1;
+    }
+  }
+}
+
+.compareImagesHandleLine {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: var(--ax-border-neutral-strong);
+}
+
+.compareImagesHandleNotch {
+  pointer-events: none;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  border-radius: var(--ax-border-radius-full);
+  background-color: var(--ax-bg-neutral-strong);
+  font-size: 1.75rem;
+  color: var(--ax-text-neutral-contrast);
+}
+
+.compareImagesCaption {
+  margin-top: var(--ax-space-8);
+  padding-inline: var(--ax-space-16);
+  display: grid;
+  place-content: center;
+}

@@ -1,38 +1,46 @@
 "use client";
 
-import cl from "clsx";
-import React, {
+import {
   CSSProperties,
+  createContext,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { BodyShort } from "@navikt/ds-react";
-import { urlFor } from "@/sanity/interface";
-import { CompareHandle } from "./CompareHandle";
-import { CompareItem } from "./CompareItem";
+import { Color } from "@/app/_sanity/query-types";
 
-/* eslint-disable @next/next/no-img-element */
+type CompareImagesContextT = {
+  container: {
+    ref: React.RefObject<HTMLDivElement>;
+    onPointerDown?: (event: React.PointerEvent<HTMLDivElement>) => void;
+    styles?: CSSProperties;
+  };
+  handle: {
+    ref: React.RefObject<HTMLButtonElement>;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  };
 
-type CompareImagesProps = {
-  node: {
-    image_1: { asset: any; alt: string };
-    image_2: { asset: any; alt: string };
-    caption?: string;
-    border?: boolean;
-    background?: {
-      rgb: { a: number; b: number; g: number; r: number };
-      alpha: number;
-    };
+  handlePosition: number;
+  dragging: {
+    current: boolean;
+    update: (value: boolean) => void;
   };
 };
 
-const CompareImages = ({ node }: CompareImagesProps) => {
+const CompareImagesContext = createContext<CompareImagesContextT | null>(null);
+
+function CompareImagesProvider({
+  children,
+  background,
+}: {
+  children: React.ReactNode;
+  background?: Color;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLButtonElement>(null);
-
-  const internalPosition = useRef(50);
+  const handlePosition = useRef(50);
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -43,14 +51,14 @@ const CompareImages = ({ node }: CompareImagesProps) => {
 
     containerRef.current.style.setProperty(
       "--image-clip-1",
-      `${100 - internalPosition.current}%`,
+      `${100 - handlePosition.current}%`,
     );
     containerRef.current.style.setProperty(
       "--image-clip-2",
-      `${internalPosition.current}%`,
+      `${handlePosition.current}%`,
     );
 
-    const rounded = Math.round(internalPosition.current);
+    const rounded = Math.round(handlePosition.current);
 
     handleRef.current.ariaValueNow = rounded.toString();
     handleRef.current.ariaValueText = `${rounded}%`;
@@ -80,7 +88,7 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       // Clamp between 0 and 100
       const clampedPercentageX = Math.max(-1, Math.min(100, percentageX));
 
-      internalPosition.current = Number(clampedPercentageX.toFixed(2));
+      handlePosition.current = Number(clampedPercentageX.toFixed(2));
       syncPosition();
     },
     [],
@@ -109,10 +117,6 @@ const CompareImages = ({ node }: CompareImagesProps) => {
     };
   }, [handlePointerMove]);
 
-  if (!node || !node.image_1 || !node.image_2) {
-    return null;
-  }
-
   /* Container */
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     // Only handle left mouse button (touch events also use 0).
@@ -125,9 +129,9 @@ const CompareImages = ({ node }: CompareImagesProps) => {
   };
 
   const movePosition = (offset: number) => {
-    internalPosition.current = Math.max(
+    handlePosition.current = Math.max(
       -1,
-      Math.min(100, internalPosition.current + offset),
+      Math.min(100, handlePosition.current + offset),
     );
     syncPosition();
   };
@@ -147,63 +151,46 @@ const CompareImages = ({ node }: CompareImagesProps) => {
   };
 
   const appliedStyle: CSSProperties = {
-    "--image-clip-2": `${internalPosition.current}%`,
-    "--image-clip-1": `${100 - internalPosition.current}%`,
-    backgroundColor: node.background
-      ? `rgba(${node.background.rgb.r},${node.background.rgb.g},${node.background.rgb.b},${node.background.rgb.a})`
+    "--image-clip-2": `${handlePosition.current}%`,
+    "--image-clip-1": `${100 - handlePosition.current}%`,
+    "--image-bg": background
+      ? `rgba(${background.rgb?.r},${background.rgb?.g},${background.rgb?.b},${background.rgb?.a})`
       : undefined,
   };
 
-  const imageOneUrl = urlFor(node.image_1)?.auto("format").url();
-  const imageTwoUrl = urlFor(node.image_2)?.auto("format").url();
-
-  if (!imageOneUrl || !imageTwoUrl) {
-    return null;
-  }
-
   return (
-    <figure className="m-0 mb-8 flex flex-col group-[.aksel-artikkel]/aksel:mx-auto">
-      <div
-        ref={containerRef}
-        style={appliedStyle}
-        onPointerDown={handlePointerDown}
-        className={cl(
-          "group relative grid max-h-full max-w-fit touch-pan-y select-none overflow-hidden rounded-lg",
-          "outline-2 outline-offset-4 outline-border-focus focus-within:outline",
-          {
-            "ring-1 ring-border-subtle": node.border,
-          },
-        )}
-      >
-        <CompareItem order="1">
-          <img
-            src={imageOneUrl}
-            alt={node.image_1.alt}
-            className="object-cover object-center"
-          />
-        </CompareItem>
-        <CompareItem order="2">
-          <img
-            src={imageTwoUrl}
-            alt={node.image_2.alt}
-            className="object-cover object-center"
-          />
-        </CompareItem>
-        <CompareHandle
-          ref={handleRef}
-          onKeyDown={handleKeyDown}
-          isDragging={isDragging}
-        />
-      </div>
-      {node.caption && (
-        <figcaption className="mt-2 grid gap-1 px-4">
-          <BodyShort as="span" size="small" className="self-center text-center">
-            {node.caption}
-          </BodyShort>
-        </figcaption>
-      )}
-    </figure>
+    <CompareImagesContext.Provider
+      value={{
+        container: {
+          ref: containerRef,
+          styles: appliedStyle,
+          onPointerDown: handlePointerDown,
+        },
+        handle: {
+          ref: handleRef,
+          onKeyDown: handleKeyDown,
+        },
+        handlePosition: handlePosition.current,
+        dragging: {
+          current: isDragging,
+          update: setIsDragging,
+        },
+      }}
+    >
+      {children}
+    </CompareImagesContext.Provider>
   );
-};
+}
 
-export default CompareImages;
+function useCompareImages() {
+  const context = useContext(CompareImagesContext);
+
+  if (context === null) {
+    throw new Error(
+      "useCompareImages must be used within a CompareImagesProvider",
+    );
+  }
+  return context;
+}
+
+export { CompareImagesProvider, useCompareImages };

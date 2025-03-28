@@ -26,7 +26,7 @@
 }
 
 .pageLayoutMain {
-  width: 100%;
+  width: fit-content;
   margin: 0 auto;
   padding-block: var(--ax-space-24);
   padding-inline: var(--ax-space-40);
