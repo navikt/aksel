@@ -6,6 +6,10 @@
 
 - Darkside: Throw error if invalid Box-props are used with new Theme instead of warnings. ([#3697](https://github.com/navikt/aksel/pull/3697))
 
+### @navikt/ds-tokens
+
+- Darkside: Update global 'meta-purple' color. ([#3703](https://github.com/navikt/aksel/pull/3703))
+
 ### @navikt/ds-css
 
 - Table: Disabled expansion-rows now has same hover-effect as other rows. ([#3702](https://github.com/navikt/aksel/pull/3702))
