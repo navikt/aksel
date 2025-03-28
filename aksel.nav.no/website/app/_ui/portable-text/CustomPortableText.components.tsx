@@ -1,10 +1,12 @@
 import {
+  PortableText,
   PortableTextBlockComponent,
   type PortableTextComponents,
   PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { Attachment } from "@/app/_ui/attachment/Attachment";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
 import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
@@ -60,6 +62,7 @@ function customPortableTextComponents({
       exampletext_block: ExampleText,
       attachment: Attachment,
       compare_images: CompareImages,
+      language: LocalCustomPortableText,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,
@@ -191,6 +194,25 @@ function withSanitizedBlock(node: React.ReactElement) {
   }
 
   return node;
+}
+
+function LocalCustomPortableText(
+  props: ExtractPortableComponentProps<"language">,
+) {
+  const { language, body } = props.value;
+
+  if (!language) {
+    return null;
+  }
+
+  return (
+    <div lang={language}>
+      <PortableText
+        components={customPortableTextComponents({})}
+        value={body ?? []}
+      />
+    </div>
+  );
 }
 
 export { customPortableTextComponents };
