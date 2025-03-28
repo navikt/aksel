@@ -6,7 +6,10 @@ import {
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
-import { ExtractPortableComponentProps } from "@/app/_sanity/types";
+import {
+  ExtractPortableComponentProps,
+  PortableContentTypes,
+} from "@/app/_sanity/types";
 import { Attachment } from "@/app/_ui/attachment/Attachment";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
 import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
@@ -63,7 +66,7 @@ function customPortableTextComponents({
       attachment: Attachment,
       compare_images: CompareImages,
       language: LocalCustomPortableText,
-    } /* satisfies Record<PortableContentTypes, any> */,
+    } satisfies Record<PortableContentTypes & "token_kategori", any>,
     block,
     marks,
     list: {
