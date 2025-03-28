@@ -1,10 +1,7 @@
 import "react";
 import type { GlobalColorRoles } from "@navikt/ds-tokens/types";
 
-type AkselBrandColors =
-  | "aksel-brand-teal"
-  | "aksel-brand-violet"
-  | "aksel-brand-pink";
+type AkselBrandColors = "aksel-brand-teal" | "aksel-brand-pink";
 
 declare module "react" {
   interface HTMLAttributes {
