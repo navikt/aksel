@@ -46,11 +46,11 @@ const serializers: Partial<PortableTextReactComponents> = {
     spesial_seksjon: ({ value }) => <SideModul node={value} />,
     exampletext_block: ({ value }) => <ExampletextBlock node={value} />,
     attachment: ({ value }) => <Attachment node={value} />,
+    compare_images: ({ value }) => <CompareImages node={value} />,
     /* TODO: ^completed */
     language: ({ value }) => (
       <SanityBlockContent lang={value.language} blocks={value.body} />
     ),
-    compare_images: ({ value }) => <CompareImages node={value} />,
   },
   unknownType: () => null,
   block: {

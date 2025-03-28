@@ -7,6 +7,7 @@ import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Attachment } from "@/app/_ui/attachment/Attachment";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
+import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
 import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
 import { LegacyTokenModule } from "@/app/_ui/legacy-token-module/LegacyTokenModule";
@@ -58,6 +59,7 @@ function customPortableTextComponents({
       spesial_seksjon: LegacyTokenModule,
       exampletext_block: ExampleText,
       attachment: Attachment,
+      compare_images: CompareImages,
     } /* satisfies Record<PortableContentTypes, any> */,
     block,
     marks,

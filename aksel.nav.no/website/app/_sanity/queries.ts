@@ -1,5 +1,5 @@
 import { defineQuery, groq } from "next-sanity";
-import { destructureBlocks } from "@/sanity/queries";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -63,6 +63,18 @@ const GRUNNLEGGENDE_BY_SLUG_QUERY =
     },
 }`);
 
+const BLOGG_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
+{
+  ...,
+  "slug": slug.current,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  ${contributorsAll}
+}`);
+
 const TOC_BY_SLUG_QUERY =
   defineQuery(`*[slug.current == $slug][0].content[style match 'h2'][]{
   "id": _key,
@@ -80,4 +92,5 @@ export {
   TOC_BY_SLUG_QUERY,
   SLUG_BY_TYPE_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,
+  BLOGG_BY_SLUG_QUERY,
 };

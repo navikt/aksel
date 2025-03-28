@@ -1,5 +1,6 @@
 import { PortableTextComponentProps } from "next-sanity";
 import {
+  BLOGG_BY_SLUG_QUERYResult,
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
 } from "./query-types";
@@ -7,7 +8,9 @@ import {
 /* TODO: Currently only handles "komponenter". Extend to cover all doctypes */
 type PortableContentTypes = NonNullable<
   NonNullable<
-    KOMPONENT_BY_SLUG_QUERYResult | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+    | KOMPONENT_BY_SLUG_QUERYResult
+    | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+    | BLOGG_BY_SLUG_QUERYResult
   >["content"]
 >[number]["_type"];
 
@@ -15,7 +18,9 @@ type PortableContentTypes = NonNullable<
 type ExtractPortableType<T extends PortableContentTypes> = Extract<
   NonNullable<
     NonNullable<
-      KOMPONENT_BY_SLUG_QUERYResult | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+      | KOMPONENT_BY_SLUG_QUERYResult
+      | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+      | BLOGG_BY_SLUG_QUERYResult
     >["content"]
   >[number],
   { _type: T }
