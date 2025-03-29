@@ -30,7 +30,7 @@ export const SearchForm = () => {
         label={
           <span className="flex items-center gap-2">
             <span>Søk i hele Aksel</span>
-            {os === "mac" ? <KBD>CMD + B</KBD> : <KBD>CTRL + B</KBD>}
+            {os === "mac" ? <KBD>CMD + K</KBD> : <KBD>CTRL + K</KBD>}
           </span>
         }
         aria-autocomplete="both"

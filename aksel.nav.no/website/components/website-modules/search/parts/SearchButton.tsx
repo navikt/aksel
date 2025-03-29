@@ -1,11 +1,15 @@
+import { useContext } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Hide, Show } from "@navikt/ds-react";
+import { SearchContext } from "../providers";
+import styles from "./SearchButton.module.css";
 
 type AkselSearchButtonProps = {
   onClick?: () => void;
 };
 
 export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
+  const { os } = useContext(SearchContext);
   return (
     <>
       <Show above="xl" asChild>
@@ -23,7 +27,14 @@ export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
           iconPosition="left"
           onClick={onClick}
         >
-          Søk <span className="text-medium font-normal">(ctrl + k)</span>
+          Søk{" "}
+          <span className="text-medium font-normal">
+            {os === "mac" ? (
+              <kbd className={styles.kbd}>⌘K</kbd>
+            ) : (
+              <kbd>(ctrl+k)</kbd>
+            )}
+          </span>
         </Button>
       </Show>
       <Hide above="xl" asChild>
