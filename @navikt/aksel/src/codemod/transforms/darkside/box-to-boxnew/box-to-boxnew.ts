@@ -18,6 +18,10 @@ export default function transformer(file: FileInfo, api: API) {
 
   const toSourceOptions = getLineTerminator(file.source);
 
+  if (file.source.includes("TODO: aksel box migration")) {
+    return root.toSource(toSourceOptions);
+  }
+
   const localName = findComponentImport({
     root,
     j,
