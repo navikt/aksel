@@ -66,7 +66,10 @@ function customPortableTextComponents({
       attachment: Attachment,
       compare_images: CompareImages,
       language: LocalCustomPortableText,
-    } satisfies Record<PortableContentTypes & "token_kategori", any>,
+    } satisfies Record<
+      PortableContentTypes & "token_kategori",
+      ExtractPortableComponentProps<PortableContentTypes>
+    >,
     block,
     marks,
     list: {
