@@ -4185,7 +4185,7 @@ __metadata:
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:3.2.11"
-    figlet: "npm:1.6.0"
+    figlet: "npm:1.8.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:^0.15.1"
     jscodeshift-add-imports: "npm:1.0.11"
@@ -13563,12 +13563,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:1.6.0":
-  version: 1.6.0
-  resolution: "figlet@npm:1.6.0"
+"figlet@npm:1.8.0":
+  version: 1.8.0
+  resolution: "figlet@npm:1.8.0"
   bin:
     figlet: bin/index.js
-  checksum: 10/ffc17bb3eedc9d39e5d1eee31378cd3bdd25a86a345db261328ed20b59530162a9e7f448ba6a166d67098d12cc68933395153147ec139b4e305a87f99f707eba
+  checksum: 10/e52933f9cba3c03c6f399763363502b6e6396d1ca6ca9d79cd8bd467aa85b64ee12c7b2cc5ae5901af5a6fe085414accac14890949130e908da8dd2a8bb8c8ac
   languageName: node
   linkType: hard
 
