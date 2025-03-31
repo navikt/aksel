@@ -3,7 +3,7 @@
 import cl from "clsx";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { SidebarGroupedPagesT } from "@/types";
 import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
@@ -33,7 +33,7 @@ function DesignsystemSidebarSubNav(
         data-umami-event-kategori={title}
       >
         {title}
-        {open ? <ChevronUpIcon aria-hidden /> : <ChevronDownIcon aria-hidden />}
+        <ChevronDownIcon aria-hidden className={styles.navListSubButtonIcon} />
       </button>
       <ul hidden={!open}>
         {pages.map((page) => (
