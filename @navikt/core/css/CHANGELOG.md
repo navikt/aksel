@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.18.0
+
+### Patch Changes
+
+- Table: Disabled expansion-rows now has same hover-effect as other rows. ([#3702](https://github.com/navikt/aksel/pull/3702))
+
 ## 7.17.4
 
 ### Patch Changes
