@@ -2,7 +2,7 @@ import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  GRUNNLEGGENDE_BY_SLUG_QUERY,
+  MONSTER_MALER_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
@@ -18,18 +18,18 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return await getStaticParamsSlugs("ds_artikkel");
+  return await getStaticParamsSlugs("templates_artikkel");
 }
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const parsedSlug = parseDesignsystemSlug(slug, "grunnleggende");
+  const parsedSlug = parseDesignsystemSlug(slug, "monster-maler");
 
   const [{ data: page }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
-      query: GRUNNLEGGENDE_BY_SLUG_QUERY,
+      query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
     }),
     sanityFetch({

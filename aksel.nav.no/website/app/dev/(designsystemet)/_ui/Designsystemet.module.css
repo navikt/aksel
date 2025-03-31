@@ -28,7 +28,7 @@
 .pageLayoutMain {
   width: fit-content;
   margin: 0 auto;
-  padding-block: var(--ax-space-24);
+  padding-block: var(--ax-space-24) var(--ax-space-128);
   padding-inline: var(--ax-space-40);
   display: grid;
   column-gap: var(--ax-space-40);

@@ -49,9 +49,8 @@ export default async function Page({ params }: Props) {
       <TableOfContents
         feedback={{
           name: page.heading,
-          text: "Innspill til siden",
+          text: "Send innspill",
         }}
-        showChangelogLink
         toc={toc}
       />
       <div>

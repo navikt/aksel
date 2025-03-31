@@ -3,26 +3,22 @@ import {
   BLOGG_BY_SLUG_QUERYResult,
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
+  MONSTER_MALER_BY_SLUG_QUERYResult,
 } from "./query-types";
 
-/* TODO: Currently only handles "komponenter". Extend to cover all doctypes */
+type QueryResults =
+  | KOMPONENT_BY_SLUG_QUERYResult
+  | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+  | MONSTER_MALER_BY_SLUG_QUERYResult
+  | BLOGG_BY_SLUG_QUERYResult;
+
 type PortableContentTypes = NonNullable<
-  NonNullable<
-    | KOMPONENT_BY_SLUG_QUERYResult
-    | GRUNNLEGGENDE_BY_SLUG_QUERYResult
-    | BLOGG_BY_SLUG_QUERYResult
-  >["content"]
+  NonNullable<QueryResults>["content"]
 >[number]["_type"];
 
 // Generic utility type to extract a specific type from the content array
 type ExtractPortableType<T extends PortableContentTypes> = Extract<
-  NonNullable<
-    NonNullable<
-      | KOMPONENT_BY_SLUG_QUERYResult
-      | GRUNNLEGGENDE_BY_SLUG_QUERYResult
-      | BLOGG_BY_SLUG_QUERYResult
-    >["content"]
-  >[number],
+  NonNullable<NonNullable<QueryResults>["content"]>[number],
   { _type: T }
 >;
 

@@ -63,6 +63,16 @@ const GRUNNLEGGENDE_BY_SLUG_QUERY =
     },
 }`);
 
+const MONSTER_MALER_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "templates_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
 const BLOGG_BY_SLUG_QUERY =
   defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
 {
@@ -93,4 +103,5 @@ export {
   SLUG_BY_TYPE_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   BLOGG_BY_SLUG_QUERY,
+  MONSTER_MALER_BY_SLUG_QUERY,
 };
