@@ -2,7 +2,7 @@ import type { API, FileInfo } from "jscodeshift";
 import {
   findComponentImport,
   findJSXElement,
-  findProp,
+  findProps,
 } from "../../../utils/ast";
 import { getLineTerminator } from "../../../utils/lineterminator";
 import { legacySpacingTokenMap } from "../spacing.utils";
@@ -53,7 +53,7 @@ export default function transformer(file: FileInfo, api: API) {
       originalName: primitive,
     }).forEach((path) => {
       for (const prop of affectedProps) {
-        findProp({ j, path, name: prop }).forEach((attr) => {
+        findProps({ j, path, name: prop }).forEach((attr) => {
           const attrValue = attr.value.value;
 
           if (attrValue.type === "StringLiteral") {
