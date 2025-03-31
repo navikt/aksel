@@ -1,12 +1,22 @@
 import {
+  PortableText,
   PortableTextBlockComponent,
   type PortableTextComponents,
   PortableTextMarkComponent,
 } from "next-sanity";
 import { Children } from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import {
+  ExtractPortableComponentProps,
+  PortableContentTypes,
+} from "@/app/_sanity/types";
+import { Attachment } from "@/app/_ui/attachment/Attachment";
 import { SingleCodeBlock } from "@/app/_ui/code-block/CodeBlock.single";
+import { CompareImages } from "@/app/_ui/compare-images/CompareImages";
+import { ExampleText } from "@/app/_ui/example-text/ExampleText";
 import { KodeEksempler } from "@/app/_ui/kode-eksempler/KodeEksempler";
+import { LegacyTokenModule } from "@/app/_ui/legacy-token-module/LegacyTokenModule";
+import { LegacyTokenTable } from "@/app/_ui/legacy-token-table/LegacyTokenTable";
 import { Bilde } from "../bilde/Bilde";
 import { DoDont } from "../do-dont/DoDont";
 import { Kbd } from "../kbd/Kbd";
@@ -15,8 +25,8 @@ import { RelatertInnhold } from "../relatert-innhold/RelatertInnhold";
 import { TableV2 } from "../table-v2/TableV2";
 import { Tips } from "../tips/Tips";
 import { Code } from "../typography/Code";
-import { List, ListItem } from "../typography/List";
 import { WebsiteLink } from "../typography/WebsiteLink";
+import { WebsiteList, WebsiteListItem } from "../typography/WebsiteList";
 import { Video } from "../video/Video";
 import { WebsiteAccordion } from "../website-accordion/WebsiteAccordion";
 import { WebsiteAlert } from "../website-alert/WebsiteAlert";
@@ -50,16 +60,27 @@ function customPortableTextComponents({
       tips: Tips,
       kode: SingleCodeBlock,
       kode_eksempler: KodeEksempler,
-    } /* satisfies Record<PortableContentTypes, any> */,
+      token_kategori: LegacyTokenTable,
+      spesial_seksjon: LegacyTokenModule,
+      exampletext_block: ExampleText,
+      attachment: Attachment,
+      compare_images: CompareImages,
+      language: LocalCustomPortableText,
+    } satisfies Record<
+      PortableContentTypes & "token_kategori",
+      ExtractPortableComponentProps<PortableContentTypes>
+    >,
     block,
     marks,
     list: {
-      bullet: ({ children }) => <List as="ul">{children}</List>,
-      number: ({ children }) => <List as="ol">{children}</List>,
+      bullet: ({ children }) => <WebsiteList as="ul">{children}</WebsiteList>,
+      number: ({ children }) => <WebsiteList as="ol">{children}</WebsiteList>,
     },
     listItem: {
-      bullet: ({ children }) => <ListItem icon>{children}</ListItem>,
-      number: ({ children }) => <ListItem>{children}</ListItem>,
+      bullet: ({ children }) => (
+        <WebsiteListItem icon>{children}</WebsiteListItem>
+      ),
+      number: ({ children }) => <WebsiteListItem>{children}</WebsiteListItem>,
     },
     unknownBlockStyle: ({ children }) =>
       withSanitizedBlock(<BodyShort spacing>{children}</BodyShort>),
@@ -179,6 +200,25 @@ function withSanitizedBlock(node: React.ReactElement) {
   }
 
   return node;
+}
+
+function LocalCustomPortableText(
+  props: ExtractPortableComponentProps<"language">,
+) {
+  const { language, body } = props.value;
+
+  if (!language) {
+    return null;
+  }
+
+  return (
+    <div lang={language}>
+      <PortableText
+        components={customPortableTextComponents({})}
+        value={body ?? []}
+      />
+    </div>
+  );
 }
 
 export { customPortableTextComponents };

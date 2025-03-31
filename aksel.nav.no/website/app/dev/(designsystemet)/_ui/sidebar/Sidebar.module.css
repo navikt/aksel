@@ -12,6 +12,7 @@
     padding-block: var(--ax-space-24) var(--ax-space-64);
     position: sticky;
     overflow: auto;
+    scrollbar-width: thin;
     top: var(--website-header-height-width-border);
     max-height: calc(100vh - var(--website-header-height-width-border));
     overscroll-behavior: contain;

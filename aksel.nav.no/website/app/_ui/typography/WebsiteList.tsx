@@ -8,7 +8,7 @@ import styles from "./Typography.module.css";
 
 type ListProps = Pick<AkselListProps, "as" | "children">;
 
-function List({ children, as = "ul" }: ListProps) {
+function WebsiteList({ children, as = "ul" }: ListProps) {
   return (
     <AkselList className={styles.typoList} as={as}>
       {children}
@@ -21,7 +21,7 @@ type ListItemProps = {
   icon?: boolean;
 };
 
-function ListItem({ children, icon = false }: ListItemProps) {
+function WebsiteListItem({ children, icon = false }: ListItemProps) {
   return (
     <AkselListItem
       icon={
@@ -45,4 +45,4 @@ function ListItem({ children, icon = false }: ListItemProps) {
   );
 }
 
-export { List, ListItem };
+export { WebsiteList, WebsiteListItem };

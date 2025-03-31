@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { DESIGNSYSTEM_SIDEBAR_QUERYResult } from "@/app/_sanity/query-types";
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
