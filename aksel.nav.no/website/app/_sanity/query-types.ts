@@ -53,7 +53,6 @@ export type Exampletext_block = {
   _type: "exampletext_block";
   title?: string;
   text?: string;
-  readMore?: boolean;
 };
 
 export type Token_ref = {
@@ -2268,6 +2267,7 @@ export type Ds_props = {
     type?: string;
     ref?: boolean;
     return?: string;
+    example?: string;
     params?: Array<string>;
     _type: "prop";
     _key: string;
@@ -3430,7 +3430,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
                 _type: "exampletext_block";
                 title?: string;
                 text?: string;
-                readMore?: boolean;
                 markDefs: null;
               }
             | {
@@ -3763,7 +3762,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
         _type: "exampletext_block";
         title?: string;
         text?: string;
-        readMore?: boolean;
         markDefs: null;
       }
     | {
@@ -3958,7 +3956,6 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               _type: "exampletext_block";
               title?: string;
               text?: string;
-              readMore?: boolean;
               markDefs: null;
             }
           | {
@@ -4230,6 +4227,7 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               type?: string;
               ref?: boolean;
               return?: string;
+              example?: string;
               params?: Array<string>;
               _type: "prop";
               _key: string;
@@ -4620,7 +4618,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
                 _type: "exampletext_block";
                 title?: string;
                 text?: string;
-                readMore?: boolean;
                 markDefs: null;
               }
             | {
@@ -5036,7 +5033,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
         _type: "exampletext_block";
         title?: string;
         text?: string;
-        readMore?: boolean;
         markDefs: null;
       }
     | {
@@ -5231,7 +5227,6 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               _type: "exampletext_block";
               title?: string;
               text?: string;
-              readMore?: boolean;
               markDefs: null;
             }
           | {
@@ -5466,6 +5461,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               type?: string;
               ref?: boolean;
               return?: string;
+              example?: string;
               params?: Array<string>;
               _type: "prop";
               _key: string;
@@ -5847,7 +5843,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
                 _type: "exampletext_block";
                 title?: string;
                 text?: string;
-                readMore?: boolean;
                 markDefs: null;
               }
             | {
@@ -6212,7 +6207,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
         _type: "exampletext_block";
         title?: string;
         text?: string;
-        readMore?: boolean;
         markDefs: null;
       }
     | {
@@ -6407,7 +6401,6 @@ export type BLOGG_BY_SLUG_QUERYResult = {
               _type: "exampletext_block";
               title?: string;
               text?: string;
-              readMore?: boolean;
               markDefs: null;
             }
           | {
