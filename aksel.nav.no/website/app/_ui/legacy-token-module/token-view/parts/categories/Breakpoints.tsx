@@ -59,8 +59,7 @@ function getSvg(token: string) {
     case token.includes("lg"):
       return <LaptopIcon title="Laptop" fontSize="2.5rem" />;
     case token.includes("xl"):
-      return <MonitorIcon title="Dekstop" fontSize="2.5rem" />;
-
+      return <MonitorIcon title="Desktop" fontSize="2.5rem" />;
     default:
       return null;
   }
