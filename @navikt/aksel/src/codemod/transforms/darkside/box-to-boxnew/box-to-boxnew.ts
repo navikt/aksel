@@ -1,4 +1,4 @@
-import type { API, FileInfo, JSCodeshift } from "jscodeshift";
+import type { API, FileInfo, JSCodeshift, JSXIdentifier } from "jscodeshift";
 import { legacyTokenConfig } from "../../../../darkside/config/legacy.tokens";
 import {
   findComponentImport,
@@ -65,8 +65,8 @@ export default function transformer(file: FileInfo, api: API) {
     }
     if (!encounteredUnmigratableProp) {
       // TODO: ?? Box -> BoxNew type fail? (but works)
-      astElement.node.openingElement.name.name = "BoxNew";
-      astElement.node.closingElement.name.name = "BoxNew";
+      (astElement.node.openingElement.name as JSXIdentifier).name = "BoxNew";
+      (astElement.node.closingElement.name as JSXIdentifier).name = "BoxNew";
     }
   }
 
