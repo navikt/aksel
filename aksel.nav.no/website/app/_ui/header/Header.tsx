@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Link from "next/link";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
@@ -12,9 +13,9 @@ const LINKS = [
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
-function Header() {
+function Header({ className }: { className?: string }) {
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header, className)}>
       <a className={styles.skiplink} href="#hovedinnhold">
         Hopp til innhold
       </a>
