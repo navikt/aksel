@@ -17,8 +17,8 @@ function CompareImagesHandle() {
       aria-orientation="horizontal"
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-valuenow={50}
-      aria-valuetext="50%"
+      aria-valuenow={value.current}
+      aria-valuetext={`${value.current}%`}
       data-rcs="handle-container"
       role="slider"
     >
