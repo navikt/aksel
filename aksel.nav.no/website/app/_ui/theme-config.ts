@@ -19,7 +19,7 @@ const statusToColorRole: Record<
   NonNullable<StatusTagT>,
   GlobalColorRoles | AkselBrandColors
 > = {
-  beta: "aksel-brand-violet",
+  beta: "meta-purple",
   deprecated: "neutral",
   new: "success",
   ready: "info",
