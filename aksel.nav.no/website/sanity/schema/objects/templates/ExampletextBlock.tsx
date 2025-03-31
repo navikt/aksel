@@ -52,11 +52,6 @@ export const ExampletextBlock = defineType({
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      title: "Bruk ReadMore",
-      name: "readMore",
-      type: "boolean",
-    }),
   ],
   preview: {
     select: {

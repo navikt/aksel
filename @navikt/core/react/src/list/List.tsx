@@ -48,7 +48,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
       as: ListTag = "ul",
       title,
       description,
-      headingTag = "h3",
+      headingTag,
       size,
       "aria-label": _ariaLabel,
       "aria-labelledby": _ariaLabelledBy,
@@ -114,7 +114,7 @@ export const List = forwardRef<HTMLDivElement, ListProps>(
           className={cn("navds-list", `navds-list--${listSize}`, className)}
         >
           {title && (
-            <Heading size={headingSizeMap[listSize]} as={headingTag}>
+            <Heading size={headingSizeMap[listSize]} as={headingTag ?? "h3"}>
               {title}
             </Heading>
           )}

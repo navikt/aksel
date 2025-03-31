@@ -3,12 +3,12 @@
 import cl from "clsx";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDownIcon } from "@navikt/aksel-icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@navikt/aksel-icons";
 import { SidebarGroupedPagesT } from "@/types";
-import { SidebarItem } from "./Sidebar.item";
+import { DesignsystemSidebarItem } from "./Sidebar.item";
 import styles from "./Sidebar.module.css";
 
-function SidebarSubNav(
+function DesignsystemSidebarSubNav(
   props: SidebarGroupedPagesT & { layout: "sidebar" | "mobile" },
 ) {
   const { pages, title, layout } = props;
@@ -18,9 +18,7 @@ function SidebarSubNav(
     return pathName?.split("#")[0] === `/${page.slug}`;
   });
 
-  /* Use this when sections are no longer default: open */
-  /* const [open, setOpen] = useState(isSectionActive); */
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(isSectionActive);
 
   return (
     <li>
@@ -35,11 +33,11 @@ function SidebarSubNav(
         data-umami-event-kategori={title}
       >
         {title}
-        <ChevronDownIcon aria-hidden />
+        {open ? <ChevronUpIcon aria-hidden /> : <ChevronDownIcon aria-hidden />}
       </button>
       <ul hidden={!open}>
         {pages.map((page) => (
-          <SidebarItem
+          <DesignsystemSidebarItem
             key={page.heading}
             page={page}
             isIndented
@@ -51,4 +49,4 @@ function SidebarSubNav(
   );
 }
 
-export { SidebarSubNav };
+export { DesignsystemSidebarSubNav };
