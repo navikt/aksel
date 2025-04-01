@@ -48,7 +48,7 @@ export async function generateMetadata(
   const ogImages = (await parent).openGraph?.images || [];
   const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
 
-  pageOgImage && ogImages.push(pageOgImage);
+  pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
     title: `${page?.heading} - Aksel.nav.no`,
