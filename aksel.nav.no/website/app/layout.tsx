@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { Theme } from "@navikt/ds-react";
@@ -11,10 +11,13 @@ export const metadata: Metadata = {
     template: "%s - Aksel.nav.no",
     default: "Aksel.nav.no",
   },
-  themeColor: "#00243A",
   icons: {
     icon: "/favicon.svg",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#00243A",
 };
 
 export default async function RootLayout({
