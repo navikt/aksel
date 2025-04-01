@@ -33,19 +33,13 @@ export async function generateMetadata(
     stega: false,
   });
 
-  if (!page) {
-    return {
-      title: "Aksel.nav.no",
-    };
-  }
-
   const ogImages = (await parent).openGraph?.images || [];
   const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: `${page?.heading} - Aksel.nav.no`,
+    title: page?.heading,
     description: page?.seo?.meta,
     openGraph: {
       images: ogImages,
