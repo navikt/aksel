@@ -10,7 +10,6 @@
   grid-template-columns: 1fr;
   margin-inline: auto;
   width: 100%;
-  gap: var(--ax-space-24);
   z-index: 0;
   position: relative;
   max-width: 1920px;
@@ -21,17 +20,21 @@
 
 @media (min-width: 1024px) {
   .pageLayout {
-    grid-template-columns: 16rem 1fr;
+    grid-template-columns: min-content 1fr;
   }
 }
 
 .pageLayoutMain {
   width: fit-content;
   margin: 0 auto;
-  padding-block: var(--ax-space-24);
+  padding-block: var(--ax-space-24) var(--ax-space-128);
   padding-inline: var(--ax-space-40);
   display: grid;
   column-gap: var(--ax-space-40);
+
+  /* TODO: For new icon-page: max-width: unsure, but right-panel is a little larger than TOC so adjust accordingly with designer */
+
+  /* TODO: For page-overview templates: max-width 1280px, only 1 column always since there is no TOC */
   grid-template-columns: minmax(0, 960px);
   grid-template-rows: min-content min-content;
   /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */

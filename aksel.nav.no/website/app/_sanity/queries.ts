@@ -63,6 +63,16 @@ const GRUNNLEGGENDE_BY_SLUG_QUERY =
     },
 }`);
 
+const MONSTER_MALER_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "templates_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
 const BLOGG_BY_SLUG_QUERY =
   defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
 {
@@ -81,6 +91,13 @@ const TOC_BY_SLUG_QUERY =
   "title": pt::text(@)
 }`);
 
+const METADATA_BY_SLUG_QUERY = defineQuery(`*[slug.current == $slug][0]{
+  heading,
+  ingress,
+  publishedAt,
+  seo
+}`);
+
 const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
@@ -93,4 +110,6 @@ export {
   SLUG_BY_TYPE_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   BLOGG_BY_SLUG_QUERY,
+  MONSTER_MALER_BY_SLUG_QUERY,
+  METADATA_BY_SLUG_QUERY,
 };

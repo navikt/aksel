@@ -102,6 +102,14 @@
   }
 }
 
+.navListSubButtonIcon {
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1);
+
+  .navListSubButton[aria-expanded="true"] > & {
+    transform: rotateX(-180deg);
+  }
+}
+
 .navListNotch {
   &::before {
     content: "";
