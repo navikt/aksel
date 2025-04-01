@@ -3,7 +3,7 @@ import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 
-function DesignsytemetKomponentIntro({
+function DesignsystemetKomponentIntro({
   data,
 }: {
   data: KOMPONENT_BY_SLUG_QUERYResult;
@@ -55,4 +55,4 @@ function DesignsytemetKomponentIntro({
   );
 }
 
-export { DesignsytemetKomponentIntro };
+export { DesignsystemetKomponentIntro };

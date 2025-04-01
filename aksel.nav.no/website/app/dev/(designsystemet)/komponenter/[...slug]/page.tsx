@@ -11,7 +11,7 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { DesignsytemetKomponentIntro } from "../../_ui/Designsystemet.intro";
+import { DesignsystemetKomponentIntro } from "../../_ui/Designsystemet.intro";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
@@ -84,7 +84,7 @@ export default async function Page({ params }: Props) {
         toc={toc}
       />
       <div>
-        <DesignsytemetKomponentIntro data={page} />
+        <DesignsystemetKomponentIntro data={page} />
         <CustomPortableText value={page.content as PortableTextBlock[]} />
       </div>
     </DesignsystemetPageLayout>
