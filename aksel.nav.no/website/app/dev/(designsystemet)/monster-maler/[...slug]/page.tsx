@@ -1,11 +1,15 @@
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next/types";
+import type { Image } from "sanity";
 import { Heading } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
+  METADATA_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import styles from "@/app/_ui/portable-text/CustomPortableText.module.css";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -22,6 +26,38 @@ import { getStaticParamsSlugs, parseDesignsystemSlug } from "../../slug";
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: page } = await sanityFetch({
+    query: METADATA_BY_SLUG_QUERY,
+    params: { slug: parseDesignsystemSlug(slug, "monster-maler") },
+    stega: false,
+  });
+
+  if (!page) {
+    return {
+      title: "Aksel.nav.no",
+    };
+  }
+
+  const ogImages = (await parent).openGraph?.images || [];
+  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
+
+  pageOgImage && ogImages.push(pageOgImage);
+
+  return {
+    title: `${page?.heading} - Aksel.nav.no`,
+    description: page?.seo?.meta,
+    openGraph: {
+      images: ogImages,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return await getStaticParamsSlugs("templates_artikkel");

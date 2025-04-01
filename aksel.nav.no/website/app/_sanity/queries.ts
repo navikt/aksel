@@ -91,6 +91,13 @@ const TOC_BY_SLUG_QUERY =
   "title": pt::text(@)
 }`);
 
+const METADATA_BY_SLUG_QUERY = defineQuery(`*[slug.current == $slug][0]{
+  heading,
+  ingress,
+  publishedAt,
+  seo
+}`);
+
 const SLUG_BY_TYPE_QUERY = defineQuery(`
   *[_type == $type && defined(slug.current)].slug.current
 `);
@@ -104,4 +111,5 @@ export {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   BLOGG_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
+  METADATA_BY_SLUG_QUERY,
 };
