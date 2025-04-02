@@ -13,7 +13,7 @@ export default function transformer(file: FileInfo, api: API) {
     const newCSSVar = translateToken(`--a-space-${newVar}`, "js");
 
     const name = findComponentImport({
-      file,
+      root,
       j,
       name: oldCSSVar,
       packageType: "tokens",

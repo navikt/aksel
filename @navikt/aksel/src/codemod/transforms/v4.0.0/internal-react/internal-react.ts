@@ -1,5 +1,5 @@
 import { getLineTerminator } from "../../../utils/lineterminator";
-import moveAndRenameImport from "../../../utils/moveAndRenameImport";
+import moveAndRenameImport from "../../../utils/packageImports";
 
 /**
  * @param {import('jscodeshift').FileInfo} file

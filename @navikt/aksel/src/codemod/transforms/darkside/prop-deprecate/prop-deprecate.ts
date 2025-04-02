@@ -17,7 +17,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   for (const [component, props] of Object.entries(deprecationMap)) {
     const sourceName = findComponentImport({
-      file,
+      root,
       j,
       name: component,
       packageType: "react",
