@@ -94,7 +94,10 @@ const PropEntry = ({
               level="4"
               className="mr-2 inline-block rounded-medium bg-surface-danger-subtle px-1 font-mono text-small font-semibold text-surface-danger-active line-through"
             >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
-            <span className="text-surface-danger">{prop.deprecated}</span>
+            <span className="text-surface-danger">
+              <span className="font-bold">Deprecated: </span>
+              {prop.deprecated}
+            </span>
           </dt>
         </summary>
         <dd>
