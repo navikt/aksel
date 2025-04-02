@@ -4,7 +4,6 @@ import { MobileNavDialog } from "./MobileNav.dialog";
 import { MobileNavMenu } from "./MobileNav.menu";
 import { MobileNavProvider } from "./MobileNav.provider";
 
-/* TODO: avoid "new"section for ds, just show all lings on same menu like primer? */
 async function MobileNav() {
   return (
     <MobileNavProvider>

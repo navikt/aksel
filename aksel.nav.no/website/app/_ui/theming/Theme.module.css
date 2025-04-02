@@ -1,0 +1,22 @@
+:root,
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.light) {
+  & .themeIconDark {
+    display: block;
+  }
+
+  & .themeIconLight {
+    display: none;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) {
+  & .themeIconLight {
+    display: block;
+  }
+
+  & .themeIconDark {
+    display: none;
+  }
+}
