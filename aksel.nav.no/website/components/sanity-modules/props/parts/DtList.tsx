@@ -31,9 +31,10 @@ type Prop = Partial<{
   params: string[];
   return: string;
   example: string;
+  deprecated: string;
 }>;
 
-export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
+export const DtList = ({ prop }: { prop: Prop }) => {
   return (
     <BodyShort as="ul" className="dtlist overflow-x-auto">
       {prop.type && (
