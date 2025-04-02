@@ -12,9 +12,11 @@ type QueryResults =
   | MONSTER_MALER_BY_SLUG_QUERYResult
   | BLOGG_BY_SLUG_QUERYResult;
 
-type PortableContentTypes = NonNullable<
-  NonNullable<QueryResults>["content"]
->[number]["_type"];
+type PortableContentTypes = Exclude<
+  | NonNullable<NonNullable<QueryResults>["content"]>[number]["_type"]
+  | "token_kategori",
+  "block" | "reference"
+>;
 
 // Generic utility type to extract a specific type from the content array
 type ExtractPortableType<T extends PortableContentTypes> = Extract<
