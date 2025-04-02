@@ -26,9 +26,19 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
   const { propref, title, overridable } = component;
 
   const propList =
-    propref?.proplist?.filter(
-      (prop) => !prop.description?.includes("@private"),
-    ) ?? [];
+    propref?.proplist
+      ?.filter((prop) => !prop.description?.includes("@private"))
+      .sort((prop_a, prop_b) => {
+        let comparator_value = 0;
+
+        if ("deprecated" in prop_a) {
+          comparator_value += 1;
+        }
+        if ("deprecated" in prop_b) {
+          comparator_value -= 1;
+        }
+        return comparator_value;
+      }) ?? [];
 
   if (overridable) {
     propList.push({
@@ -58,36 +68,94 @@ function PropTable({ component }: { component: PropsSeksjonComponentT }) {
       <dl>
         {propList.map((prop) => (
           <div className={styles.propsSeksjonRow} key={prop.name}>
-            <Box as="dt" paddingBlock="space-8 0" paddingInline="space-8">
-              <Code as="h4" highlighted>{`${prop.name}${
-                prop?.required ? "" : "?"
-              }`}</Code>
-            </Box>
-            <BodyShort as="dd">
-              <Box as="ul" overflowX="auto">
-                <PropsSeksjonCode code={prop.type} title="Type" wrap />
-                <PropsSeksjonCode
-                  /* We assume that if type starts with ", its an union-type */
-                  code={
-                    (prop.type ?? "").startsWith('"')
-                      ? `"${prop.defaultValue}"`
-                      : prop.defaultValue
-                  }
-                  title="Default"
-                  wrap
-                />
-                <PropsSeksjonDescription
-                  description={prop.description}
-                  params={prop.params}
-                />
-                <PropsSeksjonCode code={prop.example} title="Example" />
-              </Box>
-            </BodyShort>
+            <PropEntry prop={prop} />
           </div>
         ))}
       </dl>
     </div>
   );
 }
+
+const PropEntry = ({
+  prop,
+}: {
+  prop: NonNullable<
+    NonNullable<PropsSeksjonComponentT["propref"]>["proplist"]
+  >[0];
+}) => {
+  if (prop.deprecated) {
+    return (
+      <details>
+        <summary>
+          <Box
+            as="dt"
+            className="inline-block"
+            paddingBlock="space-8 0"
+            paddingInline="space-8"
+          >
+            <Code
+              as="h4"
+              className="bg-(--ax-bg-danger-moderate) mr-2 line-through"
+              highlighted
+            >{`${prop.name}${prop?.required ? "" : "?"}`}</Code>
+            <span className="text-surface-danger">
+              <span className="font-bold">Deprecated: </span>
+              {prop.deprecated}
+            </span>
+          </Box>
+        </summary>
+        <BodyShort as="dd">
+          <Box as="ul" overflowX="auto">
+            <PropsSeksjonCode code={prop.type} title="Type" wrap />
+            <PropsSeksjonCode
+              /* We assume that if type starts with ", its an union-type */
+              code={
+                (prop.type ?? "").startsWith('"')
+                  ? `"${prop.defaultValue}"`
+                  : prop.defaultValue
+              }
+              title="Default"
+              wrap
+            />
+            <PropsSeksjonDescription
+              description={prop.description}
+              params={prop.params}
+            />
+            <PropsSeksjonCode code={prop.example} title="Example" />
+          </Box>
+        </BodyShort>
+      </details>
+    );
+  }
+  return (
+    <>
+      <Box as="dt" paddingBlock="space-8 0" paddingInline="space-8">
+        <Code as="h4" highlighted>{`${prop.name}${
+          prop?.required ? "" : "?"
+        }`}</Code>
+      </Box>
+      <BodyShort as="dd">
+        <Box as="ul" overflowX="auto">
+          <PropsSeksjonCode code={prop.type} title="Type" wrap />
+          <PropsSeksjonCode
+            /* We assume that if type starts with ", its an union-type */
+            code={
+              (prop.type ?? "").startsWith('"')
+                ? `"${prop.defaultValue}"`
+                : prop.defaultValue
+            }
+            title="Default"
+            wrap
+          />
+          <PropsSeksjonDescription
+            description={prop.description}
+            params={prop.params}
+          />
+          <PropsSeksjonCode code={prop.example} title="Example" />
+        </Box>
+      </BodyShort>
+    </>
+  );
+};
 
 export { PropsSeksjon };
