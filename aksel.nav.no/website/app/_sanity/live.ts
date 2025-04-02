@@ -1,9 +1,9 @@
-"use server";
-
 import { defineLive } from "next-sanity";
+import "server-only";
 import { client } from "./client";
 
 const token = process.env.SANITY_READ;
+
 if (!token) {
   throw new Error("Missing SANITY_READ");
 }

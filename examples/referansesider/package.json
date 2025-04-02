@@ -38,13 +38,13 @@
     "tailwindcss": "^3.4.11",
     "typescript": "5.5.4",
     "typescript-eslint": "^8.0.1",
-    "vite": "^6.0.11"
+    "vite": "^5.4.15"
   },
   "resolutions": {
     "@navikt/aksel-icons": "../../@navikt/aksel-icons",
     "@navikt/ds-css": "../../@navikt/core/css",
     "@navikt/ds-react": "../../@navikt/core/react",
     "@navikt/ds-tokens": "../../@navikt/core/tokens",
-    "vite": "^5.4.12"
+    "vite": "^5.4.15"
   }
 }

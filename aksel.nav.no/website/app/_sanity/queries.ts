@@ -1,5 +1,5 @@
 import { defineQuery, groq } from "next-sanity";
-import { destructureBlocks } from "@/sanity/queries";
+import { contributorsAll, destructureBlocks } from "@/sanity/queries";
 
 const DESIGNSYSTEM_TYPES = `"komponent_artikkel", "ds_artikkel", "templates_artikkel"`;
 
@@ -53,15 +53,63 @@ const KOMPONENT_BY_SLUG_QUERY =
     },
 }`);
 
+const GRUNNLEGGENDE_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "ds_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
+const MONSTER_MALER_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "templates_artikkel" && slug.current == $slug][0]
+  {
+    ...,
+    content[]{
+      ...,
+      ${destructureBlocks}
+    },
+}`);
+
+const BLOGG_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "aksel_blogg" && slug.current == $slug][0]
+{
+  ...,
+  "slug": slug.current,
+  content[]{
+    ...,
+    ${destructureBlocks}
+  },
+  ${contributorsAll}
+}`);
+
 const TOC_BY_SLUG_QUERY =
   defineQuery(`*[slug.current == $slug][0].content[style match 'h2'][]{
   "id": _key,
   "title": pt::text(@)
 }`);
 
+const METADATA_BY_SLUG_QUERY = defineQuery(`*[slug.current == $slug][0]{
+  heading,
+  ingress,
+  publishedAt,
+  seo
+}`);
+
+const SLUG_BY_TYPE_QUERY = defineQuery(`
+  *[_type == $type && defined(slug.current)].slug.current
+`);
+
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
+  SLUG_BY_TYPE_QUERY,
+  GRUNNLEGGENDE_BY_SLUG_QUERY,
+  BLOGG_BY_SLUG_QUERY,
+  MONSTER_MALER_BY_SLUG_QUERY,
+  METADATA_BY_SLUG_QUERY,
 };

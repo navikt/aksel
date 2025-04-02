@@ -1,7 +1,7 @@
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
-import { Sidebar } from "@/app/_ui/sidebar/Sidebar";
 import styles from "./_ui/Designsystemet.module.css";
+import { DesignsystemSidebar } from "./_ui/sidebar/Sidebar";
 
 export default async function DesignsystemLayout({
   children,
@@ -9,11 +9,11 @@ export default async function DesignsystemLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={styles.websitePage}>
       <Header />
 
       <div className={styles.pageLayout}>
-        <Sidebar />
+        <DesignsystemSidebar />
         {children}
       </div>
       <Footer />

@@ -58,11 +58,6 @@ const relatertInnhold = `_type == "relatert_innhold" =>{
   }
 }`;
 
-const innholdsKort = `_type == "innholdskort" =>{
-  ...,
-  "lenke": lenke->slug.current,
-}`;
-
 const liveSeksjon = `_type == "live_demo" =>{
   ...,
   "sandbox_ref": sandbox_ref->{...},
@@ -74,13 +69,6 @@ const installSeksjon = `_type == "installasjon_seksjon" =>{
 }`;
 
 const defaultBlock = `
- _type == "riktekst_blokk" =>{
-    ...,
-    body[]{
-      ...,
-      ${markDef}
-    }
- },
  _type == "bilde" =>{
     ...,
     floating_text[]{
@@ -144,18 +132,7 @@ const expansionCardBlock = `_type == "expansioncard"=>{
 
 const spesialSeksjon = `_type == "spesial_seksjon" =>{
   ...,
-  modul == "komponentoversikt" =>{
-    "komponenter": *[_type == 'komponent_artikkel' && !(_id in path("drafts.**"))]{
-      _id,
-      heading,
-      "ingress": intro.body,
-      status,
-      slug,
-    }
-  },
-  modul == "token_kategori" =>{
-    "token": token_ref->{...}
-}
+  "token": token_ref->{...}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{
@@ -177,7 +154,6 @@ ${tokenRef},
 ${markDef},
 ${introSeksjon},
 ${relatertInnhold},
-${innholdsKort},
 ${liveSeksjon},
 ${propsSeksjon},
 ${installSeksjon},

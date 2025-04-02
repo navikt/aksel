@@ -53,7 +53,7 @@
     "jscodeshift": "^0.15.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
-    "next": "15.2.1",
+    "next": "15.2.3",
     "next-logger": "^5.0.1",
     "next-sanity": "9.8.61",
     "node-cache": "^5.1.2",
@@ -82,8 +82,8 @@
   "devDependencies": {
     "@axe-core/playwright": "4.10.0",
     "@babel/core": "^7.19.0",
-    "@next/bundle-analyzer": "15.2.1",
-    "@next/eslint-plugin-next": "15.2.1",
+    "@next/bundle-analyzer": "15.2.3",
+    "@next/eslint-plugin-next": "15.2.3",
     "@playwright/test": "1.48.1",
     "@sanity/block-tools": "3.70.0",
     "@sanity/schema": "3.78.0",
@@ -106,6 +106,6 @@
     "start-server-and-test": "^2.0.3",
     "tsx": "^4.19.1",
     "typescript": "5.5.4",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.9"
   }
 }

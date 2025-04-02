@@ -13,7 +13,7 @@ export const Results = () => {
   }
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto">
+    <div className="flex flex-col overflow-y-auto">
       {!results && mostResent && (
         <section aria-label="Nyeste artikler">
           <Collection

@@ -1,12 +1,18 @@
+/* TODO: This might be a global style, so move it out if needed  */
+.websitePage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .pageLayout {
   display: grid;
   grid-template-columns: 1fr;
   margin-inline: auto;
-  max-width: 1440px;
   width: 100%;
-  gap: var(--ax-space-24);
   z-index: 0;
   position: relative;
+  max-width: 1920px;
 
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   min-height: calc(100vh - var(--website-header-height-width-border));
@@ -14,22 +20,65 @@
 
 @media (min-width: 1024px) {
   .pageLayout {
-    grid-template-columns: 16rem 1fr;
+    grid-template-columns: min-content 1fr;
   }
 }
 
 .pageLayoutMain {
-  width: 100%;
+  width: fit-content;
   margin: 0 auto;
-  padding-block: var(--ax-space-24);
+  padding-block: var(--ax-space-24) var(--ax-space-128);
   padding-inline: var(--ax-space-40);
   display: grid;
-  grid-template-columns: minmax(0, 1024px);
-  gap: var(--ax-space-40);
+  column-gap: var(--ax-space-40);
+
+  /* TODO: For new icon-page: max-width: unsure, but right-panel is a little larger than TOC so adjust accordingly with designer */
+
+  /* TODO: For page-overview templates: max-width 1280px, only 1 column always since there is no TOC */
+  grid-template-columns: minmax(0, 960px);
+  grid-template-rows: min-content min-content;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  grid-template-areas:
+    "intro"
+    "content";
 }
 
 @media (min-width: 1280px) {
   .pageLayoutMain[data-layout="with-toc"] {
-    grid-template-columns: minmax(0, 1024px) 1fr;
+    grid-template-areas:
+      "intro aside"
+      "content aside";
+    grid-template-columns: minmax(0, 960px) min-content;
   }
+}
+
+.pageHeaderHeading {
+  color: var(--ax-text-brand-blue);
+  margin-block-end: var(--ax-space-8);
+}
+
+.thumbnailContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 24 / 9;
+  border-radius: 16px;
+  background-color: var(--ax-bg-brand-blue-moderate);
+  margin-block-start: var(--ax-space-28);
+  overflow: hidden;
+}
+
+.thumbnailImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnailCube {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }

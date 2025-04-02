@@ -16,7 +16,7 @@
   display: table-row;
 }
 
-.navds-table__body .navds-table__row--shade-on-hover:not(.navds-table__expandable-row--expansion-disabled):hover {
+.navds-table__body .navds-table__row--shade-on-hover:hover {
   background-color: var(--ac-table-row-hover, var(--a-bg-subtle));
 }
 

@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { getLineTerminator } from "../../../utils/lineterminator";
-import moveAndRenameImport from "../../../utils/moveAndRenameImport";
+import moveAndRenameImport from "../../../utils/packageImports";
 import removePropsFromComponent from "../../../utils/removeProps";
 
 /**

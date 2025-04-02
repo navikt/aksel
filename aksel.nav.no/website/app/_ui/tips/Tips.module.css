@@ -1,0 +1,11 @@
+.tips {
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-info-subtleA);
+  background: var(--ax-bg-info-soft);
+  padding: var(--ax-space-12) var(--ax-space-16);
+}
+
+.tipsHeader {
+  color: var(--ax-text-info-subtle);
+  margin-block-end: var(--ax-space-4);
+}

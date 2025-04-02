@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.18.0
+
+### Minor Changes
+
+- Darkside: Throw error if invalid Box-props are used with new Theme instead of warnings. ([#3697](https://github.com/navikt/aksel/pull/3697))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.18.0
+  - @navikt/aksel-icons@7.18.0
+
 ## 7.17.4
 
 ### Patch Changes

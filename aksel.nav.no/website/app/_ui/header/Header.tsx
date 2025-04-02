@@ -31,7 +31,7 @@ function Header() {
         </Link>
 
         <Spacer />
-        <Show above="md" asChild>
+        <Show above="lg" asChild>
           <Box
             as="nav"
             paddingInline={{ xs: "0 space-8", lg: "0 space-32" }}
@@ -48,7 +48,7 @@ function Header() {
         </Show>
         <HStack align="center" gap="2">
           <GlobalSearch />
-          <Show below="md">
+          <Show below="lg">
             <MobileNav />
           </Show>
         </HStack>

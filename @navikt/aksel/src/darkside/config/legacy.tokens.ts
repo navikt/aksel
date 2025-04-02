@@ -691,7 +691,7 @@ const colors = {
   "surface-alt-3-strong": {
     ref: "deepblue-800",
     raw: "rgba(0, 52, 83, 1)",
-    comment: "Use 'bg-brand-blue-moderate' in theme 'dark'-mode. ",
+    comment: "Use 'bg-brand-blue-moderate' in theme 'dark'-mode.",
     replacement: "",
   },
   "surface-alt-3-moderate": {

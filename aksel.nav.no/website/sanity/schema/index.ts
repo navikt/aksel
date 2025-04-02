@@ -79,16 +79,11 @@ export const schema: SchemaPluginOptions = {
     /* Komponentsider */
     object.PropsSeksjon,
     object.KodeEksempler,
-    object.TastaturUU,
     object.TokenTabell,
     object.KomponentIntro,
 
     /* Templatesider */
     object.ExampletextBlock,
-
-    /* Prinsipper */
-    object.HeroBilde,
-    object.InnholdsKort,
   ],
   templates: [
     {

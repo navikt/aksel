@@ -6,19 +6,9 @@ import React from "react";
 import { Heading } from "@navikt/ds-react";
 import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
+import { doctypeToColorRole } from "../theme-config";
 import { SearchHitT, SearchResultPageTypesT } from "./GlobalSearch.config";
 import styles from "./GlobalSearch.module.css";
-
-/* TODO: Move this to global Aksel-config */
-const doctypeToRole: Record<SearchResultPageTypesT, string> = {
-  ds_artikkel: "brand-blue",
-  komponent_artikkel: "brand-blue",
-  templates_artikkel: "brand-blue",
-  aksel_artikkel: "aksel-brand-teal",
-  aksel_blogg: "aksel-brand-pink",
-  aksel_prinsipp: "neutral",
-  aksel_standalone: "neutral",
-};
 
 function GlobalSearchHitCollection({
   heading,
@@ -39,7 +29,7 @@ function GlobalSearchHitCollection({
         className={styles.searchSectionHeading}
         size="small"
         level="2"
-        data-color-role={doctypeToRole[tag ?? ""] ?? "neutral"}
+        data-color-role={doctypeToColorRole[tag ?? ""] ?? "neutral"}
       >
         {heading}
       </Heading>
