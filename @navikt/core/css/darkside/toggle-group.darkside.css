@@ -11,7 +11,7 @@
 /* Main Togglegroup */
 .aksel-toggle-group {
   border-radius: var(--ax-border-radius-large);
-  background-color: transparent;
+  background-color: var(--ax-bg-input);
   box-shadow: inset 0 0 0 1px var(--ax-border-neutral);
   display: inline-grid;
   grid-auto-flow: column;
