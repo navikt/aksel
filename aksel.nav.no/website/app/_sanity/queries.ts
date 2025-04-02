@@ -53,6 +53,10 @@ const KOMPONENT_BY_SLUG_QUERY =
     },
 }`);
 
+const KOMPONENTOVERSIKT_QUERY = defineQuery(
+  `*[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug.current,status,kategori, "sidebarindex": sidebarindex}`,
+);
+
 const GRUNNLEGGENDE_BY_SLUG_QUERY =
   defineQuery(`*[_type == "ds_artikkel" && slug.current == $slug][0]
   {
@@ -106,6 +110,7 @@ export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
+  KOMPONENTOVERSIKT_QUERY,
   TOC_BY_SLUG_QUERY,
   SLUG_BY_TYPE_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,
