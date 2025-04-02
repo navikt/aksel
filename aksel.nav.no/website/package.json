@@ -30,7 +30,9 @@
     "playwright": "playwright test",
     "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
-    "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch"
+    "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch",
+    "rename:sanity-schema": "cd ./sanity/ && node -e \"require('fs').rename('./schema.json', './sanity-schema.json', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
+    "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default && yarn rename:sanity-schema && yarn sanity typegen generate"
   },
   "dependencies": {
     "@navikt/next-logger": "2.0.0",
