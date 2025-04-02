@@ -93,11 +93,9 @@ const PropEntry = ({
             paddingBlock="space-8 0"
             paddingInline="space-8"
           >
-            <Code
-              as="h4"
-              className="bg-(--ax-bg-danger-moderate) mr-2 line-through"
-              highlighted
-            >{`${prop.name}${prop?.required ? "" : "?"}`}</Code>
+            <Code as="h4" className="mr-2 line-through" highlighted>{`${
+              prop.name
+            }${prop?.required ? "" : "?"}`}</Code>
             <span className="text-surface-danger">
               <span className="font-bold">Deprecated: </span>
               {prop.deprecated}
