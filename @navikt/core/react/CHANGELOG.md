@@ -1,5 +1,17 @@
 # @navikt/ds-react
 
+## 7.19.0
+
+### Minor Changes
+
+- Darkside: `<Theme />`-component no longer defaults to `light`-theme className when no theme is provided. ([#3720](https://github.com/navikt/aksel/pull/3720))
+
+### Patch Changes
+
+- Updated dependencies [[`d77e7e2`](https://github.com/navikt/aksel/commit/d77e7e203e522ed3a7fcdef5ca6abe6169314fb6)]:
+  - @navikt/ds-tokens@7.19.0
+  - @navikt/aksel-icons@7.19.0
+
 ## 7.18.0
 
 ### Minor Changes
