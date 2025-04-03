@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from "next";
 import NextImage from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,7 +10,7 @@ import {
   KOMPONENTOVERSIKT_QUERY,
 } from "@/app/_sanity/queries";
 import { KOMPONENTOVERSIKT_QUERYResult } from "@/app/_sanity/query-types";
-import { urlForImage } from "@/app/_sanity/utils";
+import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
@@ -17,15 +18,20 @@ import { sanityCategoryLookup } from "@/sanity/config";
 import pagestyles from "../../_ui/Designsystemet.module.css";
 import styles from "../../_ui/Overview.module.css";
 
-/* export async function generateMetadata(
+type Props = {
+  params: Promise<{ category: string }>;
+};
+
+const categoryConfig = sanityCategoryLookup("komponenter");
+
+export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const { category } = await params;
 
   const { data: page } = await sanityFetch({
-    query: METADATA_BY_SLUG_QUERY,
-    params: { slug: parseDesignsystemSlug(slug, "komponenter") },
+    query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
     stega: false,
   });
 
@@ -34,18 +40,28 @@ import styles from "../../_ui/Overview.module.css";
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
+  const currentCategory = categoryConfig.find((cat) => cat.value === category);
+
   return {
-    title: page?.heading,
+    title: currentCategory?.title,
     description: page?.seo?.meta,
     openGraph: {
       images: ogImages,
     },
   };
-} */
+}
 
-type Props = {
-  params: Promise<{ category: string }>;
-};
+export async function generateStaticParams() {
+  const { data: page } = await sanityFetch({
+    query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+    stega: false,
+  });
+
+  return (
+    page?.oveview_pages?.map((overviewPage) => ({ category: overviewPage })) ??
+    []
+  );
+}
 
 export default async function Page({ params }: Props) {
   const { category } = await params;
@@ -70,7 +86,6 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  const categoryConfig = sanityCategoryLookup("komponenter");
   const currentCategory = categoryConfig.find((cat) => cat.value === category);
 
   if (!currentCategory) {
