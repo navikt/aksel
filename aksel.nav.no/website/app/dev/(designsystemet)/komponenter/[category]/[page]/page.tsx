@@ -55,7 +55,6 @@ export async function generateStaticParams() {
   return await getStaticParamsSlugs("komponent_artikkel");
 }
 
-/* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
   const { category, page } = await params;
 

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import type { Image } from "sanity";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
+  DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { DesignsystemetOverviewPage } from "@/app/dev/(designsystemet)/_ui/overview/DesignsystemetOverview";
@@ -14,7 +14,7 @@ type Props = {
   params: Promise<{ category: string }>;
 };
 
-const categoryConfig = sanityCategoryLookup("komponenter");
+const categoryConfig = sanityCategoryLookup("templates");
 
 export async function generateMetadata(
   { params }: Props,
@@ -23,7 +23,7 @@ export async function generateMetadata(
   const { category } = await params;
 
   const { data: page } = await sanityFetch({
-    query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+    query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
     stega: false,
   });
 
@@ -45,7 +45,7 @@ export async function generateMetadata(
 
 export async function generateStaticParams() {
   const { data: page } = await sanityFetch({
-    query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+    query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
     stega: false,
     perspective: "published",
   });
@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
       params: { category },
     }),
     sanityFetch({
-      query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+      query: DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
     }),
   ]);
 

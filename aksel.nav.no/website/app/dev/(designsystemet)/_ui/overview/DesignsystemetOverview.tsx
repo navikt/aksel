@@ -1,11 +1,53 @@
 import NextImage from "next/image";
 import Link from "next/link";
 import type { Image } from "sanity";
-import { Heading, Tag } from "@navikt/ds-react";
+import { BodyLong, Heading, Tag } from "@navikt/ds-react";
 import { DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import styles from "../../_ui/Overview.module.css";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
+import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
+import pagestyles from "../Designsystemet.module.css";
+import styles from "./DesignsystemetOverview.module.css";
+
+function DesignsystemetOverviewPage({
+  title,
+  ingress,
+  links,
+}: {
+  title: string;
+  ingress?: string;
+  links: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult;
+}) {
+  const list = sortDesignsystemetOverviewList(links);
+
+  return (
+    <DesignsystemetPageLayout>
+      <div>
+        <Heading
+          level="1"
+          size="xlarge"
+          className={pagestyles.pageHeaderHeading}
+        >
+          {title}
+        </Heading>
+        {ingress && (
+          <BodyLong size="large" className="mb-4 only:mb-7">
+            <MarkdownText>{ingress}</MarkdownText>
+          </BodyLong>
+        )}
+      </div>
+
+      <ul className={styles.overviewGrid}>
+        {list.map((component) => (
+          <li key={component.heading} className={styles.overviewLi}>
+            <DesignsystemetOverviewCard page={component} />
+          </li>
+        ))}
+      </ul>
+    </DesignsystemetPageLayout>
+  );
+}
 
 function DesignsystemetOverviewCard({
   page,
@@ -126,4 +168,8 @@ function sortDesignsystemetOverviewList(
     });
 }
 
-export { DesignsystemetOverviewCard, sortDesignsystemetOverviewList };
+export {
+  DesignsystemetOverviewPage,
+  DesignsystemetOverviewCard,
+  sortDesignsystemetOverviewList,
+};

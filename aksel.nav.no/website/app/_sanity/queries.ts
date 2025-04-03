@@ -24,6 +24,14 @@ const DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY = defineQuery(
   `*[_type == "komponenter_landingsside"][0]`,
 );
 
+const DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "grunnleggende_landingsside"][0]`,
+);
+
+const DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "templates_landingsside"][0]`,
+);
+
 const searchContent = groq`{
   heading,
   "slug": slug.current,
@@ -129,6 +137,8 @@ export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
   DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+  DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
+  DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
   DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
