@@ -10,6 +10,7 @@ import { structureTool } from "sanity/structure";
 import { TestFlaskIcon } from "@navikt/aksel-icons";
 import { SANITY_PROJECT_ID } from "./config";
 import { AkselLogo } from "./logo";
+import { resolve } from "./plugins/presentation/resolve";
 import { publicationFlow } from "./plugins/publication-flow";
 import { defaultDocumentNode, structure } from "./plugins/structure";
 import { schema } from "./schema";
@@ -45,14 +46,14 @@ export const workspaceConfig = defineConfig([
       visionTool(),
       colorInput(),
       nbNOLocale(),
-      presentationTool({
+      /* presentationTool({
+        resolve,
         previewUrl: {
           previewMode: {
-            shareAccess: false,
             enable: "/api/draft-mode/enable",
           },
         },
-      }),
+      }), */
     ],
     releases: {
       enabled: false,
@@ -88,9 +89,9 @@ export const workspaceConfig = defineConfig([
       colorInput(),
       nbNOLocale(),
       presentationTool({
+        resolve,
         previewUrl: {
           previewMode: {
-            shareAccess: false,
             enable: "/api/draft-mode/enable",
           },
         },
