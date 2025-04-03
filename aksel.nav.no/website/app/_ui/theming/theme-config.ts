@@ -23,14 +23,14 @@ const statusToColorRole: Record<
   deprecated: "neutral",
   new: "success",
   ready: "info",
-};
+} as const;
 
 const statusToText: Record<NonNullable<StatusTagT>, string> = {
   beta: "Beta",
   deprecated: "Avviklet",
   new: "Ny",
   ready: "Stabil",
-};
+} as const;
 
 /**
  * Gets config for use in Tag-components on Aksel based on article status.

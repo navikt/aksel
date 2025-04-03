@@ -1,6 +1,6 @@
+import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
-import { Metadata, ResolvingMetadata } from "next/types";
 import type { Image } from "sanity";
 import { Heading } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -20,33 +20,36 @@ import {
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
-} from "../../_ui/DesignsystemetPage";
-import { getStaticParamsSlugs, parseDesignsystemSlug } from "../../slug";
+} from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
+import {
+  getStaticParamsSlugs,
+  parseDesignsystemSlug,
+} from "@/app/dev/(designsystemet)/slug";
 
 type Props = {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ category: string; page: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const { category, page } = await params;
 
-  const { data: page } = await sanityFetch({
+  const { data: pageData } = await sanityFetch({
     query: METADATA_BY_SLUG_QUERY,
-    params: { slug: parseDesignsystemSlug(slug, "monster-maler") },
+    params: { slug: parseDesignsystemSlug(category, page, "monster-maler") },
     stega: false,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: page?.heading,
-    description: page?.seo?.meta,
+    title: pageData?.heading,
+    description: pageData?.seo?.meta,
     openGraph: {
       images: ogImages,
     },
@@ -57,13 +60,12 @@ export async function generateStaticParams() {
   return await getStaticParamsSlugs("templates_artikkel");
 }
 
-/* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
-  const { slug } = await params;
+  const { category, page } = await params;
 
-  const parsedSlug = parseDesignsystemSlug(slug, "monster-maler");
+  const parsedSlug = parseDesignsystemSlug(category, page, "monster-maler");
 
-  const [{ data: page }, { data: toc = [] }] = await Promise.all([
+  const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
       query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
@@ -74,25 +76,25 @@ export default async function Page({ params }: Props) {
     }),
   ]);
 
-  if (!page?._id) {
+  if (!pageData?._id) {
     notFound();
   }
 
-  const metadata = page.content?.find((x) => x._type === "kode_eksempler")?.dir
-    ?.metadata;
+  const metadata = pageData.content?.find((x) => x._type === "kode_eksempler")
+    ?.dir?.metadata;
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <DesignsystemetPageHeader data={page} />
+      <DesignsystemetPageHeader data={pageData} />
       <TableOfContents
         feedback={{
-          name: page.heading,
+          name: pageData.heading,
           text: "Send innspill",
         }}
         toc={toc}
       />
       <CustomPortableText
-        value={page.content as PortableTextBlock[]}
+        value={pageData.content as PortableTextBlock[]}
         data-block-margin="space-28"
       />
       {metadata?.changelog && (

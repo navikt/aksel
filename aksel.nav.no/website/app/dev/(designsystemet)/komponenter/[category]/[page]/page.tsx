@@ -11,37 +11,40 @@ import {
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { DesignsystemetKomponentIntro } from "../../_ui/Designsystemet.intro";
+import { DesignsystemetKomponentIntro } from "@/app/dev/(designsystemet)/_ui/Designsystemet.intro";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
-} from "../../_ui/DesignsystemetPage";
-import { getStaticParamsSlugs, parseDesignsystemSlug } from "../../slug";
+} from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
+import {
+  getStaticParamsSlugs,
+  parseDesignsystemSlug,
+} from "@/app/dev/(designsystemet)/slug";
 
 type Props = {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ category: string; page: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const { category, page } = await params;
 
-  const { data: page } = await sanityFetch({
+  const { data: pageData } = await sanityFetch({
     query: METADATA_BY_SLUG_QUERY,
-    params: { slug: parseDesignsystemSlug(slug, "komponenter") },
+    params: { slug: parseDesignsystemSlug(category, page, "komponenter") },
     stega: false,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(pageData?.seo?.image as Image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: page?.heading,
-    description: page?.seo?.meta,
+    title: pageData?.heading,
+    description: pageData?.seo?.meta,
     openGraph: {
       images: ogImages,
     },
@@ -52,13 +55,12 @@ export async function generateStaticParams() {
   return await getStaticParamsSlugs("komponent_artikkel");
 }
 
-/* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
-  const { slug } = await params;
+  const { category, page } = await params;
 
-  const parsedSlug = parseDesignsystemSlug(slug, "komponenter");
+  const parsedSlug = parseDesignsystemSlug(category, page, "komponenter");
 
-  const [{ data: page }, { data: toc = [] }] = await Promise.all([
+  const [{ data: pageData }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
       query: KOMPONENT_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
@@ -69,23 +71,23 @@ export default async function Page({ params }: Props) {
     }),
   ]);
 
-  if (!page?._id) {
+  if (!pageData?._id) {
     notFound();
   }
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <DesignsystemetPageHeader data={page} />
+      <DesignsystemetPageHeader data={pageData} />
       <TableOfContents
         feedback={{
-          name: page.heading,
+          name: pageData.heading,
           text: "Send innspill",
         }}
         toc={toc}
       />
       <div>
-        <DesignsystemetKomponentIntro data={page} />
-        <CustomPortableText value={page.content as PortableTextBlock[]} />
+        <DesignsystemetKomponentIntro data={pageData} />
+        <CustomPortableText value={pageData.content as PortableTextBlock[]} />
       </div>
     </DesignsystemetPageLayout>
   );

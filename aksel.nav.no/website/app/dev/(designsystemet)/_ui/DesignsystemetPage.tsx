@@ -14,12 +14,15 @@ import { KomponentLinks } from "./DesignsystemetPage.parts";
 
 type DesignsystemetPageLayoutT = {
   children: React.ReactNode;
-  layout?: "with-toc";
+  /**
+   * @default "without-toc"
+   */
+  layout?: "with-toc" | "without-toc";
 };
 
 function DesignsystemetPageLayout({
   children,
-  layout,
+  layout = "without-toc",
 }: DesignsystemetPageLayoutT) {
   return (
     <main
