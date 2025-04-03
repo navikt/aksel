@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
   gap: var(--ax-space-24);
-  margin-block: var(--ax-space-24) var(--ax-space-48);
+  margin-block: var(--ax-space-48);
 }
 
 .overviewLi {
