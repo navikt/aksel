@@ -1,0 +1,12 @@
+.draftModeDisable {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: var(--ax-bg-neutral-moderate);
+  color: var(--ax-text-neutral);
+  padding: var(--ax-space-2) var(--ax-space-4);
+  border: 1px solid var(--ax-border-neutral);
+  border-bottom: none;
+  border-right: none;
+  border-start-start-radius: var(--ax-border-radius-medium);
+}

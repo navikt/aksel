@@ -3,6 +3,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
+import { DisableDraftMode } from "@/app/_ui/draft-mode/DraftMode.disable";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 
@@ -41,7 +42,12 @@ export default async function RootLayout({
       <body>
         <ThemeProvider>{children}</ThemeProvider>
         <SanityLive />
-        {isDraftMode && <VisualEditing />}
+        {isDraftMode && (
+          <>
+            <DisableDraftMode />
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );
