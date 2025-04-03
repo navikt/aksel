@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.19.0
+
+### Patch Changes
+
+- Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+
 ## 7.18.0
 
 ### Patch Changes
