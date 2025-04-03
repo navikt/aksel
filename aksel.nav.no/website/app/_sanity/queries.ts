@@ -20,6 +20,10 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
+const DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "komponenter_landingsside"][0]`,
+);
+
 const searchContent = groq`{
   heading,
   "slug": slug.current,
@@ -61,7 +65,7 @@ const KOMPONENT_BY_SLUG_QUERY =
 }`);
 
 const KOMPONENTOVERSIKT_QUERY =
-  defineQuery(`*[_type == "komponent_artikkel" && defined(kategori)]
+  defineQuery(`*[_type == "komponent_artikkel"  && kategori == $category]
   {
     _id,
     heading,
@@ -124,6 +128,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
   DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
+  DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
   KOMPONENTOVERSIKT_QUERY,

@@ -8,14 +8,11 @@ import { AllArticleDocumentsT } from "@/sanity/config";
  * If the slug is empty or has more than 2 segments, it returns a "not found".
  */
 function parseDesignsystemSlug(
-  slug: string[],
+  category: string,
+  page: string,
   type: "komponenter" | "grunnleggende" | "monster-maler",
 ) {
-  if (slug.length === 0 || slug.length > 2) {
-    return null;
-  }
-
-  return `${type}/${slug.join("/")}`;
+  return `${type}/${category}/${page}`;
 }
 
 const SanityDoctypeSlugPrefixConfig = {

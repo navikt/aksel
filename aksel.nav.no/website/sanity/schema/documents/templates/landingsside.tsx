@@ -16,13 +16,6 @@ const views = () => {
         rows: 2,
       }),
     );
-    list.push(
-      defineField({
-        title: `Intro ${kat.title}`,
-        name: `intro_${kat.value}`,
-        type: "riktekst_standard",
-      }),
-    );
   });
   return list;
 };

@@ -18,13 +18,6 @@ const views = () => {
     );
     list.push(
       defineField({
-        title: `Intro ${kat.title}`,
-        name: `intro_${kat.value}`,
-        type: "riktekst_standard",
-      }),
-    );
-    list.push(
-      defineField({
         title: `Legg til siden 'oversikt' for ${kat.title}?`,
         description:
           "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",

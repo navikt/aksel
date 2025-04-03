@@ -2,15 +2,20 @@ import NextImage from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Image } from "sanity";
-import { BodyShort, Heading, Tag } from "@navikt/ds-react";
+import { BodyLong, Heading, Tag } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import { KOMPONENTOVERSIKT_QUERY } from "@/app/_sanity/queries";
+import {
+  DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+  KOMPONENTOVERSIKT_QUERY,
+} from "@/app/_sanity/queries";
 import { KOMPONENTOVERSIKT_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
-import pagestyles from "../_ui/Designsystemet.module.css";
-import { DesignsystemetPageLayout } from "../_ui/DesignsystemetPage";
-import styles from "../_ui/Overview.module.css";
+import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
+import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
+import { sanityCategoryLookup } from "@/sanity/config";
+import pagestyles from "../../_ui/Designsystemet.module.css";
+import styles from "../../_ui/Overview.module.css";
 
 /* export async function generateMetadata(
   { params }: Props,
@@ -38,17 +43,43 @@ import styles from "../_ui/Overview.module.css";
   };
 } */
 
-/* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
-export default async function Page() {
-  const { data: components } = await sanityFetch({
-    query: KOMPONENTOVERSIKT_QUERY,
-  });
+type Props = {
+  params: Promise<{ category: string }>;
+};
 
-  if (!components || components.length === 0) {
+export default async function Page({ params }: Props) {
+  const { category } = await params;
+
+  const [{ data: categoryPages }, { data: landingPage }] = await Promise.all([
+    sanityFetch({
+      query: KOMPONENTOVERSIKT_QUERY,
+      params: { category },
+    }),
+    sanityFetch({
+      query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+    }),
+  ]);
+
+  if (
+    !landingPage?.oveview_pages ||
+    !landingPage?.oveview_pages.some((itemValue) => itemValue === category) ||
+    !categoryPages ||
+    categoryPages.length === 0 ||
+    !landingPage
+  ) {
     notFound();
   }
 
-  const list = sortOverview(components);
+  const categoryConfig = sanityCategoryLookup("komponenter");
+  const currentCategory = categoryConfig.find((cat) => cat.value === category);
+
+  if (!currentCategory) {
+    notFound();
+  }
+
+  const list = sortOverview(categoryPages);
+
+  const ingress = landingPage?.[`ingress_${currentCategory.value}`];
 
   return (
     <DesignsystemetPageLayout>
@@ -58,12 +89,13 @@ export default async function Page() {
           size="xlarge"
           className={pagestyles.pageHeaderHeading}
         >
-          Komponenter
+          {currentCategory.title}
         </Heading>
-        <BodyShort size="large">
-          Dette er generiske komponenter som passer til det meste. Både åpne
-          sider og interne ekspertsystemer.
-        </BodyShort>
+        {ingress && (
+          <BodyLong size="large" className="mb-4 only:mb-7">
+            <MarkdownText>{ingress}</MarkdownText>
+          </BodyLong>
+        )}
       </div>
 
       <ul className={styles.overviewGrid}>

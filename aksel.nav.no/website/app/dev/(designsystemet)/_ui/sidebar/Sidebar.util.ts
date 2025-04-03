@@ -72,7 +72,7 @@ function generateSidebar(
         if (hasOverviewPage) {
           pages.unshift({
             heading: "Oversikt",
-            slug: `${type}/${category.value}/oversikt`,
+            slug: `${type}/${category.value}`,
             tag: "ready",
           });
         }
