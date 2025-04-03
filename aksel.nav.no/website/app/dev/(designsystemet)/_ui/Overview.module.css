@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
   gap: var(--ax-space-24);
+  margin-block: var(--ax-space-24) var(--ax-space-48);
 }
 
 .overviewLi {
@@ -12,7 +13,7 @@
 
 .overviewCardLink {
   display: grid;
-  gap: var(--ax-space-16);
+  gap: var(--ax-space-12);
   color: var(--ax-text-neutral);
 
   &:focus-visible {
@@ -24,10 +25,8 @@
   display: grid;
   place-content: center;
   position: relative;
-  min-height: 12.5rem;
-
-  /* TODO: Do we need more radius tokens? */
-  border-radius: 24px;
+  height: 10rem;
+  border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid var(--ax-border-subtleA);
   background: var(--ax-bg-moderate);
 
@@ -45,73 +44,4 @@
   display: flex;
   align-items: center;
   gap: var(--ax-space-8);
-}
-
-/* List view */
-.overviewList {
-  display: grid;
-}
-
-.overviewInlineCardLink {
-  display: grid;
-  padding-block: var(--ax-space-16);
-  padding-inline: 0;
-  gap: var(--ax-space-16);
-  color: var(--ax-text-neutral);
-  grid-template-columns: 8rem 1fr 1.5rem;
-  border-top: 1px solid var(--ax-border-neutral-subtle);
-  align-items: center;
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: 12.5rem 1fr 1.5rem;
-    padding-inline: 0 var(--ax-space-24);
-  }
-
-  /* .overviewCardLink:focus-visible > & {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 3px;
-  } */
-}
-
-.overviewInlineCardImageWrapper {
-  display: grid;
-  place-content: center;
-  position: relative;
-  height: 6rem;
-  width: 8rem;
-
-  /* TODO: Do we need more radius tokens? */
-  border-radius: 24px;
-  border: 1px solid var(--ax-border-subtleA);
-  background: var(--ax-bg-moderate);
-
-  .overviewInlineCardLink:hover > & {
-    background: var(--ax-bg-moderate-hover);
-  }
-
-  @media (min-width: 768px) {
-    height: 8rem;
-    width: fit-content;
-  }
-}
-
-.overviewInlineCardContent {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--ax-space-8) var(--ax-space-16);
-
-  @media (min-width: 1280px) {
-    grid-template-columns: 1fr 2fr;
-  }
-
-  @media (max-width: 767px) {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
 }

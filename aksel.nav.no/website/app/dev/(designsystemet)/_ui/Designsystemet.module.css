@@ -41,6 +41,10 @@
   grid-template-areas:
     "intro"
     "content";
+
+  &[data-layout="without-toc"] {
+    grid-template-columns: minmax(0, 1200px);
+  }
 }
 
 @media (min-width: 1280px) {
