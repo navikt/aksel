@@ -53,9 +53,17 @@ const KOMPONENT_BY_SLUG_QUERY =
     },
 }`);
 
-const KOMPONENTOVERSIKT_QUERY = defineQuery(
-  `*[_type == "komponent_artikkel" && defined(kategori)]{_id,heading,"slug": slug.current,status,kategori, "sidebarindex": sidebarindex}`,
-);
+const KOMPONENTOVERSIKT_QUERY =
+  defineQuery(`*[_type == "komponent_artikkel" && defined(kategori)]
+  {
+    _id,
+    heading,
+    "slug": slug.current,
+    status,
+    kategori,
+    "sidebarindex": sidebarindex,
+    "description": seo.meta
+}`);
 
 const GRUNNLEGGENDE_BY_SLUG_QUERY =
   defineQuery(`*[_type == "ds_artikkel" && slug.current == $slug][0]
