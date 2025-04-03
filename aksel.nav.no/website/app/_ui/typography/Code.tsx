@@ -7,9 +7,11 @@ function Code({
   as = "code",
   className,
   highlighted,
+  strikethrough,
 }: Pick<React.HTMLAttributes<HTMLElement>, "children"> & {
   as?: React.ElementType;
   highlighted?: boolean;
+  strikethrough?: boolean;
   className?: string;
 }) {
   return (
@@ -18,6 +20,7 @@ function Code({
       weight="semibold"
       className={clsx(styles.typoCode, className)}
       data-highlighted={highlighted}
+      data-strikethrough={strikethrough}
     >
       {children}
     </Detail>

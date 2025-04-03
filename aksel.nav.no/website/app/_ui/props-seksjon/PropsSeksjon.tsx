@@ -93,7 +93,7 @@ const PropEntry = ({
           paddingInline="space-8"
           className="inline-block"
         >
-          <Code as="h4" className="mr-2 line-through" highlighted>{`${
+          <Code as="h4" className="mr-2" strikethrough highlighted>{`${
             prop.name
           }${prop?.required ? "" : "?"}`}</Code>
         </Box>
