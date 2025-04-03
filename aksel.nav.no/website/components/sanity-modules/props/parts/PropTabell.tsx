@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
@@ -84,35 +85,16 @@ const PropEntry = ({
     NonNullable<PropTableProps["komponent"]["propref"]>["proplist"]
   >[0];
 }) => {
-  if (prop.deprecated) {
-    return (
-      <details>
-        <summary>
-          <dt className="inline-block px-2 pt-2">
-            <Heading
-              size="xsmall"
-              level="4"
-              className="mr-2 inline-block rounded-medium bg-surface-danger-subtle px-1 font-mono text-small font-semibold text-surface-danger-active line-through"
-            >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
-            <span className="text-surface-danger">
-              <span className="font-bold">Deprecated: </span>
-              {prop.deprecated}
-            </span>
-          </dt>
-        </summary>
-        <dd>
-          <DtList prop={prop} />
-        </dd>
-      </details>
-    );
-  }
   return (
     <>
       <dt className="px-2 pt-2">
         <Heading
           size="xsmall"
           level="4"
-          className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
+          className={clsx(
+            "inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold",
+            { "line-through": prop.deprecated !== undefined },
+          )}
         >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
       </dt>
       <dd>

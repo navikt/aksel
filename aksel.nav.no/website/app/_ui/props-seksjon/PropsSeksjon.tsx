@@ -3,6 +3,7 @@ import { ExtractPortableComponentProps } from "@/app/_sanity/types";
 import { Code } from "../typography/Code";
 import { PropsSeksjonCode } from "./PropsSeksjon.code";
 import { PropsSeksjonDescription } from "./PropsSeksjon.decription";
+import { PropsSeksjonDeprecation } from "./PropsSeksjon.deprecation";
 import styles from "./PropsSeksjon.module.css";
 
 type PropsSeksjonT = ExtractPortableComponentProps<"props_seksjon">;
@@ -85,25 +86,20 @@ const PropEntry = ({
 }) => {
   if (prop.deprecated) {
     return (
-      <details>
-        <summary>
-          <Box
-            as="dt"
-            className="inline-block"
-            paddingBlock="space-8 0"
-            paddingInline="space-8"
-          >
-            <Code as="h4" className="mr-2 line-through" highlighted>{`${
-              prop.name
-            }${prop?.required ? "" : "?"}`}</Code>
-            <span className="text-surface-danger">
-              <span className="font-bold">Deprecated: </span>
-              {prop.deprecated}
-            </span>
-          </Box>
-        </summary>
+      <>
+        <Box
+          as="dt"
+          paddingBlock="space-8 0"
+          paddingInline="space-8"
+          className="inline-block"
+        >
+          <Code as="h4" className="mr-2 line-through" highlighted>{`${
+            prop.name
+          }${prop?.required ? "" : "?"}`}</Code>
+        </Box>
         <BodyShort as="dd">
           <Box as="ul" overflowX="auto">
+            <PropsSeksjonDeprecation text={prop.deprecated} />
             <PropsSeksjonCode code={prop.type} title="Type" wrap />
             <PropsSeksjonCode
               /* We assume that if type starts with ", its an union-type */
@@ -122,7 +118,7 @@ const PropEntry = ({
             <PropsSeksjonCode code={prop.example} title="Example" />
           </Box>
         </BodyShort>
-      </details>
+      </>
     );
   }
   return (
