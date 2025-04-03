@@ -1,8 +1,9 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -26,6 +27,13 @@ function MobileNavMenu({ children }: { children: React.ReactNode }) {
 }
 
 function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
+  const { theme, setTheme } = useTheme();
+
+  /* https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch */
+  const [renderThemeToggle, setRenderThemeToggle] = useState(false);
+
+  useEffect(() => setRenderThemeToggle(true), [setTheme]);
+
   return (
     <div className={styles.mobileNavMenuIntialView}>
       <BodyShort as="ul" className={styles.mobileNavMenuList}>
@@ -46,25 +54,27 @@ function InitialView({ toggleOpen }: { toggleOpen: () => void }) {
           </Link>
         </li>
       </BodyShort>
-      {/* TODO: Add theming support */}
-      <ToggleGroup
-        fill
-        onChange={() => null}
-        defaultValue="light"
-        variant="neutral"
-        className={styles.mobileNavMenuThemeToggle}
-      >
-        <ToggleGroup.Item
-          value="light"
-          icon={<SunIcon aria-hidden />}
-          label="Light"
-        />
-        <ToggleGroup.Item
-          value="dark"
-          icon={<MoonIcon aria-hidden />}
-          label="Dark"
-        />
-      </ToggleGroup>
+
+      {renderThemeToggle && (
+        <ToggleGroup
+          fill
+          onChange={setTheme}
+          value={theme}
+          variant="neutral"
+          className={styles.mobileNavMenuThemeToggle}
+        >
+          <ToggleGroup.Item
+            value="light"
+            icon={<SunIcon aria-hidden />}
+            label="Light"
+          />
+          <ToggleGroup.Item
+            value="dark"
+            icon={<MoonIcon aria-hidden />}
+            label="Dark"
+          />
+        </ToggleGroup>
+      )}
     </div>
   );
 }

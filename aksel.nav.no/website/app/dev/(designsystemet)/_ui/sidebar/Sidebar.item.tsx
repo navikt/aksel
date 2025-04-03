@@ -4,7 +4,7 @@ import cl from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BodyShort, Tag } from "@navikt/ds-react";
-import { getStatusTag } from "@/app/_ui/theme-config";
+import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { SidebarPageT } from "@/types";
 import styles from "./Sidebar.module.css";
 

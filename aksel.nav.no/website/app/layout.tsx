@@ -1,9 +1,9 @@
 import { Metadata, Viewport } from "next";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
-import { Theme } from "@navikt/ds-react";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
+import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default async function RootLayout({
   const isDraftMode = (await draftMode()).isEnabled;
 
   return (
-    <html lang="no">
+    <html lang="no" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -38,13 +38,11 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <Theme asChild theme="light">
-        <body className="aksel antialiased">
-          {children}
-          <SanityLive />
-          {isDraftMode && <VisualEditing />}
-        </body>
-      </Theme>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+        <SanityLive />
+        {isDraftMode && <VisualEditing />}
+      </body>
     </html>
   );
 }
