@@ -47,6 +47,20 @@ export const GrunnleggendeLandingSide = defineType({
       name: "intro",
       type: "text",
     }),
+    {
+      title: "Oversikt-sider",
+      name: "oveview_pages",
+      description:
+        "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        list: grunnleggendeKategorier.map((kat) => ({
+          title: kat.title,
+          value: kat.value,
+        })),
+      },
+    },
     ...views(),
     BaseSEOPreset,
   ],

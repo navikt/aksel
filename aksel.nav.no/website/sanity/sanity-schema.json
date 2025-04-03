@@ -9300,6 +9300,16 @@
         },
         "optional": true
       },
+      "oveview_pages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
       "ingress_brev": {
         "type": "objectAttribute",
         "value": {
@@ -9467,6 +9477,16 @@
         },
         "optional": true
       },
+      "oveview_pages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
       "ingress_introduksjon": {
         "type": "objectAttribute",
         "value": {
@@ -9479,6 +9499,13 @@
         "value": {
           "type": "inline",
           "name": "riktekst_standard"
+        },
+        "optional": true
+      },
+      "show_overview_introduksjon": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": true
       },
@@ -9497,6 +9524,13 @@
         },
         "optional": true
       },
+      "show_overview_brand": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "ingress_styling": {
         "type": "objectAttribute",
         "value": {
@@ -9509,6 +9543,13 @@
         "value": {
           "type": "inline",
           "name": "riktekst_standard"
+        },
+        "optional": true
+      },
+      "show_overview_styling": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": true
       },
@@ -9527,6 +9568,13 @@
         },
         "optional": true
       },
+      "show_overview_darkside": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "ingress_guider": {
         "type": "objectAttribute",
         "value": {
@@ -9542,6 +9590,13 @@
         },
         "optional": true
       },
+      "show_overview_guider": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "ingress_kode": {
         "type": "objectAttribute",
         "value": {
@@ -9554,6 +9609,13 @@
         "value": {
           "type": "inline",
           "name": "riktekst_standard"
+        },
+        "optional": true
+      },
+      "show_overview_kode": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": true
       },
@@ -9676,6 +9738,16 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "oveview_pages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
         },
         "optional": true
       },

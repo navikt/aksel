@@ -98,9 +98,8 @@ function OverviewCard({
         {imageUrl ? (
           <NextImage
             src={imageUrl}
-            width="200"
-            height="160"
-            layout="fixed"
+            width={200}
+            height={200}
             alt={page?.heading + " thumbnail"}
             aria-hidden
           />

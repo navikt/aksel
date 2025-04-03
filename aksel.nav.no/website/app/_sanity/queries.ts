@@ -13,6 +13,13 @@ const DESIGNSYSTEM_SIDEBAR_QUERY =
   "sidebarindex": sidebarindex,
 }`);
 
+const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
+  `*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {
+  _type,
+  oveview_pages
+  }`,
+);
+
 const searchContent = groq`{
   heading,
   "slug": slug.current,
@@ -116,6 +123,7 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
+  DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
   KOMPONENTOVERSIKT_QUERY,

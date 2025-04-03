@@ -1,7 +1,10 @@
 import React from "react";
 import { BodyShort } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
-import { DESIGNSYSTEM_SIDEBAR_QUERY } from "@/app/_sanity/queries";
+import {
+  DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
+  DESIGNSYSTEM_SIDEBAR_QUERY,
+} from "@/app/_sanity/queries";
 import { DesignsystemSidebarGroup } from "./Sidebar.group";
 import styles from "./Sidebar.module.css";
 import { generateSidebar } from "./Sidebar.util";
@@ -44,11 +47,17 @@ async function DesignsystemSidebar(props: SidebarProps) {
 
 async function getSidebarData() {
   "use server";
-  const { data } = await sanityFetch({
-    query: DESIGNSYSTEM_SIDEBAR_QUERY,
-  });
 
-  const sidebarData = generateSidebar(data);
+  const [{ data: sidebar }, { data: oversikt }] = await Promise.all([
+    sanityFetch({
+      query: DESIGNSYSTEM_SIDEBAR_QUERY,
+    }),
+    await sanityFetch({
+      query: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
+    }),
+  ]);
+
+  const sidebarData = generateSidebar(sidebar, oversikt);
 
   return sidebarData;
 }
