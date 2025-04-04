@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { HGrid, VStack } from "@navikt/ds-react";
+import { VStack } from "@navikt/ds-react";
 import { tokens as tokenDocs } from "@navikt/ds-tokens/token_docs";
 import TokenCategory from "./TokenCategory";
 import { TOKEN_CATEGORIES } from "./config";
@@ -26,25 +26,23 @@ const TokensPage = () => {
     ([category]) => filteredTokens.some((token) => token.category === category),
   );
   return (
-    <HGrid columns="auto 15rem" as="main" gap="10">
-      <VStack gap="10">
-        <Toolbar onSearch={setSearchData} />
-        {filteredCategories.map(([key, category]) => {
-          const { title, description } = category;
-          const roles = "roles" in category ? category.roles : undefined;
-          return (
-            <TokenCategory
-              id={key}
-              key={key}
-              title={title}
-              description={description}
-              roles={roles}
-              tokens={filteredTokens.filter((token) => token.category === key)}
-            />
-          );
-        })}
-      </VStack>
-    </HGrid>
+    <VStack gap="10">
+      <Toolbar onSearch={setSearchData} />
+      {filteredCategories.map(([key, category]) => {
+        const { title, description } = category;
+        const roles = "roles" in category ? category.roles : undefined;
+        return (
+          <TokenCategory
+            id={key}
+            key={key}
+            title={title}
+            description={description}
+            roles={roles}
+            tokens={filteredTokens.filter((token) => token.category === key)}
+          />
+        );
+      })}
+    </VStack>
   );
 };
 

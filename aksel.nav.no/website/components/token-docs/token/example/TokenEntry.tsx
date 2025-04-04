@@ -1,4 +1,4 @@
-import { Box, CopyButton, Detail, HStack, VStack } from "@navikt/ds-react";
+import { Box, CopyButton, Detail, HGrid, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import TokenPreview from "./TokenPreview";
 
@@ -11,7 +11,7 @@ const TokenEntry = ({ index, token }: { index: number; token: any }) => {
       paddingBlock="4"
       paddingInline="2"
     >
-      <HStack gap="3">
+      <HGrid gap="8" columns="min-content 1fr">
         <TokenPreview token={token} />
         <VStack align="start" gap="2">
           <VStack align="start">
@@ -34,7 +34,7 @@ const TokenEntry = ({ index, token }: { index: number; token: any }) => {
             </Detail>
           )}
         </VStack>
-      </HStack>
+      </HGrid>
     </Box.New>
   );
 };
