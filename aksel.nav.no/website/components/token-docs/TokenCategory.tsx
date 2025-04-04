@@ -23,7 +23,13 @@ const TokenCategory = ({
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
   return (
     <section aria-labelledby={id}>
-      <Heading id={id} level="2" size="large" spacing>
+      <Heading
+        id={id}
+        level="2"
+        size="large"
+        spacing
+        style={{ scrollMarginBlockStart: "6rem" }}
+      >
         {title}
       </Heading>
       <div>

@@ -6,7 +6,6 @@ import { sanityFetch } from "@/app/_sanity/live";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
-  TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
@@ -53,16 +52,44 @@ export async function generateStaticParams() {
 
 const Page = async () => {
   const parsedSlug = "tokens-darkside";
-  const [{ data: page }, { data: toc = [] }] = await Promise.all([
-    sanityFetch({
-      query: GRUNNLEGGENDE_BY_SLUG_QUERY,
-      params: { slug: parsedSlug },
-    }),
-    sanityFetch({
-      query: TOC_BY_SLUG_QUERY,
-      params: { slug: parsedSlug },
-    }),
-  ]);
+  const { data: page } = await sanityFetch({
+    query: GRUNNLEGGENDE_BY_SLUG_QUERY,
+    params: { slug: parsedSlug },
+  });
+  const toc = [
+    {
+      id: "backgroundColor",
+      title: "Background colors",
+    },
+    {
+      id: "borderColor",
+      title: "Border colors",
+    },
+    {
+      id: "textColor",
+      title: "Text colors",
+    },
+    {
+      id: "shadow",
+      title: "Shadows",
+    },
+    {
+      id: "space",
+      title: "Space",
+    },
+    {
+      id: "radius",
+      title: "Radius",
+    },
+    {
+      id: "font",
+      title: "Font",
+    },
+    {
+      id: "breakpoint",
+      title: "Breakpoint",
+    },
+  ];
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
