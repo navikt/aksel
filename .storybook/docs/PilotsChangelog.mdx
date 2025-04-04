@@ -4,6 +4,13 @@ import { Meta, Title } from "@storybook/blocks";
 
 # Darkside changelog
 
+## v7.18 (02.04.25)
+
+`<Theme />`-component no longer defaults to `light`-theme className when no theme is provided.
+
+This change is made to make it possible to handle 'light' and 'dark' themes in a more flexible way. You can manually set `className="light"` (or dark) on any html-element higher in the hierarchy, and the `<Theme />`-component will not override this.
+One of the cases where this is needed is with `next-themes` where defaulting to light, and changing to dark based on `useTheme`-hook from `next-themes` leads to hydratiob errors.
+
 ## v7.16 (03.03.25)
 
 To allow loading old and new CSS files that the same time, we have now renamed all classes to start with `.aksel` instead of `.navds`.
