@@ -72,7 +72,7 @@ const Theme = forwardRef<HTMLDivElement, ThemeProps>(
       children,
       className,
       asChild = false,
-      theme = context?.theme ?? "light",
+      theme = context?.theme,
       hasBackground: hasBackgroundProp = true,
     } = props;
 

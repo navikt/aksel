@@ -6,7 +6,7 @@ import {
   MONSTER_MALER_BY_SLUG_QUERYResult,
 } from "@/app/_sanity/query-types";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
-import { getStatusTag } from "@/app/_ui/theme-config";
+import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";

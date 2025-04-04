@@ -1,7 +1,7 @@
 import { GlobalColorRoles } from "@navikt/ds-tokens/types";
+import { Komponent_artikkel } from "@/app/_sanity/query-types";
+import { AkselBrandColors } from "@/app/theme";
 import { AllArticleDocumentsT } from "@/sanity/config";
-import { Komponent_artikkel } from "../_sanity/query-types";
-import { AkselBrandColors } from "../theme";
 
 const doctypeToColorRole: Record<AllArticleDocumentsT, string> = {
   ds_artikkel: "brand-blue",
