@@ -5,9 +5,9 @@ import TokenPreview from "./TokenPreview";
 const TokenEntry = ({ index, token }: { index: number; token: any }) => {
   const tokenText = `--ax-${token.name}`;
   return (
-    <Box
+    <Box.New
       borderWidth={`${index === 0 ? 1 : 0} 0 1`}
-      borderColor="border-subtle"
+      borderColor="neutral-subtle"
       paddingBlock="4"
       paddingInline="2"
     >
@@ -35,7 +35,7 @@ const TokenEntry = ({ index, token }: { index: number; token: any }) => {
           )}
         </VStack>
       </HStack>
-    </Box>
+    </Box.New>
   );
 };
 

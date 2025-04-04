@@ -28,10 +28,10 @@ const TokenExample = ({ token }: { token: any }) => {
       );
     default:
       return (
-        <Box
-          borderColor="border-subtle"
+        <Box.New
+          borderColor="neutral-subtle"
           borderRadius="medium"
-          background="bg-default"
+          background="neutral-moderate"
           borderWidth="1"
           width="32px"
           height="32px"
@@ -41,21 +41,21 @@ const TokenExample = ({ token }: { token: any }) => {
 };
 
 const TokenPreview = ({ token }: { token: any }) => (
-  <Box
+  <Box.New
     background={
       token.category === "textColor" && token.modifier === "contrast"
-        ? "surface-neutral"
+        ? "neutral-moderate"
         : undefined
     }
     padding="3"
-    borderColor="border-subtle"
+    borderColor="neutral-subtle"
     borderRadius="medium"
     borderWidth="1"
     height="58px"
     width="58px"
   >
     <TokenExample token={token} />
-  </Box>
+  </Box.New>
 );
 
 export default TokenPreview;

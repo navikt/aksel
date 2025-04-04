@@ -5,8 +5,8 @@ const ColorToken = ({ token }: { token: any }) => {
   switch (token.category) {
     case "backgroundColor":
       return (
-        <Box
-          borderColor="border-subtle"
+        <Box.New
+          borderColor="neutral-subtle"
           borderRadius="full"
           borderWidth="1"
           style={{ backgroundColor: token.value }}
@@ -16,7 +16,7 @@ const ColorToken = ({ token }: { token: any }) => {
       );
     case "borderColor":
       return (
-        <Box
+        <Box.New
           borderRadius="full"
           borderWidth="4"
           width="32px"
@@ -27,7 +27,7 @@ const ColorToken = ({ token }: { token: any }) => {
     case "textColor": {
       if (token.modifier === "icon") {
         return (
-          <Box width="32px" height="32px">
+          <Box.New width="32px" height="32px">
             <VStack as="div" align="center" justify="center" height="100%">
               <PaletteIcon
                 title="a11y-title"
@@ -35,22 +35,22 @@ const ColorToken = ({ token }: { token: any }) => {
                 fontSize="1.5rem"
               />
             </VStack>
-          </Box>
+          </Box.New>
         );
       }
       return (
-        <Box width="32px" height="32px">
+        <Box.New width="32px" height="32px">
           <VStack as="div" align="center" justify="center" height="100%">
             <Heading size="medium" style={{ color: token.value }}>
               Aa
             </Heading>
           </VStack>
-        </Box>
+        </Box.New>
       );
     }
     default:
       return (
-        <Box
+        <Box.New
           borderRadius="medium"
           borderWidth="1"
           background={token.value}
