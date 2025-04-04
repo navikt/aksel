@@ -34,6 +34,14 @@ yarn workspaces focus @navikt/aksel-icons @navikt/ds-tokens @navikt/ds-css @navi
 Vi bruker [Storybook](https://storybook.js.org/) for utvikling av nye komponenter.
 Lag [stories](https://storybook.js.org/docs/writing-stories) for komponentene du vil teste.
 
+### safeguards
+
+Om man vil ha en ekstra safeguard for å hindre at man kjører diverse sanity scripts fra lokal maskin mot produksjons-datasettet så kan du legge til denne variabelen i filen `./aksel.nav.no/website/.env`:
+
+```sh
+LOCAL_DATASET_OVERRIDE=development
+```
+
 ## Utvikling av nye komponenter
 
 Det er ikke satt opp noen template for nye komponenter, men vi følger en mal.

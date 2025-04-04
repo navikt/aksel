@@ -11,6 +11,10 @@
   &[data-highlighted="true"] {
     background-color: var(--ax-bg-brand-blue-moderateA);
   }
+
+  &[data-strikethrough="true"] {
+    text-decoration-line: line-through;
+  }
 }
 
 /* className="list-margin max-w-text" */

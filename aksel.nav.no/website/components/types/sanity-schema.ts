@@ -310,6 +310,7 @@ export type PropTableT = ArrayObjectT<{
       required?: boolean;
       type?: string;
       ref?: boolean;
+      deprecated?: string;
     }>[];
   };
 }>;

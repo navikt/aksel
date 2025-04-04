@@ -31,11 +31,18 @@ type Prop = Partial<{
   params: string[];
   return: string;
   example: string;
+  deprecated: string;
 }>;
 
-export const DtList = ({ prop }: { prop: Prop; parent: string }) => {
+export const DtList = ({ prop }: { prop: Prop }) => {
   return (
     <BodyShort as="ul" className="dtlist overflow-x-auto">
+      {prop.deprecated && (
+        <li className="my-3 flex flex-col px-3 text-base text-[--ax-text-danger-subtle] md:flex-row">
+          <div className="min-w-24 font-semibold">Deprecated: </div>
+          <div>{prop.deprecated}</div>
+        </li>
+      )}
       {prop.type && (
         <li className="my-3 flex flex-col break-all px-3 text-base md:flex-row">
           <div className="min-w-24 font-semibold">Type: </div>

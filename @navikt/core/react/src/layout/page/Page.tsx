@@ -14,7 +14,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
    * @default "bg-default"
-   * @deprecated 'background'-prop will be removed in future major-versions. Use `<Box asChild background="...">` wrapped around `<Page>`.
+   * @deprecated Use `<Box asChild background="...">` wrapped around `<Page>`.
    */
   background?: BackgroundColorToken;
   /**

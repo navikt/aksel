@@ -81,6 +81,11 @@ export const Props = defineType({
               type: "array",
               of: [{ type: "string" }],
             },
+            {
+              title: "Deprecated",
+              name: "deprecated",
+              type: "string",
+            },
           ],
         },
       ],
