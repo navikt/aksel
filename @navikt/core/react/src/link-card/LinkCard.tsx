@@ -13,15 +13,26 @@ import { OverridableComponent } from "../util";
 export interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   ctaText?: string;
+  /**
+   * @default false
+   */
+  isFullWidth?: boolean;
 }
 
 export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
-  ({ children, className, ctaText }: LinkCardProps, forwardedRef) => {
+  (
+    { children, className, ctaText, isFullWidth = false }: LinkCardProps,
+    forwardedRef,
+  ) => {
     const { cn } = useRenameCSS();
 
     return (
-      <div ref={forwardedRef} className={cn("navds-link-card", className)}>
-        {/* <LinkCardArrow /> */}
+      <div
+        ref={forwardedRef}
+        className={cn("navds-link-card", className, {
+          "navds-link-card--full-width": isFullWidth,
+        })}
+      >
         {children}
         {ctaText && (
           <div className={cn("navds-link-card__action")}>
@@ -205,6 +216,11 @@ interface LinkCardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   aspectRatio?: ImageAspectRatio;
+  /**
+   * Ignores card padding
+   * @default false
+   */
+  isInset?: boolean;
 }
 
 export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
@@ -215,6 +231,7 @@ export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
       aspectRatio,
       width = aspectRatio ? "100%" : undefined,
       height = aspectRatio ? "100%" : undefined,
+      isInset = false,
       ...restProps
     }: LinkCardImageProps,
     forwardedRef,
@@ -222,7 +239,11 @@ export const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
     const { cn } = useRenameCSS();
 
     return (
-      <span className={cn("navds-link-card__image-container")}>
+      <span
+        className={cn("navds-link-card__image-container", {
+          "navds-link-card__image-container--inset": isInset,
+        })}
+      >
         <img
           ref={forwardedRef}
           {...restProps}
