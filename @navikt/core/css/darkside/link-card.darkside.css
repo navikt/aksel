@@ -1,3 +1,203 @@
 .aksel-link-card {
-  background-color: red;
+  height: 100%;
+  border-radius: var(--ax-border-radius-xlarge);
+
+  /* test */
+  text-decoration: none;
+  color: var(--ax-text-neutral);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: var(--ax-space-20);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto auto 1fr;
+
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  grid-template-areas:
+    "image image image image"
+    "icon icon icon icon"
+    "label label tag tag"
+    "heading heading heading arrow"
+    "description description description description"
+    "action action action action";
+  flex: auto;
+  position: relative;
+  border: 1px solid var(--ax-border-neutral);
+  background-color: var(--ax-bg-raised);
+
+  /* TODO: This might need to be a prop */
+  max-width: 28rem;
+
+  &:hover {
+    transform: scale3d(1.025, 1.025, 1);
+  }
+
+  &:focus-within {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+
+  &:has(.aksel-link-card__icon) :is(.aksel-link-card__icon:not(.aksel-link-card__icon--left), .aksel-link-card__tag) {
+    align-self: center;
+  }
+
+  &:has(.aksel-link-card__icon) :is(.aksel-link-card__tag) {
+    justify-self: flex-end;
+  }
+
+  &:has(.aksel-link-card__tag) {
+    grid-template-areas:
+      "image image image image"
+      "icon icon icon icon"
+      "heading heading tag tag"
+      "description description description description"
+      "action action action action";
+  }
+
+  &:has(.aksel-link-card__icon) {
+    grid-template-areas:
+      "image image"
+      "icon tag"
+      "heading heading "
+      "description description"
+      "action action";
+  }
+
+  &:has(.aksel-link-card__icon--left) {
+    grid-template-columns: min-content 1fr;
+    column-gap: var(--ax-space-16);
+    grid-template-areas:
+      "icon image image"
+      "icon tag tag"
+      "icon heading heading "
+      "icon description description"
+      "icon action action";
+  }
+}
+
+.aksel-link-card__heading {
+  margin-bottom: var(--ax-space-12);
+  grid-area: heading;
+  color: var(--ax-text-accent-subtle);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.aksel-link-card__description {
+  margin-bottom: var(--ax-space-16);
+  grid-area: description;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.aksel-link-card__tag {
+  margin-bottom: var(--ax-space-12);
+  grid-area: tag;
+}
+
+.aksel-link-card__icon {
+  margin-bottom: var(--ax-space-12);
+  grid-area: icon;
+  font-size: 1.25rem;
+  width: fit-content;
+  height: fit-content;
+  display: grid;
+  place-content: center;
+  color: var(--ax-text-default);
+}
+
+.aksel-link-card__icon--background {
+  background-color: var(--ax-bg-moderateA);
+  border-radius: var(--ax-border-radius-full);
+  padding: var(--ax-space-12);
+}
+
+.aksel-link-card__icon--left {
+  align-self: flex-start;
+}
+
+.aksel-link-card__anchor {
+  color: currentColor;
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.05em;
+  transition: text-decoration-thickness 200ms;
+
+  .aksel-link-card:hover & {
+    text-decoration-thickness: 0.111em;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+  }
+}
+
+.aksel-link-card__action {
+  grid-area: action;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ax-text-neutral-subtle);
+}
+
+.aksel-link-card__arrow {
+  transition: transform 200ms;
+  transform: translateX(0);
+  width: 1rem;
+  height: 1rem;
+  margin-left: var(--ax-space-4);
+
+  .aksel-link-card:hover & {
+    transform: translateX(4px);
+  }
+}
+
+.aksel-link-card__arrow-line {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  transition: stroke-dashoffset 200ms;
+
+  .aksel-link-card:hover & {
+    stroke-dashoffset: 20;
+  }
+}
+
+/* ----------------------------- LinkCard Image ----------------------------- */
+.aksel-link-card__image-container {
+  display: block;
+  overflow: hidden;
+  grid-area: image;
+  margin-block-end: var(--ax-space-28);
+  border-radius: var(--ax-border-radius-xlarge);
+}
+
+.aksel-link-card__image {
+  object-fit: cover;
+  display: block;
+}
+
+.aksel-link-card__image--aspect-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aksel-link-card__image--aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aksel-link-card__image--aspect-16-10 {
+  aspect-ratio: 16 / 10;
+}
+
+.aksel-link-card__image--aspect-4-3 {
+  aspect-ratio: 4 / 3;
 }
