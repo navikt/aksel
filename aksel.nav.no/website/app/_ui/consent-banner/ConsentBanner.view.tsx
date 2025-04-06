@@ -16,7 +16,10 @@ function ConsentBannerView() {
 
   return (
     <div className={styles.consentBannerRoot}>
-      <section aria-labelledby="cookie_heading">
+      <section
+        aria-labelledby="cookie_heading"
+        className={styles.consentBannerSection}
+      >
         <Stack
           as="div"
           gap={{ xs: "4", lg: "8" }}

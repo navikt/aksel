@@ -5,11 +5,11 @@
   display: flex;
   padding: var(--ax-space-16) var(--ax-space-20);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
+}
 
-  > * {
-    max-width: 1920px;
-    margin: 0 auto;
-  }
+.consentBannerSection {
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .consentBannerBrandedText {
