@@ -16,7 +16,7 @@ const DESIGNSYSTEM_SIDEBAR_QUERY =
 const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   `*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {
   _type,
-  oveview_pages
+  overview_pages
   }`,
 );
 

@@ -42,7 +42,7 @@ export const GrunnleggendeLandingSide = defineType({
     }),
     {
       title: "Oversikt-sider",
-      name: "oveview_pages",
+      name: "overview_pages",
       description:
         "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",
       type: "array",

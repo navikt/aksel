@@ -9300,7 +9300,7 @@
         },
         "optional": true
       },
-      "oveview_pages": {
+      "overview_pages": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -9317,14 +9317,6 @@
         },
         "optional": true
       },
-      "intro_brev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "ingress_stotte": {
         "type": "objectAttribute",
         "value": {
@@ -9332,26 +9324,10 @@
         },
         "optional": true
       },
-      "intro_stotte": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "ingress_soknadsdialog": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_soknadsdialog": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },
@@ -9477,7 +9453,7 @@
         },
         "optional": true
       },
-      "oveview_pages": {
+      "overview_pages": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -9491,14 +9467,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_introduksjon": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },
@@ -9516,14 +9484,6 @@
         },
         "optional": true
       },
-      "intro_brand": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "show_overview_brand": {
         "type": "objectAttribute",
         "value": {
@@ -9535,14 +9495,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_styling": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },
@@ -9560,14 +9512,6 @@
         },
         "optional": true
       },
-      "intro_darkside": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "show_overview_darkside": {
         "type": "objectAttribute",
         "value": {
@@ -9582,14 +9526,6 @@
         },
         "optional": true
       },
-      "intro_guider": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "show_overview_guider": {
         "type": "objectAttribute",
         "value": {
@@ -9601,14 +9537,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_kode": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },
@@ -9741,7 +9669,7 @@
         },
         "optional": true
       },
-      "oveview_pages": {
+      "overview_pages": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -9758,26 +9686,10 @@
         },
         "optional": true
       },
-      "intro_primitives": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "ingress_core": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_core": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },
@@ -9788,26 +9700,10 @@
         },
         "optional": true
       },
-      "intro_alpha": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
-        },
-        "optional": true
-      },
       "ingress_legacy": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "intro_legacy": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "riktekst_standard"
         },
         "optional": true
       },

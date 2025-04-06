@@ -1690,13 +1690,10 @@ export type Templates_landingsside = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_brev?: string;
-  intro_brev?: Riktekst_standard;
   ingress_stotte?: string;
-  intro_stotte?: Riktekst_standard;
   ingress_soknadsdialog?: string;
-  intro_soknadsdialog?: Riktekst_standard;
   seo?: {
     meta?: string;
     image?: {
@@ -1720,24 +1717,18 @@ export type Grunnleggende_landingsside = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_introduksjon?: string;
-  intro_introduksjon?: Riktekst_standard;
   show_overview_introduksjon?: boolean;
   ingress_brand?: string;
-  intro_brand?: Riktekst_standard;
   show_overview_brand?: boolean;
   ingress_styling?: string;
-  intro_styling?: Riktekst_standard;
   show_overview_styling?: boolean;
   ingress_darkside?: string;
-  intro_darkside?: Riktekst_standard;
   show_overview_darkside?: boolean;
   ingress_guider?: string;
-  intro_guider?: Riktekst_standard;
   show_overview_guider?: boolean;
   ingress_kode?: string;
-  intro_kode?: Riktekst_standard;
   show_overview_kode?: boolean;
   seo?: {
     meta?: string;
@@ -1762,15 +1753,11 @@ export type Komponenter_landingsside = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_primitives?: string;
-  intro_primitives?: Riktekst_standard;
   ingress_core?: string;
-  intro_core?: Riktekst_standard;
   ingress_alpha?: string;
-  intro_alpha?: Riktekst_standard;
   ingress_legacy?: string;
-  intro_legacy?: Riktekst_standard;
   seo?: {
     meta?: string;
     image?: {
@@ -2896,19 +2883,19 @@ export type DESIGNSYSTEM_SIDEBAR_QUERYResult = Array<
     }
 >;
 // Variable: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY
-// Query: *[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {  _type,  oveview_pages  }
+// Query: *[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {  _type,  overview_pages  }
 export type DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult = Array<
   | {
       _type: "grunnleggende_landingsside";
-      oveview_pages: Array<string> | null;
+      overview_pages: Array<string> | null;
     }
   | {
       _type: "komponenter_landingsside";
-      oveview_pages: Array<string> | null;
+      overview_pages: Array<string> | null;
     }
   | {
       _type: "templates_landingsside";
-      oveview_pages: Array<string> | null;
+      overview_pages: Array<string> | null;
     }
 >;
 // Variable: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY
@@ -2920,15 +2907,11 @@ export type DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_primitives?: string;
-  intro_primitives?: Riktekst_standard;
   ingress_core?: string;
-  intro_core?: Riktekst_standard;
   ingress_alpha?: string;
-  intro_alpha?: Riktekst_standard;
   ingress_legacy?: string;
-  intro_legacy?: Riktekst_standard;
   seo?: {
     meta?: string;
     image?: {
@@ -2953,24 +2936,18 @@ export type DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_introduksjon?: string;
-  intro_introduksjon?: Riktekst_standard;
   show_overview_introduksjon?: boolean;
   ingress_brand?: string;
-  intro_brand?: Riktekst_standard;
   show_overview_brand?: boolean;
   ingress_styling?: string;
-  intro_styling?: Riktekst_standard;
   show_overview_styling?: boolean;
   ingress_darkside?: string;
-  intro_darkside?: Riktekst_standard;
   show_overview_darkside?: boolean;
   ingress_guider?: string;
-  intro_guider?: Riktekst_standard;
   show_overview_guider?: boolean;
   ingress_kode?: string;
-  intro_kode?: Riktekst_standard;
   show_overview_kode?: boolean;
   seo?: {
     meta?: string;
@@ -2996,13 +2973,10 @@ export type DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   intro?: string;
-  oveview_pages?: Array<string>;
+  overview_pages?: Array<string>;
   ingress_brev?: string;
-  intro_brev?: Riktekst_standard;
   ingress_stotte?: string;
-  intro_stotte?: Riktekst_standard;
   ingress_soknadsdialog?: string;
-  intro_soknadsdialog?: Riktekst_standard;
   seo?: {
     meta?: string;
     image?: {
@@ -8131,7 +8105,7 @@ export type SLUG_BY_TYPE_QUERYResult = Array<string | null>;
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type in ["komponent_artikkel", "ds_artikkel", "templates_artikkel"] && defined(kategori)] {\n  _type,\n  heading,\n  "slug": slug.current,\n  kategori,\n  "tag": status.tag,\n  "sidebarindex": sidebarindex,\n}': DESIGNSYSTEM_SIDEBAR_QUERYResult;
-    '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  oveview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
+    '*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {\n  _type,\n  overview_pages\n  }': DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult;
     '*[_type == "komponenter_landingsside"][0]': DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERYResult;
     '*[_type == "grunnleggende_landingsside"][0]': DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERYResult;
     '*[_type == "templates_landingsside"][0]': DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERYResult;

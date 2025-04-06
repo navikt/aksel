@@ -24,7 +24,7 @@ function generateSidebar(
   return Object.keys(pageTypes).map((type) => {
     const overviewPageList = overviewPages.find((page) =>
       page._type.includes(type),
-    )?.oveview_pages;
+    )?.overview_pages;
 
     const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
     const filteredInput = input.filter(

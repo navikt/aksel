@@ -51,7 +51,7 @@ export async function generateStaticParams() {
   });
 
   return (
-    page?.oveview_pages?.map((overviewPage) => ({ category: overviewPage })) ??
+    page?.overview_pages?.map((overviewPage) => ({ category: overviewPage })) ??
     []
   );
 }
@@ -76,7 +76,7 @@ export default async function Page({ params }: Props) {
   }
 
   if (
-    !landingPage?.oveview_pages?.some((itemValue) => itemValue === category)
+    !landingPage?.overview_pages?.some((itemValue) => itemValue === category)
   ) {
     notFound();
   }
