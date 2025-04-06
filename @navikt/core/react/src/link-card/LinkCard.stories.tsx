@@ -109,6 +109,23 @@ export const Default: Story = {
             voluptatum voluptate velit commodi obcaecati.
           </LinkCardDescription>
         </LinkCard>
+        <LinkCard>
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+          <LinkCardTag variant="alt1">Beta</LinkCardTag>
+        </LinkCard>
+        <LinkCard>
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+          <LinkCardTag variant="alt1">Beta</LinkCardTag>
+          <LinkCardTag variant="alt3">Stabil</LinkCardTag>
+        </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
           <LinkCardHeading as="h3">
             <LinkCardAnchor href="#">
