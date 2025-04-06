@@ -3,6 +3,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import "@navikt/ds-tokens/darkside-css";
 import { SanityLive } from "@/app/_sanity/live";
+import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 
@@ -39,7 +40,10 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ConsentBanner />
+          {children}
+        </ThemeProvider>
         <SanityLive />
         {isDraftMode && <VisualEditing />}
       </body>
