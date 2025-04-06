@@ -7,6 +7,8 @@ import { ConsentBanner } from "@/app/_ui/consent-banner/ConsentBanner";
 import { ThemeProvider } from "@/app/_ui/theming/ThemeProvider";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     template: "%s - Aksel.nav.no",

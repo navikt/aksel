@@ -41,7 +41,7 @@ async function rejectCookies(): Promise<void> {
 async function updateCookieConsent(
   newState: CONSENT_TRACKER_STATE,
 ): Promise<void> {
-  if (!validateState(newState)) {
+  if (!validateConsentState(newState)) {
     throw new Error(`Invalid state: ${newState}`);
   }
 
@@ -100,12 +100,16 @@ async function getCookieConsent(): Promise<CONSENT_TRACKER_STATE> {
  * Helper utility to check if the consent banner should be shown.
  */
 async function showConsentBanner(): Promise<boolean> {
-  const consent = await getCookieConsent();
-
-  return !["accepted", "rejected"].includes(consent);
+  try {
+    const consent = await getCookieConsent();
+    return !["accepted", "rejected"].includes(consent);
+  } catch (error) {
+    console.error("Error getting cookie consent:", error);
+    return false;
+  }
 }
 
-function validateState(state: string): state is CONSENT_TRACKER_STATE {
+function validateConsentState(state: string): state is CONSENT_TRACKER_STATE {
   return ["accepted", "rejected", "undecided", "no_action"].includes(state);
 }
 
