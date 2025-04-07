@@ -28,7 +28,6 @@
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
     "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch",
     "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default && yarn rename:sanity-schema && yarn sanity typegen generate",
-    "###⬆️ public (devs probably want these)": "###⬇️ private (ignore these)",
     "rename:sanity-schema": "cd ./sanity/ && node -e \"require('fs').rename('./schema.json', './sanity-schema.json', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
     "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
     "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
