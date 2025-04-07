@@ -18,7 +18,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Allows setting a different HTML h-tag.
    * @default "h3"
-   * @deprecated The `title` prop above (which we decided to call title, but refer to as a heading here?!) affected by this heading tag is being deprecated, so this one follows suit.
+   * @deprecated The `title` prop gets deprecated, so this one follows suit, as it was a supplementary prop to the title.
    */
   headingTag?: React.ElementType<any>;
   /**
