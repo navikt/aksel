@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { Heading } from "@navikt/ds-react";
+import { HGrid, Heading } from "@navikt/ds-react";
+
+/* @ts-expect-error Workspace cant resolve valid import */
+import { PageBlock } from "@navikt/ds-react/Page";
 import { FigmaIcon, GithubIcon, SlackIcon } from "@/assets/Icons";
 import AkselLogo from "@/assets/Logo";
 import styles from "./Footer.module.css";
@@ -7,70 +10,72 @@ import styles from "./Footer.module.css";
 const Footer = () => {
   return (
     <footer className={`${styles.footer} dark`} id="aksel-footer">
-      <div className={styles.footerLayout}>
-        <div className={styles.footerLogo}>
-          <AkselLogo />
-          <div>
-            <p>&copy; {new Date().getFullYear()} Nav</p>
-            <p>Arbeids- og velferdsetaten</p>
+      <HGrid gap="space-24" asChild columns={{ xs: 1, md: 2, lg: 4 }}>
+        <PageBlock width="2xl">
+          <div className={styles.footerLogo}>
+            <AkselLogo />
+            <div>
+              <p>&copy; {new Date().getFullYear()} Nav</p>
+              <p>Arbeids- og velferdsetaten</p>
+            </div>
           </div>
-        </div>
-        <LinkBlock
-          heading="Snarveier"
-          links={[
-            {
-              url: "/side/skriv-for-aksel",
-              text: "Skriv for Aksel",
-            },
-            {
-              url: "/prinsipper/brukeropplevelse",
-              text: "Prinsipper for brukeropplevelse",
-            },
-            { url: "https://sikkerhet.nav.no/", text: "Security Playbook" },
-            {
-              url: "https://etterlevelse.ansatt.nav.no/",
-              text: "Etterlevelse",
-            },
-          ]}
-        />
-        <LinkBlock
-          heading="Om nettstedet"
-          links={[
-            {
-              url: "/side/om-aksel",
-              text: "Hva er Aksel?",
-            },
-            {
-              url: "/personvernerklaering",
-              text: "Personvernerklæring",
-            },
-            {
-              url: "/side/tilgjengelighetserklaring-for-aksel",
-              text: "Tilgjengelighetserklæring",
-            },
-          ]}
-        />
-        <LinkBlock
-          heading="Finn oss"
-          links={[
-            {
-              url: "https://www.figma.com/@nav_aksel",
-              text: "Figma",
-              icon: <FigmaIcon />,
-            },
-            {
-              url: "https://github.com/navikt/aksel",
-              text: "GitHub",
-              icon: <GithubIcon />,
-            },
-            {
-              url: "https://nav-it.slack.com/archives/C7NE7A8UF",
-              text: "Slack",
-              icon: <SlackIcon />,
-            },
-          ]}
-        />
-      </div>
+          <LinkBlock
+            heading="Snarveier"
+            links={[
+              {
+                url: "/side/skriv-for-aksel",
+                text: "Skriv for Aksel",
+              },
+              {
+                url: "/prinsipper/brukeropplevelse",
+                text: "Prinsipper for brukeropplevelse",
+              },
+              { url: "https://sikkerhet.nav.no/", text: "Security Playbook" },
+              {
+                url: "https://etterlevelse.ansatt.nav.no/",
+                text: "Etterlevelse",
+              },
+            ]}
+          />
+          <LinkBlock
+            heading="Om nettstedet"
+            links={[
+              {
+                url: "/side/om-aksel",
+                text: "Hva er Aksel?",
+              },
+              {
+                url: "/personvernerklaering",
+                text: "Personvernerklæring",
+              },
+              {
+                url: "/side/tilgjengelighetserklaring-for-aksel",
+                text: "Tilgjengelighetserklæring",
+              },
+            ]}
+          />
+          <LinkBlock
+            heading="Finn oss"
+            links={[
+              {
+                url: "https://www.figma.com/@nav_aksel",
+                text: "Figma",
+                icon: <FigmaIcon />,
+              },
+              {
+                url: "https://github.com/navikt/aksel",
+                text: "GitHub",
+                icon: <GithubIcon />,
+              },
+              {
+                url: "https://nav-it.slack.com/archives/C7NE7A8UF",
+                text: "Slack",
+                icon: <SlackIcon />,
+              },
+            ]}
+          />
+        </PageBlock>
+      </HGrid>
     </footer>
   );
 };

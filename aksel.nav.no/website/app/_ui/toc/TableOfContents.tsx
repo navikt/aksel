@@ -2,8 +2,8 @@
 
 import cl from "clsx";
 import NextLink from "next/link";
-import { ClockDashedIcon, LightBulbIcon } from "@navikt/aksel-icons";
-import { BodyShort, Detail, Link } from "@navikt/ds-react";
+import { SparklesIcon } from "@navikt/aksel-icons";
+import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { TOC_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { removeEmojies } from "@/utils";
 import styles from "./TableOfContents.module.css";
@@ -23,7 +23,6 @@ type TableOfContentsProps = {
 function TableOfContents({
   toc,
   variant = "default",
-  showChangelogLink,
   feedback,
 }: TableOfContentsProps) {
   const tocCtx = useTableOfContents(toc ?? []);
@@ -82,38 +81,34 @@ function TableOfContents({
           })}
         </ul>
       </div>
-      <TableOfContentsLinks
-        feedback={feedback}
-        showChangelogLink={showChangelogLink}
-      />
+      <TableOfContentsLinks feedback={feedback} />
     </aside>
   );
 }
 
 function TableOfContentsLinks({
   feedback,
-  showChangelogLink,
 }: Pick<TableOfContentsProps, "showChangelogLink" | "feedback">) {
-  if ((!feedback || !feedback.name) && !showChangelogLink) {
+  if (!feedback || !feedback.name) {
     return null;
   }
 
   return (
     <div className={styles.tocAsideLinks}>
       {feedback?.name && (
-        <Link
+        <Button
+          as="a"
+          variant="secondary-neutral"
+          size="small"
+          icon={<SparklesIcon aria-hidden />}
           href={`https://github.com/navikt/aksel/issues/new?labels=foresp%C3%B8rsel+%F0%9F%A5%B0%2Ckomponenter+%F0%9F%A7%A9&template=update-component.yml&title=%5BInnspill+til+komponent%5D%3A+%3C${feedback.name}%20/%3E`}
-          variant="neutral"
+          data-umami-event="feedback-designsystem"
+          data-umami-event-kilde="toc"
+          target="_blank"
+          rel="noreferrer"
         >
-          <LightBulbIcon fontSize="1.5rem" aria-hidden />
           {`${feedback.text}`}
-        </Link>
-      )}
-      {showChangelogLink && (
-        <Link href="/grunnleggende/kode/endringslogg" variant="neutral">
-          <ClockDashedIcon fontSize="1.5rem" aria-hidden />
-          Endringslogg
-        </Link>
+        </Button>
       )}
     </div>
   );

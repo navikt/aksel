@@ -1,17 +1,22 @@
-import { Metadata, ResolvingMetadata } from "next";
 import { PortableTextBlock } from "next-sanity";
 import { notFound } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next/types";
 import type { Image } from "sanity";
+import { Heading } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  KOMPONENT_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
+  MONSTER_MALER_BY_SLUG_QUERY,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
+import styles from "@/app/_ui/portable-text/CustomPortableText.module.css";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import { DesignsystemetKomponentIntro } from "../../_ui/Designsystemet.intro";
+import {
+  WebsiteTable,
+  WebsiteTableRow,
+} from "@/app/_ui/website-table/WebsiteTable";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
@@ -30,7 +35,7 @@ export async function generateMetadata(
 
   const { data: page } = await sanityFetch({
     query: METADATA_BY_SLUG_QUERY,
-    params: { slug: parseDesignsystemSlug(slug, "komponenter") },
+    params: { slug: parseDesignsystemSlug(slug, "monster-maler") },
     stega: false,
   });
 
@@ -49,18 +54,18 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
-  return await getStaticParamsSlugs("komponent_artikkel");
+  return await getStaticParamsSlugs("templates_artikkel");
 }
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const parsedSlug = parseDesignsystemSlug(slug, "komponenter");
+  const parsedSlug = parseDesignsystemSlug(slug, "monster-maler");
 
   const [{ data: page }, { data: toc = [] }] = await Promise.all([
     sanityFetch({
-      query: KOMPONENT_BY_SLUG_QUERY,
+      query: MONSTER_MALER_BY_SLUG_QUERY,
       params: { slug: parsedSlug },
     }),
     sanityFetch({
@@ -73,6 +78,9 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+  const metadata = page.content?.find((x) => x._type === "kode_eksempler")?.dir
+    ?.metadata;
+
   return (
     <DesignsystemetPageLayout layout="with-toc">
       <DesignsystemetPageHeader data={page} />
@@ -83,10 +91,40 @@ export default async function Page({ params }: Props) {
         }}
         toc={toc}
       />
-      <div>
-        <DesignsystemetKomponentIntro data={page} />
-        <CustomPortableText value={page.content as PortableTextBlock[]} />
-      </div>
+      <CustomPortableText
+        value={page.content as PortableTextBlock[]}
+        data-block-margin="space-28"
+      />
+      {metadata?.changelog && (
+        <div>
+          <Heading
+            className={styles.headingElement}
+            tabIndex={-1}
+            id="changelog"
+            level="2"
+            size="large"
+            data-level="2"
+          >
+            Endringer
+          </Heading>
+          <WebsiteTable
+            th={[{ text: "Dato" }, { text: "Versjon" }, { text: "Endringer" }]}
+          >
+            {metadata.changelog
+              .sort((a, b) => (a.version ?? 0) - (b.version ?? 0))
+              .map((log) => (
+                <WebsiteTableRow
+                  key={log.version}
+                  tr={[
+                    { text: log.date },
+                    { text: log.version },
+                    { text: log.description },
+                  ]}
+                />
+              ))}
+          </WebsiteTable>
+        </div>
+      )}
     </DesignsystemetPageLayout>
   );
 }

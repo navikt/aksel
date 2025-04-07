@@ -46,13 +46,12 @@
   border-radius: var(--ax-border-radius-small);
   padding-inline: var(--ax-space-8);
   color: var(--aksel-brand-logo);
+  font-size: var(--ax-font-size-large);
 
   &::before {
     content: "";
     position: absolute;
-
-    /* TODO: revisit with designer */
-    bottom: var(--ax-space-6);
+    bottom: var(--ax-space-4);
     z-index: 10;
     height: 3px;
     width: calc(100% - var(--ax-space-16));
@@ -68,8 +67,10 @@
     }
   }
 
-  &:hover[data-current="false"]::before {
-    background-color: var(--ax-border-neutral-subtleA);
+  &[data-current="false"]:hover {
+    &::before {
+      background-color: var(--ax-border-neutral-subtleA);
+    }
   }
 
   &:focus-visible {

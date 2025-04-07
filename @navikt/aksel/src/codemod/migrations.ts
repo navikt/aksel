@@ -123,6 +123,13 @@ export const migrations: {
       value: "prop-deprecate",
       path: "darkside/prop-deprecate/prop-deprecate",
     },
+    {
+      description:
+        "Update Box to to BoxNew (future Box) using the new token system",
+      value: "box-to-boxnew",
+      path: "darkside/box-to-boxnew/box-to-boxnew",
+     warning: "Remember to check if 'aksel box migration'-comment were added to any files after migration. This comment will help you find and update Box-instances where we could not resolve the update for you.",
+    },
   ],
 };
 

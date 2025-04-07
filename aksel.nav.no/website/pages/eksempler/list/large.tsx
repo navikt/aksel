@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <List as="ul" size="large" title="Det kan også være aktuelt hvis du:">
+    <List as="ul" size="large">
       <List.Item>
         står i fare for å miste jobben etter å ha vært sykmeldt helt eller
         delvis i 12 måneder,

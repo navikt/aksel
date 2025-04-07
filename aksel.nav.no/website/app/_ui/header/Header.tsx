@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Box, HStack, Show, Spacer } from "@navikt/ds-react";
 import { GlobalSearch } from "@/app/_ui/global-search/GlobalSearch";
 import { MobileNav } from "@/app/_ui/mobile-nav/MobileNav";
+import { ThemeButton } from "@/app/_ui/theming/Theme.button";
 import AkselLogo from "@/assets/Logo";
 import { HeaderLink } from "./Header.link";
 import styles from "./Header.module.css";
@@ -32,7 +33,7 @@ function Header({ className }: { className?: string }) {
         </Link>
 
         <Spacer />
-        <Show above="md" asChild>
+        <Show above="lg" asChild>
           <Box
             as="nav"
             paddingInline={{ xs: "0 space-8", lg: "0 space-32" }}
@@ -49,9 +50,10 @@ function Header({ className }: { className?: string }) {
         </Show>
         <HStack align="center" gap="2">
           <GlobalSearch />
-          <Show below="md">
+          <Show below="lg">
             <MobileNav />
           </Show>
+          <ThemeButton />
         </HStack>
       </div>
     </header>

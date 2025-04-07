@@ -1,7 +1,7 @@
 import type { API, FileInfo } from "jscodeshift";
 import { getImportSpecifier } from "../../codemod/utils/imports";
 import { getLineTerminator } from "../../codemod/utils/lineterminator";
-import moveAndRenameImport from "../../codemod/utils/moveAndRenameImport";
+import moveAndRenameImport from "../../codemod/utils/packageImports";
 import { translateToken } from "../../codemod/utils/translate-token";
 import { legacyTokenConfig } from "../config/legacy.tokens";
 

@@ -66,10 +66,7 @@ function customPortableTextComponents({
       attachment: Attachment,
       compare_images: CompareImages,
       language: LocalCustomPortableText,
-    } satisfies Record<
-      PortableContentTypes & "token_kategori",
-      ExtractPortableComponentProps<PortableContentTypes>
-    >,
+    } satisfies Record<PortableContentTypes, (props: any) => React.ReactNode>,
     block,
     marks,
     list: {

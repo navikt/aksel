@@ -3,9 +3,10 @@ import { Detail, HStack, Heading, Tag } from "@navikt/ds-react";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERYResult,
   KOMPONENT_BY_SLUG_QUERYResult,
+  MONSTER_MALER_BY_SLUG_QUERYResult,
 } from "@/app/_sanity/query-types";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
-import { getStatusTag } from "@/app/_ui/theme-config";
+import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
@@ -32,7 +33,10 @@ function DesignsystemetPageLayout({
 }
 
 type DesignsystemetPageT = {
-  data: KOMPONENT_BY_SLUG_QUERYResult | GRUNNLEGGENDE_BY_SLUG_QUERYResult;
+  data:
+    | KOMPONENT_BY_SLUG_QUERYResult
+    | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+    | MONSTER_MALER_BY_SLUG_QUERYResult;
 };
 
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {

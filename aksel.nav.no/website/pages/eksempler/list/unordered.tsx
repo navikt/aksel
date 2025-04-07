@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <List as="ul" title="Det kan også være aktuelt hvis du:">
+    <List as="ul">
       <List.Item>
         står i fare for å miste jobben etter å ha vært sykmeldt helt eller
         delvis i 12 måneder,
@@ -30,5 +30,5 @@ export const Demo = {
 
 export const args = {
   index: 0,
-  desc: "<List> wrapper <ul> og <List.Item> wrapper <li>. Husk å sette riktig 'headingTag' hvis du bruker 'title'.",
+  desc: "<List> wrapper <ul> og <List.Item> wrapper <li>.",
 };
