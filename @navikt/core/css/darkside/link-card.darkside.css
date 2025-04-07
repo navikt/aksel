@@ -7,7 +7,9 @@
   /* test */
   text-decoration: none;
   color: var(--ax-text-neutral);
-  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-property: border-color, transform, background-color;
+  transition-duration: 600ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   padding: var(--__axc-link-card-padding);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -36,47 +38,44 @@
     outline-offset: 3px;
   }
 
-  &:has(.aksel-link-card__icon) :is(.aksel-link-card__icon:not(.aksel-link-card__icon--left), .aksel-link-card__tag) {
+  /* &:has(.aksel-link-card__icon) :is(.aksel-link-card__icon:not(.aksel-link-card__icon--left), .aksel-link-card__tag) {
     align-self: center;
-  }
+  } */
 
-  &:has(.aksel-link-card__icon) :is(.aksel-link-card__tag) {
+  /* &:has(.aksel-link-card__icon) :is(.aksel-link-card__tag) {
     justify-self: flex-end;
-  }
+  } */
 
   &:has(.aksel-link-card__tag) {
     grid-template-areas:
       "image image image image"
       "icon icon icon icon"
-      "heading heading tag tag"
+      "heading heading heading heading"
+      "tag tag tag tag"
       "description description description description"
       "action action action action";
   }
 
   &:has(.aksel-link-card__icon) {
-    grid-template-areas:
-      "image image"
-      "icon tag"
-      "heading heading "
-      "description description"
-      "action action";
-  }
-
-  &:has(.aksel-link-card__icon--left) {
     grid-template-columns: min-content 1fr;
     column-gap: var(--ax-space-16);
     grid-template-areas:
-      "icon image image"
-      "icon tag tag"
-      "icon heading heading "
-      "icon description description"
-      "icon action action";
+      "icon image image image"
+      "icon heading heading arrow"
+      "icon description description description"
+      "icon tag tag tag"
+      "icon action action action";
   }
 }
 
 .aksel-link-card--border {
   border: 1px solid var(--ax-border-neutral-subtle);
   background-color: var(--ax-bg-raised);
+
+  &:hover {
+    background-color: var(--ax-bg-neutral-soft);
+    border: 1px solid var(--ax-border-neutral);
+  }
 }
 
 .aksel-link-card--full-width {
@@ -104,14 +103,14 @@
 }
 
 .aksel-link-card__tag {
-  margin-bottom: var(--ax-space-12);
+  /* margin-bottom: var(--ax-space-12); */
   grid-area: tag;
+  width: fit-content;
 }
 
 .aksel-link-card__icon {
   margin-bottom: var(--ax-space-12);
   grid-area: icon;
-  font-size: 1.25rem;
   width: fit-content;
   height: fit-content;
   display: grid;
@@ -132,13 +131,12 @@
 .aksel-link-card__anchor {
   color: currentColor;
   text-decoration: underline;
+  text-decoration-color: currentColor;
   text-underline-offset: 0.1em;
   text-decoration-thickness: 0.05em;
-  text-decoration-color: transparent;
   transition: text-decoration-thickness 200ms;
 
   .aksel-link-card:hover & {
-    text-decoration-color: currentColor;
     text-decoration-thickness: 0.111em;
   }
 
@@ -168,6 +166,7 @@
   width: 1rem;
   height: 1rem;
   margin-left: var(--ax-space-4);
+  grid-area: arrow;
 
   .aksel-link-card:hover & {
     transform: translateX(4px);

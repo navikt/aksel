@@ -63,6 +63,17 @@ export const Default: Story = {
             voluptatum voluptate velit commodi obcaecati.
           </LinkCardDescription>
         </LinkCard>
+        <LinkCard>
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+          <LinkCardIcon data-color-role="meta-purple">
+            <WalletIcon aria-hidden />
+          </LinkCardIcon>
+          <LinkCardTag variant="alt1">Test</LinkCardTag>
+        </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
           <LinkCardHeading as="h3">
             <LinkCardAnchor href="#">
@@ -127,6 +138,7 @@ export const Default: Story = {
               Heading with a somewhat long text
             </LinkCardAnchor>
           </LinkCardHeading>
+          <LinkCardTag variant="alt1">Beta</LinkCardTag>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
           <LinkCardHeading as="h3">
@@ -192,7 +204,7 @@ export const Default: Story = {
           </LinkCardHeading>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
-          <LinkCardIcon data-color-role="meta-purple" placement="left">
+          <LinkCardIcon data-color-role="meta-purple">
             <WalletIcon aria-hidden />
           </LinkCardIcon>
           <LinkCardHeading as="h3">
@@ -202,7 +214,7 @@ export const Default: Story = {
           </LinkCardHeading>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
-          <LinkCardIcon data-color-role="meta-purple" placement="left">
+          <LinkCardIcon data-color-role="meta-purple">
             <WalletIcon aria-hidden />
           </LinkCardIcon>
           <LinkCardHeading as="h3">
@@ -216,7 +228,7 @@ export const Default: Story = {
           </LinkCardDescription>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
-          <LinkCardIcon placement="left" hasBackground={false}>
+          <LinkCardIcon hasBackground={false}>
             <DemoPictogram />
           </LinkCardIcon>
           <LinkCardHeading as="h3">
@@ -230,7 +242,7 @@ export const Default: Story = {
           </LinkCardDescription>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE" isFullWidth>
-          <LinkCardIcon placement="left" hasBackground={false}>
+          <LinkCardIcon hasBackground={false}>
             <DemoPictogram />
           </LinkCardIcon>
           <LinkCardHeading as="h3">

@@ -47,6 +47,7 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
         })}
       >
         {children}
+        {/* <LinkCardArrow /> */}
         {ctaText && (
           <div className={cn("navds-link-card__action")}>
             <Detail as="span">{ctaText}</Detail>
@@ -94,15 +95,21 @@ interface LinkCardAnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export const LinkCardAnchor: OverridableComponent<
   LinkCardAnchorProps,
   HTMLAnchorElement
-> = forwardRef(({ children, as: Component = "a" }, forwardedRef) => {
-  const { cn } = useRenameCSS();
+> = forwardRef(
+  ({ children, as: Component = "a", ...restProps }, forwardedRef) => {
+    const { cn } = useRenameCSS();
 
-  return (
-    <Component ref={forwardedRef} className={cn("navds-link-card__anchor")}>
-      {children}
-    </Component>
-  );
-});
+    return (
+      <Component
+        ref={forwardedRef}
+        {...restProps}
+        className={cn("navds-link-card__anchor")}
+      >
+        {children}
+      </Component>
+    );
+  },
+);
 
 /* ---------------------------- LinkCard Description ---------------------------- */
 interface LinkCardDescriptionProps
@@ -154,21 +161,11 @@ interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   hasBackground?: boolean;
-  /**
-   * Icon placement
-   * @default "top"
-   */
-  placement?: "top" | "left";
 }
 
 export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
   (
-    {
-      children,
-      hasBackground = true,
-      placement = "top",
-      ...restProps
-    }: LinkCardIconProps,
+    { children, hasBackground = true, ...restProps }: LinkCardIconProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -176,13 +173,9 @@ export const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
     return (
       <div
         ref={forwardedRef}
-        className={cn(
-          "navds-link-card__icon",
-          `navds-link-card__icon--${placement}`,
-          {
-            "navds-link-card__icon--background": hasBackground,
-          },
-        )}
+        className={cn("navds-link-card__icon", {
+          "navds-link-card__icon--background": hasBackground,
+        })}
         aria-hidden
         data-color-role="neutral"
         {...restProps}
