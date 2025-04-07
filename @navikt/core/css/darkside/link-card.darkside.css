@@ -1,7 +1,7 @@
 .aksel-link-card {
   --__axc-link-card-padding: var(--ax-space-20);
 
-  height: 100%;
+  height: fit-content;
   border-radius: var(--ax-border-radius-xlarge);
 
   /* test */
@@ -23,8 +23,6 @@
     "action action action action";
   flex: auto;
   position: relative;
-  border: 1px solid var(--ax-border-neutral);
-  background-color: var(--ax-bg-raised);
 
   /* TODO: This might need to be a prop */
   max-width: 28rem;
@@ -74,6 +72,11 @@
       "icon description description"
       "icon action action";
   }
+}
+
+.aksel-link-card--border {
+  border: 1px solid var(--ax-border-neutral-subtle);
+  background-color: var(--ax-bg-raised);
 }
 
 .aksel-link-card--full-width {

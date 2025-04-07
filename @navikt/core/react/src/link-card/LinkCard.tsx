@@ -17,11 +17,22 @@ export interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   isFullWidth?: boolean;
+  /**
+   * Whether the card should have a border
+   * @default true
+   */
+  hasBorder?: boolean;
 }
 
 export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
-    { children, className, ctaText, isFullWidth = false }: LinkCardProps,
+    {
+      children,
+      className,
+      ctaText,
+      isFullWidth = false,
+      hasBorder = true,
+    }: LinkCardProps,
     forwardedRef,
   ) => {
     const { cn } = useRenameCSS();
@@ -30,7 +41,9 @@ export const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       <div
         ref={forwardedRef}
         className={cn("navds-link-card", className, {
+          /* TODO: Use data-attrb? */
           "navds-link-card--full-width": isFullWidth,
+          "navds-link-card--border": hasBorder,
         })}
       >
         {children}

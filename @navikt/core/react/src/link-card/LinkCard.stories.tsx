@@ -1,7 +1,7 @@
 import { StoryObj } from "@storybook/react";
 import React from "react";
 import { WalletIcon } from "@navikt/aksel-icons";
-import { VStack } from "../layout/stack";
+import { HGrid } from "../layout/grid";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -25,8 +25,19 @@ type Story = StoryObj<typeof LinkCard>;
 export const Default: Story = {
   render: () => {
     return (
-      <VStack gap="8">
+      <HGrid gap="8" columns={2}>
         <LinkCard ctaText="PENGESTØTTE">
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+          <LinkCardDescription>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
+            voluptatum voluptate velit commodi obcaecati.
+          </LinkCardDescription>
+        </LinkCard>
+        <LinkCard ctaText="PENGESTØTTE" hasBorder={false}>
           <LinkCardHeading as="h3">
             <LinkCardAnchor href="#">
               Heading with a somewhat long text
@@ -79,6 +90,43 @@ export const Default: Story = {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
             voluptatum voluptate velit commodi obcaecati.
           </LinkCardDescription>
+        </LinkCard>
+        <LinkCard ctaText="PENGESTØTTE">
+          <LinkCardImage
+            alt="123"
+            src="https://picsum.photos/800/600"
+            aspectRatio="16:9"
+          />
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+        </LinkCard>
+        <LinkCard>
+          <LinkCardImage
+            alt="123"
+            src="https://picsum.photos/800/600"
+            aspectRatio="16:9"
+          />
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
+        </LinkCard>
+        <LinkCard>
+          <LinkCardImage
+            alt="123"
+            src="https://picsum.photos/800/600"
+            aspectRatio="16:9"
+            isInset
+          />
+          <LinkCardHeading as="h3">
+            <LinkCardAnchor href="#">
+              Heading with a somewhat long text
+            </LinkCardAnchor>
+          </LinkCardHeading>
         </LinkCard>
         <LinkCard ctaText="PENGESTØTTE">
           <LinkCardHeading as="h3">
@@ -195,7 +243,7 @@ export const Default: Story = {
             voluptatum voluptate velit commodi obcaecati.
           </LinkCardDescription>
         </LinkCard>
-      </VStack>
+      </HGrid>
     );
   },
 };
