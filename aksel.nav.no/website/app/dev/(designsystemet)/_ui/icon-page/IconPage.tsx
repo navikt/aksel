@@ -1,10 +1,11 @@
 import * as Icons from "@navikt/aksel-icons";
 import { HGrid, HStack, Heading } from "@navikt/ds-react";
-import { IconPageProvider } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage.provider";
+import { IconPageSidepanel } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage.sidepanel";
 import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
 import { IconPageForm } from "./IconPage.form";
+import { IconPageProvider } from "./IconPage.provider";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
 function IconPage({
@@ -16,10 +17,6 @@ function IconPage({
   iconQuery?: string;
   iconToggle: "stroke" | "fill";
 }) {
-  /* const focusRef = React.useRef<HTMLButtonElement | null>(null); */
-
-  /* const hideModal = useMedia("screen and (min-width: 1024px)"); */
-
   const iconsWithCategories = categorizeIcons(
     searchIcons({ query: iconQuery ?? "", toggle: iconToggle ?? "stroke" }),
   );
@@ -40,7 +37,7 @@ function IconPage({
         <div>
           <IconPageForm />
           <HGrid
-            columns={{ xs: 1, lg: "3fr minmax(300px, 2fr)" }}
+            columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"
             marginBlock="space-24 0"
           >
@@ -63,13 +60,7 @@ function IconPage({
                             key={icon.id}
                             iconName={icon.id}
                             activeIconName={iconName}
-                            icon={
-                              <T
-                                fontSize="1.5rem"
-                                aria-hidden
-                                title={icon.name}
-                              />
-                            }
+                            icon={<T fontSize="1.5rem" title={icon.name} />}
                           />
                         );
                       })}
@@ -78,7 +69,7 @@ function IconPage({
                 );
               })}
             </section>
-            <section>modal thing</section>
+            <IconPageSidepanel iconName={iconName} />
           </HGrid>
         </div>
       </DesignsystemetPageLayout>

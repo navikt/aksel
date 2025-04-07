@@ -33,21 +33,29 @@ function IconPageButton({
   };
 
   return (
-    <button
-      ref={(el) => {
-        if (isActive) {
-          context.setActiveIconButton(el);
-        }
-      }}
-      onClick={handleClick}
-      key={iconName}
-      id={iconName}
-      className={styles.iconButton}
-      data-state={isActive ? "active" : "inactive"}
-      aria-pressed={iconName === icon}
-    >
-      {icon}
-    </button>
+    <>
+      <button
+        ref={(el) => {
+          if (isActive) {
+            context.setActiveIconButton(el);
+          }
+        }}
+        onClick={handleClick}
+        key={iconName}
+        id={iconName}
+        className={styles.iconButton}
+        data-state={isActive ? "active" : "inactive"}
+        aria-pressed={iconName === icon}
+        aria-controls={isActive ? "icon-page-sidepanel" : undefined}
+      >
+        {icon}
+      </button>
+      {isActive && context.hideModal && (
+        <a className={styles.iconPageSkiplink} href="#icon-page-sidepanel">
+          Hopp til ikonpanel
+        </a>
+      )}
+    </>
   );
 }
 

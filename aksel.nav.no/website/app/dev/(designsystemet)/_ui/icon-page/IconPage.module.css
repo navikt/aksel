@@ -20,7 +20,7 @@
 .iconDetails {
   border-radius: var(--ax-border-radius-xlarge);
   border: 1px solid var(--ax-border-neutral-subtleA);
-  background: var(--ax-bg-default);
+  background: var(--ax-bg-raised);
   overflow: clip;
 
   [data-modal="true"] & {
@@ -31,7 +31,7 @@
 
 .iconDetailsShowcase {
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
-  background: var(--ax-bg-neutral-soft);
+  background: var(--ax-bg-neutral-softA);
   padding-block: var(--ax-space-8);
   display: grid;
   place-content: center;
@@ -46,10 +46,6 @@
 }
 
 .iconDetailsActions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--ax-space-24);
-
   [data-modal="true"] & {
     padding-inline: var(--ax-space-20);
   }
@@ -61,5 +57,27 @@
   [data-modal="true"] & {
     padding-inline: var(--ax-space-20);
     padding-block: var(--ax-space-20);
+  }
+}
+
+.iconPageSidepanel {
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
+  position: sticky;
+}
+
+.iconPageSkiplink {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: var(--ax-bg-info-strong);
+  padding: var(--ax-space-16);
+  color: var(--ax-text-info-contrast);
+  text-decoration: none;
+  transform: translateY(200%);
+
+  &:focus-within {
+    transform: translateY(0);
+    outline: none;
   }
 }
