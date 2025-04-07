@@ -22,8 +22,7 @@ function IconPageButton({
   const isActive = iconName === activeIconName;
 
   const handleClick = () => {
-    /* TODO: fix types */
-    const params = new URLSearchParams(searchParams ?? undefined);
+    const params = new URLSearchParams(searchParams?.toString());
     if (isActive) {
       params.delete("iconName");
     } else {

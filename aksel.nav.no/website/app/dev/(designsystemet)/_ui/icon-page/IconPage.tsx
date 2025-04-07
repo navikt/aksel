@@ -39,7 +39,7 @@ function IconPage({
           <HGrid
             columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"
-            marginBlock="space-24 0"
+            marginBlock="space-40 0"
           >
             <section aria-label="Ikonliste" className="flex flex-col gap-10">
               {iconsWithCategories.map((section) => {

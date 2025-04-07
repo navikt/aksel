@@ -14,8 +14,7 @@ function IconPageSidepanel({ iconName }: { iconName?: string }) {
   const { replace } = useRouter();
 
   const handleClose = () => {
-    /* TODO: fix types */
-    const params = new URLSearchParams(searchParams ?? undefined);
+    const params = new URLSearchParams(searchParams?.toString());
     params.delete("iconName");
     replace(`${pathname}?${params.toString()}`);
     activeIconButton?.focus();
