@@ -10,7 +10,6 @@ export default async function DesignsystemLayout({
   return (
     <div className={styles.websitePage}>
       <Header className={styles.header} />
-
       <div className={styles.pageLayout}>{children}</div>
       <Footer />
     </div>
