@@ -71,11 +71,6 @@
   flex: 2;
 }
 
-.navds-combobox__wrapper-inner > :last-child {
-  display: flex;
-  flex-flow: row nowrap;
-}
-
 .navds-combobox__wrapper-inner:hover {
   cursor: text;
 }
