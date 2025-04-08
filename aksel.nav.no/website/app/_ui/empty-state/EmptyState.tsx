@@ -1,5 +1,3 @@
-"use client";
-
 import { BodyShort, BoxNew, HGrid, HStack, Heading } from "@navikt/ds-react";
 
 type EmptyStateCardProps = {
