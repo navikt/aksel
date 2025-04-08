@@ -19,3 +19,35 @@
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   min-height: calc(100vh - var(--website-header-height-width-border));
 }
+
+.main {
+  overflow: hidden;
+  padding-block: var(--ax-space-64) 8vw;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.preamble {
+  padding-inline: var(--ax-space-16);
+}
+
+.intro {
+  /* dynamic-wrapper-prose text-center */
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 75ch;
+}
+
+/* 480 === sm */
+@media (min-width: 480px) {
+  .main {
+    padding-bottom: var(--ax-space-128);
+  }
+
+  .intro {
+    width: 90%;
+  }
+}

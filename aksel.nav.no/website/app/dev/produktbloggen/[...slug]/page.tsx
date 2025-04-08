@@ -15,6 +15,7 @@ import { BLOGG_BY_SLUG_QUERY } from "@/app/_sanity/queries";
 import { urlFor } from "@/sanity/interface";
 import { abbrName, getImage } from "@/utils";
 import { parseDesignsystemSlug } from "../../(designsystemet)/slug";
+import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -59,14 +60,10 @@ export default async function Page({ params }: Props) {
       />
       */}
 
-      <main
-        tabIndex={-1}
-        id="hovedinnhold"
-        className="aksel-artikkel overflow-hidden pb-16 pt-[8vw] focus:outline-none sm:pb-32"
-      >
+      <main tabIndex={-1} id="hovedinnhold" className={styles.main}>
         <_Page>
-          <div className="px-4">
-            <div className="dynamic-wrapper-prose text-center">
+          <div className={styles.preamble}>
+            <div className={styles.intro}>
               <Heading
                 level="1"
                 size="xlarge"
