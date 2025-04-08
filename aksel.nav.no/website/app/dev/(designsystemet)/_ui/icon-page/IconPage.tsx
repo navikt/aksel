@@ -50,7 +50,7 @@ function IconPage({
           {Object.keys(meta).length} open source-ikoner designet og utviklet for
           Nav
         </BodyLong>
-        <HStack gap="space-16" marginBlock="space-16 0">
+        <HStack as="ul" gap="space-16" marginBlock="space-16 0">
           <li className={styles.iconPageLinkLi}>
             <NextLink
               href="https://www.figma.com/community/file/1214869602572392330"
