@@ -6,6 +6,7 @@ import { AirplaneIcon } from "@navikt/aksel-icons";
 import type { AkselIcon } from "@navikt/aksel-icons/metadata";
 import {
   BodyShort,
+  Box,
   Button,
   HStack,
   Heading,
@@ -75,7 +76,7 @@ function IconPageIconDetails({
   const HeaderComponent = !hideModal ? Modal.Header : "div";
 
   return (
-    <div className={styles.iconDetails}>
+    <div className={styles.iconDetails} data-inline>
       {hideModal && (
         <div className={styles.iconDetailsShowcase}>
           <IconComponent fontSize="2rem" />
@@ -84,15 +85,17 @@ function IconPageIconDetails({
       <VStack gap="space-24" className={styles.iconDetailsContent}>
         <HeaderComponent>
           {!hideModal && (
-            <IconComponent aria-hidden fontSize="2rem" className="mb-2" />
+            <Box marginBlock="space-0 space-8">
+              <IconComponent aria-hidden fontSize="2rem" />
+            </Box>
           )}
           <Heading level="2" size="small">
             {iconName}
           </Heading>
-          <div className="flex items-center gap-0.5">
+          <HStack gap="space-2">
             <Icons.ArrowDownRightIcon fontSize="1.5rem" aria-hidden />
             <BodyShort>{metaData?.sub_category}</BodyShort>
-          </div>
+          </HStack>
           <HStack gap="space-8" marginBlock="space-12 0" as="ul">
             {metaData?.keywords.map((keyword) => (
               <li key={keyword}>
@@ -115,7 +118,6 @@ function IconPageIconDetails({
               variant="secondary"
               as="a"
               href={`https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`}
-              className="w-fit"
               target="_blank"
               rel="noreferrer noopener"
               icon={<Icons.BugIcon aria-hidden />}

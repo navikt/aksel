@@ -62,7 +62,7 @@ function IconPage({
                 data-umami-event="navigere"
                 data-umami-event-kilde="ikonside"
               >
-                <FigmaIcon className="ml-1" /> <span className="">Figma</span>
+                <FigmaIcon /> <span>Figma</span>
               </Link>
             </NextLink>
           </li>
@@ -78,7 +78,7 @@ function IconPage({
                 data-umami-event="navigere"
                 data-umami-event-kilde="ikonside"
               >
-                <BrailleIcon aria-hidden className="text-2xl" />{" "}
+                <BrailleIcon aria-hidden fontSize="1.5rem" />{" "}
                 <span>Tilgjengelighet</span>
               </Link>
             </NextLink>
@@ -93,8 +93,7 @@ function IconPage({
               data-umami-event-type="zip"
               data-umami-event-tittel="ikonpakke"
             >
-              <DownloadIcon className="text-2xl" aria-hidden /> Last ned
-              ikonpakke
+              <DownloadIcon fontSize="1.5rem" aria-hidden /> Last ned ikonpakke
             </Link>
           </li>
         </HStack>

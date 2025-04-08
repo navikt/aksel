@@ -47,7 +47,7 @@ function IntroInformation() {
   ];
 
   return (
-    <div className={`${styles.iconDetails} p-5`}>
+    <div className={styles.iconDetails}>
       <Heading level="2" size="small" spacing>
         React komponenter
       </Heading>

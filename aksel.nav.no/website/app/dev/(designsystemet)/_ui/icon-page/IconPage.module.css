@@ -32,10 +32,16 @@
   border: 1px solid var(--ax-border-neutral-subtleA);
   background: var(--ax-bg-raised);
   overflow: clip;
+  padding: var(--ax-space-20);
+
+  &[data-inline] {
+    padding: 0;
+  }
 
   [data-modal="true"] & {
     border-radius: 0;
     border: none;
+    padding-block-end: var(--ax-space-20);
   }
 }
 
