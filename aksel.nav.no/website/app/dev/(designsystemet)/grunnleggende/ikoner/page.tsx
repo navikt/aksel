@@ -1,3 +1,4 @@
+import { Metadata } from "next/types";
 import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage";
 
@@ -6,34 +7,21 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-/* const categoryConfig = sanityCategoryLookup("grunnleggende"); */
-
-/* export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { category } = await params;
-
-  const { data: page } = await sanityFetch({
-    query: DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
-    stega: false,
-  });
-
-  const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
-
-  pageOgImage && ogImages.unshift(pageOgImage);
-
-  const currentCategory = categoryConfig.find((cat) => cat.value === category);
-
-  return {
-    title: currentCategory?.title,
-    description: page?.seo?.meta,
-    openGraph: {
-      images: ogImages,
-    },
-  };
-} */
+export const metadata: Metadata = {
+  title: "Ikoner",
+  description: `${
+    Object.keys(meta).length
+  } open source-ikoner designet og utviklet for Nav. Finn riktig ikon til din løsning.`,
+  openGraph: {
+    images: [
+      {
+        url: "https://aksel.nav.no/images/og/ikoner/og-ikoner.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+};
 
 export default async function Page({ searchParams }: Props) {
   const _searchParams = await searchParams;
