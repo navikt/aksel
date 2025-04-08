@@ -99,7 +99,7 @@ const Page = async () => {
       </VStack>
       <TableOfContents
         feedback={{
-          name: page?.heading,
+          name: "Tokens darkside",
           text: "Send innspill",
         }}
         toc={toc}
