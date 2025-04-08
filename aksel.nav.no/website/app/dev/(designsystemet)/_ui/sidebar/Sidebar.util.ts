@@ -7,7 +7,7 @@ import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
 /**
- * TODO: We currently do not support soring "unique" pages
+ * TODO: We currently do not support sorting "unique" pages
  */
 const pageTypes = {
   grunnleggende: {
