@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Modal, Show } from "@navikt/ds-react";
+import { Modal } from "@navikt/ds-react";
 import { IconPageDetails } from "./IconPage.details";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
@@ -22,7 +22,7 @@ function IconPageSidepanel({ iconName }: { iconName?: string }) {
 
   return (
     <>
-      <Show above="xl">
+      {(hideModal || !iconName) && (
         <section
           aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
           id="icon-page-sidepanel"
@@ -30,7 +30,8 @@ function IconPageSidepanel({ iconName }: { iconName?: string }) {
         >
           <IconPageDetails iconName={iconName} />
         </section>
-      </Show>
+      )}
+
       {!hideModal && iconName && (
         <Modal
           open={!!iconName}

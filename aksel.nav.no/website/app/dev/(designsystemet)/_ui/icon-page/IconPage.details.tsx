@@ -17,15 +17,6 @@ import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
 import styles from "./IconPage.module.css";
 
-/* const tab: CodeBlockTabsT[number] = {
-    code: code.code,
-    lang: code.language as any,
-    text: code.language.toUpperCase() ?? title,
-    value: id,
-  };
-
-  return <CodeBlock showLineNumbers tabs={[tab]} />; */
-
 function IconPageDetails({
   iconName,
   inModal = false,

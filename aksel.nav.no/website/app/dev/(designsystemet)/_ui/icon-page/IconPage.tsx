@@ -1,5 +1,6 @@
 import * as Icons from "@navikt/aksel-icons";
-import { HGrid, HStack, Heading } from "@navikt/ds-react";
+import { Button, HGrid, HStack, Heading } from "@navikt/ds-react";
+import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import { IconPageSidepanel } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage.sidepanel";
 import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
@@ -39,9 +40,23 @@ function IconPage({
           <HGrid
             columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"
-            marginBlock="space-40 0"
+            marginBlock="space-24 0"
           >
             <section aria-label="Ikonliste" className="flex flex-col gap-10">
+              {iconsWithCategories.length === 0 && (
+                <EmptyStateCard
+                  variant="questionmark"
+                  actionComponent={
+                    <Button
+                      as="a"
+                      href="https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+"
+                      variant="secondary-neutral"
+                    >
+                      Send innspill
+                    </Button>
+                  }
+                />
+              )}
               {iconsWithCategories.map((section) => {
                 return (
                   <div key={section.category}>
