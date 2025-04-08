@@ -93,8 +93,6 @@
   }
 }
 
-.iconPageLinkUl {
-  > * {
-    list-style: none;
-  }
+.iconPageLinkLi {
+  list-style: none;
 }

@@ -51,12 +51,8 @@ function IconPage({
             {Object.keys(meta).length} open source-ikoner designet og utviklet
             for Nav
           </BodyLong>
-          <HStack
-            gap="space-16"
-            marginBlock="space-16 0"
-            className={styles.iconPageLinkUl}
-          >
-            <li>
+          <HStack gap="space-16" marginBlock="space-16 0">
+            <li className={styles.iconPageLinkLi}>
               <NextLink
                 href="https://www.figma.com/community/file/1214869602572392330"
                 passHref
@@ -72,7 +68,7 @@ function IconPage({
               </NextLink>
             </li>
 
-            <li>
+            <li className={styles.iconPageLinkLi}>
               <NextLink
                 href="/god-praksis/artikler/tilgjengelig-ikonbruk"
                 passHref
@@ -88,7 +84,7 @@ function IconPage({
                 </Link>
               </NextLink>
             </li>
-            <li>
+            <li className={styles.iconPageLinkLi}>
               <Link
                 variant="subtle"
                 href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
