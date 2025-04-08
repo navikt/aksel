@@ -6,10 +6,31 @@ import {
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
+/**
+ * TODO: We currently do not support soring "unique" pages
+ */
 const pageTypes = {
-  grunnleggende: { name: "Grunnleggende", _type: "ds_artikkel" },
-  komponenter: { name: "Komponenter", _type: "komponent_artikkel" },
-  templates: { name: "Mønster og Maler", _type: "templates_artikkel" },
+  grunnleggende: {
+    name: "Grunnleggende",
+    _type: "ds_artikkel",
+    uniquePages: [],
+  },
+  komponenter: {
+    name: "Komponenter",
+    _type: "komponent_artikkel",
+    uniquePages: [
+      {
+        heading: "Ikoner",
+        slug: "komponenter/ikoner",
+        tag: "ready",
+      },
+    ],
+  },
+  templates: {
+    name: "Mønster og Maler",
+    _type: "templates_artikkel",
+    uniquePages: [],
+  },
 } as const;
 
 type DesignsystemSidebarDataT = {
@@ -85,7 +106,11 @@ function generateSidebar(
 
     return {
       label: pageTypes[type].name,
-      links: [...standalonePages, ...groupedPages],
+      links: [
+        ...pageTypes[type].uniquePages,
+        ...standalonePages,
+        ...groupedPages,
+      ],
     };
   });
 }
