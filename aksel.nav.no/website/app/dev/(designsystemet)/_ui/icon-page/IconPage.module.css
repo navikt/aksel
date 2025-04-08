@@ -92,3 +92,9 @@
     outline: none;
   }
 }
+
+.iconPageLinkUl {
+  > * {
+    list-style: none;
+  }
+}

@@ -1,4 +1,6 @@
+import NextLink from "next/link";
 import * as Icons from "@navikt/aksel-icons";
+import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
   BodyLong,
@@ -6,14 +8,17 @@ import {
   HGrid,
   HStack,
   Heading,
+  Link,
   VStack,
 } from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
+import { FigmaIcon } from "@/assets/Icons";
 import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
 import { IconDetails, IntroInformation } from "./IconPage.details";
 import { IconPageForm } from "./IconPage.form";
+import styles from "./IconPage.module.css";
 import { IconPageProvider } from "./IconPage.provider";
 import { IconPageSidebar } from "./IconPage.sidebar";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
@@ -46,6 +51,58 @@ function IconPage({
             {Object.keys(meta).length} open source-ikoner designet og utviklet
             for Nav
           </BodyLong>
+          <HStack
+            gap="space-16"
+            marginBlock="space-16 0"
+            className={styles.iconPageLinkUl}
+          >
+            <li>
+              <NextLink
+                href="https://www.figma.com/community/file/1214869602572392330"
+                passHref
+                legacyBehavior
+              >
+                <Link
+                  variant="subtle"
+                  data-umami-event="navigere"
+                  data-umami-event-kilde="ikonside"
+                >
+                  <FigmaIcon className="ml-1" /> <span className="">Figma</span>
+                </Link>
+              </NextLink>
+            </li>
+
+            <li>
+              <NextLink
+                href="/god-praksis/artikler/tilgjengelig-ikonbruk"
+                passHref
+                legacyBehavior
+              >
+                <Link
+                  variant="subtle"
+                  data-umami-event="navigere"
+                  data-umami-event-kilde="ikonside"
+                >
+                  <BrailleIcon aria-hidden className="text-2xl" />{" "}
+                  <span>Tilgjengelighet</span>
+                </Link>
+              </NextLink>
+            </li>
+            <li>
+              <Link
+                variant="subtle"
+                href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
+                download="Ikonpakke"
+                data-umami-event="last ned"
+                data-umami-event-tema="ikon"
+                data-umami-event-type="zip"
+                data-umami-event-tittel="ikonpakke"
+              >
+                <DownloadIcon className="text-2xl" aria-hidden /> Last ned
+                ikonpakke
+              </Link>
+            </li>
+          </HStack>
         </div>
 
         <div>
