@@ -2,11 +2,16 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Modal } from "@navikt/ds-react";
-import { IconPageDetails } from "./IconPage.details";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
 
-function IconPageSidepanel({ iconName }: { iconName?: string }) {
+function IconPageSidepanel({
+  children,
+  iconName,
+}: {
+  children: React.ReactNode;
+  iconName?: string;
+}) {
   const { activeIconButton, hideModal } = useIconPage();
 
   const searchParams = useSearchParams();
@@ -28,7 +33,7 @@ function IconPageSidepanel({ iconName }: { iconName?: string }) {
           id="icon-page-sidepanel"
           className={styles.iconPageSidepanel}
         >
-          <IconPageDetails iconName={iconName} />
+          {children}
         </section>
       )}
 
@@ -39,7 +44,8 @@ function IconPageSidepanel({ iconName }: { iconName?: string }) {
           onClose={handleClose}
           data-modal={true}
         >
-          <IconPageDetails iconName={iconName} inModal />
+          <div>123</div>
+          {/* <IconPageDetails iconName={iconName} inModal /> */}
         </Modal>
       )}
     </>

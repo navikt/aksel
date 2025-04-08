@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo } from "react";
-import ReactDOMServer from "react-dom/server";
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import {
@@ -15,6 +11,7 @@ import {
 } from "@navikt/ds-react";
 import { CodeBlock } from "@/app/_ui/code-block/CodeBlock";
 import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
+import { IconPageDownloadButton } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage.button";
 import styles from "./IconPage.module.css";
 
 function IconPageDetails({
@@ -36,7 +33,7 @@ function IconPageDetails({
   );
 }
 
-function Details({
+async function Details({
   iconName,
   inModal = false,
 }: {
@@ -44,18 +41,35 @@ function Details({
   inModal?: boolean;
 }) {
   const IconComponent = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
-  const metaData = useMemo(
-    () => (iconName ? meta[iconName] : null),
-    [iconName],
-  );
+  const metaData = iconName ? meta[iconName] : null;
 
   if (!IconComponent) {
     return null;
   }
 
-  const svgString = ReactDOMServer.renderToString(<IconComponent />)
-    .replaceAll("currentColor", "#000")
-    .replaceAll("1em", "24");
+  const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${iconName}.svg`;
+
+  const iconSvg = await fetch(iconUrl)
+    .then((r) => r.text())
+    .catch(() => null);
+
+  const codeTabs: CodeBlockTabsT = [
+    {
+      code: `<${iconName}Icon title="a11y-title" fontSize="1.5rem" />`,
+      lang: "tsx",
+      text: "React",
+      value: "react",
+    },
+  ];
+
+  if (iconSvg) {
+    codeTabs.push({
+      code: iconSvg,
+      lang: "tsx",
+      text: "SVG",
+      value: "svg",
+    });
+  }
 
   const HeaderComponent = inModal ? Modal.Header : "div";
 
@@ -87,17 +101,9 @@ function Details({
           </HStack>
         </HeaderComponent>
         <div className={styles.iconDetailsActions}>
-          <Button
-            as="a"
-            href={URL.createObjectURL(
-              new Blob([svgString], {
-                type: "image/svg+xml",
-              }),
-            )}
-            download={iconName}
-          >
+          <IconPageDownloadButton fileName={`${iconName}.svg`} data={iconSvg}>
             Last ned SVG
-          </Button>
+          </IconPageDownloadButton>
           <CodeBlock
             showLineNumbers={false}
             tabs={[
@@ -112,20 +118,8 @@ function Details({
 
           <CodeBlock
             showLineNumbers={false}
-            tabs={[
-              {
-                code: `<${iconName}Icon />`,
-                lang: "tsx",
-                text: "React",
-                value: "react",
-              },
-              {
-                code: svgString,
-                lang: "tsx",
-                text: "SVG",
-                value: "svg",
-              },
-            ]}
+            tabs={codeTabs}
+            defaultWrap={false}
           />
         </div>
       </VStack>
@@ -197,18 +191,17 @@ function MyComponent () {
 }
 
 function Feedback({ iconName }: { iconName?: string }) {
-  const config = useMemo(() => {
-    if (iconName) {
-      return {
-        title: "Har du innspill til ikonet?",
-        href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`,
-      };
-    }
-    return {
-      title: "Har du innspill til ikonene?",
-      href: "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
+  let config = {
+    title: "Har du innspill til ikonene?",
+    href: "https://github.com/navikt/aksel/issues/new?labels=nytt+✨%2Cikoner+🖼%2Cforespørsel+🥰&template&template=new-icon.yaml&title=%5BNytt+ikon%5D%3A+",
+  };
+
+  if (iconName) {
+    config = {
+      title: "Har du innspill til ikonet?",
+      href: `https://github.com/navikt/aksel/issues/new?labels=forespørsel+🥰&template=update-icon.yml&title=%5BInnspill+til+ikon%5D%3A+${iconName}`,
     };
-  }, [iconName]);
+  }
 
   return (
     <div className={styles.iconFeedback}>

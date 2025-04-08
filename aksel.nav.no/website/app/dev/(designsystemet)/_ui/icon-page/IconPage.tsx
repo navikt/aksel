@@ -1,12 +1,13 @@
 import * as Icons from "@navikt/aksel-icons";
 import { Button, HGrid, HStack, Heading } from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
-import { IconPageSidepanel } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage.sidepanel";
 import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
+import { IconPageDetails } from "./IconPage.details";
 import { IconPageForm } from "./IconPage.form";
 import { IconPageProvider } from "./IconPage.provider";
+import { IconPageSidepanel } from "./IconPage.sidepanel";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
 function IconPage({
@@ -84,7 +85,9 @@ function IconPage({
                 );
               })}
             </section>
-            <IconPageSidepanel iconName={iconName} />
+            <IconPageSidepanel iconName={iconName}>
+              <IconPageDetails iconName={iconName} />
+            </IconPageSidepanel>
           </HGrid>
         </div>
       </DesignsystemetPageLayout>

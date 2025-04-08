@@ -1,3 +1,4 @@
+import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage";
 
 type Props = {
@@ -42,11 +43,19 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <IconPage
-      iconName={iconName}
+      iconName={validIconName(iconName) ? iconName : undefined}
       iconQuery={iconQuery}
       iconToggle={iconToggle}
     />
   );
+}
+
+function validIconName(iconName: string | undefined) {
+  if (!iconName) {
+    return false;
+  }
+
+  return !!meta[iconName];
 }
 
 function getIconStateFromSearchParams(
