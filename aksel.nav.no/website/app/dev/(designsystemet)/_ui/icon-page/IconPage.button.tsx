@@ -44,7 +44,7 @@ function IconPageButton({
         id={iconName}
         className={styles.iconButton}
         data-state={isActive ? "active" : "inactive"}
-        aria-pressed={iconName === icon}
+        aria-pressed={isActive}
         aria-controls={isActive ? "icon-page-sidepanel" : undefined}
       >
         {icon}
