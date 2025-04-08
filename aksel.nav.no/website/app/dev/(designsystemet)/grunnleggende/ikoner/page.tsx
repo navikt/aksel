@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <IconPage
-      iconName={validIconName(iconName) ? iconName : undefined}
+      iconName={iconName}
       iconQuery={iconQuery}
       iconToggle={iconToggle}
     />
@@ -60,7 +60,7 @@ function getIconStateFromSearchParams(
   }
 
   return {
-    iconName,
+    iconName: validIconName(iconName) ? iconName : undefined,
     iconQuery,
     iconToggle: iconToggle as "stroke" | "fill",
   };

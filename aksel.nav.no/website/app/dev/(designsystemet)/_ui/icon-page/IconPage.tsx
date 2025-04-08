@@ -37,70 +37,70 @@ function IconPage({
   );
 
   return (
-    <IconPageProvider>
-      <DesignsystemetPageLayout>
-        <div>
-          <Heading
-            level="1"
-            size="xlarge"
-            className={pagestyles.pageHeaderHeading}
-          >
-            Ikoner
-          </Heading>
-          <BodyLong size="large">
-            {Object.keys(meta).length} open source-ikoner designet og utviklet
-            for Nav
-          </BodyLong>
-          <HStack gap="space-16" marginBlock="space-16 0">
-            <li className={styles.iconPageLinkLi}>
-              <NextLink
-                href="https://www.figma.com/community/file/1214869602572392330"
-                passHref
-                legacyBehavior
-              >
-                <Link
-                  variant="subtle"
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="ikonside"
-                >
-                  <FigmaIcon className="ml-1" /> <span className="">Figma</span>
-                </Link>
-              </NextLink>
-            </li>
-
-            <li className={styles.iconPageLinkLi}>
-              <NextLink
-                href="/god-praksis/artikler/tilgjengelig-ikonbruk"
-                passHref
-                legacyBehavior
-              >
-                <Link
-                  variant="subtle"
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="ikonside"
-                >
-                  <BrailleIcon aria-hidden className="text-2xl" />{" "}
-                  <span>Tilgjengelighet</span>
-                </Link>
-              </NextLink>
-            </li>
-            <li className={styles.iconPageLinkLi}>
+    <DesignsystemetPageLayout>
+      <div>
+        <Heading
+          level="1"
+          size="xlarge"
+          className={pagestyles.pageHeaderHeading}
+        >
+          Ikoner
+        </Heading>
+        <BodyLong size="large">
+          {Object.keys(meta).length} open source-ikoner designet og utviklet for
+          Nav
+        </BodyLong>
+        <HStack gap="space-16" marginBlock="space-16 0">
+          <li className={styles.iconPageLinkLi}>
+            <NextLink
+              href="https://www.figma.com/community/file/1214869602572392330"
+              passHref
+              legacyBehavior
+            >
               <Link
                 variant="subtle"
-                href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
-                download="Ikonpakke"
-                data-umami-event="last ned"
-                data-umami-event-tema="ikon"
-                data-umami-event-type="zip"
-                data-umami-event-tittel="ikonpakke"
+                data-umami-event="navigere"
+                data-umami-event-kilde="ikonside"
               >
-                <DownloadIcon className="text-2xl" aria-hidden /> Last ned
-                ikonpakke
+                <FigmaIcon className="ml-1" /> <span className="">Figma</span>
               </Link>
-            </li>
-          </HStack>
-        </div>
+            </NextLink>
+          </li>
 
+          <li className={styles.iconPageLinkLi}>
+            <NextLink
+              href="/god-praksis/artikler/tilgjengelig-ikonbruk"
+              passHref
+              legacyBehavior
+            >
+              <Link
+                variant="subtle"
+                data-umami-event="navigere"
+                data-umami-event-kilde="ikonside"
+              >
+                <BrailleIcon aria-hidden className="text-2xl" />{" "}
+                <span>Tilgjengelighet</span>
+              </Link>
+            </NextLink>
+          </li>
+          <li className={styles.iconPageLinkLi}>
+            <Link
+              variant="subtle"
+              href="https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip"
+              download="Ikonpakke"
+              data-umami-event="last ned"
+              data-umami-event-tema="ikon"
+              data-umami-event-type="zip"
+              data-umami-event-tittel="ikonpakke"
+            >
+              <DownloadIcon className="text-2xl" aria-hidden /> Last ned
+              ikonpakke
+            </Link>
+          </li>
+        </HStack>
+      </div>
+
+      <IconPageProvider>
         <div>
           <IconPageForm />
           <HGrid
@@ -164,8 +164,8 @@ function IconPage({
             </IconPageSidebar>
           </HGrid>
         </div>
-      </DesignsystemetPageLayout>
-    </IconPageProvider>
+      </IconPageProvider>
+    </DesignsystemetPageLayout>
   );
 }
 
