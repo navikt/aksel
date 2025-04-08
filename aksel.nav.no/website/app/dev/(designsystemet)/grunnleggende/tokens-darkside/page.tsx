@@ -9,7 +9,7 @@ import {
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
-import TokensPage from "../../../../../components/token-docs/tokens-page";
+import TokensPage from "../../../../../components/token-docs/TokensPage";
 import {
   DesignsystemetPageHeader,
   DesignsystemetPageLayout,
