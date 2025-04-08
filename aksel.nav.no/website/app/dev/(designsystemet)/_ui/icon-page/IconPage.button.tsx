@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Button } from "@navikt/ds-react";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
 
@@ -29,7 +28,7 @@ function IconPageButton({
     } else {
       params.set("iconName", iconName);
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
@@ -59,32 +58,4 @@ function IconPageButton({
   );
 }
 
-function IconPageDownloadButton({
-  children,
-  data,
-  fileName,
-}: {
-  children: React.ReactNode;
-  fileName?: string;
-  data?: string | null;
-}) {
-  if (!data) {
-    return null;
-  }
-
-  return (
-    <Button
-      as="a"
-      href={URL.createObjectURL(
-        new Blob([data], {
-          type: "image/svg+xml",
-        }),
-      )}
-      download={fileName}
-    >
-      {children}
-    </Button>
-  );
-}
-
-export { IconPageButton, IconPageDownloadButton };
+export { IconPageButton };

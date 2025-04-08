@@ -3,12 +3,22 @@
   display: grid;
   place-content: center;
   background-color: var(--ax-bg-neutral-soft);
+  border: 1px solid var(--ax-border-neutral-subtleA);
   color: var(--ax-text-neutral);
   border-radius: var(--ax-border-radius-large);
 
+  &:hover {
+    background-color: var(--ax-bg-neutral-moderate-hover);
+  }
+
   &[data-state="active"] {
-    background: var(--ax-bg-neutral-strong);
-    color: var(--ax-text-neutral-contrast);
+    background: var(--ax-bg-accent-strong-pressed);
+    color: var(--ax-text-accent-contrast);
+    border-color: transparent;
+
+    &:hover {
+      background: var(--ax-bg-accent-strong-hover);
+    }
   }
 
   &:focus-visible {
@@ -60,7 +70,7 @@
   }
 }
 
-.iconPageSidepanel {
+.iconPageSidebar {
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   top: calc(var(--website-header-height-width-border) + var(--ax-space-24));
   position: sticky;

@@ -1,13 +1,21 @@
 import * as Icons from "@navikt/aksel-icons";
-import { Button, HGrid, HStack, Heading } from "@navikt/ds-react";
+import meta from "@navikt/aksel-icons/metadata";
+import {
+  BodyLong,
+  Button,
+  HGrid,
+  HStack,
+  Heading,
+  VStack,
+} from "@navikt/ds-react";
 import { EmptyStateCard } from "@/app/_ui/empty-state/EmptyState";
 import pagestyles from "../Designsystemet.module.css";
 import { DesignsystemetPageLayout } from "../DesignsystemetPage";
 import { IconPageButton } from "./IconPage.button";
-import { IconPageDetails } from "./IconPage.details";
+import { IconDetails, IntroInformation } from "./IconPage.details";
 import { IconPageForm } from "./IconPage.form";
 import { IconPageProvider } from "./IconPage.provider";
-import { IconPageSidepanel } from "./IconPage.sidepanel";
+import { IconPageSidebar } from "./IconPage.sidebar";
 import { categorizeIcons, searchIcons } from "./IconPage.utils";
 
 function IconPage({
@@ -34,6 +42,10 @@ function IconPage({
           >
             Ikoner
           </Heading>
+          <BodyLong size="large">
+            {Object.keys(meta).length} open source-ikoner designet og utviklet
+            for Nav
+          </BodyLong>
         </div>
 
         <div>
@@ -43,7 +55,7 @@ function IconPage({
             gap="space-40"
             marginBlock="space-24 0"
           >
-            <section aria-label="Ikonliste" className="flex flex-col gap-10">
+            <VStack as="section" aria-label="Ikonliste" gap="space-40">
               {iconsWithCategories.length === 0 && (
                 <EmptyStateCard
                   variant="questionmark"
@@ -61,7 +73,12 @@ function IconPage({
               {iconsWithCategories.map((section) => {
                 return (
                   <div key={section.category}>
-                    <Heading level="2" size="large" spacing>
+                    <Heading
+                      level="2"
+                      size="large"
+                      spacing
+                      className={pagestyles.pageHeaderHeading}
+                    >
                       {section.category}
                     </Heading>
 
@@ -84,10 +101,14 @@ function IconPage({
                   </div>
                 );
               })}
-            </section>
-            <IconPageSidepanel iconName={iconName}>
-              <IconPageDetails iconName={iconName} />
-            </IconPageSidepanel>
+            </VStack>
+            <IconPageSidebar iconName={iconName}>
+              {iconName ? (
+                <IconDetails iconName={iconName} />
+              ) : (
+                <IntroInformation />
+              )}
+            </IconPageSidebar>
           </HGrid>
         </div>
       </DesignsystemetPageLayout>

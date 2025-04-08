@@ -5,7 +5,7 @@ import { Modal } from "@navikt/ds-react";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
 
-function IconPageSidepanel({
+function IconPageSidebar({
   children,
   iconName,
 }: {
@@ -31,7 +31,7 @@ function IconPageSidepanel({
         <section
           aria-label={iconName ? `Ikon ${iconName}` : "Kom i gang med ikoner"}
           id="icon-page-sidepanel"
-          className={styles.iconPageSidepanel}
+          className={styles.iconPageSidebar}
         >
           {children}
         </section>
@@ -44,12 +44,11 @@ function IconPageSidepanel({
           onClose={handleClose}
           data-modal={true}
         >
-          <div>123</div>
-          {/* <IconPageDetails iconName={iconName} inModal /> */}
+          {children}
         </Modal>
       )}
     </>
   );
 }
 
-export { IconPageSidepanel };
+export { IconPageSidebar };
