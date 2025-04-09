@@ -1,25 +1,38 @@
-import { Dispatch } from "react";
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 import { Search } from "@navikt/ds-react";
 
-const SearchField = ({
-  onSearch,
-}: {
-  onSearch: Dispatch<
-    React.SetStateAction<{ query: string; tokenType: "css" | "js" }>
-  >;
-}) => {
+const SearchField = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (query: string) => {
+      const params = new URLSearchParams(searchParams?.toString());
+      params.set("query", query);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
   return (
     <form
       role="search"
-      onSubmit={(event) => {
+      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        onSearch({
-          query: (event.target[0] as HTMLInputElement).value,
-          tokenType: "css",
-        });
+        event.stopPropagation();
       }}
     >
-      <Search label="Søk etter token" hideLabel />
+      <Search
+        label="Søk etter token"
+        onChange={(value: string) => {
+          router.push(pathname + "?" + createQueryString(value));
+        }}
+        hideLabel
+      />
     </form>
   );
 };

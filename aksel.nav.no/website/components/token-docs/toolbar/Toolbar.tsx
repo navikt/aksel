@@ -1,19 +1,12 @@
-import { Dispatch } from "react";
 import { MoonIcon, SunIcon } from "@navikt/aksel-icons";
 import { HStack, Select, ToggleGroup } from "@navikt/ds-react";
 import SearchField from "./SearchField";
 
-const Toolbar = ({
-  onSearch,
-}: {
-  onSearch: Dispatch<
-    React.SetStateAction<{ query: string; tokenType: "css" | "js" }>
-  >;
-}) => {
+const Toolbar = () => {
   return (
     <HStack as="nav" align="center" justify="space-between" marginBlock="0 4">
       <div style={{ width: "19rem" }}>
-        <SearchField onSearch={onSearch} />
+        <SearchField />
       </div>
       <HStack gap="2" width="">
         <Select label="Velg bostedsland" hideLabel style={{ width: "9rem" }}>
