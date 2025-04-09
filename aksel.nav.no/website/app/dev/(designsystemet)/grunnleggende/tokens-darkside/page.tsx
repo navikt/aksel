@@ -8,7 +8,7 @@ import {
   METADATA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import TokenTableOfContents from "../../../../../components/token-docs/TokenTableOfContents";
 import TokensPage from "../../../../../components/token-docs/TokensPage";
 import {
   DesignsystemetPageHeader,
@@ -56,40 +56,6 @@ const Page = async () => {
     query: GRUNNLEGGENDE_BY_SLUG_QUERY,
     params: { slug: parsedSlug },
   });
-  const toc = [
-    {
-      id: "backgroundColor",
-      title: "Background colors",
-    },
-    {
-      id: "borderColor",
-      title: "Border colors",
-    },
-    {
-      id: "textColor",
-      title: "Text colors",
-    },
-    {
-      id: "shadow",
-      title: "Shadows",
-    },
-    {
-      id: "space",
-      title: "Space",
-    },
-    {
-      id: "radius",
-      title: "Radius",
-    },
-    {
-      id: "font",
-      title: "Font",
-    },
-    {
-      id: "breakpoint",
-      title: "Breakpoint",
-    },
-  ];
 
   return (
     <DesignsystemetPageLayout layout="with-toc">
@@ -97,13 +63,7 @@ const Page = async () => {
         <DesignsystemetPageHeader data={page} />
         <TokensPage />
       </VStack>
-      <TableOfContents
-        feedback={{
-          name: "Tokens darkside",
-          text: "Send innspill",
-        }}
-        toc={toc}
-      />
+      <TokenTableOfContents />
     </DesignsystemetPageLayout>
   );
 };
