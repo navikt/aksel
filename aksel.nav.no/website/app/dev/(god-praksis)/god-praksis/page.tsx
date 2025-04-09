@@ -90,32 +90,39 @@ export default async function Page() {
                           imageSrc={url}
                           title={tema.title ?? ""}
                         /> */}
-                        <LinkCard>
-                          <HStack align="center" gap="space-12">
-                            <LinkCardIcon hasBackground={false}>
-                              {url ? (
-                                <NextImage
-                                  src={url}
-                                  decoding="sync"
-                                  width={32}
-                                  height={32}
-                                  aria-hidden
-                                  priority
-                                  alt={`${tema.title} pictogram`}
-                                />
-                              ) : (
-                                <FallbackImage />
-                              )}
-                            </LinkCardIcon>
-                            <LinkCardHeading as="h2">
-                              <LinkCardAnchor
-                                href={`/god-praksis/${tema.slug}`}
-                              >
-                                {tema.title ?? ""}
-                              </LinkCardAnchor>
-                            </LinkCardHeading>
-                          </HStack>
-                        </LinkCard>
+                        <Box
+                          asChild
+                          paddingInline="space-12 space-24"
+                          paddingBlock="space-8"
+                          borderRadius="large"
+                        >
+                          <LinkCard>
+                            <HStack align="center" gap="space-12">
+                              <LinkCardIcon hasBackground={false}>
+                                {url ? (
+                                  <NextImage
+                                    src={url}
+                                    decoding="sync"
+                                    width={32}
+                                    height={32}
+                                    aria-hidden
+                                    priority
+                                    alt={`${tema.title} pictogram`}
+                                  />
+                                ) : (
+                                  <FallbackImage />
+                                )}
+                              </LinkCardIcon>
+                              <LinkCardHeading as="h2">
+                                <LinkCardAnchor
+                                  href={`/god-praksis/${tema.slug}`}
+                                >
+                                  {tema.title ?? ""}
+                                </LinkCardAnchor>
+                              </LinkCardHeading>
+                            </HStack>
+                          </LinkCard>
+                        </Box>
                       </li>
                     );
                   })}

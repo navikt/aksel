@@ -33,12 +33,14 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
       ctaText,
       isFullWidth = false,
       hasBorder = true,
+      ...restProps
     }: LinkCardProps,
     forwardedRef,
   ) => {
     return (
       <div
         ref={forwardedRef}
+        {...restProps}
         className={cn("navds-link-card", className, {
           /* TODO: Use data-attrb? */
           "navds-link-card--full-width": isFullWidth,

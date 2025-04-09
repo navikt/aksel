@@ -1,21 +1,15 @@
 /* stylelint-disable aksel/no-class-override */
 
 .navds-link-card {
-  --__axc-link-card-padding: var(--ax-space-20);
-
   height: fit-content;
-  border-radius: var(--ax-border-radius-xlarge);
-
-  /* test */
   text-decoration: none;
   color: var(--ax-text-neutral);
   transition-property: border-color, transform, background-color;
   transition-duration: 600ms;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  padding: var(--__axc-link-card-padding);
-  display: grid;
-  flex: auto;
   position: relative;
+
+  /* border-radius: var(--ax-border-radius-xlarge); */
 
   /* TODO: This might need to be a prop */
   max-width: 28rem;
@@ -147,10 +141,10 @@
   border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
 }
 
-.navds-link-card__image-container--inset {
+/* .navds-link-card__image-container--inset {
   margin-inline: calc(var(--__axc-link-card-padding) * -1);
   margin-block-start: calc(var(--__axc-link-card-padding) * -1);
-}
+} */
 
 .navds-link-card__image {
   object-fit: cover;
