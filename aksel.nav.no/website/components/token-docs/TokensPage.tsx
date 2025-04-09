@@ -3,19 +3,14 @@
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { VStack } from "@navikt/ds-react";
-import { TokenForDocumentationT } from "../types/tokens";
 import TokenCategory from "./TokenCategory";
 import { TOKEN_CATEGORIES } from "./config";
+import { searchTokens } from "./toolbar/SearchField.utils";
 import Toolbar from "./toolbar/Toolbar";
 
-const TokensPage = ({ tokens }: { tokens: TokenForDocumentationT[] }) => {
+const TokensPage = () => {
   const searchParams = useSearchParams();
-  const query = searchParams?.get("query");
-  const filteredTokens = tokens.filter((token) => {
-    const stringifiedToken = JSON.stringify(token);
-    const searchQuery = query?.toLowerCase();
-    return !searchQuery || stringifiedToken.includes(searchQuery);
-  });
+  const filteredTokens = searchTokens(searchParams?.get("tokenQuery") || "");
 
   const filteredCategories = Object.entries(TOKEN_CATEGORIES).filter(
     ([category]) => filteredTokens.some((token) => token.category === category),

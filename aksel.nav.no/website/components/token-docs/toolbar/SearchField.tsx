@@ -1,36 +1,35 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 import { Search } from "@navikt/ds-react";
 
 const SearchField = () => {
-  const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  const createQueryString = useCallback(
-    (query: string) => {
-      const params = new URLSearchParams(searchParams?.toString());
-      params.set("query", query);
-      return params.toString();
-    },
-    [searchParams],
-  );
-
+  const handleSearch = (query: string) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    if (query) {
+      params.set("tokenQuery", query);
+    } else {
+      params.delete("tokenQuery");
+    }
+    replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
+  };
   return (
     <form
       role="search"
-      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+      onSubmit={(event) => {
         event.preventDefault();
         event.stopPropagation();
+        return false;
       }}
     >
       <Search
         label="Søk etter token"
-        onChange={(value: string) => {
-          router.push(pathname + "?" + createQueryString(value));
-        }}
+        defaultValue={searchParams?.get("tokenQuery") || ""}
+        onChange={handleSearch}
         hideLabel
       />
     </form>
