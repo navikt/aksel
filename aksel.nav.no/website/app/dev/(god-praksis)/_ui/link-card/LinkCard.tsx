@@ -8,7 +8,7 @@ import React, {
   ImgHTMLAttributes,
   forwardRef,
 } from "react";
-import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
+import { BodyLong, Detail, Heading, HeadingProps } from "@navikt/ds-react";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
 interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -40,6 +40,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
     return (
       <div
         ref={forwardedRef}
+        data-color-role="neutral"
         {...restProps}
         className={cn("navds-link-card", className, {
           /* TODO: Use data-attrb? */
@@ -61,26 +62,30 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
 );
 
 /* ---------------------------- LinkCard Heading ---------------------------- */
-interface LinkCardHeadingProps extends HTMLAttributes<HTMLHeadingElement> {
+type LinkCardHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   children: React.ReactNode;
   /**
    * Heading tag
    * @default "h3"
    */
   as: "h2" | "h3" | "h4" | "h5" | "h6";
-}
+  /**
+   *
+   */
+  size?: HeadingProps["size"];
+};
 
 const LinkCardHeading = forwardRef<HTMLHeadingElement, LinkCardHeadingProps>(
-  ({ children, as }: LinkCardHeadingProps, forwardedRef) => {
+  ({ children, as, size = "small" }: LinkCardHeadingProps, forwardedRef) => {
     return (
-      <BodyShort
+      <Heading
         as={as}
-        size="large"
+        size={size}
         ref={forwardedRef}
         className={cn("navds-link-card__heading")}
       >
         {children}
-      </BodyShort>
+      </Heading>
     );
   },
 );
@@ -245,9 +250,9 @@ function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
 
 export {
   LinkCard,
-  LinkCardHeading,
-  LinkCardImage,
   LinkCardAnchor,
   LinkCardDescription,
+  LinkCardHeading,
   LinkCardIcon,
+  LinkCardImage,
 };

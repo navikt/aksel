@@ -25,12 +25,12 @@
 }
 
 .navds-link-card--border {
-  border: 1px solid var(--ax-border-neutral-subtle);
+  border: 1px solid var(--ax-border-subtle);
   background-color: var(--ax-bg-raised);
 
   &:hover {
-    background-color: var(--ax-bg-neutral-soft);
-    border: 1px solid var(--ax-border-neutral);
+    background-color: var(--ax-bg-soft);
+    border: 1px solid var(--ax-border-default);
   }
 }
 

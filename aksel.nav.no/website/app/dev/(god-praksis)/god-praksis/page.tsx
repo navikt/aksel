@@ -2,9 +2,9 @@ import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
 import { BodyLong, Box, HStack, Stack } from "@navikt/ds-react";
-import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 
 /* @ts-expect-error Workspace cant resolve valid import */
+import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
 import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
 import { urlForImage } from "@/app/_sanity/utils";
@@ -73,7 +73,7 @@ export default async function Page() {
             </BodyLong>
             <nav aria-label="Temavelger">
               <Stack
-                gap={{ xs: "4", md: "6" }}
+                gap="space-24"
                 wrap
                 direction={{ xs: "column", md: "row" }}
                 as="ul"
@@ -85,29 +85,26 @@ export default async function Page() {
 
                     return (
                       <li key={tema.slug}>
-                        {/* <GodPraksisTemaCard
-                          href={`/god-praksis/${tema.slug}`}
-                          imageSrc={url}
-                          title={tema.title ?? ""}
-                        /> */}
                         <Box
                           asChild
                           paddingInline="space-12 space-24"
                           paddingBlock="space-8"
                           borderRadius="large"
                         >
-                          <LinkCard>
+                          <LinkCard data-color-role="brand-blue">
                             <HStack align="center" gap="space-12">
                               <LinkCardIcon hasBackground={false}>
                                 {url ? (
                                   <NextImage
                                     src={url}
                                     decoding="sync"
-                                    width={32}
-                                    height={32}
+                                    width={48}
+                                    height={48}
                                     aria-hidden
                                     priority
                                     alt={`${tema.title} pictogram`}
+                                    /* TODO: Temp hack, remove after update */
+                                    style={{ filter: "hue-rotate(50deg)" }}
                                   />
                                 ) : (
                                   <FallbackImage />
@@ -139,6 +136,8 @@ function FallbackImage() {
   return (
     <svg
       aria-hidden
+      width={48}
+      height={48}
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
