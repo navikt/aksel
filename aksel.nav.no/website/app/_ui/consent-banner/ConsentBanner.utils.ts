@@ -30,11 +30,11 @@ const stateToSanityKey = {
   rejected: "decline",
 } as const;
 
-async function acceptCookies(): Promise<void> {
+async function acceptCookiesAction(): Promise<void> {
   await updateCookieConsent("accepted");
 }
 
-async function rejectCookies(): Promise<void> {
+async function rejectCookiesAction(): Promise<void> {
   await updateCookieConsent("rejected");
 }
 
@@ -113,4 +113,9 @@ function validateConsentState(state: string): state is CONSENT_TRACKER_STATE {
   return ["accepted", "rejected", "undecided", "no_action"].includes(state);
 }
 
-export { getCookieConsent, showConsentBanner, acceptCookies, rejectCookies };
+export {
+  getCookieConsent,
+  showConsentBanner,
+  acceptCookiesAction,
+  rejectCookiesAction,
+};

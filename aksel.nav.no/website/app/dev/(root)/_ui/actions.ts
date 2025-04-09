@@ -1,15 +1,15 @@
 "use server";
 
 import {
-  acceptCookies,
-  rejectCookies,
+  acceptCookiesAction,
+  rejectCookiesAction,
 } from "@/app/_ui/consent-banner/ConsentBanner.utils";
 
 async function submitForm(formData: FormData) {
   if (formData.get("acceptedTracking") === "tracking_yes") {
-    await acceptCookies();
+    await acceptCookiesAction();
   } else if (formData.get("acceptedTracking") === "tracking_no") {
-    await rejectCookies();
+    await rejectCookiesAction();
   }
 }
 

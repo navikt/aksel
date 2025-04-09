@@ -5,7 +5,10 @@ import { useTransition } from "react";
 import { BodyLong, Box, Button, Heading, Link, Stack } from "@navikt/ds-react";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import styles from "./ConsentBanner.module.css";
-import { acceptCookies, rejectCookies } from "./ConsentBanner.utils";
+import {
+  acceptCookiesAction,
+  rejectCookiesAction,
+} from "./ConsentBanner.utils";
 
 function ConsentBannerView() {
   const [isPending, startTransition] = useTransition();
@@ -74,7 +77,7 @@ function ConsentBannerView() {
               variant="secondary-neutral"
               onClick={() => {
                 startTransition(() => {
-                  rejectCookies();
+                  rejectCookiesAction();
                 });
               }}
             >
@@ -85,7 +88,7 @@ function ConsentBannerView() {
               variant="secondary-neutral"
               onClick={() => {
                 startTransition(() => {
-                  acceptCookies();
+                  acceptCookiesAction();
                 });
               }}
             >
