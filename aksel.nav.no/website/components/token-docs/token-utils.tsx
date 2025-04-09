@@ -1,4 +1,6 @@
-const sortTokens = (a, b) => {
+import { TokenForDocumentationT } from "../types/tokens";
+
+const sortTokens = (a: TokenForDocumentationT, b: TokenForDocumentationT) => {
   switch (a.category) {
     case "backgroundColor":
     case "borderColor":

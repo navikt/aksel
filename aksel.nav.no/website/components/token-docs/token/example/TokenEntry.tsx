@@ -1,8 +1,15 @@
 import { Box, CopyButton, Detail, HGrid, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+import { TokenForDocumentationT } from "../../../types/tokens";
 import TokenPreview from "./TokenPreview";
 
-const TokenEntry = ({ index, token }: { index: number; token: any }) => {
+const TokenEntry = ({
+  index,
+  token,
+}: {
+  index: number;
+  token: TokenForDocumentationT;
+}) => {
   const tokenText = `--ax-${token.name}`;
   return (
     <Box.New

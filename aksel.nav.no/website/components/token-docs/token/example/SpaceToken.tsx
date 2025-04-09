@@ -1,7 +1,8 @@
 import { SpaceHorizontalIcon } from "@navikt/aksel-icons";
 import { VStack } from "@navikt/ds-react";
+import { TokenForDocumentationT } from "../../../types/tokens";
 
-const SpaceToken = ({ token }: { token: (typeof tokenDocs)[number] }) => (
+const SpaceToken = ({ token }: { token: TokenForDocumentationT }) => (
   <VStack as="div" align="center" justify="center" height="100%">
     <SpaceHorizontalIcon
       title={token.name}

@@ -1,4 +1,5 @@
 import { Box, VStack } from "@navikt/ds-react";
+import { TokenForDocumentationT } from "../../../types/tokens";
 import BreakpointToken from "./BreakpointToken";
 import ColorToken from "./ColorToken";
 import FontToken from "./FontToken";
@@ -6,7 +7,7 @@ import RadiusToken from "./RadiusToken";
 import ShadowToken from "./ShadowToken";
 import SpaceToken from "./SpaceToken";
 
-const TokenExample = ({ token }: { token: any }) => {
+const TokenExample = ({ token }: { token: TokenForDocumentationT }) => {
   switch (token.category) {
     case "backgroundColor":
     case "borderColor":
@@ -40,7 +41,7 @@ const TokenExample = ({ token }: { token: any }) => {
   }
 };
 
-const TokenPreview = ({ token }: { token: any }) => (
+const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
   <Box.New
     background={
       token.category === "textColor" && token.modifier === "contrast"

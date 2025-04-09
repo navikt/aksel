@@ -5,8 +5,9 @@ import {
   MonitorIcon,
   TabletIcon,
 } from "@navikt/aksel-icons";
+import { TokenForDocumentationT } from "../../../types/tokens";
 
-const BreakpointToken = ({ token }: { token: (typeof tokenDocs)[number] }) => {
+const BreakpointToken = ({ token }: { token: TokenForDocumentationT }) => {
   switch (token.modifier.split("-")[0]) {
     case "xs":
       return <MobileSmallIcon width="32px" height="32px" title={token.name} />;

@@ -122,7 +122,6 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
           type: token.type,
           rawType: token.attributes?.type,
           group: token.group,
-          all: token,
           category: formatCategory(token),
           role:
             token.group?.indexOf(".") >= 0

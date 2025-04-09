@@ -1,6 +1,7 @@
 import React from "react";
 import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
+import { TokenForDocumentationT } from "../types/tokens";
 import TokenRolesChips from "./TokenRolesChips";
 import { BreakpointRolesT, ColorRolesT, FontRolesT } from "./config";
 import { sortTokens } from "./token-utils";
@@ -16,8 +17,8 @@ const TokenCategory = ({
   id: string;
   title: string;
   description: string;
-  roles?: ColorRolesT | FontRolesT | BreakpointRolesT;
-  tokens: (typeof tokenDocs)[number][];
+  roles?: ColorRolesT | FontRolesT | BreakpointRolesT; // TODO: Check these roles
+  tokens: TokenForDocumentationT[];
 }) => {
   const sortedTokens = tokens.sort(sortTokens);
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);

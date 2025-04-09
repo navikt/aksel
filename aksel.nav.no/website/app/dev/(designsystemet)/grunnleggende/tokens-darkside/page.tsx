@@ -2,6 +2,7 @@ import { Metadata, ResolvingMetadata } from "next/types";
 import React from "react";
 import { Image } from "sanity";
 import { VStack } from "@navikt/ds-react";
+import { tokens } from "@navikt/ds-tokens/token_docs";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GRUNNLEGGENDE_BY_SLUG_QUERY,
@@ -95,7 +96,7 @@ const Page = async () => {
     <DesignsystemetPageLayout layout="with-toc">
       <VStack gap="10">
         <DesignsystemetPageHeader data={page} />
-        <TokensPage />
+        <TokensPage tokens={tokens} />
       </VStack>
       <TableOfContents
         feedback={{

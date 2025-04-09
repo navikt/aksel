@@ -1,7 +1,8 @@
 import { PaletteIcon } from "@navikt/aksel-icons";
 import { Box, Heading, VStack } from "@navikt/ds-react";
+import { TokenForDocumentationT } from "../../../types/tokens";
 
-const ColorToken = ({ token }: { token: any }) => {
+const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
   switch (token.category) {
     case "backgroundColor":
       return (

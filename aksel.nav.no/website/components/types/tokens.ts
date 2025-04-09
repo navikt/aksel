@@ -2,12 +2,13 @@ export type TokenForDocumentationT = {
   name: string;
   value: string;
   rawValue: string;
+  comment: string;
   type: string;
-  category: string;
+  rawType: string;
   group?: string;
-  modifier?: string;
+  category: string;
   role?: string;
-  description?: string;
+  modifier: string;
   attributes?: {
     [key: string]: any;
   };
