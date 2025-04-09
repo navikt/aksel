@@ -1,7 +1,6 @@
 /* stylelint-disable aksel/no-class-override */
 
 .navds-link-card {
-  height: fit-content;
   text-decoration: none;
   color: var(--ax-text-neutral);
   transition-property: border-color, transform, background-color;
@@ -15,7 +14,7 @@
   max-width: 28rem;
 
   &:hover {
-    transform: scale3d(1.025, 1.025, 1);
+    transform: scale3d(1.015, 1.015, 1);
   }
 
   &:focus-within {
@@ -114,10 +113,10 @@
   transform: translateX(0);
   width: 1rem;
   height: 1rem;
-  margin-left: var(--ax-space-4);
   grid-area: arrow;
 
-  .navds-link-card:hover & {
+  .navds-link-card:hover &,
+  [data-link-card-anchor]:hover & {
     transform: translateX(4px);
   }
 }
@@ -127,7 +126,8 @@
   stroke-dashoffset: 10;
   transition: stroke-dashoffset 200ms;
 
-  .navds-link-card:hover & {
+  .navds-link-card:hover &,
+  [data-link-card-anchor]:hover & {
     stroke-dashoffset: 20;
   }
 }

@@ -1,7 +1,19 @@
 import NextImage from "next/image";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { BodyLong, Box, HStack, Stack } from "@navikt/ds-react";
+import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
+import {
+  BodyLong,
+  Box,
+  HGrid,
+  HStack,
+  Heading,
+  Link,
+  Stack,
+  Tag,
+  VStack,
+} from "@navikt/ds-react";
 
 /* @ts-expect-error Workspace cant resolve valid import */
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
@@ -14,6 +26,7 @@ import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
   LinkCard,
   LinkCardAnchor,
+  LinkCardArrow,
   LinkCardHeading,
   LinkCardIcon,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
@@ -60,6 +73,8 @@ export default async function Page() {
     notFound();
   }
 
+  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
+
   return (
     <AkselPage footer={<Footer />} footerPosition="belowFold">
       <Header />
@@ -78,57 +93,169 @@ export default async function Page() {
                 direction={{ xs: "column", md: "row" }}
                 as="ul"
               >
-                {temaList
-                  .filter((x) => x.articles.length > 0)
-                  .map((tema) => {
-                    const url = urlForImage(tema.pictogram as Image)?.url();
+                {filteredTemaList.map((tema) => {
+                  const url = urlForImage(tema.pictogram as Image)?.url();
 
-                    return (
-                      <li key={tema.slug}>
-                        <Box
-                          asChild
-                          paddingInline="space-12 space-24"
-                          paddingBlock="space-8"
-                          borderRadius="large"
-                        >
-                          <LinkCard data-color-role="brand-blue">
-                            <HStack align="center" gap="space-12">
-                              <LinkCardIcon hasBackground={false}>
-                                {url ? (
-                                  <NextImage
-                                    src={url}
-                                    decoding="sync"
-                                    width={48}
-                                    height={48}
-                                    aria-hidden
-                                    priority
-                                    alt={`${tema.title} pictogram`}
-                                    /* TODO: Temp hack, remove after update */
-                                    style={{ filter: "hue-rotate(50deg)" }}
-                                  />
-                                ) : (
-                                  <FallbackImage />
-                                )}
-                              </LinkCardIcon>
-                              <LinkCardHeading as="h2">
-                                <LinkCardAnchor
-                                  href={`/god-praksis/${tema.slug}`}
-                                >
-                                  {tema.title ?? ""}
-                                </LinkCardAnchor>
-                              </LinkCardHeading>
-                            </HStack>
-                          </LinkCard>
-                        </Box>
-                      </li>
-                    );
-                  })}
+                  return (
+                    <li key={tema.slug}>
+                      <Box
+                        asChild
+                        paddingInline="space-12 space-24"
+                        paddingBlock="space-8"
+                        borderRadius="large"
+                      >
+                        <LinkCard data-color-role="brand-blue" isFullWidth>
+                          <HStack align="center" gap="space-12">
+                            <LinkCardIcon hasBackground={false}>
+                              {url ? (
+                                <NextImage
+                                  src={url}
+                                  decoding="sync"
+                                  width={48}
+                                  height={48}
+                                  aria-hidden
+                                  priority
+                                  alt={`${tema.title} pictogram`}
+                                  /* TODO: Temp hack, remove after update */
+                                  style={{ filter: "hue-rotate(50deg)" }}
+                                />
+                              ) : (
+                                <FallbackImage />
+                              )}
+                            </LinkCardIcon>
+                            <LinkCardHeading as="h2">
+                              <LinkCardAnchor
+                                href={`/god-praksis/${tema.slug}`}
+                              >
+                                {tema.title ?? ""}
+                              </LinkCardAnchor>
+                            </LinkCardHeading>
+                          </HStack>
+                        </LinkCard>
+                      </Box>
+                    </li>
+                  );
+                })}
               </Stack>
             </nav>
           </GodPraksisIntroHero>
+
+          <VStack
+            gap="space-48"
+            paddingInline={{ xs: "space-16", lg: "space-40" }}
+            paddingBlock="space-48"
+          >
+            {filteredTemaList.map((tema) => {
+              return (
+                <section key={tema.slug} aria-label={`Tema ${tema.title}`}>
+                  <VStack gap="space-8" marginBlock="0 space-24">
+                    <Heading level="2" size="medium">
+                      {tema.title}
+                    </Heading>
+                    {tema.description && (
+                      <BodyLong>{tema.description}</BodyLong>
+                    )}
+                  </VStack>
+                  <HGrid
+                    as="ul"
+                    columns={{ xs: 1, md: 2 }}
+                    gap={{ xs: "space-12", md: "space-24" }}
+                    marginBlock="0 space-24"
+                  >
+                    {tema.articles.map((article) => {
+                      const undertema = article.undertema?.find(
+                        (ut) => ut?.temaTitle === tema.title,
+                      )?.title;
+                      const innholdstype = article.innholdstype;
+
+                      return (
+                        <li key={article.slug}>
+                          <Box
+                            asChild
+                            paddingInline="space-20"
+                            paddingBlock="space-16"
+                            borderRadius="large"
+                            height="100%"
+                          >
+                            <VStack justify="space-between" asChild>
+                              <LinkCard isFullWidth>
+                                <LinkCardHeading as="h2">
+                                  <LinkCardAnchor href={article.slug ?? ""}>
+                                    {article.heading}
+                                  </LinkCardAnchor>
+                                </LinkCardHeading>
+                                <HStack
+                                  align="center"
+                                  justify="space-between"
+                                  gap="space-8"
+                                  marginBlock="space-16 0"
+                                  wrap={false}
+                                >
+                                  <HStack gap="space-12">
+                                    <GodPraksisTaxonomyTag type="undertema">
+                                      {undertema}
+                                    </GodPraksisTaxonomyTag>
+                                    <GodPraksisTaxonomyTag type="innholdstype">
+                                      {innholdstype}
+                                    </GodPraksisTaxonomyTag>
+                                  </HStack>
+                                  <LinkCardArrow />
+                                </HStack>
+                              </LinkCard>
+                            </VStack>
+                          </Box>
+                        </li>
+                      );
+                    })}
+                  </HGrid>
+                  <h3>
+                    <Link
+                      href={`/god-praksis/${tema.slug}`}
+                      as={NextLink}
+                      data-umami-event="navigere"
+                      data-umami-event-kilde="god praksis forside"
+                      data-link-card-anchor
+                      data-color-role="brand-blue"
+                    >
+                      {`Alt fra ${tema.title} `}
+                      <LinkCardArrow />
+                    </Link>
+                  </h3>
+                </section>
+              );
+            })}
+          </VStack>
         </PageBlock>
       </Box>
     </AkselPage>
+  );
+}
+
+function GodPraksisTaxonomyTag({
+  children,
+  type,
+}: {
+  children: React.ReactNode;
+  type: "innholdstype" | "undertema";
+}) {
+  if (!children) {
+    return null;
+  }
+
+  return (
+    <Tag
+      variant={type === "undertema" ? "alt3-moderate" : "alt1-moderate"}
+      size="xsmall"
+      icon={
+        type === "undertema" ? (
+          <TagFillIcon aria-hidden />
+        ) : (
+          <FileFillIcon aria-hidden />
+        )
+      }
+    >
+      {children}
+    </Tag>
   );
 }
 

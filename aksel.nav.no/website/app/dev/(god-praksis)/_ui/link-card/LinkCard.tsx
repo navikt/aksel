@@ -255,4 +255,5 @@ export {
   LinkCardHeading,
   LinkCardIcon,
   LinkCardImage,
+  LinkCardArrow,
 };
