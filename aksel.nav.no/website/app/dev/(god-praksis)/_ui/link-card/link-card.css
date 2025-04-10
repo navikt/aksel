@@ -14,7 +14,7 @@
   max-width: 28rem;
 
   &:hover {
-    transform: scale3d(1.015, 1.015, 1);
+    transform: scale3d(1.015, 1.015, 1) translateZ(0);
   }
 
   &:focus-within {
@@ -28,8 +28,14 @@
   background-color: var(--ax-bg-raised);
 
   &:hover {
-    background-color: var(--ax-bg-soft);
+    /* background-color: var(--ax-bg-soft); */
     border: 1px solid var(--ax-border-default);
+  }
+
+  &[data-active="true"] {
+    background-color: var(--ax-bg-strong-pressed);
+    border-color: transparent;
+    color: var(--ax-text-contrast);
   }
 }
 
