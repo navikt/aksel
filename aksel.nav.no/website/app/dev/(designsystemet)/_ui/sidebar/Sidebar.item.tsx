@@ -28,7 +28,8 @@ function DesignsystemSidebarItem(props: {
       className={styles.navListItem}
     >
       <Link
-        href={`/${page.slug}`}
+        /* TODO: Temp use /dev routing for testing */
+        href={`/dev/${page.slug}`}
         className={cl(styles.navListItemLink, {
           [styles.navListNotch]: active,
         })}

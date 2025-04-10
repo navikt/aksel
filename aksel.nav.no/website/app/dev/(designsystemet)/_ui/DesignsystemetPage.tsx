@@ -51,7 +51,7 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
   const isComponentPage = data?._type === "komponent_artikkel";
 
   return (
-    <div>
+    <div data-block-margin="space-28">
       <Heading level="1" size="xlarge" className={styles.pageHeaderHeading}>
         {data?.heading}
       </Heading>

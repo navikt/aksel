@@ -28,7 +28,7 @@ function TableOfContents({
   const tocCtx = useTableOfContents(toc ?? []);
 
   if (!toc || toc.length === 0) {
-    return null;
+    return <div className={styles.tocAside} aria-hidden />;
   }
 
   return (
