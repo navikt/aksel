@@ -9,7 +9,7 @@ import { AllArticleDocumentsT } from "@/sanity/config";
  */
 function parseDesignsystemSlug(
   slug: string[],
-  type: "komponenter" | "grunnleggende" | "monster-maler" | "produktbloggen",
+  type: "komponenter" | "grunnleggende" | "monster-maler",
 ) {
   if (slug.length === 0 || slug.length > 2) {
     return null;
