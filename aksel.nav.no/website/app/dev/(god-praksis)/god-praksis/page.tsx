@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
@@ -18,8 +19,11 @@ import {
 /* @ts-expect-error Workspace cant resolve valid import */
 import { Page as AkselPage, PageBlock } from "@navikt/ds-react/Page";
 import { sanityFetch } from "@/app/_sanity/live";
-import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
-import { urlForImage } from "@/app/_sanity/utils";
+import {
+  GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+} from "@/app/_sanity/queries";
+import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
@@ -31,37 +35,31 @@ import {
   LinkCardIcon,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 
-/* type Props = {
-  params: Promise<{ slug: string[] }>;
-};
- */
-/* export async function generateMetadata(
-  { params }: Props,
+export async function generateMetadata(
+  _,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = await params;
-
-  const { data: page } = await sanityFetch({
-    query: METADATA_BY_SLUG_QUERY,
-    params: { slug: parseDesignsystemSlug(slug, "monster-maler") },
+  const { data: seo } = await sanityFetch({
+    query: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
     stega: false,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(seo?.image as Image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: page?.heading,
-    description: page?.seo?.meta,
+    title: "God praksis",
+    description:
+      seo?.meta ??
+      `Mange som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
     openGraph: {
       images: ogImages,
     },
   };
-} */
+}
 
-/* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page() {
   const [{ data: temaList }] = await Promise.all([
     sanityFetch({

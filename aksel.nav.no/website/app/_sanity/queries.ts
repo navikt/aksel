@@ -124,6 +124,10 @@ const GOD_PRAKSIS_ALL_TEMA_QUERY =
     },
 }`);
 
+const GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY = defineQuery(
+  `*[_type == "godpraksis_landingsside"][0].seo`,
+);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -136,4 +140,5 @@ export {
   MONSTER_MALER_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
+  GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 };
