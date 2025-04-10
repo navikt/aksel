@@ -1,0 +1,47 @@
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
+  gap: var(--ax-space-24);
+  margin-block: var(--ax-space-48);
+}
+
+.overviewLi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overviewCardLink {
+  display: grid;
+  gap: var(--ax-space-12);
+  color: var(--ax-text-neutral);
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.overviewImageWrapper {
+  display: grid;
+  place-content: center;
+  position: relative;
+  height: 10rem;
+  border-radius: var(--ax-border-radius-xlarge);
+  border: 1px solid var(--ax-border-subtleA);
+  background: var(--ax-bg-moderate);
+
+  .overviewCardLink:hover > & {
+    background: var(--ax-bg-moderate-hover);
+  }
+
+  .overviewCardLink:focus-visible > & {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
+}
+
+.overviewCardHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+}

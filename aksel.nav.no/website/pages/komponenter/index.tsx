@@ -13,7 +13,6 @@ import ComponentOverview from "@/cms/component-overview/ComponentOverview";
 import Footer from "@/layout/footer/Footer";
 import Header from "@/layout/header/Header";
 import { WithSidebar } from "@/layout/templates/WithSidebar";
-import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity/client.server";
 import { landingPageQuery, sidebarQuery } from "@/sanity/queries";
 import {
@@ -137,9 +136,6 @@ const Page = ({ page, sidebar, links }: PageProps["props"]) => {
                       {page[`ingress_${kat.value}`]}
                     </TextWithMarkdown>
                   </BodyLong>
-                )}
-                {page?.[`intro_${kat.value}`] && (
-                  <SanityBlockContent blocks={page[`intro_${kat.value}`]} />
                 )}
               </div>
               <ComponentOverview
