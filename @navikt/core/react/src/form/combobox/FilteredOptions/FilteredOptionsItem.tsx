@@ -43,29 +43,25 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
   const isDisabled = (_option: ComboboxOption) =>
     maxSelected.isLimitReached && !isInList(_option.value, selectedOptions);
 
+  const optionId = filteredOptionsUtil.getOptionId(id, option.value);
+  const isActive = activeDecendantId === optionId;
+
   return (
     <li
       className={cn("navds-combobox__list-item", {
-        "navds-combobox__list-item--focus":
-          activeDecendantId ===
-          filteredOptionsUtil.getOptionId(id, option.label),
+        "navds-combobox__list-item--focus": isActive,
         "navds-combobox__list-item--selected": isInList(
           option.value,
           selectedOptions,
         ),
       })}
       data-no-focus={isDisabled(option) || undefined}
-      id={filteredOptionsUtil.getOptionId(id, option.label)}
+      id={optionId}
       key={option.label}
       tabIndex={-1}
       onMouseMove={() => {
-        if (
-          activeDecendantId !==
-          filteredOptionsUtil.getOptionId(id, option.label)
-        ) {
-          virtualFocus.moveFocusToElement(
-            filteredOptionsUtil.getOptionId(id, option.label),
-          );
+        if (!isActive) {
+          virtualFocus.moveFocusToElement(optionId);
           setIsMouseLastUsedInputDevice(true);
         }
       }}
