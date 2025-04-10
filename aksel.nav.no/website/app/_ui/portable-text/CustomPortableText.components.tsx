@@ -70,7 +70,11 @@ function customPortableTextComponents({
     block,
     marks,
     list: {
-      bullet: ({ children }) => <WebsiteList as="ul">{children}</WebsiteList>,
+      bullet: ({ children }) => (
+        <WebsiteList as="ul" data-block-margin="space-28">
+          {children}
+        </WebsiteList>
+      ),
       number: ({ children }) => <WebsiteList as="ol">{children}</WebsiteList>,
     },
     listItem: {
