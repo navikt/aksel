@@ -130,20 +130,6 @@ export default async function Page({ params }: Props) {
               Publisert: {publishDate}
             </BodyShort>
           </div>
-          {/*
-          morePosts && (
-            <div className="mx-auto mt-32 w-full max-w-4xl">
-              <Heading level="2" size="large">
-                Flere blogginnlegg
-              </Heading>
-              <ul className="mt-12 grid gap-12">
-                {morePosts.map((post) => (
-                  <BloggList key={post._id} blogg={post} />
-                ))}
-              </ul>
-            </div>
-          )
-          */}
         </div>
       </main>
     </>
