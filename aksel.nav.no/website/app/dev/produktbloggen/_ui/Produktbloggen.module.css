@@ -93,7 +93,7 @@
   width: 100%;
   max-width: 48rem;
 
-  img {
+  & img {
     border-radius: 1rem;
   }
 }
@@ -102,7 +102,7 @@
   position: relative;
   margin-top: var(--ax-space-64);
 
-  > div {
+  & > div {
     position: relative;
     z-index: 10;
     padding-inline: var(--ax-space-16) var(--ax-space-16);
@@ -110,13 +110,13 @@
   }
 
   /* this shouldn't be needed? */
-  p {
+  & p {
     color: var(--ax-text-neutral);
     line-height: var(--ax-font-line-height-large);
   }
 
   /* this shouldn't be needed? */
-  ul {
+  & ul {
     margin-bottom: var(--ax-space-28);
   }
 }
@@ -145,7 +145,7 @@
   justify-content: center;
   color: var(--ax-text-neutral);
 
-  address {
+  & address {
     font-style: normal;
   }
 }
