@@ -52,7 +52,7 @@ async function getSidebarData() {
     sanityFetch({
       query: DESIGNSYSTEM_SIDEBAR_QUERY,
     }),
-   sanityFetch({
+    sanityFetch({
       query: DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
     }),
   ]);
