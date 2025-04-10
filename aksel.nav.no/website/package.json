@@ -9,10 +9,6 @@
     "build:old": "next build",
     "build": "yarn workspace playroom build:playroom && yarn update:searchindex && next build && yarn update:rss && yarn cp:assets",
     "start": "cd .next/standalone/aksel.nav.no/website && PORT=3000 HOSTNAME=0.0.0.0 node server.js",
-    "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
-    "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
-    "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
-    "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static",
     "update:searchindex": "yarn tsx --env-file-if-exists=.env ./scripts/create-index",
     "e2e": "yarn build && yarn start-server-and-test 'yarn start' http://localhost:3000 'yarn playwright'",
     "e2e:full": "yarn build && yarn generate-testpaths && start-server-and-test start http://localhost:3000 playwright",
@@ -30,7 +26,13 @@
     "playwright": "playwright test",
     "backup": "yarn tsx --env-file-if-exists=.env scripts/backup.ts",
     "generate-testpaths": "yarn tsx --env-file-if-exists=.env ./scripts/generate-testpaths.ts",
-    "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch"
+    "watch:tw": "yarn tailwindcss -i ./components/styles/index.css -o ./dist/tw.css --watch",
+    "update:sanity-schema": "cd ./sanity && yarn sanity schema extract --workspace default && yarn rename:sanity-schema && yarn sanity typegen generate",
+    "rename:sanity-schema": "cd ./sanity/ && node -e \"require('fs').rename('./schema.json', './sanity-schema.json', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
+    "cp:playroom": "copyfiles -E -u 3 '../playroom/dist/sandbox/**' public/",
+    "cp:static": "copyfiles -E -u 1 '.next/static/**' .next/standalone/aksel.nav.no/website/.next/",
+    "cp:public": "copyfiles -E 'public/**' .next/standalone/aksel.nav.no/website/",
+    "cp:assets": "yarn cp:playroom && yarn cp:public && yarn cp:static"
   },
   "dependencies": {
     "@navikt/next-logger": "2.0.0",

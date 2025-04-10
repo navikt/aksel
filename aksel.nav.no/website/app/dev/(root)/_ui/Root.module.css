@@ -1,0 +1,33 @@
+/* TODO: This might be a global style, so move it out if needed  */
+.websitePage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.websiteMain {
+  padding-block: var(--ax-space-80);
+  padding-inline: var(--ax-space-16);
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-inline: auto;
+  width: 100%;
+  z-index: 0;
+  position: relative;
+  max-width: 40rem;
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  min-height: calc(100vh - var(--website-header-height-width-border));
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (min-width: 480px) {
+    width: 90%;
+  }
+}
+
+.websiteHeading {
+  color: var(--ax-text-brand-blue);
+}

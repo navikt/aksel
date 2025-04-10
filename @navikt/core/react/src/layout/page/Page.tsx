@@ -14,7 +14,7 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
    * Background color.
    * Accepts a [background color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#753d1cf4d1d6).
    * @default "bg-default"
-   * @deprecated 'background'-prop will be removed in future major-versions. Use `<Box asChild background="...">` wrapped around `<Page>`.
+   * @deprecated Use `<Box asChild background="...">` wrapped around `<Page>`.
    */
   background?: BackgroundColorToken;
   /**
@@ -47,7 +47,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         footer,
         children,
         footerPosition,
-        background = "bg-default",
+        background,
         contentBlockPadding = "end",
         ...rest
       },
@@ -64,7 +64,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
 
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-page-background": `var(--a-${background})`,
+        "--__ac-page-background": `var(--a-${background ?? "bg-default"})`,
       };
 
       const belowFold = footerPosition === "belowFold";
