@@ -1,4 +1,5 @@
 import { Metadata } from "next/types";
+import { z } from "zod";
 import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage";
 
@@ -38,30 +39,35 @@ export default async function Page({ searchParams }: Props) {
   );
 }
 
-function validIconName(iconName: string | undefined) {
-  if (!iconName) {
-    return false;
-  }
+const filterSearchParams = z.object({
+  iconName: z
+    .enum(Object.keys(meta) as [keyof typeof meta])
+    .optional()
+    .catch(undefined),
+  iconQuery: z.string().optional().catch(undefined),
+  iconToggle: z.enum(["stroke", "fill"]).default("stroke").catch("stroke"),
+});
 
-  return !!meta[iconName];
-}
+type Filters = z.infer<typeof filterSearchParams>;
 
 function getIconStateFromSearchParams(
   searchParams: Awaited<Props["searchParams"]>,
-) {
+): Filters {
   let { iconName, iconQuery, iconToggle } = searchParams;
 
   iconName = Array.isArray(iconName) ? iconName[0] : iconName;
   iconQuery = Array.isArray(iconQuery) ? iconQuery[0] : iconQuery;
   iconToggle = Array.isArray(iconToggle) ? iconToggle[0] : iconToggle;
 
-  if (iconToggle !== "stroke" && iconToggle !== "fill") {
-    iconToggle = "stroke";
-  }
+  const parsed = filterSearchParams.safeParse({
+    iconName,
+    iconQuery,
+    iconToggle,
+  });
 
   return {
-    iconName: validIconName(iconName) ? iconName : undefined,
-    iconQuery,
-    iconToggle: iconToggle as "stroke" | "fill",
+    iconToggle: parsed.data?.iconToggle ?? "stroke",
+    iconName: parsed.data?.iconName,
+    iconQuery: parsed.data?.iconQuery,
   };
 }

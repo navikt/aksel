@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import meta from "@navikt/aksel-icons/metadata";
 import { Modal } from "@navikt/ds-react";
 import styles from "./IconPage.module.css";
 import { useIconPage } from "./IconPage.provider";
@@ -10,7 +11,7 @@ function IconPageSidebar({
   iconName,
 }: {
   children: React.ReactNode;
-  iconName?: string;
+  iconName?: keyof typeof meta;
 }) {
   const { activeIconButton, hideModal } = useIconPage();
 

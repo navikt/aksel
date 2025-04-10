@@ -1,22 +1,33 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { HGrid, Search, ToggleGroup } from "@navikt/ds-react";
+import { useMemo } from "react";
+import { HGrid, Search, ToggleGroup, debounce } from "@navikt/ds-react";
 
-function IconPageForm() {
+function IconPageForm({
+  iconToggle,
+  iconQuery,
+}: {
+  iconQuery?: string;
+  iconToggle: "stroke" | "fill";
+}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (query: string) => {
-    const params = new URLSearchParams(searchParams?.toString());
-    if (query) {
-      params.set("iconQuery", query);
-    } else {
-      params.delete("iconQuery");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((query: string) => {
+        const params = new URLSearchParams(searchParams?.toString());
+        if (query && query.length > 2) {
+          params.set("iconQuery", query);
+        } else {
+          params.delete("iconQuery");
+        }
+        replace(`${pathname}?${params.toString()}`);
+      }),
+    [pathname, replace, searchParams],
+  );
 
   const handleToggle = (query: string) => {
     const params = new URLSearchParams(searchParams?.toString());
@@ -25,7 +36,6 @@ function IconPageForm() {
     } else {
       params.delete("iconToggle");
     }
-
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -44,12 +54,12 @@ function IconPageForm() {
         label="Ikonsøk"
         placeholder="Søk"
         autoComplete="off"
-        onChange={handleSearch}
+        onChange={debouncedSearch}
         clearButton={false}
-        defaultValue={searchParams?.get("iconQuery")?.toString()}
+        defaultValue={iconQuery}
       />
       <ToggleGroup
-        defaultValue={searchParams?.get("iconToggle")?.toString() ?? "stroke"}
+        defaultValue={iconToggle}
         onChange={handleToggle}
         variant="neutral"
         aria-label="Velg ikonvariant"

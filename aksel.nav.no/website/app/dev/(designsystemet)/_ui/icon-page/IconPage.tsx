@@ -28,7 +28,7 @@ function IconPage({
   iconQuery,
   iconToggle,
 }: {
-  iconName?: string;
+  iconName?: keyof typeof meta;
   iconQuery?: string;
   iconToggle: "stroke" | "fill";
 }) {
@@ -101,7 +101,7 @@ function IconPage({
 
       <IconPageProvider>
         <div>
-          <IconPageForm />
+          <IconPageForm iconQuery={iconQuery} iconToggle={iconToggle} />
           <HGrid
             columns={{ xs: 1, xl: "3fr minmax(300px, 2fr)" }}
             gap="space-40"

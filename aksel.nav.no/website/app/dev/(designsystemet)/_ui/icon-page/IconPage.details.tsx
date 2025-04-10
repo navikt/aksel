@@ -6,7 +6,7 @@ import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
 import { IconPageIconDetails } from "./IconPage.icondetails";
 import styles from "./IconPage.module.css";
 
-async function IconDetails({ iconName }: { iconName?: string }) {
+async function IconDetails({ iconName }: { iconName?: keyof typeof meta }) {
   const IconComponent = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
   const metaData = iconName ? meta[iconName] : null;
 
