@@ -48,15 +48,17 @@ function CodeBlockProvider({
   children,
   tabs,
   showLineNumbers,
+  defaultWrap = true,
 }: {
   children: React.ReactNode;
   tabs: CodeBlockTabsT;
   showLineNumbers: boolean;
+  defaultWrap?: boolean;
 }) {
   const [currentCodeSnippet, setCurrentCodeSnippet] = useState<string | null>(
     tabs?.[0]?.code ?? null,
   );
-  const [wrapCode, setWrapCode] = useState(true);
+  const [wrapCode, setWrapCode] = useState(defaultWrap);
   const [expanded, setExpanded] = useState(false);
 
   const updateCodeSnippet = (value: string, isExpanded?: boolean) => {
