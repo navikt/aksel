@@ -180,6 +180,10 @@
   .aksel-combobox__selected-options > li:only-child > & {
     margin-left: var(--ax-space-4);
   }
+
+  .aksel-combobox__selected-options[data-type="single"] & {
+    min-width: auto;
+  }
 }
 
 .aksel-combobox__input--hide-caret {
