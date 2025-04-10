@@ -11,6 +11,10 @@
   &[data-highlighted="true"] {
     background-color: var(--ax-bg-brand-blue-moderateA);
   }
+
+  &[data-strikethrough="true"] {
+    text-decoration-line: line-through;
+  }
 }
 
 /* className="list-margin max-w-text" */
@@ -27,6 +31,6 @@
   transform: rotate(45deg);
 
   & > * {
-    fill: var(--ax-bg-strong, var(--ax-bg-brand-blue-strong));
+    fill: var(--ax-bg-strong, var(--ax-text-brand-blue-subtle));
   }
 }

@@ -57,6 +57,15 @@ const enrich_extra_prop_fields = (docs: docgen.ComponentDoc[]) => {
 
       const link_regex = /@see {@link (http[^ ]+) ([^}]+)}/;
       prop.description = prop.description.replace(link_regex, "[$2]($1)");
+
+      const deprecation_regex = /(@deprecated?)(.*)/;
+      const deprecation = prop.description.match(deprecation_regex);
+      prop.description = prop.description.replace(deprecation_regex, "").trim();
+      if (deprecation) {
+        const return_val = deprecation[2].replace(/@deprecated?/, "").trim();
+        // @ts-expect-error adding a field here to a type that doesn't have it
+        prop.deprecated = return_val;
+      }
     }
   }
 };

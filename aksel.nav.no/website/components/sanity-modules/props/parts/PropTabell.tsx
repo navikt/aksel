@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Heading } from "@navikt/ds-react";
 import ErrorBoundary from "@/error-boundary";
 import { PropTableT } from "@/types";
@@ -9,9 +10,19 @@ type PropTableProps = {
 
 const PropTable = ({ komponent }: PropTableProps) => {
   const propList =
-    komponent?.propref?.proplist?.filter(
-      (prop) => !prop.description?.includes("@private"),
-    ) ?? [];
+    komponent?.propref?.proplist
+      ?.filter((prop) => !prop.description?.includes("@private"))
+      .sort((prop_a, prop_b) => {
+        let comparator_value = 0;
+
+        if ("deprecated" in prop_a) {
+          comparator_value += 1;
+        }
+        if ("deprecated" in prop_b) {
+          comparator_value -= 1;
+        }
+        return comparator_value;
+      }) ?? [];
 
   if (propList.length === 0) {
     return null;
@@ -49,7 +60,6 @@ const PropTable = ({ komponent }: PropTableProps) => {
                     name: "as",
                     type: "React.ElementType",
                   }}
-                  parent={komponent?.title ?? ""}
                 />
               </dd>
             </div>
@@ -59,21 +69,38 @@ const PropTable = ({ komponent }: PropTableProps) => {
               className="border border-t-0 border-gray-300 p-2 last-of-type:rounded-b-lg"
               key={prop.name}
             >
-              <dt className="px-2 pt-2">
-                <Heading
-                  size="xsmall"
-                  level="4"
-                  className="inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold"
-                >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
-              </dt>
-              <dd>
-                <DtList prop={prop} parent={komponent?.title ?? ""} />
-              </dd>
+              <PropEntry prop={prop} />
             </div>
           ))}
         </dl>
       </div>
     </div>
+  );
+};
+
+const PropEntry = ({
+  prop,
+}: {
+  prop: NonNullable<
+    NonNullable<PropTableProps["komponent"]["propref"]>["proplist"]
+  >[0];
+}) => {
+  return (
+    <>
+      <dt className="px-2 pt-2">
+        <Heading
+          size="xsmall"
+          level="4"
+          className={clsx(
+            "inline-block rounded-medium bg-surface-alt-3-subtle px-1 font-mono text-small font-semibold",
+            { "line-through": prop.deprecated !== undefined },
+          )}
+        >{`${prop.name}${prop?.required ? "" : "?"}`}</Heading>
+      </dt>
+      <dd>
+        <DtList prop={prop} />
+      </dd>
+    </>
   );
 };
 
