@@ -54,6 +54,19 @@ const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
     borderWidth="1"
     height="58px"
     width="58px"
+    style={
+      token.rawValue.startsWith("#") && token.rawValue.length === 9
+        ? {
+            backgroundColor: "transparent",
+            opacity: 0.8,
+            backgroundImage: `repeating-linear-gradient(45deg, var(--ax-bg-neutral-moderate) 25%, transparent 25%, transparent 75%, var(--ax-bg-neutral-moderate) 75%, var(--ax-bg-neutral-moderate)), 
+              repeating-linear-gradient(45deg, var(--ax-bg-neutral-moderate) 25%, transparent 25%, transparent 75%, var(--ax-bg-neutral-moderate) 75%, var(--ax-bg-neutral-moderate))`,
+            backgroundPosition: "-4px -4px, 4px 4px",
+            backgroundSize: "16px 16px",
+            backgroundRepeat: "repeat",
+          }
+        : undefined
+    }
   >
     <TokenExample token={token} />
   </Box.New>
