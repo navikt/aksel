@@ -27,8 +27,7 @@ export default async function Page({ params }: Props) {
   const { publishedAt: publishDate } = page;
   const authors = (page?.contributors as any)?.map((x) => x?.title) ?? [];
 
-  const imageUrl = urlFor(page?.seo?.image)
-    ?.auto("format")
+  const imageUrl = urlForImage(page?.seo?.image as Image)
     .quality(100)
     .url();
 
