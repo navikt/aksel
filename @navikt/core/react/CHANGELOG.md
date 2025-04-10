@@ -1,5 +1,15 @@
 # @navikt/ds-react
 
+## 7.19.1
+
+### Patch Changes
+
+- Darkside: Using `Page`-component would always give errors when using new `Theme`-component. ([`208adb8`](https://github.com/navikt/aksel/commit/208adb8b3f1a93a872782a8f309fed65b6b112d2))
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.19.1
+  - @navikt/aksel-icons@7.19.1
+
 ## 7.19.0
 
 ### Minor Changes
