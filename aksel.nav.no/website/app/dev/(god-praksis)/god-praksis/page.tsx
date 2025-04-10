@@ -98,16 +98,14 @@ export default async function Page() {
                   return (
                     <li key={tema.slug}>
                       <LinkCard data-color-role="brand-blue" hasArrow={false}>
-                        <HStack align="center">
-                          <LinkCardIcon hasBackground={false}>
-                            <GodPraksisPictogram url={url} />
-                          </LinkCardIcon>
-                          <LinkCardTitle as="h2">
-                            <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
-                              {tema.title ?? ""}
-                            </LinkCardAnchor>
-                          </LinkCardTitle>
-                        </HStack>
+                        <LinkCardIcon hasBackground={false}>
+                          <GodPraksisPictogram url={url} />
+                        </LinkCardIcon>
+                        <LinkCardTitle as="h2">
+                          <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
+                            {tema.title ?? ""}
+                          </LinkCardAnchor>
+                        </LinkCardTitle>
                       </LinkCard>
                     </li>
                   );

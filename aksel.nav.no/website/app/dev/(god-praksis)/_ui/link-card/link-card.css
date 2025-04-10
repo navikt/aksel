@@ -1,6 +1,9 @@
 /* stylelint-disable aksel/no-class-override */
 
 .aksel-link-card {
+  --__axc-link-card-padding-block: var(--ax-space-16);
+  --__axc-link-card-padding-inline: var(--ax-space-20);
+
   border-radius: var(--ax-border-radius-xlarge);
   text-decoration: none;
   color: var(--ax-text-neutral);
@@ -10,10 +13,8 @@
   position: relative;
   background-color: var(--ax-bg-raised);
   border: 1px solid var(--ax-border-neutral-subtleA);
-  padding: var(--ax-space-16) var(--ax-space-20);
+  padding: var(--__axc-link-card-padding-block) var(--__axc-link-card-padding-inline);
   height: 100%;
-  display: grid;
-  align-items: flex-start;
 
   &:hover {
     border-color: var(--ax-border-neutral);
@@ -31,15 +32,31 @@
     box-shadow: none;
     color: var(--ax-text-contrast);
   }
+
+  &[data-autoLayout="true"] {
+    display: grid;
+    grid-template-areas:
+      "image image"
+      "icon title"
+      "icon description"
+      "icon footer";
+    grid-template-columns: auto 1fr;
+    /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+    grid-template-rows: auto 1fr auto auto;
+    align-items: center;
+  }
 }
 
 .aksel-link-card__title {
+  grid-area: title;
+  height: fit-content;
   margin-bottom: var(--ax-space-16);
   color: var(--ax-text-default);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--ax-space-8);
+  width: 100%;
 
   &[data-variant="subtle"] {
     color: var(--ax-text-subtle);
@@ -51,8 +68,8 @@
 }
 
 .aksel-link-card__description {
-  margin-bottom: var(--ax-space-16);
   grid-area: description;
+  margin-bottom: var(--ax-space-16);
   max-width: 400px;
 
   &:last-child {
@@ -61,6 +78,7 @@
 }
 
 .aksel-link-card__footer {
+  grid-area: footer;
   vertical-align: bottom;
 }
 
@@ -128,14 +146,10 @@
   display: block;
   overflow: hidden;
   grid-area: image;
-  margin-block-end: var(--ax-space-28);
   border-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  margin-block-start: calc(var(--__axc-link-card-padding-block) * -1);
+  margin-inline: calc(var(--__axc-link-card-padding-inline) * 1 * -1);
 }
-
-/* .aksel-link-card__image-container--inset {
-  margin-inline: calc(var(--__axc-link-card-padding) * -1);
-  margin-block-start: calc(var(--__axc-link-card-padding) * -1);
-} */
 
 .aksel-link-card__image {
   object-fit: cover;

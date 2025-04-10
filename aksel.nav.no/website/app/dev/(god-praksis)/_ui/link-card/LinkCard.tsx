@@ -23,11 +23,21 @@ interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   hasArrow?: boolean;
+  /**
+   * @default true
+   */
+  autoLayout?: boolean;
 }
 
 const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
-    { children, className, hasArrow = true, ...restProps }: LinkCardProps,
+    {
+      children,
+      className,
+      hasArrow = true,
+      autoLayout = true,
+      ...restProps
+    }: LinkCardProps,
     forwardedRef,
   ) => {
     return (
@@ -37,6 +47,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
         {...restProps}
         className={cn("aksel-link-card", className)}
         data-arrow={hasArrow}
+        data-autoLayout={autoLayout}
       >
         {children}
       </div>
@@ -253,7 +264,11 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
         <img
           ref={forwardedRef}
           {...restProps}
-          className={cn(className, aspectRatioClassName(aspectRatio))}
+          className={cn(
+            "aksel-link-card__image",
+            className,
+            aspectRatioClassName(aspectRatio),
+          )}
           alt={alt}
           width={width}
           height={height}
