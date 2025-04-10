@@ -110,7 +110,7 @@ function marksComponents() {
 function blockComponents({
   typoConfig = { type: "long", size: "medium" },
 }: CustomPortableTextComponentsProps) {
-  const BodyComponent = typoConfig.type === "short" ? BodyLong : BodyShort;
+  const BodyComponent = typoConfig.type === "long" ? BodyLong : BodyShort;
 
   return {
     normal: ({ children }) =>
