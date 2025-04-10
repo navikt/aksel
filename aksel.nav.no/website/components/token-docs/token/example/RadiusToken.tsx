@@ -7,7 +7,7 @@ const RadiusToken = ({ token }: { token: TokenForDocumentationT }) => (
       as="div"
       width="32px"
       height="32px"
-      background="neutral-moderate"
+      background="neutral-strong"
       style={{
         borderRadius: token.value,
       }}

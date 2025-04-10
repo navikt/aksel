@@ -45,12 +45,12 @@ const TokenPreview = ({ token }: { token: TokenForDocumentationT }) => (
   <Box.New
     background={
       token.category === "textColor" && token.modifier === "contrast"
-        ? "neutral-moderate"
+        ? "neutral-strong"
         : undefined
     }
-    padding="3"
+    padding="space-12"
     borderColor="neutral-subtle"
-    borderRadius="medium"
+    borderRadius="large"
     borderWidth="1"
     height="58px"
     width="58px"

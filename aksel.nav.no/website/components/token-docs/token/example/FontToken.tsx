@@ -4,10 +4,10 @@ import { TokenForDocumentationT } from "../../../types/tokens";
 
 const FontToken = ({ token }: { token: TokenForDocumentationT }) => {
   let fontStyling = {
-    fontSize: "24px",
-    fontFamily: "'Source Sans 3', 'Source Sans Pro', Arial, sans-serif",
-    fontWeight: "400",
-    lineHeight: "1.5",
+    fontSize: "var(--ax-font-size-heading-medium)",
+    fontFamily: "var(--ax-font-family)",
+    fontWeight: "var(--ax-font-weight-regular)",
+    lineHeight: "var(--ax-font-line-height-heading-xsmall)",
   };
   switch (token.group) {
     case "family":

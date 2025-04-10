@@ -33,7 +33,7 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
               <PaletteIcon
                 title="a11y-title"
                 color={token.value}
-                fontSize="1.5rem"
+                fontSize="var(--ax-font-size-heading-medium)"
               />
             </VStack>
           </Box.New>

@@ -7,7 +7,7 @@ const SpaceToken = ({ token }: { token: TokenForDocumentationT }) => (
     <SpaceHorizontalIcon
       title={token.name}
       color={token.value}
-      fontSize="1.5rem"
+      fontSize="var(--ax-font-size-heading-medium)"
     />
   </VStack>
 );
