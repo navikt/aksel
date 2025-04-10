@@ -50,15 +50,9 @@ const ColorToken = ({ token }: { token: TokenForDocumentationT }) => {
       );
     }
     default:
-      return (
-        <Box.New
-          borderRadius="medium"
-          borderWidth="1"
-          background={token.value}
-          width="32px"
-          height="32px"
-        />
-      );
+      // eslint-disable-next-line no-console
+      console.log("Unknown token category", token);
+      return null;
   }
 };
 
