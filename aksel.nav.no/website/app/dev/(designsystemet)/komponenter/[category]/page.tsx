@@ -62,7 +62,7 @@ export default async function Page({ params }: Props) {
   const [{ data: categoryPages }, { data: landingPage }] = await Promise.all([
     sanityFetch({
       query: DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
-      params: { category },
+      params: { category, docType: "komponent_artikkel" },
     }),
     sanityFetch({
       query: DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,

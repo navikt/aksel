@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.19
+
+### @navikt/ds-react
+
+- Darkside: `<Theme />`-component no longer defaults to `light`-theme className when no theme is provided. ([#3720](https://github.com/navikt/aksel/pull/3720))
+
+### @navikt/ds-tokens
+
+- Darkside: Update global 'meta-purple' color. ([#3703](https://github.com/navikt/aksel/pull/3703))
+
+### @navikt/ds-css
+
+- Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+
+- Combobox: Fix wrapping issue when ToggleListButton is hidden ([#3727](https://github.com/navikt/aksel/pull/3727))
+
 ## 7.18
 
 ### @navikt/ds-react

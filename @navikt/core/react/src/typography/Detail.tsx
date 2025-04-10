@@ -8,7 +8,7 @@ export interface DetailProps
   extends TypoProps,
     React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * @deprecated Medium === small
+   * @deprecated Medium is now the same as small.
    */
   size?: "medium" | "small";
   /**

@@ -73,7 +73,7 @@ const KOMPONENT_BY_SLUG_QUERY =
 }`);
 
 const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
-  defineQuery(`*[_type == "komponent_artikkel"  && kategori == $category]
+  defineQuery(`*[_type == $docType  && kategori == $category]
   {
     _id,
     heading,

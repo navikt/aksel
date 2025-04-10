@@ -2265,6 +2265,7 @@ export type Ds_props = {
     return?: string;
     example?: string;
     params?: Array<string>;
+    deprecated?: string;
     _type: "prop";
     _key: string;
   }>;
@@ -4335,6 +4336,7 @@ export type KOMPONENT_BY_SLUG_QUERYResult = {
               return?: string;
               example?: string;
               params?: Array<string>;
+              deprecated?: string;
               _type: "prop";
               _key: string;
             }>;
@@ -5595,6 +5597,7 @@ export type GRUNNLEGGENDE_BY_SLUG_QUERYResult = {
               return?: string;
               example?: string;
               params?: Array<string>;
+              deprecated?: string;
               _type: "prop";
               _key: string;
             }>;
