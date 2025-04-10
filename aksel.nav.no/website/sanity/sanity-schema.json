@@ -215,13 +215,6 @@
             "type": "string"
           },
           "optional": true
-        },
-        "readMore": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
         }
       }
     }
@@ -12680,6 +12673,13 @@
                 "optional": true
               },
               "return": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "example": {
                 "type": "objectAttribute",
                 "value": {
                   "type": "string"

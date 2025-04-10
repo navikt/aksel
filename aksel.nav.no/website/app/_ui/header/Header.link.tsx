@@ -10,13 +10,31 @@ type HeaderLinkProps = {
 };
 
 function HeaderLink({ name, href }: HeaderLinkProps) {
-  const pathname = usePathname();
+  let pathname = usePathname();
+
+  if (pathname?.startsWith("/dev")) {
+    pathname = pathname.replace("/dev", "");
+  }
+
+  const isActive = () => {
+    if (pathname?.startsWith(href)) {
+      return true;
+    }
+
+    if (name.toLocaleLowerCase() === "designsystemet") {
+      return !!["/komponenter", "/grunnleggende", "/monster-maler"].find(
+        (path) => pathname?.startsWith(path),
+      );
+    }
+
+    return false;
+  };
 
   return (
     <Link
       href={href}
       prefetch={false}
-      data-current={pathname?.startsWith(href) ? "true" : "false"}
+      data-current={isActive()}
       className={styles.headerLink}
       data-umami-event="navigere"
       data-umami-event-kilde="header"

@@ -1,0 +1,11 @@
+.exampleText {
+  border-radius: var(--ax-border-radius-large);
+  padding: var(--ax-space-12) var(--ax-space-16);
+  border: 1px solid var(--ax-border-neutral-subtle);
+  background-color: var(--ax-bg-neutral-moderate);
+}
+
+.exampleTextDivider {
+  margin-block: var(--ax-space-12);
+  border-top: 1px solid var(--ax-border-neutral-subtleA);
+}

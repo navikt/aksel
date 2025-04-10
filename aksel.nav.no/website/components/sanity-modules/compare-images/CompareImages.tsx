@@ -154,8 +154,8 @@ const CompareImages = ({ node }: CompareImagesProps) => {
       : undefined,
   };
 
-  const imageOneUrl = urlFor(node.image_1.asset)?.auto("format").url();
-  const imageTwoUrl = urlFor(node.image_2.asset)?.auto("format").url();
+  const imageOneUrl = urlFor(node.image_1)?.auto("format").url();
+  const imageTwoUrl = urlFor(node.image_2)?.auto("format").url();
 
   if (!imageOneUrl || !imageTwoUrl) {
     return null;

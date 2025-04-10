@@ -30,7 +30,6 @@
   border-radius: var(--ax-border-radius-medium);
   position: sticky;
   top: 0;
-  background-color: var(--ax-bg-default);
   z-index: 20;
   flex: 1 1 auto;
 
@@ -45,7 +44,7 @@
   }
 
   &:hover {
-    background-color: var(--ax-bg-neutral-moderate-hover);
+    background-color: var(--ax-bg-neutral-moderate-hoverA);
   }
 
   & > span:empty {

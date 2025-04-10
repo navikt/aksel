@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, Hide, Show } from "@navikt/ds-react";
 
@@ -6,6 +7,14 @@ type AkselSearchButtonProps = {
 };
 
 export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isMacOS = /mac|iphone|ipad|ipod/.test(userAgent);
+    setIsMac(isMacOS);
+  }, []);
+
   return (
     <>
       <Show above="xl" asChild>
@@ -23,7 +32,10 @@ export function AkselSearchButton({ onClick }: AkselSearchButtonProps) {
           iconPosition="left"
           onClick={onClick}
         >
-          Søk <span className="text-medium font-normal">(ctrl + k)</span>
+          Søk{" "}
+          <span className="text-medium font-normal">
+            {isMac ? <>⌘K</> : <> (ctrl + k)</>}
+          </span>
         </Button>
       </Show>
       <Hide above="xl" asChild>

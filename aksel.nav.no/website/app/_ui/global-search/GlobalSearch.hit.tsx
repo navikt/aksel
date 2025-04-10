@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Heading } from "@navikt/ds-react";
+import { doctypeToColorRole } from "@/app/_ui/theming/theme-config";
 import { urlFor } from "@/sanity/interface";
 import { StatusTag } from "@/web/StatusTag";
-import { doctypeToColorRole } from "../theme-config";
 import { SearchHitT, SearchResultPageTypesT } from "./GlobalSearch.config";
 import styles from "./GlobalSearch.module.css";
 

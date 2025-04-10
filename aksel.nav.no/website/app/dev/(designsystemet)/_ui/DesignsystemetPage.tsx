@@ -1,8 +1,12 @@
 import { PortableTextBlock } from "next-sanity";
 import { Detail, HStack, Heading, Tag } from "@navikt/ds-react";
-import { KOMPONENT_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import {
+  GRUNNLEGGENDE_BY_SLUG_QUERYResult,
+  KOMPONENT_BY_SLUG_QUERYResult,
+  MONSTER_MALER_BY_SLUG_QUERYResult,
+} from "@/app/_sanity/query-types";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
-import { getStatusTag } from "@/app/_ui/theme-config";
+import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { dateStr } from "@/utils";
 import styles from "./Designsystemet.module.css";
 import { DesignsystemetThumbnail } from "./Designsystemet.thumbnail";
@@ -29,7 +33,10 @@ function DesignsystemetPageLayout({
 }
 
 type DesignsystemetPageT = {
-  data: KOMPONENT_BY_SLUG_QUERYResult;
+  data:
+    | KOMPONENT_BY_SLUG_QUERYResult
+    | GRUNNLEGGENDE_BY_SLUG_QUERYResult
+    | MONSTER_MALER_BY_SLUG_QUERYResult;
 };
 
 async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
@@ -38,18 +45,22 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
 
   const statusTag = getStatusTag(data?.status?.tag);
 
+  const isComponentPage = data?._type === "komponent_artikkel";
+
   return (
     <div>
       <Heading level="1" size="xlarge" className={styles.pageHeaderHeading}>
         {data?.heading}
       </Heading>
-      <CustomPortableText
-        value={data?.intro?.body as PortableTextBlock[]}
-        typoConfig={{
-          type: "short",
-          size: "large",
-        }}
-      />
+      {isComponentPage && (
+        <CustomPortableText
+          value={data?.intro?.body as PortableTextBlock[]}
+          typoConfig={{
+            type: "short",
+            size: "large",
+          }}
+        />
+      )}
       <HStack gap="space-16" align="center" marginBlock="space-24 0">
         {statusTag && (
           <Tag
@@ -66,7 +77,8 @@ async function DesignsystemetPageHeader({ data }: DesignsystemetPageT) {
           </Detail>
         )}
       </HStack>
-      <KomponentLinks data={data} />
+      {isComponentPage && <KomponentLinks data={data} />}
+
       <DesignsystemetThumbnail />
     </div>
   );

@@ -4185,7 +4185,7 @@ __metadata:
     commander: "npm:10.0.1"
     enquirer: "npm:^2.3.6"
     fast-glob: "npm:3.2.11"
-    figlet: "npm:1.6.0"
+    figlet: "npm:1.8.0"
     is-git-clean: "npm:1.1.0"
     jscodeshift: "npm:^0.15.1"
     jscodeshift-add-imports: "npm:1.0.11"
@@ -13543,12 +13543,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:1.6.0":
-  version: 1.6.0
-  resolution: "figlet@npm:1.6.0"
+"figlet@npm:1.8.0":
+  version: 1.8.0
+  resolution: "figlet@npm:1.8.0"
   bin:
     figlet: bin/index.js
-  checksum: 10/ffc17bb3eedc9d39e5d1eee31378cd3bdd25a86a345db261328ed20b59530162a9e7f448ba6a166d67098d12cc68933395153147ec139b4e305a87f99f707eba
+  checksum: 10/e52933f9cba3c03c6f399763363502b6e6396d1ca6ca9d79cd8bd467aa85b64ee12c7b2cc5ae5901af5a6fe085414accac14890949130e908da8dd2a8bb8c8ac
   languageName: node
   linkType: hard
 
@@ -18556,6 +18556,16 @@ __metadata:
     sanity: ^3.77.2
     styled-components: ^6.1
   checksum: 10/3659d4c58a920dcfca0670085592e374a7b9b7d72ec78d5809d00b522fb090e5acab2e2d9537c0c943313258276b1102f61e362c11f9fff752dc519dfb618df8
+  languageName: node
+  linkType: hard
+
+"next-themes@npm:^0.4.6":
+  version: 0.4.6
+  resolution: "next-themes@npm:0.4.6"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+  checksum: 10/48540e77a8f1967fa27338e91037df296f84d8979ba3003f71eed8d9a2f4f29b3cc6797d27b501547fd39cf33611a2accb432eec92ad8a457abe1a142cc5a02e
   languageName: node
   linkType: hard
 
@@ -26444,6 +26454,7 @@ __metadata:
     next: "npm:15.2.3"
     next-logger: "npm:^5.0.1"
     next-sanity: "npm:9.8.61"
+    next-themes: "npm:^0.4.6"
     node-cache: "npm:^5.1.2"
     pino: "npm:^8.21.0"
     pino-pretty: "npm:^10.0.0"

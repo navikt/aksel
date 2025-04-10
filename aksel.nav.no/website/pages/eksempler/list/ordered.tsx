@@ -3,7 +3,7 @@ import { withDsExample } from "@/web/examples/withDsExample";
 
 const Example = () => {
   return (
-    <List as="ol" title="Vi bør fikse uu-issues i følgende rekkefølge:">
+    <List as="ol">
       <List.Item>
         Blinkende innhold. Vi vil ikke gi brukerne våre anfall.
       </List.Item>
