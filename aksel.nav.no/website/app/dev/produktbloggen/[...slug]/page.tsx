@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
       <main tabIndex={-1} id="hovedinnhold" className={styles.main}>
         <div className={styles.preamble}>
           <div className={styles.intro}>
-            <Heading level="1" size="xlarge" className={styles.h1}>
+            <Heading level="1" size="xlarge" className={styles.articleTitle}>
               {page.heading}
             </Heading>
             {page?.ingress && (
@@ -112,7 +112,7 @@ export default async function Page({ params }: Props) {
           <div data-wrapper-prose>
             <div className={styles.diamondCenter} />
             {authors?.length > 0 && (
-              <Detail className={styles.authorText} as="p">
+              <Detail uppercase className={styles.authorText} as="p">
                 Bidragsytere
               </Detail>
             )}

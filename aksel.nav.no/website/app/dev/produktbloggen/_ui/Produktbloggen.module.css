@@ -36,12 +36,11 @@
 
 .intro {
   text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 75ch;
+  margin-inline: auto;
+  max-width: 670px;
 }
 
-.h1 {
+.articleTitle {
   text-wrap: balance;
   font-size: 48px;
   color: var(--ax-text-brand-blue);
@@ -50,31 +49,31 @@
 .bodyLong1 {
   color: var(--ax-text-brand-blue-subtle);
   margin-top: var(--ax-space-16);
-  line-height: var(--ax-font-line-height-xlarge);
   font-size: 24px;
+  line-height: 32px;
 }
 
 .articleMeta {
   display: inline-flex;
-  margin-top: 2rem;
+  margin-top: var(--ax-space-32);
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--ax-space-8);
   align-items: center;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: var(--ax-font-size-medium);
+  line-height: var(--ax-font-line-height-large);
 }
 
 .diamond {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: var(--ax-space-8);
+  height: var(--ax-space-8);
   rotate: 45deg;
   opacity: 0.5;
   background-color: var(--ax-brand-blue-800); /* check */
 }
 
 .diamondCenter {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: var(--ax-space-8);
+  height: var(--ax-space-8);
   rotate: 45deg;
   background-color: var(--ax-brand-blue-800); /* check */
   margin-inline: auto;
@@ -84,7 +83,7 @@
 .image {
   aspect-ratio: 16 / 9;
   position: relative;
-  margin-block: 5rem 0;
+  margin-block: var(--ax-space-64) 0;
   margin-inline: auto;
   border-radius: 1rem;
   box-shadow:
@@ -106,9 +105,19 @@
   > div {
     position: relative;
     z-index: 10;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-top: 2rem;
+    padding-inline: var(--ax-space-16) var(--ax-space-16);
+    margin-top: var(--ax-space-32);
+  }
+
+  /* this shouldn't be needed? */
+  p {
+    color: var(--ax-text-neutral);
+    line-height: var(--ax-font-line-height-large);
+  }
+
+  /* this shouldn't be needed? */
+  ul {
+    margin-bottom: var(--ax-space-28);
   }
 }
 
@@ -117,19 +126,22 @@
   z-index: 10;
   padding-inline: 1rem;
   margin-top: 4rem;
+  color: var(--ax-text-brand-blue);
 }
 
 .authorText {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--ax-space-8);
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: 1.05px; /* shouldn't this be a part of details uppercase? */
+  color: var(--ax-text-brand-blue);
 }
 
 .author {
   display: flex;
-  margin-bottom: 0.25rem;
+  margin-block: var(--ax-space-8);
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: var(--ax-space-4);
   justify-content: center;
   color: var(--ax-text-neutral);
 
