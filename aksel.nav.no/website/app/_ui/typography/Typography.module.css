@@ -31,6 +31,6 @@
   transform: rotate(45deg);
 
   & > * {
-    fill: var(--ax-bg-strong, var(--ax-bg-brand-blue-strong));
+    fill: var(--ax-bg-strong, var(--ax-text-brand-blue-subtle));
   }
 }

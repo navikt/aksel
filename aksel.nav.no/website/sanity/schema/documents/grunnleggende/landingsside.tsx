@@ -18,9 +18,11 @@ const views = () => {
     );
     list.push(
       defineField({
-        title: `Intro ${kat.title}`,
-        name: `intro_${kat.value}`,
-        type: "riktekst_standard",
+        title: `Legg til siden 'oversikt' for ${kat.title}?`,
+        description:
+          "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",
+        name: `show_overview_${kat.value}`,
+        type: "boolean",
       }),
     );
   });
@@ -38,6 +40,20 @@ export const GrunnleggendeLandingSide = defineType({
       name: "intro",
       type: "text",
     }),
+    {
+      title: "Oversikt-sider",
+      name: "overview_pages",
+      description:
+        "Legger til en ny side 'Oversikt' i menyen som lister ut alle artiklene i kategorien.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        list: grunnleggendeKategorier.map((kat) => ({
+          title: kat.title,
+          value: kat.value,
+        })),
+      },
+    },
     ...views(),
     BaseSEOPreset,
   ],

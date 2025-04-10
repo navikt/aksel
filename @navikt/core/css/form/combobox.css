@@ -136,6 +136,10 @@
   height: var(--__ac-combobox-input-height);
 }
 
+.navds-combobox__selected-options[data-type="single"] .navds-combobox__input {
+  min-width: auto;
+}
+
 .navds-combobox__input--hide-caret {
   caret-color: transparent;
 }

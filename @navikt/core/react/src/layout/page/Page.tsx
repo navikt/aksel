@@ -47,7 +47,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
         footer,
         children,
         footerPosition,
-        background = "bg-default",
+        background,
         contentBlockPadding = "end",
         ...rest
       },
@@ -64,7 +64,7 @@ export const PageComponent: OverridableComponent<PageProps, HTMLElement> =
 
       const style: React.CSSProperties = {
         ..._style,
-        "--__ac-page-background": `var(--a-${background})`,
+        "--__ac-page-background": `var(--a-${background ?? "bg-default"})`,
       };
 
       const belowFold = footerPosition === "belowFold";

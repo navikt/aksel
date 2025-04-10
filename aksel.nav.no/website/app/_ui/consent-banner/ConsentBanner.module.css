@@ -1,0 +1,17 @@
+.consentBannerRoot {
+  position: relative;
+  z-index: 10;
+  background-color: var(--ax-bg-neutral-soft);
+  display: flex;
+  padding: var(--ax-space-16) var(--ax-space-20);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+}
+
+.consentBannerSection {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.consentBannerBrandedText {
+  color: var(--ax-text-brand-blue);
+}
