@@ -8,7 +8,6 @@
 
 .pageLayout {
   display: grid;
-  grid-template-columns: 1fr;
   margin-inline: auto;
   width: 100%;
   gap: var(--ax-space-24);
