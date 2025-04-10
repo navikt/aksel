@@ -68,14 +68,14 @@
   height: var(--ax-space-8);
   rotate: 45deg;
   opacity: 0.5;
-  background-color: var(--ax-brand-blue-800); /* check */
+  background-color: var(--ax-brand-blue-800);
 }
 
 .diamondCenter {
   width: var(--ax-space-8);
   height: var(--ax-space-8);
   rotate: 45deg;
-  background-color: var(--ax-brand-blue-800); /* check */
+  background-color: var(--ax-brand-blue-800);
   margin-inline: auto;
   margin-bottom: var(--ax-space-40);
 }
@@ -101,18 +101,12 @@
 .customBlockWrapper {
   position: relative;
   margin-top: var(--ax-space-64);
+  padding-inline: var(--ax-space-16);
 
   & > div {
     position: relative;
     z-index: 10;
-    padding-inline: var(--ax-space-16) var(--ax-space-16);
     margin-top: var(--ax-space-32);
-  }
-
-  /* this shouldn't be needed? */
-  & p {
-    color: var(--ax-text-neutral);
-    line-height: var(--ax-font-line-height-large);
   }
 
   /* this shouldn't be needed? */
@@ -124,8 +118,8 @@
 .articleEnd {
   position: relative;
   z-index: 10;
-  padding-inline: 1rem;
-  margin-top: 4rem;
+  padding-inline: var(--ax-space-16);
+  margin-top: var(--ax-space-64);
   color: var(--ax-text-brand-blue);
 }
 
@@ -133,7 +127,9 @@
   margin-bottom: var(--ax-space-8);
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1.05px; /* shouldn't this be a part of details uppercase? */
+  letter-spacing: 1.05px;
+
+  /* shouldn't this be a part of details uppercase? */
   color: var(--ax-text-brand-blue);
 }
 
