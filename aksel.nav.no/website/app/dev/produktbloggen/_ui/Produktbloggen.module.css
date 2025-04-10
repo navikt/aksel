@@ -31,17 +31,121 @@
 
 .preamble {
   padding-inline: var(--ax-space-16);
+  color: var(--ax-space-12);
 }
 
 .intro {
-  /* dynamic-wrapper-prose text-center */
   text-align: center;
   margin-right: auto;
   margin-left: auto;
   max-width: 75ch;
 }
 
-/* 480 === sm */
+.h1 {
+  text-wrap: balance;
+  font-size: 48px;
+  color: var(--ax-text-brand-blue);
+}
+
+.bodyLong1 {
+  color: var(--ax-text-brand-blue-subtle);
+  margin-top: var(--ax-space-16);
+  line-height: var(--ax-font-line-height-xlarge);
+  font-size: 24px;
+}
+
+.articleMeta {
+  display: inline-flex;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.diamond {
+  width: 0.5rem;
+  height: 0.5rem;
+  rotate: 45deg;
+  opacity: 0.5;
+  background-color: var(--ax-brand-blue-800); /* check */
+}
+
+.diamondCenter {
+  width: 0.5rem;
+  height: 0.5rem;
+  rotate: 45deg;
+  background-color: var(--ax-brand-blue-800); /* check */
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-40);
+}
+
+.image {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  margin-block: 5rem 0;
+  margin-inline: auto;
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 0 rgb(255 255 255),
+    0 0 0 1px rgba(7 26 54 / 0.21),
+    0 0 0 0 rgba(0 0 0 0);
+  width: 100%;
+  max-width: 48rem;
+
+  img {
+    border-radius: 1rem;
+  }
+}
+
+.customBlockWrapper {
+  position: relative;
+  margin-top: var(--ax-space-64);
+
+  > div {
+    position: relative;
+    z-index: 10;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 2rem;
+  }
+}
+
+.articleEnd {
+  position: relative;
+  z-index: 10;
+  padding-inline: 1rem;
+  margin-top: 4rem;
+}
+
+.authorText {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.author {
+  display: flex;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  color: var(--ax-text-neutral);
+
+  address {
+    font-style: normal;
+  }
+}
+
+.publishedText {
+  display: flex;
+  justify-content: center;
+  color: var(--ax-text-neutral-subtle);
+}
+
+/* 480 === sm
+min-width: X == X is the minimum width needed before styles apply */
 @media (min-width: 480px) {
   .main {
     padding-bottom: var(--ax-space-128);
@@ -49,5 +153,12 @@
 
   .intro {
     width: 90%;
+  }
+}
+
+/* 768 == md */
+@media (min-width: 768px) {
+  .h1 {
+    hyphens: none;
   }
 }
