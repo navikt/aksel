@@ -3,6 +3,8 @@ import { z } from "zod";
 import meta from "@navikt/aksel-icons/metadata";
 import { IconPage } from "@/app/dev/(designsystemet)/_ui/icon-page/IconPage";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{ category: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -30,11 +32,22 @@ export default async function Page({ searchParams }: Props) {
   const { iconName, iconQuery, iconToggle } =
     getIconStateFromSearchParams(_searchParams);
 
+  let iconSvg: string | undefined;
+
+  if (iconName) {
+    const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${iconName}.svg`;
+
+    iconSvg = await fetch(iconUrl)
+      .then((r) => r.text())
+      .catch(() => undefined);
+  }
+
   return (
     <IconPage
       iconName={iconName}
       iconQuery={iconQuery}
       iconToggle={iconToggle}
+      iconSvg={iconSvg}
     />
   );
 }

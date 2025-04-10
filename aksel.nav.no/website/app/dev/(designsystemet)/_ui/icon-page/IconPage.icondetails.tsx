@@ -75,6 +75,8 @@ function IconPageIconDetails({
 
   const HeaderComponent = !hideModal ? Modal.Header : "div";
 
+  const dedupedKeywords = new Set(metaData?.keywords ?? []);
+
   return (
     <div className={styles.iconDetails} data-inline>
       {hideModal && (
@@ -97,7 +99,7 @@ function IconPageIconDetails({
             <BodyShort>{metaData?.sub_category}</BodyShort>
           </HStack>
           <HStack gap="space-8" marginBlock="space-12 0" as="ul">
-            {metaData?.keywords.map((keyword) => (
+            {[...dedupedKeywords.keys()].map((keyword) => (
               <li key={keyword}>
                 <Tag size="small" variant="neutral-moderate">
                   {keyword}

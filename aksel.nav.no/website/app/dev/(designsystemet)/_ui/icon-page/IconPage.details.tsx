@@ -1,3 +1,5 @@
+"use client";
+
 import * as Icons from "@navikt/aksel-icons";
 import meta from "@navikt/aksel-icons/metadata";
 import { BodyShort, Heading, VStack } from "@navikt/ds-react";
@@ -6,19 +8,19 @@ import { CodeBlockTabsT } from "@/app/_ui/code-block/CodeBlock.provider";
 import { IconPageIconDetails } from "./IconPage.icondetails";
 import styles from "./IconPage.module.css";
 
-async function IconDetails({ iconName }: { iconName?: keyof typeof meta }) {
+function IconDetails({
+  iconName,
+  iconSvg,
+}: {
+  iconName?: keyof typeof meta;
+  iconSvg?: string;
+}) {
   const IconComponent = Icons[`${iconName}Icon`]; // eslint-disable-line import/namespace
   const metaData = iconName ? meta[iconName] : null;
 
   if (!IconComponent) {
     return null;
   }
-
-  const iconUrl = `https://raw.githubusercontent.com/navikt/aksel/main/%40navikt/aksel-icons/icons/${iconName}.svg`;
-
-  const iconSvg = await fetch(iconUrl)
-    .then((r) => r.text())
-    .catch(() => undefined);
 
   return (
     <IconPageIconDetails

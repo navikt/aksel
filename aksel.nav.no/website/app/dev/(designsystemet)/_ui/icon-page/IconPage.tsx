@@ -1,3 +1,5 @@
+"use client";
+
 import NextLink from "next/link";
 import * as Icons from "@navikt/aksel-icons";
 import { BrailleIcon, DownloadIcon } from "@navikt/aksel-icons";
@@ -27,10 +29,12 @@ function IconPage({
   iconName,
   iconQuery,
   iconToggle,
+  iconSvg,
 }: {
   iconName?: keyof typeof meta;
   iconQuery?: string;
   iconToggle: "stroke" | "fill";
+  iconSvg?: string;
 }) {
   const iconsWithCategories = categorizeIcons(
     searchIcons({ query: iconQuery ?? "", toggle: iconToggle ?? "stroke" }),
@@ -156,7 +160,7 @@ function IconPage({
             </VStack>
             <IconPageSidebar iconName={iconName}>
               {iconName ? (
-                <IconDetails iconName={iconName} />
+                <IconDetails iconName={iconName} iconSvg={iconSvg} />
               ) : (
                 <IntroInformation />
               )}
