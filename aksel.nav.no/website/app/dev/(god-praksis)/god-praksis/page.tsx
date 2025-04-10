@@ -30,8 +30,9 @@ import {
   LinkCard,
   LinkCardAnchor,
   LinkCardArrow,
-  LinkCardHeading,
+  LinkCardFooter,
   LinkCardIcon,
+  LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
 
@@ -96,27 +97,18 @@ export default async function Page() {
 
                   return (
                     <li key={tema.slug}>
-                      <Box
-                        asChild
-                        paddingInline="space-12 space-24"
-                        paddingBlock="space-8"
-                        borderRadius="large"
-                      >
-                        <LinkCard data-color-role="brand-blue" isFullWidth>
-                          <HStack align="center" gap="space-12">
-                            <LinkCardIcon hasBackground={false}>
-                              <GodPraksisPictogram url={url} />
-                            </LinkCardIcon>
-                            <LinkCardHeading as="h2">
-                              <LinkCardAnchor
-                                href={`/god-praksis/${tema.slug}`}
-                              >
-                                {tema.title ?? ""}
-                              </LinkCardAnchor>
-                            </LinkCardHeading>
-                          </HStack>
-                        </LinkCard>
-                      </Box>
+                      <LinkCard data-color-role="brand-blue" hasArrow={false}>
+                        <HStack align="center">
+                          <LinkCardIcon hasBackground={false}>
+                            <GodPraksisPictogram url={url} />
+                          </LinkCardIcon>
+                          <LinkCardTitle as="h2">
+                            <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
+                              {tema.title ?? ""}
+                            </LinkCardAnchor>
+                          </LinkCardTitle>
+                        </HStack>
+                      </LinkCard>
                     </li>
                   );
                 })}
@@ -154,40 +146,23 @@ export default async function Page() {
 
                       return (
                         <li key={article.slug}>
-                          <Box
-                            asChild
-                            paddingInline="space-20"
-                            paddingBlock="space-16"
-                            borderRadius="large"
-                            height="100%"
-                          >
-                            <VStack justify="space-between" asChild>
-                              <LinkCard isFullWidth>
-                                <LinkCardHeading as="h2">
-                                  <LinkCardAnchor href={article.slug ?? ""}>
-                                    {article.heading}
-                                  </LinkCardAnchor>
-                                </LinkCardHeading>
-                                <HStack
-                                  align="center"
-                                  justify="space-between"
-                                  gap="space-8"
-                                  marginBlock="space-16 0"
-                                  wrap={false}
-                                >
-                                  <HStack gap="space-12">
-                                    <GodPraksisTaxonomyTag type="undertema">
-                                      {undertema}
-                                    </GodPraksisTaxonomyTag>
-                                    <GodPraksisTaxonomyTag type="innholdstype">
-                                      {innholdstype}
-                                    </GodPraksisTaxonomyTag>
-                                  </HStack>
-                                  <LinkCardArrow />
-                                </HStack>
-                              </LinkCard>
-                            </VStack>
-                          </Box>
+                          <LinkCard>
+                            <LinkCardTitle as="h2">
+                              <LinkCardAnchor href={article.slug ?? ""}>
+                                {article.heading}
+                              </LinkCardAnchor>
+                            </LinkCardTitle>
+                            <LinkCardFooter>
+                              <HStack gap="space-12">
+                                <GodPraksisTaxonomyTag type="undertema">
+                                  {undertema}
+                                </GodPraksisTaxonomyTag>
+                                <GodPraksisTaxonomyTag type="innholdstype">
+                                  {innholdstype}
+                                </GodPraksisTaxonomyTag>
+                              </HStack>
+                            </LinkCardFooter>
+                          </LinkCard>
                         </li>
                       );
                     })}

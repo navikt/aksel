@@ -8,33 +8,26 @@ import React, {
   ImgHTMLAttributes,
   forwardRef,
 } from "react";
-import { BodyLong, Detail, Heading, HeadingProps } from "@navikt/ds-react";
+import { ArrowRightIcon } from "@navikt/aksel-icons";
+import {
+  BodyLong,
+  BodyShortProps,
+  Heading,
+  HeadingProps,
+} from "@navikt/ds-react";
 
 /* ------------------------------ LinkCard Root ----------------------------- */
 interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  ctaText?: string;
   /**
-   * @default false
-   */
-  isFullWidth?: boolean;
-  /**
-   * Whether the card should have a border
    * @default true
    */
-  hasBorder?: boolean;
+  hasArrow?: boolean;
 }
 
 const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
   (
-    {
-      children,
-      className,
-      ctaText,
-      isFullWidth = false,
-      hasBorder = true,
-      ...restProps
-    }: LinkCardProps,
+    { children, className, hasArrow = true, ...restProps }: LinkCardProps,
     forwardedRef,
   ) => {
     return (
@@ -42,49 +35,61 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
         ref={forwardedRef}
         data-color-role="neutral"
         {...restProps}
-        className={cn("navds-link-card", className, {
-          /* TODO: Use data-attrb? */
-          "navds-link-card--full-width": isFullWidth,
-          "navds-link-card--border": hasBorder,
-        })}
+        className={cn("aksel-link-card", className)}
+        data-arrow={hasArrow}
       >
         {children}
-        {/* <LinkCardArrow /> */}
-        {ctaText && (
-          <div className={cn("navds-link-card__action")}>
-            <Detail as="span">{ctaText}</Detail>
-            <LinkCardArrow />
-          </div>
-        )}
       </div>
     );
   },
 );
 
-/* ---------------------------- LinkCard Heading ---------------------------- */
-type LinkCardHeadingProps = HTMLAttributes<HTMLHeadingElement> & {
+/* ---------------------------- LinkCard Title ---------------------------- */
+type LinkCardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   children: React.ReactNode;
   /**
    * Heading tag
    * @default "h3"
    */
-  as: "h2" | "h3" | "h4" | "h5" | "h6";
+  as: "h2" | "h3" | "h4" | "h5" | "h6" | "span";
   /**
    *
    */
   size?: HeadingProps["size"];
+  /**
+   *
+   */
+  weight?: BodyShortProps["weight"];
+  /**
+   * @default "default"
+   */
+  variant?: "default" | "subtle";
 };
 
-const LinkCardHeading = forwardRef<HTMLHeadingElement, LinkCardHeadingProps>(
-  ({ children, as, size = "small" }: LinkCardHeadingProps, forwardedRef) => {
+const LinkCardTitle = forwardRef<HTMLHeadingElement, LinkCardTitleProps>(
+  (
+    {
+      children,
+      as,
+      size = "small",
+      weight = "semibold",
+      variant = "default",
+    }: LinkCardTitleProps,
+    forwardedRef,
+  ) => {
     return (
       <Heading
         as={as}
         size={size}
         ref={forwardedRef}
-        className={cn("navds-link-card__heading")}
+        data-variant={variant}
+        className={cn(
+          "aksel-link-card__title",
+          `aksel-link-card__title--${weight}`,
+        )}
       >
         {children}
+        <LinkCardArrow />
       </Heading>
     );
   },
@@ -105,7 +110,7 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
       <a
         ref={forwardedRef}
         {...restProps}
-        className={cn("navds-link-card__anchor")}
+        className={cn("aksel-link-card__anchor")}
       >
         {children}
       </a>
@@ -128,12 +133,27 @@ const LinkCardDescription = forwardRef<
       as="p"
       size="medium"
       ref={forwardedRef}
-      className={cn("navds-link-card__description")}
+      className={cn("aksel-link-card__description")}
     >
       {children}
     </BodyLong>
   );
 });
+
+/* ---------------------------- LinkCard Footer ---------------------------- */
+interface LinkCardFooterProps extends HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+const LinkCardFooter = forwardRef<HTMLDivElement, LinkCardFooterProps>(
+  ({ children }: LinkCardFooterProps, forwardedRef) => {
+    return (
+      <div ref={forwardedRef} className={cn("aksel-link-card__footer")}>
+        {children}
+      </div>
+    );
+  },
+);
 
 /* ---------------------------- LinkCard Icon ---------------------------- */
 interface LinkCardIconProps extends HTMLAttributes<HTMLDivElement> {
@@ -153,8 +173,8 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
     return (
       <div
         ref={forwardedRef}
-        className={cn("navds-link-card__icon", {
-          "navds-link-card__icon--background": hasBackground,
+        className={cn("aksel-link-card__icon", {
+          "aksel-link-card__icon--background": hasBackground,
         })}
         aria-hidden
         data-color-role="neutral"
@@ -169,8 +189,12 @@ const LinkCardIcon = forwardRef<HTMLDivElement, LinkCardIconProps>(
 /* ---------------------------- LinkCard Arrow ---------------------------- */
 const LinkCardArrow = () => {
   return (
+    <ArrowRightIcon aria-hidden className={cn("aksel-link-card__arrow")} />
+  );
+
+  return (
     <svg
-      className={cn("navds-link-card__arrow")}
+      className={cn("aksel-link-card__arrow")}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -183,7 +207,7 @@ const LinkCardArrow = () => {
         d="M7.28033 3.21967C6.98744 2.92678 6.51256 2.92678 6.21967 3.21967C5.92678 3.51256 5.92678 3.98744 6.21967 4.28033L7.28033 3.21967ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.21967 11.7197C5.92678 12.0126 5.92678 12.4874 6.21967 12.7803C6.51256 13.0732 6.98744 13.0732 7.28033 12.7803L6.21967 11.7197ZM6.21967 4.28033L10.4697 8.53033L11.5303 7.46967L7.28033 3.21967L6.21967 4.28033ZM10.4697 7.46967L6.21967 11.7197L7.28033 12.7803L11.5303 8.53033L10.4697 7.46967Z"
       />
       <path
-        className={cn("navds-link-card__arrow-line")}
+        className={cn("aksel-link-card__arrow-line")}
         stroke="currentColor"
         d="M1.75 8H11"
         strokeWidth="1.5"
@@ -222,8 +246,8 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
   ) => {
     return (
       <span
-        className={cn("navds-link-card__image-container", {
-          "navds-link-card__image-container--inset": isInset,
+        className={cn("aksel-link-card__image-container", {
+          "aksel-link-card__image-container--inset": isInset,
         })}
       >
         <img
@@ -245,15 +269,16 @@ function aspectRatioClassName(aspectRatio?: ImageAspectRatio): string {
   }
 
   const [width, height] = aspectRatio.split(":").map(Number);
-  return `navds-link-card__image--aspect-${width}-${height}`;
+  return `aksel-link-card__image--aspect-${width}-${height}`;
 }
 
 export {
   LinkCard,
   LinkCardAnchor,
+  LinkCardArrow,
   LinkCardDescription,
-  LinkCardHeading,
+  LinkCardFooter,
+  LinkCardTitle,
   LinkCardIcon,
   LinkCardImage,
-  LinkCardArrow,
 };
