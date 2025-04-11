@@ -159,6 +159,28 @@ const GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY = defineQuery(
   `*[_type == "godpraksis_landingsside"][0].seo`,
 );
 
+const GOD_PRAKSIS_TEMA_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "gp.tema" && slug.current == $slug][0]{
+    ...,
+    "undertema": *[_type == "gp.tema.undertema" && tema->slug.current == $slug]{
+      title,
+      description
+    },
+  }`,
+);
+
+const GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY = defineQuery(
+  `*[_type == "aksel_artikkel" && defined(undertema) && $slug in undertema[]->tema->slug.current] | order(updateInfo.lastVerified desc) {
+    _id,
+    heading,
+    "displayDate": updateInfo.lastVerified,
+    "description": ingress,
+    "undertema": undertema[]->{title, "temaTitle": tema->title},
+    "innholdstype": innholdstype->title,
+    "slug": slug.current,
+  }`,
+);
+
 /* --------------------------------- Exports -------------------------------- */
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
@@ -177,4 +199,6 @@ export {
   METADATA_BY_SLUG_QUERY,
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+  GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
+  GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
 };

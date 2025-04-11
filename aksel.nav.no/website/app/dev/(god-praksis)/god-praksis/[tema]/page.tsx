@@ -1,36 +1,17 @@
-import { Metadata, ResolvingMetadata } from "next";
-import NextLink from "next/link";
 import { notFound } from "next/navigation";
-import { Image } from "sanity";
-import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
-import {
-  BodyLong,
-  HGrid,
-  HStack,
-  Heading,
-  Link,
-  Stack,
-  Tag,
-  VStack,
-} from "@navikt/ds-react";
+import { BodyLong, Stack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
-  GOD_PRAKSIS_ALL_TEMA_QUERY,
-  GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+  GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
+  GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
-import {
-  LinkCard,
-  LinkCardAnchor,
-  LinkCardArrow,
-  LinkCardFooter,
-  LinkCardIcon,
-  LinkCardTitle,
-} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
 
-export async function generateMetadata(
+type Props = {
+  params: Promise<{ tema: string }>;
+};
+
+/* export async function generateMetadata(
   _,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
@@ -53,20 +34,25 @@ export async function generateMetadata(
       images: ogImages,
     },
   };
-}
+} */
 
-export default async function Page() {
-  const [{ data: temaList }] = await Promise.all([
+export default async function Page({ params }: Props) {
+  const { tema } = await params;
+
+  const [{ data: temaPage }, { data: articleList }] = await Promise.all([
     sanityFetch({
-      query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+      query: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
+      params: { slug: tema },
+    }),
+    sanityFetch({
+      query: GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
+      params: { slug: tema },
     }),
   ]);
 
-  if (!temaList || temaList.length === 0) {
+  if (!temaPage || !articleList || articleList.length === 0) {
     notFound();
   }
-
-  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
 
   return (
     <div>
@@ -83,7 +69,7 @@ export default async function Page() {
             direction={{ xs: "column", md: "row" }}
             as="ul"
           >
-            {filteredTemaList.map((tema) => {
+            {/* {filteredTemaList.map((tema) => {
               const url = urlForImage(tema.pictogram as Image)?.url();
 
               return (
@@ -100,12 +86,12 @@ export default async function Page() {
                   </LinkCard>
                 </li>
               );
-            })}
+            })} */}
           </Stack>
         </nav>
       </GodPraksisIntroHero>
 
-      <VStack
+      {/* <VStack
         gap="space-48"
         paddingInline={{ xs: "space-16", lg: "space-40" }}
         paddingBlock="space-48"
@@ -170,12 +156,12 @@ export default async function Page() {
             </section>
           );
         })}
-      </VStack>
+      </VStack> */}
     </div>
   );
 }
 
-function GodPraksisTaxonomyTag({
+/* function GodPraksisTaxonomyTag({
   children,
   type,
 }: {
@@ -201,4 +187,4 @@ function GodPraksisTaxonomyTag({
       {children}
     </Tag>
   );
-}
+} */
