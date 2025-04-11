@@ -54,7 +54,7 @@ export async function generateMetadata(
     title: "God praksis",
     description:
       seo?.meta ??
-      `Mange som jobber med produktutvikling i NAV sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
+      `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
     openGraph: {
       images: ogImages,
     },
