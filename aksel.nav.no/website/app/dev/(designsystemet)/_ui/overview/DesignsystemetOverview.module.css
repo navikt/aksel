@@ -24,20 +24,13 @@
 .overviewImageWrapper {
   display: grid;
   place-content: center;
-  position: relative;
-  height: 10rem;
-  border-radius: var(--ax-border-radius-xlarge);
-  border: 1px solid var(--ax-border-subtleA);
+  width: 100%;
+  overflow: hidden;
+  height: min-content;
+  aspect-ratio: 16 / 10;
+  border-start-start-radius: calc(var(--ax-border-radius-xlarge) - 1px);
+  border-start-end-radius: calc(var(--ax-border-radius-xlarge) - 1px);
   background: var(--ax-bg-moderate);
-
-  .overviewCardLink:hover > & {
-    background: var(--ax-bg-moderate-hover);
-  }
-
-  .overviewCardLink:focus-visible > & {
-    outline: 3px solid var(--ax-border-focus);
-    outline-offset: 3px;
-  }
 }
 
 .overviewCardHeading {

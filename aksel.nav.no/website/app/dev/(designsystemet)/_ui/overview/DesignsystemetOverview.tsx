@@ -1,12 +1,23 @@
 import NextImage from "next/image";
-import Link from "next/link";
 import type { Image } from "sanity";
-import { BodyLong, Heading, Tag } from "@navikt/ds-react";
+import {
+  Bleed,
+  BodyLong,
+  HStack,
+  Heading,
+  Tag,
+  VStack,
+} from "@navikt/ds-react";
 import { DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
 import { getStatusTag } from "@/app/_ui/theming/theme-config";
 import { MarkdownText } from "@/app/_ui/typography/MarkdownText";
 import { DesignsystemetPageLayout } from "@/app/dev/(designsystemet)/_ui/DesignsystemetPage";
+import {
+  LinkCard,
+  LinkCardAnchor,
+  LinkCardTitle,
+} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import pagestyles from "../Designsystemet.module.css";
 import styles from "./DesignsystemetOverview.module.css";
 
@@ -60,38 +71,43 @@ function DesignsystemetOverviewCard({
   const statusTagWithoutStable = getStatusTag(page.status?.tag, true);
 
   return (
-    <Link
-      href={`/${page?.slug}`}
-      prefetch={false}
-      data-color-role={statusTag?.colorRole}
-      className={styles.overviewCardLink}
-    >
-      <span className={styles.overviewImageWrapper}>
-        {imageUrl ? (
-          <NextImage
-            src={imageUrl}
-            width={200}
-            height={200}
-            alt={page?.heading + " thumbnail"}
-            aria-hidden
-          />
-        ) : (
-          <FallbackSvg />
-        )}
-      </span>
-      <Heading as="span" size="small" className={styles.overviewCardHeading}>
-        <span>{page?.heading}</span>
-        {statusTagWithoutStable && (
-          <Tag
-            size="small"
-            variant="success"
-            data-color-role={statusTag?.colorRole}
-          >
-            {statusTagWithoutStable.text}
-          </Tag>
-        )}
-      </Heading>
-    </Link>
+    <LinkCard data-color-role={statusTag?.colorRole} autoLayout={false}>
+      <VStack gap="space-16">
+        <Bleed marginInline="space-20" marginBlock="space-16 0">
+          <span className={styles.overviewImageWrapper}>
+            {imageUrl ? (
+              <NextImage
+                src={imageUrl}
+                width={200}
+                height={200}
+                alt={page?.heading + " thumbnail"}
+                aria-hidden
+              />
+            ) : (
+              <FallbackSvg />
+            )}
+          </span>
+        </Bleed>
+
+        <LinkCardTitle as="h2">
+          <LinkCardAnchor href={`/${page?.slug}`}>
+            <HStack as="span" gap="space-8" align="center">
+              <span>{page?.heading} </span>
+              {statusTagWithoutStable && (
+                <Tag
+                  size="small"
+                  variant="success"
+                  data-color-role={statusTag?.colorRole}
+                >
+                  {/* TODO: Remove underline from tag */}
+                  {statusTagWithoutStable.text}
+                </Tag>
+              )}
+            </HStack>
+          </LinkCardAnchor>
+        </LinkCardTitle>
+      </VStack>
+    </LinkCard>
   );
 }
 
@@ -170,7 +186,7 @@ function sortDesignsystemetOverviewList(
 }
 
 export {
-  DesignsystemetOverviewPage,
   DesignsystemetOverviewCard,
+  DesignsystemetOverviewPage,
   sortDesignsystemetOverviewList,
 };

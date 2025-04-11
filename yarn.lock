@@ -4240,7 +4240,7 @@ __metadata:
     date-fns: "npm:^4.0.0"
     fast-glob: "npm:3.2.11"
     jscodeshift: "npm:^0.15.1"
-    jsdom: "npm:25.0.1"
+    jsdom: "npm:26.0.0"
     react-day-picker: "npm:9.6.1"
     react-dom: "npm:^18.0.0"
     react-router-dom: "npm:^6.3.0"
@@ -11272,7 +11272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cssstyle@npm:^4.0.1, cssstyle@npm:^4.1.0":
+"cssstyle@npm:^4.0.1":
   version: 4.1.0
   resolution: "cssstyle@npm:4.1.0"
   dependencies:
@@ -11973,6 +11973,18 @@ __metadata:
     "@types/trusted-types":
       optional: true
   checksum: 10/98570c53385518a2f9b617f796926338856acfdd3369c88b5905bddf96bd7d391bf8a5433127155e0046e6faa2bfb767185fcd571b865dfabe624c099e2537f5
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "dompurify@npm:3.2.5"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 10/03974f18851fb4e447d26adc0ebf7a64b6c5b4a11caebebec3e04de8fcaa19cdb67bf3575a2335727123d0fc1c2febc1bc992a84f327a8ce65a0bfd11e3afc50
   languageName: node
   linkType: hard
 
@@ -15166,7 +15178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^7.0.5, https-proxy-agent@npm:^7.0.6":
+"https-proxy-agent@npm:^7.0.6":
   version: 7.0.6
   resolution: "https-proxy-agent@npm:7.0.6"
   dependencies:
@@ -16083,6 +16095,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isomorphic-dompurify@npm:2.23.0":
+  version: 2.23.0
+  resolution: "isomorphic-dompurify@npm:2.23.0"
+  dependencies:
+    dompurify: "npm:^3.2.5"
+    jsdom: "npm:^26.0.0"
+  checksum: 10/81577942fd41bdb890a713a9f0e6aa78b5fcf4f9722c834e76002fdb6d40bd7e6b8f69d205a94225e03a5b67bac6a6ce4483fcb2342c9bfe6996039d55e63ad6
+  languageName: node
+  linkType: hard
+
 "isomorphic-dompurify@npm:^2.19.0":
   version: 2.22.0
   resolution: "isomorphic-dompurify@npm:2.22.0"
@@ -16323,21 +16345,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:25.0.1":
-  version: 25.0.1
-  resolution: "jsdom@npm:25.0.1"
+"jsdom@npm:26.0.0, jsdom@npm:^26.0.0":
+  version: 26.0.0
+  resolution: "jsdom@npm:26.0.0"
   dependencies:
-    cssstyle: "npm:^4.1.0"
+    cssstyle: "npm:^4.2.1"
     data-urls: "npm:^5.0.0"
     decimal.js: "npm:^10.4.3"
-    form-data: "npm:^4.0.0"
+    form-data: "npm:^4.0.1"
     html-encoding-sniffer: "npm:^4.0.0"
     http-proxy-agent: "npm:^7.0.2"
-    https-proxy-agent: "npm:^7.0.5"
+    https-proxy-agent: "npm:^7.0.6"
     is-potential-custom-element-name: "npm:^1.0.1"
-    nwsapi: "npm:^2.2.12"
-    parse5: "npm:^7.1.2"
-    rrweb-cssom: "npm:^0.7.1"
+    nwsapi: "npm:^2.2.16"
+    parse5: "npm:^7.2.1"
+    rrweb-cssom: "npm:^0.8.0"
     saxes: "npm:^6.0.0"
     symbol-tree: "npm:^3.2.4"
     tough-cookie: "npm:^5.0.0"
@@ -16345,15 +16367,15 @@ __metadata:
     webidl-conversions: "npm:^7.0.0"
     whatwg-encoding: "npm:^3.1.1"
     whatwg-mimetype: "npm:^4.0.0"
-    whatwg-url: "npm:^14.0.0"
+    whatwg-url: "npm:^14.1.0"
     ws: "npm:^8.18.0"
     xml-name-validator: "npm:^5.0.0"
   peerDependencies:
-    canvas: ^2.11.2
+    canvas: ^3.0.0
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 10/e6bf7250ddd2fbcf68da0ea041a0dc63545dc4bf77fa3ff40a46ae45b1dac1ca55b87574ab904d1f8baeeb547c52cec493a22f545d7d413b320011f41150ec49
+  checksum: 10/8c230ee4657240bbbca6b4ebb484be53fc6a777a22a3357c80c5537222813666e3e1f54740bc13e769c461d9598ba7dac402c245949c6cef7ef7014ce6f36f01
   languageName: node
   linkType: hard
 
@@ -16388,40 +16410,6 @@ __metadata:
     canvas:
       optional: true
   checksum: 10/71ad2e769515a23896881233a30d292e03752a5b01329e668a73cf205f935b55bf0881f345c747c5b4faf6288d5a01d0b0dae7b9f3379fa73d014c5a990ca0a0
-  languageName: node
-  linkType: hard
-
-"jsdom@npm:^26.0.0":
-  version: 26.0.0
-  resolution: "jsdom@npm:26.0.0"
-  dependencies:
-    cssstyle: "npm:^4.2.1"
-    data-urls: "npm:^5.0.0"
-    decimal.js: "npm:^10.4.3"
-    form-data: "npm:^4.0.1"
-    html-encoding-sniffer: "npm:^4.0.0"
-    http-proxy-agent: "npm:^7.0.2"
-    https-proxy-agent: "npm:^7.0.6"
-    is-potential-custom-element-name: "npm:^1.0.1"
-    nwsapi: "npm:^2.2.16"
-    parse5: "npm:^7.2.1"
-    rrweb-cssom: "npm:^0.8.0"
-    saxes: "npm:^6.0.0"
-    symbol-tree: "npm:^3.2.4"
-    tough-cookie: "npm:^5.0.0"
-    w3c-xmlserializer: "npm:^5.0.0"
-    webidl-conversions: "npm:^7.0.0"
-    whatwg-encoding: "npm:^3.1.1"
-    whatwg-mimetype: "npm:^4.0.0"
-    whatwg-url: "npm:^14.1.0"
-    ws: "npm:^8.18.0"
-    xml-name-validator: "npm:^5.0.0"
-  peerDependencies:
-    canvas: ^3.0.0
-  peerDependenciesMeta:
-    canvas:
-      optional: true
-  checksum: 10/8c230ee4657240bbbca6b4ebb484be53fc6a777a22a3357c80c5537222813666e3e1f54740bc13e769c461d9598ba7dac402c245949c6cef7ef7014ce6f36f01
   languageName: node
   linkType: hard
 
@@ -18868,13 +18856,6 @@ __metadata:
   dependencies:
     boolbase: "npm:^1.0.0"
   checksum: 10/5afc3dafcd1573b08877ca8e6148c52abd565f1d06b1eb08caf982e3fa289a82f2cae697ffb55b5021e146d60443f1590a5d6b944844e944714a5b549675bcd3
-  languageName: node
-  linkType: hard
-
-"nwsapi@npm:^2.2.12":
-  version: 2.2.16
-  resolution: "nwsapi@npm:2.2.16"
-  checksum: 10/1e5e086cdd4ca4a45f414d37f49bf0ca81d84ed31c6871ac68f531917d2910845db61f77c6d844430dc90fda202d43fce9603024e74038675de95229eb834dba
   languageName: node
   linkType: hard
 
@@ -26446,8 +26427,9 @@ __metadata:
     cross-env: "npm:^7.0.0"
     date-fns: "npm:^4.0.0"
     fuse.js: "npm:^7.0.0"
+    isomorphic-dompurify: "npm:2.23.0"
     jscodeshift: "npm:^0.15.1"
-    jsdom: "npm:25.0.1"
+    jsdom: "npm:26.0.0"
     json5: "npm:2.2.1"
     lodash: "npm:^4.17.21"
     lz-string: "npm:^1.5.0"
