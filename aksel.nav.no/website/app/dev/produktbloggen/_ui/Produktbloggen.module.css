@@ -81,10 +81,6 @@
   margin-block: var(--ax-space-64) 0;
   margin-inline: auto;
   border-radius: 1rem;
-  box-shadow:
-    0 0 0 0 rgb(255 255 255),
-    0 0 0 1px rgba(7 26 54 / 0.21),
-    0 0 0 0 rgba(0 0 0 0);
   width: 100%;
   max-width: 48rem;
 

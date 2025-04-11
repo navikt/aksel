@@ -1,3 +1,4 @@
+import { Page } from "@navikt/ds-react";
 import Footer from "@/app/_ui/footer/Footer";
 import { Header } from "@/app/_ui/header/Header";
 import styles from "./_ui/Produktbloggen.module.css";
