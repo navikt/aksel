@@ -11,7 +11,6 @@
   margin-inline: auto;
   width: 100%;
   gap: var(--ax-space-24);
-  position: relative;
 
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   min-height: calc(100vh - var(--website-header-height-width-border));
@@ -90,18 +89,11 @@
 }
 
 .customBlockWrapper {
-  position: relative;
   margin-top: var(--ax-space-64);
   padding-inline: var(--ax-space-16);
-
-  & > div {
-    position: relative;
-    margin-top: var(--ax-space-32);
-  }
 }
 
 .articleEnd {
-  position: relative;
   padding-inline: var(--ax-space-16);
   margin-top: var(--ax-space-64);
   color: var(--ax-text-brand-blue);
