@@ -1,5 +1,19 @@
 # @navikt/ds-react
 
+## 7.20.0
+
+### Minor Changes
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
+- Timeline: Add `placement`-prop for periods for more fine-grained control over Popover-placement. ([#3736](https://github.com/navikt/aksel/pull/3736))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-tokens@7.20.0
+  - @navikt/aksel-icons@7.20.0
+
 ## 7.19.1
 
 ### Patch Changes
