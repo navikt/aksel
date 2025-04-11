@@ -102,7 +102,6 @@
 .authorText {
   margin-bottom: var(--ax-space-8);
   text-align: center;
-  text-transform: uppercase;
   letter-spacing: 1.05px;
 
   /* shouldn't this be a part of details uppercase? */
