@@ -57,7 +57,7 @@ const FilteredOptionsItem = ({ option }: { option: ComboboxOption }) => {
       })}
       data-no-focus={isDisabled(option) || undefined}
       id={optionId}
-      key={option.label}
+      key={optionId}
       tabIndex={-1}
       onMouseMove={() => {
         if (!isActive) {
