@@ -33,7 +33,7 @@
     color: var(--ax-text-contrast);
   }
 
-  &[data-autoLayout="true"] {
+  &[data-layout="auto"] {
     display: grid;
     grid-template-areas:
       "image image"

@@ -8,6 +8,7 @@ import React, {
   ImgHTMLAttributes,
   forwardRef,
 } from "react";
+import { undefined } from "zod";
 import { ArrowRightIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -47,7 +48,7 @@ const LinkCard = forwardRef<HTMLDivElement, LinkCardProps>(
         {...restProps}
         className={cn("aksel-link-card", className)}
         data-arrow={hasArrow}
-        data-autoLayout={autoLayout}
+        data-layout={autoLayout ? "auto" : undefined}
       >
         {children}
       </div>
@@ -248,8 +249,8 @@ const LinkCardImage = forwardRef<HTMLImageElement, LinkCardImageProps>(
       className,
       alt,
       aspectRatio,
-      width = aspectRatio ? "100%" : undefined,
-      height = aspectRatio ? "100%" : undefined,
+      width = aspectRatio ? "100%" : "",
+      height = aspectRatio ? "100%" : "",
       isInset = false,
       ...restProps
     }: LinkCardImageProps,
