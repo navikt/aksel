@@ -81,7 +81,7 @@ export default async function Page() {
         <PageBlock width="xl" gutters as="main">
           <GodPraksisIntroHero title="God praksis">
             <BodyLong data-text-prose spacing>
-              Mange som jobber med produktutvikling i NAV sitter på kunnskap og
+              Mange som jobber med produktutvikling i Nav sitter på kunnskap og
               erfaring som er nyttig for oss alle. Det er god praksis som vi
               deler her.
             </BodyLong>
