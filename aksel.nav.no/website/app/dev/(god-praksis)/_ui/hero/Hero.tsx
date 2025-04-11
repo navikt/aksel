@@ -1,15 +1,40 @@
-import Image from "next/image";
+import NextImage from "next/image";
 import Link from "next/link";
-import { Box, Heading } from "@navikt/ds-react";
+import { Image } from "sanity";
+import { BodyLong, Box, HStack, Heading, Stack } from "@navikt/ds-react";
+import { sanityFetch } from "@/app/_sanity/live";
+import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
+import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
+import { urlForImage } from "@/app/_sanity/utils";
+import {
+  LinkCard,
+  LinkCardAnchor,
+  LinkCardIcon,
+  LinkCardTitle,
+} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
 import { HeroCube } from "./Cube";
 import styles from "./Hero.module.css";
 
 type GpIntroHeroProps = {
   title: string;
-  children: React.ReactNode;
+  description?: string;
+  image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult>["pictogram"];
 };
 
-function GodPraksisIntroHero({ title, children }: GpIntroHeroProps) {
+async function GodPraksisIntroHero({
+  title,
+  description,
+  image,
+}: GpIntroHeroProps) {
+  const { data: temaList } = await sanityFetch({
+    query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+  });
+
+  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
+
+  const imageUrl = urlForImage(image as Image)?.url();
+
   return (
     <Box
       paddingInline={{ xs: "space-16", lg: "space-40" }}
@@ -17,10 +42,44 @@ function GodPraksisIntroHero({ title, children }: GpIntroHeroProps) {
       className={styles.godPraksisHero}
     >
       <HeroCube />
-      <Heading level="1" size="xlarge" className={styles.godPraksisHeroTitle}>
-        {title}
-      </Heading>
-      <div>{children}</div>
+      <HStack gap="space-12" align="center" marginBlock="0 space-16">
+        {imageUrl && <GodPraksisPictogram url={imageUrl} />}
+        <Heading level="1" size="xlarge" className={styles.godPraksisHeroTitle}>
+          {title}
+        </Heading>
+      </HStack>
+      {description && (
+        <BodyLong data-text-prose spacing>
+          {description}
+        </BodyLong>
+      )}
+      <nav aria-label="Temavelger">
+        <Stack
+          gap={{ xs: "space-12", md: "space-24" }}
+          wrap
+          direction={{ xs: "column", md: "row" }}
+          as="ul"
+        >
+          {filteredTemaList.map((tema) => {
+            const url = urlForImage(tema.pictogram as Image)?.url();
+
+            return (
+              <li key={tema.slug}>
+                <LinkCard data-color-role="brand-blue" hasArrow={false}>
+                  <LinkCardIcon hasBackground={false}>
+                    <GodPraksisPictogram url={url} />
+                  </LinkCardIcon>
+                  <LinkCardTitle as="h2">
+                    <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
+                      {tema.title ?? ""}
+                    </LinkCardAnchor>
+                  </LinkCardTitle>
+                </LinkCard>
+              </li>
+            );
+          })}
+        </Stack>
+      </nav>
     </Box>
   );
 }
@@ -42,7 +101,7 @@ function GodPraksisTemaCard({
     <Link href={href} prefetch={false} className={styles.godPraksisTemaCard}>
       <span>
         {imageSrc ? (
-          <Image
+          <NextImage
             src={imageSrc}
             decoding="sync"
             width={32}

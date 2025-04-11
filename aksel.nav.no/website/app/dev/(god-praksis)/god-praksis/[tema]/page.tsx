@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { BodyLong, Stack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
@@ -56,107 +55,11 @@ export default async function Page({ params }: Props) {
 
   return (
     <div>
-      <GodPraksisIntroHero title="God praksis">
-        <BodyLong data-text-prose spacing>
-          Mange som jobber med produktutvikling i Nav sitter på kunnskap og
-          erfaring som er nyttig for oss alle. Det er god praksis som vi deler
-          her.
-        </BodyLong>
-        <nav aria-label="Temavelger">
-          <Stack
-            gap={{ xs: "space-12", md: "space-24" }}
-            wrap
-            direction={{ xs: "column", md: "row" }}
-            as="ul"
-          >
-            {/* {filteredTemaList.map((tema) => {
-              const url = urlForImage(tema.pictogram as Image)?.url();
-
-              return (
-                <li key={tema.slug}>
-                  <LinkCard data-color-role="brand-blue" hasArrow={false}>
-                    <LinkCardIcon hasBackground={false}>
-                      <GodPraksisPictogram url={url} />
-                    </LinkCardIcon>
-                    <LinkCardTitle as="h2">
-                      <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
-                        {tema.title ?? ""}
-                      </LinkCardAnchor>
-                    </LinkCardTitle>
-                  </LinkCard>
-                </li>
-              );
-            })} */}
-          </Stack>
-        </nav>
-      </GodPraksisIntroHero>
-
-      {/* <VStack
-        gap="space-48"
-        paddingInline={{ xs: "space-16", lg: "space-40" }}
-        paddingBlock="space-48"
-      >
-        {filteredTemaList.map((tema) => {
-          return (
-            <section key={tema.slug} aria-label={`Tema ${tema.title}`}>
-              <VStack gap="space-8" marginBlock="0 space-24">
-                <Heading level="2" size="large">
-                  {tema.title}
-                </Heading>
-                {tema.description && <BodyLong>{tema.description}</BodyLong>}
-              </VStack>
-              <HGrid
-                as="ul"
-                columns={{ xs: 1, md: 2 }}
-                gap={{ xs: "space-12", md: "space-24" }}
-                marginBlock="0 space-24"
-              >
-                {tema.articles.map((article) => {
-                  const undertema = article.undertema?.find(
-                    (ut) => ut?.temaTitle === tema.title,
-                  )?.title;
-                  const innholdstype = article.innholdstype;
-
-                  return (
-                    <li key={article.slug}>
-                      <LinkCard>
-                        <LinkCardTitle as="h2">
-                          <LinkCardAnchor href={article.slug ?? ""}>
-                            {article.heading}
-                          </LinkCardAnchor>
-                        </LinkCardTitle>
-                        <LinkCardFooter>
-                          <HStack gap="space-12">
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </HStack>
-                        </LinkCardFooter>
-                      </LinkCard>
-                    </li>
-                  );
-                })}
-              </HGrid>
-              <h3>
-                <Link
-                  href={`/god-praksis/${tema.slug}`}
-                  as={NextLink}
-                  data-umami-event="navigere"
-                  data-umami-event-kilde="god praksis forside"
-                  data-link-card-anchor
-                  data-color-role="brand-blue"
-                >
-                  {`Alt fra ${tema.title} `}
-                  <LinkCardArrow />
-                </Link>
-              </h3>
-            </section>
-          );
-        })}
-      </VStack> */}
+      <GodPraksisIntroHero
+        title={temaPage.title ?? "Tema"}
+        description={temaPage.description}
+        image={temaPage.pictogram}
+      />
     </div>
   );
 }

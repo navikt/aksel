@@ -9,7 +9,6 @@ import {
   HStack,
   Heading,
   Link,
-  Stack,
   Tag,
   VStack,
 } from "@navikt/ds-react";
@@ -18,17 +17,15 @@ import {
   GOD_PRAKSIS_ALL_TEMA_QUERY,
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 } from "@/app/_sanity/queries";
-import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
   LinkCard,
   LinkCardAnchor,
   LinkCardArrow,
   LinkCardFooter,
-  LinkCardIcon,
   LinkCardTitle,
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
-import { GodPraksisPictogram } from "@/app/dev/(god-praksis)/_ui/pictogram/GodPraksisPictogram";
 
 export async function generateMetadata(
   _,
@@ -70,40 +67,12 @@ export default async function Page() {
 
   return (
     <div>
-      <GodPraksisIntroHero title="God praksis">
-        <BodyLong data-text-prose spacing>
-          Mange som jobber med produktutvikling i Nav sitter på kunnskap og
+      <GodPraksisIntroHero
+        title="God praksis"
+        description="Mange som jobber med produktutvikling i Nav sitter på kunnskap og
           erfaring som er nyttig for oss alle. Det er god praksis som vi deler
-          her.
-        </BodyLong>
-        <nav aria-label="Temavelger">
-          <Stack
-            gap={{ xs: "space-12", md: "space-24" }}
-            wrap
-            direction={{ xs: "column", md: "row" }}
-            as="ul"
-          >
-            {filteredTemaList.map((tema) => {
-              const url = urlForImage(tema.pictogram as Image)?.url();
-
-              return (
-                <li key={tema.slug}>
-                  <LinkCard data-color-role="brand-blue" hasArrow={false}>
-                    <LinkCardIcon hasBackground={false}>
-                      <GodPraksisPictogram url={url} />
-                    </LinkCardIcon>
-                    <LinkCardTitle as="h2">
-                      <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
-                        {tema.title ?? ""}
-                      </LinkCardAnchor>
-                    </LinkCardTitle>
-                  </LinkCard>
-                </li>
-              );
-            })}
-          </Stack>
-        </nav>
-      </GodPraksisIntroHero>
+          her."
+      />
 
       <VStack
         gap="space-48"
