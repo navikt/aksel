@@ -113,7 +113,8 @@ const BLOGG_BY_SLUG_QUERY =
     ...,
     ${destructureBlocks}
   },
-  ${contributorsAll}
+  ${contributorsAll},
+  publishedAt,
 }`);
 
 const TOC_BY_SLUG_QUERY =

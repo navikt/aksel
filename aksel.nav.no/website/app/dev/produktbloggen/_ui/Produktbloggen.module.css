@@ -1,0 +1,147 @@
+.websitePage {
+  background-color: var(--ax-bg-brand-blue-soft);
+}
+
+.header {
+  background-color: var(--ax-bg-brand-blue-soft);
+}
+
+.pageLayout {
+  display: grid;
+  margin-inline: auto;
+  width: 100%;
+  gap: var(--ax-space-24);
+
+  /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
+  min-height: calc(100vh - var(--website-header-height-width-border));
+}
+
+.main {
+  padding-block: var(--ax-space-64) 8vw;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.preamble {
+  padding-inline: var(--ax-space-16);
+}
+
+.intro {
+  text-align: center;
+  margin-inline: auto;
+  max-width: 670px;
+}
+
+.articleTitle {
+  text-wrap: balance;
+  font-size: 3rem;
+  color: var(--ax-text-brand-blue);
+}
+
+.bodyLong1 {
+  color: var(--ax-text-brand-blue-subtle);
+  margin-top: var(--ax-space-16);
+  font-size: var(--ax-font-size-heading-medium);
+  line-height: var(--ax-font-line-height-heading-medium);
+}
+
+.articleMeta {
+  display: inline-flex;
+  margin-top: var(--ax-space-32);
+  flex-wrap: wrap;
+  gap: var(--ax-space-8);
+  align-items: center;
+  font-size: var(--ax-font-size-medium);
+  line-height: var(--ax-font-line-height-large);
+}
+
+.diamond {
+  width: var(--ax-space-8);
+  height: var(--ax-space-8);
+  rotate: 45deg;
+  opacity: 0.5;
+  background-color: var(--ax-brand-blue-800);
+}
+
+.diamondCenter {
+  width: var(--ax-space-8);
+  height: var(--ax-space-8);
+  rotate: 45deg;
+  background-color: var(--ax-brand-blue-800);
+  margin-inline: auto;
+  margin-bottom: var(--ax-space-40);
+}
+
+.image {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  margin-block: var(--ax-space-64) 0;
+  margin-inline: auto;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 48rem;
+
+  & img {
+    border-radius: 1rem;
+  }
+}
+
+.customBlockWrapper {
+  margin-top: var(--ax-space-64);
+  padding-inline: var(--ax-space-16);
+}
+
+.articleEnd {
+  padding-inline: var(--ax-space-16);
+  margin-top: var(--ax-space-64);
+  color: var(--ax-text-brand-blue);
+}
+
+.authorText {
+  margin-bottom: var(--ax-space-8);
+  text-align: center;
+  letter-spacing: 1.05px;
+
+  /* shouldn't this be a part of details uppercase? */
+  color: var(--ax-text-brand-blue);
+}
+
+.author {
+  display: flex;
+  margin-block: var(--ax-space-8);
+  flex-wrap: wrap;
+  gap: var(--ax-space-4);
+  justify-content: center;
+  color: var(--ax-text-neutral);
+
+  & address {
+    font-style: normal;
+  }
+}
+
+.publishedText {
+  display: flex;
+  justify-content: center;
+  color: var(--ax-text-neutral-subtle);
+}
+
+/* 480 === sm
+min-width: X == X is the minimum width needed before styles apply */
+@media (min-width: 480px) {
+  .main {
+    padding-bottom: var(--ax-space-128);
+  }
+
+  .intro {
+    width: 90%;
+  }
+}
+
+/* 768 == md */
+@media (min-width: 768px) {
+  .h1 {
+    hyphens: none;
+  }
+}
