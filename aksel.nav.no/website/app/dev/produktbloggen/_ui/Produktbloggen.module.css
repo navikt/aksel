@@ -11,16 +11,13 @@
   margin-inline: auto;
   width: 100%;
   gap: var(--ax-space-24);
-  z-index: 0;
   position: relative;
-  max-width: 1920px;
 
   /* stylelint-disable-next-line csstools/value-no-unknown-custom-properties */
   min-height: calc(100vh - var(--website-header-height-width-border));
 }
 
 .main {
-  overflow: hidden;
   padding-block: var(--ax-space-64) 8vw;
 
   &:focus {
@@ -30,7 +27,6 @@
 
 .preamble {
   padding-inline: var(--ax-space-16);
-  color: var(--ax-space-12);
 }
 
 .intro {
@@ -41,15 +37,15 @@
 
 .articleTitle {
   text-wrap: balance;
-  font-size: 48px;
+  font-size: 3rem;
   color: var(--ax-text-brand-blue);
 }
 
 .bodyLong1 {
   color: var(--ax-text-brand-blue-subtle);
   margin-top: var(--ax-space-16);
-  font-size: 24px;
-  line-height: 32px;
+  font-size: var(--ax-font-size-heading-medium);
+  line-height: var(--ax-font-line-height-heading-medium);
 }
 
 .articleMeta {
@@ -104,14 +100,12 @@
 
   & > div {
     position: relative;
-    z-index: 10;
     margin-top: var(--ax-space-32);
   }
 }
 
 .articleEnd {
   position: relative;
-  z-index: 10;
   padding-inline: var(--ax-space-16);
   margin-top: var(--ax-space-64);
   color: var(--ax-text-brand-blue);

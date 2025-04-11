@@ -1,41 +1,43 @@
-import Image from "next/image";
+import { PortableTextBlock } from "next-sanity";
+import NextImage from "next/image";
 import { notFound } from "next/navigation";
+import { Image } from "sanity";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import { BLOGG_BY_SLUG_QUERY } from "@/app/_sanity/queries";
-import { urlFor } from "@/sanity/interface";
-import { abbrName, getImage } from "@/utils";
-import { parseDesignsystemSlug } from "../../(designsystemet)/slug";
+import { urlForImage } from "@/app/_sanity/utils";
+import { abbrName, dateStr, getImage } from "@/utils";
 import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string }>;
 };
 
 /* https://nextjs.org/docs/app/api-reference/file-conventions/page#props */
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const parsedSlug = parseDesignsystemSlug(slug, "produktbloggen");
+  const parsedSlug = `produktbloggen/${slug}`;
 
-  const { data: page } = await sanityFetch({
+  const { data: pageData } = await sanityFetch({
     query: BLOGG_BY_SLUG_QUERY,
     params: { slug: parsedSlug },
   });
 
-  const { publishedAt: publishDate } = page;
-  const authors = (page?.contributors as any)?.map((x) => x?.title) ?? [];
+  const publishedAtRaw = pageData?.publishedAt ?? "";
+  const publishDate = await dateStr(publishedAtRaw);
+  const authors = (pageData?.contributors as any)?.map((x) => x?.title) ?? [];
 
-  const imageUrl = urlForImage(page?.seo?.image as Image)
-    .quality(100)
+  const imageUrl = urlForImage(pageData?.seo?.image as Image)
+    ?.quality(100)
     .url();
 
-  if (!page?._id) {
+  if (!pageData?._id) {
     notFound();
   }
 
-  if (!page.content || !page.heading) {
+  if (!pageData.content || !pageData.heading) {
     return null;
   }
 
@@ -56,10 +58,12 @@ export default async function Page({ params }: Props) {
         <div className={styles.preamble}>
           <div className={styles.intro}>
             <Heading level="1" size="xlarge" className={styles.articleTitle}>
-              {page.heading}
+              {pageData.heading}
             </Heading>
-            {page?.ingress && (
-              <BodyLong className={styles.bodyLong1}>{page?.ingress}</BodyLong>
+            {pageData?.ingress && (
+              <BodyLong className={styles.bodyLong1}>
+                {pageData?.ingress}
+              </BodyLong>
             )}
             <div className={styles.articleMeta}>
               <Detail uppercase as="span">
@@ -77,7 +81,7 @@ export default async function Page({ params }: Props) {
           </div>
           <div className={styles.image}>
             {imageUrl ? (
-              <Image
+              <NextImage
                 src={imageUrl}
                 blurDataURL={imageUrl}
                 placeholder="blur"
@@ -90,8 +94,8 @@ export default async function Page({ params }: Props) {
                 quality={100}
               />
             ) : (
-              <Image
-                src={getImage(page?.heading ?? "", "thumbnail")}
+              <NextImage
+                src={getImage(pageData?.heading ?? "", "thumbnail")}
                 decoding="sync"
                 layout="fill"
                 objectFit="cover"
@@ -104,7 +108,10 @@ export default async function Page({ params }: Props) {
         </div>
 
         <div className={styles.customBlockWrapper}>
-          <CustomPortableText data-wrapper-prose value={page?.content ?? []} />
+          <CustomPortableText
+            data-wrapper-prose
+            value={(pageData?.content ?? []) as PortableTextBlock[]}
+          />
         </div>
 
         <div className={styles.articleEnd}>
