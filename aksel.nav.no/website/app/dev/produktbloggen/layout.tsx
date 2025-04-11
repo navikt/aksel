@@ -8,10 +8,9 @@ export default async function DesignsystemLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={styles.websitePage}>
+    <Page className={styles.websitePage} footer={<Footer />}>
       <Header className={styles.header} />
       <div className={styles.pageLayout}>{children}</div>
-      <Footer />
-    </div>
+    </Page>
   );
 }
