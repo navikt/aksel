@@ -1,11 +1,14 @@
 import NextImage from "next/image";
 import Link from "next/link";
 import { Image } from "sanity";
-import { BodyLong, Box, HStack, Heading, Stack } from "@navikt/ds-react";
+import { BodyLong, HStack, Heading, Stack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import { GOD_PRAKSIS_ALL_TEMA_QUERY } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForImage } from "@/app/_sanity/utils";
+import { GodPraksisHeroButton } from "@/app/dev/(god-praksis)/_ui/hero/Hero.button";
+import { GodPraksisHeroDialog } from "@/app/dev/(god-praksis)/_ui/hero/Hero.dialog";
+import { GodPraksisHeroProvider } from "@/app/dev/(god-praksis)/_ui/hero/Hero.provider";
 import {
   LinkCard,
   LinkCardAnchor,
@@ -20,28 +23,21 @@ type GpIntroHeroProps = {
   title: string;
   description?: string;
   image?: NonNullable<GOD_PRAKSIS_TEMA_BY_SLUG_QUERYResult>["pictogram"];
+  isCollapsible?: boolean;
 };
 
 async function GodPraksisIntroHero({
   title,
   description,
   image,
+  isCollapsible = false,
 }: GpIntroHeroProps) {
-  const { data: temaList } = await sanityFetch({
-    query: GOD_PRAKSIS_ALL_TEMA_QUERY,
-  });
-
-  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
-
   const imageUrl = urlForImage(image as Image)?.url();
 
   return (
-    <Box
-      paddingInline={{ xs: "space-16", lg: "space-40" }}
-      paddingBlock={{ xs: "space-16 space-12", lg: "space-40 space-24" }}
-      className={styles.godPraksisHero}
-    >
+    <GodPraksisHeroProvider>
       <HeroCube />
+      {isCollapsible && <GodPraksisHeroButton />}
       <HStack gap="space-12" align="center" marginBlock="0 space-16">
         {imageUrl && <GodPraksisPictogram url={imageUrl} />}
         <Heading level="1" size="xlarge" className={styles.godPraksisHeroTitle}>
@@ -53,34 +49,53 @@ async function GodPraksisIntroHero({
           {description}
         </BodyLong>
       )}
-      <nav aria-label="Temavelger">
-        <Stack
-          gap={{ xs: "space-12", md: "space-24" }}
-          wrap
-          direction={{ xs: "column", md: "row" }}
-          as="ul"
-        >
-          {filteredTemaList.map((tema) => {
-            const url = urlForImage(tema.pictogram as Image)?.url();
 
-            return (
-              <li key={tema.slug}>
-                <LinkCard data-color-role="brand-blue" hasArrow={false}>
-                  <LinkCardIcon hasBackground={false}>
-                    <GodPraksisPictogram url={url} />
-                  </LinkCardIcon>
-                  <LinkCardTitle as="h2">
-                    <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
-                      {tema.title ?? ""}
-                    </LinkCardAnchor>
-                  </LinkCardTitle>
-                </LinkCard>
-              </li>
-            );
-          })}
-        </Stack>
-      </nav>
-    </Box>
+      {isCollapsible ? (
+        <GodPraksisHeroDialog>
+          <GodPraksisTemaList />
+        </GodPraksisHeroDialog>
+      ) : (
+        <GodPraksisTemaList />
+      )}
+    </GodPraksisHeroProvider>
+  );
+}
+
+async function GodPraksisTemaList() {
+  const { data: temaList } = await sanityFetch({
+    query: GOD_PRAKSIS_ALL_TEMA_QUERY,
+  });
+
+  const filteredTemaList = temaList.filter((x) => x.articles.length > 0);
+
+  return (
+    <nav aria-label="Temavelger">
+      <Stack
+        gap={{ xs: "space-12", md: "space-24" }}
+        wrap
+        direction={{ xs: "column", md: "row" }}
+        as="ul"
+      >
+        {filteredTemaList.map((tema) => {
+          const url = urlForImage(tema.pictogram as Image)?.url();
+
+          return (
+            <li key={tema.slug}>
+              <LinkCard data-color-role="brand-blue" hasArrow={false}>
+                <LinkCardIcon hasBackground={false}>
+                  <GodPraksisPictogram url={url} />
+                </LinkCardIcon>
+                <LinkCardTitle as="h2">
+                  <LinkCardAnchor href={`/god-praksis/${tema.slug}`}>
+                    {tema.title ?? ""}
+                  </LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+            </li>
+          );
+        })}
+      </Stack>
+    </nav>
   );
 }
 

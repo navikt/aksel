@@ -59,6 +59,7 @@ export default async function Page({ params }: Props) {
         title={temaPage.title ?? "Tema"}
         description={temaPage.description}
         image={temaPage.pictogram}
+        isCollapsible
       />
     </div>
   );

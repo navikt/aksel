@@ -1,8 +1,6 @@
+/* stylelint-disable csstools/value-no-unknown-custom-properties */
 .heroSelector {
-  --aksel-website-hero-selector-x: ;
-  --aksel-website-hero-selector-y: ;
-
-  clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
+  clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
   animation: clipExpand 800ms cubic-bezier(0.3, 0, 0.15, 1);
   height: fit-content;
   min-height: 100%;
@@ -10,11 +8,11 @@
 
 @keyframes clipExpand {
   0% {
-    clip-path: circle(0% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
+    clip-path: circle(0% at var(--website-hero-selector-x) var(--website-hero-selector-y));
   }
 
   100% {
-    clip-path: circle(140% at var(--aksel-website-hero-selector-x) var(--aksel-website-hero-selector-y));
+    clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
   }
 }
 
@@ -23,7 +21,7 @@
 }
 
 .heroGradientOpen {
-  background: linear-gradient(265deg, #14b8a6 0%, #2dd4bf 48.5%, #2dd4bf 100%);
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-moderate-hover) 36.67%);
 }
 
 /* NEW */
