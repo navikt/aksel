@@ -1,6 +1,7 @@
 export type TokenForDocumentationT = {
   name: string;
   value: string;
+  jsValue: string;
   rawValue: string;
   comment: string;
   type: string;

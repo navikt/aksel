@@ -1,3 +1,4 @@
+import { useSearchParams } from "next/navigation";
 import { Box, CopyButton, Detail, HGrid, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../../../types/tokens";
@@ -10,7 +11,9 @@ const TokenEntry = ({
   index: number;
   token: TokenForDocumentationT;
 }) => {
-  const tokenText = `--ax-${token.name}`;
+  const searchParams = useSearchParams();
+  const tokenFormat = searchParams?.get("tokenFormat");
+  const tokenText = tokenFormat === "js" ? token.jsValue : `--ax-${token.name}`;
   return (
     <Box.New
       borderWidth={`${index === 0 ? 1 : 0} 0 1`}

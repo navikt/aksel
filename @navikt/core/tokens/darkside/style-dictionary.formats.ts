@@ -112,12 +112,14 @@ export const formatDOCS: FormatFn = async ({ dictionary }) => {
   const tokens = dictionary.allTokens
     .filter((token) => token.type && !ignoredTokenTypes.includes(token.type))
     .map((token, index) => {
-      const name = kebabCaseForAlpha(token.name.slice(2));
+      const tokenNameWithoutPrefix = token.name.slice(2);
+      const name = kebabCaseForAlpha(tokenNameWithoutPrefix);
       return (
         JSON.stringify({
           name,
           value: createTokenValue(token),
           rawValue: formatRawValue(token),
+          jsValue: tokenNameWithoutPrefix,
           comment: token.comment,
           type: token.type,
           rawType: token.attributes?.type,
