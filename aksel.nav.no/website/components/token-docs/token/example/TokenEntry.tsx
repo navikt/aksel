@@ -30,6 +30,7 @@ const TokenEntry = ({
               text={tokenText}
               iconPosition="right"
               size="xsmall"
+              style={{ marginInlineStart: "calc(-1 * var(--ax-space-8))" }}
             />
             {!["backgroundColor", "textColor", "borderColor"].includes(
               token.category,
