@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { HGrid, Heading, VStack } from "@navikt/ds-react";
+import { BodyLong, HGrid, Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
@@ -49,6 +49,12 @@ type ArticleT = Omit<
   innholdstype: string;
 };
 
+const innholdstypeTitleMap: Record<string, string> = {
+  Guide: "Guider",
+  Verktøy: "Verktøy",
+  Retningslinje: "Retningslinjer",
+};
+
 type ValidArticlesT = ArticleT[];
 
 export default async function Page(props: Props) {
@@ -87,8 +93,6 @@ export default async function Page(props: Props) {
     innholdstype: string;
   }[] = [];
 
-  const filteredByParamsArticles: ValidArticlesT = [];
-
   for (const article of articleList) {
     const relevantUndertema = article.undertema?.find(
       (ut) => ut?.temaTitle === temaPage.title,
@@ -111,6 +115,13 @@ export default async function Page(props: Props) {
     a.undertema.localeCompare(b.undertema),
   );
 
+  // For article display
+  const groupByField = undertemaParam ? "innholdstype" : "undertema";
+  const articlesMap: Record<
+    string,
+    { title: string; description?: string; articles: ArticleT[] }
+  > = {};
+
   for (const article of sortedArticles) {
     simplifiedArticles.push({
       undertema: article.undertema,
@@ -122,34 +133,44 @@ export default async function Page(props: Props) {
     const matchesInnholdstype =
       !innholdstypeParam || article.innholdstype === innholdstypeParam;
 
-    if (matchesUndertema && matchesInnholdstype) {
-      filteredByParamsArticles.push(article);
+    if (!matchesUndertema || !matchesInnholdstype) {
+      continue;
+    }
+
+    if (undertemaParam && innholdstypeParam) {
+      if (!articlesMap["all"]) {
+        articlesMap["all"] = {
+          title: `${
+            innholdstypeTitleMap[article.innholdstype] ?? article.innholdstype
+          } for ${article.undertema.toLocaleLowerCase()}`,
+          description: undefined,
+          articles: [],
+        };
+      }
+
+      articlesMap["all"].articles.push(article);
+    } else {
+      const key = article[groupByField];
+
+      if (!articlesMap[key]) {
+        const description =
+          groupByField !== "innholdstype"
+            ? temaPage.undertema.find((ut) => ut.title === article.undertema)
+                ?.description
+            : undefined;
+
+        articlesMap[key] = {
+          title:
+            groupByField === "innholdstype"
+              ? innholdstypeTitleMap[key] ?? key
+              : article.undertema,
+          description: description ?? undefined,
+          articles: [],
+        };
+      }
+      articlesMap[key].articles.push(article);
     }
   }
-
-  /* Group articles based on parameters */
-  const groupArticles = () => {
-    /* No grouping is needed */
-    if (undertemaParam && innholdstypeParam) {
-      return Object.entries({ all: filteredByParamsArticles });
-    }
-
-    const groupByField = undertemaParam ? "innholdstype" : "undertema";
-
-    return Object.entries(
-      filteredByParamsArticles.reduce(
-        (acc, article) => {
-          const key = article[groupByField];
-          acc[key] = acc[key] || [];
-          acc[key].push(article);
-          return acc;
-        },
-        {} as Record<string, typeof filteredByParamsArticles>,
-      ),
-    );
-  };
-
-  const groupedArticles = groupArticles();
 
   return (
     <div>
@@ -165,21 +186,19 @@ export default async function Page(props: Props) {
         undertema={undertemaParam}
       />
       <div className="container mt-8">
-        {groupedArticles.length === 0 ? (
+        {Object.entries(articlesMap).length === 0 ? (
           <p>Ingen artikler funnet.</p>
         ) : (
-          groupedArticles.map(([groupTitle, articles]) => (
-            <section aria-label="1" key={groupTitle || "all"} className="mb-10">
-              {groupTitle && (
-                <VStack gap="space-8" marginBlock="0 space-24">
-                  <Heading level="2" size="large">
-                    {groupTitle}
-                  </Heading>
-                  {/* {tema.description && <BodyLong>{tema.description}</BodyLong>} */}
-                </VStack>
-              )}
+          Object.values(articlesMap).map(({ title, description, articles }) => (
+            <section aria-label="1" key={title} className="mb-10">
+              <VStack gap="space-8" marginBlock="0 space-24">
+                <Heading level="2" size="large">
+                  {title}
+                </Heading>
+                {description && <BodyLong>{description}</BodyLong>}
+              </VStack>
               <HGrid
-                key={groupTitle}
+                key={title}
                 as="ul"
                 columns={{ xs: 1, md: 2 }}
                 gap={{ xs: "space-12", md: "space-24" }}
