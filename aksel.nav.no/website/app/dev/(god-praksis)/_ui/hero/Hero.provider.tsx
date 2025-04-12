@@ -126,8 +126,8 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
           "--website-hero-selector-y": animationRef.y + "px",
           marginBottom: getMargin(),
           transitionTimingFunction: openDialog
-            ? "cubic-bezier(0.3, 0, 0.15, 1)"
-            : "cubic-bezier(0, 0.3, 0.15, 1)",
+            ? "cubic-bezier(0.3, 1, 0.15, 1)"
+            : "cubic-bezier(0, 0.7, 0.15, 1)",
         }}
         ref={(el) => {
           setWrapperHeight(el?.getBoundingClientRect().height || 0);

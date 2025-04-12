@@ -5,6 +5,7 @@
   position: relative;
   isolation: isolate;
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-soft) 20.83%, var(--ax-bg-brand-blue-moderate) 36.67%);
+  transition: margin 500ms;
 }
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
@@ -60,7 +61,7 @@
   border: 1px solid var(--ax-border-brand-blue-subtle);
   box-shadow: 0 0 0 1px var(--ax-border-brand-blue-subtle);
   clip-path: circle(140% at var(--website-hero-selector-x) var(--website-hero-selector-y));
-  animation: clipExpand 800ms cubic-bezier(0.3, 0.5, 0.15, 1);
+  animation: clipExpand 1s cubic-bezier(0.3, 0.2, 0.15, 1);
   height: fit-content;
   min-height: 100%;
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-moderate-hover) 36.67%);
