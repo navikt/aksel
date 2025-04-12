@@ -46,7 +46,6 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
 
   const handleOpen = useCallback(
     (e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
-      closeDialogButton?.focus();
       const rect = e.currentTarget.getBoundingClientRect();
 
       setAnimationRef({
@@ -54,13 +53,17 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
         y: e.currentTarget.offsetTop + rect.height / 2,
       });
       setOpenDialog(true);
+
+      // Since we cant focus elements inside `display: none` elements, we need to
+      // wait for the dialog to be open before we focus the close button
+      setTimeout(() => closeDialogButton?.focus());
     },
     [closeDialogButton],
   );
 
   const handleClose = useCallback(() => {
     setOpenDialog(false);
-    openDialogButton?.focus();
+    setTimeout(() => openDialogButton?.focus());
   }, [openDialogButton]);
 
   const handleToggleOpen = useCallback(
@@ -116,7 +119,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
     >
       <Box
         paddingInline={{ xs: "space-16", lg: "space-40" }}
-        paddingBlock={{ xs: "space-16 space-12", lg: "space-40 space-24" }}
+        paddingBlock={{ xs: "space-16", lg: "space-40" }}
         className={styles.godPraksisHero}
         style={{
           "--website-hero-selector-x": animationRef.x + "px",
