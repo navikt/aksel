@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
+import { HGrid, Heading, VStack } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
+import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { GodPrakisChipsNavigation } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 
@@ -39,6 +41,16 @@ type Props = {
   };
 } */
 
+type ArticleT = Omit<
+  GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult[number],
+  "undertema" | "innholdstype"
+> & {
+  undertema: string;
+  innholdstype: string;
+};
+
+type ValidArticlesT = ArticleT[];
+
 export default async function Page(props: Props) {
   const { tema } = await props.params;
   const searchParams = await props.searchParams;
@@ -58,21 +70,6 @@ export default async function Page(props: Props) {
     notFound();
   }
 
-  const sortedArticles = articleList
-    .map((article) => {
-      const _undertema = article.undertema?.find(
-        (ut) => ut?.temaTitle === temaPage.title,
-      )?.title;
-
-      return {
-        ...article,
-        undertema: _undertema ?? "",
-      };
-    })
-    .filter((article) => !!article.undertema)
-    /* Makes sure sections always appear in the same order */
-    .toSorted((a, b) => a.undertema.localeCompare(b.undertema));
-
   const innholdstypeParam =
     typeof searchParams.innholdstype === "string"
       ? decodeURIComponent(searchParams.innholdstype)
@@ -83,10 +80,76 @@ export default async function Page(props: Props) {
       ? decodeURIComponent(searchParams.undertema)
       : "";
 
-  const parsedArticles = sortedArticles.map(({ undertema, innholdstype }) => ({
-    undertema,
-    innholdstype,
-  }));
+  let sortedArticles: ValidArticlesT = [];
+
+  const simplifiedArticles: {
+    undertema: string;
+    innholdstype: string;
+  }[] = [];
+
+  const filteredByParamsArticles: ValidArticlesT = [];
+
+  for (const article of articleList) {
+    const relevantUndertema = article.undertema?.find(
+      (ut) => ut?.temaTitle === temaPage.title,
+    )?.title;
+
+    if (relevantUndertema && article.innholdstype) {
+      sortedArticles.push({
+        ...article,
+        innholdstype: article.innholdstype,
+        undertema: relevantUndertema,
+      });
+      simplifiedArticles.push({
+        undertema: relevantUndertema,
+        innholdstype: article.innholdstype,
+      });
+    }
+  }
+
+  sortedArticles = sortedArticles.toSorted((a, b) =>
+    a.undertema.localeCompare(b.undertema),
+  );
+
+  for (const article of sortedArticles) {
+    simplifiedArticles.push({
+      undertema: article.undertema,
+      innholdstype: article.innholdstype,
+    });
+
+    const matchesUndertema =
+      !undertemaParam || article.undertema === undertemaParam;
+    const matchesInnholdstype =
+      !innholdstypeParam || article.innholdstype === innholdstypeParam;
+
+    if (matchesUndertema && matchesInnholdstype) {
+      filteredByParamsArticles.push(article);
+    }
+  }
+
+  /* Group articles based on parameters */
+  const groupArticles = () => {
+    /* No grouping is needed */
+    if (undertemaParam && innholdstypeParam) {
+      return Object.entries({ all: filteredByParamsArticles });
+    }
+
+    const groupByField = undertemaParam ? "innholdstype" : "undertema";
+
+    return Object.entries(
+      filteredByParamsArticles.reduce(
+        (acc, article) => {
+          const key = article[groupByField];
+          acc[key] = acc[key] || [];
+          acc[key].push(article);
+          return acc;
+        },
+        {} as Record<string, typeof filteredByParamsArticles>,
+      ),
+    );
+  };
+
+  const groupedArticles = groupArticles();
 
   return (
     <div>
@@ -97,10 +160,51 @@ export default async function Page(props: Props) {
         isCollapsible
       />
       <GodPrakisChipsNavigation
-        articles={parsedArticles}
+        articles={simplifiedArticles}
         innholdstype={innholdstypeParam}
         undertema={undertemaParam}
       />
+      <div className="container mt-8">
+        {groupedArticles.length === 0 ? (
+          <p>Ingen artikler funnet.</p>
+        ) : (
+          groupedArticles.map(([groupTitle, articles]) => (
+            <section aria-label="1" key={groupTitle || "all"} className="mb-10">
+              {groupTitle && (
+                <VStack gap="space-8" marginBlock="0 space-24">
+                  <Heading level="2" size="large">
+                    {groupTitle}
+                  </Heading>
+                  {/* {tema.description && <BodyLong>{tema.description}</BodyLong>} */}
+                </VStack>
+              )}
+              <HGrid
+                key={groupTitle}
+                as="ul"
+                columns={{ xs: 1, md: 2 }}
+                gap={{ xs: "space-12", md: "space-24" }}
+                marginBlock="0 space-24"
+              >
+                {articles.map((article) => (
+                  <li key={article.slug}>
+                    <a
+                      href={`/dev/god-praksis/artikkel/${article.slug}`}
+                      className="text-lg font-medium hover:underline"
+                    >
+                      {article.heading}
+                    </a>
+                    {article.description && (
+                      <p className="mt-1 text-gray-600">
+                        {article.description}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </HGrid>
+            </section>
+          ))
+        )}
+      </div>
     </div>
   );
 }
