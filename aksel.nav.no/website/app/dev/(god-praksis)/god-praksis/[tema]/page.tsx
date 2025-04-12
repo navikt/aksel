@@ -1,5 +1,15 @@
 import { notFound } from "next/navigation";
-import { BodyLong, HGrid, Heading, VStack } from "@navikt/ds-react";
+import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
+import {
+  BodyLong,
+  Box,
+  Detail,
+  HGrid,
+  HStack,
+  Heading,
+  Tag,
+  VStack,
+} from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERY,
@@ -8,6 +18,14 @@ import {
 import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { GodPrakisChipsNavigation } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
+import {
+  LinkCard,
+  LinkCardAnchor,
+  LinkCardDescription,
+  LinkCardFooter,
+  LinkCardTitle,
+} from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
+import { dateStr } from "@/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -103,6 +121,7 @@ export default async function Page(props: Props) {
         ...article,
         innholdstype: article.innholdstype,
         undertema: relevantUndertema,
+        displayDate: await dateStr(article.displayDate ?? ""),
       });
       simplifiedArticles.push({
         undertema: relevantUndertema,
@@ -119,7 +138,12 @@ export default async function Page(props: Props) {
   const groupByField = undertemaParam ? "innholdstype" : "undertema";
   const articlesMap: Record<
     string,
-    { title: string; description?: string; articles: ArticleT[] }
+    {
+      title: string;
+      description?: string;
+      articles: ArticleT[];
+      ariaLabel: string;
+    }
   > = {};
 
   for (const article of sortedArticles) {
@@ -139,11 +163,14 @@ export default async function Page(props: Props) {
 
     if (undertemaParam && innholdstypeParam) {
       if (!articlesMap["all"]) {
+        const title = `${
+          innholdstypeTitleMap[article.innholdstype] ?? article.innholdstype
+        } for ${article.undertema.toLocaleLowerCase()}`;
+
         articlesMap["all"] = {
-          title: `${
-            innholdstypeTitleMap[article.innholdstype] ?? article.innholdstype
-          } for ${article.undertema.toLocaleLowerCase()}`,
+          title,
           description: undefined,
+          ariaLabel: title,
           articles: [],
         };
       }
@@ -165,6 +192,11 @@ export default async function Page(props: Props) {
               ? innholdstypeTitleMap[key] ?? key
               : article.undertema,
           description: description ?? undefined,
+          ariaLabel: `${
+            groupByField === "innholdstype"
+              ? `Innholdstype ${key}`
+              : `Undertema ${article.undertema}`
+          }`,
           articles: [],
         };
       }
@@ -189,46 +221,67 @@ export default async function Page(props: Props) {
         {Object.entries(articlesMap).length === 0 ? (
           <p>Ingen artikler funnet.</p>
         ) : (
-          Object.values(articlesMap).map(({ title, description, articles }) => (
-            <section aria-label="1" key={title} className="mb-10">
-              <VStack gap="space-8" marginBlock="0 space-24">
-                <Heading level="2" size="large">
-                  {title}
-                </Heading>
-                {description && <BodyLong>{description}</BodyLong>}
-              </VStack>
-              <HGrid
-                key={title}
-                as="ul"
-                columns={{ xs: 1, md: 2 }}
-                gap={{ xs: "space-12", md: "space-24" }}
-                marginBlock="0 space-24"
-              >
-                {articles.map((article) => (
-                  <li key={article.slug}>
-                    <a
-                      href={`/dev/god-praksis/artikkel/${article.slug}`}
-                      className="text-lg font-medium hover:underline"
-                    >
-                      {article.heading}
-                    </a>
-                    {article.description && (
-                      <p className="mt-1 text-gray-600">
-                        {article.description}
-                      </p>
-                    )}
-                  </li>
-                ))}
-              </HGrid>
-            </section>
-          ))
+          Object.values(articlesMap).map(
+            ({ title, description, ariaLabel, articles }) => (
+              <section aria-label={ariaLabel} key={title} className="mb-10">
+                <VStack gap="space-8" marginBlock="0 space-24">
+                  <Heading level="2" size="large">
+                    {title}
+                  </Heading>
+                  {description && <BodyLong>{description}</BodyLong>}
+                </VStack>
+                <HGrid
+                  key={title}
+                  as="ul"
+                  columns={{ xs: 1, md: 2 }}
+                  gap={{ xs: "space-12", md: "space-24" }}
+                  marginBlock="0 space-24"
+                >
+                  {articles.map((article) => (
+                    <li key={article.slug}>
+                      <LinkCard>
+                        <LinkCardTitle as="h2">
+                          <LinkCardAnchor href={article.slug ?? ""}>
+                            {article.heading}
+                          </LinkCardAnchor>
+                        </LinkCardTitle>
+
+                        {article.description && (
+                          <LinkCardDescription>
+                            {article.displayDate && (
+                              <Box asChild marginBlock="0 space-8">
+                                <Detail as="time" textColor="subtle" uppercase>
+                                  {article.displayDate}
+                                </Detail>
+                              </Box>
+                            )}
+                            <p>{article.description}</p>
+                          </LinkCardDescription>
+                        )}
+                        <LinkCardFooter>
+                          <HStack gap="space-12">
+                            <GodPraksisTaxonomyTag type="undertema">
+                              {article.undertema}
+                            </GodPraksisTaxonomyTag>
+                            <GodPraksisTaxonomyTag type="innholdstype">
+                              {article.innholdstype}
+                            </GodPraksisTaxonomyTag>
+                          </HStack>
+                        </LinkCardFooter>
+                      </LinkCard>
+                    </li>
+                  ))}
+                </HGrid>
+              </section>
+            ),
+          )
         )}
       </div>
     </div>
   );
 }
 
-/* function GodPraksisTaxonomyTag({
+function GodPraksisTaxonomyTag({
   children,
   type,
 }: {
@@ -254,4 +307,4 @@ export default async function Page(props: Props) {
       {children}
     </Tag>
   );
-} */
+}

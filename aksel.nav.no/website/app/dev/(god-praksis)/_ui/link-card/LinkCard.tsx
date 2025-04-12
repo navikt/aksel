@@ -131,18 +131,17 @@ const LinkCardAnchor = forwardRef<HTMLAnchorElement, LinkCardAnchorProps>(
 );
 
 /* ---------------------------- LinkCard Description ---------------------------- */
-interface LinkCardDescriptionProps
-  extends HTMLAttributes<HTMLParagraphElement> {
+interface LinkCardDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
 const LinkCardDescription = forwardRef<
-  HTMLParagraphElement,
+  HTMLDivElement,
   LinkCardDescriptionProps
 >(({ children }: LinkCardDescriptionProps, forwardedRef) => {
   return (
     <BodyLong
-      as="p"
+      as="div"
       size="medium"
       ref={forwardedRef}
       className={cn("aksel-link-card__description")}
