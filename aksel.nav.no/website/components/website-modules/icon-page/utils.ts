@@ -1,9 +1,11 @@
 import meta from "@navikt/aksel-icons/metadata";
 
+type IconType = (typeof meta)[keyof typeof meta];
+
 const subCategorizeIcons = (
-  icons: (typeof meta)[1][],
-): { sub_category: string; icons: (typeof meta)[1][] }[] => {
-  const categories: { sub_category: string; icons: (typeof meta)[1][] }[] = [];
+  icons: IconType[],
+): { sub_category: string; icons: IconType[] }[] => {
+  const categories: { sub_category: string; icons: IconType[] }[] = [];
 
   for (const icon of icons) {
     const i = categories.findIndex(
@@ -19,14 +21,14 @@ const subCategorizeIcons = (
 };
 
 export const categorizeIcons = (
-  icons: (typeof meta)[1][],
+  icons: IconType[],
 ): {
   category: string;
-  sub_categories: { sub_category: string; icons: (typeof meta)[1][] }[];
+  sub_categories: { sub_category: string; icons: IconType[] }[];
 }[] => {
   const categories: {
     category: string;
-    icons: (typeof meta)[1][];
+    icons: IconType[];
   }[] = [];
 
   for (const icon of icons) {
@@ -42,7 +44,7 @@ export const categorizeIcons = (
     .map((x) => ({ ...x, sub_categories: subCategorizeIcons(x.icons) }));
 };
 
-const noFill = (icon: (typeof meta)[1], icons: (typeof meta)[1][]) => {
+const noFill = (icon: IconType, icons: IconType[]) => {
   const foundFill = icons.find((x) => {
     if (x.name.endsWith("Fill") || x.name.endsWith("Filled")) {
       return (
@@ -57,7 +59,7 @@ const noFill = (icon: (typeof meta)[1], icons: (typeof meta)[1][]) => {
 };
 
 /* Some icons are mistakenly labeled with "filled", so we need to handle both "fill" and "filled" */
-export const getFillIcon = (icons: (typeof meta)[1][]) => {
+export const getFillIcon = (icons: IconType[]) => {
   return icons.filter(
     (x, _, z) => x.variant.toLowerCase().startsWith("fill") || noFill(x, z),
   );

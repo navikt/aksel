@@ -18,6 +18,7 @@ import { AkselPrismTheme } from "./CodePrismTheme";
 type CodeBlockT = {
   tabs: CodeBlockTabsT;
   showLineNumbers?: boolean;
+  defaultWrap?: boolean;
 };
 
 /**
@@ -26,10 +27,14 @@ type CodeBlockT = {
  * - Add support for DIFF
  */
 function CodeBlock(props: CodeBlockT & React.HTMLAttributes<HTMLDivElement>) {
-  const { tabs, showLineNumbers = true, ...rest } = props;
+  const { tabs, showLineNumbers = true, defaultWrap, ...rest } = props;
 
   return (
-    <CodeBlockProvider tabs={tabs} showLineNumbers={showLineNumbers}>
+    <CodeBlockProvider
+      tabs={tabs}
+      showLineNumbers={showLineNumbers}
+      defaultWrap={defaultWrap}
+    >
       <CodeBlockView {...rest} />
     </CodeBlockProvider>
   );
