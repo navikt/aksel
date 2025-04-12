@@ -84,7 +84,7 @@ function GodPraksisHeroProvider(props: GodPraksisHeroProviderProps) {
    * by increasing the margin-bottom of the wrapper
    */
   const getMargin = () => {
-    if (!open) return 0;
+    if (!openDialog) return 0;
     const height = dialogHeight ? dialogHeight - wrapperHeight : 0;
     if (height > 0) return height;
     return 0;
