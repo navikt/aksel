@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, forwardRef } from "react";
 import { useRenameCSS } from "../theme/Theme";
-import { BodyLong } from "../typography";
+import { BodyLong, HeadingProps } from "../typography";
 import Bubble from "./Bubble";
 
 export const VARIANTS = ["subtle", "info", "neutral"] as const;
@@ -47,6 +47,11 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: (typeof SIZES)[number];
+  /**
+   * The heading level for the toptext
+   * @default "3"
+   */
+  toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
 }
 
 interface ChatComponent
@@ -88,6 +93,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
       variant = "neutral",
       toptextPosition,
       size = "medium",
+      toptextHeadingLevel = "3",
       ...rest
     }: ChatProps,
     ref,
@@ -120,6 +126,7 @@ export const Chat = forwardRef<HTMLDivElement, ChatProps>(
                   {React.cloneElement(child, {
                     name: name && i === 0 ? name : undefined,
                     timestamp: timestamp && i === 0 ? timestamp : undefined,
+                    toptextHeadingLevel,
                     ...child.props,
                   })}
                 </BodyLong>
