@@ -1,4 +1,6 @@
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import { Image } from "sanity";
 import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
@@ -16,6 +18,7 @@ import {
   GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
+import { urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { GodPrakisChipsNavigation } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
@@ -34,30 +37,31 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-/* export async function generateMetadata(
-  _,
+export async function generateMetadata(
+  { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { data: seo } = await sanityFetch({
-    query: GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
+  const { tema } = await params;
+
+  const { data: seoData } = await sanityFetch({
+    query: GOD_PRAKSIS_TEMA_BY_SLUG_QUERY,
+    params: { slug: tema },
     stega: false,
   });
 
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(seo?.image as Image);
+  const pageOgImage = urlForOpenGraphImage(seoData?.seo?.image as Image);
 
   pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: "God praksis",
-    description:
-      seo?.meta ??
-      `Mange som jobber med produktutvikling i Nav sitter på kunnskap og erfaring som er nyttig for oss alle. Det er god praksis som vi deler her.`,
+    title: seoData?.title ?? "Tema",
+    description: seoData?.seo?.meta ?? seoData?.description,
     openGraph: {
       images: ogImages,
     },
   };
-} */
+}
 
 type ArticleT = Omit<
   GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult[number],
