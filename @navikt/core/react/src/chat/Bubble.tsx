@@ -33,7 +33,7 @@ const Bubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
       name,
       timestamp,
       toptextPosition,
-      toptextHeadingLevel,
+      toptextHeadingLevel = "3",
       ...rest
     },
     ref,
