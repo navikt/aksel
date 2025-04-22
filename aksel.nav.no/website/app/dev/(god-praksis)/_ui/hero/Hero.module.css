@@ -75,6 +75,11 @@
   }
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.dark) .godPraksisHeroDialog {
+  background: linear-gradient(238deg, var(--ax-bg-brand-blue-moderate) 20.83%, var(--ax-bg-brand-blue-soft) 36.67%);
+}
+
 @keyframes clipExpand {
   0% {
     clip-path: circle(5% at var(--website-hero-selector-x) var(--website-hero-selector-y));
