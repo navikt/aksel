@@ -21,6 +21,7 @@ export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {
   toptextPosition?: "left" | "right";
   /**
    * The heading level for the toptext.
+   * @default "3"
    */
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
 }
