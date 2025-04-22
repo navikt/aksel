@@ -31,4 +31,9 @@
       background: var(--ax-bg-strong-hover);
     }
   }
+
+  &:focus-visible {
+    outline: 3px solid var(--ax-border-focus);
+    outline-offset: 3px;
+  }
 }

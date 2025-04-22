@@ -61,6 +61,7 @@
   justify-content: space-between;
   gap: var(--ax-space-8);
   width: 100%;
+  word-break: break-all;
 
   &[data-variant="subtle"] {
     color: var(--ax-text-subtle);
