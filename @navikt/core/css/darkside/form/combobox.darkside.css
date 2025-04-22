@@ -315,6 +315,12 @@
   outline: 2px solid var(--ax-border-focus);
 }
 
+.aksel-combobox__list-item--focus,
+.aksel-combobox__list--with-hover
+  .aksel-combobox__list-item:not([data-no-focus="true"], .aksel-combobox__list-item--new-option):hover {
+  cursor: pointer;
+}
+
 .aksel-combobox__list-item {
   user-select: none;
 

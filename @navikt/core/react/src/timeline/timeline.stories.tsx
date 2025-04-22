@@ -386,6 +386,7 @@ export const ActivePeriod: StoryFn = () => {
             end={new Date("Aug 20 2022")}
             status="info"
             icon={<CheckmarkCircleFillIcon aria-hidden />}
+            placement="bottom"
           />
         </Timeline.Row>
       </Timeline>
