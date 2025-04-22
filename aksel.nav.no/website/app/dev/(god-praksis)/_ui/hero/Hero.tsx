@@ -60,7 +60,11 @@ async function GodPraksisIntroHero({
           {title}
         </Heading>
       </HStack>
-      {description && <BodyLong data-text-prose>{description}</BodyLong>}
+      {description && (
+        <BodyLong data-text-prose spacing>
+          {description}
+        </BodyLong>
+      )}
 
       {isCollapsible ? (
         <GodPraksisHeroDialog>
