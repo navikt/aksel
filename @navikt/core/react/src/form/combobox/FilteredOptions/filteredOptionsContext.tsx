@@ -91,7 +91,7 @@ const FilteredOptionsProvider = ({
         ? toComboboxOption(value)
         : undefined,
       ...customOptions.reduce((acc, customOption) => {
-        const _id = filteredOptionsUtils.getOptionId(id, customOption.label);
+        const _id = filteredOptionsUtils.getOptionId(id, customOption.value);
         acc[_id] = customOption;
         return acc;
       }, {}),
@@ -99,7 +99,7 @@ const FilteredOptionsProvider = ({
 
     // Add the options to the map
     const finalMap = options.reduce((map, _option) => {
-      const _id = filteredOptionsUtils.getOptionId(id, _option.label);
+      const _id = filteredOptionsUtils.getOptionId(id, _option.value);
       map[_id] = _option;
       return map;
     }, initialMap);
@@ -171,7 +171,7 @@ const FilteredOptionsProvider = ({
       if (shouldAutocomplete && filteredOptions[0]) {
         activeOption = filteredOptionsUtils.getOptionId(
           id,
-          filteredOptions[0].label,
+          filteredOptions[0].value,
         );
       } else if (isListOpen && isLoading) {
         activeOption = filteredOptionsUtils.getIsLoadingId(id);

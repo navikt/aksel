@@ -29,6 +29,11 @@ interface TimelineClickablePeriodProps extends PeriodProps {
   ) => void;
   isActive?: boolean;
   periodRef: React.ForwardedRef<HTMLButtonElement>;
+  /**
+   * Default orientation of popover
+   * @default "top"
+   */
+  placement?: "top" | "bottom";
 }
 
 const ClickablePeriod = React.memo(
@@ -66,7 +71,7 @@ const ClickablePeriod = React.memo(
       refs,
       floatingStyles,
     } = useFloating({
-      placement: "top",
+      placement: restProps?.placement ?? "top",
       open,
       onOpenChange: (_open) => setOpen(_open),
       whileElementsMounted: autoUpdate,

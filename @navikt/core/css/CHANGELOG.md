@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 7.20.0
+
+### Minor Changes
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
 ## 7.19.1
 
 ### Patch Changes
