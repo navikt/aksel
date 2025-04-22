@@ -11,7 +11,7 @@ function GodPraksisHeroDialog({ children }: { children: React.ReactNode }) {
   return (
     <Box
       paddingInline={{ xs: "space-16", lg: "space-40" }}
-      paddingBlock="space-40"
+      paddingBlock={{ xs: "space-16", lg: "space-40" }}
       className={styles.godPraksisHeroDialog}
       role="dialog"
       aria-label="Temanavigasjon"
