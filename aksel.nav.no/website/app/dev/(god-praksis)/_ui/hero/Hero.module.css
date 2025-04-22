@@ -16,7 +16,7 @@
 .godPraksisHeroDescription {
   margin-block-end: var(--ax-space-24);
 
-  &:last-child {
+  &[data-collapsible="true"] {
     margin-block-end: 0;
   }
 }

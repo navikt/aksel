@@ -61,7 +61,11 @@ async function GodPraksisIntroHero({
         </Heading>
       </HStack>
       {description && (
-        <BodyLong data-text-prose className={styles.godPraksisHeroDescription}>
+        <BodyLong
+          data-text-prose
+          data-collapsible={isCollapsible}
+          className={styles.godPraksisHeroDescription}
+        >
           {description}
         </BodyLong>
       )}
