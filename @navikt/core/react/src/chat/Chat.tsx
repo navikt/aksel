@@ -48,7 +48,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   size?: (typeof SIZES)[number];
   /**
-   * The heading level for the toptext
+   * The heading level for the toptext.
    * @default "3"
    */
   toptextHeadingLevel?: Exclude<HeadingProps["level"], "1">;
