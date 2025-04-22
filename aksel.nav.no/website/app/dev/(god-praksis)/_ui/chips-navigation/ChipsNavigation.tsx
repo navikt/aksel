@@ -74,7 +74,6 @@ function GodPrakisChipsNavigation(props: GpChipNavigationProps) {
     <HGrid
       columns={{ xs: "auto", sm: "max-content auto" }}
       gap={{ xs: "space-8", sm: "space-16 space-12" }}
-      paddingBlock="space-24 space-48"
       align="start"
     >
       <HStack gap="space-4" align="center" asChild data-color-role="brand-blue">

@@ -37,6 +37,10 @@ body {
   max-width: 600px;
 }
 
+[data-aksel-heading-color] {
+  color: var(--ax-text-brand-blue);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

@@ -209,73 +209,83 @@ export default async function Page(props: Props) {
         image={temaPage.pictogram}
         isCollapsible
       />
-      <GodPrakisChipsNavigation
-        articles={simplifiedArticles}
-        innholdstype={innholdstypeParam}
-        undertema={undertemaParam}
-      />
-      <div className="container mt-8">
-        {Object.entries(articlesMap).length === 0 ? (
-          <p>Ingen artikler funnet.</p>
-        ) : (
-          Object.values(articlesMap).map(
-            ({ title, description, ariaLabel, articles }) => (
-              <section aria-label={ariaLabel} key={title} className="mb-10">
-                <VStack gap="space-8" marginBlock="0 space-24">
-                  <Heading level="2" size="large">
-                    {title}
-                  </Heading>
-                  {description && (
-                    <BodyLong data-text-prose>{description}</BodyLong>
-                  )}
-                </VStack>
-                <HGrid
-                  key={title}
-                  as="ul"
-                  columns={{ xs: 1, md: 2 }}
-                  gap={{ xs: "space-12", md: "space-24" }}
-                  marginBlock="0 space-24"
-                >
-                  {articles.map((article) => (
-                    <li key={article.slug}>
-                      <LinkCard>
-                        <LinkCardTitle as="h2">
-                          <LinkCardAnchor href={article.slug ?? ""}>
-                            {article.heading}
-                          </LinkCardAnchor>
-                        </LinkCardTitle>
+      <VStack
+        gap="space-48"
+        paddingBlock="space-24"
+        paddingInline={{ xs: "space-16", lg: "space-40" }}
+      >
+        <GodPrakisChipsNavigation
+          articles={simplifiedArticles}
+          innholdstype={innholdstypeParam}
+          undertema={undertemaParam}
+        />
+        <div>
+          {Object.entries(articlesMap).length === 0 ? (
+            <p>Ingen artikler funnet.</p>
+          ) : (
+            Object.values(articlesMap).map(
+              ({ title, description, ariaLabel, articles }) => (
+                <section aria-label={ariaLabel} key={title} className="mb-10">
+                  <VStack gap="space-8" marginBlock="0 space-24">
+                    <Heading level="2" size="large" data-aksel-heading-color>
+                      {title}
+                    </Heading>
+                    {description && (
+                      <BodyLong data-text-prose>{description}</BodyLong>
+                    )}
+                  </VStack>
+                  <HGrid
+                    key={title}
+                    as="ul"
+                    columns={{ xs: 1, md: 2 }}
+                    gap={{ xs: "space-12", md: "space-24" }}
+                    marginBlock="0 space-24"
+                  >
+                    {articles.map((article) => (
+                      <li key={article.slug}>
+                        <LinkCard>
+                          <LinkCardTitle as="h2">
+                            <LinkCardAnchor href={article.slug ?? ""}>
+                              {article.heading}
+                            </LinkCardAnchor>
+                          </LinkCardTitle>
 
-                        {article.description && (
-                          <LinkCardDescription>
-                            {article.displayDate && (
-                              <Box asChild marginBlock="0 space-8">
-                                <Detail as="time" textColor="subtle" uppercase>
-                                  {article.displayDate}
-                                </Detail>
-                              </Box>
-                            )}
-                            <p>{article.description}</p>
-                          </LinkCardDescription>
-                        )}
-                        <LinkCardFooter>
-                          <HStack gap="space-12">
-                            <GodPraksisTaxonomyTag type="undertema">
-                              {article.undertema}
-                            </GodPraksisTaxonomyTag>
-                            <GodPraksisTaxonomyTag type="innholdstype">
-                              {article.innholdstype}
-                            </GodPraksisTaxonomyTag>
-                          </HStack>
-                        </LinkCardFooter>
-                      </LinkCard>
-                    </li>
-                  ))}
-                </HGrid>
-              </section>
-            ),
-          )
-        )}
-      </div>
+                          {article.description && (
+                            <LinkCardDescription>
+                              {article.displayDate && (
+                                <Box asChild marginBlock="0 space-8">
+                                  <Detail
+                                    as="time"
+                                    textColor="subtle"
+                                    uppercase
+                                  >
+                                    {article.displayDate}
+                                  </Detail>
+                                </Box>
+                              )}
+                              <p>{article.description}</p>
+                            </LinkCardDescription>
+                          )}
+                          <LinkCardFooter>
+                            <HStack gap="space-12">
+                              <GodPraksisTaxonomyTag type="undertema">
+                                {article.undertema}
+                              </GodPraksisTaxonomyTag>
+                              <GodPraksisTaxonomyTag type="innholdstype">
+                                {article.innholdstype}
+                              </GodPraksisTaxonomyTag>
+                            </HStack>
+                          </LinkCardFooter>
+                        </LinkCard>
+                      </li>
+                    ))}
+                  </HGrid>
+                </section>
+              ),
+            )
+          )}
+        </div>
+      </VStack>
     </div>
   );
 }
