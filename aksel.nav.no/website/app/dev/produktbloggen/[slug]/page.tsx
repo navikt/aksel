@@ -2,7 +2,7 @@ import { PortableTextBlock } from "next-sanity";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, HStack, Heading } from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import { BLOGG_BY_SLUG_QUERY } from "@/app/_sanity/queries";
@@ -132,9 +132,9 @@ export default async function Page({ params }: Props) {
                 ))}
               </BodyShort>
             )}
-            <BodyShort as="span" className={styles.publishedText}>
-              Publisert: {publishDate}
-            </BodyShort>
+            <HStack justify="center">
+              <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
+            </HStack>
           </div>
         </div>
       </main>

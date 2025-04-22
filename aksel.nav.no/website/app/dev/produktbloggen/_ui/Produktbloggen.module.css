@@ -116,12 +116,6 @@
   }
 }
 
-.publishedText {
-  display: flex;
-  justify-content: center;
-  color: var(--ax-text-neutral-subtle);
-}
-
 /* 480 === sm
 min-width: X == X is the minimum width needed before styles apply */
 @media (min-width: 480px) {
