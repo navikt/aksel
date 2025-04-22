@@ -8,7 +8,7 @@ const SearchField = () => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (query: string) => {
+  function handleSearch(query: string) {
     const params = new URLSearchParams(searchParams?.toString());
     if (query) {
       params.set("tokenQuery", query);
@@ -16,20 +16,19 @@ const SearchField = () => {
       params.delete("tokenQuery");
     }
     replace(`${pathname}${params.toString() ? `?${params.toString()}` : ""}`);
-  };
+  }
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // Search performed onChange, so just prevent
+  }
+
   return (
-    <form
-      role="search"
-      onSubmit={(event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-      }}
-    >
+    <form role="search" onSubmit={onSubmit}>
       <Search
         label="Søk etter token"
         defaultValue={searchParams?.get("tokenQuery") || ""}
         onChange={handleSearch}
+        name="tokenSearch"
         hideLabel
       />
     </form>
