@@ -116,7 +116,7 @@ export default async function Page({ params }: Props) {
 
         <div className={styles.articleEnd}>
           <div data-wrapper-prose>
-            <div className={styles.diamondCenter} />
+            <div className={`${styles.diamond} ${styles.diamondCenter}`} />
             {authors?.length > 0 && (
               <Detail uppercase className={styles.authorText} as="p">
                 Bidragsytere

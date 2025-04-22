@@ -61,15 +61,10 @@
   width: var(--ax-space-8);
   height: var(--ax-space-8);
   rotate: 45deg;
-  opacity: 0.5;
-  background-color: var(--ax-brand-blue-800);
+  background-color: var(--ax-text-brand-blue-icon);
 }
 
 .diamondCenter {
-  width: var(--ax-space-8);
-  height: var(--ax-space-8);
-  rotate: 45deg;
-  background-color: var(--ax-brand-blue-800);
   margin-inline: auto;
   margin-bottom: var(--ax-space-40);
 }
