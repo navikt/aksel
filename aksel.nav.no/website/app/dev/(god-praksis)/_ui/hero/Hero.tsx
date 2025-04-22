@@ -56,12 +56,12 @@ async function GodPraksisIntroHero({
       {isCollapsible && <GodPraksisHeroButton />}
       <HStack gap="space-12" align="center" marginBlock="0 space-16">
         {imageUrl && <GodPraksisPictogram url={imageUrl} />}
-        <Heading level="1" size="xlarge" className={styles.godPraksisHeroTitle}>
+        <Heading level="1" size="xlarge" data-aksel-heading-color>
           {title}
         </Heading>
       </HStack>
       {description && (
-        <BodyLong data-text-prose spacing>
+        <BodyLong data-text-prose className={styles.godPraksisHeroDescription}>
           {description}
         </BodyLong>
       )}

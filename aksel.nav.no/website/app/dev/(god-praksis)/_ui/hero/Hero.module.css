@@ -13,8 +13,12 @@
   background: linear-gradient(238deg, var(--ax-bg-brand-blue-softA) 20.83%, var(--ax-bg-neutral-soft) 36.67%);
 }
 
-.godPraksisHeroTitle {
-  color: var(--ax-text-brand-blue);
+.godPraksisHeroDescription {
+  margin-block-end: var(--ax-space-24);
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .heroCube {
