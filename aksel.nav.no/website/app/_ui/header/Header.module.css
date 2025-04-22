@@ -7,6 +7,10 @@
   border-bottom: 1px solid var(--ax-border-neutral-subtleA);
 }
 
+.headerProduktbloggen {
+  background-color: var(--ax-bg-brand-blue-soft);
+}
+
 .headerContainer {
   height: var(--website-header-height);
   display: flex;

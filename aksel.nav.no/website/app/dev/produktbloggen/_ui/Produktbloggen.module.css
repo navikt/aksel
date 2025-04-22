@@ -2,10 +2,6 @@
   background-color: var(--ax-bg-brand-blue-soft);
 }
 
-.header {
-  background-color: var(--ax-bg-brand-blue-soft);
-}
-
 .pageLayout {
   display: grid;
   margin-inline: auto;

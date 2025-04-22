@@ -14,9 +14,14 @@ const LINKS = [
   { name: "Bloggen", href: "/produktbloggen" },
 ];
 
-function Header({ className }: { className?: string }) {
+function Header({ variant }: { variant?: "default" | "produktbloggen" }) {
+  variant = variant ? variant : "default";
   return (
-    <header className={clsx(styles.header, className)}>
+    <header
+      className={clsx(styles.header, {
+        [styles.headerProduktbloggen]: variant === "produktbloggen",
+      })}
+    >
       <a className={styles.skiplink} href="#hovedinnhold">
         Hopp til innhold
       </a>
