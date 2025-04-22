@@ -123,10 +123,6 @@ export default async function Page(props: Props) {
         undertema: relevantUndertema,
         displayDate: await dateStr(article.displayDate ?? ""),
       });
-      simplifiedArticles.push({
-        undertema: relevantUndertema,
-        innholdstype: article.innholdstype,
-      });
     }
   }
 
@@ -137,7 +133,6 @@ export default async function Page(props: Props) {
   // For article display
   const groupByField = undertemaParam ? "innholdstype" : "undertema";
 
-  /* TODO: This is missing some pages for url /dev/god-praksis/brukerinnsikt?undertema=Etikk */
   const articlesMap: Record<
     string,
     {
@@ -230,7 +225,9 @@ export default async function Page(props: Props) {
                   <Heading level="2" size="large">
                     {title}
                   </Heading>
-                  {description && <BodyLong>{description}</BodyLong>}
+                  {description && (
+                    <BodyLong data-text-prose>{description}</BodyLong>
+                  )}
                 </VStack>
                 <HGrid
                   key={title}
