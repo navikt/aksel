@@ -45,7 +45,7 @@ export const Controls: Story = {
     },
     toptextHeadingLevel: {
       control: { type: "radio" },
-      options: ["1", "2", "3", "4", "5", "6"],
+      options: ["2", "3", "4", "5", "6"],
     },
     size: {
       control: { type: "radio" },
