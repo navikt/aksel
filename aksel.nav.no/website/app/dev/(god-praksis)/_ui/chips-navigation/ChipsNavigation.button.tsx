@@ -16,7 +16,17 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { push } = useRouter();
+  const { push, prefetch } = useRouter();
+
+  const getHref = () => {
+    const params = new URLSearchParams(searchParams?.toString());
+    if (isActive || resetOnClick) {
+      params.delete(type);
+    } else {
+      params.set(type, title);
+    }
+    return `${pathname}?${params.toString()}`;
+  };
 
   const handleClick = () => {
     const params = new URLSearchParams(searchParams?.toString());
@@ -25,7 +35,7 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
     } else {
       params.set(type, title);
     }
-    push(`${pathname}?${params.toString()}`, { scroll: false });
+    push(getHref(), { scroll: false });
   };
 
   return (
@@ -38,6 +48,10 @@ function GodPrakisChipsNavigationButton(props: GpChipNavigationButtonProps) {
       data-umami-event="god-praksis-chip"
       data-umami-event-type={props.type}
       data-umami-event-url={pathname}
+      onMouseEnter={() => {
+        const href = getHref();
+        prefetch(href);
+      }}
     >
       {`${title} (${count})`}
     </button>

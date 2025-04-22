@@ -136,6 +136,8 @@ export default async function Page(props: Props) {
 
   // For article display
   const groupByField = undertemaParam ? "innholdstype" : "undertema";
+
+  /* TODO: This is missing some pages for url /dev/god-praksis/brukerinnsikt?undertema=Etikk */
   const articlesMap: Record<
     string,
     {
