@@ -2,14 +2,12 @@ import { Metadata, ResolvingMetadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   HGrid,
   HStack,
   Heading,
   Link,
-  Tag,
   VStack,
 } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -18,6 +16,7 @@ import {
   GOD_PRAKSIS_LANDING_PAGE_SEO_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
   LinkCard,
@@ -141,33 +140,5 @@ export default async function Page() {
         })}
       </VStack>
     </div>
-  );
-}
-
-function GodPraksisTaxonomyTag({
-  children,
-  type,
-}: {
-  children: React.ReactNode;
-  type: "innholdstype" | "undertema";
-}) {
-  if (!children) {
-    return null;
-  }
-
-  return (
-    <Tag
-      variant={type === "undertema" ? "alt3-moderate" : "alt1-moderate"}
-      size="xsmall"
-      icon={
-        type === "undertema" ? (
-          <TagFillIcon aria-hidden />
-        ) : (
-          <FileFillIcon aria-hidden />
-        )
-      }
-    >
-      {children}
-    </Tag>
   );
 }

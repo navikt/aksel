@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { Image } from "sanity";
-import { FileFillIcon, TagFillIcon } from "@navikt/aksel-icons";
 import {
   BodyLong,
   Box,
@@ -9,7 +8,6 @@ import {
   HGrid,
   HStack,
   Heading,
-  Tag,
   VStack,
 } from "@navikt/ds-react";
 import { sanityFetch } from "@/app/_sanity/live";
@@ -19,6 +17,7 @@ import {
 } from "@/app/_sanity/queries";
 import { GOD_PRAKSIS_ARTICLES_BY_TEMA_QUERYResult } from "@/app/_sanity/query-types";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+import { GodPraksisTaxonomyTag } from "@/app/dev/(god-praksis)/_ui/GodPraksisTaxonomyTag";
 import { GodPrakisChipsNavigation } from "@/app/dev/(god-praksis)/_ui/chips-navigation/ChipsNavigation";
 import { GodPraksisIntroHero } from "@/app/dev/(god-praksis)/_ui/hero/Hero";
 import {
@@ -30,6 +29,7 @@ import {
 } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { dateStr } from "@/utils";
 
+/* We rely on seachparams for initial render, so need to force-dynamic */
 export const dynamic = "force-dynamic";
 
 type Props = {
@@ -110,11 +110,10 @@ export default async function Page(props: Props) {
 
   let sortedArticles: ValidArticlesT = [];
 
-  const simplifiedArticles: {
-    undertema: string;
-    innholdstype: string;
-  }[] = [];
-
+  /**
+   * We iterate over the articles and make sure they all have innholdstype and undertema,
+   * while doing some parsing to make sure we have the right data-format.
+   */
   for (const article of articleList) {
     const relevantUndertema = article.undertema?.find(
       (ut) => ut?.temaTitle === temaPage.title,
@@ -134,9 +133,16 @@ export default async function Page(props: Props) {
     a.undertema.localeCompare(b.undertema),
   );
 
-  // For article display
+  /* For article display */
   const groupByField = undertemaParam ? "innholdstype" : "undertema";
 
+  /**
+   * We create a map of articles, where the key is its own section:
+   * - If no undertema or innholdstype is selected, we group by undertema.
+   * - If undertema is selected, we group by innholdstype.
+   * - If innholdstype is selected, we group by undertema.
+   * - If both are selected, we only have one section.
+   */
   const articlesMap: Record<
     string,
     {
@@ -147,8 +153,13 @@ export default async function Page(props: Props) {
     }
   > = {};
 
+  const articlesByContext: {
+    undertema: string;
+    innholdstype: string;
+  }[] = [];
+
   for (const article of sortedArticles) {
-    simplifiedArticles.push({
+    articlesByContext.push({
       undertema: article.undertema,
       innholdstype: article.innholdstype,
     });
@@ -219,17 +230,17 @@ export default async function Page(props: Props) {
         paddingInline={{ xs: "space-16", lg: "space-40" }}
       >
         <GodPrakisChipsNavigation
-          articles={simplifiedArticles}
+          articles={articlesByContext}
           innholdstype={innholdstypeParam}
           undertema={undertemaParam}
         />
-        <div>
+        <VStack gap="space-48">
           {Object.entries(articlesMap).length === 0 ? (
             <p>Ingen artikler funnet.</p>
           ) : (
             Object.values(articlesMap).map(
               ({ title, description, ariaLabel, articles }) => (
-                <section aria-label={ariaLabel} key={title} className="mb-10">
+                <section aria-label={ariaLabel} key={title}>
                   <VStack gap="space-8" marginBlock="0 space-24">
                     <Heading level="2" size="large" data-aksel-heading-color>
                       {title}
@@ -243,7 +254,6 @@ export default async function Page(props: Props) {
                     as="ul"
                     columns={{ xs: 1, md: 2 }}
                     gap={{ xs: "space-12", md: "space-24" }}
-                    marginBlock="0 space-24"
                   >
                     {articles.map((article) => (
                       <li key={article.slug}>
@@ -288,36 +298,8 @@ export default async function Page(props: Props) {
               ),
             )
           )}
-        </div>
+        </VStack>
       </VStack>
     </div>
-  );
-}
-
-function GodPraksisTaxonomyTag({
-  children,
-  type,
-}: {
-  children: React.ReactNode;
-  type: "innholdstype" | "undertema";
-}) {
-  if (!children) {
-    return null;
-  }
-
-  return (
-    <Tag
-      variant={type === "undertema" ? "alt3-moderate" : "alt1-moderate"}
-      size="xsmall"
-      icon={
-        type === "undertema" ? (
-          <TagFillIcon aria-hidden />
-        ) : (
-          <FileFillIcon aria-hidden />
-        )
-      }
-    >
-      {children}
-    </Tag>
   );
 }

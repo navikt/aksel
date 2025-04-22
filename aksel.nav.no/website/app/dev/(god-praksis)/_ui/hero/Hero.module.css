@@ -107,3 +107,7 @@
     visibility: hidden;
   }
 }
+
+.godPraksisHeroButtonIcon {
+  flex-shrink: 0;
+}

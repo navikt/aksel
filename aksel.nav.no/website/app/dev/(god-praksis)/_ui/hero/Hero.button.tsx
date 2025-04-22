@@ -29,9 +29,17 @@ function GodPraksisHeroButton({ inDialog }: { inDialog?: boolean }) {
     >
       Tema
       {dialogState.open ? (
-        <ChevronDownUpIcon aria-hidden className="shrink-0 text-2xl" />
+        <ChevronDownUpIcon
+          aria-hidden
+          fontSize="1.5rem"
+          className={styles.godPraksisHeroButtonIcon}
+        />
       ) : (
-        <ChevronUpDownIcon aria-hidden className="shrink-0 text-2xl" />
+        <ChevronUpDownIcon
+          aria-hidden
+          fontSize="1.5rem"
+          className={styles.godPraksisHeroButtonIcon}
+        />
       )}
     </button>
   );
