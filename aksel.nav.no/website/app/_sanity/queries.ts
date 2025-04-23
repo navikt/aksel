@@ -20,6 +20,21 @@ const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
   }`,
 );
 
+const BLOGG_LANDINGSSIDE_QUERY = defineQuery(`
+  *[_type == "blogg_landingsside"][0]{
+    "page": {..., intro[]{...,${destructureBlocks}}},
+    "bloggposts": *[_type == "aksel_blogg"] | order(publishedAt desc, _createdAt desc){
+      seo,
+      heading,
+      ingress,
+      publishedAt,
+      _createdAt,
+      _id,
+      "slug": slug.current,
+      ${contributorsAll}
+    }
+  }`);
+
 const DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY = defineQuery(
   `*[_type == "komponenter_landingsside"][0]`,
 );
@@ -149,4 +164,5 @@ export {
   BLOGG_BY_SLUG_QUERY,
   MONSTER_MALER_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
+  BLOGG_LANDINGSSIDE_QUERY,
 };
