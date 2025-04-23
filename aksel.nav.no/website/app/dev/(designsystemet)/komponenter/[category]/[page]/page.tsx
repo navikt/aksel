@@ -9,8 +9,8 @@ import {
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForOpenGraphImage } from "@/app/_sanity/utils";
-import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
 import { CustomPortableText } from "@/app/_ui/portable-text/CustomPortableText";
+import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { DesignsystemetKomponentIntro } from "@/app/dev/(designsystemet)/_ui/Designsystemet.intro";
 import {
