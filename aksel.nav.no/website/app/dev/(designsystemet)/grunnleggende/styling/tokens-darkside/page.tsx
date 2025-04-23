@@ -12,10 +12,10 @@ import {
   VStack,
 } from "@navikt/ds-react";
 import { FigmaIcon, GithubIcon } from "@/assets/Icons";
-import TokenTableOfContents from "../../../../../components/token-docs/TokenTableOfContents";
-import TokensPage from "../../../../../components/token-docs/TokensPage";
-import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
-import { getStaticParamsSlugs } from "../../slug";
+import TokenTableOfContents from "../../../../../../components/token-docs/TokenTableOfContents";
+import TokensPage from "../../../../../../components/token-docs/TokensPage";
+import { DesignsystemetPageLayout } from "../../../_ui/DesignsystemetPage";
+import { getStaticParamsSlugs } from "../../../slug";
 
 type Props = {
   params: Promise<{ slug: string[] }>;

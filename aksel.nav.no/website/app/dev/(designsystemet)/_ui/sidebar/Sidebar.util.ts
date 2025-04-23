@@ -98,6 +98,14 @@ function generateSidebar(
           });
         }
 
+        if (category.value === "styling") {
+          pages.unshift({
+            heading: "Tokens darkside",
+            slug: `${type}/styling/tokens-darkside`,
+            tag: "ready",
+          });
+        }
+
         return {
           ...category,
           pages,
