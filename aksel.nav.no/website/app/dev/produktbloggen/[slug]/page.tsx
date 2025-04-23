@@ -9,6 +9,7 @@ import { sanityFetch } from "@/app/_sanity/live";
 import {
   BLOGG_BY_SLUG_QUERY,
   METADATA_BY_SLUG_QUERY,
+  SLUG_BY_TYPE_QUERY,
 } from "@/app/_sanity/queries";
 import { urlForImage, urlForOpenGraphImage } from "@/app/_sanity/utils";
 import { abbrName, dateStr, getImage } from "@/utils";
@@ -16,6 +17,27 @@ import styles from "../_ui/Produktbloggen.module.css";
 
 type Props = {
   params: Promise<{ slug: string }>;
+};
+
+async function getStaticParamsSlugs() {
+  const { data } = await sanityFetch({
+    query: SLUG_BY_TYPE_QUERY,
+    params: { type: "aksel_blogg" },
+    stega: false,
+    perspective: "published",
+  });
+
+  return data
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .map((slug) => {
+      return {
+        slug,
+      };
+    });
+}
+
+export const generateStaticParams = async () => {
+  return await getStaticParamsSlugs();
 };
 
 export async function generateMetadata(
