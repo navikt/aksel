@@ -141,7 +141,6 @@ export default async function Page(props: Props) {
       <TableOfContents toc={toc} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
-        <SystemPanel variant="outdated" docId={pageData._id} />
         <CustomPortableText
           value={(pageData.content ?? []) as PortableTextBlock[]}
         />
