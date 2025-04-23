@@ -112,14 +112,20 @@ export default async function Page(props: Props) {
         </BodyShort>
         <HStack gap="space-8" marginBlock="space-16 space-48">
           {pageData.undertema?.map(({ tema, title }) => (
-            <UnderTemaLink
+            <NextLink
               key={title}
+              className={styles.pageUndertemaTag}
               href={`/god-praksis/${tema?.slug}?undertema=${encodeURIComponent(
                 title ?? "",
               )}`}
+              data-link-card-anchor
+              data-umami-event="navigere"
+              data-umami-event-kilde="god praksis artikkel chips"
             >
-              {title}
-            </UnderTemaLink>
+              <TagFillIcon aria-hidden fontSize="1.25rem" />
+              <span className={styles.pageUndertemaTagText}>{title}</span>
+              <LinkCardArrow />
+            </NextLink>
           ))}
         </HStack>
       </div>
@@ -174,27 +180,5 @@ export default async function Page(props: Props) {
         </EditorPanel>
       )}
     </article>
-  );
-}
-
-function UnderTemaLink({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) {
-  return (
-    <NextLink
-      className={styles.pageUndertemaTag}
-      href={href}
-      data-link-card-anchor
-      data-umami-event="navigere"
-      data-umami-event-kilde="god praksis artikkel chips"
-    >
-      <TagFillIcon aria-hidden fontSize="1.25rem" />
-      <span className={styles.pageUndertemaTagText}>{children}</span>
-      <LinkCardArrow />
-    </NextLink>
   );
 }
