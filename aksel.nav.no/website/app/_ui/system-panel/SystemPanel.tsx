@@ -7,7 +7,7 @@ import { BodyLong, Heading } from "@navikt/ds-react";
 import {
   SystemPanelAction,
   SystemPanelOutdatedAction,
-} from "@/app/_ui/panels/SystemPanel.action";
+} from "./SystemPanel.action";
 import styles from "./SystemPanel.module.css";
 
 type SystemPanelProps = {

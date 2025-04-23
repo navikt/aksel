@@ -1,17 +1,26 @@
 import differenceInMonths from "date-fns/differenceInMonths";
 import { PortableTextBlock } from "next-sanity";
-import Link from "next/link";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { TagFillIcon } from "@navikt/aksel-icons";
-import { BodyShort, HStack, Heading, Label, VStack } from "@navikt/ds-react";
+import {
+  BodyShort,
+  HStack,
+  Heading,
+  Label,
+  Link,
+  VStack,
+} from "@navikt/ds-react";
 import { CustomPortableText } from "@/app/CustomPortableText";
 import { sanityFetch } from "@/app/_sanity/live";
 import {
   GOD_PRAKSIS_ARTICLE_BY_SLUG,
   TOC_BY_SLUG_QUERY,
 } from "@/app/_sanity/queries";
-import { SystemPanel } from "@/app/_ui/panels/SystemPanel";
+import { EditorPanel } from "@/app/_ui/editor-panel /EditorPanel";
+import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
+import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
@@ -133,7 +142,7 @@ export default async function Page(props: Props) {
               Medvirkende
             </Label>
             <HStack gap="space-4" asChild>
-              <BodyShort textColor="subtle">
+              <BodyShort textColor="subtle" as="div">
                 {authors.map(abbrName).map((x, y) => (
                   <address key={x}>
                     {x}
@@ -146,6 +155,24 @@ export default async function Page(props: Props) {
         )}
         {/* {userState && <Feedback userState={userState} />} */}
       </div>
+      {pageData.relevante_artikler && (
+        <EditorPanel variant="links" heading="Les også">
+          <WebsiteList as="ul">
+            {pageData.relevante_artikler.map((item) => (
+              <WebsiteListItem key={item.heading} icon>
+                <Link
+                  variant="neutral"
+                  href={item.slug?.current}
+                  data-umami-event="navigere"
+                  data-umami-event-kilde="les ogsaa"
+                >
+                  {item.heading}
+                </Link>
+              </WebsiteListItem>
+            ))}
+          </WebsiteList>
+        </EditorPanel>
+      )}
     </article>
   );
 }
@@ -158,7 +185,7 @@ function UnderTemaLink({
   href: string;
 }) {
   return (
-    <Link
+    <NextLink
       className={styles.pageUndertemaTag}
       href={href}
       data-link-card-anchor
@@ -168,6 +195,6 @@ function UnderTemaLink({
       <TagFillIcon aria-hidden fontSize="1.25rem" />
       <span className={styles.pageUndertemaTagText}>{children}</span>
       <LinkCardArrow />
-    </Link>
+    </NextLink>
   );
 }
