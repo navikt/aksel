@@ -15,6 +15,7 @@ function tokenIndex(_tokens: TokenForDocumentationT[]) {
       { name: "modifier", weight: 0.3 },
     ],
     shouldSort: false,
+    ignoreLocation: true,
   });
 }
 
