@@ -1,28 +1,18 @@
 import { type SemanticColorRoles } from "@navikt/ds-tokens/types";
 
-export type ColorRolesT = Record<
-  SemanticColorRoles,
-  {
-    title: string;
-    description: string;
-  }
->;
+export type RoleT = {
+  title: string;
+  description: string;
+};
+
+export type ColorRolesT = Record<SemanticColorRoles, RoleT>;
 
 export type FontRolesT = Record<
   "family" | "line-height" | "size" | "weight",
-  {
-    title: string;
-    description: string;
-  }
+  RoleT
 >;
 
-export type BreakpointRolesT = Record<
-  "mobile first" | "desktop first",
-  {
-    title: string;
-    description: string;
-  }
->;
+export type BreakpointRolesT = Record<"mobile first" | "desktop first", RoleT>;
 
 export type ColorCategoriesT = Record<
   "backgroundColor" | "borderColor" | "textColor",

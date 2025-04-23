@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BodyLong, Heading, VStack } from "@navikt/ds-react";
 import { TextWithMarkdown } from "@/web/TextWithMarkdown";
 import { TokenForDocumentationT } from "../types/tokens";
@@ -17,11 +17,19 @@ const TokenCategory = ({
   id: string;
   title: string;
   description: string;
-  roles?: ColorRolesT | FontRolesT | BreakpointRolesT; // TODO: Check these roles
+  roles?: ColorRolesT | FontRolesT | BreakpointRolesT;
   tokens: TokenForDocumentationT[];
 }) => {
   const sortedTokens = tokens.sort(sortTokens);
   const [selectedRole, setSelectedRole] = React.useState<string | null>(null);
+  const filteredRoles = Object.entries(roles || {})
+    .filter(([role]) => tokens.some((token) => token.role === role))
+    .map(([, role]) => role);
+  useEffect(() => {
+    if (filteredRoles.length === 1) {
+      setSelectedRole(filteredRoles[0].title.replace(" ", "-").toLowerCase());
+    }
+  }, [filteredRoles]);
   return (
     <section aria-labelledby={id}>
       <Heading
@@ -40,9 +48,9 @@ const TokenCategory = ({
               <TextWithMarkdown>{description}</TextWithMarkdown>
             </BodyLong>
           )}
-          {roles && (
+          {filteredRoles && (
             <TokenRolesChips
-              roles={roles}
+              roles={filteredRoles}
               selectedRole={selectedRole}
               setSelectedRole={setSelectedRole}
             />
