@@ -162,7 +162,7 @@ export default async function Page(props: Props) {
             </HStack>
           </VStack>
         )}
-        <GodPraksisFeedback />
+        <GodPraksisFeedback docId={pageData._id} />
         {/* {userState && <Feedback userState={userState} />} */}
       </div>
       {pageData.relevante_artikler && (
