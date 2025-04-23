@@ -10,7 +10,7 @@ import { AllArticleDocumentsT } from "@/sanity/config";
 function parseDesignsystemSlug(
   category: string,
   page: string,
-  type: "komponenter" | "grunnleggende" | "monster-maler" | "produktbloggen",
+  type: "komponenter" | "grunnleggende" | "monster-maler",
 ) {
   return `${type}/${category}/${page}`;
 }
