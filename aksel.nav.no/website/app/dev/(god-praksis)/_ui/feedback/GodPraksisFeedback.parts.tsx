@@ -26,7 +26,7 @@ function GodPraksisFeedbackLoginState() {
       </Heading>
       <Box asChild paddingBlock="space-4 space-24">
         <BodyLong>
-          Logg inn med NAV SSO for å gi innspill til artikkelen
+          Logg inn med Nav SSO for å gi innspill til artikkelen
         </BodyLong>
       </Box>
       <Button
@@ -42,7 +42,13 @@ function GodPraksisFeedbackLoginState() {
   );
 }
 
-function GodPraksisFeedbackForm({ docId }: { docId: string }) {
+function GodPraksisFeedbackForm({
+  docId,
+  name,
+}: {
+  docId: string;
+  name?: string;
+}) {
   const pathname = usePathname();
 
   const [isPending, startTransition] = useTransition();
@@ -171,7 +177,7 @@ function GodPraksisFeedbackForm({ docId }: { docId: string }) {
       </Box>
       <HStack gap="space-8" paddingBlock="0 space-24">
         <PersonIcon aria-hidden fontSize="1.5rem" />
-        <BodyShort>Ola Normann</BodyShort>
+        <BodyShort>{name}</BodyShort>
 
         <Link variant="subtle" href={`/oauth2/logout?redirect=${pathname}`}>
           (logg ut)

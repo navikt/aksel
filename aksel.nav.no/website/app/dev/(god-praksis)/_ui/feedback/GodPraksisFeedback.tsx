@@ -1,12 +1,14 @@
 import { BoxNew, HGrid } from "@navikt/ds-react";
+import { verifyUserLoggedIn } from "@/app/_auth/rcs";
 import styles from "./GodPraksisFeedback.module.css";
 import {
   GodPraksisFeedbackForm,
   GodPraksisFeedbackLoginState,
 } from "./GodPraksisFeedback.parts";
 
-function GodPraksisFeedback({ docId }: { docId: string }) {
-  const loggedIn = false;
+async function GodPraksisFeedback({ docId }: { docId: string }) {
+  const auth = await verifyUserLoggedIn();
+
   return (
     <BoxNew
       borderRadius="large"
@@ -17,10 +19,10 @@ function GodPraksisFeedback({ docId }: { docId: string }) {
     >
       <HGrid gap="space-64" columns="1fr min-content">
         <div>
-          {loggedIn ? (
-            <GodPraksisFeedbackLoginState />
+          {auth.ok ? (
+            <GodPraksisFeedbackForm docId={docId} name={auth.user.name} />
           ) : (
-            <GodPraksisFeedbackForm docId={docId} />
+            <GodPraksisFeedbackLoginState />
           )}
         </div>
         <div className={styles.feedbackIllustration}>
