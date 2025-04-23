@@ -23,8 +23,8 @@ spec:
     limits:
       memory: 1Gi
     requests:
-      cpu: 140m
-      memory: 640Mi
+      cpu: 100m
+      memory: 896Mi
   liveness:
     path: /api/isAlive
     initialDelay: 20
@@ -47,6 +47,7 @@ spec:
         - host: hnbe3yhs.apicdn.sanity.io
         - host: cdn.sanity.io
         - host: umami.nav.no
+        - host: raw.githubusercontent.com
 
       rules: []
   gcp:

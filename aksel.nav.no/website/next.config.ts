@@ -103,6 +103,17 @@ const nextConfig: NextConfig = {
         destination: "/api/preview?slug=:slug*",
         permanent: true,
       },
+      /* TODO: Use icon-page redirects after release */
+      /* {
+        source: "/ikoner",
+        destination: "/dev/grunnleggende/ikoner",
+        permanent: false,
+      },
+      {
+        source: "/ikoner/:slug*",
+        destination: "/dev/komponenter/ikoner?iconName=:slug*",
+        permanent: false,
+      }, */
     ];
   },
 
