@@ -11,7 +11,9 @@ export default async function DesignsystemLayout({
   return (
     <Page className={styles.websitePage} footer={<Footer />}>
       <Header variant="produktbloggen" />
-      <div className={styles.pageLayout}>{children}</div>
+      <main tabIndex={-1} id="hovedinnhold" className={styles.main}>
+        <div className={styles.pageLayout}>{children}</div>
+      </main>
     </Page>
   );
 }

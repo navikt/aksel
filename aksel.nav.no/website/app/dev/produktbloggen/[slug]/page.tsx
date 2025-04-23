@@ -95,97 +95,95 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <main tabIndex={-1} id="hovedinnhold" className={styles.main}>
-        <div className={styles.preamble}>
-          <div className={styles.intro}>
-            <Heading level="1" size="xlarge" className={styles.articleTitle}>
-              {pageData.heading}
-            </Heading>
-            {pageData?.ingress && (
-              <BodyLong className={styles.bodyLong1}>
-                {pageData?.ingress}
-              </BodyLong>
-            )}
-            <div>
-              <HStack
-                justify="center"
-                align="center"
-                gap="space-8"
-                marginBlock="space-20 0"
-              >
-                <Detail uppercase as="span">
-                  {publishDate}
-                </Detail>
-                {authors?.[0] && (
-                  <>
-                    <span className={styles.diamond} />
-                    <BodyShort size="small" as="address" className="not-italic">
-                      {authors?.[0]}
-                    </BodyShort>
-                  </>
-                )}
-              </HStack>
-            </div>
-          </div>
-          <div className={styles.image}>
-            {imageUrl ? (
-              <NextImage
-                src={imageUrl}
-                blurDataURL={imageUrl}
-                placeholder="blur"
-                decoding="sync"
-                fill={true}
-                sizes="100%"
-                aria-hidden
-                priority
-                alt=""
-                quality={100}
-              />
-            ) : (
-              <NextImage
-                src={getImage(pageData?.heading ?? "", "thumbnail")}
-                decoding="sync"
-                fill={true}
-                sizes="100%"
-                aria-hidden
-                priority
-                alt=""
-              />
-            )}
-          </div>
-        </div>
-
-        <div className={styles.customBlockWrapper}>
-          <CustomPortableText
-            data-wrapper-prose
-            value={(pageData?.content ?? []) as PortableTextBlock[]}
-          />
-        </div>
-
-        <div className={styles.articleEnd}>
-          <div data-wrapper-prose>
-            <div className={`${styles.diamond} ${styles.diamondCenter}`} />
-            {authors?.length > 0 && (
-              <Detail uppercase className={styles.authorText} as="p">
-                Bidragsytere
+      <div className={styles.preamble}>
+        <div className={styles.intro}>
+          <Heading level="1" size="xlarge" className={styles.articleTitle}>
+            {pageData.heading}
+          </Heading>
+          {pageData?.ingress && (
+            <BodyLong className={styles.bodyLong1}>
+              {pageData?.ingress}
+            </BodyLong>
+          )}
+          <div>
+            <HStack
+              justify="center"
+              align="center"
+              gap="space-8"
+              marginBlock="space-20 0"
+            >
+              <Detail uppercase as="span">
+                {publishDate}
               </Detail>
-            )}
-            {authors?.length > 0 && (
-              <BodyShort as="div" className={styles.author}>
-                {authors.map(abbrName).map((x, y) => (
-                  <address key={x}>
-                    {x}
-                    {y !== authors.length - 1 && ", "}
-                  </address>
-                ))}
-              </BodyShort>
-            )}
-            <HStack justify="center">
-              <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
+              {authors?.[0] && (
+                <>
+                  <span className={styles.diamond} />
+                  <BodyShort size="small" as="address" className="not-italic">
+                    {authors?.[0]}
+                  </BodyShort>
+                </>
+              )}
             </HStack>
           </div>
         </div>
-      </main>
+        <div className={styles.image}>
+          {imageUrl ? (
+            <NextImage
+              src={imageUrl}
+              blurDataURL={imageUrl}
+              placeholder="blur"
+              decoding="sync"
+              fill={true}
+              sizes="100%"
+              aria-hidden
+              priority
+              alt=""
+              quality={100}
+            />
+          ) : (
+            <NextImage
+              src={getImage(pageData?.heading ?? "", "thumbnail")}
+              decoding="sync"
+              fill={true}
+              sizes="100%"
+              aria-hidden
+              priority
+              alt=""
+            />
+          )}
+        </div>
+      </div>
+
+      <div className={styles.customBlockWrapper}>
+        <CustomPortableText
+          data-wrapper-prose
+          value={(pageData?.content ?? []) as PortableTextBlock[]}
+        />
+      </div>
+
+      <div className={styles.articleEnd}>
+        <div data-wrapper-prose>
+          <div className={`${styles.diamond} ${styles.diamondCenter}`} />
+          {authors?.length > 0 && (
+            <Detail uppercase className={styles.authorText} as="p">
+              Bidragsytere
+            </Detail>
+          )}
+          {authors?.length > 0 && (
+            <BodyShort as="div" className={styles.author}>
+              {authors.map(abbrName).map((x, y) => (
+                <address key={x}>
+                  {x}
+                  {y !== authors.length - 1 && ", "}
+                </address>
+              ))}
+            </BodyShort>
+          )}
+          <HStack justify="center">
+            <BodyShort textColor="subtle">Publisert: {publishDate}</BodyShort>
+          </HStack>
+        </div>
+      </div>
     </>
   );
 }
