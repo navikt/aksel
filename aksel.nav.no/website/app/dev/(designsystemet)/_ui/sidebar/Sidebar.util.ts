@@ -1,12 +1,36 @@
 import "server-only";
-import { DESIGNSYSTEM_SIDEBAR_QUERYResult } from "@/app/_sanity/query-types";
+import {
+  DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
+  DESIGNSYSTEM_SIDEBAR_QUERYResult,
+} from "@/app/_sanity/query-types";
 import { sanityCategoryLookup } from "@/sanity/config";
 import { DesignsystemSidebarSectionT, SidebarPageT } from "@/types";
 
+/**
+ * TODO: We currently do not support sorting "unique" pages
+ */
 const pageTypes = {
-  grunnleggende: { name: "Grunnleggende", _type: "ds_artikkel" },
-  komponenter: { name: "Komponenter", _type: "komponent_artikkel" },
-  templates: { name: "Mønster og Maler", _type: "templates_artikkel" },
+  grunnleggende: {
+    name: "Grunnleggende",
+    _type: "ds_artikkel",
+    uniquePages: [],
+  },
+  komponenter: {
+    name: "Komponenter",
+    _type: "komponent_artikkel",
+    uniquePages: [
+      {
+        heading: "Ikoner",
+        slug: "komponenter/ikoner",
+        tag: "ready",
+      },
+    ],
+  },
+  templates: {
+    name: "Mønster og Maler",
+    _type: "templates_artikkel",
+    uniquePages: [],
+  },
 } as const;
 
 type DesignsystemSidebarDataT = {
@@ -16,8 +40,13 @@ type DesignsystemSidebarDataT = {
 
 function generateSidebar(
   input: DESIGNSYSTEM_SIDEBAR_QUERYResult,
+  overviewPages: DESIGNSYSTEM_OVERVIEW_PAGES_QUERYResult,
 ): DesignsystemSidebarDataT {
   return Object.keys(pageTypes).map((type) => {
+    const overviewPageList = overviewPages.find((page) =>
+      page._type.includes(type),
+    )?.overview_pages;
+
     const categories = sanityCategoryLookup(type as keyof typeof pageTypes);
     const filteredInput = input.filter(
       (doc) => doc._type === pageTypes[type]._type,
@@ -38,10 +67,10 @@ function generateSidebar(
       }));
 
     const groupedPages = categories
-      .map((x) => ({
-        ...x,
+      .map((category) => ({
+        ...category,
         pages: filteredInput
-          .filter((y) => y?.kategori === x.value)
+          .filter((y) => y?.kategori === category.value)
           .filter(isValidPage)
           .sort((a, b) => {
             return (a?.heading ?? "").localeCompare(b?.heading ?? "");
@@ -49,19 +78,39 @@ function generateSidebar(
           .sort(sortIndex)
           .sort(sortDeprecated),
       }))
-      .filter((x) => !(!x.pages || x.pages.length === 0))
-      .map((x) => ({
-        ...x,
-        pages: x.pages.map((page) => ({
+      .filter((category) => !(!category.pages || category.pages.length === 0))
+      .map((category) => {
+        const hasOverviewPage = overviewPageList?.some(
+          (page) => category.value === page,
+        );
+
+        const pages = category.pages.map((page) => ({
           heading: page.heading,
           slug: page.slug,
           tag: page.tag,
-        })),
-      }));
+        }));
+
+        if (hasOverviewPage) {
+          pages.unshift({
+            heading: "Oversikt",
+            slug: `${type}/${category.value}`,
+            tag: "ready",
+          });
+        }
+
+        return {
+          ...category,
+          pages,
+        };
+      });
 
     return {
       label: pageTypes[type].name,
-      links: [...standalonePages, ...groupedPages],
+      links: [
+        ...pageTypes[type].uniquePages,
+        ...standalonePages,
+        ...groupedPages,
+      ],
     };
   });
 }

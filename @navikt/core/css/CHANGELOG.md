@@ -1,5 +1,25 @@
 # @navikt/ds-css
 
+## 7.20.0
+
+### Minor Changes
+
+- Combobox: Use option-value as `id` instead of `label`. ([#3735](https://github.com/navikt/aksel/pull/3735))
+
+## 7.19.1
+
+### Patch Changes
+
+- Combobox: Singleselect selected value now uses the complete input-width when possible. ([#3734](https://github.com/navikt/aksel/pull/3734))
+
+## 7.19.0
+
+### Patch Changes
+
+- Darkside: Togglegroup now has bg-input background. ([#3715](https://github.com/navikt/aksel/pull/3715))
+
+- Combobox: Fix wrapping issue when ToggleListButton is hidden ([#3727](https://github.com/navikt/aksel/pull/3727))
+
 ## 7.18.0
 
 ### Patch Changes

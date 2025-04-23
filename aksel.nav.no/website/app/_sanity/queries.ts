@@ -13,6 +13,25 @@ const DESIGNSYSTEM_SIDEBAR_QUERY =
   "sidebarindex": sidebarindex,
 }`);
 
+const DESIGNSYSTEM_OVERVIEW_PAGES_QUERY = defineQuery(
+  `*[_type == "komponenter_landingsside" || _type == "grunnleggende_landingsside" || _type == "templates_landingsside"] {
+  _type,
+  overview_pages
+  }`,
+);
+
+const DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "komponenter_landingsside"][0]`,
+);
+
+const DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "grunnleggende_landingsside"][0]`,
+);
+
+const DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY = defineQuery(
+  `*[_type == "templates_landingsside"][0]`,
+);
+
 const searchContent = groq`{
   heading,
   "slug": slug.current,
@@ -51,6 +70,18 @@ const KOMPONENT_BY_SLUG_QUERY =
       ...,
       ${destructureBlocks}
     },
+}`);
+
+const DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY =
+  defineQuery(`*[_type == $docType  && kategori == $category]
+  {
+    _id,
+    heading,
+    "slug": slug.current,
+    status,
+    kategori,
+    "sidebarindex": sidebarindex,
+    "description": seo.meta
 }`);
 
 const GRUNNLEGGENDE_BY_SLUG_QUERY =
@@ -104,8 +135,13 @@ const SLUG_BY_TYPE_QUERY = defineQuery(`
 
 export {
   DESIGNSYSTEM_SIDEBAR_QUERY,
+  DESIGNSYSTEM_OVERVIEW_PAGES_QUERY,
+  DESIGNSYSTEM_KOMPONENTER_LANDINGPAGE_QUERY,
+  DESIGNSYSTEM_GRUNNLEGGENDE_LANDINGPAGE_QUERY,
+  DESIGNSYSTEM_TEMPLATES_LANDINGPAGE_QUERY,
   GLOBAL_SEARCH_QUERY_ALL,
   KOMPONENT_BY_SLUG_QUERY,
+  DESIGNSYSTEM_OVERVIEW_BY_CATEGORY_QUERY,
   TOC_BY_SLUG_QUERY,
   SLUG_BY_TYPE_QUERY,
   GRUNNLEGGENDE_BY_SLUG_QUERY,

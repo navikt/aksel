@@ -1,5 +1,15 @@
 # @navikt/ds-tokens
 
+## 7.20.0
+
+## 7.19.1
+
+## 7.19.0
+
+### Patch Changes
+
+- Darkside: Update global 'meta-purple' color. ([#3703](https://github.com/navikt/aksel/pull/3703))
+
 ## 7.18.0
 
 ## 7.17.4
