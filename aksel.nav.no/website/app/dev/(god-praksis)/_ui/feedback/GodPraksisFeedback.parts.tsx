@@ -21,7 +21,13 @@ function GodPraksisFeedbackLoginState() {
 
   return (
     <div>
-      <Heading level="2" size="small" data-aksel-heading-color>
+      <Heading
+        level="2"
+        size="small"
+        data-aksel-heading-color
+        tabIndex={-1}
+        id="scrollToFeedback"
+      >
         Innspill til artikkelen
       </Heading>
       <Box asChild paddingBlock="space-4 space-24">
@@ -55,7 +61,7 @@ function GodPraksisFeedbackForm({
 
   const [formState, setFormState] = useState<FormState>({
     value: "writing",
-    error: "123",
+    error: null,
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -166,7 +172,13 @@ function GodPraksisFeedbackForm({
 
   return (
     <div>
-      <Heading level="2" size="small" data-aksel-heading-color>
+      <Heading
+        level="2"
+        size="small"
+        data-aksel-heading-color
+        tabIndex={-1}
+        id="scrollToFeedback"
+      >
         Innspill til artikkelen
       </Heading>
       <Box asChild paddingBlock="space-4 space-24">

@@ -31,7 +31,7 @@ async function verifyUserLoggedIn(): Promise<
   const requestHeaders = await headers();
 
   if (isLocalOrDemo) {
-    logger.warn("Is running locally, skipping RSC auth");
+    logger.warn("Running locally, skipping RSC wonderwall auth");
     return {
       ok: true,
       user: getAuthUser(
