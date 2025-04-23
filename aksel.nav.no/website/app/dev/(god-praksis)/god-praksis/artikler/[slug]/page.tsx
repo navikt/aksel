@@ -138,13 +138,7 @@ export default async function Page(props: Props) {
           ))}
         </HStack>
       </div>
-      <TableOfContents
-        feedback={{
-          name: pageData.heading,
-          text: "Send innspill",
-        }}
-        toc={toc}
-      />
+      <TableOfContents toc={toc} />
       <div>
         {outdated && <SystemPanel variant="outdated" docId={pageData._id} />}
         <SystemPanel variant="outdated" docId={pageData._id} />
