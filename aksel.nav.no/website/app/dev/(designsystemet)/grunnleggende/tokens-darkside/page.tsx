@@ -1,19 +1,20 @@
 import { Metadata, ResolvingMetadata } from "next/types";
 import React from "react";
-import { Image } from "sanity";
-import { VStack } from "@navikt/ds-react";
-import { sanityFetch } from "@/app/_sanity/live";
+import { ClockDashedIcon } from "@navikt/aksel-icons";
 import {
-  GRUNNLEGGENDE_BY_SLUG_QUERY,
-  METADATA_BY_SLUG_QUERY,
-} from "@/app/_sanity/queries";
-import { urlForOpenGraphImage } from "@/app/_sanity/utils";
+  BodyLong,
+  BodyShort,
+  Detail,
+  HStack,
+  Heading,
+  Link,
+  Tag,
+  VStack,
+} from "@navikt/ds-react";
+import { FigmaIcon, GithubIcon } from "@/assets/Icons";
 import TokenTableOfContents from "../../../../../components/token-docs/TokenTableOfContents";
 import TokensPage from "../../../../../components/token-docs/TokensPage";
-import {
-  DesignsystemetPageHeader,
-  DesignsystemetPageLayout,
-} from "../../_ui/DesignsystemetPage";
+import { DesignsystemetPageLayout } from "../../_ui/DesignsystemetPage";
 import { getStaticParamsSlugs } from "../../slug";
 
 type Props = {
@@ -26,20 +27,13 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   await params;
 
-  const { data: page } = await sanityFetch({
-    query: METADATA_BY_SLUG_QUERY,
-    params: { slug: "tokens-darkside" },
-    stega: false,
-  });
-
   const ogImages = (await parent).openGraph?.images || [];
-  const pageOgImage = urlForOpenGraphImage(page?.seo?.image as Image);
-
-  pageOgImage && ogImages.unshift(pageOgImage);
 
   return {
-    title: page?.heading,
-    description: page?.seo?.meta,
+    title: "Design tokens",
+    description:
+      "Ved å bruke design tokens sørger vi for at både designere og utviklere arbeider etter de samme reglene og retningslinjene. " +
+      "Dette forenkler vedlikeholdet av designet og sikrer en helhetlig visuell fremstilling på tvers av produkter.",
     openGraph: {
       images: ogImages,
     },
@@ -51,16 +45,56 @@ export async function generateStaticParams() {
 }
 
 const Page = async () => {
-  const parsedSlug = "tokens-darkside";
-  const { data: page } = await sanityFetch({
-    query: GRUNNLEGGENDE_BY_SLUG_QUERY,
-    params: { slug: parsedSlug },
-  });
-
   return (
     <DesignsystemetPageLayout layout="with-toc">
-      <VStack gap="10">
-        <DesignsystemetPageHeader data={page} />
+      <VStack gap="space-40">
+        <VStack gap="space-24">
+          <VStack>
+            <Detail
+              data-color-role="brand-blue"
+              textColor="subtle"
+              weight="semibold"
+              uppercase
+            >
+              Styling
+            </Detail>
+            <Heading level="1" size="xlarge">
+              Tokenoversikt
+            </Heading>
+            <BodyLong size="large">
+              Tokens er alle farger, avstander, typografi, osv. som vi bruker i
+              komponenter og layout.
+            </BodyLong>
+          </VStack>
+          <VStack gap="space-16">
+            <HStack gap="space-8" align="center">
+              <Tag variant="info" size="small">
+                Stabil
+              </Tag>
+              <BodyShort size="medium">Oppdatert 22. april 2025</BodyShort>
+            </HStack>
+            <HStack gap="space-16" align="center">
+              <Link href="https://github.com/navikt/aksel" variant="neutral">
+                <GithubIcon aria-hidden="true" />
+                GitHub
+              </Link>
+              <Link
+                href="https://www.figma.com/community/file/1214869602572392330"
+                variant="neutral"
+              >
+                <FigmaIcon aria-hidden="true" />
+                Figma-community
+              </Link>
+              <Link
+                href="https://aksel.nav.no/grunnleggende/kode/endringslogg"
+                variant="neutral"
+              >
+                <ClockDashedIcon aria-hidden="true" />
+                Endringslogg
+              </Link>
+            </HStack>
+          </VStack>
+        </VStack>
         <TokensPage />
       </VStack>
       <TokenTableOfContents />
