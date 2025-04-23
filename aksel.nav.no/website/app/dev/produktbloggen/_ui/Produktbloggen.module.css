@@ -84,9 +84,6 @@
   margin-bottom: var(--ax-space-8);
   text-align: center;
   letter-spacing: 1.05px;
-
-  /* shouldn't this be a part of details uppercase? */
-  color: var(--ax-text-brand-blue);
 }
 
 .author {
@@ -111,12 +108,5 @@ min-width: X == X is the minimum width needed before styles apply */
 
   .intro {
     width: 90%;
-  }
-}
-
-/* 768 == md */
-@media (min-width: 768px) {
-  .h1 {
-    hyphens: none;
   }
 }
