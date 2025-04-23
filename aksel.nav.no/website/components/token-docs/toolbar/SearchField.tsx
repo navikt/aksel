@@ -30,6 +30,7 @@ const SearchField = () => {
         onChange={handleSearch}
         name="tokenSearch"
         hideLabel
+        variant="simple"
       />
     </form>
   );
