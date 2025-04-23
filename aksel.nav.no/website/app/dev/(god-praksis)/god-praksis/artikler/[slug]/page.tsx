@@ -24,6 +24,7 @@ import { EditorPanel } from "@/app/_ui/editor-panel /EditorPanel";
 import { SystemPanel } from "@/app/_ui/system-panel/SystemPanel";
 import { TableOfContents } from "@/app/_ui/toc/TableOfContents";
 import { WebsiteList, WebsiteListItem } from "@/app/_ui/typography/WebsiteList";
+import { GodPraksisFeedback } from "@/app/dev/(god-praksis)/_ui/feedback/GodPraksisFeedback";
 import { LinkCardArrow } from "@/app/dev/(god-praksis)/_ui/link-card/LinkCard";
 import { abbrName, dateStr } from "@/utils";
 import styles from "./page.module.css";
@@ -161,6 +162,7 @@ export default async function Page(props: Props) {
             </HStack>
           </VStack>
         )}
+        <GodPraksisFeedback />
         {/* {userState && <Feedback userState={userState} />} */}
       </div>
       {pageData.relevante_artikler && (
